@@ -1,7 +1,7 @@
 //! The built-in file browser (#576): Open, Save As, Export, Insert Picture and recipient lists
 //! when the system's file dialog can't be shown — a Linux desktop with neither a file chooser
 //! portal nor zenity (labwc, sway… with only xdg-desktop-portal-wlr) — or when the user asks for
-//! it (File › Open › Browse in WordCraft…).
+//! it (File › Open › Browse in Doc4Me…).
 //!
 //! A folder path field with Up and Home folder, the folder's subfolders and the files of the
 //! chosen type, a file name field and the file types. It only lists folders the user navigates to
@@ -328,7 +328,7 @@ fn body(ui: &mut Ui, b: &mut FileBrowser, t: &Tokens) -> Option<Option<PathBuf>>
     if b.unavailable {
         ui.label(
             egui::RichText::new(tl!(
-                "The system file dialog isn't available, so WordCraft shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity."
+                "The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity."
             ))
             .color(t.text_dim),
         );
@@ -344,7 +344,7 @@ fn body(ui: &mut Ui, b: &mut FileBrowser, t: &Tokens) -> Option<Option<PathBuf>>
         {
             b.navigate(h);
         }
-        let r = ui.add(egui::TextEdit::singleline(&mut b.location).desired_width(f32::INFINITY));
+        let r = ui.add(crate::widgets::text_line(&mut b.location).desired_width(f32::INFINITY));
         if r.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter)) {
             location_done = true;
             let typed = b.location.clone();
@@ -415,7 +415,7 @@ fn body(ui: &mut Ui, b: &mut FileBrowser, t: &Tokens) -> Option<Option<PathBuf>>
         let label = ui.label(tl!("File name:"));
         // The name field takes what the label (longer in some languages) and the type list leave.
         let width = (ui.available_width() - 170.0).max(120.0);
-        let r = ui.add(egui::TextEdit::singleline(&mut b.name).desired_width(width)).labelled_by(label.id);
+        let r = ui.add(crate::widgets::text_line(&mut b.name).desired_width(width)).labelled_by(label.id);
         if b.focus_name {
             r.request_focus();
             b.focus_name = false;
@@ -470,12 +470,12 @@ fn icon_button(ui: &mut Ui, t: &Tokens, icon: &str, tip: &str, enabled: bool) ->
 mod tests {
     use super::*;
     use crate::Services;
+    use doc4me_engine::Session;
     use serde_json::json;
     use std::sync::mpsc::channel;
-    use wordcraft_engine::Session;
 
     fn scratch(name: &str) -> PathBuf {
-        let dir = std::env::temp_dir().join(format!("wordcraft-ui-browser-{name}-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("doc4me-ui-browser-{name}-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
         std::fs::create_dir_all(&dir).unwrap();
         dir
@@ -540,7 +540,7 @@ mod tests {
             })),
             ..Default::default()
         };
-        let mut a = WordApp::new(Session::new(wordcraft_doc::Document::new()), services);
+        let mut a = WordApp::new(Session::new(doc4me_doc::Document::new()), services);
         a.run("text.insert", json!({"text": "Saved without a portal"})).unwrap();
         a.save_as_dialog();
         assert!(a.file_dialog_open());
@@ -552,8 +552,8 @@ mod tests {
         a.close_file_browser(Some(path));
         assert!(!a.file_dialog_open());
         assert!(!a.session.dirty);
-        let saved = wordcraft_engine::io::open_path(&dir.join("novel.docx")).unwrap();
-        assert!(saved.plain_text(wordcraft_doc::StoryRef::Body).contains("Saved without a portal"));
+        let saved = doc4me_engine::io::open_path(&dir.join("novel.docx")).unwrap();
+        assert!(saved.plain_text(doc4me_doc::StoryRef::Body).contains("Saved without a portal"));
         let _ = std::fs::remove_dir_all(&dir);
     }
 }

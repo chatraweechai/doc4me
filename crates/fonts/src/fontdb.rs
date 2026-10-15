@@ -15,8 +15,12 @@ use skrifa::{GlyphId, MetadataProvider};
 mod user;
 pub use user::{FONT_FILE_EXTS, FontFormat, Installed, MAX_FONT_FILE_BYTES, UserFont, UserFontError, decode_font_file, is_font_file_name, sniff};
 
-/// The family used when a requested family is unknown (the UI sans).
-pub const FALLBACK_FAMILY: &str = "Source Sans 3";
+/// The family used when a requested family is unknown: Sarabun, Doc4Me's main font (Thai and
+/// Latin), bundled so it is there on every platform.
+pub const FALLBACK_FAMILY: &str = "Sarabun";
+
+/// Sarabun Regular, the face [`last_resort_face`] falls back to.
+static SARABUN_REGULAR: &[u8] = include_bytes!("../../../assets/fonts/Sarabun-Regular.ttf");
 
 /// The bundled fonts (OFL), as font file bytes. Japanese fonts are not bundled: they come from
 /// the optional craft-fonts build input ([`crate::japanese_document_fonts`]).
@@ -38,6 +42,13 @@ static BUNDLED: &[&[u8]] = &[
     include_bytes!("../../../assets/fonts/Inter-Medium.ttf"),
     include_bytes!("../../../assets/fonts/Inter-SemiBold.ttf"),
     include_bytes!("../../../assets/fonts/JetBrainsMono-Regular.ttf"),
+    // Sarabun (OFL, Cadson Demak): Doc4Me's default document and interface font, Thai and Latin.
+    SARABUN_REGULAR,
+    include_bytes!("../../../assets/fonts/Sarabun-Italic.ttf"),
+    include_bytes!("../../../assets/fonts/Sarabun-Medium.ttf"),
+    include_bytes!("../../../assets/fonts/Sarabun-SemiBold.ttf"),
+    include_bytes!("../../../assets/fonts/Sarabun-Bold.ttf"),
+    include_bytes!("../../../assets/fonts/Sarabun-BoldItalic.ttf"),
 ];
 
 #[derive(Clone)]
@@ -761,15 +772,15 @@ fn enumerate_faces(data: &[u8]) -> Vec<Found> {
     (0..count).filter_map(|i| skrifa::FontRef::from_index(data, i).ok().map(|f| font_faces(&f, i))).flatten().collect()
 }
 
-/// The compiled-in Source Sans 3 Regular, for a database that somehow has no faces at all.
+/// The compiled-in Sarabun Regular, for a database that somehow has no faces at all.
 pub(crate) fn last_resort_face() -> Arc<FontFace> {
     static FACE: std::sync::OnceLock<Arc<FontFace>> = std::sync::OnceLock::new();
     FACE.get_or_init(|| {
         // The font is compiled in (`include_bytes!`), so parsing it can't depend on input; the
         // `last_resort_face_parses` test proves it on every run.
         #[allow(clippy::expect_used)]
-        let face = make_face(FontBytes::Static(BUNDLED[0]), 0, FALLBACK_FAMILY.into(), "Regular".into(), FALLBACK_FAMILY.into(), Vec::new())
-            .expect("the compiled-in Source Sans 3 Regular parses");
+        let face = make_face(FontBytes::Static(SARABUN_REGULAR), 0, FALLBACK_FAMILY.into(), "Regular".into(), FALLBACK_FAMILY.into(), Vec::new())
+            .expect("the compiled-in Sarabun Regular parses");
         Arc::new(face)
     })
     .clone()
@@ -1162,7 +1173,7 @@ impl FontDb {
     }
 
     /// Resolve a family + style to a face, falling back to the closest style of the family, then to
-    /// Source Sans 3 Regular. `family` is a typographic family ("Roboto") or a face's legacy family
+    /// [`FALLBACK_FAMILY`] (Sarabun) Regular. `family` is a typographic family ("Roboto") or a face's legacy family
     /// name ("Roboto Light", whose styles are Light and Light Italic). Installed system fonts are
     /// found by name whatever ran before.
     pub fn face(&self, family: &str, style: &str) -> Arc<FontFace> {

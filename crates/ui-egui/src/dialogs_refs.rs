@@ -5,11 +5,11 @@
 //! `references.sources`, `references.citation`), so agents get the same result without the
 //! dialog. Shown through [`crate::dialogs::Dialog::Refs`].
 
+use doc4me_doc::{Block, Source, StyleKind};
+use doc4me_engine::cmd::references::FieldCode;
 use egui::{Sense, Ui, vec2};
 use serde::Serialize;
 use serde_json::{Value, json};
-use wordcraft_doc::{Block, Source, StyleKind};
-use wordcraft_engine::cmd::references::FieldCode;
 
 use crate::WordApp;
 use crate::dialogs::{Dialog, buttons};
@@ -292,7 +292,7 @@ fn caption_ui(app: &mut WordApp, ui: &mut Ui, f: &mut CaptionForm) -> Next {
     ui.label(tl!("Caption:"));
     ui.horizontal(|ui| {
         ui.label(f.preview());
-        ui.add(egui::TextEdit::singleline(&mut f.text).desired_width(220.0).hint_text(tl!("Caption text")));
+        ui.add(crate::widgets::text_line(&mut f.text).desired_width(220.0).hint_text(tl!("Caption text")));
     });
     ui.add_space(6.0);
     let mut then = None;
@@ -376,7 +376,7 @@ fn numbering_ui(ui: &mut Ui, f: &mut CaptionForm, was: &CaptionForm) -> Next {
 
 fn new_label_ui(app: &mut WordApp, ui: &mut Ui, f: &mut CaptionForm) -> Next {
     ui.label(tl!("Label:"));
-    let r = ui.add(egui::TextEdit::singleline(&mut f.new_label).desired_width(260.0));
+    let r = ui.add(crate::widgets::text_line(&mut f.new_label).desired_width(260.0));
     r.request_focus();
     let (ok, cancel) = buttons(ui, tl!("OK"));
     let name: String = f.new_label.chars().filter(|c| !matches!(c, '"' | '\\') && !c.is_control()).take(40).collect::<String>().trim().to_string();
@@ -410,9 +410,7 @@ pub struct IndexForm {
 /// The first field in the body whose name is `name`.
 fn body_field(app: &WordApp, name: &str) -> Option<FieldCode> {
     app.session.doc.body.iter().filter_map(|b| b.as_para()).flat_map(|p| p.objects.iter()).find_map(|o| match o {
-        wordcraft_doc::InlineObject::Field { instr, .. } => {
-            Some(FieldCode::parse(instr)).filter(|f| f.name == name && (name != "TOC" || !f.has('c')))
-        }
+        doc4me_doc::InlineObject::Field { instr, .. } => Some(FieldCode::parse(instr)).filter(|f| f.name == name && (name != "TOC" || !f.has('c'))),
         _ => None,
     })
 }
@@ -541,16 +539,16 @@ fn mark_ui(app: &mut WordApp, ui: &mut Ui, f: &mut MarkForm) -> Next {
     heading(ui, "Index");
     egui::Grid::new("xe").num_columns(2).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
         ui.label(tl!("Main entry:"));
-        ui.add(egui::TextEdit::singleline(&mut f.entry).desired_width(220.0));
+        ui.add(crate::widgets::text_line(&mut f.entry).desired_width(220.0));
         ui.end_row();
         ui.label(tl!("Subentry:"));
-        ui.add(egui::TextEdit::singleline(&mut f.subentry).desired_width(220.0));
+        ui.add(crate::widgets::text_line(&mut f.subentry).desired_width(220.0));
         ui.end_row();
     });
     heading(ui, "Options");
     ui.horizontal(|ui| {
         ui.radio_value(&mut f.option, "see".to_string(), tl!("Cross-reference:"));
-        ui.add_enabled(f.option == "see", egui::TextEdit::singleline(&mut f.see).desired_width(160.0));
+        ui.add_enabled(f.option == "see", crate::widgets::text_line(&mut f.see).desired_width(160.0));
     });
     ui.radio_value(&mut f.option, "page".to_string(), tl!("This page"));
     ui.horizontal(|ui| {
@@ -625,7 +623,7 @@ impl TocForm {
     /// The table in the document, or the defaults for a new one.
     pub fn read(app: &WordApp) -> TocForm {
         let f = body_field(app, "TOC").unwrap_or_else(|| FieldCode::parse(r#"TOC \o "1-3" \h \z \u"#));
-        let levels = f.arg('o').and_then(wordcraft_engine::cmd::references::level_range).map_or(3, |r| r.1);
+        let levels = f.arg('o').and_then(doc4me_engine::cmd::references::level_range).map_or(3, |r| r.1);
         let listed: Vec<(String, u8)> = f
             .arg('t')
             .map(|t| {
@@ -655,9 +653,9 @@ impl TocForm {
             page_numbers: !f.has('n'),
             right_align: f.arg('p').is_none_or(|p| p.contains('\t')),
             leader: match leader {
-                Some(wordcraft_doc::props::TabLeader::None) => "none",
-                Some(wordcraft_doc::props::TabLeader::Hyphen) => "hyphen",
-                Some(wordcraft_doc::props::TabLeader::Underscore) => "underscore",
+                Some(doc4me_doc::props::TabLeader::None) => "none",
+                Some(doc4me_doc::props::TabLeader::Hyphen) => "hyphen",
+                Some(doc4me_doc::props::TabLeader::Underscore) => "underscore",
                 _ => "dot",
             }
             .into(),
@@ -952,7 +950,7 @@ fn source_ui(app: &mut WordApp, ui: &mut Ui, f: &mut SourceForm) -> Next {
                     "tag" => tl!("Made from the author and year when empty"),
                     _ => "",
                 };
-                ui.add_enabled(!(edit && key == "tag"), egui::TextEdit::singleline(v).desired_width(260.0).hint_text(hint));
+                ui.add_enabled(!(edit && key == "tag"), crate::widgets::text_line(v).desired_width(260.0).hint_text(hint));
             }
             ui.end_row();
         }
@@ -1040,15 +1038,15 @@ fn sources_ui(app: &mut WordApp, ui: &mut Ui, selected: &mut Option<usize>) -> N
 
 #[cfg(test)]
 mod tests {
+    use doc4me_doc::{InlineObject, StoryRef};
+    use doc4me_engine::Session;
     use serde_json::json;
-    use wordcraft_doc::{InlineObject, StoryRef};
-    use wordcraft_engine::Session;
 
     use super::*;
     use crate::Services;
 
     fn app(text: &str) -> WordApp {
-        WordApp::new(Session::new(wordcraft_doc::Document::from_text(text)), Services::default())
+        WordApp::new(Session::new(doc4me_doc::Document::from_text(text)), Services::default())
     }
 
     fn form(a: &WordApp) -> RefsDialog {

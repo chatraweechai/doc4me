@@ -11,12 +11,12 @@ pub fn set_system_locale(tag: &str) {
     let _ = SYSTEM_LOCALE.set(tag.to_string());
 }
 
+use doc4me_doc::edit::Fragment;
+use doc4me_doc::props::CharProps;
+use doc4me_doc::{Document, Path, Pos, StoryRef};
+use doc4me_layout::{DocLayout, LayoutCache, LayoutOptions, NumeralMode, ViewMode};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use wordcraft_doc::edit::Fragment;
-use wordcraft_doc::props::CharProps;
-use wordcraft_doc::{Document, Path, Pos, StoryRef};
-use wordcraft_layout::{DocLayout, LayoutCache, LayoutOptions, NumeralMode, ViewMode};
 
 use crate::{CmdError, Registry};
 
@@ -293,7 +293,7 @@ pub struct Session {
     /// Initials for comments (File › Options › General); empty = the name's initials.
     pub initials: String,
     /// Format painter: copied formatting waiting to be applied (and whether it stays on).
-    pub painter: Option<(CharProps, wordcraft_doc::props::ParaProps, bool)>,
+    pub painter: Option<(CharProps, doc4me_doc::props::ParaProps, bool)>,
     /// Last message for the status bar / agents.
     pub status: String,
     /// Undo and redo steps. Shared so `run` can snapshot both stacks cheaply (a pointer per
@@ -314,18 +314,8 @@ pub struct Session {
     /// (revision, width, read height, view, read line spacing, layout, proofing, outline,
     /// (deletions left out, body deletions in balloons), numeral display).
     #[allow(clippy::type_complexity)]
-    layout: Option<(
-        u64,
-        f32,
-        f32,
-        ViewMode,
-        Option<u32>,
-        Arc<DocLayout>,
-        bool,
-        Option<wordcraft_layout::outline::OutlineView>,
-        (bool, bool),
-        NumeralMode,
-    )>,
+    layout:
+        Option<(u64, f32, f32, ViewMode, Option<u32>, Arc<DocLayout>, bool, Option<doc4me_layout::outline::OutlineView>, (bool, bool), NumeralMode)>,
     /// Picture edits: edited media key → original media key (Reset Picture).
     pub originals: std::collections::HashMap<String, String>,
     /// Last mutating command (Repeat).
@@ -353,7 +343,7 @@ pub struct Session {
     /// Custom ribbon and Quick Access Toolbar (`tools.customizeRibbon`); the front end saves it too.
     pub ribbon: crate::RibbonLayout,
     /// The language new blank documents (and opened plain text) are written in, a BCP 47 tag;
-    /// `None` is WordCraft's default, US English. The front end sets it from the interface
+    /// `None` is Doc4Me's default, US English. The front end sets it from the interface
     /// language with [`Session::set_editing_language`] (a Polish interface writes Polish).
     pub editing_lang: Option<String>,
     /// Editing inside an equation: which one and the caret in it.
@@ -389,7 +379,7 @@ pub struct MathEdit {
     /// The equation object (its U+FFFC).
     pub at: Pos,
     /// The caret inside it.
-    pub pos: wordcraft_doc::math_edit::MathPos,
+    pub pos: doc4me_doc::math_edit::MathPos,
 }
 
 /// Editing preferences that persist between runs (the front end saves and restores them).
@@ -401,7 +391,7 @@ pub struct Prefs {
     pub count_notes: bool,
     /// Track Changes Options: what markup shows and how revisions are drawn (per user, as in
     /// Word).
-    pub markup: wordcraft_layout::display::MarkupOptions,
+    pub markup: doc4me_layout::display::MarkupOptions,
     /// File › Print / Export: Print Markup. PDFs, prints and page images show comments in
     /// balloons beside each page and tracked changes as marked up; HTML, Markdown and text
     /// copies end with the comments (`file.printMarkup`).
@@ -415,9 +405,9 @@ pub struct Prefs {
     /// Overtype: typed characters replace the ones after the caret.
     pub overtype: bool,
     /// The unit rulers and dialogs show lengths in.
-    pub units: wordcraft_geom::Unit,
+    pub units: doc4me_geom::Unit,
     /// Formatting marks shown even while Show/Hide ¶ is off.
-    pub marks: wordcraft_layout::display::FormattingMarks,
+    pub marks: doc4me_layout::display::FormattingMarks,
     /// Mark grammar errors as you type (with Check spelling as you type on).
     pub mark_grammar: bool,
     pub ignore_uppercase: bool,
@@ -452,12 +442,8 @@ impl Default for Prefs {
 
 impl Prefs {
     /// What the spelling check skips.
-    pub fn spelling(&self) -> wordcraft_proof::Options {
-        wordcraft_proof::Options {
-            ignore_uppercase: self.ignore_uppercase,
-            ignore_numbers: self.ignore_numbers,
-            ignore_internet: self.ignore_internet,
-        }
+    pub fn spelling(&self) -> doc4me_proof::Options {
+        doc4me_proof::Options { ignore_uppercase: self.ignore_uppercase, ignore_numbers: self.ignore_numbers, ignore_internet: self.ignore_internet }
     }
 }
 
@@ -489,7 +475,7 @@ impl Session {
             goal_x: None,
             page_hint: 0,
             registry: Arc::new(crate::cmd::registry()),
-            author: "WordCraft User".into(),
+            author: "Doc4Me User".into(),
             initials: String::new(),
             painter: None,
             status: String::new(),
@@ -602,7 +588,7 @@ impl Session {
             && !v.read_mode
             && !v.multi_page
             && v.mode == ViewMode::Print
-            && self.prefs.markup.balloons != wordcraft_layout::display::BalloonMode::Inline
+            && self.prefs.markup.balloons != doc4me_layout::display::BalloonMode::Inline
     }
 
     /// Show revisions in balloons, with the balloons on screen: tracked deletions in the body leave
@@ -610,7 +596,7 @@ impl Session {
     /// as in Word; so do deletions in headers, footers, notes and text boxes, which get no balloons.
     pub fn revisions_in_balloons(&self) -> bool {
         let m = &self.prefs.markup;
-        self.balloons_shown() && m.balloons == wordcraft_layout::display::BalloonMode::Revisions && m.insertions_deletions
+        self.balloons_shown() && m.balloons == doc4me_layout::display::BalloonMode::Revisions && m.insertions_deletions
     }
 
     /// Initials for new comments: the ones set in File › Options, else the user name's.
@@ -656,9 +642,9 @@ impl Session {
             comment_balloons: false,
             field_codes: self.view.field_codes,
             outline: outline.clone(),
-            proof: wordcraft_layout::ProofOptions { grammar: self.prefs.mark_grammar, spelling: self.prefs.spelling() },
+            proof: doc4me_layout::ProofOptions { grammar: self.prefs.mark_grammar, spelling: self.prefs.spelling() },
         };
-        let l = Arc::new(wordcraft_layout::layout(&self.doc, &mut self.cache, &opts));
+        let l = Arc::new(doc4me_layout::layout(&self.doc, &mut self.cache, &opts));
         self.layout = Some((self.rev, width, height, mode, spacing, l.clone(), self.view.proofing, outline, deleted, self.view.numeral));
         l
     }
@@ -671,7 +657,7 @@ impl Session {
     /// area with the comments in balloons.
     pub fn export_layout_with(&self, markup: bool) -> Arc<DocLayout> {
         let opts = LayoutOptions { view: ViewMode::Print, comment_balloons: markup && self.prefs.markup.comments, ..Default::default() };
-        Arc::new(wordcraft_layout::layout(&self.doc, &mut LayoutCache::new(), &opts))
+        Arc::new(doc4me_layout::layout(&self.doc, &mut LayoutCache::new(), &opts))
     }
 
     /// Invalidate the cached layout (fonts changed etc.).
@@ -685,7 +671,7 @@ impl Session {
     /// undo steps, no text — switches too, so the blank document a session starts with follows
     /// the interface language. Nothing else changes and no undo step is added.
     pub fn set_editing_language(&mut self, tag: Option<&str>) {
-        let tag = tag.and_then(wordcraft_proof::lang::normalize_tag);
+        let tag = tag.and_then(doc4me_proof::lang::normalize_tag);
         if self.editing_lang == tag {
             return;
         }
@@ -940,7 +926,7 @@ impl Session {
         // The equation being edited must still be there (undo, edits elsewhere).
         if let Some(m) = &self.math {
             let eq = self.doc.para_at(&m.at).and_then(|p| match p.object_at(m.at.off) {
-                Some(wordcraft_doc::InlineObject::Equation { math, .. }) => Some(wordcraft_doc::math_edit::clamp(&math.nodes, &m.pos)),
+                Some(doc4me_doc::InlineObject::Equation { math, .. }) => Some(doc4me_doc::math_edit::clamp(&math.nodes, &m.pos)),
                 _ => None,
             });
             match eq {
@@ -991,7 +977,7 @@ impl Session {
             && (id.starts_with("text.") || id.starts_with("caret.") || id.starts_with("select.") || id.starts_with("edit.paste"))
             && let Some(m) = self.math.take()
         {
-            let off = m.at.off + wordcraft_doc::para::OBJ.len_utf8();
+            let off = m.at.off + doc4me_doc::para::OBJ.len_utf8();
             self.sel = Selection::caret(Pos { off, ..m.at });
         }
         // The undo stacks are snapshotted whole, not as a length: commands run nested commands,

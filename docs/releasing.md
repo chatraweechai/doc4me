@@ -1,31 +1,29 @@
-# Releasing WordCraft
+# Releasing Doc4Me
 
-The canonical recipe is [craftrules `release/playbook.md`](https://github.com/storytold/craftrules/blob/main/release/playbook.md);
-this file has the WordCraft specifics.
+Doc4Me is built from this repository (`chatraweechai/docscaft`) by GitHub Actions. Today the
+release pipeline builds the **Windows x64** installer; the packaging scripts for the other
+platforms (inherited from WordCraft) are in [`packaging/`](../packaging/) and run locally.
 
-1. Bump the version on `main`: `cargo xtask version set 0.2.0` (the one source of truth is
+1. Bump the version on `main`: `cargo xtask version set 1.0.1` (the one source of truth is
    `[workspace.package] version`; the app shows it in `--version` and About, with the commit from
-   `WORDCRAFT_BUILD_SHA`).
-2. Merge `main` into `release` and push. `.github/workflows/release.yml` builds:
+   `DOC4ME_BUILD_SHA`).
+2. Push to `main`. [`.github/workflows/windows-x64-installer.yml`](../.github/workflows/windows-x64-installer.yml)
+   builds, on `windows-latest`:
 
 | Platform | Artifacts | Signing |
 |---|---|---|
-| macOS | universal `WordCraft.app` in a `.dmg`, universal CLI zip | Developer ID + notarization (`APPLE_*` secrets) |
-| Windows | x64, x86 and arm64 `.msi` + portable `.zip` | Azure Trusted Signing (`AZURE_*` secrets) |
-| Linux | x86_64 and aarch64 `.AppImage` (+ `.zsync` for AppImageUpdate), `.flatpak` bundle, `.deb`, `.rpm`, `.tar.gz`; Flathub manifest | checksums |
-| Linux riscv64 | `.tar.gz` (cross-compiled on `ubuntu-24.04`, glibc >= 2.39; CLI smoke-tested under QEMU) | checksums |
-| FreeBSD | x86_64 `.tar.gz` | checksums |
-| Web | `wordcraft-web-<version>.zip` (static site: `index.html`, wasm, glue) | none |
+| Windows | x64 `doc4me-<version>-windows-x64.msi` + `doc4me-<version>-windows-x64-portable.zip` (artifact `doc4me-windows-x64`) | none yet: `packaging/windows/sign.ps1` signs when its `AZURE_*` / `WINDOWS_CERTIFICATE*` secrets exist, and warns otherwise |
 
-3. The run drafts a GitHub Release `WordCraft v<version>` with `SHA256SUMS.txt`; review and publish it.
+3. To publish a GitHub Release, push a tag: `git tag v1.0.0 && git push origin v1.0.0`. The same
+   workflow builds the tag and creates the release `Doc4Me v<version>` with the MSI and the zip.
 
-Signing secrets live in the repository's `release` environment (deployment branch: `release` only),
-synced from the release manager's machine (`craftrules/release/signing-setup.md`). Missing secrets
-produce unsigned builds with a warning, so forks still build.
+The workflow also runs on demand (Actions › Windows x64 installer › Run workflow). Its third-party
+actions are pinned to commit SHAs; the build job only reads the repository, and only the tag's
+release job may write (to create the release).
 
-Local packaging: `packaging/macos/package.sh --arch universal`, `packaging/windows/package.ps1`,
-`packaging/linux/package.sh` (then `packaging/linux/flatpak-bundle.sh` for the Flatpak), `packaging/web/package.sh`.
+The MSI has its own `UpgradeCode` (`packaging/windows/doc4me.wxs`): it upgrades earlier Doc4Me
+installs and never touches an installed WordCraft.
 
-Dry run: `gh workflow run release.yml --ref <branch>` builds the unsigned jobs (version, Linux,
-Linux riscv64, Flatpak, FreeBSD, web) on any branch; the signing jobs are refused there by the `release`
-environment's branch rule, so no draft release is made.
+Local packaging: `packaging/windows/package.ps1 -Arch x64` (Windows, needs WiX v5),
+`packaging/macos/package.sh --arch universal`, `packaging/linux/package.sh` (then
+`packaging/linux/flatpak-bundle.sh` for the Flatpak), `packaging/web/package.sh`.

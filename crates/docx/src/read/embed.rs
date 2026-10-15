@@ -1,8 +1,8 @@
 //! Objects kept for writing back: charts, SmartArt diagrams and OLE objects.
 //!
-//! WordCraft draws charts and diagrams and shows an OLE object's picture, but doesn't edit them.
+//! Doc4Me draws charts and diagrams and shows an OLE object's picture, but doesn't edit them.
 //! So that saving doesn't lose them, the reader keeps each one's own markup (an `a:graphic` or a
-//! `w:object`) as a [`wordcraft_doc::graphic::Embedded`] on the object, and every part that markup
+//! `w:object`) as a [`doc4me_doc::graphic::Embedded`] on the object, and every part that markup
 //! reaches through relationships (chart, embedded workbook, colours and style; diagram data, layout,
 //! quick style, colours and drawing; OLE embedding and its picture…) as opaque bytes in
 //! `Document::passthrough`, with their content types and relationships in an
@@ -10,7 +10,7 @@
 
 use std::sync::Arc;
 
-use wordcraft_doc::graphic::{Embedded, EmbeddedRef};
+use doc4me_doc::graphic::{Embedded, EmbeddedRef};
 
 use super::Reader;
 use crate::package::{

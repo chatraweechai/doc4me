@@ -2,8 +2,8 @@
 
 use std::sync::Arc;
 
-use wordcraft_doc::para::InlineObject;
-use wordcraft_doc::{Align, Block, CharProps, Document, Paragraph, Table, para_block};
+use doc4me_doc::para::InlineObject;
+use doc4me_doc::{Align, Block, CharProps, Document, Paragraph, Table, para_block};
 
 use crate::model::{self, FBlock, Kind};
 use crate::{export, import};
@@ -38,17 +38,17 @@ fn sample() -> Document {
     p.insert_text(n, ".", &CharProps::default()).unwrap();
     blocks.push(para_block(p));
     blocks.push(para_block(Paragraph::with_text("Second Level", CharProps::default()).styled("Heading2")));
-    let bul = d.numbering.add_list(wordcraft_doc::ListKind::Bullet);
-    let num = d.numbering.add_list(wordcraft_doc::ListKind::Numbered);
+    let bul = d.numbering.add_list(doc4me_doc::ListKind::Bullet);
+    let num = d.numbering.add_list(doc4me_doc::ListKind::Numbered);
     for (t, nm, lvl) in [("first bullet", bul, 0u8), ("second bullet", bul, 0), ("nested bullet", bul, 1)] {
         let mut q = Paragraph::with_text(t, CharProps::default()).styled("ListParagraph");
-        q.props.numbering = Some(wordcraft_doc::props::NumRef { num: nm, level: lvl });
+        q.props.numbering = Some(doc4me_doc::props::NumRef { num: nm, level: lvl });
         blocks.push(para_block(q));
     }
     blocks.push(para_block(Paragraph::with_text("Between lists", CharProps::default())));
     for t in ["step one", "step two"] {
         let mut q = Paragraph::with_text(t, CharProps::default()).styled("ListParagraph");
-        q.props.numbering = Some(wordcraft_doc::props::NumRef { num, level: 0 });
+        q.props.numbering = Some(doc4me_doc::props::NumRef { num, level: 0 });
         blocks.push(para_block(q));
     }
     let mut t = Table::new(2, 2, 400.0);
@@ -166,12 +166,12 @@ fn check_round_trip(ext: &str, rich: bool) {
 /// Two bullets directly followed by two numbered items.
 fn bullets_then_numbers() -> Document {
     let mut d = Document::new();
-    let bul = d.numbering.add_list(wordcraft_doc::ListKind::Bullet);
-    let num = d.numbering.add_list(wordcraft_doc::ListKind::Numbered);
+    let bul = d.numbering.add_list(doc4me_doc::ListKind::Bullet);
+    let num = d.numbering.add_list(doc4me_doc::ListKind::Numbered);
     let mut blocks = Vec::new();
     for (t, nm) in [("dot one", bul), ("dot two", bul), ("num one", num), ("num two", num)] {
         let mut q = Paragraph::with_text(t, CharProps::default()).styled("ListParagraph");
-        q.props.numbering = Some(wordcraft_doc::props::NumRef { num: nm, level: 0 });
+        q.props.numbering = Some(doc4me_doc::props::NumRef { num: nm, level: 0 });
         blocks.push(para_block(q));
     }
     d.body = blocks;
@@ -234,7 +234,7 @@ fn odt_round_trip() {
 fn latex_round_trip() {
     check_round_trip("tex", true);
     let tex = String::from_utf8(export("tex", &sample()).unwrap().unwrap()).unwrap();
-    assert!(tex.starts_with("% Written by WordCraft") && tex.contains("\\documentclass{article}"), "{tex}");
+    assert!(tex.starts_with("% Written by Doc4Me") && tex.contains("\\documentclass{article}"), "{tex}");
     assert!(tex.contains("\\section*{Main Heading}") && tex.contains("\\subsection*{Second Level}"), "{tex}");
     assert!(tex.contains("\\textbf{bold}") && tex.contains("\\textit{italic}"), "{tex}");
     assert!(tex.contains("\\href{https://example.com/x}{a link}"), "{tex}");
@@ -268,7 +268,7 @@ fn page_break_char_splits_paragraph() {
 fn txt_round_trip() {
     check_round_trip("txt", false);
     let d = import("txt", "a\r\nb\nc".as_bytes()).unwrap().unwrap();
-    assert_eq!(d.plain_text(wordcraft_doc::StoryRef::Body), "a\nb\nc");
+    assert_eq!(d.plain_text(doc4me_doc::StoryRef::Body), "a\nb\nc");
     // UTF-16 LE with BOM, UTF-16 without BOM, Windows-1252.
     let mut u16le = vec![0xFF, 0xFE];
     for u in "héllo".encode_utf16() {
@@ -312,16 +312,16 @@ fn rtf_merged_cells_and_lists() {
     let mut d = Document::new();
     let mut t = Table::new(3, 2, 300.0);
     t.rows[0].cells[0].blocks = vec![para_block(Paragraph::with_text("tall", CharProps::default()))];
-    t.rows[0].cells[0].props.vmerge = wordcraft_doc::props::VMerge::Restart;
-    t.rows[1].cells[0].props.vmerge = wordcraft_doc::props::VMerge::Continue;
+    t.rows[0].cells[0].props.vmerge = doc4me_doc::props::VMerge::Restart;
+    t.rows[1].cells[0].props.vmerge = doc4me_doc::props::VMerge::Continue;
     d.body = vec![Arc::new(Block::Table(t))];
     d.ensure_nonempty();
     for ext in ["rtf", "html", "odt"] {
         let back = import(ext, &export(ext, &d).unwrap().unwrap()).unwrap().unwrap();
         let Some(Block::Table(bt)) = back.body.first().map(|b| &**b) else { panic!("{ext}: no table") };
         assert_eq!(bt.rows.len(), 3, "{ext}");
-        assert_eq!(bt.rows[0].cells[0].props.vmerge, wordcraft_doc::props::VMerge::Restart, "{ext}");
-        assert_eq!(bt.rows[1].cells[0].props.vmerge, wordcraft_doc::props::VMerge::Continue, "{ext}");
+        assert_eq!(bt.rows[0].cells[0].props.vmerge, doc4me_doc::props::VMerge::Restart, "{ext}");
+        assert_eq!(bt.rows[1].cells[0].props.vmerge, doc4me_doc::props::VMerge::Continue, "{ext}");
     }
 }
 
@@ -439,14 +439,11 @@ fn latex_labels_in_a_row_are_read_in_linear_time() {
     }
     assert!(started.elapsed() < std::time::Duration::from_secs(10), "{:?}", started.elapsed());
     let d = crate::latex::import("\\label{one}First \\label{two}second \\label{three}third.".as_bytes());
-    let p = d.para_at(&wordcraft_doc::Pos::body(0, 0)).unwrap();
-    let names: Vec<&str> = p
-        .objects
-        .iter()
-        .filter_map(|o| if let wordcraft_doc::InlineObject::BookmarkStart { name } = o { Some(name.as_str()) } else { None })
-        .collect();
+    let p = d.para_at(&doc4me_doc::Pos::body(0, 0)).unwrap();
+    let names: Vec<&str> =
+        p.objects.iter().filter_map(|o| if let doc4me_doc::InlineObject::BookmarkStart { name } = o { Some(name.as_str()) } else { None }).collect();
     assert_eq!(names, ["one", "two", "three"]);
-    assert_eq!(d.plain_text(wordcraft_doc::StoryRef::Body).replace('\u{FFFC}', ""), "First second third.");
+    assert_eq!(d.plain_text(doc4me_doc::StoryRef::Body).replace('\u{FFFC}', ""), "First second third.");
 }
 
 #[test]
@@ -553,7 +550,7 @@ fn html_img_sources_go_through_the_loader() {
     });
     assert_eq!(*seen.borrow(), ["logo.png", "gone.png"]);
     assert_eq!(d.media.len(), 1);
-    let text = d.plain_text(wordcraft_doc::StoryRef::Body);
+    let text = d.plain_text(doc4me_doc::StoryRef::Body);
     assert!(text.contains("Missing") && !text.contains("Sample Logo"), "{text:?}");
     // Without a loader only data: URIs load.
     assert!(import("html", html.as_bytes()).unwrap().unwrap().media.is_empty());
@@ -611,7 +608,7 @@ fn bounded_scans_keep_ordinary_markdown_and_entities() {
     assert!(t.contains(&"a".repeat(40)), "{t}");
 }
 
-/// A document's hyperlink can be `javascript:` (WordCraft refuses to follow it); the exported
+/// A document's hyperlink can be `javascript:` (Doc4Me refuses to follow it); the exported
 /// HTML and Markdown must not hand it to a browser either. Web, mail, bookmark and relative links
 /// still export as links.
 #[test]

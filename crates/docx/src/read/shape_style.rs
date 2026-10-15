@@ -1,8 +1,8 @@
 //! How a Word shape (`wps:wsp`) looks: its preset geometry, and the fill and outline it gets from its own properties (`wps:spPr`) or, failing those, from the theme through its
 //! style references (`wps:style`: `a:fillRef`, `a:lnRef`, ECMA-376 Part 1 §20.1.4.2).
 
-use wordcraft_doc::para::ShapeKind;
-use wordcraft_doc::props::Rgb;
+use doc4me_doc::para::ShapeKind;
+use doc4me_doc::props::Rgb;
 
 use super::drawing_color::{color, fill_colour};
 use crate::units::{int, measure};
@@ -13,7 +13,7 @@ use crate::xml::El;
 const THEME_LINE_WIDTHS: [f32; 3] = [0.5, 1.0, 1.5];
 
 /// The shape kind drawn for DrawingML preset geometry `prst` (ECMA-376 Part 1 §20.1.10.56).
-/// Presets WordCraft has no shape for are drawn as the nearest one it has: callouts as the box,
+/// Presets Doc4Me has no shape for are drawn as the nearest one it has: callouts as the box,
 /// round or cloud they point from, flowchart boxes as rectangles.
 pub(crate) fn preset_kind(prst: &str) -> ShapeKind {
     match prst {
@@ -101,7 +101,7 @@ pub(crate) fn vml_color(v: &str) -> Option<Rgb> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use wordcraft_doc::THEME_COLORS;
+    use doc4me_doc::THEME_COLORS;
 
     fn el(xml: &str) -> El {
         let ns = r#"xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main""#;

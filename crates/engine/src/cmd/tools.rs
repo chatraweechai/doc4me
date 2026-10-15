@@ -1,13 +1,13 @@
 //! Tools and the long tail: Repeat, macros, AutoCorrect, Compare, accessibility checker,
 //! document inspector, restrict editing, versions, templates, Quick Parts, and more.
 
+use doc4me_doc::para::InlineObject;
+use doc4me_doc::props::{CharProps, NumRef};
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::sync::Arc;
-use wordcraft_doc::para::InlineObject;
-use wordcraft_doc::props::{CharProps, NumRef};
 
-use wordcraft_doc::{Block, Document, Paragraph, Pos, RevisionKind, StoryRef, para_block};
+use doc4me_doc::{Block, Document, Paragraph, Pos, RevisionKind, StoryRef, para_block};
 
 use super::{delete_selection, sel_result};
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -392,7 +392,7 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("file.compatibility", "Check Compatibility", "File › Info", |s, _| {
             let mut issues = Vec::new();
             if s.doc.settings.watermark.is_some() {
-                issues.push("Watermarks are kept in WordCraft documents but not yet written to .docx.");
+                issues.push("Watermarks are kept in Doc4Me documents but not yet written to .docx.");
             }
             if s.doc
                 .para_paths(StoryRef::Body)
@@ -447,7 +447,7 @@ pub fn specs() -> Vec<CommandSpec> {
             if !title.is_empty() {
                 lines.push(title);
             }
-            let frag = wordcraft_doc::edit::Fragment {
+            let frag = doc4me_doc::edit::Fragment {
                 blocks: lines.iter().map(|l| Block::Para(Paragraph::with_text(l, CharProps::default()).styled("NoSpacing"))).collect(),
                 ..Default::default()
             };
@@ -558,10 +558,10 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .params(r#"{"char": string}"#),
         CommandSpec::new("para.defineNumber", "Define New Number Format", "Home › Paragraph › Numbering", |s, v| {
-            let fmt = wordcraft_doc::section::NumFormat::from_ooxml(p::str(v, "format").unwrap_or("decimal"));
+            let fmt = doc4me_doc::section::NumFormat::from_ooxml(p::str(v, "format").unwrap_or("decimal"));
             let text = p::str(v, "text").unwrap_or("%1.").to_string();
             let start = p::u64(v, "start").unwrap_or(1).min(100_000) as u32;
-            let id = s.doc.numbering.add_list(wordcraft_doc::ListKind::Numbered);
+            let id = s.doc.numbering.add_list(doc4me_doc::ListKind::Numbered);
             if let Some(a) = s.doc.numbering.abstract_of(id).map(|a| a.id)
                 && let Some(abs) = s.doc.numbering.abstracts.iter_mut().find(|x| x.id == a)
                 && let Some(l) = abs.levels.first_mut()
@@ -634,7 +634,7 @@ pub fn specs() -> Vec<CommandSpec> {
 fn language(s: &mut Session, v: &Value) -> CmdResult {
     let lang = match p::str(v, "lang") {
         Some(t) => Some(
-            wordcraft_proof::lang::normalize_tag(t)
+            doc4me_proof::lang::normalize_tag(t)
                 .ok_or_else(|| CmdError::Params(format!("`lang` must be a language tag such as pl-PL or en-US, not {t:?}")))?,
         ),
         None => None,
@@ -755,7 +755,7 @@ pub fn autocorrect_word(s: &mut Session, on_enter: bool) -> Result<(), CmdError>
     let at = |off: usize| Pos { off, ..f.clone() };
     // 1st, 22nd, 103rd → superscript suffix.
     if let Some(n) = ordinal_suffix(&word).filter(|_| ac.ordinals) {
-        s.doc.format_range(&at(end - n), &at(end), &|c| c.vert_align = Some(wordcraft_doc::props::VertAlign::Superscript))?;
+        s.doc.format_range(&at(end - n), &at(end), &|c| c.vert_align = Some(doc4me_doc::props::VertAlign::Superscript))?;
         return Ok(());
     }
     // Web addresses become links (trailing punctuation stays outside).
@@ -925,9 +925,9 @@ fn compare(s: &mut Session, v: &Value) -> CmdResult {
     let date = super::now_iso();
     let old: Vec<Arc<Block>> = s.doc.body.clone();
     let new: Vec<Arc<Block>> = revised.body.clone();
-    s.doc.revisions.push(wordcraft_doc::Revision { kind: RevisionKind::Insert, author: author.clone(), date: date.clone(), move_name: None });
+    s.doc.revisions.push(doc4me_doc::Revision { kind: RevisionKind::Insert, author: author.clone(), date: date.clone(), move_name: None });
     let ins = (s.doc.revisions.len() - 1) as u32;
-    s.doc.revisions.push(wordcraft_doc::Revision { kind: RevisionKind::Delete, author: author.clone(), date: date.clone(), move_name: None });
+    s.doc.revisions.push(doc4me_doc::Revision { kind: RevisionKind::Delete, author: author.clone(), date: date.clone(), move_name: None });
     let del = (s.doc.revisions.len() - 1) as u32;
     let key = |b: &Arc<Block>| match &**b {
         Block::Para(p) => opts.key(&p.plain_text()),
@@ -1152,7 +1152,7 @@ fn inspect_doc(s: &mut Session, v: &Value) -> CmdResult {
         "revisions": s.doc.para_paths(StoryRef::Body).iter().filter(|p| s.doc.para(StoryRef::Body, p).is_some_and(|x| x.runs.iter().any(|r| r.props.ins.is_some() || r.props.del.is_some()))).count(),
         "properties": !s.doc.core.creator.is_empty() || !s.doc.core.last_modified_by.is_empty(),
         "hiddenText": has_hidden,
-        "headers": s.doc.parts.values().filter(|p| matches!(p.kind, wordcraft_doc::PartKind::Header | wordcraft_doc::PartKind::Footer)).count(),
+        "headers": s.doc.parts.values().filter(|p| matches!(p.kind, doc4me_doc::PartKind::Header | doc4me_doc::PartKind::Footer)).count(),
     });
     for r in &remove {
         match r.as_str() {

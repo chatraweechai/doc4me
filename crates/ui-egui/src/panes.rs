@@ -2,17 +2,17 @@
 //! Accessibility and Alt Text (see `a11y_pane`), Restrict Editing ([`crate::dialogs_review`]), Comments,
 //! and the SmartArt Text Pane.
 
+use doc4me_doc::{Pos, StoryRef};
 use egui::{Stroke, Ui, vec2};
 use serde_json::{Value, json};
-use wordcraft_doc::{Pos, StoryRef};
 
 use crate::WordApp;
 use crate::theme::{Tokens, regular, semibold};
 
 pub fn show(app: &mut WordApp, ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
-    // SmartArt Design › Text Pane, while a SmartArt graphic WordCraft can edit is selected.
-    if app.session.view.smart_art_pane && wordcraft_engine::cmd::smart_art::selected_smart_art(&app.session).is_some() {
+    // SmartArt Design › Text Pane, while a SmartArt graphic Doc4Me can edit is selected.
+    if app.session.view.smart_art_pane && doc4me_engine::cmd::smart_art::selected_smart_art(&app.session).is_some() {
         egui::Panel::left("smart_art_pane")
             .default_size(250.0)
             .resizable(true)
@@ -111,7 +111,7 @@ fn nav(app: &mut WordApp, ui: &mut Ui) {
     }
     let qid = egui::Id::new("nav_query");
     let mut q = ui.data(|d| d.get_temp::<String>(qid)).unwrap_or_default();
-    let r = ui.add(egui::TextEdit::singleline(&mut q).hint_text(tl!("Search document")).desired_width(f32::INFINITY));
+    let r = ui.add(crate::widgets::text_line(&mut q).hint_text(tl!("Search document")).desired_width(f32::INFINITY));
     if r.changed() {
         ui.data_mut(|d| d.insert_temp(qid, q.clone()));
         if !q.is_empty() {
@@ -199,13 +199,15 @@ fn nav(app: &mut WordApp, ui: &mut Ui) {
 }
 
 /// Constrain each heading to the available pane width so long document text cannot
-/// enlarge the panel. The full heading stays accessible on hover.
+/// enlarge the panel. The full heading stays accessible on hover. The text keeps to the left
+/// (the trailing `grow` atom takes the spare width), so the levels' indents line up.
 fn nav_heading(ui: &mut Ui, level: u8, text: &str, selected: bool) -> egui::Response {
     ui.horizontal(|ui| {
         ui.add_space(level as f32 * 14.0);
+        let label = egui::RichText::new(text).font(if level == 0 { semibold(12.5) } else { regular(12.5) });
         ui.add_sized(
             vec2(ui.available_width(), ui.spacing().interact_size.y),
-            egui::Button::selectable(selected, egui::RichText::new(text).font(if level == 0 { semibold(12.5) } else { regular(12.5) })).truncate(),
+            egui::Button::selectable(selected, (label, egui::Atom::grow())).truncate(),
         )
         .on_hover_text(text)
     })
@@ -296,8 +298,8 @@ fn styles(app: &mut WordApp, ui: &mut Ui) {
         .styles
         .styles
         .iter()
-        .filter(|s| !s.hidden && s.kind != wordcraft_doc::StyleKind::Table)
-        .map(|s| (s.id.clone(), crate::i18n::style_name(s), s.kind == wordcraft_doc::StyleKind::Character))
+        .filter(|s| !s.hidden && s.kind != doc4me_doc::StyleKind::Table)
+        .map(|s| (s.id.clone(), crate::i18n::style_name(s), s.kind == doc4me_doc::StyleKind::Character))
         .collect();
     list.sort_by_key(|s| s.1.to_lowercase());
     egui::ScrollArea::vertical().show(ui, |ui| {
@@ -407,7 +409,7 @@ pub(crate) fn comment_editor(app: &mut WordApp, ui: &mut Ui, id: u32, font: Opti
     let Some(part) = app.session.doc.comments.get(&id).map(|c| c.part) else { return };
     let key = edit_key(id);
     let mut text = ui.data(|d| d.get_temp::<String>(key)).unwrap_or_else(|| app.session.doc.plain_text(StoryRef::Part(part)));
-    let mut edit = egui::TextEdit::multiline(&mut text).desired_rows(1).desired_width(f32::INFINITY).hint_text(tl!("Add a comment"));
+    let mut edit = crate::widgets::text_box(&mut text).desired_rows(1).desired_width(f32::INFINITY).hint_text(tl!("Add a comment"));
     if let Some(f) = font {
         edit = edit.font(f);
     }
@@ -445,7 +447,7 @@ fn thread_root(app: &WordApp, id: u32) -> u32 {
 pub(crate) fn reply_editor(app: &mut WordApp, ui: &mut Ui, id: u32, font: Option<egui::FontId>, focus: bool) -> bool {
     let key = reply_key(id);
     let mut text = ui.data(|d| d.get_temp::<String>(key)).unwrap_or_default();
-    let mut edit = egui::TextEdit::multiline(&mut text).desired_rows(1).desired_width(f32::INFINITY).hint_text(tl!("Write a reply"));
+    let mut edit = crate::widgets::text_box(&mut text).desired_rows(1).desired_width(f32::INFINITY).hint_text(tl!("Write a reply"));
     if let Some(f) = font {
         edit = edit.font(f);
     }
@@ -481,7 +483,7 @@ fn inspector(app: &mut WordApp, ui: &mut Ui) {
     }
     // Read-only, so call it directly: running the command every frame would pay for the command
     // machinery and consume per-command state (a pending `join_next_undo`) just to draw the pane.
-    let r = wordcraft_engine::cmd::inspector::inspect(&app.session);
+    let r = doc4me_engine::cmd::inspector::inspect(&app.session);
     let t = Tokens::get(ui.ctx());
     let none = tl!("None").to_string();
     let para = &r["paragraph"];
@@ -664,6 +666,7 @@ fn describe(prop: &str, v: &Value) -> String {
             "right" => "Right",
             "justify" => "Justified",
             "distribute" => "Distributed",
+            "thaiDistribute" => "Thai Distributed",
             _ => "Left",
         })
         .to_string(),

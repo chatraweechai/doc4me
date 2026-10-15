@@ -1,9 +1,9 @@
 [package]
-name = "wordcraft-fonts"
+name = "doc4me-fonts"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "WordCraft fonts: font database (bundled OFL + system), metrics, glyph outlines, shaping"
+description = "Doc4Me fonts: font database (bundled OFL + system), metrics, glyph outlines, shaping"
 
 [lints]
 workspace = true

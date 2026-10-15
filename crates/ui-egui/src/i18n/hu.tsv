@@ -1,6 +1,6 @@
 # Hungarian (hu) interface catalog. Columns, separated by a TAB:
 #   context <TAB> English source <TAB> translation
-#   context    empty (WordCraft uses no contexts yet)
+#   context    empty (Doc4Me uses no contexts yet)
 #   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
 #   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
 #              trailing "…" in one needs one in the other.
@@ -8,7 +8,7 @@
 #
 # Commands are nouns (Mentés, Másolás); second-person text uses the informal te form; labels
 # capitalise only the first word, as Hungarian spelling does; product and format names stay as
-# they are (WordCraft, PDF, Markdown, MCP …). A noun after a number stays singular (3 oldal), so
+# they are (Doc4Me, PDF, Markdown, MCP …). A noun after a number stays singular (3 oldal), so
 # no plural forms are needed. Placeholders never take a case ending: the wording puts them after
 # a colon or in parentheses instead.
 # Clean room: every entry was written from the plain meaning of the English label in ordinary
@@ -17,10 +17,10 @@
 
 	(no suggestions)	(nincs javaslat)
 	1.5 Line Spacing	1,5-es sorköz
-	A free, open-source word processor written from scratch in Rust.\nPart of the Crafting Apps from the ArtCraft team.	Ingyenes, nyílt forráskódú szövegszerkesztő, az alapoktól Rustban írva.\nA Crafting Apps családba tartozik, az ArtCraft csapatától.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Ingyenes, nyílt forráskódú szövegszerkesztő, az alapoktól Rustban írva.\nAz ArtCraft csapat WordCraft programján alapul.
 	AaBbCcDd	AaÁáBbCc
 	About	Névjegy
-	About WordCraft	A WordCraft névjegye
+	About Doc4Me	A Doc4Me névjegye
 	Accept	Elfogadás
 	Accept All Changes	Összes módosítás elfogadása
 	Accept This Change	E módosítás elfogadása
@@ -145,7 +145,6 @@
 	Comment	Megjegyzés
 	Comments	Megjegyzések
 	Comments Pane	Megjegyzések panel
-	Community\nDiscord	Közösségi\nDiscord
 	Compact	Tömör
 	Compare	Összehasonlítás
 	Compress Pictures	Képek tömörítése
@@ -197,13 +196,12 @@
 	Dictate	Diktálás
 	Different First Page	Eltérő első oldal
 	Different Odd & Even Pages	Eltérő páros és páratlan oldalak
-	Discord	Discord
-	Discord community	Discord-közösség
 	Display	Megjelenítés
 	Display for Review	Megjelenítés véleményezéshez
 	Distribute Columns	Oszlopok egyenletes elosztása
 	Distribute Rows	Sorok egyenletes elosztása
 	Distributed	Egyenletesen elosztott
+	Thai Distributed	Thai egyenletes elosztás
 	Do Not Show in TOC	Ne jelenjen meg a tartalomjegyzékben
 	Document End	Dokumentum vége
 	Document Formatting	Dokumentumformázás
@@ -248,7 +246,7 @@
 	Equation	Egyenlet
 	Eraser	Radír
 	Even Page	Páros oldal
-	Every command is available to scripts and AI agents: run `wordcraft-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Minden parancs elérhető szkriptekből és MI-ágensekből is: MCP-szerverhez futtasd a `wordcraft-cli mcp` parancsot, a JSON-vezérlőcsatornához pedig indítsd az alkalmazást a `--control <port>` kapcsolóval.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Minden parancs elérhető szkriptekből és MI-ágensekből is: MCP-szerverhez futtasd a `doc4me-cli mcp` parancsot, a JSON-vezérlőcsatornához pedig indítsd az alkalmazást a `--control <port>` kapcsolóval.
 	Export	Exportálás
 	Export a copy to share (PDF, Word document)	Másolat exportálása megosztáshoz (PDF, Word-dokumentum)
 	Export Page as PNG	Oldal exportálása PNG-ként
@@ -368,8 +366,6 @@
 	Intense Reference	Erős hivatkozás
 	Interface language:	Felület nyelve:
 	Italic	Dőlt
-	Join the ArtCraft community on Discord	Csatlakozz az ArtCraft közösséghez a Discordon
-	Join us on Discord: discord.gg/artcraft	Csatlakozz hozzánk a Discordon: discord.gg/artcraft
 	Justify	Sorkizárás
 	Keep Lines Together	Sorok együtt tartása
 	Keep lines together	Sorok együtt tartása
@@ -665,7 +661,6 @@
 	Animate the caret (it glides and fades)	Animált kurzor (csúszva mozog, halványulva villog)
 	Animation	Animáció
 	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Be: gépeléskor és a nyílbillentyűk használatakor a kurzor csúszva mozog az új helyére, és halványulva villog. Ki: a kurzor ugrik, és egyszerűen ki-be villog.
-	Show the community button in the title bar	Közösség gomb megjelenítése a címsorban
 	Show/Hide ¶	Megjelenítés/elrejtés ¶
 	Show\nComments	Megjegyzések\nmegjelenítése
 	Shrink Font 1 Point	Betűméret csökkentése 1 ponttal
@@ -680,7 +675,7 @@
 	Small caps	Kiskapitális
 	SmartArt	SmartArt
 	Sort	Rendezés
-	Source code: github.com/storytold/wordcraft	Forráskód: github.com/storytold/wordcraft
+	Source code: github.com/chatraweechai/docscaft	Forráskód: github.com/chatraweechai/docscaft
 	Space before/after:	Térköz előtte/utána:
 	Spacing	Térköz
 	Spacing (pt):	Térköz (pt):
@@ -815,7 +810,7 @@
 	Word Left	Szó balra
 	Word Right	Szó jobbra
 	WordArt	WordArt
-	WordCraft	WordCraft
+	Doc4Me	Doc4Me
 	Words	Szavak
 	Words only	Csak szavak
 	Wrap Text	Szöveg körbefuttatása
@@ -832,7 +827,7 @@
 	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	A dokumentumok fordított színekkel jelennek meg, mint a Nézet › Módváltás esetén. A mentés, a nyomtatás és a PDF változatlan marad.
 	Only web (http, https) and email (mailto) links can be followed	Csak webes (http, https) és e-mail (mailto) link nyitható meg
 	Apply Styles	Stílusok alkalmazása
-	AutoSave documents you have saved in WordCraft	A WordCraftban mentett dokumentumok automatikus mentése
+	AutoSave documents you have saved in Doc4Me	A Doc4Meban mentett dokumentumok automatikus mentése
 	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Az automatikus mentés sikertelen: {error}. Az újbóli bekapcsolásához mentsd a dokumentumot.
 	Bottom Margin	Alsó margó
 	Edit Comment	Megjegyzés szerkesztése
@@ -1082,7 +1077,6 @@
 	Insert a new equation (Alt+=)	Új egyenlet beszúrása (Alt+=)
 	Leave the equation (Esc)	Kilépés az egyenletből (Esc)
 	Preview	Előnézet
-	getartcraft.com/apps/wordcraft	getartcraft.com/apps/wordcraft
 	Browse…	Tallózás…
 	AaBbYyZz	AaBbYyZz ŐőŰű
 	Align Top Left	Igazítás balra fel
@@ -1532,7 +1526,7 @@
 	The document will be saved with a password. Save it to protect it.	A dokumentum jelszóval lesz mentve. A védelemhez mentsd.
 	The password is removed. Save the document to keep the change.	A jelszó eltávolítva. A módosítás megtartásához mentsd a dokumentumot.
 	The passwords don't match.	A két jelszó nem egyezik.
-	Keep the password somewhere safe: without it nobody, WordCraft included, can open the document. Leave both boxes empty to remove the password.	Tartsd biztonságos helyen a jelszót: nélküle senki, még a WordCraft sem tudja megnyitni a dokumentumot. A jelszó eltávolításához hagyd üresen mindkét mezőt.
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Tartsd biztonságos helyen a jelszót: nélküle senki, még a Doc4Me sem tudja megnyitni a dokumentumot. A jelszó eltávolításához hagyd üresen mindkét mezőt.
 	{cols}×{rows} Table	{cols}×{rows} táblázat
 	Name	Név
 	PRs	PR-ek
@@ -2290,7 +2284,7 @@
 	Word document	Word-dokumentum
 	All files	Minden fájl
 	Recipient lists	Címzettlisták
-	The system file dialog isn't available, so WordCraft shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	A rendszer fájlpárbeszédablaka nem érhető el, ezért a WordCraft a sajátját mutatja. A rendszer párbeszédablakához telepíts egy fájlválasztó portált (például xdg-desktop-portal-gtk) vagy a zenity programot.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	A rendszer fájlpárbeszédablaka nem érhető el, ezért a Doc4Me a sajátját mutatja. A rendszer párbeszédablakához telepíts egy fájlválasztó portált (például xdg-desktop-portal-gtk) vagy a zenity programot.
 	Up one level	Egy szinttel feljebb
 	Home folder	Saját mappa
 	{name} wasn't found.	Nem található: {name}
@@ -2298,8 +2292,8 @@
 	This folder can't be read: {error}	Ez a mappa nem olvasható: {error}
 	Showing the first {count} items.	Az első {count} elem látható.
 	File name:	Fájlnév:
-	Browse in WordCraft…	Tallózás a WordCraftban…
-	Open a file with WordCraft's own browser when the system file dialog doesn't appear.	Fájl megnyitása a WordCraft saját tallózójával, ha a rendszer fájlpárbeszédablaka nem jelenik meg.
+	Browse in Doc4Me…	Tallózás a Doc4Meban…
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Fájl megnyitása a Doc4Me saját tallózójával, ha a rendszer fájlpárbeszédablaka nem jelenik meg.
 	Hide White Space	Üres terület elrejtése
 	All pages	Minden oldal
 	Current page	Aktuális oldal
@@ -2434,13 +2428,13 @@
 	Use "an" before a vowel sound	Magánhangzóval kezdődő szó előtt „an” áll
 	Use "a" before a consonant sound	Mássalhangzóval kezdődő szó előtt „a” áll
 	The spelling and grammar check is complete.	A helyesírás- és nyelvhelyesség-ellenőrzés befejeződött.
-	Couldn't make WordCraft the default: {error}	Nem sikerült a WordCraftot alapértelmezetté tenni: {error}
-	In Default apps, choose WordCraft for the document types you want it to open.	Az Alapértelmezett alkalmazások között válassza a WordCraftot azokhoz a dokumentumtípusokhoz, amelyeket meg kell nyitnia.
-	Make WordCraft the default for Word documents…	A WordCraft legyen az alapértelmezett a Word-dokumentumokhoz…
-	Opens .docx, .doc, .rtf and .odt files and Word templates with WordCraft from now on.	Mostantól a .docx, .doc, .rtf és .odt fájlok, valamint a Word-sablonok a WordCrafttal nyílnak meg.
-	Opens Settings › Default apps, where you choose WordCraft for .docx and the other document types.	Megnyitja a Beállítások › Alapértelmezett alkalmazások lapot, ahol a WordCraftot választhatja a .docx és a többi dokumentumtípus számára.
-	To open Word documents with WordCraft by default: select one in Finder, choose File › Get Info, pick WordCraft under Open with, then click Change All.	Ha a Word-dokumentumokat alapértelmezés szerint a WordCrafttal szeretné megnyitni: jelöljön ki egyet a Finderben, válassza a Fájl › Információ parancsot, a „Megnyitás ezzel” alatt válassza a WordCraftot, majd kattintson az „Összes módosítása” gombra.
-	WordCraft is now the default app for Word documents.	Mostantól a WordCraft az alapértelmezett alkalmazás a Word-dokumentumokhoz.
+	Couldn't make Doc4Me the default: {error}	Nem sikerült a Doc4Meot alapértelmezetté tenni: {error}
+	In Default apps, choose Doc4Me for the document types you want it to open.	Az Alapértelmezett alkalmazások között válassza a Doc4Meot azokhoz a dokumentumtípusokhoz, amelyeket meg kell nyitnia.
+	Make Doc4Me the default for Word documents…	A Doc4Me legyen az alapértelmezett a Word-dokumentumokhoz…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Mostantól a .docx, .doc, .rtf és .odt fájlok, valamint a Word-sablonok a Doc4Metal nyílnak meg.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Megnyitja a Beállítások › Alapértelmezett alkalmazások lapot, ahol a Doc4Meot választhatja a .docx és a többi dokumentumtípus számára.
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Ha a Word-dokumentumokat alapértelmezés szerint a Doc4Metal szeretné megnyitni: jelöljön ki egyet a Finderben, válassza a Fájl › Információ parancsot, a „Megnyitás ezzel” alatt válassza a Doc4Meot, majd kattintson az „Összes módosítása” gombra.
+	Doc4Me is now the default app for Word documents.	Mostantól a Doc4Me az alapértelmezett alkalmazás a Word-dokumentumokhoz.
 	Numerals:	Számjegyek:
 	Numerals	Számjegyek
 	Hindi	Hindi

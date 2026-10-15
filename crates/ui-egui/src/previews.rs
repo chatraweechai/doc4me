@@ -4,10 +4,10 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 
+use doc4me_doc::props::CharProps;
+use doc4me_doc::{Block, Document, Paragraph, Table, para_block};
 use egui::{Rect, Response, Sense, Stroke, TextureHandle, Ui, pos2, vec2};
 use serde_json::{Value, json};
-use wordcraft_doc::props::CharProps;
-use wordcraft_doc::{Block, Document, Paragraph, Table, para_block};
 
 use crate::WordApp;
 use crate::theme::{Tokens, regular};
@@ -34,9 +34,9 @@ impl Previews {
     pub fn families(&mut self) -> Vec<String> {
         let lang = crate::i18n::current().code();
         if self.families.as_ref().is_none_or(|(l, _)| *l != lang) {
-            let db = wordcraft_fonts::FontDb::global();
+            let db = doc4me_fonts::FontDb::global();
             let mut f: Vec<String> = db.families_in(lang).into_iter().filter(|f| !f.starts_with('.')).collect();
-            for w in [wordcraft_doc::styles::BODY_FONT, wordcraft_doc::styles::HEADING_FONT] {
+            for w in [doc4me_doc::styles::BODY_FONT, doc4me_doc::styles::HEADING_FONT] {
                 if !f.iter().any(|x| x == w) {
                     f.push(w.to_string());
                 }
@@ -57,7 +57,7 @@ impl Previews {
     pub fn east_asian_families(&mut self) -> Vec<String> {
         self.families();
         if self.east_asian.is_none() {
-            let mut f: Vec<String> = wordcraft_fonts::FontDb::global()
+            let mut f: Vec<String> = doc4me_fonts::FontDb::global()
                 .east_asian_families()
                 .into_iter()
                 .filter(|f| !f.starts_with('.'))
@@ -195,7 +195,7 @@ pub fn math_texture(
     app: &mut WordApp,
     ctx: &egui::Context,
     key: &str,
-    nodes: &wordcraft_doc::math::Arg,
+    nodes: &doc4me_doc::math::Arg,
     display: bool,
     pt: f32,
     size: egui::Vec2,
@@ -205,15 +205,15 @@ pub fn math_texture(
     app.previews.get_or(ctx, &k, || math_image(nodes, display, pt, size.x, size.y, ppp))
 }
 
-fn math_image(nodes: &wordcraft_doc::math::Arg, display: bool, pt: f32, w: f32, h: f32, ppp: f32) -> Option<egui::ColorImage> {
-    use wordcraft_doc::math::{Math, to_linear};
+fn math_image(nodes: &doc4me_doc::math::Arg, display: bool, pt: f32, w: f32, h: f32, ppp: f32) -> Option<egui::ColorImage> {
+    use doc4me_doc::math::{Math, to_linear};
     let props = CharProps { size: Some(pt), ..Default::default() };
     let mut p = Paragraph::with_text("", props.clone());
-    p.props.align = Some(wordcraft_doc::props::Align::Center);
+    p.props.align = Some(doc4me_doc::props::Align::Center);
     p.props.space_before = Some(0.0);
     p.props.space_after = Some(0.0);
-    p.props.line_spacing = Some(wordcraft_doc::props::LineSpacing::Multiple(1.0));
-    let eq = wordcraft_doc::InlineObject::Equation { linear: to_linear(nodes), display, math: Math { nodes: nodes.clone(), ..Default::default() } };
+    p.props.line_spacing = Some(doc4me_doc::props::LineSpacing::Multiple(1.0));
+    let eq = doc4me_doc::InlineObject::Equation { linear: to_linear(nodes), display, math: Math { nodes: nodes.clone(), ..Default::default() } };
     p.insert_object(0, eq, &props).ok()?;
     let mut d = Document::new();
     d.body = vec![para_block(p)];
@@ -223,20 +223,20 @@ fn math_image(nodes: &wordcraft_doc::math::Arg, display: bool, pt: f32, w: f32, 
     d.last_section.margin_right = 0.0;
     d.last_section.margin_top = 0.0;
     d.last_section.margin_bottom = 0.0;
-    let l = wordcraft_layout::layout(&d, &mut wordcraft_layout::LayoutCache::new(), &Default::default());
+    let l = doc4me_layout::layout(&d, &mut doc4me_layout::LayoutCache::new(), &Default::default());
     let page = l.pages.first()?;
     // Centre the equation's line in the tile.
     let mid = page
         .items
         .iter()
         .find_map(|it| match it {
-            wordcraft_layout::Placed::Lines { para, y, .. } => Some(y + para.height / 2.0),
+            doc4me_layout::Placed::Lines { para, y, .. } => Some(y + para.height / 2.0),
             _ => None,
         })
         .unwrap_or(h / 2.0);
-    let mut opts = wordcraft_render::RenderOptions::default();
+    let mut opts = doc4me_render::RenderOptions::default();
     opts.display.placeholders = true;
-    let img = wordcraft_render::render_area(&d, page, 0.0, mid - h / 2.0, w, h, ppp, &opts);
+    let img = doc4me_render::render_area(&d, page, 0.0, mid - h / 2.0, w, h, ppp, &opts);
     let px = img.to_straight();
     Some(egui::ColorImage::from_rgba_unmultiplied([img.width as usize, img.height as usize], &px))
 }
@@ -277,7 +277,7 @@ fn snippet_blocks(
     h: f32,
     ppp: f32,
     margin: f32,
-    paper: Option<wordcraft_doc::Rgb>,
+    paper: Option<doc4me_doc::Rgb>,
     dark: bool,
 ) -> Option<egui::ColorImage> {
     let mut d = Document::new();
@@ -290,14 +290,14 @@ fn snippet_blocks(
     d.last_section.margin_right = margin;
     d.last_section.margin_top = margin;
     d.last_section.margin_bottom = 0.0;
-    let l = wordcraft_layout::layout(&d, &mut wordcraft_layout::LayoutCache::new(), &Default::default());
+    let l = doc4me_layout::layout(&d, &mut doc4me_layout::LayoutCache::new(), &Default::default());
     let page = l.pages.first()?;
     let mut opts = crate::canvas::screen_render_options();
     if let Some(p) = paper {
         opts.paper = p;
     }
     opts.dark = dark;
-    let img = wordcraft_render::render_area(&d, page, 0.0, 0.0, w + 2.0 * margin, h + margin, ppp, &opts);
+    let img = doc4me_render::render_area(&d, page, 0.0, 0.0, w + 2.0 * margin, h + margin, ppp, &opts);
     let px = img.to_straight();
     Some(egui::ColorImage::from_rgba_unmultiplied([img.width as usize, img.height as usize], &px))
 }
@@ -380,7 +380,7 @@ pub fn style_gallery(app: &mut WordApp, ui: &mut Ui, state: &Value) {
             // Sample letters in the interface's script (`АаБбВвГг` in Russian).
             let mut p = Paragraph::with_text(tl!("AaBbCcDd"), CharProps::default()).styled(id);
             p.props.space_before = Some(0.0);
-            p.props.align = Some(wordcraft_doc::Align::Left);
+            p.props.align = Some(doc4me_doc::Align::Left);
             // Keep hanging indents (bullets) but start the first line at the tile's left edge.
             let first = doc.styles.resolve_para(&p.props).indent_first;
             p.props.indent_left = Some(if first.is_finite() { (-first).max(0.0) } else { 0.0 });
@@ -453,7 +453,7 @@ pub fn style_set_gallery(app: &mut WordApp, ui: &mut Ui) {
         }
         let key = format!("set:{name}:{ppp}:{}", crate::i18n::current().code());
         let tex = app.previews.get_or(ui.ctx(), &key, || {
-            let mut s = wordcraft_engine::Session::new(Document::new());
+            let mut s = doc4me_engine::Session::new(Document::new());
             let _ = s.run("design.styleSet", &json!({"name": name}));
             let blocks = vec![
                 Block::Para(Paragraph::with_text(crate::i18n::tc("preview", "Title"), CharProps::default()).styled("Title")),

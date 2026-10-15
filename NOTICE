@@ -1,11 +1,13 @@
-WordCraft
+Doc4Me
+A modified version of WordCraft (https://github.com/storytold/wordcraft).
 Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.
+Modifications copyright (c) 2026 the Doc4Me contributors.
 Licensed under the MIT License or the Apache License, Version 2.0, at your option
 (LICENSE-MIT, LICENSE-APACHE).
 
-The ArtCraft name, wordmark and logos in docs/brand/ are trademarks of the ArtCraft Team. They are
-not open source and are not covered by the license above; their terms are in
-docs/brand/LICENSE-brand.txt.
+Doc4Me is an independent project. It is not made, sponsored or endorsed by the ArtCraft Team, and
+it ships none of the ArtCraft wordmarks or logos (WordCraft's brand terms require modified versions
+to remove them). ArtCraft is a trademark of the ArtCraft Team.
 
 Third-party material
 
@@ -14,9 +16,11 @@ list (author, source, license) is in ATTRIBUTION.md.
 
 - Source Sans 3 and Source Serif 4 (assets/fonts/Source*) — SIL Open Font License 1.1. See assets/fonts/OFL-SourceSans3.txt, OFL-SourceSerif4.txt.
 - Inter (assets/fonts/Inter-*.ttf) — SIL Open Font License 1.1. See assets/fonts/OFL-Inter.txt.
+- Sarabun (assets/fonts/Sarabun-*.ttf), Copyright 2018 The Sarabun Project Authors
+  (https://github.com/cadsondemak/Sarabun) — SIL Open Font License 1.1. See assets/fonts/OFL-Sarabun.txt.
 - JetBrains Mono (assets/fonts/JetBrainsMono-*.ttf) — SIL Open Font License 1.1. See assets/fonts/OFL-JetBrainsMono.txt.
-- Japanese fonts (craft-fonts): builds made with craft-fonts (CRAFT_FONTS_DIR; all official
-  releases) embed the fonts listed in
+- Japanese fonts (craft-fonts): builds made with craft-fonts (CRAFT_FONTS_DIR) embed the fonts
+  listed in
   https://github.com/storytold/craft-fonts/blob/main/ATTRIBUTION.md (BIZ UDPGothic, BIZ UDMincho,
   Shippori Mincho), under the SIL Open Font License 1.1. Their licence texts ship with the
   packages as OFL-<family>.txt. Builds without CRAFT_FONTS_DIR do not include them.
@@ -29,6 +33,8 @@ list (author, source, license) is in ATTRIBUTION.md.
 - All UI icons are drawn in code (crates/ui-egui/src/icons.rs) and are original work, MIT OR Apache-2.0.
 
 Rust dependencies (egui, eframe, vello_cpu, skrifa, harfrust, krilla, quick-xml, zip, image, …)
-are permissively licensed (MIT/Apache-2.0/BSD/ISC/Zlib) and fetched through crates.io.
+are permissively licensed (MIT/Apache-2.0/BSD/ISC/Zlib) and fetched through crates.io. The Thai,
+Lao and Khmer word dictionaries come with ICU4X (icu_segmenter and its data crates), Copyright ©
+2020-2024 Unicode, Inc., under the Unicode License v3 (Unicode-3.0): see LICENSE-UNICODE.
 
 No Microsoft, Adobe, Avid or Autodesk icons, images, templates or artwork are included.

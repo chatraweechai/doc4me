@@ -1,11 +1,11 @@
-# Builds the WordCraft Windows x64 installer (MSI) and portable zip.
+# Builds the Doc4Me Windows x64 installer (MSI) and portable zip.
 # Run it from the Actions tab (workflow_dispatch), by pushing a `v*` tag (also publishes a
-# GitHub Release), or by pushing to the branches listed below.
+# GitHub Release), or by pushing to main. Third-party actions are pinned to commit SHAs.
 name: Windows x64 installer
 
 on:
   push:
-    branches: [main, ccr-16d2ca37-vikyc1]
+    branches: [main]
     tags: ["v*"]
   workflow_dispatch:
 
@@ -21,14 +21,28 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 90
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      # A release tag must name the version being built (cargo xtask version set first).
+      - name: Check the tag matches the version
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        run: |
+          $version = (Select-String -Path Cargo.toml -Pattern '^version = "([^"]+)"' | Select-Object -First 1).Matches[0].Groups[1].Value
+          if ("v$version" -ne $env:GITHUB_REF_NAME) {
+            Write-Error "tag $($env:GITHUB_REF_NAME) does not match version $version in Cargo.toml"
+            exit 1
+          }
 
       - name: Install Rust (MSVC, x64)
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@686976e191b89faba57d3206551f0f330d8cb249 # stable branch
         with:
+          toolchain: stable
           targets: x86_64-pc-windows-msvc
 
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
 
       - name: Install WiX v5 and extensions
         shell: pwsh
@@ -42,9 +56,9 @@ jobs:
         shell: pwsh
         run: pwsh packaging/windows/package.ps1 -Arch x64
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: wordcraft-windows-x64
+          name: doc4me-windows-x64
           path: |
             dist/release/*.msi
             dist/release/*.zip
@@ -57,11 +71,11 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: wordcraft-windows-x64
+          name: doc4me-windows-x64
           path: dist
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --title "WordCraft $GITHUB_REF_NAME" --generate-notes
+        run: gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --title "Doc4Me $GITHUB_REF_NAME" --generate-notes

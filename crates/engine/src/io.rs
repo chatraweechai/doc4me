@@ -1,11 +1,11 @@
 //! File format dispatch by extension. Format crates plug in here.
 
-use wordcraft_doc::Document;
+use doc4me_doc::Document;
 
 #[cfg(not(target_arch = "wasm32"))]
 mod safe_save;
 
-/// Formats WordCraft opens.
+/// Formats Doc4Me opens.
 pub const OPEN_EXTS: &[&str] = &[
     "docx",
     "docm",
@@ -27,7 +27,7 @@ pub const OPEN_EXTS: &[&str] = &[
     "wcraft.json",
     "json",
 ];
-/// Formats WordCraft saves (Save As).
+/// Formats Doc4Me saves (Save As).
 pub const SAVE_EXTS: &[&str] = &["docx", "docm", "dotx", "dotm", "pdf", "txt", "md", "html", "rtf", "odt", "tex", "png", "json", "xml"];
 
 /// The extension of a file name or path, lower-case; empty when the file name has none (a dot
@@ -39,7 +39,7 @@ fn ext_of(name: &str) -> String {
 
 /// Is `ext` one of Word's package formats (.docx/.docm/.dotx/.dotm), which save without loss?
 pub fn is_word_package(ext: &str) -> bool {
-    wordcraft_docx::Flavor::from_ext(ext).is_some()
+    doc4me_docx::Flavor::from_ext(ext).is_some()
 }
 
 /// How a copy in another format is written.
@@ -81,12 +81,12 @@ impl std::fmt::Debug for Password {
 
 /// Does this open error mean the file is password-protected and no password was given?
 pub fn needs_password(err: &str) -> bool {
-    err.contains(wordcraft_docx::PASSWORD_REQUIRED)
+    err.contains(doc4me_docx::PASSWORD_REQUIRED)
 }
 
 /// Does this open error mean the password given was wrong?
 pub fn wrong_password(err: &str) -> bool {
-    err.contains(wordcraft_docx::WRONG_PASSWORD)
+    err.contains(doc4me_docx::WRONG_PASSWORD)
 }
 
 /// Can files with this extension be saved with a password (Word's packages)?
@@ -105,8 +105,8 @@ pub fn open_bytes(name: &str, bytes: &[u8]) -> Result<Document, String> {
 /// [`needs_password`]; with a wrong one, [`wrong_password`].
 pub fn open_bytes_with(name: &str, bytes: &[u8], password: Option<&str>) -> Result<(Document, bool), String> {
     let ext = ext_of(name);
-    if matches!(ext.as_str(), "docx" | "docm" | "dotx" | "dotm" | "doc" | "dot") && wordcraft_docx::is_encrypted(bytes) {
-        let mut doc = wordcraft_docx::read_with_password(bytes, password).map_err(|e| e.to_string())?;
+    if matches!(ext.as_str(), "docx" | "docm" | "dotx" | "dotm" | "doc" | "dot") && doc4me_docx::is_encrypted(bytes) {
+        let mut doc = doc4me_docx::read_with_password(bytes, password).map_err(|e| e.to_string())?;
         doc.ensure_nonempty();
         return Ok((doc, true));
     }
@@ -115,7 +115,7 @@ pub fn open_bytes_with(name: &str, bytes: &[u8], password: Option<&str>) -> Resu
     }
     let mut doc = match ext.as_str() {
         // Plain text goes through the formats importer: BOMs, unmarked UTF-16, Windows-1252.
-        "txt" | "text" | "" => wordcraft_formats::txt::import(bytes),
+        "txt" | "text" | "" => doc4me_formats::txt::import(bytes),
         "json" => serde_json::from_slice::<Document>(bytes).map_err(|e| format!("{name}: {e}"))?,
         other => match crate::io_ext::open(other, bytes) {
             Some(r) => r?,
@@ -134,12 +134,12 @@ pub(crate) fn text_width(doc: &Document) -> f32 {
 /// Shrink inline pictures wider than `max_w` to it, keeping their proportions. Layout keeps a
 /// picture's size (as Word does), so formats whose pictures come at their pixel size (HTML,
 /// Markdown, ODT, RTF) are fitted when they are read, as Insert › Pictures does.
-pub(crate) fn fit_block_pictures(b: &mut wordcraft_doc::Block, max_w: f32) {
+pub(crate) fn fit_block_pictures(b: &mut doc4me_doc::Block, max_w: f32) {
     crate::cmd::paste::each_para(b, 0, &mut |p| {
         let mut changed = false;
         for o in &mut p.objects {
-            if let wordcraft_doc::InlineObject::Image { w, h, float, .. } = o
-                && float.wrap == wordcraft_doc::para::Wrap::Inline
+            if let doc4me_doc::InlineObject::Image { w, h, float, .. } = o
+                && float.wrap == doc4me_doc::para::Wrap::Inline
                 && w.is_finite()
                 && *w > max_w
             {
@@ -163,25 +163,25 @@ pub(crate) fn fit_pictures(doc: &mut Document) {
     }
 }
 
-/// A file whose extension names no format WordCraft knows (`.m3u`, `.log`, `.ini`, none…),
+/// A file whose extension names no format Doc4Me knows (`.m3u`, `.log`, `.ini`, none…),
 /// opened by what it holds, as Word does: a Word document or RTF file by its signature, any
 /// other text through the plain-text import with encoding detection (#569). Anything else is
 /// refused with a clear error rather than shown as garbage.
 fn open_by_content(name: &str, ext: &str, bytes: &[u8], password: Option<&str>) -> Result<(Document, bool), String> {
     const ZIP: &[u8] = b"PK\x03\x04";
     const OLE: &[u8] = &[0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1];
-    let (mut doc, encrypted) = if bytes.starts_with(OLE) && wordcraft_docx::is_encrypted(bytes) {
-        (wordcraft_docx::read_with_password(bytes, password).map_err(|e| e.to_string())?, true)
+    let (mut doc, encrypted) = if bytes.starts_with(OLE) && doc4me_docx::is_encrypted(bytes) {
+        (doc4me_docx::read_with_password(bytes, password).map_err(|e| e.to_string())?, true)
     } else if bytes.starts_with(ZIP) {
-        (wordcraft_docx::read(bytes).map_err(|e| format!("{name}: not a document WordCraft can open ({e})"))?, false)
+        (doc4me_docx::read(bytes).map_err(|e| format!("{name}: not a document Doc4Me can open ({e})"))?, false)
     } else if bytes.starts_with(OLE) {
-        (wordcraft_docbin::read(bytes).map_err(|e| format!("{name}: not a document WordCraft can open ({e})"))?, false)
+        (doc4me_docbin::read(bytes).map_err(|e| format!("{name}: not a document Doc4Me can open ({e})"))?, false)
     } else if bytes.starts_with(b"{\\rtf") {
-        (wordcraft_formats::rtf::import(bytes)?, false)
-    } else if wordcraft_formats::txt::is_text(bytes) {
-        (wordcraft_formats::txt::import(bytes), false)
+        (doc4me_formats::rtf::import(bytes)?, false)
+    } else if doc4me_formats::txt::is_text(bytes) {
+        (doc4me_formats::txt::import(bytes), false)
     } else if ext.is_empty() {
-        return Err(format!("{name}: not a document or text file WordCraft can open"));
+        return Err(format!("{name}: not a document or text file Doc4Me can open"));
     } else {
         return Err(format!("{name}: unsupported format `.{ext}` (not a document or text file)"));
     };
@@ -200,8 +200,8 @@ pub fn save_bytes_opts(name: &str, doc: &Document, opts: &ExportOptions) -> Resu
     match ext.as_str() {
         // List paragraphs get their label and a tab, as in Word's plain-text save.
         "txt" | "text" => {
-            let bytes = wordcraft_formats::txt::export(doc);
-            Ok(if opts.markup && opts.comments { wordcraft_formats::comments::append("txt", doc, bytes) } else { bytes })
+            let bytes = doc4me_formats::txt::export(doc);
+            Ok(if opts.markup && opts.comments { doc4me_formats::comments::append("txt", doc, bytes) } else { bytes })
         }
         "json" => serde_json::to_vec_pretty(doc).map_err(|e| e.to_string()),
         other => match crate::io_ext::save(other, doc, opts) {
@@ -216,7 +216,7 @@ pub fn save_bytes_opts(name: &str, doc: &Document, opts: &ExportOptions) -> Resu
 pub fn save_bytes_with(name: &str, doc: &Document, password: Option<&str>, opts: &ExportOptions) -> Result<Vec<u8>, String> {
     let bytes = save_bytes_opts(name, doc, opts)?;
     match password {
-        Some(pw) if can_encrypt(name) => wordcraft_docx::encrypt(&bytes, pw).map_err(|e| e.to_string()),
+        Some(pw) if can_encrypt(name) => doc4me_docx::encrypt(&bytes, pw).map_err(|e| e.to_string()),
         _ => Ok(bytes),
     }
 }
@@ -238,7 +238,7 @@ pub fn open_path_with(path: &std::path::Path, password: Option<&str>) -> Result<
     if matches!(ext_of(&name).as_str(), "html" | "htm" | "xhtml") {
         // Pictures referenced by a relative path load from beside the HTML file.
         let images = LocalImages::new(path.parent().unwrap_or(std::path::Path::new("")));
-        let mut doc = wordcraft_formats::html::import_with(&wordcraft_formats::html::decode(&bytes), &|src| images.load(src));
+        let mut doc = doc4me_formats::html::import_with(&doc4me_formats::html::decode(&bytes), &|src| images.load(src));
         fit_pictures(&mut doc);
         doc.ensure_nonempty();
         return Ok((doc, false));
@@ -318,7 +318,7 @@ impl LocalImages {
         if src.is_empty() || src.starts_with("//") || src.split_once(':').is_some_and(|(scheme, _)| !scheme.contains('/')) {
             return None;
         }
-        let rel = String::from_utf8(wordcraft_formats::model::percent_decode(src)).ok()?;
+        let rel = String::from_utf8(doc4me_formats::model::percent_decode(src)).ok()?;
         let rel = std::path::Path::new(&rel);
         if rel.components().any(|c| matches!(c, std::path::Component::Prefix(_) | std::path::Component::RootDir)) {
             return None;
@@ -413,7 +413,7 @@ pub fn save_path_with(path: &std::path::Path, _doc: &Document, _password: Option
 }
 
 /// Decode text bytes: UTF-8 (with or without BOM), UTF-16 LE/BE (BOM or sniffed), else
-/// Windows-1252 (see [`wordcraft_formats::txt::decode`]).
+/// Windows-1252 (see [`doc4me_formats::txt::decode`]).
 pub fn decode_text(b: &[u8]) -> String {
-    wordcraft_formats::txt::decode(b)
+    doc4me_formats::txt::decode(b)
 }

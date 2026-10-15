@@ -47,19 +47,19 @@ pub mod rt {
 pub const VBA_PROJECT_PART: &str = "word/vbaProject.bin";
 /// `Document::passthrough` key listing the parts the project relates to (VBA data, signatures…),
 /// one `relationship type \t part name \t content type` line each; each part's bytes are kept
-/// under its part name. Not a package part: WordCraft's own bookkeeping.
-pub const VBA_RELATED: &str = "wordcraft:vbaProject.related";
+/// under its part name. Not a package part: Doc4Me's own bookkeeping.
+pub const VBA_RELATED: &str = "doc4me:vbaProject.related";
 /// Most parts we carry along with a macro project.
 pub const MAX_VBA_RELATED: usize = 64;
 
 /// `Document::passthrough` key listing the parts that objects read from a file refer to (charts,
-/// SmartArt diagrams, OLE objects: see `wordcraft_doc::graphic::Embedded`), with their content
+/// SmartArt diagrams, OLE objects: see `doc4me_doc::graphic::Embedded`), with their content
 /// types and own relationships, as [`EmbeddedManifest`] lines. Each part's bytes are kept under its
-/// part name. Not a package part: WordCraft's own bookkeeping.
-pub const EMBEDDED_PARTS: &str = "wordcraft:embedded.parts";
+/// part name. Not a package part: Doc4Me's own bookkeeping.
+pub const EMBEDDED_PARTS: &str = "doc4me:embedded.parts";
 /// Custom XML roots kept by the package (P) or main document (D): `owner\ttype\tpart`.
 /// Their opaque bytes and related parts use the same bounded manifest as embedded objects.
-pub const CUSTOM_XML_ROOTS: &str = "wordcraft:customXml.roots";
+pub const CUSTOM_XML_ROOTS: &str = "doc4me:customXml.roots";
 /// Most parts we carry along for a file's embedded objects.
 pub const MAX_EMBEDDED_PARTS: usize = 4096;
 /// Most relationships we keep for one such part.

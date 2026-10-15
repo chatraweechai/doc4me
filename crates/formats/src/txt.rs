@@ -2,9 +2,9 @@
 //! Export writes UTF-8 with CRLF line ends; list paragraphs get their label and a tab, table
 //! cells are separated by tabs.
 
-use wordcraft_doc::Document;
+use doc4me_doc::Document;
 
-pub use wordcraft_doc::encoding::cp1252;
+pub use doc4me_doc::encoding::cp1252;
 
 use crate::model::{FBlock, ListCounter, from_doc};
 
@@ -32,7 +32,7 @@ fn unmarked_utf16(b: &[u8]) -> Option<bool> {
     None
 }
 
-/// Does `b` look like plain text, so a file with an extension WordCraft doesn't know (a
+/// Does `b` look like plain text, so a file with an extension Doc4Me doesn't know (a
 /// playlist, a log, a config file…) can open as text the way Word's text import opens it?
 ///
 /// Text has a BOM, or reads as UTF-16 by its zero bytes, or has no NUL byte and next to no

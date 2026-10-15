@@ -1,9 +1,9 @@
 //! Typing and deleting.
 
+use doc4me_doc::para::{COLUMN_BREAK, NB_HYPHEN, NBSP, OBJ, PAGE_BREAK, SOFT_HYPHEN};
+use doc4me_doc::props::{Border, BorderStyle, NumRef};
+use doc4me_doc::{Block, ListKind, Path, Pos, StoryRef, Table};
 use serde_json::Value;
-use wordcraft_doc::para::{COLUMN_BREAK, NB_HYPHEN, NBSP, OBJ, PAGE_BREAK, SOFT_HYPHEN};
-use wordcraft_doc::props::{Border, BorderStyle, NumRef};
-use wordcraft_doc::{Block, ListKind, Path, Pos, StoryRef, Table};
 
 use super::{delete_selection, non_mac, sel_result, split_para, type_text};
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -248,7 +248,7 @@ fn table_line(s: &Session, at: &Pos) -> Option<Vec<usize>> {
     let inner = text.strip_prefix('+')?.strip_suffix('+')?;
     let mut cols = Vec::new();
     for run in inner.split('+') {
-        if run.is_empty() || !run.bytes().all(|b| b == b'-') || cols.len() >= wordcraft_doc::table::MAX_COLS {
+        if run.is_empty() || !run.bytes().all(|b| b == b'-') || cols.len() >= doc4me_doc::table::MAX_COLS {
             return None;
         }
         cols.push(run.len());
@@ -259,7 +259,7 @@ fn table_line(s: &Session, at: &Pos) -> Option<Vec<usize>> {
 /// Turn the border-line characters into a bottom border on the paragraph above (or this one
 /// at the top of a story).
 fn apply_border_line(s: &mut Session, at: &Pos, line: Border) -> Result<(), CmdError> {
-    let set_bottom = |p: &mut wordcraft_doc::Paragraph| {
+    let set_bottom = |p: &mut doc4me_doc::Paragraph| {
         let mut b = p.props.borders.unwrap_or_default();
         b.bottom = Some(line);
         p.props.borders = Some(b);
@@ -371,7 +371,7 @@ fn hex_char(code: &str) -> Option<char> {
 
 /// Characters Alt+X converts (not control characters, breaks or object placeholders).
 fn codeable(c: char) -> bool {
-    !c.is_control() && c != wordcraft_doc::para::OBJ
+    !c.is_control() && c != doc4me_doc::para::OBJ
 }
 
 /// A character's code as Word writes it: at least four upper-case hex digits.
@@ -433,7 +433,7 @@ fn tab(s: &mut Session, _: &Value) -> CmdResult {
         }
         let mut path = tpath.0.clone();
         path.extend([nr as u32, nc as u32, 0]);
-        let start = Pos { story, path: wordcraft_doc::Path(path), off: 0 };
+        let start = Pos { story, path: doc4me_doc::Path(path), off: 0 };
         // Select the cell's content like Word.
         let end_path = s.doc.para_paths(story).into_iter().rfind(|q| q.0.starts_with(&start.path.0[..start.path.0.len() - 1]));
         let end = end_path.map(|q| {
@@ -473,7 +473,7 @@ fn back_tab(s: &mut Session, _: &Value) -> CmdResult {
         };
         let mut path = tpath.0.clone();
         path.extend([nr as u32, nc as u32, 0]);
-        s.sel = Selection::caret(Pos { story, path: wordcraft_doc::Path(path), off: 0 });
+        s.sel = Selection::caret(Pos { story, path: doc4me_doc::Path(path), off: 0 });
         return sel_result(s);
     }
     let f = s.sel.focus.clone();
@@ -609,7 +609,7 @@ fn delete_inner(s: &mut Session, _: &Value) -> CmdResult {
                 *l -= 1;
             }
             path.extend([0, 0, 0]);
-            s.sel = Selection::caret(Pos { story: f.story, path: wordcraft_doc::Path(path), off: 0 });
+            s.sel = Selection::caret(Pos { story: f.story, path: doc4me_doc::Path(path), off: 0 });
         }
     }
     sel_result(s)

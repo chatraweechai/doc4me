@@ -2,9 +2,9 @@
 
 use std::sync::Arc;
 
-use egui::{Align2, Color32, CornerRadius, FontData, FontDefinitions, FontFamily, FontId, Rect, Stroke, Visuals};
+use egui::{Align2, Color32, CornerRadius, FontData, FontDefinitions, FontFamily, FontId, FontTweak, Rect, Stroke, Visuals};
 
-/// WordCraft's app colour (and its darker ink for text on light backgrounds).
+/// Doc4Me's app colour (and its darker ink for text on light backgrounds).
 pub const APP_COLOR: Color32 = Color32::from_rgb(0x3B, 0x5B, 0xDB);
 pub const APP_INK: Color32 = Color32::from_rgb(0x2B, 0x47, 0xB5);
 
@@ -347,14 +347,14 @@ pub fn install_fonts_with(ctx: &egui::Context, prefer_hans: bool, system_cjk: bo
 
 /// [`install_fonts_with`], also adding document-font `faces` as last-resort fallbacks (#565): the
 /// faces that cover the text an input method is composing.
-pub fn install_fonts_extra(ctx: &egui::Context, prefer_hans: bool, system_cjk: bool, faces: &[Arc<wordcraft_fonts::FontFace>]) {
+pub fn install_fonts_extra(ctx: &egui::Context, prefer_hans: bool, system_cjk: bool, faces: &[Arc<doc4me_fonts::FontFace>]) {
     let mut fonts = font_definitions(prefer_hans, system_cjk);
     add_fallback_faces(&mut fonts, faces);
     ctx.set_fonts(fonts);
 }
 
 /// Add `faces` after every other font of the interface families.
-pub fn add_fallback_faces(fonts: &mut FontDefinitions, faces: &[Arc<wordcraft_fonts::FontFace>]) {
+pub fn add_fallback_faces(fonts: &mut FontDefinitions, faces: &[Arc<doc4me_fonts::FontFace>]) {
     for f in faces {
         let name = format!("fallback {} {} {}", f.family, f.style, f.id());
         let mut data = FontData::from_owned(f.data().to_vec());
@@ -374,11 +374,11 @@ pub fn add_fallback_faces(fonts: &mut FontDefinitions, faces: &[Arc<wordcraft_fo
 /// fallback.
 pub fn faces_for_preedit(
     text: &str,
-    have: &[Arc<wordcraft_fonts::FontFace>],
+    have: &[Arc<doc4me_fonts::FontFace>],
     covered: impl Fn(char) -> bool,
-    lookup: impl Fn(char) -> Option<Arc<wordcraft_fonts::FontFace>>,
-) -> Vec<Arc<wordcraft_fonts::FontFace>> {
-    let mut out: Vec<Arc<wordcraft_fonts::FontFace>> = Vec::new();
+    lookup: impl Fn(char) -> Option<Arc<doc4me_fonts::FontFace>>,
+) -> Vec<Arc<doc4me_fonts::FontFace>> {
+    let mut out: Vec<Arc<doc4me_fonts::FontFace>> = Vec::new();
     for c in text.chars().filter(|c| !c.is_ascii() && !c.is_whitespace() && !covered(*c)) {
         if have.iter().chain(&out).any(|f| f.covers(c)) {
             continue;
@@ -390,26 +390,42 @@ pub fn faces_for_preedit(
     out
 }
 
+/// How far Sarabun's interface glyphs are lifted, as a fraction of the font size (negative = up).
+const SARABUN_Y_OFFSET: f32 = -0.06;
+
 /// The interface fonts; see [`install_fonts_with`].
 pub fn font_definitions(prefer_hans: bool, system_cjk: bool) -> FontDefinitions {
     let mut fonts = FontDefinitions::default();
     let add = |fonts: &mut FontDefinitions, name: &str, bytes: &'static [u8]| {
         fonts.font_data.insert(name.into(), Arc::new(FontData::from_static(bytes)));
     };
+    // Sarabun (Thai and Latin) is the interface font; Inter and Source Sans 3 draw what it lacks.
+    // Its tall ascent leaves room for Thai marks above the line, which would push Latin text
+    // below the middle of its row: lift the glyphs a little.
+    let sarabun = |fonts: &mut FontDefinitions, name: &str, bytes: &'static [u8]| {
+        let tweak = FontTweak { y_offset_factor: SARABUN_Y_OFFSET, ..Default::default() };
+        fonts.font_data.insert(name.into(), Arc::new(FontData::from_static(bytes).tweak(tweak)));
+    };
+    sarabun(&mut fonts, "Sarabun", include_bytes!("../../../assets/fonts/Sarabun-Regular.ttf"));
+    sarabun(&mut fonts, "SarabunMedium", include_bytes!("../../../assets/fonts/Sarabun-Medium.ttf"));
+    sarabun(&mut fonts, "SarabunSemiBold", include_bytes!("../../../assets/fonts/Sarabun-SemiBold.ttf"));
     add(&mut fonts, "Inter", include_bytes!("../../../assets/fonts/Inter-Regular.ttf"));
     add(&mut fonts, "InterMedium", include_bytes!("../../../assets/fonts/Inter-Medium.ttf"));
     add(&mut fonts, "InterSemiBold", include_bytes!("../../../assets/fonts/Inter-SemiBold.ttf"));
     add(&mut fonts, "SourceSans", include_bytes!("../../../assets/fonts/SourceSans3-Regular.ttf"));
     add(&mut fonts, "Mono", include_bytes!("../../../assets/fonts/JetBrainsMono-Regular.ttf"));
     if let Some(prop) = fonts.families.get_mut(&FontFamily::Proportional) {
-        prop.insert(0, "Inter".into());
+        prop.splice(0..0, ["Sarabun".to_string(), "Inter".to_string()]);
         prop.push("SourceSans".into());
     }
     if let Some(m) = fonts.families.get_mut(&FontFamily::Monospace) {
         m.insert(0, "Mono".into());
+        // Thai in monospaced text (paths, codes) draws from Sarabun rather than as boxes.
+        m.push("Sarabun".into());
     }
-    fonts.families.insert(FontFamily::Name("medium".into()), vec!["InterMedium".into(), "Inter".into(), "SourceSans".into()]);
-    fonts.families.insert(FontFamily::Name("semibold".into()), vec!["InterSemiBold".into(), "Inter".into(), "SourceSans".into()]);
+    let family = |names: [&str; 5]| names.map(String::from).to_vec();
+    fonts.families.insert(FontFamily::Name("medium".into()), family(["SarabunMedium", "Sarabun", "InterMedium", "Inter", "SourceSans"]));
+    fonts.families.insert(FontFamily::Name("semibold".into()), family(["SarabunSemiBold", "Sarabun", "InterSemiBold", "Inter", "SourceSans"]));
     let add_cjk = |fonts: &mut FontDefinitions, name: String, data: FontData| {
         fonts.font_data.insert(name.clone(), Arc::new(data));
         for fam in [FontFamily::Proportional, FontFamily::Name("medium".into()), FontFamily::Name("semibold".into())] {
@@ -418,7 +434,7 @@ pub fn font_definitions(prefer_hans: bool, system_cjk: bool) -> FontDefinitions 
             }
         }
     };
-    let cjk = wordcraft_fonts::ui_cjk_fonts(prefer_hans);
+    let cjk = doc4me_fonts::ui_cjk_fonts(prefer_hans);
     for f in &cjk {
         // The same static bytes the document fonts use: one copy in the binary.
         add_cjk(&mut fonts, format!("{} {}", f.family, f.style), FontData::from_static(f.bytes));
@@ -443,22 +459,22 @@ pub fn font_definitions(prefer_hans: bool, system_cjk: bool) -> FontDefinitions 
 /// ([`cjk_font_text`](crate::i18n::Lang::cjk_font_text)). The font is picked for the catalogs'
 /// missing characters, or for the language names when only those are missing.
 #[cfg(not(target_arch = "wasm32"))]
-fn system_cjk_font(hans: bool) -> Option<&'static wordcraft_fonts::SystemUiFont> {
-    static ZH: std::sync::OnceLock<Option<wordcraft_fonts::SystemUiFont>> = std::sync::OnceLock::new();
-    static OTHER: std::sync::OnceLock<Option<wordcraft_fonts::SystemUiFont>> = std::sync::OnceLock::new();
+fn system_cjk_font(hans: bool) -> Option<&'static doc4me_fonts::SystemUiFont> {
+    static ZH: std::sync::OnceLock<Option<doc4me_fonts::SystemUiFont>> = std::sync::OnceLock::new();
+    static OTHER: std::sync::OnceLock<Option<doc4me_fonts::SystemUiFont>> = std::sync::OnceLock::new();
     (if hans { &ZH } else { &OTHER })
         .get_or_init(|| {
-            let embedded = wordcraft_fonts::ui_cjk_fonts(hans);
+            let embedded = doc4me_fonts::ui_cjk_fonts(hans);
             let (catalogs, names) = crate::i18n::Lang::cjk_font_text(hans);
-            let mut needed = wordcraft_fonts::ui_uncovered_cjk(&catalogs, &embedded);
+            let mut needed = doc4me_fonts::ui_uncovered_cjk(&catalogs, &embedded);
             if needed.is_empty() {
-                needed = wordcraft_fonts::ui_uncovered_cjk(&[&names], &embedded);
+                needed = doc4me_fonts::ui_uncovered_cjk(&[&names], &embedded);
                 if needed.is_empty() {
                     return None;
                 }
             }
             log::debug!("interface: {} CJK characters lack an embedded glyph", needed.len());
-            wordcraft_fonts::system_cjk_ui_font(hans, &needed)
+            doc4me_fonts::system_cjk_ui_font(hans, &needed)
         })
         .as_ref()
 }
@@ -625,7 +641,7 @@ fn visuals(t: &Tokens) -> Visuals {
     v
 }
 
-pub fn c32(c: wordcraft_doc::Rgb) -> Color32 {
+pub fn c32(c: doc4me_doc::Rgb) -> Color32 {
     Color32::from_rgb(c.0, c.1, c.2)
 }
 
@@ -674,7 +690,7 @@ mod tests {
     /// once, and not for characters the interface fonts draw.
     #[test]
     fn preedit_gets_document_fallback_faces() {
-        let face = wordcraft_fonts::FontDb::global().face("Source Sans 3", "Regular");
+        let face = doc4me_fonts::FontDb::global().face("Source Sans 3", "Regular");
         let lookup = |_: char| Some(face.clone());
         let bangla = "\u{0986}\u{09AE}\u{09BF}";
         let got = super::faces_for_preedit(bangla, &[], |_| false, lookup);
@@ -689,8 +705,8 @@ mod tests {
         assert!(defs.families[&egui::FontFamily::Proportional].last().is_some_and(|n| n.starts_with("fallback ")));
     }
 
-    /// #656: dialog primary buttons, the Discord pill, the table eraser and the Navigation search
-    /// highlight take their colours from the theme, not fixed light-theme values.
+    /// #656: dialog primary buttons, the table eraser and the Navigation search highlight take
+    /// their colours from the theme, not fixed light-theme values.
     #[test]
     fn interface_colours_come_from_the_theme() {
         let banned = ["fill(crate::theme::APP_COLOR)", "0x58, 0x65, 0xF2", "0x47, 0x52, 0xC4", "0xFF, 0xF1, 0x76", "0xD1, 0x3B, 0x3B"];

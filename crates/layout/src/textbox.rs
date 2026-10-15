@@ -10,9 +10,9 @@
 use std::collections::{BTreeSet, HashMap};
 use std::sync::Arc;
 
-use wordcraft_doc::props::{TextDirection, TextVert, VAlign};
-use wordcraft_doc::{Block, Blocks, Path, StoryRef, TextBody};
-use wordcraft_geom::Rect;
+use doc4me_doc::props::{TextDirection, TextVert, VAlign};
+use doc4me_doc::{Block, Blocks, Path, StoryRef, TextBody};
+use doc4me_geom::Rect;
 
 use crate::{BOX_INSET_X, BOX_INSET_Y, Ctx, Placed, fit_box, layout_box};
 
@@ -28,7 +28,7 @@ pub(crate) struct Chains {
 }
 
 impl Chains {
-    fn build(&mut self, doc: &wordcraft_doc::Document) {
+    fn build(&mut self, doc: &doc4me_doc::Document) {
         if self.built {
             return;
         }
@@ -56,7 +56,7 @@ pub(crate) fn shown_story(ctx: &mut Ctx, id: u32) -> u32 {
 
 /// Line length and the depth lines stack in, for a `w` × `h` box whose text runs `vert`.
 fn frame(vert: TextVert, w: f32, h: f32) -> (f32, f32) {
-    let (w, h) = (wordcraft_geom::finite(w), wordcraft_geom::finite(h));
+    let (w, h) = (doc4me_geom::finite(w), doc4me_geom::finite(h));
     let (along, across) = match vert.turn() {
         TextDirection::Horizontal => (w - 2.0 * BOX_INSET_X, h - 2.0 * BOX_INSET_Y),
         _ => (h - 2.0 * BOX_INSET_Y, w - 2.0 * BOX_INSET_X),

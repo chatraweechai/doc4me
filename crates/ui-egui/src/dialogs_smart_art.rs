@@ -4,11 +4,11 @@
 //! result without the UI. The picker is shown through [`crate::dialogs_insert::InsertDialog`];
 //! the pane through [`crate::panes`].
 
+use doc4me_doc::props::Rgb;
+use doc4me_doc::smart_art::{MAX_ITEMS, SmartArtColors, SmartArtLayout, SmartArtSpec};
 use egui::{Color32, Painter, Rect, Sense, Stroke, Ui, pos2, vec2};
 use serde::Serialize;
 use serde_json::{Value, json};
-use wordcraft_doc::props::Rgb;
-use wordcraft_doc::smart_art::{MAX_ITEMS, SmartArtColors, SmartArtLayout, SmartArtSpec};
 
 use crate::WordApp;
 use crate::theme::{Tokens, c32, regular, semibold};
@@ -253,7 +253,7 @@ pub fn items_without(g: &SmartArtSpec, i: usize) -> Value {
 /// The Text Pane: a row per item, indented by level. Typing changes the graphic as you go (one
 /// undo step per item typed in); Enter adds an item after the current one.
 pub fn text_pane(app: &mut WordApp, ui: &mut Ui) {
-    let Some(g) = wordcraft_engine::cmd::smart_art::selected_smart_art(&app.session) else { return };
+    let Some(g) = doc4me_engine::cmd::smart_art::selected_smart_art(&app.session) else { return };
     let t = Tokens::get(ui.ctx());
     ui.label(egui::RichText::new(tl!("One line per item. Enter adds an item.")).color(t.text_dim));
     ui.add_space(4.0);
@@ -266,7 +266,7 @@ pub fn text_pane(app: &mut WordApp, ui: &mut Ui) {
                 ui.add_space(f32::from(it.level) * 16.0);
                 ui.label(egui::RichText::new("•").color(t.text_dim));
                 let mut text = it.text.clone();
-                let r = ui.add(egui::TextEdit::singleline(&mut text).id_salt(("smart_art_item", i)).desired_width(f32::INFINITY));
+                let r = ui.add(crate::widgets::text_line(&mut text).id_salt(("smart_art_item", i)).desired_width(f32::INFINITY));
                 if want_focus == Some(i) {
                     r.request_focus();
                 }

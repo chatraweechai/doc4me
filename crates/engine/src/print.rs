@@ -1,6 +1,6 @@
 //! Print settings (#641): which pages go out, how many copies, as a PDF.
 //!
-//! WordCraft prints through a PDF (the host opens it in the system's print flow), so the settings
+//! Doc4Me prints through a PDF (the host opens it in the system's print flow), so the settings
 //! that can be delivered are the ones that shape the PDF: the page range, odd/even pages, copies
 //! and collation. Printer choice, duplex and pages per sheet belong to the OS print dialog.
 //!
@@ -8,8 +8,8 @@
 //! text is at most [`MAX_SPEC_CHARS`] long, copies are clamped to [`MAX_COPIES`], and the
 //! resulting page list never exceeds [`MAX_PRINT_PAGES`].
 
+use doc4me_layout::DocLayout;
 use serde_json::{Value, json};
-use wordcraft_layout::DocLayout;
 
 use crate::{CmdError, Session, p};
 
@@ -143,7 +143,7 @@ impl Session {
         let markup = crate::cmd::file::export_options(self, v);
         let lay = self.export_layout_with(markup.markup);
         let plan = plan(v, lay.pages.len(), self.current_pages(&lay))?;
-        let opts = wordcraft_pdf::PdfOptions {
+        let opts = doc4me_pdf::PdfOptions {
             pages: Some(plan.pages.clone()),
             // Repeated pages would repeat the structure tree's entries too.
             tagged: plan.copies <= 1,
@@ -151,7 +151,7 @@ impl Session {
             comments: markup.comments,
             ..Default::default()
         };
-        let bytes = wordcraft_pdf::export_layout(&self.doc, &lay, &opts).map_err(|e| CmdError::Failed(e.to_string()))?;
+        let bytes = doc4me_pdf::export_layout(&self.doc, &lay, &opts).map_err(|e| CmdError::Failed(e.to_string()))?;
         Ok((bytes, plan))
     }
 }

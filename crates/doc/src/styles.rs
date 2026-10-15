@@ -152,9 +152,10 @@ impl Default for StyleSheet {
 
 /// The default heading colour.
 pub const HEADING_BLUE: Rgb = Rgb(0x0F, 0x47, 0x61);
-/// Default body/heading fonts (theme minor/major). Substituted by layout when not installed.
-pub const BODY_FONT: &str = "Aptos";
-pub const HEADING_FONT: &str = "Aptos Display";
+/// Default body/heading fonts (theme minor/major): Sarabun, bundled with Doc4Me, draws Thai and
+/// Latin text alike. Substituted by layout when not installed.
+pub const BODY_FONT: &str = "Sarabun";
+pub const HEADING_FONT: &str = "Sarabun";
 
 fn chr() -> CharProps {
     CharProps::default()

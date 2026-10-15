@@ -1,9 +1,9 @@
 //! Home › Font › Phonetic Guide: ruby text (furigana, pinyin…) over base text, kept as one
 //! [`InlineObject::Ruby`] in the paragraph.
 
+use doc4me_doc::para::{OBJ, RubyAlign, ruby_offset, ruby_raise};
+use doc4me_doc::{InlineObject, Pos};
 use serde_json::{Value, json};
-use wordcraft_doc::para::{OBJ, RubyAlign, ruby_offset, ruby_raise};
-use wordcraft_doc::{InlineObject, Pos};
 
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
 
@@ -144,19 +144,19 @@ pub fn state(s: &Session) -> Value {
 
 #[cfg(test)]
 mod tests {
+    use doc4me_doc::{Document, InlineObject, Paragraph, StoryRef};
     use serde_json::json;
-    use wordcraft_doc::{Document, InlineObject, Paragraph, StoryRef};
 
     use crate::Session;
 
     fn session(text: &str) -> Session {
         let mut d = Document::new();
-        d.body = vec![wordcraft_doc::para_block(Paragraph::with_text(text, Default::default()))];
+        d.body = vec![doc4me_doc::para_block(Paragraph::with_text(text, Default::default()))];
         Session::new(d)
     }
 
     fn para(s: &Session) -> Paragraph {
-        s.doc.para(StoryRef::Body, &wordcraft_doc::Path::top(0)).cloned().unwrap()
+        s.doc.para(StoryRef::Body, &doc4me_doc::Path::top(0)).cloned().unwrap()
     }
 
     #[test]

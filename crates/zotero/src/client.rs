@@ -8,8 +8,8 @@
 use std::net::{SocketAddr, TcpStream};
 use std::time::Duration;
 
+use doc4me_engine::Session;
 use serde_json::Value;
-use wordcraft_engine::Session;
 
 use crate::wire::{self, Call};
 use crate::{Bridge, Host, ZoteroError};

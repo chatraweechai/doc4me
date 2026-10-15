@@ -75,7 +75,7 @@ pub(crate) fn paste(app: &mut WordApp) -> Option<Result<Value, String>> {
     let picture = app.services.clipboard_picture.as_ref()?()?;
     let r = match picture {
         ClipboardPicture::Pixels { width, height, rgba } => match png_from_rgba(width, height, rgba) {
-            Ok(png) => app.execute("insert.picture", json!({"data": wordcraft_engine::cmd::insert::base64_encode(&png)})),
+            Ok(png) => app.execute("insert.picture", json!({"data": doc4me_engine::cmd::insert::base64_encode(&png)})),
             Err(e) => {
                 log::warn!("clipboard picture: {e}");
                 app.status(e.clone());
@@ -117,11 +117,11 @@ pub(crate) fn paste_named_files(app: &mut WordApp, text: &str) -> bool {
 mod tests {
     use super::*;
     use crate::Services;
-    use wordcraft_engine::Session;
+    use doc4me_engine::Session;
 
     fn app_with(picture: impl Fn() -> Option<ClipboardPicture> + 'static) -> WordApp {
         let services = Services { clipboard_picture: Some(Box::new(picture)), ..Default::default() };
-        WordApp::new(Session::new(wordcraft_doc::Document::new()), services)
+        WordApp::new(Session::new(doc4me_doc::Document::new()), services)
     }
 
     fn pictures(a: &mut WordApp) -> usize {
@@ -137,7 +137,7 @@ mod tests {
         assert_eq!((r["width"].as_f64(), r["height"].as_f64()), (Some(30.0), Some(15.0)));
         assert_eq!(pictures(&mut a), 1);
         let media = a.session.doc.media.values().next().unwrap();
-        assert_eq!(wordcraft_render::image_size(media), Some((40, 20)));
+        assert_eq!(doc4me_render::image_size(media), Some((40, 20)));
         a.run("edit.undo", json!({})).unwrap();
         assert_eq!(pictures(&mut a), 0);
         // Pasted text that names picture files only becomes pictures when files were copied.
@@ -172,7 +172,7 @@ mod tests {
             clipboard_picture: Some(Box::new(|| Some(ClipboardPicture::Pixels { width: 4, height: 4, rgba: vec![200; 4 * 4 * 4] }))),
             ..Default::default()
         };
-        let mut a = WordApp::new(Session::new(wordcraft_doc::Document::new()), services);
+        let mut a = WordApp::new(Session::new(doc4me_doc::Document::new()), services);
         a.run("edit.paste", json!({})).unwrap();
         a.run("edit.pasteText", json!({})).unwrap();
         a.run("edit.pasteMerge", json!({})).unwrap();
@@ -196,7 +196,7 @@ mod tests {
             clipboard_picture: Some(Box::new(move || Some(ClipboardPicture::Files(vec![file.clone()])))),
             ..Default::default()
         };
-        let mut a = WordApp::new(Session::new(wordcraft_doc::Document::new()), services);
+        let mut a = WordApp::new(Session::new(doc4me_doc::Document::new()), services);
         let r = a.run("edit.paste", json!({}));
         let _ = std::fs::remove_file(&path);
         r.unwrap();

@@ -4,12 +4,12 @@
 //! points, like the layout's; the app turns the pen and eraser on as canvas modes and sends each
 //! finished stroke or click here, so every stroke is one undo step.
 
+use doc4me_doc::props::{HeightRule, VMerge};
+use doc4me_doc::table::{MAX_COLS, MAX_ROWS};
+use doc4me_doc::{Block, Cell, Path, Pos, StoryRef, Table, para_block};
+use doc4me_geom::Rect;
+use doc4me_layout::{DocLayout, Placed};
 use serde_json::Value;
-use wordcraft_doc::props::{HeightRule, VMerge};
-use wordcraft_doc::table::{MAX_COLS, MAX_ROWS};
-use wordcraft_doc::{Block, Cell, Path, Pos, StoryRef, Table, para_block};
-use wordcraft_geom::Rect;
-use wordcraft_layout::{DocLayout, Placed};
 
 use super::sel_result;
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -316,7 +316,7 @@ fn split_rows(s: &mut Session, l: &DocLayout, page: usize, y: f32, (xa, xb): (f3
     }
     let t = s.doc.table_mut(story, &tp)?;
     let Some(row) = t.rows.get_mut(r) else { return Err(CmdError::Failed("the row isn't there any more".into())) };
-    let mut new_row = wordcraft_doc::Row { props: row.props.clone(), cells: Vec::with_capacity(row.cells.len()), controls: Default::default() };
+    let mut new_row = doc4me_doc::Row { props: row.props.clone(), cells: Vec::with_capacity(row.cells.len()), controls: Default::default() };
     new_row.props.header = false;
     if top.is_finite() && bottom.is_finite() && bottom > top {
         let rule = if row.props.height_rule == HeightRule::Exact { HeightRule::Exact } else { HeightRule::AtLeast };
@@ -461,14 +461,14 @@ fn eraser(s: &mut Session, v: &Value) -> CmdResult {
     let mut moved = Vec::new();
     if let Some(b) = t.rows.get_mut(r2).and_then(|row| row.cells.get_mut(c2)) {
         b.props.vmerge = VMerge::Continue;
-        let blocks = std::mem::replace(&mut b.blocks, vec![para_block(wordcraft_doc::Paragraph::new())]);
+        let blocks = std::mem::replace(&mut b.blocks, vec![para_block(doc4me_doc::Paragraph::new())]);
         moved.extend(blocks.into_iter().filter(|x| x.as_para().is_none_or(|q| !q.is_empty())));
     }
     let tc = t.cell_at_grid(top, ga).unwrap_or(0);
     if !moved.is_empty()
         && let Some(dst) = t.rows.get_mut(top).and_then(|row| row.cells.get_mut(tc))
     {
-        if dst.blocks.len() == 1 && dst.blocks.first().and_then(|b| b.as_para()).is_some_and(wordcraft_doc::Paragraph::is_empty) {
+        if dst.blocks.len() == 1 && dst.blocks.first().and_then(|b| b.as_para()).is_some_and(doc4me_doc::Paragraph::is_empty) {
             dst.blocks.clear();
         }
         dst.blocks.extend(moved);
@@ -504,7 +504,7 @@ mod tests {
     /// A rectangle drawn on the page inserts a one-cell table of its size; undo takes it out.
     #[test]
     fn a_drawn_rectangle_inserts_a_table() {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         s.run("document.setText", &json!({"text": "Above the table"})).unwrap();
         let before = s.doc.clone();
         let l = s.layout();
@@ -532,7 +532,7 @@ mod tests {
     /// below the merge extends it.
     #[test]
     fn erasing_a_horizontal_border_lays_the_merge_out_as_one_cell() {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         s.run("insert.table", &json!({"rows": 3, "cols": 2})).unwrap();
         let (a, b) = (cell_rect(&mut s, 0, 0), cell_rect(&mut s, 1, 0));
         s.run("table.eraser", &json!({"page": 0, "x": a.x + a.w / 2.0, "y": a.bottom() + 0.5})).unwrap();
@@ -554,7 +554,7 @@ mod tests {
     /// the eraser merges the cells back; each is one undo step.
     #[test]
     fn lines_split_cells_and_the_eraser_merges_them() {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         s.run("insert.table", &json!({"rows": 2, "cols": 2})).unwrap();
         s.run("text.insert", &json!({"text": "A"})).unwrap();
         let start = first_table(&s);

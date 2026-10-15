@@ -1,4 +1,4 @@
-# WordCraft roadmap: milestones and what's next
+# Doc4Me roadmap: milestones and what's next
 
 > **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-11 · **Change:** minor (Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
 
@@ -39,7 +39,7 @@ every day, checked end to end on the main platform (macOS desktop), including sa
 | Share or print: export PDF, print | partial (not blocking) | PDF export solid (krilla); desktop printing goes through a PDF, no native print dialog (gap #6) | 0 (beta work: 6–10) |
 
 **Result: passes.** Every core workflow completes on macOS and the work saves and reopens; the
-partial rows are fidelity gaps (beta work), not broken workflows. WordCraft stays **alpha**.
+partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays **alpha**.
 
 ## Milestones
 

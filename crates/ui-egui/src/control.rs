@@ -131,7 +131,7 @@ pub fn handle(app: &mut WordApp, ctx: &egui::Context, req: &ControlRequest) -> O
             Err(e) => err(e),
         },
         "ui.inspect" => ok(inspect(app, ctx)),
-        "ui.parity" => ok(wordcraft_engine::catalog::parity(&app.session.registry)),
+        "ui.parity" => ok(doc4me_engine::catalog::parity(&app.session.registry)),
         "ui.click" => {
             let (Some(x), Some(y)) = (f("x"), f("y")) else { return err("missing x/y") };
             let button = match s("button") {
@@ -249,9 +249,9 @@ fn render_png(app: &WordApp, page: u64, scale: f32) -> Result<Value, String> {
     let page = usize::try_from(page.max(1)).unwrap_or(usize::MAX).saturating_sub(1);
     let l = app.session.export_layout();
     let pg = l.pages.get(page).ok_or_else(|| format!("no page {}", page + 1))?;
-    let img = wordcraft_render::render_page(&app.session.doc, pg, scale.clamp(0.1, 8.0), &Default::default());
+    let img = doc4me_render::render_page(&app.session.doc, pg, scale.clamp(0.1, 8.0), &Default::default());
     let png = img.to_png();
-    Ok(json!({"png": wordcraft_engine::cmd::insert::base64_encode(&png), "width": img.width, "height": img.height, "pages": l.pages.len()}))
+    Ok(json!({"png": doc4me_engine::cmd::insert::base64_encode(&png), "width": img.width, "height": img.height, "pages": l.pages.len()}))
 }
 
 /// The window screenshot: written to `path` when one was given, else base64 PNG in the reply
@@ -259,10 +259,10 @@ fn render_png(app: &WordApp, page: u64, scale: f32) -> Result<Value, String> {
 pub fn save_screenshot(image: &egui::ColorImage, path: Option<&str>) -> Value {
     let [w, h] = image.size;
     let bytes: Vec<u8> = image.pixels.iter().flat_map(|c| c.to_array()).collect();
-    let rendered = wordcraft_render::Rendered { width: w as u32, height: h as u32, pixels: bytes };
+    let rendered = doc4me_render::Rendered { width: w as u32, height: h as u32, pixels: bytes };
     let png = rendered.to_png();
     let Some(path) = path else {
-        return json!({"ok": true, "result": {"png": wordcraft_engine::cmd::insert::base64_encode(&png), "width": w, "height": h}});
+        return json!({"ok": true, "result": {"png": doc4me_engine::cmd::insert::base64_encode(&png), "width": w, "height": h}});
     };
     #[cfg(target_arch = "wasm32")]
     let _ = (&png, path);

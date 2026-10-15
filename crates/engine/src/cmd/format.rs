@@ -1,10 +1,10 @@
 //! Character formatting (Home › Font).
 
+use doc4me_doc::Pos;
+use doc4me_doc::eq::{EncloseShape, EncloseStyle, Enclosure};
+use doc4me_doc::props::{Border, CharProps, Highlight, Rgb, TextColor, Underline, VertAlign};
+use doc4me_doc::resolve::ResolvedChar;
 use serde_json::{Value, json};
-use wordcraft_doc::Pos;
-use wordcraft_doc::eq::{EncloseShape, EncloseStyle, Enclosure};
-use wordcraft_doc::props::{Border, CharProps, Highlight, Rgb, TextColor, Underline, VertAlign};
-use wordcraft_doc::resolve::ResolvedChar;
 
 use super::sel_result;
 use crate::{CmdError, CmdResult, CommandSpec, Session, p};
@@ -294,7 +294,7 @@ fn font(s: &mut Session, v: &Value) -> CmdResult {
     // Word; choosing a Latin font leaves that text's font as it was.
     let ea = east_asia.or_else(|| {
         name.clone().filter(|n| {
-            let r = wordcraft_fonts::word::resolve(n, false, false);
+            let r = doc4me_fonts::word::resolve(n, false, false);
             !r.substituted && r.face.is_east_asian()
         })
     });
@@ -431,7 +431,7 @@ fn change_case(s: &mut Session, v: &Value) -> CmdResult {
 
 /// Group the characters of `src` (at `from` in `p`) whose converted form `conv` differs into
 /// stretches that stay inside one run: `(start, end, replacement)`, in text order.
-fn case_groups(p: &wordcraft_doc::Paragraph, from: usize, src: &str, conv: &[String]) -> Vec<(usize, usize, String)> {
+fn case_groups(p: &doc4me_doc::Paragraph, from: usize, src: &str, conv: &[String]) -> Vec<(usize, usize, String)> {
     let runs: Vec<std::ops::Range<usize>> = p.run_ranges().map(|(r, _)| r).collect();
     let run_of = |off: usize| runs.iter().position(|r| r.contains(&off));
     let mut out: Vec<(usize, usize, String, Option<usize>)> = Vec::new();
@@ -642,14 +642,14 @@ pub struct EncloseTarget {
 
 /// The selection as Enclose Characters sees it (an error says why it can't be enclosed).
 pub fn enclose_target(s: &Session) -> Result<EncloseTarget, CmdError> {
-    use wordcraft_doc::para::OBJ;
+    use doc4me_doc::para::OBJ;
     let (a, b) = s.sel.ordered();
     if a.story != b.story || a.path != b.path {
         return Err(CmdError::Failed("select characters within one paragraph".into()));
     }
     let para = s.doc.para_at(&a).ok_or_else(|| CmdError::Failed("no paragraph at the selection".into()))?;
     let enclosed = |off: usize| -> Option<EncloseTarget> {
-        let Some(wordcraft_doc::InlineObject::Field { instr, .. }) = para.object_at(off) else { return None };
+        let Some(doc4me_doc::InlineObject::Field { instr, .. }) = para.object_at(off) else { return None };
         let e = Enclosure::parse(instr)?;
         let end = off + OBJ.len_utf8();
         Some(EncloseTarget {
@@ -671,7 +671,7 @@ pub fn enclose_target(s: &Session) -> Result<EncloseTarget, CmdError> {
     {
         return Ok(t);
     }
-    if !wordcraft_doc::eq::fits_enclosure(text) {
+    if !doc4me_doc::eq::fits_enclosure(text) {
         return Err(CmdError::Failed("select one full-width character or up to two half-width characters".into()));
     }
     let first = text.chars().next().map(char::len_utf8).unwrap_or(0);
@@ -679,7 +679,7 @@ pub fn enclose_target(s: &Session) -> Result<EncloseTarget, CmdError> {
 }
 
 /// Home › Font › Enclose Characters: put the selected character(s) in a circle, square, triangle
-/// or diamond (an `EQ \o` field, see [`wordcraft_doc::eq`]), or (`shape: null`) take them out.
+/// or diamond (an `EQ \o` field, see [`doc4me_doc::eq`]), or (`shape: null`) take them out.
 fn enclose(s: &mut Session, v: &Value) -> CmdResult {
     let shape = match v.get("shape") {
         None => return Err(CmdError::Params("`shape` is required: circle, square, triangle, diamond, or null to remove".into())),
@@ -694,7 +694,7 @@ fn enclose(s: &mut Session, v: &Value) -> CmdResult {
     };
     // Text typed in the dialog replaces the selection's (or goes in at the caret).
     let given = match p::str(v, "text") {
-        Some(t) if shape.is_some() && !wordcraft_doc::eq::fits_enclosure(t) => {
+        Some(t) if shape.is_some() && !doc4me_doc::eq::fits_enclosure(t) => {
             return Err(CmdError::Params("text: one full-width character or up to two half-width characters".into()));
         }
         Some(t) if shape.is_some() => Some(t.to_string()),
@@ -718,7 +718,7 @@ fn enclose(s: &mut Session, v: &Value) -> CmdResult {
         Some(shape) => {
             let style = style.or(t.current.as_ref().map(|e| e.style)).unwrap_or_default();
             let e = Enclosure { shape, style, text: t.text.clone() };
-            let obj = wordcraft_doc::InlineObject::Field { instr: e.instr(), result: t.text, locked: false, code: false };
+            let obj = doc4me_doc::InlineObject::Field { instr: e.instr(), result: t.text, locked: false, code: false };
             s.doc.insert_object(&at, obj, &t.props)?
         }
         None => s.doc.insert_text(&at, &t.text, &t.props)?,

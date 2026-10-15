@@ -990,6 +990,298 @@ dependencies = [
 ]
 
 [[package]]
+name = "doc4me"
+version = "1.0.0"
+dependencies = [
+ "arboard",
+ "dispatch2",
+ "doc4me-control-key",
+ "doc4me-doc",
+ "doc4me-engine",
+ "doc4me-fonts",
+ "doc4me-ui-egui",
+ "eframe",
+ "egui",
+ "fmv-macos-events",
+ "getrandom 0.3.4",
+ "log",
+ "objc2 0.6.5",
+ "objc2-app-kit 0.3.2",
+ "open",
+ "pollster 0.4.0",
+ "rfd",
+ "serde_json",
+ "windows",
+ "winit",
+ "winresource",
+ "zbus",
+]
+
+[[package]]
+name = "doc4me-cli"
+version = "1.0.0"
+dependencies = [
+ "doc4me-doc",
+ "doc4me-engine",
+ "doc4me-mcp",
+ "doc4me-render",
+ "doc4me-zotero",
+ "serde_json",
+]
+
+[[package]]
+name = "doc4me-control-key"
+version = "1.0.0"
+
+[[package]]
+name = "doc4me-doc"
+version = "1.0.0"
+dependencies = [
+ "doc4me-geom",
+ "icu_segmenter",
+ "proptest",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.21",
+ "unicode-segmentation",
+]
+
+[[package]]
+name = "doc4me-docbin"
+version = "1.0.0"
+dependencies = [
+ "cfb",
+ "doc4me-doc",
+ "doc4me-geom",
+ "image",
+ "log",
+ "miniz_oxide 0.8.9",
+ "proptest",
+ "serde_json",
+ "thiserror 2.0.21",
+]
+
+[[package]]
+name = "doc4me-docx"
+version = "1.0.0"
+dependencies = [
+ "aes",
+ "base64",
+ "cfb",
+ "doc4me-doc",
+ "doc4me-geom",
+ "getrandom 0.3.4",
+ "hmac",
+ "image",
+ "log",
+ "proptest",
+ "quick-xml",
+ "sha1",
+ "sha2",
+ "thiserror 2.0.21",
+ "zeroize",
+ "zip",
+]
+
+[[package]]
+name = "doc4me-engine"
+version = "1.0.0"
+dependencies = [
+ "doc4me-doc",
+ "doc4me-docbin",
+ "doc4me-docx",
+ "doc4me-fonts",
+ "doc4me-formats",
+ "doc4me-geom",
+ "doc4me-layout",
+ "doc4me-pdf",
+ "doc4me-proof",
+ "doc4me-render",
+ "image",
+ "js-sys",
+ "log",
+ "regex",
+ "regex-automata",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.21",
+ "zeroize",
+ "zip",
+]
+
+[[package]]
+name = "doc4me-fonts"
+version = "1.0.0"
+dependencies = [
+ "harfrust 0.13.3",
+ "kurbo",
+ "log",
+ "skrifa 0.47.0",
+ "unicode-bidi",
+ "unicode-script",
+ "wuff",
+]
+
+[[package]]
+name = "doc4me-formats"
+version = "1.0.0"
+dependencies = [
+ "doc4me-doc",
+ "doc4me-geom",
+ "image",
+ "log",
+ "proptest",
+ "quick-xml",
+ "zip",
+]
+
+[[package]]
+name = "doc4me-geom"
+version = "1.0.0"
+dependencies = [
+ "serde",
+]
+
+[[package]]
+name = "doc4me-layout"
+version = "1.0.0"
+dependencies = [
+ "doc4me-doc",
+ "doc4me-fonts",
+ "doc4me-geom",
+ "doc4me-proof",
+ "image",
+ "js-sys",
+ "kurbo",
+ "log",
+ "serde",
+ "serde_json",
+ "unicode-bidi",
+ "unicode-linebreak",
+ "unicode-segmentation",
+]
+
+[[package]]
+name = "doc4me-mcp"
+version = "1.0.0"
+dependencies = [
+ "doc4me-control-key",
+ "doc4me-doc",
+ "doc4me-engine",
+ "doc4me-render",
+ "log",
+ "serde_json",
+]
+
+[[package]]
+name = "doc4me-metafile"
+version = "1.0.0"
+dependencies = [
+ "kurbo",
+ "thiserror 2.0.21",
+]
+
+[[package]]
+name = "doc4me-pdf"
+version = "1.0.0"
+dependencies = [
+ "doc4me-doc",
+ "doc4me-fonts",
+ "doc4me-geom",
+ "doc4me-layout",
+ "doc4me-metafile",
+ "hayro-cmap",
+ "hayro-interpret",
+ "hayro-syntax",
+ "image",
+ "js-sys",
+ "krilla",
+ "kurbo",
+ "log",
+ "thiserror 2.0.21",
+]
+
+[[package]]
+name = "doc4me-proof"
+version = "1.0.0"
+dependencies = [
+ "log",
+ "miniz_oxide 0.8.9",
+ "proptest",
+]
+
+[[package]]
+name = "doc4me-render"
+version = "1.0.0"
+dependencies = [
+ "doc4me-doc",
+ "doc4me-fonts",
+ "doc4me-geom",
+ "doc4me-layout",
+ "doc4me-metafile",
+ "image",
+ "log",
+ "vello_cpu 0.2.0",
+]
+
+[[package]]
+name = "doc4me-ui-egui"
+version = "1.0.0"
+dependencies = [
+ "doc4me-doc",
+ "doc4me-engine",
+ "doc4me-fonts",
+ "doc4me-geom",
+ "doc4me-layout",
+ "doc4me-render",
+ "doc4me-zotero",
+ "egui",
+ "egui_kittest",
+ "image",
+ "js-sys",
+ "log",
+ "serde",
+ "serde_json",
+ "sys-locale",
+ "toml",
+ "zbus",
+ "zip",
+]
+
+[[package]]
+name = "doc4me-web"
+version = "1.0.0"
+dependencies = [
+ "doc4me-doc",
+ "doc4me-engine",
+ "doc4me-fonts",
+ "doc4me-ui-egui",
+ "eframe",
+ "egui",
+ "js-sys",
+ "log",
+ "rfd",
+ "serde_json",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+]
+
+[[package]]
+name = "doc4me-zotero"
+version = "1.0.0"
+dependencies = [
+ "doc4me-doc",
+ "doc4me-docx",
+ "doc4me-engine",
+ "doc4me-formats",
+ "log",
+ "proptest",
+ "serde_json",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "document-features"
 version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1868,10 +2160,31 @@ checksum = "d56e28588da92eee5c3201a6eff33fabdd49b62269c8938d4ff050ce4d900deb"
 dependencies = [
  "displaydoc",
  "litemap",
+ "serde",
  "tinystr",
  "writeable",
  "zerovec",
 ]
+
+[[package]]
+name = "icu_locale_fallback"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "251af8e57c9400e3eb58242fe5b8b1152b2a64fdf4cf632f923c38ccee6f2fa9"
+dependencies = [
+ "icu_locale_core",
+ "icu_locale_fallback_data",
+ "icu_provider",
+ "potential_utf",
+ "tinystr",
+ "zerovec",
+]
+
+[[package]]
+name = "icu_locale_fallback_data"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "decf2a22ec8fa68f1a0c1129a3f8583f8f8bc24e8b9ccbe98ead99f62a4dc3a8"
 
 [[package]]
 name = "icu_normalizer"
@@ -1922,12 +2235,36 @@ checksum = "d27bbb9d3abbefac45d55f647c9de1d44aafcd1186eb91879afef17c396c3e73"
 dependencies = [
  "displaydoc",
  "icu_locale_core",
+ "serde",
+ "stable_deref_trait",
  "writeable",
  "yoke",
  "zerofrom",
  "zerotrie",
  "zerovec",
 ]
+
+[[package]]
+name = "icu_segmenter"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "82d07aafccd67af15d02512a6adf5896fbc5ed00f2e99b471d2efa14016db3db"
+dependencies = [
+ "icu_collections",
+ "icu_locale_fallback",
+ "icu_provider",
+ "icu_segmenter_data",
+ "potential_utf",
+ "smallvec",
+ "utf8_iter",
+ "zerovec",
+]
+
+[[package]]
+name = "icu_segmenter_data"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ae293c039020f9ec10710af98d29ce6aa2051486638b49c9a6409f3b4a9e98ad"
 
 [[package]]
 name = "idna"
@@ -3017,6 +3354,8 @@ version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d83eb9bc6d8e5cf568e7a1101d60ee05e81ed50ea106026f3d18deeb046d7661"
 dependencies = [
+ "serde_core",
+ "writeable",
  "zerovec",
 ]
 
@@ -3901,6 +4240,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b1e27c91459209c2986af3dcf603a5a74a4368754ce37414f59acc971167f643"
 dependencies = [
  "displaydoc",
+ "serde_core",
  "zerovec",
 ]
 
@@ -4997,297 +5337,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1ebf944e87a7c253233ad6766e082e3cd714b5d03812acc24c318f549614536e"
 
 [[package]]
-name = "wordcraft"
-version = "0.6.0"
-dependencies = [
- "arboard",
- "dispatch2",
- "eframe",
- "egui",
- "fmv-macos-events",
- "getrandom 0.3.4",
- "log",
- "objc2 0.6.5",
- "objc2-app-kit 0.3.2",
- "open",
- "pollster 0.4.0",
- "rfd",
- "serde_json",
- "windows",
- "winit",
- "winresource",
- "wordcraft-control-key",
- "wordcraft-doc",
- "wordcraft-engine",
- "wordcraft-fonts",
- "wordcraft-ui-egui",
- "zbus",
-]
-
-[[package]]
-name = "wordcraft-cli"
-version = "0.6.0"
-dependencies = [
- "serde_json",
- "wordcraft-doc",
- "wordcraft-engine",
- "wordcraft-mcp",
- "wordcraft-render",
- "wordcraft-zotero",
-]
-
-[[package]]
-name = "wordcraft-control-key"
-version = "0.6.0"
-
-[[package]]
-name = "wordcraft-doc"
-version = "0.6.0"
-dependencies = [
- "proptest",
- "serde",
- "serde_json",
- "thiserror 2.0.21",
- "unicode-segmentation",
- "wordcraft-geom",
-]
-
-[[package]]
-name = "wordcraft-docbin"
-version = "0.6.0"
-dependencies = [
- "cfb",
- "image",
- "log",
- "miniz_oxide 0.8.9",
- "proptest",
- "serde_json",
- "thiserror 2.0.21",
- "wordcraft-doc",
- "wordcraft-geom",
-]
-
-[[package]]
-name = "wordcraft-docx"
-version = "0.6.0"
-dependencies = [
- "aes",
- "base64",
- "cfb",
- "getrandom 0.3.4",
- "hmac",
- "image",
- "log",
- "proptest",
- "quick-xml",
- "sha1",
- "sha2",
- "thiserror 2.0.21",
- "wordcraft-doc",
- "wordcraft-geom",
- "zeroize",
- "zip",
-]
-
-[[package]]
-name = "wordcraft-engine"
-version = "0.6.0"
-dependencies = [
- "image",
- "js-sys",
- "log",
- "regex",
- "regex-automata",
- "serde",
- "serde_json",
- "thiserror 2.0.21",
- "wordcraft-doc",
- "wordcraft-docbin",
- "wordcraft-docx",
- "wordcraft-fonts",
- "wordcraft-formats",
- "wordcraft-geom",
- "wordcraft-layout",
- "wordcraft-pdf",
- "wordcraft-proof",
- "wordcraft-render",
- "zeroize",
- "zip",
-]
-
-[[package]]
-name = "wordcraft-fonts"
-version = "0.6.0"
-dependencies = [
- "harfrust 0.13.3",
- "kurbo",
- "log",
- "skrifa 0.47.0",
- "unicode-bidi",
- "unicode-script",
- "wuff",
-]
-
-[[package]]
-name = "wordcraft-formats"
-version = "0.6.0"
-dependencies = [
- "image",
- "log",
- "proptest",
- "quick-xml",
- "wordcraft-doc",
- "wordcraft-geom",
- "zip",
-]
-
-[[package]]
-name = "wordcraft-geom"
-version = "0.6.0"
-dependencies = [
- "serde",
-]
-
-[[package]]
-name = "wordcraft-layout"
-version = "0.6.0"
-dependencies = [
- "image",
- "js-sys",
- "kurbo",
- "log",
- "serde",
- "serde_json",
- "unicode-bidi",
- "unicode-linebreak",
- "unicode-segmentation",
- "wordcraft-doc",
- "wordcraft-fonts",
- "wordcraft-geom",
- "wordcraft-proof",
-]
-
-[[package]]
-name = "wordcraft-mcp"
-version = "0.6.0"
-dependencies = [
- "log",
- "serde_json",
- "wordcraft-control-key",
- "wordcraft-doc",
- "wordcraft-engine",
- "wordcraft-render",
-]
-
-[[package]]
-name = "wordcraft-metafile"
-version = "0.6.0"
-dependencies = [
- "kurbo",
- "thiserror 2.0.21",
-]
-
-[[package]]
-name = "wordcraft-pdf"
-version = "0.6.0"
-dependencies = [
- "hayro-cmap",
- "hayro-interpret",
- "hayro-syntax",
- "image",
- "js-sys",
- "krilla",
- "kurbo",
- "log",
- "thiserror 2.0.21",
- "wordcraft-doc",
- "wordcraft-fonts",
- "wordcraft-geom",
- "wordcraft-layout",
- "wordcraft-metafile",
-]
-
-[[package]]
-name = "wordcraft-proof"
-version = "0.6.0"
-dependencies = [
- "log",
- "miniz_oxide 0.8.9",
- "proptest",
-]
-
-[[package]]
-name = "wordcraft-render"
-version = "0.6.0"
-dependencies = [
- "image",
- "log",
- "vello_cpu 0.2.0",
- "wordcraft-doc",
- "wordcraft-fonts",
- "wordcraft-geom",
- "wordcraft-layout",
- "wordcraft-metafile",
-]
-
-[[package]]
-name = "wordcraft-ui-egui"
-version = "0.6.0"
-dependencies = [
- "egui",
- "egui_kittest",
- "image",
- "js-sys",
- "log",
- "serde",
- "serde_json",
- "sys-locale",
- "toml",
- "wordcraft-doc",
- "wordcraft-engine",
- "wordcraft-fonts",
- "wordcraft-geom",
- "wordcraft-layout",
- "wordcraft-render",
- "wordcraft-zotero",
- "zbus",
- "zip",
-]
-
-[[package]]
-name = "wordcraft-web"
-version = "0.6.0"
-dependencies = [
- "eframe",
- "egui",
- "js-sys",
- "log",
- "rfd",
- "serde_json",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
- "wordcraft-doc",
- "wordcraft-engine",
- "wordcraft-fonts",
- "wordcraft-ui-egui",
-]
-
-[[package]]
-name = "wordcraft-zotero"
-version = "0.6.0"
-dependencies = [
- "log",
- "proptest",
- "serde_json",
- "thiserror 2.0.21",
- "wordcraft-doc",
- "wordcraft-docx",
- "wordcraft-engine",
- "wordcraft-formats",
-]
-
-[[package]]
 name = "write-fonts"
 version = "0.48.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5388,7 +5437,7 @@ checksum = "9440ea3e5aeabb0ac63af70daf835274065238cdd0cec83418f417eae38bacee"
 
 [[package]]
 name = "xtask"
-version = "0.6.0"
+version = "1.0.0"
 dependencies = [
  "serde_json",
 ]
@@ -5578,6 +5627,7 @@ dependencies = [
  "displaydoc",
  "yoke",
  "zerofrom",
+ "zerovec",
 ]
 
 [[package]]
@@ -5586,6 +5636,7 @@ version = "0.11.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bb0464e17806c1d976d5cba29399c7f08e516e279e2ba493f63123b5fca67dd8"
 dependencies = [
+ "serde",
  "yoke",
  "zerofrom",
  "zerovec-derive",

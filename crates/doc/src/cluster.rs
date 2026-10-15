@@ -1,5 +1,5 @@
 //! Text clusters for complex scripts (Myanmar, Khmer, Tai Tham, the Indic scripts): where the
-//! caret may stop, what Backspace removes, and where Myanmar text may wrap.
+//! caret may stop, what Backspace removes, and where Myanmar, Thai, Lao and Khmer text may wrap.
 //!
 //! Extended grapheme clusters (UAX #29) split some syllables that a shaper draws as one unit: a
 //! Myanmar consonant stacked under a virama (`မ္ဘ`), the Myanmar vowel signs U+102B/U+102C and
@@ -159,9 +159,151 @@ pub fn myanmar_breaks(text: &str) -> Vec<usize> {
     out
 }
 
+/// Thai, Lao or Khmer: scripts written without spaces between words, whose word boundaries come
+/// from a dictionary ([`dictionary_breaks`]).
+pub fn is_dictionary_script(c: char) -> bool {
+    matches!(u32::from(c), 0x0E00..=0x0EFF | 0x1780..=0x17FF | 0x19E0..=0x19FF)
+}
+
+/// Longest text (in bytes) [`dictionary_breaks`] segments in one piece; longer text is cut at
+/// spaces first (and, failing that, at this length), so a hostile paragraph can't make one
+/// segmentation run unbounded.
+const DICTIONARY_CHUNK: usize = 64 << 10;
+
+/// Word boundaries inside Thai, Lao and Khmer text, which has no spaces between words (UAX #14
+/// leaves class SA to a dictionary, as Word does): byte offsets, sorted, each between two
+/// characters of those scripts. Never before ๆ (mai yamok) or ฯ (paiyannoi), which stay with the
+/// word before them. Lines may wrap there, and word selection, Ctrl+arrow and the word count stop
+/// there. Empty for text without those scripts.
+pub fn dictionary_breaks(text: &str) -> Vec<usize> {
+    if !text.chars().any(is_dictionary_script) {
+        return Vec::new();
+    }
+    let segmenter = icu_segmenter::LineSegmenter::new_dictionary(icu_segmenter::options::LineBreakOptions::default());
+    let mut out = Vec::new();
+    // Cuts made inside a word (no space in the chunk): the segmenter reports them as boundaries
+    // but they aren't any.
+    let mut forced = Vec::new();
+    let mut start = 0;
+    while start < text.len() {
+        let mut end = text.len().min(start.saturating_add(DICTIONARY_CHUNK));
+        if end < text.len() {
+            // Cut at the last space in the chunk (a word boundary anyway), else at a character.
+            let cut = char_floor(text, end).max(start + 1);
+            let space = text.get(start..cut).and_then(|piece| piece.rfind(' ')).filter(|&i| i > 0);
+            end = space.map_or(cut, |i| start + i + 1);
+            while end < text.len() && !text.is_char_boundary(end) {
+                end += 1;
+            }
+            if space.is_none() {
+                forced.push(end);
+            }
+        }
+        let piece = text.get(start..end).unwrap_or("");
+        if piece.chars().any(is_dictionary_script) {
+            out.extend(segmenter.segment_str(piece).map(|b| start + b).filter(|&b| dictionary_break_ok(text, b)));
+        }
+        start = end;
+    }
+    out.sort_unstable();
+    out.dedup();
+    out.retain(|b| !forced.contains(b));
+    out
+}
+
+/// Line-break class SA (UAX #14): the Thai, Lao and Khmer letters, vowels and marks a dictionary
+/// splits into words. Their digits, currency signs and punctuation (๒, ฿, ๚, ។, ៖ …) are not:
+/// UAX #14 keeps those with the word next to them.
+fn is_complex_context(c: char) -> bool {
+    matches!(
+        u32::from(c),
+        0x0E01..=0x0E3A | 0x0E40..=0x0E4E | 0x0E81..=0x0ECF | 0x0EDC..=0x0EDF | 0x1780..=0x17D3 | 0x17D7 | 0x17DC | 0x17DD
+    )
+}
+
+/// May a dictionary word boundary at `b` stand: inside `text`, between two letters (class SA) of
+/// the dictionary scripts, at a cluster boundary, and not before ๆ or ฯ?
+fn dictionary_break_ok(text: &str, b: usize) -> bool {
+    if b == 0 || b >= text.len() || !text.is_char_boundary(b) {
+        return false;
+    }
+    let prev = text.get(..b).and_then(|t| t.chars().next_back());
+    let next = text.get(b..).and_then(|t| t.chars().next());
+    match (prev, next) {
+        (Some(p), Some(n)) => is_complex_context(p) && is_complex_context(n) && !matches!(n, '\u{0E46}' | '\u{0E2F}') && is_cluster_boundary(text, b),
+        _ => false,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn thai_breaks_between_words_from_a_dictionary() {
+        // "ภาษาไทยง่ายนิดเดียว" (Thai is quite easy): no spaces, so UAX #14 alone finds no break.
+        let s = "ภาษาไทยง่ายนิดเดียว";
+        let breaks = dictionary_breaks(s);
+        assert!(!breaks.is_empty(), "{breaks:?}");
+        let words = split(s, &[0].into_iter().chain(breaks.iter().copied()).collect::<Vec<_>>());
+        assert!(words.contains(&"ภาษา") && words.contains(&"ไทย"), "{words:?}");
+        // Every break is between two Thai characters and at a cluster boundary: never between a
+        // consonant and its vowel or tone mark.
+        for &b in &breaks {
+            assert!(s.is_char_boundary(b) && is_cluster_boundary(s, b), "{b}");
+        }
+        // ๆ (repeat) stays with its word: no break before it.
+        let r = "เด็กๆเล่นกัน";
+        let at = r.find('ๆ').unwrap();
+        assert!(!dictionary_breaks(r).contains(&at));
+        // Other scripts, spaces and mixed text: only Thai-Thai boundaries.
+        assert!(dictionary_breaks("plain English text").is_empty());
+        assert!(dictionary_breaks("").is_empty());
+        let mixed = "Word ภาษาไทย 2026";
+        for b in dictionary_breaks(mixed) {
+            let (p, n) = (mixed[..b].chars().next_back().unwrap(), mixed[b..].chars().next().unwrap());
+            assert!(is_dictionary_script(p) && is_dictionary_script(n));
+        }
+    }
+
+    #[test]
+    fn long_thai_text_is_segmented_in_bounded_pieces() {
+        // Longer than one chunk, with and without spaces: breaks stay sorted, inside the text
+        // and on character boundaries, and nothing panics.
+        let word = "ภาษาไทย";
+        let spaced = format!("{word} ").repeat(DICTIONARY_CHUNK / word.len() + 50);
+        let solid = word.repeat(DICTIONARY_CHUNK / word.len() + 50);
+        for s in [spaced.as_str(), solid.as_str()] {
+            let b = dictionary_breaks(s);
+            assert!(!b.is_empty());
+            assert!(b.windows(2).all(|w| w[0] < w[1]));
+            assert!(b.iter().all(|&i| i > 0 && i < s.len() && s.is_char_boundary(i)));
+        }
+        // Chunks of spaced text end at a space, so no break lands inside ไทย; the cut through
+        // unspaced text is not reported as a word boundary.
+        for b in dictionary_breaks(&spaced) {
+            assert!(spaced[..b].ends_with("ภาษา") && spaced[b..].starts_with("ไทย"), "{b}");
+        }
+        assert!(!dictionary_breaks(&solid).contains(&char_floor(&solid, DICTIONARY_CHUNK)));
+    }
+
+    #[test]
+    fn digits_and_punctuation_stay_with_their_word() {
+        // Thai digits, the baht sign and Khmer sentence marks are not dictionary letters: no
+        // line may start with them (UAX #14 keeps them with the word before).
+        for s in ["ปี๒๕๖๗", "มาตรา๓๒", "ราคา฿๕๐", "ภาษาไทย๚", "ខ្ញុំស្រលាញ់ភាសាខ្មែរ។"]
+        {
+            for b in dictionary_breaks(s) {
+                let n = s[b..].chars().next().unwrap();
+                let p = s[..b].chars().next_back().unwrap();
+                assert!(is_complex_context(p) && is_complex_context(n), "{s}: break before {n:?}");
+            }
+        }
+        let y = "ปี๒๕๖๗";
+        assert!(!dictionary_breaks(y).contains(&y.find('๒').unwrap()));
+        let k = "ភាសាខ្មែរ។";
+        assert!(!dictionary_breaks(k).contains(&k.find('។').unwrap()));
+    }
 
     /// "မြန်မာစာ" (Myanmar script): မြ | န် | မာ | စာ.
     const MYANMAR: &str = "\u{1019}\u{103C}\u{1014}\u{103A}\u{1019}\u{102C}\u{1005}\u{102C}";

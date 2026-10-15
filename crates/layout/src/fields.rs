@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 
-use wordcraft_doc::section::NumFormat;
+use doc4me_doc::section::NumFormat;
 
 /// Context for fields that depend on where text lands.
 #[derive(Clone, Debug, Default)]
@@ -81,7 +81,7 @@ pub fn format_switch(instr: &str) -> Option<NumFormat> {
 }
 
 /// The light grey behind a field shown as its code.
-pub const FIELD_SHADING: wordcraft_doc::props::Rgb = wordcraft_doc::props::Rgb(0xD9, 0xD9, 0xD9);
+pub const FIELD_SHADING: doc4me_doc::props::Rgb = doc4me_doc::props::Rgb(0xD9, 0xD9, 0xD9);
 
 /// What a field shows in code view: its instruction in braces, `{ PAGE }`.
 pub fn field_code_text(instr: &str) -> String {

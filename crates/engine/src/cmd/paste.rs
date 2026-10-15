@@ -1,6 +1,6 @@
 //! Paste Special: paste the clipboard in a chosen format (formatted, RTF, HTML, unformatted).
 //!
-//! The clipboard can hold several representations of the same content. WordCraft's own copy keeps
+//! The clipboard can hold several representations of the same content. Doc4Me's own copy keeps
 //! a rich fragment; the system clipboard gives text, and callers (agents, the CLI, a front end
 //! with a richer clipboard) may pass `html` or `rtf` too. Text that is itself RTF or HTML source
 //! can also be pasted as that format.
@@ -8,9 +8,9 @@
 use std::collections::BTreeMap;
 use std::sync::Arc;
 
+use doc4me_doc::edit::Fragment;
+use doc4me_doc::{Block, Document, Paragraph};
 use serde_json::{Value, json};
-use wordcraft_doc::edit::Fragment;
-use wordcraft_doc::{Block, Document, Paragraph};
 
 use super::{delete_selection, sel_result};
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -32,7 +32,7 @@ pub fn specs() -> Vec<CommandSpec> {
     ]
 }
 
-/// Clipboard text from the params (system clipboard), else WordCraft's own copy.
+/// Clipboard text from the params (system clipboard), else Doc4Me's own copy.
 fn clip_text(s: &Session, v: &Value) -> Option<String> {
     match p::str(v, "text") {
         Some(t) => Some(t.replace("\r\n", "\n")),
@@ -96,7 +96,7 @@ fn paste_special(s: &mut Session, v: &Value) -> CmdResult {
         return Ok(json!({"formats": formats_json(&ids)}));
     };
     let fmt = match fmt.to_ascii_lowercase().as_str() {
-        "formatted" | "keep" | "wordcraft" => "formatted",
+        "formatted" | "keep" | "doc4me" => "formatted",
         "rtf" => "rtf",
         "html" => "html",
         "text" | "unformatted" | "plain" => "text",
@@ -117,8 +117,8 @@ fn paste_special(s: &mut Session, v: &Value) -> CmdResult {
             return Ok(r);
         }
         "formatted" => s.clipboard.clone().ok_or_else(|| CmdError::Failed("the clipboard is empty".into()))?,
-        "html" => adopt(s, wordcraft_formats::html::import(&src)),
-        _ => adopt(s, wordcraft_formats::rtf::import(src.as_bytes()).map_err(|e| CmdError::Failed(format!("bad RTF: {e}")))?),
+        "html" => adopt(s, doc4me_formats::html::import(&src)),
+        _ => adopt(s, doc4me_formats::rtf::import(src.as_bytes()).map_err(|e| CmdError::Failed(format!("bad RTF: {e}")))?),
     };
     insert(s, frag)?;
     let mut r = sel_result(s)?;
@@ -136,7 +136,7 @@ pub fn insert(s: &mut Session, mut frag: Fragment) -> Result<(), CmdError> {
         // What the last command cut, pasted again: the two ends of a move.
         let r = match super::moves::take_paste(s, &frag) {
             Some(r) => r,
-            None => super::new_revision(s, wordcraft_doc::RevisionKind::Insert),
+            None => super::new_revision(s, doc4me_doc::RevisionKind::Insert),
         };
         rid = Some(r);
         for b in &mut frag.blocks {
@@ -202,7 +202,7 @@ fn adopt(s: &mut Session, src: Document) -> Fragment {
     for (i, a) in src.numbering.abstracts.iter().enumerate() {
         let id = next_abs.saturating_add(i as u32);
         abs_map.insert(a.id, id);
-        s.doc.numbering.abstracts.push(wordcraft_doc::numbering::AbstractNum { id, ..a.clone() });
+        s.doc.numbering.abstracts.push(doc4me_doc::numbering::AbstractNum { id, ..a.clone() });
     }
     let next_num = s.doc.numbering.nums.iter().map(|n| n.id.saturating_add(1)).max().unwrap_or(1).max(1);
     let mut num_map = BTreeMap::new();
@@ -210,7 +210,7 @@ fn adopt(s: &mut Session, src: Document) -> Fragment {
         let id = next_num.saturating_add(i as u32);
         num_map.insert(n.id, id);
         let abstract_id = abs_map.get(&n.abstract_id).copied().unwrap_or(n.abstract_id);
-        s.doc.numbering.nums.push(wordcraft_doc::numbering::Num { id, abstract_id, ..n.clone() });
+        s.doc.numbering.nums.push(doc4me_doc::numbering::Num { id, abstract_id, ..n.clone() });
     }
     for st in &src.styles.styles {
         if s.doc.styles.get(&st.id).is_none() {
@@ -231,7 +231,7 @@ fn adopt(s: &mut Session, src: Document) -> Fragment {
                 n.num = num_map.get(&n.num).copied().unwrap_or(0);
             }
             for o in &mut p.objects {
-                if let wordcraft_doc::InlineObject::Image { media: key, .. } = o
+                if let doc4me_doc::InlineObject::Image { media: key, .. } = o
                     && let Some(k) = media.get(key.as_str())
                 {
                     *key = k.clone();
@@ -240,6 +240,6 @@ fn adopt(s: &mut Session, src: Document) -> Fragment {
         });
     }
     // Text box stories the imported shapes show; pasting gives each a new story of its own.
-    let parts = src.parts.into_iter().filter(|(_, p)| p.kind == wordcraft_doc::PartKind::TextBox).collect();
+    let parts = src.parts.into_iter().filter(|(_, p)| p.kind == doc4me_doc::PartKind::TextBox).collect();
     Fragment { blocks, parts }
 }

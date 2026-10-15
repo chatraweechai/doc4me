@@ -1,6 +1,6 @@
 # Italian (it) interface catalog. Columns, separated by a TAB:
 #   context <TAB> English source <TAB> translation
-#   context    empty (WordCraft uses no contexts yet)
+#   context    empty (Doc4Me uses no contexts yet)
 #   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
 #   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
 #              trailing "…" in one needs one in the other.
@@ -8,7 +8,7 @@
 #
 # Standard Italian. Commands are second-person imperatives (Salva, Copia, Inserisci); second-person
 # text uses tu; labels use sentence case; decimals use a comma (1,5); product and format names stay
-# as they are (WordCraft, PDF, Markdown, MCP …).
+# as they are (Doc4Me, PDF, Markdown, MCP …).
 # Feature names (ribbon tabs, groups and command names) use the names Italian word-processor users
 # already know, as AGENTS.md allows for feature names. Every other entry (descriptions, tooltips,
 # messages, dialog text) was written from the plain meaning of the English text in ordinary
@@ -17,9 +17,9 @@
 	(no style)	(nessuno stile)
 	(no suggestions)	(nessun suggerimento)
 	1.5 Line Spacing	Interlinea 1,5
-	A free, open-source word processor written from scratch in Rust.\nPart of the Crafting Apps from the ArtCraft team.	Un elaboratore di testi gratuito e open source, scritto da zero in Rust.\nFa parte delle Crafting Apps del team ArtCraft.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Un elaboratore di testi gratuito e open source, scritto da zero in Rust.\nBasato su WordCraft del team ArtCraft.
 	About	Informazioni
-	About WordCraft	Informazioni su WordCraft
+	About Doc4Me	Informazioni su Doc4Me
 	Accept	Accetta
 	Accept All Changes	Accetta tutte le modifiche
 	Accept This Change	Accetta questa modifica
@@ -218,7 +218,6 @@
 	Comment	Commento
 	Comments	Commenti
 	Comments Pane	Riquadro Commenti
-	Community\nDiscord	Community\nDiscord
 	Compact	Compatto
 	Compare	Confronta
 	Compress Pictures	Comprimi immagini
@@ -271,13 +270,12 @@
 	Different First Page	Prima pagina diversa
 	Different Odd & Even Pages	Pagine pari e dispari diverse
 	Direct formatting	Formattazione diretta
-	Discord	Discord
-	Discord community	Community Discord
 	Display	Visualizza
 	Display for Review	Visualizza per revisione
 	Distribute Columns	Distribuisci colonne
 	Distribute Rows	Distribuisci righe
 	Distributed	Distribuito
+	Thai Distributed	Distribuito thailandese
 	Do Not Show in TOC	Non mostrare nel sommario
 	Document End	Fine documento
 	Document Formatting	Formattazione documento
@@ -320,7 +318,7 @@
 	Envelopes	Buste
 	Eraser	Gomma
 	Even Page	Pagina pari
-	Every command is available to scripts and AI agents: run `wordcraft-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Ogni comando è disponibile per script e agenti IA: esegui `wordcraft-cli mcp` per un server MCP, o avvia l'app con `--control <port>` per il canale di controllo JSON.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Ogni comando è disponibile per script e agenti IA: esegui `doc4me-cli mcp` per un server MCP, o avvia l'app con `--control <port>` per il canale di controllo JSON.
 	Export	Esporta
 	Export PDF	Esporta PDF
 	Export Page as PNG	Esporta pagina come PNG
@@ -435,8 +433,6 @@
 	Inspect Styles at Selection	Ispeziona stili nella selezione
 	Interface language:	Lingua dell'interfaccia:
 	Italic	Corsivo
-	Join the ArtCraft community on Discord	Unisciti alla community di ArtCraft su Discord
-	Join us on Discord: discord.gg/artcraft	Unisciti a noi su Discord: discord.gg/artcraft
 	Justify	Giustifica
 	Keep Lines Together	Mantieni righe insieme
 	Keep Text Only	Mantieni solo testo
@@ -742,7 +738,6 @@
 	Show only comments and formatting in balloons	Mostra solo commenti e formattazione nei fumetti
 	Show revisions in balloons	Mostra revisioni nei fumetti
 	Show rulers	Mostra righelli
-	Show the community button in the title bar	Mostra il pulsante della community nella barra del titolo
 	Show/Hide ¶	Mostra tutto
 	Show\nComments	Mostra\ncommenti
 	Shrink Font 1 Point	Riduci carattere di 1 punto
@@ -757,7 +752,7 @@
 	Small caps	Maiuscoletto
 	SmartArt	SmartArt
 	Sort	Ordina
-	Source code: github.com/storytold/wordcraft	Codice sorgente: github.com/storytold/wordcraft
+	Source code: github.com/chatraweechai/docscaft	Codice sorgente: github.com/chatraweechai/docscaft
 	Space	Spazio
 	Space before/after:	Spazio prima/dopo:
 	Spacing	Spaziatura
@@ -892,7 +887,7 @@
 	Word Right	Parola a destra
 	Word document (*.docx)	Documento Word (*.docx)
 	WordArt	WordArt
-	WordCraft	WordCraft
+	Doc4Me	Doc4Me
 	Words	Parole
 	Words only	Solo parole
 	Wrap Text	Testo a capo
@@ -959,7 +954,7 @@
 	Stopped	Interrotto
 	Speed	Velocità
 	Normal speed	Velocità normale
-	AutoSave documents you have saved in WordCraft	Salva automaticamente i documenti che hai salvato in WordCraft
+	AutoSave documents you have saved in Doc4Me	Salva automaticamente i documenti che hai salvato in Doc4Me
 	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Salvataggio automatico non riuscito: {error}. Salva il documento per riattivare il salvataggio automatico.
 	Couldn't download {name}: {error}	Impossibile scaricare {name}: {error}
 	Do you want to save changes to {name}?	Vuoi salvare le modifiche a {name}?
@@ -1126,7 +1121,6 @@
 	Insert a new equation (Alt+=)	Inserisci una nuova equazione (Alt+=)
 	Leave the equation (Esc)	Esci dall'equazione (Esc)
 	Preview	Anteprima
-	getartcraft.com/apps/wordcraft	getartcraft.com/apps/wordcraft
 	Draw Ink	Disegna a penna
 	Erase Ink	Cancella penna
 	Hide Ink	Nascondi penna
@@ -1264,7 +1258,7 @@
 	The document will be saved with a password. Save it to protect it.	Il documento verrà salvato con una password. Salvalo per proteggerlo.
 	The password is removed. Save the document to keep the change.	La password è stata rimossa. Salva il documento per mantenere la modifica.
 	The passwords don't match.	Le password non corrispondono.
-	Keep the password somewhere safe: without it nobody, WordCraft included, can open the document. Leave both boxes empty to remove the password.	Conserva la password in un luogo sicuro: senza di essa nessuno, nemmeno WordCraft, può aprire il documento. Lascia vuote entrambe le caselle per rimuovere la password.
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Conserva la password in un luogo sicuro: senza di essa nessuno, nemmeno Doc4Me, può aprire il documento. Lascia vuote entrambe le caselle per rimuovere la password.
 	Align Top Left	Allinea in alto a sinistra
 	Align Top Center	Allinea in alto al centro
 	Align Top Right	Allinea in alto a destra
@@ -2119,7 +2113,7 @@
 	Brackets	Parentesi quadre
 	Brackets with Separators	Parentesi con separatori
 	Breve	Breve
-	Browse in WordCraft…	Sfoglia in WordCraft…
+	Browse in Doc4Me…	Sfoglia in Doc4Me…
 	CONFIDENTIAL	RISERVATO
 	Cases (Three Conditions)	Casi (tre condizioni)
 	Cases (Two Conditions)	Casi (due condizioni)
@@ -2293,7 +2287,7 @@
 	On	Attivato
 	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Attivato: il cursore scorre nella nuova posizione quando scrivi o usi i tasti freccia, e il lampeggio sfuma. Disattivato: salta e lampeggia acceso e spento.
 	One half	Un mezzo
-	Open a file with WordCraft's own browser when the system file dialog doesn't appear.	Apri un file con il browser di WordCraft quando la finestra di dialogo dei file del sistema non compare.
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Apri un file con il browser di Doc4Me quando la finestra di dialogo dei file del sistema non compare.
 	Operator Structures	Strutture di operatori
 	Operators	Operatori
 	Other Large Operators	Altri operatori grandi
@@ -2378,7 +2372,7 @@
 	Tangent formula	Formula della tangente
 	Text over Colon Equal	Testo sopra due punti uguale
 	Text over Equal	Testo sopra uguale
-	The system file dialog isn't available, so WordCraft shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	La finestra di dialogo dei file del sistema non è disponibile, quindi WordCraft mostra la sua. Per avere quella del sistema, installa un portale di selezione dei file (come xdg-desktop-portal-gtk) o zenity.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	La finestra di dialogo dei file del sistema non è disponibile, quindi Doc4Me mostra la sua. Per avere quella del sistema, installa un portale di selezione dei file (come xdg-desktop-portal-gtk) o zenity.
 	This folder can't be read: {error}	Impossibile leggere questa cartella: {error}
 	Tilde	Tilde
 	Trigonometric Functions	Funzioni trigonometriche
@@ -2420,13 +2414,13 @@
 	✓ None	✓ Nessuno
 preview	Title	Esempio
 	Do Not Check Spelling or Grammar	Non controllare ortografia e grammatica
-	Couldn't make WordCraft the default: {error}	Impossibile rendere WordCraft l'app predefinita: {error}
-	In Default apps, choose WordCraft for the document types you want it to open.	In App predefinite, scegli WordCraft per i tipi di documento che deve aprire.
-	Make WordCraft the default for Word documents…	Rendi WordCraft l'app predefinita per i documenti Word…
-	Opens .docx, .doc, .rtf and .odt files and Word templates with WordCraft from now on.	D'ora in poi i file .docx, .doc, .rtf e .odt e i modelli di Word si aprono con WordCraft.
-	Opens Settings › Default apps, where you choose WordCraft for .docx and the other document types.	Apre Impostazioni › App predefinite, dove scegli WordCraft per .docx e gli altri tipi di documento.
-	To open Word documents with WordCraft by default: select one in Finder, choose File › Get Info, pick WordCraft under Open with, then click Change All.	Per aprire i documenti Word con WordCraft per impostazione predefinita: selezionane uno nel Finder, scegli Archivio › Ottieni informazioni, scegli WordCraft in «Apri con», quindi fai clic su «Modifica tutto».
-	WordCraft is now the default app for Word documents.	WordCraft è ora l'app predefinita per i documenti Word.
+	Couldn't make Doc4Me the default: {error}	Impossibile rendere Doc4Me l'app predefinita: {error}
+	In Default apps, choose Doc4Me for the document types you want it to open.	In App predefinite, scegli Doc4Me per i tipi di documento che deve aprire.
+	Make Doc4Me the default for Word documents…	Rendi Doc4Me l'app predefinita per i documenti Word…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	D'ora in poi i file .docx, .doc, .rtf e .odt e i modelli di Word si aprono con Doc4Me.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Apre Impostazioni › App predefinite, dove scegli Doc4Me per .docx e gli altri tipi di documento.
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Per aprire i documenti Word con Doc4Me per impostazione predefinita: selezionane uno nel Finder, scegli Archivio › Ottieni informazioni, scegli Doc4Me in «Apri con», quindi fai clic su «Modifica tutto».
+	Doc4Me is now the default app for Word documents.	Doc4Me è ora l'app predefinita per i documenti Word.
 	Numerals:	Cifre:
 	Numerals	Cifre
 	Hindi	Hindi

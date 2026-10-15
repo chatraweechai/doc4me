@@ -5,13 +5,13 @@
 //! Field ids handed to Zotero stay valid for the transaction: they are kept in a list parallel
 //! to the document-order list of Zotero fields, updated as fields are inserted and removed.
 
+use doc4me_doc::edit::Fragment;
+use doc4me_doc::para::OBJ;
+use doc4me_doc::props::{LineSpacing, TabAlign, TabLeader, TabStop};
+use doc4me_doc::styles::{Style, StyleKind};
+use doc4me_doc::{CharProps, InlineObject, ParaProps, PartKind, Pos, StoryRef};
+use doc4me_engine::{Selection, Session};
 use serde_json::{Value, json};
-use wordcraft_doc::edit::Fragment;
-use wordcraft_doc::para::OBJ;
-use wordcraft_doc::props::{LineSpacing, TabAlign, TabLeader, TabStop};
-use wordcraft_doc::styles::{Style, StyleKind};
-use wordcraft_doc::{CharProps, InlineObject, ParaProps, PartKind, Pos, StoryRef};
-use wordcraft_engine::{Selection, Session};
 
 use crate::fields::{self, ZField};
 use crate::rich;
@@ -270,7 +270,7 @@ impl Bridge {
                 Self::end_edit(s);
                 Ok(Value::Null)
             }
-            // Zotero's field kinds are one kind in WordCraft; only the note type matters: a
+            // Zotero's field kinds are one kind in Doc4Me; only the note type matters: a
             // citation moves between the text, footnotes and endnotes (switching styles).
             "Document_convert" => {
                 let Value::Array(ids) = arg(c, 1)? else { return Err("field ids must be an array".into()) };
@@ -362,9 +362,9 @@ impl Bridge {
                 Ok(Value::Null)
             }
             "Document_importDocument" | "Document_exportDocument" => {
-                Err("WordCraft doesn't support Zotero's document transfer; the citations are already stored the way Word keeps them".into())
+                Err("Doc4Me doesn't support Zotero's document transfer; the citations are already stored the way Word keeps them".into())
             }
-            m => Err(format!("WordCraft doesn't support {m}")),
+            m => Err(format!("Doc4Me doesn't support {m}")),
         }
     }
 
@@ -494,7 +494,7 @@ impl Bridge {
             let text = s.doc.copy_range(&a, &b);
             let mut text = text;
             for blk in &mut text.blocks {
-                if let wordcraft_doc::Block::Para(p) = blk {
+                if let doc4me_doc::Block::Para(p) = blk {
                     let n = p.len();
                     let _ = p.format(0, n, &|c| c.link = None);
                 }

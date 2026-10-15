@@ -9,7 +9,7 @@
 //!
 //! Export writes the same constructs; pictures become `![alt](media-name)` placeholders.
 
-use wordcraft_doc::{Align, Document};
+use doc4me_doc::{Align, Document};
 
 use crate::html::decode_entity;
 use crate::model::{self, Cell, FBlock, FTable, Fmt, Inline, Kind, ListInfo, Para, make_img};
@@ -1126,7 +1126,7 @@ fn inlines_md(inlines: &[Inline]) -> String {
     };
     for (text, f, raw) in pieces {
         // Links are the outermost construct; a script or other non-web target is plain text.
-        let f_link = f.link.clone().filter(|l| wordcraft_doc::link::is_safe_href(l));
+        let f_link = f.link.clone().filter(|l| doc4me_doc::link::is_safe_href(l));
         if f_link != link || raw.is_some() {
             close_all(&mut out, &mut stack);
             if let Some(l) = &link {

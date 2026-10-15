@@ -2,10 +2,10 @@
 //! GB/T 7714, GOST, SIST02), source manager, index, table of figures, cross-references, table
 //! of authorities, footnote options.
 
+use doc4me_doc::para::InlineObject;
+use doc4me_doc::props::{CharProps, TabAlign, TabLeader, TabStop};
+use doc4me_doc::{Block, Document, Paragraph, Path, Pos, Source, StoryRef};
 use serde_json::{Value, json};
-use wordcraft_doc::para::InlineObject;
-use wordcraft_doc::props::{CharProps, TabAlign, TabLeader, TabStop};
-use wordcraft_doc::{Block, Document, Paragraph, Path, Pos, Source, StoryRef};
 
 use super::{delete_selection, sel_result};
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -105,7 +105,7 @@ const fn names(first: Name, rest: Name, sep: &'static str, two: &'static str, la
 const AUTHOR_DATE: Cite = Cite::AuthorDate { year_sep: " ", pages_sep: ", p. " };
 
 /// Every style, in picker order (alphabetical). Formats follow the published style guides'
-/// rules for the source types WordCraft records, written in our own words.
+/// rules for the source types Doc4Me records, written in our own words.
 pub static STYLES: [CiteStyle; 12] = [
     CiteStyle {
         name: "APA",
@@ -346,7 +346,7 @@ pub fn specs() -> Vec<CommandSpec> {
             r#"{"kind"?: "footnote|endnote", "pos"?: "pageBottom|beneathText" (footnotes) | "sectEnd|docEnd" (endnotes), "numFmt"?: "decimal|lowerRoman|upperRoman|lowerLetter|upperLetter|…", "numStart"?: 1-32767, "numRestart"?: "continuous|eachSect|eachPage" (each page: footnotes only), "scope"?: "document|section", "footnoteFormat"?: …, "endnoteFormat"?: …} — no settings: the options in effect at the caret"#,
         ),
         CommandSpec::new("references.researcher", "Researcher", "References › Research", |s, _| {
-            s.status = "Researcher needs an online service; WordCraft keeps your documents offline.".into();
+            s.status = "Researcher needs an online service; Doc4Me keeps your documents offline.".into();
             Ok(json!({"available": false}))
         })
         .pure(),
@@ -709,12 +709,12 @@ const ENTRY_STYLE: &str = "ListEntry";
 /// Rebuild every generated list.
 pub fn update_generated(s: &mut Session) -> Result<(), CmdError> {
     if s.doc.styles.get(ENTRY_STYLE).is_none() {
-        s.doc.styles.upsert(wordcraft_doc::Style {
+        s.doc.styles.upsert(doc4me_doc::Style {
             id: ENTRY_STYLE.into(),
             name: "List Entry".into(),
-            kind: wordcraft_doc::StyleKind::Paragraph,
+            kind: doc4me_doc::StyleKind::Paragraph,
             based_on: Some("Normal".into()),
-            para: wordcraft_doc::ParaProps { space_after: Some(4.0), ..Default::default() },
+            para: doc4me_doc::ParaProps { space_after: Some(4.0), ..Default::default() },
             hidden: true,
             ..Default::default()
         });
@@ -925,7 +925,7 @@ fn ref_targets(s: &Session, to: &str) -> Vec<(String, Pos)> {
 /// when `number_only`), reusing one already there. Returns its name and `at` moved past the
 /// bookmark marks inserted before it.
 fn ref_bookmark(s: &mut Session, pos: &Pos, number_only: bool, mut at: Pos) -> Result<(String, Pos), CmdError> {
-    const MARK: usize = wordcraft_doc::para::OBJ.len_utf8();
+    const MARK: usize = doc4me_doc::para::OBJ.len_utf8();
     let para = s.doc.para(pos.story, &pos.path).ok_or_else(|| CmdError::Params("cross-reference target is gone".into()))?;
     let end = if number_only { para.text.find(':').unwrap_or(para.len()) } else { para.len() };
     if let Some(InlineObject::BookmarkStart { name }) = para.object_at(0)
@@ -963,7 +963,7 @@ mod tests {
 
     #[test]
     fn citations_and_bibliography() {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         s.run("text.insert", &json!({"text": "Studios matter "})).unwrap();
         s.run("references.citation", &json!({"source": {"author": "Rivera, Alex; Chen, Mei", "title": "Shared Spaces", "year": "2021", "publisher": "Harbor Books", "city": "Portland"}})).unwrap();
         assert!(s.doc.plain_text(StoryRef::Body).contains("(Rivera & Chen, 2021)"), "{}", s.doc.plain_text(StoryRef::Body));
@@ -980,7 +980,7 @@ mod tests {
 
     #[test]
     fn bibliography_round_trip_docx() {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         s.run("text.insert", &json!({"text": "Studios matter "})).unwrap();
         s.run(
             "references.citation",
@@ -1006,8 +1006,8 @@ mod tests {
         s.run("references.bibliography", &json!({})).unwrap();
 
         // Serialize to DOCX and back — sources must survive.
-        let bytes = wordcraft_docx::write(&s.doc).expect("docx write");
-        let doc = wordcraft_docx::read(&bytes).expect("docx read");
+        let bytes = doc4me_docx::write(&s.doc).expect("docx write");
+        let doc = doc4me_docx::read(&bytes).expect("docx read");
         assert_eq!(doc.sources.len(), 1, "round-tripped sources: {:?}", doc.sources);
         assert_eq!(doc.sources[0].author, "Rivera, Alex; Chen, Mei");
         assert_eq!(doc.sources[0].title, "Shared Spaces");
@@ -1029,23 +1029,23 @@ mod tests {
 
     #[test]
     fn citation_style_survives_docx_save_and_reopen() {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         s.run("references.citation", &json!({"source": {"author": "Rivera, Alex", "title": "Shared Spaces", "year": "2021"}})).unwrap();
         s.run("references.citationStyle", &json!({"style": "Harvard (Anglia)"})).unwrap();
-        let bytes = wordcraft_docx::write(&s.doc).expect("docx write");
-        let doc = wordcraft_docx::read(&bytes).expect("docx read");
+        let bytes = doc4me_docx::write(&s.doc).expect("docx write");
+        let doc = doc4me_docx::read(&bytes).expect("docx read");
         assert_eq!(doc.settings.bib_style.as_deref(), Some("Harvard (Anglia)"));
         assert_eq!(Session::new(doc.clone()).bib_style, "Harvard (Anglia)");
-        let mut other = Session::new(wordcraft_doc::Document::new());
+        let mut other = Session::new(doc4me_doc::Document::new());
         other.set_document(doc);
         assert_eq!(other.bib_style, "Harvard (Anglia)");
         // A document without a recorded style is APA.
-        assert_eq!(Session::new(wordcraft_doc::Document::new()).bib_style, "APA");
+        assert_eq!(Session::new(doc4me_doc::Document::new()).bib_style, "APA");
     }
 
     #[test]
     fn index_and_figures() {
-        let mut s = Session::new(wordcraft_doc::Document::from_text("Kilns are hot.\nPresses are heavy.\nMore kilns."));
+        let mut s = Session::new(doc4me_doc::Document::from_text("Kilns are hot.\nPresses are heavy.\nMore kilns."));
         s.run("select.text", &json!({"text": "Kilns"})).unwrap();
         s.run("references.markEntry", &json!({})).unwrap();
         s.run("select.text", &json!({"text": "Presses"})).unwrap();
@@ -1073,7 +1073,7 @@ mod tests {
     /// #661: References › Table of Authorities › Update Table picks up citations marked after the table.
     #[test]
     fn table_of_authorities_updates() {
-        let mut s = Session::new(wordcraft_doc::Document::from_text("Smith v. Jones held it.\nDoe v. Roe agreed."));
+        let mut s = Session::new(doc4me_doc::Document::from_text("Smith v. Jones held it.\nDoe v. Roe agreed."));
         s.run("select.text", &json!({"text": "Smith v. Jones"})).unwrap();
         s.run("references.markCitation", &json!({})).unwrap();
         s.run("caret.docEnd", &json!({})).unwrap();
@@ -1103,7 +1103,7 @@ mod tests {
 
     #[test]
     fn cross_references_point_at_real_bookmarks() {
-        let mut s = Session::new(wordcraft_doc::Document::from_text("Kilns\nSee here."));
+        let mut s = Session::new(doc4me_doc::Document::from_text("Kilns\nSee here."));
         s.run("caret.docStart", &json!({})).unwrap();
         s.run("styles.apply", &json!({"style": "Heading 1"})).unwrap();
         s.run("caret.docEnd", &json!({})).unwrap();
@@ -1129,7 +1129,7 @@ mod tests {
 
     #[test]
     fn cross_reference_to_a_bookmark_shows_its_text() {
-        let mut s = Session::new(wordcraft_doc::Document::from_text("Kilns are hot.\nSee "));
+        let mut s = Session::new(doc4me_doc::Document::from_text("Kilns are hot.\nSee "));
         s.run("select.text", &json!({"text": "Kilns"})).unwrap();
         s.run("insert.bookmark", &json!({"name": "Spot"})).unwrap();
         s.run("caret.docEnd", &json!({})).unwrap();
@@ -1140,7 +1140,7 @@ mod tests {
 
     #[test]
     fn cross_reference_inside_its_own_target_paragraph() {
-        let mut s = Session::new(wordcraft_doc::Document::from_text("Kilns"));
+        let mut s = Session::new(doc4me_doc::Document::from_text("Kilns"));
         s.run("styles.apply", &json!({"style": "Heading 1"})).unwrap();
         s.run("caret.docEnd", &json!({})).unwrap();
         s.run("insert.crossReference", &json!({"to": "heading", "target": "Kilns"})).unwrap();
@@ -1159,7 +1159,7 @@ mod tests {
 
     #[test]
     fn author_date_styles_cite_and_list() {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         two_sources(&mut s, "Shared Spaces");
         s.run("references.citation", &json!({"tag": "A", "pages": "12"})).unwrap();
         s.run("references.citation", &json!({"tag": "B"})).unwrap();
@@ -1193,7 +1193,7 @@ mod tests {
 
     #[test]
     fn numbered_styles_count_in_order_of_first_citation() {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         two_sources(&mut s, "Shared Spaces");
         s.run("references.citationStyle", &json!({"style": "ISO 690 (numerical)"})).unwrap();
         s.run("text.insert", &json!({"text": "Later "})).unwrap();
@@ -1236,7 +1236,7 @@ mod tests {
 
     #[test]
     fn gost_numbers_follow_its_name_or_title_sort() {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         two_sources(&mut s, "Atlas of Studios");
         s.run("references.citation", &json!({"tag": "A"})).unwrap();
         s.run("references.citation", &json!({"tag": "B", "pages": "15"})).unwrap();

@@ -442,7 +442,7 @@ mod tests {
     /// through the command (as agents do) without opening the dialog.
     #[test]
     fn layout_changes_through_the_command() {
-        let mut s = crate::Session::new(wordcraft_doc::Document::new());
+        let mut s = crate::Session::new(doc4me_doc::Document::new());
         let mut run = |v: Value| s.run("tools.customizeRibbon", &v);
         let r = run(json!({"newTab": {"name": "Mine", "after": "Home"}, "hide": "Draw"})).unwrap();
         assert_eq!(r["tab"], "Mine");
@@ -462,7 +462,7 @@ mod tests {
         assert!(run(json!({"rename": {"tab": "Writing", "to": "insert"}})).is_err());
         assert!(run(json!({"add": {"tab": "Writing", "group": "New Group", "command": "no.such"}})).is_err());
         assert!(run(json!({"move": {"tab": "Nope", "by": 1}})).is_err());
-        drop(run);
+        // `run`'s borrow of `s` ends with its last use.
         assert!(s.ui_requests.is_empty(), "programmatic calls never open dialogs");
         s.run("tools.customizeRibbon", &json!({"reset": true})).unwrap();
         assert_eq!(s.ribbon, RibbonLayout::default());

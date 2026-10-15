@@ -3,11 +3,11 @@
 
 use std::collections::BTreeMap;
 
+use doc4me_doc::para::InlineObject;
+use doc4me_doc::props::{CharProps, TabAlign, TabLeader, TabStop};
+use doc4me_doc::section::SectionStart;
+use doc4me_doc::{Block, Paragraph, Path, Pos, StoryRef};
 use serde_json::{Value, json};
-use wordcraft_doc::para::InlineObject;
-use wordcraft_doc::props::{CharProps, TabAlign, TabLeader, TabStop};
-use wordcraft_doc::section::SectionStart;
-use wordcraft_doc::{Block, Paragraph, Path, Pos, StoryRef};
 
 use super::references::{FieldCode, leader};
 use super::sel_result;
@@ -343,7 +343,7 @@ pub fn rebuild(s: &mut Session, i: usize, leader: Option<TabLeader>) -> Result<(
 /// Put the `n` entries after the index field's paragraph `i` in a continuous section with `cols`
 /// columns (the field's paragraph ends the section before), or merge that section back when the
 /// index has one column again.
-fn columns(s: &mut Session, i: usize, n: usize, cols: u32, old: Option<wordcraft_doc::section::SectionProps>) -> Result<(), CmdError> {
+fn columns(s: &mut Session, i: usize, n: usize, cols: u32, old: Option<doc4me_doc::section::SectionProps>) -> Result<(), CmdError> {
     let last = i + n;
     if cols > 1 && n > 0 {
         // A paragraph after the index keeps the following section from being empty.
@@ -394,7 +394,7 @@ mod tests {
     /// before right-aligned page numbers, and two columns in a continuous section.
     #[test]
     fn index_switches_shape_the_index() {
-        let mut s = Session::new(wordcraft_doc::Document::from_text("Kilns are hot.\nGlaze the kilns.\nKilns again.\nPresses."));
+        let mut s = Session::new(doc4me_doc::Document::from_text("Kilns are hot.\nGlaze the kilns.\nKilns again.\nPresses."));
         s.run("select.text", &json!({"text": "Kilns"})).unwrap();
         s.run("references.markEntry", &json!({"subentry": "firing", "bold": true})).unwrap();
         s.run("select.text", &json!({"text": "Presses"})).unwrap();

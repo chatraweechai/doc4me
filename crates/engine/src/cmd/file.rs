@@ -1,7 +1,7 @@
 //! File tab (Backstage): new, open, save, export, print, properties; document inspection.
 
+use doc4me_doc::{Block, Document, StoryRef};
 use serde_json::{Value, json};
-use wordcraft_doc::{Block, Document, StoryRef};
 
 use super::{pos_json, sel_result};
 use crate::{CmdError, CmdResult, CommandSpec, Session, p};
@@ -168,7 +168,7 @@ fn encrypt(s: &mut Session, v: &Value) -> CmdResult {
         Some(Value::Null) => None,
         Some(Value::String(pw)) if pw.is_empty() => None,
         Some(Value::String(pw)) => {
-            wordcraft_docx::check_password(pw).map_err(|e| CmdError::Params(e.to_string()))?;
+            doc4me_docx::check_password(pw).map_err(|e| CmdError::Params(e.to_string()))?;
             Some(crate::io::Password::new(pw))
         }
         _ => return Err(CmdError::Params("`password` must be a string, or null to remove the password".into())),
@@ -195,7 +195,7 @@ fn save(s: &mut Session, v: &Value) -> CmdResult {
         if !crate::io::can_encrypt(&path.to_string_lossy()) {
             return Err(CmdError::Params("only Word documents (.docx, .docm, .dotx, .dotm) can be saved with a password".into()));
         }
-        wordcraft_docx::check_password(pw).map_err(|e| CmdError::Params(e.to_string()))?;
+        doc4me_docx::check_password(pw).map_err(|e| CmdError::Params(e.to_string()))?;
         s.password = Some(crate::io::Password::new(pw));
     }
     s.stamp_save();
@@ -231,7 +231,7 @@ fn export_png(s: &mut Session, v: &Value) -> CmdResult {
     let scale = p::f32(v, "scale").unwrap_or(2.0).clamp(0.1, 8.0);
     let l = s.export_layout_with(export_options(s, v).markup);
     let pg = l.pages.get(page).ok_or_else(|| CmdError::Params(format!("no page {}", page + 1)))?;
-    let img = wordcraft_render::render_page(&s.doc, pg, scale, &Default::default());
+    let img = doc4me_render::render_page(&s.doc, pg, scale, &Default::default());
     let png = img.to_png();
     crate::io::write_file(path, &png).map_err(CmdError::Failed)?;
     Ok(json!({"path": path, "width": img.width, "height": img.height, "bytes": png.len()}))
@@ -367,7 +367,7 @@ fn inspect(s: &mut Session, v: &Value) -> CmdResult {
 fn paragraph(s: &mut Session, v: &Value) -> CmdResult {
     let path: Vec<u32> = serde_json::from_value(v.get("path").cloned().unwrap_or(json!([0]))).map_err(|e| CmdError::Params(e.to_string()))?;
     let story = super::story_param(s, v);
-    let p = s.doc.para(story, &wordcraft_doc::Path(path)).ok_or_else(|| CmdError::Params("no paragraph there".into()))?;
+    let p = s.doc.para(story, &doc4me_doc::Path(path)).ok_or_else(|| CmdError::Params("no paragraph there".into()))?;
     let resolved = s.doc.styles.resolve_para(&p.props);
     Ok(json!({"paragraph": p, "resolved": resolved}))
 }
@@ -378,7 +378,7 @@ fn layout_summary(s: &mut Session, _: &Value) -> CmdResult {
         .pages
         .iter()
         .map(|p| {
-            let lines: usize = p.items.iter().map(|it| if let wordcraft_layout::Placed::Lines { l0, l1, .. } = it { l1 - l0 } else { 0 }).sum();
+            let lines: usize = p.items.iter().map(|it| if let doc4me_layout::Placed::Lines { l0, l1, .. } = it { l1 - l0 } else { 0 }).sum();
             json!({"number": p.number, "w": p.w, "h": p.h, "section": p.section, "lines": lines, "firstBlock": p.first_block, "header": p.header_story, "footer": p.footer_story})
         })
         .collect();

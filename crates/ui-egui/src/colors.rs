@@ -10,9 +10,9 @@
 //! the colour back to a dialog's field. The colour a command takes is any `RRGGBB`, so a custom
 //! colour needs nothing new below the UI.
 
+use doc4me_doc::Rgb;
 use egui::{Color32, Id, Pos2, Rect, Sense, Stroke, Ui, pos2, vec2};
 use serde_json::{Value, json};
-use wordcraft_doc::Rgb;
 
 use crate::WordApp;
 use crate::theme::{Tokens, c32};
@@ -248,15 +248,15 @@ pub enum Pick {
 }
 
 fn recent_id() -> Id {
-    Id::new("wordcraft.recentColors")
+    Id::new("doc4me.recentColors")
 }
 
 fn request_id() -> Id {
-    Id::new("wordcraft.moreColorsRequest")
+    Id::new("doc4me.moreColorsRequest")
 }
 
 fn open_flag_id() -> Id {
-    Id::new("wordcraft.colorsDialogOpen")
+    Id::new("doc4me.colorsDialogOpen")
 }
 
 /// Removes and returns a temporary value.
@@ -449,7 +449,7 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context) {
         ctx.data_mut(|m| m.insert_temp(open_flag_id(), false));
         return;
     };
-    let resp = egui::Modal::new(Id::new("wordcraft.colorsDialog")).show(ctx, |ui| body(ui, &mut d));
+    let resp = egui::Modal::new(Id::new("doc4me.colorsDialog")).show(ctx, |ui| body(ui, &mut d));
     let mut done = resp.inner;
     if done.is_none() && resp.should_close() {
         done = Some(false);
@@ -716,7 +716,7 @@ fn custom(ui: &mut Ui, d: &mut ColorsDialog) {
         ui.horizontal(|ui| {
             ui.label("#");
             let mut text = d.hex.clone();
-            let r = ui.add(egui::TextEdit::singleline(&mut text).desired_width(80.0).char_limit(16));
+            let r = ui.add(crate::widgets::text_line(&mut text).desired_width(80.0).char_limit(16));
             if r.changed() {
                 d.hex = text.clone();
                 d.set_text(&text);
@@ -732,7 +732,7 @@ fn custom(ui: &mut Ui, d: &mut ColorsDialog) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use wordcraft_engine::Session;
+    use doc4me_engine::Session;
 
     #[test]
     fn parse_accepts_hex_short_hex_and_rgb_triples() {
@@ -820,7 +820,7 @@ mod tests {
     /// first in Recent Colors.
     #[test]
     fn custom_font_color_applies_and_joins_recent_colors() {
-        let mut app = WordApp::new(Session::new(wordcraft_doc::Document::new()), crate::Services::default());
+        let mut app = WordApp::new(Session::new(doc4me_doc::Document::new()), crate::Services::default());
         let _ = app.run("document.setText", json!({"text": "Custom colour"}));
         let _ = app.run("select.all", json!({}));
         let _ = app.run("format.color", json!({"color": "112233"}));

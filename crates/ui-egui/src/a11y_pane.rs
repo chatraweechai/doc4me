@@ -1,9 +1,9 @@
 //! The Accessibility pane (the checker's findings, grouped, each a jump and maybe a fix) and the
 //! Alt Text pane (the selected object's or table's alternative text).
 
+use doc4me_doc::Pos;
 use egui::Ui;
 use serde_json::{Value, json};
-use wordcraft_doc::Pos;
 
 use crate::WordApp;
 use crate::theme::{regular, semibold};
@@ -72,7 +72,7 @@ fn issues(app: &mut WordApp, ui: &Ui) -> Vec<Value> {
     {
         return v;
     }
-    let v = wordcraft_engine::cmd::accessibility::check(&app.session.doc);
+    let v = doc4me_engine::cmd::accessibility::check(&app.session.doc);
     ui.data_mut(|d| d.insert_temp(key, (stamp, v.clone())));
     v
 }
@@ -94,7 +94,7 @@ pub fn alt_text(app: &mut WordApp, ui: &mut Ui) {
         let _ = app.run("view.altTextPane", json!({"value": false}));
         return;
     }
-    if let Some((pos, obj)) = wordcraft_engine::cmd::objects::selected(&app.session) {
+    if let Some((pos, obj)) = doc4me_engine::cmd::objects::selected(&app.session) {
         let decorative = obj.is_decorative();
         ui.label(egui::RichText::new(tl!("Describe what this object shows, for people who can't see it.")).weak());
         ui.add_space(4.0);
@@ -134,7 +134,7 @@ pub fn alt_text(app: &mut WordApp, ui: &mut Ui) {
 }
 
 fn still_selected(app: &WordApp, pos: &Pos) -> bool {
-    wordcraft_engine::cmd::objects::selected(&app.session).is_some_and(|(p, _)| &p == pos)
+    doc4me_engine::cmd::objects::selected(&app.session).is_some_and(|(p, _)| &p == pos)
 }
 
 /// A text box editing `current`; the draft lives in egui memory while it has focus (frame-local
@@ -142,7 +142,7 @@ fn still_selected(app: &WordApp, pos: &Pos) -> bool {
 fn draft_box(ui: &mut Ui, key: impl std::hash::Hash + std::fmt::Debug, current: &str, enabled: bool, multiline: bool) -> Option<String> {
     let key = egui::Id::new(key);
     let mut text = ui.data(|d| d.get_temp::<String>(key)).unwrap_or_else(|| current.to_string());
-    let edit = if multiline { egui::TextEdit::multiline(&mut text).desired_rows(5) } else { egui::TextEdit::singleline(&mut text) };
+    let edit = if multiline { crate::widgets::text_box(&mut text).desired_rows(5) } else { crate::widgets::text_line(&mut text) };
     let r = ui.add_enabled(enabled, edit.desired_width(f32::INFINITY));
     if r.changed() {
         ui.data_mut(|d| d.insert_temp(key, text.clone()));

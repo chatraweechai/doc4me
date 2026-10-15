@@ -2,8 +2,8 @@
 //! linked to the previous section), endnotes continuing over pages, and the caret in a footnote
 //! continued on the next page.
 use super::*;
-use wordcraft_doc::para::{InlineObject, NoteKind};
-use wordcraft_doc::{PartKind, Pos, para_block};
+use doc4me_doc::para::{InlineObject, NoteKind};
+use doc4me_doc::{PartKind, Pos, para_block};
 
 fn lay(doc: &Document) -> DocLayout {
     let mut c = LayoutCache::new();
@@ -73,7 +73,7 @@ fn a_tall_footer_pushes_the_body_up() {
     let placed: usize = l.pages.iter().flat_map(|p| &p.items).filter(|it| matches!(it, Placed::Lines { story: StoryRef::Body, l0: 0, .. })).count();
     assert_eq!(placed, d.body.len());
     // A one-line footer fits in the margin: the body keeps its full height.
-    d.parts.insert(id, wordcraft_doc::Part { kind: PartKind::Footer, blocks: paras("Footer", 1), body: Default::default() });
+    d.parts.insert(id, doc4me_doc::Part { kind: PartKind::Footer, blocks: paras("Footer", 1), body: Default::default() });
     let l = lay(&d);
     assert!((l.pages[0].body.bottom() - (792.0 - 72.0)).abs() < 0.01, "{:?}", l.pages[0].body);
 }
@@ -83,7 +83,7 @@ fn a_linked_tall_header_pushes_the_next_sections_body_down() {
     // #454: section 2 has no header of its own and shows section 1's (link to previous).
     let mut d = Document::from_text("First section\nSecond section");
     let id = d.add_part(PartKind::Header, paras("Header line", 8));
-    let first = SectionProps { headers: wordcraft_doc::section::HeaderSet { default: Some(id), ..Default::default() }, ..d.last_section.clone() };
+    let first = SectionProps { headers: doc4me_doc::section::HeaderSet { default: Some(id), ..Default::default() }, ..d.last_section.clone() };
     d.para_mut(StoryRef::Body, &Path::top(0)).unwrap().section = Some(Box::new(first));
     let l = lay(&d);
     assert_eq!(l.pages.len(), 2);

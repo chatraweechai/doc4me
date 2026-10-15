@@ -5,10 +5,10 @@
 //! while releasing a column border changes only the column on its left. The geometry decisions
 //! are the engine's (`cmd::table_resize`).
 
+use doc4me_engine::cmd::table_resize::{self, Edge, ResizeTarget};
+use doc4me_layout::DocLayout;
 use egui::{Pos2, Rect, Stroke, Ui, pos2};
 use serde_json::json;
-use wordcraft_engine::cmd::table_resize::{self, Edge, ResizeTarget};
-use wordcraft_layout::DocLayout;
 
 use crate::WordApp;
 use crate::theme::Tokens;
@@ -188,7 +188,7 @@ mod tests {
 
     /// The whole window with a 2×3 table whose first cell's text is selected.
     fn table_window() -> H {
-        let mut a = WordApp::new(wordcraft_engine::Session::new(wordcraft_doc::Document::new()), Default::default());
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Default::default());
         a.run("insert.table", json!({"rows": 2, "cols": 3})).unwrap();
         a.run("text.insert", json!({"text": "Product"})).unwrap();
         a.run("select.text", json!({"text": "Product"})).unwrap();
@@ -207,12 +207,12 @@ mod tests {
     }
 
     /// Cell (`row`, `cell`)'s rect in page points.
-    fn cell(h: &mut H, row: usize, cell: usize) -> wordcraft_geom::Rect {
+    fn cell(h: &mut H, row: usize, cell: usize) -> doc4me_geom::Rect {
         h.state_mut().session.layout().pages[0]
             .items
             .iter()
             .find_map(|it| match it {
-                wordcraft_layout::Placed::Cell { rect, row: r, cell: c, .. } if *r == row && *c == cell => Some(*rect),
+                doc4me_layout::Placed::Cell { rect, row: r, cell: c, .. } if *r == row && *c == cell => Some(*rect),
                 _ => None,
             })
             .unwrap()

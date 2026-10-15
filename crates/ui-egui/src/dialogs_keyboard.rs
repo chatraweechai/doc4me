@@ -3,10 +3,10 @@
 //! it now, then Assign / Remove / Reset All. Every change runs `tools.customizeKeyboard`, so
 //! agents get the same result without the dialog; the keys persist with the preferences.
 
+use doc4me_engine::keymap::normalize;
 use egui::{Sense, Ui, vec2};
 use serde::Serialize;
 use serde_json::json;
-use wordcraft_engine::keymap::normalize;
 
 use crate::WordApp;
 use crate::theme::{Tokens, semibold};
@@ -264,8 +264,8 @@ fn capture(ui: &mut Ui, f: &mut KeyboardForm) -> bool {
 
 #[cfg(test)]
 mod tests {
+    use doc4me_engine::Session;
     use serde_json::json;
-    use wordcraft_engine::Session;
 
     use crate::dialogs::Dialog;
     use crate::{Services, WordApp};
@@ -274,7 +274,7 @@ mod tests {
     /// damaged saved map doesn't lose the other preferences.
     #[test]
     fn customize_keyboard_opens_and_custom_keys_persist() {
-        let app = || WordApp::new(Session::new(wordcraft_doc::Document::new()), Services::default());
+        let app = || WordApp::new(Session::new(doc4me_doc::Document::new()), Services::default());
         let mut a = app();
         a.run("tools.customizeKeyboard", json!({})).unwrap();
         assert!(matches!(a.dialog, Some(Dialog::CustomizeKeyboard { .. })));

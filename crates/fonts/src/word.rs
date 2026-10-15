@@ -54,7 +54,13 @@ fn substitutes(family: &str) -> &'static [&'static str] {
         "DejaVu Serif",
         "Source Serif 4",
     ];
+    // Thai document fonts (TH Sarabun New / PSK and the other national fonts, the Windows UPC
+    // families, Google's Thai families): the bundled Sarabun draws them.
+    const THAI: &[&str] = &["Sarabun"];
     let f = family.to_ascii_lowercase();
+    if is_thai_document_font(&f) {
+        return THAI;
+    }
     if is_persian_naskh(&f) {
         return NASKH;
     }
@@ -83,6 +89,68 @@ fn substitutes(family: &str) -> &'static [&'static str] {
         _ if f.contains("serif") && !f.contains("sans") => SERIF,
         _ => SANS,
     }
+}
+
+/// Thai document fonts that the bundled Sarabun stands in for when they aren't installed. `f` is
+/// lowercase. The Thai national fonts are named "TH …" (TH Sarabun New, TH SarabunPSK,
+/// TH SarabunIT๙, TH Niramit AS …); the Windows Thai families end in "UPC" or "New".
+fn is_thai_document_font(f: &str) -> bool {
+    const NAMES: &[&str] = &[
+        "sarabun",
+        "sarabun new",
+        "thsarabunnew",
+        "thsarabunpsk",
+        "angsana new",
+        "cordia new",
+        "browallia new",
+        "leelawadee",
+        "leelawadee ui",
+        "thonburi",
+        "ayuthaya",
+        "silom",
+        "sathu",
+        "krungthep",
+        "kanit",
+        "prompt",
+        "mitr",
+        "taviraj",
+        "trirong",
+        "pridi",
+        "chonburi",
+        "athiti",
+        "maitree",
+        "niramit",
+        "krub",
+        "k2d",
+        "kodchasan",
+        "bai jamjuree",
+        "chakra petch",
+        "charmonman",
+        "fahkwang",
+        "srisakdi",
+        "thasadith",
+    ];
+    // A family's static weights often have names of their own ("Sarabun Light", "Kanit SemiBold
+    // Italic"): match the family they belong to.
+    const WEIGHTS: &[&str] = &[
+        " thin",
+        " extralight",
+        " extra light",
+        " light",
+        " regular",
+        " medium",
+        " semibold",
+        " semi bold",
+        " bold",
+        " extrabold",
+        " extra bold",
+        " black",
+    ];
+    let mut base = f.strip_suffix(" italic").unwrap_or(f);
+    if let Some(b) = WEIGHTS.iter().find_map(|w| base.strip_suffix(w)) {
+        base = b;
+    }
+    NAMES.contains(&f) || NAMES.contains(&base) || f.starts_with("th ") || f.ends_with("upc") || f.contains("thai")
 }
 
 /// Naskh-style Persian/Arabic document fonts (the "B …" family names come from the common
@@ -283,6 +351,16 @@ mod tests {
     }
 
     #[test]
+    fn thai_families_named_by_weight_are_thai_document_fonts() {
+        for f in ["Sarabun Light", "Sarabun ExtraBold", "Kanit Light", "Prompt SemiBold", "Mitr Medium Italic", "Sarabun Thin Italic"] {
+            assert!(is_thai_document_font(&f.to_ascii_lowercase()), "{f}");
+        }
+        for f in ["Inter Light", "Arial Black", "Segoe UI Semibold", "Light"] {
+            assert!(!is_thai_document_font(&f.to_ascii_lowercase()), "{f}");
+        }
+    }
+
+    #[test]
     fn unknown_family_substitutes() {
         let r = resolve("Definitely Not A Font 123", false, false);
         assert!(r.substituted);
@@ -304,6 +382,25 @@ mod tests {
         }
         // Other serif families are unchanged.
         assert_eq!(substitutes("Georgia").first(), Some(&"Caladea"));
+    }
+
+    #[test]
+    fn thai_document_fonts_are_drawn_with_the_bundled_sarabun() {
+        for name in ["TH Sarabun New", "TH SarabunPSK", "TH SarabunIT๙", "TH Niramit AS", "Angsana New", "AngsanaUPC", "Cordia New", "Noto Sans Thai"]
+        {
+            assert_eq!(substitutes(name), &["Sarabun"], "{name}");
+        }
+        // Other families keep their substitutes ("Thai" only in a name like "Noto Sans Thai").
+        assert_eq!(substitutes("Georgia").first(), Some(&"Caladea"));
+        assert_ne!(substitutes("Tahoma"), &["Sarabun"]);
+        assert_ne!(substitutes("Theinhardt"), &["Sarabun"]);
+        // Not installed here, so the request resolves to Sarabun itself (bundled).
+        let r = resolve("TH Sarabun New Doc4Me Test", false, false);
+        assert!(r.substituted);
+        assert_eq!(r.face.family, "Sarabun");
+        let b = resolve("Sarabun", true, false);
+        assert!(!b.substituted && !b.synth_bold);
+        assert_eq!(b.face.style, "Bold");
     }
 
     #[test]

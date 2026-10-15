@@ -254,12 +254,12 @@ fn is_false(v: &bool) -> bool {
 
 impl Float {
     /// The rotation and flips, the angle normalised to `0..360` (a NaN angle is no rotation).
-    pub fn spin(&self) -> wordcraft_geom::Spin {
-        wordcraft_geom::Spin::new(self.rot, self.flip_h, self.flip_v)
+    pub fn spin(&self) -> doc4me_geom::Spin {
+        doc4me_geom::Spin::new(self.rot, self.flip_h, self.flip_v)
     }
     /// Set the rotation and flips (the angle normalised).
-    pub fn set_spin(&mut self, s: wordcraft_geom::Spin) {
-        self.rot = wordcraft_geom::normalize_degrees(s.deg);
+    pub fn set_spin(&mut self, s: doc4me_geom::Spin) {
+        self.rot = doc4me_geom::normalize_degrees(s.deg);
         self.flip_h = s.flip_h;
         self.flip_v = s.flip_v;
     }
@@ -267,7 +267,7 @@ impl Float {
     /// rotated object takes beyond its frame (zero unrotated; negative where the turned object
     /// is narrower than its frame, as a wide picture turned 90° is).
     pub fn spin_pad(&self, w: f32, h: f32) -> (f32, f32) {
-        let (w, h) = (wordcraft_geom::finite(w).clamp(0.0, 4000.0), wordcraft_geom::finite(h).clamp(0.0, 4000.0));
+        let (w, h) = (doc4me_geom::finite(w).clamp(0.0, 4000.0), doc4me_geom::finite(h).clamp(0.0, 4000.0));
         let (bw, bh) = self.spin().extent(w, h);
         ((bw - w) / 2.0, (bh - h) / 2.0)
     }
@@ -1195,6 +1195,21 @@ impl Paragraph {
             _ => self.prev_boundary(off),
         }
     }
+    /// The run of word characters ([`crate::bidi::is_word_char`]) around `off`: (start, end).
+    fn word_run(&self, off: usize) -> (usize, usize) {
+        let off = self.clamp(off);
+        let is_w = crate::bidi::is_word_char;
+        let before = self.text.get(..off).unwrap_or("");
+        let a = before.char_indices().rev().take_while(|(_, c)| is_w(*c)).last().map_or(off, |(i, _)| i);
+        let after = self.text.get(off..).unwrap_or("");
+        let b = off + after.char_indices().find(|(_, c)| !is_w(*c)).map_or(after.len(), |(i, _)| i);
+        (a, b)
+    }
+    /// Thai, Lao and Khmer word boundaries strictly inside `a..b` (a run of word characters),
+    /// found with a dictionary: those scripts put no spaces between words.
+    fn dictionary_bounds(&self, a: usize, b: usize) -> Vec<usize> {
+        self.text.get(a..b).map(|run| crate::cluster::dictionary_breaks(run).into_iter().map(|x| a + x).collect()).unwrap_or_default()
+    }
     /// Start of the word at or before `off` (Ctrl+Left).
     pub fn word_start(&self, off: usize) -> usize {
         let off = self.clamp(off);
@@ -1212,6 +1227,13 @@ impl Paragraph {
                 idx = i;
             }
         }
+        if seen_word {
+            // Thai and the other dictionary scripts: the start of the dictionary word before.
+            let (_, end) = self.word_run(idx);
+            if let Some(&b) = self.dictionary_bounds(idx, end).iter().rev().find(|&&b| b < off) {
+                return b;
+            }
+        }
         idx
     }
     /// End of the word after `off`, including trailing spaces (Ctrl+Right, like Word).
@@ -1221,6 +1243,14 @@ impl Paragraph {
         let it = after.char_indices().peekable();
         let mut end = self.text.len();
         let first_word = after.chars().next().is_some_and(|c| crate::bidi::is_word_char(c) && c != '\'');
+        if first_word {
+            // Thai and the other dictionary scripts: the end of the dictionary word, when it ends
+            // before the run of letters does.
+            let (a, b) = self.word_run(off);
+            if let Some(&w) = self.dictionary_bounds(a, b).iter().find(|&&w| w > off) {
+                return w;
+            }
+        }
         let mut in_space = false;
         for (i, c) in it {
             let w = crate::bidi::is_word_char(c);
@@ -1255,6 +1285,15 @@ impl Paragraph {
                 break;
             }
             b = off + i + c.len_utf8();
+        }
+        // Thai and the other dictionary scripts: just the dictionary word around `off`.
+        let bounds = self.dictionary_bounds(a, b);
+        if !bounds.is_empty() {
+            let s = bounds.iter().rev().find(|&&x| x <= off).copied().unwrap_or(a);
+            if let Some(&t) = bounds.iter().find(|&&x| x > off) {
+                return (s, t);
+            }
+            a = s;
         }
         // Word also selects the trailing spaces.
         let mut e = b;
@@ -1423,6 +1462,28 @@ mod tests {
         assert_eq!(p.sentence_at(3), (0, 21));
         assert_eq!(p.next_boundary(0), 1);
         assert_eq!(p.prev_boundary(0), 0);
+    }
+
+    #[test]
+    fn thai_words_come_from_a_dictionary() {
+        // "ภาษาไทย ง่าย": Thai puts no spaces between words, so a double-click selects one word
+        // (ภาษา or ไทย), not the whole run, and Ctrl+arrows stop between them.
+        let p = Paragraph::with_text("ภาษาไทย ง่าย", CharProps::default());
+        let thai = "ภาษา".len();
+        let run = "ภาษาไทย".len();
+        assert_eq!(p.word_at(3), (0, thai));
+        assert_eq!(p.word_at(thai + 3), (thai, run + 1), "the last word keeps its trailing space");
+        assert_eq!(p.word_end(0), thai);
+        assert_eq!(p.word_end(thai), run + 1);
+        assert_eq!(p.word_start(run), thai);
+        assert_eq!(p.word_start(thai), 0);
+        assert_eq!(p.word_start(p.len()), run + 1);
+        // A tone mark is never split from its consonant.
+        let (a, b) = p.word_at(run + 2);
+        assert!(p.text.is_char_boundary(a) && p.text.is_char_boundary(b));
+        // Latin text is unchanged.
+        let latin = Paragraph::with_text("plain words", CharProps::default());
+        assert_eq!(latin.word_at(2), (0, 6));
     }
 
     proptest::proptest! {

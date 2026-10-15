@@ -121,7 +121,7 @@ pub fn note_options(app: &mut WordApp, ui: &mut Ui, f: &mut NoteForm) -> bool {
         }
         ui.end_row();
         ui.label(tl!("Custom mark:"));
-        ui.add(egui::TextEdit::singleline(&mut f.mark).desired_width(60.0).char_limit(10));
+        ui.add(crate::widgets::text_line(&mut f.mark).desired_width(60.0).char_limit(10));
         ui.end_row();
         ui.label(tl!("Start at:"));
         if let Some(v) = f.start.get_mut(k) {
@@ -170,8 +170,8 @@ pub fn note_options(app: &mut WordApp, ui: &mut Ui, f: &mut NoteForm) -> bool {
 
 #[cfg(test)]
 mod tests {
+    use doc4me_engine::Session;
     use serde_json::json;
-    use wordcraft_engine::Session;
 
     use crate::dialogs::Dialog;
     use crate::{Services, WordApp};
@@ -180,7 +180,7 @@ mod tests {
     /// caret's section. Scripts get the options, never the dialog.
     #[test]
     fn footnote_and_endnote_opens_from_the_launcher_and_applies() {
-        let mut a = WordApp::new(Session::new(wordcraft_doc::Document::new()), Services::default());
+        let mut a = WordApp::new(Session::new(doc4me_doc::Document::new()), Services::default());
         assert_eq!(a.run("references.noteOptions", json!({})).unwrap(), json!({"pending": "noteOptions"}));
         let Some(Dialog::NoteOptions { form }) = &mut a.dialog else { panic!("dialog") };
         assert_eq!((form.pos[0].as_str(), form.fmt[1].as_str(), form.start[0]), ("pageBottom", "lowerRoman", 1));
@@ -191,7 +191,7 @@ mod tests {
         a.dialog = None;
         a.run("references.noteOptions", params).unwrap();
         let o = a.session.doc.note_options(&a.session.doc.last_section, false);
-        assert_eq!(o.pos, wordcraft_doc::section::NotePos::BeneathText);
+        assert_eq!(o.pos, doc4me_doc::section::NotePos::BeneathText);
         assert!(a.session.doc.settings.footnote_pr.is_empty(), "this section only");
         let got = a.execute("references.noteOptions", json!({})).unwrap();
         assert_eq!(got["footnote"]["numRestart"], "eachPage");

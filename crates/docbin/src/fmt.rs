@@ -1,8 +1,8 @@
 //! Sprms → model properties, and style-chain resolution.
 
-use wordcraft_doc::Rgb;
-use wordcraft_doc::props::{Align, CharProps, Highlight, LineSpacing, ParaProps, TextColor, Underline, VertAlign};
-use wordcraft_doc::styles::{Style, StyleKind, StyleSheet};
+use doc4me_doc::Rgb;
+use doc4me_doc::props::{Align, CharProps, Highlight, LineSpacing, ParaProps, TextColor, Underline, VertAlign};
+use doc4me_doc::styles::{Style, StyleKind, StyleSheet};
 
 use crate::sprm::{self, Prl, Toggle};
 

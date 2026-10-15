@@ -1,21 +1,21 @@
 [package]
-name = "wordcraft-ui-egui"
+name = "doc4me-ui-egui"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "WordCraft egui front end (Word-style ribbon UI); swappable: nothing below depends on it"
+description = "Doc4Me egui front end (Word-style ribbon UI); swappable: nothing below depends on it"
 
 [lints]
 workspace = true
 
 [dependencies]
-wordcraft-geom = { workspace = true }
-wordcraft-doc = { workspace = true }
-wordcraft-fonts = { workspace = true }
-wordcraft-layout = { workspace = true }
-wordcraft-render = { workspace = true }
-wordcraft-engine = { workspace = true }
-wordcraft-zotero = { workspace = true }
+doc4me-geom = { workspace = true }
+doc4me-doc = { workspace = true }
+doc4me-fonts = { workspace = true }
+doc4me-layout = { workspace = true }
+doc4me-render = { workspace = true }
+doc4me-engine = { workspace = true }
+doc4me-zotero = { workspace = true }
 egui = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }

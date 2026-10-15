@@ -1,6 +1,6 @@
 # Spanish (es) interface catalog. Columns, separated by a TAB:
 #   context <TAB> English source <TAB> translation
-#   context    empty (WordCraft uses no contexts yet)
+#   context    empty (Doc4Me uses no contexts yet)
 #   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
 #   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
 #              trailing "…" in one needs one in the other.
@@ -8,7 +8,7 @@
 #
 # Neutral Spanish, understood across Spain and Latin America. Commands are infinitives (Guardar,
 # Copiar); second-person text uses tú; labels use sentence case; product and format names stay as
-# they are (WordCraft, PDF, Markdown, MCP …).
+# they are (Doc4Me, PDF, Markdown, MCP …).
 # Clean room: every entry was written from the plain meaning of the English label in ordinary
 # computing vocabulary. No Microsoft Word (or other product) localisation, string table or
 # translated UI was consulted or copied; add entries the same way.
@@ -16,9 +16,9 @@
 	(no style)	(sin estilo)
 	(no suggestions)	(sin sugerencias)
 	1.5 Line Spacing	Interlineado 1,5
-	A free, open-source word processor written from scratch in Rust.\nPart of the Crafting Apps from the ArtCraft team.	Un procesador de textos gratuito y de código abierto, escrito desde cero en Rust.\nForma parte de las Crafting Apps del equipo de ArtCraft.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Un procesador de textos gratuito y de código abierto, escrito desde cero en Rust.\nBasado en WordCraft, del equipo de ArtCraft.
 	About	Acerca de
-	About WordCraft	Acerca de WordCraft
+	About Doc4Me	Acerca de Doc4Me
 	Accept	Aceptar
 	Accept All Changes	Aceptar todos los cambios
 	Accept This Change	Aceptar este cambio
@@ -269,7 +269,6 @@
 	Comment	Comentario
 	Comments	Comentarios
 	Comments Pane	Panel de comentarios
-	Community\nDiscord	Comunidad\nDiscord
 	Compact	Compacto
 	Compare	Comparar
 	Compress Pictures	Comprimir imágenes
@@ -283,7 +282,7 @@
 	Copy	Copiar
 	Copy Formatting	Copiar formato
 	Corrections	Correcciones
-	Couldn't make WordCraft the default: {error}	No se pudo hacer de WordCraft la aplicación predeterminada: {error}
+	Couldn't make Doc4Me the default: {error}	No se pudo hacer de Doc4Me la aplicación predeterminada: {error}
 	Count words in text boxes and notes	Contar las palabras de los cuadros de texto y las notas
 	Cover Page	Portada
 	Create	Crear
@@ -324,8 +323,6 @@
 	Different First Page	Primera página diferente
 	Different Odd & Even Pages	Páginas pares e impares diferentes
 	Direct formatting	Formato directo
-	Discord	Discord
-	Discord community	Comunidad de Discord
 	Display	Mostrar
 	Display for Review	Mostrar para revisión
 	Distribute Columns	Distribuir columnas
@@ -333,6 +330,7 @@
 	Distribute Rows	Distribuir filas
 	Distribute spacing	Distribuir espacio
 	Distributed	Distribuido
+	Thai Distributed	Distribuido tailandés
 	Do Not Show in TOC	No mostrar en la tabla de contenido
 	Document End	Fin del documento
 	Document Formatting	Formato del documento
@@ -378,7 +376,7 @@
 	Envelopes	Sobres
 	Eraser	Borrador
 	Even Page	Página par
-	Every command is available to scripts and AI agents: run `wordcraft-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Todos los comandos están disponibles para scripts y agentes de IA: ejecuta `wordcraft-cli mcp` para un servidor MCP, o inicia la aplicación con `--control <puerto>` para el canal de control JSON.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Todos los comandos están disponibles para scripts y agentes de IA: ejecuta `doc4me-cli mcp` para un servidor MCP, o inicia la aplicación con `--control <puerto>` para el canal de control JSON.
 	Export	Exportar
 	Export PDF	Exportar PDF
 	Export Page as PNG	Exportar página como PNG
@@ -459,7 +457,7 @@
 	Immersive	Inmersivo
 	Immersive Reader	Lector inmersivo
 	Immersive\nReader	Lector\ninmersivo
-	In Default apps, choose WordCraft for the document types you want it to open.	En Aplicaciones predeterminadas, elige WordCraft para los tipos de documento que quieras que abra.
+	In Default apps, choose Doc4Me for the document types you want it to open.	En Aplicaciones predeterminadas, elige Doc4Me para los tipos de documento que quieras que abra.
 	Increase Font Size	Aumentar tamaño de fuente
 	Increase Indent	Aumentar sangría
 	Indent	Sangría
@@ -501,8 +499,6 @@
 	Inspect Styles at Selection	Inspeccionar estilos de la selección
 	Interface language:	Idioma de la interfaz:
 	Italic	Cursiva
-	Join the ArtCraft community on Discord	Únete a la comunidad de ArtCraft en Discord
-	Join us on Discord: discord.gg/artcraft	Únete a nosotros en Discord: discord.gg/artcraft
 	Justify	Justificar
 	Keep Lines Together	Mantener líneas juntas
 	Keep Text Only	Mantener solo el texto
@@ -546,7 +542,7 @@
 	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT o Apache-2.0. Copyright (c) 2026 ArtCraft Team y los colaboradores de WordCraft.
 	Macros	Macros
 	Mailings	Correspondencia
-	Make WordCraft the default for Word documents…	Hacer de WordCraft la aplicación predeterminada para documentos de Word…
+	Make Doc4Me the default for Word documents…	Hacer de Doc4Me la aplicación predeterminada para documentos de Word…
 	Manage Sources	Administrar fuentes
 	Many pages	Varias páginas
 	Margins	Márgenes
@@ -619,8 +615,8 @@
 	One Page	Una página
 	Open	Abrir
 	OpenDocument Text (*.odt)	Texto de OpenDocument (*.odt)
-	Opens .docx, .doc, .rtf and .odt files and Word templates with WordCraft from now on.	A partir de ahora, los archivos .docx, .doc, .rtf y .odt y las plantillas de Word se abren con WordCraft.
-	Opens Settings › Default apps, where you choose WordCraft for .docx and the other document types.	Abre Configuración › Aplicaciones predeterminadas, donde eliges WordCraft para .docx y los demás tipos de documento.
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	A partir de ahora, los archivos .docx, .doc, .rtf y .odt y las plantillas de Word se abren con Doc4Me.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Abre Configuración › Aplicaciones predeterminadas, donde eliges Doc4Me para .docx y los demás tipos de documento.
 	Optional Hyphen	Guion opcional
 	Copyright Sign	Signo de copyright
 	Ellipsis	Puntos suspensivos
@@ -831,7 +827,6 @@
 	Animation	Animación
 	Animate the caret (it glides and fades)	Animar el cursor (se desliza y se desvanece)
 	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Activado: el cursor se desliza hasta su nueva posición al escribir o usar las flechas, y su parpadeo se desvanece. Desactivado: salta y parpadea de golpe.
-	Show the community button in the title bar	Mostrar el botón de comunidad en la barra de título
 	Show/Hide ¶	Mostrar u ocultar ¶
 	Show\nComments	Mostrar\ncomentarios
 	Shrink Font 1 Point	Reducir fuente 1 punto
@@ -847,7 +842,7 @@
 	Small caps	Versalitas
 	SmartArt	SmartArt
 	Sort	Ordenar
-	Source code: github.com/storytold/wordcraft	Código fuente: github.com/storytold/wordcraft
+	Source code: github.com/chatraweechai/docscaft	Código fuente: github.com/chatraweechai/docscaft
 	Space	Espacio
 	Space before/after:	Espacio antes y después:
 	Spacing	Espaciado
@@ -930,7 +925,7 @@
 	Tight	Ajustado
 	TOC Heading	Título de tabla de contenido
 	TOC {n}	Tabla de contenido {n}
-	To open Word documents with WordCraft by default: select one in Finder, choose File › Get Info, pick WordCraft under Open with, then click Change All.	Para abrir los documentos de Word con WordCraft de forma predeterminada: selecciona uno en el Finder, elige Archivo › Obtener información, selecciona WordCraft en «Abrir con» y haz clic en «Cambiar todo».
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Para abrir los documentos de Word con Doc4Me de forma predeterminada: selecciona uno en el Finder, elige Archivo › Obtener información, selecciona Doc4Me en «Abrir con» y haz clic en «Cambiar todo».
 	Top Border	Borde superior
 	Top Margin	Margen superior
 	Top of Page	Parte superior de la página
@@ -990,8 +985,8 @@
 	Word document (*.docx)	Documento de Word (*.docx)
 	Word XML Document (*.xml)	Documento XML de Word (*.xml)
 	WordArt	WordArt
-	WordCraft	WordCraft
-	WordCraft is now the default app for Word documents.	WordCraft es ahora la aplicación predeterminada para los documentos de Word.
+	Doc4Me	Doc4Me
+	Doc4Me is now the default app for Word documents.	Doc4Me es ahora la aplicación predeterminada para los documentos de Word.
 	Words	Palabras
 	Words only	Solo palabras
 	Wrap Text	Ajustar texto
@@ -1060,7 +1055,7 @@
 	Stopped	Detenido
 	Speed	Velocidad
 	Normal speed	Velocidad normal
-	AutoSave documents you have saved in WordCraft	Autoguardar los documentos que hayas guardado en WordCraft
+	AutoSave documents you have saved in Doc4Me	Autoguardar los documentos que hayas guardado en Doc4Me
 	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Error de autoguardado: {error}. Guarda el documento para volver a activar el autoguardado.
 	Couldn't download {name}: {error}	No se pudo descargar {name}: {error}
 	Do you want to save changes to {name}?	¿Quieres guardar los cambios en {name}?
@@ -1230,7 +1225,6 @@
 	Insert a new equation (Alt+=)	Insertar una ecuación nueva (Alt+=)
 	Leave the equation (Esc)	Salir de la ecuación (Esc)
 	Preview	Vista previa
-	getartcraft.com/apps/wordcraft	getartcraft.com/apps/wordcraft
 	Draw Ink	Dibujar tinta
 	Erase Ink	Borrar tinta
 	Hide Ink	Ocultar tinta
@@ -1369,7 +1363,7 @@
 	The document will be saved with a password. Save it to protect it.	El documento se guardará con contraseña. Guárdalo para protegerlo.
 	The password is removed. Save the document to keep the change.	Se quitó la contraseña. Guarda el documento para conservar el cambio.
 	The passwords don't match.	Las contraseñas no coinciden.
-	Keep the password somewhere safe: without it nobody, WordCraft included, can open the document. Leave both boxes empty to remove the password.	Guarda la contraseña en un lugar seguro: sin ella nadie, ni siquiera WordCraft, puede abrir el documento. Deja ambos cuadros vacíos para quitar la contraseña.
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Guarda la contraseña en un lugar seguro: sin ella nadie, ni siquiera Doc4Me, puede abrir el documento. Deja ambos cuadros vacíos para quitar la contraseña.
 
 # Interface text routed through translation (#313)
 	Align Top Left	Alinear arriba a la izquierda
@@ -1757,7 +1751,7 @@
 	Word document	Documento de Word
 	All files	Todos los archivos
 	Recipient lists	Listas de destinatarios
-	The system file dialog isn't available, so WordCraft shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	El cuadro de diálogo de archivos del sistema no está disponible, así que WordCraft muestra el suyo. Para usar el del sistema, instala un portal selector de archivos (como xdg-desktop-portal-gtk) o zenity.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	El cuadro de diálogo de archivos del sistema no está disponible, así que Doc4Me muestra el suyo. Para usar el del sistema, instala un portal selector de archivos (como xdg-desktop-portal-gtk) o zenity.
 	Up one level	Subir un nivel
 	Home folder	Carpeta personal
 	{name} wasn't found.	No se encontró {name}.
@@ -1765,8 +1759,8 @@
 	This folder can't be read: {error}	No se puede leer esta carpeta: {error}
 	Showing the first {count} items.	Se muestran los primeros {count} elementos.
 	File name:	Nombre de archivo:
-	Browse in WordCraft…	Examinar en WordCraft…
-	Open a file with WordCraft's own browser when the system file dialog doesn't appear.	Abre un archivo con el explorador propio de WordCraft cuando no aparece el cuadro de diálogo de archivos del sistema.
+	Browse in Doc4Me…	Examinar en Doc4Me…
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Abre un archivo con el explorador propio de Doc4Me cuando no aparece el cuadro de diálogo de archivos del sistema.
 	Hide White Space	Ocultar espacio en blanco
 	All pages	Todas las páginas
 	Current page	Página actual

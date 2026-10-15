@@ -3,7 +3,7 @@
 
 use std::io::{Read, Write};
 
-use wordcraft_doc::props::TextDirection;
+use doc4me_doc::props::TextDirection;
 
 fn docx(body: &str) -> Vec<u8> {
     let root = r#"<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>"#;
@@ -35,16 +35,16 @@ fn section_text_direction_round_trips_in_schema_order() {
         sect("btLr"),
         sect("diagonal")
     );
-    let d = wordcraft_docx::read(&docx(&body)).unwrap();
+    let d = doc4me_docx::read(&docx(&body)).unwrap();
     let dirs: Vec<TextDirection> = d.sections().iter().map(|(_, s)| s.text_direction).collect();
     assert_eq!(dirs, vec![TextDirection::Down, TextDirection::Up, TextDirection::Horizontal]);
-    let out = wordcraft_docx::write(&d).unwrap();
+    let out = doc4me_docx::write(&d).unwrap();
     let xml = document_xml(&out);
     // After w:titlePg and before w:bidi (CT_SectPr's sequence); a horizontal section writes none.
     assert!(xml.contains(r#"<w:titlePg/><w:textDirection w:val="tbRl"/><w:bidi/>"#), "{xml}");
     assert!(xml.contains(r#"<w:textDirection w:val="btLr"/>"#));
     assert_eq!(xml.matches("w:textDirection").count(), 2);
-    let back = wordcraft_docx::read(&out).unwrap();
+    let back = doc4me_docx::read(&out).unwrap();
     let again: Vec<TextDirection> = back.sections().iter().map(|(_, s)| s.text_direction).collect();
     assert_eq!(again, dirs);
 }

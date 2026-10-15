@@ -1,4 +1,4 @@
-//! WordCraft engine: the editing session and its commands.
+//! Doc4Me engine: the editing session and its commands.
 //!
 //! **Everything is a command.** Each user-visible action is a [`CommandSpec`] with a stable id
 //! (`format.bold`, `insert.table`), a label, the ribbon/menu location, a default shortcut, a
@@ -23,14 +23,14 @@ use std::collections::HashMap;
 
 use serde_json::Value;
 
+pub use doc4me_doc as doc;
+pub use doc4me_layout as layout;
+pub use doc4me_proof as proof;
+pub use doc4me_render as render;
 pub use io::Password;
 pub use keymap::KeyMap;
 pub use ribbon::RibbonLayout;
 pub use session::{ColumnBlock, EditSnapshot, FindState, MathEdit, Prefs, Selection, Session, ViewState, set_system_locale};
-pub use wordcraft_doc as doc;
-pub use wordcraft_layout as layout;
-pub use wordcraft_proof as proof;
-pub use wordcraft_render as render;
 
 #[derive(Debug, thiserror::Error, Clone, PartialEq)]
 pub enum CmdError {
@@ -44,8 +44,8 @@ pub enum CmdError {
     Failed(String),
 }
 
-impl From<wordcraft_doc::DocError> for CmdError {
-    fn from(e: wordcraft_doc::DocError) -> Self {
+impl From<doc4me_doc::DocError> for CmdError {
+    fn from(e: doc4me_doc::DocError) -> Self {
         CmdError::Failed(e.to_string())
     }
 }

@@ -10,10 +10,10 @@
 use std::collections::{HashMap, HashSet};
 use std::path::{Path, PathBuf};
 
+use doc4me_doc::Document;
+use doc4me_doc::numbering::{AbstractNum, Num};
+use doc4me_doc::styles::{Style, StyleKind};
 use serde_json::{Value, json};
-use wordcraft_doc::Document;
-use wordcraft_doc::numbering::{AbstractNum, Num};
-use wordcraft_doc::styles::{Style, StyleKind};
 
 use super::para::touch_all;
 use crate::{CmdError, CmdResult, CommandSpec, Session, p};
@@ -377,8 +377,8 @@ fn import_num(doc: &mut Document, src: &Document, num: u32, map: &HashMap<String
 #[cfg(test)]
 mod tests {
     use super::*;
-    use wordcraft_doc::numbering::ListKind;
-    use wordcraft_doc::props::{CharProps, NumRef};
+    use doc4me_doc::numbering::ListKind;
+    use doc4me_doc::props::{CharProps, NumRef};
 
     /// A template built in code: a changed Heading 1, a custom "Callout" based on a custom
     /// "Box" (missing in the document) and a numbered "Steps" style.
@@ -407,14 +407,14 @@ mod tests {
             id: "Steps".into(),
             name: "Steps".into(),
             kind: StyleKind::Paragraph,
-            para: wordcraft_doc::props::ParaProps { numbering: Some(NumRef { num, level: 0 }), ..Default::default() },
+            para: doc4me_doc::props::ParaProps { numbering: Some(NumRef { num, level: 0 }), ..Default::default() },
             ..Default::default()
         });
         t
     }
 
     fn save(name: &str, doc: &Document) -> PathBuf {
-        let dir = std::env::temp_dir().join(format!("wordcraft-templates-{name}-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("doc4me-templates-{name}-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
         std::fs::create_dir_all(&dir).unwrap();
         let path = dir.join("Report.dotx");

@@ -1,6 +1,6 @@
 # Polish (pl) interface catalog. Columns, separated by a TAB:
 #   context <TAB> English source <TAB> translation
-#   context    empty (WordCraft uses no contexts yet)
+#   context    empty (Doc4Me uses no contexts yet)
 #   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
 #   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
 #              trailing "…" in one needs one in the other.
@@ -9,17 +9,17 @@
 # Clean room: translated from the meaning of the English labels in this repository into ordinary
 # Polish computing vocabulary. No Microsoft Word (or other product) localisation, string table or
 # translated UI was consulted or copied; add entries the same way.
-# Product, format and technology names (WordCraft, PDF, Markdown, MCP …) stay as they are.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay as they are.
 # Conventions: commands are imperatives (Zapisz, Wstaw), tabs and groups are nouns; counts use
 # a label and a colon ("Słowa: 21") so every number reads grammatically; quotes are „…”.
-# Author: Konrad Witkowski with Claude (AI agent); licensed MIT OR Apache-2.0, like WordCraft.
+# Author: Konrad Witkowski with Claude (AI agent); licensed MIT OR Apache-2.0, like Doc4Me.
 # Not yet reviewed by a second native speaker.
 
 	(no suggestions)	(brak propozycji)
 	1.5 Line Spacing	Interlinia 1,5
-	A free, open-source word processor written from scratch in Rust.\nPart of the Crafting Apps from the ArtCraft team.	Darmowy edytor tekstu o otwartym kodzie, napisany od podstaw w języku Rust.\nCzęść rodziny Crafting Apps zespołu ArtCraft.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Darmowy edytor tekstu o otwartym kodzie, napisany od podstaw w języku Rust.\nOparty na programie WordCraft zespołu ArtCraft.
 	About	Informacje
-	About WordCraft	O programie WordCraft
+	About Doc4Me	O programie Doc4Me
 	Accept	Zaakceptuj
 	Accept All Changes	Zaakceptuj wszystkie zmiany
 	Accept This Change	Zaakceptuj tę zmianę
@@ -146,7 +146,6 @@
 	Comment	Komentarz
 	Comments	Komentarze
 	Comments Pane	Okienko komentarzy
-	Community\nDiscord	Społeczność\nDiscord
 	Compact	Zwarte
 	Compare	Porównaj
 	Compress Pictures	Kompresuj obrazy
@@ -198,13 +197,12 @@
 	Different First Page	Inna pierwsza strona
 	Different Odd & Even Pages	Inne strony parzyste i nieparzyste
 	Direct formatting	Formatowanie bezpośrednie
-	Discord	Discord
-	Discord community	Społeczność na Discordzie
 	Display	Wyświetlanie
 	Display for Review	Wyświetlanie do recenzji
 	Distribute Columns	Rozłóż kolumny
 	Distribute Rows	Rozłóż wiersze
 	Distributed	Rozłożony równomiernie
+	Thai Distributed	Rozłożony równomiernie (tajski)
 	Do Not Show in TOC	Nie pokazuj w spisie treści
 	Document End	Koniec dokumentu
 	Document Formatting	Formatowanie dokumentu
@@ -245,7 +243,7 @@
 	Envelopes	Koperty
 	Eraser	Gumka
 	Even Page	Strona parzysta
-	Every command is available to scripts and AI agents: run `wordcraft-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Każde polecenie jest dostępne dla skryptów i agentów AI: uruchom `wordcraft-cli mcp`, aby włączyć serwer MCP, albo uruchom aplikację z opcją `--control <port>`, aby korzystać z kanału sterowania JSON.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Każde polecenie jest dostępne dla skryptów i agentów AI: uruchom `doc4me-cli mcp`, aby włączyć serwer MCP, albo uruchom aplikację z opcją `--control <port>`, aby korzystać z kanału sterowania JSON.
 	Export	Eksportuj
 	Export PDF	Eksportuj do PDF
 	Export Page as PNG	Eksportuj stronę jako PNG
@@ -359,8 +357,6 @@
 	Inspect Styles at Selection	Przejrzyj style zaznaczenia
 	Interface language:	Język interfejsu:
 	Italic	Kursywa
-	Join the ArtCraft community on Discord	Dołącz do społeczności ArtCraft na Discordzie
-	Join us on Discord: discord.gg/artcraft	Dołącz do nas na Discordzie: discord.gg/artcraft
 	Justify	Wyjustuj
 	Keep Lines Together	Zachowaj wiersze razem
 	Keep Text Only	Zachowaj tylko tekst
@@ -662,7 +658,6 @@
 	Show Notes	Pokaż przypisy
 	Show all formatting marks	Pokaż wszystkie znaki formatowania
 	Show rulers	Pokaż linijki
-	Show the community button in the title bar	Pokaż przycisk społeczności na pasku tytułu
 	Show/Hide ¶	Pokaż/ukryj ¶
 	Show\nComments	Pokaż\nkomentarze
 	Shrink Font 1 Point	Pomniejsz czcionkę o 1 punkt
@@ -677,7 +672,7 @@
 	Small caps	Kapitaliki
 	SmartArt	SmartArt
 	Sort	Sortuj
-	Source code: github.com/storytold/wordcraft	Kod źródłowy: github.com/storytold/wordcraft
+	Source code: github.com/chatraweechai/docscaft	Kod źródłowy: github.com/chatraweechai/docscaft
 	Space before/after:	Odstęp przed/po:
 	Spacing	Odstępy
 	Spacing (pt):	Odstępy (pt):
@@ -804,7 +799,7 @@
 	Word Right	Słowo w prawo
 	Word document (*.docx)	Dokument Word (*.docx)
 	WordArt	WordArt
-	WordCraft	WordCraft
+	Doc4Me	Doc4Me
 	Words	Słowa
 	Words only	Tylko wyrazy
 	Wrap Text	Zawijaj tekst
@@ -872,7 +867,7 @@
 	Stopped	Zatrzymano
 	Speed	Szybkość
 	Normal speed	Normalna szybkość
-	AutoSave documents you have saved in WordCraft	Zapisuj automatycznie dokumenty zapisane już w programie WordCraft
+	AutoSave documents you have saved in Doc4Me	Zapisuj automatycznie dokumenty zapisane już w programie Doc4Me
 	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Autozapis nie powiódł się: {error}. Zapisz dokument, aby ponownie włączyć autozapis.
 	Couldn't download {name}: {error}	Nie udało się pobrać pliku {name}: {error}
 	Do you want to save changes to {name}?	Czy zapisać zmiany w dokumencie {name}?
@@ -1039,7 +1034,6 @@
 	Insert a new equation (Alt+=)	Wstaw nowe równanie (Alt+=)
 	Leave the equation (Esc)	Opuść równanie (Esc)
 	Preview	Podgląd
-	getartcraft.com/apps/wordcraft	getartcraft.com/apps/wordcraft
 	English (United Kingdom)	Angielski (Wielka Brytania)
 	Polish	Polski
 	Do Not Check Spelling or Grammar	Nie sprawdzaj pisowni ani gramatyki
@@ -1094,7 +1088,7 @@
 	Glow Colors	Kolory poświaty
 	Hide from style lists	Ukryj na listach stylów
 	Indents and Spacing	Wcięcia i odstępy
-	Keep the password somewhere safe: without it nobody, WordCraft included, can open the document. Leave both boxes empty to remove the password.	Przechowuj hasło w bezpiecznym miejscu: bez niego nikt, również WordCraft, nie otworzy dokumentu. Pozostaw oba pola puste, aby usunąć hasło.
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Przechowuj hasło w bezpiecznym miejscu: bez niego nikt, również Doc4Me, nie otworzy dokumentu. Pozostaw oba pola puste, aby usunąć hasło.
 	Line breaking	Łamanie wierszy
 	Linked style (paragraph and character)	Styl połączony (akapitowy i znakowy)
 	Manage Styles	Zarządzaj stylami
@@ -1717,7 +1711,7 @@
 	Beginning of Word	Początek wyrazu
 	Blue:	Niebieski:
 	Border lines	Linie obramowania
-	Browse in WordCraft…	Przeglądaj w programie WordCraft…
+	Browse in Doc4Me…	Przeglądaj w programie Doc4Me…
 	Building Block Gallery Content Control	Formant zawartości galerii bloków konstrukcyjnych
 	Can't be deleted	Nie można usunąć
 	Capitalize first letter of sentences	Zaczynaj zdania wielką literą
@@ -1891,7 +1885,7 @@
 	Only comments can be added, except in regions marked editable.	Można dodawać tylko komentarze, z wyjątkiem obszarów oznaczonych jako edytowalne.
 	Only form fields can be filled in.	Można wypełniać tylko pola formularza.
 	Only the allowed styles can be applied.	Można stosować tylko dozwolone style.
-	Open a file with WordCraft's own browser when the system file dialog doesn't appear.	Otwórz plik we własnej przeglądarce plików programu WordCraft, gdy systemowe okno wyboru pliku się nie pojawia.
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Otwórz plik we własnej przeglądarce plików programu Doc4Me, gdy systemowe okno wyboru pliku się nie pojawia.
 	Ordinals (1st) as superscript	Liczebniki porządkowe (1st) jako indeks górny
 	Organizer	Organizator
 	Organizer…	Organizator…
@@ -2015,7 +2009,7 @@
 	The document is read only, except for regions marked editable.	Dokument jest tylko do odczytu, z wyjątkiem obszarów oznaczonych jako edytowalne.
 	The password is optional; without it anyone can stop the protection.	Hasło jest opcjonalne; bez niego każdy może wyłączyć ochronę.
 	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Drukarkę, druk dwustronny i liczbę stron na arkuszu wybiera się w tym oknie.
-	The system file dialog isn't available, so WordCraft shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Systemowe okno wyboru pliku jest niedostępne, więc WordCraft pokazuje własne. Aby korzystać z okna systemowego, zainstaluj portal wyboru plików (np. xdg-desktop-portal-gtk) lub zenity.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Systemowe okno wyboru pliku jest niedostępne, więc Doc4Me pokazuje własne. Aby korzystać z okna systemowego, zainstaluj portal wyboru plików (np. xdg-desktop-portal-gtk) lub zenity.
 	These marks show even when Show/Hide ¶ is off.	Te znaki są widoczne nawet przy wyłączonym poleceniu Pokaż wszystko ¶.
 	This document	Ten dokument
 	This folder can't be read: {error}	Nie można odczytać tego folderu: {error}
@@ -2053,13 +2047,13 @@
 	{name} already exists. Choose Save again to replace it.	Plik {name} już istnieje. Wybierz ponownie Zapisz, aby go zastąpić.
 	{name} wasn't found.	Nie znaleziono: {name}.
 	“{text}” ({row}, {series}) isn't a number.	„{text}” ({row}, {series}) nie jest liczbą.
-	Couldn't make WordCraft the default: {error}	Nie udało się ustawić WordCraft jako domyślnego: {error}
-	In Default apps, choose WordCraft for the document types you want it to open.	W Aplikacjach domyślnych wybierz WordCraft dla typów dokumentów, które ma otwierać.
-	Make WordCraft the default for Word documents…	Ustaw WordCraft jako domyślny dla dokumentów Word…
-	Opens .docx, .doc, .rtf and .odt files and Word templates with WordCraft from now on.	Od teraz pliki .docx, .doc, .rtf i .odt oraz szablony Word otwierają się w WordCraft.
-	Opens Settings › Default apps, where you choose WordCraft for .docx and the other document types.	Otwiera Ustawienia › Aplikacje domyślne, gdzie wybierasz WordCraft dla .docx i innych typów dokumentów.
-	To open Word documents with WordCraft by default: select one in Finder, choose File › Get Info, pick WordCraft under Open with, then click Change All.	Aby otwierać dokumenty Word domyślnie w WordCraft: zaznacz jeden w Finderze, wybierz Plik › Pokaż info, wybierz WordCraft w „Otwórz za pomocą”, a następnie kliknij „Zmień wszystkie”.
-	WordCraft is now the default app for Word documents.	WordCraft jest teraz domyślną aplikacją dla dokumentów Word.
+	Couldn't make Doc4Me the default: {error}	Nie udało się ustawić Doc4Me jako domyślnego: {error}
+	In Default apps, choose Doc4Me for the document types you want it to open.	W Aplikacjach domyślnych wybierz Doc4Me dla typów dokumentów, które ma otwierać.
+	Make Doc4Me the default for Word documents…	Ustaw Doc4Me jako domyślny dla dokumentów Word…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Od teraz pliki .docx, .doc, .rtf i .odt oraz szablony Word otwierają się w Doc4Me.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Otwiera Ustawienia › Aplikacje domyślne, gdzie wybierasz Doc4Me dla .docx i innych typów dokumentów.
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Aby otwierać dokumenty Word domyślnie w Doc4Me: zaznacz jeden w Finderze, wybierz Plik › Pokaż info, wybierz Doc4Me w „Otwórz za pomocą”, a następnie kliknij „Zmień wszystkie”.
+	Doc4Me is now the default app for Word documents.	Doc4Me jest teraz domyślną aplikacją dla dokumentów Word.
 	Numerals:	Cyfry:
 	Numerals	Cyfry
 	Hindi	Hindi

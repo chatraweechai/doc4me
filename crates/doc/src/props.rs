@@ -427,6 +427,10 @@ pub enum Align {
     Right,
     Justify,
     Distribute,
+    /// Thai Distributed (`w:jc="thaiDistribute"`): justified like [`Align::Justify`] (the last
+    /// line isn't stretched), with the extra room spread between characters as Thai text has few
+    /// spaces, as in [`Align::Distribute`].
+    ThaiDistribute,
 }
 
 impl Align {

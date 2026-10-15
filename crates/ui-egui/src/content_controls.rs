@@ -2,11 +2,11 @@
 //! control in Design Mode), check boxes that tick on click, and the list or calendar of a
 //! drop-down, combo box or date picker. Everything ends in a `developer.*` command.
 
+use doc4me_doc::Pos;
+use doc4me_doc::control::{ControlKind, ControlRange};
+use doc4me_layout::DocLayout;
 use egui::{Align2, Rect, Stroke, Ui, pos2, vec2};
 use serde_json::json;
-use wordcraft_doc::Pos;
-use wordcraft_doc::control::{ControlKind, ControlRange};
-use wordcraft_layout::DocLayout;
 
 use crate::WordApp;
 use crate::theme::{Tokens, regular};
@@ -34,7 +34,7 @@ struct Popup {
     month: (i64, u32),
 }
 
-fn screen(pr: Rect, scale: f32, r: wordcraft_geom::Rect) -> Rect {
+fn screen(pr: Rect, scale: f32, r: doc4me_geom::Rect) -> Rect {
     Rect::from_min_size(pos2(pr.min.x + r.x * scale, pr.min.y + r.y * scale), vec2(r.w * scale, r.h * scale))
 }
 
@@ -142,13 +142,13 @@ pub fn clicks(app: &mut WordApp, resp: &egui::Response) {
 fn date_of(app: &WordApp, at: &Pos) -> Option<(i64, u32, u32)> {
     let r = app.session.doc.control_at(at)?;
     match &r.control.kind {
-        ControlKind::Date { full_date, .. } => wordcraft_engine::cmd::controls::parse_date(full_date),
+        ControlKind::Date { full_date, .. } => doc4me_engine::cmd::controls::parse_date(full_date),
         _ => None,
     }
 }
 
 fn today() -> (i64, u32, u32) {
-    let (y, m, d) = wordcraft_engine::cmd::civil_from_days((wordcraft_engine::cmd::now_unix() / 86_400) as i64);
+    let (y, m, d) = doc4me_engine::cmd::civil_from_days((doc4me_engine::cmd::now_unix() / 86_400) as i64);
     (y, m, d)
 }
 
@@ -219,10 +219,10 @@ fn calendar(ui: &mut Ui, t: &Tokens, month: &mut (i64, u32)) -> Option<u32> {
         }
     });
     let (y, m) = (y.clamp(1, 9999), m.clamp(1, 12));
-    let first = wordcraft_engine::cmd::controls::days_from_civil(y, m, 1);
+    let first = doc4me_engine::cmd::controls::days_from_civil(y, m, 1);
     // 1970-01-01 was a Thursday: Monday-first column of the 1st.
     let lead = (first + 3).rem_euclid(7) as u32;
-    let days = wordcraft_engine::cmd::controls::days_in_month(y, m);
+    let days = doc4me_engine::cmd::controls::days_in_month(y, m);
     egui::Grid::new("cc_calendar").spacing(vec2(2.0, 2.0)).show(ui, |ui| {
         for cell in 0..(lead + days) {
             if cell < lead {

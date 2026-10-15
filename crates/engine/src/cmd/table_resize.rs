@@ -5,11 +5,11 @@
 //! made the drawn columns differ from the stored grid. The app sends each finished drag here,
 //! so every drag is one undo step.
 
+use doc4me_doc::props::HeightRule;
+use doc4me_doc::{Document, Path, StoryRef, Table};
+use doc4me_geom::Rect;
+use doc4me_layout::{DocLayout, Placed};
 use serde_json::Value;
-use wordcraft_doc::props::HeightRule;
-use wordcraft_doc::{Document, Path, StoryRef, Table};
-use wordcraft_geom::Rect;
-use wordcraft_layout::{DocLayout, Placed};
 
 use super::sel_result;
 use crate::{CmdError, CmdResult, CommandSpec, Session, p};
@@ -169,14 +169,14 @@ fn cell_boxes(l: &DocLayout, page: usize) -> Vec<CellBox> {
 /// The drawn geometry of one table on a page, from its cells' boxes.
 fn geometry(t: &Table, boxes: &[&CellBox]) -> Option<(Vec<f32>, Vec<DrawnRow>)> {
     let n = t.cols();
-    if n == 0 || n > wordcraft_doc::table::MAX_COLS || boxes.is_empty() {
+    if n == 0 || n > doc4me_doc::table::MAX_COLS || boxes.is_empty() {
         return None;
     }
     let mut lines: Vec<Option<f32>> = vec![None; n + 1];
     let mut rows: Vec<DrawnRow> = Vec::new();
     for b in boxes {
         let g = t.grid_col(b.row, b.cell);
-        let span = t.rows.get(b.row).and_then(|r| r.cells.get(b.cell)).map_or(1, wordcraft_doc::Cell::span);
+        let span = t.rows.get(b.row).and_then(|r| r.cells.get(b.cell)).map_or(1, doc4me_doc::Cell::span);
         let end = g.saturating_add(span).min(n);
         if let Some(x) = lines.get_mut(g) {
             x.get_or_insert(b.rect.x);
@@ -421,7 +421,7 @@ mod tests {
     }
 
     fn table_session(rows: usize, cols: usize) -> Session {
-        let mut s = Session::new(wordcraft_doc::Document::new());
+        let mut s = Session::new(doc4me_doc::Document::new());
         s.run("insert.table", &json!({"rows": rows, "cols": cols})).unwrap();
         s
     }

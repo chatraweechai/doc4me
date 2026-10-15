@@ -6,7 +6,7 @@
 //! path simplified with Ramer–Douglas–Peucker, near-straight and crowded corners merged) when
 //! that polygon stays close to every point. Anything else (scribbles, curves, letters) stays ink.
 
-use wordcraft_doc::freeform::MAX_POINTS;
+use doc4me_doc::freeform::MAX_POINTS;
 
 /// A shape recognised in a stroke, in the stroke's own coordinates.
 #[derive(Clone, Debug, PartialEq)]

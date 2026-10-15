@@ -1,8 +1,8 @@
 use std::sync::Arc;
 
-use wordcraft_doc::para::InlineObject;
-use wordcraft_doc::props::NumRef;
-use wordcraft_doc::{Block, CharProps, Document, ListKind, Paragraph, Table, Watermark, para_block};
+use doc4me_doc::para::InlineObject;
+use doc4me_doc::props::NumRef;
+use doc4me_doc::{Block, CharProps, Document, ListKind, Paragraph, Table, Watermark, para_block};
 
 use crate::*;
 
@@ -26,7 +26,7 @@ fn sample() -> Document {
     let n = h1.len();
     h1.insert_object(n, InlineObject::BookmarkStart { name: "intro".into() }, &CharProps::default()).unwrap();
     b.push(para_block(h1));
-    let mut p = Paragraph::with_text("Hello WordCraft, ", CharProps::default());
+    let mut p = Paragraph::with_text("Hello Doc4Me, ", CharProps::default());
     let n = p.len();
     p.insert_text(n, "bold words", &CharProps { bold: Some(true), ..Default::default() }).unwrap();
     let n = p.len();
@@ -69,7 +69,7 @@ fn sample() -> Document {
     b.push(para_block(big));
     b.push(para_block(Paragraph::with_text(
         "Dotted and wavy",
-        CharProps { underline: Some(wordcraft_doc::props::Underline::Wave), ..Default::default() },
+        CharProps { underline: Some(doc4me_doc::props::Underline::Wave), ..Default::default() },
     )));
     d.body = b;
     d.settings.watermark = Some(Watermark::default());
@@ -136,22 +136,12 @@ fn exports_pages_text_and_structure() {
     assert_eq!(pdf.pages().len(), lay.pages.len());
     let text = extract_text(&bytes);
     let all = squash(&text.concat());
-    for w in [
-        "Introduction",
-        "Hello WordCraft,",
-        "bold words",
-        "website",
-        "Details",
-        "alpha item",
-        "beta item",
-        "Cell00",
-        "Cell11",
-        "Second page",
-        "DRAFT",
-    ] {
+    for w in
+        ["Introduction", "Hello Doc4Me,", "bold words", "website", "Details", "alpha item", "beta item", "Cell00", "Cell11", "Second page", "DRAFT"]
+    {
         assert!(all.contains(w), "{w:?} missing from {all:?}");
     }
-    assert!(squash(&text[0]).contains("Hello WordCraft, bold words and a website back to top"), "{:?}", text[0]);
+    assert!(squash(&text[0]).contains("Hello Doc4Me, bold words and a website back to top"), "{:?}", text[0]);
 
     let raw = String::from_utf8_lossy(&export(&d, &PdfOptions { compress: false, ..Default::default() }).unwrap()).into_owned();
     assert!(raw.contains("/FontFile2") || raw.contains("/FontFile3"), "embedded fonts");
@@ -219,7 +209,7 @@ fn hostile_documents_export() {
 
 #[test]
 fn tracked_deletions_are_left_out_without_markup() {
-    use wordcraft_doc::{Revision, RevisionKind};
+    use doc4me_doc::{Revision, RevisionKind};
     let mut d = Document::new();
     d.revisions.push(Revision { kind: RevisionKind::Delete, author: "Ada".into(), date: String::new(), move_name: None });
     d.revisions.push(Revision { kind: RevisionKind::Insert, author: "Ada".into(), date: String::new(), move_name: None });
@@ -239,7 +229,7 @@ fn tracked_deletions_are_left_out_without_markup() {
 
 #[test]
 fn deleted_heading_text_stays_out_of_bookmarks_and_tags() {
-    use wordcraft_doc::{Revision, RevisionKind};
+    use doc4me_doc::{Revision, RevisionKind};
     let mut d = Document::new();
     d.revisions.push(Revision { kind: RevisionKind::Delete, author: "Ada".into(), date: String::new(), move_name: None });
     let del = CharProps { del: Some(0), ..Default::default() };
@@ -267,10 +257,10 @@ fn deleted_heading_text_stays_out_of_bookmarks_and_tags() {
 fn hidden_heading_text_stays_out_of_bookmarks_and_tags() {
     let mut d = Document::new();
     // Hidden text both directly and through a character style.
-    d.styles.upsert(wordcraft_doc::Style {
+    d.styles.upsert(doc4me_doc::Style {
         id: "Secret".into(),
         name: "Secret".into(),
-        kind: wordcraft_doc::StyleKind::Character,
+        kind: doc4me_doc::StyleKind::Character,
         chr: CharProps { hidden: Some(true), ..Default::default() },
         ..Default::default()
     });
@@ -344,7 +334,7 @@ fn long_fragmented_hidden_headings_export_in_linear_time() {
             h.runs = (0..n)
                 .map(|i| {
                     let hidden = !(visible_every_other && i % 2 == 1);
-                    wordcraft_doc::Run { len: 1, props: CharProps { hidden: Some(hidden), bold: Some(i % 4 < 2), ..Default::default() } }
+                    doc4me_doc::Run { len: 1, props: CharProps { hidden: Some(hidden), bold: Some(i % 4 < 2), ..Default::default() } }
                 })
                 .collect();
             para_block(h)
@@ -378,14 +368,11 @@ fn table_style_hidden_heading_text_stays_out_of_bookmarks_and_tags() {
     // Hidden by the table style's header row, so only the layout's resolution (table conditional
     // formatting under the runs' own) says the text is hidden.
     let mut d = Document::new();
-    d.styles.upsert(wordcraft_doc::Style {
+    d.styles.upsert(doc4me_doc::Style {
         id: "SecretHeader".into(),
         name: "Secret Header".into(),
-        kind: wordcraft_doc::StyleKind::Table,
-        table: Some(wordcraft_doc::styles::TableStyleParts {
-            header_chr: CharProps { hidden: Some(true), ..Default::default() },
-            ..Default::default()
-        }),
+        kind: doc4me_doc::StyleKind::Table,
+        table: Some(doc4me_doc::styles::TableStyleParts { header_chr: CharProps { hidden: Some(true), ..Default::default() }, ..Default::default() }),
         ..Default::default()
     });
     let mut t = Table::new(2, 2, 400.0);
@@ -447,7 +434,7 @@ fn fields_put_their_shown_text_in_the_text_layer() {
     f.insert_object(5, field("PAGE"), &CharProps::default()).unwrap();
     let n = f.len();
     f.insert_object(n, field("NUMPAGES"), &CharProps::default()).unwrap();
-    let id = d.add_part(wordcraft_doc::PartKind::Footer, vec![para_block(f)]);
+    let id = d.add_part(doc4me_doc::PartKind::Footer, vec![para_block(f)]);
     d.last_section.footers.default = Some(id);
     let mut body = Paragraph::with_text("Body", CharProps::default());
     body.props.page_break_before = None;
@@ -463,7 +450,7 @@ fn fields_put_their_shown_text_in_the_text_layer() {
 /// Bundled Source Sans 3 renamed to `family`, with glyph `gid` turned into a composite glyph whose
 /// component list is cut off: fonts still parse and shape, but krilla's subsetter rejects it.
 fn unsubsettable_font(family: &str, gid: u16) -> Vec<u8> {
-    let mut f = wordcraft_fonts::bundled()[0].to_vec();
+    let mut f = doc4me_fonts::bundled()[0].to_vec();
     let rename = |f: &mut Vec<u8>, from: &[u8], to: &[u8]| {
         let mut i = 0;
         while i + from.len() <= f.len() {
@@ -535,7 +522,7 @@ fn count_glyphs_and_paths(bytes: &[u8]) -> (usize, usize) {
 
 #[test]
 fn unsubsettable_font_is_drawn_as_outlines() {
-    let db = wordcraft_fonts::FontDb::global();
+    let db = doc4me_fonts::FontDb::global();
     let o = db.face("Source Sans 3", "Regular").glyph_for('o');
     let family = "Broken Sans 3";
     db.add_font(unsubsettable_font(family, u16::try_from(o).unwrap()));
@@ -584,8 +571,8 @@ fn field_result_ligatures_extract_all_their_letters() {
     // Source Sans 3 joins "fi" and "ffi", so this doesn't depend on the installed fonts.
     let font = CharProps { font: Some("Source Sans 3".into()), ..Default::default() };
     let result = "the first office";
-    let face = wordcraft_fonts::FontDb::global().face("Source Sans 3", "Regular");
-    assert!(wordcraft_fonts::shape(&face, result, &[], |c| c).len() < result.chars().count(), "the result has ligatures");
+    let face = doc4me_fonts::FontDb::global().face("Source Sans 3", "Regular");
+    assert!(doc4me_fonts::shape(&face, result, &[], |c| c).len() < result.chars().count(), "the result has ligatures");
     let mut d = Document::new();
     let mut p = Paragraph::with_text("See  here.", font.clone());
     p.insert_object(4, InlineObject::Field { instr: " REF _RefTarget \\h ".into(), result: result.into(), locked: false, code: false }, &font)
@@ -610,7 +597,7 @@ fn synthetic_bold_text_is_extracted_once() {
 fn turned_cell_text_exports_as_text() {
     // Table Layout › Text Direction (#226): turned cell text is drawn in a turned frame and
     // stays real text in the PDF.
-    for dir in [wordcraft_doc::props::TextDirection::Down, wordcraft_doc::props::TextDirection::Up] {
+    for dir in [doc4me_doc::props::TextDirection::Down, doc4me_doc::props::TextDirection::Up] {
         let mut t = Table::new(1, 2, 300.0);
         t.rows[0].cells[0].blocks = vec![para_block(Paragraph::with_text("Turned", CharProps::default()))];
         t.rows[0].cells[0].props.text_direction = dir;
@@ -623,8 +610,8 @@ fn turned_cell_text_exports_as_text() {
 
 #[test]
 fn inline_chart_is_a_figure_with_its_text_inside_it() {
-    use wordcraft_doc::graphic::{Graphic, GraphicItem, GraphicKind, TextAlign};
-    use wordcraft_doc::props::Rgb;
+    use doc4me_doc::graphic::{Graphic, GraphicItem, GraphicKind, TextAlign};
+    use doc4me_doc::props::Rgb;
     let items = vec![GraphicItem::Text {
         rect: [0.0, 0.0, 216.0, 20.0],
         text: "Q1".into(),
@@ -637,7 +624,7 @@ fn inline_chart_is_a_figure_with_its_text_inside_it() {
     let graphic = Graphic { kind: GraphicKind::Chart, items, ..Default::default() };
     let obj = InlineObject::Graphic { w: 216.0, h: 144.0, alt: "Sales by quarter".into(), float: Default::default(), graphic: Arc::new(graphic) };
     let mut d = Document::from_text("Chart");
-    d.insert_object(&wordcraft_doc::Pos::body(0, 0), obj, &Default::default()).unwrap();
+    d.insert_object(&doc4me_doc::Pos::body(0, 0), obj, &Default::default()).unwrap();
     let raw = |tagged| String::from_utf8_lossy(&export(&d, &PdfOptions { tagged, compress: false, ..Default::default() }).unwrap()).into_owned();
     assert!(raw(true).contains("/Figure"), "tagged chart is a figure");
     assert!(!raw(false).contains("/Figure"));
@@ -645,13 +632,13 @@ fn inline_chart_is_a_figure_with_its_text_inside_it() {
 
 #[test]
 fn chart_without_alt_text_is_a_figure_called_chart() {
-    use wordcraft_doc::graphic::{Graphic, GraphicItem, GraphicKind, PathSeg};
+    use doc4me_doc::graphic::{Graphic, GraphicItem, GraphicKind, PathSeg};
     let segs = vec![PathSeg::Move(1.0, 1.0), PathSeg::Line(50.0, 50.0)];
-    let items = vec![GraphicItem::Path { segs, fill: None, stroke: Some(wordcraft_doc::props::Rgb::BLACK), stroke_width: 1.0 }];
+    let items = vec![GraphicItem::Path { segs, fill: None, stroke: Some(doc4me_doc::props::Rgb::BLACK), stroke_width: 1.0 }];
     let graphic = Graphic { kind: GraphicKind::Chart, items, ..Default::default() };
     let obj = InlineObject::Graphic { w: 216.0, h: 144.0, alt: String::new(), float: Default::default(), graphic: Arc::new(graphic) };
     let mut d = Document::from_text("Chart");
-    d.insert_object(&wordcraft_doc::Pos::body(0, 0), obj, &Default::default()).unwrap();
+    d.insert_object(&doc4me_doc::Pos::body(0, 0), obj, &Default::default()).unwrap();
     let raw = String::from_utf8_lossy(&export(&d, &PdfOptions { tagged: true, compress: false, ..Default::default() }).unwrap()).into_owned();
     assert!(raw.contains("/Alt(chart)"), "no chart alt text");
     assert!(!raw.contains("/Alt(picture)"));
@@ -833,12 +820,12 @@ fn bookmark_destination_is_the_page_of_its_start() {
 #[test]
 fn comments_print_in_balloons_beside_scaled_pages() {
     let mut d = Document::from_text("Intro line.\nThe quarterly figures look strong.\nClosing line.");
-    let part = d.add_part(wordcraft_doc::PartKind::Comment, vec![para_block(Paragraph::with_text("Check the totals", CharProps::default()))]);
-    d.comments.insert(0, wordcraft_doc::Comment { author: "Ada Reviewer".into(), part, ..Default::default() });
-    let part = d.add_part(wordcraft_doc::PartKind::Comment, vec![para_block(Paragraph::with_text("Totals checked", CharProps::default()))]);
-    d.comments.insert(1, wordcraft_doc::Comment { author: "Ben Editor".into(), part, parent: Some(0), ..Default::default() });
-    d.insert_object(&wordcraft_doc::Pos::body(1, 13), InlineObject::CommentEnd { id: 0 }, &CharProps::default()).unwrap();
-    d.insert_object(&wordcraft_doc::Pos::body(1, 4), InlineObject::CommentStart { id: 0 }, &CharProps::default()).unwrap();
+    let part = d.add_part(doc4me_doc::PartKind::Comment, vec![para_block(Paragraph::with_text("Check the totals", CharProps::default()))]);
+    d.comments.insert(0, doc4me_doc::Comment { author: "Ada Reviewer".into(), part, ..Default::default() });
+    let part = d.add_part(doc4me_doc::PartKind::Comment, vec![para_block(Paragraph::with_text("Totals checked", CharProps::default()))]);
+    d.comments.insert(1, doc4me_doc::Comment { author: "Ben Editor".into(), part, parent: Some(0), ..Default::default() });
+    d.insert_object(&doc4me_doc::Pos::body(1, 13), InlineObject::CommentEnd { id: 0 }, &CharProps::default()).unwrap();
+    d.insert_object(&doc4me_doc::Pos::body(1, 4), InlineObject::CommentStart { id: 0 }, &CharProps::default()).unwrap();
     let size = |bytes: &[u8]| {
         let pdf = hayro_syntax::Pdf::new(bytes.to_vec()).expect("parse");
         pdf.pages().iter().map(|p| p.media_box()).map(|r| (r.width().round(), r.height().round())).collect::<Vec<_>>()
@@ -856,9 +843,9 @@ fn comments_print_in_balloons_beside_scaled_pages() {
     assert_eq!(size(&marked), vec![(612.0, 792.0)]);
     // Tagged or not, with links and an outline, it still writes.
     let mut d2 = sample();
-    let part = d2.add_part(wordcraft_doc::PartKind::Comment, vec![para_block(Paragraph::with_text("On the heading", CharProps::default()))]);
-    d2.comments.insert(0, wordcraft_doc::Comment { author: "Ada".into(), part, ..Default::default() });
-    d2.insert_object(&wordcraft_doc::Pos::body(1, 3), InlineObject::CommentStart { id: 0 }, &CharProps::default()).unwrap();
+    let part = d2.add_part(doc4me_doc::PartKind::Comment, vec![para_block(Paragraph::with_text("On the heading", CharProps::default()))]);
+    d2.comments.insert(0, doc4me_doc::Comment { author: "Ada".into(), part, ..Default::default() });
+    d2.insert_object(&doc4me_doc::Pos::body(1, 3), InlineObject::CommentStart { id: 0 }, &CharProps::default()).unwrap();
     for tagged in [false, true] {
         let bytes = export(&d2, &PdfOptions { tagged, comments: true, ..Default::default() }).unwrap();
         assert!(squash(&extract_text(&bytes).concat()).contains("On the heading"));

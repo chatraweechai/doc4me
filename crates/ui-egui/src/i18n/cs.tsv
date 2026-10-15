@@ -1,6 +1,6 @@
 # Czech (cs) interface catalog. Columns, separated by a TAB:
 #   context <TAB> English source <TAB> translation
-#   context    empty (WordCraft uses no contexts yet)
+#   context    empty (Doc4Me uses no contexts yet)
 #   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
 #   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
 #              trailing "…" in one needs one in the other.
@@ -9,7 +9,7 @@
 # Clean room: every entry was written from the plain meaning of the English label in ordinary
 # Czech computing and typography vocabulary. No Microsoft Word (or other product) localisation,
 # string table or translated UI was consulted or copied; add entries the same way.
-# Product, format and technology names (WordCraft, PDF, Markdown, MCP …) stay in Latin letters.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
 
 	(All)	(Vše)
 	(no style)	(žádný styl)
@@ -22,13 +22,13 @@
 	1/4 Em Space	Čtvrtčtverčíková mezera
 	3-D	3D
 	A file dialog is already open.	Dialogové okno souboru je již otevřené.
-	A free, open-source word processor written from scratch in Rust.\nPart of the Crafting Apps from the ArtCraft team.	Bezplatný textový procesor s otevřeným zdrojovým kódem napsaný od základu v jazyce Rust.\nSoučást sady Crafting Apps od týmu ArtCraft.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Bezplatný textový procesor s otevřeným zdrojovým kódem napsaný od základu v jazyce Rust.\nZaloženo na programu WordCraft od týmu ArtCraft.
 	A mail merge field	Pole hromadné korespondence
 	A numbered sequence (figures, tables…)	Číslovaná posloupnost (obrázky, tabulky…)
 	A password is required to open this document.	K otevření tohoto dokumentu je vyžadováno heslo.
 	A table of contents	Obsah
 	About	O aplikaci
-	About WordCraft	O aplikaci WordCraft
+	About Doc4Me	O aplikaci Doc4Me
 	Accent	Diakritika
 	Accept	Přijmout
 	Accept All Changes	Přijmout všechny změny
@@ -106,7 +106,7 @@
 	Automatic Table 1 (3 levels)	Automatický obsah 1 (3 úrovně)
 	Automatic Table 2 (2 levels)	Automatický obsah 2 (2 úrovně)
 	AutoSave	Automatické ukládání
-	AutoSave documents you have saved in WordCraft	Automaticky ukládat dokumenty uložené ve WordCraftu
+	AutoSave documents you have saved in Doc4Me	Automaticky ukládat dokumenty uložené ve Doc4Meu
 	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Automatické ukládání selhalo: {error}. Uložením dokumentu automatické ukládání znovu zapnete.
 	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Automatické ukládání není v prohlížeči dostupné, protože nemůže zapisovat do vašich souborů. Příkaz Uložit stáhne kopii.
 	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Automatické ukládání podporuje pouze soubory .docx, .odt a .rtf; formát {name} nedokáže zachovat veškeré formátování. Pro zapnutí automatického ukládání uložte dokument jako .docx.
@@ -230,7 +230,6 @@
 	Comment	Komentář
 	Comments	Komentáře
 	Comments Pane	Podokno komentářů
-	Community\nDiscord	Komunita\nDiscord
 	Compact	Kompaktní
 	Company	Společnost
 	Compare	Porovnat
@@ -310,13 +309,12 @@
 	Direct formatting	Přímé formátování
 	Direction:	Směr:
 	Directory	Katalog
-	Discord	Discord
-	Discord community	Komunita na Discordu
 	Display	Zobrazení
 	Display for Review	Zobrazení k revizi
 	Distribute Columns	Rovnoměrně rozložit sloupce
 	Distribute Rows	Rovnoměrně rozložit řádky
 	Distributed	Rozložit do šířky
+	Thai Distributed	Thajské rozložení do šířky
 	Do Not Show in TOC	Nezobrazovat v obsahu
 	Do you want to save changes to {name}?	Chcete uložit změny v dokumentu {name}?
 	Document	Dokument
@@ -391,7 +389,7 @@
 	Erase Ink	Smazat rukopis
 	Eraser	Guma
 	Even Page	Sudá stránka
-	Every command is available to scripts and AI agents: run `wordcraft-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Každý příkaz je dostupný skriptům a AI agentům: spusťte `wordcraft-cli mcp` pro server MCP, nebo spusťte aplikaci s parametrem `--control <port>` pro řídicí kanál JSON.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Každý příkaz je dostupný skriptům a AI agentům: spusťte `doc4me-cli mcp` pro server MCP, nebo spusťte aplikaci s parametrem `--control <port>` pro řídicí kanál JSON.
 	Every field needs a name.	Každé pole musí mít název.
 	Exactly	Přesně
 	Exactly {n}	Přesně {n}
@@ -462,7 +460,6 @@
 	from Unicode (hex)	z Unicode (hex)
 	Function	Funkce
 	General	Obecné
-	getartcraft.com/apps/wordcraft	getartcraft.com/apps/wordcraft
 	Glow	Záře
 	Glow Colors	Barvy záře
 	Go To	Přejít na
@@ -568,15 +565,13 @@
 	Interface theme:	Motiv rozhraní:
 	Interface\nTheme	Motiv\nrozhraní
 	Italic	Kurzíva
-	Join the ArtCraft community on Discord	Připojte se ke komunitě ArtCraft na Discordu
-	Join us on Discord: discord.gg/artcraft	Připojte se k nám na Discordu: discord.gg/artcraft
 	Justification	Zarovnání
 	Justified	Do bloku
 	Justify	Do bloku
 	Keep Lines Together	Svázat řádky
 	Keep lines together	Svázat řádky
 	Keep Text Only	Zachovat pouze text
-	Keep the password somewhere safe: without it nobody, WordCraft included, can open the document. Leave both boxes empty to remove the password.	Heslo si bezpečně uložte: bez něj dokument nikdo (včetně aplikace WordCraft) neotevře. Chcete-li heslo odebrat, ponechte obě pole prázdná.
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Heslo si bezpečně uložte: bez něj dokument nikdo (včetně aplikace Doc4Me) neotevře. Chcete-li heslo odebrat, ponechte obě pole prázdná.
 	Keep with Next	Svázat s následujícím
 	Keep with next	Svázat s následujícím
 	Keeps the fonts and formatting of the copied text.	Zachová písma a formátování zkopírovaného textu.
@@ -1021,7 +1016,6 @@
 	Show or Hide Style	Zobrazit nebo skrýt styl
 	Show revisions in balloons	Zobrazit revize v bublinách
 	Show rulers	Zobrazit pravítka
-	Show the community button in the title bar	Zobrazit tlačítko komunity v záhlaví okna
 	Show/Hide ¶	Zobrazit/skrýt ¶
 	Show\nComments	Zobrazit\nkomentáře
 	Shrink Font 1 Point	Zmenšit písmo o 1 bod
@@ -1044,7 +1038,7 @@
 	Soft Edges	Měkké okraje
 	Sort	Seřadit
 	Sort order:	Pořadí řazení:
-	Source code: github.com/storytold/wordcraft	Zdrojový kód: github.com/storytold/wordcraft
+	Source code: github.com/chatraweechai/docscaft	Zdrojový kód: github.com/chatraweechai/docscaft
 	Space	Mezera
 	Space after	Mezera za
 	Space after: {pt} pt	Mezera za: {pt} b.
@@ -1240,7 +1234,7 @@
 	Word Left	O slovo vlevo
 	Word Right	O slovo vpravo
 	WordArt	WordArt
-	WordCraft	WordCraft
+	Doc4Me	Doc4Me
 	Words	Slova
 	Words only	Pouze slova
 	Wrap Text	Obtékání textu
@@ -1909,7 +1903,7 @@
 	Word document	Dokument Word
 	All files	Všechny soubory
 	Recipient lists	Seznamy příjemců
-	The system file dialog isn't available, so WordCraft shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Systémový dialog pro práci se soubory není k dispozici, proto WordCraft zobrazuje vlastní. Chcete-li používat systémový dialog, nainstalujte portál pro výběr souborů (například xdg-desktop-portal-gtk) nebo zenity.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Systémový dialog pro práci se soubory není k dispozici, proto Doc4Me zobrazuje vlastní. Chcete-li používat systémový dialog, nainstalujte portál pro výběr souborů (například xdg-desktop-portal-gtk) nebo zenity.
 	Up one level	O úroveň výš
 	Home folder	Domovská složka
 	{name} wasn't found.	{name} nebyl nalezen.
@@ -1917,8 +1911,8 @@
 	This folder can't be read: {error}	Tuto složku nelze přečíst: {error}
 	Showing the first {count} items.	Zobrazuje se prvních {count} položek.
 	File name:	Název souboru:
-	Browse in WordCraft…	Procházet ve WordCraftu…
-	Open a file with WordCraft's own browser when the system file dialog doesn't appear.	Otevřít soubor pomocí vlastního prohlížeče souborů WordCraftu, když se systémový dialog pro práci se soubory nezobrazí.
+	Browse in Doc4Me…	Procházet ve Doc4Meu…
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Otevřít soubor pomocí vlastního prohlížeče souborů Doc4Meu, když se systémový dialog pro práci se soubory nezobrazí.
 	Hide White Space	Skrýt prázdné místo
 	All pages	Všechny stránky
 	Current page	Aktuální stránka
@@ -2041,13 +2035,13 @@
 	Your system has animation effects turned off.	Efekty animace jsou v systému vypnuté.
 	Your system doesn't report an animation setting, so animation effects stay on.	Systém neuvádí žádné nastavení animací, proto efekty animace zůstávají zapnuté.
 	Do Not Check Spelling or Grammar	Nekontrolovat pravopis ani gramatiku
-	Couldn't make WordCraft the default: {error}	WordCraft se nepodařilo nastavit jako výchozí: {error}
-	In Default apps, choose WordCraft for the document types you want it to open.	Ve Výchozích aplikacích vyberte WordCraft pro typy dokumentů, které má otevírat.
-	Make WordCraft the default for Word documents…	Nastavit WordCraft jako výchozí pro dokumenty Word…
-	Opens .docx, .doc, .rtf and .odt files and Word templates with WordCraft from now on.	Soubory .docx, .doc, .rtf a .odt a šablony Wordu se od teď otevírají ve WordCraftu.
-	Opens Settings › Default apps, where you choose WordCraft for .docx and the other document types.	Otevře Nastavení › Výchozí aplikace, kde zvolíte WordCraft pro .docx a další typy dokumentů.
-	To open Word documents with WordCraft by default: select one in Finder, choose File › Get Info, pick WordCraft under Open with, then click Change All.	Chcete-li dokumenty Word otevírat ve WordCraftu jako výchozí: vyberte jeden ve Finderu, zvolte Soubor › Informace, v části „Otevřít v aplikaci“ vyberte WordCraft a klikněte na „Změnit vše“.
-	WordCraft is now the default app for Word documents.	WordCraft je nyní výchozí aplikací pro dokumenty Word.
+	Couldn't make Doc4Me the default: {error}	Doc4Me se nepodařilo nastavit jako výchozí: {error}
+	In Default apps, choose Doc4Me for the document types you want it to open.	Ve Výchozích aplikacích vyberte Doc4Me pro typy dokumentů, které má otevírat.
+	Make Doc4Me the default for Word documents…	Nastavit Doc4Me jako výchozí pro dokumenty Word…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Soubory .docx, .doc, .rtf a .odt a šablony Wordu se od teď otevírají ve Doc4Meu.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Otevře Nastavení › Výchozí aplikace, kde zvolíte Doc4Me pro .docx a další typy dokumentů.
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Chcete-li dokumenty Word otevírat ve Doc4Meu jako výchozí: vyberte jeden ve Finderu, zvolte Soubor › Informace, v části „Otevřít v aplikaci“ vyberte Doc4Me a klikněte na „Změnit vše“.
+	Doc4Me is now the default app for Word documents.	Doc4Me je nyní výchozí aplikací pro dokumenty Word.
 	Numerals:	Číslice:
 	Numerals	Číslice
 	Hindi	Hindské

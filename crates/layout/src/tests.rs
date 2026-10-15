@@ -1,7 +1,7 @@
 use super::*;
-use wordcraft_doc::para::InlineObject;
-use wordcraft_doc::props::{Align, Border, BorderStyle, Borders, ParaProps, TextDirection};
-use wordcraft_doc::{Pos, Table};
+use doc4me_doc::para::InlineObject;
+use doc4me_doc::props::{Align, Border, BorderStyle, Borders, ParaProps, TextDirection};
+use doc4me_doc::{Pos, Table};
 
 fn lay(doc: &Document) -> DocLayout {
     let mut c = LayoutCache::new();
@@ -70,9 +70,10 @@ fn reading_layout_reflows_into_viewport_height_pages_without_changing_print_layo
 
 #[test]
 fn hit_and_caret_agree() {
-    let d = Document::from_text("Hello world, this is WordCraft.\nSecond paragraph here.");
+    let d = Document::from_text("Hello world, this is Doc4Me.\nSecond paragraph here.");
     let l = lay(&d);
-    for off in [0, 5, 12, 31] {
+    // The end of the first paragraph included.
+    for off in [0, 5, 12, "Hello world, this is Doc4Me.".len()] {
         let pos = Pos::body(0, off);
         let c = l.caret(&pos).unwrap();
         let back = l.hit(c.page, c.x + 0.1, c.top + c.height / 2.0, StoryRef::Body).unwrap();
@@ -264,10 +265,10 @@ fn many_hidden_float_anchors_lay_out_in_linear_time() {
     // n square-wrapped shapes, each anchored in its own hidden run (bold alternating, so runs do not
     // merge), markup on: finding each anchor's formatting once rescanned the runs from the start.
     let doc = |n: usize| {
-        let float = wordcraft_doc::para::Float {
-            wrap: wordcraft_doc::para::Wrap::Square,
-            h_rel: wordcraft_doc::para::Anchor::Column,
-            v_rel: wordcraft_doc::para::Anchor::Paragraph,
+        let float = doc4me_doc::para::Float {
+            wrap: doc4me_doc::para::Wrap::Square,
+            h_rel: doc4me_doc::para::Anchor::Column,
+            v_rel: doc4me_doc::para::Anchor::Paragraph,
             x: 0.0,
             y: 0.0,
             dist: 9.0,
@@ -276,7 +277,7 @@ fn many_hidden_float_anchors_lay_out_in_linear_time() {
             ..Default::default()
         };
         let shape = InlineObject::Shape {
-            kind: wordcraft_doc::para::ShapeKind::Rectangle,
+            kind: doc4me_doc::para::ShapeKind::Rectangle,
             w: 20.0,
             h: 20.0,
             fill: None,
@@ -288,18 +289,18 @@ fn many_hidden_float_anchors_lay_out_in_linear_time() {
             effects: Default::default(),
             extra: Default::default(),
         };
-        let obj = wordcraft_doc::para::OBJ.to_string();
-        let mut p = wordcraft_doc::Paragraph::with_text("Text ", Default::default());
+        let obj = doc4me_doc::para::OBJ.to_string();
+        let mut p = doc4me_doc::Paragraph::with_text("Text ", Default::default());
         p.text.push_str(&obj.repeat(n));
         p.objects = vec![shape; n];
-        p.runs = std::iter::once(wordcraft_doc::Run { len: 5, props: Default::default() })
-            .chain((0..n).map(|i| wordcraft_doc::Run {
+        p.runs = std::iter::once(doc4me_doc::Run { len: 5, props: Default::default() })
+            .chain((0..n).map(|i| doc4me_doc::Run {
                 len: obj.len(),
-                props: wordcraft_doc::CharProps { hidden: Some(true), bold: Some(i % 2 == 0), ..Default::default() },
+                props: doc4me_doc::CharProps { hidden: Some(true), bold: Some(i % 2 == 0), ..Default::default() },
             }))
             .collect();
         let mut d = Document::from_text("");
-        d.body = vec![wordcraft_doc::para_block(p)];
+        d.body = vec![doc4me_doc::para_block(p)];
         d
     };
     // Correct first: hidden anchors place no shape, shown ones do.
@@ -332,9 +333,9 @@ fn fragmented_hidden_text_lays_out_like_the_visible_text() {
         let at = text.len();
         text.push('é');
         let n = d.para(StoryRef::Body, &Path::top(0)).unwrap().len();
-        let bold = wordcraft_doc::CharProps { bold: Some(i % 2 == 0), ..Default::default() };
+        let bold = doc4me_doc::CharProps { bold: Some(i % 2 == 0), ..Default::default() };
         d.insert_text(&Pos::body(0, n), &c.to_string(), &bold).unwrap();
-        let hidden = wordcraft_doc::CharProps { hidden: Some(true), bold: Some(i % 2 == 1), ..Default::default() };
+        let hidden = doc4me_doc::CharProps { hidden: Some(true), bold: Some(i % 2 == 1), ..Default::default() };
         d.insert_text(&Pos::body(0, at), "é", &hidden).unwrap();
         let n = plain.para(StoryRef::Body, &Path::top(0)).unwrap().len();
         plain.insert_text(&Pos::body(0, n), &c.to_string(), &bold).unwrap();
@@ -440,7 +441,7 @@ fn tabs_land_on_default_stops() {
 fn right_tab_aligns_text_end() {
     let mut d = Document::from_text("left\tright");
     d.format_paragraphs(&Pos::body(0, 0), &Pos::body(0, 0), &|p| {
-        p.tabs = Some(vec![wordcraft_doc::props::TabStop { pos: 400.0, align: wordcraft_doc::props::TabAlign::Right, leader: Default::default() }])
+        p.tabs = Some(vec![doc4me_doc::props::TabStop { pos: 400.0, align: doc4me_doc::props::TabAlign::Right, leader: Default::default() }])
     })
     .unwrap();
     let l = lay(&d);
@@ -451,8 +452,8 @@ fn right_tab_aligns_text_end() {
 #[test]
 fn lists_get_labels_and_indent() {
     let mut d = Document::from_text("one\ntwo\nthree");
-    let id = d.numbering.add_list(wordcraft_doc::ListKind::Numbered);
-    d.format_paragraphs(&Pos::body(0, 0), &Pos::body(2, 5), &|p| p.numbering = Some(wordcraft_doc::props::NumRef { num: id, level: 0 })).unwrap();
+    let id = d.numbering.add_list(doc4me_doc::ListKind::Numbered);
+    d.format_paragraphs(&Pos::body(0, 0), &Pos::body(2, 5), &|p| p.numbering = Some(doc4me_doc::props::NumRef { num: id, level: 0 })).unwrap();
     let l = lay(&d);
     let labels: Vec<String> = l.pages[0]
         .items
@@ -467,16 +468,16 @@ fn lists_get_labels_and_indent() {
 #[test]
 fn chinese_counting_list_labels_and_their_font_runs() {
     // Issue #534: a "一、" list showed digits, drawn with glyph ids of another font.
-    use wordcraft_doc::section::NumFormat;
+    use doc4me_doc::section::NumFormat;
     let mut d = Document::from_text("甲\n乙\n丙");
-    let id = d.numbering.add_list(wordcraft_doc::ListKind::Numbered);
+    let id = d.numbering.add_list(doc4me_doc::ListKind::Numbered);
     for a in &mut d.numbering.abstracts {
         if let Some(l) = a.levels.first_mut() {
             l.format = NumFormat::ChineseCounting;
             l.text = "%1、".into();
         }
     }
-    d.format_paragraphs(&Pos::body(0, 0), &Pos::body(2, 3), &|p| p.numbering = Some(wordcraft_doc::props::NumRef { num: id, level: 0 })).unwrap();
+    d.format_paragraphs(&Pos::body(0, 0), &Pos::body(2, 3), &|p| p.numbering = Some(doc4me_doc::props::NumRef { num: id, level: 0 })).unwrap();
     let labels = |d: &Document| -> Vec<(String, Vec<(String, bool)>)> {
         let l = lay(d);
         l.pages[0]
@@ -517,17 +518,17 @@ fn chinese_counting_list_labels_and_their_font_runs() {
 fn symbol_font_bullet_without_the_font_draws_a_bullet() {
     // Word's default bullet: U+F0B7 in Symbol.
     let mut d = Document::from_text("one");
-    let id = d.numbering.add_list(wordcraft_doc::ListKind::BulletChar('\u{F0B7}'));
+    let id = d.numbering.add_list(doc4me_doc::ListKind::BulletChar('\u{F0B7}'));
     for a in &mut d.numbering.abstracts {
         if let Some(l) = a.levels.first_mut() {
             l.chr.font = Some("Symbol".into());
         }
     }
-    d.format_paragraphs(&Pos::body(0, 0), &Pos::body(0, 0), &|p| p.numbering = Some(wordcraft_doc::props::NumRef { num: id, level: 0 })).unwrap();
+    d.format_paragraphs(&Pos::body(0, 0), &Pos::body(0, 0), &|p| p.numbering = Some(doc4me_doc::props::NumRef { num: id, level: 0 })).unwrap();
     let l = lay(&d);
     let label = l.pages[0].items.iter().find_map(|it| if let Placed::Lines { para, .. } = it { para.label.clone() } else { None }).unwrap();
     // Where a real Symbol font with the private-use code is installed (Windows), the code stays.
-    let symbol = wordcraft_fonts::word::resolve("Symbol", false, false);
+    let symbol = doc4me_fonts::word::resolve("Symbol", false, false);
     let expected = if symbol.substituted || !symbol.face.covers('\u{F0B7}') { "\u{2022}" } else { "\u{F0B7}" };
     assert_eq!(label.text, expected);
     assert_eq!(label.glyphs.len(), 1);
@@ -537,8 +538,8 @@ fn symbol_font_bullet_without_the_font_draws_a_bullet() {
 fn tables_lay_out_cells() {
     let mut d = Document::from_text("before\nafter");
     let mut t = Table::new(2, 3, 468.0);
-    t.rows[0].cells[1].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("cell text", Default::default()))];
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    t.rows[0].cells[1].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("cell text", Default::default()))];
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     let pos = Pos { story: StoryRef::Body, path: Path(vec![1, 0, 1, 0]), off: 0 };
     let c = l.caret(&pos).unwrap();
@@ -556,9 +557,9 @@ fn tables_lay_out_cells() {
 fn a_vertical_merge_lays_out_as_one_cell() {
     let mut d = Document::from_text("before\nafter");
     let mut t = Table::new(3, 2, 468.0);
-    t.rows[0].cells[0].props.vmerge = wordcraft_doc::props::VMerge::Restart;
-    t.rows[1].cells[0].props.vmerge = wordcraft_doc::props::VMerge::Continue;
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    t.rows[0].cells[0].props.vmerge = doc4me_doc::props::VMerge::Restart;
+    t.rows[1].cells[0].props.vmerge = doc4me_doc::props::VMerge::Continue;
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     let cells: Vec<_> = l.pages[0]
         .items
@@ -577,14 +578,14 @@ fn a_vertical_merge_lays_out_as_one_cell() {
 fn turned_table(dir: TextDirection, text: &str, row: Option<f32>) -> Document {
     let mut d = Document::from_text("before\nafter");
     let mut t = Table::new(1, 3, 468.0);
-    t.rows[0].cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("plain", Default::default()))];
-    t.rows[0].cells[1].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(text, Default::default()))];
+    t.rows[0].cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("plain", Default::default()))];
+    t.rows[0].cells[1].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(text, Default::default()))];
     t.rows[0].cells[1].props.text_direction = dir;
     if let Some(h) = row {
         t.rows[0].props.height = Some(h);
-        t.rows[0].props.height_rule = wordcraft_doc::props::HeightRule::Exact;
+        t.rows[0].props.height_rule = doc4me_doc::props::HeightRule::Exact;
     }
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     d
 }
 
@@ -697,7 +698,7 @@ fn table_style_borders_survive_empty_tbl_borders() {
             c.props.borders = Some(Borders::default());
         }
     }
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     assert!(rules_on_page0(&l).len() >= 8, "rules {:?}", rules_on_page0(&l));
 }
@@ -707,7 +708,7 @@ fn table_own_border_overrides_only_that_side() {
     let mut d = Document::from_text("before\nafter");
     let mut t = Table::new(2, 2, 468.0);
     t.props.borders = Some(Borders { top: Some(Border::single(2.0)), ..Default::default() });
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     let w = rules_on_page0(&l);
     assert!(w.contains(&2.0), "own top missing: {w:?}");
@@ -719,7 +720,7 @@ fn table_nil_border_hides_style_side() {
     let mut d = Document::from_text("before\nafter");
     let mut t = Table::new(1, 1, 468.0); // 1×1: no inside edges
     t.props.borders = Some(Borders::all(Border { style: BorderStyle::None, width: 0.0, color: None, space: 0.0 }));
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     assert!(rules_on_page0(&lay(&d)).is_empty());
 }
 
@@ -729,17 +730,17 @@ fn table_without_style_stays_borderless() {
     let mut t = Table::new(2, 2, 468.0);
     t.props.style = None;
     t.props.borders = Some(Borders::default());
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     assert!(rules_on_page0(&lay(&d)).is_empty());
 }
 
 #[test]
 fn headers_and_page_fields() {
     let mut d = Document::from_text(&"para\n".repeat(120));
-    let mut hp = wordcraft_doc::Paragraph::new();
+    let mut hp = doc4me_doc::Paragraph::new();
     hp.insert_object(0, InlineObject::Field { instr: "PAGE".into(), result: String::new(), locked: false, code: false }, &Default::default())
         .unwrap();
-    let id = d.add_part(wordcraft_doc::PartKind::Footer, vec![wordcraft_doc::para_block(hp)]);
+    let id = d.add_part(doc4me_doc::PartKind::Footer, vec![doc4me_doc::para_block(hp)]);
     d.last_section.footers.default = Some(id);
     let l = lay(&d);
     assert!(l.pages.len() >= 2);
@@ -756,8 +757,8 @@ fn headers_and_page_fields() {
 #[test]
 fn tall_first_page_header_pushes_body_down() {
     let mut d = Document::from_text(&"para\n".repeat(120));
-    let tall: Vec<_> = (0..12).map(|_| wordcraft_doc::para_block(wordcraft_doc::Paragraph::new())).collect();
-    let id = d.add_part(wordcraft_doc::PartKind::Header, tall);
+    let tall: Vec<_> = (0..12).map(|_| doc4me_doc::para_block(doc4me_doc::Paragraph::new())).collect();
+    let id = d.add_part(doc4me_doc::PartKind::Header, tall);
     d.last_section.headers.first = Some(id);
     d.last_section.title_page = true;
     let l = lay(&d);
@@ -807,7 +808,7 @@ fn column_segments_take_the_same_x_range_on_every_line() {
 #[test]
 fn display_has_glyphs_and_marks() {
     let mut d = Document::from_text("Hello\tworld");
-    d.format_range(&Pos::body(0, 0), &Pos::body(0, 5), &|c| c.underline = Some(wordcraft_doc::props::Underline::Single)).unwrap();
+    d.format_range(&Pos::body(0, 0), &Pos::body(0, 5), &|c| c.underline = Some(doc4me_doc::props::Underline::Single)).unwrap();
     let l = lay(&d);
     let items = display::page_display(&d, &l.pages[0], &display::DisplayOptions { marks: true, ..Default::default() });
     assert!(items.iter().any(|i| matches!(i, display::Draw::Glyphs { .. })));
@@ -819,15 +820,10 @@ fn display_has_glyphs_and_marks() {
 #[test]
 fn a_tracked_paragraph_mark_shows_in_its_authors_colour() {
     let mut d = Document::from_text("Split\nhere");
-    d.revisions.push(wordcraft_doc::Revision {
-        kind: wordcraft_doc::RevisionKind::Insert,
-        author: "Ana".into(),
-        date: String::new(),
-        move_name: None,
-    });
-    d.para_mut(wordcraft_doc::StoryRef::Body, &wordcraft_doc::Path::top(0)).unwrap().mark.ins = Some(0);
+    d.revisions.push(doc4me_doc::Revision { kind: doc4me_doc::RevisionKind::Insert, author: "Ana".into(), date: String::new(), move_name: None });
+    d.para_mut(doc4me_doc::StoryRef::Body, &doc4me_doc::Path::top(0)).unwrap().mark.ins = Some(0);
     let l = lay(&d);
-    let marks = |markup: bool| -> Vec<Option<wordcraft_doc::props::Rgb>> {
+    let marks = |markup: bool| -> Vec<Option<doc4me_doc::props::Rgb>> {
         display::page_display(&d, &l.pages[0], &display::DisplayOptions { marks: true, markup, ..Default::default() })
             .into_iter()
             .filter_map(|i| if let display::Draw::Mark { ch: '¶', color, .. } = i { Some(color) } else { None })
@@ -839,11 +835,11 @@ fn a_tracked_paragraph_mark_shows_in_its_authors_colour() {
 
 #[test]
 fn section_breaks_show_with_formatting_marks() {
-    use wordcraft_doc::section::{SectionProps, SectionStart};
+    use doc4me_doc::section::{SectionProps, SectionStart};
     // Two sections: "One" ends the first; the second starts as `start`.
     let doc = |start: SectionStart| {
         let mut d = Document::from_text("One\nTwo");
-        d.para_mut(wordcraft_doc::StoryRef::Body, &wordcraft_doc::Path::top(0)).unwrap().section = Some(Box::new(SectionProps::default()));
+        d.para_mut(doc4me_doc::StoryRef::Body, &doc4me_doc::Path::top(0)).unwrap().section = Some(Box::new(SectionProps::default()));
         d.last_section.start = start;
         d
     };
@@ -907,7 +903,7 @@ fn border_lines_in(d: &Document, l: &DocLayout) -> Vec<(f32, f32, f32, f32)> {
 
 #[test]
 fn character_border_draws_one_box_around_run() {
-    use wordcraft_doc::props::Border;
+    use doc4me_doc::props::Border;
     let mut d = Document::from_text("Hello world");
     assert!(border_lines(&d).is_empty());
     d.format_range(&Pos::body(0, 0), &Pos::body(0, 5), &|c| c.border = Some(Border::single(0.5))).unwrap();
@@ -928,7 +924,7 @@ fn character_border_draws_one_box_around_run() {
 
 #[test]
 fn equal_adjacent_borders_share_a_box() {
-    use wordcraft_doc::props::Border;
+    use doc4me_doc::props::Border;
     let mut d = Document::from_text("ab");
     d.format_range(&Pos::body(0, 0), &Pos::body(0, 2), &|c| c.border = Some(Border::single(0.5))).unwrap();
     d.format_range(&Pos::body(0, 1), &Pos::body(0, 2), &|c| c.bold = Some(true)).unwrap();
@@ -939,7 +935,7 @@ fn equal_adjacent_borders_share_a_box() {
 
 #[test]
 fn wrapped_border_boxes_each_line() {
-    use wordcraft_doc::props::Border;
+    use doc4me_doc::props::Border;
     let text = "boxed ".repeat(20);
     let mut d = Document::from_text(text.trim_end());
     let n = d.para_at(&Pos::body(0, 0)).unwrap().len();
@@ -951,7 +947,7 @@ fn wrapped_border_boxes_each_line() {
 #[test]
 fn runs_differing_only_in_link_or_decoration_keep_their_own_style() {
     let mut d = Document::from_text("Alpha Beta Gamma Delta");
-    let set = |d: &mut Document, a: usize, b: usize, f: &dyn Fn(&mut wordcraft_doc::props::CharProps)| {
+    let set = |d: &mut Document, a: usize, b: usize, f: &dyn Fn(&mut doc4me_doc::props::CharProps)| {
         d.format_range(&Pos::body(0, a), &Pos::body(0, b), f).unwrap();
     };
     set(&mut d, 0, 5, &|c| c.link = Some("https://a.example/".into()));
@@ -969,11 +965,11 @@ fn runs_differing_only_in_link_or_decoration_keep_their_own_style() {
     assert!(strokes.contains(&display::Stroke::Solid) && strokes.contains(&display::Stroke::Double), "{strokes:?}");
     // Underline colour is per run too.
     let mut d = Document::from_text("Red Blue");
-    let red = wordcraft_doc::props::Rgb(0xFF, 0, 0);
-    let blue = wordcraft_doc::props::Rgb(0, 0, 0xFF);
+    let red = doc4me_doc::props::Rgb(0xFF, 0, 0);
+    let blue = doc4me_doc::props::Rgb(0, 0, 0xFF);
     for (a, b, c) in [(0, 3, red), (4, 8, blue)] {
         d.format_range(&Pos::body(0, a), &Pos::body(0, b), &|p| {
-            p.underline = Some(wordcraft_doc::props::Underline::Single);
+            p.underline = Some(doc4me_doc::props::Underline::Single);
             p.underline_color = Some(c);
         })
         .unwrap();
@@ -1035,22 +1031,20 @@ fn empty_center_tab_then_right_tab() {
 #[test]
 fn footnotes_sit_at_page_bottom() {
     let mut d = Document::from_text(&"Body text line.\n".repeat(30));
-    let mut note = wordcraft_doc::Paragraph::with_text("The note text.", Default::default()).styled("FootnoteText");
+    let mut note = doc4me_doc::Paragraph::with_text("The note text.", Default::default()).styled("FootnoteText");
     note.props.space_after = Some(0.0);
-    let id = d.add_part(wordcraft_doc::PartKind::Footnote, vec![wordcraft_doc::para_block(note)]);
+    let id = d.add_part(doc4me_doc::PartKind::Footnote, vec![doc4me_doc::para_block(note)]);
     d.insert_object(
         &Pos::body(3, 4),
-        InlineObject::NoteRef { kind: wordcraft_doc::para::NoteKind::Footnote, id, custom: String::new() },
+        InlineObject::NoteRef { kind: doc4me_doc::para::NoteKind::Footnote, id, custom: String::new() },
         &Default::default(),
     )
     .unwrap();
-    let eid = d.add_part(
-        wordcraft_doc::PartKind::Endnote,
-        vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("An endnote.", Default::default()))],
-    );
+    let eid =
+        d.add_part(doc4me_doc::PartKind::Endnote, vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("An endnote.", Default::default()))]);
     d.insert_object(
         &Pos::body(5, 2),
-        InlineObject::NoteRef { kind: wordcraft_doc::para::NoteKind::Endnote, id: eid, custom: String::new() },
+        InlineObject::NoteRef { kind: doc4me_doc::para::NoteKind::Endnote, id: eid, custom: String::new() },
         &Default::default(),
     )
     .unwrap();
@@ -1069,22 +1063,22 @@ fn footnotes_sit_at_page_bottom() {
 
 #[test]
 fn deleted_note_anchors_take_no_number_and_print_no_note() {
-    use wordcraft_doc::para::NoteKind;
+    use doc4me_doc::para::NoteKind;
     let mut d = Document::from_text("Alpha Beta Gamma");
     let mut ids = Vec::new();
     // Footnotes after "Alpha" and "Beta", an endnote after "Gamma" (inserted back to front).
     for (off, kind, part) in [
-        (16, NoteKind::Endnote, wordcraft_doc::PartKind::Endnote),
-        (10, NoteKind::Footnote, wordcraft_doc::PartKind::Footnote),
-        (5, NoteKind::Footnote, wordcraft_doc::PartKind::Footnote),
+        (16, NoteKind::Endnote, doc4me_doc::PartKind::Endnote),
+        (10, NoteKind::Footnote, doc4me_doc::PartKind::Footnote),
+        (5, NoteKind::Footnote, doc4me_doc::PartKind::Footnote),
     ] {
-        let id = d.add_part(part, vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("A note.", Default::default()))]);
+        let id = d.add_part(part, vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("A note.", Default::default()))]);
         d.insert_object(&Pos::body(0, off), InlineObject::NoteRef { kind, id, custom: String::new() }, &Default::default()).unwrap();
         ids.push(id);
     }
     let [end_id, second, first] = ids[..] else { panic!() };
     // Track-delete the first footnote's anchor and the endnote's anchor.
-    let obj = wordcraft_doc::para::OBJ.len_utf8();
+    let obj = doc4me_doc::para::OBJ.len_utf8();
     d.format_range(&Pos::body(0, 5), &Pos::body(0, 5 + obj), &|c| c.del = Some(0)).unwrap();
     let end = d.para(StoryRef::Body, &Path::top(0)).unwrap().len();
     d.format_range(&Pos::body(0, end - obj), &Pos::body(0, end), &|c| c.del = Some(0)).unwrap();
@@ -1117,21 +1111,21 @@ fn deleted_note_anchors_take_no_number_and_print_no_note() {
 fn hidden_note_anchors_keep_their_number_and_their_note() {
     // Measured in Word (hidden text not printed): a hidden footnote or endnote reference mark still
     // takes its number, so the visible footnote after it is 2, and both notes are still printed.
-    use wordcraft_doc::para::NoteKind;
+    use doc4me_doc::para::NoteKind;
     let mut d = Document::from_text("Alpha Beta Gamma");
     let mut ids = Vec::new();
     for (off, kind, part) in [
-        (16, NoteKind::Endnote, wordcraft_doc::PartKind::Endnote),
-        (10, NoteKind::Footnote, wordcraft_doc::PartKind::Footnote),
-        (5, NoteKind::Footnote, wordcraft_doc::PartKind::Footnote),
+        (16, NoteKind::Endnote, doc4me_doc::PartKind::Endnote),
+        (10, NoteKind::Footnote, doc4me_doc::PartKind::Footnote),
+        (5, NoteKind::Footnote, doc4me_doc::PartKind::Footnote),
     ] {
-        let id = d.add_part(part, vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("A note.", Default::default()))]);
+        let id = d.add_part(part, vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("A note.", Default::default()))]);
         d.insert_object(&Pos::body(0, off), InlineObject::NoteRef { kind, id, custom: String::new() }, &Default::default()).unwrap();
         ids.push(id);
     }
     let [end_id, second, first] = ids[..] else { panic!() };
     // Hide the first footnote's anchor and the endnote's anchor.
-    let obj = wordcraft_doc::para::OBJ.len_utf8();
+    let obj = doc4me_doc::para::OBJ.len_utf8();
     d.format_range(&Pos::body(0, 5), &Pos::body(0, 5 + obj), &|c| c.hidden = Some(true)).unwrap();
     let end = d.para(StoryRef::Body, &Path::top(0)).unwrap().len();
     d.format_range(&Pos::body(0, end - obj), &Pos::body(0, end), &|c| c.hidden = Some(true)).unwrap();
@@ -1162,17 +1156,17 @@ fn hidden_note_anchors_keep_their_number_and_their_note() {
 #[test]
 fn text_wraps_around_square_float() {
     let mut d = Document::from_text(&"Words flow around the picture here. ".repeat(30));
-    let float = wordcraft_doc::para::Float {
-        wrap: wordcraft_doc::para::Wrap::Square,
-        h_rel: wordcraft_doc::para::Anchor::Column,
-        v_rel: wordcraft_doc::para::Anchor::Paragraph,
+    let float = doc4me_doc::para::Float {
+        wrap: doc4me_doc::para::Wrap::Square,
+        h_rel: doc4me_doc::para::Anchor::Column,
+        v_rel: doc4me_doc::para::Anchor::Paragraph,
         x: 0.0,
         y: 0.0,
         dist: 9.0,
         ..Default::default()
     };
     let shape = InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::Rectangle,
+        kind: doc4me_doc::para::ShapeKind::Rectangle,
         w: 144.0,
         h: 100.0,
         fill: None,
@@ -1200,10 +1194,10 @@ fn deleted_float_leaves_no_wrap_area_without_markup() {
     // A square-wrapped shape anchored at the start of the paragraph, its anchor track-deleted.
     let text = "Words flow around the picture here. ".repeat(30);
     let mut d = Document::from_text(&text);
-    let float = wordcraft_doc::para::Float {
-        wrap: wordcraft_doc::para::Wrap::Square,
-        h_rel: wordcraft_doc::para::Anchor::Column,
-        v_rel: wordcraft_doc::para::Anchor::Paragraph,
+    let float = doc4me_doc::para::Float {
+        wrap: doc4me_doc::para::Wrap::Square,
+        h_rel: doc4me_doc::para::Anchor::Column,
+        v_rel: doc4me_doc::para::Anchor::Paragraph,
         x: 0.0,
         y: 0.0,
         dist: 9.0,
@@ -1212,7 +1206,7 @@ fn deleted_float_leaves_no_wrap_area_without_markup() {
         ..Default::default()
     };
     let shape = InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::Rectangle,
+        kind: doc4me_doc::para::ShapeKind::Rectangle,
         w: 144.0,
         h: 100.0,
         fill: None,
@@ -1225,7 +1219,7 @@ fn deleted_float_leaves_no_wrap_area_without_markup() {
         extra: Default::default(),
     };
     d.insert_object(&Pos::body(0, 0), shape, &Default::default()).unwrap();
-    let obj = wordcraft_doc::para::OBJ.len_utf8();
+    let obj = doc4me_doc::para::OBJ.len_utf8();
     d.format_range(&Pos::body(0, 0), &Pos::body(0, obj), &|c| c.del = Some(0)).unwrap();
     // Where the first line starts, and whether the shape is placed.
     let first = |hide_deleted: bool| {
@@ -1247,17 +1241,17 @@ fn hidden_float_leaves_no_wrap_area_when_hidden_text_is_not_shown() {
     // resolved formatting says so). Measured in Word: not printed, and the text runs full width.
     let text = "Words flow around the picture here. ".repeat(30);
     let mut d = Document::from_text(&text);
-    d.styles.upsert(wordcraft_doc::Style {
+    d.styles.upsert(doc4me_doc::Style {
         id: "Secret".into(),
         name: "Secret".into(),
-        kind: wordcraft_doc::StyleKind::Character,
-        chr: wordcraft_doc::CharProps { hidden: Some(true), ..Default::default() },
+        kind: doc4me_doc::StyleKind::Character,
+        chr: doc4me_doc::CharProps { hidden: Some(true), ..Default::default() },
         ..Default::default()
     });
-    let float = wordcraft_doc::para::Float {
-        wrap: wordcraft_doc::para::Wrap::Square,
-        h_rel: wordcraft_doc::para::Anchor::Column,
-        v_rel: wordcraft_doc::para::Anchor::Paragraph,
+    let float = doc4me_doc::para::Float {
+        wrap: doc4me_doc::para::Wrap::Square,
+        h_rel: doc4me_doc::para::Anchor::Column,
+        v_rel: doc4me_doc::para::Anchor::Paragraph,
         x: 0.0,
         y: 0.0,
         dist: 9.0,
@@ -1266,7 +1260,7 @@ fn hidden_float_leaves_no_wrap_area_when_hidden_text_is_not_shown() {
         ..Default::default()
     };
     let shape = InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::Rectangle,
+        kind: doc4me_doc::para::ShapeKind::Rectangle,
         w: 144.0,
         h: 100.0,
         fill: None,
@@ -1279,7 +1273,7 @@ fn hidden_float_leaves_no_wrap_area_when_hidden_text_is_not_shown() {
         extra: Default::default(),
     };
     d.insert_object(&Pos::body(0, 0), shape, &Default::default()).unwrap();
-    let obj = wordcraft_doc::para::OBJ.len_utf8();
+    let obj = doc4me_doc::para::OBJ.len_utf8();
     d.format_range(&Pos::body(0, 0), &Pos::body(0, obj), &|c| c.style = Some("Secret".into())).unwrap();
     // Where the first line starts, and whether the shape is placed.
     let first = |show_hidden: bool| {
@@ -1301,12 +1295,12 @@ fn hidden_float_leaves_no_wrap_area_when_hidden_text_is_not_shown() {
 fn extreme_page_and_line_number_starts_do_not_overflow() {
     let mut d = Document::from_text("one\ntwo\nthree");
     for b in d.body.iter_mut() {
-        if let wordcraft_doc::Block::Para(p) = std::sync::Arc::make_mut(b) {
+        if let doc4me_doc::Block::Para(p) = std::sync::Arc::make_mut(b) {
             p.props.page_break_before = Some(true);
         }
     }
     d.last_section.page_num_start = Some(u32::MAX);
-    d.last_section.line_numbers = Some(wordcraft_doc::section::LineNumbering { start: u32::MAX, ..Default::default() });
+    d.last_section.line_numbers = Some(doc4me_doc::section::LineNumbering { start: u32::MAX, ..Default::default() });
     let l = lay(&d);
     assert!(l.pages.len() >= 3, "{} pages", l.pages.len());
 }
@@ -1315,13 +1309,13 @@ fn extreme_page_and_line_number_starts_do_not_overflow() {
 fn line_numbers_borders_text_boxes() {
     let mut d = Document::from_text("one\ntwo\nthree");
     d.last_section.line_numbers = Some(Default::default());
-    d.last_section.page_borders = Some(wordcraft_doc::props::Borders::box_(wordcraft_doc::props::Border::single(1.0)));
+    d.last_section.page_borders = Some(doc4me_doc::props::Borders::box_(doc4me_doc::props::Border::single(1.0)));
     let id = d.add_part(
-        wordcraft_doc::PartKind::TextBox,
-        vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("inside the box", Default::default()))],
+        doc4me_doc::PartKind::TextBox,
+        vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("inside the box", Default::default()))],
     );
     let tb = InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::TextBox,
+        kind: doc4me_doc::para::ShapeKind::TextBox,
         w: 144.0,
         h: 72.0,
         fill: None,
@@ -1347,8 +1341,8 @@ fn tall_rows_split_across_pages() {
     let mut d = Document::from_text("before\nafter");
     let mut t = Table::new(2, 2, 468.0);
     let long = "Row text that keeps going and going so the cell grows taller than a page. ".repeat(120);
-    t.rows[0].cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(&long, Default::default()))];
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t.clone())).unwrap();
+    t.rows[0].cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(&long, Default::default()))];
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t.clone())).unwrap();
     let l = lay(&d);
     assert!(l.pages.len() >= 2, "pages {}", l.pages.len());
     // The cell's lines start on page 1 (row split, not moved) and continue on page 2.
@@ -1381,7 +1375,7 @@ fn tall_rows_split_across_pages() {
     // "Can't split" rows move whole instead.
     let mut d2 = Document::from_text("before\nafter");
     t.rows[0].props.cant_split = true;
-    d2.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    d2.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     let l2 = lay(&d2);
     assert!(l2.pages.len() >= 2);
 }
@@ -1392,7 +1386,7 @@ fn repeated_header_is_followed_by_the_next_row_even_when_it_overflows() {
     // the table rows on each page, in order.
     let rows_per_page = |t: Table| -> Vec<Vec<usize>> {
         let mut d = Document::new();
-        d.insert_block(StoryRef::Body, &Path::top(0), wordcraft_doc::Block::Table(t)).unwrap();
+        d.insert_block(StoryRef::Body, &Path::top(0), doc4me_doc::Block::Table(t)).unwrap();
         let l = lay(&d);
         l.pages
             .iter()
@@ -1405,7 +1399,7 @@ fn repeated_header_is_followed_by_the_next_row_even_when_it_overflows() {
         t.rows[0].props.header = true;
         for (row, h) in t.rows.iter_mut().zip(std::iter::once(&header).chain(rows)) {
             row.props.height = Some(*h);
-            row.props.height_rule = wordcraft_doc::props::HeightRule::AtLeast;
+            row.props.height_rule = doc4me_doc::props::HeightRule::AtLeast;
         }
         t
     };
@@ -1421,10 +1415,11 @@ fn repeated_header_is_followed_by_the_next_row_even_when_it_overflows() {
     // A row of text that is taller than the room under the header still splits across pages.
     let mut t = table(100.0, &[12.0]);
     let long = "Row text that keeps going and going so the cell grows taller than a page. ".repeat(120);
-    t.rows[1].cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(&long, Default::default()))];
+    t.rows[1].cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(&long, Default::default()))];
     let pages = rows_per_page(t);
     assert!(pages.len() >= 3, "{pages:?}");
-    assert!(pages.iter().all(|p| p.first() == Some(&0) && p.contains(&1)), "{pages:?}");
+    // (A last page may hold only the empty paragraph after the table.)
+    assert!(pages.iter().filter(|p| !p.is_empty()).all(|p| p.first() == Some(&0) && p.contains(&1)), "{pages:?}");
     // An ordinary header still repeats on every page the table reaches.
     let mut t = Table::new(80, 2, 468.0);
     t.rows[0].props.header = true;
@@ -1437,11 +1432,11 @@ fn repeated_header_is_followed_by_the_next_row_even_when_it_overflows() {
 #[test]
 fn drop_cap_with_a_huge_font_lays_out() {
     for size in [999.0, 1000.0, 1001.0, 1638.0] {
-        let cp = wordcraft_doc::CharProps { size: Some(size), ..Default::default() };
-        let mut p = wordcraft_doc::Paragraph::with_text("Hello drop cap world", cp);
+        let cp = doc4me_doc::CharProps { size: Some(size), ..Default::default() };
+        let mut p = doc4me_doc::Paragraph::with_text("Hello drop cap world", cp);
         p.props.drop_cap = Some(3);
         let mut d = Document::from_text("x");
-        d.body = vec![wordcraft_doc::para_block(p)];
+        d.body = vec![doc4me_doc::para_block(p)];
         let l = lay(&d);
         let Some(pl) = l.pages[0].items.iter().find_map(|i| if let Placed::Lines { para, .. } = i { Some(para.clone()) } else { None }) else {
             panic!("no lines at size {size}")
@@ -1453,11 +1448,10 @@ fn drop_cap_with_a_huge_font_lays_out() {
 
 #[test]
 fn drop_cap_indents_its_lines() {
-    let mut p =
-        wordcraft_doc::Paragraph::with_text(&"Every line of this paragraph wraps around a large first letter. ".repeat(6), Default::default());
+    let mut p = doc4me_doc::Paragraph::with_text(&"Every line of this paragraph wraps around a large first letter. ".repeat(6), Default::default());
     p.props.drop_cap = Some(3);
     let mut d = Document::from_text("x");
-    d.body = vec![wordcraft_doc::para_block(p)];
+    d.body = vec![doc4me_doc::para_block(p)];
     let l = lay(&d);
     let Some(pl) = l.pages[0].items.iter().find_map(|i| if let Placed::Lines { para, .. } = i { Some(para.clone()) } else { None }) else {
         panic!("no lines")
@@ -1543,10 +1537,10 @@ fn styled_table_doc(style: Option<&str>, rows: usize) -> Document {
     t.props.style = style.map(str::to_string);
     for (r, row) in t.rows.iter_mut().enumerate() {
         for (c, cell) in row.cells.iter_mut().enumerate() {
-            cell.blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(&format!("R{r} C{c}"), Default::default()))];
+            cell.blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(&format!("R{r} C{c}"), Default::default()))];
         }
     }
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     d
 }
 
@@ -1572,9 +1566,9 @@ fn table_style_paragraph_props_beat_document_defaults() {
     let plain = styled_table_doc(None, 3);
     let (lg, lp) = (lay(&d), lay(&plain));
     let p = cell_para(&lg, 1, 0);
-    assert_eq!((p.rp.space_after, p.rp.line_spacing), (0.0, wordcraft_doc::props::LineSpacing::Multiple(1.0)));
+    assert_eq!((p.rp.space_after, p.rp.line_spacing), (0.0, doc4me_doc::props::LineSpacing::Multiple(1.0)));
     let q = cell_para(&lp, 1, 0);
-    assert_eq!((q.rp.space_after, q.rp.line_spacing), (8.0, wordcraft_doc::props::LineSpacing::Multiple(1.15)));
+    assert_eq!((q.rp.space_after, q.rp.line_spacing), (8.0, doc4me_doc::props::LineSpacing::Multiple(1.15)));
     let (g, n) = (row_height(&lg, 1), row_height(&lp, 1));
     assert!(g + 8.0 < n, "Table Grid row {g}, unstyled row {n}");
     assert!(g < 18.0, "one 12 pt line, single spaced: {g}");
@@ -1585,7 +1579,7 @@ fn table_style_paragraph_props_beat_document_defaults() {
 #[test]
 fn paragraph_style_and_direct_formatting_beat_table_style() {
     let mut d = styled_table_doc(Some("TableGrid"), 3);
-    d.styles.upsert(wordcraft_doc::Style {
+    d.styles.upsert(doc4me_doc::Style {
         id: "Spaced".into(),
         name: "Spaced".into(),
         based_on: Some("Normal".into()),
@@ -1607,7 +1601,7 @@ fn paragraph_style_and_direct_formatting_beat_table_style() {
     let l = lay(&d);
     let styled = cell_para(&l, 0, 0);
     assert_eq!(styled.rp.space_after, 12.0, "paragraph style");
-    assert_eq!(styled.rp.line_spacing, wordcraft_doc::props::LineSpacing::Multiple(1.0), "unset by the style: from the table style");
+    assert_eq!(styled.rp.line_spacing, doc4me_doc::props::LineSpacing::Multiple(1.0), "unset by the style: from the table style");
     assert_eq!(cell_para(&l, 1, 0).rp.space_after, 3.0, "direct formatting");
     assert_eq!(cell_para(&l, 2, 0).rp.space_after, 0.0, "table style");
     // Normal setting its own spacing wins too, even where it equals nothing in the defaults.
@@ -1621,15 +1615,15 @@ fn paragraph_style_and_direct_formatting_beat_table_style() {
 /// adds its own run formatting and conditional formats.
 #[test]
 fn derived_table_style_merges_its_base() {
-    use wordcraft_doc::styles::TableStyleParts;
-    let red = wordcraft_doc::Rgb(0xC0, 0, 0);
+    use doc4me_doc::styles::TableStyleParts;
+    let red = doc4me_doc::Rgb(0xC0, 0, 0);
     let mut d = styled_table_doc(Some("RedGrid"), 3);
-    d.styles.upsert(wordcraft_doc::Style {
+    d.styles.upsert(doc4me_doc::Style {
         id: "RedGrid".into(),
         name: "Red Grid".into(),
-        kind: wordcraft_doc::StyleKind::Table,
+        kind: doc4me_doc::StyleKind::Table,
         based_on: Some("TableGrid".into()),
-        chr: CharProps { bold: Some(true), color: Some(wordcraft_doc::TextColor::Rgb(red)), ..Default::default() },
+        chr: CharProps { bold: Some(true), color: Some(doc4me_doc::TextColor::Rgb(red)), ..Default::default() },
         table: Some(TableStyleParts { header_chr: CharProps { italic: Some(true), ..Default::default() }, ..Default::default() }),
         ..Default::default()
     });
@@ -1639,7 +1633,7 @@ fn derived_table_style_merges_its_base() {
     let body = cell_para(&l, 1, 1);
     let rc = &body.styles[0].rc;
     assert!(rc.bold && !rc.italic, "{rc:?}");
-    assert_eq!(rc.color, wordcraft_doc::TextColor::Rgb(red));
+    assert_eq!(rc.color, doc4me_doc::TextColor::Rgb(red));
     assert_eq!(body.rp.space_after, 0.0, "Table Grid's paragraph formatting");
     let head = &cell_para(&l, 0, 0).styles[0].rc;
     assert!(head.bold && head.italic, "{head:?}");
@@ -1653,15 +1647,14 @@ fn derived_table_style_merges_its_base() {
     assert!(!cell_para(&lay(&d2), 2, 0).styles[0].rc.bold);
 }
 
-fn text_box(d: &mut Document, at: usize, text: &str, w: f32, h: f32, float: wordcraft_doc::para::Float) -> u32 {
+fn text_box(d: &mut Document, at: usize, text: &str, w: f32, h: f32, float: doc4me_doc::para::Float) -> u32 {
     text_box_at(d, &Pos::body(0, at), text, w, h, float)
 }
 
-fn text_box_at(d: &mut Document, pos: &Pos, text: &str, w: f32, h: f32, float: wordcraft_doc::para::Float) -> u32 {
-    let id =
-        d.add_part(wordcraft_doc::PartKind::TextBox, vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(text, Default::default()))]);
+fn text_box_at(d: &mut Document, pos: &Pos, text: &str, w: f32, h: f32, float: doc4me_doc::para::Float) -> u32 {
+    let id = d.add_part(doc4me_doc::PartKind::TextBox, vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(text, Default::default()))]);
     let shape = InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::TextBox,
+        kind: doc4me_doc::para::ShapeKind::TextBox,
         w,
         h,
         fill: None,
@@ -1677,7 +1670,7 @@ fn text_box_at(d: &mut Document, pos: &Pos, text: &str, w: f32, h: f32, float: w
     id
 }
 
-fn box_rect(l: &DocLayout, id: u32) -> wordcraft_geom::Rect {
+fn box_rect(l: &DocLayout, id: u32) -> doc4me_geom::Rect {
     l.pages[0]
         .items
         .iter()
@@ -1705,16 +1698,16 @@ fn clicks_inside_a_text_box_hit_its_story() {
     assert_ne!(l.story_at(0, r.right() + 8.0, r.y + 10.0), Some(box_story));
     // The caret in the box sits inside it.
     let bc = l.caret(&Pos { story: box_story, path: Path::top(0), off: 0 }).unwrap();
-    assert!(r.contains(wordcraft_geom::Point::new(bc.x, bc.top)), "{bc:?} outside {r:?}");
+    assert!(r.contains(doc4me_geom::Point::new(bc.x, bc.top)), "{bc:?} outside {r:?}");
 }
 
 #[test]
 fn body_text_wins_over_a_text_box_behind_it() {
     let mut d = Document::from_text("Hi");
-    let float = wordcraft_doc::para::Float {
-        wrap: wordcraft_doc::para::Wrap::BehindText,
-        h_rel: wordcraft_doc::para::Anchor::Column,
-        v_rel: wordcraft_doc::para::Anchor::Paragraph,
+    let float = doc4me_doc::para::Float {
+        wrap: doc4me_doc::para::Wrap::BehindText,
+        h_rel: doc4me_doc::para::Anchor::Column,
+        v_rel: doc4me_doc::para::Anchor::Paragraph,
         x: 0.0,
         y: 0.0,
         dist: 0.0,
@@ -1724,7 +1717,7 @@ fn body_text_wins_over_a_text_box_behind_it() {
     let l = lay(&d);
     let r = box_rect(&l, id);
     let c = l.caret(&Pos::body(0, 0)).unwrap();
-    assert!(r.contains(wordcraft_geom::Point::new(c.x + 2.0, c.top + 2.0)), "box covers the text: {r:?} {c:?}");
+    assert!(r.contains(doc4me_geom::Point::new(c.x + 2.0, c.top + 2.0)), "box covers the text: {r:?} {c:?}");
     assert_eq!(l.story_at(0, c.x + 2.0, c.top + c.height / 2.0), Some(StoryRef::Body));
     assert_eq!(l.story_at(0, r.right() - 10.0, r.bottom() - 10.0), Some(StoryRef::Part(id)));
 }
@@ -1734,7 +1727,7 @@ fn presses_grab_pictures_anywhere_and_text_boxes_by_their_border() {
     let mut d = Document::from_text("Words before the objects.");
     let id = text_box(&mut d, 0, "Inside", 144.0, 72.0, Default::default());
     let shape = InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::Rectangle,
+        kind: doc4me_doc::para::ShapeKind::Rectangle,
         w: 60.0,
         h: 40.0,
         fill: None,
@@ -1765,7 +1758,7 @@ fn presses_grab_pictures_anywhere_and_text_boxes_by_their_border() {
 }
 
 /// (lines placed, lines laid out) of a text box's story, and its area.
-fn box_lines(l: &DocLayout, id: u32) -> (usize, usize, wordcraft_geom::Rect) {
+fn box_lines(l: &DocLayout, id: u32) -> (usize, usize, doc4me_geom::Rect) {
     let mut shown = 0;
     let mut total = 0;
     for it in &l.pages[0].items {
@@ -1806,10 +1799,10 @@ fn text_box_hides_text_that_does_not_fit() {
 
 #[test]
 fn square_wrap_flows_text_on_both_sides() {
-    let float = |x: f32| wordcraft_doc::para::Float {
-        wrap: wordcraft_doc::para::Wrap::Square,
-        h_rel: wordcraft_doc::para::Anchor::Column,
-        v_rel: wordcraft_doc::para::Anchor::Paragraph,
+    let float = |x: f32| doc4me_doc::para::Float {
+        wrap: doc4me_doc::para::Wrap::Square,
+        h_rel: doc4me_doc::para::Anchor::Column,
+        v_rel: doc4me_doc::para::Anchor::Paragraph,
         x,
         y: 0.0,
         dist: 9.0,
@@ -1863,18 +1856,17 @@ fn ink_end(pl: &ParaLayout, ln: &para::Line) -> f32 {
 }
 
 fn footnote(d: &mut Document, pos: &Pos, text: &str) -> u32 {
-    let id =
-        d.add_part(wordcraft_doc::PartKind::Footnote, vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(text, Default::default()))]);
-    d.insert_object(pos, InlineObject::NoteRef { kind: wordcraft_doc::para::NoteKind::Footnote, id, custom: String::new() }, &Default::default())
+    let id = d.add_part(doc4me_doc::PartKind::Footnote, vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(text, Default::default()))]);
+    d.insert_object(pos, InlineObject::NoteRef { kind: doc4me_doc::para::NoteKind::Footnote, id, custom: String::new() }, &Default::default())
         .unwrap();
     id
 }
 
-fn page_float(x: f32, y: f32) -> wordcraft_doc::para::Float {
-    wordcraft_doc::para::Float {
-        wrap: wordcraft_doc::para::Wrap::InFrontOfText,
-        h_rel: wordcraft_doc::para::Anchor::Page,
-        v_rel: wordcraft_doc::para::Anchor::Page,
+fn page_float(x: f32, y: f32) -> doc4me_doc::para::Float {
+    doc4me_doc::para::Float {
+        wrap: doc4me_doc::para::Wrap::InFrontOfText,
+        h_rel: doc4me_doc::para::Anchor::Page,
+        v_rel: doc4me_doc::para::Anchor::Page,
         x,
         y,
         dist: 0.0,
@@ -1886,21 +1878,19 @@ fn page_float(x: f32, y: f32) -> wordcraft_doc::para::Float {
 fn text_boxes_show_in_headers_footers_cells_and_notes() {
     let mut d = Document::from_text(&"Body paragraph.\n".repeat(4));
     // Header: an inline box and a box placed on the page.
-    let hid =
-        d.add_part(wordcraft_doc::PartKind::Header, vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("Head", Default::default()))]);
+    let hid = d.add_part(doc4me_doc::PartKind::Header, vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("Head", Default::default()))]);
     d.last_section.headers.default = Some(hid);
     let e = d.end_of(StoryRef::Part(hid));
     let inline = text_box_at(&mut d, &e, "Inline in header", 100.0, 30.0, Default::default());
     let e = d.end_of(StoryRef::Part(hid));
     let placed = text_box_at(&mut d, &e, "On the page", 100.0, 40.0, page_float(400.0, 20.0));
     // Footer: a box placed on the page (the footer is laid out twice to find it).
-    let fid =
-        d.add_part(wordcraft_doc::PartKind::Footer, vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("Foot", Default::default()))]);
+    let fid = d.add_part(doc4me_doc::PartKind::Footer, vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("Foot", Default::default()))]);
     d.last_section.footers.default = Some(fid);
     let e = d.end_of(StoryRef::Part(fid));
     let in_footer = text_box_at(&mut d, &e, "Footer box", 100.0, 30.0, page_float(300.0, 740.0));
     // A table cell and a footnote.
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(wordcraft_doc::Table::new(1, 1, 300.0))).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(doc4me_doc::Table::new(1, 1, 300.0))).unwrap();
     let cell = Pos { story: StoryRef::Body, path: Path(vec![1, 0, 0, 0]), off: 0 };
     let in_cell = text_box_at(&mut d, &cell, "In a cell", 120.0, 30.0, Default::default());
     let note = footnote(&mut d, &Pos::body(0, 4), "Note: ");
@@ -1950,13 +1940,13 @@ fn box_fan_out(levels: usize, fan: usize) -> Document {
     let ids: Vec<u32> = (0..levels)
         .map(|k| {
             d.add_part(
-                wordcraft_doc::PartKind::TextBox,
-                vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(&format!("Level {k}"), Default::default()))],
+                doc4me_doc::PartKind::TextBox,
+                vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(&format!("Level {k}"), Default::default()))],
             )
         })
         .collect();
     let shape = |story| InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::TextBox,
+        kind: doc4me_doc::para::ShapeKind::TextBox,
         w,
         h,
         fill: None,
@@ -1985,7 +1975,7 @@ fn self_showing_and_fanned_out_text_boxes_stay_bounded() {
     // Chains of boxes each showing the next 30 times (30^4 expansions unbounded).
     let d = box_fan_out(5, 30);
     let l = lay(&d);
-    assert!(l.text_boxes <= 1 + wordcraft_doc::BoxBudget::MAX_NESTED, "{} boxes laid out", l.text_boxes);
+    assert!(l.text_boxes <= 1 + doc4me_doc::BoxBudget::MAX_NESTED, "{} boxes laid out", l.text_boxes);
     // Footnote numbering's walk is bounded the same way.
     let mut visits = 0usize;
     d.objects_in_reading_order(&mut |_| visits += 1);
@@ -2002,8 +1992,7 @@ fn many_text_boxes_and_a_header_box_all_show() {
         d.split_paragraph(&end).unwrap();
     }
     let ids: Vec<u32> = (0..400).map(|k| text_box_at(&mut d, &Pos::body(k, 0), &format!("Box {k}"), 100.0, 30.0, Default::default())).collect();
-    let hid =
-        d.add_part(wordcraft_doc::PartKind::Header, vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("Head", Default::default()))]);
+    let hid = d.add_part(doc4me_doc::PartKind::Header, vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("Head", Default::default()))]);
     d.last_section.headers.default = Some(hid);
     let e = d.end_of(StoryRef::Part(hid));
     let in_header = text_box_at(&mut d, &e, "Header box", 100.0, 30.0, Default::default());
@@ -2029,9 +2018,9 @@ fn a_text_box_inside_a_text_box_still_shows_its_text() {
     assert!(l.caret(&d.start_of(StoryRef::Part(inner))).is_some(), "the inner box's text is laid out");
 }
 
-fn picture(w: f32, h: f32, float: wordcraft_doc::para::Float) -> InlineObject {
+fn picture(w: f32, h: f32, float: doc4me_doc::para::Float) -> InlineObject {
     InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::Rectangle,
+        kind: doc4me_doc::para::ShapeKind::Rectangle,
         w,
         h,
         fill: None,
@@ -2047,9 +2036,9 @@ fn picture(w: f32, h: f32, float: wordcraft_doc::para::Float) -> InlineObject {
 
 #[test]
 fn line_spacing_does_not_scale_pictures() {
-    use wordcraft_doc::props::LineSpacing;
+    use doc4me_doc::props::LineSpacing;
     let mut d = Document::from_text("");
-    if let Some(wordcraft_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
+    if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
         p.props.line_spacing = Some(LineSpacing::Multiple(1.15));
         p.insert_object(0, picture(144.0, 144.0, Default::default()), &Default::default()).unwrap();
     }
@@ -2064,11 +2053,11 @@ fn line_spacing_does_not_scale_pictures() {
 
 #[test]
 fn multiple_line_spacing_adds_its_leading_below_the_text() {
-    use wordcraft_doc::props::LineSpacing;
+    use doc4me_doc::props::LineSpacing;
     // (spacing, expected baseline below the line top as a share of the ascent)
     for (spacing, share) in [(LineSpacing::Multiple(1.15), 1.0), (LineSpacing::Multiple(2.0), 1.0), (LineSpacing::Multiple(0.8), 0.8)] {
         let mut d = Document::from_text(&"Several words wrap onto more lines. ".repeat(30));
-        if let Some(wordcraft_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
+        if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
             p.props.line_spacing = Some(spacing);
         }
         let l = lay(&d);
@@ -2087,7 +2076,7 @@ fn multiple_line_spacing_adds_its_leading_below_the_text() {
     }
     // Exact spacing still keeps the descent below the baseline.
     let mut d = Document::from_text("Exact");
-    if let Some(wordcraft_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
+    if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
         p.props.line_spacing = Some(LineSpacing::Exactly(30.0));
     }
     let l = lay(&d);
@@ -2099,10 +2088,10 @@ fn multiple_line_spacing_adds_its_leading_below_the_text() {
 #[test]
 fn body_starts_right_below_a_tall_header() {
     let mut d = Document::from_text("Body");
-    let mut hp = wordcraft_doc::Paragraph::with_text("", Default::default());
+    let mut hp = doc4me_doc::Paragraph::with_text("", Default::default());
     hp.insert_object(0, picture(100.0, 80.0, Default::default()), &Default::default()).unwrap();
     hp.props.space_after = Some(0.0);
-    let id = d.add_part(wordcraft_doc::PartKind::Header, vec![wordcraft_doc::para_block(hp)]);
+    let id = d.add_part(doc4me_doc::PartKind::Header, vec![doc4me_doc::para_block(hp)]);
     d.last_section.headers.default = Some(id);
     let l = lay(&d);
     let Some(Placed::Lines { para, y, .. }) = l.pages[0].header.iter().find(|i| matches!(i, Placed::Lines { .. })) else { panic!() };
@@ -2116,8 +2105,8 @@ fn body_starts_right_below_a_tall_header() {
 #[test]
 fn inline_picture_keeps_room_for_its_effects() {
     let mut d = Document::from_text("");
-    let shadow = wordcraft_doc::para::Float { effect: [6.0, 12.0, 18.0, 27.0], ..Default::default() };
-    if let Some(wordcraft_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
+    let shadow = doc4me_doc::para::Float { effect: [6.0, 12.0, 18.0, 27.0], ..Default::default() };
+    if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
         p.insert_object(0, picture(100.0, 50.0, shadow.clone()), &Default::default()).unwrap();
     }
     let l = lay(&d);
@@ -2137,7 +2126,7 @@ fn line_tops(l: &DocLayout) -> Vec<f32> {
 
 #[test]
 fn at_least_rows_add_cell_margins_and_border_bands() {
-    use wordcraft_doc::props::{Border, BorderStyle, Borders, HeightRule};
+    use doc4me_doc::props::{Border, BorderStyle, Borders, HeightRule};
     let mut d = Document::from_text("");
     let line = Some(Border { style: BorderStyle::Single, width: 0.5, color: None, space: 0.0 });
     let mut t = Table::new(2, 1, 200.0);
@@ -2146,9 +2135,9 @@ fn at_least_rows_add_cell_margins_and_border_bands() {
     for (r, text) in t.rows.iter_mut().zip(["one", "two"]) {
         r.props.height = Some(30.0);
         r.props.height_rule = HeightRule::AtLeast;
-        r.cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(text, Default::default()))];
+        r.cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(text, Default::default()))];
     }
-    d.body = vec![std::sync::Arc::new(wordcraft_doc::Block::Table(t))];
+    d.body = vec![std::sync::Arc::new(doc4me_doc::Block::Table(t))];
     let tops = line_tops(&lay(&d));
     // Word: a 30pt at-least row with 5pt margins and 0.5pt borders steps 40.5pt, and the text
     // starts below the top border and the top margin.
@@ -2213,9 +2202,9 @@ fn lines_with_tabs_never_shrink() {
     }
 }
 
-fn rect_shape(w: f32, h: f32, float: wordcraft_doc::para::Float) -> InlineObject {
+fn rect_shape(w: f32, h: f32, float: doc4me_doc::para::Float) -> InlineObject {
     InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::Rectangle,
+        kind: doc4me_doc::para::ShapeKind::Rectangle,
         w,
         h,
         fill: None,
@@ -2240,7 +2229,7 @@ fn first_line_top(items: &[Placed]) -> f32 {
 
 #[test]
 fn floats_align_within_their_reference_area() {
-    use wordcraft_doc::para::{Anchor, Float, FloatAlign, Wrap};
+    use doc4me_doc::para::{Anchor, Float, FloatAlign, Wrap};
     let mut d = Document::from_text("Some text beside the pictures.");
     let centred = Float { wrap: Wrap::InFrontOfText, h_rel: Anchor::Margin, h_align: Some(FloatAlign::Center), x: 999.0, ..Default::default() };
     let right = Float { wrap: Wrap::InFrontOfText, h_rel: Anchor::Page, h_align: Some(FloatAlign::End), ..Default::default() };
@@ -2261,7 +2250,7 @@ fn floats_align_within_their_reference_area() {
 
 #[test]
 fn top_and_bottom_float_pushes_its_own_first_line_down() {
-    use wordcraft_doc::para::{Anchor, Float, Wrap};
+    use doc4me_doc::para::{Anchor, Float, Wrap};
     let mut d = Document::from_text(&"Text that starts below the picture. ".repeat(10));
     let f = Float { wrap: Wrap::TopAndBottom, h_rel: Anchor::Column, v_rel: Anchor::Paragraph, dist_bottom: 6.0, ..Default::default() };
     d.insert_object(&Pos::body(0, 0), rect_shape(144.0, 100.0, f), &Default::default()).unwrap();
@@ -2276,11 +2265,11 @@ fn top_and_bottom_float_pushes_its_own_first_line_down() {
 
 #[test]
 fn float_follows_its_paragraph_to_the_next_page() {
-    use wordcraft_doc::para::{Anchor, Float, Wrap};
+    use doc4me_doc::para::{Anchor, Float, Wrap};
     let mut d = Document::from_text(&format!("First page.\n{}", "Text beside the picture on page two. ".repeat(20)));
     let f = Float { wrap: Wrap::Square, h_rel: Anchor::Column, v_rel: Anchor::Paragraph, dist: 9.0, ..Default::default() };
     d.insert_object(&Pos::body(1, 0), rect_shape(144.0, 100.0, f), &Default::default()).unwrap();
-    if let Some(wordcraft_doc::Block::Para(p)) = d.body.get_mut(1).map(std::sync::Arc::make_mut) {
+    if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(1).map(std::sync::Arc::make_mut) {
         p.props.page_break_before = Some(true);
     }
     let l = lay(&d);
@@ -2294,19 +2283,19 @@ fn float_follows_its_paragraph_to_the_next_page() {
 
 #[test]
 fn floats_in_headers_and_table_cells_are_drawn() {
-    use wordcraft_doc::para::{Anchor, Float, Wrap};
+    use doc4me_doc::para::{Anchor, Float, Wrap};
     let mut d = Document::from_text("Body text.");
     let logo = Float { wrap: Wrap::BehindText, h_rel: Anchor::Page, v_rel: Anchor::Page, x: 400.0, y: 20.0, ..Default::default() };
-    let mut hp = wordcraft_doc::Paragraph::with_text("Header", Default::default());
+    let mut hp = doc4me_doc::Paragraph::with_text("Header", Default::default());
     hp.insert_object(0, rect_shape(120.0, 60.0, logo), &Default::default()).unwrap();
-    let id = d.add_part(wordcraft_doc::PartKind::Header, vec![wordcraft_doc::para_block(hp)]);
+    let id = d.add_part(doc4me_doc::PartKind::Header, vec![doc4me_doc::para_block(hp)]);
     d.last_section.headers.default = Some(id);
     let mut t = Table::new(1, 2, 468.0);
-    let mut cp = wordcraft_doc::Paragraph::with_text("cell", Default::default());
+    let mut cp = doc4me_doc::Paragraph::with_text("cell", Default::default());
     let in_cell = Float { wrap: Wrap::Square, h_rel: Anchor::Column, v_rel: Anchor::Paragraph, x: 5.0, ..Default::default() };
     cp.insert_object(0, rect_shape(40.0, 20.0, in_cell), &Default::default()).unwrap();
-    t.rows[0].cells[0].blocks = vec![wordcraft_doc::para_block(cp)];
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    t.rows[0].cells[0].blocks = vec![doc4me_doc::para_block(cp)];
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     let h = shapes(&l.pages[0].header);
     assert_eq!(h.len(), 1, "header float drawn");
@@ -2319,7 +2308,7 @@ fn floats_in_headers_and_table_cells_are_drawn() {
 
 #[test]
 fn wrap_area_uses_each_distance() {
-    use wordcraft_doc::para::{Float, Wrap};
+    use doc4me_doc::para::{Float, Wrap};
     let f = Float { wrap: Wrap::Square, dist: 9.0, dist_top: 0.0, dist_bottom: 4.0, ..Default::default() };
     let (r, tb, ..) = wrap_area(Rect::new(10.0, 20.0, 100.0, 50.0), &f, None).unwrap();
     assert_eq!((r.x, r.y, r.w, r.h, tb), (1.0, 20.0, 118.0, 54.0, false));
@@ -2331,11 +2320,11 @@ fn wrap_area_uses_each_distance() {
 
 #[test]
 fn float_moved_to_a_new_page_sits_at_its_paragraph_top() {
-    use wordcraft_doc::para::{Anchor, Float, Wrap};
+    use doc4me_doc::para::{Anchor, Float, Wrap};
     let mut d = Document::from_text(&format!("First page.\n{}", "Text beside the picture on page two. ".repeat(20)));
     let f = Float { wrap: Wrap::Square, h_rel: Anchor::Column, v_rel: Anchor::Paragraph, dist: 9.0, ..Default::default() };
     d.insert_object(&Pos::body(1, 0), rect_shape(144.0, 100.0, f), &Default::default()).unwrap();
-    if let Some(wordcraft_doc::Block::Para(p)) = d.body.get_mut(1).map(std::sync::Arc::make_mut) {
+    if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(1).map(std::sync::Arc::make_mut) {
         p.props.page_break_before = Some(true);
         p.props.space_before = Some(24.0);
     }
@@ -2348,13 +2337,13 @@ fn float_moved_to_a_new_page_sits_at_its_paragraph_top() {
 
 #[test]
 fn page_relative_header_float_wraps_where_it_is_drawn() {
-    use wordcraft_doc::para::{Anchor, Float, Wrap};
+    use doc4me_doc::para::{Anchor, Float, Wrap};
     let body_top = |wrap| {
         let mut d = Document::from_text("Body text.");
         let logo = Float { wrap, h_rel: Anchor::Page, v_rel: Anchor::Page, x: 72.0, y: 0.0, ..Default::default() };
-        let mut hp = wordcraft_doc::Paragraph::with_text("Header", Default::default());
+        let mut hp = doc4me_doc::Paragraph::with_text("Header", Default::default());
         hp.insert_object(0, rect_shape(400.0, 20.0, logo), &Default::default()).unwrap();
-        let id = d.add_part(wordcraft_doc::PartKind::Header, vec![wordcraft_doc::para_block(hp)]);
+        let id = d.add_part(doc4me_doc::PartKind::Header, vec![doc4me_doc::para_block(hp)]);
         d.last_section.headers.default = Some(id);
         first_line_top(&lay(&d).pages[0].items)
     };
@@ -2369,7 +2358,7 @@ fn page_relative_header_float_wraps_where_it_is_drawn() {
 /// at the top margin and paginates exactly as without the box.
 #[test]
 fn floating_header_text_box_leaves_the_body_at_the_top_margin() {
-    use wordcraft_doc::para::{Anchor, Float, ShapeKind, Wrap};
+    use doc4me_doc::para::{Anchor, Float, ShapeKind, Wrap};
     let body: Vec<String> = (1..=40).map(|i| format!("Body paragraph {i}: synthetic public test content.")).collect();
     let make = |float: Option<Float>| {
         let mut d = Document::from_text(&body.join("\n"));
@@ -2379,12 +2368,12 @@ fn floating_header_text_box_leaves_the_body_at_the_top_margin() {
         d.last_section.header = 18.0;
         // A label, then the paragraph the box is anchored to (empty in the control).
         let tight = ParaProps { space_before: Some(0.0), space_after: Some(0.0), ..Default::default() };
-        let mut label = wordcraft_doc::Paragraph::with_text("Header label", Default::default());
+        let mut label = doc4me_doc::Paragraph::with_text("Header label", Default::default());
         label.props = tight.clone();
-        let mut anchor = wordcraft_doc::Paragraph { props: tight, ..Default::default() };
+        let mut anchor = doc4me_doc::Paragraph { props: tight, ..Default::default() };
         if let Some(float) = float {
-            let text = wordcraft_doc::Paragraph::with_text("WATERMARK", Default::default());
-            let story = d.add_part(wordcraft_doc::PartKind::TextBox, vec![wordcraft_doc::para_block(text)]);
+            let text = doc4me_doc::Paragraph::with_text("WATERMARK", Default::default());
+            let story = d.add_part(doc4me_doc::PartKind::TextBox, vec![doc4me_doc::para_block(text)]);
             let tb = InlineObject::Shape {
                 kind: ShapeKind::TextBox,
                 w: 405.0,
@@ -2400,7 +2389,7 @@ fn floating_header_text_box_leaves_the_body_at_the_top_margin() {
             };
             anchor.insert_object(0, tb, &Default::default()).unwrap();
         }
-        let id = d.add_part(wordcraft_doc::PartKind::Header, vec![wordcraft_doc::para_block(label), wordcraft_doc::para_block(anchor)]);
+        let id = d.add_part(doc4me_doc::PartKind::Header, vec![doc4me_doc::para_block(label), doc4me_doc::para_block(anchor)]);
         d.last_section.headers.default = Some(id);
         let l = lay(&d);
         (l.pages.len(), first_line_top(&l.pages[0].items))
@@ -2426,13 +2415,13 @@ fn labels(l: &DocLayout) -> Vec<String> {
         .collect()
 }
 
-fn numbered(d: &mut Document, texts: &[&str], props: ParaProps) -> Vec<wordcraft_doc::Paragraph> {
-    let num = d.numbering.add_list(wordcraft_doc::ListKind::Numbered);
+fn numbered(d: &mut Document, texts: &[&str], props: ParaProps) -> Vec<doc4me_doc::Paragraph> {
+    let num = d.numbering.add_list(doc4me_doc::ListKind::Numbered);
     texts
         .iter()
         .map(|t| {
-            let mut p = wordcraft_doc::Paragraph::with_text(t, Default::default());
-            p.props = ParaProps { numbering: Some(wordcraft_doc::props::NumRef { num, level: 0 }), ..props.clone() };
+            let mut p = doc4me_doc::Paragraph::with_text(t, Default::default());
+            p.props = ParaProps { numbering: Some(doc4me_doc::props::NumRef { num, level: 0 }), ..props.clone() };
             p
         })
         .collect()
@@ -2446,7 +2435,7 @@ fn list_items_are_counted_once_when_laid_out_again() {
     let mut items = numbered(&mut d, &["one", "two", "three"], props);
     // A page break before moves the last item after its first layout.
     items[2].props.page_break_before = Some(true);
-    d.body = items.into_iter().map(wordcraft_doc::para_block).collect();
+    d.body = items.into_iter().map(doc4me_doc::para_block).collect();
     let l = lay(&d);
     assert_eq!(l.pages.len(), 2);
     assert_eq!(labels(&l), ["1.", "2.", "3."]);
@@ -2454,29 +2443,29 @@ fn list_items_are_counted_once_when_laid_out_again() {
 
 #[test]
 fn list_items_beside_a_float_in_a_cell_are_counted_once() {
-    use wordcraft_doc::para::{Anchor, Float, Wrap};
+    use doc4me_doc::para::{Anchor, Float, Wrap};
     let mut d = Document::from_text("Body.");
     let mut items = numbered(&mut d, &["first item", "second item", "third item"], ParaProps::default());
     // The float makes the cell's paragraphs wrap, so they are laid out a second time.
     let f = Float { wrap: Wrap::Square, h_rel: Anchor::Column, v_rel: Anchor::Paragraph, ..Default::default() };
     items[0].insert_object(0, rect_shape(40.0, 60.0, f), &Default::default()).unwrap();
     let mut t = Table::new(1, 1, 468.0);
-    t.rows[0].cells[0].blocks = items.into_iter().map(wordcraft_doc::para_block).collect();
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    t.rows[0].cells[0].blocks = items.into_iter().map(doc4me_doc::para_block).collect();
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     assert_eq!(labels(&lay(&d)), ["1.", "2.", "3."]);
 }
 
 #[test]
 fn compatibility_mode_decides_where_a_table_s_edge_sits() {
-    use wordcraft_doc::props::{Border, BorderStyle, Borders};
+    use doc4me_doc::props::{Border, BorderStyle, Borders};
     let cell_text_x = |mode: u32| {
         let mut d = Document::from_text("");
         d.settings.compat_mode = mode;
         let line = Some(Border { style: BorderStyle::Single, width: 0.5, color: None, space: 0.0 });
         let mut t = Table::new(1, 1, 200.0);
         t.props.borders = Some(Borders { top: line, left: line, bottom: line, right: line, between: line, inside_v: line });
-        t.rows[0].cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("cell", Default::default()))];
-        d.body = vec![std::sync::Arc::new(wordcraft_doc::Block::Table(t))];
+        t.rows[0].cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("cell", Default::default()))];
+        d.body = vec![std::sync::Arc::new(doc4me_doc::Block::Table(t))];
         let l = lay(&d);
         l.pages[0].items.iter().find_map(|i| if let Placed::Lines { x, .. } = i { Some(*x) } else { None }).unwrap()
     };
@@ -2488,11 +2477,11 @@ fn compatibility_mode_decides_where_a_table_s_edge_sits() {
 
 #[test]
 fn floating_tables_take_no_room_and_text_wraps_beside_them() {
-    use wordcraft_doc::para::Anchor;
-    use wordcraft_doc::props::TableFloat;
+    use doc4me_doc::para::Anchor;
+    use doc4me_doc::props::TableFloat;
     let mut d = Document::from_text("Body text beside the narrow table.");
     let cell = |t: &mut Table, text: &str| {
-        t.rows[0].cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(text, Default::default()))]
+        t.rows[0].cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(text, Default::default()))]
     };
     let mut wide = Table::new(1, 1, 468.0);
     cell(&mut wide, "Wide");
@@ -2501,8 +2490,8 @@ fn floating_tables_take_no_room_and_text_wraps_beside_them() {
     cell(&mut narrow, "Narrow");
     narrow.props.float =
         Some(TableFloat { h_rel: Anchor::Column, v_rel: Anchor::Paragraph, dist: [9.0, 0.0, 9.0, 0.0], overlap: false, ..Default::default() });
-    d.insert_block(StoryRef::Body, &Path::top(0), wordcraft_doc::Block::Table(wide)).unwrap();
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(narrow)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(0), doc4me_doc::Block::Table(wide)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(narrow)).unwrap();
     let l = lay(&d);
     let lines: Vec<(f32, f32, f32)> = l.pages[0]
         .items
@@ -2522,15 +2511,15 @@ fn floating_tables_take_no_room_and_text_wraps_beside_them() {
 
 #[test]
 fn a_floating_table_taller_than_a_page_runs_across_pages() {
-    use wordcraft_doc::para::Anchor;
-    use wordcraft_doc::props::TableFloat;
+    use doc4me_doc::para::Anchor;
+    use doc4me_doc::props::TableFloat;
     let mut d = Document::from_text("After the table.");
     let mut t = Table::new(80, 1, 300.0);
     for (i, r) in t.rows.iter_mut().enumerate() {
-        r.cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(&format!("Row {i}"), Default::default()))];
+        r.cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(&format!("Row {i}"), Default::default()))];
     }
     t.props.float = Some(TableFloat { h_rel: Anchor::Margin, v_rel: Anchor::Paragraph, x: -30.0, overlap: false, ..Default::default() });
-    d.insert_block(StoryRef::Body, &Path::top(0), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(0), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     assert!(l.pages.len() >= 2, "{} page(s)", l.pages.len());
     // Every row is drawn on a page, none past a page's bottom margin, and all from the table's
@@ -2554,16 +2543,16 @@ fn a_floating_table_taller_than_a_page_runs_across_pages() {
 /// page full of text goes to the next page with it, like Word, instead of covering that text.
 #[test]
 fn a_page_anchored_floating_table_after_a_full_page_moves_to_the_next() {
-    use wordcraft_doc::para::Anchor;
-    use wordcraft_doc::props::TableFloat;
+    use doc4me_doc::para::Anchor;
+    use doc4me_doc::props::TableFloat;
     let text: Vec<String> = (0..24).map(|i| format!("Paragraph {i} before the table.")).collect();
     let mut d = Document::from_text(&(text.join("\n") + "\nAfter the table."));
     let mut t = Table::new(15, 1, 300.0);
     for (i, r) in t.rows.iter_mut().enumerate() {
-        r.cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(&format!("Row {i}"), Default::default()))];
+        r.cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(&format!("Row {i}"), Default::default()))];
     }
     t.props.float = Some(TableFloat { h_rel: Anchor::Page, v_rel: Anchor::Page, x: 70.0, y: 71.0, ..Default::default() });
-    d.insert_block(StoryRef::Body, &Path::top(24), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(24), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     let page_of = |want: &dyn Fn(&Path) -> bool| -> Vec<usize> {
         l.pages
@@ -2584,12 +2573,12 @@ fn a_page_anchored_floating_table_after_a_full_page_moves_to_the_next() {
 /// on that page: no blank page between the two tables around it.
 #[test]
 fn a_page_break_at_the_bottom_of_a_full_page_leaves_no_blank_page() {
-    use wordcraft_doc::props::LineSpacing;
+    use doc4me_doc::props::LineSpacing;
     let props = ParaProps { line_spacing: Some(LineSpacing::Exactly(24.0)), space_before: Some(0.0), space_after: Some(0.0), ..Default::default() };
     let para = |text: &str| {
-        let mut p = wordcraft_doc::Paragraph::with_text(text, Default::default());
+        let mut p = doc4me_doc::Paragraph::with_text(text, Default::default());
         p.props = props.clone();
-        wordcraft_doc::para_block(p)
+        doc4me_doc::para_block(p)
     };
     let mut d = Document::from_text("");
     // 27 lines of 24pt fill the 648pt of text on a Letter page.
@@ -2605,13 +2594,13 @@ fn a_page_break_at_the_bottom_of_a_full_page_leaves_no_blank_page() {
 /// size and win over the indent in points.
 #[test]
 fn character_indents_use_the_paragraph_mark_size() {
-    let mut p = wordcraft_doc::Paragraph::with_text(&"字".repeat(80), Default::default());
+    let mut p = doc4me_doc::Paragraph::with_text(&"字".repeat(80), Default::default());
     p.props.indent_first = Some(5.0);
     p.props.indent_first_chars = Some(2.0);
     p.props.indent_left_chars = Some(1.0);
     p.mark.size = Some(20.0);
     let mut d = Document::from_text("");
-    d.body = vec![wordcraft_doc::para_block(p)];
+    d.body = vec![doc4me_doc::para_block(p)];
     let l = lay(&d);
     let para = l.pages[0].items.iter().find_map(|it| if let Placed::Lines { para, .. } = it { Some(para.clone()) } else { None }).unwrap();
     assert!((para.lines[0].left - 60.0).abs() < 0.01, "first line at {}", para.lines[0].left);
@@ -2643,16 +2632,16 @@ fn unequal_formats_lay_out_in_linear_time() {
     // Runs whose formats never compare equal (NaN spacing from a hostile file) each get a style;
     // finding a run's style must not compare it against every earlier one.
     let doc = |n: usize| {
-        let mut p = wordcraft_doc::Paragraph::with_text("", Default::default());
+        let mut p = doc4me_doc::Paragraph::with_text("", Default::default());
         p.text = "ab ".repeat(n);
         p.runs = (0..n)
-            .map(|i| wordcraft_doc::Run {
+            .map(|i| doc4me_doc::Run {
                 len: 3,
-                props: wordcraft_doc::CharProps { spacing: Some(f32::NAN), bold: Some(i % 2 == 0), ..Default::default() },
+                props: doc4me_doc::CharProps { spacing: Some(f32::NAN), bold: Some(i % 2 == 0), ..Default::default() },
             })
             .collect();
         let mut d = Document::from_text("");
-        d.body = vec![wordcraft_doc::para_block(p)];
+        d.body = vec![doc4me_doc::para_block(p)];
         d
     };
     let (t1, tk, ratio) = layout_time_ratio(doc, 5_000, &LayoutOptions::default());
@@ -2662,16 +2651,16 @@ fn unequal_formats_lay_out_in_linear_time() {
 
 #[test]
 fn hidden_float_in_a_table_cell_takes_no_room() {
-    use wordcraft_doc::para::{Anchor, Float, Wrap};
+    use doc4me_doc::para::{Anchor, Float, Wrap};
     // A square-wrapped shape anchored in hidden text inside a table cell, beside wrapping text.
     let mut d = Document::from_text("Body text.");
     let mut t = Table::new(1, 2, 468.0);
-    let mut cp = wordcraft_doc::Paragraph::with_text(&"Cell words wrap around it. ".repeat(8), Default::default());
+    let mut cp = doc4me_doc::Paragraph::with_text(&"Cell words wrap around it. ".repeat(8), Default::default());
     let f = Float { wrap: Wrap::Square, h_rel: Anchor::Column, v_rel: Anchor::Paragraph, dist: 9.0, ..Default::default() };
-    let hidden = wordcraft_doc::CharProps { hidden: Some(true), ..Default::default() };
+    let hidden = doc4me_doc::CharProps { hidden: Some(true), ..Default::default() };
     cp.insert_object(0, rect_shape(60.0, 40.0, f), &hidden).unwrap();
-    t.rows[0].cells[0].blocks = vec![wordcraft_doc::para_block(cp)];
-    d.insert_block(StoryRef::Body, &Path::top(1), wordcraft_doc::Block::Table(t)).unwrap();
+    t.rows[0].cells[0].blocks = vec![doc4me_doc::para_block(cp)];
+    d.insert_block(StoryRef::Body, &Path::top(1), doc4me_doc::Block::Table(t)).unwrap();
     // (shapes placed, the cell text's widest first-line indent)
     let run = |show_hidden: bool| {
         let l = layout(&d, &mut LayoutCache::new(), &LayoutOptions { show_hidden, ..Default::default() });
@@ -2690,10 +2679,10 @@ fn hidden_float_in_a_table_cell_takes_no_room() {
 #[test]
 fn objects_left_out_through_the_table_style_formatting() {
     // The table style's character formatting sits under the runs' own, as the cell is laid out.
-    let mut p = wordcraft_doc::Paragraph::with_text("ab", Default::default());
+    let mut p = doc4me_doc::Paragraph::with_text("ab", Default::default());
     p.insert_object(1, rect_shape(10.0, 10.0, Default::default()), &Default::default()).unwrap();
     let d = Document::from_text("");
-    let hidden = wordcraft_doc::CharProps { hidden: Some(true), ..Default::default() };
+    let hidden = doc4me_doc::CharProps { hidden: Some(true), ..Default::default() };
     assert!(!left_out_objects(&d, &p, None, false, false)(0));
     assert!(left_out_objects(&d, &p, Some(&hidden), false, false)(0));
     assert!(!left_out_objects(&d, &p, Some(&hidden), true, false)(0), "hidden text shown");
@@ -2701,12 +2690,12 @@ fn objects_left_out_through_the_table_style_formatting() {
 
 #[test]
 fn hidden_float_in_a_text_box_is_not_placed() {
-    use wordcraft_doc::para::{Anchor, Float, Wrap};
+    use doc4me_doc::para::{Anchor, Float, Wrap};
     // A shape anchored in hidden text inside a text box: no drawing, no hit area.
     let mut d = Document::from_text("Body text.");
     let id = text_box(&mut d, 0, "Box words.", 200.0, 120.0, Default::default());
     let f = Float { wrap: Wrap::Square, h_rel: Anchor::Column, v_rel: Anchor::Paragraph, ..Default::default() };
-    let hidden = wordcraft_doc::CharProps { hidden: Some(true), ..Default::default() };
+    let hidden = doc4me_doc::CharProps { hidden: Some(true), ..Default::default() };
     let at = Pos { story: StoryRef::Part(id), path: Path::top(0), off: 0 };
     d.insert_object(&at, rect_shape(30.0, 20.0, f), &hidden).unwrap();
     let count = |show_hidden: bool| {
@@ -2733,12 +2722,12 @@ fn inline_graphic_reserves_its_height() {
 
 #[test]
 fn graphic_items_draw_inside_the_object() {
-    use wordcraft_doc::graphic::{Graphic, GraphicItem, GraphicKind, PathSeg, TextAlign};
-    use wordcraft_doc::props::Rgb;
+    use doc4me_doc::graphic::{Graphic, GraphicItem, GraphicKind, PathSeg, TextAlign};
+    use doc4me_doc::props::Rgb;
     let items = vec![
         GraphicItem::Shape {
             rect: [10.0, 5.0, 20.0, 20.0],
-            kind: wordcraft_doc::para::ShapeKind::Rectangle,
+            kind: doc4me_doc::para::ShapeKind::Rectangle,
             fill: Some(Rgb::BLACK),
             stroke: None,
             stroke_width: 0.0,
@@ -2776,8 +2765,8 @@ fn graphic_items_draw_inside_the_object() {
 
 #[test]
 fn graphic_text_in_a_degenerate_rectangle_is_not_drawn() {
-    use wordcraft_doc::graphic::{Graphic, GraphicItem, GraphicKind, TextAlign};
-    use wordcraft_doc::props::Rgb;
+    use doc4me_doc::graphic::{Graphic, GraphicItem, GraphicKind, TextAlign};
+    use doc4me_doc::props::Rgb;
     let text = |rect: [f32; 4], size: f32| GraphicItem::Text {
         rect,
         text: "Q1".into(),
@@ -2803,8 +2792,8 @@ fn flat(draws: Vec<display::Draw>) -> Vec<display::Draw> {
 
 #[test]
 fn inline_chart_is_a_figure_with_its_alt_text() {
-    use wordcraft_doc::graphic::{Graphic, GraphicItem, GraphicKind, PathSeg};
-    use wordcraft_doc::props::Rgb;
+    use doc4me_doc::graphic::{Graphic, GraphicItem, GraphicKind, PathSeg};
+    use doc4me_doc::props::Rgb;
     let items = vec![GraphicItem::Path {
         segs: vec![PathSeg::Move(1.0, 1.0), PathSeg::Line(2.0, 2.0)],
         fill: None,
@@ -2822,8 +2811,8 @@ fn inline_chart_is_a_figure_with_its_alt_text() {
 
 #[test]
 fn graphic_paths_drop_segments_that_cannot_be_drawn() {
-    use wordcraft_doc::graphic::{Graphic, GraphicItem, GraphicKind, PathSeg};
-    use wordcraft_doc::props::Rgb;
+    use doc4me_doc::graphic::{Graphic, GraphicItem, GraphicKind, PathSeg};
+    use doc4me_doc::props::Rgb;
     // The line before the first move, the move with a NaN, the infinite line and the line after the
     // close are all dropped.
     let segs = vec![
@@ -2848,12 +2837,12 @@ fn graphic_paths_drop_segments_that_cannot_be_drawn() {
 
 #[test]
 fn graphic_items_scale_with_their_frame() {
-    use wordcraft_doc::graphic::{Graphic, GraphicItem, GraphicKind};
-    use wordcraft_doc::props::Rgb;
+    use doc4me_doc::graphic::{Graphic, GraphicItem, GraphicKind};
+    use doc4me_doc::props::Rgb;
     // A chart drawn for 1000 x 500 pt in a 500 x 250 pt frame: its items and strokes scale by half.
     let items = vec![GraphicItem::Shape {
         rect: [0.0, 0.0, 1000.0, 500.0],
-        kind: wordcraft_doc::para::ShapeKind::Rectangle,
+        kind: doc4me_doc::para::ShapeKind::Rectangle,
         fill: None,
         stroke: Some(Rgb::BLACK),
         stroke_width: 4.0,
@@ -2876,11 +2865,11 @@ fn inline_picture_wider_than_a_text_box_is_fitted_to_it() {
     // Text boxes don't clip what runs past their sides, so a 400 x 100 pt picture in a 144 pt box
     // is fitted to the box's 129.6 pt inside its margins instead of spilling over the page.
     let mut d = Document::from_text("Before");
-    let mut p = wordcraft_doc::Paragraph::with_text("", Default::default());
+    let mut p = doc4me_doc::Paragraph::with_text("", Default::default());
     p.insert_object(0, picture(400.0, 100.0, Default::default()), &Default::default()).unwrap();
-    let id = d.add_part(wordcraft_doc::PartKind::TextBox, vec![wordcraft_doc::para_block(p)]);
+    let id = d.add_part(doc4me_doc::PartKind::TextBox, vec![doc4me_doc::para_block(p)]);
     let shape = InlineObject::Shape {
-        kind: wordcraft_doc::para::ShapeKind::TextBox,
+        kind: doc4me_doc::para::ShapeKind::TextBox,
         w: 144.0,
         h: 72.0,
         fill: None,
@@ -2898,7 +2887,7 @@ fn inline_picture_wider_than_a_text_box_is_fitted_to_it() {
     let r = draws
         .iter()
         .find_map(|x| match x {
-            display::Draw::Shape { rect, kind: wordcraft_doc::para::ShapeKind::Rectangle, .. } => Some(*rect),
+            display::Draw::Shape { rect, kind: doc4me_doc::para::ShapeKind::Rectangle, .. } => Some(*rect),
             _ => None,
         })
         .expect("the picture");
@@ -2910,7 +2899,7 @@ fn inline_picture_wider_than_the_text_keeps_its_size() {
     // A 1000 x 100 pt picture in 468 pt of text: Word draws it at its size, past the margin, and the
     // page edge clips it; the line is as tall as the picture (docxide-pdf's case179).
     let mut d = Document::from_text("");
-    if let Some(wordcraft_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
+    if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
         p.insert_object(0, picture(1000.0, 100.0, Default::default()), &Default::default()).unwrap();
     }
     let l = lay(&d);
@@ -2936,18 +2925,18 @@ fn para_at(l: &DocLayout, path: &[u32]) -> Vec<(f32, f32, usize)> {
 
 #[test]
 fn a_floating_table_in_a_cell_takes_no_room_and_the_cell_holds_it() {
-    use wordcraft_doc::para::Anchor;
-    use wordcraft_doc::props::TableFloat;
-    let text = |s: &str| wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(s, Default::default()));
+    use doc4me_doc::para::Anchor;
+    use doc4me_doc::props::TableFloat;
+    let text = |s: &str| doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(s, Default::default()));
     let mut inner = Table::new(3, 1, 200.0);
     for (i, r) in inner.rows.iter_mut().enumerate() {
         r.cells[0].blocks = vec![text(&format!("Inner {i}"))];
     }
     inner.props.float = Some(TableFloat { h_rel: Anchor::Margin, v_rel: Anchor::Paragraph, dist: [9.0, 0.0, 9.0, 0.0], ..Default::default() });
     let mut outer = Table::new(1, 1, 468.0);
-    outer.rows[0].cells[0].blocks = vec![std::sync::Arc::new(wordcraft_doc::Block::Table(inner)), text("Beside")];
+    outer.rows[0].cells[0].blocks = vec![std::sync::Arc::new(doc4me_doc::Block::Table(inner)), text("Beside")];
     let mut d = Document::from_text("Below");
-    d.insert_block(StoryRef::Body, &Path::top(0), wordcraft_doc::Block::Table(outer)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(0), doc4me_doc::Block::Table(outer)).unwrap();
     let l = lay(&d);
     let (&[(ix, iy, _)], &[(_, last_y, _)], &[(bx, by, _)], &[(_, below_y, _)]) =
         (&para_at(&l, &[0, 0, 0, 0, 0, 0, 0])[..], &para_at(&l, &[0, 0, 0, 0, 2, 0, 0])[..], &para_at(&l, &[0, 0, 0, 1])[..], &para_at(&l, &[1])[..])
@@ -2963,14 +2952,14 @@ fn a_floating_table_in_a_cell_takes_no_room_and_the_cell_holds_it() {
 
 #[test]
 fn autofit_sizes_columns_by_their_content() {
-    let text = |s: &str| wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(s, Default::default()));
+    let text = |s: &str| doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(s, Default::default()));
     // No width anywhere: the columns come from their content.
     let mut t = Table::new(1, 2, 468.0);
     t.rows[0].cells[0].blocks = vec![text("Short")];
     t.rows[0].cells[1].blocks = vec![text(&"A long cell that needs most of the width. ".repeat(4))];
     t.rows[0].cells.iter_mut().for_each(|c| c.props.width = None);
     let mut d = Document::from_text("After");
-    d.insert_block(StoryRef::Body, &Path::top(0), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(0), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     let (&[(sx, _, _)], &[(lx, _, _)]) = (&para_at(&l, &[0, 0, 0, 0])[..], &para_at(&l, &[0, 0, 1, 0])[..]) else { panic!("lines missing") };
     assert!(lx - sx < 80.0, "the short column is {}pt wide", lx - sx);
@@ -2979,7 +2968,7 @@ fn autofit_sizes_columns_by_their_content() {
     t.grid = vec![400.0, 20.0, 48.0];
     t.rows[0].cells[1].blocks = vec![text("Unbreakable")];
     let mut d = Document::from_text("After");
-    d.insert_block(StoryRef::Body, &Path::top(0), wordcraft_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(0), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     let [(_, _, n)] = para_at(&l, &[0, 0, 1, 0])[..] else { panic!("line missing") };
     assert_eq!(n, 1, "the word is broken over {n} lines");
@@ -2987,10 +2976,10 @@ fn autofit_sizes_columns_by_their_content() {
 
 #[test]
 fn autofit_handles_spanning_cells_long_words_and_empty_tables() {
-    let text = |s: &str| wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(s, Default::default()));
+    let text = |s: &str| doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(s, Default::default()));
     let table_x = |t: Table, path: &[u32]| {
         let mut d = Document::from_text("After");
-        d.insert_block(StoryRef::Body, &Path::top(0), wordcraft_doc::Block::Table(t)).unwrap();
+        d.insert_block(StoryRef::Body, &Path::top(0), doc4me_doc::Block::Table(t)).unwrap();
         para_at(&lay(&d), path)
     };
     let automatic = |rows: usize, cols: usize| {
@@ -3028,20 +3017,20 @@ fn autofit_handles_spanning_cells_long_words_and_empty_tables() {
 
 #[test]
 fn a_floating_table_in_the_footer_leaves_the_footer_where_it_is() {
-    use wordcraft_doc::para::Anchor;
-    use wordcraft_doc::props::TableFloat;
+    use doc4me_doc::para::Anchor;
+    use doc4me_doc::props::TableFloat;
     let footer_y = |float: bool| {
         let mut d = Document::from_text("Body");
         let mut t = Table::new(1, 1, 100.0);
-        t.rows[0].cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("Float", Default::default()))];
+        t.rows[0].cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("Float", Default::default()))];
         if float {
             t.props.float = Some(TableFloat { h_rel: Anchor::Page, v_rel: Anchor::Page, y: 720.0, ..Default::default() });
         }
         let blocks = vec![
-            wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("Footer", Default::default())),
-            std::sync::Arc::new(wordcraft_doc::Block::Table(t)),
+            doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("Footer", Default::default())),
+            std::sync::Arc::new(doc4me_doc::Block::Table(t)),
         ];
-        let id = d.add_part(wordcraft_doc::PartKind::Footer, blocks);
+        let id = d.add_part(doc4me_doc::PartKind::Footer, blocks);
         d.last_section.footers.default = Some(id);
         let l = lay(&d);
         l.pages[0].footer.iter().find_map(|it| if let Placed::Lines { y, path, .. } = it { (path.0 == [0]).then_some(*y) } else { None }).unwrap()
@@ -3061,7 +3050,7 @@ fn a_split_row_moves_shading_below_the_cut_with_it() {
         };
         Placed::Lines { story, path, para, l0: 0, l1: 1, x: 0.0, y, turn: TextDirection::Horizontal }
     };
-    let fill = |y: f32, h: f32| Placed::Fill { rect: wordcraft_geom::Rect::new(0.0, y, 100.0, h), color: wordcraft_doc::props::Rgb(200, 0, 0) };
+    let fill = |y: f32, h: f32| Placed::Fill { rect: doc4me_geom::Rect::new(0.0, y, 100.0, h), color: doc4me_doc::props::Rgb(200, 0, 0) };
     // The row's own shading (from its top) and a nested cell's shading starting below the cut.
     let row = RowLayout { height: 200.0, items: vec![line_row(0.0), line_row(150.0), fill(0.0, 200.0), fill(150.0, 50.0)] };
     let (a, b) = split_row(&row, 100.0).expect("splits");
@@ -3081,7 +3070,7 @@ fn kinsoku_keeps_a_manual_line_break_before_a_closing_bracket() {
     // before one still ends the line there.
     let text = "日本語\n」テスト";
     let mut d = Document::from_text("");
-    d.body = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text(text, Default::default()))];
+    d.body = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(text, Default::default()))];
     let l = lay(&d);
     let mut lines = Vec::new();
     for p in &l.pages {
@@ -3105,17 +3094,17 @@ fn rotated_float_wraps_around_its_rotated_bounds() {
     let text = "Words flow around the turned shape here. ".repeat(30);
     let place = |rot: f32| {
         let mut d = Document::from_text(&text);
-        let float = wordcraft_doc::para::Float {
-            wrap: wordcraft_doc::para::Wrap::Square,
-            h_rel: wordcraft_doc::para::Anchor::Column,
-            v_rel: wordcraft_doc::para::Anchor::Paragraph,
+        let float = doc4me_doc::para::Float {
+            wrap: doc4me_doc::para::Wrap::Square,
+            h_rel: doc4me_doc::para::Anchor::Column,
+            v_rel: doc4me_doc::para::Anchor::Paragraph,
             x: 0.0,
             y: 40.0,
             rot,
             ..Default::default()
         };
         let shape = InlineObject::Shape {
-            kind: wordcraft_doc::para::ShapeKind::Rectangle,
+            kind: doc4me_doc::para::ShapeKind::Rectangle,
             w: 144.0,
             h: 40.0,
             fill: None,
@@ -3157,13 +3146,13 @@ fn rotated_float_wraps_around_its_rotated_bounds() {
 /// its page direction inside the turn; one that does turns with the shape.
 #[test]
 fn rotated_group_turns_its_members_and_their_shadows() {
-    use wordcraft_doc::effects::{Shadow, ShapeEffects};
-    use wordcraft_doc::para::{Anchor, Float, GroupChild, ShapeKind, Wrap};
+    use doc4me_doc::effects::{Shadow, ShapeEffects};
+    use doc4me_doc::para::{Anchor, Float, GroupChild, ShapeKind, Wrap};
     let member = |rot_with_shape: bool, rot: f32| InlineObject::Shape {
         kind: ShapeKind::Rectangle,
         w: 60.0,
         h: 40.0,
-        fill: Some(wordcraft_doc::props::Rgb(1, 2, 3)),
+        fill: Some(doc4me_doc::props::Rgb(1, 2, 3)),
         stroke: None,
         stroke_width: 0.0,
         float: Float { rot, ..Default::default() },
@@ -3310,9 +3299,9 @@ fn footnote_longer_than_pages_ends() {
 
 /// A comment by `author` saying `text` on body paragraph `para`, bytes `a..b`; its id.
 fn comment_on(d: &mut Document, para: usize, a: usize, b: usize, author: &str, text: &str, parent: Option<u32>) -> u32 {
-    let part = d.add_part(wordcraft_doc::PartKind::Comment, vec![wordcraft_doc::para_block(Paragraph::with_text(text, CharProps::default()))]);
+    let part = d.add_part(doc4me_doc::PartKind::Comment, vec![doc4me_doc::para_block(Paragraph::with_text(text, CharProps::default()))]);
     let id = d.comments.keys().next_back().map_or(0, |k| k + 1);
-    d.comments.insert(id, wordcraft_doc::Comment { author: author.into(), part, parent, ..Default::default() });
+    d.comments.insert(id, doc4me_doc::Comment { author: author.into(), part, parent, ..Default::default() });
     if parent.is_none() {
         let p = CharProps::default();
         d.insert_object(&Pos::body(para, b), InlineObject::CommentEnd { id }, &p).unwrap();
@@ -3413,10 +3402,9 @@ fn line_spans(l: &DocLayout) -> Vec<(f32, f32, f32, f32)> {
 }
 
 /// A shape floating at the column's top-left with `wrap`, beside a long paragraph.
-fn wrapped_shape_doc(kind: wordcraft_doc::para::ShapeKind, w: f32, h: f32, float: wordcraft_doc::para::Float) -> Document {
+fn wrapped_shape_doc(kind: doc4me_doc::para::ShapeKind, w: f32, h: f32, float: doc4me_doc::para::Float) -> Document {
     let mut d = Document::from_text(&"Words flow around the shape here. ".repeat(40));
-    let float =
-        wordcraft_doc::para::Float { h_rel: wordcraft_doc::para::Anchor::Column, v_rel: wordcraft_doc::para::Anchor::Paragraph, dist: 9.0, ..float };
+    let float = doc4me_doc::para::Float { h_rel: doc4me_doc::para::Anchor::Column, v_rel: doc4me_doc::para::Anchor::Paragraph, dist: 9.0, ..float };
     let shape = InlineObject::Shape {
         kind,
         w,
@@ -3436,7 +3424,7 @@ fn wrapped_shape_doc(kind: wordcraft_doc::para::ShapeKind, w: f32, h: f32, float
 
 #[test]
 fn tight_wrap_follows_an_ellipse() {
-    use wordcraft_doc::para::{Float, ShapeKind, Wrap};
+    use doc4me_doc::para::{Float, ShapeKind, Wrap};
     let spans = |wrap| line_spans(&lay(&wrapped_shape_doc(ShapeKind::Ellipse, 160.0, 160.0, Float { wrap, ..Default::default() })));
     let (square, tight, through) = (spans(Wrap::Square), spans(Wrap::Tight), spans(Wrap::Through));
     // Square: every line beside the shape starts past its frame and distance from text.
@@ -3473,8 +3461,8 @@ fn tight_wrap_follows_an_ellipse() {
 
 #[test]
 fn contour_wrap_turns_with_the_object() {
-    use wordcraft_doc::para::{Float, ShapeKind, Wrap};
-    use wordcraft_doc::wrap::WrapPolygon;
+    use doc4me_doc::para::{Float, ShapeKind, Wrap};
+    use doc4me_doc::wrap::WrapPolygon;
     // A wrap polygon covering the left half of a 200 × 100 frame.
     let poly = WrapPolygon::new(true, [(0, 0), (10_800, 0), (10_800, 21_600), (0, 21_600)]).map(Arc::new);
     // Where text goes on the first row: (left, right) of each line there.
@@ -3500,7 +3488,7 @@ fn contour_wrap_turns_with_the_object() {
 /// symbol" a bigger shape around text at its own size. Plain `\o` overstrikes its arguments.
 #[test]
 fn enclosed_characters_draw_a_shape_around_the_text() {
-    use wordcraft_doc::eq::{EncloseShape, EncloseStyle, Enclosure};
+    use doc4me_doc::eq::{EncloseShape, EncloseStyle, Enclosure};
     let draw = |shape: EncloseShape, style: EncloseStyle| {
         let mut d = Document::from_text("a  b");
         let e = Enclosure { shape, style, text: "A".into() };
@@ -3528,14 +3516,14 @@ fn enclosed_characters_draw_a_shape_around_the_text() {
         (shape.expect("a shape"), at("A"), at("b"))
     };
     let ((rect, kind, stroked), (size, gx), (base, bx)) = draw(EncloseShape::Circle, EncloseStyle::Shrink);
-    assert_eq!(kind, wordcraft_doc::para::ShapeKind::Ellipse);
+    assert_eq!(kind, doc4me_doc::para::ShapeKind::Ellipse);
     assert!(stroked);
     assert!(size < base * 0.8, "the text shrinks: {size} vs {base}");
     assert!((rect.h - base * 1.05).abs() < 0.1 && (rect.w - rect.h).abs() < 0.1, "{rect:?}");
     assert!(gx > rect.x && gx < rect.x + rect.w, "the text is inside: {gx} {rect:?}");
     assert!(bx >= rect.x + rect.w, "the next text follows the shape: {bx} {rect:?}");
     let ((rect, kind, _), (size, _), (base, _)) = draw(EncloseShape::Diamond, EncloseStyle::Enlarge);
-    assert_eq!(kind, wordcraft_doc::para::ShapeKind::Diamond);
+    assert_eq!(kind, doc4me_doc::para::ShapeKind::Diamond);
     assert!((size - base).abs() < 0.01 && rect.h > base * 1.5, "the shape grows: {rect:?}");
 
     // A general overstrike: both arguments at the same place, no shape.
@@ -3554,7 +3542,7 @@ fn enclosed_characters_draw_a_shape_around_the_text() {
 
 #[test]
 fn ruby_text_sits_over_its_base_and_the_line_grows_to_fit() {
-    use wordcraft_doc::para::RubyAlign;
+    use doc4me_doc::para::RubyAlign;
     let plain = Document::from_text("Plain words here");
     let mut d = Document::from_text("Plain  here");
     let ruby = InlineObject::Ruby {
@@ -3599,7 +3587,7 @@ fn ruby_text_sits_over_its_base_and_the_line_grows_to_fit() {
 /// only to its right; Largest: only on its wider side.
 #[test]
 fn wrap_text_keeps_text_on_one_side() {
-    use wordcraft_doc::para::{Float, ShapeKind, Wrap, WrapText};
+    use doc4me_doc::para::{Float, ShapeKind, Wrap, WrapText};
     // A 100pt shape at `x` in the 468pt column; the lines beside it.
     let beside = |kind, wrap, x: f32, side| {
         let f = Float { wrap, wrap_text: side, x, ..Default::default() };
@@ -3628,17 +3616,17 @@ fn document_note_separators_and_continuation_notice() {
     let mut d = Document::from_text(&"Body text line.\n".repeat(16));
     let long = footnote(&mut d, &Pos::body(4, 4), &"A long footnote that runs on and on. ".repeat(100));
     let sep = |cont: bool| {
-        let mut p = wordcraft_doc::Paragraph::new();
+        let mut p = doc4me_doc::Paragraph::new();
         p.props.space_after = Some(0.0);
         p.insert_object(0, InlineObject::note_separator(cont), &Default::default()).unwrap();
-        Some(vec![wordcraft_doc::para_block(p)])
+        Some(vec![doc4me_doc::para_block(p)])
     };
-    let mut notice = wordcraft_doc::Paragraph::with_text("(continued)", Default::default());
+    let mut notice = doc4me_doc::Paragraph::with_text("(continued)", Default::default());
     notice.props.space_after = Some(0.0);
-    d.footnote_separators = wordcraft_doc::NoteSeparators {
+    d.footnote_separators = doc4me_doc::NoteSeparators {
         separator: sep(false),
         continuation_separator: sep(true),
-        continuation_notice: Some(vec![wordcraft_doc::para_block(notice)]),
+        continuation_notice: Some(vec![doc4me_doc::para_block(notice)]),
     };
     let l = lay(&d);
     let pieces = note_pieces(&l, long);
@@ -3681,12 +3669,12 @@ fn document_note_separators_and_continuation_notice() {
 #[test]
 fn rotated_canvas_draws_its_clipped_members_inside_the_turn() {
     use crate::display::Draw;
-    use wordcraft_doc::para::{Anchor, CanvasStyle, Float, GroupChild, ShapeKind, Wrap};
+    use doc4me_doc::para::{Anchor, CanvasStyle, Float, GroupChild, ShapeKind, Wrap};
     let member = InlineObject::Shape {
         kind: ShapeKind::Rectangle,
         w: 60.0,
         h: 40.0,
-        fill: Some(wordcraft_doc::props::Rgb(1, 2, 3)),
+        fill: Some(doc4me_doc::props::Rgb(1, 2, 3)),
         stroke: None,
         stroke_width: 0.0,
         float: Float { rot: 10.0, ..Default::default() },
@@ -3702,7 +3690,7 @@ fn rotated_canvas_draws_its_clipped_members_inside_the_turn() {
         ch_w: 200.0,
         ch_h: 100.0,
         children: vec![GroupChild { x: 20.0, y: 30.0, obj: member.clone() }],
-        canvas: Some(CanvasStyle { fill: Some(wordcraft_doc::props::Rgb(0xF0, 0xF4, 0xFF)), stroke: None, stroke_width: 0.0 }),
+        canvas: Some(CanvasStyle { fill: Some(doc4me_doc::props::Rgb(0xF0, 0xF4, 0xFF)), stroke: None, stroke_width: 0.0 }),
     };
     // Turned draws: (turn, background rect, clip rect, member rect and its own turn).
     let turned = |draws: &[Draw]| -> (Vec<f32>, Vec<Rect>, Vec<(Rect, Vec<(Rect, f32)>)>) {
@@ -3789,8 +3777,8 @@ fn mirror_indents_swap_sides_on_even_pages() {
 
 /// Ten short paragraphs in a two-column section (`widths`: unequal columns), then one paragraph
 /// in a one-column section starting `start`.
-fn two_column_section(start: wordcraft_doc::section::SectionStart, widths: Vec<(f32, f32)>) -> Document {
-    use wordcraft_doc::section::SectionProps;
+fn two_column_section(start: doc4me_doc::section::SectionStart, widths: Vec<(f32, f32)>) -> Document {
+    use doc4me_doc::section::SectionProps;
     let text: Vec<String> = (0..10).map(|i| format!("Short paragraph {i}")).chain(["After the break".to_string()]).collect();
     let mut d = Document::from_text(&text.join("\n"));
     let mut s = SectionProps::default();
@@ -3829,7 +3817,7 @@ fn column_bottoms(l: &DocLayout) -> (usize, f32, usize, f32, (usize, f32)) {
 
 #[test]
 fn columns_before_a_continuous_break_are_balanced() {
-    use wordcraft_doc::section::SectionStart;
+    use doc4me_doc::section::SectionStart;
     for widths in [vec![], vec![(150.0, 36.0), (282.0, 0.0)]] {
         let l = lay(&two_column_section(SectionStart::Continuous, widths.clone()));
         let (nl, bl, nr, br, (page, after)) = column_bottoms(&l);
@@ -3844,7 +3832,7 @@ fn columns_before_a_continuous_break_are_balanced() {
 
 #[test]
 fn columns_before_a_page_break_or_a_column_break_are_not_balanced() {
-    use wordcraft_doc::section::SectionStart;
+    use doc4me_doc::section::SectionStart;
     // Next-page break: the ten paragraphs fill the first column; the next section is on page 2.
     let l = lay(&two_column_section(SectionStart::NextPage, vec![]));
     let (nl, _, nr, _, (page, _)) = column_bottoms(&l);
@@ -3853,7 +3841,7 @@ fn columns_before_a_page_break_or_a_column_break_are_not_balanced() {
     let mut d = two_column_section(SectionStart::Continuous, vec![]);
     let p = d.para_mut(StoryRef::Body, &Path::top(1)).unwrap();
     let end = p.text.len();
-    p.insert_text(end, &wordcraft_doc::para::COLUMN_BREAK.to_string(), &Default::default()).unwrap();
+    p.insert_text(end, &doc4me_doc::para::COLUMN_BREAK.to_string(), &Default::default()).unwrap();
     let l = lay(&d);
     let (nl, bl, nr, br, (page, after)) = column_bottoms(&l);
     assert_eq!((nl, nr, page), (2, 8, 0));
@@ -3877,7 +3865,7 @@ fn note_marks(l: &DocLayout) -> HashMap<u32, Vec<u32>> {
 
 #[test]
 fn footnotes_restart_on_each_page_and_section() {
-    use wordcraft_doc::section::{NoteProps, NoteRestart};
+    use doc4me_doc::section::{NoteProps, NoteRestart};
     let mut d = Document::from_text(&"Body text line.\n".repeat(120));
     let a = footnote(&mut d, &Pos::body(2, 4), "First note.");
     let b = footnote(&mut d, &Pos::body(4, 4), "Second note.");
@@ -3902,15 +3890,13 @@ fn footnotes_restart_on_each_page_and_section() {
 
 #[test]
 fn endnotes_at_section_end_and_footnotes_below_text() {
-    use wordcraft_doc::section::{NotePos, NoteProps};
+    use doc4me_doc::section::{NotePos, NoteProps};
     let mut d = Document::from_text("Alpha\nBeta\nGamma\nDelta");
-    let eid = d.add_part(
-        wordcraft_doc::PartKind::Endnote,
-        vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("An endnote.", Default::default()))],
-    );
+    let eid =
+        d.add_part(doc4me_doc::PartKind::Endnote, vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("An endnote.", Default::default()))]);
     d.insert_object(
         &Pos::body(0, 5),
-        InlineObject::NoteRef { kind: wordcraft_doc::para::NoteKind::Endnote, id: eid, custom: String::new() },
+        InlineObject::NoteRef { kind: doc4me_doc::para::NoteKind::Endnote, id: eid, custom: String::new() },
         &Default::default(),
     )
     .unwrap();
@@ -3938,7 +3924,7 @@ fn endnotes_at_section_end_and_footnotes_below_text() {
 #[test]
 fn hyphenation_and_proofing_follow_each_runs_language() {
     // A tiny synthetic Polish dictionary (real ones are installed on the system, not bundled).
-    wordcraft_proof::pl::install_dictionary("SET UTF-8\nSFX B Y 1\nSFX B y ego y\n", "2\nkonstytucyjny/B\npłynie\n").unwrap();
+    doc4me_proof::pl::install_dictionary("SET UTF-8\nSFX B Y 1\nSFX B y ego y\n", "2\nkonstytucyjny/B\npłynie\n").unwrap();
     let text = "Konstytucyjnego żeka typography beautifull";
     let mut d = Document::from_text(text);
     d.settings.auto_hyphenation = true;
@@ -3962,17 +3948,17 @@ fn hyphenation_and_proofing_follow_each_runs_language() {
     // The layout and the Review commands report the same issues.
     let p = d.para(StoryRef::Body, &Path::top(0)).unwrap();
     let issues = para::paragraph_issues(p, &para::proof_runs(&d, p, None), &Default::default(), true);
-    assert_eq!(issues.iter().map(|i| (i.start, i.end, i.kind == wordcraft_proof::IssueKind::Grammar)).collect::<Vec<_>>(), para.issues);
-    assert_eq!(issues[0].lang, wordcraft_proof::ProofLang::Pl);
-    assert_eq!(issues[1].lang, wordcraft_proof::ProofLang::En);
+    assert_eq!(issues.iter().map(|i| (i.start, i.end, i.kind == doc4me_proof::IssueKind::Grammar)).collect::<Vec<_>>(), para.issues);
+    assert_eq!(issues[0].lang, doc4me_proof::ProofLang::Pl);
+    assert_eq!(issues[1].lang, doc4me_proof::ProofLang::En);
 }
 
-/// Text in a language WordCraft can't proof gets no spelling marks, and "Do not check spelling
+/// Text in a language Doc4Me can't proof gets no spelling marks, and "Do not check spelling
 /// or grammar" text none either; the document default language applies to text without its own.
 #[test]
 fn unproofed_languages_and_no_proof_runs_are_not_marked() {
     // A tiny synthetic Polish dictionary (real ones are installed on the system, not bundled).
-    wordcraft_proof::pl::install_dictionary("SET UTF-8\nSFX B Y 1\nSFX B y ego y\n", "2\nkonstytucyjny/B\npłynie\n").unwrap();
+    doc4me_proof::pl::install_dictionary("SET UTF-8\nSFX B Y 1\nSFX B y ego y\n", "2\nkonstytucyjny/B\npłynie\n").unwrap();
     let opts = LayoutOptions { proofing: true, ..LayoutOptions::default() };
     let issues = |d: &Document| -> usize {
         let l = layout(d, &mut LayoutCache::new(), &opts);
@@ -4005,9 +3991,9 @@ fn body_page_totals_count_every_page() {
         let n = p.len();
         p.insert_object(n, field("SECTIONPAGES"), &Default::default()).unwrap();
     }
-    let mut fp = wordcraft_doc::Paragraph::new();
+    let mut fp = doc4me_doc::Paragraph::new();
     fp.insert_object(0, field("NUMPAGES"), &Default::default()).unwrap();
-    let id = d.add_part(wordcraft_doc::PartKind::Footer, vec![wordcraft_doc::para_block(fp)]);
+    let id = d.add_part(doc4me_doc::PartKind::Footer, vec![doc4me_doc::para_block(fp)]);
     d.last_section.footers.default = Some(id);
     let l = lay(&d);
     assert_eq!(l.pages.len(), 3);
@@ -4033,7 +4019,7 @@ fn body_page_totals_count_every_page() {
 #[test]
 fn table_cell_footnotes_are_placed() {
     let mut d = Document::from_text("After the table.");
-    d.insert_block(StoryRef::Body, &Path::top(0), wordcraft_doc::Block::Table(wordcraft_doc::Table::new(1, 1, 300.0))).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(0), doc4me_doc::Block::Table(doc4me_doc::Table::new(1, 1, 300.0))).unwrap();
     let cell = Pos { story: StoryRef::Body, path: Path(vec![0, 0, 0, 0]), off: 0 };
     d.para_mut(StoryRef::Body, &cell.path).unwrap().insert_text(0, "Table reference", &Default::default()).unwrap();
     let id = footnote(&mut d, &Pos { off: "Table reference".len(), ..cell }, "Table note payload.");
@@ -4049,9 +4035,9 @@ fn table_cell_footnotes_are_placed() {
 fn east_asian_text_takes_the_asian_font_and_latin_text_the_latin_font() {
     // #505: one run with a Latin font and an Asian font (w:eastAsia) of its own sets each script in
     // its font. Prefer an installed CJK font other than the one fallback would pick anyway.
-    let resolve = |f: &str| wordcraft_fonts::word::resolve(f, false, false);
-    let fallback = wordcraft_fonts::FontDb::global().fallback_for('你', 0).map(|f| f.family.clone());
-    let mut fonts: Vec<String> = wordcraft_fonts::FontDb::global()
+    let resolve = |f: &str| doc4me_fonts::word::resolve(f, false, false);
+    let fallback = doc4me_fonts::FontDb::global().fallback_for('你', 0).map(|f| f.family.clone());
+    let mut fonts: Vec<String> = doc4me_fonts::FontDb::global()
         .east_asian_families()
         .into_iter()
         .filter(|f| {
@@ -4064,7 +4050,7 @@ fn east_asian_text_takes_the_asian_font_and_latin_text_the_latin_font() {
         eprintln!("skipped: no Chinese font installed");
         return;
     };
-    let latin = wordcraft_doc::styles::BODY_FONT;
+    let latin = doc4me_doc::styles::BODY_FONT;
     let text = "Hello 你好 World";
     let mut d = Document::from_text(text);
     d.format_range(&Pos::body(0, 0), &Pos::body(0, text.len()), &|c| {
@@ -4093,9 +4079,9 @@ fn footer_page_total_needs_one_body_pass() {
     for i in 1..3 {
         d.para_mut(StoryRef::Body, &Path::top(i)).unwrap().props.page_break_before = Some(true);
     }
-    let mut fp = wordcraft_doc::Paragraph::new();
+    let mut fp = doc4me_doc::Paragraph::new();
     fp.insert_object(0, field(), &Default::default()).unwrap();
-    let id = d.add_part(wordcraft_doc::PartKind::Footer, vec![wordcraft_doc::para_block(fp)]);
+    let id = d.add_part(doc4me_doc::PartKind::Footer, vec![doc4me_doc::para_block(fp)]);
     d.last_section.footers.default = Some(id);
     let first = |d: &Document| {
         let totals = Totals::first_guess(d.sections().len());

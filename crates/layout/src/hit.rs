@@ -1,9 +1,9 @@
 //! Hit testing and caret geometry.
 
-use wordcraft_doc::para::Wrap;
-use wordcraft_doc::props::TextDirection;
-use wordcraft_doc::{Document, Path, Pos, StoryRef};
-use wordcraft_geom::{Point, Rect};
+use doc4me_doc::para::Wrap;
+use doc4me_doc::props::TextDirection;
+use doc4me_doc::{Document, Path, Pos, StoryRef};
+use doc4me_geom::{Point, Rect};
 
 use crate::para::ParaLayout;
 use crate::{DocLayout, Page, Placed};
@@ -50,7 +50,7 @@ pub struct ObjectHit {
     pub page: usize,
     /// Its unrotated frame; `spin` turns it about the centre.
     pub rect: Rect,
-    pub spin: wordcraft_geom::Spin,
+    pub spin: doc4me_geom::Spin,
     pub story: StoryRef,
     pub path: Path,
     pub off: usize,
@@ -624,7 +624,7 @@ impl DocLayout {
     }
 
     /// The equation under (x, y) on `page` and the caret position inside it nearest the point.
-    pub fn equation_hit(&self, page: usize, x: f32, y: f32, story: StoryRef) -> Option<(Pos, wordcraft_doc::math_edit::MathPos)> {
+    pub fn equation_hit(&self, page: usize, x: f32, y: f32, story: StoryRef) -> Option<(Pos, doc4me_doc::math_edit::MathPos)> {
         let p = self.pages.get(page)?;
         for l in page_lines(p, story) {
             let Some(line) = l.para.lines.get(l.li) else { continue };
@@ -640,7 +640,7 @@ impl DocLayout {
                 }
                 let slot = ml.hit(x - x0, base - y)?;
                 let pos = Pos { story: l.story, path: l.path.clone(), off: c.start };
-                return Some((pos, wordcraft_doc::math_edit::MathPos { path: slot.path.clone(), off: slot.off }));
+                return Some((pos, doc4me_doc::math_edit::MathPos { path: slot.path.clone(), off: slot.off }));
             }
         }
         None
@@ -655,7 +655,7 @@ impl DocLayout {
     pub fn cell_at(&self, page: usize, x: f32, y: f32) -> Option<(StoryRef, Path, usize, usize)> {
         let p = self.pages.get(page)?;
         p.items.iter().rev().find_map(|it| match it {
-            Placed::Cell { rect, table, row, cell, story, covered: false } if rect.contains(wordcraft_geom::Point::new(x, y)) => {
+            Placed::Cell { rect, table, row, cell, story, covered: false } if rect.contains(doc4me_geom::Point::new(x, y)) => {
                 Some((*story, table.clone(), *row, *cell))
             }
             _ => None,

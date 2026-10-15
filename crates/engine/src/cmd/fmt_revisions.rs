@@ -10,12 +10,12 @@
 
 use std::sync::Arc;
 
+use doc4me_doc::props::{CellProps, CharProps, ParaProps, PropChange, RowProps, TableProps};
+use doc4me_doc::section::SectionProps;
+use doc4me_doc::table::{Cell, Row, Table};
+use doc4me_doc::{Block, Blocks, Document, Paragraph, Revision, RevisionKind};
 use serde::Serialize;
 use serde_json::{Value, json};
-use wordcraft_doc::props::{CellProps, CharProps, ParaProps, PropChange, RowProps, TableProps};
-use wordcraft_doc::section::SectionProps;
-use wordcraft_doc::table::{Cell, Row, Table};
-use wordcraft_doc::{Block, Blocks, Document, Paragraph, Revision, RevisionKind};
 
 use crate::Session;
 

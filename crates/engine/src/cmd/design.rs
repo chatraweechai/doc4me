@@ -1,8 +1,8 @@
 //! Design tab: themes, style sets, colours, fonts, paragraph spacing, watermark, page colour, borders.
 
+use doc4me_doc::props::{Border, BorderStyle, Borders, LineSpacing, Rgb, TextColor};
+use doc4me_doc::{Watermark, styles};
 use serde_json::{Value, json};
-use wordcraft_doc::props::{Border, BorderStyle, Borders, LineSpacing, Rgb, TextColor};
-use wordcraft_doc::{Watermark, styles};
 
 use super::sel_result;
 use crate::{CmdError, CmdResult, CommandSpec, Session, p};
@@ -90,12 +90,17 @@ pub fn specs() -> Vec<CommandSpec> {
 }
 
 fn set_fonts(s: &mut Session, heading: &str, body: &str) {
+    // A style set in the current heading font follows the new heading font. When headings and
+    // body text share one face (Sarabun for both by default), that face says nothing, so only
+    // the headings and the title take the heading font.
+    let settings = &s.doc.settings;
+    let old_heading = (settings.major_font != settings.minor_font).then(|| settings.major_font.clone());
     s.doc.settings.major_font = heading.into();
     s.doc.settings.minor_font = body.into();
     s.doc.styles.default_chr.font = Some(body.into());
     for st in &mut s.doc.styles.styles {
         if let Some(f) = &st.chr.font
-            && (f == styles::HEADING_FONT || st.id.starts_with("Heading") || st.id == "Title")
+            && (old_heading.as_deref() == Some(f.as_str()) || st.id.starts_with("Heading") || st.id == "Title")
         {
             st.chr.font = Some(heading.into());
         } else if st.chr.font.is_some() && st.chr.font.as_deref() != Some(heading) {
@@ -143,7 +148,7 @@ fn theme(s: &mut Session, v: &Value) -> CmdResult {
 fn style_set(s: &mut Session, v: &Value) -> CmdResult {
     let name = p::req_str(v, "name")?;
     let accent = s.doc.settings.theme_colors.get(4).copied().unwrap_or(styles::HEADING_BLUE);
-    let mut fresh = wordcraft_doc::StyleSheet::builtin();
+    let mut fresh = doc4me_doc::StyleSheet::builtin();
     let line = Border { style: BorderStyle::Single, width: 0.75, color: Some(accent), space: 1.0 };
     for st in &mut fresh.styles {
         let heading = st.id.starts_with("Heading") || st.id == "Title";
@@ -158,7 +163,7 @@ fn style_set(s: &mut Session, v: &Value) -> CmdResult {
                 st.chr.color = Some(TextColor::Rgb(Rgb::WHITE));
             }
             "casual" if heading => st.chr.italic = Some(true),
-            "centered" if heading => st.para.align = Some(wordcraft_doc::Align::Center),
+            "centered" if heading => st.para.align = Some(doc4me_doc::Align::Center),
             "minimalist" if heading => {
                 st.chr.caps = Some(true);
                 st.chr.spacing = Some(1.0);
@@ -172,6 +177,7 @@ fn style_set(s: &mut Session, v: &Value) -> CmdResult {
     let customs: Vec<_> = s.doc.styles.styles.iter().filter(|x| !x.builtin).cloned().collect();
     fresh.styles.extend(customs);
     fresh.default_chr.font = s.doc.styles.default_chr.font.clone();
+    fresh.default_chr.font_cs = s.doc.styles.default_chr.font_cs.clone();
     s.doc.styles = fresh;
     let (h, b) = (s.doc.settings.major_font.clone(), s.doc.settings.minor_font.clone());
     set_fonts(s, &h, &b);

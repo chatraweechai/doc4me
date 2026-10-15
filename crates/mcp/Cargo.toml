@@ -1,17 +1,17 @@
 [package]
-name = "wordcraft-mcp"
+name = "doc4me-mcp"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "WordCraft MCP server: every command as a tool, headless or bridged to the running app"
+description = "Doc4Me MCP server: every command as a tool, headless or bridged to the running app"
 
 [lints]
 workspace = true
 
 [dependencies]
-wordcraft-doc = { workspace = true }
-wordcraft-engine = { workspace = true }
-wordcraft-render = { workspace = true }
-wordcraft-control-key = { workspace = true }
+doc4me-doc = { workspace = true }
+doc4me-engine = { workspace = true }
+doc4me-render = { workspace = true }
+doc4me-control-key = { workspace = true }
 serde_json = { workspace = true }
 log = { workspace = true }

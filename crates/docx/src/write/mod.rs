@@ -9,9 +9,9 @@ mod wordart;
 
 use std::collections::{BTreeMap, HashMap};
 
-use wordcraft_doc::numbering::{Level, LevelSuffix};
-use wordcraft_doc::styles::{Style, StyleKind};
-use wordcraft_doc::{Blocks, Document, PartKind};
+use doc4me_doc::numbering::{Level, LevelSuffix};
+use doc4me_doc::styles::{Style, StyleKind};
+use doc4me_doc::{Blocks, Document, PartKind};
 
 use crate::package::{MAX_VBA_RELATED, VBA_PROJECT_PART, VBA_RELATED, rt, zip_entries};
 use crate::xml::{self, W};
@@ -90,7 +90,7 @@ pub(crate) struct Writer<'d> {
     /// Writing a TOC heading: its TOC field is held back so the entries become the field's result.
     toc_hold_end: bool,
     /// The held TOC field (instruction, locked, props), opened in the first entry as Word does.
-    toc_field: Option<(String, bool, wordcraft_doc::props::CharProps)>,
+    toc_field: Option<(String, bool, doc4me_doc::props::CharProps)>,
     /// Open the held TOC field at the start of the paragraph being written.
     toc_begin_here: bool,
     /// Close the open TOC field at the end of the paragraph being written.
@@ -100,7 +100,7 @@ pub(crate) struct Writer<'d> {
     /// Media keys actually referenced by a written drawing.
     used_media: std::collections::BTreeSet<String>,
     /// Bounds writing text boxes inside text boxes (as layout shows them).
-    boxes: wordcraft_doc::BoxBudget,
+    boxes: doc4me_doc::BoxBudget,
     /// Charts, diagrams and OLE objects kept from a file: the parts they need.
     embeds: embed::EmbedWriter<'d>,
     /// Linked text boxes: part id → (`wps:txbx`/`wps:linkedTxbx` id, seq; 0 for the box holding
@@ -133,6 +133,17 @@ pub(crate) fn write_parts(doc: &Document, flavor: Flavor) -> Result<Vec<(String,
     } else {
         doc
     };
+    // Word formats Thai and the other complex scripts with their own font and size properties;
+    // spell out the ones that fall back to the Latin values here.
+    let explicit;
+    let doc = if doc.complex_script_falls_back() {
+        let mut d = doc.clone();
+        d.make_complex_script_explicit();
+        explicit = d;
+        &explicit
+    } else {
+        doc
+    };
     let mut wr = Writer {
         eq_number: 0,
         doc,
@@ -156,7 +167,7 @@ pub(crate) fn write_parts(doc: &Document, flavor: Flavor) -> Result<Vec<(String,
         toc_end_here: false,
         inline_controls: Vec::new(),
         used_media: Default::default(),
-        boxes: wordcraft_doc::BoxBudget::default(),
+        boxes: doc4me_doc::BoxBudget::default(),
         embeds: embed::EmbedWriter::new(doc),
         txbx_links: doc
             .text_box_chains()
@@ -603,15 +614,15 @@ impl Writer<'_> {
         Some(rels.add(if footer { rt::FOOTER } else { rt::HEADER }, &file, false))
     }
 
-    fn take_para_id(&self, p: &wordcraft_doc::Paragraph) -> Option<String> {
+    fn take_para_id(&self, p: &doc4me_doc::Paragraph) -> Option<String> {
         self.para_ids.get(&(p as *const _ as usize)).cloned()
     }
 
     /// Whether `p` holds a reference to the note being written.
-    fn holds_own_ref(&self, p: &wordcraft_doc::Paragraph) -> bool {
+    fn holds_own_ref(&self, p: &doc4me_doc::Paragraph) -> bool {
         let Some((foot, id)) = self.current_note else { return false };
         p.objects.iter().any(|o| match o {
-            wordcraft_doc::InlineObject::NoteRef { kind, id: nid, .. } => *nid == id && (*kind == wordcraft_doc::para::NoteKind::Footnote) == foot,
+            doc4me_doc::InlineObject::NoteRef { kind, id: nid, .. } => *nid == id && (*kind == doc4me_doc::para::NoteKind::Footnote) == foot,
             _ => false,
         })
     }
@@ -654,7 +665,7 @@ fn styles_xml(doc: &Document) -> Vec<u8> {
     props::rpr_inner(&mut w, &s.default_chr);
     w.close("w:rPr");
     w.close("w:rPrDefault");
-    if s.default_para_present || s.default_para != wordcraft_doc::props::ParaProps::default() {
+    if s.default_para_present || s.default_para != doc4me_doc::props::ParaProps::default() {
         w.open("w:pPrDefault", &[]);
         w.open("w:pPr", &[]);
         props::ppr_inner(&mut w, &s.default_para, false, None);
@@ -740,11 +751,7 @@ fn style_xml(w: &mut W, st: &Style) {
         }
         // One conditional formatting region (ECMA-376 §17.7.6): run properties, then cell borders
         // and shading.
-        let cond = |w: &mut W,
-                    ty: &str,
-                    chr: &wordcraft_doc::CharProps,
-                    fill: Option<wordcraft_doc::Rgb>,
-                    borders: Option<wordcraft_doc::props::Borders>| {
+        let cond = |w: &mut W, ty: &str, chr: &doc4me_doc::CharProps, fill: Option<doc4me_doc::Rgb>, borders: Option<doc4me_doc::props::Borders>| {
             if !props::has_rpr(chr) && fill.is_none() && borders.is_none() {
                 return;
             }
@@ -766,7 +773,7 @@ fn style_xml(w: &mut W, st: &Style) {
             }
             w.close("w:tblStylePr");
         };
-        cond(w, "wholeTable", &wordcraft_doc::CharProps::default(), t.fill, None);
+        cond(w, "wholeTable", &doc4me_doc::CharProps::default(), t.fill, None);
         cond(w, "firstRow", &t.header_chr, t.header_fill, t.header_borders);
         // The total row's borders, its top edge falling back to the built-in top rule.
         let total_borders = match (t.total_borders, t.total_border_top) {
@@ -774,7 +781,7 @@ fn style_xml(w: &mut W, st: &Style) {
                 b.top = b.top.or(top);
                 Some(b)
             }
-            (None, top) => top.map(|b| wordcraft_doc::props::Borders { top: Some(b), ..Default::default() }),
+            (None, top) => top.map(|b| doc4me_doc::props::Borders { top: Some(b), ..Default::default() }),
         };
         cond(w, "lastRow", &t.total_chr, t.total_fill, total_borders);
         cond(w, "firstCol", &t.first_col_chr, t.first_col_fill, t.first_col_borders);
@@ -929,7 +936,7 @@ fn settings_xml(doc: &Document, footnotes: bool, endnotes: bool, template_rel: O
     if s.consecutive_hyphen_limit > 0 {
         w.val("w:consecutiveHyphenLimit", &s.consecutive_hyphen_limit.min(32_767).to_string());
     }
-    if s.hyphenation_zone.is_finite() && (s.hyphenation_zone - wordcraft_doc::DEFAULT_HYPHENATION_ZONE).abs() > 0.01 {
+    if s.hyphenation_zone.is_finite() && (s.hyphenation_zone - doc4me_doc::DEFAULT_HYPHENATION_ZONE).abs() > 0.01 {
         w.val("w:hyphenationZone", &crate::units::twips(s.hyphenation_zone.clamp(0.0, 1584.0)));
     }
     if !s.hyphenate_caps {
@@ -939,7 +946,7 @@ fn settings_xml(doc: &Document, footnotes: bool, endnotes: bool, template_rel: O
         w.empty("w:evenAndOddHeaders", &[]);
     }
     for (tag, v) in [("w:drawingGridHorizontalSpacing", s.grid_h), ("w:drawingGridVerticalSpacing", s.grid_v)] {
-        if v.is_finite() && (v - wordcraft_doc::DEFAULT_GRID).abs() > 0.01 {
+        if v.is_finite() && (v - doc4me_doc::DEFAULT_GRID).abs() > 0.01 {
             w.val(tag, &crate::units::twips(v.clamp(0.5, 1584.0)));
         }
     }
@@ -949,7 +956,7 @@ fn settings_xml(doc: &Document, footnotes: bool, endnotes: bool, template_rel: O
         ("w:endnotePr", s.endnote_format, &s.endnote_pr, endnotes, "w:endnote"),
     ] {
         w.open(tag, &[]);
-        story::note_pr_inner(&mut w, &wordcraft_doc::section::NoteProps { num_fmt: Some(fmt), ..*pr });
+        story::note_pr_inner(&mut w, &doc4me_doc::section::NoteProps { num_fmt: Some(fmt), ..*pr });
         if used {
             w.empty(el, &[("w:id", "-1")]);
             w.empty(el, &[("w:id", "0")]);
@@ -980,7 +987,7 @@ fn theme_xml(doc: &Document) -> Vec<u8> {
     w.open("a:themeElements", &[]);
     w.open("a:clrScheme", &[("name", name)]);
     for (i, n) in names.iter().enumerate() {
-        let c = s.theme_colors.get(i).or_else(|| wordcraft_doc::THEME_COLORS.get(i)).copied().unwrap_or_default();
+        let c = s.theme_colors.get(i).or_else(|| doc4me_doc::THEME_COLORS.get(i)).copied().unwrap_or_default();
         w.open(&format!("a:{n}"), &[]);
         w.empty("a:srgbClr", &[("val", &c.hex())]);
         w.close(&format!("a:{n}"));
@@ -1074,7 +1081,7 @@ fn app_xml(doc: &Document) -> Vec<u8> {
             ("xmlns:vt", "http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"),
         ],
     );
-    w.leaf("Application", &[], "WordCraft");
+    w.leaf("Application", &[], "Doc4Me");
     w.leaf("Words", &[], &doc.word_count().to_string());
     w.leaf("Paragraphs", &[], &doc.paragraph_count().to_string());
     w.leaf("DocSecurity", &[], "0");

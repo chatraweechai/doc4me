@@ -4,10 +4,10 @@
 //! formatting to the paragraphs it touches. Typing or pasting first deletes the block; any other
 //! edit collapses it to its top-left corner. Any ordinary caret move or selection drops it.
 
+use doc4me_doc::edit::Fragment;
+use doc4me_doc::props::CharProps;
+use doc4me_doc::{Block, Paragraph, Pos};
 use serde_json::{Value, json};
-use wordcraft_doc::edit::Fragment;
-use wordcraft_doc::props::CharProps;
-use wordcraft_doc::{Block, Paragraph, Pos};
 
 use super::{parse_pos, pos_json};
 use crate::{CmdError, CmdResult, ColumnBlock, CommandSpec, Selection, Session, p};

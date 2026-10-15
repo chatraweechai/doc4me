@@ -13,7 +13,7 @@
 
 use std::sync::Arc;
 
-use wordcraft_doc::{Align, Document};
+use doc4me_doc::{Align, Document};
 
 use crate::model::{
     self, Cell, FBlock, FTable, Flow, Fmt, Inline, Kind, ListInfo, Meta, Para, base64_encode, data_uri, make_img, mime_of, parse_color,
@@ -986,7 +986,7 @@ impl<'r> Builder<'r> {
             "code" | "kbd" | "tt" | "samp" => fmt.code = true,
             "sup" => fmt.sup = true,
             "sub" => fmt.sub = true,
-            "mark" => fmt.background = Some(wordcraft_doc::Rgb(255, 255, 0)),
+            "mark" => fmt.background = Some(doc4me_doc::Rgb(255, 255, 0)),
             "font" => {
                 if let Some(c) = attr(attrs, "color").and_then(parse_color) {
                     fmt.color = Some(c);
@@ -1004,7 +1004,7 @@ impl<'r> Builder<'r> {
                 }
             }
             "a" => {
-                if let Some(h) = attr(attrs, "href").filter(|h| wordcraft_doc::link::is_safe_href(h)) {
+                if let Some(h) = attr(attrs, "href").filter(|h| doc4me_doc::link::is_safe_href(h)) {
                     fmt.link = Some(h.trim().to_string());
                 }
             }
@@ -1170,7 +1170,7 @@ fn align_css(a: Option<Align>) -> Option<&'static str> {
     match a? {
         Align::Center => Some("text-align:center"),
         Align::Right => Some("text-align:right"),
-        Align::Justify | Align::Distribute => Some("text-align:justify"),
+        Align::Justify | Align::Distribute | Align::ThaiDistribute => Some("text-align:justify"),
         Align::Left => None,
     }
 }
@@ -1204,7 +1204,7 @@ pub fn inlines_html(inlines: &[Inline]) -> String {
                 let mut open = String::new();
                 let mut close: Vec<&str> = Vec::new();
                 // A script or other non-web target is written as plain text (`is_safe_href`).
-                if let Some(l) = f.link.as_deref().filter(|l| wordcraft_doc::link::is_safe_href(l)) {
+                if let Some(l) = f.link.as_deref().filter(|l| doc4me_doc::link::is_safe_href(l)) {
                     open.push_str(&format!("<a href=\"{}\">", esc(l)));
                     close.push("</a>");
                 }
@@ -1452,7 +1452,7 @@ pub fn export_flow(flow: &Flow, lang: &str) -> String {
     let mut out = String::new();
     out.push_str("<!DOCTYPE html>\n");
     out.push_str(&format!("<html lang=\"{}\">\n<head>\n<meta charset=\"utf-8\">\n", esc(lang)));
-    out.push_str("<meta name=\"generator\" content=\"WordCraft\">\n");
+    out.push_str("<meta name=\"generator\" content=\"Doc4Me\">\n");
     out.push_str(&format!("<title>{}</title>\n", esc(&m.title)));
     for (k, v) in [("author", &m.author), ("description", &m.description), ("keywords", &m.keywords), ("subject", &m.subject)] {
         if !v.is_empty() {
@@ -1460,7 +1460,7 @@ pub fn export_flow(flow: &Flow, lang: &str) -> String {
         }
     }
     out.push_str(
-        "<style>\nbody{font-family:Aptos,Calibri,'Segoe UI',Arial,sans-serif;font-size:12pt;line-height:1.15;max-width:48em;margin:2em auto;padding:0 1em}\n\
+        "<style>\nbody{font-family:Sarabun,'TH Sarabun New',Aptos,Calibri,'Segoe UI',Tahoma,Arial,sans-serif;font-size:12pt;line-height:1.15;max-width:48em;margin:2em auto;padding:0 1em}\n\
          table{border-collapse:collapse;margin:0.5em 0}\nblockquote{margin:0.5em 2em;font-style:italic;color:#404040}\n\
          pre{background:#f5f5f5;padding:0.5em;font-family:'Courier New',monospace;font-size:10pt}\n</style>\n</head>\n<body>\n",
     );
@@ -1486,7 +1486,7 @@ mod tests {
     fn table_style(html: &str) -> Option<String> {
         let doc = crate::model::to_doc(&parse(html));
         doc.body.iter().find_map(|b| match &**b {
-            wordcraft_doc::Block::Table(t) => Some(t.props.style.clone().unwrap_or_default()),
+            doc4me_doc::Block::Table(t) => Some(t.props.style.clone().unwrap_or_default()),
             _ => None,
         })
     }
@@ -1579,7 +1579,7 @@ mod tests {
         let f = parse("<p style='text-align:center'><span style=\"color:#ff0000;font-weight:700\">red</span> <a href=\"http://x\">l</a><br>n</p>");
         let FBlock::Para(p) = &f.blocks[0] else { panic!() };
         assert_eq!(p.align, Some(Align::Center));
-        assert!(matches!(&p.inlines[0], Inline::Text(t, f) if t == "red" && f.bold && f.color == Some(wordcraft_doc::Rgb(255,0,0))));
+        assert!(matches!(&p.inlines[0], Inline::Text(t, f) if t == "red" && f.bold && f.color == Some(doc4me_doc::Rgb(255,0,0))));
         assert!(p.inlines.iter().any(|i| matches!(i, Inline::Text(t, f) if t == "l" && f.link.as_deref() == Some("http://x"))));
         assert!(p.text().ends_with("l\nn"));
     }

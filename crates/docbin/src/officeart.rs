@@ -7,7 +7,7 @@
 
 use std::collections::HashMap;
 
-use wordcraft_doc::props::Rgb;
+use doc4me_doc::props::Rgb;
 
 /// Deepest container nesting walked (groups inside groups…).
 const MAX_DEPTH: usize = 12;

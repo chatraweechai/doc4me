@@ -4,10 +4,10 @@
 //! `table.draw` / `table.eraser` with page coordinates (one undo step each). Esc or the button
 //! again turns it off. The geometry decisions are the engine's (`cmd::table_draw`).
 
+use doc4me_engine::cmd::table_draw::{self, Stroke as Kind};
+use doc4me_layout::DocLayout;
 use egui::{Pos2, Rect, Stroke, Ui, pos2, vec2};
 use serde_json::{Value, json};
-use wordcraft_engine::cmd::table_draw::{self, Stroke as Kind};
-use wordcraft_layout::DocLayout;
 
 use crate::WordApp;
 use crate::theme::Tokens;
@@ -190,7 +190,7 @@ mod tests {
     /// The buttons toggle the tools (one at a time); coordinates go to the engine.
     #[test]
     fn buttons_toggle_the_pen_and_the_eraser() {
-        let mut a = WordApp::new(wordcraft_engine::Session::new(wordcraft_doc::Document::new()), crate::Services::default());
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), crate::Services::default());
         assert_eq!(a.run("table.draw", json!({})).unwrap()["tool"], "table.draw");
         assert_eq!(a.canvas.table_tool, Some(TableTool::Draw));
         assert_eq!(a.run("table.eraser", json!({})).unwrap()["tool"], "table.eraser");

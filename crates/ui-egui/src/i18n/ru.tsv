@@ -10,15 +10,15 @@
 # Clean room: every entry was written from the plain meaning of the English label in ordinary
 # computing vocabulary. No Microsoft Word (or other product) localisation, string table or
 # translated UI was consulted or copied; add entries the same way.
-# Product, format and technology names (WordCraft, PDF, Markdown, MCP …) stay in Latin letters.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
 # Counts use count-neutral wording (`Слов: 21`), so no plural forms are needed.
 
 	(no suggestions)	(нет вариантов)
 	1.5 Line Spacing	Полуторный интервал
-	A free, open-source word processor written from scratch in Rust.\nPart of the Crafting Apps from the ArtCraft team.	Бесплатный текстовый процессор с открытым исходным кодом, написанный с нуля на Rust.\nВходит в Crafting Apps от команды ArtCraft.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Бесплатный текстовый процессор с открытым исходным кодом, написанный с нуля на Rust.\nОснован на WordCraft от команды ArtCraft.
 	AaBbCcDd	АаБбВвГг
 	About	О программе
-	About WordCraft	О WordCraft
+	About Doc4Me	О Doc4Me
 	Accept	Принять
 	Accept All Changes	Принять все изменения
 	Accept This Change	Принять это изменение
@@ -143,7 +143,6 @@
 	Comment	Комментарий
 	Comments	Комментарии
 	Comments Pane	Область комментариев
-	Community\nDiscord	Сообщество\nDiscord
 	Compact	Компактный
 	Compare	Сравнить
 	Compress Pictures	Сжать рисунки
@@ -195,13 +194,12 @@
 	Dictate	Диктовка
 	Different First Page	Особая первая страница
 	Different Odd & Even Pages	Разные для чётных и нечётных страниц
-	Discord	Discord
-	Discord community	Сообщество в Discord
 	Display	Отображение
 	Display for Review	Отображение исправлений
 	Distribute Columns	Выровнять ширину столбцов
 	Distribute Rows	Выровнять высоту строк
 	Distributed	Распределённое
+	Thai Distributed	Распределённое (тайское)
 	Do Not Show in TOC	Не показывать в оглавлении
 	Document End	Конец документа
 	Document Formatting	Форматирование документа
@@ -246,7 +244,7 @@
 	Equation	Уравнение
 	Eraser	Ластик
 	Even Page	Чётная страница
-	Every command is available to scripts and AI agents: run `wordcraft-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Любая команда доступна скриптам и ИИ-агентам: запустите `wordcraft-cli mcp`, чтобы получить MCP-сервер, или запустите приложение с `--control <port>`, чтобы открыть управляющий канал JSON.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Любая команда доступна скриптам и ИИ-агентам: запустите `doc4me-cli mcp`, чтобы получить MCP-сервер, или запустите приложение с `--control <port>`, чтобы открыть управляющий канал JSON.
 	Export	Экспорт
 	Export a copy to share (PDF, Word document)	Экспортировать копию, чтобы поделиться (PDF, документ Word)
 	Export Page as PNG	Экспортировать страницу в PNG
@@ -366,8 +364,6 @@
 	Intense Reference	Сильная ссылка
 	Interface language:	Язык интерфейса:
 	Italic	Курсив
-	Join the ArtCraft community on Discord	Присоединяйтесь к сообществу ArtCraft в Discord
-	Join us on Discord: discord.gg/artcraft	Присоединяйтесь к нам в Discord: discord.gg/artcraft
 	Justify	По ширине
 	Keep Lines Together	Не разрывать абзац
 	Keep lines together	Не разрывать абзац
@@ -663,7 +659,6 @@
 	Animate the caret (it glides and fades)	Анимировать курсор (плавно перемещается и угасает)
 	Animation	Анимация
 	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Вкл.: при вводе текста и нажатии клавиш со стрелками курсор плавно перемещается на новое место, а его мигание плавно угасает. Выкл.: курсор перескакивает и резко мигает.
-	Show the community button in the title bar	Показывать кнопку сообщества в заголовке окна
 	Show/Hide ¶	Показать/скрыть ¶
 	Show\nComments	Показать\nкомментарии
 	Shrink Font 1 Point	Уменьшить шрифт на 1 пт
@@ -678,7 +673,7 @@
 	Small caps	Малые прописные
 	SmartArt	SmartArt
 	Sort	Сортировка
-	Source code: github.com/storytold/wordcraft	Исходный код: github.com/storytold/wordcraft
+	Source code: github.com/chatraweechai/docscaft	Исходный код: github.com/chatraweechai/docscaft
 	Space before/after:	Интервал перед/после:
 	Spacing	Интервал
 	Spacing (pt):	Интервал (пт):
@@ -814,7 +809,7 @@ preview	Title	Пример
 	Word Left	На слово влево
 	Word Right	На слово вправо
 	WordArt	WordArt
-	WordCraft	WordCraft
+	Doc4Me	Doc4Me
 	Words	Слова
 	Words only	Только слова
 	Wrap Text	Обтекание текстом
@@ -832,7 +827,7 @@ preview	Title	Пример
 	Only web (http, https) and email (mailto) links can be followed	Переходить можно только по веб-ссылкам (http, https) и ссылкам на электронную почту (mailto)
 
 	Apply Styles	Применить стили
-	AutoSave documents you have saved in WordCraft	Автосохранение документов, уже сохранённых в WordCraft
+	AutoSave documents you have saved in Doc4Me	Автосохранение документов, уже сохранённых в Doc4Me
 	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Ошибка автосохранения: {error}. Сохраните документ, чтобы снова включить автосохранение.
 	Bottom Margin	Нижнее поле
 	Edit Comment	Изменить комментарий
@@ -1082,7 +1077,6 @@ preview	Title	Пример
 	Insert a new equation (Alt+=)	Вставить новое уравнение (Alt+=)
 	Leave the equation (Esc)	Выйти из уравнения (Esc)
 	Preview	Предварительный просмотр
-	getartcraft.com/apps/wordcraft	getartcraft.com/apps/wordcraft
 	Browse…	Обзор…
 
 # Equation gallery, themes, watermarks, paper sizes, table styles and other strings the
@@ -1527,7 +1521,7 @@ preview	Title	Пример
 	The document will be saved with a password. Save it to protect it.	Документ будет сохранён с паролем. Сохраните его, чтобы защитить.
 	The password is removed. Save the document to keep the change.	Пароль убран. Сохраните документ, чтобы изменение осталось.
 	The passwords don't match.	Пароли не совпадают.
-	Keep the password somewhere safe: without it nobody, WordCraft included, can open the document. Leave both boxes empty to remove the password.	Храните пароль в надёжном месте: без него никто, включая WordCraft, не сможет открыть документ. Оставьте оба поля пустыми, чтобы убрать пароль.
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Храните пароль в надёжном месте: без него никто, включая Doc4Me, не сможет открыть документ. Оставьте оба поля пустыми, чтобы убрать пароль.
 	{cols}×{rows} Table	Таблица {cols}×{rows}
 	Name	Имя
 	PRs	PR
@@ -2004,13 +1998,13 @@ preview	Title	Пример
 	Hindi	Хинди
 	Context	Контекст
 	System	Системные
-	Couldn't make WordCraft the default: {error}	Не удалось сделать WordCraft приложением по умолчанию: {error}
-	In Default apps, choose WordCraft for the document types you want it to open.	В разделе «Приложения по умолчанию» выберите WordCraft для нужных типов документов.
-	Make WordCraft the default for Word documents…	Сделать WordCraft приложением по умолчанию для документов Word…
-	Opens .docx, .doc, .rtf and .odt files and Word templates with WordCraft from now on.	Отныне файлы .docx, .doc, .rtf и .odt и шаблоны Word будут открываться в WordCraft.
-	Opens Settings › Default apps, where you choose WordCraft for .docx and the other document types.	Открывает «Параметры» › «Приложения по умолчанию», где можно выбрать WordCraft для .docx и других типов документов.
-	To open Word documents with WordCraft by default: select one in Finder, choose File › Get Info, pick WordCraft under Open with, then click Change All.	Чтобы открывать документы Word в WordCraft по умолчанию: выберите документ в Finder, выберите «Файл» › «Свойства», укажите WordCraft в разделе «Открывать в программе» и нажмите «Изменить все».
-	WordCraft is now the default app for Word documents.	WordCraft теперь приложение по умолчанию для документов Word.
+	Couldn't make Doc4Me the default: {error}	Не удалось сделать Doc4Me приложением по умолчанию: {error}
+	In Default apps, choose Doc4Me for the document types you want it to open.	В разделе «Приложения по умолчанию» выберите Doc4Me для нужных типов документов.
+	Make Doc4Me the default for Word documents…	Сделать Doc4Me приложением по умолчанию для документов Word…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Отныне файлы .docx, .doc, .rtf и .odt и шаблоны Word будут открываться в Doc4Me.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Открывает «Параметры» › «Приложения по умолчанию», где можно выбрать Doc4Me для .docx и других типов документов.
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Чтобы открывать документы Word в Doc4Me по умолчанию: выберите документ в Finder, выберите «Файл» › «Свойства», укажите Doc4Me в разделе «Открывать в программе» и нажмите «Изменить все».
+	Doc4Me is now the default app for Word documents.	Doc4Me теперь приложение по умолчанию для документов Word.
 	Templates	Шаблоны
 	Templates and Add-ins	Шаблоны и надстройки
 	Attach Template	Присоединить шаблон
@@ -2162,7 +2156,7 @@ preview	Title	Пример
 	Word document	Документ Word
 	All files	Все файлы
 	Recipient lists	Списки получателей
-	The system file dialog isn't available, so WordCraft shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Системное диалоговое окно выбора файлов недоступно, поэтому WordCraft показывает собственное. Чтобы пользоваться системным, установите портал выбора файлов (например, xdg-desktop-portal-gtk) или zenity.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Системное диалоговое окно выбора файлов недоступно, поэтому Doc4Me показывает собственное. Чтобы пользоваться системным, установите портал выбора файлов (например, xdg-desktop-portal-gtk) или zenity.
 	Up one level	На уровень вверх
 	Home folder	Домашняя папка
 	{name} wasn't found.	{name} не найден.
@@ -2170,8 +2164,8 @@ preview	Title	Пример
 	This folder can't be read: {error}	Не удаётся прочитать папку: {error}
 	Showing the first {count} items.	Показаны первые элементы: {count}.
 	File name:	Имя файла:
-	Browse in WordCraft…	Обзор в WordCraft…
-	Open a file with WordCraft's own browser when the system file dialog doesn't appear.	Открыть файл во встроенном обозревателе WordCraft, если системное диалоговое окно выбора файлов не появляется.
+	Browse in Doc4Me…	Обзор в Doc4Me…
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Открыть файл во встроенном обозревателе Doc4Me, если системное диалоговое окно выбора файлов не появляется.
 	Hide White Space	Скрыть пустое место между страницами
 	All pages	Все страницы
 	Current page	Текущая страница

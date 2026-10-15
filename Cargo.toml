@@ -1,33 +1,33 @@
 [workspace]
 resolver = "3"
 members = ["crates/*", "apps/*", "xtask"]
-default-members = ["crates/*", "apps/wordcraft", "apps/wordcraft-cli", "xtask"]
+default-members = ["crates/*", "apps/doc4me", "apps/doc4me-cli", "xtask"]
 
 [workspace.package]
-version = "0.6.0"
+version = "1.0.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 rust-version = "1.90"
-repository = "https://github.com/storytold/wordcraft"
+repository = "https://github.com/chatraweechai/docscaft"
 
 [workspace.dependencies]
 # internal
-wordcraft-geom = { path = "crates/geom" }
-wordcraft-doc = { path = "crates/doc" }
-wordcraft-fonts = { path = "crates/fonts" }
-wordcraft-layout = { path = "crates/layout" }
-wordcraft-docx = { path = "crates/docx" }
-wordcraft-docbin = { path = "crates/docbin" }
-wordcraft-formats = { path = "crates/formats" }
-wordcraft-render = { path = "crates/render" }
-wordcraft-pdf = { path = "crates/pdf" }
-wordcraft-proof = { path = "crates/proof" }
-wordcraft-engine = { path = "crates/engine" }
-wordcraft-mcp = { path = "crates/mcp" }
-wordcraft-zotero = { path = "crates/zotero" }
-wordcraft-control-key = { path = "crates/control-key" }
-wordcraft-ui-egui = { path = "crates/ui-egui" }
-wordcraft-metafile = { path = "crates/metafile" }
+doc4me-geom = { path = "crates/geom" }
+doc4me-doc = { path = "crates/doc" }
+doc4me-fonts = { path = "crates/fonts" }
+doc4me-layout = { path = "crates/layout" }
+doc4me-docx = { path = "crates/docx" }
+doc4me-docbin = { path = "crates/docbin" }
+doc4me-formats = { path = "crates/formats" }
+doc4me-render = { path = "crates/render" }
+doc4me-pdf = { path = "crates/pdf" }
+doc4me-proof = { path = "crates/proof" }
+doc4me-engine = { path = "crates/engine" }
+doc4me-mcp = { path = "crates/mcp" }
+doc4me-zotero = { path = "crates/zotero" }
+doc4me-control-key = { path = "crates/control-key" }
+doc4me-ui-egui = { path = "crates/ui-egui" }
+doc4me-metafile = { path = "crates/metafile" }
 
 # foundation
 kurbo = { version = "0.13", features = ["serde"] }
@@ -41,6 +41,9 @@ unicode-bidi = "0.3"
 unicode-segmentation = "1"
 unicode-linebreak = "0.1"
 unicode-script = "0.5"
+# Thai, Lao and Khmer word boundaries (line breaks, word selection, word count): ICU4X's
+# dictionary segmenter with its compiled-in data. Unicode-3.0 licence; pure Rust, wasm-safe.
+icu_segmenter = { version = "2.3", default-features = false, features = ["compiled_data"] }
 regex = { version = "1", default-features = false, features = ["std", "unicode", "perf"] }
 regex-automata = { version = "0.4", default-features = false, features = ["std", "syntax", "meta", "nfa-pikevm", "unicode"] }
 

@@ -331,7 +331,7 @@ fn controls(tab: &str) -> Vec<Control> {
             c("Split", "view.split"),
             c("Macros", "tools.macros"),
         ],
-        "Help" => vec![d("Help", "about"), c("Community Discord", "ui.discord"), d("Commands", "commands")],
+        "Help" => vec![d("Help", "about"), d("Commands", "commands")],
         "Table Design" => {
             vec![m("Shading", "table.shading"), m("Borders", "table.borders"), c("Border Painter", "table.borderPainter")]
         }
@@ -754,7 +754,7 @@ mod tests {
     use super::*;
 
     fn app() -> WordApp {
-        WordApp::new(wordcraft_engine::Session::new(wordcraft_doc::Document::new()), crate::Services::default())
+        WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), crate::Services::default())
     }
 
     fn key_event(key: egui::Key, pressed: bool, modifiers: egui::Modifiers) -> egui::Event {
@@ -860,7 +860,7 @@ mod tests {
         // when the Word feature catalog lists them (the ribbon shows them too); `ui.*` commands are
         // the app's own (`WordApp::run`).
         let a = app();
-        let catalog: Vec<&str> = wordcraft_engine::catalog::entries().into_iter().map(|e| e.3).collect();
+        let catalog: Vec<&str> = doc4me_engine::catalog::entries().into_iter().map(|e| e.3).collect();
         let mut missing = Vec::new();
         for (tab, _) in TAB_LETTERS {
             for ctrl in controls(tab) {
@@ -1049,11 +1049,11 @@ mod tests {
         h.step();
         assert_eq!(h.state().ui.keytips, Phase::Off);
         assert_eq!(h.state_mut().session.run("format.state", &serde_json::json!({})).unwrap()["bold"], true);
-        assert!(h.state().session.doc.plain_text(wordcraft_doc::StoryRef::Body).is_empty());
+        assert!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body).is_empty());
         // Normal typing resumes immediately after the command.
         h.input_mut().events.push(egui::Event::Text("hello".into()));
         h.step();
-        assert_eq!(h.state().session.doc.plain_text(wordcraft_doc::StoryRef::Body).trim(), "hello");
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body).trim(), "hello");
         if !cfg!(target_os = "macos") {
             let alt = egui::Modifiers { alt: true, ..Default::default() };
             h.input_mut().events.extend([key_event(egui::Key::AltLeft, true, egui::Modifiers::NONE), egui::Event::ModifiersChanged(alt)]);
@@ -1064,7 +1064,7 @@ mod tests {
             h.input_mut().events.extend([key(egui::Key::Num2), egui::Event::Text("2".into())]);
             h.step();
             assert_eq!(h.state_mut().session.run("format.state", &serde_json::json!({})).unwrap()["bold"], false);
-            assert_eq!(h.state().session.doc.plain_text(wordcraft_doc::StoryRef::Body).trim(), "hello");
+            assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body).trim(), "hello");
         }
     }
 

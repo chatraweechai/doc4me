@@ -5,10 +5,10 @@
 use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
 
+use doc4me_doc::{PartKind, Pos, StoryRef};
+use doc4me_layout::{DocLayout, Page, Placed};
 use egui::{Color32, Pos2, Rect, Sense, Stroke, TextureHandle, Ui, pos2, vec2};
 use serde_json::json;
-use wordcraft_doc::{PartKind, Pos, StoryRef};
-use wordcraft_layout::{DocLayout, Page, Placed};
 
 use crate::WordApp;
 use crate::theme::{Tokens, regular, semibold};
@@ -67,7 +67,7 @@ pub struct CanvasState {
     pub render_ms: f64,
     pub ime_preedit: String,
     /// Document faces added to the interface fonts to draw the input method's composition (#565).
-    pub(crate) ime_faces: Vec<std::sync::Arc<wordcraft_fonts::FontFace>>,
+    pub(crate) ime_faces: Vec<std::sync::Arc<doc4me_fonts::FontFace>>,
     pub want_focus: bool,
     pub context_issue: Option<serde_json::Value>,
     pub context_synonyms: Option<serde_json::Value>,
@@ -117,7 +117,7 @@ pub struct CanvasState {
     /// isn't typed. The next key press clears it.
     pub(crate) swallow_text: bool,
     /// Create Link is waiting for a click on the text box to link to: the linking box's object.
-    pub(crate) link_from: Option<wordcraft_doc::Pos>,
+    pub(crate) link_from: Option<doc4me_doc::Pos>,
     /// What screen readers were last told about the document (#488).
     pub(crate) a11y: crate::a11y::A11yCache,
 }
@@ -286,9 +286,9 @@ pub fn markup_width(app: &WordApp) -> f32 {
     let s = &app.session;
     let m = &s.prefs.markup;
     let comments = m.comments && !s.doc.comments.is_empty();
-    let formats = m.formatting && wordcraft_engine::cmd::review::has_format_changes(&s.doc);
-    let moves = m.insertions_deletions && wordcraft_engine::cmd::moves::has_moves(&s.doc);
-    let deletions = s.revisions_in_balloons() && wordcraft_engine::cmd::review::has_deletions(&s.doc);
+    let formats = m.formatting && doc4me_engine::cmd::review::has_format_changes(&s.doc);
+    let moves = m.insertions_deletions && doc4me_engine::cmd::moves::has_moves(&s.doc);
+    let deletions = s.revisions_in_balloons() && doc4me_engine::cmd::review::has_deletions(&s.doc);
     if s.balloons_shown() && (comments || formats || moves || deletions) { 216.0 } else { 0.0 }
 }
 
@@ -455,7 +455,7 @@ pub fn geometry(app: &WordApp, l: &DocLayout, avail: egui::Vec2) -> Geometry {
     let markup = markup_width(app);
     let maxw = l.pages.iter().map(|p| sane_dim(p.w, 1e5)).fold(0.0f32, f32::max).max(72.0) + markup;
     let maxh = l.pages.iter().map(|p| sane_dim(p.h, 20_000.0)).fold(0.0f32, f32::max).max(72.0);
-    let web = v.mode != wordcraft_layout::ViewMode::Print;
+    let web = v.mode != doc4me_layout::ViewMode::Print;
     let mut scale = v.zoom.clamp(0.1, 5.0) * PX_PER_PT;
     if v.read_mode {
         scale = v.read_zoom.clamp(0.75, 1.5) * PX_PER_PT;
@@ -491,7 +491,7 @@ pub fn geometry(app: &WordApp, l: &DocLayout, avail: egui::Vec2) -> Geometry {
     let (mut rects, mut size) = place_pages(&sizes, markup, scale, cols, avail);
     let mut bands: Vec<(f32, f32)> = rects.iter().map(|r| (0.0, r.height())).collect();
     let editing_part = matches!(app.session.sel.focus.story, StoryRef::Part(_));
-    if v.hide_white_space && v.mode == wordcraft_layout::ViewMode::Print && !v.read_mode && cols == 1 && !editing_part && rects.len() > 1 {
+    if v.hide_white_space && v.mode == doc4me_layout::ViewMode::Print && !v.read_mode && cols == 1 && !editing_part && rects.len() > 1 {
         let bodies: Vec<(f32, f32)> = l.pages.iter().map(|p| (p.body.y, p.body.bottom())).collect();
         let (r, b, h) = collapse_white_space(&rects, &bodies, scale, avail.y);
         (rects, bands) = (r, b);
@@ -506,7 +506,7 @@ pub fn geometry(app: &WordApp, l: &DocLayout, avail: egui::Vec2) -> Geometry {
 /// Page Width jumped to 110% (issue #67).
 pub fn sync_fit_zoom(app: &mut WordApp, scale: f32) {
     let v = &mut app.session.view;
-    if v.fit.is_empty() || v.read_mode || v.mode != wordcraft_layout::ViewMode::Print || !scale.is_finite() {
+    if v.fit.is_empty() || v.read_mode || v.mode != doc4me_layout::ViewMode::Print || !scale.is_finite() {
         return;
     }
     v.zoom = (scale / PX_PER_PT).clamp(0.1, 5.0);
@@ -517,7 +517,7 @@ fn page_key(app: &WordApp, page: &Page, scale_px: f32, dim_body: bool) -> u64 {
     let mut h = std::collections::hash_map::DefaultHasher::new();
     scale_px.to_bits().hash(&mut h);
     let v = &app.session.view;
-    (v.marks, app.session.prefs.marks, v.show_markup, v.dark_mode, wordcraft_render::DARK_PAPER, v.hide_ink, v.draw.replay).hash(&mut h);
+    (v.marks, app.session.prefs.marks, v.show_markup, v.dark_mode, doc4me_render::DARK_PAPER, v.hide_ink, v.draw.replay).hash(&mut h);
     app.session.prefs.markup.hash(&mut h);
     dim_body.hash(&mut h);
     format!("{:?}{:?}", app.session.doc.settings.page_color, app.session.doc.settings.watermark).hash(&mut h);
@@ -571,7 +571,7 @@ const DRAWING_GRID_MAX_LINES: usize = 2000;
 /// The View › Gridlines drawing grid over a page's text area, in document points: the x of each
 /// vertical line and the y of each horizontal line, starting at the margins and `step` (across,
 /// down) apart, never outside the margins. Drawn on screen only — never printed or exported.
-fn drawing_grid(body: wordcraft_geom::Rect, step: (f32, f32)) -> (Vec<f32>, Vec<f32>) {
+fn drawing_grid(body: doc4me_geom::Rect, step: (f32, f32)) -> (Vec<f32>, Vec<f32>) {
     let axis = |start: f32, len: f32, step: f32| -> Vec<f32> {
         if !(step.is_finite() && step > 0.0 && start.is_finite() && len.is_finite() && len >= 0.0) {
             return Vec::new();
@@ -586,7 +586,7 @@ fn drawing_grid(body: wordcraft_geom::Rect, step: (f32, f32)) -> (Vec<f32>, Vec<
 /// ECMA-376's 1/8 inch when it doesn't say), doubled until the lines are at least
 /// [`DRAWING_GRID_MIN_PX`] apart on screen.
 fn drawing_grid_step(spacing: f32, scale: f32) -> f32 {
-    let mut step = if spacing.is_finite() && spacing > 0.0 { spacing } else { wordcraft_doc::DEFAULT_GRID };
+    let mut step = if spacing.is_finite() && spacing > 0.0 { spacing } else { doc4me_doc::DEFAULT_GRID };
     if !(scale.is_finite() && scale > 0.0) {
         return step;
     }
@@ -650,8 +650,8 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
     // View › Switch Modes: dark paper, inverted document colours, a white caret.
     let dark_page = app.session.view.dark_mode;
     let caret_color = if dark_page { Color32::WHITE } else { t.caret };
-    let dark_paper = wordcraft_render::DARK_PAPER;
-    let show_ruler = app.session.view.ruler && app.session.view.mode == wordcraft_layout::ViewMode::Print && !app.session.view.read_mode;
+    let dark_paper = doc4me_render::DARK_PAPER;
+    let show_ruler = app.session.view.ruler && app.session.view.mode == doc4me_layout::ViewMode::Print && !app.session.view.read_mode;
     let (hruler, vruler, area) = if show_ruler {
         let h = Rect::from_min_max(pos2(full.min.x + RULER, full.min.y), pos2(full.max.x, full.min.y + RULER));
         let v = Rect::from_min_max(pos2(full.min.x, full.min.y + RULER), pos2(full.min.x + RULER, full.max.y));
@@ -857,7 +857,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                 opts.dark_paper = dark_paper;
                 opts.display.dim_header = !dim_body;
                 opts.display.dim_body = dim_body;
-                let img = wordcraft_render::render_page(&app.session.doc, page, scale_px, &opts);
+                let img = doc4me_render::render_page(&app.session.doc, page, scale_px, &opts);
                 let px = img.to_straight();
                 let ci = egui::ColorImage::from_rgba_unmultiplied([img.width as usize, img.height as usize], &px);
                 match app.canvas.textures.get_mut(&i) {
@@ -913,7 +913,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                 }
             }
             // View › Gridlines: the drawing grid over the text area (Print Layout, on screen only).
-            if app.session.view.gridlines && app.session.view.mode == wordcraft_layout::ViewMode::Print && !app.session.view.read_mode {
+            if app.session.view.gridlines && app.session.view.mode == doc4me_layout::ViewMode::Print && !app.session.view.read_mode {
                 let settings = &app.session.doc.settings;
                 // A section with a document grid (`w:docGrid`) shows that grid: lines at the line
                 // pitch and, for a character grid, columns at the character pitch.
@@ -1098,7 +1098,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                     &app.canvas.ime_preedit,
                     &app.canvas.ime_faces,
                     |c| (c as u32) < 0x250,
-                    |c| wordcraft_fonts::FontDb::global().fallback_for(c, u32::MAX),
+                    |c| doc4me_fonts::FontDb::global().fallback_for(c, u32::MAX),
                 );
                 if !new.is_empty() {
                     app.canvas.ime_faces.extend(new);
@@ -1148,7 +1148,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
     crate::a11y::expose(app, ui.ctx(), resp.id, &layout, &rects, area);
     // Double-click the space between two pages (or the line between them) to hide or show it.
     if resp.double_clicked()
-        && app.session.view.mode == wordcraft_layout::ViewMode::Print
+        && app.session.view.mode == doc4me_layout::ViewMode::Print
         && !app.session.view.read_mode
         && let Some(p) = resp.interact_pointer_pos()
         && on_page_gap(&rects, &geo.bands, p)
@@ -1169,7 +1169,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
     {
         match layout.equation_hit(page, x, y, app.session.sel.focus.story) {
             Some((at, inner)) => {
-                app.session.sel = wordcraft_engine::Selection::caret(at);
+                app.session.sel = doc4me_engine::Selection::caret(at);
                 let _ = app.run("equation.edit", json!({"pos": serde_json::to_value(&inner).unwrap_or_default()}));
             }
             None if app.session.math.is_some() => {
@@ -1190,7 +1190,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
         } else if let Some(pos) = layout.hit(page, x, y, app.session.sel.focus.story) {
             let (a, b) = app.session.sel.ordered();
             if !(a <= pos && pos <= b) || app.session.sel.is_collapsed() {
-                app.session.sel = wordcraft_engine::Selection::caret(pos);
+                app.session.sel = doc4me_engine::Selection::caret(pos);
             }
             app.canvas.context_issue = app.session.run("review.suggestions", &json!({})).ok().filter(|v| !v.is_null());
             app.canvas.context_synonyms = app.session.run("review.thesaurus", &json!({})).ok().and_then(|v| v.get("synonyms").cloned());
@@ -1265,7 +1265,7 @@ fn balloons(app: &mut WordApp, ui: &mut Ui, painter: &egui::Painter, rects: &[Re
     let t = Tokens::get(ui.ctx());
     let clip = ui.clip_rect();
     // Replies hang under the comment they answer rather than getting balloons of their own.
-    let is_reply = |c: &wordcraft_doc::Comment| c.parent.is_some_and(|p| app.session.doc.comments.contains_key(&p));
+    let is_reply = |c: &doc4me_doc::Comment| c.parent.is_some_and(|p| app.session.doc.comments.contains_key(&p));
     let mut replies: HashMap<u32, Vec<u32>> = HashMap::new();
     for (id, c) in &app.session.doc.comments {
         if let Some(p) = c.parent.filter(|_| is_reply(c)) {
@@ -1277,7 +1277,7 @@ fn balloons(app: &mut WordApp, ui: &mut Ui, painter: &egui::Painter, rects: &[Re
     // go in balloons, each tracked deletion.
     let mut by_page: HashMap<usize, Vec<(f32, f32, Balloon, Pos)>> = HashMap::new();
     let m = &app.session.prefs.markup;
-    let comments = if m.comments { wordcraft_engine::cmd::review::comment_list(&app.session) } else { Vec::new() };
+    let comments = if m.comments { doc4me_engine::cmd::review::comment_list(&app.session) } else { Vec::new() };
     for (id, pos) in comments {
         let Some(pos) = pos else { continue };
         if app.session.doc.comments.get(&id).is_some_and(is_reply) {
@@ -1286,7 +1286,7 @@ fn balloons(app: &mut WordApp, ui: &mut Ui, painter: &egui::Painter, rects: &[Re
         let Some(c) = layout.caret_on(&pos, app.session.page_hint) else { continue };
         by_page.entry(c.page).or_default().push((c.x, c.top + c.height, Balloon::Comment(id), pos));
     }
-    let formats = if m.formatting { wordcraft_engine::cmd::review::format_changes(&app.session) } else { Vec::new() };
+    let formats = if m.formatting { doc4me_engine::cmd::review::format_changes(&app.session) } else { Vec::new() };
     for (pos, author, props) in formats.into_iter().take(500) {
         let Some(c) = layout.caret_on(&pos, app.session.page_hint) else { continue };
         let what = crate::panes::describe_props(&props).join(", ");
@@ -1294,14 +1294,14 @@ fn balloons(app: &mut WordApp, ui: &mut Ui, painter: &egui::Painter, rects: &[Re
         by_page.entry(c.page).or_default().push((c.x, c.top + c.height, Balloon::Format(author, text), pos));
     }
     // Each end of a tracked move.
-    let moves = if m.insertions_deletions { wordcraft_engine::cmd::review::move_changes(&app.session) } else { Vec::new() };
+    let moves = if m.insertions_deletions { doc4me_engine::cmd::review::move_changes(&app.session) } else { Vec::new() };
     for (pos, author, from) in moves.into_iter().take(500) {
         let Some(c) = layout.caret_on(&pos, app.session.page_hint) else { continue };
         let text = if from { tl!("Moved from") } else { tl!("Moved to") }.to_string();
         by_page.entry(c.page).or_default().push((c.x, c.top + c.height, Balloon::Format(author, text), pos));
     }
     // Show revisions in balloons: each tracked deletion, taken out of the text, at its place.
-    let deletions = if app.session.revisions_in_balloons() { wordcraft_engine::cmd::review::deletion_balloons(&app.session) } else { Vec::new() };
+    let deletions = if app.session.revisions_in_balloons() { doc4me_engine::cmd::review::deletion_balloons(&app.session) } else { Vec::new() };
     for d in deletions {
         let Some(c) = layout.caret_on(&d.at, app.session.page_hint) else { continue };
         let text = format!("{}: {}", tl!("Deleted"), d.text);
@@ -1434,7 +1434,7 @@ fn balloons(app: &mut WordApp, ui: &mut Ui, painter: &egui::Painter, rects: &[Re
     }
     if let Some((id, p)) = clicked {
         select_balloon(app, ui.ctx(), id);
-        app.session.sel = wordcraft_engine::Selection::caret(p);
+        app.session.sel = doc4me_engine::Selection::caret(p);
     }
 }
 
@@ -1644,7 +1644,7 @@ fn mouse(app: &mut WordApp, ui: &Ui, resp: &egui::Response, rects: &[Rect], layo
     }
     // Outline view: a paragraph's symbol selects it with what is under it; a double-click
     // expands or collapses the heading.
-    if app.session.view.mode == wordcraft_layout::ViewMode::Outline
+    if app.session.view.mode == doc4me_layout::ViewMode::Outline
         && let Some(block) = layout.outline_symbol_at(page, x, y)
     {
         if resp.double_clicked() {
@@ -1677,14 +1677,14 @@ fn mouse(app: &mut WordApp, ui: &Ui, resp: &egui::Response, rects: &[Rect], layo
             let _ = app.run(id, json!({}));
             let _ = s;
             if let Some(pos) = app.session.layout().hit(page, x, y, app.session.sel.focus.story) {
-                app.session.sel = wordcraft_engine::Selection::caret(pos);
+                app.session.sel = doc4me_engine::Selection::caret(pos);
             }
             return;
         }
         if matches!(story, StoryRef::Part(_)) && !in_text_box(app) && layout.header_footer_at(page, y).is_none() {
             let _ = app.run("insert.closeHeader", json!({}));
             if let Some(pos) = layout.hit(page, x, y, StoryRef::Body) {
-                app.session.sel = wordcraft_engine::Selection::caret(pos);
+                app.session.sel = doc4me_engine::Selection::caret(pos);
             }
             return;
         }
@@ -1692,7 +1692,7 @@ fn mouse(app: &mut WordApp, ui: &Ui, resp: &egui::Response, rects: &[Rect], layo
         if let Some(pos) = layout.hit(page, x, y, story)
             && let Some(field) = field_showing_code(app, &pos)
         {
-            app.session.sel = wordcraft_engine::Selection::caret(field);
+            app.session.sel = doc4me_engine::Selection::caret(field);
             let _ = app.run("fields.setCode", json!({}));
             return;
         }
@@ -1733,7 +1733,7 @@ fn mouse(app: &mut WordApp, ui: &Ui, resp: &egui::Response, rects: &[Rect], layo
         if !mods.shift
             && let Some((at, inner)) = layout.equation_hit(page, x, y, story)
         {
-            app.session.sel = wordcraft_engine::Selection::caret(at);
+            app.session.sel = doc4me_engine::Selection::caret(at);
             let _ = app.run("equation.edit", json!({"pos": serde_json::to_value(&inner).unwrap_or_default()}));
             app.session.page_hint = page;
             return;
@@ -2071,11 +2071,11 @@ fn ruler_d(x: f32, x0: f32, scale: f32, page_w: f32, rtl: bool) -> f32 {
 
 /// A ruler's graduation for a unit: points per numbered step, divisions per step, and how much
 /// each step counts (millimetre rulers number every centimetre as 10, 20…).
-fn ruler_scale(u: wordcraft_geom::Unit) -> (f32, i32, i32) {
-    use wordcraft_geom::Unit;
+fn ruler_scale(u: doc4me_geom::Unit) -> (f32, i32, i32) {
+    use doc4me_geom::Unit;
     match u {
-        Unit::Centimeters => (wordcraft_geom::PT_PER_CM, 4, 1),
-        Unit::Millimeters => (wordcraft_geom::PT_PER_CM, 4, 10),
+        Unit::Centimeters => (doc4me_geom::PT_PER_CM, 4, 1),
+        Unit::Millimeters => (doc4me_geom::PT_PER_CM, 4, 10),
         Unit::Points => (72.0, 8, 72),
         Unit::Picas => (72.0, 8, 6),
         Unit::Inches => (72.0, 8, 1),
@@ -2116,7 +2116,7 @@ const MIN_TEXT: f32 = 72.0;
 /// The margin (points) after dragging `edge` of the text area on a ruler to `at` points from the
 /// page's left (or top) edge: snapped to 1/16 inch, never negative, and leaving at least an inch
 /// of text between it and the opposite margin.
-pub(crate) fn dragged_margin(edge: MarginEdge, at: f32, s: &wordcraft_doc::section::SectionProps) -> f32 {
+pub(crate) fn dragged_margin(edge: MarginEdge, at: f32, s: &doc4me_doc::section::SectionProps) -> f32 {
     let (raw, room, cur) = match edge {
         MarginEdge::Left => (at - s.gutter, s.page_w - s.margin_right - s.gutter - MIN_TEXT, s.margin_left),
         MarginEdge::Right => (s.page_w - at, s.page_w - s.margin_left - s.gutter - MIN_TEXT, s.margin_right),
@@ -2131,7 +2131,7 @@ pub(crate) fn dragged_margin(edge: MarginEdge, at: f32, s: &wordcraft_doc::secti
 
 /// A draggable margin edge on a ruler: `to_pt` turns the pointer into points from the page's
 /// left (or top) edge. A whole drag is one undo step, through `layout.margins`.
-fn margin_handle(app: &mut WordApp, ui: &Ui, edge: MarginEdge, zone: Rect, to_pt: impl Fn(Pos2) -> f32, sect: &wordcraft_doc::section::SectionProps) {
+fn margin_handle(app: &mut WordApp, ui: &Ui, edge: MarginEdge, zone: Rect, to_pt: impl Fn(Pos2) -> f32, sect: &doc4me_doc::section::SectionProps) {
     let cursor =
         if matches!(edge, MarginEdge::Left | MarginEdge::Right) { egui::CursorIcon::ResizeHorizontal } else { egui::CursorIcon::ResizeVertical };
     let r = ui.interact(zone, ui.id().with(("ruler_margin", edge)), Sense::drag()).on_hover_cursor(cursor);
@@ -2306,8 +2306,8 @@ fn context_menu(app: &mut WordApp, ui: &mut Ui) {
                     let _ = app.run("select.word", json!({}));
                     let (a, b) = app.session.sel.ordered();
                     let trimmed = app.session.doc.para_at(&a).and_then(|p| p.text.get(a.off..b.off)).map(|t| t.trim_end().len()).unwrap_or(0);
-                    let end = wordcraft_doc::Pos { off: a.off + trimmed, ..b };
-                    app.session.sel = wordcraft_engine::Selection { anchor: a, focus: end };
+                    let end = doc4me_doc::Pos { off: a.off + trimmed, ..b };
+                    app.session.sel = doc4me_engine::Selection { anchor: a, focus: end };
                     let _ = app.run("text.insert", json!({"text": w, "raw": true}));
                     ui.close();
                 }
@@ -2318,19 +2318,19 @@ fn context_menu(app: &mut WordApp, ui: &mut Ui) {
     item(ui, app, "Paragraph…", "ui.dialog", json!({"name": "paragraph"}));
     item(ui, app, "Link…", "ui.dialog", json!({"name": "link"}));
     item(ui, app, "New Comment", "review.newComment", json!({}));
-    if !wordcraft_engine::cmd::fields::selected(&app.session).is_empty() {
+    if !doc4me_engine::cmd::fields::selected(&app.session).is_empty() {
         ui.separator();
         item(ui, app, tl!("Update Field"), "references.updateFields", json!({}));
         item(ui, app, tl!("Edit Field…"), "fields.setCode", json!({}));
         item(ui, app, tl!("Toggle Field Codes"), "fields.toggleCode", json!({}));
     }
-    let selected_object = wordcraft_engine::cmd::objects::selected(&app.session).is_some();
+    let selected_object = doc4me_engine::cmd::objects::selected(&app.session).is_some();
     if selected_object || app.session.sel.focus.path.cell().is_some() {
         item(ui, app, "View Alt Text…", "view.altTextPane", json!({"value": true}));
     }
     // A selected picture, shape, text box or chart: its own items, then Wrap Text (#513).
     let picture = crate::ribbon::has_picture_selected(&app.session);
-    let object = wordcraft_engine::cmd::objects::object_selection(&app.session).is_some();
+    let object = doc4me_engine::cmd::objects::object_selection(&app.session).is_some();
     if picture || object {
         ui.separator();
     }
@@ -2361,12 +2361,12 @@ fn context_menu(app: &mut WordApp, ui: &mut Ui) {
 
 /// The simple field at or just before `pos` when it shows its code (View › Field Codes, or its
 /// own toggle): where it is.
-fn field_showing_code(app: &WordApp, pos: &wordcraft_doc::Pos) -> Option<wordcraft_doc::Pos> {
+fn field_showing_code(app: &WordApp, pos: &doc4me_doc::Pos) -> Option<doc4me_doc::Pos> {
     let para = app.session.doc.para_at(pos)?;
-    let width = wordcraft_doc::para::OBJ.len_utf8();
+    let width = doc4me_doc::para::OBJ.len_utf8();
     [Some(pos.off), pos.off.checked_sub(width)].into_iter().flatten().find_map(|off| match para.object_at(off) {
-        Some(wordcraft_doc::para::InlineObject::Field { code, .. }) if *code != app.session.view.field_codes => {
-            Some(wordcraft_doc::Pos { off, ..pos.clone() })
+        Some(doc4me_doc::para::InlineObject::Field { code, .. }) if *code != app.session.view.field_codes => {
+            Some(doc4me_doc::Pos { off, ..pos.clone() })
         }
         _ => None,
     })
@@ -2374,8 +2374,8 @@ fn field_showing_code(app: &WordApp, pos: &wordcraft_doc::Pos) -> Option<wordcra
 
 /// Render options for page rasters shown on screen: on macOS, text is darkened the way the system
 /// draws it, so a page looks as it does in other Mac apps (exports never are).
-pub(crate) fn screen_render_options() -> wordcraft_render::RenderOptions {
-    wordcraft_render::RenderOptions { text_darkening: cfg!(target_os = "macos"), ..Default::default() }
+pub(crate) fn screen_render_options() -> doc4me_render::RenderOptions {
+    doc4me_render::RenderOptions { text_darkening: cfg!(target_os = "macos"), ..Default::default() }
 }
 
 /// The hyperlink under the pointer at (x, y) on `page`, where `pos` is the caret position the
@@ -2384,7 +2384,7 @@ pub(crate) fn screen_render_options() -> wordcraft_render::RenderOptions {
 fn link_under(app: &WordApp, layout: &DocLayout, page: usize, x: f32, y: f32, pos: &Pos) -> Option<String> {
     let doc = &app.session.doc;
     let para = doc.para_at(pos)?;
-    let at = wordcraft_geom::Point::new(x, y);
+    let at = doc4me_geom::Point::new(x, y);
     // The caret falls between characters: the one under the point is on either side of it.
     [(pos.off, para.next_boundary(pos.off)), (para.prev_boundary(pos.off), pos.off)].into_iter().filter(|(a, b)| a < b).find_map(|(a, b)| {
         let link = para.props_of_char(a).link.clone()?;
@@ -2396,7 +2396,7 @@ fn link_under(app: &WordApp, layout: &DocLayout, page: usize, x: f32, y: f32, po
 /// Whether Ctrl/⌘+click may hand a document's hyperlink to the system: web and email links only,
 /// so a document can't launch `file:` paths, programs or custom-scheme handlers.
 fn is_followable_link(url: &str) -> bool {
-    wordcraft_doc::link::is_web_or_mail_link(url)
+    doc4me_doc::link::is_web_or_mail_link(url)
 }
 
 #[cfg(test)]
@@ -2442,7 +2442,7 @@ mod tests {
     /// always leaving an inch of text.
     #[test]
     fn margin_drags_are_clamped() {
-        let s = wordcraft_doc::section::SectionProps {
+        let s = doc4me_doc::section::SectionProps {
             page_w: 612.0,
             page_h: 792.0,
             margin_left: 72.0,
@@ -2459,19 +2459,19 @@ mod tests {
         assert_eq!(dragged_margin(MarginEdge::Right, 0.0, &s), 612.0 - 72.0 - 72.0);
         assert_eq!(dragged_margin(MarginEdge::Top, 9.0, &s), 9.0);
         assert_eq!(dragged_margin(MarginEdge::Bottom, 100.0, &s), 792.0 - 72.0 - 72.0);
-        let g = wordcraft_doc::section::SectionProps { gutter: 36.0, ..s.clone() };
+        let g = doc4me_doc::section::SectionProps { gutter: 36.0, ..s.clone() };
         assert_eq!(dragged_margin(MarginEdge::Left, 144.0, &g), 108.0, "the gutter isn't margin");
         assert_eq!(dragged_margin(MarginEdge::Left, f32::NAN, &s), 72.0, "junk keeps the margin");
 
         // Through the command: the result is applied and is one undo step.
-        let mut app = WordApp::new(wordcraft_engine::Session::new(wordcraft_doc::Document::new()), Default::default());
-        let sect = wordcraft_engine::cmd::page::sect(&app.session);
+        let mut app = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Default::default());
+        let sect = doc4me_engine::cmd::page::sect(&app.session);
         let v = dragged_margin(MarginEdge::Left, sect.page_w, &sect);
         app.run("layout.margins", json!({"left": v})).unwrap();
-        let after = wordcraft_engine::cmd::page::sect(&app.session);
+        let after = doc4me_engine::cmd::page::sect(&app.session);
         assert!(after.page_w - after.margin_left - after.margin_right - after.gutter >= MIN_TEXT - 0.01);
         assert!(app.session.undo());
-        assert_eq!(wordcraft_engine::cmd::page::sect(&app.session).margin_left, sect.margin_left);
+        assert_eq!(doc4me_engine::cmd::page::sect(&app.session).margin_left, sect.margin_left);
     }
 
     /// Show revisions in balloons: a document whose only revision is a deletion gets the markup
@@ -2479,7 +2479,7 @@ mod tests {
     /// while the Comments pane is open.
     #[test]
     fn a_deletion_alone_opens_the_markup_area_when_revisions_go_in_balloons() {
-        let mut a = WordApp::new(wordcraft_engine::Session::new(wordcraft_doc::Document::new()), Default::default());
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Default::default());
         a.run("document.setText", json!({"text": "keep gone"})).unwrap();
         a.run("review.trackChanges", json!({"value": true})).unwrap();
         a.run("select.range", json!({"anchor": {"block": 0, "off": 5}, "focus": {"block": 0, "off": 9}})).unwrap();
@@ -2512,7 +2512,7 @@ mod tests {
     #[test]
     fn multi_click_drag_extends_by_units() {
         use egui::{Event, PointerButton};
-        let mut a = WordApp::new(wordcraft_engine::Session::new(wordcraft_doc::Document::new()), Default::default());
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Default::default());
         a.run("text.insert", json!({"text": "Alpha beta gamma delta\rSecond para\rThird para"})).unwrap();
         a.run("view.commentsPane", json!({"value": false})).unwrap();
         let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).with_step_dt(1.0 / 60.0).build_ui_state(
@@ -2579,7 +2579,7 @@ mod tests {
     /// comment has the new text as one undo step.
     #[test]
     fn a_balloon_edits_its_comment() {
-        let mut a = WordApp::new(wordcraft_engine::Session::new(wordcraft_doc::Document::new()), Default::default());
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Default::default());
         a.run("text.insert", json!({"text": "Some text here"})).unwrap();
         a.run("select.text", json!({"text": "text"})).unwrap();
         let id = a.run("review.newComment", json!({"text": "Original"})).unwrap()["id"].as_u64().unwrap() as u32;
@@ -2628,14 +2628,14 @@ mod tests {
     #[test]
     fn right_click_on_a_picture_offers_wrap_text() {
         use egui_kittest::kittest::Queryable;
-        let mut a = WordApp::new(wordcraft_engine::Session::new(wordcraft_doc::Document::new()), Default::default());
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Default::default());
         a.run("text.insert", json!({"text": "Text before the picture "})).unwrap();
         let mut png = Vec::new();
         let img = image::RgbaImage::from_pixel(40, 20, image::Rgba([200, 30, 30, 255]));
         image::DynamicImage::ImageRgba8(img).write_to(&mut std::io::Cursor::new(&mut png), image::ImageFormat::Png).unwrap();
-        a.run("insert.picture", json!({"data": wordcraft_engine::cmd::insert::base64_encode(&png), "width": 160})).unwrap();
-        let pos = wordcraft_engine::cmd::objects::selected(&a.session).unwrap().0;
-        a.session.sel = wordcraft_engine::Selection::caret(Pos::body(0, 0));
+        a.run("insert.picture", json!({"data": doc4me_engine::cmd::insert::base64_encode(&png), "width": 160})).unwrap();
+        let pos = doc4me_engine::cmd::objects::selected(&a.session).unwrap().0;
+        a.session.sel = doc4me_engine::Selection::caret(Pos::body(0, 0));
         let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
             |ui, app: &mut WordApp| {
                 let ctx = ui.ctx().clone();
@@ -2655,7 +2655,7 @@ mod tests {
             h.step();
         }
         h.step();
-        let picked = wordcraft_engine::cmd::objects::object_selection(&h.state().session).map(|(p, _)| p);
+        let picked = doc4me_engine::cmd::objects::object_selection(&h.state().session).map(|(p, _)| p);
         assert_eq!(picked, Some(pos.clone()), "the right-click selected the picture");
         h.get_by_label_contains("Wrap Text").hover();
         for _ in 0..3 {
@@ -2666,8 +2666,8 @@ mod tests {
         for _ in 0..3 {
             h.step();
         }
-        let o = wordcraft_engine::cmd::objects::selected(&h.state().session).unwrap().1;
-        assert_eq!(o.frame().unwrap().2.wrap, wordcraft_doc::para::Wrap::Square);
+        let o = doc4me_engine::cmd::objects::selected(&h.state().session).unwrap().1;
+        assert_eq!(o.frame().unwrap().2.wrap, doc4me_doc::para::Wrap::Square);
     }
 
     #[test]
@@ -2795,7 +2795,7 @@ mod tests {
     #[test]
     fn drawing_grid_starts_at_the_margins_and_stays_inside_them() {
         // Letter page with 1" margins: the text area is 468 x 648 pt from (72, 72).
-        let body = wordcraft_geom::Rect::new(72.0, 72.0, 468.0, 648.0);
+        let body = doc4me_geom::Rect::new(72.0, 72.0, 468.0, 648.0);
         let (xs, ys) = drawing_grid(body, (HALF_CM, HALF_CM));
         assert_eq!(xs.first().copied(), Some(72.0));
         assert_eq!(ys.first().copied(), Some(72.0));
@@ -2811,18 +2811,18 @@ mod tests {
         let (xs, ys) = drawing_grid(body, (9.0, 18.0));
         assert_eq!((xs.len(), ys.len()), (53, 37));
         // A grid line that lands on the margin is kept.
-        let (xs, _) = drawing_grid(wordcraft_geom::Rect::new(0.0, 0.0, 100.0, 10.0), (25.0, 25.0));
+        let (xs, _) = drawing_grid(doc4me_geom::Rect::new(0.0, 0.0, 100.0, 10.0), (25.0, 25.0));
         assert_eq!(xs, vec![0.0, 25.0, 50.0, 75.0, 100.0]);
     }
 
     #[test]
     fn drawing_grid_survives_hostile_sizes() {
-        let r = wordcraft_geom::Rect::new;
+        let r = doc4me_geom::Rect::new;
         for (body, step) in [
             (r(72.0, 72.0, 468.0, 648.0), 0.0),
             (r(72.0, 72.0, 468.0, 648.0), -5.0),
             (r(72.0, 72.0, 468.0, 648.0), f32::NAN),
-            (wordcraft_geom::Rect { x: f32::NAN, y: 0.0, w: f32::INFINITY, h: -10.0 }, HALF_CM),
+            (doc4me_geom::Rect { x: f32::NAN, y: 0.0, w: f32::INFINITY, h: -10.0 }, HALF_CM),
         ] {
             let (xs, ys) = drawing_grid(body, (step, step));
             assert!(xs.is_empty() && ys.is_empty(), "{body:?} {step}");
@@ -2830,7 +2830,7 @@ mod tests {
         let (xs, ys) = drawing_grid(r(0.0, 0.0, 1.0e9, 1.0e9), (HALF_CM, HALF_CM));
         assert_eq!((xs.len(), ys.len()), (DRAWING_GRID_MAX_LINES, DRAWING_GRID_MAX_LINES));
         // Zoomed far out, lines thin out instead of filling the page.
-        let grid = wordcraft_doc::DEFAULT_GRID;
+        let grid = doc4me_doc::DEFAULT_GRID;
         assert_eq!(drawing_grid_step(grid, PX_PER_PT), grid);
         assert_eq!(drawing_grid_step(HALF_CM, PX_PER_PT), HALF_CM);
         assert!(drawing_grid_step(grid, 0.1) * 0.1 >= DRAWING_GRID_MIN_PX);
@@ -2900,7 +2900,7 @@ mod tests {
     #[test]
     fn setting_a_paragraph_rtl_mirrors_the_ruler_numbers() {
         let ctx = egui::Context::default();
-        let mut a = WordApp::new(wordcraft_engine::Session::new(wordcraft_doc::Document::new()), Default::default());
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Default::default());
         a.run("text.insert", json!({"text": "Hello"})).unwrap();
         let screen = egui::Rect::from_min_size(egui::Pos2::ZERO, egui::vec2(1440.0, 900.0));
         let mut t = 0.0;

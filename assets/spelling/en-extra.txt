@@ -147,6 +147,7 @@ ringtone
 roadmap
 rollout
 runtime
+sarabun
 scalability
 screencast
 screensaver
@@ -214,7 +215,6 @@ wifi
 wiki
 wikipedia
 wireframe
-wordcraft
 workaround
 workflow
 workforce

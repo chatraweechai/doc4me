@@ -24,12 +24,15 @@ pub fn is_complex_script(c: char) -> bool {
 
 /// A character that belongs to a word for word selection and Ctrl+arrow movement: letters,
 /// digits, `_` and `'`, plus what sits inside Persian and Arabic words: the zero-width non-joiner
-/// (نیم‌فاصله, as in «می‌خواهم»), the zero-width joiner, tatweel and the Arabic combining marks.
+/// (نیم‌فاصله, as in «می‌خواهم»), the zero-width joiner, tatweel and the Arabic combining marks;
+/// and the Thai, Lao and Khmer tone marks and signs that aren't letters (่ ้ ๊ ๋ ็ ์ …), so
+/// «ง่าย» or «พิมพ์» is one word, not three.
 pub fn is_word_char(c: char) -> bool {
     c.is_alphanumeric()
         || c == '_'
         || c == '\''
         || matches!(u32::from(c), 0x200C | 0x200D | 0x0640 | 0x0610..=0x061A | 0x064B..=0x065F | 0x0670 | 0x06D6..=0x06DC | 0x06DF..=0x06E8 | 0x06EA..=0x06ED | 0x08D3..=0x08FF | 0x0300..=0x036F)
+        || matches!(u32::from(c), 0x0E31 | 0x0E34..=0x0E3A | 0x0E47..=0x0E4E | 0x0EB1 | 0x0EB4..=0x0EBC | 0x0EC8..=0x0ECE | 0x17B4..=0x17D3 | 0x17DD)
 }
 
 /// Does `text` contain a right-to-left character?
@@ -76,6 +79,10 @@ mod tests {
         assert!("می‌خواهم".chars().all(is_word_char), "ZWNJ is inside the word");
         assert!("کِتاب".chars().all(is_word_char), "so are harakat");
         assert!(!is_word_char(' ') && !is_word_char('،'));
+        // Thai tone marks, the thanthakhat and the other signs are inside the word too.
+        assert!("ง่ายพิมพ์คอมพิวเตอร์เด็กๆ".chars().all(is_word_char));
+        assert!(is_complex_script('ก') && !is_rtl_script('ก'));
+        assert!(!is_word_char('\u{0E3F}'), "the baht sign is a symbol");
         assert!(first_strong_is_rtl("سلام"));
         assert!(first_strong_is_rtl("من ناوم هێڤاره"));
         assert!(first_strong_is_rtl("  123. سلام"));

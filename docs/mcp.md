@@ -1,37 +1,37 @@
 # MCP server
 
-WordCraft speaks the [Model Context Protocol](https://modelcontextprotocol.io) over stdio, so
+Doc4Me speaks the [Model Context Protocol](https://modelcontextprotocol.io) over stdio, so
 Claude and other agents can write and edit documents.
 
 ```sh
-wordcraft-cli mcp                          # headless session (no window)
-wordcraft --control 7981 &                 # or: drive the running app…
-wordcraft-cli mcp --connect 127.0.0.1:7981 # …including clicks, keys and screenshots
+doc4me-cli mcp                          # headless session (no window)
+doc4me --control 7981 &                 # or: drive the running app…
+doc4me-cli mcp --connect 127.0.0.1:7981 # …including clicks, keys and screenshots
 ```
 
-Claude Code: `claude mcp add wordcraft -- wordcraft-cli mcp`.
+Claude Code: `claude mcp add doc4me -- doc4me-cli mcp`.
 
 With `--connect`, the bridge sends the app's control key, which it reads from
-`WORDCRAFT_CONTROL_KEY` or from the key file the app writes at start. It sends the key only to
+`DOC4ME_CONTROL_KEY` or from the key file the app writes at start. It sends the key only to
 loopback addresses; see [Keys](control-protocol.md#keys).
 
 ## Tracked changes by an agent
 
-Tracked changes and comments are recorded under the session's user name ("WordCraft User" by
+Tracked changes and comments are recorded under the session's user name ("Doc4Me User" by
 default). Name the agent so reviewers can tell its edits from people's: start the headless server
-with `wordcraft-cli mcp --author "Claude (copyedit)"`, or run
+with `doc4me-cli mcp --author "Claude (copyedit)"`, or run
 `file.setAuthor {"name": "Claude (copyedit)"}`. Turn tracking on explicitly with
 `review.trackChanges {"value": true}`; without `value` it toggles, which turns tracking *off* in
-a document that was saved with it on. `wordcraft-cli run` takes `--author` too.
+a document that was saved with it on. `doc4me-cli run` takes `--author` too.
 
 ## Confining file access
 
 ```sh
-wordcraft-cli mcp --automation-read-root /work/project --automation-write-root /work/project/out
+doc4me-cli mcp --automation-read-root /work/project --automation-write-root /work/project/out
 ```
 
 ```json
-{"mcpServers": {"wordcraft": {"command": "/abs/path/target/release/wordcraft-cli",
+{"mcpServers": {"doc4me": {"command": "/abs/path/target/release/doc4me-cli",
   "args": ["mcp", "--automation-read-root", "/work/project", "--automation-write-root", "/work/project/out"]}}}
 ```
 
@@ -64,8 +64,8 @@ config works across the suite) keep the agent to the folders you give it:
   given once (`--flag <dir>` or `--flag=<dir>`).
 
 The flags confine the headless server; `--connect` with them is an error, since the server would
-otherwise talk to an app that isn't confined. WordCraft's desktop app has no equivalent flags yet,
-so a running app (`wordcraft --control`) is not confined.
+otherwise talk to an app that isn't confined. Doc4Me's desktop app has no equivalent flags yet,
+so a running app (`doc4me --control`) is not confined.
 
 What the roots do not cover: commands that take no path (`text.insert`, `execute` of anything that
 works on the open document) can still read and change that document, and `get_text` and
@@ -94,6 +94,6 @@ files it was given rather than guarding against other software on the computer.
 | `parity` | feature coverage |
 | `screenshot`, `click`, `key`, `ui_inspect` | app only (`--connect`) |
 
-Resources: `wordcraft://document` (inspect) and `wordcraft://commands`.
+Resources: `doc4me://document` (inspect) and `doc4me://commands`.
 
 The acceptance test `crates/mcp/src/tests.rs` writes a formatted document using MCP only.

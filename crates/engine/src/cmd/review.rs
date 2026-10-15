@@ -1,8 +1,8 @@
 //! Review tab: comments, track changes, word count, spelling (via the proofing hook).
 
+use doc4me_doc::para::InlineObject;
+use doc4me_doc::{Comment, Paragraph, PartKind, Pos, StoryRef, para_block};
 use serde_json::{Value, json};
-use wordcraft_doc::para::InlineObject;
-use wordcraft_doc::{Comment, Paragraph, PartKind, Pos, StoryRef, para_block};
 
 use super::{fmt_revisions, now_iso, pos_json, sel_result};
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -65,7 +65,7 @@ pub fn specs() -> Vec<CommandSpec> {
             if w.is_empty() {
                 return Err(CmdError::Params("no word".into()));
             }
-            wordcraft_proof::add_word(&w);
+            doc4me_proof::add_word(&w);
             s.relayout();
             Ok(json!({"added": w}))
         })
@@ -78,7 +78,7 @@ pub fn specs() -> Vec<CommandSpec> {
                     .map(|(a, b, _)| s.doc.para_at(&a).and_then(|p| p.text.get(a.off..b.off).map(str::to_string)).unwrap_or_default())
                     .unwrap_or_default(),
             };
-            wordcraft_proof::add_word(&w);
+            doc4me_proof::add_word(&w);
             s.relayout();
             Ok(json!({"ignored": w}))
         })
@@ -193,7 +193,7 @@ fn remove_anchors(s: &mut Session, ids: &[u32]) -> Result<(), CmdError> {
             }
             let para = s.doc.para_mut(story, &path)?;
             for o in offs.into_iter().rev() {
-                para.delete(o, o + wordcraft_doc::para::OBJ.len_utf8())?;
+                para.delete(o, o + doc4me_doc::para::OBJ.len_utf8())?;
             }
         }
     }
@@ -271,7 +271,7 @@ fn nav_comment(s: &mut Session, dir: i32) -> CmdResult {
 fn resolve_para(
     s: &mut Session,
     story: StoryRef,
-    path: &wordcraft_doc::Path,
+    path: &doc4me_doc::Path,
     from: usize,
     to: usize,
     mark: bool,
@@ -328,7 +328,7 @@ fn resolve_para(
 
 /// Accept or reject the changes of the table cell `path` is in: the table's, its row's and the
 /// cell's own. Returns whether there were any.
-fn resolve_cell(s: &mut Session, story: StoryRef, path: &wordcraft_doc::Path, accept: bool) -> Result<bool, CmdError> {
+fn resolve_cell(s: &mut Session, story: StoryRef, path: &doc4me_doc::Path, accept: bool) -> Result<bool, CmdError> {
     let Some((tp, r, c)) = path.cell() else { return Ok(false) };
     let has = s.doc.table(story, &tp).is_some_and(|t| {
         let row = t.rows.get(r);
@@ -368,7 +368,7 @@ impl Change {
 
 /// The tracked paragraph mark at the end of the paragraph at `path`, as a change range: from
 /// the paragraph's end to the start of the next paragraph (or the end itself when none follows).
-fn mark_change(s: &Session, story: StoryRef, path: &wordcraft_doc::Path) -> Option<Change> {
+fn mark_change(s: &Session, story: StoryRef, path: &doc4me_doc::Path) -> Option<Change> {
     let p = s.doc.para(story, path)?;
     let kind = run_kind(&s.doc, p.mark.ins, p.mark.del);
     if kind.is_empty() {
@@ -381,7 +381,7 @@ fn mark_change(s: &Session, story: StoryRef, path: &wordcraft_doc::Path) -> Opti
 
 /// The kind of an insertion / deletion change: `insert`, `delete`, or for one end of a move
 /// `moveTo` / `moveFrom`; empty when neither.
-fn run_kind(doc: &wordcraft_doc::Document, ins: Option<u32>, del: Option<u32>) -> &'static str {
+fn run_kind(doc: &doc4me_doc::Document, ins: Option<u32>, del: Option<u32>) -> &'static str {
     match (ins, del) {
         (Some(_), _) if doc.move_name(ins).is_some() => "moveTo",
         (Some(_), _) => "insert",
@@ -490,7 +490,7 @@ fn resolve_sel(s: &mut Session, accept: bool) -> CmdResult {
 
 fn changes(s: &Session) -> Vec<Change> {
     let mut out: Vec<Change> = Vec::new();
-    let mk = |path: &wordcraft_doc::Path, off| Pos { story: StoryRef::Body, path: path.clone(), off };
+    let mk = |path: &doc4me_doc::Path, off| Pos { story: StoryRef::Body, path: path.clone(), off };
     for path in s.doc.para_paths(StoryRef::Body) {
         let Some(p) = s.doc.para(StoryRef::Body, &path) else { continue };
         // A table's, row's and cell's changes sit at the start of the cell's first paragraph.
@@ -558,7 +558,7 @@ pub fn format_changes(s: &Session) -> Vec<(Pos, String, Vec<Value>)> {
 }
 
 /// Whether the document has any tracked formatting change (cheap: stops at the first).
-pub fn has_format_changes(doc: &wordcraft_doc::Document) -> bool {
+pub fn has_format_changes(doc: &doc4me_doc::Document) -> bool {
     if doc.last_section.fmt_change.is_some() {
         return true;
     }
@@ -597,7 +597,7 @@ const MAX_DELETION_BALLOONS: usize = 500;
 pub fn deletion_balloons(s: &Session) -> Vec<DeletionBalloon> {
     let doc = &s.doc;
     let author = |rev: u32| doc.revisions.get(rev as usize).map(|r| r.author.clone()).unwrap_or_default();
-    let mk = |path: &wordcraft_doc::Path, off| Pos { story: StoryRef::Body, path: path.clone(), off };
+    let mk = |path: &doc4me_doc::Path, off| Pos { story: StoryRef::Body, path: path.clone(), off };
     let mut out = Vec::new();
     for path in doc.para_paths(StoryRef::Body) {
         let Some(p) = doc.para(StoryRef::Body, &path) else { continue };
@@ -635,8 +635,8 @@ fn push_deletion(out: &mut Vec<(DeletionBalloon, Pos, usize)>, at: Pos, end: Pos
         }
         let c = match c {
             // Pictures, fields and other objects show no text of their own.
-            wordcraft_doc::para::OBJ => continue,
-            '\t' | wordcraft_doc::para::LINE_BREAK | wordcraft_doc::para::PAGE_BREAK | wordcraft_doc::para::COLUMN_BREAK => ' ',
+            doc4me_doc::para::OBJ => continue,
+            '\t' | doc4me_doc::para::LINE_BREAK | doc4me_doc::para::PAGE_BREAK | doc4me_doc::para::COLUMN_BREAK => ' ',
             c if c.is_control() => continue,
             c => c,
         };
@@ -647,13 +647,13 @@ fn push_deletion(out: &mut Vec<(DeletionBalloon, Pos, usize)>, at: Pos, end: Pos
 
 /// A deletion revision that is not the source of a move (`w:moveFrom` is a deletion revision
 /// with a move name).
-fn plain_deletion(doc: &wordcraft_doc::Document, del: Option<u32>) -> Option<u32> {
+fn plain_deletion(doc: &doc4me_doc::Document, del: Option<u32>) -> Option<u32> {
     del.filter(|_| doc.move_name(del).is_none())
 }
 
 /// Whether the body has any tracked deletion other than a move's source (cheap: stops at the
 /// first).
-pub fn has_deletions(doc: &wordcraft_doc::Document) -> bool {
+pub fn has_deletions(doc: &doc4me_doc::Document) -> bool {
     doc.para_paths(StoryRef::Body).iter().any(|path| {
         doc.para(StoryRef::Body, path)
             .is_some_and(|p| plain_deletion(doc, p.mark.del).is_some() || p.runs.iter().any(|r| plain_deletion(doc, r.props.del).is_some()))
@@ -711,7 +711,7 @@ fn word_count(s: &mut Session, v: &Value) -> CmdResult {
     } else {
         s.selected_text()
     };
-    let words = wordcraft_doc::count_words(&text);
+    let words = doc4me_doc::count_words(&text);
     let chars = text.chars().filter(|c| *c != '\n').count();
     let chars_no_spaces = text.chars().filter(|c| !c.is_whitespace()).count();
     let paragraphs = text.split('\n').filter(|l| !l.trim().is_empty()).count();
@@ -721,7 +721,7 @@ fn word_count(s: &mut Session, v: &Value) -> CmdResult {
             .iter()
             .flat_map(|p| p.items.iter())
             .map(|it| {
-                if let wordcraft_layout::Placed::Lines { l0, l1, story, .. } = it
+                if let doc4me_layout::Placed::Lines { l0, l1, story, .. } = it
                     && stories.contains(story)
                 {
                     l1 - l0
@@ -740,26 +740,26 @@ fn word_count(s: &mut Session, v: &Value) -> CmdResult {
 
 /// Issues (spelling + grammar) in one paragraph as positions, each in its run's language and
 /// skipping text left unchecked — the same issues the layout underlines.
-fn para_issues(s: &Session, story: StoryRef, path: &wordcraft_doc::Path) -> Vec<(Pos, Pos, wordcraft_proof::Issue)> {
+fn para_issues(s: &Session, story: StoryRef, path: &doc4me_doc::Path) -> Vec<(Pos, Pos, doc4me_proof::Issue)> {
     let Some(p) = s.doc.para(story, path) else { return Vec::new() };
-    let runs = wordcraft_layout::para::proof_runs(&s.doc, p, None);
-    wordcraft_layout::para::paragraph_issues(p, &runs, &s.prefs.spelling(), true)
+    let runs = doc4me_layout::para::proof_runs(&s.doc, p, None);
+    doc4me_layout::para::paragraph_issues(p, &runs, &s.prefs.spelling(), true)
         .into_iter()
         .map(|i| (Pos { story, path: path.clone(), off: i.start }, Pos { story, path: path.clone(), off: i.end }, i))
         .collect()
 }
 
 /// The issue under a position.
-fn issue_at(s: &Session, at: &Pos) -> Option<(Pos, Pos, wordcraft_proof::Issue)> {
+fn issue_at(s: &Session, at: &Pos) -> Option<(Pos, Pos, doc4me_proof::Issue)> {
     para_issues(s, at.story, &at.path).into_iter().find(|(a, b, _)| a.off <= at.off && at.off <= b.off)
 }
 
-fn issue_json(s: &Session, a: &Pos, b: &Pos, i: &wordcraft_proof::Issue) -> Value {
+fn issue_json(s: &Session, a: &Pos, b: &Pos, i: &doc4me_proof::Issue) -> Value {
     let word = s.doc.para_at(a).and_then(|p| p.text.get(a.off..b.off)).unwrap_or("").to_string();
-    let sugg = if i.kind == wordcraft_proof::IssueKind::Spelling { wordcraft_proof::suggest_in(&word, 6, i.lang) } else { i.suggestions.clone() };
+    let sugg = if i.kind == doc4me_proof::IssueKind::Spelling { doc4me_proof::suggest_in(&word, 6, i.lang) } else { i.suggestions.clone() };
     json!({
         "start": pos_json(a), "end": pos_json(b), "text": word,
-        "kind": if i.kind == wordcraft_proof::IssueKind::Spelling { "spelling" } else { "grammar" },
+        "kind": if i.kind == doc4me_proof::IssueKind::Spelling { "spelling" } else { "grammar" },
         "message": i.message, "suggestions": sugg, "lang": i.lang.code(),
     })
 }
@@ -854,8 +854,8 @@ fn thesaurus(s: &mut Session, v: &Value) -> CmdResult {
 
 /// Track Changes Options: change the fields given, return them all. A per-user preference.
 fn tracking_options(s: &mut Session, v: &Value) -> CmdResult {
-    use wordcraft_doc::Rgb;
-    use wordcraft_layout::display::{BalloonMode, ChangeBar, DeleteMark, InsertMark};
+    use doc4me_doc::Rgb;
+    use doc4me_layout::display::{BalloonMode, ChangeBar, DeleteMark, InsertMark};
     let mut m = s.prefs.markup.clone();
     let color = |k: &str, auto: &str, cur: Option<Rgb>| -> Result<Option<Rgb>, CmdError> {
         match p::str(v, k) {
@@ -900,8 +900,8 @@ fn tracking_options(s: &mut Session, v: &Value) -> CmdResult {
 }
 
 /// The Track Changes Options as `review.trackingOptions` takes them.
-pub fn tracking_json(m: &wordcraft_layout::display::MarkupOptions) -> Value {
-    let hex = |c: Option<wordcraft_doc::Rgb>, auto: &str| c.map(|c| c.hex()).unwrap_or_else(|| auto.to_string());
+pub fn tracking_json(m: &doc4me_layout::display::MarkupOptions) -> Value {
+    let hex = |c: Option<doc4me_doc::Rgb>, auto: &str| c.map(|c| c.hex()).unwrap_or_else(|| auto.to_string());
     json!({
         "comments": m.comments,
         "ink": m.ink,
@@ -920,9 +920,9 @@ pub fn tracking_json(m: &wordcraft_layout::display::MarkupOptions) -> Value {
 
 #[cfg(test)]
 mod tests {
+    use doc4me_doc::Document;
+    use doc4me_layout::display::{DisplayOptions, Draw, page_display};
     use serde_json::json;
-    use wordcraft_doc::Document;
-    use wordcraft_layout::display::{DisplayOptions, Draw, page_display};
 
     use crate::Session;
 
@@ -934,7 +934,7 @@ mod tests {
         (page_display(&s.doc, page, &opts), page.body.x)
     }
 
-    fn glyph_colors(d: &[Draw]) -> Vec<(wordcraft_doc::Rgb, bool)> {
+    fn glyph_colors(d: &[Draw]) -> Vec<(doc4me_doc::Rgb, bool)> {
         d.iter().filter_map(|x| if let Draw::Glyphs { color, synth_bold, .. } = x { Some((*color, *synth_bold)) } else { None }).collect()
     }
 
@@ -963,7 +963,7 @@ mod tests {
         assert_eq!(bars.len(), 1, "one changed line, one bar in the left margin");
         let horizontal = lines(&d).into_iter().filter(|(_, y0, _, y1)| y0 == y1).count();
         assert_eq!(horizontal, 2, "an underline and a strikethrough: {:?}", lines(&d));
-        let author = glyph_colors(&d).iter().filter(|(c, _)| *c != wordcraft_doc::Rgb::BLACK).count();
+        let author = glyph_colors(&d).iter().filter(|(c, _)| *c != doc4me_doc::Rgb::BLACK).count();
         assert!(author >= 2, "insertion and deletion in the author's colour");
 
         // Bold, fixed-colour insertions; hidden deletions; no bars.
@@ -976,7 +976,7 @@ mod tests {
         assert_eq!((r["insertMark"].as_str(), r["deleteColor"].as_str(), r["balloons"].as_str()), (Some("bold"), Some("byAuthor"), Some("inline")));
         let (d, _) = draws(&mut s);
         assert!(lines(&d).is_empty(), "no underline, no strikethrough, no bar: {:?}", lines(&d));
-        assert!(glyph_colors(&d).contains(&(wordcraft_doc::Rgb(0, 0xAA, 0), true)), "a bold green insertion");
+        assert!(glyph_colors(&d).contains(&(doc4me_doc::Rgb(0, 0xAA, 0), true)), "a bold green insertion");
         let text: String = d.iter().filter_map(|x| if let Draw::Glyphs { text, .. } = x { Some(text.as_str()) } else { None }).collect();
         assert!(!text.contains("gone"), "the deletion takes no room: {text:?}");
 
@@ -1015,11 +1015,11 @@ mod tests {
         let horizontal = lines(&d).into_iter().filter(|(_, y0, _, y1)| y0 == y1).count();
         assert_eq!(horizontal, 0, "no strikethrough left behind: {:?}", lines(&d));
         assert_eq!(lines(&d).into_iter().filter(|(x0, _, x1, _)| x0 == x1 && *x0 < body_x).count(), 1, "the changed line keeps its bar");
-        let at = wordcraft_doc::Pos::body(0, 5);
+        let at = doc4me_doc::Pos::body(0, 5);
         assert_eq!(deletion_balloons(&s), vec![DeletionBalloon { at: at.clone(), author: "Ana".into(), text: "gone ".into() }]);
         // The balloon's anchor is where the deletion was: between "keep " and "stay".
         let l = s.layout();
-        let (anchor, stay) = (l.caret(&at).unwrap().x, l.caret(&wordcraft_doc::Pos::body(0, 10)).unwrap().x);
+        let (anchor, stay) = (l.caret(&at).unwrap().x, l.caret(&doc4me_doc::Pos::body(0, 10)).unwrap().x);
         assert!((anchor - stay).abs() < 0.01, "the deletion takes no room: {anchor} vs {stay}");
 
         // No balloons beside the page while the Comments pane lists comments: inline again.
@@ -1054,7 +1054,7 @@ mod tests {
         let b = deletion_balloons(&s);
         let got: Vec<(&str, &str)> = b.iter().map(|d| (d.author.as_str(), d.text.as_str())).collect();
         assert_eq!(got, vec![("Ana", "two¶three"), ("Bo", " four")]);
-        assert_eq!(b[0].at, wordcraft_doc::Pos::body(0, 4));
+        assert_eq!(b[0].at, doc4me_doc::Pos::body(0, 4));
 
         // A deletion far longer than a balloon shows: its first characters and an ellipsis.
         let mut s = Session::new(Document::new());
@@ -1075,7 +1075,7 @@ mod tests {
     #[test]
     fn a_moves_source_gets_no_deletion_balloon() {
         use super::{DeletionBalloon, deletion_balloons, has_deletions, move_changes};
-        use wordcraft_doc::Pos;
+        use doc4me_doc::Pos;
         let mut s = Session::new(Document::new());
         s.run("document.setText", &json!({"text": "First one.\nSecond one.\nThird one."})).unwrap();
         s.run("file.setAuthor", &json!({"name": "Ana"})).unwrap();
@@ -1108,7 +1108,7 @@ mod tests {
     #[test]
     fn deletions_outside_the_body_stay_inline_when_revisions_go_in_balloons() {
         use super::{DeletionBalloon, deletion_balloons};
-        use wordcraft_doc::{Path, Pos, StoryRef};
+        use doc4me_doc::{Path, Pos, StoryRef};
         let mut s = Session::new(Document::new());
         s.view.proofing = false;
         s.author = "Ana".into();
@@ -1162,8 +1162,8 @@ mod tests {
         assert_eq!(deletion_balloons(&s), vec![DeletionBalloon { at: Pos::body(0, at), author: "Ana".into(), text: "zeta".into() }]);
     }
 
-    fn body_para(s: &Session) -> &wordcraft_doc::Paragraph {
-        s.doc.para(wordcraft_doc::StoryRef::Body, &wordcraft_doc::Path::top(0)).unwrap()
+    fn body_para(s: &Session) -> &doc4me_doc::Paragraph {
+        s.doc.para(doc4me_doc::StoryRef::Body, &doc4me_doc::Path::top(0)).unwrap()
     }
 
     /// "plain words here" with "words" made bold, then 14 pt, and the paragraph centred, under
@@ -1194,7 +1194,7 @@ mod tests {
         let ch = p.props_of_char(6).fmt_change.as_deref().expect("a formatting change on \"words\"");
         assert_eq!((ch.old.bold, ch.old.size), (None, None), "the formatting before the first change is kept");
         let rev = &s.doc.revisions[ch.rev as usize];
-        assert_eq!((rev.kind, rev.author.as_str()), (wordcraft_doc::RevisionKind::Format, "Ana"));
+        assert_eq!((rev.kind, rev.author.as_str()), (doc4me_doc::RevisionKind::Format, "Ana"));
         assert!(p.props_of_char(0).fmt_change.is_none() && p.props_of_char(13).fmt_change.is_none());
         assert_eq!(p.props.fmt_change.as_deref().map(|c| c.old.align), Some(None));
 
@@ -1234,7 +1234,7 @@ mod tests {
         assert!(p.props.fmt_change.is_some(), "the paragraph's change is still there");
         s.run("review.acceptAll", &json!({})).unwrap();
         let p = body_para(&s);
-        assert_eq!((p.props.align, p.props.fmt_change.is_none()), (Some(wordcraft_doc::props::Align::Center), true));
+        assert_eq!((p.props.align, p.props.fmt_change.is_none()), (Some(doc4me_doc::props::Align::Center), true));
         assert!(s.run("review.changes", &json!({})).unwrap().as_array().unwrap().is_empty());
     }
 }

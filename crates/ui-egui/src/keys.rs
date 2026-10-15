@@ -301,7 +301,7 @@ pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
                     continue;
                 }
                 // Escape puts the pen or eraser down (back to selecting).
-                if key == Key::Escape && app.session.view.draw.mode != wordcraft_engine::cmd::draw::DrawMode::Select {
+                if key == Key::Escape && app.session.view.draw.mode != doc4me_engine::cmd::draw::DrawMode::Select {
                     app.canvas.ink = None;
                     let _ = app.run("draw.select", json!({}));
                     continue;
@@ -323,13 +323,13 @@ pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
                 if key == Key::Escape
                     && crate::canvas::in_text_box(app)
                     && app.session.sel.is_collapsed()
-                    && let wordcraft_doc::StoryRef::Part(id) = app.session.sel.focus.story
+                    && let doc4me_doc::StoryRef::Part(id) = app.session.sel.focus.story
                     && let Some(pos) = app.session.doc.text_box_anchor(id)
                 {
                     let _ = app.run("caret.set", json!({"pos": pos}));
                     continue;
                 }
-                if key == Key::Escape && matches!(app.session.sel.focus.story, wordcraft_doc::StoryRef::Part(_)) && app.session.sel.is_collapsed() {
+                if key == Key::Escape && matches!(app.session.sel.focus.story, doc4me_doc::StoryRef::Part(_)) && app.session.sel.is_collapsed() {
                     let _ = app.run("insert.closeHeader", json!({}));
                     continue;
                 }

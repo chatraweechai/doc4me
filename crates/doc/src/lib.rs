@@ -1,4 +1,4 @@
-//! WordCraft document model.
+//! Doc4Me document model.
 //!
 //! A [`Document`] holds the main story (`body`) and secondary stories (`parts`: headers,
 //! footers, notes, comments, text boxes). A story is a list of [`Block`]s: paragraphs and tables;
@@ -465,7 +465,7 @@ pub struct Settings {
 /// Word's compatibility mode for documents that don't state one.
 pub const LEGACY_COMPAT_MODE: u32 = 12;
 
-/// The compatibility mode of documents created by Word 2013 and later, and by WordCraft.
+/// The compatibility mode of documents created by Word 2013 and later, and by Doc4Me.
 pub const COMPAT_MODE_CURRENT: u32 = 15;
 
 /// Word's hyphenation zone when a document doesn't set one (0.25"), points.
@@ -571,6 +571,12 @@ pub struct Document {
     /// Source-format parts we keep verbatim for round-trip (e.g. custom XML), by part name.
     #[serde(skip)]
     pub passthrough: BTreeMap<String, Arc<Vec<u8>>>,
+    /// The complex-script run properties (`w:cs`, `w:szCs`, `w:bCs`, `w:iCs`) are a file's own and
+    /// inherit by Word's rules: set when a .docx is read, which then saves them back as they are.
+    /// A document made here leaves them unset (they follow the Latin ones) and spells them out
+    /// when saved ([`Document::make_complex_script_explicit`]).
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    pub complex_script_from_file: bool,
 }
 
 impl Default for Document {
@@ -598,6 +604,7 @@ impl Document {
             endnote_separators: NoteSeparators::default(),
             media: BTreeMap::new(),
             passthrough: BTreeMap::new(),
+            complex_script_from_file: false,
         }
     }
 
@@ -1109,6 +1116,64 @@ impl Document {
         }
     }
 
+    /// In a document made here (not read from a .docx), does a complex-script property
+    /// (`font_cs`, `size_cs`, `bold_cs`, `italic_cs`) fall back to its Latin value throughout: set
+    /// by no style and not in the document defaults?
+    pub fn complex_script_falls_back(&self) -> bool {
+        !self.complex_script_from_file && complex_script_fallbacks(&self.styles).iter().any(|f| *f)
+    }
+
+    /// Word draws Thai, Arabic and the other complex scripts with the complex-script properties,
+    /// which inherit on their own (`w:cs`, `w:szCs`, `w:bCs`, `w:iCs`); here an unset one falls
+    /// back to the Latin value. For each one that falls back throughout
+    /// ([`complex_script_falls_back`](Self::complex_script_falls_back)), copy the Latin value in
+    /// wherever it is set (defaults, styles, list levels, runs, paragraph marks), so Word shows
+    /// that text as it is laid out here. Properties some style sets are left alone.
+    pub fn make_complex_script_explicit(&mut self) {
+        if self.complex_script_from_file {
+            return;
+        }
+        let [font, size, bold, italic] = complex_script_fallbacks(&self.styles);
+        if !(font || size || bold || italic) {
+            return;
+        }
+        let fill = |c: &mut CharProps| {
+            if font && c.font_cs.is_none() {
+                c.font_cs.clone_from(&c.font);
+            }
+            if size && c.size_cs.is_none() {
+                c.size_cs = c.size;
+            }
+            if bold && c.bold_cs.is_none() {
+                c.bold_cs = c.bold;
+            }
+            if italic && c.italic_cs.is_none() {
+                c.italic_cs = c.italic;
+            }
+        };
+        fill(&mut self.styles.default_chr);
+        for st in &mut self.styles.styles {
+            fill(&mut st.chr);
+        }
+        for a in &mut self.numbering.abstracts {
+            for l in &mut a.levels {
+                fill(&mut l.chr);
+            }
+        }
+        let mut stories: Vec<&mut Blocks> = vec![&mut self.body];
+        stories.extend(self.parts.values_mut().map(|p| &mut p.blocks));
+        for blocks in stories {
+            for b in blocks.iter_mut() {
+                edit::each_para_mut(Arc::make_mut(b), 0, &mut |p| {
+                    for r in &mut p.runs {
+                        fill(&mut r.props);
+                    }
+                    fill(&mut p.mark);
+                });
+            }
+        }
+    }
+
     /// Number of paragraphs in the body (all depths).
     pub fn paragraph_count(&self) -> usize {
         self.para_paths(StoryRef::Body).len()
@@ -1229,9 +1294,74 @@ impl PermRange {
     }
 }
 
+/// Which complex-script properties (font, size, bold, italic) no style and no document default
+/// sets.
+fn complex_script_fallbacks(styles: &styles::StyleSheet) -> [bool; 4] {
+    let unset = |set: &dyn Fn(&CharProps) -> bool| !set(&styles.default_chr) && !styles.styles.iter().any(|s| set(&s.chr));
+    [unset(&|c| c.font_cs.is_some()), unset(&|c| c.size_cs.is_some()), unset(&|c| c.bold_cs.is_some()), unset(&|c| c.italic_cs.is_some())]
+}
+
 /// Words in `s` (tokens separated by whitespace that contain at least one alphanumeric char).
 pub fn count_words(s: &str) -> usize {
-    s.split(|c: char| c.is_whitespace() || c == para::OBJ).filter(|w| w.chars().any(char::is_alphanumeric)).count()
+    s.split(|c: char| c.is_whitespace() || c == para::OBJ).filter(|w| w.chars().any(char::is_alphanumeric)).map(dictionary_words).sum()
+}
+
+/// Words in one whitespace-separated token: 1, or for Thai, Lao and Khmer (written without
+/// spaces) the dictionary words in it, as Word counts them.
+fn dictionary_words(token: &str) -> usize {
+    if !token.chars().any(cluster::is_dictionary_script) {
+        return 1;
+    }
+    // The status bar recounts the whole document on every edit, and segmenting is the slow part:
+    // remember each token's count. Two generations, each bounded: when the current one is full
+    // it becomes the old one (dropping the previous old one), and a hit in the old one moves
+    // back, so the counts of a document that fits stay remembered as it is edited.
+    #[derive(Default)]
+    struct Memo {
+        new: std::collections::HashMap<String, usize>,
+        old: std::collections::HashMap<String, usize>,
+        bytes: usize,
+    }
+    impl Memo {
+        fn insert(&mut self, token: &str, n: usize) {
+            // Bytes an entry costs: its text plus the string, count and table slot around it.
+            let cost = token.len().saturating_add(64);
+            if cost > GENERATION_BYTES {
+                return;
+            }
+            if self.bytes.saturating_add(cost) > GENERATION_BYTES {
+                self.old = std::mem::take(&mut self.new);
+                self.bytes = 0;
+            }
+            self.bytes += cost;
+            self.new.insert(token.to_string(), n);
+        }
+    }
+    static MEMO: std::sync::OnceLock<std::sync::Mutex<Memo>> = std::sync::OnceLock::new();
+    const GENERATION_BYTES: usize = 4 << 20;
+    let memo = MEMO.get_or_init(|| std::sync::Mutex::new(Memo::default()));
+    {
+        let mut m = memo.lock().unwrap_or_else(|e| e.into_inner());
+        if let Some(n) = m.new.get(token) {
+            return *n;
+        }
+        if let Some(n) = m.old.remove(token) {
+            m.insert(token, n);
+            return n;
+        }
+    }
+    let breaks = cluster::dictionary_breaks(token);
+    let mut start = 0;
+    let mut n = 0;
+    for end in breaks.into_iter().chain(std::iter::once(token.len())) {
+        if token.get(start..end).is_some_and(|w| w.chars().any(char::is_alphanumeric)) {
+            n += 1;
+        }
+        start = end;
+    }
+    let n = n.max(1);
+    memo.lock().unwrap_or_else(|e| e.into_inner()).insert(token, n);
+    n
 }
 
 fn walk(bl: &Blocks, prefix: &mut Vec<u32>, out: &mut Vec<Path>, depth: usize) {

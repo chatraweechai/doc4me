@@ -1,8 +1,8 @@
 //! Table Design and Table Layout tabs.
 
+use doc4me_doc::props::{Align, Border, BorderStyle, Borders, HeightRule, Rgb, TextDirection, VAlign};
+use doc4me_doc::{Block, Paragraph, Path, Pos, StoryRef, Table, para_block};
 use serde_json::{Value, json};
-use wordcraft_doc::props::{Align, Border, BorderStyle, Borders, HeightRule, Rgb, TextDirection, VAlign};
-use wordcraft_doc::{Block, Paragraph, Path, Pos, StoryRef, Table, para_block};
 
 use super::sel_result;
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -152,7 +152,7 @@ pub fn specs() -> Vec<CommandSpec> {
             }
             let set = |x: Option<&str>, cur: &Option<String>| match x {
                 Some(x) if x.trim().is_empty() => None,
-                Some(x) => Some(wordcraft_doc::para::cap_alt(x)),
+                Some(x) => Some(doc4me_doc::para::cap_alt(x)),
                 None => cur.clone(),
             };
             with_table(s, |t| {
@@ -209,7 +209,7 @@ fn autofit(s: &mut Session, v: &Value) -> CmdResult {
         "contents" => {
             let t = s.doc.table(story, &tp).ok_or_else(|| CmdError::Disabled("the cursor isn't in a table".into()))?;
             let avail = (tw - t.props.indent.filter(|i| i.is_finite()).unwrap_or(0.0).max(0.0)).max(72.0);
-            let widths = wordcraft_layout::autofit_widths(&wordcraft_layout::measure_table_columns(&s.doc, t), avail);
+            let widths = doc4me_layout::autofit_widths(&doc4me_layout::measure_table_columns(&s.doc, t), avail);
             with_table(s, |t| {
                 t.props.fixed = false;
                 t.props.width = None;
@@ -400,7 +400,7 @@ fn selected_cells(s: &Session) -> Vec<(usize, usize)> {
     v
 }
 
-fn with_cells(s: &mut Session, f: impl Fn(&mut wordcraft_doc::Cell)) -> CmdResult {
+fn with_cells(s: &mut Session, f: impl Fn(&mut doc4me_doc::Cell)) -> CmdResult {
     let (tp, _, _) = cell(s)?;
     let cells = selected_cells(s);
     let t = s.doc.table_mut(s.sel.focus.story, &tp)?;
@@ -507,7 +507,7 @@ fn del_col(s: &mut Session, _: &Value) -> CmdResult {
     let mut cols = std::collections::BTreeSet::new();
     for (rr, cc) in cells {
         let g = t.grid_col(rr, cc);
-        let span = t.rows.get(rr).and_then(|x| x.cells.get(cc)).map_or(1, wordcraft_doc::Cell::span);
+        let span = t.rows.get(rr).and_then(|x| x.cells.get(cc)).map_or(1, doc4me_doc::Cell::span);
         cols.extend(g..g.saturating_add(span).min(t.grid.len()));
     }
     if cols.is_empty() {
@@ -561,7 +561,7 @@ fn split_table(s: &mut Session, _: &Value) -> CmdResult {
     let tail_rows = t.rows.split_off(r);
     // Content controls closing after the table now close after its second part.
     let close = std::mem::take(&mut t.controls.close);
-    let controls = wordcraft_doc::ControlWrap { open: Vec::new(), close };
+    let controls = doc4me_doc::ControlWrap { open: Vec::new(), close };
     let tail = Table { props: t.props.clone(), grid: t.grid.clone(), rows: tail_rows, controls };
     let after = tp.with_last(tp.last() + 1);
     s.doc.insert_block(story, &after, Block::Para(Paragraph::new()))?;
@@ -614,7 +614,7 @@ fn borders(s: &mut Session, v: &Value) -> CmdResult {
     })
 }
 
-fn cell_text(c: &wordcraft_doc::Cell) -> String {
+fn cell_text(c: &doc4me_doc::Cell) -> String {
     c.blocks.iter().filter_map(|b| b.as_para().map(|p| p.plain_text())).collect::<Vec<_>>().join("\n")
 }
 
@@ -688,11 +688,8 @@ fn formula(s: &mut Session, v: &Value) -> CmdResult {
     let text = if val.fract() == 0.0 && val.abs() < 1e15 { format!("{}", val as i64) } else { format!("{val:.2}") };
     let props = s.typing_props();
     let at = s.sel.focus.clone();
-    let end = s.doc.insert_object(
-        &at,
-        wordcraft_doc::InlineObject::Field { instr: f.clone(), result: text.clone(), locked: false, code: false },
-        &props,
-    )?;
+    let end =
+        s.doc.insert_object(&at, doc4me_doc::InlineObject::Field { instr: f.clone(), result: text.clone(), locked: false, code: false }, &props)?;
     s.sel = Selection::caret(end);
     Ok(json!({"result": text}))
 }

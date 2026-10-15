@@ -45,7 +45,7 @@ fn flags() -> [(&'static str, fn(&mut Prefs) -> &mut bool); 7] {
     ]
 }
 
-fn mark_flags() -> [(&'static str, fn(&mut wordcraft_layout::display::FormattingMarks) -> &mut bool); 4] {
+fn mark_flags() -> [(&'static str, fn(&mut doc4me_layout::display::FormattingMarks) -> &mut bool); 4] {
     [("tabs", |m| &mut m.tabs), ("spaces", |m| &mut m.spaces), ("paragraphs", |m| &mut m.paragraphs), ("hidden", |m| &mut m.hidden)]
 }
 
@@ -96,7 +96,7 @@ fn options(s: &mut Session, v: &Value) -> CmdResult {
     let units = match v.get("units") {
         None | Some(Value::Null) => None,
         Some(u) => Some(
-            serde_json::from_value::<wordcraft_geom::Unit>(u.clone())
+            serde_json::from_value::<doc4me_geom::Unit>(u.clone())
                 .map_err(|_| CmdError::Params("`units` is one of inches, centimeters, millimeters, points, picas".into()))?,
         ),
     };
@@ -149,10 +149,10 @@ fn options(s: &mut Session, v: &Value) -> CmdResult {
         s.view.proofing = b;
     }
     for w in &add {
-        wordcraft_proof::add_word(w);
+        doc4me_proof::add_word(w);
     }
     for w in &remove {
-        wordcraft_proof::remove_word(w);
+        doc4me_proof::remove_word(w);
     }
     if setting {
         // Marks, hidden text and proofing change what is laid out.
@@ -183,6 +183,6 @@ pub fn current(s: &Session) -> Value {
         "ignoreUppercase": pr.ignore_uppercase,
         "ignoreNumbers": pr.ignore_numbers,
         "ignoreInternet": pr.ignore_internet,
-        "dictionary": wordcraft_proof::user_dictionary(),
+        "dictionary": doc4me_proof::user_dictionary(),
     })
 }

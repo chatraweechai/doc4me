@@ -4,13 +4,13 @@
 //! (crate::display::Draw::Art), which [`art_layers`] turns into plain fills and strokes for the
 //! raster and PDF back ends: reflection, shadow, glow, fill, outline, in that order. A warped
 //! text box's outlines are bent by [`Warp`] before that. Blurs are approximated with
-//! [`wordcraft_doc::effects::bands`], as for shapes.
+//! [`doc4me_doc::effects::bands`], as for shapes.
 
+use doc4me_doc::props::Rgb;
+use doc4me_doc::wordart::{TextEffects, TextFill, TextWarp};
+use doc4me_fonts::FaceRef;
+use doc4me_geom::Rect;
 use kurbo::{Affine, BezPath, PathEl, Point, Shape};
-use wordcraft_doc::props::Rgb;
-use wordcraft_doc::wordart::{TextEffects, TextFill, TextWarp};
-use wordcraft_fonts::FaceRef;
-use wordcraft_geom::Rect;
 
 /// How a layer is painted.
 #[derive(Clone, Debug, PartialEq)]
@@ -35,7 +35,7 @@ pub struct ArtLayer {
 /// The outlines of `glyphs` (glyph id, pen x, baseline y in page points) of `face` at `size`, as
 /// one path in page coordinates (slanted for synthetic italics).
 pub fn glyph_path(face: &FaceRef, size: f32, glyphs: &[(u32, f32, f32)], synth_italic: bool) -> BezPath {
-    let db = wordcraft_fonts::FontDb::global();
+    let db = doc4me_fonts::FontDb::global();
     let k = f64::from(size) / face.upem.max(1.0);
     let skew = if synth_italic { Affine::new([1.0, 0.0, -0.21, 1.0, 0.0, 0.0]) } else { Affine::IDENTITY };
     let mut out = BezPath::new();
@@ -108,7 +108,7 @@ pub fn art_layers(path: &BezPath, fx: &TextEffects, color: Rgb, alpha: f32) -> V
     if let Some(sh) = fx.shadow {
         let (dx, dy) = sh.offset();
         let moved = Affine::translate((f64::from(dx), f64::from(dy))) * path.clone();
-        for (g, a) in wordcraft_doc::effects::bands(0.0, sh.blur / 2.0, sh.opacity() * alpha) {
+        for (g, a) in doc4me_doc::effects::bands(0.0, sh.blur / 2.0, sh.opacity() * alpha) {
             let paint = ArtPaint::Solid(sh.color, a);
             out.push(ArtLayer { path: moved.clone(), paint: paint.clone(), stroke: None });
             if g > 0.05 {
@@ -117,7 +117,7 @@ pub fn art_layers(path: &BezPath, fx: &TextEffects, color: Rgb, alpha: f32) -> V
         }
     }
     if let Some(gl) = fx.glow {
-        for (g, a) in wordcraft_doc::effects::bands(0.0, gl.size, gl.opacity() * alpha) {
+        for (g, a) in doc4me_doc::effects::bands(0.0, gl.size, gl.opacity() * alpha) {
             if g > 0.05 {
                 out.push(ArtLayer { path: path.clone(), paint: ArtPaint::Solid(gl.color, a), stroke: Some(2.0 * g) });
             }
@@ -191,7 +191,7 @@ fn triangle_down(u: f32, k: f32) -> (f32, f32) {
 
 impl Warp {
     /// The warp `w` fitted to `frame` for text whose box is `aspect` times as tall as it is
-    /// wide. `None` for warps drawn flat (plain, and those WordCraft doesn't bend).
+    /// wide. `None` for warps drawn flat (plain, and those Doc4Me doesn't bend).
     pub fn new(w: &TextWarp, frame: Rect, aspect: f32) -> Option<Warp> {
         use std::f32::consts::PI;
         if !(frame.w > 0.5 && frame.h > 0.5 && frame.w.is_finite() && frame.h.is_finite()) {

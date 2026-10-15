@@ -82,7 +82,8 @@ pub fn script_fallbacks(c: char) -> &'static [&'static str] {
         Script::Khmer => &["Leelawadee UI", "Khmer UI", "Noto Sans Khmer", "Noto Serif Khmer", "Khmer OS", "Khmer Sangam MN", "Khmer MN"],
         Script::Devanagari => &["Nirmala UI", "Mangal", "Kohinoor Devanagari", "Noto Sans Devanagari", "Noto Serif Devanagari", "Lohit Devanagari"],
         Script::Bengali => &["Nirmala UI", "Vrinda", "Kohinoor Bangla", "Noto Sans Bengali", "Noto Serif Bengali", "Lohit Bengali"],
-        Script::Thai => &["Leelawadee UI", "Leelawadee", "Tahoma", "Thonburi", "Noto Sans Thai", "Noto Serif Thai"],
+        // Sarabun is bundled: Thai text draws the same on every platform.
+        Script::Thai => &["Sarabun", "Leelawadee UI", "Leelawadee", "Tahoma", "Thonburi", "Noto Sans Thai", "Noto Serif Thai"],
         Script::Lao => &["Leelawadee UI", "Lao UI", "Noto Sans Lao", "Noto Serif Lao", "Lao Sangam MN"],
         Script::Tamil | Script::Telugu | Script::Kannada | Script::Malayalam | Script::Gujarati | Script::Gurmukhi | Script::Oriya => &["Nirmala UI"],
         _ => &[],
@@ -131,5 +132,10 @@ mod tests {
         assert!(fallback_rank('မ', "Noto Sans Myanmar") < fallback_rank('မ', "Myanmar Sangam MN"));
         assert!(fallback_rank('த', "Noto Sans Tamil") < fallback_rank('த', "Arial"));
         assert_eq!(fallback_rank('a', "Arial"), fallback_rank('a', "Noto Sans"));
+        // Thai prefers the bundled Sarabun over the system Thai fonts.
+        assert!(needs_layout_tables('ก'));
+        assert_eq!(fallback_rank('ก', "Sarabun"), 0);
+        assert!(fallback_rank('ก', "Sarabun") < fallback_rank('ก', "Leelawadee UI"));
+        assert!(fallback_rank('ก', "Tahoma") < fallback_rank('ก', "Arial"));
     }
 }

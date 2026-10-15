@@ -6,9 +6,9 @@
 
 use std::f64::consts::{FRAC_PI_2, TAU};
 
-use wordcraft_doc::graphic::{GraphicItem, PathSeg, TextAlign};
-use wordcraft_doc::para::ShapeKind;
-use wordcraft_doc::props::Rgb;
+use doc4me_doc::graphic::{GraphicItem, PathSeg, TextAlign};
+use doc4me_doc::para::ShapeKind;
+use doc4me_doc::props::Rgb;
 
 use super::drawing_color::{fill_colour, slot};
 use crate::units::{int, measure};
@@ -1647,7 +1647,7 @@ fn arc(segs: &mut Vec<PathSeg>, (cx, cy, r): (f64, f64, f64), a: f64, b: f64) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use wordcraft_doc::THEME_COLORS;
+    use doc4me_doc::THEME_COLORS;
 
     const NS: &str =
         r#"xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main""#;

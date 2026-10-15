@@ -14,6 +14,10 @@ fn word_count() {
     let d = Document::from_text("Hello, world!\nThis is — a test 42.\n\n");
     assert_eq!(d.word_count(), 7);
     assert_eq!(count_words(" -- "), 0);
+    // Thai is written without spaces between words: each dictionary word counts, as in Word.
+    assert_eq!(count_words("ภาษาไทย"), 2);
+    assert_eq!(count_words("ภาษาไทย English"), 3);
+    assert_eq!(count_words("๑๒๓"), 1);
 }
 
 #[test]
@@ -293,4 +297,46 @@ fn custom_props_set_get_remove() {
     assert!(d.remove_custom_prop("other"));
     assert!(!d.remove_custom_prop("other"));
     assert_eq!(d.custom_props.len(), 1);
+}
+
+#[test]
+fn complex_script_values_follow_the_latin_ones_until_export() {
+    // Built-in styles set no complex-script values: Thai (and Arabic …) text takes the Latin
+    // font and size, so a run made 36 pt by any command shows its Thai at 36 pt too.
+    let doc = Document::new();
+    assert!(doc.styles.default_chr.font_cs.is_none() && doc.styles.styles.iter().all(|s| s.chr.size_cs.is_none()));
+    let run = CharProps { size: Some(36.0), ..Default::default() };
+    let rc = doc.styles.resolve_char(Some("Heading1"), &run);
+    assert_eq!((rc.size, rc.size_cs), (36.0, 36.0));
+    assert_eq!(rc.font_cs, "Sarabun");
+    // For Word, which inherits them on their own, export spells them out where the Latin ones are.
+    assert!(doc.complex_script_falls_back());
+    let mut out = Document::from_text("ภาษาไทย");
+    if let Some(Block::Para(p)) = out.body.get_mut(0).map(std::sync::Arc::make_mut) {
+        p.runs = vec![crate::para::Run { len: p.text.len(), props: run.clone() }];
+    }
+    out.make_complex_script_explicit();
+    assert_eq!(out.styles.default_chr.font_cs.as_deref(), Some("Sarabun"));
+    assert_eq!(out.styles.default_chr.size_cs, Some(12.0));
+    let h1 = out.styles.get("Heading1").map(|s| s.chr.clone()).unwrap_or_default();
+    assert_eq!((h1.size_cs, h1.font_cs.as_deref()), (h1.size, h1.font.as_deref()));
+    assert_eq!(out.para(StoryRef::Body, &Path(vec![0])).map(|p| p.runs[0].props.size_cs), Some(Some(36.0)));
+    assert!(!out.complex_script_falls_back());
+    // A document read from a .docx keeps the file's, even where they fall back.
+    let mut read = Document::new();
+    read.complex_script_from_file = true;
+    assert!(!read.complex_script_falls_back());
+    let before = read.clone();
+    read.make_complex_script_explicit();
+    assert_eq!(read, before);
+    // So does one whose styles set them.
+    let mut word = Document::new();
+    word.styles.default_chr.font_cs = Some("TH SarabunPSK".into());
+    word.styles.default_chr.size_cs = Some(16.0);
+    word.styles.default_chr.bold_cs = Some(false);
+    word.styles.default_chr.italic_cs = Some(false);
+    let before = word.clone();
+    assert!(!word.complex_script_falls_back());
+    word.make_complex_script_explicit();
+    assert_eq!(word, before);
 }

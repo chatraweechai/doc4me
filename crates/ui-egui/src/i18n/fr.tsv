@@ -12,9 +12,9 @@
 	(no style)	(Aucun style)
 	(no suggestions)	(aucune suggestion)
 	1.5 Line Spacing	Interligne 1,5
-	A free, open-source word processor written from scratch in Rust.\nPart of the Crafting Apps from the ArtCraft team.	Un traitement de texte gratuit et open source, écrit de zéro en Rust.\nPartie de la suite Crafting Apps de l’équipe ArtCraft.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Un traitement de texte gratuit et open source, écrit de zéro en Rust.\nBasé sur WordCraft de l’équipe ArtCraft.
 	About	À propos
-	About WordCraft	À propos de WordCraft
+	About Doc4Me	À propos de Doc4Me
 	Accept	Accepter
 	Accept All Changes	Accepter toutes les modifications
 	Accept This Change	Accepter cette modification
@@ -219,7 +219,6 @@
 	Comment	Commentaire
 	Comments	Commentaires
 	Comments Pane	Volet Commentaires
-	Community\nDiscord	Communauté\nDiscord
 	Compact	Compact
 	Compare	Comparer
 	Compress Pictures	Compresser les images
@@ -291,13 +290,12 @@
 	Different First Page	Première page différente
 	Different Odd & Even Pages	Pages paires et impaires différentes
 	Direct formatting	Mise en forme directe
-	Discord	Discord
-	Discord community	Communauté Discord
 	Display	Affichage
 	Display for Review	Affichage pour la révision
 	Distribute Columns	Répartir les colonnes
 	Distribute Rows	Répartir les lignes
 	Distributed	Distribué
+	Thai Distributed	Distribué thaï
 	Do Not Show in TOC	Ne pas afficher dans la table des matières
 	Document End	Fin du document
 	Document Formatting	Mise en forme du document
@@ -338,7 +336,7 @@
 	Equation	Équation
 	Eraser	Gomme
 	Even Page	Page paire
-	Every command is available to scripts and AI agents: run `wordcraft-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Chaque commande est disponible pour les scripts et les agents IA : exécutez `wordcraft-cli mcp` pour un serveur MCP, ou démarrez l’application avec `--control <port>` pour le canal de contrôle JSON.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Chaque commande est disponible pour les scripts et les agents IA : exécutez `doc4me-cli mcp` pour un serveur MCP, ou démarrez l’application avec `--control <port>` pour le canal de contrôle JSON.
 	Export	Exporter
 	Export a copy to share (PDF, Word document)	Exporter une copie à partager (PDF, document Word)
 	Export Page as PNG	Exporter la page en PNG
@@ -452,8 +450,6 @@
 	Inspect Styles at Selection	Inspecter les styles de la sélection
 	Interface language:	Langue de l’interface :
 	Italic	Italique
-	Join the ArtCraft community on Discord	Rejoignez la communauté ArtCraft sur Discord
-	Join us on Discord: discord.gg/artcraft	Rejoignez-nous sur Discord : discord.gg/artcraft
 	Justify	Justifier
 	Keep Lines Together	Lignes solidaires
 	Keep lines together	Lignes solidaires
@@ -764,7 +760,6 @@
 	Show only comments and formatting in balloons	Afficher uniquement les commentaires et la mise en forme dans les bulles
 	Show revisions in balloons	Afficher les révisions dans les bulles
 	Show rulers	Afficher les règles
-	Show the community button in the title bar	Afficher le bouton Communauté dans la barre de titre
 	Show/Hide ¶	Afficher/Masquer ¶
 	Show\nComments	Afficher\nles commentaires
 	Shrink Font 1 Point	Réduire la police d’1 point
@@ -780,7 +775,7 @@
 	Small caps	Petites majuscules
 	SmartArt	SmartArt
 	Sort	Trier
-	Source code: github.com/storytold/wordcraft	Code source : github.com/storytold/wordcraft
+	Source code: github.com/chatraweechai/docscaft	Code source : github.com/chatraweechai/docscaft
 	Space	Espace
 	Space before/after:	Espacement avant/après :
 	Spacing	Espacement
@@ -914,7 +909,7 @@
 	Word Left	Mot vers la gauche
 	Word Right	Mot vers la droite
 	WordArt	WordArt
-	WordCraft	WordCraft
+	Doc4Me	Doc4Me
 	Words	Mots
 	Words only	Mots uniquement
 	Wrap Text	Habillage du texte
@@ -975,7 +970,7 @@
 	Stopped	Arrêté
 	Speed	Vitesse
 	Normal speed	Vitesse normale
-	AutoSave documents you have saved in WordCraft	Enregistrement automatique des documents que vous avez enregistrés dans WordCraft
+	AutoSave documents you have saved in Doc4Me	Enregistrement automatique des documents que vous avez enregistrés dans Doc4Me
 	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Échec de l’enregistrement automatique : {error}. Enregistrez le document pour réactiver l’enregistrement automatique.
 	Couldn't download {name}: {error}	Impossible de télécharger {name} : {error}
 	Do you want to save changes to {name}?	Voulez-vous enregistrer les modifications apportées à {name} ?
@@ -1144,7 +1139,6 @@
 	Insert a new equation (Alt+=)	Insérer une nouvelle équation (Alt+=)
 	Leave the equation (Esc)	Quitter l’équation (Esc)
 	Preview	Aperçu
-	getartcraft.com/apps/wordcraft	getartcraft.com/apps/wordcraft
 	Draw Ink	Dessiner à l’encre
 	Erase Ink	Effacer l’encre
 	Hide Ink	Masquer l’encre
@@ -1280,7 +1274,7 @@
 	The document will be saved with a password. Save it to protect it.	Le document sera enregistré avec un mot de passe. Enregistrez-le pour le protéger.
 	The password is removed. Save the document to keep the change.	Le mot de passe est supprimé. Enregistrez le document pour conserver cette modification.
 	The passwords don't match.	Les mots de passe ne correspondent pas.
-	Keep the password somewhere safe: without it nobody, WordCraft included, can open the document. Leave both boxes empty to remove the password.	Conservez le mot de passe en lieu sûr : sans lui, personne, WordCraft inclus, ne peut ouvrir le document. Laissez les deux zones vides pour supprimer le mot de passe.
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Conservez le mot de passe en lieu sûr : sans lui, personne, Doc4Me inclus, ne peut ouvrir le document. Laissez les deux zones vides pour supprimer le mot de passe.
 	Align Top Left	Aligner en haut à gauche
 	Align Top Center	Aligner en haut au centre
 	Align Top Right	Aligner en haut à droite
@@ -1936,7 +1930,7 @@
 	Word document	Document Word
 	All files	Tous les fichiers
 	Recipient lists	Listes de destinataires
-	The system file dialog isn't available, so WordCraft shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	La boîte de dialogue de fichiers du système n’est pas disponible, WordCraft affiche donc la sienne. Pour utiliser celle du système, installez un portail de sélection de fichiers (comme xdg-desktop-portal-gtk) ou zenity.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	La boîte de dialogue de fichiers du système n’est pas disponible, Doc4Me affiche donc la sienne. Pour utiliser celle du système, installez un portail de sélection de fichiers (comme xdg-desktop-portal-gtk) ou zenity.
 	Up one level	Dossier parent
 	Home folder	Dossier personnel
 	{name} wasn't found.	{name} est introuvable.
@@ -1944,8 +1938,8 @@
 	This folder can't be read: {error}	Impossible de lire ce dossier : {error}
 	Showing the first {count} items.	Affichage des {count} premiers éléments.
 	File name:	Nom du fichier :
-	Browse in WordCraft…	Parcourir dans WordCraft…
-	Open a file with WordCraft's own browser when the system file dialog doesn't appear.	Ouvrir un fichier avec le navigateur de fichiers intégré à WordCraft lorsque la boîte de dialogue de fichiers du système n’apparaît pas.
+	Browse in Doc4Me…	Parcourir dans Doc4Me…
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Ouvrir un fichier avec le navigateur de fichiers intégré à Doc4Me lorsque la boîte de dialogue de fichiers du système n’apparaît pas.
 	Hide White Space	Masquer les espaces blancs
 	All pages	Toutes les pages
 	Current page	Page actuelle
@@ -2044,13 +2038,13 @@
 	Use "an" before a vowel sound	Utiliser « an » devant un son voyelle
 	Use "a" before a consonant sound	Utiliser « a » devant un son consonne
 	The spelling and grammar check is complete.	La vérification de l’orthographe et de la grammaire est terminée.
-	Couldn't make WordCraft the default: {error}	Impossible de faire de WordCraft l’application par défaut : {error}
-	In Default apps, choose WordCraft for the document types you want it to open.	Dans Applications par défaut, choisissez WordCraft pour les types de documents qu’il doit ouvrir.
-	Make WordCraft the default for Word documents…	Faire de WordCraft l’application par défaut pour les documents Word…
-	Opens .docx, .doc, .rtf and .odt files and Word templates with WordCraft from now on.	Ouvre désormais les fichiers .docx, .doc, .rtf et .odt ainsi que les modèles Word avec WordCraft.
-	Opens Settings › Default apps, where you choose WordCraft for .docx and the other document types.	Ouvre Paramètres › Applications par défaut, où vous choisissez WordCraft pour .docx et les autres types de documents.
-	To open Word documents with WordCraft by default: select one in Finder, choose File › Get Info, pick WordCraft under Open with, then click Change All.	Pour ouvrir les documents Word avec WordCraft par défaut : sélectionnez-en un dans le Finder, choisissez Fichier › Lire les informations, choisissez WordCraft sous « Ouvrir avec », puis cliquez sur « Tout modifier ».
-	WordCraft is now the default app for Word documents.	WordCraft est désormais l’application par défaut pour les documents Word.
+	Couldn't make Doc4Me the default: {error}	Impossible de faire de Doc4Me l’application par défaut : {error}
+	In Default apps, choose Doc4Me for the document types you want it to open.	Dans Applications par défaut, choisissez Doc4Me pour les types de documents qu’il doit ouvrir.
+	Make Doc4Me the default for Word documents…	Faire de Doc4Me l’application par défaut pour les documents Word…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Ouvre désormais les fichiers .docx, .doc, .rtf et .odt ainsi que les modèles Word avec Doc4Me.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Ouvre Paramètres › Applications par défaut, où vous choisissez Doc4Me pour .docx et les autres types de documents.
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Pour ouvrir les documents Word avec Doc4Me par défaut : sélectionnez-en un dans le Finder, choisissez Fichier › Lire les informations, choisissez Doc4Me sous « Ouvrir avec », puis cliquez sur « Tout modifier ».
+	Doc4Me is now the default app for Word documents.	Doc4Me est désormais l’application par défaut pour les documents Word.
 	Numerals:	Chiffres :
 	Numerals	Chiffres
 	Hindi	Hindi

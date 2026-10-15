@@ -1,9 +1,9 @@
 //! References tab: table of contents, footnotes/endnotes, captions; field updates.
 
+use doc4me_doc::para::{InlineObject, NoteKind, OBJ};
+use doc4me_doc::props::{CharProps, TabAlign, TabLeader, TabStop};
+use doc4me_doc::{Block, Paragraph, PartKind, Path, Pos, StoryRef, para_block};
 use serde_json::{Value, json};
-use wordcraft_doc::para::{InlineObject, NoteKind, OBJ};
-use wordcraft_doc::props::{CharProps, TabAlign, TabLeader, TabStop};
-use wordcraft_doc::{Block, Paragraph, PartKind, Path, Pos, StoryRef, para_block};
 
 use super::{delete_selection, sel_result};
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -261,11 +261,7 @@ fn toc_entries(s: &Session, f: &FieldCode) -> Vec<TocEntry> {
         let hidden = f.has('u') && p.props.outline_level == Some(9);
         let by_heading = o.and_then(|(a, b)| {
             let l = heading_style_level(p).or_else(|| {
-                s.doc
-                    .styles
-                    .resolve_para(&wordcraft_doc::ParaProps { style: p.props.style.clone(), ..Default::default() })
-                    .outline_level
-                    .map(|l| l + 1)
+                s.doc.styles.resolve_para(&doc4me_doc::ParaProps { style: p.props.style.clone(), ..Default::default() }).outline_level.map(|l| l + 1)
             })?;
             (a..=b).contains(&l).then_some(l)
         });
@@ -406,7 +402,7 @@ fn insert_toc(s: &mut Session, v: &Value) -> CmdResult {
 /// A hidden `_Toc` bookmark around the heading at body block `i` (after its leading page breaks),
 /// reusing one already there; its name.
 fn toc_bookmark(s: &mut Session, i: usize, lead: usize) -> Result<String, CmdError> {
-    const MARK: usize = wordcraft_doc::para::OBJ.len_utf8();
+    const MARK: usize = doc4me_doc::para::OBJ.len_utf8();
     let para = s.doc.para(StoryRef::Body, &Path::top(i)).ok_or_else(|| CmdError::Failed("heading is gone".into()))?;
     if let Some(InlineObject::BookmarkStart { name }) = para.object_at(lead)
         && name.starts_with("_Toc")
@@ -534,7 +530,7 @@ fn note(s: &mut Session, v: &Value, kind: NoteKind) -> CmdResult {
 /// `references.noteOptions`: footnote or endnote placement, number format, start and restart,
 /// for the whole document (each section then follows it) or the selection's sections.
 pub(super) fn note_options(s: &mut Session, v: &Value) -> CmdResult {
-    use wordcraft_doc::section::{MAX_NOTE_START, NotePos, NoteProps, NoteRestart, NumFormat};
+    use doc4me_doc::section::{MAX_NOTE_START, NotePos, NoteProps, NoteRestart, NumFormat};
     let fmt = |k: &str| -> Result<Option<NumFormat>, CmdError> {
         match p::str(v, k) {
             None => Ok(None),
@@ -594,7 +590,7 @@ pub(super) fn note_options(s: &mut Session, v: &Value) -> CmdResult {
             to.num_restart = if clear { None } else { from.num_restart };
         }
     };
-    fn pick(sect: &mut wordcraft_doc::SectionProps, endnote: bool) -> &mut NoteProps {
+    fn pick(sect: &mut doc4me_doc::SectionProps, endnote: bool) -> &mut NoteProps {
         if endnote { &mut sect.endnote_pr } else { &mut sect.footnote_pr }
     }
     if change.is_empty() {
@@ -705,7 +701,7 @@ fn chapter_number(label: &str) -> String {
 /// fill chapter-number `STYLEREF n \s` fields with the last level-n heading's number (its list
 /// label, or its count when the heading isn't numbered).
 pub fn update_seq(s: &mut Session) -> Result<(), CmdError> {
-    let mut counters = wordcraft_doc::numbering::Counters::default();
+    let mut counters = doc4me_doc::numbering::Counters::default();
     let mut headings = [0u32; 9];
     let mut chapter: [String; 9] = Default::default();
     let mut heading_text: [String; 9] = Default::default();
@@ -752,7 +748,7 @@ pub fn update_seq(s: &mut Session) -> Result<(), CmdError> {
                     } else if !f.has('c') {
                         n.0 = n.0.saturating_add(1);
                     }
-                    let fmt = wordcraft_layout::fields::format_switch(instr).unwrap_or_default();
+                    let fmt = doc4me_layout::fields::format_switch(instr).unwrap_or_default();
                     updates.push((k, if f.has('h') { String::new() } else { fmt.format(n.0) }));
                 }
                 "STYLEREF" => {
@@ -801,7 +797,7 @@ pub fn update_fields(s: &mut Session) -> Result<(), CmdError> {
         let mut updates: Vec<(usize, String)> = Vec::new();
         for (k, o) in p.objects.iter().enumerate() {
             let InlineObject::Field { instr, locked: false, .. } = o else { continue };
-            let name = wordcraft_layout::fields::field_name(instr);
+            let name = doc4me_layout::fields::field_name(instr);
             match name.as_str() {
                 "DATE" | "TIME" | "CREATEDATE" | "SAVEDATE" | "PRINTDATE" => {
                     let pic = date_picture(instr).unwrap_or_else(|| if name == "TIME" { "h:mm am/pm".into() } else { "M/d/yyyy".into() });
@@ -847,7 +843,7 @@ pub fn date_picture(instr: &str) -> Option<String> {
 
 /// The text a bookmark marks (field results included), up to its end in the same paragraph or
 /// the paragraph's end. `None` when there is no such bookmark.
-pub fn bookmark_text(doc: &wordcraft_doc::Document, name: &str) -> Option<String> {
+pub fn bookmark_text(doc: &doc4me_doc::Document, name: &str) -> Option<String> {
     let (_, start) = doc.bookmarks().into_iter().find(|(n, _)| n == name)?;
     let para = doc.para(start.story, &start.path)?;
     let end = para
@@ -879,7 +875,7 @@ mod tests {
     /// (`\p`), or none at all (`\n`).
     #[test]
     fn toc_switches_shape_the_entries() {
-        let mut s = Session::new(wordcraft_doc::Document::from_text("Intro\nPart\nDeep\nNote"));
+        let mut s = Session::new(doc4me_doc::Document::from_text("Intro\nPart\nDeep\nNote"));
         for (text, style) in [("Intro", "Heading 1"), ("Part", "Heading 2"), ("Deep", "Heading 3"), ("Note", "Quote")] {
             s.run("select.text", &json!({"text": text})).unwrap();
             s.run("styles.apply", &json!({"style": style})).unwrap();
@@ -912,7 +908,7 @@ mod tests {
     /// numbers that restart after each Heading 1 (`STYLEREF 1 \s`, `SEQ … \s 1`).
     #[test]
     fn caption_numbering_with_chapters() {
-        let mut s = Session::new(wordcraft_doc::Document::from_text("One\nPic\nPic two\nTwo\nPic three"));
+        let mut s = Session::new(doc4me_doc::Document::from_text("One\nPic\nPic two\nTwo\nPic three"));
         for t in ["One", "Two"] {
             s.run("select.text", &json!({"text": t})).unwrap();
             s.run("styles.apply", &json!({"style": "Heading 1"})).unwrap();

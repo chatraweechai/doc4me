@@ -1,6 +1,6 @@
 //! Freeform shapes (DrawingML custom geometry, `a:custGeom`) and ink strokes drawn with them.
 
-use wordcraft_doc::freeform::{FreePath, Freeform, InkTool, MAX_PATHS, MAX_POINTS};
+use doc4me_doc::freeform::{FreePath, Freeform, InkTool, MAX_PATHS, MAX_POINTS};
 
 use crate::units::int;
 use crate::xml::El;
@@ -75,7 +75,7 @@ pub fn cust_geom(sppr: &El, w: f32, h: f32) -> Option<Freeform> {
     (!f.paths.is_empty()).then_some(f)
 }
 
-/// The pen of an ink stroke written by WordCraft, from its drawing's name (`Ink Pen 3`,
+/// The pen of an ink stroke written by Doc4Me, from its drawing's name (`Ink Pen 3`,
 /// `Ink Highlighter 4`).
 pub fn ink_tool(name: &str) -> Option<InkTool> {
     let mut words = name.split_whitespace();
@@ -85,7 +85,7 @@ pub fn ink_tool(name: &str) -> Option<InkTool> {
     words.next().and_then(InkTool::parse)
 }
 
-/// The drawing order of an ink stroke written by WordCraft, from its drawing's name
+/// The drawing order of an ink stroke written by Doc4Me, from its drawing's name
 /// (`Ink Pen 3 #12`: the twelfth stroke drawn), for Ink Replay.
 pub fn ink_order(name: &str) -> Option<u32> {
     name.split_whitespace().skip(3).find_map(|w| w.strip_prefix('#')?.parse().ok())

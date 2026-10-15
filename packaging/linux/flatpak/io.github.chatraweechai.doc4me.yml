@@ -1,0 +1,67 @@
+# Flatpak manifest for Doc4Me, ready for a Flathub submission.
+#
+# Flatpak builds run offline, so the crate sources must be vendored first. From the repo root:
+#
+#   curl -fsSLO https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/master/cargo/flatpak-cargo-generator.py
+#   python3 flatpak-cargo-generator.py Cargo.lock -o packaging/linux/flatpak/cargo-sources.json
+#   flatpak-builder --user --install --force-clean build-flatpak packaging/linux/flatpak/io.github.chatraweechai.doc4me.yml
+#   flatpak run io.github.chatraweechai.doc4me
+#
+# For Flathub, replace the `dir` source with a `git` source pinned to a release tag and commit.
+# The release's .flatpak bundles come from io.github.chatraweechai.doc4me.bundle.yml instead (see there);
+# keep runtime, runtime-version, sdk and finish-args identical in both (packaging-lint checks this).
+id: io.github.chatraweechai.doc4me
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: doc4me
+finish-args:
+  # Display: Wayland first; X11 only when no Wayland compositor is running.
+  - --socket=wayland
+  - --socket=fallback-x11
+  # X11 shared memory (MIT-SHM). Without it the X11 fallback is slow or fails.
+  - --share=ipc
+  # GPU access for the wgpu renderer (Vulkan, or GL as a fallback).
+  - --device=dri
+  # Open/Save dialogs go through the file-chooser portal (rfd's xdg-portal backend) and
+  # drag-and-drop through the document portal, so picked files work anywhere without broad
+  # filesystem access. Documents and Pictures are granted so files passed by path (the command
+  # line, Open Recent, "Save" next to the original) work in the usual places.
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-pictures
+  # Deliberately not granted: network (the optional --control server listens on 127.0.0.1 in
+  # the sandbox; `flatpak override --user --share=network io.github.chatraweechai.doc4me` exposes it to
+  # host agents) and home/host filesystem access.
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+modules:
+  - name: doc4me
+    buildsystem: simple
+    build-options:
+      env:
+        CARGO_HOME: /run/build/doc4me/cargo
+        CARGO_NET_OFFLINE: 'true'
+    build-commands:
+      - cargo --offline build --release --locked -p doc4me -p doc4me-cli
+      - install -Dm755 target/release/doc4me /app/bin/doc4me
+      - install -Dm755 target/release/doc4me-cli /app/bin/doc4me-cli
+      - install -Dm644 packaging/linux/io.github.chatraweechai.doc4me.desktop /app/share/applications/io.github.chatraweechai.doc4me.desktop
+      - install -Dm644 packaging/linux/io.github.chatraweechai.doc4me.mime.xml /app/share/mime/packages/io.github.chatraweechai.doc4me.xml
+      - mkdir -p /app/share/icons && cp -R assets/app-icon/hicolor /app/share/icons/
+      - >-
+        version=$(awk '/^\[/{p=($0=="[workspace.package]");next} p&&$1=="version"{gsub(/[" ]/,"",$3);print $3;exit}' Cargo.toml);
+        install -d /app/share/metainfo;
+        sed -e "s/@VERSION@/$version/" -e "s/@DATE@/$(date -u +%Y-%m-%d)/"
+        packaging/linux/io.github.chatraweechai.doc4me.metainfo.xml.in > /app/share/metainfo/io.github.chatraweechai.doc4me.metainfo.xml
+    sources:
+      - type: dir
+        path: ../../..
+        skip:
+          - target
+          - dist
+          - corpus
+          - build-flatpak
+          - .flatpak-builder
+      - cargo-sources.json

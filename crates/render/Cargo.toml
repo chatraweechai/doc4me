@@ -1,19 +1,19 @@
 [package]
-name = "wordcraft-render"
+name = "doc4me-render"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "WordCraft rasteriser: pages and thumbnails from the layout display list (vello_cpu), PNG/JPEG export"
+description = "Doc4Me rasteriser: pages and thumbnails from the layout display list (vello_cpu), PNG/JPEG export"
 
 [lints]
 workspace = true
 
 [dependencies]
-wordcraft-geom = { workspace = true }
-wordcraft-doc = { workspace = true }
-wordcraft-fonts = { workspace = true }
-wordcraft-layout = { workspace = true }
-wordcraft-metafile = { workspace = true }
+doc4me-geom = { workspace = true }
+doc4me-doc = { workspace = true }
+doc4me-fonts = { workspace = true }
+doc4me-layout = { workspace = true }
+doc4me-metafile = { workspace = true }
 vello_cpu = { workspace = true }
 image = { workspace = true }
 log = { workspace = true }

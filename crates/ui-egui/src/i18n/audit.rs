@@ -83,7 +83,7 @@ fn ribbon_controls(ctx: &egui::Context) -> Vec<egui::Pos2> {
 
 fn fresh_app(ctx: &egui::Context) -> WordApp {
     ctx.all_styles_mut(|s| s.interaction.tooltip_delay = 0.0);
-    let mut app = WordApp::new(wordcraft_engine::Session::new(wordcraft_engine::sample::sample_document()), Default::default());
+    let mut app = WordApp::new(doc4me_engine::Session::new(doc4me_engine::sample::sample_document()), Default::default());
     // Fonts install over the first frames.
     for _ in 0..2 {
         frame(ctx, &mut app);
@@ -108,28 +108,28 @@ struct Exempt {
 
 impl Exempt {
     fn new(app: &WordApp) -> Self {
-        let mut names: std::collections::HashSet<String> = wordcraft_fonts::FontDb::global().families().into_iter().collect();
+        let mut names: std::collections::HashSet<String> = doc4me_fonts::FontDb::global().families().into_iter().collect();
         names.extend(app.session.doc.styles.styles.iter().map(|s| s.name.clone()));
         // Fonts a document asks for, installed or not (Aptos is drawn with a substitute).
-        names.extend([wordcraft_doc::styles::BODY_FONT, wordcraft_doc::styles::HEADING_FONT].map(str::to_string));
+        names.extend([doc4me_doc::styles::BODY_FONT, doc4me_doc::styles::HEADING_FONT].map(str::to_string));
         // The selected SmartArt graphic's items (the Text Pane): document content.
-        if let Some(g) = wordcraft_engine::cmd::smart_art::selected_smart_art(&app.session) {
+        if let Some(g) = doc4me_engine::cmd::smart_art::selected_smart_art(&app.session) {
             names.extend(g.items.iter().map(|i| i.text.clone()));
         }
         // The accessibility checker's findings: like command messages, they answer scripts and
         // MCP too, so they stay English for now.
-        for i in wordcraft_engine::cmd::accessibility::check(&app.session.doc) {
+        for i in doc4me_engine::cmd::accessibility::check(&app.session.doc) {
             names.extend(["issue", "fix"].iter().filter_map(|k| i[*k].as_str()).map(str::to_string));
         }
         // The selected chart's data (Edit Data's grid): document content.
-        if let Some(c) = wordcraft_engine::cmd::chart::selected_chart(&app.session) {
+        if let Some(c) = doc4me_engine::cmd::chart::selected_chart(&app.session) {
             names.extend(c.categories.iter().cloned());
             names.extend(c.series.iter().map(|s| s.name.clone()));
         }
         for m in crate::credits::MODELS {
             names.extend([m.company, m.model, m.version].map(str::to_string));
         }
-        Exempt { body: app.session.doc.plain_text(wordcraft_doc::StoryRef::Body), names }
+        Exempt { body: app.session.doc.plain_text(doc4me_doc::StoryRef::Body), names }
     }
 
     fn allows(&self, app: &WordApp, text: &str) -> bool {
@@ -154,16 +154,16 @@ impl Exempt {
             || plain.starts_with('@') // contributor handles
             || plain.starts_with("Style") || plain.starts_with("Table Style ") // a new style's default name
             || plain.contains('┬') || plain.contains('\u{2061}') // equation input (UnicodeMath), drawn as math
-            || matches!(plain, "WordCraft" | "WordCraft User" | "Discord" | "https://" | "auto" | "I. II. III." | "i. ii. iii.")
+            || matches!(plain, "Doc4Me" | "Doc4Me User" | "https://" | "auto" | "I. II. III." | "i. ii. iii.")
             || plain == "CONFIDENTIAL" // the watermark dialog's text: document content, kept as typed
             || plain == "Figure 1" // the caption dialog's sample: the label goes into the document as is
     }
 }
 
-/// Lists untranslated interface text per UI state. `cargo test -p wordcraft-ui-egui
+/// Lists untranslated interface text per UI state. `cargo test -p doc4me-ui-egui
 /// untranslated_interface_text -- --nocapture` prints the report.
 #[test]
-#[ignore = "failed once in ~46 runs under heavy machine load (cause not yet found); run on demand with `cargo test -p wordcraft-ui-egui untranslated_interface_text -- --ignored --nocapture`"]
+#[ignore = "failed once in ~46 runs under heavy machine load (cause not yet found); run on demand with `cargo test -p doc4me-ui-egui untranslated_interface_text -- --ignored --nocapture`"]
 fn untranslated_interface_text() {
     pseudo::set(true);
     let mut found: BTreeMap<String, Vec<String>> = BTreeMap::new();
@@ -187,7 +187,7 @@ fn untranslated_interface_text() {
         let drawn = frame(&ctx, &mut app);
         record(&app, &format!("File › {page}"), drawn);
     }
-    for pane in wordcraft_engine::cmd::options::PANES {
+    for pane in doc4me_engine::cmd::options::PANES {
         let _ = app.run("ui.backstage", json!({"value": true, "page": "options", "pane": pane}));
         let drawn = frame(&ctx, &mut app);
         record(&app, &format!("File › Options › {pane}"), drawn);
@@ -318,7 +318,7 @@ fn untranslated_interface_text() {
 /// gallery's labels (shown in menus the audit doesn't open one by one). Numbered style names go
 /// through a template.
 fn complete_catalogs_have_every_string_the_interface_looked_up(mut keys: std::collections::BTreeSet<String>) {
-    use wordcraft_engine::math_gallery::{BUILT_INS, STRUCTURES, SYMBOL_SETS};
+    use doc4me_engine::math_gallery::{BUILT_INS, STRUCTURES, SYMBOL_SETS};
     keys.extend(BUILT_INS.iter().map(|(_, label, _)| label.to_string()));
     keys.extend(SYMBOL_SETS.iter().map(|(name, _)| name.to_string()));
     for g in STRUCTURES {

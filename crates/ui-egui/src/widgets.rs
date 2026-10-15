@@ -6,16 +6,63 @@ use serde_json::Value;
 use crate::theme::{Tokens, regular};
 use crate::{WordApp, icons};
 
+/// How much taller than a line of text a text box's first row is: Sarabun raises a Thai tone mark
+/// over an upper vowel (ที่, น้ำ, สิทธิ์) about a fifth of the font size above the line.
+const TEXT_BOX_ROOM: f32 = 1.45;
+
+/// A single-line text box with room for Thai marks above its text ([`roomy_layout`]).
+pub fn text_line(text: &mut dyn egui::TextBuffer) -> egui::TextEdit<'_> {
+    // A function item has no size, so leaking its box allocates nothing.
+    egui::TextEdit::singleline(text).layouter(Box::leak(Box::new(roomy_line)))
+}
+
+/// A multi-line text box with room for Thai marks above its first line ([`roomy_layout`]).
+pub fn text_box(text: &mut dyn egui::TextBuffer) -> egui::TextEdit<'_> {
+    egui::TextEdit::multiline(text).layouter(Box::leak(Box::new(roomy_box)))
+}
+
+fn roomy_line(ui: &Ui, text: &dyn egui::TextBuffer, wrap_width: f32) -> std::sync::Arc<egui::Galley> {
+    roomy_layout(ui, text, wrap_width, false)
+}
+
+fn roomy_box(ui: &Ui, text: &dyn egui::TextBuffer, wrap_width: f32) -> std::sync::Arc<egui::Galley> {
+    roomy_layout(ui, text, wrap_width, true)
+}
+
+/// Lays a text box's text out as egui does, with the first row taller and the text centred in it.
+/// egui clips a text box at the rows of its text, which would cut off marks drawn above the
+/// line, such as a Thai tone mark over an upper vowel.
+fn roomy_layout(ui: &Ui, text: &dyn egui::TextBuffer, wrap_width: f32, multiline: bool) -> std::sync::Arc<egui::Galley> {
+    let font_id = egui::FontSelection::Default.resolve(ui.style());
+    let visuals = ui.visuals();
+    let color = visuals.override_text_color.unwrap_or_else(|| visuals.widgets.inactive.text_color());
+    let line_height = ui.fonts_mut(|f| f.row_height(&font_id)) + ui.spacing().extra_text_line_spacing;
+    let text = text.as_str().to_owned();
+    let mut job = if multiline {
+        egui::text::LayoutJob::simple(text, font_id, color, wrap_width)
+    } else {
+        egui::text::LayoutJob::simple_singleline(text, font_id, color)
+    };
+    job.keep_trailing_whitespace = true;
+    for section in &mut job.sections {
+        section.format.line_height = Some(line_height);
+        section.format.valign = egui::Align::Center;
+    }
+    job.first_row_min_height = (line_height * TEXT_BOX_ROOM).round();
+    ui.fonts_mut(|f| f.layout_job(job))
+}
+
 /// Height of the ribbon content area (without group labels).
 pub const CONTENT_H: f32 = 66.0;
 /// Height of the group title row under the content.
 pub const LABEL_H: f32 = 18.0;
 /// Large buttons: centre of the 32 px icon, top of the first label line, and the pitch and
-/// height of a label line (`regular(11.5)`; a test checks the font's real line height).
+/// height of a label line (`regular(11.5)`; a test checks the font's real line height: Sarabun's
+/// leaves room for Thai marks above the line).
 pub const BIG_ICON_Y: f32 = 18.0;
 pub const BIG_LABEL_Y: f32 = 36.0;
 pub const LABEL_PITCH: f32 = 13.0;
-pub const LABEL_LINE_H: f32 = 14.0;
+pub const LABEL_LINE_H: f32 = 15.0;
 // #653: a two-line label ends inside the content, above the group title row.
 const _: () = assert!(BIG_LABEL_Y + LABEL_PITCH + LABEL_LINE_H <= CONTENT_H);
 const _: () = assert!(BIG_ICON_Y + 16.0 <= BIG_LABEL_Y);
@@ -414,13 +461,13 @@ pub fn row(ui: &mut Ui, add: impl FnOnce(&mut Ui)) {
 }
 
 /// Word's standard colour grid (theme colours + tints, standard colours). Returns a picked hex.
-pub fn color_grid(ui: &mut Ui, theme: &[wordcraft_doc::Rgb]) -> Option<String> {
+pub fn color_grid(ui: &mut Ui, theme: &[doc4me_doc::Rgb]) -> Option<String> {
     let mut picked = None;
     ui.label(egui::RichText::new(tl!("Theme Colors")).small().weak());
-    let base: Vec<wordcraft_doc::Rgb> = theme.iter().take(10).copied().collect();
-    let tint = |c: wordcraft_doc::Rgb, k: f32| {
+    let base: Vec<doc4me_doc::Rgb> = theme.iter().take(10).copied().collect();
+    let tint = |c: doc4me_doc::Rgb, k: f32| {
         let f = |v: u8| if k >= 0.0 { (v as f32 + (255.0 - v as f32) * k) as u8 } else { (v as f32 * (1.0 + k)) as u8 };
-        wordcraft_doc::Rgb(f(c.0), f(c.1), f(c.2))
+        doc4me_doc::Rgb(f(c.0), f(c.1), f(c.2))
     };
     let order = [1usize, 0, 3, 2, 4, 5, 6, 7, 8, 9];
     for k in [0.0f32, 0.8, 0.6, 0.4, -0.25, -0.5] {
@@ -440,7 +487,7 @@ pub fn color_grid(ui: &mut Ui, theme: &[wordcraft_doc::Rgb]) -> Option<String> {
     ui.horizontal(|ui| {
         ui.spacing_mut().item_spacing = vec2(3.0, 0.0);
         for hex in ["C00000", "FF0000", "FFC000", "FFFF00", "92D050", "00B050", "00B0F0", "0070C0", "002060", "7030A0"] {
-            if let Some(c) = wordcraft_doc::Rgb::parse(hex)
+            if let Some(c) = doc4me_doc::Rgb::parse(hex)
                 && swatch(ui, c)
             {
                 picked = Some(hex.to_string());
@@ -450,7 +497,7 @@ pub fn color_grid(ui: &mut Ui, theme: &[wordcraft_doc::Rgb]) -> Option<String> {
     picked
 }
 
-pub(crate) fn swatch(ui: &mut Ui, c: wordcraft_doc::Rgb) -> bool {
+pub(crate) fn swatch(ui: &mut Ui, c: doc4me_doc::Rgb) -> bool {
     let (r, resp) = ui.allocate_exact_size(vec2(15.0, 15.0), Sense::click());
     ui.painter().rect_filled(r, 0.0, Color32::from_rgb(c.0, c.1, c.2));
     let t = Tokens::get(ui.ctx());
@@ -832,6 +879,27 @@ fn icon_text_button_with(ui: &mut Ui, icon: &str, text: &str, font: egui::FontId
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// A text box clips at its text's rows: its first row leaves room above the text for a Thai
+    /// tone mark raised over an upper vowel, and keeps the text centred.
+    #[test]
+    fn text_boxes_leave_room_for_thai_marks() {
+        let ctx = egui::Context::default();
+        ctx.set_fonts(crate::theme::font_definitions(false, false));
+        ctx.run_ui(egui::RawInput::default(), |_| {}).drop_without_applying_deltas();
+        let mut out = None;
+        ctx.run_ui(egui::RawInput::default(), |ui| {
+            let plain = egui::FontSelection::Default.resolve(ui.style());
+            let simple = ui.fonts_mut(|f| f.layout_job(egui::text::LayoutJob::simple_singleline("ที่น้ำ".into(), plain, Color32::WHITE)));
+            let roomy = roomy_layout(ui, &"ที่น้ำ", f32::INFINITY, false);
+            out = Some((simple, roomy));
+        })
+        .drop_without_applying_deltas();
+        let (simple, roomy) = out.unwrap();
+        let top = |g: &egui::Galley| g.rows[0].glyphs.iter().map(|x| x.pos.y).fold(f32::MAX, f32::min);
+        assert!(roomy.size().y > simple.size().y);
+        assert!(top(&roomy) > top(&simple) + 1.0, "the text moves down into the room above it");
+    }
 
     /// #653: a large button's label line is no taller than `LABEL_LINE_H` in the interface font, so
     /// two lines (checked at compile time) end above the group title row.

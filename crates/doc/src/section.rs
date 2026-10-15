@@ -16,7 +16,7 @@ pub enum SectionStart {
 }
 
 /// A number format (ECMA-376 §17.18.59 ST_NumberFormat). Every value the format defines is
-/// kept, so a document saves back the format it was opened with even where WordCraft draws it as
+/// kept, so a document saves back the format it was opened with even where Doc4Me draws it as
 /// plain decimal (see [`NumFormat::format`]).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
@@ -226,9 +226,9 @@ impl NumFormat {
     pub fn from_ooxml(s: &str) -> NumFormat {
         NumFormat::ALL.into_iter().find(|f| f.ooxml() == s).unwrap_or(NumFormat::Decimal)
     }
-    /// Format `n` (1-based). Formats WordCraft doesn't draw yet (Hebrew, Arabic, Hindi, Thai,
-    /// Vietnamese, Russian, text amounts) show decimal, as do values past a sequence's end
-    /// (the 21st item of ①…⑳).
+    /// Format `n` (1-based). Formats Doc4Me doesn't draw yet (Hebrew, Arabic, Hindi, Thai
+    /// counting, Vietnamese, Russian, text amounts) show decimal, as do values past a sequence's
+    /// end (the 21st item of ①…⑳).
     pub fn format(self, n: u32) -> String {
         use crate::cjk_numbers as cjk;
         match self {
@@ -271,6 +271,8 @@ impl NumFormat {
             NumFormat::KoreanLegal => cjk::korean_legal(n),
             NumFormat::Ganada => cjk::ganada(n),
             NumFormat::Chosung => cjk::chosung(n),
+            NumFormat::ThaiNumbers => thai_digits(n),
+            NumFormat::ThaiLetters => thai_letters(n),
             NumFormat::Decimal
             | NumFormat::DecimalHalfWidth
             | NumFormat::Hex
@@ -285,8 +287,6 @@ impl NumFormat {
             | NumFormat::HindiConsonants
             | NumFormat::HindiNumbers
             | NumFormat::HindiCounting
-            | NumFormat::ThaiLetters
-            | NumFormat::ThaiNumbers
             | NumFormat::ThaiCounting
             | NumFormat::BahtText
             | NumFormat::DollarText => n.to_string(),
@@ -341,6 +341,29 @@ pub fn roman(mut n: u32) -> String {
         }
     }
     s
+}
+
+/// `n` in Thai digits (๑๒๓).
+pub fn thai_digits(n: u32) -> String {
+    n.to_string().chars().map(|d| d.to_digit(10).and_then(|v| char::from_u32(0x0E50 + v)).unwrap_or(d)).collect()
+}
+
+/// Thai letter numbering: ก ข ค ง … ฮ, the consonants in alphabetical order without ฃ, ฅ and ฆ,
+/// as Thai lists and multiple-choice answers are lettered (41 letters, like CSS
+/// `thai-alphabetic`); past ฮ the letters double (กก, ขข …), like `aa`, `bb` in Latin lists.
+pub fn thai_letters(n: u32) -> String {
+    const LETTERS: [char; 41] = [
+        'ก', 'ข', 'ค', 'ง', 'จ', 'ฉ', 'ช', 'ซ', 'ฌ', 'ญ', 'ฎ', 'ฏ', 'ฐ', 'ฑ', 'ฒ', 'ณ', 'ด', 'ต', 'ถ', 'ท', 'ธ', 'น', 'บ', 'ป', 'ผ', 'ฝ', 'พ', 'ฟ',
+        'ภ', 'ม', 'ย', 'ร', 'ล', 'ว', 'ศ', 'ษ', 'ส', 'ห', 'ฬ', 'อ', 'ฮ',
+    ];
+    if n == 0 {
+        return String::new();
+    }
+    let len = LETTERS.len() as u32;
+    let n = n.min(len * 30);
+    let k = (n - 1) / len + 1;
+    let c = LETTERS.get(((n - 1) % len) as usize).copied().unwrap_or('ก');
+    std::iter::repeat_n(c, k as usize).collect()
 }
 
 /// Word-style letters: a..z, aa..zz, aaa.. (repeated letter, not base-26).
@@ -824,6 +847,18 @@ mod tests {
         assert_eq!(NumFormat::OrdinalText.format(20), "Twentieth");
         assert_eq!(NumFormat::OrdinalText.format(112), "One Hundred Twelfth");
         assert_eq!(NumFormat::DecimalZero.format(3), "03");
+        // Thai: digits and consonants.
+        assert_eq!(NumFormat::ThaiNumbers.format(1), "๑");
+        assert_eq!(NumFormat::ThaiNumbers.format(2567), "๒๕๖๗");
+        assert_eq!(NumFormat::ThaiNumbers.format(10), "๑๐");
+        assert_eq!(NumFormat::ThaiLetters.format(1), "ก");
+        assert_eq!(NumFormat::ThaiLetters.format(3), "ค");
+        assert_eq!(NumFormat::ThaiLetters.format(4), "ง", "ฆ is skipped: ก ข ค ง");
+        assert_eq!(NumFormat::ThaiLetters.format(5), "จ");
+        assert_eq!(NumFormat::ThaiLetters.format(41), "ฮ");
+        assert_eq!(NumFormat::ThaiLetters.format(42), "กก");
+        assert_eq!(NumFormat::ThaiLetters.format(0), "");
+        assert!(NumFormat::ThaiLetters.format(u32::MAX).chars().count() <= 30);
         assert!(!NumFormat::UpperRoman.format(u32::MAX).is_empty());
         assert_eq!(NumFormat::LowerLetter.format(u32::MAX).len(), 30);
         assert_eq!([NumFormat::Chicago.format(1), NumFormat::Chicago.format(6)], ["*", "\u{2020}\u{2020}"]);

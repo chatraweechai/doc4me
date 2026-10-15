@@ -1,10 +1,8 @@
 //! Layout tab: page setup (margins, orientation, size, columns), breaks, line numbers, hyphenation.
 
+use doc4me_doc::section::{Columns, DocGrid, DocGridType, LineNumbering, MAX_CHAR_SPACE, MAX_GRID_PITCH, MIN_GRID_PITCH, SectionProps, SectionStart};
+use doc4me_doc::{Block, Pos, StoryRef};
 use serde_json::{Value, json};
-use wordcraft_doc::section::{
-    Columns, DocGrid, DocGridType, LineNumbering, MAX_CHAR_SPACE, MAX_GRID_PITCH, MIN_GRID_PITCH, SectionProps, SectionStart,
-};
-use wordcraft_doc::{Block, Pos, StoryRef};
 
 use super::sel_result;
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -49,9 +47,9 @@ pub fn specs() -> Vec<CommandSpec> {
         .params(r#"{"section"?: SectionProps}"#),
         CommandSpec::new("layout.verticalAlign", "Vertical Alignment", "Layout › Page Setup › Layout", |s, v| {
             let va = match p::str(v, "value") {
-                Some("center") => wordcraft_doc::props::VAlign::Center,
-                Some("bottom") => wordcraft_doc::props::VAlign::Bottom,
-                _ => wordcraft_doc::props::VAlign::Top,
+                Some("center") => doc4me_doc::props::VAlign::Center,
+                Some("bottom") => doc4me_doc::props::VAlign::Bottom,
+                _ => doc4me_doc::props::VAlign::Top,
             };
             with_sect(s, |x| x.valign = va)
         }),
@@ -72,7 +70,7 @@ pub fn specs() -> Vec<CommandSpec> {
             sel_result(s)
         }),
         CommandSpec::new("layout.pageNumberFormat", "Format Page Numbers", "Insert › Header & Footer › Page Number", |s, v| {
-            let fmt = p::str(v, "format").map(wordcraft_doc::section::NumFormat::from_ooxml);
+            let fmt = p::str(v, "format").map(doc4me_doc::section::NumFormat::from_ooxml);
             let start = p::u64(v, "start").map(|x| x.min(100_000) as u32);
             with_sect(s, |x| {
                 if let Some(f) = fmt {
@@ -95,7 +93,7 @@ pub fn specs() -> Vec<CommandSpec> {
 /// Line Numbers: on with a restart mode (`value`), or off (`none`). `start`, `countBy` and
 /// `distance` change the numbering's options and turn it on (keeping its restart mode).
 fn line_numbers(s: &mut Session, v: &Value) -> CmdResult {
-    use wordcraft_doc::section::LineNumberRestart as R;
+    use doc4me_doc::section::LineNumberRestart as R;
     let mode = p::str(v, "value");
     if mode == Some("none") {
         return with_sect(s, |x| x.line_numbers = None);
@@ -164,20 +162,20 @@ fn manual_hyphenation(s: &mut Session, v: &Value) -> CmdResult {
         Some(f) if !f.is_null() => super::parse_pos(f).ok_or_else(|| CmdError::Params("bad `from`".into()))?,
         _ => s.sel.ordered().0,
     };
-    let lim = wordcraft_proof::hyphen::Limits::default();
+    let lim = doc4me_proof::hyphen::Limits::default();
     let caps = s.doc.settings.hyphenate_caps;
     let layout = s.layout();
     let mut best: Option<(Pos, Value)> = None;
     for page in &layout.pages {
         for it in &page.items {
-            let wordcraft_layout::Placed::Lines { story, path, para, l0, l1, .. } = it else { continue };
+            let doc4me_layout::Placed::Lines { story, path, para, l0, l1, .. } = it else { continue };
             if *story != StoryRef::Body {
                 continue;
             }
             let Some(text) = s.doc.para_at(&Pos { story: *story, path: path.clone(), off: 0 }).map(|p| p.text.clone()) else { continue };
             for li in (*l0).max(1)..*l1 {
                 let (Some(prev), Some(line)) = (para.lines.get(li - 1), para.lines.get(li)) else { continue };
-                if prev.end != wordcraft_layout::LineEnd::Wrap || prev.hyphen.is_some() {
+                if prev.end != doc4me_layout::LineEnd::Wrap || prev.hyphen.is_some() {
                     continue;
                 }
                 let at = Pos { story: *story, path: path.clone(), off: line.start };
@@ -194,7 +192,7 @@ fn manual_hyphenation(s: &mut Session, v: &Value) -> CmdResult {
                 {
                     continue;
                 }
-                let points = wordcraft_proof::hyphen::hyphen_points(word, &lim);
+                let points = doc4me_proof::hyphen::hyphen_points(word, &lim);
                 // The room left at the end of the line above, and the width of each first part.
                 let room = prev.right - prev.end_x();
                 let hyphen_w = para
@@ -241,7 +239,7 @@ pub(crate) fn with_sect(s: &mut Session, f: impl Fn(&mut SectionProps)) -> CmdRe
 
 /// The text direction Layout › Text Direction would change: the caret cell's, the text box's,
 /// or the section's.
-pub fn text_direction_at(s: &Session) -> wordcraft_doc::props::TextDirection {
+pub fn text_direction_at(s: &Session) -> doc4me_doc::props::TextDirection {
     if let Some((tp, r, c)) = s.sel.focus.path.cell() {
         return s.doc.table(s.sel.focus.story, &tp).and_then(|t| t.rows.get(r)?.cells.get(c).map(|cl| cl.props.text_direction)).unwrap_or_default();
     }
@@ -254,7 +252,7 @@ pub fn text_direction_at(s: &Session) -> wordcraft_doc::props::TextDirection {
 /// Layout › Text Direction: like Word's button it works on what the caret is in — the selected
 /// table cells, the text box, or else the section.
 fn text_direction(s: &mut Session, v: &Value) -> CmdResult {
-    use wordcraft_doc::props::{TextDirection, TextVert};
+    use doc4me_doc::props::{TextDirection, TextVert};
     let dir = match p::str(v, "value") {
         Some("horizontal" | "lrTb" | "horz") => Some(TextDirection::Horizontal),
         Some("down" | "tbRl" | "vert" | "rotate90") => Some(TextDirection::Down),
@@ -279,7 +277,7 @@ fn text_direction(s: &mut Session, v: &Value) -> CmdResult {
 
 /// The default font size (Normal style), which the character pitch is based on.
 fn grid_font_size(s: &Session) -> f32 {
-    let size = s.doc.styles.resolve_char(Some("Normal"), &wordcraft_doc::CharProps::default()).size;
+    let size = s.doc.styles.resolve_char(Some("Normal"), &doc4me_doc::CharProps::default()).size;
     if size.is_finite() { size.clamp(1.0, 1584.0) } else { 10.5 }
 }
 
@@ -375,7 +373,7 @@ fn margins(s: &mut Session, v: &Value) -> CmdResult {
 
 fn size(s: &mut Session, v: &Value) -> CmdResult {
     let (w, h) = if let Some(n) = p::str(v, "name") {
-        let (_, w, h) = wordcraft_geom::PAPER_SIZES
+        let (_, w, h) = doc4me_geom::PAPER_SIZES
             .iter()
             .find(|(name, _, _)| name.eq_ignore_ascii_case(n))
             .ok_or_else(|| CmdError::Params(format!("unknown paper `{n}`")))?;
@@ -480,7 +478,7 @@ fn breaks(s: &mut Session, v: &Value) -> CmdResult {
         "oddPage" => SectionStart::OddPage,
         x => return Err(CmdError::Params(format!("unknown break `{x}`"))),
     };
-    if s.sel.focus.story != wordcraft_doc::StoryRef::Body || s.sel.focus.path.depth() > 0 {
+    if s.sel.focus.story != doc4me_doc::StoryRef::Body || s.sel.focus.path.depth() > 0 {
         return Err(CmdError::Failed("section breaks go in the main text".into()));
     }
     // Section break: the paragraph before the caret ends a section with the current props; the
@@ -506,13 +504,13 @@ mod tests {
     use super::*;
 
     fn doc() -> Session {
-        Session::new(wordcraft_doc::Document::from_text("one\ntwo\nthree"))
+        Session::new(doc4me_doc::Document::from_text("one\ntwo\nthree"))
     }
 
     /// Layout › Text Direction turns the section, or the table cell the caret is in; one undo step.
     #[test]
     fn text_direction_turns_the_section_or_the_cell() {
-        use wordcraft_doc::props::TextDirection;
+        use doc4me_doc::props::TextDirection;
         let mut s = doc();
         s.run("layout.textDirection", &json!({"value": "down"})).unwrap();
         assert_eq!(sect(&s).text_direction, TextDirection::Down);
@@ -569,8 +567,8 @@ mod tests {
     /// restart mode, `none` turns numbering off.
     #[test]
     fn line_numbering_options() {
-        use wordcraft_doc::section::LineNumberRestart;
-        let mut s = Session::new(wordcraft_doc::Document::from_text("One\nTwo"));
+        use doc4me_doc::section::LineNumberRestart;
+        let mut s = Session::new(doc4me_doc::Document::from_text("One\nTwo"));
         s.run("layout.lineNumbers", &json!({"value": "restartSection", "start": 5, "countBy": 2, "distance": 18})).unwrap();
         let l = s.doc.last_section.line_numbers.clone().unwrap();
         assert_eq!((l.start, l.count_by, l.distance, l.restart), (5, 2, 18.0, LineNumberRestart::Section));
@@ -587,7 +585,7 @@ mod tests {
     /// there breaks the word.
     #[test]
     fn hyphenation_options_and_manual_hyphenation() {
-        let mut s = Session::new(wordcraft_doc::Document::from_text(
+        let mut s = Session::new(doc4me_doc::Document::from_text(
             &"a extraordinarily be uncharacteristic of responsibilities the considerations ".repeat(12),
         ));
         let r = s.run("layout.hyphenation", &json!({"zone": 36, "caps": false, "limit": 3})).unwrap();
@@ -618,7 +616,7 @@ mod tests {
         }
         // Some line of thirty or so starts with a long word that fits hyphenated above, whatever the font.
         assert!(found > 0, "no candidates");
-        assert_eq!(s.doc.plain_text(wordcraft_doc::StoryRef::Body).matches('\u{ad}').count(), found);
+        assert_eq!(s.doc.plain_text(doc4me_doc::StoryRef::Body).matches('\u{ad}').count(), found);
         assert!(s.run("layout.manualHyphenation", &json!({"from": {"block": 999, "off": 0}})).unwrap()["done"] == true);
     }
 }

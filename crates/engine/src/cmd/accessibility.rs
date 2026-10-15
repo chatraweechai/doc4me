@@ -7,11 +7,11 @@
 //! "params"}`) that fixes it, run with the caret at `pos` (or the object selected). The rules and
 //! their wording are our own; the contrast rule uses the WCAG 2 contrast ratio.
 
+use doc4me_doc::para::{InlineObject, OBJ};
+use doc4me_doc::props::{Rgb, TextColor, VMerge};
+use doc4me_doc::table::Table;
+use doc4me_doc::{Block, Document, Paragraph, Path, Pos, StoryRef};
 use serde_json::{Value, json};
-use wordcraft_doc::para::{InlineObject, OBJ};
-use wordcraft_doc::props::{Rgb, TextColor, VMerge};
-use wordcraft_doc::table::Table;
-use wordcraft_doc::{Block, Document, Paragraph, Path, Pos, StoryRef};
 
 /// Most issues reported (a hostile document can't make the report huge).
 const MAX_ISSUES: usize = 500;
@@ -197,7 +197,7 @@ impl Checker<'_> {
                 "action": {"label": "Repeat Header Rows", "command": "table.repeatHeader", "params": {"value": true}},
             }));
         }
-        let empty = |c: &wordcraft_doc::table::Cell| {
+        let empty = |c: &doc4me_doc::table::Cell| {
             c.blocks.iter().all(|b| match &**b {
                 Block::Para(p) => p.text.trim().is_empty(),
                 _ => false,
@@ -256,9 +256,9 @@ pub fn contrast_ratio(a: Rgb, b: Rgb) -> f64 {
 
 #[cfg(test)]
 mod tests {
+    use doc4me_doc::Document;
+    use doc4me_doc::props::Rgb;
     use serde_json::json;
-    use wordcraft_doc::Document;
-    use wordcraft_doc::props::Rgb;
 
     use crate::Session;
 

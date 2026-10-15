@@ -4,10 +4,10 @@
 
 use std::sync::Arc;
 
+use doc4me_doc::props::{Border, BorderStyle, Borders, CharProps, ParaProps, Rgb, TextColor};
+use doc4me_doc::styles::{Style, StyleKind, TableStyleParts, TableStyleProps};
+use doc4me_doc::{Block, Table};
 use serde_json::{Value, json};
-use wordcraft_doc::props::{Border, BorderStyle, Borders, CharProps, ParaProps, Rgb, TextColor};
-use wordcraft_doc::styles::{Style, StyleKind, TableStyleParts, TableStyleProps};
-use wordcraft_doc::{Block, Table};
 
 use crate::{CmdError, CmdResult, CommandSpec, Session, p};
 

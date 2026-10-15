@@ -1,6 +1,6 @@
-//! [`wordcraft_doc::math`] tree → Office Math (OMML).
+//! [`doc4me_doc::math`] tree → Office Math (OMML).
 
-use wordcraft_doc::math::{
+use doc4me_doc::math::{
     Arg, BrkBin, BrkBinSub, ColJc, FracKind, LimLoc, MAX_DEPTH, MNode, MRun, MScr, MSty, Math, MathJc, MathProps, ScriptKind, parse_linear,
 };
 
@@ -52,7 +52,7 @@ pub fn resolve_numbers(math: &Math, display: bool, counter: &mut u32) -> Option<
     let mut out = rows.clone();
     let mut changed = false;
     for row in out.iter_mut() {
-        if !wordcraft_doc::math::has_number_mark(row) {
+        if !doc4me_doc::math::has_number_mark(row) {
             continue;
         }
         *counter = counter.saturating_add(1);
@@ -106,7 +106,7 @@ pub fn math_pr(w: &mut W, m: &MathProps) {
     if m.wrap_right {
         w.empty("m:wrapRight", &[]);
     } else {
-        let indent = if m.wrap_indent.is_finite() { m.wrap_indent.clamp(0.0, 1584.0) } else { wordcraft_doc::math::DEFAULT_WRAP_INDENT };
+        let indent = if m.wrap_indent.is_finite() { m.wrap_indent.clamp(0.0, 1584.0) } else { doc4me_doc::math::DEFAULT_WRAP_INDENT };
         val(w, "m:wrapIndent", &crate::units::twips(indent));
     }
     w.close("m:mathPr");
@@ -335,7 +335,7 @@ fn node(w: &mut W, n: &MNode, depth: usize) {
             w.open("m:eqArr", &[]);
             w.open("m:eqArrPr", &[]);
             // Numbered rows (`#`) stretch across the line so the number reaches the margin.
-            if rows.iter().any(|r| wordcraft_doc::math::has_number_mark(r)) {
+            if rows.iter().any(|r| doc4me_doc::math::has_number_mark(r)) {
                 val(w, "m:maxDist", "1");
             }
             ctrl(w);

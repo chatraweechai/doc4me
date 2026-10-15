@@ -1,11 +1,11 @@
 //! Mailings tab: mail merge (recipients from CSV/JSON or an Excel/OpenDocument spreadsheet,
 //! merge fields, preview, finish), envelopes and labels.
 
+use doc4me_doc::para::InlineObject;
+use doc4me_doc::props::{Align, CharProps};
+use doc4me_doc::section::{SectionProps, SectionStart};
+use doc4me_doc::{Block, Blocks, Document, Paragraph, Part, PartKind, Pos, StoryRef, Table, para_block};
 use serde_json::{Value, json};
-use wordcraft_doc::para::InlineObject;
-use wordcraft_doc::props::{Align, CharProps};
-use wordcraft_doc::section::{SectionProps, SectionStart};
-use wordcraft_doc::{Block, Blocks, Document, Paragraph, Part, PartKind, Pos, StoryRef, Table, para_block};
 
 use super::{delete_selection, sel_result};
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
@@ -271,10 +271,9 @@ fn recipients(s: &mut Session, v: &Value) -> CmdResult {
             } else {
                 return Err(CmdError::Params("`csv`, `path`, `data` or `rows` required".into()));
             };
-            let spreadsheet =
-                ext.as_deref().is_some_and(wordcraft_formats::sheet::is_extension) || wordcraft_formats::sheet::detect(&bytes).is_some();
+            let spreadsheet = ext.as_deref().is_some_and(doc4me_formats::sheet::is_extension) || doc4me_formats::sheet::detect(&bytes).is_some();
             if spreadsheet {
-                use wordcraft_formats::sheet::{Pick, read_rows, sheet_names};
+                use doc4me_formats::sheet::{Pick, read_rows, sheet_names};
                 let pick = match v.get("sheet") {
                     Some(Value::String(n)) => Pick::Name(n.as_str()),
                     Some(x) if x.as_u64().is_some_and(|n| n >= 1) => {
@@ -333,7 +332,7 @@ fn header_split(mut all: Vec<Vec<String>>, headers: bool) -> Result<(Vec<String>
     }
     let fields = if headers {
         let first = all.remove(0);
-        wordcraft_formats::sheet::field_names(&first[..first.len().min(MAX_FIELDS)])
+        doc4me_formats::sheet::field_names(&first[..first.len().min(MAX_FIELDS)])
     } else {
         let width = all.iter().map(Vec::len).max().unwrap_or(0).min(MAX_FIELDS);
         (1..=width).map(|i| format!("Column {i}")).collect()
@@ -719,7 +718,7 @@ fn merge_blocks(s: &Session, blocks: &mut Blocks, cur: &mut usize, end: usize, d
                 }
                 for (off, val) in repl.into_iter().rev() {
                     let props = p.props_of_char(off).clone();
-                    let _ = p.delete(off, off + wordcraft_doc::para::OBJ.len_utf8());
+                    let _ = p.delete(off, off + doc4me_doc::para::OBJ.len_utf8());
                     let _ = p.insert_text(off, &val, &props);
                 }
             }
@@ -1008,14 +1007,14 @@ fn labels(s: &mut Session, v: &Value) -> CmdResult {
     let width: f32 = grid_cols.iter().map(|c| if c.is_some() { prod.width } else { h_gap }).sum();
     let mut t = Table::new(grid_rows.len(), grid_cols.len(), width);
     t.props.style = None;
-    t.props.borders = Some(wordcraft_doc::props::Borders::default());
+    t.props.borders = Some(doc4me_doc::props::Borders::default());
     t.props.fixed = true;
     t.grid = grid_cols.iter().map(|c| if c.is_some() { prod.width } else { h_gap }).collect();
     let mut k = 0usize;
     let mut made = 0usize;
     for (row, r) in t.rows.iter_mut().zip(&grid_rows) {
         row.props.height = Some(if r.is_some() { prod.height } else { v_gap });
-        row.props.height_rule = wordcraft_doc::props::HeightRule::Exact;
+        row.props.height_rule = doc4me_doc::props::HeightRule::Exact;
         for (cell, c) in row.cells.iter_mut().zip(&grid_cols) {
             cell.props.width = Some(if c.is_some() { prod.width } else { h_gap });
             let (Some(r), Some(c)) = (r, c) else { continue };
@@ -1031,7 +1030,7 @@ fn labels(s: &mut Session, v: &Value) -> CmdResult {
             if !content.is_empty() {
                 made += 1;
             }
-            cell.props.valign = wordcraft_doc::props::VAlign::Center;
+            cell.props.valign = doc4me_doc::props::VAlign::Center;
             cell.blocks = content
                 .split('\n')
                 .take(20)

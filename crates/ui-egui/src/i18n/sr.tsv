@@ -1,11 +1,11 @@
 # Serbian, Cyrillic script (sr) interface catalog. Transliterated from sr-latn.tsv (see that file
 # for the clean-room translation itself); change both files together so they don't drift apart.
 # Product names, key names, shortcuts, code, URLs, schemes and file extensions stay in Latin
-# letters here too (`wordcraft-cli mcp`, Backspace, ⌘V, .docx, http, Markdown).
+# letters here too (`doc4me-cli mcp`, Backspace, ⌘V, .docx, http, Markdown).
 #
 # Columns, separated by a TAB:
 #   context <TAB> English source <TAB> translation
-#   context    empty (WordCraft uses no contexts yet)
+#   context    empty (Doc4Me uses no contexts yet)
 #   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
 #   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
 #              trailing "…" in one needs one in the other.
@@ -13,16 +13,16 @@
 # Clean room: every entry was written from the plain meaning of the English label in ordinary
 # computing vocabulary. No Microsoft Word (or other product) localisation, string table or
 # translated UI was consulted or copied; add entries the same way.
-# Product, format and technology names (WordCraft, PDF, Markdown, MCP …) stay in Latin letters.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
 
 	(no style)	(без стила)
 	(no suggestions)	(нема предлога)
 	(picture or object)	(слика или објекат)
 	1.5 Line Spacing	Проређеност 1,5
-	A free, open-source word processor written from scratch in Rust.\nPart of the Crafting Apps from the ArtCraft team.	Бесплатан, отворени обрађивач текста написан од нуле у Rust-у.\nДео Crafting Apps пакета тима ArtCraft.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Бесплатан, отворени обрађивач текста написан од нуле у Rust-у.\nЗаснован на програму WordCraft тима ArtCraft.
 	A password is required to open this document.	За отварање овог документа потребна је лозинка.
 	About	О програму
-	About WordCraft	О WordCraft-у
+	About Doc4Me	О Doc4Me-у
 	Accept	Прихвати
 	Accept All Changes	Прихвати све измене
 	Accept This Change	Прихвати ову измену
@@ -84,7 +84,7 @@
 	Automatic Table 1 (3 levels)	Аутоматска табела 1 (3 нивоа)
 	Automatic Table 2 (2 levels)	Аутоматска табела 2 (2 нивоа)
 	AutoSave	Аутоматско чување
-	AutoSave documents you have saved in WordCraft	Аутоматски чувај документе које сте већ сачували у WordCraft-у
+	AutoSave documents you have saved in Doc4Me	Аутоматски чувај документе које сте већ сачували у Doc4Me-у
 	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Аутоматско чување неуспело: {error}. Сачувајте документ да бисте га поново укључили.
 	Balloons	Облачићи
 	Bottom Margin	Доња маргина
@@ -108,7 +108,7 @@
 	Color: {color}	Боја: {color}
 	Compress punctuation at the start of a line	Сажми интерпункцију на почетку реда
 	Confirm password:	Потврдите лозинку:
-	Couldn't make WordCraft the default: {error}	WordCraft није могао да постане подразумевана апликација: {error}
+	Couldn't make Doc4Me the default: {error}	Doc4Me није могао да постане подразумевана апликација: {error}
 	Custom dictionary	Прилагођени речник
 	Dark page (white text on black)	Тамна страница (бео текст на црном)
 	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Превуците правоугаоник да нацртате табелу или линију преко ћелија да их поделите. Esc завршава.
@@ -153,10 +153,10 @@
 	Number format	Формат броја
 	Number style for this level:	Стил броја за овај ниво:
 	Outside border	Спољна ивица
-	In Default apps, choose WordCraft for the document types you want it to open.	У подразумеваним апликацијама изаберите WordCraft за врсте докумената које желите да отвара.
-	Make WordCraft the default for Word documents…	Постави WordCraft као подразумевану апликацију за Word документе…
-	Opens .docx, .doc, .rtf and .odt files and Word templates with WordCraft from now on.	Од сада ће се .docx, .doc, .rtf и .odt датотеке и Word шаблони отварати у WordCraft-у.
-	Opens Settings › Default apps, where you choose WordCraft for .docx and the other document types.	Отвара Подешавања › Подразумеване апликације, где бирате WordCraft за .docx и друге врсте докумената.
+	In Default apps, choose Doc4Me for the document types you want it to open.	У подразумеваним апликацијама изаберите Doc4Me за врсте докумената које желите да отвара.
+	Make Doc4Me the default for Word documents…	Постави Doc4Me као подразумевану апликацију за Word документе…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Од сада ће се .docx, .doc, .rtf и .odt датотеке и Word шаблони отварати у Doc4Me-у.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Отвара Подешавања › Подразумеване апликације, где бирате Doc4Me за .docx и друге врсте докумената.
 	Overtype	Преписивање
 	Overtype (typing replaces the characters after the caret)	Преписивање (откуцано замењује знакове после курсора)
 	Page display	Приказ стране
@@ -182,7 +182,7 @@
 	Glow Colors	Боје сјаја
 	Hide from style lists	Сакриј са листа стилова
 	Indents and Spacing	Увлачења и размаци
-	Keep the password somewhere safe: without it nobody, WordCraft included, can open the document. Leave both boxes empty to remove the password.	Чувајте лозинку на сигурном месту: без ње нико, па ни WordCraft, не може да отвори документ. Оставите оба поља празна да бисте уклонили лозинку.
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Чувајте лозинку на сигурном месту: без ње нико, па ни Doc4Me, не може да отвори документ. Оставите оба поља празна да бисте уклонили лозинку.
 	Line breaking	Прелом редова
 	Linked style (paragraph and character)	Повезани стил (пасус и знакови)
 	Manage Styles	Управљање стиловима
@@ -329,7 +329,6 @@
 	Comment	Коментар
 	Comments	Коментари
 	Comments Pane	Окно коментара
-	Community\nDiscord	Заједница\nна Discord-у
 	Compact	Сажето
 	Compare	Упоређивање
 	Compress Pictures	Компресуј слике
@@ -376,21 +375,20 @@
 	Delete Style	Обриши стил
 	Delete Table	Обриши табелу
 	Design	Дизајн
-	To open Word documents with WordCraft by default: select one in Finder, choose File › Get Info, pick WordCraft under Open with, then click Change All.	Да би се Word документи подразумевано отварали у WordCraft-у: изаберите један у Finder-у, изаберите Датотека › Прикажи информације, под „Отвори помоћу” изаберите WordCraft, па кликните „Промени све”.
-	WordCraft is now the default app for Word documents.	WordCraft је сада подразумевана апликација за Word документе.
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Да би се Word документи подразумевано отварали у Doc4Me-у: изаберите један у Finder-у, изаберите Датотека › Прикажи информације, под „Отвори помоћу” изаберите Doc4Me, па кликните „Промени све”.
+	Doc4Me is now the default app for Word documents.	Doc4Me је сада подразумевана апликација за Word документе.
 	development build	развојна верзија
 	Diagonal	Дијагонално
 	Diamond	Дијамант
 	Dictate	Диктирање
 	Different First Page	Другачија прва страна
 	Different Odd & Even Pages	Другачије непарне и парне стране
-	Discord	Discord
-	Discord community	Заједница на Discord-у
 	Display	Приказ
 	Display for Review	Приказ за преглед
 	Distribute Columns	Равномерно размести колоне
 	Distribute Rows	Равномерно размести редове
 	Distributed	Распрострто
+	Thai Distributed	Распрострто (тајландски)
 	Do Not Show in TOC	Не приказуј у садржају
 	Do you want to save changes to {name}?	Желите ли да сачувате измене у {name}?
 	Don't Save	Не чувај
@@ -432,7 +430,7 @@
 	Equation	Једначина
 	Eraser	Гумица
 	Even Page	Парна страна
-	Every command is available to scripts and AI agents: run `wordcraft-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Свака наредба је доступна скриптама и AI агентима: покрените `wordcraft-cli mcp` за MCP сервер, или покрените апликацију са `--control <port>` за JSON контролни канал.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Свака наредба је доступна скриптама и AI агентима: покрените `doc4me-cli mcp` за MCP сервер, или покрените апликацију са `--control <port>` за JSON контролни канал.
 	Export	Извоз
 	Export a copy to share (PDF, Word document)	Извези копију за дељење (PDF, Word документ)
 	Export Page as PNG	Извези страну као PNG
@@ -543,8 +541,6 @@
 	Inspect Document	Прегледај документ
 	Interface language:	Језик интерфејса:
 	Italic	Курзив
-	Join the ArtCraft community on Discord	Придружите се ArtCraft заједници на Discord-у
-	Join us on Discord: discord.gg/artcraft	Придружите нам се на Discord-у: discord.gg/artcraft
 	Justify	Обострано поравнање
 	Keep Lines Together	Задржи редове заједно
 	Keep lines together	Задржи редове заједно
@@ -850,7 +846,6 @@
 	Animation	Анимација
 	Animate the caret (it glides and fades)	Анимирај курсор (клизи и постепено се гаси)
 	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Укључено: курсор клизи на ново место док куцате или користите стрелице, а његово трептање се постепено гаси. Искључено: скаче и трепће нагло.
-	Show the community button in the title bar	Прикажи дугме заједнице у траци наслова
 	Show/Hide ¶	Прикажи/сакриј ¶
 	Show\nComments	Прикажи\nкоментаре
 	Shrink Font 1 Point	Смањи фонт за 1 тачку
@@ -868,7 +863,7 @@
 	Soft Edges	Меке ивице
 	Sort	Сортирај
 	Sort order:	Редослед сортирања:
-	Source code: github.com/storytold/wordcraft	Изворни код: github.com/storytold/wordcraft
+	Source code: github.com/chatraweechai/docscaft	Изворни код: github.com/chatraweechai/docscaft
 	Space	Размак
 	Space after: {pt} pt	Размак после: {pt} пт
 	Space before/after:	Размак пре/после:
@@ -1009,7 +1004,7 @@
 	Word Left	Реч лево
 	Word Right	Реч десно
 	WordArt	WordArt
-	WordCraft	WordCraft
+	Doc4Me	Doc4Me
 	Words	Речи
 	Words only	Само речи
 	Wrap Text	Преломи текст
@@ -1261,7 +1256,6 @@
 	Reset Crop	Поништи исецање
 	Insert a new equation (Alt+=)	Уметни нову једначину (Alt+=)
 	Leave the equation (Esc)	Напусти једначину (Esc)
-	getartcraft.com/apps/wordcraft	getartcraft.com/apps/wordcraft
 	Draw Ink	Цртај мастилом
 	Erase Ink	Обриши мастило
 	Hide Ink	Сакриј мастило
@@ -1731,7 +1725,7 @@
 	Word document	Word документ
 	All files	Све датотеке
 	Recipient lists	Листе прималаца
-	The system file dialog isn't available, so WordCraft shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Системски дијалог за датотеке није доступан, па WordCraft приказује свој. Да бисте добили системски дијалог, инсталирајте портал за избор датотека (на пример xdg-desktop-portal-gtk) или zenity.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Системски дијалог за датотеке није доступан, па Doc4Me приказује свој. Да бисте добили системски дијалог, инсталирајте портал за избор датотека (на пример xdg-desktop-portal-gtk) или zenity.
 	Up one level	Један ниво горе
 	Home folder	Лична фасцикла
 	{name} wasn't found.	{name} није пронађен.
@@ -1739,8 +1733,8 @@
 	This folder can't be read: {error}	Ова фасцикла не може да се прочита: {error}
 	Showing the first {count} items.	Приказане су само прве ставке: {count}.
 	File name:	Име датотеке:
-	Browse in WordCraft…	Потражи у WordCraft-у…
-	Open a file with WordCraft's own browser when the system file dialog doesn't appear.	Отворите датотеку помоћу WordCraft-овог прегледача када се системски дијалог за датотеке не појави.
+	Browse in Doc4Me…	Потражи у Doc4Me-у…
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Отворите датотеку помоћу Doc4Me-овог прегледача када се системски дијалог за датотеке не појави.
 	Hide White Space	Сакриј празан простор
 	All pages	Све странице
 	Current page	Тренутна страница

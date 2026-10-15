@@ -1,8 +1,8 @@
 //! DrawingML colours shared by charts and SmartArt: a colour element with its modifiers, and the
 //! paint of a fill or line (solid, the first stop of a gradient, a pattern's foreground).
 
-use wordcraft_doc::THEME_COLORS;
-use wordcraft_doc::props::Rgb;
+use doc4me_doc::THEME_COLORS;
+use doc4me_doc::props::Rgb;
 
 use crate::units::int;
 use crate::xml::El;
@@ -202,7 +202,7 @@ fn from_hsl(h: f64, s: f64, l: f64) -> Rgb {
 
 #[cfg(test)]
 mod tests {
-    use wordcraft_doc::THEME_COLORS;
+    use doc4me_doc::THEME_COLORS;
 
     use super::*;
 

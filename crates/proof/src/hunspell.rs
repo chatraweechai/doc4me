@@ -1,12 +1,12 @@
 //! Hunspell dictionaries installed on the system, read at runtime.
 //!
-//! WordCraft doesn't bundle large spelling dictionaries. For languages with an affix dictionary
+//! Doc4Me doesn't bundle large spelling dictionaries. For languages with an affix dictionary
 //! (Polish), it reads the standard Hunspell `.aff`/`.dic` pair installed by the operating system,
 //! a package manager or LibreOffice, with [`crate::affix::AffixDict::from_hunspell`]. When none is
 //! installed the language has no spelling check (no marks, no errors), like Word without the
 //! language's proofing tools.
 //!
-//! Search order: the directory in `WORDCRAFT_DICTIONARIES` (or one set with
+//! Search order: the directory in `DOC4ME_DICTIONARIES` (or one set with
 //! [`set_dictionary_dir`]), then the usual system locations. On the web there are none.
 
 use std::path::{Path, PathBuf};
@@ -35,14 +35,14 @@ pub fn search_dirs() -> Vec<PathBuf> {
     if cfg!(target_arch = "wasm32") {
         return dirs;
     }
-    if let Some(d) = std::env::var_os("WORDCRAFT_DICTIONARIES").filter(|v| !v.is_empty()) {
+    if let Some(d) = std::env::var_os("DOC4ME_DICTIONARIES").filter(|v| !v.is_empty()) {
         dirs.push(PathBuf::from(d));
     }
     let home = std::env::var_os("HOME").filter(|v| !v.is_empty()).map(PathBuf::from);
     if cfg!(windows) {
         for var in ["LOCALAPPDATA", "APPDATA"] {
             if let Some(base) = std::env::var_os(var).filter(|v| !v.is_empty()).map(PathBuf::from) {
-                dirs.push(base.join("WordCraft").join("dictionaries"));
+                dirs.push(base.join("Doc4Me").join("dictionaries"));
                 dirs.push(base.join("hunspell"));
             }
         }
@@ -148,7 +148,7 @@ mod tests {
 
     #[test]
     fn finds_and_loads_a_pair_in_a_directory() {
-        let dir = std::env::temp_dir().join(format!("wordcraft-hunspell-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("doc4me-hunspell-{}", std::process::id()));
         std::fs::create_dir_all(&dir).unwrap();
         assert!(find_in(&dir, &["xx_XX"]).is_none(), "no files: nothing found");
         std::fs::write(dir.join("xx_XX.aff"), "SET UTF-8\nSFX A Y 1\nSFX A 0 y .\n").unwrap();

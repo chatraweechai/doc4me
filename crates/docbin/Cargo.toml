@@ -1,16 +1,16 @@
 [package]
-name = "wordcraft-docbin"
+name = "doc4me-docbin"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "WordCraft reader for the Word 97-2003 binary file format (.doc, [MS-DOC])"
+description = "Doc4Me reader for the Word 97-2003 binary file format (.doc, [MS-DOC])"
 
 [lints]
 workspace = true
 
 [dependencies]
-wordcraft-doc = { workspace = true }
-wordcraft-geom = { workspace = true }
+doc4me-doc = { workspace = true }
+doc4me-geom = { workspace = true }
 cfb = { workspace = true }
 image = { workspace = true }
 miniz_oxide = { workspace = true }

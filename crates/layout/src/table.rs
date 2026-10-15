@@ -2,11 +2,11 @@
 //! table-style conditional formatting. Rows are laid out as free-standing boxes; pagination
 //! moves whole rows or splits them between lines (`split_row`).
 
-use wordcraft_doc::numbering::Counters;
-use wordcraft_doc::props::{Align, Border, Borders, HeightRule, Rgb, TextDirection, VAlign, VMerge};
-use wordcraft_doc::styles::{TableStyleParts, TableStyleProps};
-use wordcraft_doc::{Block, Blocks, Paragraph, StoryRef, Table};
-use wordcraft_geom::Rect;
+use doc4me_doc::numbering::Counters;
+use doc4me_doc::props::{Align, Border, Borders, HeightRule, Rgb, TextDirection, VAlign, VMerge};
+use doc4me_doc::styles::{TableStyleParts, TableStyleProps};
+use doc4me_doc::{Block, Blocks, Paragraph, StoryRef, Table};
+use doc4me_geom::Rect;
 
 use crate::para::{CellText, ClKind, ParaLayout};
 use crate::{BoxLayout, Ctx, Placed, layout_box};
@@ -96,7 +96,7 @@ const EMPTY_TEXT: f32 = 12.0;
 
 /// What one paragraph needs: the longest run of text without a break opportunity (`min`) and
 /// its longest line when nothing wraps (`max`), indents included.
-fn measure_para(p: &wordcraft_doc::Paragraph, env: &crate::para::ParaEnv) -> (f32, f32) {
+fn measure_para(p: &doc4me_doc::Paragraph, env: &crate::para::ParaEnv) -> (f32, f32) {
     use crate::para::ClKind;
     let pl = crate::para::layout_para(p, env);
     let rp = &pl.rp;
@@ -141,11 +141,11 @@ fn measure_para(p: &wordcraft_doc::Paragraph, env: &crate::para::ParaEnv) -> (f3
 /// wrap), the widest fits every paragraph on one line. A cell spanning several columns spreads
 /// what its columns lack over them. Paragraphs are laid out with the table style's formatting;
 /// after [`MEASURE_BUDGET`] paragraphs the remaining rows are skipped.
-pub fn measure_table_columns(doc: &wordcraft_doc::Document, t: &Table) -> Vec<(f32, f32)> {
-    use wordcraft_doc::Block;
+pub fn measure_table_columns(doc: &doc4me_doc::Document, t: &Table) -> Vec<(f32, f32)> {
+    use doc4me_doc::Block;
     let style = t.props.style.as_deref().and_then(|id| doc.styles.table_style(id));
     let margins_def = default_margins(t, style.as_ref());
-    let ncols = t.cols().clamp(1, wordcraft_doc::table::MAX_COLS);
+    let ncols = t.cols().clamp(1, doc4me_doc::table::MAX_COLS);
     let fields = crate::FieldCtx::default();
     let mut cols = vec![(0.0f32, 0.0f32); ncols];
     // Cells spanning several columns: (first column, span, min, max), applied after the others.
@@ -669,7 +669,7 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
             items.push(Placed::Cell {
                 rect: Rect::new(c.x, 0.0, c.w, if c.vmerge == VMerge::Continue { rh } else { span_h }),
                 covered: c.vmerge == VMerge::Continue,
-                table: wordcraft_doc::Path(path.to_vec()),
+                table: doc4me_doc::Path(path.to_vec()),
                 row: ri,
                 cell: ci,
                 story,
@@ -961,7 +961,7 @@ fn blocks_content(ctx: &mut Ctx, blocks: &Blocks, text: Option<&CellText>, depth
 }
 
 /// The list level `p` is in, for its indents (without counting it: measuring isn't laying out).
-fn list_level(ctx: &Ctx, p: &Paragraph) -> Option<wordcraft_doc::numbering::Level> {
+fn list_level(ctx: &Ctx, p: &Paragraph) -> Option<doc4me_doc::numbering::Level> {
     let n = p.props.numbering.or_else(|| ctx.doc.styles.resolve_para(&p.props).numbering).filter(|n| n.num != 0)?;
     ctx.doc.numbering.level(n.num, n.level).cloned()
 }

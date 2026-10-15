@@ -3,9 +3,9 @@
 //! The player lives in [`crate::speech`]; these commands drive it, so the player window, the
 //! ribbon, the CLI and agents all control reading the same way.
 
+use doc4me_doc::para::OBJ;
+use doc4me_doc::{InlineObject, Pos};
 use serde_json::Value;
-use wordcraft_doc::para::OBJ;
-use wordcraft_doc::{InlineObject, Pos};
 
 use super::sel_result;
 use crate::speech::{self, State};
@@ -156,9 +156,9 @@ fn past_citation(s: &mut Session, _: &Value) -> CmdResult {
 
 #[cfg(test)]
 mod tests {
+    use doc4me_doc::props::CharProps;
+    use doc4me_doc::{Document, InlineObject, Path, Pos, StoryRef};
     use serde_json::json;
-    use wordcraft_doc::props::CharProps;
-    use wordcraft_doc::{Document, InlineObject, Path, Pos, StoryRef};
 
     use crate::Session;
     use crate::speech::State;

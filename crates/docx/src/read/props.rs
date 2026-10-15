@@ -2,12 +2,12 @@
 
 use std::collections::HashMap;
 
-use wordcraft_doc::para::cap_alt;
-use wordcraft_doc::props::{
+use doc4me_doc::para::cap_alt;
+use doc4me_doc::props::{
     Align, Border, BorderStyle, Borders, CellProps, CharProps, HeightRule, Highlight, LineSpacing, NumRef, ParaProps, Rgb, RowProps, TabAlign,
     TabLeader, TabStop, TableFloat, TableLook, TableProps, TextColor, TextDirection, Underline, VAlign, VMerge, VertAlign,
 };
-use wordcraft_doc::section::{
+use doc4me_doc::section::{
     Columns, DocGrid, DocGridType, LineNumberRestart, LineNumbering, MAX_CHAR_SPACE, MAX_GRID_PITCH, NotePos, NoteProps, NoteRestart, NumFormat,
     SectionProps, SectionStart,
 };
@@ -291,7 +291,8 @@ pub fn align(v: &str) -> Align {
         "center" => Align::Center,
         "right" | "end" => Align::Right,
         "both" | "justify" | "lowKashida" | "mediumKashida" | "highKashida" => Align::Justify,
-        "distribute" | "thaiDistribute" => Align::Distribute,
+        "distribute" => Align::Distribute,
+        "thaiDistribute" => Align::ThaiDistribute,
         _ => Align::Left,
     }
 }
@@ -570,7 +571,7 @@ pub fn sectpr(e: &El) -> (SectionProps, Vec<HfRef>) {
             "w:endnotePr" => s.endnote_pr = note_pr(k, true),
             "w:titlePg" => s.title_page = on_off(k),
             "w:bidi" => s.rtl = on_off(k),
-            "w:textDirection" => s.text_direction = wordcraft_doc::props::TextDirection::from_ooxml(k.attr("w:val").unwrap_or("")),
+            "w:textDirection" => s.text_direction = doc4me_doc::props::TextDirection::from_ooxml(k.attr("w:val").unwrap_or("")),
             "w:pgNumType" => {
                 s.page_num_start = k.attr("w:start").and_then(u32_of);
                 if let Some(f) = k.attr("w:fmt") {
@@ -627,14 +628,14 @@ pub fn note_pr(e: &El, fmt: bool) -> NoteProps {
     NoteProps {
         pos: e.child_val("w:pos").and_then(NotePos::from_ooxml),
         num_fmt: if fmt { e.child_val("w:numFmt").map(NumFormat::from_ooxml) } else { None },
-        num_start: e.child_val("w:numStart").and_then(int).map(|v| v.clamp(1, wordcraft_doc::section::MAX_NOTE_START as i64) as u32),
+        num_start: e.child_val("w:numStart").and_then(int).map(|v| v.clamp(1, doc4me_doc::section::MAX_NOTE_START as i64) as u32),
         num_restart: e.child_val("w:numRestart").and_then(NoteRestart::from_ooxml),
     }
 }
 
 /// `w:tblpPr`: a floating table's anchors, offsets or alignments and distances from text.
 fn table_float(e: &El) -> TableFloat {
-    use wordcraft_doc::para::{Anchor, FloatAlign};
+    use doc4me_doc::para::{Anchor, FloatAlign};
     let pt = |n: &str| e.attr(n).and_then(|v| measure(v, 20.0)).map(|v| v.clamp(-31_680.0, 31_680.0)).unwrap_or(0.0);
     let dist = |n: &str| pt(n).clamp(0.0, 1584.0);
     let rel = |n: &str, text: Anchor| match e.attr(n) {
