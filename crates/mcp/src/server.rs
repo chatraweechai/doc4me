@@ -133,9 +133,9 @@ impl Server {
                 Ok(json!({
                     "protocolVersion": version,
                     "capabilities": {"tools": {}, "resources": {}},
-                    "serverInfo": {"name": "doc4me", "title": "Doc4Me", "version": env!("CARGO_PKG_VERSION"), "websiteUrl": "https://github.com/chatraweechai/docscaft"},
+                    "serverInfo": {"name": "doc4me", "title": "Doc4Me", "version": env!("CARGO_PKG_VERSION"), "websiteUrl": "https://github.com/chatraweechai/doc4me"},
                     "instructions": format!(
-                        "{INSTRUCTIONS} Backend: {}. Project: https://github.com/chatraweechai/docscaft",
+                        "{INSTRUCTIONS} Backend: {}. Project: https://github.com/chatraweechai/doc4me",
                         self.backend.describe()
                     ),
                 }))

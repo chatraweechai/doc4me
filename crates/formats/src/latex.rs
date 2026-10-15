@@ -52,7 +52,7 @@ pub fn export(doc: &Document) -> String {
 
     let meta = &flow.meta;
     let mut o = String::new();
-    o.push_str("% Written by Doc4Me (https://github.com/chatraweechai/docscaft).\n");
+    o.push_str("% Written by Doc4Me (https://github.com/chatraweechai/doc4me).\n");
     o.push_str("\\documentclass{article}\n");
     o.push_str("\\usepackage[T1]{fontenc}\n");
     if w.uses.ulem {

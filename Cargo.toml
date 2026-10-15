@@ -8,7 +8,7 @@ version = "1.0.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 rust-version = "1.90"
-repository = "https://github.com/chatraweechai/docscaft"
+repository = "https://github.com/chatraweechai/doc4me"
 
 [workspace.dependencies]
 # internal

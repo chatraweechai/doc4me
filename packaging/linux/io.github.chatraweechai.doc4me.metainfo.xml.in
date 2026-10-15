@@ -18,10 +18,10 @@
   <launchable type="desktop-id">io.github.chatraweechai.doc4me.desktop</launchable>
   <icon type="stock">io.github.chatraweechai.doc4me</icon>
   <!-- Only url types known to appstream 0.15 (Ubuntu 22.04, where CI validates): no vcs-browser. -->
-  <url type="homepage">https://github.com/chatraweechai/docscaft</url>
-  <url type="bugtracker">https://github.com/chatraweechai/docscaft/issues</url>
-  <url type="help">https://github.com/chatraweechai/docscaft</url>
-  <url type="contact">https://github.com/chatraweechai/docscaft/issues</url>
+  <url type="homepage">https://github.com/chatraweechai/doc4me</url>
+  <url type="bugtracker">https://github.com/chatraweechai/doc4me/issues</url>
+  <url type="help">https://github.com/chatraweechai/doc4me</url>
+  <url type="contact">https://github.com/chatraweechai/doc4me/issues</url>
   <categories>
     <category>Office</category>
     <category>WordProcessor</category>
@@ -35,7 +35,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>The Open Studio Handbook sample with the Navigation pane</caption>
-      <image>https://raw.githubusercontent.com/chatraweechai/docscaft/main/docs/images/hero.png</image>
+      <image>https://raw.githubusercontent.com/chatraweechai/doc4me/main/docs/images/hero.png</image>
     </screenshot>
   </screenshots>
   <branding>

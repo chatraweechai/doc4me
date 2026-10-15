@@ -33,9 +33,9 @@
 
     <Icon Id="Doc4meIcon.ico" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="Doc4meIcon.ico" />
-    <Property Id="ARPURLINFOABOUT" Value="https://github.com/chatraweechai/docscaft" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://github.com/chatraweechai/docscaft" />
-    <Property Id="ARPHELPLINK" Value="https://github.com/chatraweechai/docscaft/issues" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/chatraweechai/doc4me" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://github.com/chatraweechai/doc4me" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/chatraweechai/doc4me/issues" />
 
     <!-- Installer UI (#198): WixUI_Minimal is welcome + license, progress, then a finish page so
          people can see the install worked. Its dialogs and bitmaps are WiX's own

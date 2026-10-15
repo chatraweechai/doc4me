@@ -55,7 +55,7 @@ if (-not $haveCert -and -not $haveAzure) {
 }
 
 $script:SignTool = Find-SignTool
-$common = @('sign', '/v', '/fd', 'SHA256', '/td', 'SHA256', '/d', 'Doc4Me', '/du', 'https://github.com/chatraweechai/docscaft')
+$common = @('sign', '/v', '/fd', 'SHA256', '/td', 'SHA256', '/d', 'Doc4Me', '/du', 'https://github.com/chatraweechai/doc4me')
 $tmp = Join-Path ([IO.Path]::GetTempPath()) "doc4me-sign-$PID"
 New-Item -ItemType Directory -Force -Path $tmp | Out-Null
 

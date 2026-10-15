@@ -14,7 +14,7 @@ section: graphics
 priority: optional
 maintainer: ${DOC4ME_MAINTAINER}
 vendor: Doc4Me contributors
-homepage: https://github.com/chatraweechai/docscaft
+homepage: https://github.com/chatraweechai/doc4me
 license: MIT OR Apache-2.0
 description: |-
   Open-source, native word processor that works the way Word users expect.

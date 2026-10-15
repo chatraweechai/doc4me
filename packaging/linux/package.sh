@@ -38,7 +38,7 @@ case "$ARCH" in
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
 # The project has no mail address yet: set DOC4ME_MAINTAINER to "Name <address>" for real packages.
-export DOC4ME_MAINTAINER="${DOC4ME_MAINTAINER:-Doc4Me contributors <https://github.com/chatraweechai/docscaft/issues>}"
+export DOC4ME_MAINTAINER="${DOC4ME_MAINTAINER:-Doc4Me contributors <https://github.com/chatraweechai/doc4me/issues>}"
 BASENAME="doc4me-$VERSION-linux-$ARCH"
 
 echo "==> Doc4Me $VERSION for Linux $ARCH ($FORMATS)"
@@ -127,7 +127,7 @@ if has appimage; then
   # fetch only the blocks that changed in a newer release, through the .zsync published next to
   # each AppImage on GitHub Releases. `latest` is the newest published release that is not a
   # pre-release. A fork's builds point at its own releases through GITHUB_REPOSITORY.
-  REPO="${GITHUB_REPOSITORY:-chatraweechai/docscaft}"
+  REPO="${GITHUB_REPOSITORY:-chatraweechai/doc4me}"
   UPDATE_INFO="gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|doc4me-*-linux-$ARCH.AppImage.zsync"
   # Extract-and-run: works without FUSE (containers, CI). The output embeds the static runtime,
   # so users don't need libfuse2 either. With zsyncmake on the host (CI installs the zsync

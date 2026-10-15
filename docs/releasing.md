@@ -1,6 +1,6 @@
 # Releasing Doc4Me
 
-Doc4Me is built from this repository (`chatraweechai/docscaft`) by GitHub Actions. Today the
+Doc4Me is built from this repository (`chatraweechai/doc4me`) by GitHub Actions. Today the
 release pipeline builds the **Windows x64** installer; the packaging scripts for the other
 platforms (inherited from WordCraft) are in [`packaging/`](../packaging/) and run locally.
 
