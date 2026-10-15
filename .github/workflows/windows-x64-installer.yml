@@ -71,11 +71,33 @@ jobs:
     permissions:
       contents: write
     steps:
+      # Only CHANGELOG.md is needed (for the release notes).
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          sparse-checkout: CHANGELOG.md
+          sparse-checkout-cone-mode: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: doc4me-windows-x64
           path: dist
+      # The notes are the tag's "## [X.Y.Z]" section of CHANGELOG.md; without one, GitHub's
+      # generated notes.
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --title "Doc4Me $GITHUB_REF_NAME" --generate-notes
+        run: |
+          : > "$RUNNER_TEMP/notes.md"
+          if [ -f CHANGELOG.md ]; then
+            awk -v head="## [${GITHUB_REF_NAME#v}]" '
+              /^## \[/ { if (found) exit; found = (index($0, head) == 1); next }
+              found { print }
+            ' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
+          fi
+          if grep -q '[^[:space:]]' "$RUNNER_TEMP/notes.md"; then
+            notes=(--notes-file "$RUNNER_TEMP/notes.md")
+          else
+            echo "::warning::CHANGELOG.md has no section for $GITHUB_REF_NAME; using generated notes"
+            notes=(--generate-notes)
+          fi
+          gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --title "Doc4Me $GITHUB_REF_NAME" "${notes[@]}"

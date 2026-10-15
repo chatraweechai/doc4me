@@ -64,6 +64,8 @@ Typing, Enter, Backspace, Tab, lists, AutoCorrect and AutoFormat follow Word's o
 ## Roadmap
 Progress docs follow [`craftrules/standards/progress-docs.md`](https://github.com/storytold/craftrules/blob/main/standards/progress-docs.md): `ROADMAP.md` (stage, headline numbers, progress log), `docs/target-app-parity.md` (the assessment), `docs/gaps.md` (ranked work list), `docs/roadmap.md` (milestones, Current focus), `docs/architecture.md`, and the parity checklists `docs/file-format-parity.md`, `docs/layout-parity.md`, `docs/typing-parity.md`, `docs/ui-parity.md`, `docs/hardware-parity.md`, `docs/localization-parity.md`. When work lands, update the gap, the parity doc and the progress log, and bump each touched doc's status line and revision history.
 
+Every change to code, build, packaging, assets or the version also gets a detailed entry under `## [Unreleased]` in [`CHANGELOG.md`](CHANGELOG.md), in the same commit (what changed, why, where, the effect on users and compatibility, and how it was checked). Before a `v*` tag, move those entries under `## [x.y.z] - YYYY-MM-DD`: the release job publishes that section as the release notes. See `CLAUDE.md` rule 3.
+
 ## Contributor credits (About window)
 
 - About ▸ Contributors/Models are compiled into the binary from `contributors/contributors.json`

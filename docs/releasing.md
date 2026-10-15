@@ -14,8 +14,12 @@ platforms (inherited from WordCraft) are in [`packaging/`](../packaging/) and ru
 |---|---|---|
 | Windows | x64 `doc4me-<version>-windows-x64.msi` + `doc4me-<version>-windows-x64-portable.zip` (artifact `doc4me-windows-x64`) | none yet: `packaging/windows/sign.ps1` signs when its `AZURE_*` / `WINDOWS_CERTIFICATE*` secrets exist, and warns otherwise |
 
-3. To publish a GitHub Release, push a tag: `git tag v1.0.0 && git push origin v1.0.0`. The same
-   workflow builds the tag and creates the release `Doc4Me v<version>` with the MSI and the zip.
+3. In [`CHANGELOG.md`](../CHANGELOG.md), move the entries under `## [Unreleased]` to a new
+   `## [<version>] - YYYY-MM-DD` section, add its compare link at the bottom, and push to `main`.
+4. To publish a GitHub Release, push a tag: `git tag v1.0.0 && git push origin v1.0.0`. The same
+   workflow builds the tag and creates the release `Doc4Me v<version>` with the MSI and the zip;
+   the release notes are that version's `CHANGELOG.md` section (GitHub's generated notes when the
+   section is missing, with a warning in the run).
 
 The workflow also runs on demand (Actions › Windows x64 installer › Run workflow). Its third-party
 actions are pinned to commit SHAs; the build job only reads the repository, and only the tag's
