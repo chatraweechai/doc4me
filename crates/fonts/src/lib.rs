@@ -10,6 +10,9 @@
 mod fontdb;
 pub mod math;
 mod script;
+// Generated tables: one entry per line would be thousands of lines.
+#[rustfmt::skip]
+mod thsarabun;
 mod ui_fallback;
 pub mod word;
 

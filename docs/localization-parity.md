@@ -1,6 +1,6 @@
 # Localization parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-15 · **Change:** minor (Thai documents: Sarabun default font, dictionary word breaks, Thai list numbers; previously minor: Turkish interface catalog completed, 2,325 entries, #774; previously minor: font list shows fonts by their names in the interface language, #505; previously minor: Turkish interface added; previously major: first version; catalogs measured from `crates/ui-egui/src/i18n`, Word's languages from its bundle listing) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-19 · **Change:** minor (Thai interface catalog, complete; previously minor: Thai proofing, Thai counting list numbers, TH Sarabun New/PSK drawn at their own size, Word for Windows line spacing; previously minor: Thai documents: Sarabun default font, dictionary word breaks, Thai list numbers; previously minor: Turkish interface catalog completed, 2,325 entries, #774; previously minor: font list shows fonts by their names in the interface language, #505; previously minor: Turkish interface added; previously major: first version; catalogs measured from `crates/ui-egui/src/i18n`, Word's languages from its bundle listing) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
 
 Interface languages, script support and proofing per language. How translation works (catalog
 format, adding a language, clean-room rule): `crates/ui-egui/src/i18n/mod.rs`.
@@ -73,20 +73,25 @@ the Russian catalog, built-in style names shown translated, plus the citation st
 Polish is the only one besides English with proofing tools, and a Polish interface writes new
 documents in Polish (`pl-PL`).
 
-**Thai (`th`) documents** (no Thai interface catalog yet): Sarabun (OFL, bundled) is the default
+**Thai (`th`)**: a complete interface catalog (`th.tsv`, 2,433 entries, every key of the other catalogs: ribbon, dialogs, messages, built-in style names, equation gallery), chosen by `th`, `th-TH` and `th_TH.UTF-8` system locales or in File › Options; written from a 903-term glossary and a style guide (commands are verbs, labels nouns, Royal Society loanword spelling, ฟอนต์ for Font, one space between Thai and Latin or digits, Arabic digits in fields). New documents keep US English as their editing language, since Thai text is proofed whatever its language. Not yet reviewed by a native-speaking professional translator. Thai documents: Sarabun (OFL, bundled) is the default
 document and interface font, so Thai draws the same everywhere, shaped through HarfRust with its
 mark stacking (`layout::tests_complex::thai_is_drawn_with_the_bundled_sarabun_by_default`). Thai,
 Lao and Khmer lines wrap between dictionary words (ICU4X, `doc::cluster::dictionary_breaks`), and
 double-click, Ctrl+arrows and the word count use the same word boundaries; tone marks and ์ stay
-inside their word. TH Sarabun New / TH SarabunPSK and the other Thai document fonts are drawn with
-Sarabun when not installed (the glyph size may differ from TH Sarabun New's). Thai digits, ฿ and
+inside their word. TH Sarabun New, TH SarabunPSK and TH SarabunIT๙ are drawn with Sarabun when not
+installed, scaled to their letter height and set on their own advance widths, kerning and 1.331 em
+line spacing, so lines and pages break as with the real font (`fonts::thsarabun`); the other Thai
+document fonts are drawn with Sarabun at its own size. Single line spacing follows Word for Windows
+(OS/2 win metrics plus external leading: Sarabun 1.853 em). Thai digits, ฿ and
 Thai/Khmer punctuation stay with the word before them (no line starts with ๒ or ។). A document made
 here is saved to .docx with its complex-script font, size and weight spelled out (`w:cs`, `w:szCs`,
 `w:bCs`, `w:iCs`), so Word shows its Thai text the same; a .docx from Word keeps its own. List
-labels draw Thai digits (๑ ๒ ๓) and letters (ก ข ค ง, without ฃ ฅ ฆ); Thai counting words don't yet.
+labels draw Thai digits (๑ ๒ ๓), letters (ก ข ค ง, without ฃ ฅ ฆ) and counting words (หนึ่ง สอง …
+สิบเอ็ด ยี่สิบเอ็ด … หนึ่งร้อยเอ็ด), all three offered in the Numbering menu and Define New
+Multilevel List.
 Thai Distributed alignment spreads full lines between characters. Text boxes in the interface
-leave room for tone marks raised over upper vowels (ที่, น้ำ). No Thai spelling (Thai words get no
-marks).
+leave room for tone marks raised over upper vowels (ที่, น้ำ). Thai proofing marks only what is
+certainly wrong (see the table below).
 
 ## Proofing per language
 
@@ -94,6 +99,7 @@ marks).
 |---|---|---|---|---|
 | English (`en`, any region; text with no language) | Moby word list (public domain, ~160k words) with inflection rules | edit distance | repeated word, `a`/`an`, sentence capital, space before punctuation, double space | Moby dictionary, our Liang patterns, heuristic |
 | Polish (`pl`) | The Hunspell `pl_PL` dictionary installed on the system (OS package, Homebrew, LibreOffice, or the `DOC4ME_DICTIONARIES` folder; not bundled, so no Polish spelling marks without it), read at runtime by a Hunspell-style affix engine (`crates/proof/src/affix.rs`); names capitalized, compounds part by part, `Kennedy'ego` | missing diacritics first (`zolw` → `żółw`), the dictionary's confusion table (`żeka` → `rzeka`, `chuśtawka` → `huśtawka`), missing space (`napewno` → `na pewno`), one typo, then a stem scan within two typos | Polish messages: repeated word, space before punctuation, double space, sentence capital (knows `np.`, `r.`, initials, ordinals, dialogue dashes), missing comma before `że`/`który`/`ponieważ`/`gdyż`/`aby`/`żeby`/`jeśli`/`jeżeli`/`gdyby`/`lecz` (not after `mimo`, `chyba`, `tak`, prepositions…), `we`/`ze` (`we wtorek`, `ze szkoły`), doubled punctuation | TeX Polish patterns (Kołodziejska, Jackowski, Ryćko; MIT option) with their 20 exception words; a Polish syllable heuristic for letters outside the alphabet |
+| Thai (any Thai text, whatever the run's language) | Precision first: characters typed in an order no Thai word has (เเ for แ, ํา for ำ, a tone mark or ์ before the vowel, a tone mark after ำ, a doubled mark, two tone marks) and common misspellings marked only when ICU4X's dictionary sees them as a whole word (`assets/spelling/th-misspellings.tsv`: อนุญาติ, กระเพรา, อีเมล์…); unknown words are never marked | the word typed in order; the Royal Society spelling | — | — (Thai isn't hyphenated; lines wrap between words) |
 | Any other | — (no marks) | — | — | the English patterns, as before |
 
 Measured with the SJP.PL dictionary: every one of the ~4.5 million forms an independent expansion of its affix file
@@ -120,6 +126,8 @@ allows); all other text is written from the meaning of the English. No Italian p
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-19 | minor | Thai interface catalog (2,433 entries, complete); Thai misspelling list grown to 105 pairs; review fixes (Thai/Latin words split for spelling, user dictionary clears typing-order marks) |
+| 2026-10-16 | minor | Thai proofing (typing-order mistakes and common misspellings, Royal Society spellings suggested), Thai counting list numbers and Thai list kinds in the Numbering menu, TH Sarabun New/PSK/IT๙ drawn with Sarabun at their own size, widths and line spacing, Word for Windows single line spacing |
 | 2026-10-15 | minor | Thai: digits and punctuation stay with their word, Thai letters skip ฆ (ก ข ค ง), complex-script values spelled out only when saving a document made here, interface text boxes keep raised tone marks |
 | 2026-10-14 | minor | Thai documents: bundled Sarabun as the default font, dictionary word breaks for Thai, Lao and Khmer (lines, selection, word count), Thai list numbers, complex-script defaults for Word |
 | 2026-10-11 | minor | Turkish interface catalog completed (2,325 entries, the same keys as Russian): equation gallery, built-in style names, watermarks, paper sizes and preview tiles; the interface audit checks Turkish too (#774) |

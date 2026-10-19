@@ -13,6 +13,10 @@ pub enum ProofLang {
     /// Polish (`pl`, `pl-PL`): the installed Hunspell dictionary (when there is one), the Polish grammar rules and the Polish
     /// hyphenation patterns.
     Pl,
+    /// Thai (`th`, `th-TH`): common misspellings with the Royal Society's spelling and characters
+    /// typed in an order no Thai word has ([`crate::th`]). Thai text is checked that way whatever
+    /// its run's language; this tag also checks Latin words in Thai runs as English.
+    Th,
     /// A language without proofing tools here (`fr-FR`, `ja-JP`, `x-none`…). Like Word without
     /// the language's proofing tools: no spelling or grammar marks, so its words are never
     /// flagged as English misspellings. Hyphenation keeps using the English patterns, as before
@@ -22,7 +26,7 @@ pub enum ProofLang {
 
 impl ProofLang {
     /// Every language with a spelling dictionary, in display order.
-    pub const PROOFED: [ProofLang; 2] = [ProofLang::En, ProofLang::Pl];
+    pub const PROOFED: [ProofLang; 3] = [ProofLang::En, ProofLang::Pl, ProofLang::Th];
 
     /// The proofing language of a BCP 47 tag (`pl-PL`, `en_GB`, `PL`…). Only the primary subtag
     /// counts. No tag (or an empty one) is English, Doc4Me's default editing language.
@@ -33,6 +37,8 @@ impl ProofLang {
             ProofLang::En
         } else if primary.eq_ignore_ascii_case("pl") || primary.eq_ignore_ascii_case("pol") {
             ProofLang::Pl
+        } else if primary.eq_ignore_ascii_case("th") || primary.eq_ignore_ascii_case("tha") {
+            ProofLang::Th
         } else {
             ProofLang::Other
         }
@@ -43,6 +49,7 @@ impl ProofLang {
         match self {
             ProofLang::En => "en",
             ProofLang::Pl => "pl",
+            ProofLang::Th => "th",
             ProofLang::Other => "",
         }
     }
@@ -119,7 +126,10 @@ mod tests {
         for t in ["en", "en-US", "en-GB", "EN_au", "en-Latn-US"] {
             assert_eq!(ProofLang::from_tag(Some(t)), ProofLang::En, "{t}");
         }
-        for t in ["fr-FR", "de", "x-none", "ja-JP", "plx", "e", "-"] {
+        for t in ["th", "th-TH", "TH_th", "tha"] {
+            assert_eq!(ProofLang::from_tag(Some(t)), ProofLang::Th, "{t}");
+        }
+        for t in ["fr-FR", "de", "x-none", "ja-JP", "plx", "e", "-", "thx"] {
             assert_eq!(ProofLang::from_tag(Some(t)), ProofLang::Other, "{t}");
         }
         assert_eq!(ProofLang::from_tag(None), ProofLang::En);

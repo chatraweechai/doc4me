@@ -28,6 +28,19 @@ pub struct StyleRun {
     pub descent: f32,
     /// Baseline shift (superscript etc.), points, positive up.
     pub shift: f32,
+    /// The face's glyphs are drawn this much smaller or larger than `size` (1 but for a
+    /// substitute standing in for another font, [`StyleRun::fit`]).
+    pub glyph_scale: f32,
+    /// The requested font is drawn with a substitute that takes its widths, kerning and line
+    /// spacing (TH Sarabun New with Sarabun; [`doc4me_fonts::word::metric_fit`]).
+    pub fit: Option<doc4me_fonts::word::MetricFit>,
+}
+
+impl StyleRun {
+    /// The size the face's glyphs are drawn at.
+    pub fn glyph_size(&self) -> f32 {
+        self.size * self.glyph_scale
+    }
 }
 
 /// A positioned glyph inside its cluster.
@@ -575,6 +588,23 @@ pub fn visual_order(levels: &[u8]) -> Vec<usize> {
     order
 }
 
+/// The OpenType features a run is shaped with besides the shaper's defaults: no pair kerning
+/// unless the run asks for it (`w:kern`), no standard or contextual ligatures unless it asks for
+/// them (`w14:ligatures`), the way Word sets text, since both change widths and so where lines
+/// break. A substitute standing in for another font (`fit`) is never kerned or ligated by its own
+/// tables; that font's widths and kerning apply instead.
+fn run_features(rc: &ResolvedChar, fit: bool, complex: bool) -> Vec<doc4me_fonts::Feature> {
+    let (liga, clig, hlig, dlig) = if fit { (false, false, false, false) } else { rc.ligature_features() };
+    let kern = !fit && rc.kerned();
+    // Complex scripts keep the font's own ligatures: Arabic fonts put required forms such as
+    // lam + alef with hamza (لأ) in `liga`, and Word always forms them.
+    let ligatures = if complex && !fit { &[][..] } else { &[("liga", liga), ("clig", clig), ("hlig", hlig), ("dlig", dlig)][..] };
+    std::iter::once(("kern", kern))
+        .chain(ligatures.iter().copied())
+        .filter_map(|(tag, on)| doc4me_fonts::feature(&if on { format!("+{tag}") } else { format!("-{tag}") }))
+        .collect()
+}
+
 /// Text Word sets in the East Asian font: CJK ideographs, kana, bopomofo, CJK punctuation and
 /// fullwidth forms, and Hangul.
 fn east_asian(c: char) -> bool {
@@ -593,8 +623,16 @@ impl<'a> Builder<'a> {
 
     /// Style index for a resolved char in `face` (caps-scaled `size` override for small caps).
     fn style(&mut self, rc: &Arc<ResolvedChar>, face_override: Option<FaceRef>, small: bool) -> u16 {
+        self.style_for(rc, face_override, small, false)
+    }
+
+    /// [`Self::style`] for Thai (or other complex-script) text when `thai`: a substitute with a
+    /// [`MetricFit`](doc4me_fonts::word::MetricFit) scales Thai and Latin letters apart.
+    fn style_for(&mut self, rc: &Arc<ResolvedChar>, face_override: Option<FaceRef>, small: bool, thai: bool) -> u16 {
         let r = doc4me_fonts::word::resolve(&rc.font, rc.bold, rc.italic);
         let face = face_override.unwrap_or(r.face);
+        let fit = if face_override.is_none() { doc4me_fonts::word::metric_fit(&rc.font, rc.bold, rc.italic) } else { None };
+        let glyph_scale = fit.map_or(1.0, |f| f.scale(thai));
         // The display list reads every run's format (link target, strike kind, underline colour,
         // baseline shift…) from its StyleRun, so runs share one only when their formats are equal.
         // Keyed by a hash of the commonly varying fields (no allocation: this runs for every shaped
@@ -613,14 +651,19 @@ impl<'a> Builder<'a> {
             if s == small
                 && let Some(st) = self.styles.get(i as usize)
                 && st.face.id() == face.id()
+                && st.glyph_scale == glyph_scale
                 && (Arc::ptr_eq(&st.rc, rc) || *st.rc == **rc)
             {
                 return i;
             }
         }
         let size = rc.draw_size() * if small { 0.8 } else { 1.0 };
-        let (a, d) = doc4me_fonts::word::line_metrics(&face);
-        let k = size as f64 / face.upem.max(1.0);
+        // A substitute standing in for another font takes that font's line spacing.
+        let ((a, d), k) = match fit {
+            Some(f) => (f.line(), size as f64),
+            None if face_override.is_none() => (doc4me_fonts::word::single_line(&rc.font, &face, r.substituted, size as f64), 1.0),
+            None => (doc4me_fonts::word::line_metrics(&face), size as f64 / face.upem.max(1.0)),
+        };
         // A fallback face (letters the requested font lacks) is emboldened or slanted when it has
         // no bold or italic of its own.
         let (synth_bold, synth_italic) = match face_override {
@@ -636,6 +679,8 @@ impl<'a> Builder<'a> {
             ascent: (a * k) as f32,
             descent: (d * k) as f32,
             shift: rc.baseline_shift(),
+            glyph_scale,
+            fit,
         };
         let i = self.styles.len().min(u16::MAX as usize) as u16;
         self.styles.push(st);
@@ -738,7 +783,7 @@ impl<'a> Builder<'a> {
             };
             let rc = &rc;
             let small = key.small;
-            let si = self.style(rc, key.face, small);
+            let si = self.style_for(rc, key.face, small, key.complex);
             let Some(st) = self.styles.get(si as usize).cloned() else { continue };
             let upper = rc.caps || small;
             // Displayed text: numeral substitution is 1 char → 1 char, so codepoints stay
@@ -758,13 +803,18 @@ impl<'a> Builder<'a> {
                 orig_of.push(sub.len());
             }
             let shape_text = if substituted { mapped.as_str() } else { sub };
-            let map = |c: char| if upper { c.to_uppercase().next().unwrap_or(c) } else { c };
-            let shaped = if use_levels {
-                doc4me_fonts::shape_run(&st.face, shape_text, &[], map, key.rtl)
-            } else {
-                doc4me_fonts::shape(&st.face, shape_text, &[], map)
+            let fit = st.fit;
+            let map = |c: char| {
+                let c = if upper { c.to_uppercase().next().unwrap_or(c) } else { c };
+                fit.map_or(c, |f| f.shown(c))
             };
-            let k = st.size / st.face.upem.max(1.0) as f32;
+            let features = run_features(rc, fit.is_some(), key.complex);
+            let shaped = if use_levels {
+                doc4me_fonts::shape_run(&st.face, shape_text, &features, map, key.rtl)
+            } else {
+                doc4me_fonts::shape(&st.face, shape_text, &features, map)
+            };
+            let k = st.glyph_size() / st.face.upem.max(1.0) as f32;
             let hscale = rc.scale / 100.0;
             // Group glyphs by cluster byte offset; graphemes may span several shaper clusters.
             // Complex-script syllables the graphemes split (Myanmar vowel signs, stacked
@@ -785,6 +835,26 @@ impl<'a> Builder<'a> {
                 }
                 let g1 = self.glyphs.len() as u32;
                 let s = shape_text.get(gs..ge).unwrap_or("");
+                // A substitute for another font sets each cluster on that font's width (its
+                // glyphs centred in it) and kerns with that font's pairs.
+                if let Some(f) = fit {
+                    let widths: Option<f32> = s.chars().map(|c| f.advance(map(c))).sum();
+                    if let Some(w) = widths {
+                        let w = w * st.size * hscale;
+                        let shift = (w - adv) / 2.0;
+                        for g in self.glyphs.get_mut(g0 as usize..g1 as usize).into_iter().flatten() {
+                            g.dx += shift;
+                        }
+                        adv = w;
+                    }
+                    if rc.kerned() {
+                        let left = s.chars().rev().find(|c| !is_mark(*c)).map(map);
+                        let right = shape_text.get(ge..).and_then(|t| t.chars().next()).map(map);
+                        if let (Some(l), Some(r)) = (left, right) {
+                            adv += f.kern(l, r) * st.size * hscale;
+                        }
+                    }
+                }
                 let ch = s.chars().next().unwrap_or(' ');
                 let kind = kind_override.unwrap_or(if ch == ' ' || ch == '\u{3000}' {
                     ClKind::Space
@@ -2211,8 +2281,13 @@ fn hyphen_glyph(pl: &ParaLayout, style: u16, cache: &mut Vec<(u16, u32, f32)>) -
         .get(style as usize)
         .and_then(|st| {
             let g = doc4me_fonts::shape(&st.face, "-", &[], |c| c).into_iter().next()?;
-            let k = st.size / st.face.upem.max(1.0) as f32 * st.rc.scale / 100.0;
-            Some((style, g.gid, g.x_advance as f32 * k))
+            let hscale = st.rc.scale / 100.0;
+            // A substitute standing in for another font takes that font's hyphen width.
+            let adv = match st.fit.and_then(|f| f.advance('-')) {
+                Some(w) => w * st.size * hscale,
+                None => g.x_advance as f32 * st.glyph_size() / st.face.upem.max(1.0) as f32 * hscale,
+            };
+            Some((style, g.gid, adv))
         })
         .unwrap_or((style, 0, 0.0));
     cache.push(h);

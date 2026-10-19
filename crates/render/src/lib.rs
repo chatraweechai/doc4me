@@ -908,7 +908,8 @@ mod tests {
     fn turned_cell_text_is_painted_turned() {
         use doc4me_doc::props::TextDirection;
         let ink = |dir: TextDirection| {
-            let mut d = Document::from_text("before\nafter");
+            // Empty paragraphs keep "after" below the window checked for ink.
+            let mut d = Document::from_text("before\n\n\n\nafter");
             let mut t = doc4me_doc::Table::new(1, 2, 400.0);
             t.rows[0].cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("WWWWWWWWWWWW", Default::default()))];
             t.rows[0].cells[0].props.text_direction = dir;

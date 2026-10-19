@@ -13,7 +13,7 @@ use crate::dialogs::buttons;
 use crate::theme::{Tokens, semibold};
 
 /// Number styles a level can have: OOXML name and a sample.
-const STYLES: [(&str, &str); 10] = [
+const STYLES: [(&str, &str); 13] = [
     ("decimal", "1, 2, 3, …"),
     ("lowerLetter", "a, b, c, …"),
     ("upperLetter", "A, B, C, …"),
@@ -22,6 +22,9 @@ const STYLES: [(&str, &str); 10] = [
     ("decimalZero", "01, 02, 03, …"),
     ("ordinal", "1st, 2nd, 3rd, …"),
     ("cardinalText", "One, Two, Three, …"),
+    ("thaiNumbers", "๑, ๒, ๓, …"),
+    ("thaiLetters", "ก, ข, ค, …"),
+    ("thaiCounting", "หนึ่ง, สอง, สาม, …"),
     ("bullet", "•"),
     ("none", ""),
 ];

@@ -1,0 +1,1004 @@
+# Thai interface
+
+> **Last reviewed:** 2026-10-19 · **Last updated:** 2026-10-19 · **Change:** major (first version: Thai interface catalog, style guide and glossary) · **Target:** Doc4Me 1.0.0
+
+Choose **File › Options › Interface language › ไทย**, or follow a Thai system display language
+(`th`, `th-TH`, `th_TH.UTF-8`). The catalog code is `th`; `ui.language` with `{"value":"th"}`
+selects it explicitly, and `DOC4ME_LANGUAGE=th-TH` does the same for a headless screenshot or a
+launch while the preference is `auto`. Document text, command ids, CLI/MCP/control responses and
+file paths do not change, and new documents keep US English as their editing language (Thai text
+is proofed whatever its language).
+
+`crates/ui-egui/src/i18n/th.tsv` has every key of the other catalogs (2,433 entries). The tests in
+`crates/ui-egui/src/i18n/tests.rs` (`thai_*`) check the locales, the coverage, the font coverage
+(bundled Sarabun) and that every entry is typed cleanly: no Thai digits, no `...`, no letters of
+other scripts, and no mark from Doc4Me's own Thai proofing.
+
+Clean room: every entry was written from the plain meaning of the English label in ordinary Thai
+computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+translated UI was consulted or copied. Add entries the same way, following the style guide and
+the glossary below. Not yet reviewed by a native-speaking professional translator.
+
+Known shared keys (one English key shown in two places that need different Thai; to be split in
+the code): Editor (spelling tool and bibliography field), Letter (template and paper size),
+Display (Options page and equation display mode), Open (file and a spacing preset), Arabic
+(language and numeral style). Watermark presets (CONFIDENTIAL, DRAFT, DO NOT COPY, SAMPLE,
+URGENT) stay in English because the menu inserts the English label text.
+
+## Style guide
+
+1. REGISTER: semi-formal, neutral, impersonal Thai for office workers, students and government staff. No slang, no politeness particles (ครับ/ค่ะ/นะ), and no กรุณา in labels or buttons. Use คุณ only when a sentence really needs a subject. In messages, use โปรด only when the user must act before going on; never กรุณา…ด้วย. Avoid filler such as ทำการ / ได้ทำการ.
+
+2. COMMANDS ARE VERBS, LABELS ARE NOUNS. Buttons, menu items and command-search labels start with a bare imperative verb, with no subject and no การ: แทรกตาราง, บันทึกเป็น…, ลบข้อคิดเห็น. The verb comes first even where English puts it later. Tabs, groups, panes, dialog titles, field labels and Options pages are nouns: actions with การ (การแก้ไข, การจัดรูปแบบ), qualities with ความ (ความกว้าง, ความโปร่งใส). On/off toggles whose English is a noun name the attribute (ตัวหนา, ไม้บรรทัด, ติดตามการเปลี่ยนแปลง). Checkbox labels describe the behaviour (ใส่ยัติภังค์ในเอกสารโดยอัตโนมัติ).
+
+3. VERB PAIRS kept apart: Delete ลบ (destroys) / Remove เอาออก (takes off, keeps content) / Clear ล้าง; Reset คืนค่า; Undo เลิกทำ / Redo ทำซ้ำ / Repeat ทำอีกครั้ง; Edit แก้ไข / Modify ปรับเปลี่ยน / Change เปลี่ยน; Update อัปเดต / Refresh รีเฟรช; Set ตั้ง / Define กำหนด; Custom กำหนดเอง / Customize ปรับแต่ง; Insert แทรก / Add เพิ่ม; Apply button นำไปใช้ but Apply X → ใช้X; Ignore (proofing button) ข้าม / Ignore X (find option) ไม่สนใจ X; Move ย้าย; Link noun ลิงก์ / link verb เชื่อมโยง; Split window แบ่ง / Split cells or table แยก.
+
+4. ONE TERM, ONE THAI: always use the glossary rendering. Split only where the glossary splits by meaning: Line เส้น (shape, drawn line) / บรรทัด (text line); Outline เค้าร่าง (view) / เส้นกรอบ (shape or text stroke); Label ป้ายกำกับ (caption, chart, field) / ฉลาก (mailing stickers); Style สไตล์ / รูปแบบการอ้างอิง (APA…); Quick ด่วน (Quick Access) / สำเร็จรูป (Quick Parts, Tables); Limit ลิมิต / 'with Limits' แบบมีขอบเขต; Type ประเภท (kind) / พิมพ์ (keyboard); Accent สีเน้น (theme colour) / เครื่องหมายกำกับ (math); Page หน้า / หน้ากระดาษ (physical sheet); Number เลข (assigned) / ตัวเลข (digits) / จำนวน (count) / หมายเลข (bare button). Two English terms may share one Thai word when they mean the same thing (Item, Entry, List → รายการ).
+
+5. SHARED CATALOG KEYS: th.tsv has only one context ('preview'), so an English key gets one Thai string wherever the code shows it. Before choosing wording, grep the code for every use and pick Thai that reads right in all of them (Center กึ่งกลาง, Tight ชิด, Single เดี่ยว, Double คู่, New ใหม่, Preview ตัวอย่าง, Brackets วงเล็บ, Studio สตูดิโอ, Total รวม). Real conflicts are engineering follow-ups, not translation choices: Open (file.open and a paragraph-spacing preset), Display (Options page and equation display mode), Arabic (language and numeral style), Editor (spelling tool and bibliography field → บรรณาธิการ), Brackets (gallery section and the [ ] template), Letter (template and paper size, which must stay Latin), watermark presets (labels must match the English text that is inserted), Space (option and key name, if key names ever go through the catalog), and the caption label (Thai documents use ภาพที่ 1 / ตารางที่ 1).
+
+6. NO SPACES BETWEEN THAI WORDS inside a label or phrase. A space in Thai text separates phrases or sentences, never words.
+
+7. SPACING THAI ↔ LATIN / DIGITS / PLACEHOLDERS (RI spacing guidance): one ASCII space on each side where Thai meets Latin letters, digits or a {placeholder}: เกี่ยวกับ Doc4Me, ส่งออกเป็น PDF, หัวเรื่อง 1, ระยะห่างบรรทัด 1.5 เท่า, {words} คำ, หน้า {page} จาก {pages}, 12 pt. It reads better across scripts of different height and gives Thai line breaking a safe break point whatever a placeholder expands to. No space: between a number and %, °, × or the inch mark (50%, 90°, 3×3, 1"); before : ; ? ) and after (; inside key combinations (Ctrl+Shift+J); in default file names (เอกสาร1); inside {braces}.
+
+8. SENTENCES AND PUNCTUATION: Thai has no full stop, so drop the trailing '.' of English sentences (Entry marked. → ทำเครื่องหมายรายการแล้ว) and separate sentences with one space. The catalog is trimmed, so never leave a trailing space. Keep dots that are not sentence ends: Thai abbreviations (จ., พ.ศ.), decimals (1.5), file extensions (.docx), code, paths. Questions keep '?' with no space before it. Do not add '!'. Colons: none before, one space after when text follows (ฟอนต์: {font}); a field label that ends with ':' in English keeps it.
+
+9. TRAILING ELLIPSIS: keep '…' exactly where the English has it (the validator rejects a mismatch in the trailing …), attached to the last Thai word with no space (เรียกดู…, บันทึกเป็น…, กำลังรอ Zotero…). Always the single character U+2026, never '...' (a test forbids it). Do not add one the English lacks, and do not replace it with ฯลฯ. Ellipses inside the text stay (If…Then…Else → ถ้า…แล้ว…มิฉะนั้น).
+
+10. \n IN RIBBON LABELS: keep one \n when the Thai has two or more words, at a word boundary that balances the lines. A conjunction such as และ starts the second line (การสะกดคำ\nและไวยากรณ์; ลิมิต\nและลอการิทึม; ติดตาม\nการเปลี่ยนแปลง). Never break inside a word, between a consonant and its vowel or tone marks, or between a number and its classifier. If the Thai is one short, indivisible word, drop the \n and show one line (the validator does not count \n; ja already does this). Multi-line messages keep their \n and paragraphing. In .tsv write \n, \t, \\ as escapes.
+
+11. PLACEHOLDERS {name}: copy them exactly, braces included; never translate, respell, re-case or add spaces inside them, and never add one the source lacks (the validator requires the same set). Reorder freely for Thai word order: {name} wasn't found. → ไม่พบ {name}; {cols}×{rows} Table → ตาราง {cols}×{rows}.
+
+12. COUNTS: Thai nouns have no plural, so one string serves 1 and many. Never add หลาย, ต่าง ๆ or ทั้งหลาย to mimic an English plural, and never write (s). Use number + classifier ({words} คำ, {n} บรรทัด, {count} รายการ, จะพิมพ์ {count} จาก {total} หน้า). When the noun is not its own classifier and precedes the number in running text, add the classifier: อักขระ {n} ตัว, ผู้ร่วมพัฒนา {contributors} คน, คอมมิต {commits} ครั้ง. In 'label: value' form no classifier is needed (ผู้รับ: {count}). Keep one pattern per screen.
+
+13. NUMERALS: Arabic digits 0–9 only, never Thai digits ๐–๙, and never change digits in the source. Inputs and the measurement parser read ASCII digits; showing Thai digits is a separate setting (view.numeral). Keep the English decimal point and thousands separator.
+
+14. UNITS: unit symbols stay Latin next to values, with a space (12 pt, 2.5 cm, 10 mm, 1 in), but 1", 90° and 50% take no space. The parser (crates/geom) only reads cm, mm, in/", pt, so a Thai abbreviation (ซม., มม.) shown in a field could not be typed back. Unit names standing alone in a list are Thai: นิ้ว, เซนติเมตร, มิลลิเมตร, พอยต์, ไพกา. em and en stay Latin (ช่องว่างขนาด em).
+
+15. PRODUCT, FORMAT, TECHNOLOGY AND STANDARD NAMES stay in Latin script exactly as written, never transliterated: Doc4Me, Word, Office, PDF, DOCX/.docx, ODT, RTF, HTML, TXT, PNG, Markdown, OpenDocument, Unicode, LaTeX, MCP, JSON, CLI, Rust, Git, GitHub, PR, URL, DOI, Zotero, SmartArt, WordArt, APA, MLA, IEEE, Chicago, Harvard, Turabian, ISO 690, GB/T 7714, GOST, SIST02, macOS, Windows, Linux, Finder, xdg-desktop-portal, zenity. Put a Thai generic noun in front where English implies one (เอกสาร PDF, ไฟล์ Markdown, เอกสาร Word (*.docx)). Translate descriptions in parentheses: GOST (name sort) → GOST (เรียงตามชื่อ); ISO 690 (author-date) → ISO 690 (ผู้แต่ง-ปี).
+
+16. MENU PATHS: our own menus named in a sentence use the translated labels, segment by segment, with ›, in “ ”: View › Switch Modes → “มุมมอง › สลับโหมด”; กด “บันทึก”. Operating-system menu names (Finder ‘File › Get Info’, Windows ‘Default apps’) stay in English inside “ ” with their › separators, because the OS's own Thai strings may not be consulted under the clean-room rule. Flag those strings for a later check on a real OS.
+
+17. KEYBOARD KEYS stay in Latin everywhere: Ctrl, Alt, Shift, Tab, Enter, Esc, Backspace, Delete, Insert, Home, End, Page Up, Page Down, Space, F1–F12, ⌘, ⌥, ⇧. Combinations use + with no spaces (Ctrl+S, Shift+Tab, (⌘⌥G)). Commands named after a key keep the key name (Backspace, Page Up, Page Down). In a sentence: กด Esc เพื่อยกเลิก; ใช้แป้น Insert เพื่อสลับการพิมพ์ทับ. Keyboard แป้นพิมพ์, key แป้น, shortcut แป้นพิมพ์ลัด / แป้นลัด.
+
+18. QUOTES: in Thai sentences use curly quotes “ ” (‘ ’ when nested) around quoted UI names or words, with a space outside next to Thai and none inside. Backticked commands, flags, paths and code stay untranslated and unchanged (`doc4me-cli mcp`, `--control <port>`). A straight " survives only as the inch mark.
+
+19. PARENTHESES AND SYMBOLS: keep them; a space before '(' and after ')' when next to text, none inside: อัตโนมัติ ({language}), ข้อผิดพลาด ({n}), ข้อยกเว้น (ไม่บังคับ). Keep ¶, ·, ›, >>, <<, →, ✓, ➕, 📂 and the spacing around them as in the source.
+
+20. REPETITION MARK ๆ: one space before and after it (สั้น ๆ, อื่น ๆ), per RI spacing rules. In short labels that may wrap, rephrase to avoid it (Any Character → อักขระใดก็ได้, not อักขระใด ๆ). Avoid ฯลฯ in UI labels.
+
+21. THAI WORD OR LOANWORD: use a clear, established Thai word when one exists: แม่แบบ (not เทมเพลต), เขตข้อมูล (not ฟิลด์), ระเบียน, แถบคำสั่ง (not ริบบิ้น), คืนค่า (not รีเซ็ต), เน้นสี (not ไฮไลต์), ที่คั่นหน้า (not บุ๊กมาร์ก), สัญลักษณ์หัวข้อย่อย (not บูลเล็ต), เครื่องหมายการแก้ไข (not มาร์กอัป), ภาพเคลื่อนไหว (not แอนิเมชัน), ข้อความแสดงแทน, กล่องโต้ตอบ, ส่วนติดต่อผู้ใช้, อรรถาภิธาน, ปริพันธ์, กรณฑ์, วัตถุ, อักขระ, แป้นพิมพ์. Otherwise use the loanword Thai users actually say, in RI-correct spelling: ไฟล์, ฟอนต์, ลิงก์, โฟลเดอร์, ไอคอน, เมนู, คลิก, กราฟิก, เว็บไซต์, อีเมล, แอป, เวอร์ชัน, ฟังก์ชัน, แท็บ, คลิปบอร์ด, ธีม, สไตล์, เอฟเฟกต์, แมโคร, คอลัมน์, เซลล์, สเปรดชีต, เมทริกซ์, ซูม, แชร์, อัปเดต, รีเฟรช, โฟกัส, บอลลูน, เคอร์เซอร์, เอเจนต์, คอมมิต. Never invent a transliteration.
+
+22. SPELLING: every loanword follows the พจนานุกรมฉบับราชบัณฑิตยสถาน พ.ศ. 2554 and the RI English transliteration rules: no tone marks on transliterations unless the dictionary has them. Never use these common misspellings: ฟังก์ชั่น→ฟังก์ชัน, เวอร์ชั่น→เวอร์ชัน, อีเมล์→อีเมล, ลิ้งค์/ลิงค์→ลิงก์, อัพเดท→อัปเดต, กราฟฟิก→กราฟิก, เว็บไซท์→เว็บไซต์, แกลเลอรี่→แกลเลอรี, เทมเพลท→(use แม่แบบ), ล็อค→ล็อก, เอฟเฟ็กต์/เอฟเฟค→เอฟเฟกต์, จตุรัส→จัตุรัส. Write ปกติ, never ปรกติ (both are RI-correct; use one form everywhere).
+
+23. FONT DECISION: always ฟอนต์, never แบบอักษร: สีฟอนต์, ขนาดฟอนต์, ฟอนต์ธีม, ฟอนต์ข้อความละติน, ฟอนต์ย่อหน้าเริ่มต้น. It is the RI-correct loanword and what users say (TH Sarabun is a ฟอนต์), and it is short enough for ribbon space. ตัวอักษร is reserved for 'letter'.
+
+24. THAI TRAPS: hyphenation = การใส่ยัติภังค์, never การตัดคำ (Thai word segmentation, a different feature). Wrap text = การล้อมข้อความ, never ตัดคำ/ตัดข้อความ. Line breaking = การตัดบรรทัด. The Home tab is หน้าหลัก because หน้าแรก means 'first page'. Print = พิมพ์ and type = พิมพ์: give context (พิมพ์ข้อความ, พิมพ์ด้วยเสียง), and the noun Printing is การสั่งพิมพ์ while Typing is การพิมพ์. Thai has no letter case: case labels (Change Case, UPPERCASE, Small caps, Match case) describe the effect on Latin letters (ตัวพิมพ์ใหญ่ทั้งหมด, ตรงตามตัวพิมพ์เล็ก-ใหญ่) and must not imply they work on Thai. 'Asian' in this UI means East Asian (CJK) → เอเชียตะวันออก; Thai is not in that slot.
+
+25. SAMPLE AND PREVIEW TEXT: style-gallery tile AaBbCcDd → 'AaBb กขคง' (the code asks for sample letters in the interface's script; it fits the tile). Font-dialog AaBbYyZz → 'AaBbYyZz กขคง ปู่ชี้' (a below vowel and a stacked vowel plus tone mark show Thai vertical metrics; the caps option uppercases only the Latin part). The 'preview' context entry for Title → ชื่อเรื่อง. Preview paragraph → 'ข้อความเนื้อหาในย่อหน้าสั้น ๆ เพื่อแสดงระยะห่าง'. Strings that show the real output of an English formatter (One, Two, Three; 1st, 2nd; i, ii, iii) are not translated. Sample text is our own ordinary Thai, never a quote from another product.
+
+26. STATUS AND ERROR MESSAGES: completed results and states take แล้ว (บันทึกแล้ว, ส่งออกแล้ว: {path}, หยุดชั่วคราวแล้ว). Progress messages start with กำลัง (กำลังรอ Zotero…). Failures use the short …ไม่ได้ / …ไม่สำเร็จ (เปิดไฟล์ไม่ได้, พิมพ์ไม่สำเร็จ: {error}), not ล้มเหลว. Avoid the passive ถูก unless the sense is adverse (ลบแล้ว, not ถูกลบแล้ว).
+
+27. DIALOG BUTTONS: OK ตกลง, Cancel ยกเลิก, Yes ใช่, No ไม่ใช่, Apply นำไปใช้, Close ปิด, Don't Save ไม่บันทึก. A confirmation question ends with หรือไม่? (no space before ?).
+
+28. LANGUAGE AND COUNTRY NAMES: in language lists drop the prefix ภาษา and put the region in parentheses (ไทย, อังกฤษ (สหรัฐอเมริกา), จีน (ตัวย่อ)); in running text write ภาษาไทย. Spell countries and languages per the RI country list (เยอรมนี for the country, เยอรมัน for the language; เช็ก; ซีริลลิก). If no RI or established Thai form can be verified, keep the Latin name (Bokmål). The interface-language picker should show each language in its own script.
+
+29. DATES AND OFFICIAL STYLE: weekday abbreviations are จ. อ. พ. พฤ. ศ. ส. อา. (but check whether a string is formatter output first). Thai official grades for watermarks are ลับ, ด่วน, ด่วนที่สุด, used only once the code inserts translated watermark text. Thai captions number as ภาพที่ 1 / ตารางที่ 1 / สมการที่ 1 (engineering follow-up).
+
+30. THAI ENCODING: type สระอำ as the single character ำ (U+0E33), never ํ + า. Order combining marks as consonant + above or below vowel + tone mark (ที่, ปู่, ชี้); never a tone mark before a vowel. Never put zero-width spaces or other invisible characters into catalog strings. After writing th.tsv, run the catalog tests (bundled_catalogs_are_well_formed, every_tab_and_command_is_translated) and keep them green.
+
+31. CLEAN ROOM AND EVIDENCE: every entry is written from the meaning of the English label and the code that uses it, in ordinary Thai computing vocabulary. No Microsoft Office/Word Thai localisation, and no other product's translated UI or string table, was consulted or recalled. The th.tsv header should say so, as zh-hans.tsv does. Web checks in this merge reached no RI page (dictionary.orst.go.th, th.wiktionary.org: DNS/proxy blocked; WebSearch returned no RI entries). Earlier draft evidence: ปริพันธ์ (SUT and YRU course and chapter titles), เมทริกซ์เอกลักษณ์ (Thai math sources), เขตข้อมูล (Aspose Thai docs), พอยต์ (Multitran), ฟังก์ชันตรีโกณมิติผกผัน (Thai Wikipedia), โคเซแคนต์ (Thai lesson plans). FAO GACS lists 'ทฤษฎีของเบส์'. Decided from RI rules or knowledge, NOT confirmed online, so check against the RI dictionary before release: แมโคร, แกลเลอรี, ไฮเพอร์โบลิก, โคโพรดักต์, ไพกา, พอยต์, บอลลูน, อรรถาภิธาน, กล่องโต้ตอบ, ระเบียน, ผลต่างเชิงอนุพันธ์, อินเตอร์เซกชัน, เบย์, ไอโอโนสเฟียร์/มีโซสเฟียร์. Avoided because unverifiable: ริบบิ้น/ริบบอน → แถบคำสั่ง; ส่วนต่อประสาน → ส่วนติดต่อผู้ใช้; ไฮเปอร์ลิงก์ → ลิงก์; บุ๊กมอล → Bokmål.
+
+## Glossary
+
+| English | Thai | Note |
+|---|---|---|
+| File | ไฟล์ | Tab. RI loanword spelling; office users say ไฟล์, not แฟ้ม. |
+| Home | หน้าหลัก | Tab and Backstage page. A: หน้าแรก; B: หน้าหลัก. Chose หน้าหลัก because หน้าแรก is reserved for 'first page' (Different First Page → หน้าแรกต่างจากหน้าอื่น). Home folder → โฟลเดอร์ส่วนตัว. The Home key stays Latin. |
+| Insert | แทรก | Tab and the verb in every Insert X command (แทรกตาราง). The Insert key stays Latin. |
+| Draw | วาด | Tab and verb. Draw Table → วาดตาราง. |
+| Design | ออกแบบ | Tab. Design Mode → โหมดออกแบบ. |
+| Layout | เค้าโครง | Tab and noun. Never เค้าร่าง (that is Outline). Change Layout → เปลี่ยนเค้าโครง; Layout Summary → สรุปเค้าโครง. |
+| References | การอ้างอิง | Tab. A: อ้างอิง; B: การอ้างอิง. Chose การอ้างอิง because tab and group names are nouns. Links and References → ลิงก์และการอ้างอิง. |
+| Mailings | การส่งจดหมาย | Tab (envelopes, labels, mail merge). Not จดหมาย, which is Letter. |
+| Review | ตรวจทาน | Tab. Reviewing → การตรวจทาน. |
+| View | มุมมอง | Tab and noun. As the first word of a command the verb is ดู: View Gridlines → ดูเส้นตาราง; View Alt Text… → ดูข้อความแสดงแทน…. |
+| Developer | นักพัฒนา |  |
+| Help | วิธีใช้ | Tab, group and command. |
+| Zotero | Zotero | Product name, kept in Latin. Zotero: done → Zotero: เสร็จแล้ว; Zotero: cancelled → Zotero: ยกเลิกแล้ว. |
+| Outlining | การจัดเค้าร่าง | Tab in Outline view. A: การทำเค้าร่าง; B: การจัดเค้าร่าง. Chose B as the more usual verb with เค้าร่าง. |
+| Reading | การอ่าน | Read Mode tab and noun. Reading Line Spacing → ระยะห่างบรรทัดขณะอ่าน; Reading Column Width → ความกว้างคอลัมน์ขณะอ่าน; Reading Text Size → ขนาดข้อความขณะอ่าน; Reading Speed → ความเร็วในการอ่าน; Reading Highlight → เน้นสีขณะอ่าน; Reading Mode → โหมดอ่าน. |
+| Table Design | ออกแบบตาราง | Contextual tab. |
+| Table Layout | เค้าโครงตาราง | Contextual tab. |
+| Picture Format | จัดรูปแบบรูปภาพ | Contextual tab. A: รูปแบบรูปภาพ; B: จัดรูปแบบรูปภาพ. Chose B: รูปแบบรูปภาพ can be read as an image file format (PNG…), and the verb form parallels ออกแบบตาราง. |
+| Shape Format | จัดรูปแบบรูปร่าง | Contextual tab. Same decision as Picture Format. |
+| Equation | สมการ | Contextual tab, object and caption label. Insert New Equation → แทรกสมการใหม่; Edit Equation → แก้ไขสมการ; Equation Gallery → แกลเลอรีสมการ; Equation Info → ข้อมูลสมการ; Equation Number → เลขสมการ; Close Equation → ปิดสมการ; Leave Equation → ออกจากสมการ; Set Equation → ตั้งค่าสมการ; Type/Enter/Delete/Move in Equation → พิมพ์/ขึ้นบรรทัดใหม่/ลบ/ย้ายในสมการ. |
+| Chart Design | ออกแบบแผนภูมิ | Contextual tab. |
+| SmartArt Design | ออกแบบ SmartArt | Contextual tab. SmartArt is a feature name kept in Latin. |
+| Clipboard | คลิปบอร์ด | Group and pane. Established transliteration. Clipboard Pane → แผงคลิปบอร์ด; Clipboard Contents → เนื้อหาในคลิปบอร์ด; Clipboard Items → รายการในคลิปบอร์ด; Delete Clipboard Item → ลบรายการในคลิปบอร์ด; Paste Clipboard Item → วางรายการในคลิปบอร์ด. |
+| Font | ฟอนต์ | DECISION, both drafts agree: always ฟอนต์, never แบบอักษร. It is the RI-correct loanword, the word office and government users actually say (TH Sarabun is 'ฟอนต์สารบรรณ'), and it is short enough for compounds (สีฟอนต์, ขนาดฟอนต์, ฟอนต์ธีม). ตัวอักษร is kept for 'letter'. Fonts → ฟอนต์; Font… → ฟอนต์…; Font Dialog → กล่องโต้ตอบฟอนต์; Font: {font} → ฟอนต์: {font}; Add Font… → เพิ่มฟอนต์…; Added Fonts → ฟอนต์ที่เพิ่ม; Remove Added Font → เอาฟอนต์ที่เพิ่มออก. |
+| Paragraph | ย่อหน้า | Group, dialog and noun; Paragraphs is also ย่อหน้า (no plural). Paragraph… → ย่อหน้า…; Paragraph Settings → การตั้งค่าย่อหน้า; Paragraph Details → รายละเอียดย่อหน้า; New Paragraph → ย่อหน้าใหม่. |
+| Styles | สไตล์ | Group, gallery and pane (no plural). Styles Pane → แผงสไตล์; Apply Styles → ใช้สไตล์. |
+| Editing | การแก้ไข | Group and noun. Editing header/footer → กำลังแก้ไขหัวกระดาษ/ท้ายกระดาษ. |
+| Voice | เสียง | Group (Dictate). |
+| Editor | ตัวช่วยตรวจแก้ | Group and button that run spelling and grammar checking (ribbon.rs:756 → review.spelling). A: ตัวช่วยตรวจทาน; B: ตัวช่วยตรวจแก้. Chose B: ตรวจแก้ (check and correct) is ordinary Thai and does not clash with Review = ตรวจทาน. SHARED KEY: the same English 'Editor' is also a bibliography field (dialogs_refs.rs:862, the person who edited a book = บรรณาธิการ); that field will read wrong until the code gives it its own key (engineering follow-up). |
+| Pages | หน้า | Group and plural of page. |
+| Tables | ตาราง | Group. |
+| Illustrations | ภาพประกอบ | Group. |
+| Links | ลิงก์ | Group. RI loanword spelling (not ลิ้งค์/ลิงค์). |
+| Comments | ข้อคิดเห็น | Group, pane, plural of Comment. Comments Pane → แผงข้อคิดเห็น. |
+| Header & Footer | หัวกระดาษและท้ายกระดาษ | Write & as และ. Headers and footers → หัวกระดาษและท้ายกระดาษ; where space is tight: หัว/ท้ายกระดาษ. Header/Footer Position → ตำแหน่งหัวกระดาษ/ท้ายกระดาษ. |
+| Text | ข้อความ | Group and noun. Text: → ข้อความ:; Plain text → ข้อความธรรมดา. |
+| Symbols | สัญลักษณ์ | Group. |
+| Tools | เครื่องมือ | Group and noun. |
+| Pens | ปากกา | Draw group (no plural). |
+| Convert | แปลง | Group and verb. Convert to Text → แปลงเป็นข้อความ; Convert to Shapes → แปลงเป็นรูปร่าง; Convert Notes → แปลงเชิงอรรถ. |
+| Conversions | การแปลง | Equation group (from B). |
+| Replay | เล่นซ้ำ | Draw group. Ink Replay → เล่นการเขียนหมึกซ้ำ. |
+| Document Formatting | การจัดรูปแบบเอกสาร | Design group. |
+| Page Background | พื้นหลังหน้ากระดาษ | Design group. |
+| Page Setup | ตั้งค่าหน้ากระดาษ | Group and dialog. |
+| Arrange | จัดเรียง | Group. Arrange All / Arrange\nAll → จัดเรียงทั้งหมด. |
+| Breaks | ตัวแบ่ง | Layout menu. |
+| Table of Contents | สารบัญ | Group, gallery, block. Table of\nContents → สารบัญ (one line). TOC {n} → สารบัญ {n}; TOC Heading → หัวเรื่องสารบัญ. |
+| Footnotes | เชิงอรรถ | Group. RI term. |
+| Research | ค้นคว้า | Group. |
+| Citations & Bibliography | การอ้างอิงและบรรณานุกรม | Group. |
+| Captions | คำบรรยาย | Group. |
+| Index | ดัชนี | Group, inserted index, style family. Index {n} → ดัชนี {n}; Index Heading → หัวเรื่องดัชนี; Index and Tables → ดัชนีและตาราง. |
+| Table of Authorities | สารบัญอ้างอิงทางกฎหมาย | Table of cases and statutes cited; translated by meaning (both drafts). TOA Heading → หัวเรื่องสารบัญอ้างอิงทางกฎหมาย. |
+| Create | สร้าง | Group and verb. Create Source → สร้างแหล่งอ้างอิง; Create New Style → สร้างสไตล์ใหม่. |
+| Start Mail Merge | เริ่มจดหมายเวียน | Group and command. Start Mail\nMerge → เริ่ม\nจดหมายเวียน. |
+| Write & Insert Fields | เขียนและแทรกเขตข้อมูล | Group. |
+| Preview Results | แสดงตัวอย่างผลลัพธ์ | Group and toggle. Preview\nResults → แสดงตัวอย่าง\nผลลัพธ์. |
+| Finish | เสร็จสิ้น | Group and verb. |
+| Proofing | การพิสูจน์อักษร | Group and Options page. Ordinary Thai for proofreading. Proofing Issues → ปัญหาการพิสูจน์อักษร. |
+| Speech | เสียงพูด | Group (Read Aloud). |
+| Accessibility | การเข้าถึงได้ | Group, pane, checker (usable by people with disabilities); wording of Thai digital-government accessibility guidance. Not การช่วยการเข้าถึง. Accessibility Pane → แผงการเข้าถึงได้; Check Accessibility → ตรวจสอบการเข้าถึงได้. |
+| Language | ภาษา | Group, dialog and noun. |
+| Tracking | การติดตาม | Review group holding Track Changes. A: การติดตาม; B: การติดตามการเปลี่ยนแปลง. Chose A: shorter group label; the button inside already says ติดตามการเปลี่ยนแปลง. |
+| Changes | การเปลี่ยนแปลง | Group and noun. Next Change → การเปลี่ยนแปลงถัดไป; Previous Change → การเปลี่ยนแปลงก่อนหน้า. |
+| Compare | เปรียบเทียบ | Group and command. Compare Documents → เปรียบเทียบเอกสาร; Comparison settings → การตั้งค่าการเปรียบเทียบ. |
+| Protect | ป้องกัน | Group and verb. Protect Document → ป้องกันเอกสาร. |
+| Ink | หมึก | Digital ink. Hide Ink → ซ่อนหมึก; Erase Ink → ลบหมึก; Delete Selected Ink → ลบหมึกที่เลือก; Move Selected Ink → ย้ายหมึกที่เลือก; Recolor Selected Ink → เปลี่ยนสีหมึกที่เลือก. |
+| Draw Ink | เขียนด้วยหมึก | From B. |
+| Ink to Shape | แปลงหมึกเป็นรูปร่าง | A: หมึกเป็นรูปร่าง; B: แปลงหมึกเป็นรูปร่าง. Chose B (commands start with a verb). Ink to\nShape → แปลงหมึก\nเป็นรูปร่าง; Ink to\nMath → แปลงหมึก\nเป็นสมการ. |
+| Views | มุมมอง | View-tab group. |
+| Immersive | การอ่านแบบจดจ่อ | View group holding Immersive Reader and Focus. A: ตัวช่วยอ่าน (same as its button); B: อ่านแบบจดจ่อ. Chose B's meaning as a noun (group labels are nouns) so the group and its button differ. |
+| Immersive Reader | ตัวช่วยอ่าน | Reading aid (spacing, column width, read aloud). A: ตัวช่วยอ่าน; B: เครื่องมืออ่านแบบจดจ่อ. Chose A: short and says what it does. Immersive\nReader → ตัวช่วยอ่าน (one short line, as ja does). |
+| Page Movement | การเลื่อนหน้า | Group (Vertical, Side to Side). |
+| Show | แสดง | Group and verb. Show Comments → แสดงข้อคิดเห็น; Show Notes → แสดงเชิงอรรถ; Show rulers → แสดงไม้บรรทัด; Show Text Formatting → แสดงการจัดรูปแบบข้อความ. |
+| Zoom | ซูม | Group, dialog. A: ย่อ/ขยาย; B: ซูม. Chose B: ขยาย already means Expand and ย่อ is close to Collapse/Shrink; ซูม is the established loanword Thai users say. |
+| Zoom In | ซูมเข้า | A: ขยายมุมมอง; B: ซูมเข้า → B, follows Zoom. |
+| Zoom Out | ซูมออก | A: ย่อมุมมอง; B: ซูมออก → B. |
+| Window | หน้าต่าง | Group and noun. New Window → หน้าต่างใหม่. |
+| Macros | แมโคร | RI transliteration rule (/æ/ → แ-); มาโคร is common but off-rule. Not confirmed online. Record Macro → บันทึกแมโคร. |
+| Controls | ตัวควบคุม | Developer group (content controls). |
+| Templates | แม่แบบ | DECISION. A: แม่แบบ; B: เทมเพลต. Chose แม่แบบ: brief rule 3 prefers an established Thai word over a loanword, and แม่แบบ is self-explanatory Thai. เทมเพลต is spelled correctly but is not used. Search for templates → ค้นหาแม่แบบ; More templates → → แม่แบบเพิ่มเติม →. |
+| Template | แม่แบบ | Save as Template → บันทึกเป็นแม่แบบ; New from Template → สร้างจากแม่แบบ; Attach Template → แนบแม่แบบ; Detach Template → เลิกแนบแม่แบบ (A; B ถอดเทมเพลตออก); Document template: → แม่แบบเอกสาร:. |
+| Templates and Add-ins | แม่แบบและโปรแกรมเสริม | Add-in: A ส่วนเสริม, B โปรแกรมเสริม → B, clearer that it is software. |
+| Drawing Tools | เครื่องมือวาด | Draw group. |
+| Drawing Canvas | พื้นที่วาดภาพ | Group and object. New Drawing Canvas → พื้นที่วาดภาพใหม่; Scale Drawing → ปรับขนาดภาพวาด. |
+| Canvas Member | วัตถุในพื้นที่วาด |  |
+| Close | ปิด | Group, verb, dialog button. |
+| Outline Tools | เครื่องมือเค้าร่าง | Group in Outline view. |
+| Agents | เอเจนต์ | AI agents that drive the app; RI-style transliteration, no established Thai word. |
+| Table | ตาราง | Group and noun. |
+| Rows & Columns | แถวและคอลัมน์ | Group. |
+| Merge | ผสาน | Group and verb (Merge Cells → ผสานเซลล์). The mail-merge feature itself is จดหมายเวียน. |
+| Cell Size | ขนาดเซลล์ | Group. |
+| Alignment | การจัดแนว | Group and noun. Alignment: → การจัดแนว:; Number alignment: → การจัดแนวตัวเลข:. |
+| Data | ข้อมูล | Group. |
+| Table Style Options | ตัวเลือกสไตล์ตาราง | Group. |
+| Table Styles | สไตล์ตาราง | Group/gallery. |
+| Borders | เส้นขอบ | Group and menu. |
+| Adjust | ปรับ | Picture group. |
+| Picture Styles | สไตล์รูปภาพ |  |
+| Size | ขนาด | Group, field, noun. Size: → ขนาด:; Size (pt): → ขนาด (pt):. |
+| Shape Styles | สไตล์รูปร่าง |  |
+| WordArt Styles | สไตล์ WordArt |  |
+| Insert Shapes | แทรกรูปร่าง | Group. |
+| Create Graphic | สร้างกราฟิก | SmartArt group. |
+| Layouts | เค้าโครง | Group/gallery (no plural). |
+| SmartArt Styles | สไตล์ SmartArt |  |
+| Reset | คืนค่า | Ordinary Thai preferred over รีเซ็ต (both drafts). Reset… → คืนค่า…; Reset All… → คืนค่าทั้งหมด…; Reset Picture → คืนค่ารูปภาพ; Reset Crop → คืนค่าการครอบตัด; Reset Graphic → คืนค่ากราฟิก; Reset to Normal → คืนค่าเป็นปกติ; Reset Character/Paragraph Formatting → คืนค่าการจัดรูปแบบอักขระ/ย่อหน้า. |
+| Chart Layouts | เค้าโครงแผนภูมิ |  |
+| Type | ประเภท | Noun 'kind': Chart Design group (ribbon.rs:1840), Type: → ประเภท:, Change Chart Type → เปลี่ยนประเภทแผนภูมิ. A: ประเภท; B: ชนิด. Chose ประเภท (the usual Thai UI word); Category gets หมวดหมู่ so the two never collide. As a keyboard verb: พิมพ์ (Type Text → พิมพ์ข้อความ; As you type → ขณะพิมพ์). |
+| Structures | โครงสร้าง | Equation group. Insert Structure → แทรกโครงสร้าง; Change Structure → เปลี่ยนโครงสร้าง; Structure Actions → การดำเนินการกับโครงสร้าง. |
+| Equation Options | ตัวเลือกสมการ |  |
+| Dark Mode | โหมดมืด | Users say โหมด; the RI coinage ภาวะ reads oddly in a UI. |
+| Document | เอกสาร | Documents → เอกสาร. Document1 → เอกสาร1 (a file name, so no space). New document → เอกสารใหม่; Blank document → เอกสารเปล่า; This document → เอกสารนี้; Whole document → ทั้งเอกสาร; Document Text → ข้อความในเอกสาร; Document Title → ชื่อเรื่องเอกสาร. |
+| Page | หน้า | A page of the document (Page 3, Next Page). For the physical sheet (setup, colour, borders, background, paper size) use หน้ากระดาษ. Page {page} → หน้า {page}; Page display → การแสดงหน้า; Page title → ชื่อหน้า. |
+| Section | ส่วน | Document section (its own page setup); not ตอน or เซกชัน. Sections → ส่วน; Next/Previous Section → ส่วนถัดไป/ก่อนหน้า; This section → ส่วนนี้; Section Properties → คุณสมบัติส่วน; End of section → ท้ายส่วน. |
+| Line | เส้น | The bare key is the Line shape (ribbon.rs:795) and the Line chart → เส้น (B). A line of TEXT is บรรทัด in every compound: Line Spacing, Line Numbers, Line Break, Line Start, Select Line → เลือกบรรทัด, Line between (columns) → เส้นคั่นระหว่างคอลัมน์ (drawn). A listed both under split keys; merged here. |
+| Lines | บรรทัด | Text lines (statistics, grid). {n} lines → {n} บรรทัด; Lines per page: → บรรทัดต่อหน้า:; Lines only → เฉพาะบรรทัด; Lines and characters → บรรทัดและอักขระ; Lines added/deleted → บรรทัดที่เพิ่ม/ที่ลบ; Lines +/− → บรรทัด +/−. |
+| Character | อักขระ | RI computer term. Characters → อักขระ; counted as อักขระ {n} ตัว. Characters (with spaces) → อักขระ (รวมช่องว่าง); Characters (no spaces) → อักขระ (ไม่รวมช่องว่าง); Characters per line: → อักขระต่อบรรทัด:; Character level → ระดับอักขระ. |
+| Letter (of the alphabet) | ตัวอักษร | Any Letter → ตัวอักษรใดก็ได้; Distribute letters → กระจายตัวอักษร; Letter headings (index) → หัวเรื่องตัวอักษร; Greek Letters → อักษรกรีก. |
+| Letter | จดหมาย | Template and merge type (Letters → จดหมาย). SHARED KEY: as a paper-size name 'Letter' must stay Latin like A4; if a paper-size list ever shows this key, it needs its own key (engineering follow-up). |
+| Word (unit of text) | คำ | Words → คำ; Word Count → นับคำ; Whole words → ทั้งคำ; Select Word → เลือกคำ; Word level → ระดับคำ; New word → คำใหม่; Delete Previous/Next Word → ลบคำก่อนหน้า/คำถัดไป; Beginning of Word → ต้นคำ; End of Word → ท้ายคำ. |
+| Word (product) | Word | Product name stays Latin: Word document → เอกสาร Word; Normal Word Document → เอกสาร Word ปกติ. |
+| Sentence | ประโยค | Select Sentence → เลือกประโยค; Next Sentence / Next sentence → ประโยคถัดไป; Previous Sentence → ประโยคก่อนหน้า. |
+| Body Text | เนื้อความ | Style name and outline level. |
+| Title | ชื่อเรื่อง | Style, document property, bibliography field. Title: → ชื่อเรื่อง:. The 'preview' context entry (style-set tiles) → ชื่อเรื่อง too (short enough for a tile). |
+| Subtitle | ชื่อเรื่องรอง | Built-in style. |
+| Heading | หัวเรื่อง | Heading 1 → หัวเรื่อง 1; Heading {n} → หัวเรื่อง {n}; Headings (navigation) → หัวเรื่อง. หัวข้อ is avoided (the bullets term uses it). |
+| Header | หัวกระดาษ | Edit Header → แก้ไขหัวกระดาษ; Remove Header → เอาหัวกระดาษออก. |
+| Footer | ท้ายกระดาษ | Edit Footer → แก้ไขท้ายกระดาษ; Remove Footer → เอาท้ายกระดาษออก. |
+| Margins | ระยะขอบ | Page and cell. Top/Bottom/Left/Right Margin → ระยะขอบบน/ล่าง/ซ้าย/ขวา; Cell Margins → ระยะขอบเซลล์. Presets: Normal → ปกติ; Narrow → แคบ; Moderate → พอประมาณ; Wide → กว้าง; Mirrored → สลับข้าง. |
+| Custom Margins… | ระยะขอบแบบกำหนดเอง… | A: ที่กำหนดเอง; B: แบบกำหนดเอง. Rule adopted: a menu entry that opens custom settings uses แบบกำหนดเอง; something the user defined uses ที่กำหนดเอง. |
+| Mirrored | สลับข้าง | Book margins (inside/outside swap on facing pages). A: แบบสะท้อน; B: สลับข้าง. Chose B: says what happens; สะท้อน suggests a mirror image. |
+| Mirror indents | เยื้องแบบสลับข้าง | Checkbox. A: การเยื้องแบบสะท้อน; B: เยื้องแบบสลับข้าง → B, matches Mirrored. |
+| Moderate | พอประมาณ | Margin preset. A: ปานกลาง; B: พอประมาณ → B, so that Medium can be ปานกลาง. |
+| Medium | ปานกลาง | Reading width (from B). |
+| Narrow | แคบ |  |
+| Wide | กว้าง |  |
+| Narrow  0.5" all | แคบ  0.5" ทุกด้าน | Keep the double space and the inch mark exactly. Normal  1" all → ปกติ  1" ทุกด้าน. |
+| Orientation | การวางแนว |  |
+| Portrait | แนวตั้ง |  |
+| Landscape | แนวนอน |  |
+| Paper size | ขนาดกระดาษ |  |
+| Inside: | ด้านใน: | Mirrored margins and borders. Outside: → ด้านนอก:. |
+| Indent | การเยื้อง | Noun; the verb is เยื้อง. Indentation / Indents → การเยื้อง; Increase Indent → เพิ่มการเยื้อง; Decrease Indent → ลดการเยื้อง; Left indent → การเยื้องซ้าย; Right indent → การเยื้องขวา; Indent from left: → เยื้องจากซ้าย:; Text indent at: → เยื้องข้อความที่:; Normal Indent → การเยื้องปกติ. |
+| Hanging Indent | การเยื้องแบบแขวน | Hanging (special indent) → แบบแขวน; Reduce Hanging Indent → ลดการเยื้องแบบแขวน. |
+| First line | บรรทัดแรก | Special indent. First line: → บรรทัดแรก:. |
+| Indents and Spacing | การเยื้องและระยะห่าง | Paragraph dialog tab. |
+| Spacing | ระยะห่าง | Between lines, paragraphs, characters. The blank character itself is ช่องว่าง. Spacing: → ระยะห่าง:; Spacing (pt): → ระยะห่าง (pt):. |
+| Line Spacing | ระยะห่างบรรทัด | Line spacing / Line spacing: → ระยะห่างบรรทัด(:); Line Spacing Options… → ตัวเลือกระยะห่างบรรทัด…. |
+| Single Spacing | ระยะห่างบรรทัด 1 เท่า | A: ระยะห่าง 1 เท่า; B: ระยะห่างบรรทัดเท่าเดียว. Merged: keeps บรรทัด (B) and the numeric pattern (A) so the three presets read alike: 1.5 Line Spacing → ระยะห่างบรรทัด 1.5 เท่า; Double Spacing → ระยะห่างบรรทัด 2 เท่า. |
+| Paragraph Spacing | ระยะห่างย่อหน้า | Design menu. No Paragraph Space → ไม่มีระยะห่างย่อหน้า. |
+| Space before | ระยะห่างก่อนย่อหน้า | Space after → ระยะห่างหลังย่อหน้า; Space before/after: → ระยะห่างก่อน/หลังย่อหน้า:. In the dialog Before: → ก่อน:; After: → หลัง:. |
+| Character Spacing | ระยะห่างอักขระ | Font dialog tab; Character spacing same. |
+| At least | อย่างน้อย | Line spacing / row height rule. At least {n} → อย่างน้อย {n}. |
+| Exactly | เท่ากับ | Exactly {n} → เท่ากับ {n}. |
+| Multiple | หลายเท่า | Line spacing rule. |
+| No Spacing | ไม่มีระยะห่าง | Built-in style. |
+| Compact | กระชับ | Paragraph-spacing preset (ribbon.rs:1089: Compact, Tight, Open, Relaxed, Double). |
+| Tight | ชิด | SHARED KEY: wrap option and spacing preset. A: ชิดรูป (wrap only); B: ชิด. Chose B, which works in both places. |
+| Relaxed | โปร่ง | Spacing preset. A: โปร่ง; B: ผ่อนคลาย. Chose A, the natural word for loose spacing. |
+| Align | จัดแนว | Verb. Align Text → จัดแนวข้อความ; Aligned at: → จัดแนวที่:. |
+| Align Left | จัดชิดซ้าย | Align Right → จัดชิดขวา; Align Center → จัดกึ่งกลาง. |
+| Center | กึ่งกลาง | SHARED KEY: the alignment button (mini toolbar, keytips) and a value in tab/list/number alignment lists (Left/Center/Right). A: จัดกึ่งกลาง; B: กึ่งกลาง. Chose B, which reads right in both; the explicit command 'Align Center' is จัดกึ่งกลาง. Centered → กึ่งกลาง; Centered as Group → กึ่งกลางเป็นกลุ่ม. |
+| Justify | จัดชิดขอบ | Flush to both margins. Justified (state) → ชิดขอบ; Justification → การจัดชิดขอบ. |
+| Distributed | จัดกระจาย | para.distribute command and its pane state: characters spread over the full line, last line included. A: จัดกระจาย; B: กระจาย. Chose A: the command use matters more and parallels จัดชิดขอบ; Scatter gets จุดกระจาย. |
+| Thai Distributed | จัดกระจายแบบไทย | Thai distributed alignment (panes.rs thaiDistribute): spreads Thai text without relying on spaces. Same decision as Distributed; keeps ไทย so it can be found. |
+| Distribute letters | กระจายตัวอักษร | Phonetic Guide option. Distribute spacing → กระจายระยะห่าง. |
+| Left | ซ้าย | Value. Left: → ซ้าย:; Insert Left → แทรกทางซ้าย; Left Border / Left border → เส้นขอบซ้าย; Left Only → เฉพาะด้านซ้าย. |
+| Right | ขวา | Insert Right → แทรกทางขวา; Right (vertical) → ขวา (แนวตั้ง); Right Only → เฉพาะด้านขวา. |
+| Top | บน | Value. A: ด้านบน; B: บน. Chose B so Top ≠ Above. Top: → บน:; Top Border → เส้นขอบบน; Top of Page → ด้านบนของหน้า; Align Top Left → จัดชิดบนซ้าย (pattern จัดชิด+vertical+horizontal). |
+| Bottom | ล่าง | Bottom: → ล่าง:; Bottom Border → เส้นขอบล่าง; Bottom of Page → ด้านล่างของหน้า; Align Bottom Center → จัดชิดล่างกึ่งกลาง. |
+| Middle | กลาง |  |
+| Above | ด้านบน | Insert Above → แทรกด้านบน; Above Chart → เหนือแผนภูมิ; Above the item → เหนือรายการที่เลือก. |
+| Below | ด้านล่าง | Insert Below → แทรกด้านล่าง; Below text → ใต้ข้อความ; Below the item → ใต้รายการที่เลือก. |
+| Inside | ด้านใน | Inside Borders → เส้นขอบด้านใน. |
+| Outside | ด้านนอก | Outside Borders → เส้นขอบด้านนอก; Outside border → เส้นขอบด้านนอก. |
+| Between | ระหว่าง | Border between paragraphs. |
+| Horizontal | แนวนอน | Horizontal Line → เส้นแนวนอน. |
+| Vertical | แนวตั้ง | Vertical Alignment / Vertical alignment: → การจัดแนวตั้ง(:). |
+| Diagonal | แนวทแยง |  |
+| Direction | ทิศทาง | Text Direction → ทิศทางข้อความ; Direction: → ทิศทาง:; Section direction: → ทิศทางส่วน:; Table direction: → ทิศทางตาราง:; Left-to-right → ซ้ายไปขวา; Right-to-left → ขวาไปซ้าย; Right-to-Left Table/Section → ตาราง/ส่วนขวาไปซ้าย; Left-to-Right Text Direction → ทิศทางข้อความซ้ายไปขวา. |
+| Columns | คอลัมน์ | Text, table, page columns; คอลัมน์ is the dictionary loanword (สดมภ์ is unused). Column → คอลัมน์; Column: → คอลัมน์:; Col #: → คอลัมน์ที่:; More Columns… → คอลัมน์เพิ่มเติม…; Number of columns: → จำนวนคอลัมน์:; Equal column width → ความกว้างคอลัมน์เท่ากัน; Column Selection → เลือกแนวตั้ง. Presets One/Two/Three → หนึ่ง/สอง/สาม. In chart types Column → แท่งแนวตั้ง. |
+| Column Break | ตัวแบ่งคอลัมน์ |  |
+| Row | แถว | Row: → แถว:; Number of rows: → จำนวนแถว:; Select Row → เลือกแถว; Add Row → เพิ่มแถว; Remove row → เอาแถวออก. |
+| Cell | เซลล์ | RI spelling. Select Cell → เลือกเซลล์. |
+| List | รายการ | A list, or list of items; Item and Entry are รายการ too (context separates them). A recipient list is รายชื่อผู้รับ. List entries → รายการในลิสต์ตัวเลือก; List Definition → นิยามรายการ; Tabular List → รายการแบบตาราง. |
+| Item | รายการ | Noun and classifier: {count} items highlighted → เน้นแล้ว {count} รายการ. |
+| Entry | รายการ | New Entry → รายการใหม่. |
+| Bullets | สัญลักษณ์หัวข้อย่อย | Descriptive Thai instead of บุลเล็ต (both drafts). Bullet → สัญลักษณ์หัวข้อย่อย; Bullet Library → คลังสัญลักษณ์หัวข้อย่อย; Define New Bullet → กำหนดสัญลักษณ์หัวข้อย่อยใหม่; Automatic bulleted lists → รายการสัญลักษณ์หัวข้อย่อยอัตโนมัติ. |
+| Numbering | ลำดับเลข | Numbering: / Numbering… → ลำดับเลข: / ลำดับเลข…; Continuous numbering → ลำดับเลขต่อเนื่อง; Legal style numbering → ลำดับเลขแบบเอกสารกฎหมาย; Automatic numbered lists → รายการลำดับเลขอัตโนมัติ; Restart at 1 → เริ่มใหม่ที่ 1. |
+| Set Numbering Value | ตั้งค่าลำดับเลข | A: ตั้งค่า; B: กำหนดค่า. Set → ตั้ง (Define keeps กำหนด). |
+| Multilevel List | รายการหลายระดับ |  |
+| Level | ระดับ | Level {n} → ระดับ {n}; Levels: → ระดับ:; Change List Level → เปลี่ยนระดับรายการ; Show Level 1 → แสดงระดับ 1; Show Level → แสดงระดับ; Show All Levels / All Levels → แสดงทุกระดับ / ทุกระดับ; Up one level → ขึ้นไปหนึ่งระดับ. |
+| Number | หมายเลข | The bare key is the Equation-tab number button (equation_tab.rs:348). In compounds: an assigned number → เลข (Page Number → เลขหน้า; Line Numbers → เลขบรรทัด; Equation Number → เลขสมการ); a numeric value/digit → ตัวเลข (Number format → รูปแบบตัวเลข; Follow number with: → ต่อท้ายตัวเลขด้วย:); a count → จำนวน (Number of columns → จำนวนคอลัมน์). |
+| Page Number | เลขหน้า | Page\nNumber → เลขหน้า; Format Page Numbers(…) → จัดรูปแบบเลขหน้า(…); Page number style → รูปแบบเลขหน้า; Include page numbers → แสดงเลขหน้า. |
+| Line Numbers | เลขบรรทัด | Line Number → เลขบรรทัด; Line Numbering Options… → ตัวเลือกเลขบรรทัด…; Add line numbering → เพิ่มเลขบรรทัด; Suppress line numbers → ไม่แสดงเลขบรรทัด; Count by: → นับทีละ:; From text: → ห่างจากข้อความ:; Restart Each Page/Section → เริ่มใหม่ทุกหน้า/ทุกส่วน. |
+| Break | ตัวแบ่ง | Noun: an inserted break. |
+| Page Break | ตัวแบ่งหน้า | Page Breaks → ตัวแบ่งหน้า. |
+| Section Break | ตัวแบ่งส่วน | Section Breaks → ตัวแบ่งส่วน. |
+| Line Break | ตัวแบ่งบรรทัด |  |
+| Manual Line Break | ตัวแบ่งบรรทัดที่ใส่เอง | A: ที่ใส่เอง; B: ด้วยตนเอง. Chose A: natural Thai for a noun; ด้วยตนเอง is kept for verbs (Manual Hyphenation → ใส่ยัติภังค์ด้วยตนเอง). Manual Page Break → ตัวแบ่งหน้าที่ใส่เอง. |
+| Line breaking | การตัดบรรทัด | Where lines wrap; important for Thai, which has no spaces between words. Allow line breaks → อนุญาตให้ตัดบรรทัด. |
+| Break Link | ตัดการเชื่อมโยง | Break as a verb on links. |
+| Continuous | ต่อเนื่อง | Section break type. |
+| Next Page | หน้าถัดไป | Previous Page → หน้าก่อนหน้า. |
+| Even Page | หน้าคู่ | Even pages only → เฉพาะหน้าคู่. |
+| Odd Page | หน้าคี่ | Odd pages only → เฉพาะหน้าคี่. |
+| Different First Page | หน้าแรกต่างจากหน้าอื่น |  |
+| Different Odd & Even Pages | หน้าคี่และหน้าคู่ต่างกัน |  |
+| Link to Previous | เชื่อมโยงกับส่วนก่อนหน้า | A: กับก่อนหน้า; B: กับส่วนก่อนหน้า → B, says what is linked. Link as a verb is เชื่อมโยง. |
+| Widow/Orphan Control | ป้องกันบรรทัดเดี่ยวค้างหน้า | Widow/Orphan control same. A: ควบคุมบรรทัดค้าง; B: ป้องกันบรรทัดเดี่ยวค้างหน้า. Chose B: a checkbox describes the behaviour. |
+| Keep with next | ให้อยู่หน้าเดียวกับย่อหน้าถัดไป | Keep with Next same. A had no ให้; B added it to parallel the next entry. |
+| Keep lines together | ให้ทุกบรรทัดอยู่หน้าเดียวกัน | Keep Lines Together same. |
+| Page break before | ขึ้นหน้าใหม่ก่อนย่อหน้า | Page Break Before same. |
+| Document Grid | เส้นตารางเอกสาร | Page Setup tab. No grid → ไม่มีเส้นตาราง. |
+| Format | รูปแบบ | Noun: look, or a file format. Verb: จัดรูปแบบ. Kept distinct from Style (สไตล์). Format: → รูปแบบ:; HTML Format → รูปแบบ HTML. |
+| Formatting | การจัดรูปแบบ | Clear All Formatting → ล้างการจัดรูปแบบทั้งหมด; Clear Paragraph/Character Formatting → ล้างการจัดรูปแบบย่อหน้า/อักขระ; Direct formatting → การจัดรูปแบบโดยตรง; Formatting marks → เครื่องหมายการจัดรูปแบบ; Formatting at Selection → การจัดรูปแบบที่ส่วนที่เลือก; Track formatting → ติดตามการจัดรูปแบบ; Set Character/Paragraph Formatting → ตั้งการจัดรูปแบบอักขระ/ย่อหน้า. |
+| Formatted | จัดรูปแบบแล้ว | State (from B). |
+| Formatted Text | ข้อความที่จัดรูปแบบ | Paste option. A: ข้อความที่มีรูปแบบ; B: ข้อความที่จัดรูปแบบ → B, consistent with Formatting = การจัดรูปแบบ. |
+| Unformatted Text | ข้อความที่ไม่มีการจัดรูปแบบ | A: ข้อความไม่มีรูปแบบ; B → B for the same reason. |
+| Rich Text | ข้อความแบบจัดรูปแบบ | Content-control and paste type (from A, aligned to การจัดรูปแบบ). The format name Rich Text Format (RTF) stays Latin. |
+| Copy Formatting | คัดลอกการจัดรูปแบบ | A: คัดลอกรูปแบบ; B: คัดลอกการจัดรูปแบบ → B (Formatting = การจัดรูปแบบ). |
+| Paste Formatting | วางการจัดรูปแบบ | Same decision. |
+| Merge Formatting | ผสานการจัดรูปแบบ | Paste option. Paste: Merge Formatting → วาง: ผสานการจัดรูปแบบ. |
+| Format Painter | แปรงคัดลอกรูปแบบ | A: แปรงคัดลอกรูปแบบ; B: ตัวคัดลอกรูปแบบ. Chose A: Painter → แปรง everywhere (Border Painter → แปรงเส้นขอบ). |
+| Border Painter | แปรงเส้นขอบ | Border\nPainter → แปรง\nเส้นขอบ. |
+| Style | สไตล์ | A named, reusable set of formatting (Normal, Heading 1, table styles); distinct from รูปแบบ. A citation standard (APA, MLA) is รูปแบบการอ้างอิง instead. Style: / Styles: → สไตล์:; Style: {style} → สไตล์: {style}. |
+| Style Set | ชุดสไตล์ | Design gallery. |
+| Apply Style | ใช้สไตล์ | Apply X → ใช้X; นำไปใช้ only for the Apply button. Apply Character Style → ใช้สไตล์อักขระ. |
+| Modify Style | ปรับเปลี่ยนสไตล์ | Modify Table Style(…) → ปรับเปลี่ยนสไตล์ตาราง(…). |
+| New Style… | สไตล์ใหม่… | New Table Style(…) → สไตล์ตารางใหม่(…). |
+| Create a Style | สร้างสไตล์ |  |
+| Manage Styles | จัดการสไตล์ | Manage Styles… → จัดการสไตล์…. |
+| Rename Style | เปลี่ยนชื่อสไตล์ |  |
+| Delete Style | ลบสไตล์ | Delete Table Style → ลบสไตล์ตาราง; Clear Character Style → ล้างสไตล์อักขระ; Clear Formatting Level → ล้างระดับการจัดรูปแบบ. |
+| Copy Styles | คัดลอกสไตล์ |  |
+| Style Inspector | ตัวตรวจสอบสไตล์ |  |
+| Paragraph style | สไตล์ย่อหน้า |  |
+| Character style | สไตล์อักขระ |  |
+| Table style | สไตล์ตาราง |  |
+| Built-in style | สไตล์ในตัว | Built-In → ในตัว. |
+| Style based on: | สไตล์ที่ใช้เป็นฐาน: |  |
+| Based on: {style} | อิงจาก: {style} |  |
+| Current style: {style} | สไตล์ปัจจุบัน: {style} |  |
+| (no style) | (ไม่มีสไตล์) |  |
+| Update to Match | อัปเดตให้ตรงกับส่วนที่เลือก | A: ปรับให้ตรง…; B: อัปเดตให้ตรง… → B, follows Update = อัปเดต. |
+| Normal | ปกติ | Style, view, margin preset. Normal Style → สไตล์ปกติ; Normal Table → ตารางปกติ; Normal Text → ข้อความปกติ. Write ปกติ, never ปรกติ (both are RI-correct; one form is used everywhere). |
+| Default Paragraph Font | ฟอนต์ย่อหน้าเริ่มต้น | Built-in character style. |
+| List Paragraph | ย่อหน้ารายการ |  |
+| Quote | ข้อความที่ยกมา | Built-in style for quoted passages. A: ข้อความยกมา; B: คำพูดที่ยกมา. Merged: ข้อความ (passages are often text, not speech) plus B's ที่. Intense Quote → ข้อความที่ยกมาแบบเข้ม. The quote character is อัญประกาศ. |
+| Emphasis | การเน้น | Built-in style. A: การเน้น; B: ตัวเน้น → A. Subtle Emphasis → การเน้นแบบอ่อน; Intense Emphasis → การเน้นแบบเข้ม. |
+| Subtle | แบบอ่อน | Style-name modifier. A: แบบจาง; B: แบบอ่อน. Chose B: เข้ม/อ่อน is the natural Thai pair. Subtle Reference → การอ้างอิงแบบอ่อน. |
+| Intense | แบบเข้ม | Intense Reference → การอ้างอิงแบบเข้ม. |
+| Strong | เน้นหนัก | Built-in style (bold). A: เน้นหนา; B: เน้นหนัก → B (strong emphasis, not a weight name). |
+| Book Title | ชื่อหนังสือ | Built-in style; Book title (bibliography field) same. |
+| Plain Table 1 | ตารางธรรมดา 1 |  |
+| Table Grid | ตารางแบบมีเส้น | Built-in table style. A: ตารางแบบมีเส้น; B: เส้นตารางของตาราง. Chose A: it names a table that has all its lines, and avoids repeating ตาราง. |
+| Field | เขตข้อมูล | Computed placeholder, merge field, form field. Established Thai computing term (RI computer vocabulary; Aspose Thai docs use it); never ฟิลด์. Fields / Field… / Field: → เขตข้อมูล / เขตข้อมูล… / เขตข้อมูล:; Next/Previous Field → เขตข้อมูลถัดไป/ก่อนหน้า; Add Field → เพิ่มเขตข้อมูล; Remove field → เอาเขตข้อมูลออก; Field properties → คุณสมบัติเขตข้อมูล; Selected Fields → เขตข้อมูลที่เลือก; TC entry fields → เขตข้อมูลรายการ TC. |
+| Field Codes | รหัสเขตข้อมูล | Field code: / Field codes: → รหัสเขตข้อมูล:; Toggle Field Codes → สลับรหัสเขตข้อมูล; Edit Field Code → แก้ไขรหัสเขตข้อมูล; Edit Field… → แก้ไขเขตข้อมูล…; Hide Codes → ซ่อนรหัส. |
+| Update Field | อัปเดตเขตข้อมูล | A: ปรับปรุง; B: อัปเดต. Chose อัปเดต: here 'update' means recompute, and ปรับปรุง reads as 'improve'. |
+| Lock Fields | ล็อกเขตข้อมูล | RI spelling ล็อก (not ล็อค). Unlock Fields → ปลดล็อกเขตข้อมูล. |
+| Unlink Fields | ยกเลิกการเชื่อมโยงเขตข้อมูล | Turns fields into plain text. Unlink\nCitations → ยกเลิกการเชื่อมโยง\nการอ้างอิง. |
+| Field name | ชื่อเขตข้อมูล | Field name: / Field names: → ชื่อเขตข้อมูล:. |
+| Insert Merge Field | แทรกเขตข้อมูลผสาน | Insert Merge\nField → แทรก\nเขตข้อมูลผสาน. |
+| Highlight Merge Fields | เน้นเขตข้อมูลผสาน | Highlight\nMerge Fields → เน้น\nเขตข้อมูลผสาน. |
+| Insert Date Field | แทรกเขตข้อมูลวันที่ | Insert Page Field → แทรกเขตข้อมูลเลขหน้า; Insert Time Field → แทรกเขตข้อมูลเวลา. |
+| Content control | ตัวควบคุมเนื้อหา | Content Control Properties → คุณสมบัติตัวควบคุมเนื้อหา; Remove Content Control → เอาตัวควบคุมเนื้อหาออก; Picture Content Control → ตัวควบคุมเนื้อหารูปภาพ. |
+| Placeholder text | ข้อความตัวยึดตำแหน่ง |  |
+| Check box | กล่องกาเครื่องหมาย | Toggle Check Box → สลับกล่องกาเครื่องหมาย. |
+| Checked symbol | สัญลักษณ์เมื่อกาเครื่องหมาย | A: เมื่อกาเครื่องหมาย; B: เมื่อเลือก. Chose A, matches กล่องกาเครื่องหมาย. Unchecked symbol → สัญลักษณ์เมื่อไม่กาเครื่องหมาย. |
+| Choose List Item | เลือกรายการ |  |
+| Design Mode | โหมดออกแบบ |  |
+| Tag | แท็ก | Short identifier (content control, bibliography). |
+| Properties | คุณสมบัติ | Table Properties → คุณสมบัติตาราง; Document Property → คุณสมบัติเอกสาร. |
+| Options | ตัวเลือก | Options… → ตัวเลือก…; Search Options → ตัวเลือกการค้นหา. |
+| Settings | การตั้งค่า | Settings… → การตั้งค่า…; Setting: → การตั้งค่า:; {group} settings → การตั้งค่า {group}; Use system setting → ใช้การตั้งค่าของระบบ. |
+| Preferences | ค่ากำหนด | Document\nPreferences → ค่ากำหนด\nเอกสาร. |
+| Default | ค่าเริ่มต้น | Set As Default / Set as Default → ตั้งเป็นค่าเริ่มต้น. |
+| Custom | กำหนดเอง | (Custom) → (กำหนดเอง); Custom range → ช่วงที่กำหนดเอง; Custom mark: → เครื่องหมายที่กำหนดเอง:; Custom dictionary → พจนานุกรมที่กำหนดเอง (B; A had พจนานุกรมผู้ใช้). |
+| Customize | ปรับแต่ง | A: ปรับแต่ง; B: กำหนดเอง. Chose A so Customize ≠ Custom. Customize… → ปรับแต่ง…. |
+| Customize Keyboard | ปรับแต่งแป้นพิมพ์ลัด | A: ปรับแต่งแป้นพิมพ์; B: กำหนดแป้นพิมพ์ลัดเอง. Merged: the dialog edits shortcuts, so keep ลัด, with Customize = ปรับแต่ง. |
+| Personalize | ปรับให้เป็นแบบส่วนตัว | Options page. A: ปรับให้เป็นแบบส่วนตัว; B: ปรับแต่งส่วนตัว. Chose A so it stays distinct from Customize. |
+| Automatic | อัตโนมัติ | Auto → อัตโนมัติ; Automatic ({language}) → อัตโนมัติ ({language}). |
+| Manual | ด้วยตนเอง | For verbs (Manual Hyphenation → ใส่ยัติภังค์ด้วยตนเอง). Manual… → กำหนดเอง…. |
+| Advanced | ขั้นสูง | Advanced Find(…) → ค้นหาขั้นสูง(…). |
+| Basic | พื้นฐาน |  |
+| General | ทั่วไป |  |
+| Common | ที่ใช้บ่อย | Gallery sections. Common Fractions → เศษส่วนที่ใช้บ่อย; Common Functions → ฟังก์ชันที่ใช้บ่อย; Common Operators → ตัวดำเนินการที่ใช้บ่อย. |
+| Standard | มาตรฐาน | Standard Colors → สีมาตรฐาน. |
+| Special | พิเศษ | Special Characters → อักขระพิเศษ. |
+| Presets | ค่าสำเร็จรูป |  |
+| Theme | ธีม | Themes → ธีม. Theme Colors → สีธีม; Theme Fonts → ฟอนต์ธีม; Theme List → รายการธีม. A: no ของ; B: สีของธีม. Chose A: compact compounds. |
+| Watermark | ลายน้ำ | Custom Watermark / Custom Watermark… → ลายน้ำแบบกำหนดเอง(…); Remove Watermark → เอาลายน้ำออก. |
+| Page Color | สีหน้ากระดาษ | Page\nColor → สี\nหน้ากระดาษ. |
+| Page Borders | เส้นขอบหน้ากระดาษ | Page Border / Page\nBorders → เส้นขอบหน้ากระดาษ (one line, or เส้นขอบ\nหน้ากระดาษ). |
+| Border | เส้นขอบ | No Border → ไม่มีเส้นขอบ; All Borders → เส้นขอบทั้งหมด; Border lines → เส้นขอบ; Character Border → เส้นขอบอักขระ; Picture Border → เส้นขอบรูปภาพ. |
+| Shading | การแรเงา | A: แรเงา; B: การแรเงา. Chose B: labels are nouns. Borders and Shading(…) → เส้นขอบและการแรเงา(…); Character Shading → การแรเงาอักขระ. |
+| Highlight | เน้นสี | Marking text with a background colour; the bare key is a pane attribute (panes.rs:609). A: เน้นสี; B: เน้นข้อความ. Chose A: names the attribute and leaves the verb เน้น for commands (Highlight Merge Fields → เน้นเขตข้อมูลผสาน). Avoids the loanword ไฮไลต์. Kept apart from Emphasis (การเน้น). |
+| Text Highlight Color | สีเน้นข้อความ | Both drafts agree. |
+| Highlighter | ปากกาเน้นข้อความ | Ink tool; ordinary Thai name. |
+| Color | สี | Colors / Colors: → สี / สี:; No Color → ไม่มีสี; More Colors… → สีเพิ่มเติม…; Recent Colors → สีที่ใช้ล่าสุด; Color: {color} → สี: {color}; Color only → เฉพาะสี; Change Colors → เปลี่ยนสี. |
+| Colorful | หลากสี |  |
+| Hue: | เฉดสี: | Colour picker (HSL). Sat: → ความอิ่มตัว:; Lum: → ความสว่าง:. |
+| Red: | แดง: | Green: → เขียว:; Blue: → น้ำเงิน:. |
+| Hex: | ฐานสิบหก: | A: ฐานสิบหก:; B: Hex:. Chose A to match from Unicode (hex) → จาก Unicode (ฐานสิบหก). |
+| Color model: | แบบจำลองสี: |  |
+| Accent (color) | สีเน้น | Theme colour slots: Accent {n} → สีเน้น {n}; Accent Gradient → สีเน้นไล่ระดับ; Solid Accent → สีเน้นทึบ; Accent with Reflection → สีเน้นพร้อมเงาสะท้อน. |
+| Accent | เครื่องหมายกำกับ | The bare key and 'Accents' are the equation gallery (hat, bar, tilde over a symbol). Common Accent Objects → เครื่องหมายกำกับที่ใช้บ่อย. |
+| Gradient | ไล่ระดับสี |  |
+| Fill | สีเติม | Noun. A: เติมสี; B: สีเติม. Chose B: a label names the attribute. No Fill → ไม่มีสีเติม (A had ไม่เติมสี); Fill color: → สีเติม:; Shape Fill → สีเติมรูปร่าง; Text Fill → สีเติมข้อความ. |
+| Outline (stroke) | เส้นกรอบ | Outline of a shape or text. A: เส้นกรอบ; B: เส้นขอบ. Chose A so it never collides with Border (เส้นขอบ). Shape Outline → เส้นกรอบรูปร่าง; Text Outline → เส้นกรอบข้อความ; No Outline → ไม่มีเส้นกรอบ; Light with Outline → สว่างพร้อมเส้นกรอบ. |
+| Outline | เค้าร่าง | The bare key: Outline view. Outline Level / Outline level → ระดับเค้าร่าง; Outline levels → ระดับเค้าร่าง; Close Outline View → ปิดมุมมองเค้าร่าง; Outline State → สถานะเค้าร่าง. |
+| Effects | เอฟเฟกต์ | RI spelling (not เอฟเฟ็กต์/เอฟเฟค). Text Effects → เอฟเฟกต์ข้อความ; Shape Effects → เอฟเฟกต์รูปร่าง; Visual effects → เอฟเฟกต์ภาพ; Animation effects: → เอฟเฟกต์ภาพเคลื่อนไหว:. |
+| Artistic Effects | เอฟเฟกต์ศิลป์ | A: เอฟเฟกต์ศิลป์; B: เอฟเฟกต์ทางศิลป์ → A (shorter). |
+| Corrections | การปรับแก้ | Picture command (from B). |
+| Shadow | เงา | No Shadow → ไม่มีเงา; Dark with Shadow → มืดพร้อมเงา. |
+| Reflection | เงาสะท้อน | No Reflection → ไม่มีเงาสะท้อน. |
+| Glow | เรืองแสง | Soft Glow → เรืองแสงนุ่ม; Glow Colors → สีเรืองแสง; No Glow → ไม่เรืองแสง. |
+| Soft Edges | ขอบนุ่ม | A: ขอบนุ่ม; B: ขอบนุ่มนวล → A (shorter). No Soft Edges → ไม่มีขอบนุ่ม. |
+| 3-D | 3 มิติ | A: 3 มิติ; B: สามมิติ. Chose A: keeps the source digit (space between digit and Thai). |
+| Transform | แปลงรูป | WordArt warp. A: แปลงรูปทรง; B: แปลงรูป. Chose B: Shape is รูปร่าง everywhere, so รูปทรง is not introduced. No Transform → ไม่แปลงรูป. |
+| Transparency | ความโปร่งใส |  |
+| Emboss | นูน | Font effect (from B). Engrave → แกะสลัก. |
+| Hollow | กลวง |  |
+| Bold | ตัวหนา | Toggle names the attribute. |
+| Italic | ตัวเอียง |  |
+| Underline | ขีดเส้นใต้ | Underline color → สีเส้นใต้; Underline Words Only / Words only → ขีดเส้นใต้เฉพาะคำ / เฉพาะคำ; Double Underline → ขีดเส้นใต้คู่. |
+| Strikethrough | ขีดทับ | Double Strikethrough / Double strikethrough → ขีดทับสองเส้น. |
+| Subscript | ตัวห้อย |  |
+| Superscript | ตัวยก |  |
+| Subscript-Superscript | ตัวห้อย-ตัวยก | Equation structure. Left Subscript-Superscript → ตัวห้อย-ตัวยกด้านซ้าย; Subscripts and Superscripts → ตัวห้อยและตัวยก. |
+| Small caps | ตัวพิมพ์ใหญ่ขนาดเล็ก | Small Caps same. Thai has no case: affects Latin letters only. |
+| All caps | ตัวพิมพ์ใหญ่ทั้งหมด | All Caps same. |
+| Change Case | เปลี่ยนตัวพิมพ์เล็ก-ใหญ่ | A: เปลี่ยนตัวพิมพ์เล็ก-ใหญ่; B: เปลี่ยนตัวพิมพ์. Chose A: เปลี่ยนตัวพิมพ์ alone can mean 'change typeface'. Case changes → การเปลี่ยนตัวพิมพ์เล็ก-ใหญ่. |
+| Sentence case. | ตัวพิมพ์ใหญ่ต้นประโยค | Drop the demonstrating full stop. A: ตัวพิมพ์ใหญ่ต้นประโยค; B: ตัวพิมพ์แบบประโยค. Chose A: describes the effect. |
+| lowercase | ตัวพิมพ์เล็กทั้งหมด | A: …ทั้งหมด; B: ตัวพิมพ์เล็ก. Chose A: says the whole selection changes. |
+| UPPERCASE | ตัวพิมพ์ใหญ่ทั้งหมด | Same decision; matches All caps. |
+| Capitalize Each Word | ตัวพิมพ์ใหญ่ต้นทุกคำ | A: ตัวพิมพ์ใหญ่ต้นทุกคำ; B: ขึ้นต้นทุกคำด้วยตัวพิมพ์ใหญ่. Chose A: parallels ตัวพิมพ์ใหญ่ต้นประโยค in the same menu. |
+| tOGGLE cASE | สลับตัวพิมพ์เล็ก-ใหญ่ | A uses -, B uses /. Chose the hyphen everywhere. |
+| Match case | ตรงตามตัวพิมพ์เล็ก-ใหญ่ | Find option. Hyphen form, as above. |
+| Font Size | ขนาดฟอนต์ | Increase Font Size → เพิ่มขนาดฟอนต์; Decrease Font Size → ลดขนาดฟอนต์. |
+| Font Color | สีฟอนต์ | Font color / Font color: same. A: สีฟอนต์; B: สีตัวอักษร. Chose A: one term → one Thai (Font = ฟอนต์), and ตัวอักษร is reserved for 'letter'. |
+| Hidden | ซ่อน | Font effect. Hidden text → ข้อความที่ซ่อน. |
+| Character Scale | มาตราส่วนอักขระ |  |
+| Character Position | ตำแหน่งอักขระ |  |
+| Raised/lowered | ยกขึ้น/ลดลง | A: ยกขึ้น/ลดลง; B: ยก/ลด → A (clearer). |
+| Drop Cap | ตัวใหญ่ต้นย่อหน้า | Drop cap same. A: ตัวใหญ่ต้นย่อหน้า; B: อักษรนำย่อหน้า. Chose A: อักษรนำ is a Thai-grammar term (leading consonant) and would mislead. |
+| Latin text font: | ฟอนต์ข้อความละติน: |  |
+| Asian text font: | ฟอนต์ข้อความเอเชียตะวันออก: | 'Asian' = the OOXML eastAsia slot (CJK). Thai is not in it (complex script), so never translate as เอเชีย alone. Asian Typography → การจัดตัวอักษรเอเชียตะวันออก. |
+| Phonetic Guide | คำอ่านกำกับ | Ruby. Ruby text: → ข้อความคำอ่าน: (A; B ข้อความกำกับเสียงอ่าน:, A chosen to match คำอ่านกำกับ); Base text: → ข้อความหลัก:. |
+| Enclose Characters | ล้อมอักขระ | A: อักขระในกรอบล้อม; B: ล้อมอักขระ. Chose B: commands start with a verb. Enclosure → กรอบล้อม. |
+| Text Box | กล่องข้อความ | Text boxes → กล่องข้อความ. |
+| Shape | รูปร่าง | Shapes → รูปร่าง (never รูปทรง). Change Shape → เปลี่ยนรูปร่าง; Add Shape / Add\nShape → เพิ่มรูปร่าง. |
+| Picture | รูปภาพ | Pictures → รูปภาพ; Change Picture(…) → เปลี่ยนรูปภาพ(…); Compress Pictures → บีบอัดรูปภาพ; (picture or object) → (รูปภาพหรือวัตถุ). |
+| Remove Background | เอาพื้นหลังออก |  |
+| Crop | ครอบตัด | Size and Crop… → ขนาดและการครอบตัด…. |
+| Chart | แผนภูมิ | RI term (กราฟ is a graph). Insert Chart → แทรกแผนภูมิ. |
+| SmartArt | SmartArt | Feature name. Insert SmartArt → แทรก SmartArt. |
+| WordArt | WordArt |  |
+| Symbol | สัญลักษณ์ | Insert Symbol → แทรกสัญลักษณ์; More Symbols… → สัญลักษณ์เพิ่มเติม…; All symbol sets → ชุดสัญลักษณ์ทั้งหมด; Subset: → ชุดย่อย:; Recently used symbols: → สัญลักษณ์ที่ใช้ล่าสุด:; Character code: → รหัสอักขระ:; from Unicode (hex) → จาก Unicode (ฐานสิบหก). |
+| Object | วัตถุ | RI computer term. Select Objects → เลือกวัตถุ. |
+| Graphic | กราฟิก | RI spelling (not กราฟฟิก). |
+| Icons | ไอคอน | Search icons → ค้นหาไอคอน; Icon Color → สีไอคอน. |
+| Alt Text | ข้อความแสดงแทน | Alt text / Alt\nText / Alt: → ข้อความแสดงแทน(:); Alt Text Pane → แผงข้อความแสดงแทน. Wording of Thai web-accessibility guidance. |
+| Mark as decorative | ทำเครื่องหมายว่าเป็นภาพตกแต่ง | A: ภาพตกแต่ง; B: ของตกแต่ง. Chose A: ของตกแต่ง suggests ornaments or furniture. |
+| Hyperlink | ลิงก์ | Thai users say ลิงก์ for both Link and Hyperlink; also avoids an unconfirmed ไฮเปอร์-/ไฮเพอร์- spelling. Insert Hyperlink → แทรกลิงก์; Remove Hyperlink → เอาลิงก์ออก; Text to display: / Display text → ข้อความที่แสดง(:). |
+| Link | ลิงก์ | Noun (URL link). Link… → ลิงก์…. The verb that joins things is เชื่อมโยง. |
+| Create Link | สร้างการเชื่อมโยง | Links text boxes. A put สร้างลิงก์ in a note; B: สร้างการเชื่อมโยง. Chose B: it is the verb sense. |
+| Bookmark | ที่คั่นหน้า | A: บุ๊กมาร์ก; B: ที่คั่นหน้า. Chose B: brief rule 3 prefers the established Thai word, and it is clear. Bookmark name: → ชื่อที่คั่นหน้า:; Pages of bookmark: → หน้าของที่คั่นหน้า:. |
+| Cross-reference | การอ้างอิงโยง | Cross-reference: → การอ้างอิงโยง:. |
+| Footnote | เชิงอรรถ | RI term. Insert Footnote / Insert\nFootnote → แทรกเชิงอรรถ; Next Footnote → เชิงอรรถถัดไป; Footnote Text → ข้อความเชิงอรรถ. |
+| Footnote Reference | เครื่องหมายอ้างอิงเชิงอรรถ | A: เลขอ้างอิงเชิงอรรถ; B: เครื่องหมายอ้างอิงเชิงอรรถ. Chose B: the mark may be a symbol, and it matches Annotation Reference. Endnote Reference → เครื่องหมายอ้างอิงเชิงอรรถท้ายเรื่อง. |
+| Endnote | เชิงอรรถท้ายเรื่อง | Endnotes → เชิงอรรถท้ายเรื่อง; Insert Endnote → แทรกเชิงอรรถท้ายเรื่อง; Endnote Text → ข้อความเชิงอรรถท้ายเรื่อง. |
+| Footnote and Endnote | เชิงอรรถและเชิงอรรถท้ายเรื่อง | Footnotes and endnotes same. |
+| Footnotes to endnotes | เปลี่ยนเชิงอรรถเป็นเชิงอรรถท้ายเรื่อง | A had no verb; B: เปลี่ยน… → B (clearer). Endnotes to footnotes → เปลี่ยนเชิงอรรถท้ายเรื่องเป็นเชิงอรรถ. |
+| Notes | เชิงอรรถ | Footnotes and endnotes together. A Zotero note (Add\nNote) is บันทึกย่อ: เพิ่ม\nบันทึกย่อ. |
+| Citation | การอ้างอิง | Citations → การอ้างอิง; Insert Citation / Insert\nCitation → แทรกการอ้างอิง; Add/Edit\nCitation → เพิ่ม/แก้ไข\nการอ้างอิง; Mark Citation / Mark\nCitation → ทำเครื่องหมายการอ้างอิง; Move Past Citation → เลื่อนผ่านการอ้างอิง. |
+| Citation Style | รูปแบบการอ้างอิง | APA, MLA… are citation standards, which Thai academics call รูปแบบ. Style: APA → รูปแบบ: APA. |
+| Bibliography | บรรณานุกรม | Add/Edit\nBibliography → เพิ่ม/แก้ไข\nบรรณานุกรม. |
+| Source | แหล่งอ้างอิง | A bibliography source. A: แหล่งอ้างอิง; B: แหล่งข้อมูล. Chose A: specific, and leaves แหล่งข้อมูล free for data sources. Manage Sources → จัดการแหล่งอ้างอิง; Source Manager → ตัวจัดการแหล่งอ้างอิง; Add New Source… → เพิ่มแหล่งอ้างอิงใหม่…; Edit Source → แก้ไขแหล่งอ้างอิง; Source type: → ประเภทแหล่งอ้างอิง:; No sources yet. → ยังไม่มีแหล่งอ้างอิง. |
+| Caption | คำบรรยาย | Insert Caption / Insert\nCaption → แทรกคำบรรยาย; Caption: → คำบรรยาย:; Caption text → ข้อความคำบรรยาย. |
+| Caption Numbering | ลำดับเลขคำบรรยาย | A: ลำดับเลขคำบรรยาย; B: การใส่ลำดับเลขคำบรรยาย. Chose A, consistent with Numbering = ลำดับเลข. |
+| Label: | ป้ายกำกับ: | Caption label (Figure, Table), chart and field labels → ป้ายกำกับ. New Label / New Label… (caption dialog) → ป้ายกำกับใหม่(…); Delete Label → ลบป้ายกำกับ. Label changes with: (Compare dialog) → ทำเครื่องหมายการเปลี่ยนแปลงด้วย:. |
+| Data Labels | ป้ายกำกับข้อมูล | A: ป้ายกำกับข้อมูล; B: ป้ายข้อมูล. Chose A: one Thai for 'label' in this sense. |
+| Labels | ฉลาก | Mailings sticker labels. A: ฉลาก; B: ป้ายจ่าหน้า. Chose A: it covers any sticker label and avoids ป้ายจ่าหน้าที่อยู่, which says 'address' twice. Address labels → ฉลากที่อยู่; Shipping labels → ฉลากจัดส่ง; Return address labels → ฉลากที่อยู่ผู้ส่ง; Single label → ฉลากเดียว. |
+| Figure | ภาพ | Caption label. Thai documents number as ภาพที่ 1 / ตารางที่ 1 / สมการที่ 1; the inserted label is English today (engineering follow-up). |
+| Table of Figures | สารบัญภาพ |  |
+| Update Table | อัปเดตสารบัญ | The same key updates the TOC, the Table of Figures and the Table of Authorities (ribbon.rs:1335/1387/1411). All three Thai names start with สารบัญ, so อัปเดตสารบัญ fits all. A: ปรับปรุงสารบัญ; B: อัปเดตตาราง (wrong, it is not a data table). |
+| Add Text | เพิ่มข้อความ | TOC command. |
+| Tab leader: | ตัวนำแท็บ: | A: เส้นนำแท็บ; B: ตัวนำแท็บ. Chose B: leaders can be dots, not only lines. Leader → ตัวนำ. |
+| Mark Entry | ทำเครื่องหมายรายการ | Mark Entry… / Mark\nEntry same; Mark Index Entry → ทำเครื่องหมายรายการดัชนี; Main entry: → รายการหลัก:; Subentry: → รายการย่อย:; Entry marked. → ทำเครื่องหมายรายการแล้ว; Collect entries from: → รวบรวมรายการจาก:. |
+| Insert Index | แทรกดัชนี | Update Index → อัปเดตดัชนี. |
+| Indented | แบบเยื้อง | Index layout. A: แบบเยื้อง; B: เยื้อง → A (pairs with Run-in). |
+| Run-in | แบบต่อเนื่องในบรรทัด | A: แบบต่อเนื่อง; B: ต่อเนื่องในบรรทัด. Merged: 'in the line' is the point, and แบบ pairs with แบบเยื้อง. |
+| See | ดู | Index cross-reference. |
+| Sequence name: | ชื่อลำดับ: |  |
+| Envelope | ซองจดหมาย | Envelopes → ซองจดหมาย; Envelope size: → ขนาดซองจดหมาย: (B; A ขนาดซอง). |
+| Envelope Address | ที่อยู่ผู้รับบนซองจดหมาย | Built-in style. A: ที่อยู่บนซอง; B → B (whose address). Envelope Return → ที่อยู่ผู้ส่งบนซองจดหมาย. |
+| Mail Merge | จดหมายเวียน | The ordinary Thai name for a letter sent to many recipients, used by office and government staff. The verb merge stays ผสาน. |
+| Recipient | ผู้รับ | Select Recipients → เลือกผู้รับ; Edit Recipient List → แก้ไขรายชื่อผู้รับ; Recipient List / Recipient lists → รายชื่อผู้รับ; Find Recipient → ค้นหาผู้รับ; Remove recipient → เอาผู้รับออก; Recipients: {count} → ผู้รับ: {count}. |
+| Record (data) | ระเบียน | A row of the recipient list (RI database term). Next Record → ระเบียนถัดไป; Previous Record → ระเบียนก่อนหน้า. |
+| Merge Record # | หมายเลขระเบียนที่ผสาน | A: หมายเลขระเบียนผสาน; B: …ที่ผสาน → B (grammatical). |
+| Address Block | ส่วนที่อยู่ | A: ส่วนที่อยู่; B: ชุดที่อยู่. Chose A. Address\nBlock → ส่วนที่อยู่. |
+| Greeting Line | คำขึ้นต้นจดหมาย | A: บรรทัดคำขึ้นต้น; B: คำขึ้นต้นจดหมาย. Chose B: what Thai letters call the opening (เรียน …). Greeting\nLine → คำขึ้นต้น\nจดหมาย. |
+| Match Fields | จับคู่เขตข้อมูล |  |
+| Rules | กฎ | Mail-merge rules. |
+| If…Then…Else | ถ้า…แล้ว…มิฉะนั้น | Both keys exist. If…Then…Else… → ถ้า…แล้ว…มิฉะนั้น… (trailing … required by the validator). Then insert: → แล้วแทรก:; Otherwise insert: → มิฉะนั้นแทรก:. |
+| Skip Record If | ข้ามระเบียนถ้า | Skip Record If… → ข้ามระเบียนถ้า…. |
+| Finish & Merge | เสร็จสิ้นและผสาน | Finish &\nMerge → เสร็จสิ้น\nและผสาน. |
+| Return address: | ที่อยู่ผู้ส่ง: |  |
+| Delivery address: | ที่อยู่ผู้รับ: |  |
+| Omit | ละเว้น | Envelope option (from B). |
+| Address | ที่อยู่ | Address: → ที่อยู่:. |
+| Postal Code | รหัสไปรษณีย์ |  |
+| Courtesy Title | คำนำหน้าชื่อ |  |
+| First Name | ชื่อ |  |
+| Last Name | นามสกุล |  |
+| Company | บริษัท | Address field and credits column. |
+| Country | ประเทศ |  |
+| State | รัฐ/จังหวัด | Address field. A: รัฐ/จังหวัด; B: รัฐ. Chose A: Thai users enter their province here. View State / Outline State are สถานะ (other keys). |
+| E-mail Messages | ข้อความอีเมล | RI spelling อีเมล (not อีเมล์). |
+| Directory | สมุดรายชื่อ | Merge type: one document listing all records. A: รายชื่อรวม; B: สมุดรายชื่อ. Chose B: the familiar Thai word; not ไดเรกทอรี (a file-system term). |
+| Letters | จดหมาย | Merge type. |
+| Normal Word Document | เอกสาร Word ปกติ | Merge type. |
+| Spelling | การสะกดคำ | Possible spelling mistake → อาจสะกดผิด. |
+| Grammar | ไวยากรณ์ |  |
+| Spelling & Grammar | การสะกดคำและไวยากรณ์ | A: การสะกดและไวยากรณ์; B: การสะกดคำและไวยากรณ์. Chose B: Spelling = การสะกดคำ. Spelling &\nGrammar → การสะกดคำ\nและไวยากรณ์. |
+| Spelling Suggestions | คำแนะนำการสะกดคำ | A: คำแนะนำการสะกด; B: คำที่แนะนำ. Merged: Suggestions = คำแนะนำ, plus Spelling = การสะกดคำ. |
+| Suggestions | คำแนะนำ | (no suggestions) → (ไม่มีคำแนะนำ). |
+| Thesaurus | อรรถาภิธาน | Standard Thai word (RI dictionary; not confirmed online). Some office users may not know it, so tooltips and help can gloss it as คลังคำพ้องความหมาย. Synonyms → คำพ้องความหมาย. |
+| Dictionary | พจนานุกรม | Add to Dictionary → เพิ่มลงในพจนานุกรม. |
+| Word Count | นับคำ | Dialog and command. |
+| Statistics | สถิติ |  |
+| Ignore | ข้าม | Proofing button: Ignore All → ข้ามทั้งหมด. As a Find option meaning 'disregard' it is ไม่สนใจ: Ignore punctuation characters → ไม่สนใจเครื่องหมายวรรคตอน; Ignore white-space characters → ไม่สนใจอักขระช่องว่าง. A used ข้าม for both; B's split chosen because skipping and disregarding are different actions. |
+| Proofing language | ภาษาที่ใช้พิสูจน์อักษร |  |
+| Detect language automatically | ตรวจหาภาษาโดยอัตโนมัติ |  |
+| AutoCorrect | แก้ไขอัตโนมัติ | AutoCorrect Options → ตัวเลือกการแก้ไขอัตโนมัติ; Exceptions… → ข้อยกเว้น…; Don't capitalize after: → ไม่ขึ้นต้นด้วยตัวพิมพ์ใหญ่หลัง: (A; B added ต้อง). |
+| Math AutoCorrect | แก้ไขคณิตศาสตร์อัตโนมัติ | A: แก้ไขสมการอัตโนมัติ; B: แก้ไขคณิตศาสตร์อัตโนมัติ. Chose B: Math → คณิตศาสตร์. |
+| AutoFormat | จัดรูปแบบอัตโนมัติ |  |
+| AutoSave | บันทึกอัตโนมัติ |  |
+| AutoText | ข้อความอัตโนมัติ |  |
+| AutoFit | ปรับพอดีอัตโนมัติ | Fixed Column Width → ความกว้างคอลัมน์คงที่. |
+| AutoFit Contents | ปรับพอดีกับเนื้อหาอัตโนมัติ | A: no อัตโนมัติ; B: with it. Chose B: command search shows the item without its parent menu. AutoFit Window → ปรับพอดีกับหน้าต่างอัตโนมัติ. |
+| Hyphenation | การใส่ยัติภังค์ | Hyphen = ยัติภังค์ (RI punctuation name). Applies to Latin text; never translate as การตัดคำ (Thai word segmentation, another feature). Hyphenation Options… → ตัวเลือกการใส่ยัติภังค์…; Automatically hyphenate document → ใส่ยัติภังค์ในเอกสารโดยอัตโนมัติ. |
+| Hyphenation zone: | ระยะใส่ยัติภังค์: | A: ระยะตัดยัติภังค์; B: ระยะสำหรับใส่ยัติภังค์. Merged on the verb ใส่, shorter. Hyphenate at: → ใส่ยัติภังค์ที่:. |
+| Hyphenate | ใส่ยัติภังค์ | Don't hyphenate → ไม่ใส่ยัติภังค์; Manual Hyphenation → ใส่ยัติภังค์ด้วยตนเอง. |
+| Nonbreaking Hyphen | ยัติภังค์ไม่ตัดบรรทัด | A: ไม่ตัดบรรทัด; B: ไม่แบ่งบรรทัด. Chose A: matches Line breaking = การตัดบรรทัด. |
+| Nonbreaking Space | ช่องว่างไม่ตัดบรรทัด | Same decision. |
+| Optional Hyphen | ยัติภังค์ตามเงื่อนไข | Shows only when the word breaks at the end of a line. A: แบบมีเงื่อนไข; B: ตามเงื่อนไข → B (shorter). |
+| No-Width Optional Break | จุดตัดบรรทัดแบบไม่มีความกว้าง | Zero-width break opportunity; important for Thai line breaking. Merged A's ตัด with B's แบบ. |
+| No-Width Non Break | ตัวเชื่อมแบบไม่มีความกว้าง | Zero-width joiner that prevents a break. A: ตัวเชื่อมไม่มีความกว้าง; B was very long. Kept A's idea with แบบ. |
+| Track Changes | ติดตามการเปลี่ยนแปลง | Track\nChanges → ติดตาม\nการเปลี่ยนแปลง; Track\nChanges ✓ → ติดตาม\nการเปลี่ยนแปลง ✓; Track Changes: On → ติดตามการเปลี่ยนแปลง: เปิด; Track Changes Options → ตัวเลือกการติดตามการเปลี่ยนแปลง. |
+| Tracked changes | การเปลี่ยนแปลงที่ติดตาม |  |
+| Markup | เครื่องหมายการแก้ไข | How changes and comments are drawn; avoids มาร์กอัป. All Markup → เครื่องหมายการแก้ไขทั้งหมด; No Markup → ไม่แสดงเครื่องหมายการแก้ไข; Show Markup → แสดงเครื่องหมายการแก้ไข; Print Markup → พิมพ์เครื่องหมายการแก้ไข. A kept เครื่องหมาย in every option, B dropped it in two. Chose A for consistency. |
+| Display for Review | แสดงเพื่อตรวจทาน | A: แสดงผลสำหรับการตรวจทาน; B → B (shorter). |
+| Accept | ยอมรับ | Accept All Changes → ยอมรับการเปลี่ยนแปลงทั้งหมด; Accept This Change → ยอมรับการเปลี่ยนแปลงนี้. |
+| Reject | ปฏิเสธ | Reject All Changes → ปฏิเสธการเปลี่ยนแปลงทั้งหมด; Reject Change → ปฏิเสธการเปลี่ยนแปลง. |
+| Insertions: | ส่วนที่แทรก: | Deletions: → ส่วนที่ลบ:; Insertions and Deletions → ส่วนที่แทรกและส่วนที่ลบ. |
+| Moves | การย้าย | Moved from → ย้ายมาจาก; Moved to → ย้ายไปที่. |
+| Balloons | บอลลูน | Section heading over 'Show revisions in balloons' (dialogs_lists.rs:468). A: บอลลูน; B: กรอบคำอธิบาย. Chose A: บอลลูน is a Thai dictionary loanword (RI entry assumed, not confirmed online), it describes the shape, and it fits แสดงการแก้ไขในบอลลูน. กรอบคำอธิบาย ('explanation box') misdescribes comments and changes. |
+| Comment | ข้อคิดเห็น | ข้อคิดเห็น (remark on a document), not ความคิดเห็น (personal opinion). New Comment / New\nComment → ข้อคิดเห็นใหม่; ➕ New comment → ➕ ข้อคิดเห็นใหม่; Add a comment → เพิ่มข้อคิดเห็น; Edit Comment → แก้ไขข้อคิดเห็น; Delete Comment → ลบข้อคิดเห็น; Next/Previous Comment → ข้อคิดเห็นถัดไป/ก่อนหน้า; Show\nComments → แสดง\nข้อคิดเห็น. |
+| Annotation Text | ข้อความข้อคิดเห็น | OOXML comment styles. Annotation Reference → เครื่องหมายอ้างอิงข้อคิดเห็น. |
+| Annotation Subject | เรื่องของข้อคิดเห็น | A: หัวข้อข้อคิดเห็น; B: หัวเรื่องข้อคิดเห็น. Neither was kept: หัวเรื่อง is Heading and หัวข้อ belongs to bullets. Uses Subject = เรื่อง. |
+| Reply | ตอบกลับ | Write a reply → เขียนคำตอบกลับ. |
+| Resolve | ปิดประเด็น | Marks a thread settled; not แก้ไข (Edit). Resolved → ปิดประเด็นแล้ว. |
+| Reviewing Pane | แผงการตรวจทาน | A: แผงการตรวจทาน; B: แผงตรวจทาน. Chose A: same pattern as แผงการเลือก. |
+| Block Authors | ปิดกั้นผู้เขียนอื่น | Missed by both drafts (review.blockAuthors): stops other authors editing the selected part. Block\nAuthors → ปิดกั้น\nผู้เขียนอื่น. |
+| Original document | เอกสารต้นฉบับ |  |
+| Revised document | เอกสารฉบับแก้ไข |  |
+| Show changes at: | แสดงการเปลี่ยนแปลงที่: | Compare options (missed by both). Show changes in: → แสดงการเปลี่ยนแปลงใน:; Changed lines: → บรรทัดที่เปลี่ยน:. |
+| Combine | รวม | Combine Documents → รวมเอกสาร. |
+| Restrict Editing | จำกัดการแก้ไข | Restrict\nEditing → จำกัด\nการแก้ไข. 1. Formatting restrictions → 1. ข้อจำกัดการจัดรูปแบบ; 2. Editing restrictions → 2. ข้อจำกัดการแก้ไข; 3. Start enforcement → 3. เริ่มบังคับใช้. |
+| Start Enforcing Protection | เริ่มบังคับใช้การป้องกัน | Stop Protection → หยุดการป้องกัน. |
+| Filling in forms | การกรอกแบบฟอร์ม |  |
+| Password | รหัสผ่าน | Password: → รหัสผ่าน:; Confirm password: → ยืนยันรหัสผ่าน:; Change Password… → เปลี่ยนรหัสผ่าน…; Remove Password → เอารหัสผ่านออก. |
+| Encrypt with Password | เข้ารหัสด้วยรหัสผ่าน | Encrypt with Password… same with …. |
+| Everyone | ทุกคน | Anyone → ทุกคน. |
+| Exceptions (optional) | ข้อยกเว้น (ไม่บังคับ) | Formatting exceptions → ข้อยกเว้นการจัดรูปแบบ. |
+| Translate | แปล |  |
+| Read Aloud | อ่านออกเสียง | Read\nAloud → อ่าน\nออกเสียง; Stop Reading → หยุดอ่าน; Read Aloud Status → สถานะการอ่านออกเสียง. |
+| Dictate | พิมพ์ด้วยเสียง |  |
+| Researcher | ผู้ช่วยค้นคว้า |  |
+| Pen | ปากกา | Add Pen / Add\nPen → เพิ่มปากกา; Remove Pen → เอาปากกาออก. |
+| Pencil | ดินสอ |  |
+| Eraser | ยางลบ | Erase → ลบ. |
+| Lasso | บ่วงบาศ | Lasso Select → เลือกแบบบ่วงบาศ. |
+| Thickness | ความหนา | Weight (line) → ความหนา; Thick → หนา. |
+| Read Mode | โหมดอ่าน | Read\nMode → โหมดอ่าน. |
+| Print Layout | เค้าโครงสิ่งพิมพ์ | View showing pages as printed. A: เค้าโครงสิ่งพิมพ์; B: เค้าโครงหน้าพิมพ์. Chose A: สิ่งพิมพ์ (printed matter) is an ordinary word; หน้าพิมพ์ is unclear. Print\nLayout → เค้าโครง\nสิ่งพิมพ์. |
+| Web Layout | เค้าโครงเว็บ | Web\nLayout → เค้าโครงเว็บ. |
+| Draft | ฉบับร่าง | View name. |
+| Focus | โฟกัส | Distraction-free mode; a dictionary loanword users say. |
+| Navigation Pane | แผงนำทาง | Navigation → การนำทาง; Results → ผลลัพธ์; Search document → ค้นหาในเอกสาร. |
+| Pane | แผง | Shorter than บานหน้าต่าง. Selection Pane → แผงการเลือก; Text Pane → แผงข้อความ. |
+| Ruler | ไม้บรรทัด |  |
+| Gridlines | เส้นตาราง | View Gridlines → ดูเส้นตาราง. |
+| One Page | หน้าเดียว |  |
+| Multiple Pages | หลายหน้า | Many pages → หลายหน้า. |
+| Page Width | ความกว้างหน้า | Page width same. |
+| Side to Side | เคียงข้างกัน | Side\nto Side → เคียงข้างกัน. |
+| Switch Modes | สลับโหมด | Switch\nModes → สลับโหมด. |
+| Hide White Space | ซ่อนช่องว่างระหว่างหน้า | A: ซ่อนช่องว่าง; B: …ระหว่างหน้า. Chose B: it hides the gap between pages, not space characters. White space / White Space → ช่องว่าง. |
+| Split | แบ่ง | Splitting the window. For cells and tables use แยก: Split Cells → แยกเซลล์; Split Table → แยกตาราง. B put แยก on the bare key; A's split kept. |
+| Status Bar | แถบสถานะ |  |
+| Toolbar | แถบเครื่องมือ |  |
+| Quick Access Toolbar | แถบเครื่องมือด่วน | Here Quick = ด่วน (fast access); in Quick Parts/Tables it is สำเร็จรูป. |
+| Ribbon | แถบคำสั่ง | DECISION. A: แถบคำสั่ง; B: ริบบิ้น. Chose A: brief rule 3 prefers a clear Thai description, and it matches แถบเครื่องมือ and แถบสถานะ. The RI dictionary form of the loanword could not be confirmed online (ริบบิ้น vs ริบบอน). Ribbon tabs → แท็บแถบคำสั่ง; Customize Ribbon → ปรับแต่งแถบคำสั่ง; Customize the Ribbon… → ปรับแต่งแถบคำสั่ง…; Scroll ribbon left/right → เลื่อนแถบคำสั่งไปทางซ้าย/ขวา. |
+| Tab | แท็บ | Ribbon/dialog tab and tab stop; RI-style spelling. New Tab → แท็บใหม่; Tabs / Tabs… → แท็บ / แท็บ…; Tab character / Tab Character / Tab characters → อักขระแท็บ. The Tab key stays Latin. |
+| Tab stop position: | ตำแหน่งจุดหยุดแท็บ: | A: ตำแหน่งจุดหยุดแท็บ; B: ตำแหน่งแท็บ. Chose A: Tab stop = จุดหยุดแท็บ. |
+| Default tab stops: | ระยะจุดหยุดแท็บเริ่มต้น: | The field is the spacing between default stops. Merged: A's term plus B's ระยะ. |
+| Group | จัดกลุ่ม | The bare key is the Arrange verb (arrange.group). A: กลุ่ม (noun); B: จัดกลุ่ม. Chose B per code. The noun is กลุ่ม: New Group → กลุ่มใหม่. Ungroup → ยกเลิกการจัดกลุ่ม. |
+| Command | คำสั่ง | Commands / Commands: → คำสั่ง(:); All Commands → คำสั่งทั้งหมด; Search Commands → ค้นหาคำสั่ง; Choose a command → เลือกคำสั่ง; More Commands… → คำสั่งเพิ่มเติม…. |
+| Dialog | กล่องโต้ตอบ | RI computer vocabulary (from knowledge; not confirmed online). |
+| Menu | เมนู |  |
+| Keyboard shortcuts: | แป้นพิมพ์ลัด: | Keyboard = แป้นพิมพ์, key = แป้น. Shortcut key: → แป้นลัด:; New shortcut: → แป้นลัดใหม่:; Choose a shortcut → เลือกแป้นลัด. |
+| Assign | กำหนด | Shortcut dialog button (from B). Same Thai as Define; meanings overlap there. |
+| Gallery | แกลเลอรี | UI gallery and a theme name. RI rule: no tone mark, final -y → -ี (not แกลเลอรี่). Not confirmed online. |
+| Preview | ตัวอย่าง | SHARED KEY: the bare key is a section heading in the Font dialog (dialogs.rs:1505). A: แสดงตัวอย่าง (verb); B: ตัวอย่าง. Chose B per code. The verb in commands stays แสดงตัวอย่าง (Preview Results). |
+| Sample | ตัวอย่าง | Example: {sample} → ตัวอย่าง: {sample}. |
+| Selection | ส่วนที่เลือก | Extend Selection → ขยายส่วนที่เลือก; Collapse Selection → ยุบส่วนที่เลือก; Selected → ที่เลือก; Selected pages → หน้าที่เลือก. |
+| Caret | เคอร์เซอร์ | Insertion point. Set Caret → วางเคอร์เซอร์. |
+| Caret Character | อักขระ ^ | Find special character. A: เครื่องหมายแคเรต (^); B: อักขระ ^. Chose B: avoids an unverified transliteration. |
+| Version | เวอร์ชัน | RI spelling (not เวอร์ชั่น). Version History → ประวัติเวอร์ชัน; Version {version} ({build}) → เวอร์ชัน {version} ({build}); development build → รุ่นทดสอบสำหรับการพัฒนา. |
+| Organizer | ตัวจัดระเบียบ | Organizer… → ตัวจัดระเบียบ…. |
+| New | ใหม่ | SHARED KEY: the File › New command and Backstage heading (file.new), and the 'New' swatch in the colour picker (colors.rs:528). A: ใหม่ (adjective) / สร้าง (command); B: สร้างใหม่. Only ใหม่ reads right in both places. New… → สร้าง…; New Document → เอกสารใหม่. |
+| Open | เปิด | file.open and Backstage. SHARED KEY: also the 'Open' paragraph-spacing preset (ribbon.rs:1091), where เปิด reads oddly (wanted: โปร่ง; Relaxed would then need another word). Engineering follow-up: give the preset its own key. Reopen → เปิดอีกครั้ง. |
+| Save | บันทึก | Save documents → บันทึกเอกสาร; as an Options page: การบันทึก. |
+| Save As | บันทึกเป็น |  |
+| Don't Save | ไม่บันทึก |  |
+| Saved | บันทึกแล้ว | Not saved / Not saved yet → ยังไม่ได้บันทึก. |
+| Recover Unsaved Documents | กู้คืนเอกสารที่ยังไม่ได้บันทึก |  |
+| Print | พิมพ์ | Command verb. Print to PDF → พิมพ์เป็น PDF; Print failed: {error} → พิมพ์ไม่สำเร็จ: {error}; Copies → จำนวนสำเนา; Collate copies → เรียงชุดสำเนา; All pages → ทุกหน้า; Current page → หน้าปัจจุบัน; {count} of {total} pages will print → จะพิมพ์ {count} จาก {total} หน้า. |
+| Printing | การสั่งพิมพ์ | Noun (Options section, status). A: การสั่งพิมพ์; B: การพิมพ์. Chose A so it never collides with Typing = การพิมพ์. |
+| Opening print dialog… | กำลังเปิดกล่องโต้ตอบการสั่งพิมพ์… | Follows Printing = การสั่งพิมพ์ (B had การพิมพ์). |
+| Typing | การพิมพ์ | Keyboard typing. As you type → ขณะพิมพ์. |
+| Overtype | พิมพ์ทับ |  |
+| Export | ส่งออก | Export PDF → ส่งออกเป็น PDF; Exported {path} → ส่งออกแล้ว: {path}. |
+| Import | นำเข้า |  |
+| Share | แชร์ | What Thai users say for sharing files; แบ่งปัน sounds like dividing things up. |
+| Info | ข้อมูล | Backstage. Document Information → ข้อมูลเอกสาร. |
+| Recent | ล่าสุด |  |
+| Browse… | เรียกดู… | Browse in Doc4Me… → เรียกดูใน Doc4Me…; 📂  Browse… → 📂  เรียกดู… (keep the icon and two spaces). |
+| Inspect Document | ตรวจสอบเอกสาร |  |
+| Check Compatibility | ตรวจสอบความเข้ากันได้ |  |
+| Check for Errors | ตรวจหาข้อผิดพลาด |  |
+| Keywords | คำสำคัญ | Document property. |
+| Subject | เรื่อง | Document property. |
+| Category | หมวดหมู่ | Document property (backstage.rs:310) and chart category (Category {n} → หมวดหมู่ {n}; Categories(:) → หมวดหมู่(:)). A: ประเภท; B: หมวดหมู่. Chose B: natural for a document property, and Type stays ประเภท without a clash. |
+| Undo | เลิกทำ | Undo {action} → เลิกทำ {action}. |
+| Redo | ทำซ้ำ |  |
+| Repeat | ทำอีกครั้ง | Repeat last action. A: ทำซ้ำ (same as Redo); B: ทำอีกครั้ง. Chose B: one Thai per English term, and the two commands differ. |
+| Cut | ตัด |  |
+| Copy | คัดลอก |  |
+| Paste | วาง | Paste (⌘V) → วาง (⌘V); Paste Special / Paste Special… → วางแบบพิเศษ(…); Paste All → วางทั้งหมด; Paste as: → วางเป็น:. |
+| Keep Text Only | เก็บเฉพาะข้อความ | A: เก็บไว้เฉพาะข้อความ; B → B (shorter). |
+| Select | เลือก | Select All → เลือกทั้งหมด; Select Text → เลือกข้อความ; Select Table → เลือกตาราง; Select Paragraph → เลือกย่อหน้า; Select Range → เลือกช่วง. |
+| Find | ค้นหา | Find Next → ค้นหาถัดไป; Find Previous → ค้นหาก่อนหน้า; Find what: / Find: → ค้นหา:; Find What Text → ข้อความที่ค้นหา; Find What Expression → นิพจน์ที่ค้นหา. |
+| Search | ค้นหา | Same verb as Find. |
+| Replace | แทนที่ | Replace All → แทนที่ทั้งหมด; Replace with: → แทนที่ด้วย:; Replace: → แทนที่:; With: → ด้วย:; Replace Document Text → แทนที่ข้อความในเอกสาร. |
+| Find and Replace | ค้นหาและแทนที่ |  |
+| Go To | ไปที่ | Go to / Go To… → ไปที่ / ไปที่…; Go To (⌘⌥G) → ไปที่ (⌘⌥G); Go Back → ย้อนกลับ; Enter page number: → ใส่เลขหน้า:. |
+| Delete | ลบ | Removes for good. Delete Rows/Columns/Cells/Table → ลบแถว/คอลัมน์/เซลล์/ตาราง; Deleted → ลบแล้ว; Can't be deleted → ลบไม่ได้. The Delete key stays Latin. |
+| Remove | เอาออก | Takes off without destroying content. << Remove → << เอาออก; Remove series → เอาชุดข้อมูลออก. |
+| Clear | ล้าง | Clear All → ล้างทั้งหมด. |
+| Add | เพิ่ม | Add >> → เพิ่ม >>; Add to Document → เพิ่มลงในเอกสาร; Add a Table → เพิ่มตาราง. |
+| Apply | นำไปใช้ | Button only. Apply to: → นำไปใช้กับ:; Apply formatting to: → นำการจัดรูปแบบไปใช้กับ:. |
+| Edit | แก้ไข | Edit… → แก้ไข…; Edit Data / Edit\nData → แก้ไขข้อมูล; Edit Items → แก้ไขรายการ; Edited → แก้ไขแล้ว. |
+| Modify | ปรับเปลี่ยน | Modify… → ปรับเปลี่ยน…. |
+| Change | เปลี่ยน |  |
+| Rename | เปลี่ยนชื่อ | Rename… → เปลี่ยนชื่อ…. |
+| Update | อัปเดต | DECISION. A: ปรับปรุง; B: อัปเดต. Chose อัปเดต: in this UI 'update' means 'bring up to date', and ปรับปรุง means 'improve'. อัปเดต follows the RI rules (final p → ป, t → ต; never อัพเดท). Kept distinct from Refresh. |
+| Refresh | รีเฟรช | Reload citations from Zotero; loanword users say. |
+| Set | ตั้ง | A: ตั้ง; B: กำหนด. Chose A so Set ≠ Define (กำหนด). Set Date → ตั้งวันที่. |
+| Define | กำหนด |  |
+| Check | ตรวจสอบ | Check\nAccessibility → ตรวจสอบ\nการเข้าถึงได้. |
+| Manage | จัดการ |  |
+| Move | ย้าย | Move or Resize → ย้ายหรือปรับขนาด; Move with Text → ย้ายตามข้อความ (B; A ย้ายไปพร้อมข้อความ, B shorter). |
+| Move Up | ย้ายขึ้น | A: เลื่อนขึ้น; B: ย้ายขึ้น. Chose B: Move = ย้าย. Move Down → ย้ายลง; Move Paragraph Up/Down → ย้ายย่อหน้าขึ้น/ลง. |
+| Nudge | ขยับทีละน้อย |  |
+| Rotate | หมุน | Rotate Left 90° → หมุนซ้าย 90°; Rotate Right 90° → หมุนขวา 90°; Rotation(:) → การหมุน(:). |
+| Flip Horizontal | พลิกแนวนอน | Flip Vertical → พลิกแนวตั้ง. |
+| Bring Forward | นำไปข้างหน้า |  |
+| Send Backward | ส่งไปข้างหลัง |  |
+| Wrap Text | การล้อมข้อความ | Text flowing around an object; never ตัดคำ/ตัดข้อความ. Text Wrapping → การล้อมข้อความ; Wrap\nText → การล้อม\nข้อความ; Wrap Text Sides → ด้านที่ล้อมข้อความ; Both Sides → ทั้งสองด้าน; Largest Only → เฉพาะด้านที่กว้างที่สุด. |
+| Inline | ในบรรทัด | Wrap style and equation mode. In Line with Text → ในบรรทัดเดียวกับข้อความ; Change to Inline → เปลี่ยนเป็นแบบในบรรทัด. |
+| Square | สี่เหลี่ยม | Wrap option and bullet shape; a true square is จัตุรัส (not จตุรัส). |
+| Through | ทะลุผ่าน |  |
+| Top and Bottom | บนและล่าง |  |
+| Behind Text | หลังข้อความ | In Front of Text → หน้าข้อความ. |
+| Position | ตำแหน่ง | Position: → ตำแหน่ง:; Current Position → ตำแหน่งปัจจุบัน. |
+| Sort | เรียงลำดับ | Sort order: → ลำดับการเรียง:; Alphabetical → ตามตัวอักษร; As Recommended → ตามที่แนะนำ; Reverse the order → กลับลำดับ; Name (A–Z) → ชื่อ (เรียงตามตัวอักษร). |
+| Hide | ซ่อน |  |
+| Show/Hide ¶ | แสดง/ซ่อน ¶ | Keep ¶ with a space before it. |
+| Toggle | สลับ | Toggle Unicode Character → สลับอักขระ Unicode. |
+| Switch | สลับ |  |
+| Expand | ขยาย | Outline/heading expand. |
+| Collapse | ยุบ |  |
+| Promote | เลื่อนระดับขึ้น |  |
+| Demote | ลดระดับลง | A: ลดระดับ; B: ลดระดับลง → B (pairs with เลื่อนระดับขึ้น). |
+| Insert Table | แทรกตาราง | Insert Table… → แทรกตาราง…; Draw\nTable → วาดตาราง. |
+| Merge Cells | ผสานเซลล์ |  |
+| Split Cells | แยกเซลล์ |  |
+| Distribute Rows | กระจายความสูงแถวให้เท่ากัน | A: กระจายแถวให้เท่ากัน; B: กระจายความสูงแถวเท่ากัน. Merged: says what is evened out (B), with A's ให้. Distribute Columns → กระจายความกว้างคอลัมน์ให้เท่ากัน. |
+| Repeat Header Rows | แสดงแถวหัวตารางซ้ำ | A: …ซ้ำ; B: …ซ้ำทุกหน้า. Chose A: short enough for the ribbon. |
+| Header Row | แถวหัวตาราง | Not หัวกระดาษ. Total Row → แถวผลรวม; Banded Rows → แถวสลับสี; Banded Columns → คอลัมน์สลับสี; First Column → คอลัมน์แรก; Last Column → คอลัมน์สุดท้าย. |
+| Insert Rows Above | แทรกแถวด้านบน | Insert Rows Below → แทรกแถวด้านล่าง; Insert\nAbove → แทรก\nด้านบน. |
+| Table Column Width | ความกว้างคอลัมน์ตาราง | Table Row Height → ความสูงแถวตาราง; Preferred width: → ความกว้างที่ต้องการ:; Specify height: → ระบุความสูง:. |
+| Whole Table | ทั้งตาราง |  |
+| Formula | สูตร |  |
+| Quick Tables | ตารางสำเร็จรูป | Here Quick = สำเร็จรูป (ready-made). |
+| Quick Parts | ส่วนสำเร็จรูป |  |
+| Spreadsheet Table | ตารางสเปรดชีต | A: ตารางแบบสเปรดชีต; B: ตารางสเปรดชีต → B (shorter). RI coinage ตารางทำการ is not used by office users. |
+| Cover Page | หน้าปก | Studio cover → ปกสตูดิโอ. |
+| Blank Page | หน้าว่าง |  |
+| Blank | ว่าง | Header/footer preset (ribbon.rs:834). A: ว่าง; B: เปล่า. Chose A per code. Exception: Blank document → เอกสารเปล่า (idiom). Blank (Three Columns) → ว่าง (สามคอลัมน์). |
+| Signature Line | บรรทัดลายเซ็น |  |
+| Date & Time | วันที่และเวลา | Date and Time same; Date format → รูปแบบวันที่; Date formats: → รูปแบบวันที่:. |
+| Text from File | ข้อความจากไฟล์ |  |
+| Next | ถัดไป |  |
+| Previous | ก่อนหน้า |  |
+| First | แรก | First commit → คอมมิตแรก. |
+| Last | สุดท้าย | Last commit → คอมมิตล่าสุด. |
+| Up | ขึ้น |  |
+| Down | ลง |  |
+| Forward | ไปข้างหน้า |  |
+| Back | ย้อนกลับ |  |
+| Word Left | ไปทางซ้ายหนึ่งคำ | Caret command. A: คำทางซ้าย; B: ไปทางซ้ายหนึ่งคำ. Chose B: commands are verbs. Word Right → ไปทางขวาหนึ่งคำ. |
+| Paragraph Up | ขึ้นไปหนึ่งย่อหน้า | Caret command (B). Paragraph Down → ลงไปหนึ่งย่อหน้า. |
+| Line Start | ไปต้นบรรทัด | Caret command. B: ต้นบรรทัด (noun); made a verb to match Word Left. Line End → ไปท้ายบรรทัด; Document Start → ไปต้นเอกสาร; Document End → ไปท้ายเอกสาร. |
+| Page Down | Page Down | Caret command named after its key; key names stay Latin (B). A wanted เลื่อนลงหนึ่งหน้าจอ; kept B so the label matches the key the user sees. Page Up and Backspace (command) likewise stay Latin. |
+| Restart | เริ่มใหม่ | Restart list after: → เริ่มรายการใหม่หลัง:. |
+| Start at: | เริ่มที่: | Chapters begin at: → บทเริ่มที่:. |
+| Stop | หยุด | Stopped → หยุดแล้ว. |
+| Pause | หยุดชั่วคราว | Play/Pause → เล่น/หยุดชั่วคราว. |
+| Paused | หยุดชั่วคราวแล้ว | A: …แล้ว; B: …อยู่. Chose A: matches the status rule (states take แล้ว). |
+| Play | เล่น |  |
+| Rewind | กรอกลับ | A: กรอกลับ; B: ย้อนกลับ. Chose A: ย้อนกลับ is Back/Go Back. |
+| Speed | ความเร็ว | Normal speed → ความเร็วปกติ. |
+| OK | ตกลง |  |
+| Cancel | ยกเลิก |  |
+| Yes | ใช่ |  |
+| No | ไม่ใช่ | Dialog button. As a prefix meaning 'none': ไม่มี (No Border → ไม่มีเส้นขอบ). |
+| None | ไม่มี | (none) → (ไม่มี); ✓ None → ✓ ไม่มี; Nothing → ไม่มี; No limit → ไม่จำกัด. |
+| Not | ไม่ใช่ | Find special character [!] (dialogs.rs:61). A: ไม่ใช่; B: นิเสธ (logic). Chose A: the menu means 'not these characters'. Not {name} → ไม่ใช่ {name}. |
+| All | ทั้งหมด | (All) → (ทั้งหมด). |
+| On | เปิด |  |
+| Off | ปิด |  |
+| Current | ปัจจุบัน |  |
+| Whole document | ทั้งเอกสาร | This page → หน้านี้; Whole page → ทั้งหน้า; This point forward → ตั้งแต่จุดนี้เป็นต้นไป (A; B ตำแหน่งนี้, A shorter). |
+| More | เพิ่มเติม | More >> → เพิ่มเติม >>; << Less → << น้อยลง. |
+| Other | อื่น ๆ | Space before and after ๆ (RI). |
+| Error | ข้อผิดพลาด | Errors ({n}) → ข้อผิดพลาด ({n}). |
+| Warning | คำเตือน | Warnings ({n}) → คำเตือน ({n}). |
+| Tips ({n}) | เคล็ดลับ ({n}) |  |
+| Failed | ไม่สำเร็จ | Gentler than ล้มเหลว. |
+| {name} wasn't found. | ไม่พบ {name} | Reordered; full stop dropped. |
+| Finished | เสร็จแล้ว |  |
+| Waiting for Zotero… | กำลังรอ Zotero… |  |
+| Result | ผลลัพธ์ |  |
+| Name | ชื่อ | Name: → ชื่อ:. |
+| Description: | คำอธิบาย: |  |
+| Value | ค่า |  |
+| Expression | นิพจน์ |  |
+| Count | จำนวน |  |
+| Total | รวม | Bare key is a row header in the Quick Tables sample (dialogs.rs:690). A: รวม; B: ผลรวม. Chose A per code; Total Row keeps ผลรวม. |
+| Range | ช่วง | Character in Range → อักขระในช่วง. |
+| Width: | ความกว้าง: | Width → ความกว้าง; W: → กว้าง:; Width and spacing → ความกว้างและระยะห่าง. |
+| Height: | ความสูง: | H: → สูง:. |
+| Weight | ความหนา |  |
+| Angle | มุม |  |
+| Offset (pt): | ระยะเลื่อน (pt): | Shadow presets: Offset: Bottom Right → เลื่อน: ล่างขวา; Offset: Center → เลื่อน: กึ่งกลาง. |
+| Scale | มาตราส่วน |  |
+| Fit | พอดี |  |
+| Shrink text | ย่อข้อความ |  |
+| Location | ตำแหน่งที่ตั้ง | A: ตำแหน่งที่ตั้ง; B: ตำแหน่ง. Chose A so it differs from Position. Location: {path} → ตำแหน่งที่ตั้ง: {path}. |
+| File name: | ชื่อไฟล์: | All files → ไฟล์ทั้งหมด; Another file → ไฟล์อื่น. |
+| Folder | โฟลเดอร์ | RI spelling. |
+| Home folder | โฟลเดอร์ส่วนตัว | A: โฟลเดอร์ส่วนตัว; B: โฟลเดอร์หลัก. Chose A: หลัก suggests a root or main folder. |
+| App | แอป | RI short form of แอปพลิเคชัน. |
+| System | ระบบ |  |
+| User name: | ชื่อผู้ใช้: | User Name / Username → ชื่อผู้ใช้. |
+| Initials: | อักษรย่อชื่อ: | A: อักษรย่อ; B: อักษรย่อชื่อ → B (clearer). |
+| Display name | ชื่อที่แสดง | Real name → ชื่อจริง. |
+| Measurement units: | หน่วยวัด: |  |
+| Display | การแสดงผล | Options page. SHARED KEY: also the equation mode button (equation_tab.rs:328), where แยกบรรทัด is meant. Change to Display → เปลี่ยนเป็นแบบแยกบรรทัด. Engineering follow-up: own key for the equation button. |
+| Animation | ภาพเคลื่อนไหว | Long-established Thai; avoids แอนิเมชัน in the UI. |
+| Dark | มืด |  |
+| Light | สว่าง |  |
+| Interface | ส่วนติดต่อผู้ใช้ | Ordinary, widely understood Thai; the academic coinage ส่วนต่อประสาน is less known to office users (not confirmed online). Interface language(:) → ภาษาส่วนติดต่อผู้ใช้(:); Interface Theme / Interface theme: / Interface\nTheme → ธีมส่วนติดต่อผู้ใช้; Interface size: → ขนาดส่วนติดต่อผู้ใช้:. A: no ของ; B: ของ → A (compact). |
+| About | เกี่ยวกับ | About Doc4Me → เกี่ยวกับ Doc4Me. |
+| Contributors | ผู้ร่วมพัฒนา | Credits. A: ผู้มีส่วนร่วม; B: ผู้ร่วมพัฒนา. Chose B: the natural phrase for an open-source project's credits. {contributors} contributors · {commits} commits → ผู้ร่วมพัฒนา {contributors} คน · คอมมิต {commits} ครั้ง. |
+| Commits | คอมมิต | Git term, RI-style transliteration. % of all commits → % ของคอมมิตทั้งหมด. |
+| PRs | PR | Merged PRs → PR ที่ผสานแล้ว. |
+| Model | โมเดล | AI model (credits). Models → โมเดล. แบบจำลอง is kept for scientific models (Color model). |
+| Grab bag | แบบคละ | Credits view in random order (credits.rs:238). A: สุ่มแสดง; B: แบบคละ. Chose B: a view name, paired with the table view. |
+| Binary assets added | ไฟล์ไบนารีที่เพิ่ม | Binary assets removed → ไฟล์ไบนารีที่เอาออก. |
+| Content | เนื้อหา |  |
+| Mark | ทำเครื่องหมาย | Verb. Mark All → ทำเครื่องหมายทั้งหมด. Noun: เครื่องหมาย (Paragraph marks → เครื่องหมายย่อหน้า). |
+| Empty | ว่าง |  |
+| Equal | เท่ากับ | Math relation (Plus Equal → บวกเท่ากับ; Minus Equal → ลบเท่ากับ; Equal Equal → เท่ากับเท่ากับ; Colon Equal → ทวิภาคเท่ากับ; Equals: → เท่ากับ:). Meaning 'the same' → เท่ากัน. |
+| Stacked | แบบซ้อน | Stacked, no bar → แบบซ้อน ไม่มีเส้นคั่น. |
+| Match | ตรงกับ | Find: Match prefix → ตรงกับส่วนต้นคำ; Match suffix → ตรงกับส่วนท้ายคำ. Pairing columns (Match Fields) → จับคู่. |
+| Keep | เก็บ | Pagination options use ให้…อยู่ (Keep with next). |
+| Read | อ่าน |  |
+| Date | วันที่ | Time → เวลา; Day → วัน; Month → เดือน; Year → ปี; Calendar → ปฏิทิน; Today → วันนี้. |
+| Box | กล่อง |  |
+| Dots | จุด | Dot → จุด; Double Dot → จุดคู่; Triple Dot → จุดสามจุด; Baseline Dots → จุดบนเส้นฐาน; Midline Dots → จุดกึ่งกลาง; Vertical Dots → จุดแนวตั้ง; Diagonal Dots → จุดแนวทแยง; Up Diagonal Dots → จุดแนวทแยงขึ้น. |
+| Code | รหัส |  |
+| Skip | ข้าม |  |
+| Mode | โหมด |  |
+| People | บุคคล |  |
+| Status | สถานะ | View State → สถานะมุมมอง. |
+| Context | บริบท | Numeral mode (contextual digits). |
+| Numerals | ตัวเลข | view.numeral option. Numerals: → ตัวเลข:. |
+| Compact (spacing) | กระชับ | See Compact. |
+| Single | เดี่ยว | SHARED KEY: underline and border style (ribbon.rs:562, dialogs_para.rs:242). A: เส้นเดี่ยว (line style) / 1 เท่า (spacing); B: เดี่ยว. The bare key never means line spacing in code, so เดี่ยว. Single Brackets → วงเล็บเดี่ยว. |
+| Double | คู่ | SHARED KEY: underline/border style AND the paragraph-spacing preset (ribbon.rs:563, 1093). A: เส้นคู่ / 2 เท่า; B: คู่. Only คู่ reads acceptably in both. Double Underline → ขีดเส้นใต้คู่. |
+| Triple | สามเส้น | Border style (from B). |
+| Thick | หนา |  |
+| Dashed | เส้นประ | Dotted → เส้นจุด; Dot-dash / Dot dash → เส้นจุดขีด. |
+| Wave | เส้นหยัก | Underline and border style (code uses it only there). A: เส้นหยัก; B: คลื่น. Chose A: names a line style. |
+| Arch Up | โค้งขึ้น | WordArt transforms (from B). Arch Down → โค้งลง; Slant Up/Down → เอียงขึ้น/ลง; Inflate → พองออก; Deflate → ยุบเข้า; Chevron Up/Down → บั้งขึ้น/ลง. |
+| Relaxed (spacing) | โปร่ง | See Relaxed. |
+| pt | pt | Unit symbol kept Latin; the parser (crates/geom) reads only cm, mm, in/", pt. {n} pt → {n} pt; {size} pt → {size} pt. |
+| Points | พอยต์ | Unit name in the units list (both drafts). Spelling from Thai printing usage (Multitran); RI form not confirmed. Reviewer to confirm. |
+| Picas | ไพกา | A: ไพคา; B: ไพกา. Chose ไพกา by analogy with established -ica spellings (อเมริกา, จาเมกา, ฮาร์โมนิกา). No Thai source found online; reviewer to confirm. |
+| Inches | นิ้ว | Value symbol stays " or in. |
+| Centimeters | เซนติเมตร | Value symbol stays cm. |
+| Millimeters | มิลลิเมตร | Value symbol stays mm. |
+| Decimal | ทศนิยม | Tab alignment (missed by both). |
+| Bar | ขีด | Bar tab stop (dialogs_para.rs:165) and the math bar accent; one key (B). |
+| Em Space | ช่องว่างขนาด em | em/en stay Latin. En Space → ช่องว่างขนาด en; 1/4 Em Space → ช่องว่างขนาด 1/4 em. |
+| Em Dash | ขีดยาว | The Symbol dialog shows the glyph beside the name (dialogs_insert.rs), so no glyph in the label (A). B added (—). |
+| En Dash | ขีดกลาง |  |
+| Ellipsis | จุดไข่ปลา | RI punctuation name. |
+| Copyright Sign | เครื่องหมายลิขสิทธิ์ | Copyright → same. Registered / Registered Sign → เครื่องหมายจดทะเบียน; Trademark / Trademark Sign → เครื่องหมายการค้า. |
+| Section Mark | เครื่องหมายมาตรา | § in the Symbol dialog. Section Character (Find, ^%) → เครื่องหมายมาตรา. A's note giving Section Mark → เครื่องหมายส่วน was wrong per code. |
+| Paragraph Mark | เครื่องหมายย่อหน้า | ¶. Paragraph Character → เครื่องหมายย่อหน้า. |
+| Double Opening Quote | อัญประกาศคู่เปิด | Double Closing Quote → อัญประกาศคู่ปิด; Single Opening/Closing Quote → อัญประกาศเดี่ยวเปิด/ปิด. |
+| Punctuation | เครื่องหมายวรรคตอน | Allow hanging punctuation → อนุญาตให้เครื่องหมายวรรคตอนยื่นออกนอกขอบ. |
+| Separator: | ตัวคั่น: |  |
+| Use wildcards | ใช้อักขระตัวแทน | Wildcards (regex) → อักขระตัวแทน (regex). |
+| Regular expressions | นิพจน์ปกติ |  |
+| Whole words | ทั้งคำ | Thai whole-word matching depends on word segmentation. |
+| Any Character | อักขระใดก็ได้ | Avoids ใด ๆ in a short label. Any Digit → ตัวเลขใดก็ได้; Any Letter → ตัวอักษรใดก็ได้; Num Occurrences → จำนวนครั้งที่พบ. |
+| Space | ช่องว่าง | The blank character (Follow number with: Space). Spaces → ช่องว่าง. SHARED KEY risk: if key names in keys.rs ever go through the catalog, the Space key must stay Latin. |
+| Column (chart type) | แท่งแนวตั้ง | As taught in Thai schools. Clustered Column → แท่งแนวตั้งแบบกลุ่ม; Stacked Column → แท่งแนวตั้งแบบซ้อน. |
+| Bar (chart type) | แท่งแนวนอน | Clustered Bar → แท่งแนวนอนแบบกลุ่ม; Stacked Bar → แท่งแนวนอนแบบซ้อน. |
+| Pie | วงกลม |  |
+| Doughnut | โดนัท |  |
+| Area | พื้นที่ |  |
+| Scatter | จุดกระจาย | A: กระจาย; B: จุดกระจาย. Chose B so it never collides with Distributed. |
+| Legend | คำอธิบายสัญลักษณ์ |  |
+| Chart Title | ชื่อแผนภูมิ |  |
+| Series | ชุดข้อมูล | Series {n} → ชุดข้อมูล {n}; Add Series → เพิ่มชุดข้อมูล; Series name → ชื่อชุดข้อมูล. |
+| Add Chart Element | เพิ่มองค์ประกอบแผนภูมิ |  |
+| Process | กระบวนการ | Basic Process → กระบวนการพื้นฐาน. |
+| Cycle | วัฏจักร | A: วงจร; B: วัฏจักร. Chose B: วัฏจักร means a repeating cycle; วงจร suggests a circuit. Basic Cycle → วัฏจักรพื้นฐาน. |
+| Hierarchy | ลำดับชั้น |  |
+| Relationship | ความสัมพันธ์ |  |
+| Pyramid | พีระมิด | Basic Pyramid → พีระมิดพื้นฐาน. |
+| Basic Venn | แผนภาพเวนน์พื้นฐาน |  |
+| Basic Radial | แบบรัศมีพื้นฐาน | A: รัศมีพื้นฐาน; B: แบบรัศมีพื้นฐาน → B. |
+| Basic List | รายการพื้นฐาน |  |
+| Matrix | เมทริกซ์ | Math and SmartArt. Basic Matrix → เมทริกซ์พื้นฐาน; n×n Matrix → เมทริกซ์ n×n; Matrices with Brackets → เมทริกซ์ในวงเล็บ. |
+| Rectangle | สี่เหลี่ยมผืนผ้า | Rounded Rectangle → สี่เหลี่ยมผืนผ้ามุมมน (A; B สี่เหลี่ยมมุมมน). |
+| Oval | วงรี |  |
+| Circle | วงกลม | Circled Plus/Times/Dot → บวก/คูณ/จุดในวงกลม. |
+| Triangle | สามเหลี่ยม | Triangle Up → สามเหลี่ยมชี้ขึ้น; Triangle Down → สามเหลี่ยมชี้ลง. |
+| Diamond | ข้าวหลามตัด | A: ข้าวหลามตัด; B: สี่เหลี่ยมขนมเปียกปูน. Chose A: the familiar name for this shape in a shape menu; the math name is longer. |
+| Star | ดาว |  |
+| Heart | หัวใจ |  |
+| Arrow | ลูกศร | Arrows → ลูกศร; Leftwards/Rightwards Arrow Above → ลูกศรชี้ซ้าย/ขวาด้านบน. |
+| Connector | ตัวเชื่อมต่อ | B's shorter forms: Straight Connector → ตัวเชื่อมต่อตรง; Elbow Connector → ตัวเชื่อมต่อหักมุม; Curved Connector → ตัวเชื่อมต่อโค้ง; Straight/Elbow/Curved Arrow Connector → ตัวเชื่อมต่อลูกศรตรง/หักมุม/โค้ง; Connect Shapes → เชื่อมต่อรูปร่าง. |
+| Fraction | เศษส่วน | Stacked Fraction → เศษส่วนแบบซ้อน; Skewed Fraction → เศษส่วนแบบเฉียง; One half → หนึ่งส่วนสอง; Small change → การเปลี่ยนแปลงเล็กน้อย. |
+| Professional | แบบสองมิติ | Built-up equation format, by meaning (not มืออาชีพ). All - Professional → ทั้งหมด - แบบสองมิติ; Current - Professional → ปัจจุบัน - แบบสองมิติ. |
+| Linear | แบบบรรทัดเดียว | One-line equation format. A: แบบเชิงเส้น (but A used บรรทัดเดียว for Linear Fraction); B: เชิงเส้น. Chose แบบบรรทัดเดียว everywhere: it says what the user sees and pairs with แบบสองมิติ, and เชิงเส้น would suggest a linear function. All - Linear → ทั้งหมด - แบบบรรทัดเดียว; Linear Fraction → เศษส่วนแบบบรรทัดเดียว. |
+| Input Format | รูปแบบการป้อน | Equation conversions (missed by both). |
+| Normal Text | ข้อความปกติ | Equation option. (normal text) → (ข้อความปกติ). |
+| Radical | กรณฑ์ | Equation group (√). A: กรณฑ์; B: ราก. Chose A: the RI and Thai school-math name of the radical sign (เครื่องหมายกรณฑ์). Radicals → กรณฑ์; Common Radicals → กรณฑ์ที่ใช้บ่อย; Square Root → รากที่สอง; Cube Root → รากที่สาม. |
+| Radical with Degree | รากที่ n | A: กรณฑ์ระบุอันดับ; B: รากที่ระบุดัชนี. Neither 'degree' word could be confirmed, so the label names the template (ⁿ√x) as Thai students read it. n is a literal letter, not a placeholder. |
+| Integral | ปริพันธ์ | RI/Thai university term (course and chapter titles at SUT, YRU); never อินทิกรัล in the UI. Integrals → ปริพันธ์; Double/Triple Integral → ปริพันธ์สองชั้น/สามชั้น; Contour Integral(s) → ปริพันธ์ตามเส้นโค้งปิด; Surface Integral → ปริพันธ์ตามผิว; Volume Integral → ปริพันธ์ตามปริมาตร; Integral with Limits → ปริพันธ์แบบมีขอบเขต; Integral of e^(−x²) → ปริพันธ์ของ e^(−x²). |
+| Differential | ผลต่างเชิงอนุพันธ์ | dx, dy, dθ. A: ผลต่างเชิงอนุพันธ์ (RI math coinage, from knowledge); B: ดิฟเฟอเรนเชียล. Chose A: RI correctness comes first. Not confirmed online; reviewer to confirm. Differentials → ผลต่างเชิงอนุพันธ์; Differential x → ผลต่างเชิงอนุพันธ์ x. Partial Differential (∂) → อนุพันธ์ย่อย. |
+| Large Operator | ตัวดำเนินการขนาดใหญ่ | Large\nOperator → ตัวดำเนินการ\nขนาดใหญ่; Operator(s) → ตัวดำเนินการ; Operator Structures → โครงสร้างตัวดำเนินการ; Other Large Operators → ตัวดำเนินการขนาดใหญ่อื่น ๆ. |
+| Summation | ผลบวก | Σ. A: ผลบวก; B: ผลรวม. Chose A: the math-register word (ผลบวกของอนุกรม), and Total keeps รวม/ผลรวม. Summations / Sum → ผลบวก; Double summation → ผลบวกสองชั้น; Summation over binomials → ผลบวกของสัมประสิทธิ์ทวินาม; Sum of cosines → ผลบวกของโคไซน์. |
+| with Limits | แบบมีขอบเขต | Bounds above and below a large operator, not the calculus limit. A: พร้อมขอบเขต; B: แบบมีขอบเขต → B. Summation with Limits → ผลบวกแบบมีขอบเขต; Product/Coproduct/Union/Intersection with Limits → …แบบมีขอบเขต. |
+| Limit | ลิมิต | Calculus limit. Limit and\nLog → ลิมิต\nและลอการิทึม (A: และ starts the second line; B put it at the end of the first). Limit Example → ตัวอย่างลิมิต. |
+| Product (math) | ผลคูณ | ∏. Product of A → ผลคูณของ A; Products and Coproducts → ผลคูณและโคโพรดักต์. Outside mathematics Product is ผลิตภัณฑ์ (the bare key 'Product' is the math one if only in the equation gallery). |
+| Coproduct | โคโพรดักต์ | ∐. A: โคโปรดักต์; B: โคโพรดักต์. Chose B: RI rule pr → พร (cf. RI โพรโทคอล); no Thai term in use. |
+| Union | ยูเนียน | Thai school-math term (∪). Square Union → ยูเนียนแบบเหลี่ยม; Union with Plus → ยูเนียนพร้อมเครื่องหมายบวก; Unions and Intersections → ยูเนียนและอินเตอร์เซกชัน; Union of intersections → ยูเนียนของอินเตอร์เซกชัน. |
+| Intersection | อินเตอร์เซกชัน | ∩. Both drafts: the Thai school-math form. The strict RI transliteration rule would give อินเทอร์-; kept the textbook form. Reviewer to confirm. |
+| Function | ฟังก์ชัน | RI spelling (not ฟังก์ชั่น). Functions → ฟังก์ชัน. |
+| Trigonometric Functions | ฟังก์ชันตรีโกณมิติ |  |
+| Sine Function | ฟังก์ชันไซน์ | Cosine → โคไซน์; Tangent → แทนเจนต์; Secant → เซแคนต์; Cosecant → โคเซแคนต์; Cotangent → โคแทนเจนต์ (each ฟังก์ชัน…). Cosine 2x → โคไซน์ 2x; Tangent formula → สูตรแทนเจนต์; Sine theta → ไซน์ทีตา. |
+| Inverse Functions | ฟังก์ชันผกผัน | Inverse Sine Function → ฟังก์ชันไซน์ผกผัน (pattern for all inverse trig). |
+| Hyperbolic Functions | ฟังก์ชันไฮเพอร์โบลิก | RI rule p → พ (cf. ไฮเพอร์โบลา). Hyperbolic Sine Function → ฟังก์ชันไซน์ไฮเพอร์โบลิก; Inverse Hyperbolic Functions → ฟังก์ชันไฮเพอร์โบลิกผกผัน. Not confirmed online. |
+| Logarithm | ลอการิทึม | Natural Logarithm → ลอการิทึมธรรมชาติ; Logarithm with Base → ลอการิทึมที่ระบุฐาน. |
+| Exponential | เอกซ์โพเนนเชียล | Exponential series → อนุกรมเอกซ์โพเนนเชียล. |
+| Maximum | ค่าสูงสุด | Minimum → ค่าต่ำสุด; Maximum Example → ตัวอย่างค่าสูงสุด. |
+| Determinant | ดีเทอร์มิแนนต์ | 2×2 Determinant → ดีเทอร์มิแนนต์ 2×2. |
+| Identity Matrix | เมทริกซ์เอกลักษณ์ | Identity Matrices → เมทริกซ์เอกลักษณ์; 2×2 Identity Matrix → เมทริกซ์เอกลักษณ์ 2×2; n×n Identity Matrix → เมทริกซ์เอกลักษณ์ n×n. |
+| Empty Matrices | เมทริกซ์ว่าง | 2×2 Empty Matrix → เมทริกซ์ว่าง 2×2 (pattern for all sizes). |
+| Sparse Matrices | เมทริกซ์แบบย่อด้วยจุด | Gallery of matrices with ⋯ (from B). |
+| Binomial Coefficient | สัมประสิทธิ์ทวินาม | Binomial Coefficient (angle) → สัมประสิทธิ์ทวินาม (วงเล็บมุม). |
+| Vector A | เวกเตอร์ A | Vector AB → เวกเตอร์ AB. |
+| Bracket | วงเล็บ | Equation gallery label (math_gallery.rs:220). |
+| Brackets | วงเล็บ | SHARED KEY: the section title of the bracket gallery AND the [ ] template (math_gallery.rs:223/226). A: วงเล็บ; B: วงเล็บเหลี่ยม. Chose A: วงเล็บเหลี่ยม as a section title over (), {}, ⟨⟩ would mislead; the template tile shows its glyph. Engineering follow-up: rename that template 'Square Brackets' (→ วงเล็บเหลี่ยม). Double Square Brackets → วงเล็บเหลี่ยมคู่; Brackets with Separators → วงเล็บมีตัวคั่น; Common Brackets → วงเล็บที่ใช้บ่อย; Outward Brackets → วงเล็บหันออก. |
+| Parentheses | วงเล็บ | ( ). Parentheses with Separator → วงเล็บมีตัวคั่น; Single Left/Right Parenthesis → วงเล็บเปิด/ปิดเดี่ยว. |
+| Braces | วงเล็บปีกกา | Braces with Separator → วงเล็บปีกกามีตัวคั่น. |
+| Angle Brackets | วงเล็บมุม |  |
+| Vertical Bars | เส้นตั้ง | Double Vertical Bars → เส้นตั้งคู่; Double Bar → ขีดคู่. |
+| Floor | ฟังก์ชันพื้น | Ceiling → ฟังก์ชันเพดาน. |
+| Overbar | ขีดเหนือ | A: ขีดบน/ล่าง; B: ขีดเหนือ/ใต้. Chose B: เหนือ/ใต้ is natural for over/under. Underbar → ขีดใต้; Overbrace → วงเล็บปีกกาเหนือ; Underbrace → วงเล็บปีกกาใต้; Overbars and Underbars → ขีดเหนือและขีดใต้; x bar → x บาร์. |
+| Hat | หมวก | Math accent ˆ (from B). Tilde → ตัวหนอน (common Thai name for ~). The gallery tile shows the glyph, so it is not repeated in the label. |
+| Grouping Character Above | อักขระจัดกลุ่มด้านบน | Grouping Character Below → อักขระจัดกลุ่มด้านล่าง. |
+| Boxed Formula | สูตรในกรอบ | Boxed Formulas → สูตรในกรอบ; Boxed Formula (example) → สูตรในกรอบ (ตัวอย่าง). |
+| Cases (Two Conditions) | กรณี (สองเงื่อนไข) | Cases (Three Conditions) → กรณี (สามเงื่อนไข); Cases and Stacks → กรณีและการซ้อน; Absolute value cases → กรณีของค่าสัมบูรณ์; Stack Object → วัตถุแบบซ้อน. |
+| Script | ตัวยกและตัวห้อย | Equation structure group. A: ตัวยก-ตัวห้อย; B: ตัวยกและตัวห้อย → B, keeping - for Subscript-Superscript. |
+| Scripts | อักษรตัวเขียน | Math script alphabet 𝒜ℬ𝒞 (from B). |
+| Accents | เครื่องหมายกำกับ |  |
+| Enlarge symbol | สัญลักษณ์ขนาดใหญ่ | Equation option (missed by both); avoids ขยาย (Expand). |
+| Hypotenuse | ด้านตรงข้ามมุมฉาก |  |
+| Euler's identity | เอกลักษณ์ของออยเลอร์ |  |
+| Bayes' rule | กฎของเบย์ | A: เบส์; B: เบย์. Chose เบย์: the form common in Thai statistics teaching (ทฤษฎีบทของเบย์), parallel to the RI math spelling เทย์เลอร์. FAO's GACS thesaurus has 'ทฤษฎีของเบส์'. Reviewer to confirm. |
+| Quadratic Root | รากของสมการกำลังสอง | Roots of ax²+bx+c → รากของ ax²+bx+c. |
+| Pi Over 2 | พายส่วนสอง | Thai reads a/b as a ส่วน b. |
+| Normal probability density | ความหนาแน่นของความน่าจะเป็นแบบปกติ |  |
+| Greek Letters | อักษรกรีก |  |
+| Letter-Like Symbols | สัญลักษณ์คล้ายตัวอักษร |  |
+| Negated Relations | ความสัมพันธ์แบบนิเสธ | A: นิเสธของความสัมพันธ์; B → B (reads as a category). |
+| Geometry | เรขาคณิต |  |
+| Basic Math | คณิตศาสตร์พื้นฐาน |  |
+| Logical AND | และเชิงตรรกะ | Logical OR → หรือเชิงตรรกะ. A xor B stays as notation: A xor B. |
+| Measured By | วัดโดย | Operators (from B). Yields → ให้ผลเป็น; Equal by Definition → เท่ากับโดยนิยาม; Delta Equal To → เดลตาเท่ากับ; Text over Equal → ข้อความเหนือเครื่องหมายเท่ากับ. |
+| Author | ผู้แต่ง | Bibliography field and document property. By author → ตามผู้แต่ง. |
+| Editor (bibliography) | บรรณาธิการ | Intended rendering of the bibliography 'Editor' field. It cannot be applied until the code gives the field its own key; see Editor. |
+| Publisher | สำนักพิมพ์ |  |
+| City | เมือง |  |
+| Journal | วารสาร |  |
+| Periodical | สิ่งพิมพ์ต่อเนื่อง | Library-science term. |
+| Volume | เล่มที่ | Bibliography field. Volume Integral is a different key. |
+| Issue | ฉบับที่ |  |
+| Edition | ครั้งที่พิมพ์ | Thai references write พิมพ์ครั้งที่ 2. |
+| Container Title | ชื่อแหล่งที่ตีพิมพ์ | Journal, book or website holding the work. |
+| Institution | สถาบัน |  |
+| Conference paper | บทความในการประชุมวิชาการ | A: no ใน; B: with it → B. Conference → การประชุมวิชาการ. |
+| Website | เว็บไซต์ | RI spelling (not เว็บไซท์). Site name → ชื่อเว็บไซต์. |
+| Accessed on | สืบค้นเมื่อ | A: เข้าถึงเมื่อ; B: สืบค้นเมื่อ. Chose B: the standard phrase in Thai reference lists. |
+| Book | หนังสือ |  |
+| Report | รายงาน | Source type and template. |
+| Film | ภาพยนตร์ | Source type (missed by both). |
+| Studio | สตูดิโอ | SHARED KEY: theme/template name and the publisher field of a Film source (dialogs_refs.rs:855); สตูดิโอ (dictionary loanword) fits both. Studio handbook (sample) → คู่มือสตูดิโอ (ตัวอย่าง). |
+| Product | ผลิตภัณฑ์ | Non-math meaning. |
+| DOI | DOI | URL → URL. |
+| Blank document | เอกสารเปล่า |  |
+| Résumé | ประวัติย่อ | Template name; Thai word rather than เรซูเม่. |
+| Craft | งานฝีมือ | Theme name. |
+| Atelier | ห้องศิลปิน | Theme name. A: ห้องศิลป์; B: ห้องศิลปิน → B (plain, clear). |
+| Darkroom | ห้องมืด |  |
+| Sketchbook | สมุดวาดภาพ | A: สมุดร่างภาพ; B: สมุดวาดภาพ → B (the everyday name). |
+| Office | Office | Compatibility theme name. Office 2003 Default → ค่าเริ่มต้น Office 2003. |
+| DRAFT | DRAFT | WATERMARK PRESETS (DRAFT, CONFIDENTIAL, DO NOT COPY, SAMPLE, ASAP, URGENT): the menu translates the label but inserts the English text (ribbon.rs:1104 → {"text": w}), so th.tsv keeps them in English for now (B). A proposed Thai labels. Once the code inserts the translated text, use the Thai official grades: ฉบับร่าง, ลับ, ห้ามทำสำเนา, ตัวอย่าง, ด่วนที่สุด (ASAP), ด่วน (URGENT). |
+| CONFIDENTIAL | CONFIDENTIAL | See DRAFT; future Thai: ลับ. |
+| Good morning | สวัสดีตอนเช้า | Good afternoon → สวัสดีตอนบ่าย; Good evening → สวัสดีตอนเย็น. |
+| Mon | จ. | Thai weekday abbreviations จ. อ. พ. พฤ. ศ. ส. อา. (Tue → อ.; Wed → พ.). Check the use first: if a string is sample output of a date formatter, it must match what the formatter really produces. |
+| AaBbCcDd | AaBb กขคง | Style-gallery tile sample (previews.rs:381: 'sample letters in the interface's script'). Latin plus Thai, about as wide as the English, fits the tile. B would have left it Latin; A's chosen because the code asks for the interface script. |
+| AaBbYyZz | AaBbYyZz กขคง ปู่ชี้ | Font-dialog preview: adds a below vowel and a stacked vowel plus tone mark to show Thai vertical metrics. to_uppercase() changes only the Latin part. |
+| Body text in a short paragraph to show spacing. | ข้อความเนื้อหาในย่อหน้าสั้น ๆ เพื่อแสดงระยะห่าง | Preview paragraph; full stop dropped. |
+| {words} words | {words} คำ | Number + classifier. |
+| {selected} of {words} words | {selected} จาก {words} คำ |  |
+| Page {page} of {pages} | หน้า {page} จาก {pages} |  |
+| {n} entries marked. | ทำเครื่องหมายแล้ว {n} รายการ |  |
+| {cols}×{rows} Table | ตาราง {cols}×{rows} | No spaces around ×. |
+| Compared: {changes} changes | เปรียบเทียบแล้ว: พบการเปลี่ยนแปลง {changes} รายการ | A had no พบ; B → B (natural). |
+| Showing the first {count} items. | แสดง {count} รายการแรก |  |
+| Shift+Tab | Shift+Tab | Key names stay Latin. |
+| Backspace | Backspace | Command named after its key; see Page Down. |
+| Word document (*.docx) | เอกสาร Word (*.docx) | Format names stay Latin, with a Thai generic noun in front. |
+| PDF document (*.pdf) | เอกสาร PDF (*.pdf) |  |
+| Plain text (*.txt) | ข้อความธรรมดา (*.txt) |  |
+| Web page (*.html) | หน้าเว็บ (*.html) |  |
+| OpenDocument Text (*.odt) | ข้อความ OpenDocument (*.odt) | Markdown (*.md) → Markdown (*.md). |
+| Page image (*.png) | ภาพหน้า (*.png) |  |
+| Thai | ไทย | Language lists drop ภาษา (the field already says it). In running text: ภาษาไทย. The interface-language picker should show each language's own name. |
+| English (United States) | อังกฤษ (สหรัฐอเมริกา) | English (United Kingdom) → อังกฤษ (สหราชอาณาจักร). |
+| Chinese (Simplified) | จีน (ตัวย่อ) | Chinese (Traditional) → จีน (ตัวเต็ม). |
+| Japanese | ญี่ปุ่น | Korean → เกาหลี. |
+| German (Germany) | เยอรมัน (เยอรมนี) | Language เยอรมัน, country เยอรมนี (RI country list). |
+| French (France) | ฝรั่งเศส (ฝรั่งเศส) |  |
+| Spanish (Mexico) | สเปน (เม็กซิโก) | Spanish (Spain) → สเปน (สเปน). |
+| Portuguese (Brazil) | โปรตุเกส (บราซิล) | Portuguese (Portugal) → โปรตุเกส (โปรตุเกส). |
+| Russian | รัสเซีย | Ukrainian → ยูเครน; Polish → โปแลนด์; Czech → เช็ก (RI). |
+| Arabic | อาหรับ | Language and Unicode subset. SHARED KEY: also the numeral style '1, 2, 3, …' (dialogs_insert.rs:977), which in Thai is เลขอารบิก. Engineering follow-up: own key. |
+| Hindi | ฮินดี | Hebrew → ฮีบรู. |
+| Serbian (Cyrillic) | เซอร์เบีย (ซีริลลิก) | Serbian (Latin) → เซอร์เบีย (ละติน). |
+| Greek | กรีก |  |
+| Dutch | ดัตช์ | Danish → เดนมาร์ก; Swedish → สวีเดน; Finnish → ฟินแลนด์; Estonian → เอสโตเนีย; Italian → อิตาลี; Turkish → ตุรกี (the country is now officially ทูร์เคีย; the language stays ตุรกี). |
+| Norwegian (Bokmål) | นอร์เวย์ (Bokmål) | A: (บุ๊กมอล); B: (Bokmål). Chose B: no verifiable Thai spelling of Bokmål, so it stays Latin rather than guessed. |
+| Atmosphere | บรรยากาศ | Sample index entries in the Index dialog preview (missed by both). Ionosphere → ไอโอโนสเฟียร์; Mesosphere → มีโซสเฟียร์ (Thai science-textbook forms; reviewer to confirm). |
+| North | เหนือ | Quick Tables sample data (missed by both). South → ใต้; West → ตะวันตก. |
+| Weather | สภาพอากาศ | Category names (missed by both): Nature → ธรรมชาติ; Technology → เทคโนโลยี; Transport → การขนส่ง; Communication → การสื่อสาร. |
+
+## Revision history
+
+| Date | Change | Summary |
+|---|---|---|
+| 2026-10-19 | major | First version: Thai catalog, style guide and glossary |

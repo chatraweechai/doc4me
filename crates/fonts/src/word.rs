@@ -308,31 +308,176 @@ fn hhea_line(ascender: i16, descender: i16, line_gap: i16) -> (f64, f64) {
     (f64::from(ascender) + f64::from(line_gap.max(0)), f64::from(descender).abs())
 }
 
-/// Line metrics for a face in font units: (ascent, descent), both positive, the way word
-/// processors measure single line spacing: the hhea values with the line gap above the ascent
-/// (Word puts the first baseline that far below the line top), falling back to OS/2
-/// usWinAscent/usWinDescent.
+/// A line's (ascent, descent) the way Word for Windows measures it (GDI text metrics): OS/2
+/// usWinAscent and usWinDescent, plus the external leading, the part of the hhea line gap that
+/// the win metrics don't already cover, above the ascent. Times New Roman (win 1825/443, hhea
+/// 1825/-443, gap 87): 1912 + 443, like 13.8 pt at 12 pt. Sarabun (win 1286/567, hhea 1068/-232,
+/// gap 0): 1286 + 567, 1.853 em, where Word for Mac's hhea gives 1.30 em.
+fn win_line(win_ascent: u16, win_descent: u16, ascender: i16, descender: i16, line_gap: i16) -> (f64, f64) {
+    let win = f64::from(win_ascent) + f64::from(win_descent);
+    let hhea = f64::from(ascender) - f64::from(descender);
+    let external = (f64::from(line_gap) - (win - hhea)).max(0.0);
+    (f64::from(win_ascent) + external, f64::from(win_descent))
+}
+
+/// A line's (ascent, descent) in font units from a face's OS/2 win metrics and hhea values:
+/// [`win_line`] when the win metrics are set and sane (not zero, at most four ems), else
+/// [`hhea_line`] (at most two ems), else `None`. With `prefer_hhea` the hhea line comes first.
+fn pick_line(win: Option<(u16, u16)>, hhea: Option<(i16, i16, i16)>, upem: f64, prefer_hhea: bool) -> Option<(f64, f64)> {
+    let ok = |m: &(f64, f64), max_ems: f64| m.0 > 0.0 && m.0 + m.1 <= upem * max_ems;
+    let (asc, desc, gap) = hhea.unwrap_or((0, 0, 0));
+    let win = win.filter(|(a, d)| *a > 0 && u32::from(*a) + u32::from(*d) > 0).map(|(a, d)| win_line(a, d, asc, desc, gap)).filter(|m| ok(m, 4.0));
+    let hhea = hhea.map(|(a, d, g)| hhea_line(a, d, g)).filter(|m| ok(m, 2.0));
+    if prefer_hhea { hhea.or(win) } else { win.or(hhea) }
+}
+
+/// Line metrics for a face in font units: (ascent, descent), both positive, the way Word for
+/// Windows measures single line spacing ([`win_line`]), so a page holds the same lines here, in
+/// Word on Windows and in print on every platform. hhea values (the line gap above the ascent)
+/// when the face has no OS/2 table or its win metrics are zero or absurd (over four ems).
 pub fn line_metrics(face: &crate::FontFace) -> (f64, f64) {
-    static CACHE: OnceLock<Mutex<HashMap<u32, (f64, f64)>>> = OnceLock::new();
+    face_line(face, false)
+}
+
+/// The cached line of `face`: [`pick_line`] over its tables, or its ascent and descent.
+fn face_line(face: &crate::FontFace, prefer_hhea: bool) -> (f64, f64) {
+    type Cache = Mutex<HashMap<(u32, bool), (f64, f64)>>;
+    static CACHE: OnceLock<Cache> = OnceLock::new();
     let cache = CACHE.get_or_init(|| Mutex::new(HashMap::new()));
-    if let Some(v) = cache.lock().unwrap_or_else(|e| e.into_inner()).get(&face.id()) {
+    if let Some(v) = cache.lock().unwrap_or_else(|e| e.into_inner()).get(&(face.id(), prefer_hhea)) {
         return *v;
     }
     let mut v = (face.ascent.max(1.0), face.descent.abs());
     if let Some(f) = face.skrifa() {
-        // hhea ascender + descender + line gap (Word on macOS), the gap above the ascent; OS/2
-        // win metrics only when the hhea values are missing, and never more than twice the em.
-        let hhea = f.hhea().ok().map(|h| hhea_line(h.ascender().to_i16(), h.descender().to_i16(), h.line_gap().to_i16()));
-        let win = f.os2().ok().map(|o| (o.us_win_ascent() as f64, o.us_win_descent() as f64));
-        let ok = |m: &(f64, f64)| m.0 > 0.0 && m.0 + m.1 <= face.upem * 2.0;
-        if let Some(m) = hhea.filter(ok) {
-            v = m;
-        } else if let Some(m) = win.filter(ok) {
+        let hhea = f.hhea().ok().map(|h| (h.ascender().to_i16(), h.descender().to_i16(), h.line_gap().to_i16()));
+        let win = f.os2().ok().map(|o| (o.us_win_ascent(), o.us_win_descent()));
+        if let Some(m) = pick_line(win, hhea, face.upem, prefer_hhea) {
             v = m;
         }
     }
-    cache.lock().unwrap_or_else(|e| e.into_inner()).insert(face.id(), v);
+    cache.lock().unwrap_or_else(|e| e.into_inner()).insert((face.id(), prefer_hhea), v);
     v
+}
+
+/// Word for Windows' single line of fonts whose open substitutes are spaced differently, per em
+/// (ascent, descent): Cambria (drawn with Caladea, 1.30 em) and Courier New (drawn with JetBrains
+/// Mono where only the bundled fonts exist, 1.565 em).
+fn requested_line(family: &str) -> Option<(f64, f64)> {
+    match family.trim().to_ascii_lowercase().as_str() {
+        "cambria" | "cambria math" => Some((1946.0 / 2048.0, 455.0 / 2048.0)),
+        "courier new" | "courier" => Some((1705.0 / 2048.0, 615.0 / 2048.0)),
+        _ => None,
+    }
+}
+
+/// Single line spacing for text a document sets in `family`, drawn with `face` ([`resolve`]),
+/// at `size` points: (ascent, descent) in points. The face's own Word for Windows line
+/// ([`line_metrics`]) when it is the font asked for. A substitute keeps the line of the font it
+/// stands in for where that is known ([`requested_line`]), and otherwise its hhea line, which
+/// metric-compatible substitutes share with their originals and which keeps a Thai font drawn
+/// with Sarabun (Angsana New, Cordia New…) near its own small-letter spacing (1.30 em, not
+/// Sarabun's 1.853 em).
+pub fn single_line(family: &str, face: &crate::FontFace, substituted: bool, size: f64) -> (f64, f64) {
+    if !substituted {
+        let (a, d) = line_metrics(face);
+        let k = size / face.upem.max(1.0);
+        return (a * k, d * k);
+    }
+    if let Some((a, d)) = requested_line(family) {
+        return (a * size, d * size);
+    }
+    let (a, d) = face_line(face, true);
+    let k = size / face.upem.max(1.0);
+    (a * k, d * k)
+}
+
+/// How a substitute stands in for a font a document asks for, so its text keeps that font's size,
+/// widths and line spacing and pages hold what they hold in Word with the real font: TH Sarabun
+/// New, TH SarabunPSK and TH SarabunIT๙, drawn with the bundled Sarabun when they are not
+/// installed. Sarabun's letters are about 1.47 times as tall as theirs at the same point size, and
+/// its widths differ letter by letter, so its glyphs are scaled to their height
+/// ([`MetricFit::scale`]) and set on their advance widths ([`MetricFit::advance`], with their
+/// kerning, [`MetricFit::kern`]); lines take their line spacing ([`MetricFit::line`]).
+#[derive(Clone, Copy)]
+pub struct MetricFit {
+    style: &'static crate::thsarabun::ThSarabunStyle,
+    /// TH SarabunIT๙ draws the ASCII digits as Thai digits.
+    thai_digits: bool,
+}
+
+impl std::fmt::Debug for MetricFit {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("MetricFit").field("thai_scale", &self.style.thai_scale).field("thai_digits", &self.thai_digits).finish()
+    }
+}
+
+impl PartialEq for MetricFit {
+    fn eq(&self, other: &Self) -> bool {
+        std::ptr::eq(self.style, other.style) && self.thai_digits == other.thai_digits
+    }
+}
+
+impl MetricFit {
+    /// The substitute's glyph scale: for Thai letters (the height of ก) or Latin ones (of x).
+    pub fn scale(&self, thai: bool) -> f32 {
+        if thai { self.style.thai_scale } else { self.style.latin_scale }
+    }
+
+    /// The advance width of `c` in the original font, in ems; `None` when it has no such character
+    /// (the substitute's own width applies).
+    pub fn advance(&self, c: char) -> Option<f32> {
+        let a = self.style.advances;
+        a.binary_search_by_key(&c, |e| e.0).ok().and_then(|i| a.get(i)).map(|e| f32::from(e.1) / 1000.0)
+    }
+
+    /// The original font's kerning between `left` and `right`, in ems (when the run is kerned).
+    pub fn kern(&self, left: char, right: char) -> f32 {
+        let k = crate::thsarabun::KERN;
+        k.binary_search_by(|e| (e.0, e.1).cmp(&(left, right))).ok().and_then(|i| k.get(i)).map_or(0.0, |e| f32::from(e.2) / 1000.0)
+    }
+
+    /// The original font's line (ascent with the external leading, descent), in ems, measured
+    /// as [`line_metrics`] measures fonts.
+    pub fn line(&self) -> (f64, f64) {
+        let (a, d) = crate::thsarabun::LINE;
+        (a / 1000.0, d / 1000.0)
+    }
+
+    /// The character the original font shows for `c`: TH SarabunIT๙ shows ASCII digits as Thai
+    /// digits; the text keeps the digits it has.
+    pub fn shown(&self, c: char) -> char {
+        match c {
+            '0'..='9' if self.thai_digits => char::from_u32(u32::from(c) - u32::from('0') + 0x0E50).unwrap_or(c),
+            _ => c,
+        }
+    }
+}
+
+/// The [`MetricFit`] for a requested family drawn with a substitute: `Some` for TH Sarabun New,
+/// TH SarabunPSK and TH SarabunIT๙ (any spacing or case) when they are not installed and resolve
+/// to the bundled Sarabun; `None` otherwise, including when the real font is installed.
+pub fn metric_fit(family: &str, bold: bool, italic: bool) -> Option<MetricFit> {
+    // Layout asks for every shaped piece: rule most families out without allocating.
+    if !family.trim_start().get(..2).is_some_and(|p| p.eq_ignore_ascii_case("th")) {
+        return None;
+    }
+    let key: String = family.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).collect();
+    let thai_digits = match key.as_str() {
+        "thsarabunnew" | "thsarabunpsk" => false,
+        "thsarabunit๙" | "thsarabunit9" => true,
+        _ => return None,
+    };
+    let r = resolve(family, bold, italic);
+    if !r.substituted || r.face.family != "Sarabun" {
+        return None;
+    }
+    let style = match (bold, italic) {
+        (false, false) => &crate::thsarabun::REGULAR,
+        (true, false) => &crate::thsarabun::BOLD,
+        (false, true) => &crate::thsarabun::ITALIC,
+        (true, true) => &crate::thsarabun::BOLD_ITALIC,
+    };
+    Some(MetricFit { style, thai_digits })
 }
 
 #[cfg(test)]
@@ -348,6 +493,69 @@ mod tests {
         // A negative gap adds nothing; the most negative descender doesn't overflow.
         assert_eq!(hhea_line(1000, -300, -50), (1000.0, 300.0));
         assert_eq!(hhea_line(1000, i16::MIN, 0), (1000.0, 32768.0));
+    }
+
+    #[test]
+    fn single_spacing_uses_word_for_windows_metrics() {
+        // Times New Roman and Arial: the win metrics equal hhea, so the whole gap is external
+        // leading (13.8 pt at 12 pt). Calibri: the win metrics already cover hhea + gap (2500).
+        assert_eq!(win_line(1825, 443, 1825, -443, 87), (1912.0, 443.0));
+        assert_eq!(win_line(1854, 434, 1854, -434, 67), (1921.0, 434.0));
+        assert_eq!(win_line(1950, 550, 1536, -512, 452), (1950.0, 550.0));
+        // Sarabun: 1.853 em on Windows (hhea would give 1.30 em).
+        assert_eq!(win_line(1286, 567, 1068, -232, 0), (1286.0, 567.0));
+        // Extremes don't overflow; a negative gap adds nothing.
+        assert_eq!(win_line(u16::MAX, u16::MAX, i16::MIN, i16::MAX, i16::MIN), (65535.0, 65535.0));
+        assert_eq!(win_line(0, 0, 0, 0, 0), (0.0, 0.0));
+        // The bundled Sarabun measures that way.
+        let r = resolve("Sarabun", false, false);
+        assert_eq!(r.face.family, "Sarabun");
+        assert_eq!(line_metrics(&r.face), (1286.0, 567.0));
+        // Zero win metrics fall back to hhea, as do absurd ones; hhea first when asked.
+        assert_eq!(pick_line(Some((0, 0)), Some((800, -200, 0)), 1000.0, false), Some((800.0, 200.0)));
+        assert_eq!(pick_line(Some((9000, 0)), Some((800, -200, 0)), 1000.0, false), Some((800.0, 200.0)));
+        assert_eq!(pick_line(Some((1286, 567)), Some((1068, -232, 0)), 1000.0, true), Some((1068.0, 232.0)));
+        assert_eq!(pick_line(None, None, 1000.0, false), None);
+    }
+
+    /// A substitute keeps the spacing of the font it stands in for: Cambria 1.172 em and Courier
+    /// New 1.133 em whatever draws them, a Thai font drawn with Sarabun near 1.30 em, and the
+    /// font asked for its own Word for Windows line (Sarabun 1.853 em).
+    #[test]
+    fn substitutes_keep_the_requested_fonts_line() {
+        let r = resolve("Sarabun", false, false);
+        let em = |(a, d): (f64, f64)| ((a + d) * 1000.0).round() / 1000.0;
+        assert_eq!(em(single_line("Sarabun", &r.face, false, 1.0)), 1.853);
+        assert_eq!(em(single_line("Cordia New", &r.face, true, 1.0)), 1.3);
+        assert_eq!(em(single_line("Cambria", &r.face, true, 1.0)), 1.172);
+        assert_eq!(em(single_line("Courier New", &r.face, true, 1.0)), 1.133);
+        // Points scale with the size.
+        assert_eq!(em(single_line("Cambria", &r.face, true, 12.0)), 14.068);
+    }
+
+    #[test]
+    fn th_sarabun_fonts_fit_sarabun_to_their_metrics() {
+        for name in ["TH Sarabun New", "TH SarabunPSK", "th sarabun new", "THSarabunNew", "TH Sarabun PSK", "TH SarabunIT๙", "TH SarabunIT9"] {
+            let f = metric_fit(name, false, false).unwrap_or_else(|| panic!("{name}"));
+            assert_eq!(f.advance('ก'), Some(0.386), "{name}");
+            assert_eq!(f.advance('\u{0E48}'), Some(0.0), "{name}: tone marks take no width");
+            assert_eq!(f.advance('😀'), None);
+            assert!((f.scale(true) - 400.0 / 586.0).abs() < 1e-5 && (f.scale(false) - 0.68).abs() < 1e-5);
+            assert_eq!(f.kern('A', 'V'), -0.05);
+            assert_eq!(f.kern('ก', 'ข'), 0.0);
+            assert_eq!(f.line(), (0.874, 0.457));
+        }
+        // Bold has its own widths and Thai scale (ก 407 high against Sarabun Bold's 586).
+        let b = metric_fit("TH Sarabun New", true, false).unwrap();
+        assert!((b.scale(true) - 407.0 / 586.0).abs() < 1e-5);
+        assert_ne!(b.advance('ก'), Some(0.386));
+        // IT๙ shows ASCII digits as Thai digits; the others keep them.
+        assert_eq!(metric_fit("TH SarabunIT๙", false, false).unwrap().shown('7'), '๗');
+        assert_eq!(metric_fit("TH Sarabun New", false, false).unwrap().shown('7'), '7');
+        // Other families, and fonts that are themselves available, are drawn as they are.
+        for name in ["Sarabun", "Arial", "TH Niramit AS", "", "T", "THX", "ทดสอบ"] {
+            assert!(metric_fit(name, false, false).is_none(), "{name}");
+        }
     }
 
     #[test]

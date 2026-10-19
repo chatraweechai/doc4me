@@ -52,7 +52,7 @@ pub struct LangInfo {
 }
 
 /// The registry. English first: it is the fallback and the source language.
-pub static LANGUAGES: [LangInfo; 18] = [
+pub static LANGUAGES: [LangInfo; 19] = [
     LangInfo { code: "en", name: "English", source: "", prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // Simplified Chinese; `zh`, `zh-CN`, `zh-SG` and `zh-Hans-*` resolve here (see `candidates`).
     LangInfo {
@@ -123,6 +123,10 @@ pub static LANGUAGES: [LangInfo; 18] = [
     LangInfo { code: "it", name: "Italiano", source: include_str!("it.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // Hungarian; `hu`, `hu-HU` and `hu_HU.UTF-8` resolve here.
     LangInfo { code: "hu", name: "Magyar", source: include_str!("hu.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    // Thai; `th`, `th-TH`, `th_TH.UTF-8` and `th-TH-u-nu-thai` resolve here. New documents keep
+    // US English as their editing language: Thai text is proofed whatever its run's language, and
+    // Latin words typed beside it stay checked as English.
+    LangInfo { code: "th", name: "ไทย", source: include_str!("th.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // French; `fr`, `fr-FR`, `fr_CA` and other regions resolve here.
     LangInfo { code: "fr", name: "Français", source: include_str!("fr.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
 ];

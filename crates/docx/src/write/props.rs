@@ -114,6 +114,10 @@ pub fn rpr_inner(w: &mut W, c: &CharProps) {
     if let Some(fx) = &c.text_effects {
         super::wordart::rpr_effects(w, fx);
     }
+    // After the text effects, in the order of the w14 run properties.
+    if let Some(l) = c.ligatures.as_deref().and_then(doc4me_doc::props::ligatures_value) {
+        w.empty("w14:ligatures", &[("w14:val", l)]);
+    }
 }
 
 /// Does `c` produce any `w:rPr` content (besides a tracked change)?

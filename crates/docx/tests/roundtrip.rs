@@ -106,6 +106,7 @@ fn every_char_prop_round_trips() {
             reflection: Some(doc4me_doc::wordart::Reflection::default()),
         })),
         lang: Some("fr-FR".into()),
+        ligatures: Some("standardContextual".into()),
         no_proof: Some(true),
         rtl: Some(false),
         cs: Some(true),
@@ -2250,4 +2251,20 @@ fn new_documents_spell_out_complex_script_properties() {
     let again = doc4me_docx::read(&doc4me_docx::write(&r).expect("write")).expect("read");
     assert_eq!(again.styles, r.styles);
     assert_eq!(again.body, r.body);
+}
+
+/// "Kerning for fonts" and OpenType ligatures, which change text widths, survive a save, and an
+/// unknown ligature value is dropped rather than written back.
+#[test]
+fn kerning_and_ligatures_round_trip() {
+    let mut d = Document::from_text("AV fi");
+    d.styles.default_chr.kern = Some(1.0);
+    d.styles.default_chr.ligatures = Some("standardContextual".into());
+    let r = rt(&d);
+    assert_eq!(r.styles.default_chr.kern, Some(1.0));
+    assert_eq!(r.styles.default_chr.ligatures.as_deref(), Some("standardContextual"));
+    d.styles.default_chr.ligatures = Some("<bogus/>".into());
+    let bytes = doc4me_docx::write(&d).expect("write");
+    let r = doc4me_docx::read(&bytes).expect("read");
+    assert_eq!(r.styles.default_chr.ligatures, None);
 }

@@ -2,7 +2,7 @@
 
 **Stage: alpha** · next: beta, ~15 points (60% → 75% ready for real work) and ~150–230 h away
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-14 · **Change:** trivial (Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-19 · **Change:** trivial (Thai interface catalog; previously trivial: Thai proofing, Thai counting, TH Sarabun New/PSK at their own size, Word for Windows line spacing; previously trivial: Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
 
 Doc4Me aims for complete parity with Microsoft Word, then goes further on speed, openness and
 agent control. This page is the summary; the assessment is
@@ -109,11 +109,12 @@ Weights and evidence per area: [docs/target-app-parity.md](docs/target-app-parit
 | German | de | partial (#574) | ~95% |
 | Korean | ko | none | 0% |
 | Vietnamese | vi | none | 0% |
+| Thai | th | full (interface, Sarabun default font, word breaks, Thai proofing) | 100% |
 
 Also shipped: Traditional Chinese (`zh-hant`), Ukrainian (`uk`), Serbian (`sr`, `sr-latn`, #250), Russian (`ru`) and Polish (`pl`), all partial (~95%). Estonian (`et`), Italian (`it`, #594) and Czech (`cs`) now have complete interface catalogs, and Turkish (`tr`) a complete 2,325-entry one (every key of the Russian catalog), all with
 system-locale selection and a saved language choice (Italian also has 51 strings none of the others had yet); Estonian, Turkish, Italian and Czech proofing are not included. Hungarian (`hu`) has a
 complete 2,419-entry catalog, also without proofing.
-Proofing: English and Polish (spelling, grammar, hyphenation), chosen per run from its language. Word ships
+Proofing: English and Polish (spelling, grammar, hyphenation), chosen per run from its language; Thai spelling marks only certain mistakes (typing order, common misspellings) in any Thai text. Word ships
 30 interface languages and proofing for ~50. Detail: [docs/localization-parity.md](docs/localization-parity.md).
 
 ## Upcoming
@@ -135,6 +136,8 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 | 2026-10-11 | Hide White Space (#645): `view.hideWhiteSpace` (View › Show checkbox, or double-click the gap between pages) collapses margins, headers and footers between pages to a thin line in Print Layout; screen only, page count unchanged |
 | 2026-10-11 | Fonts: Palatino Linotype and Book Antiqua fall back to Palatino (macOS) or TeX Gyre Pagella / P052 / URW Palladio (Linux) before generic serif (#670) |
 |---|---|
+| 2026-10-19 | Thai interface (`th`, 2,433 entries, complete); Thai misspelling list 105 pairs; review fixes: Arabic ligatures kept, substituted fonts keep the requested font's line spacing (Cambria, Courier New, Thai fonts drawn with Sarabun), Thai numbering switches a decimal list, Thai/Latin words spelled apart |
+| 2026-10-16 | Thai and Word fidelity: single line spacing from Word for Windows' font metrics (Sarabun 1.853 em, as Word for Windows paginates it); kerning only with `w:kern` and ligatures only with `w14:ligatures` (read and saved), as Word does; TH Sarabun New / PSK / IT๙ drawn with Sarabun at their own letter height, advance widths, kerning and line spacing when not installed; Thai counting list numbers (หนึ่ง … สิบเอ็ด … หนึ่งร้อยเอ็ด) and Thai list kinds in the Numbering menu; Thai proofing (typing-order mistakes, common misspellings with Royal Society spellings) |
 | 2026-10-15 | Doc4Me 1.0.0 review fixes: Thai digits, ฿ and Thai/Khmer punctuation never start a line; Thai letters number ก ข ค ง (no ฆ); Thai Distributed lines end at the margin when they wrap after a space; built-in styles no longer pin complex-script sizes (a 36 pt run shows its Thai at 36 pt) and .docx export spells them out for Word; interface text boxes keep raised Thai tone marks; theme fonts no longer give body styles the heading face; the Layout tab no longer trips an egui assertion in debug builds; Navigation headings left-aligned again; installers carry NOTICE, the font licences (OFL) and the Unicode licence; .docx canvases saved by WordCraft keep their turn |
 | 2026-10-14 | Doc4Me 1.0.0: renamed from WordCraft (crates, binaries, installer with its own MSI UpgradeCode, app id `io.github.chatraweechai.doc4me`; ArtCraft brand files removed as the brand terms require); Sarabun (OFL) bundled as the default document and interface font; Thai, Lao and Khmer wrap between dictionary words (ICU4X) and double-click, Ctrl+arrows and the word count use them; Thai tone marks stay inside words; Thai list numbers (๑, ก); new documents carry complex-script font/size/bold for Word; Windows x64 installer built by GitHub Actions |
 | 2026-10-11 | Turkish (`tr`) interface completed (#774): 2,325 entries, every key of the Russian catalog (equation gallery, built-in style names, watermarks, paper sizes, preview tiles); the interface audit checks Turkish too |
@@ -221,6 +224,8 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-19 | trivial | Progress log and Languages: Thai interface catalog |
+| 2026-10-16 | trivial | Progress log: Thai proofing, Thai counting, TH Sarabun metrics, Word for Windows line spacing; Languages proofing line |
 | 2026-10-14 | trivial | Progress log: Doc4Me 1.0.0 (rename, Sarabun, Thai word breaks); Releases row |
 | 2026-10-11 | trivial | Progress log and shipped languages: Turkish interface completed, 2,325 entries (#774) |
 | 2026-10-12 | trivial | Progress log: Navigation heading truncation (#759) |

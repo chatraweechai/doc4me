@@ -374,7 +374,7 @@ fn manual_ui(app: &mut WordApp, ui: &mut Ui, f: &mut ManualForm) -> bool {
 // Language
 
 /// Proofing languages offered, by BCP 47 tag, with their English names (translated for display).
-pub const LANGUAGES: [(&str, &str); 29] = [
+pub const LANGUAGES: [(&str, &str); 30] = [
     ("en-US", "English (United States)"),
     ("en-GB", "English (United Kingdom)"),
     ("de-DE", "German (Germany)"),
@@ -402,6 +402,7 @@ pub const LANGUAGES: [(&str, &str); 29] = [
     ("zh-CN", "Chinese (Simplified)"),
     ("zh-TW", "Chinese (Traditional)"),
     ("ko-KR", "Korean"),
+    ("th-TH", "Thai"),
     ("ar-SA", "Arabic"),
     ("he-IL", "Hebrew"),
 ];

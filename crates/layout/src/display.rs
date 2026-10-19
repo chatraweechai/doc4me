@@ -661,7 +661,7 @@ fn lines(
                 let Some(st) = pl.styles.get(run.style as usize) else { continue };
                 out.push(Draw::Glyphs {
                     face: st.face,
-                    size: st.size,
+                    size: st.glyph_size(),
                     glyphs: lab.glyphs.get(run.glyphs.clone()).into_iter().flatten().map(|g| (g.gid, gx + g.dx, base - st.shift - g.dy)).collect(),
                     color: text_color(&st.rc.color, None),
                     alpha,
@@ -680,7 +680,7 @@ fn lines(
             let hx = x + line.hyphen_x(adv);
             out.push(Draw::Glyphs {
                 face: st.face,
-                size: st.size,
+                size: st.glyph_size(),
                 glyphs: vec![(gid, hx, base - st.shift)],
                 color: text_color(&st.rc.color, None),
                 alpha,
@@ -825,13 +825,13 @@ fn lines(
             // for the PDF's text.
             let art = rc.text_effects.as_ref().filter(|_| ins.is_none() && del.is_none() && !glyphs.is_empty());
             if let Some(fx) = art {
-                let path = crate::wordart::glyph_path(&st.face, st.size, &glyphs, st.synth_italic);
+                let path = crate::wordart::glyph_path(&st.face, st.glyph_size(), &glyphs, st.synth_italic);
                 out.push(Draw::Art { path, fx: fx.clone(), color, alpha });
             }
             if !glyphs.is_empty() {
                 out.push(Draw::Glyphs {
                     face: st.face,
-                    size: st.size,
+                    size: st.glyph_size(),
                     glyphs,
                     color,
                     alpha: if art.is_some() { 0.0 } else { alpha },
@@ -918,7 +918,7 @@ fn lines(
             let Some(st) = pl.styles.get(c.style as usize) else { continue };
             let Some(ch) = leader.char() else { continue };
             let gid = st.face.glyph_for(ch);
-            let adv = (st.face.advance(gid) as f32 * st.size / st.face.upem.max(1.0) as f32).max(1.0);
+            let adv = (st.face.advance(gid) as f32 * st.glyph_size() / st.face.upem.max(1.0) as f32).max(1.0);
             let (mut gx, end) = (x + a + adv * 0.5, x + b - adv * 1.2);
             let mut glyphs = Vec::new();
             // Align leader dots to a grid so consecutive lines line up.
@@ -929,7 +929,7 @@ fn lines(
             }
             out.push(Draw::Glyphs {
                 face: st.face,
-                size: st.size,
+                size: st.glyph_size(),
                 glyphs,
                 color: text_color(&st.rc.color, None),
                 alpha,
@@ -1002,7 +1002,7 @@ fn lines(
                 let Some(st) = pl.styles.get(style as usize) else { continue };
                 out.push(Draw::Glyphs {
                     face: st.face,
-                    size: st.size,
+                    size: st.glyph_size(),
                     glyphs: run.iter().map(|(_, g)| (g.gid, cx + g.dx, y - g.dy)).collect(),
                     color: text_color(&st.rc.color, st.rc.shading.or(st.rc.highlight)),
                     alpha,

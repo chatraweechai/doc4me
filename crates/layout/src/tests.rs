@@ -603,8 +603,9 @@ fn turned_cell_text_runs_down_the_cell() {
     let it = turned_lines(&l);
     assert!(matches!(it, Placed::Lines { turn: TextDirection::Down, l0: 0, l1: 1, .. }), "one unwrapped line: {it:?}");
     let b = it.turned_bounds().unwrap();
-    // Tall and narrow, against the cell's right edge (cell 2 spans x 228..384, 5.4pt margins).
-    assert!(b.h > 60.0 && b.w < 20.0, "{b:?}");
+    // Tall and narrow (one Sarabun line, 1.853 em: 22.2 pt at 12 pt), against the cell's right
+    // edge (cell 2 spans x 228..384, 5.4pt margins).
+    assert!(b.h > 60.0 && b.w < 24.0, "{b:?}");
     assert!((b.right() - (72.0 + 312.0 - 5.4)).abs() < 1.0 && b.x > 72.0 + 156.0, "{b:?}");
     // The row grew to hold the text: the next paragraph starts below it.
     let after = l.caret(&Pos::body(2, 0)).unwrap();
@@ -1571,7 +1572,8 @@ fn table_style_paragraph_props_beat_document_defaults() {
     assert_eq!((q.rp.space_after, q.rp.line_spacing), (8.0, doc4me_doc::props::LineSpacing::Multiple(1.15)));
     let (g, n) = (row_height(&lg, 1), row_height(&lp, 1));
     assert!(g + 8.0 < n, "Table Grid row {g}, unstyled row {n}");
-    assert!(g < 18.0, "one 12 pt line, single spaced: {g}");
+    // One 12 pt Sarabun line, single spaced: 1.853 em (Word for Windows' win metrics) = 22.2 pt.
+    assert!(g < 24.0, "one 12 pt line, single spaced: {g}");
 }
 
 /// The paragraph's own style (Normal included) and direct formatting beat the table style; the
@@ -2427,6 +2429,29 @@ fn numbered(d: &mut Document, texts: &[&str], props: ParaProps) -> Vec<doc4me_do
         .collect()
 }
 
+/// Thai lists: Thai digits, Thai letters (no ฃ ฅ ฆ) and Thai number words, with เอ็ด for a
+/// final 1 after other digits.
+#[test]
+fn thai_list_labels() {
+    for (kind, want) in [
+        (doc4me_doc::ListKind::ThaiNumbers, ["๑.", "๒.", "๓.", "๔."]),
+        (doc4me_doc::ListKind::ThaiLetters, ["ก.", "ข.", "ค.", "ง."]),
+        (doc4me_doc::ListKind::ThaiCounting, ["หนึ่ง.", "สอง.", "สาม.", "สี่."]),
+    ] {
+        let mut d = Document::new();
+        let num = d.numbering.add_list(kind);
+        d.body = (0..4)
+            .map(|i| {
+                let mut p = doc4me_doc::Paragraph::with_text(&format!("ข้อ {i}"), Default::default());
+                p.props.numbering = Some(doc4me_doc::props::NumRef { num, level: 0 });
+                doc4me_doc::para_block(p)
+            })
+            .collect();
+        assert_eq!(labels(&lay(&d)), want, "{kind:?}");
+    }
+    assert_eq!(doc4me_doc::ListKind::parse("thaiCounting"), Some(doc4me_doc::ListKind::ThaiCounting));
+}
+
 #[test]
 fn list_items_are_counted_once_when_laid_out_again() {
     // Contextual spacing drops the space before, so each item's top differs from the first guess.
@@ -2545,14 +2570,15 @@ fn a_floating_table_taller_than_a_page_runs_across_pages() {
 fn a_page_anchored_floating_table_after_a_full_page_moves_to_the_next() {
     use doc4me_doc::para::Anchor;
     use doc4me_doc::props::TableFloat;
-    let text: Vec<String> = (0..24).map(|i| format!("Paragraph {i} before the table.")).collect();
+    // 19 paragraphs of 12 pt Sarabun (1.853 em lines, 1.15 spacing, 8 pt after) fill the page.
+    let text: Vec<String> = (0..19).map(|i| format!("Paragraph {i} before the table.")).collect();
     let mut d = Document::from_text(&(text.join("\n") + "\nAfter the table."));
     let mut t = Table::new(15, 1, 300.0);
     for (i, r) in t.rows.iter_mut().enumerate() {
         r.cells[0].blocks = vec![doc4me_doc::para_block(doc4me_doc::Paragraph::with_text(&format!("Row {i}"), Default::default()))];
     }
     t.props.float = Some(TableFloat { h_rel: Anchor::Page, v_rel: Anchor::Page, x: 70.0, y: 71.0, ..Default::default() });
-    d.insert_block(StoryRef::Body, &Path::top(24), doc4me_doc::Block::Table(t)).unwrap();
+    d.insert_block(StoryRef::Body, &Path::top(19), doc4me_doc::Block::Table(t)).unwrap();
     let l = lay(&d);
     let page_of = |want: &dyn Fn(&Path) -> bool| -> Vec<usize> {
         l.pages
@@ -2563,10 +2589,10 @@ fn a_page_anchored_floating_table_after_a_full_page_moves_to_the_next() {
             .collect()
     };
     // The text before the table fills page 1; the table and the text after it are on page 2.
-    assert_eq!(page_of(&|p| p.0 == [23]), vec![0]);
-    let rows = page_of(&|p| p.0.first() == Some(&24) && p.0.len() > 1);
+    assert_eq!(page_of(&|p| p.0 == [18]), vec![0]);
+    let rows = page_of(&|p| p.0.first() == Some(&19) && p.0.len() > 1);
     assert!(rows.len() == 15 && rows.iter().all(|pg| *pg == 1), "table rows on pages {rows:?}");
-    assert_eq!(page_of(&|p| p.0 == [25]), vec![1]);
+    assert_eq!(page_of(&|p| p.0 == [20]), vec![1]);
 }
 
 /// #534: a paragraph that starts with a page break right where the page is full keeps the break
@@ -3235,7 +3261,7 @@ fn rules_below(l: &DocLayout, pi: usize, y: f32) -> Vec<f32> {
 #[test]
 fn long_footnotes_continue_on_the_next_page() {
     let mut d = Document::from_text(&"Body text line.\n".repeat(16));
-    let long = footnote(&mut d, &Pos::body(4, 4), &"A long footnote that runs on and on. ".repeat(100));
+    let long = footnote(&mut d, &Pos::body(4, 4), &"A long footnote that runs on and on. ".repeat(60));
     let own = footnote(&mut d, &Pos::body(14, 4), "The second page's own note.");
     let l = lay(&d);
     let refs = l.caret(&Pos::body(4, 4)).unwrap();
@@ -3614,7 +3640,7 @@ fn wrap_text_keeps_text_on_one_side() {
 #[test]
 fn document_note_separators_and_continuation_notice() {
     let mut d = Document::from_text(&"Body text line.\n".repeat(16));
-    let long = footnote(&mut d, &Pos::body(4, 4), &"A long footnote that runs on and on. ".repeat(100));
+    let long = footnote(&mut d, &Pos::body(4, 4), &"A long footnote that runs on and on. ".repeat(60));
     let sep = |cont: bool| {
         let mut p = doc4me_doc::Paragraph::new();
         p.props.space_after = Some(0.0);

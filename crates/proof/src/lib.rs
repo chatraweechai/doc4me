@@ -12,6 +12,10 @@
 //!   spelling marks), read by the affix engine ([`affix`]), suggestions tuned for Polish
 //!   (diacritics, `ż`/`rz`, `u`/`ó`, missing spaces), and Polish grammar rules with Polish
 //!   messages.
+//! - **Thai** (module [`th`]): precision-first, whatever the run's language: common
+//!   misspellings with the Royal Society of Thailand's spelling, and characters typed in an
+//!   order no Thai word has (`เเ` for `แ`, a tone mark before its vowel), each with its
+//!   correction; unknown words are never marked. Messages in Thai. No Thai grammar rules.
 //! - **Other languages** ([`ProofLang::Other`]): no spelling or grammar marks, like Word without
 //!   the language's proofing tools.
 //! - **Hyphenation** ([`hyphen`]): dictionary, Liang patterns (English, Polish), heuristic.
@@ -26,6 +30,7 @@ pub mod hyphen;
 pub mod lang;
 pub mod patterns;
 pub mod pl;
+pub mod th;
 
 use std::collections::HashSet;
 use std::ops::Range;
@@ -317,6 +322,7 @@ pub fn words(text: &str) -> Vec<(usize, usize)> {
     let mut out = Vec::new();
     let mut start: Option<usize> = None;
     let is_w = |c: char| c.is_alphanumeric() || c == '\'' || c == '’' || c == '-';
+    let mut prev: Option<char> = None;
     for (i, c) in text.char_indices() {
         match (start, is_w(c)) {
             (None, true) => start = Some(i),
@@ -324,8 +330,15 @@ pub fn words(text: &str) -> Vec<(usize, usize)> {
                 out.push((s, i));
                 start = None;
             }
+            // Thai written against Latin with no space (ส่งemailหาครู): two words, so the Latin
+            // one is spelled by itself and the Thai one is left to `th::check`.
+            (Some(s), true) if prev.is_some_and(|p| th::is_thai(p) != th::is_thai(c)) => {
+                out.push((s, i));
+                start = Some(i);
+            }
             _ => {}
         }
+        prev = Some(c);
     }
     if let Some(s) = start {
         out.push((s, text.len()));
@@ -357,7 +370,12 @@ pub fn check_spelling_in(text: &str, lang: ProofLang) -> Vec<Issue> {
     if !lang.is_proofed() {
         return Vec::new();
     }
-    words(text).into_iter().filter_map(|(a, b)| spelling_issue(text, a, b, lang, &Options::default())).collect()
+    let mut v: Vec<Issue> = words(text).into_iter().filter_map(|(a, b)| spelling_issue(text, a, b, lang, &Options::default())).collect();
+    if lang == ProofLang::Th {
+        v.extend(th::check(text));
+        v.sort_by_key(|i| (i.start, i.end));
+    }
+    v
 }
 
 /// The spelling issue of the word at `a..b` of `text`, if it is misspelled in `lang`. Words in
@@ -388,6 +406,8 @@ pub fn is_correct_in_with(word: &str, lang: ProofLang, opts: &Options) -> bool {
     match lang {
         ProofLang::En => is_correct_with(word, opts),
         ProofLang::Pl => accepted_by_options(word, opts) || pl::is_correct(word),
+        // Thai words are checked by `th::check` over the paragraph; Latin ones as English.
+        ProofLang::Th => is_correct_with(word, opts),
         ProofLang::Other => true,
     }
 }
@@ -397,6 +417,8 @@ pub fn suggest_in(word: &str, max: usize, lang: ProofLang) -> Vec<String> {
     match lang {
         ProofLang::En => suggest(word, max),
         ProofLang::Pl => pl::suggest(word, max),
+        ProofLang::Th if word.chars().any(th::is_thai) => th::suggest(word).into_iter().take(max).collect(),
+        ProofLang::Th => suggest(word, max),
         ProofLang::Other => Vec::new(),
     }
 }
@@ -407,7 +429,7 @@ pub fn check_grammar_in(text: &str, lang: ProofLang) -> Vec<Issue> {
     match lang {
         ProofLang::En => check_grammar(text),
         ProofLang::Pl => pl::grammar::check(text),
-        ProofLang::Other => Vec::new(),
+        ProofLang::Th | ProofLang::Other => Vec::new(),
     }
 }
 
@@ -439,6 +461,8 @@ pub fn check_text_with(text: &str, spans: &[(Range<usize>, ProofLang)], opts: &O
         merged.get(k).filter(|(r, _)| r.start <= i).map_or(ProofLang::En, |s| s.1)
     };
     let mut v: Vec<Issue> = words(text).into_iter().filter_map(|(a, b)| spelling_issue(text, a, b, lang_at(a), opts)).collect();
+    // Thai text, whatever its run's language (no other language is written in Thai script).
+    v.extend(th::check(text));
     if !grammar {
         v.sort_by_key(|i| (i.start, i.end));
         return v;
@@ -571,6 +595,22 @@ fn starts_consonant_sound(w: &str) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Thai typed against Latin with no space: the Latin word is spelled by itself, the Thai left
+    /// to the Thai check.
+    #[test]
+    fn thai_glued_to_latin_is_two_words() {
+        let spelling = |t: &str| -> Vec<String> {
+            check_text(t, &[(0..t.len(), ProofLang::Th)])
+                .into_iter()
+                .filter(|i| i.kind == IssueKind::Spelling)
+                .map(|i| t.get(i.start..i.end).unwrap_or("").to_string())
+                .collect()
+        };
+        assert!(spelling("ส่งemailหาครู").is_empty(), "{:?}", spelling("ส่งemailหาครู"));
+        assert!(spelling("ใช้Wordพิมพ์งาน").is_empty(), "{:?}", spelling("ใช้Wordพิมพ์งาน"));
+        assert_eq!(spelling("ส่งemialหาครู"), ["emial"]);
+    }
 
     #[test]
     fn dictionary_loads() {

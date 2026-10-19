@@ -58,6 +58,12 @@ pub struct ResolvedChar {
     pub size_cs: f32,
     pub bold_cs: bool,
     pub italic_cs: bool,
+    /// Pair kerning for this size and above (points); 0 = no kerning, Word's default.
+    #[serde(default)]
+    pub kern: f32,
+    /// OpenType ligatures asked for (`w14:ligatures`, [`CharProps::ligatures`]); none when unset.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ligatures: Option<String>,
 }
 
 impl ResolvedChar {
@@ -100,6 +106,9 @@ impl ResolvedChar {
             size_cs: c.size_cs.or(c.size).unwrap_or(11.0).clamp(1.0, 1638.0),
             bold_cs: c.bold_cs.or(c.bold).unwrap_or(false),
             italic_cs: c.italic_cs.or(c.italic).unwrap_or(false),
+            kern: c.kern.filter(|k| k.is_finite()).unwrap_or(0.0).clamp(0.0, 1638.0),
+            // Only values a .docx can hold, so what is drawn is what a save keeps.
+            ligatures: c.ligatures.as_deref().and_then(crate::props::ligatures_value).map(str::to_string),
         }
     }
     /// The formatting complex-script text in this run is drawn with: the complex-script font,
@@ -111,6 +120,21 @@ impl ResolvedChar {
     /// Does a character of this run use the complex-script properties?
     pub fn uses_complex(&self, c: char) -> bool {
         self.rtl || self.cs || crate::bidi::is_complex_script(c)
+    }
+    /// Does Word kern this run's letters? Only with "Kerning for fonts" (`w:kern`) set, at that
+    /// size and above.
+    pub fn kerned(&self) -> bool {
+        self.kern > 0.0 && self.size >= self.kern
+    }
+    /// The OpenType ligature features the run asks for: (standard `liga`, contextual `clig`,
+    /// historical `hlig`, discretional `dlig`). All off unless `w14:ligatures` names them.
+    pub fn ligature_features(&self) -> (bool, bool, bool, bool) {
+        let Some(v) = self.ligatures.as_deref() else { return (false, false, false, false) };
+        if v == "all" {
+            return (true, true, true, true);
+        }
+        let v = v.to_ascii_lowercase();
+        (v.contains("standard"), v.contains("contextual"), v.contains("historical"), v.contains("discretional"))
     }
     /// The size glyphs are drawn at (super/subscript shrink to ~2/3).
     pub fn draw_size(&self) -> f32 {

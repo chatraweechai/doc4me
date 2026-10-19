@@ -314,6 +314,11 @@ pub struct CharProps {
     /// BCP 47 language of complex-script text (`w:lang/@w:bidi`, e.g. `fa-IR`).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub lang_bidi: Option<String>,
+    /// OpenType ligatures the run asks for (`w14:ligatures`): `none`, `standard`, `contextual`,
+    /// `historical`, `discretional`, their combinations (`standardContextual` …) or `all`. Word
+    /// sets none unless asked, and neither does Doc4Me.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ligatures: Option<String>,
     /// Hyperlink target: a URL, or `#bookmark` for an internal link.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub link: Option<String>,
@@ -395,7 +400,7 @@ impl CharProps {
     pub fn overlay(&mut self, patch: &CharProps) {
         overlay_fields!(self, patch; style, font, size, bold, italic, underline, underline_color, strike, double_strike, color, highlight,
             shading, border, vert_align, caps, small_caps, hidden, spacing, scale, position, kern, outline, shadow, emboss, engrave, lang, no_proof, rtl,
-            cs, font_cs, font_ea, size_cs, bold_cs, italic_cs, lang_bidi, link, ins, del, fmt_change);
+            cs, font_cs, font_ea, size_cs, bold_cs, italic_cs, lang_bidi, ligatures, link, ins, del, fmt_change);
         if let Some(p) = &patch.text_effects {
             self.text_effects.get_or_insert_with(Default::default).overlay(p);
         }
@@ -416,6 +421,31 @@ impl CharProps {
     pub fn formatting(&self) -> CharProps {
         CharProps { link: None, ins: None, del: None, fmt_change: None, ..self.clone() }
     }
+}
+
+/// The values of `w14:ligatures` ([MS-DOCX] ST_Ligatures).
+pub const LIGATURE_VALUES: [&str; 16] = [
+    "none",
+    "standard",
+    "contextual",
+    "historical",
+    "discretional",
+    "standardContextual",
+    "standardHistorical",
+    "contextualHistorical",
+    "standardDiscretional",
+    "contextualDiscretional",
+    "historicalDiscretional",
+    "standardContextualHistorical",
+    "standardContextualDiscretional",
+    "standardHistoricalDiscretional",
+    "contextualHistoricalDiscretional",
+    "all",
+];
+
+/// A `w14:ligatures` value as Doc4Me stores it, `None` for anything else.
+pub fn ligatures_value(v: &str) -> Option<&'static str> {
+    LIGATURE_VALUES.iter().copied().find(|l| *l == v)
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]

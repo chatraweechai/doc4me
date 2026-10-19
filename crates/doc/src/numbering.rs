@@ -121,6 +121,12 @@ pub enum ListKind {
     LowerRoman,
     /// 1. 1.1. 1.1.1.
     Legal,
+    /// ๑. ก. 1. (Thai digits)
+    ThaiNumbers,
+    /// ก. ๑. 1. (Thai letters)
+    ThaiLetters,
+    /// หนึ่ง. ก. ๑. (Thai number words)
+    ThaiCounting,
 }
 
 impl ListKind {
@@ -135,6 +141,9 @@ impl ListKind {
             "lowerLetterDot" => ListKind::LowerLetterDot,
             "lowerRoman" => ListKind::LowerRoman,
             "legal" | "multilevel" => ListKind::Legal,
+            "thaiNumbers" => ListKind::ThaiNumbers,
+            "thaiLetters" => ListKind::ThaiLetters,
+            "thaiCounting" => ListKind::ThaiCounting,
             s if s.chars().count() == 1 => ListKind::BulletChar(s.chars().next()?),
             _ => return None,
         })
@@ -184,6 +193,9 @@ pub fn levels_for(kind: ListKind) -> Vec<Level> {
                 ListKind::LowerLetter => lvl(cyc(NumFormat::LowerLetter, NumFormat::LowerRoman, NumFormat::Decimal), format!("%{n})")),
                 ListKind::LowerLetterDot => lvl(cyc(NumFormat::LowerLetter, NumFormat::LowerRoman, NumFormat::Decimal), format!("%{n}.")),
                 ListKind::LowerRoman => lvl(cyc(NumFormat::LowerRoman, NumFormat::LowerLetter, NumFormat::Decimal), format!("%{n}.")),
+                ListKind::ThaiNumbers => lvl(cyc(NumFormat::ThaiNumbers, NumFormat::ThaiLetters, NumFormat::Decimal), format!("%{n}.")),
+                ListKind::ThaiLetters => lvl(cyc(NumFormat::ThaiLetters, NumFormat::ThaiNumbers, NumFormat::Decimal), format!("%{n}.")),
+                ListKind::ThaiCounting => lvl(cyc(NumFormat::ThaiCounting, NumFormat::ThaiLetters, NumFormat::ThaiNumbers), format!("%{n}.")),
                 ListKind::Outline => {
                     let f = [NumFormat::UpperRoman, NumFormat::UpperLetter, NumFormat::Decimal, NumFormat::LowerLetter, NumFormat::LowerRoman]
                         .get(i)

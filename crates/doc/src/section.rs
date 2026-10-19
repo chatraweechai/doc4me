@@ -226,9 +226,9 @@ impl NumFormat {
     pub fn from_ooxml(s: &str) -> NumFormat {
         NumFormat::ALL.into_iter().find(|f| f.ooxml() == s).unwrap_or(NumFormat::Decimal)
     }
-    /// Format `n` (1-based). Formats Doc4Me doesn't draw yet (Hebrew, Arabic, Hindi, Thai
-    /// counting, Vietnamese, Russian, text amounts) show decimal, as do values past a sequence's
-    /// end (the 21st item of ①…⑳).
+    /// Format `n` (1-based). Formats Doc4Me doesn't draw yet (Hebrew, Arabic, Hindi,
+    /// Vietnamese, Russian, text amounts) show decimal, as do values past a sequence's end (the
+    /// 21st item of ①…⑳).
     pub fn format(self, n: u32) -> String {
         use crate::cjk_numbers as cjk;
         match self {
@@ -273,6 +273,7 @@ impl NumFormat {
             NumFormat::Chosung => cjk::chosung(n),
             NumFormat::ThaiNumbers => thai_digits(n),
             NumFormat::ThaiLetters => thai_letters(n),
+            NumFormat::ThaiCounting => thai_counting(n),
             NumFormat::Decimal
             | NumFormat::DecimalHalfWidth
             | NumFormat::Hex
@@ -287,7 +288,6 @@ impl NumFormat {
             | NumFormat::HindiConsonants
             | NumFormat::HindiNumbers
             | NumFormat::HindiCounting
-            | NumFormat::ThaiCounting
             | NumFormat::BahtText
             | NumFormat::DollarText => n.to_string(),
         }
@@ -364,6 +364,49 @@ pub fn thai_letters(n: u32) -> String {
     let k = (n - 1) / len + 1;
     let c = LETTERS.get(((n - 1) % len) as usize).copied().unwrap_or('ก');
     std::iter::repeat_n(c, k as usize).collect()
+}
+
+/// `n` in Thai words (`thaiCounting`: หนึ่ง สอง สาม …), the way the Royal Society of Thailand
+/// reads numbers: tens are สิบ, ยี่สิบ, สามสิบ … (never หนึ่งสิบ or สองสิบ); a final 1 after
+/// other digits is เอ็ด (สิบเอ็ด, ยี่สิบเอ็ด, หนึ่งร้อยเอ็ด, หนึ่งพันเอ็ด, หนึ่งล้านเอ็ด); a
+/// leading 1 is หนึ่ง (หนึ่งร้อย, หนึ่งพัน, หนึ่งล้าน); past หกหลัก the millions are counted the
+/// same way before ล้าน (สิบเอ็ดล้าน). 0 is ศูนย์. One word, no spaces.
+pub fn thai_counting(n: u32) -> String {
+    if n == 0 {
+        return "ศูนย์".into();
+    }
+    let (millions, rest) = (n / 1_000_000, n % 1_000_000);
+    let mut s = String::new();
+    if millions > 0 {
+        thai_group(millions, false, &mut s);
+        s.push_str("ล้าน");
+    }
+    thai_group(rest, millions > 0, &mut s);
+    s
+}
+
+/// One group below a million in Thai words, after `s`; `after` says digits come before it.
+fn thai_group(n: u32, after: bool, s: &mut String) {
+    const DIGITS: [&str; 10] = ["", "หนึ่ง", "สอง", "สาม", "สี่", "ห้า", "หก", "เจ็ด", "แปด", "เก้า"];
+    const PLACES: [&str; 6] = ["แสน", "หมื่น", "พัน", "ร้อย", "สิบ", ""];
+    let mut before = after;
+    for (i, place) in PLACES.iter().enumerate() {
+        let d = (n / 10u32.pow(5 - i as u32) % 10) as usize;
+        if d == 0 {
+            continue;
+        }
+        let digit = DIGITS.get(d).copied().unwrap_or("");
+        match (*place, d) {
+            ("สิบ", 1) => s.push_str("สิบ"),
+            ("สิบ", 2) => s.push_str("ยี่สิบ"),
+            ("", 1) if before => s.push_str("เอ็ด"),
+            _ => {
+                s.push_str(digit);
+                s.push_str(place);
+            }
+        }
+        before = true;
+    }
 }
 
 /// Word-style letters: a..z, aa..zz, aaa.. (repeated letter, not base-26).
@@ -858,6 +901,43 @@ mod tests {
         assert_eq!(NumFormat::ThaiLetters.format(41), "ฮ");
         assert_eq!(NumFormat::ThaiLetters.format(42), "กก");
         assert_eq!(NumFormat::ThaiLetters.format(0), "");
+        for (n, want) in [
+            (1, "หนึ่ง"),
+            (2, "สอง"),
+            (9, "เก้า"),
+            (10, "สิบ"),
+            (11, "สิบเอ็ด"),
+            (12, "สิบสอง"),
+            (20, "ยี่สิบ"),
+            (21, "ยี่สิบเอ็ด"),
+            (22, "ยี่สิบสอง"),
+            (31, "สามสิบเอ็ด"),
+            (99, "เก้าสิบเก้า"),
+            (100, "หนึ่งร้อย"),
+            (101, "หนึ่งร้อยเอ็ด"),
+            (110, "หนึ่งร้อยสิบ"),
+            (111, "หนึ่งร้อยสิบเอ็ด"),
+            (121, "หนึ่งร้อยยี่สิบเอ็ด"),
+            (201, "สองร้อยเอ็ด"),
+            (1000, "หนึ่งพัน"),
+            (1001, "หนึ่งพันเอ็ด"),
+            (1011, "หนึ่งพันสิบเอ็ด"),
+            (2567, "สองพันห้าร้อยหกสิบเจ็ด"),
+            (10001, "หนึ่งหมื่นเอ็ด"),
+            (21001, "สองหมื่นหนึ่งพันเอ็ด"),
+            (100000, "หนึ่งแสน"),
+            (1000000, "หนึ่งล้าน"),
+            (1000001, "หนึ่งล้านเอ็ด"),
+            (1000011, "หนึ่งล้านสิบเอ็ด"),
+            (11000000, "สิบเอ็ดล้าน"),
+            (21000000, "ยี่สิบเอ็ดล้าน"),
+            (101000000, "หนึ่งร้อยเอ็ดล้าน"),
+            (32767, "สามหมื่นสองพันเจ็ดร้อยหกสิบเจ็ด"),
+            (0, "ศูนย์"),
+            (u32::MAX, "สี่พันสองร้อยเก้าสิบสี่ล้านเก้าแสนหกหมื่นเจ็ดพันสองร้อยเก้าสิบห้า"),
+        ] {
+            assert_eq!(NumFormat::ThaiCounting.format(n), want, "{n}");
+        }
         assert!(NumFormat::ThaiLetters.format(u32::MAX).chars().count() <= 30);
         assert!(!NumFormat::UpperRoman.format(u32::MAX).is_empty());
         assert_eq!(NumFormat::LowerLetter.format(u32::MAX).len(), 30);

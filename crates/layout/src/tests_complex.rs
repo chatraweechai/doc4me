@@ -64,9 +64,18 @@ fn myanmar_without_spaces_wraps_between_syllables() {
     assert!(pl.lines[0].c1 - pl.lines[0].c0 > 10);
 }
 
-/// A face with Myanmar letters (an installed system font), or `None` to skip.
+/// A face with Myanmar letters and Myanmar shaping rules (an installed system font), or `None` to
+/// skip. A face that only maps the letters (Unifont) has GSUB for other scripts but no Myanmar
+/// lookups, so the vowel sign is never moved.
 fn myanmar_face() -> Option<doc4me_fonts::FaceRef> {
-    doc4me_fonts::FontDb::global().fallback_for('\u{1000}', 0).map(|f| doc4me_fonts::FaceRef::of(&f)).filter(|f| f.has_layout_tables())
+    use skrifa::raw::TableProvider;
+    let shapes_myanmar = |f: &doc4me_fonts::FaceRef| {
+        let Some(font) = f.skrifa() else { return false };
+        let Ok(gsub) = font.gsub() else { return false };
+        let Ok(scripts) = gsub.script_list() else { return false };
+        scripts.script_records().iter().any(|r| [*b"mym2", *b"mymr"].contains(&r.script_tag().into_bytes()))
+    };
+    doc4me_fonts::FontDb::global().fallback_for('\u{1000}', 0).map(|f| doc4me_fonts::FaceRef::of(&f)).filter(shapes_myanmar)
 }
 
 #[test]
@@ -212,4 +221,114 @@ fn distributed_lines_ending_in_a_space_still_reach_the_margin() {
         }
         assert!(checked > 0, "{align:?}: no line ended in a space");
     }
+}
+
+/// A one-paragraph document in `font` (Latin and complex script) at `size`, single spaced with no
+/// space before or after, with `chr` applied on top of the defaults.
+fn doc_in(font: &str, size: f32, text: &str, chr: impl FnOnce(&mut doc4me_doc::props::CharProps)) -> Document {
+    let mut d = Document::from_text(text);
+    let c = &mut d.styles.default_chr;
+    (c.font, c.font_cs, c.size, c.size_cs) = (Some(font.into()), Some(font.into()), Some(size), Some(size));
+    chr(c);
+    if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
+        p.props.line_spacing = Some(doc4me_doc::props::LineSpacing::Multiple(1.0));
+        (p.props.space_before, p.props.space_after) = (Some(0.0), Some(0.0));
+    }
+    d
+}
+
+/// Sarabun's single-spaced lines are 1.853 em apart, as in Word for Windows (its usWin metrics),
+/// not the 1.30 em of its hhea metrics.
+#[test]
+fn sarabun_lines_are_spaced_like_word_for_windows() {
+    let l = lay(&doc_in("Sarabun", 16.0, "ภาษาไทย Thai", |_| {}));
+    let pl = para_layout(&l, 0);
+    assert!((pl.lines[0].height - 16.0 * 1.853).abs() < 0.01, "{}", pl.lines[0].height);
+}
+
+/// TH Sarabun New, TH SarabunPSK and TH SarabunIT๙ (not installed here) are drawn with the
+/// bundled Sarabun at their own letter height, on their own widths and line spacing, so a page
+/// holds the same text as with the real font.
+#[test]
+fn th_sarabun_new_keeps_its_size_widths_and_line_spacing_when_drawn_with_sarabun() {
+    for font in ["TH Sarabun New", "TH SarabunPSK", "TH SarabunIT๙"] {
+        let l = lay(&doc_in(font, 16.0, "กขค ABC", |_| {}));
+        let pl = para_layout(&l, 0);
+        // hhea 844/-457 with a 30 gap, usWin 844/457: 1.331 em.
+        assert!((pl.lines[0].height - 16.0 * 1.331).abs() < 0.01, "{font}: {}", pl.lines[0].height);
+        // TH Sarabun New's advance widths (ems): ก ข ค, space, A B C.
+        let want = [0.386, 0.378, 0.393, 0.216, 0.400, 0.378, 0.406];
+        let got: Vec<f32> = pl.clusters.iter().map(|c| c.adv).collect();
+        assert_eq!(got.len(), want.len(), "{font}: {got:?}");
+        for (g, w) in got.iter().zip(want) {
+            assert!((g - w * 16.0).abs() < 0.001, "{font}: {got:?}");
+        }
+        // Drawn with Sarabun, scaled to TH Sarabun New's letter heights: ก 400/586, x 340/500.
+        let style = |i: usize| &pl.styles[pl.clusters[i].style as usize];
+        assert_eq!(style(0).face.family, "Sarabun");
+        assert!((style(0).glyph_size() - 16.0 * 400.0 / 586.0).abs() < 0.01, "{}", style(0).glyph_size());
+        assert!((style(4).glyph_size() - 16.0 * 0.68).abs() < 0.01, "{}", style(4).glyph_size());
+        // Each glyph is centred on its cluster's width. Sarabun's letters, scaled, are a little
+        // wider or narrower than TH Sarabun New's (ข: 0.405 em against 0.378), so a glyph may
+        // start a fraction of a point before its cluster, into the side bearings.
+        for c in &pl.clusters {
+            for g in &pl.glyphs[c.g0 as usize..c.g1 as usize] {
+                assert!(g.dx > -0.05 * 16.0 && g.dx < c.adv, "{font}: {g:?} in {c:?}");
+            }
+        }
+    }
+    // TH SarabunIT๙ shows ASCII digits as Thai digits, on the Thai digits' width; the text keeps
+    // its digits.
+    let l = lay(&doc_in("TH SarabunIT๙", 16.0, "12", |_| {}));
+    let pl = para_layout(&l, 0);
+    let face = &pl.styles[pl.clusters[0].style as usize].face;
+    assert_eq!(pl.glyphs[0].gid, face.glyph_for('๑'));
+    assert!((pl.clusters[0].adv - 0.449 * 16.0).abs() < 0.001);
+    let l = lay(&doc_in("TH Sarabun New", 16.0, "12", |_| {}));
+    let pl = para_layout(&l, 0);
+    assert!((pl.clusters[0].adv - 0.362 * 16.0).abs() < 0.001);
+    // Fonts that resolve to themselves are left alone.
+    let l = lay(&doc_in("Sarabun", 16.0, "ก", |_| {}));
+    let st = &para_layout(&l, 0).styles[0];
+    assert!(st.fit.is_none() && st.glyph_scale == 1.0);
+}
+
+/// Word kerns letter pairs only with "Kerning for fonts" (`w:kern`) set, at that size and above;
+/// TH Sarabun New drawn with Sarabun takes TH Sarabun New's pairs.
+#[test]
+fn letters_are_kerned_only_when_the_run_asks() {
+    let width = |font: &str, kern: Option<f32>| {
+        let l = lay(&doc_in(font, 16.0, "AV", |c| c.kern = kern));
+        para_layout(&l, 0).clusters.iter().map(|c| c.adv).sum::<f32>()
+    };
+    for font in ["Sarabun", "TH Sarabun New"] {
+        let plain = width(font, None);
+        assert_eq!(plain, width(font, Some(0.0)), "{font}: 0 is off");
+        assert_eq!(plain, width(font, Some(20.0)), "{font}: 16 pt is below the 20 pt threshold");
+        assert!(width(font, Some(1.0)) < plain - 0.1, "{font}: kerned from 1 pt");
+    }
+    // TH Sarabun New's A V pair: -50 units.
+    assert!((width("TH Sarabun New", None) - width("TH Sarabun New", Some(1.0)) - 0.05 * 16.0).abs() < 0.001);
+}
+
+/// Word sets no standard ligatures unless `w14:ligatures` asks for them.
+#[test]
+fn ligatures_only_when_the_run_asks() {
+    let glyphs = |lig: Option<&str>| {
+        let l = lay(&doc_in("Sarabun", 16.0, "fi", |c| c.ligatures = lig.map(str::to_string)));
+        para_layout(&l, 0).glyphs.len()
+    };
+    assert_eq!(glyphs(None), 2);
+    assert_eq!(glyphs(Some("none")), 2);
+    assert_eq!(glyphs(Some("standardContextual")), 1, "Sarabun has an fi ligature");
+    assert_eq!(glyphs(Some("all")), 1);
+    // A value a .docx can't hold (and a save would drop) turns nothing on.
+    assert_eq!(glyphs(Some("Standard")), 2);
+    // Complex scripts keep the font's own ligatures (Word always forms Arabic لأ): Sarabun's ฤๅ.
+    let thai = |lig: Option<&str>| {
+        let l = lay(&doc_in("Sarabun", 16.0, "ฤๅ", |c| c.ligatures = lig.map(str::to_string)));
+        para_layout(&l, 0).glyphs.len()
+    };
+    assert_eq!(thai(None), 1, "Sarabun joins ฤๅ");
+    assert_eq!(thai(Some("none")), 1);
 }

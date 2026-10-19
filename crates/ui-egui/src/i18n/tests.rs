@@ -919,9 +919,9 @@ fn polish_covers_every_key_of_every_other_catalog() {
     use std::collections::HashSet;
     let keys = |source| parse_entries(source).0.into_iter().map(|e| e.source).collect::<HashSet<_>>();
     let polish = keys(lang("pl").0.source);
-    // Russian, Italian, Hungarian and Turkish also translate the built-in style names and the equation gallery,
-    // which the others don't yet; Polish matches every other catalog.
-    for other in Lang::all().filter(|l| *l != Lang::EN && !matches!(l.code(), "pl" | "ru" | "it" | "hu" | "tr")) {
+    // Russian, Italian, Hungarian, Turkish and Thai also translate the built-in style names and the
+    // equation gallery, which the others don't yet; Polish matches every other catalog.
+    for other in Lang::all().filter(|l| *l != Lang::EN && !matches!(l.code(), "pl" | "ru" | "it" | "hu" | "tr" | "th")) {
         let mut missing: Vec<String> = keys(other.0.source).difference(&polish).cloned().collect();
         missing.sort();
         assert!(missing.is_empty(), "pl lacks {}'s {missing:?}", other.code());
@@ -1106,6 +1106,119 @@ fn bundled_interface_fonts_cover_italian_letters() {
         assert_eq!(face.family, family, "must use the bundled interface face");
         for ch in "ÀàÈèÉéÌìÒòÙù".chars() {
             assert_ne!(face.glyph_for(ch), 0, "{family} {style} lacks {ch}");
+        }
+    }
+}
+
+#[test]
+fn thai_locales_and_saved_preference_work_without_changing_the_document() {
+    let th = lang("th");
+    for tag in ["th", "th-TH", "th_TH.UTF-8", "TH_th.UTF-8", "th-TH-u-nu-thai", "th-Thai-TH"] {
+        assert_eq!(lang_from_tag(tag), Some(th), "{tag}");
+    }
+    assert_eq!(first_supported(["sv-SE", "th-TH", "en-US"]), Some(th));
+    assert_eq!(normalize_pref("TH"), Some("th"));
+    assert_eq!(th.name(), "ไทย");
+    assert!(!th.uses_cjk());
+    assert_eq!(th.editing_lang(), None, "new documents stay US English; Thai text is proofed whatever its language");
+    let mut app = crate::WordApp::new(doc4me_engine::Session::new(doc4me_engine::sample::sample_document()), Default::default());
+    let before = serde_json::to_value(&app.session.doc).unwrap();
+    let result = app.run("ui.language", serde_json::json!({"value": "th"})).unwrap();
+    assert_eq!(result["effective"], "th");
+    assert!(result["available"].as_array().unwrap().iter().any(|l| l["code"] == "th" && l["name"] == "ไทย"));
+    assert_eq!(serde_json::to_value(&app.session.doc).unwrap(), before);
+    let saved = serde_json::to_string(&app.ui).unwrap();
+    let restored: crate::UiState = serde_json::from_str(&saved).unwrap();
+    assert_eq!(Lang::from_pref(&restored.language), th);
+    app.run("ui.language", serde_json::json!({"value": "auto"})).unwrap();
+    assert_eq!(app.ui.language, AUTO);
+}
+
+#[test]
+fn thai_covers_the_entire_existing_interface_catalog() {
+    use std::collections::HashSet;
+    let keys = |source| parse_entries(source).0.into_iter().map(|e| e.source).collect::<HashSet<_>>();
+    let thai = keys(lang("th").0.source);
+    for other in Lang::all().filter(|l| *l != Lang::EN && l.code() != "th") {
+        let mut missing: Vec<String> = keys(other.0.source).difference(&thai).cloned().collect();
+        missing.sort();
+        assert!(missing.is_empty(), "th lacks {}'s {missing:?}", other.code());
+    }
+    let th = lang("th");
+    for (source, expected) in [
+        ("Home", "หน้าหลัก"),
+        ("Insert", "แทรก"),
+        ("Font", "ฟอนต์"),
+        ("Review", "ตรวจทาน"),
+        ("Track Changes", "ติดตามการเปลี่ยนแปลง"),
+        ("Save", "บันทึก"),
+        ("Redo", "ทำซ้ำ"),
+        ("Thai", "ไทย"),
+        ("Doc4Me", "Doc4Me"),
+        ("unknown future label", "unknown future label"),
+    ] {
+        assert_eq!(super::tr(th, source), expected, "{source}");
+    }
+    assert_eq!(fmt(super::tr(th, "Page {page} of {pages}"), &[("page", "3"), ("pages", "9")]), "หน้า 3 จาก 9");
+    // Thai nouns have no plural: one string serves every count.
+    for count in [0, 1, 2, 21, 1000] {
+        let words = count.to_string();
+        assert_eq!(fmt(super::tr(th, "{words} words"), &[("words", &words)]), format!("{count} คำ"));
+    }
+    // The Font dialog's sample shows Thai with a below vowel and a stacked tone mark; All Caps
+    // uppercases only the Latin part.
+    assert_eq!(super::tr(th, "AaBbYyZz").to_uppercase(), "AABBYYZZ กขคง ปู่ชี้");
+    set_current(th);
+    for (style, expected) in [("Normal", "ปกติ"), ("No Spacing", "ไม่มีระยะห่าง"), ("Heading 2", "หัวเรื่อง 2"), ("TOC 3", "สารบัญ 3")]
+    {
+        assert_eq!(builtin_style_name(style), expected);
+    }
+    assert_eq!(builtin_style_name("My Own Style"), "My Own Style");
+    assert_eq!(location("Home › Font"), "หน้าหลัก › ฟอนต์");
+    assert_eq!(prefixed("Undo", "Bold"), "เลิกทำ ตัวหนา");
+    set_current(Lang::EN);
+}
+
+/// The Thai catalog follows its style rules: no Thai digits (inputs read ASCII digits), no "..."
+/// for the ellipsis, no spaces left at either end, Thai and Latin script only, and every Thai word
+/// passes Doc4Me's own Thai proofing (characters typed in order, no common misspelling).
+#[test]
+fn thai_catalog_is_typed_cleanly() {
+    let (entries, errors) = parse_entries(lang("th").0.source);
+    assert!(errors.is_empty(), "{errors:?}");
+    for e in &entries {
+        let t = &e.translation;
+        assert!(!t.chars().any(|c| ('๐'..='๙').contains(&c)), "Thai digit in {t:?}");
+        assert!(!t.contains("..."), "three dots for … in {t:?}");
+        assert_eq!(t.trim(), t, "space at an end of {t:?}");
+        assert!(!t.contains("  ") || e.source.contains("  "), "double space in {t:?}");
+        // Thai, Latin and the symbols the English already has; no letters of other scripts.
+        assert!(
+            t.chars().all(|c| !c.is_alphabetic()
+                || c.is_ascii()
+                || doc4me_engine::proof::th::is_thai(c)
+                || e.source.contains(c)
+                || "ÀÁÂÄàáâäÉéÈèÊêËëÍíÎîÏïÓóÔôÖöÚúÛûÜüÇçÑñ".contains(c)),
+            "letter of another script in {t:?}"
+        );
+        let issues = doc4me_engine::proof::th::check(t);
+        assert!(issues.is_empty(), "{t:?}: {:?}", issues.iter().map(|i| &i.message).collect::<Vec<_>>());
+    }
+}
+
+#[test]
+fn bundled_interface_fonts_cover_thai_without_system_fallbacks() {
+    let db = doc4me_fonts::FontDb::with_font_dirs(Vec::new());
+    let (entries, errors) = parse_entries(lang("th").0.source);
+    assert!(errors.is_empty(), "{errors:?}");
+    let chars: std::collections::HashSet<char> =
+        entries.iter().flat_map(|e| e.translation.chars()).filter(|c| doc4me_engine::proof::th::is_thai(*c)).collect();
+    assert!(chars.len() > 50, "{} Thai characters", chars.len());
+    for style in ["Regular", "Medium", "SemiBold"] {
+        let face = db.face("Sarabun", style);
+        assert_eq!(face.family, "Sarabun", "must use the bundled interface face");
+        for ch in &chars {
+            assert_ne!(face.glyph_for(*ch), 0, "Sarabun {style} lacks {ch}");
         }
     }
 }

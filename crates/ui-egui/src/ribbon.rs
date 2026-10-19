@@ -409,8 +409,8 @@ fn mi_text(ui: &mut Ui, app: &mut WordApp, text: &str, id: &str, params: Value) 
 }
 
 /// The proofing languages the Language menu offers: tag and English name (translated when drawn).
-pub(crate) const PROOFING_LANGUAGES: [(&str, &str); 3] =
-    [("en-US", "English (United States)"), ("en-GB", "English (United Kingdom)"), ("pl-PL", "Polish")];
+pub(crate) const PROOFING_LANGUAGES: [(&str, &str); 4] =
+    [("en-US", "English (United States)"), ("en-GB", "English (United Kingdom)"), ("pl-PL", "Polish"), ("th-TH", "Thai")];
 
 /// The English name of a proofing language tag, as the status bar shows it (no tag: Doc4Me's
 /// default, US English; a tag without a name here: the tag).
@@ -421,6 +421,7 @@ pub(crate) fn language_name(tag: Option<&str>) -> String {
     }
     match doc4me_engine::proof::ProofLang::from_tag(Some(tag)) {
         doc4me_engine::proof::ProofLang::Pl => "Polish".into(),
+        doc4me_engine::proof::ProofLang::Th => "Thai".into(),
         doc4me_engine::proof::ProofLang::En if tag.eq_ignore_ascii_case("en") => "English (United States)".into(),
         _ => tag.to_string(),
     }
@@ -658,6 +659,9 @@ fn home(app: &mut WordApp, ui: &mut Ui) {
                         ("A. B. C.", "upperLetter"),
                         ("a) b) c)", "lowerLetter"),
                         ("i. ii. iii.", "lowerRoman"),
+                        ("๑. ๒. ๓.", "thaiNumbers"),
+                        ("ก. ข. ค.", "thaiLetters"),
+                        ("หนึ่ง. สอง. สาม.", "thaiCounting"),
                     ] {
                         mi(ui, app, l, "para.numbering", json!({"kind": k}));
                     }

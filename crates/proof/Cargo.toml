@@ -3,12 +3,13 @@ name = "doc4me-proof"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Doc4Me proofing per language: spelling, suggestions, grammar checks and hyphenation for English (public-domain word list) and Polish (installed Hunspell dictionary, TeX patterns)"
+description = "Doc4Me proofing per language: spelling, suggestions, grammar checks and hyphenation for English (public-domain word list), Polish (installed Hunspell dictionary, TeX patterns) and Thai (common misspellings, character order)"
 
 [lints]
 workspace = true
 
 [dependencies]
+icu_segmenter = { workspace = true }
 log = { workspace = true }
 miniz_oxide = "0.8"
 

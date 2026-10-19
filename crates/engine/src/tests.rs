@@ -3733,6 +3733,33 @@ fn list_buttons_follow_the_paragraphs_own_level() {
     assert_eq!(state(&s), ListButtons::default());
 }
 
+/// Choosing Thai numbering on a decimal list switches it to Thai digits (their labels share
+/// "%1."), and a paragraph after a decimal list starts a Thai list instead of joining it.
+#[test]
+fn thai_numbering_replaces_decimal_numbering() {
+    use doc4me_doc::section::NumFormat;
+    let mut s = s();
+    run(&mut s, "text.insert", json!({"text": "one"}));
+    run(&mut s, "para.numbering", json!({}));
+    let format = |s: &Session| {
+        let n = s.doc.para_at(&s.sel.focus).and_then(|p| p.props.numbering).filter(|n| n.num != 0);
+        n.and_then(|n| s.doc.numbering.level(n.num, 0)).map(|l| l.format)
+    };
+    assert_eq!(format(&s), Some(NumFormat::Decimal));
+    run(&mut s, "para.numbering", json!({"kind": "thaiNumbers"}));
+    assert_eq!(format(&s), Some(NumFormat::ThaiNumbers));
+    // The same choice again turns the list off, as before.
+    run(&mut s, "para.numbering", json!({"kind": "thaiNumbers"}));
+    assert_eq!(format(&s), None);
+    // After a decimal item, Thai counting starts its own list.
+    run(&mut s, "para.numbering", json!({}));
+    run(&mut s, "text.newParagraph", json!({}));
+    run(&mut s, "para.numbering", json!({"off": true}));
+    run(&mut s, "text.insert", json!({"text": "two"}));
+    run(&mut s, "para.numbering", json!({"kind": "thaiCounting"}));
+    assert_eq!(format(&s), Some(NumFormat::ThaiCounting));
+}
+
 #[test]
 fn replace_all_splits_paragraphs_at_a_paragraph_mark_in_the_replacement() {
     // Issue #423: untracked Replace All left `\r` in the paragraph instead of splitting it.
