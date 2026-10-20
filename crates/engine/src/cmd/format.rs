@@ -602,6 +602,9 @@ pub fn state(s: &Session) -> Value {
         "caps": all.iter().all(|r| r.caps),
         "hidden": all.iter().all(|r| r.hidden),
         "spacing": same(&|r| json!(r.spacing)),
+        // Kerning for fonts (points and above; 0 = off) and OpenType ligatures (`none` unless set).
+        "kern": same(&|r| json!(r.kern)),
+        "ligatures": same(&|r| json!(r.ligatures.as_deref().unwrap_or("none"))),
         "color": same(&|r| json!(match r.color { TextColor::Auto => "auto".to_string(), TextColor::Rgb(c) => c.hex() })),
         "highlight": same(&|r| json!(r.highlight.map(|c| c.hex()))),
         "style": style,
