@@ -1372,7 +1372,26 @@ pub(crate) fn buttons(ui: &mut Ui, ok: &str) -> (bool, bool) {
 
 /// The character properties the Font dialog's fields stand for.
 fn font_props(d: &Dialog) -> serde_json::Map<String, Value> {
-    let Dialog::Font { font, font_ea, size, bold, italic, underline, strike, sup, sub, small_caps, caps, hidden, color, spacing, kern, ligatures, .. } = d else {
+    let Dialog::Font {
+        font,
+        font_ea,
+        size,
+        bold,
+        italic,
+        underline,
+        strike,
+        sup,
+        sub,
+        small_caps,
+        caps,
+        hidden,
+        color,
+        spacing,
+        kern,
+        ligatures,
+        ..
+    } = d
+    else {
         return serde_json::Map::new();
     };
     let mut props = serde_json::Map::new();
@@ -1440,7 +1459,26 @@ fn apply_font(app: &mut WordApp, d: &Dialog) {
 /// Returns true to close.
 fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     match d {
-        Dialog::Font { font, font_ea, asian, size, bold, italic, underline, strike, sup, sub, small_caps, caps, hidden, color, spacing, kern, ligatures, .. } => {
+        Dialog::Font {
+            font,
+            font_ea,
+            asian,
+            size,
+            bold,
+            italic,
+            underline,
+            strike,
+            sup,
+            sub,
+            small_caps,
+            caps,
+            hidden,
+            color,
+            spacing,
+            kern,
+            ligatures,
+            ..
+        } => {
             // Build the sample text format for the preview pane below.
             let preview_size = size.trim().parse::<f32>().unwrap_or(12.0).clamp(6.0, 72.0);
             let preview_color = doc4me_doc::Rgb::parse(color).map(crate::theme::c32).unwrap_or_else(|| ui.visuals().text_color());
@@ -1507,7 +1545,8 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     ("historicalDiscretional", tl!("Historical and Discretional")),
                     ("all", tl!("All")),
                 ];
-                let shown = ligature_names.iter().find(|(v, _)| *v == ligatures.as_str()).map(|(_, n)| n.to_string()).unwrap_or_else(|| ligatures.clone());
+                let shown =
+                    ligature_names.iter().find(|(v, _)| *v == ligatures.as_str()).map(|(_, n)| n.to_string()).unwrap_or_else(|| ligatures.clone());
                 egui::ComboBox::from_id_salt("fontdlg_ligatures").selected_text(shown).show_ui(ui, |ui| {
                     for (v, n) in ligature_names {
                         ui.selectable_value(ligatures, v.to_string(), n);
