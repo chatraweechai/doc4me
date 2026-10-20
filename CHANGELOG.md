@@ -28,6 +28,11 @@
 
 ### เพิ่ม
 
+- **อ่านและเขียน "Kerning for fonts" ใน RTF, ODT และอ่านจาก .doc** (`crates/formats/src/model.rs` `Fmt::kern`, `rtf.rs` `\kerningN`, `odt.rs` `style:letter-kerning`, `crates/docbin/src/fmt.rs` sprmCHpsKern 0x484B)
+  - เหตุผล: เดิมเปิดไฟล์เหล่านี้แล้วค่า kerning หายไป ตัวอักษรชิดต่างจาก Word
+  - ผู้ใช้: RTF เก็บขนาดขั้นต่ำเป็นครึ่งพอยต์ (`\kerning0` = ปิด); ODF มีแค่เปิด/ปิด จึงอ่านว่าเปิด = ตั้งแต่ 1 pt และเขียน `true`/`false` ตามค่า; .doc อ่านเท่านั้น (ยังไม่มีตัวเขียน .doc) ข้อความที่ไม่ได้ตั้งค่าไม่เปลี่ยน ไฟล์ .docx เดิมไม่ได้รับผลกระทบ
+  - ข้อจำกัด: markdown/html/latex ไม่มีค่านี้
+  - ตรวจสอบ: เทสต์ `kerning_round_trips_through_rtf_and_odt` (formats) และ `kerning_for_fonts_is_read` (docbin); `cargo test -p doc4me-formats -p doc4me-docbin` 65 และ 69 ผ่าน
 - **ข้อความในแผนภูมิ SmartArt และสมการ (m:nor) ที่ใช้ TH Sarabun ขนาดเท่าต้นฉบับ** (`crates/layout/src/display.rs` `text_glyphs`, `crates/layout/src/math.rs` `run_atoms`)
   - เหตุผล: เดิมวาดด้วย Sarabun ขนาดเต็ม ทำให้ตัวอักษรใหญ่กว่า Word ที่ใช้ TH Sarabun จริง
   - ผู้ใช้: แยกช่วงอักษรไทยกับละติน ย่อแต่ละช่วงด้วยสเกลของต้นฉบับ และในแผนภูมิวางแต่ละตัวบนความกว้างของ TH Sarabun เดิม ฟอนต์อื่นไม่เปลี่ยน ไฟล์ .docx ไม่เปลี่ยน (เป็นการวาดเท่านั้น)
