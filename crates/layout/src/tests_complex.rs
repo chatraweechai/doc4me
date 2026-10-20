@@ -293,6 +293,35 @@ fn th_sarabun_new_keeps_its_size_widths_and_line_spacing_when_drawn_with_sarabun
     assert!(st.fit.is_none() && st.glyph_scale == 1.0);
 }
 
+/// Text in a chart or diagram set in TH Sarabun New (drawn with Sarabun) scales Thai and Latin
+/// letters apart and sets each letter on the original font's width, as a paragraph does.
+#[test]
+fn drawing_text_in_th_sarabun_is_sized_like_the_original() {
+    let doc = doc_in("TH Sarabun New", 16.0, "x", |_| {});
+    let item = |font: &str| GraphicItem::Text {
+        rect: [0.0, 0.0, 200.0, 30.0],
+        text: "Aก".into(),
+        size: 20.0,
+        color: Rgb::BLACK,
+        bold: false,
+        align: TextAlign::Left,
+        font: Some(font.into()),
+    };
+    let r = Rect::new(0.0, 0.0, 200.0, 30.0);
+    let fit = doc4me_fonts::word::metric_fit("TH Sarabun New", false, false).expect("a fit");
+    let draws = display::text_glyphs(&doc, r, &item("TH Sarabun New"), 1.0, 1.0);
+    let sizes: Vec<f32> = draws.iter().filter_map(|d| if let Draw::Glyphs { size, .. } = d { Some(*size) } else { None }).collect();
+    assert_eq!(sizes.len(), 2, "a Latin run and a Thai run");
+    assert!((sizes[0] - 20.0 * fit.scale(false)).abs() < 1e-3 && (sizes[1] - 20.0 * fit.scale(true)).abs() < 1e-3, "{sizes:?}");
+    // The Thai run starts after the Latin letter's width in the original font.
+    let Some(Draw::Glyphs { glyphs, .. }) = draws.get(1) else { panic!("no Thai run") };
+    let want = fit.advance('A').expect("A") * 20.0;
+    assert!(glyphs.first().is_some_and(|g| g.1 >= want - 1e-3), "{glyphs:?} after {want}");
+    // Any other font stays one run at its own size.
+    let draws = display::text_glyphs(&doc, r, &item("Sarabun"), 1.0, 1.0);
+    assert!(draws.iter().all(|d| matches!(d, Draw::Glyphs { size, .. } if (*size - 20.0).abs() < 1e-3)));
+}
+
 /// Word kerns letter pairs only with "Kerning for fonts" (`w:kern`) set, at that size and above;
 /// TH Sarabun New drawn with Sarabun takes TH Sarabun New's pairs.
 #[test]
