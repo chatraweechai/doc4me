@@ -116,9 +116,9 @@ fn find_para<'a>(b: &'a [FBlock], text: &str) -> Option<&'a model::Para> {
 #[test]
 fn kerning_round_trips_through_rtf_and_odt() {
     let kern_of = |d: &Document, text: &str| {
-        let p = d.blocks().iter().find_map(|b| if let Block::Paragraph(p) = b { Some(p) } else { None }).expect("a paragraph");
-        let i = p.plain_text().find(text).expect("text");
-        p.props_of_char(i).kern
+        let blocks = flat(d);
+        let p = blocks.iter().find_map(|b| if let FBlock::Para(p) = b { Some(p) } else { None }).expect("a paragraph");
+        p.inlines.iter().find_map(|i| if let model::Inline::Text(t, f) = i { t.contains(text).then_some(f.kern) } else { None }).expect("a span")
     };
     let mut d = Document::new();
     let mut p = Paragraph::with_text("plain ", CharProps::default());
