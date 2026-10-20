@@ -4,6 +4,7 @@
 และเลขเวอร์ชันใช้ [Semantic Versioning](https://semver.org/) (แหล่งเดียวคือ `[workspace.package] version` ใน `Cargo.toml`)
 
 กติกา (`CLAUDE.md` ข้อ 3):
+
 - ทุกการเปลี่ยนแปลงโค้ด build packaging asset หรือเวอร์ชัน ต้องบันทึกใต้ `## [Unreleased]` ใน commit เดียวกัน
 - ก่อน push tag `vX.Y.Z` ให้ย้ายรายการไปเป็น `## [X.Y.Z] - YYYY-MM-DD`
 - workflow `windows-x64-installer.yml` นำเนื้อหาใต้หัวข้อนั้นไปเป็นบันทึกของ GitHub Release
@@ -158,7 +159,7 @@
     - ทำทีละแพ็กเกจเพราะดิสก์ของเครื่อง build มีจำกัด
     - ตัวอย่างจำนวนเทสต์: doc4me-ui-egui 313 (มี 1 เทสต์ที่ ignore อยู่แล้ว), doc4me-proof 73
   - เทสต์ audit ที่ปกติ ignore ไว้ (`untranslated_interface_text`) ล้มด้วยข้อความเดียวที่ไม่ได้ครอบ `tl!`
-    - ข้อความนั้นคือขนาดซอง "#10   4.13 × 9.5 in" ในแท็บ Mailings
+    - ข้อความนั้นคือขนาดซอง "#10 4.13 × 9.5 in" ในแท็บ Mailings
     - เป็นปัญหาเดิมก่อนรอบนี้ ไม่เกี่ยวกับภาษาไทย
   - `cargo xtask assets` (asset 53 ไฟล์มีรายการใน ATTRIBUTION.md ครบ)
   - `cargo xtask layers` (20 crate ไม่ละเมิดลำดับชั้น)
@@ -195,6 +196,7 @@ Doc4Me รุ่นแรก พัฒนาต่อจาก WordCraft 0.6.0 �
 ### เพิ่ม
 
 #### ฟอนต์ Sarabun เป็นฟอนต์หลักของระบบ
+
 - ฝังฟอนต์ Sarabun ของ Cadson Demak (SIL OFL 1.1) ไว้ในโปรแกรม
   - น้ำหนักที่ฝัง: Regular, Italic, Medium, SemiBold, Bold, BoldItalic
   - ไฟล์อยู่ที่ `assets/fonts/Sarabun-*.ttf` พร้อมสัญญาอนุญาต `assets/fonts/OFL-Sarabun.txt`
@@ -211,6 +213,7 @@ Doc4Me รุ่นแรก พัฒนาต่อจาก WordCraft 0.6.0 �
 - หน้าจอโปรแกรม (เมนู ริบบอน กล่องโต้ตอบ) ใช้ Sarabun ระดับ regular, medium และ semibold ก่อน Inter และ Source Sans 3
 
 #### การรองรับภาษาไทย
+
 - **การตัดบรรทัดตามคำในพจนานุกรม** สำหรับไทย ลาว และเขมร
   - ใช้ ICU4X `icu_segmenter` 2.3 พร้อมข้อมูลพจนานุกรมที่คอมไพล์ในตัว (`crates/doc/src/cluster.rs`)
   - การดับเบิลคลิกเลือกคำ, Ctrl+ลูกศร และการนับคำ ใช้ขอบเขตคำชุดเดียวกัน
@@ -234,6 +237,7 @@ Doc4Me รุ่นแรก พัฒนาต่อจาก WordCraft 0.6.0 �
 - ภาพหน้าจอใน `docs/images` ถ่ายใหม่ด้วย Doc4Me และ Sarabun และเพิ่มหน้าตัวอย่างภาษาไทย `docs/images/thai.png`
 
 #### การออกรุ่นและเอกสาร
+
 - เพิ่ม `CHANGELOG.md` (ไฟล์นี้)
 - เพิ่มกฎข้อ 3 ใน `CLAUDE.md` และย่อหน้าเรื่อง changelog ใน `AGENTS.md`
 - workflow ตรวจว่า tag ตรงกับเวอร์ชันใน `Cargo.toml` ก่อน build หากไม่ตรงจะหยุด
@@ -244,6 +248,7 @@ Doc4Me รุ่นแรก พัฒนาต่อจาก WordCraft 0.6.0 �
 ### เปลี่ยนแปลง
 
 #### ชื่อโปรแกรม (WordCraft → Doc4Me)
+
 - เปลี่ยนชื่อในทุกส่วน
   - crate (`doc4me-*`) และไฟล์โปรแกรม (`doc4me`, `doc4me-cli`, `doc4me-web`)
   - ตัวแปรสภาพแวดล้อม (`DOC4ME_*`) และโฟลเดอร์ตั้งค่า
@@ -259,6 +264,7 @@ Doc4Me รุ่นแรก พัฒนาต่อจาก WordCraft 0.6.0 �
 - ข้อมูลที่อยู่ผู้ดูแลแพ็กเกจ Linux ตั้งต้นเป็น `Doc4Me contributors <https://github.com/chatraweechai/doc4me/issues>` ไม่ใช้ที่อยู่ของต้นทางอีกต่อไป
 
 #### ตัวติดตั้ง Windows
+
 - MSI ใช้ `UpgradeCode` และ GUID ของ component ชุดใหม่ (`packaging/windows/doc4me.wxs`)
   - อัปเกรดทับ Doc4Me รุ่นก่อนได้ และไม่แตะ WordCraft ที่ติดตั้งอยู่
 - ผู้ผลิตเป็น "Doc4Me contributors" และลิงก์ความช่วยเหลือชี้ไปที่หน้า issues
@@ -269,9 +275,11 @@ Doc4Me รุ่นแรก พัฒนาต่อจาก WordCraft 0.6.0 �
 - workflow ทำงานเฉพาะเมื่อ push `main`, push tag `v*` หรือสั่งรันเอง
 
 #### เวอร์ชัน
+
 - เปลี่ยนจาก 0.6.0 เป็น 1.0.0 (`cargo xtask version set 1.0.0`)
 
 #### ความเข้ากันได้ของไฟล์
+
 - ไฟล์ .docx ที่ WordCraft บันทึกพร้อม canvas ที่หมุนหรือพลิก ยังเปิดได้ถูกต้อง
   - ตัวอ่านรับทั้ง URI เดิม `urn:wordcraft:canvas-xfrm` และ URI ใหม่
 - เอกสาร .docx ที่สร้างจาก Doc4Me เปิดใน Word แล้วข้อความไทยใช้ฟอนต์และขนาดเดียวกับข้อความละติน (ดูหัวข้อ complex script ด้านบน)
