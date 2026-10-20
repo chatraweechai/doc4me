@@ -106,6 +106,9 @@ fn text_props(f: &Fmt) -> String {
     if let Some(s) = f.size {
         p.push_str(&format!(" fo:font-size=\"{}\"", pt(s)));
     }
+    if let Some(k) = f.kern.filter(|k| k.is_finite()) {
+        p.push_str(if k > 0.0 { " style:letter-kerning=\"true\"" } else { " style:letter-kerning=\"false\"" });
+    }
     if f.code {
         p.push_str(&format!(" fo:font-family=\"'{}'\" style:font-family-generic=\"modern\" style:font-pitch=\"fixed\"", model::MONO_FONT));
     } else if let Some(fam) = &f.font {
