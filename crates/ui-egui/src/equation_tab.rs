@@ -325,7 +325,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                 ui,
                 app,
                 "alignCenter",
-                Some("Display"),
+                Some("equation|Display"),
                 "Show the equation on a line of its own",
                 "equation.display",
                 json!({"value": true}),
