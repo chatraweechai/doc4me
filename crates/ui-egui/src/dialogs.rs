@@ -145,6 +145,8 @@ pub enum Dialog {
         /// Kerning for fonts: the size in points and above (0 = off), and the `w14:ligatures` value.
         kern: f32,
         ligatures: String,
+        /// Page: 0 Font, 1 Advanced (spacing, kerning, ligatures).
+        tab: u8,
         /// The properties the fields stood for when the dialog opened: OK sends only what the
         /// user changed, so formatting the dialog can't show (a double underline) or left
         /// alone stays as it is.
@@ -959,6 +961,7 @@ impl Dialog {
                     spacing: st.get("spacing").and_then(Value::as_f64).unwrap_or(0.0) as f32,
                     kern: st.get("kern").and_then(Value::as_f64).unwrap_or(0.0) as f32,
                     ligatures: st.get("ligatures").and_then(Value::as_str).unwrap_or("none").to_string(),
+                    tab: 0,
                     start: serde_json::Map::new(),
                 };
                 let props = font_props(&d);
@@ -1477,6 +1480,7 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             spacing,
             kern,
             ligatures,
+            tab,
             ..
         } => {
             // Build the sample text format for the preview pane below.
@@ -1499,79 +1503,95 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             if *strike {
                 fmt.strikethrough = egui::Stroke::new(1.0, preview_color);
             }
-            egui::Grid::new("fontdlg").num_columns(2).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
-                // Word's two font boxes when East Asian text is in use: the Latin text font and
-                // the Asian text font, each with its own list (type to find a font).
-                let prev = app.previews.font_preview_fn();
-                if *asian {
-                    ui.label(tl!("Asian text font:"));
-                    let fams = app.previews.east_asian_families();
-                    if let Some(f) = crate::widgets::font_combo(ui, "fontdlg_asian", 220.0, font_ea, &fams, Some(&*prev)) {
-                        *font_ea = f;
+            ui.horizontal(|ui| {
+                for (k, name) in ["Font", "Advanced"].into_iter().enumerate() {
+                    if ui.selectable_label(*tab as usize == k, tl!(name)).clicked() {
+                        *tab = k as u8;
                     }
-                    ui.end_row();
                 }
-                ui.label(if *asian { tl!("Latin text font:") } else { tl!("Font:") });
-                let fams = app.previews.families();
-                if let Some(f) = crate::widgets::font_combo(ui, "fontdlg_font", 220.0, font, &fams, Some(&*prev)) {
-                    *font = f;
-                }
-                ui.end_row();
-                ui.label(tl!("Size:"));
-                ui.add(crate::widgets::text_line(size));
-                ui.end_row();
-                ui.label(tl!("Font color:"));
-                let theme = app.session.doc.settings.theme_colors.clone();
-                color_field(ui, &theme, color, "Automatic", "auto");
-                ui.end_row();
-                ui.label(tl!("Spacing (pt):"));
-                ui.add(egui::DragValue::new(spacing).speed(0.1).range(-20.0..=20.0));
-                ui.end_row();
-                // Kerning for fonts: a box that turns pair kerning on from a size up (Word's default is off).
-                ui.label(tl!("Kerning for fonts:"));
-                ui.horizontal(|ui| {
-                    let mut on = *kern > 0.0;
-                    if ui.checkbox(&mut on, "").changed() {
-                        *kern = if on { 1.0 } else { 0.0 };
-                    }
-                    ui.add_enabled(on, egui::DragValue::new(kern).speed(0.5).range(0.5..=1638.0).suffix(format!(" {}", tl!("points and above"))));
-                });
-                ui.end_row();
-                ui.label(tl!("Ligatures:"));
-                let ligature_names = [
-                    ("none", tl!("None")),
-                    ("standard", tl!("Standard Only")),
-                    ("standardContextual", tl!("Standard and Contextual")),
-                    ("historicalDiscretional", tl!("Historical and Discretional")),
-                    ("all", tl!("All")),
-                ];
-                let shown =
-                    ligature_names.iter().find(|(v, _)| *v == ligatures.as_str()).map(|(_, n)| n.to_string()).unwrap_or_else(|| ligatures.clone());
-                egui::ComboBox::from_id_salt("fontdlg_ligatures").selected_text(shown).show_ui(ui, |ui| {
-                    for (v, n) in ligature_names {
-                        ui.selectable_value(ligatures, v.to_string(), n);
-                    }
-                });
-                ui.end_row();
             });
             ui.separator();
-            ui.label(egui::RichText::new(tl!("Effects")).font(semibold(12.5)));
-            egui::Grid::new("fx").num_columns(2).show(ui, |ui| {
-                ui.checkbox(bold, tl!("Bold"));
-                ui.checkbox(italic, tl!("Italic"));
-                ui.end_row();
-                ui.checkbox(underline, tl!("Underline"));
-                ui.checkbox(strike, tl!("Strikethrough"));
-                ui.end_row();
-                ui.checkbox(sup, tl!("Superscript"));
-                ui.checkbox(sub, tl!("Subscript"));
-                ui.end_row();
-                ui.checkbox(small_caps, tl!("Small caps"));
-                ui.checkbox(caps, tl!("All caps"));
-                ui.end_row();
-                ui.checkbox(hidden, tl!("Hidden"));
-                ui.end_row();
-            });
+            if *tab == 0 {
+                egui::Grid::new("fontdlg").num_columns(2).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
+                    // Word's two font boxes when East Asian text is in use: the Latin text font and
+                    // the Asian text font, each with its own list (type to find a font).
+                    let prev = app.previews.font_preview_fn();
+                    if *asian {
+                        ui.label(tl!("Asian text font:"));
+                        let fams = app.previews.east_asian_families();
+                        if let Some(f) = crate::widgets::font_combo(ui, "fontdlg_asian", 220.0, font_ea, &fams, Some(&*prev)) {
+                            *font_ea = f;
+                        }
+                        ui.end_row();
+                    }
+                    ui.label(if *asian { tl!("Latin text font:") } else { tl!("Font:") });
+                    let fams = app.previews.families();
+                    if let Some(f) = crate::widgets::font_combo(ui, "fontdlg_font", 220.0, font, &fams, Some(&*prev)) {
+                        *font = f;
+                    }
+                    ui.end_row();
+                    ui.label(tl!("Size:"));
+                    ui.add(crate::widgets::text_line(size));
+                    ui.end_row();
+                    ui.label(tl!("Font color:"));
+                    let theme = app.session.doc.settings.theme_colors.clone();
+                    color_field(ui, &theme, color, "Automatic", "auto");
+                    ui.end_row();
+                });
+                ui.separator();
+                ui.label(egui::RichText::new(tl!("Effects")).font(semibold(12.5)));
+                egui::Grid::new("fx").num_columns(2).show(ui, |ui| {
+                    ui.checkbox(bold, tl!("Bold"));
+                    ui.checkbox(italic, tl!("Italic"));
+                    ui.end_row();
+                    ui.checkbox(underline, tl!("Underline"));
+                    ui.checkbox(strike, tl!("Strikethrough"));
+                    ui.end_row();
+                    ui.checkbox(sup, tl!("Superscript"));
+                    ui.checkbox(sub, tl!("Subscript"));
+                    ui.end_row();
+                    ui.checkbox(small_caps, tl!("Small caps"));
+                    ui.checkbox(caps, tl!("All caps"));
+                    ui.end_row();
+                    ui.checkbox(hidden, tl!("Hidden"));
+                    ui.end_row();
+                });
+            } else {
+                egui::Grid::new("fontdlg_adv").num_columns(2).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
+                    ui.label(tl!("Spacing (pt):"));
+                    ui.add(egui::DragValue::new(spacing).speed(0.1).range(-20.0..=20.0));
+                    ui.end_row();
+                    // Kerning for fonts: a box that turns pair kerning on from a size up (Word's default is off).
+                    ui.label(tl!("Kerning for fonts:"));
+                    ui.horizontal(|ui| {
+                        let mut on = *kern > 0.0;
+                        if ui.checkbox(&mut on, "").changed() {
+                            *kern = if on { 1.0 } else { 0.0 };
+                        }
+                        ui.add_enabled(on, egui::DragValue::new(kern).speed(0.5).range(0.5..=1638.0).suffix(format!(" {}", tl!("points and above"))));
+                    });
+                    ui.end_row();
+                    ui.label(tl!("Ligatures:"));
+                    let ligature_names = [
+                        ("none", tl!("None")),
+                        ("standard", tl!("Standard Only")),
+                        ("standardContextual", tl!("Standard and Contextual")),
+                        ("historicalDiscretional", tl!("Historical and Discretional")),
+                        ("all", tl!("All")),
+                    ];
+                    let shown = ligature_names
+                        .iter()
+                        .find(|(v, _)| *v == ligatures.as_str())
+                        .map(|(_, n)| n.to_string())
+                        .unwrap_or_else(|| ligatures.clone());
+                    egui::ComboBox::from_id_salt("fontdlg_ligatures").selected_text(shown).show_ui(ui, |ui| {
+                        for (v, n) in ligature_names {
+                            ui.selectable_value(ligatures, v.to_string(), n);
+                        }
+                    });
+                    ui.end_row();
+                });
+            }
             // Live preview of the chosen font/size/colour/effects.
             ui.separator();
             ui.label(egui::RichText::new(tl!("Preview")).small().weak());
