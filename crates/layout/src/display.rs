@@ -1362,46 +1362,107 @@ pub fn seg_path(segs: &[PathSeg]) -> BezPath {
 /// unset) and aligned horizontally, centred vertically, at its size times `k`. `None` when there is
 /// nothing to draw, or the item's rectangle or size isn't a finite number (a degenerate scale:
 /// `r` itself is always finite, as [`Rect::new`] makes it).
-fn text_glyphs(doc: &Document, r: Rect, it: &GraphicItem, alpha: f32, k: f32) -> Option<Draw> {
-    let GraphicItem::Text { rect, text, size, color, bold, align, font } = it else { return None };
+pub(crate) fn text_glyphs(doc: &Document, r: Rect, it: &GraphicItem, alpha: f32, k: f32) -> Vec<Draw> {
+    let GraphicItem::Text { rect, text, size, color, bold, align, font } = it else { return Vec::new() };
     let size = *size * k;
     if !rect.iter().chain([&size]).all(|v| v.is_finite()) {
-        return None;
+        return Vec::new();
     }
     let family = font.as_deref().filter(|f| !f.is_empty()).unwrap_or(&doc.settings.minor_font);
     let size = size.clamp(1.0, 400.0);
     let resolved = doc4me_fonts::word::resolve(family, *bold, false);
     let face = resolved.face.get();
-    let shaped = doc4me_fonts::shape(face, text, &[], |c| c);
-    if shaped.is_empty() {
-        return None;
+    // TH Sarabun New and its kin, drawn with Sarabun: Thai and Latin letters are scaled apart and
+    // every cluster is set on the original font's width, as in a paragraph (`Builder::shape_with`).
+    let fit = doc4me_fonts::word::metric_fit(family, *bold, false);
+    let is_thai = |c: char| ('\u{0E00}'..='\u{0E7F}').contains(&c);
+    let mut runs: Vec<(&str, bool)> = Vec::new();
+    let (mut start, mut cur) = (0, None);
+    for (i, c) in text.char_indices() {
+        let th = is_thai(c);
+        if let Some(prev) = cur.filter(|p| *p != th) {
+            runs.push((text.get(start..i).unwrap_or(""), prev));
+            start = i;
+        }
+        cur = Some(th);
     }
-    let k = size / face.upem.max(1.0) as f32;
-    let width: f32 = shaped.iter().map(|g| g.x_advance as f32 * k).sum();
-    let (ascent, descent) = doc4me_fonts::word::line_metrics(face);
-    let baseline = r.y + r.h / 2.0 + (ascent - descent) as f32 * k / 2.0;
+    if let Some(th) = cur {
+        runs.push((text.get(start..).unwrap_or(""), th));
+    }
+    // (run text, size, glyphs with x counted from the run's start, width)
+    let mut pieces = Vec::new();
+    for (run, th) in runs {
+        let run_size = size * fit.map_or(1.0, |f| f.scale(th));
+        let shaped = doc4me_fonts::shape(face, run, &[], |c| fit.map_or(c, |f| f.shown(c)));
+        if shaped.is_empty() {
+            continue;
+        }
+        let kk = run_size / face.upem.max(1.0) as f32;
+        let bounds = doc4me_doc::cluster::cluster_starts(run);
+        let (mut glyphs, mut pen, mut gi) = (Vec::with_capacity(shaped.len()), 0.0f32, 0usize);
+        for (bi, &gs) in bounds.iter().enumerate() {
+            let ge = bounds.get(bi + 1).copied().unwrap_or(run.len());
+            let first = glyphs.len();
+            let mut adv = 0.0f32;
+            while let Some(g) = shaped.get(gi) {
+                if g.cluster >= ge {
+                    break;
+                }
+                glyphs.push((g.gid, pen + adv + g.x_offset as f32 * kk, -(g.y_offset as f32) * kk));
+                adv += g.x_advance as f32 * kk;
+                gi += 1;
+            }
+            if let Some(f) = fit
+                && let Some(w) = run.get(gs..ge).unwrap_or("").chars().map(|c| f.advance(f.shown(c))).sum::<Option<f32>>()
+            {
+                let w = w * size;
+                let shift = (w - adv) / 2.0;
+                for g in glyphs.iter_mut().skip(first) {
+                    g.1 += shift;
+                }
+                adv = w;
+            }
+            pen += adv;
+        }
+        pieces.push((run, run_size, glyphs, pen));
+    }
+    if pieces.is_empty() {
+        return Vec::new();
+    }
+    let width: f32 = pieces.iter().map(|p| p.3).sum();
+    let half_line = match fit {
+        Some(f) => {
+            let (a, d) = f.line();
+            (a - d) as f32 * size / 2.0
+        }
+        None => {
+            let (ascent, descent) = doc4me_fonts::word::line_metrics(face);
+            (ascent - descent) as f32 * (size / face.upem.max(1.0) as f32) / 2.0
+        }
+    };
+    let baseline = r.y + r.h / 2.0 + half_line;
     let mut pen = match align {
         TextAlign::Left => r.x,
         TextAlign::Center => r.x + (r.w - width) / 2.0,
         TextAlign::Right => r.x + r.w - width,
     };
-    let mut glyphs = Vec::with_capacity(shaped.len());
-    for g in &shaped {
-        glyphs.push((g.gid, pen + g.x_offset as f32 * k, baseline - g.y_offset as f32 * k));
-        pen += g.x_advance as f32 * k;
+    let mut out = Vec::with_capacity(pieces.len());
+    for (run, run_size, glyphs, w) in pieces {
+        out.push(Draw::Glyphs {
+            face: resolved.face,
+            size: run_size,
+            glyphs: glyphs.into_iter().map(|(gid, x, y)| (gid, pen + x, baseline + y)).collect(),
+            color: *color,
+            alpha,
+            synth_bold: resolved.synth_bold,
+            synth_italic: false,
+            text: run.to_string(),
+            link: None,
+            ranges: Vec::new(),
+        });
+        pen += w;
     }
-    Some(Draw::Glyphs {
-        face: resolved.face,
-        size,
-        glyphs,
-        color: *color,
-        alpha,
-        synth_bold: resolved.synth_bold,
-        synth_italic: false,
-        text: text.clone(),
-        link: None,
-        ranges: Vec::new(),
-    })
+    out
 }
 
 fn author_index(doc: &Document, author: &str) -> u32 {
