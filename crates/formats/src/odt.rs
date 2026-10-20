@@ -782,6 +782,10 @@ impl Styles {
                         if let Some(sz) = get(&a, "fo:font-size").and_then(length).filter(|v| *v >= 1.0 && *v <= 1638.0) {
                             d.size = Some(sz);
                         }
+                        // ODF has no size threshold: kerning on is kerning from the smallest size.
+                        if let Some(v) = get(&a, "style:letter-kerning") {
+                            d.kern = Some(if v == "true" { 1.0 } else { 0.0 });
+                        }
                         if let Some(fam) = get(&a, "fo:font-family").or_else(|| get(&a, "style:font-name")) {
                             let fam = fam.split(',').next().unwrap_or("").trim().trim_matches(['\'', '"']).to_string();
                             if model::is_mono(&fam) || get(&a, "style:font-pitch") == Some("fixed") {
