@@ -1118,6 +1118,8 @@ impl Reader {
                 self.st.fmt.sub = false;
             }
             "fs" => self.st.fmt.size = if pv > 0 { Some((pv as f32 / 2.0).clamp(1.0, 1638.0)) } else { None },
+            // `\kerningN`: kern from N half-points up; `\kerning0` (or no number) is off.
+            "kerning" => self.st.fmt.kern = Some((pv.max(0) as f32 / 2.0).clamp(0.0, 1638.0)),
             "f" => {
                 let name = self.fonts.get(&pv).cloned();
                 match name {
