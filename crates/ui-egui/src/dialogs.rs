@@ -142,6 +142,9 @@ pub enum Dialog {
         hidden: bool,
         color: String,
         spacing: f32,
+        /// Kerning for fonts: the size in points and above (0 = off), and the `w14:ligatures` value.
+        kern: f32,
+        ligatures: String,
         /// The properties the fields stood for when the dialog opened: OK sends only what the
         /// user changed, so formatting the dialog can't show (a double underline) or left
         /// alone stays as it is.
