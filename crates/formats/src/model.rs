@@ -308,6 +308,7 @@ pub fn char_props(f: &Fmt) -> CharProps {
         size: f.size.filter(|s| s.is_finite() && *s >= 1.0 && *s <= 1638.0),
         font: if f.code { Some(MONO_FONT.to_string()) } else { f.font.clone().filter(|s| !s.is_empty()) },
         shading: f.background,
+        kern: f.kern.filter(|k| k.is_finite() && (0.0..=1638.0).contains(k)),
         ..Default::default()
     }
 }
