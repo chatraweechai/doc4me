@@ -18,6 +18,7 @@ const C_ICO: u16 = 0x2A42; // palette colour
 const C_CR: u16 = 0x6870; // explicit COLORREF
 const C_HPS: u16 = 0x4A43; // half-points
 const C_HPS_POS: u16 = 0x4845; // super/subscript by half-points
+const C_HPS_KERN: u16 = 0x484B; // sprmCHpsKern: kern from this size up, in half-points (0 = off)
 const C_FTC0: u16 = 0x4A4F; // font index
 const C_HIGHLIGHT: u16 = 0x2A0C;
 const C_ISTD: u16 = 0x4A30; // character style
