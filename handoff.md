@@ -42,7 +42,7 @@
    - ค่าที่ต้อง map: `style:letter-kerning`, `\kerningN`, sprmCHpsKern
    - หมายเหตุ (2026-10-20): `Fmt` ใน `crates/formats/src/model.rs` เป็นโมเดลแลกเปลี่ยนแบบย่อ (ไม่มี spacing/kern) และมีจุดสร้าง 17 แห่ง ต้องเพิ่มฟิลด์ใหม่ให้ครบทุกจุด
    - ไฟล์ที่ต้องแก้: model `Fmt` ใน `crates/formats/src/model.rs`, `rtf.rs`, `odt.rs` และ `crates/docbin`
-3. **กล่อง Font (แท็บ Advanced) ยังไม่มีตัวเลือก Kerning for fonts และ Ligatures** ตอนนี้ตั้งได้ผ่าน `format.set` เท่านั้น
+3. ~~กล่อง Font ไม่มี Kerning/Ligatures~~ เพิ่มแล้ว (2026-10-20) เทสต์ `font_dialog_sets_kerning_and_ligatures_only_when_changed` ผ่าน ยังไม่ได้แยกเป็นแท็บ Advanced แบบ Word (อยู่หน้าเดียว)
 4. **ข้อความในแผนภูมิ, SmartArt และ m:nor ที่ใช้ TH Sarabun ยังวาดด้วย Sarabun ขนาดเต็ม**
    - ตำแหน่งโค้ด: `display.rs` `text_glyphs` และ `math.rs`
 5. **คีย์ที่ใช้ร่วมกันใน UI ต้องแยกในโค้ด**
