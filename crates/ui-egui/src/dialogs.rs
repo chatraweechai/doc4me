@@ -1392,6 +1392,8 @@ fn font_props(d: &Dialog) -> serde_json::Map<String, Value> {
     props.insert("caps".into(), json!(*caps));
     props.insert("hidden".into(), json!(*hidden));
     props.insert("spacing".into(), json!(*spacing));
+    props.insert("kern".into(), json!(*kern));
+    props.insert("ligatures".into(), json!(ligatures));
     if !font.trim().is_empty() {
         props.insert("font".into(), json!(font.trim()));
     }
