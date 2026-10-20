@@ -28,6 +28,11 @@
 
 ### เพิ่ม
 
+- **ข้อความในแผนภูมิ SmartArt และสมการ (m:nor) ที่ใช้ TH Sarabun ขนาดเท่าต้นฉบับ** (`crates/layout/src/display.rs` `text_glyphs`, `crates/layout/src/math.rs` `run_atoms`)
+  - เหตุผล: เดิมวาดด้วย Sarabun ขนาดเต็ม ทำให้ตัวอักษรใหญ่กว่า Word ที่ใช้ TH Sarabun จริง
+  - ผู้ใช้: แยกช่วงอักษรไทยกับละติน ย่อแต่ละช่วงด้วยสเกลของต้นฉบับ และในแผนภูมิวางแต่ละตัวบนความกว้างของ TH Sarabun เดิม ฟอนต์อื่นไม่เปลี่ยน ไฟล์ .docx ไม่เปลี่ยน (เป็นการวาดเท่านั้น)
+  - `text_glyphs` คืน `Vec<Draw>` แทน `Option<Draw>` (หนึ่งรายการต่อช่วง)
+  - ตรวจสอบ: เทสต์ `drawing_text_in_th_sarabun_is_sized_like_the_original`; `cargo test -p doc4me-layout` 222 ผ่าน; clippy `-D warnings` และ fmt ผ่าน เฉพาะ crate layout ส่วนสมการ m:nor ยังไม่มีเทสต์เฉพาะ
 - **กล่อง Font: ช่อง "Kerning for fonts" และ "Ligatures"** (`crates/ui-egui/src/dialogs.rs`, `crates/engine/src/cmd/format.rs`, `th.tsv`)
   - เหตุผล: เดิมตั้ง `w:kern` และ `w14:ligatures` ได้เฉพาะผ่านคำสั่ง `format.set`
   - ผู้ใช้: ติ๊กเปิด kerning แล้วระบุขนาดขั้นต่ำ และเลือก ligature ได้ 5 แบบ ส่งเฉพาะค่าที่ผู้ใช้เปลี่ยน จึงไม่กระทบไฟล์ .docx เดิม
