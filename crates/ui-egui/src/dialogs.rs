@@ -3446,6 +3446,31 @@ mod tests {
         assert_eq!((c.small_caps, c.caps, c.size), (Some(false), Some(true), Some(14.0)));
     }
 
+    #[test]
+    fn font_dialog_sets_kerning_and_ligatures_only_when_changed() {
+        let mut app = app_with("Example");
+        let _ = app.run("select.all", json!({}));
+        let Some(mut d) = Dialog::open("font", &mut app) else { panic!("no font dialog") };
+        if let Dialog::Font { kern, ligatures, size, .. } = &mut d {
+            assert_eq!((*kern, ligatures.as_str()), (0.0, "none"), "Word's defaults: no kerning, no ligatures");
+            *size = "14".into();
+        }
+        apply_font(&mut app, &d);
+        let c = app.session.doc.para_at(&doc4me_doc::Pos::body(0, 0)).map(|p| p.props_of_char(0).clone()).unwrap_or_default();
+        assert_eq!((c.kern, c.ligatures.clone()), (None, None), "untouched boxes write nothing");
+        let Some(mut d) = Dialog::open("font", &mut app) else { panic!("no font dialog") };
+        if let Dialog::Font { kern, ligatures, .. } = &mut d {
+            *kern = 12.0;
+            *ligatures = "standardContextual".into();
+        }
+        apply_font(&mut app, &d);
+        let c = app.session.doc.para_at(&doc4me_doc::Pos::body(0, 0)).map(|p| p.props_of_char(0).clone()).unwrap_or_default();
+        assert_eq!((c.kern, c.ligatures.as_deref()), (Some(12.0), Some("standardContextual")));
+        // Reopening shows what was set.
+        let Some(Dialog::Font { kern, ligatures, .. }) = Dialog::open("font", &mut app) else { panic!("no font dialog") };
+        assert_eq!((kern, ligatures.as_str()), (12.0, "standardContextual"));
+    }
+
     /// A dialog was pinned by its anchor, so dragging its title bar did nothing (#732).
     #[test]
     fn dragging_a_dialog_title_bar_moves_it() {
