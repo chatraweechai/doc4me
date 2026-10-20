@@ -28,6 +28,11 @@
 
 ### เพิ่ม
 
+- **แยกคำอังกฤษที่ใช้ร่วมกันสองที่ให้แปลไทยต่างกัน** (`crates/ui-egui/src/i18n/catalog.rs` `CONTEXTS`, `th.tsv`, `widgets.rs` `small`, `ribbon.rs`, `dialogs_refs.rs`, `options.rs`, `docs/localization-th.md`)
+  - เหตุผล: Editor, Display, Open, Arabic มีสองความหมายแต่แปลได้คำเดียว (เช่น Editor ในช่องบรรณานุกรมอ่านว่า "ตัวช่วยตรวจแก้")
+  - ผู้ใช้: ภาษาไทยเห็น บรรณาธิการ (ช่องบรรณานุกรม), แยกบรรทัด (ปุ่มสมการ), กว้าง (ระยะห่างย่อหน้า), อารบิก (ตัวเลือกตัวเลข); ภาษาอื่นไม่เปลี่ยน เพราะ context ที่ไม่มีรายการจะใช้คำแปลปกติ; ไม่กระทบเอกสาร
+  - Letter ไม่ต้องแยก เพราะ UI ไม่แสดงชื่อกระดาษผ่านคีย์นี้
+  - ตรวจสอบ: เทสต์ `thai_splits_the_english_words_two_places_share`; `cargo test -p doc4me-ui-egui` 314 ผ่านก่อนเพิ่มเทสต์ใหม่ และเทสต์ภาษาไทย 6 ผ่านหลังเพิ่ม; clippy `-D warnings` ผ่านทั้ง workspace
 - **อ่านและเขียน "Kerning for fonts" ใน RTF, ODT และอ่านจาก .doc** (`crates/formats/src/model.rs` `Fmt::kern`, `rtf.rs` `\kerningN`, `odt.rs` `style:letter-kerning`, `crates/docbin/src/fmt.rs` sprmCHpsKern 0x484B)
   - เหตุผล: เดิมเปิดไฟล์เหล่านี้แล้วค่า kerning หายไป ตัวอักษรชิดต่างจาก Word
   - ผู้ใช้: RTF เก็บขนาดขั้นต่ำเป็นครึ่งพอยต์ (`\kerning0` = ปิด); ODF มีแค่เปิด/ปิด จึงอ่านว่าเปิด = ตั้งแต่ 1 pt และเขียน `true`/`false` ตามค่า; .doc อ่านเท่านั้น (ยังไม่มีตัวเขียน .doc) ข้อความที่ไม่ได้ตั้งค่าไม่เปลี่ยน ไฟล์ .docx เดิมไม่ได้รับผลกระทบ
