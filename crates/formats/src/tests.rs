@@ -126,7 +126,7 @@ fn kerning_round_trips_through_rtf_and_odt() {
     p.insert_text(n, "kerned", &CharProps { kern: Some(12.0), ..Default::default() }).unwrap();
     let n = p.len();
     p.insert_text(n, " off", &CharProps { kern: Some(0.0), ..Default::default() }).unwrap();
-    d.blocks = vec![para_block(p)];
+    d.body = vec![para_block(p)];
     for (ext, kerned) in [("rtf", 12.0), ("odt", 1.0)] {
         let bytes = export(ext, &d).expect("handled").expect("export");
         let back = import(ext, &bytes).expect("handled").unwrap_or_else(|e| panic!("{ext}: {e}"));
