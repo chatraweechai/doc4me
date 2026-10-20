@@ -19,10 +19,14 @@ computing vocabulary. No Microsoft Word (or other product) localisation, string 
 translated UI was consulted or copied. Add entries the same way, following the style guide and
 the glossary below. Not yet reviewed by a native-speaking professional translator.
 
-Known shared keys (one English key shown in two places that need different Thai; to be split in
-the code): Editor (spelling tool and bibliography field), Letter (template and paper size),
-Display (Options page and equation display mode), Open (file and a spacing preset), Arabic
-(language and numeral style). Watermark presets (CONFIDENTIAL, DRAFT, DO NOT COPY, SAMPLE,
+Shared keys (one English key shown in two places that need different Thai) are split with a
+catalog context (first column of th.tsv, `i18n::tc`): `bibliography` Editor (บรรณาธิการ, the
+bibliography field; the spelling tool stays ตัวช่วยตรวจแก้), `equation` Display (แยกบรรทัด, the
+equation button; the Options page stays การแสดงผล), `spacing` Open (กว้าง, the paragraph spacing
+preset; the File command stays เปิด), `numeral` Arabic (อารบิก, the Numerals option; the language
+stays อาหรับ). Letter needs no split: the UI never shows the paper size name through this key
+(Letter, the template, is จดหมาย). In `ribbon::small` a label written `context|English` is looked
+up in that context. Watermark presets (CONFIDENTIAL, DRAFT, DO NOT COPY, SAMPLE,
 URGENT) stay in English because the menu inserts the English label text.
 
 ## Style guide
