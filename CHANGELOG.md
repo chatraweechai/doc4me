@@ -142,6 +142,8 @@
     - `proof::th::tests::a_misspelling_inside_a_longer_word_is_not_marked`, `words_in_the_user_dictionary_get_no_typing_order_mark`
     - ส่วนที่เพิ่มใน `layout::tests_complex::ligatures_only_when_the_run_asks` (ค่าที่ไม่ถูกต้อง และ ฤๅ)
 
+- **ป้ายขนาดซองในกล่อง Envelopes แปลได้** (`envelope_label` ใน `crates/ui-egui/src/dialogs_layout.rs`, `th.tsv`): หน่วยนิ้ว/มม. ผ่าน `tl!` และ `i18n::fmt` เดิมเขียนตายตัวเป็นอังกฤษ ทำให้เทสต์ audit `untranslated_interface_text` ล้ม ภาษาไทยแสดง "นิ้ว"/"มม." ไม่กระทบไฟล์ .docx หรือภาษาอื่น ยังรอผลเทสต์ i18n (commit ถัดไปจะบันทึกผล)
+
 ### การตรวจสอบ
 
 - รันชุดตรวจเดียวกับ `cargo xtask ci` ทีละขั้นบน Linux ผ่านทั้งหมด

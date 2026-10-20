@@ -27,6 +27,8 @@
 	(normal text)	(ข้อความปกติ)
 	(not matched)	(ไม่ได้จับคู่)
 	(picture or object)	(รูปภาพหรือวัตถุ)
+	{w} × {h} in	{w} × {h} นิ้ว
+	{w} × {h} mm	{w} × {h} มม.
 	0 or More Characters	อักขระตั้งแต่ 0 ตัวขึ้นไป
 	1. Formatting restrictions	1. ข้อจำกัดการจัดรูปแบบ
 	1.5 Line Spacing	ระยะห่างบรรทัด 1.5 เท่า

@@ -535,10 +535,12 @@ pub(crate) fn envelope_label(name: &str, w: f32, h: f32) -> String {
     let short = name.strip_prefix("Envelope ").unwrap_or(name);
     if short.starts_with('#') || short == "Monarch" {
         let i = |pt: f32| ((pt / 72.0) * 100.0).round() / 100.0;
-        format!("{short}   {} × {} in", i(h), i(w))
+        let size = crate::i18n::fmt(tl!("{w} × {h} in"), &[("w", &i(h).to_string()), ("h", &i(w).to_string())]);
+        format!("{short}   {size}")
     } else {
         let mm = |pt: f32| (pt * 25.4 / 72.0).round();
-        format!("{short}   {} × {} mm", mm(h), mm(w))
+        let size = crate::i18n::fmt(tl!("{w} × {h} mm"), &[("w", &mm(h).to_string()), ("h", &mm(w).to_string())]);
+        format!("{short}   {size}")
     }
 }
 
