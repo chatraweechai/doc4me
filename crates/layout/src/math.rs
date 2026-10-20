@@ -699,9 +699,26 @@ impl Ctx {
                 _ => (false, false),
             };
             let rs = doc4me_fonts::word::resolve(&fam, bold, italic);
-            let mut b = self.text_atom(rs.face, &r.text, size, 0, color, (rs.synth_bold, rs.synth_italic), path, u0);
-            b.glyph = None;
-            out.push(RunPart::Atom(b.cls(Cls::Ord)));
+            // TH Sarabun New and its kin, drawn with Sarabun, scale Thai and Latin letters apart
+            // (as in a paragraph); any other font is one atom.
+            let fit = doc4me_fonts::word::metric_fit(&fam, bold, italic);
+            let is_thai = |c: char| ('\u{0E00}'..='\u{0E7F}').contains(&c);
+            let mut pieces: Vec<(String, bool)> = Vec::new();
+            for c in r.text.chars() {
+                let th = fit.is_some() && is_thai(c);
+                match pieces.last_mut() {
+                    Some((s, prev)) if *prev == th => s.push(c),
+                    _ => pieces.push((c.to_string(), th)),
+                }
+            }
+            let mut k0 = 0usize;
+            for (piece, th) in pieces {
+                let piece_size = size * fit.map_or(1.0, |f| f.scale(th));
+                let mut b = self.text_atom(rs.face, &piece, piece_size, 0, color, (rs.synth_bold, rs.synth_italic), path, u0 + k0);
+                b.glyph = None;
+                out.push(RunPart::Atom(b.cls(Cls::Ord)));
+                k0 += piece.chars().count();
+            }
             return out;
         }
         // Map characters (math alphabets, operators) and split into atoms by class.
