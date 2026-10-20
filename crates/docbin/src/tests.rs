@@ -634,6 +634,22 @@ fn character_formatting_applied() {
     assert!(p.runs.first().is_some_and(|r| r.props.bold.is_none()));
 }
 
+/// `sprmCHpsKern` (0x484B) is "Kerning for fonts": kern from that size up, in half-points.
+#[test]
+fn kerning_for_fonts_is_read() {
+    let spec = RichSpec {
+        text: "plain kerned\r",
+        styles: vec![(1, 0x0FFF, "Normal", Vec::new(), Vec::new())],
+        fonts: vec!["Times New Roman"],
+        chpx_runs: vec![(0, Vec::new()), (6, grpprl(&[(0x484B, &24u16.to_le_bytes())]))],
+        papx_entries: vec![(0, 0, Vec::new())],
+    };
+    let doc = read(&rich_doc(&spec)).expect("opens");
+    let p = para0(&doc);
+    assert!(p.runs.first().is_some_and(|r| r.props.kern.is_none()), "{:?}", p.runs);
+    assert!(p.runs.get(1).is_some_and(|r| r.props.kern == Some(12.0)), "{:?}", p.runs);
+}
+
 #[test]
 fn font_and_size_from_style_and_direct() {
     let spec = RichSpec {
