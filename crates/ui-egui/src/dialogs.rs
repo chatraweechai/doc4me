@@ -3525,6 +3525,9 @@ mod tests {
         apply_font(&mut app, &d);
         let c = app.session.doc.para_at(&doc4me_doc::Pos::body(0, 0)).map(|p| p.props_of_char(0).clone()).unwrap_or_default();
         assert_eq!((c.kern, c.ligatures.as_deref()), (Some(12.0), Some("standardContextual")));
+        // The Font dialog opens on its Font page; kerning and ligatures sit on Advanced.
+        let Some(Dialog::Font { tab, .. }) = Dialog::open("font", &mut app) else { panic!("no font dialog") };
+        assert_eq!(tab, 0);
         // Reopening shows what was set.
         let Some(Dialog::Font { kern, ligatures, .. }) = Dialog::open("font", &mut app) else { panic!("no font dialog") };
         assert_eq!((kern, ligatures.as_str()), (12.0, "standardContextual"));
