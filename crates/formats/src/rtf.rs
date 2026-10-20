@@ -130,6 +130,9 @@ impl Writer {
         if let Some(s) = f.size {
             ctl.push_str(&format!("\\fs{}", (s * 2.0).round().clamp(2.0, 3276.0) as i32));
         }
+        if let Some(k) = f.kern.filter(|k| k.is_finite()) {
+            ctl.push_str(&format!("\\kerning{}", (k * 2.0).round().clamp(0.0, 3276.0) as i32));
+        }
         let color = f.color.or(if f.link.is_some() { Some(Rgb(0x05, 0x63, 0xC1)) } else { None });
         if let Some(c) = color {
             let i = self.t.color(c);
