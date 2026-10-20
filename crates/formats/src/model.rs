@@ -35,6 +35,9 @@ pub struct Fmt {
     pub font: Option<String>,
     /// Background (highlight / shading).
     pub background: Option<Rgb>,
+    /// Pair kerning from this size up, points (`w:kern`, RTF `\kerning`, `.doc` sprmCHpsKern);
+    /// `Some(0.0)` is "off", `None` leaves the default.
+    pub kern: Option<f32>,
 }
 
 /// An embedded picture.
