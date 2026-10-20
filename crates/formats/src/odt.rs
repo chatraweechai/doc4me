@@ -598,6 +598,7 @@ struct FmtDelta {
     size: Option<f32>,
     font: Option<String>,
     code: Option<bool>,
+    kern: Option<f32>,
 }
 
 impl FmtDelta {
