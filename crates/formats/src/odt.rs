@@ -619,6 +619,9 @@ impl FmtDelta {
         if let Some(fam) = &self.font {
             f.font = Some(fam.clone());
         }
+        if self.kern.is_some() {
+            f.kern = self.kern;
+        }
     }
 }
 
