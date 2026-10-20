@@ -1507,7 +1507,7 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     ("historicalDiscretional", tl!("Historical and Discretional")),
                     ("all", tl!("All")),
                 ];
-                let shown = ligature_names.iter().find(|(v, _)| v == ligatures).map(|(_, n)| n.to_string()).unwrap_or_else(|| ligatures.clone());
+                let shown = ligature_names.iter().find(|(v, _)| *v == ligatures.as_str()).map(|(_, n)| n.to_string()).unwrap_or_else(|| ligatures.clone());
                 egui::ComboBox::from_id_salt("fontdlg_ligatures").selected_text(shown).show_ui(ui, |ui| {
                     for (v, n) in ligature_names {
                         ui.selectable_value(ligatures, v.to_string(), n);
