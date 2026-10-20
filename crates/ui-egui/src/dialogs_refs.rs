@@ -943,7 +943,9 @@ fn source_ui(app: &mut WordApp, ui: &mut Ui, f: &mut SourceForm) -> Next {
         ui.end_row();
         let edit = f.edit;
         for (key, label) in f.fields() {
-            ui.label(format!("{}:", tl!(label)));
+            // The person who edited a book, not the spelling Editor.
+            let name = if key == "editor" { crate::i18n::tc("bibliography", label) } else { tl!(label) };
+            ui.label(format!("{name}:"));
             if let Some(v) = field_mut(&mut f.source, key) {
                 let hint = match key {
                     "author" => tl!("Last, First; Last, First"),
