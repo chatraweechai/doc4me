@@ -1372,7 +1372,7 @@ pub(crate) fn buttons(ui: &mut Ui, ok: &str) -> (bool, bool) {
 
 /// The character properties the Font dialog's fields stand for.
 fn font_props(d: &Dialog) -> serde_json::Map<String, Value> {
-    let Dialog::Font { font, font_ea, size, bold, italic, underline, strike, sup, sub, small_caps, caps, hidden, color, spacing, .. } = d else {
+    let Dialog::Font { font, font_ea, size, bold, italic, underline, strike, sup, sub, small_caps, caps, hidden, color, spacing, kern, ligatures, .. } = d else {
         return serde_json::Map::new();
     };
     let mut props = serde_json::Map::new();
