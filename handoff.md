@@ -1,6 +1,6 @@
 # Handoff: งานภาษาไทยและความเที่ยงตรงแบบ Word (Doc4Me 1.0.x)
 
-อัปเดต: 2026-10-19 · สาขา `main` · รายละเอียดทุกข้อดูใน [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`
+อัปเดต: 2026-10-20 · สาขา `main` · รายละเอียดทุกข้อดูใน [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`
 
 ## สิ่งที่เสร็จแล้วในรอบนี้
 
@@ -40,6 +40,7 @@
      3. push tag `v1.1.0` workflow `windows-x64-installer.yml` จะสร้าง installer และ GitHub Release ให้
 2. **การอ่าน kerning จาก ODT, RTF และ .doc ยังไม่ได้ทำ**
    - ค่าที่ต้อง map: `style:letter-kerning`, `\kerningN`, sprmCHpsKern
+   - หมายเหตุ (2026-10-20): `Fmt` ใน `crates/formats/src/model.rs` เป็นโมเดลแลกเปลี่ยนแบบย่อ (ไม่มี spacing/kern) และมีจุดสร้าง 17 แห่ง ต้องเพิ่มฟิลด์ใหม่ให้ครบทุกจุด
    - ไฟล์ที่ต้องแก้: model `Fmt` ใน `crates/formats/src/model.rs`, `rtf.rs`, `odt.rs` และ `crates/docbin`
 3. **กล่อง Font (แท็บ Advanced) ยังไม่มีตัวเลือก Kerning for fonts และ Ligatures** ตอนนี้ตั้งได้ผ่าน `format.set` เท่านั้น
 4. **ข้อความในแผนภูมิ, SmartArt และ m:nor ที่ใช้ TH Sarabun ยังวาดด้วย Sarabun ขนาดเต็ม**
@@ -49,9 +50,8 @@
    - ตอนนี้แต่ละคีย์แปลได้แบบเดียว ดูรายละเอียดใน `docs/localization-th.md`
 6. **ภาษาไทยใน UI ยังไม่ได้ให้นักแปลมืออาชีพที่เป็นเจ้าของภาษาตรวจทาน**
    - รอบนี้ตรวจด้วยสคริปต์และเทสต์ `thai_catalog_is_typed_cleanly` เท่านั้น
-7. **เทสต์ audit ที่ ignore ไว้ (`untranslated_interface_text`) ยังล้มอยู่ ซึ่งเป็นปัญหาเดิม**
-   - สาเหตุคือป้ายขนาดซอง "#10   4.13 × 9.5 in" ใน `dialogs_layout.rs` ไม่ได้ผ่าน `tl!`
-8. **ค่าของ TH SarabunIT๙ อนุมาน ยังไม่ได้วัดจากไฟล์จริง**
+7. ~~เทสต์ audit `untranslated_interface_text`~~ แก้แล้วในคอมมิต 6519073 (ป้ายขนาดซองแปลผ่าน `tl!`) ยังไม่ได้รันซ้ำด้วย `--ignored` ในรอบนี้
+7. **ค่าของ TH SarabunIT๙ อนุมาน ยังไม่ได้วัดจากไฟล์จริง**
    - ค่าเลขไทยอนุมานจากการออกแบบของฟอนต์
    - ถ้าได้ไฟล์ IT๙ มา ให้วัดและแก้ `thsarabun.rs`
 
