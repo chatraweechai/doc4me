@@ -111,6 +111,31 @@ fn find_para<'a>(b: &'a [FBlock], text: &str) -> Option<&'a model::Para> {
     })
 }
 
+/// "Kerning for fonts" survives RTF and ODT: the size from which pairs are kerned (RTF `\kerning`,
+/// half-points; ODF only says on or off) and an explicit "off".
+#[test]
+fn kerning_round_trips_through_rtf_and_odt() {
+    let kern_of = |d: &Document, text: &str| {
+        let p = d.blocks().iter().find_map(|b| if let Block::Paragraph(p) = b { Some(p) } else { None }).expect("a paragraph");
+        let i = p.plain_text().find(text).expect("text");
+        p.props_of_char(i).kern
+    };
+    let mut d = Document::new();
+    let mut p = Paragraph::with_text("plain ", CharProps::default());
+    let n = p.len();
+    p.insert_text(n, "kerned", &CharProps { kern: Some(12.0), ..Default::default() }).unwrap();
+    let n = p.len();
+    p.insert_text(n, " off", &CharProps { kern: Some(0.0), ..Default::default() }).unwrap();
+    d.blocks = vec![para_block(p)];
+    for (ext, kerned) in [("rtf", 12.0), ("odt", 1.0)] {
+        let bytes = export(ext, &d).expect("handled").expect("export");
+        let back = import(ext, &bytes).expect("handled").unwrap_or_else(|e| panic!("{ext}: {e}"));
+        assert_eq!(kern_of(&back, "plain"), None, "{ext}: untouched text stays at the default");
+        assert_eq!(kern_of(&back, "kerned"), Some(kerned), "{ext}");
+        assert_eq!(kern_of(&back, "off"), Some(0.0), "{ext}");
+    }
+}
+
 fn check_round_trip(ext: &str, rich: bool) {
     let d = sample();
     let bytes = export(ext, &d).expect("handled").expect("export");
