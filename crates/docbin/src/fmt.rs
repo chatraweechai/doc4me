@@ -164,6 +164,11 @@ pub(crate) fn apply_char(p: &mut CharProps, prl: &Prl, base: &CharProps, fonts: 
                 p.size = Some((hps as f32 / 2.0).clamp(1.0, 1638.0));
             }
         }
+        C_HPS_KERN => {
+            if let Some(hps) = u16_of(prl) {
+                p.kern = Some((hps as f32 / 2.0).clamp(0.0, 1638.0));
+            }
+        }
         C_HPS_POS => {
             if let Some(pos) = s16_of(prl) {
                 p.vert_align = Some(match pos {
