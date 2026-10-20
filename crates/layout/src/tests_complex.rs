@@ -318,7 +318,8 @@ fn drawing_text_in_th_sarabun_is_sized_like_the_original() {
     // The Thai run starts after the Latin letter's width in the original font.
     let Some(Draw::Glyphs { glyphs, .. }) = draws.get(1) else { panic!("no Thai run") };
     let want = fit.advance('A').expect("A") * 20.0;
-    assert!(glyphs.first().is_some_and(|g| g.1 >= want - 1e-3), "{glyphs:?} after {want}");
+    // (the letter is centred in its own width, so it may sit a little either side of the start)
+    assert!(glyphs.first().is_some_and(|g| (g.1 - want).abs() < 1.0), "{glyphs:?} after {want}");
     // Any other font stays one run at its own size.
     let draws = display::text_glyphs(&doc, r, &item("Sarabun"), 1.0, 1.0);
     assert!(draws.iter().all(|d| matches!(d, Draw::Glyphs { size, .. } if (*size - 20.0).abs() < 1e-3)));
