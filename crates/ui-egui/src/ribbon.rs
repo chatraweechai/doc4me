@@ -1092,7 +1092,9 @@ fn design(app: &mut WordApp, ui: &mut Ui) {
                     ("Relaxed", "relaxed"),
                     ("Double", "double"),
                 ] {
-                    mi(ui, app, l, "design.paragraphSpacing", json!({"value": v}));
+                    // "Open" here is a loose spacing, not the File command.
+                    let text = if v == "open" { crate::i18n::tc("spacing", l) } else { tl!(l) };
+                    mi_text(ui, app, text, "design.paragraphSpacing", json!({"value": v}));
                 }
             });
             small(ui, app, "effectsDesign", Some("Effects"), "Effects", "design.effects", json!({}), false);
