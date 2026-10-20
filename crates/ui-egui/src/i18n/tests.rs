@@ -619,6 +619,19 @@ fn context_entries_override_only_their_context_and_unknown_contexts_are_rejected
     assert_eq!(trc(lang("ja"), "preview", "Unknown"), "Unknown");
 }
 
+/// One English word shown in two places that need different Thai has its own context for the
+/// second place; every other language falls back to its plain translation there.
+#[test]
+fn thai_splits_the_english_words_two_places_share() {
+    let th = lang("th");
+    for (context, english) in [("bibliography", "Editor"), ("equation", "Display"), ("spacing", "Open"), ("numeral", "Arabic")] {
+        assert_ne!(trc(th, context, english), tr(th, english), "{context}: {english}");
+        assert_ne!(trc(th, context, english), english, "{context}: {english} is translated");
+        let de = lang("de");
+        assert_eq!(trc(de, context, english), tr(de, english), "{context} falls back to the plain translation");
+    }
+}
+
 #[test]
 fn estonian_locales_and_saved_preference_keep_document_content() {
     let et = lang("et");
