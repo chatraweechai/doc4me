@@ -20,7 +20,7 @@ pub struct Entry {
 /// The contexts a catalog entry may name, and where each applies.
 /// - `preview`: sample text inside a rendered preview (the Design tab's style-set tiles), which
 ///   has to fit a small tile; it falls back to the plain entry.
-pub const CONTEXTS: &[&str] = &["preview"];
+pub const CONTEXTS: &[&str] = &["preview", "bibliography", "equation", "numeral", "spacing"];
 
 /// A parsed catalog. Values are owned for the life of the process (catalogs are built once).
 #[derive(Debug, Default)]
