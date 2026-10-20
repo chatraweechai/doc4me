@@ -27,6 +27,11 @@
 
 ### เพิ่ม
 
+- **กล่อง Font: ช่อง "Kerning for fonts" และ "Ligatures"** (`crates/ui-egui/src/dialogs.rs`, `crates/engine/src/cmd/format.rs`, `th.tsv`)
+  - เหตุผล: เดิมตั้ง `w:kern` และ `w14:ligatures` ได้เฉพาะผ่านคำสั่ง `format.set`
+  - ผู้ใช้: ติ๊กเปิด kerning แล้วระบุขนาดขั้นต่ำ และเลือก ligature ได้ 5 แบบ ส่งเฉพาะค่าที่ผู้ใช้เปลี่ยน จึงไม่กระทบไฟล์ .docx เดิม
+  - state ของ ribbon เพิ่มคีย์ `kern` และ `ligatures`; เพิ่มข้อความไทย 6 รายการ
+  - ตรวจสอบ: เทสต์ `font_dialog_sets_kerning_and_ligatures_only_when_changed` (กำลังรัน ยังไม่ยืนยันผล ณ เวลา commit)
 - **TH Sarabun New / TH SarabunPSK / TH SarabunIT๙ ขนาดเท่าต้นฉบับเมื่อไม่ได้ติดตั้ง** (`crates/fonts/src/thsarabun.rs`, `word::MetricFit`)
   - เมื่อเครื่องไม่มีฟอนต์เหล่านี้ จะวาดด้วย Sarabun ที่ฝังในโปรแกรม โดยย่อตัวอักษรให้สูงเท่าต้นฉบับ
     - ตัวไทยใช้ความสูงของ ก: 400/586 (ตัวหนา 407/586)
