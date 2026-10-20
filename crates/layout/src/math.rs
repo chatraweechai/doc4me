@@ -711,6 +711,9 @@ impl Ctx {
                     _ => pieces.push((c.to_string(), th)),
                 }
             }
+            if pieces.is_empty() {
+                pieces.push((String::new(), false));
+            }
             let mut k0 = 0usize;
             for (piece, th) in pieces {
                 let piece_size = size * fit.map_or(1.0, |f| f.scale(th));
