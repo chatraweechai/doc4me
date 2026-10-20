@@ -230,7 +230,12 @@ fn big_button(ui: &mut Ui, app: &mut WordApp, icon: &str, label: &str, id: &str,
 
 /// A small button: 16 px icon with an optional label; `checked` draws the toggled state.
 pub fn small(ui: &mut Ui, app: &mut WordApp, icon: &str, label: Option<&str>, tip: &str, id: &str, params: Value, checked: bool) -> Response {
-    let (label, tip) = (label.map(|l| tl!(l)), tl!(tip));
+    // `context|English` words a label for that context (the same English needs another Thai here).
+    let label = label.map(|l| match l.split_once('|') {
+        Some((context, english)) => crate::i18n::tc(context, english),
+        None => tl!(l),
+    });
+    let tip = tl!(tip);
     let t = Tokens::get(ui.ctx());
     let text_w = label.map(|l| ui.ctx().fonts_mut(|f| f.layout_no_wrap(l.to_string(), regular(11.5), t.text).size().x) + 6.0).unwrap_or(0.0);
     let (r, resp) = ui.allocate_exact_size(vec2(24.0 + text_w, 22.0), Sense::click());
