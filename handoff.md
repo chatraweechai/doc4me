@@ -38,16 +38,12 @@
      1. ตั้งเลขเวอร์ชันใหม่ (เช่น 1.1.0) ด้วย `cargo xtask version` หรือแก้ `[workspace.package] version`
      2. ย้าย `[Unreleased]` ไปเป็น `## [1.1.0] - วันที่`
      3. push tag `v1.1.0` workflow `windows-x64-installer.yml` จะสร้าง installer และ GitHub Release ให้
-2. **การอ่าน kerning จาก ODT, RTF และ .doc ยังไม่ได้ทำ**
-   - ค่าที่ต้อง map: `style:letter-kerning`, `\kerningN`, sprmCHpsKern
-   - หมายเหตุ (2026-10-20): `Fmt` ใน `crates/formats/src/model.rs` เป็นโมเดลแลกเปลี่ยนแบบย่อ (ไม่มี spacing/kern) และมีจุดสร้าง 17 แห่ง ต้องเพิ่มฟิลด์ใหม่ให้ครบทุกจุด
-   - ไฟล์ที่ต้องแก้: model `Fmt` ใน `crates/formats/src/model.rs`, `rtf.rs`, `odt.rs` และ `crates/docbin`
-3. ~~กล่อง Font ไม่มี Kerning/Ligatures~~ เพิ่มแล้ว (2026-10-20) เทสต์ `font_dialog_sets_kerning_and_ligatures_only_when_changed` ผ่าน ยังไม่ได้แยกเป็นแท็บ Advanced แบบ Word (อยู่หน้าเดียว)
-4. **ข้อความในแผนภูมิ, SmartArt และ m:nor ที่ใช้ TH Sarabun ยังวาดด้วย Sarabun ขนาดเต็ม**
-   - ตำแหน่งโค้ด: `display.rs` `text_glyphs` และ `math.rs`
-5. **คีย์ที่ใช้ร่วมกันใน UI ต้องแยกในโค้ด**
-   - คีย์: Editor, Letter, Display, Open, Arabic
-   - ตอนนี้แต่ละคีย์แปลได้แบบเดียว ดูรายละเอียดใน `docs/localization-th.md`
+2. ~~การอ่าน kerning จาก ODT, RTF และ .doc~~ ทำแล้ว (2026-10-20)
+   - `Fmt::kern` ใน `crates/formats/src/model.rs`, `\kerningN` ใน `rtf.rs`, `style:letter-kerning` ใน `odt.rs` (ODF มีแค่เปิด/ปิด), sprmCHpsKern 0x484B ใน `crates/docbin/src/fmt.rs` (อ่านอย่างเดียว)
+   - เทสต์: `kerning_round_trips_through_rtf_and_odt`, `kerning_for_fonts_is_read`
+3. ~~กล่อง Font ไม่มี Kerning/Ligatures~~ ทำแล้ว (2026-10-20) แยกเป็นหน้า Font และ Advanced
+4. ~~ข้อความในแผนภูมิ, SmartArt และ m:nor ที่ใช้ TH Sarabun~~ ทำแล้ว (2026-10-20) `display.rs` `text_glyphs` และ `math.rs` `run_atoms` ใช้ `metric_fit` เทสต์ `drawing_text_in_th_sarabun_is_sized_like_the_original` (ส่วน m:nor ยังไม่มีเทสต์เฉพาะ)
+5. ~~คีย์ที่ใช้ร่วมกันใน UI~~ แยกแล้ว (2026-10-20) ด้วย context ใน `th.tsv`: bibliography/equation/spacing/numeral ส่วน Letter ไม่ต้องแยก ดู `docs/localization-th.md`
 6. **ภาษาไทยใน UI ยังไม่ได้ให้นักแปลมืออาชีพที่เป็นเจ้าของภาษาตรวจทาน**
    - รอบนี้ตรวจด้วยสคริปต์และเทสต์ `thai_catalog_is_typed_cleanly` เท่านั้น
 7. ~~เทสต์ audit `untranslated_interface_text`~~ แก้แล้วในคอมมิต 6519073 (ป้ายขนาดซองแปลผ่าน `tl!`) ยังไม่ได้รันซ้ำด้วย `--ignored` ในรอบนี้
