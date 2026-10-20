@@ -47,7 +47,8 @@
   - เหตุผล: เดิมตั้ง `w:kern` และ `w14:ligatures` ได้เฉพาะผ่านคำสั่ง `format.set`
   - ผู้ใช้: ติ๊กเปิด kerning แล้วระบุขนาดขั้นต่ำ และเลือก ligature ได้ 5 แบบ ส่งเฉพาะค่าที่ผู้ใช้เปลี่ยน จึงไม่กระทบไฟล์ .docx เดิม
   - state ของ ribbon เพิ่มคีย์ `kern` และ `ligatures`; เพิ่มข้อความไทย 6 รายการ
-  - ตรวจสอบ: เทสต์ `font_dialog_sets_kerning_and_ligatures_only_when_changed` (กำลังรัน ยังไม่ยืนยันผล ณ เวลา commit)
+  - ต่อมาแยกเป็นสองหน้าแบบ Word: Font (ฟอนต์ ขนาด สี เอฟเฟกต์) และ Advanced (ระยะห่างอักขระ Kerning Ligatures) ด้วยตัวเลือก `tab` ในกล่อง
+  - ตรวจสอบ: เทสต์ `font_dialog_sets_kerning_and_ligatures_only_when_changed` ผ่าน; `cargo test -p doc4me-ui-egui` 315 ผ่าน; clippy `-D warnings` ผ่าน
 - **TH Sarabun New / TH SarabunPSK / TH SarabunIT๙ ขนาดเท่าต้นฉบับเมื่อไม่ได้ติดตั้ง** (`crates/fonts/src/thsarabun.rs`, `word::MetricFit`)
   - เมื่อเครื่องไม่มีฟอนต์เหล่านี้ จะวาดด้วย Sarabun ที่ฝังในโปรแกรม โดยย่อตัวอักษรให้สูงเท่าต้นฉบับ
     - ตัวไทยใช้ความสูงของ ก: 400/586 (ตัวหนา 407/586)
