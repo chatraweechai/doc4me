@@ -1489,6 +1489,31 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 ui.label(tl!("Spacing (pt):"));
                 ui.add(egui::DragValue::new(spacing).speed(0.1).range(-20.0..=20.0));
                 ui.end_row();
+                // Kerning for fonts: a box that turns pair kerning on from a size up (Word's default is off).
+                ui.label(tl!("Kerning for fonts:"));
+                ui.horizontal(|ui| {
+                    let mut on = *kern > 0.0;
+                    if ui.checkbox(&mut on, "").changed() {
+                        *kern = if on { 1.0 } else { 0.0 };
+                    }
+                    ui.add_enabled(on, egui::DragValue::new(kern).speed(0.5).range(0.5..=1638.0).suffix(format!(" {}", tl!("points and above"))));
+                });
+                ui.end_row();
+                ui.label(tl!("Ligatures:"));
+                let ligature_names = [
+                    ("none", tl!("None")),
+                    ("standard", tl!("Standard Only")),
+                    ("standardContextual", tl!("Standard and Contextual")),
+                    ("historicalDiscretional", tl!("Historical and Discretional")),
+                    ("all", tl!("All")),
+                ];
+                let shown = ligature_names.iter().find(|(v, _)| v == ligatures).map(|(_, n)| n.to_string()).unwrap_or_else(|| ligatures.clone());
+                egui::ComboBox::from_id_salt("fontdlg_ligatures").selected_text(shown).show_ui(ui, |ui| {
+                    for (v, n) in ligature_names {
+                        ui.selectable_value(ligatures, v.to_string(), n);
+                    }
+                });
+                ui.end_row();
             });
             ui.separator();
             ui.label(egui::RichText::new(tl!("Effects")).font(semibold(12.5)));
