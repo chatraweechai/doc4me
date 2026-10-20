@@ -957,6 +957,8 @@ impl Dialog {
                     hidden: b("hidden"),
                     color: s("color"),
                     spacing: st.get("spacing").and_then(Value::as_f64).unwrap_or(0.0) as f32,
+                    kern: st.get("kern").and_then(Value::as_f64).unwrap_or(0.0) as f32,
+                    ligatures: st.get("ligatures").and_then(Value::as_str).unwrap_or("none").to_string(),
                     start: serde_json::Map::new(),
                 };
                 let props = font_props(&d);
