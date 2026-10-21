@@ -1,0 +1,9 @@
+{"method": "ui.tab", "params": {"tab": "References"}}
+{"method": "select.text", "params": {"text": "Why share a studio?"}}
+{"method": "caret.left"}
+{"method": "references.toc", "params": {"title": "Contents"}}
+{"method": "view.zoom", "params": {"value": "multiplePages"}}
+{"method": "caret.docStart"}
+{"method": "ui.key", "params": {"key": "Home", "cmd": true}}
+{"steps": 10}
+{"shot": "docs/images/references.png"}

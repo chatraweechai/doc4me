@@ -1,0 +1,20 @@
+{"method": "ui.tab", "params": {"tab": "Review"}}
+{"method": "select.text", "params": {"text": "old print shop"}}
+{"method": "review.newComment", "params": {"text": "Is it still on Alder Street?"}}
+{"method": "select.text", "params": {"text": "glaze chemistry"}}
+{"method": "review.newComment", "params": {"text": "Worth a workshop of its own."}}
+{"method": "select.text", "params": {"text": "a quick note"}}
+{"method": "review.newComment", "params": {"text": "Could we keep a notebook by the shelf?"}}
+{"method": "review.trackChanges", "params": {"value": true}}
+{"method": "select.text", "params": {"text": "thirty"}}
+{"method": "text.insert", "params": {"text": "forty"}}
+{"method": "view.commentsPane", "params": {"value": false}}
+{"method": "review.previousComment"}
+{"method": "review.nextComment"}
+{"method": "review.nextComment"}
+{"method": "select.text", "params": {"text": "and somebody always"}}
+{"method": "caret.left"}
+{"method": "review.nextComment"}
+{"method": "view.commentsPane", "params": {"value": false}}
+{"steps": 10}
+{"shot": "docs/images/review.png"}

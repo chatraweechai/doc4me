@@ -328,10 +328,12 @@ pub fn status_bar(app: &mut WordApp, ui: &mut Ui) {
                     let slider = egui::Slider::new(&mut v, if reading { 0.75..=1.5 } else { 0.1..=5.0 }).logarithmic(!reading).show_value(false);
                     ui.spacing_mut().slider_width = 110.0;
                     // egui paints the rail in the input fill, which is the status bar's own colour
-                    // in the dark theme; the input border shows in both.
+                    // in the dark theme; the input border shows in both. The knob takes that fill
+                    // too, so a thin rail (as Word draws it) keeps the knob standing out.
                     let changed = ui
                         .scope(|ui| {
                             ui.visuals_mut().widgets.inactive.bg_fill = t.input_border;
+                            ui.spacing_mut().slider_rail_height = 3.0;
                             ui.add(slider).changed()
                         })
                         .inner;
@@ -451,6 +453,6 @@ mod tests {
             out.shapes.iter().for_each(|s| rails(&s.shape, t.input_border, &mut found));
             out.drop_without_applying_deltas();
         }
-        assert!(found.iter().any(|r| (r.width() - 110.0).abs() < 12.0), "no visible zoom rail: {found:?}");
+        assert!(found.iter().any(|r| (r.width() - 110.0).abs() < 12.0 && r.height() <= 4.0), "no thin visible zoom rail: {found:?}");
     }
 }

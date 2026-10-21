@@ -1,0 +1,3 @@
+{"method": "ui.backstage", "params": {"value": true, "page": "home"}}
+{"steps": 10}
+{"shot": "docs/images/backstage.png"}

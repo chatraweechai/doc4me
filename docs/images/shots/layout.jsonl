@@ -1,0 +1,15 @@
+{"method": "ui.tab", "params": {"tab": "Layout"}}
+{"method": "view.zoom", "params": {"value": 80}}
+{"method": "design.pageBorders", "params": {"kind": "box", "color": "156082", "width": 0.5}}
+{"method": "layout.lineNumbers", "params": {"value": "continuous"}}
+{"method": "select.text", "params": {"text": "Every Thursday"}}
+{"method": "caret.left"}
+{"method": "insert.dropCap", "params": {"lines": 3}}
+{"method": "select.text", "params": {"text": "Rent is the obvious"}}
+{"method": "caret.left"}
+{"method": "insert.shape", "params": {"kind": "ellipse", "width": 96, "height": 96, "fill": "1F3B5C", "stroke": "1F3B5C"}}
+{"method": "arrange.wrap", "params": {"wrap": "square"}}
+{"method": "caret.docStart"}
+{"method": "ui.key", "params": {"key": "Home", "cmd": true}}
+{"steps": 10}
+{"shot": "docs/images/layout.png"}

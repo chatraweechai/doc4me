@@ -1,0 +1,7 @@
+{"method": "ui.tab", "params": {"tab": "Design"}}
+{"method": "design.theme", "params": {"name": "Atelier"}}
+{"method": "design.styleSet", "params": {"name": "lines"}}
+{"method": "design.watermark", "params": {"text": "DRAFT", "diagonal": true}}
+{"method": "caret.docStart"}
+{"steps": 10}
+{"shot": "docs/images/design.png"}
