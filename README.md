@@ -1,5 +1,7 @@
 # Doc4Me
 
+**English** · [ภาษาไทย](README.th.md)
+
 Doc4Me is a clean-room, open-source word processor written in Rust. It aims for complete parity
 with Microsoft Word, then goes further on speed, openness and agent control: every feature is a
 command that scripts and AI agents can run, over a local control channel or MCP.
@@ -7,14 +9,6 @@ command that scripts and AI agents can run, over a local control channel or MCP.
 It is in **alpha**: see [ROADMAP.md](ROADMAP.md) for what works today and what is left.
 
 ![Doc4Me with the built-in sample document](docs/images/hero.png)
-
-## ภาษาไทย
-
-Doc4Me 1.1.0 มีหน้าจอภาษาไทยครบทุกเมนู ใช้ฟอนต์สารบรรณ (Sarabun) เป็นฟอนต์หลัก ตัดคำไทยด้วยพจนานุกรม
-มีตัวตรวจตัวสะกดไทยและเลขลำดับไทย ระยะบรรทัดวัดแบบเดียวกับ Word บน Windows และเอกสารที่ใช้
-TH Sarabun New จะแสดงขนาดเท่าต้นฉบับแม้เครื่องไม่มีฟอนต์นั้น
-
-![หน้าจอภาษาไทยของ Doc4Me กับเอกสารภาษาไทย](docs/images/thai.png)
 
 ## Download
 
@@ -31,10 +25,22 @@ web build are in [`packaging/`](packaging/).
   PDF.
 - A Word-style ribbon, styles, lists, tables, equations, SmartArt, charts, comments and tracked
   changes, references and citations (with Zotero), mail merge and Reading Mode.
-- Interface in English, Thai, Russian, Hungarian, Turkish, Italian and other languages.
+- Interface in English, Thai, Russian, Hungarian, Turkish, Italian and other languages. Thai comes
+  with dictionary word breaks, a Thai spelling checker, Thai list numbers and line spacing measured
+  as Word for Windows measures it; see the [Thai page](README.th.md).
 - Light and dark themes; in the dark theme the page stays white.
 - `doc4me-cli` converts and edits documents without a window, and `doc4me-cli mcp` serves every
   command to AI agents ([docs/mcp.md](docs/mcp.md)).
+
+### Kerning and ligatures
+
+The Font dialog's Advanced page sets "Kerning for fonts" and ligatures, as Word stores them in
+`.docx`. Without them, text gets Word's defaults: no kerning, and no ligatures in Latin text
+(complex scripts such as Arabic and Thai always use their font's ligatures).
+
+![The Advanced page of the Font dialog, with Kerning for fonts and Ligatures](docs/images/font.png)
+
+### Dark theme
 
 ![Doc4Me in the dark theme](docs/images/dark.png)
 

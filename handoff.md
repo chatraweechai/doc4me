@@ -13,9 +13,14 @@
   - หลัง push tag workflow `windows-x64-installer.yml` จะ build MSI และ zip และสร้าง Release `Doc4Me v1.1.0` โดยใช้หัวข้อ `[1.1.0]` ใน CHANGELOG เป็นบันทึกประจำรุ่น
   - GitHub ยังไม่มี tag `v1.0.0` เลย (1.0.0 build ผ่าน Actions บน `main` เท่านั้น) ลิงก์ `[1.1.0]` ท้าย CHANGELOG จึงชี้ไปหน้า Release
 - **README และภาพหน้าจอ**: ทำแล้ว อยู่ในหัวข้อ `[1.1.0]`
-  - `README.md` ที่ราก repo กับภาพ `docs/images/hero.png`, `thai.png`, `dark.png` ที่ถ่ายจาก 1.1.0
+  - `README.md` (อังกฤษ) และ `README.th.md` (ไทย) มีลิงก์สลับภาษากันที่หัวหน้า
+  - ภาพเป็นคู่ฉากเดียวกัน หน้าจออังกฤษ/ไทย: `hero.png`/`thai.png`, `font.png`/`font-th.png` (หน้าขั้นสูงของกล่องฟอนต์), `dark.png`/`dark-th.png`
   - ภาพอื่นใน `docs/images` (backstage, design, layout, references, review) ยังเป็นของ 1.0.0
-  - สคริปต์ถ่ายภาพ (`ui_shot`) ไม่ได้เก็บใน repo วิธีถ่ายดูหัวข้อ "ถ่ายภาพหน้าจอ" ด้านล่าง
+  - สคริปต์ถ่ายภาพไม่ได้เก็บใน repo วิธีถ่ายดูหัวข้อ "ถ่ายภาพหน้าจอ" ด้านล่าง
+- **แก้แล้วก่อนออก 1.1.0**: หน้าขั้นสูงของกล่องฟอนต์เปิดเคิร์นนิงเองเมื่อแค่เปิดหน้า เพราะ `DragValue` บีบค่า 0 เป็น 0.5 (เทสต์ `showing_the_font_advanced_page_changes_nothing`)
+- **งานที่ควรทำต่อ**: ช่อง `DragValue` ที่มี `range` อีกราว 46 ช่องยังบีบค่าที่มีอยู่และนับเป็นการเปลี่ยนค่า ถ้าค่าในเอกสารอยู่นอกช่วงจะถูกเปลี่ยนแค่จากการแสดงช่อง
+  - เช่น ช่องตัดภาพบนแถบคำสั่ง (0–45%) และหมายเลขหน้าเริ่มต้น (เริ่มที่ 1 แต่ Word เริ่มที่ 0 ได้)
+  - วิธีแก้ที่น่าจะใช้: `.clamp_existing_to_range(false)` ทุกช่อง พร้อมเทสต์ที่วาดช่องกับค่านอกช่วง
 - **สิ่งที่สังเกตเห็นแต่ยังไม่แก้**: ในธีมมืด แถบของตัวเลื่อนซูมที่มุมขวาล่างมองไม่เห็น เห็นแค่ปุ่มเลื่อน
 
 ## สิ่งที่อยู่ใน 1.1.0
@@ -58,6 +63,7 @@
 - `cargo build -p doc4me-ui-egui --example ui_shot` แล้วรัน `target/debug/examples/ui_shot script.jsonl` (รูปแบบสคริปต์ดูหัวไฟล์ `crates/ui-egui/examples/ui_shot.rs`)
 - container ไม่มี GPU ต้องติดตั้ง Vulkan แบบซอฟต์แวร์ก่อน: `apt-get update && apt-get install -y mesa-vulkan-drivers`
   - ถ้าไม่ติดตั้งจะล้มด้วย `No adapter found`
+- กล่องฟอนต์: `ui.dialog` (`name: font`) แล้ว `ui.click` ที่แท็บขั้นสูง (อังกฤษ 630,257 pt ไทย 625,257 pt) และ `ui.move` ไปนอกหน้าต่างเพื่อไม่ให้มีตัวชี้เมาส์ในภาพ; ตั้งค่าตัวอักษรด้วย `format.set` (`{"props": {...}}`)
 - คำสั่งที่ใช้สร้างภาพ `thai.png`: `ui.language` (`th`), `review.language` (`th-TH`, `default: true`), `styles.apply`, `text.insert` (`raw: true`), `text.newParagraph`, `view.zoomOut` และ `ui.key` Home พร้อม `cmd: true` เพื่อกลับไปต้นเอกสาร
 
 ## วิธีตรวจก่อน commit (ตามกฎใน CLAUDE.md)

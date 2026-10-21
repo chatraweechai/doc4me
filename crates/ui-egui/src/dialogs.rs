@@ -1558,8 +1558,10 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 });
             } else {
                 egui::Grid::new("fontdlg_adv").num_columns(2).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
+                    // Only what the user enters is held to a box's range: egui clamps the value
+                    // already there by default, which would change the text just by showing the page.
                     ui.label(tl!("Spacing (pt):"));
-                    ui.add(egui::DragValue::new(spacing).speed(0.1).range(-20.0..=20.0));
+                    ui.add(egui::DragValue::new(spacing).speed(0.1).range(-20.0..=20.0).clamp_existing_to_range(false));
                     ui.end_row();
                     // Kerning for fonts: a box that turns pair kerning on from a size up (Word's default is off).
                     ui.label(tl!("Kerning for fonts:"));
@@ -1568,7 +1570,15 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                         if ui.checkbox(&mut on, "").changed() {
                             *kern = if on { 1.0 } else { 0.0 };
                         }
-                        ui.add_enabled(on, egui::DragValue::new(kern).speed(0.5).range(0.5..=1638.0).suffix(format!(" {}", tl!("points and above"))));
+                        // Off is 0, below the range: clamping it would turn kerning on.
+                        ui.add_enabled(
+                            on,
+                            egui::DragValue::new(kern)
+                                .speed(0.5)
+                                .range(0.5..=1638.0)
+                                .clamp_existing_to_range(false)
+                                .suffix(format!(" {}", tl!("points and above"))),
+                        );
                     });
                     ui.end_row();
                     ui.label(tl!("Ligatures:"));
@@ -3531,6 +3541,29 @@ mod tests {
         // Reopening shows what was set.
         let Some(Dialog::Font { kern, ligatures, .. }) = Dialog::open("font", &mut app) else { panic!("no font dialog") };
         assert_eq!((kern, ligatures.as_str()), (12.0, "standardContextual"));
+    }
+
+    /// Showing the Advanced page left its values alone: egui clamps a box's existing value into its
+    /// range, so "off" (0, below the 0.5 pt minimum) turned kerning on and 25 pt spacing became 20,
+    /// and OK then wrote them to text that never had them.
+    #[test]
+    fn showing_the_font_advanced_page_changes_nothing() {
+        let mut app = app_with("Example");
+        let _ = app.run("select.all", json!({}));
+        let Some(mut d) = Dialog::open("font", &mut app) else { panic!("no font dialog") };
+        if let Dialog::Font { tab, spacing, .. } = &mut d {
+            *tab = 1;
+            *spacing = 25.0;
+        }
+        let ctx = egui::Context::default();
+        for _ in 0..2 {
+            ctx.run_ui(Default::default(), |ui| {
+                body(&mut app, ui, &mut d);
+            })
+            .drop_without_applying_deltas();
+        }
+        let Dialog::Font { kern, spacing, .. } = &d else { panic!("not the font dialog") };
+        assert_eq!((*kern, *spacing), (0.0, 25.0));
     }
 
     /// A dialog was pinned by its anchor, so dragging its title bar did nothing (#732).
