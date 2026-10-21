@@ -4,12 +4,19 @@
 
 ## สถานะล่าสุด
 
-- **ออกเวอร์ชัน 1.1.0** (2026-10-21)
-  - ตั้งเลขด้วย `cargo xtask version set 1.1.0` แล้วย้าย `[Unreleased]` ไปเป็น `## [1.1.0] - 2026-10-21` พร้อมลิงก์ท้ายไฟล์ (GitHub ไม่มี tag `v1.0.0` ลิงก์ `[1.1.0]` จึงชี้ไปหน้า Release)
-  - push tag `v1.1.0` แล้ว workflow `windows-x64-installer.yml` จะ build MSI และ zip และสร้าง GitHub Release `Doc4Me v1.1.0` โดยใช้เนื้อหาหัวข้อ `[1.1.0]` เป็นบันทึกประจำรุ่น
-  - ถ้า Release ยังไม่ขึ้น ให้ดูผลของ run ที่ tag `v1.1.0` ในแท็บ Actions
-- **งานถัดไป: ภาพหน้าจอสำหรับ README** (ผู้ใช้สั่งไว้ให้ทำหลังออกเวอร์ชัน)
-  - ตอนนี้ยังไม่มี `README.md` ที่ราก repo
+- **ออกเวอร์ชัน 1.1.0: รอ push tag** (2026-10-21)
+  - คอมมิต `Release 1.1.0` (260459d) และคอมมิต README อยู่บน `main` แล้ว
+  - push tag จาก session นี้ไม่ได้ เพราะ git proxy ตอบ `HTTP 403` เฉพาะการ push tag (push สาขา `main` ได้ปกติ) และเครื่องมือ GitHub ที่มีสร้าง tag หรือ Release ไม่ได้
+  - ให้เจ้าของ repo tag คอมมิตล่าสุดบน `main` ที่มี README:
+    `git fetch origin && git tag -a v1.1.0 origin/main -m "Doc4Me 1.1.0" && git push origin v1.1.0`
+  - อย่าสร้าง Release ผ่านหน้าเว็บ GitHub เอง เพราะ job `release` ของ workflow จะรัน `gh release create v1.1.0` แล้วล้มถ้ามี Release นั้นอยู่แล้ว
+  - หลัง push tag workflow `windows-x64-installer.yml` จะ build MSI และ zip และสร้าง Release `Doc4Me v1.1.0` โดยใช้หัวข้อ `[1.1.0]` ใน CHANGELOG เป็นบันทึกประจำรุ่น
+  - GitHub ยังไม่มี tag `v1.0.0` เลย (1.0.0 build ผ่าน Actions บน `main` เท่านั้น) ลิงก์ `[1.1.0]` ท้าย CHANGELOG จึงชี้ไปหน้า Release
+- **README และภาพหน้าจอ**: ทำแล้ว อยู่ในหัวข้อ `[1.1.0]`
+  - `README.md` ที่ราก repo กับภาพ `docs/images/hero.png`, `thai.png`, `dark.png` ที่ถ่ายจาก 1.1.0
+  - ภาพอื่นใน `docs/images` (backstage, design, layout, references, review) ยังเป็นของ 1.0.0
+  - สคริปต์ถ่ายภาพ (`ui_shot`) ไม่ได้เก็บใน repo วิธีถ่ายดูหัวข้อ "ถ่ายภาพหน้าจอ" ด้านล่าง
+- **สิ่งที่สังเกตเห็นแต่ยังไม่แก้**: ในธีมมืด แถบของตัวเลื่อนซูมที่มุมขวาล่างมองไม่เห็น เห็นแค่ปุ่มเลื่อน
 
 ## สิ่งที่อยู่ใน 1.1.0
 
@@ -45,6 +52,13 @@
   - เช่น `ROADMAP.md` เคยเปลี่ยนไป 439 บรรทัด
   - ถ้าจะแก้ไฟล์ที่มีตาราง ให้แก้ผ่านสคริปต์หรือ `sed` แล้วตรวจ `git diff --stat` ทุกครั้ง
 - hook ห้ามรัน Python แบบ inline ใน Bash ให้เขียนสคริปต์เป็นไฟล์ก่อนแล้วค่อยรัน
+
+## ถ่ายภาพหน้าจอ
+
+- `cargo build -p doc4me-ui-egui --example ui_shot` แล้วรัน `target/debug/examples/ui_shot script.jsonl` (รูปแบบสคริปต์ดูหัวไฟล์ `crates/ui-egui/examples/ui_shot.rs`)
+- container ไม่มี GPU ต้องติดตั้ง Vulkan แบบซอฟต์แวร์ก่อน: `apt-get update && apt-get install -y mesa-vulkan-drivers`
+  - ถ้าไม่ติดตั้งจะล้มด้วย `No adapter found`
+- คำสั่งที่ใช้สร้างภาพ `thai.png`: `ui.language` (`th`), `review.language` (`th-TH`, `default: true`), `styles.apply`, `text.insert` (`raw: true`), `text.newParagraph`, `view.zoomOut` และ `ui.key` Home พร้อม `cmd: true` เพื่อกลับไปต้นเอกสาร
 
 ## วิธีตรวจก่อน commit (ตามกฎใน CLAUDE.md)
 

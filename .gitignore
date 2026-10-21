@@ -12,3 +12,8 @@ plan/
 # simple-workflow plugin artifacts (local-only; delete entries to share via git)
 .simple-workflow/
 .simple-workflow
+
+# Other plugin logs (local-only)
+.anchor/
+.harnesskit/
+.viberevert/
