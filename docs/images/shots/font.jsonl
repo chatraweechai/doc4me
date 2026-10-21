@@ -1,0 +1,8 @@
+{"method": "select.text", "params": {"text": "Painters"}}
+{"method": "format.set", "params": {"props": {"kern": 12, "ligatures": "standardContextual"}}}
+{"method": "ui.dialog", "params": {"name": "font"}}
+{"steps": 4}
+{"method": "ui.click", "params": {"x": 630, "y": 257}}
+{"method": "ui.move", "params": {"x": 2000, "y": 2000}}
+{"steps": 10}
+{"shot": "docs/images/font.png"}
