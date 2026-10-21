@@ -11,8 +11,17 @@
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-21
+
 ### เปลี่ยนแปลง
 
+- **ออกเวอร์ชัน 1.1.0** (`Cargo.toml` `[workspace.package] version`, `Cargo.lock`, `CHANGELOG.md`, `ROADMAP.md`, `docs/localization-th.md`)
+  - เหตุผล: รวมงานภาษาไทยและความเที่ยงตรงแบบ Word หลัง 1.0.0 ไว้ในเวอร์ชันที่ติดตั้งได้ ได้แก่ UI ภาษาไทย ตัวตรวจตัวสะกดไทย เลขลำดับไทย ระยะบรรทัดแบบ Word บน Windows TH Sarabun ขนาดเท่าต้นฉบับ และ kerning/ligature ตามค่าในเอกสาร
+  - ตั้งเลขด้วย `cargo xtask version set 1.1.0` ซึ่งเปลี่ยน `Cargo.lock` เฉพาะแพ็กเกจใน workspace ไม่ได้อัปเกรด dependency
+  - ผู้ใช้: installer MSI ใช้ `UpgradeCode` เดิม จึงติดตั้งทับ Doc4Me 1.0.0 ได้ ไฟล์ .docx เดิมเปิดได้เหมือนเดิม แต่เอกสารที่ใช้ Sarabun จะแบ่งหน้าตามระยะบรรทัดแบบ Word บน Windows (ดูรายการถัดไป)
+  - `ROADMAP.md`: แก้แถว Releases และย้ายแถว Progress log วันที่ 2026-10-11 สองแถวที่อยู่ระหว่างหัวตารางกับบรรทัด `|---|---|` ลงไปใต้หัวตาราง เพราะเดิมตารางนี้แสดงผลไม่ได้
+  - ข้อจำกัด: GitHub ยังไม่มี tag `v1.0.0` (1.0.0 build ผ่าน Actions แต่ไม่ได้ tag) ลิงก์ `[1.1.0]` ท้ายไฟล์จึงชี้ไปหน้า Release แทนหน้าเปรียบเทียบ ส่วนลิงก์ `[1.0.0]` เดิมเปิดไม่ได้และคงไว้ตามกฎไม่แก้ประวัติของเวอร์ชันที่ออกไปแล้ว
+  - ตรวจสอบ: workflow `windows-x64-installer.yml` บน `main` ที่คอมมิต 307a25b build MSI และ zip สำเร็จ; หลังตั้งเลข `cargo xtask version` แสดง 1.1.0
 - **ระยะบรรทัดแบบ Word บน Windows** (`crates/fonts/src/word.rs` `line_metrics`)
   - ระยะบรรทัดแบบ Single ใช้ค่าจาก OS/2 `usWinAscent` + `usWinDescent` บวก external leading (ส่วนของ line gap ใน hhea ที่ค่า win ยังไม่ครอบคลุม) ไว้เหนือ ascent ซึ่งเป็นวิธีที่ Word บน Windows วัด (GDI)
   - แต่ก่อนใช้ค่า hhea แบบ Word บน Mac ทำให้ Sarabun มีระยะบรรทัด 1.30 em แต่ Word บน Windows ใช้ 1.853 em เอกสารเดียวกันจึงยาวไม่เท่ากัน
@@ -362,5 +371,6 @@ Doc4Me รุ่นแรก พัฒนาต่อจาก WordCraft 0.6.0 �
   - ตัวตรวจตัวสะกดภาษาไทย
   - เลขลำดับแบบคำอ่านไทย (`thaiCounting`)
 
-[Unreleased]: https://github.com/chatraweechai/doc4me/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/chatraweechai/doc4me/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/chatraweechai/doc4me/releases/tag/v1.1.0
 [1.0.0]: https://github.com/chatraweechai/doc4me/releases/tag/v1.0.0

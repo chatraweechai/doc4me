@@ -991,7 +991,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "arboard",
  "dispatch2",
@@ -1019,7 +1019,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-cli"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-doc",
  "doc4me-engine",
@@ -1031,11 +1031,11 @@ dependencies = [
 
 [[package]]
 name = "doc4me-control-key"
-version = "1.0.0"
+version = "1.1.0"
 
 [[package]]
 name = "doc4me-doc"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-geom",
  "icu_segmenter",
@@ -1048,7 +1048,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-docbin"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "cfb",
  "doc4me-doc",
@@ -1063,7 +1063,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-docx"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "aes",
  "base64",
@@ -1085,7 +1085,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-engine"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-doc",
  "doc4me-docbin",
@@ -1111,7 +1111,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-fonts"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "harfrust 0.13.3",
  "kurbo",
@@ -1124,7 +1124,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-formats"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-doc",
  "doc4me-geom",
@@ -1137,14 +1137,14 @@ dependencies = [
 
 [[package]]
 name = "doc4me-geom"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "serde",
 ]
 
 [[package]]
 name = "doc4me-layout"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-doc",
  "doc4me-fonts",
@@ -1164,7 +1164,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-mcp"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-control-key",
  "doc4me-doc",
@@ -1176,7 +1176,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-metafile"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "kurbo",
  "thiserror 2.0.21",
@@ -1184,7 +1184,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-pdf"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-doc",
  "doc4me-fonts",
@@ -1204,7 +1204,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-proof"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "icu_segmenter",
  "log",
@@ -1214,7 +1214,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-render"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-doc",
  "doc4me-fonts",
@@ -1228,7 +1228,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-ui-egui"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-doc",
  "doc4me-engine",
@@ -1252,7 +1252,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-web"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-doc",
  "doc4me-engine",
@@ -1271,7 +1271,7 @@ dependencies = [
 
 [[package]]
 name = "doc4me-zotero"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "doc4me-doc",
  "doc4me-docx",
@@ -5439,7 +5439,7 @@ checksum = "9440ea3e5aeabb0ac63af70daf835274065238cdd0cec83418f417eae38bacee"
 
 [[package]]
 name = "xtask"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "serde_json",
 ]

@@ -2,7 +2,7 @@
 
 **Stage: alpha** · next: beta, ~15 points (60% → 75% ready for real work) and ~150–230 h away
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-19 · **Change:** trivial (Thai interface catalog; previously trivial: Thai proofing, Thai counting, TH Sarabun New/PSK at their own size, Word for Windows line spacing; previously trivial: Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-21 · **Change:** trivial (Doc4Me 1.1.0 release; previously trivial: Thai interface catalog; previously trivial: Thai proofing, Thai counting, TH Sarabun New/PSK at their own size, Word for Windows line spacing; previously trivial: Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
 
 Doc4Me aims for complete parity with Microsoft Word, then goes further on speed, openness and
 agent control. This page is the summary; the assessment is
@@ -22,7 +22,7 @@ agent control. This page is the summary; the assessment is
 | Remaining to **beta** | **~150–230 h** of Opus 5.5 agent wall-clock (gaps #1–#7) | estimated |
 | Remaining to **full parity** with Word desktop | **~750–1,250 h** (70–80% parallelizable) | estimated |
 | Commands / tests / code | 433 commands · 855 tests + 10 property blocks · ~88,700 lines of Rust | measured (source) |
-| Releases | Doc4Me v1.0.0 (2026-10-14): Windows MSI and portable zip, x64, unsigned, built by GitHub Actions (WordCraft, upstream, last shipped v0.4.0 on every platform) | measured |
+| Releases | Doc4Me v1.1.0 (2026-10-21, GitHub Release; v1.0.0 of 2026-10-15 was built by Actions but never tagged): Windows MSI and portable zip, x64, unsigned, built by GitHub Actions (WordCraft, upstream, last shipped v0.4.0 on every platform) | measured |
 
 Hours are calibrated from this repo's PRs (equations #191: ~9.7k lines in ~5 h; `.doc` reader
 #145: ~4.5k lines in ~10 h; layout fidelity PRs run 5–10× slower per line). The earlier "≈120–150 h
@@ -133,13 +133,14 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 ## Progress log
 
 | Date | What landed |
-| 2026-10-11 | Hide White Space (#645): `view.hideWhiteSpace` (View › Show checkbox, or double-click the gap between pages) collapses margins, headers and footers between pages to a thin line in Print Layout; screen only, page count unchanged |
-| 2026-10-11 | Fonts: Palatino Linotype and Book Antiqua fall back to Palatino (macOS) or TeX Gyre Pagella / P052 / URW Palladio (Linux) before generic serif (#670) |
 |---|---|
+| 2026-10-21 | Doc4Me 1.1.0: the Thai and Word-fidelity work since 1.0.0 as a Windows x64 MSI and portable zip (installs over 1.0.0); reading-mode and status strings filled in the ru/hu/tr/th/it catalogs (th: 2,452 entries); equation normal text (`m:nor`) in TH Sarabun sized like the original, with a test |
 | 2026-10-19 | Thai interface (`th`, 2,433 entries, complete); Thai misspelling list 105 pairs; review fixes: Arabic ligatures kept, substituted fonts keep the requested font's line spacing (Cambria, Courier New, Thai fonts drawn with Sarabun), Thai numbering switches a decimal list, Thai/Latin words spelled apart |
 | 2026-10-16 | Thai and Word fidelity: single line spacing from Word for Windows' font metrics (Sarabun 1.853 em, as Word for Windows paginates it); kerning only with `w:kern` and ligatures only with `w14:ligatures` (read and saved), as Word does; TH Sarabun New / PSK / IT๙ drawn with Sarabun at their own letter height, advance widths, kerning and line spacing when not installed; Thai counting list numbers (หนึ่ง … สิบเอ็ด … หนึ่งร้อยเอ็ด) and Thai list kinds in the Numbering menu; Thai proofing (typing-order mistakes, common misspellings with Royal Society spellings) |
 | 2026-10-15 | Doc4Me 1.0.0 review fixes: Thai digits, ฿ and Thai/Khmer punctuation never start a line; Thai letters number ก ข ค ง (no ฆ); Thai Distributed lines end at the margin when they wrap after a space; built-in styles no longer pin complex-script sizes (a 36 pt run shows its Thai at 36 pt) and .docx export spells them out for Word; interface text boxes keep raised Thai tone marks; theme fonts no longer give body styles the heading face; the Layout tab no longer trips an egui assertion in debug builds; Navigation headings left-aligned again; installers carry NOTICE, the font licences (OFL) and the Unicode licence; .docx canvases saved by WordCraft keep their turn |
 | 2026-10-14 | Doc4Me 1.0.0: renamed from WordCraft (crates, binaries, installer with its own MSI UpgradeCode, app id `io.github.chatraweechai.doc4me`; ArtCraft brand files removed as the brand terms require); Sarabun (OFL) bundled as the default document and interface font; Thai, Lao and Khmer wrap between dictionary words (ICU4X) and double-click, Ctrl+arrows and the word count use them; Thai tone marks stay inside words; Thai list numbers (๑, ก); new documents carry complex-script font/size/bold for Word; Windows x64 installer built by GitHub Actions |
+| 2026-10-11 | Hide White Space (#645): `view.hideWhiteSpace` (View › Show checkbox, or double-click the gap between pages) collapses margins, headers and footers between pages to a thin line in Print Layout; screen only, page count unchanged |
+| 2026-10-11 | Fonts: Palatino Linotype and Book Antiqua fall back to Palatino (macOS) or TeX Gyre Pagella / P052 / URW Palladio (Linux) before generic serif (#670) |
 | 2026-10-11 | Turkish (`tr`) interface completed (#774): 2,325 entries, every key of the Russian catalog (equation gallery, built-in style names, watermarks, paper sizes, preview tiles); the interface audit checks Turkish too |
 | 2026-10-12 | Navigation headings truncate within the resizable pane, with an ellipsis for long titles and full text on hover (#759) |
 | 2026-10-11 | Reading Mode: existing View ribbon button now opens a read-only, viewport-column layout with animated horizontal paging, transient display controls, heading navigation (Navigation pane) and resize anchoring; document layout and export unchanged |
@@ -224,6 +225,7 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-21 | trivial | Progress log: Doc4Me 1.1.0; Releases row; the progress-log table's two 2026-10-11 rows moved below its delimiter row, so the table renders |
 | 2026-10-19 | trivial | Progress log and Languages: Thai interface catalog |
 | 2026-10-16 | trivial | Progress log: Thai proofing, Thai counting, TH Sarabun metrics, Word for Windows line spacing; Languages proofing line |
 | 2026-10-14 | trivial | Progress log: Doc4Me 1.0.0 (rename, Sarabun, Thai word breaks); Releases row |

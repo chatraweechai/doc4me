@@ -1,6 +1,6 @@
 # Thai interface
 
-> **Last reviewed:** 2026-10-19 · **Last updated:** 2026-10-19 · **Change:** major (first version: Thai interface catalog, style guide and glossary) · **Target:** Doc4Me 1.0.0
+> **Last reviewed:** 2026-10-19 · **Last updated:** 2026-10-21 · **Change:** trivial (catalog count 2,452 and target Doc4Me 1.1.0; previously major: first version, Thai interface catalog, style guide and glossary) · **Target:** Doc4Me 1.1.0
 
 Choose **File › Options › Interface language › ไทย**, or follow a Thai system display language
 (`th`, `th-TH`, `th_TH.UTF-8`). The catalog code is `th`; `ui.language` with `{"value":"th"}`
@@ -1005,4 +1005,5 @@ URGENT) stay in English because the menu inserts the English label text.
 
 | Date       | Change | Summary                                               |
 | ---------- | ------ | ----------------------------------------------------- |
+| 2026-10-21 | trivial | Catalog count 2,452 (reading-mode and status strings); target Doc4Me 1.1.0 |
 | 2026-10-19 | major  | First version: Thai catalog, style guide and glossary |
