@@ -22,11 +22,14 @@
     - กล่อง Columns: เดิมความกว้างคอลัมน์ที่เกินความกว้างข้อความถูกบีบและสั่ง `rebalance` ทุกเฟรม ตอนนี้ปรับเฉพาะเมื่อผู้ใช้แก้ช่อง
   - ผลต่อผู้ใช้: เปิดไฟล์ .docx เดิมที่มีค่าเกินช่วงของช่อง (ภาพใหญ่, ระยะย่อหน้าหรือระยะห่างมาก, ช่องคอลัมน์มากกว่า 12) แล้วเลือกหรือเปิดกล่องโต้ตอบ ค่าเดิมจะคงอยู่จนกว่าผู้ใช้จะแก้เอง ไม่กระทบการติดตั้งทับหรือภาษาไทย
   - ตรวจสอบ: เทสต์ใหม่ `ribbon::tests::showing_picture_size_fields_changes_nothing` วาดกลุ่ม Size ของ Picture Format สองเฟรมกับภาพ 3000×2500 pt แล้วตรวจว่าขนาดไม่เปลี่ยน และ `widgets::tests::ranged_number_fields_keep_existing_values` ไล่ซอร์สทุกไฟล์ใน `crates/ui-egui/src` ว่า `DragValue` ที่มี `.range(` ต้องมี `.clamp_existing_to_range(false)` เพื่อกันช่องใหม่ที่ลืมใส่
+    - ก่อนแก้ (เอา `.clamp_existing_to_range(false)` ของช่อง 4–2000 pt ออกชั่วคราว) เทสต์แรกล้มด้วยขนาด `(2000.0, 1666.6666)` แทน `(3000.0, 2500.0)` และเทสต์ตรวจซอร์สชี้ 3 ช่องใน `ribbon.rs` หลังแก้ผ่าน
+    - `cargo test -p doc4me-ui-egui` ผ่าน 319 รายการ (ข้าม 1 คือ audit ภาษา `#[ignore]`), `cargo clippy -p doc4me-ui-egui --all-targets -- -D warnings` และ `cargo fmt --all -- --check` ผ่าน
 - **ธีมมืด: แถบของตัวเลื่อนซูมที่มุมขวาล่างมองไม่เห็น เห็นแค่ปุ่มเลื่อน** (`crates/ui-egui/src/chrome.rs` `status_bar`)
   - สาเหตุ: egui วาดรางของ `Slider` ด้วย `widgets.inactive.bg_fill` ซึ่งธีมตั้งเป็นสีช่องป้อนข้อมูล (`input` 0x1E1E1E) แทบเท่าสีแถบสถานะ (`status_bar` 0x1F1F1F) ตรวจจากซอร์ส egui 0.36.2 `widgets/slider.rs`
   - แก้: วาดตัวเลื่อนซูมใน `ui.scope` ที่ตั้งสีรางเป็น `input_border` (มืด 0x7A7A7A, สว่าง 0x8A8A8A) ปุ่มเลื่อนตอนไม่ได้ชี้ก็ใช้สีนี้ด้วย ช่องและตัวเลื่อนอื่นไม่เปลี่ยน
   - ผลต่อผู้ใช้: ธีมสว่างรางเปลี่ยนจากสีขาวบนพื้น 0xF0F0F0 เป็นสีเทา ซึ่งใกล้ Word กว่า ไม่กระทบไฟล์ .docx
   - ตรวจสอบ: เทสต์ใหม่ `chrome::tests::zoom_slider_rail_shows_in_the_dark_theme` วาดแถบสถานะในธีมมืดแล้วหาสี่เหลี่ยมกว้างราว 110 pt สี `input_border`
+    - ก่อนแก้ล้มด้วย `no visible zoom rail: []` หลังแก้ผ่าน คอมมิตแรก `f2d21b5` มีเทสต์นี้ที่ panic ตอนทิ้ง `FullOutput` โดยไม่เรียก `drop_without_applying_deltas` แก้ในคอมมิตถัดมา
 
 ## [1.1.0] - 2026-10-21
 

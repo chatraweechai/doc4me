@@ -449,6 +449,7 @@ mod tests {
             let out = ctx.run_ui(Default::default(), |ui| status_bar(&mut app, ui));
             found.clear();
             out.shapes.iter().for_each(|s| rails(&s.shape, t.input_border, &mut found));
+            out.drop_without_applying_deltas();
         }
         assert!(found.iter().any(|r| (r.width() - 110.0).abs() < 12.0), "no visible zoom rail: {found:?}");
     }

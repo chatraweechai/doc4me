@@ -24,7 +24,8 @@
 - **ทำแล้วใน session 2026-10-21 เช้า (อยู่ใต้ `[Unreleased]`)**
   - ช่องตัวเลข `DragValue` ที่มี `range` ทั้ง 47 ช่องไม่บีบค่าเดิมของเอกสารอีก (`.clamp_existing_to_range(false)`) พร้อมเทสต์ `showing_picture_size_fields_changes_nothing` และเทสต์ตรวจซอร์ส `ranged_number_fields_keep_existing_values` ที่จะล้มถ้ามีช่องใหม่ลืมใส่
   - ธีมมืด: รางตัวเลื่อนซูมในแถบสถานะใช้สี `input_border` แล้ว (`chrome.rs`) เทสต์ `zoom_slider_rail_shows_in_the_dark_theme`
-  - ผลตรวจ: ยังรอ `cargo test -p doc4me-ui-egui`, clippy และ fmt (push ก่อนตรวจตามกฎข้อ 4 ของผู้ใช้) ถ้าบรรทัดนี้ยังอยู่ ให้รันตรวจก่อนทำอย่างอื่น
+  - ผลตรวจ: `cargo test -p doc4me-ui-egui` ผ่าน 319 รายการ, clippy `-D warnings` และ fmt ผ่าน; เทสต์ใหม่ทั้ง 3 ล้มเมื่อเอาการแก้ออกชั่วคราว (ยืนยันว่าจับบั๊กได้จริง)
+  - ยังไม่ได้รัน `cargo xtask ci` ทั้ง workspace (แก้แค่ `crates/ui-egui`) และ audit ภาษา `--include-ignored` (ไม่ได้เพิ่มข้อความ UI)
   - ยังไม่ได้ถ่ายภาพ `docs/images/dark.png` และ `dark-th.png` ใหม่ ภาพเดิมยังเป็นรางที่มองไม่เห็น
 
 ## งานถัดไป
