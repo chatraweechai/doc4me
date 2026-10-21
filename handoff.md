@@ -1,38 +1,35 @@
 # Handoff: Doc4Me 1.1.0 และงานภาษาไทย
 
-อัปเดต: 2026-10-21 · สาขา `main` · รายละเอียดทุกข้อดูใน [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.0]`
+อัปเดต: 2026-10-21 09:45 UTC · สาขา `main` · ปิดงานแล้ว เหลือแค่ push tag `v1.1.0` · รายละเอียดทุกข้อดูใน [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.0]`
 
-## เริ่ม session ใหม่: ทำตามลำดับนี้
+## สถานะ: ปิดงานบน repo นี้แล้ว (2026-10-21)
 
-1. ตรวจว่ามี tag `v1.1.0` บน GitHub แล้วหรือยัง: `git fetch origin --tags && git ls-remote --tags origin`
-2. ถ้ายังไม่มี tag ให้เจ้าของ repo push จากเครื่องของตัวเอง (session บนคลาวด์ push tag ไม่ได้ git proxy ตอบ `HTTP 403`)
-   - **ผู้ใช้สั่งเมื่อ 2026-10-21 08:00 UTC**: ยกเลิก 1.1.0 ที่ `7e26f97` แล้วออก 1.1.0 จากโค้ดล่าสุดแทน
-     - รายการที่เคยอยู่ใต้ `[Unreleased]` (ช่องตัวเลข `DragValue`, รางตัวเลื่อนซูมในธีมมืด) ย้ายเข้า `[1.1.0]` แล้ว ข้อจำกัดเรื่อง `DragValue` ใน `[1.1.0]` ลบออกเพราะแก้แล้ว
-   - คำสั่ง: tag คอมมิตล่าสุดของ `main` ที่มีข้อความ "Release 1.1.0 from the latest code"
-     `git fetch origin && git tag -a v1.1.0 origin/main -m "Doc4Me 1.1.0" && git push origin v1.1.0`
-   - ถ้ามีคอมมิตใหม่บน `main` หลังจากนั้นที่ไม่ใช่งานของ 1.1.0 ให้ tag คอมมิต "Release 1.1.0 from the latest code" แทน `origin/main`
-   - อย่าสร้าง Release ผ่านหน้าเว็บ GitHub เอง เพราะ job `release` รัน `gh release create v1.1.0` และจะล้มถ้ามี Release นั้นอยู่แล้ว
-3. ถ้ามี tag แล้ว ให้ตามดู run ของ workflow `windows-x64-installer.yml` ที่ tag จนได้ Release `Doc4Me v1.1.0` พร้อม MSI และ zip
-   - ถ้า job `release` ล้ม ให้อ่าน log ด้วยเครื่องมือ GitHub (`get_job_logs`) แล้วแก้
-4. หลังออก 1.1.0 แล้ว งานใหม่ทั้งหมดลง `## [Unreleased]` และห้ามแก้ `[1.1.0]`
+ผู้ใช้สั่งเมื่อ 2026-10-21 08:10 UTC ให้ทำงานที่ค้างให้เสร็จแล้วยุติการทำงานบน repo นี้ งานโค้ดทั้งหมดเสร็จและ push ไป `main` แล้ว เหลือแค่ขั้นที่ session บนคลาวด์ทำไม่ได้
 
-## สถานะล่าสุด
+### สิ่งเดียวที่ยังค้าง: เจ้าของ repo push tag `v1.1.0`
 
-- **ออกเวอร์ชัน 1.1.0 จากโค้ดล่าสุด: รอ push tag** (ดูข้อ 2 ข้างบน)
-  - GitHub ยังไม่มี tag `v1.0.0` เลย ลิงก์ `[1.0.0]` ท้าย CHANGELOG จึงเปิดไม่ได้และคงไว้ตามกฎไม่แก้ประวัติ
-- **ทำแล้วใน session 2026-10-21 เช้า (อยู่ใน `[1.1.0]`)**
-  - ช่องตัวเลข `DragValue` ที่มี `range` ทั้ง 47 ช่องไม่บีบค่าเดิมของเอกสารอีก (`.clamp_existing_to_range(false)`) พร้อมเทสต์ `showing_picture_size_fields_changes_nothing` และเทสต์ตรวจซอร์ส `ranged_number_fields_keep_existing_values` ที่จะล้มถ้ามีช่องใหม่ลืมใส่
-  - ธีมมืด: รางตัวเลื่อนซูมในแถบสถานะใช้สี `input_border` แล้ว (`chrome.rs`) เทสต์ `zoom_slider_rail_shows_in_the_dark_theme`
-  - ผลตรวจ: `cargo test -p doc4me-ui-egui` ผ่าน 319 รายการ, clippy `-D warnings` และ fmt ผ่าน; เทสต์ใหม่ทั้ง 3 ล้มเมื่อเอาการแก้ออกชั่วคราว
-  - ยังไม่ได้รัน `cargo xtask ci` ทั้ง workspace (แก้แค่ `crates/ui-egui`) และ audit ภาษา `--include-ignored` (ไม่ได้เพิ่มข้อความ UI)
-  - ยังไม่ได้ถ่ายภาพ `docs/images/dark.png` และ `dark-th.png` ใหม่ ภาพเดิมยังเป็นรางที่มองไม่เห็น
+- ผู้ใช้สั่ง (08:00 UTC) ให้ยกเลิก 1.1.0 ที่ `7e26f97` แล้วออก 1.1.0 จากโค้ดล่าสุด: `Cargo.toml` เป็น 1.1.0 และ CHANGELOG มี `## [1.1.0] - 2026-10-21` ครบแล้ว `[Unreleased]` ว่าง
+- session บนคลาวด์ push tag ไม่ได้ (git proxy ตอบ `HTTP 403` เฉพาะ tag) และเครื่องมือ GitHub ใน session สร้าง tag หรือ Release ไม่ได้
+- คำสั่งบนเครื่องของเจ้าของ repo (tag คอมมิตล่าสุดของ `main` ที่ผ่าน CI):
+  `git fetch origin && git tag -a v1.1.0 origin/main -m "Doc4Me 1.1.0" && git push origin v1.1.0`
+- workflow `windows-x64-installer.yml` จะ build MSI และ zip แล้วสร้าง Release `Doc4Me v1.1.0` จากหัวข้อ `[1.1.0]` เอง อย่าสร้าง Release ผ่านหน้าเว็บก่อน เพราะ `gh release create` จะล้มถ้ามีอยู่แล้ว
+- ถ้า session ใหม่เปิดมาหลังจากนั้น: ตรวจว่ามี Release แล้วและ job `release` ผ่าน ถ้าล้มให้อ่าน log ด้วย `get_job_logs`; งานใหม่ทั้งหมดลง `## [Unreleased]` และห้ามแก้ `[1.1.0]`
 
-## งานถัดไป
+### ทำแล้วใน session 2026-10-21 (ทั้งหมดอยู่ใน `[1.1.0]`)
 
-1. **ถ่ายภาพ `dark.png` / `dark-th.png` ใหม่** ให้เห็นรางตัวเลื่อนซูม (วิธีดูหัวข้อ "ถ่ายภาพหน้าจอ")
-2. **ภาพหน้าจออีก 5 ภาพของ 1.0.0** ใน `docs/images` (backstage, design, layout, references, review) README ไม่ได้ใช้ ถ้าจะใช้ต้องถ่ายใหม่ เพราะระยะบรรทัดเปลี่ยนตั้งแต่ 1.1.0
-3. **ทวนคำแปล `README.th.md`** โดยผู้ใช้หรือ agent อิสระ (ยังไม่เคยรัน)
-4. `Slider` อื่น (`read_aloud.rs`, `options.rs`, กล่อง Zoom ใน `dialogs.rs`) ใช้การบีบค่าแบบเดิมของ egui ค่าที่ใช้มาจากการตั้งค่าหรือมุมมองซึ่งอยู่ในช่วงเสมอ จึงยังไม่ได้แก้ ถ้าพบค่าที่มาจากเอกสารให้ใช้ `.clamping(egui::SliderClamping::Edits)`
+- ช่องตัวเลข `DragValue` ที่มี `range` ทั้ง 47 ช่องไม่บีบค่าเดิมของเอกสาร (`.clamp_existing_to_range(false)`) และเทสต์ตรวจซอร์ส `ranged_number_fields_keep_existing_values` กันช่องใหม่ที่ลืมใส่
+- รางตัวเลื่อนซูมในแถบสถานะ: สี `input_border` และสูง 3 pt (`chrome.rs`) เห็นได้ทั้งสองธีม ปุ่มยังเด่นกว่าราง
+- drop cap ใช้ระยะบรรทัดจริงของย่อหน้า (`layout/src/para.rs`) แทน 1.2 em ตายตัว ซึ่งทำให้ drop cap เล็กเกินไปตั้งแต่เปลี่ยนเป็นความสูงบรรทัดแบบ Word
+- ภาพตัวอย่าง style set บนแท็บ Design วาดพื้นที่ 150 pt ที่สเกล 0.38 จึงเห็นครบสามย่อหน้า
+- `README.th.md` ใช้คำตามอภิธานศัพท์และ `th.tsv` (12 จุด ตรวจด้วย agent สองชั้น)
+- ภาพหน้าจอทุกภาพใน `docs/images` ถ่ายใหม่ด้วยโค้ดล่าสุด และสคริปต์ `ui_shot` ทุกภาพเก็บไว้ที่ `docs/images/shots/`
+- ผลตรวจล่าสุด: `cargo test` ของ `doc4me-layout` (224), `doc4me-engine` (372 + 13 + 8) และ `doc4me-ui-egui` (320) ผ่าน; audit ภาษา `--include-ignored` ผ่าน 60 รายการ; clippy `-D warnings` ของ layout และ ui-egui และ `cargo fmt --all --check` ผ่าน
+  - ยังไม่ได้รัน `cargo xtask ci` ทั้ง workspace เพราะดิสก์ของ container ไม่พอ (ต้องใช้ราว 25 GB); crate อื่นไม่ได้แก้ใน session นี้
+
+### ข้อสังเกตที่ไม่ได้แก้ (ไม่ใช่บั๊กที่ยืนยันแล้ว)
+
+- `Slider` อื่น (`read_aloud.rs`, `options.rs`, กล่อง Zoom ใน `dialogs.rs`) ยังบีบค่าแบบเดิมของ egui ค่ามาจากการตั้งค่าหรือมุมมองซึ่งอยู่ในช่วงเสมอ ถ้าวันหนึ่งผูกกับค่าจากเอกสาร ให้ใช้ `.clamping(egui::SliderClamping::Edits)`
+- `backstage.png` มีคำทักทายตามเวลา ถ่ายใหม่หลังเที่ยง UTC จะได้ "Good afternoon"
 
 ## ข้อที่ผู้ใช้สั่งให้ข้าม (2026-10-21)
 
@@ -83,6 +80,7 @@
 - container ไม่มี GPU ต้องติดตั้ง Vulkan แบบซอฟต์แวร์ก่อน: `apt-get update && apt-get install -y mesa-vulkan-drivers`
   - ถ้าไม่ติดตั้งจะล้มด้วย `No adapter found`
 - กล่องฟอนต์: `ui.dialog` (`name: font`) แล้ว `ui.click` ที่แท็บขั้นสูง (อังกฤษ 630,257 pt ไทย 625,257 pt) และ `ui.move` ไปนอกหน้าต่างเพื่อไม่ให้มีตัวชี้เมาส์ในภาพ; ตั้งค่าตัวอักษรด้วย `format.set` (`{"props": {...}}`)
+- สคริปต์ของทุกภาพอยู่ที่ `docs/images/shots/<ชื่อภาพ>.jsonl` รันจากรากของ repo แล้วจะเขียนทับภาพใน `docs/images` (ถ่ายใหม่หลังเที่ยง UTC `backstage.png` จะทักทายต่างไป)
 - คำสั่งที่ใช้สร้างภาพ `thai.png`: `ui.language` (`th`), `review.language` (`th-TH`, `default: true`), `styles.apply`, `text.insert` (`raw: true`), `text.newParagraph`, `view.zoomOut` และ `ui.key` Home พร้อม `cmd: true` เพื่อกลับไปต้นเอกสาร
 - ธีมมืด: `ui.theme` (`value: dark`)
 
