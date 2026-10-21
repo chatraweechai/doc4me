@@ -2129,6 +2129,24 @@ mod tests {
         assert!(h(&big) > h(&small) * 1.4, "{} vs {}", h(&big), h(&small));
     }
 
+    /// Normal text (`m:nor`) in TH Sarabun New, drawn with Sarabun, sizes Thai and Latin letters
+    /// apart to the original's heights, as in a paragraph; any other font is one run at its size.
+    #[test]
+    fn normal_text_in_th_sarabun_is_sized_like_the_original() {
+        use doc4me_doc::math::*;
+        let sizes = |font: &str| {
+            let run = MRun { text: "Aก".into(), nor: true, size: Some(20.0), font: Some(font.into()), ..Default::default() };
+            let m =
+                layout_equation(&Math { nodes: vec![MNode::Run(run)], ..Default::default() }, "", &rc(), false, 400.0, &MathProps::default(), &mut 0);
+            m.items.iter().filter_map(|i| if let MItem::Glyphs { size, .. } = i { Some(*size) } else { None }).collect::<Vec<f32>>()
+        };
+        let fit = doc4me_fonts::word::metric_fit("TH Sarabun New", false, false).expect("a fit");
+        let th = sizes("TH Sarabun New");
+        assert_eq!(th.len(), 2, "a Latin run and a Thai run: {th:?}");
+        assert!((th[0] - 20.0 * fit.scale(false)).abs() < 1e-3 && (th[1] - 20.0 * fit.scale(true)).abs() < 1e-3, "{th:?}");
+        assert!(sizes("Sarabun").iter().all(|s| (*s - 20.0).abs() < 1e-3));
+    }
+
     #[test]
     fn every_structure_lays_out() {
         use doc4me_doc::math::*;

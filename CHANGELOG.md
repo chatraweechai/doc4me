@@ -25,6 +25,8 @@
   - ใช้ ligature แบบ standard, contextual, historical และ discretional เฉพาะเมื่อ `w14:ligatures` สั่ง
   - ทั้งสองอย่างเป็นค่าเริ่มต้นของ Word (ปิด) แต่ก่อน Doc4Me เปิดไว้เสมอ ความกว้างบรรทัดจึงต่างจาก Word เล็กน้อย
   - เพิ่ม `CharProps::ligatures` / `ResolvedChar::{kern, ligatures}` และอ่าน/บันทึก `w14:ligatures` ใน .docx ได้ครบ ค่าที่ไม่รู้จักจะถูกทิ้งแทนการเขียนกลับ
+- **ปรับรายการข้อจำกัดที่ทราบของ `[Unreleased]`** (`CHANGELOG.md`)
+  - เอาออก 3 รายการที่แก้แล้วในรอบเดียวกัน: kerning ใน ODT/RTF/.doc, ช่อง Kerning/Ligatures ในกล่อง Font และข้อความ TH Sarabun ในแผนภูมิ SmartArt และ m:nor (ดูหมวด เพิ่ม) เพื่อไม่ให้บันทึกประจำรุ่นขัดกันเอง ไม่มีผลต่อโปรแกรม
 
 ### เพิ่ม
 
@@ -43,6 +45,7 @@
   - ผู้ใช้: แยกช่วงอักษรไทยกับละติน ย่อแต่ละช่วงด้วยสเกลของต้นฉบับ และในแผนภูมิวางแต่ละตัวบนความกว้างของ TH Sarabun เดิม ฟอนต์อื่นไม่เปลี่ยน ไฟล์ .docx ไม่เปลี่ยน (เป็นการวาดเท่านั้น)
   - `text_glyphs` คืน `Vec<Draw>` แทน `Option<Draw>` (หนึ่งรายการต่อช่วง)
   - ตรวจสอบ: เทสต์ `drawing_text_in_th_sarabun_is_sized_like_the_original`; `cargo test -p doc4me-layout` 222 ผ่าน; clippy `-D warnings` และ fmt ผ่าน เฉพาะ crate layout ส่วนสมการ m:nor ยังไม่มีเทสต์เฉพาะ
+  - ต่อมาเพิ่มเทสต์ `normal_text_in_th_sarabun_is_sized_like_the_original` (`crates/layout/src/math.rs`) ยืนยันว่า m:nor ใน TH Sarabun New แยกเป็นช่วงละตินกับไทยที่ขนาด 20 × `scale(false)` และ 20 × `scale(true)` ส่วน Sarabun คงขนาด 20 pt; `cargo test -p doc4me-layout normal_text_in_th_sarabun` ผ่าน
 - **กล่อง Font: ช่อง "Kerning for fonts" และ "Ligatures"** (`crates/ui-egui/src/dialogs.rs`, `crates/engine/src/cmd/format.rs`, `th.tsv`)
   - เหตุผล: เดิมตั้ง `w:kern` และ `w14:ligatures` ได้เฉพาะผ่านคำสั่ง `format.set`
   - ผู้ใช้: ติ๊กเปิด kerning แล้วระบุขนาดขั้นต่ำ และเลือก ligature ได้ 5 แบบ ส่งเฉพาะค่าที่ผู้ใช้เปลี่ยน จึงไม่กระทบไฟล์ .docx เดิม
@@ -193,9 +196,6 @@
 - ligature เสริมของ TH Sarabun (fi, ฤๅ) ไม่ได้จำลอง
 - Word บน Windows อาจตัดคำไทยต่างจากพจนานุกรม ICU4X ในบางคำ จึงยังมีโอกาสที่บรรทัดตัดต่างกัน
 - ตัวตรวจภาษาไทยยังไม่ตรวจไวยากรณ์
-- การอ่าน ODT, RTF และ .doc ยังไม่ map ค่า kerning (`style:letter-kerning`, `\kerningN`, sprmCHpsKern) เมื่อค่าเริ่มต้นเปลี่ยนเป็นไม่ kern แบบ Word ข้อความจากไฟล์เหล่านี้จึงไม่ถูก kern และอาจตัดบรรทัดต่างจากโปรแกรมต้นทางเล็กน้อย
-- กล่อง Font (แท็บ Advanced) ยังไม่มีตัวเลือก Kerning for fonts และ Ligatures ตั้งได้ผ่าน `format.set` (`kern`, `ligatures`) และค่าในไฟล์ .docx
-- ข้อความในแผนภูมิ, SmartArt และ m:nor ในสมการที่ใช้ TH Sarabun New/PSK ยังวาดด้วย Sarabun ขนาดเต็ม ยังไม่ย่อแบบเนื้อความ ขนาดกล่องของวัตถุไม่เปลี่ยน จึงไม่กระทบการแบ่งหน้า
 
 ## [1.0.0] - 2026-10-15
 
