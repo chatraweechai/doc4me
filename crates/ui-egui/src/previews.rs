@@ -270,16 +270,9 @@ pub fn preview_tint(t: &Tokens, dark_page: bool) -> egui::Color32 {
     if t.dark && !dark_page { egui::Color32::from_gray(0xC8) } else { egui::Color32::WHITE }
 }
 
-fn snippet_blocks(
-    base: &Document,
-    blocks: Vec<Block>,
-    w: f32,
-    h: f32,
-    ppp: f32,
-    margin: f32,
-    paper: Option<doc4me_doc::Rgb>,
-    dark: bool,
-) -> Option<egui::ColorImage> {
+/// A tall page `w` points wide (plus `margin` at the sides and top) holding `blocks` in `base`'s
+/// styles and numbering, for [`snippet_blocks`] to draw.
+fn snippet_doc(base: &Document, blocks: Vec<Block>, w: f32, margin: f32) -> Document {
     let mut d = Document::new();
     d.styles = base.styles.clone();
     d.numbering = base.numbering.clone();
@@ -290,6 +283,20 @@ fn snippet_blocks(
     d.last_section.margin_right = margin;
     d.last_section.margin_top = margin;
     d.last_section.margin_bottom = 0.0;
+    d
+}
+
+fn snippet_blocks(
+    base: &Document,
+    blocks: Vec<Block>,
+    w: f32,
+    h: f32,
+    ppp: f32,
+    margin: f32,
+    paper: Option<doc4me_doc::Rgb>,
+    dark: bool,
+) -> Option<egui::ColorImage> {
+    let d = snippet_doc(base, blocks, w, margin);
     let l = doc4me_layout::layout(&d, &mut doc4me_layout::LayoutCache::new(), &Default::default());
     let page = l.pages.first()?;
     let mut opts = crate::canvas::screen_render_options();
@@ -441,6 +448,23 @@ const STYLE_SETS: [&str; 7] = ["default", "basic", "lines", "shaded", "casual", 
 const STYLE_SET_W: f32 = 56.0;
 /// Width the whole gallery takes with the ribbon's 1 pt item spacing.
 pub const STYLE_SET_GALLERY_W: f32 = STYLE_SETS.len() as f32 * (STYLE_SET_W + 1.0) - 1.0;
+/// Page area a style set thumbnail draws (width, height without the 6 pt margins), points, and
+/// the scale it is drawn at. Tall enough for the title, heading and first body line of every set
+/// at Word's line heights, which made them taller in 1.1.0.
+const STYLE_SET_PAGE: (f32, f32) = (120.0, 150.0);
+const STYLE_SET_SCALE: f32 = 0.38;
+
+/// A blank document in style set `name` and the paragraphs its thumbnail shows.
+fn style_set_sample(name: &str) -> (Document, Vec<Block>) {
+    let mut s = doc4me_engine::Session::new(Document::new());
+    let _ = s.run("design.styleSet", &json!({"name": name}));
+    let blocks = vec![
+        Block::Para(Paragraph::with_text(crate::i18n::tc("preview", "Title"), CharProps::default()).styled("Title")),
+        Block::Para(Paragraph::with_text(tl!("Heading 1"), CharProps::default()).styled("Heading1")),
+        Block::Para(Paragraph::with_text(tl!("Body text in a short paragraph to show spacing."), CharProps::default())),
+    ];
+    (s.doc, blocks)
+}
 
 /// Design tab: style set tiles.
 pub fn style_set_gallery(app: &mut WordApp, ui: &mut Ui) {
@@ -453,14 +477,9 @@ pub fn style_set_gallery(app: &mut WordApp, ui: &mut Ui) {
         }
         let key = format!("set:{name}:{ppp}:{}", crate::i18n::current().code());
         let tex = app.previews.get_or(ui.ctx(), &key, || {
-            let mut s = doc4me_engine::Session::new(Document::new());
-            let _ = s.run("design.styleSet", &json!({"name": name}));
-            let blocks = vec![
-                Block::Para(Paragraph::with_text(crate::i18n::tc("preview", "Title"), CharProps::default()).styled("Title")),
-                Block::Para(Paragraph::with_text(tl!("Heading 1"), CharProps::default()).styled("Heading1")),
-                Block::Para(Paragraph::with_text(tl!("Body text in a short paragraph to show spacing."), CharProps::default())),
-            ];
-            snippet_blocks(&s.doc, blocks, 120.0, 110.0, ppp * 0.42, 6.0, None, false)
+            let (doc, blocks) = style_set_sample(name);
+            let (w, h) = STYLE_SET_PAGE;
+            snippet_blocks(&doc, blocks, w, h, ppp * STYLE_SET_SCALE, 6.0, None, false)
         });
         if let Some(h) = tex {
             let sz = h.size_vec2() / ppp;
@@ -600,5 +619,36 @@ mod tests {
             }
             assert_eq!(images, 1, "{theme:?}: the entry draws its rendered name");
         }
+    }
+
+    /// Every style set thumbnail shows its title, heading and first body line: Word's taller line
+    /// heights (1.1.0) pushed the body text below the drawn area and Heading 1 onto its edge.
+    #[test]
+    fn style_set_thumbnails_show_all_three_paragraphs() {
+        let (w, h) = STYLE_SET_PAGE;
+        let margin = 6.0;
+        // The tile shows at most 60 pt of the drawing.
+        assert!((h + margin) * STYLE_SET_SCALE <= 60.0, "drawn {} pt tall", (h + margin) * STYLE_SET_SCALE);
+        let mut short = Vec::new();
+        for name in STYLE_SETS {
+            let (base, blocks) = style_set_sample(name);
+            let d = snippet_doc(&base, blocks, w, margin);
+            let l = doc4me_layout::layout(&d, &mut doc4me_layout::LayoutCache::new(), &Default::default());
+            let mut paras = 0;
+            let mut bottom = 0.0f32;
+            for item in &l.pages[0].items {
+                if let doc4me_layout::Placed::Lines { para, l0, y, .. } = item
+                    && let (Some(first), Some(line)) = (para.lines.get(*l0), para.lines.get(*l0))
+                {
+                    paras += 1;
+                    bottom = bottom.max(y + line.top + line.height - first.top);
+                }
+            }
+            assert_eq!(paras, 3, "{name}");
+            if bottom > h + margin {
+                short.push(format!("{name}: {bottom} pt"));
+            }
+        }
+        assert!(short.is_empty(), "first body line ends below the drawn {} pt: {short:?}", h + margin);
     }
 }

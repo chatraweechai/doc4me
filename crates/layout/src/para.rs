@@ -1233,7 +1233,19 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
             && let Some(c) = drop_first
             && let Some(first) = text.get(..c.len_utf8())
         {
-            let line_h = (rc.size * 1.2).max(1.0);
+            // The lines it spans are as far apart as this text's lines: the font's line height under
+            // the paragraph's spacing, on the line grid when it snaps (as `break_lines` does).
+            let si = b.style(&rc, None, false);
+            let natural = b.styles.get(si as usize).map_or(rc.size * 1.2, |st| st.ascent + st.descent);
+            let grid = Some(&env.grid).filter(|g| g.line.is_some() && rp.snap_to_grid);
+            let line_h = match (rp.line_spacing, grid) {
+                (LineSpacing::Multiple(m), Some(g)) => g.snap_height(natural) * m,
+                (LineSpacing::AtLeast(v), Some(g)) => g.snap_height(natural).max(v),
+                (LineSpacing::Multiple(m), None) => natural * m,
+                (LineSpacing::AtLeast(v), None) => natural.max(v),
+                (LineSpacing::Exactly(v), _) => v,
+            }
+            .max(1.0);
             let lines = rp.drop_cap as f32;
             // Capital height is ~0.7 em: the letter's cap spans from line 1's caps to line N's baseline.
             let mut big = (*rc).clone();

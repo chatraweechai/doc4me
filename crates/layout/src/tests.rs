@@ -1474,6 +1474,38 @@ fn drop_cap_indents_its_lines() {
     assert!(g < -20.0, "dy {g}");
 }
 
+/// The capital reaches from the first line's caps to the last spanned line's baseline at the
+/// paragraph's real line pitch. It used to assume lines 1.2 em apart, so once lines took Word's
+/// height for the font (Sarabun 1.853 em) a three-line cap reached only two lines down.
+#[test]
+fn drop_cap_spans_its_lines_at_their_pitch() {
+    use doc4me_doc::props::LineSpacing;
+    let cases = [
+        ("Sarabun", LineSpacing::Multiple(1.0)),
+        ("Sarabun", LineSpacing::Multiple(1.5)),
+        ("Sarabun", LineSpacing::AtLeast(40.0)),
+        ("Liberation Serif", LineSpacing::Exactly(30.0)),
+    ];
+    for (font, spacing) in cases {
+        let cp = doc4me_doc::CharProps { font: Some(font.into()), size: Some(14.0), ..Default::default() };
+        let mut p = doc4me_doc::Paragraph::with_text(&"Every line of this paragraph wraps around a large first letter. ".repeat(6), cp);
+        p.props.drop_cap = Some(3);
+        p.props.line_spacing = Some(spacing);
+        let mut d = Document::from_text("x");
+        d.body = vec![doc4me_doc::para_block(p)];
+        let l = lay(&d);
+        let Some(pl) = l.pages[0].items.iter().find_map(|i| if let Placed::Lines { para, .. } = i { Some(para.clone()) } else { None }) else {
+            panic!("no lines")
+        };
+        assert!(pl.lines.len() > 3, "{font} {spacing:?}");
+        let pitch = pl.lines[2].baseline - pl.lines[1].baseline;
+        let size = |k: usize| pl.clusters.get(k).and_then(|c| pl.styles.get(c.style as usize)).map_or(0.0, |s| s.size);
+        // Capital height ~0.7 em, as the sizing assumes.
+        let want = (2.0 * pitch + 0.7 * size(1)) / 0.7;
+        assert!((size(0) - want).abs() < 0.5, "{font} {spacing:?}: cap {} pt, want {want} pt (pitch {pitch})", size(0));
+    }
+}
+
 #[test]
 fn auto_hyphenation_breaks_long_words() {
     let text = "Internationalization considerations notwithstanding, administrators systematically reconsidered extraordinarily uncharacteristic responsibilities. ".repeat(4);
