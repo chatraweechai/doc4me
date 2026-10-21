@@ -45,7 +45,7 @@
   - ผู้ใช้: แยกช่วงอักษรไทยกับละติน ย่อแต่ละช่วงด้วยสเกลของต้นฉบับ และในแผนภูมิวางแต่ละตัวบนความกว้างของ TH Sarabun เดิม ฟอนต์อื่นไม่เปลี่ยน ไฟล์ .docx ไม่เปลี่ยน (เป็นการวาดเท่านั้น)
   - `text_glyphs` คืน `Vec<Draw>` แทน `Option<Draw>` (หนึ่งรายการต่อช่วง)
   - ตรวจสอบ: เทสต์ `drawing_text_in_th_sarabun_is_sized_like_the_original`; `cargo test -p doc4me-layout` 222 ผ่าน; clippy `-D warnings` และ fmt ผ่าน เฉพาะ crate layout ส่วนสมการ m:nor ยังไม่มีเทสต์เฉพาะ
-  - ต่อมาเพิ่มเทสต์ `normal_text_in_th_sarabun_is_sized_like_the_original` (`crates/layout/src/math.rs`) ยืนยันว่า m:nor ใน TH Sarabun New แยกเป็นช่วงละตินกับไทยที่ขนาด 20 × `scale(false)` และ 20 × `scale(true)` ส่วน Sarabun คงขนาด 20 pt; `cargo test -p doc4me-layout normal_text_in_th_sarabun` ผ่าน
+  - ต่อมาเพิ่มเทสต์ `normal_text_in_th_sarabun_is_sized_like_the_original` (`crates/layout/src/math.rs`) ยืนยันว่า m:nor ใน TH Sarabun New แยกเป็นช่วงละตินกับไทยที่ขนาด 20 × `scale(false)` และ 20 × `scale(true)` ส่วน Sarabun คงขนาด 20 pt; `cargo test -p doc4me-layout normal_text_in_th_sarabun` ผ่าน; `cargo test -p doc4me-layout` 223 ผ่าน และ clippy `-D warnings` ผ่าน
 - **กล่อง Font: ช่อง "Kerning for fonts" และ "Ligatures"** (`crates/ui-egui/src/dialogs.rs`, `crates/engine/src/cmd/format.rs`, `th.tsv`)
   - เหตุผล: เดิมตั้ง `w:kern` และ `w14:ligatures` ได้เฉพาะผ่านคำสั่ง `format.set`
   - ผู้ใช้: ติ๊กเปิด kerning แล้วระบุขนาดขั้นต่ำ และเลือก ligature ได้ 5 แบบ ส่งเฉพาะค่าที่ผู้ใช้เปลี่ยน จึงไม่กระทบไฟล์ .docx เดิม
@@ -126,7 +126,7 @@
   - แก้: เพิ่มคำแปล ru/hu/tr 9 รายการ, th 7 รายการ (รวมข้อความสถานะ "Column selection: …" และ "{w} × {h} mm" ที่ audit ไม่ได้เปิดถึง) และ it 9 รายการ เพราะเทสต์กำหนดให้อิตาลีครอบคลุมทุกคีย์ของ tr; th.tsv มี 2,452 รายการ
   - ข้อความ error ของคำสั่ง (ขึ้นต้นด้วยตัวพิมพ์เล็ก เช่น "bad parameters: …", "can't split at the first row") ยังเป็นภาษาอังกฤษตามนโยบายเดิม เพราะคำสั่งตอบสคริปต์และ MCP ด้วย: เพิ่ม `pseudo::note_status`/`statuses` (เฉพาะ `cfg(test)`) จดข้อความที่ส่งไปแถบสถานะ ให้ audit ยกเว้นข้อความเหล่านี้ โปรแกรมจริงไม่เปลี่ยน
   - ผู้ใช้: UI ภาษาไทย รัสเซีย ฮังการี ตุรกี และอิตาลีแสดงข้อความเหล่านี้เป็นภาษานั้น ไม่กระทบไฟล์ .docx และค่าที่บันทึกไว้
-  - ตรวจสอบ: `cargo test -p doc4me-ui-egui i18n -- --include-ignored` 60 ผ่าน (รวม `untranslated_interface_text`, `thai_covers_the_entire_existing_interface_catalog`, `thai_catalog_is_typed_cleanly`)
+  - ตรวจสอบ: `cargo test -p doc4me-ui-egui i18n -- --include-ignored` 60 ผ่าน (รวม `untranslated_interface_text`, `thai_covers_the_entire_existing_interface_catalog`, `thai_catalog_is_typed_cleanly`); หลัง push รัน `cargo test -p doc4me-ui-egui` 315 ผ่าน (1 ignored คือ audit) และ clippy `-D warnings` กับ `cargo fmt --all --check` ผ่าน
 - ปรับเทสต์ที่ผูกกับระยะบรรทัด 1.30 em ของ Sarabun ให้ใช้ค่าใหม่ ได้แก่
   - layout: แถวตารางข้อความหมุน, Table Grid, ตารางลอยหลังหน้าเต็ม, เชิงอรรถยาว
   - render: ข้อความหมุนในเซลล์
