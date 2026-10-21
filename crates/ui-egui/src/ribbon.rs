@@ -1212,13 +1212,27 @@ fn layout(app: &mut WordApp, ui: &mut Ui) {
             let mut b = rp.space_before;
             ui.label(egui::RichText::new(tl!("Left:")).small());
             if ui
-                .add_sized(FIELD, egui::DragValue::new(&mut l).speed(3.6 / k).range(-792.0 / k..=1584.0 / k).suffix(u.suffix()).max_decimals(2))
+                .add_sized(
+                    FIELD,
+                    egui::DragValue::new(&mut l)
+                        .speed(3.6 / k)
+                        .range(-792.0 / k..=1584.0 / k)
+                        .clamp_existing_to_range(false)
+                        .suffix(u.suffix())
+                        .max_decimals(2),
+                )
                 .changed()
             {
                 let _ = app.run("para.indents", json!({"left": l * k}));
             }
             gap_label(ui, egui::RichText::new(tl!("Before:")).small());
-            if ui.add_sized(FIELD, egui::DragValue::new(&mut b).speed(1.0).range(0.0..=1584.0).suffix(format!(" {}", tl!("pt")))).changed() {
+            if ui
+                .add_sized(
+                    FIELD,
+                    egui::DragValue::new(&mut b).speed(1.0).range(0.0..=1584.0).clamp_existing_to_range(false).suffix(format!(" {}", tl!("pt"))),
+                )
+                .changed()
+            {
                 let _ = app.run("para.spacing", json!({"before": b}));
             }
             ui.end_row();
@@ -1226,13 +1240,27 @@ fn layout(app: &mut WordApp, ui: &mut Ui) {
             let mut a = rp.space_after;
             ui.label(egui::RichText::new(tl!("Right:")).small());
             if ui
-                .add_sized(FIELD, egui::DragValue::new(&mut r).speed(3.6 / k).range(-792.0 / k..=1584.0 / k).suffix(u.suffix()).max_decimals(2))
+                .add_sized(
+                    FIELD,
+                    egui::DragValue::new(&mut r)
+                        .speed(3.6 / k)
+                        .range(-792.0 / k..=1584.0 / k)
+                        .clamp_existing_to_range(false)
+                        .suffix(u.suffix())
+                        .max_decimals(2),
+                )
                 .changed()
             {
                 let _ = app.run("para.indents", json!({"right": r * k}));
             }
             gap_label(ui, egui::RichText::new(tl!("After:")).small());
-            if ui.add_sized(FIELD, egui::DragValue::new(&mut a).speed(1.0).range(0.0..=1584.0).suffix(format!(" {}", tl!("pt")))).changed() {
+            if ui
+                .add_sized(
+                    FIELD,
+                    egui::DragValue::new(&mut a).speed(1.0).range(0.0..=1584.0).clamp_existing_to_range(false).suffix(format!(" {}", tl!("pt"))),
+                )
+                .changed()
+            {
                 let _ = app.run("para.spacing", json!({"after": a}));
             }
             ui.end_row();
@@ -1301,7 +1329,7 @@ fn rotation_field(ui: &mut Ui, app: &mut WordApp) {
     let deg0 = doc4me_engine::cmd::objects::selected(&app.session).and_then(|(_, o)| o.frame().map(|(_, _, f)| f.spin().deg)).unwrap_or(0.0);
     ui.label(egui::RichText::new(tl!("Rotation:")).small());
     let mut deg = deg0;
-    let r = ui.add(egui::DragValue::new(&mut deg).speed(1.0).range(-360.0..=360.0).max_decimals(1).suffix("°"));
+    let r = ui.add(egui::DragValue::new(&mut deg).speed(1.0).range(-360.0..=360.0).clamp_existing_to_range(false).max_decimals(1).suffix("°"));
     if r.changed() {
         if r.dragged() && !r.drag_started() {
             app.session.join_next_undo();
@@ -1849,7 +1877,7 @@ fn chart_design(app: &mut WordApp, ui: &mut Ui) {
                 crate::widgets::row(ui, |ui| {
                     ui.label(egui::RichText::new(tl!(label)).small());
                     let mut v = v0;
-                    let r = ui.add(egui::DragValue::new(&mut v).speed(1.0).range(36.0..=2000.0).suffix(" pt"));
+                    let r = ui.add(egui::DragValue::new(&mut v).speed(1.0).range(36.0..=2000.0).clamp_existing_to_range(false).suffix(" pt"));
                     if r.changed() {
                         if r.dragged() && !r.drag_started() {
                             app.session.join_next_undo();
@@ -1936,7 +1964,7 @@ fn shape_format(app: &mut WordApp, ui: &mut Ui) {
                 for (label, key, v0) in [("W:", "width", w0), ("H:", "height", h0)] {
                     ui.label(egui::RichText::new(tl!(label)).small());
                     let mut v = v0;
-                    let r = ui.add(egui::DragValue::new(&mut v).speed(1.0).range(4.0..=2000.0).suffix(" pt"));
+                    let r = ui.add(egui::DragValue::new(&mut v).speed(1.0).range(4.0..=2000.0).clamp_existing_to_range(false).suffix(" pt"));
                     if r.changed() {
                         if r.dragged() && !r.drag_started() {
                             app.session.join_next_undo();
@@ -2094,7 +2122,9 @@ fn picture_format(app: &mut WordApp, ui: &mut Ui) {
             crate::widgets::row(ui, |ui| {
                 ui.label(egui::RichText::new(tl!("W:")).small());
                 let mut w = w0;
-                let r = ui.add(egui::DragValue::new(&mut w).speed(1.0).range(4.0..=2000.0).suffix(format!(" {}", tl!("pt"))));
+                let r = ui.add(
+                    egui::DragValue::new(&mut w).speed(1.0).range(4.0..=2000.0).clamp_existing_to_range(false).suffix(format!(" {}", tl!("pt"))),
+                );
                 if r.changed() {
                     if r.dragged() && !r.drag_started() {
                         app.session.join_next_undo();
@@ -2103,7 +2133,9 @@ fn picture_format(app: &mut WordApp, ui: &mut Ui) {
                 }
                 ui.label(egui::RichText::new(tl!("H:")).small());
                 let mut h = h0;
-                let r = ui.add(egui::DragValue::new(&mut h).speed(1.0).range(4.0..=2000.0).suffix(format!(" {}", tl!("pt"))));
+                let r = ui.add(
+                    egui::DragValue::new(&mut h).speed(1.0).range(4.0..=2000.0).clamp_existing_to_range(false).suffix(format!(" {}", tl!("pt"))),
+                );
                 if r.changed() {
                     if r.dragged() && !r.drag_started() {
                         app.session.join_next_undo();
@@ -2117,7 +2149,7 @@ fn picture_format(app: &mut WordApp, ui: &mut Ui) {
                 for (i, side) in ["L", "T", "R", "B"].iter().enumerate() {
                     ui.label(egui::RichText::new(tl!(side)).small());
                     let mut v = crop0[i] * 100.0;
-                    let r = ui.add(egui::DragValue::new(&mut v).speed(0.5).range(0.0..=45.0).suffix("%"));
+                    let r = ui.add(egui::DragValue::new(&mut v).speed(0.5).range(0.0..=45.0).clamp_existing_to_range(false).suffix("%"));
                     if r.changed() {
                         if r.dragged() && !r.drag_started() {
                             app.session.join_next_undo();
@@ -2290,7 +2322,10 @@ fn cell_size_boxes(ui: &mut Ui, app: &mut WordApp) {
         crate::widgets::row(ui, |ui| {
             ui.add_sized(vec2(48.0, 18.0), egui::Label::new(egui::RichText::new(tl!(label)).small()));
             let mut v = pt / k;
-            let r = ui.add_sized(vec2(72.0, 18.0), egui::DragValue::new(&mut v).speed(0.01).range(0.02..=22.0).suffix(unit.suffix()).max_decimals(2));
+            let r = ui.add_sized(
+                vec2(72.0, 18.0),
+                egui::DragValue::new(&mut v).speed(0.01).range(0.02..=22.0).clamp_existing_to_range(false).suffix(unit.suffix()).max_decimals(2),
+            );
             if r.changed() {
                 out = Some((v * k, r.dragged() && !r.drag_started()));
             }
@@ -2456,6 +2491,27 @@ mod tests {
         assert!(!has_picture_selected(&s));
     }
 
+    /// The Size fields stop at 2000 pt; a wider picture kept its size until the user typed one,
+    /// instead of shrinking as soon as it was selected.
+    #[test]
+    fn showing_picture_size_fields_changes_nothing() {
+        let mut app = crate::WordApp::new(Session::new(doc4me_doc::Document::new()), crate::Services::default());
+        app.run("insert.picture", json!({"data": png_data()})).unwrap();
+        app.run("picture.size", json!({"width": 3000, "height": 2500, "lockAspect": false})).unwrap();
+        fn size(app: &crate::WordApp) -> (f32, f32) {
+            match doc4me_engine::cmd::objects::selected(&app.session) {
+                Some((_, doc4me_doc::para::InlineObject::Image { w, h, .. })) => (w, h),
+                o => panic!("no picture selected: {o:?}"),
+            }
+        }
+        let before = size(&app);
+        assert_eq!(before, (3000.0, 2500.0));
+        let ctx = egui::Context::default();
+        for _ in 0..2 {
+            ctx.run_ui(Default::default(), |ui| picture_format(&mut app, ui)).drop_without_applying_deltas();
+        }
+        assert_eq!(size(&app), before);
+    }
     #[test]
     fn shape_format_tab_appears_when_shape_selected() {
         let mut s = Session::new(doc4me_doc::Document::new());

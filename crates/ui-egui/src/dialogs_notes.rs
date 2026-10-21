@@ -125,7 +125,7 @@ pub fn note_options(app: &mut WordApp, ui: &mut Ui, f: &mut NoteForm) -> bool {
         ui.end_row();
         ui.label(tl!("Start at:"));
         if let Some(v) = f.start.get_mut(k) {
-            ui.add(egui::DragValue::new(v).range(1..=32_767).speed(0.2));
+            ui.add(egui::DragValue::new(v).range(1..=32_767).clamp_existing_to_range(false).speed(0.2));
         }
         ui.end_row();
         ui.label(tl!("Numbering"));

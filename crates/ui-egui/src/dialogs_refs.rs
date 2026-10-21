@@ -462,7 +462,7 @@ fn index_ui(app: &mut WordApp, ui: &mut Ui, f: &mut IndexForm) -> Next {
         });
         ui.end_row();
         ui.label(tl!("Columns:"));
-        ui.add(egui::DragValue::new(&mut f.columns).range(1..=4));
+        ui.add(egui::DragValue::new(&mut f.columns).range(1..=4).clamp_existing_to_range(false));
         ui.end_row();
         ui.label("");
         ui.checkbox(&mut f.right_align, tl!("Page numbers at the right margin"));
@@ -708,7 +708,7 @@ fn toc_ui(app: &mut WordApp, ui: &mut Ui, f: &mut TocForm) -> Next {
     ui.checkbox(&mut f.hyperlinks, tl!("Link entries to their headings"));
     ui.horizontal(|ui| {
         ui.label(tl!("Levels:"));
-        ui.add(egui::DragValue::new(&mut f.levels).range(1..=9));
+        ui.add(egui::DragValue::new(&mut f.levels).range(1..=9).clamp_existing_to_range(false));
     });
     ui.add_space(4.0);
     let mut then = None;
@@ -738,7 +738,12 @@ fn toc_options_ui(_app: &mut WordApp, ui: &mut Ui, f: &mut TocForm, was: &TocFor
         egui::Grid::new("toc_styles").num_columns(2).spacing(vec2(10.0, 3.0)).show(ui, |ui| {
             for (name, level) in f.style_levels.iter_mut() {
                 ui.label(name.as_str());
-                ui.add(egui::DragValue::new(level).range(0..=9).custom_formatter(|v, _| if v < 0.5 { String::new() } else { format!("{v:.0}") }));
+                ui.add(
+                    egui::DragValue::new(level)
+                        .range(0..=9)
+                        .clamp_existing_to_range(false)
+                        .custom_formatter(|v, _| if v < 0.5 { String::new() } else { format!("{v:.0}") }),
+                );
                 ui.end_row();
             }
         });

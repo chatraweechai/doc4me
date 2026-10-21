@@ -166,7 +166,7 @@ impl ListForm {
 pub fn define_list(app: &mut WordApp, ui: &mut Ui, f: &mut ListForm) -> bool {
     let unit = crate::options::unit();
     fn len(v: &mut f32, unit: doc4me_geom::Unit) -> egui::DragValue<'_> {
-        egui::DragValue::new(v).speed(0.01).range(-10.0..=22.0).suffix(unit.suffix()).max_decimals(2)
+        egui::DragValue::new(v).speed(0.01).range(-10.0..=22.0).clamp_existing_to_range(false).suffix(unit.suffix()).max_decimals(2)
     }
     let heading = |ui: &mut Ui, s: &str| {
         ui.add_space(4.0);
@@ -223,7 +223,7 @@ pub fn define_list(app: &mut WordApp, ui: &mut Ui, f: &mut ListForm) -> bool {
             ui.end_row();
         }
         ui.label(tl!("Start at:"));
-        ui.add(egui::DragValue::new(&mut l.start).range(0..=32_767));
+        ui.add(egui::DragValue::new(&mut l.start).range(0..=32_767).clamp_existing_to_range(false));
         ui.end_row();
         if i > 0 {
             ui.checkbox(&mut l.restart, tl!("Restart list after:"));

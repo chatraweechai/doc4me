@@ -327,7 +327,15 @@ pub fn status_bar(app: &mut WordApp, ui: &mut Ui) {
                     let mut v = if reading { app.session.view.read_zoom } else { app.canvas.scale / crate::canvas::PX_PER_PT };
                     let slider = egui::Slider::new(&mut v, if reading { 0.75..=1.5 } else { 0.1..=5.0 }).logarithmic(!reading).show_value(false);
                     ui.spacing_mut().slider_width = 110.0;
-                    if ui.add(slider).changed() {
+                    // egui paints the rail in the input fill, which is the status bar's own colour
+                    // in the dark theme; the input border shows in both.
+                    let changed = ui
+                        .scope(|ui| {
+                            ui.visuals_mut().widgets.inactive.bg_fill = t.input_border;
+                            ui.add(slider).changed()
+                        })
+                        .inner;
+                    if changed {
                         let command = if reading { "view.readTextSize" } else { "view.zoom" };
                         let _ = app.run(command, json!({"value": (v * 100.0).round()}));
                     }
@@ -418,5 +426,30 @@ mod tests {
         assert_eq!(MAC_CONTENT_LEFT - lights_end, margin);
         // `egui::Margin` is in `i8`.
         assert!(MAC_CONTENT_LEFT <= f32::from(i8::MAX));
+    }
+
+    /// The zoom slider's rail took the input fill, the status bar's own colour in the dark
+    /// theme, so only its knob showed.
+    #[test]
+    fn zoom_slider_rail_shows_in_the_dark_theme() {
+        fn rails(shape: &egui::Shape, fill: egui::Color32, out: &mut Vec<egui::Rect>) {
+            match shape {
+                egui::Shape::Rect(r) if r.fill == fill => out.push(r.rect),
+                egui::Shape::Vec(v) => v.iter().for_each(|s| rails(s, fill, out)),
+                _ => {}
+            }
+        }
+        let t = Tokens::dark();
+        assert_ne!(t.input, t.input_border);
+        let mut app = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), crate::Services::default());
+        let ctx = egui::Context::default();
+        crate::theme::apply(&ctx, crate::theme::Appearance::Dark);
+        let mut found = Vec::new();
+        for _ in 0..2 {
+            let out = ctx.run_ui(Default::default(), |ui| status_bar(&mut app, ui));
+            found.clear();
+            out.shapes.iter().for_each(|s| rails(&s.shape, t.input_border, &mut found));
+        }
+        assert!(found.iter().any(|r| (r.width() - 110.0).abs() < 12.0), "no visible zoom rail: {found:?}");
     }
 }

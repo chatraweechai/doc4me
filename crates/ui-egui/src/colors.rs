@@ -687,7 +687,7 @@ fn custom(ui: &mut Ui, d: &mut ColorsDialog) {
                 for (i, label) in ["Red:", "Green:", "Blue:"].into_iter().enumerate() {
                     ui.label(tl!(label));
                     if let Some(v) = c.get_mut(i) {
-                        changed |= ui.add(egui::DragValue::new(v).range(0..=255).speed(1.0)).changed();
+                        changed |= ui.add(egui::DragValue::new(v).range(0..=255).clamp_existing_to_range(false).speed(1.0)).changed();
                     }
                     ui.end_row();
                 }
@@ -703,7 +703,7 @@ fn custom(ui: &mut Ui, d: &mut ColorsDialog) {
                 for (i, label) in ["Hue:", "Sat:", "Lum:"].into_iter().enumerate() {
                     ui.label(tl!(label));
                     if let Some(x) = v.get_mut(i) {
-                        changed |= ui.add(egui::DragValue::new(x).range(0..=255).speed(1.0)).changed();
+                        changed |= ui.add(egui::DragValue::new(x).range(0..=255).clamp_existing_to_range(false).speed(1.0)).changed();
                     }
                     ui.end_row();
                 }

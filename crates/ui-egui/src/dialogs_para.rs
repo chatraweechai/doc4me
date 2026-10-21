@@ -123,7 +123,14 @@ pub fn tabs(app: &mut WordApp, ui: &mut Ui, f: &mut TabsForm) -> bool {
     ui.horizontal(|ui| {
         ui.vertical(|ui| {
             ui.label(tl!("Tab stop position:"));
-            ui.add(egui::DragValue::new(&mut f.pos).speed(0.05).range(-22.0 * 72.0 / k..=22.0 * 72.0 / k).suffix(u.suffix()).max_decimals(2));
+            ui.add(
+                egui::DragValue::new(&mut f.pos)
+                    .speed(0.05)
+                    .range(-22.0 * 72.0 / k..=22.0 * 72.0 / k)
+                    .clamp_existing_to_range(false)
+                    .suffix(u.suffix())
+                    .max_decimals(2),
+            );
             let mut pick = None;
             egui::Frame::new().stroke(Stroke::new(1.0, Tokens::get(ui.ctx()).input_border)).inner_margin(4.0).show(ui, |ui| {
                 ui.set_min_size(vec2(150.0, 96.0));
@@ -147,7 +154,14 @@ pub fn tabs(app: &mut WordApp, ui: &mut Ui, f: &mut TabsForm) -> bool {
         ui.add_space(12.0);
         ui.vertical(|ui| {
             ui.label(tl!("Default tab stops:"));
-            ui.add(egui::DragValue::new(&mut f.default_tab).speed(0.05).range(1.0 / k..=1584.0 / k).suffix(u.suffix()).max_decimals(2));
+            ui.add(
+                egui::DragValue::new(&mut f.default_tab)
+                    .speed(0.05)
+                    .range(1.0 / k..=1584.0 / k)
+                    .clamp_existing_to_range(false)
+                    .suffix(u.suffix())
+                    .max_decimals(2),
+            );
             ui.add_space(8.0);
             ui.label(tl!("Tab stops to be cleared:"));
             let list = if f.clear_all { tl!("All").to_string() } else { f.cleared.iter().map(|p| u.format(*p)).collect::<Vec<_>>().join(", ") };

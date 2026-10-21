@@ -1043,4 +1043,32 @@ mod tests {
         })
         .drop_without_applying_deltas();
     }
+
+    /// Every number field with a range leaves a value outside it alone until the user edits it:
+    /// egui clamps it on every frame and reports that as a change otherwise, so only drawing the
+    /// field would rewrite the document (a picture wider than the ribbon's 2000 pt, say).
+    #[test]
+    fn ranged_number_fields_keep_existing_values() {
+        let dir = concat!(env!("CARGO_MANIFEST_DIR"), "/src");
+        let mut bad = Vec::new();
+        let mut stack = vec![std::path::PathBuf::from(dir)];
+        while let Some(p) = stack.pop() {
+            if p.is_dir() {
+                stack.extend(std::fs::read_dir(&p).unwrap().map(|e| e.unwrap().path()));
+                continue;
+            }
+            if p.extension().is_none_or(|e| e != "rs") {
+                continue;
+            }
+            let src = std::fs::read_to_string(&p).unwrap();
+            for (i, chunk) in src.split("DragValue::new(").enumerate().skip(1) {
+                // The builder chain ends with the call or statement holding it.
+                let chain = chunk.split(';').next().and_then(|c| c.split("{\n").next()).unwrap_or(chunk);
+                if chain.contains(".range(") && !chain.contains(".clamp_existing_to_range(false)") {
+                    bad.push(format!("{} #{i}", p.display()));
+                }
+            }
+        }
+        assert!(bad.is_empty(), "ranged DragValue clamps existing values: {bad:?}");
+    }
 }

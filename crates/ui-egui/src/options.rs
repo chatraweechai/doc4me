@@ -302,7 +302,7 @@ fn advanced(app: &mut WordApp, ui: &mut Ui) {
     egui::Grid::new("options_display").num_columns(2).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
         ui.label(tl!("Recent documents to show:"));
         let mut n = app.ui.recent_shown();
-        if ui.add(egui::DragValue::new(&mut n).range(0..=crate::MAX_RECENT).speed(0.2)).changed() {
+        if ui.add(egui::DragValue::new(&mut n).range(0..=crate::MAX_RECENT).clamp_existing_to_range(false).speed(0.2)).changed() {
             app.ui.recent_count = n;
         }
         ui.end_row();

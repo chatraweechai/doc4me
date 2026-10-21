@@ -134,7 +134,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
             ui.label(egui::RichText::new(tl!("Copies")).font(medium(13.0)));
             ui.horizontal(|ui| {
                 let mut n = app.ui.print.copies;
-                ui.add(egui::DragValue::new(&mut n).range(1..=doc4me_engine::print::MAX_COPIES).speed(0.2));
+                ui.add(egui::DragValue::new(&mut n).range(1..=doc4me_engine::print::MAX_COPIES).clamp_existing_to_range(false).speed(0.2));
                 app.ui.print.copies = n.clamp(1, doc4me_engine::print::MAX_COPIES);
                 if app.ui.print.copies > 1 {
                     ui.checkbox(&mut app.ui.print.collate, tl!("Collate copies"));

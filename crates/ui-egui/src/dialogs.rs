@@ -1693,12 +1693,24 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     ui.label(egui::RichText::new(tl!("Spacing")).font(semibold(12.5)));
                     egui::Grid::new("sp").num_columns(4).show(ui, |ui| {
                         ui.label(tl!("Before:"));
-                        ui.add(egui::DragValue::new(before).speed(1.0).range(0.0..=1584.0).suffix(format!(" {}", tl!("pt"))));
+                        ui.add(
+                            egui::DragValue::new(before)
+                                .speed(1.0)
+                                .range(0.0..=1584.0)
+                                .clamp_existing_to_range(false)
+                                .suffix(format!(" {}", tl!("pt"))),
+                        );
                         ui.label(tl!("Line spacing:"));
-                        ui.add(egui::DragValue::new(line).speed(0.05).range(0.5..=5.0));
+                        ui.add(egui::DragValue::new(line).speed(0.05).range(0.5..=5.0).clamp_existing_to_range(false));
                         ui.end_row();
                         ui.label(tl!("After:"));
-                        ui.add(egui::DragValue::new(after).speed(1.0).range(0.0..=1584.0).suffix(format!(" {}", tl!("pt"))));
+                        ui.add(
+                            egui::DragValue::new(after)
+                                .speed(1.0)
+                                .range(0.0..=1584.0)
+                                .clamp_existing_to_range(false)
+                                .suffix(format!(" {}", tl!("pt"))),
+                        );
                         ui.end_row();
                     });
                     ui.checkbox(&mut opts[1], tl!("Don't add space between paragraphs of the same style"));
@@ -1918,10 +1930,10 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         Dialog::InsertTable { rows, cols } => {
             egui::Grid::new("it").num_columns(2).show(ui, |ui| {
                 ui.label(tl!("Number of columns:"));
-                ui.add(egui::DragValue::new(cols).range(1..=63));
+                ui.add(egui::DragValue::new(cols).range(1..=63).clamp_existing_to_range(false));
                 ui.end_row();
                 ui.label(tl!("Number of rows:"));
-                ui.add(egui::DragValue::new(rows).range(1..=1000));
+                ui.add(egui::DragValue::new(rows).range(1..=1000).clamp_existing_to_range(false));
                 ui.end_row();
             });
             let (ok, cancel) = buttons(ui, tl!("OK"));
@@ -1978,9 +1990,9 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             });
             egui::Grid::new("ps_grid").num_columns(4).show(ui, |ui| {
                 ui.add_enabled(grid.0 >= 2, egui::Label::new(tl!("Characters per line:")));
-                ui.add_enabled(grid.0 >= 2, egui::DragValue::new(&mut grid.2).range(1..=1000));
+                ui.add_enabled(grid.0 >= 2, egui::DragValue::new(&mut grid.2).range(1..=1000).clamp_existing_to_range(false));
                 ui.add_enabled(grid.0 >= 1, egui::Label::new(tl!("Lines per page:")));
-                ui.add_enabled(grid.0 >= 1, egui::DragValue::new(&mut grid.1).range(1..=1000));
+                ui.add_enabled(grid.0 >= 1, egui::DragValue::new(&mut grid.1).range(1..=1000).clamp_existing_to_range(false));
                 ui.end_row();
             });
             ui.horizontal(|ui| {
@@ -2138,10 +2150,10 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 });
                 ui.end_row();
                 ui.label(tl!("Offset (pt):"));
-                ui.add(egui::DragValue::new(offset).speed(0.5).range(-100.0..=100.0));
+                ui.add(egui::DragValue::new(offset).speed(0.5).range(-100.0..=100.0).clamp_existing_to_range(false));
                 ui.end_row();
                 ui.label(tl!("Size (pt):"));
-                ui.add(egui::DragValue::new(size).speed(0.5).range(1.0..=200.0));
+                ui.add(egui::DragValue::new(size).speed(0.5).range(1.0..=200.0).clamp_existing_to_range(false));
                 ui.end_row();
             });
             let mut remove = false;
@@ -2187,15 +2199,15 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 ui.add(crate::widgets::text_line(font));
                 ui.end_row();
                 ui.label(tl!("Size:"));
-                ui.add(egui::DragValue::new(size).range(1.0..=1638.0).speed(0.5));
+                ui.add(egui::DragValue::new(size).range(1.0..=1638.0).clamp_existing_to_range(false).speed(0.5));
                 ui.end_row();
                 ui.label(tl!("Color:"));
                 ui.add(crate::widgets::text_line(color));
                 ui.end_row();
                 ui.label(tl!("Space before/after:"));
                 ui.horizontal(|ui| {
-                    ui.add(egui::DragValue::new(before).range(0.0..=1584.0));
-                    ui.add(egui::DragValue::new(after).range(0.0..=1584.0));
+                    ui.add(egui::DragValue::new(before).range(0.0..=1584.0).clamp_existing_to_range(false));
+                    ui.add(egui::DragValue::new(after).range(0.0..=1584.0).clamp_existing_to_range(false));
                 });
                 ui.end_row();
             });
@@ -2801,7 +2813,7 @@ fn recipient_list(app: &mut WordApp, ui: &mut Ui, fields: &mut Vec<String>, rows
 fn table_properties(ui: &mut Ui, f: &mut TableForm) {
     let unit = crate::options::unit();
     fn len(v: &mut f32, lo: f32, unit: doc4me_geom::Unit) -> egui::DragValue<'_> {
-        egui::DragValue::new(v).speed(0.01).range(lo..=22.0).suffix(unit.suffix()).max_decimals(2)
+        egui::DragValue::new(v).speed(0.01).range(lo..=22.0).clamp_existing_to_range(false).suffix(unit.suffix()).max_decimals(2)
     }
     let heading = |ui: &mut Ui, s: &str| {
         ui.add_space(4.0);
@@ -2820,7 +2832,10 @@ fn table_properties(ui: &mut Ui, f: &mut TableForm) {
         });
         ui.end_row();
         ui.label(tl!("Indent from left:"));
-        ui.add_enabled(f.align == "left", egui::DragValue::new(&mut f.indent).speed(0.01).range(-11.0..=22.0).suffix(unit.suffix()).max_decimals(2));
+        ui.add_enabled(
+            f.align == "left",
+            egui::DragValue::new(&mut f.indent).speed(0.01).range(-11.0..=22.0).clamp_existing_to_range(false).suffix(unit.suffix()).max_decimals(2),
+        );
         ui.end_row();
         ui.label(tl!("Table direction:"));
         ui.horizontal(|ui| {
