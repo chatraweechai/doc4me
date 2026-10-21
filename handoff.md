@@ -1,30 +1,29 @@
 # Handoff: Doc4Me 1.1.0 และงานภาษาไทย
 
-อัปเดต: 2026-10-21 · สาขา `main` · รายละเอียดทุกข้อดูใน [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]` และ `[1.1.0]`
+อัปเดต: 2026-10-21 · สาขา `main` · รายละเอียดทุกข้อดูใน [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.0]`
 
 ## เริ่ม session ใหม่: ทำตามลำดับนี้
 
 1. ตรวจว่ามี tag `v1.1.0` บน GitHub แล้วหรือยัง: `git fetch origin --tags && git ls-remote --tags origin`
-   - ตรวจล่าสุด 2026-10-21 07:40 UTC: ยังไม่มี tag ใดเลย
-2. ถ้ายังไม่มี tag
-   - ให้เจ้าของ repo push tag จากเครื่องของตัวเอง เพราะ session บนคลาวด์ push tag ไม่ได้ (git proxy ตอบ `HTTP 403` เฉพาะ tag ส่วน push สาขา `main` ได้ปกติ)
-   - **tag ที่คอมมิต `7e26f97`** ไม่ใช่ `origin/main` เพราะหลังจากนั้นมีงานใหม่ใต้ `[Unreleased]` (ไม่ใช่ของ 1.1.0)
-     - `7e26f97` ต่างจาก `a4de4dc` แค่ handoff และคำแก้ใน CHANGELOG `[1.1.0]` ซึ่ง Release ใช้เป็นบันทึกประจำรุ่น จึงควร tag ตัวนี้
-   - คำสั่ง: `git fetch origin && git tag -a v1.1.0 7e26f97 -m "Doc4Me 1.1.0" && git push origin v1.1.0`
+2. ถ้ายังไม่มี tag ให้เจ้าของ repo push จากเครื่องของตัวเอง (session บนคลาวด์ push tag ไม่ได้ git proxy ตอบ `HTTP 403`)
+   - **ผู้ใช้สั่งเมื่อ 2026-10-21 08:00 UTC**: ยกเลิก 1.1.0 ที่ `7e26f97` แล้วออก 1.1.0 จากโค้ดล่าสุดแทน
+     - รายการที่เคยอยู่ใต้ `[Unreleased]` (ช่องตัวเลข `DragValue`, รางตัวเลื่อนซูมในธีมมืด) ย้ายเข้า `[1.1.0]` แล้ว ข้อจำกัดเรื่อง `DragValue` ใน `[1.1.0]` ลบออกเพราะแก้แล้ว
+   - คำสั่ง: tag คอมมิตล่าสุดของ `main` ที่มีข้อความ "Release 1.1.0 from the latest code"
+     `git fetch origin && git tag -a v1.1.0 origin/main -m "Doc4Me 1.1.0" && git push origin v1.1.0`
+   - ถ้ามีคอมมิตใหม่บน `main` หลังจากนั้นที่ไม่ใช่งานของ 1.1.0 ให้ tag คอมมิต "Release 1.1.0 from the latest code" แทน `origin/main`
    - อย่าสร้าง Release ผ่านหน้าเว็บ GitHub เอง เพราะ job `release` รัน `gh release create v1.1.0` และจะล้มถ้ามี Release นั้นอยู่แล้ว
 3. ถ้ามี tag แล้ว ให้ตามดู run ของ workflow `windows-x64-installer.yml` ที่ tag จนได้ Release `Doc4Me v1.1.0` พร้อม MSI และ zip
    - ถ้า job `release` ล้ม ให้อ่าน log ด้วยเครื่องมือ GitHub (`get_job_logs`) แล้วแก้
-4. งานใหม่ทั้งหมดลง `## [Unreleased]` เพราะ `[1.1.0]` ถือว่าออกแล้ว ห้ามแก้
+4. หลังออก 1.1.0 แล้ว งานใหม่ทั้งหมดลง `## [Unreleased]` และห้ามแก้ `[1.1.0]`
 
 ## สถานะล่าสุด
 
-- **ออกเวอร์ชัน 1.1.0: รอเจ้าของ repo push tag** (ดูข้อ 2 ข้างบน)
-  - CI `windows-x64-installer.yml` run #21 build MSI และ zip ผ่านที่ `a4de4dc` (2026-10-21 04:23 UTC)
+- **ออกเวอร์ชัน 1.1.0 จากโค้ดล่าสุด: รอ push tag** (ดูข้อ 2 ข้างบน)
   - GitHub ยังไม่มี tag `v1.0.0` เลย ลิงก์ `[1.0.0]` ท้าย CHANGELOG จึงเปิดไม่ได้และคงไว้ตามกฎไม่แก้ประวัติ
-- **ทำแล้วใน session 2026-10-21 เช้า (อยู่ใต้ `[Unreleased]`)**
+- **ทำแล้วใน session 2026-10-21 เช้า (อยู่ใน `[1.1.0]`)**
   - ช่องตัวเลข `DragValue` ที่มี `range` ทั้ง 47 ช่องไม่บีบค่าเดิมของเอกสารอีก (`.clamp_existing_to_range(false)`) พร้อมเทสต์ `showing_picture_size_fields_changes_nothing` และเทสต์ตรวจซอร์ส `ranged_number_fields_keep_existing_values` ที่จะล้มถ้ามีช่องใหม่ลืมใส่
   - ธีมมืด: รางตัวเลื่อนซูมในแถบสถานะใช้สี `input_border` แล้ว (`chrome.rs`) เทสต์ `zoom_slider_rail_shows_in_the_dark_theme`
-  - ผลตรวจ: `cargo test -p doc4me-ui-egui` ผ่าน 319 รายการ, clippy `-D warnings` และ fmt ผ่าน; เทสต์ใหม่ทั้ง 3 ล้มเมื่อเอาการแก้ออกชั่วคราว (ยืนยันว่าจับบั๊กได้จริง)
+  - ผลตรวจ: `cargo test -p doc4me-ui-egui` ผ่าน 319 รายการ, clippy `-D warnings` และ fmt ผ่าน; เทสต์ใหม่ทั้ง 3 ล้มเมื่อเอาการแก้ออกชั่วคราว
   - ยังไม่ได้รัน `cargo xtask ci` ทั้ง workspace (แก้แค่ `crates/ui-egui`) และ audit ภาษา `--include-ignored` (ไม่ได้เพิ่มข้อความ UI)
   - ยังไม่ได้ถ่ายภาพ `docs/images/dark.png` และ `dark-th.png` ใหม่ ภาพเดิมยังเป็นรางที่มองไม่เห็น
 
