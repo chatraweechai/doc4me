@@ -9,7 +9,7 @@ launch while the preference is `auto`. Document text, command ids, CLI/MCP/contr
 file paths do not change, and new documents keep US English as their editing language (Thai text
 is proofed whatever its language).
 
-`crates/ui-egui/src/i18n/th.tsv` has every key of the other catalogs (2,433 entries). The tests in
+`crates/ui-egui/src/i18n/th.tsv` has every key of the other catalogs (2,452 entries). The tests in
 `crates/ui-egui/src/i18n/tests.rs` (`thai_*`) check the locales, the coverage, the font coverage
 (bundled Sarabun) and that every entry is typed cleanly: no Thai digits, no `...`, no letters of
 other scripts, and no mark from Doc4Me's own Thai proofing.

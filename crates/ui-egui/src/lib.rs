@@ -820,6 +820,8 @@ impl WordApp {
         if !self.session.status.is_empty() {
             // Engine messages are English; the catalog translates the ones it knows.
             let s = std::mem::take(&mut self.session.status);
+            #[cfg(test)]
+            i18n::pseudo::note_status(&s);
             let s = tl!(&s).to_string();
             self.status(s);
         }

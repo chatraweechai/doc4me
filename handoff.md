@@ -1,6 +1,6 @@
 # Handoff: งานภาษาไทยและความเที่ยงตรงแบบ Word (Doc4Me 1.0.x)
 
-อัปเดต: 2026-10-20 · สาขา `main` · รายละเอียดทุกข้อดูใน [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`
+อัปเดต: 2026-10-21 · สาขา `main` · รายละเอียดทุกข้อดูใน [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`
 
 ## สิ่งที่เสร็จแล้วในรอบนี้
 
@@ -23,7 +23,7 @@
   - ตรวจลำดับการพิมพ์ผิด และคำที่มักเขียนผิด 105 คู่ (`assets/spelling/th-misspellings.tsv`)
   - เน้นความแม่นยำ ไม่ทำเครื่องหมายคำที่ไม่รู้จัก
 - **ส่วนติดต่อผู้ใช้ภาษาไทย**
-  - ไฟล์: `crates/ui-egui/src/i18n/th.tsv` มี 2,433 รายการ ครบทุกคีย์
+  - ไฟล์: `crates/ui-egui/src/i18n/th.tsv` มี 2,452 รายการ ครบทุกคีย์
   - คู่มือรูปแบบและอภิธานศัพท์อยู่ที่ [`docs/localization-th.md`](docs/localization-th.md)
 - **แก้ข้อบกพร่องจากการตรวจแบบ adversarial**
   - ลิเกเจอร์อาหรับ, ค่า ligatures ที่ไม่ถูกต้อง, ฟอนต์ที่ค่า usWin เป็นศูนย์
@@ -42,11 +42,14 @@
    - `Fmt::kern` ใน `crates/formats/src/model.rs`, `\kerningN` ใน `rtf.rs`, `style:letter-kerning` ใน `odt.rs` (ODF มีแค่เปิด/ปิด), sprmCHpsKern 0x484B ใน `crates/docbin/src/fmt.rs` (อ่านอย่างเดียว)
    - เทสต์: `kerning_round_trips_through_rtf_and_odt`, `kerning_for_fonts_is_read`
 3. ~~กล่อง Font ไม่มี Kerning/Ligatures~~ ทำแล้ว (2026-10-20) แยกเป็นหน้า Font และ Advanced
-4. ~~ข้อความในแผนภูมิ, SmartArt และ m:nor ที่ใช้ TH Sarabun~~ ทำแล้ว (2026-10-20) `display.rs` `text_glyphs` และ `math.rs` `run_atoms` ใช้ `metric_fit` เทสต์ `drawing_text_in_th_sarabun_is_sized_like_the_original` (ส่วน m:nor ยังไม่มีเทสต์เฉพาะ)
+4. ~~ข้อความในแผนภูมิ, SmartArt และ m:nor ที่ใช้ TH Sarabun~~ ทำแล้ว (2026-10-20) `display.rs` `text_glyphs` และ `math.rs` `run_atoms` ใช้ `metric_fit` เทสต์ `drawing_text_in_th_sarabun_is_sized_like_the_original` และ m:nor มีเทสต์ `normal_text_in_th_sarabun_is_sized_like_the_original` แล้ว (2026-10-21)
 5. ~~คีย์ที่ใช้ร่วมกันใน UI~~ แยกแล้ว (2026-10-20) ด้วย context ใน `th.tsv`: bibliography/equation/spacing/numeral ส่วน Letter ไม่ต้องแยก ดู `docs/localization-th.md`
 6. **ภาษาไทยใน UI ยังไม่ได้ให้นักแปลมืออาชีพที่เป็นเจ้าของภาษาตรวจทาน**
    - รอบนี้ตรวจด้วยสคริปต์และเทสต์ `thai_catalog_is_typed_cleanly` เท่านั้น
-7. ~~เทสต์ audit `untranslated_interface_text`~~ แก้แล้วในคอมมิต 6519073 (ป้ายขนาดซองแปลผ่าน `tl!`) ยังไม่ได้รันซ้ำด้วย `--ignored` ในรอบนี้
+7. ~~เทสต์ audit `untranslated_interface_text`~~ รันด้วย `--ignored` แล้ว (2026-10-21)
+   - พบคาตาล็อก ru/hu/tr/th ขาดข้อความโหมดอ่านและข้อความสถานะ เติมแล้ว (รวม it)
+   - ข้อความ error ของคำสั่ง (ตัวพิมพ์เล็ก) audit ยกเว้นผ่าน `pseudo::statuses()` คงเป็นภาษาอังกฤษตามนโยบาย
+   - เทสต์ยังติด `#[ignore]` เพราะเคยล้มครั้งเดียวตอนเครื่องโหลดหนัก ควรรันด้วยมือก่อนออกเวอร์ชัน
 8. **ค่าของ TH SarabunIT๙ อนุมาน ยังไม่ได้วัดจากไฟล์จริง**
    - ค่าเลขไทยอนุมานจากการออกแบบของฟอนต์
    - ถ้าได้ไฟล์ IT๙ มา ให้วัดและแก้ `thsarabun.rs`

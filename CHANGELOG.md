@@ -121,6 +121,12 @@
 
 ### แก้ไข
 
+- **แค็ตตาล็อก ru/hu/tr/th/it ขาดข้อความของโหมดอ่านและข้อความสถานะ** (`crates/ui-egui/src/i18n/{ru,hu,tr,th,it}.tsv`, `audit.rs`, `pseudo.rs`, `lib.rs` `after_command`)
+  - เหตุผล: รันเทสต์ audit `untranslated_interface_text` ด้วย `--ignored` แล้วล้ม เพราะ ru/hu/tr ขาด 15 และ th ขาด 14 ข้อความ ได้แก่ป้ายในแถบโหมดอ่าน (Reading Mode, Column width, Text size, Edit Document), ข้อความสถานะ 2 ประโยค ("Researcher needs an online service…", "These settings will be used for new documents.") และขนาดกระดาษ "{w} × {h} in" จึงแสดงเป็นภาษาอังกฤษ
+  - แก้: เพิ่มคำแปล ru/hu/tr 9 รายการ, th 7 รายการ (รวมข้อความสถานะ "Column selection: …" และ "{w} × {h} mm" ที่ audit ไม่ได้เปิดถึง) และ it 9 รายการ เพราะเทสต์กำหนดให้อิตาลีครอบคลุมทุกคีย์ของ tr; th.tsv มี 2,452 รายการ
+  - ข้อความ error ของคำสั่ง (ขึ้นต้นด้วยตัวพิมพ์เล็ก เช่น "bad parameters: …", "can't split at the first row") ยังเป็นภาษาอังกฤษตามนโยบายเดิม เพราะคำสั่งตอบสคริปต์และ MCP ด้วย: เพิ่ม `pseudo::note_status`/`statuses` (เฉพาะ `cfg(test)`) จดข้อความที่ส่งไปแถบสถานะ ให้ audit ยกเว้นข้อความเหล่านี้ โปรแกรมจริงไม่เปลี่ยน
+  - ผู้ใช้: UI ภาษาไทย รัสเซีย ฮังการี ตุรกี และอิตาลีแสดงข้อความเหล่านี้เป็นภาษานั้น ไม่กระทบไฟล์ .docx และค่าที่บันทึกไว้
+  - ตรวจสอบ: `cargo test -p doc4me-ui-egui i18n -- --include-ignored` 60 ผ่าน (รวม `untranslated_interface_text`, `thai_covers_the_entire_existing_interface_catalog`, `thai_catalog_is_typed_cleanly`)
 - ปรับเทสต์ที่ผูกกับระยะบรรทัด 1.30 em ของ Sarabun ให้ใช้ค่าใหม่ ได้แก่
   - layout: แถวตารางข้อความหมุน, Table Grid, ตารางลอยหลังหน้าเต็ม, เชิงอรรถยาว
   - render: ข้อความหมุนในเซลล์

@@ -10,11 +10,25 @@ thread_local! {
     static CACHE: RefCell<HashMap<String, &'static str>> = RefCell::new(HashMap::new());
     // Every English string looked up while on, to check against a real catalog.
     static LOOKED_UP: RefCell<BTreeSet<String>> = const { RefCell::new(BTreeSet::new()) };
+    // Engine messages (statuses and command errors) the status bar looked up while on.
+    static STATUSES: RefCell<BTreeSet<String>> = const { RefCell::new(BTreeSet::new()) };
 }
 
 /// Every English string looked up while the pseudo-language was on.
 pub fn looked_up() -> BTreeSet<String> {
     LOOKED_UP.with_borrow(Clone::clone)
+}
+
+/// Note an engine message on its way to the status bar (while on).
+pub fn note_status(s: &str) {
+    if on() {
+        STATUSES.with_borrow_mut(|l| l.insert(s.to_string()));
+    }
+}
+
+/// Every engine message the status bar looked up while the pseudo-language was on.
+pub fn statuses() -> BTreeSet<String> {
+    STATUSES.with_borrow(Clone::clone)
 }
 
 pub fn on() -> bool {

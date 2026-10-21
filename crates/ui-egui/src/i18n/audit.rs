@@ -328,6 +328,11 @@ fn complete_catalogs_have_every_string_the_interface_looked_up(mut keys: std::co
             keys.extend(templates.iter().map(|t| t.label.to_string()));
         }
     }
+    // A command's error message on its way to the status bar (lowercase, as Rust errors are):
+    // commands answer scripts and MCP too, so their messages stay English for now. Engine
+    // statuses that read as sentences ("These settings will be used for new documents.") do not.
+    let errors: std::collections::BTreeSet<String> =
+        pseudo::statuses().into_iter().filter(|s| s.chars().next().is_some_and(char::is_lowercase)).collect();
     let numbered = |s: &str| ["Heading ", "TOC "].iter().any(|p| s.strip_prefix(p).is_some_and(|n| n.chars().all(|c| c.is_ascii_digit())));
     // Names that read the same in these languages (citation style names included).
     let same = |s: &str| {
@@ -355,7 +360,8 @@ fn complete_catalogs_have_every_string_the_interface_looked_up(mut keys: std::co
     let mut report = String::new();
     for code in ["ru", "hu", "tr", "th"] {
         let lang = super::Lang::from_code(code).unwrap_or(super::Lang::EN);
-        let missing: Vec<&String> = keys.iter().filter(|s| english_words(s) && !super::has(lang, s) && !numbered(s) && !same(s)).collect();
+        let missing: Vec<&String> =
+            keys.iter().filter(|s| english_words(s) && !super::has(lang, s) && !numbered(s) && !same(s) && !errors.contains(*s)).collect();
         if !missing.is_empty() {
             report.push_str(&format!("{} strings have no {code} entry:\n{missing:#?}\n", missing.len()));
         }
