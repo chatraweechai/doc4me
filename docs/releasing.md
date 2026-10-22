@@ -26,6 +26,12 @@ platforms (inherited from WordCraft) are in [`packaging/`](../packaging/) and ru
      already exists, so bump the version first. Anyone who can run workflows here can release this
      way. A session can start it with the GitHub tools (`actions_run_trigger`, workflow
      `windows-x64-installer.yml`, ref `main`, input `release: true`).
+   - Don't push a change to `.github/workflows` while such a run is going. The tag would point at
+     a commit whose workflow differs from `main`'s, and the release job's `GITHUB_TOKEN` (no
+     `workflows` permission) was refused creating it: `HTTP 403: Resource not accessible by
+     integration` (run 39783304886). Pushes that leave the workflow alone are fine (v1.1.1 was
+     released by run 39788628618 while a handoff commit landed on `main`). If it happens, start
+     the run again on the new `main`; nothing was tagged or released.
 
 The workflow also runs on demand (Actions › Windows x64 installer › Run workflow). Its third-party
 actions are pinned to commit SHAs; the build job only reads the repository, and only the release

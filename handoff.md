@@ -1,22 +1,27 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย
 
-อัปเดต: 2026-10-22 13:45 UTC · สาขา `main` · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-22 14:00 UTC · สาขา `main` · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
 
-## สถานะ: กำลังออก Release v1.1.1 จากแท็บ Actions (รอบที่สอง)
+## สถานะ: ออก 1.1.1 แล้ว ไม่มีงานค้าง
 
-### session 2026-10-22 13:35 UTC: สั่ง release ใหม่
+- [Doc4Me v1.1.1](https://github.com/chatraweechai/doc4me/releases/tag/v1.1.1) ออก 2026-10-22 13:51 UTC จาก [run 39788628618](https://github.com/chatraweechai/doc4me/actions/runs/39788628618) (แท็บ Actions, `release: true`)
+  - tag `v1.1.1` ชี้ `be5893e` มี `doc4me-1.1.1-windows-x64.msi` (32,993,280 ไบต์) และ `doc4me-1.1.1-windows-x64-portable.zip` (43,584,012 ไบต์)
+- งานใหม่ทั้งหมดลง `## [Unreleased]` ห้ามแก้หัวข้อ `[1.1.1]` (ข้อความ "เจ้าของ repo ต้อง push tag เอง" ใน `[1.1.1]` ล้าสมัยแล้ว บันทึกแก้ไว้ใน `[Unreleased]` › แก้ไข)
+- ออกรุ่นถัดไป: `cargo xtask version set x.y.z` ย้าย `[Unreleased]` เป็น `## [x.y.z] - YYYY-MM-DD` push ไป `main` แล้วสั่ง workflow `windows-x64-installer.yml` บน `main` พร้อม `release: true` (ดู `docs/releasing.md` ข้อ 4)
+  - ระหว่างที่ release รัน ห้าม push การแก้ไฟล์ใน `.github/workflows` (เป็นเหตุให้รอบแรกของ 1.1.1 ล้มด้วย 403) push ไฟล์อื่นได้
+
+### session 2026-10-22 13:35–14:00 UTC: ออก Release v1.1.1
 
 - ผู้ใช้สั่ง "ดำเนินการต่อจากที่ค้างให้เสร็จ" งานที่ค้างมีข้อเดียวคือ Release v1.1.1 (ตอนเริ่ม session ยังไม่มี tag `v1.1.1` บน GitHub)
-- สาเหตุที่น่าจะทำให้รอบแรกได้ 403 (อ่านจาก log ของ job `release` ใน run 39783304886):
-  - token มี `Contents: write` ถูกต้อง แต่ตอนที่ job `release` เรียก `POST /releases` (13:14:20 UTC) `main` ถูก push `e06edac` ไปแล้ว (13:11:49) ซึ่งแก้ `.github/workflows/windows-x64-installer.yml`
-  - tag ใหม่ที่ `858b9bd` จึงมีไฟล์ workflow ไม่ตรงกับ `main` และ `GITHUB_TOKEN` ไม่มีสิทธิ์ `workflows` ที่จะสร้าง ref แบบนั้น (ยังเป็นสมมติฐาน)
-- 13:38 UTC สั่ง workflow_dispatch `release: true` บน `main` ที่ `be5893e` เป็น [run 39788628618](https://github.com/chatraweechai/doc4me/actions/runs/39788628618)
-  - ระหว่างรอบนี้ไม่ push อะไรขึ้น `main` เพื่อให้ `main` ตรงกับคอมมิตที่จะติด tag ตลอด และ commit handoff นี้ไว้ในเครื่องก่อน แล้วค่อย push หลัง job `release` จบ
-  - ตั้งเวลาให้ session กลับมาตรวจตอน 13:53 UTC
-- ถ้ารอบนี้ผ่าน: ตรวจว่า Release v1.1.1 มี MSI และ zip และ tag ชี้ `be5893e` แล้วบันทึกผลลง `[Unreleased]` ใน CHANGELOG (ห้ามแก้ `[1.1.1]` เพราะเป็นบันทึกของรุ่นที่ออกแล้ว)
-- ถ้ารอบนี้ล้มอีก: ใช้ทางเดิมด้านล่าง (เจ้าของ repo push tag เอง)
+- สาเหตุที่รอบแรก (run 39783304886) ได้ 403 อ่านจาก log ของ job `release`:
+  - token มี `Contents: write` ถูกต้อง แต่ก่อนที่ job `release` จะเรียก `POST /releases` (13:14:20 UTC) `main` ถูก push `e06edac` ไปแล้ว (13:11:49) ซึ่งแก้ `.github/workflows/windows-x64-installer.yml`
+  - tag ใหม่ที่ `858b9bd` จึงมีไฟล์ workflow ไม่ตรงกับ `main` และ `GITHUB_TOKEN` ไม่มีสิทธิ์ `workflows` ที่จะสร้าง ref แบบนั้น
+- 13:38 UTC สั่ง workflow_dispatch `release: true` บน `main` ที่ `be5893e` เป็น run 39788628618 แล้วผ่านทั้ง job `build` และ `release`
+  - ระหว่างรัน push `10a276a` (handoff อย่างเดียว) ขึ้น `main` ตอน 13:42:43 เพราะ stop hook เตือนเรื่องคอมมิตที่ยังไม่ push และไฟล์ workflow ยังเหมือนเดิม release ก็ยังผ่าน จึงสรุปว่าตัวการคือไฟล์ workflow ที่ต่างกัน ไม่ใช่การที่ `main` ขยับ (สรุปจากการเทียบสองรอบ ไม่ได้ยืนยันจากเอกสารของ GitHub)
+  - run ของ push `10a276a` (39789261472) ผ่าน
+- บันทึกผลใน `CHANGELOG.md` `[Unreleased]` และเพิ่มข้อควรระวังใน `docs/releasing.md`
 
-### ทางเลือกในการออก Release v1.1.1
+### ทางเลือกในการออก Release v1.1.1 (บันทึกเดิม ก่อนออกสำเร็จ)
 
 - งานโค้ด ภาพหน้าจอ อภิธานศัพท์ และเอกสารของ 1.1.1 เสร็จและ push ไป `main` แล้ว ไม่มีงานโค้ดค้าง
 - ทางที่ใช้ได้: เจ้าของ repo รันบนเครื่องตัวเอง `git fetch origin && git tag -a v1.1.1 origin/main -m "Doc4Me 1.1.1" && git push origin v1.1.1`

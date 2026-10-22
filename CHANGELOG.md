@@ -11,6 +11,21 @@
 
 ## [Unreleased]
 
+### เปลี่ยนแปลง
+
+- **คู่มือออกรุ่น: ห้าม push การแก้ไฟล์ workflow ระหว่างที่ release จากแท็บ Actions กำลังรัน** (`docs/releasing.md` ข้อ 4)
+  - เหตุผล: รอบแรกของ Release v1.1.1 (run 39783304886) ล้มด้วย `HTTP 403: Resource not accessible by integration` ตอนสร้าง tag ที่ `858b9bd` เพราะก่อน job `release` จะรัน (13:14:20 UTC) `main` ถูก push `e06edac` ซึ่งแก้ `.github/workflows/windows-x64-installer.yml` ไปแล้ว (13:11:49 UTC) tag ใหม่จึงชี้คอมมิตที่ไฟล์ workflow ต่างจาก `main` และ `GITHUB_TOKEN` ของ job ไม่มีสิทธิ์ `workflows`
+  - รอบที่สอง (run 39788628618 ที่ `be5893e`) ผ่าน ทั้งที่ระหว่างรัน `main` ขยับไป `10a276a` (13:42:43 UTC แก้แค่ `handoff.md`) จึงสรุปว่าตัวการคือไฟล์ workflow ที่ต่างกัน ไม่ใช่การที่ `main` ขยับ ข้อสรุปนี้มาจากการเทียบสองรอบ ไม่ได้มาจากเอกสารของ GitHub
+  - คู่มือบอกวิธีแก้ด้วย: สั่ง run ใหม่บน `main` ล่าสุด เพราะรอบที่ล้มไม่ได้สร้าง tag หรือ Release
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+
+### แก้ไข
+
+- **ข้อมูลใน `[1.1.1]` ที่ล้าสมัย: Release v1.1.1 ออกจากแท็บ Actions ได้แล้ว** (บันทึกเป็นรายการใหม่ตามกติกา ไม่แก้หัวข้อ `[1.1.1]`)
+  - หัวข้อ `[1.1.1]` › เปลี่ยนแปลง › ข้อจำกัดที่ทราบ บอกว่าออก Release ผ่าน workflow ไม่ได้และเจ้าของ repo ต้อง push tag เอง ตอนนี้ไม่จริงแล้ว: [Doc4Me v1.1.1](https://github.com/chatraweechai/doc4me/releases/tag/v1.1.1) ออกเมื่อ 2026-10-22 13:51 UTC โดย [run 39788628618](https://github.com/chatraweechai/doc4me/actions/runs/39788628618) (workflow_dispatch `release: true`)
+  - tag `v1.1.1` ชี้ `be5893e` มีไฟล์ `doc4me-1.1.1-windows-x64.msi` (32,993,280 ไบต์) และ `doc4me-1.1.1-windows-x64-portable.zip` (43,584,012 ไบต์) บันทึกประจำรุ่นคือหัวข้อ `[1.1.1]` ของ `be5893e`
+  - ตรวจสอบ: job `build` และ `release` ของ run 39788628618 ผ่าน; `get_release_by_tag v1.1.1` ได้ `target_commitish` = `be5893e`, `draft: false`, ไฟล์สองไฟล์สถานะ `uploaded`; `git fetch --tags` แล้ว `git rev-parse v1.1.1^{commit}` ได้ `be5893e`
+
 ## [1.1.1] - 2026-10-22
 
 ### เพิ่ม
