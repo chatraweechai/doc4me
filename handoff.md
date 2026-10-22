@@ -1,8 +1,20 @@
-# Handoff: Doc4Me 1.1.0 และงานภาษาไทย
+# Handoff: Doc4Me 1.1.1 และงานภาษาไทย
 
-อัปเดต: 2026-10-22 · สาขา `main` · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-22 13:25 UTC · สาขา `main` · ผู้ใช้สั่งยุติ session นี้ · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.1]` และ `[1.1.0]`
 
 ## สถานะ: 1.1.1 พร้อมออก รอเจ้าของ repo push tag `v1.1.1`
+
+### สิ่งเดียวที่ค้าง: ออก Release v1.1.1
+
+- งานโค้ด ภาพหน้าจอ อภิธานศัพท์ และเอกสารของ 1.1.1 เสร็จและ push ไป `main` แล้ว ไม่มีงานโค้ดค้าง
+- ทางที่ใช้ได้: เจ้าของ repo รันบนเครื่องตัวเอง `git fetch origin && git tag -a v1.1.1 origin/main -m "Doc4Me 1.1.1" && git push origin v1.1.1`
+- ทางที่ลองแล้วไม่สำเร็จ:
+  - session บนคลาวด์ push tag ไม่ได้ (git proxy ตอบ HTTP 403) แม้ `.claude/settings.json` อนุญาต `git tag -a v*` / `git push origin v*` แล้ว
+  - ตัวเลือก `release` ของ workflow_dispatch (เพิ่มใน `858b9bd`, แก้ใน `e06edac`): run 39783304886 build ผ่าน แต่ `gh release create v1.1.1 --target` ล้มด้วย `HTTP 403: Resource not accessible by integration` (สร้าง tag ใหม่ด้วย `GITHUB_TOKEN` ไม่ได้)
+  - ถ้าจะทำให้ทางนี้ใช้ได้ (ยังไม่ได้ตรวจ): ดู Settings › Actions › General › Workflow permissions ว่าเป็น "Read and write" หรือไม่ และ GitHub อาจไม่ให้ `GITHUB_TOKEN` สร้าง ref ที่ชี้คอมมิตซึ่งแก้ไฟล์ workflow ทางแก้คือใช้ PAT หรือ GitHub App token ที่มีสิทธิ์ `contents` + `workflows` เป็น secret
+- หลังออกแล้ว: ตรวจว่า Release มี MSI และ zip และ job `release` ผ่าน งานใหม่ทั้งหมดลง `## [Unreleased]` ห้ามแก้ `[1.1.1]`
+
+### ประวัติของ 1.1.1
 
 - 2026-10-22 ผู้ใช้สั่ง: เพิ่มการจัดแนว จัดกระจายแบบไทย, ระยะห่างตัวอักขระ ปกติ/บีบ/ขยาย ขนาด 0–1584 pt และเลขเวอร์ชัน 1.1.1 ทำเสร็จและ push ไป `main` แล้ว เทสต์ ui-egui/engine, audit ภาษา, clippy และ fmt ผ่าน (ดู `[1.1.1]` หมวดการตรวจสอบ)
 - `Cargo.toml` เป็น 1.1.1 และ CHANGELOG มี `## [1.1.1] - 2026-10-22` แล้ว `[Unreleased]` ว่าง

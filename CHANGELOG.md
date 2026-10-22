@@ -52,6 +52,9 @@
   - ตรวจสอบ: แปลง YAML ด้วย Ruby ได้ เงื่อนไข `if` และ input ถูกต้อง; คำสั่ง `sed` อ่านเวอร์ชันจาก `Cargo.toml` ได้ `1.1.1`; ผลรันจริงบันทึกในคอมมิตถัดไป
   - ตรวจบั๊กหลัง push: ขั้นตรวจว่ามี tag แล้วหรือไม่เดิมถือทุกความล้มเหลวของ `gh api` (สิทธิ์ผิด, rate limit, GitHub ล่ม) ว่า "ไม่มี tag" แล้วออก Release ต่อ ซึ่งอาจผูก Release กับ tag เดิมที่อยู่คนละคอมมิต แก้ให้ผ่านเฉพาะเมื่อได้ `HTTP 404` กรณีอื่นหยุดพร้อมข้อความ error; ยืนยันรูปแบบข้อความด้วย `gh api repos/chatraweechai/doc4me/git/ref/tags/v9.9.9` ได้ `gh: Not Found (HTTP 404)` และ YAML ยังแปลงได้
   - ตรวจโค้ดฝั่งแอปของ 1.1.1 ซ้ำ (ปุ่มจัดแนว, `para.thaiDistribute`, ช่องระยะห่าง) ไม่พบบั๊กหรือช่องโหว่เพิ่ม
+  - ข้อจำกัดที่ทราบ: รันจริงครั้งแรก ([run 39783304886](https://github.com/chatraweechai/doc4me/actions/runs/39783304886), คอมมิต `858b9bd`, `release: true`) job build ผ่าน แต่ job `release` ล้มที่ `gh release create v1.1.1 --target` ด้วย `HTTP 403: Resource not accessible by integration` จึงไม่มี tag และ Release v1.1.1
+    - การสร้าง Release บน tag ที่มีอยู่แล้วด้วยสิทธิ์เดียวกันเคยสำเร็จ (Release v1.1.0) จุดที่ต่างคือการสร้าง tag ใหม่ผ่าน `GITHUB_TOKEN` สาเหตุที่น่าจะเป็น (ยังไม่ยืนยัน): GitHub ไม่ให้ `GITHUB_TOKEN` สร้าง ref ที่ชี้คอมมิตซึ่งแก้ไฟล์ใน `.github/workflows` เพราะ token นี้ไม่มีสิทธิ์ `workflows` หรือการตั้งค่า Actions ของ repo จำกัดสิทธิ์ token
+    - ทางที่ใช้ได้ตอนนี้: เจ้าของ repo push tag จากเครื่องตัวเอง (`git tag -a v1.1.1 origin/main -m "Doc4Me 1.1.1" && git push origin v1.1.1`) แล้ว job `release` จะสร้าง Release บน tag นั้นเหมือน 1.1.0
 
 ### การตรวจสอบ
 
