@@ -1,6 +1,6 @@
 # Thai interface
 
-> **Last reviewed:** 2026-10-19 · **Last updated:** 2026-10-21 · **Change:** trivial (catalog count 2,452 and target Doc4Me 1.1.0; previously major: first version, Thai interface catalog, style guide and glossary) · **Target:** Doc4Me 1.1.0
+> **Last reviewed:** 2026-10-19 · **Last updated:** 2026-10-22 · **Change:** trivial (catalog count 2,456: character spacing choices, target Doc4Me 1.1.1; previously trivial: catalog count 2,452 and target Doc4Me 1.1.0; previously major: first version, Thai interface catalog, style guide and glossary) · **Target:** Doc4Me 1.1.1
 
 Choose **File › Options › Interface language › ไทย**, or follow a Thai system display language
 (`th`, `th-TH`, `th_TH.UTF-8`). The catalog code is `th`; `ui.language` with `{"value":"th"}`
@@ -9,7 +9,7 @@ launch while the preference is `auto`. Document text, command ids, CLI/MCP/contr
 file paths do not change, and new documents keep US English as their editing language (Thai text
 is proofed whatever its language).
 
-`crates/ui-egui/src/i18n/th.tsv` has every key of the other catalogs (2,452 entries). The tests in
+`crates/ui-egui/src/i18n/th.tsv` has every key of the other catalogs (2,456 entries). The tests in
 `crates/ui-egui/src/i18n/tests.rs` (`thai_*`) check the locales, the coverage, the font coverage
 (bundled Sarabun) and that every entry is typed cleanly: no Thai digits, no `...`, no letters of
 other scripts, and no mark from Doc4Me's own Thai proofing.
@@ -247,6 +247,10 @@ URGENT) stay in English because the menu inserts the English label text.
 | First line                                      | บรรทัดแรก                                          | Special indent. First line: → บรรทัดแรก:.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | Indents and Spacing                             | การเยื้องและระยะห่าง                               | Paragraph dialog tab.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Spacing                                         | ระยะห่าง                                           | Between lines, paragraphs, characters. The blank character itself is ช่องว่าง. Spacing: → ระยะห่าง:; Spacing (pt): → ระยะห่าง (pt):.                                                                                                                                                                                                                                                                                                                                                       |
+| Expanded                                        | ขยาย                                               | Font › Advanced › Spacing choice: characters spread apart by the By amount. Same word as Expand (ขยาย); the choice sits next to บีบ, so no noun is needed. |
+| Condensed                                       | บีบ                                                | Font › Advanced › Spacing choice: characters drawn closer by the By amount. A: บีบ; B: บีบอัด (reads as data compression). Chose A, as the user asked. |
+| By:                                             | ขนาด:                                              | Font › Advanced: the amount of Expanded/Condensed spacing, 0–1584 pt. A literal โดย: reads wrongly; ขนาด: names the amount. |
+| Normal (spacing)                                | ปกติ                                               | Font › Advanced › Spacing choice, `spacing` context. Same word as the Normal style. |
 | Line Spacing                                    | ระยะห่างบรรทัด                                     | Line spacing / Line spacing: → ระยะห่างบรรทัด(:); Line Spacing Options… → ตัวเลือกระยะห่างบรรทัด….                                                                                                                                                                                                                                                                                                                                                                                         |
 | Single Spacing                                  | ระยะห่างบรรทัด 1 เท่า                              | A: ระยะห่าง 1 เท่า; B: ระยะห่างบรรทัดเท่าเดียว. Merged: keeps บรรทัด (B) and the numeric pattern (A) so the three presets read alike: 1.5 Line Spacing → ระยะห่างบรรทัด 1.5 เท่า; Double Spacing → ระยะห่างบรรทัด 2 เท่า.                                                                                                                                                                                                                                                                  |
 | Paragraph Spacing                               | ระยะห่างย่อหน้า                                    | Design menu. No Paragraph Space → ไม่มีระยะห่างย่อหน้า.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
@@ -1005,5 +1009,6 @@ URGENT) stay in English because the menu inserts the English label text.
 
 | Date       | Change | Summary                                               |
 | ---------- | ------ | ----------------------------------------------------- |
+| 2026-10-22 | trivial | Catalog count 2,456; Expanded, Condensed, By:, Normal (spacing) in the glossary; target Doc4Me 1.1.1 |
 | 2026-10-21 | trivial | Catalog count 2,452 (reading-mode and status strings); target Doc4Me 1.1.0 |
 | 2026-10-19 | major  | First version: Thai catalog, style guide and glossary |
