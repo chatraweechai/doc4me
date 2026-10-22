@@ -16,6 +16,7 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("para.alignRight", "Align Right", "Home › Paragraph", |s, _| align(s, Align::Right)).key("Mod+R"),
         CommandSpec::new("para.justify", "Justify", "Home › Paragraph", |s, _| align(s, Align::Justify)).key("Mod+J"),
         CommandSpec::new("para.distribute", "Distributed", "Home › Paragraph", |s, _| align(s, Align::Distribute)).key("Mod+Shift+J"),
+        CommandSpec::new("para.thaiDistribute", "Thai Distributed", "Home › Paragraph", |s, _| align(s, Align::ThaiDistribute)),
         CommandSpec::new("para.align", "Alignment", "Home › Paragraph", |s, v| {
             let a = match p::req_str(v, "value")? {
                 "left" => Align::Left,

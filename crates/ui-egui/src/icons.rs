@@ -214,6 +214,21 @@ pub fn paint(p: &Painter, r: Rect, name: &str, c: Color32, accent: Color32) {
             ().then_lines(&pen, 8.0, 17.0, &[7.0, 13.0])
         }
         "justify" => pen.lines(3.0, 17.0, &[4.0, 7.0, 10.0, 13.0, 16.0]),
+        // Distributed: full lines, the last one spread to both edges (a two-headed arrow).
+        "distribute" => {
+            pen.lines(3.0, 17.0, &[4.0, 8.0, 12.0]);
+            pen.line_c(&[(3.0, 16.5), (17.0, 16.5)], a);
+            pen.line_c(&[(5.5, 14.5), (3.0, 16.5), (5.5, 18.5)], a);
+            pen.line_c(&[(14.5, 14.5), (17.0, 16.5), (14.5, 18.5)], a);
+        }
+        // Thai Distributed: full lines and a Thai letter spread to the far edge.
+        "thaiDistribute" => {
+            pen.lines(3.0, 17.0, &[4.0, 8.0]);
+            pen.text(5.5, 14.0, 9.0, "ก", c, false);
+            pen.line_c(&[(9.5, 14.5), (17.0, 14.5)], a);
+            pen.line_c(&[(11.5, 12.5), (9.5, 14.5), (11.5, 16.5)], a);
+            pen.line_c(&[(15.0, 12.5), (17.0, 14.5), (15.0, 16.5)], a);
+        }
         // Text direction: lines set from the start edge, an arrow in the reading direction.
         "textLtr" => {
             pen.lines(3.0, 14.0, &[4.0, 8.0]);

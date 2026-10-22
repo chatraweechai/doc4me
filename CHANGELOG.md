@@ -11,6 +11,35 @@
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-10-22
+
+### เพิ่ม
+
+- **ปุ่มจัดแนว "จัดกระจาย" และ "จัดกระจายแบบไทย" บนริบบอน และในกล่อง Paragraph** (`crates/ui-egui/src/ribbon.rs`, `icons.rs`, `dialogs.rs` `ALIGNS`, `crates/engine/src/cmd/para.rs`, `crates/engine/src/catalog.rs`, `docs/parity-checklist.md`)
+  - เหตุผล: เอกสารรองรับ `w:jc="thaiDistribute"` และ `distribute` อยู่แล้ว (อ่าน เขียน จัดหน้า) แต่ผู้ใช้เลือกได้เฉพาะผ่านคำสั่ง `para.align` หรือ Ctrl+Shift+J
+  - เพิ่มคำสั่ง `para.thaiDistribute` (Home › Paragraph, กดซ้ำกลับเป็นชิดซ้ายเหมือนปุ่มจัดแนวอื่น) และไอคอน `distribute` / `thaiDistribute`; กล่องตัวเลือกการจัดแนวในกล่อง Paragraph มี จัดกระจาย และ จัดกระจายแบบไทย
+  - ผู้ใช้: ไฟล์ .docx เดิมไม่เปลี่ยน ค่าที่เลือกบันทึกเป็น `w:jc` ตามมาตรฐาน (RTF/ODT/HTML บันทึกเป็น justify ตามเดิม); แถบ Paragraph กว้างขึ้นสองปุ่ม
+- **ระยะห่างตัวอักขระแบบ ปกติ / ขยาย / บีบ ปรับขนาดได้ 0–1584 pt** (กล่อง Font หน้า Advanced, `crates/ui-egui/src/dialogs.rs` `spacing_kind`, `spacing_value`)
+  - เดิมเป็นช่องตัวเลขเดียว −20 ถึง 20 pt ตอนนี้เลือกชนิดแล้วกรอกขนาดได้ถึง 1584 pt ซึ่งเป็นค่าสูงสุดที่ `w:spacing` เก็บได้ (±31680 twips) เหมือน Word; เปลี่ยนจากปกติเป็นขยายหรือบีบเริ่มที่ 1 pt
+  - คำสั่ง `format.spacing` รับ ±1584 pt (เดิมบีบไว้ ±100 pt ขณะที่ตัวอ่าน/เขียน .docx รับ ±1584 อยู่แล้ว)
+  - คำแปลใหม่ใน 18 ภาษา: `Expanded`, `Condensed`, `By:` และ `spacing` › `Normal` (ไทย: ขยาย, บีบ, ขนาด:, ปกติ) ป้าย `Spacing (pt):` เปลี่ยนเป็น `Spacing:` ที่มีคำแปลอยู่แล้ว
+  - ผู้ใช้: ค่าที่มีอยู่ในเอกสาร รวมถึงค่านอกช่วง ไม่ถูกเปลี่ยนเมื่อแค่เปิดหน้า Advanced ไฟล์ .docx เดิมไม่กระทบ
+
+### แก้ไข
+
+- **กล่อง Paragraph แสดงการจัดแนว "จัดกระจายแบบไทย" เป็น `thaidistribute`** (`crates/ui-egui/src/dialogs.rs` `align_value`)
+  - สาเหตุ: ชื่อมาจาก `format!("{:?}").to_lowercase()` ซึ่งไม่ตรงกับค่า `thaiDistribute` ที่ `para.align` รับ กด OK แล้วคำสั่งตอบ error
+  - แก้: แปลง `Align` เป็นค่าของ `para.align` โดยตรง
+
+### เปลี่ยนแปลง
+
+- **เวอร์ชัน 1.1.1** (`Cargo.toml`, `Cargo.lock` เฉพาะแพ็กเกจใน workspace ด้วย `cargo xtask version set 1.1.1`) installer ติดตั้งทับ 1.1.0 ได้ (`UpgradeCode` เดิม)
+
+### การตรวจสอบ
+
+- เทสต์ใหม่ `font_spacing_is_normal_expanded_or_condensed_up_to_1584_pt`, `paragraph_dialog_shows_and_sets_thai_distributed` และกรณีจัดกระจาย/จัดกระจายแบบไทยใน `paragraph_dialog_ok_keeps_what_it_shows`
+- ผลการรันเทสต์บันทึกในคอมมิตถัดไป (commit ก่อนตรวจตามคำสั่งผู้ใช้)
+
 ## [1.1.0] - 2026-10-21
 
 ### เปลี่ยนแปลง
@@ -425,6 +454,7 @@ Doc4Me รุ่นแรก พัฒนาต่อจาก WordCraft 0.6.0 �
   - ตัวตรวจตัวสะกดภาษาไทย
   - เลขลำดับแบบคำอ่านไทย (`thaiCounting`)
 
-[Unreleased]: https://github.com/chatraweechai/doc4me/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/chatraweechai/doc4me/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/chatraweechai/doc4me/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/chatraweechai/doc4me/releases/tag/v1.1.0
 [1.0.0]: https://github.com/chatraweechai/doc4me/releases/tag/v1.0.0

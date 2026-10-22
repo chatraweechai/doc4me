@@ -980,7 +980,7 @@ impl Dialog {
                 let (vl, vr) = rp.visual_indents();
                 Dialog::Paragraph {
                     rtl: rp.bidi,
-                    align: format!("{:?}", rp.align.visual(rp.bidi)).to_lowercase(),
+                    align: align_value(rp.align.visual(rp.bidi)).into(),
                     left: vl / crate::options::unit().pt_per_unit(),
                     right: vr / crate::options::unit().pt_per_unit(),
                     first: rp.indent_first / crate::options::unit().pt_per_unit(),
@@ -1440,6 +1440,40 @@ fn east_asian_char(c: char) -> bool {
     matches!(u32::from(c), 0x1100..=0x11FF | 0x2E80..=0x9FFF | 0xA960..=0xA97F | 0xAC00..=0xD7FF | 0xF900..=0xFAFF | 0xFE30..=0xFE4F | 0xFF00..=0xFFEF | 0x20000..=0x3FFFF)
 }
 
+/// The `para.align` value of an alignment as seen on the page.
+fn align_value(a: doc4me_doc::Align) -> &'static str {
+    use doc4me_doc::Align as A;
+    match a {
+        A::Left => "left",
+        A::Center => "center",
+        A::Right => "right",
+        A::Justify => "justify",
+        A::Distribute => "distribute",
+        A::ThaiDistribute => "thaiDistribute",
+    }
+}
+
+/// The Font dialog's Spacing choice for a character spacing in points: 0 Normal, 1 Expanded,
+/// 2 Condensed.
+fn spacing_kind(points: f32) -> usize {
+    if points > 0.0 {
+        1
+    } else if points < 0.0 {
+        2
+    } else {
+        0
+    }
+}
+
+/// The character spacing for a Spacing choice ([`spacing_kind`]) and its "By" amount.
+fn spacing_value(kind: usize, by: f32) -> f32 {
+    match kind {
+        1 => by,
+        2 => -by,
+        _ => 0.0,
+    }
+}
+
 /// The Font dialog's OK: one formatting step that sets only the properties the user changed, so
 /// formatting the dialog can't show or left alone stays as it is. Fonts are set by their stored
 /// (English) names, the Latin font for Persian/Arabic text too (as `format.font`).
@@ -1560,8 +1594,32 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 egui::Grid::new("fontdlg_adv").num_columns(2).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
                     // Only what the user enters is held to a box's range: egui clamps the value
                     // already there by default, which would change the text just by showing the page.
-                    ui.label(tl!("Spacing (pt):"));
-                    ui.add(egui::DragValue::new(spacing).speed(0.1).range(-20.0..=20.0).clamp_existing_to_range(false));
+                    // Word's Spacing box: Normal, Expanded or Condensed by an amount up to 1584 pt
+                    // (the most `w:spacing` holds, ±31680 twips); the document keeps one signed value.
+                    ui.label(tl!("Spacing:"));
+                    ui.horizontal(|ui| {
+                        let was = spacing_kind(*spacing);
+                        let mut kind = was;
+                        let names = [crate::i18n::tc("spacing", "Normal"), tl!("Expanded"), tl!("Condensed")];
+                        egui::ComboBox::from_id_salt("fontdlg_spacing").selected_text(names[kind]).show_ui(ui, |ui| {
+                            for (k, n) in names.iter().enumerate() {
+                                ui.selectable_value(&mut kind, k, *n);
+                            }
+                        });
+                        let mut by = spacing.abs();
+                        if kind != was && by == 0.0 {
+                            // Word starts a new expansion or condensing at 1 pt.
+                            by = 1.0;
+                        }
+                        ui.label(tl!("By:"));
+                        ui.add_enabled(
+                            kind != 0,
+                            egui::DragValue::new(&mut by).speed(0.1).range(0.0..=1584.0).clamp_existing_to_range(false).suffix(" pt"),
+                        );
+                        if kind != was || (kind != 0 && by != spacing.abs()) {
+                            *spacing = spacing_value(kind, by);
+                        }
+                    });
                     ui.end_row();
                     // Kerning for fonts: a box that turns pair kerning on from a size up (Word's default is off).
                     ui.label(tl!("Kerning for fonts:"));
@@ -1651,7 +1709,14 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                         ui.radio_value(rtl, true, tl!("Right-to-left"));
                         ui.radio_value(rtl, false, tl!("Left-to-right"));
                     });
-                    const ALIGNS: [(&str, &str); 4] = [("left", "Left"), ("center", "Center"), ("right", "Right"), ("justify", "Justify")];
+                    const ALIGNS: [(&str, &str); 6] = [
+                        ("left", "Left"),
+                        ("center", "Center"),
+                        ("right", "Right"),
+                        ("justify", "Justify"),
+                        ("distribute", "Distributed"),
+                        ("thaiDistribute", "Thai Distributed"),
+                    ];
                     ui.horizontal(|ui| {
                         ui.label(tl!("Alignment:"));
                         let shown = ALIGNS.iter().find(|(v, _)| v == align).map_or(align.as_str(), |(_, l)| tl!(l));
@@ -3343,8 +3408,30 @@ mod tests {
     }
 
     #[test]
+    fn paragraph_dialog_shows_and_sets_thai_distributed() {
+        let mut app = app_with("ภาษาไทย");
+        let _ = app.run("para.thaiDistribute", json!({}));
+        assert_eq!(props(&app).align, Some(doc4me_doc::Align::ThaiDistribute));
+        let Some(Dialog::Paragraph { align, .. }) = Dialog::open("paragraph", &mut app) else { panic!() };
+        assert_eq!(align, "thaiDistribute", "the alignment box names it as para.align takes it");
+        let _ = app.run("para.align", json!({"value": "distribute"}));
+        let Some(Dialog::Paragraph { align, .. }) = Dialog::open("paragraph", &mut app) else { panic!() };
+        assert_eq!(align, "distribute");
+        let _ = app.run("para.align", json!({"value": "thaiDistribute"}));
+        assert_eq!(props(&app).align, Some(doc4me_doc::Align::ThaiDistribute));
+    }
+
+    #[test]
     fn paragraph_dialog_ok_keeps_what_it_shows() {
-        for (rtl, align) in [(false, "para.alignCenter"), (false, "para.alignRight"), (true, "para.alignLeft"), (true, "para.alignRight")] {
+        for (rtl, align) in [
+            (false, "para.alignCenter"),
+            (false, "para.alignRight"),
+            (true, "para.alignLeft"),
+            (true, "para.alignRight"),
+            (false, "para.distribute"),
+            (false, "para.thaiDistribute"),
+            (true, "para.thaiDistribute"),
+        ] {
             let mut app = app_with("متن");
             let _ = app.run(if rtl { "para.rtl" } else { "para.ltr" }, json!({}));
             let _ = app.run(align, json!({}));
@@ -3579,6 +3666,42 @@ mod tests {
         }
         let Dialog::Font { kern, spacing, .. } = &d else { panic!("not the font dialog") };
         assert_eq!((*kern, *spacing), (0.0, 25.0));
+    }
+
+    /// Word's Spacing box: Normal, Expanded or Condensed by up to 1584 pt. Showing it keeps any
+    /// value, and OK writes the signed spacing.
+    #[test]
+    fn font_spacing_is_normal_expanded_or_condensed_up_to_1584_pt() {
+        assert_eq!([spacing_kind(0.0), spacing_kind(2.5), spacing_kind(-1584.0), spacing_kind(-0.0)], [0, 1, 2, 0]);
+        assert_eq!([spacing_value(0, 7.0), spacing_value(1, 1584.0), spacing_value(2, 1584.0)], [0.0, 1584.0, -1584.0]);
+        let mut app = app_with("Example");
+        let _ = app.run("select.all", json!({}));
+        for shown in [-1584.0, 1584.0, -2000.0, 0.0] {
+            let Some(mut d) = Dialog::open("font", &mut app) else { panic!("no font dialog") };
+            if let Dialog::Font { tab, spacing, .. } = &mut d {
+                *tab = 1;
+                *spacing = shown;
+            }
+            let ctx = egui::Context::default();
+            for _ in 0..2 {
+                ctx.run_ui(Default::default(), |ui| {
+                    body(&mut app, ui, &mut d);
+                })
+                .drop_without_applying_deltas();
+            }
+            let Dialog::Font { spacing, .. } = &d else { panic!("not the font dialog") };
+            assert_eq!(*spacing, shown, "showing the page keeps {shown} pt");
+        }
+        let Some(mut d) = Dialog::open("font", &mut app) else { panic!("no font dialog") };
+        if let Dialog::Font { spacing, .. } = &mut d {
+            *spacing = spacing_value(2, 1584.0);
+        }
+        apply_font(&mut app, &d);
+        let c = app.session.doc.para_at(&Pos::body(0, 0)).map(|p| p.props_of_char(0).clone()).unwrap_or_default();
+        assert_eq!(c.spacing, Some(-1584.0));
+        let _ = app.run("format.spacing", json!({"points": 1584}));
+        let c = app.session.doc.para_at(&Pos::body(0, 0)).map(|p| p.props_of_char(0).clone()).unwrap_or_default();
+        assert_eq!(c.spacing, Some(1584.0), "format.spacing takes Word's whole range");
     }
 
     /// A dialog was pinned by its anchor, so dragging its title bar did nothing (#732).

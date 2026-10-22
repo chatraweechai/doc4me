@@ -2449,3 +2449,7 @@ preview	Title	Пример
 	Column selection: the arrow keys extend the block, Esc ends it	Выделение столбца: клавиши со стрелками расширяют блок, Esc завершает выделение
 	{w} × {h} in	{w} × {h} дюйм.
 	{w} × {h} mm	{w} × {h} мм
+	Expanded	Разреженный
+	Condensed	Уплотнённый
+	By:	На:
+spacing	Normal	Обычный

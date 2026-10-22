@@ -2048,3 +2048,7 @@
 	Your system has animation effects turned on.	システムのアニメーション効果はオンです。
 	Your system has animation effects turned off.	システムのアニメーション効果はオフです。
 	Your system doesn't report an animation setting, so animation effects stay on.	システムからアニメーションの設定を取得できないため、アニメーション効果はオンのままです。
+	Expanded	広く
+	Condensed	狭く
+	By:	幅:
+spacing	Normal	標準
