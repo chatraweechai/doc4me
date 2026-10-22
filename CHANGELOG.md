@@ -39,6 +39,8 @@
 
 - เทสต์ใหม่ `font_spacing_is_normal_expanded_or_condensed_up_to_1584_pt`, `paragraph_dialog_shows_and_sets_thai_distributed` และกรณีจัดกระจาย/จัดกระจายแบบไทยใน `paragraph_dialog_ok_keeps_what_it_shows`
 - ผลการรันเทสต์บันทึกในคอมมิตถัดไป (commit ก่อนตรวจตามคำสั่งผู้ใช้)
+- ผลตรวจหลัง push: `cargo test -p doc4me-ui-egui` ผ่าน 322 (ignore 1 คือ audit ภาษา); `cargo test -p doc4me-ui-egui i18n -- --include-ignored` ผ่าน 60 (รวม audit `untranslated_interface_text` และเทสต์ครอบคลุมคีย์ของทุกภาษา); `cargo test -p doc4me-engine` ผ่าน 372 + 13 + 8; `cargo clippy -p doc4me-ui-egui -p doc4me-engine --all-targets -- -D warnings` และ `cargo fmt --all --check` ผ่าน
+- ตรวจทาน diff แล้วไม่พบบั๊กหรือช่องโหว่เพิ่ม: ค่าระยะห่างที่ป้อนผ่าน UI อยู่ใน ±1584 pt และตัวเขียน .docx บีบไว้ที่ ±1584 อยู่แล้ว; `docs/parity-checklist.md` แก้ตัวเลขด้วยมือ (484/499, Home 103/104) เพราะไม่ได้รัน `cargo xtask parity`
 
 ## [1.1.0] - 2026-10-21
 

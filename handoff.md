@@ -1,12 +1,18 @@
 # Handoff: Doc4Me 1.1.0 และงานภาษาไทย
 
-อัปเดต: 2026-10-22 · สาขา `main` · **ปิดงานครบแล้ว ไม่มีงานค้าง** · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.0]`
+อัปเดต: 2026-10-22 · สาขา `main` · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.1]` และ `[1.1.0]`
 
-## สถานะ: 1.1.0 ออกแล้ว (ตรวจเมื่อ 2026-10-22)
+## สถานะ: 1.1.1 พร้อมออก รอเจ้าของ repo push tag `v1.1.1`
 
-- เจ้าของ repo push tag `v1.1.0` ที่ `51a9658` แล้ว run `Windows x64 installer` #31 ผ่าน และสร้าง Release [Doc4Me v1.1.0](https://github.com/chatraweechai/doc4me/releases/tag/v1.1.0) เมื่อ 2026-10-21 10:41 UTC มี `doc4me-1.1.0-windows-x64.msi` และ `doc4me-1.1.0-windows-x64-portable.zip`
-- เจ้าของ repo เพิ่ม `package-lock.json` ว่างที่รากของ repo (`fc7bab5` "Initial commit") ไม่มีผลต่อโปรแกรม และ CI บน `main` ผ่าน
-- งานใหม่ทั้งหมดลง `## [Unreleased]` ใน CHANGELOG ห้ามแก้ `[1.1.0]`
+- 2026-10-22 ผู้ใช้สั่ง: เพิ่มการจัดแนว จัดกระจายแบบไทย, ระยะห่างตัวอักขระ ปกติ/บีบ/ขยาย ขนาด 0–1584 pt และเลขเวอร์ชัน 1.1.1 ทำเสร็จและ push ไป `main` แล้ว เทสต์ ui-egui/engine, audit ภาษา, clippy และ fmt ผ่าน (ดู `[1.1.1]` หมวดการตรวจสอบ)
+- `Cargo.toml` เป็น 1.1.1 และ CHANGELOG มี `## [1.1.1] - 2026-10-22` แล้ว `[Unreleased]` ว่าง
+- ขั้นที่ session บนคลาวด์ทำไม่ได้ (push tag ได้ HTTP 403): `git fetch origin && git tag -a v1.1.1 origin/main -m "Doc4Me 1.1.1" && git push origin v1.1.1` workflow จะสร้าง Release เอง
+- ยังไม่ได้ถ่ายภาพหน้าจอใหม่ (แถบ Paragraph บนริบบอนมีปุ่มเพิ่มสองปุ่ม) และยังไม่ได้เพิ่มคำใหม่ (ขยาย, บีบ, ขนาด:) ในอภิธานศัพท์ `docs/localization-th.md`
+
+## ประวัติ 1.1.0 (ออกแล้ว 2026-10-21)
+
+- Release [Doc4Me v1.1.0](https://github.com/chatraweechai/doc4me/releases/tag/v1.1.0) ที่ `51a9658` มี MSI และ portable zip
+- เจ้าของ repo เพิ่ม `package-lock.json` ว่างที่ราก (`fc7bab5`) ไม่มีผลต่อโปรแกรม
 
 ### ทำแล้วใน session 2026-10-21 (ทั้งหมดอยู่ใน `[1.1.0]`)
 
