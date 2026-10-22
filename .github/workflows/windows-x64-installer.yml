@@ -1,6 +1,8 @@
 # Builds the Doc4Me Windows x64 installer (MSI) and portable zip.
 # Run it from the Actions tab (workflow_dispatch), by pushing a `v*` tag (also publishes a
-# GitHub Release), or by pushing to main. Third-party actions are pinned to commit SHAs.
+# GitHub Release), or by pushing to main. A workflow_dispatch run on main with `release` ticked
+# also publishes a Release and creates its tag, v<version in Cargo.toml>, at the built commit
+# (for sessions that can't push tags). Third-party actions are pinned to commit SHAs.
 name: Windows x64 installer
 
 on:
@@ -8,12 +10,18 @@ on:
     branches: [main]
     tags: ["v*"]
   workflow_dispatch:
+    inputs:
+      release:
+        description: "Publish a GitHub Release and tag v<version in Cargo.toml> (main only)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 concurrency:
-  group: windows-x64-installer-${{ github.ref }}
+  # By event too, so a push to main doesn't cancel a release started from the Actions tab.
+  group: windows-x64-installer-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
@@ -65,18 +73,45 @@ jobs:
           if-no-files-found: error
 
   release:
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release)
     needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      # Only CHANGELOG.md is needed (for the release notes).
+      # Only CHANGELOG.md (the release notes) and Cargo.toml (the version) are needed.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
-          sparse-checkout: CHANGELOG.md
+          sparse-checkout: |
+            CHANGELOG.md
+            Cargo.toml
           sparse-checkout-cone-mode: false
+      # A tag push releases that tag. A manual run releases main's version as a new tag at the
+      # built commit; it stops if that tag already exists, so it never moves or reuses one.
+      - name: Choose the tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+              echo "::error::release from main only (this run is on $GITHUB_REF)"
+              exit 1
+            fi
+            version=$(sed -n 's/^version = "\([^"]*\)".*/\1/p' Cargo.toml | head -n 1)
+            if ! printf '%s' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "::error::no version in Cargo.toml (got '$version')"
+              exit 1
+            fi
+            tag="v$version"
+            if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" > /dev/null 2>&1; then
+              echo "::error::tag $tag already exists; set a new version with cargo xtask version set"
+              exit 1
+            fi
+          else
+            tag="$GITHUB_REF_NAME"
+          fi
+          echo "TAG=$tag" >> "$GITHUB_ENV"
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: doc4me-windows-x64
@@ -89,7 +124,7 @@ jobs:
         run: |
           : > "$RUNNER_TEMP/notes.md"
           if [ -f CHANGELOG.md ]; then
-            awk -v head="## [${GITHUB_REF_NAME#v}]" '
+            awk -v head="## [${TAG#v}]" '
               /^## \[/ { if (found) exit; found = (index($0, head) == 1); next }
               found { print }
             ' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
@@ -97,7 +132,8 @@ jobs:
           if grep -q '[^[:space:]]' "$RUNNER_TEMP/notes.md"; then
             notes=(--notes-file "$RUNNER_TEMP/notes.md")
           else
-            echo "::warning::CHANGELOG.md has no section for $GITHUB_REF_NAME; using generated notes"
+            echo "::warning::CHANGELOG.md has no section for $TAG; using generated notes"
             notes=(--generate-notes)
           fi
-          gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --title "Doc4Me $GITHUB_REF_NAME" "${notes[@]}"
+          # --target creates a missing tag at the commit built (a tag push already has it there).
+          gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Doc4Me $TAG" "${notes[@]}"

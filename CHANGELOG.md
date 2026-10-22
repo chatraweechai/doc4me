@@ -43,6 +43,13 @@
 ### เปลี่ยนแปลง
 
 - **เวอร์ชัน 1.1.1** (`Cargo.toml`, `Cargo.lock` เฉพาะแพ็กเกจใน workspace ด้วย `cargo xtask version set 1.1.1`) installer ติดตั้งทับ 1.1.0 ได้ (`UpgradeCode` เดิม)
+- **ออก Release จากแท็บ Actions ได้โดยไม่ต้อง push tag** (`.github/workflows/windows-x64-installer.yml`, `docs/releasing.md`)
+  - เหตุผล: session บนคลาวด์ push tag ไม่ได้ (git proxy ตอบ HTTP 403) เจ้าของ repo สั่งให้ workflow สร้าง tag เองและมีสิทธิ์ `contents: write`
+  - `workflow_dispatch` มีตัวเลือก `release` (boolean, ค่าเริ่มต้นปิด) เมื่อรันบน `main` และติ๊กไว้ job `release` จะอ่านเวอร์ชันจาก `Cargo.toml` (ต้องเป็นรูป x.y.z) แล้วสร้าง Release `Doc4Me v<เวอร์ชัน>` พร้อม tag ที่คอมมิตที่ build (`gh release create --target "$GITHUB_SHA"`) บันทึกประจำรุ่นมาจากหัวข้อของเวอร์ชันนั้นใน CHANGELOG เหมือนการ push tag
+  - ความปลอดภัย: สิทธิ์ `contents: write` มีเฉพาะ job `release` (job build และค่าเริ่มต้นของ workflow ยังเป็น `contents: read`); หยุดถ้า tag มีอยู่แล้ว จึงไม่ย้ายหรือใช้ tag เดิมซ้ำ; รันจากสาขาอื่นไม่ได้; ตัวเลือกเป็น boolean ใช้แค่ในเงื่อนไข `if` ไม่ได้แทรกลงในสคริปต์; tag ที่สร้างด้วย `GITHUB_TOKEN` ไม่ทริกเกอร์ workflow ซ้ำ จึงไม่เกิด Release ซ้อน; ผู้ที่รัน workflow ได้ (สิทธิ์ write ของ repo) ออก Release ได้
+  - กลุ่ม concurrency แยกตามชนิด event เพื่อไม่ให้ push ไป `main` ยกเลิกการออก Release ที่สั่งจากแท็บ Actions
+  - การ push tag `v*` ทำงานเหมือนเดิม; ไม่มีผลต่อโปรแกรมหรือไฟล์ .docx
+  - ตรวจสอบ: แปลง YAML ด้วย Ruby ได้ เงื่อนไข `if` และ input ถูกต้อง; คำสั่ง `sed` อ่านเวอร์ชันจาก `Cargo.toml` ได้ `1.1.1`; ผลรันจริงบันทึกในคอมมิตถัดไป
 
 ### การตรวจสอบ
 

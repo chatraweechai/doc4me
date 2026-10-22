@@ -20,10 +20,16 @@ platforms (inherited from WordCraft) are in [`packaging/`](../packaging/) and ru
    workflow builds the tag and creates the release `Doc4Me v<version>` with the MSI and the zip;
    the release notes are that version's `CHANGELOG.md` section (GitHub's generated notes when the
    section is missing, with a warning in the run).
+   - Without a tag push (a cloud session's git proxy refuses tags): Actions › Windows x64
+     installer › Run workflow on `main` with **release** ticked. The release job creates the tag
+     `v<version in Cargo.toml>` at the commit it built, with the release. It stops if that tag
+     already exists, so bump the version first. Anyone who can run workflows here can release this
+     way. A session can start it with the GitHub tools (`actions_run_trigger`, workflow
+     `windows-x64-installer.yml`, ref `main`, input `release: true`).
 
 The workflow also runs on demand (Actions › Windows x64 installer › Run workflow). Its third-party
-actions are pinned to commit SHAs; the build job only reads the repository, and only the tag's
-release job may write (to create the release).
+actions are pinned to commit SHAs; the build job only reads the repository, and only the release
+job may write (`contents: write`, to create the tag and the release).
 
 The MSI has its own `UpgradeCode` (`packaging/windows/doc4me.wxs`): it upgrades earlier Doc4Me
 installs and never touches an installed WordCraft.
