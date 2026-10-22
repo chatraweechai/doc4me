@@ -13,18 +13,27 @@
 
 ### เปลี่ยนแปลง
 
-- **คู่มือออกรุ่น: ห้าม push การแก้ไฟล์ workflow ระหว่างที่ release จากแท็บ Actions กำลังรัน** (`docs/releasing.md` ข้อ 4)
-  - เหตุผล: รอบแรกของ Release v1.1.1 (run 39783304886) ล้มด้วย `HTTP 403: Resource not accessible by integration` ตอนสร้าง tag ที่ `858b9bd` เพราะก่อน job `release` จะรัน (13:14:20 UTC) `main` ถูก push `e06edac` ซึ่งแก้ `.github/workflows/windows-x64-installer.yml` ไปแล้ว (13:11:49 UTC) tag ใหม่จึงชี้คอมมิตที่ไฟล์ workflow ต่างจาก `main` และ `GITHUB_TOKEN` ของ job ไม่มีสิทธิ์ `workflows`
-  - รอบที่สอง (run 39788628618 ที่ `be5893e`) ผ่าน ทั้งที่ระหว่างรัน `main` ขยับไป `10a276a` (13:42:43 UTC แก้แค่ `handoff.md`) จึงสรุปว่าตัวการคือไฟล์ workflow ที่ต่างกัน ไม่ใช่การที่ `main` ขยับ ข้อสรุปนี้มาจากการเทียบสองรอบ ไม่ได้มาจากเอกสารของ GitHub
+- **คู่มือออกรุ่น: ห้าม push ไป `main` จนกว่า job `release` ที่สั่งจากแท็บ Actions จะจบ โดยเฉพาะการแก้ไฟล์ workflow** (`docs/releasing.md` ข้อ 4)
+  - เหตุผล: รอบแรกของ Release v1.1.1 (run 39783304886 ที่ `858b9bd`) ล้มด้วย `HTTP 403: Resource not accessible by integration` ตอน `gh release create` เรียก `POST /repos/chatraweechai/doc4me/releases` (13:14:20 UTC) ก่อนหน้านั้น `main` ถูก push `e06edac` ซึ่งแก้ `.github/workflows/windows-x64-installer.yml` (13:11:46 UTC) คอมมิตที่จะติด tag จึงมีไฟล์ workflow ต่างจาก default branch และไม่มี branch หรือ tag ชี้อยู่
+  - กลไกนี้ GitHub เขียนไว้ใน [เอกสาร REST หัวข้อ Create a release](https://docs.github.com/en/rest/releases/releases#create-a-release): ถ้าคอมมิตเป้าหมายเพิ่มหรือแก้ไฟล์ใต้ `.github/workflows/` เมื่อเทียบกับ default branch token ต้องมีสิทธิ์แก้ workflow ไม่เช่นนั้นตอบ 404 หรือ `403 Resource not accessible by integration` และ `GITHUB_TOKEN` ได้สิทธิ์นี้ไม่ได้ ส่วน [changelog ของ GitHub 2023-11-02](https://github.blog/changelog/2023-11-02-github-actions-enforcing-workflow-scope-when-creating-a-release/) เขียนเงื่อนไขว่าเป็นคอมมิตที่แก้ไฟล์ workflow และไม่มี branch หรือ tag ชี้อยู่ รอบแรกเข้าทั้งสองแบบ
+  - รอบที่สอง (run 39788628618 ที่ `be5893e`) ผ่าน แม้ระหว่างรัน `main` ขยับไป `10a276a` (push 13:42:41 UTC แก้แค่ `handoff.md`) เพราะ `be5893e` ไม่ได้แก้ไฟล์ workflow เอง และไฟล์ workflow ก็ตรงกับ `main` จึงผ่านได้ทั้งสองแบบ การเทียบสองรอบนี้แยกไม่ได้ว่า GitHub ใช้เงื่อนไขแบบไหน คู่มือจึงให้งด push ไป `main` ทั้งหมดจนกว่า job `release` จะจบ
   - คู่มือบอกวิธีแก้ด้วย: สั่ง run ใหม่บน `main` ล่าสุด เพราะรอบที่ล้มไม่ได้สร้าง tag หรือ Release
   - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: log ของ job `release` (119845910393) แสดง `Contents: write` และ `HTTP 403: Resource not accessible by integration (https://api.github.com/repos/chatraweechai/doc4me/releases)`; เวลา push ดูจาก `gh api repos/chatraweechai/doc4me/activity` (`858b9bd->e06edac` 13:11:46, `be5893e->10a276a` 13:42:41); `git diff --stat 858b9bd e06edac` แก้ไฟล์ workflow และ `git diff --stat be5893e 10a276a` แก้แค่ `handoff.md`; เปิดเอกสาร REST และ changelog ของ GitHub ตามลิงก์แล้วตรงกับที่สรุปไว้
+  - ตรวจหลัง push (คอมมิต `670f22b`): ฉบับแรกสรุปเองจากการเทียบสองรอบว่าตัวการคือไฟล์ workflow ไม่ใช่การที่ `main` ขยับ และบอกว่า push ไฟล์อื่นได้ ซึ่งการเทียบนั้นยืนยันไม่ได้ จึงแก้ให้อ้างเอกสารของ GitHub และให้งด push ทั้งหมด; เวลา 13:11:49 และ 13:42:43 ที่ใช้ก่อนหน้าเป็นเวลาสร้าง run ไม่ใช่เวลา push
 
 ### แก้ไข
 
 - **ข้อมูลใน `[1.1.1]` ที่ล้าสมัย: Release v1.1.1 ออกจากแท็บ Actions ได้แล้ว** (บันทึกเป็นรายการใหม่ตามกติกา ไม่แก้หัวข้อ `[1.1.1]`)
   - หัวข้อ `[1.1.1]` › เปลี่ยนแปลง › ข้อจำกัดที่ทราบ บอกว่าออก Release ผ่าน workflow ไม่ได้และเจ้าของ repo ต้อง push tag เอง ตอนนี้ไม่จริงแล้ว: [Doc4Me v1.1.1](https://github.com/chatraweechai/doc4me/releases/tag/v1.1.1) ออกเมื่อ 2026-10-22 13:51 UTC โดย [run 39788628618](https://github.com/chatraweechai/doc4me/actions/runs/39788628618) (workflow_dispatch `release: true`)
   - tag `v1.1.1` ชี้ `be5893e` มีไฟล์ `doc4me-1.1.1-windows-x64.msi` (32,993,280 ไบต์) และ `doc4me-1.1.1-windows-x64-portable.zip` (43,584,012 ไบต์) บันทึกประจำรุ่นคือหัวข้อ `[1.1.1]` ของ `be5893e`
-  - ตรวจสอบ: job `build` และ `release` ของ run 39788628618 ผ่าน; `get_release_by_tag v1.1.1` ได้ `target_commitish` = `be5893e`, `draft: false`, ไฟล์สองไฟล์สถานะ `uploaded`; `git fetch --tags` แล้ว `git rev-parse v1.1.1^{commit}` ได้ `be5893e`
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer; หน้า Release v1.1.1 ยังแสดงข้อจำกัดที่ทราบเดิม ("จึงไม่มี tag และ Release v1.1.1" และให้เจ้าของ repo push tag เอง) เพราะบันทึกประจำรุ่นมาจากหัวข้อ `[1.1.1]` ของ `be5893e` ซึ่งไม่แก้ตามกติกา ให้ถือรายการนี้แทน ดาวน์โหลด MSI และ zip จากหน้านั้นได้ตามปกติ
+  - ตรวจสอบ:
+    - job `build` และ `release` ของ run 39788628618 ผ่าน; `get_release_by_tag v1.1.1` ได้ `target_commitish` = `be5893e`, `draft: false`, ไฟล์สองไฟล์สถานะ `uploaded`; `git fetch --tags` แล้ว `git rev-parse v1.1.1^{commit}` ได้ `be5893e`
+    - ดาวน์โหลดทั้งสองไฟล์แล้ว ขนาดและ sha256 ตรงกับ digest ของ GitHub (MSI `e4dc153c…`, zip `310c7308…`)
+    - zip มี `doc4me.exe`, `doc4me-cli.exe`, ไฟล์สัญญาอนุญาต และ README รวม 12 ไฟล์; `doc4me.exe` มี FileVersion และ ProductVersion 1.1.1
+    - MSI มี ProductVersion 1.1.1 และ `UpgradeCode` เดียวกับ 1.1.0 จึงติดตั้งทับได้
+    - เนื้อหาบันทึกบนหน้า Release ตรงกับหัวข้อ `[1.1.1]` ของ `be5893e` ทุกไบต์
 
 ## [1.1.1] - 2026-10-22
 

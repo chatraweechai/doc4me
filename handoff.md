@@ -1,25 +1,39 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย
 
-อัปเดต: 2026-10-22 14:00 UTC · สาขา `main` · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-22 14:20 UTC · สาขา `main` · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
 
 ## สถานะ: ออก 1.1.1 แล้ว ไม่มีงานค้าง
 
 - [Doc4Me v1.1.1](https://github.com/chatraweechai/doc4me/releases/tag/v1.1.1) ออก 2026-10-22 13:51 UTC จาก [run 39788628618](https://github.com/chatraweechai/doc4me/actions/runs/39788628618) (แท็บ Actions, `release: true`)
   - tag `v1.1.1` ชี้ `be5893e` มี `doc4me-1.1.1-windows-x64.msi` (32,993,280 ไบต์) และ `doc4me-1.1.1-windows-x64-portable.zip` (43,584,012 ไบต์)
-- งานใหม่ทั้งหมดลง `## [Unreleased]` ห้ามแก้หัวข้อ `[1.1.1]` (ข้อความ "เจ้าของ repo ต้อง push tag เอง" ใน `[1.1.1]` ล้าสมัยแล้ว บันทึกแก้ไว้ใน `[Unreleased]` › แก้ไข)
-- ออกรุ่นถัดไป: `cargo xtask version set x.y.z` ย้าย `[Unreleased]` เป็น `## [x.y.z] - YYYY-MM-DD` push ไป `main` แล้วสั่ง workflow `windows-x64-installer.yml` บน `main` พร้อม `release: true` (ดู `docs/releasing.md` ข้อ 4)
-  - ระหว่างที่ release รัน ห้าม push การแก้ไฟล์ใน `.github/workflows` (เป็นเหตุให้รอบแรกของ 1.1.1 ล้มด้วย 403) push ไฟล์อื่นได้
+  - ตรวจหลังออกแล้ว: sha256 ตรงกับ digest, `doc4me.exe` และ MSI เป็น 1.1.1, `UpgradeCode` เดียวกับ 1.1.0, บันทึกบนหน้า Release ตรงกับ `[1.1.1]` ทุกไบต์
+- งานใหม่ทั้งหมดลง `## [Unreleased]` ห้ามแก้หัวข้อ `[1.1.1]`
+  - ข้อความ "เจ้าของ repo ต้อง push tag เอง" ใน `[1.1.1]` (และบนหน้า Release) ล้าสมัยแล้ว บันทึกแก้ไว้ใน `[Unreleased]` › แก้ไข
+  - ถ้าเจ้าของ repo อยากให้หน้า Release ไม่ขัดกันเอง ให้ต่อหมายเหตุท้ายบันทึกบนหน้า Release เอง (session นี้ไม่ได้แก้หน้า Release)
+- ออกรุ่นถัดไป (`docs/releasing.md` ข้อ 3–4):
+  - `cargo xtask version set x.y.z` แล้วย้าย `[Unreleased]` เป็น `## [x.y.z] - YYYY-MM-DD` และเพิ่มลิงก์เปรียบเทียบท้าย `CHANGELOG.md` แล้ว push ไป `main`
+  - สั่ง workflow `windows-x64-installer.yml` บน `main` พร้อม `release: true`
+  - ห้าม push ไป `main` จนกว่า job `release` จะจบ โดยเฉพาะการแก้ `.github/workflows` (เป็นเหตุให้รอบแรกของ 1.1.1 ล้มด้วย 403)
 
-### session 2026-10-22 13:35–14:00 UTC: ออก Release v1.1.1
+### session 2026-10-22 13:35–14:20 UTC: ออก Release v1.1.1
 
 - ผู้ใช้สั่ง "ดำเนินการต่อจากที่ค้างให้เสร็จ" งานที่ค้างมีข้อเดียวคือ Release v1.1.1 (ตอนเริ่ม session ยังไม่มี tag `v1.1.1` บน GitHub)
-- สาเหตุที่รอบแรก (run 39783304886) ได้ 403 อ่านจาก log ของ job `release`:
-  - token มี `Contents: write` ถูกต้อง แต่ก่อนที่ job `release` จะเรียก `POST /releases` (13:14:20 UTC) `main` ถูก push `e06edac` ไปแล้ว (13:11:49) ซึ่งแก้ `.github/workflows/windows-x64-installer.yml`
-  - tag ใหม่ที่ `858b9bd` จึงมีไฟล์ workflow ไม่ตรงกับ `main` และ `GITHUB_TOKEN` ไม่มีสิทธิ์ `workflows` ที่จะสร้าง ref แบบนั้น
+- สาเหตุที่รอบแรก (run 39783304886) ได้ 403:
+  - log ของ job `release` มีแค่ `Contents: write` และ `HTTP 403: Resource not accessible by integration` ตอน `POST /releases` (13:14:20 UTC) ส่วนเวลา push ดูจาก `gh api repos/chatraweechai/doc4me/activity`
+  - ก่อนหน้านั้น `main` ถูก push `e06edac` ซึ่งแก้ `.github/workflows/windows-x64-installer.yml` (13:11:46) คอมมิต `858b9bd` ที่จะติด tag จึงมีไฟล์ workflow ต่างจาก default branch และไม่มี branch หรือ tag ชี้อยู่
+  - เอกสาร REST ของ GitHub (Create a release) เขียนไว้ว่ากรณีนี้ token ต้องมีสิทธิ์แก้ workflow ซึ่ง `GITHUB_TOKEN` ได้ไม่ได้ (ลิงก์อยู่ใน CHANGELOG `[Unreleased]`)
 - 13:38 UTC สั่ง workflow_dispatch `release: true` บน `main` ที่ `be5893e` เป็น run 39788628618 แล้วผ่านทั้ง job `build` และ `release`
-  - ระหว่างรัน push `10a276a` (handoff อย่างเดียว) ขึ้น `main` ตอน 13:42:43 เพราะ stop hook เตือนเรื่องคอมมิตที่ยังไม่ push และไฟล์ workflow ยังเหมือนเดิม release ก็ยังผ่าน จึงสรุปว่าตัวการคือไฟล์ workflow ที่ต่างกัน ไม่ใช่การที่ `main` ขยับ (สรุปจากการเทียบสองรอบ ไม่ได้ยืนยันจากเอกสารของ GitHub)
+  - ระหว่างรัน push `10a276a` (handoff อย่างเดียว) ขึ้น `main` ตอน 13:42:41 เพราะ stop hook เตือนเรื่องคอมมิตที่ยังไม่ push
+  - release ยังผ่าน เพราะ `be5893e` ไม่ได้แก้ไฟล์ workflow และไฟล์ workflow ตรงกับ `main` แต่การเทียบสองรอบนี้แยกไม่ได้ว่า GitHub ใช้เงื่อนไขแบบไหน จึงให้งด push ทั้งหมดระหว่าง release
   - run ของ push `10a276a` (39789261472) ผ่าน
-- บันทึกผลใน `CHANGELOG.md` `[Unreleased]` และเพิ่มข้อควรระวังใน `docs/releasing.md`
+- บันทึกผลใน `CHANGELOG.md` `[Unreleased]` และเพิ่มข้อควรระวังใน `docs/releasing.md` (คอมมิต `670f22b`)
+- ตรวจหลัง push ด้วย agent: ตรวจไฟล์ใน Release, ตรวจข้อเท็จจริงในเอกสาร และพยายามหักล้างสาเหตุของ 403 แต่ละข้อที่พบมี agent อีกตัวตรวจซ้ำ
+  - ไฟล์ใน Release ถูกต้องทุกข้อ
+  - เอกสารแก้ 4 เรื่องในคอมมิตถัดมา:
+    - ข้อสรุปเกินหลักฐาน: เปลี่ยนไปอ้างเอกสารของ GitHub
+    - เวลาที่ใช้เป็นเวลาสร้าง run ไม่ใช่เวลา push
+    - CHANGELOG ขาดบรรทัดตรวจสอบและบรรทัดผลต่อผู้ใช้
+    - ขั้นออกรุ่นใน handoff ขาดลิงก์เปรียบเทียบ
 
 ### ทางเลือกในการออก Release v1.1.1 (บันทึกเดิม ก่อนออกสำเร็จ)
 
