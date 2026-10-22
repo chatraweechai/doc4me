@@ -1,19 +1,12 @@
 # Handoff: Doc4Me 1.1.0 และงานภาษาไทย
 
-อัปเดต: 2026-10-21 09:45 UTC · สาขา `main` · ปิดงานแล้ว เหลือแค่ push tag `v1.1.0` · รายละเอียดทุกข้อดูใน [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.0]`
+อัปเดต: 2026-10-22 · สาขา `main` · **ปิดงานครบแล้ว ไม่มีงานค้าง** · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[1.1.0]`
 
-## สถานะ: ปิดงานบน repo นี้แล้ว (2026-10-21)
+## สถานะ: 1.1.0 ออกแล้ว (ตรวจเมื่อ 2026-10-22)
 
-ผู้ใช้สั่งเมื่อ 2026-10-21 08:10 UTC ให้ทำงานที่ค้างให้เสร็จแล้วยุติการทำงานบน repo นี้ งานโค้ดทั้งหมดเสร็จและ push ไป `main` แล้ว เหลือแค่ขั้นที่ session บนคลาวด์ทำไม่ได้
-
-### สิ่งเดียวที่ยังค้าง: เจ้าของ repo push tag `v1.1.0`
-
-- ผู้ใช้สั่ง (08:00 UTC) ให้ยกเลิก 1.1.0 ที่ `7e26f97` แล้วออก 1.1.0 จากโค้ดล่าสุด: `Cargo.toml` เป็น 1.1.0 และ CHANGELOG มี `## [1.1.0] - 2026-10-21` ครบแล้ว `[Unreleased]` ว่าง
-- session บนคลาวด์ push tag ไม่ได้ (git proxy ตอบ `HTTP 403` เฉพาะ tag) และเครื่องมือ GitHub ใน session สร้าง tag หรือ Release ไม่ได้
-- คำสั่งบนเครื่องของเจ้าของ repo (tag คอมมิตล่าสุดของ `main` ที่ผ่าน CI):
-  `git fetch origin && git tag -a v1.1.0 origin/main -m "Doc4Me 1.1.0" && git push origin v1.1.0`
-- workflow `windows-x64-installer.yml` จะ build MSI และ zip แล้วสร้าง Release `Doc4Me v1.1.0` จากหัวข้อ `[1.1.0]` เอง อย่าสร้าง Release ผ่านหน้าเว็บก่อน เพราะ `gh release create` จะล้มถ้ามีอยู่แล้ว
-- ถ้า session ใหม่เปิดมาหลังจากนั้น: ตรวจว่ามี Release แล้วและ job `release` ผ่าน ถ้าล้มให้อ่าน log ด้วย `get_job_logs`; งานใหม่ทั้งหมดลง `## [Unreleased]` และห้ามแก้ `[1.1.0]`
+- เจ้าของ repo push tag `v1.1.0` ที่ `51a9658` แล้ว run `Windows x64 installer` #31 ผ่าน และสร้าง Release [Doc4Me v1.1.0](https://github.com/chatraweechai/doc4me/releases/tag/v1.1.0) เมื่อ 2026-10-21 10:41 UTC มี `doc4me-1.1.0-windows-x64.msi` และ `doc4me-1.1.0-windows-x64-portable.zip`
+- เจ้าของ repo เพิ่ม `package-lock.json` ว่างที่รากของ repo (`fc7bab5` "Initial commit") ไม่มีผลต่อโปรแกรม และ CI บน `main` ผ่าน
+- งานใหม่ทั้งหมดลง `## [Unreleased]` ใน CHANGELOG ห้ามแก้ `[1.1.0]`
 
 ### ทำแล้วใน session 2026-10-21 (ทั้งหมดอยู่ใน `[1.1.0]`)
 
