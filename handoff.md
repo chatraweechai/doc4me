@@ -1,6 +1,6 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย
 
-อัปเดต: 2026-10-22 14:58 UTC · สาขา `main` · session ยุติแล้ว ไม่มีงานค้าง · CI ของ `main` ล่าสุดผ่าน · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-23 04:15 UTC · สาขา `main` · session ยุติแล้ว · CI ของ `main` ล่าสุดผ่าน · มีผลสำรวจงานค้างที่ยังไม่ได้ตรวจซ้ำ (หัวข้อ session 2026-10-22 15:15 ข้างล่าง) · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
 
 ## สถานะ: ออก 1.1.1 แล้ว ไม่มีงานค้าง
 
@@ -14,6 +14,31 @@
   - `cargo xtask version set x.y.z` แล้วย้าย `[Unreleased]` เป็น `## [x.y.z] - YYYY-MM-DD` และเพิ่มลิงก์เปรียบเทียบท้าย `CHANGELOG.md` แล้ว push ไป `main`
   - สั่ง workflow `windows-x64-installer.yml` บน `main` พร้อม `release: true`
   - ห้าม push ไป `main` จนกว่า job `release` จะจบ โดยเฉพาะการแก้ `.github/workflows` (เป็นเหตุให้รอบแรกของ 1.1.1 ล้มด้วย 403)
+
+### session 2026-10-22 15:15 – 2026-10-23 04:15 UTC: สำรวจงานค้าง (ยกเลิกกลางทาง ผลยังไม่ได้ตรวจซ้ำ)
+
+- ผู้ใช้สั่ง "ตรวจสอบงานค้างและงานเบื้องหลังทั้งหมด" แล้วสั่ง "ยกเลิกงานทั้งหมด บันทึก handoff สำหรับเริ่ม session ใหม่" ไม่ได้แก้โค้ดหรือเอกสารอื่น
+- งานเบื้องหลัง (ตรวจแล้ว 15:13 UTC): ไม่มี scheduled task, PR หรือ issue ที่เปิด ไม่มี run ค้าง branch `claude/*` บน remote merge เข้า `main` หมดแล้ว
+  - session อื่นในบัญชี "รวมโค้ด doc-scanner-pdf" เป็นคนละ repo รอเจ้าของใส่ secret `SITE_DEPLOY_KEY` และ publish เว็บเอง
+- สั่ง workflow ให้ agent อ่านอย่างเดียว 4 ด้าน แต่ชนขีดจำกัดของ session: ด้านโค้ด/เทสต์ ขั้นตรวจซ้ำ และตัวตรวจความครบล้มหมด
+  - ข้อข้างล่างมาจาก finder ตัวเดียว **ต้องตรวจกับโค้ดอีกครั้งก่อนลงมือ** และยังไม่ได้สแกนโค้ดหา stub หรือคีย์แปลที่ขาด
+- น่าจะเป็นบั๊ก: คำทักทายบนหน้า Home ของ backstage, Insert › Date and Time และตัวเลือกวันที่ของ content control ใช้เวลา UTC ไม่ใช่เวลาท้องถิ่น
+  - ไฟล์: `crates/ui-egui/src/backstage.rs:194`, `crates/engine/src/cmd/mod.rs:377-401` (`now_iso`), `crates/engine/src/cmd/insert.rs:503-512` (`format_date`), `crates/ui-egui/src/content_controls.rs:151`
+  - ผู้ใช้ไทย (UTC+7) ได้วันที่ของเมื่อวานช่วง 00:00–06:59 ทางแก้คือใช้ offset ของเครื่องกับวันที่ที่แสดงผู้ใช้ แต่คง UTC ไว้ใน metadata ของ revision และ comment
+- CI: workflow บน `main` แค่ build installer ไม่รัน fmt, clippy หรือเทสต์ ไม่มี trigger ของ PR และไม่มี job Linux/wasm
+  - `cargo xtask ci` เต็มและ `cargo xtask parity` ยังไม่ได้รันกับโค้ด 1.1.1
+  - action ที่ pin ไว้ยังเป็น Node 20 ที่เลิกสนับสนุนแล้ว ไม่มี Dependabot และไม่มี `cargo audit` อัตโนมัติ
+- ลงนามโค้ด: workflow ไม่ส่ง `secrets.*` ให้ `sign.ps1` ใส่แค่ secret ใน repo จึงยังไม่ลงนาม แต่ `docs/releasing.md:15` เขียนเหมือนว่าลงนาม
+- เอกสารล้าสมัย:
+  - handoff นี้: `th.tsv` มี 2,456 รายการ (ไม่ใช่ 2,452) ช่อง `DragValue` มี 49 ช่อง (ไม่ใช่ 47) และหัวข้อ "ประวัติของ 1.1.1" ยังบอกให้เจ้าของ push tag เอง
+  - `ROADMAP.md` แถว Releases ยังเป็น v1.1.0 และไม่มีบันทึกความคืบหน้าของ 1.1.1
+  - `docs/parity-checklist.md` ถูกแก้ด้วยมือ ไม่ได้สร้างจาก `cargo xtask parity` และตัวเลขขาดไป 1
+  - `docs/gaps.md`, `target-app-parity.md` และเอกสาร roadmap ยังระบุว่าบางฟีเจอร์ที่ออกแล้วยังขาด เช่น kerning/ligature, ตัวตรวจตัวสะกดไทย และภาษา UI ไทย
+  - เอกสารยังมีข้อความจาก WordCraft (PR/issue ของต้นทาง, build ที่ลงนามทุกแพลตฟอร์ม, Word for Mac)
+  - `docs/releasing.md` มีเลขเวอร์ชันตัวอย่างเก่า
+- รอเจ้าของ repo ตัดสินใจ: ไม่มี tag `v1.0.0` (ลิงก์ `[1.0.0]` ท้าย CHANGELOG ได้ 404), `main` และ tag `v*` ยังไม่มี protection, `.claude/settings.json` ยังอนุญาตให้ push tag ทั้งที่ไม่ใช้แล้ว
+- ก่อนออกรุ่นถัดไป: `[Unreleased]` มีแต่เอกสาร และรายการ แก้ไข ต้องคงไว้ในหัวข้อรุ่นถัดไป เพราะหมายเหตุบนหน้า Release v1.1.1 อ้างถึง
+- ทำต่อใน session ใหม่: รัน finder ด้านโค้ด/เทสต์ แล้วตรวจซ้ำแต่ละข้อข้างบน เลือกงานให้ผู้ใช้ยืนยัน (แนะนำบั๊ก UTC กับเอกสาร 1.1.1 ที่ล้าสมัยก่อน) งานโค้ดทุกชิ้นต้องบันทึกใน `CHANGELOG.md` `[Unreleased]`
 
 ### session 2026-10-22 14:44–14:58 UTC: ตรวจ CI ของ `main` (ยุติแล้ว)
 
