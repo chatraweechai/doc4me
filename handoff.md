@@ -1,13 +1,18 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย
 
-อัปเดต: 2026-10-23 04:17 UTC · สาขา `main` · session ยุติแล้ว · CI ของ `main` ล่าสุดผ่าน (build installer เท่านั้น) · เริ่ม session ใหม่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-23 04:30 UTC · สาขา `main` · session ยุติแล้ว · CI ของ `main` ล่าสุดผ่าน (build installer เท่านั้น) · เริ่ม session ใหม่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
 
 ## งานที่ต้องทำต่อใน session ใหม่ (รวบรวม 2026-10-23)
 
 ที่มา: workflow สำรวจงานค้าง (agent อ่านอย่างเดียว 2026-10-22 15:15 UTC) ซึ่งขั้นตรวจซ้ำล้มเพราะชนขีดจำกัดของ session
 
 - ข้อที่มี **[ตรวจแล้ว]** ตรวจกับโค้ดเมื่อ 2026-10-23 04:10–04:15 UTC ข้ออื่นมาจาก finder ตัวเดียว ต้องตรวจซ้ำก่อนลงมือ
-- ให้ผู้ใช้เลือกหรือยืนยันลำดับงานก่อน (แนะนำข้อ 1 แล้วข้อ 2)
+- ลำดับที่แนะนำ (ผู้ใช้ปรับได้):
+  1. แจ้งงานที่ **[เจ้าของ repo]** ต้องทำเองในข้อ 5.1–5.3 ตั้งแต่ต้น session
+  2. ทำข้อ 5.4 และ 5.5 (งานเล็ก)
+  3. ทำข้อ 1 (บั๊ก UTC)
+  4. ทำข้อ 2 รวมกับข้อ 5.6 (เอกสาร)
+  5. ทำส่วนของ session ในข้อ 5.2 แล้วต่อด้วยข้อ 3
 - งานโค้ดหรือเอกสารทุกชิ้นต้องบันทึกใน `CHANGELOG.md` `[Unreleased]` ในคอมมิตเดียวกัน (CLAUDE.md ข้อ 3) แล้ว push ไป `main`
 - ห้าม push ไป `main` ระหว่างที่ job `release` ของ workflow รันอยู่ โดยเฉพาะการแก้ `.github/workflows`
 - คอมมิตที่แก้แค่ `handoff.md` ใส่ `[skip ci]` ได้ run ล่าสุดของ `main` จะได้ไม่ใช่ run ที่ยังไม่จบ
@@ -86,7 +91,7 @@
 - `cargo audit` รันครั้งล่าสุดตอน 1.0.0 ส่วน `rustybuzz 0.20.1` และ `ttf-parser 0.25.1` (มาผ่าน krilla) ยังเป็น crate ที่ไม่มีคนดูแลใน `Cargo.lock` ให้รันก่อนออกรุ่นถัดไป หรือเพิ่ม cargo-deny ใน CI
 - ลงนามโค้ด [ตรวจแล้ว]: workflow ไม่มี `secrets.*` เลย (คำว่า secrets มีแค่ในคอมเมนต์ที่ :62)
   - `sign.ps1` จึงไม่เห็น `WINDOWS_CERTIFICATE` หรือ `AZURE_*` ใน CI แม้เจ้าของ repo จะใส่ secret ไว้แล้ว
-  - ต้องเพิ่ม `env:` ใน step "Build MSI + portable zip" หรือแก้เอกสารให้บอกว่ายังไม่ได้ต่อการลงนาม
+  - ผู้ใช้ตัดสินใจแล้วว่าจะลงนาม ดูขั้นตอนในข้อ 5.2
 - `xtask/src/main.rs`: ข้อความ USAGE (:16-30) ไม่มีคำสั่ง `version` และ `corpus --download` โหลด PngSuite ผ่าน `http://` โดยไม่ตรวจ checksum (:202, :226-231)
 
 ### 4. ส่วนที่ยังไม่ได้สำรวจ (agent ล้มก่อนทำ)
@@ -99,23 +104,98 @@
 - ตรวจความครบ: ข้อความใน `README.md` และ `README.th.md`, `AGENTS.md`, ความใหม่ของภาพใน `docs/images`, `apps/doc4me-web`, `docs/mcp.md`, `ATTRIBUTION.md` และ `NOTICE`, `contributors/`
 - ผล grep ตอนเริ่ม session: ไม่พบ `TODO`, `FIXME`, `todo!(` หรือ `unimplemented!(` ใน `crates`, `apps` และ `xtask` และพบ `#[ignore]` จุดเดียวคือ audit ในข้อ 3
 
-### 5. รอเจ้าของ repo ตัดสินใจ (session ห้ามทำเอง)
+### 5. งานที่ผู้ใช้ตัดสินใจแล้ว ให้ลงมือได้เลย (สั่ง 2026-10-23)
 
-- ไม่มี tag `v1.0.0` ลิงก์ `[1.0.0]` ท้าย `CHANGELOG.md` จึงได้ 404 [ตรวจแล้ว]
-  - ทางเลือก: ปล่อยไว้ตามที่บันทึกแล้ว หรือ push tag ที่คอมมิตของ 1.0.0
-  - finder เสนอ `7946cbb` จาก run 38742771852 แต่ต้องตรวจ `Cargo.toml` ของคอมมิตนั้นก่อน
-  - การ push tag `v*` จะสั่ง workflow ให้สร้าง Release ด้วย
-- ใบรับรองสำหรับลงนามโค้ด หรือ Azure Trusted Signing (SmartScreen เตือนมาตั้งแต่ 1.0.0)
-- การป้องกัน repo
-  - `main` ไม่ได้ protected, tag `v*` ย้ายหรือลบได้ และ Release แก้ไขได้ (`immutable: false`)
-  - เสนอ ruleset ที่กัน force-push และการลบ (ยัง push ตรงได้) และเปิด immutable releases
-- `.claude/settings.json` และไฟล์ที่เกี่ยวข้อง
-  - อนุญาต `git tag -a v*` และ `git push origin v*` โดยไม่ถาม ทั้งที่ตอนนี้ออกรุ่นผ่าน workflow แล้ว
-  - `.gitignore:9` มี `/.claude/` ไฟล์ใหม่ใต้ `.claude/` จึงถูกละเว้น
-  - `package-lock.json` เป็นไฟล์ว่าง (`fc7bab5`)
-  - คอมมิต `9954ae0` และ `fc7bab5` ไม่มีรายการใน CHANGELOG
-- ลบ branch ที่ merge แล้วบน remote เช่น `claude/optimistic-fermat-z9uknk` (ไม่มีงานหาย)
-- เป้าหมาย parity: เอกสารยังตั้งเป้า Word for Mac 16.113.4 และรัน alpha gate บน macOS แต่ Doc4Me ทำตาม Word for Windows และออกรุ่นแค่บน Windows
+ผู้ใช้สั่งว่า "tag / release v1.0.0, ใบรับรองลงนามโค้ด, การตั้งค่าป้องกัน main, สิทธิ์ push tag ใน .claude/settings.json, การลบ branch เก่า, จะเทียบกับ Word for Windows ด้วยเลยไม่ต้องรอการตัดสินใจ"
+
+- บางขั้น session บนคลาวด์ทำเองไม่ได้ เพราะ push tag ไม่ได้ (git proxy ตอบ 403) และไม่มีสิทธิ์ admin ของ repo
+- ขั้นเหล่านั้นติดป้าย **[เจ้าของ repo]** ให้แจ้งผู้ใช้ตั้งแต่ต้น session พร้อมคำสั่งหรือเมนูที่ต้องกด
+
+#### 5.1 tag และ Release `v1.0.0` [ตรวจแล้ว]
+
+- ใช้คอมมิต `7946cbb57a0f4618711e765a844f46194150ec1f` (2026-10-15, [run 38742771852](https://github.com/chatraweechai/doc4me/actions/runs/38742771852) ผ่าน)
+  - `Cargo.toml` ของคอมมิตนี้เป็น 1.0.0 และ CHANGELOG ของคอมมิตนี้มีหัวข้อ `## [1.0.0] - 2026-10-15`
+  - โค้ดเหมือน `ca0e607` ([run 38734047702](https://github.com/chatraweechai/doc4me/actions/runs/38734047702)) ซึ่ง `[1.0.0]` › ตรวจสอบ อ้างว่าเป็น build ของ 1.0.0
+  - `git diff --stat ca0e607 7946cbb` ต่างกันแค่ workflow, `CHANGELOG.md`, `CLAUDE.md`, `AGENTS.md` และ `docs/releasing.md`
+  - คอมมิตถัดไปคือ `1d05c27` (run 8, 2026-10-19) เริ่มมีฟีเจอร์ของ 1.1.0 จึงใช้ไม่ได้
+  - ทั้งสองคอมมิตไม่อยู่ในประวัติของ `main` เพราะประวัติปัจจุบันเริ่มที่ `a4ae748` (2026-10-20) แต่ยังดึงจาก GitHub ด้วย SHA เต็มได้ (ลองแล้ว 2026-10-23)
+- **[เจ้าของ repo]** รันบนเครื่องตัวเอง (workflow_dispatch `release: true` ติด tag ได้แค่ HEAD ของ `main` ตามเวอร์ชันใน `Cargo.toml` จึงใช้กับ 1.0.0 ไม่ได้):
+  - `git fetch origin 7946cbb57a0f4618711e765a844f46194150ec1f`
+  - `git tag -a v1.0.0 7946cbb57a0f4618711e765a844f46194150ec1f -m "Doc4Me 1.0.0"`
+  - `git push origin v1.0.0`
+  - ถ้า push ถูกปฏิเสธเรื่อง `workflow` scope ให้ใช้ token ที่มีสิทธิ์นี้ เพราะไฟล์ workflow ของคอมมิตนั้นต่างจาก `main`
+- การ push tag จะรัน workflow ของคอมมิตนั้น (มี trigger `tags: ["v*"]` และ job `release`): build ใหม่จากซอร์ส 1.0.0 แล้วสร้าง Release โดยใช้หัวข้อ `[1.0.0]` เป็นบันทึก
+  - job `release` อาจได้ 403 แบบรอบแรกของ 1.1.1 เพราะไฟล์ workflow ของคอมมิตต่างจาก default branch ยังไม่รู้ว่าเงื่อนไขนี้ใช้กับ tag ที่มีอยู่แล้วด้วยหรือไม่
+  - ถ้า job ใดล้ม **[เจ้าของ repo]** ให้สร้าง Release เองที่ Releases › Draft a new release
+    - เลือก tag `v1.0.0` และใช้หัวข้อ `[1.0.0]` ของ `7946cbb` เป็นบันทึก
+    - แนบ MSI และ zip จาก artifact `doc4me-windows-x64` ของ run 38742771852 (69,888,334 ไบต์ หมดอายุ 2027-01-13)
+    - ไม่ต้องติ๊ก "Set as the latest release"
+- หลังออก:
+  - ตรวจว่าป้าย Latest ยังอยู่ที่ v1.1.1 ถ้าย้ายไป v1.0.0 ให้แก้ Release v1.1.1 กลับเป็น latest
+    - เหตุผล: `gh release create` ของคอมมิตนั้นไม่ได้ใส่ `--latest=false` และค่าเริ่มต้นของ GitHub อาจตั้ง Release ที่เผยแพร่ใหม่เป็น latest (ยังไม่ได้ตรวจ)
+  - ตรวจไฟล์เหมือนตอน 1.1.1: sha256 ตรงกับ digest และ `doc4me.exe` กับ MSI เป็น 1.0.0
+  - session บันทึกใน `CHANGELOG.md` `[Unreleased]` › แก้ไข ว่าลิงก์ `[1.0.0]` ใช้ได้แล้ว ห้ามแก้หัวข้อ `[1.0.0]` และ `[1.1.0]`
+  - ลิงก์ `[1.1.0]` ให้ชี้หน้า Release ต่อไป เพราะ `v1.0.0` กับ `v1.1.0` อยู่คนละประวัติ หน้าเปรียบเทียบจึงใช้ไม่ได้
+
+#### 5.2 ลงนามโค้ด
+
+- ส่วนของ session (ทำได้เลย แต่ห้ามทำขณะ job `release` รันอยู่):
+  - เพิ่ม `env:` ใน step "Build MSI + portable zip" ของ `.github/workflows/windows-x64-installer.yml` ให้รับค่าจาก `secrets.*`
+    - ชื่อตาม `packaging/windows/sign.ps1:7-10`: `WINDOWS_CERTIFICATE`, `WINDOWS_CERTIFICATE_PASSWORD`, `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_SIGNING_ENDPOINT`, `AZURE_SIGNING_ACCOUNT`, `AZURE_CERT_PROFILE`
+  - secret ที่ยังไม่ได้ใส่จะได้ค่าว่าง `sign.ps1:48` ใช้ `[bool]$env:WINDOWS_CERTIFICATE` จึงยังข้ามการลงนามพร้อมคำเตือนเหมือนเดิม [ตรวจแล้ว] (ให้ตรวจการเช็ก `AZURE_*` ที่ :49-53 ด้วย)
+  - แก้ `docs/releasing.md:14-15` ให้บอกชื่อ secret และวิธีตั้ง แล้วบันทึก `[Unreleased]`
+- **[เจ้าของ repo]** สมัครบริการลงนาม แล้วใส่ secret ที่ Settings › Secrets and variables › Actions
+  - ตามข้อกำหนดของ CA/Browser Forum ใบรับรอง code signing ที่ออกตั้งแต่ 2023-06-01 ต้องเก็บกุญแจในฮาร์ดแวร์ (token หรือ HSM) ส่วนใหญ่จึงส่งออกเป็น .pfx มาใส่ `WINDOWS_CERTIFICATE` ไม่ได้
+  - ให้ถามผู้ขายว่ามีการลงนามบนคลาวด์ที่ใช้ใน CI ได้หรือไม่ หรือใช้ Azure Trusted Signing ซึ่ง `sign.ps1` รองรับอยู่แล้ว
+  - ตรวจเงื่อนไขประเทศและประเภทผู้สมัครของ Azure Trusted Signing ก่อนสมัคร (session นี้ยังไม่ได้ตรวจ)
+- หลังใส่ secret ให้สั่ง run บน `main` (ไม่ต้องติ๊ก `release`) แล้วตรวจว่า log ไม่มีคำเตือน "leaving unsigned" และ `doc4me.exe`, `doc4me-cli.exe` กับ MSI มีลายเซ็น
+
+#### 5.3 ป้องกัน `main`
+
+- **[เจ้าของ repo]** ตั้งที่ Settings › Rules › Rulesets › New ruleset › New branch ruleset (session ไม่มีสิทธิ์ admin และไม่มีเครื่องมือตั้ง ruleset)
+  - Enforcement status: Active และ Target branches: Include default branch
+  - เปิด "Restrict deletions" และ "Block force pushes"
+  - อย่าเปิด "Require a pull request before merging" เพราะ session push ตรงไป `main` ตาม `CLAUDE.md`
+  - อย่าเปิด "Require status checks to pass" จนกว่าจะมี job ทดสอบ (ข้อ 3) และอย่าเปิด "Restrict updates"
+- ถ้าจะกัน tag ด้วย ให้สร้าง tag ruleset สำหรับ `v*` เปิด "Restrict updates" และ "Restrict deletions"
+  - อย่าเปิด "Restrict creations" เพราะ job `release` ใช้ `GITHUB_TOKEN` สร้าง tag ของรุ่นใหม่
+- immutable releases ยังไม่ต้องเปิด เพราะจะแก้บันทึกหรือไฟล์ของ Release หลังเผยแพร่ไม่ได้ (เคยต้องเพิ่มหมายเหตุท้าย v1.1.1) ถ้าจะเปิดให้รอออก v1.0.0 เสร็จก่อน
+- หลังตั้ง session ตรวจแค่ว่า push ปกติไป `main` ยังผ่าน (ห้ามทดสอบด้วย force-push) แล้วบันทึกใน handoff
+
+#### 5.4 ถอนสิทธิ์ push tag ใน `.claude/settings.json` [ตรวจแล้ว]
+
+- ไฟล์นี้มีแค่ `permissions.allow` สองรายการ คือ `Bash(git tag -a v*)` และ `Bash(git push origin v*)`
+- session ลบสองรายการนี้ ถ้าไฟล์ไม่เหลือค่าอื่นให้ลบทั้งไฟล์ แล้วบันทึก `[Unreleased]` › ความปลอดภัย
+- เหตุผล:
+  - ตอนนี้ออกรุ่นผ่าน workflow_dispatch และ `v1.0.0` เจ้าของ repo push เอง session บนคลาวด์ก็ push tag ไม่ได้อยู่แล้ว
+  - การอนุญาตแบบไม่ถามจึงไม่ได้ใช้ แต่เปิดทางให้ push tag สาธารณะ (ซึ่งสร้าง Release) โดยไม่มีการยืนยัน
+- `.gitignore:9` (`/.claude/`) ไม่กระทบการแก้ไฟล์นี้ เพราะไฟล์ถูก track อยู่แล้ว
+
+#### 5.5 ลบ branch เก่า [ตรวจแล้ว]
+
+- ผล `git ls-remote --heads origin` เมื่อ 2026-10-23: มี `main` และ `claude/optimistic-fermat-z9uknk` (`be5893e` คือคอมมิตของ tag `v1.1.1` merge เข้า `main` แล้ว) ส่วน `claude/modest-maxwell-3q1mya` ไม่มีบน remote แล้ว
+- session ตรวจทุก branch ด้วย `git merge-base --is-ancestor origin/<branch> origin/main` ก่อน แล้วรัน `git push origin --delete <branch>`
+  - ถ้า proxy ตอบ 403 **[เจ้าของ repo]** ให้ลบที่หน้า Branches ของ GitHub
+- ห้ามลบ branch ที่ยัง merge ไม่หมด หรือ branch ของ session ที่ยังทำงานอยู่ และ session ใหม่อาจสร้าง branch `claude/*` เพิ่ม จึงต้องตรวจใหม่ทุกครั้ง
+
+#### 5.6 ใช้ Word for Windows เป็นเป้าหมาย parity
+
+- เปลี่ยนหัวเอกสาร "Target: Microsoft Word (Microsoft 365) for Mac 16.113.4" ใน 11 ไฟล์ [ตรวจแล้ว]
+  - ไฟล์: `ROADMAP.md`, `docs/architecture.md`, `docs/file-format-parity.md`, `docs/gaps.md`, `docs/hardware-parity.md`, `docs/layout-parity.md`, `docs/localization-parity.md`, `docs/roadmap.md`, `docs/target-app-parity.md`, `docs/typing-parity.md`, `docs/ui-parity.md`
+  - ถามผู้ใช้ว่าเทียบกับ Word for Windows รุ่นและ build ไหน (ดูได้ที่ File › Account › About Word) ถ้ายังไม่รู้ให้เขียน "Microsoft Word (Microsoft 365) for Windows" โดยไม่ใส่เลขรุ่น
+- ตรวจแถวที่อิงพฤติกรรมของ Mac ใหม่:
+  - ทางลัด Cmd เทียบกับ Ctrl (`docs/typing-parity.md`)
+  - เมนูของ Mac เทียบกับ ribbon และ backstage ของ Windows (`docs/ui-parity.md`, `docs/target-app-parity.md`)
+  - `docs/hardware-parity.md`
+  - ระยะบรรทัดทำตาม Windows อยู่แล้ว (`docs/layout-parity.md:24`)
+- alpha gate ใน `docs/roadmap.md:28-29` ระบุ "main platform (macOS desktop)" ให้เปลี่ยนเป็น Windows
+  - การรัน alpha gate ใหม่ต้องใช้เครื่อง Windows ซึ่ง session บนคลาวด์ทำไม่ได้ ให้ระบุว่ายังไม่ได้วัดใหม่
+  - ตัวเลข readiness (~60%/55%/63%) ยังเป็นค่าที่วัดใน WordCraft
+- ทำพร้อมข้อ 2 ในคอมมิตเดียวได้ และบันทึก `[Unreleased]` › เปลี่ยนแปลง
+
+#### 5.7 ยังรอเจ้าของ repo ตัดสินใจ
+
+- `.gitignore:9` มี `/.claude/` ไฟล์ใหม่ใต้ `.claude/` จึงถูกละเว้น, `package-lock.json` เป็นไฟล์ว่าง (`fc7bab5`) และคอมมิต `9954ae0` กับ `fc7bab5` ไม่มีรายการใน CHANGELOG
 - อ้างอิง PR และ issue ของ WordCraft ต้นทาง (`ROADMAP.md:124` "~45 open PRs", `docs/roadmap.md:11`, `docs/gaps.md:7-8,18`) ซึ่ง repo นี้ไม่มี ต้องเลือกว่าจะติดตามต้นทางหรือเริ่มใหม่
 - ฟอนต์แทน Aptos (gap #4 ซึ่งขวาง beta), ecosystem (#22), ผู้ให้บริการ AI (#25) และโมเดลเสียง (#28)
 - จะเพิ่ม job ทดสอบบน Linux ใน CI หรือไม่ (ข้อ 3)
@@ -163,7 +243,7 @@
   - สั่ง workflow `windows-x64-installer.yml` บน `main` พร้อม `release: true`
   - ห้าม push ไป `main` จนกว่า job `release` จะจบ โดยเฉพาะการแก้ `.github/workflows` (เป็นเหตุให้รอบแรกของ 1.1.1 ล้มด้วย 403)
 
-### session 2026-10-22 15:15 – 2026-10-23 04:17 UTC: สำรวจงานค้าง (ยกเลิกกลางทาง)
+### session 2026-10-22 15:15 – 2026-10-23 04:30 UTC: สำรวจงานค้าง (ยกเลิกกลางทาง)
 
 - ผู้ใช้สั่งตามลำดับ: "ตรวจสอบงานค้างและงานเบื้องหลังทั้งหมด", "ยกเลิกงานทั้งหมด บันทึก handoff สำหรับเริ่ม session ใหม่" และ "บันทึก handoff สิ่งที่ต้องทำต่อใน session ใหม่ทั้งหมด"
 - งานเบื้องหลัง (ตรวจ 2026-10-22 15:13 UTC): ไม่มี scheduled task, task list, PR หรือ issue ที่เปิด และไม่มี run ค้าง
@@ -172,8 +252,12 @@
 - สั่ง workflow ให้ agent อ่านอย่างเดียว 4 ด้าน (handoff/CHANGELOG, roadmap/gaps, โค้ด/เทสต์, CI/infra) แต่ชนขีดจำกัดของ session
   - finder ด้านโค้ด/เทสต์, ตัวตรวจซ้ำทั้ง 4 ตัว และตัวตรวจความครบล้มหมด
   - ผลที่ได้ย้ายไปไว้ในหัวข้อ "งานที่ต้องทำต่อใน session ใหม่" ข้างบน และตรวจข้อสำคัญกับโค้ดแล้ว (2026-10-23)
-- แก้แค่ `handoff.md` (คอมมิต `92e1929` และคอมมิตนี้ ใส่ `[skip ci]` ทั้งคู่) จึงไม่ได้แก้ `CHANGELOG.md`
-  - คอมมิตนี้ทำหมายเหตุไว้ที่ข้อมูลเก่าในหัวข้อประวัติของ handoff ด้วย
+- แก้แค่ `handoff.md` (คอมมิต `92e1929`, `30e8da4` และคอมมิตล่าสุด ใส่ `[skip ci]` ทุกคอมมิต) จึงไม่ได้แก้ `CHANGELOG.md`
+  - `30e8da4` ทำหมายเหตุไว้ที่ข้อมูลเก่าในหัวข้อประวัติของ handoff
+- 2026-10-23 ผู้ใช้ตัดสินใจ 6 เรื่องที่เคยรอเจ้าของ repo (v1.0.0, ลงนามโค้ด, ป้องกัน `main`, สิทธิ์ push tag, ลบ branch เก่า, เทียบกับ Word for Windows)
+  - เขียนข้อ 5 ใหม่เป็นขั้นตอนที่ลงมือได้
+  - ตรวจข้อเท็จจริงที่ใช้วางขั้นตอนแล้ว: คอมมิตและ artifact ของ 1.0.0 (ผ่าน GitHub API และ `git fetch` ด้วย SHA), workflow ของ `7946cbb`, `.claude/settings.json`, การอ่าน secret ของ `sign.ps1`, branch บน remote และไฟล์ที่ยังตั้งเป้าเป็น Word for Mac
+  - ยังไม่ได้ลงมือทำงานใดในข้อ 5
 
 ### session 2026-10-22 14:44–14:58 UTC: ตรวจ CI ของ `main` (ยุติแล้ว)
 
