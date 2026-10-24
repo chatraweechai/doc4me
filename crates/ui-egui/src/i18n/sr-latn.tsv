@@ -431,6 +431,7 @@
 	Export	Izvoz
 	Export a copy to share (PDF, Word document)	Izvezi kopiju za deljenje (PDF, Word dokument)
 	Export Page as PNG	Izvezi stranu kao PNG
+	Export Page as JPEG	Izvezi stranu kao JPEG
 	Export PDF	Izvezi PDF
 	Exported {path}	Izvezeno: {path}
 	Extend Selection	Proširi izbor
@@ -674,6 +675,7 @@
 	Page Color	Boja strane
 	Page Down	Strana nadole
 	Page image (*.png)	Slika strane (*.png)
+	Page image (*.jpg, *.jpeg)	Slika strane (*.jpg, *.jpeg)
 	Page Movement	Kretanje stranama
 	Page Number	Broj strane
 	Page Setup	Podešavanje strane

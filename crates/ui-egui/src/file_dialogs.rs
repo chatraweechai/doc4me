@@ -54,7 +54,7 @@ pub(crate) enum AfterPick {
     Picture,
     /// Save the document there, then carry on.
     SaveAs(AfterSave),
-    /// Save a copy there in this format (`pdf`, `docx`, `png`…).
+    /// Save a copy there in this format (`pdf`, `docx`, `png`, `jpg`…).
     Export { ext: String },
     /// Write the PDF of these print settings there (File › Print › Save these pages as PDF).
     PrintPdf { settings: Value },
@@ -215,7 +215,11 @@ impl WordApp {
             }
             AfterPick::Export { ext } => {
                 let Some(path) = picked else { return Ok(json!({"cancelled": true})) };
-                let r = if ext == "png" { self.run("file.exportPng", json!({"path": path})) } else { self.run("file.saveAs", json!({"path": path})) };
+                let r = match ext.as_str() {
+                    "png" => self.run("file.exportPng", json!({"path": path})),
+                    "jpg" | "jpeg" => self.run("file.exportJpeg", json!({"path": path})),
+                    _ => self.run("file.saveAs", json!({"path": path})),
+                };
                 if r.is_ok() {
                     self.status(crate::i18n::fmt(tl!("Exported {path}"), &[("path", &path)]));
                 }
@@ -414,6 +418,24 @@ mod tests {
         assert_eq!(r, json!({"saved": false}));
         assert!(a.file_dialog_open(), "F12's saveAs request opens the dialog");
         assert_eq!(shown.borrow()[0].0, FileDialogRequest::Save { name: "two.docx".into() });
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// File › Export › Page image (*.jpg, *.jpeg): suggests a .jpg name and writes page 1 as JPEG
+    /// beside the document, which keeps its own path.
+    #[test]
+    fn export_writes_a_jpeg_page_image() {
+        let dir = scratch("export-jpeg");
+        let (mut a, shown) = async_app();
+        typed(&mut a);
+        a.export_dialog("jpg");
+        assert!(matches!(&shown.borrow()[0].0, FileDialogRequest::Save { name } if name.ends_with(".jpg")));
+        let picked = dir.join("page.jpg");
+        answer(&shown, Some(&picked.to_string_lossy()));
+        let r = a.poll_file_dialog().unwrap().unwrap();
+        assert!(r["width"].as_u64().is_some_and(|w| w > 0), "{r}");
+        assert!(std::fs::read(&picked).unwrap().starts_with(&[0xFF, 0xD8, 0xFF]), "a JPEG file");
+        assert_eq!(a.session.path, None, "an export is a copy");
         let _ = std::fs::remove_dir_all(&dir);
     }
 

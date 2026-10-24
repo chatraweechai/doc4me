@@ -384,6 +384,7 @@
 	Export	匯出
 	Export a copy to share (PDF, Word document)	匯出副本以共用（PDF、Word 文件）
 	Export Page as PNG	將頁面匯出為 PNG
+	Export Page as JPEG	將頁面匯出為 JPEG
 	Export PDF	匯出 PDF
 	Exported {path}	已匯出 {path}
 	Extend Selection	擴大選取範圍
@@ -627,6 +628,7 @@
 	Page Color	頁面色彩
 	Page Down	下一頁
 	Page image (*.png)	頁面影像 (*.png)
+	Page image (*.jpg, *.jpeg)	頁面影像 (*.jpg, *.jpeg)
 	Page Movement	翻頁方式
 	Page Number	頁碼
 	Page Setup	版面設定

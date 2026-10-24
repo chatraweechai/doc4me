@@ -253,6 +253,7 @@
 	Export	Ekspordi
 	Export PDF	Ekspordi PDF
 	Export Page as PNG	Ekspordi leht PNG-na
+	Export Page as JPEG	Ekspordi leht JPEG-na
 	Export a copy to share (PDF, Word document)	Ekspordi koopia jagamiseks (PDF, Wordi dokument)
 	Exported {path}	Eksporditud: {path}
 	Extend Selection	Laienda valikut
@@ -529,6 +530,7 @@
 	Page break before	Lehepiir enne
 	Page display	Lehe kuvamine
 	Page image (*.png)	Lehe pilt (*.png)
+	Page image (*.jpg, *.jpeg)	Lehe pilt (*.jpg, *.jpeg)
 	Page width	Lehe laius
 	Page {page}	Leht {page}
 	Page {page} of {pages}	Leht {page} / {pages}

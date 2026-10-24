@@ -3572,6 +3572,41 @@ fn print_markup_exports_comments() {
     let _ = std::fs::remove_dir_all(&dir);
 }
 
+#[test]
+fn pages_export_and_save_as_jpeg() {
+    let mut s = s();
+    run(&mut s, "document.setText", json!({"text": "ปีงบประมาณ 2567\rPage two follows"}));
+    run(&mut s, "caret.set", json!({"pos": {"block": 1, "off": 0}}));
+    run(&mut s, "insert.pageBreak", json!({}));
+    let dir = std::env::temp_dir().join(format!("doc4me-jpeg-{}", std::process::id()));
+    std::fs::create_dir_all(&dir).unwrap();
+    let decode = |p: &std::path::Path| image::load_from_memory_with_format(&std::fs::read(p).unwrap(), image::ImageFormat::Jpeg).unwrap();
+    // File › Export: page 2 at 1 px/pt; `.jpg` is added to a path without it, `.jpeg` is kept.
+    let r = run(&mut s, "file.exportJpeg", json!({"path": dir.join("page").to_string_lossy(), "page": 2, "scale": 1.0}));
+    assert_eq!(r["path"], dir.join("page.jpg").to_string_lossy().as_ref());
+    let img = decode(&dir.join("page.jpg"));
+    assert_eq!((u64::from(img.width()), u64::from(img.height())), (r["width"].as_u64().unwrap(), r["height"].as_u64().unwrap()));
+    // JPEG has no transparency: the page is on white, its corner white.
+    let corner = img.to_rgb8().get_pixel(2, 2).0;
+    assert!(corner.iter().all(|c| *c > 240), "{corner:?}");
+    let r = run(&mut s, "file.exportJpeg", json!({"path": dir.join("low.JPEG").to_string_lossy(), "quality": 0, "scale": 0.5}));
+    assert!(r["path"].as_str().unwrap().ends_with("low.JPEG"));
+    let high = run(&mut s, "file.exportJpeg", json!({"path": dir.join("high.jpeg").to_string_lossy(), "quality": 500, "scale": 0.5}));
+    assert!(high["bytes"].as_u64() > r["bytes"].as_u64(), "quality is clamped to 1–100 and changes the size");
+    assert!(s.run("file.exportJpeg", &json!({"path": dir.join("x.jpg").to_string_lossy(), "page": 9})).is_err());
+    // Save As by extension writes page 1 as a copy: the document keeps its own path and stays unsaved.
+    for name in ["copy.jpg", "copy.jpeg"] {
+        let r = run(&mut s, "file.saveAs", json!({"path": dir.join(name).to_string_lossy()}));
+        assert_eq!(r["saved"], true);
+        assert!(std::fs::read(dir.join(name)).unwrap().starts_with(&[0xFF, 0xD8, 0xFF]), "{name}");
+        decode(&dir.join(name));
+    }
+    assert_eq!(s.path, None);
+    assert!(crate::io::SAVE_EXTS.contains(&"jpg") && crate::io::SAVE_EXTS.contains(&"jpeg"));
+    assert!(crate::io::save_bytes("x.jpg", &s.doc).unwrap().starts_with(&[0xFF, 0xD8, 0xFF]));
+    let _ = std::fs::remove_dir_all(&dir);
+}
+
 /// #606: the colour commands behind More Colors… take any `RRGGBB` (with or without `#`, any
 /// case), not only the palette's colours; junk is a params error and changes nothing.
 #[test]

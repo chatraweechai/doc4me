@@ -55,6 +55,11 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("file.exportPng", "Export Page as PNG", "File › Export", export_png)
             .params(r#"{"path": string, "page"?: n (1-based), "scale"?: px per pt, "markup"?: bool (the page with its comments in balloons beside it; default file.printMarkup)}"#)
             .pure(),
+        CommandSpec::new("file.exportJpeg", "Export Page as JPEG", "File › Export", export_jpeg)
+            .params(
+                r#"{"path": string (.jpg is added unless it ends in .jpg or .jpeg), "page"?: n (1-based), "scale"?: px per pt, "quality"?: 1-100 (default 90), "markup"?: bool (the page with its comments in balloons beside it; default file.printMarkup)}"#,
+            )
+            .pure(),
         // A print setting, like Word's: not part of the document, so no undo step.
         CommandSpec::new("file.printMarkup", "Print Markup", "File › Print", |s, v| {
             s.prefs.print_markup = p::bool(v, "value").unwrap_or(!s.prefs.print_markup);
@@ -226,15 +231,34 @@ pub fn export_options(s: &Session, v: &Value) -> crate::io::ExportOptions {
 }
 
 fn export_png(s: &mut Session, v: &Value) -> CmdResult {
+    export_page(s, v, None)
+}
+
+fn export_jpeg(s: &mut Session, v: &Value) -> CmdResult {
+    let quality = p::u64(v, "quality").unwrap_or(u64::from(crate::io_ext::JPEG_QUALITY)).clamp(1, 100) as u8;
+    export_page(s, v, Some(quality))
+}
+
+/// Write one page as a picture: PNG, or JPEG at quality `jpeg` (on white, since JPEG has no
+/// transparency).
+fn export_page(s: &mut Session, v: &Value, jpeg: Option<u8>) -> CmdResult {
     let path = p::req_str(v, "path")?;
+    let lower = path.to_ascii_lowercase();
+    let path = if jpeg.is_some() && !lower.ends_with(".jpg") && !lower.ends_with(".jpeg") { format!("{path}.jpg") } else { path.to_string() };
     let page = p::u64(v, "page").unwrap_or(1).max(1) as usize - 1;
     let scale = p::f32(v, "scale").unwrap_or(2.0).clamp(0.1, 8.0);
     let l = s.export_layout_with(export_options(s, v).markup);
     let pg = l.pages.get(page).ok_or_else(|| CmdError::Params(format!("no page {}", page + 1)))?;
     let img = doc4me_render::render_page(&s.doc, pg, scale, &Default::default());
-    let png = img.to_png();
-    crate::io::write_file(path, &png).map_err(CmdError::Failed)?;
-    Ok(json!({"path": path, "width": img.width, "height": img.height, "bytes": png.len()}))
+    let (bytes, format) = match jpeg {
+        Some(q) => (img.to_jpeg(q), "JPEG"),
+        None => (img.to_png(), "PNG"),
+    };
+    if bytes.is_empty() {
+        return Err(CmdError::Failed(format!("{path}: the page image ({}×{} px) couldn't be encoded as {format}", img.width, img.height)));
+    }
+    crate::io::write_file(&path, &bytes).map_err(CmdError::Failed)?;
+    Ok(json!({"path": path, "width": img.width, "height": img.height, "bytes": bytes.len()}))
 }
 
 fn properties(s: &mut Session, v: &Value) -> CmdResult {

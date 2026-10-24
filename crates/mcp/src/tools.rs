@@ -95,7 +95,7 @@ pub fn tool_definitions() -> Value {
         tool(
             "save_document",
             "Save",
-            "Save (format from the extension: docx, pdf, odt, rtf, html, md, tex, txt, png).",
+            "Save (format from the extension: docx, pdf, odt, rtf, html, md, tex, txt, png, jpg/jpeg).",
             obj(json!({"path": s("File path; omit to save in place")}), &[]),
             false
         ),
@@ -213,8 +213,12 @@ pub fn call_tool(b: &mut dyn Backend, name: &str, a: &Value) -> ToolResult {
         "save_document" => {
             let p = st("path");
             let ext = p.and_then(|x| x.rsplit('.').next()).unwrap_or("").to_ascii_lowercase();
-            if ext == "png" {
-                wrap(exec(b, "file.exportPng", json!({"path": p})))
+            if let Some(id) = match ext.as_str() {
+                "png" => Some("file.exportPng"),
+                "jpg" | "jpeg" => Some("file.exportJpeg"),
+                _ => None,
+            } {
+                wrap(exec(b, id, json!({"path": p})))
             } else {
                 wrap(exec(
                     b,

@@ -249,6 +249,7 @@
 	Export	Dışa Aktar
 	Export a copy to share (PDF, Word document)	Paylaşmak için bir kopya dışa aktarın (PDF, Word belgesi)
 	Export Page as PNG	Sayfayı PNG Olarak Dışa Aktar
+	Export Page as JPEG	Sayfayı JPEG Olarak Dışa Aktar
 	Export PDF	PDF Olarak Dışa Aktar
 	Exported {path}	Dışa aktarıldı: {path}
 	Extend Selection	Seçimi Genişlet
@@ -496,6 +497,7 @@
 	Page Color	Sayfa Rengi
 	Page Down	Bir Sayfa Aşağı
 	Page image (*.png)	Sayfa görüntüsü (*.png)
+	Page image (*.jpg, *.jpeg)	Sayfa görüntüsü (*.jpg, *.jpeg)
 	Page Movement	Sayfa Geçişi
 	Page Number	Sayfa Numarası
 	Page Setup	Sayfa Ayarları

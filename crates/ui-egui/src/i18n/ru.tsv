@@ -249,6 +249,7 @@
 	Export	Экспорт
 	Export a copy to share (PDF, Word document)	Экспортировать копию, чтобы поделиться (PDF, документ Word)
 	Export Page as PNG	Экспортировать страницу в PNG
+	Export Page as JPEG	Экспортировать страницу в JPEG
 	Export PDF	Экспорт в PDF
 	Exported {path}	Экспортировано: {path}
 	Extend Selection	Расширить выделение
@@ -495,6 +496,7 @@
 	Page Color	Цвет страницы
 	Page Down	Страница вниз
 	Page image (*.png)	Изображение страницы (*.png)
+	Page image (*.jpg, *.jpeg)	Изображение страницы (*.jpg, *.jpeg)
 	Page Movement	Перелистывание страниц
 	Page Number	Номер страницы
 	Page Setup	Параметры страницы

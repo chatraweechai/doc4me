@@ -827,6 +827,7 @@
 	Export	ส่งออก
 	Export a copy to share (PDF, Word document)	ส่งออกสำเนาเพื่อแชร์ (PDF, เอกสาร Word)
 	Export Page as PNG	ส่งออกหน้าเป็น PNG
+	Export Page as JPEG	ส่งออกหน้าเป็น JPEG
 	Export PDF	ส่งออกเป็น PDF
 	Exported {path}	ส่งออกแล้ว: {path}
 	Expression	นิพจน์
@@ -1559,6 +1560,7 @@
 	Page display	การแสดงหน้า
 	Page Down	Page Down
 	Page image (*.png)	ภาพหน้า (*.png)
+	Page image (*.jpg, *.jpeg)	ภาพหน้า (*.jpg, *.jpeg)
 	Page Movement	การเลื่อนหน้า
 	Page Number	เลขหน้า
 	Page number style	รูปแบบเลขหน้า

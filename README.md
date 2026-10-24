@@ -22,7 +22,7 @@ web build are in [`packaging/`](packaging/).
 ## Highlights
 
 - Opens and saves `.docx`, RTF, ODT, HTML, Markdown, LaTeX and plain text; reads `.doc`; exports
-  PDF.
+  PDF and page images (PNG, JPG/JPEG).
 - A Word-style ribbon, styles, lists, tables, equations, SmartArt, charts, comments and tracked
   changes, references and citations (with Zotero), mail merge and Reading Mode.
 - Interface in English, Thai, Russian, Hungarian, Turkish, Italian and other languages. Thai comes

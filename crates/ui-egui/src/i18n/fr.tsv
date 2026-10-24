@@ -341,6 +341,7 @@
 	Export	Exporter
 	Export a copy to share (PDF, Word document)	Exporter une copie à partager (PDF, document Word)
 	Export Page as PNG	Exporter la page en PNG
+	Export Page as JPEG	Exporter la page en JPEG
 	Export PDF	Exporter en PDF
 	Exported {path}	{path} exporté
 	Extend Selection	Étendre la sélection
@@ -587,6 +588,7 @@
 	Page Color	Couleur de page
 	Page Down	Une page vers le bas
 	Page image (*.png)	Image de page (*.png)
+	Page image (*.jpg, *.jpeg)	Image de page (*.jpg, *.jpeg)
 	Page Movement	Déplacement par page
 	Page Number	Numéro de page
 	Page Setup	Mise en page

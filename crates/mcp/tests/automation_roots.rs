@@ -159,6 +159,7 @@ fn saves_and_exports_go_only_into_the_write_root() {
         ("file.printPdf", json!({"path": s(&base.join("outside/printed.pdf"))})),
         ("file.printPdf", json!({"path": format!("{}{sep}..{sep}outside{sep}up", s(&base.join("out")))})),
         ("file.exportPng", json!({"path": s(&base.join("outside/x.png"))})),
+        ("file.exportJpeg", json!({"path": s(&base.join("outside/x.jpg"))})),
         ("file.saveTemplate", json!({"path": s(&base.join("outside/x.dotx"))})),
         ("mailings.finish", json!({"path": s(&base.join("outside/merged.docx"))})),
     ] {

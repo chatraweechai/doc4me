@@ -28,6 +28,7 @@ pub fn save(ext: &str, doc: &Document, opts: &crate::io::ExportOptions) -> Optio
     match ext {
         "xml" => Some(doc4me_docx::write_flat(doc).map_err(|e| e.to_string())),
         "png" => Some(render_png(doc, 0, 2.0, opts)),
+        "jpg" | "jpeg" => Some(render_jpeg(doc, 0, 2.0, JPEG_QUALITY, opts)),
         "pdf" => {
             let pdf = doc4me_pdf::PdfOptions { include_markup: opts.markup, comments: opts.markup && opts.comments, ..Default::default() };
             Some(doc4me_pdf::export(doc, &pdf).map_err(|e| e.to_string()))
@@ -36,12 +37,29 @@ pub fn save(ext: &str, doc: &Document, opts: &crate::io::ExportOptions) -> Optio
     }
 }
 
+/// The quality page images are saved at as JPEG (1–100): sharp text in a file several times
+/// smaller than the PNG.
+pub const JPEG_QUALITY: u8 = 90;
+
 /// Render page `page` as PNG at `scale` px/pt. With Print Markup's comments the page has its
 /// markup area with the comments in balloons (page images always show tracked changes).
 pub fn render_png(doc: &Document, page: usize, scale: f32, opts: &crate::io::ExportOptions) -> Result<Vec<u8>, String> {
+    encoded(render(doc, page, scale, opts)?.to_png(), "PNG")
+}
+
+/// [`render_png`] as JPEG at `quality` (1–100), on white.
+pub fn render_jpeg(doc: &Document, page: usize, scale: f32, quality: u8, opts: &crate::io::ExportOptions) -> Result<Vec<u8>, String> {
+    encoded(render(doc, page, scale, opts)?.to_jpeg(quality), "JPEG")
+}
+
+fn render(doc: &Document, page: usize, scale: f32, opts: &crate::io::ExportOptions) -> Result<doc4me_render::Rendered, String> {
     let lo = doc4me_layout::LayoutOptions { comment_balloons: opts.markup && opts.comments, ..Default::default() };
     let l = doc4me_layout::layout(doc, &mut doc4me_layout::LayoutCache::new(), &lo);
     let p = l.pages.get(page).ok_or_else(|| format!("no page {}", page + 1))?;
-    let img = doc4me_render::render_page(doc, p, scale, &Default::default());
-    Ok(img.to_png())
+    Ok(doc4me_render::render_page(doc, p, scale, &Default::default()))
+}
+
+/// The encoders return nothing when they fail (logged).
+fn encoded(bytes: Vec<u8>, format: &str) -> Result<Vec<u8>, String> {
+    if bytes.is_empty() { Err(format!("the page image couldn't be encoded as {format}")) } else { Ok(bytes) }
 }

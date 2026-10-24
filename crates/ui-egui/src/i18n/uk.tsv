@@ -393,6 +393,7 @@
 	Export	Експорт
 	Export a copy to share (PDF, Word document)	Експортувати копію для спільного доступу (PDF, документ Word)
 	Export Page as PNG	Експортувати сторінку у PNG
+	Export Page as JPEG	Експортувати сторінку у JPEG
 	Export PDF	Експортувати PDF
 	Exported {path}	Експортовано {path}
 	Extend Selection	Розширити виділення
@@ -640,6 +641,7 @@
 	Page Color	Колір сторінки
 	Page Down	На сторінку вниз
 	Page image (*.png)	Зображення сторінки (*.png)
+	Page image (*.jpg, *.jpeg)	Зображення сторінки (*.jpg, *.jpeg)
 	Page Movement	Переміщення сторінок
 	Page Number	Номер сторінки
 	Page Setup	Параметри сторінки

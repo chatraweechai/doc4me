@@ -1,21 +1,36 @@
-# Handoff: Doc4Me 1.1.1 และงานภาษาไทย
+# Handoff: Doc4Me 1.1.1 และงานภาษาไทย (งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง)
 
-อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 กำลังทำงาน (ดูหัวข้อแรก) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
 
-## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก และงานค้างจาก handoff (กำลังทำ)
+## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก, JPG/JPEG และงานค้างจาก handoff
 
-- ผู้ใช้สั่ง "ดำเนินการต่อจากที่ค้างให้เสร็จ และเพิ่มปุ่มฟังก์ชันในริบบอนแปลงเลขอารบิกเป็นเลขไทย และแปลงเลขไทยเป็นเลขอารบิก" กฎของผู้ใช้: push ไป `main` เท่านั้น, commit/push ก่อนแล้วตรวจบั๊กทีหลังแล้ว push อีกครั้ง, บันทึก handoff ทุกครั้ง
-- push รอบแรก (คอมมิตนี้): ทำแล้ว ดู `CHANGELOG.md` `[Unreleased]`
-  - เพิ่ม `format.thaiDigits` / `format.arabicDigits` และปุ่มบนริบบอน หน้าหลัก › ฟอนต์
-  - ข้อ 1 (เวลา UTC): ใช้ `now_local` กับวันที่และเวลาที่แสดงผู้ใช้ เพิ่ม dependency `chrono` (desktop) metadata ยังเป็น UTC
-  - ข้อ 5.2 ส่วนของ session: workflow ส่ง secret ลงนามให้ขั้นแพ็กเท่านั้น (`package.ps1 -BuildOnly` แล้ว `-SkipBuild`) และ `docs/releasing.md`
+- ผู้ใช้สั่ง (ตามลำดับ)
+  - "ดำเนินการต่อจากที่ค้างให้เสร็จ และเพิ่มปุ่มฟังก์ชันในริบบอนแปลงเลขอารบิกเป็นเลขไทย และแปลงเลขไทยเป็นเลขอารบิก"
+  - "เมื่อทำเสร็จทั้งหมดรวมทั้งงานที่ค้าง ห้ามออกเวอร์ชันใหม่ ให้เพิ่มฟังก์ชันการ save as และ export file เป็นนามสกุลไฟล์ jpg/jpeg ด้วย"
+  - กฎของผู้ใช้: push ไป `main` เท่านั้น, commit/push ก่อนแล้วตรวจบั๊กทีหลังแล้ว push อีกครั้ง, บันทึก handoff ทุกครั้ง
+- **ห้ามออกเวอร์ชันใหม่** (ผู้ใช้สั่ง 2026-10-24): `Cargo.toml` ยังเป็น 1.1.1 และทุกอย่างอยู่ใต้ `[Unreleased]` อย่าสั่ง workflow พร้อม `release: true` จนกว่าผู้ใช้จะสั่ง
+- ทำแล้ว (รายละเอียดและผลตรวจอยู่ใน `CHANGELOG.md` `[Unreleased]`)
+  - ปุ่ม "แปลงเป็นเลขไทย" / "แปลงเป็นเลขอารบิก" บนริบบอน หน้าหลัก › ฟอนต์ (`format.thaiDigits`, `format.arabicDigits`)
+  - Save As และ File › Export เป็น JPG/JPEG (`file.exportJpeg`, `SAVE_EXTS`, CLI, MCP, เว็บ)
+  - ข้อ 1 (เวลา UTC): `now_local` ใช้กับวันที่และเวลาที่แสดงผู้ใช้ เพิ่ม dependency `chrono` (desktop เท่านั้น) วันที่ที่เก็บในไฟล์ยังเป็น UTC
+  - ข้อ 2 และ 5.6: เอกสารที่ล้าสมัยแก้ตามที่ตรวจกับโค้ดแล้ว, Target เป็น Word for Windows (ไม่มีเลขรุ่น), `cargo xtask parity` ได้ 485/500 (97.0%)
+  - ข้อ 3: xtask USAGE มี `version`, PngSuite ตรวจ SHA-256, `.github/dependabot.yml`; ข้อ 4: เลขเวอร์ชันใน `packaging/` และ `apps/` ไม่มีที่เขียนตายตัว (อ่านจาก `Cargo.toml`)
+  - ข้อ 5.2 ส่วนของ session: workflow แยก build (ไม่มี secret) กับขั้นแพ็ก/ลงนาม (ได้ secret) และ `docs/releasing.md`
   - ข้อ 5.4: เจ้าของ repo ลบ `.claude/settings.json` แล้วใน `e5214c4` บันทึกใน `[Unreleased]` › ความปลอดภัย
-  - ข้อ 2 และ 5.6 (บางส่วน): แก้เอกสารตามที่ตรวจกับโค้ดแล้ว และเปลี่ยน Target เป็น Word for Windows (ไม่มีเลขรุ่น)
-  - ข้อ 5.5: `git push origin --delete claude/optimistic-fermat-z9uknk` ถูก git proxy ตัดการเชื่อมต่อสองครั้ง (branch merge เข้า `main` แล้ว ตรวจด้วย `merge-base --is-ancestor`) **[เจ้าของ repo]** ลบที่หน้า Branches ของ GitHub
-- ตรวจก่อน push รอบแรก: `cargo test -p doc4me-engine` ผ่าน (ก่อนแก้ UTC), เทสต์เลข/วันที่ใหม่ผ่าน, ui-egui `i18n ribbon icons widgets` ผ่าน 82, `cargo fmt --all --check` ผ่าน
-- push รอบแรก `21bb34a` แล้ว (CI run 40100455417 เริ่ม 13:58 UTC); ui-egui ทั้งหมดผ่าน 323 รายการ (`--include-ignored`) และ clippy `-D warnings` ของ engine, ui-egui, xtask (`--all-targets`) ผ่าน
-- คอมมิตถัดมา: ปรับ `convert_digits` ไม่สร้าง `Pos` ทุกตัวอักษร, xtask USAGE มี `version` และตรวจ SHA-256 ของ PngSuite, เพิ่ม `.github/dependabot.yml` (github-actions รายสัปดาห์), ข้อจำกัดที่ทราบใน CHANGELOG
-- ยังค้าง: ผลเทสต์ engine ทั้งชุดหลังแก้ UTC, `cargo xtask parity` (แล้วแก้ `ROADMAP.md` แถวแรกกับ `docs/parity-checklist.md`), ภาพหน้าจอปุ่มใหม่ (ติดตั้ง `mesa-vulkan-drivers` แล้ว สคริปต์อยู่ใน scratchpad ของ session), ผล CI ของ `main`
+- **[เจ้าของ repo]** ต้องทำเอง
+  - ข้อ 5.1: tag และ Release `v1.0.0` (คำสั่งอยู่ในข้อ 5.1 ข้างล่าง ยังไม่มี tag นี้ ตรวจ 2026-10-24)
+  - ข้อ 5.2: ใส่ secret ลงนามที่ Settings › Secrets and variables › Actions (ชื่ออยู่ใน `docs/releasing.md` ข้อ 2)
+  - ข้อ 5.3: ruleset ป้องกัน `main`
+  - ข้อ 5.5: ลบ branch `claude/optimistic-fermat-z9uknk` ที่หน้า Branches (merge เข้า `main` แล้ว ตรวจด้วย `merge-base --is-ancestor`; `git push origin --delete` ถูก git proxy ตัดการเชื่อมต่อสองครั้ง) และ branch `claude/affectionate-ptolemy-92v2ut` ของ session นี้ถ้ามีบน remote (session ไม่ได้ push branch นี้)
+  - PR ของ Dependabot ([#1](https://github.com/chatraweechai/doc4me/pull/1) rust-cache 2.9.2 → 2.9.3, [#2](https://github.com/chatraweechai/doc4me/pull/2) checkout 4.4.0 → 7.0.1, [#3](https://github.com/chatraweechai/doc4me/pull/3) download-artifact 4.3.0 → 8.0.2, [#4](https://github.com/chatraweechai/doc4me/pull/4) upload-artifact 4.6.2 → 7.0.2): session ไม่ได้ merge เพราะเป็นการขึ้นเวอร์ชันหลักที่แก้ไฟล์ workflow และ PR ไม่รัน build (ไม่มี trigger `pull_request`) ให้อ่าน release notes ใน PR ก่อน merge โดยเฉพาะ download-artifact ที่ job `release` ใช้ แล้วสั่ง run บน `main` (ไม่ติ๊ก `release`) หลัง merge ห้าม merge ระหว่างที่ job `release` รันอยู่
+- ยังไม่ได้ทำ / ข้อสังเกต
+  - ภาพหน้าจอใน `docs/images` ยังเป็นริบบอนก่อนมีปุ่มแปลงเลข (สคริปต์อยู่ที่ `docs/images/shots/`; ติดตั้ง `mesa-vulkan-drivers` ก่อน)
+  - บานหน้าต่างข้อคิดเห็นแสดงวันที่จาก UTC (ดู `[Unreleased]` › ข้อจำกัดที่ทราบ) ต้องตรวจก่อนว่า Word for Windows เขียน `w:date` แบบไหน
+  - แถวในเอกสาร parity ที่อิงทางลัด ⌘ และเมนูของ Mac (`docs/typing-parity.md`, `docs/ui-parity.md`, `docs/hardware-parity.md`) ยังไม่ได้เขียนใหม่สำหรับ Windows; alpha gate ยังไม่ได้รันบน Windows
+  - ข้อ 3 ที่เหลือ: job ทดสอบบน Linux ใน CI รอเจ้าของ repo ตัดสินใจ, `cargo audit` ยังไม่ได้รัน, audit ภาษาที่ติด `#[ignore]` ยังไม่รู้สาเหตุที่เคยล้ม (รอบนี้ผ่าน)
+  - ข้อ 5.7 ทั้งหมดยังรอเจ้าของ repo
+- CI ของ `main`: run ของ `21bb34a` และ `b65c320` ยังรันอยู่ตอนบันทึก (ขั้น "Build doc4me + doc4me-cli" ใหม่) ให้ตรวจว่า run ล่าสุดผ่านทั้งสองขั้นใหม่
+- ตรวจในเครื่องก่อน push คอมมิต JPEG: engine 378 + 13 + 8, cli/mcp/render ผ่าน, fmt ผ่าน; ui-egui และ clippy ทั้งชุดรันต่อหลัง push
 
 ## งานที่ต้องทำต่อใน session ใหม่ (รวบรวม 2026-10-23)
 

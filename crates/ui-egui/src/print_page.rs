@@ -229,6 +229,7 @@ pub fn export_formats(app: &mut WordApp, ui: &mut Ui) {
         ("LaTeX (*.tex)", "tex"),
         ("Plain text (*.txt)", "txt"),
         ("Page image (*.png)", "png"),
+        ("Page image (*.jpg, *.jpeg)", "jpg"),
     ] {
         if ui.add(egui::Button::new(egui::RichText::new(tl!(label)).font(medium(13.5))).min_size(vec2(320.0, 34.0))).clicked() {
             app.export_dialog(ext);

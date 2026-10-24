@@ -381,6 +381,7 @@
 	Export	Exportar
 	Export PDF	Exportar PDF
 	Export Page as PNG	Exportar página como PNG
+	Export Page as JPEG	Exportar página como JPEG
 	Export a copy to share (PDF, Word document)	Exporta una copia para compartir (PDF, documento de Word)
 	Exported {path}	Exportado: {path}
 	Extend Selection	Ampliar selección
@@ -652,6 +653,7 @@
 	Page X of Y	Página X de Y
 	Page break before	Salto de página antes
 	Page image (*.png)	Imagen de página (*.png)
+	Page image (*.jpg, *.jpeg)	Imagen de página (*.jpg, *.jpeg)
 	Page width	Ancho de página
 	Page {page}	Página {page}
 	Page {page} of {pages}	Página {page} de {pages}

@@ -248,6 +248,7 @@
 	Export	Eksportuj
 	Export PDF	Eksportuj do PDF
 	Export Page as PNG	Eksportuj stronę jako PNG
+	Export Page as JPEG	Eksportuj stronę jako JPEG
 	Export a copy to share (PDF, Word document)	Wyeksportuj kopię do udostępnienia (PDF, dokument Word)
 	Exported {path}	Wyeksportowano: {path}
 	Extend Selection	Rozszerz zaznaczenie
@@ -493,6 +494,7 @@
 	Page X of Y	Strona X z Y
 	Page break before	Podział strony przed
 	Page image (*.png)	Obraz strony (*.png)
+	Page image (*.jpg, *.jpeg)	Obraz strony (*.jpg, *.jpeg)
 	Page width	Szerokość strony
 	Page {page}	Strona {page}
 	Page {page} of {pages}	Strona {page} z {pages}

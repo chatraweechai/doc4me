@@ -251,6 +251,7 @@
 	Export	Exportálás
 	Export a copy to share (PDF, Word document)	Másolat exportálása megosztáshoz (PDF, Word-dokumentum)
 	Export Page as PNG	Oldal exportálása PNG-ként
+	Export Page as JPEG	Oldal exportálása JPEG-ként
 	Export PDF	PDF exportálása
 	Exported {path}	Exportálva: {path}
 	Extend Selection	Kijelölés bővítése
@@ -497,6 +498,7 @@
 	Page Color	Oldalszín
 	Page Down	Page Down
 	Page image (*.png)	Oldalkép (*.png)
+	Page image (*.jpg, *.jpeg)	Oldalkép (*.jpg, *.jpeg)
 	Page Movement	Lapozás
 	Page Number	Oldalszám
 	Page Setup	Oldalbeállítás

@@ -395,6 +395,7 @@
 	Export	导出
 	Export a copy to share (PDF, Word document)	导出副本以共享（PDF、Word 文档）
 	Export Page as PNG	将页面导出为 PNG
+	Export Page as JPEG	将页面导出为 JPEG
 	Export PDF	导出 PDF
 	Exported {path}	已导出 {path}
 	Extend Selection	扩展选定范围
@@ -638,6 +639,7 @@
 	Page Color	页面颜色
 	Page Down	下一屏
 	Page image (*.png)	页面图像 (*.png)
+	Page image (*.jpg, *.jpeg)	页面图像 (*.jpg, *.jpeg)
 	Page Movement	翻页方式
 	Page Number	页码
 	Page Setup	页面设置

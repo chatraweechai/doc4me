@@ -383,6 +383,7 @@
 	Export	エクスポート
 	Export a copy to share (PDF, Word document)	共有用にコピーをエクスポート（PDF、Word 文書）
 	Export Page as PNG	ページを PNG としてエクスポート
+	Export Page as JPEG	ページを JPEG としてエクスポート
 	Export PDF	PDF にエクスポート
 	Exported {path}	{path} にエクスポートしました
 	Extend Selection	選択範囲の拡張
@@ -626,6 +627,7 @@
 	Page Color	ページの色
 	Page Down	下へスクロール
 	Page image (*.png)	ページ画像 (*.png)
+	Page image (*.jpg, *.jpeg)	ページ画像 (*.jpg, *.jpeg)
 	Page Movement	ページの移動
 	Page Number	ページ番号
 	Page Setup	ページ設定

@@ -397,6 +397,7 @@
 	Export	Exportovat
 	Export a copy to share (PDF, Word document)	Exportovat kopii ke sdílení (PDF, dokument Word)
 	Export Page as PNG	Exportovat stránku jako PNG
+	Export Page as JPEG	Exportovat stránku jako JPEG
 	Export PDF	Exportovat PDF
 	Exported {path}	Exportováno: {path}
 	Extend Selection	Rozšířit výběr
@@ -774,6 +775,7 @@
 	Page Color	Barva stránky
 	Page Down	O stránku dolů
 	Page image (*.png)	Obrázek stránky (*.png)
+	Page image (*.jpg, *.jpeg)	Obrázek stránky (*.jpg, *.jpeg)
 	Page Movement	Pohyb stránek
 	Page Number	Číslo stránky
 	Page on which a bookmarked passage falls	Číslo stránky se záložkou

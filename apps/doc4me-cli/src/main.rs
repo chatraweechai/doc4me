@@ -15,13 +15,13 @@ doc4me-cli — Doc4Me from the command line
 
 USAGE:
   doc4me-cli convert <in> <out> [--markup]
-                                              convert between formats (docx, doc [read], pdf, odt, rtf, html, md, tex, txt, json, png);
+                                              convert between formats (docx, doc [read], pdf, odt, rtf, html, md, tex, txt, json, png, jpg/jpeg);
                                               --markup (Print Markup): comments beside each page and
-                                              tracked changes in pdf/png, a comment list in html/md/txt
+                                              tracked changes in pdf/png/jpg, a comment list in html/md/txt
   doc4me-cli info <file>                   pages, words, paragraphs, properties (JSON)
   doc4me-cli text <file>                   plain text
   doc4me-cli inspect <file>                document structure (JSON)
-  doc4me-cli render <file> <out.png> [--page N] [--scale S]
+  doc4me-cli render <file> <out.png|out.jpg> [--page N] [--scale S]
   doc4me-cli run [--file F | --template T] --cmd 'id={json}' [--cmd …] [--save OUT] [--print]
                     [--author NAME]           run commands headlessly, then save (--author names
                                               who tracked changes and comments are by)
@@ -53,6 +53,19 @@ fn open(path: &str) -> Result<Session, String> {
 /// `--author NAME`: the author recorded on tracked changes and comments (`file.setAuthor`).
 fn set_author(s: &mut Session, name: &str) -> Result<(), String> {
     s.run("file.setAuthor", &json!({"name": name})).map(|_| ()).map_err(|e| format!("--author: {e}"))
+}
+
+/// The page-image export for an output path: PNG or JPEG by its extension, `None` otherwise
+/// (a document format, saved with `file.save`).
+fn image_export(path: &str) -> Option<&'static str> {
+    let lower = path.to_ascii_lowercase();
+    if lower.ends_with(".png") {
+        Some("file.exportPng")
+    } else if lower.ends_with(".jpg") || lower.ends_with(".jpeg") {
+        Some("file.exportJpeg")
+    } else {
+        None
+    }
 }
 
 fn arg_value(args: &[String], name: &str) -> Option<String> {
@@ -183,10 +196,9 @@ fn run(args: &[String]) -> Result<(), Failure> {
             let (i, o) = (pos(0)?, pos(1)?);
             let markup = rest.iter().any(|a| a == "--markup");
             let mut s = open(&i)?;
-            let r = if o.to_ascii_lowercase().ends_with(".png") {
-                s.run("file.exportPng", &json!({"path": o, "page": 1, "markup": markup}))
-            } else {
-                s.run("file.save", &json!({"path": o, "markup": markup}))
+            let r = match image_export(&o) {
+                Some(id) => s.run(id, &json!({"path": o, "page": 1, "markup": markup})),
+                None => s.run("file.save", &json!({"path": o, "markup": markup})),
             };
             r.map_err(|e| e.to_string())?;
             eprintln!("wrote {o}");
@@ -215,7 +227,8 @@ fn run(args: &[String]) -> Result<(), Failure> {
             let mut s = open(&i)?;
             let page = arg_value(&rest, "--page").and_then(|p| p.parse::<u64>().ok()).unwrap_or(1);
             let scale = arg_value(&rest, "--scale").and_then(|p| p.parse::<f64>().ok()).unwrap_or(2.0);
-            let r = s.run("file.exportPng", &json!({"path": o, "page": page, "scale": scale})).map_err(|e| e.to_string())?;
+            let id = image_export(&o).unwrap_or("file.exportPng");
+            let r = s.run(id, &json!({"path": o, "page": page, "scale": scale})).map_err(|e| e.to_string())?;
             write_stdout(|o| writeln!(o, "{r}"))
         }
         "run" => {
@@ -250,7 +263,7 @@ fn run(args: &[String]) -> Result<(), Failure> {
                 }
             }
             if let Some(out) = arg_value(&rest, "--save") {
-                let r = if out.to_ascii_lowercase().ends_with(".png") {
+                let r = if let Some(id) = image_export(&out) {
                     let mut v = json!({"path": out});
                     if let Some(n) = arg_value(&rest, "--page").and_then(|p| p.parse::<u64>().ok()) {
                         v["page"] = json!(n);
@@ -258,7 +271,7 @@ fn run(args: &[String]) -> Result<(), Failure> {
                     if let Some(k) = arg_value(&rest, "--scale").and_then(|p| p.parse::<f64>().ok()) {
                         v["scale"] = json!(k);
                     }
-                    s.run("file.exportPng", &v)
+                    s.run(id, &v)
                 } else {
                     s.run("file.save", &json!({"path": out}))
                 };
@@ -428,6 +441,15 @@ fn main() -> ExitCode {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn page_images_export_by_extension() {
+        assert_eq!(image_export("out.png"), Some("file.exportPng"));
+        assert_eq!(image_export("out.JPG"), Some("file.exportJpeg"));
+        assert_eq!(image_export("dir.v2/out.jpeg"), Some("file.exportJpeg"));
+        assert_eq!(image_export("out.docx"), None);
+        assert_eq!(image_export("jpg"), None);
+    }
 
     fn args(values: &[&str]) -> Vec<String> {
         values.iter().map(|value| (*value).into()).collect()

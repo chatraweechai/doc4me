@@ -30,6 +30,19 @@
   - ผู้ใช้และความเข้ากันได้: ไฟล์ .docx เดิมเปิดและบันทึกเหมือนเดิม; ตัวเลขที่แปลงแล้วเป็นอักขระ U+0E50–U+0E59 จริงในไฟล์ ต่างจาก File › Options › Numerals ซึ่งเปลี่ยนแค่การแสดงผล; ติดตั้งทับรุ่นเดิมได้ตามปกติ
   - ตรวจสอบ: เทสต์ใหม่ `digits_convert_between_arabic_and_thai`, `digit_conversion_keeps_each_runs_formatting`, `digit_conversion_under_track_changes_is_a_revision` (`crates/engine/src/tests.rs`) และ `digit_conversion_skips_controls_that_cant_be_edited` (`cmd/controls.rs`) ผ่าน; `cargo test -p doc4me-engine` ผ่าน 376 + 13 + 8; `cargo test -p doc4me-ui-egui --lib -- --include-ignored i18n ribbon icons widgets` ผ่าน 82 รายการ (รวม `every_tab_and_command_is_translated`, การตรวจว่าแค็ตตาล็อกทุกภาษามีคีย์ชุดเดียวกัน และ audit `untranslated_interface_text`); `cargo fmt --all --check` ผ่าน
 
+- **บันทึกเป็น (Save As) และส่งออก (Export) หน้าเอกสารเป็นไฟล์ภาพ JPG/JPEG**
+  - เหตุผล: ผู้ใช้สั่งเพิ่ม เดิมส่งออกเป็นภาพได้แค่ PNG
+  - คำสั่งใหม่ `file.exportJpeg` "Export Page as JPEG" (`crates/engine/src/cmd/file.rs`, รวมกับ PNG ใน `export_page`): พารามิเตอร์ `path`, `page`, `scale`, `quality` (1–100 ค่าเริ่มต้น 90 ค่านอกช่วงถูกบีบ) และ `markup`; path ที่ไม่ลงท้าย `.jpg` หรือ `.jpeg` (ตัวพิมพ์ใดก็ได้) จะต่อ `.jpg` ให้
+  - บันทึกเป็น: `.jpg` และ `.jpeg` อยู่ใน `SAVE_EXTS` (`crates/engine/src/io.rs`) จึงอยู่ในกล่อง Save As ของระบบ และ `io_ext::save` เขียนหน้า 1 ที่ 2 px/pt คุณภาพ 90 (`render_jpeg`, `JPEG_QUALITY`) เป็นสำเนาเหมือน PNG: เอกสารยังมี path เดิมและยังนับว่าไม่ได้บันทึก
+  - File › Export และหน้าพิมพ์มีปุ่ม "Page image (*.jpg, *.jpeg)" (`crates/ui-egui/src/print_page.rs`) เสนอชื่อ `.jpg` แล้วเรียก `file.exportJpeg` (`file_dialogs.rs`); บนเว็บ การส่งออกและบันทึกเป็น JPEG กลายเป็นการดาวน์โหลด (`lib.rs`, MIME `image/jpeg` ใน `apps/doc4me-web` มีอยู่แล้ว)
+  - JPEG ไม่มีความโปร่งใส หน้าจึงวาดบนพื้นขาว (`Rendered::to_jpeg` ใน `crates/render/src/lib.rs`); ถ้าเข้ารหัสไม่ได้ (เช่นกว้างหรือสูงเกิน 65,535 px) จะแจ้งข้อผิดพลาดแทนการเขียนไฟล์เสีย ซึ่งใช้กับ PNG ด้วย (เดิม `to_jpeg` ไม่ถูกเรียกใช้ และไม่สนใจข้อผิดพลาด)
+  - `doc4me-cli`: `convert`, `render` และ `run --save` เลือก JPEG ตามนามสกุล `.jpg`/`.jpeg` (`image_export`) และข้อความ USAGE บอกแล้ว; MCP `save_document` ส่ง `.jpg`/`.jpeg` ไป `file.exportJpeg` และ `file.exportJpeg` เขียนได้เฉพาะใน `--automation-write-root` เหมือนคำสั่งเขียนไฟล์อื่น (`crates/engine/src/io.rs` `write_file`, `docs/mcp.md`)
+  - คำแปล "Export Page as JPEG" และ "Page image (*.jpg, *.jpeg)" ครบ 18 ภาษา (ไทย: "ส่งออกหน้าเป็น JPEG", "ภาพหน้า (*.jpg, *.jpeg)") ใช้คำเดียวกับของ PNG
+  - ไม่ได้เพิ่มลงแค็ตตาล็อก parity เพราะ Word ไม่มีคำสั่งนี้
+  - ผู้ใช้และความเข้ากันได้: ไฟล์ .docx เดิมไม่เปลี่ยน; ภาพ JPEG เป็นสำเนาของหน้าเดียว เปิดกลับมาแก้เป็นเอกสารไม่ได้ (เหมือน PNG); ติดตั้งทับได้ตามปกติ; ไม่ได้ออกเวอร์ชันใหม่ตามที่ผู้ใช้สั่ง
+  - `README.md`, `README.th.md` และบันทึกความคืบหน้าใน `ROADMAP.md` บอกว่าส่งออกภาพหน้าเป็น PNG และ JPG/JPEG ได้
+  - ตรวจสอบ: เทสต์ใหม่ `pages_export_and_save_as_jpeg` (`crates/engine/src/tests.rs`: ไฟล์ถอดรหัสเป็น JPEG ได้ ขนาดตรงกับที่รายงาน มุมหน้าเป็นสีขาว ต่อ `.jpg` ให้ path ที่ไม่มี คง `.JPEG` ไว้ quality ถูกบีบและเปลี่ยนขนาดไฟล์ หน้าที่ไม่มีเป็นข้อผิดพลาด Save As `.jpg`/`.jpeg` เป็นสำเนา), `export_writes_a_jpeg_page_image` (`crates/ui-egui/src/file_dialogs.rs`), `page_images_export_by_extension` (`apps/doc4me-cli`) และ `file.exportJpeg` ในเทสต์ write root ของ MCP (`crates/mcp/tests/automation_roots.rs`); `cargo test -p doc4me-engine` ผ่าน 378 + 13 + 8; `cargo test -p doc4me-cli -p doc4me-mcp -p doc4me-render` ผ่านทั้งหมด; `cargo fmt --all --check` ผ่าน; ผลของ ui-egui และ clippy ดูรายการตรวจหลัง push
+
 ### เปลี่ยนแปลง
 
 - **เอกสารที่ล้าสมัยหลังออก 1.1.1 และเป้าหมาย parity เป็น Word for Windows** (handoff ข้อ 2 และ 5.6)
@@ -42,7 +55,8 @@
   - `ROADMAP.md`: แถว Releases เป็น v1.1.1, ตัวเลข 609 คำสั่ง 1,758 เทสต์ ~181,000 บรรทัด (นับจากซอร์ส), Why alpha / Why not beta ไม่อ้างว่ามี build ที่ลงนามทุกแพลตฟอร์มและไม่นับฟีเจอร์ที่มีแล้วว่ายังขาด, จำนวนรายการของ tr (2,414) และ hu (2,446), Upcoming ข้อ 3, 5, 6 และบันทึกความคืบหน้า 2026-10-22 กับ 2026-10-24
   - `docs/localization-hu.md`, `docs/localization-tr.md`: Target "Doc4Me 0.5.0" ซึ่งเป็นรุ่นที่ไม่เคยมี เปลี่ยนเป็น Doc4Me 1.1
   - `README.th.md`: หัวข้อ "ภาษาไทยใน Doc4Me" เพิ่มปุ่มจัดกระจายแบบไทยของ 1.1.1 และปุ่มแปลงเลข
-  - ยังไม่ได้ทำ: ตัวเลข parity ของ catalog (`ROADMAP.md` แถวแรก, `docs/parity-checklist.md`) ต้องรัน `cargo xtask parity`; ข้อความที่อ้าง PR และ issue ของ WordCraft รอเจ้าของ repo ตัดสินใจ (handoff ข้อ 5.7)
+  - ตัวเลข parity ของ catalog: `cargo xtask parity` (2026-10-24) ได้ 485 จาก 500 (97.0%) และแท็บ File 22/22 เพราะ catalog มี `File|Options|Numerals|view.numeral` แล้ว แก้ `docs/parity-checklist.md` (สร้างใหม่โดยคำสั่งนั้น) และแถวแรกของ `ROADMAP.md` (เดิม 484/499 แก้ด้วยมือตอน 1.1.1)
+  - ยังไม่ได้ทำ: ข้อความที่อ้าง PR และ issue ของ WordCraft รอเจ้าของ repo ตัดสินใจ (handoff ข้อ 5.7); แถวในเอกสาร parity ที่เขียนทางลัดแบบ ⌘ ของ Mac ยังไม่ได้เขียนใหม่สำหรับ Windows
   - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
   - ตรวจสอบ: ข้อเท็จจริงแต่ละข้อตรวจกับโค้ดด้วย grep (`crypt.rs`, `b:Sources` ใน `crates/docx/src/read/mod.rs` และ `write/mod.rs`, `arrange.group`, `edit.clipboardPane`, `styles.manage`, `wpc` ใน `crates/docx/src/xml.rs`, ไม่มี `contentPart`, การ balance คอลัมน์และการแบ่ง footnote ใน `crates/layout/src/lib.rs`); จำนวนรายการนับจากไฟล์ `.tsv`; จำนวนคำสั่งนับ id ของ `CommandSpec::new` ที่ไม่ซ้ำ; `git diff --stat` ตรวจว่าแก้แค่บรรทัดที่ตั้งใจ
 

@@ -69,6 +69,8 @@ impl Rendered {
         }
         buf
     }
+    /// JPEG bytes at `quality` (1–100), composited on white since JPEG has no transparency
+    /// (empty on failure, logged: JPEG stops at 65,535 px a side).
     pub fn to_jpeg(&self, quality: u8) -> Vec<u8> {
         let rgba = self.to_straight();
         let rgb: Vec<u8> = rgba
@@ -83,7 +85,10 @@ impl Rendered {
             .collect();
         let mut buf = Vec::new();
         let enc = image::codecs::jpeg::JpegEncoder::new_with_quality(&mut buf, quality.clamp(1, 100));
-        let _ = image::ImageEncoder::write_image(enc, &rgb, self.width, self.height, image::ExtendedColorType::Rgb8);
+        if let Err(e) = image::ImageEncoder::write_image(enc, &rgb, self.width, self.height, image::ExtendedColorType::Rgb8) {
+            log::error!("JPEG encode {}×{}: {e}", self.width, self.height);
+            return Vec::new();
+        }
         buf
     }
     /// Straight RGBA at (x, y) (transparent outside).
