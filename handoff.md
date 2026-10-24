@@ -1,6 +1,6 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย (งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง)
 
-อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 ยุติแล้ว CI ของ `main` ผ่าน (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
 
 ## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก, JPG/JPEG และงานค้างจาก handoff
 
@@ -29,7 +29,7 @@
   - แถวในเอกสาร parity ที่อิงทางลัด ⌘ และเมนูของ Mac (`docs/typing-parity.md`, `docs/ui-parity.md`, `docs/hardware-parity.md`) ยังไม่ได้เขียนใหม่สำหรับ Windows; alpha gate ยังไม่ได้รันบน Windows
   - ข้อ 3 ที่เหลือ: job ทดสอบบน Linux ใน CI รอเจ้าของ repo ตัดสินใจ, `cargo audit` ยังไม่ได้รัน, audit ภาษาที่ติด `#[ignore]` ยังไม่รู้สาเหตุที่เคยล้ม (รอบนี้ผ่าน)
   - ข้อ 5.7 ทั้งหมดยังรอเจ้าของ repo
-- CI ของ `main`: run ของ `21bb34a` (40100455417) และ `b65c320` (40100747357) ถูกยกเลิกโดย concurrency เพราะมี push ใหม่ (ไม่ใช่การล้ม); [run 40101348687](https://github.com/chatraweechai/doc4me/actions/runs/40101348687) ของ `0cdf2bb` (คอมมิตโค้ดล่าสุด) ยังรันอยู่ตอนบันทึก คอมมิตหลังจากนั้นแก้แค่เอกสารและภาพ จึงใส่ `[skip ci]` **session ถัดไปต้องตรวจว่า run นี้ผ่าน** โดยเฉพาะขั้นใหม่ "Build doc4me + doc4me-cli" และ "Sign and package MSI + portable zip" (คาดว่ามีคำเตือน "leaving unsigned" เพราะยังไม่มี secret)
+- CI ของ `main`: run ของ `21bb34a` (40100455417) และ `b65c320` (40100747357) ถูกยกเลิกโดย concurrency เพราะมี push ใหม่ (ไม่ใช่การล้ม); [run 40101348687](https://github.com/chatraweechai/doc4me/actions/runs/40101348687) ของ `0cdf2bb` (คอมมิตโค้ดล่าสุด) **ผ่าน** (ตรวจ 14:26 UTC): job `build` สำเร็จทุกขั้น รวมขั้นใหม่ "Build doc4me + doc4me-cli" (14:11:45–14:22:23) และ "Sign and package MSI + portable zip" (14:22:23–14:23:05) ส่วน job `release` ถูกข้ามตามปกติของ push; คอมมิตหลังจากนั้นแก้แค่เอกสารและภาพ จึงใส่ `[skip ci]` run นี้จึงเป็น build ล่าสุดของโค้ด
 - ผลตรวจในเครื่องรอบสุดท้าย: engine 378 + 13 + 8, cli/mcp/render ผ่าน, ui-egui 324 (`--include-ignored`), clippy `-D warnings` `--all-targets` ของ engine, ui-egui, cli, mcp, render, xtask ผ่าน, `cargo fmt --all --check` ผ่าน, `cargo xtask parity` 485/500; ภาพหน้าจอยืนยันปุ่มแปลงเลขและผลการแปลง
 - ยังไม่ได้รัน `cargo xtask ci` ทั้ง workspace (wasm target ไม่ได้ติดตั้ง และดิสก์จำกัด) ส่วน wasm ของ `local_offset_secs` ตรวจแค่ว่า `js_sys::Date::new_0` และ `get_timezone_offset` มีใน js-sys 0.3.106
 
