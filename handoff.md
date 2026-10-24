@@ -24,13 +24,14 @@
   - ข้อ 5.5: ลบ branch `claude/optimistic-fermat-z9uknk` ที่หน้า Branches (merge เข้า `main` แล้ว ตรวจด้วย `merge-base --is-ancestor`; `git push origin --delete` ถูก git proxy ตัดการเชื่อมต่อสองครั้ง) และ branch `claude/affectionate-ptolemy-92v2ut` ของ session นี้ถ้ามีบน remote (session ไม่ได้ push branch นี้)
   - PR ของ Dependabot ([#1](https://github.com/chatraweechai/doc4me/pull/1) rust-cache 2.9.2 → 2.9.3, [#2](https://github.com/chatraweechai/doc4me/pull/2) checkout 4.4.0 → 7.0.1, [#3](https://github.com/chatraweechai/doc4me/pull/3) download-artifact 4.3.0 → 8.0.2, [#4](https://github.com/chatraweechai/doc4me/pull/4) upload-artifact 4.6.2 → 7.0.2): session ไม่ได้ merge เพราะเป็นการขึ้นเวอร์ชันหลักที่แก้ไฟล์ workflow และ PR ไม่รัน build (ไม่มี trigger `pull_request`) ให้อ่าน release notes ใน PR ก่อน merge โดยเฉพาะ download-artifact ที่ job `release` ใช้ แล้วสั่ง run บน `main` (ไม่ติ๊ก `release`) หลัง merge ห้าม merge ระหว่างที่ job `release` รันอยู่
 - ยังไม่ได้ทำ / ข้อสังเกต
-  - ภาพหน้าจอใน `docs/images` ยังเป็นริบบอนก่อนมีปุ่มแปลงเลข (สคริปต์อยู่ที่ `docs/images/shots/`; ติดตั้ง `mesa-vulkan-drivers` ก่อน)
+  - ภาพ `hero`, `thai`, `dark`, `dark-th`, `font`, `font-th` ถ่ายใหม่แล้ว ภาพอื่นใน `docs/images` (backstage, design, layout, references, review) ไม่เห็นกลุ่มฟอนต์ของหน้าหลักจึงไม่ได้ถ่ายใหม่
   - บานหน้าต่างข้อคิดเห็นแสดงวันที่จาก UTC (ดู `[Unreleased]` › ข้อจำกัดที่ทราบ) ต้องตรวจก่อนว่า Word for Windows เขียน `w:date` แบบไหน
   - แถวในเอกสาร parity ที่อิงทางลัด ⌘ และเมนูของ Mac (`docs/typing-parity.md`, `docs/ui-parity.md`, `docs/hardware-parity.md`) ยังไม่ได้เขียนใหม่สำหรับ Windows; alpha gate ยังไม่ได้รันบน Windows
   - ข้อ 3 ที่เหลือ: job ทดสอบบน Linux ใน CI รอเจ้าของ repo ตัดสินใจ, `cargo audit` ยังไม่ได้รัน, audit ภาษาที่ติด `#[ignore]` ยังไม่รู้สาเหตุที่เคยล้ม (รอบนี้ผ่าน)
   - ข้อ 5.7 ทั้งหมดยังรอเจ้าของ repo
-- CI ของ `main`: run ของ `21bb34a` และ `b65c320` ยังรันอยู่ตอนบันทึก (ขั้น "Build doc4me + doc4me-cli" ใหม่) ให้ตรวจว่า run ล่าสุดผ่านทั้งสองขั้นใหม่
-- ตรวจในเครื่องก่อน push คอมมิต JPEG: engine 378 + 13 + 8, cli/mcp/render ผ่าน, fmt ผ่าน; ui-egui และ clippy ทั้งชุดรันต่อหลัง push
+- CI ของ `main`: run ของ `21bb34a` (40100455417) และ `b65c320` (40100747357) ถูกยกเลิกโดย concurrency เพราะมี push ใหม่ (ไม่ใช่การล้ม); [run 40101348687](https://github.com/chatraweechai/doc4me/actions/runs/40101348687) ของ `0cdf2bb` (คอมมิตโค้ดล่าสุด) ยังรันอยู่ตอนบันทึก คอมมิตหลังจากนั้นแก้แค่เอกสารและภาพ จึงใส่ `[skip ci]` **session ถัดไปต้องตรวจว่า run นี้ผ่าน** โดยเฉพาะขั้นใหม่ "Build doc4me + doc4me-cli" และ "Sign and package MSI + portable zip" (คาดว่ามีคำเตือน "leaving unsigned" เพราะยังไม่มี secret)
+- ผลตรวจในเครื่องรอบสุดท้าย: engine 378 + 13 + 8, cli/mcp/render ผ่าน, ui-egui 324 (`--include-ignored`), clippy `-D warnings` `--all-targets` ของ engine, ui-egui, cli, mcp, render, xtask ผ่าน, `cargo fmt --all --check` ผ่าน, `cargo xtask parity` 485/500; ภาพหน้าจอยืนยันปุ่มแปลงเลขและผลการแปลง
+- ยังไม่ได้รัน `cargo xtask ci` ทั้ง workspace (wasm target ไม่ได้ติดตั้ง และดิสก์จำกัด) ส่วน wasm ของ `local_offset_secs` ตรวจแค่ว่า `js_sys::Date::new_0` และ `get_timezone_offset` มีใน js-sys 0.3.106
 
 ## งานที่ต้องทำต่อใน session ใหม่ (รวบรวม 2026-10-23)
 

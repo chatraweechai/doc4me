@@ -25,6 +25,9 @@
     - ไม่แปลงตัวเลขใน content control ที่ล็อกการแก้เนื้อหา หรือที่ยังแสดงข้อความแนะนำ
     - การจำกัดการจัดรูปแบบของ Restrict Editing ไม่ปิดสองคำสั่งนี้ เพราะเปลี่ยนข้อความไม่ใช่รูปแบบ (`cmd/protect.rs` เหมือนเปลี่ยนตัวพิมพ์เล็ก-ใหญ่) ส่วนเอกสารที่ป้องกันแบบอ่านอย่างเดียวยังกันการแก้ไขตามเดิม
   - คำแปลชื่อคำสั่งครบ 18 ภาษาใน `crates/ui-egui/src/i18n/*.tsv` (ไทย: "แปลงเป็นเลขไทย" และ "แปลงเป็นเลขอารบิก")
+  - ภาพ `docs/images/hero.png`, `thai.png`, `dark.png`, `dark-th.png`, `font.png` และ `font-th.png` (เห็นริบบอนหน้าหลัก) ถ่ายใหม่ด้วยสคริปต์เดิมใน `docs/images/shots/` เพราะกลุ่มฟอนต์มีปุ่มเพิ่ม
+  - ตรวจด้วยภาพหน้าจอ (`ui_shot`, ภาษาไทย): ปุ่ม 1→๑ และ ๑→1 อยู่ถัดจากปุ่มเปลี่ยนตัวพิมพ์เล็ก-ใหญ่ และย่อหน้าที่เลือกแปลงเป็น ๒๕๖๗ ๑๒ ๑,๒๕๐ โดยการเลือกยังครอบทั้งย่อหน้า
+  - รอบตรวจหลัง push: `cargo test -p doc4me-engine` ผ่าน 377 + 13 + 8 (หลังแก้ UTC), ui-egui ทั้งชุดผ่าน 323 รายการ (`--include-ignored`), clippy `-D warnings` `--all-targets` ของ engine, ui-egui และ xtask ผ่าน
   - ตรวจหลัง push (คอมมิต `21bb34a`): ตำแหน่งของอักขระที่ใช้เทียบกับ content control ที่ล็อกถูกสร้างทุกตัวอักษร (คัดลอก path ทุกครั้ง) เปลี่ยนให้สร้างเฉพาะตัวเลขในเอกสารที่มี control ที่ต้องข้าม ผลลัพธ์เหมือนเดิม
   - ไม่ได้เพิ่มลงแค็ตตาล็อก parity (`crates/engine/src/catalog.rs`) เพราะ Word ไม่มีคำสั่งนี้ ตัวเลข parity จึงไม่เปลี่ยน
   - ผู้ใช้และความเข้ากันได้: ไฟล์ .docx เดิมเปิดและบันทึกเหมือนเดิม; ตัวเลขที่แปลงแล้วเป็นอักขระ U+0E50–U+0E59 จริงในไฟล์ ต่างจาก File › Options › Numerals ซึ่งเปลี่ยนแค่การแสดงผล; ติดตั้งทับรุ่นเดิมได้ตามปกติ
@@ -41,7 +44,7 @@
   - ไม่ได้เพิ่มลงแค็ตตาล็อก parity เพราะ Word ไม่มีคำสั่งนี้
   - ผู้ใช้และความเข้ากันได้: ไฟล์ .docx เดิมไม่เปลี่ยน; ภาพ JPEG เป็นสำเนาของหน้าเดียว เปิดกลับมาแก้เป็นเอกสารไม่ได้ (เหมือน PNG); ติดตั้งทับได้ตามปกติ; ไม่ได้ออกเวอร์ชันใหม่ตามที่ผู้ใช้สั่ง
   - `README.md`, `README.th.md` และบันทึกความคืบหน้าใน `ROADMAP.md` บอกว่าส่งออกภาพหน้าเป็น PNG และ JPG/JPEG ได้
-  - ตรวจสอบ: เทสต์ใหม่ `pages_export_and_save_as_jpeg` (`crates/engine/src/tests.rs`: ไฟล์ถอดรหัสเป็น JPEG ได้ ขนาดตรงกับที่รายงาน มุมหน้าเป็นสีขาว ต่อ `.jpg` ให้ path ที่ไม่มี คง `.JPEG` ไว้ quality ถูกบีบและเปลี่ยนขนาดไฟล์ หน้าที่ไม่มีเป็นข้อผิดพลาด Save As `.jpg`/`.jpeg` เป็นสำเนา), `export_writes_a_jpeg_page_image` (`crates/ui-egui/src/file_dialogs.rs`), `page_images_export_by_extension` (`apps/doc4me-cli`) และ `file.exportJpeg` ในเทสต์ write root ของ MCP (`crates/mcp/tests/automation_roots.rs`); `cargo test -p doc4me-engine` ผ่าน 378 + 13 + 8; `cargo test -p doc4me-cli -p doc4me-mcp -p doc4me-render` ผ่านทั้งหมด; `cargo fmt --all --check` ผ่าน; ผลของ ui-egui และ clippy ดูรายการตรวจหลัง push
+  - ตรวจสอบ: เทสต์ใหม่ `pages_export_and_save_as_jpeg` (`crates/engine/src/tests.rs`: ไฟล์ถอดรหัสเป็น JPEG ได้ ขนาดตรงกับที่รายงาน มุมหน้าเป็นสีขาว ต่อ `.jpg` ให้ path ที่ไม่มี คง `.JPEG` ไว้ quality ถูกบีบและเปลี่ยนขนาดไฟล์ หน้าที่ไม่มีเป็นข้อผิดพลาด Save As `.jpg`/`.jpeg` เป็นสำเนา), `export_writes_a_jpeg_page_image` (`crates/ui-egui/src/file_dialogs.rs`), `page_images_export_by_extension` (`apps/doc4me-cli`) และ `file.exportJpeg` ในเทสต์ write root ของ MCP (`crates/mcp/tests/automation_roots.rs`); `cargo test -p doc4me-engine` ผ่าน 378 + 13 + 8; `cargo test -p doc4me-cli -p doc4me-mcp -p doc4me-render` ผ่านทั้งหมด; `cargo fmt --all --check` ผ่าน; `cargo test -p doc4me-ui-egui --lib -- --include-ignored` ผ่าน 324 รายการ; `cargo clippy -p doc4me-engine -p doc4me-ui-egui -p doc4me-cli -p doc4me-mcp -p doc4me-render -p xtask --all-targets -- -D warnings` ผ่าน
 
 ### เปลี่ยนแปลง
 
