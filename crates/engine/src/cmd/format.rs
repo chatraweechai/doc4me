@@ -561,6 +561,21 @@ fn convert_generated_numbers(s: &mut Session, a: &Pos, b: &Pos, thai: bool) -> R
     }
     if !relist.is_empty() {
         super::lists::touch_lists(s, &relist)?;
+        // Paragraphs numbered through their style (outline-numbered headings) relabel too.
+        let styled: Vec<String> = s
+            .doc
+            .styles
+            .styles
+            .iter()
+            .filter(|st| {
+                let pp = doc4me_doc::props::ParaProps { style: Some(st.id.clone()), ..Default::default() };
+                s.doc.styles.resolve_para(&pp).numbering.is_some_and(|n| relist.contains(&n.num))
+            })
+            .map(|st| st.id.clone())
+            .collect();
+        if !styled.is_empty() {
+            super::lists::touch_styles(s, &styled)?;
+        }
     }
     // The sections, by the body block each ends at.
     let ends: Vec<usize> = s.doc.sections().iter().map(|(e, _)| *e).collect();

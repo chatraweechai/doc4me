@@ -238,7 +238,7 @@ pub(crate) fn touch_lists(s: &mut Session, nums: &[u32]) -> Result<(), CmdError>
 }
 
 /// Lay out again every paragraph in one of `styles`.
-fn touch_styles(s: &mut Session, styles: &[String]) -> Result<(), CmdError> {
+pub(crate) fn touch_styles(s: &mut Session, styles: &[String]) -> Result<(), CmdError> {
     touch_where(s, &|p| p.props.style.as_ref().is_some_and(|st| styles.contains(st)))
 }
 
