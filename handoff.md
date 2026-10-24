@@ -1,6 +1,6 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย (งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง)
 
-อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 รอบที่ 4 กำลังตรวจ (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 ยุติแล้ว CI ของ `main` ผ่าน ([run 40108607965](https://github.com/chatraweechai/doc4me/actions/runs/40108607965) ของ `8757e7d`) (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
 
 ## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก, JPG/JPEG และงานค้างจาก handoff
 
@@ -31,6 +31,7 @@
   - **ผู้ใช้สั่งซ้ำ 2026-10-24: ห้ามออกเวอร์ชันใหม่จนกว่าจะสั่ง**
 - รอบที่ 4 (ผู้ใช้สั่ง "แก้ข้อจำกัดที่เหลือทั้งหมด") ทำแล้ว ดู `[Unreleased]`
   - เขียน `commentsIds.xml` / `commentsExtensible.xml` (เวลา UTC ของข้อคิดเห็น) และอ่าน-เขียน `w16du:dateUtc` ของ tracked change (`Revision.date_utc`); ค่าของ namespace, relationship และ content type ตรวจกับ MS-DOCX และเอกสารของ Paper Instruments แต่ยังไม่ได้เทียบกับไฟล์ที่ Word บันทึกเอง **ควรเปิดไฟล์ที่ Doc4Me บันทึก (มีข้อคิดเห็นและ tracked change) ใน Word for Windows เพื่อยืนยันว่าไม่มีคำเตือนไฟล์เสีย**
+  - ตรวจแล้ว: clippy `-D warnings` `--all-targets` (doc, docx, layout, engine, ui-egui, pdf) ผ่าน; เทสต์ engine 383 + 13 + 8, ui-egui 324 (`--include-ignored`), pdf, mcp, cli, docx และ layout ผ่านทั้งหมด; CI run 40108607965 ผ่าน job `release` ข้ามตามปกติ
   - ปุ่มแปลงเลขสลับ `\* Arabic` ↔ `\* ThaiArabic` ในฟิลด์ PAGE/NUMPAGES/SECTIONPAGES/SECTION/SEQ และตัวจัดวางรู้จัก `ThaiArabic`, `ThaiCardText`, `ThaiLetter`
   - เอกสาร parity: เป้าหมาย Word for Windows อธิบายใน `docs/target-app-parity.md`, แถวเครื่องพิมพ์และสแกนเนอร์ใน `docs/hardware-parity.md`, แถว Platforms ตรงกับ Release จริง
 - ยังไม่ได้ทำ / ข้อสังเกต
