@@ -322,7 +322,11 @@ pub enum RevisionKind {
 pub struct Revision {
     pub kind: RevisionKind,
     pub author: String,
+    /// As Word writes `w:date`: the author's local time (marked `Z` all the same).
     pub date: String,
+    /// The same moment in UTC (Word's `w16du:dateUtc`), when known; empty otherwise.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub date_utc: String,
     /// A move (ECMA-376 §17.13.5.21–28): the name linking the source (an `Delete` revision,
     /// `w:moveFrom`) with the destination (an `Insert` revision, `w:moveTo`). `None` = a plain
     /// insertion or deletion.
@@ -332,7 +336,7 @@ pub struct Revision {
 
 impl Revision {
     pub fn new(kind: RevisionKind, author: impl Into<String>, date: impl Into<String>) -> Revision {
-        Revision { kind, author: author.into(), date: date.into(), move_name: None }
+        Revision { kind, author: author.into(), date: date.into(), date_utc: String::new(), move_name: None }
     }
 }
 

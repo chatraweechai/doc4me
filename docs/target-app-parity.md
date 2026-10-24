@@ -1,6 +1,6 @@
 # Doc4Me parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (stale rows corrected against the code: Font dialog, proofing, file exchange, localization; headline marked as measured in WordCraft; previously minor: Polish interface and Polish proofing; previously trivial: English spelling knows common modern words, #520; previously trivial: all 12 bibliography styles, #383; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; replaces the parity tables that lived in ROADMAP.md) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (the Windows target described under What we measured against; the platforms row matches the releases; stale rows corrected against the code: Font dialog, proofing, file exchange, localization; headline marked as measured in WordCraft; previously minor: Polish interface and Polish proofing; previously trivial: English spelling knows common modern words, #520; previously trivial: all 12 bibliography styles, #383; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; replaces the parity tables that lived in ROADMAP.md) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 The authoritative assessment of how close Doc4Me is to Microsoft Word. [`ROADMAP.md`](../ROADMAP.md)
 summarizes it; [`gaps.md`](gaps.md) itemizes every shortfall; the deep checklists are
@@ -29,6 +29,14 @@ The generated ribbon checklist is [`parity-checklist.md`](parity-checklist.md).
 
 ## What we measured against
 
+- **The target since 2026-10-24 is Microsoft Word (Microsoft 365) for Windows** (the owner's build
+  is not recorded yet: File › Account › About Word). The measurements below were taken against
+  Word for Mac and stay the baseline until they are re-run on Windows. Where the two differ, Word
+  for Windows counts: the ribbon and Backstage (Home, New, Open, Info, Save As, Print, Share,
+  Export, Close, Account, Options) instead of the Mac menu bar; Ctrl shortcuts instead of ⌘;
+  File › Print in Backstage with the printer's own properties instead of the Mac print dialog and
+  its `WordPDE.plugin`; PDF Reflow (open a PDF to edit it) is Windows-only, Continuity Camera
+  Mac-only.
 - **Microsoft Word for Mac 16.113.4** (Microsoft 365 subscription build, installed on the owner's Mac
   at `/Applications/Microsoft Word.app`; version read with `mdls`, bundle modified 2026-10-06).
 - Inspected black-box, by **file listing only**, as `AGENTS.md` § Clean room requires (no bundle file
@@ -196,7 +204,7 @@ Word. Their weighted sum is the **full ready for real work** number.
 | Stability | 10% | 50% | 25–45 | [gaps.md](gaps.md) | Never-crash standard and hostile-param fuzzing in place, but open reports of a startup crash on Intel UHD (#170), freezes (#77, #59, #31) and Windows write failure without admin (#218); no soak test; 5 days of field history |
 | Performance | 5% | 75% | 10–20 | [layout-parity.md](layout-parity.md) | 61 ms cold layout and 1.4 ms relayout on a 188-page document (measured 2026-10-06, not re-run); font picker freezes fixed in #233; no large real-world documents measured |
 | Localization | 4% | 27% | 75–120 + native review | [localization-parity.md](localization-parity.md) | 19 UI languages (Word 30); 6 of the 12 key languages shipped (hi, ar, id, ko, vi, pt-PT missing); English, Polish and Thai proofing |
-| Platforms | 3% | 95% | 5–10 | [ROADMAP.md](../ROADMAP.md) | macOS (universal, signed), Windows x64/x86/arm64, Linux (AppImage/deb/rpm/Flatpak), FreeBSD, web. Beyond Word on Linux, BSD and the web; Word's iPad/iPhone/Android apps are out of scope |
+| Platforms | 3% | 95% | 5–10 | [ROADMAP.md](../ROADMAP.md) | Doc4Me releases a Windows x64 MSI and portable zip (unsigned until the owner adds a certificate); the macOS, Linux, FreeBSD and web packaging scripts come from WordCraft and run locally, with no Doc4Me release yet. Beyond Word on Linux, BSD and the web once released; Word's iPad/iPhone/Android apps are out of scope |
 | Hardware | 1% | 40% | 20–40 | [hardware-parity.md](hardware-parity.md) | No native printing on desktop, no pen/ink, no dictation; GPU drawing and HiDPI fine. Ink hours are in the Features row (Draw tab) |
 | Ecosystem and plugins | 2% | 15% | 40–80 | [gaps.md](gaps.md) | Zotero built in, macros record/play commands, `.docm` macros preserved (#172). No VBA execution, no Office add-ins, no EndNote/Mendeley plugins, no cloud storage or co-authoring |
 | AI features | 0% | 40% | 15–30 | [gaps.md](gaps.md) | Beyond Word for external agents (MCP, CLI). No in-app writing assistant like Copilot yet (chat PR #178 open). Weight 0: Copilot is a paid add-on and not what decides a switch |

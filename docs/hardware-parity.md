@@ -1,6 +1,6 @@
 # Hardware parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-10 · **Change:** major (first version) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet) and Word for Windows
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (the Word column describes Word for Windows; scanner insert is Mac-only; previously major: first version) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Word is not a hardware-heavy app, but a few devices matter to its users: printers above all, then
 pens, microphones (Dictate) and speakers (Read Aloud), and displays.
@@ -10,14 +10,14 @@ pens, microphones (Dictate) and speakers (Read Aloud), and displays.
 
 | Hardware | Word | Doc4Me macOS | Windows | Linux / BSD | Web | Parity | Hours |
 |---|---|---|---|---|---|---|---|
-| Printers: native print dialog, printer choice, copies, duplex, page ranges, tray, scaling | ✅ (`WordPDE.plugin` print-dialog extension on Mac) | 🟡 PDF opens in Preview to print (#286) | 🟡 PDF opens in the default viewer (#286) | 🟡 PDF opens in the default viewer (#286) | ✅ browser print dialog (#209) | 35% | 5–8 |
+| Printers: native print dialog, printer choice, copies, duplex, page ranges, tray, scaling | ✅ (Word for Windows: File › Print in Backstage with printer, printer properties, copies, pages, one- or two-sided, collation, orientation, paper size, margins and pages per sheet; Word for Mac adds `WordPDE.plugin` to the system print dialog) | 🟡 PDF opens in Preview to print (#286) | 🟡 PDF opens in the default viewer (#286) | 🟡 PDF opens in the default viewer (#286) | ✅ browser print dialog (#209) | 35% | 5–8 |
 | GPU rendering, HiDPI/Retina, pixel-aligned text | ✅ | ✅ wgpu + vello_cpu rasteriser, whole-pixel text (#110, #165) | ✅ DirectX 12 default (#50), OpenGL when DirectX 12 has no GPU driver (#316); startup crash on Intel UHD (#170) | ✅ (soft text on KDE at some zooms, #140) | ✅ | 80% | 3–5 (bugs) |
 | Multiple monitors, per-monitor DPI, remembered window position | ✅ | ✅ (#38, #76) | ✅ (winit DPI fix pending, #155) | ✅ | — | 85% | 1 |
-| Pen / stylus: ink, pressure, eraser, ink to shape/math | ✅ (Draw tab, `InkRender.bundle`) | ❌ | ❌ | ❌ | ❌ | 0% | (Draw tab, 15–25) |
+| Pen / stylus: ink, pressure, eraser, ink to shape/math | ✅ (Draw tab) | ❌ | ❌ | ❌ | ❌ | 0% | (Draw tab, 15–25) |
 | Microphone: Dictate | ✅ (cloud speech service) | ❌ | ❌ | ❌ | ❌ | 0% | 8–15 + owner (speech model choice) |
 | Speakers: Read Aloud | ✅ | ✅ system speech, speed, sentence skip (#190) | ✅ | 🟡 | 🟡 | 75% | 1–2 |
 | Touch screens and touchpads: pinch zoom, inertial scroll | ✅ | ✅ pinch (#179) | ✅ | ✅ inertial scroll (#252) | ✅ | 85% | 0–1 |
-| Scanners/cameras (Insert from device / Continuity Camera on Mac) | ✅ | ❌ | ❌ | ❌ | ❌ | 0% | 2–4 |
+| Scanners/cameras (Continuity Camera) | Word for Mac only; Word for Windows has no scanner or camera command (pictures come in through Windows) | ❌ | ❌ | ❌ | ❌ | not a gap for Word for Windows | 0 (2–4 for the macOS build) |
 
 ## Revision history
 

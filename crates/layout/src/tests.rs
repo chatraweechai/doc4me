@@ -821,7 +821,13 @@ fn display_has_glyphs_and_marks() {
 #[test]
 fn a_tracked_paragraph_mark_shows_in_its_authors_colour() {
     let mut d = Document::from_text("Split\nhere");
-    d.revisions.push(doc4me_doc::Revision { kind: doc4me_doc::RevisionKind::Insert, author: "Ana".into(), date: String::new(), move_name: None });
+    d.revisions.push(doc4me_doc::Revision {
+        kind: doc4me_doc::RevisionKind::Insert,
+        author: "Ana".into(),
+        date: String::new(),
+        date_utc: String::new(),
+        move_name: None,
+    });
     d.para_mut(doc4me_doc::StoryRef::Body, &doc4me_doc::Path::top(0)).unwrap().mark.ins = Some(0);
     let l = lay(&d);
     let marks = |markup: bool| -> Vec<Option<doc4me_doc::props::Rgb>> {

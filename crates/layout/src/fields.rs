@@ -73,6 +73,10 @@ pub fn format_switch(instr: &str) -> Option<NumFormat> {
                 v if v.eq_ignore_ascii_case("ChineseNum1") => NumFormat::ChineseCountingThousand,
                 v if v.eq_ignore_ascii_case("ChineseNum2") => NumFormat::ChineseLegalSimplified,
                 v if v.eq_ignore_ascii_case("ChineseNum3") => NumFormat::IdeographDigital,
+                // Thai digits (๑๒๓), counting words (หนึ่ง) and letters (ก ข ค), ECMA-376 §17.16.4.3.
+                v if v.eq_ignore_ascii_case("ThaiArabic") => NumFormat::ThaiNumbers,
+                v if v.eq_ignore_ascii_case("ThaiCardText") => NumFormat::ThaiCounting,
+                v if v.eq_ignore_ascii_case("ThaiLetter") => NumFormat::ThaiLetters,
                 _ => continue,
             });
         }
@@ -116,6 +120,8 @@ mod tests {
         assert_eq!(field_text("NUMPAGES \\* CardText", "", &ctx).0, "Twelve");
         assert_eq!(field_text("NUMPAGES \\* CHINESENUM1", "", &ctx).0, "十二");
         assert_eq!(field_text("PAGE \\* ChineseNum2", "", &ctx).0, "肆");
+        assert_eq!(field_text("NUMPAGES \\* ThaiArabic", "", &ctx).0, "๑๒");
+        assert_eq!(field_text("PAGE \\* THAIARABIC \\* MERGEFORMAT", "", &ctx).0, "๔");
         assert_eq!(field_text("DATE \\@ \"M/d/yyyy\"", "1/2/2026", &ctx), ("1/2/2026".into(), false));
         assert_eq!(field_name("=SUM(ABOVE)"), "SUM(ABOVE)");
         assert_eq!(field_code_text(" PAGE \\* ROMAN "), "{ PAGE \\* ROMAN }");

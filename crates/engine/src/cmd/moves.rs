@@ -56,7 +56,7 @@ pub fn cut_tracked(s: &mut Session) -> Result<bool, CmdError> {
     if !s.doc.settings.track_changes || a == b || a.story != b.story || !move_sized(&s.clipboard_text) {
         return Ok(false);
     }
-    s.doc.revisions.push(Revision::new(RevisionKind::Delete, s.author.clone(), now_word_date()));
+    s.doc.revisions.push(Revision { date_utc: super::now_iso(), ..Revision::new(RevisionKind::Delete, s.author.clone(), now_word_date()) });
     let rid = (s.doc.revisions.len() - 1) as u32;
     let at = track_delete_as(s, &a, &b, rid)?;
     s.sel = Selection::caret(at);
@@ -81,7 +81,7 @@ pub fn take_paste(s: &mut Session, frag: &Fragment) -> Option<u32> {
     if let Some(r) = s.doc.revisions.get_mut(m.rev as usize) {
         r.move_name = Some(name.clone());
     }
-    s.doc.revisions.push(Revision { kind: RevisionKind::Insert, author: s.author.clone(), date, move_name: Some(name) });
+    s.doc.revisions.push(Revision { kind: RevisionKind::Insert, author: s.author.clone(), date, date_utc: super::now_iso(), move_name: Some(name) });
     Some((s.doc.revisions.len() - 1) as u32)
 }
 

@@ -519,6 +519,88 @@ fn convert_digits(s: &mut Session, thai: bool) -> CmdResult {
     sel_result(s)
 }
 
+/// A number field's instruction with its digits switched: `\* Arabic` ↔ `\* ThaiArabic`, and
+/// Thai digits added to a page count, section number or sequence that has no number format (a
+/// PAGE field follows its section's format instead). `None` when nothing changes.
+fn swap_field_digits(instr: &str, thai: bool) -> Option<String> {
+    let name = doc4me_layout::fields::field_name(instr);
+    if !matches!(name.as_str(), "PAGE" | "NUMPAGES" | "SECTIONPAGES" | "SECTION" | "SEQ") {
+        return None;
+    }
+    // The words of the instruction, by byte range.
+    let mut words: Vec<std::ops::Range<usize>> = Vec::new();
+    let mut start = None;
+    for (i, c) in instr.char_indices() {
+        match (c.is_whitespace(), start) {
+            (true, Some(s)) => {
+                words.push(s..i);
+                start = None;
+            }
+            (false, None) => start = Some(i),
+            _ => {}
+        }
+    }
+    if let Some(s) = start {
+        words.push(s..instr.len());
+    }
+    let mut numbered = false;
+    for w in words.windows(2) {
+        let (Some(sw), Some(v)) = (instr.get(w[0].clone()), instr.get(w[1].clone())) else { continue };
+        if sw != "\\*" {
+            continue;
+        }
+        let to = match v.to_ascii_lowercase().as_str() {
+            "arabic" if thai => "ThaiArabic",
+            "thaiarabic" if !thai => "Arabic",
+            "mergeformat" | "charformat" | "upper" | "lower" | "caps" | "firstcap" => continue,
+            _ => {
+                numbered = true;
+                continue;
+            }
+        };
+        return Some(format!("{}{to}{}", instr.get(..w[1].start)?, instr.get(w[1].end..)?));
+    }
+    (thai && !numbered && name != "PAGE").then(|| format!("{} \\* ThaiArabic ", instr.trim_end()))
+}
+
+/// Switch the number fields of paragraph `path` in `story` (their codes, and a simple field's
+/// shown result); `only_pages`: just the page and section fields (a header or footer).
+fn convert_fields(s: &mut Session, story: StoryRef, path: &doc4me_doc::Path, thai: bool, only_pages: bool) -> Result<(), CmdError> {
+    let wanted = |instr: &str| !only_pages || doc4me_layout::fields::field_name(instr) != "SEQ";
+    let changes: Vec<(usize, String)> = match s.doc.para(story, path) {
+        Some(p) => p
+            .objects
+            .iter()
+            .enumerate()
+            .filter_map(|(i, o)| match o {
+                doc4me_doc::InlineObject::Field { instr, locked: false, .. } | doc4me_doc::InlineObject::FieldStart { instr, locked: false }
+                    if wanted(instr) =>
+                {
+                    swap_field_digits(instr, thai).map(|n| (i, n))
+                }
+                _ => None,
+            })
+            .collect(),
+        None => return Ok(()),
+    };
+    if changes.is_empty() {
+        return Ok(());
+    }
+    let para = s.doc.para_mut(story, path)?;
+    for (i, new) in changes {
+        match para.objects.get_mut(i) {
+            Some(doc4me_doc::InlineObject::Field { instr, result, .. }) => {
+                *instr = new;
+                *result = result.chars().map(|c| swap_digit(c, thai).unwrap_or(c)).collect();
+            }
+            Some(doc4me_doc::InlineObject::FieldStart { instr, .. }) => *instr = new,
+            _ => {}
+        }
+    }
+    para.touch();
+    Ok(())
+}
+
 /// Decimal ↔ Thai numbers; other number formats stay as they are.
 fn swap_num_format(f: NumFormat, thai: bool) -> Option<NumFormat> {
     match f {
@@ -535,6 +617,7 @@ fn swap_num_format(f: NumFormat, thai: bool) -> Option<NumFormat> {
 fn convert_generated_numbers(s: &mut Session, a: &Pos, b: &Pos, thai: bool) -> Result<(), CmdError> {
     let mut nums: Vec<u32> = Vec::new();
     for path in s.doc.paths_between(a, b) {
+        convert_fields(s, a.story, &path, thai, false)?;
         let Some(p) = s.doc.para(a.story, &path) else { continue };
         let num = p.props.numbering.or_else(|| s.doc.styles.resolve_para(&p.props).numbering).filter(|n| n.num != 0).map(|n| n.num);
         if let Some(n) = num
@@ -594,6 +677,21 @@ fn convert_generated_numbers(s: &mut Session, a: &Pos, b: &Pos, thai: bool) -> R
             .map(|(e, _)| *e)
             .collect(),
     };
+    // The page fields of their headers and footers follow their page numbers.
+    let mut parts: Vec<u32> = Vec::new();
+    for end in &picked {
+        let i = s.doc.section_index_of(*end);
+        if let Some((_, x)) = s.doc.sections().get(i) {
+            for h in [&x.headers, &x.footers] {
+                parts.extend([h.default, h.first, h.even].into_iter().flatten().filter(|id| !parts.contains(id)).collect::<Vec<_>>());
+            }
+        }
+    }
+    for id in parts {
+        for path in s.doc.para_paths(StoryRef::Part(id)) {
+            convert_fields(s, StoryRef::Part(id), &path, thai, true)?;
+        }
+    }
     for end in picked {
         // The note formats in effect (the section's own, else the document's).
         let Some(x) = s.doc.sections().get(s.doc.section_index_of(end)).map(|(_, x)| (*x).clone()) else { continue };

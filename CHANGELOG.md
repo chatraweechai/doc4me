@@ -51,6 +51,13 @@
 
 ### เปลี่ยนแปลง
 
+- **เอกสาร parity เทียบกับ Word for Windows แทนเมนูและอุปกรณ์ของ Mac** (ผู้ใช้สั่งแก้ข้อจำกัดที่เหลือ)
+  - `docs/target-app-parity.md`: หัวข้อ What we measured against บอกว่าเป้าหมายตั้งแต่ 2026-10-24 คือ Word for Windows และอะไรนับตามแบบ Windows (ribbon และ Backstage แทนแถบเมนูของ Mac, Ctrl แทน ⌘, File › Print ใน Backstage แทน `WordPDE.plugin`, PDF Reflow มีเฉพาะ Windows, Continuity Camera มีเฉพาะ Mac) ส่วนค่าที่วัดกับ Word for Mac ยังเป็นค่าตั้งต้นจนกว่าจะวัดใหม่บน Windows; แถว Platforms บอกตามจริงว่า Doc4Me ออก Release เฉพาะ Windows x64 ส่วนสคริปต์ของแพลตฟอร์มอื่นมาจาก WordCraft
+  - `docs/hardware-parity.md`: คอลัมน์ Word ของเครื่องพิมพ์อธิบาย File › Print ของ Word for Windows; แถวสแกนเนอร์และกล้องเป็นของ Word for Mac เท่านั้น จึงไม่นับเป็นช่องว่างเทียบกับ Word for Windows (ชั่วโมง 0 เหลือ 2–4 ชั่วโมงเฉพาะ build ของ macOS); ตัด `InkRender.bundle` ของ Mac ออกจากแถวปากกา
+  - `docs/ui-parity.md`: Windows ขึ้นก่อนในแถว Platform conventions และ Narrator กับ NVDA ในแถว Screen readers
+  - ยังไม่ได้ทำ (ต้องใช้เครื่อง Windows ที่มี Word): วัดตัวเลข parity และ alpha gate ใหม่บน Windows
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือการติดตั้ง
+  - ตรวจสอบ: ข้อความเรื่อง Word for Windows ตรวจกับความรู้เรื่อง Backstage และหน้าพิมพ์ของ Word 365; `git diff --stat` แก้แค่สามไฟล์นี้
 - **เอกสารและคำแนะนำในโปรแกรมใช้ทางลัดแบบ Windows แทน ⌘ ของ Mac** (ผู้ใช้สั่ง)
   - `docs/typing-parity.md` (⌘Z, ⌘B, ⌘Y เป็น Ctrl+Z, Ctrl+B, Ctrl+Y และตัด ⌃⇧ ลูกศรของ macOS), `docs/ui-parity.md` และ `ROADMAP.md` (Ctrl/⌘+click เป็น Ctrl+click), `docs/localization-th.md` (คู่มือรูปแบบเขียนชื่อแป้นแบบ Windows เช่น Ctrl+Alt+G และใช้ ⊞ เมื่อหมายถึงแป้นโลโก้ Windows)
   - ใช้ Ctrl แทน ⌘ ไม่ใช่ ⊞ เพราะทางลัดของ Word for Windows ใช้ Ctrl (เช่น Ctrl+Z) ส่วน ⊞ เป็นแป้นของระบบ (⊞+Z เป็นทางลัดของ Windows เอง ซึ่ง Windows 11 ใช้เปิด Snap layouts ไม่ใช่เลิกทำ)
@@ -103,6 +110,19 @@
 
 ### แก้ไข
 
+- **เวลา UTC ของข้อคิดเห็นและ tracked change ถูกเขียนกลับลงไฟล์ และอ่าน `w16du:dateUtc` ของ revision** (ผู้ใช้สั่งแก้ข้อจำกัดที่เหลือ)
+  - เดิม: ตอนบันทึก .docx ไม่เขียน `commentsIds.xml` และ `commentsExtensible.xml` และไม่อ่าน `w16du:dateUtc` ของ revision Word จึงแสดง `w:date` ซึ่งเป็นเวลาท้องถิ่นของผู้เขียน ผิดเมื่อผู้อ่านอยู่คนละ time zone
+  - แก้ (`crates/docx/src/write/mod.rs`): เมื่อมีข้อคิดเห็นที่รู้เวลา UTC จะเขียน `word/commentsIds.xml` (`w16cid:commentId` คู่ `w14:paraId` ของย่อหน้าสุดท้ายกับ durable id `10000000` ขึ้นไป ไม่ซ้ำกันและต่ำกว่า `7FFFFFFF`) และ `word/commentsExtensible.xml` (`w16cex:commentExtensible` กับ `w16cex:dateUtc`) พร้อม relationship และ content type
+  - revision: `Revision` มีช่องใหม่ `date_utc` (`crates/doc/src/lib.rs`) ตัวอ่านอ่าน `w16du:dateUtc` (`crates/docx/src/read/mod.rs`) และตัวเขียนเขียนลงทุก tracked change ที่เขียน `w:date` (`w:ins`, `w:del`, `w:moveFrom`, `w:moveTo`, เครื่องหมายย่อหน้า และการเปลี่ยนรูปแบบ, `crates/docx/src/write/story.rs` `change_attrs`); namespace `w16du` อยู่ในตาราง namespace ของ body และใน `mc:Ignorable` (`crates/docx/src/xml.rs`) Word รุ่นที่ไม่รู้จักจึงข้ามไป; revision ใหม่ใน Doc4Me เก็บ `date_utc` เป็น UTC (`cmd/mod.rs`, `moves.rs`, `fmt_revisions.rs`, `tools.rs`)
+  - ค่าที่อ่านมาต้องเป็นรูปแบบ xsd:dateTime (`looks_iso`: 16–40 ตัว เป็นตัวเลขกับ `-:TZ.+`) ไม่อย่างนั้นทิ้ง เพราะจะถูกเขียนกลับตามที่อ่าน
+  - ข้อเท็จจริงที่ใช้ ตรวจกับ [MS-DOCX](https://learn.microsoft.com/en-us/openspecs/office_standards/ms-docx/d760867e-6bc3-43c7-ac53-b32247e1b7e6): namespace `http://schemas.microsoft.com/office/word/2016/wordml/cid`, `…/2018/wordml/cex` และ `…/2023/wordml/word16du`, และ `dateUtc` เป็นเวลา UTC ต่างจาก `w:date`; relationship `…/2016/09/relationships/commentsIds`, `…/2018/08/relationships/commentsExtensible` และ content type `application/vnd.openxmlformats-officedocument.wordprocessingml.commentsIds+xml` / `…commentsExtensible+xml` จาก [เอกสาร API ของ Paper Instruments](https://docs.paperinstruments.com/docs/docx/api/commentops) ตรงกับ issue ของ [JSv4/Docxodus#1228](https://github.com/JSv4/Docxodus/issues/1228) (ยังไม่ได้เทียบกับไฟล์ที่ Word บันทึกเอง)
+  - ผู้ใช้และความเข้ากันได้: ไฟล์ .docx เดิมเปิดได้เหมือนเดิม; ไฟล์ที่บันทึกใหม่มีสอง part นี้เมื่อมีข้อคิดเห็นที่รู้เวลา UTC; Word รุ่นเก่าไม่อ่าน part ที่ไม่รู้จัก
+  - ตรวจสอบ: `comments_round_trip` และ `tracked_changes_round_trip` (`crates/docx/tests/roundtrip.rs`) ตั้ง `date_utc` แล้วอ่านกลับได้ค่าเดิม (ข้อคิดเห็นที่ไม่มี UTC ยังว่าง) ผ่าน; `cargo test -p doc4me-docx -p doc4me-layout` ผ่านทั้งหมด
+- **ฟิลด์เลขหน้าที่มีสวิตช์รูปแบบของตัวเอง เปลี่ยนตามปุ่มแปลงเลขด้วย และรองรับ `\* ThaiArabic`** (ผู้ใช้สั่งแก้ข้อจำกัดที่เหลือ)
+  - เดิม: ฟิลด์ PAGE ที่มี `\* Arabic` ยังแสดงเลขอารบิกแม้เปลี่ยนรูปแบบเลขหน้าของ section แล้ว และ NUMPAGES, SECTIONPAGES, SECTION, SEQ แสดงเลขอารบิกเสมอ; ตัวจัดวางไม่รู้จัก `\* ThaiArabic`
+  - แก้: `format_switch` (`crates/layout/src/fields.rs`) รู้จัก `ThaiArabic` (๑๒๓), `ThaiCardText` (คำอ่าน) และ `ThaiLetter` (ก ข ค) ตามรายการ general formatting ของ ECMA-376 §17.16.4.3; ปุ่มแปลงเลข (`swap_field_digits`, `convert_fields` ใน `cmd/format.rs`) สลับ `\* Arabic` ↔ `\* ThaiArabic` ในฟิลด์ PAGE, NUMPAGES, SECTIONPAGES, SECTION และ SEQ ที่ไม่ล็อกของย่อหน้าที่เลือก และในฟิลด์เลขหน้าของหัวและท้ายกระดาษของ section ที่เปลี่ยน; ฟิลด์ที่ไม่มีรูปแบบตัวเลข (ยกเว้น PAGE ซึ่งตามรูปแบบของ section) ได้ `\* ThaiArabic`; ผลที่เก็บไว้ของฟิลด์แบบ simple แปลงเลขด้วย; ฟิลด์ที่มีรูปแบบอื่น (เช่นเลขโรมัน) ไม่เปลี่ยน; กดซ้ำไม่เปลี่ยนเพิ่ม
+  - ผู้ใช้และความเข้ากันได้: รหัสฟิลด์ที่บันทึกเป็นแบบที่ Word เขียนเอง เปิดใน Word ได้ตามปกติ
+  - ตรวจสอบ: เทสต์ใหม่ `digit_conversion_switches_number_fields` (`crates/engine/src/tests.rs`) และกรณี `ThaiArabic` ใน `crates/layout/src/fields.rs` ผ่าน
 - **บานหน้าต่างข้อคิดเห็นแสดงวันที่และเวลาตามเครื่อง และ `w:date` เขียนแบบเดียวกับ Word** (ผู้ใช้สั่ง)
   - อาการเดิม: บานหน้าต่างข้อคิดเห็น (`crates/ui-egui/src/panes.rs`) แสดง 10 ตัวแรกของวันที่ที่เก็บเป็น UTC ข้อคิดเห็นที่เขียนช่วง 00:00–06:59 น. ในไทยจึงขึ้นวันของเมื่อวาน และ `w:date` ที่ Doc4Me เขียนเป็น UTC จึงขึ้นเร็วไป 7 ชั่วโมงเมื่อเปิดใน Word ในไทย
   - ข้อเท็จจริงที่ใช้: Word เขียน `w:date` ของข้อคิดเห็นและ revision เป็นเวลาท้องถิ่นของผู้เขียนแม้ลงท้าย `Z` และ Word รุ่นใหม่เก็บเวลา UTC จริงแยกไว้ใน `w16cex:dateUtc` ของ `commentsExtensible.xml` (โยงผ่าน durable id ใน `commentsIds.xml`) และ `w16du:dateUtc` ของ revision ข้อมูลนี้มาจากรายงานของผู้พัฒนาหลายโครงการ เช่น [CollaboraOnline/online#16271](https://github.com/CollaboraOnline/online/issues/16271) และ [jandira-tech/jubarte-redlines#1118](https://github.com/jandira-tech/jubarte-redlines/issues/1118) ไม่ใช่เอกสารทางการของ Microsoft
@@ -143,8 +163,8 @@
 
 ### ข้อจำกัดที่ทราบ
 
-- ตอนบันทึก .docx ยังไม่เขียน `commentsIds.xml` และ `commentsExtensible.xml` (เวลา UTC ของข้อคิดเห็น) และยังไม่อ่าน `w16du:dateUtc` ของ revision: Word จึงแสดง `w:date` ซึ่งเป็นเวลาท้องถิ่นของผู้เขียน ถูกต้องเมื่อผู้อ่านอยู่ time zone เดียวกัน
-- ปุ่มแปลงเลขแปลงเฉพาะเลขอารบิก 0–9 กับเลขไทย ๐–๙ ไม่แปลงเลขของอักษรอื่น (เช่น ٠–٩) เลขที่โปรแกรมสร้างเองเปลี่ยนได้เฉพาะรูปแบบเลขอารบิก (decimal) กับเลขไทย (thaiNumbers) และฟิลด์ PAGE ที่มีสวิตช์รูปแบบของตัวเอง (เช่น `\* Arabic`) ยังแสดงตามสวิตช์นั้น; ผลของฟิลด์ที่แปลงเป็นข้อความแล้วจะกลับเป็นค่าเดิมเมื่ออัปเดตฟิลด์
+- ข้อคิดเห็นและ revision จาก Word รุ่นก่อน 2019 หรือจาก Doc4Me รุ่นก่อนหน้า ไม่มีเวลา UTC จึงแสดง `w:date` ตามที่เขียนไว้ (เวลาท้องถิ่นของผู้เขียน เหมือนที่ Word แสดง)
+- ปุ่มแปลงเลขแปลงเฉพาะเลขอารบิก 0–9 กับเลขไทย ๐–๙ ไม่แปลงเลขของอักษรอื่น (เช่น ٠–٩) เลขที่โปรแกรมสร้างเองเปลี่ยนได้เฉพาะรูปแบบเลขอารบิก (decimal) กับเลขไทย (thaiNumbers); ผลของฟิลด์ที่แปลงเป็นข้อความแล้วจะกลับเป็นค่าเดิมเมื่ออัปเดตฟิลด์
 
 ## [1.1.1] - 2026-10-22
 

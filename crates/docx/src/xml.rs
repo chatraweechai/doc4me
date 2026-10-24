@@ -27,6 +27,8 @@ pub const NAMESPACES: &[(&str, &str)] = &[
     ("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006"),
     ("w14", "http://schemas.microsoft.com/office/word/2010/wordml"),
     ("w15", "http://schemas.microsoft.com/office/word/2012/wordml"),
+    // Tracked changes' UTC times (`w16du:dateUtc`, [MS-DOCX]); older Word ignores them.
+    ("w16du", "http://schemas.microsoft.com/office/word/2023/wordml/word16du"),
     ("wp14", "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"),
     ("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape"),
     ("wpg", "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"),
@@ -449,7 +451,7 @@ impl W {
 /// `xmlns:` declarations for the body-part namespaces, plus `mc:Ignorable`.
 pub fn body_ns() -> Vec<(String, String)> {
     let mut v: Vec<(String, String)> = NAMESPACES.iter().map(|(p, u)| (format!("xmlns:{p}"), (*u).to_string())).collect();
-    v.push(("mc:Ignorable".into(), "w14 w15 wp14".into()));
+    v.push(("mc:Ignorable".into(), "w14 w15 wp14 w16du".into()));
     v
 }
 

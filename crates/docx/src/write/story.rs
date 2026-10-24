@@ -170,12 +170,9 @@ impl Writer<'_> {
             if has_mark {
                 w.open("w:rPr", &[]);
                 for (idx, tag) in mark_revs {
-                    let (id, author, date) = self.rev_attrs(idx);
-                    if date.is_empty() {
-                        w.empty(tag, &[("w:id", &id), ("w:author", &author)]);
-                    } else {
-                        w.empty(tag, &[("w:id", &id), ("w:author", &author), ("w:date", &date)]);
-                    }
+                    let a = self.change_attrs(idx);
+                    let a: Vec<(&str, &str)> = a.iter().map(|(k, v)| (*k, v.as_str())).collect();
+                    w.empty(tag, &a);
                 }
                 rpr_inner(w, &p.mark);
                 if let Some(ch) = p.mark.fmt_change.as_deref() {
@@ -374,12 +371,16 @@ impl Writer<'_> {
         (self.next_rev_id.to_string(), author, date)
     }
 
-    /// `w:id`, `w:author` and `w:date` of a tracked change by revision `idx`.
+    /// `w:id`, `w:author`, `w:date` and `w16du:dateUtc` of a tracked change by revision `idx`.
     fn change_attrs(&mut self, idx: u32) -> ChangeAttrs {
         let (id, author, date) = self.rev_attrs(idx);
         let mut a = vec![("w:id", id), ("w:author", author)];
         if !date.is_empty() {
             a.push(("w:date", date));
+        }
+        // The UTC time, which Word 365 keeps beside `w:date` (the author's local time).
+        if let Some(utc) = self.doc.revisions.get(idx as usize).map(|r| r.date_utc.clone()).filter(|u| !u.is_empty()) {
+            a.push(("w16du:dateUtc", utc));
         }
         a
     }
@@ -409,12 +410,9 @@ impl Writer<'_> {
                 continue;
             }
             let tag = self.rev_tag(idx, tag);
-            let (id, author, date) = self.rev_attrs(idx);
-            if date.is_empty() {
-                w.open(tag, &[("w:id", &id), ("w:author", &author)]);
-            } else {
-                w.open(tag, &[("w:id", &id), ("w:author", &author), ("w:date", &date)]);
-            }
+            let a = self.change_attrs(idx);
+            let a: Vec<(&str, &str)> = a.iter().map(|(k, v)| (*k, v.as_str())).collect();
+            w.open(tag, &a);
         }
     }
 

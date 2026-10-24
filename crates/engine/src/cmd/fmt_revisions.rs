@@ -49,7 +49,14 @@ impl Recorder<'_> {
         let r = match found {
             Some(i) => i as u32,
             None => {
-                self.revisions.push(Revision { kind: RevisionKind::Format, author: self.author.clone(), date: self.date.clone(), move_name: None });
+                let date_utc = super::now_iso();
+                self.revisions.push(Revision {
+                    kind: RevisionKind::Format,
+                    author: self.author.clone(),
+                    date: self.date.clone(),
+                    date_utc,
+                    move_name: None,
+                });
                 self.revisions.len().saturating_sub(1) as u32
             }
         };

@@ -466,7 +466,8 @@ fn comments_round_trip() {
             author: "Ann".into(),
             initials: "A".into(),
             date: "2026-01-02T03:04:05Z".into(),
-            date_utc: String::new(),
+            // Written to commentsExtensible (by durable id, through commentsIds) and read back.
+            date_utc: "2026-01-01T20:04:05Z".into(),
             parent: None,
             resolved: true,
             part: c0,
@@ -495,6 +496,7 @@ fn comments_round_trip() {
     for (id, c) in &d.comments {
         let g = r.comments.get(id).expect("comment");
         assert_eq!((&g.author, &g.initials, &g.date, g.parent, g.resolved), (&c.author, &c.initials, &c.date, c.parent, c.resolved));
+        assert_eq!(g.date_utc, c.date_utc, "comment {id}");
         assert_eq!(part_text(&r, Some(g.part)), part_text(&d, Some(c.part)));
         assert_eq!(r.parts.get(&g.part).unwrap().kind, PartKind::Comment);
     }
@@ -829,8 +831,21 @@ fn toc_field_skips_nested_stories() {
 #[test]
 fn tracked_changes_round_trip() {
     let mut d = Document::new();
-    d.revisions.push(Revision { kind: RevisionKind::Insert, author: "Alice".into(), date: "2026-05-01T10:00:00Z".into(), move_name: None });
-    d.revisions.push(Revision { kind: RevisionKind::Delete, author: "Bob".into(), date: "2026-05-02T10:00:00Z".into(), move_name: None });
+    d.revisions.push(Revision {
+        kind: RevisionKind::Insert,
+        author: "Alice".into(),
+        date: "2026-05-01T10:00:00Z".into(),
+        // `w16du:dateUtc` beside `w:date` (the author's local time).
+        date_utc: "2026-05-01T03:00:00Z".into(),
+        move_name: None,
+    });
+    d.revisions.push(Revision {
+        kind: RevisionKind::Delete,
+        author: "Bob".into(),
+        date: "2026-05-02T10:00:00Z".into(),
+        date_utc: String::new(),
+        move_name: None,
+    });
     d.settings.track_changes = true;
     let ins = CharProps { ins: Some(0), ..Default::default() };
     let del = CharProps { del: Some(1), bold: Some(true), ..Default::default() };
@@ -854,8 +869,20 @@ fn tracked_paragraph_marks_round_trip() {
     // Issue #229: an inserted / deleted paragraph mark is `w:ins` / `w:del` in the mark's
     // `w:rPr` (ECMA-376 §17.13.5.16, §17.13.5.15), alone or with mark formatting.
     let mut d = Document::new();
-    d.revisions.push(Revision { kind: RevisionKind::Insert, author: "Alice".into(), date: "2026-05-01T10:00:00Z".into(), move_name: None });
-    d.revisions.push(Revision { kind: RevisionKind::Delete, author: "Bob".into(), date: "2026-05-02T10:00:00Z".into(), move_name: None });
+    d.revisions.push(Revision {
+        kind: RevisionKind::Insert,
+        author: "Alice".into(),
+        date: "2026-05-01T10:00:00Z".into(),
+        date_utc: String::new(),
+        move_name: None,
+    });
+    d.revisions.push(Revision {
+        kind: RevisionKind::Delete,
+        author: "Bob".into(),
+        date: "2026-05-02T10:00:00Z".into(),
+        date_utc: String::new(),
+        move_name: None,
+    });
     let mut split = Paragraph::with_text("Owned ALPHA ", CharProps::default());
     split.mark.ins = Some(0);
     let mut joined = Paragraph::with_text("Owned BETA", CharProps::default());
@@ -1278,7 +1305,7 @@ fn kitchen_sink() -> Document {
     let f = d.add_part(PartKind::Footnote, vec![para_block(Paragraph::with_text("Note", CharProps::default()))]);
     let c = d.add_part(PartKind::Comment, vec![para_block(Paragraph::with_text("Comment", CharProps::default()))]);
     d.comments.insert(3, Comment { author: "X".into(), part: c, ..Default::default() });
-    d.revisions.push(Revision { kind: RevisionKind::Insert, author: "A".into(), date: String::new(), move_name: None });
+    d.revisions.push(Revision { kind: RevisionKind::Insert, author: "A".into(), date: String::new(), date_utc: String::new(), move_name: None });
     d.last_section.headers.default = Some(h);
     let mut blocks: Blocks = Vec::new();
     let mut p = para_runs(&[

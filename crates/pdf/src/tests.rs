@@ -211,8 +211,8 @@ fn hostile_documents_export() {
 fn tracked_deletions_are_left_out_without_markup() {
     use doc4me_doc::{Revision, RevisionKind};
     let mut d = Document::new();
-    d.revisions.push(Revision { kind: RevisionKind::Delete, author: "Ada".into(), date: String::new(), move_name: None });
-    d.revisions.push(Revision { kind: RevisionKind::Insert, author: "Ada".into(), date: String::new(), move_name: None });
+    d.revisions.push(Revision { kind: RevisionKind::Delete, author: "Ada".into(), date: String::new(), date_utc: String::new(), move_name: None });
+    d.revisions.push(Revision { kind: RevisionKind::Insert, author: "Ada".into(), date: String::new(), date_utc: String::new(), move_name: None });
     let mut p = Paragraph::with_text("Keep ", CharProps::default());
     let n = p.len();
     p.insert_text(n, "DELETEDTEXT ", &CharProps { del: Some(0), ..Default::default() }).unwrap();
@@ -231,7 +231,7 @@ fn tracked_deletions_are_left_out_without_markup() {
 fn deleted_heading_text_stays_out_of_bookmarks_and_tags() {
     use doc4me_doc::{Revision, RevisionKind};
     let mut d = Document::new();
-    d.revisions.push(Revision { kind: RevisionKind::Delete, author: "Ada".into(), date: String::new(), move_name: None });
+    d.revisions.push(Revision { kind: RevisionKind::Delete, author: "Ada".into(), date: String::new(), date_utc: String::new(), move_name: None });
     let del = CharProps { del: Some(0), ..Default::default() };
     // "Intro SECRET Part" with "SECRET " deleted, then a heading deleted as a whole.
     let mut h = Paragraph::with_text("Intro ", CharProps::default()).styled("Heading1");

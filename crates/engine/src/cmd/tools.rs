@@ -923,11 +923,24 @@ fn compare(s: &mut Session, v: &Value) -> CmdResult {
         ["moves", "comments", "headersFooters", "footnotes", "textBoxes", "fields"].into_iter().filter(|k| v.get(*k).is_some()).collect();
     let author = p::str(v, "author").map(str::trim).filter(|a| !a.is_empty()).map(str::to_string).unwrap_or_else(|| s.author.clone());
     let date = super::now_word_date();
+    let date_utc = super::now_iso();
     let old: Vec<Arc<Block>> = s.doc.body.clone();
     let new: Vec<Arc<Block>> = revised.body.clone();
-    s.doc.revisions.push(doc4me_doc::Revision { kind: RevisionKind::Insert, author: author.clone(), date: date.clone(), move_name: None });
+    s.doc.revisions.push(doc4me_doc::Revision {
+        kind: RevisionKind::Insert,
+        author: author.clone(),
+        date: date.clone(),
+        date_utc: date_utc.clone(),
+        move_name: None,
+    });
     let ins = (s.doc.revisions.len() - 1) as u32;
-    s.doc.revisions.push(doc4me_doc::Revision { kind: RevisionKind::Delete, author: author.clone(), date: date.clone(), move_name: None });
+    s.doc.revisions.push(doc4me_doc::Revision {
+        kind: RevisionKind::Delete,
+        author: author.clone(),
+        date: date.clone(),
+        date_utc: date_utc.clone(),
+        move_name: None,
+    });
     let del = (s.doc.revisions.len() - 1) as u32;
     let key = |b: &Arc<Block>| match &**b {
         Block::Para(p) => opts.key(&p.plain_text()),

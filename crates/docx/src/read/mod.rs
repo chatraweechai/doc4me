@@ -557,8 +557,9 @@ impl Reader<'_> {
         if let Some(i) = self.revs.get(&key) {
             return *i;
         }
+        let date_utc = e.attr("w16du:dateUtc").filter(|d| looks_iso(d)).unwrap_or("").to_string();
         let i = self.doc.revisions.len() as u32;
-        self.doc.revisions.push(Revision { kind, author, date, move_name });
+        self.doc.revisions.push(Revision { kind, author, date, date_utc, move_name });
         self.revs.insert(key, i);
         i
     }
@@ -1162,7 +1163,7 @@ impl Reader<'_> {
                 .collect();
             for e in cex.els().filter(|e| e.local() == "commentExtensible") {
                 let (Some(d), Some(when)) = (e.attr("w16cex:durableId"), e.attr("w16cex:dateUtc")) else { continue };
-                if when.len() <= 40
+                if looks_iso(when)
                     && let Some(c) = durable.get(&d.to_ascii_uppercase()).and_then(|id| entries.get_mut(id))
                 {
                     c.date_utc = when.to_string();
@@ -1366,4 +1367,10 @@ fn read_protection(k: &El, s: &mut doc4me_doc::Settings) {
         .iter()
         .filter_map(|n| k.attr(n).filter(|v| !v.is_empty() && v.len() <= 1024).map(|v| (n.to_string(), v.to_string())))
         .collect();
+}
+
+/// Whether `s` looks like an xsd:dateTime (`2025-10-10T07:53:00Z`): the UTC times Word keeps
+/// apart (`dateUtc`) are written back as they were read, so anything else is dropped.
+fn looks_iso(s: &str) -> bool {
+    (16..=40).contains(&s.len()) && s.as_bytes().get(4) == Some(&b'-') && s.bytes().all(|b| b.is_ascii_digit() || b"-:TZ.+".contains(&b))
 }

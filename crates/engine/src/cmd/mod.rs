@@ -157,7 +157,7 @@ pub fn new_revision(s: &mut Session, kind: RevisionKind) -> u32 {
     {
         return i as u32;
     }
-    s.doc.revisions.push(Revision { kind, author: s.author.clone(), date, move_name: None });
+    s.doc.revisions.push(Revision { kind, author: s.author.clone(), date, date_utc: now_iso(), move_name: None });
     (s.doc.revisions.len() - 1) as u32
 }
 

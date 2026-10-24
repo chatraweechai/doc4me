@@ -1,6 +1,6 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย (งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง)
 
-อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 ยุติแล้ว CI ของ `main` ผ่าน ([run 40106198767](https://github.com/chatraweechai/doc4me/actions/runs/40106198767) ของ `637bd89`) (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 รอบที่ 4 กำลังตรวจ (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
 
 ## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก, JPG/JPEG และงานค้างจาก handoff
 
@@ -29,9 +29,13 @@
   - ทางลัดในเอกสารใช้ Ctrl (ไม่ใช่ ⊞ เพราะ Word for Windows ใช้ Ctrl) และคำแนะนำ "Paste"/"Go To" ในโปรแกรมแสดงทางลัดตามแพลตฟอร์ม
   - ตรวจแล้ว: เทสต์ doc, docx, engine (382 + 13 + 8), cli, mcp, layout (224), pdf ผ่านทั้งหมด, ui-egui 324 (`--include-ignored`), clippy ผ่าน; CI ของ `637bd89` (run 40106198767) ผ่าน job `release` ข้ามตามปกติ
   - **ผู้ใช้สั่งซ้ำ 2026-10-24: ห้ามออกเวอร์ชันใหม่จนกว่าจะสั่ง**
+- รอบที่ 4 (ผู้ใช้สั่ง "แก้ข้อจำกัดที่เหลือทั้งหมด") ทำแล้ว ดู `[Unreleased]`
+  - เขียน `commentsIds.xml` / `commentsExtensible.xml` (เวลา UTC ของข้อคิดเห็น) และอ่าน-เขียน `w16du:dateUtc` ของ tracked change (`Revision.date_utc`); ค่าของ namespace, relationship และ content type ตรวจกับ MS-DOCX และเอกสารของ Paper Instruments แต่ยังไม่ได้เทียบกับไฟล์ที่ Word บันทึกเอง **ควรเปิดไฟล์ที่ Doc4Me บันทึก (มีข้อคิดเห็นและ tracked change) ใน Word for Windows เพื่อยืนยันว่าไม่มีคำเตือนไฟล์เสีย**
+  - ปุ่มแปลงเลขสลับ `\* Arabic` ↔ `\* ThaiArabic` ในฟิลด์ PAGE/NUMPAGES/SECTIONPAGES/SECTION/SEQ และตัวจัดวางรู้จัก `ThaiArabic`, `ThaiCardText`, `ThaiLetter`
+  - เอกสาร parity: เป้าหมาย Word for Windows อธิบายใน `docs/target-app-parity.md`, แถวเครื่องพิมพ์และสแกนเนอร์ใน `docs/hardware-parity.md`, แถว Platforms ตรงกับ Release จริง
 - ยังไม่ได้ทำ / ข้อสังเกต
   - ภาพ `hero`, `thai`, `dark`, `dark-th`, `font`, `font-th` ถ่ายใหม่แล้ว ภาพอื่นใน `docs/images` (backstage, design, layout, references, review) ไม่เห็นกลุ่มฟอนต์ของหน้าหลักจึงไม่ได้ถ่ายใหม่
-  - แถวในเอกสาร parity ที่อิงเมนูของ Mac (`docs/ui-parity.md`, `docs/target-app-parity.md`, `docs/hardware-parity.md`) ยังไม่ได้เทียบกับ ribbon และ backstage ของ Windows; alpha gate ยังไม่ได้รันบน Windows
+  - ตัวเลข parity และ alpha gate ยังเป็นค่าที่วัดกับ Word for Mac ต้องวัดใหม่บนเครื่อง Windows ที่มี Word (session บนคลาวด์ทำไม่ได้)
   - ข้อ 3 ที่เหลือ: job ทดสอบบน Linux ใน CI รอเจ้าของ repo ตัดสินใจ, `cargo audit` ยังไม่ได้รัน, audit ภาษาที่ติด `#[ignore]` ยังไม่รู้สาเหตุที่เคยล้ม (รอบนี้ผ่าน)
   - ข้อ 5.7 ทั้งหมดยังรอเจ้าของ repo
 - CI ของ `main`: run ของ `21bb34a` (40100455417) และ `b65c320` (40100747357) ถูกยกเลิกโดย concurrency เพราะมี push ใหม่ (ไม่ใช่การล้ม); [run 40101348687](https://github.com/chatraweechai/doc4me/actions/runs/40101348687) ของ `0cdf2bb` (คอมมิตโค้ดล่าสุด) **ผ่าน** (ตรวจ 14:26 UTC): job `build` สำเร็จทุกขั้น รวมขั้นใหม่ "Build doc4me + doc4me-cli" (14:11:45–14:22:23) และ "Sign and package MSI + portable zip" (14:22:23–14:23:05) ส่วน job `release` ถูกข้ามตามปกติของ push; คอมมิตหลังจากนั้นแก้แค่เอกสารและภาพ จึงใส่ `[skip ci]` run นี้จึงเป็น build ล่าสุดของโค้ด

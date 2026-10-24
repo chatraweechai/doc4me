@@ -3621,6 +3621,41 @@ fn digit_conversion_converts_list_page_and_note_numbers() {
 }
 
 #[test]
+fn digit_conversion_switches_number_fields() {
+    let mut s = s();
+    run(&mut s, "document.setText", json!({"text": "Body"}));
+    run(&mut s, "insert.field", json!({"instr": "SEQ Table \\* ARABIC", "result": "1"}));
+    run(&mut s, "insert.footer", json!({}));
+    let footer = s.sel.focus.story;
+    run(&mut s, "insert.field", json!({"instr": "PAGE \\* Arabic \\* MERGEFORMAT"}));
+    run(&mut s, "insert.field", json!({"instr": "NUMPAGES"}));
+    let instrs = |s: &crate::Session, story: StoryRef| -> Vec<(String, String)> {
+        let paras: Vec<_> = s.doc.para_paths(story).iter().filter_map(|p| s.doc.para(story, p)).cloned().collect();
+        paras
+            .iter()
+            .flat_map(|p| p.objects.clone())
+            .filter_map(|o| match o {
+                doc4me_doc::InlineObject::Field { instr, result, .. } => Some((instr, result)),
+                _ => None,
+            })
+            .collect()
+    };
+    let codes = |s: &crate::Session, story| instrs(s, story).into_iter().map(|(i, _)| i).collect::<Vec<_>>();
+    // From the body: its sequence number, and the page fields in its section's footer.
+    run(&mut s, "caret.set", json!({"pos": {"block": 0, "off": 0}}));
+    run(&mut s, "select.all", json!({}));
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(instrs(&s, StoryRef::Body), [("SEQ Table \\* ThaiArabic".to_string(), "๑".to_string())]);
+    assert_eq!(codes(&s, footer), ["PAGE \\* ThaiArabic \\* MERGEFORMAT", "NUMPAGES \\* ThaiArabic "]);
+    // Twice changes nothing more.
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(codes(&s, footer), ["PAGE \\* ThaiArabic \\* MERGEFORMAT", "NUMPAGES \\* ThaiArabic "]);
+    run(&mut s, "format.arabicDigits", json!({}));
+    assert_eq!(instrs(&s, StoryRef::Body), [("SEQ Table \\* Arabic".to_string(), "1".to_string())]);
+    assert_eq!(codes(&s, footer), ["PAGE \\* Arabic \\* MERGEFORMAT", "NUMPAGES \\* Arabic "]);
+}
+
+#[test]
 fn digit_conversion_in_a_footer_converts_the_page_numbers() {
     use doc4me_doc::section::NumFormat;
     let mut s = s();

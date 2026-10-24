@@ -109,6 +109,9 @@ pub(crate) struct Writer<'d> {
 }
 
 const CT_WML: &str = "application/vnd.openxmlformats-officedocument.wordprocessingml.";
+/// [MS-DOCX] namespaces of the comment ids and comment extensible parts.
+const W16CID: &str = "http://schemas.microsoft.com/office/word/2016/wordml/cid";
+const W16CEX: &str = "http://schemas.microsoft.com/office/word/2018/wordml/cex";
 
 /// Write a `.docx` package.
 pub fn write(doc: &Document) -> Result<Vec<u8>, DocxError> {
@@ -348,6 +351,43 @@ pub(crate) fn write_parts(doc: &Document, flavor: Flavor) -> Result<Vec<(String,
             &format!("{CT_WML}commentsExtended+xml"),
             PartRels::default(),
         );
+
+        // Word 2019 and later: each comment's durable id (commentsIds, by the paragraph id of its
+        // last paragraph) and its UTC time (commentsExtensible, by durable id), so Word shows the
+        // time in the reader's time zone; `w:date` is the author's local time.
+        if doc.comments.values().any(|c| !c.date_utc.is_empty()) {
+            let ids: Vec<(u32, String, String)> = doc
+                .comments
+                .keys()
+                .enumerate()
+                .filter_map(|(i, cid)| Some((*cid, pid_of(*cid)?, format!("{:08X}", 0x1000_0000u32.saturating_add(i as u32)))))
+                .collect();
+            let mut w = W::new();
+            w.open("w16cid:commentsIds", &[("xmlns:w16cid", W16CID)]);
+            for (_, pid, durable) in &ids {
+                w.empty("w16cid:commentId", &[("w16cid:paraId", pid), ("w16cid:durableId", durable)]);
+            }
+            w.close("w16cid:commentsIds");
+            rels.add(rt::COMMENTS_IDS, "commentsIds.xml", false);
+            push_part(&mut entries, &mut overrides, "word/commentsIds.xml", w.into_bytes(), &format!("{CT_WML}commentsIds+xml"), PartRels::default());
+            let mut w = W::new();
+            w.open("w16cex:commentsExtensible", &[("xmlns:w16cex", W16CEX)]);
+            for (cid, _, durable) in &ids {
+                if let Some(utc) = doc.comments.get(cid).map(|c| c.date_utc.as_str()).filter(|u| !u.is_empty()) {
+                    w.empty("w16cex:commentExtensible", &[("w16cex:durableId", durable), ("w16cex:dateUtc", utc)]);
+                }
+            }
+            w.close("w16cex:commentsExtensible");
+            rels.add(rt::COMMENTS_EXTENSIBLE, "commentsExtensible.xml", false);
+            push_part(
+                &mut entries,
+                &mut overrides,
+                "word/commentsExtensible.xml",
+                w.into_bytes(),
+                &format!("{CT_WML}commentsExtensible+xml"),
+                PartRels::default(),
+            );
+        }
     }
 
     rels.add(rt::STYLES, "styles.xml", false);
