@@ -13,7 +13,9 @@
   - ข้อ 2 และ 5.6 (บางส่วน): แก้เอกสารตามที่ตรวจกับโค้ดแล้ว และเปลี่ยน Target เป็น Word for Windows (ไม่มีเลขรุ่น)
   - ข้อ 5.5: `git push origin --delete claude/optimistic-fermat-z9uknk` ถูก git proxy ตัดการเชื่อมต่อสองครั้ง (branch merge เข้า `main` แล้ว ตรวจด้วย `merge-base --is-ancestor`) **[เจ้าของ repo]** ลบที่หน้า Branches ของ GitHub
 - ตรวจก่อน push รอบแรก: `cargo test -p doc4me-engine` ผ่าน (ก่อนแก้ UTC), เทสต์เลข/วันที่ใหม่ผ่าน, ui-egui `i18n ribbon icons widgets` ผ่าน 82, `cargo fmt --all --check` ผ่าน
-- ขั้นต่อไป (รอบตรวจ): เทสต์ engine และ ui-egui ทั้งหมด, clippy `-D warnings`, ตรวจโค้ดใหม่แบบหาบั๊ก, `cargo xtask parity`, ดู CI ของ `main` แล้ว push รอบสอง
+- push รอบแรก `21bb34a` แล้ว (CI run 40100455417 เริ่ม 13:58 UTC); ui-egui ทั้งหมดผ่าน 323 รายการ (`--include-ignored`) และ clippy `-D warnings` ของ engine, ui-egui, xtask (`--all-targets`) ผ่าน
+- คอมมิตถัดมา: ปรับ `convert_digits` ไม่สร้าง `Pos` ทุกตัวอักษร, xtask USAGE มี `version` และตรวจ SHA-256 ของ PngSuite, เพิ่ม `.github/dependabot.yml` (github-actions รายสัปดาห์), ข้อจำกัดที่ทราบใน CHANGELOG
+- ยังค้าง: ผลเทสต์ engine ทั้งชุดหลังแก้ UTC, `cargo xtask parity` (แล้วแก้ `ROADMAP.md` แถวแรกกับ `docs/parity-checklist.md`), ภาพหน้าจอปุ่มใหม่ (ติดตั้ง `mesa-vulkan-drivers` แล้ว สคริปต์อยู่ใน scratchpad ของ session), ผล CI ของ `main`
 
 ## งานที่ต้องทำต่อใน session ใหม่ (รวบรวม 2026-10-23)
 

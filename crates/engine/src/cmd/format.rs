@@ -462,12 +462,14 @@ fn convert_digits(s: &mut Session, thai: bool) -> CmdResult {
             let deleted: Vec<std::ops::Range<usize>> = p.run_ranges().filter(|(_, c)| c.del.is_some()).map(|(r, _)| r).collect();
             let conv: Vec<String> = src
                 .char_indices()
-                .map(|(i, c)| {
-                    let at = Pos { story: a.story, path: path.clone(), off: from + i };
-                    match swap_digit(c, thai) {
-                        Some(d) if !deleted.iter().any(|r| r.contains(&at.off)) && !fenced.iter().any(|r| r.contains(&at)) => d.to_string(),
-                        _ => c.to_string(),
+                .map(|(i, c)| match swap_digit(c, thai) {
+                    Some(d)
+                        if !deleted.iter().any(|r| r.contains(&(from + i)))
+                            && !fenced.iter().any(|r| r.contains(&Pos { story: a.story, path: path.clone(), off: from + i })) =>
+                    {
+                        d.to_string()
                     }
+                    _ => c.to_string(),
                 })
                 .collect();
             case_groups(p, from, src, &conv)

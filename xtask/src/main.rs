@@ -10,6 +10,7 @@ mod parity;
 mod stats;
 mod version;
 
+use sha2::Digest;
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
@@ -25,6 +26,8 @@ commands:
                   show where test corpora live; --download fetches PngSuite into corpus/pngsuite
   stats [--exact] count tests and lines per crate (--exact: ask the test harness via `-- --list`)
   parity          recompute the Word feature-parity summary in docs/parity-checklist.md
+  version [set X.Y.Z[-pre]]
+                  print the workspace version, or set it ([workspace.package] in Cargo.toml)
   ico <out.ico> <in.png>...
                   pack square PNGs (<= 256 px) into a Windows .ico (see packaging/icons.sh)
 ";
@@ -200,6 +203,9 @@ fn cmd_ci() -> Result<(), String> {
 }
 
 const PNGSUITE_URL: &str = "http://www.schaik.com/pngsuite/PngSuite-2017jul19.tgz";
+/// SHA-256 of that archive (68,521 bytes, 178 entries, as downloaded on 2026-10-24). The site's
+/// HTTPS fails the TLS handshake, so the download is checked against this before it is extracted.
+const PNGSUITE_SHA256: &str = "0294b244c95a8342c01b00010cf34abdcabc7c6a34fd0fe1bd963917537bfdc8";
 
 fn cmd_corpus(download: bool) -> Result<(), String> {
     let corpus = root().join("corpus");
@@ -226,6 +232,12 @@ Tests that use a corpus skip cleanly when it is absent.
     let mut curl = Command::new("curl");
     curl.args(["-fsSL", "-o"]).arg(&tgz).arg(PNGSUITE_URL);
     run(curl, &format!("curl {PNGSUITE_URL}"))?;
+    let bytes = std::fs::read(&tgz).map_err(|e| format!("read {}: {e}", tgz.display()))?;
+    let got: String = sha2::Sha256::digest(&bytes).iter().map(|b| format!("{b:02x}")).collect();
+    if got != PNGSUITE_SHA256 {
+        let _ = std::fs::remove_file(&tgz);
+        return Err(format!("{PNGSUITE_URL}: SHA-256 {got}, expected {PNGSUITE_SHA256}; nothing extracted"));
+    }
     let mut tar = Command::new("tar");
     tar.arg("-xzf").arg(&tgz).arg("-C").arg(&dest);
     run(tar, "tar -xzf PngSuite-2017jul19.tgz")?;

@@ -25,6 +25,7 @@
     - ไม่แปลงตัวเลขใน content control ที่ล็อกการแก้เนื้อหา หรือที่ยังแสดงข้อความแนะนำ
     - การจำกัดการจัดรูปแบบของ Restrict Editing ไม่ปิดสองคำสั่งนี้ เพราะเปลี่ยนข้อความไม่ใช่รูปแบบ (`cmd/protect.rs` เหมือนเปลี่ยนตัวพิมพ์เล็ก-ใหญ่) ส่วนเอกสารที่ป้องกันแบบอ่านอย่างเดียวยังกันการแก้ไขตามเดิม
   - คำแปลชื่อคำสั่งครบ 18 ภาษาใน `crates/ui-egui/src/i18n/*.tsv` (ไทย: "แปลงเป็นเลขไทย" และ "แปลงเป็นเลขอารบิก")
+  - ตรวจหลัง push (คอมมิต `21bb34a`): ตำแหน่งของอักขระที่ใช้เทียบกับ content control ที่ล็อกถูกสร้างทุกตัวอักษร (คัดลอก path ทุกครั้ง) เปลี่ยนให้สร้างเฉพาะตัวเลขในเอกสารที่มี control ที่ต้องข้าม ผลลัพธ์เหมือนเดิม
   - ไม่ได้เพิ่มลงแค็ตตาล็อก parity (`crates/engine/src/catalog.rs`) เพราะ Word ไม่มีคำสั่งนี้ ตัวเลข parity จึงไม่เปลี่ยน
   - ผู้ใช้และความเข้ากันได้: ไฟล์ .docx เดิมเปิดและบันทึกเหมือนเดิม; ตัวเลขที่แปลงแล้วเป็นอักขระ U+0E50–U+0E59 จริงในไฟล์ ต่างจาก File › Options › Numerals ซึ่งเปลี่ยนแค่การแสดงผล; ติดตั้งทับรุ่นเดิมได้ตามปกติ
   - ตรวจสอบ: เทสต์ใหม่ `digits_convert_between_arabic_and_thai`, `digit_conversion_keeps_each_runs_formatting`, `digit_conversion_under_track_changes_is_a_revision` (`crates/engine/src/tests.rs`) และ `digit_conversion_skips_controls_that_cant_be_edited` (`cmd/controls.rs`) ผ่าน; `cargo test -p doc4me-engine` ผ่าน 376 + 13 + 8; `cargo test -p doc4me-ui-egui --lib -- --include-ignored i18n ribbon icons widgets` ผ่าน 82 รายการ (รวม `every_tab_and_command_is_translated`, การตรวจว่าแค็ตตาล็อกทุกภาษามีคีย์ชุดเดียวกัน และ audit `untranslated_interface_text`); `cargo fmt --all --check` ผ่าน
@@ -62,6 +63,18 @@
   - ตรวจสอบ: log ของ job `release` (119845910393) แสดง `Contents: write` และ `HTTP 403: Resource not accessible by integration (https://api.github.com/repos/chatraweechai/doc4me/releases)`; เวลา push ดูจาก `gh api repos/chatraweechai/doc4me/activity` (`858b9bd->e06edac` 13:11:46, `be5893e->10a276a` 13:42:41); `git diff --stat 858b9bd e06edac` แก้ไฟล์ workflow และ `git diff --stat be5893e 10a276a` แก้แค่ `handoff.md`; เปิดเอกสาร REST และ changelog ของ GitHub ตามลิงก์แล้วตรงกับที่สรุปไว้
   - ตรวจหลัง push (คอมมิต `670f22b`): ฉบับแรกสรุปเองจากการเทียบสองรอบว่าตัวการคือไฟล์ workflow ไม่ใช่การที่ `main` ขยับ และบอกว่า push ไฟล์อื่นได้ ซึ่งการเทียบนั้นยืนยันไม่ได้ จึงแก้ให้อ้างเอกสารของ GitHub และให้งด push ทั้งหมด; เวลา 13:11:49 และ 13:42:43 ที่ใช้ก่อนหน้าเป็นเวลาสร้าง run ไม่ใช่เวลา push
 
+- **xtask: USAGE มีคำสั่ง `version` และ `corpus --download` ตรวจ SHA-256 ของ PngSuite ก่อนแตกไฟล์** (`xtask/src/main.rs`, `xtask/Cargo.toml`)
+  - เหตุผล: ข้อความ USAGE ไม่มี `cargo xtask version [set X.Y.Z[-pre]]` ที่ `docs/releasing.md` ใช้ และ PngSuite โหลดผ่าน `http://` โดยไม่ตรวจอะไร (handoff ข้อ 3) ส่วน HTTPS ของเว็บนั้น TLS handshake ล้ม (`tlsv1 alert internal error` เมื่อ 2026-10-24) จึงเปลี่ยนเป็น HTTPS ไม่ได้
+  - ไฟล์ที่ hash ไม่ตรงกับ `PNGSUITE_SHA256` (`0294b244…bfdc8` ของไฟล์ 68,521 ไบต์ 178 รายการ โหลดเมื่อ 2026-10-24) ถูกลบและไม่ถูกแตก; ค่า hash ได้จากการโหลดครั้งเดียวและยังไม่ได้เทียบกับแหล่งที่สอง
+  - ใช้ `sha2` ที่ workspace มีอยู่แล้ว (`Cargo.lock` ไม่มี crate ใหม่)
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer (เฉพาะเครื่องมือของนักพัฒนา)
+  - ตรวจสอบ: `curl -fsSL http://…/PngSuite-2017jul19.tgz` แล้ว `sha256sum` และ `tar -tzf` ได้ 178 รายการ; clippy ของ `xtask` ดูหมวดการตรวจรอบสองข้างล่าง
+- **Dependabot สำหรับ GitHub Actions** (`.github/dependabot.yml` ไฟล์ใหม่)
+  - เหตุผล: action ที่ pin SHA ไว้ (`actions/checkout` v4.4.0, `actions/upload-artifact` v4.6.2, `actions/download-artifact` v4.3.0) ยังรันบน Node 20 และ GitHub เตือนใน log (handoff ข้อ 3) Dependabot จะเปิด PR ที่แก้ SHA พร้อมคอมเมนต์เวอร์ชันทุกสัปดาห์ session นี้ไม่ได้อัปเองเพราะสิทธิ์ GitHub ของ session จำกัดอยู่ที่ repo นี้ จึงตรวจ SHA กับ tag ของ repo `actions/*` ไม่ได้
+  - workflow ไม่มี trigger `pull_request` PR ของ Dependabot จึงไม่รัน build; ก่อน merge ให้ดู release notes ของ action นั้น และห้าม merge ระหว่างที่ job `release` รันอยู่ (เป็นการแก้ไฟล์ workflow)
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: รูปแบบตามเอกสาร Dependabot (`version: 2`, `package-ecosystem: "github-actions"`, `directory: "/"`, `schedule.interval: "weekly"`)
+
 ### แก้ไข
 
 - **วันที่และเวลาที่แสดงผู้ใช้เป็นเวลาของเครื่อง ไม่ใช่ UTC** (`crates/engine/src/cmd/mod.rs` `local_offset_secs`, `shift_secs`, `now_local`)
@@ -94,6 +107,11 @@
   - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
   - ตรวจสอบ: `git show --stat e5214c4` ลบ `.claude/settings.json` 8 บรรทัด และไม่มีไฟล์ใต้ `.claude/` เหลือใน repo
 - **secret ของการลงนามโค้ดไม่อยู่ใน environment ระหว่าง `cargo build` ใน CI** ดูรายการ "CI ลงนามโค้ดได้เมื่อมี secret" ในหมวดเปลี่ยนแปลง
+
+### ข้อจำกัดที่ทราบ
+
+- บานหน้าต่างข้อคิดเห็น (`crates/ui-egui/src/panes.rs`) ยังแสดงวันที่ของข้อคิดเห็นจากค่า UTC ที่เก็บไว้ (10 ตัวแรกของ `date`) ข้อคิดเห็นที่เขียนช่วง 00:00–06:59 น. ในไทยจึงขึ้นวันของเมื่อวาน ยังไม่แปลงเป็นเวลาเครื่องเพราะยังไม่ได้ตรวจว่า Word for Windows เขียน `w:date` เป็น UTC หรือเวลาเครื่อง
+- ปุ่มแปลงเลขแปลงเฉพาะเลขอารบิก 0–9 กับเลขไทย ๐–๙ ไม่แปลงเลขของอักษรอื่น (เช่น ٠–٩) และไม่เปลี่ยนเลขที่โปรแกรมสร้างเอง (เลขหน้า เลขลำดับรายการ เลขเชิงอรรถ) ซึ่งตั้งรูปแบบได้ที่ตัวเลือกของรายการหรือเลขหน้า และผลของฟิลด์ที่แปลงแล้วจะกลับเป็นค่าเดิมเมื่ออัปเดตฟิลด์
 
 ## [1.1.1] - 2026-10-22
 
