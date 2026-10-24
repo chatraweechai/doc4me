@@ -24,14 +24,14 @@ overall picture is in [`target-app-parity.md`](target-app-parity.md).
 | `* ` `- ` `1. ` `1) ` `a. ` `a) ` `A. ` `i. ` `I. ` + text | bullet, dash bullet, 1. 1) a. a) A. i. I. lists | `list_autoformat_triggers` |
 | `> ` `-> ` `=> ` + text | bulleted list with an arrow bullet (➢ ➔ ⇨; Word takes them from a symbol font, we use the Unicode arrows) ¹ | `arrow_bullets` |
 | `1. ` after other text | a new list restarting at 1 (never continues an earlier list) | `typing_1_dot_starts_numbering_again` |
-| ⌘Z right after an AutoFormat | undoes only the AutoFormat (`* ` comes back as text) | `undo_right_after_autoformat_undoes_only_the_autoformat` |
+| Ctrl+Z right after an AutoFormat | undoes only the AutoFormat (`* ` comes back as text) | `undo_right_after_autoformat_undoes_only_the_autoformat` |
 
 ## Undo
 
 | Keys | Word's result | Test |
 |---|---|---|
-| type, select some of it, type over it | two undo steps: the first ⌘Z brings the selected text back (still selected), the second removes the typing. Uninterrupted typing stays one step | `typing_then_selecting_then_typing_are_two_undo_steps` |
-| ⌘B with nothing selected, ⌘Z, type | the text isn't bold (Undo takes the waiting caret formatting back too); ⌘Y brings it back | `undoing_bold_at_the_caret_turns_bold_typing_off_again` |
+| type, select some of it, type over it | two undo steps: the first Ctrl+Z brings the selected text back (still selected), the second removes the typing. Uninterrupted typing stays one step | `typing_then_selecting_then_typing_are_two_undo_steps` |
+| Ctrl+B with nothing selected, Ctrl+Z, type | the text isn't bold (Undo takes the waiting caret formatting back too); Ctrl+Y brings it back | `undoing_bold_at_the_caret_turns_bold_typing_off_again` |
 
 ## Track Changes
 
@@ -48,8 +48,8 @@ Windows/Linux keys are given first, macOS second.
 
 | Keys | Word's result | Test |
 |---|---|---|
-| Alt+Shift+Up / Down (⌃⇧↑ / ⌃⇧↓) | the paragraphs the selection touches swap with the paragraph above / below, keeping style and list membership; the selection moves with them; one undo step. A selection ending at the start of a paragraph doesn't take it along. Refused at the top or bottom of the story or cell, next to a table and across a section break | `alt_shift_down_then_up_moves_a_paragraph_and_back_and_undoes` |
-| Alt+Shift+Left / Right (⌃⇧← / ⌃⇧→) | Promote / Demote: a heading goes up or down one level (Heading 1 and Heading 9 are the ends); promoted body text becomes a heading at the level of the heading before it; a list item changes level like Shift+Tab / Tab | `alt_shift_left_and_right_promote_and_demote_headings_and_list_items` |
+| Alt+Shift+Up / Down | the paragraphs the selection touches swap with the paragraph above / below, keeping style and list membership; the selection moves with them; one undo step. A selection ending at the start of a paragraph doesn't take it along. Refused at the top or bottom of the story or cell, next to a table and across a section break | `alt_shift_down_then_up_moves_a_paragraph_and_back_and_undoes` |
+| Alt+Shift+Left / Right | Promote / Demote: a heading goes up or down one level (Heading 1 and Heading 9 are the ends); promoted body text becomes a heading at the level of the heading before it; a list item changes level like Shift+Tab / Tab | `alt_shift_left_and_right_promote_and_demote_headings_and_list_items` |
 | Outline view: Alt+Shift+Up / Down, Left / Right | as above, but a collapsed heading takes what is hidden under it along: moving passes whole shown paragraphs with their hidden content; promote/demote shifts the hidden subheadings too | `outline_collapse_hides_descendants_and_expand_restores` |
 | Outline view: Alt+Shift+Plus / Minus, Alt+Shift+1–9, Alt+Shift+A | Expand / Collapse the heading (one level at a time); Show Level 1–9; show all levels. The caret never stays in hidden text: it moves on to the next shown paragraph | `outline_show_level_filters_paragraphs` |
 | Shift+F5 | Go Back: the caret cycles through the last four places edited, most recent first | `shift_f5_goes_back_through_the_last_edits` |
@@ -71,12 +71,12 @@ Applied when a word is finished by a space, punctuation **or Enter** (`enter_fin
   paragraphs Enter makes from it aren't links (#413; `a_link_covers_only_its_own_text`,
   `typing_at_either_end_of_a_link_is_not_linked`).
 - Enter after `---` `===` `***` `___` `~~~` `###` → a bottom border on the paragraph above
-  (single, double, dotted, thick, wave, triple) (`border_line_autoformat`). ⌘Z right after brings the
+  (single, double, dotted, thick, wave, triple) (`border_line_autoformat`). Ctrl+Z right after brings the
   characters back and removes the border; the Enter stays (one undo step) ¹
   (`undo_right_after_a_border_line_brings_the_characters_back`).
 - `+---+------+` Enter (plus signs around runs of hyphens, the whole paragraph) → a one-row
   table across the text width, each column as wide as its share of the hyphens; the caret goes
-  into the first cell. ⌘Z right after brings the characters back. More than 63 columns stay
+  into the first cell. Ctrl+Z right after brings the characters back. More than 63 columns stay
   text ¹ (`plus_and_hyphen_line_becomes_a_table`).
 - Smileys `:)` `:-)` `:(` `:-(` `:|` → ☺ ☹ 😐, also straight after a word (`ok:)` → `ok☺`) ¹
   (`smileys_are_replaced_inside_words_too`).

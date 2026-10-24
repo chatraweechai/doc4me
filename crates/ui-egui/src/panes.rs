@@ -354,7 +354,8 @@ fn comments(app: &mut WordApp, ui: &mut Ui) {
                 }
                 ui.horizontal(|ui| {
                     ui.label(egui::RichText::new(c.get("author").and_then(Value::as_str).unwrap_or("")).font(semibold(12.0)));
-                    ui.label(egui::RichText::new(c.get("date").and_then(Value::as_str).unwrap_or("").get(..10).unwrap_or("")).small().weak());
+                    // In this computer's time zone (`review.comments` works it out).
+                    ui.label(egui::RichText::new(c.get("localDate").and_then(Value::as_str).unwrap_or("")).small().weak());
                     if c.get("resolved").and_then(Value::as_bool).unwrap_or(false) {
                         ui.label(egui::RichText::new(tl!("Resolved")).small().color(t.green));
                     }

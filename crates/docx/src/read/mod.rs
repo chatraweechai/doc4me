@@ -195,7 +195,8 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
     }
     if let Some(p) = part(rt::COMMENTS) {
         let ex = part(rt::COMMENTS_EX);
-        lenient("comments", r.read_comments(&p, ex.as_deref()));
+        let utc = (part(rt::COMMENTS_IDS), part(rt::COMMENTS_EXTENSIBLE));
+        lenient("comments", r.read_comments(&p, ex.as_deref(), (utc.0.as_deref(), utc.1.as_deref())));
     }
     // Bibliography sources live in a custom XML data store (`b:Sources`), related from the
     // package root or the main part; Word's own files sometimes leave the relationship out, so
@@ -1084,7 +1085,8 @@ impl Reader<'_> {
         *slot = Some(blocks);
     }
 
-    fn read_comments(&mut self, path: &str, ext: Option<&str>) -> Result<(), DocxError> {
+    /// `utc`: the commentsIds and commentsExtensible parts, which give each comment's UTC time.
+    fn read_comments(&mut self, path: &str, ext: Option<&str>, utc: (Option<&str>, Option<&str>)) -> Result<(), DocxError> {
         let Some(root) = self.xml(path)? else { return Ok(()) };
         let rels = self.pkg.rels(path);
         let mut by_para: HashMap<String, u32> = HashMap::new();
@@ -1121,6 +1123,7 @@ impl Reader<'_> {
                     author: c.attr("w:author").unwrap_or("").to_string(),
                     initials: c.attr("w:initials").unwrap_or("").to_string(),
                     date: c.attr("w:date").unwrap_or("").to_string(),
+                    date_utc: String::new(),
                     parent: None,
                     resolved: false,
                     part,
@@ -1138,6 +1141,31 @@ impl Reader<'_> {
                 if let Some(c) = entries.get_mut(&cid) {
                     c.parent = parent;
                     c.resolved = done;
+                }
+            }
+        }
+        // Word 2019 and later keep each comment's UTC time in commentsExtensible, by the durable
+        // id commentsIds gives the paragraph id of the comment's last paragraph (`w:date` is
+        // the author's local time).
+        const NS: &[(&str, &str)] = &[
+            ("w16cid", "http://schemas.microsoft.com/office/word/2016/wordml/cid"),
+            ("w16cex", "http://schemas.microsoft.com/office/word/2018/wordml/cex"),
+        ];
+        let parse = |p: &str| self.pkg.get(p).and_then(|b| crate::xml::parse_ns(b, NS).ok());
+        if let (Some(ids), Some(cex)) = utc
+            && let (Some(ids), Some(cex)) = (parse(ids), parse(cex))
+        {
+            let durable: HashMap<String, u32> = ids
+                .els()
+                .filter(|e| e.local() == "commentId")
+                .filter_map(|e| Some((e.attr("w16cid:durableId")?.to_ascii_uppercase(), *by_para.get(e.attr("w16cid:paraId")?)?)))
+                .collect();
+            for e in cex.els().filter(|e| e.local() == "commentExtensible") {
+                let (Some(d), Some(when)) = (e.attr("w16cex:durableId"), e.attr("w16cex:dateUtc")) else { continue };
+                if when.len() <= 40
+                    && let Some(c) = durable.get(&d.to_ascii_uppercase()).and_then(|id| entries.get_mut(id))
+                {
+                    c.date_utc = when.to_string();
                 }
             }
         }

@@ -295,8 +295,12 @@ pub const MAX_LINKED_BOXES: usize = 256;
 pub struct Comment {
     pub author: String,
     pub initials: String,
-    /// ISO 8601.
+    /// ISO 8601, as Word writes `w:date`: the author's local time (Word marks it `Z` all the
+    /// same).
     pub date: String,
+    /// The same moment in UTC (Word's `w16cex:dateUtc`), when known; empty otherwise.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub date_utc: String,
     /// Reply to this comment id.
     pub parent: Option<u32>,
     pub resolved: bool,

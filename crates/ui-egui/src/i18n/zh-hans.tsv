@@ -435,7 +435,6 @@
 	General	常规
 	Go To	定位
 	Go to	转到
-	Go To (⌘⌥G)	定位 (⌘⌥G)
 	Grab bag	随机展示
 	Greeting Line	问候语
 	Greeting\nLine	问候语
@@ -661,7 +660,6 @@
 	Paragraph Up	上移一段
 	Paragraphs	段落数
 	Paste	粘贴
-	Paste (⌘V)	粘贴 (⌘V)
 	Paste Formatting	粘贴格式
 	Paste: Keep Text Only	粘贴：只保留文本
 	Paste: Merge Formatting	粘贴：合并格式

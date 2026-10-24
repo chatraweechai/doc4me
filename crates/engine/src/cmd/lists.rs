@@ -233,7 +233,7 @@ fn define(s: &mut Session, v: &Value) -> CmdResult {
 }
 
 /// Lay out again every paragraph in one of `nums`.
-fn touch_lists(s: &mut Session, nums: &[u32]) -> Result<(), CmdError> {
+pub(crate) fn touch_lists(s: &mut Session, nums: &[u32]) -> Result<(), CmdError> {
     touch_where(s, &|p| p.props.numbering.is_some_and(|n| nums.contains(&n.num)))
 }
 

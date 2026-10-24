@@ -1,6 +1,6 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย (งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง)
 
-อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 ยุติแล้ว CI ของ `main` ผ่าน (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 รอบที่ 3 กำลังตรวจ (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
 
 ## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก, JPG/JPEG และงานค้างจาก handoff
 
@@ -23,10 +23,13 @@
   - ข้อ 5.3: ruleset ป้องกัน `main`
   - ข้อ 5.5: ลบ branch `claude/optimistic-fermat-z9uknk` ที่หน้า Branches (merge เข้า `main` แล้ว ตรวจด้วย `merge-base --is-ancestor`; `git push origin --delete` ถูก git proxy ตัดการเชื่อมต่อสองครั้ง) และ branch `claude/affectionate-ptolemy-92v2ut` ของ session นี้ถ้ามีบน remote (session ไม่ได้ push branch นี้)
   - PR ของ Dependabot ([#1](https://github.com/chatraweechai/doc4me/pull/1) rust-cache 2.9.2 → 2.9.3, [#2](https://github.com/chatraweechai/doc4me/pull/2) checkout 4.4.0 → 7.0.1, [#3](https://github.com/chatraweechai/doc4me/pull/3) download-artifact 4.3.0 → 8.0.2, [#4](https://github.com/chatraweechai/doc4me/pull/4) upload-artifact 4.6.2 → 7.0.2): session ไม่ได้ merge เพราะเป็นการขึ้นเวอร์ชันหลักที่แก้ไฟล์ workflow และ PR ไม่รัน build (ไม่มี trigger `pull_request`) ให้อ่าน release notes ใน PR ก่อน merge โดยเฉพาะ download-artifact ที่ job `release` ใช้ แล้วสั่ง run บน `main` (ไม่ติ๊ก `release`) หลัง merge ห้าม merge ระหว่างที่ job `release` รันอยู่
+- รอบที่ 3 (ผู้ใช้สั่ง: แก้วันที่ในบานหน้าต่างข้อคิดเห็น, ให้ปุ่มแปลงเลขเปลี่ยนเลขหน้าและเลขลำดับรายการ, เปลี่ยนทางลัด ⌘ ในเอกสารเป็นแบบ Windows) ทำแล้ว ดู `[Unreleased]`
+  - `w:date` ของข้อคิดเห็นและ revision ใหม่เป็นเวลาท้องถิ่นแบบ Word และอ่าน `w16cex:dateUtc` (ยังไม่เขียนกลับ และยังไม่อ่าน `w16du:dateUtc` ของ revision)
+  - ปุ่มแปลงเลขเปลี่ยนรูปแบบ decimal ↔ thaiNumbers ของรายการ เลขหน้า เลขเชิงอรรถ และเลขอ้างอิงท้ายเรื่อง
+  - ทางลัดในเอกสารใช้ Ctrl (ไม่ใช่ ⊞ เพราะ Word for Windows ใช้ Ctrl) และคำแนะนำ "Paste"/"Go To" ในโปรแกรมแสดงทางลัดตามแพลตฟอร์ม
 - ยังไม่ได้ทำ / ข้อสังเกต
   - ภาพ `hero`, `thai`, `dark`, `dark-th`, `font`, `font-th` ถ่ายใหม่แล้ว ภาพอื่นใน `docs/images` (backstage, design, layout, references, review) ไม่เห็นกลุ่มฟอนต์ของหน้าหลักจึงไม่ได้ถ่ายใหม่
-  - บานหน้าต่างข้อคิดเห็นแสดงวันที่จาก UTC (ดู `[Unreleased]` › ข้อจำกัดที่ทราบ) ต้องตรวจก่อนว่า Word for Windows เขียน `w:date` แบบไหน
-  - แถวในเอกสาร parity ที่อิงทางลัด ⌘ และเมนูของ Mac (`docs/typing-parity.md`, `docs/ui-parity.md`, `docs/hardware-parity.md`) ยังไม่ได้เขียนใหม่สำหรับ Windows; alpha gate ยังไม่ได้รันบน Windows
+  - แถวในเอกสาร parity ที่อิงเมนูของ Mac (`docs/ui-parity.md`, `docs/target-app-parity.md`, `docs/hardware-parity.md`) ยังไม่ได้เทียบกับ ribbon และ backstage ของ Windows; alpha gate ยังไม่ได้รันบน Windows
   - ข้อ 3 ที่เหลือ: job ทดสอบบน Linux ใน CI รอเจ้าของ repo ตัดสินใจ, `cargo audit` ยังไม่ได้รัน, audit ภาษาที่ติด `#[ignore]` ยังไม่รู้สาเหตุที่เคยล้ม (รอบนี้ผ่าน)
   - ข้อ 5.7 ทั้งหมดยังรอเจ้าของ repo
 - CI ของ `main`: run ของ `21bb34a` (40100455417) และ `b65c320` (40100747357) ถูกยกเลิกโดย concurrency เพราะมี push ใหม่ (ไม่ใช่การล้ม); [run 40101348687](https://github.com/chatraweechai/doc4me/actions/runs/40101348687) ของ `0cdf2bb` (คอมมิตโค้ดล่าสุด) **ผ่าน** (ตรวจ 14:26 UTC): job `build` สำเร็จทุกขั้น รวมขั้นใหม่ "Build doc4me + doc4me-cli" (14:11:45–14:22:23) และ "Sign and package MSI + portable zip" (14:22:23–14:23:05) ส่วน job `release` ถูกข้ามตามปกติของ push; คอมมิตหลังจากนั้นแก้แค่เอกสารและภาพ จึงใส่ `[skip ci]` run นี้จึงเป็น build ล่าสุดของโค้ด

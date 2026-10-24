@@ -2774,9 +2774,15 @@ fn timestamps_come_from_the_clock() {
     run(&mut s, "text.insert", json!({"text": "Dated"}));
     run(&mut s, "select.text", json!({"text": "Dated"}));
     run(&mut s, "review.newComment", json!({"text": "When?"}));
-    let date = run(&mut s, "review.comments", json!({}))[0]["date"].as_str().unwrap_or_default().to_string();
-    // Fixed-width ISO strings sort by time.
-    assert!(date >= cmd::iso_from_unix_secs(before) && date <= cmd::iso_from_unix_secs(cmd::now_unix()), "{date}");
+    let c = run(&mut s, "review.comments", json!({}))[0].clone();
+    let (date, utc) = (c["date"].as_str().unwrap_or_default().to_string(), c["dateUtc"].as_str().unwrap_or_default().to_string());
+    // Fixed-width ISO strings sort by time. `w:date` is the local time, as Word writes it; the
+    // UTC time is kept apart.
+    let off = cmd::local_offset_secs();
+    let local = |t: u64| cmd::iso_from_unix_secs(cmd::shift_secs(t, off));
+    assert!(date >= local(before) && date <= local(cmd::now_unix()), "{date}");
+    assert!(utc >= cmd::iso_from_unix_secs(before) && utc <= cmd::iso_from_unix_secs(cmd::now_unix()), "{utc}");
+    assert_eq!(c["localDate"].as_str().unwrap_or_default(), &date[..16].replacen('T', " ", 1));
 }
 
 #[test]
@@ -3398,17 +3404,17 @@ fn change_case_keeps_each_runs_formatting_when_lengths_change() {
 #[test]
 fn digits_convert_between_arabic_and_thai() {
     let mut s = s();
-    run(&mut s, "document.setText", json!({"text": "ปี 2567 ข้อ 10\rราคา 50 บาท"}));
+    run(&mut s, "document.setText", json!({"text": "ปี 2567 ข้อ 10\nราคา 50 บาท"}));
     run(&mut s, "select.all", json!({}));
     run(&mut s, "format.thaiDigits", json!({}));
-    assert_eq!(text(&s), "ปี ๒๕๖๗ ข้อ ๑๐\rราคา ๕๐ บาท");
+    assert_eq!(text(&s), "ปี ๒๕๖๗ ข้อ ๑๐\nราคา ๕๐ บาท");
     // Thai digits are three bytes each: the selection still covers everything.
-    assert_eq!(s.selected_text(), "ปี ๒๕๖๗ ข้อ ๑๐\rราคา ๕๐ บาท");
+    assert_eq!(s.selected_text(), "ปี ๒๕๖๗ ข้อ ๑๐\nราคา ๕๐ บาท");
     run(&mut s, "format.arabicDigits", json!({}));
-    assert_eq!(text(&s), "ปี 2567 ข้อ 10\rราคา 50 บาท");
+    assert_eq!(text(&s), "ปี 2567 ข้อ 10\nราคา 50 บาท");
     // Digits already in the asked-for script, and every other character, stay as they are.
     run(&mut s, "format.arabicDigits", json!({}));
-    assert_eq!(text(&s), "ปี 2567 ข้อ 10\rราคา 50 บาท");
+    assert_eq!(text(&s), "ปี 2567 ข้อ 10\nราคา 50 บาท");
 
     // With no selection, the number at the insertion point converts and the rest stays.
     let mut s = self::s();
@@ -3573,9 +3579,62 @@ fn print_markup_exports_comments() {
 }
 
 #[test]
+fn digit_conversion_converts_list_page_and_note_numbers() {
+    use doc4me_doc::section::NumFormat;
+    let mut s = s();
+    run(&mut s, "document.setText", json!({"text": "One\nTwo\nPlain 12"}));
+    run(&mut s, "select.range", json!({"anchor": {"block": 0, "off": 0}, "focus": {"block": 1, "off": 3}}));
+    run(&mut s, "para.numbering", json!({}));
+    let num = crate::cmd::lists::caret_list(&s).unwrap();
+    let fmt = |s: &crate::Session, lvl: u8| s.doc.numbering.level(num, lvl).unwrap().format;
+    let other = fmt(&s, 1);
+    assert_eq!(fmt(&s, 0), NumFormat::Decimal);
+    // The caret in a plain paragraph: its text, and the section's page and footnote numbers.
+    run(&mut s, "caret.set", json!({"pos": {"block": 2, "off": 7}}));
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(text(&s), "One\nTwo\nPlain ๑๒");
+    assert_eq!(s.doc.last_section.page_num_format, NumFormat::ThaiNumbers);
+    assert_eq!(s.doc.note_options(&s.doc.last_section, false).num_fmt, NumFormat::ThaiNumbers);
+    assert_eq!(s.doc.note_options(&s.doc.last_section, true).num_fmt, NumFormat::LowerRoman, "endnotes stay i, ii, iii");
+    assert_eq!(fmt(&s, 0), NumFormat::Decimal, "a list the selection isn't in stays");
+    // In a list item: the list's decimal levels become Thai numbers; other formats stay.
+    run(&mut s, "caret.set", json!({"pos": {"block": 1, "off": 1}}));
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(fmt(&s, 0), NumFormat::ThaiNumbers);
+    assert_eq!(fmt(&s, 1), if other == NumFormat::Decimal { NumFormat::ThaiNumbers } else { other });
+    // One undo step takes the list back to 1, 2, 3.
+    run(&mut s, "edit.undo", json!({}));
+    assert_eq!(fmt(&s, 0), NumFormat::Decimal);
+    run(&mut s, "edit.redo", json!({}));
+    assert_eq!(fmt(&s, 0), NumFormat::ThaiNumbers);
+    // Back to Arabic everywhere.
+    run(&mut s, "select.all", json!({}));
+    run(&mut s, "format.arabicDigits", json!({}));
+    assert_eq!(text(&s), "One\nTwo\nPlain 12");
+    assert_eq!(fmt(&s, 0), NumFormat::Decimal);
+    assert_eq!(s.doc.last_section.page_num_format, NumFormat::Decimal);
+    assert_eq!(s.doc.note_options(&s.doc.last_section, false).num_fmt, NumFormat::Decimal);
+    // Roman page numbers aren't digits: they stay.
+    run(&mut s, "layout.pageNumberFormat", json!({"format": "lowerRoman"}));
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(s.doc.last_section.page_num_format, NumFormat::LowerRoman);
+}
+
+#[test]
+fn digit_conversion_in_a_footer_converts_the_page_numbers() {
+    use doc4me_doc::section::NumFormat;
+    let mut s = s();
+    run(&mut s, "document.setText", json!({"text": "Body"}));
+    run(&mut s, "insert.footer", json!({}));
+    assert!(matches!(s.sel.focus.story, StoryRef::Part(_)), "editing the footer");
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(s.doc.last_section.page_num_format, NumFormat::ThaiNumbers);
+}
+
+#[test]
 fn pages_export_and_save_as_jpeg() {
     let mut s = s();
-    run(&mut s, "document.setText", json!({"text": "ปีงบประมาณ 2567\rPage two follows"}));
+    run(&mut s, "document.setText", json!({"text": "ปีงบประมาณ 2567\nPage two follows"}));
     run(&mut s, "caret.set", json!({"pos": {"block": 1, "off": 0}}));
     run(&mut s, "insert.pageBreak", json!({}));
     let dir = std::env::temp_dir().join(format!("doc4me-jpeg-{}", std::process::id()));

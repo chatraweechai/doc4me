@@ -65,7 +65,7 @@ own (`AGENTS.md`: no Microsoft iconography, ever).
 | 2026-10-11 | trivial | The caret glides to its new place for keys and typing and its blink fades, as measured from Word for Windows; File › Options › Advanced › Animation turns it off, kept between runs; `ui.caretAnimation` for agents |
 | 2026-10-11 | trivial | Screen readers: the document canvas exposes paragraphs, headings, lists, tables, links, pictures and the caret through AccessKit (#488); 25% → 50% |
 | 2026-10-11 | trivial | More Colors… in every colour drop-down and a Colors dialog (Standard and Custom tabs, RGB/HSL numbers, hex box) with Recent Colors (#606) |
-| 2026-10-11 | trivial | Selection by units: double-click and drag extends by whole words, triple-click and drag by paragraphs, Ctrl/⌘+click and drag by sentences; `select.dragUnit` (#549) |
+| 2026-10-11 | trivial | Selection by units: double-click and drag extends by whole words, triple-click and drag by paragraphs, Ctrl+click and drag by sentences; `select.dragUnit` (#549) |
 | 2026-10-11 | trivial | Compare / Combine Documents (original and revised document, label changes with, comparison settings, word or character level, show changes in) and AutoCorrect Options (replacement list, capitalization, exceptions, AutoFormat As You Type, Math AutoCorrect) dialogs; Restrict Editing pane (formatting and editing restrictions, exceptions for everyone, password); modal dialog rows merged into one (#412) |
 | 2026-10-11 | trivial | Line Numbers, Hyphenation (with Manual Hyphenation), Language, Envelopes and Labels dialogs (#407); the three duplicated modal-dialog rows merged into one |
 | 2026-10-11 | trivial | Accessibility pane (errors/warnings/tips, jump-to, fixes) and Alt Text pane, opened from Picture/Shape Format › Accessibility and right-click › View Alt Text… (#386) |
@@ -96,7 +96,7 @@ own (`AGENTS.md`: no Microsoft iconography, ever).
 | 2026-10-10 | trivial | Columns (presets, unequal widths, line between, apply to), Symbol (font coverage grid by Unicode subset, recently used, character code, Special Characters) and Field (categories, options, field codes) dialogs (#321) |
 | 2026-10-10 | trivial | Define New Multilevel List (all nine levels, live preview, `list.define`) and Track Changes Options (show, balloons, insertion/deletion marks and colours, changed-line bars; `review.trackingOptions`, saved per user) (#328) |
 | 2026-10-11 | trivial | Enclose Characters dialog and Home › Font button (#297) |
-| 2026-10-10 | trivial | Shortcuts: Alt+Shift+Up/Down move paragraphs, Alt+Shift+Left/Right promote/demote (⌃⇧ arrows on macOS), Shift+F5 Go Back, Alt+X Toggle Unicode (#343) |
+| 2026-10-10 | trivial | Shortcuts: Alt+Shift+Up/Down move paragraphs, Alt+Shift+Left/Right promote/demote, Shift+F5 Go Back, Alt+X Toggle Unicode (#343) |
 | 2026-10-10 | trivial | Rotation handle on pictures, shapes and text boxes; Rotate menu (90° and flips) and a Rotation box in Picture/Shape Format › Size (#332) |
 | 2026-10-10 | trivial | System interface theme keeps following OS appearance changes (no longer pins the macOS window); Dark page no longer darkens the interface (#311, #312) |
 | 2026-10-11 | trivial | Insert › Icons picker: search, category chips, icons drawn live from the library's path data; Picture Format › Icon Color (#309) |

@@ -8,7 +8,7 @@ use std::collections::BTreeSet;
 use doc4me_doc::edit::Fragment;
 use doc4me_doc::{Pos, Revision, RevisionKind, StoryRef};
 
-use super::{now_iso, track_delete_as};
+use super::{now_word_date, track_delete_as};
 use crate::{CmdError, Selection, Session};
 
 /// The deletion the last tracked cut recorded, which the paste right after it makes a move.
@@ -56,7 +56,7 @@ pub fn cut_tracked(s: &mut Session) -> Result<bool, CmdError> {
     if !s.doc.settings.track_changes || a == b || a.story != b.story || !move_sized(&s.clipboard_text) {
         return Ok(false);
     }
-    s.doc.revisions.push(Revision::new(RevisionKind::Delete, s.author.clone(), now_iso()));
+    s.doc.revisions.push(Revision::new(RevisionKind::Delete, s.author.clone(), now_word_date()));
     let rid = (s.doc.revisions.len() - 1) as u32;
     let at = track_delete_as(s, &a, &b, rid)?;
     s.sel = Selection::caret(at);

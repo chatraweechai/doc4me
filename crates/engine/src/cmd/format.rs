@@ -1,9 +1,10 @@
 //! Character formatting (Home › Font).
 
-use doc4me_doc::Pos;
 use doc4me_doc::eq::{EncloseShape, EncloseStyle, Enclosure};
 use doc4me_doc::props::{Border, CharProps, Highlight, Rgb, TextColor, Underline, VertAlign};
 use doc4me_doc::resolve::ResolvedChar;
+use doc4me_doc::section::NumFormat;
+use doc4me_doc::{Pos, StoryRef};
 use serde_json::{Value, json};
 
 use super::sel_result;
@@ -442,11 +443,14 @@ fn swap_digit(c: char, thai: bool) -> Option<char> {
 
 /// Convert to Thai Digits / Convert to Arabic Digits: 0–9 ↔ ๐–๙ in the selection, or in the word
 /// at the insertion point. Each run keeps its formatting and text already deleted is left as it
-/// is; with Track Changes on, each changed stretch becomes a deletion and an insertion.
+/// is; with Track Changes on, each changed stretch becomes a deletion and an insertion. The
+/// numbers Doc4Me makes follow too (see [`convert_generated_numbers`]).
 fn convert_digits(s: &mut Session, thai: bool) -> CmdResult {
     let (a, b) = s.sel.ordered();
     let (a, b) = if a == b { target(s).unwrap_or((a, b)) } else { (a, b) };
     if a == b {
+        // No text to convert, but the paragraph's list and the section's numbers still follow.
+        convert_generated_numbers(s, &a, &b, thai)?;
         return sel_result(s);
     }
     let tracked = s.doc.settings.track_changes;
@@ -511,7 +515,86 @@ fn convert_digits(s: &mut Session, thai: bool) -> CmdResult {
             }
         }
     }
+    convert_generated_numbers(s, &a, &b, thai)?;
     sel_result(s)
+}
+
+/// Decimal ↔ Thai numbers; other number formats stay as they are.
+fn swap_num_format(f: NumFormat, thai: bool) -> Option<NumFormat> {
+    match f {
+        NumFormat::Decimal if thai => Some(NumFormat::ThaiNumbers),
+        NumFormat::ThaiNumbers if !thai => Some(NumFormat::Decimal),
+        _ => None,
+    }
+}
+
+/// The numbers Doc4Me makes itself, which aren't text to convert: the list numbers of the
+/// paragraphs in `a..b` (every level of their lists, and the lists that share their definition,
+/// as Define New Multilevel List changes them) and the page, footnote and endnote numbers of the
+/// sections `a..b` is in (in a header or footer: the sections that use it).
+fn convert_generated_numbers(s: &mut Session, a: &Pos, b: &Pos, thai: bool) -> Result<(), CmdError> {
+    let mut nums: Vec<u32> = Vec::new();
+    for path in s.doc.paths_between(a, b) {
+        let Some(p) = s.doc.para(a.story, &path) else { continue };
+        let num = p.props.numbering.or_else(|| s.doc.styles.resolve_para(&p.props).numbering).filter(|n| n.num != 0).map(|n| n.num);
+        if let Some(n) = num
+            && !nums.contains(&n)
+        {
+            nums.push(n);
+        }
+    }
+    let mut relist: Vec<u32> = Vec::new();
+    for n in nums {
+        let Some(aid) = s.doc.numbering.num(n).map(|x| x.abstract_id) else { continue };
+        let mut changed = false;
+        let levels = s.doc.numbering.abstracts.iter_mut().filter(|x| x.id == aid).flat_map(|x| x.levels.iter_mut());
+        let own = s.doc.numbering.nums.iter_mut().filter(|x| x.abstract_id == aid).flat_map(|x| x.level_overrides.iter_mut().map(|(_, l)| l));
+        for l in levels.chain(own) {
+            if let Some(f) = swap_num_format(l.format, thai) {
+                l.format = f;
+                changed = true;
+            }
+        }
+        if changed {
+            relist.extend(s.doc.numbering.nums.iter().filter(|x| x.abstract_id == aid && !relist.contains(&x.id)).map(|x| x.id).collect::<Vec<_>>());
+        }
+    }
+    if !relist.is_empty() {
+        super::lists::touch_lists(s, &relist)?;
+    }
+    // The sections, by the body block each ends at.
+    let ends: Vec<usize> = s.doc.sections().iter().map(|(e, _)| *e).collect();
+    let picked: Vec<usize> = match a.story {
+        StoryRef::Body => {
+            let (i0, i1) = (a.path.0.first().copied().unwrap_or(0) as usize, b.path.0.first().copied().unwrap_or(0) as usize);
+            let first = ends.iter().position(|e| i0 <= *e).unwrap_or(0);
+            let last = ends.iter().position(|e| i1 <= *e).unwrap_or(first);
+            ends.get(first..=last.max(first)).map(<[usize]>::to_vec).unwrap_or_default()
+        }
+        StoryRef::Part(id) => s
+            .doc
+            .sections()
+            .iter()
+            .filter(|(_, x)| [&x.headers, &x.footers].iter().any(|h| [h.default, h.first, h.even].contains(&Some(id))))
+            .map(|(e, _)| *e)
+            .collect(),
+    };
+    for end in picked {
+        // The note formats in effect (the section's own, else the document's).
+        let Some(x) = s.doc.sections().get(s.doc.section_index_of(end)).map(|(_, x)| (*x).clone()) else { continue };
+        let (foot, end_note) = (s.doc.note_options(&x, false).num_fmt, s.doc.note_options(&x, true).num_fmt);
+        let x = s.doc.section_mut(end);
+        if let Some(f) = swap_num_format(x.page_num_format, thai) {
+            x.page_num_format = f;
+        }
+        if let Some(f) = swap_num_format(foot, thai) {
+            x.footnote_pr.num_fmt = Some(f);
+        }
+        if let Some(f) = swap_num_format(end_note, thai) {
+            x.endnote_pr.num_fmt = Some(f);
+        }
+    }
+    Ok(())
 }
 
 /// Group the characters of `src` (at `from` in `p`) whose converted form `conv` differs into

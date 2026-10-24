@@ -144,7 +144,7 @@ pub fn delete_selection(s: &mut Session) -> Result<Pos, CmdError> {
 
 /// A revision record for the current author.
 pub fn new_revision(s: &mut Session, kind: RevisionKind) -> u32 {
-    let date = now_iso();
+    let date = now_word_date();
     // Never one end of a move, nor the deletion a cut may still turn into one.
     let held = s.pending_move.as_ref().map(|m| m.rev);
     if let Some((i, _)) = s
@@ -431,6 +431,78 @@ pub fn now_local() -> u64 {
     shift_secs(now_unix(), local_offset_secs())
 }
 
+/// The `w:date` Word writes on comments and tracked changes: the local wall-clock time, marked
+/// `Z` all the same (newer Word keeps the UTC time apart, in `dateUtc`).
+pub fn now_word_date() -> String {
+    iso_from_unix_secs(now_local())
+}
+
+/// Seconds since the Unix epoch of an ISO-8601 time `YYYY-MM-DDTHH:MM[:SS[.fff]]` followed by
+/// `Z`, a `±HH:MM` offset or nothing (taken as UTC); `None` when it isn't one.
+pub fn parse_iso(s: &str) -> Option<u64> {
+    let s = s.trim();
+    let b = s.as_bytes();
+    let num = |r: std::ops::Range<usize>| s.get(r).filter(|t| t.bytes().all(|c| c.is_ascii_digit())).and_then(|t| t.parse::<i64>().ok());
+    if b.get(4) != Some(&b'-') || b.get(7) != Some(&b'-') || !matches!(b.get(10), Some(b'T' | b't' | b' ')) || b.get(13) != Some(&b':') {
+        return None;
+    }
+    let (y, mo, d, h, mi) = (num(0..4)?, num(5..7)?, num(8..10)?, num(11..13)?, num(14..16)?);
+    let mut rest = s.get(16..)?;
+    let mut sec = 0;
+    if let Some(r) = rest.strip_prefix(':') {
+        sec = num(17..19)?;
+        rest = r.get(2..)?;
+        if let Some(r) = rest.strip_prefix('.') {
+            rest = r.trim_start_matches(|c: char| c.is_ascii_digit());
+        }
+    }
+    let offset = match rest {
+        "" | "Z" | "z" => 0,
+        _ => {
+            let sign = match rest.as_bytes().first() {
+                Some(b'+') => 1,
+                Some(b'-') => -1,
+                _ => return None,
+            };
+            let hm = rest.get(1..)?;
+            let (oh, om) = hm.split_once(':').unwrap_or((hm.get(..2)?, hm.get(2..)?));
+            let all_digits = |t: &str| !t.is_empty() && t.len() <= 2 && t.bytes().all(|c| c.is_ascii_digit());
+            if !all_digits(oh) || !all_digits(om) {
+                return None;
+            }
+            sign * (oh.parse::<i64>().ok()? * 3600 + om.parse::<i64>().ok()? * 60)
+        }
+    };
+    if !(1..=12).contains(&mo) || !(1..=31).contains(&d) || h > 23 || mi > 59 || sec > 60 {
+        return None;
+    }
+    let t = days_from_civil(y, mo as u32, d as u32) * 86_400 + h * 3600 + mi * 60 + sec - offset;
+    u64::try_from(t).ok()
+}
+
+/// (year, month, day) → days since 1970-01-01, the inverse of [`civil_from_days`].
+pub fn days_from_civil(y: i64, m: u32, d: u32) -> i64 {
+    let y = if m <= 2 { y - 1 } else { y };
+    let era = if y >= 0 { y } else { y - 399 } / 400;
+    let yoe = y - era * 400;
+    let m = i64::from(m);
+    let doy = (153 * (if m > 2 { m - 3 } else { m + 9 }) + 2) / 5 + i64::from(d) - 1;
+    let doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+    era * 146_097 + doe - 719_468
+}
+
+/// When a comment was written, as the person reading it sees it (`YYYY-MM-DD HH:MM`): its UTC
+/// time in this computer's time zone when known, else `w:date` as written (the author's local
+/// time, which is what Word shows then too).
+pub fn comment_local_date(c: &doc4me_doc::Comment) -> String {
+    let iso = match parse_iso(&c.date_utc) {
+        Some(t) => iso_from_unix_secs(shift_secs(t, local_offset_secs())),
+        None => c.date.clone(),
+    };
+    let iso: String = iso.chars().take(16).collect();
+    iso.replacen('T', " ", 1)
+}
+
 /// Days since 1970-01-01 → (year, month, day) (Howard Hinnant's algorithm).
 pub fn civil_from_days(z: i64) -> (i64, u32, u32) {
     let z = z + 719_468;
@@ -465,6 +537,36 @@ mod iso_tests {
         assert_eq!(iso_from_unix_secs(1_709_164_800), "2024-02-29T00:00:00Z");
         assert_eq!(iso_from_unix_secs(951_782_400), "2000-02-29T00:00:00Z");
         assert_eq!(iso_from_unix_secs(1_735_689_599), "2024-12-31T23:59:59Z");
+    }
+
+    #[test]
+    fn iso_times_parse_back_to_unix_seconds() {
+        use super::{civil_from_days, days_from_civil, parse_iso};
+        for t in [0, 951_782_400, 1_709_164_800, 1_735_689_599, 1_760_082_785] {
+            assert_eq!(parse_iso(&iso_from_unix_secs(t)), Some(t));
+        }
+        for z in [-800_000, -1, 0, 59, 11_016, 20_000, 2_000_000] {
+            let (y, m, d) = civil_from_days(z);
+            assert_eq!(days_from_civil(y, m, d), z);
+        }
+        assert_eq!(parse_iso("2025-10-10T14:53:05+07:00"), Some(1_760_082_785));
+        assert_eq!(parse_iso("2025-10-10T03:53:05.123-04:00"), Some(1_760_082_785));
+        assert_eq!(parse_iso("2025-10-10T07:53"), Some(1_760_082_780));
+        for bad in ["", "yesterday", "2025-13-01T00:00:00Z", "2025-10-10T07:53:05+0x:00", "２０２５-10-10T07:53:05Z", "2025-10-10T07:53:05Q"] {
+            assert_eq!(parse_iso(bad), None, "{bad}");
+        }
+    }
+
+    #[test]
+    fn comments_show_their_utc_time_in_the_local_time_zone() {
+        use super::{comment_local_date, local_offset_secs, shift_secs};
+        let c = doc4me_doc::Comment { date: "2025-10-10T14:53:05Z".into(), date_utc: "2025-10-10T07:53:05Z".into(), ..Default::default() };
+        let want = iso_from_unix_secs(shift_secs(1_760_082_785, local_offset_secs())).chars().take(16).collect::<String>().replacen('T', " ", 1);
+        assert_eq!(comment_local_date(&c), want);
+        // Without the UTC time, `w:date` as written: the author's local time.
+        let c = doc4me_doc::Comment { date: "2025-10-10T14:53:05Z".into(), ..Default::default() };
+        assert_eq!(comment_local_date(&c), "2025-10-10 14:53");
+        assert_eq!(comment_local_date(&doc4me_doc::Comment::default()), "");
     }
 
     #[test]

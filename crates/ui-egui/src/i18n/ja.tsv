@@ -423,7 +423,6 @@
 	General	全般
 	Go To	ジャンプ
 	Go to	移動
-	Go To (⌘⌥G)	ジャンプ (⌘⌥G)
 	Grab bag	ランダム表示
 	Greeting Line	あいさつ文
 	Greeting\nLine	あいさつ文
@@ -649,7 +648,6 @@
 	Paragraph Up	前の段落へ
 	Paragraphs	段落数
 	Paste	貼り付け
-	Paste (⌘V)	貼り付け (⌘V)
 	Paste Formatting	書式の貼り付け
 	Paste: Keep Text Only	貼り付け: テキストのみ保持
 	Paste: Merge Formatting	貼り付け: 書式を結合

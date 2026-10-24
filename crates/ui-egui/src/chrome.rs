@@ -254,6 +254,8 @@ pub fn status_bar(app: &mut WordApp, ui: &mut Ui) {
                 ui.spacing_mut().item_spacing = vec2(14.0, 0.0);
                 let l = app.session.layout();
                 let page = l.caret_on(&app.session.sel.focus, app.session.page_hint).map(|c| c.page + 1).unwrap_or(1);
+                // Go To with the platform's shortcut (Ctrl+Alt+G; ⌘⌥G on macOS).
+                let go_to = format!("{} ({})", tl!("Go To"), crate::widgets::shortcut_text(app, "edit.goto"));
                 let st = |ui: &mut Ui, s: &str| {
                     let font = TypeRung::Caption.regular();
                     let track = TypeRung::Caption.tracking();
@@ -263,7 +265,7 @@ pub fn status_bar(app: &mut WordApp, ui: &mut Ui) {
                     resp
                 };
                 if st(ui, &crate::i18n::fmt(tl!("Page {page} of {pages}"), &[("page", &page.to_string()), ("pages", &l.pages.len().to_string())]))
-                    .on_hover_text(tl!("Go To (⌘⌥G)"))
+                    .on_hover_text(go_to)
                     .clicked()
                 {
                     let _ = app.run("ui.dialog", json!({"name": "goto"}));

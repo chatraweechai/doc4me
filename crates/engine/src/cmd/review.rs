@@ -4,7 +4,7 @@ use doc4me_doc::para::InlineObject;
 use doc4me_doc::{Comment, Paragraph, PartKind, Pos, StoryRef, para_block};
 use serde_json::{Value, json};
 
-use super::{fmt_revisions, now_iso, pos_json, sel_result};
+use super::{fmt_revisions, now_iso, now_word_date, pos_json, sel_result};
 use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
 
 pub fn specs() -> Vec<CommandSpec> {
@@ -121,7 +121,9 @@ fn new_comment(s: &mut Session, v: &Value) -> CmdResult {
     let part = s.doc.add_part(PartKind::Comment, vec![para_block(Paragraph::with_text(&text, Default::default()))]);
     let id = s.doc.comments.keys().next_back().map(|k| k + 1).unwrap_or(0);
     let initials = s.user_initials();
-    s.doc.comments.insert(id, Comment { author: s.author.clone(), initials, date: now_iso(), parent: None, resolved: false, part });
+    s.doc
+        .comments
+        .insert(id, Comment { author: s.author.clone(), initials, date: now_word_date(), date_utc: now_iso(), parent: None, resolved: false, part });
     let props = Default::default();
     s.doc.insert_object(&b, InlineObject::CommentEnd { id }, &props)?;
     s.doc.insert_object(&a, InlineObject::CommentStart { id }, &props)?;
@@ -138,7 +140,10 @@ fn reply(s: &mut Session, v: &Value) -> CmdResult {
     let part = s.doc.add_part(PartKind::Comment, vec![para_block(Paragraph::with_text(text, Default::default()))]);
     let id = s.doc.comments.keys().next_back().map(|k| k + 1).unwrap_or(0);
     let initials = s.user_initials();
-    s.doc.comments.insert(id, Comment { author: s.author.clone(), initials, date: now_iso(), parent: Some(parent), resolved: false, part });
+    s.doc.comments.insert(
+        id,
+        Comment { author: s.author.clone(), initials, date: now_word_date(), date_utc: now_iso(), parent: Some(parent), resolved: false, part },
+    );
     Ok(json!({"id": id}))
 }
 
@@ -246,7 +251,8 @@ fn list_comments(s: &mut Session, _: &Value) -> CmdResult {
             .filter_map(|(id, pos)| {
                 let c = s.doc.comments.get(id)?;
                 Some(json!({
-                    "id": id, "author": c.author, "date": c.date, "resolved": c.resolved, "parent": c.parent,
+                    "id": id, "author": c.author, "date": c.date, "dateUtc": c.date_utc, "localDate": super::comment_local_date(c),
+                    "resolved": c.resolved, "parent": c.parent,
                     "text": s.doc.plain_text(StoryRef::Part(c.part)),
                     "anchor": pos.as_ref().map(pos_json),
                 }))

@@ -173,7 +173,7 @@ pub(crate) fn record(s: &mut Session, id: &str, before: &Document) {
     }
     let author = s.author.clone();
     let doc = &mut s.doc;
-    let mut r = Recorder { author, date: super::now_iso(), before: &before.revisions, revisions: &mut doc.revisions, rid: None };
+    let mut r = Recorder { author, date: super::now_word_date(), before: &before.revisions, revisions: &mut doc.revisions, rid: None };
     r.blocks(&before.body, &mut doc.body, 0);
     for (k, pb) in &before.parts {
         if let Some(pa) = doc.parts.get_mut(k) {

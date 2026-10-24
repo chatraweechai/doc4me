@@ -116,7 +116,7 @@ fn keytip_badge(ui: &Ui, rect: Rect, id: &str, name: &str) {
     let tab = ui.data(|d| d.get_temp::<String>(crate::keytips::tab_id())).unwrap_or_default();
     let controls = crate::keytips::controls_public(&tab);
     // Match by command id first; fall back to tooltip prefix, since widget tooltips carry
-    // extra text ("Paste (⌘V)") the canonical control name does not.
+    // extra text ("Paste (Ctrl+V)") the canonical control name does not.
     let Some(i) = controls
         .iter()
         .position(|c| c.id == id && id != "ui.dialog")
