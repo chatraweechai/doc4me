@@ -141,6 +141,14 @@ pub fn paint(p: &Painter, r: Rect, name: &str, c: Color32, accent: Color32) {
             pen.fill(&[(14.5, 4.0), (18.5, 4.0), (16.5, 7.0)], a);
         }
         "case" => pen.text(10.0, 10.5, 12.0, "Aa", c, false),
+        // A digit turning into the other script's: 1 → ๑ and ๑ → 1.
+        "thaidigits" | "arabicdigits" => {
+            let (from, to) = if name == "thaidigits" { ("1", "\u{0E51}") } else { ("\u{0E51}", "1") };
+            pen.text(5.0, 10.0, 11.0, from, a, false);
+            pen.line(&[(8.5, 10.0), (11.0, 10.0)]);
+            pen.fill(&[(10.5, 8.0), (12.5, 10.0), (10.5, 12.0)], c);
+            pen.text(15.5, 10.0, 12.0, to, c, true);
+        }
         "clear" => {
             pen.text(8.0, 9.0, 13.0, "A", c, false);
             pen.fill(&[(10.0, 15.0), (14.0, 11.0), (18.0, 15.0), (14.0, 19.0)], Color32::from_rgb(0xE8, 0x6F, 0xA0));

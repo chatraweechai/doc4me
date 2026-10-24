@@ -769,6 +769,23 @@ mod editing_tests {
     }
 
     #[test]
+    fn digit_conversion_skips_controls_that_cant_be_edited() {
+        let mut s = Session::new(doc4me_doc::Document::new());
+        run(&mut s, "text.insert", json!({"text": "1 "}));
+        run(&mut s, "developer.richText", json!({"tag": "n"}));
+        run(&mut s, "text.insert", json!({"text": "23"}));
+        run(&mut s, "developer.properties", json!({"control": "n", "lockEdit": true}));
+        run(&mut s, "select.all", json!({}));
+        run(&mut s, "format.thaiDigits", json!({}));
+        assert_eq!(text(&s), "\u{0E51} 23");
+        // Unlocked, its digits convert too.
+        run(&mut s, "developer.properties", json!({"control": "n", "lockEdit": false}));
+        run(&mut s, "select.all", json!({}));
+        run(&mut s, "format.thaiDigits", json!({}));
+        assert_eq!(text(&s), "\u{0E51} \u{0E52}\u{0E53}");
+    }
+
+    #[test]
     fn check_boxes_toggle_and_locks_refuse() {
         let mut s = Session::new(doc4me_doc::Document::new());
         run(&mut s, "developer.checkBox", json!({"tag": "ok"}));

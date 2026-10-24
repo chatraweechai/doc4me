@@ -148,7 +148,8 @@ fn date_of(app: &WordApp, at: &Pos) -> Option<(i64, u32, u32)> {
 }
 
 fn today() -> (i64, u32, u32) {
-    let (y, m, d) = doc4me_engine::cmd::civil_from_days((doc4me_engine::cmd::now_unix() / 86_400) as i64);
+    // The computer's local date, not UTC's.
+    let (y, m, d) = doc4me_engine::cmd::civil_from_days((doc4me_engine::cmd::now_local() / 86_400) as i64);
     (y, m, d)
 }
 

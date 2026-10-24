@@ -4,7 +4,7 @@ Doc4Me is built from this repository (`chatraweechai/doc4me`) by GitHub Actions.
 release pipeline builds the **Windows x64** installer; the packaging scripts for the other
 platforms (inherited from WordCraft) are in [`packaging/`](../packaging/) and run locally.
 
-1. Bump the version on `main`: `cargo xtask version set 1.0.1` (the one source of truth is
+1. Bump the version on `main`: `cargo xtask version set x.y.z` (the one source of truth is
    `[workspace.package] version`; the app shows it in `--version` and About, with the commit from
    `DOC4ME_BUILD_SHA`).
 2. Push to `main`. [`.github/workflows/windows-x64-installer.yml`](../.github/workflows/windows-x64-installer.yml)
@@ -12,11 +12,28 @@ platforms (inherited from WordCraft) are in [`packaging/`](../packaging/) and ru
 
 | Platform | Artifacts | Signing |
 |---|---|---|
-| Windows | x64 `doc4me-<version>-windows-x64.msi` + `doc4me-<version>-windows-x64-portable.zip` (artifact `doc4me-windows-x64`) | none yet: `packaging/windows/sign.ps1` signs when its `AZURE_*` / `WINDOWS_CERTIFICATE*` secrets exist, and warns otherwise |
+| Windows | x64 `doc4me-<version>-windows-x64.msi` + `doc4me-<version>-windows-x64-portable.zip` (artifact `doc4me-windows-x64`) | `packaging/windows/sign.ps1` signs `doc4me.exe`, `doc4me-cli.exe` and the MSI when the signing secrets below are set, and warns "leaving unsigned" otherwise (no secrets are set yet) |
 
+   The binaries are built in a step without the signing secrets (`package.ps1 -BuildOnly`), so no
+   dependency's build script or proc-macro can read them; the next step packages and signs
+   (`package.ps1 -SkipBuild`). The secrets (Settings › Secrets and variables › Actions › New
+   repository secret), either set:
+   - a certificate file: `WINDOWS_CERTIFICATE` (the .pfx, base64) and `WINDOWS_CERTIFICATE_PASSWORD`.
+     Code-signing certificates issued since 2023-06-01 keep their key in hardware (a token or an
+     HSM), so most can't be exported as a .pfx; ask the vendor for cloud signing that CI can use.
+   - Azure Trusted Signing (all six): `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`,
+     `AZURE_SIGNING_ENDPOINT`, `AZURE_SIGNING_ACCOUNT`, `AZURE_CERT_PROFILE`.
+
+   A secret that isn't set reads as empty, which `sign.ps1` treats as unset. After adding them, run
+   the workflow on `main` (without **release**) and check the log has no "leaving unsigned" warning
+   and the files carry a signature.
 3. In [`CHANGELOG.md`](../CHANGELOG.md), move the entries under `## [Unreleased]` to a new
-   `## [<version>] - YYYY-MM-DD` section, add its compare link at the bottom, and push to `main`.
-4. To publish a GitHub Release, push a tag: `git tag v1.0.0 && git push origin v1.0.0`. The same
+   `## [x.y.z] - YYYY-MM-DD` section; at the bottom add `[x.y.z]: …/compare/v<previous>...vx.y.z`
+   and change `[Unreleased]` to `…/compare/vx.y.z...HEAD`. Run the checks CI doesn't:
+   `cargo xtask ci`, the interface-text audit that is `#[ignore]`d in normal runs
+   (`cargo test -p doc4me-ui-egui i18n -- --include-ignored`) and `cargo audit`. Push to `main`.
+4. To publish a GitHub Release, push an annotated tag:
+   `git tag -a vx.y.z -m "Doc4Me x.y.z" && git push origin vx.y.z`. The same
    workflow builds the tag and creates the release `Doc4Me v<version>` with the MSI and the zip;
    the release notes are that version's `CHANGELOG.md` section (GitHub's generated notes when the
    section is missing, with a warning in the run).

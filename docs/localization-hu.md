@@ -1,6 +1,6 @@
 # Hungarian interface
 
-> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-11 · **Change:** minor (Hungarian interface catalog and regression checks) · **Target:** Doc4Me 0.5.0
+> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-11 · **Change:** minor (Hungarian interface catalog and regression checks) · **Target:** Doc4Me 1.1 (written as "0.5.0", a version never released; the catalog has been in every release since 1.0.0)
 
 Choose **File › Options › Interface language › Magyar**, or follow a Hungarian system display
 language (`hu-HU`, `hu_HU.UTF-8`). The catalog code is `hu`; `ui.language` with `{"value":"hu"}`

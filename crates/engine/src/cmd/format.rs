@@ -115,6 +115,8 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("format.changeCase", "Change Case", "Home › Font", change_case)
             .key("Shift+F3")
             .params(r#"{"mode"?: "sentence|lower|upper|title|toggle"}"#),
+        CommandSpec::new("format.thaiDigits", "Convert to Thai Digits", "Home › Font", |s, _| convert_digits(s, true)),
+        CommandSpec::new("format.arabicDigits", "Convert to Arabic Digits", "Home › Font", |s, _| convert_digits(s, false)),
         CommandSpec::new("format.clear", "Clear All Formatting", "Home › Font", clear),
         // Word's Ctrl+Space; ⌘Space is Spotlight, so Word for Mac uses ⌃Space.
         CommandSpec::new("format.resetChar", "Reset Character Formatting", "Home › Font", reset_char).key(super::mac_or("Ctrl+Space", "Mod+Space")),
@@ -420,6 +422,87 @@ fn change_case(s: &mut Session, v: &Value) -> CmdResult {
         para.touch();
         // The selection keeps covering the converted text when its length changed (#420).
         let spans: Vec<(usize, usize, usize)> = groups.iter().map(|(x, y, n)| (*x, *y, n.len())).collect();
+        for end in [&mut s.sel.anchor, &mut s.sel.focus] {
+            if end.story == a.story && end.path == path {
+                end.off = map_offset(&spans, end.off);
+            }
+        }
+    }
+    sel_result(s)
+}
+
+/// The other script's form of a digit: 0–9 → ๐–๙ when `thai`, ๐–๙ → 0–9 otherwise.
+fn swap_digit(c: char, thai: bool) -> Option<char> {
+    match c {
+        '0'..='9' if thai => char::from_u32(u32::from(c) - u32::from('0') + 0x0E50),
+        '\u{0E50}'..='\u{0E59}' if !thai => char::from_u32(u32::from(c) - 0x0E50 + u32::from('0')),
+        _ => None,
+    }
+}
+
+/// Convert to Thai Digits / Convert to Arabic Digits: 0–9 ↔ ๐–๙ in the selection, or in the word
+/// at the insertion point. Each run keeps its formatting and text already deleted is left as it
+/// is; with Track Changes on, each changed stretch becomes a deletion and an insertion.
+fn convert_digits(s: &mut Session, thai: bool) -> CmdResult {
+    let (a, b) = s.sel.ordered();
+    let (a, b) = if a == b { target(s).unwrap_or((a, b)) } else { (a, b) };
+    if a == b {
+        return sel_result(s);
+    }
+    let tracked = s.doc.settings.track_changes;
+    // A control whose contents can't be edited, or still showing its placeholder, stays as it is.
+    let fenced: Vec<doc4me_doc::ControlRange> =
+        s.doc.control_ranges(a.story).into_iter().filter(|r| !r.control.lock.can_edit() || r.control.showing_placeholder).collect();
+    for path in s.doc.paths_between(&a, &b) {
+        let groups = {
+            let Some(p) = s.doc.para(a.story, &path) else { continue };
+            let from = if path == a.path { a.off } else { 0 };
+            let to = if path == b.path { b.off } else { p.len() };
+            let Some(src) = p.text.get(from..to) else { continue };
+            let deleted: Vec<std::ops::Range<usize>> = p.run_ranges().filter(|(_, c)| c.del.is_some()).map(|(r, _)| r).collect();
+            let conv: Vec<String> = src
+                .char_indices()
+                .map(|(i, c)| {
+                    let at = Pos { story: a.story, path: path.clone(), off: from + i };
+                    match swap_digit(c, thai) {
+                        Some(d) if !deleted.iter().any(|r| r.contains(&at.off)) && !fenced.iter().any(|r| r.contains(&at)) => d.to_string(),
+                        _ => c.to_string(),
+                    }
+                })
+                .collect();
+            case_groups(p, from, src, &conv)
+        };
+        if groups.is_empty() {
+            continue;
+        }
+        // (start, end, length after), right to left so the earlier offsets hold.
+        let mut spans: Vec<(usize, usize, usize)> = Vec::with_capacity(groups.len());
+        for (start, end, new) in groups.iter().rev() {
+            let len = |s: &Session| s.doc.para(a.story, &path).map(|p| p.len()).unwrap_or(0);
+            let before = len(s);
+            let mut props = s.doc.para(a.story, &path).map(|p| p.props_of_char(*start).clone()).unwrap_or_default();
+            if tracked {
+                let x = Pos { story: a.story, path: path.clone(), off: *start };
+                let y = Pos { off: *end, ..x.clone() };
+                super::track_delete(s, &x, &y)?;
+                // Text marked deleted stays, and the new digits follow it; the author's own
+                // insertion is gone, and they take its place.
+                let at = if len(s) == before { *end } else { *start };
+                props.ins = Some(super::new_revision(s, doc4me_doc::RevisionKind::Insert));
+                props.del = None;
+                props.fmt_change = None;
+                s.doc.para_mut(a.story, &path)?.insert_text(at, new, &props)?;
+            } else {
+                let para = s.doc.para_mut(a.story, &path)?;
+                para.delete(*start, *end)?;
+                para.insert_text(*start, new, &props)?;
+            }
+            let grown = len(s).saturating_add(end - start).saturating_sub(before);
+            spans.push((*start, *end, grown));
+        }
+        spans.reverse();
+        s.doc.para_mut(a.story, &path)?.touch();
+        // The selection keeps covering the converted text (Thai digits are three bytes each).
         for end in [&mut s.sel.anchor, &mut s.sel.focus] {
             if end.story == a.story && end.path == path {
                 end.off = map_offset(&spans, end.off);

@@ -1,6 +1,6 @@
 # UI parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-12 · **Change:** trivial (Navigation headings truncate in the resizable pane, #759; previously trivial: Find and Replace special characters and wildcards, #543; previously trivial: Customize Ribbon and the Quick Access Toolbar, #379; previously: major, first version; ribbon, dialogs, shortcuts and on-canvas interaction measured from `crates/ui-egui` and the command registry) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-12 · **Change:** trivial (Navigation headings truncate in the resizable pane, #759; previously trivial: Find and Replace special characters and wildcards, #543; previously trivial: Customize Ribbon and the Quick Access Toolbar, #379; previously: major, first version; ribbon, dialogs, shortcuts and on-canvas interaction measured from `crates/ui-egui` and the command registry) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 How Doc4Me looks and feels next to Word: ribbon, dialogs, panes, keyboard, mouse and touch.
 Typing behaviour has its own checklist ([`typing-parity.md`](typing-parity.md)). All assets are our

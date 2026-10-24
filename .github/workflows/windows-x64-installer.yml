@@ -59,10 +59,26 @@ jobs:
           wix extension add -g WixToolset.UI.wixext/5.0.2
           wix extension add -g WixToolset.Util.wixext/5.0.2
 
-      # Signing is skipped (with a warning) when no signing secrets are configured.
-      - name: Build MSI + portable zip
+      # Built without the signing secrets in the environment, so no build script or proc-macro
+      # of a dependency can read them; only the packaging step below gets them.
+      - name: Build doc4me + doc4me-cli
         shell: pwsh
-        run: pwsh packaging/windows/package.ps1 -Arch x64
+        run: pwsh packaging/windows/package.ps1 -Arch x64 -BuildOnly
+
+      # Signing is skipped (with a warning) when no signing secrets are configured: a secret
+      # that isn't set reads as empty here, and packaging/windows/sign.ps1 treats empty as unset.
+      - name: Sign and package MSI + portable zip
+        shell: pwsh
+        env:
+          WINDOWS_CERTIFICATE: ${{ secrets.WINDOWS_CERTIFICATE }}
+          WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          AZURE_SIGNING_ENDPOINT: ${{ secrets.AZURE_SIGNING_ENDPOINT }}
+          AZURE_SIGNING_ACCOUNT: ${{ secrets.AZURE_SIGNING_ACCOUNT }}
+          AZURE_CERT_PROFILE: ${{ secrets.AZURE_CERT_PROFILE }}
+        run: pwsh packaging/windows/package.ps1 -Arch x64 -SkipBuild
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:

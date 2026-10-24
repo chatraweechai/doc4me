@@ -20,11 +20,15 @@
 .EXAMPLE
   pwsh packaging/windows/package.ps1 -Arch x64
   pwsh packaging/windows/package.ps1 -Arch x86 -SkipBuild
+  pwsh packaging/windows/package.ps1 -Arch x64 -BuildOnly  # then -SkipBuild with the signing secrets set
   pwsh packaging/windows/package.ps1 -Arch arm64     # cross-compiled; needs the MSVC ARM64 build tools
 #>
 param(
   [ValidateSet('x64', 'x86', 'arm64')] [string] $Arch = 'x64',
-  [switch] $SkipBuild
+  [switch] $SkipBuild,
+  # Build the binaries and stop: CI builds without the signing secrets in the environment (no
+  # build script or proc-macro can read them), then packages and signs with -SkipBuild.
+  [switch] $BuildOnly
 )
 $ErrorActionPreference = 'Stop'
 $Root = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
@@ -66,6 +70,11 @@ if (-not $SkipBuild) {
   # Fail the build (rather than warn) if the icon/VERSIONINFO can't be embedded.
   $env:DOC4ME_REQUIRE_WINRES = '1'
   Invoke-Native "cargo build ($Target)" { cargo build --release --locked -p doc4me -p doc4me-cli --target $Target }
+}
+if ($BuildOnly) {
+  if ($SkipBuild) { throw '-BuildOnly and -SkipBuild together do nothing' }
+  Write-Output "built $Target; package with -SkipBuild"
+  exit 0
 }
 
 $Bin = Join-Path $TargetDir "$Target\release"

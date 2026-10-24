@@ -1,6 +1,6 @@
 # Doc4Me architecture
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-10 · **Change:** minor (`proof` is per language: English and Polish; previously major: first committed version; `plan/architecture.md` is local-only) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (Thai proofing; CI section matches the one workflow; previously minor: `proof` is per language: English and Polish; previously major: first committed version; `plan/architecture.md` is local-only) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 How Doc4Me is built today (origin/main `40c5d51`). The longer design notes in
 `plan/architecture.md` are gitignored and local to the original author's machine; this file is the
@@ -17,7 +17,7 @@ winit or rfd.
 | L0 | `geom` | 0.2k | Units (points, twips, EMU, inches, cm), rectangles, measurement parsing |
 | L1 | `doc` | 10.0k | Document model: stories, paragraphs, runs, tables, sections, styles, numbering, fields, notes, comments, revisions, equations (OMML-shaped math tree, linear/LaTeX input); edit primitives; bidi |
 | L1 | `fonts` | 2.3k | Font database (bundled OFL + system fonts), metrics, outlines, shaping with HarfRust, Word font substitution (`word.rs`: Carlito ↔ Calibri, Caladea ↔ Cambria, Liberation ↔ Arial/Times/Courier), OpenType MATH |
-| L1 | `proof` | 3.8k | Proofing per language (`ProofLang` from a run's `w:lang`): English (public-domain word list) and Polish (installed Hunspell dictionary through a Hunspell-style affix engine) spelling and suggestions, rule-based grammar for both, hyphenation dictionary and Liang patterns (English, Polish) |
+| L1 | `proof` | 3.8k | Proofing per language (`ProofLang` from a run's `w:lang`): English (public-domain word list), Polish (installed Hunspell dictionary through a Hunspell-style affix engine) and Thai (common misspellings) spelling and suggestions, rule-based grammar for English and Polish, hyphenation dictionary and Liang patterns (English, Polish) |
 | L2 | `layout` | 9.6k | Shaping runs, line breaking, tabs, lists, tables (row splitting, floating tables), pagination, headers/footers, notes, floating objects and wrap, math layout, fields, hit testing; produces a display list |
 | L2 | `docx` | 8.4k | OOXML WordprocessingML reader and writer (Transitional and Strict namespaces, `.docx/.docm/.dotx/.dotm`), OMML, custom properties, VBA parts preserved |
 | L2 | `docbin` | 4.4k | Word 97-2003 `.doc` reader ([MS-DOC]: FIB, piece table, FKPs, SPRMs, stylesheet, lists, tables, notes, pictures) over a CFB container |
@@ -57,8 +57,9 @@ winit or rfd.
 - `cargo xtask ci`: fmt, clippy `-D warnings`, tests, asset attribution, layering, wasm build.
 - `cargo xtask parity` regenerates [`parity-checklist.md`](parity-checklist.md); a test keeps the
   catalog percentage above a floor that only rises.
-- GitHub Actions on PRs: packaging lint, and FreeBSD / Windows ARM64 when build files change;
-  release builds on pushes to `release`.
+- GitHub Actions: one workflow, `windows-x64-installer.yml`, on pushes to `main`, `v*` tags and on
+  demand. It builds the Windows x64 MSI and portable zip and runs `doc4me-cli --version`; it runs
+  no fmt, clippy or tests, so run `cargo xtask ci` before pushing. See [`releasing.md`](releasing.md).
 
 ## Revision history
 

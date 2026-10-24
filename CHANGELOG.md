@@ -11,8 +11,48 @@
 
 ## [Unreleased]
 
+### เพิ่ม
+
+- **ปุ่มแปลงเลขอารบิกเป็นเลขไทย และแปลงเลขไทยเป็นเลขอารบิก บนริบบอน หน้าหลัก › ฟอนต์ (Home › Font)** (ถัดจากปุ่มเปลี่ยนตัวพิมพ์เล็ก-ใหญ่)
+  - เหตุผล: ผู้ใช้สั่งเพิ่ม เอกสารราชการไทยมักใช้เลขไทย แต่ Word ไม่มีคำสั่งนี้ (ต้องใช้ค้นหาและแทนที่ทีละตัวหรือ macro)
+  - คำสั่งใหม่ `format.thaiDigits` "Convert to Thai Digits" (0–9 → ๐–๙) และ `format.arabicDigits` "Convert to Arabic Digits" (๐–๙ → 0–9) ใน `crates/engine/src/cmd/format.rs` (`convert_digits`, `swap_digit`)
+  - ปุ่มเล็กสองปุ่มใน `crates/ui-egui/src/ribbon.rs` ไอคอน `thaidigits` (1 → ๑) และ `arabicdigits` (๑ → 1) วาดใน `crates/ui-egui/src/icons.rs`
+  - การทำงาน
+    - แปลงเฉพาะส่วนที่เลือก ถ้าไม่ได้เลือกจะแปลงคำหรือตัวเลขที่เคอร์เซอร์อยู่ (เหมือนเปลี่ยนตัวพิมพ์เล็ก-ใหญ่) อักขระอื่นไม่เปลี่ยน
+    - แต่ละ run คงรูปแบบเดิม การเลือกยังครอบข้อความที่แปลงแล้ว (เลขไทยยาว 3 ไบต์ใน UTF-8) และเลิกทำได้ในขั้นเดียว
+    - การเลือกแบบคอลัมน์แปลงทีละแถว (`cmd/column.rs`)
+    - เมื่อเปิดติดตามการเปลี่ยนแปลง ตัวเลขเดิมถูกทำเครื่องหมายลบและเลขใหม่เป็นข้อความแทรก ยอมรับหรือปฏิเสธได้ ข้อความที่ถูกลบไว้แล้วไม่ถูกแตะ ส่วนตัวเลขที่ผู้เขียนคนเดียวกันแทรกไว้ถูกแทนที่ตรงๆ
+    - ไม่แปลงตัวเลขใน content control ที่ล็อกการแก้เนื้อหา หรือที่ยังแสดงข้อความแนะนำ
+    - การจำกัดการจัดรูปแบบของ Restrict Editing ไม่ปิดสองคำสั่งนี้ เพราะเปลี่ยนข้อความไม่ใช่รูปแบบ (`cmd/protect.rs` เหมือนเปลี่ยนตัวพิมพ์เล็ก-ใหญ่) ส่วนเอกสารที่ป้องกันแบบอ่านอย่างเดียวยังกันการแก้ไขตามเดิม
+  - คำแปลชื่อคำสั่งครบ 18 ภาษาใน `crates/ui-egui/src/i18n/*.tsv` (ไทย: "แปลงเป็นเลขไทย" และ "แปลงเป็นเลขอารบิก")
+  - ไม่ได้เพิ่มลงแค็ตตาล็อก parity (`crates/engine/src/catalog.rs`) เพราะ Word ไม่มีคำสั่งนี้ ตัวเลข parity จึงไม่เปลี่ยน
+  - ผู้ใช้และความเข้ากันได้: ไฟล์ .docx เดิมเปิดและบันทึกเหมือนเดิม; ตัวเลขที่แปลงแล้วเป็นอักขระ U+0E50–U+0E59 จริงในไฟล์ ต่างจาก File › Options › Numerals ซึ่งเปลี่ยนแค่การแสดงผล; ติดตั้งทับรุ่นเดิมได้ตามปกติ
+  - ตรวจสอบ: เทสต์ใหม่ `digits_convert_between_arabic_and_thai`, `digit_conversion_keeps_each_runs_formatting`, `digit_conversion_under_track_changes_is_a_revision` (`crates/engine/src/tests.rs`) และ `digit_conversion_skips_controls_that_cant_be_edited` (`cmd/controls.rs`) ผ่าน; `cargo test -p doc4me-engine` ผ่าน 376 + 13 + 8; `cargo test -p doc4me-ui-egui --lib -- --include-ignored i18n ribbon icons widgets` ผ่าน 82 รายการ (รวม `every_tab_and_command_is_translated`, การตรวจว่าแค็ตตาล็อกทุกภาษามีคีย์ชุดเดียวกัน และ audit `untranslated_interface_text`); `cargo fmt --all --check` ผ่าน
+
 ### เปลี่ยนแปลง
 
+- **เอกสารที่ล้าสมัยหลังออก 1.1.1 และเป้าหมาย parity เป็น Word for Windows** (handoff ข้อ 2 และ 5.6)
+  - หัวเอกสาร **Target** ของ `ROADMAP.md` และ `docs/` 10 ไฟล์ (architecture, file-format-parity, gaps, hardware-parity, layout-parity, localization-parity, roadmap, target-app-parity, typing-parity, ui-parity) เปลี่ยนจาก Word for Mac 16.113.4 เป็น "Microsoft Word (Microsoft 365) for Windows" โดยไม่ใส่เลขรุ่นเพราะยังไม่รู้ build ที่ใช้เทียบ และบอกว่าค่าที่วัดถึง 2026-10-21 วัดกับ Word for Mac และยังไม่ได้วัดใหม่บน Windows; alpha gate ใน `docs/roadmap.md` เปลี่ยนแพลตฟอร์มหลักเป็น Windows พร้อมบอกว่ายังไม่ได้รันใหม่
+  - `docs/gaps.md`: #2 เหลือแค่ Word ink (`w14:contentPart`) เพราะ drawing canvas (`wpc`) อ่านเขียนได้แล้ว; #8 เพิ่มตัวตรวจตัวสะกดไทย; #9 เหลือแค่ `.doc` แบบ RC4/XOR เพราะ .docx ที่เข้ารหัสเปิดและบันทึกได้ (`crates/docx/src/crypt.rs`); #10 group มีแล้ว (`arrange.group`); #11 ฝรั่งเศสมีแล้ว (`fr.tsv`); #15 แหล่งอ้างอิงอ่านเขียน `b:Sources` ได้แล้ว; #17 `para.asianTypography` อยู่ใน catalog แล้ว; ตัดข้อความว่ามี PR เปิดอยู่ของ Clipboard pane, Manage Styles และ Group (มีคำสั่งครบแล้ว); เพิ่มแถว #30 ภาษาไทย (ยังไม่ตรวจไวยากรณ์, การตัดบรรทัดอาจต่างจาก Word, ไม่จำลอง ligature ทางเลือกของ TH Sarabun, ค่าของ TH SarabunIT๙ ใช้ค่าของ TH Sarabun New)
+  - `docs/localization-parity.md`: 19 ภาษารวมไทย, จำนวนรายการ 2,040–2,458, ภาษาไทยมี 2,458 รายการ, ตัวตรวจภาษาอังกฤษ โปแลนด์ และไทย, ค่าของ IT๙ เป็นค่าอนุมาน และปุ่มแปลงเลข
+  - `docs/target-app-parity.md`: หัวข้อ headline บอกว่าวัดใน WordCraft (คอมมิต `a99dddc` ไม่มีใน repo นี้), กล่อง Font ขาดแค่ stylistic set, number form และ number spacing, ตัวตรวจภาษาไทย, การแลกไฟล์กับ Word (chart/SmartArt/OLE เขียนกลับได้แล้ว column balancing และ footnote ต่อหน้ามีแล้ว), 19 ภาษา UI
+  - `docs/architecture.md`: ตัวตรวจภาษาไทย และส่วน CI ตรงกับ workflow เดียวที่มีจริง (ไม่มี CI บน PR หรือ branch `release`)
+  - `docs/roadmap.md`: 609 คำสั่ง, M14 เป็น Release ของ Doc4Me (ไม่ใช่ v0.1.0–v0.4.0 ของ WordCraft), M15 19 ภาษาและตัวตรวจภาษาไทย, ตัด column balancing กับ footnote continuation ออกจากงานที่เหลือ
+  - `ROADMAP.md`: แถว Releases เป็น v1.1.1, ตัวเลข 609 คำสั่ง 1,758 เทสต์ ~181,000 บรรทัด (นับจากซอร์ส), Why alpha / Why not beta ไม่อ้างว่ามี build ที่ลงนามทุกแพลตฟอร์มและไม่นับฟีเจอร์ที่มีแล้วว่ายังขาด, จำนวนรายการของ tr (2,414) และ hu (2,446), Upcoming ข้อ 3, 5, 6 และบันทึกความคืบหน้า 2026-10-22 กับ 2026-10-24
+  - `docs/localization-hu.md`, `docs/localization-tr.md`: Target "Doc4Me 0.5.0" ซึ่งเป็นรุ่นที่ไม่เคยมี เปลี่ยนเป็น Doc4Me 1.1
+  - `README.th.md`: หัวข้อ "ภาษาไทยใน Doc4Me" เพิ่มปุ่มจัดกระจายแบบไทยของ 1.1.1 และปุ่มแปลงเลข
+  - ยังไม่ได้ทำ: ตัวเลข parity ของ catalog (`ROADMAP.md` แถวแรก, `docs/parity-checklist.md`) ต้องรัน `cargo xtask parity`; ข้อความที่อ้าง PR และ issue ของ WordCraft รอเจ้าของ repo ตัดสินใจ (handoff ข้อ 5.7)
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: ข้อเท็จจริงแต่ละข้อตรวจกับโค้ดด้วย grep (`crypt.rs`, `b:Sources` ใน `crates/docx/src/read/mod.rs` และ `write/mod.rs`, `arrange.group`, `edit.clipboardPane`, `styles.manage`, `wpc` ใน `crates/docx/src/xml.rs`, ไม่มี `contentPart`, การ balance คอลัมน์และการแบ่ง footnote ใน `crates/layout/src/lib.rs`); จำนวนรายการนับจากไฟล์ `.tsv`; จำนวนคำสั่งนับ id ของ `CommandSpec::new` ที่ไม่ซ้ำ; `git diff --stat` ตรวจว่าแก้แค่บรรทัดที่ตั้งใจ
+
+- **CI ลงนามโค้ดได้เมื่อมี secret และ build โดยไม่มี secret ใน environment** (`.github/workflows/windows-x64-installer.yml`, `packaging/windows/package.ps1`, `docs/releasing.md` ข้อ 2)
+  - เหตุผล: workflow ไม่เคยส่ง `secrets.*` ให้ `packaging/windows/sign.ps1` จึงไม่ลงนามแม้เจ้าของ repo จะใส่ secret แล้ว (handoff ข้อ 5.2 ผู้ใช้ตัดสินใจให้ลงนาม)
+  - แยก step เดิมเป็นสองขั้น: "Build doc4me + doc4me-cli" (`package.ps1 -BuildOnly` สวิตช์ใหม่ build แล้วหยุด ไม่มี secret) และ "Sign and package MSI + portable zip" (`package.ps1 -SkipBuild`) ซึ่งได้ `WINDOWS_CERTIFICATE`, `WINDOWS_CERTIFICATE_PASSWORD`, `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_SIGNING_ENDPOINT`, `AZURE_SIGNING_ACCOUNT` และ `AZURE_CERT_PROFILE` จาก `secrets.*` ชื่อตาม `sign.ps1:7-10`
+  - การแยกทำให้ build script และ proc-macro ของ dependency อ่าน secret ไม่ได้ ตัวเลือกและ environment ของ `cargo build` เหมือนเดิม (`--release --locked`, `+crt-static`, `DOC4ME_REQUIRE_WINRES`)
+  - secret ที่ยังไม่ได้ใส่อ่านได้ค่าว่าง `sign.ps1` ตรวจด้วย `[bool]$env:WINDOWS_CERTIFICATE` และต้องมี `AZURE_*` ครบหกค่า จึงยังข้ามการลงนามพร้อมคำเตือน "leaving unsigned" เหมือนเดิม
+  - `docs/releasing.md`: บอกชื่อ secret ที่ตั้งใน Settings › Secrets and variables › Actions, ข้อจำกัดของใบรับรองที่ออกตั้งแต่ 2023-06-01 (กุญแจต้องอยู่ในฮาร์ดแวร์ ส่วนใหญ่ส่งออกเป็น .pfx ไม่ได้) และวิธีตรวจหลังใส่ secret; ตัวอย่างเวอร์ชันเปลี่ยนเป็น x.y.z, ใช้ `git tag -a`, เพิ่มขั้นแก้ลิงก์ `[Unreleased]` เป็น `compare/vx.y.z...HEAD` และขั้นรัน `cargo xtask ci`, audit ที่ติด `#[ignore]` และ `cargo audit` ก่อนออกรุ่น
+  - ผู้ใช้: ตอนนี้ยังไม่มี secret ไฟล์ MSI และ zip จึงยังไม่ลงนามเหมือนเดิม เมื่อเจ้าของ repo ใส่ secret แล้ว `doc4me.exe`, `doc4me-cli.exe` และ MSI จะลงนาม การติดตั้งทับรุ่นเดิมไม่เปลี่ยน (`UpgradeCode` เดิม)
+  - ตรวจสอบ: อ่าน `sign.ps1:48-56` และ `package.ps1` แล้วเทียบเส้นทาง `-SkipBuild`; ผลบน Windows ดูได้จาก run ของคอมมิตนี้บน `main` (container ไม่มี pwsh และ Windows)
 - **คู่มือออกรุ่น: ห้าม push ไป `main` จนกว่า job `release` ที่สั่งจากแท็บ Actions จะจบ โดยเฉพาะการแก้ไฟล์ workflow** (`docs/releasing.md` ข้อ 4)
   - เหตุผล: รอบแรกของ Release v1.1.1 (run 39783304886 ที่ `858b9bd`) ล้มด้วย `HTTP 403: Resource not accessible by integration` ตอน `gh release create` เรียก `POST /repos/chatraweechai/doc4me/releases` (13:14:20 UTC) ก่อนหน้านั้น `main` ถูก push `e06edac` ซึ่งแก้ `.github/workflows/windows-x64-installer.yml` (13:11:46 UTC) คอมมิตที่จะติด tag จึงมีไฟล์ workflow ต่างจาก default branch และไม่มี branch หรือ tag ชี้อยู่
   - กลไกนี้ GitHub เขียนไว้ใน [เอกสาร REST หัวข้อ Create a release](https://docs.github.com/en/rest/releases/releases#create-a-release): ถ้าคอมมิตเป้าหมายเพิ่มหรือแก้ไฟล์ใต้ `.github/workflows/` เมื่อเทียบกับ default branch token ต้องมีสิทธิ์แก้ workflow ไม่เช่นนั้นตอบ 404 หรือ `403 Resource not accessible by integration` และ `GITHUB_TOKEN` ได้สิทธิ์นี้ไม่ได้ ส่วน [changelog ของ GitHub 2023-11-02](https://github.blog/changelog/2023-11-02-github-actions-enforcing-workflow-scope-when-creating-a-release/) เขียนเงื่อนไขว่าเป็นคอมมิตที่แก้ไฟล์ workflow และไม่มี branch หรือ tag ชี้อยู่ รอบแรกเข้าทั้งสองแบบ
@@ -23,6 +63,15 @@
   - ตรวจหลัง push (คอมมิต `670f22b`): ฉบับแรกสรุปเองจากการเทียบสองรอบว่าตัวการคือไฟล์ workflow ไม่ใช่การที่ `main` ขยับ และบอกว่า push ไฟล์อื่นได้ ซึ่งการเทียบนั้นยืนยันไม่ได้ จึงแก้ให้อ้างเอกสารของ GitHub และให้งด push ทั้งหมด; เวลา 13:11:49 และ 13:42:43 ที่ใช้ก่อนหน้าเป็นเวลาสร้าง run ไม่ใช่เวลา push
 
 ### แก้ไข
+
+- **วันที่และเวลาที่แสดงผู้ใช้เป็นเวลาของเครื่อง ไม่ใช่ UTC** (`crates/engine/src/cmd/mod.rs` `local_offset_secs`, `shift_secs`, `now_local`)
+  - อาการเดิม: ผู้ใช้ในไทย (UTC+7) เห็นคำทักทายบนหน้า Home ของ backstage เป็น "สวัสดีตอนเช้า" ไปถึง 18:59 น., Insert › Date and Time และฟิลด์ DATE/TIME ได้วันของเมื่อวานช่วง 00:00–06:59 น. และเวลาช้าไป 7 ชั่วโมง, และ "วันนี้" ในตัวเลือกวันที่ของ content control ก็เป็นวันตาม UTC
+  - สาเหตุ: `now_iso` และ `iso_from_unix_secs` ให้เวลา UTC และไม่มีโค้ดส่วนไหนอ่าน time zone ของเครื่อง
+  - แก้: `format_date` (`cmd/insert.rs`, ใช้กับ Insert › Date and Time, การอัปเดตฟิลด์ DATE/TIME, หน้าปก และเอกสารตัวอย่าง), `today` (`crates/ui-egui/src/content_controls.rs`) และคำทักทาย (`crates/ui-egui/src/backstage.rs`) ใช้ `now_local` ซึ่งเลื่อนเวลา Unix ตาม offset ของเครื่อง: desktop อ่าน time zone ของระบบผ่าน crate `chrono` (Windows ผ่าน API ของระบบ, Linux/macOS ผ่าน `TZ` และ `/etc/localtime`), เว็บอ่าน `Date.getTimezoneOffset` ของเบราว์เซอร์ อ่านไม่ได้ให้ offset 0
+  - ไม่เปลี่ยน: วันที่ที่เก็บในไฟล์ (`w:date` ของ revision และ comment, `core.modified`, รุ่นของเอกสาร) ยังเป็น UTC ลงท้าย `Z` ตาม ISO-8601 เพราะยังไม่ได้ตรวจว่า Word for Windows เขียนค่าแบบไหน
+  - dependency ใหม่: `chrono` 0.4 (ได้ 0.4.45 พร้อม `iana-time-zone` 0.1.65 และ `iana-time-zone-haiku` 0.1.2 ใน `Cargo.lock`; `default-features = false`, `features = ["clock"]`) เฉพาะ target ที่ไม่ใช่ wasm32 ประกาศใน `[workspace.dependencies]` ของ `Cargo.toml` และ `crates/engine/Cargo.toml` เลือกเพราะ workspace ห้าม `unsafe` (`unsafe_code = "forbid"`) จึงเรียก API ของระบบเองไม่ได้ สัญญาอนุญาต MIT/Apache-2.0
+  - ผู้ใช้: ไฟล์ .docx เดิมไม่เปลี่ยน; ฟิลด์ DATE ที่อัปเดตใหม่ได้วันที่ตามเวลาเครื่อง; ติดตั้งทับได้ตามปกติ
+  - ตรวจสอบ: เทสต์ใหม่ `local_time_is_the_unix_time_moved_by_the_offset` (`cmd/mod.rs`: 00:30 UTC เป็น 07:30 ที่ UTC+7 และ 20:30 ของวันก่อนที่ UTC−4, การตัดที่ขอบ และ offset ของเครื่องอยู่ระหว่าง UTC−12 ถึง UTC+14) ผ่าน; container ตั้งเป็น UTC จึงยังไม่ได้ลองบนเครื่องที่ตั้ง UTC+7 จริง
 
 - **ข้อมูลใน `[1.1.1]` ที่ล้าสมัย: Release v1.1.1 ออกจากแท็บ Actions ได้แล้ว** (บันทึกเป็นรายการใหม่ตามกติกา ไม่แก้หัวข้อ `[1.1.1]`)
   - หัวข้อ `[1.1.1]` › เปลี่ยนแปลง › ข้อจำกัดที่ทราบ บอกว่าออก Release ผ่าน workflow ไม่ได้และเจ้าของ repo ต้อง push tag เอง ตอนนี้ไม่จริงแล้ว: [Doc4Me v1.1.1](https://github.com/chatraweechai/doc4me/releases/tag/v1.1.1) ออกเมื่อ 2026-10-22 13:51 UTC โดย [run 39788628618](https://github.com/chatraweechai/doc4me/actions/runs/39788628618) (workflow_dispatch `release: true`)
@@ -36,6 +85,15 @@
     - zip มี `doc4me.exe`, `doc4me-cli.exe`, ไฟล์สัญญาอนุญาต และ README รวม 12 ไฟล์; `doc4me.exe` มี FileVersion และ ProductVersion 1.1.1
     - MSI มี ProductVersion 1.1.1 และ `UpgradeCode` เดียวกับ 1.1.0 จึงติดตั้งทับได้
     - เนื้อหาบันทึกบนหน้า Release ตรงกับหัวข้อ `[1.1.1]` ของ `be5893e` ทุกไบต์
+
+### ความปลอดภัย
+
+- **ถอนสิทธิ์ push tag แบบไม่ถามของ Claude Code** (`.claude/settings.json`)
+  - เจ้าของ repo ลบไฟล์นี้ทั้งไฟล์ในคอมมิต `e5214c4` (2026-10-23) ไฟล์มีแค่ `permissions.allow` สองรายการ คือ `Bash(git tag -a v*)` และ `Bash(git push origin v*)` บันทึกในคอมมิตนี้เพราะคอมมิตนั้นไม่มีรายการใน CHANGELOG
+  - เหตุผล: การอนุญาตแบบไม่ถามเปิดทางให้ push tag สาธารณะ (ซึ่งสร้าง Release) โดยไม่มีการยืนยัน ทั้งที่ตอนนี้ออกรุ่นผ่าน workflow_dispatch และ session บนคลาวด์ push tag ไม่ได้อยู่แล้ว (handoff ข้อ 5.4)
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: `git show --stat e5214c4` ลบ `.claude/settings.json` 8 บรรทัด และไม่มีไฟล์ใต้ `.claude/` เหลือใน repo
+- **secret ของการลงนามโค้ดไม่อยู่ใน environment ระหว่าง `cargo build` ใน CI** ดูรายการ "CI ลงนามโค้ดได้เมื่อมี secret" ในหมวดเปลี่ยนแปลง
 
 ## [1.1.1] - 2026-10-22
 

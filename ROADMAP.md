@@ -2,7 +2,7 @@
 
 **Stage: alpha** · next: beta, ~15 points (60% → 75% ready for real work) and ~150–230 h away
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-21 · **Change:** trivial (Doc4Me 1.1.0 release; previously trivial: Thai interface catalog; previously trivial: Thai proofing, Thai counting, TH Sarabun New/PSK at their own size, Word for Windows line spacing; previously trivial: Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (Doc4Me 1.1.1 and the Thai digit conversion; target is Word for Windows; counts and stale gaps corrected; previously trivial: Doc4Me 1.1.0 release; previously trivial: Thai interface catalog; previously trivial: Thai proofing, Thai counting, TH Sarabun New/PSK at their own size, Word for Windows line spacing; previously trivial: Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Doc4Me aims for complete parity with Microsoft Word, then goes further on speed, openness and
 agent control. This page is the summary; the assessment is
@@ -21,8 +21,8 @@ agent control. This page is the summary; the assessment is
 | **Essentials user** | **~63%** | estimated: core-feature depth × discounts for launch (×0.90), discoverability (×0.95), opening received files (×0.92) |
 | Remaining to **beta** | **~150–230 h** of Opus 5.5 agent wall-clock (gaps #1–#7) | estimated |
 | Remaining to **full parity** with Word desktop | **~750–1,250 h** (70–80% parallelizable) | estimated |
-| Commands / tests / code | 433 commands · 855 tests + 10 property blocks · ~88,700 lines of Rust | measured (source) |
-| Releases | Doc4Me v1.1.0 (2026-10-21, GitHub Release; v1.0.0 of 2026-10-15 was built by Actions but never tagged): Windows MSI and portable zip, x64, unsigned, built by GitHub Actions (WordCraft, upstream, last shipped v0.4.0 on every platform) | measured |
+| Commands / tests / code | 609 commands · 1,758 tests · ~181,000 lines of Rust (2026-10-24) | measured (source: `CommandSpec::new` ids, `#[test]` functions, `.rs` lines in `crates`, `apps`, `xtask`) |
+| Releases | Doc4Me v1.1.1 (2026-10-22, GitHub Release, made from the Actions tab; v1.1.0 of 2026-10-21; v1.0.0 of 2026-10-15 was built by Actions but is not tagged yet): Windows MSI and portable zip, x64, unsigned, built by GitHub Actions (WordCraft, upstream, last shipped v0.4.0 on every platform) | measured |
 
 Hours are calibrated from this repo's PRs (equations #191: ~9.7k lines in ~5 h; `.doc` reader
 #145: ~4.5k lines in ~10 h; layout fidelity PRs run 5–10× slower per line). The earlier "≈120–150 h
@@ -40,13 +40,12 @@ discounts and the user evidence (120 issues from outside users, 4 praise, 0 "swi
 | Essentials user | **~63%** | **~90–140 h** (~50% parallelizes) | Install/launch stability, opening files people send (corpus subset, chart fallbacks), native printing, picture handling, English spelling depth |
 
 **Why alpha:** the core workflows (write, format, styles, lists, tables, references, review, mail
-merge, open and save .docx) work end to end and ship as signed builds on every desktop platform
-and the web. **Why not beta:** DOCX has never been tested on real-world files; charts, SmartArt and
-OLE objects are dropped silently; pagination differs from Word (no Aptos-metric font, no column
-balancing or footnote continuation); content controls are lost; there is open field evidence of
+merge, open and save .docx) work end to end and ship as an unsigned Windows x64 MSI and portable
+zip (CI signs once the owner adds a certificate; no other platform is packaged yet). **Why not beta:** DOCX has never been tested on real-world files; Word ink is dropped
+silently; pagination differs from Word (no Aptos-metric font); there is open field evidence of
 a startup crash and several hangs; no native printing. Gaps #1–#7 in [`docs/gaps.md`](docs/gaps.md)
 are the beta list. All six core workflows pass the
-[alpha gate](docs/roadmap.md#alpha-gate-core-workflows) end to end on macOS, with save and reopen;
+[alpha gate](docs/roadmap.md#alpha-gate-core-workflows) end to end on macOS (checked in WordCraft, not re-run on Windows yet), with save and reopen;
 the two partial ones (real-world .docx, printing) complete, roughly.
 
 ## By dimension
@@ -111,9 +110,9 @@ Weights and evidence per area: [docs/target-app-parity.md](docs/target-app-parit
 | Vietnamese | vi | none | 0% |
 | Thai | th | full (interface, Sarabun default font, word breaks, Thai proofing) | 100% |
 
-Also shipped: Traditional Chinese (`zh-hant`), Ukrainian (`uk`), Serbian (`sr`, `sr-latn`, #250), Russian (`ru`) and Polish (`pl`), all partial (~95%). Estonian (`et`), Italian (`it`, #594) and Czech (`cs`) now have complete interface catalogs, and Turkish (`tr`) a complete 2,325-entry one (every key of the Russian catalog), all with
+Also shipped: Traditional Chinese (`zh-hant`), Ukrainian (`uk`), Serbian (`sr`, `sr-latn`, #250), Russian (`ru`) and Polish (`pl`), all partial (~95%). Estonian (`et`), Italian (`it`, #594) and Czech (`cs`) now have complete interface catalogs, and Turkish (`tr`) a complete one (2,414 entries on 2026-10-24) (every key of the Russian catalog), all with
 system-locale selection and a saved language choice (Italian also has 51 strings none of the others had yet); Estonian, Turkish, Italian and Czech proofing are not included. Hungarian (`hu`) has a
-complete 2,419-entry catalog, also without proofing.
+complete catalog (2,446 entries on 2026-10-24), also without proofing.
 Proofing: English and Polish (spelling, grammar, hyphenation), chosen per run from its language; Thai spelling marks only certain mistakes (typing order, common misspellings) in any Thai text. Word ships
 30 interface languages and proofing for ~50. Detail: [docs/localization-parity.md](docs/localization-parity.md).
 
@@ -123,17 +122,20 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 
 1. Review and merge the ~45 open PRs that already close gaps (owner).
 2. DOCX real-world corpus: open, render, round-trip, compare with Word (30–50 h).
-3. Preserve charts, SmartArt, OLE and ink through a round trip with fallback pictures (10–15 h).
+3. Preserve Word ink (`w14:contentPart`) through a round trip (2–4 h); charts, SmartArt and OLE
+   objects already round-trip with all their parts.
 4. Stability sweep of the open crash, hang and write-failure issues; autosave soak test (20–30 h).
-5. Pagination fidelity: column balancing, footnote continuation, compat options, comparison
-   harness; an Aptos-metric font decision (30–50 h + owner).
-6. Formatting revisions and content controls (12–18 h); native printing (6–10 h); dialog depth
-   (20–30 h).
+5. Pagination fidelity: compat options, comparison harness (column balancing and footnote
+   continuation landed); an Aptos-metric font decision (30–50 h + owner).
+6. Native printing (6–10 h); dialog depth (20–30 h). Formatting revisions and content controls
+   landed.
 
 ## Progress log
 
 | Date | What landed |
 |---|---|
+| 2026-10-24 | Home › Font: Convert to Thai Digits and Convert to Arabic Digits (0–9 ↔ ๐–๙ in the selection, each run keeping its formatting, a revision with Track Changes on); dates and times people see (Insert › Date and Time, DATE fields, the date picker's today, the Home greeting) use the computer's time zone instead of UTC; CI passes the signing secrets to the packaging step only |
+| 2026-10-22 | Doc4Me 1.1.1: Distributed and Thai Distributed alignment buttons; character spacing Normal/Expanded/Condensed by 0–1584 pt; releases can be made from the Actions tab (`release: true`) |
 | 2026-10-21 | Doc4Me 1.1.0: the Thai and Word-fidelity work since 1.0.0 as a Windows x64 MSI and portable zip (installs over 1.0.0); reading-mode and status strings filled in the ru/hu/tr/th/it catalogs (th: 2,452 entries); equation normal text (`m:nor`) in TH Sarabun sized like the original, with a test |
 | 2026-10-19 | Thai interface (`th`, 2,433 entries, complete); Thai misspelling list 105 pairs; review fixes: Arabic ligatures kept, substituted fonts keep the requested font's line spacing (Cambria, Courier New, Thai fonts drawn with Sarabun), Thai numbering switches a decimal list, Thai/Latin words spelled apart |
 | 2026-10-16 | Thai and Word fidelity: single line spacing from Word for Windows' font metrics (Sarabun 1.853 em, as Word for Windows paginates it); kerning only with `w:kern` and ligatures only with `w14:ligatures` (read and saved), as Word does; TH Sarabun New / PSK / IT๙ drawn with Sarabun at their own letter height, advance widths, kerning and line spacing when not installed; Thai counting list numbers (หนึ่ง … สิบเอ็ด … หนึ่งร้อยเอ็ด) and Thai list kinds in the Numbering menu; Thai proofing (typing-order mistakes, common misspellings with Royal Society spellings) |

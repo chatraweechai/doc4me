@@ -1,6 +1,6 @@
 # Typing parity with Word
 
-> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-11 · **Change:** minor (right-to-left letters typed into an empty paragraph make it right-to-left, #713; previously minor: editing options: typing replaces selection, overtype, #485; previously minor: Move Paragraph Up/Down, Promote/Demote, Go Back and Alt+X keys, #343) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
+> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-11 · **Change:** minor (right-to-left letters typed into an empty paragraph make it right-to-left, #713; previously minor: editing options: typing replaces selection, overtype, #485; previously minor: Move Paragraph Up/Down, Promote/Demote, Go Back and Alt+X keys, #343) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 What Word does when you type, observed black-box (same keystrokes typed into Word and
 Doc4Me, results read back paragraph by paragraph) and pinned by tests in

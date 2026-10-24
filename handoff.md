@@ -1,6 +1,19 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย
 
-อัปเดต: 2026-10-23 04:30 UTC · สาขา `main` · session ยุติแล้ว · CI ของ `main` ล่าสุดผ่าน (build installer เท่านั้น) · เริ่ม session ใหม่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 กำลังทำงาน (ดูหัวข้อแรก) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+
+## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก และงานค้างจาก handoff (กำลังทำ)
+
+- ผู้ใช้สั่ง "ดำเนินการต่อจากที่ค้างให้เสร็จ และเพิ่มปุ่มฟังก์ชันในริบบอนแปลงเลขอารบิกเป็นเลขไทย และแปลงเลขไทยเป็นเลขอารบิก" กฎของผู้ใช้: push ไป `main` เท่านั้น, commit/push ก่อนแล้วตรวจบั๊กทีหลังแล้ว push อีกครั้ง, บันทึก handoff ทุกครั้ง
+- push รอบแรก (คอมมิตนี้): ทำแล้ว ดู `CHANGELOG.md` `[Unreleased]`
+  - เพิ่ม `format.thaiDigits` / `format.arabicDigits` และปุ่มบนริบบอน หน้าหลัก › ฟอนต์
+  - ข้อ 1 (เวลา UTC): ใช้ `now_local` กับวันที่และเวลาที่แสดงผู้ใช้ เพิ่ม dependency `chrono` (desktop) metadata ยังเป็น UTC
+  - ข้อ 5.2 ส่วนของ session: workflow ส่ง secret ลงนามให้ขั้นแพ็กเท่านั้น (`package.ps1 -BuildOnly` แล้ว `-SkipBuild`) และ `docs/releasing.md`
+  - ข้อ 5.4: เจ้าของ repo ลบ `.claude/settings.json` แล้วใน `e5214c4` บันทึกใน `[Unreleased]` › ความปลอดภัย
+  - ข้อ 2 และ 5.6 (บางส่วน): แก้เอกสารตามที่ตรวจกับโค้ดแล้ว และเปลี่ยน Target เป็น Word for Windows (ไม่มีเลขรุ่น)
+  - ข้อ 5.5: `git push origin --delete claude/optimistic-fermat-z9uknk` ถูก git proxy ตัดการเชื่อมต่อสองครั้ง (branch merge เข้า `main` แล้ว ตรวจด้วย `merge-base --is-ancestor`) **[เจ้าของ repo]** ลบที่หน้า Branches ของ GitHub
+- ตรวจก่อน push รอบแรก: `cargo test -p doc4me-engine` ผ่าน (ก่อนแก้ UTC), เทสต์เลข/วันที่ใหม่ผ่าน, ui-egui `i18n ribbon icons widgets` ผ่าน 82, `cargo fmt --all --check` ผ่าน
+- ขั้นต่อไป (รอบตรวจ): เทสต์ engine และ ui-egui ทั้งหมด, clippy `-D warnings`, ตรวจโค้ดใหม่แบบหาบั๊ก, `cargo xtask parity`, ดู CI ของ `main` แล้ว push รอบสอง
 
 ## งานที่ต้องทำต่อใน session ใหม่ (รวบรวม 2026-10-23)
 

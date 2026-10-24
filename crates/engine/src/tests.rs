@@ -3396,6 +3396,75 @@ fn change_case_keeps_each_runs_formatting_when_lengths_change() {
 }
 
 #[test]
+fn digits_convert_between_arabic_and_thai() {
+    let mut s = s();
+    run(&mut s, "document.setText", json!({"text": "ปี 2567 ข้อ 10\rราคา 50 บาท"}));
+    run(&mut s, "select.all", json!({}));
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(text(&s), "ปี ๒๕๖๗ ข้อ ๑๐\rราคา ๕๐ บาท");
+    // Thai digits are three bytes each: the selection still covers everything.
+    assert_eq!(s.selected_text(), "ปี ๒๕๖๗ ข้อ ๑๐\rราคา ๕๐ บาท");
+    run(&mut s, "format.arabicDigits", json!({}));
+    assert_eq!(text(&s), "ปี 2567 ข้อ 10\rราคา 50 บาท");
+    // Digits already in the asked-for script, and every other character, stay as they are.
+    run(&mut s, "format.arabicDigits", json!({}));
+    assert_eq!(text(&s), "ปี 2567 ข้อ 10\rราคา 50 บาท");
+
+    // With no selection, the number at the insertion point converts and the rest stays.
+    let mut s = self::s();
+    run(&mut s, "document.setText", json!({"text": "12 345 67"}));
+    run(&mut s, "caret.set", json!({"pos": {"block": 0, "off": 4}}));
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(text(&s), "12 ๓๔๕ 67");
+}
+
+#[test]
+fn digit_conversion_keeps_each_runs_formatting() {
+    let mut s = s();
+    run(&mut s, "text.insert", json!({"text": "1-23", "raw": true}));
+    run(&mut s, "select.text", json!({"text": "23"}));
+    run(&mut s, "format.bold", json!({"value": true}));
+    run(&mut s, "select.all", json!({}));
+    run(&mut s, "format.thaiDigits", json!({}));
+    let p = s.doc.para_at(&Pos::body(0, 0)).unwrap();
+    assert_eq!(p.text, "๑-๒๓");
+    assert_ne!(p.props_of_char(0).bold, Some(true));
+    assert_eq!(p.props_of_char(4).bold, Some(true));
+    assert_eq!(p.props_of_char(7).bold, Some(true));
+    // One undo step brings the Arabic digits back.
+    run(&mut s, "edit.undo", json!({}));
+    assert_eq!(text(&s), "1-23");
+}
+
+#[test]
+fn digit_conversion_under_track_changes_is_a_revision() {
+    let mut s = s();
+    run(&mut s, "document.setText", json!({"text": "a 12 b"}));
+    run(&mut s, "review.trackChanges", json!({"value": true}));
+    run(&mut s, "select.all", json!({}));
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(text(&s), "a 12๑๒ b", "the old digits stay, marked deleted");
+    assert_eq!(s.selected_text(), "a 12๑๒ b");
+    // Converting again leaves the deleted digits alone.
+    run(&mut s, "format.thaiDigits", json!({}));
+    assert_eq!(text(&s), "a 12๑๒ b");
+    // The author's own inserted digits are replaced outright when converted back.
+    run(&mut s, "format.arabicDigits", json!({}));
+    assert_eq!(text(&s), "a 1212 b");
+    run(&mut s, "format.thaiDigits", json!({}));
+    run(&mut s, "review.acceptAll", json!({}));
+    assert_eq!(text(&s), "a ๑๒ b");
+
+    let mut s = self::s();
+    run(&mut s, "document.setText", json!({"text": "a 12 b"}));
+    run(&mut s, "review.trackChanges", json!({"value": true}));
+    run(&mut s, "select.all", json!({}));
+    run(&mut s, "format.thaiDigits", json!({}));
+    run(&mut s, "review.rejectAll", json!({}));
+    assert_eq!(text(&s), "a 12 b");
+}
+
+#[test]
 fn document_grid_sets_lines_and_characters_in_one_undo_step() {
     // #391: Layout › Page Setup › Document Grid.
     let mut s = s();

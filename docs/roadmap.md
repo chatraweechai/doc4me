@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-11 · **Change:** minor (Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -18,20 +18,22 @@ Opus 5.5 agent wall-clock.
    survive a round trip and show their fallback pictures.
 4. **Stability sweep** (gap #3, 20–30 h): the open crash, hang and write-failure issues, plus an
    autosave/recovery soak test.
-5. **Pagination fidelity** (gap #4, 30–50 h): column balancing, footnote continuation, compat
-   options, a local page-by-page comparison harness; an owner decision on an Aptos-metric font.
+5. **Pagination fidelity** (gap #4, 30–50 h): compat options (column balancing and footnote
+   continuation landed), a local page-by-page comparison harness; an owner decision on an Aptos-metric font.
 6. **Formatting revisions and content controls** (gap #5, 12–18 h), **native printing** (gap #6,
    6–10 h), **dialog depth** (gap #7, 20–30 h).
 
 ## Alpha gate (core workflows)
 
 The core-workflow gate from the craftrules progress-docs standard: what a typical Word user does
-every day, checked end to end on the main platform (macOS desktop), including save and reopen.
+every day, checked end to end on the main platform, including save and reopen. The main platform is
+now Windows desktop (Word for Windows is the target); the results below were checked on macOS
+desktop in WordCraft and have not been re-run on Windows yet.
 "Partial" here means rough but not blocking: the workflow completes.
 
 | Core workflow | Works end to end? | Evidence | Hours to pass |
 |---|---|---|---|
-| Write and format a document: type, fonts, paragraph formatting, styles, lists, undo, find/replace; save as .docx and reopen | yes | 422 commands, typing parity pinned by `tests_typing.rs`, DOCX round-trip tests (`crates/docx/tests/roundtrip.rs`) | 0 |
+| Write and format a document: type, fonts, paragraph formatting, styles, lists, undo, find/replace; save as .docx and reopen | yes | 609 commands (2026-10-24), typing parity pinned by `tests_typing.rs`, DOCX round-trip tests (`crates/docx/tests/roundtrip.rs`) | 0 |
 | Open a .docx someone sent, edit it, send back a .docx Word opens | partial (not blocking) | Word opens our files; typical text/table/picture documents work; never tested on a real-world corpus; charts, SmartArt and OLE dropped silently, move tracking lost (gaps #1, #2, #5) | 0 (beta work: 50–80) |
 | Build a structured document: tables, pictures, headers/footers, page numbers, sections, columns | yes | Tables with row splitting and floating tables (#137), floating pictures (#136), first/odd/even headers; columns don't balance (gap #4) | 0 |
 | Review with others: comments, track changes, accept/reject, compare | yes | Margin balloons, tracked insert/delete incl. paragraph marks (#125, #244), formatting revisions (#41), compare | 0 |
@@ -59,8 +61,8 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 | M11 | Draw and objects | text wrap, text boxes, canvas handles, rotation (#332), ink pens and eraser (#307), contour wrap (#354), lasso, Add Pen, Ink to Shape and Ink Replay (#395) done; Ink to Math, grouping missing | 35–55 h |
 | M12 | Formats breadth (PDF, ODT, RTF, HTML, MD, TXT, LaTeX, `.doc` import) | done (first versions); `.doc` write, encryption, minor formats missing | 60–100 h |
 | M13 | Performance budgets | on track (1.4 ms relayout); large real-world documents unmeasured | 10–20 h |
-| M14 | 1.0 polish, packaging, signing | releases v0.1.0–v0.4.0 published (signed macOS, Windows MSI x64/x86/arm64, Linux, FreeBSD, web) | — |
-| M15 | Localization (12 key languages, RTL interface, proofing languages) | 15 UI languages; English and Polish proofing, a proofing language per run | 75–120 h |
+| M14 | 1.0 polish, packaging, signing | Doc4Me v1.1.0 and v1.1.1 published (Windows x64 MSI and portable zip, unsigned; CI signs once the signing secrets are set); WordCraft, upstream, shipped v0.1.0–v0.4.0 on every platform | — |
+| M15 | Localization (12 key languages, RTL interface, proofing languages) | 19 UI languages; English, Polish and Thai proofing, a proofing language per run | 75–120 h |
 | M16 | Right-to-left and East Asian typography | RTL paragraphs done (#207) | 30–45 h |
 
 ## Next after beta

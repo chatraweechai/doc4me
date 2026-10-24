@@ -396,9 +396,39 @@ pub fn now_unix() -> u64 {
     }
 }
 
-/// ISO-8601 timestamp (UTC, seconds).
+/// ISO-8601 timestamp (UTC, seconds): for what is stored (revision and comment dates, versions,
+/// `core.modified`). Dates and times people read use [`now_local`].
 pub fn now_iso() -> String {
     iso_from_unix_secs(now_unix())
+}
+
+/// The computer's offset from UTC now, in seconds (east positive): the system time zone, or the
+/// browser's on the web. 0 when it can't be read.
+pub fn local_offset_secs() -> i64 {
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        i64::from(chrono::Local::now().offset().local_minus_utc())
+    }
+    // `getTimezoneOffset` is UTC minus local time, in minutes.
+    #[cfg(target_arch = "wasm32")]
+    {
+        let m = js_sys::Date::new_0().get_timezone_offset();
+        if m.is_finite() && m.abs() <= 1440.0 { (-m * 60.0) as i64 } else { 0 }
+    }
+}
+
+/// `secs` since the Unix epoch moved by `offset` seconds, clamped at the epoch.
+pub fn shift_secs(secs: u64, offset: i64) -> u64 {
+    let t = i64::try_from(secs).unwrap_or(i64::MAX).saturating_add(offset);
+    u64::try_from(t).unwrap_or(0)
+}
+
+/// The local wall-clock time as seconds since 1970-01-01 00:00 (the Unix time moved by the
+/// computer's offset from UTC), for the dates and times people see: Insert › Date and Time, DATE
+/// fields, a date picker's today, the Home greeting. [`iso_from_unix_secs`] and
+/// [`civil_from_days`] read it like a Unix time; its `Z` then means nothing.
+pub fn now_local() -> u64 {
+    shift_secs(now_unix(), local_offset_secs())
 }
 
 /// Days since 1970-01-01 → (year, month, day) (Howard Hinnant's algorithm).
@@ -435,5 +465,20 @@ mod iso_tests {
         assert_eq!(iso_from_unix_secs(1_709_164_800), "2024-02-29T00:00:00Z");
         assert_eq!(iso_from_unix_secs(951_782_400), "2000-02-29T00:00:00Z");
         assert_eq!(iso_from_unix_secs(1_735_689_599), "2024-12-31T23:59:59Z");
+    }
+
+    #[test]
+    fn local_time_is_the_unix_time_moved_by_the_offset() {
+        use super::{local_offset_secs, now_local, now_unix, shift_secs};
+        // 2025-10-10 00:30 UTC is 07:30 in Bangkok (UTC+7) and still the 9th in New York (UTC-4).
+        assert_eq!(iso_from_unix_secs(shift_secs(1_760_056_200, 7 * 3600)), "2025-10-10T07:30:00Z");
+        assert_eq!(iso_from_unix_secs(shift_secs(1_760_056_200, -4 * 3600)), "2025-10-09T20:30:00Z");
+        assert_eq!(shift_secs(10, -3600), 0);
+        assert_eq!(shift_secs(u64::MAX, 3600), i64::MAX as u64);
+        // Real time zones are between UTC-12 and UTC+14.
+        let off = local_offset_secs();
+        assert!((-12 * 3600..=14 * 3600).contains(&off), "{off}");
+        let (before, local) = (now_unix(), now_local());
+        assert!(local.abs_diff(shift_secs(before, off)) <= 2, "{local} {before} {off}");
     }
 }

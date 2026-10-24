@@ -191,7 +191,9 @@ fn matching_templates(query: &str) -> Vec<(&'static str, &'static str)> {
 /// Home: a greeting, Blank plus a short row of templates with a link to New, then Recent.
 fn home_page(app: &mut WordApp, ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
-    let hour = doc4me_engine::cmd::now_iso().get(11..13).and_then(|h| h.parse::<u32>().ok()).unwrap_or(9);
+    // The computer's local hour, not UTC's.
+    let local = doc4me_engine::cmd::iso_from_unix_secs(doc4me_engine::cmd::now_local());
+    let hour = local.get(11..13).and_then(|h| h.parse::<u32>().ok()).unwrap_or(9);
     heading(
         ui,
         if hour < 12 {

@@ -550,6 +550,8 @@ fn home(app: &mut WordApp, ui: &mut Ui) {
                     mi(ui, app, "Capitalize Each Word", "format.changeCase", json!({"mode": "title"}));
                     mi(ui, app, "tOGGLE cASE", "format.changeCase", json!({"mode": "toggle"}));
                 });
+                small(ui, app, "thaidigits", None, "Convert to Thai Digits", "format.thaiDigits", json!({}), false);
+                small(ui, app, "arabicdigits", None, "Convert to Arabic Digits", "format.arabicDigits", json!({}), false);
                 small(ui, app, "clear", None, "Clear All Formatting", "format.clear", json!({}), false);
                 small(ui, app, "phonetic", None, "Phonetic Guide", "format.phonetic", json!({}), false);
             });

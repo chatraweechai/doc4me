@@ -1,6 +1,6 @@
 # Hardware parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-10 · **Change:** major (first version) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4 and Word for Windows
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-10 · **Change:** major (first version) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet) and Word for Windows
 
 Word is not a hardware-heavy app, but a few devices matter to its users: printers above all, then
 pens, microphones (Dictate) and speakers (Read Aloud), and displays.

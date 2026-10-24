@@ -69,6 +69,8 @@ hmac = "0.13"
 base64 = "0.22"
 getrandom = "0.3"
 zeroize = "1"
+# The computer's time zone for the dates and times people see (desktop; the web asks the browser).
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
 
 # ui
 egui = "0.36"

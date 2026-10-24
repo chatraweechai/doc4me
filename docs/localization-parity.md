@@ -1,6 +1,6 @@
 # Localization parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-19 · **Change:** minor (Thai interface catalog, complete; previously minor: Thai proofing, Thai counting list numbers, TH Sarabun New/PSK drawn at their own size, Word for Windows line spacing; previously minor: Thai documents: Sarabun default font, dictionary word breaks, Thai list numbers; previously minor: Turkish interface catalog completed, 2,325 entries, #774; previously minor: font list shows fonts by their names in the interface language, #505; previously minor: Turkish interface added; previously major: first version; catalogs measured from `crates/ui-egui/src/i18n`, Word's languages from its bundle listing) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (language and entry counts corrected, Thai proofing and digit conversion; previously minor: Thai interface catalog, complete; previously minor: Thai proofing, Thai counting list numbers, TH Sarabun New/PSK drawn at their own size, Word for Windows line spacing; previously minor: Thai documents: Sarabun default font, dictionary word breaks, Thai list numbers; previously minor: Turkish interface catalog completed, 2,325 entries, #774; previously minor: font list shows fonts by their names in the interface language, #505; previously minor: Turkish interface added; previously major: first version; catalogs measured from `crates/ui-egui/src/i18n`, Word's languages from its bundle listing) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Interface languages, script support and proofing per language. How translation works (catalog
 format, adding a language, clean-room rule): `crates/ui-egui/src/i18n/mod.rs`.
@@ -19,8 +19,8 @@ native-speaker review (human).
 
 ## What Doc4Me ships (measured)
 
-- **18 interface languages**: English plus `zh-hans`, `zh-hant`, `ja`, `uk`, `es`, `pt-br`,
-  Serbian `sr`/`sr-latn` (#250), Estonian `et`, Turkish `tr`, Russian `ru`, Italian `it` (#594), German `de` (#574), Polish `pl`, Czech `cs`, Hungarian `hu` and French `fr`. Catalogs have 2,021–2,419 entries
+- **19 interface languages**: English plus `zh-hans`, `zh-hant`, `ja`, `uk`, `es`, `pt-br`,
+  Serbian `sr`/`sr-latn` (#250), Estonian `et`, Turkish `tr`, Russian `ru`, Italian `it` (#594), German `de` (#574), Polish `pl`, Czech `cs`, Hungarian `hu`, French `fr` and Thai `th`. Catalogs have 2,040–2,458 entries
   each; Polish has every key of every other catalog except the style names and equation gallery labels only Russian, Italian, Hungarian and Turkish translate so far (a test checks it). A test (`every_tab_and_command_is_translated`) enforces that every ribbon tab, command
   label and ribbon location is translated in every language.
   `pl`, `pl-PL` and `pl_PL.UTF-8` system locales pick Polish automatically.
@@ -29,7 +29,7 @@ native-speaker review (human).
   Read Aloud, Backstage greetings) aren't wrapped in `tl!` yet, so they show in English in every
   language: the true share of visible strings is **~93–95%** (estimated).
 - Pending PRs: Norwegian Bokmål (#208) and Nynorsk (#210), Hebrew with RTL (#20).
-- **Proofing: English and Polish**, chosen per run from its language (`w:lang`, resolved through
+- **Proofing: English, Polish and Thai** (Thai: spelling only), chosen per run from its language (`w:lang`, resolved through
   the styles; Review › Language and the status bar set it). Languages without proofing tools get
   no spelling or grammar marks (as in Word without the language's tools) instead of being flagged
   as English. Detail in [Proofing per language](#proofing-per-language).
@@ -57,8 +57,8 @@ shared items below.
 | Korean | ko | 0 | ❌ | Hangul ✅; macOS Korean IME fixes pending (#163, #164) | no | none | 3–5 |
 | Vietnamese | vi | 0 | ❌ | Latin with stacked diacritics, untested | no | none | 3–4 |
 
-Other shipped languages: **12** — Traditional Chinese (`zh-hant`), Ukrainian (`uk`), Serbian
-Cyrillic and Latin (`sr`, `sr-latn`, #250), Estonian (`et`), Turkish (`tr`), Russian (`ru`), Italian (`it`, #594), Polish (`pl`), Czech (`cs`), Hungarian (`hu`) and French (`fr`), all partial.
+Other shipped languages: **13** — Traditional Chinese (`zh-hant`), Ukrainian (`uk`), Serbian
+Cyrillic and Latin (`sr`, `sr-latn`, #250), Estonian (`et`), Turkish (`tr`), Russian (`ru`), Italian (`it`, #594), Polish (`pl`), Czech (`cs`), Hungarian (`hu`) and French (`fr`), all partial, and Thai (`th`, complete; below).
 Estonian uses the existing fonts, follows `et-EE` system locales, and is available in Options or
 through `ui.language` with `{"value":"et"}`. Its 1,307 entries cover the existing interface catalog.
 Estonian spelling, grammar, dates and document templates are not added by the interface catalog.
@@ -70,17 +70,18 @@ Hungarian follows `hu-HU` system locales and `{"value":"hu"}`, with a complete c
 the Russian catalog, built-in style names shown translated, plus the citation style names. Hungarian proofing is not included; terminology and conventions:
 [`localization-hu.md`](localization-hu.md).
 
-Polish is the only one besides English with proofing tools, and a Polish interface writes new
-documents in Polish (`pl-PL`).
+Polish and Thai are the only ones besides English with proofing tools (Thai: spelling only), and a
+Polish interface writes new documents in Polish (`pl-PL`).
 
-**Thai (`th`)**: a complete interface catalog (`th.tsv`, 2,433 entries, every key of the other catalogs: ribbon, dialogs, messages, built-in style names, equation gallery), chosen by `th`, `th-TH` and `th_TH.UTF-8` system locales or in File › Options; written from a 903-term glossary and a style guide (commands are verbs, labels nouns, Royal Society loanword spelling, ฟอนต์ for Font, one space between Thai and Latin or digits, Arabic digits in fields). New documents keep US English as their editing language, since Thai text is proofed whatever its language. Not yet reviewed by a native-speaking professional translator. Thai documents: Sarabun (OFL, bundled) is the default
+**Thai (`th`)**: a complete interface catalog (`th.tsv`, 2,458 entries, every key of the other catalogs: ribbon, dialogs, messages, built-in style names, equation gallery), chosen by `th`, `th-TH` and `th_TH.UTF-8` system locales or in File › Options; written from a 903-term glossary and a style guide (commands are verbs, labels nouns, Royal Society loanword spelling, ฟอนต์ for Font, one space between Thai and Latin or digits, Arabic digits in fields). New documents keep US English as their editing language, since Thai text is proofed whatever its language. Not yet reviewed by a native-speaking professional translator. Home › Font has Convert to Thai Digits and Convert to Arabic Digits (0–9 ↔ ๐–๙ in the selection; with Track Changes on, a revision). Thai documents: Sarabun (OFL, bundled) is the default
 document and interface font, so Thai draws the same everywhere, shaped through HarfRust with its
 mark stacking (`layout::tests_complex::thai_is_drawn_with_the_bundled_sarabun_by_default`). Thai,
 Lao and Khmer lines wrap between dictionary words (ICU4X, `doc::cluster::dictionary_breaks`), and
 double-click, Ctrl+arrows and the word count use the same word boundaries; tone marks and ์ stay
 inside their word. TH Sarabun New, TH SarabunPSK and TH SarabunIT๙ are drawn with Sarabun when not
 installed, scaled to their letter height and set on their own advance widths, kerning and 1.331 em
-line spacing, so lines and pages break as with the real font (`fonts::thsarabun`); the other Thai
+line spacing, so lines and pages break as with the real font (`fonts::thsarabun`; measured for TH Sarabun New and
+PSK, inferred for IT๙, which reuses TH Sarabun New's metrics); the other Thai
 document fonts are drawn with Sarabun at its own size. Single line spacing follows Word for Windows
 (OS/2 win metrics plus external leading: Sarabun 1.853 em). Thai digits, ฿ and
 Thai/Khmer punctuation stay with the word before them (no line starts with ๒ or ។). A document made

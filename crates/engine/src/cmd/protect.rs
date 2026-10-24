@@ -229,7 +229,8 @@ fn check_formatting(s: &Session, id: &str, params: &Value) -> Result<(), CmdErro
         let locked = s.doc.styles.styles.iter().any(|st| st.locked && (st.id == name || st.name.eq_ignore_ascii_case(name)));
         return if locked { Err(CmdError::Disabled(format!("{id}: the style {name:?} is locked in this document"))) } else { Ok(()) };
     }
-    let direct = (id.starts_with("format.") && !matches!(id, "format.changeCase" | "format.state" | "format.fontDialog"))
+    let direct = (id.starts_with("format.")
+        && !matches!(id, "format.changeCase" | "format.thaiDigits" | "format.arabicDigits" | "format.state" | "format.fontDialog"))
         || (id.starts_with("para.") && !matches!(id, "para.sort" | "para.dialog"))
         || id.starts_with("styles.create")
         || id.starts_with("styles.modify")
