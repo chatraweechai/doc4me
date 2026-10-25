@@ -19,6 +19,10 @@ list (author, source, license) is in ATTRIBUTION.md.
 - Sarabun (assets/fonts/Sarabun-*.ttf), Copyright 2018 The Sarabun Project Authors
   (https://github.com/cadsondemak/Sarabun) — SIL Open Font License 1.1. See assets/fonts/OFL-Sarabun.txt.
 - JetBrains Mono (assets/fonts/JetBrainsMono-*.ttf) — SIL Open Font License 1.1. See assets/fonts/OFL-JetBrainsMono.txt.
+- Intos and Intos Display (assets/fonts/Intos-*.ttf, IntosDisplay-*.ttf), metric-compatible with
+  Aptos; Copyright 2016-2024 The Inter Project Authors, Intos modifications Copyright 2026 The
+  Intos Project Authors (https://github.com/muglug/intos) — SIL Open Font License 1.1. See
+  assets/fonts/OFL-Intos.txt.
 - Japanese fonts (craft-fonts): builds made with craft-fonts (CRAFT_FONTS_DIR) embed the fonts
   listed in
   https://github.com/storytold/craft-fonts/blob/main/ATTRIBUTION.md (BIZ UDPGothic, BIZ UDMincho,

@@ -22,8 +22,9 @@ pub struct Resolved {
 }
 
 /// Substitutes to try, in order, for a family that isn't installed. Open fonts that are
-/// metric-compatible come first (Carlito ↔ Calibri, Caladea ↔ Cambria, Liberation ↔ Arial /
-/// Times New Roman / Courier New), then common system fonts, then our bundled families.
+/// metric-compatible come first (Intos ↔ Aptos, bundled; Carlito ↔ Calibri, Caladea ↔ Cambria,
+/// Liberation ↔ Arial / Times New Roman / Courier New), then common system fonts, then our bundled
+/// families.
 fn substitutes(family: &str) -> &'static [&'static str] {
     const SANS: &[&str] = &["Carlito", "Helvetica Neue", "Arial", "Liberation Sans", "Noto Sans", "DejaVu Sans", "Source Sans 3"];
     const SERIF: &[&str] = &["Caladea", "Times New Roman", "Liberation Serif", "Georgia", "Noto Serif", "DejaVu Serif", "Source Serif 4"];
@@ -57,6 +58,14 @@ fn substitutes(family: &str) -> &'static [&'static str] {
     // Thai document fonts (TH Sarabun New / PSK and the other national fonts, the Windows UPC
     // families, Google's Thai families): the bundled Sarabun draws them.
     const THAI: &[&str] = &["Sarabun"];
+    // Aptos, Word's default font since 2023: Intos (bundled) has its advances, kerning and
+    // vertical metrics, as Intos Display, Narrow and Serif have Aptos Display's, Narrow's and
+    // Serif's (Display is bundled; Narrow and Serif are used when installed).
+    const APTOS: &[&str] = &["Intos", "Carlito", "Helvetica Neue", "Arial", "Liberation Sans", "Noto Sans", "DejaVu Sans", "Source Sans 3"];
+    const APTOS_DISPLAY: &[&str] = &["Intos Display", "Intos", "Carlito", "Arial", "Liberation Sans", "Source Sans 3"];
+    const APTOS_NARROW: &[&str] = &["Intos Narrow", "Intos", "Carlito", "Arial", "Liberation Sans", "Source Sans 3"];
+    const APTOS_SERIF: &[&str] =
+        &["Intos Serif", "Caladea", "Times New Roman", "Liberation Serif", "Georgia", "Noto Serif", "DejaVu Serif", "Source Serif 4"];
     let f = family.to_ascii_lowercase();
     if is_thai_document_font(&f) {
         return THAI;
@@ -68,6 +77,10 @@ fn substitutes(family: &str) -> &'static [&'static str] {
         return ARABIC_SANS;
     }
     match f.as_str() {
+        "aptos" | "aptos light" | "aptos semibold" | "aptos extrabold" | "aptos black" => APTOS,
+        "aptos display" => APTOS_DISPLAY,
+        "aptos narrow" => APTOS_NARROW,
+        "aptos serif" => APTOS_SERIF,
         "palatino linotype" | "book antiqua" | "palatino" => PALATINO,
         "arial" | "helvetica" | "arial nova" => ARIAL,
         "times new roman" | "times" => TIMES,
@@ -83,8 +96,7 @@ fn substitutes(family: &str) -> &'static [&'static str] {
         | "century schoolbook"
         | "bookman old style"
         | "sitka text"
-        | "sitka"
-        | "aptos serif" => SERIF,
+        | "sitka" => SERIF,
         _ if f.contains("mono") || f.contains("code") => MONO,
         _ if f.contains("serif") && !f.contains("sans") => SERIF,
         _ => SANS,
@@ -366,6 +378,8 @@ fn requested_line(family: &str) -> Option<(f64, f64)> {
     match family.trim().to_ascii_lowercase().as_str() {
         "cambria" | "cambria math" => Some((1946.0 / 2048.0, 455.0 / 2048.0)),
         "courier new" | "courier" => Some((1705.0 / 2048.0, 615.0 / 2048.0)),
+        // Every Aptos family (Display, Narrow, Serif, Mono, each weight): usWin 2068 / 563.
+        f if f == "aptos" || f.starts_with("aptos ") => Some((2068.0 / 2048.0, 563.0 / 2048.0)),
         _ => None,
     }
 }
@@ -393,8 +407,9 @@ pub fn single_line(family: &str, face: &crate::FontFace, substituted: bool, size
 
 /// How a substitute stands in for a font a document asks for, so its text keeps that font's size,
 /// widths and line spacing and pages hold what they hold in Word with the real font: TH Sarabun
-/// New and TH SarabunPSK, drawn with the bundled Sarabun when they are not installed. Sarabun's letters are about 1.47 times as tall as theirs at the same point size, and
-/// its widths differ letter by letter, so its glyphs are scaled to their height
+/// New and TH SarabunPSK, drawn with the bundled Sarabun when they are not installed. Sarabun's
+/// letters are about 1.47 times as tall as theirs at the same point size, and its widths differ
+/// letter by letter, so its glyphs are scaled to their height
 /// ([`MetricFit::scale`]) and set on their advance widths ([`MetricFit::advance`], with their
 /// kerning, [`MetricFit::kern`]); lines take their line spacing ([`MetricFit::line`]).
 #[derive(Clone, Copy)]
@@ -541,6 +556,31 @@ mod tests {
         for name in ["Sarabun", "Arial", "TH Niramit AS", "TH SarabunIT๙", "TH SarabunIT9", "", "T", "THX", "ทดสอบ"] {
             assert!(metric_fit(name, false, false).is_none(), "{name}");
         }
+    }
+
+    /// Aptos isn't installed here: the bundled Intos (metric-compatible) draws it, Intos Display
+    /// draws Aptos Display, and lines keep Aptos's Word for Windows spacing (2068 + 563 of 2048).
+    #[test]
+    fn aptos_is_drawn_with_the_bundled_intos() {
+        for (asked, family) in [("Aptos", "Intos"), ("aptos", "Intos"), ("Aptos Display", "Intos Display"), ("Aptos SemiBold", "Intos")] {
+            let r = resolve(asked, false, false);
+            assert!(r.substituted, "{asked}");
+            assert_eq!(r.face.family, family, "{asked}");
+            let em = |(a, d): (f64, f64)| ((a + d) * 10000.0).round() / 10000.0;
+            assert_eq!(em(single_line(asked, &r.face, true, 1.0)), 1.2847, "{asked}");
+        }
+        for (bold, italic, style) in [(true, false, "Bold"), (false, true, "Italic"), (true, true, "Bold Italic")] {
+            let r = resolve("Aptos", bold, italic);
+            assert_eq!((r.face.family.as_str(), r.face.style.as_str()), ("Intos", style));
+            assert!(!r.synth_bold && !r.synth_italic);
+        }
+        // Narrow and Serif are not bundled: their own look-alikes when installed, else the
+        // next substitutes; Aptos Mono stays with the monospaced ones.
+        assert_eq!(substitutes("Aptos Narrow").first(), Some(&"Intos Narrow"));
+        assert_eq!(substitutes("Aptos Serif").first(), Some(&"Intos Serif"));
+        assert_eq!(substitutes("Aptos Mono").first(), Some(&"Courier New"));
+        assert_eq!(requested_line("Aptos Mono"), Some((2068.0 / 2048.0, 563.0 / 2048.0)));
+        assert_eq!(requested_line("Aptosx"), None);
     }
 
     #[test]

@@ -1,6 +1,6 @@
 # Typing parity with Word
 
-> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-11 · **Change:** minor (right-to-left letters typed into an empty paragraph make it right-to-left, #713; previously minor: editing options: typing replaces selection, overtype, #485; previously minor: Move Paragraph Up/Down, Promote/Demote, Go Back and Alt+X keys, #343) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-25 · **Change:** trivial (Aptos known gap closed with Intos; previously minor: right-to-left letters typed into an empty paragraph make it right-to-left, #713; previously minor: editing options: typing replaces selection, overtype, #485; previously minor: Move Paragraph Up/Down, Promote/Demote, Go Back and Alt+X keys, #343) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 What Word does when you type, observed black-box (same keystrokes typed into Word and
 Doc4Me, results read back paragraph by paragraph) and pinned by tests in
@@ -123,8 +123,10 @@ Word.
 
 ## Known gaps
 
-- Word's body font Aptos isn't installed outside Office; our substitute (Carlito, else Helvetica
-  Neue) is wider, so lines wrap earlier than in Word. Needs a metric-matched open substitute.
+- Word's body font Aptos isn't installed outside Office; Doc4Me draws it with the bundled Intos,
+  which has Aptos's advances and kerning, so lines wrap where Word wraps them (2026-10-25). Aptos's
+  99 rarer characters that Intos lacks (Coptic, box drawing, some dingbats) come from fallback
+  fonts with their own widths.
 - Moving paragraphs with Track Changes on isn't recorded as a tracked move; whole table rows
   don't move yet (a selection across cells is refused). Go Back's places aren't mapped through
   later edits (they are clamped to the document).
@@ -144,6 +146,7 @@ Word.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Known gaps: Aptos is drawn with the bundled metric-compatible Intos |
 | 2026-10-11 | minor | Text direction: right-to-left letters typed into an empty paragraph make it right-to-left; existing paragraphs keep theirs (#713) |
 | 2026-10-11 | trivial | Grammar proofing (not AutoCorrect) no longer suggests capitalising a sentence after `...` or `…` (`proof::tests::ellipses_do_not_start_sentences`) |
 | 2026-10-11 | minor | AutoFormat tables from `+---+`, arrow bullets, smileys inside words, undo after a border line (#546) |

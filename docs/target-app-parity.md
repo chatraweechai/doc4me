@@ -1,6 +1,6 @@
 # Doc4Me parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (ecosystem and AI rows: Microsoft's systems and the in-app AI provider out of scope; previously trivial: the Windows target described under What we measured against; the platforms row matches the releases; stale rows corrected against the code: Font dialog, proofing, file exchange, localization; headline marked as measured in WordCraft; previously minor: Polish interface and Polish proofing; previously trivial: English spelling knows common modern words, #520; previously trivial: all 12 bibliography styles, #383; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; replaces the parity tables that lived in ROADMAP.md) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (Aptos drawn with Intos in the layout and file-exchange rows; previously trivial: ecosystem and AI rows: Microsoft's systems and the in-app AI provider out of scope; previously trivial: the Windows target described under What we measured against; the platforms row matches the releases; stale rows corrected against the code: Font dialog, proofing, file exchange, localization; headline marked as measured in WordCraft; previously minor: Polish interface and Polish proofing; previously trivial: English spelling knows common modern words, #520; previously trivial: all 12 bibliography styles, #383; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; replaces the parity tables that lived in ROADMAP.md) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 The authoritative assessment of how close Doc4Me is to Microsoft Word. [`ROADMAP.md`](../ROADMAP.md)
 summarizes it; [`gaps.md`](gaps.md) itemizes every shortfall; the deep checklists are
@@ -113,10 +113,10 @@ h), pictures and tables (12–18 h), spelling depth (8–12 h), polish (10–20 
 
 | Discount | Mainstream | Essentials | Evidence |
 |---|---|---|---|
-| Interaction fidelity | ×0.93 | — | Typing pinned to Word (`tests_typing.rs`), ribbon, keytips, mini-toolbar; but 16 modal dialogs against Word's ~100, 125 of ~250 shortcuts, picture/shape handling complaints (#82, #142), lines wrap differently without an Aptos-metric font |
+| Interaction fidelity | ×0.93 | — | Typing pinned to Word (`tests_typing.rs`), ribbon, keytips, mini-toolbar; but 16 modal dialogs against Word's ~100, 125 of ~250 shortcuts, picture/shape handling complaints (#82, #142) |
 | Discoverability and UI clarity | — | ×0.95 | Word-style ribbon a Word user already knows, command search, keytips; some newer pane strings and tooltips terse or untranslated |
 | Stability on real machines | ×0.90 | ×0.90 (launch and install) | Never-crash standard, hostile-param fuzzing, panic guard; but open startup crash on Intel UHD (#170), freezes (#77, #59, #31), Windows writes fail without admin (#218), installer conflicts with other Crafting Apps (#64, #73, #106, #51); 5 days of field history |
-| Exchanging files with Word users | ×0.90 | ×0.92 (opening files people send) | Word opens our .docx; `.doc` import; but no real-world corpus test, Word ink dropped silently, pagination differs (Aptos has no metric-matched substitute). Simple documents, which are most of what a casual user receives, come through well; double-click open on macOS is fixed on main but not yet released (#223, #279) |
+| Exchanging files with Word users | ×0.90 | ×0.92 (opening files people send) | Word opens our .docx; `.doc` import; but no real-world corpus test, Word ink dropped silently, pagination not compared with Word page by page (Aptos is drawn with the metric-compatible Intos since 2026-10-25). Simple documents, which are most of what a casual user receives, come through well; double-click open on macOS is fixed on main but not yet released (#223, #279) |
 | Product | **×0.753** | **×0.787** | |
 
 ### Full target (ready for real work): ~60%
@@ -199,7 +199,7 @@ Word. Their weighted sum is the **full ready for real work** number.
 |---|---|---|---|---|---|
 | Features (depth, table above) | 30% | 68% | 210–335 | this file | Weighted table above. Hours: the area table sums to 290–460 h; the Page layout, Footnotes, RTL and East Asian rows (~50–85 h) are counted under Layout and the Proofing row (25–45 h) under Localization, so they aren't counted twice |
 | File formats (DOCX fidelity first) | 20% | 60% | 185–300 | [file-format-parity.md](file-format-parity.md) | DOCX opens in Word and round-trips our own tests, but no real-world corpus test yet; charts, SmartArt, OLE and encrypted files are lost or refused (content controls kept since #381) |
-| Layout and pagination fidelity | 15% | 55% | 90–145 | [layout-parity.md](layout-parity.md) | Aptos has no metric-matched substitute so lines break differently from Word; no column balancing, footnote continuation or document grid; compatibility modes beyond 15 partial |
+| Layout and pagination fidelity | 15% | 55% | 90–145 | [layout-parity.md](layout-parity.md) | Aptos is drawn with the metric-compatible Intos (2026-10-25); no column balancing, footnote continuation or document grid; compatibility modes beyond 15 partial |
 | UI/UX fidelity | 10% | 65% | 65–100 | [ui-parity.md](ui-parity.md) | Ribbon, keytips, mini-toolbar, Backstage, 125 shortcuts; 16 modal dialogs against Word's ~100; no ribbon/keyboard customization |
 | Stability | 10% | 50% | 25–45 | [gaps.md](gaps.md) | Never-crash standard and hostile-param fuzzing in place, but open reports of a startup crash on Intel UHD (#170), freezes (#77, #59, #31) and Windows write failure without admin (#218); no soak test; 5 days of field history |
 | Performance | 5% | 75% | 10–20 | [layout-parity.md](layout-parity.md) | 61 ms cold layout and 1.4 ms relayout on a 188-page document (measured 2026-10-06, not re-run); font picker freezes fixed in #233; no large real-world documents measured |
@@ -251,14 +251,14 @@ Rule of thumb used: **a new, self-contained subsystem runs ~600–1,000 tested l
 Most of the remaining gap is the second kind, which is why the hours are high relative to the
 code already written. About 70–80% of the hours parallelize across agents by area (formats, layout,
 objects, localization, proofing are independent crates). Human time is needed for: native-speaker
-review of translations, a
-licensed or commissioned metric-compatible Aptos substitute, and a real-world DOCX corpus that
+review of translations and a real-world DOCX corpus that
 can be used without committing Word output.
 
 ## Revision history
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Layout and file-exchange rows: Aptos drawn with the metric-compatible Intos; Aptos substitute removed from the human-time list |
 | 2026-10-25 | trivial | Ecosystem: Microsoft's own systems out of scope, open replacements listed; AI: in-app provider out of scope; owner decisions list shortened |
 | 2026-10-11 | trivial | Proofing: runs in a language without a dictionary are skipped instead of flagged against the English dictionary (#100); no percentage change |
 | 2026-10-11 | minor | Polish interface (13 UI languages) and Polish proofing with per-run languages: Proofing 35% → 40% (25–45 h → 20–40 h), Localization 25% → 27%; feature depth and readiness unchanged at this precision |

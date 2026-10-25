@@ -49,6 +49,17 @@ static BUNDLED: &[&[u8]] = &[
     include_bytes!("../../../assets/fonts/Sarabun-SemiBold.ttf"),
     include_bytes!("../../../assets/fonts/Sarabun-Bold.ttf"),
     include_bytes!("../../../assets/fonts/Sarabun-BoldItalic.ttf"),
+    // Intos and Intos Display (OFL, github.com/muglug/intos): metric-compatible with Aptos and
+    // Aptos Display, Word's default body and heading fonts, so documents in them keep Word's line
+    // and page breaks where Aptos isn't installed.
+    include_bytes!("../../../assets/fonts/Intos-Regular.ttf"),
+    include_bytes!("../../../assets/fonts/Intos-Bold.ttf"),
+    include_bytes!("../../../assets/fonts/Intos-Italic.ttf"),
+    include_bytes!("../../../assets/fonts/Intos-BoldItalic.ttf"),
+    include_bytes!("../../../assets/fonts/IntosDisplay-Regular.ttf"),
+    include_bytes!("../../../assets/fonts/IntosDisplay-Bold.ttf"),
+    include_bytes!("../../../assets/fonts/IntosDisplay-Italic.ttf"),
+    include_bytes!("../../../assets/fonts/IntosDisplay-BoldItalic.ttf"),
 ];
 
 #[derive(Clone)]

@@ -87,6 +87,7 @@
         <File Id="OflSourceSans3" Source="$(var.RootDir)\assets\fonts\OFL-SourceSans3.txt" />
         <File Id="OflSourceSerif4" Source="$(var.RootDir)\assets\fonts\OFL-SourceSerif4.txt" />
         <File Id="OflJetBrainsMono" Source="$(var.RootDir)\assets\fonts\OFL-JetBrainsMono.txt" />
+        <File Id="OflIntos" Source="$(var.RootDir)\assets\fonts\OFL-Intos.txt" />
       </Component>
 
       <!-- File associations (#295). Each document type gets a Doc4Me ProgId (name, icon, open

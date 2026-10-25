@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (Next after beta: ecosystem decisions and the in-app assistant removed; previously trivial: M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (path to 80% measured readiness; previously trivial: beta list item 5: Aptos drawn with Intos; previously trivial: Next after beta: ecosystem decisions and the in-app assistant removed; previously trivial: M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -19,7 +19,8 @@ Opus 5.5 agent wall-clock.
 4. **Stability sweep** (gap #3, 20–30 h): the open crash, hang and write-failure issues, plus an
    autosave/recovery soak test.
 5. **Pagination fidelity** (gap #4, 30–50 h): compat options (column balancing and footnote
-   continuation landed), a local page-by-page comparison harness; an owner decision on an Aptos-metric font.
+   continuation landed), a local page-by-page comparison harness (Aptos is drawn with the bundled
+   metric-compatible Intos since 2026-10-25).
 6. **Formatting revisions and content controls** (gap #5, 12–18 h), **native printing** (gap #6,
    6–10 h), **dialog depth** (gap #7, 20–30 h).
 
@@ -65,6 +66,44 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 | M15 | Localization (12 key languages, RTL interface, proofing languages) | 19 UI languages; English, Polish and Thai proofing, a proofing language per run | 75–120 h |
 | M16 | Right-to-left and East Asian typography | RTL paragraphs done (#207) | 30–45 h |
 
+## Path to 80% measured readiness
+
+The readiness number in [`ROADMAP.md`](../ROADMAP.md) (~60%) is an estimate: a weighted sum of
+estimated dimension parities. The target is **80% ready for real work, measured**: every dimension
+comes from a fixed pass/fail check set, and one command computes the number. Checks may be added,
+never removed, so the number can't drift by editing the list.
+
+**A. Build the measurement first** (no real number exists until this is done):
+
+1. `cargo xtask readiness`: reads every check set's results and computes the weighted pass rate
+   with the existing weights (features 0.30, file formats 0.20, layout 0.15, UI/UX 0.10,
+   stability 0.10, performance 0.05, localization 0.04, platforms 0.03, ecosystem 0.02, hardware
+   0.01); writes `docs/readiness.md`, whose number replaces the estimate in `ROADMAP.md`.
+2. Real-world DOCX corpus: at least 200 files that may be reused (public-domain government
+   documents and openly licensed ones), each with a reference PDF that Microsoft Word produced
+   (PDF Producer "Microsoft Word"), so no Word installation is needed. Files stay out of git
+   (`/corpus`); a manifest in the repo lists URL, licence and SHA-256.
+3. File-format checks per corpus file: opens without error; save and reopen keep text, styles,
+   tables, pictures and unknown parts.
+4. Pagination checks against the reference PDFs: page count, and the first and last words of
+   every page.
+5. Stability checks: open, lay out and save every corpus file under a timeout with no panic or
+   hang; the autosave soak test; the existing hostile-parameter fuzzing.
+6. Feature and UI checklist: a fixed table of Word for Windows features, dialogs and options and
+   Microsoft's published default shortcut list, each row tied to a test or a manual check on
+   Windows.
+7. Performance thresholds (open a 500-page document, typing latency, scrolling), localization
+   (catalog completeness per language against Word's 30 interface languages), platforms (build
+   and install per platform), hardware and ecosystem rows as pass/fail.
+
+**B. Measure once** and record the first measured number in `ROADMAP.md`.
+
+**C. Fix what the checks fail**, highest weight per hour first, until `cargo xtask readiness`
+reports at least 80.0% on the latest commit: real-world DOCX failures (gap #1), pagination
+(gap #4), crashes and hangs on Windows (gap #3), Word ink round trip (gap #2), native printing
+(gap #6), missing dialogs and options (gap #7) and shortcuts (gap #24), editing Word's charts and
+SmartArt (gap #13), and the alpha gate re-run on Windows.
+
 ## Next after beta
 
 Charts and SmartArt editing, the Draw tab, `.doc` writing, PDF Reflow, the remaining interface
@@ -74,6 +113,8 @@ languages, screen-reader access.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Path to 80% measured readiness: build the measurement (xtask readiness, DOCX corpus with Word-made PDFs, pagination, stability, feature checklist), measure, fix to 80% |
+| 2026-10-25 | trivial | Beta list item 5 no longer waits on an Aptos-metric font (Intos bundled) |
 | 2026-10-25 | trivial | Next after beta no longer lists ecosystem decisions or an in-app assistant (out of scope, owner decision) |
 | 2026-10-25 | trivial | M2, M3 and M11 done: Dictate, Online Pictures, Get Add-ins, Ink Equation and Ink to Math landed with free and open-source parts; catalog parity 499/499 |
 | 2026-10-25 | trivial | M1, M2, M3, M8, M11 and M12 rows checked against the code; M3 and M8 done apart from service-bound items; alpha gate's command count 618 |

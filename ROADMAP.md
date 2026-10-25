@@ -2,7 +2,7 @@
 
 **Stage: alpha** · next: beta, ~15 points (60% → 75% ready for real work) and ~150–230 h away
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (catalog 499/499, View windows, Screenshot, Online Video, 3D Models, Online Pictures, Translate, Get Add-ins, Ink Equation, Dictate; counts re-measured; previously trivial: Doc4Me 1.1.1 and the Thai digit conversion; target is Word for Windows; counts and stale gaps corrected; previously trivial: Doc4Me 1.1.0 release; previously trivial: Thai interface catalog; previously trivial: Thai proofing, Thai counting, TH Sarabun New/PSK at their own size, Word for Windows line spacing; previously trivial: Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (Aptos drawn with the metric-compatible Intos; Microsoft's systems and the in-app AI provider out of scope; measured-readiness plan; previously trivial: catalog 499/499, View windows, Screenshot, Online Video, 3D Models, Online Pictures, Translate, Get Add-ins, Ink Equation, Dictate; counts re-measured; previously trivial: Doc4Me 1.1.1 and the Thai digit conversion; target is Word for Windows; counts and stale gaps corrected; previously trivial: Doc4Me 1.1.0 release; previously trivial: Thai interface catalog; previously trivial: Thai proofing, Thai counting, TH Sarabun New/PSK at their own size, Word for Windows line spacing; previously trivial: Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Doc4Me aims for complete parity with Microsoft Word, then goes further on speed, openness and
 agent control. This page is the summary; the assessment is
@@ -42,7 +42,8 @@ discounts and the user evidence (120 issues from outside users, 4 praise, 0 "swi
 **Why alpha:** the core workflows (write, format, styles, lists, tables, references, review, mail
 merge, open and save .docx) work end to end and ship as an unsigned Windows x64 MSI and portable
 zip (CI signs once the owner adds a certificate; no other platform is packaged yet). **Why not beta:** DOCX has never been tested on real-world files; Word ink is dropped
-silently; pagination differs from Word (no Aptos-metric font); there is open field evidence of
+silently; pagination hasn't been compared with Word page by page (Aptos is drawn with the
+metric-compatible Intos since 2026-10-25); there is open field evidence of
 a startup crash and several hangs; no native printing. Gaps #1–#7 in [`docs/gaps.md`](docs/gaps.md)
 are the beta list. All six core workflows pass the
 [alpha gate](docs/roadmap.md#alpha-gate-core-workflows) end to end on macOS (checked in WordCraft, not re-run on Windows yet), with save and reopen;
@@ -120,14 +121,18 @@ Proofing: English and Polish (spelling, grammar, hyphenation), chosen per run fr
 
 Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadmap.md)):
 
-1. Owner: review the four open Dependabot PRs (GitHub Actions updates). The ~45 open PRs that
-   closed gaps belong to WordCraft, upstream, and aren't in this repository.
+0. Measure readiness instead of estimating it: `cargo xtask readiness` over fixed check sets
+   (real-world DOCX corpus with Word-made reference PDFs, pagination, stability, a feature and
+   UI checklist), then fix what fails until it reports 80%
+   ([plan](docs/roadmap.md#path-to-80-measured-readiness)).
+1. Keep following WordCraft, upstream: its ~45 open PRs close gaps and are taken over as they
+   land. In this repository, the four open Dependabot PRs (GitHub Actions updates) wait on the owner.
 2. DOCX real-world corpus: open, render, round-trip, compare with Word (30–50 h).
 3. Preserve Word ink (`w14:contentPart`) through a round trip (2–4 h); charts, SmartArt and OLE
    objects already round-trip with all their parts.
 4. Stability sweep of the open crash, hang and write-failure issues; autosave soak test (20–30 h).
 5. Pagination fidelity: compat options, comparison harness (column balancing and footnote
-   continuation landed); an Aptos-metric font decision (30–50 h + owner).
+   continuation landed; Aptos drawn with the metric-compatible Intos) (30–50 h).
 6. Native printing (6–10 h); dialog depth (20–30 h). Formatting revisions and content controls
    landed.
 
@@ -229,6 +234,7 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Why not beta and Upcoming: Aptos drawn with the bundled Intos; Ecosystem and AI rows: Microsoft's systems and the in-app AI provider out of scope; Upcoming 0: measured readiness to 80%; Upcoming 1 keeps following WordCraft |
 | 2026-10-25 | trivial | Progress log: View windows, Screenshot, Online Video, 3D Models and the remaining catalog items (499/499); counts re-measured (625 commands, 1,816 tests); Upcoming #1 names this repository's open PRs |
 | 2026-10-24 | trivial | Progress log: Doc4Me 1.1.1 and the Thai digit conversion; Releases row; target is Word for Windows; counts and stale gaps corrected |
 | 2026-10-21 | trivial | Progress log: Doc4Me 1.1.0; Releases row; the progress-log table's two 2026-10-11 rows moved below its delimiter row, so the table renders |
