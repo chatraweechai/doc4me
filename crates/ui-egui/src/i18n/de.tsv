@@ -2162,3 +2162,416 @@ spacing	Normal	Normal
 	First Cell in Column	Erste Zelle der Spalte
 	Insert LISTNUM Field	LISTNUM-Feld einfügen
 	Collapse the Ribbon	Menüband reduzieren
+	1×2 Empty Matrix	Leere 1×2-Matrix
+	1×3 Empty Matrix	Leere 1×3-Matrix
+	2×1 Empty Matrix	Leere 2×1-Matrix
+	2×2 Determinant	2×2-Determinante
+	2×2 Empty Matrix	Leere 2×2-Matrix
+	2×2 Identity Matrix	2×2-Einheitsmatrix
+	2×2 Identity Matrix (sparse)	2×2-Einheitsmatrix (dünn besetzt)
+	2×2 Matrix in Brackets	2×2-Matrix in eckigen Klammern
+	2×2 Matrix in Double Bars	2×2-Matrix in doppelten senkrechten Strichen
+	2×2 Matrix in Parentheses	2×2-Matrix in runden Klammern
+	2×3 Empty Matrix	Leere 2×3-Matrix
+	3×1 Empty Matrix	Leere 3×1-Matrix
+	3×2 Empty Matrix	Leere 3×2-Matrix
+	3×3 Empty Matrix	Leere 3×3-Matrix
+	3×3 Identity Matrix	3×3-Einheitsmatrix
+	3×3 Identity Matrix (sparse)	3×3-Einheitsmatrix (dünn besetzt)
+	A xor B	A xor B
+	APA	APA
+	ASAP	DRINGEND
+	AaBbCcDd	AaBbCcDd
+	Absolute value cases	Fallunterscheidung beim Betrag
+	Accents	Akzente
+	Acute	Akut
+	All - Linear	Alle – Linear
+	All - Professional	Alle – Professionell
+	Angle Brackets	Spitze Klammern
+	Angle Brackets with Separator	Spitze Klammern mit Trennzeichen
+	Angle Brackets with Two Separators	Spitze Klammern mit zwei Trennzeichen
+	Annotation Reference	Kommentarzeichen
+	Annotation Subject	Kommentarthema
+	Annotation Text	Kommentartext
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Baseline Dots	Punkte auf der Grundlinie
+	Basic Math	Grundlegende Mathematik
+	Bayes' rule	Satz von Bayes
+	Binomial Coefficient	Binomialkoeffizient
+	Binomial Coefficient (angle)	Binomialkoeffizient (spitze Klammern)
+	Binomial Coefficient with Angle Brackets	Binomialkoeffizient mit spitzen Klammern
+	Binomial expansion of (x+a)ⁿ	Binomische Entwicklung von (x+a)ⁿ
+	Body text in a short paragraph to show spacing.	Fließtext in einem kurzen Absatz, der den Abstand zeigt.
+	Book Title	Buchtitel
+	Boxed Formula	Umrahmte Formel
+	Boxed Formula (example)	Umrahmte Formel (Beispiel)
+	Boxed Formulas	Umrahmte Formeln
+	Braces	Geschweifte Klammern
+	Braces with Separator	Geschweifte Klammern mit Trennzeichen
+	Brackets	Klammern
+	Brackets with Separators	Klammern mit Trennzeichen
+	Breve	Breve
+	CONFIDENTIAL	VERTRAULICH
+	Capitalize the first word of a sentence	Erstes Wort eines Satzes großschreiben
+	Cases (Three Conditions)	Fallunterscheidung (drei Bedingungen)
+	Cases (Two Conditions)	Fallunterscheidung (zwei Bedingungen)
+	Cases and Stacks	Fallunterscheidungen und Stapel
+	Category	Kategorie
+	Ceiling	Aufrundungsfunktion
+	Centered as Group	Als Gruppe zentriert
+	Change in y over change in x	Änderung von y durch Änderung von x
+	Change to Level 1	In Ebene 1 ändern
+	Change to Level 2	In Ebene 2 ändern
+	Change to Level 3	In Ebene 3 ändern
+	Change to Level 4	In Ebene 4 ändern
+	Change to Level 5	In Ebene 5 ändern
+	Change to Level 6	In Ebene 6 ändern
+	Change to Level 7	In Ebene 7 ändern
+	Change to Level 8	In Ebene 8 ändern
+	Change to Level 9	In Ebene 9 ändern
+	Check	Häkchen
+	Chicago	Chicago
+	Circle area from its radius	Kreisfläche aus dem Radius
+	Circled Dot	Eingekreister Punkt
+	Circled Plus	Eingekreistes Plus
+	Circled Times	Eingekreistes Mal
+	Colon Equal	Doppelpunkt-Gleich
+	Column selection: the arrow keys extend the block, Esc ends it	Spaltenauswahl: Die Pfeiltasten erweitern den Block, ESC beendet sie
+	Column width	Spaltenbreite
+	Common Accent Objects	Häufige Akzentobjekte
+	Common Brackets	Häufige Klammern
+	Common Fractions	Häufige Brüche
+	Common Functions	Häufige Funktionen
+	Common Large Operators	Häufige große Operatoren
+	Common Operator Structures	Häufige Operatorstrukturen
+	Common Operators	Häufige Operatoren
+	Common Radicals	Häufige Wurzeln
+	Common Subscripts and Superscripts	Häufige Tief- und Hochstellungen
+	Contour Integral	Kurvenintegral
+	Contour Integral with Limits	Kurvenintegral mit Grenzen
+	Contour Integral with Stacked Limits	Kurvenintegral mit gestapelten Grenzen
+	Contour Integrals	Kurvenintegrale
+	Contributors	Mitwirkende
+	Convert between built-up and linear form	Zwischen professioneller und linearer Form wechseln
+	Coproduct	Koprodukt
+	Coproduct with Limits	Koprodukt mit Grenzen
+	Coproduct with Lower Limit	Koprodukt mit unterer Grenze
+	Coproduct with Subscript-Superscript Limits	Koprodukt mit tief- und hochgestellten Grenzen
+	Cosecant Function	Kosekansfunktion
+	Cosine 2x	Kosinus 2x
+	Cosine Function	Kosinusfunktion
+	Cotangent Function	Kotangensfunktion
+	Cube Root	Kubikwurzel
+	Current - Linear	Aktuell – Linear
+	Current - Professional	Aktuell – Professionell
+	DO NOT COPY	NICHT KOPIEREN
+	DRAFT	ENTWURF
+	Default Paragraph Font	Absatz-Standardschriftart
+	Delta Equal To	Delta gleich
+	Delta over arrow	Delta über Pfeil
+	Derivative as a limit	Ableitung als Grenzwert
+	Diagonal Dots	Diagonale Punkte
+	Differential	Differenzial
+	Differential theta	Differenzial Theta
+	Differential x	Differenzial x
+	Differential y	Differenzial y
+	Differentials	Differenziale
+	Dot	Punkt
+	Dots	Punkte
+	Double Bar	Doppelter Strich
+	Double Dot	Doppelpunkt (Akzent)
+	Double Integral	Doppelintegral
+	Double Integral with Limits	Doppelintegral mit Grenzen
+	Double Integral with Stacked Limits	Doppelintegral mit gestapelten Grenzen
+	Double Left Arrow with Text Above	Doppelpfeil nach links mit Text darüber
+	Double Left Arrow with Text Below	Doppelpfeil nach links mit Text darunter
+	Double Left Right Arrow with Text Above	Doppelpfeil nach links und rechts mit Text darüber
+	Double Left Right Arrow with Text Below	Doppelpfeil nach links und rechts mit Text darunter
+	Double Right Arrow with Text Above	Doppelpfeil nach rechts mit Text darüber
+	Double Right Arrow with Text Below	Doppelpfeil nach rechts mit Text darunter
+	Double Square Brackets	Doppelte eckige Klammern
+	Double Vertical Bars	Doppelte senkrechte Striche
+	Double summation	Doppelsumme
+	Edit Document	Dokument bearbeiten
+	Emphasis	Hervorhebung
+	Empty Matrices	Leere Matrizen
+	Endnote Reference	Endnotenzeichen
+	Endnote Text	Endnotentext
+	Envelope #10   4.12" × 9.50"	Umschlag #10   4,12" × 9,50"
+	Envelope Address	Umschlagadresse
+	Envelope DL   4.33" × 8.66"	Umschlag DL   4,33" × 8,66"
+	Envelope Return	Umschlagabsenderadresse
+	Equal Equal	Gleich gleich
+	Equal by Definition	Gleich per Definition
+	Euler's identity	Eulersche Identität
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exponential	Exponentialfunktion
+	Exponential series	Exponentialreihe
+	Extra space	Überzähliges Leerzeichen
+	Floor	Abrundungsfunktion
+	Footnote Reference	Fußnotenzeichen
+	Footnote Text	Fußnotentext
+	Functions	Funktionen
+	GB/T 7714	GB/T 7714
+	GOST (name sort)	GOST (Sortierung nach Name)
+	GOST (title sort)	GOST (Sortierung nach Titel)
+	Geometry	Geometrie
+	Good afternoon	Guten Tag
+	Good evening	Guten Abend
+	Good morning	Guten Morgen
+	Grave	Gravis
+	Greek Letters	Griechische Buchstaben
+	Grid Table 1 Light	Gitternetztabelle 1 hell
+	Grid Table 4 – Blue	Gitternetztabelle 4 – Blau
+	Grid Table 4 – Green	Gitternetztabelle 4 – Grün
+	Grid Table 4 – Orange	Gitternetztabelle 4 – Orange
+	Grid Table 4 – Purple	Gitternetztabelle 4 – Violett
+	Grouping Character Above	Gruppierungszeichen oben
+	Grouping Character Below	Gruppierungszeichen unten
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Dach
+	Historical and Discretional	Historisch und frei wählbar
+	Hyperbolic Cosecant Function	Hyperbolische Kosekansfunktion
+	Hyperbolic Cosine Function	Hyperbolische Kosinusfunktion
+	Hyperbolic Cotangent Function	Hyperbolische Kotangensfunktion
+	Hyperbolic Functions	Hyperbolische Funktionen
+	Hyperbolic Secant Function	Hyperbolische Sekansfunktion
+	Hyperbolic Sine Function	Hyperbolische Sinusfunktion
+	Hyperbolic Tangent Function	Hyperbolische Tangensfunktion
+	Hyperlink	Hyperlink
+	Hypotenuse	Hypotenuse
+	IEEE	IEEE
+	ISO 690 (author-date)	ISO 690 (Autor-Datum)
+	ISO 690 (numerical)	ISO 690 (numerisch)
+	Identity Matrices	Einheitsmatrizen
+	Index Heading	Indexüberschrift
+	Index {n}	Index {n}
+	Integral of e^(−x²)	Integral von e^(−x²)
+	Integral with Limits	Integral mit Grenzen
+	Integral with Stacked Limits	Integral mit gestapelten Grenzen
+	Integrals	Integrale
+	Intense Emphasis	Intensive Hervorhebung
+	Intense Quote	Intensives Zitat
+	Intense Reference	Intensiver Verweis
+	Intersection	Durchschnitt
+	Intersection with Limits	Durchschnitt mit Grenzen
+	Intersection with Lower Limit	Durchschnitt mit unterer Grenze
+	Intersection with Subscript-Superscript Limits	Durchschnitt mit tief- und hochgestellten Grenzen
+	Inverse Cosecant Function	Umkehrfunktion des Kosekans
+	Inverse Cosine Function	Umkehrfunktion des Kosinus
+	Inverse Cotangent Function	Umkehrfunktion des Kotangens
+	Inverse Functions	Umkehrfunktionen
+	Inverse Hyperbolic Cosecant Function	Umkehrfunktion des hyperbolischen Kosekans
+	Inverse Hyperbolic Cosine Function	Umkehrfunktion des hyperbolischen Kosinus
+	Inverse Hyperbolic Cotangent Function	Umkehrfunktion des hyperbolischen Kotangens
+	Inverse Hyperbolic Functions	Umgekehrte hyperbolische Funktionen
+	Inverse Hyperbolic Secant Function	Umkehrfunktion des hyperbolischen Sekans
+	Inverse Hyperbolic Sine Function	Umkehrfunktion des hyperbolischen Sinus
+	Inverse Hyperbolic Tangent Function	Umkehrfunktion des hyperbolischen Tangens
+	Inverse Secant Function	Umkehrfunktion des Sekans
+	Inverse Sine Function	Umkehrfunktion des Sinus
+	Inverse Tangent Function	Umkehrfunktion des Tangens
+	Justification of a display equation	Ausrichtung einer abgesetzten Formel
+	Kerning for fonts:	Unterschneidung für Schriftarten:
+	Keywords	Stichwörter
+	Left Arrow with Text Above	Pfeil nach links mit Text darüber
+	Left Arrow with Text Below	Pfeil nach links mit Text darunter
+	Left Bracket Twice	Zweimal linke Klammer
+	Left Right Arrow Above	Pfeil nach links und rechts oben
+	Left Right Arrow with Text Above	Pfeil nach links und rechts mit Text darüber
+	Left Right Arrow with Text Below	Pfeil nach links und rechts mit Text darunter
+	Left Subscript-Superscript	Links tief- und hochgestellt
+	Leftwards Arrow Above	Pfeil nach links oben
+	Leftwards Harpoon Above	Harpune nach links oben
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter-Like Symbols	Buchstabenähnliche Symbole
+	Level 1	Ebene 1
+	Level 2	Ebene 2
+	Level 3	Ebene 3
+	Level 4	Ebene 4
+	Level 5	Ebene 5
+	Level 6	Ebene 6
+	Level 7	Ebene 7
+	Level 8	Ebene 8
+	Level 9	Ebene 9
+	Ligatures:	Ligaturen:
+	Limit	Grenzwert
+	Limit Example	Grenzwert-Beispiel
+	Line Number	Zeilennummer
+	Linear Fraction	Linearer Bruch
+	List Paragraph	Listenabsatz
+	List Table 3 – Blue	Listentabelle 3 – Blau
+	List Table 3 – Green	Listentabelle 3 – Grün
+	List Table 3 – Orange	Listentabelle 3 – Orange
+	List Table 3 – Purple	Listentabelle 3 – Violett
+	Logarithm	Logarithmus
+	Logarithm with Base	Logarithmus mit Basis
+	Logical AND	Logisches UND
+	Logical AND with Limits	Logisches UND mit Grenzen
+	Logical OR	Logisches ODER
+	Logical OR with Limits	Logisches ODER mit Grenzen
+	MLA	MLA
+	Matrices with Brackets	Matrizen mit Klammern
+	Maximum	Maximum
+	Maximum Example	Maximum-Beispiel
+	Measured By	Gemessen durch
+	Midline Dots	Punkte auf der Mittellinie
+	Minimum	Minimum
+	Minus Equal	Minus gleich
+	Models	Modelle
+	Natural Logarithm	Natürlicher Logarithmus
+	Negated Relations	Negierte Relationen
+	No Spacing	Kein Leerraum
+	Normal	Standard
+	Normal Indent	Standardeinzug
+	Normal Table	Normale Tabelle
+	Normal probability density	Dichte der Normalverteilung
+	Number the equation; the number sits at the right margin (or type # then the number)	Formel nummerieren; die Nummer steht am rechten Rand (oder # und dann die Nummer eingeben)
+	One half	Ein Halb
+	Operator Structures	Operatorstrukturen
+	Operators	Operatoren
+	Other Large Operators	Andere große Operatoren
+	Outward Brackets	Nach außen gerichtete Klammern
+	Overbar	Überstrich
+	Overbars and Underbars	Über- und Unterstriche
+	Overbrace	Geschweifte Klammer oben
+	Parentheses	Runde Klammern
+	Parentheses with Separator	Runde Klammern mit Trennzeichen
+	Partial Differential	Partielles Differenzial
+	Pi Over 2	Pi durch 2
+	Plain Table 1	Einfache Tabelle 1
+	Plus Equal	Plus gleich
+	Possible spelling mistake	Möglicher Rechtschreibfehler
+	Power series of (1+x)ⁿ	Potenzreihe von (1+x)ⁿ
+	Product	Produkt
+	Product of A	Produkt von A
+	Product with Limits	Produkt mit Grenzen
+	Product with Lower Limit	Produkt mit unterer Grenze
+	Product with Subscript-Superscript Limits	Produkt mit tief- und hochgestellten Grenzen
+	Products and Coproducts	Produkte und Koprodukte
+	Quadratic Root	Quadratwurzel
+	Quote	Zitat
+	Radical with Degree	Wurzel mit Grad
+	Radicals	Wurzeln
+	Reading Mode	Lesemodus
+	Remove the space before the punctuation	Leerzeichen vor dem Satzzeichen entfernen
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Researcher braucht einen Onlinedienst; Doc4Me hält Ihre Dokumente offline.
+	Right Arrow with Text Above	Pfeil nach rechts mit Text darüber
+	Right Arrow with Text Below	Pfeil nach rechts mit Text darunter
+	Right Bracket Twice	Zweimal rechte Klammer
+	Rightwards Arrow Above	Pfeil nach rechts oben
+	Rightwards Harpoon Above	Harpune nach rechts oben
+	Roots of ax²+bx+c	Nullstellen von ax²+bx+c
+	SAMPLE	MUSTER
+	SIST02	SIST02
+	Scripts	Skripte
+	Secant Function	Sekansfunktion
+	Show the equation in the line of text	Formel in der Textzeile anzeigen
+	Show the equation on a line of its own	Formel in einer eigenen Zeile anzeigen
+	Sides of a right triangle	Seiten eines rechtwinkligen Dreiecks
+	Sine Function	Sinusfunktion
+	Sine and cosine series of f(x)	Sinus- und Kosinusreihe von f(x)
+	Sine theta	Sinus Theta
+	Single Brackets	Einfache Klammern
+	Single Left Angle	Einzelne linke spitze Klammer
+	Single Left Bar	Einzelner linker Strich
+	Single Left Brace	Einzelne linke geschweifte Klammer
+	Single Left Bracket	Einzelne linke eckige Klammer
+	Single Left Parenthesis	Einzelne linke runde Klammer
+	Single Right Brace	Einzelne rechte geschweifte Klammer
+	Single Right Bracket	Einzelne rechte eckige Klammer
+	Single Right Parenthesis	Einzelne rechte runde Klammer
+	Skewed Fraction	Schräger Bruch
+	Small change	Kleine Änderung
+	Sparse Matrices	Dünn besetzte Matrizen
+	Square Root	Quadratwurzel
+	Square Root with Degree	Wurzel mit Grad
+	Square Union	Eckige Vereinigung
+	Stack Object	Stapelobjekt
+	Stack Object (Three)	Stapelobjekt (drei)
+	Stacked Fraction	Gestapelter Bruch
+	Stacked, no bar	Gestapelt, ohne Bruchstrich
+	Standard Only	Nur Standard
+	Standard and Contextual	Standard und kontextbezogen
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Strong	Fett
+	Style: APA	Formatvorlage: APA
+	Subject	Betreff
+	Subscript-Superscript	Tief- und Hochstellung
+	Subscripts and Superscripts	Tief- und Hochstellungen
+	Subtitle	Untertitel
+	Subtle Emphasis	Schwache Hervorhebung
+	Subtle Reference	Schwacher Verweis
+	Sum of cosines	Summe von Kosinus
+	Sum or difference of sines	Summe oder Differenz von Sinus
+	Summation	Summe
+	Summation from 0 to n	Summe von 0 bis n
+	Summation over binomials	Summe über Binomialkoeffizienten
+	Summation with Limits	Summe mit Grenzen
+	Summation with Lower Limit	Summe mit unterer Grenze
+	Summation with Subscript Limit	Summe mit tiefgestellter Grenze
+	Summation with Subscript-Superscript Limits	Summe mit tief- und hochgestellten Grenzen
+	Summations	Summen
+	Surface Integral	Oberflächenintegral
+	Surface Integral with Limits	Oberflächenintegral mit Grenzen
+	Surface Integral with Stacked Limits	Oberflächenintegral mit gestapelten Grenzen
+	TOA Heading	RVZ-Überschrift
+	TOC Heading	Inhaltsverzeichnisüberschrift
+	TOC {n}	Verzeichnis {n}
+	Table Grid	Tabellenraster
+	Table of Figures	Abbildungsverzeichnis
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tangent Function	Tangensfunktion
+	Tangent formula	Tangensformel
+	Text over Colon Equal	Text über Doppelpunkt-Gleich
+	Text over Equal	Text über Gleich
+	Text size	Textgröße
+	The spelling and grammar check is complete.	Die Rechtschreib- und Grammatikprüfung ist abgeschlossen.
+	These settings will be used for new documents.	Diese Einstellungen werden für neue Dokumente verwendet.
+	Tilde	Tilde
+	Track\nChanges	Änderungen\nnachverfolgen
+	Track\nChanges ✓	Änderungen\nnachverfolgen ✓
+	Trigonometric Functions	Trigonometrische Funktionen
+	Triple Dot	Drei Punkte
+	Triple Integral	Dreifachintegral
+	Triple Integral with Limits	Dreifachintegral mit Grenzen
+	Triple Integral with Stacked Limits	Dreifachintegral mit gestapelten Grenzen
+	Turabian	Turabian
+	Type equations in LaTeX	Formeln in LaTeX eingeben
+	Type equations in the linear format (UnicodeMath)	Formeln im linearen Format eingeben (UnicodeMath)
+	Type normal (non-math) text in the equation	Normalen Text (keine Mathematik) in die Formel eingeben
+	Typing	Eingabe
+	URGENT	DRINGEND
+	Underbar	Unterstrich
+	Underbrace	Geschweifte Klammer unten
+	Union	Vereinigung
+	Union of intersections	Vereinigung von Durchschnitten
+	Union with Limits	Vereinigung mit Grenzen
+	Union with Lower Limit	Vereinigung mit unterer Grenze
+	Union with Plus	Vereinigung mit Plus
+	Union with Subscript-Superscript Limits	Vereinigung mit tief- und hochgestellten Grenzen
+	Unions and Intersections	Vereinigungen und Durchschnitte
+	Up Diagonal Dots	Diagonale Punkte nach oben
+	Use "a" before a consonant sound	Vor einem Konsonanten "a" verwenden
+	Use "an" before a vowel sound	Vor einem Vokal "an" verwenden
+	Vector A	Vektor A
+	Vector AB	Vektor AB
+	Vertical Bars	Senkrechte Striche
+	Vertical Dots	Vertikale Punkte
+	Volume Integral	Volumenintegral
+	Volume Integral with Limits	Volumenintegral mit Grenzen
+	Volume Integral with Stacked Limits	Volumenintegral mit gestapelten Grenzen
+	Wildcards (regex)	Platzhalter (regulärer Ausdruck)
+	Yields	Ergibt
+	n×n Identity Matrix	n×n-Einheitsmatrix
+	n×n Matrix	n×n-Matrix
+	points and above	Punkt und größer
+	tOGGLE cASE	gROSS-/kLEINSCHREIBUNG uMKEHREN
+	x bar	x quer
+	{w} × {h} in	{w} × {h} Zoll
+	{w} × {h} mm	{w} × {h} mm
+	✓ None	✓ Keine
+	➕ New comment	➕ Neuer Kommentar
+	📂  Browse…	📂  Durchsuchen…

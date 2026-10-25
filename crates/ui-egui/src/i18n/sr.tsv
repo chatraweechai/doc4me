@@ -2177,3 +2177,416 @@ spacing	Normal	Нормално
 	First Cell in Column	Прва ћелија у колони
 	Insert LISTNUM Field	Уметни поље LISTNUM
 	Collapse the Ribbon	Скупи траку
+	1×2 Empty Matrix	Празна матрица 1×2
+	1×3 Empty Matrix	Празна матрица 1×3
+	2×1 Empty Matrix	Празна матрица 2×1
+	2×2 Determinant	Детерминанта 2×2
+	2×2 Empty Matrix	Празна матрица 2×2
+	2×2 Identity Matrix	Јединична матрица 2×2
+	2×2 Identity Matrix (sparse)	Јединична матрица 2×2 (ретка)
+	2×2 Matrix in Brackets	Матрица 2×2 у угластим заградама
+	2×2 Matrix in Double Bars	Матрица 2×2 у двоструким усправним цртама
+	2×2 Matrix in Parentheses	Матрица 2×2 у обичним заградама
+	2×3 Empty Matrix	Празна матрица 2×3
+	3×1 Empty Matrix	Празна матрица 3×1
+	3×2 Empty Matrix	Празна матрица 3×2
+	3×3 Empty Matrix	Празна матрица 3×3
+	3×3 Identity Matrix	Јединична матрица 3×3
+	3×3 Identity Matrix (sparse)	Јединична матрица 3×3 (ретка)
+	A xor B	A xor B
+	APA	APA
+	ASAP	ШТО ПРЕ
+	AaBbCcDd	AaBbCcDd
+	Absolute value cases	Случајеви апсолутне вредности
+	Accents	Акценти
+	Acute	Акут
+	All - Linear	Све – линеарно
+	All - Professional	Све – професионално
+	Angle Brackets	Изломљене заграде
+	Angle Brackets with Separator	Изломљене заграде са разделником
+	Angle Brackets with Two Separators	Изломљене заграде са два разделника
+	Annotation Reference	Референца примедбе
+	Annotation Subject	Тема примедбе
+	Annotation Text	Текст примедбе
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Baseline Dots	Тачке на основној линији
+	Basic Math	Основна математика
+	Bayes' rule	Бајесово правило
+	Binomial Coefficient	Биномни коефицијент
+	Binomial Coefficient (angle)	Биномни коефицијент (изломљене заграде)
+	Binomial Coefficient with Angle Brackets	Биномни коефицијент у изломљеним заградама
+	Binomial expansion of (x+a)ⁿ	Биномни развој (x+a)ⁿ
+	Body text in a short paragraph to show spacing.	Основни текст у кратком пасусу за приказ размака.
+	Book Title	Наслов књиге
+	Boxed Formula	Формула у оквиру
+	Boxed Formula (example)	Формула у оквиру (пример)
+	Boxed Formulas	Формуле у оквиру
+	Braces	Витичасте заграде
+	Braces with Separator	Витичасте заграде са разделником
+	Brackets	Заграде
+	Brackets with Separators	Заграде са разделницима
+	Breve	Бревис
+	CONFIDENTIAL	ПОВЕРЉИВО
+	Capitalize the first word of a sentence	Велико почетно слово прве речи у реченици
+	Cases (Three Conditions)	Случајеви (три услова)
+	Cases (Two Conditions)	Случајеви (два услова)
+	Cases and Stacks	Случајеви и наслагани изрази
+	Category	Категорија
+	Ceiling	Горњи цели део
+	Centered as Group	Центрирано као група
+	Change in y over change in x	Промена y кроз промену x
+	Change to Level 1	Промени у ниво 1
+	Change to Level 2	Промени у ниво 2
+	Change to Level 3	Промени у ниво 3
+	Change to Level 4	Промени у ниво 4
+	Change to Level 5	Промени у ниво 5
+	Change to Level 6	Промени у ниво 6
+	Change to Level 7	Промени у ниво 7
+	Change to Level 8	Промени у ниво 8
+	Change to Level 9	Промени у ниво 9
+	Check	Квачица
+	Chicago	Chicago
+	Circle area from its radius	Површина круга из полупречника
+	Circled Dot	Тачка у кругу
+	Circled Plus	Плус у кругу
+	Circled Times	Пута у кругу
+	Colon Equal	Двотачка једнако
+	Column selection: the arrow keys extend the block, Esc ends it	Бирање колоне: тастери са стрелицама проширују блок, Esc га завршава
+	Column width	Ширина колоне
+	Common Accent Objects	Уобичајени објекти акцента
+	Common Brackets	Уобичајене заграде
+	Common Fractions	Уобичајени разломци
+	Common Functions	Уобичајене функције
+	Common Large Operators	Уобичајени велики оператори
+	Common Operator Structures	Уобичајене структуре оператора
+	Common Operators	Уобичајени оператори
+	Common Radicals	Уобичајени корени
+	Common Subscripts and Superscripts	Уобичајени индекси и експоненти
+	Contour Integral	Контурни интеграл
+	Contour Integral with Limits	Контурни интеграл са границама
+	Contour Integral with Stacked Limits	Контурни интеграл са наслаганим границама
+	Contour Integrals	Контурни интеграли
+	Contributors	Сарадници
+	Convert between built-up and linear form	Претвори између професионалног и линеарног облика
+	Coproduct	Копроизвод
+	Coproduct with Limits	Копроизвод са границама
+	Coproduct with Lower Limit	Копроизвод са доњом границом
+	Coproduct with Subscript-Superscript Limits	Копроизвод са границама у индексу и експоненту
+	Cosecant Function	Функција косеканс
+	Cosine 2x	Косинус 2x
+	Cosine Function	Функција косинус
+	Cotangent Function	Функција котангенс
+	Cube Root	Кубни корен
+	Current - Linear	Тренутно – линеарно
+	Current - Professional	Тренутно – професионално
+	DO NOT COPY	НЕ КОПИРАТИ
+	DRAFT	РАДНА ВЕРЗИЈА
+	Default Paragraph Font	Подразумевани фонт пасуса
+	Delta Equal To	Делта једнако
+	Delta over arrow	Делта изнад стрелице
+	Derivative as a limit	Извод као гранична вредност
+	Diagonal Dots	Дијагоналне тачке
+	Differential	Диференцијал
+	Differential theta	Диференцијал тета
+	Differential x	Диференцијал x
+	Differential y	Диференцијал y
+	Differentials	Диференцијали
+	Dot	Тачка
+	Dots	Тачке
+	Double Bar	Двострука црта
+	Double Dot	Двострука тачка
+	Double Integral	Двоструки интеграл
+	Double Integral with Limits	Двоструки интеграл са границама
+	Double Integral with Stacked Limits	Двоструки интеграл са наслаганим границама
+	Double Left Arrow with Text Above	Двострука стрелица налево са текстом изнад
+	Double Left Arrow with Text Below	Двострука стрелица налево са текстом испод
+	Double Left Right Arrow with Text Above	Двострука двосмерна стрелица са текстом изнад
+	Double Left Right Arrow with Text Below	Двострука двосмерна стрелица са текстом испод
+	Double Right Arrow with Text Above	Двострука стрелица надесно са текстом изнад
+	Double Right Arrow with Text Below	Двострука стрелица надесно са текстом испод
+	Double Square Brackets	Двоструке угласте заграде
+	Double Vertical Bars	Двоструке усправне црте
+	Double summation	Двострука сума
+	Edit Document	Уреди документ
+	Emphasis	Нагласак
+	Empty Matrices	Празне матрице
+	Endnote Reference	Референца ендноте
+	Endnote Text	Текст ендноте
+	Envelope #10   4.12" × 9.50"	Коверта #10   4,12" × 9,50"
+	Envelope Address	Адреса на коверти
+	Envelope DL   4.33" × 8.66"	Коверта DL   4,33" × 8,66"
+	Envelope Return	Повратна адреса на коверти
+	Equal Equal	Једнако једнако
+	Equal by Definition	Једнако по дефиницији
+	Euler's identity	Ојлеров идентитет
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exponential	Експоненцијална
+	Exponential series	Експоненцијални ред
+	Extra space	Вишак размака
+	Floor	Доњи цели део
+	Footnote Reference	Референца фусноте
+	Footnote Text	Текст фусноте
+	Functions	Функције
+	GB/T 7714	GB/T 7714
+	GOST (name sort)	GOST (сортирање по имену)
+	GOST (title sort)	GOST (сортирање по наслову)
+	Geometry	Геометрија
+	Good afternoon	Добар дан
+	Good evening	Добро вече
+	Good morning	Добро јутро
+	Grave	Гравис
+	Greek Letters	Грчка слова
+	Grid Table 1 Light	Табела мреже 1 светла
+	Grid Table 4 – Blue	Табела мреже 4 – плава
+	Grid Table 4 – Green	Табела мреже 4 – зелена
+	Grid Table 4 – Orange	Табела мреже 4 – наранџаста
+	Grid Table 4 – Purple	Табела мреже 4 – љубичаста
+	Grouping Character Above	Знак за груписање изнад
+	Grouping Character Below	Знак за груписање испод
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Капица
+	Historical and Discretional	Историјске и по избору
+	Hyperbolic Cosecant Function	Функција хиперболички косеканс
+	Hyperbolic Cosine Function	Функција хиперболички косинус
+	Hyperbolic Cotangent Function	Функција хиперболички котангенс
+	Hyperbolic Functions	Хиперболичке функције
+	Hyperbolic Secant Function	Функција хиперболички секанс
+	Hyperbolic Sine Function	Функција хиперболички синус
+	Hyperbolic Tangent Function	Функција хиперболички тангенс
+	Hyperlink	Хипервеза
+	Hypotenuse	Хипотенуза
+	IEEE	IEEE
+	ISO 690 (author-date)	ISO 690 (аутор-датум)
+	ISO 690 (numerical)	ISO 690 (бројевно)
+	Identity Matrices	Јединичне матрице
+	Index Heading	Наслов индекса
+	Index {n}	Индекс {n}
+	Integral of e^(−x²)	Интеграл од e^(−x²)
+	Integral with Limits	Интеграл са границама
+	Integral with Stacked Limits	Интеграл са наслаганим границама
+	Integrals	Интеграли
+	Intense Emphasis	Јак нагласак
+	Intense Quote	Наглашени цитат
+	Intense Reference	Јака референца
+	Intersection	Пресек
+	Intersection with Limits	Пресек са границама
+	Intersection with Lower Limit	Пресек са доњом границом
+	Intersection with Subscript-Superscript Limits	Пресек са границама у индексу и експоненту
+	Inverse Cosecant Function	Инверзна функција косеканс
+	Inverse Cosine Function	Инверзна функција косинус
+	Inverse Cotangent Function	Инверзна функција котангенс
+	Inverse Functions	Инверзне функције
+	Inverse Hyperbolic Cosecant Function	Инверзна функција хиперболички косеканс
+	Inverse Hyperbolic Cosine Function	Инверзна функција хиперболички косинус
+	Inverse Hyperbolic Cotangent Function	Инверзна функција хиперболички котангенс
+	Inverse Hyperbolic Functions	Инверзне хиперболичке функције
+	Inverse Hyperbolic Secant Function	Инверзна функција хиперболички секанс
+	Inverse Hyperbolic Sine Function	Инверзна функција хиперболички синус
+	Inverse Hyperbolic Tangent Function	Инверзна функција хиперболички тангенс
+	Inverse Secant Function	Инверзна функција секанс
+	Inverse Sine Function	Инверзна функција синус
+	Inverse Tangent Function	Инверзна функција тангенс
+	Justification of a display equation	Поравнање издвојене једначине
+	Kerning for fonts:	Кернинг за фонтове:
+	Keywords	Кључне речи
+	Left Arrow with Text Above	Стрелица налево са текстом изнад
+	Left Arrow with Text Below	Стрелица налево са текстом испод
+	Left Bracket Twice	Две леве заграде
+	Left Right Arrow Above	Двосмерна стрелица изнад
+	Left Right Arrow with Text Above	Двосмерна стрелица са текстом изнад
+	Left Right Arrow with Text Below	Двосмерна стрелица са текстом испод
+	Left Subscript-Superscript	Леви индекс и експонент
+	Leftwards Arrow Above	Стрелица налево изнад
+	Leftwards Harpoon Above	Харпун налево изнад
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter-Like Symbols	Симболи слични словима
+	Level 1	Ниво 1
+	Level 2	Ниво 2
+	Level 3	Ниво 3
+	Level 4	Ниво 4
+	Level 5	Ниво 5
+	Level 6	Ниво 6
+	Level 7	Ниво 7
+	Level 8	Ниво 8
+	Level 9	Ниво 9
+	Ligatures:	Лигатуре:
+	Limit	Гранична вредност
+	Limit Example	Пример граничне вредности
+	Line Number	Број реда
+	Linear Fraction	Линеарни разломак
+	List Paragraph	Пасус листе
+	List Table 3 – Blue	Табела листе 3 – плава
+	List Table 3 – Green	Табела листе 3 – зелена
+	List Table 3 – Orange	Табела листе 3 – наранџаста
+	List Table 3 – Purple	Табела листе 3 – љубичаста
+	Logarithm	Логаритам
+	Logarithm with Base	Логаритам са основом
+	Logical AND	Логичко И
+	Logical AND with Limits	Логичко И са границама
+	Logical OR	Логичко ИЛИ
+	Logical OR with Limits	Логичко ИЛИ са границама
+	MLA	MLA
+	Matrices with Brackets	Матрице у заградама
+	Maximum	Максимум
+	Maximum Example	Пример максимума
+	Measured By	Мерено помоћу
+	Midline Dots	Тачке на средњој линији
+	Minimum	Минимум
+	Minus Equal	Минус једнако
+	Models	Модели
+	Natural Logarithm	Природни логаритам
+	Negated Relations	Негиране релације
+	No Spacing	Без прореда
+	Normal	Нормално
+	Normal Indent	Нормално увлачење
+	Normal Table	Нормална табела
+	Normal probability density	Нормална густина вероватноће
+	Number the equation; the number sits at the right margin (or type # then the number)	Нумериши једначину; број стоји уз десну маргину (или откуцајте # па број)
+	One half	Једна половина
+	Operator Structures	Структуре оператора
+	Operators	Оператори
+	Other Large Operators	Остали велики оператори
+	Outward Brackets	Заграде окренуте споља
+	Overbar	Црта изнад
+	Overbars and Underbars	Црте изнад и испод
+	Overbrace	Витичаста заграда изнад
+	Parentheses	Обичне заграде
+	Parentheses with Separator	Обичне заграде са разделником
+	Partial Differential	Парцијални диференцијал
+	Pi Over 2	Пи кроз 2
+	Plain Table 1	Обична табела 1
+	Plus Equal	Плус једнако
+	Possible spelling mistake	Могућа правописна грешка
+	Power series of (1+x)ⁿ	Степени ред за (1+x)ⁿ
+	Product	Производ
+	Product of A	Производ од A
+	Product with Limits	Производ са границама
+	Product with Lower Limit	Производ са доњом границом
+	Product with Subscript-Superscript Limits	Производ са границама у индексу и експоненту
+	Products and Coproducts	Производи и копроизводи
+	Quadratic Root	Корен квадратне једначине
+	Quote	Цитат
+	Radical with Degree	Корен са степеном
+	Radicals	Корени
+	Reading Mode	Режим читања
+	Remove the space before the punctuation	Уклони размак испред интерпункције
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Истраживач захтева онлајн услугу; Doc4Me чува ваше документе ван мреже.
+	Right Arrow with Text Above	Стрелица надесно са текстом изнад
+	Right Arrow with Text Below	Стрелица надесно са текстом испод
+	Right Bracket Twice	Две десне заграде
+	Rightwards Arrow Above	Стрелица надесно изнад
+	Rightwards Harpoon Above	Харпун надесно изнад
+	Roots of ax²+bx+c	Корени ax²+bx+c
+	SAMPLE	УЗОРАК
+	SIST02	SIST02
+	Scripts	Писана слова
+	Secant Function	Функција секанс
+	Show the equation in the line of text	Прикажи једначину у реду текста
+	Show the equation on a line of its own	Прикажи једначину у засебном реду
+	Sides of a right triangle	Странице правоуглог троугла
+	Sine Function	Функција синус
+	Sine and cosine series of f(x)	Синусни и косинусни ред за f(x)
+	Sine theta	Синус тета
+	Single Brackets	Појединачне заграде
+	Single Left Angle	Једна лева изломљена заграда
+	Single Left Bar	Једна лева усправна црта
+	Single Left Brace	Једна лева витичаста заграда
+	Single Left Bracket	Једна лева угласта заграда
+	Single Left Parenthesis	Једна лева обична заграда
+	Single Right Brace	Једна десна витичаста заграда
+	Single Right Bracket	Једна десна угласта заграда
+	Single Right Parenthesis	Једна десна обична заграда
+	Skewed Fraction	Коси разломак
+	Small change	Мала промена
+	Sparse Matrices	Ретке матрице
+	Square Root	Квадратни корен
+	Square Root with Degree	Корен са степеном
+	Square Union	Квадратна унија
+	Stack Object	Наслагани објекат
+	Stack Object (Three)	Наслагани објекат (три)
+	Stacked Fraction	Наслагани разломак
+	Stacked, no bar	Наслагано, без разломачке црте
+	Standard Only	Само стандардне
+	Standard and Contextual	Стандардне и контекстуалне
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Strong	Наглашено
+	Style: APA	Стил: APA
+	Subject	Тема
+	Subscript-Superscript	Индекс и експонент
+	Subscripts and Superscripts	Индекси и експоненти
+	Subtitle	Поднаслов
+	Subtle Emphasis	Благ нагласак
+	Subtle Reference	Блага референца
+	Sum of cosines	Збир косинуса
+	Sum or difference of sines	Збир или разлика синуса
+	Summation	Сума
+	Summation from 0 to n	Сума од 0 до n
+	Summation over binomials	Сума биномних коефицијената
+	Summation with Limits	Сума са границама
+	Summation with Lower Limit	Сума са доњом границом
+	Summation with Subscript Limit	Сума са границом у индексу
+	Summation with Subscript-Superscript Limits	Сума са границама у индексу и експоненту
+	Summations	Суме
+	Surface Integral	Површински интеграл
+	Surface Integral with Limits	Површински интеграл са границама
+	Surface Integral with Stacked Limits	Површински интеграл са наслаганим границама
+	TOA Heading	Наслов регистра извора
+	TOC Heading	Наслов садржаја
+	TOC {n}	Садржај {n}
+	Table Grid	Мрежа табеле
+	Table of Figures	Списак слика
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tangent Function	Функција тангенс
+	Tangent formula	Формула за тангенс
+	Text over Colon Equal	Текст изнад знака двотачка једнако
+	Text over Equal	Текст изнад знака једнакости
+	Text size	Величина текста
+	The spelling and grammar check is complete.	Провера правописа и граматике је завршена.
+	These settings will be used for new documents.	Ова подешавања ће се користити за нове документе.
+	Tilde	Тилда
+	Track\nChanges	Праћење\nпромена
+	Track\nChanges ✓	Праћење\nпромена ✓
+	Trigonometric Functions	Тригонометријске функције
+	Triple Dot	Трострука тачка
+	Triple Integral	Троструки интеграл
+	Triple Integral with Limits	Троструки интеграл са границама
+	Triple Integral with Stacked Limits	Троструки интеграл са наслаганим границама
+	Turabian	Turabian
+	Type equations in LaTeX	Куцај једначине у LaTeX-у
+	Type equations in the linear format (UnicodeMath)	Куцај једначине у линеарном формату (UnicodeMath)
+	Type normal (non-math) text in the equation	Куцај обичан (нематематички) текст у једначини
+	Typing	Куцање
+	URGENT	ХИТНО
+	Underbar	Црта испод
+	Underbrace	Витичаста заграда испод
+	Union	Унија
+	Union of intersections	Унија пресека
+	Union with Limits	Унија са границама
+	Union with Lower Limit	Унија са доњом границом
+	Union with Plus	Унија са плусом
+	Union with Subscript-Superscript Limits	Унија са границама у индексу и експоненту
+	Unions and Intersections	Уније и пресеци
+	Up Diagonal Dots	Узлазне дијагоналне тачке
+	Use "a" before a consonant sound	Користи "a" испред сугласничког гласа
+	Use "an" before a vowel sound	Користи "an" испред самогласничког гласа
+	Vector A	Вектор A
+	Vector AB	Вектор AB
+	Vertical Bars	Усправне црте
+	Vertical Dots	Вертикалне тачке
+	Volume Integral	Запремински интеграл
+	Volume Integral with Limits	Запремински интеграл са границама
+	Volume Integral with Stacked Limits	Запремински интеграл са наслаганим границама
+	Wildcards (regex)	Џокерски знакови (регуларни изрази)
+	Yields	Даје
+	n×n Identity Matrix	Јединична матрица n×n
+	n×n Matrix	Матрица n×n
+	points and above	тачака и више
+	tOGGLE cASE	оБРНИ вЕЛИЧИНУ сЛОВА
+	x bar	x са цртом
+	{w} × {h} in	{w} × {h} in
+	{w} × {h} mm	{w} × {h} mm
+	✓ None	✓ Ниједно
+	➕ New comment	➕ Нови коментар
+	📂  Browse…	📂  Потражи…

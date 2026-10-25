@@ -2204,3 +2204,380 @@ spacing	Normal	Normalne
 	First Cell in Column	Pierwsza komórka w kolumnie
 	Insert LISTNUM Field	Wstaw pole LISTNUM
 	Collapse the Ribbon	Zwiń wstążkę
+	1×2 Empty Matrix	Pusta macierz 1×2
+	1×3 Empty Matrix	Pusta macierz 1×3
+	2×1 Empty Matrix	Pusta macierz 2×1
+	2×2 Determinant	Wyznacznik 2×2
+	2×2 Empty Matrix	Pusta macierz 2×2
+	2×2 Identity Matrix	Macierz jednostkowa 2×2
+	2×2 Identity Matrix (sparse)	Macierz jednostkowa 2×2 (rzadka)
+	2×2 Matrix in Brackets	Macierz 2×2 w nawiasach kwadratowych
+	2×2 Matrix in Double Bars	Macierz 2×2 w podwójnych kreskach
+	2×2 Matrix in Parentheses	Macierz 2×2 w nawiasach okrągłych
+	2×3 Empty Matrix	Pusta macierz 2×3
+	3×1 Empty Matrix	Pusta macierz 3×1
+	3×2 Empty Matrix	Pusta macierz 3×2
+	3×3 Empty Matrix	Pusta macierz 3×3
+	3×3 Identity Matrix	Macierz jednostkowa 3×3
+	3×3 Identity Matrix (sparse)	Macierz jednostkowa 3×3 (rzadka)
+	A xor B	A xor B
+	APA	APA
+	ASAP	JAK NAJSZYBCIEJ
+	AaBbCcDd	AaBbCcDd
+	Absolute value cases	Przypadki wartości bezwzględnej
+	Accents	Akcenty
+	Acute	Akcent ostry
+	All - Linear	Wszystko – liniowy
+	All - Professional	Wszystko – profesjonalny
+	Angle Brackets	Nawiasy ostre
+	Angle Brackets with Separator	Nawiasy ostre z separatorem
+	Angle Brackets with Two Separators	Nawiasy ostre z dwoma separatorami
+	Annotation Reference	Odwołanie do komentarza
+	Annotation Subject	Temat komentarza
+	Annotation Text	Tekst komentarza
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Baseline Dots	Kropki na linii bazowej
+	Basic Math	Podstawy matematyki
+	Bayes' rule	Twierdzenie Bayesa
+	Binomial Coefficient	Współczynnik dwumianowy
+	Binomial Coefficient (angle)	Współczynnik dwumianowy (ostry)
+	Binomial Coefficient with Angle Brackets	Współczynnik dwumianowy w nawiasach ostrych
+	Binomial expansion of (x+a)ⁿ	Rozwinięcie dwumianu (x+a)ⁿ
+	Body text in a short paragraph to show spacing.	Tekst w krótkim akapicie pokazujący odstępy.
+	Boxed Formula	Formuła w ramce
+	Boxed Formula (example)	Formuła w ramce (przykład)
+	Boxed Formulas	Formuły w ramce
+	Braces	Nawiasy klamrowe
+	Braces with Separator	Nawiasy klamrowe z separatorem
+	Brackets	Nawiasy
+	Brackets with Separators	Nawiasy z separatorami
+	Breve	Brewis
+	CONFIDENTIAL	POUFNE
+	Cases (Three Conditions)	Przypadki (trzy warunki)
+	Cases (Two Conditions)	Przypadki (dwa warunki)
+	Cases and Stacks	Przypadki i stosy
+	Ceiling	Sufit
+	Centered as Group	Wyśrodkowane jako grupa
+	Change in y over change in x	Zmiana y przez zmianę x
+	Change to Level 1	Zmień na poziom 1
+	Change to Level 2	Zmień na poziom 2
+	Change to Level 3	Zmień na poziom 3
+	Change to Level 4	Zmień na poziom 4
+	Change to Level 5	Zmień na poziom 5
+	Change to Level 6	Zmień na poziom 6
+	Change to Level 7	Zmień na poziom 7
+	Change to Level 8	Zmień na poziom 8
+	Change to Level 9	Zmień na poziom 9
+	Check	Znacznik wyboru
+	Chicago	Chicago
+	Circle area from its radius	Pole koła z promienia
+	Circled Dot	Kropka w kółku
+	Circled Plus	Plus w kółku
+	Circled Times	Razy w kółku
+	Colon Equal	Dwukropek równa się
+	Column selection: the arrow keys extend the block, Esc ends it	Zaznaczanie kolumny: klawisze strzałek rozszerzają blok, Esc kończy
+	Column width	Szerokość kolumny
+	Common Accent Objects	Typowe obiekty akcentu
+	Common Brackets	Typowe nawiasy
+	Common Fractions	Typowe ułamki
+	Common Functions	Typowe funkcje
+	Common Large Operators	Typowe duże operatory
+	Common Operator Structures	Typowe struktury operatorów
+	Common Operators	Typowe operatory
+	Common Radicals	Typowe pierwiastki
+	Common Subscripts and Superscripts	Typowe indeksy dolne i górne
+	Contour Integral	Całka krzywoliniowa
+	Contour Integral with Limits	Całka krzywoliniowa z granicami
+	Contour Integral with Stacked Limits	Całka krzywoliniowa z granicami w stosie
+	Contour Integrals	Całki krzywoliniowe
+	Convert between built-up and linear form	Przełącz między formą profesjonalną a liniową
+	Coproduct	Koprodukt
+	Coproduct with Limits	Koprodukt z granicami
+	Coproduct with Lower Limit	Koprodukt z dolną granicą
+	Coproduct with Subscript-Superscript Limits	Koprodukt z granicami w indeksie dolnym i górnym
+	Cosecant Function	Funkcja cosecans
+	Cosine 2x	Cosinus 2x
+	Cosine Function	Funkcja cosinus
+	Cotangent Function	Funkcja cotangens
+	Cube Root	Pierwiastek sześcienny
+	Current - Linear	Bieżący – liniowy
+	Current - Professional	Bieżący – profesjonalny
+	DO NOT COPY	NIE KOPIOWAĆ
+	DRAFT	WERSJA ROBOCZA
+	Default Paragraph Font	Domyślna czcionka akapitu
+	Delta Equal To	Delta równa się
+	Delta over arrow	Delta nad strzałką
+	Derivative as a limit	Pochodna jako granica
+	Diagonal Dots	Kropki ukośne
+	Differential	Różniczka
+	Differential theta	Różniczka theta
+	Differential x	Różniczka x
+	Differential y	Różniczka y
+	Differentials	Różniczki
+	Dot	Kropka
+	Dots	Kropki
+	Double Bar	Podwójna kreska
+	Double Dot	Dwie kropki
+	Double Integral	Całka podwójna
+	Double Integral with Limits	Całka podwójna z granicami
+	Double Integral with Stacked Limits	Całka podwójna z granicami w stosie
+	Double Left Arrow with Text Above	Podwójna strzałka w lewo z tekstem nad
+	Double Left Arrow with Text Below	Podwójna strzałka w lewo z tekstem pod
+	Double Left Right Arrow with Text Above	Podwójna strzałka w lewo i w prawo z tekstem nad
+	Double Left Right Arrow with Text Below	Podwójna strzałka w lewo i w prawo z tekstem pod
+	Double Right Arrow with Text Above	Podwójna strzałka w prawo z tekstem nad
+	Double Right Arrow with Text Below	Podwójna strzałka w prawo z tekstem pod
+	Double Square Brackets	Podwójne nawiasy kwadratowe
+	Double Vertical Bars	Podwójne kreski pionowe
+	Double summation	Suma podwójna
+	Edit Document	Edytuj dokument
+	Empty Matrices	Puste macierze
+	Envelope #10   4.12" × 9.50"	Koperta #10   4,12" × 9,50"
+	Envelope Address	Adres na kopercie
+	Envelope DL   4.33" × 8.66"	Koperta DL   4,33" × 8,66"
+	Envelope Return	Adres zwrotny na kopercie
+	Equal Equal	Równa się równa się
+	Equal by Definition	Równe z definicji
+	Euler's identity	Tożsamość Eulera
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exponential	Funkcja wykładnicza
+	Exponential series	Szereg wykładniczy
+	Floor	Podłoga
+	Functions	Funkcje
+	GB/T 7714	GB/T 7714
+	GOST (name sort)	GOST (sortowanie wg nazwiska)
+	GOST (title sort)	GOST (sortowanie wg tytułu)
+	Geometry	Geometria
+	Good afternoon	Dzień dobry
+	Good evening	Dobry wieczór
+	Good morning	Dzień dobry
+	Grave	Akcent słaby
+	Greek Letters	Litery greckie
+	Grid Table 1 Light	Tabela siatki 1 — jasna
+	Grid Table 4 – Blue	Tabela siatki 4 – niebieska
+	Grid Table 4 – Green	Tabela siatki 4 – zielona
+	Grid Table 4 – Orange	Tabela siatki 4 – pomarańczowa
+	Grid Table 4 – Purple	Tabela siatki 4 – fioletowa
+	Grouping Character Above	Znak grupowania nad
+	Grouping Character Below	Znak grupowania pod
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Daszek
+	Historical and Discretional	Historyczne i opcjonalne
+	Hyperbolic Cosecant Function	Funkcja cosecans hiperboliczny
+	Hyperbolic Cosine Function	Funkcja cosinus hiperboliczny
+	Hyperbolic Cotangent Function	Funkcja cotangens hiperboliczny
+	Hyperbolic Functions	Funkcje hiperboliczne
+	Hyperbolic Secant Function	Funkcja secans hiperboliczny
+	Hyperbolic Sine Function	Funkcja sinus hiperboliczny
+	Hyperbolic Tangent Function	Funkcja tangens hiperboliczny
+	Hypotenuse	Przeciwprostokątna
+	IEEE	IEEE
+	ISO 690 (author-date)	ISO 690 (autor-data)
+	ISO 690 (numerical)	ISO 690 (numeryczny)
+	Identity Matrices	Macierze jednostkowe
+	Index Heading	Nagłówek indeksu
+	Index {n}	Indeks {n}
+	Integral of e^(−x²)	Całka z e^(−x²)
+	Integral with Limits	Całka z granicami
+	Integral with Stacked Limits	Całka z granicami w stosie
+	Integrals	Całki
+	Intersection	Iloczyn zbiorów
+	Intersection with Limits	Iloczyn zbiorów z granicami
+	Intersection with Lower Limit	Iloczyn zbiorów z dolną granicą
+	Intersection with Subscript-Superscript Limits	Iloczyn zbiorów z granicami w indeksie dolnym i górnym
+	Inverse Cosecant Function	Funkcja odwrotna do cosecansa
+	Inverse Cosine Function	Funkcja odwrotna do cosinusa
+	Inverse Cotangent Function	Funkcja odwrotna do cotangensa
+	Inverse Functions	Funkcje odwrotne
+	Inverse Hyperbolic Cosecant Function	Funkcja odwrotna do cosecansa hiperbolicznego
+	Inverse Hyperbolic Cosine Function	Funkcja odwrotna do cosinusa hiperbolicznego
+	Inverse Hyperbolic Cotangent Function	Funkcja odwrotna do cotangensa hiperbolicznego
+	Inverse Hyperbolic Functions	Odwrotne funkcje hiperboliczne
+	Inverse Hyperbolic Secant Function	Funkcja odwrotna do secansa hiperbolicznego
+	Inverse Hyperbolic Sine Function	Funkcja odwrotna do sinusa hiperbolicznego
+	Inverse Hyperbolic Tangent Function	Funkcja odwrotna do tangensa hiperbolicznego
+	Inverse Secant Function	Funkcja odwrotna do secansa
+	Inverse Sine Function	Funkcja odwrotna do sinusa
+	Inverse Tangent Function	Funkcja odwrotna do tangensa
+	Justification of a display equation	Wyrównanie równania wyświetlanego
+	Kerning for fonts:	Kerning dla czcionek:
+	Left Arrow with Text Above	Strzałka w lewo z tekstem nad
+	Left Arrow with Text Below	Strzałka w lewo z tekstem pod
+	Left Bracket Twice	Dwa razy lewy nawias
+	Left Right Arrow Above	Strzałka w lewo i w prawo nad
+	Left Right Arrow with Text Above	Strzałka w lewo i w prawo z tekstem nad
+	Left Right Arrow with Text Below	Strzałka w lewo i w prawo z tekstem pod
+	Left Subscript-Superscript	Indeks dolny i górny z lewej
+	Leftwards Arrow Above	Strzałka w lewo nad
+	Leftwards Harpoon Above	Harpun w lewo nad
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter-Like Symbols	Symbole literopodobne
+	Level 1	Poziom 1
+	Level 2	Poziom 2
+	Level 3	Poziom 3
+	Level 4	Poziom 4
+	Level 5	Poziom 5
+	Level 6	Poziom 6
+	Level 7	Poziom 7
+	Level 8	Poziom 8
+	Level 9	Poziom 9
+	Ligatures:	Ligatury:
+	Limit	Granica
+	Limit Example	Przykład granicy
+	Line Number	Numer wiersza
+	Linear Fraction	Ułamek liniowy
+	List Table 3 – Blue	Tabela listy 3 – niebieska
+	List Table 3 – Green	Tabela listy 3 – zielona
+	List Table 3 – Orange	Tabela listy 3 – pomarańczowa
+	List Table 3 – Purple	Tabela listy 3 – fioletowa
+	Logarithm	Logarytm
+	Logarithm with Base	Logarytm o podstawie
+	Logical AND	Logiczne I
+	Logical AND with Limits	Logiczne I z granicami
+	Logical OR	Logiczne LUB
+	Logical OR with Limits	Logiczne LUB z granicami
+	MLA	MLA
+	Matrices with Brackets	Macierze w nawiasach
+	Maximum	Maksimum
+	Maximum Example	Przykład maksimum
+	Measured By	Mierzone przez
+	Midline Dots	Kropki na linii środkowej
+	Minimum	Minimum
+	Minus Equal	Minus równa się
+	Natural Logarithm	Logarytm naturalny
+	Negated Relations	Relacje zanegowane
+	Normal	Normalny
+	Normal Indent	Wcięcie normalne
+	Normal Table	Normalna tabela
+	Normal probability density	Gęstość rozkładu normalnego
+	Number the equation; the number sits at the right margin (or type # then the number)	Ponumeruj równanie; numer stoi przy prawym marginesie (lub wpisz # i numer)
+	One half	Jedna druga
+	Operator Structures	Struktury operatorów
+	Operators	Operatory
+	Other Large Operators	Inne duże operatory
+	Outward Brackets	Nawiasy na zewnątrz
+	Overbar	Kreska nad
+	Overbars and Underbars	Kreski nad i pod
+	Overbrace	Nawias klamrowy nad
+	Parentheses	Nawiasy okrągłe
+	Parentheses with Separator	Nawiasy okrągłe z separatorem
+	Partial Differential	Różniczka cząstkowa
+	Pi Over 2	Pi przez 2
+	Plain Table 1	Zwykła tabela 1
+	Plus Equal	Plus równa się
+	Power series of (1+x)ⁿ	Szereg potęgowy (1+x)ⁿ
+	Product	Iloczyn
+	Product of A	Iloczyn A
+	Product with Limits	Iloczyn z granicami
+	Product with Lower Limit	Iloczyn z dolną granicą
+	Product with Subscript-Superscript Limits	Iloczyn z granicami w indeksie dolnym i górnym
+	Products and Coproducts	Iloczyny i koprodukty
+	Quadratic Root	Pierwiastki równania kwadratowego
+	Radical with Degree	Pierwiastek ze stopniem
+	Radicals	Pierwiastki
+	Reading Mode	Tryb czytania
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Narzędzie Researcher wymaga usługi online; Doc4Me trzyma dokumenty offline.
+	Right Arrow with Text Above	Strzałka w prawo z tekstem nad
+	Right Arrow with Text Below	Strzałka w prawo z tekstem pod
+	Right Bracket Twice	Dwa razy prawy nawias
+	Rightwards Arrow Above	Strzałka w prawo nad
+	Rightwards Harpoon Above	Harpun w prawo nad
+	Roots of ax²+bx+c	Pierwiastki ax²+bx+c
+	SAMPLE	PRZYKŁAD
+	SIST02	SIST02
+	Scripts	Skrypty
+	Secant Function	Funkcja secans
+	Show the equation in the line of text	Pokaż równanie w wierszu tekstu
+	Show the equation on a line of its own	Pokaż równanie w osobnym wierszu
+	Sides of a right triangle	Boki trójkąta prostokątnego
+	Sine Function	Funkcja sinus
+	Sine and cosine series of f(x)	Szereg sinusów i cosinusów f(x)
+	Sine theta	Sinus theta
+	Single Brackets	Pojedyncze nawiasy
+	Single Left Angle	Pojedynczy lewy nawias ostry
+	Single Left Bar	Pojedyncza lewa kreska
+	Single Left Brace	Pojedynczy lewy nawias klamrowy
+	Single Left Bracket	Pojedynczy lewy nawias kwadratowy
+	Single Left Parenthesis	Pojedynczy lewy nawias okrągły
+	Single Right Brace	Pojedynczy prawy nawias klamrowy
+	Single Right Bracket	Pojedynczy prawy nawias kwadratowy
+	Single Right Parenthesis	Pojedynczy prawy nawias okrągły
+	Skewed Fraction	Ułamek ukośny
+	Small change	Mała zmiana
+	Sparse Matrices	Macierze rzadkie
+	Square Root	Pierwiastek kwadratowy
+	Square Root with Degree	Pierwiastek ze stopniem
+	Square Union	Suma kwadratowa
+	Stack Object	Obiekt stosu
+	Stack Object (Three)	Obiekt stosu (trzy)
+	Stacked Fraction	Ułamek w stosie
+	Stacked, no bar	W stosie, bez kreski
+	Standard Only	Tylko standardowe
+	Standard and Contextual	Standardowe i kontekstowe
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Style: APA	Styl: APA
+	Subscript-Superscript	Indeks dolny-górny
+	Subscripts and Superscripts	Indeksy dolne i górne
+	Sum of cosines	Suma cosinusów
+	Sum or difference of sines	Suma lub różnica sinusów
+	Summation	Suma
+	Summation from 0 to n	Suma od 0 do n
+	Summation over binomials	Suma współczynników dwumianowych
+	Summation with Limits	Suma z granicami
+	Summation with Lower Limit	Suma z dolną granicą
+	Summation with Subscript Limit	Suma z granicą w indeksie dolnym
+	Summation with Subscript-Superscript Limits	Suma z granicami w indeksie dolnym i górnym
+	Summations	Sumy
+	Surface Integral	Całka powierzchniowa
+	Surface Integral with Limits	Całka powierzchniowa z granicami
+	Surface Integral with Stacked Limits	Całka powierzchniowa z granicami w stosie
+	TOA Heading	Nagłówek wykazu źródeł
+	Table Grid	Tabela - Siatka
+	Table of Figures	Spis ilustracji
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tangent Function	Funkcja tangens
+	Tangent formula	Wzór na tangens
+	Text over Colon Equal	Tekst nad dwukropkiem równa się
+	Text over Equal	Tekst nad znakiem równości
+	Text size	Rozmiar tekstu
+	These settings will be used for new documents.	Te ustawienia będą używane w nowych dokumentach.
+	Tilde	Tylda
+	Trigonometric Functions	Funkcje trygonometryczne
+	Triple Dot	Trzy kropki
+	Triple Integral	Całka potrójna
+	Triple Integral with Limits	Całka potrójna z granicami
+	Triple Integral with Stacked Limits	Całka potrójna z granicami w stosie
+	Turabian	Turabian
+	Type equations in LaTeX	Wpisuj równania w LaTeX
+	Type equations in the linear format (UnicodeMath)	Wpisuj równania w formacie liniowym (UnicodeMath)
+	Type normal (non-math) text in the equation	Wpisz zwykły (niematematyczny) tekst w równaniu
+	Typing	Wpisywanie
+	URGENT	PILNE
+	Underbar	Kreska pod
+	Underbrace	Nawias klamrowy pod
+	Union	Suma zbiorów
+	Union of intersections	Suma iloczynów zbiorów
+	Union with Limits	Suma zbiorów z granicami
+	Union with Lower Limit	Suma zbiorów z dolną granicą
+	Union with Plus	Suma zbiorów z plusem
+	Union with Subscript-Superscript Limits	Suma zbiorów z granicami w indeksie dolnym i górnym
+	Unions and Intersections	Sumy i iloczyny zbiorów
+	Up Diagonal Dots	Kropki ukośne w górę
+	Vector A	Wektor A
+	Vector AB	Wektor AB
+	Vertical Bars	Kreski pionowe
+	Vertical Dots	Kropki pionowe
+	Volume Integral	Całka objętościowa
+	Volume Integral with Limits	Całka objętościowa z granicami
+	Volume Integral with Stacked Limits	Całka objętościowa z granicami w stosie
+	Yields	Daje
+	n×n Identity Matrix	Macierz jednostkowa n×n
+	n×n Matrix	Macierz n×n
+	points and above	punktów i więcej
+	tOGGLE cASE	zAMIEŃ wIELKOŚĆ lITER
+	x bar	x z kreską
+	{w} × {h} in	{w} × {h} cali
+	{w} × {h} mm	{w} × {h} mm
+	✓ None	✓ Brak

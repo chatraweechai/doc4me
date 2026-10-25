@@ -2175,3 +2175,416 @@ spacing	Normal	Звичайний
 	First Cell in Column	Перша клітинка стовпця
 	Insert LISTNUM Field	Вставити поле LISTNUM
 	Collapse the Ribbon	Згорнути стрічку
+	1×2 Empty Matrix	Порожня матриця 1×2
+	1×3 Empty Matrix	Порожня матриця 1×3
+	2×1 Empty Matrix	Порожня матриця 2×1
+	2×2 Determinant	Визначник 2×2
+	2×2 Empty Matrix	Порожня матриця 2×2
+	2×2 Identity Matrix	Одинична матриця 2×2
+	2×2 Identity Matrix (sparse)	Одинична матриця 2×2 (розріджена)
+	2×2 Matrix in Brackets	Матриця 2×2 у квадратних дужках
+	2×2 Matrix in Double Bars	Матриця 2×2 у подвійних вертикальних рисках
+	2×2 Matrix in Parentheses	Матриця 2×2 у круглих дужках
+	2×3 Empty Matrix	Порожня матриця 2×3
+	3×1 Empty Matrix	Порожня матриця 3×1
+	3×2 Empty Matrix	Порожня матриця 3×2
+	3×3 Empty Matrix	Порожня матриця 3×3
+	3×3 Identity Matrix	Одинична матриця 3×3
+	3×3 Identity Matrix (sparse)	Одинична матриця 3×3 (розріджена)
+	A xor B	A xor B
+	APA	APA
+	ASAP	ЯКНАЙШВИДШЕ
+	AaBbCcDd	АаБбВвГг
+	Absolute value cases	Випадки модуля
+	Accents	Діакритичні знаки
+	Acute	Акут
+	All - Linear	Усе – лінійний
+	All - Professional	Усе – професійний
+	Angle Brackets	Кутові дужки
+	Angle Brackets with Separator	Кутові дужки з роздільником
+	Angle Brackets with Two Separators	Кутові дужки з двома роздільниками
+	Annotation Reference	Знак примітки
+	Annotation Subject	Тема примітки
+	Annotation Text	Текст примітки
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Baseline Dots	Крапки на базовій лінії
+	Basic Math	Основи математики
+	Bayes' rule	Теорема Баєса
+	Binomial Coefficient	Біноміальний коефіцієнт
+	Binomial Coefficient (angle)	Біноміальний коефіцієнт (кутовий)
+	Binomial Coefficient with Angle Brackets	Біноміальний коефіцієнт у кутових дужках
+	Binomial expansion of (x+a)ⁿ	Біноміальне розвинення (x+a)ⁿ
+	Body text in a short paragraph to show spacing.	Текст у короткому абзаці для показу інтервалів.
+	Book Title	Назва книги
+	Boxed Formula	Формула в рамці
+	Boxed Formula (example)	Формула в рамці (приклад)
+	Boxed Formulas	Формули в рамці
+	Braces	Фігурні дужки
+	Braces with Separator	Фігурні дужки з роздільником
+	Brackets	Дужки
+	Brackets with Separators	Дужки з роздільниками
+	Breve	Бреве
+	CONFIDENTIAL	КОНФІДЕНЦІЙНО
+	Capitalize the first word of a sentence	Перше слово речення з великої літери
+	Cases (Three Conditions)	Випадки (три умови)
+	Cases (Two Conditions)	Випадки (дві умови)
+	Cases and Stacks	Випадки та стеки
+	Category	Категорія
+	Ceiling	Стеля
+	Centered as Group	По центру як група
+	Change in y over change in x	Зміна y до зміни x
+	Change to Level 1	Змінити на рівень 1
+	Change to Level 2	Змінити на рівень 2
+	Change to Level 3	Змінити на рівень 3
+	Change to Level 4	Змінити на рівень 4
+	Change to Level 5	Змінити на рівень 5
+	Change to Level 6	Змінити на рівень 6
+	Change to Level 7	Змінити на рівень 7
+	Change to Level 8	Змінити на рівень 8
+	Change to Level 9	Змінити на рівень 9
+	Check	Позначка
+	Chicago	Chicago
+	Circle area from its radius	Площа кола за радіусом
+	Circled Dot	Крапка в колі
+	Circled Plus	Плюс у колі
+	Circled Times	Множення в колі
+	Colon Equal	Двокрапка дорівнює
+	Column selection: the arrow keys extend the block, Esc ends it	Виділення стовпця: клавіші зі стрілками розширюють блок, Esc завершує
+	Column width	Ширина стовпця
+	Common Accent Objects	Поширені діакритичні об’єкти
+	Common Brackets	Поширені дужки
+	Common Fractions	Поширені дроби
+	Common Functions	Поширені функції
+	Common Large Operators	Поширені великі оператори
+	Common Operator Structures	Поширені структури операторів
+	Common Operators	Поширені оператори
+	Common Radicals	Поширені корені
+	Common Subscripts and Superscripts	Поширені нижні й верхні індекси
+	Contour Integral	Контурний інтеграл
+	Contour Integral with Limits	Контурний інтеграл з межами
+	Contour Integral with Stacked Limits	Контурний інтеграл з межами одна над одною
+	Contour Integrals	Контурні інтеграли
+	Contributors	Учасники
+	Convert between built-up and linear form	Перетворити між професійною та лінійною формою
+	Coproduct	Кодобуток
+	Coproduct with Limits	Кодобуток з межами
+	Coproduct with Lower Limit	Кодобуток з нижньою межею
+	Coproduct with Subscript-Superscript Limits	Кодобуток з межами в нижньому та верхньому індексах
+	Cosecant Function	Функція косеканс
+	Cosine 2x	Косинус 2x
+	Cosine Function	Функція косинус
+	Cotangent Function	Функція котангенс
+	Cube Root	Кубічний корінь
+	Current - Linear	Поточне – лінійний
+	Current - Professional	Поточне – професійний
+	DO NOT COPY	НЕ КОПІЮВАТИ
+	DRAFT	ЧЕРНЕТКА
+	Default Paragraph Font	Шрифт абзацу за промовчанням
+	Delta Equal To	Дельта дорівнює
+	Delta over arrow	Дельта над стрілкою
+	Derivative as a limit	Похідна як границя
+	Diagonal Dots	Діагональні крапки
+	Differential	Диференціал
+	Differential theta	Диференціал тета
+	Differential x	Диференціал x
+	Differential y	Диференціал y
+	Differentials	Диференціали
+	Dot	Крапка
+	Dots	Крапки
+	Double Bar	Подвійна риска
+	Double Dot	Дві крапки
+	Double Integral	Подвійний інтеграл
+	Double Integral with Limits	Подвійний інтеграл з межами
+	Double Integral with Stacked Limits	Подвійний інтеграл з межами одна над одною
+	Double Left Arrow with Text Above	Подвійна стрілка вліво з текстом угорі
+	Double Left Arrow with Text Below	Подвійна стрілка вліво з текстом унизу
+	Double Left Right Arrow with Text Above	Подвійна стрілка вліво-вправо з текстом угорі
+	Double Left Right Arrow with Text Below	Подвійна стрілка вліво-вправо з текстом унизу
+	Double Right Arrow with Text Above	Подвійна стрілка вправо з текстом угорі
+	Double Right Arrow with Text Below	Подвійна стрілка вправо з текстом унизу
+	Double Square Brackets	Подвійні квадратні дужки
+	Double Vertical Bars	Подвійні вертикальні риски
+	Double summation	Подвійна сума
+	Edit Document	Редагувати документ
+	Emphasis	Виділення
+	Empty Matrices	Порожні матриці
+	Endnote Reference	Знак кінцевої виноски
+	Endnote Text	Текст кінцевої виноски
+	Envelope #10   4.12" × 9.50"	Конверт #10   4,12" × 9,50"
+	Envelope Address	Адреса на конверті
+	Envelope DL   4.33" × 8.66"	Конверт DL   4,33" × 8,66"
+	Envelope Return	Зворотна адреса на конверті
+	Equal Equal	Дорівнює дорівнює
+	Equal by Definition	Дорівнює за визначенням
+	Euler's identity	Тотожність Ейлера
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exponential	Експонента
+	Exponential series	Експоненціальний ряд
+	Extra space	Зайвий пробіл
+	Floor	Підлога
+	Footnote Reference	Знак виноски
+	Footnote Text	Текст виноски
+	Functions	Функції
+	GB/T 7714	GB/T 7714
+	GOST (name sort)	ГОСТ (за іменем)
+	GOST (title sort)	ГОСТ (за назвою)
+	Geometry	Геометрія
+	Good afternoon	Добрий день
+	Good evening	Добрий вечір
+	Good morning	Доброго ранку
+	Grave	Гравіс
+	Greek Letters	Грецькі літери
+	Grid Table 1 Light	Таблиця-сітка 1, світла
+	Grid Table 4 – Blue	Таблиця-сітка 4 – синя
+	Grid Table 4 – Green	Таблиця-сітка 4 – зелена
+	Grid Table 4 – Orange	Таблиця-сітка 4 – помаранчева
+	Grid Table 4 – Purple	Таблиця-сітка 4 – фіолетова
+	Grouping Character Above	Символ групування вгорі
+	Grouping Character Below	Символ групування внизу
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Циркумфлекс
+	Historical and Discretional	Історичні та необов’язкові
+	Hyperbolic Cosecant Function	Функція гіперболічний косеканс
+	Hyperbolic Cosine Function	Функція гіперболічний косинус
+	Hyperbolic Cotangent Function	Функція гіперболічний котангенс
+	Hyperbolic Functions	Гіперболічні функції
+	Hyperbolic Secant Function	Функція гіперболічний секанс
+	Hyperbolic Sine Function	Функція гіперболічний синус
+	Hyperbolic Tangent Function	Функція гіперболічний тангенс
+	Hyperlink	Гіперпосилання
+	Hypotenuse	Гіпотенуза
+	IEEE	IEEE
+	ISO 690 (author-date)	ISO 690 (автор-дата)
+	ISO 690 (numerical)	ISO 690 (числовий)
+	Identity Matrices	Одиничні матриці
+	Index Heading	Заголовок покажчика
+	Index {n}	Покажчик {n}
+	Integral of e^(−x²)	Інтеграл від e^(−x²)
+	Integral with Limits	Інтеграл з межами
+	Integral with Stacked Limits	Інтеграл з межами одна над одною
+	Integrals	Інтеграли
+	Intense Emphasis	Насичене виділення
+	Intense Quote	Насичена цитата
+	Intense Reference	Насичене посилання
+	Intersection	Перетин
+	Intersection with Limits	Перетин з межами
+	Intersection with Lower Limit	Перетин з нижньою межею
+	Intersection with Subscript-Superscript Limits	Перетин з межами в нижньому та верхньому індексах
+	Inverse Cosecant Function	Функція арккосеканс
+	Inverse Cosine Function	Функція арккосинус
+	Inverse Cotangent Function	Функція арккотангенс
+	Inverse Functions	Обернені функції
+	Inverse Hyperbolic Cosecant Function	Функція гіперболічний арккосеканс
+	Inverse Hyperbolic Cosine Function	Функція гіперболічний арккосинус
+	Inverse Hyperbolic Cotangent Function	Функція гіперболічний арккотангенс
+	Inverse Hyperbolic Functions	Обернені гіперболічні функції
+	Inverse Hyperbolic Secant Function	Функція гіперболічний арксеканс
+	Inverse Hyperbolic Sine Function	Функція гіперболічний арксинус
+	Inverse Hyperbolic Tangent Function	Функція гіперболічний арктангенс
+	Inverse Secant Function	Функція арксеканс
+	Inverse Sine Function	Функція арксинус
+	Inverse Tangent Function	Функція арктангенс
+	Justification of a display equation	Вирівнювання виокремленого рівняння
+	Kerning for fonts:	Кернінг для шрифтів:
+	Keywords	Ключові слова
+	Left Arrow with Text Above	Стрілка вліво з текстом угорі
+	Left Arrow with Text Below	Стрілка вліво з текстом унизу
+	Left Bracket Twice	Двічі ліва дужка
+	Left Right Arrow Above	Стрілка вліво-вправо вгорі
+	Left Right Arrow with Text Above	Стрілка вліво-вправо з текстом угорі
+	Left Right Arrow with Text Below	Стрілка вліво-вправо з текстом унизу
+	Left Subscript-Superscript	Лівий нижній і верхній індекс
+	Leftwards Arrow Above	Стрілка вліво вгорі
+	Leftwards Harpoon Above	Гарпун уліво вгорі
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter-Like Symbols	Буквоподібні символи
+	Level 1	Рівень 1
+	Level 2	Рівень 2
+	Level 3	Рівень 3
+	Level 4	Рівень 4
+	Level 5	Рівень 5
+	Level 6	Рівень 6
+	Level 7	Рівень 7
+	Level 8	Рівень 8
+	Level 9	Рівень 9
+	Ligatures:	Лігатури:
+	Limit	Границя
+	Limit Example	Приклад границі
+	Line Number	Номер рядка
+	Linear Fraction	Лінійний дріб
+	List Paragraph	Абзац списку
+	List Table 3 – Blue	Таблиця-список 3 – синя
+	List Table 3 – Green	Таблиця-список 3 – зелена
+	List Table 3 – Orange	Таблиця-список 3 – помаранчева
+	List Table 3 – Purple	Таблиця-список 3 – фіолетова
+	Logarithm	Логарифм
+	Logarithm with Base	Логарифм за основою
+	Logical AND	Логічне І
+	Logical AND with Limits	Логічне І з межами
+	Logical OR	Логічне АБО
+	Logical OR with Limits	Логічне АБО з межами
+	MLA	MLA
+	Matrices with Brackets	Матриці з дужками
+	Maximum	Максимум
+	Maximum Example	Приклад максимуму
+	Measured By	Вимірюється за
+	Midline Dots	Крапки на середній лінії
+	Minimum	Мінімум
+	Minus Equal	Мінус дорівнює
+	Models	Моделі
+	Natural Logarithm	Натуральний логарифм
+	Negated Relations	Заперечені відношення
+	No Spacing	Без інтервалів
+	Normal	Звичайний
+	Normal Indent	Звичайний відступ
+	Normal Table	Звичайна таблиця
+	Normal probability density	Густина нормального розподілу
+	Number the equation; the number sits at the right margin (or type # then the number)	Пронумерувати рівняння; номер стоїть біля правого поля (або введіть #, а потім номер)
+	One half	Одна друга
+	Operator Structures	Структури операторів
+	Operators	Оператори
+	Other Large Operators	Інші великі оператори
+	Outward Brackets	Дужки назовні
+	Overbar	Риска вгорі
+	Overbars and Underbars	Риски вгорі та внизу
+	Overbrace	Фігурна дужка вгорі
+	Parentheses	Круглі дужки
+	Parentheses with Separator	Круглі дужки з роздільником
+	Partial Differential	Частинний диференціал
+	Pi Over 2	Пі на 2
+	Plain Table 1	Проста таблиця 1
+	Plus Equal	Плюс дорівнює
+	Possible spelling mistake	Можлива орфографічна помилка
+	Power series of (1+x)ⁿ	Степеневий ряд (1+x)ⁿ
+	Product	Добуток
+	Product of A	Добуток A
+	Product with Limits	Добуток з межами
+	Product with Lower Limit	Добуток з нижньою межею
+	Product with Subscript-Superscript Limits	Добуток з межами в нижньому та верхньому індексах
+	Products and Coproducts	Добутки та кодобутки
+	Quadratic Root	Корінь квадратного рівняння
+	Quote	Цитата
+	Radical with Degree	Корінь зі степенем
+	Radicals	Корені
+	Reading Mode	Режим читання
+	Remove the space before the punctuation	Видалити пробіл перед розділовим знаком
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Researcher потребує онлайн-служби; Doc4Me зберігає ваші документи офлайн.
+	Right Arrow with Text Above	Стрілка вправо з текстом угорі
+	Right Arrow with Text Below	Стрілка вправо з текстом унизу
+	Right Bracket Twice	Двічі права дужка
+	Rightwards Arrow Above	Стрілка вправо вгорі
+	Rightwards Harpoon Above	Гарпун управо вгорі
+	Roots of ax²+bx+c	Корені ax²+bx+c
+	SAMPLE	ЗРАЗОК
+	SIST02	SIST02
+	Scripts	Письмена
+	Secant Function	Функція секанс
+	Show the equation in the line of text	Показувати рівняння в рядку тексту
+	Show the equation on a line of its own	Показувати рівняння в окремому рядку
+	Sides of a right triangle	Сторони прямокутного трикутника
+	Sine Function	Функція синус
+	Sine and cosine series of f(x)	Ряд синусів і косинусів f(x)
+	Sine theta	Синус тета
+	Single Brackets	Одинарні дужки
+	Single Left Angle	Одна ліва кутова дужка
+	Single Left Bar	Одна ліва риска
+	Single Left Brace	Одна ліва фігурна дужка
+	Single Left Bracket	Одна ліва квадратна дужка
+	Single Left Parenthesis	Одна ліва кругла дужка
+	Single Right Brace	Одна права фігурна дужка
+	Single Right Bracket	Одна права квадратна дужка
+	Single Right Parenthesis	Одна права кругла дужка
+	Skewed Fraction	Похилий дріб
+	Small change	Мала зміна
+	Sparse Matrices	Розріджені матриці
+	Square Root	Квадратний корінь
+	Square Root with Degree	Корінь зі степенем
+	Square Union	Квадратне об’єднання
+	Stack Object	Об’єкт стека
+	Stack Object (Three)	Об’єкт стека (три)
+	Stacked Fraction	Вертикальний дріб
+	Stacked, no bar	Вертикальний, без риски
+	Standard Only	Лише стандартні
+	Standard and Contextual	Стандартні та контекстні
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Strong	Жирний
+	Style: APA	Стиль: APA
+	Subject	Тема
+	Subscript-Superscript	Нижній і верхній індекс
+	Subscripts and Superscripts	Нижні й верхні індекси
+	Subtitle	Підзаголовок
+	Subtle Emphasis	Слабке виділення
+	Subtle Reference	Слабке посилання
+	Sum of cosines	Сума косинусів
+	Sum or difference of sines	Сума або різниця синусів
+	Summation	Сума
+	Summation from 0 to n	Сума від 0 до n
+	Summation over binomials	Сума біноміальних коефіцієнтів
+	Summation with Limits	Сума з межами
+	Summation with Lower Limit	Сума з нижньою межею
+	Summation with Subscript Limit	Сума з межею в нижньому індексі
+	Summation with Subscript-Superscript Limits	Сума з межами в нижньому та верхньому індексах
+	Summations	Суми
+	Surface Integral	Поверхневий інтеграл
+	Surface Integral with Limits	Поверхневий інтеграл з межами
+	Surface Integral with Stacked Limits	Поверхневий інтеграл з межами одна над одною
+	TOA Heading	Заголовок таблиці посилань
+	TOC Heading	Заголовок змісту
+	TOC {n}	Зміст {n}
+	Table Grid	Сітка таблиці
+	Table of Figures	Перелік ілюстрацій
+	Tabloid   11.00" × 17.00"	Таблоїд   11,00" × 17,00"
+	Tangent Function	Функція тангенс
+	Tangent formula	Формула тангенса
+	Text over Colon Equal	Текст над двокрапкою дорівнює
+	Text over Equal	Текст над знаком рівності
+	Text size	Розмір тексту
+	The spelling and grammar check is complete.	Перевірку правопису й граматики завершено.
+	These settings will be used for new documents.	Ці параметри використовуватимуться для нових документів.
+	Tilde	Тильда
+	Track\nChanges	Відстежувати\nвиправлення
+	Track\nChanges ✓	Відстежувати\nвиправлення ✓
+	Trigonometric Functions	Тригонометричні функції
+	Triple Dot	Три крапки
+	Triple Integral	Потрійний інтеграл
+	Triple Integral with Limits	Потрійний інтеграл з межами
+	Triple Integral with Stacked Limits	Потрійний інтеграл з межами одна над одною
+	Turabian	Turabian
+	Type equations in LaTeX	Вводити рівняння в LaTeX
+	Type equations in the linear format (UnicodeMath)	Вводити рівняння в лінійному форматі (UnicodeMath)
+	Type normal (non-math) text in the equation	Вводити звичайний (не математичний) текст у рівняння
+	Typing	Введення
+	URGENT	ТЕРМІНОВО
+	Underbar	Риска внизу
+	Underbrace	Фігурна дужка внизу
+	Union	Об’єднання
+	Union of intersections	Об’єднання перетинів
+	Union with Limits	Об’єднання з межами
+	Union with Lower Limit	Об’єднання з нижньою межею
+	Union with Plus	Об’єднання з плюсом
+	Union with Subscript-Superscript Limits	Об’єднання з межами в нижньому та верхньому індексах
+	Unions and Intersections	Об’єднання та перетини
+	Up Diagonal Dots	Діагональні крапки вгору
+	Use "a" before a consonant sound	Вживайте "a" перед приголосним звуком
+	Use "an" before a vowel sound	Вживайте "an" перед голосним звуком
+	Vector A	Вектор A
+	Vector AB	Вектор AB
+	Vertical Bars	Вертикальні риски
+	Vertical Dots	Вертикальні крапки
+	Volume Integral	Об’ємний інтеграл
+	Volume Integral with Limits	Об’ємний інтеграл з межами
+	Volume Integral with Stacked Limits	Об’ємний інтеграл з межами одна над одною
+	Wildcards (regex)	Символи узагальнення (регулярний вираз)
+	Yields	Дає
+	n×n Identity Matrix	Одинична матриця n×n
+	n×n Matrix	Матриця n×n
+	points and above	пт і більше
+	tOGGLE cASE	зМІНИТИ рЕГІСТР
+	x bar	x з рискою
+	{w} × {h} in	{w} × {h} дюйм.
+	{w} × {h} mm	{w} × {h} мм
+	✓ None	✓ Немає
+	➕ New comment	➕ Нова примітка
+	📂  Browse…	📂  Огляд…

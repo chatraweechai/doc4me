@@ -2570,3 +2570,10 @@ spacing	Normal	Normál
 	First Cell in Column	Oszlop első cellája
 	Insert LISTNUM Field	LISTNUM mező beszúrása
 	Collapse the Ribbon	Menüszalag összecsukása
+	Historical and Discretional	Történeti és választható
+	Kerning for fonts:	Alávágás a következő betűmérettől:
+	Ligatures:	Ligatúrák:
+	Standard Only	Csak szabványos
+	Standard and Contextual	Szabványos és környezetfüggő
+	Wildcards (regex)	Helyettesítő karakterek (reguláris kifejezés)
+	points and above	pont vagy nagyobb

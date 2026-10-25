@@ -2168,3 +2168,416 @@ spacing	Normal	Normální
 	First Cell in Column	První buňka ve sloupci
 	Insert LISTNUM Field	Vložit pole LISTNUM
 	Collapse the Ribbon	Sbalit pás karet
+	1×2 Empty Matrix	Prázdná matice 1×2
+	1×3 Empty Matrix	Prázdná matice 1×3
+	2×1 Empty Matrix	Prázdná matice 2×1
+	2×2 Determinant	Determinant 2×2
+	2×2 Empty Matrix	Prázdná matice 2×2
+	2×2 Identity Matrix	Jednotková matice 2×2
+	2×2 Identity Matrix (sparse)	Jednotková matice 2×2 (řídká)
+	2×2 Matrix in Brackets	Matice 2×2 v hranatých závorkách
+	2×2 Matrix in Double Bars	Matice 2×2 ve dvojitých svislých čarách
+	2×2 Matrix in Parentheses	Matice 2×2 v kulatých závorkách
+	2×3 Empty Matrix	Prázdná matice 2×3
+	3×1 Empty Matrix	Prázdná matice 3×1
+	3×2 Empty Matrix	Prázdná matice 3×2
+	3×3 Empty Matrix	Prázdná matice 3×3
+	3×3 Identity Matrix	Jednotková matice 3×3
+	3×3 Identity Matrix (sparse)	Jednotková matice 3×3 (řídká)
+	A xor B	A xor B
+	APA	APA
+	ASAP	CO NEJDŘÍVE
+	AaBbCcDd	AaBbCcDd
+	Absolute value cases	Případy absolutní hodnoty
+	Accents	Diakritika
+	Acute	Čárka
+	All - Linear	Vše – lineární
+	All - Professional	Vše – profesionální
+	Angle Brackets	Lomené závorky
+	Angle Brackets with Separator	Lomené závorky s oddělovačem
+	Angle Brackets with Two Separators	Lomené závorky se dvěma oddělovači
+	Annotation Reference	Odkaz na komentář
+	Annotation Subject	Předmět komentáře
+	Annotation Text	Text komentáře
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Baseline Dots	Tečky na účaří
+	Basic Math	Základní matematika
+	Bayes' rule	Bayesova věta
+	Binomial Coefficient	Kombinační číslo
+	Binomial Coefficient (angle)	Kombinační číslo (lomené)
+	Binomial Coefficient with Angle Brackets	Kombinační číslo v lomených závorkách
+	Binomial expansion of (x+a)ⁿ	Binomický rozvoj (x+a)ⁿ
+	Body text in a short paragraph to show spacing.	Text v krátkém odstavci, který ukazuje mezery.
+	Book Title	Název knihy
+	Boxed Formula	Vzorec v rámečku
+	Boxed Formula (example)	Vzorec v rámečku (příklad)
+	Boxed Formulas	Vzorce v rámečku
+	Braces	Složené závorky
+	Braces with Separator	Složené závorky s oddělovačem
+	Brackets	Závorky
+	Brackets with Separators	Závorky s oddělovači
+	Breve	Oblouček
+	CONFIDENTIAL	DŮVĚRNÉ
+	Capitalize the first word of a sentence	První slovo věty s velkým písmenem
+	Cases (Three Conditions)	Případy (tři podmínky)
+	Cases (Two Conditions)	Případy (dvě podmínky)
+	Cases and Stacks	Případy a zásobníky
+	Category	Kategorie
+	Ceiling	Horní celá část
+	Centered as Group	Zarovnáno na střed jako skupina
+	Change in y over change in x	Změna y ku změně x
+	Change to Level 1	Změnit na úroveň 1
+	Change to Level 2	Změnit na úroveň 2
+	Change to Level 3	Změnit na úroveň 3
+	Change to Level 4	Změnit na úroveň 4
+	Change to Level 5	Změnit na úroveň 5
+	Change to Level 6	Změnit na úroveň 6
+	Change to Level 7	Změnit na úroveň 7
+	Change to Level 8	Změnit na úroveň 8
+	Change to Level 9	Změnit na úroveň 9
+	Check	Značka zaškrtnutí
+	Chicago	Chicago
+	Circle area from its radius	Obsah kruhu z poloměru
+	Circled Dot	Tečka v kroužku
+	Circled Plus	Plus v kroužku
+	Circled Times	Krát v kroužku
+	Colon Equal	Dvojtečka rovná se
+	Column selection: the arrow keys extend the block, Esc ends it	Výběr sloupce: šipky rozšiřují blok, Esc výběr ukončí
+	Column width	Šířka sloupce
+	Common Accent Objects	Běžné objekty diakritiky
+	Common Brackets	Běžné závorky
+	Common Fractions	Běžné zlomky
+	Common Functions	Běžné funkce
+	Common Large Operators	Běžné velké operátory
+	Common Operator Structures	Běžné struktury operátorů
+	Common Operators	Běžné operátory
+	Common Radicals	Běžné odmocniny
+	Common Subscripts and Superscripts	Běžné dolní a horní indexy
+	Contour Integral	Křivkový integrál
+	Contour Integral with Limits	Křivkový integrál s mezemi
+	Contour Integral with Stacked Limits	Křivkový integrál s mezemi nad sebou
+	Contour Integrals	Křivkové integrály
+	Contributors	Přispěvatelé
+	Convert between built-up and linear form	Převést mezi profesionálním a lineárním tvarem
+	Coproduct	Koprodukt
+	Coproduct with Limits	Koprodukt s mezemi
+	Coproduct with Lower Limit	Koprodukt s dolní mezí
+	Coproduct with Subscript-Superscript Limits	Koprodukt s mezemi v dolním a horním indexu
+	Cosecant Function	Funkce kosekans
+	Cosine 2x	Kosinus 2x
+	Cosine Function	Funkce kosinus
+	Cotangent Function	Funkce kotangens
+	Cube Root	Třetí odmocnina
+	Current - Linear	Aktuální – lineární
+	Current - Professional	Aktuální – profesionální
+	DO NOT COPY	NEKOPÍROVAT
+	DRAFT	KONCEPT
+	Default Paragraph Font	Výchozí písmo odstavce
+	Delta Equal To	Delta rovná se
+	Delta over arrow	Delta nad šipkou
+	Derivative as a limit	Derivace jako limita
+	Diagonal Dots	Úhlopříčné tečky
+	Differential	Diferenciál
+	Differential theta	Diferenciál theta
+	Differential x	Diferenciál x
+	Differential y	Diferenciál y
+	Differentials	Diferenciály
+	Dot	Tečka
+	Dots	Tečky
+	Double Bar	Dvojitá čára
+	Double Dot	Dvě tečky
+	Double Integral	Dvojný integrál
+	Double Integral with Limits	Dvojný integrál s mezemi
+	Double Integral with Stacked Limits	Dvojný integrál s mezemi nad sebou
+	Double Left Arrow with Text Above	Dvojitá šipka doleva s textem nad
+	Double Left Arrow with Text Below	Dvojitá šipka doleva s textem pod
+	Double Left Right Arrow with Text Above	Dvojitá šipka doleva a doprava s textem nad
+	Double Left Right Arrow with Text Below	Dvojitá šipka doleva a doprava s textem pod
+	Double Right Arrow with Text Above	Dvojitá šipka doprava s textem nad
+	Double Right Arrow with Text Below	Dvojitá šipka doprava s textem pod
+	Double Square Brackets	Dvojité hranaté závorky
+	Double Vertical Bars	Dvojité svislé čáry
+	Double summation	Dvojitá suma
+	Edit Document	Upravit dokument
+	Emphasis	Zdůraznění
+	Empty Matrices	Prázdné matice
+	Endnote Reference	Odkaz na vysvětlivku
+	Endnote Text	Text vysvětlivky
+	Envelope #10   4.12" × 9.50"	Obálka #10   4,12" × 9,50"
+	Envelope Address	Adresa na obálce
+	Envelope DL   4.33" × 8.66"	Obálka DL   4,33" × 8,66"
+	Envelope Return	Zpáteční adresa na obálce
+	Equal Equal	Rovná se rovná se
+	Equal by Definition	Rovno z definice
+	Euler's identity	Eulerova identita
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exponential	Exponenciála
+	Exponential series	Exponenciální řada
+	Extra space	Nadbytečná mezera
+	Floor	Dolní celá část
+	Footnote Reference	Odkaz na poznámku pod čarou
+	Footnote Text	Text poznámky pod čarou
+	Functions	Funkce
+	GB/T 7714	GB/T 7714
+	GOST (name sort)	GOST (řazení podle jména)
+	GOST (title sort)	GOST (řazení podle názvu)
+	Geometry	Geometrie
+	Good afternoon	Dobré odpoledne
+	Good evening	Dobrý večer
+	Good morning	Dobré ráno
+	Grave	Obrácená čárka
+	Greek Letters	Řecká písmena
+	Grid Table 1 Light	Tabulka s mřížkou 1 – světlá
+	Grid Table 4 – Blue	Tabulka s mřížkou 4 – modrá
+	Grid Table 4 – Green	Tabulka s mřížkou 4 – zelená
+	Grid Table 4 – Orange	Tabulka s mřížkou 4 – oranžová
+	Grid Table 4 – Purple	Tabulka s mřížkou 4 – fialová
+	Grouping Character Above	Seskupovací znak nad
+	Grouping Character Below	Seskupovací znak pod
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Stříška
+	Historical and Discretional	Historické a volitelné
+	Hyperbolic Cosecant Function	Funkce hyperbolický kosekans
+	Hyperbolic Cosine Function	Funkce hyperbolický kosinus
+	Hyperbolic Cotangent Function	Funkce hyperbolický kotangens
+	Hyperbolic Functions	Hyperbolické funkce
+	Hyperbolic Secant Function	Funkce hyperbolický sekans
+	Hyperbolic Sine Function	Funkce hyperbolický sinus
+	Hyperbolic Tangent Function	Funkce hyperbolický tangens
+	Hyperlink	Hypertextový odkaz
+	Hypotenuse	Přepona
+	IEEE	IEEE
+	ISO 690 (author-date)	ISO 690 (autor–datum)
+	ISO 690 (numerical)	ISO 690 (číselný)
+	Identity Matrices	Jednotkové matice
+	Index Heading	Nadpis rejstříku
+	Index {n}	Rejstřík {n}
+	Integral of e^(−x²)	Integrál z e^(−x²)
+	Integral with Limits	Integrál s mezemi
+	Integral with Stacked Limits	Integrál s mezemi nad sebou
+	Integrals	Integrály
+	Intense Emphasis	Výrazné zdůraznění
+	Intense Quote	Výrazná citace
+	Intense Reference	Výrazný odkaz
+	Intersection	Průnik
+	Intersection with Limits	Průnik s mezemi
+	Intersection with Lower Limit	Průnik s dolní mezí
+	Intersection with Subscript-Superscript Limits	Průnik s mezemi v dolním a horním indexu
+	Inverse Cosecant Function	Funkce arkuskosekans
+	Inverse Cosine Function	Funkce arkuskosinus
+	Inverse Cotangent Function	Funkce arkuskotangens
+	Inverse Functions	Inverzní funkce
+	Inverse Hyperbolic Cosecant Function	Funkce hyperbolický argument kosekans
+	Inverse Hyperbolic Cosine Function	Funkce hyperbolický argument kosinus
+	Inverse Hyperbolic Cotangent Function	Funkce hyperbolický argument kotangens
+	Inverse Hyperbolic Functions	Inverzní hyperbolické funkce
+	Inverse Hyperbolic Secant Function	Funkce hyperbolický argument sekans
+	Inverse Hyperbolic Sine Function	Funkce hyperbolický argument sinus
+	Inverse Hyperbolic Tangent Function	Funkce hyperbolický argument tangens
+	Inverse Secant Function	Funkce arkussekans
+	Inverse Sine Function	Funkce arkussinus
+	Inverse Tangent Function	Funkce arkustangens
+	Justification of a display equation	Zarovnání samostatné rovnice
+	Kerning for fonts:	Vyrovnání párů znaků u písem:
+	Keywords	Klíčová slova
+	Left Arrow with Text Above	Šipka doleva s textem nad
+	Left Arrow with Text Below	Šipka doleva s textem pod
+	Left Bracket Twice	Dvakrát levá závorka
+	Left Right Arrow Above	Šipka doleva a doprava nad
+	Left Right Arrow with Text Above	Šipka doleva a doprava s textem nad
+	Left Right Arrow with Text Below	Šipka doleva a doprava s textem pod
+	Left Subscript-Superscript	Dolní a horní index vlevo
+	Leftwards Arrow Above	Šipka doleva nad
+	Leftwards Harpoon Above	Harpuna doleva nad
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter-Like Symbols	Symboly podobné písmenům
+	Level 1	Úroveň 1
+	Level 2	Úroveň 2
+	Level 3	Úroveň 3
+	Level 4	Úroveň 4
+	Level 5	Úroveň 5
+	Level 6	Úroveň 6
+	Level 7	Úroveň 7
+	Level 8	Úroveň 8
+	Level 9	Úroveň 9
+	Ligatures:	Ligatury:
+	Limit	Limita
+	Limit Example	Příklad limity
+	Line Number	Číslo řádku
+	Linear Fraction	Lineární zlomek
+	List Paragraph	Odstavec se seznamem
+	List Table 3 – Blue	Tabulka se seznamem 3 – modrá
+	List Table 3 – Green	Tabulka se seznamem 3 – zelená
+	List Table 3 – Orange	Tabulka se seznamem 3 – oranžová
+	List Table 3 – Purple	Tabulka se seznamem 3 – fialová
+	Logarithm	Logaritmus
+	Logarithm with Base	Logaritmus o základu
+	Logical AND	Logické A
+	Logical AND with Limits	Logické A s mezemi
+	Logical OR	Logické NEBO
+	Logical OR with Limits	Logické NEBO s mezemi
+	MLA	MLA
+	Matrices with Brackets	Matice se závorkami
+	Maximum	Maximum
+	Maximum Example	Příklad maxima
+	Measured By	Měřeno podle
+	Midline Dots	Tečky na střední čáře
+	Minimum	Minimum
+	Minus Equal	Minus rovná se
+	Models	Modely
+	Natural Logarithm	Přirozený logaritmus
+	Negated Relations	Negované relace
+	No Spacing	Bez mezer
+	Normal	Normální
+	Normal Indent	Normální odsazení
+	Normal Table	Normální tabulka
+	Normal probability density	Hustota normálního rozdělení
+	Number the equation; the number sits at the right margin (or type # then the number)	Očíslovat rovnici; číslo je u pravého okraje (nebo napište # a pak číslo)
+	One half	Jedna polovina
+	Operator Structures	Struktury operátorů
+	Operators	Operátory
+	Other Large Operators	Další velké operátory
+	Outward Brackets	Závorky směrem ven
+	Overbar	Čára nad
+	Overbars and Underbars	Čáry nad a pod
+	Overbrace	Složená závorka nad
+	Parentheses	Kulaté závorky
+	Parentheses with Separator	Kulaté závorky s oddělovačem
+	Partial Differential	Parciální diferenciál
+	Pi Over 2	Pí lomeno 2
+	Plain Table 1	Obyčejná tabulka 1
+	Plus Equal	Plus rovná se
+	Possible spelling mistake	Možná pravopisná chyba
+	Power series of (1+x)ⁿ	Mocninná řada (1+x)ⁿ
+	Product	Součin
+	Product of A	Součin A
+	Product with Limits	Součin s mezemi
+	Product with Lower Limit	Součin s dolní mezí
+	Product with Subscript-Superscript Limits	Součin s mezemi v dolním a horním indexu
+	Products and Coproducts	Součiny a koprodukty
+	Quadratic Root	Kořen kvadratické rovnice
+	Quote	Citace
+	Radical with Degree	Odmocnina se stupněm
+	Radicals	Odmocniny
+	Reading Mode	Režim čtení
+	Remove the space before the punctuation	Odstranit mezeru před interpunkcí
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Researcher potřebuje online službu; Doc4Me uchovává dokumenty offline.
+	Right Arrow with Text Above	Šipka doprava s textem nad
+	Right Arrow with Text Below	Šipka doprava s textem pod
+	Right Bracket Twice	Dvakrát pravá závorka
+	Rightwards Arrow Above	Šipka doprava nad
+	Rightwards Harpoon Above	Harpuna doprava nad
+	Roots of ax²+bx+c	Kořeny ax²+bx+c
+	SAMPLE	UKÁZKA
+	SIST02	SIST02
+	Scripts	Písma
+	Secant Function	Funkce sekans
+	Show the equation in the line of text	Zobrazit rovnici v řádku textu
+	Show the equation on a line of its own	Zobrazit rovnici na samostatném řádku
+	Sides of a right triangle	Strany pravoúhlého trojúhelníku
+	Sine Function	Funkce sinus
+	Sine and cosine series of f(x)	Řada sinů a kosinů f(x)
+	Sine theta	Sinus theta
+	Single Brackets	Jednoduché závorky
+	Single Left Angle	Jedna levá lomená závorka
+	Single Left Bar	Jedna levá svislá čára
+	Single Left Brace	Jedna levá složená závorka
+	Single Left Bracket	Jedna levá hranatá závorka
+	Single Left Parenthesis	Jedna levá kulatá závorka
+	Single Right Brace	Jedna pravá složená závorka
+	Single Right Bracket	Jedna pravá hranatá závorka
+	Single Right Parenthesis	Jedna pravá kulatá závorka
+	Skewed Fraction	Šikmý zlomek
+	Small change	Malá změna
+	Sparse Matrices	Řídké matice
+	Square Root	Druhá odmocnina
+	Square Root with Degree	Odmocnina se stupněm
+	Square Union	Hranaté sjednocení
+	Stack Object	Objekt zásobníku
+	Stack Object (Three)	Objekt zásobníku (tři)
+	Stacked Fraction	Zlomek nad sebou
+	Stacked, no bar	Nad sebou, bez zlomkové čáry
+	Standard Only	Jen standardní
+	Standard and Contextual	Standardní a kontextové
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Strong	Silné
+	Style: APA	Styl: APA
+	Subject	Předmět
+	Subscript-Superscript	Dolní a horní index
+	Subscripts and Superscripts	Dolní a horní indexy
+	Subtitle	Podtitul
+	Subtle Emphasis	Jemné zdůraznění
+	Subtle Reference	Jemný odkaz
+	Sum of cosines	Součet kosinů
+	Sum or difference of sines	Součet nebo rozdíl sinů
+	Summation	Suma
+	Summation from 0 to n	Suma od 0 do n
+	Summation over binomials	Suma kombinačních čísel
+	Summation with Limits	Suma s mezemi
+	Summation with Lower Limit	Suma s dolní mezí
+	Summation with Subscript Limit	Suma s mezí v dolním indexu
+	Summation with Subscript-Superscript Limits	Suma s mezemi v dolním a horním indexu
+	Summations	Sumy
+	Surface Integral	Plošný integrál
+	Surface Integral with Limits	Plošný integrál s mezemi
+	Surface Integral with Stacked Limits	Plošný integrál s mezemi nad sebou
+	TOA Heading	Nadpis seznamu citací
+	TOC Heading	Nadpis obsahu
+	TOC {n}	Obsah {n}
+	Table Grid	Mřížka tabulky
+	Table of Figures	Seznam obrázků
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tangent Function	Funkce tangens
+	Tangent formula	Vzorec pro tangens
+	Text over Colon Equal	Text nad dvojtečkou rovná se
+	Text over Equal	Text nad rovnítkem
+	Text size	Velikost textu
+	The spelling and grammar check is complete.	Kontrola pravopisu a gramatiky je dokončena.
+	These settings will be used for new documents.	Tato nastavení se použijí pro nové dokumenty.
+	Tilde	Vlnovka
+	Track\nChanges	Sledovat\nzměny
+	Track\nChanges ✓	Sledovat\nzměny ✓
+	Trigonometric Functions	Goniometrické funkce
+	Triple Dot	Tři tečky
+	Triple Integral	Trojný integrál
+	Triple Integral with Limits	Trojný integrál s mezemi
+	Triple Integral with Stacked Limits	Trojný integrál s mezemi nad sebou
+	Turabian	Turabian
+	Type equations in LaTeX	Psát rovnice v LaTeXu
+	Type equations in the linear format (UnicodeMath)	Psát rovnice v lineárním formátu (UnicodeMath)
+	Type normal (non-math) text in the equation	Psát normální (nematematický) text v rovnici
+	Typing	Psaní
+	URGENT	NALÉHAVÉ
+	Underbar	Čára pod
+	Underbrace	Složená závorka pod
+	Union	Sjednocení
+	Union of intersections	Sjednocení průniků
+	Union with Limits	Sjednocení s mezemi
+	Union with Lower Limit	Sjednocení s dolní mezí
+	Union with Plus	Sjednocení s plusem
+	Union with Subscript-Superscript Limits	Sjednocení s mezemi v dolním a horním indexu
+	Unions and Intersections	Sjednocení a průniky
+	Up Diagonal Dots	Úhlopříčné tečky nahoru
+	Use "a" before a consonant sound	Před souhláskou použijte "a"
+	Use "an" before a vowel sound	Před samohláskou použijte "an"
+	Vector A	Vektor A
+	Vector AB	Vektor AB
+	Vertical Bars	Svislé čáry
+	Vertical Dots	Svislé tečky
+	Volume Integral	Objemový integrál
+	Volume Integral with Limits	Objemový integrál s mezemi
+	Volume Integral with Stacked Limits	Objemový integrál s mezemi nad sebou
+	Wildcards (regex)	Zástupné znaky (regulární výraz)
+	Yields	Dává
+	n×n Identity Matrix	Jednotková matice n×n
+	n×n Matrix	Matice n×n
+	points and above	bodů a větší
+	tOGGLE cASE	pŘEPNOUT vELIKOST
+	x bar	x s pruhem
+	{w} × {h} in	{w} × {h} palců
+	{w} × {h} mm	{w} × {h} mm
+	✓ None	✓ Žádné
+	➕ New comment	➕ Nový komentář
+	📂  Browse…	📂  Procházet…

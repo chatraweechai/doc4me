@@ -34,6 +34,9 @@ overrides:
       - libvulkan1 | libegl1
     recommends:
       - libwayland-client0
+      # On X11 the keyboard is read through xkbcommon's X11 library; without it the app stops
+      # at start-up (found running the tar build under Xvfb).
+      - libxkbcommon-x11-0
       - libx11-6
       - libx11-xcb1
       - libxcursor1
@@ -47,6 +50,7 @@ overrides:
       - (vulkan-loader or libglvnd-egl)
     recommends:
       - libwayland-client
+      - libxkbcommon-x11
       - libX11
       - libXcursor
       - libXi

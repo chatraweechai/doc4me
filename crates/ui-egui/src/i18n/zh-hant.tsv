@@ -2164,3 +2164,416 @@ spacing	Normal	標準
 	First Cell in Column	欄中第一個儲存格
 	Insert LISTNUM Field	插入 LISTNUM 欄位
 	Collapse the Ribbon	摺疊功能區
+	1×2 Empty Matrix	1×2 空白矩陣
+	1×3 Empty Matrix	1×3 空白矩陣
+	2×1 Empty Matrix	2×1 空白矩陣
+	2×2 Determinant	2×2 行列式
+	2×2 Empty Matrix	2×2 空白矩陣
+	2×2 Identity Matrix	2×2 單位矩陣
+	2×2 Identity Matrix (sparse)	2×2 單位矩陣 (稀疏)
+	2×2 Matrix in Brackets	方括號中的 2×2 矩陣
+	2×2 Matrix in Double Bars	雙垂直線中的 2×2 矩陣
+	2×2 Matrix in Parentheses	圓括號中的 2×2 矩陣
+	2×3 Empty Matrix	2×3 空白矩陣
+	3×1 Empty Matrix	3×1 空白矩陣
+	3×2 Empty Matrix	3×2 空白矩陣
+	3×3 Empty Matrix	3×3 空白矩陣
+	3×3 Identity Matrix	3×3 單位矩陣
+	3×3 Identity Matrix (sparse)	3×3 單位矩陣 (稀疏)
+	A xor B	A xor B
+	APA	APA
+	ASAP	儘速處理
+	AaBbCcDd	AaBbCcDd
+	Absolute value cases	絕對值分段
+	Accents	重音符號
+	Acute	尖音符
+	All - Linear	全部 - 線性
+	All - Professional	全部 - 專業
+	Angle Brackets	角括號
+	Angle Brackets with Separator	含分隔符號的角括號
+	Angle Brackets with Two Separators	含兩個分隔符號的角括號
+	Annotation Reference	註解參照
+	Annotation Subject	註解主旨
+	Annotation Text	註解文字
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10.12" × 14.33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7.17" × 10.12"
+	Baseline Dots	基線點
+	Basic Math	基本數學
+	Bayes' rule	貝氏定理
+	Binomial Coefficient	二項式係數
+	Binomial Coefficient (angle)	二項式係數 (角括號)
+	Binomial Coefficient with Angle Brackets	含角括號的二項式係數
+	Binomial expansion of (x+a)ⁿ	(x+a)ⁿ 的二項式展開
+	Body text in a short paragraph to show spacing.	以一段簡短的本文示範間距。
+	Book Title	書名
+	Boxed Formula	方框公式
+	Boxed Formula (example)	方框公式 (範例)
+	Boxed Formulas	方框公式
+	Braces	大括號
+	Braces with Separator	含分隔符號的大括號
+	Brackets	括號
+	Brackets with Separators	含分隔符號的括號
+	Breve	短音符
+	CONFIDENTIAL	機密
+	Capitalize the first word of a sentence	句首字母大寫
+	Cases (Three Conditions)	分段函數 (三個條件)
+	Cases (Two Conditions)	分段函數 (兩個條件)
+	Cases and Stacks	分段函數與堆疊
+	Category	類別
+	Ceiling	上取整
+	Centered as Group	整體置中
+	Change in y over change in x	y 的變化量除以 x 的變化量
+	Change to Level 1	變更為階層 1
+	Change to Level 2	變更為階層 2
+	Change to Level 3	變更為階層 3
+	Change to Level 4	變更為階層 4
+	Change to Level 5	變更為階層 5
+	Change to Level 6	變更為階層 6
+	Change to Level 7	變更為階層 7
+	Change to Level 8	變更為階層 8
+	Change to Level 9	變更為階層 9
+	Check	核取記號
+	Chicago	Chicago
+	Circle area from its radius	由半徑求圓面積
+	Circled Dot	圓圈點
+	Circled Plus	圓圈加號
+	Circled Times	圓圈乘號
+	Colon Equal	冒號等號
+	Column selection: the arrow keys extend the block, Esc ends it	欄選取:方向鍵可延伸區塊,按 Esc 結束
+	Column width	欄寬
+	Common Accent Objects	常用重音符號物件
+	Common Brackets	常用括號
+	Common Fractions	常用分數
+	Common Functions	常用函數
+	Common Large Operators	常用大型運算子
+	Common Operator Structures	常用運算子結構
+	Common Operators	常用運算子
+	Common Radicals	常用根式
+	Common Subscripts and Superscripts	常用上下標
+	Contour Integral	圍線積分
+	Contour Integral with Limits	含上下限的圍線積分
+	Contour Integral with Stacked Limits	含堆疊上下限的圍線積分
+	Contour Integrals	圍線積分
+	Contributors	貢獻者
+	Convert between built-up and linear form	在專業與線性格式之間轉換
+	Coproduct	餘積
+	Coproduct with Limits	含上下限的餘積
+	Coproduct with Lower Limit	含下限的餘積
+	Coproduct with Subscript-Superscript Limits	含上下標限制的餘積
+	Cosecant Function	餘割函數
+	Cosine 2x	餘弦 2x
+	Cosine Function	餘弦函數
+	Cotangent Function	餘切函數
+	Cube Root	立方根
+	Current - Linear	目前 - 線性
+	Current - Professional	目前 - 專業
+	DO NOT COPY	禁止複製
+	DRAFT	草稿
+	Default Paragraph Font	預設段落字型
+	Delta Equal To	Delta 等於
+	Delta over arrow	箭號上方的 Delta
+	Derivative as a limit	以極限定義的導數
+	Diagonal Dots	對角點
+	Differential	微分
+	Differential theta	微分 theta
+	Differential x	微分 x
+	Differential y	微分 y
+	Differentials	微分
+	Dot	點
+	Dots	點
+	Double Bar	雙橫線
+	Double Dot	雙點
+	Double Integral	二重積分
+	Double Integral with Limits	含上下限的二重積分
+	Double Integral with Stacked Limits	含堆疊上下限的二重積分
+	Double Left Arrow with Text Above	上方含文字的雙向左箭號
+	Double Left Arrow with Text Below	下方含文字的雙向左箭號
+	Double Left Right Arrow with Text Above	上方含文字的雙線左右箭號
+	Double Left Right Arrow with Text Below	下方含文字的雙線左右箭號
+	Double Right Arrow with Text Above	上方含文字的雙線右箭號
+	Double Right Arrow with Text Below	下方含文字的雙線右箭號
+	Double Square Brackets	雙方括號
+	Double Vertical Bars	雙垂直線
+	Double summation	二重總和
+	Edit Document	編輯文件
+	Emphasis	強調
+	Empty Matrices	空白矩陣
+	Endnote Reference	章節附註參照
+	Endnote Text	章節附註文字
+	Envelope #10   4.12" × 9.50"	信封 #10   4.12" × 9.50"
+	Envelope Address	信封地址
+	Envelope DL   4.33" × 8.66"	信封 DL   4.33" × 8.66"
+	Envelope Return	信封寄件者地址
+	Equal Equal	等號等號
+	Equal by Definition	定義為
+	Euler's identity	尤拉恆等式
+	Executive   7.25" × 10.50"	Executive   7.25" × 10.50"
+	Exponential	指數
+	Exponential series	指數級數
+	Extra space	多餘空格
+	Floor	下取整
+	Footnote Reference	註腳參照
+	Footnote Text	註腳文字
+	Functions	函數
+	GB/T 7714	GB/T 7714
+	GOST (name sort)	GOST (依名稱排序)
+	GOST (title sort)	GOST (依標題排序)
+	Geometry	幾何
+	Good afternoon	午安
+	Good evening	晚安
+	Good morning	早安
+	Grave	抑音符
+	Greek Letters	希臘字母
+	Grid Table 1 Light	格線表格 1 淺色
+	Grid Table 4 – Blue	格線表格 4 – 藍色
+	Grid Table 4 – Green	格線表格 4 – 綠色
+	Grid Table 4 – Orange	格線表格 4 – 橙色
+	Grid Table 4 – Purple	格線表格 4 – 紫色
+	Grouping Character Above	上方群組字元
+	Grouping Character Below	下方群組字元
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	抑揚符
+	Historical and Discretional	歷史與自選連字
+	Hyperbolic Cosecant Function	雙曲餘割函數
+	Hyperbolic Cosine Function	雙曲餘弦函數
+	Hyperbolic Cotangent Function	雙曲餘切函數
+	Hyperbolic Functions	雙曲函數
+	Hyperbolic Secant Function	雙曲正割函數
+	Hyperbolic Sine Function	雙曲正弦函數
+	Hyperbolic Tangent Function	雙曲正切函數
+	Hyperlink	超連結
+	Hypotenuse	斜邊
+	IEEE	IEEE
+	ISO 690 (author-date)	ISO 690 (作者-日期)
+	ISO 690 (numerical)	ISO 690 (數字)
+	Identity Matrices	單位矩陣
+	Index Heading	索引標題
+	Index {n}	索引 {n}
+	Integral of e^(−x²)	e^(−x²) 的積分
+	Integral with Limits	含上下限的積分
+	Integral with Stacked Limits	含堆疊上下限的積分
+	Integrals	積分
+	Intense Emphasis	鮮明強調
+	Intense Quote	鮮明引文
+	Intense Reference	鮮明參考
+	Intersection	交集
+	Intersection with Limits	含上下限的交集
+	Intersection with Lower Limit	含下限的交集
+	Intersection with Subscript-Superscript Limits	含上下標限制的交集
+	Inverse Cosecant Function	反餘割函數
+	Inverse Cosine Function	反餘弦函數
+	Inverse Cotangent Function	反餘切函數
+	Inverse Functions	反函數
+	Inverse Hyperbolic Cosecant Function	反雙曲餘割函數
+	Inverse Hyperbolic Cosine Function	反雙曲餘弦函數
+	Inverse Hyperbolic Cotangent Function	反雙曲餘切函數
+	Inverse Hyperbolic Functions	反雙曲函數
+	Inverse Hyperbolic Secant Function	反雙曲正割函數
+	Inverse Hyperbolic Sine Function	反雙曲正弦函數
+	Inverse Hyperbolic Tangent Function	反雙曲正切函數
+	Inverse Secant Function	反正割函數
+	Inverse Sine Function	反正弦函數
+	Inverse Tangent Function	反正切函數
+	Justification of a display equation	獨立方程式的對齊方式
+	Kerning for fonts:	字型調整字距:
+	Keywords	關鍵字
+	Left Arrow with Text Above	上方含文字的左箭號
+	Left Arrow with Text Below	下方含文字的左箭號
+	Left Bracket Twice	兩個左括號
+	Left Right Arrow Above	上方的左右箭號
+	Left Right Arrow with Text Above	上方含文字的左右箭號
+	Left Right Arrow with Text Below	下方含文字的左右箭號
+	Left Subscript-Superscript	左上下標
+	Leftwards Arrow Above	上方的左箭號
+	Leftwards Harpoon Above	上方的左魚叉箭號
+	Legal   8.50" × 14.00"	Legal   8.50" × 14.00"
+	Letter   8.50" × 11.00"	Letter   8.50" × 11.00"
+	Letter-Like Symbols	類字母符號
+	Level 1	階層 1
+	Level 2	階層 2
+	Level 3	階層 3
+	Level 4	階層 4
+	Level 5	階層 5
+	Level 6	階層 6
+	Level 7	階層 7
+	Level 8	階層 8
+	Level 9	階層 9
+	Ligatures:	連字:
+	Limit	極限
+	Limit Example	極限範例
+	Line Number	行號
+	Linear Fraction	線性分數
+	List Paragraph	清單段落
+	List Table 3 – Blue	清單表格 3 – 藍色
+	List Table 3 – Green	清單表格 3 – 綠色
+	List Table 3 – Orange	清單表格 3 – 橙色
+	List Table 3 – Purple	清單表格 3 – 紫色
+	Logarithm	對數
+	Logarithm with Base	含底數的對數
+	Logical AND	邏輯 AND
+	Logical AND with Limits	含上下限的邏輯 AND
+	Logical OR	邏輯 OR
+	Logical OR with Limits	含上下限的邏輯 OR
+	MLA	MLA
+	Matrices with Brackets	含括號的矩陣
+	Maximum	最大值
+	Maximum Example	最大值範例
+	Measured By	測量依據
+	Midline Dots	中線點
+	Minimum	最小值
+	Minus Equal	減等號
+	Models	模型
+	Natural Logarithm	自然對數
+	Negated Relations	否定關係
+	No Spacing	無間距
+	Normal	內文
+	Normal Indent	內文縮排
+	Normal Table	表格內文
+	Normal probability density	常態分布機率密度
+	Number the equation; the number sits at the right margin (or type # then the number)	為方程式編號;編號位於右邊界 (或輸入 # 後再輸入編號)
+	One half	二分之一
+	Operator Structures	運算子結構
+	Operators	運算子
+	Other Large Operators	其他大型運算子
+	Outward Brackets	外向括號
+	Overbar	上橫線
+	Overbars and Underbars	上橫線與下橫線
+	Overbrace	上大括號
+	Parentheses	圓括號
+	Parentheses with Separator	含分隔符號的圓括號
+	Partial Differential	偏微分
+	Pi Over 2	π 除以 2
+	Plain Table 1	純表格 1
+	Plus Equal	加等號
+	Possible spelling mistake	可能的拼字錯誤
+	Power series of (1+x)ⁿ	(1+x)ⁿ 的冪級數
+	Product	乘積
+	Product of A	A 的乘積
+	Product with Limits	含上下限的乘積
+	Product with Lower Limit	含下限的乘積
+	Product with Subscript-Superscript Limits	含上下標限制的乘積
+	Products and Coproducts	乘積與餘積
+	Quadratic Root	二次方程式的根
+	Quote	引文
+	Radical with Degree	含次方的根式
+	Radicals	根式
+	Reading Mode	閱讀模式
+	Remove the space before the punctuation	移除標點符號前的空格
+	Researcher needs an online service; Doc4Me keeps your documents offline.	研究工具需要線上服務;Doc4Me 讓您的文件保持離線。
+	Right Arrow with Text Above	上方含文字的右箭號
+	Right Arrow with Text Below	下方含文字的右箭號
+	Right Bracket Twice	兩個右括號
+	Rightwards Arrow Above	上方的右箭號
+	Rightwards Harpoon Above	上方的右魚叉箭號
+	Roots of ax²+bx+c	ax²+bx+c 的根
+	SAMPLE	樣本
+	SIST02	SIST02
+	Scripts	手寫體
+	Secant Function	正割函數
+	Show the equation in the line of text	在文字行中顯示方程式
+	Show the equation on a line of its own	在獨立的一行顯示方程式
+	Sides of a right triangle	直角三角形的邊
+	Sine Function	正弦函數
+	Sine and cosine series of f(x)	f(x) 的正弦與餘弦級數
+	Sine theta	正弦 theta
+	Single Brackets	單一括號
+	Single Left Angle	單一左角括號
+	Single Left Bar	單一左垂直線
+	Single Left Brace	單一左大括號
+	Single Left Bracket	單一左方括號
+	Single Left Parenthesis	單一左圓括號
+	Single Right Brace	單一右大括號
+	Single Right Bracket	單一右方括號
+	Single Right Parenthesis	單一右圓括號
+	Skewed Fraction	斜分數
+	Small change	微小變化
+	Sparse Matrices	稀疏矩陣
+	Square Root	平方根
+	Square Root with Degree	含次方的根式
+	Square Union	方形聯集
+	Stack Object	堆疊物件
+	Stack Object (Three)	堆疊物件 (三個)
+	Stacked Fraction	堆疊分數
+	Stacked, no bar	堆疊,無分數線
+	Standard Only	僅標準
+	Standard and Contextual	標準與內容相關
+	Statement   5.50" × 8.50"	Statement   5.50" × 8.50"
+	Strong	強調粗體
+	Style: APA	樣式:APA
+	Subject	主旨
+	Subscript-Superscript	上下標
+	Subscripts and Superscripts	上下標
+	Subtitle	副標題
+	Subtle Emphasis	區別強調
+	Subtle Reference	區別參考
+	Sum of cosines	餘弦之和
+	Sum or difference of sines	正弦之和或差
+	Summation	總和
+	Summation from 0 to n	從 0 到 n 的總和
+	Summation over binomials	二項式係數的總和
+	Summation with Limits	含上下限的總和
+	Summation with Lower Limit	含下限的總和
+	Summation with Subscript Limit	含下標限制的總和
+	Summation with Subscript-Superscript Limits	含上下標限制的總和
+	Summations	總和
+	Surface Integral	曲面積分
+	Surface Integral with Limits	含上下限的曲面積分
+	Surface Integral with Stacked Limits	含堆疊上下限的曲面積分
+	TOA Heading	引文目錄標題
+	TOC Heading	目錄標題
+	TOC {n}	目錄 {n}
+	Table Grid	表格格線
+	Table of Figures	圖表目錄
+	Tabloid   11.00" × 17.00"	Tabloid   11.00" × 17.00"
+	Tangent Function	正切函數
+	Tangent formula	正切公式
+	Text over Colon Equal	冒號等號上方的文字
+	Text over Equal	等號上方的文字
+	Text size	文字大小
+	The spelling and grammar check is complete.	拼字及文法檢查已完成。
+	These settings will be used for new documents.	這些設定將用於新文件。
+	Tilde	波狀符號
+	Track\nChanges	追蹤\n修訂
+	Track\nChanges ✓	追蹤\n修訂 ✓
+	Trigonometric Functions	三角函數
+	Triple Dot	三點
+	Triple Integral	三重積分
+	Triple Integral with Limits	含上下限的三重積分
+	Triple Integral with Stacked Limits	含堆疊上下限的三重積分
+	Turabian	Turabian
+	Type equations in LaTeX	以 LaTeX 輸入方程式
+	Type equations in the linear format (UnicodeMath)	以線性格式 (UnicodeMath) 輸入方程式
+	Type normal (non-math) text in the equation	在方程式中輸入一般 (非數學) 文字
+	Typing	輸入
+	URGENT	緊急
+	Underbar	下橫線
+	Underbrace	下大括號
+	Union	聯集
+	Union of intersections	交集的聯集
+	Union with Limits	含上下限的聯集
+	Union with Lower Limit	含下限的聯集
+	Union with Plus	含加號的聯集
+	Union with Subscript-Superscript Limits	含上下標限制的聯集
+	Unions and Intersections	聯集與交集
+	Up Diagonal Dots	上對角點
+	Use "a" before a consonant sound	子音前使用 "a"
+	Use "an" before a vowel sound	母音前使用 "an"
+	Vector A	向量 A
+	Vector AB	向量 AB
+	Vertical Bars	垂直線
+	Vertical Dots	垂直點
+	Volume Integral	體積積分
+	Volume Integral with Limits	含上下限的體積積分
+	Volume Integral with Stacked Limits	含堆疊上下限的體積積分
+	Wildcards (regex)	萬用字元 (規則運算式)
+	Yields	產生
+	n×n Identity Matrix	n×n 單位矩陣
+	n×n Matrix	n×n 矩陣
+	points and above	點或更大
+	tOGGLE cASE	切換大小寫
+	x bar	x 橫線
+	{w} × {h} in	{w} × {h} 英吋
+	{w} × {h} mm	{w} × {h} 公釐
+	✓ None	✓ 無
+	➕ New comment	➕ 新增註解
+	📂  Browse…	📂  瀏覽…

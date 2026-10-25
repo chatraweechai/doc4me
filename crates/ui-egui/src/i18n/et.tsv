@@ -2197,3 +2197,390 @@ spacing	Normal	Tavaline
 	First Cell in Column	Veeru esimene lahter
 	Insert LISTNUM Field	Lisa väli LISTNUM
 	Collapse the Ribbon	Ahenda menüriba
+	1×2 Empty Matrix	Tühi 1×2 maatriks
+	1×3 Empty Matrix	Tühi 1×3 maatriks
+	2×1 Empty Matrix	Tühi 2×1 maatriks
+	2×2 Determinant	2×2 determinant
+	2×2 Empty Matrix	Tühi 2×2 maatriks
+	2×2 Identity Matrix	2×2 ühikmaatriks
+	2×2 Identity Matrix (sparse)	2×2 ühikmaatriks (hõre)
+	2×2 Matrix in Brackets	2×2 maatriks nurksulgudes
+	2×2 Matrix in Double Bars	2×2 maatriks topeltpüstkriipsudes
+	2×2 Matrix in Parentheses	2×2 maatriks ümarsulgudes
+	2×3 Empty Matrix	Tühi 2×3 maatriks
+	3×1 Empty Matrix	Tühi 3×1 maatriks
+	3×2 Empty Matrix	Tühi 3×2 maatriks
+	3×3 Empty Matrix	Tühi 3×3 maatriks
+	3×3 Identity Matrix	3×3 ühikmaatriks
+	3×3 Identity Matrix (sparse)	3×3 ühikmaatriks (hõre)
+	A xor B	A xor B
+	APA	APA
+	ASAP	ESIMESEL VÕIMALUSEL
+	AaBbCcDd	AaBbCcDd
+	Absolute value cases	Absoluutväärtuse juhud
+	Accents	Rõhumärgid
+	Acute	Akuut
+	All - Linear	Kõik – lineaarne
+	All - Professional	Kõik – professionaalne
+	Angle Brackets	Nurksulud (noolsulud)
+	Angle Brackets with Separator	Noolsulud eraldajaga
+	Angle Brackets with Two Separators	Noolsulud kahe eraldajaga
+	Annotation Reference	Kommentaari viide
+	Annotation Subject	Kommentaari teema
+	Annotation Text	Kommentaari tekst
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Baseline Dots	Punktid alusjoonel
+	Basic Math	Põhimatemaatika
+	Bayes' rule	Bayesi valem
+	Binomial Coefficient	Binoomkordaja
+	Binomial Coefficient (angle)	Binoomkordaja (noolsulud)
+	Binomial Coefficient with Angle Brackets	Binoomkordaja noolsulgudes
+	Binomial expansion of (x+a)ⁿ	Binoomarendus (x+a)ⁿ
+	Body text in a short paragraph to show spacing.	Lühikese lõigu tekst vahede näitamiseks.
+	Boxed Formula	Raamitud valem
+	Boxed Formula (example)	Raamitud valem (näide)
+	Boxed Formulas	Raamitud valemid
+	Braces	Looksulud
+	Braces with Separator	Looksulud eraldajaga
+	Brackets	Sulud
+	Brackets with Separators	Sulud eraldajatega
+	Breve	Breve
+	CONFIDENTIAL	KONFIDENTSIAALNE
+	Capitalize the first word of a sentence	Lause esimene sõna suure algustähega
+	Cases (Three Conditions)	Juhud (kolm tingimust)
+	Cases (Two Conditions)	Juhud (kaks tingimust)
+	Cases and Stacks	Juhud ja virnad
+	Ceiling	Ülemine täisosa
+	Centered as Group	Rühmana tsentreeritud
+	Change in y over change in x	y muut x muudu kohta
+	Change to Level 1	Muuda 1. tasemeks
+	Change to Level 2	Muuda 2. tasemeks
+	Change to Level 3	Muuda 3. tasemeks
+	Change to Level 4	Muuda 4. tasemeks
+	Change to Level 5	Muuda 5. tasemeks
+	Change to Level 6	Muuda 6. tasemeks
+	Change to Level 7	Muuda 7. tasemeks
+	Change to Level 8	Muuda 8. tasemeks
+	Change to Level 9	Muuda 9. tasemeks
+	Check	Linnuke
+	Chicago	Chicago
+	Circle area from its radius	Ringi pindala raadiusest
+	Circled Dot	Ringis punkt
+	Circled Plus	Ringis pluss
+	Circled Times	Ringis korrutusmärk
+	Colon Equal	Koolon võrdub
+	Column selection: the arrow keys extend the block, Esc ends it	Veeru valik: nooleklahvid laiendavad plokki, Esc lõpetab
+	Column width	Veeru laius
+	Common Accent Objects	Levinud rõhumärgiobjektid
+	Common Brackets	Levinud sulud
+	Common Fractions	Levinud murrud
+	Common Functions	Levinud funktsioonid
+	Common Large Operators	Levinud suured tehtemärgid
+	Common Operator Structures	Levinud tehtemärgistruktuurid
+	Common Operators	Levinud tehtemärgid
+	Common Radicals	Levinud juured
+	Common Subscripts and Superscripts	Levinud ala- ja ülaindeksid
+	Contour Integral	Joonintegraal
+	Contour Integral with Limits	Joonintegraal rajadega
+	Contour Integral with Stacked Limits	Joonintegraal virnastatud rajadega
+	Contour Integrals	Joonintegraalid
+	Convert between built-up and linear form	Teisenda professionaalse ja lineaarse kuju vahel
+	Coproduct	Kaaskorrutis
+	Coproduct with Limits	Kaaskorrutis rajadega
+	Coproduct with Lower Limit	Kaaskorrutis alumise rajaga
+	Coproduct with Subscript-Superscript Limits	Kaaskorrutis ala- ja ülaindeksi rajadega
+	Cosecant Function	Koosekansfunktsioon
+	Cosine 2x	Koosinus 2x
+	Cosine Function	Koosinusfunktsioon
+	Cotangent Function	Kootangensfunktsioon
+	Cube Root	Kuupjuur
+	Current - Linear	Praegune – lineaarne
+	Current - Professional	Praegune – professionaalne
+	DO NOT COPY	MITTE KOPEERIDA
+	DRAFT	MUSTAND
+	Default Paragraph Font	Lõigu vaikefont
+	Delta Equal To	Delta võrdub
+	Delta over arrow	Delta noole kohal
+	Derivative as a limit	Tuletis piirväärtusena
+	Diagonal Dots	Diagonaalpunktid
+	Differential	Diferentsiaal
+	Differential theta	Diferentsiaal teeta
+	Differential x	Diferentsiaal x
+	Differential y	Diferentsiaal y
+	Differentials	Diferentsiaalid
+	Dot	Punkt
+	Dots	Punktid
+	Double Bar	Topeltkriips
+	Double Dot	Kaks punkti
+	Double Integral	Kahekordne integraal
+	Double Integral with Limits	Kahekordne integraal rajadega
+	Double Integral with Stacked Limits	Kahekordne integraal virnastatud rajadega
+	Double Left Arrow with Text Above	Topeltnool vasakule, tekst kohal
+	Double Left Arrow with Text Below	Topeltnool vasakule, tekst all
+	Double Left Right Arrow with Text Above	Topeltnool vasakule-paremale, tekst kohal
+	Double Left Right Arrow with Text Below	Topeltnool vasakule-paremale, tekst all
+	Double Right Arrow with Text Above	Topeltnool paremale, tekst kohal
+	Double Right Arrow with Text Below	Topeltnool paremale, tekst all
+	Double Square Brackets	Topeltnurksulud
+	Double Vertical Bars	Topeltpüstkriipsud
+	Double summation	Kahekordne summa
+	Edit Document	Redigeeri dokumenti
+	Empty Matrices	Tühjad maatriksid
+	Envelope #10   4.12" × 9.50"	Ümbrik #10   4,12" × 9,50"
+	Envelope Address	Ümbriku aadress
+	Envelope DL   4.33" × 8.66"	Ümbrik DL   4,33" × 8,66"
+	Envelope Return	Ümbriku saatja aadress
+	Equal Equal	Võrdub võrdub
+	Equal by Definition	Võrdub definitsiooni järgi
+	Euler's identity	Euleri samasus
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exponential	Eksponent
+	Exponential series	Eksponentrida
+	Extra space	Liigne tühik
+	Floor	Alumine täisosa
+	Functions	Funktsioonid
+	GB/T 7714	GB/T 7714
+	GOST (name sort)	GOST (nime järgi)
+	GOST (title sort)	GOST (pealkirja järgi)
+	Geometry	Geomeetria
+	Good afternoon	Tere päevast
+	Good evening	Tere õhtust
+	Good morning	Tere hommikust
+	Grave	Graavis
+	Greek Letters	Kreeka tähed
+	Grid Table 1 Light	Ruudustiktabel 1, hele
+	Grid Table 4 – Blue	Ruudustiktabel 4 – sinine
+	Grid Table 4 – Green	Ruudustiktabel 4 – roheline
+	Grid Table 4 – Orange	Ruudustiktabel 4 – oranž
+	Grid Table 4 – Purple	Ruudustiktabel 4 – lilla
+	Grouping Character Above	Rühmitusmärk üleval
+	Grouping Character Below	Rühmitusmärk all
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Katus
+	Historical and Discretional	Ajaloolised ja valikulised
+	Hyperbolic Cosecant Function	Hüperboolne koosekansfunktsioon
+	Hyperbolic Cosine Function	Hüperboolne koosinusfunktsioon
+	Hyperbolic Cotangent Function	Hüperboolne kootangensfunktsioon
+	Hyperbolic Functions	Hüperboolsed funktsioonid
+	Hyperbolic Secant Function	Hüperboolne sekansfunktsioon
+	Hyperbolic Sine Function	Hüperboolne siinusfunktsioon
+	Hyperbolic Tangent Function	Hüperboolne tangensfunktsioon
+	Hypotenuse	Hüpotenuus
+	IEEE	IEEE
+	ISO 690 (author-date)	ISO 690 (autor-kuupäev)
+	ISO 690 (numerical)	ISO 690 (numbriline)
+	Identity Matrices	Ühikmaatriksid
+	Index Heading	Registri pealkiri
+	Index {n}	Register {n}
+	Integral of e^(−x²)	Integraal e^(−x²)
+	Integral with Limits	Integraal rajadega
+	Integral with Stacked Limits	Integraal virnastatud rajadega
+	Integrals	Integraalid
+	Intersection	Ühisosa
+	Intersection with Limits	Ühisosa rajadega
+	Intersection with Lower Limit	Ühisosa alumise rajaga
+	Intersection with Subscript-Superscript Limits	Ühisosa ala- ja ülaindeksi rajadega
+	Inverse Cosecant Function	Arkuskoosekansfunktsioon
+	Inverse Cosine Function	Arkuskoosinusfunktsioon
+	Inverse Cotangent Function	Arkuskootangensfunktsioon
+	Inverse Functions	Pöördfunktsioonid
+	Inverse Hyperbolic Cosecant Function	Area-hüperboolne koosekansfunktsioon
+	Inverse Hyperbolic Cosine Function	Area-hüperboolne koosinusfunktsioon
+	Inverse Hyperbolic Cotangent Function	Area-hüperboolne kootangensfunktsioon
+	Inverse Hyperbolic Functions	Area-funktsioonid
+	Inverse Hyperbolic Secant Function	Area-hüperboolne sekansfunktsioon
+	Inverse Hyperbolic Sine Function	Area-hüperboolne siinusfunktsioon
+	Inverse Hyperbolic Tangent Function	Area-hüperboolne tangensfunktsioon
+	Inverse Secant Function	Arkussekansfunktsioon
+	Inverse Sine Function	Arkussiinusfunktsioon
+	Inverse Tangent Function	Arkustangensfunktsioon
+	Justification of a display equation	Eraldi rea võrrandi joondus
+	Kerning for fonts:	Fontide märgipaaride lähendus:
+	Left Arrow with Text Above	Nool vasakule, tekst kohal
+	Left Arrow with Text Below	Nool vasakule, tekst all
+	Left Bracket Twice	Kaks korda vasak sulg
+	Left Right Arrow Above	Nool vasakule-paremale üleval
+	Left Right Arrow with Text Above	Nool vasakule-paremale, tekst kohal
+	Left Right Arrow with Text Below	Nool vasakule-paremale, tekst all
+	Left Subscript-Superscript	Vasak ala- ja ülaindeks
+	Leftwards Arrow Above	Nool vasakule üleval
+	Leftwards Harpoon Above	Harpuun vasakule üleval
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter-Like Symbols	Tähesarnased sümbolid
+	Level 1	1. tase
+	Level 2	2. tase
+	Level 3	3. tase
+	Level 4	4. tase
+	Level 5	5. tase
+	Level 6	6. tase
+	Level 7	7. tase
+	Level 8	8. tase
+	Level 9	9. tase
+	Ligatures:	Ligatuurid:
+	Limit	Piirväärtus
+	Limit Example	Piirväärtuse näide
+	Line Number	Reanumber
+	Linear Fraction	Lineaarne murd
+	List Table 3 – Blue	Loenditabel 3 – sinine
+	List Table 3 – Green	Loenditabel 3 – roheline
+	List Table 3 – Orange	Loenditabel 3 – oranž
+	List Table 3 – Purple	Loenditabel 3 – lilla
+	Logarithm	Logaritm
+	Logarithm with Base	Logaritm alusega
+	Logical AND	Loogiline JA
+	Logical AND with Limits	Loogiline JA rajadega
+	Logical OR	Loogiline VÕI
+	Logical OR with Limits	Loogiline VÕI rajadega
+	MLA	MLA
+	Matrices with Brackets	Maatriksid sulgudes
+	Maximum	Maksimum
+	Maximum Example	Maksimumi näide
+	Measured By	Mõõdetud
+	Midline Dots	Punktid keskjoonel
+	Minimum	Miinimum
+	Minus Equal	Miinus võrdub
+	Natural Logarithm	Naturaallogaritm
+	Negated Relations	Eitatud seosed
+	Normal	Normaallaad
+	Normal Indent	Tavaline taane
+	Normal Table	Tavaline tabel
+	Normal probability density	Normaaljaotuse tihedus
+	Number the equation; the number sits at the right margin (or type # then the number)	Nummerda võrrand; number on paremas veerises (või tippige # ja seejärel number)
+	One half	Pool
+	Operator Structures	Tehtemärgistruktuurid
+	Operators	Tehtemärgid
+	Other Large Operators	Muud suured tehtemärgid
+	Outward Brackets	Väljapoole suunatud sulud
+	Overbar	Ülakriips
+	Overbars and Underbars	Üla- ja alakriipsud
+	Overbrace	Looksulg üleval
+	Parentheses	Ümarsulud
+	Parentheses with Separator	Ümarsulud eraldajaga
+	Partial Differential	Osadiferentsiaal
+	Pi Over 2	Pii jagatud 2-ga
+	Plain Table 1	Lihttabel 1
+	Plus Equal	Pluss võrdub
+	Possible spelling mistake	Võimalik õigekirjaviga
+	Power series of (1+x)ⁿ	Astmerida (1+x)ⁿ
+	Product	Korrutis
+	Product of A	A korrutis
+	Product with Limits	Korrutis rajadega
+	Product with Lower Limit	Korrutis alumise rajaga
+	Product with Subscript-Superscript Limits	Korrutis ala- ja ülaindeksi rajadega
+	Products and Coproducts	Korrutised ja kaaskorrutised
+	Quadratic Root	Ruutvõrrandi lahend
+	Radical with Degree	Juur astmega
+	Radicals	Juured
+	Reading Mode	Lugemisrežiim
+	Remove the space before the punctuation	Eemalda tühik kirjavahemärgi eest
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Researcher vajab võrguteenust; Doc4Me hoiab teie dokumente võrguühenduseta.
+	Right Arrow with Text Above	Nool paremale, tekst kohal
+	Right Arrow with Text Below	Nool paremale, tekst all
+	Right Bracket Twice	Kaks korda parem sulg
+	Rightwards Arrow Above	Nool paremale üleval
+	Rightwards Harpoon Above	Harpuun paremale üleval
+	Roots of ax²+bx+c	ax²+bx+c juured
+	SAMPLE	NÄIDIS
+	SIST02	SIST02
+	Scripts	Kirjad
+	Secant Function	Sekansfunktsioon
+	Show the equation in the line of text	Näita võrrandit tekstireas
+	Show the equation on a line of its own	Näita võrrandit eraldi real
+	Sides of a right triangle	Täisnurkse kolmnurga küljed
+	Sine Function	Siinusfunktsioon
+	Sine and cosine series of f(x)	f(x) siinus- ja koosinusrida
+	Sine theta	Siinus teeta
+	Single Brackets	Üksiksulud
+	Single Left Angle	Üks vasak noolsulg
+	Single Left Bar	Üks vasak püstkriips
+	Single Left Brace	Üks vasak looksulg
+	Single Left Bracket	Üks vasak nurksulg
+	Single Left Parenthesis	Üks vasak ümarsulg
+	Single Right Brace	Üks parem looksulg
+	Single Right Bracket	Üks parem nurksulg
+	Single Right Parenthesis	Üks parem ümarsulg
+	Skewed Fraction	Kaldmurd
+	Small change	Väike muutus
+	Sparse Matrices	Hõredad maatriksid
+	Square Root	Ruutjuur
+	Square Root with Degree	Juur astmega
+	Square Union	Nurkühend
+	Stack Object	Virnaobjekt
+	Stack Object (Three)	Virnaobjekt (kolm)
+	Stacked Fraction	Virnastatud murd
+	Stacked, no bar	Virnastatud, murrujooneta
+	Standard Only	Ainult standardsed
+	Standard and Contextual	Standardsed ja kontekstipõhised
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Style: APA	Laad: APA
+	Subscript-Superscript	Ala- ja ülaindeks
+	Subscripts and Superscripts	Ala- ja ülaindeksid
+	Sum of cosines	Koosinuste summa
+	Sum or difference of sines	Siinuste summa või vahe
+	Summation	Summa
+	Summation from 0 to n	Summa 0-st n-ni
+	Summation over binomials	Binoomkordajate summa
+	Summation with Limits	Summa rajadega
+	Summation with Lower Limit	Summa alumise rajaga
+	Summation with Subscript Limit	Summa alaindeksi rajaga
+	Summation with Subscript-Superscript Limits	Summa ala- ja ülaindeksi rajadega
+	Summations	Summad
+	Surface Integral	Pinnaintegraal
+	Surface Integral with Limits	Pinnaintegraal rajadega
+	Surface Integral with Stacked Limits	Pinnaintegraal virnastatud rajadega
+	TOA Heading	Viiteloendi pealkiri
+	Table Grid	Tabeli ruudustik
+	Table of Figures	Jooniste loend
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tangent Function	Tangensfunktsioon
+	Tangent formula	Tangensi valem
+	Text over Colon Equal	Tekst koolon-võrdusmärgi kohal
+	Text over Equal	Tekst võrdusmärgi kohal
+	Text size	Teksti suurus
+	The spelling and grammar check is complete.	Õigekirja ja grammatika kontroll on lõpetatud.
+	These settings will be used for new documents.	Neid sätteid kasutatakse uute dokumentide jaoks.
+	Tilde	Tilde
+	Trigonometric Functions	Trigonomeetrilised funktsioonid
+	Triple Dot	Kolm punkti
+	Triple Integral	Kolmekordne integraal
+	Triple Integral with Limits	Kolmekordne integraal rajadega
+	Triple Integral with Stacked Limits	Kolmekordne integraal virnastatud rajadega
+	Turabian	Turabian
+	Type equations in LaTeX	Tippige võrrandid LaTeX-is
+	Type equations in the linear format (UnicodeMath)	Tippige võrrandid lineaarvormingus (UnicodeMath)
+	Type normal (non-math) text in the equation	Tippige võrrandisse tavateksti (mitte matemaatikat)
+	Typing	Tippimine
+	URGENT	KIIRELOOMULINE
+	Underbar	Alakriips
+	Underbrace	Looksulg all
+	Union	Ühend
+	Union of intersections	Ühisosade ühend
+	Union with Limits	Ühend rajadega
+	Union with Lower Limit	Ühend alumise rajaga
+	Union with Plus	Ühend plussiga
+	Union with Subscript-Superscript Limits	Ühend ala- ja ülaindeksi rajadega
+	Unions and Intersections	Ühendid ja ühisosad
+	Up Diagonal Dots	Ülesminevad diagonaalpunktid
+	Use "a" before a consonant sound	Kasutage kaashääliku ees "a"
+	Use "an" before a vowel sound	Kasutage täishääliku ees "an"
+	Vector A	Vektor A
+	Vector AB	Vektor AB
+	Vertical Bars	Püstkriipsud
+	Vertical Dots	Vertikaalsed punktid
+	Volume Integral	Ruumintegraal
+	Volume Integral with Limits	Ruumintegraal rajadega
+	Volume Integral with Stacked Limits	Ruumintegraal virnastatud rajadega
+	Wildcards (regex)	Metamärgid (regulaaravaldis)
+	Yields	Annab
+	n×n Identity Matrix	n×n ühikmaatriks
+	n×n Matrix	n×n maatriks
+	points and above	punkti ja suuremad
+	tOGGLE cASE	vAHETA tÄHESUURUST
+	x bar	x kriipsuga
+	{w} × {h} in	{w} × {h} tolli
+	{w} × {h} mm	{w} × {h} mm
+	✓ None	✓ Puudub
+	➕ New comment	➕ Uus kommentaar
+	📂  Browse…	📂  Sirvi…
