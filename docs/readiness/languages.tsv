@@ -1,0 +1,96 @@
+id	language	culture	catalog
+lang-001	Afrikaans	af-ZA	-
+lang-002	Albanian	sq-AL	-
+lang-003	Arabic	ar-SA	-
+lang-004	Armenian	hy-AM	-
+lang-005	Assamese	as-IN	-
+lang-006	Azerbaijani (Latin)	az-Latn-AZ	-
+lang-007	Bangla (Bangladesh)	bn-BD	-
+lang-008	Bangla (Bengali India)	bn-IN	-
+lang-009	Basque (Basque)	eu-ES	-
+lang-010	Bosnian (Latin)	bs-latn-BA	-
+lang-011	Bulgarian	bg-BG	-
+lang-012	Catalan	ca-ES	-
+lang-013	Catalan (Valencia)	ca-ES-valencia	-
+lang-014	Chinese (Simplified)	zh-CN	zh-hans
+lang-015	Chinese (Traditional)	zh-TW	zh-hant
+lang-016	Croatian	hr-HR	-
+lang-017	Czech	cs-CZ	cs
+lang-018	Danish	da-DK	-
+lang-019	Dutch	nl-NL	-
+lang-020	English	en-US	en
+lang-021	English UK [1]	en-GB	-
+lang-022	Estonian	et-EE	et
+lang-023	Finnish	fi-FI	-
+lang-024	French	fr-FR	fr
+lang-025	French Canada [1]	fr-CA	-
+lang-026	Galician	gl-ES	-
+lang-027	Georgian	ka-GE	-
+lang-028	German	de-DE	de
+lang-029	Greek	el-GR	-
+lang-030	Gujarati	gu-IN	-
+lang-031	Hausa	ha-Latn-NG	-
+lang-032	Hebrew	he-IL	-
+lang-033	Hindi	hi-IN	-
+lang-034	Hungarian	hu-HU	hu
+lang-035	Icelandic	is-IS	-
+lang-036	Igbo	ig-NG	-
+lang-037	Indonesian	id-ID	-
+lang-038	Irish	ga-IE	-
+lang-039	isiXhosa	xh-ZA	-
+lang-040	isiZulu	zu-ZA	-
+lang-041	Italian	it-IT	it
+lang-042	Japanese	ja-JP	ja
+lang-043	Kannada	kn-IN	-
+lang-044	Kazakh	kk-KZ	-
+lang-045	Kinyarwanda	rw-RW	-
+lang-046	KiSwahili	sw-KE	-
+lang-047	Konkani	kok-IN	-
+lang-048	Korean	ko-KR	-
+lang-049	Kyrgyz	ky-KG	-
+lang-050	Latvian	lv-LV	-
+lang-051	Lithuanian	lt-LT	-
+lang-052	Luxembourgish	lb-LU	-
+lang-053	Macedonian (North Macedonia)	mk-MK	-
+lang-054	Malay (Latin)	ms-MY	-
+lang-055	Malayalam	ml-IN	-
+lang-056	Maltese	mt-MT	-
+lang-057	Maori	mi-NZ	-
+lang-058	Marathi	mr-IN	-
+lang-059	Nepali	ne-NP	-
+lang-060	Norwegian Bokmål	nb-NO	-
+lang-061	Norwegian Nynorsk	nn-NO	-
+lang-062	Odia	or-IN	-
+lang-063	Pashto	ps-AF	-
+lang-064	Persian	fa-IR	-
+lang-065	Polish	pl-PL	pl
+lang-066	Portuguese (Portugal)	pt-PT	-
+lang-067	Portuguese (Brazil)	pt-BR	pt-br
+lang-068	Punjabi (Gurmukhi)	pa-IN	-
+lang-069	Romanian	ro-RO	-
+lang-070	Romansh	rm-CH	-
+lang-071	Russian	ru-RU	ru
+lang-072	Scottish Gaelic	gd-GB	-
+lang-073	Serbian (Cyrillic, Serbia)	sr-cyrl-RS	sr
+lang-074	Serbian (Latin, Serbia)	sr-latn-RS	sr-latn
+lang-075	Serbian (Cyrillic, Bosnia & Herzegovina)	sr-cyrl-BA	-
+lang-076	Sesotho sa Leboa	nso-ZA	-
+lang-077	Setswana	tn-ZA	-
+lang-078	Sinhala	si-LK	-
+lang-079	Slovak	sk-SK	-
+lang-080	Slovenian	sl-SI	-
+lang-081	Spanish	es-ES	es
+lang-082	Spanish Mexico [1]	es-MX	-
+lang-083	Swedish	sv-SE	-
+lang-084	Tamil	ta-IN	-
+lang-085	Tatar (Cyrillic)	tt-RU	-
+lang-086	Telugu	te-IN	-
+lang-087	Thai	th-TH	th
+lang-088	Turkish	tr-TR	tr
+lang-089	Ukrainian	uk-UA	uk
+lang-090	Urdu	ur-PK	-
+lang-091	Uzbek (Latin)	uz-Latn-UZ	-
+lang-092	Vietnamese	vi-VN	-
+lang-093	Welsh	cy-GB	-
+lang-094	Wolof	wo-SN	-
+lang-095	Yoruba	yo-NG	-

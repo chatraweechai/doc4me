@@ -7,6 +7,7 @@ mod assets;
 mod ico;
 mod layers;
 mod parity;
+mod readiness;
 mod stats;
 mod version;
 
@@ -26,6 +27,10 @@ commands:
                   show where test corpora live; --download fetches PngSuite into corpus/pngsuite
   stats [--exact] count tests and lines per crate (--exact: ask the test harness via `-- --list`)
   parity          recompute the Word feature-parity summary in docs/parity-checklist.md
+  readiness [--download] [--corpus] [--jobs N] [--cli PATH] [--dry-run]
+                  the measured readiness number over the check sets in docs/readiness/ (written to
+                  docs/readiness.md); --download fetches the real-world corpus into
+                  corpus/readiness (SHA-256 checked), --corpus checks it (needs pdfinfo/pdftotext)
   version [set X.Y.Z[-pre]]
                   print the workspace version, or set it ([workspace.package] in Cargo.toml)
   ico <out.ico> <in.png>...
@@ -43,6 +48,7 @@ fn main() -> ExitCode {
         Some("corpus") => cmd_corpus(rest.contains(&"--download")),
         Some("stats") => stats::run(&root(), rest.contains(&"--exact")),
         Some("parity") => parity::run(&root()),
+        Some("readiness") => readiness::run(&root(), &rest),
         Some("ico") => ico::run(&rest),
         Some("version") => version::run(&root(), &rest),
         Some("-h" | "--help" | "help") | None => {

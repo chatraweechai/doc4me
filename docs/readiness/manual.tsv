@@ -1,0 +1,25 @@
+id	set	check	status	date	evidence
+stab-001	stability	Autosave and recovery soak test: 8 hours of editing with autosave on, then a forced quit, loses nothing	untested	2026-10-25	not run yet
+stab-002	stability	No open startup-crash report (WordCraft #170, Intel UHD Graphics)	fail	2026-10-25	docs/gaps.md #3
+stab-003	stability	No open freeze report (WordCraft #77, #59 Thai fonts, #31 font selector)	fail	2026-10-25	docs/gaps.md #3
+stab-004	stability	Saving works without administrator rights on Windows 11 (WordCraft #218)	fail	2026-10-25	docs/gaps.md #3
+stab-005	stability	Every command with junk parameters returns an error, never a panic (hostile_params_never_panic)	pass	2026-10-25	cargo test --workspace: 1,813 passed
+plat-001	platforms	Windows x64: CI builds the MSI and portable zip, and the build starts (doc4me-cli --version)	pass	2026-10-25	Actions run 40191882219
+plat-002	platforms	Windows arm64: a packaged build	fail	2026-10-25	not built
+plat-003	platforms	macOS: a packaged build (packaging/macos/package.sh)	untested	2026-10-25	not built by CI
+plat-004	platforms	Linux x64: a packaged build (packaging/linux)	untested	2026-10-25	not built by CI
+plat-005	platforms	Web: the wasm build loads in a browser and opens a document	untested	2026-10-25	cargo xtask wasm compiles; not served
+eco-001	ecosystem	Macros: record and play commands (Doc4Me's replacement for VBA)	pass	2026-10-25	crates/engine/src/cmd/tools.rs macros_record_and_run
+eco-002	ecosystem	Add-ins: install and remove from Doc4Me's own catalog (replacement for Office add-ins)	pass	2026-10-25	addins.get, crates/ui-egui/src/get_addins.rs tests
+eco-003	ecosystem	Cloud storage: open and save in place in a folder kept in sync by Nextcloud Desktop or Syncthing	untested	2026-10-25	not tried
+eco-004	ecosystem	Reference manager: Zotero cite while you write	pass	2026-10-25	doc4me-cli zotero, crates/zotero tests
+eco-005	ecosystem	Reference manager: Mendeley Cite	fail	2026-10-25	no plugin
+eco-006	ecosystem	Agents drive the editor through MCP and the CLI	pass	2026-10-25	docs/mcp.md, crates/mcp tests
+hw-001	hardware	Printing through the system's print dialog: printer, copies, two-sided	fail	2026-10-25	File › Print opens the PDF in the system viewer (gap #6)
+hw-002	hardware	GPU rendering, HiDPI and crisp text	pass	2026-10-25	docs/hardware-parity.md
+hw-003	hardware	Several monitors with different DPI on Windows	untested	2026-10-25	winit DPI fix pending (WordCraft #155)
+hw-004	hardware	Pen: ink with pressure	fail	2026-10-25	no pressure (gap #12)
+hw-005	hardware	Microphone: Dictate on Windows with a real microphone	untested	2026-10-25	tested with synthetic speech only
+hw-006	hardware	Speakers: Read Aloud	pass	2026-10-25	review.readAloud (#190)
+hw-007	hardware	Scanner or camera: insert a picture from a device	fail	2026-10-25	not available
+hw-008	hardware	Touch: scroll, zoom and select with fingers on Windows	untested	2026-10-25	not tried
