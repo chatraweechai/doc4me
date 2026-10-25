@@ -191,6 +191,14 @@
   - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
   - ตรวจสอบ: รูปแบบตามเอกสาร Dependabot (`version: 2`, `package-ecosystem: "github-actions"`, `directory: "/"`, `schedule.interval: "weekly"`)
 
+- **เอกสารตรงกับโค้ดหลังรอบ parity 499/499** (`ROADMAP.md`, `docs/gaps.md`, `docs/mcp.md`, `docs/roadmap.md`, `README.md`, `README.th.md`)
+  - เหตุผล: ไล่รายการเอกสารล้าสมัยใน handoff ข้อ 2 เทียบกับโค้ดทีละข้อ ส่วนใหญ่แก้ไปแล้วในรอบก่อน ที่ยังผิดอยู่คือ
+    - `ROADMAP.md`: ตัวเลขคำสั่ง/เทสต์/บรรทัดยังเป็นของ 2026-10-24 (609 · 1,758 · ~181,000) แก้เป็น 625 คำสั่ง · 1,816 เทสต์ · ~188,000 บรรทัด (2026-10-25); "Last updated" เป็น 2026-10-25; Upcoming ข้อ 1 "~45 open PRs" เป็นของ WordCraft (repo นี้มี PR เปิดอยู่ 4 รายการ เป็น Dependabot ทั้งหมด); เพิ่มแถว revision history 2026-10-24 และ 2026-10-25 ที่ขาดไป
+    - `docs/gaps.md` #29 ยังบอกว่าไม่มีสมการด้วยลายมือ แก้เป็นช่องว่างที่เหลือจริง (ตัวจดจำรู้จักสัญลักษณ์ชุดจำกัดตาม `crates/engine/src/ink_math.rs`)
+    - `docs/mcp.md` และ alpha gate ใน `docs/roadmap.md`: 618 → 625 คำสั่ง
+    - `README.md` และ `README.th.md`: เพิ่มบรรทัด "รุ่นถัดไป" ของพิมพ์ด้วยเสียง (รองรับภาษาไทย ทำงานบนเครื่อง) แปลเอกสาร รูปภาพออนไลน์ สมการด้วยลายมือ และ Get Add-ins
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: นับคำสั่งด้วย `grep -rho 'CommandSpec::new("[^"]*"' crates apps | sort -u | wc -l` (625), เทสต์ด้วย `grep -rn '#\[test\]' crates apps xtask` (1,816), บรรทัดของไฟล์ `.rs` ใน `crates`, `apps`, `xtask` (188,030); PR ที่เปิดอยู่จาก GitHub (#1–#4 ของ Dependabot); สัญลักษณ์ของตัวจดจำจากคอมเมนต์ต้นไฟล์และ `templates()` ใน `ink_math.rs`
 ### แก้ไข
 
 - เทสต์ engine `failed_command_restores_history_changed_by_nested_commands` ล้มเป็นครั้งคราว: เทียบประวัติ undo ของสองเซสชันที่สร้างห่างกันเล็กน้อย โดยล้าง `date` ของข้อคิดเห็นแต่ไม่ล้าง `date_utc` (เพิ่มในรอบที่ 4) ถ้าสองเซสชันคร่อมวินาทีจะต่างกัน — ล้าง `date_utc` ด้วย (`crates/engine/src/tests.rs`); เฉพาะเทสต์ ไม่กระทบโปรแกรม

@@ -41,7 +41,7 @@ Native save reliability: synthetic cases on macOS reproduced loss through the pr
 | 26 | **Minor formats**: MHT, Works/WordPerfect, saving Word 2003 XML | | Word XML Document (Flat OPC) opens and saves, Word 2003 XML opens (#548) | Rare | 15–28 | [file-format-parity.md](file-format-parity.md) |
 | 27 | **View windows** (landed 2026-10-25: New Window, Split, Arrange All, Side by Side, Synchronous Scrolling, Switch Windows): a new window shows the document without its own ribbon, and all windows share one selection | | `crates/ui-egui/src/windows.rs`; [parity-checklist.md](parity-checklist.md) (View 29/29) | Comparing documents | 1–2 | [ui-parity.md](ui-parity.md) |
 | 28 | **Dictate**: works (2026-10-25) with whisper.cpp on the computer; text comes after each pause, no voice commands | | `tools.dictate`, `apps/doc4me/src/dictate.rs` | Dictation users | 4–8 (voice commands, streaming) | [hardware-parity.md](hardware-parity.md) |
-| 29 | **Equations**: ink equations | | #191 notes; long display equations wrap at operators (#326) | Maths-heavy documents | 2–3 | [layout-parity.md](layout-parity.md) |
+| 29 | **Equations**: handwritten equations are recognised from a small symbol set (Insert › Equation › Ink Equation and Draw › Ink to Math landed 2026-10-25, `crates/engine/src/ink_math.rs`: digits, `a b c n x y z`, `+ − = < > / ( )`, `π`, `∫`, `√`): no matrices, other Greek letters or letters beyond those by hand | | #191 notes; long display equations wrap at operators (#326) | Maths-heavy documents | 2–3 | [layout-parity.md](layout-parity.md) |
 | 30 | **Thai depth**: no Thai grammar checking; line breaks (ICU4X dictionary segmentation) may differ from Word's; TH Sarabun's optional ligatures (fi, ฤๅ) are not simulated; TH SarabunIT๙ metrics are inferred, not measured from the font file | | `crates/proof/src/th` checks spelling only; TH SarabunIT๙ reuses TH Sarabun New's measured metrics (`crates/fonts/src/word.rs`, `thsarabun.rs`) | Thai government and academic writers | 10–20 + owner (font file, native review) | [localization-parity.md](localization-parity.md) |
 
 **Beta needs #1–#7** (~150–230 h with the stability and layout work they imply): they are the
@@ -69,7 +69,7 @@ The same gaps grouped the way the parity documents are, for agents working in on
 
 | Date | Change | Summary |
 |---|---|---|
-| 2026-10-25 | trivial | #12 Ink to Math / Ink Equation, #22 Get Add-ins (Doc4Me's own add-in catalog), #28 Dictate (whisper.cpp) landed; catalog parity 499/499 |
+| 2026-10-25 | trivial | #12 Ink to Math / Ink Equation, #22 Get Add-ins (Doc4Me's own add-in catalog), #28 Dictate (whisper.cpp) landed; #29 narrowed to the recogniser's symbol set; catalog parity 499/499 |
 | 2026-10-11 | trivial | #8 narrowed: runs in a proofing language without a dictionary are skipped instead of flagged against the English dictionary (#100); dictionaries still English-only |
 | 2026-10-11 | trivial | #16: DOCX open/save preserves independent complex-script formatting inheritance; RTL sections, tables and typography remain open |
 | 2026-10-11 | trivial | `.doc` pictures, shapes and text boxes read (#551); gap #14 narrowed to the writer and Word 6/95 files |

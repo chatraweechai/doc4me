@@ -2,7 +2,7 @@
 
 **Stage: alpha** · next: beta, ~15 points (60% → 75% ready for real work) and ~150–230 h away
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (Doc4Me 1.1.1 and the Thai digit conversion; target is Word for Windows; counts and stale gaps corrected; previously trivial: Doc4Me 1.1.0 release; previously trivial: Thai interface catalog; previously trivial: Thai proofing, Thai counting, TH Sarabun New/PSK at their own size, Word for Windows line spacing; previously trivial: Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (catalog 499/499, View windows, Screenshot, Online Video, 3D Models, Online Pictures, Translate, Get Add-ins, Ink Equation, Dictate; counts re-measured; previously trivial: Doc4Me 1.1.1 and the Thai digit conversion; target is Word for Windows; counts and stale gaps corrected; previously trivial: Doc4Me 1.1.0 release; previously trivial: Thai interface catalog; previously trivial: Thai proofing, Thai counting, TH Sarabun New/PSK at their own size, Word for Windows line spacing; previously trivial: Doc4Me 1.0.0: rename, Sarabun default font, Thai word breaks; previously trivial: Turkish interface catalog completed, #774; previously trivial: drag-select by whole units, #549; previously trivial: Insert › SmartArt landed, #497: catalog 429/451 → 437/458 (95.4%); previously trivial: Turkish interface landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw tab ink, #307, and Draw Table and Eraser, #303, landed: catalog 402/434; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; restructured to the craftrules progress-docs standard) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Doc4Me aims for complete parity with Microsoft Word, then goes further on speed, openness and
 agent control. This page is the summary; the assessment is
@@ -21,7 +21,7 @@ agent control. This page is the summary; the assessment is
 | **Essentials user** | **~63%** | estimated: core-feature depth × discounts for launch (×0.90), discoverability (×0.95), opening received files (×0.92) |
 | Remaining to **beta** | **~150–230 h** of Opus 5.5 agent wall-clock (gaps #1–#7) | estimated |
 | Remaining to **full parity** with Word desktop | **~750–1,250 h** (70–80% parallelizable) | estimated |
-| Commands / tests / code | 609 commands · 1,758 tests · ~181,000 lines of Rust (2026-10-24) | measured (source: `CommandSpec::new` ids, `#[test]` functions, `.rs` lines in `crates`, `apps`, `xtask`) |
+| Commands / tests / code | 625 commands · 1,816 tests · ~188,000 lines of Rust (2026-10-25) | measured (source: `CommandSpec::new` ids, `#[test]` functions, `.rs` lines in `crates`, `apps`, `xtask`) |
 | Releases | Doc4Me v1.1.1 (2026-10-22, GitHub Release, made from the Actions tab; v1.1.0 of 2026-10-21; v1.0.0 of 2026-10-15 was built by Actions but is not tagged yet): Windows MSI and portable zip, x64, unsigned, built by GitHub Actions (WordCraft, upstream, last shipped v0.4.0 on every platform) | measured |
 
 Hours are calibrated from this repo's PRs (equations #191: ~9.7k lines in ~5 h; `.doc` reader
@@ -120,7 +120,8 @@ Proofing: English and Polish (spelling, grammar, hyphenation), chosen per run fr
 
 Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadmap.md)):
 
-1. Review and merge the ~45 open PRs that already close gaps (owner).
+1. Owner: review the four open Dependabot PRs (GitHub Actions updates). The ~45 open PRs that
+   closed gaps belong to WordCraft, upstream, and aren't in this repository.
 2. DOCX real-world corpus: open, render, round-trip, compare with Word (30–50 h).
 3. Preserve Word ink (`w14:contentPart`) through a round trip (2–4 h); charts, SmartArt and OLE
    objects already round-trip with all their parts.
@@ -228,6 +229,8 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Progress log: View windows, Screenshot, Online Video, 3D Models and the remaining catalog items (499/499); counts re-measured (625 commands, 1,816 tests); Upcoming #1 names this repository's open PRs |
+| 2026-10-24 | trivial | Progress log: Doc4Me 1.1.1 and the Thai digit conversion; Releases row; target is Word for Windows; counts and stale gaps corrected |
 | 2026-10-21 | trivial | Progress log: Doc4Me 1.1.0; Releases row; the progress-log table's two 2026-10-11 rows moved below its delimiter row, so the table renders |
 | 2026-10-19 | trivial | Progress log and Languages: Thai interface catalog |
 | 2026-10-16 | trivial | Progress log: Thai proofing, Thai counting, TH Sarabun metrics, Word for Windows line spacing; Languages proofing line |

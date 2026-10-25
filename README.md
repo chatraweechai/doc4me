@@ -28,6 +28,10 @@ web build are in [`packaging/`](packaging/).
 - Interface in English, Thai, Russian, Hungarian, Turkish, Italian and other languages. Thai comes
   with dictionary word breaks, a Thai spelling checker, Thai list numbers and line spacing measured
   as Word for Windows measures it; see the [Thai page](README.th.md).
+- Coming in the next release: Dictate recognises speech, Thai included, on the computer
+  (whisper.cpp; the free speech model is downloaded once); Translate (MyMemory or your own
+  LibreTranslate server), Online Pictures (Creative Commons pictures from Openverse, credited),
+  Ink Equation and Get Add-ins.
 - Light and dark themes; in the dark theme the page stays white.
 - `doc4me-cli` converts and edits documents without a window, and `doc4me-cli mcp` serves every
   command to AI agents ([docs/mcp.md](docs/mcp.md)).

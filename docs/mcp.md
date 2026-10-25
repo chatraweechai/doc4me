@@ -82,7 +82,7 @@ files it was given rather than guarding against other software on the computer.
 
 | Tool | What it does |
 |---|---|
-| `list_commands` | every command (filter with `query`) — over 600 of them (618 on 2026-10-25) |
+| `list_commands` | every command (filter with `query`) — over 600 of them (625 on 2026-10-25) |
 | `execute` | run one command: `{command: "insert.table", params: {rows: 3, cols: 4}}` |
 | `batch` | run several commands in order |
 | `new_document` | blank, sample, letter, resume, report |
