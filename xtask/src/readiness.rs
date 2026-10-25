@@ -98,6 +98,9 @@ pub fn run(root: &Path, args: &[&str]) -> Result<(), String> {
     if opts.download {
         download(&manifest, &corpus_dir)?;
     }
+    if opts.corpus && !["pdfinfo", "pdftotext"].iter().all(|t| Command::new(t).arg("-v").output().is_ok()) {
+        return Err("--corpus compares pages with poppler's pdfinfo and pdftotext; install poppler-utils (Windows: poppler for Windows) first".into());
+    }
     let cli = match opts.cli {
         Some(p) => p,
         None => build_cli(root)?,
