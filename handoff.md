@@ -54,7 +54,7 @@
 ### งานของเจ้าของ repo (session ทำไม่ได้)
 
 - tag `v1.0.0` ที่คอมมิต `7946cbb` (คำสั่งในข้อ 5.1 ด้านล่าง)
-- ใบรับรองลงนามโค้ดหรือ Azure Trusted Signing แล้วใส่ secret (workflow พร้อมแล้ว)
+- ใบรับรองลงนามโค้ดหรือ Azure Trusted Signing แล้วใส่ secret (workflow พร้อมแล้ว) (ข้อ 5.2)
 - ruleset ป้องกัน `main` (ข้อ 5.3), ลบ branch `claude/optimistic-fermat-z9uknk` ที่ merge แล้ว, ตัดสินใจ PR ของ Dependabot #1–#4
 
 ## session 2026-10-25 รอบที่ 7: งานค้างใน handoff ข้อ 2–4
