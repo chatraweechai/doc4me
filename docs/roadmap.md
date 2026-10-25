@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (target raised to 95%; previously trivial: stage B done: readiness measured, 66.1%; previously trivial: path to 80% measured readiness; previously trivial: beta list item 5: Aptos drawn with Intos; previously trivial: Next after beta: ecosystem decisions and the in-app assistant removed; previously trivial: M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (measured 73.4% during stage C; previously trivial: target raised to 95%; previously trivial: stage B done: readiness measured, 66.1%; previously trivial: path to 80% measured readiness; previously trivial: beta list item 5: Aptos drawn with Intos; previously trivial: Next after beta: ecosystem decisions and the in-app assistant removed; previously trivial: M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -69,8 +69,8 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 ## Path to 95% measured readiness
 
 The readiness number in [`ROADMAP.md`](../ROADMAP.md) was an estimate (~60%): a weighted sum of
-estimated dimension parities. Since stage B it is measured: **66.1%** (2026-10-25,
-[`readiness.md`](readiness.md)), 28.9 points short of the target. The target is **95% ready for real work, measured**
+estimated dimension parities. Since stage B it is measured: **66.1%** at first, **73.4%** during stage C (2026-10-25,
+[`readiness.md`](readiness.md)), 21.6 points short of the target. The target is **95% ready for real work, measured**
 (raised from 80% by the owner on 2026-10-25): every dimension
 comes from a fixed pass/fail check set, and one command computes the number. Checks may be added,
 never removed, so the number can't drift by editing the list.
@@ -123,6 +123,7 @@ languages, screen-reader access.
 | Date | Change | Summary |
 |---|---|---|
 | 2026-10-25 | trivial | Target raised from 80% to 95% measured (owner); the rows only the owner can check |
+| 2026-10-25 | trivial | Stage C so far: measured 73.4% |
 | 2026-10-25 | trivial | Path to 80%: stage B done, 66.1% measured replaces the ~60% estimate; alpha-gate row for received .docx from the corpus |
 | 2026-10-25 | trivial | Path to 80%: stage A done (measurement and a 222-document corpus); the number goes into `ROADMAP.md` in stage B |
 | 2026-10-25 | trivial | Path to 80% measured readiness: build the measurement (xtask readiness, DOCX corpus with Word-made PDFs, pagination, stability, feature checklist), measure, fix to 80% |

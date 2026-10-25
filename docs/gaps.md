@@ -1,6 +1,6 @@
 # Where Doc4Me falls short of Word
 
-> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-25 · **Change:** trivial (beta note: the full number is measured, 66.1%; previously trivial: #4: Aptos drawn with the bundled metric-compatible Intos; previously trivial: #22 Microsoft's systems out of scope with open replacements, #25 in-app AI cut; previously trivial: #30: TH SarabunIT๙ drawn with Sarabun and announced on open; previously trivial: #12 Ink to Math and Ink Equation, #22 Get Add-ins, #28 Dictate landed; previously trivial: #27 View windows landed; previously trivial: rows #2, #8, #9, #10, #11, #15 and #17 corrected against the code; Thai row #30 added; previously trivial: DOCX complex-script formatting inheritance fixed; broader RTL work remains; previously trivial: #24 narrowed: Customize Keyboard and Customize Ribbon landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: first version; every known shortfall from the 2026-10-10 re-measure, ranked) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-25 · **Change:** trivial (beta note: measured 73.4% now; previously trivial: the full number is measured, 66.1%; previously trivial: #4: Aptos drawn with the bundled metric-compatible Intos; previously trivial: #22 Microsoft's systems out of scope with open replacements, #25 in-app AI cut; previously trivial: #30: TH SarabunIT๙ drawn with Sarabun and announced on open; previously trivial: #12 Ink to Math and Ink Equation, #22 Get Add-ins, #28 Dictate landed; previously trivial: #27 View windows landed; previously trivial: rows #2, #8, #9, #10, #11, #15 and #17 corrected against the code; Thai row #30 added; previously trivial: DOCX complex-script formatting inheritance fixed; broader RTL work remains; previously trivial: #24 narrowed: Customize Keyboard and Customize Ribbon landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: first version; every known shortfall from the 2026-10-10 re-measure, ranked) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 The work list. One entry per shortfall, ranked by how much it stops a Word user from switching
 (**B** = blocks beta). Each says what's missing, the evidence, who it hurts, an Opus 5.5 agent
@@ -46,7 +46,7 @@ Native save reliability: synthetic cases on macOS reproduced loss through the pr
 
 **Beta needs #1–#7** (~150–230 h with the stability and layout work they imply): they are the
 blocking gaps, and closing them lifts layout, stability and UI, where the measured full number
-(66.1%, [readiness.md](readiness.md)) loses most of its points. Everything else is depth on the way to full parity.
+(73.4%, [readiness.md](readiness.md)) loses most of its points. Everything else is depth on the way to full parity.
 
 ## By kind
 
@@ -69,6 +69,7 @@ The same gaps grouped the way the parity documents are, for agents working in on
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Beta note: measured readiness is 73.4% now |
 | 2026-10-25 | trivial | Beta note: the full number is measured (66.1%) instead of estimated (~60% → ~75%) |
 | 2026-10-25 | trivial | #4: Aptos and Aptos Display drawn with the bundled Intos and Intos Display; owner-bound font item removed |
 | 2026-10-25 | trivial | #22: VBA, Office add-ins, OneDrive/SharePoint and co-authoring out of scope (owner); open replacements listed. #25 in-app AI provider cut (owner) |
