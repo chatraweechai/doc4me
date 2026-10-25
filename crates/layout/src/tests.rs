@@ -2085,10 +2085,19 @@ fn line_spacing_does_not_scale_pictures() {
     let l = lay(&d);
     let Some(Placed::Lines { para, .. }) = l.pages[0].items.iter().find(|i| matches!(i, Placed::Lines { .. })) else { panic!() };
     let line = &para.lines[0];
-    let desc = para.styles[0].descent;
-    // Word: the picture plus the font's descent, not (picture + descent) x 1.15.
-    assert!((line.height - (144.0 + desc)).abs() < 0.01, "line {} for a 144pt picture (descent {desc})", line.height);
+    // Word: a line of only pictures is as tall as the tallest one, not scaled by the spacing and
+    // with no descent below it in body text (readiness corpus: zenodo-075, govuk-035).
+    assert!((line.height - 144.0).abs() < 0.01, "line {} for a 144pt picture", line.height);
     assert!((line.baseline - line.top - 144.0).abs() < 0.01, "the picture stands on the baseline");
+    // With text on the line, the text's descent stays below the picture.
+    if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(0).map(std::sync::Arc::make_mut) {
+        let props = p.mark.clone();
+        p.insert_text(0, "x", &props).unwrap();
+    }
+    let l = lay(&d);
+    let Some(Placed::Lines { para, .. }) = l.pages[0].items.iter().find(|i| matches!(i, Placed::Lines { .. })) else { panic!() };
+    let (line, desc) = (&para.lines[0], para.styles[0].descent);
+    assert!((line.height - (144.0 + desc)).abs() < 0.01, "line {} for a 144pt picture and text (descent {desc})", line.height);
 }
 
 #[test]
