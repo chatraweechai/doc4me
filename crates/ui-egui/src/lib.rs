@@ -57,7 +57,9 @@ pub mod ink;
 pub mod keys;
 pub mod keytips;
 pub mod mini_toolbar;
+pub mod net;
 pub mod objects;
+pub mod online_pictures;
 pub mod options;
 pub mod panes;
 pub mod paste_picture;
@@ -113,6 +115,10 @@ pub struct Services {
     /// Desktop: the picture on the system clipboard, if any — egui's paste only carries text
     /// (#45). Read when Paste finds no text; see [`paste_picture`].
     pub clipboard_picture: Option<Box<dyn Fn() -> Option<paste_picture::ClipboardPicture>>>,
+    /// Requests to free web services (Online Pictures, Translate, Get Add-ins, Dictate's speech
+    /// model): make `req` and answer on the returned channel, waking the UI. The desktop app uses
+    /// the system's `curl`, the web app the browser. See [`net`].
+    pub fetch: Option<Box<dyn Fn(net::FetchRequest) -> std::sync::mpsc::Receiver<net::FetchAnswer>>>,
     /// Desktop: Insert › Screenshot › Screen Clipping. Start the system's screen clipping and
     /// answer on the returned channel once the user is done (`Ok(None)` when they cancelled),
     /// waking the UI; an `Err` says it couldn't start. See [`screen_clip`].
@@ -315,6 +321,8 @@ pub struct WordApp {
     pub windows: windows::Windows,
     /// Insert › Screenshot › Screen Clipping in progress.
     pub(crate) screen_clip: Option<screen_clip::Clipping>,
+    /// Insert › Online Pictures, while its window is open.
+    pub(crate) online_pictures: Option<online_pictures::Browser>,
     /// Content control frames, check boxes and lists on the page.
     pub controls: content_controls::ControlUi,
     pub dialog: Option<dialogs::Dialog>,
@@ -442,6 +450,7 @@ impl WordApp {
             canvas: canvas::CanvasState::default(),
             windows: windows::Windows::default(),
             screen_clip: None,
+            online_pictures: None,
             controls: Default::default(),
             dialog: None,
             colors: None,
@@ -871,6 +880,7 @@ impl WordApp {
                 "insertPicture" => self.pick_picture(),
                 "insertModel3d" => self.pick_model3d(),
                 "screenClipping" => screen_clip::start(self),
+                "onlinePictures" => online_pictures::open(self),
                 "addFont" => self.pick_font(),
                 "print" => {
                     self.ui.backstage = true;
@@ -1325,6 +1335,7 @@ impl WordApp {
         zotero::poll(self, ctx);
         read_aloud::poll(self, ctx);
         screen_clip::poll(self, ctx);
+        online_pictures::poll(self, ctx);
         self.clear_stale_change_picture();
         let _ = self.poll_file_dialog();
         self.drain_inbox();
@@ -1475,6 +1486,7 @@ impl WordApp {
         colors::show(self, &ctx);
         zotero::show_alert(self, &ctx);
         read_aloud::show(self, &ctx);
+        online_pictures::show(self, &ctx);
         crate::keytips::show(self, &ctx, ui);
         keys::global_shortcuts(self, &ctx);
         windows::show_others(self, ui);

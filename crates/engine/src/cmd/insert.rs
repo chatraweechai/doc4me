@@ -32,6 +32,9 @@ pub fn specs() -> Vec<CommandSpec> {
             sel_result(s)
         })
         .pure(),
+        CommandSpec::new("insert.onlinePicture", "Online Pictures", "Insert › Illustrations", online_picture).params(
+            r#"{"data"?: base64 (the picture; omit to show Online Pictures), "title"?: string, "creator"?: string, "license"?: "by|by-sa|by-nd|by-nc|by-nc-sa|by-nc-nd|cc0|pdm", "licenseVersion"?: string, "licenseUrl"?: url, "source"?: url (the picture's page), "attribution"?: bool (default true: a credit line under the picture), "width"?: pt}"#,
+        ),
         CommandSpec::new("insert.model3d", "3D Models", "Insert › Illustrations", model3d).params(
             r#"{"path"?: string, "data"?: base64, "name"?: string (the file's name, for its format), "width"?: pt, "yaw"?: degrees, "pitch"?: degrees; .glb, .stl or .obj}"#,
         ),
@@ -205,6 +208,92 @@ fn picture(s: &mut Session, v: &Value) -> CmdResult {
         return sel_result(s);
     };
     place_picture(s, bytes, p::f32(v, "width"), p::str(v, "alt").unwrap_or(""))
+}
+
+/// Insert › Online Pictures: a Creative Commons picture the front end found (Openverse) and
+/// downloaded, with a credit line under it ("“Title” by Creator is licensed under CC BY 2.0",
+/// the title linked to the picture's page and the licence to its deed), as the licences ask.
+/// WebP pictures become JPEG or PNG, which every Word reads.
+fn online_picture(s: &mut Session, v: &Value) -> CmdResult {
+    let Some(data) = p::str(v, "data") else {
+        s.ui_requests.push(json!({"open": "onlinePictures"}));
+        return sel_result(s);
+    };
+    let mut bytes = base64_decode(data).ok_or_else(|| CmdError::Params("bad base64 data".into()))?;
+    if bytes.starts_with(b"RIFF") && bytes.get(8..12) == Some(b"WEBP") {
+        bytes = webp_to_jpeg_or_png(&bytes)?;
+    }
+    let text = |k: &str| p::str(v, k).map(str::trim).filter(|t| !t.is_empty()).map(|t| t.chars().take(300).collect::<String>());
+    let title = text("title");
+    let creator = text("creator");
+    let licence = text("license").map(|l| licence_name(&l, text("licenseVersion").as_deref()));
+    let web = |k: &str| text(k).filter(|u| doc4me_doc::link::is_web_or_mail_link(u) && !u.starts_with("mailto:"));
+    let alt = match (&title, &creator) {
+        (Some(t), Some(c)) => format!("{t} by {c}"),
+        (Some(t), None) => t.clone(),
+        (None, Some(c)) => format!("Picture by {c}"),
+        (None, None) => "Online picture".to_string(),
+    };
+    let mut r = place_picture(s, bytes, p::f32(v, "width"), &alt)?;
+    // A picture added to a selected Drawing Canvas has no paragraph of its own to credit under.
+    if p::bool(v, "attribution").unwrap_or(true)
+        && r.get("canvasMember").is_none()
+        && let Some(licence) = licence
+    {
+        let at = s.sel.focus.clone();
+        let base = CharProps { size: Some(8.0), ..CharProps::default() };
+        let linked = |url: Option<String>| CharProps { link: url, ..base.clone() };
+        let mut para = Paragraph::new();
+        let mut push = |text: &str, props: CharProps| {
+            let off = para.len();
+            let _ = para.insert_text(off, text, &props);
+        };
+        match &title {
+            Some(t) => push(&format!("“{t}”"), linked(web("source"))),
+            None => push("This picture", linked(web("source"))),
+        }
+        if let Some(c) = &creator {
+            push(&format!(" by {c}"), base.clone());
+        }
+        push(" is licensed under ", base.clone());
+        push(&licence, linked(web("licenseUrl")));
+        push(".", base.clone());
+        para.mark = base;
+        let next = at.path.with_last(at.path.last() + 1);
+        s.doc.insert_block(at.story, &next, Block::Para(para))?;
+        r["attribution"] = json!(true);
+    }
+    Ok(r)
+}
+
+/// "CC BY-SA 4.0", "CC0 1.0", "Public Domain Mark 1.0" for an Openverse licence code.
+fn licence_name(code: &str, version: Option<&str>) -> String {
+    let code = code.to_ascii_lowercase();
+    let name = match code.as_str() {
+        "cc0" => "CC0".to_string(),
+        "pdm" => "Public Domain Mark".to_string(),
+        c if c.chars().all(|ch| ch.is_ascii_alphanumeric() || ch == '-' || ch == '+') => format!("CC {}", c.to_ascii_uppercase()),
+        _ => "a Creative Commons licence".to_string(),
+    };
+    match version.filter(|v| v.len() <= 8 && v.chars().all(|c| c.is_ascii_digit() || c == '.')) {
+        Some(v) => format!("{name} {v}"),
+        None => name,
+    }
+}
+
+/// A WebP picture as JPEG (or PNG when it has transparency), so older Word versions show it.
+fn webp_to_jpeg_or_png(bytes: &[u8]) -> Result<Vec<u8>, CmdError> {
+    let img =
+        image::load_from_memory_with_format(bytes, image::ImageFormat::WebP).map_err(|e| CmdError::Failed(format!("not a readable picture: {e}")))?;
+    let mut out = Vec::new();
+    let mut cur = std::io::Cursor::new(&mut out);
+    if img.color().has_alpha() {
+        img.write_to(&mut cur, image::ImageFormat::Png)
+    } else {
+        image::codecs::jpeg::JpegEncoder::new_with_quality(&mut cur, 90).encode_image(&img.to_rgb8())
+    }
+    .map_err(|e| CmdError::Failed(format!("couldn't convert the picture: {e}")))?;
+    Ok(out)
 }
 
 /// Insert › 3D Models: the model in a glTF binary, STL or OBJ file (`crate::model3d`) as a

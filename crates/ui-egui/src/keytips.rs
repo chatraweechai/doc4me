@@ -179,7 +179,7 @@ fn controls(tab: &str) -> Vec<Control> {
             c("Blank Page", "insert.blankPage"),
             c("Page Break", "insert.pageBreak"),
             m("Table", "insert.table"),
-            c("Pictures", "insert.picture"),
+            m("Pictures", "insert.picture"),
             m("Shapes", "insert.shape"),
             c("Icons", "insert.icon"),
             c("3D Models", "insert.model3d"),

@@ -2500,3 +2500,16 @@ spacing	Normal	ปกติ
 	Read Aloud couldn't start: {reason}	อ่านออกเสียง: เริ่มไม่ได้: {reason}
 	Read Aloud stopped: {reason}	อ่านออกเสียงหยุดแล้ว: {reason}
 	no speech program on this system	ระบบนี้ไม่มีโปรแกรมเสียงพูด
+	Online Pictures	รูปภาพออนไลน์
+	This Device…	อุปกรณ์นี้…
+	Online Pictures…	รูปภาพออนไลน์…
+	Search Openverse (Creative Commons pictures)	ค้นหาใน Openverse (รูปภาพ Creative Commons)
+	Search	ค้นหา
+	Only pictures I may use commercially	เฉพาะรูปที่ใช้เชิงพาณิชย์ได้
+	Searching…	กำลังค้นหา…
+	No pictures found.	ไม่พบรูปภาพ
+	Downloading…	กำลังดาวน์โหลด…
+	Couldn't search: {reason}	ค้นหาไม่ได้: {reason}
+	Couldn't download the picture: {reason}	ดาวน์โหลดรูปภาพไม่ได้: {reason}
+	it isn't a picture Doc4Me can read	ไม่ใช่รูปภาพที่ Doc4Me อ่านได้
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	รูปภาพจาก Openverse โปรดปฏิบัติตามสัญญาอนุญาตของแต่ละรูป Doc4Me จะใส่บรรทัดให้เครดิตไว้ใต้รูป

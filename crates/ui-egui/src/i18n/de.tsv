@@ -2077,3 +2077,16 @@ spacing	Normal	Normal
 	Read Aloud couldn't start: {reason}	Vorlesen konnte nicht gestartet werden: {reason}
 	Read Aloud stopped: {reason}	Vorlesen wurde beendet: {reason}
 	no speech program on this system	kein Sprachprogramm auf diesem System
+	Online Pictures	Onlinebilder
+	This Device…	Dieses Gerät…
+	Online Pictures…	Onlinebilder…
+	Search Openverse (Creative Commons pictures)	Openverse durchsuchen (Creative-Commons-Bilder)
+	Search	Suchen
+	Only pictures I may use commercially	Nur Bilder, die ich kommerziell nutzen darf
+	Searching…	Suche läuft…
+	No pictures found.	Keine Bilder gefunden.
+	Downloading…	Wird heruntergeladen…
+	Couldn't search: {reason}	Suche nicht möglich: {reason}
+	Couldn't download the picture: {reason}	Das Bild konnte nicht heruntergeladen werden: {reason}
+	it isn't a picture Doc4Me can read	es ist kein Bild, das Doc4Me lesen kann
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Bilder von Openverse. Beachten Sie die Lizenz jedes Bildes: Doc4Me fügt darunter eine Quellenangabe ein.

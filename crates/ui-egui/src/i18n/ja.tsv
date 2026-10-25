@@ -2078,3 +2078,16 @@ spacing	Normal	標準
 	Read Aloud couldn't start: {reason}	音声読み上げ を開始できませんでした: {reason}
 	Read Aloud stopped: {reason}	音声読み上げ が停止しました: {reason}
 	no speech program on this system	このシステムには音声プログラムがありません
+	Online Pictures	オンライン画像
+	This Device…	このデバイス…
+	Online Pictures…	オンライン画像…
+	Search Openverse (Creative Commons pictures)	Openverse を検索 (クリエイティブ コモンズの画像)
+	Search	検索
+	Only pictures I may use commercially	商用利用できる画像のみ
+	Searching…	検索しています…
+	No pictures found.	画像が見つかりませんでした。
+	Downloading…	ダウンロードしています…
+	Couldn't search: {reason}	検索できませんでした: {reason}
+	Couldn't download the picture: {reason}	画像をダウンロードできませんでした: {reason}
+	it isn't a picture Doc4Me can read	Doc4Me で読み取れる画像ではありません
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Openverse の画像です。各画像のライセンスに従ってください。Doc4Me は画像の下にクレジットを追加します。

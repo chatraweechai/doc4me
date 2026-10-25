@@ -2112,3 +2112,16 @@ spacing	Normal	Tavaline
 	Read Aloud couldn't start: {reason}	Loe ette: ei saanud käivitada: {reason}
 	Read Aloud stopped: {reason}	Loe ette peatus: {reason}
 	no speech program on this system	selles süsteemis pole kõneprogrammi
+	Online Pictures	Võrgupildid
+	This Device…	See seade…
+	Online Pictures…	Võrgupildid…
+	Search Openverse (Creative Commons pictures)	Otsi Openverse'ist (Creative Commonsi pildid)
+	Search	Otsi
+	Only pictures I may use commercially	Ainult pildid, mida tohin kasutada ärilistel eesmärkidel
+	Searching…	Otsimine…
+	No pictures found.	Pilte ei leitud.
+	Downloading…	Allalaadimine…
+	Couldn't search: {reason}	Otsing nurjus: {reason}
+	Couldn't download the picture: {reason}	Pilti ei saanud alla laadida: {reason}
+	it isn't a picture Doc4Me can read	see pole pilt, mida Doc4Me oskab lugeda
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Pildid Openverse'ist. Järgige iga pildi litsentsi: Doc4Me lisab selle alla autorirea.

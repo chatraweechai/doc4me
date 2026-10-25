@@ -2479,3 +2479,16 @@ spacing	Normal	Обычный
 	Read Aloud couldn't start: {reason}	Прочитать вслух: не удалось запустить: {reason}
 	Read Aloud stopped: {reason}	Прочитать вслух: остановлено: {reason}
 	no speech program on this system	в системе нет программы речи
+	Online Pictures	Изображения из Интернета
+	This Device…	Это устройство…
+	Online Pictures…	Изображения из Интернета…
+	Search Openverse (Creative Commons pictures)	Поиск в Openverse (изображения Creative Commons)
+	Search	Найти
+	Only pictures I may use commercially	Только изображения для коммерческого использования
+	Searching…	Поиск…
+	No pictures found.	Изображения не найдены.
+	Downloading…	Загрузка…
+	Couldn't search: {reason}	Не удалось выполнить поиск: {reason}
+	Couldn't download the picture: {reason}	Не удалось загрузить изображение: {reason}
+	it isn't a picture Doc4Me can read	это не изображение, которое Doc4Me может прочитать
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Изображения из Openverse. Соблюдайте лицензию каждого изображения: Doc4Me добавляет под ним строку с указанием автора.

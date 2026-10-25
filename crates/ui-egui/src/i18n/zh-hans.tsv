@@ -2090,3 +2090,16 @@ spacing	Normal	标准
 	Read Aloud couldn't start: {reason}	朗读: 无法启动: {reason}
 	Read Aloud stopped: {reason}	朗读已停止: {reason}
 	no speech program on this system	此系统上没有语音程序
+	Online Pictures	联机图片
+	This Device…	此设备…
+	Online Pictures…	联机图片…
+	Search Openverse (Creative Commons pictures)	搜索 Openverse (知识共享图片)
+	Search	搜索
+	Only pictures I may use commercially	仅可商用的图片
+	Searching…	正在搜索…
+	No pictures found.	未找到图片。
+	Downloading…	正在下载…
+	Couldn't search: {reason}	无法搜索: {reason}
+	Couldn't download the picture: {reason}	无法下载图片: {reason}
+	it isn't a picture Doc4Me can read	不是 Doc4Me 能读取的图片
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	图片来自 Openverse。请遵守每张图片的许可协议: Doc4Me 会在图片下方添加署名行。

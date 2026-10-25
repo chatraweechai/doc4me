@@ -2478,3 +2478,16 @@ spacing	Normal	Normal
 	Read Aloud couldn't start: {reason}	Sesli Oku: başlatılamadı: {reason}
 	Read Aloud stopped: {reason}	Sesli Oku durdu: {reason}
 	no speech program on this system	bu sistemde konuşma programı yok
+	Online Pictures	Çevrimiçi Resimler
+	This Device…	Bu Cihaz…
+	Online Pictures…	Çevrimiçi Resimler…
+	Search Openverse (Creative Commons pictures)	Openverse'te ara (Creative Commons resimleri)
+	Search	Ara
+	Only pictures I may use commercially	Yalnızca ticari olarak kullanabileceğim resimler
+	Searching…	Aranıyor…
+	No pictures found.	Resim bulunamadı.
+	Downloading…	İndiriliyor…
+	Couldn't search: {reason}	Arama yapılamadı: {reason}
+	Couldn't download the picture: {reason}	Resim indirilemedi: {reason}
+	it isn't a picture Doc4Me can read	Doc4Me'nin okuyabileceği bir resim değil
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Openverse'ten resimler. Her resmin lisansına uyun: Doc4Me altına bir kaynak satırı ekler.

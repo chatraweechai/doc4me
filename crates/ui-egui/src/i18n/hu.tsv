@@ -2485,3 +2485,16 @@ spacing	Normal	Normál
 	Read Aloud couldn't start: {reason}	Felolvasás: nem sikerült elindítani: {reason}
 	Read Aloud stopped: {reason}	Felolvasás leállt: {reason}
 	no speech program on this system	nincs beszédprogram a rendszeren
+	Online Pictures	Online képek
+	This Device…	Ez az eszköz…
+	Online Pictures…	Online képek…
+	Search Openverse (Creative Commons pictures)	Keresés az Openverse-ben (Creative Commons-képek)
+	Search	Keresés
+	Only pictures I may use commercially	Csak üzleti célra is használható képek
+	Searching…	Keresés…
+	No pictures found.	Nem található kép.
+	Downloading…	Letöltés…
+	Couldn't search: {reason}	A keresés nem sikerült: {reason}
+	Couldn't download the picture: {reason}	A képet nem sikerült letölteni: {reason}
+	it isn't a picture Doc4Me can read	ez nem olyan kép, amelyet a Doc4Me be tud olvasni
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Képek az Openverse-ből. Tartsa be minden kép licencét: a Doc4Me forrásmegjelölést ír alá.

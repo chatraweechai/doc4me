@@ -4587,3 +4587,36 @@ fn a_3d_model_is_inserted_as_its_picture() {
     assert_eq!(alt, "Bracket");
     assert_eq!(doc4me_render::image_size(&s.doc.media[&media]), Some((800, 800)));
 }
+
+/// Insert › Online Pictures: the picture and its credit line, one undo step; WebP becomes JPEG;
+/// links in the credit are web addresses only.
+#[test]
+fn an_online_picture_comes_with_its_credit_line() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("Pets"));
+    run(&mut s, "caret.docEnd", json!({}));
+    run(&mut s, "insert.onlinePicture", json!({}));
+    assert!(s.ui_requests.iter().any(|r| r["open"] == "onlinePictures"));
+    let mut webp = Vec::new();
+    image::RgbImage::from_pixel(4, 3, image::Rgb([10, 200, 30])).write_to(&mut std::io::Cursor::new(&mut webp), image::ImageFormat::WebP).unwrap();
+    let undo = s.undo_depth();
+    let r = run(
+        &mut s,
+        "insert.onlinePicture",
+        json!({"data": crate::cmd::insert::base64_encode(&webp), "title": "Cat", "creator": "Ann", "license": "by-sa", "licenseVersion": "4.0",
+               "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "javascript:alert(1)"}),
+    );
+    assert_eq!(r["attribution"], true);
+    assert_eq!(s.undo_depth(), undo + 1);
+    let text = s.doc.plain_text(StoryRef::Body);
+    assert!(text.contains("“Cat” by Ann is licensed under CC BY-SA 4.0."), "{text}");
+    let media = s.doc.media.values().next().unwrap();
+    assert_eq!(&media[..2], &[0xFF, 0xD8], "WebP stored as JPEG");
+    let paths = s.doc.para_paths(StoryRef::Body);
+    let credit = s.doc.para(StoryRef::Body, paths.last().unwrap()).unwrap();
+    let links: Vec<String> = credit.runs.iter().filter_map(|r| r.props.link.clone()).collect();
+    assert_eq!(links, ["https://creativecommons.org/licenses/by-sa/4.0/"], "the script address isn't linked");
+    // Without a licence there is nothing to credit.
+    let png = crate::cmd::insert::base64_encode(&doc4me_render::video_poster(200, 100));
+    let r = run(&mut s, "insert.onlinePicture", json!({"data": png}));
+    assert!(r["attribution"].is_null());
+}

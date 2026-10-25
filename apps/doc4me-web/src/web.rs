@@ -11,6 +11,7 @@ use wasm_bindgen::JsCast as _;
 const DOC_EXTS: &[&str] = &["docx", "docm", "dotx", "dotm", "doc", "dot", "odt", "rtf", "txt", "md", "html", "htm", "tex", "json", "xml"];
 const IMAGE_EXTS: &[&str] = &["png", "jpg", "jpeg", "gif", "webp", "bmp"];
 const RECIPIENT_EXTS: &[&str] = &["csv", "tsv", "txt", "xlsx", "xlsm", "ods"];
+mod fetch;
 mod font_store;
 const CANVAS_ID: &str = "doc4me_canvas";
 const LOADING_ID: &str = "doc4me_loading";
@@ -188,6 +189,7 @@ fn listen_for_pasted_pictures(inbox: Inbox, ctx: egui::Context) -> Result<(), St
 fn services(inbox: Inbox, ctx: egui::Context, dirty: Rc<Cell<bool>>, saves: Rc<PickerSaves>) -> Services {
     let open_inbox = inbox.clone();
     let save_ctx = ctx.clone();
+    let fetch_ctx = ctx.clone();
     Services {
         open_async: Some(Box::new(move |purpose: &str| {
             let inbox = open_inbox.clone();
@@ -219,6 +221,7 @@ fn services(inbox: Inbox, ctx: egui::Context, dirty: Rc<Cell<bool>>, saves: Rc<P
         inbox: Some(inbox),
         on_dirty: Some(Box::new(move |d| dirty.set(d))),
         animations_enabled: Some(animations_enabled()),
+        fetch: Some(fetch::hook(fetch_ctx)),
         store_font: Some(Box::new(font_store::store)),
         forget_font: Some(Box::new(font_store::forget)),
         ..Default::default()

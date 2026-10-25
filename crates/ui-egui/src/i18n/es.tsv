@@ -2118,3 +2118,16 @@ spacing	Normal	Normal
 	Read Aloud couldn't start: {reason}	Leer en voz alta: no se pudo iniciar: {reason}
 	Read Aloud stopped: {reason}	Leer en voz alta se detuvo: {reason}
 	no speech program on this system	no hay ningún programa de voz en este sistema
+	Online Pictures	Imágenes en línea
+	This Device…	Este dispositivo…
+	Online Pictures…	Imágenes en línea…
+	Search Openverse (Creative Commons pictures)	Buscar en Openverse (imágenes Creative Commons)
+	Search	Buscar
+	Only pictures I may use commercially	Solo imágenes que puedo usar comercialmente
+	Searching…	Buscando…
+	No pictures found.	No se encontraron imágenes.
+	Downloading…	Descargando…
+	Couldn't search: {reason}	No se pudo buscar: {reason}
+	Couldn't download the picture: {reason}	No se pudo descargar la imagen: {reason}
+	it isn't a picture Doc4Me can read	no es una imagen que Doc4Me pueda leer
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Imágenes de Openverse. Respete la licencia de cada imagen: Doc4Me agrega una línea de créditos debajo.

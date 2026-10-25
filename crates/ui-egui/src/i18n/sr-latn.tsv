@@ -2088,3 +2088,16 @@ spacing	Normal	Normalno
 	Read Aloud couldn't start: {reason}	Čitanje naglas: pokretanje nije uspelo: {reason}
 	Read Aloud stopped: {reason}	Čitanje naglas je zaustavljeno: {reason}
 	no speech program on this system	na ovom sistemu nema programa za govor
+	Online Pictures	Slike na mreži
+	This Device…	Ovaj uređaj…
+	Online Pictures…	Slike na mreži…
+	Search Openverse (Creative Commons pictures)	Pretraži Openverse (slike pod Creative Commons licencom)
+	Search	Pretraži
+	Only pictures I may use commercially	Samo slike koje smem da koristim u komercijalne svrhe
+	Searching…	Pretraživanje…
+	No pictures found.	Nisu pronađene slike.
+	Downloading…	Preuzimanje…
+	Couldn't search: {reason}	Pretraga nije uspela: {reason}
+	Couldn't download the picture: {reason}	Preuzimanje slike nije uspelo: {reason}
+	it isn't a picture Doc4Me can read	to nije slika koju Doc4Me može da pročita
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Slike sa Openverse-a. Poštujte licencu svake slike: Doc4Me ispod nje dodaje red sa navođenjem autora.

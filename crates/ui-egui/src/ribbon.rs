@@ -789,7 +789,10 @@ fn insert(app: &mut WordApp, ui: &mut Ui) {
         });
     });
     group(ui, "Illustrations", None, app, |ui, app| {
-        big(ui, app, "picture", "Pictures", "insert.picture", json!({}), false);
+        menu_button(ui, app, "picture", Some("Pictures"), "Pictures", true, "insert.picture", |ui, app| {
+            mi(ui, app, "This Device…", "insert.picture", json!({}));
+            mi(ui, app, "Online Pictures…", "insert.onlinePicture", json!({}));
+        });
         menu_button(ui, app, "shapes", Some("Shapes"), "Shapes", true, "insert.shape", |ui, app| {
             for (l, k) in [
                 ("Rectangle", "rectangle"),

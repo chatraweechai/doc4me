@@ -2083,3 +2083,16 @@ spacing	Normal	Normální
 	Read Aloud couldn't start: {reason}	Číst nahlas: nepodařilo se spustit: {reason}
 	Read Aloud stopped: {reason}	Číst nahlas se zastavilo: {reason}
 	no speech program on this system	v systému není program pro řeč
+	Online Pictures	Online obrázky
+	This Device…	Toto zařízení…
+	Online Pictures…	Online obrázky…
+	Search Openverse (Creative Commons pictures)	Hledat v Openverse (obrázky Creative Commons)
+	Search	Hledat
+	Only pictures I may use commercially	Jen obrázky, které smím použít komerčně
+	Searching…	Hledá se…
+	No pictures found.	Nenašly se žádné obrázky.
+	Downloading…	Stahuje se…
+	Couldn't search: {reason}	Hledání se nezdařilo: {reason}
+	Couldn't download the picture: {reason}	Obrázek se nepodařilo stáhnout: {reason}
+	it isn't a picture Doc4Me can read	není to obrázek, který Doc4Me umí přečíst
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Obrázky z Openverse. Dodržujte licenci každého obrázku: Doc4Me pod něj přidá řádek s uvedením autora.

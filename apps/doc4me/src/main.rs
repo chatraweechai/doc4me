@@ -14,6 +14,7 @@ mod animations;
 mod apple_events;
 mod control_server;
 mod default_apps;
+mod fetch;
 mod file_dialogs;
 #[cfg(any(target_os = "windows", test))]
 mod graphics;
@@ -179,7 +180,7 @@ fn save_prefs(app: &WordApp) {
 
 /// Native file dialogs, shown without blocking the window (`file_dialogs`, #94), File › Print
 /// through the system's PDF viewer (`print`, #15), pictures on the system clipboard (#45), the
-/// system's screen clipping (`screen_clip`), the system's animation setting (`animations`), and
+/// system's screen clipping (`screen_clip`), web requests for the online features (`fetch`), the system's animation setting (`animations`), and
 /// making Doc4Me the default app for Word documents (`default_apps`, #295).
 fn services(file_dialog: file_dialogs::Hook, ctx: &egui::Context) -> Services {
     Services {
@@ -187,6 +188,7 @@ fn services(file_dialog: file_dialogs::Hook, ctx: &egui::Context) -> Services {
         print: Some(print::hook()),
         clipboard_picture: Some(Box::new(clipboard_picture)),
         screen_clip: screen_clip::hook(ctx),
+        fetch: Some(fetch::hook(ctx)),
         make_default_app: default_apps::hook(),
         animations_enabled: Some(animations::hook(ctx)),
         clipboard_text: Some(Box::new(|| arboard::Clipboard::new().ok()?.get_text().ok())),
