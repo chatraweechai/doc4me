@@ -94,7 +94,7 @@ pub fn run(root: &Path, args: &[&str]) -> Result<(), String> {
     }
     let dir = root.join("docs/readiness");
     let corpus_dir = root.join("corpus/readiness");
-    let manifest = read_tsv(&dir.join("corpus.tsv"))?;
+    let manifest = corpus_rows(read_tsv(&dir.join("corpus.tsv"))?);
     if opts.download {
         download(&manifest, &corpus_dir)?;
     }
@@ -521,6 +521,12 @@ struct DocResult {
     stable: Result<(), String>,
 }
 
+/// The manifest rows the corpus sets count: a row whose reference PDF turned out not to be the
+/// same document stays in `corpus.tsv` with `check` = `excluded` and isn't fetched or counted.
+fn corpus_rows(manifest: Vec<BTreeMap<String, String>>) -> Vec<BTreeMap<String, String>> {
+    manifest.into_iter().filter(|r| col(r, "check") != "excluded").collect()
+}
+
 /// The five corpus sets, and how many documents were available. Without `run`, every document
 /// counts as not run.
 fn sets_from_corpus(manifest: &[BTreeMap<String, String>], dir: &Path, cli: &Path, work: &Path, run: bool, jobs: usize) -> (Vec<SetResult>, usize) {
@@ -848,6 +854,14 @@ mod tests {
         assert!((dims[0].2 - 0.75).abs() < 1e-9);
         let md = render(&[], 3, 5, "abc", "2026-10-25");
         assert!(md.contains("**Measured readiness: 0.0%**") && md.contains("ran on 3 documents (5 listed"), "{md}");
+    }
+
+    #[test]
+    fn excluded_corpus_rows_are_not_counted() {
+        let rows = corpus_rows(parse_tsv(
+            "id\tdocx_url\tcheck\tnote\na\thttps://x/a.docx\t\t\nb\thttps://x/b.docx\texcluded\tother edition\nc\thttps://x/c.docx\n",
+        ));
+        assert_eq!(rows.iter().map(|r| col(r, "id")).collect::<Vec<_>>(), ["a", "c"]);
     }
 
     #[test]

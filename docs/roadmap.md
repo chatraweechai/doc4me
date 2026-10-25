@@ -73,7 +73,9 @@ estimated dimension parities. The target is **80% ready for real work, measured*
 comes from a fixed pass/fail check set, and one command computes the number. Checks may be added,
 never removed, so the number can't drift by editing the list.
 
-**A. Build the measurement first** (no real number exists until this is done):
+**A. Build the measurement first** (done 2026-10-25: `cargo xtask readiness`, check sets in
+[`readiness/`](readiness/README.md), 222 corpus documents; result in
+[`readiness.md`](readiness.md)):
 
 1. `cargo xtask readiness`: reads every check set's results and computes the weighted pass rate
    with the existing weights (features 0.30, file formats 0.20, layout 0.15, UI/UX 0.10,
@@ -113,6 +115,7 @@ languages, screen-reader access.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Path to 80%: stage A done (measurement and a 222-document corpus); the number goes into `ROADMAP.md` in stage B |
 | 2026-10-25 | trivial | Path to 80% measured readiness: build the measurement (xtask readiness, DOCX corpus with Word-made PDFs, pagination, stability, feature checklist), measure, fix to 80% |
 | 2026-10-25 | trivial | Beta list item 5 no longer waits on an Aptos-metric font (Intos bundled) |
 | 2026-10-25 | trivial | Next after beta no longer lists ecosystem decisions or an in-app assistant (out of scope, owner decision) |
