@@ -164,7 +164,7 @@ fn glb(b: &[u8]) -> Result<Mesh, String> {
         at = at.div_ceil(4) * 4;
     }
     let json: Value = serde_json::from_slice(json.ok_or("the glTF file has no JSON chunk")?).map_err(|e| format!("the glTF file is damaged: {e}"))?;
-    let g = Gltf { json: &json, bin };
+    let g = Gltf { json: &json, bin, work: std::cell::Cell::new(0) };
     let mut mesh = Mesh::default();
     let scene = json.get("scene").and_then(Value::as_u64).unwrap_or(0) as usize;
     let roots: Vec<usize> = match json.pointer(&format!("/scenes/{scene}/nodes")).and_then(Value::as_array) {
@@ -180,7 +180,7 @@ fn glb(b: &[u8]) -> Result<Mesh, String> {
     };
     let mut visits = 0usize;
     for root in roots {
-        g.node(root, &IDENTITY, 0, &mut visits, &mut mesh)?;
+        g.node(root, &IDENTITY, &mut Vec::new(), &mut visits, &mut mesh)?;
     }
     Ok(mesh)
 }
@@ -206,13 +206,21 @@ fn apply(m: &M4, p: V3) -> V3 {
 struct Gltf<'a> {
     json: &'a Value,
     bin: &'a [u8],
+    /// Vertices and indices read so far: a node graph that draws one big mesh many times (or
+    /// a mesh of points and lines, which adds no triangles) can't make reading take forever.
+    work: std::cell::Cell<usize>,
 }
 
+/// Most vertices and indices read from a glTF file, counting every time a mesh is drawn.
+const MAX_WORK: usize = MAX_TRIANGLES * 6;
+
 impl Gltf<'_> {
-    fn node(&self, i: usize, parent: &M4, depth: usize, visits: &mut usize, out: &mut Mesh) -> Result<(), String> {
+    /// Draw node `i` and its children; `path` holds its ancestors.
+    fn node(&self, i: usize, parent: &M4, path: &mut Vec<usize>, visits: &mut usize, out: &mut Mesh) -> Result<(), String> {
         *visits += 1;
-        // Node graphs are trees; a cyclic or huge one is cut off.
-        if depth > 64 || *visits > 100_000 {
+        // Node graphs are trees: a node that is its own ancestor is skipped, and a very deep or
+        // very large graph is cut off.
+        if path.len() > 64 || *visits > 100_000 || path.contains(&i) {
             return Ok(());
         }
         let Some(node) = self.json.pointer(&format!("/nodes/{i}")) else { return Ok(()) };
@@ -261,9 +269,11 @@ impl Gltf<'_> {
         if let Some(m) = node.get("mesh").and_then(Value::as_u64) {
             self.mesh(m as usize, &world, out)?;
         }
+        path.push(i);
         for child in node.get("children").and_then(Value::as_array).into_iter().flatten().filter_map(Value::as_u64) {
-            self.node(child as usize, &world, depth + 1, visits, out)?;
+            self.node(child as usize, &world, path, visits, out)?;
         }
+        path.pop();
         Ok(())
     }
 
@@ -284,6 +294,11 @@ impl Gltf<'_> {
                 },
                 None => (0..points.len()).collect(),
             };
+            let work = self.work.get().saturating_add(points.len()).saturating_add(order.len());
+            if work > MAX_WORK {
+                return Err("the model is too large to draw".into());
+            }
+            self.work.set(work);
             let color = prim
                 .get("material")
                 .and_then(Value::as_u64)
@@ -561,7 +576,7 @@ mod tests {
         // The node's translation applies, its material colours the triangle, and the node that
         // lists itself as its child doesn't loop forever.
         let glb = load(&triangle_glb(), Some("glb")).unwrap();
-        assert!(!glb.triangles.is_empty());
+        assert_eq!(glb.triangles.len(), 1, "drawn once");
         assert_eq!(glb.triangles[0][0], [5.0, 0.0, 0.0]);
         assert_eq!(glb.colors[0], [255, 0, 0]);
     }
@@ -575,6 +590,35 @@ mod tests {
         let glb = String::from_utf8_lossy(&triangle_glb()).replacen("\"count\":3", "\"count\":9", 1).into_bytes();
         assert!(load(&glb, None).is_err(), "no triangles from out-of-range data");
         assert!(load(b"", Some("obj")).is_err(), "nothing to show");
+        // A node that is its own child, listed many times, keeps drawing a mesh of lines (no
+        // triangles): reading stops at the work limit instead of running on.
+        let lines = String::from_utf8_lossy(&triangle_glb())
+            .replacen("\"indices\":1,", "\"indices\":1,\"mode\":1,", 1)
+            .replacen("\"children\":[0]", &format!("\"children\":[{}]", vec!["0"; 4000].join(",")), 1)
+            .into_bytes();
+        let fixed = |mut b: Vec<u8>| {
+            // The JSON chunk grew: fix its length, the padding and the file length.
+            let json_len = u32::from_le_bytes(b[12..16].try_into().unwrap()) as usize;
+            // The binary chunk: 8 bytes of header, 36 of positions and 8 of indices.
+            let grow = b.len() - (12 + 8 + json_len + 8 + 44);
+            let mut js = b[20..20 + json_len + grow].to_vec();
+            while !js.len().is_multiple_of(4) {
+                js.push(b' ');
+            }
+            let bin = b.split_off(20 + json_len + grow);
+            let mut out = b[..12].to_vec();
+            out.extend_from_slice(&(js.len() as u32).to_le_bytes());
+            out.extend_from_slice(&0x4E4F534Au32.to_le_bytes());
+            out.extend_from_slice(&js);
+            out.extend_from_slice(&bin);
+            let total = out.len() as u32;
+            out[8..12].copy_from_slice(&total.to_le_bytes());
+            out
+        };
+        assert_eq!(load(&fixed(triangle_glb()), None).unwrap().triangles.len(), 1, "the helper keeps a file whole");
+        let started = std::time::Instant::now();
+        assert!(load(&fixed(lines), None).is_err(), "lines only: nothing to show");
+        assert!(started.elapsed() < std::time::Duration::from_secs(20), "stopped in time");
         let huge = vec![0u8; MAX_BYTES + 1];
         assert!(load(&huge, Some("stl")).is_err(), "too large");
     }
