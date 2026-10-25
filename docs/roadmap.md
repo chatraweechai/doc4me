@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (Next after beta: ecosystem decisions and the in-app assistant removed; previously trivial: M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -68,12 +68,13 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 ## Next after beta
 
 Charts and SmartArt editing, the Draw tab, `.doc` writing, PDF Reflow, the remaining interface
-languages, screen-reader access, ecosystem decisions (VBA, add-ins, cloud), an in-app assistant.
+languages, screen-reader access.
 
 ## Revision history
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Next after beta no longer lists ecosystem decisions or an in-app assistant (out of scope, owner decision) |
 | 2026-10-25 | trivial | M2, M3 and M11 done: Dictate, Online Pictures, Get Add-ins, Ink Equation and Ink to Math landed with free and open-source parts; catalog parity 499/499 |
 | 2026-10-25 | trivial | M1, M2, M3, M8, M11 and M12 rows checked against the code; M3 and M8 done apart from service-bound items; alpha gate's command count 618 |
 | 2026-10-11 | trivial | M15: Polish interface and Polish proofing landed |

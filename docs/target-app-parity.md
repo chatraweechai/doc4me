@@ -1,6 +1,6 @@
 # Doc4Me parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (the Windows target described under What we measured against; the platforms row matches the releases; stale rows corrected against the code: Font dialog, proofing, file exchange, localization; headline marked as measured in WordCraft; previously minor: Polish interface and Polish proofing; previously trivial: English spelling knows common modern words, #520; previously trivial: all 12 bibliography styles, #383; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; replaces the parity tables that lived in ROADMAP.md) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (ecosystem and AI rows: Microsoft's systems and the in-app AI provider out of scope; previously trivial: the Windows target described under What we measured against; the platforms row matches the releases; stale rows corrected against the code: Font dialog, proofing, file exchange, localization; headline marked as measured in WordCraft; previously minor: Polish interface and Polish proofing; previously trivial: English spelling knows common modern words, #520; previously trivial: all 12 bibliography styles, #383; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: readiness table with hours per audience; full number back to the additive weighted sum, 60%; mainstream and essentials numbers added; alpha gate checked; previously major: full re-measure against Word for Mac 16.113.4; replaces the parity tables that lived in ROADMAP.md) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 The authoritative assessment of how close Doc4Me is to Microsoft Word. [`ROADMAP.md`](../ROADMAP.md)
 summarizes it; [`gaps.md`](gaps.md) itemizes every shortfall; the deep checklists are
@@ -206,8 +206,8 @@ Word. Their weighted sum is the **full ready for real work** number.
 | Localization | 4% | 27% | 75–120 + native review | [localization-parity.md](localization-parity.md) | 19 UI languages (Word 30); 6 of the 12 key languages shipped (hi, ar, id, ko, vi, pt-PT missing); English, Polish and Thai proofing |
 | Platforms | 3% | 95% | 5–10 | [ROADMAP.md](../ROADMAP.md) | Doc4Me releases a Windows x64 MSI and portable zip (unsigned until the owner adds a certificate); the macOS, Linux, FreeBSD and web packaging scripts come from WordCraft and run locally, with no Doc4Me release yet. Beyond Word on Linux, BSD and the web once released; Word's iPad/iPhone/Android apps are out of scope |
 | Hardware | 1% | 40% | 20–40 | [hardware-parity.md](hardware-parity.md) | No native printing on desktop, no pen/ink, no dictation; GPU drawing and HiDPI fine. Ink hours are in the Features row (Draw tab) |
-| Ecosystem and plugins | 2% | 15% | 40–80 | [gaps.md](gaps.md) | Zotero built in, macros record/play commands, `.docm` macros preserved (#172). No VBA execution, no Office add-ins, no EndNote/Mendeley plugins, no cloud storage or co-authoring |
-| AI features | 0% | 40% | 15–30 | [gaps.md](gaps.md) | Beyond Word for external agents (MCP, CLI). No in-app writing assistant like Copilot yet (chat PR #178 open). Weight 0: Copilot is a paid add-on and not what decides a switch |
+| Ecosystem and plugins | 2% | replacements in place | — | [gaps.md](gaps.md) | Microsoft's own systems are out of scope (owner decision, 2026-10-25): VBA execution, Office add-ins and the Office Store, OneDrive/SharePoint and Microsoft co-authoring. Open replacements: Zotero built in, macros record/play commands (`.docm` VBA kept, never run, #172), Doc4Me's own add-in catalog (Get Add-ins), cloud storage through folders synced by Nextcloud Desktop or Syncthing. No EndNote/Mendeley plugins |
+| AI features | 0% | beyond Word for external agents | — | [gaps.md](gaps.md) | Beyond Word for external agents (MCP, CLI). No in-app AI provider: out of scope (owner decision, 2026-10-25) |
 
 **Ready for real work ≈ 0.30·68 + 0.20·60 + 0.15·55 + 0.10·65 + 0.10·50 + 0.05·75 + 0.04·25 +
 0.03·95 + 0.01·40 + 0.02·15 ≈ 60%.**
@@ -251,7 +251,7 @@ Rule of thumb used: **a new, self-contained subsystem runs ~600–1,000 tested l
 Most of the remaining gap is the second kind, which is why the hours are high relative to the
 code already written. About 70–80% of the hours parallelize across agents by area (formats, layout,
 objects, localization, proofing are independent crates). Human time is needed for: native-speaker
-review of translations, owner decisions (cloud/co-authoring scope, AI provider, VBA scope), a
+review of translations, a
 licensed or commissioned metric-compatible Aptos substitute, and a real-world DOCX corpus that
 can be used without committing Word output.
 
@@ -259,6 +259,7 @@ can be used without committing Word output.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Ecosystem: Microsoft's own systems out of scope, open replacements listed; AI: in-app provider out of scope; owner decisions list shortened |
 | 2026-10-11 | trivial | Proofing: runs in a language without a dictionary are skipped instead of flagged against the English dictionary (#100); no percentage change |
 | 2026-10-11 | minor | Polish interface (13 UI languages) and Polish proofing with per-run languages: Proofing 35% → 40% (25–45 h → 20–40 h), Localization 25% → 27%; feature depth and readiness unchanged at this precision |
 | 2026-10-11 | trivial | Tables: column and row borders and the resize handle drag on the page (#217); Tables row and interaction-fidelity evidence updated, no percentage change |

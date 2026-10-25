@@ -133,6 +133,14 @@
 
 ### เปลี่ยนแปลง
 
+- **ระบบเสริมที่เป็นของ Microsoft และผู้ให้บริการ AI ในโปรแกรมออกจากเป้าหมาย parity; ระบุตัวทดแทน open-source** (`docs/gaps.md` #22 และ #25, `ROADMAP.md`, `docs/target-app-parity.md`, `docs/roadmap.md`)
+  - เหตุผล: ผู้ใช้สั่ง (2026-10-25) ให้ตัดระบบเสริมที่เป็นลิขสิทธิ์ของ Microsoft Office ทั้งหมดแล้วใช้ open-source แทน และตัดผู้ให้บริการ AI ในโปรแกรม
+  - ตัดออกจากเป้าหมาย: การรัน VBA, Add-in ของ Office (Office.js) และ Office Store, OneDrive/SharePoint, การแก้ไขร่วมกันแบบเรียลไทม์ของ Microsoft และผู้ช่วย AI ในโปรแกรม (แบบ Copilot)
+  - ตัวทดแทน open-source ที่มีอยู่แล้ว: แมโครของ Doc4Me (`tools.macros`, `tools.recordMacro` บันทึกและเล่นคำสั่ง), แค็ตตาล็อก Add-in ของ Doc4Me เอง (`addins.get`), การเก็บไฟล์บนคลาวด์ผ่านโฟลเดอร์ที่ Nextcloud Desktop หรือ Syncthing ซิงก์ให้ (Doc4Me เปิดและบันทึกไฟล์ในโฟลเดอร์นั้นได้ตามปกติ), ส่วนเอเจนต์ AI ภายนอกใช้ MCP และ CLI ได้เหมือนเดิม การแก้ไขร่วมกันแบบเรียลไทม์ไม่มีตัวทดแทนที่ใส่ในโปรแกรมได้ จึงตัดออก
+  - ไม่มีโค้ดที่ผูกกับบริการของ Microsoft ให้ลบ (`file.share` เปิด Save As อยู่แล้ว); VBA ในไฟล์ `.docm` ยังเก็บไว้ในไฟล์ตามเดิม (ไม่รัน) เพื่อไม่ให้ข้อมูลในไฟล์ของผู้ใช้หาย
+  - แก้เพิ่ม: `docs/hardware-parity.md` แถวปากกาและ Dictate ยังเป็น ❌ ทั้งที่แท็บวาด, Ink to Math และ Dictate (whisper.cpp) มีแล้ว จึงแก้ให้ตรงกับโค้ด (ยังไม่ได้วัดค่า parity ใหม่)
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: `grep` หาโค้ดที่อ้าง OneDrive, SharePoint, Office.js, Copilot หรือผู้ให้บริการ AI ใน `crates` และ `apps` ไม่พบ (มีแค่ชื่อกลุ่ม "SharePoint" ของ Word ใน catalog ที่เป็นคุณสมบัติเอกสาร); คำสั่งแมโครและ `addins.get` มีใน `crates/engine/src/catalog.rs`
 - **TH SarabunIT๙ ไม่ใช้ค่าที่อนุมานอีกต่อไป: เมื่อเครื่องไม่มีฟอนต์นี้ แสดงด้วย Sarabun ขนาดของ Sarabun เอง และแจ้งผู้ใช้ตอนเปิดไฟล์** (`crates/fonts/src/word.rs`, `crates/layout/src/para.rs`, `crates/layout/src/display.rs`, `crates/engine/src/cmd/file.rs`, `crates/ui-egui/src/font_notice.rs` ไฟล์ใหม่, `crates/ui-egui/src/lib.rs`, `crates/ui-egui/src/i18n/*.tsv` 18 ไฟล์, เทสต์ใน `crates/layout/src/tests_complex.rs`, `crates/engine/src/tests.rs`)
   - เหตุผล: ผู้ใช้สั่ง (2026-10-25) ให้ตัดการวัดค่า TH SarabunIT๙ จากไฟล์ฟอนต์จริงออก ไม่อ้างอิงฟอนต์นี้ และเมื่อไฟล์ที่เปิดใช้ฟอนต์นี้แต่เครื่องไม่มี ให้แทนด้วย Sarabun และแจ้งเตือนผู้ใช้ เดิม (1.1.0) Doc4Me วาด IT๙ ด้วย Sarabun บนความกว้างและระยะบรรทัดของ TH Sarabun New ซึ่ง "อนุมาน" ไม่ได้วัดจากไฟล์ IT๙ และแสดงเลขอารบิกเป็นเลขไทย
   - เปลี่ยน: `metric_fit` รับเฉพาะ TH Sarabun New และ TH SarabunPSK (ค่าที่วัดจากไฟล์จริง); ลบ `MetricFit::shown` และการแสดงเลขอารบิกเป็นเลขไทย; IT๙ จึงเป็นฟอนต์ไทยที่ Sarabun แทนที่ขนาดของ Sarabun เอง เหมือน Angsana New หรือ Cordia New

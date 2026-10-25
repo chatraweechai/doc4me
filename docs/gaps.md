@@ -1,6 +1,6 @@
 # Where Doc4Me falls short of Word
 
-> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-25 · **Change:** trivial (#30: TH SarabunIT๙ drawn with Sarabun and announced on open; previously trivial: #12 Ink to Math and Ink Equation, #22 Get Add-ins, #28 Dictate landed; previously trivial: #27 View windows landed; previously trivial: rows #2, #8, #9, #10, #11, #15 and #17 corrected against the code; Thai row #30 added; previously trivial: DOCX complex-script formatting inheritance fixed; broader RTL work remains; previously trivial: #24 narrowed: Customize Keyboard and Customize Ribbon landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: first version; every known shortfall from the 2026-10-10 re-measure, ranked) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-25 · **Change:** trivial (#22 Microsoft's systems out of scope with open replacements, #25 in-app AI cut; previously trivial: #30: TH SarabunIT๙ drawn with Sarabun and announced on open; previously trivial: #12 Ink to Math and Ink Equation, #22 Get Add-ins, #28 Dictate landed; previously trivial: #27 View windows landed; previously trivial: rows #2, #8, #9, #10, #11, #15 and #17 corrected against the code; Thai row #30 added; previously trivial: DOCX complex-script formatting inheritance fixed; broader RTL work remains; previously trivial: #24 narrowed: Customize Keyboard and Customize Ribbon landed; previously trivial: formatting revisions landed, #41; previously trivial: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: first version; every known shortfall from the 2026-10-10 re-measure, ranked) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 The work list. One entry per shortfall, ranked by how much it stops a Word user from switching
 (**B** = blocks beta). Each says what's missing, the evidence, who it hurts, an Opus 5.5 agent
@@ -34,10 +34,10 @@ Native save reliability: synthetic cases on macOS reproduced loss through the pr
 | 19 | **RTF and ODT depth**: notes, comments, revisions, sections, RTL | | ~1,500 lines each in `crates/formats` | Users exchanging with LibreOffice or older tools | 18–27 | [file-format-parity.md](file-format-parity.md) |
 | 20 | **Performance on large real-world documents** unmeasured (500+ pages, many pictures) | | Only the 188-page sample benchmark | Thesis and book authors | 10–20 | [layout-parity.md](layout-parity.md) |
 | 21 | **Mail merge data sources**: no Outlook/Contacts, Access or database sources, no email merge; CSV, typed lists (#247) and Excel/OpenDocument spreadsheets (#334) only | | Select Recipients reads .csv/.tsv, .xlsx/.xlsm and .ods | Office administrators | 4–8 | [target-app-parity.md](target-app-parity.md) |
-| 22 | **Ecosystem**: no VBA execution (macros preserved only), no Office (Office.js) add-ins, no cloud storage, no real-time co-authoring | | `.docm` keeps macros (#172); Get Add-ins installs Doc4Me's own macro-pack add-ins from `addins/catalog.json` (2026-10-25) | Enterprise users with macro templates; teams | 40–80 + owner decisions | [target-app-parity.md](target-app-parity.md) |
+| 22 | **Ecosystem**: Microsoft's own systems are out of scope (owner decision, 2026-10-25): VBA execution, Office (Office.js) add-ins and the Office Store, OneDrive/SharePoint storage and Microsoft's real-time co-authoring. Open replacements in place: Doc4Me macros (record and play commands; VBA in a `.docm` is kept in the file, never run), Doc4Me's own add-in catalog (Get Add-ins), and cloud storage through a folder that Nextcloud Desktop or Syncthing keeps in sync | | `tools.macros`, `tools.recordMacro`; `addins.get` with `addins/catalog.json`; `.docm` keeps macros (#172) | Enterprise users with macro templates; teams | — | [target-app-parity.md](target-app-parity.md) |
 | 23 | **PDF Reflow** (open a PDF as an editable document, Word for Windows) | | | Users who edit PDFs they receive | 30–50 | [file-format-parity.md](file-format-parity.md) |
 | 24 | **Default shortcuts**: ~135 of Word's ~250 (#330, #339, #343; Customize Keyboard #368, Customize Ribbon and the Quick Access Toolbar #379 landed) | | [ui-parity.md](ui-parity.md) | Power users | 4–7 | [ui-parity.md](ui-parity.md) |
-| 25 | **In-app AI assistant** (Copilot-style draft, rewrite, summarize) | | Chat PR #178 open | Users expecting Copilot | 15–30 + owner (provider) | [target-app-parity.md](target-app-parity.md) |
+| 25 | ~~In-app AI assistant~~: cut (owner decision, 2026-10-25); Doc4Me has no AI provider in the program. External agents drive it through MCP and the CLI ([mcp.md](mcp.md)) | | | | — | [target-app-parity.md](target-app-parity.md) |
 | 26 | **Minor formats**: MHT, Works/WordPerfect, saving Word 2003 XML | | Word XML Document (Flat OPC) opens and saves, Word 2003 XML opens (#548) | Rare | 15–28 | [file-format-parity.md](file-format-parity.md) |
 | 27 | **View windows** (landed 2026-10-25: New Window, Split, Arrange All, Side by Side, Synchronous Scrolling, Switch Windows): a new window shows the document without its own ribbon, and all windows share one selection | | `crates/ui-egui/src/windows.rs`; [parity-checklist.md](parity-checklist.md) (View 29/29) | Comparing documents | 1–2 | [ui-parity.md](ui-parity.md) |
 | 28 | **Dictate**: works (2026-10-25) with whisper.cpp on the computer; text comes after each pause, no voice commands | | `tools.dictate`, `apps/doc4me/src/dictate.rs` | Dictation users | 4–8 (voice commands, streaming) | [hardware-parity.md](hardware-parity.md) |
@@ -52,7 +52,7 @@ full number from ~60% to ~75%. Everything else is depth on the way to full parit
 
 The same gaps grouped the way the parity documents are, for agents working in one area.
 
-- **Feature gaps:** #2 (preserve), #5, #10, #12, #13, #15, #17, #21, #25, #27, #28, #29 (Clipboard
+- **Feature gaps:** #2 (preserve), #5, #10, #12, #13, #15, #17, #21, #27, #28, #29 (Clipboard
   pane, Manage Styles and Group landed: `edit.clipboardPane`, `styles.manage`, `arrange.group`). Paste Special, Advanced Find, Column Selection, Style Inspector, custom table
   styles, and Draw Table and Eraser (#303) landed on 2026-10-10.
 - **UI/UX gaps:** #7, #18, #24; crop handles on the canvas (rotation handle landed, #332); table column markers on the
@@ -69,6 +69,7 @@ The same gaps grouped the way the parity documents are, for agents working in on
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | #22: VBA, Office add-ins, OneDrive/SharePoint and co-authoring out of scope (owner); open replacements listed. #25 in-app AI provider cut (owner) |
 | 2026-10-25 | trivial | #30: TH SarabunIT๙ no longer uses inferred metrics; Sarabun draws it and opening the document says so; the owner-bound font-file item dropped |
 | 2026-10-25 | trivial | #12 Ink to Math / Ink Equation, #22 Get Add-ins (Doc4Me's own add-in catalog), #28 Dictate (whisper.cpp) landed; #29 narrowed to the recogniser's symbol set; catalog parity 499/499 |
 | 2026-10-11 | trivial | #8 narrowed: runs in a proofing language without a dictionary are skipped instead of flagged against the English dictionary (#100); dictionaries still English-only |
