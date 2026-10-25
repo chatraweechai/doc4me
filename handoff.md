@@ -1,6 +1,6 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย (งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง)
 
-อัปเดต: 2026-10-25 · สาขา `main` · session 2026-10-25 รอบที่ 5 เสร็จ: parity 492/500 (ที่เหลือ 8 รายการต้องใช้บริการภายนอกหรือการตัดสินใจของเจ้าของ repo) CI ของ `a47ba63` ผ่าน ([run 40157107569](https://github.com/chatraweechai/doc4me/actions/runs/40157107569)) ดูหัวข้อแรก
+อัปเดต: 2026-10-25 · สาขา `main` · session 2026-10-25 รอบที่ 5 เสร็จ: parity 492/500 (ที่เหลือ 8 รายการต้องใช้บริการภายนอกหรือการตัดสินใจของเจ้าของ repo) CI ของ `main` ผ่านทุก commit ที่มีโค้ด: `a47ba63` ([run 40157107569](https://github.com/chatraweechai/doc4me/actions/runs/40157107569)), `46ef579` ([run 40162369389](https://github.com/chatraweechai/doc4me/actions/runs/40162369389), รวม `4cb88d6` ที่ถูกยกเลิกโดย concurrency), `2c02c50` ([run 40163818414](https://github.com/chatraweechai/doc4me/actions/runs/40163818414)) · เวอร์ชันยังเป็น 1.1.1 (ห้ามออกรุ่นใหม่จนกว่าผู้ใช้สั่ง) ดูหัวข้อแรก
 
 ## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก, JPG/JPEG และงานค้างจาก handoff
 
