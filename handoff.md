@@ -12,7 +12,7 @@
   - Translate ผ่าน MyMemory (ฟรี) หรือ LibreTranslate (โอเพนซอร์ส) — `98b4cce`
   - Get Add-ins: แค็ตตาล็อก `addins/catalog.json` ใน repo นี้ + 3 ชุดแมโคร ตรวจ SHA-256 และคำสั่งที่อนุญาต — `d9b7edd` (ตรวจบน GitHub จริงแล้ว hash ตรง)
   - Ink Equation + Ink to Math ด้วยตัวจดจำ $P ของเราเอง — `af604a3`
-  - Dictate ด้วย whisper.cpp บนเครื่อง (โมเดลจาก Hugging Face ตรวจ SHA-256) — `8aa0dea`; ทดสอบจริงด้วยเสียงสังเคราะห์ espeak-ng ผ่าน; CI Windows run 40178908529 ล้มเพราะ bindings ที่มากับ crate เป็นของ Linux → แก้โดยให้ bindgen สร้างบนแต่ละแพลตฟอร์ม
+  - Dictate ด้วย whisper.cpp บนเครื่อง (โมเดลจาก Hugging Face ตรวจ SHA-256) — `8aa0dea`; ทดสอบจริงด้วยเสียงสังเคราะห์ espeak-ng ผ่าน; CI Windows run 40178908529 ล้มเพราะ bindings ที่มากับ crate เป็นของ Linux → แก้โดยให้ bindgen สร้างบนแต่ละแพลตฟอร์ม (`6f4ded8`) แล้ว [run 40179588066](https://github.com/chatraweechai/doc4me/actions/runs/40179588066) ผ่าน (build + MSI + zip; release ข้าม)
   - Block Authors ตัดออก (ต้องใช้ SharePoint ของ Microsoft 365 แบบเสียเงิน)
 - สภาพแวดล้อม: ติดตั้ง `libasound2-dev` (cpal) และ `espeak-ng` (ทดสอบ Dictate) ใน container; build ใช้ `CARGO_INCREMENTAL=0` และ `-p` ทีละ package เพราะดิสก์จำกัด (เคย `cargo clean` ได้คืน 26 GB)
 - ทดสอบกับบริการจริง: `DOC4ME_NET_TESTS=1 cargo test -p doc4me fetch` (Openverse, httpbin), `DOC4ME_WHISPER_TEST=<wav 16-bit mono> cargo test -p doc4me real_model` (ดาวน์โหลดโมเดล 60 MB)
