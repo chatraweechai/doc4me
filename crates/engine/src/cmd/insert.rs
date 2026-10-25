@@ -10,10 +10,7 @@ use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![
-        CommandSpec::new("insert.pageBreak", "Page Break", "Insert › Pages", |s, _| {
-            type_text(s, "\u{000C}")?;
-            sel_result(s)
-        }),
+        CommandSpec::new("insert.pageBreak", "Page Break", "Insert › Pages", super::text::page_break),
         CommandSpec::new("insert.blankPage", "Blank Page", "Insert › Pages", |s, _| {
             type_text(s, "\u{000C}")?;
             let at = s.sel.focus.clone();

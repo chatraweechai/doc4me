@@ -2566,6 +2566,9 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
     }
     let mut n = pl.lines.len();
     let mut l0 = 0;
+    // The paragraph ends with a page break: what follows starts the next page, and its space
+    // after stays on the page before.
+    let mut ends_on_break = false;
     while l0 < n {
         // How many lines fit?
         let Some(first) = pl.lines.get(l0) else { break };
@@ -2632,6 +2635,17 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
                 break;
             }
         }
+        // Word 2013 and later keep the paragraph mark after a page break that ends a paragraph on
+        // the break's page, so the next page doesn't start with an empty line.
+        if forced_break == Some(LineEnd::PageBreak)
+            && l1 + 1 == n
+            && ctx.doc.settings.compat_mode >= doc4me_doc::COMPAT_MODE_CURRENT
+            && !ctx.doc.settings.split_page_break_mark
+            && pl.lines.get(l1).is_some_and(|l| pl.clusters.get(l.c0..l.c1).is_some_and(|cs| cs.iter().all(|c| c.kind == para::ClKind::Marker)))
+        {
+            l1 = n;
+        }
+        ends_on_break = forced_break == Some(LineEnd::PageBreak) && l1 >= n;
         // Widow/orphan control (2-line minimum at either end).
         if forced_break.is_none() && l1 < n && pl.rp.widow_control && n >= 2 {
             if l1 - l0 == 1 && l0 == 0 && !pb.at_top() {
@@ -2745,6 +2759,9 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
             _ if l0 < n => pb.advance(block, body_top),
             _ => {}
         }
+    }
+    if ends_on_break {
+        return;
     }
     pb.y += pl.rp.space_after;
     pb.prev = Some((pl.rp.style.clone(), pl.rp.contextual_spacing, pl.rp.space_after));

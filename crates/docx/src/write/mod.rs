@@ -1011,6 +1011,9 @@ fn settings_xml(doc: &Document, footnotes: bool, endnotes: bool, template_rel: O
     if s.add_para_spacing {
         w.empty("w:doNotUseHTMLParagraphAutoSpacing", &[]);
     }
+    if s.split_page_break_mark {
+        w.empty("w:splitPgBreakAndParaMark", &[]);
+    }
     let mode = doc.settings.compat_mode.clamp(11, 15).to_string();
     w.empty("w:compatSetting", &[("w:name", "compatibilityMode"), ("w:uri", "http://schemas.microsoft.com/office/word"), ("w:val", &mode)]);
     w.close("w:compat");

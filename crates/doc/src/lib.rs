@@ -458,6 +458,11 @@ pub struct Settings {
     /// it Word, since 2007, puts the larger of the two between them.
     #[serde(skip_serializing_if = "std::ops::Not::not")]
     pub add_para_spacing: bool,
+    /// A page break that ends a paragraph sends the paragraph mark to the next page, as Word 2010
+    /// and earlier did (`w:splitPgBreakAndParaMark`); otherwise, in compatibility mode 15, the mark
+    /// stays with the break.
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    pub split_page_break_mark: bool,
     /// Drawing grid spacing in points, across and down (View › Gridlines); ECMA-376's default is 1/8 inch.
     pub grid_h: f32,
     pub grid_v: f32,
@@ -546,6 +551,7 @@ impl Default for Settings {
             protect_hash: Vec::new(),
             compat_mode: COMPAT_MODE_CURRENT,
             add_para_spacing: false,
+            split_page_break_mark: false,
             grid_h: DEFAULT_GRID,
             grid_v: DEFAULT_GRID,
             math: None,

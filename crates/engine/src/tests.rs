@@ -1552,6 +1552,22 @@ fn imported_range_toc_is_refreshed_in_place() {
 }
 
 #[test]
+fn a_page_break_ends_its_paragraph_like_word() {
+    for id in ["text.pageBreak", "insert.pageBreak"] {
+        let mut s = s();
+        run(&mut s, "text.insert", json!({"text": "Hello world"}));
+        run(&mut s, "caret.set", json!({"pos": {"block": 0, "off": 5}}));
+        run(&mut s, id, json!({}));
+        let t = text(&s);
+        assert_eq!(t, "Hello\u{c}\n world", "{id}");
+        // The caret starts the next paragraph, on page two.
+        run(&mut s, "text.insert", json!({"text": "X"}));
+        assert_eq!(text(&s), "Hello\u{c}\nX world", "{id}");
+        assert_eq!(s.layout().pages.len(), 2, "{id}");
+    }
+}
+
+#[test]
 fn toc_page_numbers_follow_headings() {
     let mut s = s();
     run(&mut s, "references.toc", json!({}));

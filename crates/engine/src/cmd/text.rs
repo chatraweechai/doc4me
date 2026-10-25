@@ -13,7 +13,7 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("text.insert", "Type Text", "Editing", insert).params(r#"{"text": string}"#),
         CommandSpec::new("text.newParagraph", "New Paragraph", "Editing", new_paragraph).key("Enter"),
         CommandSpec::new("text.lineBreak", "Line Break", "Editing", |s, _| ins_char(s, '\n')).key("Shift+Enter"),
-        CommandSpec::new("text.pageBreak", "Page Break", "Insert › Pages", |s, _| ins_char(s, PAGE_BREAK)).key("Mod+Enter"),
+        CommandSpec::new("text.pageBreak", "Page Break", "Insert › Pages", page_break).key("Mod+Enter"),
         CommandSpec::new("text.columnBreak", "Column Break", "Layout › Breaks", |s, _| ins_char(s, COLUMN_BREAK)).key("Mod+Shift+Enter"),
         CommandSpec::new("text.tab", "Tab", "Editing", tab).key("Tab"),
         CommandSpec::new("text.backTab", "Shift+Tab", "Editing", back_tab).key("Shift+Tab"),
@@ -383,6 +383,13 @@ fn ins_char(s: &mut Session, c: char) -> CmdResult {
     let mut b = [0u8; 4];
     type_text(s, c.encode_utf8(&mut b))?;
     sel_result(s)
+}
+
+/// A page break ends its paragraph, and what follows starts a new one at the top of the next page,
+/// as Word 2013 and later insert it (the paragraph mark stays on the break's page).
+pub(crate) fn page_break(s: &mut Session, v: &Value) -> CmdResult {
+    ins_char(s, PAGE_BREAK)?;
+    new_paragraph(s, v)
 }
 
 fn new_paragraph(s: &mut Session, _: &Value) -> CmdResult {

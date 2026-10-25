@@ -2188,6 +2188,37 @@ fn the_larger_of_space_after_and_space_before_separates_paragraphs() {
 }
 
 #[test]
+fn a_page_break_ending_a_paragraph_keeps_the_mark_on_its_page() {
+    let top_of_b = |split: bool| {
+        let mut d = Document::new();
+        d.settings.split_page_break_mark = split;
+        let a = doc4me_doc::Paragraph::with_text(&format!("A{}", doc4me_doc::para::PAGE_BREAK), Default::default());
+        let b = doc4me_doc::Paragraph::with_text("B", Default::default());
+        d.body = vec![doc4me_doc::para_block(a), doc4me_doc::para_block(b)];
+        let l = lay(&d);
+        assert_eq!(l.pages.len(), 2);
+        let tops: Vec<f32> =
+            l.pages[1].items.iter().filter_map(|i| if let Placed::Lines { y, story: StoryRef::Body, .. } = i { Some(*y) } else { None }).collect();
+        (tops[0], *tops.last().unwrap())
+    };
+    // Word 2013 and later: B starts page two.
+    let (first, b) = top_of_b(false);
+    assert!((first - b).abs() < 0.01, "only B on page two: {first} {b}");
+    // splitPgBreakAndParaMark (Word 2010): the mark takes a line there first.
+    let (first, b) = top_of_b(true);
+    assert!(b > first + 5.0, "the mark's line comes first: {first} {b}");
+    // The space after a paragraph ending with a page break stays behind, so a heading that starts
+    // a page of its own (page break before) doesn't add another page.
+    let mut d = Document::new();
+    let mut a = doc4me_doc::Paragraph::with_text(&format!("A{}", doc4me_doc::para::PAGE_BREAK), Default::default());
+    a.props.space_after = Some(24.0);
+    let mut b = doc4me_doc::Paragraph::with_text("B", Default::default());
+    b.props.page_break_before = Some(true);
+    d.body = vec![doc4me_doc::para_block(a), doc4me_doc::para_block(b)];
+    assert_eq!(lay(&d).pages.len(), 2);
+}
+
+#[test]
 fn at_least_rows_add_cell_margins_and_border_bands() {
     use doc4me_doc::props::{Border, BorderStyle, Borders, HeightRule};
     let mut d = Document::from_text("");

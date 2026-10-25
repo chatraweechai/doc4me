@@ -621,6 +621,9 @@ fn additive_paragraph_spacing_is_read_and_written_back() {
     assert!(!with_settings(None).settings.add_para_spacing);
     let again = doc4me_docx::read(&doc4me_docx::write(&on).unwrap()).unwrap();
     assert!(again.settings.add_para_spacing);
+    let split = with_settings(Some("<w:compat><w:splitPgBreakAndParaMark/></w:compat>"));
+    assert!(split.settings.split_page_break_mark && !split.settings.add_para_spacing);
+    assert!(doc4me_docx::read(&doc4me_docx::write(&split).unwrap()).unwrap().settings.split_page_break_mark);
 }
 
 #[test]
