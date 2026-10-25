@@ -594,22 +594,19 @@ fn check_document(id: &str, docx: &Path, reference: &Path, cli: &Path, work: &Pa
         Outcome::Ok(_) => Ok(()),
         o => Err(format!("open: {o}")),
     };
-    // Save and reopen: the text and the paragraph count stay.
+    // Save and reopen: the text and the structure stay.
     let rt = work.join("roundtrip.docx");
     r.roundtrip = match step(&["convert".into(), path(docx), path(&rt)], "save") {
         Outcome::Ok(_) => {
             let (a, b) = (step(&["text".into(), path(docx)], "text-a"), step(&["text".into(), path(&rt)], "text-b"));
-            let info_b = step(&["info".into(), path(&rt)], "info-b");
-            match (a, b, &info, info_b) {
+            let (ia, ib) = (step(&["inspect".into(), path(docx)], "inspect-a"), step(&["inspect".into(), path(&rt)], "inspect-b"));
+            match (a, b, ia, ib) {
                 (Outcome::Ok(a), Outcome::Ok(b), Outcome::Ok(ia), Outcome::Ok(ib)) => {
-                    let paras =
-                        |s: &str| serde_json::from_str::<serde_json::Value>(s).ok().and_then(|v| v.get("paragraphs").and_then(|p| p.as_u64()));
+                    let print = |s: &str| serde_json::from_str::<serde_json::Value>(s).map(|v| fingerprint(&v)).unwrap_or_default();
                     if words(&a) != words(&b) {
                         Err("text changed after save and reopen".into())
-                    } else if paras(ia) != paras(&ib) {
-                        Err(format!("paragraphs {:?} → {:?} after save and reopen", paras(ia), paras(&ib)))
                     } else {
-                        Ok(())
+                        structure_change(&print(&ia), &print(&ib)).map_or(Ok(()), Err)
                     }
                 }
                 _ => Err("reading the saved copy failed".into()),
@@ -626,6 +623,44 @@ fn check_document(id: &str, docx: &Path, reference: &Path, cli: &Path, work: &Pa
     (r.pages, r.breaks) = (pages, breaks);
     r.stable = if unstable.is_empty() { Ok(()) } else { Err(unstable.join("; ")) };
     r
+}
+
+/// What a document is made of, from `doc4me-cli inspect`: how many blocks, objects and runs of each
+/// `type` and `style` there are anywhere in its body (paragraphs, tables, pictures, fields,
+/// bookmarks, shapes, paragraph and character styles…), its parts by `kind` (headers, footers,
+/// text boxes, notes, comments) and its sections.
+pub fn fingerprint(doc: &serde_json::Value) -> BTreeMap<String, usize> {
+    fn walk(v: &serde_json::Value, out: &mut BTreeMap<String, usize>) {
+        match v {
+            serde_json::Value::Object(m) => {
+                for (k, x) in m {
+                    if let (Some(name), "type" | "style") = (x.as_str(), k.as_str()) {
+                        *out.entry(format!("{k} {name}")).or_default() += 1;
+                    }
+                    walk(x, out);
+                }
+            }
+            serde_json::Value::Array(a) => a.iter().for_each(|x| walk(x, out)),
+            _ => {}
+        }
+    }
+    let mut out = BTreeMap::new();
+    if let Some(blocks) = doc.get("blocks") {
+        walk(blocks, &mut out);
+    }
+    for part in doc.get("parts").and_then(|p| p.as_array()).into_iter().flatten() {
+        *out.entry(format!("part {}", part.get("kind").and_then(|k| k.as_str()).unwrap_or("?"))).or_default() += 1;
+    }
+    out.insert("sections".into(), doc.get("sections").and_then(|s| s.as_array()).map_or(0, Vec::len));
+    out
+}
+
+/// The first difference between two [`fingerprint`]s, as "type image: 2 → 1 …".
+pub fn structure_change(before: &BTreeMap<String, usize>, after: &BTreeMap<String, usize>) -> Option<String> {
+    before.keys().chain(after.keys()).find_map(|k| {
+        let (a, b) = (before.get(k).copied().unwrap_or(0), after.get(k).copied().unwrap_or(0));
+        (a != b).then(|| format!("{k}: {a} → {b} after save and reopen"))
+    })
 }
 
 /// Page count, then the first and last word of every page.
@@ -813,6 +848,29 @@ mod tests {
         assert!((dims[0].2 - 0.75).abs() < 1e-9);
         let md = render(&[], 3, 5, "abc", "2026-10-25");
         assert!(md.contains("**Measured readiness: 0.0%**") && md.contains("ran on 3 documents (5 listed"), "{md}");
+    }
+
+    #[test]
+    fn structure_is_compared_by_kind_and_count() {
+        let doc = |pics: usize| {
+            let objects: Vec<serde_json::Value> = (0..pics).map(|_| serde_json::json!({"type": "image"})).collect();
+            serde_json::json!({
+                "blocks": [{"type": "paragraph", "props": {"style": "Heading1"}, "objects": objects, "runs": [{"props": {"style": "Strong"}}]},
+                           {"type": "table", "rows": [{"cells": [{"blocks": [{"type": "paragraph"}]}]}]}],
+                "parts": [{"kind": "header"}, {"kind": "footer"}, {"kind": "footer"}],
+                "sections": [{}, {}],
+            })
+        };
+        let f = fingerprint(&doc(2));
+        assert_eq!(f.get("type paragraph"), Some(&2));
+        assert_eq!(f.get("type table"), Some(&1));
+        assert_eq!(f.get("type image"), Some(&2));
+        assert_eq!(f.get("style Heading1"), Some(&1));
+        assert_eq!(f.get("style Strong"), Some(&1));
+        assert_eq!(f.get("part footer"), Some(&2));
+        assert_eq!(f.get("sections"), Some(&2));
+        assert_eq!(structure_change(&f, &fingerprint(&doc(2))), None);
+        assert_eq!(structure_change(&f, &fingerprint(&doc(1))).as_deref(), Some("type image: 2 → 1 after save and reopen"));
     }
 
     #[test]
