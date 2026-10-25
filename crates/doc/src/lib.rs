@@ -453,6 +453,11 @@ pub struct Settings {
     /// 2013 and later, which places a table's border at the margin rather than its text and lets
     /// justified lines shrink their spaces to fit more text.
     pub compat_mode: u32,
+    /// Space after a paragraph and space before the next add up (`w:doNotUseHTMLParagraphAutoSpacing`,
+    /// File › Options › Advanced › Layout options "Don't use HTML paragraph auto spacing"); without
+    /// it Word, since 2007, puts the larger of the two between them.
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    pub add_para_spacing: bool,
     /// Drawing grid spacing in points, across and down (View › Gridlines); ECMA-376's default is 1/8 inch.
     pub grid_h: f32,
     pub grid_v: f32,
@@ -540,6 +545,7 @@ impl Default for Settings {
             protect_formatting: false,
             protect_hash: Vec::new(),
             compat_mode: COMPAT_MODE_CURRENT,
+            add_para_spacing: false,
             grid_h: DEFAULT_GRID,
             grid_v: DEFAULT_GRID,
             math: None,

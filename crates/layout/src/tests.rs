@@ -2165,6 +2165,29 @@ fn line_tops(l: &DocLayout) -> Vec<f32> {
 }
 
 #[test]
+fn the_larger_of_space_after_and_space_before_separates_paragraphs() {
+    let gap = |after: f32, before: f32, add: bool| {
+        let mut d = Document::new();
+        d.settings.add_para_spacing = add;
+        let p = |props| {
+            let mut p = doc4me_doc::Paragraph::with_text("Line", Default::default());
+            p.props = props;
+            doc4me_doc::para_block(p)
+        };
+        d.body =
+            vec![p(ParaProps { space_after: Some(after), ..Default::default() }), p(ParaProps { space_before: Some(before), ..Default::default() })];
+        let tops = line_tops(&lay(&d));
+        tops[1] - tops[0]
+    };
+    let line = gap(0.0, 0.0, false);
+    // Word since 2007 (measured on the corpus's Word PDFs): the larger of the two.
+    assert!((gap(8.0, 3.0, false) - line - 8.0).abs() < 0.01, "{}", gap(8.0, 3.0, false) - line);
+    assert!((gap(8.0, 12.0, false) - line - 12.0).abs() < 0.01);
+    // Don't use HTML paragraph auto spacing: both.
+    assert!((gap(8.0, 3.0, true) - line - 11.0).abs() < 0.01);
+}
+
+#[test]
 fn at_least_rows_add_cell_margins_and_border_bands() {
     use doc4me_doc::props::{Border, BorderStyle, Borders, HeightRule};
     let mut d = Document::from_text("");

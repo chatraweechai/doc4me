@@ -371,34 +371,43 @@ fn face_line(face: &crate::FontFace, prefer_hhea: bool) -> (f64, f64) {
     v
 }
 
-/// Word for Windows' single line of fonts whose open substitutes are spaced differently, per em
-/// (ascent, descent): Cambria (drawn with Caladea, 1.30 em) and Courier New (drawn with JetBrains
-/// Mono where only the bundled fonts exist, 1.565 em).
+/// Word's single line of fonts whose open substitutes, or whose own win metrics, are spaced
+/// differently, per em (ascent, descent): Cambria (drawn with Caladea, 1.30 em), Courier New (drawn
+/// with JetBrains Mono where only the bundled fonts exist, 1.565 em) and Aptos, whose lines in
+/// Word's PDFs step 1.2207 em (its hhea and typo metrics, 1923 + 577), not its win metrics' 1.2847.
 fn requested_line(family: &str) -> Option<(f64, f64)> {
     match family.trim().to_ascii_lowercase().as_str() {
         "cambria" | "cambria math" => Some((1946.0 / 2048.0, 455.0 / 2048.0)),
         "courier new" | "courier" => Some((1705.0 / 2048.0, 615.0 / 2048.0)),
-        // Every Aptos family (Display, Narrow, Serif, Mono, each weight): usWin 2068 / 563.
-        f if f == "aptos" || f.starts_with("aptos ") => Some((2068.0 / 2048.0, 563.0 / 2048.0)),
+        // Every Aptos family (Display, Narrow, Serif, Mono, each weight): hhea 1923 / 577.
+        f if is_aptos(f) => Some((1923.0 / 2048.0, 577.0 / 2048.0)),
         _ => None,
     }
 }
 
+/// Aptos, Aptos Display, Narrow, Serif, Mono and each weight.
+fn is_aptos(family: &str) -> bool {
+    let f = family.trim().to_ascii_lowercase();
+    f == "aptos" || f.starts_with("aptos ")
+}
+
 /// Single line spacing for text a document sets in `family`, drawn with `face` ([`resolve`]),
 /// at `size` points: (ascent, descent) in points. The face's own Word for Windows line
-/// ([`line_metrics`]) when it is the font asked for. A substitute keeps the line of the font it
-/// stands in for where that is known ([`requested_line`]), and otherwise its hhea line, which
+/// ([`line_metrics`]) when it is the font asked for, except Aptos ([`requested_line`]). A
+/// substitute keeps the line of the font it stands in for where that is known
+/// ([`requested_line`]), and otherwise its hhea line, which
 /// metric-compatible substitutes share with their originals and which keeps a Thai font drawn
 /// with Sarabun (Angsana New, Cordia New…) near its own small-letter spacing (1.30 em, not
 /// Sarabun's 1.853 em).
 pub fn single_line(family: &str, face: &crate::FontFace, substituted: bool, size: f64) -> (f64, f64) {
+    // Aptos's own win metrics aren't what Word spaces it by, so its line holds when it is installed.
+    if let Some((a, d)) = requested_line(family).filter(|_| substituted || is_aptos(family)) {
+        return (a * size, d * size);
+    }
     if !substituted {
         let (a, d) = line_metrics(face);
         let k = size / face.upem.max(1.0);
         return (a * k, d * k);
-    }
-    if let Some((a, d)) = requested_line(family) {
-        return (a * size, d * size);
     }
     let (a, d) = face_line(face, true);
     let k = size / face.upem.max(1.0);
@@ -559,7 +568,7 @@ mod tests {
     }
 
     /// Aptos isn't installed here: the bundled Intos (metric-compatible) draws it, Intos Display
-    /// draws Aptos Display, and lines keep Aptos's Word for Windows spacing (2068 + 563 of 2048).
+    /// draws Aptos Display, and lines keep the spacing Word gives Aptos (1923 + 577 of 2048).
     #[test]
     fn aptos_is_drawn_with_the_bundled_intos() {
         for (asked, family) in [("Aptos", "Intos"), ("aptos", "Intos"), ("Aptos Display", "Intos Display"), ("Aptos SemiBold", "Intos")] {
@@ -567,7 +576,9 @@ mod tests {
             assert!(r.substituted, "{asked}");
             assert_eq!(r.face.family, family, "{asked}");
             let em = |(a, d): (f64, f64)| ((a + d) * 10000.0).round() / 10000.0;
-            assert_eq!(em(single_line(asked, &r.face, true, 1.0)), 1.2847, "{asked}");
+            assert_eq!(em(single_line(asked, &r.face, true, 1.0)), 1.2207, "{asked}");
+            // The same when Aptos itself is installed.
+            assert_eq!(em(single_line(asked, &r.face, false, 1.0)), 1.2207, "{asked}");
         }
         for (bold, italic, style) in [(true, false, "Bold"), (false, true, "Italic"), (true, true, "Bold Italic")] {
             let r = resolve("Aptos", bold, italic);
@@ -579,7 +590,7 @@ mod tests {
         assert_eq!(substitutes("Aptos Narrow").first(), Some(&"Intos Narrow"));
         assert_eq!(substitutes("Aptos Serif").first(), Some(&"Intos Serif"));
         assert_eq!(substitutes("Aptos Mono").first(), Some(&"Courier New"));
-        assert_eq!(requested_line("Aptos Mono"), Some((2068.0 / 2048.0, 563.0 / 2048.0)));
+        assert_eq!(requested_line("Aptos Mono"), Some((1923.0 / 2048.0, 577.0 / 2048.0)));
         assert_eq!(requested_line("Aptosx"), None);
     }
 

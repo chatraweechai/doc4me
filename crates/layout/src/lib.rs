@@ -2532,14 +2532,20 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
     // Contextual spacing: no space between paragraphs of the same style when either asks for it.
     let mut before = pl.rp.space_before;
     if let Some((style, ctxl, after)) = pb.prev.take()
-        && style == pl.rp.style
         && !pb.at_top()
     {
-        if ctxl {
-            pb.y -= after;
+        if style == pl.rp.style {
+            if ctxl {
+                pb.y -= after;
+            }
+            if pl.rp.contextual_spacing {
+                before = 0.0;
+            }
         }
-        if pl.rp.contextual_spacing {
-            before = 0.0;
+        // Word (since 2007) puts the larger of the space after and the space before between two
+        // paragraphs, unless the document asks for both (Don't use HTML paragraph auto spacing).
+        if !ctx.doc.settings.add_para_spacing && !(style == pl.rp.style && ctxl) {
+            before = (before - after.max(0.0)).max(before.min(0.0));
         }
     }
     pb.y += before;

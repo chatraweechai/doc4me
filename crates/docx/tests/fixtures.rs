@@ -614,6 +614,16 @@ fn with_settings(settings: Option<&str>) -> Document {
 }
 
 #[test]
+fn additive_paragraph_spacing_is_read_and_written_back() {
+    let on = with_settings(Some("<w:compat><w:doNotUseHTMLParagraphAutoSpacing/></w:compat>"));
+    assert!(on.settings.add_para_spacing);
+    assert!(!with_settings(Some(r#"<w:compat><w:doNotUseHTMLParagraphAutoSpacing w:val="0"/></w:compat>"#)).settings.add_para_spacing);
+    assert!(!with_settings(None).settings.add_para_spacing);
+    let again = doc4me_docx::read(&doc4me_docx::write(&on).unwrap()).unwrap();
+    assert!(again.settings.add_para_spacing);
+}
+
+#[test]
 fn compatibility_mode_is_read_and_defaults_to_word_2007() {
     let compat = |v: &str| {
         format!(r#"<w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="{v}"/></w:compat>"#)

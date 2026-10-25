@@ -240,8 +240,8 @@ fn doc_in(font: &str, size: f32, text: &str, chr: impl FnOnce(&mut doc4me_doc::p
 }
 
 /// Aptos and Aptos Display (not installed here) are drawn with the bundled Intos and Intos
-/// Display, which have their advance widths, and single lines keep Aptos's spacing in Word for
-/// Windows ((2068 + 563) / 2048 em). "Hello world" measures 10111 units in Aptos, 9522 in Aptos
+/// Display, which have their advance widths, and single lines keep the spacing Word gives Aptos
+/// ((1923 + 577) / 2048 em, measured on Word's PDFs in the readiness corpus). "Hello world" measures 10111 units in Aptos, 9522 in Aptos
 /// Display and 10729 in Aptos Bold (of 2048, from the fonts' hmtx; Word doesn't kern by default).
 #[test]
 fn aptos_is_drawn_with_intos_on_aptos_widths_and_line_spacing() {
@@ -250,7 +250,7 @@ fn aptos_is_drawn_with_intos_on_aptos_widths_and_line_spacing() {
     {
         let l = lay(&doc_in(font, 12.0, "Hello world", |c| c.bold = Some(bold)));
         let pl = para_layout(&l, 0);
-        assert!((pl.lines[0].height - 12.0 * 2631.0 / 2048.0).abs() < 0.01, "{font}: {}", pl.lines[0].height);
+        assert!((pl.lines[0].height - 12.0 * 2500.0 / 2048.0).abs() < 0.01, "{font}: {}", pl.lines[0].height);
         assert_eq!(pl.styles[pl.clusters[0].style as usize].face.family, family);
         let width: f32 = pl.clusters.iter().map(|c| c.adv).sum();
         assert!((width - 12.0 * units / 2048.0).abs() < 0.01, "{font}: {width}");
