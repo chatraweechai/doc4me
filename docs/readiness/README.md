@@ -2,7 +2,7 @@
 
 The measured readiness number comes from these files, not from estimates. `cargo xtask readiness`
 reads them, runs what can be run, and writes [`../readiness.md`](../readiness.md). The plan that
-uses the number is in [`../roadmap.md`](../roadmap.md#path-to-80-measured-readiness).
+uses the number is in [`../roadmap.md`](../roadmap.md#path-to-95-measured-readiness).
 
 ## Rules
 
