@@ -56,7 +56,6 @@
 - tag `v1.0.0` ที่คอมมิต `7946cbb` (คำสั่งในข้อ 5.1 ด้านล่าง)
 - ใบรับรองลงนามโค้ดหรือ Azure Trusted Signing แล้วใส่ secret (workflow พร้อมแล้ว)
 - ruleset ป้องกัน `main` (ข้อ 5.3), ลบ branch `claude/optimistic-fermat-z9uknk` ที่ merge แล้ว, ตัดสินใจ PR ของ Dependabot #1–#4
-- ทดสอบบนเครื่องจริง: Dictate กับไมโครโฟน, Screen Clipping บน Windows, เปิดไฟล์ที่มีวิดีโอออนไลน์ใน Word for Windows, สมการลายมือจริง, แจ้งรุ่น/build ของ Word for Windows ที่ใช้เทียบ, วัด alpha gate บน Windows
 
 ## session 2026-10-25 รอบที่ 7: งานค้างใน handoff ข้อ 2–4
 
