@@ -2480,3 +2480,9 @@ spacing	Normal	ปกติ
 	View Side by Side	ดูเคียงข้างกัน
 	Synchronous Scrolling	การเลื่อนแบบซิงโครนัส
 	Switch Windows	สลับหน้าต่าง
+	Screenshot	ภาพหน้าจอ
+	Screen Clipping	การตัดหน้าจอ
+	Select the part of the screen to insert.	เลือกส่วนของหน้าจอที่จะแทรก
+	Screen clipping ended without a picture.	การตัดหน้าจอสิ้นสุดโดยไม่มีภาพ
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	ใช้การตัดหน้าจอที่นี่ไม่ได้ ให้คัดลอกภาพหน้าจอแล้ววาง
+	Screen clipping didn't work: {reason}	การตัดหน้าจอไม่สำเร็จ: {reason}

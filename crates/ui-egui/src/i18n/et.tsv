@@ -2092,3 +2092,9 @@ spacing	Normal	Tavaline
 	View Side by Side	Kuva kõrvuti
 	Synchronous Scrolling	Sünkroonne kerimine
 	Switch Windows	Vaheta aknaid
+	Screenshot	Kuvatõmmis
+	Screen Clipping	Ekraanilõige
+	Select the part of the screen to insert.	Valige ekraani osa, mille soovite lisada.
+	Screen clipping ended without a picture.	Ekraanilõige lõppes ilma pildita.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Ekraanilõige pole siin saadaval. Kopeerige ekraanipilt ja kleepige see.
+	Screen clipping didn't work: {reason}	Ekraanilõige ei õnnestunud: {reason}

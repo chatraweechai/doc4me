@@ -19,6 +19,7 @@ mod file_dialogs;
 mod graphics;
 mod logging;
 mod print;
+mod screen_clip;
 
 use doc4me_engine::Session;
 use doc4me_ui_egui::{
@@ -178,13 +179,14 @@ fn save_prefs(app: &WordApp) {
 
 /// Native file dialogs, shown without blocking the window (`file_dialogs`, #94), File › Print
 /// through the system's PDF viewer (`print`, #15), pictures on the system clipboard (#45), the
-/// system's animation setting (`animations`), and making Doc4Me the default app for Word
-/// documents (`default_apps`, #295).
+/// system's screen clipping (`screen_clip`), the system's animation setting (`animations`), and
+/// making Doc4Me the default app for Word documents (`default_apps`, #295).
 fn services(file_dialog: file_dialogs::Hook, ctx: &egui::Context) -> Services {
     Services {
         file_dialog: Some(file_dialog),
         print: Some(print::hook()),
         clipboard_picture: Some(Box::new(clipboard_picture)),
+        screen_clip: screen_clip::hook(ctx),
         make_default_app: default_apps::hook(),
         animations_enabled: Some(animations::hook(ctx)),
         clipboard_text: Some(Box::new(|| arboard::Clipboard::new().ok()?.get_text().ok())),

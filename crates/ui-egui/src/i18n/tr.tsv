@@ -2458,3 +2458,9 @@ spacing	Normal	Normal
 	View Side by Side	Yan Yana Görüntüle
 	Synchronous Scrolling	Eşzamanlı Kaydırma
 	Switch Windows	Pencereleri Değiştir
+	Screenshot	Ekran Görüntüsü
+	Screen Clipping	Ekran Kırpma
+	Select the part of the screen to insert.	Eklenecek ekran bölümünü seçin.
+	Screen clipping ended without a picture.	Ekran kırpma resim olmadan sona erdi.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Ekran kırpma burada kullanılamıyor. Ekranın resmini kopyalayıp yapıştırın.
+	Screen clipping didn't work: {reason}	Ekran kırpma çalışmadı: {reason}

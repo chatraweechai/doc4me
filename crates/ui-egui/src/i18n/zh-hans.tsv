@@ -2070,3 +2070,9 @@ spacing	Normal	标准
 	View Side by Side	并排查看
 	Synchronous Scrolling	同步滚动
 	Switch Windows	切换窗口
+	Screenshot	屏幕截图
+	Screen Clipping	屏幕剪辑
+	Select the part of the screen to insert.	选择要插入的屏幕部分。
+	Screen clipping ended without a picture.	屏幕剪辑已结束，但没有图片。
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	此处无法使用屏幕剪辑。请复制屏幕图片，然后粘贴。
+	Screen clipping didn't work: {reason}	屏幕剪辑失败：{reason}

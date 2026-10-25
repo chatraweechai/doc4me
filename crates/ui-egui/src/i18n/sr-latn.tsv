@@ -2068,3 +2068,9 @@ spacing	Normal	Normalno
 	View Side by Side	Prikaži uporedo
 	Synchronous Scrolling	Sinhrono pomeranje
 	Switch Windows	Promeni prozore
+	Screenshot	Snimak ekrana
+	Screen Clipping	Isečak ekrana
+	Select the part of the screen to insert.	Izaberite deo ekrana koji želite da umetnete.
+	Screen clipping ended without a picture.	Isecanje ekrana je završeno bez slike.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Isecanje ekrana ovde nije dostupno. Kopirajte sliku ekrana, a zatim je nalepite.
+	Screen clipping didn't work: {reason}	Isecanje ekrana nije uspelo: {reason}

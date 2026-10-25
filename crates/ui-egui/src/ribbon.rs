@@ -823,6 +823,11 @@ fn insert(app: &mut WordApp, ui: &mut Ui) {
             small(ui, app, "smartArt", Some("SmartArt"), "SmartArt", "insert.smartArt", json!({}), false);
             small(ui, app, "chart", Some("Chart"), "Chart", "insert.chart", json!({}), false);
         });
+        stack(ui, |ui| {
+            menu_button(ui, app, "screenshot", Some("Screenshot"), "Screenshot", false, "insert.screenshot", |ui, app| {
+                mi(ui, app, "Screen Clipping", "insert.screenshot", json!({}));
+            });
+        });
     });
     group(ui, "Links", None, app, |ui, app| {
         stack(ui, |ui| {

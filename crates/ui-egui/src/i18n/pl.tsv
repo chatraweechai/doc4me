@@ -2099,3 +2099,9 @@ spacing	Normal	Normalne
 	View Side by Side	Wyświetl obok siebie
 	Synchronous Scrolling	Przewijanie synchroniczne
 	Switch Windows	Przełącz okna
+	Screenshot	Zrzut ekranu
+	Screen Clipping	Wycinek ekranu
+	Select the part of the screen to insert.	Zaznacz część ekranu do wstawienia.
+	Screen clipping ended without a picture.	Wycinanie ekranu zakończyło się bez obrazu.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Wycinek ekranu nie jest tu dostępny. Skopiuj obraz ekranu, a następnie go wklej.
+	Screen clipping didn't work: {reason}	Wycinanie ekranu nie powiodło się: {reason}

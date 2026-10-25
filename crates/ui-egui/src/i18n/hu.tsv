@@ -2465,3 +2465,9 @@ spacing	Normal	Normál
 	View Side by Side	Megtekintés egymás mellett
 	Synchronous Scrolling	Szinkron görgetés
 	Switch Windows	Váltás ablakok között
+	Screenshot	Képernyőkép
+	Screen Clipping	Képernyőrészlet
+	Select the part of the screen to insert.	Jelölje ki a beszúrandó képernyőrészt.
+	Screen clipping ended without a picture.	A képernyőrészlet kép nélkül ért véget.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	A képernyőrészlet itt nem érhető el. Másoljon egy képet a képernyőről, majd illessze be.
+	Screen clipping didn't work: {reason}	A képernyőrészlet nem sikerült: {reason}

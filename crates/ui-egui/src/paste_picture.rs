@@ -18,6 +18,8 @@ pub enum ClipboardPicture {
     Pixels { width: usize, height: usize, rgba: Vec<u8> },
     /// Copied files (a file manager's Copy); the pictures among them are inserted.
     Files(Vec<PathBuf>),
+    /// A picture file's bytes (PNG, JPEG…), as a screen clipping tool saved it.
+    Encoded(Vec<u8>),
 }
 
 /// Longest side of a pasted picture, in pixels.
@@ -73,6 +75,12 @@ pub fn names_picture_files(text: &str) -> bool {
 /// service): the caller pastes as usual.
 pub(crate) fn paste(app: &mut WordApp) -> Option<Result<Value, String>> {
     let picture = app.services.clipboard_picture.as_ref()?()?;
+    insert(app, picture)
+}
+
+/// Insert a picture from another program (the clipboard, a screen clipping) at the selection.
+/// `None` when it holds no picture.
+pub(crate) fn insert(app: &mut WordApp, picture: ClipboardPicture) -> Option<Result<Value, String>> {
     let r = match picture {
         ClipboardPicture::Pixels { width, height, rgba } => match png_from_rgba(width, height, rgba) {
             Ok(png) => app.execute("insert.picture", json!({"data": doc4me_engine::cmd::insert::base64_encode(&png)})),
@@ -103,6 +111,12 @@ pub(crate) fn paste(app: &mut WordApp) -> Option<Result<Value, String>> {
             }
             r
         }
+        ClipboardPicture::Encoded(bytes) if bytes.len() as u64 > MAX_FILE_BYTES => {
+            let e = "the picture is larger than 200 MB".to_string();
+            app.status(e.clone());
+            Err(e)
+        }
+        ClipboardPicture::Encoded(bytes) => app.execute("insert.picture", json!({"data": doc4me_engine::cmd::insert::base64_encode(&bytes)})),
     };
     Some(r)
 }

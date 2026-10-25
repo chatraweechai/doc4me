@@ -65,6 +65,7 @@ pub mod previews;
 pub mod print_page;
 pub mod read_aloud;
 pub mod ribbon;
+pub mod screen_clip;
 pub mod scroll;
 pub mod table_pen;
 pub mod table_resize;
@@ -112,6 +113,10 @@ pub struct Services {
     /// Desktop: the picture on the system clipboard, if any — egui's paste only carries text
     /// (#45). Read when Paste finds no text; see [`paste_picture`].
     pub clipboard_picture: Option<Box<dyn Fn() -> Option<paste_picture::ClipboardPicture>>>,
+    /// Desktop: Insert › Screenshot › Screen Clipping. Start the system's screen clipping and
+    /// answer on the returned channel once the user is done (`Ok(None)` when they cancelled),
+    /// waking the UI; an `Err` says it couldn't start. See [`screen_clip`].
+    pub screen_clip: Option<Box<dyn Fn() -> Result<std::sync::mpsc::Receiver<screen_clip::ScreenClip>, String>>>,
     /// Whether the system has animation effects on (Windows: Animation effects; macOS: Reduce
     /// motion; Linux and the BSDs: the desktop's setting; browsers: `prefers-reduced-motion`), or
     /// `None` when it doesn't say. What "Use system setting" follows ([`theme::Animations`]).
@@ -308,6 +313,8 @@ pub struct WordApp {
     pub canvas: canvas::CanvasState,
     /// View › Window: the split pane and the other windows on the document.
     pub windows: windows::Windows,
+    /// Insert › Screenshot › Screen Clipping in progress.
+    pub(crate) screen_clip: Option<screen_clip::Clipping>,
     /// Content control frames, check boxes and lists on the page.
     pub controls: content_controls::ControlUi,
     pub dialog: Option<dialogs::Dialog>,
@@ -426,6 +433,7 @@ impl WordApp {
             services,
             canvas: canvas::CanvasState::default(),
             windows: windows::Windows::default(),
+            screen_clip: None,
             controls: Default::default(),
             dialog: None,
             colors: None,
@@ -842,6 +850,7 @@ impl WordApp {
                     self.save_as_dialog();
                 }
                 "insertPicture" => self.pick_picture(),
+                "screenClipping" => screen_clip::start(self),
                 "addFont" => self.pick_font(),
                 "print" => {
                     self.ui.backstage = true;
@@ -1295,6 +1304,7 @@ impl WordApp {
         self.drain_control(ctx);
         zotero::poll(self, ctx);
         read_aloud::poll(self, ctx);
+        screen_clip::poll(self, ctx);
         self.clear_stale_change_picture();
         let _ = self.poll_file_dialog();
         self.drain_inbox();

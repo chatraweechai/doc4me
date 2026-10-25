@@ -985,6 +985,7 @@ name = "doc4me"
 version = "1.1.1"
 dependencies = [
  "arboard",
+ "clipboard-win",
  "dispatch2",
  "doc4me-control-key",
  "doc4me-doc",

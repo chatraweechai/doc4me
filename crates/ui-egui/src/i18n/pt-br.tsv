@@ -2070,3 +2070,9 @@ spacing	Normal	Normal
 	View Side by Side	Exibir Lado a Lado
 	Synchronous Scrolling	Rolagem Sincronizada
 	Switch Windows	Alternar Janelas
+	Screenshot	Instantâneo
+	Screen Clipping	Recorte de Tela
+	Select the part of the screen to insert.	Selecione a parte da tela a ser inserida.
+	Screen clipping ended without a picture.	O recorte de tela terminou sem uma imagem.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	O recorte de tela não está disponível aqui. Copie uma imagem da tela e cole-a.
+	Screen clipping didn't work: {reason}	O recorte de tela não funcionou: {reason}

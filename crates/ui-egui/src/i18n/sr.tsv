@@ -2072,3 +2072,9 @@ spacing	Normal	Нормално
 	View Side by Side	Прикажи упоредо
 	Synchronous Scrolling	Синхроно померање
 	Switch Windows	Промени прозоре
+	Screenshot	Снимак екрана
+	Screen Clipping	Исечак екрана
+	Select the part of the screen to insert.	Изаберите део екрана који желите да уметнете.
+	Screen clipping ended without a picture.	Исецање екрана је завршено без слике.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Исецање екрана овде није доступно. Копирајте слику екрана, а затим је налепите.
+	Screen clipping didn't work: {reason}	Исецање екрана није успело: {reason}

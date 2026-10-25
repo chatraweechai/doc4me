@@ -184,6 +184,7 @@ fn controls(tab: &str) -> Vec<Control> {
             c("Icons", "insert.icon"),
             c("SmartArt", "insert.smartArt"),
             c("Chart", "insert.chart"),
+            m("Screenshot", "insert.screenshot"),
             d("Link", "link"),
             d("Bookmark", "bookmark"),
             c("Cross-reference", "insert.crossReference"),

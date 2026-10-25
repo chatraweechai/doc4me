@@ -2098,3 +2098,9 @@ spacing	Normal	Normal
 	View Side by Side	Ver en paralelo
 	Synchronous Scrolling	Desplazamiento sincrónico
 	Switch Windows	Cambiar ventanas
+	Screenshot	Captura
+	Screen Clipping	Recorte de pantalla
+	Select the part of the screen to insert.	Seleccione la parte de la pantalla que desea insertar.
+	Screen clipping ended without a picture.	El recorte de pantalla terminó sin una imagen.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	El recorte de pantalla no está disponible aquí. Copie una imagen de la pantalla y péguela.
+	Screen clipping didn't work: {reason}	El recorte de pantalla no funcionó: {reason}

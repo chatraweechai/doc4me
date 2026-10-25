@@ -2057,3 +2057,9 @@ spacing	Normal	Normal
 	View Side by Side	Nebeneinander anzeigen
 	Synchronous Scrolling	Synchrones Scrollen
 	Switch Windows	Fenster wechseln
+	Screenshot	Screenshot
+	Screen Clipping	Bildschirmausschnitt
+	Select the part of the screen to insert.	Wählen Sie den Bildschirmbereich aus, der eingefügt werden soll.
+	Screen clipping ended without a picture.	Der Bildschirmausschnitt wurde ohne Bild beendet.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Bildschirmausschnitte sind hier nicht verfügbar. Kopieren Sie ein Bild des Bildschirms, und fügen Sie es dann ein.
+	Screen clipping didn't work: {reason}	Der Bildschirmausschnitt hat nicht funktioniert: {reason}

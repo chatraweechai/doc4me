@@ -13,6 +13,14 @@
 
 ### เพิ่ม
 
+- **แทรก › ภาพประกอบ › ภาพหน้าจอ › การตัดหน้าจอ (Insert › Screenshot › Screen Clipping)** (parity 489 → 490/500)
+  - ปุ่ม "ภาพหน้าจอ" ใหม่ในกลุ่มภาพประกอบ (คอลัมน์ที่สองถัดจาก Icons/SmartArt/Chart แบบ Word for Windows) มีเมนู "การตัดหน้าจอ" และ KeyTip; คำสั่ง `insert.screenshot` (`crates/engine/src/cmd/insert.rs`) เป็นคำสั่ง pure เพียงขอให้ UI เริ่มการตัดหน้าจอ จึงไม่สร้าง undo step และไม่ทำให้เอกสารเป็น "ยังไม่บันทึก" ภาพที่ได้แทรกด้วย `insert.picture` เป็น undo step เดียวเหมือนแทรกรูป
+  - UI (`crates/ui-egui/src/screen_clip.rs`): hook ใหม่ `Services::screen_clip` ให้ host เริ่มเครื่องมือตัดหน้าจอของระบบแล้วตอบผ่าน channel; บน Windows และ macOS หน้าต่างย่อลงระหว่างตัด (แบบ Word) แล้วกลับมาพร้อมภาพ บน Linux/BSD ไม่ย่อเพราะ Wayland คืนหน้าต่างที่ย่อแล้วไม่ได้; ถ้าผู้ใช้เปิดหน้าต่างกลับมาเองก่อนตัด ถือว่ายกเลิก; รอนานสุด 5 นาที; ภาพตรวจขนาดเหมือนภาพที่วางจากคลิปบอร์ด (`paste_picture::insert` แยกออกมาใช้ร่วมกัน และเพิ่มชนิด `ClipboardPicture::Encoded` สำหรับไฟล์ภาพที่เครื่องมือบันทึก จำกัด 200 MB)
+  - host (`apps/doc4me/src/screen_clip.rs`): Windows เปิด `ms-screenclip:` (Snipping Tool แบบ Windows+Shift+S) แล้วเฝ้าเลขลำดับของคลิปบอร์ดผ่าน `clipboard_win::raw::seq_num` (อ่านภาพเมื่อเลขเปลี่ยนเท่านั้น สูงสุด 2 นาที; เพิ่ม dependency `clipboard-win` 5.4 ซึ่งอยู่ใน build ผ่าน arboard รุ่นเดียวกันอยู่แล้ว); macOS `/usr/sbin/screencapture -i -x`; Linux/BSD ใช้ XDG Screenshot portal แบบ interactive (GNOME, KDE, wlroots, Flatpak) ถ้าไม่มี portal ใช้ `gnome-screenshot --area`, `spectacle --region`, `xfce4-screenshooter --region` หรือ `flameshot gui` ตัวแรกที่พบใน `PATH`
+  - ข้อความแถบสถานะ 6 ข้อความแปลครบ 18 ภาษา (ไทย: ภาพหน้าจอ, การตัดหน้าจอ, เลือกส่วนของหน้าจอที่จะแทรก ฯลฯ)
+  - ผลต่อผู้ใช้: ไม่เปลี่ยนรูปแบบไฟล์ (ภาพที่แทรกเป็นรูปภาพธรรมดาใน .docx) ติดตั้งทับได้ เว็บไม่มีการตัดหน้าจอ (แสดงข้อความให้คัดลอกภาพหน้าจอแล้ววาง)
+  - ตรวจแล้ว: เทสต์ใหม่ `screen_clip::tests` ใน ui-egui (แทรกเป็น undo step เดียว, เริ่มแล้วไม่สร้าง undo/ไม่ dirty, ยกเลิก, ข้อมูลไม่ใช่ภาพ, เริ่มไม่ได้, host ปิด channel, ไม่มี hook) และใน app (แปลง `file://` เป็น path รวม `%XX` และภาษาไทย, โฟลเดอร์ชั่วคราวสิทธิ์ 0700 ถูกลบพร้อมไฟล์); `cargo test -p doc4me-ui-egui` 329 ผ่าน (+ audit แปลภาษา `--ignored` ผ่าน), `cargo test -p doc4me-engine` 383 + 13 + 8 ผ่าน, `cargo clippy -p doc4me --target x86_64-pc-windows-msvc` และ `--target x86_64-apple-darwin` `-D warnings` ผ่าน, clippy Linux `--all-targets` ผ่าน, `cargo xtask parity` 490/500
+
 - **มุมมอง › หน้าต่าง (View › Window) ครบทั้งกลุ่ม: หน้าต่างใหม่, จัดเรียงทั้งหมด, แบ่ง, ดูเคียงข้างกัน, การเลื่อนแบบซิงโครนัส และสลับหน้าต่าง** (ผู้ใช้สั่งให้ทำ parity ที่เหลือ; `crates/ui-egui/src/windows.rs` ใหม่, `crates/engine/src/cmd/view.rs`)
   - เดิม `view.newWindow` และ `view.split` เป็น stub: ส่งคำขอ (`{"open": "newWindow"}`, `{"toggle": "split"}`) ที่ไม่มีส่วนไหนของโปรแกรมรับ กดแล้วไม่มีอะไรเกิด และปุ่ม Arrange All บนริบบอนอ้างคำสั่ง `view.arrangeAll` ที่ไม่มีอยู่
   - แบ่ง (Split, Ctrl+Alt+S): พื้นที่เอกสารแบ่งเป็นบนล่าง แต่ละบานมีไม้บรรทัดและการเลื่อนของตัวเอง ใช้การเลือกเดียวกัน (แบบ Word) ลากแถบกลางเพื่อย้ายเส้นแบ่ง ดับเบิลคลิกแถบหรือกดแบ่งอีกครั้งเพื่อเอาออก
@@ -182,6 +190,7 @@
 
 ### ข้อจำกัดที่ทราบ
 
+- ภาพหน้าจอ: มีเฉพาะการตัดหน้าจอ ยังไม่มีแกลเลอรี "หน้าต่างที่พร้อมใช้งาน" (Available Windows) ของ Word ซึ่งต้องจับภาพหน้าต่างของโปรแกรมอื่น; บน Windows ถ้ากด Esc ใน Snipping Tool โปรแกรมไม่รู้ว่ายกเลิก หน้าต่างจะย่ออยู่จนกว่าผู้ใช้เปิดกลับมา; macOS ต้องอนุญาต Screen Recording ครั้งแรก; Linux แบบ portal บน GNOME จะบันทึกภาพลงโฟลเดอร์ Pictures ของผู้ใช้ด้วย; การทำงานจริงบน Windows/macOS/เดสก์ท็อป Linux ยังไม่ได้ทดสอบด้วยมือ (container ไม่มีหน้าจอ ตรวจด้วย cross-check และเทสต์)
 - ข้อคิดเห็นและ revision จาก Word รุ่นก่อน 2019 หรือจาก Doc4Me รุ่นก่อนหน้า ไม่มีเวลา UTC จึงแสดง `w:date` ตามที่เขียนไว้ (เวลาท้องถิ่นของผู้เขียน เหมือนที่ Word แสดง)
 - ปุ่มแปลงเลขแปลงเฉพาะเลขอารบิก 0–9 กับเลขไทย ๐–๙ ไม่แปลงเลขของอักษรอื่น (เช่น ٠–٩) เลขที่โปรแกรมสร้างเองเปลี่ยนได้เฉพาะรูปแบบเลขอารบิก (decimal) กับเลขไทย (thaiNumbers); ผลของฟิลด์ที่แปลงเป็นข้อความแล้วจะกลับเป็นค่าเดิมเมื่ออัปเดตฟิลด์
 

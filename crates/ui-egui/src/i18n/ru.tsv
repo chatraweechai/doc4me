@@ -2459,3 +2459,9 @@ spacing	Normal	Обычный
 	View Side by Side	Рядом
 	Synchronous Scrolling	Синхронная прокрутка
 	Switch Windows	Перейти в другое окно
+	Screenshot	Снимок
+	Screen Clipping	Вырезка экрана
+	Select the part of the screen to insert.	Выделите часть экрана для вставки.
+	Screen clipping ended without a picture.	Вырезка экрана завершилась без рисунка.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Вырезка экрана здесь недоступна. Скопируйте изображение экрана, а затем вставьте его.
+	Screen clipping didn't work: {reason}	Не удалось вырезать часть экрана: {reason}

@@ -2066,3 +2066,9 @@ spacing	Normal	Normal
 	View Side by Side	Côte à côte
 	Synchronous Scrolling	Défilement synchrone
 	Switch Windows	Changer de fenêtre
+	Screenshot	Capture
+	Screen Clipping	Capture d’écran
+	Select the part of the screen to insert.	Sélectionnez la partie de l’écran à insérer.
+	Screen clipping ended without a picture.	La capture d’écran s’est terminée sans image.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	La capture d’écran n’est pas disponible ici. Copiez une image de l’écran, puis collez-la.
+	Screen clipping didn't work: {reason}	La capture d’écran n’a pas fonctionné : {reason}

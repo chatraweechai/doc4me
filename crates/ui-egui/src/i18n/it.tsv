@@ -2451,3 +2451,9 @@ spacing	Normal	Normale
 	View Side by Side	Affianca
 	Synchronous Scrolling	Scorrimento sincrono
 	Switch Windows	Cambia finestra
+	Screenshot	Screenshot
+	Screen Clipping	Ritaglio schermata
+	Select the part of the screen to insert.	Selezionare la parte dello schermo da inserire.
+	Screen clipping ended without a picture.	Il ritaglio della schermata è terminato senza un’immagine.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Il ritaglio della schermata non è disponibile qui. Copiare un’immagine dello schermo, quindi incollarla.
+	Screen clipping didn't work: {reason}	Il ritaglio della schermata non è riuscito: {reason}

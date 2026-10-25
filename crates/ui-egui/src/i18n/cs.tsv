@@ -2063,3 +2063,9 @@ spacing	Normal	Normální
 	View Side by Side	Zobrazit vedle sebe
 	Synchronous Scrolling	Synchronní posouvání
 	Switch Windows	Přepnout okna
+	Screenshot	Snímek obrazovky
+	Screen Clipping	Výřez obrazovky
+	Select the part of the screen to insert.	Vyberte část obrazovky, kterou chcete vložit.
+	Screen clipping ended without a picture.	Výřez obrazovky skončil bez obrázku.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Výřez obrazovky tu není k dispozici. Zkopírujte obrázek obrazovky a pak ho vložte.
+	Screen clipping didn't work: {reason}	Výřez obrazovky se nezdařil: {reason}

@@ -25,6 +25,13 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("insert.coverPage", "Cover Page", "Insert › Pages", cover_page).params(r#"{"title"?: string, "subtitle"?: string, "author"?: string}"#),
         CommandSpec::new("insert.table", "Table", "Insert › Tables", table).params(r#"{"rows": n, "cols": n, "style"?: string}"#),
         CommandSpec::new("insert.picture", "Pictures", "Insert › Illustrations", picture).params(r#"{"path"?: string, "data"?: base64, "width"?: pt, "alt"?: string}"#),
+        // Screen Clipping: the front end starts the system's screen clipping and inserts the clip
+        // with `insert.picture`, so starting it changes nothing (no undo step, no unsaved change).
+        CommandSpec::new("insert.screenshot", "Screenshot", "Insert › Illustrations", |s, _| {
+            s.ui_requests.push(json!({"open": "screenClipping"}));
+            sel_result(s)
+        })
+        .pure(),
         CommandSpec::new("insert.icon", "Icons", "Insert › Illustrations", icon)
             .params(r#"{"id"?: string (omit to list the library), "color"?: "RRGGBB", "size"?: pt, "query"?: string, "category"?: string}"#),
         CommandSpec::new("insert.shape", "Shapes", "Insert › Illustrations", shape)

@@ -2059,3 +2059,9 @@ spacing	Normal	標準
 	View Side by Side	並排顯示
 	Synchronous Scrolling	同步捲動
 	Switch Windows	切換視窗
+	Screenshot	螢幕擷取畫面
+	Screen Clipping	畫面剪輯
+	Select the part of the screen to insert.	選取要插入的畫面部分。
+	Screen clipping ended without a picture.	畫面剪輯已結束，但沒有圖片。
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	此處無法使用畫面剪輯。請複製畫面圖片，然後貼上。
+	Screen clipping didn't work: {reason}	畫面剪輯失敗：{reason}
