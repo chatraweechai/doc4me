@@ -2091,3 +2091,31 @@ spacing	Normal	標準
 	Couldn't download the picture: {reason}	画像をダウンロードできませんでした: {reason}
 	it isn't a picture Doc4Me can read	Doc4Me で読み取れる画像ではありません
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Openverse の画像です。各画像のライセンスに従ってください。Doc4Me は画像の下にクレジットを追加します。
+	Translator	翻訳ツール
+	From	翻訳元
+	To	翻訳先
+	Select text in the document to translate it.	翻訳するには文書内のテキストを選択してください。
+	The whole document is translated into a new document, which replaces this one. Save your work first.	文書全体が新しい文書に翻訳され、この文書と置き換わります。先に作業内容を保存してください。
+	Translating {done} of {total}	{total} 件中 {done} 件を翻訳しています
+	Couldn't translate: {reason}	翻訳できませんでした: {reason}
+	There's no text to translate.	翻訳するテキストがありません。
+	Translation service	翻訳サービス
+	MyMemory (free, no account)	MyMemory (無料、アカウント不要)
+	5,000 characters a day; give an email address for 50,000.	1 日 5,000 文字。メール アドレスを指定すると 50,000 文字。
+	Email address (optional)	メール アドレス (省略可)
+	LibreTranslate server (open source)	LibreTranslate サーバー (オープンソース)
+	Server address (https://…)	サーバーのアドレス (https://…)
+	API key (if the server needs one)	API キー (サーバーが必要とする場合)
+	the LibreTranslate server	LibreTranslate サーバー
+	The text is sent to {service} to be translated.	テキストは翻訳のために {service} に送信されます。
+	English	英語
+	Vietnamese	ベトナム語
+	Indonesian	インドネシア語
+	Malay	マレー語
+	French	フランス語
+	German	ドイツ語
+	Spanish	スペイン語
+	Hungarian	ハンガリー語
+	Serbian	セルビア語
+	the free daily allowance is used up (try again tomorrow, or give an email address)	1 日の無料枠を使い切りました (明日もう一度試すか、メール アドレスを指定してください)
+	Translate Document	文書の翻訳

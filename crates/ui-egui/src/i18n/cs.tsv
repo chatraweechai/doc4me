@@ -2096,3 +2096,31 @@ spacing	Normal	Normální
 	Couldn't download the picture: {reason}	Obrázek se nepodařilo stáhnout: {reason}
 	it isn't a picture Doc4Me can read	není to obrázek, který Doc4Me umí přečíst
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Obrázky z Openverse. Dodržujte licenci každého obrázku: Doc4Me pod něj přidá řádek s uvedením autora.
+	Translator	Překladač
+	From	Z
+	To	Do
+	Select text in the document to translate it.	Vyberte v dokumentu text, který chcete přeložit.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Celý dokument se přeloží do nového dokumentu, který nahradí tento. Nejdřív svou práci uložte.
+	Translating {done} of {total}	Překládá se {done} z {total}
+	Couldn't translate: {reason}	Nepodařilo se přeložit: {reason}
+	There's no text to translate.	Není tu žádný text k překladu.
+	Translation service	Překladová služba
+	MyMemory (free, no account)	MyMemory (zdarma, bez účtu)
+	5,000 characters a day; give an email address for 50,000.	5 000 znaků denně; s e-mailovou adresou 50 000.
+	Email address (optional)	E-mailová adresa (nepovinné)
+	LibreTranslate server (open source)	Server LibreTranslate (open source)
+	Server address (https://…)	Adresa serveru (https://…)
+	API key (if the server needs one)	Klíč API (pokud ho server vyžaduje)
+	the LibreTranslate server	server LibreTranslate
+	The text is sent to {service} to be translated.	Text se k překladu odešle do služby {service}.
+	English	Angličtina
+	Vietnamese	Vietnamština
+	Indonesian	Indonéština
+	Malay	Malajština
+	French	Francouzština
+	German	Němčina
+	Spanish	Španělština
+	Hungarian	Maďarština
+	Serbian	Srbština
+	the free daily allowance is used up (try again tomorrow, or give an email address)	bezplatný denní limit je vyčerpaný (zkuste to zítra nebo zadejte e-mailovou adresu)
+	Translate Document	Přeložit dokument

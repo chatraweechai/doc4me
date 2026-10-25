@@ -2132,3 +2132,31 @@ spacing	Normal	Normalne
 	Couldn't download the picture: {reason}	Nie można pobrać obrazu: {reason}
 	it isn't a picture Doc4Me can read	to nie jest obraz, który Doc4Me potrafi odczytać
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Obrazy z Openverse. Przestrzegaj licencji każdego obrazu: Doc4Me dodaje pod nim informację o autorze.
+	Translator	Translator
+	From	Z
+	To	Na
+	Select text in the document to translate it.	Zaznacz tekst w dokumencie, aby go przetłumaczyć.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Cały dokument zostanie przetłumaczony na nowy dokument, który zastąpi ten. Najpierw zapisz swoją pracę.
+	Translating {done} of {total}	Tłumaczenie {done} z {total}
+	Couldn't translate: {reason}	Nie można przetłumaczyć: {reason}
+	There's no text to translate.	Brak tekstu do przetłumaczenia.
+	Translation service	Usługa tłumaczenia
+	MyMemory (free, no account)	MyMemory (bezpłatnie, bez konta)
+	5,000 characters a day; give an email address for 50,000.	5000 znaków dziennie; z adresem e-mail 50 000.
+	Email address (optional)	Adres e-mail (opcjonalnie)
+	LibreTranslate server (open source)	Serwer LibreTranslate (open source)
+	Server address (https://…)	Adres serwera (https://…)
+	API key (if the server needs one)	Klucz API (jeśli serwer go wymaga)
+	the LibreTranslate server	serwera LibreTranslate
+	The text is sent to {service} to be translated.	Tekst jest wysyłany do usługi {service} w celu przetłumaczenia.
+	English	Angielski
+	Vietnamese	Wietnamski
+	Indonesian	Indonezyjski
+	Malay	Malajski
+	French	Francuski
+	German	Niemiecki
+	Spanish	Hiszpański
+	Hungarian	Węgierski
+	Serbian	Serbski
+	the free daily allowance is used up (try again tomorrow, or give an email address)	dzienny bezpłatny limit został wyczerpany (spróbuj jutro lub podaj adres e-mail)
+	Translate Document	Przetłumacz dokument

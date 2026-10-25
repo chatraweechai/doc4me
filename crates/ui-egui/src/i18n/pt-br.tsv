@@ -2103,3 +2103,31 @@ spacing	Normal	Normal
 	Couldn't download the picture: {reason}	Não foi possível baixar a imagem: {reason}
 	it isn't a picture Doc4Me can read	não é uma imagem que o Doc4Me consiga ler
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Imagens do Openverse. Respeite a licença de cada imagem: o Doc4Me adiciona uma linha de crédito abaixo dela.
+	Translator	Tradutor
+	From	De
+	To	Para
+	Select text in the document to translate it.	Selecione um texto no documento para traduzi-lo.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	O documento inteiro é traduzido para um novo documento, que substitui este. Salve seu trabalho antes.
+	Translating {done} of {total}	Traduzindo {done} de {total}
+	Couldn't translate: {reason}	Não foi possível traduzir: {reason}
+	There's no text to translate.	Não há texto para traduzir.
+	Translation service	Serviço de tradução
+	MyMemory (free, no account)	MyMemory (gratuito, sem conta)
+	5,000 characters a day; give an email address for 50,000.	5.000 caracteres por dia; com um endereço de email, 50.000.
+	Email address (optional)	Endereço de email (opcional)
+	LibreTranslate server (open source)	Servidor LibreTranslate (código aberto)
+	Server address (https://…)	Endereço do servidor (https://…)
+	API key (if the server needs one)	Chave de API (se o servidor exigir)
+	the LibreTranslate server	o servidor LibreTranslate
+	The text is sent to {service} to be translated.	O texto é enviado para {service} para ser traduzido.
+	English	Inglês
+	Vietnamese	Vietnamita
+	Indonesian	Indonésio
+	Malay	Malaio
+	French	Francês
+	German	Alemão
+	Spanish	Espanhol
+	Hungarian	Húngaro
+	Serbian	Sérvio
+	the free daily allowance is used up (try again tomorrow, or give an email address)	a cota gratuita diária acabou (tente novamente amanhã ou informe um endereço de email)
+	Translate Document	Traduzir Documento

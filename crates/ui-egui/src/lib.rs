@@ -72,6 +72,7 @@ pub mod scroll;
 pub mod table_pen;
 pub mod table_resize;
 pub mod theme;
+pub mod translator;
 pub mod widgets;
 pub mod window_geometry;
 pub mod windows;
@@ -245,6 +246,8 @@ pub struct UiState {
     pub update_fields_before_print: bool,
     /// The custom dictionary (File › Options › Proofing, Add to Dictionary), kept between runs.
     pub dictionary: Vec<String>,
+    /// The Translator pane's service and target language.
+    pub translator: translator::Settings,
 }
 
 /// Most recent documents kept (File › Options › Advanced offers 0–50, as Word does).
@@ -292,6 +295,7 @@ impl Default for UiState {
             print_backgrounds: false,
             update_fields_before_print: false,
             dictionary: Vec::new(),
+            translator: translator::Settings::default(),
         }
     }
 }
@@ -323,6 +327,8 @@ pub struct WordApp {
     pub(crate) screen_clip: Option<screen_clip::Clipping>,
     /// Insert › Online Pictures, while its window is open.
     pub(crate) online_pictures: Option<online_pictures::Browser>,
+    /// The Translator pane (Review › Translate), while it is open.
+    pub(crate) translator: Option<translator::Translator>,
     /// Content control frames, check boxes and lists on the page.
     pub controls: content_controls::ControlUi,
     pub dialog: Option<dialogs::Dialog>,
@@ -451,6 +457,7 @@ impl WordApp {
             windows: windows::Windows::default(),
             screen_clip: None,
             online_pictures: None,
+            translator: None,
             controls: Default::default(),
             dialog: None,
             colors: None,
@@ -881,6 +888,7 @@ impl WordApp {
                 "insertModel3d" => self.pick_model3d(),
                 "screenClipping" => screen_clip::start(self),
                 "onlinePictures" => online_pictures::open(self),
+                "translator" => translator::open(self),
                 "addFont" => self.pick_font(),
                 "print" => {
                     self.ui.backstage = true;
@@ -1336,6 +1344,7 @@ impl WordApp {
         read_aloud::poll(self, ctx);
         screen_clip::poll(self, ctx);
         online_pictures::poll(self, ctx);
+        translator::poll(self, ctx);
         self.clear_stale_change_picture();
         let _ = self.poll_file_dialog();
         self.drain_inbox();
@@ -1487,6 +1496,7 @@ impl WordApp {
         zotero::show_alert(self, &ctx);
         read_aloud::show(self, &ctx);
         online_pictures::show(self, &ctx);
+        translator::show(self, &ctx);
         crate::keytips::show(self, &ctx, ui);
         keys::global_shortcuts(self, &ctx);
         windows::show_others(self, ui);
@@ -1733,7 +1743,7 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
 /// document (`add`) leave it alone.
 fn discards_document(id: &str, params: &Value) -> bool {
     match id {
-        "file.new" | "file.close" | "mailings.labels" => true,
+        "file.new" | "file.close" | "mailings.labels" | "review.translateDocument" => true,
         "mailings.envelopes" => params.get("add").and_then(Value::as_bool) != Some(true),
         "file.open" => params.get("path").is_some(),
         "mailings.finish" => params.get("path").and_then(Value::as_str).is_none(),

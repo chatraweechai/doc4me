@@ -2105,3 +2105,31 @@ spacing	Normal	Нормално
 	Couldn't download the picture: {reason}	Преузимање слике није успело: {reason}
 	it isn't a picture Doc4Me can read	то није слика коју Doc4Me може да прочита
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Слике са Openverse-а. Поштујте лиценцу сваке слике: Doc4Me испод ње додаје ред са навођењем аутора.
+	Translator	Преводилац
+	From	Са
+	To	На
+	Select text in the document to translate it.	Изаберите текст у документу да бисте га превели.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Цео документ се преводи у нови документ који замењује овај. Прво сачувајте рад.
+	Translating {done} of {total}	Превођење {done} од {total}
+	Couldn't translate: {reason}	Превођење није успело: {reason}
+	There's no text to translate.	Нема текста за превођење.
+	Translation service	Услуга превођења
+	MyMemory (free, no account)	MyMemory (бесплатно, без налога)
+	5,000 characters a day; give an email address for 50,000.	5.000 знакова дневно; уз адресу е-поште 50.000.
+	Email address (optional)	Адреса е-поште (опционално)
+	LibreTranslate server (open source)	LibreTranslate сервер (отворени кôд)
+	Server address (https://…)	Адреса сервера (https://…)
+	API key (if the server needs one)	API кључ (ако га сервер захтева)
+	the LibreTranslate server	LibreTranslate сервер
+	The text is sent to {service} to be translated.	Текст се шаље на {service} ради превођења.
+	English	Енглески
+	Vietnamese	Вијетнамски
+	Indonesian	Индонежански
+	Malay	Малајски
+	French	Француски
+	German	Немачки
+	Spanish	Шпански
+	Hungarian	Мађарски
+	Serbian	Српски
+	the free daily allowance is used up (try again tomorrow, or give an email address)	бесплатна дневна квота је потрошена (покушајте сутра или унесите адресу е-поште)
+	Translate Document	Преведи документ

@@ -44,6 +44,7 @@ pub mod table_style;
 pub mod templates;
 pub mod text;
 pub mod tools;
+pub mod translate;
 pub mod view;
 pub mod wordart;
 
@@ -95,6 +96,7 @@ pub fn registry() -> Registry {
     v.extend(tools::specs());
     v.extend(templates::specs());
     v.extend(protect::specs());
+    v.extend(translate::specs());
     v.extend(speech::specs());
     v.extend(controls::specs());
     Registry::new(v)

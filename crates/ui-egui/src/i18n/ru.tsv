@@ -2492,3 +2492,31 @@ spacing	Normal	Обычный
 	Couldn't download the picture: {reason}	Не удалось загрузить изображение: {reason}
 	it isn't a picture Doc4Me can read	это не изображение, которое Doc4Me может прочитать
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Изображения из Openverse. Соблюдайте лицензию каждого изображения: Doc4Me добавляет под ним строку с указанием автора.
+	Translator	Переводчик
+	From	С языка
+	To	На язык
+	Select text in the document to translate it.	Выделите текст в документе, чтобы перевести его.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Весь документ переводится в новый документ, который заменяет этот. Сначала сохраните работу.
+	Translating {done} of {total}	Перевод: {done} из {total}
+	Couldn't translate: {reason}	Не удалось перевести: {reason}
+	There's no text to translate.	Нет текста для перевода.
+	Translation service	Служба перевода
+	MyMemory (free, no account)	MyMemory (бесплатно, без учетной записи)
+	5,000 characters a day; give an email address for 50,000.	5000 символов в день; с адресом электронной почты — 50 000.
+	Email address (optional)	Адрес электронной почты (необязательно)
+	LibreTranslate server (open source)	Сервер LibreTranslate (открытый код)
+	Server address (https://…)	Адрес сервера (https://…)
+	API key (if the server needs one)	Ключ API (если он нужен серверу)
+	the LibreTranslate server	сервер LibreTranslate
+	The text is sent to {service} to be translated.	Текст отправляется в {service} для перевода.
+	English	Английский
+	Vietnamese	Вьетнамский
+	Indonesian	Индонезийский
+	Malay	Малайский
+	French	Французский
+	German	Немецкий
+	Spanish	Испанский
+	Hungarian	Венгерский
+	Serbian	Сербский
+	the free daily allowance is used up (try again tomorrow, or give an email address)	бесплатный дневной лимит исчерпан (попробуйте завтра или укажите адрес электронной почты)
+	Translate Document	Перевести документ

@@ -2103,3 +2103,31 @@ spacing	Normal	标准
 	Couldn't download the picture: {reason}	无法下载图片: {reason}
 	it isn't a picture Doc4Me can read	不是 Doc4Me 能读取的图片
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	图片来自 Openverse。请遵守每张图片的许可协议: Doc4Me 会在图片下方添加署名行。
+	Translator	翻译器
+	From	源语言
+	To	目标语言
+	Select text in the document to translate it.	在文档中选择文本以进行翻译。
+	The whole document is translated into a new document, which replaces this one. Save your work first.	整个文档将被翻译为一个新文档并替换当前文档。请先保存你的工作。
+	Translating {done} of {total}	正在翻译第 {done} 个，共 {total} 个
+	Couldn't translate: {reason}	无法翻译: {reason}
+	There's no text to translate.	没有要翻译的文本。
+	Translation service	翻译服务
+	MyMemory (free, no account)	MyMemory (免费，无需帐户)
+	5,000 characters a day; give an email address for 50,000.	每天 5,000 个字符；提供电子邮件地址可达 50,000 个。
+	Email address (optional)	电子邮件地址 (可选)
+	LibreTranslate server (open source)	LibreTranslate 服务器 (开源)
+	Server address (https://…)	服务器地址 (https://…)
+	API key (if the server needs one)	API 密钥 (如服务器需要)
+	the LibreTranslate server	LibreTranslate 服务器
+	The text is sent to {service} to be translated.	文本将发送到 {service} 进行翻译。
+	English	英语
+	Vietnamese	越南语
+	Indonesian	印度尼西亚语
+	Malay	马来语
+	French	法语
+	German	德语
+	Spanish	西班牙语
+	Hungarian	匈牙利语
+	Serbian	塞尔维亚语
+	the free daily allowance is used up (try again tomorrow, or give an email address)	今天的免费额度已用完 (请明天再试，或提供电子邮件地址)
+	Translate Document	翻译文档

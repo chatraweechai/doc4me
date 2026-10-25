@@ -2125,3 +2125,31 @@ spacing	Normal	Tavaline
 	Couldn't download the picture: {reason}	Pilti ei saanud alla laadida: {reason}
 	it isn't a picture Doc4Me can read	see pole pilt, mida Doc4Me oskab lugeda
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Pildid Openverse'ist. Järgige iga pildi litsentsi: Doc4Me lisab selle alla autorirea.
+	Translator	Tõlkija
+	From	Lähtekeel
+	To	Sihtkeel
+	Select text in the document to translate it.	Tõlkimiseks valige dokumendis tekst.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Kogu dokument tõlgitakse uude dokumenti, mis asendab selle. Salvestage esmalt oma töö.
+	Translating {done} of {total}	Tõlgitakse {done}/{total}
+	Couldn't translate: {reason}	Tõlkida ei saanud: {reason}
+	There's no text to translate.	Pole teksti, mida tõlkida.
+	Translation service	Tõlketeenus
+	MyMemory (free, no account)	MyMemory (tasuta, kontota)
+	5,000 characters a day; give an email address for 50,000.	5000 märki päevas; e-posti aadressiga 50 000.
+	Email address (optional)	E-posti aadress (valikuline)
+	LibreTranslate server (open source)	LibreTranslate'i server (avatud lähtekoodiga)
+	Server address (https://…)	Serveri aadress (https://…)
+	API key (if the server needs one)	API-võti (kui server seda nõuab)
+	the LibreTranslate server	LibreTranslate'i serverisse
+	The text is sent to {service} to be translated.	Tekst saadetakse tõlkimiseks teenusesse {service}.
+	English	Inglise
+	Vietnamese	Vietnami
+	Indonesian	Indoneesia
+	Malay	Malai
+	French	Prantsuse
+	German	Saksa
+	Spanish	Hispaania
+	Hungarian	Ungari
+	Serbian	Serbia
+	the free daily allowance is used up (try again tomorrow, or give an email address)	tasuta päevane piirang on täis (proovige homme uuesti või andke e-posti aadress)
+	Translate Document	Tõlgi dokument

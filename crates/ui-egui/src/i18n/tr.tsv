@@ -2491,3 +2491,31 @@ spacing	Normal	Normal
 	Couldn't download the picture: {reason}	Resim indirilemedi: {reason}
 	it isn't a picture Doc4Me can read	Doc4Me'nin okuyabileceği bir resim değil
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Openverse'ten resimler. Her resmin lisansına uyun: Doc4Me altına bir kaynak satırı ekler.
+	Translator	Çevirmen
+	From	Kaynak
+	To	Hedef
+	Select text in the document to translate it.	Çevirmek için belgede metin seçin.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Belgenin tamamı bunun yerine geçecek yeni bir belgeye çevrilir. Önce çalışmanızı kaydedin.
+	Translating {done} of {total}	{total} öğeden {done} tanesi çevriliyor
+	Couldn't translate: {reason}	Çevrilemedi: {reason}
+	There's no text to translate.	Çevrilecek metin yok.
+	Translation service	Çeviri hizmeti
+	MyMemory (free, no account)	MyMemory (ücretsiz, hesap gerekmez)
+	5,000 characters a day; give an email address for 50,000.	Günde 5.000 karakter; e-posta adresiyle 50.000.
+	Email address (optional)	E-posta adresi (isteğe bağlı)
+	LibreTranslate server (open source)	LibreTranslate sunucusu (açık kaynak)
+	Server address (https://…)	Sunucu adresi (https://…)
+	API key (if the server needs one)	API anahtarı (sunucu gerektiriyorsa)
+	the LibreTranslate server	LibreTranslate sunucusu
+	The text is sent to {service} to be translated.	Metin çevrilmek üzere {service} hizmetine gönderilir.
+	English	İngilizce
+	Vietnamese	Vietnamca
+	Indonesian	Endonezce
+	Malay	Malayca
+	French	Fransızca
+	German	Almanca
+	Spanish	İspanyolca
+	Hungarian	Macarca
+	Serbian	Sırpça
+	the free daily allowance is used up (try again tomorrow, or give an email address)	günlük ücretsiz kota doldu (yarın yeniden deneyin veya bir e-posta adresi girin)
+	Translate Document	Belgeyi Çevir

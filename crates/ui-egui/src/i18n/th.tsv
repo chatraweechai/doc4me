@@ -2513,3 +2513,31 @@ spacing	Normal	ปกติ
 	Couldn't download the picture: {reason}	ดาวน์โหลดรูปภาพไม่ได้: {reason}
 	it isn't a picture Doc4Me can read	ไม่ใช่รูปภาพที่ Doc4Me อ่านได้
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	รูปภาพจาก Openverse โปรดปฏิบัติตามสัญญาอนุญาตของแต่ละรูป Doc4Me จะใส่บรรทัดให้เครดิตไว้ใต้รูป
+	Translator	ตัวแปลภาษา
+	From	จาก
+	To	เป็น
+	Select text in the document to translate it.	เลือกข้อความในเอกสารเพื่อแปล
+	The whole document is translated into a new document, which replaces this one. Save your work first.	เอกสารทั้งฉบับจะถูกแปลเป็นเอกสารใหม่ที่แทนที่ฉบับนี้ โปรดบันทึกงานก่อน
+	Translating {done} of {total}	กำลังแปล {done} จาก {total}
+	Couldn't translate: {reason}	แปลไม่ได้: {reason}
+	There's no text to translate.	ไม่มีข้อความให้แปล
+	Translation service	บริการแปลภาษา
+	MyMemory (free, no account)	MyMemory (ฟรี ไม่ต้องมีบัญชี)
+	5,000 characters a day; give an email address for 50,000.	วันละ 5,000 ตัวอักษร ใส่อีเมลเพื่อเพิ่มเป็น 50,000
+	Email address (optional)	อีเมล (ไม่บังคับ)
+	LibreTranslate server (open source)	เซิร์ฟเวอร์ LibreTranslate (โอเพนซอร์ส)
+	Server address (https://…)	ที่อยู่เซิร์ฟเวอร์ (https://…)
+	API key (if the server needs one)	API key (ถ้าเซิร์ฟเวอร์ต้องการ)
+	the LibreTranslate server	เซิร์ฟเวอร์ LibreTranslate
+	The text is sent to {service} to be translated.	ข้อความจะถูกส่งไปยัง {service} เพื่อแปล
+	English	อังกฤษ
+	Vietnamese	เวียดนาม
+	Indonesian	อินโดนีเซีย
+	Malay	มลายู
+	French	ฝรั่งเศส
+	German	เยอรมัน
+	Spanish	สเปน
+	Hungarian	ฮังการี
+	Serbian	เซอร์เบีย
+	the free daily allowance is used up (try again tomorrow, or give an email address)	ใช้โควตาฟรีของวันนี้หมดแล้ว (ลองใหม่พรุ่งนี้ หรือใส่อีเมล)
+	Translate Document	แปลเอกสาร

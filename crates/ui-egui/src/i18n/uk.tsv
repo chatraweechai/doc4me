@@ -2103,3 +2103,31 @@ spacing	Normal	Звичайний
 	Couldn't download the picture: {reason}	Не вдалося завантажити зображення: {reason}
 	it isn't a picture Doc4Me can read	це не зображення, яке Doc4Me може прочитати
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Зображення з Openverse. Дотримуйтеся ліцензії кожного зображення: Doc4Me додає під ним рядок із зазначенням автора.
+	Translator	Перекладач
+	From	З мови
+	To	На мову
+	Select text in the document to translate it.	Виділіть текст у документі, щоб перекласти його.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Увесь документ перекладається в новий документ, який замінює цей. Спочатку збережіть роботу.
+	Translating {done} of {total}	Переклад: {done} з {total}
+	Couldn't translate: {reason}	Не вдалося перекласти: {reason}
+	There's no text to translate.	Немає тексту для перекладу.
+	Translation service	Служба перекладу
+	MyMemory (free, no account)	MyMemory (безкоштовно, без облікового запису)
+	5,000 characters a day; give an email address for 50,000.	5000 символів на день; з адресою електронної пошти — 50 000.
+	Email address (optional)	Адреса електронної пошти (необов’язково)
+	LibreTranslate server (open source)	Сервер LibreTranslate (відкритий код)
+	Server address (https://…)	Адреса сервера (https://…)
+	API key (if the server needs one)	Ключ API (якщо його потребує сервер)
+	the LibreTranslate server	сервер LibreTranslate
+	The text is sent to {service} to be translated.	Текст надсилається до {service} для перекладу.
+	English	Англійська
+	Vietnamese	В’єтнамська
+	Indonesian	Індонезійська
+	Malay	Малайська
+	French	Французька
+	German	Німецька
+	Spanish	Іспанська
+	Hungarian	Угорська
+	Serbian	Сербська
+	the free daily allowance is used up (try again tomorrow, or give an email address)	безкоштовний денний ліміт вичерпано (спробуйте завтра або вкажіть адресу електронної пошти)
+	Translate Document	Перекласти документ

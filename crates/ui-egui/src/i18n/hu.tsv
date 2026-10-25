@@ -2498,3 +2498,31 @@ spacing	Normal	Normál
 	Couldn't download the picture: {reason}	A képet nem sikerült letölteni: {reason}
 	it isn't a picture Doc4Me can read	ez nem olyan kép, amelyet a Doc4Me be tud olvasni
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Képek az Openverse-ből. Tartsa be minden kép licencét: a Doc4Me forrásmegjelölést ír alá.
+	Translator	Fordító
+	From	Forrásnyelv
+	To	Célnyelv
+	Select text in the document to translate it.	Jelöljön ki szöveget a dokumentumban a fordításhoz.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	A teljes dokumentum lefordítva egy új dokumentumba kerül, amely felváltja ezt. Előbb mentse a munkáját.
+	Translating {done} of {total}	Fordítás: {done}/{total}
+	Couldn't translate: {reason}	A fordítás nem sikerült: {reason}
+	There's no text to translate.	Nincs lefordítandó szöveg.
+	Translation service	Fordítási szolgáltatás
+	MyMemory (free, no account)	MyMemory (ingyenes, fiók nélkül)
+	5,000 characters a day; give an email address for 50,000.	Napi 5000 karakter; e-mail-címmel 50 000.
+	Email address (optional)	E-mail-cím (nem kötelező)
+	LibreTranslate server (open source)	LibreTranslate-kiszolgáló (nyílt forráskódú)
+	Server address (https://…)	Kiszolgáló címe (https://…)
+	API key (if the server needs one)	API-kulcs (ha a kiszolgáló kéri)
+	the LibreTranslate server	a LibreTranslate-kiszolgálónak
+	The text is sent to {service} to be translated.	A szöveget a rendszer elküldi fordításra: {service}.
+	English	Angol
+	Vietnamese	Vietnami
+	Indonesian	Indonéz
+	Malay	Maláj
+	French	Francia
+	German	Német
+	Spanish	Spanyol
+	Hungarian	Magyar
+	Serbian	Szerb
+	the free daily allowance is used up (try again tomorrow, or give an email address)	elfogyott az ingyenes napi keret (próbálja újra holnap, vagy adjon meg e-mail-címet)
+	Translate Document	Dokumentum fordítása

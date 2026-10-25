@@ -2092,3 +2092,31 @@ spacing	Normal	標準
 	Couldn't download the picture: {reason}	無法下載圖片: {reason}
 	it isn't a picture Doc4Me can read	不是 Doc4Me 能讀取的圖片
 	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	圖片來自 Openverse。請遵守每張圖片的授權: Doc4Me 會在圖片下方加入出處說明。
+	Translator	翻譯工具
+	From	來源語言
+	To	目標語言
+	Select text in the document to translate it.	在文件中選取文字以進行翻譯。
+	The whole document is translated into a new document, which replaces this one. Save your work first.	整份文件會翻譯成新文件並取代目前的文件。請先儲存您的工作。
+	Translating {done} of {total}	正在翻譯第 {done} 個，共 {total} 個
+	Couldn't translate: {reason}	無法翻譯: {reason}
+	There's no text to translate.	沒有要翻譯的文字。
+	Translation service	翻譯服務
+	MyMemory (free, no account)	MyMemory (免費，不需帳戶)
+	5,000 characters a day; give an email address for 50,000.	每天 5,000 個字元；提供電子郵件地址可達 50,000 個。
+	Email address (optional)	電子郵件地址 (選用)
+	LibreTranslate server (open source)	LibreTranslate 伺服器 (開放原始碼)
+	Server address (https://…)	伺服器位址 (https://…)
+	API key (if the server needs one)	API 金鑰 (若伺服器需要)
+	the LibreTranslate server	LibreTranslate 伺服器
+	The text is sent to {service} to be translated.	文字會傳送到 {service} 進行翻譯。
+	English	英文
+	Vietnamese	越南文
+	Indonesian	印尼文
+	Malay	馬來文
+	French	法文
+	German	德文
+	Spanish	西班牙文
+	Hungarian	匈牙利文
+	Serbian	塞爾維亞文
+	the free daily allowance is used up (try again tomorrow, or give an email address)	今天的免費額度已用完 (請明天再試，或提供電子郵件地址)
+	Translate Document	翻譯文件
