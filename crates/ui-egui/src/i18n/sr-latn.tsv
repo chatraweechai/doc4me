@@ -2083,3 +2083,8 @@ spacing	Normal	Normalno
 	That isn't the web address or embed code of an online video.	To nije veb adresa ni kôd za ugradnju video zapisa na mreži.
 	3D Models	3D modeli
 	Insert a 3D model from a file (.glb, .stl, .obj)	Umetni 3D model iz datoteke (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	Čitanje naglas nije dostupno u pregledaču
+	Read Aloud couldn't start the speech program: {reason}	Čitanje naglas: pokretanje programa za govor nije uspelo: {reason}
+	Read Aloud couldn't start: {reason}	Čitanje naglas: pokretanje nije uspelo: {reason}
+	Read Aloud stopped: {reason}	Čitanje naglas je zaustavljeno: {reason}
+	no speech program on this system	na ovom sistemu nema programa za govor

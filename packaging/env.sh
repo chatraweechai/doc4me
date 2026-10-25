@@ -54,8 +54,8 @@ copy_docs() {
 }
 
 # Every build embeds the fonts in assets/fonts (Sarabun, Inter, Source Sans 3 / Serif 4,
-# JetBrains Mono), and builds made with craft-fonts (CRAFT_FONTS_DIR, set by the release workflow)
-# embed its fonts too: the package carries their licences as OFL-<family>.txt.
+# JetBrains Mono), and builds made with craft-fonts (CRAFT_FONTS_DIR; the Windows x64 release
+# workflow doesn't set it) embed its fonts too: the package carries their licences as OFL-<family>.txt.
 copy_font_licences() {
   local dest="$1" f
   for f in "$ROOT"/assets/fonts/OFL-*.txt; do

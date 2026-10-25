@@ -2085,3 +2085,8 @@ spacing	Normal	标准
 	That isn't the web address or embed code of an online video.	这不是联机视频的网址或嵌入代码。
 	3D Models	3D 模型
 	Insert a 3D model from a file (.glb, .stl, .obj)	从文件插入 3D 模型(.glb、.stl、.obj)
+	Read Aloud isn't available in the browser	浏览器中无法使用朗读
+	Read Aloud couldn't start the speech program: {reason}	朗读: 无法启动语音程序: {reason}
+	Read Aloud couldn't start: {reason}	朗读: 无法启动: {reason}
+	Read Aloud stopped: {reason}	朗读已停止: {reason}
+	no speech program on this system	此系统上没有语音程序

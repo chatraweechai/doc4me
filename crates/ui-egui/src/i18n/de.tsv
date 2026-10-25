@@ -2072,3 +2072,8 @@ spacing	Normal	Normal
 	That isn't the web address or embed code of an online video.	Das ist keine Webadresse und kein Einbettungscode eines Onlinevideos.
 	3D Models	3D-Modelle
 	Insert a 3D model from a file (.glb, .stl, .obj)	3D-Modell aus einer Datei einfügen (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	Vorlesen ist im Browser nicht verfügbar
+	Read Aloud couldn't start the speech program: {reason}	Vorlesen: Das Sprachprogramm konnte nicht gestartet werden: {reason}
+	Read Aloud couldn't start: {reason}	Vorlesen konnte nicht gestartet werden: {reason}
+	Read Aloud stopped: {reason}	Vorlesen wurde beendet: {reason}
+	no speech program on this system	kein Sprachprogramm auf diesem System

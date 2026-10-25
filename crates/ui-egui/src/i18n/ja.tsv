@@ -2073,3 +2073,8 @@ spacing	Normal	標準
 	That isn't the web address or embed code of an online video.	オンライン ビデオの Web アドレスまたは埋め込みコードではありません。
 	3D Models	3D モデル
 	Insert a 3D model from a file (.glb, .stl, .obj)	ファイルから 3D モデルを挿入します (.glb、.stl、.obj)
+	Read Aloud isn't available in the browser	音声読み上げ はブラウザーでは使用できません
+	Read Aloud couldn't start the speech program: {reason}	音声読み上げ: 音声プログラムを起動できませんでした: {reason}
+	Read Aloud couldn't start: {reason}	音声読み上げ を開始できませんでした: {reason}
+	Read Aloud stopped: {reason}	音声読み上げ が停止しました: {reason}
+	no speech program on this system	このシステムには音声プログラムがありません

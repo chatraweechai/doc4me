@@ -132,6 +132,9 @@ impl Exempt {
         for n in app.windows.numbers() {
             names.extend([format!("{title}:{n}"), format!("{n} {title}:{n}")]);
         }
+        // The words in the user's dictionary (File › Options › Proofing lists them): the user's
+        // own, and process-wide, so another test's words can show up here.
+        names.extend(doc4me_engine::proof::user_dictionary());
         for m in crate::credits::MODELS {
             names.extend([m.company, m.model, m.version].map(str::to_string));
         }
@@ -169,7 +172,6 @@ impl Exempt {
 /// Lists untranslated interface text per UI state. `cargo test -p doc4me-ui-egui
 /// untranslated_interface_text -- --nocapture` prints the report.
 #[test]
-#[ignore = "failed once in ~46 runs under heavy machine load (cause not yet found); run on demand with `cargo test -p doc4me-ui-egui untranslated_interface_text -- --ignored --nocapture`"]
 fn untranslated_interface_text() {
     pseudo::set(true);
     let mut found: BTreeMap<String, Vec<String>> = BTreeMap::new();

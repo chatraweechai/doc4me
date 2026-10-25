@@ -2474,3 +2474,8 @@ spacing	Normal	Обычный
 	That isn't the web address or embed code of an online video.	Это не веб-адрес и не код внедрения видео из Интернета.
 	3D Models	Трехмерные модели
 	Insert a 3D model from a file (.glb, .stl, .obj)	Вставить трехмерную модель из файла (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	Функция «Прочитать вслух» недоступна в браузере
+	Read Aloud couldn't start the speech program: {reason}	Прочитать вслух: не удалось запустить программу речи: {reason}
+	Read Aloud couldn't start: {reason}	Прочитать вслух: не удалось запустить: {reason}
+	Read Aloud stopped: {reason}	Прочитать вслух: остановлено: {reason}
+	no speech program on this system	в системе нет программы речи

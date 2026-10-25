@@ -2078,3 +2078,8 @@ spacing	Normal	Normální
 	That isn't the web address or embed code of an online video.	To není webová adresa ani kód pro vložení online videa.
 	3D Models	3D modely
 	Insert a 3D model from a file (.glb, .stl, .obj)	Vložit 3D model ze souboru (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	Číst nahlas není v prohlížeči k dispozici
+	Read Aloud couldn't start the speech program: {reason}	Číst nahlas: nepodařilo se spustit program pro řeč: {reason}
+	Read Aloud couldn't start: {reason}	Číst nahlas: nepodařilo se spustit: {reason}
+	Read Aloud stopped: {reason}	Číst nahlas se zastavilo: {reason}
+	no speech program on this system	v systému není program pro řeč

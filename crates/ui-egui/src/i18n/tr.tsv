@@ -2473,3 +2473,8 @@ spacing	Normal	Normal
 	That isn't the web address or embed code of an online video.	Bu, çevrimiçi bir videonun web adresi veya ekleme kodu değil.
 	3D Models	3B Modeller
 	Insert a 3D model from a file (.glb, .stl, .obj)	Dosyadan 3B model ekle (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	Sesli Oku tarayıcıda kullanılamıyor
+	Read Aloud couldn't start the speech program: {reason}	Sesli Oku: konuşma programı başlatılamadı: {reason}
+	Read Aloud couldn't start: {reason}	Sesli Oku: başlatılamadı: {reason}
+	Read Aloud stopped: {reason}	Sesli Oku durdu: {reason}
+	no speech program on this system	bu sistemde konuşma programı yok

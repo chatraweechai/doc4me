@@ -2085,3 +2085,8 @@ spacing	Normal	Звичайний
 	That isn't the web address or embed code of an online video.	Це не веб-адреса й не код вбудовування відео з Інтернету.
 	3D Models	Тривимірні моделі
 	Insert a 3D model from a file (.glb, .stl, .obj)	Вставити тривимірну модель із файлу (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	Функція «Читати вголос» недоступна в браузері
+	Read Aloud couldn't start the speech program: {reason}	Читати вголос: не вдалося запустити програму мовлення: {reason}
+	Read Aloud couldn't start: {reason}	Читати вголос: не вдалося запустити: {reason}
+	Read Aloud stopped: {reason}	Читати вголос: зупинено: {reason}
+	no speech program on this system	у системі немає програми мовлення

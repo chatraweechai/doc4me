@@ -2480,3 +2480,8 @@ spacing	Normal	Normál
 	That isn't the web address or embed code of an online video.	Ez nem egy online videó webcíme vagy beágyazási kódja.
 	3D Models	3D-modellek
 	Insert a 3D model from a file (.glb, .stl, .obj)	3D-modell beszúrása fájlból (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	A(z) Felolvasás nem érhető el a böngészőben
+	Read Aloud couldn't start the speech program: {reason}	Felolvasás: nem sikerült elindítani a beszédprogramot: {reason}
+	Read Aloud couldn't start: {reason}	Felolvasás: nem sikerült elindítani: {reason}
+	Read Aloud stopped: {reason}	Felolvasás leállt: {reason}
+	no speech program on this system	nincs beszédprogram a rendszeren

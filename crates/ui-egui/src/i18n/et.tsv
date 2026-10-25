@@ -2107,3 +2107,8 @@ spacing	Normal	Tavaline
 	That isn't the web address or embed code of an online video.	See pole võrguvideo veebiaadress ega manustamiskood.
 	3D Models	3D-mudelid
 	Insert a 3D model from a file (.glb, .stl, .obj)	Lisa 3D-mudel failist (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	Loe ette pole brauseris saadaval
+	Read Aloud couldn't start the speech program: {reason}	Loe ette: kõneprogrammi ei saanud käivitada: {reason}
+	Read Aloud couldn't start: {reason}	Loe ette: ei saanud käivitada: {reason}
+	Read Aloud stopped: {reason}	Loe ette peatus: {reason}
+	no speech program on this system	selles süsteemis pole kõneprogrammi

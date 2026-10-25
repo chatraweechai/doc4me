@@ -2495,3 +2495,8 @@ spacing	Normal	ปกติ
 	That isn't the web address or embed code of an online video.	นี่ไม่ใช่ที่อยู่เว็บหรือโค้ดฝังของวิดีโอออนไลน์
 	3D Models	แบบจำลอง 3 มิติ
 	Insert a 3D model from a file (.glb, .stl, .obj)	แทรกแบบจำลอง 3 มิติจากไฟล์ (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	ใช้อ่านออกเสียงในเบราว์เซอร์ไม่ได้
+	Read Aloud couldn't start the speech program: {reason}	อ่านออกเสียง: เริ่มโปรแกรมเสียงพูดไม่ได้: {reason}
+	Read Aloud couldn't start: {reason}	อ่านออกเสียง: เริ่มไม่ได้: {reason}
+	Read Aloud stopped: {reason}	อ่านออกเสียงหยุดแล้ว: {reason}
+	no speech program on this system	ระบบนี้ไม่มีโปรแกรมเสียงพูด

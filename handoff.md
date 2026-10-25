@@ -1,6 +1,6 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย (งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง)
 
-อัปเดต: 2026-10-24 · สาขา `main` · session 2026-10-24 ยุติแล้ว CI ของ `main` ผ่าน ([run 40108607965](https://github.com/chatraweechai/doc4me/actions/runs/40108607965) ของ `8757e7d`) (ดูหัวข้อแรก: งานที่เสร็จ งานของเจ้าของ repo และงานที่ยังค้าง) · งานค้างเดิมอยู่ที่หัวข้อ "งานที่ต้องทำต่อใน session ใหม่" · รายละเอียดดู [`CHANGELOG.md`](CHANGELOG.md) หัวข้อ `[Unreleased]`, `[1.1.1]` และ `[1.1.0]`
+อัปเดต: 2026-10-25 · สาขา `main` · session 2026-10-25 รอบที่ 5 เสร็จ: parity 492/500 (ที่เหลือ 8 รายการต้องใช้บริการภายนอกหรือการตัดสินใจของเจ้าของ repo) CI ของ `a47ba63` ผ่าน ([run 40157107569](https://github.com/chatraweechai/doc4me/actions/runs/40157107569)) ดูหัวข้อแรก
 
 ## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก, JPG/JPEG และงานค้างจาก handoff
 
@@ -39,10 +39,17 @@
   - View › Window: `view.newWindow` และ `view.split` เดิมเป็น stub ตอนนี้ทำงานจริง และเพิ่ม `view.arrangeAll`, `view.sideBySide`, `view.syncScroll`, `view.switchWindows` (`crates/ui-egui/src/windows.rs`) parity 489/500
   - `cargo audit`: อัปเดต zip 3 → 9.1 (ช่องโหว่ 3 รายการใน `extract` ซึ่งโค้ดไม่เรียก), ctutils, tokio, clipboard-win; เหลือคำเตือน unmaintained 5 รายการ
   - ดิสก์ของ container เคยเต็ม (linker ล้มด้วย Bus error) แก้โดยลบไฟล์ทดสอบขนาดใหญ่ใน `target/debug/deps` และ `target/debug/examples`
+  - Insert › Screenshot › Screen Clipping (`a47ba63`, parity 490): engine `insert.screenshot` (pure) → UI `screen_clip.rs` → host `apps/doc4me/src/screen_clip.rs` (Windows `ms-screenclip:` + `clipboard_win::raw::seq_num`, macOS `screencapture -i -x`, Linux XDG Screenshot portal แล้ว gnome-screenshot/spectacle/xfce4-screenshooter/flameshot) ตรวจ `cargo clippy -p doc4me --target x86_64-pc-windows-msvc` และ `x86_64-apple-darwin` ผ่าน; CI Windows ผ่าน
+  - Insert › Online Video (`4cb88d6`, parity 491): `WebVideo` (`crates/doc/src/video.rs`) ในฟิลด์ใหม่ `InlineObject::Image.video`, .docx `wp15:webVideoPr` ที่ ext uri `{C809E66F-F1BF-436E-B5F7-EEA9579F0CBA}` (ยืนยันจากตัวอย่าง OOXML จริง ไม่ใช่เดา), กล่อง Insert Video, ดับเบิลคลิก/`picture.playVideo` เปิดเบราว์เซอร์, โปสเตอร์วาดเอง
+  - Insert › 3D Models (`4cb88d6` + `46ef579`, parity 492): `crates/engine/src/model3d.rs` อ่าน .glb/.stl/.obj วาดเป็นรูปด้วย z-buffer; หลัง push ตรวจพบและแก้ node glTF ที่วนอ้างตัวเอง + จำกัดงานอ่านรวม (`MAX_WORK`)
+  - parity ที่เหลือ 8 รายการ (ข้ามตามคำสั่ง เพราะต้องใช้บริการภายนอกหรือโมเดล ML ที่เจ้าของ repo ต้องตัดสินใจ): Dictate, Online Pictures, Get Add-ins, Ink Equation, Ink to Math, Translate และรายการของ Review ใน `docs/parity-checklist.md` (Block Authors ฯลฯ)
+  - งานค้างใน handoff ที่ทำแล้ว: wasm check (`rustup target add wasm32-unknown-unknown`; `cargo clippy -p doc4me-web --target wasm32-unknown-unknown -- -D warnings` ผ่านหลังแก้ lint 3 จุด), สาเหตุ audit ภาษาที่ติด `#[ignore]` (ข้อความผิดพลาด Read Aloud ไม่แปลและมาถึงแบบ async; แก้แล้วเอา `#[ignore]` ออก ทดสอบ 24/24 ภายใต้โหลด), เอกสารล้าสมัย (file-format-parity การเข้ารหัส, roadmap M1/M2/M3/M8/M11/M12 + 618 คำสั่ง, package.ps1 อ้าง windows-arm64.yml, env.sh/ATTRIBUTION อ้างว่า release ฝัง craft-fonts — ตรวจไฟล์ workflow ที่ tag v1.1.1 แล้วไม่มี, docs/mcp.md "over 270")
+  - ดิสก์ของ container เต็มซ้ำ 2 ครั้ง: `cargo build --workspace --all-targets` สร้าง dependency ชุดที่สอง (feature ต่างกัน) และ `target/debug/incremental` ใหญ่ ~11 GB — ใช้ `CARGO_INCREMENTAL=0` และ build/test ทีละ package (`-p`) แทน
 - ยังไม่ได้ทำ / ข้อสังเกต
   - ภาพ `hero`, `thai`, `dark`, `dark-th`, `font`, `font-th` ถ่ายใหม่แล้ว ภาพอื่นใน `docs/images` (backstage, design, layout, references, review) ไม่เห็นกลุ่มฟอนต์ของหน้าหลักจึงไม่ได้ถ่ายใหม่
   - ตัวเลข parity และ alpha gate ยังเป็นค่าที่วัดกับ Word for Mac ต้องวัดใหม่บนเครื่อง Windows ที่มี Word (session บนคลาวด์ทำไม่ได้)
-  - ข้อ 3 ที่เหลือ: job ทดสอบบน Linux ใน CI รอเจ้าของ repo ตัดสินใจ, `cargo audit` ยังไม่ได้รัน, audit ภาษาที่ติด `#[ignore]` ยังไม่รู้สาเหตุที่เคยล้ม (รอบนี้ผ่าน)
+  - ข้อ 3 ที่เหลือ: job ทดสอบบน Linux ใน CI รอเจ้าของ repo ตัดสินใจ (`cargo audit` รันแล้วในรอบ 5; audit ภาษาที่ติด `#[ignore]` หาสาเหตุและแก้แล้ว)
+  - **[เจ้าของ repo]** เพิ่มเติมจากรอบ 5: เปิดไฟล์ .docx ที่ Doc4Me บันทึกซึ่งมีวิดีโอออนไลน์ใน Word for Windows เพื่อยืนยันว่า Word เล่นได้; ทดสอบ Screen Clipping บน Windows/macOS/เดสก์ท็อป Linux ด้วยมือ; ตัดสินใจเรื่อง release workflow จะตั้ง `CRAFT_FONTS_DIR` หรือไม่ (ตอนนี้รุ่น Windows ไม่มีฟอนต์ CJK ของ craft-fonts)
   - ข้อ 5.7 ทั้งหมดยังรอเจ้าของ repo
 - CI ของ `main`: run ของ `21bb34a` (40100455417) และ `b65c320` (40100747357) ถูกยกเลิกโดย concurrency เพราะมี push ใหม่ (ไม่ใช่การล้ม); [run 40101348687](https://github.com/chatraweechai/doc4me/actions/runs/40101348687) ของ `0cdf2bb` (คอมมิตโค้ดล่าสุด) **ผ่าน** (ตรวจ 14:26 UTC): job `build` สำเร็จทุกขั้น รวมขั้นใหม่ "Build doc4me + doc4me-cli" (14:11:45–14:22:23) และ "Sign and package MSI + portable zip" (14:22:23–14:23:05) ส่วน job `release` ถูกข้ามตามปกติของ push; คอมมิตหลังจากนั้นแก้แค่เอกสารและภาพ จึงใส่ `[skip ci]` run นี้จึงเป็น build ล่าสุดของโค้ด
 - ผลตรวจในเครื่องรอบสุดท้าย: engine 378 + 13 + 8, cli/mcp/render ผ่าน, ui-egui 324 (`--include-ignored`), clippy `-D warnings` `--all-targets` ของ engine, ui-egui, cli, mcp, render, xtask ผ่าน, `cargo fmt --all --check` ผ่าน, `cargo xtask parity` 485/500; ภาพหน้าจอยืนยันปุ่มแปลงเลขและผลการแปลง

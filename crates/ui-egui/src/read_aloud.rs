@@ -27,7 +27,7 @@ pub fn poll(app: &mut WordApp, ctx: &egui::Context) {
         && app.read_aloud_error.as_deref() != Some(e.as_str())
     {
         app.read_aloud_error = Some(e.clone());
-        app.status(e);
+        app.status(message(&e));
     }
     let current = app.session.read_aloud.current().map(|u| u.start);
     if current != app.read_aloud_at {
@@ -38,6 +38,24 @@ pub fn poll(app: &mut WordApp, ctx: &egui::Context) {
         }
         app.read_aloud_at = current;
     }
+}
+
+/// The status bar's words for a Read Aloud error from the player (`doc4me_engine::speech`), in
+/// the interface's language; the system's own reason stays as the system gave it.
+fn message(e: &str) -> String {
+    if e == "Read Aloud isn't available in the browser" {
+        return tl!("Read Aloud isn't available in the browser").to_string();
+    }
+    let (template, reason) = match (e.strip_prefix("Read Aloud couldn't start the speech program: "), e.strip_prefix("couldn't start Read Aloud: ")) {
+        (Some(reason), _) => (tl!("Read Aloud couldn't start the speech program: {reason}"), reason),
+        (None, Some(reason)) => (tl!("Read Aloud couldn't start: {reason}"), reason),
+        (None, None) => (tl!("Read Aloud stopped: {reason}"), e),
+    };
+    let reason = match reason {
+        "no speech program on this system" => tl!("no speech program on this system"),
+        other => other,
+    };
+    crate::i18n::fmt(template, &[("reason", reason)])
 }
 
 /// The page rectangles (in page units) of the sentence being read, to highlight.
@@ -154,4 +172,19 @@ fn button(ui: &mut Ui, t: &Tokens, icon: &str, tip: &str, enabled: bool) -> bool
     let r = Rect::from_center_size(rect.center(), vec2(20.0, 20.0));
     crate::icons::paint(ui.painter(), r, icon, c, if enabled { t.accent } else { Color32::TRANSPARENT });
     enabled && resp.clicked()
+}
+
+#[cfg(test)]
+mod message_tests {
+    /// The player's errors reach the status bar in the interface's language.
+    #[test]
+    fn read_aloud_errors_are_translated() {
+        crate::i18n::set_current(crate::i18n::Lang::from_code("th").unwrap());
+        let m = super::message("Read Aloud couldn't start the speech program: no speech program on this system");
+        assert_eq!(m, "อ่านออกเสียง: เริ่มโปรแกรมเสียงพูดไม่ได้: ระบบนี้ไม่มีโปรแกรมเสียงพูด");
+        assert_eq!(super::message("couldn't start Read Aloud: out of threads"), "อ่านออกเสียง: เริ่มไม่ได้: out of threads");
+        assert_eq!(super::message("Broken pipe (os error 32)"), "อ่านออกเสียงหยุดแล้ว: Broken pipe (os error 32)");
+        crate::i18n::set_current(crate::i18n::Lang::EN);
+        assert_eq!(super::message("Read Aloud isn't available in the browser"), "Read Aloud isn't available in the browser");
+    }
 }

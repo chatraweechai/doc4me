@@ -423,6 +423,14 @@ impl SaveChoice {
 
 impl WordApp {
     pub fn new(session: Session, services: Services) -> Self {
+        // Tests never start the system's speech program (which would speak on the developer's
+        // machine, and answer at a time the test can't know): the player holds each sentence.
+        #[cfg(test)]
+        let session = {
+            let mut session = session;
+            session.read_aloud.backend = doc4me_engine::speech::Backend::Hold;
+            session
+        };
         // Numeral › System follows the system locale, found here rather than in layout.
         if let Some(tag) = sys_locale::get_locale() {
             doc4me_engine::set_system_locale(&tag);
