@@ -2,6 +2,13 @@
 
 อัปเดต: 2026-10-25 · สาขา `main` · รอบที่ 6 (2026-10-25): parity ของ catalog 499/499 (100%) · เวอร์ชันยังเป็น 1.1.1 (ห้ามออกรุ่นใหม่จนกว่าผู้ใช้สั่ง) · ดูหัวข้อ "session 2026-10-25 รอบที่ 6" ด้านล่าง
 
+## session 2026-10-25 รอบที่ 7: งานค้างใน handoff ข้อ 2–4
+
+- ผู้ใช้สั่ง "ทำต่อ" (ทำงานค้างที่ session ทำได้ ข้ามงานของเจ้าของ repo)
+- ทำแล้ว: เอกสารตรงกับโค้ด (`b303ed9`: ตัวเลข 625 คำสั่ง · 1,816 เทสต์ · ~188,000 บรรทัด, ROADMAP Upcoming, gap #29, README สองภาษา); `cargo audit` ไม่มีช่องโหว่ (คำเตือน unmaintained 5 รายการ)
+- กำลังทำ: `cargo xtask ci` ทั้ง workspace (log ที่ scratchpad `ci.log` ของ session; fmt ผ่านแล้ว) และถ่ายภาพใน `docs/images` ใหม่หลังได้ผล CI (ติดตั้ง `mesa-vulkan-drivers` แล้ว)
+- ถ้า session ล้มกลางทาง: รัน `CARGO_INCREMENTAL=0 cargo xtask ci` ใหม่ แล้วรันสคริปต์ `docs/images/shots/*.jsonl` ด้วย `ui_shot` ตามหัวข้อ "ถ่ายภาพหน้าจอ"
+
 ## session 2026-10-25 รอบที่ 6: parity ที่เหลือ 8 รายการด้วยของฟรี/โอเพนซอร์ส
 
 - ผู้ใช้สั่ง: "ทำส่วน parity ที่เหลือ 8 รายการ โดยเลือกใช้รายการ open-source หรือฟรีเป็นอย่างแรก หากจำเป็นต้องใช้แบบมีค่าใช้จ่ายให้ตัด parity นั้นทิ้งไป และไม่ต้องแจ้งอีก" และ "ไม่ต้องให้ release workflow ตั้ง CRAFT_FONTS_DIR ต่อไปนี้ข้ามฟอนต์ CJK ของ craft-fonts ไม่ต้องแจ้งอีก"
@@ -101,6 +108,8 @@
 
 ### 2. เอกสารที่ล้าสมัยหลังออก 1.1.1 (แก้แค่เอกสาร ทำในคอมมิตเดียวได้)
 
+**สถานะ 2026-10-25 รอบที่ 7: ปิดแล้ว** ตรวจทุกข้อกับโค้ดแล้ว ส่วนใหญ่แก้ในรอบ 5 (2026-10-24) ที่เหลือแก้ใน `b303ed9`: ตัวเลข 625 คำสั่ง · 1,816 เทสต์ · ~188,000 บรรทัด, ROADMAP Upcoming ข้อ 1 (PR ที่เปิดอยู่มีแค่ Dependabot #1–#4), gap #29, README ทั้งสองภาษา รายการข้างล่างเก็บไว้เป็นประวัติ
+
 - `ROADMAP.md` [ตรวจแล้วที่ :25]
   - :25 แถว Releases ยังเป็น v1.1.0, :5 ยังเป็น "Last updated 2026-10-21" และบันทึกความคืบหน้า (:137) ยังไม่มีแถว 2026-10-22
   - ต้องเพิ่มของ 1.1.1: ปุ่มจัดกระจายและจัดกระจายแบบไทย, ระยะห่างตัวอักขระ 0–1584 pt และการออก Release จากแท็บ Actions (`AGENTS.md:65` กำหนดให้อัปเดต gap, เอกสาร parity และบันทึกความคืบหน้า)
@@ -145,6 +154,8 @@
 
 ### 3. CI การตรวจสอบ และ dependency
 
+**สถานะ 2026-10-25 รอบที่ 7**: xtask USAGE และ checksum ของ PngSuite แก้แล้ว (รอบ 5), `.github/dependabot.yml` มีแล้ว (PR #1–#4 รอเจ้าของ repo), `cargo audit` รันซ้ำหลังเพิ่ม whisper-rs/cpal: ไม่มีช่องโหว่ เหลือคำเตือน unmaintained 5 รายการ (`rustybuzz`, `ttf-parser` ผ่าน krilla; `zbus_names`, `zvariant`, `zvariant_derive` ผ่าน zbus/accesskit บน Linux), ผล `cargo xtask ci` ทั้ง workspace ดูหัวข้อรอบที่ 7 ด้านบน; job CI บน ubuntu และการลงนามยังรอเจ้าของ repo
+
 - CI บน GitHub มีแค่ `windows-x64-installer.yml` [ตรวจแล้ว]
   - workflow นี้ build `doc4me` กับ `doc4me-cli` แบบ release, แพ็ก MSI และ zip แล้วรัน `doc4me-cli --version` เท่านั้น
   - ไม่รัน fmt, clippy, เทสต์, assets, layers หรือ wasm และไม่มี trigger `pull_request` "CI ผ่าน" จึงหมายถึงแค่ build installer ผ่าน
@@ -163,6 +174,8 @@
 - `xtask/src/main.rs`: ข้อความ USAGE (:16-30) ไม่มีคำสั่ง `version` และ `corpus --download` โหลด PngSuite ผ่าน `http://` โดยไม่ตรวจ checksum (:202, :226-231)
 
 ### 4. ส่วนที่ยังไม่ได้สำรวจ (agent ล้มก่อนทำ)
+
+**สถานะ 2026-10-25 รอบที่ 7**: เลขเวอร์ชันใน `packaging/` และ `apps/` มาจาก workspace ทั้งหมด (ไม่มีเลขตายตัว); ข้อความ "isn't available/supported" ที่ผู้ใช้เจอได้เป็นข้อจำกัดที่ตั้งใจ (เช่นเว็บ, รหัสผ่านชนิดที่ไม่รองรับ) ไม่ใช่ stub; คีย์แปลที่ขาดมีเทสต์ i18n คุม; ภาพใน `docs/images` ถ่ายใหม่ในรอบที่ 7
 
 - โค้ดและเทสต์
   - stub, `unimplemented!` หรือ `todo!` ที่ผู้ใช้เรียกถึงได้
