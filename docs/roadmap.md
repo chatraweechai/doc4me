@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (path to 80% measured readiness; previously trivial: beta list item 5: Aptos drawn with Intos; previously trivial: Next after beta: ecosystem decisions and the in-app assistant removed; previously trivial: M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (stage B done: readiness measured, 66.1%; previously trivial: path to 80% measured readiness; previously trivial: beta list item 5: Aptos drawn with Intos; previously trivial: Next after beta: ecosystem decisions and the in-app assistant removed; previously trivial: M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -35,7 +35,7 @@ desktop in WordCraft and have not been re-run on Windows yet.
 | Core workflow | Works end to end? | Evidence | Hours to pass |
 |---|---|---|---|
 | Write and format a document: type, fonts, paragraph formatting, styles, lists, undo, find/replace; save as .docx and reopen | yes | 625 commands (2026-10-25), typing parity pinned by `tests_typing.rs`, DOCX round-trip tests (`crates/docx/tests/roundtrip.rs`) | 0 |
-| Open a .docx someone sent, edit it, send back a .docx Word opens | partial (not blocking) | Word opens our files; typical text/table/picture documents work; never tested on a real-world corpus; charts, SmartArt and OLE dropped silently, move tracking lost (gaps #1, #2, #5) | 0 (beta work: 50–80) |
+| Open a .docx someone sent, edit it, send back a .docx Word opens | partial (not blocking) | Word opens our files; typical text/table/picture documents work; on 222 real-world documents all open and 221 keep text and make-up through save and reopen (formatting not compared yet); charts, SmartArt and OLE dropped silently, move tracking lost (gaps #1, #2, #5) | 0 (beta work: 50–80) |
 | Build a structured document: tables, pictures, headers/footers, page numbers, sections, columns | yes | Tables with row splitting and floating tables (#137), floating pictures (#136), first/odd/even headers; columns don't balance (gap #4) | 0 |
 | Review with others: comments, track changes, accept/reject, compare | yes | Margin balloons, tracked insert/delete incl. paragraph marks (#125, #244), formatting revisions (#41), compare | 0 |
 | References for reports and papers: TOC, footnotes, citations and bibliography, captions | yes | Updatable TOC field (#52), notes, APA/MLA/Chicago/IEEE, Zotero (#189); long footnotes don't continue (gap #4) | 0 |
@@ -68,8 +68,9 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 
 ## Path to 80% measured readiness
 
-The readiness number in [`ROADMAP.md`](../ROADMAP.md) (~60%) is an estimate: a weighted sum of
-estimated dimension parities. The target is **80% ready for real work, measured**: every dimension
+The readiness number in [`ROADMAP.md`](../ROADMAP.md) was an estimate (~60%): a weighted sum of
+estimated dimension parities. Since stage B it is measured: **66.1%** (2026-10-25,
+[`readiness.md`](readiness.md)), 13.9 points short of the target. The target is **80% ready for real work, measured**: every dimension
 comes from a fixed pass/fail check set, and one command computes the number. Checks may be added,
 never removed, so the number can't drift by editing the list.
 
@@ -98,7 +99,8 @@ never removed, so the number can't drift by editing the list.
    (catalog completeness per language against Word's 30 interface languages), platforms (build
    and install per platform), hardware and ecosystem rows as pass/fail.
 
-**B. Measure once** and record the first measured number in `ROADMAP.md`.
+**B. Measure once** and record the first measured number in `ROADMAP.md` (done 2026-10-25: 66.1%
+replaces ~60% in `ROADMAP.md`, `target-app-parity.md` and `gaps.md`).
 
 **C. Fix what the checks fail**, highest weight per hour first, until `cargo xtask readiness`
 reports at least 80.0% on the latest commit: real-world DOCX failures (gap #1), pagination
@@ -115,6 +117,7 @@ languages, screen-reader access.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Path to 80%: stage B done, 66.1% measured replaces the ~60% estimate; alpha-gate row for received .docx from the corpus |
 | 2026-10-25 | trivial | Path to 80%: stage A done (measurement and a 222-document corpus); the number goes into `ROADMAP.md` in stage B |
 | 2026-10-25 | trivial | Path to 80% measured readiness: build the measurement (xtask readiness, DOCX corpus with Word-made PDFs, pagination, stability, feature checklist), measure, fix to 80% |
 | 2026-10-25 | trivial | Beta list item 5 no longer waits on an Aptos-metric font (Intos bundled) |

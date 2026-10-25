@@ -1,6 +1,6 @@
 # File-format parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-25 · **Change:** trivial (the encryption row split: encrypted `.docx` opens and saves, encrypted `.doc` is refused, as the code does; previously trivial: independent complex-script formatting inheritance and round-trip regression tests; previously trivial: import/export fixes for TXT, RTF, ODT, HTML and LaTeX, #433–#440; previously major: first version; every format Word reads or writes, measured from the readers and writers on origin/main) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet), plus Word for Windows' extra formats
+> **Last reviewed:** 2026-10-11 · **Last updated:** 2026-10-25 · **Change:** trivial (the dimension note says what the real-world corpus checks; previously trivial: the encryption row split: encrypted `.docx` opens and saves, encrypted `.doc` is refused, as the code does; previously trivial: independent complex-script formatting inheritance and round-trip regression tests; previously trivial: import/export fixes for TXT, RTF, ODT, HTML and LaTeX, #433–#440; previously major: first version; every format Word reads or writes, measured from the readers and writers on origin/main) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet), plus Word for Windows' extra formats
 
 Every format Word opens or saves, what Doc4Me does with it, and how it's tested. Fidelity is the
 share of a typical real-world file's content and formatting that survives (read: shows correctly;
@@ -8,8 +8,9 @@ write: Word opens it showing the same). Summary in [`target-app-parity.md`](targ
 the work items are in [`gaps.md`](gaps.md).
 
 **Dimension: ~60% (estimated), 179–290 h to full** (the sum of the rows below). The weighted table
-gives ~64%; we discount it to ~60% because DOCX fidelity has never been checked on real-world
-files. DOCX dominates the weight: a Word user sends and receives .docx; everything else is
+gives ~64%; we discount it to ~60% because DOCX formatting fidelity hasn't been compared with Word
+on real-world files. What is checked (2026-10-25, `cargo xtask readiness`): all 222 real-world
+documents open, and 221 keep their text and make-up through save and reopen. DOCX dominates the weight: a Word user sends and receives .docx; everything else is
 occasional.
 
 ## Formats
@@ -162,6 +163,7 @@ raise readiness estimates. No Word-derived files are fixtures.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | Dimension note: 222 real-world documents open and 221 keep their text and make-up through save and reopen (`cargo xtask readiness`); formatting still not compared, estimate unchanged |
 | 2026-10-11 | trivial | Independent complex-script size, bold and italic inherit correctly through defaults and styles; explicit equal values survive; six synthetic multi-generation round-trip tests, including tracked formatting, added |
 | 2026-10-11 | minor | Opening files from the system: file associations and the default-app button (#295) |
 | 2026-10-11 | trivial | `.doc`: inline and floating pictures (BLIP store, PNG/JPEG/DIB/TIFF/EMF/WMF), basic shapes, groups and text boxes read from OfficeArt drawings (#551); fidelity ~55% → ~60% |
