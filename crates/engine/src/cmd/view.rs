@@ -79,16 +79,27 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("view.altTextPane", "Alt Text Pane", "Review › Accessibility", |s, v| toggle(s, v, |x| &mut x.alt_text_pane))
             .params(r#"{"value"?: bool}"#)
             .pure(),
-        CommandSpec::new("view.newWindow", "New Window", "View › Window", |s, _| {
-            s.ui_requests.push(json!({"open": "newWindow"}));
-            sel_result(s)
+        // View › Window acts on the app's windows: the commands ask the interface.
+        CommandSpec::new("view.newWindow", "New Window", "View › Window", |s, _| window(s, json!({"window": "new"}))).pure(),
+        CommandSpec::new("view.split", "Split", "View › Window", |s, v| window(s, json!({"window": "split", "value": v.get("value")})))
+            .key("Mod+Alt+S")
+            .params(r#"{"value"?: bool} (omit to toggle)"#)
+            .pure(),
+        CommandSpec::new("view.arrangeAll", "Arrange All", "View › Window", |s, _| window(s, json!({"window": "arrange"}))).pure(),
+        CommandSpec::new("view.sideBySide", "View Side by Side", "View › Window", |s, v| {
+            window(s, json!({"window": "sideBySide", "value": v.get("value")}))
         })
+        .params(r#"{"value"?: bool} (omit to toggle; with one window open, a second one opens to compare with)"#)
         .pure(),
-        CommandSpec::new("view.split", "Split", "View › Window", |s, _| {
-            s.ui_requests.push(json!({"toggle": "split"}));
-            sel_result(s)
+        CommandSpec::new("view.syncScroll", "Synchronous Scrolling", "View › Window", |s, v| {
+            window(s, json!({"window": "syncScroll", "value": v.get("value")}))
         })
-        .key("Mod+Alt+S")
+        .params(r#"{"value"?: bool} (omit to toggle; scrolls the windows shown side by side together)"#)
+        .pure(),
+        CommandSpec::new("view.switchWindows", "Switch Windows", "View › Window", |s, v| {
+            window(s, json!({"window": "switch", "to": v.get("window")}))
+        })
+        .params(r#"{"window": n} (1 is the first window; New Window opens 2, 3…)"#)
         .pure(),
         CommandSpec::new("view.state", "View State", "View", |s, _| serde_json::to_value(&s.view).map_err(|e| CmdError::Failed(e.to_string())))
             .pure(),
@@ -179,4 +190,10 @@ fn zoom(s: &mut Session, v: &Value) -> CmdResult {
         }
     }
     Ok(json!({"zoom": s.view.zoom, "fit": s.view.fit}))
+}
+
+/// A View › Window request for the interface; headless, nothing to show.
+fn window(s: &mut Session, req: Value) -> CmdResult {
+    s.ui_requests.push(req);
+    sel_result(s)
 }

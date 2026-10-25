@@ -1707,6 +1707,21 @@ fn view(app: &mut WordApp, ui: &mut Ui) {
         big(ui, app, "newWindow", "New\nWindow", "view.newWindow", json!({}), false);
         big(ui, app, "arrangeAll", "Arrange\nAll", "view.arrangeAll", json!({}), false);
         big(ui, app, "split", "Split", "view.split", json!({}), false);
+        stack(ui, |ui| {
+            let (side, sync) = (app.windows.side_by_side, app.windows.sync_scroll);
+            small(ui, app, "sideBySide", Some("View Side by Side"), "View Side by Side", "view.sideBySide", json!({}), side);
+            small(ui, app, "syncScroll", Some("Synchronous Scrolling"), "Synchronous Scrolling", "view.syncScroll", json!({}), sync && side);
+            menu_button(ui, app, "switchWindows", Some("Switch Windows"), "Switch Windows", false, "view.switchWindows", |ui, app| {
+                let title = app.title_stem();
+                for n in app.windows.numbers() {
+                    let name = if n == 1 && app.windows.others.is_empty() { title.clone() } else { format!("{n} {title}:{n}") };
+                    if ui.button(name).clicked() {
+                        let _ = app.run("view.switchWindows", json!({"window": n}));
+                        ui.close();
+                    }
+                }
+            });
+        });
     });
     group(ui, "Macros", None, app, |ui, app| {
         big(ui, app, "macros", "Macros", "tools.macros", json!({}), false);

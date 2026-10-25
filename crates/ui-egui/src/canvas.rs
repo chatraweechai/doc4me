@@ -129,6 +129,19 @@ impl CanvasState {
     }
 }
 
+impl CanvasState {
+    /// Scroll to `offset` next frame (Synchronous Scrolling moves the other windows so).
+    pub(crate) fn request_scroll(&mut self, offset: egui::Vec2) {
+        self.scroll_request = Some(offset);
+    }
+
+    /// The scroll waiting for the next frame, if any.
+    #[cfg(test)]
+    pub(crate) fn scroll_request(&self) -> Option<egui::Vec2> {
+        self.scroll_request
+    }
+}
+
 impl Default for CanvasState {
     fn default() -> Self {
         CanvasState {

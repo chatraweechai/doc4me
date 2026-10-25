@@ -126,6 +126,12 @@ impl Exempt {
             names.extend(c.categories.iter().cloned());
             names.extend(c.series.iter().map(|s| s.name.clone()));
         }
+        // The other windows' titles (View › New Window) and their entries in Switch Windows: the
+        // document's name with the window's number.
+        let title = app.title_stem();
+        for n in app.windows.numbers() {
+            names.extend([format!("{title}:{n}"), format!("{n} {title}:{n}")]);
+        }
         for m in crate::credits::MODELS {
             names.extend([m.company, m.model, m.version].map(str::to_string));
         }

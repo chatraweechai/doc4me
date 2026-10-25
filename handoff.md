@@ -34,6 +34,11 @@
   - ตรวจแล้ว: clippy `-D warnings` `--all-targets` (doc, docx, layout, engine, ui-egui, pdf) ผ่าน; เทสต์ engine 383 + 13 + 8, ui-egui 324 (`--include-ignored`), pdf, mcp, cli, docx และ layout ผ่านทั้งหมด; CI run 40108607965 ผ่าน job `release` ข้ามตามปกติ
   - ปุ่มแปลงเลขสลับ `\* Arabic` ↔ `\* ThaiArabic` ในฟิลด์ PAGE/NUMPAGES/SECTIONPAGES/SECTION/SEQ และตัวจัดวางรู้จัก `ThaiArabic`, `ThaiCardText`, `ThaiLetter`
   - เอกสาร parity: เป้าหมาย Word for Windows อธิบายใน `docs/target-app-parity.md`, แถวเครื่องพิมพ์และสแกนเนอร์ใน `docs/hardware-parity.md`, แถว Platforms ตรงกับ Release จริง
+- รอบที่ 5 (2026-10-25, ผู้ใช้สั่ง "ตรวจสอบ parity ที่เหลือ ทำให้เสร็จทั้งหมด และดำเนินการส่วนที่ค้างใน handoff ยกเว้นที่ผู้ใช้ต้องทำเอง")
+  - parity ที่ขาด 15 รายการ แบ่งเป็น ทำได้เอง: View › Window (เสร็จแล้ว), Screenshot, Online Video, 3D Models; ต้องให้เจ้าของ repo ตัดสินใจหรือใช้บริการภายนอก (ข้าม): Dictate (โมเดลเสียง, gap #28), Online Pictures (Bing), Get Add-ins (Office Store, gap #22), Translate (บริการแปล), Ink Equation และ Ink to Math (โมเดลจำลายมือ), Block Authors (co-authoring ของ SharePoint, gap #22)
+  - View › Window: `view.newWindow` และ `view.split` เดิมเป็น stub ตอนนี้ทำงานจริง และเพิ่ม `view.arrangeAll`, `view.sideBySide`, `view.syncScroll`, `view.switchWindows` (`crates/ui-egui/src/windows.rs`) parity 489/500
+  - `cargo audit`: อัปเดต zip 3 → 9.1 (ช่องโหว่ 3 รายการใน `extract` ซึ่งโค้ดไม่เรียก), ctutils, tokio, clipboard-win; เหลือคำเตือน unmaintained 5 รายการ
+  - ดิสก์ของ container เคยเต็ม (linker ล้มด้วย Bus error) แก้โดยลบไฟล์ทดสอบขนาดใหญ่ใน `target/debug/deps` และ `target/debug/examples`
 - ยังไม่ได้ทำ / ข้อสังเกต
   - ภาพ `hero`, `thai`, `dark`, `dark-th`, `font`, `font-th` ถ่ายใหม่แล้ว ภาพอื่นใน `docs/images` (backstage, design, layout, references, review) ไม่เห็นกลุ่มฟอนต์ของหน้าหลักจึงไม่ได้ถ่ายใหม่
   - ตัวเลข parity และ alpha gate ยังเป็นค่าที่วัดกับ Word for Mac ต้องวัดใหม่บนเครื่อง Windows ที่มี Word (session บนคลาวด์ทำไม่ได้)

@@ -71,6 +71,7 @@ pub mod table_resize;
 pub mod theme;
 pub mod widgets;
 pub mod window_geometry;
+pub mod windows;
 pub mod wordart_menus;
 pub mod zotero;
 
@@ -305,6 +306,8 @@ pub struct WordApp {
     pub ui: UiState,
     pub services: Services,
     pub canvas: canvas::CanvasState,
+    /// View › Window: the split pane and the other windows on the document.
+    pub windows: windows::Windows,
     /// Content control frames, check boxes and lists on the page.
     pub controls: content_controls::ControlUi,
     pub dialog: Option<dialogs::Dialog>,
@@ -422,6 +425,7 @@ impl WordApp {
             ui: UiState::default(),
             services,
             canvas: canvas::CanvasState::default(),
+            windows: windows::Windows::default(),
             controls: Default::default(),
             dialog: None,
             colors: None,
@@ -856,6 +860,9 @@ impl WordApp {
         }
         if req.get("close").is_some() {
             self.quit_requested = true;
+        }
+        if req.get("window").is_some() {
+            windows::request(self, req);
         }
     }
 
@@ -1428,7 +1435,7 @@ impl WordApp {
             chrome::status_bar(self, ui);
             panes::show(self, ui);
             egui::CentralPanel::default().frame(egui::Frame::NONE.fill(t.canvas)).show(ui, |ui| {
-                canvas::show(self, ui);
+                windows::document_area(self, ui);
             });
         }
         content_controls::popup(self, &ctx);
@@ -1440,6 +1447,7 @@ impl WordApp {
         read_aloud::show(self, &ctx);
         crate::keytips::show(self, &ctx, ui);
         keys::global_shortcuts(self, &ctx);
+        windows::show_others(self, ui);
         if let Some(url) = self.canvas.open_url.take() {
             ctx.open_url(egui::OpenUrl::new_tab(url));
         }
