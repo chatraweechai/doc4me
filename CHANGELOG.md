@@ -133,6 +133,11 @@
 
 ### เปลี่ยนแปลง
 
+- **`.gitignore` ไม่ละเว้น `/.claude/` แล้ว** (`.gitignore`)
+  - เหตุผล: ผู้ใช้สั่ง (2026-10-25) ให้เอาออก บรรทัดนี้ทำให้ไฟล์ใหม่ใต้ `.claude/` (เช่นการตั้งค่า Claude Code ของโปรเจกต์) ไม่ถูก git เห็น ส่วนบรรทัดอื่น (`/target`, `/craft-fonts/`, `plan/`, `/corpus` ฯลฯ) คงไว้เพราะกันผลการ build และไฟล์ภายนอกไม่ให้ถูก commit
+  - ผลต่อผู้พัฒนา: ไฟล์ส่วนตัวใต้ `.claude/` เช่น `settings.local.json` จะขึ้นเป็นไฟล์ untracked ต้องระวังไม่ให้ commit
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: `git status --short` หลังแก้ไม่มีไฟล์ใหม่โผล่ (ไม่มีโฟลเดอร์ `.claude/` ใน repo); `cargo xtask assets` ผ่าน
 - เอกสารที่ไม่ตรงกับโค้ด (งานค้างใน handoff ข้อ "เอกสารล้าสมัย") ตรวจกับโค้ดแล้วแก้: `docs/file-format-parity.md` แถวการเข้ารหัสเคยบอก ❌ ทั้ง .docx/.doc แต่ `crates/docx/src/crypt.rs` เปิดและบันทึก .docx ที่เข้ารหัส (agile, [MS-OFFCRYPTO]) ได้ จึงแยกเป็นสองแถว (.docx ✅ R/W, .doc ❌ ตรวจพบแล้วปฏิเสธ); `docs/roadmap.md` แถว M1 (chart/SmartArt/OLE อ่านและเขียนกลับแล้ว ไม่ได้ทิ้ง), M2 (Paste Special, Clipboard pane, Style Inspector, Manage Styles, Asian Typography มีคำสั่งแล้ว), M3 และ M8 (ทำแล้วเว้นรายการที่ต้องใช้บริการออนไลน์), M11 (`arrange.group` มีแล้ว), M12 และจำนวนคำสั่งใน alpha gate 609 → 618 (นับด้วย `doc4me-cli commands --json`); `docs/mcp.md` บอก `list_commands` มี "over 270" → over 600 (618); `packaging/windows/package.ps1` อ้าง `.github/workflows/windows-arm64.yml` ที่ไม่มี; `packaging/env.sh` และ `ATTRIBUTION.md` บอกว่า release workflow ตั้ง `CRAFT_FONTS_DIR` / "ทุก release ทางการ" ฝัง craft-fonts แต่ workflow ทั้งปัจจุบันและที่ tag `v1.1.1` ไม่ได้ตั้ง (ตรวจไฟล์ที่ tag ผ่าน GitHub) จึงแก้ให้ตรงว่ารุ่น Windows 1.1.0/1.1.1 ไม่มีฟอนต์ CJK ของ craft-fonts — เปลี่ยนเฉพาะเอกสารและคอมเมนต์ ไม่กระทบโปรแกรม
 - **เอกสาร parity เทียบกับ Word for Windows แทนเมนูและอุปกรณ์ของ Mac** (ผู้ใช้สั่งแก้ข้อจำกัดที่เหลือ)
   - `docs/target-app-parity.md`: หัวข้อ What we measured against บอกว่าเป้าหมายตั้งแต่ 2026-10-24 คือ Word for Windows และอะไรนับตามแบบ Windows (ribbon และ Backstage แทนแถบเมนูของ Mac, Ctrl แทน ⌘, File › Print ใน Backstage แทน `WordPDE.plugin`, PDF Reflow มีเฉพาะ Windows, Continuity Camera มีเฉพาะ Mac) ส่วนค่าที่วัดกับ Word for Mac ยังเป็นค่าตั้งต้นจนกว่าจะวัดใหม่บน Windows; แถว Platforms บอกตามจริงว่า Doc4Me ออก Release เฉพาะ Windows x64 ส่วนสคริปต์ของแพลตฟอร์มอื่นมาจาก WordCraft
@@ -261,6 +266,11 @@
 
 ### ลบ
 
+- **`package-lock.json`** (ไฟล์ที่รากของ repo)
+  - คอมมิต `fc7bab5` (2026-10-21, "Initial commit") เพิ่มไฟล์นี้ 6 บรรทัด เป็น lockfile ของ npm ที่ไม่มี package ใดเลย (`"packages": {}`) และไม่มี `package.json` คู่กัน คอมมิตนั้นไม่มีรายการใน CHANGELOG จึงบันทึกไว้ที่นี่
+  - เหตุผลที่ลบ: Doc4Me ไม่ใช้ npm (ส่วนเว็บ build ด้วย Cargo) ไฟล์จึงไม่มีผลกับอะไร ผู้ใช้สั่งให้ลบ (2026-10-25)
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: `grep` ทั้ง repo ไม่พบไฟล์ใดอ้างถึง `package-lock`; `git show --stat fc7bab5` เพิ่มแค่ไฟล์นี้
 - **ปุ่มและรายการ "ปิดกั้นผู้เขียนอื่น" (Review › Protect › Block Authors)** ออกจากริบบอน KeyTip และ catalog (`crates/engine/src/catalog.rs`, `ribbon.rs`, `keytips.rs`): Word เก็บการล็อกนี้บนช่องข้อมูลของเซิร์ฟเวอร์ co-authoring ของ SharePoint ([MS-WORDLFF] ผ่าน MS-FSSHTTP ไม่ได้อยู่ในไฟล์ .docx) ซึ่งต้องใช้ Microsoft 365 แบบเสียเงิน ผู้ใช้สั่งให้ตัด parity ที่ต้องใช้บริการเสียเงิน; ปุ่มเดิมไม่มีคำสั่ง (กดแล้วไม่มีอะไรเกิด) จึงไม่กระทบผู้ใช้; catalog เหลือ 499 รายการ parity 499/499 (100%)
 
 ### ความปลอดภัย
@@ -273,6 +283,10 @@
   - ผู้ใช้: ไม่มีผลต่อไฟล์ .docx; การเปิดและบันทึก .docx, .odt, .xlsx (ข้อมูลจดหมายเวียน) ใช้ zip รุ่นใหม่
   - ตรวจสอบ: `cargo audit` หลังอัปเดต: ไม่มี vulnerability เหลือคำเตือน 5 รายการข้างต้น; `cargo test -p doc4me-docx -p doc4me-formats -p doc4me-engine` ผ่านทั้งหมด
 
+- **บันทึกย้อนหลัง: คอมมิต `9954ae0` (2026-10-22, "Initial commit") เพิ่ม `.claude/settings.json`** (`.claude/settings.json`)
+  - ไฟล์ 8 บรรทัดนี้อนุญาตให้ Claude Code รัน `git tag -a v*` และ `git push origin v*` โดยไม่ถาม คอมมิตนั้นไม่มีรายการใน CHANGELOG จึงบันทึกไว้ที่นี่ตามที่ผู้ใช้สั่ง (2026-10-25) ไฟล์ถูกลบแล้วใน `e5214c4` (รายการถัดไป)
+  - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: `git show 9954ae0` เพิ่มแค่ไฟล์นี้ มีเฉพาะ `permissions.allow` สองรายการข้างต้น
 - **ถอนสิทธิ์ push tag แบบไม่ถามของ Claude Code** (`.claude/settings.json`)
   - เจ้าของ repo ลบไฟล์นี้ทั้งไฟล์ในคอมมิต `e5214c4` (2026-10-23) ไฟล์มีแค่ `permissions.allow` สองรายการ คือ `Bash(git tag -a v*)` และ `Bash(git push origin v*)` บันทึกในคอมมิตนี้เพราะคอมมิตนั้นไม่มีรายการใน CHANGELOG
   - เหตุผล: การอนุญาตแบบไม่ถามเปิดทางให้ push tag สาธารณะ (ซึ่งสร้าง Release) โดยไม่มีการยืนยัน ทั้งที่ตอนนี้ออกรุ่นผ่าน workflow_dispatch และ session บนคลาวด์ push tag ไม่ได้อยู่แล้ว (handoff ข้อ 5.4)
