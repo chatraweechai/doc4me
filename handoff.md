@@ -20,9 +20,9 @@
 ### รอบที่ 8 ทำแล้ว (รายละเอียดและผลตรวจอยู่ใน `CHANGELOG.md` `[Unreleased]`)
 
 - `f158368` ลบบรรทัด `/.claude/` ใน `.gitignore`, ลบ `package-lock.json`, บันทึกคอมมิต `9954ae0` และ `fc7bab5` ใน CHANGELOG
-- `adb9db9` TH SarabunIT๙: ใช้ Sarabun ขนาดของ Sarabun เอง และหน้าต่าง "ไม่มีฟอนต์นี้ในเครื่อง" ตอนเปิดไฟล์ (`cmd::file::unmatched_fonts`, `font_notice.rs`)
+- `adb9db9` TH SarabunIT๙: ใช้ Sarabun ขนาดของ Sarabun เอง และหน้าต่าง "ไม่มีฟอนต์นี้ในเครื่อง" ตอนเปิดไฟล์ (`cmd::file::unmatched_fonts`, `font_notice.rs`) — CI run 40189539051 ผ่าน
 - `83e1611` ระบบเสริมของ Microsoft และ AI ในโปรแกรมออกจากเป้าหมาย (gap #22, #25) ตัวทดแทน: แมโครของ Doc4Me, แค็ตตาล็อก Add-in ของ Doc4Me, โฟลเดอร์ที่ Nextcloud Desktop/Syncthing ซิงก์
-- คอมมิตถัดไป: ฝัง Intos และ Intos Display (OFL, github.com/muglug/intos) แทน Aptos/Aptos Display — วัดเทียบไฟล์ Aptos จริงแล้วตรงทุกความกว้าง (ตัดบรรทัดตรง 387/387) ตัวอื่นที่ใกล้ที่สุดคือ Lato 35.7%; แผนความพร้อม 80% ใน `docs/roadmap.md`; handoff นี้
+- `062d409` ฝัง Intos และ Intos Display (OFL, github.com/muglug/intos) แทน Aptos/Aptos Display — วัดเทียบไฟล์ Aptos จริงแล้วตรงทุกความกว้าง (ตัดบรรทัดตรง 387/387) ตัวอื่นที่ใกล้ที่สุดคือ Lato 35.7%; แผนความพร้อม 80% ใน `docs/roadmap.md`; handoff นี้
 
 ### งานที่ต้องทำต่อ: ความพร้อมใช้งานจริง 80% แบบวัดได้ (ไม่ใช่ค่าประมาณ)
 
