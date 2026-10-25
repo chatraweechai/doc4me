@@ -2144,3 +2144,10 @@ spacing	Normal	Normální
 	Undo Stroke	Vrátit tah
 	Write math here with the mouse or a pen.	Sem napište matematický výraz myší nebo perem.
 	Recognized (you can correct it):	Rozpoznáno (můžete opravit):
+	Dictation isn't available here.	Diktování tu není k dispozici.
+	Dictation stopped: {reason}	Diktování se zastavilo: {reason}
+	Dictation stopped.	Diktování se zastavilo.
+	Downloading the speech model ({mb} MB, once)…	Stahuje se model řeči ({mb} MB, jen jednou)…
+	Getting ready…	Připravuje se…
+	Listening… speak now	Poslouchám… mluvte
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Řeč se rozpoznává v tomto počítači (whisper.cpp); nic se neodesílá online.

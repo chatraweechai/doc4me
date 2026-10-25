@@ -45,6 +45,7 @@ pub mod dialogs_review;
 pub mod dialogs_ribbon;
 pub mod dialogs_smart_art;
 pub mod dialogs_templates;
+pub mod dictate;
 pub mod equation_tab;
 /// The built-in file browser, for desktops without a system file dialog (#576).
 #[cfg(not(target_arch = "wasm32"))]
@@ -121,6 +122,10 @@ pub struct Services {
     /// model): make `req` and answer on the returned channel, waking the UI. The desktop app uses
     /// the system's `curl`, the web app the browser. See [`net`].
     pub fetch: Option<Box<dyn Fn(net::FetchRequest) -> std::sync::mpsc::Receiver<net::FetchAnswer>>>,
+    /// Desktop: Home › Dictate. Listen to the microphone and recognise speech on the computer
+    /// (whisper.cpp), sending events on the returned channel until the stop switch is set; an
+    /// `Err` says it couldn't start. See [`dictate`].
+    pub dictate: Option<Box<dyn Fn(dictate::DictationRequest) -> Result<dictate::Dictation, String>>>,
     /// Desktop: Insert › Screenshot › Screen Clipping. Start the system's screen clipping and
     /// answer on the returned channel once the user is done (`Ok(None)` when they cancelled),
     /// waking the UI; an `Err` says it couldn't start. See [`screen_clip`].
@@ -335,6 +340,8 @@ pub struct WordApp {
     pub(crate) translator: Option<translator::Translator>,
     /// Get Add-ins, while its window is open.
     pub(crate) addins_store: Option<get_addins::Store>,
+    /// Home › Dictate, while it runs.
+    pub(crate) dictation: Option<dictate::Active>,
     /// Content control frames, check boxes and lists on the page.
     pub controls: content_controls::ControlUi,
     pub dialog: Option<dialogs::Dialog>,
@@ -465,6 +472,7 @@ impl WordApp {
             online_pictures: None,
             translator: None,
             addins_store: None,
+            dictation: None,
             controls: Default::default(),
             dialog: None,
             colors: None,
@@ -880,6 +888,9 @@ impl WordApp {
 
     /// Requests commands make of the UI (open a dialog…).
     fn handle_request(&mut self, req: &Value) {
+        if let Some(what) = req.get("dictate").and_then(Value::as_str) {
+            dictate::request(self, what);
+        }
         // Play Video: the browser, for web addresses only.
         if let Some(url) = req.get("openUrl").and_then(Value::as_str)
             && doc4me_doc::link::is_web_or_mail_link(url)
@@ -1355,6 +1366,7 @@ impl WordApp {
         online_pictures::poll(self, ctx);
         translator::poll(self, ctx);
         get_addins::poll(self, ctx);
+        dictate::poll(self, ctx);
         self.clear_stale_change_picture();
         let _ = self.poll_file_dialog();
         self.drain_inbox();
@@ -1508,6 +1520,7 @@ impl WordApp {
         online_pictures::show(self, &ctx);
         translator::show(self, &ctx);
         get_addins::show(self, &ctx);
+        dictate::show(self, &ctx);
         crate::keytips::show(self, &ctx, ui);
         keys::global_shortcuts(self, &ctx);
         windows::show_others(self, ui);

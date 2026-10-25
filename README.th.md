@@ -54,7 +54,7 @@ Windows SmartScreen จึงอาจถามก่อนเปิด ตั�
 
 ## Build จากซอร์สโค้ด
 
-ติดตั้ง Rust เวอร์ชัน 1.90 ขึ้นไป แล้วรัน
+ติดตั้ง Rust เวอร์ชัน 1.90 ขึ้นไป, CMake และคอมไพเลอร์ C++ (การพูดเป็นข้อความ build whisper.cpp) และบน Linux ต้องมี header ของ ALSA (`libasound2-dev` บน Debian/Ubuntu, `alsa-lib-devel` บน Fedora) แล้วรัน
 
 ```sh
 cargo run --release -p doc4me                 # เปิดโปรแกรม

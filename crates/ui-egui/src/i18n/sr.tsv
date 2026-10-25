@@ -2153,3 +2153,10 @@ spacing	Normal	Нормално
 	Undo Stroke	Опозови потез
 	Write math here with the mouse or a pen.	Овде пишите математику мишем или оловком.
 	Recognized (you can correct it):	Препознато (можете исправити):
+	Dictation isn't available here.	Диктирање овде није доступно.
+	Dictation stopped: {reason}	Диктирање је заустављено: {reason}
+	Dictation stopped.	Диктирање је заустављено.
+	Downloading the speech model ({mb} MB, once)…	Преузимање модела говора ({mb} MB, једном)…
+	Getting ready…	Припрема…
+	Listening… speak now	Слушам… говорите
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Говор се препознаје на овом рачунару (whisper.cpp); ништа се не шаље на мрежу.

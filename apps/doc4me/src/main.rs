@@ -14,6 +14,8 @@ mod animations;
 mod apple_events;
 mod control_server;
 mod default_apps;
+#[cfg(not(target_arch = "wasm32"))]
+mod dictate;
 mod fetch;
 mod file_dialogs;
 #[cfg(any(target_os = "windows", test))]
@@ -189,6 +191,7 @@ fn services(file_dialog: file_dialogs::Hook, ctx: &egui::Context) -> Services {
         clipboard_picture: Some(Box::new(clipboard_picture)),
         screen_clip: screen_clip::hook(ctx),
         fetch: Some(fetch::hook(ctx)),
+        dictate: Some(dictate::hook(ctx)),
         make_default_app: default_apps::hook(),
         animations_enabled: Some(animations::hook(ctx)),
         clipboard_text: Some(Box::new(|| arboard::Clipboard::new().ok()?.get_text().ok())),

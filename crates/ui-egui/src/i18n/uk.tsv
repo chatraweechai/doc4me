@@ -2151,3 +2151,10 @@ spacing	Normal	Звичайний
 	Undo Stroke	Скасувати штрих
 	Write math here with the mouse or a pen.	Напишіть тут формулу мишею або пером.
 	Recognized (you can correct it):	Розпізнано (можна виправити):
+	Dictation isn't available here.	Диктування тут недоступне.
+	Dictation stopped: {reason}	Диктування зупинено: {reason}
+	Dictation stopped.	Диктування зупинено.
+	Downloading the speech model ({mb} MB, once)…	Завантаження мовної моделі ({mb} МБ, один раз)…
+	Getting ready…	Підготовка…
+	Listening… speak now	Слухаю… говоріть
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Мовлення розпізнається на цьому комп’ютері (whisper.cpp); нічого не надсилається в Інтернет.

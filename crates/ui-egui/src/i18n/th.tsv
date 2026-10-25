@@ -2561,3 +2561,10 @@ spacing	Normal	ปกติ
 	Undo Stroke	เลิกทำเส้น
 	Write math here with the mouse or a pen.	เขียนคณิตศาสตร์ที่นี่ด้วยเมาส์หรือปากกา
 	Recognized (you can correct it):	ที่จดจำได้ (แก้ไขได้):
+	Dictation isn't available here.	ใช้การพูดเป็นข้อความที่นี่ไม่ได้
+	Dictation stopped: {reason}	การพูดเป็นข้อความหยุดแล้ว: {reason}
+	Dictation stopped.	การพูดเป็นข้อความหยุดแล้ว
+	Downloading the speech model ({mb} MB, once)…	กำลังดาวน์โหลดโมเดลเสียงพูด ({mb} MB ครั้งเดียว)…
+	Getting ready…	กำลังเตรียม…
+	Listening… speak now	กำลังฟัง… พูดได้เลย
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	เสียงพูดถูกแปลงเป็นข้อความบนเครื่องนี้ (whisper.cpp) ไม่มีการส่งออนไลน์

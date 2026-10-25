@@ -2139,3 +2139,10 @@ spacing	Normal	標準
 	Undo Stroke	ストロークを元に戻す
 	Write math here with the mouse or a pen.	マウスまたはペンでここに数式を書いてください。
 	Recognized (you can correct it):	認識結果 (修正できます):
+	Dictation isn't available here.	ここではディクテーションを使用できません。
+	Dictation stopped: {reason}	ディクテーションが停止しました: {reason}
+	Dictation stopped.	ディクテーションが停止しました。
+	Downloading the speech model ({mb} MB, once)…	音声モデルをダウンロードしています ({mb} MB、初回のみ)…
+	Getting ready…	準備しています…
+	Listening… speak now	聞き取っています… 話してください
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	音声はこのコンピューター上で認識されます (whisper.cpp)。オンラインには何も送信されません。

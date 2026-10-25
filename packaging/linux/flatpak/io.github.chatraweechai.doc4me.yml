@@ -20,6 +20,8 @@ command: doc4me
 finish-args:
   # Display: Wayland first; X11 only when no Wayland compositor is running.
   - --socket=wayland
+  # The microphone for Home › Dictate (cpal's ALSA output goes through PulseAudio/PipeWire).
+  - --socket=pulseaudio
   - --socket=fallback-x11
   # X11 shared memory (MIT-SHM). Without it the X11 fallback is slow or fails.
   - --share=ipc

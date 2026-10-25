@@ -46,7 +46,8 @@ The Font dialog's Advanced page sets "Kerning for fonts" and ligatures, as Word 
 
 ## Build from source
 
-Install Rust 1.90 or newer, then:
+Install Rust 1.90 or newer, CMake and a C++ compiler (Dictate builds whisper.cpp), and on Linux
+the ALSA headers (`libasound2-dev` on Debian and Ubuntu, `alsa-lib-devel` on Fedora), then:
 
 ```sh
 cargo run --release -p doc4me                 # the app

@@ -2546,3 +2546,10 @@ spacing	Normal	Normál
 	Undo Stroke	Vonás visszavonása
 	Write math here with the mouse or a pen.	Írjon ide matematikát egérrel vagy tollal.
 	Recognized (you can correct it):	Felismerve (javíthatja):
+	Dictation isn't available here.	A diktálás itt nem érhető el.
+	Dictation stopped: {reason}	A diktálás leállt: {reason}
+	Dictation stopped.	A diktálás leállt.
+	Downloading the speech model ({mb} MB, once)…	A beszédmodell letöltése ({mb} MB, egyszeri)…
+	Getting ready…	Előkészítés…
+	Listening… speak now	Figyelek… beszéljen
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	A beszédet ez a számítógép ismeri fel (whisper.cpp); semmi sem kerül az internetre.

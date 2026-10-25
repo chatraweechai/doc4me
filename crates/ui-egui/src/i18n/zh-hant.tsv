@@ -2140,3 +2140,10 @@ spacing	Normal	標準
 	Undo Stroke	復原筆劃
 	Write math here with the mouse or a pen.	在此用滑鼠或手寫筆書寫數學式。
 	Recognized (you can correct it):	辨識結果 (可以更正):
+	Dictation isn't available here.	此處無法使用聽寫。
+	Dictation stopped: {reason}	聽寫已停止: {reason}
+	Dictation stopped.	聽寫已停止。
+	Downloading the speech model ({mb} MB, once)…	正在下載語音模型 ({mb} MB，僅一次)…
+	Getting ready…	正在準備…
+	Listening… speak now	正在聆聽… 請說話
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	語音在這台電腦上辨識 (whisper.cpp)；不會在線上傳送任何內容。

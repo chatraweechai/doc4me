@@ -1,2 +1,16 @@
 [alias]
 xtask = "run --package xtask --"
+
+# whisper.cpp (Home › Dictate, through whisper-rs-sys, which passes GGML_* to its CMake build):
+# a build for any x86-64 CPU, not just the build machine's (ggml defaults to -march=native, and a
+# release built on a CI runner would then stop with "illegal instruction" on older processors).
+# SSE 4.2 stays on; AVX and later are left out. The bindings bundled with the crate match its
+# whisper.cpp, so they aren't generated again (no libclang needed).
+[env]
+GGML_NATIVE = "OFF"
+GGML_AVX = "OFF"
+GGML_AVX2 = "OFF"
+GGML_BMI2 = "OFF"
+GGML_FMA = "OFF"
+GGML_F16C = "OFF"
+WHISPER_DONT_GENERATE_BINDINGS = "1"

@@ -81,7 +81,7 @@ fn args(req: &FetchRequest) -> Vec<String> {
     a
 }
 
-fn fetch(req: &FetchRequest) -> FetchAnswer {
+pub(crate) fn fetch(req: &FetchRequest) -> FetchAnswer {
     if !doc4me_ui_egui::net::allowed(&req.url) {
         return Err("only https addresses can be used".into());
     }

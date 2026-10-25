@@ -42,6 +42,9 @@
   <true/>
   <key>NSRequiresAquaSystemAppearance</key>
   <false/>
+  <!-- Home › Dictate listens to the microphone; speech is recognised on the Mac. -->
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Doc4Me listens to the microphone while you dictate. Speech is recognised on this Mac and nothing is sent online.</string>
   <key>NSHumanReadableCopyright</key>
   <string>Copyright © 2026 ArtCraft Team and the WordCraft contributors, and the Doc4Me contributors. MIT OR Apache-2.0.</string>
 

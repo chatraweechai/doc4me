@@ -2173,3 +2173,10 @@ spacing	Normal	Tavaline
 	Undo Stroke	Võta joon tagasi
 	Write math here with the mouse or a pen.	Kirjutage siia hiire või pliiatsiga matemaatikat.
 	Recognized (you can correct it):	Tuvastatud (saate parandada):
+	Dictation isn't available here.	Dikteerimine pole siin saadaval.
+	Dictation stopped: {reason}	Dikteerimine peatus: {reason}
+	Dictation stopped.	Dikteerimine peatus.
+	Downloading the speech model ({mb} MB, once)…	Kõnemudeli allalaadimine ({mb} MB, ühekordselt)…
+	Getting ready…	Valmistumine…
+	Listening… speak now	Kuulan… rääkige
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Kõne tuvastatakse selles arvutis (whisper.cpp); midagi ei saadeta võrku.

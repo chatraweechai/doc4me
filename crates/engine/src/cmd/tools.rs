@@ -316,6 +316,19 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .params(r#"{"name"?: string} (call again to stop)"#)
         .pure(),
+        // Dictation runs in the front end (the microphone, speech recognition on the computer);
+        // the command switches it.
+        CommandSpec::new("tools.dictate", "Dictate", "Home › Voice", |s, v| {
+            let what = match p::bool(v, "value") {
+                Some(true) => "on",
+                Some(false) => "off",
+                None => "toggle",
+            };
+            s.ui_requests.push(json!({"dictate": what}));
+            Ok(json!({"dictate": what}))
+        })
+        .params(r#"{"value"?: bool (on or off; omit to switch)}"#)
+        .pure(),
         CommandSpec::new("tools.macros", "Macros", "View › Macros", macros)
             .params(r#"{"run"?: name, "define"?: {"name": string, "steps": [{"command", "params"}]}, "delete"?: name}"#)
             .pure(),

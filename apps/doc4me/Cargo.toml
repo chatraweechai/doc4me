@@ -69,6 +69,14 @@ pollster = "0.4"
 arboard = { workspace = true, features = ["image-data"] }
 # The control server's random key.
 getrandom = "0.3"
+# Home › Dictate: speech recognition on this computer with whisper.cpp (MIT; the bindings are
+# Unlicense), no online service. The speech model is downloaded once, from Hugging Face, and
+# checked by SHA-256 (`dictate`). Builds whisper.cpp from source (needs CMake and a C++ compiler).
+whisper-rs = { version = "=0.16.0", default-features = false, features = ["log_backend"] }
+# The microphone for Dictate (WASAPI, Core Audio, ALSA; Linux builds need the ALSA headers).
+cpal = "0.18"
+# The speech model's SHA-256 is checked after the download (already in the build through docx).
+sha2 = { workspace = true }
 # File › Print opens the PDF in the system's default viewer (`xdg-open`/`gio` on Linux and BSD, the
 # file association on Windows, `open` on macOS) without blocking; already in the tree via egui_kittest.
 open = "5.4"

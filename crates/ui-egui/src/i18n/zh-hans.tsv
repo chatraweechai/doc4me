@@ -2151,3 +2151,10 @@ spacing	Normal	标准
 	Undo Stroke	撤消笔划
 	Write math here with the mouse or a pen.	在此用鼠标或笔书写数学公式。
 	Recognized (you can correct it):	识别结果 (可以更正):
+	Dictation isn't available here.	此处无法使用听写。
+	Dictation stopped: {reason}	听写已停止: {reason}
+	Dictation stopped.	听写已停止。
+	Downloading the speech model ({mb} MB, once)…	正在下载语音模型 ({mb} MB，仅一次)…
+	Getting ready…	正在准备…
+	Listening… speak now	正在聆听… 请说话
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	语音在这台计算机上识别 (whisper.cpp)；不会在线发送任何内容。

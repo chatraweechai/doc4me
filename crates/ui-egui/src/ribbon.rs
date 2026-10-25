@@ -756,7 +756,8 @@ fn home(app: &mut WordApp, ui: &mut Ui) {
         });
     });
     group(ui, "Voice", None, app, |ui, app| {
-        big(ui, app, "dictate", "Dictate", "tools.dictate", json!({}), false);
+        let on = app.dictation.is_some();
+        big_toggle(ui, app, "dictate", "Dictate", "tools.dictate", on);
     });
     group(ui, "Editor", None, app, |ui, app| {
         big(ui, app, "editor", "Editor", "review.spelling", json!({}), false);

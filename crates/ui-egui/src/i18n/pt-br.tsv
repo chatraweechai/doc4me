@@ -2151,3 +2151,10 @@ spacing	Normal	Normal
 	Undo Stroke	Desfazer Traço
 	Write math here with the mouse or a pen.	Escreva matemática aqui com o mouse ou uma caneta.
 	Recognized (you can correct it):	Reconhecido (você pode corrigir):
+	Dictation isn't available here.	O ditado não está disponível aqui.
+	Dictation stopped: {reason}	O ditado parou: {reason}
+	Dictation stopped.	O ditado parou.
+	Downloading the speech model ({mb} MB, once)…	Baixando o modelo de fala ({mb} MB, uma vez)…
+	Getting ready…	Preparando…
+	Listening… speak now	Ouvindo… fale agora
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	A fala é reconhecida neste computador (whisper.cpp); nada é enviado online.

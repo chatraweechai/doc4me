@@ -2539,3 +2539,10 @@ spacing	Normal	Normal
 	Undo Stroke	Vuruşu Geri Al
 	Write math here with the mouse or a pen.	Buraya fare veya kalemle matematik yazın.
 	Recognized (you can correct it):	Tanınan (düzeltebilirsiniz):
+	Dictation isn't available here.	Dikte burada kullanılamıyor.
+	Dictation stopped: {reason}	Dikte durdu: {reason}
+	Dictation stopped.	Dikte durdu.
+	Downloading the speech model ({mb} MB, once)…	Konuşma modeli indiriliyor ({mb} MB, bir kez)…
+	Getting ready…	Hazırlanıyor…
+	Listening… speak now	Dinleniyor… şimdi konuşun
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Konuşma bu bilgisayarda tanınır (whisper.cpp); çevrimiçi hiçbir şey gönderilmez.

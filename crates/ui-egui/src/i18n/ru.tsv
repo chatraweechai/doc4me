@@ -2540,3 +2540,10 @@ spacing	Normal	Обычный
 	Undo Stroke	Отменить штрих
 	Write math here with the mouse or a pen.	Напишите здесь формулу мышью или пером.
 	Recognized (you can correct it):	Распознано (можно исправить):
+	Dictation isn't available here.	Диктовка здесь недоступна.
+	Dictation stopped: {reason}	Диктовка остановлена: {reason}
+	Dictation stopped.	Диктовка остановлена.
+	Downloading the speech model ({mb} MB, once)…	Загрузка речевой модели ({mb} МБ, один раз)…
+	Getting ready…	Подготовка…
+	Listening… speak now	Слушаю… говорите
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Речь распознается на этом компьютере (whisper.cpp); ничего не отправляется в Интернет.
