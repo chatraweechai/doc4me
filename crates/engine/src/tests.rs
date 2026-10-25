@@ -4664,3 +4664,28 @@ fn handwritten_math_becomes_an_equation() {
     });
     assert_eq!((ink, equations), (0, 1), "the strokes became the equation");
 }
+
+/// TH SarabunIT๙ isn't installed here and Doc4Me has no metrics for it: a document set in it opens
+/// drawn with Sarabun at its own size, and the user is told which font is missing (each once).
+#[cfg(not(target_arch = "wasm32"))]
+#[test]
+fn opening_a_document_in_an_unmatched_font_tells_the_user() {
+    let dir = scratch_dir("unmatched-font");
+    let path = dir.join("it9.docx");
+    let mut s = Session::new(doc4me_doc::Document::from_text("ราชการ 123\nข้อ ๒"));
+    s.run("select.all", &json!({})).unwrap();
+    s.run("format.font", &json!({"name": "TH SarabunIT๙"})).unwrap();
+    s.run("file.saveAs", &json!({"path": path.to_string_lossy()})).unwrap();
+    assert_eq!(crate::cmd::file::unmatched_fonts(&s.doc), vec!["TH SarabunIT๙".to_string()]);
+    let mut s = Session::new(doc4me_doc::Document::new());
+    s.ui_requests.clear();
+    let r = s.run("file.open", &json!({"path": path.to_string_lossy()})).unwrap();
+    assert_eq!(r["substitutedFonts"], json!(["TH SarabunIT๙"]));
+    assert!(s.ui_requests.iter().any(|q| q["fontsSubstituted"] == json!(["TH SarabunIT๙"]) && q["with"] == "Sarabun"), "{:?}", s.ui_requests);
+    // Fonts with metrics (TH Sarabun New) or installed ones aren't reported.
+    let mut s = Session::new(doc4me_doc::Document::from_text("ราชการ"));
+    s.run("select.all", &json!({})).unwrap();
+    s.run("format.font", &json!({"name": "TH Sarabun New"})).unwrap();
+    assert!(crate::cmd::file::unmatched_fonts(&s.doc).is_empty());
+    let _ = std::fs::remove_dir_all(&dir);
+}

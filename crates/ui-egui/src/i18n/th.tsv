@@ -2568,3 +2568,5 @@ spacing	Normal	ปกติ
 	Getting ready…	กำลังเตรียม…
 	Listening… speak now	กำลังฟัง… พูดได้เลย
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	เสียงพูดถูกแปลงเป็นข้อความบนเครื่องนี้ (whisper.cpp) ไม่มีการส่งออนไลน์
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	เครื่องนี้ไม่มีฟอนต์ {fonts} จึงแสดงเอกสารนี้ด้วยฟอนต์ {with} แทน การขึ้นบรรทัดใหม่และการแบ่งหน้าอาจต่างจากฟอนต์ต้นฉบับ
+	Font not installed	ไม่มีฟอนต์นี้ในเครื่อง

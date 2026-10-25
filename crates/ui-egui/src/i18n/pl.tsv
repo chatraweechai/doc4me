@@ -2187,3 +2187,5 @@ spacing	Normal	Normalne
 	Getting ready…	Przygotowywanie…
 	Listening… speak now	Słucham… mów teraz
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Mowa jest rozpoznawana na tym komputerze (whisper.cpp); nic nie jest wysyłane do sieci.
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Czcionka {fonts} nie jest zainstalowana na tym komputerze, więc dokument jest wyświetlany czcionką {with}. Wiersze i strony mogą łamać się inaczej niż z oryginalną czcionką.
+	Font not installed	Czcionka nie jest zainstalowana

@@ -2147,3 +2147,5 @@ spacing	Normal	標準
 	Getting ready…	正在準備…
 	Listening… speak now	正在聆聽… 請說話
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	語音在這台電腦上辨識 (whisper.cpp)；不會在線上傳送任何內容。
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	此電腦未安裝 {fonts}，因此本文件以 {with} 顯示。換行和分頁可能與原字型不同。
+	Font not installed	未安裝字型

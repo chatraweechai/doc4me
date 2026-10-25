@@ -1393,7 +1393,7 @@ pub(crate) fn text_glyphs(doc: &Document, r: Rect, it: &GraphicItem, alpha: f32,
     let mut pieces = Vec::new();
     for (run, th) in runs {
         let run_size = size * fit.map_or(1.0, |f| f.scale(th));
-        let shaped = doc4me_fonts::shape(face, run, &[], |c| fit.map_or(c, |f| f.shown(c)));
+        let shaped = doc4me_fonts::shape(face, run, &[], |c| c);
         if shaped.is_empty() {
             continue;
         }
@@ -1413,7 +1413,7 @@ pub(crate) fn text_glyphs(doc: &Document, r: Rect, it: &GraphicItem, alpha: f32,
                 gi += 1;
             }
             if let Some(f) = fit
-                && let Some(w) = run.get(gs..ge).unwrap_or("").chars().map(|c| f.advance(f.shown(c))).sum::<Option<f32>>()
+                && let Some(w) = run.get(gs..ge).unwrap_or("").chars().map(|c| f.advance(c)).sum::<Option<f32>>()
             {
                 let w = w * size;
                 let shift = (w - adv) / 2.0;

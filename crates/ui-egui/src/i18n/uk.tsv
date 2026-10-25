@@ -2158,3 +2158,5 @@ spacing	Normal	Звичайний
 	Getting ready…	Підготовка…
 	Listening… speak now	Слухаю… говоріть
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Мовлення розпізнається на цьому комп’ютері (whisper.cpp); нічого не надсилається в Інтернет.
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Шрифт {fonts} не встановлено на цьому комп’ютері, тому документ показано шрифтом {with}. Рядки й сторінки можуть розбиватися інакше, ніж з оригінальним шрифтом.
+	Font not installed	Шрифт не встановлено

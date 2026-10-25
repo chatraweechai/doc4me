@@ -2180,3 +2180,5 @@ spacing	Normal	Tavaline
 	Getting ready…	Valmistumine…
 	Listening… speak now	Kuulan… rääkige
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Kõne tuvastatakse selles arvutis (whisper.cpp); midagi ei saadeta võrku.
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} pole selles arvutis installitud, seepärast kuvatakse dokumenti fondiga {with}. Read ja leheküljed võivad murduda teisiti kui algse fondiga.
+	Font not installed	Font pole installitud

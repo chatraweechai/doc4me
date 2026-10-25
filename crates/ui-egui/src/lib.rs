@@ -51,6 +51,7 @@ pub mod equation_tab;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod file_browser;
 pub mod file_dialogs;
+mod font_notice;
 pub mod frame;
 pub mod get_addins;
 pub mod i18n;
@@ -342,6 +343,8 @@ pub struct WordApp {
     pub(crate) addins_store: Option<get_addins::Store>,
     /// Home › Dictate, while it runs.
     pub(crate) dictation: Option<dictate::Active>,
+    /// The notice that an opened document's font isn't installed and is drawn with Sarabun.
+    pub(crate) font_notice: Option<String>,
     /// Content control frames, check boxes and lists on the page.
     pub controls: content_controls::ControlUi,
     pub dialog: Option<dialogs::Dialog>,
@@ -473,6 +476,7 @@ impl WordApp {
             translator: None,
             addins_store: None,
             dictation: None,
+            font_notice: None,
             controls: Default::default(),
             dialog: None,
             colors: None,
@@ -891,6 +895,7 @@ impl WordApp {
         if let Some(what) = req.get("dictate").and_then(Value::as_str) {
             dictate::request(self, what);
         }
+        font_notice::request(self, req);
         // Play Video: the browser, for web addresses only.
         if let Some(url) = req.get("openUrl").and_then(Value::as_str)
             && doc4me_doc::link::is_web_or_mail_link(url)
@@ -1521,6 +1526,7 @@ impl WordApp {
         translator::show(self, &ctx);
         get_addins::show(self, &ctx);
         dictate::show(self, &ctx);
+        font_notice::show(self, &ctx);
         crate::keytips::show(self, &ctx, ui);
         keys::global_shortcuts(self, &ctx);
         windows::show_others(self, ui);

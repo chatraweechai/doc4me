@@ -2156,3 +2156,5 @@ spacing	Normal	Normalno
 	Getting ready…	Priprema…
 	Listening… speak now	Slušam… govorite
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Govor se prepoznaje na ovom računaru (whisper.cpp); ništa se ne šalje na mrežu.
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Font {fonts} nije instaliran na ovom računaru, pa je dokument prikazan fontom {with}. Redovi i stranice mogu se prelamati drugačije nego sa originalnim fontom.
+	Font not installed	Font nije instaliran

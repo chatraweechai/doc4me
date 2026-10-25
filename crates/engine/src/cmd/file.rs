@@ -163,7 +163,58 @@ fn open(s: &mut Session, v: &Value) -> CmdResult {
     if encrypted {
         s.password = password.map(crate::io::Password::new);
     }
-    Ok(json!({"path": path, "paragraphs": s.doc.paragraph_count(), "words": s.doc.word_count(), "encrypted": encrypted}))
+    let substituted = unmatched_fonts(&s.doc);
+    if !substituted.is_empty() {
+        s.ui_requests.push(json!({"fontsSubstituted": substituted, "with": "Sarabun"}));
+    }
+    Ok(json!({
+        "path": path,
+        "paragraphs": s.doc.paragraph_count(),
+        "words": s.doc.word_count(),
+        "encrypted": encrypted,
+        "substitutedFonts": substituted,
+    }))
+}
+
+/// Fonts Doc4Me has no metrics for that a document may use; when one isn't installed the bundled
+/// Sarabun draws it at its own size, so lines and pages can break differently, and the user is
+/// told when the document opens. Compared without spaces or case.
+const UNMATCHED_FONTS: &[&str] = &["thsarabunit๙", "thsarabunit9"];
+
+/// The [`UNMATCHED_FONTS`] the document uses (in its styles or its text) that aren't installed,
+/// each once, spelled as the document first spells it.
+pub fn unmatched_fonts(doc: &Document) -> Vec<String> {
+    let mut found: Vec<String> = Vec::new();
+    let mut note = |name: &Option<String>| {
+        let Some(name) = name.as_deref() else { return };
+        let key: String = name.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).collect();
+        if UNMATCHED_FONTS.contains(&key.as_str())
+            && !found.iter().any(|f| f.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).eq(key.chars()))
+            && doc4me_fonts::word::resolve(name, false, false).substituted
+        {
+            found.push(name.trim().to_string());
+        }
+    };
+    let mut chr = |c: &doc4me_doc::props::CharProps| {
+        note(&c.font);
+        note(&c.font_cs);
+        note(&c.font_ea);
+    };
+    chr(&doc.styles.default_chr);
+    for st in &doc.styles.styles {
+        chr(&st.chr);
+    }
+    let stories = std::iter::once(StoryRef::Body).chain(doc.parts.keys().map(|id| StoryRef::Part(*id)));
+    for story in stories {
+        for path in doc.para_paths(story) {
+            if let Some(para) = doc.para(story, &path) {
+                for run in &para.runs {
+                    chr(&run.props);
+                }
+            }
+        }
+    }
+    found
 }
 
 /// File › Info › Protect Document › Encrypt with Password: the password Word documents are saved

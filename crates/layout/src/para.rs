@@ -804,10 +804,7 @@ impl<'a> Builder<'a> {
             }
             let shape_text = if substituted { mapped.as_str() } else { sub };
             let fit = st.fit;
-            let map = |c: char| {
-                let c = if upper { c.to_uppercase().next().unwrap_or(c) } else { c };
-                fit.map_or(c, |f| f.shown(c))
-            };
+            let map = |c: char| if upper { c.to_uppercase().next().unwrap_or(c) } else { c };
             let features = run_features(rc, fit.is_some(), key.complex);
             let shaped = if use_levels {
                 doc4me_fonts::shape_run(&st.face, shape_text, &features, map, key.rtl)

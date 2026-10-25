@@ -2151,3 +2151,5 @@ spacing	Normal	Normální
 	Getting ready…	Připravuje se…
 	Listening… speak now	Poslouchám… mluvte
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Řeč se rozpoznává v tomto počítači (whisper.cpp); nic se neodesílá online.
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} není v tomto počítači nainstalováno, proto se dokument zobrazuje písmem {with}. Řádky a stránky se mohou zalomit jinak než s původním písmem.
+	Font not installed	Písmo není nainstalováno

@@ -248,12 +248,12 @@ fn sarabun_lines_are_spaced_like_word_for_windows() {
     assert!((pl.lines[0].height - 16.0 * 1.853).abs() < 0.01, "{}", pl.lines[0].height);
 }
 
-/// TH Sarabun New, TH SarabunPSK and TH SarabunIT๙ (not installed here) are drawn with the
-/// bundled Sarabun at their own letter height, on their own widths and line spacing, so a page
-/// holds the same text as with the real font.
+/// TH Sarabun New and TH SarabunPSK (not installed here) are drawn with the bundled Sarabun at
+/// their own letter height, on their own widths and line spacing, so a page holds the same text as
+/// with the real font.
 #[test]
 fn th_sarabun_new_keeps_its_size_widths_and_line_spacing_when_drawn_with_sarabun() {
-    for font in ["TH Sarabun New", "TH SarabunPSK", "TH SarabunIT๙"] {
+    for font in ["TH Sarabun New", "TH SarabunPSK"] {
         let l = lay(&doc_in(font, 16.0, "กขค ABC", |_| {}));
         let pl = para_layout(&l, 0);
         // hhea 844/-457 with a 30 gap, usWin 844/457: 1.331 em.
@@ -279,13 +279,13 @@ fn th_sarabun_new_keeps_its_size_widths_and_line_spacing_when_drawn_with_sarabun
             }
         }
     }
-    // TH SarabunIT๙ shows ASCII digits as Thai digits, on the Thai digits' width; the text keeps
-    // its digits.
+    // TH SarabunIT๙ has no metrics here: Sarabun draws it at its own size, digits as they are.
     let l = lay(&doc_in("TH SarabunIT๙", 16.0, "12", |_| {}));
     let pl = para_layout(&l, 0);
-    let face = &pl.styles[pl.clusters[0].style as usize].face;
-    assert_eq!(pl.glyphs[0].gid, face.glyph_for('๑'));
-    assert!((pl.clusters[0].adv - 0.449 * 16.0).abs() < 0.001);
+    let st = &pl.styles[pl.clusters[0].style as usize];
+    assert_eq!(st.face.family, "Sarabun");
+    assert!(st.fit.is_none() && st.glyph_scale == 1.0);
+    assert_eq!(pl.glyphs[0].gid, st.face.glyph_for('1'));
     let l = lay(&doc_in("TH Sarabun New", 16.0, "12", |_| {}));
     let pl = para_layout(&l, 0);
     assert!((pl.clusters[0].adv - 0.362 * 16.0).abs() < 0.001);

@@ -93,7 +93,7 @@ fn substitutes(family: &str) -> &'static [&'static str] {
 
 /// Thai document fonts that the bundled Sarabun stands in for when they aren't installed. `f` is
 /// lowercase. The Thai national fonts are named "TH …" (TH Sarabun New, TH SarabunPSK,
-/// TH SarabunIT๙, TH Niramit AS …); the Windows Thai families end in "UPC" or "New".
+/// TH Niramit AS …); the Windows Thai families end in "UPC" or "New".
 fn is_thai_document_font(f: &str) -> bool {
     const NAMES: &[&str] = &[
         "sarabun",
@@ -393,27 +393,24 @@ pub fn single_line(family: &str, face: &crate::FontFace, substituted: bool, size
 
 /// How a substitute stands in for a font a document asks for, so its text keeps that font's size,
 /// widths and line spacing and pages hold what they hold in Word with the real font: TH Sarabun
-/// New, TH SarabunPSK and TH SarabunIT๙, drawn with the bundled Sarabun when they are not
-/// installed. Sarabun's letters are about 1.47 times as tall as theirs at the same point size, and
+/// New and TH SarabunPSK, drawn with the bundled Sarabun when they are not installed. Sarabun's letters are about 1.47 times as tall as theirs at the same point size, and
 /// its widths differ letter by letter, so its glyphs are scaled to their height
 /// ([`MetricFit::scale`]) and set on their advance widths ([`MetricFit::advance`], with their
 /// kerning, [`MetricFit::kern`]); lines take their line spacing ([`MetricFit::line`]).
 #[derive(Clone, Copy)]
 pub struct MetricFit {
     style: &'static crate::thsarabun::ThSarabunStyle,
-    /// TH SarabunIT๙ draws the ASCII digits as Thai digits.
-    thai_digits: bool,
 }
 
 impl std::fmt::Debug for MetricFit {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("MetricFit").field("thai_scale", &self.style.thai_scale).field("thai_digits", &self.thai_digits).finish()
+        f.debug_struct("MetricFit").field("thai_scale", &self.style.thai_scale).finish()
     }
 }
 
 impl PartialEq for MetricFit {
     fn eq(&self, other: &Self) -> bool {
-        std::ptr::eq(self.style, other.style) && self.thai_digits == other.thai_digits
+        std::ptr::eq(self.style, other.style)
     }
 }
 
@@ -442,31 +439,21 @@ impl MetricFit {
         let (a, d) = crate::thsarabun::LINE;
         (a / 1000.0, d / 1000.0)
     }
-
-    /// The character the original font shows for `c`: TH SarabunIT๙ shows ASCII digits as Thai
-    /// digits; the text keeps the digits it has.
-    pub fn shown(&self, c: char) -> char {
-        match c {
-            '0'..='9' if self.thai_digits => char::from_u32(u32::from(c) - u32::from('0') + 0x0E50).unwrap_or(c),
-            _ => c,
-        }
-    }
 }
 
-/// The [`MetricFit`] for a requested family drawn with a substitute: `Some` for TH Sarabun New,
-/// TH SarabunPSK and TH SarabunIT๙ (any spacing or case) when they are not installed and resolve
-/// to the bundled Sarabun; `None` otherwise, including when the real font is installed.
+/// The [`MetricFit`] for a requested family drawn with a substitute: `Some` for TH Sarabun New and
+/// TH SarabunPSK (any spacing or case) when they are not installed and resolve to the bundled
+/// Sarabun; `None` otherwise, including when the real font is installed. Other Thai document fonts
+/// are drawn with Sarabun at its own size and widths.
 pub fn metric_fit(family: &str, bold: bool, italic: bool) -> Option<MetricFit> {
     // Layout asks for every shaped piece: rule most families out without allocating.
     if !family.trim_start().get(..2).is_some_and(|p| p.eq_ignore_ascii_case("th")) {
         return None;
     }
     let key: String = family.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).collect();
-    let thai_digits = match key.as_str() {
-        "thsarabunnew" | "thsarabunpsk" => false,
-        "thsarabunit๙" | "thsarabunit9" => true,
-        _ => return None,
-    };
+    if !matches!(key.as_str(), "thsarabunnew" | "thsarabunpsk") {
+        return None;
+    }
     let r = resolve(family, bold, italic);
     if !r.substituted || r.face.family != "Sarabun" {
         return None;
@@ -477,7 +464,7 @@ pub fn metric_fit(family: &str, bold: bool, italic: bool) -> Option<MetricFit> {
         (false, true) => &crate::thsarabun::ITALIC,
         (true, true) => &crate::thsarabun::BOLD_ITALIC,
     };
-    Some(MetricFit { style, thai_digits })
+    Some(MetricFit { style })
 }
 
 #[cfg(test)]
@@ -535,7 +522,7 @@ mod tests {
 
     #[test]
     fn th_sarabun_fonts_fit_sarabun_to_their_metrics() {
-        for name in ["TH Sarabun New", "TH SarabunPSK", "th sarabun new", "THSarabunNew", "TH Sarabun PSK", "TH SarabunIT๙", "TH SarabunIT9"] {
+        for name in ["TH Sarabun New", "TH SarabunPSK", "th sarabun new", "THSarabunNew", "TH Sarabun PSK"] {
             let f = metric_fit(name, false, false).unwrap_or_else(|| panic!("{name}"));
             assert_eq!(f.advance('ก'), Some(0.386), "{name}");
             assert_eq!(f.advance('\u{0E48}'), Some(0.0), "{name}: tone marks take no width");
@@ -549,11 +536,9 @@ mod tests {
         let b = metric_fit("TH Sarabun New", true, false).unwrap();
         assert!((b.scale(true) - 407.0 / 586.0).abs() < 1e-5);
         assert_ne!(b.advance('ก'), Some(0.386));
-        // IT๙ shows ASCII digits as Thai digits; the others keep them.
-        assert_eq!(metric_fit("TH SarabunIT๙", false, false).unwrap().shown('7'), '๗');
-        assert_eq!(metric_fit("TH Sarabun New", false, false).unwrap().shown('7'), '7');
-        // Other families, and fonts that are themselves available, are drawn as they are.
-        for name in ["Sarabun", "Arial", "TH Niramit AS", "", "T", "THX", "ทดสอบ"] {
+        // Other families, and fonts that are themselves available, are drawn as they are; TH
+        // SarabunIT๙ has no metrics here and is drawn with Sarabun at its own size.
+        for name in ["Sarabun", "Arial", "TH Niramit AS", "TH SarabunIT๙", "TH SarabunIT9", "", "T", "THX", "ทดสอบ"] {
             assert!(metric_fit(name, false, false).is_none(), "{name}");
         }
     }

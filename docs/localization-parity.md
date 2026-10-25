@@ -1,6 +1,6 @@
 # Localization parity with Microsoft Word
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-24 · **Change:** trivial (language and entry counts corrected, Thai proofing and digit conversion; previously minor: Thai interface catalog, complete; previously minor: Thai proofing, Thai counting list numbers, TH Sarabun New/PSK drawn at their own size, Word for Windows line spacing; previously minor: Thai documents: Sarabun default font, dictionary word breaks, Thai list numbers; previously minor: Turkish interface catalog completed, 2,325 entries, #774; previously minor: font list shows fonts by their names in the interface language, #505; previously minor: Turkish interface added; previously major: first version; catalogs measured from `crates/ui-egui/src/i18n`, Word's languages from its bundle listing) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (TH SarabunIT๙ drawn with Sarabun at its own size and announced on open; previously trivial: language and entry counts corrected, Thai proofing and digit conversion; previously minor: Thai interface catalog, complete; previously minor: Thai proofing, Thai counting list numbers, TH Sarabun New/PSK drawn at their own size, Word for Windows line spacing; previously minor: Thai documents: Sarabun default font, dictionary word breaks, Thai list numbers; previously minor: Turkish interface catalog completed, 2,325 entries, #774; previously minor: font list shows fonts by their names in the interface language, #505; previously minor: Turkish interface added; previously major: first version; catalogs measured from `crates/ui-egui/src/i18n`, Word's languages from its bundle listing) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Interface languages, script support and proofing per language. How translation works (catalog
 format, adding a language, clean-room rule): `crates/ui-egui/src/i18n/mod.rs`.
@@ -78,12 +78,13 @@ document and interface font, so Thai draws the same everywhere, shaped through H
 mark stacking (`layout::tests_complex::thai_is_drawn_with_the_bundled_sarabun_by_default`). Thai,
 Lao and Khmer lines wrap between dictionary words (ICU4X, `doc::cluster::dictionary_breaks`), and
 double-click, Ctrl+arrows and the word count use the same word boundaries; tone marks and ์ stay
-inside their word. TH Sarabun New, TH SarabunPSK and TH SarabunIT๙ are drawn with Sarabun when not
+inside their word. TH Sarabun New and TH SarabunPSK are drawn with Sarabun when not
 installed, scaled to their letter height and set on their own advance widths, kerning and 1.331 em
-line spacing, so lines and pages break as with the real font (`fonts::thsarabun`; measured for TH Sarabun New and
-PSK, inferred for IT๙, which reuses TH Sarabun New's metrics); the other Thai
-document fonts are drawn with Sarabun at its own size. Single line spacing follows Word for Windows
-(OS/2 win metrics plus external leading: Sarabun 1.853 em). Thai digits, ฿ and
+line spacing, so lines and pages break as with the real font (`fonts::thsarabun`, measured from
+the font files); the other Thai document fonts are drawn with Sarabun at its own size, and when an
+opened document uses TH SarabunIT๙ and the computer doesn't have it, a notice says the
+document is shown with Sarabun (`cmd::file::unmatched_fonts`). Single line spacing follows Word
+for Windows (OS/2 win metrics plus external leading: Sarabun 1.853 em). Thai digits, ฿ and
 Thai/Khmer punctuation stay with the word before them (no line starts with ๒ or ។). A document made
 here is saved to .docx with its complex-script font, size and weight spelled out (`w:cs`, `w:szCs`,
 `w:bCs`, `w:iCs`), so Word shows its Thai text the same; a .docx from Word keeps its own. List
@@ -127,6 +128,7 @@ allows); all other text is written from the meaning of the English. No Italian p
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | TH SarabunIT๙ no longer reuses TH Sarabun New's metrics: Sarabun draws it at its own size and opening the document says so |
 | 2026-10-19 | minor | Thai interface catalog (2,433 entries, complete); Thai misspelling list grown to 105 pairs; review fixes (Thai/Latin words split for spelling, user dictionary clears typing-order marks) |
 | 2026-10-16 | minor | Thai proofing (typing-order mistakes and common misspellings, Royal Society spellings suggested), Thai counting list numbers and Thai list kinds in the Numbering menu, TH Sarabun New/PSK/IT๙ drawn with Sarabun at their own size, widths and line spacing, Word for Windows single line spacing |
 | 2026-10-15 | minor | Thai: digits and punctuation stay with their word, Thai letters skip ฆ (ก ข ค ง), complex-script values spelled out only when saving a document made here, interface text boxes keep raised tone marks |

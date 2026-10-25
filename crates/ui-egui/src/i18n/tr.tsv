@@ -2546,3 +2546,5 @@ spacing	Normal	Normal
 	Getting ready…	Hazırlanıyor…
 	Listening… speak now	Dinleniyor… şimdi konuşun
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Konuşma bu bilgisayarda tanınır (whisper.cpp); çevrimiçi hiçbir şey gönderilmez.
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} bu bilgisayarda yüklü değil, bu nedenle belge {with} ile gösteriliyor. Satırlar ve sayfalar özgün yazı tipindekinden farklı bölünebilir.
+	Font not installed	Yazı tipi yüklü değil

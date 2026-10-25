@@ -2146,3 +2146,5 @@ spacing	Normal	標準
 	Getting ready…	準備しています…
 	Listening… speak now	聞き取っています… 話してください
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	音声はこのコンピューター上で認識されます (whisper.cpp)。オンラインには何も送信されません。
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} はこのコンピューターにインストールされていないため、この文書は {with} で表示されます。元のフォントとは行やページの区切りが異なる場合があります。
+	Font not installed	フォントがインストールされていません

@@ -2553,3 +2553,5 @@ spacing	Normal	Normál
 	Getting ready…	Előkészítés…
 	Listening… speak now	Figyelek… beszéljen
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	A beszédet ez a számítógép ismeri fel (whisper.cpp); semmi sem kerül az internetre.
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	A(z) {fonts} nincs telepítve ezen a számítógépen, ezért a dokumentum {with} betűtípussal jelenik meg. A sorok és oldalak máshol törhetnek, mint az eredeti betűtípussal.
+	Font not installed	A betűtípus nincs telepítve
