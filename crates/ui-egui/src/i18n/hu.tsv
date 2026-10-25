@@ -2526,3 +2526,17 @@ spacing	Normal	Normál
 	Serbian	Szerb
 	the free daily allowance is used up (try again tomorrow, or give an email address)	elfogyott az ingyenes napi keret (próbálja újra holnap, vagy adjon meg e-mail-címet)
 	Translate Document	Dokumentum fordítása
+	Add-ins	Bővítmények
+	Get Add-ins	Bővítmények beszerzése
+	Store	Áruház
+	My Add-ins	Saját bővítmények
+	Added	Hozzáadva
+	Run	Futtatás
+	No add-ins are listed yet.	Még nincs bővítmény a listában.
+	Couldn't get the add-in list: {reason}	A bővítménylistát nem sikerült lekérni: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	A(z) {name} hozzáadva. Makrói a Saját bővítmények között és a Nézet › Makrók menüben vannak.
+	Couldn't add {name}: {reason}	A(z) {name} hozzáadása nem sikerült: {reason}
+	No add-ins yet. Add one from the Store.	Még nincs bővítmény. Adjon hozzá egyet az Áruházból.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	A Doc4Me-bővítmények ingyenes makrócsomagok a Doc4Me bővítménykatalógusából. Csak a dokumentumot szerkeszthetik.
+	only https addresses can be used	csak https-címek használhatók
+	web access isn't available here	itt nem érhető el webes hozzáférés

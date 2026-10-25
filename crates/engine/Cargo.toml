@@ -27,6 +27,8 @@ regex = { workspace = true }
 regex-automata = { workspace = true }
 image = { workspace = true }
 zeroize = { workspace = true }
+# Insert › Get Add-ins checks each pack against its SHA-256 in the catalog (already used by docx).
+sha2 = { workspace = true }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 # The system time zone for `now_local` (the web reads the browser's instead).

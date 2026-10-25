@@ -2541,3 +2541,17 @@ spacing	Normal	ปกติ
 	Serbian	เซอร์เบีย
 	the free daily allowance is used up (try again tomorrow, or give an email address)	ใช้โควตาฟรีของวันนี้หมดแล้ว (ลองใหม่พรุ่งนี้ หรือใส่อีเมล)
 	Translate Document	แปลเอกสาร
+	Add-ins	Add-in
+	Get Add-ins	รับ Add-in
+	Store	ร้านค้า
+	My Add-ins	Add-in ของฉัน
+	Added	เพิ่มแล้ว
+	Run	เรียกใช้
+	No add-ins are listed yet.	ยังไม่มี Add-in ในรายการ
+	Couldn't get the add-in list: {reason}	รับรายการ Add-in ไม่ได้: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	เพิ่ม {name} แล้ว แมโครอยู่ใน Add-in ของฉัน และ มุมมอง › แมโคร
+	Couldn't add {name}: {reason}	เพิ่ม {name} ไม่ได้: {reason}
+	No add-ins yet. Add one from the Store.	ยังไม่มี Add-in เพิ่มได้จากร้านค้า
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Add-in ของ Doc4Me คือชุดแมโครฟรีจากแค็ตตาล็อก Add-in ของ Doc4Me ทำได้เพียงแก้ไขเอกสาร
+	only https addresses can be used	ใช้ได้เฉพาะที่อยู่ https
+	web access isn't available here	ใช้งานเว็บที่นี่ไม่ได้

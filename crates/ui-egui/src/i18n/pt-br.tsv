@@ -2131,3 +2131,17 @@ spacing	Normal	Normal
 	Serbian	Sérvio
 	the free daily allowance is used up (try again tomorrow, or give an email address)	a cota gratuita diária acabou (tente novamente amanhã ou informe um endereço de email)
 	Translate Document	Traduzir Documento
+	Add-ins	Suplementos
+	Get Add-ins	Obter Suplementos
+	Store	Loja
+	My Add-ins	Meus Suplementos
+	Added	Adicionado
+	Run	Executar
+	No add-ins are listed yet.	Ainda não há suplementos listados.
+	Couldn't get the add-in list: {reason}	Não foi possível obter a lista de suplementos: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} foi adicionado. Suas macros estão em Meus Suplementos e em Exibir › Macros.
+	Couldn't add {name}: {reason}	Não foi possível adicionar {name}: {reason}
+	No add-ins yet. Add one from the Store.	Ainda não há suplementos. Adicione um da Loja.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Os suplementos do Doc4Me são pacotes gratuitos de macros do catálogo de suplementos do Doc4Me. Eles só podem editar o documento.
+	only https addresses can be used	só é possível usar endereços https
+	web access isn't available here	o acesso à Web não está disponível aqui

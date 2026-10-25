@@ -2520,3 +2520,17 @@ spacing	Normal	Обычный
 	Serbian	Сербский
 	the free daily allowance is used up (try again tomorrow, or give an email address)	бесплатный дневной лимит исчерпан (попробуйте завтра или укажите адрес электронной почты)
 	Translate Document	Перевести документ
+	Add-ins	Надстройки
+	Get Add-ins	Получить надстройки
+	Store	Магазин
+	My Add-ins	Мои надстройки
+	Added	Добавлено
+	Run	Запустить
+	No add-ins are listed yet.	Надстроек в списке пока нет.
+	Couldn't get the add-in list: {reason}	Не удалось получить список надстроек: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	Надстройка {name} добавлена. Ее макросы — в разделе «Мои надстройки» и в меню «Вид › Макросы».
+	Couldn't add {name}: {reason}	Не удалось добавить {name}: {reason}
+	No add-ins yet. Add one from the Store.	Надстроек пока нет. Добавьте их из магазина.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Надстройки Doc4Me — это бесплатные пакеты макросов из каталога надстроек Doc4Me. Они могут только изменять документ.
+	only https addresses can be used	можно использовать только адреса https
+	web access isn't available here	доступ к Интернету здесь недоступен

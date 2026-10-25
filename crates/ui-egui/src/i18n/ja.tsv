@@ -2119,3 +2119,17 @@ spacing	Normal	標準
 	Serbian	セルビア語
 	the free daily allowance is used up (try again tomorrow, or give an email address)	1 日の無料枠を使い切りました (明日もう一度試すか、メール アドレスを指定してください)
 	Translate Document	文書の翻訳
+	Add-ins	アドイン
+	Get Add-ins	アドインを入手
+	Store	ストア
+	My Add-ins	個人用アドイン
+	Added	追加済み
+	Run	実行
+	No add-ins are listed yet.	まだアドインは登録されていません。
+	Couldn't get the add-in list: {reason}	アドインの一覧を取得できませんでした: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} を追加しました。マクロは [個人用アドイン] と [表示] › [マクロ] にあります。
+	Couldn't add {name}: {reason}	{name} を追加できませんでした: {reason}
+	No add-ins yet. Add one from the Store.	アドインはまだありません。ストアから追加してください。
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me アドインは、Doc4Me のアドイン カタログにある無料のマクロ パックです。文書の編集だけを行えます。
+	only https addresses can be used	https のアドレスのみ使用できます
+	web access isn't available here	ここでは Web にアクセスできません

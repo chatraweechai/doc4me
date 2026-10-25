@@ -51,6 +51,7 @@ pub mod equation_tab;
 pub mod file_browser;
 pub mod file_dialogs;
 pub mod frame;
+pub mod get_addins;
 pub mod i18n;
 pub mod icons;
 pub mod ink;
@@ -248,6 +249,8 @@ pub struct UiState {
     pub dictionary: Vec<String>,
     /// The Translator pane's service and target language.
     pub translator: translator::Settings,
+    /// The add-ins installed from Get Add-ins: each pack's text, installed again at start-up.
+    pub addins: Vec<String>,
 }
 
 /// Most recent documents kept (File › Options › Advanced offers 0–50, as Word does).
@@ -296,6 +299,7 @@ impl Default for UiState {
             update_fields_before_print: false,
             dictionary: Vec::new(),
             translator: translator::Settings::default(),
+            addins: Vec::new(),
         }
     }
 }
@@ -329,6 +333,8 @@ pub struct WordApp {
     pub(crate) online_pictures: Option<online_pictures::Browser>,
     /// The Translator pane (Review › Translate), while it is open.
     pub(crate) translator: Option<translator::Translator>,
+    /// Get Add-ins, while its window is open.
+    pub(crate) addins_store: Option<get_addins::Store>,
     /// Content control frames, check boxes and lists on the page.
     pub controls: content_controls::ControlUi,
     pub dialog: Option<dialogs::Dialog>,
@@ -458,6 +464,7 @@ impl WordApp {
             screen_clip: None,
             online_pictures: None,
             translator: None,
+            addins_store: None,
             controls: Default::default(),
             dialog: None,
             colors: None,
@@ -563,6 +570,7 @@ impl WordApp {
         self.session.ribbon = std::mem::take(&mut self.ui.ribbon);
         self.session.ribbon.retain_known(&reg);
         self.session.view.draw.pens = std::mem::take(&mut self.ui.ink_pens);
+        get_addins::reinstall(self);
     }
 
     /// Run a command the user asked for (ribbon, shortcut, Backstage, file drop). New, Open,
@@ -889,6 +897,7 @@ impl WordApp {
                 "screenClipping" => screen_clip::start(self),
                 "onlinePictures" => online_pictures::open(self),
                 "translator" => translator::open(self),
+                "getAddins" => get_addins::open(self),
                 "addFont" => self.pick_font(),
                 "print" => {
                     self.ui.backstage = true;
@@ -1345,6 +1354,7 @@ impl WordApp {
         screen_clip::poll(self, ctx);
         online_pictures::poll(self, ctx);
         translator::poll(self, ctx);
+        get_addins::poll(self, ctx);
         self.clear_stale_change_picture();
         let _ = self.poll_file_dialog();
         self.drain_inbox();
@@ -1497,6 +1507,7 @@ impl WordApp {
         read_aloud::show(self, &ctx);
         online_pictures::show(self, &ctx);
         translator::show(self, &ctx);
+        get_addins::show(self, &ctx);
         crate::keytips::show(self, &ctx, ui);
         keys::global_shortcuts(self, &ctx);
         windows::show_others(self, ui);

@@ -2512,3 +2512,17 @@ spacing	Normal	Normale
 	Serbian	Serbo
 	the free daily allowance is used up (try again tomorrow, or give an email address)	la quota gratuita giornaliera è esaurita (riprovare domani o indicare un indirizzo e-mail)
 	Translate Document	Traduci documento
+	Add-ins	Componenti aggiuntivi
+	Get Add-ins	Ottieni componenti aggiuntivi
+	Store	Store
+	My Add-ins	Componenti aggiuntivi personali
+	Added	Aggiunto
+	Run	Esegui
+	No add-ins are listed yet.	Nessun componente aggiuntivo elencato.
+	Couldn't get the add-in list: {reason}	Impossibile ottenere l’elenco dei componenti aggiuntivi: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} è stato aggiunto. Le sue macro si trovano in Componenti aggiuntivi personali e in Visualizza › Macro.
+	Couldn't add {name}: {reason}	Impossibile aggiungere {name}: {reason}
+	No add-ins yet. Add one from the Store.	Nessun componente aggiuntivo. Aggiungerne uno dallo Store.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	I componenti aggiuntivi di Doc4Me sono pacchetti gratuiti di macro dal catalogo di Doc4Me. Possono solo modificare il documento.
+	only https addresses can be used	si possono usare solo indirizzi https
+	web access isn't available here	l’accesso al Web non è disponibile qui

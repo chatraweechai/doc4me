@@ -2129,3 +2129,17 @@ spacing	Normal	Normalno
 	Serbian	Srpski
 	the free daily allowance is used up (try again tomorrow, or give an email address)	besplatna dnevna kvota je potrošena (pokušajte sutra ili unesite adresu e-pošte)
 	Translate Document	Prevedi dokument
+	Add-ins	Programski dodaci
+	Get Add-ins	Nabavi programske dodatke
+	Store	Prodavnica
+	My Add-ins	Moji programski dodaci
+	Added	Dodato
+	Run	Pokreni
+	No add-ins are listed yet.	Još nema navedenih programskih dodataka.
+	Couldn't get the add-in list: {reason}	Preuzimanje liste programskih dodataka nije uspelo: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} je dodat. Njegovi makroi su u odeljku Moji programski dodaci i u meniju Prikaz › Makroi.
+	Couldn't add {name}: {reason}	Dodavanje {name} nije uspelo: {reason}
+	No add-ins yet. Add one from the Store.	Još nema programskih dodataka. Dodajte neki iz prodavnice.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me programski dodaci su besplatni paketi makroa iz Doc4Me kataloga dodataka. Mogu samo da uređuju dokument.
+	only https addresses can be used	mogu se koristiti samo https adrese
+	web access isn't available here	pristup vebu ovde nije dostupan

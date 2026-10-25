@@ -2118,3 +2118,17 @@ spacing	Normal	Normal
 	Serbian	Serbisch
 	the free daily allowance is used up (try again tomorrow, or give an email address)	das kostenlose Tageskontingent ist aufgebraucht (morgen erneut versuchen oder eine E-Mail-Adresse angeben)
 	Translate Document	Dokument übersetzen
+	Add-ins	Add-Ins
+	Get Add-ins	Add-Ins abrufen
+	Store	Store
+	My Add-ins	Meine Add-Ins
+	Added	Hinzugefügt
+	Run	Ausführen
+	No add-ins are listed yet.	Noch keine Add-Ins aufgeführt.
+	Couldn't get the add-in list: {reason}	Die Add-In-Liste konnte nicht abgerufen werden: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} wurde hinzugefügt. Die Makros finden Sie unter „Meine Add-Ins“ und „Ansicht › Makros“.
+	Couldn't add {name}: {reason}	{name} konnte nicht hinzugefügt werden: {reason}
+	No add-ins yet. Add one from the Store.	Noch keine Add-Ins. Fügen Sie eines aus dem Store hinzu.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me-Add-Ins sind kostenlose Makropakete aus dem Add-In-Katalog von Doc4Me. Sie können nur das Dokument bearbeiten.
+	only https addresses can be used	nur https-Adressen sind möglich
+	web access isn't available here	Webzugriff ist hier nicht verfügbar

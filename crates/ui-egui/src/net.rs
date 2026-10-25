@@ -44,9 +44,9 @@ pub fn allowed(url: &str) -> bool {
 /// isn't allowed.
 pub(crate) fn start(app: &crate::WordApp, req: FetchRequest) -> Result<Receiver<FetchAnswer>, String> {
     if !allowed(&req.url) {
-        return Err("only https addresses can be used".into());
+        return Err(tl!("only https addresses can be used").to_string());
     }
-    let fetch = app.services.fetch.as_ref().ok_or("web access isn't available here")?;
+    let fetch = app.services.fetch.as_ref().ok_or_else(|| tl!("web access isn't available here").to_string())?;
     Ok(fetch(req))
 }
 

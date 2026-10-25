@@ -2120,3 +2120,17 @@ spacing	Normal	標準
 	Serbian	塞爾維亞文
 	the free daily allowance is used up (try again tomorrow, or give an email address)	今天的免費額度已用完 (請明天再試，或提供電子郵件地址)
 	Translate Document	翻譯文件
+	Add-ins	增益集
+	Get Add-ins	取得增益集
+	Store	市集
+	My Add-ins	我的增益集
+	Added	已新增
+	Run	執行
+	No add-ins are listed yet.	尚未列出任何增益集。
+	Couldn't get the add-in list: {reason}	無法取得增益集清單: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	已新增 {name}。其巨集位於「我的增益集」和「檢視 › 巨集」中。
+	Couldn't add {name}: {reason}	無法新增 {name}: {reason}
+	No add-ins yet. Add one from the Store.	還沒有增益集。請從市集新增。
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me 增益集是 Doc4Me 增益集目錄中的免費巨集套件。它們只能編輯文件。
+	only https addresses can be used	只能使用 https 位址
+	web access isn't available here	此處無法存取網路

@@ -2124,3 +2124,17 @@ spacing	Normal	Normální
 	Serbian	Srbština
 	the free daily allowance is used up (try again tomorrow, or give an email address)	bezplatný denní limit je vyčerpaný (zkuste to zítra nebo zadejte e-mailovou adresu)
 	Translate Document	Přeložit dokument
+	Add-ins	Doplňky
+	Get Add-ins	Získat doplňky
+	Store	Obchod
+	My Add-ins	Moje doplňky
+	Added	Přidáno
+	Run	Spustit
+	No add-ins are listed yet.	Zatím nejsou uvedené žádné doplňky.
+	Couldn't get the add-in list: {reason}	Seznam doplňků se nepodařilo získat: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	Doplněk {name} byl přidán. Jeho makra najdete v Moje doplňky a v Zobrazení › Makra.
+	Couldn't add {name}: {reason}	{name} se nepodařilo přidat: {reason}
+	No add-ins yet. Add one from the Store.	Zatím žádné doplňky. Přidejte některý z obchodu.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doplňky Doc4Me jsou bezplatné balíčky maker z katalogu doplňků Doc4Me. Mohou jen upravovat dokument.
+	only https addresses can be used	lze použít jen adresy https
+	web access isn't available here	přístup na web tu není k dispozici

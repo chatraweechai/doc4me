@@ -833,6 +833,9 @@ fn insert(app: &mut WordApp, ui: &mut Ui) {
             });
         });
     });
+    group(ui, "Add-ins", None, app, |ui, app| {
+        big(ui, app, "addins", "Get Add-ins", "addins.get", json!({}), false);
+    });
     group(ui, "Media", None, app, |ui, app| {
         big(ui, app, "video", "Online Video", "insert.video", json!({}), false);
     });

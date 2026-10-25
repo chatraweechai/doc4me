@@ -2519,3 +2519,17 @@ spacing	Normal	Normal
 	Serbian	Sırpça
 	the free daily allowance is used up (try again tomorrow, or give an email address)	günlük ücretsiz kota doldu (yarın yeniden deneyin veya bir e-posta adresi girin)
 	Translate Document	Belgeyi Çevir
+	Add-ins	Eklentiler
+	Get Add-ins	Eklenti Al
+	Store	Mağaza
+	My Add-ins	Eklentilerim
+	Added	Eklendi
+	Run	Çalıştır
+	No add-ins are listed yet.	Henüz listelenmiş eklenti yok.
+	Couldn't get the add-in list: {reason}	Eklenti listesi alınamadı: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} eklendi. Makroları Eklentilerim'de ve Görünüm › Makrolar'da.
+	Couldn't add {name}: {reason}	{name} eklenemedi: {reason}
+	No add-ins yet. Add one from the Store.	Henüz eklenti yok. Mağazadan bir tane ekleyin.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me eklentileri, Doc4Me eklenti kataloğundaki ücretsiz makro paketleridir. Yalnızca belgeyi düzenleyebilirler.
+	only https addresses can be used	yalnızca https adresleri kullanılabilir
+	web access isn't available here	web erişimi burada kullanılamıyor

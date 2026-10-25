@@ -2153,3 +2153,17 @@ spacing	Normal	Tavaline
 	Serbian	Serbia
 	the free daily allowance is used up (try again tomorrow, or give an email address)	tasuta päevane piirang on täis (proovige homme uuesti või andke e-posti aadress)
 	Translate Document	Tõlgi dokument
+	Add-ins	Lisandmoodulid
+	Get Add-ins	Hangi lisandmooduleid
+	Store	Pood
+	My Add-ins	Minu lisandmoodulid
+	Added	Lisatud
+	Run	Käivita
+	No add-ins are listed yet.	Lisandmooduleid pole veel loetletud.
+	Couldn't get the add-in list: {reason}	Lisandmoodulite loendit ei saanud: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} lisati. Selle makrod on jaotises Minu lisandmoodulid ja menüüs Vaade › Makrod.
+	Couldn't add {name}: {reason}	{name} lisamine nurjus: {reason}
+	No add-ins yet. Add one from the Store.	Lisandmooduleid pole veel. Lisage mõni poest.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me lisandmoodulid on tasuta makropaketid Doc4Me lisandmoodulite kataloogist. Need saavad ainult dokumenti muuta.
+	only https addresses can be used	kasutada saab ainult https-aadresse
+	web access isn't available here	veebiühendus pole siin saadaval

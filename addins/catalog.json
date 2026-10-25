@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "about": "Doc4Me add-ins: packs of macros that only edit the document. Each pack's SHA-256 is checked before it is installed. Add one by pull request; update its sha256 here when its file changes.",
+  "addins": [
+    {
+      "id": "thai-document",
+      "name": "Thai Document Tools",
+      "description": "Thai or Arabic digits throughout, Sarabun 16 pt, and an A4 page with 2.5 cm margins.",
+      "author": "Doc4Me contributors",
+      "license": "MIT OR Apache-2.0",
+      "version": "1.0.0",
+      "file": "thai-document.json",
+      "sha256": "bc47105caa9773455d8bbd7bee7c4b01dc7f0dc057d23cba027470398c43e11e"
+    },
+    {
+      "id": "tidy-text",
+      "name": "Tidy Text",
+      "description": "Cleans up pasted text: single spaces, no empty paragraphs, plain formatting.",
+      "author": "Doc4Me contributors",
+      "license": "MIT OR Apache-2.0",
+      "version": "1.0.0",
+      "file": "tidy-text.json",
+      "sha256": "9fd743991eeb30c8703c730e796dac9a33df35ce686ee61adae5006ab21f6c58"
+    },
+    {
+      "id": "academic-paper",
+      "name": "Academic Paper Setup",
+      "description": "One-inch margins, a 12 pt serif font, double spacing and page numbers at the top right, as many style guides ask.",
+      "author": "Doc4Me contributors",
+      "license": "MIT OR Apache-2.0",
+      "version": "1.0.0",
+      "file": "academic-paper.json",
+      "sha256": "1f9a11724de7368d9a501261c18a2aa47e8e208dbb8a7cf6a43e80eae84013d1"
+    }
+  ]
+}

@@ -186,6 +186,7 @@ fn controls(tab: &str) -> Vec<Control> {
             c("SmartArt", "insert.smartArt"),
             c("Chart", "insert.chart"),
             m("Screenshot", "insert.screenshot"),
+            c("Get Add-ins", "addins.get"),
             c("Online Video", "insert.video"),
             d("Link", "link"),
             d("Bookmark", "bookmark"),
