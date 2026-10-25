@@ -72,6 +72,7 @@ pub mod read_aloud;
 pub mod ribbon;
 pub mod screen_clip;
 pub mod scroll;
+pub mod style_format;
 pub mod table_pen;
 pub mod table_resize;
 pub mod theme;
@@ -356,6 +357,8 @@ pub struct WordApp {
     pub previews: previews::Previews,
     /// Media key of the picture a pending Change Picture replaces (#147).
     pub change_picture_target: Option<String>,
+    /// Modify Style › Format…: the scratch document its dialog formats.
+    pub style_scratch: Option<style_format::StyleScratch>,
     /// Web: a recipient list was asked for (Select Recipients › Use an Existing List…), so the
     /// next text file from the picker loads as recipients instead of opening (#240).
     pub recipient_list_pending: bool,
@@ -518,6 +521,7 @@ impl WordApp {
             read_aloud_error: None,
             autosave_path: None,
             change_picture_target: None,
+            style_scratch: None,
             recipient_list_pending: false,
             font_generation: doc4me_fonts::FontDb::global().generation(),
             dialog_pick: None,
@@ -1776,6 +1780,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "layout.break" if !has("kind") => Some("insertBreak"),
         "review.highlightChanges" if params.as_object().is_none_or(|m| m.is_empty()) => Some("highlightChanges"),
         "tools.listCommands" if !has("all") => Some("listCommands"),
+        // Modify Style without a style: the style of the paragraph at the caret.
+        "styles.modify" if !has("style") => Some("modifyStyle"),
         _ => None,
     }
 }

@@ -279,6 +279,12 @@ pub enum Dialog {
         color: String,
         before: f32,
         after: f32,
+        /// What Format › Font…, Paragraph…, Tabs…, Border… and Language… set (`styles.modify`'s
+        /// `chr` and `para`), applied with the fields above on OK.
+        #[serde(skip)]
+        extra_chr: serde_json::Map<String, Value>,
+        #[serde(skip)]
+        extra_para: serde_json::Map<String, Value>,
     },
     /// Manage Styles: every style with its preview and description; modify, create, delete and
     /// show or hide them.
@@ -1154,6 +1160,11 @@ impl Dialog {
             "trackChangesOptions" => Dialog::TrackOptions { form: Box::new(crate::dialogs_lists::TrackForm::read(app)) },
             "customizeKeyboard" => Dialog::CustomizeKeyboard { form: Box::new(crate::dialogs_keyboard::KeyboardForm::read(app)) },
             "listCommands" => Dialog::ListCommands { all: false },
+            // Modify Style for the style of the paragraph at the caret.
+            "modifyStyle" => {
+                let id = app.session.doc.para_at(&app.session.sel.focus).and_then(|p| p.props.style.clone()).unwrap_or_else(|| "Normal".into());
+                return Dialog::modify_style(app, &id);
+            }
             "customizeRibbon" => {
                 Dialog::CustomizeRibbon { form: Box::new(crate::dialogs_ribbon::RibbonForm::read(app, crate::dialogs_ribbon::Page::Ribbon)) }
             }
@@ -1208,6 +1219,8 @@ impl Dialog {
             },
             before: rp.space_before,
             after: rp.space_after,
+            extra_chr: serde_json::Map::new(),
+            extra_para: serde_json::Map::new(),
         })
     }
 }
@@ -1288,8 +1301,15 @@ fn count_dialog_frame(ctx: &egui::Context, id: egui::Id) {
 pub fn show(app: &mut WordApp, ctx: &egui::Context) {
     let Some(mut d) = app.dialog.take() else {
         ctx.data_mut(|d| d.remove::<(egui::Id, u8)>(dialog_top_key()));
+        // A Format dialog of Modify Style closed some other way: back to Modify Style.
+        if let Some(sc) = app.style_scratch.take() {
+            crate::style_format::finish(app, sc);
+        }
         return;
     };
+    // Modify Style › Format…: its dialog formats the scratch document (swapped in to draw).
+    let mut scratch = app.style_scratch.take().filter(|_| crate::style_format::uses_scratch(d.name()));
+    let parked = if scratch.is_none() { app.style_scratch.take() } else { None };
     let mut open = true;
     let mut close = false;
     let title = match &d {
@@ -1349,15 +1369,31 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context) {
     let id = egui::Id::new(("dialog", title));
     let shown = place_dialog(ctx, id, egui::Window::new(tl!(title)).id(id).collapsible(false).resizable(false)).open(&mut open).show(ctx, |ui| {
         ui.set_min_width(340.0);
+        if let Some(sc) = scratch.as_mut() {
+            std::mem::swap(&mut app.session, &mut sc.session);
+        }
         close = body(app, ui, &mut d);
+        if let Some(sc) = scratch.as_mut() {
+            std::mem::swap(&mut app.session, &mut sc.session);
+        }
     });
     if shown.is_some() {
         count_dialog_frame(ctx, id);
+    }
+    // Format… in Modify Style has just made a new scratch; otherwise this one stays.
+    if app.style_scratch.is_none() {
+        app.style_scratch = scratch.or(parked);
     }
     if open && !close {
         app.dialog = Some(d);
     } else {
         app.canvas.want_focus = true;
+        // The Format dialog is done (and opened no other): back to Modify Style.
+        if app.dialog.is_none()
+            && let Some(sc) = app.style_scratch.take()
+        {
+            crate::style_format::finish(app, sc);
+        }
     }
 }
 
@@ -2262,7 +2298,7 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             }
             ok || cancel
         }
-        Dialog::ModifyStyle { back, resume, id, name, font, size, bold, italic, color, before, after } => {
+        Dialog::ModifyStyle { back, resume, id, name, font, size, bold, italic, color, before, after, extra_chr, extra_para } => {
             egui::Grid::new("ms").num_columns(2).show(ui, |ui| {
                 ui.label(tl!("Name:"));
                 ui.add(crate::widgets::text_line(name));
@@ -2287,14 +2323,55 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 ui.checkbox(bold, tl!("Bold"));
                 ui.checkbox(italic, tl!("Italic"));
             });
+            // Format ▾: the selection's dialogs, working on the style.
+            let para_style = app.session.doc.styles.get(id).is_some_and(|s| s.kind == doc4me_doc::StyleKind::Paragraph);
+            let mut pick = None;
+            ui.menu_button(tl!("Format"), |ui| {
+                for (label, which, para_only) in crate::style_format::ITEMS {
+                    if ui.add_enabled(para_style || !para_only, egui::Button::new(tl!(label))).clicked() {
+                        pick = Some(which);
+                        ui.close();
+                    }
+                }
+            });
+            if let Some(which) = pick {
+                let me = Dialog::ModifyStyle {
+                    back: *back,
+                    resume: resume.take(),
+                    id: id.clone(),
+                    name: name.clone(),
+                    font: font.clone(),
+                    size: *size,
+                    bold: *bold,
+                    italic: *italic,
+                    color: color.clone(),
+                    before: *before,
+                    after: *after,
+                    extra_chr: extra_chr.clone(),
+                    extra_para: extra_para.clone(),
+                };
+                crate::style_format::open(app, which, me);
+                return true;
+            }
             let (ok, cancel) = buttons(ui, tl!("OK"));
             if ok {
-                let mut chr = json!({"font": font, "size": *size, "bold": *bold, "italic": *italic});
-                if let Some(c) = doc4me_doc::Rgb::parse(color) {
-                    chr["color"] = json!({"Rgb": [c.0, c.1, c.2]});
-                }
-                let _ =
-                    app.run("styles.modify", json!({"style": id, "name": name, "chr": chr, "para": {"spaceBefore": *before, "spaceAfter": *after}}));
+                let d = Dialog::ModifyStyle {
+                    back: false,
+                    resume: None,
+                    id: id.clone(),
+                    name: name.clone(),
+                    font: font.clone(),
+                    size: *size,
+                    bold: *bold,
+                    italic: *italic,
+                    color: color.clone(),
+                    before: *before,
+                    after: *after,
+                    extra_chr: extra_chr.clone(),
+                    extra_para: extra_para.clone(),
+                };
+                let (chr, para) = crate::style_format::pending(&d);
+                let _ = app.run("styles.modify", json!({"style": id, "name": name, "chr": chr, "para": para}));
             }
             if (ok || cancel) && *back {
                 app.dialog = Some(Dialog::ManageStyles { alphabetical: false, selected: id.clone() });
@@ -3071,10 +3148,11 @@ fn manage_styles(app: &mut WordApp, ui: &mut Ui, alphabetical: &mut bool, select
                 }
                 if r.double_clicked() {
                     *selected = id;
-                    if let Some(Dialog::ModifyStyle { id, name, font, size, bold, italic, color, before, after, .. }) =
-                        Dialog::modify_style(app, selected)
-                    {
-                        app.dialog = Some(Dialog::ModifyStyle { back: true, resume: None, id, name, font, size, bold, italic, color, before, after });
+                    if let Some(mut d) = Dialog::modify_style(app, selected) {
+                        if let Dialog::ModifyStyle { back, .. } = &mut d {
+                            *back = true;
+                        }
+                        app.dialog = Some(d);
                     }
                 }
             }
@@ -3109,9 +3187,12 @@ fn manage_styles(app: &mut WordApp, ui: &mut Ui, alphabetical: &mut bool, select
     ui.horizontal(|ui| {
         // Table styles are edited from Table Design.
         if ui.add_enabled(ty != "table", egui::Button::new(tl!("Modify…"))).clicked()
-            && let Some(Dialog::ModifyStyle { id, name, font, size, bold, italic, color, before, after, .. }) = Dialog::modify_style(app, selected)
+            && let Some(mut d) = Dialog::modify_style(app, selected)
         {
-            app.dialog = Some(Dialog::ModifyStyle { back: true, resume: None, id, name, font, size, bold, italic, color, before, after });
+            if let Dialog::ModifyStyle { back, .. } = &mut d {
+                *back = true;
+            }
+            app.dialog = Some(d);
         }
         if ui.button(tl!("New Style…")).clicked() {
             app.dialog = Some(Dialog::NewStyle { name: "Style1".into(), based_on: str_of(&cur, "name"), back: true });
@@ -3760,5 +3841,40 @@ mod tests {
         let after = h.ctx.memory(|m| m.area_rect(id)).expect("dialog is still open");
         assert!((after.min.x - (before.min.x - 200.0)).abs() <= 1.0, "moved left: {before:?} -> {after:?}");
         assert!((after.min.y - (before.min.y + 120.0)).abs() <= 1.0, "moved down: {before:?} -> {after:?}");
+    }
+
+    /// Modify Style › Format › Font…: the Font dialog draws on the scratch document while the page
+    /// keeps the document, and its OK comes back to Modify Style showing what it set.
+    #[test]
+    fn modify_style_format_font_comes_back_to_modify_style() {
+        use egui_kittest::kittest::Queryable;
+        let mut app = app_with("Kilns");
+        let doc = app.session.doc.clone();
+        let md = Dialog::modify_style(&app, "Heading1").unwrap();
+        crate::style_format::open(&mut app, "font", md);
+        let Some(Dialog::Font { bold, .. }) = &mut app.dialog else { panic!("{:?}", app.dialog) };
+        let want = !*bold;
+        *bold = want;
+        let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            app,
+        );
+        for _ in 0..4 {
+            h.step();
+        }
+        assert_eq!(h.state().session.doc, doc, "the page keeps the document");
+        assert!(h.state().style_scratch.is_some());
+        h.get_by_label(tl!("OK")).click();
+        for _ in 0..4 {
+            h.step();
+        }
+        let Some(Dialog::ModifyStyle { bold, extra_chr, .. }) = &h.state().dialog else { panic!("{:?}", h.state().dialog) };
+        assert_eq!((*bold, extra_chr.get("bold")), (want, Some(&json!(want))));
+        assert!(h.state().style_scratch.is_none());
+        assert_eq!(h.state().session.doc, doc, "nothing changes before Modify Style's OK");
     }
 }
