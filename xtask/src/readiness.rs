@@ -94,7 +94,7 @@ pub fn run(root: &Path, args: &[&str]) -> Result<(), String> {
     }
     let dir = root.join("docs/readiness");
     let corpus_dir = root.join("corpus/readiness");
-    let manifest = corpus_rows(read_tsv(&dir.join("corpus.tsv"))?);
+    let manifest = corpus_rows(read_tsv(&dir.join("corpus.tsv"))?)?;
     if opts.download {
         download(&manifest, &corpus_dir)?;
     }
@@ -523,8 +523,15 @@ struct DocResult {
 
 /// The manifest rows the corpus sets count: a row whose reference PDF turned out not to be the
 /// same document stays in `corpus.tsv` with `check` = `excluded` and isn't fetched or counted.
-fn corpus_rows(manifest: Vec<BTreeMap<String, String>>) -> Vec<BTreeMap<String, String>> {
-    manifest.into_iter().filter(|r| col(r, "check") != "excluded").collect()
+/// An id names the files and the work folder that is emptied before each check, so it must be a
+/// plain name.
+fn corpus_rows(manifest: Vec<BTreeMap<String, String>>) -> Result<Vec<BTreeMap<String, String>>, String> {
+    if let Some(bad) =
+        manifest.iter().map(|r| col(r, "id")).find(|id| id.is_empty() || !id.bytes().all(|b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_'))
+    {
+        return Err(format!("corpus.tsv: id {bad:?} must be letters, digits, '-' or '_'"));
+    }
+    Ok(manifest.into_iter().filter(|r| col(r, "check") != "excluded").collect())
 }
 
 /// The five corpus sets, and how many documents were available. Without `run`, every document
@@ -860,8 +867,12 @@ mod tests {
     fn excluded_corpus_rows_are_not_counted() {
         let rows = corpus_rows(parse_tsv(
             "id\tdocx_url\tcheck\tnote\na\thttps://x/a.docx\t\t\nb\thttps://x/b.docx\texcluded\tother edition\nc\thttps://x/c.docx\n",
-        ));
+        ))
+        .unwrap();
         assert_eq!(rows.iter().map(|r| col(r, "id")).collect::<Vec<_>>(), ["a", "c"]);
+        for bad in ["..", "", "a/b", "a b"] {
+            assert!(corpus_rows(parse_tsv(&format!("id\tdocx_url\n{bad}\thttps://x/a.docx\n"))).is_err(), "{bad:?}");
+        }
     }
 
     #[test]
