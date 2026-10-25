@@ -2625,3 +2625,37 @@ spacing	Normal	Обычный
 	A new document lists the commands with their shortcuts.	Новый документ будет содержать список команд с их сочетаниями клавиш.
 	Border…	Граница…
 	Language…	Язык…
+	Font Substitution…	Замена шрифтов…
+	Compatibility Options…	Параметры совместимости…
+	Add New Placeholder…	Добавить новый заполнитель…
+	Drawing Grid	Сетка рисования
+	Compatibility Options	Параметры совместимости
+	Font Substitution	Замена шрифтов
+	Insert Rows	Вставка строк
+	Insert Cells	Вставка ячеек
+	Placeholder Name	Имя заполнителя
+	Horizontal spacing:	Шаг по горизонтали:
+	Vertical spacing:	Шаг по вертикали:
+	Display gridlines on screen	Отображать линии сетки на экране
+	Compatibility mode: {version}	Режим совместимости: {version}
+	Word 2013 and later	Word 2013 и более поздние версии
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Параметры макета для этого документа
+	Don't use HTML paragraph auto spacing	Не использовать автоматические интервалы абзацев HTML
+	Split apart page break and paragraph mark	Разделять разрыв страницы и знак абзаца
+	Every font this document uses is installed.	Все шрифты этого документа установлены.
+	Missing document font	Отсутствующий шрифт документа
+	Substituted font	Заменяющий шрифт
+	Convert Permanently	Преобразовать навсегда
+	Shift cells right	Со сдвигом вправо
+	A table's rows keep the same columns here.	Здесь строки таблицы имеют одинаковые столбцы.
+	Shift cells down	Со сдвигом вниз
+	Insert entire row	Вставить всю строку
+	Insert entire column	Вставить весь столбец
+	Number:	Число:
+	Number type:	Тип числа:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Введите имя тега источника. Дополнительные сведения можно добавить позже, изменив источник.
+	Grid Settings	Параметры сетки
+	Add New Placeholder	Добавить новый заполнитель

@@ -2609,3 +2609,37 @@ spacing	Normal	标准
 	A new document lists the commands with their shortcuts.	新文档将列出命令及其快捷键。
 	Border…	边框…
 	Language…	语言…
+	Font Substitution…	字体替换…
+	Compatibility Options…	兼容性选项…
+	Add New Placeholder…	添加新占位符…
+	Drawing Grid	绘图网格
+	Compatibility Options	兼容性选项
+	Font Substitution	字体替换
+	Insert Rows	插入行
+	Insert Cells	插入单元格
+	Placeholder Name	占位符名称
+	Horizontal spacing:	水平间距:
+	Vertical spacing:	垂直间距:
+	Display gridlines on screen	在屏幕上显示网格线
+	Compatibility mode: {version}	兼容模式: {version}
+	Word 2013 and later	Word 2013 及更高版本
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	此文档的版式选项
+	Don't use HTML paragraph auto spacing	不使用 HTML 段落自动间距
+	Split apart page break and paragraph mark	拆分分页符和段落标记
+	Every font this document uses is installed.	此文档使用的所有字体都已安装。
+	Missing document font	缺少的文档字体
+	Substituted font	替换字体
+	Convert Permanently	永久转换
+	Shift cells right	活动单元格右移
+	A table's rows keep the same columns here.	此处表格的各行保持相同的列。
+	Shift cells down	活动单元格下移
+	Insert entire row	整行插入
+	Insert entire column	整列插入
+	Number:	数字:
+	Number type:	数字类型:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	键入源的标记名称。以后可以通过编辑源来添加更多信息。
+	Grid Settings	网格设置
+	Add New Placeholder	添加新占位符

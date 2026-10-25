@@ -2598,3 +2598,37 @@ spacing	Normal	Normál
 	A new document lists the commands with their shortcuts.	Egy új dokumentum felsorolja a parancsokat a billentyűparancsaikkal.
 	Border…	Szegély…
 	Language…	Nyelv…
+	Font Substitution…	Betűtípus-helyettesítés…
+	Compatibility Options…	Kompatibilitási beállítások…
+	Add New Placeholder…	Új helyőrző hozzáadása…
+	Drawing Grid	Rajzrács
+	Compatibility Options	Kompatibilitási beállítások
+	Font Substitution	Betűtípus-helyettesítés
+	Insert Rows	Sorok beszúrása
+	Insert Cells	Cellák beszúrása
+	Placeholder Name	Helyőrző neve
+	Horizontal spacing:	Vízszintes térköz:
+	Vertical spacing:	Függőleges térköz:
+	Display gridlines on screen	Rácsvonalak megjelenítése a képernyőn
+	Compatibility mode: {version}	Kompatibilitási mód: {version}
+	Word 2013 and later	Word 2013 és újabb
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	A dokumentum elrendezési beállításai
+	Don't use HTML paragraph auto spacing	Ne legyen automatikus HTML-bekezdéstávolság
+	Split apart page break and paragraph mark	Az oldaltörés és a bekezdésjel szétválasztása
+	Every font this document uses is installed.	A dokumentum minden betűtípusa telepítve van.
+	Missing document font	Hiányzó betűtípus
+	Substituted font	Helyettesítő betűtípus
+	Convert Permanently	Végleges átalakítás
+	Shift cells right	Cellák eltolása jobbra
+	A table's rows keep the same columns here.	A táblázat sorai itt azonos oszlopokkal rendelkeznek.
+	Shift cells down	Cellák eltolása lefelé
+	Insert entire row	Teljes sor beszúrása
+	Insert entire column	Teljes oszlop beszúrása
+	Number:	Szám:
+	Number type:	Számtípus:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Írja be a forrás címkenevét. A forrás további adatait később, szerkesztéssel adhatja meg.
+	Grid Settings	Rácsbeállítások
+	Add New Placeholder	Új helyőrző hozzáadása

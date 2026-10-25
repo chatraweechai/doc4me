@@ -26,6 +26,29 @@ pub fn specs() -> Vec<CommandSpec> {
             .params(
                 r#"{"count": 1-12, "space"?: pt, "separator"?: bool, "preset"?: "left|right", "widths"?: [[width pt, space after pt], …] (unequal columns; sets the count), "apply"?: "section|document|forward"}"#,
             ),
+        // Align › Grid Settings…: Word's Drawing Grid dialog (the spacing the gridlines are drawn
+        // at, saved in the document as w:drawingGridHorizontalSpacing / VerticalSpacing).
+        CommandSpec::new("layout.drawingGrid", "Grid Settings", "Layout › Arrange › Align", |s, v| {
+            let spacing = |k: &str| -> Result<Option<f32>, CmdError> {
+                match p::f32(v, k) {
+                    Some(x) if (0.5..=100.0).contains(&x) => Ok(Some(x)),
+                    Some(_) => Err(CmdError::Params(format!("`{k}` is 0.5 to 100 pt"))),
+                    None => Ok(None),
+                }
+            };
+            let (h, vert) = (spacing("horizontal")?, spacing("vertical")?);
+            if let Some(x) = h {
+                s.doc.settings.grid_h = x;
+            }
+            if let Some(x) = vert {
+                s.doc.settings.grid_v = x;
+            }
+            if let Some(on) = p::bool(v, "show") {
+                s.view.gridlines = on;
+            }
+            Ok(json!({"horizontal": s.doc.settings.grid_h, "vertical": s.doc.settings.grid_v, "show": s.view.gridlines}))
+        })
+        .params(r#"{"horizontal"?: pt, "vertical"?: pt (0.5-100), "show"?: bool (gridlines on screen, as view.gridlines)} → the settings"#),
         CommandSpec::new("layout.break", "Breaks", "Layout › Page Setup", breaks)
             .params(r#"{"kind": "page|column|textWrapping|nextPage|continuous|evenPage|oddPage"}"#),
         CommandSpec::new("layout.lineNumbers", "Line Numbers", "Layout › Page Setup", line_numbers).params(

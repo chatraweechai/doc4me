@@ -1409,6 +1409,7 @@ fn references(app: &mut WordApp, ui: &mut Ui) {
                 ui.separator();
             }
             mi(ui, app, "Add New Source…", "ui.dialog", json!({"name": "createSource"}));
+            mi(ui, app, "Add New Placeholder…", "references.placeholder", json!({}));
         });
         stack(ui, |ui| {
             small(ui, app, "sources", Some("Manage Sources"), "Manage Sources", "references.sources", json!({}), false);

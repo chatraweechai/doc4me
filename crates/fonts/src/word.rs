@@ -254,6 +254,16 @@ fn style_name(bold: bool, italic: bool) -> &'static str {
     }
 }
 
+/// The family `family` is drawn with when it isn't installed (Word's Font Substitution), or
+/// `None` when it is.
+pub fn substitute_for(family: &str) -> Option<String> {
+    let db = FontDb::global();
+    if db.has_family(family) {
+        return None;
+    }
+    Some(substitutes(family).iter().find(|s| db.has_family(s)).copied().unwrap_or(crate::FALLBACK_FAMILY).to_string())
+}
+
 /// Resolve `family` with bold/italic to a face (memoised until user fonts are added or removed,
 /// [`FontDb::generation`]).
 pub fn resolve(family: &str, bold: bool, italic: bool) -> Resolved {

@@ -2609,3 +2609,37 @@ spacing	Normal	Normal
 	A new document lists the commands with their shortcuts.	Um novo documento lista os comandos com seus atalhos.
 	Border…	Borda…
 	Language…	Idioma…
+	Font Substitution…	Substituição de fontes…
+	Compatibility Options…	Opções de compatibilidade…
+	Add New Placeholder…	Adicionar novo espaço reservado…
+	Drawing Grid	Grade de desenho
+	Compatibility Options	Opções de compatibilidade
+	Font Substitution	Substituição de fontes
+	Insert Rows	Inserir linhas
+	Insert Cells	Inserir células
+	Placeholder Name	Nome do espaço reservado
+	Horizontal spacing:	Espaçamento horizontal:
+	Vertical spacing:	Espaçamento vertical:
+	Display gridlines on screen	Exibir linhas de grade na tela
+	Compatibility mode: {version}	Modo de compatibilidade: {version}
+	Word 2013 and later	Word 2013 e posterior
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Opções de layout para este documento
+	Don't use HTML paragraph auto spacing	Não usar espaçamento automático de parágrafo HTML
+	Split apart page break and paragraph mark	Separar quebra de página e marca de parágrafo
+	Every font this document uses is installed.	Todas as fontes deste documento estão instaladas.
+	Missing document font	Fonte do documento ausente
+	Substituted font	Fonte substituta
+	Convert Permanently	Converter permanentemente
+	Shift cells right	Deslocar células para a direita
+	A table's rows keep the same columns here.	Aqui as linhas de uma tabela mantêm as mesmas colunas.
+	Shift cells down	Deslocar células para baixo
+	Insert entire row	Inserir linha inteira
+	Insert entire column	Inserir coluna inteira
+	Number:	Número:
+	Number type:	Tipo de número:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Digite o nome da marca da fonte. Você pode adicionar mais informações a esta fonte depois, editando-a.
+	Grid Settings	Configurações de grade
+	Add New Placeholder	Adicionar novo espaço reservado

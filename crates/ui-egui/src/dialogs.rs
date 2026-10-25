@@ -440,6 +440,9 @@ pub enum Dialog {
     CustomizeKeyboard {
         form: Box<crate::dialogs_keyboard::KeyboardForm>,
     },
+    /// Drawing Grid, Compatibility Options, Font Substitution, Insert Rows / Cells, Number and
+    /// Placeholder Name ([`crate::dialogs_misc`]).
+    Misc(Box<crate::dialogs_misc::MiscDialog>),
     /// Word's List Commands: every command, or those with a shortcut.
     ListCommands {
         all: bool,
@@ -898,6 +901,7 @@ impl Dialog {
             Dialog::Review(d) => d.name(),
             Dialog::CustomizeKeyboard { .. } => "customizeKeyboard",
             Dialog::ListCommands { .. } => "listCommands",
+            Dialog::Misc(d) => d.name(),
             Dialog::CustomizeRibbon { .. } => "customizeRibbon",
             Dialog::Control { .. } => "controlProperties",
             Dialog::Enclose { .. } => "enclose",
@@ -933,6 +937,9 @@ impl Dialog {
         }
         if let Some(d) = crate::dialogs_layout::open(name, app) {
             return Some(Dialog::Layout(Box::new(d)));
+        }
+        if let Some(d) = crate::dialogs_misc::open(name, app) {
+            return Some(Dialog::Misc(Box::new(d)));
         }
         if matches!(name, "compare" | "combine" | "autoCorrect" | "restrictEditing" | "acceptRejectChanges" | "highlightChanges") {
             return crate::dialogs_review::open(name, app).map(|d| Dialog::Review(Box::new(d)));
@@ -1358,6 +1365,7 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context) {
         Dialog::Review(d) => d.title(),
         Dialog::CustomizeKeyboard { .. } => "Customize Keyboard",
         Dialog::ListCommands { .. } => "List Commands",
+        Dialog::Misc(d) => d.title(),
         Dialog::CustomizeRibbon { .. } => "Customize Ribbon",
         Dialog::Control { .. } => "Content Control Properties",
         Dialog::Enclose { .. } => "Enclose Characters",
@@ -2709,6 +2717,7 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         Dialog::TrackOptions { form } => crate::dialogs_lists::track_options(app, ui, form),
         Dialog::Review(d) => crate::dialogs_review::body(app, ui, d),
         Dialog::CustomizeKeyboard { form } => crate::dialogs_keyboard::customize_keyboard(app, ui, form),
+        Dialog::Misc(d) => crate::dialogs_misc::body(app, ui, d),
         Dialog::ListCommands { all } => {
             ui.radio_value(all, false, tl!("Current keyboard settings"));
             ui.radio_value(all, true, tl!("All Commands"));

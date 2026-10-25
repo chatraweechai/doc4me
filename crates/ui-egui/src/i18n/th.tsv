@@ -2606,3 +2606,37 @@ spacing	Normal	ปกติ
 	A new document lists the commands with their shortcuts.	เอกสารใหม่จะแสดงรายการคำสั่งพร้อมคีย์ลัด
 	Border…	เส้นขอบ…
 	Language…	ภาษา…
+	Font Substitution…	การแทนที่แบบอักษร…
+	Compatibility Options…	ตัวเลือกความเข้ากันได้…
+	Add New Placeholder…	เพิ่มตัวยึดตำแหน่งใหม่…
+	Drawing Grid	เส้นตารางรูปวาด
+	Compatibility Options	ตัวเลือกความเข้ากันได้
+	Font Substitution	การแทนที่แบบอักษร
+	Insert Rows	แทรกแถว
+	Insert Cells	แทรกเซลล์
+	Placeholder Name	ชื่อตัวยึดตำแหน่ง
+	Horizontal spacing:	ระยะห่างแนวนอน:
+	Vertical spacing:	ระยะห่างแนวตั้ง:
+	Display gridlines on screen	แสดงเส้นตารางบนหน้าจอ
+	Compatibility mode: {version}	โหมดความเข้ากันได้: {version}
+	Word 2013 and later	Word 2013 ขึ้นไป
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	ตัวเลือกเค้าโครงสำหรับเอกสารนี้
+	Don't use HTML paragraph auto spacing	ไม่ใช้ระยะห่างย่อหน้าอัตโนมัติแบบ HTML
+	Split apart page break and paragraph mark	แยกตัวแบ่งหน้าออกจากเครื่องหมายย่อหน้า
+	Every font this document uses is installed.	แบบอักษรทุกแบบที่เอกสารนี้ใช้ติดตั้งไว้แล้ว
+	Missing document font	แบบอักษรของเอกสารที่ขาดหาย
+	Substituted font	แบบอักษรที่ใช้แทน
+	Convert Permanently	แปลงอย่างถาวร
+	Shift cells right	เลื่อนเซลล์ไปทางขวา
+	A table's rows keep the same columns here.	แถวทุกแถวของตารางที่นี่ต้องมีคอลัมน์เท่ากัน
+	Shift cells down	เลื่อนเซลล์ลง
+	Insert entire row	แทรกทั้งแถว
+	Insert entire column	แทรกทั้งคอลัมน์
+	Number:	ตัวเลข:
+	Number type:	ชนิดตัวเลข:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	พิมพ์ชื่อแท็กของแหล่งข้อมูล คุณเพิ่มข้อมูลของแหล่งข้อมูลนี้ได้ภายหลังโดยแก้ไขแหล่งข้อมูล
+	Grid Settings	การตั้งค่าเส้นตาราง
+	Add New Placeholder	เพิ่มตัวยึดตำแหน่งใหม่

@@ -2604,3 +2604,37 @@ spacing	Normal	Normale
 	A new document lists the commands with their shortcuts.	Un nuovo documento elenca i comandi con i relativi tasti di scelta rapida.
 	Border…	Bordo…
 	Language…	Lingua…
+	Font Substitution…	Sostituzione tipi di carattere…
+	Compatibility Options…	Opzioni di compatibilità…
+	Add New Placeholder…	Aggiungi nuovo segnaposto…
+	Drawing Grid	Griglia di disegno
+	Compatibility Options	Opzioni di compatibilità
+	Font Substitution	Sostituzione tipi di carattere
+	Insert Rows	Inserisci righe
+	Insert Cells	Inserisci celle
+	Placeholder Name	Nome segnaposto
+	Horizontal spacing:	Spaziatura orizzontale:
+	Vertical spacing:	Spaziatura verticale:
+	Display gridlines on screen	Visualizza griglia sullo schermo
+	Compatibility mode: {version}	Modalità compatibilità: {version}
+	Word 2013 and later	Word 2013 e versioni successive
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Opzioni di layout per questo documento
+	Don't use HTML paragraph auto spacing	Non usare la spaziatura automatica dei paragrafi HTML
+	Split apart page break and paragraph mark	Separa interruzione di pagina e segno di paragrafo
+	Every font this document uses is installed.	Tutti i tipi di carattere del documento sono installati.
+	Missing document font	Tipo di carattere del documento mancante
+	Substituted font	Tipo di carattere sostitutivo
+	Convert Permanently	Converti in modo permanente
+	Shift cells right	Sposta le celle a destra
+	A table's rows keep the same columns here.	Qui le righe di una tabella mantengono le stesse colonne.
+	Shift cells down	Sposta le celle in basso
+	Insert entire row	Inserisci intera riga
+	Insert entire column	Inserisci intera colonna
+	Number:	Numero:
+	Number type:	Tipo di numero:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Digitare il nome del tag della fonte. È possibile aggiungere altre informazioni alla fonte in seguito modificandola.
+	Grid Settings	Impostazioni griglia
+	Add New Placeholder	Aggiungi nuovo segnaposto

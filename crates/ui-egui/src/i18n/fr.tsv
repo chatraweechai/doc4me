@@ -2594,3 +2594,37 @@ spacing	Normal	Normal
 	A new document lists the commands with their shortcuts.	Un nouveau document liste les commandes avec leurs raccourcis.
 	Border…	Bordure…
 	Language…	Langue…
+	Font Substitution…	Substitution de polices…
+	Compatibility Options…	Options de compatibilité…
+	Add New Placeholder…	Ajouter un nouvel espace réservé…
+	Drawing Grid	Grille de dessin
+	Compatibility Options	Options de compatibilité
+	Font Substitution	Substitution de polices
+	Insert Rows	Insérer des lignes
+	Insert Cells	Insérer des cellules
+	Placeholder Name	Nom de l’espace réservé
+	Horizontal spacing:	Espacement horizontal :
+	Vertical spacing:	Espacement vertical :
+	Display gridlines on screen	Afficher le quadrillage à l’écran
+	Compatibility mode: {version}	Mode de compatibilité : {version}
+	Word 2013 and later	Word 2013 et versions ultérieures
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Options de disposition pour ce document
+	Don't use HTML paragraph auto spacing	Ne pas utiliser l’espacement automatique des paragraphes HTML
+	Split apart page break and paragraph mark	Séparer le saut de page et la marque de paragraphe
+	Every font this document uses is installed.	Toutes les polices de ce document sont installées.
+	Missing document font	Police du document manquante
+	Substituted font	Police de substitution
+	Convert Permanently	Convertir définitivement
+	Shift cells right	Décaler les cellules vers la droite
+	A table's rows keep the same columns here.	Ici, les lignes d’un tableau gardent les mêmes colonnes.
+	Shift cells down	Décaler les cellules vers le bas
+	Insert entire row	Insérer une ligne entière
+	Insert entire column	Insérer une colonne entière
+	Number:	Nombre :
+	Number type:	Type de nombre :
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Tapez le nom de balise de la source. Vous pourrez ajouter des informations à cette source plus tard en la modifiant.
+	Grid Settings	Paramètres de la grille
+	Add New Placeholder	Ajouter un nouvel espace réservé

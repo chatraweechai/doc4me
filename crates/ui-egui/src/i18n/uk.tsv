@@ -2609,3 +2609,37 @@ spacing	Normal	Звичайний
 	A new document lists the commands with their shortcuts.	Новий документ міститиме список команд із сполученнями клавіш.
 	Border…	Межа…
 	Language…	Мова…
+	Font Substitution…	Заміна шрифтів…
+	Compatibility Options…	Параметри сумісності…
+	Add New Placeholder…	Додати новий заповнювач…
+	Drawing Grid	Сітка малювання
+	Compatibility Options	Параметри сумісності
+	Font Substitution	Заміна шрифтів
+	Insert Rows	Вставлення рядків
+	Insert Cells	Вставлення клітинок
+	Placeholder Name	Ім’я заповнювача
+	Horizontal spacing:	Крок по горизонталі:
+	Vertical spacing:	Крок по вертикалі:
+	Display gridlines on screen	Відображати лінії сітки на екрані
+	Compatibility mode: {version}	Режим сумісності: {version}
+	Word 2013 and later	Word 2013 і пізніші версії
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Параметри макета для цього документа
+	Don't use HTML paragraph auto spacing	Не використовувати автоматичні інтервали абзаців HTML
+	Split apart page break and paragraph mark	Розділяти розрив сторінки та знак абзацу
+	Every font this document uses is installed.	Усі шрифти цього документа встановлено.
+	Missing document font	Відсутній шрифт документа
+	Substituted font	Шрифт для заміни
+	Convert Permanently	Перетворити назавжди
+	Shift cells right	Зі зсувом праворуч
+	A table's rows keep the same columns here.	Тут рядки таблиці мають однакові стовпці.
+	Shift cells down	Зі зсувом донизу
+	Insert entire row	Вставити весь рядок
+	Insert entire column	Вставити весь стовпець
+	Number:	Число:
+	Number type:	Тип числа:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Введіть ім’я тегу джерела. Додаткові відомості можна додати пізніше, змінивши джерело.
+	Grid Settings	Параметри сітки
+	Add New Placeholder	Додати новий заповнювач

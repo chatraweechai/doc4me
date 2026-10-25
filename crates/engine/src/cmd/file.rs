@@ -78,6 +78,31 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .key("Mod+P / Mod+Shift+F12 / Mod+F2 / Mod+Alt+I")
         .pure(),
+        // Options › Advanced › Compatibility options: the layout options of this document that
+        // Doc4Me's layout follows.
+        CommandSpec::new("file.compatibilityOptions", "Compatibility Options", "File › Options › Advanced", |s, v| {
+            let mut changed = false;
+            for (k, f) in [("doNotUseHtmlParagraphAutoSpacing", 0), ("splitPageBreakAndParagraphMark", 1)] {
+                if let Some(b) = p::bool(v, k) {
+                    let x = if f == 0 { &mut s.doc.settings.add_para_spacing } else { &mut s.doc.settings.split_page_break_mark };
+                    changed |= *x != b;
+                    *x = b;
+                }
+            }
+            if changed {
+                s.relayout();
+            }
+            Ok(json!({
+                "mode": s.doc.settings.compat_mode,
+                "doNotUseHtmlParagraphAutoSpacing": s.doc.settings.add_para_spacing,
+                "splitPageBreakAndParagraphMark": s.doc.settings.split_page_break_mark,
+            }))
+        })
+        .params(r#"{"doNotUseHtmlParagraphAutoSpacing"?: bool (space after and before add up instead of the larger winning), "splitPageBreakAndParagraphMark"?: bool (a page break ending a paragraph takes its mark to the next page)} → the options and the compatibility mode (15: Word 2013 and later)"#),
+        // Options › Advanced › Font Substitution: the fonts the document names that aren't
+        // installed, each with the font shown instead; `convert` puts that font in their place.
+        CommandSpec::new("file.fontSubstitution", "Font Substitution", "File › Options › Advanced", font_substitution)
+            .params(r#"{"convert"?: [font name] (replace these missing fonts with their substitutes, Convert Permanently)} → {"fonts": [{"font", "substitute"}], "converted"}"#),
         // F1: Help (Word's Help pane; Doc4Me's Help window).
         CommandSpec::new("help.show", "Help", "Help", |s, _| {
             s.ui_requests.push(json!({"open": "about"}));
@@ -222,6 +247,89 @@ pub fn unmatched_fonts(doc: &Document) -> Vec<String> {
         }
     }
     found
+}
+
+/// Every font name the document's styles, runs and paragraph marks use, in all stories, with the
+/// theme's heading and body fonts: the first spelling of each (case and spaces aside).
+fn document_fonts(doc: &Document) -> Vec<String> {
+    let key = |n: &str| n.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).collect::<String>();
+    let mut found: Vec<String> = Vec::new();
+    let mut note = |name: Option<&str>| {
+        let Some(name) = name.map(str::trim).filter(|n| !n.is_empty() && !n.starts_with('+')) else { return };
+        if !found.iter().any(|f| key(f) == key(name)) {
+            found.push(name.to_string());
+        }
+    };
+    note(Some(&doc.settings.major_font));
+    note(Some(&doc.settings.minor_font));
+    let mut chr = |c: &doc4me_doc::props::CharProps| {
+        for f in [&c.font, &c.font_cs, &c.font_ea] {
+            note(f.as_deref());
+        }
+    };
+    chr(&doc.styles.default_chr);
+    for st in &doc.styles.styles {
+        chr(&st.chr);
+    }
+    let stories = std::iter::once(StoryRef::Body).chain(doc.parts.keys().map(|id| StoryRef::Part(*id)));
+    for story in stories {
+        for path in doc.para_paths(story) {
+            if let Some(para) = doc.para(story, &path) {
+                chr(&para.mark);
+                for run in &para.runs {
+                    chr(&run.props);
+                }
+            }
+        }
+    }
+    found
+}
+
+/// `file.fontSubstitution`.
+fn font_substitution(s: &mut Session, v: &Value) -> CmdResult {
+    let fonts: Vec<(String, String)> =
+        document_fonts(&s.doc).into_iter().filter_map(|f| doc4me_fonts::word::substitute_for(&f).map(|sub| (f, sub))).collect();
+    let key = |n: &str| n.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).collect::<String>();
+    let wanted: Vec<String> = v.get("convert").and_then(Value::as_array).into_iter().flatten().filter_map(Value::as_str).map(key).collect();
+    let swap: Vec<(String, String)> = fonts.iter().filter(|(f, _)| wanted.contains(&key(f))).map(|(f, sub)| (key(f), sub.clone())).collect();
+    let mut converted = 0;
+    if !swap.is_empty() {
+        let fix = |name: &mut Option<String>, n: &mut usize| {
+            if let Some(sub) = name.as_deref().and_then(|x| swap.iter().find(|(k, _)| *k == key(x))).map(|(_, sub)| sub.clone()) {
+                *name = Some(sub);
+                *n += 1;
+            }
+        };
+        let fix_chr = |c: &mut doc4me_doc::props::CharProps, n: &mut usize| {
+            fix(&mut c.font, n);
+            fix(&mut c.font_cs, n);
+            fix(&mut c.font_ea, n);
+        };
+        for f in [&mut s.doc.settings.major_font, &mut s.doc.settings.minor_font] {
+            let mut o = Some(f.clone());
+            fix(&mut o, &mut converted);
+            *f = o.unwrap_or_default();
+        }
+        fix_chr(&mut s.doc.styles.default_chr, &mut converted);
+        for st in &mut s.doc.styles.styles {
+            fix_chr(&mut st.chr, &mut converted);
+        }
+        let stories: Vec<StoryRef> = std::iter::once(StoryRef::Body).chain(s.doc.parts.keys().map(|id| StoryRef::Part(*id))).collect();
+        for story in stories {
+            for path in s.doc.para_paths(story) {
+                let para = s.doc.para_mut(story, &path)?;
+                fix_chr(&mut para.mark, &mut converted);
+                for run in &mut para.runs {
+                    fix_chr(&mut run.props, &mut converted);
+                }
+                para.touch();
+            }
+        }
+        s.relayout();
+    }
+    let left: Vec<Value> =
+        fonts.iter().filter(|(f, _)| !swap.iter().any(|(k, _)| *k == key(f))).map(|(f, sub)| json!({"font": f, "substitute": sub})).collect();
+    Ok(json!({"fonts": left, "converted": converted}))
 }
 
 /// File › Info › Protect Document › Encrypt with Password: the password Word documents are saved

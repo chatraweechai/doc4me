@@ -291,6 +291,18 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("references.sources", "Manage Sources", "References › Citations & Bibliography", sources)
             .params(r#"{"add"?: Source, "remove"?: tag} → list"#),
         CommandSpec::new("references.citation", "Insert Citation", "References › Citations & Bibliography", citation).params(r#"{"tag"?: string, "source"?: Source (added if new), "pages"?: string}"#),
+        // Insert Citation › Add New Placeholder…: cite a source known only by its name for now.
+        CommandSpec::new("references.placeholder", "Add New Placeholder", "References › Citations & Bibliography", |s, v| {
+            let name = p::req_str(v, "name")?.trim().to_string();
+            if name.is_empty() || name.chars().count() > 255 || !name.chars().all(|c| c.is_alphanumeric() || c == '_' || c == '-') {
+                return Err(CmdError::Params("a placeholder's name is letters, digits, _ and -, with no spaces".into()));
+            }
+            if !s.doc.sources.iter().any(|x| x.tag == name) {
+                s.doc.sources.push(Source { tag: name.clone(), kind: "other".into(), ..Default::default() });
+            }
+            citation(s, &json!({"tag": name}))
+        })
+        .params(r#"{"name": string (letters, digits, _ and -)} — cites the placeholder, adding it as a source if new"#),
         CommandSpec::new("references.citationStyle", "Style", "References › Citations & Bibliography", |s, v| {
             let st = p::str(v, "style").unwrap_or("APA");
             let st = find_style(st).ok_or_else(|| {
@@ -463,8 +475,17 @@ fn render(template: &str, field: &dyn Fn(&str) -> String) -> String {
 }
 
 /// In-text citation for a style; `n` is the source's number in numbered styles.
+/// A placeholder: a source known only by its tag (Insert Citation › Add New Placeholder), filled
+/// in later. Its citations show the tag and the bibliography leaves it out, as in Word.
+pub fn is_placeholder(src: &Source) -> bool {
+    src.author.trim().is_empty() && src.title.trim().is_empty() && src.year.trim().is_empty()
+}
+
 pub fn cite(src: &Source, style_name: &str, n: usize, pages: &str) -> String {
     let st = style(style_name);
+    if is_placeholder(src) && !matches!(st.cite, Cite::Number { .. }) {
+        return format!("({})", src.tag);
+    }
     let au = authors(&src.author);
     let lasts: Vec<&str> = au.iter().map(|a| a.0.as_str()).collect();
     let who = match lasts.as_slice() {
@@ -619,12 +640,12 @@ fn author_key(src: &Source) -> String {
 fn bib_order(doc: &Document, st: &CiteStyle) -> Vec<usize> {
     let cited = cited_tags(doc);
     let mut idx: Vec<usize> = if cited.is_empty() {
-        (0..doc.sources.len()).collect()
+        (0..doc.sources.len()).filter(|i| !doc.sources.get(*i).is_some_and(is_placeholder)).collect()
     } else if st.order == Order::Cited {
-        cited.iter().filter_map(|t| doc.sources.iter().position(|x| &x.tag == t)).collect()
+        cited.iter().filter_map(|t| doc.sources.iter().position(|x| &x.tag == t && !is_placeholder(x))).collect()
     } else {
         let cited: std::collections::HashSet<&str> = cited.iter().map(String::as_str).collect();
-        doc.sources.iter().enumerate().filter(|(_, x)| cited.contains(x.tag.as_str())).map(|(i, _)| i).collect()
+        doc.sources.iter().enumerate().filter(|(_, x)| cited.contains(x.tag.as_str()) && !is_placeholder(x)).map(|(i, _)| i).collect()
     };
     let key =
         |i: &usize, by_title: bool| doc.sources.get(*i).map(|x| if by_title { x.title.to_lowercase() } else { author_key(x) }).unwrap_or_default();

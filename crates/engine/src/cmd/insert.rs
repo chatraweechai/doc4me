@@ -86,6 +86,11 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("insert.symbol", "Symbol", "Insert › Symbols", symbol).params(r#"{"char": string, "font"?: family (the symbol's own font)}"#),
         CommandSpec::new("insert.field", "Field", "Insert › Text › Quick Parts", field).key("Mod+F9").params(r#"{"instr": string, "result"?: string}"#),
         // Word's Ctrl+Alt+L: a LISTNUM field (numbering within a paragraph).
+        // Word's Insert Number: a number written out in a numbering style, as an = field with a \*
+        // format switch (which Word keeps when the field updates).
+        CommandSpec::new("insert.number", "Number", "Insert › Symbols", insert_number).params(
+            r#"{"number": 0-999999, "format"?: "Arabic|alphabetic|ALPHABETIC|roman|ROMAN|CardText|OrdText|Ordinal|ThaiArabic|ThaiCardText|ThaiLetter|ChineseNum1|ChineseNum2|ChineseNum3" (default Arabic; letters and Roman numerals from 1)}"#,
+        ),
         CommandSpec::new("insert.listNumField", "Insert LISTNUM Field", "Insert › Text › Quick Parts", |s, _| {
             field(s, &json!({"instr": "LISTNUM", "result": "1)"}))
         })
@@ -752,6 +757,42 @@ fn symbol(s: &mut Session, v: &Value) -> CmdResult {
     s.pending = Some(base);
     r?;
     sel_result(s)
+}
+
+/// Insert Number's number types: the `\*` switch and how it writes a number.
+pub const NUMBER_FORMATS: [(&str, doc4me_doc::section::NumFormat); 14] = {
+    use doc4me_doc::section::NumFormat as F;
+    [
+        ("Arabic", F::Decimal),
+        ("alphabetic", F::LowerLetter),
+        ("ALPHABETIC", F::UpperLetter),
+        ("roman", F::LowerRoman),
+        ("ROMAN", F::UpperRoman),
+        ("CardText", F::CardinalText),
+        ("OrdText", F::OrdinalText),
+        ("Ordinal", F::Ordinal),
+        ("ThaiArabic", F::ThaiNumbers),
+        ("ThaiCardText", F::ThaiCounting),
+        ("ThaiLetter", F::ThaiLetters),
+        ("ChineseNum1", F::ChineseCountingThousand),
+        ("ChineseNum2", F::ChineseLegalSimplified),
+        ("ChineseNum3", F::IdeographDigital),
+    ]
+};
+
+/// `insert.number`: `= 42 \* roman` showing "xlii".
+fn insert_number(s: &mut Session, v: &Value) -> CmdResult {
+    let n = p::u64(v, "number").filter(|n| *n <= 999_999).ok_or_else(|| CmdError::Params("`number` is 0 to 999999".into()))? as u32;
+    let name = p::str(v, "format").unwrap_or("Arabic");
+    let (switch, fmt) =
+        NUMBER_FORMATS.iter().find(|(k, _)| *k == name).copied().ok_or_else(|| CmdError::Params(format!("no number format `{name}`")))?;
+    if n == 0 && matches!(switch, "alphabetic" | "ALPHABETIC" | "roman" | "ROMAN" | "ThaiLetter") {
+        return Err(CmdError::Params("letters and Roman numerals start at 1".into()));
+    }
+    let instr = if switch == "Arabic" { format!("= {n}") } else { format!("= {n} \\* {switch}") };
+    // A field's CardText and OrdText are lower case ("twenty-one"), unlike list numbers.
+    let result = if matches!(switch, "CardText" | "OrdText") { fmt.format(n).to_lowercase() } else { fmt.format(n) };
+    field(s, &json!({"instr": instr, "result": result}))
 }
 
 fn field(s: &mut Session, v: &Value) -> CmdResult {

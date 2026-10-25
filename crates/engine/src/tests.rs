@@ -4818,3 +4818,92 @@ fn highlight_accept_reject_and_list_commands() {
     assert!(s.dirty && s.path.is_none());
     assert_eq!(run(&mut s, "tools.listCommands", json!({"all": true}))["commands"], all);
 }
+
+/// Insert Rows and Insert Cells (shift down moves the column's cells into a new last row), the
+/// Drawing Grid settings, Compatibility Options and Insert Number.
+#[test]
+fn insert_rows_cells_grid_compatibility_and_number() {
+    let mut s = s();
+    run(&mut s, "insert.table", json!({"rows": 2, "cols": 2}));
+    run(&mut s, "text.insert", json!({"text": "a1"}));
+    run(&mut s, "text.tab", json!({}));
+    run(&mut s, "text.insert", json!({"text": "b1"}));
+    run(&mut s, "text.tab", json!({}));
+    run(&mut s, "text.insert", json!({"text": "a2"}));
+    let rows = |s: &Session| s.doc.body.iter().find_map(|b| b.as_table().map(|t| t.rows.len())).unwrap();
+    assert!(s.run("table.insertRows", &json!({"count": 0})).is_err());
+    run(&mut s, "table.insertRows", json!({"count": 2, "below": true}));
+    assert_eq!(rows(&s), 4);
+    run(&mut s, "caret.docStart", json!({}));
+    run(&mut s, "table.insertCells", json!({"shift": "down"}));
+    assert_eq!(rows(&s), 5);
+    let t = text(&s);
+    assert!(t.starts_with("\tb1\na1\t\na2\t"), "{t:?}");
+    assert!(s.run("table.insertCells", &json!({"shift": "right"})).is_err());
+    run(&mut s, "table.insertCells", json!({"shift": "column"}));
+    assert!(text(&s).starts_with("\t\tb1"), "{:?}", text(&s));
+    // Drawing grid: spacing kept in the document's settings, gridlines on screen.
+    assert!(s.run("layout.drawingGrid", &json!({"horizontal": 0.1})).is_err());
+    let g = run(&mut s, "layout.drawingGrid", json!({"horizontal": 18, "vertical": 4.5, "show": true}));
+    assert_eq!(g, json!({"horizontal": 18.0, "vertical": 4.5, "show": true}));
+    assert!(s.view.gridlines && s.doc.settings.grid_h == 18.0);
+    // Compatibility options.
+    let c = run(&mut s, "file.compatibilityOptions", json!({"doNotUseHtmlParagraphAutoSpacing": true}));
+    assert_eq!((c["doNotUseHtmlParagraphAutoSpacing"].as_bool(), c["splitPageBreakAndParagraphMark"].as_bool()), (Some(true), Some(false)));
+    assert!(s.doc.settings.add_para_spacing);
+    // Insert Number: an = field with the format switch, showing the number written out.
+    run(&mut s, "caret.docEnd", json!({}));
+    run(&mut s, "insert.number", json!({"number": 42, "format": "roman"}));
+    run(&mut s, "insert.number", json!({"number": 21, "format": "CardText"}));
+    assert!(text(&s).ends_with("xliitwenty-one"), "{:?}", text(&s));
+    assert!(s.run("insert.number", &json!({"number": 0, "format": "ROMAN"})).is_err());
+    assert!(s.run("insert.number", &json!({"number": 5, "format": "bogus"})).is_err());
+    assert!(s.run("insert.number", &json!({"number": 1_000_000})).is_err());
+    let instrs: Vec<String> = s
+        .doc
+        .para_paths(StoryRef::Body)
+        .iter()
+        .filter_map(|p| s.doc.para(StoryRef::Body, p))
+        .flat_map(|p| p.objects.iter())
+        .filter_map(|o| match o {
+            doc4me_doc::InlineObject::Field { instr, .. } => Some(instr.clone()),
+            _ => None,
+        })
+        .collect();
+    assert_eq!(instrs, vec!["= 42 \\* roman".to_string(), "= 21 \\* CardText".to_string()]);
+}
+
+/// Font Substitution lists the missing fonts with what shows instead; Convert Permanently puts
+/// that font in their place. A citation placeholder shows its name and stays out of the
+/// bibliography.
+#[test]
+fn font_substitution_and_citation_placeholders() {
+    let mut s = s();
+    run(&mut s, "text.insert", json!({"text": "Kilns"}));
+    run(&mut s, "select.all", json!({}));
+    run(&mut s, "format.set", json!({"props": {"font": "Zyx Missing Sans"}}));
+    let v = run(&mut s, "file.fontSubstitution", json!({}));
+    let fonts = v["fonts"].as_array().unwrap();
+    let row = fonts.iter().find(|f| f["font"] == "Zyx Missing Sans").expect("listed");
+    let sub = row["substitute"].as_str().unwrap().to_string();
+    let v = run(&mut s, "file.fontSubstitution", json!({"convert": ["zyx missing sans"]}));
+    assert!(v["converted"].as_u64().unwrap() >= 1);
+    assert!(!v["fonts"].as_array().unwrap().iter().any(|f| f["font"] == "Zyx Missing Sans"));
+    let p = s.doc.para(StoryRef::Body, &doc4me_doc::Path::top(0)).unwrap();
+    assert_eq!(p.runs[0].props.font.as_deref(), Some(sub.as_str()));
+    // Placeholders.
+    run(&mut s, "caret.docEnd", json!({}));
+    assert!(s.run("references.placeholder", &json!({"name": "two words"})).is_err());
+    run(&mut s, "references.placeholder", json!({"name": "Kiln1"}));
+    assert!(text(&s).ends_with("(Kiln1)"), "{:?}", text(&s));
+    run(
+        &mut s,
+        "references.citation",
+        json!({"source": {"tag": "Rivera2024", "author": "Rivera, Alex", "title": "Kilns", "year": "2024", "kind": "book"}}),
+    );
+    run(&mut s, "text.newParagraph", json!({}));
+    run(&mut s, "references.bibliography", json!({}));
+    let t = text(&s);
+    assert!(t.contains("Rivera, A.") && !t.contains("Kiln1."), "{t}");
+    assert_eq!(s.doc.sources.iter().filter(|x| x.tag == "Kiln1").count(), 1);
+}

@@ -322,6 +322,17 @@ fn advanced(app: &mut WordApp, ui: &mut Ui) {
         let _ = app.run("ui.keytips", json!({"value": keytips}));
     }
     ui.add_space(8.0);
+    // Word's Font Substitution… and Compatibility options (this document's layout options).
+    section(ui, "This document");
+    ui.horizontal(|ui| {
+        if ui.button(tl!("Font Substitution…")).clicked() {
+            let _ = app.run("file.fontSubstitution", json!({}));
+        }
+        if ui.button(tl!("Compatibility Options…")).clicked() {
+            let _ = app.run("file.compatibilityOptions", json!({}));
+        }
+    });
+    ui.add_space(8.0);
     section(ui, "Animation");
     let mut caret = app.ui.caret_animation;
     if ui

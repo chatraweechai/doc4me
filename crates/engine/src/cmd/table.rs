@@ -17,6 +17,11 @@ pub fn specs() -> Vec<CommandSpec> {
         t(CommandSpec::new("table.insertRowAbove", "Insert Above", "Table Layout › Rows & Columns", |s, _| row(s, false))),
         t(CommandSpec::new("table.insertRowBelow", "Insert Below", "Table Layout › Rows & Columns", |s, _| row(s, true))),
         t(CommandSpec::new("table.insertColumnLeft", "Insert Left", "Table Layout › Rows & Columns", |s, _| col(s, false))),
+        // Word's Insert Rows and Insert Cells dialogs.
+        t(CommandSpec::new("table.insertRows", "Insert Rows", "Table Layout › Rows & Columns", insert_rows)
+            .params(r#"{"count"?: 1-100 (default 1), "below"?: bool (default above)}"#)),
+        t(CommandSpec::new("table.insertCells", "Insert Cells", "Table Layout › Rows & Columns", insert_cells)
+            .params(r#"{"shift": "down" (the column's cells move down a row from here; the table gains a row) | "row" (a whole row above) | "column" (a whole column left)}"#)),
         t(CommandSpec::new("table.insertColumnRight", "Insert Right", "Table Layout › Rows & Columns", |s, _| col(s, true))),
         t(CommandSpec::new("table.deleteRow", "Delete Rows", "Table Layout › Rows & Columns › Delete", del_row)),
         t(CommandSpec::new("table.deleteColumn", "Delete Columns", "Table Layout › Rows & Columns › Delete", del_col)),
@@ -463,6 +468,49 @@ fn row(s: &mut Session, below: bool) -> CmdResult {
         t.insert_row(if below { r + 1 } else { r }, r);
     }
     fix_caret(s, &tp, if below { r + 1 } else { r }, c)
+}
+
+/// `table.insertRows`: `count` rows above (or below) the cursor's row, like it.
+fn insert_rows(s: &mut Session, v: &Value) -> CmdResult {
+    let n = match v.get("count") {
+        None | Some(Value::Null) => 1,
+        Some(c) => c.as_u64().filter(|n| (1..=100).contains(n)).ok_or_else(|| CmdError::Params("`count` is 1 to 100".into()))?,
+    };
+    let below = p::bool(v, "below").unwrap_or(false);
+    let (tp, r, c) = cell(s)?;
+    let t = s.doc.table_mut(s.sel.focus.story, &tp)?;
+    for _ in 0..n {
+        t.insert_row(if below { r + 1 } else { r }, r);
+    }
+    fix_caret(s, &tp, if below { r + 1 } else { r }, c)
+}
+
+/// `table.insertCells`. Shift cells down: as in Word, the cells of the cursor's column from its
+/// row down move one row down into a new last row, leaving the cursor's cell empty.
+fn insert_cells(s: &mut Session, v: &Value) -> CmdResult {
+    match p::req_str(v, "shift")? {
+        "row" => row(s, false),
+        "column" => col(s, false),
+        "down" => {
+            let (tp, r, c) = cell(s)?;
+            let story = s.sel.focus.story;
+            let t = s.doc.table_mut(story, &tp)?;
+            let last = t.rows.len().saturating_sub(1);
+            t.insert_row(last + 1, last);
+            for i in (r + 1..t.rows.len()).rev() {
+                let above = t.rows.get(i - 1).and_then(|x| x.cells.get(c)).map(|x| x.blocks.clone());
+                if let (Some(blocks), Some(cell)) = (above, t.rows.get_mut(i).and_then(|x| x.cells.get_mut(c))) {
+                    cell.blocks = blocks;
+                }
+            }
+            if let Some(cell) = t.rows.get_mut(r).and_then(|x| x.cells.get_mut(c)) {
+                cell.blocks = doc4me_doc::Cell::empty().blocks;
+            }
+            touch_cells(s, &tp)?;
+            fix_caret(s, &tp, r, c)
+        }
+        other => Err(CmdError::Params(format!("`shift` is down, row or column, not `{other}`"))),
+    }
 }
 
 fn col(s: &mut Session, right: bool) -> CmdResult {

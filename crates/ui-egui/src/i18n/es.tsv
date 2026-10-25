@@ -2611,3 +2611,37 @@ spacing	Normal	Normal
 	A new document lists the commands with their shortcuts.	Un documento nuevo enumera los comandos con sus métodos abreviados.
 	Border…	Borde…
 	Language…	Idioma…
+	Font Substitution…	Sustitución de fuentes…
+	Compatibility Options…	Opciones de compatibilidad…
+	Add New Placeholder…	Agregar nuevo marcador de posición…
+	Drawing Grid	Cuadrícula de dibujo
+	Compatibility Options	Opciones de compatibilidad
+	Font Substitution	Sustitución de fuentes
+	Insert Rows	Insertar filas
+	Insert Cells	Insertar celdas
+	Placeholder Name	Nombre del marcador de posición
+	Horizontal spacing:	Espaciado horizontal:
+	Vertical spacing:	Espaciado vertical:
+	Display gridlines on screen	Mostrar líneas de cuadrícula en pantalla
+	Compatibility mode: {version}	Modo de compatibilidad: {version}
+	Word 2013 and later	Word 2013 y posterior
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Opciones de diseño para este documento
+	Don't use HTML paragraph auto spacing	No usar el espaciado automático de párrafos HTML
+	Split apart page break and paragraph mark	Separar el salto de página y la marca de párrafo
+	Every font this document uses is installed.	Todas las fuentes de este documento están instaladas.
+	Missing document font	Fuente del documento que falta
+	Substituted font	Fuente sustituta
+	Convert Permanently	Convertir permanentemente
+	Shift cells right	Desplazar las celdas hacia la derecha
+	A table's rows keep the same columns here.	Aquí las filas de una tabla mantienen las mismas columnas.
+	Shift cells down	Desplazar las celdas hacia abajo
+	Insert entire row	Insertar toda una fila
+	Insert entire column	Insertar toda una columna
+	Number:	Número:
+	Number type:	Tipo de número:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Escriba el nombre de etiqueta del origen. Puede agregar más información a este origen más adelante modificándolo.
+	Grid Settings	Configuración de cuadrícula
+	Add New Placeholder	Agregar nuevo marcador de posición

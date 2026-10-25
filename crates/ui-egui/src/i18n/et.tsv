@@ -2605,3 +2605,37 @@ spacing	Normal	Tavaline
 	A new document lists the commands with their shortcuts.	Uus dokument loetleb käsud koos nende kiirklahvidega.
 	Border…	Ääris…
 	Language…	Keel…
+	Font Substitution…	Fondiasendus…
+	Compatibility Options…	Ühilduvussuvandid…
+	Add New Placeholder…	Lisa uus kohatäide…
+	Drawing Grid	Joonistusruudustik
+	Compatibility Options	Ühilduvussuvandid
+	Font Substitution	Fondiasendus
+	Insert Rows	Ridade lisamine
+	Insert Cells	Lahtrite lisamine
+	Placeholder Name	Kohatäite nimi
+	Horizontal spacing:	Horisontaalne vahe:
+	Vertical spacing:	Vertikaalne vahe:
+	Display gridlines on screen	Kuva ruudustikujooned ekraanil
+	Compatibility mode: {version}	Ühilduvusrežiim: {version}
+	Word 2013 and later	Word 2013 ja uuemad
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Selle dokumendi paigutussuvandid
+	Don't use HTML paragraph auto spacing	Ära kasuta HTML-i automaatset lõiguvahet
+	Split apart page break and paragraph mark	Eralda leheküljepiir ja lõigumärk
+	Every font this document uses is installed.	Kõik selle dokumendi fondid on installitud.
+	Missing document font	Puuduv dokumendi font
+	Substituted font	Asendusfont
+	Convert Permanently	Teisenda jäädavalt
+	Shift cells right	Nihuta lahtrid paremale
+	A table's rows keep the same columns here.	Tabeli read jäävad siin samade veergudega.
+	Shift cells down	Nihuta lahtrid alla
+	Insert entire row	Lisa terve rida
+	Insert entire column	Lisa terve veerg
+	Number:	Arv:
+	Number type:	Arvu tüüp:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Tippige allika sildi nimi. Allikale saate hiljem rohkem teavet lisada, kui seda redigeerite.
+	Grid Settings	Ruudustiku sätted
+	Add New Placeholder	Lisa uus kohatäide

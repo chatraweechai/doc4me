@@ -2602,3 +2602,37 @@ spacing	Normal	Normalne
 	A new document lists the commands with their shortcuts.	Nowy dokument wyświetli listę poleceń z ich skrótami klawiaturowymi.
 	Border…	Obramowanie…
 	Language…	Język…
+	Font Substitution…	Podstawianie czcionek…
+	Compatibility Options…	Opcje zgodności…
+	Add New Placeholder…	Dodaj nowy symbol zastępczy…
+	Drawing Grid	Siatka rysunku
+	Compatibility Options	Opcje zgodności
+	Font Substitution	Podstawianie czcionek
+	Insert Rows	Wstaw wiersze
+	Insert Cells	Wstaw komórki
+	Placeholder Name	Nazwa symbolu zastępczego
+	Horizontal spacing:	Odstęp w poziomie:
+	Vertical spacing:	Odstęp w pionie:
+	Display gridlines on screen	Wyświetlaj linie siatki na ekranie
+	Compatibility mode: {version}	Tryb zgodności: {version}
+	Word 2013 and later	Word 2013 i nowsze
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Opcje układu dla tego dokumentu
+	Don't use HTML paragraph auto spacing	Nie używaj automatycznych odstępów akapitów HTML
+	Split apart page break and paragraph mark	Rozdziel podział strony i znacznik akapitu
+	Every font this document uses is installed.	Wszystkie czcionki tego dokumentu są zainstalowane.
+	Missing document font	Brakująca czcionka dokumentu
+	Substituted font	Czcionka zastępcza
+	Convert Permanently	Konwertuj na stałe
+	Shift cells right	Przesuń komórki w prawo
+	A table's rows keep the same columns here.	Tutaj wiersze tabeli mają te same kolumny.
+	Shift cells down	Przesuń komórki w dół
+	Insert entire row	Wstaw cały wiersz
+	Insert entire column	Wstaw całą kolumnę
+	Number:	Liczba:
+	Number type:	Typ liczby:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Wpisz nazwę tagu źródła. Więcej informacji możesz dodać później, edytując źródło.
+	Grid Settings	Ustawienia siatki
+	Add New Placeholder	Dodaj nowy symbol zastępczy

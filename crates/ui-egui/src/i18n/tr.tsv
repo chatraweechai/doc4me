@@ -2624,3 +2624,37 @@ spacing	Normal	Normal
 	A new document lists the commands with their shortcuts.	Yeni bir belge, komutları kısayollarıyla birlikte listeler.
 	Border…	Kenarlık…
 	Language…	Dil…
+	Font Substitution…	Yazı Tipi Değiştirme…
+	Compatibility Options…	Uyumluluk Seçenekleri…
+	Add New Placeholder…	Yeni Yer Tutucu Ekle…
+	Drawing Grid	Çizim Kılavuzu
+	Compatibility Options	Uyumluluk Seçenekleri
+	Font Substitution	Yazı Tipi Değiştirme
+	Insert Rows	Satır Ekle
+	Insert Cells	Hücre Ekle
+	Placeholder Name	Yer Tutucu Adı
+	Horizontal spacing:	Yatay aralık:
+	Vertical spacing:	Dikey aralık:
+	Display gridlines on screen	Kılavuz çizgilerini ekranda göster
+	Compatibility mode: {version}	Uyumluluk modu: {version}
+	Word 2013 and later	Word 2013 ve sonrası
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Bu belge için düzen seçenekleri
+	Don't use HTML paragraph auto spacing	HTML paragraf otomatik aralığını kullanma
+	Split apart page break and paragraph mark	Sayfa sonunu ve paragraf işaretini ayır
+	Every font this document uses is installed.	Bu belgenin kullandığı tüm yazı tipleri yüklü.
+	Missing document font	Eksik belge yazı tipi
+	Substituted font	Yerine kullanılan yazı tipi
+	Convert Permanently	Kalıcı Olarak Dönüştür
+	Shift cells right	Hücreleri sağa kaydır
+	A table's rows keep the same columns here.	Burada bir tablonun satırları aynı sütunları korur.
+	Shift cells down	Hücreleri aşağı kaydır
+	Insert entire row	Tüm satırı ekle
+	Insert entire column	Tüm sütunu ekle
+	Number:	Sayı:
+	Number type:	Sayı türü:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Kaynağın etiket adını yazın. Kaynağı düzenleyerek daha sonra başka bilgiler ekleyebilirsiniz.
+	Grid Settings	Kılavuz Ayarları
+	Add New Placeholder	Yeni Yer Tutucu Ekle

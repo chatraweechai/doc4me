@@ -2596,3 +2596,37 @@ spacing	Normal	Normal
 	A new document lists the commands with their shortcuts.	Ein neues Dokument listet die Befehle mit ihren Tastenkombinationen auf.
 	Border…	Rahmen…
 	Language…	Sprache…
+	Font Substitution…	Schriftartersetzung…
+	Compatibility Options…	Kompatibilitätsoptionen…
+	Add New Placeholder…	Neuen Platzhalter hinzufügen…
+	Drawing Grid	Zeichnungsraster
+	Compatibility Options	Kompatibilitätsoptionen
+	Font Substitution	Schriftartersetzung
+	Insert Rows	Zeilen einfügen
+	Insert Cells	Zellen einfügen
+	Placeholder Name	Platzhaltername
+	Horizontal spacing:	Horizontaler Abstand:
+	Vertical spacing:	Vertikaler Abstand:
+	Display gridlines on screen	Gitternetzlinien auf dem Bildschirm anzeigen
+	Compatibility mode: {version}	Kompatibilitätsmodus: {version}
+	Word 2013 and later	Word 2013 und höher
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Layoutoptionen für dieses Dokument
+	Don't use HTML paragraph auto spacing	Keinen automatischen HTML-Absatzabstand verwenden
+	Split apart page break and paragraph mark	Seitenumbruch und Absatzmarke trennen
+	Every font this document uses is installed.	Alle Schriftarten dieses Dokuments sind installiert.
+	Missing document font	Fehlende Dokumentschriftart
+	Substituted font	Ersetzte Schriftart
+	Convert Permanently	Dauerhaft konvertieren
+	Shift cells right	Zellen nach rechts verschieben
+	A table's rows keep the same columns here.	Die Zeilen einer Tabelle behalten hier dieselben Spalten.
+	Shift cells down	Zellen nach unten verschieben
+	Insert entire row	Ganze Zeile einfügen
+	Insert entire column	Ganze Spalte einfügen
+	Number:	Zahl:
+	Number type:	Zahlentyp:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Geben Sie den Tagnamen der Quelle ein. Weitere Angaben können Sie später durch Bearbeiten der Quelle hinzufügen.
+	Grid Settings	Rastereinstellungen
+	Add New Placeholder	Neuen Platzhalter hinzufügen

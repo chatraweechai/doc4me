@@ -2597,3 +2597,37 @@ spacing	Normal	標準
 	A new document lists the commands with their shortcuts.	新しい文書にコマンドとショートカット キーの一覧が作成されます。
 	Border…	罫線…
 	Language…	言語…
+	Font Substitution…	フォントの置換…
+	Compatibility Options…	互換性オプション…
+	Add New Placeholder…	新しいプレースホルダーの追加…
+	Drawing Grid	描画グリッド
+	Compatibility Options	互換性オプション
+	Font Substitution	フォントの置換
+	Insert Rows	行の挿入
+	Insert Cells	セルの挿入
+	Placeholder Name	プレースホルダー名
+	Horizontal spacing:	水平方向の間隔:
+	Vertical spacing:	垂直方向の間隔:
+	Display gridlines on screen	画面にグリッド線を表示する
+	Compatibility mode: {version}	互換モード: {version}
+	Word 2013 and later	Word 2013 以降
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	この文書のレイアウト オプション
+	Don't use HTML paragraph auto spacing	HTML の段落自動間隔を使用しない
+	Split apart page break and paragraph mark	改ページと段落記号を分離する
+	Every font this document uses is installed.	この文書のフォントはすべてインストールされています。
+	Missing document font	見つからない文書のフォント
+	Substituted font	代替フォント
+	Convert Permanently	完全に変換
+	Shift cells right	右方向にシフト
+	A table's rows keep the same columns here.	ここでは表の各行の列は同じです。
+	Shift cells down	下方向にシフト
+	Insert entire row	行全体を挿入
+	Insert entire column	列全体を挿入
+	Number:	数値:
+	Number type:	数値の種類:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	資料文献のタグ名を入力してください。資料文献の情報は後で編集して追加できます。
+	Grid Settings	グリッドの設定
+	Add New Placeholder	新しいプレースホルダーの追加

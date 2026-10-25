@@ -38,6 +38,7 @@ pub mod dialogs_insert;
 pub mod dialogs_keyboard;
 pub mod dialogs_layout;
 pub mod dialogs_lists;
+pub mod dialogs_misc;
 pub mod dialogs_notes;
 pub mod dialogs_para;
 pub mod dialogs_refs;
@@ -1780,6 +1781,19 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "layout.break" if !has("kind") => Some("insertBreak"),
         "review.highlightChanges" if params.as_object().is_none_or(|m| m.is_empty()) => Some("highlightChanges"),
         "tools.listCommands" if !has("all") => Some("listCommands"),
+        // Drawing Grid, Compatibility Options, Font Substitution, Insert Rows / Cells, Number and
+        // Placeholder Name without their input.
+        "layout.drawingGrid" | "file.compatibilityOptions" | "table.insertRows" if params.as_object().is_none_or(|m| m.is_empty()) => {
+            Some(match id {
+                "layout.drawingGrid" => "drawingGrid",
+                "file.compatibilityOptions" => "compatibilityOptions",
+                _ => "insertRows",
+            })
+        }
+        "file.fontSubstitution" if !has("convert") => Some("fontSubstitution"),
+        "table.insertCells" if !has("shift") => Some("insertCells"),
+        "insert.number" if !has("number") => Some("insertNumber"),
+        "references.placeholder" if !has("name") => Some("placeholderName"),
         // Modify Style without a style: the style of the paragraph at the caret.
         "styles.modify" if !has("style") => Some("modifyStyle"),
         _ => None,

@@ -2611,3 +2611,37 @@ spacing	Normal	Нормално
 	A new document lists the commands with their shortcuts.	Нови документ наводи команде са њиховим пречицама.
 	Border…	Ивица…
 	Language…	Језик…
+	Font Substitution…	Замена фонтова…
+	Compatibility Options…	Опције компатибилности…
+	Add New Placeholder…	Додај нови чувар места…
+	Drawing Grid	Мрежа за цртање
+	Compatibility Options	Опције компатибилности
+	Font Substitution	Замена фонтова
+	Insert Rows	Уметање редова
+	Insert Cells	Уметање ћелија
+	Placeholder Name	Име чувара места
+	Horizontal spacing:	Хоризонтални размак:
+	Vertical spacing:	Вертикални размак:
+	Display gridlines on screen	Прикажи линије мреже на екрану
+	Compatibility mode: {version}	Режим компатибилности: {version}
+	Word 2013 and later	Word 2013 и новији
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Опције распореда за овај документ
+	Don't use HTML paragraph auto spacing	Не користи аутоматски HTML размак између пасуса
+	Split apart page break and paragraph mark	Раздвоји прелом странице и ознаку пасуса
+	Every font this document uses is installed.	Сви фонтови овог документа су инсталирани.
+	Missing document font	Фонт документа који недостаје
+	Substituted font	Заменски фонт
+	Convert Permanently	Трајно конвертуј
+	Shift cells right	Помери ћелије удесно
+	A table's rows keep the same columns here.	Овде редови табеле имају исте колоне.
+	Shift cells down	Помери ћелије надоле
+	Insert entire row	Уметни цео ред
+	Insert entire column	Уметни целу колону
+	Number:	Број:
+	Number type:	Тип броја:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Откуцајте име ознаке извора. Више података о извору можете да додате касније уређивањем извора.
+	Grid Settings	Поставке мреже
+	Add New Placeholder	Додај нови чувар места

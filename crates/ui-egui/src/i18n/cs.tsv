@@ -2602,3 +2602,37 @@ spacing	Normal	Normální
 	A new document lists the commands with their shortcuts.	Nový dokument vypíše příkazy s jejich klávesovými zkratkami.
 	Border…	Ohraničení…
 	Language…	Jazyk…
+	Font Substitution…	Nahrazení písem…
+	Compatibility Options…	Možnosti kompatibility…
+	Add New Placeholder…	Přidat nový zástupný symbol…
+	Drawing Grid	Mřížka kreslení
+	Compatibility Options	Možnosti kompatibility
+	Font Substitution	Nahrazení písem
+	Insert Rows	Vložit řádky
+	Insert Cells	Vložit buňky
+	Placeholder Name	Název zástupného symbolu
+	Horizontal spacing:	Vodorovné rozestupy:
+	Vertical spacing:	Svislé rozestupy:
+	Display gridlines on screen	Zobrazit mřížku na obrazovce
+	Compatibility mode: {version}	Režim kompatibility: {version}
+	Word 2013 and later	Word 2013 a novější
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Možnosti rozložení pro tento dokument
+	Don't use HTML paragraph auto spacing	Nepoužívat automatické mezery odstavců HTML
+	Split apart page break and paragraph mark	Oddělit konec stránky a značku odstavce
+	Every font this document uses is installed.	Všechna písma tohoto dokumentu jsou nainstalována.
+	Missing document font	Chybějící písmo dokumentu
+	Substituted font	Náhradní písmo
+	Convert Permanently	Trvale převést
+	Shift cells right	Posunout buňky doprava
+	A table's rows keep the same columns here.	Řádky tabulky tu mají stejné sloupce.
+	Shift cells down	Posunout buňky dolů
+	Insert entire row	Vložit celý řádek
+	Insert entire column	Vložit celý sloupec
+	Number:	Číslo:
+	Number type:	Typ čísla:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Zadejte název značky zdroje. Další údaje můžete ke zdroji přidat později jeho úpravou.
+	Grid Settings	Nastavení mřížky
+	Add New Placeholder	Přidat nový zástupný symbol
