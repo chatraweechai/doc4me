@@ -2549,3 +2549,18 @@ spacing	Normal	Обычный
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Речь распознается на этом компьютере (whisper.cpp); ничего не отправляется в Интернет.
 	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Шрифт {fonts} не установлен на этом компьютере, поэтому документ показан шрифтом {with}. Строки и страницы могут разбиваться иначе, чем с исходным шрифтом.
 	Font not installed	Шрифт не установлен
+	Top of the Window	Верх окна
+	Bottom of the Window	Низ окна
+	Top of Next Page	Начало следующей страницы
+	Top of Previous Page	Начало предыдущей страницы
+	Symbol Font	Шрифт Symbol
+	Shrink Selection	Уменьшить выделение
+	Previous Window	Предыдущее окно
+	Next Window	Следующее окно
+	Previous Footnote	Предыдущая сноска
+	Last Cell in Row	Последняя ячейка строки
+	Last Cell in Column	Последняя ячейка столбца
+	First Cell in Row	Первая ячейка строки
+	First Cell in Column	Первая ячейка столбца
+	Insert LISTNUM Field	Вставить поле LISTNUM
+	Collapse the Ribbon	Свернуть ленту

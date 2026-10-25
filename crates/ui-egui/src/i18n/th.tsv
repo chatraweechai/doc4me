@@ -2570,3 +2570,18 @@ spacing	Normal	ปกติ
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	เสียงพูดถูกแปลงเป็นข้อความบนเครื่องนี้ (whisper.cpp) ไม่มีการส่งออนไลน์
 	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	เครื่องนี้ไม่มีฟอนต์ {fonts} จึงแสดงเอกสารนี้ด้วยฟอนต์ {with} แทน การขึ้นบรรทัดใหม่และการแบ่งหน้าอาจต่างจากฟอนต์ต้นฉบับ
 	Font not installed	ไม่มีฟอนต์นี้ในเครื่อง
+	Top of the Window	ด้านบนของหน้าต่าง
+	Bottom of the Window	ด้านล่างของหน้าต่าง
+	Top of Next Page	ด้านบนของหน้าถัดไป
+	Top of Previous Page	ด้านบนของหน้าก่อนหน้า
+	Symbol Font	แบบอักษร Symbol
+	Shrink Selection	ย่อส่วนที่เลือก
+	Previous Window	หน้าต่างก่อนหน้า
+	Next Window	หน้าต่างถัดไป
+	Previous Footnote	เชิงอรรถก่อนหน้า
+	Last Cell in Row	เซลล์สุดท้ายในแถว
+	Last Cell in Column	เซลล์สุดท้ายในคอลัมน์
+	First Cell in Row	เซลล์แรกในแถว
+	First Cell in Column	เซลล์แรกในคอลัมน์
+	Insert LISTNUM Field	แทรกเขตข้อมูล LISTNUM
+	Collapse the Ribbon	ยุบ Ribbon

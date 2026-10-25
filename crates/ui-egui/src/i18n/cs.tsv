@@ -2153,3 +2153,18 @@ spacing	Normal	Normální
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Řeč se rozpoznává v tomto počítači (whisper.cpp); nic se neodesílá online.
 	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} není v tomto počítači nainstalováno, proto se dokument zobrazuje písmem {with}. Řádky a stránky se mohou zalomit jinak než s původním písmem.
 	Font not installed	Písmo není nainstalováno
+	Top of the Window	Začátek okna
+	Bottom of the Window	Konec okna
+	Top of Next Page	Začátek další stránky
+	Top of Previous Page	Začátek předchozí stránky
+	Symbol Font	Písmo Symbol
+	Shrink Selection	Zmenšit výběr
+	Previous Window	Předchozí okno
+	Next Window	Další okno
+	Previous Footnote	Předchozí poznámka pod čarou
+	Last Cell in Row	Poslední buňka v řádku
+	Last Cell in Column	Poslední buňka ve sloupci
+	First Cell in Row	První buňka v řádku
+	First Cell in Column	První buňka ve sloupci
+	Insert LISTNUM Field	Vložit pole LISTNUM
+	Collapse the Ribbon	Sbalit pás karet

@@ -116,6 +116,8 @@ pub struct CanvasState {
     /// The last key ran an Alt shortcut: the text its key sends (it may arrive a frame later)
     /// isn't typed. The next key press clears it.
     pub(crate) swallow_text: bool,
+    /// Word's Ctrl+accent keys (Ctrl+' then e types é): the accent waiting for its letter.
+    pub(crate) dead_accent: Option<crate::keys::Accent>,
     /// Create Link is waiting for a click on the text box to link to: the linking box's object.
     pub(crate) link_from: Option<doc4me_doc::Pos>,
     /// What screen readers were last told about the document (#488).
@@ -181,6 +183,7 @@ impl Default for CanvasState {
             mini_anchor: None,
             pasted: false,
             swallow_text: false,
+            dead_accent: None,
             wheel: Default::default(),
             scroll_offset: egui::Vec2::ZERO,
             scroll_max: egui::Vec2::ZERO,
@@ -2215,6 +2218,25 @@ pub fn caret_screen(app: &mut WordApp) -> Option<(Pos2, f32)> {
         .and_then(|r| l.pages.get(c.page).map(|page| page_screen_scale(*r, page, app.canvas.scale)))
         .unwrap_or(app.canvas.scale);
     Some((p, c.height.max(c.width) * scale))
+}
+
+/// Ctrl+Alt+Page Up / Down: the caret to the first or last line showing in the window, in the
+/// column it is in (Shift extends the selection).
+pub fn caret_to_window_edge(app: &mut WordApp, bottom: bool, extend: bool) {
+    let (Some(area), Some((caret, _))) = (app.canvas.canvas_rect, caret_screen(app)) else { return };
+    let x = caret.x.clamp(area.left() + 1.0, area.right() - 1.0);
+    // Step in from the edge until a page is under the point (the gap between pages has none).
+    let mut found = None;
+    for i in 0..40 {
+        let y = if bottom { area.bottom() - 2.0 - i as f32 * 6.0 } else { area.top() + 2.0 + i as f32 * 6.0 };
+        if let Some(pos) = pos_from_screen(app, pos2(x, y)) {
+            found = Some(pos);
+            break;
+        }
+    }
+    if let Some(pos) = found {
+        let _ = app.run("caret.set", json!({"pos": pos, "extend": extend}));
+    }
 }
 
 pub fn pos_from_screen(app: &mut WordApp, p: Pos2) -> Option<Pos> {

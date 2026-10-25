@@ -95,10 +95,49 @@ fn word_default_shortcuts_resolve() {
         assert_eq!(id("Mod+Shift+G"), Some("edit.findPrevious"));
     } else {
         assert_eq!(id("Mod+Shift+G"), Some("review.wordCount"));
-        assert_eq!(id("Mod+Alt+C"), Some("text.copyright"));
         assert_eq!(id("Mod+Alt+H"), Some("format.highlight"));
+        // Microsoft 365's list: Ctrl+Shift+V pastes text only, Ctrl+Alt+C / V copy and paste
+        // formatting, Ctrl+G is Go To, Ctrl+Plus / Minus / 0 zoom, Ctrl+Shift+Minus is Subscript.
+        assert_eq!(id("Mod+Shift+V"), Some("edit.pasteText"));
+        assert_eq!(id("Mod+Alt+C"), Some("edit.copyFormat"));
+        assert_eq!(id("Mod+Alt+V"), Some("edit.pasteFormat"));
+        assert_eq!(id("Mod+G"), Some("edit.goto"));
+        assert_eq!(id("Mod+="), Some("view.zoomIn"));
+        assert_eq!(id("Mod+-"), Some("view.zoomOut"));
+        assert_eq!(id("Mod+0"), Some("view.zoom100"));
+        assert_eq!(id("Mod+Shift+-"), Some("format.subscript"));
     }
-    assert_eq!(id("Mod+PageUp"), Some("edit.findPrevious"));
+    assert_eq!(id("Mod+PageDown"), Some("caret.nextPage"));
+    assert_eq!(id("Mod+PageUp"), Some("caret.prevPage"));
+    assert_eq!(id("Shift+F8"), Some("select.shrink"));
+}
+
+#[test]
+fn page_keys_and_shrink_selection_move_like_word() {
+    let mut s = s();
+    run(&mut s, "text.insert", json!({"text": "One two three. Four five."}));
+    run(&mut s, "text.pageBreak", json!({}));
+    run(&mut s, "text.insert", json!({"text": "Second page"}));
+    run(&mut s, "caret.docStart", json!({}));
+    // Ctrl+Page Down: the top of the next page; Ctrl+Page Up back to the top of this one.
+    run(&mut s, "caret.nextPage", json!({}));
+    assert_eq!(s.sel.focus, Pos::body(1, 0));
+    run(&mut s, "caret.prevPage", json!({}));
+    assert_eq!(s.sel.focus, Pos::body(0, 0));
+    // F8 grows word → sentence → paragraph; Shift+F8 steps back down to the caret.
+    run(&mut s, "caret.set", json!({"pos": {"block": 0, "off": 5}}));
+    for _ in 0..4 {
+        run(&mut s, "select.extend", json!({}));
+    }
+    let grown = s.sel.ordered();
+    assert_eq!((grown.0.path.clone(), grown.1.path.clone()), (doc4me_doc::Path::top(0), doc4me_doc::Path::top(1)), "the whole document");
+    let mut steps = Vec::new();
+    for _ in 0..4 {
+        run(&mut s, "select.shrink", json!({}));
+        steps.push(s.sel.ordered().1);
+    }
+    // The paragraph (with its mark), its first sentence, its first word, then the caret.
+    assert_eq!(steps, [Pos::body(1, 0), Pos::body(0, 15), Pos::body(0, 4), Pos::body(0, 0)]);
 }
 
 #[test]
@@ -876,6 +915,50 @@ fn tables_commands() {
     run(&mut s, "table.deleteTable", json!({}));
     assert!(s.doc.body.iter().all(|b| b.as_table().is_none()));
     assert!(s.run("table.merge", &json!({})).is_err());
+}
+
+/// Word's table keys: Tab and Shift+Tab select the next or previous cell's content, Alt+Home /
+/// End / Page Up / Page Down reach the row's or column's first and last cells, Ctrl+Tab types a
+/// tab, and Alt+Shift+Up / Down move the row.
+#[test]
+fn table_keys_move_and_select_like_word() {
+    let mut s = s();
+    run(&mut s, "insert.table", json!({"rows": 3, "cols": 3}));
+    for (i, name) in ["A1", "B1", "C1", "A2", "B2", "C2", "A3", "B3", "C3"].iter().enumerate() {
+        if i > 0 {
+            run(&mut s, "text.tab", json!({}));
+        }
+        run(&mut s, "text.insert", json!({"text": name}));
+    }
+    let cell = |s: &Session| s.sel.focus.path.cell().map(|(_, r, c)| (r, c)).unwrap();
+    let selected = |s: &Session| s.selected_text();
+    run(&mut s, "table.firstCellInRow", json!({}));
+    assert_eq!(cell(&s), (2, 0));
+    run(&mut s, "table.firstCellInColumn", json!({}));
+    assert_eq!(cell(&s), (0, 0));
+    run(&mut s, "table.lastCellInRow", json!({}));
+    assert_eq!(cell(&s), (0, 2));
+    run(&mut s, "table.lastCellInColumn", json!({}));
+    assert_eq!(cell(&s), (2, 2));
+    run(&mut s, "text.backTab", json!({}));
+    assert_eq!((cell(&s), selected(&s).as_str()), ((2, 1), "B3"), "Shift+Tab selects the cell's content");
+    run(&mut s, "table.firstCellInColumn", json!({}));
+    run(&mut s, "text.tab", json!({}));
+    assert_eq!((cell(&s), selected(&s).as_str()), ((0, 2), "C1"), "Tab selects the cell's content");
+    // Alt+Shift+Down: row 1 goes below row 2; the caret goes with it.
+    run(&mut s, "table.firstCellInColumn", json!({}));
+    run(&mut s, "para.moveDown", json!({}));
+    let t = s.doc.body.iter().find_map(|b| b.as_table()).unwrap();
+    let first = |r: usize| t.rows[r].cells[0].blocks.iter().find_map(|b| b.as_para()).map(|p| p.text.clone()).unwrap();
+    assert_eq!((first(0), first(1), first(2)), ("A2".to_string(), "A1".to_string(), "A3".to_string()));
+    assert_eq!(cell(&s).0, 1);
+    run(&mut s, "para.moveUp", json!({}));
+    let t = s.doc.body.iter().find_map(|b| b.as_table()).unwrap();
+    assert_eq!(t.rows[0].cells[2].blocks.iter().find_map(|b| b.as_para()).map(|p| p.text.as_str()), Some("C1"));
+    // Ctrl+Tab: a tab character in the cell.
+    run(&mut s, "caret.set", json!({"pos": {"story": "body", "path": [0, 0, 0, 0], "off": 2}}));
+    run(&mut s, "text.tabCharacter", json!({}));
+    assert_eq!(s.doc.para_at(&s.sel.focus).unwrap().text, "A1\t");
 }
 
 /// AutoFit Contents (#44) measures the text: a column of short words narrows, a column with a
@@ -4432,7 +4515,9 @@ fn outline_show_level_filters_paragraphs() {
     assert_eq!(reg.by_shortcut("Alt+Shift+1").map(|c| c.id), Some("outline.showLevel1"));
     assert_eq!(reg.by_shortcut("Alt+Shift+A").map(|c| c.id), Some("outline.showAll"));
     assert_eq!(reg.by_shortcut("Alt+Shift+=").map(|c| c.id), Some("outline.expand"));
-    assert_eq!(reg.by_shortcut("Alt+Shift+-").map(|c| c.id), Some("outline.collapse"));
+    // Alt+Shift+Minus is Nonbreaking Hyphen in Microsoft's list; the front end collapses with it
+    // in Outline view.
+    assert_eq!(reg.by_shortcut("Alt+Shift+-").map(|c| c.id), Some("text.nbHyphen"));
     run(&mut s, "outline.close", json!({}));
     assert!(s.run("outline.showLevel1", &json!({})).is_err());
 }

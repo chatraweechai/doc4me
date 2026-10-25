@@ -19,6 +19,7 @@ const PARA_SKIP: [&str; 4] = ["style", "numbering", "numChange", "fmtChange"];
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![
+        // Shift+F1: Word's Reveal Formatting pane; Doc4Me's inspector shows the same formatting.
         CommandSpec::new("styles.inspector", "Style Inspector", "Home › Styles", |s, v| {
             s.view.style_inspector = p::bool(v, "value").unwrap_or(!s.view.style_inspector);
             let mut out = inspect(s);
@@ -28,6 +29,7 @@ pub fn specs() -> Vec<CommandSpec> {
             Ok(out)
         })
         .params(r#"{"value"?: bool (show/hide the pane)}"#)
+        .key("Shift+F1")
         .pure(),
         CommandSpec::new("styles.inspect", "Inspect Styles at Selection", "Home › Styles › Style Inspector", |s, _| Ok(inspect(s))).pure(),
         CommandSpec::new("styles.inspectorClear", "Clear Formatting Level", "Home › Styles › Style Inspector", clear)

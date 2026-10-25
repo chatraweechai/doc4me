@@ -2548,3 +2548,18 @@ spacing	Normal	Normal
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Konuşma bu bilgisayarda tanınır (whisper.cpp); çevrimiçi hiçbir şey gönderilmez.
 	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} bu bilgisayarda yüklü değil, bu nedenle belge {with} ile gösteriliyor. Satırlar ve sayfalar özgün yazı tipindekinden farklı bölünebilir.
 	Font not installed	Yazı tipi yüklü değil
+	Top of the Window	Pencerenin üstü
+	Bottom of the Window	Pencerenin altı
+	Top of Next Page	Sonraki sayfanın başı
+	Top of Previous Page	Önceki sayfanın başı
+	Symbol Font	Symbol yazı tipi
+	Shrink Selection	Seçimi daralt
+	Previous Window	Önceki pencere
+	Next Window	Sonraki pencere
+	Previous Footnote	Önceki dipnot
+	Last Cell in Row	Satırdaki son hücre
+	Last Cell in Column	Sütundaki son hücre
+	First Cell in Row	Satırdaki ilk hücre
+	First Cell in Column	Sütundaki ilk hücre
+	Insert LISTNUM Field	LISTNUM alanı ekle
+	Collapse the Ribbon	Şeridi daralt

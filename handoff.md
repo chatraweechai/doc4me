@@ -25,6 +25,7 @@
 - `062d409` ฝัง Intos และ Intos Display (OFL, github.com/muglug/intos) แทน Aptos/Aptos Display — วัดเทียบไฟล์ Aptos จริงแล้วตรงทุกความกว้าง (ตัดบรรทัดตรง 387/387) ตัวอื่นที่ใกล้ที่สุดคือ Lato 35.7%; แผนความพร้อม 80% ใน `docs/roadmap.md`; handoff นี้ — CI run 40191882219 ผ่าน (build, MSI และ zip)
 - ขั้น A เสร็จ (คอมมิต `cargo xtask readiness` ชุดล่าสุดบน `main`): เครื่องวัด `xtask/src/readiness.rs`, ชุดตรวจใน `docs/readiness/` (กติกาใน `README.md`), คลังเอกสารจริง 244 แถวนับ 222 (GOV.UK 72 OGL v3 + Zenodo 172 CC; 22 แถว GOV.UK เป็นคนละฉบับจึง `excluded`) ผลอยู่ที่ `docs/readiness.md` — CI run 40195346897 ของ `52d83ba` ผ่าน
 - ขั้น B เสร็จ: `ROADMAP.md` และเอกสาร parity ใช้ค่าวัด 66.1% แทนค่าประมาณ ~60% (รายละเอียดใน CHANGELOG `[Unreleased]` หมวดเปลี่ยนแปลง)
+- ขั้น C (เป้า 95%) กำลังทำ: `e1678b9` ระยะย่อหน้าแบบค่าที่มากกว่า + ระยะบรรทัด Aptos 1.2207 em, `eca31e8` ตัวแบ่งหน้าท้ายย่อหน้าและ Ctrl+Enter แบบ Word (จำนวนหน้าตรง 127 → 151, ต้น-ท้ายทุกหน้า 46 → 61), คีย์ลัดตามรายการของ Microsoft (ผ่าน 145 → 217/280); เครื่องมือเทียบตำแหน่งบรรทัดกับ PDF ของ Word อยู่ใน scratchpad ของ session (ydrift.py ใช้ `pdftotext -bbox-layout`) ไม่ได้อยู่ใน repo
 
 ### ผลวัดครั้งแรก (2026-10-25, คลัง 222 เอกสาร ตัวเลขสุดท้าย): 66.1%
 

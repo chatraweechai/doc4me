@@ -36,7 +36,8 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("edit.paste", "Paste", "Home › Clipboard", paste).key("Mod+V").params(r#"{"text"?: string}"#),
         CommandSpec::new("edit.pasteText", "Paste: Keep Text Only", "Home › Clipboard › Paste", paste_text)
             .params(r#"{"text"?: string}"#)
-            .key("Mod+Shift+Alt+V"),
+            // Word for Windows (Microsoft 365): Ctrl+Shift+V pastes text only.
+            .key(super::mac_or("Mod+Shift+Alt+V", "Mod+Shift+V / Mod+Shift+Alt+V")),
         CommandSpec::new("edit.pasteMerge", "Paste: Merge Formatting", "Home › Clipboard › Paste", paste_text).params(r#"{"text"?: string}"#),
         CommandSpec::new("edit.clipboardPane", "Clipboard Pane", "Home › Clipboard", |s, v| {
             let on = p::bool(v, "value").unwrap_or(!s.view.clipboard_pane);
@@ -74,22 +75,24 @@ pub fn specs() -> Vec<CommandSpec> {
             read_opts(s, v);
             step(s, 1)
         })
-        .key("Mod+G / F3 / Mod+PageDown")
+        // Word for Windows: Ctrl+G is Go To and Ctrl+Page Down the top of the next page.
+        // Shift+F4 repeats the last Find (Word: or Go To).
+        .key(super::mac_or("Mod+G / F3 / Shift+F4", "F3 / Shift+F4"))
         .params(r#"{"text"?: string, "matchCase"?: bool, "wholeWord"?: bool, "regex"?: bool}"#)
         .pure(),
         CommandSpec::new("edit.findPrevious", "Find Previous", "Home › Editing › Find", |s, v| {
             read_opts(s, v);
             step(s, -1)
         })
-        // Elsewhere Ctrl+Shift+G is Word Count; Ctrl+Page Up/Down browse the find results.
-        .key(super::mac_or("Mod+Shift+G / Mod+PageUp", "Mod+PageUp"))
+        // Elsewhere Ctrl+Shift+G is Word Count.
+        .key(super::mac_or("Mod+Shift+G", ""))
         .params(r#"{"text"?: string, "matchCase"?: bool, "wholeWord"?: bool, "regex"?: bool}"#)
         .pure(),
         CommandSpec::new("edit.replace", "Replace", "Home › Editing", replace).key("Mod+H").params(r#"{"text": string, "with": string, …options of edit.replaceAll}"#),
         CommandSpec::new("edit.replaceAll", "Replace All", "Home › Editing › Replace", replace_all)
             .params(r#"{"text": string, "with": string (^p ^t ^& ^c …; \\1 with wildcards), …options of edit.find}"#),
         CommandSpec::new("edit.goto", "Go To", "Home › Editing › Find", goto)
-            .key("Mod+Alt+G / F5")
+            .key(super::mac_or("Mod+Alt+G / F5", "Mod+G / Mod+Alt+G / F5"))
             .params(r#"{"page"?: n, "bookmark"?: string, "paragraph"?: n}"#)
             .pure(),
         CommandSpec::new("edit.goBack", "Go Back", "Navigation", |s, _| {
@@ -98,16 +101,17 @@ pub fn specs() -> Vec<CommandSpec> {
             s.goal_x = None;
             sel_result(s)
         })
-        .key("Shift+F5")
+        .key("Shift+F5 / Mod+Alt+Z")
         .pure(),
         CommandSpec::new("edit.formatPainter", "Format Painter", "Home › Clipboard", painter).params(r#"{"sticky"?: bool}"#).pure(),
         CommandSpec::new("edit.copyFormat", "Copy Formatting", "Home › Clipboard", |s, _| {
             painter_pick(s);
             sel_result(s)
         })
-        .key("Mod+Shift+C")
+        // Word for Windows (Microsoft 365): Ctrl+Alt+C and Ctrl+Alt+V, since Ctrl+Shift+V pastes text.
+        .key(super::mac_or("Mod+Shift+C", "Mod+Alt+C / Mod+Shift+C"))
         .pure(),
-        CommandSpec::new("edit.pasteFormat", "Paste Formatting", "Home › Clipboard", paste_format).key("Mod+Shift+V"),
+        CommandSpec::new("edit.pasteFormat", "Paste Formatting", "Home › Clipboard", paste_format).key(super::mac_or("Mod+Shift+V", "Mod+Alt+V")),
     ]
 }
 

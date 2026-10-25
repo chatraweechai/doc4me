@@ -74,8 +74,9 @@ pub fn specs() -> Vec<CommandSpec> {
             .params(BLOCK)
             .when(in_outline)
             .pure(),
+        // Alt+Shift+Minus is Nonbreaking Hyphen in Microsoft's list; Outline view still collapses
+        // with it (the front end sends it here there).
         CommandSpec::new("outline.collapse", "Collapse", "Outlining › Outline Tools", |s, v| collapse(s, v, false))
-            .key("Alt+Shift+-")
             .params(BLOCK)
             .when(in_outline)
             .pure(),
@@ -150,6 +151,7 @@ pub fn specs() -> Vec<CommandSpec> {
             s.view.outline.first_line_only = p::bool(v, "value").unwrap_or(!s.view.outline.first_line_only);
             Ok(json!({"value": s.view.outline.first_line_only}))
         })
+        .key("Alt+Shift+L")
         .params(r#"{"value"?: bool}"#)
         .when(in_outline)
         .pure(),

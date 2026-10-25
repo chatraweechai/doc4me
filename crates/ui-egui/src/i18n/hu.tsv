@@ -2555,3 +2555,18 @@ spacing	Normal	Normál
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	A beszédet ez a számítógép ismeri fel (whisper.cpp); semmi sem kerül az internetre.
 	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	A(z) {fonts} nincs telepítve ezen a számítógépen, ezért a dokumentum {with} betűtípussal jelenik meg. A sorok és oldalak máshol törhetnek, mint az eredeti betűtípussal.
 	Font not installed	A betűtípus nincs telepítve
+	Top of the Window	Ablak teteje
+	Bottom of the Window	Ablak alja
+	Top of Next Page	Következő oldal teteje
+	Top of Previous Page	Előző oldal teteje
+	Symbol Font	Symbol betűtípus
+	Shrink Selection	Kijelölés szűkítése
+	Previous Window	Előző ablak
+	Next Window	Következő ablak
+	Previous Footnote	Előző lábjegyzet
+	Last Cell in Row	Sor utolsó cellája
+	Last Cell in Column	Oszlop utolsó cellája
+	First Cell in Row	Sor első cellája
+	First Cell in Column	Oszlop első cellája
+	Insert LISTNUM Field	LISTNUM mező beszúrása
+	Collapse the Ribbon	Menüszalag összecsukása

@@ -330,6 +330,7 @@ pub fn specs() -> Vec<CommandSpec> {
         .params(r#"{"value"?: bool (on or off; omit to switch)}"#)
         .pure(),
         CommandSpec::new("tools.macros", "Macros", "View › Macros", macros)
+            .key("Alt+F8")
             .params(r#"{"run"?: name, "define"?: {"name": string, "steps": [{"command", "params"}]}, "delete"?: name}"#)
             .pure(),
         CommandSpec::new("tools.autocorrect", "AutoCorrect Options", "File › Options › Proofing", autocorrect_options)
@@ -423,6 +424,7 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .pure(),
         CommandSpec::new("insert.quickParts", "Quick Parts", "Insert › Text", quick_parts)
+            .key("Alt+F3")
             .params(r#"{"save"?: name (from the selection), "insert"?: name, "delete"?: name} → list"#),
         CommandSpec::new("insert.autoText", "AutoText", "Insert › Text › Quick Parts", quick_parts).params(r#"{"save"?: name, "insert"?: name}"#),
         CommandSpec::new("insert.docProperty", "Document Property", "Insert › Text › Quick Parts", |s, v| {
@@ -492,7 +494,9 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .params(r#"{"csv"?: string}"#),
         CommandSpec::new("layout.linkToPrevious", "Link to Previous", "Header & Footer › Navigation", |s, v| {
-            let header = p::bool(v, "footer").map(|f| !f).unwrap_or(true);
+            // Alt+Shift+R in a footer links the footer.
+            let in_footer = matches!(s.sel.focus.story, StoryRef::Part(id) if s.doc.parts.get(&id).is_some_and(|p| p.kind == doc4me_doc::PartKind::Footer));
+            let header = p::bool(v, "footer").map(|f| !f).unwrap_or(!in_footer);
             let block = s.sel.focus.path.0.first().copied().unwrap_or(0) as usize;
             let sect = s.doc.section_mut(block);
             if header {
@@ -502,6 +506,7 @@ pub fn specs() -> Vec<CommandSpec> {
             }
             Ok(json!({"linked": true}))
         })
+        .key("Alt+Shift+R")
         .params(r#"{"footer"?: bool}"#),
         CommandSpec::new("hf.next", "Next Section", "Header & Footer › Navigation", |s, _| hf_nav(s, 1)).pure(),
         CommandSpec::new("hf.previous", "Previous Section", "Header & Footer › Navigation", |s, _| hf_nav(s, -1)).pure(),
@@ -614,6 +619,26 @@ pub fn specs() -> Vec<CommandSpec> {
             s.run(id, &json!({}))
         })
         .key("F8")
+        .pure(),
+        CommandSpec::new("select.shrink", "Shrink Selection", "Editing › Selection", |s, _| {
+            // Shift+F8 steps back down: document → paragraph → sentence → word → the caret, each
+            // time the largest of those units at the selection's start that is inside it.
+            let current = s.sel.ordered();
+            if current.0 == current.1 {
+                return sel_result(s);
+            }
+            for id in ["select.paragraph", "select.sentence", "select.word"] {
+                s.sel = Selection::caret(current.0.clone());
+                s.run(id, &json!({}))?;
+                let unit = s.sel.ordered();
+                if unit.0 >= current.0 && unit.1 <= current.1 && unit != current {
+                    return sel_result(s);
+                }
+            }
+            s.sel = Selection::caret(current.0);
+            sel_result(s)
+        })
+        .key("Shift+F8")
         .pure(),
         CommandSpec::new("design.effects", "Effects", "Design › Document Formatting", |s, v| {
             s.doc.settings.theme_name =

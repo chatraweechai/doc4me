@@ -56,6 +56,17 @@ pub fn specs() -> Vec<CommandSpec> {
             }
             sel_result(s)
         })
+        .key("Alt+Shift+. / Alt+Shift+>")
+        .pure(),
+        CommandSpec::new("references.previousFootnote", "Previous Footnote", "References › Footnotes", |s, _| {
+            let caret = s.sel.focus.clone();
+            let refs = note_refs(s);
+            if let Some(p) = refs.iter().rev().find(|p| **p < caret).or(refs.last()) {
+                s.sel = Selection::caret(p.clone());
+            }
+            sel_result(s)
+        })
+        .key("Alt+Shift+, / Alt+Shift+<")
         .pure(),
         CommandSpec::new("references.notes", "Show Notes", "References › Footnotes", |s, _| {
             let mut out = Vec::new();

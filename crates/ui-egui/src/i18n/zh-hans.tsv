@@ -2160,3 +2160,18 @@ spacing	Normal	标准
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	语音在这台计算机上识别 (whisper.cpp)；不会在线发送任何内容。
 	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	此计算机上未安装 {fonts}，因此本文档使用 {with} 显示。换行和分页可能与原字体不同。
 	Font not installed	未安装字体
+	Top of the Window	窗口顶部
+	Bottom of the Window	窗口底部
+	Top of Next Page	下一页顶部
+	Top of Previous Page	上一页顶部
+	Symbol Font	Symbol 字体
+	Shrink Selection	缩小选定范围
+	Previous Window	上一个窗口
+	Next Window	下一个窗口
+	Previous Footnote	上一条脚注
+	Last Cell in Row	行中最后一个单元格
+	Last Cell in Column	列中最后一个单元格
+	First Cell in Row	行中第一个单元格
+	First Cell in Column	列中第一个单元格
+	Insert LISTNUM Field	插入 LISTNUM 域
+	Collapse the Ribbon	折叠功能区

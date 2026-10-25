@@ -2162,3 +2162,18 @@ spacing	Normal	Нормално
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Говор се препознаје на овом рачунару (whisper.cpp); ништа се не шаље на мрежу.
 	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Фонт {fonts} није инсталиран на овом рачунару, па је документ приказан фонтом {with}. Редови и странице могу се преламати другачије него са оригиналним фонтом.
 	Font not installed	Фонт није инсталиран
+	Top of the Window	Врх прозора
+	Bottom of the Window	Дно прозора
+	Top of Next Page	Почетак следеће странице
+	Top of Previous Page	Почетак претходне странице
+	Symbol Font	Фонт Symbol
+	Shrink Selection	Смањи избор
+	Previous Window	Претходни прозор
+	Next Window	Следећи прозор
+	Previous Footnote	Претходна фуснота
+	Last Cell in Row	Последња ћелија у реду
+	Last Cell in Column	Последња ћелија у колони
+	First Cell in Row	Прва ћелија у реду
+	First Cell in Column	Прва ћелија у колони
+	Insert LISTNUM Field	Уметни поље LISTNUM
+	Collapse the Ribbon	Скупи траку

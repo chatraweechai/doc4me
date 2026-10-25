@@ -327,7 +327,7 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .params(r#"{"value": "left|center|right"}"#)
         .when(has_movable),
-        CommandSpec::new("arrange.selectionPane", "Selection Pane", "Layout › Arrange", objects_list).pure(),
+        CommandSpec::new("arrange.selectionPane", "Selection Pane", "Layout › Arrange", objects_list).key("Alt+F10").pure(),
         CommandSpec::new("arrange.bounds", "Move or Resize", "Layout › Arrange", bounds)
             .params(r#"{"width"?: pt, "height"?: pt, "x"?: pt, "y"?: pt, "page"?: n}  (x/y: the top-left on page `page` (0-based, default its page); moving an inline object floats it)"#)
             .when(has_movable),

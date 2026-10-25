@@ -32,8 +32,10 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("fields.unlink", "Unlink Fields", "Insert › Text › Quick Parts", unlink).key("Mod+Shift+F9"),
         CommandSpec::new("fields.lock", "Lock Fields", "Insert › Text › Quick Parts", |s, _| set_locked(s, true)).key("Mod+F11"),
         CommandSpec::new("fields.unlock", "Unlock Fields", "Insert › Text › Quick Parts", |s, _| set_locked(s, false)).key("Mod+Shift+F11"),
-        CommandSpec::new("fields.next", "Next Field", "Insert › Text › Quick Parts", |s, _| go(s, true)).key("F11").pure(),
-        CommandSpec::new("fields.previous", "Previous Field", "Insert › Text › Quick Parts", |s, _| go(s, false)).key("Shift+F11").pure(),
+        CommandSpec::new("fields.next", "Next Field", "Insert › Text › Quick Parts", |s, _| go(s, true)).key("F11 / Alt+F1").pure(),
+        CommandSpec::new("fields.previous", "Previous Field", "Insert › Text › Quick Parts", |s, _| go(s, false))
+            .key("Shift+F11 / Alt+Shift+F1")
+            .pure(),
         CommandSpec::new("fields.selected", "Selected Fields", "Insert › Text › Quick Parts", |s, _| {
             Ok(Value::Array(selected(s).iter().map(|f| f.json()).collect()))
         })

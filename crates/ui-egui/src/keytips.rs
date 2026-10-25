@@ -65,20 +65,35 @@ impl Target {
     }
 }
 
-/// Word's tab letters. `File` (Backstage only) and `Help` (dialog-only content) have none.
-const TAB_LETTERS: [(&str, &str); 11] = [
-    ("File", ""),
+/// Word for Windows' tab letters (Microsoft's keyboard shortcut list: Alt, F opens the File page,
+/// G Design, S References, R Review, W View, L Developer). `Help` (dialog-only content) has none;
+/// Alt, Q goes to the search box and Alt, F1 opens Help.
+const TAB_LETTERS: [(&str, &str); 12] = [
+    ("File", "F"),
     ("Home", "H"),
     ("Insert", "N"),
     ("Draw", "D"),
-    ("Design", "L"),
+    ("Design", "G"),
     ("Layout", "P"),
-    ("References", "R"),
+    ("References", "S"),
     ("Mailings", "M"),
-    ("Review", "S"),
-    ("View", "V"),
+    ("Review", "R"),
+    ("View", "W"),
+    ("Developer", "L"),
     ("Help", ""),
 ];
+
+/// Word's own keytips for controls whose letters don't follow from their names: Insert › Object
+/// (J, J), SmartArt (M) and WordArt (W); View › Read Mode (F).
+fn word_letter(tab: &str, tip: &str) -> Option<&'static str> {
+    Some(match (tab, tip) {
+        ("Insert", "Object") => "JJ",
+        ("Insert", "SmartArt") => "M",
+        ("Insert", "WordArt") => "W",
+        ("View", "Read Mode") => "F",
+        _ => return None,
+    })
+}
 
 /// The letter badge for a tab (empty when it has none).
 pub fn tab_letter(tab: &str) -> &'static str {
@@ -398,8 +413,18 @@ fn letters_for(app: &WordApp, tab: &str) -> Vec<String> {
         Target::Tab(_) => "ui.tab",
     };
 
+    // Pass 0: Word's own keytips.
+    for (i, ctl) in ctrls.iter().enumerate() {
+        if let Some(l) = word_letter(tab, ctl.tip) {
+            used.extend(l.chars());
+            out[i] = Some(l.to_string());
+        }
+    }
     // Pass 1: own shortcut letters. First-come keeps it if two commands somehow share a letter.
     for (i, ctl) in ctrls.iter().enumerate() {
+        if out[i].is_some() {
+            continue;
+        }
         if let Some(c) = shortcut_letter(app, id_of(ctl))
             && !used.contains(&c)
         {
@@ -533,6 +558,13 @@ pub fn handle_key(app: &mut WordApp, key: egui::Key) -> bool {
                     qat_key(app, &name);
                     return true;
                 }
+                // Alt, Q: the search box; Alt, F1: Help.
+                if app.ui.keytips == Phase::Tabs && (name == "Q" || name == "F1") {
+                    app.ui.keytips = Phase::Off;
+                    app.ui.keytip_prefix.clear();
+                    let _ = app.run("ui.dialog", serde_json::json!({ "name": if name == "Q" { "commands" } else { "about" } }));
+                    return true;
+                }
                 match app.ui.keytips {
                     Phase::Tabs => {
                         let mut hit: Option<&'static str> = None;
@@ -545,21 +577,29 @@ pub fn handle_key(app: &mut WordApp, key: egui::Key) -> bool {
                         match hit {
                             Some(tab) => {
                                 let _ = app.run("ui.tab", serde_json::json!({ "tab": tab }));
-                                app.ui.keytips = Phase::Commands;
+                                // The File page (Backstage) has no ribbon badges.
+                                app.ui.keytips = if tab == "File" { Phase::Off } else { Phase::Commands };
                             }
                             None => app.ui.keytips = Phase::Off,
                         }
                     }
                     Phase::Commands => {
+                        // Two-letter badges (Object is J, J) wait for their second letter.
                         let tab = app.ui.tab.clone();
+                        let typed = format!("{}{name}", app.ui.keytip_prefix);
                         let ls = letters_for(app, &tab);
                         let ctrls = controls(&tab);
+                        let pending = ls.iter().any(|l| l.len() > typed.len() && l.starts_with(&typed));
                         let mut hit: Option<Target> = None;
                         for (ctl, l) in ctrls.into_iter().zip(ls) {
-                            if l == name {
+                            if l == typed {
                                 hit = Some(ctl.target);
                                 break;
                             }
+                        }
+                        if hit.is_none() && pending {
+                            app.ui.keytip_prefix = typed;
+                            return true;
                         }
                         app.ui.keytips = Phase::Off;
                         if let Some(t) = hit {
@@ -847,16 +887,57 @@ mod tests {
 
     #[test]
     fn tab_letters_match_word() {
-        assert_eq!(tab_letter("Home"), "H");
-        assert_eq!(tab_letter("Insert"), "N");
-        assert_eq!(tab_letter("Design"), "L");
-        assert_eq!(tab_letter("Layout"), "P");
-        assert_eq!(tab_letter("References"), "R");
-        assert_eq!(tab_letter("Mailings"), "M");
-        assert_eq!(tab_letter("Review"), "S");
-        assert_eq!(tab_letter("View"), "V");
-        assert_eq!(tab_letter("File"), "");
-        assert_eq!(tab_letter("Help"), "");
+        // Microsoft's keyboard shortcut list for Word for Windows.
+        for (tab, letter) in [
+            ("File", "F"),
+            ("Home", "H"),
+            ("Insert", "N"),
+            ("Design", "G"),
+            ("Layout", "P"),
+            ("References", "S"),
+            ("Mailings", "M"),
+            ("Review", "R"),
+            ("View", "W"),
+            ("Developer", "L"),
+            ("Help", ""),
+        ] {
+            assert_eq!(tab_letter(tab), letter, "{tab}");
+        }
+        let mut a = app();
+        a.canvas.focused = false;
+        // Alt, F opens the File page; Alt, Q the command search; Alt, F1 Help.
+        activate(&mut a);
+        handle_key(&mut a, egui::Key::F);
+        assert!(a.ui.backstage);
+        a.ui.backstage = false;
+        activate(&mut a);
+        handle_key(&mut a, egui::Key::Q);
+        assert!(matches!(a.dialog, Some(crate::dialogs::Dialog::Commands { .. })), "{:?}", a.dialog.as_ref().map(|_| ()));
+        a.dialog = None;
+        activate(&mut a);
+        handle_key(&mut a, egui::Key::F1);
+        assert!(a.dialog.is_some());
+    }
+
+    #[test]
+    fn word_keytips_reach_object_smartart_wordart_and_read_mode() {
+        let mut a = app();
+        a.canvas.focused = false;
+        let ls = letters_for(&a, "Insert");
+        let at = |tip: &str| controls("Insert").iter().position(|c| c.tip == tip).unwrap();
+        assert_eq!((ls[at("Object")].as_str(), ls[at("SmartArt")].as_str(), ls[at("WordArt")].as_str()), ("JJ", "M", "W"));
+        // Alt, N, J, J: the first J waits for the second.
+        activate(&mut a);
+        handle_key(&mut a, egui::Key::N);
+        handle_key(&mut a, egui::Key::J);
+        assert_eq!(a.ui.keytips, Phase::Commands);
+        handle_key(&mut a, egui::Key::J);
+        assert_eq!(a.ui.keytips, Phase::Off);
+        // Alt, W, F: Read Mode.
+        activate(&mut a);
+        handle_key(&mut a, egui::Key::W);
+        handle_key(&mut a, egui::Key::F);
+        assert!(a.session.view.read_mode);
     }
 
     #[test]

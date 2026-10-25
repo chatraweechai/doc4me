@@ -24,6 +24,7 @@ pub const MAX_PIECE: usize = 480;
 pub fn specs() -> Vec<CommandSpec> {
     vec![
         CommandSpec::new("review.translate", "Translate", "Review › Language", translate)
+            .key("Alt+Shift+F7")
             .params(r#"{"scope"?: "selection"|"document"} → {"text": the selection, "language": tag} or {"paragraphs": [{"path", "text", "language"}]}; from the ribbon it opens the Translator pane"#)
             .pure(),
         CommandSpec::new("review.translateDocument", "Translate Document", "Review › Language › Translate", translate_document)

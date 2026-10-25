@@ -25,18 +25,18 @@ ks-023	Frequently used shortcuts	Return back to 100% zoom.	Ctrl+0	Mod+0	view.zoo
 ks-024	Frequently used shortcuts	Zoom in and out with mouse.	Ctrl+Scroll	Mod+Scroll	-	manual	pass	canvas.rs: Ctrl+wheel zooms the page
 ks-025	Frequently used shortcuts	Split the document window.	Ctrl+Alt+S	Mod+Alt+S	view.split	registry		
 ks-026	Frequently used shortcuts	Remove the document window split.	Alt+Shift+C or Ctrl+Alt+S	Alt+Shift+C | Mod+Alt+S	view.split	registry		view.split toggles
-ks-027	Use the Access Keys for ribbon tabs	Move to the Tell Me or Search field on the Ribbon to search for assistance or Help content.	Alt, Q, then enter the search term.	Alt,Q	-	manual	fail	no keytip for the search box
-ks-028	Use the Access Keys for ribbon tabs	Open the File page to use Backstage view.	Alt, F	Alt,F	-	manual	fail	File has no keytip letter (keytips.rs TAB_LETTERS)
+ks-027	Use the Access Keys for ribbon tabs	Move to the Tell Me or Search field on the Ribbon to search for assistance or Help content.	Alt, Q, then enter the search term.	Alt,Q	-	manual	pass	keytips.rs tests tab_letters_match_word
+ks-028	Use the Access Keys for ribbon tabs	Open the File page to use Backstage view.	Alt, F	Alt,F	-	manual	pass	keytips.rs tests tab_letters_match_word
 ks-029	Use the Access Keys for ribbon tabs	Open the Home tab to use common formatting commands, paragraph styles, and the Find tool.	Alt, H	Alt,H	-	manual	pass	keytips.rs TAB_LETTERS: Home = H
 ks-030	Use the Access Keys for ribbon tabs	Open the Insert tab to insert tables, pictures and shapes, headers, or text boxes.	Alt, N	Alt,N	-	manual	pass	keytips.rs TAB_LETTERS: Insert = N
-ks-031	Use the Access Keys for ribbon tabs	Open the Design tab to use themes, colors, and effects, such as page borders.	Alt, G	Alt,G	-	manual	fail	keytips.rs TAB_LETTERS: Design = L
+ks-031	Use the Access Keys for ribbon tabs	Open the Design tab to use themes, colors, and effects, such as page borders.	Alt, G	Alt,G	-	manual	pass	keytips.rs tests tab_letters_match_word
 ks-032	Use the Access Keys for ribbon tabs	Open the Layout tab to work with page margins, page orientation, indentation, and spacing.	Alt, P	Alt,P	-	manual	pass	keytips.rs TAB_LETTERS: Layout = P
-ks-033	Use the Access Keys for ribbon tabs	Open the References tab to add a table of contents, footnotes, or a table of citations.	Alt, S	Alt,S	-	manual	fail	keytips.rs TAB_LETTERS: References = R
+ks-033	Use the Access Keys for ribbon tabs	Open the References tab to add a table of contents, footnotes, or a table of citations.	Alt, S	Alt,S	-	manual	pass	keytips.rs tests tab_letters_match_word
 ks-034	Use the Access Keys for ribbon tabs	Open the Mailings tab to manage Mail Merge tasks and to work with envelopes and labels.	Alt, M	Alt,M	-	manual	pass	keytips.rs TAB_LETTERS: Mailings = M
-ks-035	Use the Access Keys for ribbon tabs	Open the Review tab to use Spell Check, set proofing languages, and to track and review changes to your document.	Alt, R	Alt,R	-	manual	fail	keytips.rs TAB_LETTERS: Review = S
-ks-036	Use the Access Keys for ribbon tabs	Open the View tab to choose a document view or mode, such as Read Mode or Outline view. You can also set the zoom magnification and manage multiple document windows.	Alt, W	Alt,W	-	manual	fail	keytips.rs TAB_LETTERS: View = V
-ks-037	Use the Access Keys for ribbon tabs	Open the Help box.	Alt, F1	Alt,F1	-	manual	fail	
-ks-038	Use the Access Keys for ribbon tabs	Open the Developer box.	Alt, L	Alt,L	-	manual	fail	keytips.rs TAB_LETTERS: Developer has no letter; L is Design
+ks-035	Use the Access Keys for ribbon tabs	Open the Review tab to use Spell Check, set proofing languages, and to track and review changes to your document.	Alt, R	Alt,R	-	manual	pass	keytips.rs tests tab_letters_match_word
+ks-036	Use the Access Keys for ribbon tabs	Open the View tab to choose a document view or mode, such as Read Mode or Outline view. You can also set the zoom magnification and manage multiple document windows.	Alt, W	Alt,W	-	manual	pass	keytips.rs tests tab_letters_match_word
+ks-037	Use the Access Keys for ribbon tabs	Open the Help box.	Alt, F1	Alt,F1	-	manual	pass	keytips.rs tests tab_letters_match_word
+ks-038	Use the Access Keys for ribbon tabs	Open the Developer box.	Alt, L	Alt,L	-	manual	pass	keytips.rs tests tab_letters_match_word
 ks-039	Work in the ribbon with the keyboard	Select the active tab on the ribbon and activate the access keys.	Alt or F10. To move to a different tab, use access keys or the arrow keys.	Alt | F10	-	manual	pass	keytips.rs: Alt or F10 shows the tab letters
 ks-040	Work in the ribbon with the keyboard	Move the focus to commands on the ribbon.	Tab key or Shift+Tab	Tab | Shift+Tab	-	manual	untested	
 ks-041	Work in the ribbon with the keyboard	Move between command groupings on the ribbon.	Ctrl+Left or Right arrow key	Mod+Left | Mod+Right	-	manual	untested	
@@ -46,7 +46,7 @@ ks-044	Work in the ribbon with the keyboard	Activate the selected button.	Spaceb
 ks-045	Work in the ribbon with the keyboard	Open the list for the selected command.	Down arrow key	Down	-	manual	untested	
 ks-046	Work in the ribbon with the keyboard	Open the menu for the selected button.	Alt+Down arrow key	Alt+Down	-	manual	untested	
 ks-047	Work in the ribbon with the keyboard	When a menu or submenu is open, move to the next command.	Down arrow key	Down	-	manual	untested	
-ks-048	Work in the ribbon with the keyboard	Expand or collapse the ribbon.	Ctrl+F1	Mod+F1	-	registry		no key to collapse the ribbon; no such command in Doc4Me
+ks-048	Work in the ribbon with the keyboard	Expand or collapse the ribbon.	Ctrl+F1	Mod+F1	view.collapseRibbon	registry		view.collapseRibbon (2026-10-25)
 ks-049	Work in the ribbon with the keyboard	Open the context menu.	Shift+F10 Or, on a Windows keyboard, the Windows Menu key (between the right Alt and right Ctrl keys)	Shift+F10	-	manual	untested	
 ks-050	Work in the ribbon with the keyboard	Move to the submenu when a main menu is open or selected.	Right arrow key	Right	-	manual	untested	
 ks-051	Work in the ribbon with the keyboard	Toggle AutoSave on or off.	Alt+Z, A	Alt+Z,A	-	manual	fail	
@@ -58,12 +58,12 @@ ks-056	Navigate the document	Move the cursor up by one paragraph.	Ctrl+Up arrow 
 ks-057	Navigate the document	Move the cursor down by one paragraph.	Ctrl+Down arrow key	Mod+Down	caret.paraDown	registry		
 ks-058	Navigate the document	Move the cursor to the end of the current line.	End	End	caret.end	registry		
 ks-059	Navigate the document	Move the cursor to the beginning the current line.	Home	Home	caret.home	registry		
-ks-060	Navigate the document	Move the cursor to the top of the screen.	Ctrl+Alt+Page up	Mod+Alt+PageUp	-	registry		no such command; no such command in Doc4Me
-ks-061	Navigate the document	Move the cursor to the bottom of the screen.	Ctrl+Alt+Page down	Mod+Alt+PageDown	-	registry		no such command; no such command in Doc4Me
+ks-060	Navigate the document	Move the cursor to the top of the screen.	Ctrl+Alt+Page up	Mod+Alt+PageUp	caret.screenTop	registry		caret.screenTop: the front end moves the caret to the first line in the window
+ks-061	Navigate the document	Move the cursor to the bottom of the screen.	Ctrl+Alt+Page down	Mod+Alt+PageDown	caret.screenBottom	registry		caret.screenBottom: the last line in the window
 ks-062	Navigate the document	Move the cursor by scrolling the document view up by one screen.	Page up	PageUp	caret.pageUp	registry		
 ks-063	Navigate the document	Move the cursor by scrolling the document view down by one screen.	Page down	PageDown	caret.pageDown	registry		
-ks-064	Navigate the document	Move the cursor to the top of the next page.	Ctrl+Page down	Mod+PageDown	-	registry		Mod+PageDown is Find Next in Doc4Me; no such command in Doc4Me
-ks-065	Navigate the document	Move the cursor to the top of the previous page.	Ctrl+Page up	Mod+PageUp	-	registry		Mod+PageUp is Find Previous in Doc4Me; no such command in Doc4Me
+ks-064	Navigate the document	Move the cursor to the top of the next page.	Ctrl+Page down	Mod+PageDown	caret.nextPage	registry		caret.nextPage; Find Next stays on F3
+ks-065	Navigate the document	Move the cursor to the top of the previous page.	Ctrl+Page up	Mod+PageUp	caret.prevPage	registry		caret.prevPage
 ks-066	Navigate the document	Move the cursor to the end of the document.	Ctrl+End	Mod+End	caret.docEnd	registry		
 ks-067	Navigate the document	Move the cursor to the beginning of the document.	Ctrl+Home	Mod+Home	caret.docStart	registry		
 ks-068	Navigate the document	Move the cursor to the location of the previous revision.	Shift+F5	Shift+F5	edit.goBack	registry		
@@ -72,9 +72,9 @@ ks-070	Navigate the document	Cycle through floating shapes, such as text boxes o
 ks-071	Navigate the document	Exit the floating shape navigation and return to the normal navigation.	Esc	Escape	-	manual	fail	depends on Mod+Alt+5
 ks-072	Navigate the document	Display the Navigation task pane, to search within the document content.	Ctrl+F	Mod+F	edit.find	registry		
 ks-073	Navigate the document	Display the Go To dialog box, to navigate to a specific page, bookmark, footnote, table, comment, graphic, or other location.	Ctrl+G	Mod+G	edit.goto	registry		Go To is Mod+Alt+G / F5; Mod+G is Find Next
-ks-074	Navigate the document	Cycle through the locations of the four previous changes made to the document.	Ctrl+Alt+Z	Mod+Alt+Z	-	manual	fail	
+ks-074	Navigate the document	Cycle through the locations of the four previous changes made to the document.	Ctrl+Alt+Z	Mod+Alt+Z	edit.goBack	registry		edit.goBack cycles the last edit locations
 ks-075	Preview and print documents	Print the document.	Ctrl+P	Mod+P	file.print	registry		
-ks-076	Preview and print documents	Switch to print preview.	Ctrl+Alt+I	Mod+Alt+I	-	registry		no key; no such command in Doc4Me
+ks-076	Preview and print documents	Switch to print preview.	Ctrl+Alt+I	Mod+Alt+I	file.print	registry		opens the Print page with its preview, as Word 365 does
 ks-077	Preview and print documents	Move around the preview page when zoomed in.	Arrow keys	Arrows	-	manual	untested	print preview
 ks-078	Preview and print documents	Move by one preview page when zoomed out.	Page up or Page down	PageUp | PageDown	-	manual	untested	print preview
 ks-079	Preview and print documents	Move to the first preview page when zoomed out.	Ctrl+Home	Mod+Home	-	manual	untested	print preview
@@ -90,12 +90,12 @@ ks-088	Select text and graphics	Select from the current position to the top of t
 ks-089	Select text and graphics	Select from the current position to the bottom of the screen.	Shift+Page down	Shift+PageDown	caret.pageDown	registry		
 ks-090	Select text and graphics	Select from the current position to the beginning of the document.	Ctrl+Shift+Home	Mod+Shift+Home	caret.docStart	registry		
 ks-091	Select text and graphics	Select from the current position to the end of the document.	Ctrl+Shift+End	Mod+Shift+End	caret.docEnd	registry		
-ks-092	Select text and graphics	Select from the current position to the bottom of the window.	Ctrl+Alt+Shift+Page down	Mod+Alt+Shift+PageDown	-	manual	fail	
+ks-092	Select text and graphics	Select from the current position to the bottom of the window.	Ctrl+Alt+Shift+Page down	Mod+Alt+Shift+PageDown	caret.screenBottom	registry		caret.screenBottom; Shift extends it
 ks-093	Select text and graphics	Select all document content.	Ctrl+A			duplicate	ks-009	same shortcut and action as ks-009
 ks-094	Extend a selection	Start extending the selection.	F8 In the extend selection mode, clicking a location in the document extends the current selection to that location.	F8	select.extend	registry		
 ks-095	Extend a selection	Select the nearest character to the left or right.	F8, Left or Right arrow key	F8,Left	-	manual	untested	arrows after F8
 ks-096	Extend a selection	Expand the selection.	F8 repeatedly to expand the selection to the entire word, sentence, paragraph, section, and document.	F8	select.extend	registry		tools.rs: word → sentence → paragraph → document
-ks-097	Extend a selection	Reduce the selection.	Shift+F8	Shift+F8	-	registry		no key; no such command in Doc4Me
+ks-097	Extend a selection	Reduce the selection.	Shift+F8	Shift+F8	select.shrink	registry		select.shrink: paragraph, sentence, word, caret
 ks-098	Extend a selection	Select a vertical block of text.	Ctrl+Shift+F8, then press the arrow keys	Mod+Shift+F8	select.column	registry		
 ks-099	Extend a selection	Stop extending the selection.	Esc	Escape	select.collapse	registry		
 ks-100	Edit text and graphics	Delete one word to the left.	Ctrl+Backspace	Mod+Backspace	text.deleteWordBack	registry		
@@ -113,11 +113,11 @@ ks-111	Edit text and graphics	Paste the contents of the Spike.	Ctrl+Shift+F3	Mod
 ks-112	Edit text and graphics	Copy the selected text formatting.	Ctrl+Alt+C	Mod+Alt+C	edit.copyFormat	registry		Doc4Me: Mod+Shift+C; Mod+Alt+C is ©
 ks-113	Edit text and graphics	Paste the selected text formatting.	Ctrl+Alt+V	Mod+Alt+V	edit.pasteFormat	registry		Doc4Me: Mod+Shift+V; Mod+Alt+V is Paste Special
 ks-114	Edit text and graphics	Paste text only.	Ctrl+Shift+V			duplicate	ks-008	same shortcut and action as ks-008
-ks-115	Edit text and graphics	Copy the header or footer used in the previous section of the document.	Alt+Shift+R	Alt+Shift+R	-	manual	fail	
+ks-115	Edit text and graphics	Copy the header or footer used in the previous section of the document.	Alt+Shift+R	Alt+Shift+R	layout.linkToPrevious	registry		Link to Previous: the section takes the previous header or footer
 ks-116	Edit text and graphics	Display the Replace dialog box, to find and replace text, specific formatting, or special items.	Ctrl+H	Mod+H	edit.replace	registry		
-ks-117	Edit text and graphics	Display the Object dialog box, to insert a file object into the document.	Alt, N, J, J	Alt,N,J,J	-	manual	untested	
-ks-118	Edit text and graphics	Insert a SmartArt graphic.	Alt, N, M	Alt,N,M	-	manual	untested	
-ks-119	Edit text and graphics	Insert a WordArt graphic.	Alt, N, W	Alt,N,W	-	manual	untested	
+ks-117	Edit text and graphics	Display the Object dialog box, to insert a file object into the document.	Alt, N, J, J	Alt,N,J,J	-	manual	pass	keytips.rs test word_keytips_reach_object_smartart_wordart_and_read_mode
+ks-118	Edit text and graphics	Insert a SmartArt graphic.	Alt, N, M	Alt,N,M	-	manual	pass	keytips.rs test word_keytips_reach_object_smartart_wordart_and_read_mode
+ks-119	Edit text and graphics	Insert a WordArt graphic.	Alt, N, W	Alt,N,W	-	manual	pass	keytips.rs test word_keytips_reach_object_smartart_wordart_and_read_mode
 ks-120	Align and format paragraphs	Center the paragraph.	Ctrl+E			duplicate	ks-015	same shortcut and action as ks-015
 ks-121	Align and format paragraphs	Justify the paragraph.	Ctrl+J	Mod+J	para.justify	registry		
 ks-122	Align and format paragraphs	Align the paragraph to the left.	Ctrl+L			duplicate	ks-016	same shortcut and action as ks-016
@@ -155,9 +155,9 @@ ks-153	Format characters	Apply small caps formatting.	Ctrl+Shift+K	Mod+Shift+K	f
 ks-154	Format characters	Apply subscript formatting.	Ctrl+Shift+Minus sign (-)	Mod+Shift+-	format.subscript	registry		published as Ctrl+Shift+Minus; Doc4Me (like classic Word) uses Mod+= — verify on Word for Windows
 ks-155	Format characters	Apply superscript formatting.	Ctrl+Shift+Plus sign (+)	Mod+Shift+=	format.superscript	registry		
 ks-156	Format characters	Remove manual character formatting.	Ctrl+Spacebar	Mod+Space	format.resetChar	registry		
-ks-157	Format characters	Change the selected text to the Symbol font.	Ctrl+Shift+Q	Mod+Shift+Q	-	manual	fail	
+ks-157	Format characters	Change the selected text to the Symbol font.	Ctrl+Shift+Q	Mod+Shift+Q	format.symbolFont	registry		format.symbolFont
 ks-158	Manage text formatting	Display all nonprinting characters.	Ctrl+Shift+8 (do not use the numeric keypad)	Mod+Shift+8	view.marks	registry		
-ks-159	Manage text formatting	Display the Reveal Formatting task pane.	Shift+F1	Shift+F1	-	manual	fail	
+ks-159	Manage text formatting	Display the Reveal Formatting task pane.	Shift+F1	Shift+F1	styles.inspector	registry		Doc4Me's Style Inspector shows the paragraph and character formatting Reveal Formatting shows
 ks-160	Insert special characters	Insert a line break.	Shift+Enter	Shift+Enter	text.lineBreak	registry		
 ks-161	Insert special characters	Insert a page break.	Ctrl+Enter	Mod+Enter	text.pageBreak	registry		
 ks-162	Insert special characters	Insert a column break.	Ctrl+Shift+Enter	Mod+Shift+Enter	text.columnBreak	registry		
@@ -176,16 +176,16 @@ ks-174	Work with web content	Insert a hyperlink.	Ctrl+K	Mod+K	insert.link	regist
 ks-175	Work with web content	Go back one page.	Alt+Left arrow key	Alt+Left	-	manual	fail	Alt+Left is Word Left in Doc4Me
 ks-176	Work with web content	Go forward one page.	Alt+Right arrow key	Alt+Right	-	manual	fail	
 ks-177	Work with web content	Refresh the page.	F9	F9	-	manual	fail	web page refresh
-ks-178	Move around in a table	Move to the next cell in the row and select its content.	Tab key	Tab	-	manual	fail	text.rs tab: moves to the next cell but doesn't select its content
-ks-179	Move around in a table	Move to the previous cell in the row and select its content.	Shift+Tab	Shift+Tab	-	manual	fail	moves to the previous cell without selecting it
-ks-180	Move around in a table	Move to the first cell in the row.	Alt+Home	Alt+Home	-	manual	fail	
-ks-181	Move around in a table	Move to the last cell in the row.	Alt+End	Alt+End	-	manual	fail	
-ks-182	Move around in a table	Move to the first cell in the column.	Alt+Page up	Alt+PageUp	-	manual	fail	
-ks-183	Move around in a table	Move to the last cell in the column.	Alt+Page down	Alt+PageDown	-	manual	fail	
+ks-178	Move around in a table	Move to the next cell in the row and select its content.	Tab key	Tab	-	manual	pass	engine tests.rs table_keys_move_and_select_like_word (Tab selects the next cell's content)
+ks-179	Move around in a table	Move to the previous cell in the row and select its content.	Shift+Tab	Shift+Tab	-	manual	pass	engine tests.rs table_keys_move_and_select_like_word (Shift+Tab selects the previous cell's content)
+ks-180	Move around in a table	Move to the first cell in the row.	Alt+Home	Alt+Home	table.firstCellInRow	registry		table.firstCellInRow
+ks-181	Move around in a table	Move to the last cell in the row.	Alt+End	Alt+End	table.lastCellInRow	registry		table.lastCellInRow
+ks-182	Move around in a table	Move to the first cell in the column.	Alt+Page up	Alt+PageUp	table.firstCellInColumn	registry		table.firstCellInColumn
+ks-183	Move around in a table	Move to the last cell in the column.	Alt+Page down	Alt+PageDown	table.lastCellInColumn	registry		table.lastCellInColumn
 ks-184	Move around in a table	Move to the previous row.	Up arrow key	Up	caret.up	registry		
 ks-185	Move around in a table	Move to the next row.	Down arrow key	Down	caret.down	registry		
-ks-186	Move around in a table	Move one row up.	Alt+Shift+Up arrow key	Alt+Shift+Up	-	manual	fail	whole table rows don't move yet (typing-parity.md)
-ks-187	Move around in a table	Move one row down.	Alt+Shift+Down arrow key	Alt+Shift+Down	-	manual	fail	
+ks-186	Move around in a table	Move one row up.	Alt+Shift+Up arrow key	Alt+Shift+Up	-	manual	pass	engine tests.rs table_keys_move_and_select_like_word (Alt+Shift+Up/Down, para.moveUp/moveDown, move the table row)
+ks-187	Move around in a table	Move one row down.	Alt+Shift+Down arrow key	Alt+Shift+Down	-	manual	pass	engine tests.rs table_keys_move_and_select_like_word (Alt+Shift+Down moves the row)
 ks-188	Select table content	Select the content in the next cell.	Tab key			duplicate	ks-178	same shortcut and action as ks-178
 ks-189	Select table content	Select the content in the previous cell.	Shift+Tab			duplicate	ks-179	same shortcut and action as ks-179
 ks-190	Select table content	Extend a selection to adjacent cells.	Shift+Arrow keys	Shift+Arrows	-	manual	untested	
@@ -193,7 +193,7 @@ ks-191	Select table content	Select a column.	Select the top or bottom cell of th
 ks-192	Select table content	Select a row.	Select the first or last cell in the row, and then press Shift+Alt+End or Home.	Shift+Home | Shift+End	-	manual	untested	
 ks-193	Select table content	Select the whole table.	Alt+5 on the numeric keypad, with Num Lock switched off	Alt+numpad 5	-	manual	fail	
 ks-194	Insert paragraphs and tab characters in a table	Insert a new paragraph in a cell.	Enter	Enter	text.newParagraph	registry		
-ks-195	Insert paragraphs and tab characters in a table	Insert a tab character in a cell.	Ctrl+Tab	Mod+Tab	-	manual	fail	
+ks-195	Insert paragraphs and tab characters in a table	Insert a tab character in a cell.	Ctrl+Tab	Mod+Tab	text.tabCharacter	registry		text.tabCharacter
 ks-196	Review a document	Open the Review tab.	Alt, R			duplicate	ks-035	same shortcut and action as ks-035
 ks-197	Review a document	Show list of comments.	Alt, R, P, 1, L	Alt,R,P,1,L	-	manual	untested	
 ks-198	Review a document	Insert a comment.	Ctrl+Alt+M	Mod+Alt+M	review.newComment	registry		
@@ -205,15 +205,15 @@ ks-203	Work with references, citations, and indexing	Choose citation options.	Al
 ks-204	Work with references, citations, and indexing	Mark an index entry.	Alt+Shift+X	Alt+Shift+X	references.markEntry	registry		
 ks-205	Work with references, citations, and indexing	Insert a footnote.	Ctrl+Alt+F	Mod+Alt+F	references.footnote	registry		
 ks-206	Work with references, citations, and indexing	Insert an endnote.	Ctrl+Alt+D	Mod+Alt+D	references.endnote	registry		
-ks-207	Work with references, citations, and indexing	Go to the next footnote.	Alt+Shift+Right angle bracket (>)	Alt+Shift+.	-	manual	fail	
-ks-208	Work with references, citations, and indexing	Go to the previous footnote.	Alt+Shift+Left angle bracket (<)	Alt+Shift+,	-	manual	fail	
+ks-207	Work with references, citations, and indexing	Go to the next footnote.	Alt+Shift+Right angle bracket (>)	Alt+Shift+.	references.nextFootnote	registry		references.nextFootnote
+ks-208	Work with references, citations, and indexing	Go to the previous footnote.	Alt+Shift+Left angle bracket (<)	Alt+Shift+,	references.previousFootnote	registry		references.previousFootnote
 ks-209	Perform a mail merge	Preview the mail merge.	Alt+Shift+K	Alt+Shift+K	mailings.preview	registry		
 ks-210	Perform a mail merge	Merge a document.	Alt+Shift+N	Alt+Shift+N	mailings.finish	registry		
 ks-211	Perform a mail merge	Print the merged document.	Alt+Shift+M	Alt+Shift+M	-	manual	fail	
 ks-212	Perform a mail merge	Edit a mail-merge data document.	Alt+Shift+E	Alt+Shift+E	mailings.editRecipients	registry		
 ks-213	Perform a mail merge	Insert a merge field.	Alt+Shift+F	Alt+Shift+F	mailings.insertField	registry		
 ks-214	Work with fields	Insert a DATE field.	Alt+Shift+D	Alt+Shift+D	insert.dateField	registry		
-ks-215	Work with fields	Insert a LISTNUM field.	Ctrl+Alt+L	Mod+Alt+L	-	manual	fail	
+ks-215	Work with fields	Insert a LISTNUM field.	Ctrl+Alt+L	Mod+Alt+L	insert.listNumField	registry		insert.listNumField
 ks-216	Work with fields	Insert a PAGE field.	Alt+Shift+P	Alt+Shift+P	insert.pageField	registry		
 ks-217	Work with fields	Insert a TIME field.	Alt+Shift+T	Alt+Shift+T	insert.timeField	registry		
 ks-218	Work with fields	Insert an empty field.	Ctrl+F9	Mod+F9	insert.field	registry		
@@ -229,24 +229,24 @@ ks-227	Work with fields	Lock a field.	Ctrl+F11	Mod+F11	fields.lock	registry
 ks-228	Work with fields	Unlock a field.	Ctrl+Shift+F11	Mod+Shift+F11	fields.unlock	registry		
 ks-229	Set the proofing language	Display the Language dialog box to set the proofing language.	Alt+R, U, L	Alt,R,U,L	-	manual	untested	
 ks-230	Set the proofing language	Set default languages.	Alt+R, L	Alt,R,L	-	manual	untested	
-ks-231	Insert international characters	à, è, ì, ò, ù, À, È, Ì, Ò, Ù	Ctrl+Grave accent (`), the letter	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-232	Insert international characters	á, é, í, ó, ú, ý Á, É, Í, Ó, Ú, Ý	Ctrl+Single quotation mark ('), the letter	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-233	Insert international characters	â, ê, î, ô, û Â, Ê, Î, Ô, Û	Ctrl+Shift+Caret (^), the letter	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-234	Insert international characters	ã, ñ, õ Ã, Ñ, Õ	Ctrl+Shift+Tilde (~), the letter	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-235	Insert international characters	ä, ë, ï, ö, ü, ÿ, Ä, Ë, Ï, Ö, Ü, Ÿ	Ctrl+Shift+Colon (:), the letter	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-236	Insert international characters	å, Å	Ctrl+Shift+At sign (@), a or A	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-237	Insert international characters	æ, Æ	Ctrl+Shift+Ampersand (&), a or A	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-238	Insert international characters	œ, Œ	Ctrl+Shift+Ampersand (&), o or O	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-239	Insert international characters	ç, Ç	Ctrl+Comma (,), c or C	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-240	Insert international characters	ð, Ð	Ctrl+Single quotation mark ('), d or D	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-241	Insert international characters	ø, Ø	Ctrl+Forward slash (/), o or O	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-242	Insert international characters	¿	Ctrl+Alt+Shift+Question mark (?)	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-243	Insert international characters	¡	Ctrl+Alt+Shift+Exclamation point (!)	dead key	-	manual	fail	no Ctrl-accent dead keys
-ks-244	Insert international characters	ß	Ctrl+Shift+Ampersand (&), s	dead key	-	manual	fail	no Ctrl-accent dead keys
+ks-231	Insert international characters	à, è, ì, ò, ù, À, È, Ì, Ò, Ù	Ctrl+Grave accent (`), the letter	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-232	Insert international characters	á, é, í, ó, ú, ý Á, É, Í, Ó, Ú, Ý	Ctrl+Single quotation mark ('), the letter	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-233	Insert international characters	â, ê, î, ô, û Â, Ê, Î, Ô, Û	Ctrl+Shift+Caret (^), the letter	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-234	Insert international characters	ã, ñ, õ Ã, Ñ, Õ	Ctrl+Shift+Tilde (~), the letter	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-235	Insert international characters	ä, ë, ï, ö, ü, ÿ, Ä, Ë, Ï, Ö, Ü, Ÿ	Ctrl+Shift+Colon (:), the letter	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-236	Insert international characters	å, Å	Ctrl+Shift+At sign (@), a or A	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-237	Insert international characters	æ, Æ	Ctrl+Shift+Ampersand (&), a or A	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-238	Insert international characters	œ, Œ	Ctrl+Shift+Ampersand (&), o or O	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-239	Insert international characters	ç, Ç	Ctrl+Comma (,), c or C	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-240	Insert international characters	ð, Ð	Ctrl+Single quotation mark ('), d or D	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-241	Insert international characters	ø, Ø	Ctrl+Forward slash (/), o or O	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-242	Insert international characters	¿	Ctrl+Alt+Shift+Question mark (?)	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-243	Insert international characters	¡	Ctrl+Alt+Shift+Exclamation point (!)	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
+ks-244	Insert international characters	ß	Ctrl+Shift+Ampersand (&), s	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
 ks-245	Use Input Method Editors for East Asian languages	Switch to the Japanese Input Method Editor (IME) for a 101-key keyboard, if available.	Alt+Back quote (`)	Alt+`	-	manual	untested	system input method
 ks-246	Use Input Method Editors for East Asian languages	Switch to the Korean Input Method Editor (IME) for a 101-key keyboard, if available.	Right Alt	Right Alt	-	manual	untested	system input method
 ks-247	Use Input Method Editors for East Asian languages	Switch to the Chinese Input Method Editor (IME) for a 101-key keyboard, if available.	Ctrl+Spacebar	Mod+Space	-	manual	untested	system input method
-ks-248	Switch the document view	Switch to the Read Mode view.	Alt+W, F	Alt,W,F	-	manual	untested	
+ks-248	Switch the document view	Switch to the Read Mode view.	Alt+W, F	Alt,W,F	-	manual	pass	keytips.rs test word_keytips_reach_object_smartart_wordart_and_read_mode
 ks-249	Switch the document view	Switch to the Print Layout view.	Ctrl+Alt+P	Mod+Alt+P	view.printLayout	registry		
 ks-250	Switch the document view	Switch to the Outline view.	Ctrl+Alt+O	Mod+Alt+O	view.outline	registry		
 ks-251	Switch the document view	Switch to the Draft view.	Ctrl+Alt+N	Mod+Alt+N	view.draft	registry		
@@ -259,7 +259,7 @@ ks-257	Outline a document	Expand the text under a heading.	Alt+Shift+Plus sign (
 ks-258	Outline a document	Collapse the text under a heading.	Alt+Shift+Plus sign (+)	Alt+Shift+=	outline.collapse	registry		published as Alt+Shift+Plus (same as Expand); Doc4Me collapses with Alt+Shift+-
 ks-259	Outline a document	Expand or collapse all text or headings.	Alt+Shift+A	Alt+Shift+A	outline.showAll	registry		
 ks-260	Outline a document	Hide or display the character formatting.	Forward slash (/) (on the numeric keypad)	numpad /	-	manual	fail	
-ks-261	Outline a document	Switch between showing the first line of body text and showing all body text.	Alt+Shift+L	Alt+Shift+L	-	manual	fail	
+ks-261	Outline a document	Switch between showing the first line of body text and showing all body text.	Alt+Shift+L	Alt+Shift+L	outline.firstLineOnly	registry		outline.firstLineOnly
 ks-262	Outline a document	Show all headings with the Heading 1 style.	Alt+Shift+1	Alt+Shift+1	outline.showLevel1	registry		
 ks-263	Outline a document	Show all headings with the specified heading level.	Alt+Shift+Heading level number	Alt+Shift+2	outline.showLevel2	registry		
 ks-264	Outline a document	Insert a tab character.	Ctrl+Tab			duplicate	ks-195	same shortcut and action as ks-195
@@ -271,7 +271,7 @@ ks-269	Zoom and adjust view	Zoom in.	Ctrl+Plus (+)			duplicate	ks-021	same short
 ks-270	Zoom and adjust view	Zoom out.	Ctrl+Minus (-)			duplicate	ks-022	same shortcut and action as ks-022
 ks-271	Zoom and adjust view	Return to 100% zoom.	Ctrl+0			duplicate	ks-023	same shortcut and action as ks-023
 ks-272	Zoom and adjust view	Zoom in and out.	Ctrl+Scroll			duplicate	ks-024	same shortcut and action as ks-024
-ks-273	Use function key shortcuts	Display the Word help task pane.	F1	F1	-	manual	fail	
+ks-273	Use function key shortcuts	Display the Word help task pane.	F1	F1	help.show	registry		help.show opens Help
 ks-274	Use function key shortcuts	Reveal Formatting task pane.	Shift+F1	Shift+F1		duplicate	ks-159	same shortcut and action as ks-159
 ks-275	Use function key shortcuts	Display or hide the ribbon.	Ctrl+F1	Mod+F1		duplicate	ks-048	same shortcut and action as ks-048
 ks-276	Use function key shortcuts	Move to the next field.	Alt+F1	Alt+F1	fields.next	registry		fields.next is F11 only
@@ -286,7 +286,7 @@ ks-284	Use function key shortcuts	Cut to the Spike.	Ctrl+F3	Mod+F3		duplicate	ks
 ks-285	Use function key shortcuts	Paste the Spike.	Ctrl+Shift+F3	Mod+Shift+F3		duplicate	ks-111	same shortcut and action as ks-111
 ks-286	Use function key shortcuts	Create a new Building Block.	Alt+F3	Alt+F3		duplicate	ks-108	same shortcut and action as ks-108
 ks-287	Use function key shortcuts	Repeat the last command or action.	F4	F4	edit.repeat	registry		
-ks-288	Use function key shortcuts	Repeat the last Find or Go To action.	Shift+F4	Shift+F4	-	manual	fail	
+ks-288	Use function key shortcuts	Repeat the last Find or Go To action.	Shift+F4	Shift+F4	edit.findNext	registry		repeats the last Find (Go To repeats with F5)
 ks-289	Use function key shortcuts	Close the current document.	Ctrl+F4	Mod+F4	file.close	registry		
 ks-290	Use function key shortcuts	Close Word.	Alt+F4	Alt+F4	-	manual	untested	window manager
 ks-291	Use function key shortcuts	Display the Go To dialog box.	F5	F5	edit.goto	registry		
@@ -295,8 +295,8 @@ ks-293	Use function key shortcuts	Display the Bookmark dialog box.	Ctrl+Shift+F5
 ks-294	Use function key shortcuts	Restore the document window size.	Alt+F5	Alt+F5	-	manual	untested	
 ks-295	Use function key shortcuts	Switch between the document, task pane, status bar and ribbon.	F6	F6	-	manual	untested	
 ks-296	Use function key shortcuts	Switch backwards between the document, ribbon, status bar and task pane.	Shift+F6	Shift+F6	-	manual	untested	
-ks-297	Use function key shortcuts	Switch to the next document window.	Ctrl+F6	Mod+F6	view.switchWindows	registry		
-ks-298	Use function key shortcuts	Switch to the previous document window.	Ctrl+Shift+F6	Mod+Shift+F6	-	manual	fail	
+ks-297	Use function key shortcuts	Switch to the next document window.	Ctrl+F6	Mod+F6	view.nextWindow	registry		view.nextWindow
+ks-298	Use function key shortcuts	Switch to the previous document window.	Ctrl+Shift+F6	Mod+Shift+F6	view.previousWindow	registry		view.previousWindow
 ks-299	Use function key shortcuts	Move from a dialog box back to the document.	Alt+F6	Alt+F6	-	manual	untested	
 ks-300	Use function key shortcuts	Display the Editor pane to check spelling and grammar.	F7	F7	review.spelling	registry		
 ks-301	Use function key shortcuts	Display the Thesaurus pane.	Shift+F7	Shift+F7	review.thesaurus	registry		
@@ -316,7 +316,7 @@ ks-314	Use function key shortcuts	Run GOTOBUTTON or MACROBUTTON.	Alt+Shift+F9	Al
 ks-315	Use function key shortcuts	Turn KeyTips on or off.	F10	F10		duplicate	ks-039	same shortcut and action as ks-039
 ks-316	Use function key shortcuts	Display the shortcut menu.	Shift+F10	Shift+F10		duplicate	ks-049	same shortcut and action as ks-049
 ks-317	Use function key shortcuts	Maximize or restore the document window.	Ctrl+F10	Mod+F10	-	manual	untested	
-ks-318	Use function key shortcuts	Display the Selection pane.	Alt+F10	Alt+F10	-	manual	fail	
+ks-318	Use function key shortcuts	Display the Selection pane.	Alt+F10	Alt+F10	arrange.selectionPane	registry		arrange.selectionPane
 ks-319	Use function key shortcuts	Display the menu for available actions.	Alt+Shift+F10	Alt+Shift+F10	-	manual	fail	
 ks-320	Use function key shortcuts	Move to the next field.	F11	F11		duplicate	ks-225	same shortcut and action as ks-225
 ks-321	Use function key shortcuts	Move to the previous field.	Shift+F11	Shift+F11		duplicate	ks-226	same shortcut and action as ks-226

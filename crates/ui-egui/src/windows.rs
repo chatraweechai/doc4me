@@ -132,9 +132,15 @@ pub(crate) fn request(app: &mut WordApp, req: &Value) {
         }
         Some("syncScroll") => w.sync_scroll = flag(req.get("value"), w.sync_scroll),
         Some("switch") => {
-            if let Some(n) = req.get("to").and_then(Value::as_u64).and_then(|n| u32::try_from(n).ok())
-                && w.numbers().contains(&n)
-            {
+            let numbers = w.numbers();
+            let now = numbers.iter().position(|n| Some(*n) == w.focus).unwrap_or(0);
+            let to = match req.get("to") {
+                // Ctrl+F6 and Ctrl+Shift+F6: the next or previous window, round the list.
+                Some(Value::String(dir)) if dir == "next" => numbers.get((now + 1) % numbers.len()).copied(),
+                Some(Value::String(dir)) if dir == "previous" => numbers.get((now + numbers.len() - 1) % numbers.len()).copied(),
+                other => other.and_then(Value::as_u64).and_then(|n| u32::try_from(n).ok()).filter(|n| numbers.contains(n)),
+            };
+            if let Some(n) = to {
                 w.focus = Some(n);
             }
         }

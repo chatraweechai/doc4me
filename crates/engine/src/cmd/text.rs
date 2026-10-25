@@ -17,13 +17,25 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("text.columnBreak", "Column Break", "Layout › Breaks", |s, _| ins_char(s, COLUMN_BREAK)).key("Mod+Shift+Enter"),
         CommandSpec::new("text.tab", "Tab", "Editing", tab).key("Tab"),
         CommandSpec::new("text.backTab", "Shift+Tab", "Editing", back_tab).key("Shift+Tab"),
+        // In a table Tab moves to the next cell; Ctrl+Tab types a tab character there.
+        CommandSpec::new("text.tabCharacter", "Tab Character", "Editing", |s, _| ins_char(s, '\t')).key(non_mac("Mod+Tab")),
+        CommandSpec::new("table.firstCellInRow", "First Cell in Row", "Table › Navigation", |s, _| cell_jump(s, true, true)).key("Alt+Home").pure(),
+        CommandSpec::new("table.lastCellInRow", "Last Cell in Row", "Table › Navigation", |s, _| cell_jump(s, true, false)).key("Alt+End").pure(),
+        CommandSpec::new("table.firstCellInColumn", "First Cell in Column", "Table › Navigation", |s, _| cell_jump(s, false, true))
+            .key("Alt+PageUp")
+            .pure(),
+        CommandSpec::new("table.lastCellInColumn", "Last Cell in Column", "Table › Navigation", |s, _| cell_jump(s, false, false))
+            .key("Alt+PageDown")
+            .pure(),
         CommandSpec::new("text.backspace", "Backspace", "Editing", backspace).key("Backspace"),
         CommandSpec::new("text.delete", "Delete", "Editing", delete).key("Delete"),
         CommandSpec::new("text.deleteWordBack", "Delete Previous Word", "Editing", delete_word_back).key("Mod+Backspace / Alt+Backspace"),
         CommandSpec::new("text.deleteWordForward", "Delete Next Word", "Editing", delete_word_fwd).key("Mod+Delete / Alt+Delete"),
         CommandSpec::new("text.nbsp", "Nonbreaking Space", "Insert › Symbols", |s, _| ins_char(s, NBSP)).key("Mod+Shift+Space"),
-        CommandSpec::new("text.nbHyphen", "Nonbreaking Hyphen", "Insert › Symbols", |s, _| ins_char(s, NB_HYPHEN)).key("Mod+Shift+-"),
-        CommandSpec::new("text.optionalHyphen", "Optional Hyphen", "Insert › Symbols", |s, _| ins_char(s, SOFT_HYPHEN)).key("Mod+-"),
+        // Microsoft's list: Alt+Shift+Minus (Ctrl+Shift+Minus is Subscript, Ctrl+Minus Zoom Out).
+        CommandSpec::new("text.nbHyphen", "Nonbreaking Hyphen", "Insert › Symbols", |s, _| ins_char(s, NB_HYPHEN)).key("Alt+Shift+-"),
+        // Microsoft's list gives Ctrl+Alt+Minus, which is also its Em Dash (on the keypad): no key.
+        CommandSpec::new("text.optionalHyphen", "Optional Hyphen", "Insert › Symbols", |s, _| ins_char(s, SOFT_HYPHEN)),
         // Alt+X on Windows and Linux; macOS has no default (Option+X types a character there).
         CommandSpec::new("text.toggleUnicode", "Toggle Unicode Character", "Editing", toggle_unicode).key(if cfg!(target_os = "macos") {
             ""
@@ -32,7 +44,8 @@ pub fn specs() -> Vec<CommandSpec> {
         }),
         CommandSpec::new("text.emDash", "Em Dash", "Insert › Symbols", |s, _| ins_char(s, '—')).key("Mod+Alt+-"),
         // On macOS Option+G / R / 2 / ; type these directly, so Word for Mac has no Cmd shortcut.
-        CommandSpec::new("text.copyright", "Copyright Sign", "Insert › Symbols", |s, _| ins_char(s, '©')).key(non_mac("Mod+Alt+C")),
+        // Ctrl+Alt+C copies formatting in Word for Windows now; (c) still AutoCorrects to ©.
+        CommandSpec::new("text.copyright", "Copyright Sign", "Insert › Symbols", |s, _| ins_char(s, '©')),
         CommandSpec::new("text.registered", "Registered Sign", "Insert › Symbols", |s, _| ins_char(s, '®')).key(non_mac("Mod+Alt+R")),
         CommandSpec::new("text.trademark", "Trademark Sign", "Insert › Symbols", |s, _| ins_char(s, '™')).key(non_mac("Mod+Alt+T")),
         CommandSpec::new("text.ellipsis", "Ellipsis", "Insert › Symbols", |s, _| ins_char(s, '…')).key(non_mac("Mod+Alt+.")),
@@ -438,16 +451,7 @@ fn tab(s: &mut Session, _: &Value) -> CmdResult {
             let t = s.doc.table_mut(story, &tpath)?;
             t.insert_row(nr, r);
         }
-        let mut path = tpath.0.clone();
-        path.extend([nr as u32, nc as u32, 0]);
-        let start = Pos { story, path: doc4me_doc::Path(path), off: 0 };
-        // Select the cell's content like Word.
-        let end_path = s.doc.para_paths(story).into_iter().rfind(|q| q.0.starts_with(&start.path.0[..start.path.0.len() - 1]));
-        let end = end_path.map(|q| {
-            let off = s.doc.para(story, &q).map(|x| x.len()).unwrap_or(0);
-            Pos { story, path: q, off }
-        });
-        s.sel = Selection { anchor: start.clone(), focus: end.unwrap_or(start) };
+        select_cell(s, story, &tpath, nr, nc);
         return sel_result(s);
     }
     let f = s.sel.focus.clone();
@@ -468,6 +472,38 @@ fn tab(s: &mut Session, _: &Value) -> CmdResult {
     ins_char(s, '\t')
 }
 
+/// Select a cell's content, as Tab and Shift+Tab do in Word.
+fn select_cell(s: &mut Session, story: StoryRef, tpath: &Path, r: usize, c: usize) {
+    let mut path = tpath.0.clone();
+    path.extend([r as u32, c as u32, 0]);
+    let start = Pos { story, path: Path(path), off: 0 };
+    let end_path = s.doc.para_paths(story).into_iter().rfind(|q| q.0.starts_with(&start.path.0[..start.path.0.len() - 1]));
+    let end = end_path.map(|q| {
+        let off = s.doc.para(story, &q).map(|x| x.len()).unwrap_or(0);
+        Pos { story, path: q, off }
+    });
+    s.sel = Selection { anchor: start.clone(), focus: end.unwrap_or(start) };
+}
+
+/// Alt+Home / End / Page Up / Page Down in a table: the first or last cell of the caret's row or
+/// column.
+fn cell_jump(s: &mut Session, in_row: bool, first: bool) -> CmdResult {
+    let Some((tpath, r, c)) = s.sel.focus.path.cell() else { return sel_result(s) };
+    let story = s.sel.focus.story;
+    let Some(t) = s.doc.table(story, &tpath) else { return sel_result(s) };
+    let (nr, nc) = if in_row {
+        let n = t.rows.get(r).map(|x| x.cells.len()).unwrap_or(1);
+        (r, if first { 0 } else { n.saturating_sub(1) })
+    } else {
+        let rows: Vec<usize> = (0..t.rows.len()).filter(|&i| t.rows.get(i).is_some_and(|x| x.cells.len() > c)).collect();
+        (if first { rows.first() } else { rows.last() }.copied().unwrap_or(r), c)
+    };
+    let mut path = tpath.0.clone();
+    path.extend([nr as u32, nc as u32, 0]);
+    s.sel = Selection::caret(Pos { story, path: Path(path), off: 0 });
+    sel_result(s)
+}
+
 fn back_tab(s: &mut Session, _: &Value) -> CmdResult {
     if let Some((tpath, r, c)) = s.sel.focus.path.cell() {
         let story = s.sel.focus.story;
@@ -478,9 +514,7 @@ fn back_tab(s: &mut Session, _: &Value) -> CmdResult {
         } else {
             return sel_result(s);
         };
-        let mut path = tpath.0.clone();
-        path.extend([nr as u32, nc as u32, 0]);
-        s.sel = Selection::caret(Pos { story, path: doc4me_doc::Path(path), off: 0 });
+        select_cell(s, story, &tpath, nr, nc);
         return sel_result(s);
     }
     let f = s.sel.focus.clone();

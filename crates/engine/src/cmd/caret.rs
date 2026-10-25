@@ -40,6 +40,17 @@ pub fn specs() -> Vec<CommandSpec> {
             .pure(),
         CommandSpec::new("caret.pageUp", "Page Up", "Navigation", |s, v| page(s, v, -1)).key("PageUp").params(EXTEND).pure(),
         CommandSpec::new("caret.pageDown", "Page Down", "Navigation", |s, v| page(s, v, 1)).key("PageDown").params(EXTEND).pure(),
+        CommandSpec::new("caret.nextPage", "Top of Next Page", "Navigation", |s, v| page_top(s, v, 1)).key("Mod+PageDown").params(EXTEND).pure(),
+        CommandSpec::new("caret.prevPage", "Top of Previous Page", "Navigation", |s, v| page_top(s, v, -1)).key("Mod+PageUp").params(EXTEND).pure(),
+        // The window's top and bottom are the front end's to know: it moves the caret there.
+        CommandSpec::new("caret.screenTop", "Top of the Window", "Navigation", |s, v| screen_edge(s, v, "top"))
+            .key("Mod+Alt+PageUp")
+            .params(EXTEND)
+            .pure(),
+        CommandSpec::new("caret.screenBottom", "Bottom of the Window", "Navigation", |s, v| screen_edge(s, v, "bottom"))
+            .key("Mod+Alt+PageDown")
+            .params(EXTEND)
+            .pure(),
         CommandSpec::new("caret.set", "Set Caret", "Navigation", set)
             .params(r#"{"pos": Pos, "extend"?: bool} | {"page": n, "x": pt, "y": pt}"#)
             .pure(),
@@ -256,6 +267,34 @@ fn page(s: &mut Session, v: &Value, dir: i32) -> CmdResult {
     let to = l.hit(np, c.x, c.top + 1.0, from.story).unwrap_or(from);
     s.page_hint = np;
     apply(s, to, ext);
+    sel_result(s)
+}
+
+/// Ctrl+Page Down / Up: the start of the first body line on the next or previous page.
+fn page_top(s: &mut Session, v: &Value, dir: i32) -> CmdResult {
+    let ext = extend(v);
+    let l = s.layout();
+    let from = s.sel.focus.clone();
+    let Some(c) = l.caret_on(&from, s.page_hint) else { return sel_result(s) };
+    let np = if dir < 0 { c.page.saturating_sub(1) } else { (c.page + 1).min(l.pages.len().saturating_sub(1)) };
+    let first = l.pages.get(np).and_then(|pg| {
+        pg.items.iter().find_map(|it| match it {
+            doc4me_layout::Placed::Lines { story: StoryRef::Body, path, para, l0, .. } => {
+                para.lines.get(*l0).map(|line| Pos { story: StoryRef::Body, path: path.clone(), off: line.start })
+            }
+            _ => None,
+        })
+    });
+    if let Some(to) = first {
+        s.page_hint = np;
+        s.goal_x = None;
+        apply(s, s.doc.clamp(&to), ext);
+    }
+    sel_result(s)
+}
+
+fn screen_edge(s: &mut Session, v: &Value, edge: &str) -> CmdResult {
+    s.ui_requests.push(serde_json::json!({"caretScreen": edge, "extend": extend(v)}));
     sel_result(s)
 }
 

@@ -107,6 +107,12 @@ pub fn combo(m: Modifiers, key: &str, with_shift: bool) -> String {
 /// Find and run the command bound to this key. Returns true if handled.
 fn dispatch(app: &mut WordApp, key: Key, m: Modifiers) -> bool {
     let Some(name) = key_name(key) else { return false };
+    // Alt+Shift+Minus is Nonbreaking Hyphen in Microsoft's list but still collapses a heading in
+    // Outline view.
+    if app.session.view.mode == doc4me_engine::layout::ViewMode::Outline && combo(m, name, true) == "Alt+Shift+-" {
+        let _ = app.run("outline.collapse", json!({}));
+        return true;
+    }
     let reg = app.session.registry.clone();
     if let Some(spec) = app.session.keymap.resolve(&reg, &combo(m, name, true)) {
         let _ = app.run(spec.id, json!({}));
@@ -168,6 +174,79 @@ fn equation_key(app: &mut WordApp, key: Key, m: Modifiers) -> bool {
 /// picture may be pasted on it (#45).
 fn is_paste_release(key: Key, modifiers: egui::Modifiers) -> bool {
     (modifiers.command || key == Key::Paste) && !modifiers.alt && !modifiers.shift
+}
+
+/// The accents Word for Windows types with Ctrl and a punctuation key, then a letter.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Accent {
+    Grave,
+    Acute,
+    Circumflex,
+    Tilde,
+    Umlaut,
+    Ring,
+    Ligature,
+    Cedilla,
+    Stroke,
+}
+
+/// What Ctrl (with Shift or Alt) and this key do in Word for Windows: start an accent, or type
+/// ¿ and ¡ straight away. Shifted keys are read as US keyboards place them (Shift+6 is ^).
+pub enum AccentKey {
+    Dead(Accent),
+    Char(char),
+}
+
+pub fn accent_key(key: Key, m: Modifiers) -> Option<AccentKey> {
+    let ctrl = m.ctrl || (m.command && !cfg!(target_os = "macos"));
+    if !ctrl || cfg!(target_os = "macos") {
+        return None;
+    }
+    use AccentKey::{Char, Dead};
+    Some(match (key, m.shift, m.alt) {
+        (Key::Backtick, false, false) => Dead(Accent::Grave),
+        (Key::Quote, false, false) => Dead(Accent::Acute),
+        (Key::Num6, true, false) => Dead(Accent::Circumflex),
+        (Key::Backtick, true, false) => Dead(Accent::Tilde),
+        (Key::Semicolon | Key::Colon, true, false) => Dead(Accent::Umlaut),
+        (Key::Num2, true, false) => Dead(Accent::Ring),
+        (Key::Num7, true, false) => Dead(Accent::Ligature),
+        (Key::Comma, false, false) => Dead(Accent::Cedilla),
+        (Key::Slash, false, false) => Dead(Accent::Stroke),
+        (Key::Slash | Key::Questionmark, true, true) => Char('¿'),
+        (Key::Num1 | Key::Exclamationmark, true, true) => Char('¡'),
+        _ => return None,
+    })
+}
+
+/// The letter `c` with the accent, as Word composes it; `None` when the pair has no character.
+pub fn compose(accent: Accent, c: char) -> Option<char> {
+    let pick = |from: &str, to: &str| from.chars().position(|x| x == c).and_then(|i| to.chars().nth(i));
+    match accent {
+        Accent::Grave => pick("aeiouAEIOU", "àèìòùÀÈÌÒÙ"),
+        Accent::Acute => pick("aeiouyAEIOUYdD", "áéíóúýÁÉÍÓÚÝðÐ"),
+        Accent::Circumflex => pick("aeiouAEIOU", "âêîôûÂÊÎÔÛ"),
+        Accent::Tilde => pick("anoANO", "ãñõÃÑÕ"),
+        Accent::Umlaut => pick("aeiouyAEIOUY", "äëïöüÿÄËÏÖÜŸ"),
+        Accent::Ring => pick("aA", "åÅ"),
+        Accent::Ligature => pick("aAoOs", "æÆœŒß"),
+        Accent::Cedilla => pick("cC", "çÇ"),
+        Accent::Stroke => pick("oO", "øØ"),
+    }
+}
+
+/// The command a paste with these modifiers runs: Word for Windows (Microsoft 365) pastes text only
+/// on Mod+Shift+V and formatting on Mod+Alt+V; Word for Mac pastes formatting on ⌘⇧V and opens
+/// Paste Special on ⌘⌥V.
+fn paste_command(alt: bool, shift: bool) -> &'static str {
+    match (alt, shift) {
+        (true, true) => "edit.pasteText",
+        (false, true) if cfg!(target_os = "macos") => "edit.pasteFormat",
+        (false, true) => "edit.pasteText",
+        (true, false) if cfg!(target_os = "macos") => "edit.pasteSpecial",
+        (true, false) => "edit.pasteFormat",
+        _ => "edit.paste",
+    }
 }
 
 /// Events for the focused canvas: text, editing keys, clipboard, IME. While keytips are showing
@@ -262,6 +341,15 @@ pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
                 if t.chars().all(|c| !c.is_control()) && !t.is_empty() {
                     // Typing with a text box selected types into it.
                     crate::objects::enter_text_box(app);
+                    // After a Ctrl+accent key the letter takes the accent (or comes as typed).
+                    let t = match app.canvas.dead_accent.take() {
+                        Some(a) => {
+                            let mut cs = t.chars();
+                            let first = cs.next().and_then(|c| compose(a, c));
+                            first.map_or(t.clone(), |c| std::iter::once(c).chain(cs).collect())
+                        }
+                        None => t,
+                    };
                     let _ = app.run("text.insert", json!({"text": t}));
                 }
             }
@@ -273,16 +361,19 @@ pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
                 }
             }
             egui::Event::Paste(t) => {
-                // Mod+Alt+V arrives as a paste too (the shell reads the clipboard): Paste Special.
+                // Mod+Shift+V and Mod+Alt+V arrive as a paste too (the shell reads the clipboard).
                 let m = ctx.input(|i| i.modifiers);
-                let id = match (m.alt, m.shift) {
-                    (true, true) => "edit.pasteText",
-                    (true, false) => "edit.pasteSpecial",
-                    _ => "edit.paste",
-                };
-                let _ = app.run(id, json!({"text": t}));
+                let id = paste_command(m.alt, m.shift);
+                let params = if id == "edit.pasteFormat" { json!({}) } else { json!({"text": t}) };
+                let _ = app.run(id, params);
             }
             egui::Event::Copy | egui::Event::Cut => {
+                // Mod+Alt+C (Word for Windows) or Mod+Shift+C arrive as a copy: Copy Formatting.
+                let m = ctx.input(|i| i.modifiers);
+                if matches!(e, egui::Event::Copy) && (m.shift || (m.alt && !cfg!(target_os = "macos"))) {
+                    let _ = app.run("edit.copyFormat", json!({}));
+                    continue;
+                }
                 let id = if matches!(e, egui::Event::Cut) { "edit.cut" } else { "edit.copy" };
                 if let Ok(r) = app.run(id, json!({}))
                     && let Some(t) = r.get("text").and_then(Value::as_str)
@@ -318,6 +409,23 @@ pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
                 }
                 if crate::objects::key(app, key, modifiers) {
                     continue;
+                }
+                // Word's Ctrl+accent keys.
+                match accent_key(key, modifiers) {
+                    Some(AccentKey::Dead(a)) => {
+                        app.canvas.dead_accent = Some(a);
+                        continue;
+                    }
+                    Some(AccentKey::Char(c)) => {
+                        app.canvas.swallow_text = true;
+                        let _ = app.run("text.insert", json!({"text": c.to_string()}));
+                        continue;
+                    }
+                    None => {}
+                }
+                if !matches!(key, Key::Escape) && key_name(key).is_some_and(|n| n.len() > 1) {
+                    // A named key (arrows, Enter…) cancels a waiting accent; letters use it.
+                    app.canvas.dead_accent = None;
                 }
                 // Escape leaves a text box to just after it in the body.
                 if key == Key::Escape
@@ -362,6 +470,91 @@ pub fn global_shortcuts(app: &mut WordApp, ctx: &egui::Context) {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn paste_modifiers_follow_word_for_windows() {
+        if cfg!(target_os = "macos") {
+            return;
+        }
+        assert_eq!(paste_command(false, false), "edit.paste");
+        assert_eq!(paste_command(false, true), "edit.pasteText");
+        assert_eq!(paste_command(true, false), "edit.pasteFormat");
+        assert_eq!(paste_command(true, true), "edit.pasteText");
+    }
+
+    #[test]
+    fn ctrl_alt_c_and_v_copy_and_paste_formatting() {
+        if cfg!(target_os = "macos") {
+            return;
+        }
+        let mut a = crate::WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("Bold plain")), crate::Services::default());
+        a.run("select.range", json!({"anchor": {"block": 0, "off": 0}, "focus": {"block": 0, "off": 4}})).unwrap();
+        a.run("format.bold", json!({})).unwrap();
+        let ctx = egui::Context::default();
+        let alt_ctrl = Modifiers { alt: true, ctrl: true, command: true, ..Default::default() };
+        let frame = |a: &mut crate::WordApp, modifiers: Modifiers, e: egui::Event| {
+            ctx.run_ui(egui::RawInput { events: vec![egui::Event::ModifiersChanged(modifiers), e], ..Default::default() }, |ui| {
+                canvas_events(a, ui.ctx())
+            })
+            .drop_without_applying_deltas();
+        };
+        frame(&mut a, alt_ctrl, egui::Event::Copy);
+        a.run("select.range", json!({"anchor": {"block": 0, "off": 5}, "focus": {"block": 0, "off": 10}})).unwrap();
+        frame(&mut a, alt_ctrl, egui::Event::Paste("clipboard text".into()));
+        let p = a.session.doc.para_at(&doc4me_doc::Pos::body(0, 0)).unwrap().clone();
+        assert_eq!(p.text, "Bold plain", "formatting only, no text pasted");
+        assert_eq!(p.props_of_char(6).bold, Some(true), "Ctrl+Alt+V pasted the bold");
+        // Ctrl+Shift+V pastes the clipboard's text only.
+        a.run("caret.docEnd", json!({})).unwrap();
+        frame(&mut a, Modifiers { shift: true, ctrl: true, command: true, ..Default::default() }, egui::Event::Paste(" more".into()));
+        assert_eq!(a.session.doc.plain_text(doc4me_doc::StoryRef::Body), "Bold plain more");
+    }
+
+    #[test]
+    fn ctrl_accent_keys_compose_like_word() {
+        if cfg!(target_os = "macos") {
+            return;
+        }
+        let mut a = crate::WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), crate::Services::default());
+        let ctx = egui::Context::default();
+        let ctrl = |shift, alt| Modifiers { ctrl: true, command: true, shift, alt, ..Default::default() };
+        let key = |key, modifiers| egui::Event::Key { key, physical_key: None, pressed: true, repeat: false, modifiers };
+        let type_after = |a: &mut crate::WordApp, k: Key, m: Modifiers, letter: &str| {
+            ctx.run_ui(egui::RawInput { events: vec![egui::Event::ModifiersChanged(m), key(k, m)], ..Default::default() }, |ui| {
+                canvas_events(a, ui.ctx())
+            })
+            .drop_without_applying_deltas();
+            if !letter.is_empty() {
+                ctx.run_ui(
+                    egui::RawInput {
+                        events: vec![egui::Event::ModifiersChanged(Modifiers::NONE), egui::Event::Text(letter.into())],
+                        ..Default::default()
+                    },
+                    |ui| canvas_events(a, ui.ctx()),
+                )
+                .drop_without_applying_deltas();
+            }
+        };
+        for (k, m, letter) in [
+            (Key::Backtick, ctrl(false, false), "e"),
+            (Key::Quote, ctrl(false, false), "E"),
+            (Key::Num6, ctrl(true, false), "o"),
+            (Key::Backtick, ctrl(true, false), "n"),
+            (Key::Semicolon, ctrl(true, false), "u"),
+            (Key::Num2, ctrl(true, false), "a"),
+            (Key::Num7, ctrl(true, false), "o"),
+            (Key::Num7, ctrl(true, false), "s"),
+            (Key::Comma, ctrl(false, false), "c"),
+            (Key::Quote, ctrl(false, false), "d"),
+            (Key::Slash, ctrl(false, false), "O"),
+            (Key::Slash, ctrl(true, true), ""),
+            (Key::Num1, ctrl(true, true), ""),
+            (Key::Backtick, ctrl(false, false), "x"),
+        ] {
+            type_after(&mut a, k, m, letter);
+        }
+        assert_eq!(a.session.doc.plain_text(doc4me_doc::StoryRef::Body), "èÉôñüåœßçðØ¿¡x");
+    }
 
     #[test]
     fn shift_backspace_still_erases() {

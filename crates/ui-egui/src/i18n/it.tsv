@@ -2541,3 +2541,18 @@ spacing	Normal	Normale
 	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	La voce viene riconosciuta su questo computer (whisper.cpp); non viene inviato nulla online.
 	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} non è installato su questo computer, quindi il documento viene mostrato con {with}. Righe e pagine potrebbero andare a capo diversamente rispetto al tipo di carattere originale.
 	Font not installed	Tipo di carattere non installato
+	Top of the Window	Inizio della finestra
+	Bottom of the Window	Fine della finestra
+	Top of Next Page	Inizio della pagina successiva
+	Top of Previous Page	Inizio della pagina precedente
+	Symbol Font	Tipo di carattere Symbol
+	Shrink Selection	Riduci selezione
+	Previous Window	Finestra precedente
+	Next Window	Finestra successiva
+	Previous Footnote	Nota a piè di pagina precedente
+	Last Cell in Row	Ultima cella della riga
+	Last Cell in Column	Ultima cella della colonna
+	First Cell in Row	Prima cella della riga
+	First Cell in Column	Prima cella della colonna
+	Insert LISTNUM Field	Inserisci campo LISTNUM
+	Collapse the Ribbon	Comprimi la barra multifunzione

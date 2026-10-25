@@ -933,6 +933,12 @@ impl WordApp {
         if req.get("close").is_some() {
             self.quit_requested = true;
         }
+        if req.get("ui").and_then(Value::as_str) == Some("collapseRibbon") {
+            self.ui.ribbon_collapsed = !self.ui.ribbon_collapsed;
+        }
+        if let Some(edge) = req.get("caretScreen").and_then(Value::as_str) {
+            canvas::caret_to_window_edge(self, edge == "bottom", req.get("extend").and_then(Value::as_bool).unwrap_or(false));
+        }
         if req.get("window").is_some() {
             windows::request(self, req);
         }

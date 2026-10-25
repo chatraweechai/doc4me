@@ -93,8 +93,7 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("para.addSpaceBefore", "Add Space Before Paragraph", "Home › Paragraph › Line Spacing", |s, _| {
             let has = cur(s).space_before > 0.0;
             fmt(s, &|p| p.space_before = Some(if has { 0.0 } else { 12.0 }))
-        })
-        .key("Mod+0"),
+        }),
         CommandSpec::new("para.removeSpaceAfter", "Remove Space After Paragraph", "Home › Paragraph › Line Spacing", |s, _| {
             let has = cur(s).space_after > 0.0;
             fmt(s, &|p| p.space_after = Some(if has { 0.0 } else { 8.0 }))
@@ -606,9 +605,45 @@ pub fn border_sides(v: &Value, space_tb: f32, space_lr: f32) -> Result<Borders, 
 /// A selection that ends at the very start of a paragraph doesn't touch that paragraph (a
 /// selected paragraph includes its mark). Refused at the top or bottom of the container, next to
 /// a table, across a section break and for a selection across table cells.
+/// Alt+Shift+Up / Down with the selection in one table: its rows move past the row above or below.
+fn move_rows(s: &mut Session, up: bool) -> Option<CmdResult> {
+    let (a, b) = s.sel.ordered();
+    let ((ta, ra, _), (tb, rb, _)) = (a.path.cell()?, b.path.cell()?);
+    if ta != tb || a.story != b.story {
+        return None;
+    }
+    let (story, depth) = (a.story, ta.0.len());
+    let (lo, hi) = (ra.min(rb), ra.max(rb));
+    Some((|| {
+        let t = s.doc.table_mut(story, &ta)?;
+        if up {
+            let Some(above) = lo.checked_sub(1) else { return Err(CmdError::Failed("already at the top".into())) };
+            t.rows.get_mut(above..=hi).ok_or_else(|| CmdError::Failed("bad rows".into()))?.rotate_left(1);
+        } else {
+            let below = hi + 1;
+            if below >= t.rows.len() {
+                return Err(CmdError::Failed("already at the bottom".into()));
+            }
+            t.rows.get_mut(lo..=below).ok_or_else(|| CmdError::Failed("bad rows".into()))?.rotate_right(1);
+        }
+        for p in [&mut s.sel.anchor, &mut s.sel.focus] {
+            if p.path.0.starts_with(&ta.0)
+                && let Some(row) = p.path.0.get_mut(depth)
+            {
+                *row = if up { row.saturating_sub(1) } else { *row + 1 };
+            }
+        }
+        sel_result(s)
+    })())
+}
+
 fn move_paras(s: &mut Session, up: bool) -> CmdResult {
     // Outline view: what's collapsed moves with its heading, past whole shown paragraphs.
     if let Some(r) = super::outline::move_shown(s, up) {
+        return r;
+    }
+    // In a table Word moves the selected rows.
+    if let Some(r) = move_rows(s, up) {
         return r;
     }
     let (a, b) = s.sel.ordered();

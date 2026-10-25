@@ -27,7 +27,8 @@ pub const FORMATS: [(&str, &str); 4] =
 pub fn specs() -> Vec<CommandSpec> {
     vec![
         CommandSpec::new("edit.pasteSpecial", "Paste Special", "Home › Clipboard › Paste", paste_special)
-            .key("Mod+Alt+V")
+            // Word for Mac's key; on Windows Ctrl+Alt+V pastes formatting now.
+            .key(super::mac_or("Mod+Ctrl+V", ""))
             .params(r#"{"as"?: "formatted"|"rtf"|"html"|"text", "text"?: string, "html"?: string, "rtf"?: string}"#),
     ]
 }

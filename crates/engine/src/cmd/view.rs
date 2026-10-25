@@ -54,16 +54,18 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("view.zoom", "Zoom", "View › Zoom", zoom)
             .params(r#"{"value": percent (10-500) | "pageWidth" | "onePage" | "multiplePages"}"#)
             .pure(),
-        CommandSpec::new("view.zoom100", "100%", "View › Zoom", |s, _| zoom(s, &json!({"value": 100}))).pure(),
+        CommandSpec::new("view.zoom100", "100%", "View › Zoom", |s, _| zoom(s, &json!({"value": 100}))).key("Mod+0").pure(),
         CommandSpec::new("view.zoomIn", "Zoom In", "View › Zoom", |s, _| {
             let z = ((s.view.zoom * 10.0).round() / 10.0 + 0.1).min(5.0);
             zoom(s, &json!({"value": z * 100.0}))
         })
+        .key("Mod+=")
         .pure(),
         CommandSpec::new("view.zoomOut", "Zoom Out", "View › Zoom", |s, _| {
             let z = ((s.view.zoom * 10.0).round() / 10.0 - 0.1).max(0.1);
             zoom(s, &json!({"value": z * 100.0}))
         })
+        .key("Mod+-")
         .pure(),
         CommandSpec::new("view.onePage", "One Page", "View › Zoom", |s, _| zoom(s, &json!({"value": "onePage"}))).pure(),
         CommandSpec::new("view.multiplePages", "Multiple Pages", "View › Zoom", |s, _| zoom(s, &json!({"value": "multiplePages"}))).pure(),
@@ -100,6 +102,20 @@ pub fn specs() -> Vec<CommandSpec> {
             window(s, json!({"window": "switch", "to": v.get("window")}))
         })
         .params(r#"{"window": n} (1 is the first window; New Window opens 2, 3…)"#)
+        .pure(),
+        CommandSpec::new("view.nextWindow", "Next Window", "View › Window", |s, _| window(s, json!({"window": "switch", "to": "next"})))
+            .key("Mod+F6")
+            .pure(),
+        CommandSpec::new("view.previousWindow", "Previous Window", "View › Window", |s, _| {
+            window(s, json!({"window": "switch", "to": "previous"}))
+        })
+        .key("Mod+Shift+F6")
+        .pure(),
+        CommandSpec::new("view.collapseRibbon", "Collapse the Ribbon", "View", |s, _| {
+            s.ui_requests.push(json!({"ui": "collapseRibbon"}));
+            sel_result(s)
+        })
+        .key("Mod+F1")
         .pure(),
         CommandSpec::new("view.state", "View State", "View", |s, _| serde_json::to_value(&s.view).map_err(|e| CmdError::Failed(e.to_string())))
             .pure(),

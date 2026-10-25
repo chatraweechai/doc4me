@@ -71,7 +71,8 @@ pub fn specs() -> Vec<CommandSpec> {
                 |c, on| c.vert_align = Some(if on { VertAlign::Subscript } else { VertAlign::Baseline }),
             )
         })
-        .key("Mod+="),
+        // Microsoft's list for Word for Windows; Ctrl+= zooms in there now.
+        .key("Mod+Shift+-"),
         CommandSpec::new("format.superscript", "Superscript", "Home › Font", |s, v| {
             toggle(
                 s,
@@ -96,6 +97,8 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("format.emboss", "Emboss", "Home › Font › Font", |s, v| toggle(s, v, |r| r.emboss, |c, on| c.emboss = Some(on))),
         CommandSpec::new("format.engrave", "Engrave", "Home › Font › Font", |s, v| toggle(s, v, |r| r.engrave, |c, on| c.engrave = Some(on))),
         CommandSpec::new("format.font", "Font", "Home › Font", font).key("Mod+Shift+F").params(r#"{"name"?: string, "eastAsia"?: string}"#),
+        // Word's Ctrl+Shift+Q: the selection in the Symbol font.
+        CommandSpec::new("format.symbolFont", "Symbol Font", "Home › Font", |s, _| font(s, &json!({"name": "Symbol"}))).key("Mod+Shift+Q"),
         CommandSpec::new("format.size", "Font Size", "Home › Font", size).key("Mod+Shift+P").params(r#"{"size": number}"#),
         CommandSpec::new("format.growFont", "Increase Font Size", "Home › Font", |s, _| step_size(s, 1)).key("Mod+Shift+. / Mod+Shift+>"),
         CommandSpec::new("format.shrinkFont", "Decrease Font Size", "Home › Font", |s, _| step_size(s, -1)).key("Mod+Shift+, / Mod+Shift+<"),
