@@ -9,6 +9,7 @@
 pub mod catalog;
 pub mod cmd;
 pub mod file_access;
+pub mod ink_math;
 pub mod io;
 mod io_ext;
 pub mod keymap;

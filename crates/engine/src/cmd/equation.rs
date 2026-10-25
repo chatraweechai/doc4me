@@ -22,6 +22,12 @@ fn near_equation(s: &Session) -> Option<&'static str> {
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![
+        // Handwritten math (`crate::ink_math`): from the Ink Equation dialog's strokes, or the
+        // linear text the dialog shows (and the user may have corrected).
+        CommandSpec::new("insert.inkEquation", "Ink Equation", "Insert › Symbols › Equation", ink_equation)
+            .params(r#"{"strokes"?: [[[x, y], …], …] (handwriting, y down), "linear"?: string (UnicodeMath, e.g. the dialog's corrected text)} → {"linear"}; neither shows Ink Equation"#),
+        CommandSpec::new("draw.inkToMath", "Ink to Math", "Draw › Convert", ink_to_math)
+            .when(|s| if crate::cmd::draw::lasso_selection(s).is_some() { None } else { Some("select handwritten math with the Lasso first") }),
         CommandSpec::new("insert.equation", "Equation", "Insert › Symbols", insert)
             .key("Alt+=")
             .params(r#"{"linear"?: string, "latex"?: string, "builtin"?: "pythagoras|area|quadratic|binomial|expansion|euler|derivative|taylor|gaussian|fourier|trig1|trig2|normal|bayes", "display"?: bool, "edit"?: bool (default true)}"#),
@@ -161,6 +167,72 @@ fn insert(s: &mut Session, v: &Value) -> CmdResult {
         None => parse_linear(selected.trim()),
     };
     insert_nodes_as_equation(s, nodes, v)
+}
+
+fn ink_equation(s: &mut Session, v: &Value) -> CmdResult {
+    let linear = if let Some(l) = p::str(v, "linear") {
+        l.trim().chars().take(4000).collect::<String>()
+    } else if let Some(strokes) = v.get("strokes") {
+        crate::ink_math::recognize(&strokes_from(strokes)?).map_err(CmdError::Failed)?
+    } else {
+        s.ui_requests.push(json!({"open": "inkEquation"}));
+        return sel_result(s);
+    };
+    if linear.is_empty() {
+        return Err(CmdError::Params("there is no equation to insert".into()));
+    }
+    let mut r = insert_nodes_as_equation(s, parse_linear(&linear), &json!({"edit": false}))?;
+    r["linear"] = json!(linear);
+    Ok(r)
+}
+
+/// Strokes in JSON: a list of lists of `[x, y]`, capped.
+fn strokes_from(v: &Value) -> Result<Vec<crate::ink_math::Stroke>, CmdError> {
+    let list = v.as_array().ok_or_else(|| CmdError::Params("`strokes` is a list of strokes, each a list of [x, y]".into()))?;
+    Ok(list
+        .iter()
+        .take(crate::ink_math::MAX_STROKES)
+        .map(|s| {
+            s.as_array().into_iter().flatten().take(20_000).filter_map(|p| Some([p.get(0)?.as_f64()? as f32, p.get(1)?.as_f64()? as f32])).collect()
+        })
+        .collect())
+}
+
+/// Draw › Convert › Ink to Math: the lasso-selected pen strokes, recognised, become an equation
+/// where the first of them was anchored; the strokes go (one undo step).
+fn ink_to_math(s: &mut Session, _: &Value) -> CmdResult {
+    let sel =
+        crate::cmd::draw::lasso_selection(s).cloned().ok_or_else(|| CmdError::Disabled("select handwritten math with the Lasso first".into()))?;
+    let layout = s.layout();
+    let mut strokes = Vec::new();
+    let mut items = Vec::new();
+    for pos in &sel.items {
+        let Some(InlineObject::Shape { w, h, freeform: Some(f), .. }) = s.doc.para_at(pos).and_then(|p| p.object_at(pos.off)) else { continue };
+        if f.ink.is_none() {
+            continue;
+        }
+        let Some(hit) = layout.object(pos, sel.page) else { continue };
+        let r = hit.rect;
+        for (pts, _) in f.placed(r.x, r.y, *w, *h) {
+            strokes.push(pts);
+        }
+        items.push(pos.clone());
+    }
+    if strokes.is_empty() {
+        return Err(CmdError::Failed("the selection has no handwriting".into()));
+    }
+    let linear = crate::ink_math::recognize(&strokes).map_err(CmdError::Failed)?;
+    items.sort();
+    items.dedup();
+    for pos in items.iter().rev() {
+        crate::cmd::draw::delete_object(s, pos)?;
+    }
+    s.view.draw.lasso = None;
+    let Some(at) = items.first().cloned() else { return Err(CmdError::Failed("the selection has no handwriting".into())) };
+    s.sel = Selection::caret(at);
+    let mut r = insert_nodes_as_equation(s, parse_linear(&linear), &json!({"edit": false}))?;
+    r["linear"] = json!(linear);
+    Ok(r)
 }
 
 fn insert_nodes_as_equation(s: &mut Session, nodes: Arg, v: &Value) -> CmdResult {

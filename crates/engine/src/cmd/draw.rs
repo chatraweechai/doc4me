@@ -391,7 +391,7 @@ fn erase(s: &mut Session, v: &Value) -> CmdResult {
 }
 
 /// Delete the object at `pos`, keeping the text selection on the same text.
-fn delete_object(s: &mut Session, pos: &Pos) -> Result<(), CmdError> {
+pub(crate) fn delete_object(s: &mut Session, pos: &Pos) -> Result<(), CmdError> {
     let len = OBJ.len_utf8();
     s.doc.delete_range(pos, &Pos { off: pos.off + len, ..pos.clone() })?;
     for at in [&mut s.sel.anchor, &mut s.sel.focus] {

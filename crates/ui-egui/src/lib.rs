@@ -1693,6 +1693,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         // Symbol without a character and Field without a code show their dialogs (#321).
         "insert.symbol" if !has("char") => Some("symbol"),
         "insert.field" if !has("instr") => Some("field"),
+        // Ink Equation without handwriting shows its writing pad.
+        "insert.inkEquation" if !has("strokes") && !has("linear") => Some("inkEquation"),
         // Online Video without an address asks for one.
         "insert.video" if !has("url") => Some("insertVideo"),
         // Edit Field Code shows the selected field's code (#339).

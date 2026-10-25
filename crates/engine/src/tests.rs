@@ -4623,3 +4623,44 @@ fn an_online_picture_comes_with_its_credit_line() {
     let r = run(&mut s, "insert.onlinePicture", json!({"data": png}));
     assert!(r["attribution"].is_null());
 }
+
+/// Ink Equation and Ink to Math: handwriting becomes an equation, one undo step.
+#[test]
+fn handwritten_math_becomes_an_equation() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("Sum: "));
+    run(&mut s, "caret.docEnd", json!({}));
+    // x + 1, written as strokes (y down).
+    let x = |x0: f32| vec![json!([[x0, 210.0], [x0 + 30.0, 250.0]]), json!([[x0 + 30.0, 210.0], [x0, 250.0]])];
+    let mut strokes = x(100.0);
+    strokes.push(json!([[150.0, 214.0], [150.0, 246.0]]));
+    strokes.push(json!([[134.0, 230.0], [166.0, 230.0]]));
+    strokes.push(json!([[190.0, 205.0], [190.0, 252.0]]));
+    let undo = s.undo_depth();
+    let r = run(&mut s, "insert.inkEquation", json!({"strokes": strokes}));
+    assert_eq!(r["linear"], "x+1");
+    assert_eq!(s.undo_depth(), undo + 1);
+    assert!(s.doc.plain_text(StoryRef::Body).starts_with("Sum: "));
+    // Corrected text goes in as typed.
+    assert_eq!(run(&mut s, "insert.inkEquation", json!({"linear": "a^2"}))["linear"], "a^2");
+    assert!(s.run("insert.inkEquation", &json!({"strokes": "junk"})).is_err());
+    assert!(s.run("insert.inkEquation", &json!({"linear": "  "})).is_err());
+    // Ink to Math: the same strokes drawn on the page, lassoed, converted.
+    let mut s = Session::new(doc4me_doc::Document::from_text("Notes"));
+    assert!(s.run("draw.inkToMath", &json!({})).is_err(), "nothing selected");
+    for st in &strokes {
+        run(&mut s, "draw.stroke", json!({"page": 0, "points": st}));
+    }
+    run(&mut s, "draw.lasso", json!({"page": 0, "points": [[80, 190], [220, 190], [220, 270], [80, 270]]}));
+    let undo = s.undo_depth();
+    let r = run(&mut s, "draw.inkToMath", json!({}));
+    assert_eq!(r["linear"], "x+1");
+    assert_eq!(s.undo_depth(), undo + 1, "one undo step");
+    let mut ink = 0;
+    let mut equations = 0;
+    s.doc.objects_in_reading_order(&mut |o| match o {
+        doc4me_doc::para::InlineObject::Equation { .. } => equations += 1,
+        o if o.ink().is_some() => ink += 1,
+        _ => {}
+    });
+    assert_eq!((ink, equations), (0, 1), "the strokes became the equation");
+}

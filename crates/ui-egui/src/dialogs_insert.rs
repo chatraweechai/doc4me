@@ -20,6 +20,7 @@ pub enum InsertDialog {
     ChartType(crate::dialogs_chart::ChartTypeForm),
     ChartData(crate::dialogs_chart::ChartDataForm),
     Video(VideoForm),
+    InkEquation(InkForm),
 }
 
 impl InsertDialog {
@@ -33,6 +34,7 @@ impl InsertDialog {
             InsertDialog::ChartType(_) => "insertChart",
             InsertDialog::ChartData(_) => "chartData",
             InsertDialog::Video(_) => "insertVideo",
+            InsertDialog::InkEquation(_) => "inkEquation",
         }
     }
 
@@ -47,6 +49,7 @@ impl InsertDialog {
             InsertDialog::ChartType(_) => "Insert Chart",
             InsertDialog::ChartData(_) => "Edit Data",
             InsertDialog::Video(_) => "Insert Video",
+            InsertDialog::InkEquation(_) => "Math Input Control",
         }
     }
 }
@@ -65,6 +68,7 @@ pub fn open(name: &str, app: &WordApp) -> Option<InsertDialog> {
         "changeChartType" => InsertDialog::ChartType(crate::dialogs_chart::ChartTypeForm::new(app, true)?),
         "chartData" => InsertDialog::ChartData(crate::dialogs_chart::ChartDataForm::new(app)?),
         "insertVideo" => InsertDialog::Video(VideoForm::default()),
+        "inkEquation" => InsertDialog::InkEquation(InkForm::default()),
         _ => return None,
     })
 }
@@ -79,7 +83,99 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut InsertDialog) -> bool {
         InsertDialog::ChartType(f) => crate::dialogs_chart::type_ui(app, ui, f),
         InsertDialog::ChartData(f) => crate::dialogs_chart::data_ui(app, ui, f),
         InsertDialog::Video(f) => video_ui(app, ui, f),
+        InsertDialog::InkEquation(f) => ink_ui(app, ui, f),
     }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Ink Equation (Word's Math Input Control)
+
+/// The writing pad: the strokes so far (pad points, y down), the stroke being drawn, and the
+/// recognised linear text, which the user may correct before inserting.
+#[derive(Clone, Debug, Default, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct InkForm {
+    pub strokes: Vec<Vec<[f32; 2]>>,
+    #[serde(skip)]
+    drawing: Option<Vec<[f32; 2]>>,
+    pub linear: String,
+    pub problem: Option<String>,
+}
+
+impl InkForm {
+    /// Recognise the strokes again (after each one).
+    pub fn recognise(&mut self) {
+        match doc4me_engine::ink_math::recognize(&self.strokes) {
+            Ok(t) => {
+                self.linear = t;
+                self.problem = None;
+            }
+            Err(e) => {
+                self.linear.clear();
+                self.problem = (!self.strokes.is_empty()).then_some(e);
+            }
+        }
+    }
+}
+
+fn ink_ui(app: &mut WordApp, ui: &mut Ui, f: &mut InkForm) -> bool {
+    let t = Tokens::get(ui.ctx());
+    ui.set_width(600.0);
+    ui.label(tl!("Write math here with the mouse or a pen."));
+    let (r, resp) = ui.allocate_exact_size(vec2(600.0, 240.0), Sense::drag());
+    ui.painter().rect_filled(r, 4.0, Color32::WHITE);
+    ui.painter().rect_stroke(r, 4.0, Stroke::new(1.0, t.border), egui::StrokeKind::Inside);
+    // Faint ruled line, as on Word's pad.
+    let base = r.min.y + r.height() * 0.62;
+    ui.painter().line_segment([pos2(r.min.x + 12.0, base), pos2(r.max.x - 12.0, base)], Stroke::new(1.0, Color32::from_gray(225)));
+    let local = |p: egui::Pos2| [p.x - r.min.x, p.y - r.min.y];
+    if let Some(p) = resp.interact_pointer_pos().filter(|_| resp.dragged() || resp.drag_started()) {
+        let pt = local(p);
+        let stroke = f.drawing.get_or_insert_with(Vec::new);
+        if stroke.last().is_none_or(|q| (q[0] - pt[0]).hypot(q[1] - pt[1]) > 1.0) && stroke.len() < 4000 {
+            stroke.push(pt);
+        }
+    }
+    if resp.drag_stopped()
+        && let Some(s) = f.drawing.take()
+        && !s.is_empty()
+        && f.strokes.len() < doc4me_engine::ink_math::MAX_STROKES
+    {
+        f.strokes.push(s);
+        f.recognise();
+    }
+    let pen = Stroke::new(2.5, Color32::from_rgb(0x20, 0x20, 0x60));
+    for s in f.strokes.iter().chain(f.drawing.iter()) {
+        let pts: Vec<egui::Pos2> = s.iter().map(|p| pos2(r.min.x + p[0], r.min.y + p[1])).collect();
+        if pts.len() == 1 {
+            ui.painter().circle_filled(pts[0], 1.5, pen.color);
+        } else {
+            ui.painter().add(egui::Shape::line(pts, pen));
+        }
+    }
+    ui.add_space(6.0);
+    ui.horizontal(|ui| {
+        ui.label(tl!("Recognized (you can correct it):"));
+        ui.add(crate::widgets::text_line(&mut f.linear).desired_width(300.0).font(egui::TextStyle::Monospace));
+    });
+    if let Some(p) = &f.problem {
+        ui.label(egui::RichText::new(p).small().color(t.text_dim));
+    }
+    ui.horizontal(|ui| {
+        if ui.add_enabled(!f.strokes.is_empty(), egui::Button::new(tl!("Undo Stroke"))).clicked() {
+            f.strokes.pop();
+            f.recognise();
+        }
+        if ui.add_enabled(!f.strokes.is_empty(), egui::Button::new(tl!("Clear"))).clicked() {
+            f.strokes.clear();
+            f.recognise();
+        }
+    });
+    let (ok, cancel) = buttons(ui, "Insert", "Cancel", !f.linear.trim().is_empty());
+    if ok {
+        let _ = app.run("insert.inkEquation", json!({"linear": f.linear.trim()}));
+    }
+    ok || cancel
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -1305,6 +1401,22 @@ mod tests {
 
     fn app() -> WordApp {
         WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("one\ntwo")), Default::default())
+    }
+
+    /// Ink Equation: the pad recognises each stroke; Insert puts in the (corrected) text.
+    #[test]
+    fn ink_equation_pad_recognises_and_inserts() {
+        let mut a = app();
+        a.run("insert.inkEquation", json!({})).unwrap();
+        let Some(crate::dialogs::Dialog::Insert(d)) = a.dialog.take() else { panic!("no dialog") };
+        let InsertDialog::InkEquation(mut f) = *d else { panic!("not the ink pad") };
+        f.strokes = vec![vec![[100.0, 60.0], [130.0, 100.0]], vec![[130.0, 60.0], [100.0, 100.0]]];
+        f.recognise();
+        assert_eq!(f.linear, "x");
+        f.linear = "x^2".into();
+        let undo = a.session.undo_depth();
+        a.run("insert.inkEquation", json!({"linear": f.linear})).unwrap();
+        assert_eq!(a.session.undo_depth(), undo + 1);
     }
 
     /// Online Video: the button asks for an address (no undo step); the inserted poster plays in
