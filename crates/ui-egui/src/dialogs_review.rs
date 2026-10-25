@@ -1,8 +1,9 @@
 //! Review dialogs and the Restrict Editing pane (#412): Compare / Combine Documents (with the
 //! More >> comparison settings), AutoCorrect Options (AutoCorrect, AutoFormat As You Type and
-//! Math AutoCorrect) and the Restrict Editing side pane. Each ends by running a command
-//! (`review.compare`, `review.combine`, `tools.autocorrect`, `review.restrict`), so scripts and
-//! agents get the same result without them. Shown through [`crate::dialogs::Dialog::Review`] and
+//! Math AutoCorrect), Word's Accept or Reject Changes and Highlight Changes, and the Restrict
+//! Editing side pane. Each ends by running a command (`review.compare`, `review.combine`,
+//! `tools.autocorrect`, `review.nextChange` / `review.accept` / …, `review.highlightChanges`,
+//! `review.restrict`), so scripts and agents get the same result without them. Shown through [`crate::dialogs::Dialog::Review`] and
 //! [`crate::panes`].
 
 use doc4me_engine::Password;
@@ -19,6 +20,9 @@ use crate::theme::semibold;
 pub enum ReviewDialog {
     Compare(CompareForm),
     AutoCorrect(Box<AutoCorrectForm>),
+    AcceptReject(AcceptRejectForm),
+    /// Track changes while editing, show them on screen, print them.
+    HighlightChanges([bool; 3]),
 }
 
 impl ReviewDialog {
@@ -27,6 +31,8 @@ impl ReviewDialog {
             ReviewDialog::Compare(f) if f.combine => "combine",
             ReviewDialog::Compare(_) => "compare",
             ReviewDialog::AutoCorrect(_) => "autoCorrect",
+            ReviewDialog::AcceptReject(_) => "acceptRejectChanges",
+            ReviewDialog::HighlightChanges(_) => "highlightChanges",
         }
     }
 
@@ -36,16 +42,29 @@ impl ReviewDialog {
             ReviewDialog::Compare(f) if f.combine => "Combine Documents",
             ReviewDialog::Compare(_) => "Compare Documents",
             ReviewDialog::AutoCorrect(_) => "AutoCorrect",
+            ReviewDialog::AcceptReject(_) => "Accept or Reject Changes",
+            ReviewDialog::HighlightChanges(_) => "Highlight Changes",
         }
     }
 }
 
-/// The dialog `ui.dialog` opens by `name`: `compare`, `combine` or `autoCorrect`.
+/// The dialog `ui.dialog` opens by `name`: `compare`, `combine`, `autoCorrect`,
+/// `acceptRejectChanges` or `highlightChanges`.
 /// `restrictEditing` opens the Restrict Editing pane instead (no dialog).
 pub fn open(name: &str, app: &mut WordApp) -> Option<ReviewDialog> {
     Some(match name {
         "compare" | "combine" => ReviewDialog::Compare(CompareForm::new(app, name == "combine")),
         "autoCorrect" => ReviewDialog::AutoCorrect(Box::new(AutoCorrectForm::new(app))),
+        "acceptRejectChanges" => {
+            let mut f = AcceptRejectForm::default();
+            f.read(app);
+            ReviewDialog::AcceptReject(f)
+        }
+        "highlightChanges" => {
+            let v = app.session.run("review.highlightChanges", &json!({})).unwrap_or_default();
+            let on = |k: &str| v.get(k).and_then(Value::as_bool).unwrap_or(false);
+            ReviewDialog::HighlightChanges([on("track"), on("screen"), on("print")])
+        }
         "restrictEditing" => {
             app.restrict.open = true;
             return None;
@@ -59,7 +78,142 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut ReviewDialog) -> bool {
     match d {
         ReviewDialog::Compare(f) => compare_ui(app, ui, f),
         ReviewDialog::AutoCorrect(f) => autocorrect_ui(app, ui, f),
+        ReviewDialog::AcceptReject(f) => accept_reject_ui(app, ui, f),
+        ReviewDialog::HighlightChanges(on) => highlight_ui(app, ui, on),
     }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Accept or Reject Changes, Highlight Changes
+
+/// Word's Accept or Reject Changes dialog: the change the selection holds (what, who, when).
+#[derive(Clone, Debug, Default, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct AcceptRejectForm {
+    /// `insert`, `delete`, `format`, `moveFrom` or `moveTo`; empty when the selection holds none.
+    pub kind: String,
+    pub author: String,
+    pub date: String,
+    pub description: String,
+    pub message: String,
+}
+
+impl AcceptRejectForm {
+    /// The change whose range is the selection (as Find leaves it).
+    fn read(&mut self, app: &mut WordApp) {
+        let (a, b) = app.session.sel.ordered();
+        let (a, b) = (serde_json::to_value(&a).unwrap_or_default(), serde_json::to_value(&b).unwrap_or_default());
+        let list = app.session.run("review.changes", &json!({})).unwrap_or_default();
+        let found = list.as_array().into_iter().flatten().find(|c| c.get("start") == Some(&a) && c.get("end") == Some(&b));
+        let text = |k: &str| found.and_then(|c| c.get(k)).and_then(Value::as_str).unwrap_or("").to_string();
+        self.kind = text("kind");
+        self.author = text("author");
+        // The day of an ISO date-time (2026-10-25T14:03:00Z).
+        let date = text("date");
+        self.date = date.get(..10).unwrap_or(&date).to_string();
+        self.description = text("description");
+    }
+
+    fn label(&self) -> &'static str {
+        match self.kind.as_str() {
+            "insert" => "Inserted",
+            "delete" => "Deleted",
+            "format" => "Formatted",
+            "moveFrom" => "Moved from",
+            "moveTo" => "Moved to",
+            _ => "",
+        }
+    }
+}
+
+fn accept_reject_ui(app: &mut WordApp, ui: &mut Ui, f: &mut AcceptRejectForm) -> bool {
+    ui.label(egui::RichText::new(tl!("Changes")).font(semibold(12.5)));
+    egui::Grid::new("arc").num_columns(2).spacing(vec2(10.0, 4.0)).show(ui, |ui| {
+        ui.label(tl!("Author"));
+        ui.label(&f.author);
+        ui.end_row();
+        ui.label(tl!("Date"));
+        ui.label(&f.date);
+        ui.end_row();
+    });
+    let what = if f.kind.is_empty() { String::new() } else { tl!(f.label()).to_string() };
+    ui.label(if f.description.is_empty() || f.kind == "moveFrom" || f.kind == "moveTo" { what } else { format!("{what}: {}", f.description) });
+    ui.add_space(4.0);
+    ui.label(egui::RichText::new(tl!("View")).font(semibold(12.5)));
+    let mut markup = app.session.view.show_markup;
+    let was = markup;
+    ui.radio_value(&mut markup, true, tl!("Changes with highlighting"));
+    ui.radio_value(&mut markup, false, tl!("Changes without highlighting"));
+    if markup != was {
+        let _ = app.run("review.markup", json!({"value": if markup { "allMarkup" } else { "noMarkup" }}));
+    }
+    if !f.message.is_empty() {
+        ui.label(egui::RichText::new(&f.message).small());
+    }
+    ui.add_space(8.0);
+    let mut act: Option<(&str, Value)> = None;
+    let mut close = false;
+    ui.horizontal(|ui| {
+        if ui.button(tl!("Find Previous")).clicked() {
+            act = Some(("review.previousChange", json!({})));
+        }
+        if ui.button(tl!("Find Next")).clicked() {
+            act = Some(("review.nextChange", json!({})));
+        }
+        if ui.add_enabled(!f.kind.is_empty(), egui::Button::new(tl!("Accept"))).clicked() {
+            act = Some(("review.accept", json!({})));
+        }
+        if ui.add_enabled(!f.kind.is_empty(), egui::Button::new(tl!("Reject"))).clicked() {
+            act = Some(("review.reject", json!({})));
+        }
+    });
+    ui.horizontal(|ui| {
+        if ui.button(tl!("Accept All Changes")).clicked() {
+            act = Some(("review.acceptAll", json!({})));
+        }
+        if ui.button(tl!("Reject All Changes")).clicked() {
+            act = Some(("review.rejectAll", json!({})));
+        }
+        if ui.button(tl!("Undo")).clicked() {
+            act = Some(("edit.undo", json!({})));
+        }
+        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+            if ui.button(tl!("Close")).clicked() || ui.input(|i| i.key_pressed(egui::Key::Escape)) {
+                close = true;
+            }
+        });
+    });
+    if let Some((id, params)) = act {
+        let resolve = matches!(id, "review.accept" | "review.reject");
+        f.message = match app.run(id, params) {
+            Ok(_) => String::new(),
+            Err(e) => e,
+        };
+        // Accept and Reject go on to the next change, as Word's dialog does.
+        if resolve && f.message.is_empty() {
+            let _ = app.run("review.nextChange", json!({}));
+        }
+        f.read(app);
+        let left = app.session.run("review.changes", &json!({})).ok().and_then(|v| v.as_array().map(Vec::len)).unwrap_or(0);
+        if left == 0 && f.message.is_empty() {
+            f.message = tl!("The document contains no tracked changes.").to_string();
+        }
+    }
+    close
+}
+
+fn highlight_ui(app: &mut WordApp, ui: &mut Ui, on: &mut [bool; 3]) -> bool {
+    ui.checkbox(&mut on[0], tl!("Track changes while editing"));
+    ui.checkbox(&mut on[1], tl!("Highlight changes on screen"));
+    ui.checkbox(&mut on[2], tl!("Highlight changes in printed document"));
+    let (ok, cancel) = buttons(ui, true);
+    if ok {
+        if let Err(e) = app.run("review.highlightChanges", json!({"track": on[0], "screen": on[1], "print": on[2]})) {
+            app.status(e);
+        }
+        return true;
+    }
+    cancel
 }
 
 /// OK / Cancel; returns (ok, cancel). `ok_enabled` greys OK out.
@@ -824,5 +978,33 @@ mod tests {
         assert_eq!(p["caseChanges"], false);
         assert_eq!(p["showIn"], "new");
         assert!(p.get("original").is_none());
+    }
+
+    /// Accept or Reject Changes: Find selects each change and shows who made it; Accept takes it
+    /// and goes on. Highlight Changes opens with the three settings and OK's command sets them.
+    #[test]
+    fn accept_reject_and_highlight_changes_dialogs() {
+        let mut a = app("Kilns");
+        a.run("caret.docEnd", json!({})).unwrap();
+        a.run("review.trackChanges", json!({"value": true})).unwrap();
+        a.run("text.insert", json!({"text": " fired"})).unwrap();
+        a.run("caret.docStart", json!({})).unwrap();
+        a.run("review.acceptReject", json!({})).unwrap();
+        let Some(crate::dialogs::Dialog::Review(d)) = &a.dialog else { panic!("{:?}", a.dialog) };
+        let ReviewDialog::AcceptReject(mut f) = (**d).clone() else { panic!() };
+        assert!(f.kind.is_empty(), "the caret holds no change");
+        a.run("review.nextChange", json!({})).unwrap();
+        f.read(&mut a);
+        assert_eq!((f.kind.as_str(), f.label()), ("insert", "Inserted"));
+        assert!(!f.author.is_empty() && f.date.len() == 10, "{f:?}");
+        a.run("review.accept", json!({})).unwrap();
+        assert_eq!(a.session.run("review.changes", &json!({})).unwrap(), json!([]));
+        assert_eq!(a.session.doc.plain_text(doc4me_doc::StoryRef::Body), "Kilns fired");
+        assert_eq!(a.run("review.highlightChanges", json!({})).unwrap(), json!({"pending": "highlightChanges"}));
+        let Some(crate::dialogs::Dialog::Review(d)) = &a.dialog else { panic!("{:?}", a.dialog) };
+        let ReviewDialog::HighlightChanges(on) = **d else { panic!() };
+        assert_eq!(on, [true, true, false]);
+        a.run("review.highlightChanges", json!({"track": false, "print": true})).unwrap();
+        assert!(!a.session.doc.settings.track_changes && a.session.prefs.print_markup);
     }
 }

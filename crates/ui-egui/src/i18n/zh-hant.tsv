@@ -2577,3 +2577,22 @@ spacing	Normal	標準
 	✓ None	✓ 無
 	➕ New comment	➕ 新增註解
 	📂  Browse…	📂  瀏覽…
+	Mark Table of Contents Entry	標記目錄項目
+	Custom Table of Contents	自訂目錄
+	Type a New List	輸入新清單
+	Accept or Reject Changes	接受或拒絕修訂
+	Highlight Changes	醒目提示修訂
+	List Commands	列出命令
+	Entry:	項目:
+	Table identifier:	表格識別碼:
+	Level:	階層:
+	Date	日期
+	Inserted	插入
+	Changes with highlighting	醒目提示的修訂
+	Changes without highlighting	不醒目提示的修訂
+	The document contains no tracked changes.	文件中沒有追蹤修訂。
+	Track changes while editing	編輯時追蹤修訂
+	Highlight changes on screen	在螢幕上醒目提示修訂
+	Highlight changes in printed document	在列印文件中醒目提示修訂
+	Current keyboard settings	目前的鍵盤設定
+	A new document lists the commands with their shortcuts.	新文件會列出命令及其快速鍵。

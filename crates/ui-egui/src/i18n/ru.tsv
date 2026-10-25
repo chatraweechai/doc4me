@@ -2604,3 +2604,22 @@ spacing	Normal	Обычный
 	points and above	пт и более
 	➕ New comment	➕ Новый комментарий
 	📂  Browse…	📂  Обзор…
+	Mark Table of Contents Entry	Пометить элемент оглавления
+	Custom Table of Contents	Настраиваемое оглавление
+	Type a New List	Ввести новый список
+	Accept or Reject Changes	Принятие или отклонение исправлений
+	Highlight Changes	Выделение исправлений
+	List Commands	Список команд
+	Entry:	Элемент:
+	Table identifier:	Идентификатор указателя:
+	Level:	Уровень:
+	Date	Дата
+	Inserted	Вставлено
+	Changes with highlighting	Исправления с выделением
+	Changes without highlighting	Исправления без выделения
+	The document contains no tracked changes.	Документ не содержит записанных исправлений.
+	Track changes while editing	Записывать исправления при редактировании
+	Highlight changes on screen	Выделять исправления на экране
+	Highlight changes in printed document	Выделять исправления в напечатанном документе
+	Current keyboard settings	Текущие параметры клавиатуры
+	A new document lists the commands with their shortcuts.	Новый документ будет содержать список команд с их сочетаниями клавиш.

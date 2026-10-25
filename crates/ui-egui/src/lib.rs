@@ -1762,6 +1762,7 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
             Some(if id == "references.caption" { "caption" } else { "index" })
         }
         "references.markEntry" if !has("entry") => Some("markEntry"),
+        "references.markTocEntry" if !has("entry") => Some("markTocEntry"),
         "references.sources" if params.as_object().is_none_or(|m| m.is_empty()) => Some("sourceManager"),
         "references.citation" if !has("tag") && !has("source") => Some("createSource"),
         // Templates and Add-ins, and the Organizer without a file to list (#377).
@@ -1771,17 +1772,21 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "review.language" if params.as_object().is_none_or(|m| m.is_empty()) => Some("language"),
         "mailings.envelopes" if params.as_object().is_none_or(|m| m.is_empty()) => Some("envelopes"),
         "mailings.labels" if params.as_object().is_none_or(|m| m.is_empty()) => Some("labels"),
+        // Word's Break, Highlight Changes and List Commands dialogs.
+        "layout.break" if !has("kind") => Some("insertBreak"),
+        "review.highlightChanges" if params.as_object().is_none_or(|m| m.is_empty()) => Some("highlightChanges"),
+        "tools.listCommands" if !has("all") => Some("listCommands"),
         _ => None,
     }
 }
 
 /// User commands that replace or close the document (`file.open` without a path only shows the
-/// file picker; the open that follows is checked). Envelopes, Labels and Finish & Merge make a
-/// new document in its place; a merge written to a file (`path`) and an envelope added to this
+/// file picker; the open that follows is checked). Envelopes, Labels, Finish & Merge and List
+/// Commands make a new document in its place; a merge written to a file (`path`) and an envelope added to this
 /// document (`add`) leave it alone.
 fn discards_document(id: &str, params: &Value) -> bool {
     match id {
-        "file.new" | "file.close" | "mailings.labels" | "review.translateDocument" => true,
+        "file.new" | "file.close" | "mailings.labels" | "review.translateDocument" | "tools.listCommands" => true,
         "mailings.envelopes" => params.get("add").and_then(Value::as_bool) != Some(true),
         "file.open" => params.get("path").is_some(),
         "mailings.finish" => params.get("path").and_then(Value::as_str).is_none(),

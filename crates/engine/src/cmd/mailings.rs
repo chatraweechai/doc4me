@@ -49,6 +49,13 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("mailings.recipients", "Select Recipients", "Mailings › Start Mail Merge", recipients)
             .params(r#"{"csv"?: string, "path"?: string (.csv/.tsv/.txt, or a .xlsx/.xlsm/.ods workbook), "data"?: base64 (a file's bytes, as for path), "sheet"?: name | number (1 = first; a workbook with several sheets and no sheet answers {"sheets": [...], "chooseSheet": true} and loads nothing), "headers"?: bool (default true: the first non-blank row names the fields; false: fields are Column 1…N), "rows"?: [{field: value}] | [[value]], "fields"?: [string] (column order; required with array rows)}"#)
             .pure(),
+        // Select Recipients › Type a New List…: Word's New Address List dialog, whose rows become
+        // the recipients (`mailings.recipients` with `rows`).
+        CommandSpec::new("mailings.newList", "Type a New List", "Mailings › Start Mail Merge", |s, _| {
+            s.ui_requests.push(json!({"open": "newRecipientList"}));
+            sel_result(s)
+        })
+        .pure(),
         CommandSpec::new("mailings.editRecipients", "Edit Recipient List", "Mailings › Start Mail Merge", |s, v| {
             if v.get("rows").and_then(Value::as_array).is_some() {
                 return recipients(s, &json!({"rows": v.get("rows"), "fields": v.get("fields")}));

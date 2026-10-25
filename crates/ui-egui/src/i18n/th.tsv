@@ -2585,3 +2585,22 @@ spacing	Normal	ปกติ
 	First Cell in Column	เซลล์แรกในคอลัมน์
 	Insert LISTNUM Field	แทรกเขตข้อมูล LISTNUM
 	Collapse the Ribbon	ยุบ Ribbon
+	Mark Table of Contents Entry	ทำเครื่องหมายรายการสารบัญ
+	Custom Table of Contents	สารบัญแบบกำหนดเอง
+	Type a New List	พิมพ์รายการใหม่
+	Accept or Reject Changes	ยอมรับหรือปฏิเสธการเปลี่ยนแปลง
+	Highlight Changes	เน้นการเปลี่ยนแปลง
+	List Commands	แสดงรายการคำสั่ง
+	Entry:	รายการ:
+	Table identifier:	ตัวระบุตาราง:
+	Level:	ระดับ:
+	Date	วันที่
+	Inserted	แทรก
+	Changes with highlighting	การเปลี่ยนแปลงพร้อมการเน้น
+	Changes without highlighting	การเปลี่ยนแปลงโดยไม่เน้น
+	The document contains no tracked changes.	เอกสารนี้ไม่มีการเปลี่ยนแปลงที่ติดตามไว้
+	Track changes while editing	ติดตามการเปลี่ยนแปลงขณะแก้ไข
+	Highlight changes on screen	เน้นการเปลี่ยนแปลงบนหน้าจอ
+	Highlight changes in printed document	เน้นการเปลี่ยนแปลงในเอกสารที่พิมพ์
+	Current keyboard settings	การตั้งค่าแป้นพิมพ์ปัจจุบัน
+	A new document lists the commands with their shortcuts.	เอกสารใหม่จะแสดงรายการคำสั่งพร้อมคีย์ลัด

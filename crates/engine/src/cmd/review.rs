@@ -34,6 +34,28 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("review.reject", "Reject", "Review › Changes", |s, _| resolve_sel(s, false)),
         CommandSpec::new("review.nextChange", "Next Change", "Review › Changes", |s, _| nav_change(s, 1)).pure(),
         CommandSpec::new("review.previousChange", "Previous Change", "Review › Changes", |s, _| nav_change(s, -1)).pure(),
+        // Word's Accept or Reject Changes dialog: find each change, then accept or reject it.
+        CommandSpec::new("review.acceptReject", "Accept or Reject Changes", "Review › Changes", |s, _| {
+            s.ui_requests.push(json!({"open": "acceptRejectChanges"}));
+            Ok(json!({"changes": changes(s).len()}))
+        })
+        .pure(),
+        // Word's Highlight Changes dialog: track changes while editing, and show them on screen and
+        // in printouts (file.printMarkup).
+        CommandSpec::new("review.highlightChanges", "Highlight Changes", "Review › Tracking", |s, v| {
+            if let Some(on) = p::bool(v, "track") {
+                s.doc.settings.track_changes = on;
+            }
+            if let Some(on) = p::bool(v, "screen") {
+                s.view.show_markup = on;
+                s.relayout();
+            }
+            if let Some(on) = p::bool(v, "print") {
+                s.prefs.print_markup = on;
+            }
+            Ok(json!({"track": s.doc.settings.track_changes, "screen": s.view.show_markup, "print": s.prefs.print_markup}))
+        })
+        .params(r#"{"track"?: bool (track changes while editing), "screen"?: bool (show markup on screen), "print"?: bool (print markup)} → the three settings"#),
         CommandSpec::new("review.markup", "Display for Review", "Review › Tracking", |s, v| {
             s.view.show_markup = p::str(v, "value").map(|m| m != "noMarkup" && m != "original").unwrap_or(!s.view.show_markup);
             // Without markup, deletions leave the layout.

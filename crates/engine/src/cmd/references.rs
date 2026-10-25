@@ -17,6 +17,12 @@ pub fn specs() -> Vec<CommandSpec> {
             update_toc(s)?;
             sel_result(s)
         }),
+        // Custom Table of Contents… (Word's Table of Contents dialog, with its Options and Modify).
+        CommandSpec::new("references.customToc", "Custom Table of Contents", "References › Table of Contents", |s, _| {
+            s.ui_requests.push(json!({"open": "toc"}));
+            sel_result(s)
+        })
+        .pure(),
         CommandSpec::new("references.removeToc", "Remove Table of Contents", "References › Table of Contents", |s, _| {
             if let Some((start, end)) = toc_range(s) {
                 for i in (start..=end).rev() {

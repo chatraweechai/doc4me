@@ -2588,3 +2588,22 @@ spacing	Normal	Звичайний
 	✓ None	✓ Немає
 	➕ New comment	➕ Нова примітка
 	📂  Browse…	📂  Огляд…
+	Mark Table of Contents Entry	Позначити елемент змісту
+	Custom Table of Contents	Настроюваний зміст
+	Type a New List	Ввести новий список
+	Accept or Reject Changes	Прийняття або відхилення виправлень
+	Highlight Changes	Виділення виправлень
+	List Commands	Список команд
+	Entry:	Елемент:
+	Table identifier:	Ідентифікатор покажчика:
+	Level:	Рівень:
+	Date	Дата
+	Inserted	Вставлено
+	Changes with highlighting	Виправлення з виділенням
+	Changes without highlighting	Виправлення без виділення
+	The document contains no tracked changes.	Документ не містить записаних виправлень.
+	Track changes while editing	Записувати виправлення під час редагування
+	Highlight changes on screen	Виділяти виправлення на екрані
+	Highlight changes in printed document	Виділяти виправлення в надрукованому документі
+	Current keyboard settings	Поточні параметри клавіатури
+	A new document lists the commands with their shortcuts.	Новий документ міститиме список команд із сполученнями клавіш.

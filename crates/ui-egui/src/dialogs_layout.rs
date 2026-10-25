@@ -1,9 +1,10 @@
 //! Layout, Review and Mailings dialogs (#407): Line Numbers (Layout › Line Numbers › Line
-//! Numbering Options…), Hyphenation (Hyphenation Options… and Manual…), Language (Review ›
-//! Language), and Envelopes and Labels (Mailings › Create). Each ends by running a command
-//! (`layout.lineNumbers`, `layout.hyphenation`, `layout.manualHyphenation` with `caret.set` and
-//! `text.optionalHyphen`, `review.language`, `mailings.envelopes`, `mailings.labels`), so scripts
-//! and agents get the same result without the dialog. Shown through
+//! Numbering Options…), Hyphenation (Hyphenation Options… and Manual…), Break (Word's Insert ›
+//! Break dialog), Language (Review › Language), and Envelopes and Labels (Mailings › Create). Each
+//! ends by running a command (`layout.lineNumbers`, `layout.hyphenation`,
+//! `layout.manualHyphenation` with `caret.set` and `text.optionalHyphen`, `layout.break`,
+//! `review.language`, `mailings.envelopes`, `mailings.labels`), so scripts and agents get the
+//! same result without the dialog. Shown through
 //! [`crate::dialogs::Dialog::Layout`].
 
 use egui::{Ui, vec2};
@@ -22,6 +23,8 @@ pub enum LayoutDialog {
     LineNumbers(LineNumbersForm),
     Hyphenation(HyphenationForm),
     ManualHyphenation(ManualForm),
+    /// The break `layout.break` inserts (its `kind`).
+    Break(String),
     Language(LanguageForm),
     Envelopes(EnvelopeForm),
     Labels(LabelsForm),
@@ -33,6 +36,7 @@ impl LayoutDialog {
             LayoutDialog::LineNumbers(_) => "lineNumbers",
             LayoutDialog::Hyphenation(_) => "hyphenation",
             LayoutDialog::ManualHyphenation(_) => "manualHyphenation",
+            LayoutDialog::Break(_) => "insertBreak",
             LayoutDialog::Language(_) => "language",
             LayoutDialog::Envelopes(_) => "envelopes",
             LayoutDialog::Labels(_) => "labels",
@@ -45,6 +49,7 @@ impl LayoutDialog {
             LayoutDialog::LineNumbers(_) => "Line Numbers",
             LayoutDialog::Hyphenation(_) => "Hyphenation",
             LayoutDialog::ManualHyphenation(_) => "Manual Hyphenation",
+            LayoutDialog::Break(_) => "Breaks",
             LayoutDialog::Language(_) => "Language",
             LayoutDialog::Envelopes(_) => "Envelopes",
             LayoutDialog::Labels(_) => "Labels",
@@ -58,6 +63,7 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<LayoutDialog> {
         "lineNumbers" => LayoutDialog::LineNumbers(LineNumbersForm::read(app)),
         "hyphenation" => LayoutDialog::Hyphenation(HyphenationForm::read(app)),
         "manualHyphenation" => LayoutDialog::ManualHyphenation(ManualForm::start(app)),
+        "insertBreak" => LayoutDialog::Break("page".into()),
         "language" => LayoutDialog::Language(LanguageForm::read(app)),
         "envelopes" => LayoutDialog::Envelopes(EnvelopeForm::read(app)),
         "labels" => LayoutDialog::Labels(LabelsForm::read(app)),
@@ -71,6 +77,7 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut LayoutDialog) -> bool {
         LayoutDialog::LineNumbers(f) => line_numbers_ui(app, ui, f),
         LayoutDialog::Hyphenation(f) => hyphenation_ui(app, ui, f),
         LayoutDialog::ManualHyphenation(f) => manual_ui(app, ui, f),
+        LayoutDialog::Break(kind) => break_ui(app, ui, kind),
         LayoutDialog::Language(f) => language_ui(app, ui, f),
         LayoutDialog::Envelopes(f) => envelopes_ui(app, ui, f),
         LayoutDialog::Labels(f) => labels_ui(app, ui, f),
@@ -113,6 +120,31 @@ fn run(app: &mut WordApp, id: &str, params: Value) -> bool {
 
 fn unit() -> doc4me_geom::Unit {
     crate::options::unit()
+}
+
+// ---------------------------------------------------------------------------------------------
+// Break
+
+/// Word's Break dialog: the break types, then the section break types (named as in Layout ›
+/// Breaks).
+const BREAKS: [(&str, &str); 3] = [("page", "Page"), ("column", "Column"), ("textWrapping", "Text Wrapping")];
+const SECTION_BREAKS: [(&str, &str); 4] =
+    [("nextPage", "Next Page"), ("continuous", "Continuous"), ("evenPage", "Even Page"), ("oddPage", "Odd Page")];
+
+fn break_ui(app: &mut WordApp, ui: &mut Ui, kind: &mut String) -> bool {
+    heading(ui, "Page Breaks");
+    for (k, label) in BREAKS {
+        ui.radio_value(kind, k.to_string(), tl!(label));
+    }
+    heading(ui, "Section Breaks");
+    for (k, label) in SECTION_BREAKS {
+        ui.radio_value(kind, k.to_string(), tl!(label));
+    }
+    let (ok, cancel) = buttons(ui, "OK", true);
+    if ok || ui.input(|i| i.key_pressed(egui::Key::Enter)) {
+        return run(app, "layout.break", json!({"kind": kind}));
+    }
+    cancel
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -773,5 +805,18 @@ mod tests {
         (f.row, f.col) = (3, 2);
         assert_eq!(a.session.run("mailings.labels", &f.params()).unwrap()["filled"], 1);
         assert!(product_label(f.product).contains("63.5 × 33.9 mm (A4)"));
+    }
+
+    /// Word's Break dialog: Breaks without a kind asks for one; the choice is `layout.break`'s.
+    #[test]
+    fn break_dialog_inserts_the_chosen_break() {
+        let mut a = app();
+        a.run("caret.docEnd", json!({})).unwrap();
+        assert_eq!(a.run("layout.break", json!({})).unwrap(), json!({"pending": "insertBreak"}));
+        let LayoutDialog::Break(kind) = form(&mut a) else { panic!() };
+        assert_eq!(kind, "page");
+        let sections = a.session.doc.sections().len();
+        a.run("layout.break", json!({"kind": "continuous"})).unwrap();
+        assert_eq!(a.session.doc.sections().len(), sections + 1);
     }
 }

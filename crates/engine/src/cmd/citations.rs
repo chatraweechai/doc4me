@@ -332,6 +332,11 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .params(r#"{"entry"?: string}"#)
         .key(super::non_mac("Alt+Shift+I")),
+        // Mark Table of Contents Entry (Alt+Shift+O): a hidden TC field that a table of contents
+        // with "Table entry fields" (`tcFields`, TOC's \f) lists.
+        CommandSpec::new("references.markTocEntry", "Mark Table of Contents Entry", "References › Table of Contents", mark_toc_entry)
+            .params(r#"{"entry"?: string (the selection), "identifier"?: "A"-"Z" (which table; default C, a table of contents), "level"?: 1-9 (default 1)}"#)
+            .key(super::non_mac("Alt+Shift+O")),
         CommandSpec::new("references.tableOfAuthorities", "Insert Table of Authorities", "References › Table of Authorities", |s, _| {
             generated_list(s, "TOA", "Table of Authorities")?;
             sel_result(s)
@@ -673,6 +678,34 @@ fn refresh_citations(s: &mut Session) -> Result<(), CmdError> {
         para.touch();
     }
     Ok(())
+}
+
+/// `references.markTocEntry`: `TC "entry" \f C \l "1"` (as Word writes it), hidden, after the
+/// selection, which stays as it is.
+fn mark_toc_entry(s: &mut Session, v: &Value) -> CmdResult {
+    let raw = p::str(v, "entry").map(str::to_string).unwrap_or_else(|| s.selected_text());
+    let entry: String = raw.chars().map(|c| if c.is_control() { ' ' } else { c }).filter(|c| *c != '"').take(255).collect();
+    let entry = entry.split_whitespace().collect::<Vec<_>>().join(" ");
+    if entry.is_empty() {
+        return Err(CmdError::Params("select the entry's text or give `entry`".into()));
+    }
+    let id = p::str(v, "identifier").unwrap_or("C").trim().to_ascii_uppercase();
+    if id.len() != 1 || !id.chars().all(|c| c.is_ascii_uppercase()) {
+        return Err(CmdError::Params("`identifier` is one letter, A to Z".into()));
+    }
+    let level = match v.get("level") {
+        None | Some(Value::Null) => 1,
+        Some(l) => l.as_u64().filter(|l| (1..=9).contains(l)).ok_or_else(|| CmdError::Params("`level` is 1 to 9".into()))?,
+    };
+    let (_, b) = s.sel.ordered();
+    // A backslash is escaped, so one ending the entry can't swallow the closing quote.
+    let instr = format!("TC \"{}\" \\f {id} \\l \"{level}\"", entry.replace('\\', "\\\\"));
+    s.doc.insert_object(
+        &b,
+        InlineObject::Field { instr, result: String::new(), locked: false, code: false },
+        &CharProps { hidden: Some(true), ..Default::default() },
+    )?;
+    Ok(json!({"entry": entry, "identifier": id, "level": level}))
 }
 
 /// Generated lists (BIBLIOGRAPHY, INDEX, table of figures, TOA): a heading paragraph holding
@@ -1255,5 +1288,34 @@ mod tests {
         assert_eq!(find_style("ISO 690 - Numerical Reference").map(|x| x.name), Some("ISO 690 (numerical)"));
         assert_eq!(find_style("Harvard - Anglia 2008").map(|x| x.name), Some("Harvard (Anglia)"));
         assert!(find_style("").is_none() && find_style("Vancouver").is_none());
+    }
+
+    /// Mark Table of Contents Entry (Alt+Shift+O): a hidden TC field, as Word writes it, that a
+    /// table of contents built from table entry fields lists at its level; bad input is refused.
+    #[test]
+    fn mark_toc_entry_feeds_the_table_of_contents() {
+        let mut s = Session::new(Document::from_text("Kilns\nPresses"));
+        s.run("select.text", &json!({"text": "Kilns"})).unwrap();
+        assert_eq!(s.run("references.markTocEntry", &json!({"level": 2})).unwrap()["level"], 2);
+        assert!(fields(&s).iter().any(|(i, _)| i == "TC \"Kilns\" \\f C \\l \"2\""), "{:?}", fields(&s));
+        assert!(s.run("references.markTocEntry", &json!({"entry": "x", "identifier": "CC"})).is_err());
+        assert!(s.run("references.markTocEntry", &json!({"entry": "x", "level": 10})).is_err());
+        s.run("caret.docStart", &json!({})).unwrap();
+        assert!(s.run("references.markTocEntry", &json!({})).is_err(), "no selection, no entry");
+        // Quotes and line breaks can't end the field's text early.
+        s.run("references.markTocEntry", &json!({"entry": "Glaze \"notes\"\nand tests"})).unwrap();
+        assert!(fields(&s).iter().any(|(i, _)| i == "TC \"Glaze notes and tests\" \\f C \\l \"1\""), "{:?}", fields(&s));
+        s.run("references.markTocEntry", &json!({"entry": "Kiln C:\\", "level": 2})).unwrap();
+        let tc = fields(&s)
+            .into_iter()
+            .map(|(i, _)| crate::cmd::references::FieldCode::parse(&i))
+            .find(|c| c.args.first().is_some_and(|a| a.starts_with("Kiln C")))
+            .unwrap();
+        assert_eq!((tc.args[0].as_str(), tc.arg('l')), ("Kiln C:\\", Some("2")), "a trailing backslash keeps the switches");
+        s.run("caret.docEnd", &json!({})).unwrap();
+        s.run("text.newParagraph", &json!({})).unwrap();
+        s.run("references.toc", &json!({"headingStyles": false, "outlineLevels": false, "tcFields": true})).unwrap();
+        let t = s.doc.plain_text(StoryRef::Body);
+        assert!(t.contains("Kilns\t1") && t.contains("Glaze notes and tests\t1"), "{t}");
     }
 }

@@ -434,6 +434,10 @@ pub enum Dialog {
     CustomizeKeyboard {
         form: Box<crate::dialogs_keyboard::KeyboardForm>,
     },
+    /// Word's List Commands: every command, or those with a shortcut.
+    ListCommands {
+        all: bool,
+    },
     /// Tools › Customize Ribbon and the Quick Access Toolbar (#379).
     CustomizeRibbon {
         form: Box<crate::dialogs_ribbon::RibbonForm>,
@@ -887,6 +891,7 @@ impl Dialog {
             Dialog::TrackOptions { .. } => "trackChangesOptions",
             Dialog::Review(d) => d.name(),
             Dialog::CustomizeKeyboard { .. } => "customizeKeyboard",
+            Dialog::ListCommands { .. } => "listCommands",
             Dialog::CustomizeRibbon { .. } => "customizeRibbon",
             Dialog::Control { .. } => "controlProperties",
             Dialog::Enclose { .. } => "enclose",
@@ -923,7 +928,7 @@ impl Dialog {
         if let Some(d) = crate::dialogs_layout::open(name, app) {
             return Some(Dialog::Layout(Box::new(d)));
         }
-        if matches!(name, "compare" | "combine" | "autoCorrect" | "restrictEditing") {
+        if matches!(name, "compare" | "combine" | "autoCorrect" | "restrictEditing" | "acceptRejectChanges" | "highlightChanges") {
             return crate::dialogs_review::open(name, app).map(|d| Dialog::Review(Box::new(d)));
         }
         let st = app.session.run("format.state", &json!({})).unwrap_or_default();
@@ -1148,6 +1153,7 @@ impl Dialog {
             "defineList" => Dialog::DefineList { form: Box::new(crate::dialogs_lists::ListForm::read(app)) },
             "trackChangesOptions" => Dialog::TrackOptions { form: Box::new(crate::dialogs_lists::TrackForm::read(app)) },
             "customizeKeyboard" => Dialog::CustomizeKeyboard { form: Box::new(crate::dialogs_keyboard::KeyboardForm::read(app)) },
+            "listCommands" => Dialog::ListCommands { all: false },
             "customizeRibbon" => {
                 Dialog::CustomizeRibbon { form: Box::new(crate::dialogs_ribbon::RibbonForm::read(app, crate::dialogs_ribbon::Page::Ribbon)) }
             }
@@ -1331,6 +1337,7 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context) {
         Dialog::TrackOptions { .. } => "Track Changes Options",
         Dialog::Review(d) => d.title(),
         Dialog::CustomizeKeyboard { .. } => "Customize Keyboard",
+        Dialog::ListCommands { .. } => "List Commands",
         Dialog::CustomizeRibbon { .. } => "Customize Ribbon",
         Dialog::Control { .. } => "Content Control Properties",
         Dialog::Enclose { .. } => "Enclose Characters",
@@ -2625,6 +2632,17 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         Dialog::TrackOptions { form } => crate::dialogs_lists::track_options(app, ui, form),
         Dialog::Review(d) => crate::dialogs_review::body(app, ui, d),
         Dialog::CustomizeKeyboard { form } => crate::dialogs_keyboard::customize_keyboard(app, ui, form),
+        Dialog::ListCommands { all } => {
+            ui.radio_value(all, false, tl!("Current keyboard settings"));
+            ui.radio_value(all, true, tl!("All Commands"));
+            ui.label(egui::RichText::new(tl!("A new document lists the commands with their shortcuts.")).small().weak());
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok {
+                // Asks to save first when the document has changes (it is replaced).
+                let _ = app.run("tools.listCommands", json!({"all": *all}));
+            }
+            ok || cancel
+        }
         Dialog::CustomizeRibbon { form } => crate::dialogs_ribbon::customize_ribbon(app, ui, form),
         Dialog::FieldCode { code, edit, message } => {
             ui.label(tl!("Field codes:"));
@@ -3322,7 +3340,8 @@ mod tests {
             h.state_mut().dialog = Some(Dialog::Commands { query: query.into() });
             h.run_steps(4);
             assert!(
-                h.query(egui_kittest::kittest::By::new().role(egui::accesskit::Role::Button).label_contains(expected)).is_some(),
+                // Any match: "Custom Table of Contents" ("Özel İçindekiler Tablosu") contains one.
+                h.query_all(egui_kittest::kittest::By::new().role(egui::accesskit::Role::Button).label_contains(expected)).next().is_some(),
                 "{language}: {query}\n{:?}",
                 h.query_all_by_role(egui::accesskit::Role::Button).collect::<Vec<_>>()
             );

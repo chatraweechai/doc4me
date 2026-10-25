@@ -1373,7 +1373,7 @@ fn references(app: &mut WordApp, ui: &mut Ui) {
             mi(ui, app, "Automatic Table 1 (3 levels)", "references.toc", json!({"levels": 3}));
             mi(ui, app, "Automatic Table 2 (2 levels)", "references.toc", json!({"levels": 2, "title": "Table of Contents"}));
             ui.separator();
-            mi(ui, app, "Custom Table of Contents…", "ui.dialog", json!({"name": "toc"}));
+            mi(ui, app, "Custom Table of Contents…", "references.customToc", json!({}));
             mi(ui, app, "Remove Table of Contents", "references.removeToc", json!({}));
         });
         stack(ui, |ui| {
@@ -1487,7 +1487,7 @@ fn mailings(app: &mut WordApp, ui: &mut Ui) {
         });
         // The command needs data, so the button offers the two ways to give it (#240).
         menu_button(ui, app, "recipients", Some("Select\nRecipients"), "Select Recipients", true, "mailings.recipients", |ui, app| {
-            mi(ui, app, "Type a New List…", "ui.dialog", json!({"name": "newRecipientList"}));
+            mi(ui, app, "Type a New List…", "mailings.newList", json!({}));
             mi(ui, app, "Use an Existing List…", "ui.openRecipientList", json!({}));
         });
         big(ui, app, "editRecipients", "Edit\nRecipient List", "mailings.editRecipients", json!({}), false);

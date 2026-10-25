@@ -2588,3 +2588,22 @@ spacing	Normal	标准
 	➕ New comment	➕ 新建批注
 	📂  Browse…	📂  浏览…
 	Measured By	测量依据
+	Mark Table of Contents Entry	标记目录项
+	Custom Table of Contents	自定义目录
+	Type a New List	键入新列表
+	Accept or Reject Changes	接受或拒绝修订
+	Highlight Changes	突出显示修订
+	List Commands	列出命令
+	Entry:	目录项:
+	Table identifier:	表格标识符:
+	Level:	级别:
+	Date	日期
+	Inserted	插入
+	Changes with highlighting	突出显示的修订
+	Changes without highlighting	不突出显示的修订
+	The document contains no tracked changes.	文档中没有修订。
+	Track changes while editing	在编辑时跟踪修订
+	Highlight changes on screen	在屏幕上突出显示修订
+	Highlight changes in printed document	在打印文档中突出显示修订
+	Current keyboard settings	当前键盘设置
+	A new document lists the commands with their shortcuts.	新文档将列出命令及其快捷键。

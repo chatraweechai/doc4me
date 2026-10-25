@@ -199,7 +199,7 @@ ks-197	Review a document	Show list of comments.	Alt, R, P, 1, L	Alt,R,P,1,L	-	ma
 ks-198	Review a document	Insert a comment.	Ctrl+Alt+M	Mod+Alt+M	review.newComment	registry		
 ks-199	Review a document	Turn change tracking on or off.	Ctrl+Shift+E	Mod+Shift+E	review.trackChanges	registry		
 ks-200	Review a document	Close the Reviewing Pane.	Alt+Shift+C	Alt+Shift+C	-	manual	fail	
-ks-201	Work with references, citations, and indexing	Mark a table of contents entry.	Alt+Shift+O	Alt+Shift+O	-	manual	fail	
+ks-201	Work with references, citations, and indexing	Mark a table of contents entry.	Alt+Shift+O	Alt+Shift+O	references.markTocEntry	registry		
 ks-202	Work with references, citations, and indexing	Mark a table of authorities entry (citation).	Alt+Shift+I	Alt+Shift+I	references.markCitation	registry		
 ks-203	Work with references, citations, and indexing	Choose citation options.	Alt+Shift+F12, Spacebar	Alt+Shift+F12,Space	-	manual	fail	
 ks-204	Work with references, citations, and indexing	Mark an index entry.	Alt+Shift+X	Alt+Shift+X	references.markEntry	registry		

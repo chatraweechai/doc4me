@@ -2576,3 +2576,22 @@ spacing	Normal	標準
 	✓ None	✓ なし
 	➕ New comment	➕ 新しいコメント
 	📂  Browse…	📂  参照…
+	Mark Table of Contents Entry	目次項目の登録
+	Custom Table of Contents	ユーザー設定の目次
+	Type a New List	新しいリストの入力
+	Accept or Reject Changes	変更の承諾または元に戻す
+	Highlight Changes	変更の強調表示
+	List Commands	コマンドの一覧
+	Entry:	項目:
+	Table identifier:	目次識別子:
+	Level:	レベル:
+	Date	日付
+	Inserted	挿入
+	Changes with highlighting	強調表示された変更
+	Changes without highlighting	強調表示なしの変更
+	The document contains no tracked changes.	この文書には変更履歴がありません。
+	Track changes while editing	編集中に変更履歴を記録する
+	Highlight changes on screen	画面上で変更を強調表示する
+	Highlight changes in printed document	印刷する文書で変更を強調表示する
+	Current keyboard settings	現在のキーボード設定
+	A new document lists the commands with their shortcuts.	新しい文書にコマンドとショートカット キーの一覧が作成されます。

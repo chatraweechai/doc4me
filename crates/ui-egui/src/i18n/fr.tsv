@@ -2573,3 +2573,22 @@ spacing	Normal	Normal
 	{w} × {h} in	{w} × {h} po
 	{w} × {h} mm	{w} × {h} mm
 	✓ None	✓ Aucun
+	Mark Table of Contents Entry	Marquer une entrée de table des matières
+	Custom Table of Contents	Table des matières personnalisée
+	Type a New List	Taper une nouvelle liste
+	Accept or Reject Changes	Accepter ou refuser les modifications
+	Highlight Changes	Surligner les modifications
+	List Commands	Lister les commandes
+	Entry:	Entrée :
+	Table identifier:	Identificateur de table :
+	Level:	Niveau :
+	Date	Date
+	Inserted	Inséré
+	Changes with highlighting	Modifications surlignées
+	Changes without highlighting	Modifications non surlignées
+	The document contains no tracked changes.	Le document ne contient aucune modification suivie.
+	Track changes while editing	Suivre les modifications pendant l’édition
+	Highlight changes on screen	Surligner les modifications à l’écran
+	Highlight changes in printed document	Surligner les modifications dans le document imprimé
+	Current keyboard settings	Paramètres de clavier actuels
+	A new document lists the commands with their shortcuts.	Un nouveau document liste les commandes avec leurs raccourcis.

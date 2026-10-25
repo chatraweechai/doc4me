@@ -333,6 +333,10 @@ pub fn specs() -> Vec<CommandSpec> {
             .key("Alt+F8")
             .params(r#"{"run"?: name, "define"?: {"name": string, "steps": [{"command", "params"}]}, "delete"?: name}"#)
             .pure(),
+        // Word's List Commands macro: a new document listing the commands and their keys.
+        CommandSpec::new("tools.listCommands", "List Commands", "View › Macros", list_commands)
+            .params(r#"{"all"?: bool (every command; default: the commands that have a shortcut, as now assigned)}"#)
+            .pure(),
         CommandSpec::new("tools.autocorrect", "AutoCorrect Options", "File › Options › Proofing", autocorrect_options)
             .params(
                 r#"{"enabled"?: bool (all of AutoCorrect), "replaceText"|"capSentences"|"capCells"|"capDays"|"smartQuotes"|"fractions"|"ordinals"|"dashes"|"links"|"bullets"|"numbering"|"borderLines"?: bool, "add"?: {"from": string, "to": string} (adds or replaces an entry), "delete"?: string (an entry's "from", built in or added), "addException"?: string, "deleteException"?: string} → options, entries and exceptions"#,
@@ -707,6 +711,48 @@ fn language(s: &mut Session, v: &Value) -> CmdResult {
             c.no_proof = Some(np);
         }
     })
+}
+
+/// `tools.listCommands`: replaces the document (the window shows one) with a table of commands,
+/// sorted by name: Command, Shortcut (as now assigned, Ctrl or Cmd for Mod), Location.
+fn list_commands(s: &mut Session, v: &Value) -> CmdResult {
+    let all = p::bool(v, "all").unwrap_or(false);
+    let reg = s.registry.clone();
+    let modifier = if cfg!(target_os = "macos") { "Cmd" } else { "Ctrl" };
+    let mut rows: Vec<[String; 3]> = reg
+        .all()
+        .iter()
+        .filter_map(|c| {
+            let keys = s.keymap.keys_for(&reg, c.id);
+            (all || !keys.is_empty()).then(|| {
+                let keys: Vec<String> = keys.iter().map(|k| k.replace("Mod+", &format!("{modifier}+"))).collect();
+                [c.label.to_string(), keys.join(", "), c.location.to_string()]
+            })
+        })
+        .collect();
+    rows.sort_by(|a, b| a[0].to_lowercase().cmp(&b[0].to_lowercase()).then_with(|| a[2].cmp(&b[2])));
+    let mut d = Document::new();
+    if let Some(lang) = &s.editing_lang {
+        d.styles.default_chr.lang = Some(lang.clone());
+    }
+    let mut t = doc4me_doc::Table::new(rows.len() + 1, 3, d.last_section.text_width());
+    t.props.style = Some("TableGrid".into());
+    for (r, row) in std::iter::once(["Command".to_string(), "Shortcut".to_string(), "Location".to_string()]).chain(rows.iter().cloned()).enumerate() {
+        for (c, text) in row.iter().enumerate() {
+            if let Some(cell) = t.rows.get_mut(r).and_then(|x| x.cells.get_mut(c)) {
+                let bold = CharProps { bold: Some(r == 0), ..Default::default() };
+                cell.blocks = vec![para_block(Paragraph::with_text(text, if r == 0 { bold } else { CharProps::default() }))];
+            }
+        }
+    }
+    if let Some(r) = t.rows.first_mut() {
+        r.props.header = true;
+    }
+    d.insert_block(StoryRef::Body, &doc4me_doc::Path::top(0), Block::Table(t)).map_err(|e| CmdError::Failed(e.to_string()))?;
+    s.set_document(d);
+    s.path = None;
+    s.dirty = true;
+    Ok(json!({"commands": rows.len()}))
 }
 
 fn macros(s: &mut Session, v: &Value) -> CmdResult {

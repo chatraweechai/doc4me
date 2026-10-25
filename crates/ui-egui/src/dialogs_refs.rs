@@ -1,9 +1,9 @@
 //! References dialogs (#402): Caption (with New Label and Numbering), Index and Mark Index Entry,
-//! Custom Table of Contents (with Options and the TOC styles), and the Source Manager with
-//! Create / Edit Source. Each fills a form from the session and ends in a command
-//! (`references.caption`, `references.index`, `references.markEntry`, `references.toc`,
-//! `references.sources`, `references.citation`), so agents get the same result without the
-//! dialog. Shown through [`crate::dialogs::Dialog::Refs`].
+//! Custom Table of Contents (with Options and the TOC styles), Mark Table of Contents Entry, and
+//! the Source Manager with Create / Edit Source. Each fills a form from the session and ends in a
+//! command (`references.caption`, `references.index`, `references.markEntry`, `references.toc`,
+//! `references.markTocEntry`, `references.sources`, `references.citation`), so agents get the
+//! same result without the dialog. Shown through [`crate::dialogs::Dialog::Refs`].
 
 use doc4me_doc::{Block, Source, StyleKind};
 use doc4me_engine::cmd::references::FieldCode;
@@ -29,6 +29,8 @@ pub enum RefsDialog {
     NewLabel(CaptionForm),
     Index(IndexForm),
     MarkEntry(MarkForm),
+    /// Mark Table of Contents Entry (Alt+Shift+O).
+    MarkToc(MarkTocForm),
     Toc(TocForm),
     /// Table of Contents › Options…; `was` comes back on Cancel.
     TocOptions {
@@ -55,6 +57,7 @@ impl RefsDialog {
             RefsDialog::NewLabel(_) => "newLabel",
             RefsDialog::Index(_) => "index",
             RefsDialog::MarkEntry(_) => "markEntry",
+            RefsDialog::MarkToc(_) => "markTocEntry",
             RefsDialog::Toc(_) => "toc",
             RefsDialog::TocOptions { .. } => "tocOptions",
             RefsDialog::TocStyles { .. } => "tocStyles",
@@ -72,6 +75,7 @@ impl RefsDialog {
             RefsDialog::NewLabel(_) => "New Label",
             RefsDialog::Index(_) => "Index",
             RefsDialog::MarkEntry(_) => "Mark Index Entry",
+            RefsDialog::MarkToc(_) => "Mark Table of Contents Entry",
             RefsDialog::Toc(_) => "Table of Contents",
             RefsDialog::TocOptions { .. } => "Table of Contents Options",
             RefsDialog::TocStyles { .. } => "Table of Contents Styles",
@@ -82,13 +86,19 @@ impl RefsDialog {
     }
 }
 
-/// The dialog `ui.dialog` opens by `name`: `caption`, `index`, `markEntry`, `toc`,
+/// The dialog `ui.dialog` opens by `name`: `caption`, `index`, `markEntry`, `markTocEntry`, `toc`,
 /// `sourceManager` or `createSource` (which inserts a citation of the new source).
 pub fn open(name: &str, app: &WordApp) -> Option<RefsDialog> {
     Some(match name {
         "caption" => RefsDialog::Caption(CaptionForm::read(app)),
         "index" => RefsDialog::Index(IndexForm::read(app)),
         "markEntry" => RefsDialog::MarkEntry(MarkForm::read(app)),
+        "markTocEntry" => RefsDialog::MarkToc(MarkTocForm {
+            entry: app.session.selected_text().trim().to_string(),
+            identifier: "C".into(),
+            level: 1,
+            message: String::new(),
+        }),
         "toc" => RefsDialog::Toc(TocForm::read(app)),
         "sourceManager" => RefsDialog::Sources { selected: None },
         "createSource" => RefsDialog::Source(Box::new(SourceForm::new(true, false))),
@@ -104,6 +114,7 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut RefsDialog) -> bool {
         RefsDialog::NewLabel(f) => new_label_ui(app, ui, f),
         RefsDialog::Index(f) => index_ui(app, ui, f),
         RefsDialog::MarkEntry(f) => mark_ui(app, ui, f),
+        RefsDialog::MarkToc(f) => mark_toc_ui(app, ui, f),
         RefsDialog::Toc(f) => toc_ui(app, ui, f),
         RefsDialog::TocOptions { form, was } => toc_options_ui(app, ui, form, was),
         RefsDialog::TocStyles { form, level } => toc_styles_ui(app, ui, form, level),
@@ -590,6 +601,62 @@ fn mark_ui(app: &mut WordApp, ui: &mut Ui, f: &mut MarkForm) -> Next {
             }
             if ui.add_enabled(can, crate::widgets::primary_button(ui, tl!("Mark"))).clicked() {
                 f.message = match app.run("references.markEntry", f.params(false)) {
+                    Ok(_) => tl!("Entry marked.").to_string(),
+                    Err(e) => e,
+                };
+            }
+        });
+    });
+    if close { Next::Close } else { Next::Stay }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Mark Table of Contents Entry
+
+/// The Mark Table of Contents Entry dialog's fields: the entry, the table it belongs to (C, a
+/// table of contents) and its level. It stays open for the next entry, as Word's does.
+#[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct MarkTocForm {
+    pub entry: String,
+    pub identifier: String,
+    pub level: u8,
+    pub message: String,
+}
+
+const TABLE_IDS: [&str; 26] =
+    ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+fn mark_toc_ui(app: &mut WordApp, ui: &mut Ui, f: &mut MarkTocForm) -> Next {
+    egui::Grid::new("tc").num_columns(2).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
+        ui.label(tl!("Entry:"));
+        ui.add(crate::widgets::text_line(&mut f.entry).desired_width(240.0));
+        ui.end_row();
+        ui.label(tl!("Table identifier:"));
+        egui::ComboBox::from_id_salt("tc_id").selected_text(f.identifier.clone()).width(60.0).show_ui(ui, |ui| {
+            for id in TABLE_IDS {
+                ui.selectable_value(&mut f.identifier, id.to_string(), id);
+            }
+        });
+        ui.end_row();
+        ui.label(tl!("Level:"));
+        ui.add(egui::DragValue::new(&mut f.level).range(1..=9).clamp_existing_to_range(false));
+        ui.end_row();
+    });
+    if !f.message.is_empty() {
+        ui.label(egui::RichText::new(&f.message).small());
+    }
+    let mut close = false;
+    ui.add_space(8.0);
+    ui.horizontal(|ui| {
+        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+            if ui.button(tl!("Close")).clicked() || ui.input(|i| i.key_pressed(egui::Key::Escape)) {
+                close = true;
+            }
+            let can = !f.entry.trim().is_empty();
+            if ui.add_enabled(can, crate::widgets::primary_button(ui, tl!("Mark"))).clicked() {
+                let params = json!({"entry": f.entry.trim(), "identifier": f.identifier, "level": f.level});
+                f.message = match app.run("references.markTocEntry", params) {
                     Ok(_) => tl!("Entry marked.").to_string(),
                     Err(e) => e,
                 };
@@ -1181,5 +1248,22 @@ mod tests {
         a.run("references.sources", json!({"add": src})).unwrap();
         assert!(a.session.doc.plain_text(StoryRef::Body).contains("(Rivera, 2025)"), "{}", a.session.doc.plain_text(StoryRef::Body));
         assert_eq!(a.session.doc.sources.len(), 1);
+    }
+
+    /// Mark Table of Contents Entry opens with the selection (Alt+Shift+O without an entry);
+    /// Custom Table of Contents and Type a New List are commands that open their dialogs.
+    #[test]
+    fn mark_toc_entry_and_custom_toc_open_from_commands() {
+        let mut a = app("Kilns\nPresses");
+        a.run("select.text", json!({"text": "Presses"})).unwrap();
+        assert_eq!(a.run("references.markTocEntry", json!({})).unwrap(), json!({"pending": "markTocEntry"}));
+        let RefsDialog::MarkToc(f) = form(&a) else { panic!() };
+        assert_eq!((f.entry.as_str(), f.identifier.as_str(), f.level), ("Presses", "C", 1));
+        a.run("references.markTocEntry", json!({"entry": f.entry, "identifier": f.identifier, "level": 3})).unwrap();
+        assert!(instrs(&a).contains(&"TC \"Presses\" \\f C \\l \"3\"".to_string()), "{:?}", instrs(&a));
+        a.run("references.customToc", json!({})).unwrap();
+        assert!(matches!(form(&a), RefsDialog::Toc(_)));
+        a.run("mailings.newList", json!({})).unwrap();
+        assert_eq!(a.dialog.as_ref().map(|d| d.name()), Some("recipientList"));
     }
 }

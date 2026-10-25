@@ -2577,3 +2577,22 @@ spacing	Normal	Normál
 	Standard and Contextual	Szabványos és környezetfüggő
 	Wildcards (regex)	Helyettesítő karakterek (reguláris kifejezés)
 	points and above	pont vagy nagyobb
+	Mark Table of Contents Entry	Tartalomjegyzék-bejegyzés megjelölése
+	Custom Table of Contents	Egyéni tartalomjegyzék
+	Type a New List	Új lista beírása
+	Accept or Reject Changes	Változások elfogadása vagy elvetése
+	Highlight Changes	Változások kiemelése
+	List Commands	Parancsok listázása
+	Entry:	Bejegyzés:
+	Table identifier:	Jegyzékazonosító:
+	Level:	Szint:
+	Date	Dátum
+	Inserted	Beszúrva
+	Changes with highlighting	Változások kiemeléssel
+	Changes without highlighting	Változások kiemelés nélkül
+	The document contains no tracked changes.	A dokumentum nem tartalmaz követett változásokat.
+	Track changes while editing	Változások követése szerkesztés közben
+	Highlight changes on screen	Változások kiemelése a képernyőn
+	Highlight changes in printed document	Változások kiemelése a nyomtatott dokumentumban
+	Current keyboard settings	Jelenlegi billentyűzetbeállítások
+	A new document lists the commands with their shortcuts.	Egy új dokumentum felsorolja a parancsokat a billentyűparancsaikkal.

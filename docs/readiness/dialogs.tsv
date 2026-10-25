@@ -78,17 +78,17 @@ dlg-076	wdDialogFormattingRestrictions	1427	(none)	review.restrict	registry
 dlg-077	wdDialogFormFieldHelp	361	(none)	-	registry		legacy form fields
 dlg-078	wdDialogFormFieldOptions	353	Entry, Exit, Name, Enable, TextType, TextWidth, TextDefault, TextFormat, CheckSize, CheckWidth, CheckDefault, Type, OwnHelp, HelpText, OwnStat, StatText, Calculate	-	registry		legacy form fields
 dlg-079	wdDialogFrameSetProperties	1074	(none)	-	registry		legacy frames page
-dlg-080	wdDialogHelpAbout	9	APPNAME, APPCOPYRIGHT, APPUSERNAME, APPORGANIZATION, APPSERIALNUMBER	-	manual	pass	backstage.rs: File › About opens the About dialog
+dlg-080	wdDialogHelpAbout	9	APPNAME, APPCOPYRIGHT, APPUSERNAME, APPORGANIZATION, APPSERIALNUMBER	help.show	registry		F1 and File › About open the About dialog
 dlg-081	wdDialogHelpWordPerfectHelp	10	WPCommand, HelpText, DemoGuidance	-	registry		legacy
 dlg-082	wdDialogHelpWordPerfectHelpOptions	511	CommandKeyHelp, DocNavKeys, MouseSimulation, DemoGuidance, DemoSpeed, HelpType	-	registry		legacy
 dlg-083	wdDialogHorizontalInVertical	1160	(none)	-	registry		
 dlg-084	wdDialogIMESetDefault	1094	(none)	-	registry		
-dlg-085	wdDialogInsertAddCaption	402	Name	-	registry		new caption label
+dlg-085	wdDialogInsertAddCaption	402	Name	references.caption	registry		Caption › New Label
 dlg-086	wdDialogInsertAutoCaption	359	Clear, ClearAll, Object, Label, Position	-	registry		AutoCaption
 dlg-087	wdDialogInsertBookmark	168	Name, SortBy, Add, Delete, Goto, Hidden	insert.bookmark	registry		
-dlg-088	wdDialogInsertBreak	159	Type	-	registry		Break dialog
+dlg-088	wdDialogInsertBreak	159	Type	layout.break	registry		Break dialog (layout.break without kind; the Layout › Breaks names)
 dlg-089	wdDialogInsertCaption	357	Label, TitleAutoText, Title, Delete, Position, AutoCaption, ExcludeLabel	references.caption	registry		
-dlg-090	wdDialogInsertCaptionNumbering	358	Label, FormatNumber, ChapterNumber, Level, Separator, CapNumberingStyle	-	registry		
+dlg-090	wdDialogInsertCaptionNumbering	358	Label, FormatNumber, ChapterNumber, Level, Separator, CapNumberingStyle	references.caption	registry		Caption › Numbering
 dlg-091	wdDialogInsertCrossReference	367	ReferenceType, ReferenceKind, ReferenceItem, InsertAsHyperLink, InsertPosition, SeparateNumbers, SeparatorCharacters	insert.crossReference	registry		
 dlg-092	wdDialogInsertDatabase	341	Format, Style, LinkToSource, Connection, SQLStatement, SQLStatement1, PasswordDoc, PasswordDot, DataSource, From, To, IncludeFields, WritePasswordDoc, WritePasswordDot	-	registry		
 dlg-093	wdDialogInsertDateTime	165	DateTimePic, InsertAsField, DbCharField, DateLanguage, CalendarType	insert.dateTime	registry		
@@ -109,17 +109,17 @@ dlg-107	wdDialogInsertSource	2120	(none)	references.citation	registry
 dlg-108	wdDialogInsertSubdocument	583	Name, ConfirmConversions, ReadOnly, LinkToSource, AddToMru, PasswordDoc, PasswordDot, Revert, WritePasswordDoc, WritePasswordDot, Connection, SQLStatement, SQLStatement1, Format, Encoding, Visible, OpenExclusive, OpenAndRepair, SubType, DocumentDirection, NoEncodingDialog, XMLTransform	-	registry		master documents
 dlg-109	wdDialogInsertSymbol	162	Font, Tab, CharNum, CharNumLow, Unicode, Hint	insert.symbol	registry		
 dlg-110	wdDialogInsertTableOfAuthorities	471	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	references.tableOfAuthorities	registry		
-dlg-111	wdDialogInsertTableOfContents	171	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	-	manual	pass	ribbon.rs: Custom Table of Contents… (ui.dialog toc, dialogs_refs.rs)
+dlg-111	wdDialogInsertTableOfContents	171	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	references.customToc	registry		Custom Table of Contents (dialogs_refs.rs)
 dlg-112	wdDialogInsertTableOfFigures	472	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	references.tableOfFigures	registry		
 dlg-113	wdDialogInsertWebComponent	1324	IconNumber, FileName, Link, DisplayIcon, Tab, Class, IconFileName, Caption, Floating	-	registry		legacy
 dlg-114	wdDialogLabelOptions	1367	(none)	mailings.labels	registry		
 dlg-115	wdDialogLetterWizard	821	SenderCity, DateFormat, IncludeHeaderFooter, LetterStyle, Letterhead, LetterheadLocation, LetterheadSize, RecipientName, RecipientAddress, Salutation, SalutationType, RecipientGender, RecipientReference, MailingInstructions, AttentionLine, LetterSubject, CCList, SenderName, ReturnAddress, Closing, SenderJobTitle, SenderCompany, SenderInitials, EnclosureNumber, PageDesign, InfoBlock, SenderGender, ReturnAddressSF, RecipientCode, SenderCode, SenderReference	-	registry		legacy
-dlg-116	wdDialogListCommands	723	ListType	-	registry		
+dlg-116	wdDialogListCommands	723	ListType	tools.listCommands	registry		List Commands: current keyboard settings or all commands, into a new document
 dlg-117	wdDialogMailMerge	676	CheckErrors, Destination, MergeRecords, From, To, Suppression, MailMerge, QueryOptions, MailSubject, MailAsAttachment, MailAddress	-	registry		no step-by-step wizard
-dlg-118	wdDialogMailMergeCheck	677	CheckErrors	-	registry		
-dlg-119	wdDialogMailMergeCreateDataSource	642	FileName, PasswordDoc, PasswordDot, HeaderRecord, MSQuery, SQLStatement, SQLStatement1, Connection, LinkToSource, WritePasswordDoc	-	manual	pass	ribbon.rs: Type a New List… (ui.dialog newRecipientList)
+dlg-118	wdDialogMailMergeCheck	677	CheckErrors	mailings.checkErrors	registry		Check for Errors
+dlg-119	wdDialogMailMergeCreateDataSource	642	FileName, PasswordDoc, PasswordDot, HeaderRecord, MSQuery, SQLStatement, SQLStatement1, Connection, LinkToSource, WritePasswordDoc	mailings.newList	registry		Type a New List (the New Address List)
 dlg-120	wdDialogMailMergeCreateHeaderSource	643	FileName, PasswordDoc, PasswordDot, HeaderRecord, MSQuery, SQLStatement, SQLStatement1, Connection, LinkToSource, WritePasswordDoc	-	registry		
-dlg-121	wdDialogMailMergeFieldMapping	1304	(none)	-	registry		
+dlg-121	wdDialogMailMergeFieldMapping	1304	(none)	mailings.matchFields	registry		Match Fields
 dlg-122	wdDialogMailMergeFindRecipient	1326	(none)	mailings.findRecipient	registry		
 dlg-123	wdDialogMailMergeFindRecord	569	(none)	mailings.findRecipient	registry		
 dlg-124	wdDialogMailMergeHelper	680	(none)	-	registry		
@@ -140,7 +140,7 @@ dlg-138	wdDialogMailMergeSetDocumentType	1339	(none)	mailings.start	registry
 dlg-139	wdDialogMailMergeUseAddressBook	779	(none)		excluded		Outlook address book (Microsoft service)
 dlg-140	wdDialogMarkCitation	463	(none)	references.markCitation	registry		
 dlg-141	wdDialogMarkIndexEntry	169	(none)	references.markEntry	registry		
-dlg-142	wdDialogMarkTableOfContentsEntry	442	(none)	-	registry		
+dlg-142	wdDialogMarkTableOfContentsEntry	442	(none)	references.markTocEntry	registry		Mark Table of Contents Entry (Alt+Shift+O; a TC field)
 dlg-143	wdDialogMyPermission	1437	(none)		excluded		Information Rights Management (Microsoft service)
 dlg-144	wdDialogNewToolbar	586	(none)	-	registry		legacy toolbars
 dlg-145	wdDialogNoteOptions	373	(none)	references.noteOptions	registry		
@@ -164,7 +164,7 @@ dlg-162	wdDialogTableInsertCells	130	(none)	-	registry		no Insert Cells dialog
 dlg-163	wdDialogTableInsertRow	131	(none)	-	registry		
 dlg-164	wdDialogTableInsertTable	129	(none)	insert.table	registry		Insert Table
 dlg-165	wdDialogTableOfCaptionsOptions	551	(none)	-	registry		
-dlg-166	wdDialogTableOfContentsOptions	470	(none)	-	manual	pass	dialogs_refs.rs: Custom Table of Contents › Options
+dlg-166	wdDialogTableOfContentsOptions	470	(none)	references.customToc	registry		Custom Table of Contents › Options
 dlg-167	wdDialogTableProperties	861	(none)	table.properties	registry		
 dlg-168	wdDialogTableRowHeight	142	(none)	table.properties	registry		
 dlg-169	wdDialogTableSort	199	(none)	table.sort	registry		
@@ -174,7 +174,7 @@ dlg-172	wdDialogTableToText	128	(none)	table.toText	registry
 dlg-173	wdDialogTableWrapping	854	(none)	-	registry		Table Properties has no text wrapping
 dlg-174	wdDialogTCSCTranslator	1156	(none)	-	registry		Chinese conversion
 dlg-175	wdDialogTextToTable	127	(none)	table.fromText	registry		
-dlg-176	wdDialogToolsAcceptRejectChanges	506	(none)	-	registry		
+dlg-176	wdDialogToolsAcceptRejectChanges	506	(none)	review.acceptReject	registry		Accept or Reject Changes
 dlg-177	wdDialogToolsAdvancedSettings	206	(none)	-	registry		legacy
 dlg-178	wdDialogToolsAutoCorrect	378	(none)	tools.autocorrect	registry		
 dlg-179	wdDialogToolsAutoCorrectExceptions	762	(none)	-	registry		
@@ -221,7 +221,7 @@ dlg-219	wdDialogToolsOptionsUserInfo	213	(none)	file.options	registry		General �
 dlg-220	wdDialogToolsOptionsView	204	(none)	file.options	registry		Display
 dlg-221	wdDialogToolsProtectDocument	503	(none)	review.restrict	registry		
 dlg-222	wdDialogToolsProtectSection	578	(none)	-	registry		
-dlg-223	wdDialogToolsRevisions	197	(none)	-	registry		
+dlg-223	wdDialogToolsRevisions	197	(none)	review.highlightChanges	registry		Highlight Changes: track while editing, show on screen, print markup
 dlg-224	wdDialogToolsSpellingAndGrammar	828	(none)	review.spelling	registry		
 dlg-225	wdDialogToolsTemplates	87	(none)	tools.templates	registry		
 dlg-226	wdDialogToolsThesaurus	194	(none)	review.thesaurus	registry		

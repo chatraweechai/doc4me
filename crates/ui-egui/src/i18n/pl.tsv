@@ -2581,3 +2581,22 @@ spacing	Normal	Normalne
 	{w} × {h} in	{w} × {h} cali
 	{w} × {h} mm	{w} × {h} mm
 	✓ None	✓ Brak
+	Mark Table of Contents Entry	Oznacz pozycję spisu treści
+	Custom Table of Contents	Niestandardowy spis treści
+	Type a New List	Wpisz nową listę
+	Accept or Reject Changes	Akceptuj lub odrzuć zmiany
+	Highlight Changes	Wyróżnij zmiany
+	List Commands	Wyświetl listę poleceń
+	Entry:	Pozycja:
+	Table identifier:	Identyfikator spisu:
+	Level:	Poziom:
+	Date	Data
+	Inserted	Wstawiono
+	Changes with highlighting	Zmiany z wyróżnieniem
+	Changes without highlighting	Zmiany bez wyróżnienia
+	The document contains no tracked changes.	Dokument nie zawiera śledzonych zmian.
+	Track changes while editing	Śledź zmiany podczas edycji
+	Highlight changes on screen	Wyróżnij zmiany na ekranie
+	Highlight changes in printed document	Wyróżnij zmiany w drukowanym dokumencie
+	Current keyboard settings	Bieżące ustawienia klawiatury
+	A new document lists the commands with their shortcuts.	Nowy dokument wyświetli listę poleceń z ich skrótami klawiaturowymi.

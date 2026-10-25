@@ -4790,3 +4790,31 @@ fn opening_a_document_in_an_unmatched_font_tells_the_user() {
     assert!(crate::cmd::file::unmatched_fonts(&s.doc).is_empty());
     let _ = std::fs::remove_dir_all(&dir);
 }
+
+/// Word's Highlight Changes, Accept or Reject Changes and List Commands: the settings the first
+/// sets, the dialog request and change count of the second, and the third's table of commands.
+#[test]
+fn highlight_accept_reject_and_list_commands() {
+    let mut s = s();
+    run(&mut s, "text.insert", json!({"text": "Kilns"}));
+    let v = run(&mut s, "review.highlightChanges", json!({"track": true, "screen": false, "print": true}));
+    assert_eq!(v, json!({"track": true, "screen": false, "print": true}));
+    assert!(s.doc.settings.track_changes && !s.view.show_markup && s.prefs.print_markup);
+    run(&mut s, "review.highlightChanges", json!({"screen": true}));
+    assert!(s.view.show_markup && s.doc.settings.track_changes, "settings left out stay");
+    run(&mut s, "text.insert", json!({"text": " fired"}));
+    s.ui_requests.clear();
+    assert_eq!(run(&mut s, "review.acceptReject", json!({}))["changes"], 1);
+    assert_eq!(s.ui_requests, vec![json!({"open": "acceptRejectChanges"})]);
+    run(&mut s, "review.highlightChanges", json!({"track": false}));
+    // List Commands: the commands with a key, sorted by name, under a header row.
+    let n = run(&mut s, "tools.listCommands", json!({}))["commands"].as_u64().unwrap() as usize;
+    let all = s.registry.all().len();
+    assert!(n > 100 && n < all, "{n} of {all}");
+    let t = text(&s);
+    let modifier = if cfg!(target_os = "macos") { "Cmd" } else { "Ctrl" };
+    assert!(t.starts_with("Command\tShortcut\tLocation"), "{}", &t[..80.min(t.len())]);
+    assert!(t.contains(&format!("Bold\t{modifier}+B")), "Bold and its key");
+    assert!(s.dirty && s.path.is_none());
+    assert_eq!(run(&mut s, "tools.listCommands", json!({"all": true}))["commands"], all);
+}

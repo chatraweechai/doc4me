@@ -8,7 +8,7 @@ plat-001	platforms	Windows x64: CI builds the MSI and portable zip, and the buil
 plat-002	platforms	Windows arm64: a packaged build	fail	2026-10-25	not built
 plat-003	platforms	macOS: a packaged build (packaging/macos/package.sh)	untested	2026-10-25	not built by CI
 plat-004	platforms	Linux x64: a packaged build (packaging/linux)	pass	2026-10-25	packaging/linux/package.sh --formats tar built doc4me-1.1.1-linux-x86_64.tar.gz (Ubuntu 24.04 x86_64); extracted, doc4me --version 1.1.1, and the window opened govuk-001.docx (29 pages) under Xvfb; needs libxkbcommon-x11 on X11 (now in the deb/rpm recommends)
-plat-005	platforms	Web: the wasm build loads in a browser and opens a document	untested	2026-10-25	cargo xtask wasm compiles; not served
+plat-005	platforms	Web: the wasm build loads in a browser and opens a document	pass	2026-10-25	trunk 0.22.0 `trunk build --release` (apps/doc4me-web, wasm 51 MB) served over http://127.0.0.1; Playwright Chromium (WebGL2, SwiftShader) started it in 0.8 s, Ctrl+O file chooser opened govuk-001.docx: title govuk-001, status bar Page 1 of 29, 6396 words
 eco-001	ecosystem	Macros: record and play commands (Doc4Me's replacement for VBA)	pass	2026-10-25	crates/engine/src/cmd/tools.rs macros_record_and_run
 eco-002	ecosystem	Add-ins: install and remove from Doc4Me's own catalog (replacement for Office add-ins)	pass	2026-10-25	addins.get, crates/ui-egui/src/get_addins.rs tests
 eco-003	ecosystem	Cloud storage: open and save in place in a folder kept in sync by Nextcloud Desktop or Syncthing	untested	2026-10-25	not tried
