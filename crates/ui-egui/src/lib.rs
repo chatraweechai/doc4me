@@ -545,6 +545,11 @@ impl WordApp {
     /// Close, Envelopes, Labels and Finish & Merge on a document with unsaved changes first ask
     /// Save / Don't Save / Cancel, and the command runs once that is answered (`ui.saveChanges`).
     pub fn run(&mut self, id: &str, params: Value) -> Result<Value, String> {
+        // 3D Models without a file picks one first (no undo step for asking).
+        if id == "insert.model3d" && params.get("path").is_none() && params.get("data").is_none() && widgets::enabled(self, id) {
+            self.pick_model3d();
+            return Ok(json!({"pending": "insertModel3d"}));
+        }
         // A button whose command needs input the user hasn't given yet opens its dialog (#240).
         if let Some(name) = input_dialog(id, &params)
             && widgets::enabled(self, id)
@@ -843,6 +848,12 @@ impl WordApp {
 
     /// Requests commands make of the UI (open a dialog…).
     fn handle_request(&mut self, req: &Value) {
+        // Play Video: the browser, for web addresses only.
+        if let Some(url) = req.get("openUrl").and_then(Value::as_str)
+            && doc4me_doc::link::is_web_or_mail_link(url)
+        {
+            self.canvas.open_url = Some(url.to_string());
+        }
         if let Some(what) = req.get("open").and_then(Value::as_str) {
             match what {
                 "openFile" => self.open_dialog(),
@@ -850,6 +861,7 @@ impl WordApp {
                     self.save_as_dialog();
                 }
                 "insertPicture" => self.pick_picture(),
+                "insertModel3d" => self.pick_model3d(),
                 "screenClipping" => screen_clip::start(self),
                 "addFont" => self.pick_font(),
                 "print" => {
@@ -1484,7 +1496,10 @@ impl WordApp {
             let list = lower.ends_with(".csv") || lower.ends_with(".tsv") || (lower.ends_with(".txt") && asked);
             let sheet = [".xlsx", ".xlsm", ".ods"].iter().any(|e| lower.ends_with(e));
             self.recipient_list_pending = asked && !list && !sheet;
-            let r = if sheet {
+            let model = doc4me_engine::model3d::EXTENSIONS.iter().any(|e| lower.ends_with(&format!(".{e}")));
+            let r = if model {
+                self.run("insert.model3d", json!({"name": name, "data": doc4me_engine::cmd::insert::base64_encode(&bytes)}))
+            } else if sheet {
                 self.load_recipients(json!({"path": name, "data": doc4me_engine::cmd::insert::base64_encode(&bytes)}))
             } else if doc4me_fonts::is_font_file_name(&lower) {
                 self.run("font.add", json!({"name": name, "data": doc4me_engine::cmd::insert::base64_encode(&bytes)}))
@@ -1637,6 +1652,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         // Symbol without a character and Field without a code show their dialogs (#321).
         "insert.symbol" if !has("char") => Some("symbol"),
         "insert.field" if !has("instr") => Some("field"),
+        // Online Video without an address asks for one.
+        "insert.video" if !has("url") => Some("insertVideo"),
         // Edit Field Code shows the selected field's code (#339).
         "fields.setCode" if !has("code") => Some("editFieldCode"),
         // SmartArt without a layout or items shows the layout picker.

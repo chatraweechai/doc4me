@@ -40,6 +40,7 @@ const DOCUMENTS: &[&str] = &["docx", "docm", "dotx", "dotm", "doc", "dot", "odt"
 pub fn open_filters(purpose: &str) -> &'static [(&'static str, &'static [&'static str])] {
     match purpose {
         "picture" => &[("Pictures", PICTURES)],
+        "model3d" => &[("3D Models", doc4me_engine::model3d::EXTENSIONS)],
         "font" => &[("Fonts", doc4me_fonts::FONT_FILE_EXTS)],
         "recipients" => &[("Recipient lists", &["csv", "tsv", "txt", "xlsx", "xlsm", "ods"]), ("All files", &["*"])],
         _ => &[("Documents", DOCUMENTS), ("Word document", &["docx"]), ("All files", &["*"])],
@@ -52,6 +53,8 @@ pub(crate) enum AfterPick {
     OpenDocument,
     /// Insert the picked picture, or replace the pending Change Picture target.
     Picture,
+    /// Insert the picked 3D model (Insert › 3D Models).
+    Model3d,
     /// Save the document there, then carry on.
     SaveAs(AfterSave),
     /// Save a copy there in this format (`pdf`, `docx`, `png`, `jpg`…).
@@ -194,6 +197,10 @@ impl WordApp {
                 };
                 self.insert_or_change_picture(json!({"path": path}))
             }
+            AfterPick::Model3d => {
+                let Some(path) = picked else { return Ok(json!({"cancelled": true})) };
+                self.run("insert.model3d", json!({"path": path}))
+            }
             AfterPick::Font => {
                 let Some(path) = picked else { return Ok(json!({"cancelled": true})) };
                 self.run("font.add", json!({"path": path}))
@@ -302,6 +309,15 @@ impl WordApp {
             return;
         }
         let _ = self.ask_file(FileDialogRequest::Open { purpose: "picture".into() }, AfterPick::Picture);
+    }
+
+    /// Pick a 3D model to insert (Insert › 3D Models; web: it arrives through the inbox).
+    pub(crate) fn pick_model3d(&mut self) {
+        if let Some(f) = &self.services.open_async {
+            f("model3d");
+            return;
+        }
+        let _ = self.ask_file(FileDialogRequest::Open { purpose: "model3d".into() }, AfterPick::Model3d);
     }
 
     /// Pick a font file to add (Add Font…; web: it arrives through the inbox).

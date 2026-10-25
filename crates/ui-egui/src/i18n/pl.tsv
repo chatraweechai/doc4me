@@ -2105,3 +2105,12 @@ spacing	Normal	Normalne
 	Screen clipping ended without a picture.	Wycinanie ekranu zakończyło się bez obrazu.
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Wycinek ekranu nie jest tu dostępny. Skopiuj obraz ekranu, a następnie go wklej.
 	Screen clipping didn't work: {reason}	Wycinanie ekranu nie powiodło się: {reason}
+	Media	Multimedia
+	Online Video	Wideo online
+	Insert Video	Wstawianie wideo
+	Play Video	Odtwórz wideo
+	Enter the web address or embed code of an online video:	Wprowadź adres internetowy lub kod osadzania wideo online:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Wideo jest wyświetlane w dokumencie jako obraz. Kliknij je dwukrotnie, aby obejrzeć je w przeglądarce.
+	That isn't the web address or embed code of an online video.	To nie jest adres internetowy ani kod osadzania wideo online.
+	3D Models	Modele 3D
+	Insert a 3D model from a file (.glb, .stl, .obj)	Wstaw model 3D z pliku (.glb, .stl, .obj)

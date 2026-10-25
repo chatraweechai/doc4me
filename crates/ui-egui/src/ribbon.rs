@@ -820,14 +820,18 @@ fn insert(app: &mut WordApp, ui: &mut Ui) {
         });
         stack(ui, |ui| {
             small(ui, app, "icons", Some("Icons"), "Icons", "insert.icon", json!({}), false);
+            small(ui, app, "model3d", Some("3D Models"), "Insert a 3D model from a file (.glb, .stl, .obj)", "insert.model3d", json!({}), false);
             small(ui, app, "smartArt", Some("SmartArt"), "SmartArt", "insert.smartArt", json!({}), false);
-            small(ui, app, "chart", Some("Chart"), "Chart", "insert.chart", json!({}), false);
         });
         stack(ui, |ui| {
+            small(ui, app, "chart", Some("Chart"), "Chart", "insert.chart", json!({}), false);
             menu_button(ui, app, "screenshot", Some("Screenshot"), "Screenshot", false, "insert.screenshot", |ui, app| {
                 mi(ui, app, "Screen Clipping", "insert.screenshot", json!({}));
             });
         });
+    });
+    group(ui, "Media", None, app, |ui, app| {
+        big(ui, app, "video", "Online Video", "insert.video", json!({}), false);
     });
     group(ui, "Links", None, app, |ui, app| {
         stack(ui, |ui| {

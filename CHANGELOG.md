@@ -13,6 +13,24 @@
 
 ### เพิ่ม
 
+- **แทรก › ภาพประกอบ › แบบจำลอง 3 มิติ (Insert › 3D Models)** (parity 491 → 492/500)
+  - ปุ่ม "แบบจำลอง 3 มิติ" ในกลุ่มภาพประกอบ (ใต้ Icons แบบ Word for Windows; Chart ย้ายไปคอลัมน์ถัดไปกับภาพหน้าจอ) เลือกไฟล์ `.glb` (glTF 2.0 binary), `.stl` (binary/ข้อความ) หรือ `.obj`; คำสั่ง `insert.model3d {path|data, name?, width?, yaw?, pitch?}` (`crates/engine/src/cmd/insert.rs`) แทรกภาพของโมเดลเป็นรูปภาพกว้าง 3 นิ้ว (undo step เดียว ข้อความแสดงแทน = ชื่อไฟล์) การเลือกไฟล์ไม่สร้าง undo step; เว็บรับไฟล์ผ่านตัวเลือกไฟล์และการลากวาง
+  - ตัวอ่าน+ตัววาด (`crates/engine/src/model3d.rs`): glTF อ่าน mesh ของ scene หลักพร้อม matrix/TRS ของ node และสี `baseColorFactor` (triangles/strip/fan, index u8/u16/u32); STL ถือว่า z ชี้ขึ้น; OBJ รองรับ `v/vt/vn` ดัชนีติดลบ และรูปหลายเหลี่ยม; วาดด้วย z-buffer แบบซอฟต์แวร์ (ไม่ใช้ GPU) แรเงาแบบ flat แสงจากซ้ายบน มุมมอง yaw −30° pitch 20° พื้นหลังโปร่งใส 800×800 px (วาด 2 เท่าแล้วย่อเพื่อขอบเรียบ)
+  - ความปลอดภัย: ไฟล์มาจากภายนอก ตรวจทุก offset/count กับขนาด buffer view และ chunk (ไม่อ่านเกินขอบ) จำกัด 200 MB และ 4 ล้านสามเหลี่ยม node ที่วนอ้างตัวเองตัดที่ความลึก 64 / 100,000 ครั้ง; glTF แบบ Draco, sparse accessor, buffer ภายนอก หรือ glTF 1.0 แจ้งว่าอ่านไม่ได้
+  - ข้อความใหม่ 2 ข้อความ (ไทย: แบบจำลอง 3 มิติ) ครบ 18 ภาษา, KeyTip และไอคอนลูกบาศก์
+  - ผลต่อผู้ใช้/ความเข้ากันได้: แบบจำลอง 3 มิติในไฟล์ของ Word (`am3d` ใน `mc:AlternateContent`) ยังเปิดเป็นรูป fallback เหมือนเดิม; ไม่เปลี่ยนรูปแบบไฟล์
+  - ตรวจแล้ว: เทสต์ใหม่ `model3d::tests` (3: อ่าน STL/OBJ/GLB รวม node วน, ปฏิเสธไฟล์เสีย/glTF 1/chunk เกินไฟล์/accessor เกิน buffer view/ไฟล์เกินขนาด, ภาพมีพื้นโปร่งใสและมีโมเดลกลางภาพ) และ `a_3d_model_is_inserted_as_its_picture` (engine); `cargo test -p doc4me-engine` 388 + 13 + 8 ผ่าน, `cargo test -p doc4me-ui-egui -- --include-ignored` 331 ผ่าน (รวม audit การแปล), clippy `-D warnings --all-targets` (engine, ui-egui) ผ่าน
+
+- **แทรก › สื่อ › วิดีโอออนไลน์ (Insert › Media › Online Video)** (parity 490 → 491/500)
+  - กลุ่ม "สื่อ" ใหม่บนแท็บแทรก (ระหว่างภาพประกอบกับลิงก์แบบ Word for Windows) ปุ่ม "วิดีโอออนไลน์" เปิดกล่อง "แทรกวิดีโอ" ให้วางที่อยู่เว็บหรือโค้ดฝัง `<iframe>`; คำสั่ง `insert.video {url, poster?, title?}` (`crates/engine/src/cmd/insert.rs`) แทรกรูปโปสเตอร์ที่เก็บวิดีโอไว้ เป็น undo step เดียว การเปิดกล่องไม่สร้าง undo step (`input_dialog` ใน `crates/ui-egui/src/lib.rs`)
+  - โมเดล: `InlineObject::Image` มีฟิลด์ใหม่ `video: Option<Arc<WebVideo>>` (`crates/doc/src/video.rs`) ที่อยู่ YouTube (`watch?v=`, `youtu.be`, `shorts`, `live`) และ Vimeo แปลงเป็น player (`/embed/ID`, `player.vimeo.com/video/ID`) ที่อยู่อื่นต้องเป็น https; จากโค้ดฝังเอาเฉพาะ `src` กับขนาด (16–4096 px ไม่งั้นใช้ 640×360) แล้วสร้าง `<iframe>` ใหม่เอง ไม่เก็บ HTML/script ที่ผู้ใช้วาง (กัน script แฝงในไฟล์ที่ Word จะแสดง)
+  - .docx: อ่าน-เขียน `wp15:webVideoPr` (`embeddedHtml`, `w`, `h`; [MS-ODRAWXML] 2.19) ใน `a:blip/a:extLst/a:ext uri="{C809E66F-F1BF-436E-B5F7-EEA9579F0CBA}"` (URI ตามที่ Word เขียน ตรวจจากตัวอย่าง OOXML จริง) namespace ประกาศที่ตัว element จึงไม่ต้องแก้ `mc:Ignorable`; HTML ที่ยาวเกิน 64 KB ถูกทิ้ง (รูปยังอยู่) — วิดีโอออนไลน์จากไฟล์ของ Word จึงไม่หายเมื่อบันทึกด้วย Doc4Me
+  - เล่น: ดับเบิลคลิกรูปวิดีโอ หรือคำสั่ง `picture.playVideo` (pure) เปิดหน้าวิดีโอในเบราว์เซอร์ (YouTube/Vimeo player แปลงกลับเป็นหน้าดูปกติ) เปิดได้เฉพาะ http/https; ฝั่ง UI รับคำขอ `{"openUrl"}` เฉพาะลิงก์เว็บหรืออีเมล
+  - โปสเตอร์: `doc4me_render::video_poster` วาดการ์ดสีเข้ม 16:9 พร้อมปุ่มเล่น (Doc4Me ไม่ดึงภาพตัวอย่างจากเว็บไซต์วิดีโอ) หรือส่ง `poster` เป็น base64 เอง; ข้อความแสดงแทน = `title` หรือที่อยู่วิดีโอ
+  - ข้อความใหม่ 7 ข้อความแปลครบ 18 ภาษา (ไทย: สื่อ, วิดีโอออนไลน์, แทรกวิดีโอ, เล่นวิดีโอ ฯลฯ) และ KeyTip
+  - ผลต่อผู้ใช้/ความเข้ากันได้: ไฟล์ .docx เดิมเปิดได้เหมือนเดิม รูปธรรมดาไม่เปลี่ยน; ไฟล์ JSON ภายใน (`video` ข้ามเมื่อไม่มี) อ่านไฟล์เก่าได้; ติดตั้งทับได้
+  - ตรวจแล้ว: เทสต์ใหม่ `video::tests` (3, doc), `poster::tests` (render), `online_video_inserts_a_poster_that_keeps_its_video` (engine: เปิดกล่อง, ที่อยู่อันตราย `javascript:`/`http:`/`file:` ถูกปฏิเสธโดยไม่สร้าง undo, round trip .docx ได้ HTML และขนาดเดิม, เล่นได้, undo), `online_video_asks_for_an_address_and_plays_in_the_browser` (ui-egui); clippy `-D warnings --all-targets` ของ doc, docx, render, engine, ui-egui, doc4me ผ่าน
+
 - **แทรก › ภาพประกอบ › ภาพหน้าจอ › การตัดหน้าจอ (Insert › Screenshot › Screen Clipping)** (parity 489 → 490/500)
   - ปุ่ม "ภาพหน้าจอ" ใหม่ในกลุ่มภาพประกอบ (คอลัมน์ที่สองถัดจาก Icons/SmartArt/Chart แบบ Word for Windows) มีเมนู "การตัดหน้าจอ" และ KeyTip; คำสั่ง `insert.screenshot` (`crates/engine/src/cmd/insert.rs`) เป็นคำสั่ง pure เพียงขอให้ UI เริ่มการตัดหน้าจอ จึงไม่สร้าง undo step และไม่ทำให้เอกสารเป็น "ยังไม่บันทึก" ภาพที่ได้แทรกด้วย `insert.picture` เป็น undo step เดียวเหมือนแทรกรูป
   - UI (`crates/ui-egui/src/screen_clip.rs`): hook ใหม่ `Services::screen_clip` ให้ host เริ่มเครื่องมือตัดหน้าจอของระบบแล้วตอบผ่าน channel; บน Windows และ macOS หน้าต่างย่อลงระหว่างตัด (แบบ Word) แล้วกลับมาพร้อมภาพ บน Linux/BSD ไม่ย่อเพราะ Wayland คืนหน้าต่างที่ย่อแล้วไม่ได้; ถ้าผู้ใช้เปิดหน้าต่างกลับมาเองก่อนตัด ถือว่ายกเลิก; รอนานสุด 5 นาที; ภาพตรวจขนาดเหมือนภาพที่วางจากคลิปบอร์ด (`paste_picture::insert` แยกออกมาใช้ร่วมกัน และเพิ่มชนิด `ClipboardPicture::Encoded` สำหรับไฟล์ภาพที่เครื่องมือบันทึก จำกัด 200 MB)
@@ -130,6 +148,7 @@
 
 ### แก้ไข
 
+- build เว็บ (wasm32) ไม่ผ่าน `cargo clippy -D warnings`: `crates/fonts/src/fontdb.rs` (`let mut base` ที่บนเว็บไม่ถูกแก้), `crates/engine/src/speech.rs` (ฟิลด์ `running` ที่เว็บไม่มี worker thread อ่าน) และ `apps/doc4me-web/src/web/font_store.rs` (`map_err(JsValue::from)` ที่แปลงเป็นชนิดเดิม) — แก้ด้วย `cfg_attr(target_arch = "wasm32", allow(...))` สองจุดและลบการแปลงที่ไม่จำเป็น ไม่เปลี่ยนพฤติกรรม; ตรวจด้วย `rustup target add wasm32-unknown-unknown` แล้ว `cargo clippy -p doc4me-web --target wasm32-unknown-unknown -- -D warnings` ผ่าน (งานค้างใน handoff: wasm check)
 - **เวลา UTC ของข้อคิดเห็นและ tracked change ถูกเขียนกลับลงไฟล์ และอ่าน `w16du:dateUtc` ของ revision** (ผู้ใช้สั่งแก้ข้อจำกัดที่เหลือ)
   - เดิม: ตอนบันทึก .docx ไม่เขียน `commentsIds.xml` และ `commentsExtensible.xml` และไม่อ่าน `w16du:dateUtc` ของ revision Word จึงแสดง `w:date` ซึ่งเป็นเวลาท้องถิ่นของผู้เขียน ผิดเมื่อผู้อ่านอยู่คนละ time zone
   - แก้ (`crates/docx/src/write/mod.rs`): เมื่อมีข้อคิดเห็นที่รู้เวลา UTC จะเขียน `word/commentsIds.xml` (`w16cid:commentId` คู่ `w14:paraId` ของย่อหน้าสุดท้ายกับ durable id `10000000` ขึ้นไป ไม่ซ้ำกันและต่ำกว่า `7FFFFFFF`) และ `word/commentsExtensible.xml` (`w16cex:commentExtensible` กับ `w16cex:dateUtc`) พร้อม relationship และ content type
@@ -190,6 +209,8 @@
 
 ### ข้อจำกัดที่ทราบ
 
+- แบบจำลอง 3 มิติ: แทรกเป็นภาพนิ่งของโมเดล (หมุนหรือเปลี่ยนมุมมองหลังแทรกยังไม่ได้ ต้องแทรกใหม่ด้วย `yaw`/`pitch`) ไม่เขียน `am3d:model3d` ลง .docx จึงเป็นรูปภาพธรรมดาใน Word; ไม่อ่าน texture, `.fbx`, `.3mf`, `.ply` หรือ glTF แบบข้อความ (`.gltf`); โมเดล 3 มิติจากไฟล์ Word เปิดเป็นรูป fallback และเมื่อบันทึกจะเหลือเป็นรูปภาพ
+- วิดีโอออนไลน์: Doc4Me เล่นวิดีโอในเบราว์เซอร์ ไม่เล่นในเอกสารแบบ Word และไม่ดึงภาพตัวอย่าง/ชื่อวิดีโอจากเว็บไซต์ (ไม่มีการเชื่อมต่อเครือข่าย) โปสเตอร์จึงเป็นการ์ดปุ่มเล่นที่วาดเอง; ยังไม่มีช่องค้นหาวิดีโอ (Bing/YouTube) ของ Word; การเปิดไฟล์ที่ Doc4Me เขียนใน Word for Windows ยังไม่ได้ทดสอบ (ไม่มี Word ใน container)
 - ภาพหน้าจอ: มีเฉพาะการตัดหน้าจอ ยังไม่มีแกลเลอรี "หน้าต่างที่พร้อมใช้งาน" (Available Windows) ของ Word ซึ่งต้องจับภาพหน้าต่างของโปรแกรมอื่น; บน Windows ถ้ากด Esc ใน Snipping Tool โปรแกรมไม่รู้ว่ายกเลิก หน้าต่างจะย่ออยู่จนกว่าผู้ใช้เปิดกลับมา; macOS ต้องอนุญาต Screen Recording ครั้งแรก; Linux แบบ portal บน GNOME จะบันทึกภาพลงโฟลเดอร์ Pictures ของผู้ใช้ด้วย; การทำงานจริงบน Windows/macOS/เดสก์ท็อป Linux ยังไม่ได้ทดสอบด้วยมือ (container ไม่มีหน้าจอ ตรวจด้วย cross-check และเทสต์)
 - ข้อคิดเห็นและ revision จาก Word รุ่นก่อน 2019 หรือจาก Doc4Me รุ่นก่อนหน้า ไม่มีเวลา UTC จึงแสดง `w:date` ตามที่เขียนไว้ (เวลาท้องถิ่นของผู้เขียน เหมือนที่ Word แสดง)
 - ปุ่มแปลงเลขแปลงเฉพาะเลขอารบิก 0–9 กับเลขไทย ๐–๙ ไม่แปลงเลขของอักษรอื่น (เช่น ٠–٩) เลขที่โปรแกรมสร้างเองเปลี่ยนได้เฉพาะรูปแบบเลขอารบิก (decimal) กับเลขไทย (thaiNumbers); ผลของฟิลด์ที่แปลงเป็นข้อความแล้วจะกลับเป็นค่าเดิมเมื่ออัปเดตฟิลด์

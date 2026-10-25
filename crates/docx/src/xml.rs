@@ -46,6 +46,11 @@ pub const NAMESPACES: &[(&str, &str)] = &[
 pub const DECORATIVE_EXT: &str = "{C183D7F6-B498-43B3-948B-1728B52AA6E4}";
 pub const DECORATIVE_NS: &str = "http://schemas.microsoft.com/office/drawing/2017/decorative";
 
+/// The `a:ext` URI of a picture's online video (`wp15:webVideoPr` in its `a:blip`), and the
+/// namespace of that element ([MS-ODRAWXML] 2.19; the URI as Word writes it).
+pub const WEB_VIDEO_EXT: &str = "{C809E66F-F1BF-436E-B5F7-EEA9579F0CBA}";
+pub const WEB_VIDEO_NS: &str = "http://schemas.microsoft.com/office/word/2012/wordprocessingDrawing";
+
 /// Namespaces that only appear in non-body parts.
 const OTHER_NAMESPACES: &[(&str, &str)] = &[
     ("b", "http://schemas.openxmlformats.org/officeDocument/2006/bibliography"),

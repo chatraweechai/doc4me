@@ -2074,3 +2074,12 @@ spacing	Normal	Normalno
 	Screen clipping ended without a picture.	Isecanje ekrana je završeno bez slike.
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Isecanje ekrana ovde nije dostupno. Kopirajte sliku ekrana, a zatim je nalepite.
 	Screen clipping didn't work: {reason}	Isecanje ekrana nije uspelo: {reason}
+	Media	Medijum
+	Online Video	Video na mreži
+	Insert Video	Umetanje video zapisa
+	Play Video	Reprodukuj video
+	Enter the web address or embed code of an online video:	Unesite veb adresu ili kôd za ugradnju video zapisa na mreži:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Video se u dokumentu prikazuje kao slika. Kliknite dvaput na njega da biste ga pogledali u pregledaču.
+	That isn't the web address or embed code of an online video.	To nije veb adresa ni kôd za ugradnju video zapisa na mreži.
+	3D Models	3D modeli
+	Insert a 3D model from a file (.glb, .stl, .obj)	Umetni 3D model iz datoteke (.glb, .stl, .obj)

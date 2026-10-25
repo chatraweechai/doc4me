@@ -2457,3 +2457,12 @@ spacing	Normal	Normale
 	Screen clipping ended without a picture.	Il ritaglio della schermata è terminato senza un’immagine.
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Il ritaglio della schermata non è disponibile qui. Copiare un’immagine dello schermo, quindi incollarla.
 	Screen clipping didn't work: {reason}	Il ritaglio della schermata non è riuscito: {reason}
+	Media	Elementi multimediali
+	Online Video	Video online
+	Insert Video	Inserisci video
+	Play Video	Riproduci video
+	Enter the web address or embed code of an online video:	Immettere l’indirizzo Web o il codice di incorporamento di un video online:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Il video viene visualizzato come immagine nel documento. Fare doppio clic per guardarlo nel browser.
+	That isn't the web address or embed code of an online video.	Non è l’indirizzo Web o il codice di incorporamento di un video online.
+	3D Models	Modelli 3D
+	Insert a 3D model from a file (.glb, .stl, .obj)	Inserisci un modello 3D da un file (.glb, .stl, .obj)

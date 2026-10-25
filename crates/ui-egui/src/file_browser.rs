@@ -279,6 +279,7 @@ impl WordApp {
         }
         let (req, after) = match purpose {
             "picture" => (FileDialogRequest::Open { purpose: "picture".into() }, AfterPick::Picture),
+            "model3d" => (FileDialogRequest::Open { purpose: "model3d".into() }, AfterPick::Model3d),
             "recipients" => (FileDialogRequest::Open { purpose: "recipients".into() }, AfterPick::Recipients),
             "save" => (FileDialogRequest::Save { name: self.default_save_name() }, AfterPick::SaveAs(crate::file_dialogs::AfterSave::Nothing)),
             _ => (FileDialogRequest::Open { purpose: "document".into() }, AfterPick::OpenDocument),

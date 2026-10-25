@@ -2069,3 +2069,12 @@ spacing	Normal	Normální
 	Screen clipping ended without a picture.	Výřez obrazovky skončil bez obrázku.
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Výřez obrazovky tu není k dispozici. Zkopírujte obrázek obrazovky a pak ho vložte.
 	Screen clipping didn't work: {reason}	Výřez obrazovky se nezdařil: {reason}
+	Media	Média
+	Online Video	Online video
+	Insert Video	Vložit video
+	Play Video	Přehrát video
+	Enter the web address or embed code of an online video:	Zadejte webovou adresu nebo kód pro vložení online videa:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Video se v dokumentu zobrazí jako obrázek. Poklikáním ho přehrajete v prohlížeči.
+	That isn't the web address or embed code of an online video.	To není webová adresa ani kód pro vložení online videa.
+	3D Models	3D modely
+	Insert a 3D model from a file (.glb, .stl, .obj)	Vložit 3D model ze souboru (.glb, .stl, .obj)

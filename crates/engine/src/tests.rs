@@ -4521,3 +4521,69 @@ fn format_font_sets_the_asian_and_latin_fonts_separately() {
     assert_eq!(fonts(&s), before);
     assert!(s.run("format.font", &json!({})).is_err() && s.run("format.font", &json!({"eastAsia": " "})).is_err());
 }
+
+/// Insert › Online Video: a poster picture carrying the video, kept through .docx, played in the
+/// browser; bad addresses change nothing.
+#[test]
+fn online_video_inserts_a_poster_that_keeps_its_video() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("Watch: "));
+    run(&mut s, "caret.docEnd", json!({}));
+    run(&mut s, "insert.video", json!({}));
+    assert!(s.ui_requests.iter().any(|r| r["open"] == "insertVideo"), "no address: the dialog");
+    let undo = s.undo_depth();
+    for bad in ["javascript:alert(1)", "http://example.com/v", "<iframe src=\"file:///etc/passwd\"></iframe>"] {
+        assert!(s.run("insert.video", &json!({"url": bad})).is_err(), "{bad}");
+    }
+    assert_eq!(s.undo_depth(), undo, "refused addresses add no undo step");
+    let r = run(&mut s, "insert.video", json!({"url": "https://youtu.be/dQw4w9WgXcQ", "title": "Talk"}));
+    assert_eq!(r["video"], true);
+    // As wide as the 640-pixel player (480 pt), fitted to the text column.
+    let w = r["width"].as_f64().unwrap();
+    assert!(w > 100.0 && w <= 480.0, "{w}");
+    let v = crate::cmd::objects::selected_video(&s).expect("the poster is selected and has its video");
+    assert!(v.html.contains("https://www.youtube.com/embed/dQw4w9WgXcQ"), "{}", v.html);
+    let played = run(&mut s, "picture.playVideo", json!({}));
+    assert_eq!(played["url"], "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+    assert!(s.ui_requests.iter().any(|r| r["openUrl"] == "https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+    // Through .docx: `wp15:webVideoPr` in the blip.
+    let bytes = doc4me_docx::write(&s.doc).unwrap();
+    let back = Session::new(doc4me_docx::read(&bytes).unwrap());
+    let mut videos = Vec::new();
+    back.doc.objects_in_reading_order(&mut |o| {
+        if let doc4me_doc::para::InlineObject::Image { video: Some(v), alt, .. } = o {
+            videos.push((v.clone(), alt.clone()));
+        }
+    });
+    assert_eq!(videos.len(), 1);
+    assert_eq!((*videos[0].0).clone(), (*v).clone(), "the same HTML and player size");
+    assert_eq!(videos[0].1, "Talk");
+    // The same picture inserted as a plain picture isn't a video.
+    let mut plain = Session::new(doc4me_doc::Document::new());
+    let png = crate::cmd::insert::base64_encode(&doc4me_render::video_poster(640, 360));
+    run(&mut plain, "insert.picture", json!({"data": png}));
+    assert!(plain.run("picture.playVideo", &json!({})).is_err());
+    drop(back);
+    // Undo takes the video out.
+    run(&mut s, "edit.undo", json!({}));
+    assert!(crate::cmd::objects::selected_video(&s).is_none());
+}
+
+/// Insert › 3D Models: a model file becomes one undoable picture of it; other files are refused.
+#[test]
+fn a_3d_model_is_inserted_as_its_picture() {
+    let mut s = Session::new(doc4me_doc::Document::new());
+    run(&mut s, "insert.model3d", json!({}));
+    assert!(s.ui_requests.iter().any(|r| r["open"] == "insertModel3d"), "no file: the picker");
+    let undo = s.undo_depth();
+    let bad = crate::cmd::insert::base64_encode(b"not a model");
+    assert!(s.run("insert.model3d", &json!({"data": bad, "name": "x.stl"})).is_err());
+    assert_eq!(s.undo_depth(), undo);
+    let obj = "v 0 0 0\nv 1 0 0\nv 1 1 0\nv 0 1 0\nv 0 0 1\nf 1 2 3 4\nf 1 2 5\n";
+    let r = run(&mut s, "insert.model3d", json!({"data": crate::cmd::insert::base64_encode(obj.as_bytes()), "name": "C:\\models\\Bracket.obj"}));
+    assert_eq!(r["triangles"], 3);
+    assert!((r["width"].as_f64().unwrap() - 216.0).abs() < 0.01, "3 inches wide");
+    assert_eq!(s.undo_depth(), undo + 1);
+    let Some((_, doc4me_doc::para::InlineObject::Image { alt, media, .. })) = crate::cmd::objects::selected(&s) else { panic!("a picture") };
+    assert_eq!(alt, "Bracket");
+    assert_eq!(doc4me_render::image_size(&s.doc.media[&media]), Some((800, 800)));
+}

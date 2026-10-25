@@ -17,6 +17,9 @@ use vello_cpu::peniko;
 use vello_cpu::{Pixmap, RenderContext, Resources};
 
 pub mod icon_lib;
+mod poster;
+
+pub use poster::video_poster;
 
 /// Worker threads for rasterising (0 on the web, where there are no threads).
 pub fn default_threads() -> u16 {
@@ -1047,6 +1050,7 @@ mod tests {
             float: Default::default(),
             crop: [0.0; 4],
             ole: None,
+            video: None,
         };
         hp.insert_object(0, obj, &Default::default()).unwrap();
         let id = d.add_part(doc4me_doc::PartKind::Header, vec![doc4me_doc::para_block(hp)]);
@@ -1118,6 +1122,7 @@ mod tests {
             float: Default::default(),
             crop: [0.0; 4],
             ole: None,
+            video: None,
         };
         p.insert_object(0, obj, &Default::default()).unwrap();
         d.body = vec![doc4me_doc::para_block(p)];
@@ -1154,6 +1159,7 @@ mod tests {
             float: Default::default(),
             crop: [0.0; 4],
             ole: None,
+            video: None,
         };
         p.insert_object(0, obj, &Default::default()).unwrap();
         d.body = vec![doc4me_doc::para_block(p)];
@@ -1188,6 +1194,7 @@ mod tests {
             float: Default::default(),
             crop: [0.0; 4],
             ole: None,
+            video: None,
         };
         p.insert_object(0, obj, &Default::default()).unwrap();
         d.body = vec![doc4me_doc::para_block(p)];

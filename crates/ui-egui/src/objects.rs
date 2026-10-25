@@ -183,6 +183,11 @@ pub fn pointer(app: &mut WordApp, ui: &Ui, resp: &egui::Response, pages: &[Rect]
         return true;
     }
     let Some((object, grab)) = grab_at(app, layout, pages, scale, at) else { return false };
+    // Double-click an online video to watch it (Word plays it in place; Doc4Me opens the browser).
+    if multi && !pressed && grab == Grab::Move && doc4me_engine::cmd::objects::selected_video(&app.session).is_some() {
+        let _ = app.run("picture.playVideo", json!({}));
+        return true;
+    }
     // Shift/Ctrl+click adds an object to the selected ones (or takes it out), for Group.
     let adding = ui.input(|i| i.modifiers.shift || i.modifiers.command);
     if pressed && adding && grab == Grab::Move && selected(app).is_some() {

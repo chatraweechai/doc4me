@@ -2064,3 +2064,12 @@ spacing	Normal	標準
 	Screen clipping ended without a picture.	画面の領域の取り込みは画像なしで終了しました。
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	ここでは画面の領域を使用できません。画面の画像をコピーしてから貼り付けてください。
 	Screen clipping didn't work: {reason}	画面の領域を取り込めませんでした: {reason}
+	Media	メディア
+	Online Video	オンライン ビデオ
+	Insert Video	ビデオの挿入
+	Play Video	ビデオの再生
+	Enter the web address or embed code of an online video:	オンライン ビデオの Web アドレスまたは埋め込みコードを入力してください:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	ビデオは文書内に画像として表示されます。ダブルクリックするとブラウザーで視聴できます。
+	That isn't the web address or embed code of an online video.	オンライン ビデオの Web アドレスまたは埋め込みコードではありません。
+	3D Models	3D モデル
+	Insert a 3D model from a file (.glb, .stl, .obj)	ファイルから 3D モデルを挿入します (.glb、.stl、.obj)

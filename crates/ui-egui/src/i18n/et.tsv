@@ -2098,3 +2098,12 @@ spacing	Normal	Tavaline
 	Screen clipping ended without a picture.	Ekraanilõige lõppes ilma pildita.
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Ekraanilõige pole siin saadaval. Kopeerige ekraanipilt ja kleepige see.
 	Screen clipping didn't work: {reason}	Ekraanilõige ei õnnestunud: {reason}
+	Media	Meedium
+	Online Video	Võrguvideo
+	Insert Video	Video lisamine
+	Play Video	Esita video
+	Enter the web address or embed code of an online video:	Sisestage võrguvideo veebiaadress või manustamiskood:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Video kuvatakse dokumendis pildina. Topeltklõpsake seda, et vaadata seda brauseris.
+	That isn't the web address or embed code of an online video.	See pole võrguvideo veebiaadress ega manustamiskood.
+	3D Models	3D-mudelid
+	Insert a 3D model from a file (.glb, .stl, .obj)	Lisa 3D-mudel failist (.glb, .stl, .obj)

@@ -2076,3 +2076,12 @@ spacing	Normal	Звичайний
 	Screen clipping ended without a picture.	Вирізання екрана завершилося без зображення.
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Вирізка екрана тут недоступна. Скопіюйте зображення екрана, а потім вставте його.
 	Screen clipping didn't work: {reason}	Не вдалося вирізати частину екрана: {reason}
+	Media	Мультимедіа
+	Online Video	Відео з Інтернету
+	Insert Video	Вставлення відео
+	Play Video	Відтворити відео
+	Enter the web address or embed code of an online video:	Введіть веб-адресу або код вбудовування відео з Інтернету:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Відео відображається в документі як зображення. Двічі клацніть його, щоб переглянути в браузері.
+	That isn't the web address or embed code of an online video.	Це не веб-адреса й не код вбудовування відео з Інтернету.
+	3D Models	Тривимірні моделі
+	Insert a 3D model from a file (.glb, .stl, .obj)	Вставити тривимірну модель із файлу (.glb, .stl, .obj)

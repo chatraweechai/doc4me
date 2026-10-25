@@ -19,6 +19,7 @@ pub enum InsertDialog {
     SmartArt(crate::dialogs_smart_art::SmartArtForm),
     ChartType(crate::dialogs_chart::ChartTypeForm),
     ChartData(crate::dialogs_chart::ChartDataForm),
+    Video(VideoForm),
 }
 
 impl InsertDialog {
@@ -31,6 +32,7 @@ impl InsertDialog {
             InsertDialog::ChartType(f) if f.change => "changeChartType",
             InsertDialog::ChartType(_) => "insertChart",
             InsertDialog::ChartData(_) => "chartData",
+            InsertDialog::Video(_) => "insertVideo",
         }
     }
 
@@ -44,6 +46,7 @@ impl InsertDialog {
             InsertDialog::ChartType(f) if f.change => "Change Chart Type",
             InsertDialog::ChartType(_) => "Insert Chart",
             InsertDialog::ChartData(_) => "Edit Data",
+            InsertDialog::Video(_) => "Insert Video",
         }
     }
 }
@@ -61,6 +64,7 @@ pub fn open(name: &str, app: &WordApp) -> Option<InsertDialog> {
         "insertChart" => InsertDialog::ChartType(crate::dialogs_chart::ChartTypeForm::new(app, false)?),
         "changeChartType" => InsertDialog::ChartType(crate::dialogs_chart::ChartTypeForm::new(app, true)?),
         "chartData" => InsertDialog::ChartData(crate::dialogs_chart::ChartDataForm::new(app)?),
+        "insertVideo" => InsertDialog::Video(VideoForm::default()),
         _ => return None,
     })
 }
@@ -74,7 +78,46 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut InsertDialog) -> bool {
         InsertDialog::SmartArt(f) => crate::dialogs_smart_art::picker_ui(app, ui, f),
         InsertDialog::ChartType(f) => crate::dialogs_chart::type_ui(app, ui, f),
         InsertDialog::ChartData(f) => crate::dialogs_chart::data_ui(app, ui, f),
+        InsertDialog::Video(f) => video_ui(app, ui, f),
     }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Insert Video
+
+/// Insert › Online Video: the video's web address or embed code, as Word's Insert Video asks.
+#[derive(Clone, Debug, Default, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct VideoForm {
+    pub address: String,
+    /// Insert was refused: the address isn't an online video's.
+    pub refused: bool,
+}
+
+fn video_ui(app: &mut WordApp, ui: &mut Ui, f: &mut VideoForm) -> bool {
+    let t = Tokens::get(ui.ctx());
+    ui.set_width(460.0);
+    ui.label(tl!("Enter the web address or embed code of an online video:"));
+    let edit = ui.add(crate::widgets::text_line(&mut f.address).desired_width(f32::INFINITY));
+    if edit.changed() {
+        f.refused = false;
+    }
+    ui.label(
+        egui::RichText::new(tl!("The video shows as a picture in the document. Double-click it to watch it in your browser."))
+            .small()
+            .color(t.text_dim),
+    );
+    if f.refused {
+        ui.colored_label(ui.visuals().error_fg_color, tl!("That isn't the web address or embed code of an online video."));
+    }
+    let (ok, cancel) = buttons(ui, "Insert", "Cancel", !f.address.trim().is_empty());
+    if ok {
+        if app.run("insert.video", json!({"url": f.address.trim()})).is_ok() {
+            return true;
+        }
+        f.refused = true;
+    }
+    cancel
 }
 
 /// OK / Cancel (or another OK label); returns (ok, cancel). `ok_enabled` greys OK out.
@@ -1262,6 +1305,29 @@ mod tests {
 
     fn app() -> WordApp {
         WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("one\ntwo")), Default::default())
+    }
+
+    /// Online Video: the button asks for an address (no undo step); the inserted poster plays in
+    /// the browser, from web addresses only.
+    #[test]
+    fn online_video_asks_for_an_address_and_plays_in_the_browser() {
+        let mut a = app();
+        let undo = a.session.undo_depth();
+        a.run("insert.video", json!({})).unwrap();
+        assert!(matches!(a.dialog.as_ref(), Some(crate::dialogs::Dialog::Insert(d)) if d.name() == "insertVideo"));
+        assert_eq!(a.session.undo_depth(), undo, "asking adds no undo step");
+        assert!(!a.session.dirty);
+        a.dialog = None;
+        assert!(a.run("insert.video", json!({"url": "ftp://example.com/v"})).is_err());
+        a.run("insert.video", json!({"url": "https://vimeo.com/76979871"})).unwrap();
+        assert_eq!(a.session.undo_depth(), undo + 1);
+        a.run("picture.playVideo", json!({})).unwrap();
+        assert_eq!(a.canvas.open_url.as_deref(), Some("https://vimeo.com/76979871"));
+        // A request to open anything but a web address is ignored.
+        a.canvas.open_url = None;
+        a.session.ui_requests.push(json!({"openUrl": "file:///etc/passwd"}));
+        a.run("view.zoom", json!({"percent": 100})).ok();
+        assert_eq!(a.canvas.open_url, None);
     }
 
     /// More Columns: two unequal columns with a line between apply as one undo step.

@@ -32,6 +32,11 @@ pub fn specs() -> Vec<CommandSpec> {
             sel_result(s)
         })
         .pure(),
+        CommandSpec::new("insert.model3d", "3D Models", "Insert › Illustrations", model3d).params(
+            r#"{"path"?: string, "data"?: base64, "name"?: string (the file's name, for its format), "width"?: pt, "yaw"?: degrees, "pitch"?: degrees; .glb, .stl or .obj}"#,
+        ),
+        CommandSpec::new("insert.video", "Online Video", "Insert › Media", video)
+            .params(r#"{"url"?: string (a video's web address or <iframe> embed code; omit to show Insert Video), "poster"?: base64 PNG/JPEG, "title"?: string}"#),
         CommandSpec::new("insert.icon", "Icons", "Insert › Illustrations", icon)
             .params(r#"{"id"?: string (omit to list the library), "color"?: "RRGGBB", "size"?: pt, "query"?: string, "category"?: string}"#),
         CommandSpec::new("insert.shape", "Shapes", "Insert › Illustrations", shape)
@@ -202,9 +207,68 @@ fn picture(s: &mut Session, v: &Value) -> CmdResult {
     place_picture(s, bytes, p::f32(v, "width"), p::str(v, "alt").unwrap_or(""))
 }
 
+/// Insert › 3D Models: the model in a glTF binary, STL or OBJ file (`crate::model3d`) as a
+/// picture, 3 inches wide unless `width` says otherwise. Without a file it asks the front end to
+/// pick one.
+fn model3d(s: &mut Session, v: &Value) -> CmdResult {
+    let (bytes, name) = if let Some(d) = p::str(v, "data") {
+        (base64_decode(d).ok_or_else(|| CmdError::Params("bad base64 data".into()))?, p::str(v, "name").unwrap_or("").to_string())
+    } else if let Some(path) = p::str(v, "path") {
+        (crate::io::read_file(path).map_err(CmdError::Failed)?, path.to_string())
+    } else {
+        s.ui_requests.push(json!({"open": "insertModel3d"}));
+        return sel_result(s);
+    };
+    // The file name, whichever system's separators the path has.
+    let file = name.rsplit(['/', '\\']).next().unwrap_or("");
+    let (stem, ext) = match file.rsplit_once('.') {
+        Some((stem, ext)) => (stem, Some(ext.to_ascii_lowercase())),
+        None => (file, None),
+    };
+    let mesh = crate::model3d::load(&bytes, ext.as_deref()).map_err(CmdError::Failed)?;
+    let yaw = p::f32(v, "yaw").filter(|a| a.is_finite()).unwrap_or(-30.0);
+    let pitch = p::f32(v, "pitch").filter(|a| a.is_finite()).unwrap_or(20.0).clamp(-90.0, 90.0);
+    let png = crate::model3d::render(&mesh, 800, yaw, pitch);
+    if png.is_empty() {
+        return Err(CmdError::Failed("couldn't draw the model".into()));
+    }
+    let alt: String = if stem.is_empty() { "3D model" } else { stem }.chars().take(200).collect();
+    let width = p::f32(v, "width").filter(|w| w.is_finite()).unwrap_or(216.0);
+    let mut r = place_picture(s, png, Some(width), &alt)?;
+    r["triangles"] = json!(mesh.triangles.len());
+    Ok(r)
+}
+
+/// Insert › Online Video: a picture standing for a video on the web (`doc4me_doc::video`), the
+/// poster frame given or drawn here, as wide as the video's player (never wider than the text
+/// column). Without a `url` it asks the front end for Insert Video.
+fn video(s: &mut Session, v: &Value) -> CmdResult {
+    let Some(input) = p::str(v, "url") else {
+        s.ui_requests.push(json!({"open": "insertVideo"}));
+        return sel_result(s);
+    };
+    let video = doc4me_doc::video::WebVideo::from_input(input).map_err(CmdError::Params)?;
+    let poster = match p::str(v, "poster") {
+        Some(d) => base64_decode(d).ok_or_else(|| CmdError::Params("bad base64 poster".into()))?,
+        None => doc4me_render::video_poster(video.w, video.h),
+    };
+    let alt = match p::str(v, "title").map(str::trim).filter(|t| !t.is_empty()) {
+        Some(t) => t.chars().take(1000).collect(),
+        None => video.watch_url().unwrap_or_default(),
+    };
+    let width = video.w as f32 * 0.75;
+    let mut r = place(s, poster, Some(width), &alt, Some(std::sync::Arc::new(video)))?;
+    r["video"] = json!(true);
+    Ok(r)
+}
+
 /// Insert an encoded image at the selection as an inline picture, `width` points wide (default:
 /// its natural size at 96 ppi), never wider than the text column.
 fn place_picture(s: &mut Session, bytes: Vec<u8>, width: Option<f32>, alt: &str) -> CmdResult {
+    place(s, bytes, width, alt, None)
+}
+
+fn place(s: &mut Session, bytes: Vec<u8>, width: Option<f32>, alt: &str, video: Option<std::sync::Arc<doc4me_doc::video::WebVideo>>) -> CmdResult {
     if bytes.len() > 200 << 20 {
         return Err(CmdError::Failed("image is larger than 200 MB".into()));
     }
@@ -230,7 +294,7 @@ fn place_picture(s: &mut Session, bytes: Vec<u8>, width: Option<f32>, alt: &str)
         h *= max_w / w;
         w = max_w;
     }
-    let obj = InlineObject::Image { media: key.clone(), w, h, alt: alt.to_string(), float: Float::default(), crop: [0.0; 4], ole: None };
+    let obj = InlineObject::Image { media: key.clone(), w, h, alt: alt.to_string(), float: Float::default(), crop: [0.0; 4], ole: None, video };
     // A selected Drawing Canvas takes it in.
     if let Some(i) = super::canvas::add_member(s, obj.clone())? {
         return Ok(json!({"media": key, "canvasMember": i}));

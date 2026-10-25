@@ -2076,3 +2076,12 @@ spacing	Normal	标准
 	Screen clipping ended without a picture.	屏幕剪辑已结束，但没有图片。
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	此处无法使用屏幕剪辑。请复制屏幕图片，然后粘贴。
 	Screen clipping didn't work: {reason}	屏幕剪辑失败：{reason}
+	Media	媒体
+	Online Video	联机视频
+	Insert Video	插入视频
+	Play Video	播放视频
+	Enter the web address or embed code of an online video:	输入联机视频的网址或嵌入代码:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	视频在文档中显示为图片。双击即可在浏览器中观看。
+	That isn't the web address or embed code of an online video.	这不是联机视频的网址或嵌入代码。
+	3D Models	3D 模型
+	Insert a 3D model from a file (.glb, .stl, .obj)	从文件插入 3D 模型(.glb、.stl、.obj)

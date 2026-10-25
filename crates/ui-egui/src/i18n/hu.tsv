@@ -2471,3 +2471,12 @@ spacing	Normal	Normál
 	Screen clipping ended without a picture.	A képernyőrészlet kép nélkül ért véget.
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	A képernyőrészlet itt nem érhető el. Másoljon egy képet a képernyőről, majd illessze be.
 	Screen clipping didn't work: {reason}	A képernyőrészlet nem sikerült: {reason}
+	Media	Média
+	Online Video	Online videó
+	Insert Video	Videó beszúrása
+	Play Video	Videó lejátszása
+	Enter the web address or embed code of an online video:	Írja be egy online videó webcímét vagy beágyazási kódját:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	A videó képként jelenik meg a dokumentumban. Kattintson rá duplán, ha a böngészőben szeretné megnézni.
+	That isn't the web address or embed code of an online video.	Ez nem egy online videó webcíme vagy beágyazási kódja.
+	3D Models	3D-modellek
+	Insert a 3D model from a file (.glb, .stl, .obj)	3D-modell beszúrása fájlból (.glb, .stl, .obj)

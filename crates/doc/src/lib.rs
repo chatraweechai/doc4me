@@ -37,6 +37,7 @@ pub mod section;
 pub mod smart_art;
 pub mod styles;
 pub mod table;
+pub mod video;
 pub mod wordart;
 pub mod wrap;
 

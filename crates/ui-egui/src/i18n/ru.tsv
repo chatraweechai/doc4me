@@ -2465,3 +2465,12 @@ spacing	Normal	Обычный
 	Screen clipping ended without a picture.	Вырезка экрана завершилась без рисунка.
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Вырезка экрана здесь недоступна. Скопируйте изображение экрана, а затем вставьте его.
 	Screen clipping didn't work: {reason}	Не удалось вырезать часть экрана: {reason}
+	Media	Мультимедиа
+	Online Video	Видео из Интернета
+	Insert Video	Вставка видео
+	Play Video	Воспроизвести видео
+	Enter the web address or embed code of an online video:	Введите веб-адрес или код внедрения видео из Интернета:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Видео отображается в документе как рисунок. Дважды щелкните его, чтобы посмотреть в браузере.
+	That isn't the web address or embed code of an online video.	Это не веб-адрес и не код внедрения видео из Интернета.
+	3D Models	Трехмерные модели
+	Insert a 3D model from a file (.glb, .stl, .obj)	Вставить трехмерную модель из файла (.glb, .stl, .obj)

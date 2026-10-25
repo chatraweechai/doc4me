@@ -996,7 +996,7 @@ impl Reader<'_> {
                 }
             }
         }
-        Some(InlineObject::Image { media, w, h, alt, float, crop, ole: None })
+        Some(InlineObject::Image { media, w, h, alt, float, crop, ole: None, video: web_video(blip) })
     }
 
     /// A `wpg:wgp` group (`w` × `h`): its pictures, shapes and text boxes, nested groups
@@ -1213,7 +1213,7 @@ impl Reader<'_> {
             let id = img.attr("r:id").or_else(|| img.attr("r:pict"))?;
             let media = self.media_for(rels, id)?;
             let alt = shape.attr("alt").or_else(|| img.attr("o:title")).unwrap_or("").to_string();
-            return Some(InlineObject::Image { media, w, h, alt, float, crop: [0.0; 4], ole: None });
+            return Some(InlineObject::Image { media, w, h, alt, float, crop: [0.0; 4], ole: None, video: None });
         }
         let on = |name: &str| shape.attr(name).is_none_or(|v| !matches!(v, "f" | "false" | "0"));
         let stroke = on("stroked").then(|| shape.attr("strokecolor").map_or(Some(Rgb::BLACK), vml_color)).flatten();
@@ -1417,6 +1417,24 @@ fn nv_alt(p: Option<&El>) -> (String, AltText) {
         .flat_map(|x| x.els())
         .any(|d| d.local() == "decorative" && on_off_attr(d, "val"));
     (descr, AltText { text: String::new(), title, decorative })
+}
+
+/// The online video a picture stands for: its blip's `wp15:webVideoPr` extension
+/// ([MS-ODRAWXML] 2.19). Oversized HTML is dropped (the picture stays).
+fn web_video(blip: &El) -> Option<std::sync::Arc<doc4me_doc::video::WebVideo>> {
+    let pr = blip
+        .child("a:extLst")
+        .into_iter()
+        .flat_map(|l| l.children("a:ext"))
+        .filter(|x| x.attr("uri").is_some_and(|u| u.eq_ignore_ascii_case(crate::xml::WEB_VIDEO_EXT)))
+        .flat_map(|x| x.els())
+        .find(|e| e.local() == "webVideoPr")?;
+    let html = pr.attr("embeddedHtml").unwrap_or("");
+    if html.is_empty() || html.len() > doc4me_doc::video::MAX_HTML {
+        return None;
+    }
+    let px = |n: &str| pr.attr(n).and_then(|v| v.trim().parse::<u32>().ok()).unwrap_or(0).min(100_000);
+    Some(std::sync::Arc::new(doc4me_doc::video::WebVideo { html: html.to_string(), w: px("w"), h: px("h") }))
 }
 
 fn anchor_float(c: &El) -> Float {

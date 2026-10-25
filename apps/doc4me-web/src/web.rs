@@ -194,6 +194,8 @@ fn services(inbox: Inbox, ctx: egui::Context, dirty: Rc<Cell<bool>>, saves: Rc<P
             let ctx = ctx.clone();
             let dialog = if purpose == "picture" {
                 rfd::AsyncFileDialog::new().add_filter("Pictures", IMAGE_EXTS)
+            } else if purpose == "model3d" {
+                rfd::AsyncFileDialog::new().add_filter("3D Models", doc4me_engine::model3d::EXTENSIONS)
             } else if purpose == "font" {
                 rfd::AsyncFileDialog::new().add_filter("Fonts", doc4me_fonts::FONT_FILE_EXTS)
             } else if purpose == "recipients" {

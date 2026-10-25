@@ -867,7 +867,7 @@ impl Writer<'_> {
 
     /// A picture's `pic:pic` (the image in `media/{file}`), at `off` in its group (or 0, 0).
     fn pic(&mut self, w: &mut W, o: &InlineObject, file: &str, off: (f32, f32), rels: &mut PartRels) {
-        let InlineObject::Image { media, w: iw, h: ih, alt, crop, float, .. } = o else { return };
+        let InlineObject::Image { media, w: iw, h: ih, alt, crop, float, video, .. } = o else { return };
         let rid = rels.add(rt::IMAGE, &format!("media/{file}"), false);
         self.used_media.insert(media.clone());
         w.open("pic:pic", &[]);
@@ -878,7 +878,19 @@ impl Writer<'_> {
         w.close("pic:cNvPicPr");
         w.close("pic:nvPicPr");
         w.open("pic:blipFill", &[]);
-        w.empty("a:blip", &[("r:embed", &rid)]);
+        match video {
+            Some(v) => {
+                w.open("a:blip", &[("r:embed", &rid)]);
+                w.open("a:extLst", &[]);
+                w.open("a:ext", &[("uri", crate::xml::WEB_VIDEO_EXT)]);
+                let (vw, vh) = (v.w.to_string(), v.h.to_string());
+                w.empty("wp15:webVideoPr", &[("xmlns:wp15", crate::xml::WEB_VIDEO_NS), ("embeddedHtml", &v.html), ("h", &vh), ("w", &vw)]);
+                w.close("a:ext");
+                w.close("a:extLst");
+                w.close("a:blip");
+            }
+            None => w.empty("a:blip", &[("r:embed", &rid)]),
+        }
         if crop.iter().any(|c| *c > 0.0) {
             let c = |v: f32| n((doc4me_geom::finite(v).clamp(0.0, 1.0) * 100_000.0).round() as i64);
             w.empty("a:srcRect", &[("l", &c(crop[0])), ("t", &c(crop[1])), ("r", &c(crop[2])), ("b", &c(crop[3]))]);

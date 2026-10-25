@@ -380,6 +380,7 @@ fn images_round_trip() {
         float: Float { effect: [12.0, 12.0, 27.0, 27.0], ..Default::default() },
         crop: [0.1, 0.0, 0.25, 0.05],
         ole: None,
+        video: None,
     };
     let floating = InlineObject::Image {
         media: key.clone(),
@@ -389,6 +390,7 @@ fn images_round_trip() {
         float: Float { wrap: Wrap::Square, h_rel: Anchor::Page, v_rel: Anchor::Margin, x: 36.0, y: 12.5, dist: 9.0, ..Default::default() },
         crop: [0.0; 4],
         ole: None,
+        video: None,
     };
     let aligned = InlineObject::Image {
         media: key.clone(),
@@ -408,6 +410,7 @@ fn images_round_trip() {
         },
         crop: [0.0; 4],
         ole: None,
+        video: None,
     };
     let mut floats = vec![floating.clone(), aligned];
     for wrap in [Wrap::Tight, Wrap::Through, Wrap::TopAndBottom, Wrap::BehindText, Wrap::InFrontOfText] {
@@ -419,6 +422,7 @@ fn images_round_trip() {
             float: Float { wrap, h_rel: Anchor::Column, v_rel: Anchor::Paragraph, x: 0.0, y: 0.0, dist: 0.0, ..Default::default() },
             crop: [0.0; 4],
             ole: None,
+            video: None,
         });
     }
     let mut p = Paragraph::with_text("pic: ", CharProps::default());
@@ -1004,7 +1008,16 @@ fn groups_round_trip() {
     let mut d = Document::new();
     let key = d.add_media(tiny_png(), "png");
     let story = d.add_part(PartKind::TextBox, vec![para_block(Paragraph::with_text("In the group", CharProps::default()))]);
-    let pic = InlineObject::Image { media: key, w: 60.0, h: 40.0, alt: "A picture".into(), float: Float::default(), crop: [0.0; 4], ole: None };
+    let pic = InlineObject::Image {
+        media: key,
+        w: 60.0,
+        h: 40.0,
+        alt: "A picture".into(),
+        float: Float::default(),
+        crop: [0.0; 4],
+        ole: None,
+        video: None,
+    };
     let oval = InlineObject::Shape {
         kind: ShapeKind::Ellipse,
         w: 50.0,
@@ -1091,7 +1104,16 @@ fn drawing_canvas_round_trips() {
     use doc4me_doc::para::{CanvasStyle, GroupChild};
     let mut d = Document::new();
     let key = d.add_media(tiny_png(), "png");
-    let pic = InlineObject::Image { media: key, w: 60.0, h: 40.0, alt: "In the canvas".into(), float: Float::default(), crop: [0.0; 4], ole: None };
+    let pic = InlineObject::Image {
+        media: key,
+        w: 60.0,
+        h: 40.0,
+        alt: "In the canvas".into(),
+        float: Float::default(),
+        crop: [0.0; 4],
+        ole: None,
+        video: None,
+    };
     let star = InlineObject::Shape {
         kind: ShapeKind::Star,
         w: 72.0,
@@ -1325,7 +1347,7 @@ fn kitchen_sink() -> Document {
     let mut img = Paragraph::new();
     img.insert_object(
         0,
-        InlineObject::Image { media: key, w: 30.0, h: 20.0, alt: "pic".into(), float: Float::default(), crop: [0.0; 4], ole: None },
+        InlineObject::Image { media: key, w: 30.0, h: 20.0, alt: "pic".into(), float: Float::default(), crop: [0.0; 4], ole: None, video: None },
         &CharProps::default(),
     )
     .unwrap();
@@ -1422,6 +1444,7 @@ fn hostile_model_values_still_write() {
             float: Float::default(),
             crop: [f32::NAN; 4],
             ole: None,
+            video: None,
         },
         &CharProps::default(),
     )
@@ -1692,6 +1715,7 @@ fn rotation_and_flips_round_trip() {
         float: Float { rot: 30.0, effect: [6.0; 4], ..Default::default() },
         crop: [0.0; 4],
         ole: None,
+        video: None,
     };
     let shape = |kind, float| InlineObject::Shape {
         kind,
@@ -2125,6 +2149,7 @@ fn alt_text_title_and_decorative_round_trip_for_every_object() {
         float: Float { alt: AltText { title: "Kiln".into(), ..Default::default() }, ..Default::default() },
         crop: [0.0; 4],
         ole: None,
+        video: None,
     };
     let shape = |alt: AltText| InlineObject::Shape {
         kind: ShapeKind::Ellipse,

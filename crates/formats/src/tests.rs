@@ -65,7 +65,7 @@ fn sample() -> Document {
     let n = ip.len();
     ip.insert_object(
         n,
-        InlineObject::Image { media: key, w: 60.0, h: 30.0, alt: "tiny".into(), float: Default::default(), crop: [0.0; 4], ole: None },
+        InlineObject::Image { media: key, w: 60.0, h: 30.0, alt: "tiny".into(), float: Default::default(), crop: [0.0; 4], ole: None, video: None },
         &CharProps::default(),
     )
     .unwrap();

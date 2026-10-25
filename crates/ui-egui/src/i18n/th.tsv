@@ -2486,3 +2486,12 @@ spacing	Normal	ปกติ
 	Screen clipping ended without a picture.	การตัดหน้าจอสิ้นสุดโดยไม่มีภาพ
 	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	ใช้การตัดหน้าจอที่นี่ไม่ได้ ให้คัดลอกภาพหน้าจอแล้ววาง
 	Screen clipping didn't work: {reason}	การตัดหน้าจอไม่สำเร็จ: {reason}
+	Media	สื่อ
+	Online Video	วิดีโอออนไลน์
+	Insert Video	แทรกวิดีโอ
+	Play Video	เล่นวิดีโอ
+	Enter the web address or embed code of an online video:	ใส่ที่อยู่เว็บหรือโค้ดฝังของวิดีโอออนไลน์:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	วิดีโอแสดงเป็นรูปภาพในเอกสาร ดับเบิลคลิกเพื่อดูในเบราว์เซอร์
+	That isn't the web address or embed code of an online video.	นี่ไม่ใช่ที่อยู่เว็บหรือโค้ดฝังของวิดีโอออนไลน์
+	3D Models	แบบจำลอง 3 มิติ
+	Insert a 3D model from a file (.glb, .stl, .obj)	แทรกแบบจำลอง 3 มิติจากไฟล์ (.glb, .stl, .obj)

@@ -378,6 +378,9 @@ pub enum InlineObject {
         /// saving writes the object back, not only its picture. See [`crate::graphic::Embedded`].
         #[serde(skip)]
         ole: Option<std::sync::Arc<crate::graphic::Embedded>>,
+        /// The online video this picture is the poster frame of (Insert › Online Video).
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        video: Option<std::sync::Arc<crate::video::WebVideo>>,
     },
     /// A chart or SmartArt diagram (see [`crate::graphic`]).
     Graphic {

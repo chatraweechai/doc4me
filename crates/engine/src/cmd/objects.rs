@@ -18,6 +18,13 @@ fn has_picture(s: &Session) -> Option<&'static str> {
         _ => Some("select a picture first"),
     }
 }
+/// The online video the selected picture stands for.
+pub fn selected_video(s: &Session) -> Option<std::sync::Arc<doc4me_doc::video::WebVideo>> {
+    match selected(s) {
+        Some((_, InlineObject::Image { video, .. })) => video,
+        _ => None,
+    }
+}
 fn has_object(s: &Session) -> Option<&'static str> {
     if selected(s).is_some() { None } else { Some("select a picture or shape first") }
 }
@@ -197,6 +204,15 @@ pub fn specs() -> Vec<CommandSpec> {
         .params(r#"{"maxPixels"?: n}"#)
         .when(has_picture),
         CommandSpec::new("picture.reset", "Reset Picture", "Picture Format › Adjust", reset).when(has_picture),
+        // Online Video (Insert › Media): Word plays the video in place; Doc4Me opens it in the
+        // browser (`doc4me_doc::video::WebVideo::watch_url`).
+        CommandSpec::new("picture.playVideo", "Play Video", "Picture Format", |s, _| {
+            let url = selected_video(s).and_then(|v| v.watch_url()).ok_or_else(|| CmdError::Disabled("the video has no web address".into()))?;
+            s.ui_requests.push(json!({"openUrl": url}));
+            Ok(json!({"url": url}))
+        })
+        .pure()
+        .when(|s| if selected_video(s).is_some() { None } else { Some("select an online video first") }),
         CommandSpec::new("picture.change", "Change Picture", "Picture Format › Adjust", |s, v| {
             let bytes = if let Some(d) = p::str(v, "data") {
                 super::insert::base64_decode(d).ok_or_else(|| CmdError::Params("bad base64".into()))?
