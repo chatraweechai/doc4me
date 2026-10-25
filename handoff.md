@@ -1,13 +1,14 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย (งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง)
 
-อัปเดต: 2026-10-25 · สาขา `main` · รอบที่ 6 (2026-10-25): parity ของ catalog 499/499 (100%) · เวอร์ชันยังเป็น 1.1.1 (ห้ามออกรุ่นใหม่จนกว่าผู้ใช้สั่ง) · ดูหัวข้อ "session 2026-10-25 รอบที่ 6" ด้านล่าง
+อัปเดต: 2026-10-25 · สาขา `main` · รอบที่ 7: งานค้างที่ session ทำได้เสร็จแล้ว `cargo xtask ci` ผ่านทั้ง workspace · รอบที่ 6 (2026-10-25): parity ของ catalog 499/499 (100%) · เวอร์ชันยังเป็น 1.1.1 (ห้ามออกรุ่นใหม่จนกว่าผู้ใช้สั่ง) · ดูหัวข้อ "session 2026-10-25 รอบที่ 6" ด้านล่าง
 
 ## session 2026-10-25 รอบที่ 7: งานค้างใน handoff ข้อ 2–4
 
 - ผู้ใช้สั่ง "ทำต่อ" (ทำงานค้างที่ session ทำได้ ข้ามงานของเจ้าของ repo)
 - ทำแล้ว: เอกสารตรงกับโค้ด (`b303ed9`: ตัวเลข 625 คำสั่ง · 1,816 เทสต์ · ~188,000 บรรทัด, ROADMAP Upcoming, gap #29, README สองภาษา); `cargo audit` ไม่มีช่องโหว่ (คำเตือน unmaintained 5 รายการ)
-- กำลังทำ: `cargo xtask ci` ทั้ง workspace (log ที่ scratchpad `ci.log` ของ session; fmt ผ่านแล้ว) และถ่ายภาพใน `docs/images` ใหม่หลังได้ผล CI (ติดตั้ง `mesa-vulkan-drivers` แล้ว)
-- ถ้า session ล้มกลางทาง: รัน `CARGO_INCREMENTAL=0 cargo xtask ci` ใหม่ แล้วรันสคริปต์ `docs/images/shots/*.jsonl` ด้วย `ui_shot` ตามหัวข้อ "ถ่ายภาพหน้าจอ"
+- `cargo xtask ci` ทั้ง workspace (หลัง `cargo clean`, `CARGO_INCREMENTAL=0`): fmt, clippy, test (ผ่าน 1,809 ล้ม 0 ignored 0) ผ่าน แต่ล้มที่ `assets` เพราะสคริปต์ `docs/images/shots/*.jsonl` 11 ไฟล์ไม่มีแถวใน `ATTRIBUTION.md` (ค้างมาตั้งแต่ 2026-10-21) แก้แล้วใน `c6a91fe`; `assets`, `layers`, `wasm` ผ่าน — CI บน GitHub ไม่รันขั้นเหล่านี้ ควรรัน `cargo xtask ci` เองก่อนออกรุ่น
+- ถ่ายภาพใน `docs/images` ใหม่ทั้ง 11 ภาพ: เปลี่ยนจริงแค่ `review.png` (ปุ่ม Translate) ที่เหลือต่างแค่เคอร์เซอร์/วันที่จึงคืนค่าเดิม
+- ยังเหลือเฉพาะงานของเจ้าของ repo (ข้อ 5.1–5.3: แท็ก v1.0.0, secret ลงนาม, ruleset, ลบสาขาเก่า, PR Dependabot #1–#4) และการทดสอบด้วยมือบนเครื่องจริง (Dictate กับไมโครโฟน, Screen Clipping บน Windows, เปิดไฟล์ที่มีวิดีโอออนไลน์ใน Word, วัด parity/alpha gate ใหม่บน Windows)
 
 ## session 2026-10-25 รอบที่ 6: parity ที่เหลือ 8 รายการด้วยของฟรี/โอเพนซอร์ส
 

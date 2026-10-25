@@ -199,6 +199,10 @@
     - `README.md` และ `README.th.md`: เพิ่มบรรทัด "รุ่นถัดไป" ของพิมพ์ด้วยเสียง (รองรับภาษาไทย ทำงานบนเครื่อง) แปลเอกสาร รูปภาพออนไลน์ สมการด้วยลายมือ และ Get Add-ins
   - ผู้ใช้: ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
   - ตรวจสอบ: นับคำสั่งด้วย `grep -rho 'CommandSpec::new("[^"]*"' crates apps | sort -u | wc -l` (625), เทสต์ด้วย `grep -rn '#\[test\]' crates apps xtask` (1,816), บรรทัดของไฟล์ `.rs` ใน `crates`, `apps`, `xtask` (188,030); PR ที่เปิดอยู่จาก GitHub (#1–#4 ของ Dependabot); สัญลักษณ์ของตัวจดจำจากคอมเมนต์ต้นไฟล์และ `templates()` ใน `ink_math.rs`
+- **ภาพ `docs/images/review.png` ถ่ายใหม่ให้เห็นปุ่มแปล (Translate) ในแท็บรีวิว** (`docs/images/review.png`)
+  - เหตุผล: handoff ข้อ 4 ให้ตรวจความใหม่ของภาพใน `docs/images`; ถ่ายใหม่ทั้ง 11 ภาพจาก `docs/images/shots/*.jsonl` ด้วย `ui_shot` (Vulkan แบบซอฟต์แวร์ `mesa-vulkan-drivers`) มีแค่ `review.png` ที่ต่างจริง (กลุ่มภาษามีปุ่ม Translate); `hero.png` และ `dark.png` ต่างแค่เคอร์เซอร์กะพริบ (412 พิกเซล), `backstage.png` ต่างแค่วันที่ในภาพย่อของแม่แบบจดหมาย (28 พิกเซล) และ `layout.png` 2 พิกเซล จึงคืนค่าเดิมไม่ให้ไฟล์เปลี่ยนโดยไม่มีเหตุ อีก 6 ภาพได้ไฟล์เหมือนเดิมทุกไบต์
+  - ผู้ใช้: เฉพาะเอกสารใน repo ไม่มีผลต่อโปรแกรม ไฟล์ .docx หรือ installer
+  - ตรวจสอบ: สคริปต์ทั้ง 11 ไฟล์จบด้วยรหัส 0; เทียบพิกเซลกับภาพเดิมด้วย Pillow (`ImageChops.difference`) แล้วเปิดดู `review.png` ว่าแถบคำสั่งและข้อคิดเห็นแสดงถูกต้อง
 ### แก้ไข
 
 - **`cargo xtask ci` ผ่านทั้ง workspace อีกครั้ง: สคริปต์ถ่ายภาพหน้าจอมีแถวใน `ATTRIBUTION.md`** (`ATTRIBUTION.md`)
