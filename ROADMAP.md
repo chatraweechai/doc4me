@@ -14,7 +14,7 @@ agent control. This page is the summary; the assessment is
 
 | Number | Value | Kind |
 |---|---|---|
-| Ribbon/menu catalog coverage | **499 / 500 (99.8%)** | measured (`cargo xtask parity` → [`docs/parity-checklist.md`](docs/parity-checklist.md)) |
+| Ribbon/menu catalog coverage | **499 / 499 (100%)** | measured (`cargo xtask parity` → [`docs/parity-checklist.md`](docs/parity-checklist.md)) |
 | **Feature breadth** (weighted, incl. dialog options, styles, languages beyond the ribbon) | **~80%** | estimated |
 | **Ready for real work** (full target) | **~60%** (55–63%) | estimated, additive weighted sum over the dimensions |
 | **Mainstream practitioner** | **~55%** | estimated: weekly-work depth × discounts for interaction (×0.93), stability (×0.90), file exchange (×0.90) |
@@ -134,7 +134,7 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 
 | Date | What landed |
 |---|---|
-| 2026-10-25 | View › Window works (New Window, Split, Arrange All, View Side by Side, Synchronous Scrolling, Switch Windows); Insert › Screenshot › Screen Clipping through the system's own clipping (Snipping Tool, `screencapture`, the XDG Screenshot portal or a desktop tool), inserted as one undoable picture; Insert › Online Video (a poster picture keeping `wp15:webVideoPr`, played in the browser) and Insert › 3D Models (`.glb`, `.stl`, `.obj` drawn as a picture); the web build passes clippy on wasm32; catalog 492/500 |
+| 2026-10-25 | View › Window works (New Window, Split, Arrange All, View Side by Side, Synchronous Scrolling, Switch Windows); Insert › Screenshot › Screen Clipping through the system's own clipping (Snipping Tool, `screencapture`, the XDG Screenshot portal or a desktop tool), inserted as one undoable picture; Insert › Online Video (a poster picture keeping `wp15:webVideoPr`, played in the browser) and Insert › 3D Models (`.glb`, `.stl`, `.obj` drawn as a picture); the web build passes clippy on wasm32; then Online Pictures (Openverse), Translate (MyMemory or LibreTranslate), Get Add-ins (Doc4Me's own catalog), Ink Equation and Ink to Math (own recogniser) and Dictate (whisper.cpp on the computer); catalog 499/499 |
 | 2026-10-24 | Home › Font: Convert to Thai Digits and Convert to Arabic Digits (0–9 ↔ ๐–๙ in the selection, each run keeping its formatting, a revision with Track Changes on); dates and times people see (Insert › Date and Time, DATE fields, the date picker's today, the Home greeting) use the computer's time zone instead of UTC; Save As and File › Export write page images as JPG/JPEG (`file.exportJpeg`) as well as PNG; CI passes the signing secrets to the packaging step only |
 | 2026-10-22 | Doc4Me 1.1.1: Distributed and Thai Distributed alignment buttons; character spacing Normal/Expanded/Condensed by 0–1584 pt; releases can be made from the Actions tab (`release: true`) |
 | 2026-10-21 | Doc4Me 1.1.0: the Thai and Word-fidelity work since 1.0.0 as a Windows x64 MSI and portable zip (installs over 1.0.0); reading-mode and status strings filled in the ru/hu/tr/th/it catalogs (th: 2,452 entries); equation normal text (`m:nor`) in TH Sarabun sized like the original, with a test |

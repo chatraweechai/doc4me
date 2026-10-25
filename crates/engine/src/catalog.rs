@@ -304,7 +304,6 @@ Review|Changes|Previous Change|review.previousChange
 Review|Changes|Next Change|review.nextChange
 Review|Compare|Compare|review.compare
 Review|Compare|Combine|review.combine
-Review|Protect|Block Authors|review.blockAuthors
 Review|Protect|Restrict Editing|review.restrict
 Review|Ink|Hide Ink|review.hideInk
 View|Views|Read Mode|view.readMode

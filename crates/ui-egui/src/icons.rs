@@ -964,7 +964,7 @@ pub fn paint(p: &Painter, r: Rect, name: &str, c: Color32, accent: Color32) {
             pen.page(10.0, 5.0, 18.0, 17.0);
             pen.line_c(&[(6.0, 18.5), (14.0, 18.5)], a);
         }
-        "protect" | "restrict" | "blockAuthors" => {
+        "protect" | "restrict" => {
             pen.rect(5.0, 9.0, 15.0, 17.5, c);
             pen.line_c(&[(7.0, 9.0), (7.0, 6.0), (10.0, 3.0), (13.0, 6.0), (13.0, 9.0)], a);
         }

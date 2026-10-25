@@ -49,8 +49,8 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 |---|---|---|---|
 | M0 | Skeleton and vertical slice (model, layout, render, engine, Word-style UI, CLI, MCP, web) | done | — |
 | M1 | DOCX I/O | done (first version); charts, SmartArt and embedded OLE objects are read and written back; real-world corpus not started | 45–75 h |
-| M2 | Home tab | done (Paste Special, Clipboard pane, Style Inspector, Manage Styles and Asian Typography landed); Dictate needs a speech service | — |
-| M3 | Insert tab | done except what needs an online service or a handwriting model (Online Pictures, Get Add-ins, Ink Equation): equations (#191), icons (#309), charts, SmartArt, Screenshot › Screen Clipping, Online Video and 3D Models (as a picture) landed | — (service-bound items wait for the owner) |
+| M2 | Home tab | done (Paste Special, Clipboard pane, Style Inspector, Manage Styles and Asian Typography landed; Dictate with whisper.cpp on the computer, 2026-10-25) | — |
+| M3 | Insert tab | done: equations (#191), icons (#309), charts, SmartArt, Screenshot › Screen Clipping, Online Video, 3D Models (as a picture), Online Pictures (Openverse), Get Add-ins (Doc4Me's own catalog) and Ink Equation landed | — |
 | M4 | Layout and Design tabs | done except column balancing, group | 6–10 h |
 | M5 | Tables | done (row splitting, floating tables, style formatting); custom table styles (#256); Draw Table and Eraser (#303) | 6–10 h |
 | M6 | References | first version done (TOC fields, cross-references, Zotero); footnote continuation missing; all 12 bibliography styles (#383) | 15–25 h |
@@ -58,7 +58,7 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 | M8 | View | done; window commands (New Window, Arrange All, Split, View Side by Side, Synchronous Scrolling, Switch Windows) landed 2026-10-25 | — |
 | M9 | Mailings | done (first version); Excel/Outlook data sources and email merge missing | 6–10 h |
 | M10 | File/Backstage | mostly done; native printing, Options depth missing | 12–20 h |
-| M11 | Draw and objects | text wrap, text boxes, canvas handles, rotation (#332), ink pens and eraser (#307), contour wrap (#354), lasso, Add Pen, Ink to Shape and Ink Replay (#395) done; grouping (`arrange.group`) done; Ink to Math missing (needs a handwriting model) | 35–55 h |
+| M11 | Draw and objects | text wrap, text boxes, canvas handles, rotation (#332), ink pens and eraser (#307), contour wrap (#354), lasso, Add Pen, Ink to Shape and Ink Replay (#395) done; grouping (`arrange.group`) and Ink to Math (own recogniser, 2026-10-25) done | 30–50 h |
 | M12 | Formats breadth (PDF, ODT, RTF, HTML, MD, TXT, LaTeX, `.doc` import) | done (first versions); encrypted `.docx` opens and saves (agile encryption); `.doc` write, encrypted `.doc`, minor formats missing | 60–100 h |
 | M13 | Performance budgets | on track (1.4 ms relayout); large real-world documents unmeasured | 10–20 h |
 | M14 | 1.0 polish, packaging, signing | Doc4Me v1.1.0 and v1.1.1 published (Windows x64 MSI and portable zip, unsigned; CI signs once the signing secrets are set); WordCraft, upstream, shipped v0.1.0–v0.4.0 on every platform | — |
@@ -74,6 +74,7 @@ languages, screen-reader access, ecosystem decisions (VBA, add-ins, cloud), an i
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-25 | trivial | M2, M3 and M11 done: Dictate, Online Pictures, Get Add-ins, Ink Equation and Ink to Math landed with free and open-source parts; catalog parity 499/499 |
 | 2026-10-25 | trivial | M1, M2, M3, M8, M11 and M12 rows checked against the code; M3 and M8 done apart from service-bound items; alpha gate's command count 618 |
 | 2026-10-11 | trivial | M15: Polish interface and Polish proofing landed |
 | 2026-10-11 | trivial | M3: icons landed (#309) |

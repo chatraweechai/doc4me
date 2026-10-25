@@ -1608,7 +1608,6 @@ fn review(app: &mut WordApp, ui: &mut Ui) {
         big(ui, app, "compare", "Compare", "review.compare", json!({}), false);
     });
     group(ui, "Protect", None, app, |ui, app| {
-        big(ui, app, "blockAuthors", "Block\nAuthors", "review.blockAuthors", json!({}), false);
         big(ui, app, "restrict", "Restrict\nEditing", "review.restrict", json!({}), false);
     });
     group(ui, "Ink", None, app, |ui, app| {

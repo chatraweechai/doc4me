@@ -310,7 +310,6 @@ fn controls(tab: &str) -> Vec<Control> {
             c("Previous", "review.previousChange"),
             c("Next", "review.nextChange"),
             c("Compare", "review.compare"),
-            c("Block Authors", "review.blockAuthors"),
             c("Restrict Editing", "review.restrict"),
             c("Hide Ink", "review.hideInk"),
         ],

@@ -1,6 +1,21 @@
 # Handoff: Doc4Me 1.1.1 และงานภาษาไทย (งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง)
 
-อัปเดต: 2026-10-25 · สาขา `main` · session 2026-10-25 รอบที่ 5 เสร็จ: parity 492/500 (ที่เหลือ 8 รายการต้องใช้บริการภายนอกหรือการตัดสินใจของเจ้าของ repo) CI ของ `main` ผ่านทุก commit ที่มีโค้ด: `a47ba63` ([run 40157107569](https://github.com/chatraweechai/doc4me/actions/runs/40157107569)), `46ef579` ([run 40162369389](https://github.com/chatraweechai/doc4me/actions/runs/40162369389), รวม `4cb88d6` ที่ถูกยกเลิกโดย concurrency), `2c02c50` ([run 40163818414](https://github.com/chatraweechai/doc4me/actions/runs/40163818414)) · เวอร์ชันยังเป็น 1.1.1 (ห้ามออกรุ่นใหม่จนกว่าผู้ใช้สั่ง) ดูหัวข้อแรก
+อัปเดต: 2026-10-25 · สาขา `main` · รอบที่ 6 (2026-10-25): parity ของ catalog 499/499 (100%) · เวอร์ชันยังเป็น 1.1.1 (ห้ามออกรุ่นใหม่จนกว่าผู้ใช้สั่ง) · ดูหัวข้อ "session 2026-10-25 รอบที่ 6" ด้านล่าง
+
+## session 2026-10-25 รอบที่ 6: parity ที่เหลือ 8 รายการด้วยของฟรี/โอเพนซอร์ส
+
+- ผู้ใช้สั่ง: "ทำส่วน parity ที่เหลือ 8 รายการ โดยเลือกใช้รายการ open-source หรือฟรีเป็นอย่างแรก หากจำเป็นต้องใช้แบบมีค่าใช้จ่ายให้ตัด parity นั้นทิ้งไป และไม่ต้องแจ้งอีก" และ "ไม่ต้องให้ release workflow ตั้ง CRAFT_FONTS_DIR ต่อไปนี้ข้ามฟอนต์ CJK ของ craft-fonts ไม่ต้องแจ้งอีก"
+- **การตัดสินใจถาวรของเจ้าของ repo (ไม่ต้องถามหรือแจ้งอีก)**: (1) release workflow ไม่ตั้ง `CRAFT_FONTS_DIR` ข้ามฟอนต์ CJK ของ craft-fonts; (2) parity ที่ต้องใช้บริการเสียเงินให้ตัดออกจาก catalog โดยไม่ต้องแจ้ง
+- ทำแล้ว (รายละเอียดและผลตรวจใน `CHANGELOG.md` `[Unreleased]`):
+  - บริการเรียกเว็บ `Services::fetch` (desktop: `curl` ของระบบ https เท่านั้น; เว็บ: `fetch` ของเบราว์เซอร์) — `caa9274`
+  - Online Pictures ผ่าน Openverse (ฟรี CC) พร้อมบรรทัดเครดิต — `caa9274`
+  - Translate ผ่าน MyMemory (ฟรี) หรือ LibreTranslate (โอเพนซอร์ส) — `98b4cce`
+  - Get Add-ins: แค็ตตาล็อก `addins/catalog.json` ใน repo นี้ + 3 ชุดแมโคร ตรวจ SHA-256 และคำสั่งที่อนุญาต — `d9b7edd` (ตรวจบน GitHub จริงแล้ว hash ตรง)
+  - Ink Equation + Ink to Math ด้วยตัวจดจำ $P ของเราเอง — `af604a3`
+  - Dictate ด้วย whisper.cpp บนเครื่อง (โมเดลจาก Hugging Face ตรวจ SHA-256) — `8aa0dea`; ทดสอบจริงด้วยเสียงสังเคราะห์ espeak-ng ผ่าน; CI Windows run 40178908529 ล้มเพราะ bindings ที่มากับ crate เป็นของ Linux → แก้โดยให้ bindgen สร้างบนแต่ละแพลตฟอร์ม
+  - Block Authors ตัดออก (ต้องใช้ SharePoint ของ Microsoft 365 แบบเสียเงิน)
+- สภาพแวดล้อม: ติดตั้ง `libasound2-dev` (cpal) และ `espeak-ng` (ทดสอบ Dictate) ใน container; build ใช้ `CARGO_INCREMENTAL=0` และ `-p` ทีละ package เพราะดิสก์จำกัด (เคย `cargo clean` ได้คืน 26 GB)
+- ทดสอบกับบริการจริง: `DOC4ME_NET_TESTS=1 cargo test -p doc4me fetch` (Openverse, httpbin), `DOC4ME_WHISPER_TEST=<wav 16-bit mono> cargo test -p doc4me real_model` (ดาวน์โหลดโมเดล 60 MB)
 
 ## session 2026-10-24: ปุ่มแปลงเลขไทย/อารบิก, JPG/JPEG และงานค้างจาก handoff
 
@@ -49,7 +64,7 @@
   - ภาพ `hero`, `thai`, `dark`, `dark-th`, `font`, `font-th` ถ่ายใหม่แล้ว ภาพอื่นใน `docs/images` (backstage, design, layout, references, review) ไม่เห็นกลุ่มฟอนต์ของหน้าหลักจึงไม่ได้ถ่ายใหม่
   - ตัวเลข parity และ alpha gate ยังเป็นค่าที่วัดกับ Word for Mac ต้องวัดใหม่บนเครื่อง Windows ที่มี Word (session บนคลาวด์ทำไม่ได้)
   - ข้อ 3 ที่เหลือ: job ทดสอบบน Linux ใน CI รอเจ้าของ repo ตัดสินใจ (`cargo audit` รันแล้วในรอบ 5; audit ภาษาที่ติด `#[ignore]` หาสาเหตุและแก้แล้ว)
-  - **[เจ้าของ repo]** เพิ่มเติมจากรอบ 5: เปิดไฟล์ .docx ที่ Doc4Me บันทึกซึ่งมีวิดีโอออนไลน์ใน Word for Windows เพื่อยืนยันว่า Word เล่นได้; ทดสอบ Screen Clipping บน Windows/macOS/เดสก์ท็อป Linux ด้วยมือ; ตัดสินใจเรื่อง release workflow จะตั้ง `CRAFT_FONTS_DIR` หรือไม่ (ตอนนี้รุ่น Windows ไม่มีฟอนต์ CJK ของ craft-fonts)
+  - **[เจ้าของ repo]** เพิ่มเติมจากรอบ 5: เปิดไฟล์ .docx ที่ Doc4Me บันทึกซึ่งมีวิดีโอออนไลน์ใน Word for Windows เพื่อยืนยันว่า Word เล่นได้; ทดสอบ Screen Clipping และ Dictate (ไมโครโฟน) บน Windows/macOS/เดสก์ท็อป Linux ด้วยมือ
   - ข้อ 5.7 ทั้งหมดยังรอเจ้าของ repo
 - CI ของ `main`: run ของ `21bb34a` (40100455417) และ `b65c320` (40100747357) ถูกยกเลิกโดย concurrency เพราะมี push ใหม่ (ไม่ใช่การล้ม); [run 40101348687](https://github.com/chatraweechai/doc4me/actions/runs/40101348687) ของ `0cdf2bb` (คอมมิตโค้ดล่าสุด) **ผ่าน** (ตรวจ 14:26 UTC): job `build` สำเร็จทุกขั้น รวมขั้นใหม่ "Build doc4me + doc4me-cli" (14:11:45–14:22:23) และ "Sign and package MSI + portable zip" (14:22:23–14:23:05) ส่วน job `release` ถูกข้ามตามปกติของ push; คอมมิตหลังจากนั้นแก้แค่เอกสารและภาพ จึงใส่ `[skip ci]` run นี้จึงเป็น build ล่าสุดของโค้ด
 - ผลตรวจในเครื่องรอบสุดท้าย: engine 378 + 13 + 8, cli/mcp/render ผ่าน, ui-egui 324 (`--include-ignored`), clippy `-D warnings` `--all-targets` ของ engine, ui-egui, cli, mcp, render, xtask ผ่าน, `cargo fmt --all --check` ผ่าน, `cargo xtask parity` 485/500; ภาพหน้าจอยืนยันปุ่มแปลงเลขและผลการแปลง
