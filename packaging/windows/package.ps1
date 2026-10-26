@@ -21,7 +21,7 @@
   pwsh packaging/windows/package.ps1 -Arch x64
   pwsh packaging/windows/package.ps1 -Arch x86 -SkipBuild
   pwsh packaging/windows/package.ps1 -Arch x64 -BuildOnly  # then -SkipBuild with the signing secrets set
-  pwsh packaging/windows/package.ps1 -Arch arm64     # cross-compiled; needs the MSVC ARM64 build tools
+  pwsh packaging/windows/package.ps1 -Arch arm64     # cross-compiled; needs the MSVC ARM64 build tools, clang-cl and Ninja
 #>
 param(
   [ValidateSet('x64', 'x86', 'arm64')] [string] $Arch = 'x64',
@@ -69,6 +69,26 @@ if (-not $SkipBuild) {
   [Environment]::SetEnvironmentVariable($flagVar, '-C target-feature=+crt-static')
   # Fail the build (rather than warn) if the icon/VERSIONINFO can't be embedded.
   $env:DOC4ME_REQUIRE_WINRES = '1'
+  # whisper.cpp (Home > Dictate) builds ggml, which refuses MSVC's compiler for ARM ("use clang"):
+  # on arm64, configure it with clang-cl (LLVM, part of Visual Studio's C++ tools and of the
+  # GitHub runners) through Ninja. whisper-rs-sys passes CMAKE_* and GGML_* variables to CMake,
+  # which runs with the ARM64 headers and libraries the cc crate found; its configure checks build
+  # static libraries, so they need no ARM64 linker. CMake wants forward slashes in compiler paths.
+  if ($Arch -eq 'arm64' -and -not $env:CMAKE_GENERATOR) {
+    $clang = Get-Command clang-cl -ErrorAction SilentlyContinue
+    if (-not $clang) { throw 'arm64 builds need clang-cl (LLVM) on PATH for whisper.cpp' }
+    if (-not (Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'arm64 builds need Ninja on PATH for whisper.cpp' }
+    $clangPath = $clang.Source -replace '\\', '/'
+    $env:CMAKE_GENERATOR = 'Ninja'
+    $env:CMAKE_C_COMPILER = $clangPath
+    $env:CMAKE_CXX_COMPILER = $clangPath
+    $env:CMAKE_ASM_COMPILER = $clangPath
+    $env:CMAKE_C_COMPILER_TARGET = $Target
+    $env:CMAKE_CXX_COMPILER_TARGET = $Target
+    $env:CMAKE_ASM_COMPILER_TARGET = $Target
+    $env:CMAKE_TRY_COMPILE_TARGET_TYPE = 'STATIC_LIBRARY'
+    $env:GGML_NATIVE = 'OFF'
+  }
   Invoke-Native "cargo build ($Target)" { cargo build --release --locked -p doc4me -p doc4me-cli --target $Target }
 }
 if ($BuildOnly) {
