@@ -115,6 +115,21 @@ const MAC_LIGHTS_LEFT: f32 = 10.0;
 /// from the top of the window.
 pub const MAC_CONTENT_LEFT: f32 = MAC_LIGHTS_LEFT + 2.0 * MAC_LIGHT_PITCH + MAC_LIGHT + (MAC_TITLE_BAR - MAC_LIGHT) / 2.0;
 
+/// The AutoSave switch pressed (a click, or Alt, Z, A): on or off, or Save As first where AutoSave
+/// needs a file the user saved (#196).
+pub(crate) fn press_autosave(app: &mut WordApp) {
+    match app.autosave_block() {
+        None => {
+            let _ = app.run("file.autosave", json!({}));
+        }
+        // AutoSave comes on once Save As has saved (maybe on a later frame, #94).
+        Some(b) if b.save_as_helps() => {
+            let _ = app.save_as(crate::file_dialogs::AfterSave::AutoSave);
+        }
+        Some(b) => app.status(b.reason()),
+    }
+}
+
 pub fn title_bar(app: &mut WordApp, ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
     // macOS: shorter, so the system's traffic lights are centred in it; the tallest controls
@@ -158,17 +173,12 @@ pub fn title_bar(app: &mut WordApp, ui: &mut Ui) {
                 let tip = block
                     .as_ref()
                     .map_or_else(|| tl!("AutoSave saves every change to the file (needs a saved document)").to_string(), |b| b.reason());
+                // Alt, Z, A: the switch's keytip.
+                if app.ui.keytips == crate::keytips::Phase::Tabs && "ZA".starts_with(app.ui.keytip_prefix.as_str()) {
+                    app.keytip_rects.push((r, "ZA".into()));
+                }
                 if resp.on_hover_text(tip).clicked() {
-                    match block {
-                        None => {
-                            let _ = app.run("file.autosave", json!({}));
-                        }
-                        // AutoSave comes on once Save As has saved (maybe on a later frame, #94).
-                        Some(b) if b.save_as_helps() => {
-                            let _ = app.save_as(crate::file_dialogs::AfterSave::AutoSave);
-                        }
-                        Some(b) => app.status(b.reason()),
-                    }
+                    press_autosave(app);
                 }
                 ui.add_space(8.0);
                 quick_access(ui, app);
@@ -225,6 +235,11 @@ pub fn title_bar(app: &mut WordApp, ui: &mut Ui) {
             let track = TypeRung::Chrome.tracking();
             let w = text_width(ui.painter(), &title, &font, track, t.text);
             let cx = full.center().x;
+            // Alt, B: save the document under another name or in another place.
+            if app.ui.keytips == crate::keytips::Phase::Tabs && app.ui.keytip_prefix.is_empty() {
+                let at = if cx - w / 2.0 > qat_end + 10.0 { cx - w / 2.0 - 20.0 } else { qat_end + 6.0 };
+                app.keytip_rects.push((Rect::from_min_size(pos2(at, full.center().y - 8.0), vec2(16.0, 16.0)), "B".into()));
+            }
             if cx - w / 2.0 > qat_end + 10.0 && cx + w / 2.0 < right_start - 10.0 {
                 paint_text(
                     ui.painter(),

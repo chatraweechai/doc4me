@@ -36,6 +36,8 @@ pub enum Phase {
     Tabs,
     /// Badges over one tab's groups and buttons.
     Commands,
+    /// The items of a control's list, picked by their own letters ([`menu_items`]).
+    Menu(&'static str),
 }
 
 /// Which ribbon item a letter is bound to, and what pressing it does.
@@ -47,6 +49,8 @@ pub enum Target {
     Cmd { id: &'static str, params: serde_json::Value },
     /// Open a dialog by name.
     Dialog { name: &'static str },
+    /// Show a list's items, each with its own letter ([`menu_items`]).
+    Menu(&'static str),
 }
 
 impl Target {
@@ -61,7 +65,32 @@ impl Target {
             Target::Dialog { name } => {
                 let _ = app.run("ui.dialog", serde_json::json!({ "name": name }));
             }
+            Target::Menu(menu) => app.ui.keytips = Phase::Menu(menu),
         }
+    }
+}
+
+/// The items of a list a keytip opens, with their letters (Word: Alt, R, P, 1, then L for the
+/// comments as a list).
+fn menu_items(menu: &str) -> Vec<(&'static str, &'static str, Target)> {
+    let cmd = |id: &'static str, params: serde_json::Value| Target::Cmd { id, params };
+    match menu {
+        // Review › Show Comments: beside the text (the balloons) or as a list (the Comments pane).
+        "comments" => vec![
+            ("C", "Contextual", cmd("view.commentsPane", serde_json::json!({"value": false}))),
+            ("L", "List", cmd("view.commentsPane", serde_json::json!({"value": true}))),
+        ],
+        // Mailings › Finish & Merge.
+        "finish" => vec![
+            ("E", "Edit Individual Documents…", cmd("mailings.finish", serde_json::json!({}))),
+            ("P", "Print Documents…", cmd("mailings.print", serde_json::json!({}))),
+        ],
+        // Review › Language.
+        "language" => vec![
+            ("L", "Set Proofing Language…", Target::Dialog { name: "language" }),
+            ("P", "Language Preferences…", cmd("file.options", serde_json::json!({"pane": "language"}))),
+        ],
+        _ => Vec::new(),
     }
 }
 
@@ -83,13 +112,19 @@ const TAB_LETTERS: [(&str, &str); 12] = [
     ("Help", ""),
 ];
 
-/// Word's own keytips for controls whose letters don't follow from their names: Insert › Object
-/// (J, J), SmartArt (M) and WordArt (W); View › Read Mode (F).
+/// Word's own keytips for controls whose letters don't follow from their names: Home › Clipboard's
+/// launcher (F, O); Insert › Object (J, J), SmartArt (M) and WordArt (W); Review › Show Comments
+/// (P, 1), Language (U) and Language Preferences (L); View › Read Mode (F).
 fn word_letter(tab: &str, tip: &str) -> Option<&'static str> {
     Some(match (tab, tip) {
+        ("Home", "Clipboard") => "FO",
         ("Insert", "Object") => "JJ",
         ("Insert", "SmartArt") => "M",
         ("Insert", "WordArt") => "W",
+        ("Mailings", "Finish & Merge") => "F",
+        ("Review", "Show Comments") => "P1",
+        ("Review", "Language") => "U",
+        ("Review", "Language Preferences") => "L",
         ("View", "Read Mode") => "F",
         _ => return None,
     })
@@ -156,6 +191,8 @@ fn controls(tab: &str) -> Vec<Control> {
     let p = |tip: &'static str, id: &'static str, params: serde_json::Value| Control { tip, target: Target::Cmd { id, params } };
     match tab {
         "Home" => vec![
+            // The Clipboard group's launcher: the Clipboard pane.
+            c("Clipboard", "edit.clipboardPane"),
             m("Paste", "edit.paste"),
             c("Cut", "edit.cut"),
             c("Copy", "edit.copy"),
@@ -302,7 +339,7 @@ fn controls(tab: &str) -> Vec<Control> {
             p("Next Record", "mailings.next", serde_json::json!({})),
             c("Find Recipient", "mailings.findRecipient"),
             c("Check for Errors", "mailings.checkErrors"),
-            c("Finish & Merge", "mailings.finish"),
+            Control { tip: "Finish & Merge", target: Target::Menu("finish") },
         ],
         "Review" => vec![
             c("Spelling & Grammar", "review.spelling"),
@@ -311,12 +348,14 @@ fn controls(tab: &str) -> Vec<Control> {
             c("Read Aloud", "review.readAloud"),
             c("Check Accessibility", "file.accessibility"),
             c("Translate", "review.translate"),
-            c("Language", "review.language"),
+            Control { tip: "Language", target: Target::Menu("language") },
+            // Not a button of its own (it is in the Language list), but Word gives it a keytip.
+            p("Language Preferences", "file.options", serde_json::json!({"pane": "language"})),
             c("New Comment", "review.newComment"),
             c("Delete", "review.deleteComment"),
             c("Previous", "review.previousComment"),
             c("Next", "review.nextComment"),
-            c("Show Comments", "view.commentsPane"),
+            Control { tip: "Show Comments", target: Target::Menu("comments") },
             c("Track Changes", "review.trackChanges"),
             m("Display for Review", "review.markup"),
             c("Reviewing Pane", "view.reviewingPane"),
@@ -411,6 +450,7 @@ fn letters_for(app: &WordApp, tab: &str) -> Vec<String> {
         Target::Cmd { id, .. } => *id,
         Target::Dialog { .. } => "ui.dialog",
         Target::Tab(_) => "ui.tab",
+        Target::Menu(_) => "ui.menu",
     };
 
     // Pass 0: Word's own keytips.
@@ -492,6 +532,7 @@ pub fn controls_public(tab: &str) -> Vec<ControlInfo> {
                 Target::Cmd { id, .. } => id,
                 Target::Dialog { .. } => "ui.dialog",
                 Target::Tab(_) => "ui.tab",
+                Target::Menu(_) => "ui.menu",
             },
         })
         .collect()
@@ -554,6 +595,25 @@ pub fn handle_key(app: &mut WordApp, key: egui::Key) -> bool {
                     app.ui.keytip_prefix.clear();
                     return true;
                 };
+                // The title bar: Alt, Z, A switches AutoSave; Alt, B saves under another name or
+                // in another place (Word renames the document there).
+                if app.ui.keytips == Phase::Tabs && app.ui.keytip_prefix == "Z" {
+                    app.ui.keytips = Phase::Off;
+                    app.ui.keytip_prefix.clear();
+                    if name == "A" {
+                        crate::chrome::press_autosave(app);
+                    }
+                    return true;
+                }
+                if app.ui.keytips == Phase::Tabs && app.ui.keytip_prefix.is_empty() && name == "Z" {
+                    app.ui.keytip_prefix = name;
+                    return true;
+                }
+                if app.ui.keytips == Phase::Tabs && app.ui.keytip_prefix.is_empty() && name == "B" {
+                    app.ui.keytips = Phase::Off;
+                    let _ = app.save_as(crate::file_dialogs::AfterSave::Nothing);
+                    return true;
+                }
                 if app.ui.keytips == Phase::Tabs && (name.chars().all(|c| c.is_ascii_digit()) || !app.ui.keytip_prefix.is_empty()) {
                     qat_key(app, &name);
                     return true;
@@ -603,6 +663,12 @@ pub fn handle_key(app: &mut WordApp, key: egui::Key) -> bool {
                         }
                         app.ui.keytips = Phase::Off;
                         if let Some(t) = hit {
+                            t.run(app);
+                        }
+                    }
+                    Phase::Menu(menu) => {
+                        app.ui.keytips = Phase::Off;
+                        if let Some((_, _, t)) = menu_items(menu).into_iter().find(|(l, _, _)| *l == name) {
                             t.run(app);
                         }
                     }
@@ -780,6 +846,18 @@ pub fn logic(app: &mut WordApp, ctx: &egui::Context) {
     if app.ui.keytips == Phase::Off {
         app.ui.keytip_prefix.clear();
     }
+    // A list a keytip opened shows its letters under its control (whose badge was drawn last
+    // frame).
+    match app.ui.keytips {
+        Phase::Menu(menu) if app.keytip_menu_at.is_none() => {
+            let tab = app.ui.tab.clone();
+            let letter = controls(&tab).iter().position(|c| c.target == Target::Menu(menu)).and_then(|i| letters_for(app, &tab).get(i).cloned());
+            let rects: Vec<(Rect, String)> = ctx.data(|d| d.get_temp::<Vec<(Rect, String)>>(rects_id())).unwrap_or_default();
+            app.keytip_menu_at = rects.iter().find(|(_, l)| Some(l) == letter.as_ref()).map(|(r, _)| r.left_bottom() + Vec2::new(0.0, 2.0));
+        }
+        Phase::Menu(_) => {}
+        _ => app.keytip_menu_at = None,
+    }
     // Publish the state the ribbon widgets read to place their badges, and clear last frame's.
     ctx.data_mut(|d| {
         d.insert_temp(phase_id(), app.ui.keytips);
@@ -806,6 +884,21 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context, ui: &mut Ui) {
     let cmds: Vec<(Rect, String)> = ui.data(|d| d.get_temp::<Vec<(Rect, String)>>(rects_id())).unwrap_or_default();
     for (r, l) in tabs.into_iter().chain(cmds) {
         badge(ui, r, &l);
+    }
+    // A list's items with their letters, under its control.
+    if let Phase::Menu(menu) = app.ui.keytips {
+        let at = app.keytip_menu_at.unwrap_or(egui::pos2(16.0, 96.0));
+        egui::Area::new(egui::Id::new("wc_keytip_menu")).order(egui::Order::Foreground).fixed_pos(at).show(ctx, |ui| {
+            egui::Frame::popup(ui.style()).show(ui, |ui| {
+                for (letter, label, _) in menu_items(menu) {
+                    ui.horizontal(|ui| {
+                        let (r, _) = ui.allocate_exact_size(Vec2::new(20.0, 17.0), egui::Sense::hover());
+                        badge(ui, r, letter);
+                        ui.label(tl!(label));
+                    });
+                }
+            });
+        });
     }
 }
 
@@ -1069,8 +1162,66 @@ mod tests {
         assert!(handle_key(&mut a, egui::Key::H));
         assert_eq!(a.ui.tab, "Home");
         assert_eq!(a.ui.keytips, Phase::Commands);
+        // F waits for its second letter (F, O is the Clipboard launcher), then the mode ends.
         assert!(handle_key(&mut a, egui::Key::F));
+        assert_eq!(a.ui.keytips, Phase::Commands);
+        assert!(handle_key(&mut a, egui::Key::O));
         assert_eq!(a.ui.keytips, Phase::Off);
+    }
+
+    /// ks-102, ks-197, ks-229, ks-230, ks-051, ks-053: Word's keytip sequences for a launcher,
+    /// the items of a list, and the title bar.
+    #[test]
+    fn word_keytip_sequences_reach_lists_launchers_and_the_title_bar() {
+        let dir = std::env::temp_dir().join(format!("doc4me-keytips-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let path = dir.join("named.docx").to_string_lossy().to_string();
+        let picked = path.clone();
+        let services = crate::Services { pick_save: Some(Box::new(move |_| Some(picked.clone()))), ..Default::default() };
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("Text")), services);
+        a.canvas.focused = false;
+        let keys = |a: &mut WordApp, ks: &[egui::Key]| {
+            activate(a);
+            for k in ks {
+                assert!(handle_key(a, *k), "{k:?}");
+            }
+        };
+        use egui::Key::*;
+        // Alt, H, F, O: the Clipboard pane.
+        keys(&mut a, &[H, F, O]);
+        assert!(a.session.view.clipboard_pane);
+        assert_eq!(a.ui.keytips, Phase::Off);
+        // Alt, R, P, 1 shows Show Comments' items; L: the comments as a list, C: beside the text.
+        keys(&mut a, &[R, P, Num1]);
+        assert_eq!(a.ui.keytips, Phase::Menu("comments"));
+        handle_key(&mut a, L);
+        assert!(a.session.view.comments_pane);
+        assert_eq!(a.ui.keytips, Phase::Off);
+        keys(&mut a, &[R, P, Num1, C]);
+        assert!(!a.session.view.comments_pane);
+        // Alt, R, U, L: Set Proofing Language.
+        keys(&mut a, &[R, U]);
+        assert_eq!(a.ui.keytips, Phase::Menu("language"));
+        handle_key(&mut a, L);
+        assert!(matches!(&a.dialog, Some(crate::dialogs::Dialog::Layout(d)) if matches!(**d, crate::dialogs_layout::LayoutDialog::Language(_))));
+        a.dialog = None;
+        // Alt, R, L: Language Preferences.
+        keys(&mut a, &[R, L]);
+        assert!(a.ui.backstage && a.ui.options_pane == "language");
+        a.ui.backstage = false;
+        // Alt, B: Save As (here the picker answers at once); then Alt, Z, A switches AutoSave.
+        keys(&mut a, &[B]);
+        assert_eq!(a.session.path.as_ref().map(|p| p.to_string_lossy().to_string()), Some(path.clone()));
+        assert!(std::path::Path::new(&path).exists());
+        a.run("file.autosave", serde_json::json!({"value": false})).unwrap();
+        keys(&mut a, &[Z]);
+        assert_eq!(a.ui.keytips, Phase::Tabs, "Z waits for A");
+        handle_key(&mut a, A);
+        assert!(a.autosaves());
+        keys(&mut a, &[Z, A]);
+        assert!(!a.autosaves());
+        let _ = std::fs::remove_dir_all(&dir);
     }
 
     #[test]

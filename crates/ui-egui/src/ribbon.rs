@@ -453,6 +453,9 @@ pub(crate) fn language_menu(ui: &mut Ui, app: &mut WordApp) {
     }
     ui.separator();
     mi_check(ui, app, "Do Not Check Spelling or Grammar", no_proof, "review.language", json!({"noProof": !no_proof}));
+    ui.separator();
+    mi(ui, app, "Set Proofing Language…", "ui.dialog", json!({"name": "language"}));
+    mi(ui, app, "Language Preferences…", "file.options", json!({"pane": "language"}));
 }
 
 /// A menu item with a check mark when `checked` (the current choice of several).
@@ -1527,7 +1530,11 @@ fn mailings(app: &mut WordApp, ui: &mut Ui) {
         });
     });
     group(ui, "Finish", None, app, |ui, app| {
-        big(ui, app, "finish", "Finish &\nMerge", "mailings.finish", json!({}), false);
+        // Word's list: the merged letters as a new document, or printed.
+        menu_button(ui, app, "finish", Some("Finish &\nMerge"), "Finish & Merge", true, "mailings.finish", |ui, app| {
+            mi(ui, app, "Edit Individual Documents…", "mailings.finish", json!({}));
+            mi(ui, app, "Print Documents…", "mailings.print", json!({}));
+        });
     });
 }
 

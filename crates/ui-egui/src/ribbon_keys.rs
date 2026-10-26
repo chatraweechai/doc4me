@@ -663,6 +663,36 @@ mod tests {
         assert!(h.state().dialog.is_some(), "the dialog stays open");
     }
 
+    /// ks-109: typing the first letters of an AutoText entry's name shows a tip; Enter inserts the
+    /// entry in place of the letters.
+    #[test]
+    fn autotext_tip_then_enter_inserts_the_entry() {
+        let mut h = harness("Yours sincerely");
+        h.state_mut().run("select.all", json!({})).unwrap();
+        h.state_mut().run("insert.autoText", json!({"save": "Signoff"})).unwrap();
+        h.state_mut().run("caret.docEnd", json!({})).unwrap();
+        h.state_mut().run("text.newParagraph", json!({})).unwrap();
+        for c in "Sign".chars() {
+            h.input_mut().events.push(egui::Event::Text(c.to_string()));
+            h.step();
+        }
+        assert_eq!(h.state().canvas.autotext_tip.as_deref(), Some("Signoff"));
+        h.run_steps(1);
+        assert!(h.query_by_label_contains("Press ENTER to Insert").is_some(), "the tip shows");
+        press(&mut h, Key::Enter, NONE);
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "Yours sincerely\nYours sincerely");
+        assert!(h.state().canvas.autotext_tip.is_none());
+        // Another key puts the tip away; Enter then starts a new paragraph as usual.
+        for c in "Sign".chars() {
+            h.input_mut().events.push(egui::Event::Text(c.to_string()));
+            h.step();
+        }
+        press(&mut h, Key::ArrowLeft, NONE);
+        assert!(h.state().canvas.autotext_tip.is_none());
+        press(&mut h, Key::Enter, NONE);
+        assert!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body).ends_with("Sig\nn"));
+    }
+
     /// ks-265–ks-268: Read Mode's Home and End, a page number then Enter, and Escape.
     #[test]
     fn read_mode_home_end_page_number_and_escape() {

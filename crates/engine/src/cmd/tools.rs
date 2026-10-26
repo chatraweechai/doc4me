@@ -431,6 +431,8 @@ pub fn specs() -> Vec<CommandSpec> {
             .key("Alt+F3")
             .params(r#"{"save"?: name (from the selection), "insert"?: name, "delete"?: name} → list"#),
         CommandSpec::new("insert.autoText", "AutoText", "Insert › Text › Quick Parts", quick_parts).params(r#"{"save"?: name, "insert"?: name}"#),
+        CommandSpec::new("insert.autoTextComplete", "AutoComplete", "Insert › Text › Quick Parts", autotext_complete)
+            .params(r#"{"apply"?: true} → {"name"} of the AutoText entry the word before the caret begins (four letters or more), or null; with apply, that entry replaces the letters typed"#),
         CommandSpec::new("insert.docProperty", "Document Property", "Insert › Text › Quick Parts", |s, v| {
             let name = p::str(v, "name").unwrap_or("Title").to_string();
             let c = &s.doc.core;
@@ -1314,6 +1316,38 @@ fn quick_parts(s: &mut Session, v: &Value) -> CmdResult {
     Ok(json!({"parts": s.building_blocks.keys().collect::<Vec<_>>()}))
 }
 
+/// Word's AutoComplete for AutoText: the entry whose name the word before the caret begins, once
+/// four letters or more are typed (the first in name order when several do), and where that word
+/// starts.
+fn autotext_prefix(s: &Session) -> Option<(String, Pos)> {
+    if !s.sel.is_collapsed() || s.building_blocks.is_empty() {
+        return None;
+    }
+    let caret = &s.sel.focus;
+    let before = s.doc.para_at(caret)?.text.get(..caret.off)?;
+    let start = before.char_indices().rev().take_while(|(_, c)| c.is_alphanumeric()).last()?.0;
+    let word = &before[start..];
+    let typed = word.chars().count();
+    if typed < 4 {
+        return None;
+    }
+    let lower = word.to_lowercase();
+    let name = s.building_blocks.keys().find(|n| n.chars().count() > typed && n.to_lowercase().starts_with(&lower))?;
+    Some((name.clone(), Pos { off: start, ..caret.clone() }))
+}
+
+fn autotext_complete(s: &mut Session, v: &Value) -> CmdResult {
+    let found = autotext_prefix(s);
+    if p::bool(v, "apply") != Some(true) {
+        s.only_read();
+        return Ok(found.map_or(Value::Null, |(name, _)| json!({"name": name})));
+    }
+    let (name, start) = found.ok_or_else(|| CmdError::Disabled("no AutoText entry begins with the word before the caret".into()))?;
+    s.sel = Selection { anchor: start, focus: s.sel.focus.clone() };
+    quick_parts(s, &json!({"insert": name}))?;
+    Ok(json!({"name": name}))
+}
+
 fn hf_nav(s: &mut Session, dir: i32) -> CmdResult {
     let StoryRef::Part(cur) = s.sel.focus.story else { return Err(CmdError::Disabled("edit a header or footer first".into())) };
     let mut ids: Vec<u32> = Vec::new();
@@ -1581,5 +1615,29 @@ mod tests {
         s.run("review.language", &json!({"lang": "de-DE", "default": true})).unwrap();
         assert_eq!(s.doc.styles.default_chr.lang.as_deref(), Some("de-DE"));
         assert!(s.run("review.language", &json!({"lang": "<script>"})).is_err());
+    }
+
+    /// ks-109: the first letters of an AutoText entry's name, then Enter, insert the entry.
+    #[test]
+    fn autotext_autocomplete_after_four_letters() {
+        let mut s = Session::new(Document::from_text("Kind regards"));
+        s.run("select.all", &json!({})).unwrap();
+        s.run("insert.autoText", &json!({"save": "Closing"})).unwrap();
+        s.run("caret.docEnd", &json!({})).unwrap();
+        s.run("text.newParagraph", &json!({})).unwrap();
+        s.run("text.insert", &json!({"text": "Clo"})).unwrap();
+        assert_eq!(s.run("insert.autoTextComplete", &json!({})).unwrap(), Value::Null, "three letters: no tip yet");
+        s.run("text.insert", &json!({"text": "s"})).unwrap();
+        let undo_before = s.can_undo();
+        assert_eq!(s.run("insert.autoTextComplete", &json!({})).unwrap(), json!({"name": "Closing"}));
+        assert_eq!(s.can_undo(), undo_before);
+        s.run("insert.autoTextComplete", &json!({"apply": true})).unwrap();
+        assert_eq!(s.doc.plain_text(StoryRef::Body), "Kind regards\nKind regards");
+        s.run("edit.undo", &json!({})).unwrap();
+        assert_eq!(s.doc.plain_text(StoryRef::Body), "Kind regards\nClos");
+        // The whole name typed, or another word: nothing to complete.
+        s.run("text.insert", &json!({"text": "ing"})).unwrap();
+        assert_eq!(s.run("insert.autoTextComplete", &json!({})).unwrap(), Value::Null);
+        assert!(s.run("insert.autoTextComplete", &json!({"apply": true})).is_err());
     }
 }

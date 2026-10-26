@@ -143,6 +143,17 @@ pub fn specs() -> Vec<CommandSpec> {
             .params(r#"{"path"?: string (save the merged document), "from"?: n, "to"?: n}"#)
             .key(super::non_mac("Alt+Shift+N"))
             .when(has_recipients),
+        // Word's Merge to Printer (Alt+Shift+M): the merged letters, then the Print page. Doc4Me
+        // prints through its Print page, so the merge replaces the document as Finish & Merge
+        // does (the window asks to save it first).
+        CommandSpec::new("mailings.print", "Print Documents", "Mailings › Finish › Finish & Merge", |s, v| {
+            let r = finish(s, v)?;
+            s.ui_requests.push(json!({"open": "print"}));
+            Ok(r)
+        })
+        .params(r#"{"from"?: n, "to"?: n}"#)
+        .key(super::non_mac("Alt+Shift+M"))
+        .when(has_recipients),
         CommandSpec::new("mailings.envelopes", "Envelopes", "Mailings › Create", envelopes).params(
             r#"{"delivery": string, "return"?: string, "size"?: "Envelope #10|#9|Monarch|DL|C4|C5|C6|B5", "width"?: pt, "height"?: pt, "add"?: bool (add to this document instead of a new one)}"#,
         ),
@@ -1120,6 +1131,24 @@ mod tests {
         let t = s.doc.plain_text(StoryRef::Body);
         assert!(t.contains("See you in London") && t.contains("Dear Alan Turing,"), "{t}");
         assert_eq!(s.layout().pages.len(), 2);
+    }
+
+    /// ks-211: Alt+Shift+M merges to the printer: the merged letters, then the Print page.
+    #[test]
+    fn alt_shift_m_merges_and_opens_the_print_page() {
+        let mut s = Session::new(Document::new());
+        assert!(s.run("mailings.print", &json!({})).is_err(), "no recipients yet");
+        s.run("mailings.recipients", &json!({"csv": "Name\nAda\nAlan\nGrace"})).unwrap();
+        s.run("text.insert", &json!({"text": "Hello "})).unwrap();
+        s.run("mailings.insertField", &json!({"field": "Name"})).unwrap();
+        if !cfg!(target_os = "macos") {
+            assert_eq!(s.registry.get("mailings.print").map(|c| c.shortcut), Some("Alt+Shift+M"));
+        }
+        let r = s.run("mailings.print", &json!({"from": 2, "to": 3})).unwrap();
+        assert_eq!(r["records"], 2);
+        let t = s.doc.plain_text(StoryRef::Body);
+        assert!(t.contains("Hello Alan") && t.contains("Hello Grace") && !t.contains("Ada"), "{t}");
+        assert_eq!(s.ui_requests.last(), Some(&json!({"open": "print"})));
     }
 
     /// A typed list (#240) keeps its column order, and rows may be arrays in that order.

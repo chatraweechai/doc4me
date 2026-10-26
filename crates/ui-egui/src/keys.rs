@@ -392,6 +392,11 @@ pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
                         None => t,
                     };
                     let _ = app.run("text.insert", json!({"text": t}));
+                    // AutoComplete: the AutoText entry these letters begin, offered in a tip.
+                    if !app.session.building_blocks.is_empty() {
+                        app.canvas.autotext_tip =
+                            app.session.run("insert.autoTextComplete", &json!({})).ok().and_then(|v| v.get("name")?.as_str().map(str::to_string));
+                    }
                 }
             }
             egui::Event::Ime(egui::ImeEvent::Preedit { text, .. }) => app.canvas.ime_preedit = text,
@@ -424,6 +429,11 @@ pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
                 }
             }
             egui::Event::Key { key, pressed: true, modifiers, .. } => {
+                // Enter takes the AutoText entry the tip offers; any other key puts the tip away.
+                if app.canvas.autotext_tip.take().is_some() && key == Key::Enter && modifiers.is_none() {
+                    let _ = app.run("insert.autoTextComplete", json!({"apply": true}));
+                    continue;
+                }
                 // Floating shape navigation (Ctrl+Alt+5): Tab goes from shape to shape.
                 if key == Key::Tab && app.session.shape_nav && !(modifiers.command || modifiers.ctrl || modifiers.alt) {
                     let _ = app.run("select.floatingShapes", json!({"next": true, "back": modifiers.shift}));

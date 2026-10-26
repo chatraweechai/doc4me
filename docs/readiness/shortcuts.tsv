@@ -49,9 +49,9 @@ ks-047	Work in the ribbon with the keyboard	When a menu or submenu is open, move
 ks-048	Work in the ribbon with the keyboard	Expand or collapse the ribbon.	Ctrl+F1	Mod+F1	view.collapseRibbon	registry		view.collapseRibbon (2026-10-25)
 ks-049	Work in the ribbon with the keyboard	Open the context menu.	Shift+F10 Or, on a Windows keyboard, the Windows Menu key (between the right Alt and right Ctrl keys)	Shift+F10	-	manual	pass	UI test ribbon_keys::shift_f10_menus_and_ctrl_shift_f10_tooltips: Shift+F10 opens the page's shortcut menu at the caret (keyboard in the menu, Escape back to the page), or a focused ribbon command's own menu (Add to Quick Access Toolbar); no Menu key in egui's key set
 ks-050	Work in the ribbon with the keyboard	Move to the submenu when a main menu is open or selected.	Right arrow key	Right	-	manual	pass	UI test ribbon_keys::right_opens_a_submenu: Right on a submenu (Text Effects › Text Fill) opens it and moves into it
-ks-051	Work in the ribbon with the keyboard	Toggle AutoSave on or off.	Alt+Z, A	Alt+Z,A	-	manual	fail	
+ks-051	Work in the ribbon with the keyboard	Toggle AutoSave on or off.	Alt+Z, A	Alt+Z,A	-	manual	pass	UI test keytips::word_keytip_sequences_reach_lists_launchers_and_the_title_bar: Alt, Z, A switches AutoSave on and off for a saved document (Save As first when AutoSave needs a saved file, as a click on the switch does); the badge ZA sits on the title bar's switch
 ks-052	Work in the ribbon with the keyboard	Expand or collapse the ribbon.	Ctrl+F1			duplicate	ks-048	same shortcut and action as ks-048
-ks-053	Work in the ribbon with the keyboard	Open the dialog box to rename the document or save it to another location.	Alt+B	Alt+B	-	manual	fail	
+ks-053	Work in the ribbon with the keyboard	Open the dialog box to rename the document or save it to another location.	Alt+B	Alt+B	-	manual	pass	UI test keytips::word_keytip_sequences_reach_lists_launchers_and_the_title_bar: Alt, B opens Save As to name the document or put it elsewhere (Word renames it in the title bar's flyout; Doc4Me has no rename-in-place)
 ks-054	Navigate the document	Move the cursor one word to the left.	Ctrl+Left arrow key	Mod+Left	caret.wordLeft	registry		
 ks-055	Navigate the document	Move the cursor one word to the right.	Ctrl+Right arrow key	Mod+Right	caret.wordRight	registry		
 ks-056	Navigate the document	Move the cursor up by one paragraph.	Ctrl+Up arrow key	Mod+Up	caret.paraUp	registry		
@@ -100,14 +100,14 @@ ks-098	Extend a selection	Select a vertical block of text.	Ctrl+Shift+F8, then p
 ks-099	Extend a selection	Stop extending the selection.	Esc	Escape	select.collapse	registry		
 ks-100	Edit text and graphics	Delete one word to the left.	Ctrl+Backspace	Mod+Backspace	text.deleteWordBack	registry		
 ks-101	Edit text and graphics	Delete one word to the right.	Ctrl+Delete	Mod+Delete	text.deleteWordForward	registry		
-ks-102	Edit text and graphics	Open the Clipboard task pane and enable the Office Clipboard, which allows you to copy and paste content between Microsoft 365 apps.	Alt, H, F, O	Alt,H,F,O	-	manual	untested	
+ks-102	Edit text and graphics	Open the Clipboard task pane and enable the Office Clipboard, which allows you to copy and paste content between Microsoft 365 apps.	Alt, H, F, O	Alt,H,F,O	-	manual	pass	UI test keytips::word_keytip_sequences_reach_lists_launchers_and_the_title_bar: Alt, H, F, O opens the Clipboard pane (the Clipboard group's launcher, badge FO)
 ks-103	Edit text and graphics	Cut the selected content to the Clipboard.	Ctrl+X			duplicate	ks-005	same shortcut and action as ks-005
 ks-104	Edit text and graphics	Copy the selected content to the Clipboard.	Ctrl+C			duplicate	ks-006	same shortcut and action as ks-006
 ks-105	Edit text and graphics	Paste the contents of the Clipboard.	Ctrl+V			duplicate	ks-007	same shortcut and action as ks-007
 ks-106	Edit text and graphics	Move the selected content to a specific location.	F2, move the cursor to the destination, and then press Enter.	F2	edit.moveText	registry		Enter moves the text to the caret; Esc or any edit cancels
 ks-107	Edit text and graphics	Copy the selected content to a specific location.	Shift+F2, move the cursor to the destination, and then press Enter.	Shift+F2	edit.copyText	registry		Enter copies the text to the caret
 ks-108	Edit text and graphics	Define an AutoText block with the selected content.	Alt+F3	Alt+F3	insert.quickParts	registry		no key
-ks-109	Edit text and graphics	Insert an AutoText block.	The first few characters of the AutoText block, and then press Enter when the ScreenTip appears.	F3 | Enter	-	manual	untested	
+ks-109	Edit text and graphics	Insert an AutoText block.	The first few characters of the AutoText block, and then press Enter when the ScreenTip appears.	F3 | Enter	-	manual	pass	UI test ribbon_keys::autotext_tip_then_enter_inserts_the_entry and engine test autotext_autocomplete_after_four_letters: four letters of an AutoText entry's name show "Name (Press ENTER to Insert)" above the caret; Enter inserts the entry in place of the letters (one undo step); any other key puts the tip away (F3 stays Find Next in Doc4Me)
 ks-110	Edit text and graphics	Cut the selected content to the Spike.	Ctrl+F3	Mod+F3	edit.spike	registry		the Spike is the AutoText entry "Spike"
 ks-111	Edit text and graphics	Paste the contents of the Spike.	Ctrl+Shift+F3	Mod+Shift+F3	edit.pasteSpike	registry		pastes and empties the Spike
 ks-112	Edit text and graphics	Copy the selected text formatting.	Ctrl+Alt+C	Mod+Alt+C	edit.copyFormat	registry		Doc4Me: Mod+Shift+C; Mod+Alt+C is ©
@@ -195,7 +195,7 @@ ks-193	Select table content	Select the whole table.	Alt+5 on the numeric keypad,
 ks-194	Insert paragraphs and tab characters in a table	Insert a new paragraph in a cell.	Enter	Enter	text.newParagraph	registry		
 ks-195	Insert paragraphs and tab characters in a table	Insert a tab character in a cell.	Ctrl+Tab	Mod+Tab	text.tabCharacter	registry		text.tabCharacter
 ks-196	Review a document	Open the Review tab.	Alt, R			duplicate	ks-035	same shortcut and action as ks-035
-ks-197	Review a document	Show list of comments.	Alt, R, P, 1, L	Alt,R,P,1,L	-	manual	untested	
+ks-197	Review a document	Show list of comments.	Alt, R, P, 1, L	Alt,R,P,1,L	-	manual	pass	UI test keytips::word_keytip_sequences_reach_lists_launchers_and_the_title_bar: Alt, R, P, 1 shows Show Comments' items with their letters; L shows the comments as a list (the Comments pane), C beside the text
 ks-198	Review a document	Insert a comment.	Ctrl+Alt+M	Mod+Alt+M	review.newComment	registry		
 ks-199	Review a document	Turn change tracking on or off.	Ctrl+Shift+E	Mod+Shift+E	review.trackChanges	registry		
 ks-200	Review a document	Close the Reviewing Pane.	Alt+Shift+C	Alt+Shift+C	view.closeReviewingPane	registry		Review › Reviewing Pane (new pane; UI test reviewing_pane_lists_and_accepts_changes)
@@ -209,7 +209,7 @@ ks-207	Work with references, citations, and indexing	Go to the next footnote.	Al
 ks-208	Work with references, citations, and indexing	Go to the previous footnote.	Alt+Shift+Left angle bracket (<)	Alt+Shift+,	references.previousFootnote	registry		references.previousFootnote
 ks-209	Perform a mail merge	Preview the mail merge.	Alt+Shift+K	Alt+Shift+K	mailings.preview	registry		
 ks-210	Perform a mail merge	Merge a document.	Alt+Shift+N	Alt+Shift+N	mailings.finish	registry		
-ks-211	Perform a mail merge	Print the merged document.	Alt+Shift+M	Alt+Shift+M	-	manual	fail	
+ks-211	Perform a mail merge	Print the merged document.	Alt+Shift+M	Alt+Shift+M	-	manual	pass	engine test mailings::alt_shift_m_merges_and_opens_the_print_page: Alt+Shift+M (mailings.print, Finish & Merge › Print Documents…) merges the records (from/to) and opens File › Print; Doc4Me prints through its Print page, so the merge replaces the document after the save question, as Finish & Merge does
 ks-212	Perform a mail merge	Edit a mail-merge data document.	Alt+Shift+E	Alt+Shift+E	mailings.editRecipients	registry		
 ks-213	Perform a mail merge	Insert a merge field.	Alt+Shift+F	Alt+Shift+F	mailings.insertField	registry		
 ks-214	Work with fields	Insert a DATE field.	Alt+Shift+D	Alt+Shift+D	insert.dateField	registry		
@@ -227,8 +227,8 @@ ks-225	Work with fields	Go to the next field.	F11	F11	fields.next	registry
 ks-226	Work with fields	Go to the previous field.	Shift+F11	Shift+F11	fields.previous	registry		
 ks-227	Work with fields	Lock a field.	Ctrl+F11	Mod+F11	fields.lock	registry		
 ks-228	Work with fields	Unlock a field.	Ctrl+Shift+F11	Mod+Shift+F11	fields.unlock	registry		
-ks-229	Set the proofing language	Display the Language dialog box to set the proofing language.	Alt+R, U, L	Alt,R,U,L	-	manual	untested	
-ks-230	Set the proofing language	Set default languages.	Alt+R, L	Alt,R,L	-	manual	untested	
+ks-229	Set the proofing language	Display the Language dialog box to set the proofing language.	Alt+R, U, L	Alt,R,U,L	-	manual	pass	UI test keytips::word_keytip_sequences_reach_lists_launchers_and_the_title_bar: Alt, R, U shows the Language list's items; L opens the Language dialog (Set Proofing Language…)
+ks-230	Set the proofing language	Set default languages.	Alt+R, L	Alt,R,L	-	manual	pass	UI test keytips::word_keytip_sequences_reach_lists_launchers_and_the_title_bar: Alt, R, L opens File › Options › Language (Language Preferences); also in the Review › Language list
 ks-231	Insert international characters	à, è, ì, ò, ù, À, È, Ì, Ò, Ù	Ctrl+Grave accent (`), the letter	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
 ks-232	Insert international characters	á, é, í, ó, ú, ý Á, É, Í, Ó, Ú, Ý	Ctrl+Single quotation mark ('), the letter	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
 ks-233	Insert international characters	â, ê, î, ô, û Â, Ê, Î, Ô, Û	Ctrl+Shift+Caret (^), the letter	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word

@@ -83,6 +83,8 @@ pub struct CanvasState {
     context_at: Option<Pos2>,
     /// Read Mode: the page number typed so far (Enter goes to it).
     pub(crate) read_goto: String,
+    /// AutoComplete: the AutoText entry the letters before the caret begin (Enter inserts it).
+    pub(crate) autotext_tip: Option<String>,
     /// Screen rect of the selection's first line, for the floating mini toolbar.
     pub mini_anchor: Option<Rect>,
     /// A picture, shape or text box being dragged by its frame.
@@ -195,6 +197,7 @@ impl Default for CanvasState {
             context_from_keys: false,
             context_at: None,
             read_goto: String::new(),
+            autotext_tip: None,
             mini_anchor: None,
             pasted: false,
             swallow_text: false,
@@ -1339,6 +1342,21 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
             app.canvas.context_issue = app.session.run("review.suggestions", &json!({})).ok().filter(|v| !v.is_null());
             app.canvas.context_synonyms = app.session.run("review.thesaurus", &json!({})).ok().and_then(|v| v.get("synonyms").cloned());
         }
+    }
+    // AutoComplete's tip just above the caret, as Word shows it.
+    if let Some(name) = app.canvas.autotext_tip.clone()
+        && app.canvas.focused
+        && let Some(caret) = ui.ctx().output(|o| o.ime.map(|i| i.cursor_rect))
+    {
+        egui::Area::new(ui.id().with("autotext_tip"))
+            .order(egui::Order::Tooltip)
+            .fixed_pos(caret.left_top() - vec2(0.0, 26.0))
+            .interactable(false)
+            .show(ui.ctx(), |ui| {
+                egui::Frame::popup(ui.style()).inner_margin(egui::Margin::symmetric(6, 2)).show(ui, |ui| {
+                    ui.label(crate::i18n::fmt(tl!("{name} (Press ENTER to Insert)"), &[("name", &name)]));
+                });
+            });
     }
     // Shift+F10: the context menu at the caret, with what a right-click there would offer.
     if std::mem::take(&mut app.canvas.context_from_keys)

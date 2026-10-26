@@ -411,6 +411,9 @@ pub fn group_titled(ui: &mut Ui, id_title: &str, title: &str, launcher: Option<&
     if let Some(cmd) = launcher {
         let lr = Rect::from_center_size(pos2(r.max.x - 6.0, title_y), vec2(11.0, 11.0));
         let resp = ui.interact(lr, ui.id().with(("launch", id_title)), Sense::click());
+        // Only a launcher with a keytip of its own (Clipboard's F, O) gets a badge: matched by
+        // command, never by the group's name.
+        keytip_badge(ui, lr, cmd, "");
         if resp.hovered() {
             ui.painter().rect_filled(lr.expand(2.0), 2.0, t.hover);
         }

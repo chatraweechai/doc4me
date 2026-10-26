@@ -386,6 +386,8 @@ pub struct WordApp {
     pub(crate) touch_pointer: Option<u64>,
     /// Badge rects recorded during layout for the current keytip phase (cleared by `logic`, painted by `show`).
     pub(crate) keytip_rects: Vec<(egui::Rect, String)>,
+    /// Where the list a keytip opened (Review › Show Comments, P1) shows its letters.
+    pub(crate) keytip_menu_at: Option<egui::Pos2>,
     styled: bool,
     /// The CJK face order the installed UI fonts use (Chinese first, or Japanese first).
     fonts_hans: bool,
@@ -516,6 +518,7 @@ impl WordApp {
             synthetic: Vec::new(),
             touch_pointer: None,
             keytip_rects: Vec::new(),
+            keytip_menu_at: None,
             styled: false,
             fonts_hans: false,
             fonts_system_cjk: false,
@@ -1871,6 +1874,7 @@ fn discards_document(id: &str, params: &Value) -> bool {
         "mailings.envelopes" => params.get("add").and_then(Value::as_bool) != Some(true),
         "file.open" => params.get("path").is_some(),
         "mailings.finish" => params.get("path").and_then(Value::as_str).is_none(),
+        "mailings.print" => true,
         _ => false,
     }
 }
