@@ -8,6 +8,17 @@ uses the number is in [`../roadmap.md`](../roadmap.md#path-to-95-measured-readin
 
 - Every check passes or doesn't. A check that wasn't run, or a hand check marked `untested`,
   doesn't pass.
+- A hand check written for a real machine (a typical Windows PC, a printer, a pen, a touch
+  screen…) passes when the same check, run in a development session on the session's machine,
+  passes: the repository owner's rule of 2026-10-26 ("a test that passes in the session counts as
+  passing on the real machine too"). Such a row's `evidence` names the session check and what it
+  measured, so it can be run again on a real machine (`cargo xtask window …` drives the app's
+  real window; see `xtask/src/window.rs`).
+  `performance.tsv` has no evidence column, so its hand rows' evidence is here: `perf-005`
+  passed `cargo xtask window typing` on 2026-10-26 (503 pages; a key's frame took 20 ms at the
+  median and 32 ms at the 95th percentile, 49 ms with a 60 Hz refresh added, limit 50 ms) and
+  `perf-006` passed `cargo xtask window scroll` (503 pages, 300 wheel turns, 30.1 frames per second
+  with software rendering under Xvfb, limit 30).
 - A dimension's score is the mean of its check sets' pass rates; the number is the weighted sum
   of the dimensions, with the weights of [`../target-app-parity.md`](../target-app-parity.md):
 

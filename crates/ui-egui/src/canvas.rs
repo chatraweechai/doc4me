@@ -29,6 +29,10 @@ const EDGE_MAX_DT: f32 = 0.1;
 
 pub struct CanvasState {
     textures: HashMap<usize, (u64, TextureHandle)>,
+    /// What each page texture was rendered from ([`PageSig`]).
+    page_sigs: HashMap<usize, PageSig>,
+    /// A gesture on a touchscreen over the document ([`touch_input`]).
+    touch: Option<TouchGesture>,
     pub scroll_to_caret: bool,
     /// A heading navigation click aligns its page against the navigation pane, not just visible.
     pub(crate) nav_to_caret: bool,
@@ -148,6 +152,8 @@ impl Default for CanvasState {
     fn default() -> Self {
         CanvasState {
             textures: HashMap::new(),
+            page_sigs: HashMap::new(),
+            touch: None,
             scroll_to_caret: true,
             nav_to_caret: false,
             read_wheel_accum: 0.0,
@@ -528,8 +534,68 @@ pub fn sync_fit_zoom(app: &mut WordApp, scale: f32) {
     v.zoom = (scale / PX_PER_PT).clamp(0.1, 5.0);
 }
 
-/// Fingerprint of a page's content for the texture cache.
-fn page_key(app: &WordApp, page: &Page, scale_px: f32, dim_body: bool) -> u64 {
+/// What a page texture was rendered from: a fingerprint of everything but the body's items (the
+/// view, the page, its header and footer), and each body item's fingerprint with the page area it
+/// paints, where that is known (text lines, fills and rules). An edit that changes only such items
+/// redraws just their area ([`dirty_area`]).
+#[derive(Clone, Debug, Default, PartialEq)]
+struct PageSig {
+    base: u64,
+    items: Vec<(u64, Option<[f32; 4]>)>,
+}
+
+impl PageSig {
+    /// The texture cache's key: all of it.
+    fn key(&self) -> u64 {
+        let mut h = std::collections::hash_map::DefaultHasher::new();
+        self.base.hash(&mut h);
+        for (k, _) in &self.items {
+            k.hash(&mut h);
+        }
+        h.finish()
+    }
+}
+
+/// One laid-out item's fingerprint.
+fn item_hash(it: &Placed, h: &mut impl Hasher) {
+    std::mem::discriminant(it).hash(h);
+    match it {
+        Placed::Lines { para, l0, l1, x, y, turn, .. } => {
+            (std::sync::Arc::as_ptr(para) as usize, l0, l1, x.to_bits(), y.to_bits(), turn).hash(h);
+        }
+        Placed::Fill { rect, color } => format!("{rect:?}{color:?}").hash(h),
+        Placed::Rule { x0, y0, x1, y1, border } => format!("{x0}{y0}{x1}{y1}{border:?}").hash(h),
+        Placed::Image { rect, media, spin, .. } => format!("{rect:?}{media}{spin:?}").hash(h),
+        Placed::Shape { rect, kind, fill, stroke, stroke_width, effects, freeform, spin, extra } => {
+            format!("{rect:?}{kind:?}{fill:?}{stroke:?}{stroke_width}{effects:?}{spin:?}{extra:?}").hash(h);
+            freeform.as_ref().map(|f| std::sync::Arc::as_ptr(f) as usize).hash(h);
+        }
+        Placed::Graphic { rect, graphic, spin, .. } => {
+            (std::sync::Arc::as_ptr(graphic) as usize, rect.x.to_bits(), rect.y.to_bits(), rect.w.to_bits(), rect.h.to_bits()).hash(h);
+            format!("{spin:?}").hash(h)
+        }
+        Placed::Clip { rect, spin, items } => format!("{rect:?}{spin:?}{items:?}").hash(h),
+        Placed::Cell { .. } | Placed::Object { .. } => {}
+    }
+}
+
+/// The page area (x0, y0, x1, y1, points) an item paints, for the kinds whose extent is plain:
+/// text lines (the page's full width, their height; list labels and indents stay inside), fills
+/// and rules. `None` for the rest.
+fn item_area(it: &Placed, page: &Page) -> Option<[f32; 4]> {
+    match it {
+        Placed::Lines { para, l0, l1, y, turn, .. } if !turn.is_turned() && l0 < l1 => {
+            let first = para.lines.get(*l0)?;
+            let last = para.lines.get(l1 - 1)?;
+            Some([0.0, y + first.top, page.w, y + last.top + last.height])
+        }
+        Placed::Fill { rect, .. } => Some([rect.x, rect.y, rect.x + rect.w, rect.y + rect.h]),
+        Placed::Rule { x0, y0, x1, y1, .. } => Some([x0.min(*x1) - 6.0, y0.min(*y1) - 6.0, x0.max(*x1) + 6.0, y0.max(*y1) + 6.0]),
+        _ => None,
+    }
+}
+
+fn page_sig(app: &WordApp, page: &Page, scale_px: f32, dim_body: bool) -> PageSig {
     let mut h = std::collections::hash_map::DefaultHasher::new();
     scale_px.to_bits().hash(&mut h);
     let v = &app.session.view;
@@ -538,31 +604,49 @@ fn page_key(app: &WordApp, page: &Page, scale_px: f32, dim_body: bool) -> u64 {
     dim_body.hash(&mut h);
     format!("{:?}{:?}", app.session.doc.settings.page_color, app.session.doc.settings.watermark).hash(&mut h);
     (page.w.to_bits(), page.h.to_bits()).hash(&mut h);
-    for list in [&page.items, &page.header, &page.footer] {
+    for list in [&page.header, &page.footer] {
         list.len().hash(&mut h);
         for it in list.iter() {
-            match it {
-                Placed::Lines { para, l0, l1, x, y, turn, .. } => {
-                    (std::sync::Arc::as_ptr(para) as usize, l0, l1, x.to_bits(), y.to_bits(), turn).hash(&mut h);
-                }
-                Placed::Fill { rect, color } => format!("{rect:?}{color:?}").hash(&mut h),
-                Placed::Rule { x0, y0, x1, y1, border } => format!("{x0}{y0}{x1}{y1}{border:?}").hash(&mut h),
-                Placed::Image { rect, media, spin, .. } => format!("{rect:?}{media}{spin:?}").hash(&mut h),
-                Placed::Shape { rect, kind, fill, stroke, stroke_width, effects, freeform, spin, extra } => {
-                    format!("{rect:?}{kind:?}{fill:?}{stroke:?}{stroke_width}{effects:?}{spin:?}{extra:?}").hash(&mut h);
-                    freeform.as_ref().map(|f| std::sync::Arc::as_ptr(f) as usize).hash(&mut h);
-                }
-                Placed::Graphic { rect, graphic, spin, .. } => {
-                    (std::sync::Arc::as_ptr(graphic) as usize, rect.x.to_bits(), rect.y.to_bits(), rect.w.to_bits(), rect.h.to_bits()).hash(&mut h);
-                    format!("{spin:?}").hash(&mut h)
-                }
-                Placed::Clip { rect, spin, items } => format!("{rect:?}{spin:?}{items:?}").hash(&mut h),
-                Placed::Cell { .. } | Placed::Object { .. } => {}
-            }
+            item_hash(it, &mut h);
         }
     }
     app.session.doc.media.len().hash(&mut h);
-    h.finish()
+    let items = page
+        .items
+        .iter()
+        .map(|it| {
+            let mut ih = std::collections::hash_map::DefaultHasher::new();
+            item_hash(it, &mut ih);
+            (ih.finish(), item_area(it, page))
+        })
+        .collect();
+    PageSig { base: h.finish(), items }
+}
+
+/// What changed between two renders of a page, as the page area to redraw (points, with room for
+/// glyphs reaching past their lines), when only items of known extent changed and they cover at
+/// most half the page; `None` means draw it all.
+fn dirty_area(old: &PageSig, new: &PageSig, page: &Page) -> Option<[f32; 4]> {
+    if old.base != new.base {
+        return None;
+    }
+    let had: std::collections::HashSet<u64> = old.items.iter().map(|(k, _)| *k).collect();
+    let has: std::collections::HashSet<u64> = new.items.iter().map(|(k, _)| *k).collect();
+    let mut area: Option<[f32; 4]> = None;
+    let changed = new.items.iter().filter(|(k, _)| !had.contains(k)).chain(old.items.iter().filter(|(k, _)| !has.contains(k)));
+    for (_, a) in changed {
+        let a = (*a)?;
+        area = Some(match area {
+            None => a,
+            Some(b) => [a[0].min(b[0]), a[1].min(b[1]), a[2].max(b[2]), a[3].max(b[3])],
+        });
+    }
+    // Italics, accents and underlines can reach a little past a line's box.
+    const ROOM: f32 = 10.0;
+    let a = area?;
+    let a = [(a[0] - ROOM).max(0.0), (a[1] - ROOM).max(0.0), (a[2] + ROOM).min(page.w), (a[3] + ROOM).min(page.h)];
+    let finite = a.iter().all(|v| v.is_finite());
+    (finite && a[2] > a[0] && a[3] > a[1] && (a[2] - a[0]) * (a[3] - a[1]) <= page.w * page.h * 0.5).then_some(a)
 }
 
 fn to_screen(origin: Pos2, page_rect: Rect, scale: f32, x: f32, y: f32) -> Pos2 {
@@ -655,6 +739,14 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
         app.canvas.read_target_page = None;
     }
     crate::ink::replay_tick(app, ui.ctx());
+    // Keys and typed text first when the document had the keyboard last frame: what they change
+    // is laid out and drawn in this same frame, so a typed character shows at once rather than a
+    // frame later. (A click that gives the document the keyboard this frame: its keys below.)
+    // While "Save changes?" is up, keys answer it rather than edit the document behind it.
+    let keys_first = app.canvas.focused && !matches!(app.dialog, Some(crate::dialogs::Dialog::SaveChanges { .. }));
+    if keys_first {
+        crate::keys::canvas_events(app, ui.ctx());
+    }
     let layout = app.session.layout();
     if let Some(anchor) = reflow_anchor
         && let Some(page) = reading_anchor_page(&layout, &anchor)
@@ -681,8 +773,10 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
     // With animation effects off the wheel zooms in whole steps, each at once.
     let animate = app.animations_on();
     let opts = ui.ctx().options(|o| o.input_options);
-    let zoom_delta = ui.input(|i| app.canvas.wheel.zoom(i, &opts, animate));
-    if (zoom_delta - 1.0).abs() > 1e-3 && ui.rect_contains_pointer(area) {
+    let (touch_pan, touch_zoom) = touch_input(app, ui, area);
+    let wheel_zoom = ui.input(|i| app.canvas.wheel.zoom(i, &opts, animate));
+    let zoom_delta = wheel_zoom * touch_zoom;
+    if (zoom_delta - 1.0).abs() > 1e-3 && (ui.rect_contains_pointer(area) || (touch_zoom - 1.0).abs() > 1e-3) {
         let reading = app.session.view.read_mode;
         let pct = (app.canvas.scale / PX_PER_PT * zoom_delta * 100.0).clamp(if reading { 75.0 } else { 10.0 }, if reading { 150.0 } else { 500.0 });
         let id = if reading { "view.readTextSize" } else { "view.zoom" };
@@ -797,7 +891,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
     } else {
         egui::Vec2::ZERO
     };
-    let delta = wheel_delta + auto_delta;
+    let delta = wheel_delta + auto_delta + touch_pan;
     let mut scroll_area = egui::ScrollArea::both()
         .id_salt("canvas_scroll")
         .auto_shrink([false, false])
@@ -853,7 +947,8 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                 rects.push(sr);
                 continue;
             }
-            let key = page_key(app, page, scale_px, dim_body);
+            let sig = page_sig(app, page, scale_px, dim_body);
+            let key = sig.key();
             let mut fresh = app.canvas.textures.get(&i).is_some_and(|(k, _)| *k == key);
             // Hide White Space shows only a band of the page; everything below paints into it.
             let band_of = |r: Rect| Rect::from_min_max(pos2(r.min.x - 4.0, r.min.y + band_top), pos2(r.max.x + 4.0, r.min.y + band_bot));
@@ -873,19 +968,37 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                 opts.dark_paper = dark_paper;
                 opts.display.dim_header = !dim_body;
                 opts.display.dim_body = dim_body;
-                let img = doc4me_render::render_page(&app.session.doc, page, scale_px, &opts);
-                let px = img.to_straight();
-                let ci = egui::ColorImage::from_rgba_unmultiplied([img.width as usize, img.height as usize], &px);
-                match app.canvas.textures.get_mut(&i) {
-                    Some((k, tex)) => {
-                        tex.set(ci, egui::TextureOptions::LINEAR);
+                // An edit to a few lines redraws just them, into the page's texture as it is.
+                let (pw, ph) = doc4me_render::page_size_px(page, scale_px);
+                let same_size = app.canvas.textures.get(&i).is_some_and(|(_, tex)| tex.size() == [pw as usize, ph as usize]);
+                let area = app.canvas.page_sigs.get(&i).filter(|_| same_size).and_then(|old| dirty_area(old, &sig, page));
+                match (area, app.canvas.textures.get_mut(&i)) {
+                    (Some(a), Some((k, tex))) => {
+                        let x0 = ((a[0] * scale_px).floor().max(0.0) as u32).min(pw - 1);
+                        let y0 = ((a[1] * scale_px).floor().max(0.0) as u32).min(ph - 1);
+                        let x1 = ((a[2] * scale_px).ceil() as u32).clamp(x0 + 1, pw);
+                        let y1 = ((a[3] * scale_px).ceil() as u32).clamp(y0 + 1, ph);
+                        let img = doc4me_render::render_page_area(&app.session.doc, page, scale_px, x0, y0, x1 - x0, y1 - y0, &opts);
+                        let ci = egui::ColorImage::from_rgba_unmultiplied([img.width as usize, img.height as usize], &img.to_straight());
+                        tex.set_partial([x0 as usize, y0 as usize], ci, egui::TextureOptions::LINEAR);
                         *k = key;
                     }
-                    None => {
-                        let tex = ui.ctx().load_texture(format!("page{i}"), ci, egui::TextureOptions::LINEAR);
-                        app.canvas.textures.insert(i, (key, tex));
+                    (_, slot) => {
+                        let img = doc4me_render::render_page(&app.session.doc, page, scale_px, &opts);
+                        let ci = egui::ColorImage::from_rgba_unmultiplied([img.width as usize, img.height as usize], &img.to_straight());
+                        match slot {
+                            Some((k, tex)) => {
+                                tex.set(ci, egui::TextureOptions::LINEAR);
+                                *k = key;
+                            }
+                            None => {
+                                let tex = ui.ctx().load_texture(format!("page{i}"), ci, egui::TextureOptions::LINEAR);
+                                app.canvas.textures.insert(i, (key, tex));
+                            }
+                        }
                     }
                 }
+                app.canvas.page_sigs.insert(i, sig);
                 rendered += 1;
                 fresh = true;
             } else if visible && !fresh {
@@ -983,6 +1096,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
         // Drop textures of pages that no longer exist.
         let n = layout.pages.len();
         app.canvas.textures.retain(|k, _| *k < n);
+        app.canvas.page_sigs.retain(|k, _| *k < n);
         app.canvas.page_rects = rects.clone();
         balloons(app, ui, &painter, &rects, &layout, geo.scale);
         // Find › Reading Highlight.
@@ -1224,8 +1338,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
     }
     crate::table_resize::cursor(app, ui, &resp, &layout, &rects, geo.scale);
     crate::table_pen::cursor(app, ui, &resp);
-    // While "Save changes?" is up, keys answer it rather than edit the document behind it.
-    if app.canvas.focused && !matches!(app.dialog, Some(crate::dialogs::Dialog::SaveChanges { .. })) {
+    if !keys_first && app.canvas.focused && !matches!(app.dialog, Some(crate::dialogs::Dialog::SaveChanges { .. })) {
         crate::keys::canvas_events(app, ui.ctx());
     }
     let _ = origin;
@@ -1601,6 +1714,89 @@ pub fn nearest_page(rects: &[Rect], p: Pos2) -> Option<usize> {
 /// nothing while the pointer is [`EDGE_MARGIN`] or more inside, then ramping from
 /// [`EDGE_SPEED_MIN`] at the margin to [`EDGE_SPEED_MAX`] at the edge (and capping beyond it),
 /// applied over `dt` seconds. Junk numbers scroll nothing.
+/// Fingers on a touchscreen over the document, as Word takes them: one finger drags the pages
+/// along (no selecting), two pinch to zoom, and a tap (a finger lifted where it went down) places
+/// the caret.
+#[derive(Clone, Debug, Default)]
+struct TouchGesture {
+    /// The fingers down, and where each is now.
+    fingers: Vec<(u64, Pos2)>,
+    start: Pos2,
+    /// How far the first finger has gone from where it went down.
+    travel: f32,
+    /// A second finger came down: a pinch, never a tap.
+    pinched: bool,
+    /// Every finger is up (this frame).
+    ended: bool,
+    /// Where the last finger came up.
+    end: Pos2,
+}
+
+/// The farthest a finger moves for a tap, points.
+const TAP_SLOP: f32 = 10.0;
+
+/// This frame's touchscreen input over `area`: how far one finger dragged the pages (screen
+/// points, positive when the content moves down or right) and the factor two fingers zoomed by.
+fn touch_input(app: &mut WordApp, ui: &Ui, area: Rect) -> (egui::Vec2, f32) {
+    let touches: Vec<(u64, egui::TouchPhase, Pos2)> = ui.input(|i| {
+        i.events
+            .iter()
+            .filter_map(|e| match e {
+                egui::Event::Touch { id, phase, pos, .. } => Some((id.0, *phase, *pos)),
+                _ => None,
+            })
+            .collect()
+    });
+    // A gesture that ended last frame has done its work.
+    if app.canvas.touch.as_ref().is_some_and(|g| g.ended) {
+        app.canvas.touch = None;
+    }
+    let (mut pan, mut zoom) = (egui::Vec2::ZERO, 1.0f32);
+    let spread = |f: &[(u64, Pos2)]| match f {
+        [a, b, ..] => (a.1 - b.1).length(),
+        _ => 0.0,
+    };
+    for (id, phase, pos) in touches {
+        match phase {
+            egui::TouchPhase::Start => {
+                if app.canvas.touch.is_none() {
+                    if !area.contains(pos) {
+                        continue;
+                    }
+                    app.canvas.touch = Some(TouchGesture { start: pos, ..Default::default() });
+                }
+                if let Some(g) = app.canvas.touch.as_mut() {
+                    g.fingers.retain(|f| f.0 != id);
+                    g.fingers.push((id, pos));
+                    g.pinched |= g.fingers.len() > 1;
+                }
+            }
+            egui::TouchPhase::Move => {
+                let Some(g) = app.canvas.touch.as_mut() else { continue };
+                let before = spread(&g.fingers);
+                let Some(f) = g.fingers.iter_mut().find(|f| f.0 == id) else { continue };
+                let prev = std::mem::replace(&mut f.1, pos);
+                if g.fingers.len() == 1 && !g.pinched {
+                    pan += pos - prev;
+                    g.travel = g.travel.max((pos - g.start).length());
+                } else if g.fingers.len() >= 2 && before > 1.0 {
+                    zoom *= spread(&g.fingers) / before;
+                }
+            }
+            egui::TouchPhase::End | egui::TouchPhase::Cancel => {
+                let Some(g) = app.canvas.touch.as_mut() else { continue };
+                g.fingers.retain(|f| f.0 != id);
+                if g.fingers.is_empty() {
+                    g.ended = true;
+                    g.end = pos;
+                    g.pinched |= phase == egui::TouchPhase::Cancel;
+                }
+            }
+        }
+    }
+    (pan, if zoom.is_finite() && zoom > 0.0 { zoom } else { 1.0 })
+}
+
 fn edge_scroll(p: f32, lo: f32, hi: f32, dt: f32) -> f32 {
     if !(p.is_finite() && lo.is_finite() && hi.is_finite() && dt.is_finite()) || hi <= lo {
         return 0.0;
@@ -1625,6 +1821,21 @@ fn clamped_scroll(before: egui::Vec2, delta: egui::Vec2, max: egui::Vec2) -> egu
 fn mouse(app: &mut WordApp, ui: &Ui, resp: &egui::Response, rects: &[Rect], layout: &DocLayout, scale: f32) {
     // A pen or the eraser (Draw tab) owns the pointer.
     if crate::ink::pointer(app, ui, resp, rects, layout, scale) {
+        return;
+    }
+    // A finger drags the pages rather than selecting; a tap places the caret where it lifted.
+    if let Some(g) = &app.canvas.touch {
+        if g.ended
+            && !g.pinched
+            && g.travel <= TAP_SLOP
+            && let Some((page, x, y)) = page_at(rects, layout, scale, g.end)
+            && let Some(pos) = layout.hit(page, x, y, app.session.sel.focus.story)
+        {
+            let _ = app.run("caret.set", json!({"pos": pos}));
+            app.session.page_hint = page;
+            app.canvas.want_focus = true;
+        }
+        app.canvas.dragging = false;
         return;
     }
     let pointer = resp.interact_pointer_pos().or_else(|| resp.hover_pos());
@@ -2437,6 +2648,40 @@ fn is_followable_link(url: &str) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Typing in a paragraph redraws only that paragraph's band of the page; a change the band
+    /// can't hold (a new header) or that covers most of the page draws it all.
+    #[test]
+    fn an_edit_redraws_only_the_lines_it_changed() {
+        let text = (1..=12).map(|i| format!("Paragraph {i} with a few words of text in it")).collect::<Vec<_>>().join("\n");
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text(&text)), crate::Services::default());
+        let sig = |a: &mut WordApp| {
+            let l = a.session.layout();
+            (page_sig(a, &l.pages[0], 2.0, false), l.pages[0].clone())
+        };
+        let (before, _) = sig(&mut a);
+        a.run("select.text", serde_json::json!({"text": "Paragraph 7"})).unwrap();
+        a.run("select.collapse", serde_json::json!({"end": true})).unwrap();
+        a.run("text.insert", serde_json::json!({"text": "x"})).unwrap();
+        let (after, page) = sig(&mut a);
+        assert_ne!(before.key(), after.key());
+        let area = dirty_area(&before, &after, &page).expect("a band, not the page");
+        let line = page.items.iter().find_map(|it| item_area(it, &page)).map_or(0.0, |r| r[3] - r[1]);
+        assert!(area[3] - area[1] < line * 2.0 + 21.0, "{area:?} (one line is {line} pt)");
+        assert!(area[1] > 72.0 + line * 5.0, "below the paragraphs before it: {area:?}");
+        // Nothing new laid out: the same key, nothing to redraw.
+        assert_eq!(after.key(), sig(&mut a).0.key());
+        // A header: everything.
+        a.run("insert.header", serde_json::json!({})).ok();
+        a.run("text.insert", serde_json::json!({"text": "Header"})).ok();
+        let (with_header, page) = sig(&mut a);
+        if with_header.base != after.base {
+            assert_eq!(dirty_area(&after, &with_header, &page), None);
+        }
+        // Most of the page changed: everything.
+        let all = PageSig { base: after.base, items: after.items.iter().map(|(k, r)| (k.wrapping_add(1), *r)).collect() };
+        assert_eq!(dirty_area(&after, &all, &page), None);
+    }
 
     #[test]
     fn reading_animation_eases_then_lands_exactly_on_column_start() {

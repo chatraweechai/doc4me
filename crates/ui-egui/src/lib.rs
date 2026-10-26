@@ -40,6 +40,7 @@ pub mod dialogs_layout;
 pub mod dialogs_lists;
 pub mod dialogs_misc;
 pub mod dialogs_notes;
+pub mod dialogs_object;
 pub mod dialogs_para;
 pub mod dialogs_refs;
 pub mod dialogs_review;
@@ -376,6 +377,8 @@ pub struct WordApp {
     queued_shots: Vec<(u64, f64, u32)>,
     pending_shots: Vec<(u64, Option<String>, std::sync::mpsc::Sender<Value>, f64)>,
     pub(crate) synthetic: Vec<egui::Event>,
+    /// The synthetic touch (`ui.touch`) the pointer follows, as egui-winit does for a real one.
+    pub(crate) touch_pointer: Option<u64>,
     /// Badge rects recorded during layout for the current keytip phase (cleared by `logic`, painted by `show`).
     pub(crate) keytip_rects: Vec<(egui::Rect, String)>,
     styled: bool,
@@ -400,6 +403,17 @@ pub struct WordApp {
     /// Whether egui's own animations were last switched on or off ([`theme::apply_animations`]).
     applied_animations: Option<bool>,
     pub frame_ms: f64,
+    /// Frames laid out since the start (`ui.inspect` reports it, for frame rates).
+    pub frames: u64,
+    /// When this frame began ([`Self::logic`]).
+    frame_start: f64,
+    /// The last frame that read a key or typed text: how long the app took over it, from the
+    /// frame's start to its drawing done (what the graphics card then shows is not included),
+    /// and how many such frames there have been.
+    pub key_frame_ms: f64,
+    pub key_frames: u64,
+    /// The same for the last frame, whatever it read.
+    pub frame_cpu_ms: f64,
     /// The window title last sent; a viewport command schedules a repaint, so only send changes.
     sent_title: String,
     pub quit_requested: bool,
@@ -493,6 +507,7 @@ impl WordApp {
             queued_shots: Vec::new(),
             pending_shots: Vec::new(),
             synthetic: Vec::new(),
+            touch_pointer: None,
             keytip_rects: Vec::new(),
             styled: false,
             fonts_hans: false,
@@ -507,6 +522,11 @@ impl WordApp {
             system_animations: None,
             applied_animations: None,
             frame_ms: 0.0,
+            frames: 0,
+            frame_start: 0.0,
+            key_frame_ms: 0.0,
+            key_frames: 0,
+            frame_cpu_ms: 0.0,
             sent_title: String::new(),
             quit_requested: false,
             autosave: true,
@@ -1316,6 +1336,7 @@ impl WordApp {
 
     /// Per-frame logic before layout: control requests, screenshots, shortcuts, file drops.
     pub fn logic(&mut self, ctx: &egui::Context) {
+        self.frame_start = now_ms();
         let lang = i18n::Lang::from_pref(&self.ui.language);
         i18n::set_current(lang);
         // New documents are written in the interface's language when Doc4Me can proof it
@@ -1550,6 +1571,19 @@ impl WordApp {
             self.sent_title = title;
         }
         self.frame_ms = now_ms() - t0;
+        self.frames += 1;
+        // From `logic`'s start when it ran this frame (hosts that don't call it: from `ui`'s).
+        let start = if (0.0..1000.0).contains(&(t0 - self.frame_start)) { self.frame_start } else { t0 };
+        self.frame_cpu_ms = now_ms() - start;
+        if ctx.input(|i| i.events.iter().any(|e| matches!(e, egui::Event::Text(_) | egui::Event::Key { pressed: true, .. }))) {
+            self.key_frame_ms = self.frame_cpu_ms;
+            self.key_frames += 1;
+        }
+        // Control-channel input still queued ([`Self::raw_input_hook`] feeds it a frame at a
+        // time): draw again for it, instead of waiting for the next request or real input.
+        if !self.synthetic.is_empty() {
+            ctx.request_repaint();
+        }
         // Typing and formatting land here, after `logic` has reported.
         self.report_dirty();
     }
@@ -1798,6 +1832,10 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         // Cell Options and Table Positioning.
         "table.cellOptions" if params.as_object().is_none_or(|m| m.is_empty()) => Some("cellOptions"),
         "table.positioning" if params.as_object().is_none_or(|m| m.is_empty()) => Some("tablePositioning"),
+        // Layout, Format Picture and Format Shape for the selected object.
+        "arrange.layout" if params.as_object().is_none_or(|m| m.is_empty()) => Some("objectLayout"),
+        "picture.format" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formatPicture"),
+        "shape.format" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formatShape"),
         // Modify Style without a style: the style of the paragraph at the caret.
         "styles.modify" if !has("style") => Some("modifyStyle"),
         _ => None,

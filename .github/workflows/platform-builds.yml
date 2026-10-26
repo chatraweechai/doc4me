@@ -1,0 +1,88 @@
+# Builds Doc4Me for Windows arm64 (MSI and portable zip, cross-compiled on x64) and for macOS
+# (universal DMG and CLI zip, ad-hoc signed unless signing secrets are set), the readiness rows
+# plat-002 and plat-003 (docs/readiness/manual.tsv). The macOS job also starts the build
+# (doc4me-cli --version, at the end of packaging/macos/package.sh); the arm64 binaries can't run
+# on the x64 runner, so package.ps1 checks their PE headers instead. Run it from the Actions tab
+# (workflow_dispatch) or by pushing a `v*` tag. Third-party actions are pinned to commit SHAs, as
+# in windows-x64-installer.yml. Nothing is signed with a real identity or published here.
+name: Windows arm64 and macOS builds
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: platform-builds-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows-arm64:
+    runs-on: windows-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Install Rust (MSVC, arm64 target)
+        uses: dtolnay/rust-toolchain@686976e191b89faba57d3206551f0f330d8cb249 # stable branch
+        with:
+          toolchain: stable
+          targets: aarch64-pc-windows-msvc
+
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+
+      - name: Install WiX v5 and extensions
+        shell: pwsh
+        run: |
+          dotnet tool install --global wix --version 5.0.2
+          wix extension add -g WixToolset.UI.wixext/5.0.2
+          wix extension add -g WixToolset.Util.wixext/5.0.2
+
+      # Unsigned: no signing secrets in this job.
+      - name: Build and package (arm64)
+        shell: pwsh
+        run: pwsh packaging/windows/package.ps1 -Arch arm64
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: doc4me-windows-arm64
+          path: |
+            dist/release/*.msi
+            dist/release/*.zip
+          if-no-files-found: error
+          retention-days: 14
+
+  macos:
+    runs-on: macos-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Install Rust (both macOS targets)
+        uses: dtolnay/rust-toolchain@686976e191b89faba57d3206551f0f330d8cb249 # stable branch
+        with:
+          toolchain: stable
+          targets: aarch64-apple-darwin, x86_64-apple-darwin
+
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+
+      # Ad-hoc signed (MACOS_SIGN_IDENTITY unset): Gatekeeper rejects it on other Macs, but the
+      # build, the bundle and the DMG are the release ones.
+      - name: Build and package (universal)
+        run: packaging/macos/package.sh --arch universal
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: doc4me-macos-universal
+          path: |
+            dist/release/*.dmg
+            dist/release/*.zip
+          if-no-files-found: error
+          retention-days: 14

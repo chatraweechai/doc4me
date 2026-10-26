@@ -5094,3 +5094,92 @@ fn ctrl_alt_5_goes_round_the_floating_shapes() {
     run(&mut s, "select.collapse", json!({}));
     assert!(!s.shape_nav, "Esc leaves shape navigation");
 }
+
+/// Word's Layout dialog (`arrange.layout`): the selected picture's position, wrapping and size,
+/// read back as set, kept in .docx, one undo step; unknown values are refused.
+#[cfg(not(target_arch = "wasm32"))]
+#[test]
+fn layout_dialog_sets_position_wrapping_and_size() {
+    let mut s = s();
+    run(&mut s, "text.insert", json!({"text": "Before "}));
+    let png = crate::cmd::insert::base64_encode(&tiny_png());
+    run(&mut s, "insert.picture", json!({"data": png, "width": 100}));
+    run(&mut s, "select.objects", json!({"index": 0}));
+    let got = run(&mut s, "arrange.layout", json!({}));
+    assert_eq!((&got["wrap"], &got["width"]), (&json!("inline"), &json!(100.0)));
+    assert!(s.run("arrange.layout", &json!({"horizontalFrom": "paragraph"})).is_err(), "not a horizontal anchor");
+    assert!(s.run("arrange.layout", &json!({"vertical": "left"})).is_err());
+    assert!(s.run("arrange.layout", &json!({"wrap": "around"})).is_err());
+    let undo_before = s.undo_labels().len();
+    run(
+        &mut s,
+        "arrange.layout",
+        json!({"horizontal": "center", "horizontalFrom": "margin", "vertical": 72.0, "verticalFrom": "page", "wrap": "square", "wrapSide": "largest", "top": 6.0, "left": 12.0, "width": 120.0, "rotation": 370.0}),
+    );
+    assert_eq!(s.undo_labels().len(), undo_before + 1, "one undo step");
+    let got = run(&mut s, "arrange.layout", json!({}));
+    assert_eq!(
+        (&got["horizontal"], &got["horizontalFrom"], &got["vertical"], &got["verticalFrom"], &got["wrap"], &got["wrapSide"], &got["moveWithText"]),
+        (&json!("center"), &json!("margin"), &json!(72.0), &json!("page"), &json!("square"), &json!("largest"), &json!(false))
+    );
+    assert_eq!((&got["top"], &got["left"], &got["rotation"]), (&json!(6.0), &json!(12.0), &json!(10.0)));
+    assert!((got["width"].as_f64().unwrap() - 120.0).abs() < 0.01);
+    // Move with Text measures from the paragraph.
+    run(&mut s, "arrange.layout", json!({"moveWithText": true}));
+    assert_eq!(run(&mut s, "arrange.layout", json!({}))["verticalFrom"], json!("paragraph"));
+    let back = doc4me_docx::read(&doc4me_docx::write(&s.doc).unwrap()).unwrap();
+    let f = back
+        .body
+        .iter()
+        .flat_map(|b| b.as_para().map(|p| p.objects.clone()).unwrap_or_default())
+        .find_map(|o| o.frame().map(|(_, _, f)| f.clone()))
+        .unwrap();
+    assert_eq!(
+        (f.h_align, f.wrap, f.wrap_text),
+        (Some(doc4me_doc::para::FloatAlign::Center), doc4me_doc::para::Wrap::Square, doc4me_doc::para::WrapText::Largest)
+    );
+    assert!((f.dist_top - 6.0).abs() < 0.1 && (f.dist - 12.0).abs() < 0.1, "{f:?}");
+}
+
+/// Format Picture and Format Shape: several settings in one undo step, read back as set.
+#[cfg(not(target_arch = "wasm32"))]
+#[test]
+fn format_picture_and_shape_apply_in_one_step() {
+    let mut s = s();
+    let png = crate::cmd::insert::base64_encode(&tiny_png());
+    run(&mut s, "insert.picture", json!({"data": png, "width": 100}));
+    run(&mut s, "select.objects", json!({"index": 0}));
+    let before = s.undo_labels().len();
+    run(
+        &mut s,
+        "picture.format",
+        json!({"width": 80, "height": 40, "crop": {"left": 0.1}, "brightness": 20, "rotation": 15, "alt": "A red square", "title": "Swatch"}),
+    );
+    assert_eq!(s.undo_labels().len(), before + 1, "one undo step");
+    let got = run(&mut s, "picture.format", json!({}));
+    assert_eq!(
+        (&got["width"], &got["height"], &got["rotation"], &got["alt"], &got["title"]),
+        (&json!(80.0), &json!(40.0), &json!(15.0), &json!("A red square"), &json!("Swatch"))
+    );
+    assert!((got["crop"]["left"].as_f64().unwrap() - 0.1).abs() < 1e-6);
+    assert_eq!(s.undo_labels().len(), before + 1, "reading the settings leaves no undo step");
+    run(&mut s, "edit.undo", json!({}));
+    assert_eq!(run(&mut s, "picture.format", json!({}))["width"], json!(100.0), "undone together");
+    // Reading them keeps Redo and Repeat, and leaves the document unchanged.
+    s.dirty = false;
+    run(&mut s, "picture.format", json!({}));
+    assert!(!s.dirty);
+    run(&mut s, "edit.redo", json!({}));
+    assert_eq!(run(&mut s, "picture.format", json!({}))["width"], json!(80.0), "redone");
+    // A shape.
+    run(&mut s, "caret.docEnd", json!({}));
+    run(&mut s, "insert.shape", json!({"kind": "rectangle"}));
+    run(&mut s, "select.objects", json!({"index": 1}));
+    assert!(s.run("shape.format", &json!({"fill": "red"})).is_err(), "colours are RRGGBB");
+    run(&mut s, "shape.format", json!({"fill": "00AA00", "line": null, "lineWidth": 3, "width": 150, "decorative": true}));
+    let got = run(&mut s, "shape.format", json!({}));
+    assert_eq!(
+        (&got["fill"], &got["line"], &got["width"], &got["decorative"]),
+        (&json!("00AA00"), &serde_json::Value::Null, &json!(150.0), &json!(true))
+    );
+}

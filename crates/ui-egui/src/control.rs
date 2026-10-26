@@ -8,6 +8,8 @@
 //!   real pointer input in screen points (reaches every widget)
 //! - `ui.clickText {page, x, y}`: click at a page position (points from the page's top-left)
 //! - `ui.key {key, shift?, alt?, cmd?}`, `ui.text {text}`: keyboard input through egui
+//! - `ui.scroll {dy, dx?, x?, y?, unit?}`: a wheel turn; `ui.touch {phase, x, y, id?, force?}`: a
+//!   finger on a touchscreen
 //! - `ui.screenshot {path?}`: PNG of the window; `ui.render {path?, page?, scale?}`: page PNG
 //!   (without `path`, both reply with the PNG as base64 `png`)
 //! - `ui.parity`: feature catalog parity
@@ -60,7 +62,7 @@ pub fn inspect(app: &mut WordApp, ctx: &egui::Context) -> Value {
         "focused": app.canvas.focused,
         "title": app.title_stem(),
         "dirty": app.session.dirty,
-        "perf": {"frameMs": app.frame_ms, "renderMs": app.canvas.render_ms, "layoutMs": app.session.layout().ms},
+        "perf": {"frameMs": app.frame_ms, "renderMs": app.canvas.render_ms, "layoutMs": app.session.layout().ms, "frames": app.frames, "keyFrameMs": app.key_frame_ms, "keyFrames": app.key_frames, "frameCpuMs": app.frame_cpu_ms},
     })
 }
 
@@ -107,7 +109,8 @@ fn click_events(app: &mut WordApp, pos: egui::Pos2, button: egui::PointerButton,
 pub fn handle(app: &mut WordApp, ctx: &egui::Context, req: &ControlRequest) -> Outcome {
     let p = &req.params;
     let s = |k: &str| p.get(k).and_then(Value::as_str);
-    let f = |k: &str| p.get(k).and_then(Value::as_f64).map(|v| v as f32);
+    // Numbers beyond f32 (1e300) count as missing, so no position or delta is infinite.
+    let f = |k: &str| p.get(k).and_then(Value::as_f64).map(|v| v as f32).filter(|v| v.is_finite());
     match req.method.as_str() {
         "engine.execute" | "command" => {
             let Some(id) = s("command").or(s("id")) else { return err("missing `command`") };
@@ -195,6 +198,57 @@ pub fn handle(app: &mut WordApp, ctx: &egui::Context, req: &ControlRequest) -> O
             let m = mods(p);
             app.synthetic.push(egui::Event::Key { key: k, physical_key: None, pressed: true, repeat: false, modifiers: m });
             app.synthetic.push(egui::Event::Key { key: k, physical_key: None, pressed: false, repeat: false, modifiers: m });
+            ok(json!({"queued": true}))
+        }
+        "ui.scroll" => {
+            // A wheel turn (points; positive y moves the content down) over `x`, `y`, by default
+            // the middle of the document area.
+            let at = match (f("x"), f("y")) {
+                (Some(x), Some(y)) => egui::pos2(x, y),
+                _ => app.canvas.canvas_rect.map_or(ctx.content_rect().center(), |r| r.center()),
+            };
+            let delta = egui::vec2(f("dx").unwrap_or(0.0), f("dy").unwrap_or(0.0));
+            if !(delta.x.is_finite() && delta.y.is_finite()) {
+                return err("bad dx/dy");
+            }
+            let unit = if s("unit") == Some("line") { egui::MouseWheelUnit::Line } else { egui::MouseWheelUnit::Point };
+            app.synthetic.push(egui::Event::PointerMoved(at));
+            app.synthetic.push(egui::Event::MouseWheel { unit, delta, phase: egui::TouchPhase::Move, modifiers: mods(p) });
+            ok(json!({"queued": true}))
+        }
+        "ui.touch" => {
+            // One finger (`id`) touching the screen, as a touchscreen reports it: the touch event,
+            // and for the first finger down the pointer events egui-winit makes of it.
+            let (Some(x), Some(y)) = (f("x"), f("y")) else { return err("missing x/y") };
+            let id = p.get("id").and_then(Value::as_u64).unwrap_or(0);
+            let phase = match s("phase").unwrap_or("move") {
+                "start" => egui::TouchPhase::Start,
+                "move" => egui::TouchPhase::Move,
+                "end" => egui::TouchPhase::End,
+                "cancel" => egui::TouchPhase::Cancel,
+                other => return err(format!("unknown touch phase `{other}`")),
+            };
+            let pos = egui::pos2(x, y);
+            let force = f("force").filter(|v| v.is_finite()).map(|v| v.clamp(0.0, 1.0));
+            app.synthetic.push(egui::Event::Touch { device_id: egui::TouchDeviceId(1), id: egui::TouchId(id), phase, pos, force });
+            if app.touch_pointer.is_none_or(|t| t == id) {
+                let button =
+                    |pressed| egui::Event::PointerButton { pos, button: egui::PointerButton::Primary, pressed, modifiers: egui::Modifiers::NONE };
+                match phase {
+                    egui::TouchPhase::Start => {
+                        app.touch_pointer = Some(id);
+                        app.synthetic.push(egui::Event::PointerMoved(pos));
+                        app.synthetic.push(button(true));
+                    }
+                    egui::TouchPhase::Move => app.synthetic.push(egui::Event::PointerMoved(pos)),
+                    egui::TouchPhase::End | egui::TouchPhase::Cancel => {
+                        app.touch_pointer = None;
+                        app.synthetic.push(egui::Event::PointerMoved(pos));
+                        app.synthetic.push(button(false));
+                        app.synthetic.push(egui::Event::PointerGone);
+                    }
+                }
+            }
             ok(json!({"queued": true}))
         }
         "ui.text" => {

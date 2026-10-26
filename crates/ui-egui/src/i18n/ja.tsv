@@ -2660,3 +2660,24 @@ spacing	Normal	標準
 	Move to where?	移動先を指定してください
 	Copy to where?	コピー先を指定してください
 	Select Floating Shapes	浮動図形の選択
+	Absolute position	絶対位置
+	Both sides	両側
+	Brightness, contrast and transparency change the picture from how it looks now.	明るさ、コントラスト、透明度は現在の見た目を基準に図を変更します。
+	Brightness:	明るさ:
+	Contrast:	コントラスト:
+	Fill & Line	塗りつぶしと線
+	Fill:	塗りつぶし:
+	Format Picture	図の書式設定
+	Format Shape	図形の書式設定
+	Inside Margin	内側の余白
+	Largest only	広い側のみ
+	Left only	左側のみ
+	Line width:	線の幅:
+	Line:	線:
+	Lock aspect ratio	縦横比を固定する
+	Move object with text	文字列と一緒に移動する
+	No Line	線なし
+	Outside Margin	外側の余白
+	Right only	右側のみ
+	Transparency:	透明度:
+	relative to	基準

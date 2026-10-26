@@ -10,6 +10,7 @@ mod parity;
 mod readiness;
 mod stats;
 mod version;
+mod window;
 
 use sha2::Digest;
 use std::path::{Path, PathBuf};
@@ -31,6 +32,9 @@ commands:
                   the measured readiness number over the check sets in docs/readiness/ (written to
                   docs/readiness.md); --download fetches the real-world corpus into
                   corpus/readiness (SHA-256 checked), --corpus checks it (needs pdfinfo/pdftotext)
+  window <soak|fonts|save|typing|scroll|touch> [--app PATH] [--cli PATH] [--out DIR] [--hours H]
+                  readiness hand checks in the app's real window, driven through its control
+                  channel (on Linux without a display: xvfb-run -a cargo xtask window …)
   version [set X.Y.Z[-pre]]
                   print the workspace version, or set it ([workspace.package] in Cargo.toml)
   ico <out.ico> <in.png>...
@@ -49,6 +53,7 @@ fn main() -> ExitCode {
         Some("stats") => stats::run(&root(), rest.contains(&"--exact")),
         Some("parity") => parity::run(&root()),
         Some("readiness") => readiness::run(&root(), &rest),
+        Some("window") => window::run(&root(), &rest),
         Some("ico") => ico::run(&rest),
         Some("version") => version::run(&root(), &rest),
         Some("-h" | "--help" | "help") | None => {

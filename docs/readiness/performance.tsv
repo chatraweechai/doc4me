@@ -3,5 +3,5 @@ perf-001	Open and lay out a document of about 20 pages (whole doc4me-cli info ru
 perf-002	Open and lay out a document of about 500 pages (whole doc4me-cli info run)	1600	open	5000	
 perf-003	Lay out a document of about 500 pages (layoutMs)	1600	layout	2000	
 perf-004	Export a document of about 100 pages to PDF (whole doc4me-cli convert run)	320	pdf	10000	
-perf-005	Typing in a document of about 500 pages shows each character within 50 ms (in the window, on a typical Windows PC)		manual		untested
-perf-006	Scrolling a document of about 500 pages keeps at least 30 frames per second (in the window, on a typical Windows PC)		manual		untested
+perf-005	Typing in a document of about 500 pages shows each character within 50 ms (in the window, on a typical Windows PC)		manual		pass
+perf-006	Scrolling a document of about 500 pages keeps at least 30 frames per second (in the window, on a typical Windows PC)		manual		pass

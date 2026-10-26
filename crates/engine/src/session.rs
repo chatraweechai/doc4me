@@ -310,6 +310,8 @@ pub struct Session {
     typing_open: bool,
     /// The next mutating command joins the previous undo step (later frames of a drag).
     join_next: bool,
+    /// The command running now only read its settings ([`Session::only_read`]).
+    only_read: bool,
     rev: u64,
     /// Which document this is: changes when [`Session::set_document`] replaces it (open, new,
     /// mail merge, recover), never on an edit.
@@ -495,6 +497,7 @@ impl Session {
             redo: Vec::new(),
             typing_open: false,
             join_next: false,
+            only_read: false,
             rev: 1,
             document_id: 1,
             cache: LayoutCache::new(),
@@ -724,6 +727,11 @@ impl Session {
     pub fn join_next_undo(&mut self) {
         self.join_next = true;
     }
+    /// Called by a mutating command asked only for its settings (a dialog opening with them):
+    /// its run leaves no undo step, keeps Redo and Repeat, and doesn't mark the document changed.
+    pub fn only_read(&mut self) {
+        self.only_read = true;
+    }
     /// Stamp the document's save metadata (modified time, last modified by, revision; created
     /// when it has none) the way Word does on every save. `file.save` calls it, and so does any
     /// front end that writes the bytes itself (the web build's download, #262).
@@ -862,6 +870,7 @@ impl Session {
             redo,
             typing_open,
             join_next,
+            only_read: _,
             rev: _,
             cache: _,
             layout: _,
@@ -982,6 +991,7 @@ impl Session {
         if record && let Some((_, steps)) = self.recording.as_mut() {
             steps.push((id.to_string(), kept()));
         }
+        let last_command = spec.mutates.then(|| self.last_command.clone());
         if spec.mutates && !matches!(id, "edit.undo" | "edit.redo" | "edit.repeat") {
             self.last_command = Some((id.to_string(), kept()));
         }
@@ -1039,7 +1049,9 @@ impl Session {
         let sel_before = self.sel.clone();
         let run = spec.run;
         let mutates = spec.mutates;
+        self.only_read = false;
         let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| crate::cmd::column::dispatch(self, id, mutates, run, params)));
+        let only_read = std::mem::take(&mut self.only_read);
         let mut result = match result {
             Ok(r) => r,
             Err(p) => {
@@ -1056,6 +1068,20 @@ impl Session {
             result = Err(CmdError::Disabled(format!("{id}: only the editable regions of this protected document can change")));
         }
         match &result {
+            Ok(_) if spec.mutates && only_read => {
+                if let Some((_, _, h, r, t, ev, _)) = before_doc {
+                    self.history = h;
+                    self.redo = r;
+                    self.typing_open = t;
+                    self.undo_evicted = ev;
+                }
+                if let Some(last) = last_command {
+                    self.last_command = last;
+                }
+                if record && let Some((_, steps)) = self.recording.as_mut() {
+                    steps.pop();
+                }
+            }
             Ok(_) => {
                 if spec.mutates {
                     // Formatting changed while tracking becomes a formatting revision.

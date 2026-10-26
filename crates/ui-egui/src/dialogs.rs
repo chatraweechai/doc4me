@@ -476,6 +476,9 @@ pub enum Dialog {
     },
     /// Line Numbers, Hyphenation, Language, Envelopes and Labels (#407).
     Layout(Box<crate::dialogs_layout::LayoutDialog>),
+    /// Layout (Position, Text Wrapping, Size), Format Picture and Format Shape for the selected
+    /// object ([`crate::dialogs_object`]).
+    Object(Box<crate::dialogs_object::ObjectDialog>),
 }
 
 /// The Table Properties dialog's fields. Lengths are in the interface unit
@@ -912,6 +915,7 @@ impl Dialog {
             Dialog::Templates { .. } => "templates",
             Dialog::Organizer { .. } => "organizer",
             Dialog::Layout(d) => d.name(),
+            Dialog::Object(d) => d.name(),
         }
     }
 
@@ -943,6 +947,9 @@ impl Dialog {
         }
         if let Some(d) = crate::dialogs_misc::open(name, app) {
             return Some(Dialog::Misc(Box::new(d)));
+        }
+        if let Some(d) = crate::dialogs_object::open(name, app) {
+            return Some(Dialog::Object(Box::new(d)));
         }
         if matches!(name, "compare" | "combine" | "autoCorrect" | "restrictEditing" | "acceptRejectChanges" | "highlightChanges") {
             return crate::dialogs_review::open(name, app).map(|d| Dialog::Review(Box::new(d)));
@@ -1376,6 +1383,7 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context) {
         Dialog::Templates { .. } => "Templates and Add-ins",
         Dialog::Organizer { .. } => "Organizer",
         Dialog::Layout(d) => d.title(),
+        Dialog::Object(d) => d.title(),
     };
     let id = egui::Id::new(("dialog", title));
     let shown = place_dialog(ctx, id, egui::Window::new(tl!(title)).id(id).collapsible(false).resizable(false)).open(&mut open).show(ctx, |ui| {
@@ -2804,6 +2812,7 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         Dialog::Templates { form } => crate::dialogs_templates::templates(app, ui, form),
         Dialog::Organizer { form } => crate::dialogs_templates::organizer(app, ui, form),
         Dialog::Layout(d) => crate::dialogs_layout::body(app, ui, d),
+        Dialog::Object(d) => crate::dialogs_object::body(app, ui, d),
         Dialog::FindRecipient { text, message } => {
             ui.horizontal(|ui| {
                 ui.label(tl!("Find:"));

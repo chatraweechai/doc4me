@@ -88,6 +88,13 @@ fn has_shape(s: &Session) -> Option<&'static str> {
 pub fn specs() -> Vec<CommandSpec> {
     vec![
         CommandSpec::new("picture.size", "Size", "Picture Format › Size", size).params(r#"{"width"?: pt, "height"?: pt, "lockAspect"?: bool, "scale"?: percent}"#).when(has_sizable),
+        // Word's Format Picture and Format Shape: several settings at once, one undo step.
+        CommandSpec::new("picture.format", "Format Picture", "Picture Format › Picture Styles", format_picture)
+            .params(r#"{"width"?: pt, "height"?: pt, "lockAspect"?: bool, "crop"?: {"left"?, "top"?, "right"?, "bottom"? (fractions 0–0.45)}, "brightness"?: -100..100, "contrast"?: -100..100, "transparency"?: 0..100, "rotation"?: degrees, "alt"?: string, "title"?: string, "decorative"?: bool} (brightness, contrast and transparency change the picture from how it is now; without settings it returns the current ones)"#)
+            .when(has_picture),
+        CommandSpec::new("shape.format", "Format Shape", "Shape Format › Shape Styles", format_shape)
+            .params(r#"{"fill"?: "RRGGBB"|null, "line"?: "RRGGBB"|null, "lineWidth"?: pt, "width"?: pt, "height"?: pt, "rotation"?: degrees, "alt"?: string, "title"?: string, "decorative"?: bool} (without settings it returns the current ones)"#)
+            .when(has_shape_or_canvas),
         CommandSpec::new("picture.crop", "Crop", "Picture Format › Size", |s, v| {
             let c = [p::f32(v, "left"), p::f32(v, "top"), p::f32(v, "right"), p::f32(v, "bottom")].map(|x| x.unwrap_or(0.0).clamp(0.0, 0.45));
             with_obj(s, |o| {
@@ -330,6 +337,12 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("arrange.selectionPane", "Selection Pane", "Layout › Arrange", objects_list).key("Alt+F10").pure(),
         CommandSpec::new("arrange.bounds", "Move or Resize", "Layout › Arrange", bounds)
             .params(r#"{"width"?: pt, "height"?: pt, "x"?: pt, "y"?: pt, "page"?: n}  (x/y: the top-left on page `page` (0-based, default its page); moving an inline object floats it)"#)
+            .when(has_movable),
+        // Word's Layout dialog (Format Object): Position, Text Wrapping and Size together.
+        CommandSpec::new("arrange.layout", "Layout", "Layout › Arrange › Position", layout_options)
+            .params(
+                r#"{"horizontal"?: "left|center|right|inside|outside"|pt, "horizontalFrom"?: "margin|page|column|character|leftMargin|rightMargin|insideMargin|outsideMargin", "vertical"?: "top|center|bottom|inside|outside"|pt, "verticalFrom"?: "margin|page|paragraph|line|topMargin|bottomMargin|insideMargin|outsideMargin", "moveWithText"?: bool, "wrap"?: "inline|square|tight|through|topAndBottom|behindText|inFrontOfText", "wrapSide"?: "bothSides|left|right|largest", "top"?, "bottom"?, "left"?, "right"? (pt from the text), "width"?: pt, "height"?: pt, "rotation"?: degrees} (the selected picture, shape, text box or group; without settings it returns the current ones)"#,
+            )
             .when(has_movable),
         CommandSpec::new("arrange.nudge", "Nudge", "Layout › Arrange", |s, v| {
             let d = |k| p::f32(v, k).unwrap_or(0.0).clamp(-MAX_OFFSET, MAX_OFFSET);
@@ -770,6 +783,308 @@ fn move_object(s: &mut Session, pos: Pos, page: Option<u64>, x: f32, y: f32, (w,
 
 /// Turn the selected floating object's alignment (left, centred, …) into an offset from its
 /// column / paragraph that keeps it where it is, so it can be moved by an offset.
+/// Run `id` as part of the command running now (its undo step).
+fn part_of(s: &mut Session, id: &str, v: Value) -> Result<(), CmdError> {
+    s.join_next_undo();
+    s.run(id, &v).map(|_| ())
+}
+
+/// The alt text settings in `v`, as `object.altText` takes them, if any.
+fn alt_params(v: &Value) -> Option<Value> {
+    let mut a = serde_json::Map::new();
+    for (k, to) in [("alt", "text"), ("title", "title"), ("decorative", "decorative")] {
+        if let Some(x) = v.get(k).filter(|x| !x.is_null()) {
+            a.insert(to.into(), x.clone());
+        }
+    }
+    (!a.is_empty()).then_some(Value::Object(a))
+}
+
+/// What Format Picture and Format Shape show of the selected object's frame and alt text.
+fn frame_json(o: &InlineObject) -> serde_json::Map<String, Value> {
+    let (w, h) = obj_size(o);
+    let f = o.frame().map(|(_, _, f)| f.clone()).unwrap_or_default();
+    let mut m = serde_json::Map::new();
+    m.insert("width".into(), json!(w));
+    m.insert("height".into(), json!(h));
+    m.insert("rotation".into(), json!(f.rot));
+    m.insert("alt".into(), json!(o.alt_text()));
+    m.insert("title".into(), json!(f.alt.title));
+    m.insert("decorative".into(), json!(f.alt.decorative));
+    m
+}
+
+/// `picture.format`.
+fn format_picture(s: &mut Session, v: &Value) -> CmdResult {
+    let (_, o) = selected(s).ok_or_else(|| CmdError::Disabled("select a picture first".into()))?;
+    let keys = ["width", "height", "lockAspect", "crop", "brightness", "contrast", "transparency", "rotation", "alt", "title", "decorative"];
+    if !keys.iter().any(|k| v.get(*k).is_some()) {
+        let mut m = frame_json(&o);
+        if let InlineObject::Image { crop, .. } = &o {
+            m.insert("crop".into(), json!({"left": crop[0], "top": crop[1], "right": crop[2], "bottom": crop[3]}));
+        }
+        s.only_read();
+        return Ok(Value::Object(m));
+    }
+    if ["width", "height"].iter().any(|k| v.get(*k).is_some()) {
+        let mut sz = json!({"lockAspect": p::bool(v, "lockAspect").unwrap_or(false)});
+        for k in ["width", "height"] {
+            if let Some(x) = p::f32(v, k) {
+                sz[k] = json!(x);
+            }
+        }
+        part_of(s, "picture.size", sz)?;
+    }
+    if let Some(c) = v.get("crop").filter(|c| c.is_object()) {
+        part_of(s, "picture.crop", c.clone())?;
+    }
+    let (b, c) = (p::f32(v, "brightness").unwrap_or(0.0), p::f32(v, "contrast").unwrap_or(0.0));
+    if b != 0.0 || c != 0.0 {
+        part_of(s, "picture.corrections", json!({"brightness": b, "contrast": c}))?;
+    }
+    if let Some(t) = p::f32(v, "transparency").filter(|t| *t > 0.0) {
+        part_of(s, "picture.transparency", json!({"percent": t}))?;
+    }
+    if let Some(r) = p::f32(v, "rotation") {
+        part_of(s, "arrange.rotation", json!({"degrees": r}))?;
+    }
+    if let Some(a) = alt_params(v) {
+        part_of(s, "object.altText", a)?;
+    }
+    sel_result(s)
+}
+
+/// A shape's (or a drawing canvas's) fill, outline colour and outline width.
+fn shape_colors(o: &InlineObject) -> (Option<Rgb>, Option<Rgb>, f32) {
+    match o {
+        InlineObject::Shape { fill, stroke, stroke_width, .. } => (*fill, *stroke, *stroke_width),
+        InlineObject::Group { canvas: Some(c), .. } => (c.fill, c.stroke, c.stroke_width),
+        _ => (None, None, 0.0),
+    }
+}
+
+/// `shape.format`.
+fn format_shape(s: &mut Session, v: &Value) -> CmdResult {
+    let (_, o) = selected(s).ok_or_else(|| CmdError::Disabled("select a shape first".into()))?;
+    let keys = ["fill", "line", "lineWidth", "width", "height", "rotation", "alt", "title", "decorative"];
+    if !keys.iter().any(|k| v.get(*k).is_some()) {
+        let mut m = frame_json(&o);
+        let hex = |c: Option<Rgb>| c.map_or(Value::Null, |c| json!(c.hex()));
+        let (fill, line, lw) = shape_colors(&o);
+        m.insert("fill".into(), hex(fill));
+        m.insert("line".into(), hex(line));
+        m.insert("lineWidth".into(), json!(lw));
+        s.only_read();
+        return Ok(Value::Object(m));
+    }
+    let color = |k: &str| -> Result<Option<Value>, CmdError> {
+        match v.get(k) {
+            None => Ok(None),
+            Some(Value::Null) => Ok(Some(Value::Null)),
+            Some(Value::String(c)) if Rgb::parse(c).is_some() => Ok(Some(json!(c))),
+            Some(_) => Err(CmdError::Params(format!("`{k}` is RRGGBB or null"))),
+        }
+    };
+    let (fill, line) = (color("fill")?, color("line")?);
+    if let Some(f) = fill {
+        part_of(s, "shape.fill", json!({"color": f}))?;
+    }
+    if line.is_some() || v.get("lineWidth").is_some() {
+        let current = selected(s).and_then(|(_, o)| shape_colors(&o).1).map_or(Value::Null, |c| json!(c.hex()));
+        let mut ol = json!({"color": line.unwrap_or(current)});
+        if let Some(w) = p::f32(v, "lineWidth") {
+            ol["width"] = json!(w);
+        }
+        part_of(s, "shape.outline", ol)?;
+    }
+    if ["width", "height"].iter().any(|k| v.get(*k).is_some()) {
+        let mut b = json!({});
+        for k in ["width", "height"] {
+            if let Some(x) = p::f32(v, k) {
+                b[k] = json!(x);
+            }
+        }
+        part_of(s, "arrange.bounds", b)?;
+    }
+    if let Some(r) = p::f32(v, "rotation") {
+        part_of(s, "arrange.rotation", json!({"degrees": r}))?;
+    }
+    if let Some(a) = alt_params(v) {
+        part_of(s, "object.altText", a)?;
+    }
+    sel_result(s)
+}
+
+/// The `arrange.layout` names of the anchors, horizontal and vertical.
+const H_FROM: [(&str, doc4me_doc::para::Anchor); 8] = {
+    use doc4me_doc::para::Anchor::*;
+    [
+        ("margin", Margin),
+        ("page", Page),
+        ("column", Column),
+        ("character", Character),
+        ("leftMargin", LeftMargin),
+        ("rightMargin", RightMargin),
+        ("insideMargin", InsideMargin),
+        ("outsideMargin", OutsideMargin),
+    ]
+};
+const V_FROM: [(&str, doc4me_doc::para::Anchor); 8] = {
+    use doc4me_doc::para::Anchor::*;
+    [
+        ("margin", Margin),
+        ("page", Page),
+        ("paragraph", Paragraph),
+        ("line", Line),
+        ("topMargin", TopMargin),
+        ("bottomMargin", BottomMargin),
+        ("insideMargin", InsideMargin),
+        ("outsideMargin", OutsideMargin),
+    ]
+};
+const WRAPS: [(&str, Wrap); 7] = [
+    ("inline", Wrap::Inline),
+    ("square", Wrap::Square),
+    ("tight", Wrap::Tight),
+    ("through", Wrap::Through),
+    ("topAndBottom", Wrap::TopAndBottom),
+    ("behindText", Wrap::BehindText),
+    ("inFrontOfText", Wrap::InFrontOfText),
+];
+const SIDES: [(&str, WrapText); 4] =
+    [("bothSides", WrapText::BothSides), ("left", WrapText::Left), ("right", WrapText::Right), ("largest", WrapText::Largest)];
+
+/// `arrange.layout`: the Layout dialog's Position, Text Wrapping and Size, read or set together
+/// (one undo step).
+fn layout_options(s: &mut Session, v: &Value) -> CmdResult {
+    use doc4me_doc::para::FloatAlign;
+    let (_, obj) = selected(s).ok_or_else(|| CmdError::Disabled("no picture or shape selected".into()))?;
+    let Some((w0, h0, f0)) = obj.frame().map(|(w, h, f)| (w, h, f.clone())) else {
+        return Err(CmdError::Disabled("the selection has no layout".into()));
+    };
+    let name = |list: &[(&'static str, doc4me_doc::para::Anchor)], a| list.iter().find(|(_, x)| *x == a).map_or("column", |(n, _)| *n);
+    let keys = [
+        "horizontal",
+        "horizontalFrom",
+        "vertical",
+        "verticalFrom",
+        "moveWithText",
+        "wrap",
+        "wrapSide",
+        "top",
+        "bottom",
+        "left",
+        "right",
+        "width",
+        "height",
+        "rotation",
+    ];
+    if !keys.iter().any(|k| v.get(*k).is_some()) {
+        let at = |a: Option<FloatAlign>, off: f32, horizontal: bool| a.map_or(json!(off), |a| json!(a.ooxml(horizontal)));
+        s.only_read();
+        return Ok(json!({
+            "horizontal": at(f0.h_align, f0.x, true), "horizontalFrom": name(&H_FROM, f0.h_rel),
+            "vertical": at(f0.v_align, f0.y, false), "verticalFrom": name(&V_FROM, f0.v_rel),
+            "moveWithText": matches!(f0.v_rel, doc4me_doc::para::Anchor::Paragraph | doc4me_doc::para::Anchor::Line),
+            "wrap": WRAPS.iter().find(|(_, w)| *w == f0.wrap).map_or("inline", |(n, _)| *n),
+            "wrapSide": SIDES.iter().find(|(_, w)| *w == f0.wrap_text).map_or("bothSides", |(n, _)| *n),
+            "top": f0.dist_top, "bottom": f0.dist_bottom, "left": f0.dist, "right": f0.dist,
+            "width": w0, "height": h0, "rotation": f0.rot,
+        }));
+    }
+    let pick = |k: &str, list: &[(&'static str, doc4me_doc::para::Anchor)]| -> Result<Option<doc4me_doc::para::Anchor>, CmdError> {
+        p::str(v, k)
+            .map(|x| list.iter().find(|(n, _)| *n == x).map(|(_, a)| *a).ok_or_else(|| CmdError::Params(format!("unknown `{k}` `{x}`"))))
+            .transpose()
+    };
+    let place = |k: &str, horizontal: bool| -> Result<Option<(Option<FloatAlign>, f32)>, CmdError> {
+        match v.get(k) {
+            None => Ok(None),
+            Some(Value::String(a)) => FloatAlign::from_ooxml(a)
+                .filter(|al| al.ooxml(horizontal) == a)
+                .map(|al| Some((Some(al), 0.0)))
+                .ok_or_else(|| CmdError::Params(format!("unknown `{k}` `{a}`"))),
+            Some(x) => x
+                .as_f64()
+                .map(|n| n as f32)
+                .filter(|n| n.is_finite())
+                .map(|n| Some((None, n.clamp(-MAX_OFFSET, MAX_OFFSET))))
+                .ok_or_else(|| CmdError::Params(format!("`{k}` is an alignment or a number of points"))),
+        }
+    };
+    let (h_from, v_from) = (pick("horizontalFrom", &H_FROM)?, pick("verticalFrom", &V_FROM)?);
+    let (horizontal, vertical) = (place("horizontal", true)?, place("vertical", false)?);
+    let wrap = p::str(v, "wrap")
+        .map(|x| WRAPS.iter().find(|(n, _)| *n == x).map(|(_, w)| *w).ok_or_else(|| CmdError::Params(format!("unknown wrap `{x}`"))))
+        .transpose()?;
+    let side = p::str(v, "wrapSide")
+        .map(|x| SIDES.iter().find(|(n, _)| *n == x).map(|(_, w)| *w).ok_or_else(|| CmdError::Params(format!("unknown wrapSide `{x}`"))))
+        .transpose()?;
+    let dist = |k| p::f32(v, k).map(|d| d.clamp(0.0, 1584.0));
+    let (top, bottom, left, right) = (dist("top"), dist("bottom"), dist("left"), dist("right"));
+    let move_with = p::bool(v, "moveWithText");
+    let rotation = p::f32(v, "rotation").map(|r| r.rem_euclid(360.0));
+    let min = min_size(&obj);
+    let (w, h) = (p::f32(v, "width").map(|w| w.clamp(min, MAX_OFFSET)), p::f32(v, "height").map(|h| h.clamp(min, MAX_OFFSET)));
+    with_obj(s, |o| {
+        if w.is_some() || h.is_some() {
+            o.set_size(w.unwrap_or(w0), h.unwrap_or(h0));
+        }
+        let Some(f) = o.float_mut() else { return };
+        if let Some(wr) = wrap {
+            if f.wrap == Wrap::Inline && wr != Wrap::Inline && f.dist == 0.0 {
+                f.dist = 9.0;
+            }
+            f.wrap = wr;
+        }
+        if let Some(sd) = side {
+            f.wrap_text = sd;
+        }
+        // A position (or what it's measured from) floats an object in line with text.
+        let positioned = horizontal.is_some() || vertical.is_some() || h_from.is_some() || v_from.is_some() || move_with.is_some();
+        if positioned && f.wrap == Wrap::Inline {
+            f.wrap = Wrap::Square;
+            f.dist = 9.0;
+        }
+        if let Some(a) = h_from {
+            f.h_rel = a;
+        }
+        if let Some((al, x)) = horizontal {
+            (f.h_align, f.x) = (al, x);
+        }
+        if let Some(a) = v_from {
+            f.v_rel = a;
+        }
+        // Move with Text: measured from the paragraph; off, from the margin (unless given).
+        match move_with {
+            Some(true) if v_from.is_none() => f.v_rel = doc4me_doc::para::Anchor::Paragraph,
+            Some(false) if v_from.is_none() && matches!(f.v_rel, doc4me_doc::para::Anchor::Paragraph | doc4me_doc::para::Anchor::Line) => {
+                f.v_rel = doc4me_doc::para::Anchor::Margin
+            }
+            _ => {}
+        }
+        if let Some((al, y)) = vertical {
+            (f.v_align, f.y) = (al, y);
+        }
+        if let Some(t) = top {
+            f.dist_top = t;
+        }
+        if let Some(b) = bottom {
+            f.dist_bottom = b;
+        }
+        // One distance for both sides (Word keeps left and right; Doc4Me one value).
+        if let Some(d) = left.or(right) {
+            f.dist = match (left, right) {
+                (Some(l), Some(r)) => l.max(r),
+                _ => d,
+            };
+        }
+        if let Some(r) = rotation {
+            f.rot = r;
+        }
+    })
+}
+
 fn unalign(s: &mut Session) -> Result<(), CmdError> {
     use doc4me_doc::para::Anchor;
     let (pos, obj) = selected(s).ok_or_else(|| CmdError::Disabled("no picture or shape selected".into()))?;

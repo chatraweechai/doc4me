@@ -401,6 +401,7 @@ fn cell_options(s: &mut Session, v: &Value) -> CmdResult {
     if !["sameAsTable", "top", "bottom", "left", "right", "wrap"].iter().any(|k| v.get(*k).is_some()) {
         let cp = t.rows.get(r).and_then(|x| x.cells.get(c)).map(|x| x.props.clone()).unwrap_or_default();
         let m = cp.margins.unwrap_or(whole);
+        s.only_read();
         return Ok(json!({"sameAsTable": cp.margins.is_none(), "top": m[0], "left": m[1], "bottom": m[2], "right": m[3], "wrap": !cp.no_wrap}));
     }
     let same = p::bool(v, "sameAsTable");
@@ -446,6 +447,7 @@ fn positioning(s: &mut Session, v: &Value) -> CmdResult {
         };
         let at = |al: Option<FloatAlign>, off: f32, horizontal: bool| al.map_or(json!(off), |a| json!(a.ooxml(horizontal)));
         let d = f.dist_from_text();
+        s.only_read();
         return Ok(json!({
             "around": current.is_some(),
             "horizontal": at(f.h_align, f.x, true), "horizontalFrom": from(f.h_rel, true),

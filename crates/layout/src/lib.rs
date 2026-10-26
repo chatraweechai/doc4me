@@ -434,7 +434,7 @@ pub struct Page {
 pub struct DocLayout {
     pub pages: Vec<Page>,
     /// Index: (story, paragraph path) → (page, item index) of each placed piece, in order.
-    pub index: HashMap<(StoryRef, Path), Vec<(usize, usize)>>,
+    pub index: foldhash::HashMap<(StoryRef, Path), Vec<(usize, usize)>>,
     /// Layout time, milliseconds.
     pub ms: f64,
     /// Text box stories laid out (each time a box's text was).
@@ -460,12 +460,14 @@ struct Key {
 /// Memoised paragraph layouts.
 #[derive(Default)]
 pub struct LayoutCache {
-    paras: HashMap<Key, Arc<ParaLayout>>,
+    paras: foldhash::HashMap<Key, Arc<ParaLayout>>,
+    /// Paragraphs' resolved formatting, by revision ([`Ctx::resolved`]).
+    resolved: foldhash::HashMap<u64, Arc<doc4me_doc::resolve::ResolvedPara>>,
     /// Outlines of pictures' opaque pixels (Tight and Through wrapping), by media key, the
     /// media's bytes (address and length) and crop.
     outlines: HashMap<(String, usize, usize, [u32; 4]), Option<Arc<Vec<(f32, f32)>>>>,
     env: u64,
-    used: HashSet<Key>,
+    used: foldhash::HashSet<Key>,
     pub hits: u64,
     pub misses: u64,
 }
@@ -482,6 +484,7 @@ impl LayoutCache {
     }
     pub fn clear(&mut self) {
         self.paras.clear();
+        self.resolved.clear();
         self.outlines.clear();
     }
 }
@@ -655,10 +658,22 @@ impl Ctx<'_> {
         pl
     }
 
+    /// `p`'s formatting with its styles resolved, memoised by the paragraph's revision (an edit
+    /// gives it a new one) until the styles change (the cache's environment). Pagination asks for
+    /// it for every paragraph on every pass, so typing doesn't resolve them all again.
+    fn resolved(&mut self, p: &Paragraph) -> Arc<doc4me_doc::resolve::ResolvedPara> {
+        if let Some(r) = self.cache.resolved.get(&p.rev) {
+            return r.clone();
+        }
+        let r = Arc::new(self.doc.styles.resolve_para(&p.props));
+        self.cache.resolved.insert(p.rev, r.clone());
+        r
+    }
+
     /// The list label of `p`, advancing the list counters: call it once per paragraph, in
     /// document order (only for paragraphs that will show).
     fn next_label(&mut self, p: &Paragraph) -> Option<(String, Level)> {
-        let n = p.props.numbering.or_else(|| self.doc.styles.resolve_para(&p.props).numbering).filter(|n| n.num != 0)?;
+        let n = p.props.numbering.or_else(|| self.resolved(p).numbering).filter(|n| n.num != 0)?;
         self.counters.next_label(&self.doc.numbering, n.num, n.level)
     }
 
@@ -1649,7 +1664,12 @@ fn layout_pass(
     let env = env_hash(doc, opts);
     if env != cache.env {
         cache.paras.clear();
+        cache.resolved.clear();
         cache.env = env;
+    }
+    // Revisions of paragraphs long gone: start again (a pass re-resolves what it uses).
+    if cache.resolved.len() > 4 * cache.paras.len().max(1024) {
+        cache.resolved.clear();
     }
     cache.used.clear();
     // Note references are counted as the body shows them.
@@ -1920,7 +1940,8 @@ fn layout_pass(
         ctx.cache.paras.retain(|k, _| used.contains(k));
         ctx.cache.used = used;
     }
-    let mut index: HashMap<(StoryRef, Path), Vec<(usize, usize)>> = HashMap::new();
+    let mut index: foldhash::HashMap<(StoryRef, Path), Vec<(usize, usize)>> = Default::default();
+    index.reserve(pages.iter().map(|p| p.items.len()).sum());
     for (pi, p) in pages.iter().enumerate() {
         for (ii, it) in p.items.iter().enumerate() {
             if let Placed::Lines { story, path, .. } = it {
@@ -2447,6 +2468,10 @@ fn place_objects(
     depth: usize,
 ) -> (Vec<Placed>, Vec<Placed>) {
     let (mut behind, mut front) = (Vec::new(), Vec::new());
+    // Most paragraphs hold no objects: nothing to look for in their lines.
+    if p.objects.is_empty() {
+        return (behind, front);
+    }
     let Some(fl) = pl.lines.get(l0) else { return (behind, front) };
     // Objects left out of the layout (hidden, or deleted in the final text) aren't placed.
     let left_out = left_out_objects(ctx.doc, p, at.table_chr, ctx.opts.show_hidden, ctx.hide_deleted);
@@ -2538,7 +2563,7 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
     // Floating objects anchored here join the page's wrap areas before the text is laid out; if
     // the paragraph then starts somewhere else (another column or page, or contextual spacing
     // drops its space before), they are placed again there.
-    let space_before = ctx.doc.styles.resolve_para(&p.props).space_before;
+    let space_before = ctx.resolved(p).space_before;
     let excl_mark = pb.excl.len();
     let guess = pb.y + space_before;
     let label = ctx.next_label(p);

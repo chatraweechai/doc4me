@@ -390,10 +390,28 @@ impl Default for RenderOptions {
 
 /// Render a whole page at `scale` pixels per point.
 pub fn render_page(doc: &Document, page: &Page, scale: f32, opts: &RenderOptions) -> Rendered {
-    let scale = if scale.is_finite() && scale > 0.0 { scale } else { 1.0 };
-    let w = ((page.w * scale).ceil() as u32).clamp(1, MAX_SIDE);
-    let h = ((page.h.min(1e6) * scale).ceil() as u32).clamp(1, MAX_SIDE);
+    let scale = page_scale(scale);
+    let (w, h) = page_size_px(page, scale);
     render_region(doc, page, w, h, Affine::scale(scale as f64), opts)
+}
+
+fn page_scale(scale: f32) -> f32 {
+    if scale.is_finite() && scale > 0.0 { scale } else { 1.0 }
+}
+
+/// The raster size, in pixels, [`render_page`] gives `page` at `scale`.
+pub fn page_size_px(page: &Page, scale: f32) -> (u32, u32) {
+    let scale = page_scale(scale);
+    (((page.w * scale).ceil() as u32).clamp(1, MAX_SIDE), ((page.h.min(1e6) * scale).ceil() as u32).clamp(1, MAX_SIDE))
+}
+
+/// The `w`×`h` pixels at `x`, `y` of what [`render_page`] renders at `scale`: redraws the part of a
+/// page an edit changed without rasterising the rest.
+#[allow(clippy::too_many_arguments)]
+pub fn render_page_area(doc: &Document, page: &Page, scale: f32, x: u32, y: u32, w: u32, h: u32, opts: &RenderOptions) -> Rendered {
+    let scale = page_scale(scale);
+    let view = Affine::translate((-(x as f64), -(y as f64))) * Affine::scale(scale as f64);
+    render_region(doc, page, w, h, view, opts)
 }
 
 /// Render a page into a `w`×`h` raster with `view` (page points → pixels).
@@ -908,6 +926,30 @@ mod tests {
         assert!(dark > 30, "dark {dark}");
         assert_eq!(img.pixel(5, 5), [255, 255, 255, 255]);
         assert!(!img.to_png().is_empty());
+    }
+
+    /// An area of a page renders the same pixels the whole page has there (the screen redraws only
+    /// the lines an edit changed).
+    #[test]
+    fn page_area_matches_the_whole_page() {
+        let d = Document::from_text("Hello Doc4Me, a line of text\nAnd a second paragraph that runs on a little");
+        let l = layout(&d, &mut LayoutCache::new(), &LayoutOptions::default());
+        let scale = 1.37;
+        let whole = render_page(&d, &l.pages[0], scale, &RenderOptions::default());
+        assert_eq!(page_size_px(&l.pages[0], scale), (whole.width, whole.height));
+        let (x, y, w, h) = (61, 87, 400, 63);
+        let part = render_page_area(&d, &l.pages[0], scale, x, y, w, h, &RenderOptions::default());
+        assert_eq!((part.width, part.height), (w, h));
+        let mut ink = 0;
+        for py in 0..h {
+            for px in 0..w {
+                let (a, b) = (part.pixel(px, py), whole.pixel(px + x, py + y));
+                let diff = a.iter().zip(b).map(|(p, q)| p.abs_diff(q)).max().unwrap_or(0);
+                assert!(diff <= 2, "pixel {px},{py}: {a:?} vs {b:?}");
+                ink += usize::from(a[0] < 128);
+            }
+        }
+        assert!(ink > 50, "the area has text in it ({ink})");
     }
 
     /// Table Layout › Text Direction (#226): a turned cell's text is painted running down the

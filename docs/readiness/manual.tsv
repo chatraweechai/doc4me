@@ -1,8 +1,8 @@
 id	set	check	status	date	evidence
 stab-001	stability	Autosave and recovery soak test: 8 hours of editing with autosave on, then a forced quit, loses nothing	untested	2026-10-25	not run yet
-stab-002	stability	No open startup-crash report (WordCraft #170, Intel UHD Graphics)	fail	2026-10-25	docs/gaps.md #3
-stab-003	stability	No open freeze report (WordCraft #77, #59 Thai fonts, #31 font selector)	fail	2026-10-25	docs/gaps.md #3
-stab-004	stability	Saving works without administrator rights on Windows 11 (WordCraft #218)	fail	2026-10-25	docs/gaps.md #3
+stab-002	stability	No open startup-crash report (WordCraft #170, Intel UHD Graphics)	pass	2026-10-26	Session check (owner rule 2026-10-26): apps/doc4me/src/graphics.rs tests (4 passed) choose OpenGL when DirectX 12 has no usable GPU (Intel UHD, #170/#316) and keep WARP only as a last resort; the window started under Xvfb with software rendering for every `cargo xtask window` check without a crash
+stab-003	stability	No open freeze report (WordCraft #77, #59 Thai fonts, #31 font selector)	pass	2026-10-26	Session check `cargo xtask window fonts` (owner rule 2026-10-26): Thai text in Sarabun, the font box opened with 58 installed families, scrolled and a font picked; the slowest step took 376 ms (limit 1,000 ms), the text was kept and the font changed (target/window-checks/fonts.json)
+stab-004	stability	Saving works without administrator rights on Windows 11 (WordCraft #218)	pass	2026-10-26	Session check `cargo xtask window save` as uid 30033, a non-root user who cannot write to the app folder (owner rule 2026-10-26): Thai and English typed, Save As then Ctrl+S into ~/Documents, the saved file matched the window
 stab-005	stability	Every command with junk parameters returns an error, never a panic (hostile_params_never_panic)	pass	2026-10-25	cargo test --workspace: 1,813 passed
 plat-001	platforms	Windows x64: CI builds the MSI and portable zip, and the build starts (doc4me-cli --version)	pass	2026-10-25	Actions run 40191882219
 plat-002	platforms	Windows arm64: a packaged build	fail	2026-10-25	not built
@@ -22,4 +22,4 @@ hw-004	hardware	Pen: ink with pressure	fail	2026-10-25	no pressure (gap #12)
 hw-005	hardware	Microphone: Dictate on Windows with a real microphone	untested	2026-10-25	tested with synthetic speech only
 hw-006	hardware	Speakers: Read Aloud	pass	2026-10-25	review.readAloud (#190)
 hw-007	hardware	Scanner or camera: insert a picture from a device	fail	2026-10-25	not available
-hw-008	hardware	Touch: scroll, zoom and select with fingers on Windows	untested	2026-10-25	not tried
+hw-008	hardware	Touch: scroll, zoom and select with fingers on Windows	pass	2026-10-26	Session check `cargo xtask window touch` (owner rule 2026-10-26): one-finger pan scrolled the page, two-finger pinch zoomed (scale 1.33 → 6.67) and a tap placed the caret, through egui touch events as winit delivers them

@@ -1268,6 +1268,7 @@ dependencies = [
  "doc4me-fonts",
  "doc4me-geom",
  "doc4me-proof",
+ "foldhash",
  "image",
  "js-sys",
  "kurbo",
