@@ -9,6 +9,10 @@
 //! - `soak` (stab-001): `--hours H` (default 8) of editing with AutoSave on; every
 //!   `--checkpoint M` minutes (default 15) the file on disk must hold what the window shows; then
 //!   the app is killed (SIGKILL / TerminateProcess) and the file must open with everything typed.
+//!   The run's progress is kept in `<out>/soak/state.json` at each checkpoint; `--resume` goes on
+//!   from it after the machine stopped the run (a forced quit too: the file AutoSave last wrote
+//!   must open in the window as it is on disk), counting only the editing time up to the last
+//!   checkpoint.
 //! - `fonts` (stab-003): Thai text selected, the Home tab's font list opened with the mouse,
 //!   scrolled through every installed font (each drawn in its own face) and back, and a font
 //!   picked from it; the window must answer within a second throughout and the text take the font.
@@ -39,6 +43,7 @@ struct Opts {
     hours: f64,
     checkpoint_min: f64,
     port: u16,
+    resume: bool,
 }
 
 pub fn run(root: &Path, args: &[&str]) -> Result<(), String> {
@@ -51,6 +56,7 @@ pub fn run(root: &Path, args: &[&str]) -> Result<(), String> {
         hours: 8.0,
         checkpoint_min: 15.0,
         port: 7990,
+        resume: false,
     };
     while let Some(a) = it.next() {
         let mut val = || it.next().copied().ok_or_else(|| format!("{a} needs a value"));
@@ -61,6 +67,7 @@ pub fn run(root: &Path, args: &[&str]) -> Result<(), String> {
             "--hours" => o.hours = val()?.parse().map_err(|_| "--hours needs a number")?,
             "--checkpoint" => o.checkpoint_min = val()?.parse().map_err(|_| "--checkpoint needs minutes")?,
             "--port" => o.port = val()?.parse().map_err(|_| "--port needs a number")?,
+            "--resume" => o.resume = true,
             other => return Err(format!("window: unknown option {other}")),
         }
     }
@@ -290,27 +297,64 @@ fn sentence(r: &mut Rng) -> String {
 // stab-001: AutoSave soak
 
 fn soak(o: &Opts) -> Result<Value, String> {
-    let dir = workdir(o, "soak")?;
+    let dir = o.out.join("soak");
+    let state_path = dir.join("state.json");
     let file = dir.join("soak.docx");
-    let mut app = App::start(o, &dir, &[])?;
-    // Saved once by the user (Save As), so AutoSave covers it, then AutoSave on.
-    app.exec("file.saveAs", json!({"path": file}))?;
-    app.exec("file.autosave", json!({"value": true}))?;
+    // Progress so far: editing seconds, actions, checkpoints, mismatches, the random sequence,
+    // the first memory reading and the resumes after a stopped run.
+    let mut st = if o.resume {
+        let text = std::fs::read_to_string(&state_path).map_err(|e| format!("{}: {e} (nothing to resume)", state_path.display()))?;
+        serde_json::from_str::<Value>(&text).map_err(|e| format!("{}: {e}", state_path.display()))?
+    } else {
+        json!({"seconds": 0.0, "actions": 0, "checkpoints": [], "mismatches": 0, "rng": 0x5eed_d0c4_2026u64, "rssFirst": null, "resumes": []})
+    };
+    let mut app = if o.resume {
+        // The run stopped with no warning, a forced quit: the window must open what AutoSave last
+        // wrote, as it is on disk.
+        let saved = file_text(o, &file)?;
+        let mut app = App::start(o, &dir, &[&file])?;
+        let reopened = app.text()?;
+        let ok = same_text(&saved, &reopened) && !saved.trim().is_empty();
+        let r = json!({"afterMinute": st["seconds"].as_f64().unwrap_or(0.0) / 60.0, "chars": reopened.chars().count(), "reopenMatchesFile": ok});
+        println!("{}", json!({"resume": r}));
+        if let Some(v) = st["resumes"].as_array_mut() {
+            v.push(r);
+        }
+        if !ok {
+            st["mismatches"] = json!(st["mismatches"].as_u64().unwrap_or(0) + 1);
+        }
+        app.exec("caret.docEnd", json!({}))?;
+        // A file the user only opened isn't rewritten until they save it; then AutoSave on.
+        app.exec("file.save", json!({}))?;
+        app.exec("file.autosave", json!({"value": true}))?;
+        app
+    } else {
+        let dir = workdir(o, "soak")?;
+        let mut app = App::start(o, &dir, &[])?;
+        // Saved once by the user (Save As), so AutoSave covers it, then AutoSave on.
+        app.exec("file.saveAs", json!({"path": file}))?;
+        app.exec("file.autosave", json!({"value": true}))?;
+        app
+    };
+    let base = st["seconds"].as_f64().unwrap_or(0.0);
     let started = Instant::now();
-    let deadline = Duration::from_secs_f64(o.hours * 3600.0);
-    let every = Duration::from_secs_f64(o.checkpoint_min * 60.0);
-    let mut r = Rng(0x5eed_d0c4_2026);
-    let (mut actions, mut checkpoints, mut mismatches) = (0u64, Vec::new(), 0u64);
-    let mut next_check = every;
-    let mut rss_first = None;
-    while started.elapsed() < deadline {
+    let elapsed = |started: &Instant| base + started.elapsed().as_secs_f64();
+    let deadline = o.hours * 3600.0;
+    let every = o.checkpoint_min * 60.0;
+    let mut r = Rng(st["rng"].as_u64().filter(|n| *n != 0).unwrap_or(0x5eed_d0c4_2026));
+    let mut actions = st["actions"].as_u64().unwrap_or(0);
+    let mut mismatches = st["mismatches"].as_u64().unwrap_or(0);
+    let mut checkpoints: Vec<Value> = st["checkpoints"].as_array().cloned().unwrap_or_default();
+    let mut rss_first = st["rssFirst"].as_u64();
+    let mut next_check = ((base / every).floor() + 1.0) * every;
+    while elapsed(&started) < deadline {
         if !app.alive() {
-            return Ok(json!({"pass": false, "why": "the app quit or crashed", "afterSeconds": started.elapsed().as_secs(), "actions": actions}));
+            return Ok(json!({"pass": false, "why": "the app quit or crashed", "afterSeconds": elapsed(&started), "actions": actions}));
         }
         soak_action(&mut app, &mut r)?;
         actions += 1;
         std::thread::sleep(Duration::from_millis(150 + r.below(1200)));
-        if started.elapsed() >= next_check {
+        if elapsed(&started) >= next_check {
             next_check += every;
             // Idle long enough for AutoSave (2.5 s after the last change, the caret still).
             std::thread::sleep(Duration::from_secs(8));
@@ -320,9 +364,18 @@ fn soak(o: &Opts) -> Result<Value, String> {
             mismatches += u64::from(!ok);
             let rss = app.rss_kb();
             rss_first = rss_first.or(rss);
-            let c = json!({"minute": started.elapsed().as_secs() / 60, "actions": actions, "chars": shown.chars().count(), "savedMatches": ok, "rssKb": rss});
+            let now = elapsed(&started);
+            let c = json!({"minute": (now / 60.0) as u64, "actions": actions, "chars": shown.chars().count(), "savedMatches": ok, "rssKb": rss});
             println!("{c}");
             checkpoints.push(c);
+            st["seconds"] = json!(now);
+            st["actions"] = json!(actions);
+            st["mismatches"] = json!(mismatches);
+            st["checkpoints"] = json!(checkpoints);
+            st["rng"] = json!(r.0);
+            st["rssFirst"] = json!(rss_first);
+            let text = serde_json::to_string_pretty(&st).unwrap_or_default();
+            std::fs::write(&state_path, text).map_err(|e| format!("{}: {e}", state_path.display()))?;
         }
     }
     // The last edits, AutoSave's moment, then a forced quit.
@@ -342,10 +395,11 @@ fn soak(o: &Opts) -> Result<Value, String> {
     Ok(json!({
         "pass": pass,
         "row": "stab-001",
-        "hours": started.elapsed().as_secs_f64() / 3600.0,
+        "hours": elapsed(&started) / 3600.0,
         "actions": actions,
         "checkpoints": checkpoints.len(),
         "checkpointMismatches": mismatches,
+        "resumes": st["resumes"],
         "charsAtKill": before_kill.chars().count(),
         "fileMatchesAfterKill": same_text(&before_kill, &after),
         "reopenMatches": same_text(&before_kill, &reopened),

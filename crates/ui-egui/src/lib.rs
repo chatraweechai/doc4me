@@ -264,6 +264,10 @@ pub struct UiState {
 
 /// Most recent documents kept (File › Options › Advanced offers 0–50, as Word does).
 pub const MAX_RECENT: usize = 50;
+/// The longest AutoSave leaves changes unsaved while typing goes on with no pause: a crash or a
+/// forced quit then loses half a minute at most (the soak test, stab-001, found everything since
+/// the last pause lost).
+pub const AUTOSAVE_MAX_WAIT_MS: f64 = 30_000.0;
 /// Most custom dictionary words read back from `ui.json`.
 pub const MAX_DICTIONARY: usize = 10_000;
 
@@ -420,6 +424,8 @@ pub struct WordApp {
     pub autosave: bool,
     pub word_count: (u64, usize),
     last_autosave: f64,
+    /// When AutoSave first saw the current unsaved changes ([`AUTOSAVE_MAX_WAIT_MS`]).
+    dirty_since: Option<f64>,
     /// The tab shown before the Equation tab came up (restored when editing ends).
     pub(crate) equation_prev_tab: Option<String>,
     /// SmartArt Text Pane: the item last focused (Promote, Demote and Add Shape act on it) and
@@ -532,6 +538,7 @@ impl WordApp {
             autosave: true,
             word_count: (0, 0),
             last_autosave: 0.0,
+            dirty_since: None,
             equation_prev_tab: None,
             smart_art_item: None,
             smart_art_typing: None,
@@ -1487,11 +1494,20 @@ impl WordApp {
         Ok(json!({"value": on}))
     }
 
-    /// AutoSave: write a saved document a couple of seconds after the last change. A failure is
-    /// shown in the status bar and turns AutoSave off for the file until the user saves it again.
+    /// AutoSave: write a saved document a couple of seconds after the last change, and at least
+    /// every [`AUTOSAVE_MAX_WAIT_MS`] while the changes go on with no pause. A failure is shown in
+    /// the status bar and turns AutoSave off for the file until the user saves it again.
     fn autosave_tick(&mut self, now: f64) {
-        if self.autosaves() && self.session.dirty && now - self.last_autosave > 2500.0 && now - self.canvas.caret_visible_since > 1500.0 {
+        if !(self.autosaves() && self.session.dirty) {
+            self.dirty_since = None;
+            return;
+        }
+        let since = *self.dirty_since.get_or_insert(now);
+        let rested = now - self.last_autosave > 2500.0;
+        let paused = now - self.canvas.caret_visible_since > 1500.0;
+        if rested && (paused || now - since >= AUTOSAVE_MAX_WAIT_MS) {
             self.last_autosave = now;
+            self.dirty_since = None;
             if let Err(e) = self.session.run("file.save", &json!({})) {
                 log::warn!("AutoSave failed: {e}");
                 self.autosave_path = None;
@@ -3117,6 +3133,38 @@ mod tests {
             assert!(saved.plain_text(doc4me_doc::StoryRef::Body).contains("More "), "{ext}");
             let _ = std::fs::remove_dir_all(&dir);
         }
+    }
+
+    /// Typing that never pauses long enough for AutoSave still reaches the file within 30 s.
+    #[test]
+    fn autosave_saves_within_half_a_minute_while_typing_goes_on() {
+        let dir = scratch("autosave-typing");
+        let path = dir.join("long.docx");
+        let mut a = typed();
+        a.run("file.save", json!({"path": path.to_string_lossy()})).unwrap();
+        assert!(a.autosaves());
+        let t0 = now_ms() + 10_000.0;
+        let mut first_save = None;
+        for second in 0..45 {
+            let now = t0 + f64::from(second) * 1000.0;
+            a.run("text.insert", json!({"text": "x"})).unwrap();
+            // The caret moved with the letter just typed: no pause.
+            a.canvas.caret_visible_since = now;
+            a.autosave_tick(now);
+            if !a.session.dirty && first_save.is_none() {
+                first_save = Some(second);
+            }
+        }
+        assert_eq!(first_save, Some(30), "saved 30 s after the first unsaved change, not before");
+        let saved = doc4me_engine::io::open_path(&path).unwrap().plain_text(doc4me_doc::StoryRef::Body);
+        assert!(saved.contains(&"x".repeat(31)), "{saved}");
+        // A pause still saves at once, as before.
+        a.run("text.insert", json!({"text": "y"})).unwrap();
+        let later = t0 + 60_000.0;
+        a.canvas.caret_visible_since = later - 2_000.0;
+        a.autosave_tick(later);
+        assert!(!a.session.dirty);
+        let _ = std::fs::remove_dir_all(&dir);
     }
 
     /// Web: the download callback couldn't report a failure, so Save marked the document saved
