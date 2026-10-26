@@ -1558,9 +1558,8 @@ const SUBSTITUTE_SLACK: f32 = 0.03;
 /// with no break opportunity yet: the last cluster of its word when the whole word, in a
 /// substitute font, overflows by at most [`SUBSTITUTE_SLACK`] of the line's text so far.
 fn slack_word(pl: &ParaLayout, j: usize, x: f32, line_x: f32, right_edge: f32) -> Option<usize> {
-    let substituted = |style: u16| {
-        pl.styles.get(style as usize).is_some_and(|st| doc4me_fonts::word::resolve(&st.rc.font, st.rc.bold, st.rc.italic).substituted)
-    };
+    let substituted =
+        |style: u16| pl.styles.get(style as usize).is_some_and(|st| doc4me_fonts::word::resolve(&st.rc.font, st.rc.bold, st.rc.italic).substituted);
     let mut end_x = x;
     let mut k = j;
     loop {
