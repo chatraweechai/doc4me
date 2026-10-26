@@ -2702,3 +2702,4 @@ spacing	Normal	ปกติ
 	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	แทรก: {ins}, ลบ: {del}, ย้าย: {moves}, จัดรูปแบบ: {fmt}, ข้อคิดเห็น: {comments}
 	No revisions	ไม่มีการแก้ไขที่ติดตาม
 	Changed	เปลี่ยนแปลง
+	Zoom to Page	ย่อให้พอดีหน้า

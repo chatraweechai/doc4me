@@ -655,6 +655,33 @@ fn line_rule_is_read_case_insensitively() {
     assert_eq!(p[1].props.line_spacing, Some(doc4me_doc::props::LineSpacing::Exactly(15.0)));
 }
 
+/// Strict OOXML writes the auto rule's 240ths of a line as a length: `13.90pt` is 278 twips,
+/// 1.16 lines (not 13.9 lines).
+#[test]
+fn strict_auto_line_spacing_in_points_is_lines() {
+    let d = read_body(
+        r#"<w:p><w:pPr><w:spacing w:line="13.90pt" w:lineRule="auto"/></w:pPr><w:r><w:t>x</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:line="360"/></w:pPr></w:p>"#,
+    );
+    let p = paras(&d);
+    let Some(doc4me_doc::props::LineSpacing::Multiple(m)) = p[0].props.line_spacing else { panic!("{:?}", p[0].props.line_spacing) };
+    assert!((m - 278.0 / 240.0).abs() < 1e-3, "{m}");
+    assert_eq!(p[1].props.line_spacing, Some(doc4me_doc::props::LineSpacing::Multiple(1.5)));
+}
+
+/// `w:beforeAutospacing` / `w:afterAutospacing`: Word's automatic (HTML) spacing, 14 pt, in place
+/// of the `w:before` / `w:after` amounts; `0` turns it off for a paragraph whose style has it.
+#[test]
+fn auto_spacing_is_fourteen_points() {
+    let d = read_body(
+        r#"<w:p><w:pPr><w:spacing w:before="100" w:beforeAutospacing="1" w:after="100" w:afterAutospacing="1"/></w:pPr><w:r><w:t>x</w:t></w:r></w:p><w:p><w:pPr><w:spacing w:before="100" w:beforeAutospacing="0"/></w:pPr></w:p>"#,
+    );
+    let p = paras(&d);
+    assert_eq!((p[0].props.space_before_auto, p[0].props.space_after_auto, p[0].props.space_before), (Some(true), Some(true), Some(5.0)));
+    let r = d.styles.resolve_para(&p[0].props);
+    assert_eq!((r.space_before, r.space_after, r.space_before_auto), (14.0, 14.0, true));
+    assert_eq!(d.styles.resolve_para(&p[1].props).space_before, 5.0);
+}
+
 #[test]
 fn char_border_reads_and_nil_resolves_off() {
     let d = read_body(

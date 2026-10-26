@@ -2701,3 +2701,4 @@ spacing	Normal	Tavaline
 	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Lisamised: {ins}, kustutamised: {del}, teisaldused: {moves}, vormindus: {fmt}, kommentaarid: {comments}
 	No revisions	Redaktsioone pole
 	Changed	Muudetud
+	Zoom to Page	Suumi lehele

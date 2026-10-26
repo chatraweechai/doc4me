@@ -2705,3 +2705,4 @@ spacing	Normal	标准
 	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	插入：{ins}，删除：{del}，移动：{moves}，格式：{fmt}，批注：{comments}
 	No revisions	无修订
 	Changed	已更改
+	Zoom to Page	缩放到页面

@@ -271,7 +271,12 @@ pub fn ppr_inner(w: &mut W, p: &ParaProps, framed: bool, num_change: Option<&Cha
     toggle(w, "w:autoSpaceDN", p.auto_space_dn);
     toggle(w, "w:bidi", p.bidi);
     toggle(w, "w:snapToGrid", p.snap_to_grid);
-    if p.space_before.is_some() || p.space_after.is_some() || p.line_spacing.is_some() {
+    if p.space_before.is_some()
+        || p.space_after.is_some()
+        || p.line_spacing.is_some()
+        || p.space_before_auto.is_some()
+        || p.space_after_auto.is_some()
+    {
         let before = p.space_before.map(|v| twips(v.max(0.0)));
         let after = p.space_after.map(|v| twips(v.max(0.0)));
         let line = p.line_spacing.map(|l| match l {
@@ -283,8 +288,14 @@ pub fn ppr_inner(w: &mut W, p: &ParaProps, framed: bool, num_change: Option<&Cha
         if let Some(b) = &before {
             a.push(("w:before", b));
         }
+        if let Some(on) = p.space_before_auto {
+            a.push(("w:beforeAutospacing", if on { "1" } else { "0" }));
+        }
         if let Some(x) = &after {
             a.push(("w:after", x));
+        }
+        if let Some(on) = p.space_after_auto {
+            a.push(("w:afterAutospacing", if on { "1" } else { "0" }));
         }
         if let Some((l, r)) = &line {
             a.push(("w:line", l));

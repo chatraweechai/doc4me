@@ -693,6 +693,13 @@ pub struct ParaProps {
     pub space_before: Option<f32>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub space_after: Option<f32>,
+    /// `w:beforeAutospacing`: the space before is Word's automatic (HTML) spacing, 14 pt, in place
+    /// of `space_before` (which is kept for writing back).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub space_before_auto: Option<bool>,
+    /// `w:afterAutospacing`: the same for the space after.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub space_after_auto: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub line_spacing: Option<LineSpacing>,
     /// Ignore space before/after between paragraphs of the same style.
@@ -765,7 +772,7 @@ pub struct ParaProps {
 
 impl ParaProps {
     pub fn overlay(&mut self, patch: &ParaProps) {
-        overlay_fields!(self, patch; style, align, indent_left, indent_right, indent_first, indent_left_chars, indent_right_chars, indent_first_chars, space_before, space_after, line_spacing,
+        overlay_fields!(self, patch; style, align, indent_left, indent_right, indent_first, indent_left_chars, indent_right_chars, indent_first_chars, space_before, space_after, space_before_auto, space_after_auto, line_spacing,
             contextual_spacing, mirror_indents, keep_next, keep_lines, page_break_before, widow_control, outline_level, numbering, tabs, shading, borders,
             suppress_hyphens, suppress_line_numbers, bidi, drop_cap, kinsoku, word_wrap, overflow_punct, top_line_punct, auto_space_de, auto_space_dn,
             snap_to_grid);

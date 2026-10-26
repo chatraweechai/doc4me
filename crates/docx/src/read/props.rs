@@ -241,13 +241,28 @@ impl PropCtx {
                     if let Some(v) = tw(k, "w:after") {
                         p.space_after = Some(v.max(0.0));
                     }
+                    // ST_OnOff attributes: on unless 0 / false / off.
+                    let auto = |a: &str| k.attr(a).map(|v| !matches!(v.trim().to_ascii_lowercase().as_str(), "0" | "false" | "off"));
+                    if let Some(on) = auto("w:beforeAutospacing") {
+                        p.space_before_auto = Some(on);
+                    }
+                    if let Some(on) = auto("w:afterAutospacing") {
+                        p.space_after_auto = Some(on);
+                    }
                     if let Some(line) = k.attr("w:line") {
                         // Word reads the rule case-insensitively (`atleast` is seen in the wild).
                         let rule = k.attr("w:lineRule").unwrap_or("auto").to_ascii_lowercase();
                         p.line_spacing = match rule.as_str() {
                             "exact" => measure(line, 20.0).map(|v| LineSpacing::Exactly(v.abs())),
                             "atleast" => measure(line, 20.0).map(|v| LineSpacing::AtLeast(v.abs())),
-                            _ => measure(line, 240.0).map(|v| LineSpacing::Multiple(v.abs().clamp(0.06, 132.0))),
+                            // 240ths of a line; Strict OOXML writes them as a length too ("13.90pt"
+                            // is 278 twips, 1.16 lines).
+                            _ => if line.trim_end().ends_with(|c: char| c.is_ascii_alphabetic()) {
+                                measure(line, 20.0).map(|pt| pt * 20.0 / 240.0)
+                            } else {
+                                measure(line, 240.0)
+                            }
+                            .map(|v| LineSpacing::Multiple(v.abs().clamp(0.06, 132.0))),
                         };
                     }
                 }

@@ -2690,3 +2690,4 @@ spacing	Normal	Normal
 	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Insertions : {ins}, suppressions : {del}, déplacements : {moves}, mise en forme : {fmt}, commentaires : {comments}
 	No revisions	Aucune révision
 	Changed	Modifié
+	Zoom to Page	Zoom sur la page

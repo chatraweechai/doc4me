@@ -1157,7 +1157,9 @@ struct PageBuilder<'a> {
     /// Page bottom before footnotes took space.
     orig_bottom: f32,
     /// The previous paragraph: (style, contextual spacing, space after) for contextual spacing.
-    prev: Option<(String, bool, f32)>,
+    /// The paragraph placed last: its style, whether it has contextual spacing, its space after,
+    /// and whether it is a list item with automatic space after.
+    prev: Option<(String, bool, f32, bool)>,
     /// Wrap areas of floating objects on this page (see [`wrap_area`]).
     excl: Vec<WrapArea>,
     /// Wrap areas of the floating tables on this page, which others may not overlap.
@@ -2577,9 +2579,23 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
     }
     // Contextual spacing: no space between paragraphs of the same style when either asks for it.
     let mut before = pl.rp.space_before;
-    if let Some((style, ctxl, after)) = pb.prev.take()
+    // Automatic (HTML) space before isn't put above the document's first paragraph.
+    if pl.rp.space_before_auto && block == 0 && pb.pages.len() <= 1 && pb.at_top() {
+        before = 0.0;
+    }
+    if let Some((style, ctxl, mut after, list_auto)) = pb.prev.take()
         && !pb.at_top()
     {
+        // Automatic (HTML) spacing isn't put between the items of a list, as in a web page.
+        if is_list(&pl.rp) && (list_auto || pl.rp.space_before_auto) {
+            if list_auto {
+                pb.y -= after;
+                after = 0.0;
+            }
+            if pl.rp.space_before_auto {
+                before = 0.0;
+            }
+        }
         if style == pl.rp.style {
             if ctxl {
                 pb.y -= after;
@@ -2595,9 +2611,16 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
         }
     }
     pb.y += before;
-    // Keep lines together: if it doesn't fit but would on an empty column, move it.
-    if pl.rp.keep_lines || pl.rp.keep_next {
-        let need = pl.height + if pl.rp.keep_next { next_first_line(ctx, block, width) } else { 0.0 };
+    // Keep lines together: if it doesn't fit but would on an empty column, move it. (Not a
+    // paragraph holding a page or column break: that ends the page itself.)
+    let breaks = |pl: &para::ParaLayout| pl.lines.iter().any(|l| matches!(l.end, para::LineEnd::PageBreak | para::LineEnd::ColumnBreak));
+    // Keep with next only ties the paragraph's last line to the next one's start: one that may
+    // break across pages (see `may_split`) keeps just its last lines with it, below.
+    let mut keep_tail = None;
+    if pl.rp.keep_next && !pl.rp.keep_lines && may_split(&pl) && !breaks(&pl) {
+        keep_tail = Some(keep_next_need(ctx, block, width, pl.rp.space_after));
+    } else if (pl.rp.keep_lines || pl.rp.keep_next) && !breaks(&pl) {
+        let need = pl.height + if pl.rp.keep_next { keep_next_need(ctx, block, width, pl.rp.space_after) } else { 0.0 };
         // (Against the whole column: balanced columns grow to hold it.)
         if pb.y + need > pb.bottom && !pb.at_top() && need <= pb.uncapped_bottom() - pb.top {
             pb.advance(block, body_top);
@@ -2692,12 +2715,39 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
             l1 = n;
         }
         ends_on_break = forced_break == Some(LineEnd::PageBreak) && l1 >= n;
-        // Widow/orphan control (2-line minimum at either end).
+        // Widow/orphan control (2-line minimum at either end): a paragraph's first line never
+        // stays alone at the bottom of a page, nor its last line alone at the top of the next.
+        // When taking a line along for the last one would leave the first alone, the whole
+        // paragraph moves (Word: a three-line paragraph with room for two goes to the next page).
         if forced_break.is_none() && l1 < n && pl.rp.widow_control && n >= 2 {
             if l1 - l0 == 1 && l0 == 0 && !pb.at_top() {
                 l1 = l0; // orphan: move the first line to the next page
-            } else if n - l1 == 1 && l1 - l0 >= 3 {
-                l1 -= 1; // widow: take one more line along
+            } else if n - l1 == 1 {
+                let keep = if l0 == 0 { 2 } else { 1 };
+                if l1 - l0 > keep {
+                    l1 -= 1; // widow: take one more line along
+                } else if l0 == 0 && !pb.at_top() {
+                    l1 = l0;
+                }
+            }
+        }
+        // Keep with next on a paragraph that may break: when its end and the start of what follows
+        // don't fit together here, its last lines (two with widow control) go on with it; if that
+        // would leave its first line alone, all of it does.
+        if let Some(tail) = keep_tail
+            && l1 == n
+            && l1 > l0
+            && forced_break.is_none()
+            && !pb.at_top()
+            && let (Some(first), Some(last)) = (pl.lines.get(l0), pl.lines.get(n - 1))
+        {
+            let lead = if l0 == 0 { first.top.max(0.0) } else { 0.0 };
+            let end = pb.y + lead + (last.top + last.height - first.top);
+            let take = if pl.rp.widow_control { 2 } else { 1 };
+            let carried: f32 = pl.lines.iter().skip(n.saturating_sub(take)).map(|l| l.height).sum();
+            if end + tail > pb.bottom + 0.01 && carried + tail <= pb.uncapped_bottom() - pb.top {
+                let keep_here = n.saturating_sub(take);
+                l1 = if keep_here > l0 && !(l0 == 0 && pl.rp.widow_control && keep_here - l0 < 2) { keep_here } else { l0 };
             }
         }
         // A row (text both sides of a floating object) stays together.
@@ -2810,7 +2860,7 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
         return;
     }
     pb.y += pl.rp.space_after;
-    pb.prev = Some((pl.rp.style.clone(), pl.rp.contextual_spacing, pl.rp.space_after));
+    pb.prev = Some((pl.rp.style.clone(), pl.rp.contextual_spacing, pl.rp.space_after, is_list(&pl.rp) && pl.rp.space_after_auto));
 }
 
 /// The outline of the body for an Outline view pass.
@@ -2880,35 +2930,95 @@ fn mirror_shift(rp: &doc4me_doc::resolve::ResolvedPara, number: u32, web: bool) 
 }
 
 /// Height of the first line of the block after `block` (for keep-with-next).
-fn next_first_line(ctx: &mut Ctx, block: usize, width: f32) -> f32 {
-    match ctx.doc.body.get(block + 1).map(|b| &**b) {
-        Some(Block::Para(p)) => {
-            // Don't advance list counters for a lookahead: lay out without the label.
-            let rp = ctx.doc.styles.resolve_para(&p.props);
-            let env = para::ParaEnv {
-                doc: ctx.doc,
-                width,
-                label: None,
-                fields: &ctx.fields,
-                show_hidden: ctx.opts.show_hidden,
-                field_codes: ctx.opts.field_codes,
-                hide_deleted: ctx.opts.hides_deleted(StoryRef::Body),
-                table: None,
-                proofing: None,
-                numeral: ctx.opts.numeral,
-                exclusions: &[],
-                eq_number: ctx.eq_count,
-                read_line_spacing: if ctx.opts.view == ViewMode::Read { ctx.opts.read_line_spacing } else { None },
-                grid: ctx.grid,
-                fit_objects: false,
-            };
-            let _ = rp;
-            let pl = para::layout_para(p, &env);
-            pl.rp.space_before + pl.lines.first().map(|l| l.height).unwrap_or(0.0)
+/// How much of what follows block `block` has to stand on the same page for Keep with next:
+/// the paragraphs after it that keep with the next one in turn, whole, then the start of the one
+/// after them — its first line, or its first two with widow control (Word won't leave one there)
+/// — or a table's first row. Between paragraphs, the larger of the space after and the space
+/// before, as they are placed; `after` is the space after block `block`.
+fn keep_next_need(ctx: &mut Ctx, block: usize, width: f32, after: f32) -> f32 {
+    let mut need = 0.0;
+    let mut after = after.max(0.0);
+    for b in block + 1..block + 9 {
+        match ctx.doc.body.get(b).map(|b| &**b) {
+            Some(Block::Para(p)) => {
+                let pl = lookahead_para(ctx, p, width);
+                // A page break (before it or in it) ends what has to stand on this page.
+                if pl.rp.page_break_before || pl.lines.iter().any(|l| matches!(l.end, para::LineEnd::PageBreak | para::LineEnd::ColumnBreak)) {
+                    break;
+                }
+                let gap = if ctx.doc.settings.add_para_spacing { pl.rp.space_before.max(0.0) + after } else { pl.rp.space_before.max(after) };
+                // One that keeps with the next in turn and can't break across pages stands here
+                // whole, and so does the start of what follows it.
+                if pl.rp.keep_next && (pl.rp.keep_lines || !may_split(&pl)) && b + 1 < ctx.doc.body.len() && p.section.is_none() {
+                    need += gap + pl.height;
+                    after = pl.rp.space_after.max(0.0);
+                    continue;
+                }
+                let lines = if pl.rp.widow_control && pl.lines.len() >= 2 { 2 } else { 1 };
+                need += gap + pl.lines.iter().take(lines).map(|l| l.height).sum::<f32>();
+                break;
+            }
+            Some(Block::Table(t)) => {
+                let tl = table::layout_table(ctx, StoryRef::Body, t, &[b as u32], width, 1);
+                let cant_split = t.rows.first().is_some_and(|r| r.props.cant_split);
+                need += tl.rows.first().map_or(0.0, |r| if cant_split { r.height } else { table::first_line_bottom(r).min(r.height) });
+                break;
+            }
+            None => break,
         }
-        Some(Block::Table(_)) => 24.0,
-        None => 0.0,
     }
+    need
+}
+
+/// Whether a paragraph is a list item (numbered or bulleted).
+fn is_list(rp: &doc4me_doc::resolve::ResolvedPara) -> bool {
+    rp.numbering.is_some_and(|n| n.num != 0)
+}
+
+/// Whether a paragraph may break across pages: two lines or more, four with widow control (two
+/// on each page).
+fn may_split(pl: &para::ParaLayout) -> bool {
+    pl.lines.len() >= if pl.rp.widow_control { 4 } else { 2 }
+}
+
+/// A paragraph laid out for a look ahead: no list label (that would advance the counters).
+fn lookahead_para(ctx: &Ctx, p: &doc4me_doc::Paragraph, width: f32) -> para::ParaLayout {
+    let env = para::ParaEnv {
+        doc: ctx.doc,
+        width,
+        label: None,
+        fields: &ctx.fields,
+        show_hidden: ctx.opts.show_hidden,
+        field_codes: ctx.opts.field_codes,
+        hide_deleted: ctx.opts.hides_deleted(StoryRef::Body),
+        table: None,
+        proofing: None,
+        numeral: ctx.opts.numeral,
+        exclusions: &[],
+        eq_number: ctx.eq_count,
+        read_line_spacing: if ctx.opts.view == ViewMode::Read { ctx.opts.read_line_spacing } else { None },
+        grid: ctx.grid,
+        fit_objects: false,
+    };
+    para::layout_para(p, &env)
+}
+
+/// Whether a table row keeps with the next one: Word keeps a row on the page of the row after it
+/// when the paragraphs in it are set to Keep with next (how a heading row stays with the rows it
+/// heads). A row with no paragraph doesn't.
+fn row_keeps_with_next(ctx: &mut Ctx, row: &doc4me_doc::Row) -> bool {
+    let mut any = false;
+    for cell in &row.cells {
+        for b in &cell.blocks {
+            if let Block::Para(p) = &**b {
+                if !ctx.resolved(p).keep_next {
+                    return false;
+                }
+                any = true;
+            }
+        }
+    }
+    any
 }
 
 fn place_table(ctx: &mut Ctx, pb: &mut PageBuilder, t: &doc4me_doc::Table, block: usize, body_top: f32) {
@@ -2943,43 +3053,96 @@ fn place_table(ctx: &mut Ctx, pb: &mut PageBuilder, t: &doc4me_doc::Table, block
         pb.y += row.height;
         pb.content_bottom = pb.content_bottom.max(pb.y);
     };
+    // Rows that keep with the next one (see `row_keeps_with_next`).
+    let keeps: Vec<bool> = t.rows.iter().map(|r| row_keeps_with_next(ctx, r)).collect();
+    let header_h: f32 = header_rows.iter().filter_map(|r| tl.rows.get(*r)).map(|r| r.height).sum();
     for (ri, row) in tl.rows.iter().enumerate() {
         let splittable = !header_rows.contains(&ri) && !t.rows.get(ri).is_some_and(|r| r.props.cant_split);
-        let mut rest: Option<table::RowLayout> = None;
-        // On a new page holding only the repeated header rows.
-        let mut fresh = false;
-        // Each pass places the part of the row that fits, then breaks the page.
-        for _ in 0..1000 {
-            let cur = rest.as_ref().unwrap_or(row);
-            if pb.y + cur.height <= pb.bottom + 0.01 {
-                break;
+        // A run of rows that keep with the next goes to the next page with that row's start when
+        // they don't fit together here (and would on a page of their own).
+        if keeps.get(ri) == Some(&true) && !header_rows.contains(&ri) && !pb.at_top() && (ri == 0 || keeps.get(ri - 1) != Some(&true)) {
+            let mut need = 0.0;
+            let mut k = ri;
+            while keeps.get(k) == Some(&true) && k + 1 < tl.rows.len() {
+                need += tl.rows[k].height;
+                k += 1;
             }
-            let split = if splittable { table::split_row(cur, pb.bottom - pb.y) } else { None };
-            match split {
-                Some((a, b)) => {
-                    place(pb, &a);
-                    table_notes(ctx, pb, &a.items);
-                    rest = Some(b);
-                }
-                // Like Word, a row that does not fit on an empty page, or under the header rows
-                // repeated there, is placed anyway and runs into the bottom margin.
-                None if pb.at_top() || fresh => break,
-                None => {}
-            }
-            pb.advance(block, body_top);
-            // Repeat header rows.
-            if !header_rows.contains(&ri) {
-                for hr in &header_rows {
-                    if let Some(h) = tl.rows.get(*hr) {
-                        place(pb, h);
+            if k > ri
+                && let Some(next) = tl.rows.get(k)
+            {
+                let cant_split = t.rows.get(k).is_some_and(|r| r.props.cant_split);
+                need += if cant_split { next.height } else { table::first_line_bottom(next).min(next.height) };
+                if pb.y + need > pb.bottom + 0.01 && need + header_h <= pb.uncapped_bottom() - pb.top {
+                    pb.advance(block, body_top);
+                    for hr in &header_rows {
+                        if let Some(h) = tl.rows.get(*hr) {
+                            place(pb, h);
+                        }
                     }
                 }
             }
-            fresh = true;
         }
-        let last = rest.as_ref().unwrap_or(row);
-        place(pb, last);
-        table_notes(ctx, pb, &last.items);
+        // A page break typed in a cell ends the page there; the rest of the row starts the next
+        // one (Word).
+        // (Not in a row of exact height: it never breaks, and Word ignores the break there.)
+        let exact = t.rows.get(ri).is_some_and(|r| r.props.height_rule == doc4me_doc::props::HeightRule::Exact && r.props.height.is_some());
+        let mut pieces: Vec<std::borrow::Cow<'_, table::RowLayout>> = vec![std::borrow::Cow::Borrowed(row)];
+        while !exact && pieces.len() < 64 {
+            let Some(last) = pieces.last() else { break };
+            let Some((a, b)) = table::page_break_cut(last).and_then(|c| table::split_row(last, c)) else { break };
+            pieces.pop();
+            pieces.push(std::borrow::Cow::Owned(a));
+            pieces.push(std::borrow::Cow::Owned(b));
+        }
+        let n_pieces = pieces.len();
+        for (pi, piece) in pieces.iter().enumerate() {
+            let row: &table::RowLayout = piece;
+            let mut rest: Option<table::RowLayout> = None;
+            // On a new page holding only the repeated header rows.
+            let mut fresh = false;
+            // Each pass places the part of the row that fits, then breaks the page.
+            for _ in 0..1000 {
+                let cur = rest.as_ref().unwrap_or(row);
+                if pb.y + cur.height <= pb.bottom + 0.01 {
+                    break;
+                }
+                let split = if splittable { table::split_row(cur, pb.bottom - pb.y) } else { None };
+                match split {
+                    Some((a, b)) => {
+                        place(pb, &a);
+                        table_notes(ctx, pb, &a.items);
+                        rest = Some(b);
+                    }
+                    // Like Word, a row that does not fit on an empty page, or under the header rows
+                    // repeated there, is placed anyway and runs into the bottom margin.
+                    None if pb.at_top() || fresh => break,
+                    None => {}
+                }
+                pb.advance(block, body_top);
+                // Repeat header rows.
+                if !header_rows.contains(&ri) {
+                    for hr in &header_rows {
+                        if let Some(h) = tl.rows.get(*hr) {
+                            place(pb, h);
+                        }
+                    }
+                }
+                fresh = true;
+            }
+            let last = rest.as_ref().unwrap_or(row);
+            place(pb, last);
+            table_notes(ctx, pb, &last.items);
+            if pi + 1 < n_pieces {
+                pb.advance(block, body_top);
+                if !header_rows.contains(&ri) {
+                    for hr in &header_rows {
+                        if let Some(h) = tl.rows.get(*hr) {
+                            place(pb, h);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

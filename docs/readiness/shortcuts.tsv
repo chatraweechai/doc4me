@@ -75,10 +75,10 @@ ks-073	Navigate the document	Display the Go To dialog box, to navigate to a spec
 ks-074	Navigate the document	Cycle through the locations of the four previous changes made to the document.	Ctrl+Alt+Z	Mod+Alt+Z	edit.goBack	registry		edit.goBack cycles the last edit locations
 ks-075	Preview and print documents	Print the document.	Ctrl+P	Mod+P	file.print	registry		
 ks-076	Preview and print documents	Switch to print preview.	Ctrl+Alt+I	Mod+Alt+I	file.print	registry		opens the Print page with its preview, as Word 365 does
-ks-077	Preview and print documents	Move around the preview page when zoomed in.	Arrow keys	Arrows	-	manual	untested	print preview
-ks-078	Preview and print documents	Move by one preview page when zoomed out.	Page up or Page down	PageUp | PageDown	-	manual	untested	print preview
-ks-079	Preview and print documents	Move to the first preview page when zoomed out.	Ctrl+Home	Mod+Home	-	manual	untested	print preview
-ks-080	Preview and print documents	Move to the last preview page when zoomed out.	Ctrl+End	Mod+End	-	manual	untested	print preview
+ks-077	Preview and print documents	Move around the preview page when zoomed in.	Arrow keys	Arrows	-	manual	pass	File › Print preview: zoomed in, the arrow keys move around the preview page (UI test print_page::preview_keys_move_through_the_pages_like_word)
+ks-078	Preview and print documents	Move by one preview page when zoomed out.	Page up or Page down	PageUp | PageDown	-	manual	pass	File › Print preview: Page Up / Page Down move by a preview page (UI test print_page::preview_keys_move_through_the_pages_like_word)
+ks-079	Preview and print documents	Move to the first preview page when zoomed out.	Ctrl+Home	Mod+Home	-	manual	pass	File › Print preview: Ctrl+Home: the first preview page (UI test print_page::preview_keys_move_through_the_pages_like_word)
+ks-080	Preview and print documents	Move to the last preview page when zoomed out.	Ctrl+End	Mod+End	-	manual	pass	File › Print preview: Ctrl+End: the last preview page (UI test print_page::preview_keys_move_through_the_pages_like_word)
 ks-081	Select text and graphics	Select text.	Shift+Arrow keys	Shift+Left	caret.left	registry		Shift extends caret moves (keys.rs)
 ks-082	Select text and graphics	Select the word to the left.	Ctrl+Shift+Left arrow key	Mod+Shift+Left	caret.wordLeft	registry		
 ks-083	Select text and graphics	Select the word to the right.	Ctrl+Shift+Right arrow key	Mod+Shift+Right	caret.wordRight	registry		

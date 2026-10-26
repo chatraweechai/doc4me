@@ -8,9 +8,10 @@ use doc4me_doc::styles::{TableStyleParts, TableStyleProps};
 use doc4me_doc::{Block, Blocks, Paragraph, StoryRef, Table};
 use doc4me_geom::Rect;
 
-use crate::para::{CellText, ClKind, ParaLayout};
+use crate::para::{CellText, ClKind, LineEnd, ParaLayout};
 use crate::{BoxLayout, Ctx, Placed, layout_box};
 
+#[derive(Clone)]
 pub struct RowLayout {
     pub height: f32,
     /// Items relative to the table's top-left (x) and the row's top (y).
@@ -685,6 +686,42 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
 /// Split a row at `cut` (points below the row's top) so the part above fits on this page.
 /// Paragraph lines break between lines; fills, vertical rules and cell areas are cut; the
 /// rest moves up to the top of the continuation. `None` when no line fits above the cut.
+/// Where a row's first line of text ends (from the row's top): how much of a row that may break
+/// across pages has to fit for it to start on a page. The whole row when it has no text.
+pub fn first_line_bottom(row: &RowLayout) -> f32 {
+    // Each cell's first line (the topmost text at the cell's left edge), then the lowest of those.
+    let mut cells: Vec<(f32, f32)> = Vec::new();
+    for it in &row.items {
+        let Placed::Lines { para, l0, x, y, .. } = it else { continue };
+        let Some(l) = para.lines.get(*l0) else { continue };
+        let bottom = y + l.top + l.height;
+        match cells.iter_mut().find(|(cx, _)| (cx - x).abs() < 0.5) {
+            Some((_, b)) => *b = b.min(bottom),
+            None => cells.push((*x, bottom)),
+        }
+    }
+    cells.iter().map(|(_, b)| *b).fold(None, |m: Option<f32>, b| Some(m.map_or(b, |m| m.max(b)))).unwrap_or(row.height)
+}
+
+/// Where the first page break typed in one of the row's cells ends (from the row's top): Word
+/// starts a new page there and the rest of the row goes on it. `None` without one.
+pub fn page_break_cut(row: &RowLayout) -> Option<f32> {
+    let mut cut: Option<f32> = None;
+    for it in &row.items {
+        let Placed::Lines { para, l0, l1, y, .. } = it else { continue };
+        let base = para.lines.get(*l0).map_or(0.0, |l| l.top);
+        for k in *l0..*l1 {
+            let Some(l) = para.lines.get(k) else { continue };
+            if l.end == LineEnd::PageBreak {
+                let b = y + l.top - base + l.height;
+                cut = Some(cut.map_or(b, |c| c.min(b)));
+                break;
+            }
+        }
+    }
+    cut.filter(|c| *c > 0.01 && *c < row.height - 0.01)
+}
+
 pub fn split_row(row: &RowLayout, cut: f32) -> Option<(RowLayout, RowLayout)> {
     if cut <= 0.0 || cut >= row.height {
         return None;

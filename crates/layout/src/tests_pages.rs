@@ -3,7 +3,7 @@
 //! continued on the next page.
 use super::*;
 use doc4me_doc::para::{InlineObject, NoteKind};
-use doc4me_doc::{PartKind, Pos, para_block};
+use doc4me_doc::{PartKind, Pos, Table, para_block};
 
 fn lay(doc: &Document) -> DocLayout {
     let mut c = LayoutCache::new();
@@ -153,4 +153,170 @@ fn caret_in_a_continued_footnote_is_found_on_its_page() {
         let (up, _) = l.vertical(&cont, None, -1, hint).unwrap();
         assert_eq!(para.line_of(up.off), k, "hint {hint}: {up:?}");
     }
+}
+
+/// The pages a body paragraph's lines are on, in order, with how many lines each holds.
+fn line_pages(l: &DocLayout, path: &Path) -> Vec<(usize, usize)> {
+    let mut out: Vec<(usize, usize)> = Vec::new();
+    for (pi, page) in l.pages.iter().enumerate() {
+        for it in &page.items {
+            if let Placed::Lines { story: StoryRef::Body, path: p, l0, l1, .. } = it
+                && p == path
+            {
+                match out.last_mut() {
+                    Some((last, n)) if *last == pi => *n += l1 - l0,
+                    _ => out.push((pi, l1 - l0)),
+                }
+            }
+        }
+    }
+    out
+}
+
+fn long_para(words: usize) -> Arc<Block> {
+    para_block(Paragraph::with_text(&"word ".repeat(words), Default::default()))
+}
+
+/// Widow/orphan control: wherever the page ends, a three-line paragraph is never split (a 2 + 1
+/// split leaves a widow, 1 + 2 an orphan), and a four-line one only splits 2 + 2.
+#[test]
+fn widow_control_never_leaves_one_line_of_a_short_paragraph() {
+    // Word counts that make three and four lines.
+    let lines = |words: usize| {
+        let mut d = Document::from_text("");
+        d.body.insert(0, long_para(words));
+        line_pages(&lay(&d), &Path::top(0)).iter().map(|(_, k)| k).sum::<usize>()
+    };
+    let three_words = (5..200).find(|w| lines(*w) == 3).expect("three lines");
+    let four_words = (5..200).find(|w| lines(*w) == 4).expect("four lines");
+    for n in 30..60 {
+        let mut d = Document::from_text(&"Body line\n".repeat(n));
+        let three = n;
+        d.body.insert(three, long_para(three_words));
+        d.body.insert(three + 1, long_para(four_words));
+        let l = lay(&d);
+        let first = line_pages(&l, &Path::top(three));
+        assert_eq!(first.len(), 1, "{n} lines before: a three-line paragraph split {first:?}");
+        for (path, what) in [(three, "first"), (three + 1, "second")] {
+            let pages = line_pages(&l, &Path::top(path));
+            if pages.len() > 1 {
+                assert!(pages.first().is_some_and(|(_, k)| *k >= 2) && pages.last().is_some_and(|(_, k)| *k >= 2), "{n}: {what} {pages:?}");
+            }
+        }
+    }
+}
+
+/// Keep with next runs on: two headings that keep with the next paragraph stay on the page of
+/// that paragraph's first lines, wherever the page ends.
+#[test]
+fn a_chain_of_keep_with_next_headings_stays_with_the_text() {
+    for n in 30..60 {
+        let mut d = Document::from_text(&"Body line\n".repeat(n));
+        let mut h1 = Paragraph::with_text("Heading one", Default::default());
+        h1.props.keep_next = Some(true);
+        let mut h2 = Paragraph::with_text("Heading two", Default::default());
+        h2.props.keep_next = Some(true);
+        d.body.insert(n, para_block(h1));
+        d.body.insert(n + 1, para_block(h2));
+        d.body.insert(n + 2, long_para(60));
+        let l = lay(&d);
+        let page = |i: usize| line_pages(&l, &Path::top(i)).first().map(|(p, _)| *p);
+        assert_eq!((page(n), page(n + 1)), (page(n + 2), page(n + 2)), "{n} lines before");
+    }
+}
+
+/// A table row whose paragraphs keep with the next goes to the next page with that row (a heading
+/// row with the rows it heads), and a page break typed in a cell starts a new page there.
+#[test]
+fn table_rows_keep_with_next_and_page_breaks_in_cells() {
+    let build = |n: usize, keep: bool| {
+        let mut d = Document::from_text(&"Body line\n".repeat(n));
+        let mut t = Table::new(2, 1, 468.0);
+        let mut head = Paragraph::with_text("Section heading", Default::default());
+        head.props.keep_next = Some(keep);
+        t.rows[0].cells[0].blocks = vec![para_block(head)];
+        t.rows[1].cells[0].blocks = paras("Row text", 6);
+        t.rows[1].props.cant_split = true;
+        d.insert_block(StoryRef::Body, &Path::top(n), Block::Table(t)).unwrap();
+        d
+    };
+    let page_of = |l: &DocLayout, path: Vec<u32>| l.caret(&Pos { story: StoryRef::Body, path: Path(path), off: 0 }).map(|c| c.page);
+    // Where, without Keep with next, the heading row ends page 1 and the next row starts page 2.
+    let n = (20..60)
+        .find(|n| {
+            let l = lay(&build(*n, false));
+            page_of(&l, vec![*n as u32, 0, 0, 0]).map(|p| p + 1) == page_of(&l, vec![*n as u32, 1, 0, 0])
+        })
+        .expect("a page end between the rows");
+    let l = lay(&build(n, true));
+    assert_eq!(page_of(&l, vec![n as u32, 0, 0, 0]), page_of(&l, vec![n as u32, 1, 0, 0]), "the heading row goes with the next one");
+
+    let mut d = Document::from_text("Before");
+    let mut t = Table::new(1, 1, 468.0);
+    t.rows[0].cells[0].blocks = vec![
+        para_block(Paragraph::with_text("Top part", Default::default())),
+        para_block(Paragraph::with_text(&format!("{}After the break", doc4me_doc::para::PAGE_BREAK), Default::default())),
+    ];
+    d.insert_block(StoryRef::Body, &Path::top(1), Block::Table(t.clone())).unwrap();
+    let l = lay(&d);
+    let text_page =
+        |l: &DocLayout, para: u32, off: usize| l.caret(&Pos { story: StoryRef::Body, path: Path(vec![1, 0, 0, para]), off }).map(|c| c.page);
+    let top = text_page(&l, 0, 0).expect("laid out");
+    assert_eq!(text_page(&l, 1, 1), Some(top + 1), "the text after the break starts the next page");
+    // Not in a row of exact height, which never breaks.
+    t.rows[0].props.height = Some(200.0);
+    t.rows[0].props.height_rule = doc4me_doc::props::HeightRule::Exact;
+    let mut d = Document::from_text("Before");
+    d.insert_block(StoryRef::Body, &Path::top(1), Block::Table(t)).unwrap();
+    let l = lay(&d);
+    assert_eq!(text_page(&l, 1, 1), text_page(&l, 0, 0));
+}
+
+/// Keep with next on a long paragraph ties only its last lines to the next paragraph: wherever
+/// the page ends, its last line shares a page with the next one's first, and it may break
+/// across pages (Word doesn't move it whole).
+#[test]
+fn a_long_keep_with_next_paragraph_breaks_and_keeps_its_end_with_the_next() {
+    let mut split_seen = false;
+    for n in 25..60 {
+        let mut d = Document::from_text(&"Body line\n".repeat(n));
+        let mut long = Paragraph::with_text(&"word ".repeat(140), Default::default());
+        long.props.keep_next = Some(true);
+        d.body.insert(n, para_block(long));
+        d.body.insert(n + 1, long_para(30));
+        let l = lay(&d);
+        let first = line_pages(&l, &Path::top(n));
+        let next = line_pages(&l, &Path::top(n + 1));
+        assert_eq!(first.last().map(|(p, _)| *p), next.first().map(|(p, _)| *p), "{n}: {first:?} / {next:?}");
+        split_seen |= first.len() > 1;
+    }
+    assert!(split_seen, "the long paragraph never broke across pages");
+}
+
+/// Word's automatic (HTML) spacing: 14 pt between paragraphs, none between the items of a list
+/// nor above the document's first paragraph.
+#[test]
+fn automatic_spacing_skips_list_items_and_the_first_paragraph() {
+    let mut d = Document::from_text("");
+    let num = d.numbering.add_list(doc4me_doc::ListKind::Bullet);
+    let auto = |text: &str, list: bool| {
+        let mut p = Paragraph::with_text(text, Default::default());
+        p.props.space_before_auto = Some(true);
+        p.props.space_after_auto = Some(true);
+        p.props.space_before = Some(5.0);
+        p.props.space_after = Some(5.0);
+        if list {
+            p.props.numbering = Some(doc4me_doc::props::NumRef { num, level: 0 });
+        }
+        para_block(p)
+    };
+    d.body = vec![auto("Title", false), auto("Intro", false), auto("One", true), auto("Two", true), auto("After", false)];
+    let l = lay(&d);
+    let top = |i: u32| l.caret(&Pos { story: StoryRef::Body, path: Path::top(i as usize), off: 0 }).unwrap().top;
+    let line = top(3) - top(2);
+    assert!((top(0) - d.last_section.margin_top).abs() < 6.0, "no space above the first paragraph: {}", top(0));
+    assert!((top(2) - top(1) - line - 14.0).abs() < 0.5, "14 pt between paragraphs: {} vs line {line}", top(2) - top(1));
+    assert!((top(4) - top(3) - line - 14.0).abs() < 0.5, "14 pt after the list");
+    let height = l.caret(&Pos { story: StoryRef::Body, path: Path::top(2), off: 0 }).unwrap().height;
+    assert!((line - height).abs() < 1.0, "no space between list items: {line} for a {height} pt line");
 }

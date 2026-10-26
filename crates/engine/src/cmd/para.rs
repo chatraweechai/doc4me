@@ -81,22 +81,31 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("para.spacing", "Paragraph Spacing", "Layout › Paragraph", |s, v| {
             let (b, a) = (p::f32(v, "before"), p::f32(v, "after"));
             fmt(s, &|p| {
+                // A set amount replaces automatic spacing.
                 if let Some(x) = b {
                     p.space_before = Some(x.clamp(0.0, 1584.0));
+                    p.space_before_auto = Some(false);
                 }
                 if let Some(x) = a {
                     p.space_after = Some(x.clamp(0.0, 1584.0));
+                    p.space_after_auto = Some(false);
                 }
             })
         })
         .params(r#"{"before"?: pt, "after"?: pt}"#),
         CommandSpec::new("para.addSpaceBefore", "Add Space Before Paragraph", "Home › Paragraph › Line Spacing", |s, _| {
             let has = cur(s).space_before > 0.0;
-            fmt(s, &|p| p.space_before = Some(if has { 0.0 } else { 12.0 }))
+            fmt(s, &|p| {
+                p.space_before = Some(if has { 0.0 } else { 12.0 });
+                p.space_before_auto = Some(false);
+            })
         }),
         CommandSpec::new("para.removeSpaceAfter", "Remove Space After Paragraph", "Home › Paragraph › Line Spacing", |s, _| {
             let has = cur(s).space_after > 0.0;
-            fmt(s, &|p| p.space_after = Some(if has { 0.0 } else { 8.0 }))
+            fmt(s, &|p| {
+                p.space_after = Some(if has { 0.0 } else { 8.0 });
+                p.space_after_auto = Some(false);
+            })
         }),
         // Back to the paragraph style: direct indents, spacing, alignment… go; the style, list
         // membership and drop cap stay. ⌘Q quits on macOS, so Word for Mac uses ⌃Q.

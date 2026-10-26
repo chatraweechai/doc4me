@@ -3,7 +3,8 @@
 //! Doc4Me prints through a PDF that the host opens in the system's print flow, so the settings
 //! here are the ones that shape that PDF: which pages, odd/even, copies and collation. They go to
 //! `ui.print` / `file.printPdf` as params (see `doc4me_engine::print`). The printer, two-sided
-//! printing and pages per sheet are chosen in the system print dialog that opens next.
+//! printing and pages per sheet are chosen in the system print dialog that opens next. The
+//! preview takes Word's keys ([`preview_keys`]) and zooms in on a click.
 
 use std::sync::Arc;
 
@@ -27,11 +28,23 @@ pub struct PrintSettings {
     pub collate: bool,
     /// The page shown in the preview (0-based).
     pub preview: usize,
+    /// The preview is zoomed in (twice the size), showing the part at `pan` (0–1 across and down).
+    pub zoomed: bool,
+    pub pan: egui::Vec2,
 }
 
 impl Default for PrintSettings {
     fn default() -> Self {
-        PrintSettings { range: "all".into(), pages: String::new(), parity: "all".into(), copies: 1, collate: true, preview: 0 }
+        PrintSettings {
+            range: "all".into(),
+            pages: String::new(),
+            parity: "all".into(),
+            copies: 1,
+            collate: true,
+            preview: 0,
+            zoomed: false,
+            pan: egui::Vec2::ZERO,
+        }
     }
 }
 
@@ -181,18 +194,76 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
     });
 }
 
-/// The preview: one page with Previous/Next.
+/// Word's keys on the print preview, when nothing else has the keyboard: Page Up / Page Down move
+/// by a page, Ctrl+Home / Ctrl+End go to the first and last page, and the arrow keys move around a
+/// zoomed-in page (or by a page when it isn't zoomed).
+pub fn preview_keys(app: &mut WordApp, ctx: &egui::Context, total: usize) {
+    if ctx.egui_wants_keyboard_input() || total == 0 {
+        return;
+    }
+    let s = &mut app.ui.print;
+    let last = total - 1;
+    ctx.input_mut(|i| {
+        let step = 0.25;
+        if i.consume_key(egui::Modifiers::COMMAND, egui::Key::Home) {
+            s.preview = 0;
+        }
+        if i.consume_key(egui::Modifiers::COMMAND, egui::Key::End) {
+            s.preview = last;
+        }
+        if i.consume_key(egui::Modifiers::NONE, egui::Key::PageDown) {
+            s.preview = (s.preview + 1).min(last);
+        }
+        if i.consume_key(egui::Modifiers::NONE, egui::Key::PageUp) {
+            s.preview = s.preview.saturating_sub(1);
+        }
+        for (key, dx, dy) in [
+            (egui::Key::ArrowLeft, -step, 0.0),
+            (egui::Key::ArrowRight, step, 0.0),
+            (egui::Key::ArrowUp, 0.0, -step),
+            (egui::Key::ArrowDown, 0.0, step),
+        ] {
+            if i.consume_key(egui::Modifiers::NONE, key) {
+                if s.zoomed {
+                    s.pan = (s.pan + vec2(dx, dy)).clamp(egui::Vec2::ZERO, vec2(1.0, 1.0));
+                } else if dx + dy > 0.0 {
+                    s.preview = (s.preview + 1).min(last);
+                } else {
+                    s.preview = s.preview.saturating_sub(1);
+                }
+            }
+        }
+    });
+}
+
+/// The preview: one page with Previous/Next, zoomed in by a click.
 fn preview(app: &mut WordApp, ui: &mut Ui, lay: &DocLayout, total: usize) {
     let t = Tokens::get(ui.ctx());
     let ctx = ui.ctx().clone();
+    preview_keys(app, &ctx, total);
     let width = 340.0;
-    let page = app.ui.print.preview;
+    let page = app.ui.print.preview.min(total.saturating_sub(1));
+    app.ui.print.preview = page;
     let aspect = lay.pages.get(page).map_or(11.0 / 8.5, |p| p.h.max(1.0) / p.w.max(1.0)).clamp(0.2, 5.0);
-    let (r, _) = ui.allocate_exact_size(vec2(width, width * aspect), Sense::hover());
+    let (r, resp) = ui.allocate_exact_size(vec2(width, width * aspect), Sense::click());
     ui.painter().rect_filled(r.translate(vec2(2.0, 3.0)), 0.0, t.page_shadow);
     ui.painter().rect(r, 0.0, egui::Color32::WHITE, Stroke::new(1.0, t.border_strong), egui::StrokeKind::Inside);
-    if let Some(tex) = page_texture(app, &ctx, lay, page, width) {
-        ui.painter().image(tex.id(), r, Rect::from_min_max(pos2(0.0, 0.0), pos2(1.0, 1.0)), egui::Color32::WHITE);
+    // Zoomed in, half the page across and down shows, from `pan` (rendered at twice the width).
+    let s = &app.ui.print;
+    let (scale, uv) = if s.zoomed {
+        let min = pos2(s.pan.x * 0.5, s.pan.y * 0.5);
+        (2.0, Rect::from_min_max(min, min + vec2(0.5, 0.5)))
+    } else {
+        (1.0, Rect::from_min_max(pos2(0.0, 0.0), pos2(1.0, 1.0)))
+    };
+    if let Some(tex) = page_texture(app, &ctx, lay, page, width * scale) {
+        ui.painter().image(tex.id(), r, uv, egui::Color32::WHITE);
+    }
+    let tip = if app.ui.print.zoomed { tl!("Zoom to Page") } else { tl!("Zoom In") };
+    if resp.on_hover_text(tip).clicked() {
+        let s = &mut app.ui.print;
+        s.zoomed = !s.zoomed;
+        s.pan = egui::Vec2::ZERO;
     }
     ui.add_space(6.0);
     ui.horizontal(|ui| {
@@ -235,5 +306,46 @@ pub fn export_formats(app: &mut WordApp, ui: &mut Ui) {
             app.export_dialog(ext);
         }
         ui.add_space(4.0);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// Word's preview keys on File › Print: Page Down / Page Up step through the pages, Ctrl+End
+    /// and Ctrl+Home go to the last and first, the arrows step through pages, or move around the
+    /// page once it's zoomed in.
+    #[test]
+    fn preview_keys_move_through_the_pages_like_word() {
+        let text = (1..=200).map(|i| format!("Line {i}")).collect::<Vec<_>>().join("\n");
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text(&text)), Default::default());
+        let total = a.session.layout().pages.len();
+        assert!(total >= 3, "{total} pages");
+        let ctx = egui::Context::default();
+        let press = |a: &mut WordApp, key: egui::Key, modifiers: egui::Modifiers| {
+            let e = egui::Event::Key { key, physical_key: None, pressed: true, repeat: false, modifiers };
+            ctx.run_ui(egui::RawInput { events: vec![egui::Event::ModifiersChanged(modifiers), e], ..Default::default() }, |ui| {
+                preview_keys(a, ui.ctx(), total)
+            })
+            .drop_without_applying_deltas();
+        };
+        press(&mut a, egui::Key::PageDown, egui::Modifiers::NONE);
+        press(&mut a, egui::Key::PageDown, egui::Modifiers::NONE);
+        assert_eq!(a.ui.print.preview, 2);
+        press(&mut a, egui::Key::PageUp, egui::Modifiers::NONE);
+        assert_eq!(a.ui.print.preview, 1);
+        press(&mut a, egui::Key::End, egui::Modifiers::COMMAND);
+        assert_eq!(a.ui.print.preview, total - 1);
+        press(&mut a, egui::Key::PageDown, egui::Modifiers::NONE);
+        assert_eq!(a.ui.print.preview, total - 1, "stays on the last page");
+        press(&mut a, egui::Key::Home, egui::Modifiers::COMMAND);
+        assert_eq!(a.ui.print.preview, 0);
+        press(&mut a, egui::Key::ArrowRight, egui::Modifiers::NONE);
+        assert_eq!(a.ui.print.preview, 1, "an arrow moves a page when not zoomed");
+        a.ui.print.zoomed = true;
+        press(&mut a, egui::Key::ArrowRight, egui::Modifiers::NONE);
+        press(&mut a, egui::Key::ArrowDown, egui::Modifiers::NONE);
+        assert_eq!((a.ui.print.preview, a.ui.print.pan), (1, egui::vec2(0.25, 0.25)), "zoomed in, the arrows move around the page");
     }
 }

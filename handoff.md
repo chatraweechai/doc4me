@@ -11,6 +11,7 @@
 - release workflow ไม่ตั้ง `CRAFT_FONTS_DIR` ข้ามฟอนต์ CJK ของ craft-fonts
 - parity ที่ต้องใช้บริการเสียเงินให้ตัดทิ้ง
 - ไม่เพิ่ม job ทดสอบบน Linux ใน CI เว้นแต่ผู้ใช้สั่ง
+- ข้ามงาน build ของ Windows arm64, Linux และ macOS จนกว่าผู้ใช้จะสั่ง (สั่งเมื่อ 2026-10-26: ไม่สั่งรัน workflow "Windows arm64 and macOS builds" ไม่แก้ปัญหา build ของแพลตฟอร์มเหล่านี้ แถว plat-002 คงสถานะไว้ตามผลล่าสุด)
 - ยังติดตาม WordCraft ต้นทางต่อ (เอกสารที่อ้าง PR/issue ของ WordCraft คงไว้)
 - ระบบเสริมที่เป็นของ Microsoft (VBA, Office add-ins/Office Store, OneDrive/SharePoint, co-authoring ของ Microsoft) อยู่นอกเป้าหมาย ใช้ open-source แทน ถ้าหาตัวแทนไม่ได้ให้ตัดเงียบ ๆ
 - ไม่มีผู้ให้บริการ AI ในโปรแกรม
