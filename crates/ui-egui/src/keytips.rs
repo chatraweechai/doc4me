@@ -734,9 +734,23 @@ pub fn logic(app: &mut WordApp, ctx: &egui::Context) {
             _ => {}
         }
     }
-    // Route letter/navigation keys to the keytips while they are showing.
+    // Route letter/navigation keys to the keytips while they are showing. Tab and the arrow keys
+    // leave them for the ribbon's own keyboard focus (`ribbon_keys`).
     let mut consumed = Vec::new();
     for e in &events {
+        if let egui::Event::Key { key, pressed: true, modifiers, .. } = e
+            && app.ui.keytips != Phase::Off
+            && crate::ribbon_keys::enters_ribbon(*key)
+            && !modifiers.alt
+            && !modifiers.command
+            && !modifiers.ctrl
+        {
+            app.ui.keytips = Phase::Off;
+            app.ui.keytip_prefix.clear();
+            crate::ribbon_keys::enter(ctx, *key, modifiers.shift);
+            consumed.push(*key);
+            continue;
+        }
         if let egui::Event::Key { key, pressed: true, modifiers, .. } = e
             && app.ui.keytips != Phase::Off
             && !is_alt(*key)

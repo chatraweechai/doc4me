@@ -253,6 +253,24 @@ fn paste_command(alt: bool, shift: bool) -> &'static str {
     }
 }
 
+/// The digit a number key types (the main row or the keypad, which egui reports alike).
+fn digit(key: Key) -> Option<char> {
+    let d = match key {
+        Key::Num0 => '0',
+        Key::Num1 => '1',
+        Key::Num2 => '2',
+        Key::Num3 => '3',
+        Key::Num4 => '4',
+        Key::Num5 => '5',
+        Key::Num6 => '6',
+        Key::Num7 => '7',
+        Key::Num8 => '8',
+        Key::Num9 => '9',
+        _ => return None,
+    };
+    Some(d)
+}
+
 /// Events for the focused canvas: text, editing keys, clipboard, IME. While keytips are showing
 /// every key belongs to them (letters pick badges, Escape cancels), so nothing here runs.
 pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
@@ -265,9 +283,28 @@ pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
         // Edit Document button or Escape returns to Print Layout before editing.
         for e in &events {
             match e {
+                // Escape leaves Read Mode, or first drops a page number being typed.
+                egui::Event::Key { key: Key::Escape, pressed: true, .. } if !app.canvas.read_goto.is_empty() => app.canvas.read_goto.clear(),
                 egui::Event::Key { key: Key::Escape, pressed: true, .. } => {
                     let _ = app.run("view.printLayout", json!({}));
                     break;
+                }
+                // Home / End: the first and last page; a page number, then Enter, goes to that page.
+                egui::Event::Key { key: Key::Home, pressed: true, modifiers, .. } if modifiers.is_none() => crate::canvas::go_to_read_page(app, 0),
+                egui::Event::Key { key: Key::End, pressed: true, modifiers, .. } if modifiers.is_none() => {
+                    crate::canvas::go_to_read_page(app, usize::MAX)
+                }
+                egui::Event::Key { key, pressed: true, modifiers, .. } if modifiers.is_none() && digit(*key).is_some() => {
+                    if app.canvas.read_goto.len() < 6 {
+                        app.canvas.read_goto.extend(digit(*key));
+                    }
+                }
+                egui::Event::Key { key: Key::Backspace, pressed: true, .. } => {
+                    app.canvas.read_goto.pop();
+                }
+                egui::Event::Key { key: Key::Enter, pressed: true, .. } if !app.canvas.read_goto.is_empty() => {
+                    let page: usize = std::mem::take(&mut app.canvas.read_goto).parse().unwrap_or(1);
+                    crate::canvas::go_to_read_page(app, page.saturating_sub(1));
                 }
                 egui::Event::Key { key: Key::PageDown | Key::ArrowRight, pressed: true, modifiers, .. } if modifiers.is_none() => {
                     crate::canvas::turn_read_page(app, 1.0)

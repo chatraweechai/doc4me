@@ -77,6 +77,12 @@ pub struct CanvasState {
     pub context_synonyms: Option<serde_json::Value>,
     /// The right-click context menu is open (the mini toolbar stands down while it is).
     pub context_menu_open: bool,
+    /// Shift+F10 asked for the context menu at the caret (`ribbon_keys`).
+    pub context_from_keys: bool,
+    /// Where a context menu the keyboard opened shows (a right-click opens it at the pointer).
+    context_at: Option<Pos2>,
+    /// Read Mode: the page number typed so far (Enter goes to it).
+    pub(crate) read_goto: String,
     /// Screen rect of the selection's first line, for the floating mini toolbar.
     pub mini_anchor: Option<Rect>,
     /// A picture, shape or text box being dragged by its frame.
@@ -91,7 +97,7 @@ pub struct CanvasState {
     pub(crate) wheel: crate::scroll::CanvasScroll,
     /// The scroll offset and its maximum at the end of last frame.
     pub(crate) scroll_offset: egui::Vec2,
-    scroll_max: egui::Vec2,
+    pub(crate) scroll_max: egui::Vec2,
     /// Explicit page turn to apply on the next frame (reading navigation buttons/keys).
     scroll_request: Option<egui::Vec2>,
     /// The viewport (the content's visible rect on screen) at the end of last frame; the
@@ -186,6 +192,9 @@ impl Default for CanvasState {
             erasing: None,
             ink_ui: Default::default(),
             context_menu_open: false,
+            context_from_keys: false,
+            context_at: None,
+            read_goto: String::new(),
             mini_anchor: None,
             pasted: false,
             swallow_text: false,
@@ -409,6 +418,11 @@ fn reading_page_start(layout: &DocLayout, page: usize) -> Option<Pos> {
 /// of jumping to the editing caret (which may be thousands of columns away).
 fn reading_anchor_page(layout: &DocLayout, anchor: &Pos) -> Option<usize> {
     layout.caret_on(anchor, 0).map(|c| c.page)
+}
+
+/// Read Mode: go to a page (counted from 0; past the last goes to the last).
+pub(crate) fn go_to_read_page(app: &mut WordApp, page: usize) {
+    app.canvas.read_target_page = Some(page.min(app.canvas.cols.saturating_sub(1)));
 }
 
 /// Turn one reading column left/right. Multiple ticks during an animation queue additional
@@ -1326,10 +1340,36 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
             app.canvas.context_synonyms = app.session.run("review.thesaurus", &json!({})).ok().and_then(|v| v.get("synonyms").cloned());
         }
     }
-    resp.context_menu(|ui| context_menu(app, ui));
+    // Shift+F10: the context menu at the caret, with what a right-click there would offer.
+    if std::mem::take(&mut app.canvas.context_from_keys)
+        && let Some(at) = ui.ctx().output(|o| o.ime.map(|i| i.cursor_rect.left_bottom())).or(app.canvas.viewport.map(|v| v.center()))
+    {
+        if crate::objects::selected(app).is_some() {
+            app.canvas.context_issue = None;
+            app.canvas.context_synonyms = None;
+        } else {
+            app.canvas.context_issue = app.session.run("review.suggestions", &json!({})).ok().filter(|v| !v.is_null());
+            app.canvas.context_synonyms = app.session.run("review.thesaurus", &json!({})).ok().and_then(|v| v.get("synonyms").cloned());
+        }
+        let menu = egui::Popup::default_response_id(&resp);
+        app.canvas.context_at = Some(at);
+        egui::Popup::open_id(ui.ctx(), menu);
+        crate::ribbon_keys::opened_from_keys(ui.ctx(), menu);
+    }
+    if resp.secondary_clicked() {
+        app.canvas.context_at = None;
+    }
+    let mut menu = egui::Popup::context_menu(&resp);
+    if let Some(at) = app.canvas.context_at {
+        menu = menu.anchor(egui::PopupAnchor::Position(at));
+    }
+    menu.show(|ui| context_menu(app, ui));
     // Stand down while the context menu owns the pointer so the two never double up;
     // `context_menu_opened` also covers the click that dismisses the menu.
     app.canvas.context_menu_open = resp.context_menu_opened();
+    if !app.canvas.context_menu_open {
+        app.canvas.context_at = None;
+    }
     if let Some(c) = crate::ink::cursor(app).filter(|_| resp.hovered() || app.canvas.ink.is_some()) {
         ui.ctx().set_cursor_icon(c);
     } else if resp.hovered() || app.canvas.obj_drag.is_some() {
@@ -1362,7 +1402,10 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                     if ui.add_enabled(app.canvas.scroll_offset.x > 0.5, egui::Button::new("‹")).on_hover_text(tl!("Previous Page")).clicked() {
                         turn_read_page(app, -1.0);
                     }
-                    ui.label(format!("{} / {}", current.min(total.max(1)), total));
+                    // A page number being typed shows in place of the current one until Enter.
+                    let shown =
+                        if app.canvas.read_goto.is_empty() { current.min(total.max(1)).to_string() } else { format!("{}_", app.canvas.read_goto) };
+                    ui.label(format!("{shown} / {total}"));
                     if ui
                         .add_enabled(app.canvas.scroll_offset.x + 0.5 < app.canvas.scroll_max.x, egui::Button::new("›"))
                         .on_hover_text(tl!("Next Page"))
@@ -2500,6 +2543,7 @@ fn equation_menu(app: &mut WordApp, ui: &mut Ui) {
 }
 
 fn context_menu(app: &mut WordApp, ui: &mut Ui) {
+    crate::ribbon_keys::focus_first(ui);
     if app.session.math.is_some() {
         return equation_menu(app, ui);
     }
@@ -2547,7 +2591,7 @@ fn context_menu(app: &mut WordApp, ui: &mut Ui) {
     item(ui, app, "Paste", "edit.paste", json!({}));
     ui.separator();
     if let Some(syn) = app.canvas.context_synonyms.clone().and_then(|v| v.as_array().cloned()).filter(|a| !a.is_empty()) {
-        ui.menu_button(tl!("Synonyms"), |ui| {
+        crate::ribbon_keys::sub_menu(ui, tl!("Synonyms"), |ui| {
             for w in syn.iter().filter_map(|x| x.as_str()) {
                 if ui.button(w).clicked() {
                     let _ = app.run("select.word", json!({}));
@@ -2587,17 +2631,17 @@ fn context_menu(app: &mut WordApp, ui: &mut Ui) {
         item(ui, app, "Size and Crop…", "ui.tab", json!({"tab": "Picture Format"}));
     }
     if object {
-        ui.menu_button(tl!("Wrap Text"), |ui| crate::ribbon::wrap_text_items(ui, app));
+        crate::ribbon_keys::sub_menu(ui, tl!("Wrap Text"), |ui| crate::ribbon::wrap_text_items(ui, app));
     }
     if app.session.sel.focus.path.cell().is_some() {
         ui.separator();
-        ui.menu_button(tl!("Insert"), |ui| {
+        crate::ribbon_keys::sub_menu(ui, tl!("Insert"), |ui| {
             item(ui, app, "Insert Rows Above", "table.insertRowAbove", json!({}));
             item(ui, app, "Insert Rows Below", "table.insertRowBelow", json!({}));
             item(ui, app, "Insert Columns to the Left", "table.insertColumnLeft", json!({}));
             item(ui, app, "Insert Columns to the Right", "table.insertColumnRight", json!({}));
         });
-        ui.menu_button(tl!("Delete"), |ui| {
+        crate::ribbon_keys::sub_menu(ui, tl!("Delete"), |ui| {
             item(ui, app, "Delete Rows", "table.deleteRow", json!({}));
             item(ui, app, "Delete Columns", "table.deleteColumn", json!({}));
             item(ui, app, "Delete Table", "table.deleteTable", json!({}));

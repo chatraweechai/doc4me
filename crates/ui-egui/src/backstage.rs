@@ -349,6 +349,7 @@ fn info_page(app: &mut WordApp, ui: &mut Ui) {
                 let _ = app.run("file.encrypt", json!({"password": null}));
             }
         });
+        versions(app, ui);
         let ui = &mut cols[1];
         ui.label(egui::RichText::new(tl!("Statistics")).font(semibold(15.0)));
         for (l, k) in [("Pages", "pages"), ("Words", "words"), ("Paragraphs", "paragraphs"), ("Sections", "sections"), ("Comments", "comments")] {
@@ -357,6 +358,43 @@ fn info_page(app: &mut WordApp, ui: &mut Ui) {
         let path = info.get("path").and_then(|v| v.as_str()).unwrap_or(tl!("Not saved yet"));
         ui.label(crate::i18n::fmt(tl!("Location: {path}"), &[("path", path)]));
     });
+}
+
+/// Version History (Word's Save Version, File › Versions): the document as it is now, saved
+/// under a comment, and each saved version to go back to. They live as long as the document is
+/// open: a .docx file has no versions.
+fn versions(app: &mut WordApp, ui: &mut Ui) {
+    ui.add_space(18.0);
+    ui.label(egui::RichText::new(tl!("Version History")).font(semibold(15.0)));
+    ui.label(egui::RichText::new(tl!("Versions are kept while the document is open (a .docx file has no versions).")).small().weak());
+    let note_id = ui.id().with("version-note");
+    let mut note: String = ui.data(|d| d.get_temp(note_id)).unwrap_or_default();
+    ui.horizontal(|ui| {
+        let label = ui.label(tl!("Comments on version"));
+        let field = ui.add(crate::widgets::text_line(&mut note).desired_width(220.0)).labelled_by(label.id);
+        let enter = field.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter));
+        if ui.button(egui::RichText::new(tl!("Save Version")).font(medium(13.5))).clicked() || enter {
+            // As in Word, the comment may be left empty.
+            if app.run("file.versions", json!({"save": note.trim()})).is_ok() {
+                note.clear();
+            }
+        }
+    });
+    ui.data_mut(|d| d.insert_temp(note_id, note));
+    let list = app.session.run("file.versions", &json!({})).ok().and_then(|v| v.as_array().cloned()).unwrap_or_default();
+    // Newest first, as Word lists them.
+    for v in list.iter().rev() {
+        let (Some(index), Some(label)) = (v.get("index").and_then(|i| i.as_u64()), v.get("label").and_then(|l| l.as_str())) else { continue };
+        // `2026-10-26T14:05:11Z` reads as 2026-10-26 14:05.
+        let date = v.get("date").and_then(|d| d.as_str()).unwrap_or("").replace('T', " ");
+        let date = date.get(..16).unwrap_or(&date).to_string();
+        ui.horizontal(|ui| {
+            ui.label(format!("{date}  {label}"));
+            if ui.button(tl!("Restore")).clicked() {
+                let _ = app.run("file.versions", json!({"restore": index}));
+            }
+        });
+    }
 }
 
 fn export_page(app: &mut WordApp, ui: &mut Ui) {
@@ -424,6 +462,37 @@ mod tests {
         assert_eq!(h.state().ui.backstage_page, "new", "the link opens New");
         assert!(h.query_by_label("Report").is_some(), "New shows every template");
         assert!(h.query_by_label("Recent").is_none(), "New has no Recent list");
+    }
+
+    /// dlg-044 (Save Version): File › Info saves the document as a version under a comment and
+    /// restores it later.
+    #[test]
+    fn info_saves_and_restores_versions() {
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("First draft")), Services::default());
+        a.run("ui.backstage", json!({"value": true, "page": "info"})).unwrap();
+        let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            a,
+        );
+        h.run_steps(4);
+        h.get_by_label("Comments on version").focus();
+        h.run_steps(1);
+        h.get_by_label("Comments on version").type_text("Sent to the board");
+        h.run_steps(2);
+        h.get_by_label("Save Version").click();
+        h.run_steps(3);
+        assert!(h.query_by_label_contains("Sent to the board").is_some(), "listed");
+        h.state_mut().run("text.insert", json!({"text": "Edited. "})).unwrap();
+        assert!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body).starts_with("Edited."));
+        h.run_steps(2);
+        h.get_by_label("Restore").click();
+        h.run_steps(3);
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "First draft", "the version came back");
+        assert!(h.state().session.can_undo(), "Restore can be undone");
     }
 
     /// #260: File › Info's Title and Author fields dropped every keystroke (they edited a copy

@@ -2703,3 +2703,7 @@ spacing	Normal	ปกติ
 	No revisions	ไม่มีการแก้ไขที่ติดตาม
 	Changed	เปลี่ยนแปลง
 	Zoom to Page	ย่อให้พอดีหน้า
+	Save Version	บันทึกเวอร์ชัน
+	Comments on version	ข้อคิดเห็นเกี่ยวกับเวอร์ชัน
+	Restore	คืนค่า
+	Versions are kept while the document is open (a .docx file has no versions).	เวอร์ชันจะเก็บไว้ขณะที่เอกสารยังเปิดอยู่ (ไฟล์ .docx ไม่เก็บเวอร์ชัน)

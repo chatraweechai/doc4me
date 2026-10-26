@@ -2695,3 +2695,7 @@ spacing	Normal	標準
 	No revisions	沒有修訂
 	Changed	已變更
 	Zoom to Page	縮放至頁面
+	Save Version	儲存版本
+	Comments on version	版本註解
+	Restore	還原
+	Versions are kept while the document is open (a .docx file has no versions).	文件開啟期間會保留各個版本（.docx 檔案不儲存版本）。

@@ -18,6 +18,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
             .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
                 if header(ui, "Text Pane") {
                     let _ = app.run("smartArt.textPane", json!({"value": false}));
                     return;
@@ -31,49 +32,70 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
             .default_size(270.0)
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
-            .show(ui, |ui| reviewing(app, ui));
+            .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
+                reviewing(app, ui)
+            });
     }
     if app.session.view.nav_pane {
         egui::Panel::left("nav_pane")
             .default_size(260.0)
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
-            .show(ui, |ui| nav(app, ui));
+            .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
+                nav(app, ui)
+            });
     }
     if app.session.view.clipboard_pane {
         egui::Panel::left("clipboard_pane")
             .default_size(250.0)
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
-            .show(ui, |ui| clipboard(app, ui));
+            .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
+                clipboard(app, ui)
+            });
     }
     if app.session.view.styles_pane {
         egui::Panel::right("styles_pane")
             .default_size(250.0)
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
-            .show(ui, |ui| styles(app, ui));
+            .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
+                styles(app, ui)
+            });
     }
     if app.session.view.style_inspector {
         egui::Panel::right("style_inspector")
             .default_size(240.0)
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
-            .show(ui, |ui| inspector(app, ui));
+            .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
+                inspector(app, ui)
+            });
     }
     if app.session.view.accessibility_pane {
         egui::Panel::right("accessibility_pane")
             .default_size(280.0)
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
-            .show(ui, |ui| crate::a11y_pane::accessibility(app, ui));
+            .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
+                crate::a11y_pane::accessibility(app, ui)
+            });
     }
     if app.session.view.alt_text_pane {
         egui::Panel::right("alt_text_pane")
             .default_size(260.0)
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
-            .show(ui, |ui| crate::a11y_pane::alt_text(app, ui));
+            .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
+                crate::a11y_pane::alt_text(app, ui)
+            });
     }
     if app.restrict.open {
         egui::Panel::right("restrict_pane")
@@ -81,6 +103,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
             .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
                 if header(ui, "Restrict Editing") {
                     app.restrict.open = false;
                     return;
@@ -93,7 +116,10 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
             .default_size(290.0)
             .resizable(true)
             .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
-            .show(ui, |ui| comments(app, ui));
+            .show(ui, |ui| {
+                crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Pane, ui.max_rect());
+                comments(app, ui)
+            });
     }
 }
 

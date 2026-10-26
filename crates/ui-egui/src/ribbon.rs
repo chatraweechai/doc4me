@@ -215,7 +215,10 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                         let u = Rect::from_center_size(pos2(r.center().x, r.max.y - 2.0), vec2(w - 16.0, 3.0));
                         ui.painter().rect_filled(u, 2.0, t.accent);
                     }
-                    if resp.clicked() {
+                    crate::ribbon_keys::tab(ui, &resp, tab);
+                    // The keyboard focus moving onto a tab brings it up, as in Word; the File page
+                    // waits for Enter.
+                    if resp.clicked() || (resp.gained_focus() && !active && tab != "File") {
                         let _ = app.run("ui.tab", json!({"tab": tab}));
                     }
                     if resp.double_clicked() && tab != "File" {
@@ -272,9 +275,11 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
         .show(ui, |ui| {
             // Right-click on the ribbon (outside a button): Customize Ribbon. Registered first, so
             // the buttons drawn over it keep their own clicks.
-            let bg = ui.interact(ui.max_rect(), ui.id().with("ribbon_background"), Sense::click());
+            // Not a keyboard stop: Tab and the arrow keys go through the commands, not round them.
+            let bg = ui.interact(ui.max_rect(), ui.id().with("ribbon_background"), Sense::CLICK);
             bg.context_menu(|ui| crate::widgets::customize_menu_items(ui, app));
             let entry = user_tabs.iter().find(|e| e.name == app.ui.tab);
+            crate::ribbon_keys::recording(ui.ctx(), true);
             let scroll = egui::ScrollArea::horizontal().scroll_bar_visibility(egui::scroll_area::ScrollBarVisibility::AlwaysHidden).show(ui, |ui| {
                 ui.horizontal_top(|ui| {
                     ui.spacing_mut().item_spacing = vec2(2.0, 2.0);
@@ -312,6 +317,7 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                     }
                 });
             });
+            crate::ribbon_keys::recording(ui.ctx(), false);
             // The bar is hidden, so a row wider than the window would be clipped with no sign. Edge chevrons show
             // where more is and scroll it on click. Every command also stays reachable through Search Commands.
             let r = scroll.inner_rect;
@@ -584,9 +590,9 @@ fn home(app: &mut WordApp, ui: &mut Ui) {
                     let theme = app.session.doc.settings.theme_colors.clone();
                     crate::wordart_menus::style_gallery(ui, app, "format.textEffects");
                     ui.separator();
-                    ui.menu_button(tl!("Text Fill"), |ui| crate::wordart_menus::fill_menu(ui, app, &theme));
+                    crate::ribbon_keys::sub_menu(ui, tl!("Text Fill"), |ui| crate::wordart_menus::fill_menu(ui, app, &theme));
                     let outline = crate::wordart_menus::current_outline(app);
-                    ui.menu_button(tl!("Text Outline"), |ui| crate::wordart_menus::outline_menu(ui, app, &theme, outline));
+                    crate::ribbon_keys::sub_menu(ui, tl!("Text Outline"), |ui| crate::wordart_menus::outline_menu(ui, app, &theme, outline));
                     crate::wordart_menus::effects_menu(ui, app, &theme, false);
                     ui.separator();
                     mi(ui, app, "Outline", "format.outline", json!({}));
@@ -782,7 +788,7 @@ fn insert(app: &mut WordApp, ui: &mut Ui) {
             let drawing = app.canvas.table_tool == Some(crate::table_pen::TableTool::Draw);
             mi_check(ui, app, "Draw Table", drawing, "table.draw", json!({}));
             mi(ui, app, "Convert Text to Table…", "table.fromText", json!({}));
-            ui.menu_button(tl!("Quick Tables"), |ui| {
+            crate::ribbon_keys::sub_menu(ui, tl!("Quick Tables"), |ui| {
                 mi(ui, app, "Tabular List", "table.quick", json!({"kind": "tabular"}));
                 mi(ui, app, "Matrix", "table.quick", json!({"kind": "matrix"}));
                 mi(ui, app, "Calendar", "table.quick", json!({"kind": "calendar"}));
@@ -1323,7 +1329,7 @@ fn wrap_menu(ui: &mut Ui, app: &mut WordApp) {
             mi_check(ui, app, l, wrap == w, "arrange.wrap", json!({"wrap": v}));
         }
         ui.separator();
-        ui.menu_button(tl!("Wrap Text Sides"), |ui| {
+        crate::ribbon_keys::sub_menu(ui, tl!("Wrap Text Sides"), |ui| {
             for (l, s, v) in [
                 ("Both Sides", WrapText::BothSides, "bothSides"),
                 ("Left Only", WrapText::Left, "left"),
@@ -1952,7 +1958,7 @@ fn shape_format(app: &mut WordApp, ui: &mut Ui) {
                 mi(ui, app, "No Color", "shape.outline", json!({"color": null}));
                 crate::colors::menu(ui, app, &theme, Target::cmd("shape.outline"));
                 ui.separator();
-                ui.menu_button(tl!("Weight"), |ui| {
+                crate::ribbon_keys::sub_menu(ui, tl!("Weight"), |ui| {
                     let color = stroke.unwrap_or(doc4me_doc::Rgb::BLACK).hex();
                     for w in [0.25, 0.5, 0.75, 1.0, 1.5, 2.25, 3.0, 4.5, 6.0] {
                         mi(ui, app, &format!("{w} pt"), "shape.outline", json!({"color": color, "width": w}));
@@ -1970,7 +1976,7 @@ fn shape_format(app: &mut WordApp, ui: &mut Ui) {
             menu_button(ui, app, "canvas", Some("Drawing\nCanvas"), "Drawing Canvas", true, "", |ui, app| {
                 mi(ui, app, "Fit", "canvas.fit", json!({}));
                 mi(ui, app, "Expand", "canvas.expand", json!({}));
-                ui.menu_button(tl!("Scale Drawing"), |ui| {
+                crate::ribbon_keys::sub_menu(ui, tl!("Scale Drawing"), |ui| {
                     for pct in [50, 75, 125, 150, 200] {
                         mi(ui, app, &format!("{pct}%"), "canvas.scale", json!({"factor": pct as f32 / 100.0}));
                     }
@@ -2066,26 +2072,26 @@ fn alt_text_group(ui: &mut Ui, app: &mut WordApp) {
 
 /// Shape Format › Shape Effects: Shadow, Glow and Soft Edges, each with presets and a "No …" entry.
 fn shape_effects_menu(ui: &mut Ui, app: &mut WordApp, theme: &[doc4me_doc::Rgb], glow_size: Option<f32>) {
-    ui.menu_button(tl!("Shadow"), |ui| {
+    crate::ribbon_keys::sub_menu(ui, tl!("Shadow"), |ui| {
         mi(ui, app, "No Shadow", "shape.effects", json!({"shadow": null}));
         ui.separator();
         for (id, label) in doc4me_doc::effects::SHADOW_PRESETS {
             mi(ui, app, label, "shape.effects", json!({"shadow": id}));
         }
     });
-    ui.menu_button(tl!("Glow"), |ui| {
+    crate::ribbon_keys::sub_menu(ui, tl!("Glow"), |ui| {
         mi(ui, app, "No Glow", "shape.effects", json!({"glow": null}));
         ui.separator();
         for size in [5.0, 8.0, 11.0, 18.0] {
             mi(ui, app, &format!("{size} pt"), "shape.effects", json!({"glow": size}));
         }
         ui.separator();
-        ui.menu_button(tl!("Glow Colors"), |ui| {
+        crate::ribbon_keys::sub_menu(ui, tl!("Glow Colors"), |ui| {
             let target = Target::at("shape.effects", json!({"glow": {"color": null, "size": glow_size.unwrap_or(8.0)}}), "/glow/color");
             crate::colors::menu(ui, app, theme, target);
         });
     });
-    ui.menu_button(tl!("Soft Edges"), |ui| {
+    crate::ribbon_keys::sub_menu(ui, tl!("Soft Edges"), |ui| {
         mi(ui, app, "No Soft Edges", "shape.effects", json!({"softEdge": null}));
         ui.separator();
         for r in [1.0, 2.5, 5.0, 10.0, 25.0, 50.0] {

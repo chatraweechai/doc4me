@@ -2694,3 +2694,7 @@ spacing	Normal	標準
 	No revisions	変更履歴はありません
 	Changed	変更
 	Zoom to Page	ページに合わせる
+	Save Version	バージョンの保存
+	Comments on version	バージョンに関するコメント
+	Restore	復元
+	Versions are kept while the document is open (a .docx file has no versions).	バージョンは文書を開いている間だけ保持されます (.docx ファイルにはバージョンは保存されません)。

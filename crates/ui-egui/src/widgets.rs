@@ -91,7 +91,7 @@ fn tooltip(app: &WordApp, resp: Response, label: &str, id: &str) -> Response {
     let sc = shortcut_text(app, id);
     let desc = app.session.registry.get(id).map(|s| crate::i18n::location(s.location)).unwrap_or_default();
     let enabled = app.session.registry.get(id).map(|s| (s.enabled)(&app.session).is_none()).unwrap_or(true);
-    resp.on_hover_ui(|ui| {
+    let show = |ui: &mut Ui| {
         ui.set_max_width(260.0);
         if sc.is_empty() {
             ui.label(egui::RichText::new(label).font(crate::theme::semibold(12.0)));
@@ -104,7 +104,14 @@ fn tooltip(app: &WordApp, resp: Response, label: &str, id: &str) -> Response {
         if !enabled {
             ui.label(egui::RichText::new(tl!("Not available right now")).small().weak());
         }
-    })
+    };
+    // Ctrl+Shift+F10 shows it for the command the keyboard focus is on.
+    if crate::ribbon_keys::tip_shown(&resp.ctx, resp.id) {
+        crate::ribbon_keys::show_tip(&resp, show);
+        resp
+    } else {
+        resp.on_hover_ui(show)
+    }
 }
 
 /// Record a keytip badge over a control's rect when keytips are showing commands. `ui` reaches
@@ -222,9 +229,11 @@ fn big_button(ui: &mut Ui, app: &mut WordApp, icon: &str, label: &str, id: &str,
     }
     let resp = tooltip(app, resp, &label.replace('\n', " "), id);
     command_menu(&resp, app, id);
+    crate::ribbon_keys::control(ui, &resp, menu.then_some(&resp), !menu);
     if resp.clicked() && on && !menu {
         run_from_ribbon(app, id, params);
     }
+    resp.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::Button, on, label.replace('\n', " ")));
     resp
 }
 
@@ -250,6 +259,7 @@ pub fn small(ui: &mut Ui, app: &mut WordApp, icon: &str, label: Option<&str>, ti
     }
     let resp = tooltip(app, resp, tip, id);
     command_menu(&resp, app, id);
+    crate::ribbon_keys::control(ui, &resp, None, true);
     if resp.clicked() && on {
         run_from_ribbon(app, id, params);
     }
@@ -284,11 +294,17 @@ pub fn split(
     icons::paint(ui.painter(), Rect::from_center_size(ar.center(), vec2(DROPDOWN, DROPDOWN)), "dropdown", t.icon, t.accent);
     let resp = tooltip(app, resp, tip, id);
     command_menu(&resp, app, id);
+    crate::ribbon_keys::control(ui, &resp, Some(&aresp), true);
+    crate::ribbon_keys::control(ui, &aresp, Some(&aresp), false);
     if resp.clicked() {
         run_from_ribbon(app, id, params);
     }
+    if aresp.clicked() && !aresp.clicked_by(egui::PointerButton::Primary) {
+        crate::ribbon_keys::opened_from_keys(ui.ctx(), egui::Popup::default_response_id(&aresp));
+    }
     egui::Popup::menu(&aresp).show(|ui| {
         ui.set_min_width(180.0);
+        crate::ribbon_keys::focus_first(ui);
         menu(ui, app);
     });
 }
@@ -345,12 +361,26 @@ pub fn menu_button(
         icons::paint(ui.painter(), Rect::from_center_size(pos2(r.max.x - 6.0, r.center().y), vec2(DROPDOWN, DROPDOWN)), "dropdown", c, c);
         resp
     };
-    let resp = resp.on_hover_text(tip);
+    let resp = if crate::ribbon_keys::tip_shown(ui.ctx(), resp.id) {
+        crate::ribbon_keys::show_tip(&resp, |ui| {
+            ui.label(tip);
+        });
+        resp
+    } else {
+        resp.on_hover_text(tip)
+    };
+    resp.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::Button, on, tip));
     if !on {
         return;
     }
+    crate::ribbon_keys::control(ui, &resp, Some(&resp), false);
+    // Enter or Space opened it: its first item takes the focus.
+    if resp.clicked() && !resp.clicked_by(egui::PointerButton::Primary) {
+        crate::ribbon_keys::opened_from_keys(ui.ctx(), egui::Popup::default_response_id(&resp));
+    }
     egui::Popup::menu(&resp).show(|ui| {
         ui.set_min_width(200.0);
+        crate::ribbon_keys::focus_first(ui);
         menu(ui, app);
     });
 }
@@ -364,6 +394,7 @@ pub fn group(ui: &mut Ui, title: &str, launcher: Option<&str>, app: &mut WordApp
 /// A ribbon group whose title is shown as is (a custom group's name, Customize Ribbon).
 pub fn group_titled(ui: &mut Ui, id_title: &str, title: &str, launcher: Option<&str>, app: &mut WordApp, add: impl FnOnce(&mut Ui, &mut WordApp)) {
     let t = Tokens::get(ui.ctx());
+    crate::ribbon_keys::group(ui.ctx());
     let label_w = ui.ctx().fonts_mut(|f| f.layout_no_wrap(title.to_string(), regular(11.0), t.group_label).size().x);
     let start = ui.cursor().min;
     let inner = ui.vertical(|ui| {
@@ -427,7 +458,13 @@ pub fn command_icon(id: &str) -> &str {
 /// Right-click on a command's button: put it on (or take it off) the Quick Access Toolbar, or
 /// open Customize Ribbon (#379).
 pub fn command_menu(resp: &Response, app: &mut WordApp, id: &str) {
-    resp.context_menu(|ui| {
+    let mut popup = egui::Popup::context_menu(resp);
+    // Shift+F10 opened it from the keyboard: under the command, not at the pointer.
+    if let Some(at) = crate::ribbon_keys::shortcut_menu_at(&resp.ctx, resp) {
+        popup = popup.anchor(egui::PopupAnchor::Position(at));
+    }
+    popup.show(|ui| {
+        crate::ribbon_keys::focus_first(ui);
         let known = app.session.registry.get(id).is_some();
         let on_qat = app.session.ribbon.qat().contains(&id);
         if known && !on_qat && ui.button(tl!("Add to Quick Access Toolbar")).clicked() {

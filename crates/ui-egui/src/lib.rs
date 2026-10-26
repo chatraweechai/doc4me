@@ -72,6 +72,7 @@ pub mod previews;
 pub mod print_page;
 pub mod read_aloud;
 pub mod ribbon;
+pub mod ribbon_keys;
 pub mod screen_clip;
 pub mod scroll;
 pub mod style_format;
@@ -1552,6 +1553,7 @@ impl WordApp {
         // Keytips are read before layout so the frame paints the new state; badges paint after
         // the ribbon so they sit on top of it.
         crate::keytips::logic(self, &ctx);
+        crate::ribbon_keys::logic(self, &ctx);
         if self.ui.backstage {
             backstage::show(self, ui);
         } else {
@@ -1600,6 +1602,7 @@ impl WordApp {
         if !self.synthetic.is_empty() {
             ctx.request_repaint();
         }
+        crate::ribbon_keys::end_frame(&ctx);
         // Typing and formatting land here, after `logic` has reported.
         self.report_dirty();
     }

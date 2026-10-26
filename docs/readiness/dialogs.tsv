@@ -42,7 +42,7 @@ dlg-040	wdDialogFilePrintOneCopy	445	Macintosh-only. For information about this 
 dlg-041	wdDialogFilePrintSetup	97	Printer, Options, Network, DoNotSetAsSysDefault	-	registry		printer setup
 dlg-042	wdDialogFileRoutingSlip	624	Subject, Message, AllAtOnce, ReturnWhenDone, TrackStatus, Protect, AddSlip, RouteDocument, AddRecipient, OldRecipient, ResetSlip, ClearSlip, ClearRecipients, Address	-	registry		legacy
 dlg-043	wdDialogFileSaveAs	84	Name, Format, LockAnnot, Password, AddToMru, WritePassword, RecommendReadOnly, EmbedFonts, NativePictureFormat, FormsData, SaveAsAOCELetter, WriteVersion, VersionDesc, InsertLineBreaks, AllowSubstitutions, LineEnding, AddBiDiMarks	file.saveAs	registry		
-dlg-044	wdDialogFileSaveVersion	1007	(none)	-	registry		legacy versions
+dlg-044	wdDialogFileSaveVersion	1007	(none)	file.versions	registry		Save Version: File › Info › Version History saves the document as a named version (`file.versions` {"save": label}); Word 2002–2003's versions feature
 dlg-045	wdDialogFileSummaryInfo	86	Title, Subject, Author, Keywords, Comments, FileName, Directory, Template, CreateDate, LastSavedDate, LastSavedBy, RevisionNumber, EditTime, LastPrintedDate, NumPages, NumWords, NumChars, NumParas, NumLines, Update, FileSize	file.properties	registry		Properties
 dlg-046	wdDialogFileVersions	945	AutoVersion, VersionDesc	file.versions	registry		
 dlg-047	wdDialogFitText	983	FitTextWidth	-	registry		

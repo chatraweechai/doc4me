@@ -250,6 +250,7 @@ pub fn status_bar(app: &mut WordApp, ui: &mut Ui) {
                 .stroke(Stroke::new(1.0, t.border)),
         )
         .show(ui, |ui| {
+            crate::ribbon_keys::stop(ui, crate::ribbon_keys::Region::Status, ui.max_rect());
             ui.horizontal_centered(|ui| {
                 ui.spacing_mut().item_spacing = vec2(14.0, 0.0);
                 let l = app.session.layout();

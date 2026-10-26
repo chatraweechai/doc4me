@@ -38,17 +38,17 @@ ks-036	Use the Access Keys for ribbon tabs	Open the View tab to choose a documen
 ks-037	Use the Access Keys for ribbon tabs	Open the Help box.	Alt, F1	Alt,F1	-	manual	pass	keytips.rs tests tab_letters_match_word
 ks-038	Use the Access Keys for ribbon tabs	Open the Developer box.	Alt, L	Alt,L	-	manual	pass	keytips.rs tests tab_letters_match_word
 ks-039	Work in the ribbon with the keyboard	Select the active tab on the ribbon and activate the access keys.	Alt or F10. To move to a different tab, use access keys or the arrow keys.	Alt | F10	-	manual	pass	keytips.rs: Alt or F10 shows the tab letters
-ks-040	Work in the ribbon with the keyboard	Move the focus to commands on the ribbon.	Tab key or Shift+Tab	Tab | Shift+Tab	-	manual	untested	
-ks-041	Work in the ribbon with the keyboard	Move between command groupings on the ribbon.	Ctrl+Left or Right arrow key	Mod+Left | Mod+Right	-	manual	untested	
-ks-042	Work in the ribbon with the keyboard	Move among the items on the ribbon.	Arrow keys	Arrows	-	manual	untested	
-ks-043	Work in the ribbon with the keyboard	Show the tooltip for the ribbon element currently in focus.	Ctrl+Shift+F10	Mod+Shift+F10	-	manual	untested	
-ks-044	Work in the ribbon with the keyboard	Activate the selected button.	Spacebar or Enter	Space | Enter	-	manual	untested	
-ks-045	Work in the ribbon with the keyboard	Open the list for the selected command.	Down arrow key	Down	-	manual	untested	
-ks-046	Work in the ribbon with the keyboard	Open the menu for the selected button.	Alt+Down arrow key	Alt+Down	-	manual	untested	
-ks-047	Work in the ribbon with the keyboard	When a menu or submenu is open, move to the next command.	Down arrow key	Down	-	manual	untested	
+ks-040	Work in the ribbon with the keyboard	Move the focus to commands on the ribbon.	Tab key or Shift+Tab	Tab | Shift+Tab	-	manual	pass	UI test ribbon_keys::keytips_then_tab_and_arrows_move_through_the_ribbon: after F10 (or Alt) Down or Tab puts the focus on the active tab's first command, Tab and Shift+Tab move through the commands; Tab on a tab goes to its first command (tabs_and_groups_by_keyboard)
+ks-041	Work in the ribbon with the keyboard	Move between command groupings on the ribbon.	Ctrl+Left or Right arrow key	Mod+Left | Mod+Right	-	manual	pass	UI test ribbon_keys::tabs_and_groups_by_keyboard: Ctrl+Right and Ctrl+Left move to the first command of the next and previous group
+ks-042	Work in the ribbon with the keyboard	Move among the items on the ribbon.	Arrow keys	Arrows	-	manual	pass	UI test ribbon_keys::keytips_then_tab_and_arrows_move_through_the_ribbon: the arrow keys move to the nearest command in their direction; after F10, Left and Right walk the tabs (tabs_and_groups_by_keyboard)
+ks-043	Work in the ribbon with the keyboard	Show the tooltip for the ribbon element currently in focus.	Ctrl+Shift+F10	Mod+Shift+F10	-	manual	pass	UI test ribbon_keys::shift_f10_menus_and_ctrl_shift_f10_tooltips: Ctrl+Shift+F10 shows the focused command's tooltip (name, shortcut, where it is)
+ks-044	Work in the ribbon with the keyboard	Activate the selected button.	Spacebar or Enter	Space | Enter	-	manual	pass	UI test ribbon_keys::keytips_then_tab_and_arrows_move_through_the_ribbon: Space presses the focused command (Bold applied), then the document has the keyboard again; Enter does the same
+ks-045	Work in the ribbon with the keyboard	Open the list for the selected command.	Down arrow key	Down	-	manual	pass	UI test ribbon_keys::down_opens_a_commands_list_and_escape_closes_it: Down opens the focused command's list with its first item focused
+ks-046	Work in the ribbon with the keyboard	Open the menu for the selected button.	Alt+Down arrow key	Alt+Down	-	manual	pass	UI test ribbon_keys::down_opens_a_commands_list_and_escape_closes_it: Alt+Down opens the focused button's menu
+ks-047	Work in the ribbon with the keyboard	When a menu or submenu is open, move to the next command.	Down arrow key	Down	-	manual	pass	UI test ribbon_keys::down_opens_a_commands_list_and_escape_closes_it: in an open list Down moves to the next item; Escape closes it back onto its command
 ks-048	Work in the ribbon with the keyboard	Expand or collapse the ribbon.	Ctrl+F1	Mod+F1	view.collapseRibbon	registry		view.collapseRibbon (2026-10-25)
-ks-049	Work in the ribbon with the keyboard	Open the context menu.	Shift+F10 Or, on a Windows keyboard, the Windows Menu key (between the right Alt and right Ctrl keys)	Shift+F10	-	manual	untested	
-ks-050	Work in the ribbon with the keyboard	Move to the submenu when a main menu is open or selected.	Right arrow key	Right	-	manual	untested	
+ks-049	Work in the ribbon with the keyboard	Open the context menu.	Shift+F10 Or, on a Windows keyboard, the Windows Menu key (between the right Alt and right Ctrl keys)	Shift+F10	-	manual	pass	UI test ribbon_keys::shift_f10_menus_and_ctrl_shift_f10_tooltips: Shift+F10 opens the page's shortcut menu at the caret (keyboard in the menu, Escape back to the page), or a focused ribbon command's own menu (Add to Quick Access Toolbar); no Menu key in egui's key set
+ks-050	Work in the ribbon with the keyboard	Move to the submenu when a main menu is open or selected.	Right arrow key	Right	-	manual	pass	UI test ribbon_keys::right_opens_a_submenu: Right on a submenu (Text Effects › Text Fill) opens it and moves into it
 ks-051	Work in the ribbon with the keyboard	Toggle AutoSave on or off.	Alt+Z, A	Alt+Z,A	-	manual	fail	
 ks-052	Work in the ribbon with the keyboard	Expand or collapse the ribbon.	Ctrl+F1			duplicate	ks-048	same shortcut and action as ks-048
 ks-053	Work in the ribbon with the keyboard	Open the dialog box to rename the document or save it to another location.	Alt+B	Alt+B	-	manual	fail	
@@ -263,10 +263,10 @@ ks-261	Outline a document	Switch between showing the first line of body text and
 ks-262	Outline a document	Show all headings with the Heading 1 style.	Alt+Shift+1	Alt+Shift+1	outline.showLevel1	registry		
 ks-263	Outline a document	Show all headings with the specified heading level.	Alt+Shift+Heading level number	Alt+Shift+2	outline.showLevel2	registry		
 ks-264	Outline a document	Insert a tab character.	Ctrl+Tab			duplicate	ks-195	same shortcut and action as ks-195
-ks-265	Move through the document in Read Mode	Move to the beginning of the document.	Home	Home	-	manual	untested	Read Mode
-ks-266	Move through the document in Read Mode	Move to the end of the document.	End	End	-	manual	untested	Read Mode
-ks-267	Move through the document in Read Mode	Go to a specific page.	Type the page number, then press Enter	number,Enter	-	manual	untested	Read Mode
-ks-268	Move through the document in Read Mode	Exit Read Mode.	Esc	Escape	-	manual	untested	Read Mode
+ks-265	Move through the document in Read Mode	Move to the beginning of the document.	Home	Home	-	manual	pass	UI test ribbon_keys::read_mode_home_end_page_number_and_escape: Home goes to the first page
+ks-266	Move through the document in Read Mode	Move to the end of the document.	End	End	-	manual	pass	UI test ribbon_keys::read_mode_home_end_page_number_and_escape: End goes to the last page
+ks-267	Move through the document in Read Mode	Go to a specific page.	Type the page number, then press Enter	number,Enter	-	manual	pass	UI test ribbon_keys::read_mode_home_end_page_number_and_escape: 2 then Enter goes to the second page (the number shows in the page box while typed)
+ks-268	Move through the document in Read Mode	Exit Read Mode.	Esc	Escape	-	manual	pass	UI test ribbon_keys::read_mode_home_end_page_number_and_escape: Escape leaves Read Mode
 ks-269	Zoom and adjust view	Zoom in.	Ctrl+Plus (+)			duplicate	ks-021	same shortcut and action as ks-021
 ks-270	Zoom and adjust view	Zoom out.	Ctrl+Minus (-)			duplicate	ks-022	same shortcut and action as ks-022
 ks-271	Zoom and adjust view	Return to 100% zoom.	Ctrl+0			duplicate	ks-023	same shortcut and action as ks-023
@@ -293,11 +293,11 @@ ks-291	Use function key shortcuts	Display the Go To dialog box.	F5	F5	edit.goto	
 ks-292	Use function key shortcuts	Move to the last change.	Shift+F5	Shift+F5		duplicate	ks-068	same shortcut and action as ks-068
 ks-293	Use function key shortcuts	Display the Bookmark dialog box.	Ctrl+Shift+F5	Mod+Shift+F5	insert.bookmark	registry		
 ks-294	Use function key shortcuts	Restore the document window size.	Alt+F5	Alt+F5	view.restoreWindow	registry		restores a maximized window (ViewportCommand::Maximized(false))
-ks-295	Use function key shortcuts	Switch between the document, task pane, status bar and ribbon.	F6	F6	-	manual	untested	
-ks-296	Use function key shortcuts	Switch backwards between the document, ribbon, status bar and task pane.	Shift+F6	Shift+F6	-	manual	untested	
+ks-295	Use function key shortcuts	Switch between the document, task pane, status bar and ribbon.	F6	F6	-	manual	pass	UI test ribbon_keys::f6_goes_round_the_document_a_pane_the_status_bar_and_the_ribbon: F6 goes document, task pane, status bar, ribbon, document
+ks-296	Use function key shortcuts	Switch backwards between the document, ribbon, status bar and task pane.	Shift+F6	Shift+F6	-	manual	pass	UI test ribbon_keys::f6_goes_round_the_document_a_pane_the_status_bar_and_the_ribbon: Shift+F6 goes the other way
 ks-297	Use function key shortcuts	Switch to the next document window.	Ctrl+F6	Mod+F6	view.nextWindow	registry		view.nextWindow
 ks-298	Use function key shortcuts	Switch to the previous document window.	Ctrl+Shift+F6	Mod+Shift+F6	view.previousWindow	registry		view.previousWindow
-ks-299	Use function key shortcuts	Move from a dialog box back to the document.	Alt+F6	Alt+F6	-	manual	untested	
+ks-299	Use function key shortcuts	Move from a dialog box back to the document.	Alt+F6	Alt+F6	-	manual	pass	UI test ribbon_keys::alt_f6_goes_from_a_dialog_back_to_the_document: from the Find dialog Alt+F6 gives the document the keyboard; the dialog stays open
 ks-300	Use function key shortcuts	Display the Editor pane to check spelling and grammar.	F7	F7	review.spelling	registry		
 ks-301	Use function key shortcuts	Display the Thesaurus pane.	Shift+F7	Shift+F7	review.thesaurus	registry		
 ks-302	Use function key shortcuts	Update the linked information.	Ctrl+Shift+F7	Mod+Shift+F7		duplicate	ks-219	same shortcut and action as ks-219
