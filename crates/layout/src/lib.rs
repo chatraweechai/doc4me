@@ -2166,10 +2166,29 @@ fn item_bottom(y: f32, para: &ParaLayout, l0: usize, l1: usize) -> Option<f32> {
     Some(y + l.top + l.height - f.top)
 }
 
+/// A header or footer with nothing in it: one empty paragraph without borders or shading, as Word
+/// leaves an unused one. Word doesn't move the body for it, however far it reaches (govuk-018:
+/// the header distance is past the top margin and the body still starts at the margin). Empty
+/// paragraphs added to make room do push it.
+fn blank_story(doc: &Document, blocks: &Blocks) -> bool {
+    match blocks.as_slice() {
+        [b] => match &**b {
+            Block::Para(p) => {
+                p.text.is_empty() && p.objects.is_empty() && {
+                    let rp = doc.styles.resolve_para(&p.props);
+                    rp.borders.is_none() && rp.shading.is_none()
+                }
+            }
+            _ => false,
+        },
+        _ => false,
+    }
+}
+
 /// Where body text starts: the top margin, or below the header if it's taller.
 fn body_top_for(ctx: &mut Ctx, sect: &SectionProps, header: Option<u32>) -> f32 {
     let Some(id) = header else { return sect.margin_top };
-    let Some(part) = ctx.doc.parts.get(&id) else { return sect.margin_top };
+    let Some(part) = ctx.doc.parts.get(&id).filter(|p| !blank_story(ctx.doc, &p.blocks)) else { return sect.margin_top };
     let blocks = part.blocks.clone();
     // Placed as `headers_footers` draws it, so page-relative floats wrap the same way.
     let frame = PageFrame { sect, origin: (sect.margin_left + sect.gutter, sect.header) };
@@ -2182,7 +2201,9 @@ fn body_top_for(ctx: &mut Ctx, sect: &SectionProps, header: Option<u32>) -> f32 
 
 /// Where the footer starts (as `headers_footers` places it), `f32::MAX` without one.
 fn foot_top_for(ctx: &mut Ctx, sect: &SectionProps, footer: Option<u32>) -> f32 {
-    let Some(part) = footer.and_then(|id| ctx.doc.parts.get(&id).map(|p| (id, p))) else { return f32::MAX };
+    let Some(part) = footer.and_then(|id| ctx.doc.parts.get(&id).map(|p| (id, p))).filter(|(_, p)| !blank_story(ctx.doc, &p.blocks)) else {
+        return f32::MAX;
+    };
     let (id, blocks) = (part.0, part.1.blocks.clone());
     // A page total in the footer is filled in after pagination, like the header's: it doesn't
     // make the body lay out again.

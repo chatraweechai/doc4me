@@ -32,6 +32,14 @@ fn substitutes(family: &str) -> &'static [&'static str] {
     const ARIAL: &[&str] = &["Liberation Sans", "Helvetica", "Helvetica Neue", "Arimo", "Source Sans 3"];
     const TIMES: &[&str] = &["Liberation Serif", "Times", "Tinos", "Source Serif 4"];
     const SYMBOL: &[&str] = &["Apple Symbols", "Segoe UI Symbol", "DejaVu Sans", "Noto Sans Symbols", "Source Sans 3"];
+    // Verdana: DejaVu Sans (Bitstream Vera's design) sets English text 1.2% narrower in regular
+    // and 0.2% wider in bold, and breaks 60% / 74% of lines at the same word (measured against
+    // Microsoft's core-fonts Verdana); Carlito, the old fallback, was 21% narrower and broke none.
+    // Inter (bundled, for the web) is the next nearest, 6.8% narrower.
+    const VERDANA: &[&str] = &["DejaVu Sans", "Bitstream Vera Sans", "Inter", "Source Sans 3"];
+    // Georgia: Gelasio is made metric-compatible with it; the bundled Source Serif 4 sets English
+    // text 0.1% wider and breaks 54% of lines at the same word (Caladea: 8.5% narrower, 1%).
+    const GEORGIA: &[&str] = &["Gelasio", "Source Serif 4", "Caladea", "Liberation Serif", "Noto Serif"];
     // Persian / Arabic document fonts. Naskh (book) faces such as B Nazanin, B Lotus, B Zar and
     // Traditional Arabic, then the sans faces (B Yekan, B Titr, IRANSans) people use for
     // headings and screens. Open fonts with full Persian coverage first.
@@ -86,9 +94,10 @@ fn substitutes(family: &str) -> &'static [&'static str] {
         "times new roman" | "times" => TIMES,
         "courier new" | "courier" | "consolas" | "lucida console" | "cascadia code" | "cascadia mono" => MONO,
         "symbol" | "wingdings" | "segoe ui symbol" | "webdings" => SYMBOL,
+        "verdana" => VERDANA,
+        "georgia" => GEORGIA,
         "cambria"
         | "cambria math"
-        | "georgia"
         | "garamond"
         | "constantia"
         | "baskerville old face"
@@ -383,12 +392,17 @@ fn face_line(face: &crate::FontFace, prefer_hhea: bool) -> (f64, f64) {
 
 /// Word's single line of fonts whose open substitutes, or whose own win metrics, are spaced
 /// differently, per em (ascent, descent): Cambria (drawn with Caladea, 1.30 em), Courier New (drawn
-/// with JetBrains Mono where only the bundled fonts exist, 1.565 em) and Aptos, whose lines in
-/// Word's PDFs step 1.2207 em (its hhea and typo metrics, 1923 + 577), not its win metrics' 1.2847.
+/// with JetBrains Mono where only the bundled fonts exist, 1.565 em), Verdana and Georgia (drawn
+/// with DejaVu Sans and Source Serif 4) and Aptos, whose lines in Word's PDFs step 1.2207 em (its
+/// hhea and typo metrics, 1923 + 577), not its win metrics' 1.2847.
 fn requested_line(family: &str) -> Option<(f64, f64)> {
     match family.trim().to_ascii_lowercase().as_str() {
         "cambria" | "cambria math" => Some((1946.0 / 2048.0, 455.0 / 2048.0)),
         "courier new" | "courier" => Some((1705.0 / 2048.0, 615.0 / 2048.0)),
+        // Verdana (win 2059 / 430: 1.215 em; DejaVu Sans is 1.164) and Georgia (win 1878 / 449:
+        // 1.136 em; Source Serif 4 is 1.371), every style alike.
+        "verdana" => Some((2059.0 / 2048.0, 430.0 / 2048.0)),
+        "georgia" => Some((1878.0 / 2048.0, 449.0 / 2048.0)),
         // Every Aptos family (Display, Narrow, Serif, Mono, each weight): hhea 1923 / 577.
         f if is_aptos(f) => Some((1923.0 / 2048.0, 577.0 / 2048.0)),
         _ => None,
@@ -635,7 +649,19 @@ mod tests {
             assert!(pos("Palatino") < pos("Caladea") && pos("TeX Gyre Pagella") < pos("Times New Roman"), "{name}");
         }
         // Other serif families are unchanged.
-        assert_eq!(substitutes("Georgia").first(), Some(&"Caladea"));
+        assert_eq!(substitutes("Garamond").first(), Some(&"Caladea"));
+    }
+
+    /// Verdana and Georgia go to the open fonts nearest their widths (DejaVu Sans, Source Serif
+    /// 4) and keep Word's own line spacing for them.
+    #[test]
+    fn verdana_and_georgia_keep_their_widths_and_lines() {
+        assert_eq!(substitutes("Verdana").first(), Some(&"DejaVu Sans"));
+        assert!(substitutes("Georgia").iter().position(|x| *x == "Source Serif 4") < substitutes("Georgia").iter().position(|x| *x == "Caladea"));
+        let r = resolve("Georgia", false, false);
+        let em = |(a, d): (f64, f64)| ((a + d) * 1000.0).round() / 1000.0;
+        assert_eq!(em(single_line("Georgia", &r.face, true, 1.0)), 1.136);
+        assert_eq!(em(single_line("Verdana", &r.face, true, 1.0)), 1.215);
     }
 
     #[test]
@@ -645,7 +671,7 @@ mod tests {
             assert_eq!(substitutes(name), &["Sarabun"], "{name}");
         }
         // Other families keep their substitutes ("Thai" only in a name like "Noto Sans Thai").
-        assert_eq!(substitutes("Georgia").first(), Some(&"Caladea"));
+        assert_eq!(substitutes("Garamond").first(), Some(&"Caladea"));
         assert_ne!(substitutes("Tahoma"), &["Sarabun"]);
         assert_ne!(substitutes("Theinhardt"), &["Sarabun"]);
         // Not installed here, so the request resolves to Sarabun itself (bundled).

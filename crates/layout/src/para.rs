@@ -1547,6 +1547,38 @@ fn next_tab(x: f32, tabs: &[TabStop], default_tab: f32, hanging_at: Option<f32>)
     })
 }
 
+/// How much wider than the font a document asks for its substitute may set a word (a share of the
+/// word) before a line with no other break opportunity breaks that word in the middle. Labels in
+/// fixed-width table cells are often set to fit exactly in the requested font (govuk-018: "Name"
+/// in Verdana 10 pt in a 40 pt cell with 5.4 pt margins each side), and an open substitute within
+/// a few per cent of its widths (DejaVu Sans for Verdana, 1.2%) is wider in some words.
+const SUBSTITUTE_SLACK: f32 = 0.03;
+
+/// For a cluster `j` at `x` that doesn't fit before `right_edge`, on a line starting at `line_x`
+/// with no break opportunity yet: the last cluster of its word when the whole word, in a
+/// substitute font, overflows by at most [`SUBSTITUTE_SLACK`] of the line's text so far.
+fn slack_word(pl: &ParaLayout, j: usize, x: f32, line_x: f32, right_edge: f32) -> Option<usize> {
+    let substituted = |style: u16| {
+        pl.styles.get(style as usize).is_some_and(|st| doc4me_fonts::word::resolve(&st.rc.font, st.rc.bold, st.rc.italic).substituted)
+    };
+    let mut end_x = x;
+    let mut k = j;
+    loop {
+        let c = pl.clusters.get(k)?;
+        if c.kind != ClKind::Text || !substituted(c.style) {
+            return None;
+        }
+        end_x += c.adv;
+        let next_space = pl.clusters.get(k + 1).is_none_or(|n| !matches!(n.kind, ClKind::Text));
+        if c.break_after || next_space {
+            break;
+        }
+        k += 1;
+    }
+    let word = end_x - line_x;
+    (word > 0.0 && end_x - right_edge <= word * SUBSTITUTE_SLACK).then_some(k)
+}
+
 fn break_lines(pl: &mut ParaLayout, env: &ParaEnv, mark_style: u16, level: Option<&Level>) {
     let suffix = level.map(|l| l.suffix);
     let rp = pl.rp.clone();
@@ -1666,6 +1698,8 @@ fn break_lines(pl: &mut ParaLayout, env: &ParaEnv, mark_style: u16, level: Optio
         let mut xs: Vec<f32> = Vec::new();
         let mut leaders = Vec::new();
         let mut last_break: Option<usize> = None; // cluster index after which we may break
+        // The last cluster of a word kept whole past the right edge ([`slack_word`]).
+        let mut slack_until: Option<usize> = None;
         let mut last_plain: Option<(usize, f32)> = None; // last non-hyphen break and the x after it
         // After `hyph_limit` hyphenated lines in a row this one may not end with a hyphen.
         let hyph_ok = hyph_limit == 0 || lines.iter().rev().take_while(|l| l.hyphen.is_some()).count() < hyph_limit;
@@ -1743,7 +1777,21 @@ fn break_lines(pl: &mut ParaLayout, env: &ParaEnv, mark_style: u16, level: Optio
                 }
             });
             let shrink = if shrink_spaces && !has_tab { space_w * MAX_SPACE_SHRINK } else { 0.0 };
-            let fits = absorbs || x + c.adv <= right_edge + shrink + 0.01 || c.kind == ClKind::Space || c.kind == ClKind::Marker;
+            let mut fits = absorbs
+                || x + c.adv <= right_edge + shrink + 0.01
+                || c.kind == ClKind::Space
+                || c.kind == ClKind::Marker
+                || slack_until.is_some_and(|e| j <= e);
+            // A word with nowhere to break before it that overflows only by what a substitute font
+            // adds stays whole instead of breaking mid-word.
+            if !fits
+                && j > c0
+                && last_break.filter(|bk| *bk >= c0).is_none()
+                && let Some(e) = slack_word(pl, j, x, xs.first().copied().unwrap_or(line_start_x), right_edge)
+            {
+                slack_until = Some(e);
+                fits = true;
+            }
             if !fits && j > c0 {
                 // Wrap: back up to the last break opportunity on this line.
                 end = LineEnd::Wrap;

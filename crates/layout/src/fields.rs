@@ -104,6 +104,9 @@ pub fn field_text(instr: &str, result: &str, ctx: &FieldCtx) -> (String, bool) {
         "TITLE" if result.is_empty() => (ctx.title.to_string(), false),
         "AUTHOR" if result.is_empty() => (ctx.author.to_string(), false),
         "FILENAME" if result.is_empty() => (ctx.filename.to_string(), false),
+        // A legacy form check box has no result: Word draws the box (its checked state is in the
+        // form field data, which isn't kept).
+        "FORMCHECKBOX" if result.is_empty() => ("\u{2610}".to_string(), false),
         _ => (result.to_string(), false),
     }
 }
@@ -126,5 +129,6 @@ mod tests {
         assert_eq!(field_name("=SUM(ABOVE)"), "SUM(ABOVE)");
         assert_eq!(field_code_text(" PAGE \\* ROMAN "), "{ PAGE \\* ROMAN }");
         assert_eq!(field_code_text(""), "{  }");
+        assert_eq!(field_text(" FORMCHECKBOX ", "", &ctx).0, "\u{2610}");
     }
 }
