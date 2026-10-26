@@ -76,7 +76,47 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("equation.structure", "Change Structure", "Equation", structure)
             .when(editing)
             .params(r#"{"action": string (see equation.structureActions), "level"?: n}"#),
+        CommandSpec::new("equation.functions", "Recognized Functions", "Equation › Tools › Equation Options", functions)
+            .params(r#"{"add"?: name (letters A–Z, up to 24), "remove"?: name, "reset"?: true} → {"functions": [name]}: the names an equation sets upright as functions when it builds up (sin, log…)"#)
+            .pure(),
     ]
+}
+
+/// Most names the Recognized Functions list keeps.
+const MAX_FUNCTIONS: usize = 300;
+/// Longest function name, in letters.
+const MAX_FUNCTION_LEN: usize = 24;
+
+/// Equation Options › Recognized Functions: add, remove or restore the names (kept with the
+/// user's preferences, like Word keeps them with Math AutoCorrect).
+fn functions(s: &mut Session, v: &Value) -> CmdResult {
+    let defaults = || doc4me_doc::math_linear::FUNCTION_NAMES.iter().map(|n| n.to_string()).collect::<Vec<_>>();
+    if p::bool(v, "reset") == Some(true) {
+        s.prefs.math_functions = None;
+    }
+    let mut names = s.prefs.math_functions.clone().unwrap_or_else(defaults);
+    if let Some(name) = p::str(v, "add").map(str::trim) {
+        // The linear format reads a function name as a run of letters A–Z.
+        if name.is_empty() || name.len() > MAX_FUNCTION_LEN || !name.chars().all(|c| c.is_ascii_alphabetic()) {
+            return Err(CmdError::Params(format!("a function name is 1–{MAX_FUNCTION_LEN} letters A–Z")));
+        }
+        if !names.iter().any(|n| n == name) {
+            if names.len() >= MAX_FUNCTIONS {
+                return Err(CmdError::Params(format!("at most {MAX_FUNCTIONS} function names")));
+            }
+            names.push(name.to_string());
+        }
+    }
+    if let Some(name) = p::str(v, "remove") {
+        names.retain(|n| n != name.trim());
+    }
+    names.sort_by_key(|n| (n.to_lowercase(), n.clone()));
+    let mut builtin = defaults();
+    builtin.sort_by_key(|n| (n.to_lowercase(), n.clone()));
+    if v.get("add").is_some() || v.get("remove").is_some() {
+        s.prefs.math_functions = (names != builtin).then(|| names.clone());
+    }
+    Ok(json!({"functions": names}))
 }
 
 fn near_equation_or_all(_: &Session) -> Option<&'static str> {
@@ -727,6 +767,41 @@ mod tests {
 
     fn linear(s: &Session) -> String {
         s.math.as_ref().and_then(|m| s.doc.para_at(&m.at).and_then(|p| p.object_at(m.at.off))).map(|o| o.plain_text().to_string()).unwrap_or_default()
+    }
+
+    /// dlg-146: Equation Options › Recognized Functions: an added name is set upright as a
+    /// function when the equation builds up; a removed one isn't; Restore Defaults goes back.
+    #[test]
+    fn recognized_functions_are_the_users() {
+        let mut s = Session::new(Document::new());
+        let list = |s: &mut Session| s.run("equation.functions", &json!({})).unwrap()["functions"].as_array().unwrap().len();
+        let builtin = list(&mut s);
+        let func = |s: &mut Session, linear: &str| {
+            s.run("select.all", &json!({})).unwrap();
+            s.run("edit.delete", &json!({})).ok();
+            s.run("insert.equation", &json!({"linear": linear})).unwrap();
+            let eq = s.doc.body.iter().find_map(|b| match &**b {
+                doc4me_doc::Block::Para(p) => p.objects.iter().find_map(|o| match o {
+                    InlineObject::Equation { math, .. } => Some(math.nodes.clone()),
+                    _ => None,
+                }),
+                _ => None,
+            });
+            eq.is_some_and(|n| n.iter().any(|x| matches!(x, MNode::Func { .. })))
+        };
+        assert!(!func(&mut s, "erf x"), "not a function yet");
+        assert!(func(&mut s, "sin x"));
+        s.run("equation.functions", &json!({"add": "erf"})).unwrap();
+        assert_eq!(list(&mut s), builtin + 1);
+        assert!(func(&mut s, "erf x"), "added: a function");
+        s.run("equation.functions", &json!({"remove": "sin"})).unwrap();
+        assert!(!func(&mut s, "sin x"), "removed: letters");
+        assert!(s.run("equation.functions", &json!({"add": "x2"})).is_err(), "letters only");
+        assert!(s.run("equation.functions", &json!({"add": ""})).is_err());
+        s.run("equation.functions", &json!({"reset": true})).unwrap();
+        assert_eq!(list(&mut s), builtin);
+        assert_eq!(s.prefs.math_functions, None);
+        assert!(func(&mut s, "sin x") && !func(&mut s, "erf x"));
     }
 
     #[test]

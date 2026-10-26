@@ -2715,3 +2715,44 @@ spacing	Normal	ปกติ
 	Print Documents…	พิมพ์เอกสาร…
 	AutoComplete	การเติมข้อความอัตโนมัติ
 	{name} (Press ENTER to Insert)	{name} (กด ENTER เพื่อแทรก)
+	Recognized Functions	ฟังก์ชันที่รู้จัก
+	Recognized Functions…	ฟังก์ชันที่รู้จัก…
+	Restore Defaults	คืนค่าเริ่มต้น
+	Insert Database	แทรกฐานข้อมูล
+	Insert Database…	แทรกฐานข้อมูล…
+	Get Data…	รับข้อมูล…
+	Data source:	แหล่งข้อมูล:
+	Fields to insert:	เขตข้อมูลที่จะแทรก:
+	Insert Data	แทรกข้อมูล
+	All records	ระเบียนทั้งหมด
+	{n} records	{n} ระเบียน
+	Filter and Sort	ตัวกรองและการเรียงลำดับ
+	Filter and Sort…	ตัวกรองและการเรียงลำดับ…
+	Filter Records	กรองระเบียน
+	Sort Records	เรียงลำดับระเบียน
+	Comparison	การเปรียบเทียบ
+	Compare to	เปรียบเทียบกับ
+	And	และ
+	Or	หรือ
+	Equal to	เท่ากับ
+	Not equal to	ไม่เท่ากับ
+	Less than	น้อยกว่า
+	Greater than	มากกว่า
+	Less than or equal	น้อยกว่าหรือเท่ากับ
+	Greater than or equal	มากกว่าหรือเท่ากับ
+	Is blank	ว่างเปล่า
+	Is not blank	ไม่ว่างเปล่า
+	Contains	มี
+	Does not contain	ไม่มี
+	Sort by	เรียงตาม
+	Then by	จากนั้นตาม
+	Ascending	จากน้อยไปมาก
+	Descending	จากมากไปน้อย
+	Table AutoFormat	จัดรูปแบบตารางอัตโนมัติ
+	Table AutoFormat…	จัดรูปแบบตารางอัตโนมัติ…
+	Table styles:	ลักษณะตาราง:
+	Apply special formats to	ใช้รูปแบบพิเศษกับ
+	Sheet:	แผ่นงาน:
+	{n} of {of} recipients	{n} จาก {of} ผู้รับ
+	New Folder	โฟลเดอร์ใหม่
+	{name} can't be a folder's name.	ใช้ {name} เป็นชื่อโฟลเดอร์ไม่ได้

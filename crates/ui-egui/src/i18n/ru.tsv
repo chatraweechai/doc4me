@@ -2734,3 +2734,44 @@ spacing	Normal	Обычный
 	Print Documents…	Печать документов…
 	AutoComplete	Автозавершение
 	{name} (Press ENTER to Insert)	{name} (Нажмите клавишу ВВОД для вставки)
+	Recognized Functions	Распознаваемые функции
+	Recognized Functions…	Распознаваемые функции…
+	Restore Defaults	Восстановить значения по умолчанию
+	Insert Database	Вставить базу данных
+	Insert Database…	Вставить базу данных…
+	Get Data…	Получить данные…
+	Data source:	Источник данных:
+	Fields to insert:	Вставляемые поля:
+	Insert Data	Вставить данные
+	All records	Все записи
+	{n} records	Записей: {n}
+	Filter and Sort	Фильтр и сортировка
+	Filter and Sort…	Фильтр и сортировка…
+	Filter Records	Фильтр записей
+	Sort Records	Сортировка записей
+	Comparison	Сравнение
+	Compare to	Сравнить с
+	And	И
+	Or	Или
+	Equal to	Равно
+	Not equal to	Не равно
+	Less than	Меньше
+	Greater than	Больше
+	Less than or equal	Меньше или равно
+	Greater than or equal	Больше или равно
+	Is blank	Пусто
+	Is not blank	Не пусто
+	Contains	Содержит
+	Does not contain	Не содержит
+	Sort by	Сортировать по
+	Then by	Затем по
+	Ascending	По возрастанию
+	Descending	По убыванию
+	Table AutoFormat	Автоформат таблицы
+	Table AutoFormat…	Автоформат таблицы…
+	Table styles:	Стили таблиц:
+	Apply special formats to	Применить особый формат к
+	Sheet:	Лист:
+	{n} of {of} recipients	{n} из {of} получателей
+	New Folder	Новая папка
+	{name} can't be a folder's name.	{name} не может быть именем папки.

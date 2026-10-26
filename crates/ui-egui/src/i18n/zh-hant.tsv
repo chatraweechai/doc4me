@@ -2707,3 +2707,44 @@ spacing	Normal	標準
 	Print Documents…	列印文件…
 	AutoComplete	自動完成
 	{name} (Press ENTER to Insert)	{name} (按 Enter 插入)
+	Recognized Functions	識別的函數
+	Recognized Functions…	識別的函數…
+	Restore Defaults	還原預設值
+	Insert Database	插入資料庫
+	Insert Database…	插入資料庫…
+	Get Data…	取得資料…
+	Data source:	資料來源:
+	Fields to insert:	要插入的欄位:
+	Insert Data	插入資料
+	All records	所有記錄
+	{n} records	{n} 筆記錄
+	Filter and Sort	篩選與排序
+	Filter and Sort…	篩選與排序…
+	Filter Records	篩選記錄
+	Sort Records	排序記錄
+	Comparison	比較
+	Compare to	比較對象
+	And	且
+	Or	或
+	Equal to	等於
+	Not equal to	不等於
+	Less than	小於
+	Greater than	大於
+	Less than or equal	小於或等於
+	Greater than or equal	大於或等於
+	Is blank	空白
+	Is not blank	非空白
+	Contains	包含
+	Does not contain	不包含
+	Sort by	排序方式
+	Then by	次要排序
+	Ascending	遞增
+	Descending	遞減
+	Table AutoFormat	表格自動格式設定
+	Table AutoFormat…	表格自動格式設定…
+	Table styles:	表格樣式:
+	Apply special formats to	套用特殊格式至
+	Sheet:	工作表:
+	{n} of {of} recipients	{of} 位收件者中的 {n} 位
+	New Folder	新增資料夾
+	{name} can't be a folder's name.	{name} 不能作為資料夾名稱。

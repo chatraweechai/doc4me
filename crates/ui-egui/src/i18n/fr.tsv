@@ -2703,3 +2703,44 @@ spacing	Normal	Normal
 	Print Documents…	Imprimer les documents…
 	AutoComplete	Saisie semi-automatique
 	{name} (Press ENTER to Insert)	{name} (Appuyez sur ENTRÉE pour insérer)
+	Recognized Functions	Fonctions reconnues
+	Recognized Functions…	Fonctions reconnues…
+	Restore Defaults	Rétablir les valeurs par défaut
+	Insert Database	Insérer une base de données
+	Insert Database…	Insérer une base de données…
+	Get Data…	Obtenir les données…
+	Data source:	Source de données :
+	Fields to insert:	Champs à insérer :
+	Insert Data	Insérer les données
+	All records	Tous les enregistrements
+	{n} records	{n} enregistrements
+	Filter and Sort	Filtrer et trier
+	Filter and Sort…	Filtrer et trier…
+	Filter Records	Filtrer les enregistrements
+	Sort Records	Trier les enregistrements
+	Comparison	Comparaison
+	Compare to	Comparer à
+	And	Et
+	Or	Ou
+	Equal to	Égal à
+	Not equal to	Différent de
+	Less than	Inférieur à
+	Greater than	Supérieur à
+	Less than or equal	Inférieur ou égal à
+	Greater than or equal	Supérieur ou égal à
+	Is blank	Est vide
+	Is not blank	N’est pas vide
+	Contains	Contient
+	Does not contain	Ne contient pas
+	Sort by	Trier par
+	Then by	Puis par
+	Ascending	Croissant
+	Descending	Décroissant
+	Table AutoFormat	Mise en forme automatique du tableau
+	Table AutoFormat…	Mise en forme automatique du tableau…
+	Table styles:	Styles de tableau :
+	Apply special formats to	Appliquer les formats spéciaux à
+	Sheet:	Feuille :
+	{n} of {of} recipients	{n} destinataires sur {of}
+	New Folder	Nouveau dossier
+	{name} can't be a folder's name.	{name} ne peut pas être le nom d’un dossier.

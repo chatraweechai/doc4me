@@ -440,6 +440,9 @@ pub struct Prefs {
     /// as in Word).
     #[serde(deserialize_with = "crate::cmd::references::lenient_auto_caption")]
     pub auto_caption: Vec<crate::cmd::references::AutoCaption>,
+    /// Equation Options › Recognized Functions: the names set upright as functions when an
+    /// equation builds up (per user, as in Word); `None`, the built-in list.
+    pub math_functions: Option<Vec<String>>,
 }
 
 impl Default for Prefs {
@@ -460,6 +463,7 @@ impl Default for Prefs {
             detect_language: true,
             autocorrect: Default::default(),
             auto_caption: Vec::new(),
+            math_functions: None,
         }
     }
 }
@@ -1134,7 +1138,11 @@ impl Session {
         let run = spec.run;
         let mutates = spec.mutates;
         self.only_read = false;
-        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| crate::cmd::column::dispatch(self, id, mutates, run, params)));
+        // Equations build up with the user's recognized function names.
+        let functions = if id.starts_with("equation.") || id.starts_with("insert.") { self.prefs.math_functions.clone() } else { None };
+        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            doc4me_doc::math_linear::with_functions(functions.as_deref(), || crate::cmd::column::dispatch(self, id, mutates, run, params))
+        }));
         let only_read = std::mem::take(&mut self.only_read);
         let mut result = match result {
             Ok(r) => r,

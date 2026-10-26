@@ -2716,3 +2716,44 @@ spacing	Normal	Normalno
 	Print Documents…	Odštampaj dokumente…
 	AutoComplete	Automatsko dovršavanje
 	{name} (Press ENTER to Insert)	{name} (Pritisnite ENTER da biste umetnuli)
+	Recognized Functions	Prepoznate funkcije
+	Recognized Functions…	Prepoznate funkcije…
+	Restore Defaults	Vrati podrazumevane vrednosti
+	Insert Database	Umetni bazu podataka
+	Insert Database…	Umetni bazu podataka…
+	Get Data…	Preuzmi podatke…
+	Data source:	Izvor podataka:
+	Fields to insert:	Polja za umetanje:
+	Insert Data	Umetni podatke
+	All records	Svi zapisi
+	{n} records	Zapisa: {n}
+	Filter and Sort	Filtriranje i sortiranje
+	Filter and Sort…	Filtriranje i sortiranje…
+	Filter Records	Filtriraj zapise
+	Sort Records	Sortiraj zapise
+	Comparison	Poređenje
+	Compare to	Uporedi sa
+	And	I
+	Or	Ili
+	Equal to	Jednako
+	Not equal to	Nije jednako
+	Less than	Manje od
+	Greater than	Veće od
+	Less than or equal	Manje ili jednako
+	Greater than or equal	Veće ili jednako
+	Is blank	Prazno je
+	Is not blank	Nije prazno
+	Contains	Sadrži
+	Does not contain	Ne sadrži
+	Sort by	Sortiraj po
+	Then by	Zatim po
+	Ascending	Rastuće
+	Descending	Opadajuće
+	Table AutoFormat	Automatsko oblikovanje tabele
+	Table AutoFormat…	Automatsko oblikovanje tabele…
+	Table styles:	Stilovi tabele:
+	Apply special formats to	Primeni posebne formate na
+	Sheet:	List:
+	{n} of {of} recipients	{n} od {of} primalaca
+	New Folder	Nova fascikla
+	{name} can't be a folder's name.	{name} ne može biti ime fascikle.

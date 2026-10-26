@@ -2706,3 +2706,44 @@ spacing	Normal	標準
 	Print Documents…	文書の印刷…
 	AutoComplete	オートコンプリート
 	{name} (Press ENTER to Insert)	{name} (Enter キーを押すと挿入します)
+	Recognized Functions	認識される関数
+	Recognized Functions…	認識される関数…
+	Restore Defaults	既定値に戻す
+	Insert Database	データベースの挿入
+	Insert Database…	データベースの挿入…
+	Get Data…	データの取り込み…
+	Data source:	データ ソース:
+	Fields to insert:	挿入するフィールド:
+	Insert Data	データの挿入
+	All records	すべてのレコード
+	{n} records	{n} 件のレコード
+	Filter and Sort	フィルターと並べ替え
+	Filter and Sort…	フィルターと並べ替え…
+	Filter Records	レコードのフィルター
+	Sort Records	レコードの並べ替え
+	Comparison	比較
+	Compare to	比較対象
+	And	かつ
+	Or	または
+	Equal to	等しい
+	Not equal to	等しくない
+	Less than	より小さい
+	Greater than	より大きい
+	Less than or equal	以下
+	Greater than or equal	以上
+	Is blank	空白
+	Is not blank	空白ではない
+	Contains	含む
+	Does not contain	含まない
+	Sort by	並べ替え
+	Then by	次に
+	Ascending	昇順
+	Descending	降順
+	Table AutoFormat	表のオートフォーマット
+	Table AutoFormat…	表のオートフォーマット…
+	Table styles:	表のスタイル:
+	Apply special formats to	特殊な書式を適用する対象
+	Sheet:	シート:
+	{n} of {of} recipients	{of} 人中 {n} 人の宛先
+	New Folder	新しいフォルダー
+	{name} can't be a folder's name.	{name} はフォルダー名に使えません。

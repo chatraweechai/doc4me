@@ -18,6 +18,43 @@ pub const FUNCTION_NAMES: &[&str] = &[
     "tanh",
 ];
 
+thread_local! {
+    /// Equation Options › Recognized Functions while an equation command runs ([`with_functions`]);
+    /// `None`: [`FUNCTION_NAMES`].
+    static FUNCTIONS: std::cell::RefCell<Option<Vec<String>>> = const { std::cell::RefCell::new(None) };
+}
+
+/// Run `f` with `names` as the recognized function names (`None`: the built-in ones), as the
+/// user's Recognized Functions list sets them.
+pub fn with_functions<R>(names: Option<&[String]>, f: impl FnOnce() -> R) -> R {
+    /// Puts the previous list back, also when `f` panics.
+    struct Restore(Option<Vec<String>>);
+    impl Drop for Restore {
+        fn drop(&mut self) {
+            let prev = self.0.take();
+            FUNCTIONS.with(|c| *c.borrow_mut() = prev);
+        }
+    }
+    let _restore = Restore(FUNCTIONS.with(|c| c.replace(names.map(<[String]>::to_vec))));
+    f()
+}
+
+/// Whether `word` is a recognized function name (set upright, applied to what follows).
+pub fn is_function_name(word: &str) -> bool {
+    FUNCTIONS.with(|c| match &*c.borrow() {
+        Some(names) => names.iter().any(|n| n == word),
+        None => FUNCTION_NAMES.contains(&word),
+    })
+}
+
+/// Whether `text` contains a recognized function name anywhere.
+pub fn mentions_function(text: &str) -> bool {
+    FUNCTIONS.with(|c| match &*c.borrow() {
+        Some(names) => names.iter().any(|n| text.contains(n.as_str())),
+        None => FUNCTION_NAMES.iter().any(|f| text.contains(f)),
+    })
+}
+
 /// Function names whose subscripts go underneath (`lim_(n→∞)`).
 const LIMIT_NAMES: &[&str] = &["lim", "liminf", "limsup", "max", "min", "sup", "inf", "det", "gcd", "Pr"];
 
@@ -395,7 +432,7 @@ impl P {
             end += 1;
         }
         let word: String = self.c.get(start..end).unwrap_or(&[]).iter().collect();
-        if !FUNCTION_NAMES.contains(&word.as_str()) {
+        if !is_function_name(&word) {
             self.i = start + 1;
             return vec![text(self.c.get(start).copied().unwrap_or(' '))];
         }

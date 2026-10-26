@@ -2733,3 +2733,44 @@ spacing	Normal	Normal
 	Print Documents…	Belgeleri Yazdır…
 	AutoComplete	Otomatik Tamamlama
 	{name} (Press ENTER to Insert)	{name} (Eklemek için ENTER tuşuna basın)
+	Recognized Functions	Tanınan İşlevler
+	Recognized Functions…	Tanınan İşlevler…
+	Restore Defaults	Varsayılanları Geri Yükle
+	Insert Database	Veritabanı Ekle
+	Insert Database…	Veritabanı Ekle…
+	Get Data…	Veri Al…
+	Data source:	Veri kaynağı:
+	Fields to insert:	Eklenecek alanlar:
+	Insert Data	Veri Ekle
+	All records	Tüm kayıtlar
+	{n} records	{n} kayıt
+	Filter and Sort	Filtrele ve Sırala
+	Filter and Sort…	Filtrele ve Sırala…
+	Filter Records	Kayıtları Filtrele
+	Sort Records	Kayıtları Sırala
+	Comparison	Karşılaştırma
+	Compare to	Karşılaştırılacak değer
+	And	Ve
+	Or	Veya
+	Equal to	Eşittir
+	Not equal to	Eşit değildir
+	Less than	Küçüktür
+	Greater than	Büyüktür
+	Less than or equal	Küçük veya eşittir
+	Greater than or equal	Büyük veya eşittir
+	Is blank	Boştur
+	Is not blank	Boş değildir
+	Contains	İçerir
+	Does not contain	İçermez
+	Sort by	Sıralama ölçütü
+	Then by	Sonra
+	Ascending	Artan
+	Descending	Azalan
+	Table AutoFormat	Tablo Otomatik Biçimi
+	Table AutoFormat…	Tablo Otomatik Biçimi…
+	Table styles:	Tablo stilleri:
+	Apply special formats to	Özel biçimleri uygula
+	Sheet:	Sayfa:
+	{n} of {of} recipients	{of} alıcıdan {n} tanesi
+	New Folder	Yeni Klasör
+	{name} can't be a folder's name.	{name} bir klasör adı olamaz.

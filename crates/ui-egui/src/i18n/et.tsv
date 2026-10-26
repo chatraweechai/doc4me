@@ -2714,3 +2714,44 @@ spacing	Normal	Tavaline
 	Print Documents…	Prindi dokumendid…
 	AutoComplete	Automaatlõpetus
 	{name} (Press ENTER to Insert)	{name} (Lisamiseks vajutage sisestusklahvi)
+	Recognized Functions	Tuvastatud funktsioonid
+	Recognized Functions…	Tuvastatud funktsioonid…
+	Restore Defaults	Taasta vaikesätted
+	Insert Database	Lisa andmebaas
+	Insert Database…	Lisa andmebaas…
+	Get Data…	Too andmed…
+	Data source:	Andmeallikas:
+	Fields to insert:	Lisatavad väljad:
+	Insert Data	Lisa andmed
+	All records	Kõik kirjed
+	{n} records	{n} kirjet
+	Filter and Sort	Filtreerimine ja sortimine
+	Filter and Sort…	Filtreerimine ja sortimine…
+	Filter Records	Filtreeri kirjed
+	Sort Records	Sordi kirjed
+	Comparison	Võrdlus
+	Compare to	Võrdle väärtusega
+	And	Ja
+	Or	Või
+	Equal to	Võrdub
+	Not equal to	Ei võrdu
+	Less than	Väiksem kui
+	Greater than	Suurem kui
+	Less than or equal	Väiksem või võrdne
+	Greater than or equal	Suurem või võrdne
+	Is blank	On tühi
+	Is not blank	Pole tühi
+	Contains	Sisaldab
+	Does not contain	Ei sisalda
+	Sort by	Sordi
+	Then by	Siis
+	Ascending	Kasvavalt
+	Descending	Kahanevalt
+	Table AutoFormat	Tabeli automaatvorming
+	Table AutoFormat…	Tabeli automaatvorming…
+	Table styles:	Tabelilaadid:
+	Apply special formats to	Rakenda erivormingud järgmisele
+	Sheet:	Leht:
+	{n} of {of} recipients	{n} adressaati {of}-st
+	New Folder	Uus kaust
+	{name} can't be a folder's name.	{name} ei saa olla kausta nimi.

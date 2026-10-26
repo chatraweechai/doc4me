@@ -2707,3 +2707,44 @@ spacing	Normal	Normál
 	Print Documents…	Dokumentumok nyomtatása…
 	AutoComplete	Automatikus kiegészítés
 	{name} (Press ENTER to Insert)	{name} (Beszúráshoz nyomja le az ENTER billentyűt)
+	Recognized Functions	Felismert függvények
+	Recognized Functions…	Felismert függvények…
+	Restore Defaults	Alapértékek visszaállítása
+	Insert Database	Adatbázis beszúrása
+	Insert Database…	Adatbázis beszúrása…
+	Get Data…	Adatok beolvasása…
+	Data source:	Adatforrás:
+	Fields to insert:	Beszúrandó mezők:
+	Insert Data	Adatok beszúrása
+	All records	Minden rekord
+	{n} records	{n} rekord
+	Filter and Sort	Szűrés és rendezés
+	Filter and Sort…	Szűrés és rendezés…
+	Filter Records	Rekordok szűrése
+	Sort Records	Rekordok rendezése
+	Comparison	Összehasonlítás
+	Compare to	Összehasonlítás ezzel
+	And	És
+	Or	Vagy
+	Equal to	Egyenlő
+	Not equal to	Nem egyenlő
+	Less than	Kisebb, mint
+	Greater than	Nagyobb, mint
+	Less than or equal	Kisebb vagy egyenlő
+	Greater than or equal	Nagyobb vagy egyenlő
+	Is blank	Üres
+	Is not blank	Nem üres
+	Contains	Tartalmazza
+	Does not contain	Nem tartalmazza
+	Sort by	Rendezés
+	Then by	Azután
+	Ascending	Növekvő
+	Descending	Csökkenő
+	Table AutoFormat	Táblázat automatikus formázása
+	Table AutoFormat…	Táblázat automatikus formázása…
+	Table styles:	Táblázatstílusok:
+	Apply special formats to	Különleges formázás alkalmazása:
+	Sheet:	Munkalap:
+	{n} of {of} recipients	{n} / {of} címzett
+	New Folder	Új mappa
+	{name} can't be a folder's name.	{name} nem lehet mappa neve.

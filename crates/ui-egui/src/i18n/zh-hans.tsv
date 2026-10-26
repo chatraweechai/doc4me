@@ -2718,3 +2718,44 @@ spacing	Normal	标准
 	Print Documents…	打印文档…
 	AutoComplete	自动完成
 	{name} (Press ENTER to Insert)	{name} (按 Enter 插入)
+	Recognized Functions	识别的函数
+	Recognized Functions…	识别的函数…
+	Restore Defaults	还原默认值
+	Insert Database	插入数据库
+	Insert Database…	插入数据库…
+	Get Data…	获取数据…
+	Data source:	数据源:
+	Fields to insert:	要插入的域:
+	Insert Data	插入数据
+	All records	全部记录
+	{n} records	{n} 条记录
+	Filter and Sort	筛选和排序
+	Filter and Sort…	筛选和排序…
+	Filter Records	筛选记录
+	Sort Records	排序记录
+	Comparison	比较关系
+	Compare to	比较对象
+	And	与
+	Or	或
+	Equal to	等于
+	Not equal to	不等于
+	Less than	小于
+	Greater than	大于
+	Less than or equal	小于或等于
+	Greater than or equal	大于或等于
+	Is blank	为空
+	Is not blank	不为空
+	Contains	包含
+	Does not contain	不包含
+	Sort by	排序依据
+	Then by	然后依据
+	Ascending	升序
+	Descending	降序
+	Table AutoFormat	表格自动套用格式
+	Table AutoFormat…	表格自动套用格式…
+	Table styles:	表格样式:
+	Apply special formats to	将特殊格式应用于
+	Sheet:	工作表:
+	{n} of {of} recipients	{n} / {of} 个收件人
+	New Folder	新建文件夹
+	{name} can't be a folder's name.	{name} 不能用作文件夹名称。

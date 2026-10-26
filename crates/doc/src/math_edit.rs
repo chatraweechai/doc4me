@@ -787,7 +787,7 @@ fn builds(s: &str) -> bool {
                 | '\u{2061}'
         ) || crate::math_linear::is_combining(c)
             || crate::math::is_nary_char(c)
-    }) || crate::math_linear::FUNCTION_NAMES.iter().any(|f| s.contains(f))
+    }) || crate::math_linear::mentions_function(s)
 }
 
 /// A run is plain math text that build-up may rewrite.

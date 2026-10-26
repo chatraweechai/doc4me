@@ -135,6 +135,9 @@ impl Exempt {
         // The words in the user's dictionary (File › Options › Proofing lists them): the user's
         // own, and process-wide, so another test's words can show up here.
         names.extend(doc4me_engine::proof::user_dictionary());
+        // Recognized Functions: math notation (sin, log…), the same in every language.
+        names.extend(doc4me_doc::math_linear::FUNCTION_NAMES.iter().map(|n| n.to_string()));
+        names.extend(app.session.prefs.math_functions.iter().flatten().cloned());
         for m in crate::credits::MODELS {
             names.extend([m.company, m.model, m.version].map(str::to_string));
         }

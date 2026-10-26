@@ -90,7 +90,7 @@ dlg-088	wdDialogInsertBreak	159	Type	layout.break	registry		Break dialog (layout
 dlg-089	wdDialogInsertCaption	357	Label, TitleAutoText, Title, Delete, Position, AutoCaption, ExcludeLabel	references.caption	registry		
 dlg-090	wdDialogInsertCaptionNumbering	358	Label, FormatNumber, ChapterNumber, Level, Separator, CapNumberingStyle	references.caption	registry		Caption › Numbering
 dlg-091	wdDialogInsertCrossReference	367	ReferenceType, ReferenceKind, ReferenceItem, InsertAsHyperLink, InsertPosition, SeparateNumbers, SeparatorCharacters	insert.crossReference	registry		
-dlg-092	wdDialogInsertDatabase	341	Format, Style, LinkToSource, Connection, SQLStatement, SQLStatement1, PasswordDoc, PasswordDot, DataSource, From, To, IncludeFields, WritePasswordDoc, WritePasswordDot	-	registry		
+dlg-092	wdDialogInsertDatabase	341	Format, Style, LinkToSource, Connection, SQLStatement, SQLStatement1, PasswordDoc, PasswordDot, DataSource, From, To, IncludeFields, WritePasswordDoc, WritePasswordDot	insert.database	registry		Insert Database (Insert › Table › Insert Database…): Get Data (CSV/TSV/text, .xlsx/.xlsm/.ods and its sheet), first row has field names, the fields to insert, all records or from–to; Insert Data puts them in a table with a header row (no DATABASE field: the data is inserted as text, as Word does with "Insert data as field" off)
 dlg-093	wdDialogInsertDateTime	165	DateTimePic, InsertAsField, DbCharField, DateLanguage, CalendarType	insert.dateTime	registry		
 dlg-094	wdDialogInsertField	166	Field	insert.field	registry		
 dlg-095	wdDialogInsertFile	164	Name, Range, ConfirmConversions, Link, Attachment	insert.textFromFile	registry		
@@ -134,7 +134,7 @@ dlg-132	wdDialogMailMergeInsertSet	4054	(none)	mailings.rules	registry
 dlg-133	wdDialogMailMergeInsertSkipIf	4055	(none)	mailings.rules	registry		ruleSkipIf
 dlg-134	wdDialogMailMergeOpenDataSource	81	(none)	mailings.recipients	registry		
 dlg-135	wdDialogMailMergeOpenHeaderSource	82	(none)	-	registry		
-dlg-136	wdDialogMailMergeQueryOptions	681	(none)	-	registry		filter and sort recipients
+dlg-136	wdDialogMailMergeQueryOptions	681	(none)	mailings.query	registry		Filter and Sort (Edit Recipient List › Filter and Sort…): Filter Records (six rules, And/Or, ten comparisons, numbers compared as numbers) and Sort Records (three fields, ascending/descending); Clear All
 dlg-137	wdDialogMailMergeRecipients	1308	(none)	mailings.editRecipients	registry		recipientList
 dlg-138	wdDialogMailMergeSetDocumentType	1339	(none)	mailings.start	registry		
 dlg-139	wdDialogMailMergeUseAddressBook	779	(none)		excluded		Outlook address book (Microsoft service)
@@ -144,7 +144,7 @@ dlg-142	wdDialogMarkTableOfContentsEntry	442	(none)	references.markTocEntry	regi
 dlg-143	wdDialogMyPermission	1437	(none)		excluded		Information Rights Management (Microsoft service)
 dlg-144	wdDialogNewToolbar	586	(none)	-	registry		legacy toolbars
 dlg-145	wdDialogNoteOptions	373	(none)	references.noteOptions	registry		
-dlg-146	wdDialogOMathRecognizedFunctions	2165	(none)	-	registry		
+dlg-146	wdDialogOMathRecognizedFunctions	2165	(none)	equation.functions	registry		Recognized Functions (Equation tab › Recognized Functions…): add, delete, restore defaults; the names build up upright as functions, kept with the user's preferences
 dlg-147	wdDialogOrganizer	222	(none)	styles.organizer	registry		
 dlg-148	wdDialogPermission	1469	(none)		excluded		Information Rights Management (Microsoft service)
 dlg-149	wdDialogPhoneticGuide	986	(none)	format.phonetic	registry		
@@ -154,7 +154,7 @@ dlg-152	wdDialogSearch	1363	(none)	-	registry		legacy file search
 dlg-153	wdDialogShowRepairs	1381	(none)	-	registry		
 dlg-154	wdDialogSourceManager	1920	(none)	references.sources	registry		
 dlg-155	wdDialogStyleManagement	1948	(none)	styles.manage	registry		
-dlg-156	wdDialogTableAutoFormat	563	(none)	-	registry		legacy
+dlg-156	wdDialogTableAutoFormat	563	(none)	table.style	registry		Table AutoFormat (Table Design › Styles › Table AutoFormat…): the table styles and Apply special formats to Header Row, First Column, Total Row, Last Column (table.style + table.look in one undo step)
 dlg-157	wdDialogTableCellOptions	1081	(none)	table.cellOptions	registry		Cell Options: margins or same as the whole table, Wrap text (Fit text not offered)
 dlg-158	wdDialogTableColumnWidth	143	(none)	table.properties	registry		
 dlg-159	wdDialogTableDeleteCells	133	(none)	table.deleteCells	registry		
@@ -182,7 +182,7 @@ dlg-180	wdDialogToolsAutoManager	915	(none)	tools.autocorrect	registry
 dlg-181	wdDialogToolsAutoSummarize	874	(none)	-	registry		legacy
 dlg-182	wdDialogToolsBulletsNumbers	196	(none)	list.define	registry		
 dlg-183	wdDialogToolsCompareDocuments	198	(none)	review.compare	registry		
-dlg-184	wdDialogToolsCreateDirectory	833	(none)	-	registry		legacy
+dlg-184	wdDialogToolsCreateDirectory	833	(none)	-	manual	pass	New Folder in Doc4Me's own file browser (Open/Save As when the system dialog isn't used): makes the folder where the browser is and opens it (UI test file_browser::new_folder_is_made_here_and_opened, 2026-10-26); the system dialogs have their own
 dlg-185	wdDialogToolsCreateEnvelope	173	(none)	mailings.envelopes	registry		
 dlg-186	wdDialogToolsCreateLabels	489	(none)	mailings.labels	registry		
 dlg-187	wdDialogToolsCustomize	152	(none)	tools.customizeRibbon	registry		

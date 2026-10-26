@@ -2711,3 +2711,44 @@ spacing	Normal	Normální
 	Print Documents…	Tisk dokumentů…
 	AutoComplete	Automatické dokončování
 	{name} (Press ENTER to Insert)	{name} (Vložte stisknutím klávesy ENTER)
+	Recognized Functions	Rozpoznané funkce
+	Recognized Functions…	Rozpoznané funkce…
+	Restore Defaults	Obnovit výchozí
+	Insert Database	Vložit databázi
+	Insert Database…	Vložit databázi…
+	Get Data…	Načíst data…
+	Data source:	Zdroj dat:
+	Fields to insert:	Pole k vložení:
+	Insert Data	Vložit data
+	All records	Všechny záznamy
+	{n} records	Záznamy: {n}
+	Filter and Sort	Filtrovat a seřadit
+	Filter and Sort…	Filtrovat a seřadit…
+	Filter Records	Filtrovat záznamy
+	Sort Records	Seřadit záznamy
+	Comparison	Porovnání
+	Compare to	Porovnat s
+	And	A
+	Or	Nebo
+	Equal to	Rovná se
+	Not equal to	Nerovná se
+	Less than	Menší než
+	Greater than	Větší než
+	Less than or equal	Menší nebo rovno
+	Greater than or equal	Větší nebo rovno
+	Is blank	Je prázdné
+	Is not blank	Není prázdné
+	Contains	Obsahuje
+	Does not contain	Neobsahuje
+	Sort by	Seřadit podle
+	Then by	Potom podle
+	Ascending	Vzestupně
+	Descending	Sestupně
+	Table AutoFormat	Automatický formát tabulky
+	Table AutoFormat…	Automatický formát tabulky…
+	Table styles:	Styly tabulky:
+	Apply special formats to	Použít speciální formáty na
+	Sheet:	List:
+	{n} of {of} recipients	{n} z {of} příjemců
+	New Folder	Nová složka
+	{name} can't be a folder's name.	{name} nemůže být názvem složky.

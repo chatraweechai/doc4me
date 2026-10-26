@@ -375,6 +375,10 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                     }
                 },
             );
+            // Word's Equation Options › Recognized Functions.
+            if ui.button(tl!("Recognized Functions…")).clicked() {
+                let _ = app.run("ui.dialog", json!({"name": "mathFunctions"}));
+            }
             if ui.button(tl!("Close Equation")).on_hover_text(tl!("Leave the equation (Esc)")).clicked() {
                 let _ = app.run("equation.exit", json!({}));
                 app.canvas.want_focus = true;

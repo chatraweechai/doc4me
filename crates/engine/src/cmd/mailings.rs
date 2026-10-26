@@ -19,6 +19,11 @@ pub struct MergeState {
     pub preview: bool,
     pub record: usize,
     pub highlight: bool,
+    /// Filter and Sort: the whole list while `rows` holds the records the query keeps, in its
+    /// order; `None` when no query is set.
+    pub all_rows: Option<Vec<Vec<String>>>,
+    /// The query in effect (`mailings.query`'s parameters), for the dialog to show.
+    pub query: Value,
 }
 
 fn has_recipients(s: &Session) -> Option<&'static str> {
@@ -60,7 +65,8 @@ pub fn specs() -> Vec<CommandSpec> {
             if v.get("rows").and_then(Value::as_array).is_some() {
                 return recipients(s, &json!({"rows": v.get("rows"), "fields": v.get("fields")}));
             }
-            Ok(json!({"headers": s.merge.headers, "rows": s.merge.rows}))
+            // The whole list, also while Filter and Sort shows part of it; editing it ends the query.
+            Ok(json!({"headers": s.merge.headers, "rows": s.merge.all_rows.as_ref().unwrap_or(&s.merge.rows)}))
         })
         .params(r#"{"rows"?: [{field: value}] | [[value]], "fields"?: [string]}"#)
         .key(super::non_mac("Alt+Shift+E"))
@@ -154,6 +160,12 @@ pub fn specs() -> Vec<CommandSpec> {
         .params(r#"{"from"?: n, "to"?: n}"#)
         .key(super::non_mac("Alt+Shift+M"))
         .when(has_recipients),
+        CommandSpec::new("mailings.query", "Filter and Sort", "Mailings › Edit Recipient List", query)
+            .params(r#"{"filter"?: [{"field": name, "op": "eq|ne|lt|gt|le|ge|blank|notBlank|contains|notContains", "value"?: string, "or"?: bool (joined to the rule before by Or; And binds first)}], "sort"?: [{"field": name, "descending"?: bool}], "clear"?: true} → {"records", "of", "query"}: the records the merge uses and their order (numbers compare as numbers, text without regard to case); no parameters returns the query in effect"#)
+            .when(has_list),
+        CommandSpec::new("insert.database", "Insert Database", "Customize Ribbon › All Commands", database).params(
+            r#"{"csv"?: string, "path"?: string (.csv/.tsv/.txt, or a .xlsx/.xlsm/.ods workbook), "data"?: base64, "sheet"?: name | number, "headers"?: bool (the first row names the fields; default true), "fields"?: [name] (the columns, in order; default all), "from"?: n, "to"?: n (the records; default all), "preview"?: true (only the source's {"fields", "records"})} → {"rows", "cols"}: the data as a table at the caret, field names in a header row; a workbook with several sheets and none chosen returns {"sheets", "chooseSheet": true}"#,
+        ),
         CommandSpec::new("mailings.envelopes", "Envelopes", "Mailings › Create", envelopes).params(
             r#"{"delivery": string, "return"?: string, "size"?: "Envelope #10|#9|Monarch|DL|C4|C5|C6|B5", "width"?: pt, "height"?: pt, "add"?: bool (add to this document instead of a new one)}"#,
         ),
@@ -273,56 +285,66 @@ fn table_from_rows(fields: Option<&Vec<Value>>, arr: &[Value]) -> Result<(Vec<St
     Ok((headers, rows))
 }
 
+/// A data source's rows, from `csv` text, a file's `path`, or its bytes as base64 `data`
+/// (CSV/TSV/text, or a .xlsx/.xlsm/.ods workbook and its `sheet`): `Ok((rows, sheet chosen))`,
+/// or the workbook's sheet names when it has several and none was chosen.
+type SourceRows = Result<(Vec<Vec<String>>, Value), Vec<String>>;
+
+fn read_source(v: &Value) -> Result<SourceRows, CmdError> {
+    if let Some(c) = p::str(v, "csv") {
+        return Ok(Ok((parse_csv(c), Value::Null)));
+    }
+    let (bytes, ext) = if let Some(d) = p::str(v, "data") {
+        let b = super::insert::base64_decode(d.trim()).ok_or_else(|| CmdError::Params("`data` isn't valid base64".into()))?;
+        (b, p::str(v, "path").and_then(extension))
+    } else if let Some(path) = p::str(v, "path") {
+        (read_file(path)?, extension(path))
+    } else {
+        return Err(CmdError::Params("`csv`, `path`, `data` or `rows` required".into()));
+    };
+    let spreadsheet = ext.as_deref().is_some_and(doc4me_formats::sheet::is_extension) || doc4me_formats::sheet::detect(&bytes).is_some();
+    if !spreadsheet {
+        return Ok(Ok((parse_csv(&crate::io::decode_text(&bytes)), Value::Null)));
+    }
+    use doc4me_formats::sheet::{Pick, read_rows, sheet_names};
+    let pick = match v.get("sheet") {
+        Some(Value::String(n)) => Pick::Name(n.as_str()),
+        Some(x) if x.as_u64().is_some_and(|n| n >= 1) => {
+            Pick::Index(usize::try_from(x.as_u64().unwrap_or(1).saturating_sub(1)).unwrap_or(usize::MAX))
+        }
+        Some(Value::Null) | None => {
+            let names = sheet_names(&bytes).map_err(CmdError::Failed)?;
+            if names.len() > 1 {
+                return Ok(Err(names));
+            }
+            Pick::Index(0)
+        }
+        Some(_) => return Err(CmdError::Params("`sheet` must be a sheet name or number".into())),
+    };
+    let (names, rows) = read_rows(&bytes, pick).map_err(CmdError::Failed)?;
+    let chosen = match pick {
+        Pick::Index(i) => names.get(i).cloned(),
+        Pick::Name(n) => names.iter().find(|s| s.as_str() == n).or_else(|| names.iter().find(|s| s.eq_ignore_ascii_case(n.trim()))).cloned(),
+    };
+    Ok(Ok((rows, json!(chosen))))
+}
+
 fn recipients(s: &mut Session, v: &Value) -> CmdResult {
     let mut sheet = Value::Null;
     let (headers, rows) = if let Some(arr) = v.get("rows").and_then(Value::as_array) {
         table_from_rows(v.get("fields").and_then(Value::as_array), arr)?
     } else {
-        let all = if let Some(c) = p::str(v, "csv") {
-            parse_csv(c)
-        } else {
-            let (bytes, ext) = if let Some(d) = p::str(v, "data") {
-                let b = super::insert::base64_decode(d.trim()).ok_or_else(|| CmdError::Params("`data` isn't valid base64".into()))?;
-                (b, p::str(v, "path").and_then(extension))
-            } else if let Some(path) = p::str(v, "path") {
-                (read_file(path)?, extension(path))
-            } else {
-                return Err(CmdError::Params("`csv`, `path`, `data` or `rows` required".into()));
-            };
-            let spreadsheet = ext.as_deref().is_some_and(doc4me_formats::sheet::is_extension) || doc4me_formats::sheet::detect(&bytes).is_some();
-            if spreadsheet {
-                use doc4me_formats::sheet::{Pick, read_rows, sheet_names};
-                let pick = match v.get("sheet") {
-                    Some(Value::String(n)) => Pick::Name(n.as_str()),
-                    Some(x) if x.as_u64().is_some_and(|n| n >= 1) => {
-                        Pick::Index(usize::try_from(x.as_u64().unwrap_or(1).saturating_sub(1)).unwrap_or(usize::MAX))
-                    }
-                    Some(Value::Null) | None => {
-                        let names = sheet_names(&bytes).map_err(CmdError::Failed)?;
-                        if names.len() > 1 {
-                            return Ok(json!({"sheets": names, "chooseSheet": true}));
-                        }
-                        Pick::Index(0)
-                    }
-                    Some(_) => return Err(CmdError::Params("`sheet` must be a sheet name or number".into())),
-                };
-                let (names, rows) = read_rows(&bytes, pick).map_err(CmdError::Failed)?;
-                let chosen = match pick {
-                    Pick::Index(i) => names.get(i).cloned(),
-                    Pick::Name(n) => {
-                        names.iter().find(|s| s.as_str() == n).or_else(|| names.iter().find(|s| s.eq_ignore_ascii_case(n.trim()))).cloned()
-                    }
-                };
-                sheet = json!(chosen);
-                rows
-            } else {
-                parse_csv(&crate::io::decode_text(&bytes))
-            }
+        let (all, chosen) = match read_source(v)? {
+            Ok(x) => x,
+            Err(names) => return Ok(json!({"sheets": names, "chooseSheet": true})),
         };
+        sheet = chosen;
         header_split(all, p::bool(v, "headers").unwrap_or(true))?
     };
     s.merge.headers = headers;
     s.merge.rows = rows;
+    s.merge.all_rows = None;
+    s.merge.query = Value::Null;
     s.merge.record = 0;
     refresh(s);
     let mut r = json!({"fields": s.merge.headers, "records": s.merge.rows.len()});
@@ -330,6 +352,175 @@ fn recipients(s: &mut Session, v: &Value) -> CmdResult {
         r["sheet"] = sheet;
     }
     Ok(r)
+}
+
+/// Most rules a Filter Records query keeps (Word offers six).
+const MAX_RULES: usize = 6;
+/// Most Sort Records keys (Word offers three).
+const MAX_SORT_KEYS: usize = 3;
+
+/// A value compared as a number when both sides are numbers, as text without case otherwise.
+fn compare_values(a: &str, b: &str) -> std::cmp::Ordering {
+    match (a.trim().parse::<f64>(), b.trim().parse::<f64>()) {
+        (Ok(x), Ok(y)) if x.is_finite() && y.is_finite() => x.total_cmp(&y),
+        _ => a.to_lowercase().cmp(&b.to_lowercase()),
+    }
+}
+
+/// Filter and Sort (Edit Recipient List › Refine recipient list): which records the merge uses,
+/// and in what order. The whole list stays; `clear` brings it back.
+fn query(s: &mut Session, v: &Value) -> CmdResult {
+    let has = |k: &str| v.get(k).is_some_and(|x| !x.is_null());
+    if !has("filter") && !has("sort") && p::bool(v, "clear") != Some(true) {
+        let of = s.merge.all_rows.as_ref().map_or(s.merge.rows.len(), Vec::len);
+        return Ok(json!({"records": s.merge.rows.len(), "of": of, "query": s.merge.query}));
+    }
+    let field = |name: &str| {
+        s.merge.headers.iter().position(|h| h == name || h.eq_ignore_ascii_case(name)).ok_or_else(|| CmdError::Params(format!("no field `{name}`")))
+    };
+    // Rules: (field, op, value, joined by or).
+    let mut rules = Vec::new();
+    for r in v.get("filter").and_then(Value::as_array).into_iter().flatten().take(MAX_RULES + 1) {
+        if rules.len() == MAX_RULES {
+            return Err(CmdError::Params(format!("at most {MAX_RULES} filter rules")));
+        }
+        let f = field(p::str(r, "field").unwrap_or(""))?;
+        let op = p::str(r, "op").unwrap_or("eq");
+        if !["eq", "ne", "lt", "gt", "le", "ge", "blank", "notBlank", "contains", "notContains"].contains(&op) {
+            return Err(CmdError::Params(format!("unknown comparison `{op}`")));
+        }
+        rules.push((f, op.to_string(), p::str(r, "value").unwrap_or("").to_string(), p::bool(r, "or").unwrap_or(false)));
+    }
+    let mut keys = Vec::new();
+    for k in v.get("sort").and_then(Value::as_array).into_iter().flatten() {
+        if keys.len() == MAX_SORT_KEYS {
+            return Err(CmdError::Params(format!("at most {MAX_SORT_KEYS} sort fields")));
+        }
+        keys.push((field(p::str(k, "field").unwrap_or(""))?, p::bool(k, "descending").unwrap_or(false)));
+    }
+    let all = s.merge.all_rows.take().unwrap_or_else(|| s.merge.rows.clone());
+    if p::bool(v, "clear") == Some(true) || (rules.is_empty() && keys.is_empty()) {
+        s.merge.rows = all;
+        s.merge.query = Value::Null;
+    } else {
+        let test = |row: &[String], (f, op, value, _): &(usize, String, String, bool)| {
+            let cell = row.get(*f).map_or("", String::as_str);
+            let ord = compare_values(cell, value);
+            match op.as_str() {
+                "eq" => ord.is_eq(),
+                "ne" => !ord.is_eq(),
+                "lt" => ord.is_lt(),
+                "gt" => ord.is_gt(),
+                "le" => ord.is_le(),
+                "ge" => ord.is_ge(),
+                "blank" => cell.trim().is_empty(),
+                "notBlank" => !cell.trim().is_empty(),
+                "contains" => cell.to_lowercase().contains(&value.to_lowercase()),
+                _ => !cell.to_lowercase().contains(&value.to_lowercase()),
+            }
+        };
+        // And binds before Or: the rules split into Or groups whose rules must all hold.
+        let keep = |row: &[String]| {
+            if rules.is_empty() {
+                return true;
+            }
+            let mut groups: Vec<Vec<&(usize, String, String, bool)>> = Vec::new();
+            for r in &rules {
+                match groups.last_mut() {
+                    Some(g) if !r.3 => g.push(r),
+                    _ => groups.push(vec![r]),
+                }
+            }
+            groups.iter().any(|g| g.iter().all(|r| test(row, r)))
+        };
+        let mut rows: Vec<Vec<String>> = all.iter().filter(|r| keep(r)).cloned().collect();
+        rows.sort_by(|a, b| {
+            keys.iter()
+                .map(|(f, desc)| {
+                    let o = compare_values(a.get(*f).map_or("", String::as_str), b.get(*f).map_or("", String::as_str));
+                    if *desc { o.reverse() } else { o }
+                })
+                .find(|o| !o.is_eq())
+                .unwrap_or(std::cmp::Ordering::Equal)
+        });
+        s.merge.rows = rows;
+        s.merge.all_rows = Some(all);
+        s.merge.query = json!({"filter": v.get("filter").cloned().unwrap_or(Value::Null), "sort": v.get("sort").cloned().unwrap_or(Value::Null)});
+    }
+    s.merge.record = 0;
+    refresh(s);
+    let of = s.merge.all_rows.as_ref().map_or(s.merge.rows.len(), Vec::len);
+    Ok(json!({"records": s.merge.rows.len(), "of": of, "query": s.merge.query}))
+}
+
+/// Most rows Insert Database puts in a table (the header row included).
+const MAX_DATABASE_ROWS: usize = 5000;
+/// Word's widest table.
+const MAX_DATABASE_COLS: usize = 63;
+
+/// Insert Database (Word's Database toolbar): a data source as a table at the caret.
+fn database(s: &mut Session, v: &Value) -> CmdResult {
+    let (all, _) = match read_source(v)? {
+        Ok(x) => x,
+        Err(names) => {
+            s.only_read();
+            return Ok(json!({"sheets": names, "chooseSheet": true}));
+        }
+    };
+    let headers = p::bool(v, "headers").unwrap_or(true);
+    let (fields, records) = header_split(all, headers)?;
+    // What the source holds, for the dialog to offer.
+    if p::bool(v, "preview") == Some(true) {
+        s.only_read();
+        return Ok(json!({"fields": fields, "records": records.len()}));
+    }
+    let cols: Vec<usize> = match v.get("fields").and_then(Value::as_array) {
+        Some(names) => names
+            .iter()
+            .map(|n| {
+                let n = n.as_str().unwrap_or("");
+                fields.iter().position(|f| f == n || f.eq_ignore_ascii_case(n)).ok_or_else(|| CmdError::Params(format!("no field `{n}`")))
+            })
+            .collect::<Result<_, _>>()?,
+        None => (0..fields.len()).collect(),
+    };
+    if cols.is_empty() {
+        return Err(CmdError::Params("choose at least one field".into()));
+    }
+    if cols.len() > MAX_DATABASE_COLS {
+        return Err(CmdError::Params(format!("a table has at most {MAX_DATABASE_COLS} columns; choose fewer fields")));
+    }
+    let n = records.len();
+    let from = (p::u64(v, "from").unwrap_or(1).max(1) as usize).saturating_sub(1).min(n);
+    let to = (p::u64(v, "to").unwrap_or(n as u64) as usize).clamp(from, n);
+    let mut data: Vec<Vec<String>> = Vec::new();
+    if headers {
+        data.push(cols.iter().map(|&c| fields[c].clone()).collect());
+    }
+    data.extend(records[from..to].iter().map(|r| cols.iter().map(|&c| r.get(c).cloned().unwrap_or_default()).collect()));
+    data.truncate(MAX_DATABASE_ROWS);
+    if data.is_empty() {
+        return Err(CmdError::Params("no records in that range".into()));
+    }
+    let width = super::page::sect(s).text_width();
+    let mut t = Table::new(data.len(), cols.len(), width);
+    let props = s.typing_props();
+    for (r, row) in data.iter().enumerate() {
+        for (c, text) in row.iter().enumerate() {
+            if let Some(cell) = t.rows.get_mut(r).and_then(|x| x.cells.get_mut(c)) {
+                cell.blocks = vec![para_block(Paragraph::with_text(text, props.clone()))];
+            }
+        }
+    }
+    if headers && let Some(r) = t.rows.first_mut() {
+        r.props.header = true;
+    }
+    let story = s.sel.focus.story;
+    let path = super::insert::insert_block_at_caret(s, Block::Table(t))?;
+    let mut first = path.0.clone();
+    first.extend([0, 0, 0]);
+    s.sel = Selection::caret(Pos { story, path: doc4me_doc::Path(first), off: 0 });
+    Ok(json!({"rows": data.len(), "cols": cols.len()}))
 }
 
 /// A file's extension, lower case.
@@ -1131,6 +1322,88 @@ mod tests {
         let t = s.doc.plain_text(StoryRef::Body);
         assert!(t.contains("See you in London") && t.contains("Dear Alan Turing,"), "{t}");
         assert_eq!(s.layout().pages.len(), 2);
+    }
+
+    /// dlg-136: Filter and Sort keeps the records the rules allow, in the sort order, and the
+    /// merge follows; Clear All brings the whole list back.
+    #[test]
+    fn filter_and_sort_recipients() {
+        let mut s = Session::new(Document::new());
+        let csv = "Name,City,Age\nAda,London,36\nAlan,Wilmslow,41\nGrace,New York,85\nKath,london,9\nBo,,100";
+        s.run("mailings.recipients", &json!({"csv": csv})).unwrap();
+        s.run("mailings.insertField", &json!({"field": "Name"})).unwrap();
+        // City is london (any case) and Age is 10 or more, or City is blank; oldest first.
+        let r = s
+            .run(
+                "mailings.query",
+                &json!({"filter": [
+                    {"field": "City", "op": "eq", "value": "LONDON"},
+                    {"field": "Age", "op": "ge", "value": "10"},
+                    {"field": "City", "op": "blank", "or": true},
+                ], "sort": [{"field": "Age", "descending": true}]}),
+            )
+            .unwrap();
+        assert_eq!((r["records"].as_u64(), r["of"].as_u64()), (Some(2), Some(5)));
+        assert_eq!(s.merge.rows.iter().map(|r| r[0].as_str()).collect::<Vec<_>>(), ["Bo", "Ada"], "100 sorts above 36 as a number");
+        let merged = s.run("mailings.finish", &json!({})).unwrap();
+        assert_eq!(merged["records"], 2);
+        s.run("edit.undo", &json!({})).ok();
+        // Contains, and a sort on text.
+        s.run("mailings.query", &json!({"filter": [{"field": "Name", "op": "contains", "value": "a"}], "sort": [{"field": "Name"}]})).unwrap();
+        assert_eq!(s.merge.rows.iter().map(|r| r[0].as_str()).collect::<Vec<_>>(), ["Ada", "Alan", "Grace", "Kath"]);
+        // The query in effect, then Clear All.
+        assert_eq!(s.run("mailings.query", &json!({})).unwrap()["records"], 4);
+        let r = s.run("mailings.query", &json!({"clear": true})).unwrap();
+        assert_eq!((r["records"].as_u64(), r["of"].as_u64()), (Some(5), Some(5)));
+        assert_eq!(s.merge.rows[0][0], "Ada", "the list's own order again");
+        assert!(s.run("mailings.query", &json!({"filter": [{"field": "Email", "op": "eq"}]})).is_err());
+        assert!(s.run("mailings.query", &json!({"filter": [{"field": "Name", "op": "like"}]})).is_err());
+        // Editing the list ends the query and keeps every record.
+        s.run("mailings.query", &json!({"filter": [{"field": "Name", "op": "eq", "value": "Ada"}]})).unwrap();
+        let listed = s.run("mailings.editRecipients", &json!({})).unwrap();
+        assert_eq!(listed["rows"].as_array().map(Vec::len), Some(5));
+    }
+
+    /// dlg-092: Insert Database puts a data source in a table: the chosen fields and records, the
+    /// field names in a header row; the mail merge recipients stay as they were.
+    #[test]
+    fn insert_database_makes_a_table_of_the_data() {
+        let mut s = Session::new(Document::from_text("Guests:"));
+        s.run("caret.docEnd", &json!({})).unwrap();
+        let csv = "Name,City,Phone\nAda,London,1\nAlan,Wilmslow,2\nGrace,New York,3";
+        let r = s.run("insert.database", &json!({"csv": csv, "fields": ["City", "name"], "from": 2, "to": 3})).unwrap();
+        assert_eq!(r, json!({"rows": 3, "cols": 2}));
+        let t = s.doc.body.iter().find_map(|b| match &**b {
+            Block::Table(t) => Some(t.clone()),
+            _ => None,
+        });
+        let t = t.expect("a table");
+        let text = |r: usize, c: usize| {
+            t.rows[r].cells[c]
+                .blocks
+                .iter()
+                .map(|b| match &**b {
+                    Block::Para(p) => p.text.clone(),
+                    _ => String::new(),
+                })
+                .collect::<String>()
+        };
+        assert_eq!((text(0, 0), text(0, 1)), ("City".to_string(), "Name".to_string()));
+        assert_eq!((text(1, 0), text(1, 1), text(2, 0)), ("Wilmslow".to_string(), "Alan".to_string(), "New York".to_string()));
+        assert!(t.rows[0].props.header);
+        assert!(s.merge.rows.is_empty(), "not a recipient list");
+        assert!(s.run("insert.database", &json!({"csv": csv, "fields": ["Email"]})).is_err());
+        let before = s.doc.clone();
+        assert_eq!(
+            s.run("insert.database", &json!({"csv": csv, "preview": true})).unwrap(),
+            json!({"fields": ["Name", "City", "Phone"], "records": 3})
+        );
+        assert_eq!(s.doc, before, "a preview inserts nothing");
+        assert!(s.run("insert.database", &json!({"csv": ""})).is_err());
+        // No header row: every row is a record.
+        let r = s.run("insert.database", &json!({"csv": "1,2\n3,4", "headers": false})).unwrap();
+        assert_eq!(r, json!({"rows": 2, "cols": 2}));
+        s.run("edit.undo", &json!({})).unwrap();
     }
 
     /// ks-211: Alt+Shift+M merges to the printer: the merged letters, then the Print page.

@@ -2711,3 +2711,44 @@ spacing	Normal	Normalne
 	Print Documents…	Drukuj dokumenty…
 	AutoComplete	Autouzupełnianie
 	{name} (Press ENTER to Insert)	{name} (Naciśnij klawisz ENTER, aby wstawić)
+	Recognized Functions	Rozpoznawane funkcje
+	Recognized Functions…	Rozpoznawane funkcje…
+	Restore Defaults	Przywróć domyślne
+	Insert Database	Wstaw bazę danych
+	Insert Database…	Wstaw bazę danych…
+	Get Data…	Pobierz dane…
+	Data source:	Źródło danych:
+	Fields to insert:	Pola do wstawienia:
+	Insert Data	Wstaw dane
+	All records	Wszystkie rekordy
+	{n} records	Rekordy: {n}
+	Filter and Sort	Filtruj i sortuj
+	Filter and Sort…	Filtruj i sortuj…
+	Filter Records	Filtruj rekordy
+	Sort Records	Sortuj rekordy
+	Comparison	Porównanie
+	Compare to	Porównaj z
+	And	I
+	Or	Lub
+	Equal to	Równe
+	Not equal to	Różne od
+	Less than	Mniejsze niż
+	Greater than	Większe niż
+	Less than or equal	Mniejsze lub równe
+	Greater than or equal	Większe lub równe
+	Is blank	Jest puste
+	Is not blank	Nie jest puste
+	Contains	Zawiera
+	Does not contain	Nie zawiera
+	Sort by	Sortuj według
+	Then by	Następnie według
+	Ascending	Rosnąco
+	Descending	Malejąco
+	Table AutoFormat	Autoformatowanie tabeli
+	Table AutoFormat…	Autoformatowanie tabeli…
+	Table styles:	Style tabel:
+	Apply special formats to	Zastosuj formaty specjalne do
+	Sheet:	Arkusz:
+	{n} of {of} recipients	{n} z {of} adresatów
+	New Folder	Nowy folder
+	{name} can't be a folder's name.	{name} nie może być nazwą folderu.

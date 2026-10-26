@@ -443,6 +443,7 @@ pub enum Dialog {
     /// Drawing Grid, Compatibility Options, Font Substitution, Insert Rows / Cells, Number and
     /// Placeholder Name ([`crate::dialogs_misc`]).
     Misc(Box<crate::dialogs_misc::MiscDialog>),
+    Data(Box<crate::dialogs_data::DataDialog>),
     /// Word's List Commands: every command, or those with a shortcut.
     ListCommands {
         all: bool,
@@ -908,6 +909,7 @@ impl Dialog {
             Dialog::CustomizeKeyboard { .. } => "customizeKeyboard",
             Dialog::ListCommands { .. } => "listCommands",
             Dialog::Misc(d) => d.name(),
+            Dialog::Data(d) => d.name(),
             Dialog::CustomizeRibbon { .. } => "customizeRibbon",
             Dialog::Control { .. } => "controlProperties",
             Dialog::Enclose { .. } => "enclose",
@@ -947,6 +949,9 @@ impl Dialog {
         }
         if let Some(d) = crate::dialogs_misc::open(name, app) {
             return Some(Dialog::Misc(Box::new(d)));
+        }
+        if let Some(d) = crate::dialogs_data::open(name, app) {
+            return Some(Dialog::Data(Box::new(d)));
         }
         if let Some(d) = crate::dialogs_object::open(name, app) {
             return Some(Dialog::Object(Box::new(d)));
@@ -1376,6 +1381,7 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context) {
         Dialog::CustomizeKeyboard { .. } => "Customize Keyboard",
         Dialog::ListCommands { .. } => "List Commands",
         Dialog::Misc(d) => d.title(),
+        Dialog::Data(d) => d.title(),
         Dialog::CustomizeRibbon { .. } => "Customize Ribbon",
         Dialog::Control { .. } => "Content Control Properties",
         Dialog::Enclose { .. } => "Enclose Characters",
@@ -2736,6 +2742,7 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         Dialog::Review(d) => crate::dialogs_review::body(app, ui, d),
         Dialog::CustomizeKeyboard { form } => crate::dialogs_keyboard::customize_keyboard(app, ui, form),
         Dialog::Misc(d) => crate::dialogs_misc::body(app, ui, d),
+        Dialog::Data(d) => crate::dialogs_data::body(app, ui, d),
         Dialog::ListCommands { all } => {
             ui.radio_value(all, false, tl!("Current keyboard settings"));
             ui.radio_value(all, true, tl!("All Commands"));
@@ -2919,9 +2926,22 @@ fn recipient_list(app: &mut WordApp, ui: &mut Ui, fields: &mut Vec<String>, rows
     let table_w = fields.len() as f32 * (CELL_W + X_W + 2.0 * gap) + X_W + 2.0 * gap;
     ui.set_min_width(table_w.clamp(340.0, 720.0));
     ui.label(tl!("Type the recipients, or load them from a file."));
-    if ui.button(tl!("Use an Existing List…")).clicked() {
+    let (existing, refine) = ui
+        .horizontal(|ui| {
+            // Refine recipient list: Filter and Sort (it shows in place of this dialog).
+            (
+                ui.button(tl!("Use an Existing List…")).clicked(),
+                ui.add_enabled(!app.session.merge.headers.is_empty(), egui::Button::new(tl!("Filter and Sort…"))).clicked(),
+            )
+        })
+        .inner;
+    if existing {
         // The picker takes over; the list it loads replaces this one.
         let _ = app.run("ui.openRecipientList", json!({}));
+        return true;
+    }
+    if refine {
+        let _ = app.run("ui.dialog", json!({"name": "filterSort"}));
         return true;
     }
     ui.add_space(6.0);

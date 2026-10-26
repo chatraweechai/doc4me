@@ -2720,3 +2720,44 @@ spacing	Normal	Нормално
 	Print Documents…	Одштампај документе…
 	AutoComplete	Аутоматско довршавање
 	{name} (Press ENTER to Insert)	{name} (Притисните ENTER да бисте уметнули)
+	Recognized Functions	Препознате функције
+	Recognized Functions…	Препознате функције…
+	Restore Defaults	Врати подразумеване вредности
+	Insert Database	Уметни базу података
+	Insert Database…	Уметни базу података…
+	Get Data…	Преузми податке…
+	Data source:	Извор података:
+	Fields to insert:	Поља за уметање:
+	Insert Data	Уметни податке
+	All records	Сви записи
+	{n} records	Записа: {n}
+	Filter and Sort	Филтрирање и сортирање
+	Filter and Sort…	Филтрирање и сортирање…
+	Filter Records	Филтрирај записе
+	Sort Records	Сортирај записе
+	Comparison	Поређење
+	Compare to	Упореди са
+	And	И
+	Or	Или
+	Equal to	Једнако
+	Not equal to	Није једнако
+	Less than	Мање од
+	Greater than	Веће од
+	Less than or equal	Мање или једнако
+	Greater than or equal	Веће или једнако
+	Is blank	Празно је
+	Is not blank	Није празно
+	Contains	Садржи
+	Does not contain	Не садржи
+	Sort by	Сортирај по
+	Then by	Затим по
+	Ascending	Растуће
+	Descending	Опадајуће
+	Table AutoFormat	Аутоматско обликовање табеле
+	Table AutoFormat…	Аутоматско обликовање табеле…
+	Table styles:	Стилови табеле:
+	Apply special formats to	Примени посебне формате на
+	Sheet:	Лист:
+	{n} of {of} recipients	{n} од {of} прималаца
+	New Folder	Нова фасцикла
+	{name} can't be a folder's name.	{name} не може бити име фасцикле.

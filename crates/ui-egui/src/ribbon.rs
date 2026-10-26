@@ -791,6 +791,7 @@ fn insert(app: &mut WordApp, ui: &mut Ui) {
             let drawing = app.canvas.table_tool == Some(crate::table_pen::TableTool::Draw);
             mi_check(ui, app, "Draw Table", drawing, "table.draw", json!({}));
             mi(ui, app, "Convert Text to Table…", "table.fromText", json!({}));
+            mi(ui, app, "Insert Database…", "ui.dialog", json!({"name": "insertDatabase"}));
             crate::ribbon_keys::sub_menu(ui, tl!("Quick Tables"), |ui| {
                 mi(ui, app, "Tabular List", "table.quick", json!({"kind": "tabular"}));
                 mi(ui, app, "Matrix", "table.quick", json!({"kind": "matrix"}));
@@ -2306,6 +2307,7 @@ fn table_design(app: &mut WordApp, ui: &mut Ui) {
             let can_delete = current == Some(false);
             menu_button(ui, app, "styles", Some("Styles"), "Table Styles", false, "table.style", |ui, app| {
                 mi(ui, app, "New Table Style…", "ui.dialog", json!({"name": "newTableStyle"}));
+                mi(ui, app, "Table AutoFormat…", "ui.dialog", json!({"name": "tableAutoFormat"}));
                 if ui.add_enabled(can_modify, egui::Button::new(tl!("Modify Table Style…")).min_size(vec2(200.0, 0.0))).clicked() {
                     let _ = app.run("ui.dialog", json!({"name": "modifyTableStyle"}));
                     ui.close();

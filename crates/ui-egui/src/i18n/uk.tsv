@@ -2718,3 +2718,44 @@ spacing	Normal	Звичайний
 	Print Documents…	Друк документів…
 	AutoComplete	Автозавершення
 	{name} (Press ENTER to Insert)	{name} (Натисніть клавішу ENTER, щоб вставити)
+	Recognized Functions	Розпізнавані функції
+	Recognized Functions…	Розпізнавані функції…
+	Restore Defaults	Відновити стандартні
+	Insert Database	Вставити базу даних
+	Insert Database…	Вставити базу даних…
+	Get Data…	Отримати дані…
+	Data source:	Джерело даних:
+	Fields to insert:	Поля для вставлення:
+	Insert Data	Вставити дані
+	All records	Усі записи
+	{n} records	Записів: {n}
+	Filter and Sort	Фільтр і сортування
+	Filter and Sort…	Фільтр і сортування…
+	Filter Records	Фільтрувати записи
+	Sort Records	Сортувати записи
+	Comparison	Порівняння
+	Compare to	Порівняти з
+	And	І
+	Or	Або
+	Equal to	Дорівнює
+	Not equal to	Не дорівнює
+	Less than	Менше ніж
+	Greater than	Більше ніж
+	Less than or equal	Менше або дорівнює
+	Greater than or equal	Більше або дорівнює
+	Is blank	Порожнє
+	Is not blank	Не порожнє
+	Contains	Містить
+	Does not contain	Не містить
+	Sort by	Сортувати за
+	Then by	Потім за
+	Ascending	За зростанням
+	Descending	За спаданням
+	Table AutoFormat	Автоформат таблиці
+	Table AutoFormat…	Автоформат таблиці…
+	Table styles:	Стилі таблиці:
+	Apply special formats to	Застосувати особливі формати до
+	Sheet:	Аркуш:
+	{n} of {of} recipients	{n} з {of} одержувачів
+	New Folder	Нова папка
+	{name} can't be a folder's name.	{name} не може бути назвою папки.

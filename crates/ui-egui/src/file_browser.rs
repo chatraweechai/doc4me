@@ -121,6 +121,8 @@ enum Note {
     None,
     NotFound(String),
     Replace(PathBuf),
+    /// New Folder couldn't make the folder: why.
+    Failed(String),
 }
 
 /// The open browser.
@@ -142,6 +144,8 @@ pub(crate) struct FileBrowser {
     selected: Option<PathBuf>,
     note: Note,
     focus_name: bool,
+    /// New Folder: the name being typed for the folder to make here.
+    new_folder: Option<String>,
 }
 
 impl FileBrowser {
@@ -170,6 +174,7 @@ impl FileBrowser {
             selected: None,
             note: Note::None,
             focus_name: true,
+            new_folder: None,
         };
         b.navigate(start);
         b
@@ -186,6 +191,18 @@ impl FileBrowser {
         self.dir = dir;
         self.selected = None;
         self.note = Note::None;
+    }
+
+    /// New Folder: make `name` in the folder shown and go into it (Word's Create New Folder).
+    pub(crate) fn create_folder(&mut self, name: &str) -> Result<(), String> {
+        let name = name.trim();
+        if name.is_empty() || name == "." || name == ".." || name.contains(['/', '\\']) {
+            return Err(crate::i18n::fmt(tl!("{name} can't be a folder's name."), &[("name", name)]));
+        }
+        let path = self.dir.join(name);
+        std::fs::create_dir(&path).map_err(|e| e.to_string())?;
+        self.navigate(path);
+        Ok(())
     }
 
     fn up(&mut self) {
@@ -345,6 +362,9 @@ fn body(ui: &mut Ui, b: &mut FileBrowser, t: &Tokens) -> Option<Option<PathBuf>>
         {
             b.navigate(h);
         }
+        if icon_button(ui, t, "folder", tl!("New Folder"), b.listing.is_ok()) {
+            b.new_folder = Some(String::new());
+        }
         let r = ui.add(crate::widgets::text_line(&mut b.location).desired_width(f32::INFINITY));
         if r.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter)) {
             location_done = true;
@@ -354,6 +374,32 @@ fn body(ui: &mut Ui, b: &mut FileBrowser, t: &Tokens) -> Option<Option<PathBuf>>
             }
         }
     });
+    // New Folder: its name, then Create (Enter) or Escape (which then leaves the browser open).
+    let mut escape_used = false;
+    if let Some(mut name) = b.new_folder.take() {
+        let mut keep = true;
+        ui.horizontal(|ui| {
+            let label = ui.label(tl!("Name:"));
+            let r = ui.add(crate::widgets::text_line(&mut name).desired_width(240.0)).labelled_by(label.id);
+            if name.is_empty() && !r.has_focus() {
+                r.request_focus();
+            }
+            let enter = r.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter));
+            if ui.add_enabled(!name.trim().is_empty(), egui::Button::new(tl!("Create"))).clicked() || (enter && !name.trim().is_empty()) {
+                match b.create_folder(&name) {
+                    Ok(()) => keep = false,
+                    Err(e) => b.note = Note::Failed(e),
+                }
+            }
+            escape_used = ui.input(|i| i.key_pressed(egui::Key::Escape));
+            if escape_used || ui.button(tl!("Cancel")).clicked() {
+                keep = false;
+            }
+        });
+        if keep {
+            b.new_folder = Some(name);
+        }
+    }
     ui.add_space(4.0);
     let mut pick = false;
     let mut go: Option<PathBuf> = None;
@@ -397,6 +443,7 @@ fn body(ui: &mut Ui, b: &mut FileBrowser, t: &Tokens) -> Option<Option<PathBuf>>
     }
     let message = match (&b.listing, &b.note) {
         (_, Note::NotFound(name)) => Some((crate::i18n::fmt(tl!("{name} wasn't found."), &[("name", name)]), t.red)),
+        (_, Note::Failed(why)) => Some((why.clone(), t.red)),
         (_, Note::Replace(p)) => {
             let name = p.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
             Some((crate::i18n::fmt(tl!("{name} already exists. Choose Save again to replace it."), &[("name", &name)]), t.red))
@@ -438,7 +485,7 @@ fn body(ui: &mut Ui, b: &mut FileBrowser, t: &Tokens) -> Option<Option<PathBuf>>
         b.navigate(b.dir.clone());
     }
     ui.add_space(8.0);
-    let mut cancel = ui.input(|i| i.key_pressed(egui::Key::Escape));
+    let mut cancel = !escape_used && ui.input(|i| i.key_pressed(egui::Key::Escape));
     let enter = !location_done && ui.input(|i| i.key_pressed(egui::Key::Enter));
     ui.horizontal(|ui| {
         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
@@ -488,6 +535,24 @@ mod tests {
 
     /// Folders come first, then the files of the chosen type (any case), each by name; hidden
     /// entries and other types are left out, and a big folder is cut off and says so.
+    /// dlg-184: New Folder makes a folder where the browser is and goes into it; a name with a
+    /// path in it, or one already there, is refused and nothing changes.
+    #[test]
+    fn new_folder_is_made_here_and_opened() {
+        let dir = scratch("new-folder");
+        let mut b = FileBrowser::new(FileDialogRequest::Save { name: "a.docx".into() }, AfterPick::OpenDocument, dir.clone(), false);
+        b.create_folder(" Drafts ").unwrap();
+        assert!(dir.join("Drafts").is_dir());
+        assert_eq!(b.dir, dir.join("Drafts"), "inside it");
+        b.up();
+        assert!(b.create_folder("Drafts").is_err(), "already there");
+        for bad in ["", "..", "a/b", "a\\b"] {
+            assert!(b.create_folder(bad).is_err(), "{bad:?}");
+        }
+        assert_eq!(std::fs::read_dir(&dir).unwrap().count(), 1);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
     #[test]
     fn listing_filters_sorts_and_caps() {
         let dir = scratch("list");

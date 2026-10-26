@@ -2705,3 +2705,44 @@ spacing	Normal	Normal
 	Print Documents…	Dokumente drucken…
 	AutoComplete	AutoVervollständigen
 	{name} (Press ENTER to Insert)	{name} (Zum Einfügen EINGABETASTE drücken)
+	Recognized Functions	Erkannte Funktionen
+	Recognized Functions…	Erkannte Funktionen…
+	Restore Defaults	Standard wiederherstellen
+	Insert Database	Datenbank einfügen
+	Insert Database…	Datenbank einfügen…
+	Get Data…	Daten abrufen…
+	Data source:	Datenquelle:
+	Fields to insert:	Einzufügende Felder:
+	Insert Data	Daten einfügen
+	All records	Alle Datensätze
+	{n} records	{n} Datensätze
+	Filter and Sort	Filtern und Sortieren
+	Filter and Sort…	Filtern und Sortieren…
+	Filter Records	Datensätze filtern
+	Sort Records	Datensätze sortieren
+	Comparison	Vergleich
+	Compare to	Vergleichen mit
+	And	Und
+	Or	Oder
+	Equal to	Gleich
+	Not equal to	Ungleich
+	Less than	Kleiner als
+	Greater than	Größer als
+	Less than or equal	Kleiner als oder gleich
+	Greater than or equal	Größer als oder gleich
+	Is blank	Ist leer
+	Is not blank	Ist nicht leer
+	Contains	Enthält
+	Does not contain	Enthält nicht
+	Sort by	Sortieren nach
+	Then by	Dann nach
+	Ascending	Aufsteigend
+	Descending	Absteigend
+	Table AutoFormat	Tabelle AutoFormat
+	Table AutoFormat…	Tabelle AutoFormat…
+	Table styles:	Tabellenformatvorlagen:
+	Apply special formats to	Sonderformate zuweisen
+	Sheet:	Blatt:
+	{n} of {of} recipients	{n} von {of} Empfängern
+	New Folder	Neuer Ordner
+	{name} can't be a folder's name.	{name} kann nicht der Name eines Ordners sein.
