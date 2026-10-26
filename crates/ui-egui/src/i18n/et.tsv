@@ -2639,3 +2639,21 @@ spacing	Normal	Tavaline
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Tippige allika sildi nimi. Allikale saate hiljem rohkem teavet lisada, kui seda redigeerite.
 	Grid Settings	Ruudustiku sätted
 	Add New Placeholder	Lisa uus kohatäide
+	Text wrapping:	Teksti mähkimine:
+	Around	Ümber
+	Positioning…	Paigutus…
+	Cell Options	Lahtri suvandid
+	Table Positioning	Tabeli paigutus
+	Cell margins	Lahtri veerised
+	Same as the whole table	Sama mis kogu tabelil
+	Wrap text	Murra tekst
+	Fit text	Sobita tekst
+	Text isn't squeezed to fit its cell yet.	Teksti ei suruta veel lahtrisse mahtuma.
+	Inside	Sees
+	Outside	Väljas
+	Margin	Veeris
+	Relative to:	Suhtes:
+	Distance from surrounding text	Kaugus ümbritsevast tekstist
+	Move with text	Liiguta koos tekstiga
+	Allow overlap	Luba kattumine
+	Remove Positioning	Eemalda paigutus

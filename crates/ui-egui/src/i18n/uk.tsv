@@ -2643,3 +2643,21 @@ spacing	Normal	Звичайний
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Введіть ім’я тегу джерела. Додаткові відомості можна додати пізніше, змінивши джерело.
 	Grid Settings	Параметри сітки
 	Add New Placeholder	Додати новий заповнювач
+	Text wrapping:	Обтікання текстом:
+	Around	Навколо
+	Positioning…	Розташування…
+	Cell Options	Параметри клітинки
+	Table Positioning	Розташування таблиці
+	Cell margins	Поля клітинки
+	Same as the whole table	Як у всій таблиці
+	Wrap text	Переносити текст
+	Fit text	Вписати текст
+	Text isn't squeezed to fit its cell yet.	Текст поки не стискається, щоб уміститися в клітинці.
+	Inside	Усередині
+	Outside	Ззовні
+	Margin	Поле
+	Relative to:	Відносно:
+	Distance from surrounding text	Відстань до навколишнього тексту
+	Move with text	Переміщати з текстом
+	Allow overlap	Дозволити перекриття
+	Remove Positioning	Скасувати розташування

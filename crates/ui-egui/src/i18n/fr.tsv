@@ -2628,3 +2628,21 @@ spacing	Normal	Normal
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Tapez le nom de balise de la source. Vous pourrez ajouter des informations à cette source plus tard en la modifiant.
 	Grid Settings	Paramètres de la grille
 	Add New Placeholder	Ajouter un nouvel espace réservé
+	Text wrapping:	Habillage :
+	Around	Autour
+	Positioning…	Positionnement…
+	Cell Options	Options de cellule
+	Table Positioning	Positionnement du tableau
+	Cell margins	Marges de cellule
+	Same as the whole table	Identiques à l’ensemble du tableau
+	Wrap text	Renvoyer à la ligne
+	Fit text	Ajuster le texte
+	Text isn't squeezed to fit its cell yet.	Le texte n’est pas encore resserré pour tenir dans sa cellule.
+	Inside	Intérieur
+	Outside	Extérieur
+	Margin	Marge
+	Relative to:	Par rapport à :
+	Distance from surrounding text	Distance du texte environnant
+	Move with text	Déplacer avec le texte
+	Allow overlap	Autoriser le chevauchement
+	Remove Positioning	Supprimer le positionnement

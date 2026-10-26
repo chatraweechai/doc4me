@@ -2659,3 +2659,21 @@ spacing	Normal	Обычный
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Введите имя тега источника. Дополнительные сведения можно добавить позже, изменив источник.
 	Grid Settings	Параметры сетки
 	Add New Placeholder	Добавить новый заполнитель
+	Text wrapping:	Обтекание текстом:
+	Around	Вокруг
+	Positioning…	Размещение…
+	Cell Options	Параметры ячейки
+	Table Positioning	Размещение таблицы
+	Cell margins	Поля ячейки
+	Same as the whole table	Как во всей таблице
+	Wrap text	Переносить текст
+	Fit text	Вписать текст
+	Text isn't squeezed to fit its cell yet.	Текст пока не сжимается, чтобы уместиться в ячейке.
+	Inside	Внутри
+	Outside	Снаружи
+	Margin	Поле
+	Relative to:	Относительно:
+	Distance from surrounding text	Расстояние до окружающего текста
+	Move with text	Перемещать с текстом
+	Allow overlap	Разрешить перекрытие
+	Remove Positioning	Отменить размещение

@@ -155,7 +155,7 @@ dlg-153	wdDialogShowRepairs	1381	(none)	-	registry
 dlg-154	wdDialogSourceManager	1920	(none)	references.sources	registry		
 dlg-155	wdDialogStyleManagement	1948	(none)	styles.manage	registry		
 dlg-156	wdDialogTableAutoFormat	563	(none)	-	registry		legacy
-dlg-157	wdDialogTableCellOptions	1081	(none)	-	registry		no per-cell Options (margins, wrap text)
+dlg-157	wdDialogTableCellOptions	1081	(none)	table.cellOptions	registry		Cell Options: margins or same as the whole table, Wrap text (Fit text not offered)
 dlg-158	wdDialogTableColumnWidth	143	(none)	table.properties	registry		
 dlg-159	wdDialogTableDeleteCells	133	(none)	table.deleteCells	registry		
 dlg-160	wdDialogTableFormatCell	612	(none)	table.properties	registry		
@@ -171,7 +171,7 @@ dlg-169	wdDialogTableSort	199	(none)	table.sort	registry
 dlg-170	wdDialogTableSplitCells	137	(none)	table.split	registry		
 dlg-171	wdDialogTableTableOptions	1080	(none)	table.cellMargins	registry		Table Options: default cell margins
 dlg-172	wdDialogTableToText	128	(none)	table.toText	registry		
-dlg-173	wdDialogTableWrapping	854	(none)	-	registry		Table Properties has no text wrapping
+dlg-173	wdDialogTableWrapping	854	(none)	table.positioning	registry		Table Positioning: position, relative to, distance from text, move with text, overlap
 dlg-174	wdDialogTCSCTranslator	1156	(none)	-	registry		Chinese conversion
 dlg-175	wdDialogTextToTable	127	(none)	table.fromText	registry		
 dlg-176	wdDialogToolsAcceptRejectChanges	506	(none)	review.acceptReject	registry		Accept or Reject Changes

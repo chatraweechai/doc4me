@@ -2636,3 +2636,21 @@ spacing	Normal	Normální
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Zadejte název značky zdroje. Další údaje můžete ke zdroji přidat později jeho úpravou.
 	Grid Settings	Nastavení mřížky
 	Add New Placeholder	Přidat nový zástupný symbol
+	Text wrapping:	Obtékání textu:
+	Around	Kolem
+	Positioning…	Umístění…
+	Cell Options	Možnosti buňky
+	Table Positioning	Umístění tabulky
+	Cell margins	Okraje buňky
+	Same as the whole table	Stejné jako celá tabulka
+	Wrap text	Zalomit text
+	Fit text	Přizpůsobit text
+	Text isn't squeezed to fit its cell yet.	Text se zatím nezužuje, aby se vešel do buňky.
+	Inside	Uvnitř
+	Outside	Vně
+	Margin	Okraj
+	Relative to:	Vzhledem k:
+	Distance from surrounding text	Vzdálenost od okolního textu
+	Move with text	Přesunout s textem
+	Allow overlap	Povolit překrývání
+	Remove Positioning	Odebrat umístění

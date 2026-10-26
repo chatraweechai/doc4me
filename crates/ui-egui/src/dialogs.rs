@@ -490,6 +490,8 @@ pub struct TableForm {
     pub indent: f32,
     /// Table direction: right to left (`w:bidiVisual`).
     pub rtl: bool,
+    /// Text wrapping Around: a floating table (`w:tblpPr`).
+    pub wrap_around: bool,
     pub row_height_on: bool,
     pub row_height: f32,
     pub row_exact: bool,
@@ -526,6 +528,7 @@ impl TableForm {
             .into(),
             indent: fin(t.props.indent.unwrap_or(0.0)) / k,
             rtl: t.props.bidi_visual,
+            wrap_around: t.props.float.is_some(),
             row_height_on: row.height.is_some() && row.height_rule != HeightRule::Auto,
             row_height: fin(row.height.unwrap_or(18.0)) / k,
             row_exact: row.height_rule == HeightRule::Exact,
@@ -2033,15 +2036,22 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             ok || cancel
         }
         Dialog::TableProperties { form, basis } => {
-            table_properties(ui, form);
+            let sub = table_properties(ui, form);
             let (ok, cancel) = buttons(ui, tl!("OK"));
-            if ok {
+            if ok || sub.is_some() {
                 let changes = form.changes(basis);
                 if changes.as_object().is_some_and(|m| !m.is_empty()) {
                     let _ = app.run("table.properties", changes);
                 }
+                if form.wrap_around != basis.wrap_around {
+                    let _ = app.run("table.positioning", json!({"around": form.wrap_around}));
+                }
             }
-            ok || cancel
+            // Positioning… and Options… keep what was set here and move on to their dialogs.
+            if let Some(name) = sub {
+                app.dialog = Dialog::open(name, app);
+            }
+            ok || cancel || sub.is_some()
         }
         Dialog::InsertTable { rows, cols } => {
             egui::Grid::new("it").num_columns(2).show(ui, |ui| {
@@ -2979,7 +2989,9 @@ fn recipient_list(app: &mut WordApp, ui: &mut Ui, fields: &mut Vec<String>, rows
 }
 
 /// The Table Properties dialog's fields: Table, Row, Column and Cell sections.
-fn table_properties(ui: &mut Ui, f: &mut TableForm) {
+/// Draws Table Properties; returns the dialog Positioning… or Options… opens, if one was clicked.
+fn table_properties(ui: &mut Ui, f: &mut TableForm) -> Option<&'static str> {
+    let mut sub = None;
     let unit = crate::options::unit();
     fn len(v: &mut f32, lo: f32, unit: doc4me_geom::Unit) -> egui::DragValue<'_> {
         egui::DragValue::new(v).speed(0.01).range(lo..=22.0).clamp_existing_to_range(false).suffix(unit.suffix()).max_decimals(2)
@@ -3010,6 +3022,15 @@ fn table_properties(ui: &mut Ui, f: &mut TableForm) {
         ui.horizontal(|ui| {
             ui.radio_value(&mut f.rtl, false, tl!("Left-to-right"));
             ui.radio_value(&mut f.rtl, true, tl!("Right-to-left"));
+        });
+        ui.end_row();
+        ui.label(tl!("Text wrapping:"));
+        ui.horizontal(|ui| {
+            ui.radio_value(&mut f.wrap_around, false, tl!("None"));
+            ui.radio_value(&mut f.wrap_around, true, tl!("Around"));
+            if ui.add_enabled(f.wrap_around, egui::Button::new(tl!("Positioning…"))).clicked() {
+                sub = Some("tablePositioning");
+            }
         });
         ui.end_row();
     });
@@ -3048,6 +3069,10 @@ fn table_properties(ui: &mut Ui, f: &mut TableForm) {
         });
         ui.end_row();
     });
+    if ui.button(tl!("Options…")).clicked() {
+        sub = Some("cellOptions");
+    }
+    sub
 }
 
 /// The Paragraph dialog's OK. `align`, `left` and `right` are as seen on the page; `flags` are

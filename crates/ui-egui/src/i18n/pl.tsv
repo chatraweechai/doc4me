@@ -2636,3 +2636,21 @@ spacing	Normal	Normalne
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Wpisz nazwę tagu źródła. Więcej informacji możesz dodać później, edytując źródło.
 	Grid Settings	Ustawienia siatki
 	Add New Placeholder	Dodaj nowy symbol zastępczy
+	Text wrapping:	Zawijanie tekstu:
+	Around	Wokół
+	Positioning…	Położenie…
+	Cell Options	Opcje komórki
+	Table Positioning	Położenie tabeli
+	Cell margins	Marginesy komórki
+	Same as the whole table	Takie same jak w całej tabeli
+	Wrap text	Zawijaj tekst
+	Fit text	Dopasuj tekst
+	Text isn't squeezed to fit its cell yet.	Tekst nie jest jeszcze ściskany, by zmieścił się w komórce.
+	Inside	Wewnątrz
+	Outside	Na zewnątrz
+	Margin	Margines
+	Relative to:	Względem:
+	Distance from surrounding text	Odległość od otaczającego tekstu
+	Move with text	Przenieś z tekstem
+	Allow overlap	Zezwalaj na nakładanie
+	Remove Positioning	Usuń położenie

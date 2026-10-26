@@ -1794,6 +1794,9 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "table.insertCells" if !has("shift") => Some("insertCells"),
         "insert.number" if !has("number") => Some("insertNumber"),
         "references.placeholder" if !has("name") => Some("placeholderName"),
+        // Cell Options and Table Positioning.
+        "table.cellOptions" if params.as_object().is_none_or(|m| m.is_empty()) => Some("cellOptions"),
+        "table.positioning" if params.as_object().is_none_or(|m| m.is_empty()) => Some("tablePositioning"),
         // Modify Style without a style: the style of the paragraph at the caret.
         "styles.modify" if !has("style") => Some("modifyStyle"),
         _ => None,

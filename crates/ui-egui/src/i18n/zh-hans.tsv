@@ -2643,3 +2643,21 @@ spacing	Normal	标准
 	Type the tag name of the source. You can add more information to this source later by editing the source.	键入源的标记名称。以后可以通过编辑源来添加更多信息。
 	Grid Settings	网格设置
 	Add New Placeholder	添加新占位符
+	Text wrapping:	文字环绕：
+	Around	环绕
+	Positioning…	定位…
+	Cell Options	单元格选项
+	Table Positioning	表格定位
+	Cell margins	单元格边距
+	Same as the whole table	与整张表格相同
+	Wrap text	自动换行
+	Fit text	适应文字
+	Text isn't squeezed to fit its cell yet.	文字尚不能压缩以适应单元格。
+	Inside	内侧
+	Outside	外侧
+	Margin	页边距
+	Relative to:	相对于：
+	Distance from surrounding text	距正文
+	Move with text	随文字移动
+	Allow overlap	允许重叠
+	Remove Positioning	取消定位

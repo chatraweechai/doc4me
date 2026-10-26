@@ -198,6 +198,8 @@ pub fn measure_table_columns(doc: &doc4me_doc::Document, t: &Table) -> Vec<(f32,
                     }
                 }
             }
+            // A cell that doesn't wrap its text (`w:noWrap`) needs its lines whole.
+            let min = if cell.props.no_wrap { max } else { min };
             let (min, max) = ((min + side).min(1584.0), (max + side).min(1584.0));
             if span == 1 {
                 if let Some(c) = cols.get_mut(g) {

@@ -49,6 +49,20 @@ pub enum MiscDialog {
     Placeholder {
         name: String,
     },
+    /// Cell margins in the interface unit (top, bottom, left, right) or the table's; Wrap text.
+    CellOptions {
+        same: bool,
+        margins: [f32; 4],
+        wrap: bool,
+    },
+    /// Table Positioning: each axis's alignment (empty: the offset, in the interface unit) and
+    /// what it is measured from; the distances from the text around (left, top, right, bottom).
+    TablePositioning {
+        horizontal: (String, f32, String),
+        vertical: (String, f32, String),
+        dist: [f32; 4],
+        overlap: bool,
+    },
 }
 
 impl MiscDialog {
@@ -61,6 +75,8 @@ impl MiscDialog {
             MiscDialog::InsertCells { .. } => "insertCells",
             MiscDialog::InsertNumber { .. } => "insertNumber",
             MiscDialog::Placeholder { .. } => "placeholderName",
+            MiscDialog::CellOptions { .. } => "cellOptions",
+            MiscDialog::TablePositioning { .. } => "tablePositioning",
         }
     }
 
@@ -74,6 +90,8 @@ impl MiscDialog {
             MiscDialog::InsertCells { .. } => "Insert Cells",
             MiscDialog::InsertNumber { .. } => "Number",
             MiscDialog::Placeholder { .. } => "Placeholder Name",
+            MiscDialog::CellOptions { .. } => "Cell Options",
+            MiscDialog::TablePositioning { .. } => "Table Positioning",
         }
     }
 }
@@ -111,6 +129,32 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<MiscDialog> {
         "placeholderName" => {
             let n = (1..).find(|i| !app.session.doc.sources.iter().any(|s| s.tag == format!("Placeholder{i}"))).unwrap_or(1);
             MiscDialog::Placeholder { name: format!("Placeholder{n}") }
+        }
+        "cellOptions" => {
+            let v = app.session.run("table.cellOptions", &json!({})).ok()?;
+            let u = crate::options::unit().pt_per_unit();
+            let f = |k: &str| v.get(k).and_then(Value::as_f64).unwrap_or(0.0) as f32 / u;
+            MiscDialog::CellOptions {
+                same: v.get("sameAsTable").and_then(Value::as_bool).unwrap_or(true),
+                margins: [f("top"), f("bottom"), f("left"), f("right")],
+                wrap: v.get("wrap").and_then(Value::as_bool).unwrap_or(true),
+            }
+        }
+        "tablePositioning" => {
+            let v = app.session.run("table.positioning", &json!({})).ok()?;
+            let u = crate::options::unit().pt_per_unit();
+            let axis = |k: &str, from: &str| {
+                let at = v.get(k).cloned().unwrap_or_default();
+                let s = |k: &str| v.get(k).and_then(Value::as_str).unwrap_or("").to_string();
+                (at.as_str().unwrap_or("").to_string(), at.as_f64().unwrap_or(0.0) as f32 / u, s(from))
+            };
+            let d = |k: &str| v.get(k).and_then(Value::as_f64).unwrap_or(0.0) as f32 / u;
+            MiscDialog::TablePositioning {
+                horizontal: axis("horizontal", "horizontalFrom"),
+                vertical: axis("vertical", "verticalFrom"),
+                dist: [d("left"), d("top"), d("right"), d("bottom")],
+                overlap: v.get("overlap").and_then(Value::as_bool).unwrap_or(true),
+            }
         }
         _ => return None,
     })
@@ -261,7 +305,119 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut MiscDialog) -> bool {
             }
             cancel
         }
+        MiscDialog::CellOptions { same, margins, wrap } => {
+            heading(ui, "Cell margins");
+            ui.checkbox(same, tl!("Same as the whole table"));
+            egui::Grid::new("cellopt").num_columns(4).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
+                let [top, bottom, left, right] = margins;
+                for (i, (label, v)) in [("Top:", top), ("Left:", left), ("Bottom:", bottom), ("Right:", right)].into_iter().enumerate() {
+                    ui.add_enabled(!*same, egui::Label::new(tl!(label)));
+                    ui.add_enabled(!*same, length(v, 0.0, 144.0));
+                    if i % 2 == 1 {
+                        ui.end_row();
+                    }
+                }
+            });
+            heading(ui, "Options");
+            ui.checkbox(wrap, tl!("Wrap text"));
+            ui.add_enabled_ui(false, |ui| ui.checkbox(&mut false, tl!("Fit text")))
+                .inner
+                .on_disabled_hover_text(tl!("Text isn't squeezed to fit its cell yet."));
+            let (ok, cancel) = buttons(ui, true);
+            if ok {
+                let u = crate::options::unit().pt_per_unit();
+                let [top, bottom, left, right] = margins.map(|m| m * u);
+                let p = if *same {
+                    json!({"sameAsTable": true, "wrap": *wrap})
+                } else {
+                    json!({"sameAsTable": false, "top": top, "bottom": bottom, "left": left, "right": right, "wrap": *wrap})
+                };
+                return run(app, "table.cellOptions", p);
+            }
+            cancel
+        }
+        MiscDialog::TablePositioning { horizontal, vertical, dist, overlap } => {
+            let place = |a: &(String, f32, String)| if a.0.is_empty() { json!(a.1 * crate::options::unit().pt_per_unit()) } else { json!(a.0) };
+            heading(ui, "Horizontal");
+            egui::Grid::new("tpos_h").num_columns(5).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
+                let aligns = [("left", "Left"), ("right", "Right"), ("center", "Center"), ("inside", "Inside"), ("outside", "Outside")];
+                axis(ui, "tpos_h", horizontal, &aligns, &[("margin", "Margin"), ("page", "Page"), ("column", "Column")]);
+            });
+            heading(ui, "Vertical");
+            egui::Grid::new("tpos_v").num_columns(5).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
+                let aligns = [("top", "Top"), ("bottom", "Bottom"), ("center", "Center"), ("inside", "Inside"), ("outside", "Outside")];
+                axis(ui, "tpos_v", vertical, &aligns, &[("margin", "Margin"), ("page", "Page"), ("paragraph", "Paragraph")]);
+            });
+            heading(ui, "Distance from surrounding text");
+            egui::Grid::new("tpos_d").num_columns(4).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
+                let [left, top, right, bottom] = dist;
+                for (i, (label, v)) in [("Top:", top), ("Left:", left), ("Bottom:", bottom), ("Right:", right)].into_iter().enumerate() {
+                    ui.label(tl!(label));
+                    ui.add(length(v, 0.0, 1584.0));
+                    if i % 2 == 1 {
+                        ui.end_row();
+                    }
+                }
+            });
+            heading(ui, "Options");
+            // Move with text: measured from the paragraph the table stands in.
+            let mut moves = vertical.2 == "paragraph";
+            if ui.checkbox(&mut moves, tl!("Move with text")).changed() {
+                vertical.2 = if moves { "paragraph" } else { "margin" }.into();
+            }
+            ui.checkbox(overlap, tl!("Allow overlap"));
+            let mut remove = false;
+            ui.add_space(4.0);
+            if ui.button(tl!("Remove Positioning")).clicked() {
+                remove = true;
+            }
+            let (ok, cancel) = buttons(ui, true);
+            if remove {
+                return run(app, "table.positioning", json!({"around": false}));
+            }
+            if ok {
+                let u = crate::options::unit().pt_per_unit();
+                let [left, top, right, bottom] = dist.map(|d| d * u);
+                let p = json!({
+                    "around": true,
+                    "horizontal": place(horizontal), "horizontalFrom": horizontal.2,
+                    "vertical": place(vertical), "verticalFrom": vertical.2,
+                    "left": left, "top": top, "right": right, "bottom": bottom, "overlap": *overlap,
+                });
+                return run(app, "table.positioning", p);
+            }
+            cancel
+        }
     }
+}
+
+/// A length in the interface unit, 0–`hi` points.
+fn length(v: &mut f32, lo: f32, hi: f32) -> egui::DragValue<'_> {
+    let unit = crate::options::unit();
+    let k = unit.pt_per_unit();
+    egui::DragValue::new(v).speed(0.01).range(lo / k..=hi / k).clamp_existing_to_range(false).suffix(unit.suffix()).max_decimals(2)
+}
+
+/// One axis of Table Positioning: the position (an alignment or an offset) and what it's
+/// measured from.
+fn axis(ui: &mut Ui, id: &str, a: &mut (String, f32, String), aligns: &[(&str, &'static str)], froms: &[(&str, &'static str)]) {
+    let (at, off, from) = a;
+    let label = |k: &str, list: &[(&str, &'static str)]| -> &'static str { list.iter().find(|(v, _)| *v == k).map_or("Custom", |(_, l)| *l) };
+    ui.label(tl!("Position:"));
+    egui::ComboBox::from_id_salt((id, "at")).selected_text(tl!(label(at, aligns))).show_ui(ui, |ui| {
+        for (v, l) in aligns {
+            ui.selectable_value(at, v.to_string(), tl!(l));
+        }
+        ui.selectable_value(at, String::new(), tl!("Custom"));
+    });
+    ui.add_enabled(at.is_empty(), length(off, -1584.0, 1584.0));
+    ui.label(tl!("Relative to:"));
+    egui::ComboBox::from_id_salt((id, "from")).selected_text(tl!(label(from, froms))).show_ui(ui, |ui| {
+        for (v, l) in froms {
+            ui.selectable_value(from, v.to_string(), tl!(l));
+        }
+    });
+    ui.end_row();
 }
 
 fn heading(ui: &mut Ui, s: &str) {
@@ -300,6 +456,7 @@ fn run(app: &mut WordApp, id: &str, params: Value) -> bool {
 #[cfg(test)]
 mod tests {
     use doc4me_engine::Session;
+    use egui_kittest::kittest::Queryable;
     use serde_json::json;
 
     use super::*;
@@ -334,5 +491,60 @@ mod tests {
         assert_eq!(form(&mut a), MiscDialog::InsertRows { count: 1, below: false });
         a.run("table.insertCells", json!({})).unwrap();
         assert_eq!(form(&mut a), MiscDialog::InsertCells { shift: "down".into() });
+        a.run("table.cellOptions", json!({})).unwrap();
+        let MiscDialog::CellOptions { same, margins, wrap } = form(&mut a) else { panic!() };
+        assert!(same && wrap);
+        assert!((margins[2] * crate::options::unit().pt_per_unit() - 5.4).abs() < 1e-3, "{margins:?}");
+        a.run("table.positioning", json!({})).unwrap();
+        let MiscDialog::TablePositioning { horizontal, vertical, overlap, .. } = form(&mut a) else { panic!() };
+        assert_eq!((horizontal.2.as_str(), vertical.2.as_str(), overlap), ("column", "paragraph", true), "Word's defaults");
+    }
+
+    /// Table Properties: Text wrapping Around with Positioning… wraps the table and opens Table
+    /// Positioning, whose Remove Positioning puts it back in the text; the Cell tab's Options…
+    /// opens Cell Options, whose OK sets the cell's margins and Wrap text.
+    #[test]
+    fn table_properties_leads_to_positioning_and_cell_options() {
+        let mut a = WordApp::new(Session::new(doc4me_doc::Document::from_text("Kilns")), Services::default());
+        a.run("insert.table", json!({"rows": 2, "cols": 2})).unwrap();
+        a.run("table.properties", json!({})).unwrap();
+        if let Some(Dialog::TableProperties { form, .. }) = &mut a.dialog {
+            form.wrap_around = true;
+        }
+        let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            a,
+        );
+        h.run_steps(3);
+        h.get_by_label("Positioning…").click();
+        h.run_steps(3);
+        let float = |a: &WordApp| a.session.doc.body.iter().find_map(|b| b.as_table().map(|t| t.props.float)).flatten();
+        assert!(float(h.state()).is_some(), "Around wraps the table");
+        assert!(matches!(h.state().dialog.as_ref().map(Dialog::name), Some("tablePositioning")), "{:?}", h.state().dialog);
+        h.get_by_label("Remove Positioning").click();
+        h.run_steps(3);
+        assert!(float(h.state()).is_none() && h.state().dialog.is_none());
+        h.state_mut().run("table.properties", json!({})).unwrap();
+        h.run_steps(3);
+        h.get_by_label("Options…").click();
+        h.run_steps(3);
+        if let Some(Dialog::Misc(d)) = &mut h.state_mut().dialog
+            && let MiscDialog::CellOptions { same, wrap, .. } = &mut **d
+        {
+            (*same, *wrap) = (false, false);
+        } else {
+            panic!("no Cell Options: {:?}", h.state().dialog);
+        }
+        h.run_steps(2);
+        h.get_by_label("OK").click();
+        h.run_steps(3);
+        let a = h.state();
+        let (tp, r, c) = a.session.sel.focus.path.cell().unwrap();
+        let cell = &a.session.doc.table(a.session.sel.focus.story, &tp).unwrap().rows[r].cells[c];
+        assert_eq!((cell.props.margins, cell.props.no_wrap), (Some([0.0, 5.4, 0.0, 5.4]), true));
     }
 }

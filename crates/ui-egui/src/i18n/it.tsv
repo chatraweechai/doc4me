@@ -2638,3 +2638,21 @@ spacing	Normal	Normale
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Digitare il nome del tag della fonte. È possibile aggiungere altre informazioni alla fonte in seguito modificandola.
 	Grid Settings	Impostazioni griglia
 	Add New Placeholder	Aggiungi nuovo segnaposto
+	Text wrapping:	Disposizione testo:
+	Around	Intorno
+	Positioning…	Posizione…
+	Cell Options	Opzioni cella
+	Table Positioning	Posizione tabella
+	Cell margins	Margini cella
+	Same as the whole table	Uguali a quelli della tabella
+	Wrap text	Testo a capo
+	Fit text	Adatta testo
+	Text isn't squeezed to fit its cell yet.	Il testo non viene ancora compresso per entrare nella cella.
+	Inside	Interno
+	Outside	Esterno
+	Margin	Margine
+	Relative to:	Rispetto a:
+	Distance from surrounding text	Distanza dal testo circostante
+	Move with text	Sposta con il testo
+	Allow overlap	Consenti sovrapposizione
+	Remove Positioning	Rimuovi posizione

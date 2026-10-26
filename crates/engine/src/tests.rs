@@ -4907,3 +4907,50 @@ fn font_substitution_and_citation_placeholders() {
     assert!(t.contains("Rivera, A.") && !t.contains("Kiln1."), "{t}");
     assert_eq!(s.doc.sources.iter().filter(|x| x.tag == "Kiln1").count(), 1);
 }
+
+/// Cell Options (margins of the selected cells or the table's, Wrap text, which AutoFit to
+/// Contents honours) and Table Positioning (Around places the table, None puts it back), both
+/// kept in .docx.
+#[test]
+fn cell_options_and_table_positioning() {
+    use doc4me_doc::para::{Anchor, FloatAlign};
+    let mut s = s();
+    run(&mut s, "insert.table", json!({"rows": 1, "cols": 2}));
+    run(&mut s, "text.insert", json!({"text": "kiln ".repeat(60)}));
+    let table = |s: &Session| s.doc.body.iter().find_map(|b| b.as_table().cloned()).unwrap();
+    let got = run(&mut s, "table.cellOptions", json!({}));
+    assert_eq!(got, json!({"sameAsTable": true, "top": 0.0, "left": 5.4f32, "bottom": 0.0, "right": 5.4f32, "wrap": true}));
+    run(&mut s, "table.cellOptions", json!({"sameAsTable": false, "top": 3.0, "left": 200.0, "wrap": false}));
+    let c = table(&s).rows[0].cells[0].props.clone();
+    assert_eq!((c.margins, c.no_wrap), (Some([3.0, 144.0, 0.0, 5.4]), true), "clamped to 144 pt");
+    // Wrap text off: AutoFit to Contents keeps the cell's line whole, past the margin.
+    run(&mut s, "table.cellOptions", json!({"sameAsTable": true}));
+    assert_eq!(table(&s).rows[0].cells[0].props.margins, None, "same as the whole table");
+    run(&mut s, "table.autofit", json!({"mode": "contents"}));
+    assert!(table(&s).grid[0] > 600.0, "{:?}", table(&s).grid);
+    run(&mut s, "table.cellOptions", json!({"wrap": true}));
+    run(&mut s, "table.autofit", json!({"mode": "contents"}));
+    assert!(table(&s).grid[0] < 468.0, "{:?}", table(&s).grid);
+    // Positioning.
+    assert_eq!(run(&mut s, "table.positioning", json!({}))["around"], json!(false));
+    assert!(s.run("table.positioning", &json!({"horizontal": "top"})).is_err());
+    assert!(s.run("table.positioning", &json!({"verticalFrom": "column"})).is_err());
+    run(&mut s, "table.positioning", json!({"around": true}));
+    let f = table(&s).props.float.unwrap();
+    assert_eq!((f.h_rel, f.v_rel, f.dist, f.overlap), (Anchor::Column, Anchor::Paragraph, [9.0, 0.0, 9.0, 0.0], true));
+    run(
+        &mut s,
+        "table.positioning",
+        json!({"horizontal": "center", "horizontalFrom": "margin", "vertical": 36.0, "verticalFrom": "page", "top": 4.0, "overlap": false}),
+    );
+    let back = doc4me_docx::read(&doc4me_docx::write(&s.doc).unwrap()).unwrap();
+    let f = back.body.iter().find_map(|b| b.as_table().and_then(|t| t.props.float)).unwrap();
+    assert_eq!(
+        (f.h_align, f.h_rel, f.v_align, f.v_rel, f.y, f.dist[1], f.overlap),
+        (Some(FloatAlign::Center), Anchor::Margin, None, Anchor::Page, 36.0, 4.0, false)
+    );
+    let got = run(&mut s, "table.positioning", json!({}));
+    assert_eq!((&got["horizontal"], &got["vertical"], &got["verticalFrom"]), (&json!("center"), &json!(36.0), &json!("page")));
+    run(&mut s, "table.positioning", json!({"around": false}));
+    assert_eq!(table(&s).props.float, None);
+}

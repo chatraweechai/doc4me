@@ -2640,3 +2640,21 @@ spacing	Normal	ปกติ
 	Type the tag name of the source. You can add more information to this source later by editing the source.	พิมพ์ชื่อแท็กของแหล่งข้อมูล คุณเพิ่มข้อมูลของแหล่งข้อมูลนี้ได้ภายหลังโดยแก้ไขแหล่งข้อมูล
 	Grid Settings	การตั้งค่าเส้นตาราง
 	Add New Placeholder	เพิ่มตัวยึดตำแหน่งใหม่
+	Text wrapping:	การตัดข้อความ:
+	Around	รอบ
+	Positioning…	การจัดตำแหน่ง…
+	Cell Options	ตัวเลือกเซลล์
+	Table Positioning	การจัดตำแหน่งตาราง
+	Cell margins	ระยะขอบเซลล์
+	Same as the whole table	เหมือนกับทั้งตาราง
+	Wrap text	ตัดข้อความ
+	Fit text	จัดข้อความให้พอดี
+	Text isn't squeezed to fit its cell yet.	ยังบีบข้อความให้พอดีกับเซลล์ไม่ได้
+	Inside	ด้านใน
+	Outside	ด้านนอก
+	Margin	ระยะขอบ
+	Relative to:	สัมพันธ์กับ:
+	Distance from surrounding text	ระยะห่างจากข้อความโดยรอบ
+	Move with text	ย้ายไปพร้อมข้อความ
+	Allow overlap	อนุญาตให้ซ้อนทับ
+	Remove Positioning	เอาการจัดตำแหน่งออก

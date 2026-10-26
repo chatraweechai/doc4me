@@ -2643,3 +2643,21 @@ spacing	Normal	Normal
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Digite o nome da marca da fonte. Você pode adicionar mais informações a esta fonte depois, editando-a.
 	Grid Settings	Configurações de grade
 	Add New Placeholder	Adicionar novo espaço reservado
+	Text wrapping:	Quebra automática de texto:
+	Around	Ao redor
+	Positioning…	Posicionamento…
+	Cell Options	Opções de Célula
+	Table Positioning	Posicionamento da Tabela
+	Cell margins	Margens da célula
+	Same as the whole table	Iguais às da tabela inteira
+	Wrap text	Quebrar texto automaticamente
+	Fit text	Ajustar texto
+	Text isn't squeezed to fit its cell yet.	O texto ainda não é comprimido para caber na célula.
+	Inside	Interno
+	Outside	Externo
+	Margin	Margem
+	Relative to:	Em relação a:
+	Distance from surrounding text	Distância do texto ao redor
+	Move with text	Mover com o texto
+	Allow overlap	Permitir sobreposição
+	Remove Positioning	Remover Posicionamento

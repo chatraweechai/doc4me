@@ -2632,3 +2632,21 @@ spacing	Normal	標準
 	Type the tag name of the source. You can add more information to this source later by editing the source.	輸入來源的標籤名稱。您可以稍後編輯來源以新增更多資訊。
 	Grid Settings	格線設定
 	Add New Placeholder	新增預留位置
+	Text wrapping:	文繞圖：
+	Around	文繞圖
+	Positioning…	位置…
+	Cell Options	儲存格選項
+	Table Positioning	表格位置
+	Cell margins	儲存格邊界
+	Same as the whole table	與整個表格相同
+	Wrap text	自動換行
+	Fit text	文字適當地調整
+	Text isn't squeezed to fit its cell yet.	文字尚無法壓縮以符合儲存格。
+	Inside	內側
+	Outside	外側
+	Margin	邊界
+	Relative to:	相對於：
+	Distance from surrounding text	與周圍文字的距離
+	Move with text	隨文字移動
+	Allow overlap	允許重疊
+	Remove Positioning	移除位置

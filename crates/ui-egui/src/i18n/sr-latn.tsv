@@ -2641,3 +2641,21 @@ spacing	Normal	Normalno
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Otkucajte ime oznake izvora. Više podataka o izvoru možete da dodate kasnije uređivanjem izvora.
 	Grid Settings	Postavke mreže
 	Add New Placeholder	Dodaj novi čuvar mesta
+	Text wrapping:	Prelamanje teksta:
+	Around	Okolo
+	Positioning…	Pozicioniranje…
+	Cell Options	Opcije ćelije
+	Table Positioning	Pozicioniranje tabele
+	Cell margins	Margine ćelije
+	Same as the whole table	Isto kao za celu tabelu
+	Wrap text	Prelomi tekst
+	Fit text	Uklopi tekst
+	Text isn't squeezed to fit its cell yet.	Tekst se još ne sažima da stane u ćeliju.
+	Inside	Unutra
+	Outside	Spolja
+	Margin	Margina
+	Relative to:	U odnosu na:
+	Distance from surrounding text	Rastojanje od okolnog teksta
+	Move with text	Pomeri sa tekstom
+	Allow overlap	Dozvoli preklapanje
+	Remove Positioning	Ukloni pozicioniranje

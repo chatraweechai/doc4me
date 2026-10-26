@@ -2645,3 +2645,21 @@ spacing	Normal	Normal
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Escriba el nombre de etiqueta del origen. Puede agregar más información a este origen más adelante modificándolo.
 	Grid Settings	Configuración de cuadrícula
 	Add New Placeholder	Agregar nuevo marcador de posición
+	Text wrapping:	Ajuste del texto:
+	Around	Alrededor
+	Positioning…	Posición…
+	Cell Options	Opciones de celda
+	Table Positioning	Posición de la tabla
+	Cell margins	Márgenes de celda
+	Same as the whole table	Igual que toda la tabla
+	Wrap text	Ajustar texto
+	Fit text	Ajustar texto a la celda
+	Text isn't squeezed to fit its cell yet.	El texto aún no se comprime para caber en su celda.
+	Inside	Interior
+	Outside	Exterior
+	Margin	Margen
+	Relative to:	Con relación a:
+	Distance from surrounding text	Distancia del texto circundante
+	Move with text	Mover con el texto
+	Allow overlap	Permitir superposición
+	Remove Positioning	Quitar posición

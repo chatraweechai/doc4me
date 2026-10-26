@@ -2632,3 +2632,21 @@ spacing	Normal	Normál
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Írja be a forrás címkenevét. A forrás további adatait később, szerkesztéssel adhatja meg.
 	Grid Settings	Rácsbeállítások
 	Add New Placeholder	Új helyőrző hozzáadása
+	Text wrapping:	Szöveg körbefuttatása:
+	Around	Körbe
+	Positioning…	Elhelyezés…
+	Cell Options	Cellabeállítások
+	Table Positioning	Táblázat elhelyezése
+	Cell margins	Cellamargók
+	Same as the whole table	A teljes táblázattal azonos
+	Wrap text	Sortöréssel
+	Fit text	Szöveg illesztése
+	Text isn't squeezed to fit its cell yet.	A szöveg még nem sűrűsödik össze, hogy elférjen a cellában.
+	Inside	Belül
+	Outside	Kívül
+	Margin	Margó
+	Relative to:	Viszonyítási alap:
+	Distance from surrounding text	Távolság a környező szövegtől
+	Move with text	Mozgatás a szöveggel
+	Allow overlap	Átfedés engedélyezése
+	Remove Positioning	Elhelyezés eltávolítása

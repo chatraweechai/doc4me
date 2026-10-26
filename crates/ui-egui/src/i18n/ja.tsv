@@ -2631,3 +2631,21 @@ spacing	Normal	標準
 	Type the tag name of the source. You can add more information to this source later by editing the source.	資料文献のタグ名を入力してください。資料文献の情報は後で編集して追加できます。
 	Grid Settings	グリッドの設定
 	Add New Placeholder	新しいプレースホルダーの追加
+	Text wrapping:	文字列の折り返し:
+	Around	する
+	Positioning…	位置…
+	Cell Options	セルのオプション
+	Table Positioning	表の位置
+	Cell margins	セルの余白
+	Same as the whole table	表全体を同じ設定にする
+	Wrap text	文字列を折り返す
+	Fit text	文字列をセル幅に合わせる
+	Text isn't squeezed to fit its cell yet.	文字列をセルに収まるように詰める機能はまだありません。
+	Inside	内側
+	Outside	外側
+	Margin	余白
+	Relative to:	基準:
+	Distance from surrounding text	周囲の文字列との間隔
+	Move with text	文字列と一緒に移動する
+	Allow overlap	重なりを許可する
+	Remove Positioning	位置の解除

@@ -197,6 +197,14 @@ pub fn specs() -> Vec<CommandSpec> {
         t(CommandSpec::new("table.properties", "Properties", "Table Layout › Table", properties).params(
             r#"{"align"?: "left|center|right", "rtl"?: bool, "width"?: pt|null, "widthPct"?: percent, "indent"?: pt, "rowHeight"?: pt|null, "rowHeightRule"?: "atLeast|exact", "allowBreak"?: bool, "headerRow"?: bool, "columnWidth"?: pt, "cellWidth"?: pt|null, "valign"?: "top|center|bottom"} (row, column and cell settings apply to the caret's; without settings it returns the current ones)"#,
         )),
+        // Word's Cell Options (Table Properties › Cell › Options…) and Table Positioning (Table ›
+        // Text wrapping › Positioning…) dialogs.
+        t(CommandSpec::new("table.cellOptions", "Cell Options", "Table Layout › Table › Properties", cell_options).params(
+            r#"{"sameAsTable"?: bool (the table's cell margins), "top"?, "bottom"?, "left"?, "right"? (pt), "wrap"?: bool} (for the selected cells; without settings it returns the caret cell's)"#,
+        )),
+        t(CommandSpec::new("table.positioning", "Table Positioning", "Table Layout › Table › Properties", positioning).params(
+            r#"{"around"?: bool (false puts the table back in the text), "horizontal"?: "left|center|right|inside|outside"|pt, "horizontalFrom"?: "column|margin|page", "vertical"?: "top|center|bottom|inside|outside"|pt, "verticalFrom"?: "paragraph|margin|page", "top"?, "bottom"?, "left"?, "right"? (pt from the text around it), "overlap"?: bool} (without settings it returns the current ones)"#,
+        )),
         CommandSpec::new("table.fromText", "Convert Text to Table", "Insert › Tables", from_text).params(r#"{"separator"?: "tab|comma"}"#),
         CommandSpec::new("table.quick", "Quick Tables", "Insert › Tables", quick_table).params(r#"{"kind"?: "calendar|tabular|matrix"}"#),
     ]
@@ -373,6 +381,127 @@ fn properties(s: &mut Session, v: &Value) -> CmdResult {
             }
         }
     })
+}
+
+/// The table's default cell margins (top, left, bottom, right): its own, else its style's, else
+/// Word's.
+fn table_margins(s: &Session, t: &Table) -> [f32; 4] {
+    t.props
+        .cell_margins
+        .or_else(|| t.props.style.as_deref().and_then(|id| s.doc.styles.table_style(id)).and_then(|st| st.parts.cell_margins))
+        .unwrap_or([0.0, 5.4, 0.0, 5.4])
+}
+
+/// `table.cellOptions`: the selected cells' margins, or the table's ("Same as the whole table"),
+/// and Wrap text.
+fn cell_options(s: &mut Session, v: &Value) -> CmdResult {
+    let (tp, r, c) = cell(s)?;
+    let t = s.doc.table(s.sel.focus.story, &tp).ok_or_else(|| CmdError::Disabled("the cursor isn't in a table".into()))?;
+    let whole = table_margins(s, t);
+    if !["sameAsTable", "top", "bottom", "left", "right", "wrap"].iter().any(|k| v.get(*k).is_some()) {
+        let cp = t.rows.get(r).and_then(|x| x.cells.get(c)).map(|x| x.props.clone()).unwrap_or_default();
+        let m = cp.margins.unwrap_or(whole);
+        return Ok(json!({"sameAsTable": cp.margins.is_none(), "top": m[0], "left": m[1], "bottom": m[2], "right": m[3], "wrap": !cp.no_wrap}));
+    }
+    let same = p::bool(v, "sameAsTable");
+    let sides = ["top", "left", "bottom", "right"].map(|k| p::f32(v, k).map(|x| x.clamp(0.0, 144.0)));
+    let wrap = p::bool(v, "wrap");
+    with_cells(s, |cl| {
+        if same == Some(true) {
+            cl.props.margins = None;
+        } else if same == Some(false) || sides.iter().any(Option::is_some) {
+            let mut m = cl.props.margins.unwrap_or(whole);
+            for (x, side) in m.iter_mut().zip(sides) {
+                if let Some(side) = side {
+                    *x = side;
+                }
+            }
+            cl.props.margins = Some(m);
+        }
+        if let Some(w) = wrap {
+            cl.props.no_wrap = !w;
+        }
+    })
+}
+
+/// `table.positioning`: Text wrapping Around places the table (`w:tblpPr`) and the text after it
+/// wraps around it; None puts it back in the text.
+fn positioning(s: &mut Session, v: &Value) -> CmdResult {
+    use doc4me_doc::para::{Anchor, FloatAlign};
+    use doc4me_doc::props::TableFloat;
+    let (tp, _, _) = cell(s)?;
+    let story = s.sel.focus.story;
+    let current = s.doc.table(story, &tp).and_then(|t| t.props.float);
+    let keys = ["around", "horizontal", "horizontalFrom", "vertical", "verticalFrom", "top", "bottom", "left", "right", "overlap"];
+    // Word's defaults for a table wrapped from Table Properties: at the left of the column, where
+    // its paragraph is, 0.13" from the text at its sides, free to overlap.
+    let wrapped = TableFloat { h_rel: Anchor::Column, v_rel: Anchor::Paragraph, dist: [9.0, 0.0, 9.0, 0.0], overlap: true, ..Default::default() };
+    if !keys.iter().any(|k| v.get(*k).is_some()) {
+        let f = current.unwrap_or(wrapped);
+        let from = |a: Anchor, horizontal: bool| match a {
+            Anchor::Margin => "margin",
+            Anchor::Page => "page",
+            _ if horizontal => "column",
+            _ => "paragraph",
+        };
+        let at = |al: Option<FloatAlign>, off: f32, horizontal: bool| al.map_or(json!(off), |a| json!(a.ooxml(horizontal)));
+        let d = f.dist_from_text();
+        return Ok(json!({
+            "around": current.is_some(),
+            "horizontal": at(f.h_align, f.x, true), "horizontalFrom": from(f.h_rel, true),
+            "vertical": at(f.v_align, f.y, false), "verticalFrom": from(f.v_rel, false),
+            "left": d[0], "top": d[1], "right": d[2], "bottom": d[3], "overlap": f.overlap,
+        }));
+    }
+    if p::bool(v, "around") == Some(false) {
+        return with_table(s, |t| t.props.float = None);
+    }
+    let mut f = current.unwrap_or(wrapped);
+    // A position is an alignment or an offset (points).
+    let place = |k: &str, horizontal: bool| -> Result<Option<(Option<FloatAlign>, f32)>, CmdError> {
+        match v.get(k) {
+            None => Ok(None),
+            Some(Value::String(a)) => {
+                // `top` isn't a horizontal position, nor `left` a vertical one.
+                let al = FloatAlign::from_ooxml(a).filter(|al| al.ooxml(horizontal) == a);
+                al.map(|al| Some((Some(al), 0.0)))
+                    .ok_or_else(|| CmdError::Params(format!("unknown {} position `{a}`", if horizontal { "horizontal" } else { "vertical" })))
+            }
+            Some(x) => x
+                .as_f64()
+                .map(|n| n as f32)
+                .filter(|n| n.is_finite())
+                .map(|n| Some((None, n.clamp(-1584.0, 1584.0))))
+                .ok_or_else(|| CmdError::Params(format!("`{k}` is an alignment or a number of points"))),
+        }
+    };
+    let from = |k: &str, choices: &[(&str, Anchor)]| -> Result<Option<Anchor>, CmdError> {
+        match p::str(v, k) {
+            None => Ok(None),
+            Some(x) => choices.iter().find(|(n, _)| *n == x).map(|(_, a)| Some(*a)).ok_or_else(|| CmdError::Params(format!("unknown `{k}` `{x}`"))),
+        }
+    };
+    if let Some((al, x)) = place("horizontal", true)? {
+        (f.h_align, f.x) = (al, x);
+    }
+    if let Some((al, y)) = place("vertical", false)? {
+        (f.v_align, f.y) = (al, y);
+    }
+    if let Some(a) = from("horizontalFrom", &[("column", Anchor::Column), ("margin", Anchor::Margin), ("page", Anchor::Page)])? {
+        f.h_rel = a;
+    }
+    if let Some(a) = from("verticalFrom", &[("paragraph", Anchor::Paragraph), ("margin", Anchor::Margin), ("page", Anchor::Page)])? {
+        f.v_rel = a;
+    }
+    for (i, k) in ["left", "top", "right", "bottom"].into_iter().enumerate() {
+        if let Some(d) = p::f32(v, k) {
+            f.dist[i] = d.clamp(0.0, 1584.0);
+        }
+    }
+    if let Some(o) = p::bool(v, "overlap") {
+        f.overlap = o;
+    }
+    with_table(s, move |t| t.props.float = Some(f))
 }
 
 fn cell(s: &Session) -> Result<(Path, usize, usize), CmdError> {

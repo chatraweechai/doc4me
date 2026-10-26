@@ -2658,3 +2658,21 @@ spacing	Normal	Normal
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Kaynağın etiket adını yazın. Kaynağı düzenleyerek daha sonra başka bilgiler ekleyebilirsiniz.
 	Grid Settings	Kılavuz Ayarları
 	Add New Placeholder	Yeni Yer Tutucu Ekle
+	Text wrapping:	Metin kaydırma:
+	Around	Çevresinde
+	Positioning…	Konumlandırma…
+	Cell Options	Hücre Seçenekleri
+	Table Positioning	Tablo Konumlandırma
+	Cell margins	Hücre kenar boşlukları
+	Same as the whole table	Tüm tabloyla aynı
+	Wrap text	Metni kaydır
+	Fit text	Metni sığdır
+	Text isn't squeezed to fit its cell yet.	Metin henüz hücresine sığacak şekilde sıkıştırılmıyor.
+	Inside	İç
+	Outside	Dış
+	Margin	Kenar boşluğu
+	Relative to:	Göre:
+	Distance from surrounding text	Çevreleyen metinden uzaklık
+	Move with text	Metinle taşı
+	Allow overlap	Çakışmaya izin ver
+	Remove Positioning	Konumlandırmayı Kaldır

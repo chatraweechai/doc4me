@@ -2630,3 +2630,21 @@ spacing	Normal	Normal
 	Type the tag name of the source. You can add more information to this source later by editing the source.	Geben Sie den Tagnamen der Quelle ein. Weitere Angaben können Sie später durch Bearbeiten der Quelle hinzufügen.
 	Grid Settings	Rastereinstellungen
 	Add New Placeholder	Neuen Platzhalter hinzufügen
+	Text wrapping:	Textumbruch:
+	Around	Umgebend
+	Positioning…	Positionierung…
+	Cell Options	Zellenoptionen
+	Table Positioning	Tabellenpositionierung
+	Cell margins	Zellenbegrenzungen
+	Same as the whole table	Wie gesamte Tabelle
+	Wrap text	Zeilenumbruch
+	Fit text	Text anpassen
+	Text isn't squeezed to fit its cell yet.	Text wird noch nicht an seine Zelle angepasst.
+	Inside	Innen
+	Outside	Außen
+	Margin	Seitenrand
+	Relative to:	Gemessen von:
+	Distance from surrounding text	Abstand vom umgebenden Text
+	Move with text	Mit Text verschieben
+	Allow overlap	Überlappen zulassen
+	Remove Positioning	Positionierung entfernen
