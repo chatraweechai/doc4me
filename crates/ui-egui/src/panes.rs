@@ -1,6 +1,6 @@
 //! Side panes: Navigation (headings, pages, search results), Clipboard, Styles, Style Inspector,
 //! Accessibility and Alt Text (see `a11y_pane`), Restrict Editing ([`crate::dialogs_review`]), Comments,
-//! and the SmartArt Text Pane.
+//! the Reviewing Pane and the SmartArt Text Pane.
 
 use doc4me_doc::{Pos, StoryRef};
 use egui::{Stroke, Ui, vec2};
@@ -24,6 +24,14 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
                 }
                 crate::dialogs_smart_art::text_pane(app, ui);
             });
+    }
+    // Review › Reviewing Pane (Word's vertical one, on the left).
+    if app.session.view.track_changes_pane {
+        egui::Panel::left("reviewing_pane")
+            .default_size(270.0)
+            .resizable(true)
+            .frame(egui::Frame::NONE.fill(t.panel).inner_margin(10).stroke(Stroke::new(1.0, t.border)))
+            .show(ui, |ui| reviewing(app, ui));
     }
     if app.session.view.nav_pane {
         egui::Panel::left("nav_pane")
@@ -395,6 +403,104 @@ fn comments(app: &mut WordApp, ui: &mut Ui) {
     });
 }
 
+/// What a revision is, as the Reviewing Pane says it.
+fn change_kind(kind: &str) -> &'static str {
+    match kind {
+        "insert" => "Inserted",
+        "delete" => "Deleted",
+        "format" => "Formatted",
+        "moveFrom" => "Moved from",
+        "moveTo" => "Moved to",
+        _ => "Changed",
+    }
+}
+
+/// The Reviewing Pane: how many revisions there are, then each tracked change (Go to, Accept,
+/// Reject) and each comment (Go to), in document order.
+fn reviewing(app: &mut WordApp, ui: &mut Ui) {
+    if header(ui, "Revisions") {
+        let _ = app.run("view.reviewingPane", json!({"value": false}));
+        return;
+    }
+    let list = |v: Result<Value, doc4me_engine::CmdError>| v.ok().and_then(|v| v.as_array().cloned()).unwrap_or_default();
+    let changes = list(app.session.run("review.changes", &json!({})));
+    let comments = list(app.session.run("review.comments", &json!({})));
+    let count = |k: &str| changes.iter().filter(|c| c["kind"] == k).count();
+    let n = changes.len() + comments.len();
+    ui.label(egui::RichText::new(crate::i18n::fmt(tl!("{n} revisions"), &[("n", &n.to_string())])).font(semibold(12.5)));
+    ui.label(
+        egui::RichText::new(crate::i18n::fmt(
+            tl!("Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}"),
+            &[
+                ("ins", &count("insert").to_string()),
+                ("del", &count("delete").to_string()),
+                ("moves", &(count("moveFrom") + count("moveTo")).to_string()),
+                ("fmt", &count("format").to_string()),
+                ("comments", &comments.len().to_string()),
+            ],
+        ))
+        .small()
+        .weak(),
+    );
+    ui.separator();
+    if n == 0 {
+        ui.label(egui::RichText::new(tl!("No revisions")).weak());
+        return;
+    }
+    let t = Tokens::get(ui.ctx());
+    let clip = |s: &str| if s.chars().count() > 160 { format!("{}…", s.chars().take(160).collect::<String>()) } else { s.to_string() };
+    egui::ScrollArea::vertical().show(ui, |ui| {
+        for (i, c) in changes.iter().enumerate() {
+            egui::Frame::NONE.fill(t.input).stroke(Stroke::new(1.0, t.border)).corner_radius(6).inner_margin(8).show(ui, |ui| {
+                ui.set_width(ui.available_width());
+                ui.horizontal(|ui| {
+                    ui.label(egui::RichText::new(c["author"].as_str().unwrap_or("")).font(semibold(12.0)));
+                    ui.label(egui::RichText::new(tl!(change_kind(c["kind"].as_str().unwrap_or("")))).small().weak());
+                });
+                let text = c["description"]
+                    .as_str()
+                    .filter(|_| c["kind"] == "format")
+                    .map_or_else(|| clip(c["text"].as_str().unwrap_or("")), str::to_string);
+                ui.label(egui::RichText::new(text).font(regular(12.0)));
+                ui.horizontal(|ui| {
+                    let select = |app: &mut WordApp| {
+                        let _ = app.run("caret.set", json!({"pos": c["start"]}));
+                        let _ = app.run("caret.set", json!({"pos": c["end"], "extend": true}));
+                    };
+                    if ui.small_button(tl!("Go to")).clicked() {
+                        select(app);
+                    }
+                    if ui.push_id(("accept", i), |ui| ui.small_button(tl!("Accept"))).inner.clicked() {
+                        select(app);
+                        let _ = app.run("review.accept", json!({}));
+                    }
+                    if ui.push_id(("reject", i), |ui| ui.small_button(tl!("Reject"))).inner.clicked() {
+                        select(app);
+                        let _ = app.run("review.reject", json!({}));
+                    }
+                });
+            });
+            ui.add_space(6.0);
+        }
+        for c in &comments {
+            egui::Frame::NONE.fill(t.input).stroke(Stroke::new(1.0, t.border)).corner_radius(6).inner_margin(8).show(ui, |ui| {
+                ui.set_width(ui.available_width());
+                ui.horizontal(|ui| {
+                    ui.label(egui::RichText::new(c["author"].as_str().unwrap_or("")).font(semibold(12.0)));
+                    ui.label(egui::RichText::new(tl!("Comment")).small().weak());
+                });
+                ui.label(egui::RichText::new(clip(c["text"].as_str().unwrap_or(""))).font(regular(12.0)));
+                if ui.small_button(tl!("Go to")).clicked()
+                    && let Some(a) = c.get("anchor").filter(|a| !a.is_null())
+                {
+                    let _ = app.run("caret.set", json!({"pos": a}));
+                }
+            });
+            ui.add_space(6.0);
+        }
+    });
+}
+
 fn edit_key(id: u32) -> egui::Id {
     egui::Id::new(("comment_edit", id))
 }
@@ -745,5 +851,36 @@ mod navigation_tests {
             );
             output.drop_without_applying_deltas();
         }
+    }
+
+    /// Review › Reviewing Pane lists the tracked changes and comments; Accept there accepts one;
+    /// Alt+Shift+C closes the pane.
+    #[test]
+    fn reviewing_pane_lists_and_accepts_changes() {
+        use egui_kittest::kittest::Queryable;
+        let mut a = WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("Kept. ")), Default::default());
+        a.run("caret.docEnd", json!({})).unwrap();
+        a.run("review.trackChanges", json!({"value": true})).unwrap();
+        a.run("text.insert", json!({"text": "Tracked words"})).unwrap();
+        a.run("view.reviewingPane", json!({})).unwrap();
+        let mut h = egui_kittest::Harness::builder().with_size(vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            a,
+        );
+        h.run_steps(3);
+        h.get_by_label("1 revisions");
+        h.get_by_label("Tracked words");
+        h.get_by_label("Accept").click();
+        h.run_steps(3);
+        assert_eq!(h.state_mut().session.run("review.changes", &json!({})).unwrap(), json!([]));
+        h.get_by_label("No revisions");
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "Kept. Tracked words");
+        h.state_mut().run("view.closeReviewingPane", json!({})).unwrap();
+        h.run_steps(2);
+        assert!(h.query_by_label("No revisions").is_none(), "closed");
     }
 }

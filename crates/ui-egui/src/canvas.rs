@@ -1973,8 +1973,9 @@ fn mouse(app: &mut WordApp, ui: &Ui, resp: &egui::Response, rects: &[Rect], layo
         if mods.command
             && let Some(link) = link_under(app, layout, page, x, y, &pos)
         {
-            if let Some(name) = link.strip_prefix('#') {
-                let _ = app.run("edit.goto", json!({"bookmark": name}));
+            // A place in the document: Back (Alt+Left) returns from it.
+            if link.starts_with('#') {
+                let _ = app.run("web.follow", json!({"link": link}));
             } else if is_followable_link(&link) {
                 app.canvas.open_url = Some(link);
             } else {

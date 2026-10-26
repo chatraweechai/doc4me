@@ -2682,3 +2682,15 @@ spacing	Normal	Normál
 	Right only	Csak jobb oldalon
 	Transparency:	Átlátszóság:
 	relative to	viszonyítási alap
+	Open Hyperlink	Hivatkozás megnyitása
+	Back	Vissza
+	Field Click	Mezőre kattintás
+	Close Reviewing Pane	Korrektúrapanel bezárása
+	Maximize	Teljes méret
+	Restore Down	Előző méret
+	Exit	Kilépés
+	Revisions	Korrektúrák
+	{n} revisions	{n} korrektúra
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Beszúrások: {ins}, törlések: {del}, áthelyezések: {moves}, formázás: {fmt}, megjegyzések: {comments}
+	No revisions	Nincs korrektúra
+	Changed	Módosítva

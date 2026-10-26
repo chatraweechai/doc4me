@@ -116,6 +116,14 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .key("Mod+W / Mod+F4")
         .pure(),
+        // Alt+F4: Word's Exit. Doc4Me has one document per window, so it closes it, asking first
+        // about unsaved changes, as Close does.
+        CommandSpec::new("file.exit", "Exit", "File", |s, _| {
+            s.ui_requests.push(json!({"close": true}));
+            sel_result(s)
+        })
+        .key(super::non_mac("Alt+F4"))
+        .pure(),
         CommandSpec::new("file.properties", "Properties", "File › Info", properties)
             .params(r#"{"title"?, "subject"?, "author"?, "keywords"?, "comments"?, "category"?, "custom"?: {name: string | null (removes)}}"#),
         CommandSpec::new("file.info", "Info", "File", info).pure(),
@@ -371,7 +379,7 @@ fn save(s: &mut Session, v: &Value) -> CmdResult {
     }
     s.stamp_save();
     let password = s.password.as_ref().map(crate::io::Password::as_str);
-    crate::io::save_path_with(&path, &s.doc, password, &export_options(s, v)).map_err(CmdError::Failed)?;
+    crate::io::save_path_with(&path, &s.doc_to_save(), password, &export_options(s, v)).map_err(CmdError::Failed)?;
     let encrypted = password.is_some() && crate::io::can_encrypt(&path.to_string_lossy());
     let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("").to_ascii_lowercase();
     if ["docx", "docm", "dotx", "dotm", "odt", "rtf", "json", "xml"].contains(&ext.as_str()) {

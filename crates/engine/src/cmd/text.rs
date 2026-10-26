@@ -19,13 +19,23 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("text.backTab", "Shift+Tab", "Editing", back_tab).key("Shift+Tab"),
         // In a table Tab moves to the next cell; Ctrl+Tab types a tab character there.
         CommandSpec::new("text.tabCharacter", "Tab Character", "Editing", |s, _| ins_char(s, '\t')).key(non_mac("Mod+Tab")),
-        CommandSpec::new("table.firstCellInRow", "First Cell in Row", "Table › Navigation", |s, _| cell_jump(s, true, true)).key("Alt+Home").pure(),
-        CommandSpec::new("table.lastCellInRow", "Last Cell in Row", "Table › Navigation", |s, _| cell_jump(s, true, false)).key("Alt+End").pure(),
-        CommandSpec::new("table.firstCellInColumn", "First Cell in Column", "Table › Navigation", |s, _| cell_jump(s, false, true))
-            .key("Alt+PageUp")
+        // With Shift (`extend`) they select to there: Shift+Alt+End a row, Shift+Alt+Page Down a
+        // column (Word).
+        CommandSpec::new("table.firstCellInRow", "First Cell in Row", "Table › Navigation", |s, v| cell_jump(s, v, true, true))
+            .key("Alt+Home")
+            .params(CELL_JUMP)
             .pure(),
-        CommandSpec::new("table.lastCellInColumn", "Last Cell in Column", "Table › Navigation", |s, _| cell_jump(s, false, false))
+        CommandSpec::new("table.lastCellInRow", "Last Cell in Row", "Table › Navigation", |s, v| cell_jump(s, v, true, false))
+            .key("Alt+End")
+            .params(CELL_JUMP)
+            .pure(),
+        CommandSpec::new("table.firstCellInColumn", "First Cell in Column", "Table › Navigation", |s, v| cell_jump(s, v, false, true))
+            .key("Alt+PageUp")
+            .params(CELL_JUMP)
+            .pure(),
+        CommandSpec::new("table.lastCellInColumn", "Last Cell in Column", "Table › Navigation", |s, v| cell_jump(s, v, false, false))
             .key("Alt+PageDown")
+            .params(CELL_JUMP)
             .pure(),
         CommandSpec::new("text.backspace", "Backspace", "Editing", backspace).key("Backspace"),
         CommandSpec::new("text.delete", "Delete", "Editing", delete).key("Delete"),
@@ -493,7 +503,9 @@ fn select_cell(s: &mut Session, story: StoryRef, tpath: &Path, r: usize, c: usiz
 
 /// Alt+Home / End / Page Up / Page Down in a table: the first or last cell of the caret's row or
 /// column.
-fn cell_jump(s: &mut Session, in_row: bool, first: bool) -> CmdResult {
+const CELL_JUMP: &str = r#"{"extend"?: bool (select from the selection's start to that cell)}"#;
+
+fn cell_jump(s: &mut Session, v: &Value, in_row: bool, first: bool) -> CmdResult {
     let Some((tpath, r, c)) = s.sel.focus.path.cell() else { return sel_result(s) };
     let story = s.sel.focus.story;
     let Some(t) = s.doc.table(story, &tpath) else { return sel_result(s) };
@@ -506,7 +518,21 @@ fn cell_jump(s: &mut Session, in_row: bool, first: bool) -> CmdResult {
     };
     let mut path = tpath.0.clone();
     path.extend([nr as u32, nc as u32, 0]);
-    s.sel = Selection::caret(Pos { story, path: Path(path), off: 0 });
+    let to = Pos { story, path: Path(path), off: 0 };
+    if p::bool(v, "extend") == Some(true) {
+        // The whole of that cell joins the selection: to its start going back, its end going on.
+        s.sel.focus = if first {
+            to
+        } else {
+            let mut cell = tpath.0.clone();
+            cell.extend([nr as u32, nc as u32]);
+            let last = s.doc.para_paths(story).into_iter().rfind(|q| q.0.starts_with(&cell)).unwrap_or(to.path);
+            let off = s.doc.para(story, &last).map_or(0, |x| x.len());
+            Pos { story, path: last, off }
+        };
+        return sel_result(s);
+    }
+    s.sel = Selection::caret(to);
     sel_result(s)
 }
 

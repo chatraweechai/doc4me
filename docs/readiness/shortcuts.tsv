@@ -67,7 +67,7 @@ ks-065	Navigate the document	Move the cursor to the top of the previous page.	Ct
 ks-066	Navigate the document	Move the cursor to the end of the document.	Ctrl+End	Mod+End	caret.docEnd	registry		
 ks-067	Navigate the document	Move the cursor to the beginning of the document.	Ctrl+Home	Mod+Home	caret.docStart	registry		
 ks-068	Navigate the document	Move the cursor to the location of the previous revision.	Shift+F5	Shift+F5	edit.goBack	registry		
-ks-069	Navigate the document	Move the cursor to the location of the last revision made before the document was last closed.	Shift+F5, immediately after opening the document.	Shift+F5	-	manual	untested	last edit before the document was closed
+ks-069	Navigate the document	Move the cursor to the location of the last revision made before the document was last closed.	Shift+F5, immediately after opening the document.	Shift+F5	edit.goBack	manual	pass	engine test shift_f5_after_opening_goes_to_the_last_edit: Save writes Word's hidden _GoBack bookmark at the last edit; Shift+F5 right after opening goes there
 ks-070	Navigate the document	Cycle through floating shapes, such as text boxes or images.	Ctrl+Alt+5, and then the Tab key repeatedly	Mod+Alt+5	select.floatingShapes	registry		then Tab / Shift+Tab go to the next / previous floating shape
 ks-071	Navigate the document	Exit the floating shape navigation and return to the normal navigation.	Esc	Escape	select.collapse	registry		Esc (select.collapse) ends floating shape navigation
 ks-072	Navigate the document	Display the Navigation task pane, to search within the document content.	Ctrl+F	Mod+F	edit.find	registry		
@@ -93,7 +93,7 @@ ks-091	Select text and graphics	Select from the current position to the end of t
 ks-092	Select text and graphics	Select from the current position to the bottom of the window.	Ctrl+Alt+Shift+Page down	Mod+Alt+Shift+PageDown	caret.screenBottom	registry		caret.screenBottom; Shift extends it
 ks-093	Select text and graphics	Select all document content.	Ctrl+A			duplicate	ks-009	same shortcut and action as ks-009
 ks-094	Extend a selection	Start extending the selection.	F8 In the extend selection mode, clicking a location in the document extends the current selection to that location.	F8	select.extend	registry		
-ks-095	Extend a selection	Select the nearest character to the left or right.	F8, Left or Right arrow key	F8,Left	-	manual	untested	arrows after F8
+ks-095	Extend a selection	Select the nearest character to the left or right.	F8, Left or Right arrow key	F8,Left	-	manual	pass	engine test f8_extend_mode_extends_with_the_arrow_keys: F8 turns on Extend mode, the arrows extend, Esc keeps the selection
 ks-096	Extend a selection	Expand the selection.	F8 repeatedly to expand the selection to the entire word, sentence, paragraph, section, and document.	F8	select.extend	registry		tools.rs: word → sentence → paragraph → document
 ks-097	Extend a selection	Reduce the selection.	Shift+F8	Shift+F8	select.shrink	registry		select.shrink: paragraph, sentence, word, caret
 ks-098	Extend a selection	Select a vertical block of text.	Ctrl+Shift+F8, then press the arrow keys	Mod+Shift+F8	select.column	registry		
@@ -173,8 +173,8 @@ ks-171	Insert special characters	Insert an ellipsis (…)	Ctrl+Alt+Period (.)	Mo
 ks-172	Insert special characters	Insert the Unicode character for the specified Unicode (hexadecimal) character code. For example, to insert the euro currency symbol ( ), type 20AC, and then hold down Alt and press X. Tip: To find out the Unicode character code for a selected character, press Alt+X.	The character code, then press Alt+X	Alt+X	text.toggleUnicode	registry		
 ks-173	Insert special characters	Insert the ANSI character for the specified ANSI (decimal) character code. For example, to insert the euro currency symbol, hold down Alt and press 0128 on the numeric keypad.	Alt+the character code (on the numeric keypad)	Alt+numpad	-	manual	untested	Windows turns Alt+numpad codes into typed text
 ks-174	Work with web content	Insert a hyperlink.	Ctrl+K	Mod+K	insert.link	registry		
-ks-175	Work with web content	Go back one page.	Alt+Left arrow key	Alt+Left	-	manual	fail	Alt+Left is Word Left in Doc4Me
-ks-176	Work with web content	Go forward one page.	Alt+Right arrow key	Alt+Right	-	manual	fail	
+ks-175	Work with web content	Go back one page.	Alt+Left arrow key	Alt+Left	web.back	registry		Back through followed hyperlinks (engine test hyperlinks_back_and_forward); Alt+Left stays Word Left on a Mac
+ks-176	Work with web content	Go forward one page.	Alt+Right arrow key	Alt+Right	web.forward	registry		Forward through followed hyperlinks (engine test hyperlinks_back_and_forward)
 ks-177	Work with web content	Refresh the page.	F9	F9	-	manual	fail	web page refresh
 ks-178	Move around in a table	Move to the next cell in the row and select its content.	Tab key	Tab	-	manual	pass	engine tests.rs table_keys_move_and_select_like_word (Tab selects the next cell's content)
 ks-179	Move around in a table	Move to the previous cell in the row and select its content.	Shift+Tab	Shift+Tab	-	manual	pass	engine tests.rs table_keys_move_and_select_like_word (Shift+Tab selects the previous cell's content)
@@ -188,9 +188,9 @@ ks-186	Move around in a table	Move one row up.	Alt+Shift+Up arrow key	Alt+Shift+
 ks-187	Move around in a table	Move one row down.	Alt+Shift+Down arrow key	Alt+Shift+Down	-	manual	pass	engine tests.rs table_keys_move_and_select_like_word (Alt+Shift+Down moves the row)
 ks-188	Select table content	Select the content in the next cell.	Tab key			duplicate	ks-178	same shortcut and action as ks-178
 ks-189	Select table content	Select the content in the previous cell.	Shift+Tab			duplicate	ks-179	same shortcut and action as ks-179
-ks-190	Select table content	Extend a selection to adjacent cells.	Shift+Arrow keys	Shift+Arrows	-	manual	untested	
-ks-191	Select table content	Select a column.	Select the top or bottom cell of the column, and then press Shift+ Page up or Page down arrow key	Shift+Up | Shift+Down	-	manual	untested	
-ks-192	Select table content	Select a row.	Select the first or last cell in the row, and then press Shift+Alt+End or Home.	Shift+Home | Shift+End	-	manual	untested	
+ks-190	Select table content	Extend a selection to adjacent cells.	Shift+Arrow keys	Shift+Arrows	-	manual	pass	engine test shift_alt_keys_select_table_rows_and_columns: Shift+Right and Shift+Down from a cell reach the next cells
+ks-191	Select table content	Select a column.	Select the top or bottom cell of the column, and then press Shift+ Page up or Page down arrow key	Shift+Alt+PageDown|Shift+Alt+PageUp	-	manual	pass	UI test shift_alt_end_and_page_down_select_a_row_and_a_column (Shift+Alt+Page Down selects to the bottom of the column, as Word); Shift+Down extends cell by cell (engine test shift_alt_keys_select_table_rows_and_columns)
+ks-192	Select table content	Select a row.	Select the first or last cell in the row, and then press Shift+Alt+End or Home.	Shift+Alt+End|Shift+Alt+Home	-	manual	pass	UI test shift_alt_end_and_page_down_select_a_row_and_a_column: Shift+Alt+End selects to the end of the row
 ks-193	Select table content	Select the whole table.	Alt+5 on the numeric keypad, with Num Lock switched off	Alt+numpad 5	-	manual	fail	
 ks-194	Insert paragraphs and tab characters in a table	Insert a new paragraph in a cell.	Enter	Enter	text.newParagraph	registry		
 ks-195	Insert paragraphs and tab characters in a table	Insert a tab character in a cell.	Ctrl+Tab	Mod+Tab	text.tabCharacter	registry		text.tabCharacter
@@ -198,7 +198,7 @@ ks-196	Review a document	Open the Review tab.	Alt, R			duplicate	ks-035	same sho
 ks-197	Review a document	Show list of comments.	Alt, R, P, 1, L	Alt,R,P,1,L	-	manual	untested	
 ks-198	Review a document	Insert a comment.	Ctrl+Alt+M	Mod+Alt+M	review.newComment	registry		
 ks-199	Review a document	Turn change tracking on or off.	Ctrl+Shift+E	Mod+Shift+E	review.trackChanges	registry		
-ks-200	Review a document	Close the Reviewing Pane.	Alt+Shift+C	Alt+Shift+C	-	manual	fail	
+ks-200	Review a document	Close the Reviewing Pane.	Alt+Shift+C	Alt+Shift+C	view.closeReviewingPane	registry		Review › Reviewing Pane (new pane; UI test reviewing_pane_lists_and_accepts_changes)
 ks-201	Work with references, citations, and indexing	Mark a table of contents entry.	Alt+Shift+O	Alt+Shift+O	references.markTocEntry	registry		
 ks-202	Work with references, citations, and indexing	Mark a table of authorities entry (citation).	Alt+Shift+I	Alt+Shift+I	references.markCitation	registry		
 ks-203	Work with references, citations, and indexing	Choose citation options.	Alt+Shift+F12, Spacebar	Alt+Shift+F12,Space	-	manual	fail	
@@ -222,7 +222,7 @@ ks-220	Work with fields	Update the selected fields.	F9	F9	references.updateField
 ks-221	Work with fields	Unlink a field.	Ctrl+Shift+F9	Mod+Shift+F9	fields.unlink	registry		
 ks-222	Work with fields	Switch between a selected field code and its result.	Shift+F9	Shift+F9	fields.toggleCode	registry		
 ks-223	Work with fields	Switch between all field codes and their results.	Alt+F9	Alt+F9	view.fieldCodes	registry		
-ks-224	Work with fields	Run GOTOBUTTON or MACROBUTTON from a field displaying field results.	Alt+Shift+F9	Alt+Shift+F9	-	manual	fail	
+ks-224	Work with fields	Run GOTOBUTTON or MACROBUTTON from a field displaying field results.	Alt+Shift+F9	Alt+Shift+F9	fields.click	registry		GOTOBUTTON, MACROBUTTON, HYPERLINK (engine test field_click_runs_goto_macro_and_hyperlink_fields)
 ks-225	Work with fields	Go to the next field.	F11	F11	fields.next	registry		
 ks-226	Work with fields	Go to the previous field.	Shift+F11	Shift+F11	fields.previous	registry		
 ks-227	Work with fields	Lock a field.	Ctrl+F11	Mod+F11	fields.lock	registry		
@@ -288,11 +288,11 @@ ks-286	Use function key shortcuts	Create a new Building Block.	Alt+F3	Alt+F3		du
 ks-287	Use function key shortcuts	Repeat the last command or action.	F4	F4	edit.repeat	registry		
 ks-288	Use function key shortcuts	Repeat the last Find or Go To action.	Shift+F4	Shift+F4	edit.findNext	registry		repeats the last Find (Go To repeats with F5)
 ks-289	Use function key shortcuts	Close the current document.	Ctrl+F4	Mod+F4	file.close	registry		
-ks-290	Use function key shortcuts	Close Word.	Alt+F4	Alt+F4	-	manual	untested	window manager
+ks-290	Use function key shortcuts	Close Word.	Alt+F4	Alt+F4	file.exit	registry		Doc4Me has one document per window: closes it, asking about unsaved changes first
 ks-291	Use function key shortcuts	Display the Go To dialog box.	F5	F5	edit.goto	registry		
 ks-292	Use function key shortcuts	Move to the last change.	Shift+F5	Shift+F5		duplicate	ks-068	same shortcut and action as ks-068
 ks-293	Use function key shortcuts	Display the Bookmark dialog box.	Ctrl+Shift+F5	Mod+Shift+F5	insert.bookmark	registry		
-ks-294	Use function key shortcuts	Restore the document window size.	Alt+F5	Alt+F5	-	manual	untested	
+ks-294	Use function key shortcuts	Restore the document window size.	Alt+F5	Alt+F5	view.restoreWindow	registry		restores a maximized window (ViewportCommand::Maximized(false))
 ks-295	Use function key shortcuts	Switch between the document, task pane, status bar and ribbon.	F6	F6	-	manual	untested	
 ks-296	Use function key shortcuts	Switch backwards between the document, ribbon, status bar and task pane.	Shift+F6	Shift+F6	-	manual	untested	
 ks-297	Use function key shortcuts	Switch to the next document window.	Ctrl+F6	Mod+F6	view.nextWindow	registry		view.nextWindow
@@ -315,7 +315,7 @@ ks-313	Use function key shortcuts	Toggle all field codes.	Alt+F9	Alt+F9		duplica
 ks-314	Use function key shortcuts	Run GOTOBUTTON or MACROBUTTON.	Alt+Shift+F9	Alt+Shift+F9		duplicate	ks-224	same shortcut and action as ks-224
 ks-315	Use function key shortcuts	Turn KeyTips on or off.	F10	F10		duplicate	ks-039	same shortcut and action as ks-039
 ks-316	Use function key shortcuts	Display the shortcut menu.	Shift+F10	Shift+F10		duplicate	ks-049	same shortcut and action as ks-049
-ks-317	Use function key shortcuts	Maximize or restore the document window.	Ctrl+F10	Mod+F10	-	manual	untested	
+ks-317	Use function key shortcuts	Maximize or restore the document window.	Ctrl+F10	Mod+F10	view.maximizeWindow	registry		maximizes the window or puts it back
 ks-318	Use function key shortcuts	Display the Selection pane.	Alt+F10	Alt+F10	arrange.selectionPane	registry		arrange.selectionPane
 ks-319	Use function key shortcuts	Display the menu for available actions.	Alt+Shift+F10	Alt+Shift+F10	-	manual	fail	
 ks-320	Use function key shortcuts	Move to the next field.	F11	F11		duplicate	ks-225	same shortcut and action as ks-225

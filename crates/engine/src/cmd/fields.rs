@@ -36,6 +36,7 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("fields.previous", "Previous Field", "Insert › Text › Quick Parts", |s, _| go(s, false))
             .key("Shift+F11 / Alt+Shift+F1")
             .pure(),
+        CommandSpec::new("fields.click", "Field Click", "Insert › Text › Quick Parts", click).key("Alt+Shift+F9"),
         CommandSpec::new("fields.selected", "Selected Fields", "Insert › Text › Quick Parts", |s, _| {
             Ok(Value::Array(selected(s).iter().map(|f| f.json()).collect()))
         })
@@ -105,6 +106,69 @@ pub fn selected(s: &Session) -> Vec<FieldAt> {
     }
     // The innermost range field around the caret: the last-starting one that contains it.
     all.into_iter().rfind(|f| f.end.as_ref().is_some_and(|e| f.at < a && a <= *e)).into_iter().collect()
+}
+
+/// A field code's words, with quoted words kept whole (quotes removed).
+fn instr_words(instr: &str) -> Vec<String> {
+    let mut out = Vec::new();
+    let mut chars = instr.chars().peekable();
+    while let Some(c) = chars.next() {
+        if c.is_whitespace() {
+            continue;
+        }
+        let mut w = String::new();
+        if c == '"' {
+            for d in chars.by_ref() {
+                if d == '"' {
+                    break;
+                }
+                w.push(d);
+            }
+        } else {
+            w.push(c);
+            while let Some(d) = chars.next_if(|d| !d.is_whitespace()) {
+                w.push(d);
+            }
+        }
+        out.push(w);
+    }
+    out
+}
+
+/// Alt+Shift+F9 (Word's Do Field Click) on the field at the caret: GOTOBUTTON goes to its
+/// bookmark; MACROBUTTON runs its macro, or, when there is no such macro (Word's `NoMacro`
+/// placeholder text), selects the field so typing replaces it; HYPERLINK follows its link.
+fn click(s: &mut Session, _: &Value) -> CmdResult {
+    let f = selected(s).into_iter().next().ok_or_else(none_selected)?;
+    let words = instr_words(&f.instr);
+    let arg = |i: usize| words.get(i).filter(|w| !w.starts_with('\\')).cloned();
+    match words.first().map(|w| w.to_ascii_uppercase()).as_deref() {
+        Some("GOTOBUTTON") => {
+            let name = arg(1).ok_or_else(|| CmdError::Failed("GOTOBUTTON names no bookmark".into()))?;
+            s.run("web.follow", &json!({"link": format!("#{name}")}))
+        }
+        Some("MACROBUTTON") => {
+            let name = arg(1).unwrap_or_default();
+            if s.macros.contains_key(&name) {
+                return s.run("tools.macros", &json!({"run": name}));
+            }
+            let end =
+                f.end.clone().map_or_else(|| Pos { off: f.at.off + OBJ.len_utf8(), ..f.at.clone() }, |e| Pos { off: e.off + OBJ.len_utf8(), ..e });
+            s.sel = Selection { anchor: f.at, focus: end };
+            sel_result(s)
+        }
+        Some("HYPERLINK") => {
+            // `\l name`: a place in this document (with or without an address before it).
+            let place = words.iter().position(|w| w == "\\l").and_then(|i| words.get(i + 1)).cloned();
+            let link = match (place, arg(1)) {
+                (Some(p), _) => format!("#{p}"),
+                (None, Some(url)) => url,
+                (None, None) => return Err(CmdError::Failed("HYPERLINK has no address".into())),
+            };
+            s.run("web.follow", &json!({"link": link}))
+        }
+        _ => Err(CmdError::Failed("Field Click works on GOTOBUTTON, MACROBUTTON and HYPERLINK fields".into())),
+    }
 }
 
 fn none_selected() -> CmdError {

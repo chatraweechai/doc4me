@@ -369,6 +369,12 @@ pub struct Session {
     pub column: Option<ColumnBlock>,
     /// Column selection mode (Ctrl+Shift+F8): caret movement extends the block.
     pub column_mode: bool,
+    /// Extend mode (F8): caret movement and clicks extend the selection until Esc or an edit.
+    pub extend_mode: bool,
+    /// Where followed hyperlinks left from, latest last (Back, Alt+Left), and where Back left
+    /// from (Forward, Alt+Right); at most [`LINK_HISTORY`] each.
+    link_back: Vec<Pos>,
+    link_forward: Vec<Pos>,
     /// Where the last edits happened, oldest first (at most [`EDIT_MARKS`]), for Go Back
     /// (Shift+F5). Positions aren't mapped through later edits; they're clamped when used.
     edit_marks: Vec<Pos>,
@@ -378,6 +384,13 @@ pub struct Session {
 
 /// The number of edit locations Go Back cycles through (Word: four).
 const EDIT_MARKS: usize = 4;
+
+/// How many hyperlink jumps Back and Forward remember.
+const LINK_HISTORY: usize = 32;
+
+/// Word's hidden bookmark at the last edit, written on save: Shift+F5 right after opening goes
+/// there.
+pub const GO_BACK_MARK: &str = "_GoBack";
 
 /// The equation being edited.
 #[derive(Clone, Debug, PartialEq)]
@@ -524,6 +537,9 @@ impl Session {
             password: None,
             column: None,
             column_mode: false,
+            extend_mode: false,
+            link_back: Vec::new(),
+            link_forward: Vec::new(),
             edit_marks: Vec::new(),
             go_back_step: 0,
         }
@@ -549,6 +565,10 @@ impl Session {
     /// the caret is already at is skipped. `None` before any edit.
     pub fn go_back(&mut self) -> Option<Pos> {
         let n = self.edit_marks.len();
+        // Nothing edited since the document opened: where it was last edited before it was saved.
+        if n == 0 {
+            return self.doc.bookmarks().into_iter().find(|(name, _)| name == GO_BACK_MARK).map(|(_, p)| self.doc.clamp(&p));
+        }
         for _ in 0..n {
             let i = n - 1 - self.go_back_step % n;
             self.go_back_step = self.go_back_step.wrapping_add(1);
@@ -559,6 +579,63 @@ impl Session {
             }
         }
         self.edit_marks.last().map(|p| self.doc.clamp(p))
+    }
+
+    /// The document as Save writes it: with Word's hidden `_GoBack` bookmark at the last edit in
+    /// the body (in place of an older one), so Shift+F5 right after opening the file goes back
+    /// there, here and in Word. The open document itself doesn't change.
+    pub fn doc_to_save(&self) -> std::borrow::Cow<'_, Document> {
+        let Some(last) = self.edit_marks.last().filter(|p| p.story == StoryRef::Body) else { return std::borrow::Cow::Borrowed(&self.doc) };
+        let at = self.doc.clamp(last);
+        let mut doc = self.doc.clone();
+        let width = doc4me_doc::para::OBJ.len_utf8();
+        for path in doc.para_paths(StoryRef::Body) {
+            let Ok(para) = doc.para_mut(StoryRef::Body, &path) else { continue };
+            let marks: Vec<usize> = para
+                .object_offsets()
+                .into_iter()
+                .filter(|off| {
+                    matches!(para.object_at(*off), Some(doc4me_doc::InlineObject::BookmarkStart { name } | doc4me_doc::InlineObject::BookmarkEnd { name }) if name == GO_BACK_MARK)
+                })
+                .collect();
+            for off in marks.into_iter().rev() {
+                let _ = para.delete(off, off + width);
+            }
+        }
+        let at = doc.clamp(&at);
+        let props = CharProps::default();
+        if doc.insert_object(&at, doc4me_doc::InlineObject::BookmarkEnd { name: GO_BACK_MARK.into() }, &props).is_err()
+            || doc.insert_object(&at, doc4me_doc::InlineObject::BookmarkStart { name: GO_BACK_MARK.into() }, &props).is_err()
+        {
+            return std::borrow::Cow::Borrowed(&self.doc);
+        }
+        std::borrow::Cow::Owned(doc)
+    }
+
+    /// Follow a hyperlink to `to` in this document: the caret goes there, and Back (Alt+Left)
+    /// returns to where it was.
+    pub fn follow_to(&mut self, to: Pos) {
+        self.link_back.push(self.sel.focus.clone());
+        if self.link_back.len() > LINK_HISTORY {
+            self.link_back.remove(0);
+        }
+        self.link_forward.clear();
+        self.sel = Selection::caret(to);
+        self.goal_x = None;
+    }
+
+    /// Back (`true`) or Forward through followed hyperlinks: where the caret goes, if anywhere.
+    pub fn link_step(&mut self, back: bool) -> Option<Pos> {
+        let (from, to) = if back { (&mut self.link_back, &mut self.link_forward) } else { (&mut self.link_forward, &mut self.link_back) };
+        let p = from.pop()?;
+        to.push(self.sel.focus.clone());
+        if to.len() > LINK_HISTORY {
+            to.remove(0);
+        }
+        let p = self.doc.clamp(&p);
+        self.sel = Selection::caret(p.clone());
+        self.goal_x = None;
+        Some(p)
     }
 
     /// The line pieces of the current column selection, if there is one (the selection hasn't
@@ -817,6 +894,9 @@ impl Session {
         self.also_selected.clear();
         self.column = None;
         self.column_mode = false;
+        self.extend_mode = false;
+        self.link_back.clear();
+        self.link_forward.clear();
         self.edit_marks.clear();
         self.go_back_step = 0;
         self.view.outline.collapsed.clear();
@@ -901,6 +981,10 @@ impl Session {
             // Column selection, like `sel`'s shape: valid only while `sel` matches it.
             column: _,
             column_mode: _,
+            extend_mode: _,
+            // Hyperlink history, like the caret history: not part of the document.
+            link_back: _,
+            link_forward: _,
             // Go Back's places, like the caret history: not part of the document.
             edit_marks: _,
             go_back_step: _,

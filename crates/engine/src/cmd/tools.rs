@@ -610,7 +610,12 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("review.editor", "Editor", "Home › Editor", |s, v| s.run("review.spelling", v)).pure(),
         CommandSpec::new("select.similar", "Select Text with Similar Formatting", "Home › Editing › Select", select_similar).pure(),
         CommandSpec::new("select.extend", "Extend Selection", "Editing › Selection", |s, _| {
-            // F8 grows the selection: word → sentence → paragraph → document.
+            // F8 turns on Extend mode (the arrow keys and clicks then extend the selection, until
+            // Esc); pressed again it grows the selection: word → sentence → paragraph → document.
+            if !s.extend_mode {
+                s.extend_mode = true;
+                return sel_result(s);
+            }
             let (a, b) = s.sel.ordered();
             let para_len = s.doc.para_at(&a).map(|x| x.len()).unwrap_or(0);
             let id = if a == b {

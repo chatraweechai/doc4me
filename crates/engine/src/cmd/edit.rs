@@ -113,6 +113,23 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .key("Shift+F5 / Mod+Alt+Z")
         .pure(),
+        // Hyperlinks within the document: following one remembers where it was, and Back and
+        // Forward (Alt+Left, Alt+Right, Word's Web toolbar) step through those places.
+        CommandSpec::new("web.follow", "Open Hyperlink", "Navigation", follow_link)
+            .params(r#"{"link"?: string (a URL, or # and a bookmark name; default: the link at the caret)} → {"followed": bookmark} | {"url": string (for the interface to open)}"#)
+            .pure(),
+        CommandSpec::new("web.back", "Back", "Navigation", |s, _| {
+            s.link_step(true).ok_or_else(|| CmdError::Failed("no followed hyperlink to go back from".into()))?;
+            sel_result(s)
+        })
+        .key(super::non_mac("Alt+Left"))
+        .pure(),
+        CommandSpec::new("web.forward", "Forward", "Navigation", |s, _| {
+            s.link_step(false).ok_or_else(|| CmdError::Failed("nothing to go forward to".into()))?;
+            sel_result(s)
+        })
+        .key(super::non_mac("Alt+Right"))
+        .pure(),
         CommandSpec::new("edit.formatPainter", "Format Painter", "Home › Clipboard", painter).params(r#"{"sticky"?: bool}"#).pure(),
         CommandSpec::new("edit.copyFormat", "Copy Formatting", "Home › Clipboard", |s, _| {
             painter_pick(s);
@@ -785,4 +802,38 @@ fn paste_format(s: &mut Session, _: &Value) -> CmdResult {
         s.painter = None;
     }
     sel_result(s)
+}
+
+/// `web.follow`: a link to a bookmark in this document moves the caret there (Back returns);
+/// any other link comes back as `url`, and the interface opens it if it's a web or email address.
+fn follow_link(s: &mut Session, v: &Value) -> CmdResult {
+    let link = match p::str(v, "link") {
+        Some(l) => l.to_string(),
+        None => {
+            let at = s.sel.focus.clone();
+            let para = s.doc.para_at(&at).ok_or_else(|| CmdError::Failed("the caret isn't in text".into()))?;
+            let mut offs = vec![at.off];
+            if at.off > 0 {
+                offs.push(para.prev_boundary(at.off));
+            }
+            offs.into_iter()
+                .filter(|o| *o < para.len())
+                .find_map(|o| para.props_of_char(o).link.clone())
+                .ok_or_else(|| CmdError::Failed("there is no hyperlink at the caret".into()))?
+        }
+    };
+    let Some(name) = link.strip_prefix('#') else {
+        // The interface opens web and email addresses only.
+        s.ui_requests.push(json!({"openUrl": link}));
+        return Ok(json!({"url": link}));
+    };
+    let at = s
+        .doc
+        .bookmarks()
+        .into_iter()
+        .find(|(n, _)| n == name)
+        .map(|(_, p)| p)
+        .ok_or_else(|| CmdError::Failed(format!("there is no bookmark named `{name}`")))?;
+    s.follow_to(at);
+    Ok(json!({"followed": name}))
 }

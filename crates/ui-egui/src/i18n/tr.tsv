@@ -2708,3 +2708,15 @@ spacing	Normal	Normal
 	Right only	Yalnızca sağ
 	Transparency:	Saydamlık:
 	relative to	göre
+	Open Hyperlink	Köprüyü Aç
+	Back	Geri
+	Field Click	Alan Tıklaması
+	Close Reviewing Pane	Düzeltme Bölmesini Kapat
+	Maximize	Ekranı Kapla
+	Restore Down	Önceki Boyut
+	Exit	Çıkış
+	Revisions	Düzeltmeler
+	{n} revisions	{n} düzeltme
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Eklemeler: {ins}, silmeler: {del}, taşımalar: {moves}, biçimlendirme: {fmt}, açıklamalar: {comments}
+	No revisions	Düzeltme yok
+	Changed	Değiştirildi

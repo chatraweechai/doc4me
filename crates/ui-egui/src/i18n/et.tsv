@@ -2689,3 +2689,15 @@ spacing	Normal	Tavaline
 	Right only	Ainult paremal
 	Transparency:	Läbipaistvus:
 	relative to	suhtes
+	Open Hyperlink	Ava hüperlink
+	Back	Tagasi
+	Field Click	Välja klõps
+	Close Reviewing Pane	Sule redigeerimispaan
+	Maximize	Maksimeeri
+	Restore Down	Taasta
+	Exit	Välju
+	Revisions	Redaktsioonid
+	{n} revisions	Redaktsioone: {n}
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Lisamised: {ins}, kustutamised: {del}, teisaldused: {moves}, vormindus: {fmt}, kommentaarid: {comments}
+	No revisions	Redaktsioone pole
+	Changed	Muudetud

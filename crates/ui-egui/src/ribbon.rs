@@ -1588,7 +1588,16 @@ fn review(app: &mut WordApp, ui: &mut Ui) {
                     mi(ui, app, "No Markup", "review.markup", json!({"value": "noMarkup"}));
                 },
             );
-            small(ui, app, "reviewingPane", Some("Reviewing Pane"), "Reviewing Pane", "review.changes", json!({}), false);
+            small(
+                ui,
+                app,
+                "reviewingPane",
+                Some("Reviewing Pane"),
+                "Reviewing Pane",
+                "view.reviewingPane",
+                json!({}),
+                app.session.view.track_changes_pane,
+            );
         });
     });
     group(ui, "Changes", None, app, |ui, app| {

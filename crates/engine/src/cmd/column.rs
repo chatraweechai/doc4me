@@ -111,6 +111,19 @@ fn extend_to(s: &mut Session, to: Pos) {
 
 /// Run a command with the column block in mind (called by `Session::run` for every command).
 pub(crate) fn dispatch(s: &mut Session, id: &str, mutates: bool, run: fn(&mut Session, &Value) -> CmdResult, v: &Value) -> CmdResult {
+    // Extend mode (F8): caret movement and clicks extend the selection; an edit ends the mode.
+    if s.extend_mode && mutates {
+        s.extend_mode = false;
+    } else if s.extend_mode && !s.column_mode && id.starts_with("caret.") {
+        let mut params = v.clone();
+        match params.as_object_mut() {
+            Some(o) => {
+                o.insert("extend".into(), Value::Bool(true));
+            }
+            None => params = json!({"extend": true}),
+        }
+        return run(s, &params);
+    }
     // A block the selection has moved away from is gone.
     if s.column.as_ref().is_some_and(|c| c.sel != s.sel) {
         s.column = None;

@@ -2682,3 +2682,15 @@ spacing	Normal	標準
 	Right only	僅右側
 	Transparency:	透明度：
 	relative to	相對於
+	Open Hyperlink	開啟超連結
+	Back	上一頁
+	Field Click	功能變數按一下
+	Close Reviewing Pane	關閉校閱窗格
+	Maximize	最大化
+	Restore Down	還原
+	Exit	結束
+	Revisions	修訂
+	{n} revisions	{n} 個修訂
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	插入：{ins}，刪除：{del}，移動：{moves}，格式：{fmt}，註解：{comments}
+	No revisions	沒有修訂
+	Changed	已變更

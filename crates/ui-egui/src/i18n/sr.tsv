@@ -2695,3 +2695,15 @@ spacing	Normal	Нормално
 	Right only	Само десно
 	Transparency:	Транспарентност:
 	relative to	у односу на
+	Open Hyperlink	Отвори хипервезу
+	Back	Назад
+	Field Click	Клик на поље
+	Close Reviewing Pane	Затвори окно за редиговање
+	Maximize	Максимизуј
+	Restore Down	Врати на претходну величину
+	Exit	Изађи
+	Revisions	Ревизије
+	{n} revisions	Ревизија: {n}
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Уметања: {ins}, брисања: {del}, премештања: {moves}, обликовање: {fmt}, коментари: {comments}
+	No revisions	Нема ревизија
+	Changed	Промењено

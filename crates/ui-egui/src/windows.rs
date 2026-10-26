@@ -106,6 +106,14 @@ impl Windows {
 /// A View › Window request from a command (`{"window": "new" | "split" | "arrange" | "sideBySide"
 /// | "syncScroll" | "switch", …}`).
 pub(crate) fn request(app: &mut WordApp, req: &Value) {
+    // The app window itself: Ctrl+F10 maximizes it or puts it back, Alt+F5 puts it back.
+    if let Some(kind @ ("maximize" | "restore")) = req.get("window").and_then(Value::as_str) {
+        if let Some(ctx) = app.ctx.clone() {
+            let maximized = ctx.input(|i| i.viewport().maximized.unwrap_or(false));
+            ctx.send_viewport_cmd(egui::ViewportCommand::Maximized(kind == "maximize" && !maximized));
+        }
+        return;
+    }
     let flag = |v: Option<&Value>, now: bool| v.and_then(Value::as_bool).unwrap_or(!now);
     let w = &mut app.windows;
     match req.get("window").and_then(Value::as_str) {

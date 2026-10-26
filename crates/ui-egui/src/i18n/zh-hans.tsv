@@ -2693,3 +2693,15 @@ spacing	Normal	标准
 	Right only	只在右侧
 	Transparency:	透明度：
 	relative to	相对于
+	Open Hyperlink	打开超链接
+	Back	后退
+	Field Click	域单击
+	Close Reviewing Pane	关闭审阅窗格
+	Maximize	最大化
+	Restore Down	向下还原
+	Exit	退出
+	Revisions	修订
+	{n} revisions	{n} 处修订
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	插入：{ins}，删除：{del}，移动：{moves}，格式：{fmt}，批注：{comments}
+	No revisions	无修订
+	Changed	已更改

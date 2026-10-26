@@ -73,6 +73,15 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("view.darkMode", "Switch Modes", "View › Dark Mode", |s, v| toggle(s, v, |x| &mut x.dark_mode)).pure(),
         CommandSpec::new("view.stylesPane", "Styles Pane", "Home › Styles", |s, v| toggle(s, v, |x| &mut x.styles_pane)).pure(),
         CommandSpec::new("view.commentsPane", "Comments Pane", "Review › Comments", |s, v| toggle(s, v, |x| &mut x.comments_pane)).pure(),
+        // Review › Reviewing Pane: every revision and comment in a list; Alt+Shift+C closes it.
+        CommandSpec::new("view.reviewingPane", "Reviewing Pane", "Review › Tracking", |s, v| toggle(s, v, |x| &mut x.track_changes_pane))
+            .params(r#"{"value"?: bool}"#)
+            .pure(),
+        CommandSpec::new("view.closeReviewingPane", "Close Reviewing Pane", "Review › Tracking", |s, _| {
+            toggle(s, &json!({"value": false}), |x| &mut x.track_changes_pane)
+        })
+        .key("Alt+Shift+C")
+        .pure(),
         CommandSpec::new("view.accessibilityPane", "Accessibility Pane", "Review › Accessibility", |s, v| {
             toggle(s, v, |x| &mut x.accessibility_pane)
         })
@@ -88,6 +97,11 @@ pub fn specs() -> Vec<CommandSpec> {
             .params(r#"{"value"?: bool} (omit to toggle)"#)
             .pure(),
         CommandSpec::new("view.arrangeAll", "Arrange All", "View › Window", |s, _| window(s, json!({"window": "arrange"}))).pure(),
+        // The app window: Ctrl+F10 maximizes it or puts it back, Alt+F5 puts it back (Word).
+        CommandSpec::new("view.maximizeWindow", "Maximize", "View › Window", |s, _| window(s, json!({"window": "maximize"}))).key("Mod+F10").pure(),
+        CommandSpec::new("view.restoreWindow", "Restore Down", "View › Window", |s, _| window(s, json!({"window": "restore"})))
+            .key(super::non_mac("Alt+F5"))
+            .pure(),
         CommandSpec::new("view.sideBySide", "View Side by Side", "View › Window", |s, v| {
             window(s, json!({"window": "sideBySide", "value": v.get("value")}))
         })

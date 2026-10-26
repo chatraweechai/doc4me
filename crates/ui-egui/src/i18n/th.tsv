@@ -2690,3 +2690,15 @@ spacing	Normal	ปกติ
 	Right only	เฉพาะด้านขวา
 	Transparency:	ความโปร่งใส:
 	relative to	อ้างอิงจาก
+	Open Hyperlink	เปิดไฮเปอร์ลิงก์
+	Back	กลับ
+	Field Click	คลิกเขตข้อมูล
+	Close Reviewing Pane	ปิดแผงการตรวจทาน
+	Maximize	ขยายใหญ่สุด
+	Restore Down	คืนขนาดเดิม
+	Exit	ออก
+	Revisions	การแก้ไขที่ติดตาม
+	{n} revisions	การแก้ไขที่ติดตาม {n} รายการ
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	แทรก: {ins}, ลบ: {del}, ย้าย: {moves}, จัดรูปแบบ: {fmt}, ข้อคิดเห็น: {comments}
+	No revisions	ไม่มีการแก้ไขที่ติดตาม
+	Changed	เปลี่ยนแปลง

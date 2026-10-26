@@ -130,9 +130,13 @@ fn dispatch(app: &mut WordApp, key: Key, m: Modifiers) -> bool {
 }
 
 /// How a command bound to a plain key runs when Shift is also held and nothing is bound to the
-/// shifted combo: caret moves extend the selection, Backspace erases as usual (#707).
+/// shifted combo: caret moves and table cell jumps extend the selection, Backspace erases as
+/// usual (#707).
 fn shift_variant_params(id: &str) -> Option<Value> {
-    if id.starts_with("caret.") {
+    // Table cell jumps too: Shift+Alt+End selects to the end of the row, Shift+Alt+Page Down to
+    // the bottom of the column.
+    if id.starts_with("caret.") || matches!(id, "table.firstCellInRow" | "table.lastCellInRow" | "table.firstCellInColumn" | "table.lastCellInColumn")
+    {
         Some(json!({"extend": true}))
     } else if id == "text.backspace" {
         Some(json!({}))
@@ -565,7 +569,31 @@ mod tests {
     fn shift_backspace_still_erases() {
         assert_eq!(shift_variant_params("text.backspace"), Some(json!({})));
         assert_eq!(shift_variant_params("caret.left"), Some(json!({"extend": true})));
+        assert_eq!(shift_variant_params("table.lastCellInRow"), Some(json!({"extend": true})));
         assert_eq!(shift_variant_params("text.delete"), None);
+    }
+
+    /// Shift+Alt+End selects to the end of the table row, Shift+Alt+Page Down to the bottom of the
+    /// column, through the keyboard as the window gets it.
+    #[test]
+    fn shift_alt_end_and_page_down_select_a_row_and_a_column() {
+        let mut a = crate::WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), crate::Services::default());
+        a.run("insert.table", json!({"rows": 3, "cols": 3})).unwrap();
+        let ctx = egui::Context::default();
+        let key = |a: &mut crate::WordApp, key: Key| {
+            let modifiers = Modifiers { alt: true, shift: true, ..Default::default() };
+            let e = egui::Event::Key { key, physical_key: None, pressed: true, repeat: false, modifiers };
+            ctx.run_ui(egui::RawInput { events: vec![egui::Event::ModifiersChanged(modifiers), e], ..Default::default() }, |ui| {
+                canvas_events(a, ui.ctx())
+            })
+            .drop_without_applying_deltas();
+        };
+        let cell = |p: &doc4me_doc::Pos| p.path.cell().map(|(_, r, c)| (r, c));
+        key(&mut a, Key::End);
+        assert_eq!((cell(&a.session.sel.anchor), cell(&a.session.sel.focus)), (Some((0, 0)), Some((0, 2))), "the row");
+        a.run("table.firstCellInRow", json!({})).unwrap();
+        key(&mut a, Key::PageDown);
+        assert_eq!((cell(&a.session.sel.anchor), cell(&a.session.sel.focus)), (Some((0, 0)), Some((2, 0))), "the column");
     }
 
     #[test]

@@ -15,12 +15,14 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("caret.up", "Up", "Navigation", |s, v| vert(s, v, -1)).key("Up").params(EXTEND).pure(),
         CommandSpec::new("caret.down", "Down", "Navigation", |s, v| vert(s, v, 1)).key("Down").params(EXTEND).pure(),
         // In a right-to-left paragraph the word to the left is the next one.
+        // Alt+Left and Alt+Right are Back and Forward on Windows and Linux (Word for Windows);
+        // on a Mac, Option+arrow moves by word.
         CommandSpec::new("caret.wordLeft", "Word Left", "Navigation", |s, v| mv(s, v, if rtl_para(s) { word_right } else { word_left }))
-            .key("Mod+Left / Alt+Left")
+            .key(super::mac_or("Mod+Left / Alt+Left", "Mod+Left"))
             .params(EXTEND)
             .pure(),
         CommandSpec::new("caret.wordRight", "Word Right", "Navigation", |s, v| mv(s, v, if rtl_para(s) { word_left } else { word_right }))
-            .key("Mod+Right / Alt+Right")
+            .key(super::mac_or("Mod+Right / Alt+Right", "Mod+Right"))
             .params(EXTEND)
             .pure(),
         CommandSpec::new("caret.home", "Line Start", "Navigation", |s, v| line(s, v, true)).key("Home").params(EXTEND).pure(),
@@ -65,6 +67,11 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("select.line", "Select Line", "Navigation", select_line).pure(),
         CommandSpec::new("select.text", "Select Text", "Navigation", select_text).params(r#"{"text": string, "occurrence"?: n}"#).pure(),
         CommandSpec::new("select.collapse", "Collapse Selection", "Navigation", |s, v| {
+            // Esc in Extend mode only turns the mode off, keeping the selection (Word).
+            if s.extend_mode && v.get("end").is_none() {
+                s.extend_mode = false;
+                return sel_result(s);
+            }
             let to_end = p::bool(v, "end").unwrap_or(false);
             let (a, b) = s.sel.ordered();
             s.sel = Selection::caret(if to_end { b } else { a });

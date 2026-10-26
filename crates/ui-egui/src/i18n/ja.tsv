@@ -2681,3 +2681,15 @@ spacing	Normal	標準
 	Right only	右側のみ
 	Transparency:	透明度:
 	relative to	基準
+	Open Hyperlink	ハイパーリンクを開く
+	Back	戻る
+	Field Click	フィールドのクリック
+	Close Reviewing Pane	[変更履歴] ウィンドウを閉じる
+	Maximize	最大化
+	Restore Down	元のサイズに戻す
+	Exit	終了
+	Revisions	変更履歴
+	{n} revisions	変更履歴 {n} 件
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	挿入: {ins}、削除: {del}、移動: {moves}、書式: {fmt}、コメント: {comments}
+	No revisions	変更履歴はありません
+	Changed	変更

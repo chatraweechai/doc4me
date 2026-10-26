@@ -126,9 +126,11 @@ fn page_keys_and_shrink_selection_move_like_word() {
     assert_eq!(s.sel.focus, Pos::body(0, 0));
     // F8 grows word → sentence → paragraph; Shift+F8 steps back down to the caret.
     run(&mut s, "caret.set", json!({"pos": {"block": 0, "off": 5}}));
-    for _ in 0..4 {
+    // The first press turns on Extend mode; four more grow word → sentence → paragraph → all.
+    for _ in 0..5 {
         run(&mut s, "select.extend", json!({}));
     }
+    run(&mut s, "select.collapse", json!({}));
     let grown = s.sel.ordered();
     assert_eq!((grown.0.path.clone(), grown.1.path.clone()), (doc4me_doc::Path::top(0), doc4me_doc::Path::top(1)), "the whole document");
     let mut steps = Vec::new();
@@ -5182,4 +5184,161 @@ fn format_picture_and_shape_apply_in_one_step() {
         (&got["fill"], &got["line"], &got["width"], &got["decorative"]),
         (&json!("00AA00"), &serde_json::Value::Null, &json!(150.0), &json!(true))
     );
+}
+
+/// F8 turns on Extend mode: arrows extend the selection without Shift; Esc turns it off and keeps
+/// the selection; an edit ends it.
+#[test]
+fn f8_extend_mode_extends_with_the_arrow_keys() {
+    let mut s = s();
+    run(&mut s, "text.insert", json!({"text": "Hello world, again"}));
+    run(&mut s, "caret.docStart", json!({}));
+    run(&mut s, "select.extend", json!({}));
+    assert!(s.extend_mode && s.sel.is_collapsed(), "the first F8 only turns the mode on");
+    for _ in 0..3 {
+        run(&mut s, "caret.right", json!({}));
+    }
+    assert_eq!(s.selected_text(), "Hel");
+    run(&mut s, "caret.wordRight", json!({}));
+    assert_eq!(s.selected_text(), "Hello ");
+    run(&mut s, "select.collapse", json!({}));
+    assert!(!s.extend_mode);
+    assert_eq!(s.selected_text(), "Hello ", "Esc keeps the selection");
+    run(&mut s, "caret.right", json!({}));
+    assert!(s.sel.is_collapsed(), "arrows move again");
+    run(&mut s, "select.extend", json!({}));
+    run(&mut s, "caret.right", json!({}));
+    run(&mut s, "text.insert", json!({"text": "X"}));
+    assert!(!s.extend_mode, "an edit ends Extend mode");
+}
+
+/// Shift+Alt+End / Home select to the end or start of the row, Shift+Alt+Page Down / Up to the
+/// bottom or top of the column, and Shift+arrows reach the next cells (Word's table keys).
+#[test]
+fn shift_alt_keys_select_table_rows_and_columns() {
+    let mut s = s();
+    run(&mut s, "insert.table", json!({"rows": 3, "cols": 3}));
+    for (i, name) in ["A1", "B1", "C1", "A2", "B2", "C2", "A3", "B3", "C3"].iter().enumerate() {
+        if i > 0 {
+            run(&mut s, "text.tab", json!({}));
+        }
+        run(&mut s, "text.insert", json!({"text": name}));
+    }
+    let cell = |p: &Pos| p.path.cell().map(|(_, r, c)| (r, c)).unwrap();
+    run(&mut s, "table.firstCellInColumn", json!({}));
+    run(&mut s, "table.firstCellInRow", json!({}));
+    assert_eq!(cell(&s.sel.focus), (0, 0));
+    run(&mut s, "table.lastCellInRow", json!({"extend": true}));
+    assert_eq!((cell(&s.sel.anchor), cell(&s.sel.focus), s.sel.focus.off), ((0, 0), (0, 2), 2), "the row, to the end of C1");
+    run(&mut s, "table.firstCellInRow", json!({}));
+    run(&mut s, "table.lastCellInColumn", json!({"extend": true}));
+    assert_eq!((cell(&s.sel.anchor), cell(&s.sel.focus)), ((0, 0), (2, 0)), "the column");
+    run(&mut s, "table.firstCellInColumn", json!({}));
+    run(&mut s, "caret.end", json!({}));
+    run(&mut s, "caret.right", json!({"extend": true}));
+    run(&mut s, "caret.down", json!({"extend": true}));
+    let (a, b) = s.sel.ordered();
+    assert!(cell(&a) == (0, 0) && cell(&b).0 >= 1, "Shift+arrows reach the next cells: {:?} – {:?}", cell(&a), cell(&b));
+    // The row's text is the selection's.
+    run(&mut s, "table.firstCellInColumn", json!({}));
+    run(&mut s, "table.firstCellInRow", json!({}));
+    run(&mut s, "table.lastCellInRow", json!({"extend": true}));
+    assert!(s.selected_text().contains("A1") && s.selected_text().contains("C1"));
+}
+
+/// Following a link to a bookmark moves the caret there; Back (Alt+Left) and Forward
+/// (Alt+Right) step through the jumps; a web link comes back for the interface to open.
+#[test]
+fn hyperlinks_back_and_forward() {
+    let mut s = s();
+    run(&mut s, "text.insert", json!({"text": "See "}));
+    run(&mut s, "insert.link", json!({"url": "#Target", "text": "the end"}));
+    run(&mut s, "text.newParagraph", json!({}));
+    run(&mut s, "text.insert", json!({"text": "Middle."}));
+    run(&mut s, "text.newParagraph", json!({}));
+    run(&mut s, "text.insert", json!({"text": "Target here."}));
+    run(&mut s, "caret.home", json!({}));
+    run(&mut s, "insert.bookmark", json!({"name": "Target"}));
+    run(&mut s, "caret.set", json!({"pos": {"block": 0, "off": 6}}));
+    let start = s.sel.focus.clone();
+    assert_eq!(run(&mut s, "web.follow", json!({}))["followed"], json!("Target"));
+    assert_eq!(s.sel.focus.path, doc4me_doc::Path::top(2));
+    run(&mut s, "web.back", json!({}));
+    assert_eq!(s.sel.focus, start);
+    run(&mut s, "web.forward", json!({}));
+    assert_eq!(s.sel.focus.path, doc4me_doc::Path::top(2));
+    assert!(s.run("web.forward", &json!({})).is_err(), "nothing further");
+    assert_eq!(run(&mut s, "web.follow", json!({"link": "https://example.org"}))["url"], json!("https://example.org"));
+    assert!(s.run("web.follow", &json!({"link": "#Nowhere"})).is_err());
+    if !cfg!(target_os = "macos") {
+        let reg = s.registry.clone();
+        assert_eq!(s.keymap.resolve(&reg, "Alt+Left").map(|c| c.id), Some("web.back"));
+        assert_eq!(s.keymap.resolve(&reg, "Alt+Right").map(|c| c.id), Some("web.forward"));
+    }
+}
+
+/// Alt+Shift+F9: GOTOBUTTON goes to its bookmark, MACROBUTTON NoMacro selects its placeholder,
+/// HYPERLINK \l follows the link.
+#[test]
+fn field_click_runs_goto_macro_and_hyperlink_fields() {
+    let mut s = s();
+    run(&mut s, "insert.field", json!({"instr": "GOTOBUTTON Target Go there", "result": "Go there"}));
+    run(&mut s, "text.newParagraph", json!({}));
+    run(&mut s, "insert.field", json!({"instr": "MACROBUTTON NoMacro [Type your name]", "result": "[Type your name]"}));
+    run(&mut s, "text.newParagraph", json!({}));
+    run(&mut s, "insert.field", json!({"instr": "HYPERLINK \\l \"Target\"", "result": "link"}));
+    run(&mut s, "text.newParagraph", json!({}));
+    run(&mut s, "text.insert", json!({"text": "Target."}));
+    run(&mut s, "caret.home", json!({}));
+    run(&mut s, "insert.bookmark", json!({"name": "Target"}));
+    run(&mut s, "caret.set", json!({"pos": {"block": 0, "off": 0}}));
+    run(&mut s, "fields.click", json!({}));
+    assert_eq!(s.sel.focus.path, doc4me_doc::Path::top(3), "GOTOBUTTON");
+    run(&mut s, "caret.set", json!({"pos": {"block": 1, "off": 0}}));
+    run(&mut s, "fields.click", json!({}));
+    assert!(!s.sel.is_collapsed() && s.sel.focus.path == doc4me_doc::Path::top(1), "MACROBUTTON NoMacro selects the field");
+    run(&mut s, "caret.set", json!({"pos": {"block": 2, "off": 0}}));
+    run(&mut s, "fields.click", json!({}));
+    assert_eq!(s.sel.focus.path, doc4me_doc::Path::top(3), "HYPERLINK \\l");
+    run(&mut s, "caret.set", json!({"pos": {"block": 3, "off": 0}}));
+    assert!(s.run("fields.click", &json!({})).is_err(), "no field there");
+}
+
+/// Save writes Word's hidden `_GoBack` bookmark at the last edit, so Shift+F5 right after opening
+/// goes back there; the open document doesn't get it.
+#[cfg(not(target_arch = "wasm32"))]
+#[test]
+fn shift_f5_after_opening_goes_to_the_last_edit() {
+    let dir = scratch_dir("goback");
+    let path = dir.join("go.docx");
+    let mut s = s();
+    run(&mut s, "text.insert", json!({"text": "First paragraph."}));
+    run(&mut s, "text.newParagraph", json!({}));
+    run(&mut s, "text.insert", json!({"text": "Second paragraph."}));
+    run(&mut s, "text.newParagraph", json!({}));
+    run(&mut s, "text.insert", json!({"text": "Third."}));
+    run(&mut s, "caret.set", json!({"pos": {"block": 1, "off": 6}}));
+    run(&mut s, "text.insert", json!({"text": "X"}));
+    run(&mut s, "caret.docStart", json!({}));
+    run(&mut s, "file.saveAs", json!({"path": path.to_string_lossy()}));
+    assert!(s.doc.bookmarks().is_empty(), "the open document has no _GoBack");
+    run(&mut s, "file.save", json!({}));
+    let mut t = Session::new(doc4me_doc::Document::new());
+    run(&mut t, "file.open", json!({"path": path.to_string_lossy()}));
+    assert_eq!(t.doc.bookmarks().iter().filter(|(n, _)| n == "_GoBack").count(), 1, "one, replaced on each save");
+    run(&mut t, "edit.goBack", json!({}));
+    assert_eq!((t.sel.focus.path.clone(), t.sel.focus.off), (doc4me_doc::Path::top(1), 7));
+    let _ = std::fs::remove_dir_all(&dir);
+}
+
+/// Review › Reviewing Pane shows and hides the pane; Alt+Shift+C closes it.
+#[test]
+fn reviewing_pane_opens_and_alt_shift_c_closes_it() {
+    let mut s = s();
+    assert_eq!(run(&mut s, "view.reviewingPane", json!({}))["value"], json!(true));
+    assert!(s.view.track_changes_pane);
+    let reg = s.registry.clone();
+    assert_eq!(s.keymap.resolve(&reg, "Alt+Shift+C").map(|c| c.id), Some("view.closeReviewingPane"));
+    run(&mut s, "view.closeReviewingPane", json!({}));
+    assert!(!s.view.track_changes_pane);
 }

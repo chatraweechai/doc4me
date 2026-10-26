@@ -2709,3 +2709,15 @@ spacing	Normal	Обычный
 	Right only	Только справа
 	Transparency:	Прозрачность:
 	relative to	относительно
+	Open Hyperlink	Открыть гиперссылку
+	Back	Назад
+	Field Click	Щелчок по полю
+	Close Reviewing Pane	Закрыть область проверки
+	Maximize	Развернуть
+	Restore Down	Свернуть в окно
+	Exit	Выход
+	Revisions	Исправления
+	{n} revisions	Исправлений: {n}
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Вставки: {ins}, удаления: {del}, перемещения: {moves}, форматирование: {fmt}, примечания: {comments}
+	No revisions	Исправлений нет
+	Changed	Изменено
