@@ -2754,3 +2754,13 @@ spacing	Normal	Normale
 	{n} of {of} recipients	{n} di {of} destinatari
 	New Folder	Nuova cartella
 	{name} can't be a folder's name.	{name} non può essere il nome di una cartella.
+	Trust Center	Centro protezione
+	Allow Doc4Me to use online services	Consenti a Doc4Me di usare i servizi online
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Immagini online (Openverse), Traduci (MyMemory o il tuo server LibreTranslate), Scarica componenti aggiuntivi e il download del modello vocale di Detta si connettono a Internet, e solo quando li usi. Se disattivato, Doc4Me non stabilisce alcuna connessione di sua iniziativa.
+	Online services are turned off (File › Options › Trust Center).	I servizi online sono disattivati (File › Opzioni › Centro protezione).
+	Cut, copy, and paste	Taglia, copia e incolla
+	Pasting within the same document:	Incolla nello stesso documento:
+	Pasting between documents:	Incolla tra documenti:
+	Pasting from other programs:	Incolla da altri programmi:
+	Keep Source Formatting	Mantieni formattazione originale
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Unisci formattazione incolla il testo con la formattazione del punto di arrivo, come Mantieni solo testo.

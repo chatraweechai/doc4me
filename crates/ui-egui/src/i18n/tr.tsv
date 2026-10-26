@@ -2774,3 +2774,13 @@ spacing	Normal	Normal
 	{n} of {of} recipients	{of} alıcıdan {n} tanesi
 	New Folder	Yeni Klasör
 	{name} can't be a folder's name.	{name} bir klasör adı olamaz.
+	Trust Center	Güven Merkezi
+	Allow Doc4Me to use online services	Doc4Me'nin çevrimiçi hizmetleri kullanmasına izin ver
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Çevrimiçi Resimler (Openverse), Çevir (MyMemory veya LibreTranslate sunucunuz), Eklenti Al ve Dikte konuşma modelinin indirilmesi internete bağlanır ve yalnızca bunları kullandığınızda. Kapalıyken Doc4Me kendiliğinden hiçbir bağlantı kurmaz.
+	Online services are turned off (File › Options › Trust Center).	Çevrimiçi hizmetler kapalı (Dosya › Seçenekler › Güven Merkezi).
+	Cut, copy, and paste	Kesme, kopyalama ve yapıştırma
+	Pasting within the same document:	Aynı belge içinde yapıştırma:
+	Pasting between documents:	Belgeler arasında yapıştırma:
+	Pasting from other programs:	Diğer programlardan yapıştırma:
+	Keep Source Formatting	Kaynak Biçimlendirmesini Koru
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Biçimlendirmeyi Birleştir, Yalnızca Metni Koru gibi metni yapıştırıldığı yerin biçimlendirmesiyle yapıştırır.

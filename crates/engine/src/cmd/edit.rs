@@ -151,6 +151,7 @@ fn copy(s: &mut Session, _: &Value) -> CmdResult {
     s.clipboard_text = f.plain_text();
     s.clip_history.push(&f, &s.clipboard_text);
     s.clipboard = Some(f);
+    s.clipboard_doc = Some(s.document_id());
     Ok(json!({"text": s.clipboard_text}))
 }
 
@@ -260,13 +261,19 @@ fn paste_spike(s: &mut Session, _: &Value) -> CmdResult {
 }
 
 fn paste(s: &mut Session, v: &Value) -> CmdResult {
+    // File › Options › Advanced › Cut, copy, and paste: our own copy from this document or
+    // another one, or another program's.
+    let ours = if s.clipboard_doc == Some(s.document_id()) { s.prefs.paste_same } else { s.prefs.paste_between };
     // An explicit text param (from the system clipboard) wins unless it matches our own copy.
-    let frag = match (p::str(v, "text"), &s.clipboard) {
-        (Some(t), Some(f)) if f.plain_text() == t.replace("\r\n", "\n") => f.clone(),
-        (Some(t), _) => Fragment::from_text(&t.replace("\r\n", "\n")),
-        (None, Some(f)) => f.clone(),
+    let (frag, mode) = match (p::str(v, "text"), &s.clipboard) {
+        (Some(t), Some(f)) if f.plain_text() == t.replace("\r\n", "\n") => (f.clone(), ours),
+        (Some(t), _) => (Fragment::from_text(&t.replace("\r\n", "\n")), s.prefs.paste_other),
+        (None, Some(f)) => (f.clone(), ours),
         (None, None) => return Err(CmdError::Failed("the clipboard is empty".into())),
     };
+    if mode != crate::session::PasteMode::Keep {
+        return paste_text(s, &json!({"text": frag.plain_text()}));
+    }
     super::paste::insert(s, frag)?;
     sel_result(s)
 }

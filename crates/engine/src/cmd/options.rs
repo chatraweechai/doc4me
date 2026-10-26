@@ -7,7 +7,7 @@ use serde_json::{Value, json};
 use crate::{CmdError, CmdResult, CommandSpec, Prefs, Session, p};
 
 /// Options panes, in the order the page lists them (the `pane` param of `file.options`).
-pub const PANES: [&str; 8] = ["general", "display", "proofing", "save", "language", "accessibility", "advanced", "agents"];
+pub const PANES: [&str; 9] = ["general", "display", "proofing", "save", "language", "accessibility", "advanced", "trustCenter", "agents"];
 
 /// Longest initials kept, in characters.
 pub const MAX_INITIALS_CHARS: usize = 9;
@@ -20,7 +20,7 @@ pub fn specs() -> Vec<CommandSpec> {
     vec![
         CommandSpec::new("file.options", "Options", "File", options)
             .params(
-                r#"{"pane"?: "general|display|proofing|save|language|accessibility|advanced|agents", "author"?: string, "initials"?: string, "units"?: "inches|centimeters|millimeters|points|picas", "typingReplacesSelection"?: bool, "insertKeyOvertype"?: bool, "overtype"?: bool, "marks"?: {"tabs"?: bool, "spaces"?: bool, "paragraphs"?: bool, "hidden"?: bool}, "checkSpelling"?: bool, "markGrammar"?: bool, "ignoreUppercase"?: bool, "ignoreNumbers"?: bool, "ignoreInternet"?: bool, "addWords"?: [string], "removeWords"?: [string]} — with any setting it changes them and opens nothing; without, it opens File › Options (at `pane`). Returns the settings."#,
+                r#"{"pane"?: "general|display|proofing|save|language|accessibility|advanced|trustCenter|agents", "author"?: string, "initials"?: string, "units"?: "inches|centimeters|millimeters|points|picas", "typingReplacesSelection"?: bool, "insertKeyOvertype"?: bool, "overtype"?: bool, "marks"?: {"tabs"?: bool, "spaces"?: bool, "paragraphs"?: bool, "hidden"?: bool}, "checkSpelling"?: bool, "markGrammar"?: bool, "ignoreUppercase"?: bool, "ignoreNumbers"?: bool, "ignoreInternet"?: bool, "addWords"?: [string], "removeWords"?: [string], "pasteSame"|"pasteBetween"|"pasteOther"?: "keep|merge|text" (Paste within this document, between documents, from other programs)} — with any setting it changes them and opens nothing; without, it opens File › Options (at `pane`). Returns the settings."#,
             )
             .pure(),
         CommandSpec::new("text.overtype", "Overtype", "File › Options › Advanced", |s, v| {
@@ -119,6 +119,17 @@ fn options(s: &mut Session, v: &Value) -> CmdResult {
         Some(_) => return Err(CmdError::Params("`marks` must be an object of true/false".into())),
     }
     let check_spelling = bool_param(v, "checkSpelling")?;
+    let mut paste_values = Vec::new();
+    for (k, f) in paste_modes() {
+        match v.get(k) {
+            None | Some(Value::Null) => {}
+            Some(m) => paste_values.push((
+                f,
+                serde_json::from_value::<crate::session::PasteMode>(m.clone())
+                    .map_err(|_| CmdError::Params(format!("`{k}` is one of keep, merge, text")))?,
+            )),
+        }
+    }
     let add = words_param(v, "addWords")?;
     let remove = words_param(v, "removeWords")?;
 
@@ -128,6 +139,7 @@ fn options(s: &mut Session, v: &Value) -> CmdResult {
         || !flag_values.is_empty()
         || !mark_values.is_empty()
         || check_spelling.is_some()
+        || !paste_values.is_empty()
         || !add.is_empty()
         || !remove.is_empty();
     if let Some(name) = author {
@@ -144,6 +156,9 @@ fn options(s: &mut Session, v: &Value) -> CmdResult {
     }
     for (f, b) in mark_values {
         *f(&mut s.prefs.marks) = b;
+    }
+    for (f, m) in paste_values {
+        *f(&mut s.prefs) = m;
     }
     if let Some(b) = check_spelling {
         s.view.proofing = b;
@@ -183,6 +198,14 @@ pub fn current(s: &Session) -> Value {
         "ignoreUppercase": pr.ignore_uppercase,
         "ignoreNumbers": pr.ignore_numbers,
         "ignoreInternet": pr.ignore_internet,
+        "pasteSame": pr.paste_same,
+        "pasteBetween": pr.paste_between,
+        "pasteOther": pr.paste_other,
         "dictionary": doc4me_proof::user_dictionary(),
     })
+}
+
+/// Cut, copy, and paste: the `file.options` names of the three paste defaults.
+fn paste_modes() -> [(&'static str, fn(&mut Prefs) -> &mut crate::session::PasteMode); 3] {
+    [("pasteSame", |p| &mut p.paste_same), ("pasteBetween", |p| &mut p.paste_between), ("pasteOther", |p| &mut p.paste_other)]
 }

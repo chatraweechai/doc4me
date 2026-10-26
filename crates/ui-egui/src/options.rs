@@ -50,6 +50,7 @@ fn pane_label(id: &str) -> &'static str {
         "language" => "Language",
         "accessibility" => "Accessibility",
         "advanced" => "Advanced",
+        "trustCenter" => "Trust Center",
         "agents" => "Agents",
         _ => "General",
     }
@@ -94,6 +95,7 @@ pub fn page(app: &mut WordApp, ui: &mut Ui) {
                 "language" => language(app, ui),
                 "accessibility" => accessibility(app, ui),
                 "advanced" => advanced(app, ui),
+                "trustCenter" => trust_center(app, ui),
                 "agents" => agents(ui),
                 _ => general(app, ui),
             }
@@ -298,6 +300,31 @@ fn advanced(app: &mut WordApp, ui: &mut Ui) {
     flag(app, ui, "Use the Insert key to switch overtype on and off", "insertKeyOvertype", pr.insert_key_overtype);
     flag(app, ui, "Overtype (typing replaces the characters after the caret)", "overtype", pr.overtype);
     ui.add_space(8.0);
+    // What Paste keeps by default (Word's Cut, copy, and paste options).
+    section(ui, "Cut, copy, and paste");
+    egui::Grid::new("options_paste").num_columns(2).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
+        use doc4me_engine::PasteMode;
+        const MODES: [(PasteMode, &str); 3] =
+            [(PasteMode::Keep, "Keep Source Formatting"), (PasteMode::Merge, "Merge Formatting"), (PasteMode::Text, "Keep Text Only")];
+        for (label, key, current) in [
+            ("Pasting within the same document:", "pasteSame", pr.paste_same),
+            ("Pasting between documents:", "pasteBetween", pr.paste_between),
+            ("Pasting from other programs:", "pasteOther", pr.paste_other),
+        ] {
+            ui.label(tl!(label));
+            let name = MODES.iter().find(|(m, _)| *m == current).map_or("Keep Source Formatting", |(_, n)| n);
+            egui::ComboBox::from_id_salt(("options_paste", key)).selected_text(tl!(name)).width(200.0).show_ui(ui, |ui| {
+                for (m, n) in MODES {
+                    if ui.selectable_label(current == m, tl!(n)).clicked() {
+                        set(app, json!({ key: m }));
+                    }
+                }
+            });
+            ui.end_row();
+        }
+    });
+    note(ui, "Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.");
+    ui.add_space(8.0);
     section(ui, "Display");
     egui::Grid::new("options_display").num_columns(2).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
         ui.label(tl!("Recent documents to show:"));
@@ -358,6 +385,16 @@ fn advanced(app: &mut WordApp, ui: &mut Ui) {
             let _ = app.run("tools.customizeRibbon", json!({}));
         }
     });
+}
+
+/// Trust Center: whether Doc4Me connects to online services at all.
+fn trust_center(app: &mut WordApp, ui: &mut Ui) {
+    section(ui, "Trust Center");
+    ui.checkbox(&mut app.ui.online_services, tl!("Allow Doc4Me to use online services"));
+    note(
+        ui,
+        "Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.",
+    );
 }
 
 fn agents(ui: &mut Ui) {

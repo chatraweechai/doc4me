@@ -276,6 +276,8 @@ pub struct Session {
     pub path: Option<std::path::PathBuf>,
     pub dirty: bool,
     pub clipboard: Option<Fragment>,
+    /// The document the clipboard's content was copied from ([`Session::document_id`]).
+    pub clipboard_doc: Option<u64>,
     /// A tracked cut the next paste can turn into a move (see `cmd::moves`).
     pub pending_move: Option<crate::cmd::moves::PendingMove>,
     /// F2 / Shift+F2 (Move Text / Copy Text): the text Enter moves or copies to the caret.
@@ -443,6 +445,24 @@ pub struct Prefs {
     /// Equation Options › Recognized Functions: the names set upright as functions when an
     /// equation builds up (per user, as in Word); `None`, the built-in list.
     pub math_functions: Option<Vec<String>>,
+    /// File › Options › Advanced › Cut, copy, and paste: what Paste keeps when the content comes
+    /// from this document, from another document, or from another program.
+    pub paste_same: PasteMode,
+    pub paste_between: PasteMode,
+    pub paste_other: PasteMode,
+}
+
+/// What Paste keeps of the copied content's formatting (Word's Paste Options).
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum PasteMode {
+    /// Keep Source Formatting.
+    #[default]
+    Keep,
+    /// Merge Formatting: the text takes the formatting where it lands (as Keep Text Only, here).
+    Merge,
+    /// Keep Text Only.
+    Text,
 }
 
 impl Default for Prefs {
@@ -464,6 +484,9 @@ impl Default for Prefs {
             autocorrect: Default::default(),
             auto_caption: Vec::new(),
             math_functions: None,
+            paste_same: PasteMode::Keep,
+            paste_between: PasteMode::Keep,
+            paste_other: PasteMode::Keep,
         }
     }
 }
@@ -496,6 +519,7 @@ impl Session {
             path: None,
             dirty: false,
             clipboard: None,
+            clipboard_doc: None,
             pending_move: None,
             move_text: None,
             shape_nav: false,
@@ -935,6 +959,7 @@ impl Session {
             path: _,
             dirty,
             clipboard: _,
+            clipboard_doc: _,
             // Like the clipboard: what the next paste can make a move of.
             pending_move: _,
             move_text: _,

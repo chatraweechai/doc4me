@@ -262,6 +262,9 @@ pub struct UiState {
     pub translator: translator::Settings,
     /// The add-ins installed from Get Add-ins: each pack's text, installed again at start-up.
     pub addins: Vec<String>,
+    /// File › Options › Trust Center: Doc4Me may connect to online services (Online Pictures,
+    /// Translate, Get Add-ins, Dictate's speech model). Off, it makes no connection of its own.
+    pub online_services: bool,
 }
 
 /// Most recent documents kept (File › Options › Advanced offers 0–50, as Word does).
@@ -315,6 +318,7 @@ impl Default for UiState {
             dictionary: Vec::new(),
             translator: translator::Settings::default(),
             addins: Vec::new(),
+            online_services: true,
         }
     }
 }

@@ -62,7 +62,7 @@ pub fn hook(ctx: &egui::Context) -> Hook {
                     let _ = tx.send(e);
                     ctx.request_repaint();
                 };
-                let end = match run(&req.language, &models, &flag, &send) {
+                let end = match run(&req.language, req.online, &models, &flag, &send) {
                     Ok(()) => DictationEvent::Stopped,
                     Err(e) => DictationEvent::Error(e),
                 };
@@ -90,10 +90,13 @@ fn file_sha256(path: &Path) -> Result<String, String> {
 }
 
 /// The model's file, downloaded and checked first if it isn't there yet.
-fn ensure_model(model: &Model, dir: &Path, stop: &AtomicBool, send: &dyn Fn(DictationEvent)) -> Result<PathBuf, String> {
+fn ensure_model(model: &Model, dir: &Path, online: bool, stop: &AtomicBool, send: &dyn Fn(DictationEvent)) -> Result<PathBuf, String> {
     let path = dir.join(model.file);
     if std::fs::metadata(&path).is_ok_and(|m| m.len() == model.size) {
         return Ok(path);
+    }
+    if !online {
+        return Err("the speech model isn't on this computer and online services are turned off (File › Options › Trust Center)".into());
     }
     std::fs::create_dir_all(dir).map_err(|e| format!("couldn't make {}: {e}", dir.display()))?;
     let part = dir.join(format!("{}.part", model.file));
@@ -225,9 +228,9 @@ pub fn clean(text: &str) -> String {
     out.split_whitespace().collect::<Vec<_>>().join(" ")
 }
 
-fn run(language: &str, models: &Path, stop: &AtomicBool, send: &dyn Fn(DictationEvent)) -> Result<(), String> {
+fn run(language: &str, online: bool, models: &Path, stop: &AtomicBool, send: &dyn Fn(DictationEvent)) -> Result<(), String> {
     let model = model_for(language);
-    let path = ensure_model(model, models, stop, send)?;
+    let path = ensure_model(model, models, online, stop, send)?;
     send(DictationEvent::Loading);
     whisper_rs::install_logging_hooks();
     let ctx = whisper_rs::WhisperContext::new_with_params(&path, whisper_rs::WhisperContextParameters::default())
@@ -361,7 +364,7 @@ mod tests {
         let samples: Vec<f32> = bytes[data..].chunks_exact(2).map(|c| i16::from_le_bytes([c[0], c[1]]) as f32 / 32768.0).collect();
         let dir = std::env::temp_dir().join("doc4me-whisper-test");
         let stop = AtomicBool::new(false);
-        let path = ensure_model(&BASE, &dir, &stop, &|_| {}).unwrap();
+        let path = ensure_model(&BASE, &dir, true, &stop, &|_| {}).unwrap();
         assert_eq!(file_sha256(&path).unwrap(), BASE.sha256);
         let ctx = whisper_rs::WhisperContext::new_with_params(&path, whisper_rs::WhisperContextParameters::default()).unwrap();
         let mut state = ctx.create_state().unwrap();
@@ -387,5 +390,14 @@ mod tests {
         assert_eq!(clean("สวัสดีครับ"), "สวัสดีครับ");
         assert_eq!(model_for("th").file, "ggml-small-q5_1.bin");
         assert_eq!(model_for("en").file, "ggml-base-q5_1.bin");
+    }
+
+    /// File › Options › Trust Center off: no download, not even a folder for one.
+    #[test]
+    fn no_download_with_online_services_off() {
+        let dir = std::env::temp_dir().join(format!("doc4me-no-download-{}", std::process::id()));
+        let e = ensure_model(&BASE, &dir, false, &AtomicBool::new(false), &|_| panic!("nothing is downloaded")).unwrap_err();
+        assert!(e.contains("Trust Center"), "{e}");
+        assert!(!dir.exists());
     }
 }

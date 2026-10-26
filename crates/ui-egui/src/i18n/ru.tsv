@@ -2775,3 +2775,13 @@ spacing	Normal	Обычный
 	{n} of {of} recipients	{n} из {of} получателей
 	New Folder	Новая папка
 	{name} can't be a folder's name.	{name} не может быть именем папки.
+	Trust Center	Центр управления безопасностью
+	Allow Doc4Me to use online services	Разрешить Doc4Me использовать веб-службы
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Изображения из Интернета (Openverse), Перевод (MyMemory или ваш сервер LibreTranslate), Получить надстройки и загрузка речевой модели для диктовки подключаются к Интернету, и только когда вы ими пользуетесь. Когда параметр выключен, Doc4Me сам не устанавливает подключений.
+	Online services are turned off (File › Options › Trust Center).	Веб-службы отключены (Файл › Параметры › Центр управления безопасностью).
+	Cut, copy, and paste	Вырезание, копирование и вставка
+	Pasting within the same document:	Вставка в пределах одного документа:
+	Pasting between documents:	Вставка в другой документ:
+	Pasting from other programs:	Вставка из других программ:
+	Keep Source Formatting	Сохранить исходное форматирование
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Объединить форматирование вставляет текст с форматированием места вставки, как Сохранить только текст.

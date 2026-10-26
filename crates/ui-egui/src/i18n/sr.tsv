@@ -2761,3 +2761,13 @@ spacing	Normal	Нормално
 	{n} of {of} recipients	{n} од {of} прималаца
 	New Folder	Нова фасцикла
 	{name} can't be a folder's name.	{name} не може бити име фасцикле.
+	Trust Center	Центар за безбедност
+	Allow Doc4Me to use online services	Дозволи апликацији Doc4Me да користи услуге на мрежи
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Слике на мрежи (Openverse), Превођење (MyMemory или ваш LibreTranslate сервер), Преузимање додатака и преузимање говорног модела за диктирање повезују се на интернет, и то само када их користите. Када је искључено, Doc4Me се сам не повезује.
+	Online services are turned off (File › Options › Trust Center).	Услуге на мрежи су искључене (Датотека › Опције › Центар за безбедност).
+	Cut, copy, and paste	Исецање, копирање и лепљење
+	Pasting within the same document:	Лепљење унутар истог документа:
+	Pasting between documents:	Лепљење између докумената:
+	Pasting from other programs:	Лепљење из других програма:
+	Keep Source Formatting	Задржи изворно обликовање
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Спајање обликовања лепи текст у обликовању места где се лепи, као и Задржи само текст.

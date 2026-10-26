@@ -43,6 +43,10 @@ pub fn allowed(url: &str) -> bool {
 /// Send `req` through the host. An error when there is no web access here or the address
 /// isn't allowed.
 pub(crate) fn start(app: &crate::WordApp, req: FetchRequest) -> Result<Receiver<FetchAnswer>, String> {
+    // File › Options › Trust Center: every request Doc4Me makes comes through here.
+    if !app.ui.online_services {
+        return Err(tl!("Online services are turned off (File › Options › Trust Center).").to_string());
+    }
     if !allowed(&req.url) {
         return Err(tl!("only https addresses can be used").to_string());
     }
@@ -107,5 +111,31 @@ mod tests {
         assert!(start(&app, FetchRequest::get("http://example.com", 10)).is_err(), "not https");
         let rx = start(&app, FetchRequest::get("https://example.com", 10)).unwrap();
         assert!(Pending::new(rx).poll().is_some_and(|a| a.is_err()), "dropped by the host");
+    }
+
+    /// dlg-214: File › Options › Trust Center turns every connection off, and back on.
+    #[test]
+    fn trust_center_turns_online_services_off() {
+        use std::sync::atomic::{AtomicUsize, Ordering};
+        let asked = std::sync::Arc::new(AtomicUsize::new(0));
+        let count = asked.clone();
+        let services = crate::Services {
+            fetch: Some(Box::new(move |_| {
+                count.fetch_add(1, Ordering::SeqCst);
+                std::sync::mpsc::channel().1
+            })),
+            ..Default::default()
+        };
+        let mut app = crate::WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), services);
+        app.ui.online_services = false;
+        let refused = start(&app, FetchRequest::get("https://api.openverse.org/v1/images/?q=cat", 10));
+        assert!(refused.is_err_and(|e| e.contains("Trust Center")));
+        assert_eq!(asked.load(Ordering::SeqCst), 0, "the host was never asked");
+        app.ui.online_services = true;
+        assert!(start(&app, FetchRequest::get("https://api.openverse.org/v1/images/?q=cat", 10)).is_ok());
+        assert_eq!(asked.load(Ordering::SeqCst), 1);
+        // The pane opens by name, as File › Options › Trust Center.
+        app.run("file.options", serde_json::json!({"pane": "trustCenter"})).unwrap();
+        assert!(app.ui.backstage && app.ui.options_pane == "trustCenter");
     }
 }

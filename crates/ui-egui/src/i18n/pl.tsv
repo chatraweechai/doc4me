@@ -2752,3 +2752,13 @@ spacing	Normal	Normalne
 	{n} of {of} recipients	{n} z {of} adresatów
 	New Folder	Nowy folder
 	{name} can't be a folder's name.	{name} nie może być nazwą folderu.
+	Trust Center	Centrum zaufania
+	Allow Doc4Me to use online services	Zezwalaj aplikacji Doc4Me na korzystanie z usług online
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Obrazy online (Openverse), Tłumacz (MyMemory lub Twój serwer LibreTranslate), Pobierz dodatki oraz pobieranie modelu mowy do dyktowania łączą się z internetem, i tylko wtedy, gdy z nich korzystasz. Po wyłączeniu Doc4Me sam nie nawiązuje żadnych połączeń.
+	Online services are turned off (File › Options › Trust Center).	Usługi online są wyłączone (Plik › Opcje › Centrum zaufania).
+	Cut, copy, and paste	Wycinanie, kopiowanie i wklejanie
+	Pasting within the same document:	Wklejanie w obrębie tego samego dokumentu:
+	Pasting between documents:	Wklejanie między dokumentami:
+	Pasting from other programs:	Wklejanie z innych programów:
+	Keep Source Formatting	Zachowaj formatowanie źródłowe
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Scal formatowanie wkleja tekst w formatowaniu miejsca docelowego, tak jak Zachowaj tylko tekst.

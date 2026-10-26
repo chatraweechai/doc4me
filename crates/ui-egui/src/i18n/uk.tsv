@@ -2759,3 +2759,13 @@ spacing	Normal	Звичайний
 	{n} of {of} recipients	{n} з {of} одержувачів
 	New Folder	Нова папка
 	{name} can't be a folder's name.	{name} не може бути назвою папки.
+	Trust Center	Центр безпеки
+	Allow Doc4Me to use online services	Дозволити Doc4Me використовувати онлайн-служби
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Зображення з Інтернету (Openverse), Переклад (MyMemory або ваш сервер LibreTranslate), Отримати надбудови та завантаження мовленнєвої моделі для диктування підключаються до Інтернету, і лише коли ви ними користуєтеся. Якщо вимкнути, Doc4Me сам не встановлює жодних підключень.
+	Online services are turned off (File › Options › Trust Center).	Онлайн-служби вимкнено (Файл › Параметри › Центр безпеки).
+	Cut, copy, and paste	Вирізання, копіювання та вставлення
+	Pasting within the same document:	Вставлення в межах одного документа:
+	Pasting between documents:	Вставлення між документами:
+	Pasting from other programs:	Вставлення з інших програм:
+	Keep Source Formatting	Зберегти вихідне форматування
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Об’єднати форматування вставляє текст із форматуванням місця вставлення, як і Зберегти лише текст.

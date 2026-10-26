@@ -20,6 +20,9 @@ use crate::theme::Tokens;
 pub struct DictationRequest {
     /// A Whisper language code (`th`, `en`, `ja`…).
     pub language: String,
+    /// File › Options › Trust Center allows online services: the speech model may be
+    /// downloaded. Off, only a model already on the computer is used.
+    pub online: bool,
 }
 
 /// What the host tells the UI while dictating.
@@ -113,7 +116,7 @@ fn start(app: &mut WordApp, language: String) {
         app.status(tl!("Dictation isn't available here.").to_string());
         return;
     };
-    match hook(DictationRequest { language: language.clone() }) {
+    match hook(DictationRequest { language: language.clone(), online: app.ui.online_services }) {
         Ok(session) => app.dictation = Some(Active { session, language, state: DictationEvent::Loading }),
         Err(e) => failed(app, &e),
     }
@@ -257,6 +260,7 @@ mod tests {
         let services = crate::Services {
             dictate: Some(Box::new(move |req: DictationRequest| {
                 assert_eq!(req.language, "en");
+                assert!(req.online, "Trust Center allows online services by default");
                 Ok(Dictation { events: rx.borrow_mut().take().ok_or("busy")?, stop: flag.clone() })
             })),
             ..Default::default()

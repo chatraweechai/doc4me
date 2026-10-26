@@ -2752,3 +2752,13 @@ spacing	Normal	Normální
 	{n} of {of} recipients	{n} z {of} příjemců
 	New Folder	Nová složka
 	{name} can't be a folder's name.	{name} nemůže být názvem složky.
+	Trust Center	Centrum zabezpečení
+	Allow Doc4Me to use online services	Povolit aplikaci Doc4Me používat online služby
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Online obrázky (Openverse), Překlad (MyMemory nebo váš server LibreTranslate), Získat doplňky a stažení řečového modelu pro diktování se připojují k internetu, a to jen když je použijete. Když je tato možnost vypnutá, Doc4Me se sám nikam nepřipojuje.
+	Online services are turned off (File › Options › Trust Center).	Online služby jsou vypnuté (Soubor › Možnosti › Centrum zabezpečení).
+	Cut, copy, and paste	Vyjmutí, kopírování a vložení
+	Pasting within the same document:	Vkládání v rámci jednoho dokumentu:
+	Pasting between documents:	Vkládání mezi dokumenty:
+	Pasting from other programs:	Vkládání z jiných programů:
+	Keep Source Formatting	Zachovat formátování zdroje
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Sloučit formátování vloží text ve formátování místa vložení, stejně jako Zachovat pouze text.

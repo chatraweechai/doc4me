@@ -197,6 +197,7 @@ fn copy(s: &mut Session, segs: &[(Pos, Pos)]) -> CmdResult {
     }
     s.clipboard_text = rows.join("\n");
     s.clipboard = Some(Fragment { blocks, parts });
+    s.clipboard_doc = Some(s.document_id());
     Ok(json!({"text": s.clipboard_text}))
 }
 

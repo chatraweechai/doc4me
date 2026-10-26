@@ -2748,3 +2748,13 @@ spacing	Normal	Normál
 	{n} of {of} recipients	{n} / {of} címzett
 	New Folder	Új mappa
 	{name} can't be a folder's name.	{name} nem lehet mappa neve.
+	Trust Center	Adatvédelmi központ
+	Allow Doc4Me to use online services	A Doc4Me használhat online szolgáltatásokat
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Az Online képek (Openverse), a Fordítás (MyMemory vagy a saját LibreTranslate-kiszolgálója), a Bővítmények beszerzése és a Diktálás beszédmodelljének letöltése az internethez csatlakozik, és csak akkor, amikor használja őket. Kikapcsolva a Doc4Me magától semmihez sem csatlakozik.
+	Online services are turned off (File › Options › Trust Center).	Az online szolgáltatások ki vannak kapcsolva (Fájl › Beállítások › Adatvédelmi központ).
+	Cut, copy, and paste	Kivágás, másolás és beillesztés
+	Pasting within the same document:	Beillesztés ugyanazon a dokumentumon belül:
+	Pasting between documents:	Beillesztés dokumentumok között:
+	Pasting from other programs:	Beillesztés más programokból:
+	Keep Source Formatting	Forrásformázás megtartása
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	A Formázás egyesítése a beillesztés helyének formázásával illeszti be a szöveget, ahogy a Csak a szöveg megtartása is.

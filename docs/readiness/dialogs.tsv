@@ -206,13 +206,13 @@ dlg-204	wdDialogToolsOptionsAutoFormatAsYouType	778	(none)	tools.autocorrect	reg
 dlg-205	wdDialogToolsOptionsBidi	1029	(none)	-	registry		
 dlg-206	wdDialogToolsOptionsCompatibility	525	(none)	file.compatibilityOptions	registry		Compatibility Options: the layout options Doc4Me follows (Options › Advanced)
 dlg-207	wdDialogToolsOptionsEdit	224	(none)	file.options	registry		Advanced
-dlg-208	wdDialogToolsOptionsEditCopyPaste	1356	(none)	-	registry		Options has no cut, copy and paste settings
+dlg-208	wdDialogToolsOptionsEditCopyPaste	1356	(none)	file.options	registry		File › Options › Advanced › Cut, copy, and paste: Pasting within the same document, between documents, from other programs (Keep Source Formatting, Merge Formatting, Keep Text Only); file.options pasteSame/pasteBetween/pasteOther
 dlg-209	wdDialogToolsOptionsFileLocations	225	(none)	-	registry		
 dlg-210	wdDialogToolsOptionsFuzzy	790	(none)	-	registry		Japanese fuzzy find
 dlg-211	wdDialogToolsOptionsGeneral	203	(none)	file.options	registry		General
 dlg-212	wdDialogToolsOptionsPrint	208	(none)	file.options	registry		Advanced › Print
 dlg-213	wdDialogToolsOptionsSave	209	(none)	file.options	registry		Save
-dlg-214	wdDialogToolsOptionsSecurity	1361	(none)	-	registry		Trust Center
+dlg-214	wdDialogToolsOptionsSecurity	1361	(none)	file.options	registry		File › Options › Trust Center: Allow Doc4Me to use online services (Online Pictures, Translate, Get Add-ins, the Dictate model download); off, Doc4Me makes no connection of its own. Word's macro/ActiveX/protected-view settings have no counterpart (Doc4Me runs no VBA or ActiveX)
 dlg-215	wdDialogToolsOptionsSmartTag	1395	(none)	-	registry		legacy
 dlg-216	wdDialogToolsOptionsSpellingAndGrammar	211	(none)	file.options	registry		Proofing
 dlg-217	wdDialogToolsOptionsTrackChanges	386	(none)	review.trackingOptions	registry		

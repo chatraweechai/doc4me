@@ -2755,3 +2755,13 @@ spacing	Normal	Tavaline
 	{n} of {of} recipients	{n} adressaati {of}-st
 	New Folder	Uus kaust
 	{name} can't be a folder's name.	{name} ei saa olla kausta nimi.
+	Trust Center	Usalduskeskus
+	Allow Doc4Me to use online services	Luba Doc4Me-l kasutada võrguteenuseid
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Võrgupildid (Openverse), Tõlge (MyMemory või teie LibreTranslate'i server), Lisandmoodulite toomine ja dikteerimise kõnemudeli allalaadimine loovad ühenduse internetiga, ja ainult siis, kui neid kasutate. Väljalülitatuna ei loo Doc4Me ise ühtegi ühendust.
+	Online services are turned off (File › Options › Trust Center).	Võrguteenused on välja lülitatud (Fail › Suvandid › Usalduskeskus).
+	Cut, copy, and paste	Lõikamine, kopeerimine ja kleepimine
+	Pasting within the same document:	Kleepimine sama dokumendi piires:
+	Pasting between documents:	Kleepimine dokumentide vahel:
+	Pasting from other programs:	Kleepimine muudest programmidest:
+	Keep Source Formatting	Säilita lähtevorming
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Vormingu ühendamine kleebib teksti sihtkoha vormingus, nagu Säilita ainult tekst.

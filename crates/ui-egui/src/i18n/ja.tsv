@@ -2747,3 +2747,13 @@ spacing	Normal	標準
 	{n} of {of} recipients	{of} 人中 {n} 人の宛先
 	New Folder	新しいフォルダー
 	{name} can't be a folder's name.	{name} はフォルダー名に使えません。
+	Trust Center	トラスト センター
+	Allow Doc4Me to use online services	Doc4Me がオンライン サービスを使用することを許可する
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	オンライン画像 (Openverse)、翻訳 (MyMemory またはお使いの LibreTranslate サーバー)、アドインの入手、ディクテーションの音声モデルのダウンロードは、使用するときにのみインターネットに接続します。オフにすると、Doc4Me は自ら接続しません。
+	Online services are turned off (File › Options › Trust Center).	オンライン サービスはオフになっています (ファイル › オプション › トラスト センター)。
+	Cut, copy, and paste	切り取り、コピー、貼り付け
+	Pasting within the same document:	同じ文書内での貼り付け:
+	Pasting between documents:	文書間での貼り付け:
+	Pasting from other programs:	他のプログラムからの貼り付け:
+	Keep Source Formatting	元の書式を保持
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	書式を結合は、テキストのみ保持と同じく、貼り付け先の書式でテキストを貼り付けます。

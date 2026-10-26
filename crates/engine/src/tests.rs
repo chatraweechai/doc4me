@@ -5342,3 +5342,47 @@ fn reviewing_pane_opens_and_alt_shift_c_closes_it() {
     run(&mut s, "view.closeReviewingPane", json!({}));
     assert!(!s.view.track_changes_pane);
 }
+
+/// dlg-208: File › Options › Advanced › Cut, copy, and paste: what Paste keeps depends on where
+/// the content came from — this document, another one, or another program. Keep Text Only and
+/// Merge Formatting take the formatting where the text lands (here: plain text).
+#[test]
+fn paste_options_follow_where_the_content_came_from() {
+    // Paste at the caret, say whether the first pasted letter is bold, and undo the paste (Keep
+    // Text Only takes the letter before the caret, so it must stay plain).
+    let paste_bold = |s: &mut Session, params: serde_json::Value| {
+        let at = s.sel.focus.clone();
+        s.run("edit.paste", &params).unwrap();
+        let bold = s.doc.para_at(&at).unwrap().props_of_char(at.off).bold == Some(true);
+        s.run("edit.undo", &json!({})).unwrap();
+        bold
+    };
+    let mut s = Session::new(doc4me_doc::Document::from_text("Bold plain "));
+    s.run("select.range", &json!({"anchor": {"block": 0, "off": 0}, "focus": {"block": 0, "off": 4}})).unwrap();
+    s.run("format.bold", &json!({})).unwrap();
+    s.run("edit.copy", &json!({})).unwrap();
+    // Each paste goes in front of plain text, at the start of "plain".
+    let plain = |s: &mut Session| {
+        let off = s.doc.plain_text(StoryRef::Body).rfind("plain").unwrap();
+        s.sel = crate::Selection::caret(Pos::body(0, off));
+    };
+    plain(&mut s);
+    assert!(paste_bold(&mut s, json!({})), "same document, Keep Source Formatting (the default)");
+    s.run("file.options", &json!({"pasteSame": "text"})).unwrap();
+    plain(&mut s);
+    assert!(!paste_bold(&mut s, json!({})), "same document, Keep Text Only");
+    assert_eq!(s.run("file.options", &json!({})).unwrap()["pasteSame"], "text");
+    // Another document: Pasting between documents (still Keep Source Formatting).
+    s.set_document(doc4me_doc::Document::from_text("Other plain"));
+    plain(&mut s);
+    assert!(paste_bold(&mut s, json!({})), "between documents keeps the bold");
+    s.run("file.options", &json!({"pasteBetween": "merge"})).unwrap();
+    plain(&mut s);
+    assert!(!paste_bold(&mut s, json!({})), "between documents, Merge Formatting");
+    // Another program's text: Pasting from other programs.
+    s.run("file.options", &json!({"pasteOther": "text"})).unwrap();
+    plain(&mut s);
+    s.run("edit.paste", &json!({"text": "Outside "})).unwrap();
+    assert!(s.doc.plain_text(StoryRef::Body).contains("Outside plain"));
+    assert!(s.run("file.options", &json!({"pasteOther": "html"})).is_err());
+}

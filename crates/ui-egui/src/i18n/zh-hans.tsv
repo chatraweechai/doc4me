@@ -2759,3 +2759,13 @@ spacing	Normal	标准
 	{n} of {of} recipients	{n} / {of} 个收件人
 	New Folder	新建文件夹
 	{name} can't be a folder's name.	{name} 不能用作文件夹名称。
+	Trust Center	信任中心
+	Allow Doc4Me to use online services	允许 Doc4Me 使用联机服务
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	联机图片 (Openverse)、翻译 (MyMemory 或你的 LibreTranslate 服务器)、获取加载项以及下载听写的语音模型会连接到 Internet，且仅在你使用时连接。关闭后，Doc4Me 不会自行建立任何连接。
+	Online services are turned off (File › Options › Trust Center).	联机服务已关闭 (文件 › 选项 › 信任中心)。
+	Cut, copy, and paste	剪切、复制和粘贴
+	Pasting within the same document:	在同一文档内粘贴:
+	Pasting between documents:	在文档之间粘贴:
+	Pasting from other programs:	从其他程序粘贴:
+	Keep Source Formatting	保留源格式
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	合并格式与只保留文本一样，按粘贴位置的格式粘贴文本。
