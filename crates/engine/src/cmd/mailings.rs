@@ -775,6 +775,12 @@ fn envelopes(s: &mut Session, v: &Value) -> CmdResult {
     });
     let ret = p::str(v, "return").unwrap_or("").to_string();
     let (w, h) = envelope_size(v)?;
+    // Envelope Options › Font…: how each address looks.
+    let font = |k: &str| -> Result<CharProps, CmdError> {
+        let c = v.get(k).filter(|c| !c.is_null()).map(|c| serde_json::from_value::<CharProps>(c.clone())).transpose();
+        c.map(Option::unwrap_or_default).map_err(|e| CmdError::Params(format!("`{k}`: {e}")))
+    };
+    let (delivery_font, return_font) = (font("deliveryFont")?, font("returnFont")?);
     let sect = SectionProps {
         page_w: w,
         page_h: h,
@@ -790,7 +796,7 @@ fn envelopes(s: &mut Session, v: &Value) -> CmdResult {
     let mut blocks = Vec::new();
     let ret_lines = if ret.is_empty() { Vec::new() } else { lines(&ret) };
     for l in &ret_lines {
-        blocks.push(para_block(Paragraph::with_text(l, CharProps { size: Some(10.0), ..Default::default() }).styled("NoSpacing")));
+        blocks.push(para_block(Paragraph::with_text(l, CharProps::default()).styled(RETURN_STYLE)));
     }
     let spacer = (6 - ret_lines.len().min(6)).max(1);
     for _ in 0..spacer + 2 {
@@ -798,7 +804,7 @@ fn envelopes(s: &mut Session, v: &Value) -> CmdResult {
     }
     let mut last = None;
     for l in lines(&delivery) {
-        let mut p = Paragraph::with_text(&l, CharProps::default()).styled("NoSpacing");
+        let mut p = Paragraph::with_text(&l, CharProps::default()).styled(ADDRESS_STYLE);
         p.props.indent_left = Some(w * 0.42);
         if let Some(prev) = last.replace(p) {
             blocks.push(para_block(prev));
@@ -809,6 +815,7 @@ fn envelopes(s: &mut Session, v: &Value) -> CmdResult {
         let mut end = last.unwrap_or_else(|| Paragraph::new().styled("NoSpacing"));
         end.section = Some(Box::new(sect));
         blocks.push(para_block(end));
+        envelope_styles(&mut s.doc, &delivery_font, &return_font);
         let n = blocks.len();
         s.doc.body.splice(0..0, blocks);
         s.sel = Selection::caret(s.doc.start_of(StoryRef::Body));
@@ -818,9 +825,34 @@ fn envelopes(s: &mut Session, v: &Value) -> CmdResult {
     let mut d = Document::new();
     d.last_section = sect;
     d.body = blocks;
+    envelope_styles(&mut d, &delivery_font, &return_font);
     s.set_document(d);
     s.path = None;
     Ok(json!({"width": w, "height": h}))
+}
+
+/// Word's styles for an envelope's delivery and return addresses.
+pub const ADDRESS_STYLE: &str = "EnvelopeAddress";
+pub const RETURN_STYLE: &str = "EnvelopeReturn";
+
+/// Envelope Address (12 pt) and Envelope Return (10 pt), made in `doc` when it lacks them;
+/// the fonts chosen with Envelope Options › Font… go into them.
+fn envelope_styles(doc: &mut Document, delivery: &CharProps, ret: &CharProps) {
+    for (id, name, size, chr) in [(ADDRESS_STYLE, "Envelope Address", 12.0, delivery), (RETURN_STYLE, "Envelope Return", 10.0, ret)] {
+        if doc.styles.get(id).is_none() {
+            doc.styles.upsert(doc4me_doc::Style {
+                id: id.into(),
+                name: name.into(),
+                kind: doc4me_doc::StyleKind::Paragraph,
+                based_on: Some("NoSpacing".into()),
+                chr: CharProps { size: Some(size), ..Default::default() },
+                ..Default::default()
+            });
+        }
+        if let Some(st) = doc.styles.get_mut(id) {
+            st.chr.overlay(chr);
+        }
+    }
 }
 
 /// A sheet of labels: the label size, how many across and down, and where the first one sits.
@@ -1270,6 +1302,23 @@ mod tests {
         let text = s.doc.plain_text(StoryRef::Body);
         assert!(text.starts_with("Me") && text.contains("1 Main St") && text.trim_end().ends_with("Dear Jo,"), "{text}");
         assert!(s.run("mailings.envelopes", &json!({"size": "Envelope X"})).is_err());
+        let style_of = |s: &Session, i: usize| s.doc.body.get(i).and_then(|b| b.as_para()).and_then(|p| p.props.style.clone());
+        assert_eq!(style_of(&s, 0).as_deref(), Some(RETURN_STYLE));
+        // Envelope Options › Font…: Word's Envelope Address and Envelope Return styles carry the
+        // fonts, in a new document too.
+        let fonts = json!({"delivery": "Jo Doe", "return": "Me", "deliveryFont": {"font": "Courier New", "bold": true}, "returnFont": {"size": 8.0}});
+        s.run("mailings.envelopes", &fonts).unwrap();
+        let st = |id: &str| s.doc.styles.get(id).map(|st| st.chr.clone()).unwrap_or_default();
+        assert_eq!(
+            (st(ADDRESS_STYLE).font.as_deref(), st(ADDRESS_STYLE).bold, st(ADDRESS_STYLE).size),
+            (Some("Courier New"), Some(true), Some(12.0))
+        );
+        assert_eq!(st(RETURN_STYLE).size, Some(8.0));
+        let last = s.doc.body.len() - 1;
+        assert_eq!(style_of(&s, last).as_deref(), Some(ADDRESS_STYLE));
+        let back = doc4me_docx::read(&doc4me_docx::write(&s.doc).unwrap()).unwrap();
+        assert_eq!(back.styles.get(ADDRESS_STYLE).map(|st| st.name.as_str()), Some("Envelope Address"));
+        assert!(s.run("mailings.envelopes", &json!({"delivery": "Jo", "deliveryFont": {"size": "big"}})).is_err());
 
         let r = s.run("mailings.labels", &json!({"text": "Ada", "product": "a4-2x7"})).unwrap();
         assert_eq!(r["labels"], 14);

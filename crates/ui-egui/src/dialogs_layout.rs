@@ -523,30 +523,61 @@ pub struct EnvelopeForm {
     pub ret: String,
     pub omit_return: bool,
     pub size: usize,
+    /// What Font… set for each address (`CharProps`, as `mailings.envelopes` takes it).
+    pub delivery_font: serde_json::Map<String, Value>,
+    pub return_font: serde_json::Map<String, Value>,
 }
 
 impl EnvelopeForm {
     /// The delivery address starts as the selected text (an address in the letter).
     pub fn read(app: &WordApp) -> EnvelopeForm {
         let sel = if app.session.sel.is_collapsed() { String::new() } else { app.session.selected_text() };
-        EnvelopeForm { delivery: sel.trim().replace("\r\n", "\n").replace('\r', "\n"), ret: String::new(), omit_return: false, size: 0 }
+        EnvelopeForm {
+            delivery: sel.trim().replace("\r\n", "\n").replace('\r', "\n"),
+            ret: String::new(),
+            omit_return: false,
+            size: 0,
+            delivery_font: Default::default(),
+            return_font: Default::default(),
+        }
     }
 
     /// `mailings.envelopes` parameters; `add` puts the envelope at the start of this document.
     pub fn params(&self, add: bool) -> Value {
         let size = ENVELOPE_SIZES.get(self.size).map_or("Envelope #10", |s| s.0);
         let ret = if self.omit_return { "" } else { self.ret.as_str() };
-        json!({"delivery": self.delivery, "return": ret, "size": size, "add": add})
+        let mut v = json!({"delivery": self.delivery, "return": ret, "size": size, "add": add});
+        for (k, font) in [("deliveryFont", &self.delivery_font), ("returnFont", &self.return_font)] {
+            if !font.is_empty() {
+                v[k] = Value::Object(font.clone());
+            }
+        }
+        v
     }
 }
 
 fn envelopes_ui(app: &mut WordApp, ui: &mut Ui, f: &mut EnvelopeForm) -> bool {
-    ui.label(tl!("Delivery address:"));
+    // Font… (Word's Envelope Address and Envelope Return font dialogs): the Font dialog, then
+    // back here.
+    let mut font = None;
+    ui.horizontal(|ui| {
+        ui.label(tl!("Delivery address:"));
+        if ui.button(tl!("Font…")).clicked() {
+            font = Some(false);
+        }
+    });
     ui.add(crate::widgets::text_box(&mut f.delivery).desired_rows(4).desired_width(340.0));
     ui.horizontal(|ui| {
         ui.label(tl!("Return address:"));
         ui.checkbox(&mut f.omit_return, tl!("Omit"));
+        if ui.add_enabled(!f.omit_return, egui::Button::new(tl!("Font…"))).clicked() {
+            font = Some(true);
+        }
     });
+    if let Some(ret) = font {
+        crate::style_format::open_envelope_font(app, f.clone(), ret);
+        return true;
+    }
     ui.add_enabled(!f.omit_return, crate::widgets::text_box(&mut f.ret).desired_rows(3).desired_width(340.0));
     ui.horizontal(|ui| {
         ui.label(tl!("Envelope size:"));

@@ -27,6 +27,14 @@ pub enum RefsDialog {
     },
     /// Caption › New Label….
     NewLabel(CaptionForm),
+    /// Caption › AutoCaption…: for each object, whether it gets a caption, the label and above
+    /// or below; `back` is the Caption dialog to return to.
+    AutoCaption {
+        rows: Vec<AutoCaptionRow>,
+        labels: Vec<String>,
+        #[serde(skip)]
+        back: Option<Box<CaptionForm>>,
+    },
     Index(IndexForm),
     MarkEntry(MarkForm),
     /// Mark Table of Contents Entry (Alt+Shift+O).
@@ -55,6 +63,7 @@ impl RefsDialog {
             RefsDialog::Caption(_) => "caption",
             RefsDialog::CaptionNumbering { .. } => "captionNumbering",
             RefsDialog::NewLabel(_) => "newLabel",
+            RefsDialog::AutoCaption { .. } => "autoCaption",
             RefsDialog::Index(_) => "index",
             RefsDialog::MarkEntry(_) => "markEntry",
             RefsDialog::MarkToc(_) => "markTocEntry",
@@ -73,6 +82,7 @@ impl RefsDialog {
             RefsDialog::Caption(_) => "Caption",
             RefsDialog::CaptionNumbering { .. } => "Caption Numbering",
             RefsDialog::NewLabel(_) => "New Label",
+            RefsDialog::AutoCaption { .. } => "AutoCaption",
             RefsDialog::Index(_) => "Index",
             RefsDialog::MarkEntry(_) => "Mark Index Entry",
             RefsDialog::MarkToc(_) => "Mark Table of Contents Entry",
@@ -100,6 +110,7 @@ pub fn open(name: &str, app: &WordApp) -> Option<RefsDialog> {
             message: String::new(),
         }),
         "toc" => RefsDialog::Toc(TocForm::read(app)),
+        "autoCaption" => auto_caption_dialog(app, None),
         "sourceManager" => RefsDialog::Sources { selected: None },
         "createSource" => RefsDialog::Source(Box::new(SourceForm::new(true, false))),
         _ => return None,
@@ -112,6 +123,7 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut RefsDialog) -> bool {
         RefsDialog::Caption(f) => caption_ui(app, ui, f),
         RefsDialog::CaptionNumbering { form, was } => numbering_ui(ui, form, was),
         RefsDialog::NewLabel(f) => new_label_ui(app, ui, f),
+        RefsDialog::AutoCaption { rows, labels, back } => auto_caption_ui(app, ui, rows, labels, back),
         RefsDialog::Index(f) => index_ui(app, ui, f),
         RefsDialog::MarkEntry(f) => mark_ui(app, ui, f),
         RefsDialog::MarkToc(f) => mark_toc_ui(app, ui, f),
@@ -337,6 +349,9 @@ fn caption_ui(app: &mut WordApp, ui: &mut Ui, f: &mut CaptionForm) -> Next {
         if ui.button(tl!("Numbering…")).clicked() {
             then = Some(RefsDialog::CaptionNumbering { was: Box::new(f.clone()), form: f.clone() });
         }
+        if ui.button(tl!("AutoCaption…")).clicked() {
+            then = Some(auto_caption_dialog(app, Some(f.clone())));
+        }
     });
     if let Some(g) = then {
         return go(g);
@@ -383,6 +398,77 @@ fn numbering_ui(ui: &mut Ui, f: &mut CaptionForm, was: &CaptionForm) -> Next {
         return go(RefsDialog::Caption(was.clone()));
     }
     Next::Stay
+}
+
+/// One object AutoCaption can caption.
+#[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct AutoCaptionRow {
+    /// `table` or `picture`.
+    pub object: String,
+    pub on: bool,
+    pub label: String,
+    /// `above` or `below`.
+    pub position: String,
+}
+
+/// AutoCaption as the user last set it (`references.autoCaption`).
+fn auto_caption_dialog(app: &WordApp, back: Option<CaptionForm>) -> RefsDialog {
+    let set = &app.session.prefs.auto_caption;
+    let rows = doc4me_engine::cmd::references::AUTO_CAPTION_OBJECTS
+        .iter()
+        .map(|o| match set.iter().find(|e| e.object == *o) {
+            Some(e) => AutoCaptionRow { object: o.to_string(), on: true, label: e.label.clone(), position: e.position.clone() },
+            None => AutoCaptionRow {
+                object: o.to_string(),
+                on: false,
+                label: if *o == "table" { "Table" } else { "Figure" }.into(),
+                position: if *o == "table" { "above" } else { "below" }.into(),
+            },
+        })
+        .collect();
+    let labels = back.as_ref().map(|f| f.labels.clone()).unwrap_or_else(|| CaptionForm::read(app).labels);
+    RefsDialog::AutoCaption { rows, labels, back: back.map(Box::new) }
+}
+
+fn auto_caption_ui(app: &mut WordApp, ui: &mut Ui, rows: &mut [AutoCaptionRow], labels: &[String], back: &Option<Box<CaptionForm>>) -> Next {
+    ui.label(tl!("Add caption when inserting:"));
+    egui::Grid::new("autocap").num_columns(3).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
+        for r in rows.iter_mut() {
+            ui.checkbox(&mut r.on, tl!(if r.object == "table" { "Table" } else { "Picture" }));
+            ui.add_enabled_ui(r.on, |ui| {
+                egui::ComboBox::from_id_salt(("autocap_label", r.object.as_str())).selected_text(tl!(&r.label)).width(130.0).show_ui(ui, |ui| {
+                    for l in labels {
+                        ui.selectable_value(&mut r.label, l.clone(), tl!(l));
+                    }
+                });
+            });
+            ui.add_enabled_ui(r.on, |ui| {
+                choice(
+                    ui,
+                    &format!("autocap_pos_{}", r.object),
+                    &mut r.position,
+                    &[("above".to_string(), "Above the item"), ("below".to_string(), "Below the item")],
+                );
+            });
+            ui.end_row();
+        }
+    });
+    let (ok, cancel) = buttons(ui, tl!("OK"));
+    if ok {
+        let set: Vec<Value> = rows.iter().filter(|r| r.on).map(|r| json!({"object": r.object, "label": r.label, "position": r.position})).collect();
+        if let Err(e) = app.run("references.autoCaption", json!({"set": set})) {
+            app.status(e);
+            return Next::Stay;
+        }
+    }
+    if !(ok || cancel) {
+        return Next::Stay;
+    }
+    match back {
+        Some(f) => go(RefsDialog::Caption((**f).clone())),
+        None => Next::Close,
+    }
 }
 
 fn new_label_ui(app: &mut WordApp, ui: &mut Ui, f: &mut CaptionForm) -> Next {
@@ -1170,6 +1256,44 @@ mod tests {
         // The label is offered next time and saved with the preferences.
         assert!(CaptionForm::read(&a).labels.contains(&"Plate".to_string()));
         assert_eq!(a.prefs().caption_labels, vec!["Plate".to_string()]);
+    }
+
+    /// Caption › AutoCaption… opens with what the preferences hold; OK sets which inserted
+    /// objects get a caption (kept with the preferences) and goes back to Caption.
+    #[test]
+    fn auto_caption_dialog_sets_the_preference() {
+        use egui_kittest::kittest::Queryable;
+        let mut a = app("Text");
+        a.run("references.autoCaption", json!({})).unwrap();
+        let RefsDialog::AutoCaption { rows, labels, back } = form(&a) else { panic!() };
+        assert!(back.is_none() && rows.iter().all(|r| !r.on) && labels.contains(&"Figure".to_string()));
+        a.run("references.caption", json!({})).unwrap();
+        let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            a,
+        );
+        h.run_steps(3);
+        h.get_by_label("AutoCaption…").click();
+        h.run_steps(3);
+        if let Some(Dialog::Refs(d)) = &mut h.state_mut().dialog
+            && let RefsDialog::AutoCaption { rows, .. } = &mut **d
+        {
+            rows[1].on = true;
+            rows[1].label = "Table".into();
+        } else {
+            panic!("no AutoCaption: {:?}", h.state().dialog);
+        }
+        h.run_steps(2);
+        h.get_by_label("OK").click();
+        h.run_steps(3);
+        let a = h.state();
+        assert!(matches!(&a.dialog, Some(Dialog::Refs(d)) if matches!(**d, RefsDialog::Caption(_))), "back to Caption: {:?}", a.dialog);
+        let want = doc4me_engine::cmd::references::AutoCaption { object: "picture".into(), label: "Table".into(), position: "below".into() };
+        assert_eq!(a.prefs().editing.auto_caption, vec![want]);
     }
 
     /// #402: Mark Entry opens with the selection; Insert Index opens with Word's defaults and

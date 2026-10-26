@@ -406,6 +406,12 @@ pub(crate) fn page_break(s: &mut Session, v: &Value) -> CmdResult {
 }
 
 fn new_paragraph(s: &mut Session, _: &Value) -> CmdResult {
+    // Enter after Move Text / Copy Text (F2 / Shift+F2) puts the text here.
+    if let Some(m) = s.move_text.take()
+        && let Some(r) = super::edit::finish_move(s, m)
+    {
+        return r;
+    }
     // Enter in a one-line plain text control (or a check box or list) does nothing, as in Word.
     if super::controls::refuses_paragraph(s) {
         return sel_result(s);

@@ -86,6 +86,10 @@ pub fn specs() -> Vec<CommandSpec> {
         .pure(),
         CommandSpec::new("references.caption", "Insert Caption", "References › Captions", caption)
             .params(r#"{"label"?: "Figure|Table|Equation|any label", "text"?: string, "position"?: "below|above", "excludeLabel"?: bool, "format"?: "ARABIC|alphabetic|ALPHABETIC|roman|ROMAN", "chapter"?: heading level 1-9, "separator"?: "-|.|:|—|–"}"#),
+        // Insert Caption › AutoCaption…: captions added as tables and pictures go in (per user).
+        CommandSpec::new("references.autoCaption", "AutoCaption", "References › Captions", auto_caption_prefs)
+            .params(r#"{"set"?: [{"object": "table|picture", "label"?: string (default Table or Figure), "position"?: "above|below"}] (replaces the list; [] turns AutoCaption off; without it returns the list)}"#)
+            .pure(),
         // F9: update fields; the selected ones that showed their code show their result again.
         CommandSpec::new("references.updateFields", "Update Field", "References", |s, _| {
             update_fields(s)?;
@@ -671,6 +675,90 @@ pub const CHAPTER_SEPARATORS: [&str; 5] = ["-", ".", ":", "\u{2014}", "\u{2013}"
 /// Insert a caption paragraph below (or above) the caret's paragraph, table or object: the label,
 /// a chapter number (`STYLEREF n \s` and a separator) and a `SEQ label \* format \s n` number
 /// (ECMA-376 §17.16.5.56, §17.16.5.59).
+/// One AutoCaption entry: what gets a caption, with which label, above or below it.
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+pub struct AutoCaption {
+    /// `table` or `picture`.
+    pub object: String,
+    pub label: String,
+    /// `above` or `below`.
+    pub position: String,
+}
+
+impl Default for AutoCaption {
+    fn default() -> Self {
+        AutoCaption { object: "table".into(), label: "Table".into(), position: "above".into() }
+    }
+}
+
+/// What AutoCaption can caption.
+pub const AUTO_CAPTION_OBJECTS: [&str; 2] = ["table", "picture"];
+
+/// Saved AutoCaption settings: the entries that read as one keep, a damaged one is dropped (a
+/// damaged `ui.json` never loses the other preferences).
+pub fn lenient_auto_caption<'de, D: serde::Deserializer<'de>>(d: D) -> Result<Vec<AutoCaption>, D::Error> {
+    let v = <Value as serde::Deserialize>::deserialize(d)?;
+    let mut out: Vec<AutoCaption> = Vec::new();
+    for e in v.as_array().into_iter().flatten().filter_map(|e| serde_json::from_value::<AutoCaption>(e.clone()).ok()) {
+        if AUTO_CAPTION_OBJECTS.contains(&e.object.as_str()) && !out.iter().any(|x| x.object == e.object) {
+            out.push(e);
+        }
+    }
+    Ok(out)
+}
+
+/// `references.autoCaption`.
+fn auto_caption_prefs(s: &mut Session, v: &Value) -> CmdResult {
+    if let Some(set) = v.get("set") {
+        let list = set.as_array().ok_or_else(|| CmdError::Params("`set` is a list".into()))?;
+        let mut out: Vec<AutoCaption> = Vec::new();
+        for e in list {
+            let object = p::str(e, "object").unwrap_or("");
+            if !AUTO_CAPTION_OBJECTS.contains(&object) {
+                return Err(CmdError::Params(format!("AutoCaption can't caption `{object}`")));
+            }
+            let position = p::str(e, "position").unwrap_or("above");
+            if !matches!(position, "above" | "below") {
+                return Err(CmdError::Params(format!("unknown position `{position}`")));
+            }
+            let fallback = if object == "table" { "Table" } else { "Figure" };
+            let label: String =
+                p::str(e, "label").unwrap_or(fallback).chars().filter(|c| !matches!(c, '"' | '\\') && !c.is_control()).take(40).collect();
+            let label = if label.trim().is_empty() { fallback.to_string() } else { label.trim().to_string() };
+            out.retain(|x| x.object != object);
+            out.push(AutoCaption { object: object.into(), label, position: position.into() });
+        }
+        s.prefs.auto_caption = out;
+    }
+    Ok(json!({"objects": s.prefs.auto_caption, "available": AUTO_CAPTION_OBJECTS}))
+}
+
+/// AutoCaption: a caption for the `object` just inserted at the caret, when the user asked for
+/// one. Only for a table or picture in the main text's own paragraphs (not inside a table); the
+/// caret stays where the insertion left it.
+pub(crate) fn auto_caption(s: &mut Session, object: &str) -> Result<(), CmdError> {
+    let Some(e) = s.prefs.auto_caption.iter().find(|e| e.object == object).cloned() else { return Ok(()) };
+    let f = s.sel.focus.clone();
+    let top_level = if object == "table" { f.path.cell().is_some_and(|(tp, _, _)| tp.depth() == 0) } else { f.path.depth() == 0 };
+    if f.story != StoryRef::Body || !top_level {
+        return Ok(());
+    }
+    let keep = s.sel.clone();
+    caption(s, &json!({"label": e.label, "position": e.position}))?;
+    // A caption above moves the object down a block.
+    let shift = |mut p: Pos| {
+        if e.position == "above"
+            && let Some(first) = p.path.0.first_mut()
+        {
+            *first = first.saturating_add(1);
+        }
+        p
+    };
+    s.sel = Selection { anchor: shift(keep.anchor), focus: shift(keep.focus) };
+    Ok(())
+}
+
 fn caption(s: &mut Session, v: &Value) -> CmdResult {
     let label: String = p::str(v, "label").unwrap_or("Figure").chars().filter(|c| !matches!(c, '"' | '\\') && !c.is_control()).take(40).collect();
     let label = if label.trim().is_empty() { "Figure".to_string() } else { label.trim().to_string() };

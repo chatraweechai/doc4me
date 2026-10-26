@@ -1,7 +1,7 @@
 //! Undo, clipboard, find & replace, Go To, Format Painter.
 
 use doc4me_doc::edit::Fragment;
-use doc4me_doc::{Pos, StoryRef};
+use doc4me_doc::{Block, Paragraph, Pos, StoryRef};
 use serde_json::{Value, json};
 
 use super::{delete_selection, find_pattern, pos_json, sel_result};
@@ -32,6 +32,16 @@ pub fn specs() -> Vec<CommandSpec> {
         .key("Mod+Y / Mod+Shift+Z")
         .pure(),
         CommandSpec::new("edit.cut", "Cut", "Home › Clipboard", cut).key("Mod+X").when(has_sel),
+        // F2 / Shift+F2: the selection waits while the caret goes where it should go; Enter
+        // moves (or copies) it there, Esc or any edit forgets it.
+        CommandSpec::new("edit.moveText", "Move Text", "Editing", |s, _| move_text(s, false)).key("F2").when(has_sel).pure(),
+        CommandSpec::new("edit.copyText", "Copy Text", "Editing", |s, _| move_text(s, true)).key("Shift+F2").when(has_sel).pure(),
+        // Word's Spike: cuts collected one after another (each ending its paragraph), pasted
+        // together. It is the AutoText entry "Spike", so Quick Parts lists and inserts it too.
+        CommandSpec::new("edit.spike", "Spike", "Editing", spike).key("Mod+F3").when(has_sel),
+        CommandSpec::new("edit.pasteSpike", "Paste Spike", "Editing", paste_spike)
+            .key("Mod+Shift+F3")
+            .when(|s| if s.building_blocks.contains_key(SPIKE) { None } else { Some("the Spike is empty") }),
         CommandSpec::new("edit.copy", "Copy", "Home › Clipboard", copy).key("Mod+C").pure(),
         CommandSpec::new("edit.paste", "Paste", "Home › Clipboard", paste).key("Mod+V").params(r#"{"text"?: string}"#),
         CommandSpec::new("edit.pasteText", "Paste: Keep Text Only", "Home › Clipboard › Paste", paste_text)
@@ -135,6 +145,101 @@ fn cut(s: &mut Session, v: &Value) -> CmdResult {
     }
     super::controls::restore_placeholder(s)?;
     Ok(r)
+}
+
+/// Move Text / Copy Text waiting for Enter: the text (start, end) and whether to copy it.
+#[derive(Clone, Debug, PartialEq)]
+pub struct MoveText {
+    pub from: (Pos, Pos),
+    pub copy: bool,
+}
+
+fn move_text(s: &mut Session, copy: bool) -> CmdResult {
+    let (a, b) = s.sel.ordered();
+    s.move_text = Some(MoveText { from: (a, b), copy });
+    Ok(json!({ if copy { "copyTo" } else { "moveTo" }: true }))
+}
+
+/// Enter after Move Text / Copy Text: the text goes to the caret (Word's "Move to where?").
+/// `None` when it can't (the caret is in the text itself, or the text is gone): Enter is Enter.
+pub(crate) fn finish_move(s: &mut Session, m: MoveText) -> Option<CmdResult> {
+    let (a, b) = m.from;
+    let c = s.sel.ordered().0;
+    let fits = |p: &Pos| s.doc.para_at(p).is_some_and(|x| p.off <= x.len() && x.text.is_char_boundary(p.off));
+    if a >= b || !fits(&a) || !fits(&b) || (c.story == a.story && c >= a && c <= b) {
+        return None;
+    }
+    Some(place_moved(s, a, b, c, m.copy))
+}
+
+/// The bookmark that keeps the destination while the moved text comes out before it.
+const MOVE_MARK: &str = "_Doc4MeMoveTo";
+
+fn place_moved(s: &mut Session, a: Pos, b: Pos, c: Pos, copy: bool) -> CmdResult {
+    let frag = s.doc.copy_range(&a, &b);
+    let mut at = c.clone();
+    if !copy {
+        // Text before the destination: mark the destination, so taking the text out keeps it.
+        let after = c.story == a.story && c > b;
+        if after {
+            s.doc.para_mut(c.story, &c.path)?.insert_object(
+                c.off,
+                doc4me_doc::para::InlineObject::BookmarkStart { name: MOVE_MARK.into() },
+                &Default::default(),
+            )?;
+        }
+        s.sel = Selection { anchor: a, focus: b };
+        delete_selection(s)?;
+        if after {
+            let mark = s.doc.para_paths(c.story).into_iter().find_map(|path| {
+                let p = s.doc.para(c.story, &path)?;
+                p.object_offsets()
+                    .into_iter()
+                    .find(|off| matches!(p.object_at(*off), Some(doc4me_doc::para::InlineObject::BookmarkStart { name }) if name == MOVE_MARK))
+                    .map(|off| Pos { story: c.story, path: path.clone(), off })
+            });
+            let mark = mark.ok_or_else(|| CmdError::Failed("the place to move to is gone".into()))?;
+            s.doc.para_mut(mark.story, &mark.path)?.delete(mark.off, mark.off + doc4me_doc::para::OBJ.len_utf8())?;
+            at = mark;
+        }
+    }
+    s.sel = Selection::caret(at);
+    super::paste::insert(s, frag)?;
+    sel_result(s)
+}
+
+/// The AutoText entry the Spike collects into (Word's name).
+pub const SPIKE: &str = "Spike";
+
+/// Ctrl+F3: cut the selection onto the end of the Spike, with a paragraph mark after it.
+fn spike(s: &mut Session, _: &Value) -> CmdResult {
+    let (a, b) = s.sel.ordered();
+    let item = s.doc.copy_range(&a, &b);
+    delete_selection(s)?;
+    super::controls::restore_placeholder(s)?;
+    let mut all = s.building_blocks.remove(SPIKE).unwrap_or_default();
+    // A Spike ends with the empty paragraph after its last paragraph mark; the item takes its
+    // place and ends with a paragraph mark of its own (a whole paragraph has one already).
+    let ends_with_mark = |f: &Fragment| f.blocks.last().is_some_and(|b| b.as_para().is_some_and(|p| p.is_empty()));
+    if ends_with_mark(&all) {
+        all.blocks.pop();
+    }
+    all.blocks.extend(item.blocks);
+    if !ends_with_mark(&all) {
+        all.blocks.push(Block::Para(Paragraph::new()));
+    }
+    all.parts.extend(item.parts);
+    let text = all.plain_text();
+    s.building_blocks.insert(SPIKE.into(), all);
+    Ok(json!({"spike": text}))
+}
+
+/// Ctrl+Shift+F3: paste the Spike and empty it.
+fn paste_spike(s: &mut Session, _: &Value) -> CmdResult {
+    let frag = s.building_blocks.get(SPIKE).cloned().ok_or_else(|| CmdError::Disabled("the Spike is empty".into()))?;
+    super::paste::insert(s, frag)?;
+    s.building_blocks.remove(SPIKE);
+    sel_result(s)
 }
 
 fn paste(s: &mut Session, v: &Value) -> CmdResult {

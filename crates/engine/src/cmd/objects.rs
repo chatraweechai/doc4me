@@ -349,6 +349,13 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("select.addObject", "Add Object to Selection", "Home › Editing › Select", add_object)
             .params(r#"{"pos"?: Pos, "index"?: n, "objects"?: [Pos | n]}  (n: its Selection Pane index; with no object selected yet, the first one becomes the selection)"#)
             .pure(),
+        // Ctrl+Alt+5: Word's floating shape navigation. It selects the first floating picture,
+        // shape or text box from the caret; Tab (Shift+Tab) goes on to the next (previous) one
+        // and Esc leaves it.
+        CommandSpec::new("select.floatingShapes", "Select Floating Shapes", "Navigation", floating_shapes)
+            .key("Mod+Alt+5")
+            .params(r#"{"next"?: bool (from the selected one to the next), "back"?: bool (to the previous)}"#)
+            .pure(),
         CommandSpec::new("select.objects", "Select Objects", "Home › Editing › Select", |s, v| {
             let n = p::u64(v, "index").unwrap_or(0) as usize;
             let list = all_objects(s);
@@ -1341,6 +1348,34 @@ fn all_objects(s: &Session) -> Vec<(Pos, InlineObject)> {
         }
     }
     v
+}
+
+/// `select.floatingShapes`.
+fn floating_shapes(s: &mut Session, v: &Value) -> CmdResult {
+    let list: Vec<Pos> =
+        all_objects(s).into_iter().filter(|(_, o)| o.frame().is_some_and(|(_, _, f)| f.wrap != Wrap::Inline)).map(|(p, _)| p).collect();
+    let n = list.len();
+    if n == 0 {
+        s.shape_nav = false;
+        return Err(CmdError::Failed("there are no floating shapes".into()));
+    }
+    let at = s.sel.ordered().0;
+    let i = match list.iter().position(|p| *p == at) {
+        Some(i) if p::bool(v, "next") == Some(true) => {
+            if p::bool(v, "back") == Some(true) {
+                (i + n - 1) % n
+            } else {
+                (i + 1) % n
+            }
+        }
+        Some(i) => i,
+        None => list.iter().position(|p| *p >= at).unwrap_or(0),
+    };
+    let pos = list[i.min(n - 1)].clone();
+    let end = Pos { off: pos.off + doc4me_doc::para::OBJ.len_utf8(), ..pos.clone() };
+    s.sel = Selection { anchor: pos, focus: end };
+    s.shape_nav = true;
+    Ok(json!({"index": i, "count": n}))
 }
 
 fn objects_list(s: &mut Session, _: &Value) -> CmdResult {

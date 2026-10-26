@@ -297,6 +297,10 @@ pub fn status_bar(app: &mut WordApp, ui: &mut Ui) {
                 if app.session.prefs.overtype && st(ui, tl!("Overtype")).on_hover_text(tl!("Click to switch back to inserting")).clicked() {
                     let _ = app.run("text.overtype", json!({"value": false}));
                 }
+                // F2 / Shift+F2 wait for Enter, as Word asks.
+                if let Some(m) = &app.session.move_text {
+                    st(ui, tl!(if m.copy { "Copy to where?" } else { "Move to where?" }));
+                }
                 if let Some((msg, at)) = &app.status_msg
                     && crate::now_ms() - at < 6000.0
                 {

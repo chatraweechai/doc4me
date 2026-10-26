@@ -68,8 +68,8 @@ ks-066	Navigate the document	Move the cursor to the end of the document.	Ctrl+En
 ks-067	Navigate the document	Move the cursor to the beginning of the document.	Ctrl+Home	Mod+Home	caret.docStart	registry		
 ks-068	Navigate the document	Move the cursor to the location of the previous revision.	Shift+F5	Shift+F5	edit.goBack	registry		
 ks-069	Navigate the document	Move the cursor to the location of the last revision made before the document was last closed.	Shift+F5, immediately after opening the document.	Shift+F5	-	manual	untested	last edit before the document was closed
-ks-070	Navigate the document	Cycle through floating shapes, such as text boxes or images.	Ctrl+Alt+5, and then the Tab key repeatedly	Mod+Alt+5	-	manual	fail	
-ks-071	Navigate the document	Exit the floating shape navigation and return to the normal navigation.	Esc	Escape	-	manual	fail	depends on Mod+Alt+5
+ks-070	Navigate the document	Cycle through floating shapes, such as text boxes or images.	Ctrl+Alt+5, and then the Tab key repeatedly	Mod+Alt+5	select.floatingShapes	registry		then Tab / Shift+Tab go to the next / previous floating shape
+ks-071	Navigate the document	Exit the floating shape navigation and return to the normal navigation.	Esc	Escape	select.collapse	registry		Esc (select.collapse) ends floating shape navigation
 ks-072	Navigate the document	Display the Navigation task pane, to search within the document content.	Ctrl+F	Mod+F	edit.find	registry		
 ks-073	Navigate the document	Display the Go To dialog box, to navigate to a specific page, bookmark, footnote, table, comment, graphic, or other location.	Ctrl+G	Mod+G	edit.goto	registry		Go To is Mod+Alt+G / F5; Mod+G is Find Next
 ks-074	Navigate the document	Cycle through the locations of the four previous changes made to the document.	Ctrl+Alt+Z	Mod+Alt+Z	edit.goBack	registry		edit.goBack cycles the last edit locations
@@ -104,12 +104,12 @@ ks-102	Edit text and graphics	Open the Clipboard task pane and enable the Office
 ks-103	Edit text and graphics	Cut the selected content to the Clipboard.	Ctrl+X			duplicate	ks-005	same shortcut and action as ks-005
 ks-104	Edit text and graphics	Copy the selected content to the Clipboard.	Ctrl+C			duplicate	ks-006	same shortcut and action as ks-006
 ks-105	Edit text and graphics	Paste the contents of the Clipboard.	Ctrl+V			duplicate	ks-007	same shortcut and action as ks-007
-ks-106	Edit text and graphics	Move the selected content to a specific location.	F2, move the cursor to the destination, and then press Enter.	F2	-	manual	fail	
-ks-107	Edit text and graphics	Copy the selected content to a specific location.	Shift+F2, move the cursor to the destination, and then press Enter.	Shift+F2	-	manual	fail	
+ks-106	Edit text and graphics	Move the selected content to a specific location.	F2, move the cursor to the destination, and then press Enter.	F2	edit.moveText	registry		Enter moves the text to the caret; Esc or any edit cancels
+ks-107	Edit text and graphics	Copy the selected content to a specific location.	Shift+F2, move the cursor to the destination, and then press Enter.	Shift+F2	edit.copyText	registry		Enter copies the text to the caret
 ks-108	Edit text and graphics	Define an AutoText block with the selected content.	Alt+F3	Alt+F3	insert.quickParts	registry		no key
 ks-109	Edit text and graphics	Insert an AutoText block.	The first few characters of the AutoText block, and then press Enter when the ScreenTip appears.	F3 | Enter	-	manual	untested	
-ks-110	Edit text and graphics	Cut the selected content to the Spike.	Ctrl+F3	Mod+F3	-	manual	fail	
-ks-111	Edit text and graphics	Paste the contents of the Spike.	Ctrl+Shift+F3	Mod+Shift+F3	-	manual	fail	
+ks-110	Edit text and graphics	Cut the selected content to the Spike.	Ctrl+F3	Mod+F3	edit.spike	registry		the Spike is the AutoText entry "Spike"
+ks-111	Edit text and graphics	Paste the contents of the Spike.	Ctrl+Shift+F3	Mod+Shift+F3	edit.pasteSpike	registry		pastes and empties the Spike
 ks-112	Edit text and graphics	Copy the selected text formatting.	Ctrl+Alt+C	Mod+Alt+C	edit.copyFormat	registry		Doc4Me: Mod+Shift+C; Mod+Alt+C is ©
 ks-113	Edit text and graphics	Paste the selected text formatting.	Ctrl+Alt+V	Mod+Alt+V	edit.pasteFormat	registry		Doc4Me: Mod+Shift+V; Mod+Alt+V is Paste Special
 ks-114	Edit text and graphics	Paste text only.	Ctrl+Shift+V			duplicate	ks-008	same shortcut and action as ks-008

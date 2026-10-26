@@ -3,6 +3,7 @@
 //! the style (or, for a character style, one run), all selected — swapped in only while the
 //! dialog draws; when it closes, the formatting it set there goes back into Modify Style, which
 //! applies it with the rest on OK (`styles.modify`), so Cancel there still changes nothing.
+//! Envelopes › Font… works the same way for the delivery and return addresses' fonts.
 
 use doc4me_doc::{CharProps, Document, Path, Pos, StoryRef, StyleKind, para_block};
 use doc4me_engine::{Selection, Session};
@@ -10,6 +11,7 @@ use serde_json::{Map, Value, json};
 
 use crate::WordApp;
 use crate::dialogs::Dialog;
+use crate::dialogs_layout::{EnvelopeForm, LayoutDialog};
 
 /// The Format menu: (label, the dialog `ui.dialog` names, for paragraph styles only).
 pub const ITEMS: [(&str, &str, bool); 5] = [
@@ -23,12 +25,14 @@ pub const ITEMS: [(&str, &str, bool); 5] = [
 /// The text of the scratch paragraph.
 const SAMPLE: &str = "AaBbCcYyZz";
 
-/// A Format dialog's scratch document and the Modify Style dialog to go back to.
+/// A Format dialog's scratch document and the Modify Style (or Envelopes) dialog to go back to.
 pub struct StyleScratch {
     pub session: Box<Session>,
     /// The scratch paragraph's and run's direct formatting when the dialog opened.
     before: (Value, Value),
     resume: Box<Dialog>,
+    /// Envelopes › Font…: for the return address (`true`) or the delivery address.
+    envelope: Option<bool>,
 }
 
 /// Whether `name` is one of the Format dialogs (or one they lead to), which draw on the scratch.
@@ -57,17 +61,61 @@ pub fn open(app: &mut WordApp, which: &str, md: Dialog) {
     match dialog {
         Some(d) => {
             app.dialog = Some(d);
-            app.style_scratch = Some(StyleScratch { session, before, resume: Box::new(md) });
+            app.style_scratch = Some(StyleScratch { session, before, resume: Box::new(md), envelope: None });
         }
         None => app.dialog = Some(md),
     }
 }
 
-/// The Format dialog closed: what it set goes into Modify Style, whose fields show it.
+/// Envelopes › Font… for the delivery (or `ret`urn) address: the Font dialog on a scratch
+/// paragraph in that address's font so far (12 or 10 pt, as Word's Envelope Address and Envelope
+/// Return styles); when it closes, the font goes back to the Envelopes dialog.
+pub fn open_envelope_font(app: &mut WordApp, form: EnvelopeForm, ret: bool) {
+    let chosen = if ret { &form.return_font } else { &form.delivery_font };
+    let mut chr = CharProps { size: Some(if ret { 10.0 } else { 12.0 }), ..Default::default() };
+    chr.overlay(&serde_json::from_value(Value::Object(chosen.clone())).unwrap_or_default());
+    let mut d = app.session.doc.clone();
+    d.parts.clear();
+    d.comments.clear();
+    d.revisions.clear();
+    d.settings.track_changes = false;
+    d.settings.protection = None;
+    d.body = vec![para_block(doc4me_doc::Paragraph::with_text(SAMPLE, chr).styled("NoSpacing"))];
+    let mut session = Box::new(Session::new(d));
+    let end = session.doc.para(StoryRef::Body, &Path::top(0)).map_or(0, |p| p.len());
+    let at = |off| Pos { story: StoryRef::Body, path: Path::top(0), off };
+    session.sel = Selection { anchor: at(0), focus: at(end) };
+    let before = direct(&session);
+    let resume = Dialog::Layout(Box::new(LayoutDialog::Envelopes(form)));
+    std::mem::swap(&mut app.session, &mut session);
+    let dialog = Dialog::open("font", app);
+    std::mem::swap(&mut app.session, &mut session);
+    match dialog {
+        Some(d) => {
+            app.dialog = Some(d);
+            app.style_scratch = Some(StyleScratch { session, before, resume: Box::new(resume), envelope: Some(ret) });
+        }
+        None => app.dialog = Some(resume),
+    }
+}
+
+/// The Format dialog closed: what it set goes into Modify Style, whose fields show it (or into
+/// the Envelopes dialog's font for the address).
 pub fn finish(app: &mut WordApp, sc: StyleScratch) {
-    let StyleScratch { session, before, resume } = sc;
+    let StyleScratch { session, before, resume, envelope } = sc;
     let mut md = *resume;
     let after = direct(&session);
+    if let Some(ret) = envelope {
+        if after.1 != before.1
+            && let Dialog::Layout(l) = &mut md
+            && let LayoutDialog::Envelopes(f) = &mut **l
+        {
+            let font = if ret { &mut f.return_font } else { &mut f.delivery_font };
+            merge(font, &after.1);
+        }
+        app.dialog = Some(md);
+        return;
+    }
     if after != before
         && let Dialog::ModifyStyle { id, extra_chr, extra_para, font, size, bold, italic, color, before: sp_before, after: sp_after, .. } = &mut md
     {
@@ -209,5 +257,32 @@ mod tests {
         assert!(st.para.tabs.as_ref().is_some_and(|t| t.iter().any(|t| (t.pos - 144.0).abs() < 0.1)), "{:?}", st.para.tabs);
         // A character style has no paragraph to format.
         assert!(ITEMS.iter().any(|(_, w, para_only)| *w == "paragraph" && *para_only));
+    }
+
+    /// Envelopes › Font… opens the Font dialog on a scratch address in Word's 12 pt; the font it
+    /// sets comes back to the Envelopes dialog, leaves the document alone, and goes into the
+    /// Envelope Address style of the envelope.
+    #[test]
+    fn envelope_font_comes_back_to_envelopes() {
+        let mut a = WordApp::new(Session::new(Document::from_text("Kilns")), Services::default());
+        let before = a.session.doc.clone();
+        let form = EnvelopeForm { delivery: "Jo Doe".into(), ..EnvelopeForm::read(&a) };
+        open_envelope_font(&mut a, form, false);
+        assert!(matches!(a.dialog, Some(Dialog::Font { .. })), "{:?}", a.dialog);
+        let mut sc = a.style_scratch.take().unwrap();
+        std::mem::swap(&mut a.session, &mut sc.session);
+        assert_eq!(a.session.run("format.state", &json!({})).unwrap()["size"], json!(12.0));
+        a.run("format.set", json!({"props": {"font": "Courier New", "bold": true}})).unwrap();
+        std::mem::swap(&mut a.session, &mut sc.session);
+        a.dialog = None;
+        finish(&mut a, sc);
+        assert_eq!(a.session.doc, before, "nothing changes in the document");
+        let Some(Dialog::Layout(l)) = &a.dialog else { panic!("{:?}", a.dialog) };
+        let LayoutDialog::Envelopes(f) = &**l else { panic!("{l:?}") };
+        assert_eq!((f.delivery_font.get("font"), f.delivery_font.get("bold")), (Some(&json!("Courier New")), Some(&json!(true))));
+        assert!(f.return_font.is_empty());
+        a.session.run("mailings.envelopes", &f.params(false)).unwrap();
+        let st = a.session.doc.styles.get("EnvelopeAddress").unwrap();
+        assert_eq!((st.chr.font.as_deref(), st.chr.size), (Some("Courier New"), Some(12.0)));
     }
 }

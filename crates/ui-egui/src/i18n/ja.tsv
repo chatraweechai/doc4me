@@ -2649,3 +2649,14 @@ spacing	Normal	標準
 	Move with text	文字列と一緒に移動する
 	Allow overlap	重なりを許可する
 	Remove Positioning	位置の解除
+	AutoCaption	自動図表番号設定
+	AutoCaption…	自動図表番号設定…
+	Add caption when inserting:	図表番号を自動的に挿入する項目:
+	Picture	画像
+	Spike	スパイク
+	Paste Spike	スパイクの貼り付け
+	Move Text	文字列の移動
+	Copy Text	文字列のコピー
+	Move to where?	移動先を指定してください
+	Copy to where?	コピー先を指定してください
+	Select Floating Shapes	浮動図形の選択

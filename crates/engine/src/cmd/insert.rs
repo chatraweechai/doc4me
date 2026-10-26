@@ -159,7 +159,10 @@ fn table(s: &mut Session, v: &Value) -> CmdResult {
     let mut first = path.0.clone();
     first.extend([0, 0, 0]);
     s.sel = Selection::caret(Pos { story, path: Path(first), off: 0 });
-    Ok(json!({"table": path.0}))
+    super::references::auto_caption(s, "table")?;
+    // The table's path after a caption above it.
+    let at = s.sel.focus.path.cell().map_or(path.0, |(tp, _, _)| tp.0);
+    Ok(json!({"table": at}))
 }
 
 /// Minimal base64 (standard alphabet, padding optional, whitespace ignored).
@@ -214,7 +217,12 @@ fn picture(s: &mut Session, v: &Value) -> CmdResult {
         s.ui_requests.push(json!({"open": "insertPicture"}));
         return sel_result(s);
     };
-    place_picture(s, bytes, p::f32(v, "width"), p::str(v, "alt").unwrap_or(""))
+    let r = place_picture(s, bytes, p::f32(v, "width"), p::str(v, "alt").unwrap_or(""))?;
+    // A picture added to a drawing canvas is part of it, not captioned on its own.
+    if r.get("canvasMember").is_none() {
+        super::references::auto_caption(s, "picture")?;
+    }
+    Ok(r)
 }
 
 /// Insert › Online Pictures: a Creative Commons picture the front end found (Openverse) and

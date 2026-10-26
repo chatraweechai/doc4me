@@ -278,6 +278,10 @@ pub struct Session {
     pub clipboard: Option<Fragment>,
     /// A tracked cut the next paste can turn into a move (see `cmd::moves`).
     pub pending_move: Option<crate::cmd::moves::PendingMove>,
+    /// F2 / Shift+F2 (Move Text / Copy Text): the text Enter moves or copies to the caret.
+    pub move_text: Option<crate::cmd::edit::MoveText>,
+    /// Ctrl+Alt+5: floating shape navigation, where Tab goes from shape to shape.
+    pub shape_nav: bool,
     /// Plain text mirror of the clipboard (for the system clipboard).
     pub clipboard_text: String,
     /// Items collected by Copy and Cut this session, for the Clipboard pane.
@@ -417,6 +421,10 @@ pub struct Prefs {
     /// in Word). A damaged saved value reads as the defaults.
     #[serde(deserialize_with = "crate::cmd::tools::lenient_autocorrect")]
     pub autocorrect: crate::cmd::tools::AutoCorrectPrefs,
+    /// Insert Caption › AutoCaption: captions added as tables and pictures are inserted (per user,
+    /// as in Word).
+    #[serde(deserialize_with = "crate::cmd::references::lenient_auto_caption")]
+    pub auto_caption: Vec<crate::cmd::references::AutoCaption>,
 }
 
 impl Default for Prefs {
@@ -436,6 +444,7 @@ impl Default for Prefs {
             ignore_internet: true,
             detect_language: true,
             autocorrect: Default::default(),
+            auto_caption: Vec::new(),
         }
     }
 }
@@ -469,6 +478,8 @@ impl Session {
             dirty: false,
             clipboard: None,
             pending_move: None,
+            move_text: None,
+            shape_nav: false,
             clipboard_text: String::new(),
             clip_history: Default::default(),
             find: FindState::default(),
@@ -834,6 +845,8 @@ impl Session {
             clipboard: _,
             // Like the clipboard: what the next paste can make a move of.
             pending_move: _,
+            move_text: _,
+            shape_nav: _,
             clipboard_text: _,
             clip_history: _,
             find: _,
@@ -1012,6 +1025,16 @@ impl Session {
         // Only the paste right after a tracked cut makes it a move.
         if (spec.mutates || matches!(id, "edit.undo" | "edit.redo")) && !matches!(id, "edit.cut" | "edit.paste" | "edit.pasteSpecial") {
             self.pending_move = None;
+        }
+        // Floating shape navigation ends with Esc, a caret move or an edit.
+        if (spec.mutates || id.starts_with("caret.") || id == "select.collapse") && id != "select.floatingShapes" {
+            self.shape_nav = false;
+        }
+        // Move Text / Copy Text wait only through caret moves and selections, for Enter.
+        if (spec.mutates || matches!(id, "edit.undo" | "edit.redo" | "select.collapse"))
+            && !matches!(id, "text.newParagraph" | "edit.moveText" | "edit.copyText")
+        {
+            self.move_text = None;
         }
         let sel_before = self.sel.clone();
         let run = spec.run;

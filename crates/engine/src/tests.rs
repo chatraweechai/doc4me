@@ -4954,3 +4954,143 @@ fn cell_options_and_table_positioning() {
     run(&mut s, "table.positioning", json!({"around": false}));
     assert_eq!(table(&s).props.float, None);
 }
+
+/// AutoCaption: a numbered caption above each inserted table (the caret stays in the table) and
+/// below each picture, until the list is emptied; nested tables and unknown objects aren't
+/// captioned.
+#[cfg(not(target_arch = "wasm32"))]
+#[test]
+fn auto_caption_captions_inserted_tables_and_pictures() {
+    let mut s = s();
+    assert!(s.run("references.autoCaption", &json!({"set": [{"object": "chart"}]})).is_err());
+    assert!(s.run("references.autoCaption", &json!({"set": [{"object": "table", "position": "left"}]})).is_err());
+    let set = json!({"set": [{"object": "table"}, {"object": "picture", "label": "Photo", "position": "below"}]});
+    let got = run(&mut s, "references.autoCaption", set);
+    assert_eq!(got["objects"][1], json!({"object": "picture", "label": "Photo", "position": "below"}));
+    run(&mut s, "insert.table", json!({"rows": 1, "cols": 1}));
+    run(&mut s, "text.insert", json!({"text": "cell"}));
+    // A table inside the cell gets no caption of its own.
+    run(&mut s, "insert.table", json!({"rows": 1, "cols": 1}));
+    run(&mut s, "caret.docEnd", json!({}));
+    run(&mut s, "insert.table", json!({"rows": 1, "cols": 1}));
+    let t = text(&s);
+    assert!(t.starts_with("Table 1\ncell") && t.contains("Table 2\n"), "{t:?}");
+    assert_eq!(t.matches("Table ").count(), 2, "{t:?}");
+    assert!(s.sel.focus.path.cell().is_some(), "the caret stays in the new table");
+    run(&mut s, "caret.docEnd", json!({}));
+    let png = crate::cmd::insert::base64_encode(&tiny_png());
+    run(&mut s, "insert.picture", json!({"data": png}));
+    assert!(text(&s).trim_end().ends_with("Photo 1"), "{:?}", text(&s));
+    // Undo takes the picture and its caption back together.
+    run(&mut s, "edit.undo", json!({}));
+    assert!(!text(&s).contains("Photo"));
+    run(&mut s, "references.autoCaption", json!({"set": []}));
+    run(&mut s, "insert.table", json!({"rows": 1, "cols": 1}));
+    assert_eq!(text(&s).matches("Table ").count(), 2);
+    // Saved settings: a damaged entry is dropped, the rest of the preferences stay.
+    let saved = r#"{"overtype": true, "autoCaption": [{"object": "table", "label": "Tab."}, {"object": 3}, {"object": "chart"}]}"#;
+    let prefs: crate::session::Prefs = serde_json::from_str(saved).unwrap();
+    assert!(prefs.overtype);
+    assert_eq!(prefs.auto_caption.len(), 1);
+    assert_eq!(prefs.auto_caption[0].label, "Tab.");
+    let broken: crate::session::Prefs = serde_json::from_str(r#"{"overtype": true, "autoCaption": "yes"}"#).unwrap();
+    assert!(broken.overtype && broken.auto_caption.is_empty());
+}
+
+/// Word's Spike: Ctrl+F3 cuts each selection onto it (each ending its paragraph), Quick Parts
+/// lists it, and Ctrl+Shift+F3 pastes it all and empties it.
+#[test]
+fn spike_collects_cuts_and_pastes_them_together() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("Alpha beta\nGamma delta\nEnd"));
+    assert!(s.run("edit.pasteSpike", &json!({})).is_err(), "nothing spiked yet");
+    run(&mut s, "select.text", json!({"text": "beta"}));
+    run(&mut s, "edit.spike", json!({}));
+    run(&mut s, "select.text", json!({"text": "Gamma"}));
+    let got = run(&mut s, "edit.spike", json!({}));
+    assert_eq!(got["spike"], json!("beta\nGamma\n"));
+    assert!(run(&mut s, "insert.quickParts", json!({}))["parts"].as_array().unwrap().contains(&json!("Spike")));
+    assert_eq!(text(&s), "Alpha \n delta\nEnd");
+    run(&mut s, "caret.docEnd", json!({}));
+    run(&mut s, "edit.pasteSpike", json!({}));
+    assert_eq!(text(&s), "Alpha \n delta\nEndbeta\nGamma\n");
+    assert!(s.run("edit.pasteSpike", &json!({})).is_err(), "the Spike is empty again");
+    // Undo puts the Spike's text back where it was cut from, one step at a time.
+    run(&mut s, "edit.undo", json!({}));
+    assert_eq!(text(&s), "Alpha \n delta\nEnd");
+    // A whole paragraph keeps its own paragraph mark, without another.
+    run(&mut s, "caret.docStart", json!({}));
+    run(&mut s, "select.paragraph", json!({}));
+    assert_eq!(run(&mut s, "edit.spike", json!({}))["spike"], json!("Alpha \n"));
+}
+
+/// F2 / Shift+F2: Word's Move Text and Copy Text. The caret goes where the text should go and
+/// Enter moves (or copies) it there, before or after where it was; Esc or an edit forgets it, and
+/// Enter inside the text itself is just Enter.
+#[test]
+fn f2_moves_and_shift_f2_copies_text_to_the_caret() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("One two three\nFour"));
+    run(&mut s, "select.text", json!({"text": "two "}));
+    assert_eq!(run(&mut s, "edit.moveText", json!({})), json!({"moveTo": true}));
+    run(&mut s, "caret.docEnd", json!({}));
+    run(&mut s, "text.newParagraph", json!({}));
+    assert_eq!(text(&s), "One three\nFourtwo ", "moved after where it was");
+    assert!(s.move_text.is_none());
+    run(&mut s, "select.text", json!({"text": "Four"}));
+    run(&mut s, "edit.copyText", json!({}));
+    run(&mut s, "caret.docStart", json!({}));
+    run(&mut s, "text.newParagraph", json!({}));
+    assert_eq!(text(&s), "FourOne three\nFourtwo ", "copied before it");
+    // Undo takes the copy back in one step.
+    run(&mut s, "edit.undo", json!({}));
+    assert_eq!(text(&s), "One three\nFourtwo ");
+    // Moving it before where it was, across paragraphs.
+    run(&mut s, "select.text", json!({"text": "two"}));
+    run(&mut s, "edit.moveText", json!({}));
+    run(&mut s, "caret.docStart", json!({}));
+    run(&mut s, "text.newParagraph", json!({}));
+    assert_eq!(text(&s), "twoOne three\nFour ");
+    assert!(!s.doc.bookmarks().iter().any(|(n, _)| n.starts_with("_Doc4Me")), "no marker left behind");
+    // Esc forgets it; so does an edit.
+    run(&mut s, "select.text", json!({"text": "three"}));
+    run(&mut s, "edit.moveText", json!({}));
+    run(&mut s, "select.collapse", json!({}));
+    assert!(s.move_text.is_none());
+    run(&mut s, "select.text", json!({"text": "three"}));
+    run(&mut s, "edit.moveText", json!({}));
+    run(&mut s, "caret.docEnd", json!({}));
+    run(&mut s, "text.insert", json!({"text": "!"}));
+    assert!(s.move_text.is_none());
+    // Enter with the caret inside the text is a new paragraph.
+    run(&mut s, "select.text", json!({"text": "three"}));
+    run(&mut s, "edit.moveText", json!({}));
+    run(&mut s, "text.newParagraph", json!({}));
+    assert_eq!(text(&s).matches('\n').count(), 2, "{:?}", text(&s));
+}
+
+/// Ctrl+Alt+5: floating shape navigation selects the first floating shape from the caret, then
+/// next (Tab) and back (Shift+Tab) go round them, past shapes in line with text; Esc leaves it.
+#[test]
+fn ctrl_alt_5_goes_round_the_floating_shapes() {
+    let mut s = s();
+    assert!(s.run("select.floatingShapes", &json!({})).is_err(), "no floating shapes yet");
+    for kind in ["rectangle", "ellipse", "triangle"] {
+        run(&mut s, "insert.shape", json!({"kind": kind}));
+        run(&mut s, "caret.docEnd", json!({}));
+        run(&mut s, "text.newParagraph", json!({}));
+    }
+    // The first two float; the triangle stays in line with the text.
+    for i in 0..2 {
+        run(&mut s, "select.objects", json!({"index": i}));
+        run(&mut s, "arrange.wrap", json!({"wrap": "square"}));
+    }
+    run(&mut s, "caret.docStart", json!({}));
+    let r = run(&mut s, "select.floatingShapes", json!({}));
+    assert_eq!((&r["index"], &r["count"]), (&json!(0), &json!(2)));
+    assert!(s.shape_nav);
+    assert_eq!(run(&mut s, "select.floatingShapes", json!({"next": true}))["index"], json!(1));
+    assert_eq!(run(&mut s, "select.floatingShapes", json!({"next": true}))["index"], json!(0), "round again");
+    assert_eq!(run(&mut s, "select.floatingShapes", json!({"next": true, "back": true}))["index"], json!(1));
+    assert!(crate::cmd::objects::selected(&s).is_some());
+    run(&mut s, "select.collapse", json!({}));
+    assert!(!s.shape_nav, "Esc leaves shape navigation");
+}

@@ -383,6 +383,11 @@ pub fn canvas_events(app: &mut WordApp, ctx: &egui::Context) {
                 }
             }
             egui::Event::Key { key, pressed: true, modifiers, .. } => {
+                // Floating shape navigation (Ctrl+Alt+5): Tab goes from shape to shape.
+                if key == Key::Tab && app.session.shape_nav && !(modifiers.command || modifiers.ctrl || modifiers.alt) {
+                    let _ = app.run("select.floatingShapes", json!({"next": true, "back": modifiers.shift}));
+                    continue;
+                }
                 if key == Key::Escape && app.session.painter.is_some() {
                     app.session.painter = None;
                     continue;
