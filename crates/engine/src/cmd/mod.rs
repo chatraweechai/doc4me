@@ -2,6 +2,7 @@
 
 pub mod accessibility;
 pub mod addins;
+pub mod autoformat;
 pub mod canvas;
 pub mod caret;
 pub mod chart;
@@ -95,6 +96,7 @@ pub fn registry() -> Registry {
     v.extend(wordart::specs());
     v.extend(connectors::specs());
     v.extend(tools::specs());
+    v.extend(autoformat::specs());
     v.extend(templates::specs());
     v.extend(protect::specs());
     v.extend(translate::specs());

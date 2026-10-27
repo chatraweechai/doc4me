@@ -2756,3 +2756,22 @@ spacing	Normal	Normal
 	Pasting from other programs:	Einfügen aus anderen Programmen:
 	Keep Source Formatting	Ursprüngliche Formatierung beibehalten
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Formatierung zusammenführen fügt den Text in der Formatierung an der Einfügestelle ein, wie Nur den Text übernehmen.
+	AutoFormat	AutoFormat
+	Review AutoFormat Changes	AutoFormat-Änderungen überprüfen
+	*Bold* and _italic_ with real formatting	*Fett* und _kursiv_ durch echte Formatierung
+	Accept All	Alle annehmen
+	Reject All	Alle ablehnen
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	AutoFormat (Strg+Alt+K) formatiert die markierten Absätze oder das ganze Dokument.
+	AutoFormat Now	AutoFormat jetzt
+	AutoFormat and Review Changes…	AutoFormat und Änderungen überprüfen…
+	AutoFormat changed {count} paragraphs	AutoFormat hat {count} Absätze geändert
+	Built-in Heading styles	Integrierte Überschriften-Formatvorlagen
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Suchen markiert den nächsten geänderten Absatz; Ablehnen stellt den markierten wieder her.
+	Find →	Suchen →
+	← Find	← Suchen
+	Formatting completed. You can now:	Die Formatierung ist abgeschlossen. Sie können jetzt:
+	List styles	Listenformatvorlagen
+	Other paragraph styles	Andere Absatzformatvorlagen
+	Preserve	Beibehalten
+	Review Changes…	Änderungen überprüfen…
+	{count} paragraphs were changed.	{count} Absätze wurden geändert.

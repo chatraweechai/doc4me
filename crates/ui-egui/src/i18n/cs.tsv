@@ -2762,3 +2762,22 @@ spacing	Normal	Normální
 	Pasting from other programs:	Vkládání z jiných programů:
 	Keep Source Formatting	Zachovat formátování zdroje
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Sloučit formátování vloží text ve formátování místa vložení, stejně jako Zachovat pouze text.
+	AutoFormat	Automatický formát
+	Review AutoFormat Changes	Zkontrolovat změny automatického formátu
+	*Bold* and _italic_ with real formatting	*Tučné* a _kurzíva_ skutečným formátováním
+	Accept All	Přijmout vše
+	Reject All	Odmítnout vše
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Automatický formát (Ctrl+Alt+K) naformátuje vybrané odstavce nebo celý dokument.
+	AutoFormat Now	Automaticky formátovat nyní
+	AutoFormat and Review Changes…	Automaticky formátovat a zkontrolovat změny…
+	AutoFormat changed {count} paragraphs	Automatický formát změnil odstavce: {count}
+	Built-in Heading styles	Předdefinované styly nadpisů
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Najít vybere další změněný odstavec; Odmítnout vrátí vybraný do původní podoby.
+	Find →	Najít →
+	← Find	← Najít
+	Formatting completed. You can now:	Formátování je dokončeno. Nyní můžete:
+	List styles	Styly seznamů
+	Other paragraph styles	Ostatní styly odstavců
+	Preserve	Zachovat
+	Review Changes…	Zkontrolovat změny…
+	{count} paragraphs were changed.	Změněné odstavce: {count}.

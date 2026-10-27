@@ -2762,3 +2762,22 @@ spacing	Normal	Normalne
 	Pasting from other programs:	Wklejanie z innych programów:
 	Keep Source Formatting	Zachowaj formatowanie źródłowe
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Scal formatowanie wkleja tekst w formatowaniu miejsca docelowego, tak jak Zachowaj tylko tekst.
+	AutoFormat	Autoformatowanie
+	Review AutoFormat Changes	Przejrzyj zmiany autoformatowania
+	*Bold* and _italic_ with real formatting	*Pogrubienie* i _kursywa_ prawdziwym formatowaniem
+	Accept All	Zaakceptuj wszystko
+	Reject All	Odrzuć wszystko
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Autoformatowanie (Ctrl+Alt+K) formatuje zaznaczone akapity lub cały dokument.
+	AutoFormat Now	Autoformatuj teraz
+	AutoFormat and Review Changes…	Autoformatuj i przejrzyj zmiany…
+	AutoFormat changed {count} paragraphs	Autoformatowanie zmieniło akapity: {count}
+	Built-in Heading styles	Wbudowane style nagłówków
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Znajdź zaznacza następny zmieniony akapit; Odrzuć przywraca zaznaczony do poprzedniej postaci.
+	Find →	Znajdź →
+	← Find	← Znajdź
+	Formatting completed. You can now:	Formatowanie zakończone. Teraz możesz:
+	List styles	Style list
+	Other paragraph styles	Inne style akapitu
+	Preserve	Zachowaj
+	Review Changes…	Przejrzyj zmiany…
+	{count} paragraphs were changed.	Zmienione akapity: {count}.

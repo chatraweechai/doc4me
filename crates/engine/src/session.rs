@@ -278,6 +278,8 @@ pub struct Session {
     pub clipboard: Option<Fragment>,
     /// The document the clipboard's content was copied from ([`Session::document_id`]).
     pub clipboard_doc: Option<u64>,
+    /// AutoFormat and review each change: what Review AutoFormat Changes can reject.
+    pub autoformat_review: Option<crate::cmd::autoformat::AutoFormatReview>,
     /// A tracked cut the next paste can turn into a move (see `cmd::moves`).
     pub pending_move: Option<crate::cmd::moves::PendingMove>,
     /// F2 / Shift+F2 (Move Text / Copy Text): the text Enter moves or copies to the caret.
@@ -520,6 +522,7 @@ impl Session {
             dirty: false,
             clipboard: None,
             clipboard_doc: None,
+            autoformat_review: None,
             pending_move: None,
             move_text: None,
             shape_nav: false,
@@ -960,6 +963,8 @@ impl Session {
             dirty,
             clipboard: _,
             clipboard_doc: _,
+            // Checked against the document before each use.
+            autoformat_review: _,
             // Like the clipboard: what the next paste can make a move of.
             pending_move: _,
             move_text: _,

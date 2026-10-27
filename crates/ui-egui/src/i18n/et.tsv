@@ -2765,3 +2765,22 @@ spacing	Normal	Tavaline
 	Pasting from other programs:	Kleepimine muudest programmidest:
 	Keep Source Formatting	Säilita lähtevorming
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Vormingu ühendamine kleebib teksti sihtkoha vormingus, nagu Säilita ainult tekst.
+	AutoFormat	Automaatvorming
+	Review AutoFormat Changes	Automaatvormingu muudatuste ülevaatus
+	*Bold* and _italic_ with real formatting	*Paks* ja _kursiiv_ päris vorminguga
+	Accept All	Nõustu kõigiga
+	Reject All	Lükka kõik tagasi
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Automaatvorming (Ctrl+Alt+K) vormindab valitud lõigud või kogu dokumendi.
+	AutoFormat Now	Vorminda kohe
+	AutoFormat and Review Changes…	Vorminda ja vaata muudatused üle…
+	AutoFormat changed {count} paragraphs	Automaatvorming muutis {count} lõiku
+	Built-in Heading styles	Sisseehitatud pealkirjastiilid
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Otsi valib järgmise muudetud lõigu; Lükka tagasi taastab valitud lõigu endisel kujul.
+	Find →	Otsi →
+	← Find	← Otsi
+	Formatting completed. You can now:	Vormindamine on lõpetatud. Nüüd saate:
+	List styles	Loendistiilid
+	Other paragraph styles	Muud lõigustiilid
+	Preserve	Säilita
+	Review Changes…	Vaata muudatused üle…
+	{count} paragraphs were changed.	Muudeti {count} lõiku.

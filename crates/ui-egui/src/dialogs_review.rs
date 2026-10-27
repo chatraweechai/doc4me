@@ -456,7 +456,7 @@ fn compare_ui(app: &mut WordApp, ui: &mut Ui, f: &mut CompareForm) -> bool {
 #[derive(Clone, Debug, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AutoCorrectForm {
-    /// 0 AutoCorrect, 1 AutoFormat As You Type, 2 Math AutoCorrect.
+    /// 0 AutoCorrect, 1 AutoFormat As You Type, 2 Math AutoCorrect, 3 AutoFormat.
     pub tab: u8,
     /// The options as edited (applied on OK); the lists change at once, as in Word.
     pub options: AutoCorrectPrefs,
@@ -501,6 +501,7 @@ impl AutoCorrectForm {
             "bullets": o.bullets,
             "numbering": o.numbering,
             "borderLines": o.border_lines,
+            "autoFormat": o.autoformat,
         })
     }
 }
@@ -526,7 +527,7 @@ fn list_change(app: &mut WordApp, f: &mut AutoCorrectForm, params: Value) -> boo
 
 fn autocorrect_ui(app: &mut WordApp, ui: &mut Ui, f: &mut AutoCorrectForm) -> bool {
     ui.horizontal(|ui| {
-        for (i, l) in ["AutoCorrect", "AutoFormat As You Type", "Math AutoCorrect"].into_iter().enumerate() {
+        for (i, l) in ["AutoCorrect", "AutoFormat As You Type", "Math AutoCorrect", "AutoFormat"].into_iter().enumerate() {
             if ui.selectable_label(f.tab == i as u8, tl!(l)).clicked() {
                 f.tab = i as u8;
             }
@@ -548,7 +549,12 @@ fn autocorrect_ui(app: &mut WordApp, ui: &mut Ui, f: &mut AutoCorrectForm) -> bo
             ui.checkbox(&mut o.numbering, tl!("Automatic numbered lists"));
             ui.checkbox(&mut o.border_lines, tl!("Border lines"));
         }
-        _ => math_tab(ui, f),
+        2 => math_tab(ui, f),
+        _ => {
+            if let Some(close) = autoformat_tab(app, ui, f) {
+                return close;
+            }
+        }
     }
     error(ui, &f.message);
     let (ok, cancel) = buttons(ui, true);
@@ -560,6 +566,58 @@ fn autocorrect_ui(app: &mut WordApp, ui: &mut Ui, f: &mut AutoCorrectForm) -> bo
         return true;
     }
     cancel
+}
+
+/// The AutoFormat tab: what AutoFormat (Ctrl+Alt+K) changes, and (Word has no ribbon button
+/// for it) AutoFormat Now and AutoFormat with review. `Some` closes the dialog.
+fn autoformat_tab(app: &mut WordApp, ui: &mut Ui, f: &mut AutoCorrectForm) -> Option<bool> {
+    let o = &mut f.options.autoformat;
+    heading(ui, "Apply");
+    ui.checkbox(&mut o.headings, tl!("Built-in Heading styles"));
+    ui.checkbox(&mut o.lists, tl!("List styles"));
+    ui.checkbox(&mut o.bullets, tl!("Automatic bulleted lists"));
+    ui.checkbox(&mut o.other_styles, tl!("Other paragraph styles"));
+    heading(ui, "Replace");
+    ui.checkbox(&mut o.quotes, tl!("Smart quotes instead of straight quotes"));
+    ui.checkbox(&mut o.ordinals, tl!("Ordinals (1st) as superscript"));
+    ui.checkbox(&mut o.fractions, tl!("Fractions (1/2) as fraction characters (½)"));
+    ui.checkbox(&mut o.dashes, tl!("Hyphens (--) as dashes (—)"));
+    ui.checkbox(&mut o.emphasis, tl!("*Bold* and _italic_ with real formatting"));
+    ui.checkbox(&mut o.links, tl!("Internet addresses as links"));
+    heading(ui, "Preserve");
+    ui.checkbox(&mut o.preserve_styles, tl!("Styles"));
+    ui.add_space(4.0);
+    ui.label(egui::RichText::new(tl!("AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.")).small().weak());
+    let mut review = None;
+    ui.horizontal(|ui| {
+        if ui.button(tl!("AutoFormat Now")).clicked() {
+            review = Some(false);
+        }
+        if ui.button(tl!("AutoFormat and Review Changes…")).clicked() {
+            review = Some(true);
+        }
+    });
+    let review = review?;
+    // The options as set here, then AutoFormat with them.
+    if let Err(e) = app.run("tools.autocorrect", f.params()) {
+        f.message = e;
+        return None;
+    }
+    match app.run("format.autoFormat", json!({"review": review})) {
+        Ok(v) => {
+            if v.get("review").and_then(Value::as_bool) == Some(true) {
+                let _ = app.run("ui.dialog", json!({"name": "autoFormatReview"}));
+            } else {
+                let n = v.get("changed").and_then(Value::as_u64).unwrap_or(0).to_string();
+                app.status(crate::i18n::fmt(tl!("AutoFormat changed {count} paragraphs"), &[("count", &n)]));
+            }
+            Some(true)
+        }
+        Err(e) => {
+            f.message = e;
+            None
+        }
+    }
 }
 
 fn autocorrect_tab(app: &mut WordApp, ui: &mut Ui, f: &mut AutoCorrectForm) {

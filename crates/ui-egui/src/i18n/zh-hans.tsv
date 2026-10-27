@@ -2769,3 +2769,22 @@ spacing	Normal	标准
 	Pasting from other programs:	从其他程序粘贴:
 	Keep Source Formatting	保留源格式
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	合并格式与只保留文本一样，按粘贴位置的格式粘贴文本。
+	AutoFormat	自动套用格式
+	Review AutoFormat Changes	审阅自动套用格式更改
+	*Bold* and _italic_ with real formatting	*加粗* 和 _倾斜_ 替换为真正的格式
+	Accept All	全部接受
+	Reject All	全部拒绝
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	自动套用格式 (Ctrl+Alt+K) 设置所选段落或整个文档的格式。
+	AutoFormat Now	立即自动套用格式
+	AutoFormat and Review Changes…	自动套用格式并审阅更改…
+	AutoFormat changed {count} paragraphs	自动套用格式更改了 {count} 个段落
+	Built-in Heading styles	内置标题样式
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	“查找”选择下一个更改的段落；“拒绝”将所选段落恢复原样。
+	Find →	查找 →
+	← Find	← 查找
+	Formatting completed. You can now:	格式设置已完成。现在可以：
+	List styles	列表样式
+	Other paragraph styles	其他段落样式
+	Preserve	保留
+	Review Changes…	审阅更改…
+	{count} paragraphs were changed.	已更改 {count} 个段落。

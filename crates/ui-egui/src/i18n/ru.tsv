@@ -2785,3 +2785,22 @@ spacing	Normal	Обычный
 	Pasting from other programs:	Вставка из других программ:
 	Keep Source Formatting	Сохранить исходное форматирование
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Объединить форматирование вставляет текст с форматированием места вставки, как Сохранить только текст.
+	AutoFormat	Автоформат
+	Review AutoFormat Changes	Просмотр изменений автоформата
+	*Bold* and _italic_ with real formatting	*Полужирный* и _курсив_ настоящим форматированием
+	Accept All	Принять все
+	Reject All	Отклонить все
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Автоформат (Ctrl+Alt+K) форматирует выделенные абзацы или весь документ.
+	AutoFormat Now	Автоформат сейчас
+	AutoFormat and Review Changes…	Автоформат с просмотром изменений…
+	AutoFormat changed {count} paragraphs	Автоформат изменил абзацев: {count}
+	Built-in Heading styles	Встроенные стили заголовков
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	«Найти» выделяет следующий измененный абзац; «Отклонить» возвращает выделенный в прежний вид.
+	Find →	Найти →
+	← Find	← Найти
+	Formatting completed. You can now:	Форматирование завершено. Теперь можно:
+	List styles	Стили списков
+	Other paragraph styles	Другие стили абзацев
+	Preserve	Сохранять
+	Review Changes…	Просмотреть изменения…
+	{count} paragraphs were changed.	Изменено абзацев: {count}.

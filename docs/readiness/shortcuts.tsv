@@ -130,7 +130,7 @@ ks-128	Align and format paragraphs	Remove paragraph formatting.	Ctrl+Q	Mod+Q	par
 ks-129	Align and format paragraphs	Apply single spacing to the paragraph.	Ctrl+1	Mod+1	para.single	registry		
 ks-130	Align and format paragraphs	Apply double spacing to the paragraph.	Ctrl+2	Mod+2	para.double	registry		
 ks-131	Align and format paragraphs	Apply 1.5-line spacing to the paragraph.	Ctrl+5	Mod+5	para.oneAndHalf	registry		
-ks-132	Align and format paragraphs	Enable AutoFormat.	Ctrl+Alt+K	Mod+Alt+K	-	manual	fail	
+ks-132	Align and format paragraphs	Enable AutoFormat.	Ctrl+Alt+K	Mod+Alt+K	format.autoFormat	registry		AutoFormat: headings, lists, Body Text and the AutoFormat replacements over the selection or the document (engine test cmd::autoformat::tests::autoformat_styles_and_replaces)
 ks-133	Align and format paragraphs	Apply the Normal style.	Ctrl+Shift+N	Mod+Shift+N	para.normal	registry		
 ks-134	Align and format paragraphs	Apply the Heading 1 style.	Ctrl+Alt+1	Mod+Alt+1	para.heading1	registry		
 ks-135	Align and format paragraphs	Apply the Heading 2 style.	Ctrl+Alt+2	Mod+Alt+2	para.heading2	registry		

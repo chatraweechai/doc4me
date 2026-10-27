@@ -2757,3 +2757,22 @@ spacing	Normal	標準
 	Pasting from other programs:	他のプログラムからの貼り付け:
 	Keep Source Formatting	元の書式を保持
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	書式を結合は、テキストのみ保持と同じく、貼り付け先の書式でテキストを貼り付けます。
+	AutoFormat	オートフォーマット
+	Review AutoFormat Changes	オートフォーマットの変更の確認
+	*Bold* and _italic_ with real formatting	*太字* と _斜体_ を書式に置き換える
+	Accept All	すべて承諾
+	Reject All	すべて元に戻す
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	オートフォーマット (Ctrl+Alt+K) は選択した段落、または文書全体を書式設定します。
+	AutoFormat Now	今すぐオートフォーマット
+	AutoFormat and Review Changes…	オートフォーマットして変更を確認…
+	AutoFormat changed {count} paragraphs	オートフォーマットで {count} 個の段落を変更しました
+	Built-in Heading styles	組み込みの見出しスタイル
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	検索で次に変更された段落を選択し、[元に戻す] で選択した段落を元の状態に戻します。
+	Find →	検索 →
+	← Find	← 検索
+	Formatting completed. You can now:	書式設定が完了しました。次の操作ができます:
+	List styles	リスト スタイル
+	Other paragraph styles	その他の段落スタイル
+	Preserve	保持
+	Review Changes…	変更の確認…
+	{count} paragraphs were changed.	{count} 個の段落が変更されました。

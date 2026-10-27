@@ -2769,3 +2769,22 @@ spacing	Normal	Normal
 	Pasting from other programs:	Colar de outros programas:
 	Keep Source Formatting	Manter Formatação Original
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Mesclar Formatação cola o texto com a formatação do local de destino, como Manter Somente Texto.
+	AutoFormat	AutoFormatação
+	Review AutoFormat Changes	Revisar alterações da AutoFormatação
+	*Bold* and _italic_ with real formatting	*Negrito* e _itálico_ com formatação real
+	Accept All	Aceitar Tudo
+	Reject All	Rejeitar Tudo
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	A AutoFormatação (Ctrl+Alt+K) formata os parágrafos selecionados, ou o documento inteiro.
+	AutoFormat Now	AutoFormatar Agora
+	AutoFormat and Review Changes…	AutoFormatar e Revisar Alterações…
+	AutoFormat changed {count} paragraphs	A AutoFormatação alterou {count} parágrafos
+	Built-in Heading styles	Estilos de Título internos
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Localizar seleciona o próximo parágrafo alterado; Rejeitar devolve o selecionado ao que era.
+	Find →	Localizar →
+	← Find	← Localizar
+	Formatting completed. You can now:	Formatação concluída. Agora você pode:
+	List styles	Estilos de lista
+	Other paragraph styles	Outros estilos de parágrafo
+	Preserve	Preservar
+	Review Changes…	Revisar Alterações…
+	{count} paragraphs were changed.	{count} parágrafos foram alterados.

@@ -2767,3 +2767,22 @@ spacing	Normal	Normalno
 	Pasting from other programs:	Lepljenje iz drugih programa:
 	Keep Source Formatting	Zadrži izvorno oblikovanje
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Spajanje oblikovanja lepi tekst u oblikovanju mesta gde se lepi, kao i Zadrži samo tekst.
+	AutoFormat	Automatsko oblikovanje
+	Review AutoFormat Changes	Pregled izmena automatskog oblikovanja
+	*Bold* and _italic_ with real formatting	*Podebljano* i _kurziv_ pravim oblikovanjem
+	Accept All	Prihvati sve
+	Reject All	Odbij sve
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Automatsko oblikovanje (Ctrl+Alt+K) oblikuje izabrane pasuse ili ceo dokument.
+	AutoFormat Now	Oblikuj sada
+	AutoFormat and Review Changes…	Oblikuj i pregledaj izmene…
+	AutoFormat changed {count} paragraphs	Automatsko oblikovanje je izmenilo pasusa: {count}
+	Built-in Heading styles	Ugrađeni stilovi naslova
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Pronađi bira sledeći izmenjeni pasus; Odbij vraća izabrani u prethodno stanje.
+	Find →	Pronađi →
+	← Find	← Pronađi
+	Formatting completed. You can now:	Oblikovanje je završeno. Sada možete:
+	List styles	Stilovi lista
+	Other paragraph styles	Ostali stilovi pasusa
+	Preserve	Zadrži
+	Review Changes…	Pregledaj izmene…
+	{count} paragraphs were changed.	Izmenjeno pasusa: {count}.

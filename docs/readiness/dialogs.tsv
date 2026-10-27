@@ -148,7 +148,7 @@ dlg-146	wdDialogOMathRecognizedFunctions	2165	(none)	equation.functions	registry
 dlg-147	wdDialogOrganizer	222	(none)	styles.organizer	registry		
 dlg-148	wdDialogPermission	1469	(none)		excluded		Information Rights Management (Microsoft service)
 dlg-149	wdDialogPhoneticGuide	986	(none)	format.phonetic	registry		
-dlg-150	wdDialogReviewAfmtRevisions	570	(none)	-	registry		
+dlg-150	wdDialogReviewAfmtRevisions	570	(none)	format.autoFormatReview	registry		"Formatting completed" after AutoFormat and Review Changes: Accept All, Reject All, Review Changes (Find ←/→ selects each changed paragraph, Reject puts it back); UI test dialogs_data::tests::autoformat_tab_and_review_dialog
 dlg-151	wdDialogSchemaLibrary	1417	(none)	-	registry		
 dlg-152	wdDialogSearch	1363	(none)	-	registry		legacy file search
 dlg-153	wdDialogShowRepairs	1381	(none)	-	registry		
@@ -201,7 +201,7 @@ dlg-199	wdDialogToolsMacroRecord	214	(none)	tools.recordMacro	registry
 dlg-200	wdDialogToolsManageFields	631	(none)	-	registry		
 dlg-201	wdDialogToolsMergeDocuments	435	(none)	review.combine	registry		
 dlg-202	wdDialogToolsOptions	974	(none)	file.options	registry		
-dlg-203	wdDialogToolsOptionsAutoFormat	959	(none)	-	registry		AutoCorrect Options has AutoFormat As You Type, not AutoFormat
+dlg-203	wdDialogToolsOptionsAutoFormat	959	(none)	tools.autocorrect	registry		AutoCorrect Options › AutoFormat: Apply (Built-in Heading styles, List styles, Automatic bulleted lists, Other paragraph styles), Replace (quotes, ordinals, fractions, dashes, *bold* and _italic_, links), Preserve Styles; AutoFormat Now / AutoFormat and Review Changes
 dlg-204	wdDialogToolsOptionsAutoFormatAsYouType	778	(none)	tools.autocorrect	registry		
 dlg-205	wdDialogToolsOptionsBidi	1029	(none)	-	registry		
 dlg-206	wdDialogToolsOptionsCompatibility	525	(none)	file.compatibilityOptions	registry		Compatibility Options: the layout options Doc4Me follows (Options › Advanced)

@@ -101,6 +101,8 @@ pub struct AutoCorrectPrefs {
     pub exceptions: Vec<String>,
     /// Built-in abbreviations the user deleted from the exceptions.
     pub exceptions_removed: Vec<String>,
+    /// The AutoFormat tab: what AutoFormat (Ctrl+Alt+K) changes.
+    pub autoformat: super::autoformat::AutoFormatPrefs,
 }
 
 impl Default for AutoCorrectPrefs {
@@ -123,6 +125,7 @@ impl Default for AutoCorrectPrefs {
             removed: Vec::new(),
             exceptions: Vec::new(),
             exceptions_removed: Vec::new(),
+            autoformat: Default::default(),
         }
     }
 }
@@ -232,6 +235,17 @@ fn autocorrect_options(s: &mut Session, v: &Value) -> CmdResult {
             *f = b;
         }
     }
+    match v.get("autoFormat") {
+        None | Some(Value::Null) => {}
+        Some(Value::Object(m)) => {
+            for (k, f) in ac.autoformat.switches() {
+                if let Some(b) = m.get(k).and_then(Value::as_bool) {
+                    *f = b;
+                }
+            }
+        }
+        Some(_) => return Err(CmdError::Params("`autoFormat` is an object of true/false switches".into())),
+    }
     let bad = |t: &str, max: usize| t.trim().is_empty() || t.chars().count() > max || t.contains(['\n', '\r']);
     if let Some(add) = v.get("add") {
         let (Some(f), Some(t)) = (add.get("from").and_then(Value::as_str), add.get("to").and_then(Value::as_str)) else {
@@ -288,6 +302,7 @@ fn autocorrect_options(s: &mut Session, v: &Value) -> CmdResult {
         "bullets": ac.bullets,
         "numbering": ac.numbering,
         "borderLines": ac.border_lines,
+        "autoFormat": ac.autoformat,
         "entries": ac.list().into_iter().map(|(a, b, builtin)| json!({"from": a, "to": b, "builtIn": builtin})).collect::<Vec<_>>(),
         "user": ac.entries,
         "exceptions": ac.exception_list(),
@@ -339,7 +354,7 @@ pub fn specs() -> Vec<CommandSpec> {
             .pure(),
         CommandSpec::new("tools.autocorrect", "AutoCorrect Options", "File › Options › Proofing", autocorrect_options)
             .params(
-                r#"{"enabled"?: bool (all of AutoCorrect), "replaceText"|"capSentences"|"capCells"|"capDays"|"smartQuotes"|"fractions"|"ordinals"|"dashes"|"links"|"bullets"|"numbering"|"borderLines"?: bool, "add"?: {"from": string, "to": string} (adds or replaces an entry), "delete"?: string (an entry's "from", built in or added), "addException"?: string, "deleteException"?: string} → options, entries and exceptions"#,
+                r#"{"enabled"?: bool (all of AutoCorrect), "replaceText"|"capSentences"|"capCells"|"capDays"|"smartQuotes"|"fractions"|"ordinals"|"dashes"|"links"|"bullets"|"numbering"|"borderLines"?: bool, "autoFormat"?: {"headings"|"lists"|"bullets"|"otherStyles"|"quotes"|"ordinals"|"fractions"|"dashes"|"emphasis"|"links"|"preserveStyles"?: bool} (the AutoFormat tab), "add"?: {"from": string, "to": string} (adds or replaces an entry), "delete"?: string (an entry's "from", built in or added), "addException"?: string, "deleteException"?: string} → options, entries and exceptions"#,
             )
             .pure(),
         CommandSpec::new("tools.customizeKeyboard", "Customize Keyboard", "File › Options", customize_keyboard)
@@ -896,7 +911,7 @@ pub fn autocorrect_word(s: &mut Session, on_enter: bool) -> Result<(), CmdError>
 }
 
 /// Byte length of an ordinal suffix to superscript ("1st" → 2), if `word` is a correct ordinal.
-fn ordinal_suffix(word: &str) -> Option<usize> {
+pub(crate) fn ordinal_suffix(word: &str) -> Option<usize> {
     let digits = word.find(|c: char| !c.is_ascii_digit())?;
     let (num, suffix) = word.split_at(digits);
     if num.is_empty() || num.len() > 9 {

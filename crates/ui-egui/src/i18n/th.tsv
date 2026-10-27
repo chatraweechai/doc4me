@@ -2766,3 +2766,22 @@ spacing	Normal	ปกติ
 	Pasting from other programs:	การวางจากโปรแกรมอื่น:
 	Keep Source Formatting	คงการจัดรูปแบบต้นฉบับ
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	การผสานการจัดรูปแบบจะวางข้อความด้วยการจัดรูปแบบของตำแหน่งที่วาง เช่นเดียวกับเก็บข้อความเท่านั้น
+	AutoFormat	จัดรูปแบบอัตโนมัติ
+	Review AutoFormat Changes	ตรวจทานการเปลี่ยนแปลงของการจัดรูปแบบอัตโนมัติ
+	*Bold* and _italic_ with real formatting	*ตัวหนา* และ _ตัวเอียง_ เป็นการจัดรูปแบบจริง
+	Accept All	ยอมรับทั้งหมด
+	Reject All	ปฏิเสธทั้งหมด
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	จัดรูปแบบอัตโนมัติ (Ctrl+Alt+K) จัดรูปแบบย่อหน้าที่เลือก หรือทั้งเอกสาร
+	AutoFormat Now	จัดรูปแบบอัตโนมัติเดี๋ยวนี้
+	AutoFormat and Review Changes…	จัดรูปแบบอัตโนมัติและตรวจทานการเปลี่ยนแปลง…
+	AutoFormat changed {count} paragraphs	จัดรูปแบบอัตโนมัติเปลี่ยน {count} ย่อหน้า
+	Built-in Heading styles	สไตล์หัวเรื่องที่มีอยู่ภายใน
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	ค้นหาจะเลือกย่อหน้าถัดไปที่ถูกเปลี่ยน ส่วนปฏิเสธจะคืนย่อหน้าที่เลือกให้เป็นเหมือนเดิม
+	Find →	ค้นหา →
+	← Find	← ค้นหา
+	Formatting completed. You can now:	จัดรูปแบบเสร็จแล้ว ตอนนี้คุณสามารถ:
+	List styles	สไตล์รายการ
+	Other paragraph styles	สไตล์ย่อหน้าอื่นๆ
+	Preserve	คงไว้
+	Review Changes…	ตรวจทานการเปลี่ยนแปลง…
+	{count} paragraphs were changed.	มีการเปลี่ยน {count} ย่อหน้า

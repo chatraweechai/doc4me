@@ -2758,3 +2758,22 @@ spacing	Normal	Normál
 	Pasting from other programs:	Beillesztés más programokból:
 	Keep Source Formatting	Forrásformázás megtartása
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	A Formázás egyesítése a beillesztés helyének formázásával illeszti be a szöveget, ahogy a Csak a szöveg megtartása is.
+	AutoFormat	Automatikus formázás
+	Review AutoFormat Changes	Automatikus formázás változásainak áttekintése
+	*Bold* and _italic_ with real formatting	*Félkövér* és _dőlt_ valódi formázással
+	Accept All	Az összes elfogadása
+	Reject All	Az összes elutasítása
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Az automatikus formázás (Ctrl+Alt+K) a kijelölt bekezdéseket vagy a teljes dokumentumot formázza.
+	AutoFormat Now	Formázás most
+	AutoFormat and Review Changes…	Formázás és a változások áttekintése…
+	AutoFormat changed {count} paragraphs	Az automatikus formázás {count} bekezdést módosított
+	Built-in Heading styles	Beépített címsorstílusok
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	A Keresés kijelöli a következő módosított bekezdést; az Elutasítás visszaállítja a kijelöltet.
+	Find →	Keresés →
+	← Find	← Keresés
+	Formatting completed. You can now:	A formázás befejeződött. Most a következőket teheti:
+	List styles	Listastílusok
+	Other paragraph styles	Egyéb bekezdésstílusok
+	Preserve	Megőrzés
+	Review Changes…	Változások áttekintése…
+	{count} paragraphs were changed.	{count} bekezdés módosult.

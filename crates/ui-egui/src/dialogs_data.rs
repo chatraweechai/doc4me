@@ -1,8 +1,9 @@
 //! Dialogs about data and lists: Recognized Functions (Equation › Equation Options), Insert
-//! Database, Filter and Sort (Edit Recipient List) and Table AutoFormat (Table Design › Table
-//! Styles). Each ends by running a command (`equation.functions`, `insert.database`,
-//! `mailings.query`, `table.style` with `table.look`), so scripts and agents get the same result
-//! without the dialog. Shown through [`crate::dialogs::Dialog::Data`].
+//! Database, Filter and Sort (Edit Recipient List), Table AutoFormat (Table Design › Table
+//! Styles) and the review after AutoFormat. Each ends by running a command
+//! (`equation.functions`, `insert.database`, `mailings.query`, `table.style` with `table.look`,
+//! `format.autoFormatReview`), so scripts and agents get the same result without the dialog.
+//! Shown through [`crate::dialogs::Dialog::Data`].
 
 use egui::{Ui, vec2};
 use serde::Serialize;
@@ -65,6 +66,9 @@ pub enum DataDialog {
     /// The table styles (id, name), the one picked and Apply special formats to: heading rows,
     /// first column, last row, last column.
     TableAutoFormat { styles: Vec<(String, String)>, style: usize, look: [bool; 4] },
+    /// After AutoFormat with review: the changed paragraphs (before, after), and whether the
+    /// list of changes is open (Review Changes).
+    AutoFormatReview { changes: Vec<(String, String)>, reviewing: bool },
 }
 
 impl DataDialog {
@@ -74,6 +78,7 @@ impl DataDialog {
             DataDialog::InsertDatabase { .. } => "insertDatabase",
             DataDialog::FilterSort { .. } => "filterSort",
             DataDialog::TableAutoFormat { .. } => "tableAutoFormat",
+            DataDialog::AutoFormatReview { .. } => "autoFormatReview",
         }
     }
 
@@ -84,6 +89,7 @@ impl DataDialog {
             DataDialog::InsertDatabase { .. } => "Insert Database",
             DataDialog::FilterSort { .. } => "Filter and Sort",
             DataDialog::TableAutoFormat { .. } => "Table AutoFormat",
+            DataDialog::AutoFormatReview { .. } => "AutoFormat",
         }
     }
 }
@@ -157,6 +163,10 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<DataDialog> {
             let l = &table.props.look;
             DataDialog::TableAutoFormat { styles, style, look: [l.header_row, l.first_column, l.total_row, l.last_column] }
         }
+        "autoFormatReview" => {
+            let v = app.session.run("format.autoFormatReview", &json!({})).ok()?;
+            DataDialog::AutoFormatReview { changes: review_changes(&v), reviewing: false }
+        }
         _ => return None,
     })
 }
@@ -168,6 +178,7 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut DataDialog) -> bool {
         DataDialog::InsertDatabase { .. } => insert_database(app, ui, d),
         DataDialog::FilterSort { tab, fields, rules, sort } => filter_sort(app, ui, tab, fields, rules, sort),
         DataDialog::TableAutoFormat { styles, style, look } => table_autoformat(app, ui, styles, style, look),
+        DataDialog::AutoFormatReview { changes, reviewing } => autoformat_review(app, ui, changes, reviewing),
     }
 }
 
@@ -484,6 +495,90 @@ fn table_autoformat(app: &mut WordApp, ui: &mut Ui, styles: &[(String, String)],
     cancel
 }
 
+/// `format.autoFormatReview`'s changes as (before, after).
+fn review_changes(v: &Value) -> Vec<(String, String)> {
+    let s = |c: &Value, k: &str| c.get(k).and_then(Value::as_str).unwrap_or("").to_string();
+    v.get("changes").and_then(Value::as_array).into_iter().flatten().map(|c| (s(c, "before"), s(c, "after"))).collect()
+}
+
+/// Runs a review action and takes the changes left; a refusal shows in the status bar.
+fn review_action(app: &mut WordApp, changes: &mut Vec<(String, String)>, action: &str) -> bool {
+    match app.run("format.autoFormatReview", json!({"action": action})) {
+        Ok(v) => {
+            *changes = review_changes(&v);
+            true
+        }
+        Err(e) => {
+            app.status(e);
+            false
+        }
+    }
+}
+
+/// Word's "Formatting completed" dialog after AutoFormat with review: Accept All, Reject All, or
+/// Review Changes (find each changed paragraph and reject it). Close keeps what is left.
+fn autoformat_review(app: &mut WordApp, ui: &mut Ui, changes: &mut Vec<(String, String)>, reviewing: &mut bool) -> bool {
+    ui.label(tl!("Formatting completed. You can now:"));
+    let n = changes.len().to_string();
+    ui.label(egui::RichText::new(crate::i18n::fmt(tl!("{count} paragraphs were changed."), &[("count", &n)])).small().weak());
+    let mut close = false;
+    ui.horizontal(|ui| {
+        if ui.button(tl!("Accept All")).clicked() {
+            review_action(app, changes, "acceptAll");
+            close = true;
+        }
+        if ui.button(tl!("Reject All")).clicked() {
+            review_action(app, changes, "rejectAll");
+            close = true;
+        }
+        if ui.selectable_label(*reviewing, tl!("Review Changes…")).clicked() {
+            *reviewing = !*reviewing;
+            if *reviewing {
+                review_action(app, changes, "next");
+            }
+        }
+    });
+    if close {
+        return true;
+    }
+    if *reviewing {
+        ui.add_space(4.0);
+        egui::Frame::group(ui.style()).show(ui, |ui| {
+            ui.set_min_width(320.0);
+            egui::ScrollArea::vertical().id_salt("autoformat_changes").max_height(180.0).show(ui, |ui| {
+                let short = |t: &str| if t.chars().count() > 60 { format!("{}…", t.chars().take(60).collect::<String>()) } else { t.to_string() };
+                for (before, after) in changes.iter() {
+                    ui.label(egui::RichText::new(short(before)).small().strikethrough().weak());
+                    ui.label(short(after));
+                    ui.separator();
+                }
+            });
+        });
+        ui.horizontal(|ui| {
+            if ui.button(tl!("← Find")).clicked() {
+                review_action(app, changes, "previous");
+            }
+            if ui.button(tl!("Find →")).clicked() {
+                review_action(app, changes, "next");
+            }
+            if ui.button(tl!("Reject")).clicked() && review_action(app, changes, "reject") && !changes.is_empty() {
+                review_action(app, changes, "next");
+            }
+        });
+        ui.label(egui::RichText::new(tl!("Find selects the next changed paragraph; Reject puts the selected one back as it was.")).small().weak());
+    }
+    // Nothing left to review: done.
+    if changes.is_empty() {
+        return true;
+    }
+    ui.add_space(8.0);
+    let mut done = ui.input(|i| i.key_pressed(egui::Key::Escape));
+    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+        done |= ui.button(tl!("Close")).clicked();
+    });
+    done
+}
+
 #[cfg(test)]
 mod tests {
     use egui_kittest::Harness;
@@ -632,5 +727,50 @@ mod tests {
         // Outside a table there is nothing to format.
         let mut b = harness(app("No table here"));
         assert!(b.state_mut().run("ui.dialog", json!({"name": "tableAutoFormat"})).unwrap()["dialog"].is_null());
+    }
+
+    /// dlg-203 and dlg-150: AutoCorrect Options › AutoFormat sets what AutoFormat changes, and
+    /// AutoFormat and Review Changes opens Word's "Formatting completed" dialog, which finds and
+    /// rejects one change and closes keeping the rest.
+    #[test]
+    fn autoformat_tab_and_review_dialog() {
+        use crate::dialogs_review::ReviewDialog;
+        let mut h = harness(app("SUMMARY\nIt's \"fine\" -- really.\nThe end of it."));
+        h.state_mut().run("tools.autocorrect", json!({})).unwrap();
+        h.run_steps(3);
+        match h.state_mut().dialog.as_mut() {
+            Some(Dialog::Review(d)) => match &mut **d {
+                ReviewDialog::AutoCorrect(f) => {
+                    f.tab = 3;
+                    f.options.autoformat.dashes = false;
+                }
+                other => panic!("{other:?}"),
+            },
+            other => panic!("{other:?}"),
+        }
+        h.run_steps(2);
+        h.get_by_label("AutoFormat and Review Changes…").click();
+        h.run_steps(3);
+        assert!(!h.state().session.prefs.autocorrect.autoformat.dashes, "the tab's options are kept");
+        let text = |h: &Harness<'_, WordApp>| h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body);
+        assert!(text(&h).contains("It\u{2019}s \u{201C}fine\u{201D} -- really."), "{}", text(&h));
+        let changes = match form(&mut h) {
+            DataDialog::AutoFormatReview { changes, .. } => changes.len(),
+            other => panic!("{other:?}"),
+        };
+        assert_eq!(changes, 3, "heading, quotes, body text");
+        h.get_by_label("Review Changes…").click();
+        h.run_steps(2);
+        // Review Changes finds the first change: the heading; Reject puts it back.
+        assert_eq!(h.state().session.sel.focus.path.0[0], 0);
+        h.get_by_label("Reject").click();
+        h.run_steps(2);
+        let para0 = |h: &Harness<'_, WordApp>| h.state().session.doc.body[0].as_para().and_then(|p| p.props.style.clone());
+        assert_eq!(para0(&h), None);
+        assert!(matches!(form(&mut h), DataDialog::AutoFormatReview { changes, .. } if changes.len() == 2));
+        h.get_by_label("Close").click();
+        h.run_steps(2);
+        assert!(h.state().dialog.is_none());
+        assert!(text(&h).contains("\u{201C}fine\u{201D}"), "the other changes stay");
     }
 }

@@ -2764,3 +2764,22 @@ spacing	Normal	Normale
 	Pasting from other programs:	Incolla da altri programmi:
 	Keep Source Formatting	Mantieni formattazione originale
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Unisci formattazione incolla il testo con la formattazione del punto di arrivo, come Mantieni solo testo.
+	AutoFormat	Formattazione automatica
+	Review AutoFormat Changes	Rivedi modifiche della formattazione automatica
+	*Bold* and _italic_ with real formatting	*Grassetto* e _corsivo_ con formattazione reale
+	Accept All	Accetta tutto
+	Reject All	Rifiuta tutto
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	La formattazione automatica (Ctrl+Alt+K) formatta i paragrafi selezionati, o tutto il documento.
+	AutoFormat Now	Formatta ora
+	AutoFormat and Review Changes…	Formatta e rivedi le modifiche…
+	AutoFormat changed {count} paragraphs	La formattazione automatica ha modificato {count} paragrafi
+	Built-in Heading styles	Stili titolo predefiniti
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Trova seleziona il paragrafo modificato successivo; Rifiuta ripristina quello selezionato.
+	Find →	Trova →
+	← Find	← Trova
+	Formatting completed. You can now:	Formattazione completata. Ora è possibile:
+	List styles	Stili elenco
+	Other paragraph styles	Altri stili di paragrafo
+	Preserve	Mantieni
+	Review Changes…	Rivedi modifiche…
+	{count} paragraphs were changed.	Sono stati modificati {count} paragrafi.

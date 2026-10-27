@@ -2784,3 +2784,22 @@ spacing	Normal	Normal
 	Pasting from other programs:	Diğer programlardan yapıştırma:
 	Keep Source Formatting	Kaynak Biçimlendirmesini Koru
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Biçimlendirmeyi Birleştir, Yalnızca Metni Koru gibi metni yapıştırıldığı yerin biçimlendirmesiyle yapıştırır.
+	AutoFormat	Otomatik Biçimlendir
+	Review AutoFormat Changes	Otomatik Biçimlendirme Değişikliklerini Gözden Geçir
+	*Bold* and _italic_ with real formatting	*Kalın* ve _italik_ yerine gerçek biçimlendirme
+	Accept All	Tümünü Kabul Et
+	Reject All	Tümünü Reddet
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Otomatik Biçimlendir (Ctrl+Alt+K) seçili paragrafları veya belgenin tamamını biçimlendirir.
+	AutoFormat Now	Şimdi Otomatik Biçimlendir
+	AutoFormat and Review Changes…	Otomatik Biçimlendir ve Değişiklikleri Gözden Geçir…
+	AutoFormat changed {count} paragraphs	Otomatik Biçimlendirme {count} paragrafı değiştirdi
+	Built-in Heading styles	Yerleşik Başlık stilleri
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Bul, değiştirilen sonraki paragrafı seçer; Reddet seçili paragrafı eski hâline getirir.
+	Find →	Bul →
+	← Find	← Bul
+	Formatting completed. You can now:	Biçimlendirme tamamlandı. Şimdi şunları yapabilirsiniz:
+	List styles	Liste stilleri
+	Other paragraph styles	Diğer paragraf stilleri
+	Preserve	Koru
+	Review Changes…	Değişiklikleri Gözden Geçir…
+	{count} paragraphs were changed.	{count} paragraf değiştirildi.

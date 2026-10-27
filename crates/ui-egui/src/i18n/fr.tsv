@@ -2754,3 +2754,22 @@ spacing	Normal	Normal
 	Pasting from other programs:	Coller depuis d’autres programmes :
 	Keep Source Formatting	Conserver la mise en forme source
 	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Fusionner la mise en forme colle le texte avec la mise en forme de l’endroit où il arrive, comme Conserver uniquement le texte.
+	AutoFormat	Mise en forme automatique
+	Review AutoFormat Changes	Vérifier les modifications de mise en forme automatique
+	*Bold* and _italic_ with real formatting	*Gras* et _italique_ par une mise en forme réelle
+	Accept All	Tout accepter
+	Reject All	Tout refuser
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	La mise en forme automatique (Ctrl+Alt+K) met en forme les paragraphes sélectionnés, ou tout le document.
+	AutoFormat Now	Mettre en forme maintenant
+	AutoFormat and Review Changes…	Mettre en forme et vérifier les modifications…
+	AutoFormat changed {count} paragraphs	La mise en forme automatique a modifié {count} paragraphes
+	Built-in Heading styles	Styles de titre prédéfinis
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Rechercher sélectionne le paragraphe modifié suivant ; Refuser rétablit celui qui est sélectionné.
+	Find →	Rechercher →
+	← Find	← Rechercher
+	Formatting completed. You can now:	Mise en forme terminée. Vous pouvez maintenant :
+	List styles	Styles de liste
+	Other paragraph styles	Autres styles de paragraphe
+	Preserve	Conserver
+	Review Changes…	Vérifier les modifications…
+	{count} paragraphs were changed.	{count} paragraphes ont été modifiés.
