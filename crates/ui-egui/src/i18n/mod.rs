@@ -52,7 +52,7 @@ pub struct LangInfo {
 }
 
 /// The registry. English first: it is the fallback and the source language.
-pub static LANGUAGES: [LangInfo; 21] = [
+pub static LANGUAGES: [LangInfo; 25] = [
     LangInfo { code: "en", name: "English", source: "", prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // British English (colour, centre, customise); `en-GB` and `en_GB.UTF-8` resolve here, other
     // English regions keep the built-in US English. New documents stay in Doc4Me's default
@@ -150,6 +150,14 @@ pub static LANGUAGES: [LangInfo; 21] = [
         editing_lang: None,
         catalog: OnceLock::new(),
     },
+    // Dutch; `nl`, `nl-NL`, `nl-BE` resolve here.
+    LangInfo { code: "nl", name: "Nederlands", source: include_str!("nl.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    // Swedish; `sv`, `sv-SE`, `sv-FI` resolve here.
+    LangInfo { code: "sv", name: "Svenska", source: include_str!("sv.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    // Danish; `da`, `da-DK` resolve here.
+    LangInfo { code: "da", name: "Dansk", source: include_str!("da.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    // Norwegian Bokmål; `nb`, `nb-NO`, and plain Norwegian `no`/`no-NO` resolve here (see `candidates`).
+    LangInfo { code: "nb", name: "Norsk bokmål", source: include_str!("nb.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
 ];
 
 impl LangInfo {
@@ -258,6 +266,10 @@ fn candidates(tag: &str) -> Vec<String> {
         // Chinese by region when no script is given.
         let script = if parts.iter().any(|p| matches!(*p, "tw" | "hk" | "mo")) { "zh-hant" } else { "zh-hans" };
         out.insert(out.len().saturating_sub(1), script.to_string());
+    }
+    if primary == "no" {
+        // Plain Norwegian (`no`, `no_NO`) is written in Bokmål.
+        out.push("nb".to_string());
     }
     out
 }

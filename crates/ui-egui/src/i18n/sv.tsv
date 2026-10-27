@@ -1,0 +1,2849 @@
+# Swedish (sv) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts here)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" eller "an" före nästa ord; polska "w"/"we", "z"/"ze".
+	% of all commits	% av alla commits
+	(All)	(Alla)
+	(Custom)	(Anpassad)
+	(no style)	(inget format)
+	(no suggestions)	(inga förslag)
+	(none)	(inget)
+	(normal text)	(normal text)
+	(not matched)	(ingen matchning)
+	(picture or object)	(bild eller objekt)
+	*Bold* and _italic_ with real formatting	*Fet* och _kursiv_ med riktig formatering
+	0 or More Characters	0 eller fler tecken
+	1. Formatting restrictions	1. Formateringsbegränsningar
+	1. Main document	1. Huvuddokument
+	1.5 Line Spacing	Radavstånd 1,5
+	1/4 Em Space	1/4 em-blanksteg
+	1×2 Empty Matrix	Tom 1×2-matris
+	1×3 Empty Matrix	Tom 1×3-matris
+	2. Data source	2. Datakälla
+	2. Editing restrictions	2. Redigeringsbegränsningar
+	2×1 Empty Matrix	Tom 2×1-matris
+	2×2 Determinant	2×2-determinant
+	2×2 Empty Matrix	Tom 2×2-matris
+	2×2 Identity Matrix	2×2-enhetsmatris
+	2×2 Identity Matrix (sparse)	2×2-enhetsmatris (gles)
+	2×2 Matrix in Brackets	2×2-matris inom hakparentes
+	2×2 Matrix in Double Bars	2×2-matris inom dubbla lodstreck
+	2×2 Matrix in Parentheses	2×2-matris inom parentes
+	2×3 Empty Matrix	Tom 2×3-matris
+	3-D	3D
+	3. Merge the data with the document	3. Koppla data till dokumentet
+	3. Start enforcement	3. Starta skyddet
+	3D Models	3D-modeller
+	3×1 Empty Matrix	Tom 3×1-matris
+	3×2 Empty Matrix	Tom 3×2-matris
+	3×3 Empty Matrix	Tom 3×3-matris
+	3×3 Identity Matrix	3×3-enhetsmatris
+	3×3 Identity Matrix (sparse)	3×3-enhetsmatris (gles)
+	5,000 characters a day; give an email address for 50,000.	5 000 tecken per dag; ange en e-postadress för 50 000.
+	<< Less	<< Mindre
+	<< Remove	<< Ta bort
+	A file dialog is already open.	En fildialogruta är redan öppen.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	En kostnadsfri ordbehandlare med öppen källkod, skriven från grunden i Rust.\nBaserad på WordCraft av ArtCraft-teamet.
+	A header source holds the field names for a data source without a header row.	En rubrikkälla innehåller fältnamnen för en datakälla utan rubrikrad.
+	A mail merge field	Ett kopplingsfält
+	A new document lists the commands with their shortcuts.	Ett nytt dokument listar kommandona med deras kortkommandon.
+	A numbered sequence (figures, tables…)	En numrerad serie (figurer, tabeller…)
+	A password is required to open this document.	Ett lösenord krävs för att öppna dokumentet.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Ett blanksteg före skiljetecken, dubbla tecken, polska kommatecken före konjunktioner.
+	A table of contents	En innehållsförteckning
+	A table's rows keep the same columns here.	En tabells rader behåller samma kolumner här.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Om
+	About Doc4Me	Om Doc4Me
+	Above Chart	Ovanför diagram
+	Above the item	Ovanför objektet
+	Absolute position	Absolut position
+	Absolute value cases	Fall med absolutbelopp
+	Accent	Dekorfärg
+	Accent Gradient	Dekorfärgtoning
+	Accent with Reflection	Dekorfärg med reflektion
+	Accent {n}	Dekorfärg {n}
+	Accents	Accenter
+	Accept	Godkänn
+	Accept All	Godkänn alla
+	Accept All Changes	Godkänn alla ändringar
+	Accept or Reject Changes	Godkänn eller avvisa ändringar
+	Accept This Change	Godkänn den här ändringen
+	Accessed on	Hämtad
+	Accessibility	Hjälpmedel
+	Accessibility Pane	Fönstret Hjälpmedel
+	Acute	Akut accent
+	Add	Lägg till
+	Add >>	Lägg till >>
+	Add a comment	Lägg till en kommentar
+	Add a Table	Lägg till en tabell
+	Add at least one field.	Lägg till minst ett fält.
+	Add caption when inserting:	Lägg till beskrivning vid infogning:
+	Add Chart Element	Lägg till diagramelement
+	Add Field	Lägg till fält
+	Add Field Name	Lägg till fältnamn
+	Add Font…	Lägg till teckensnitt…
+	Add line numbering	Lägg till radnumrering
+	Add New Placeholder	Lägg till ny platshållare
+	Add New Placeholder…	Lägg till ny platshållare…
+	Add New Source…	Lägg till ny källa…
+	Add Object to Selection	Lägg till objekt i markeringen
+	Add Pen	Lägg till penna
+	Add Row	Lägg till rad
+	Add Series	Lägg till serie
+	Add Shape	Lägg till form
+	Add Space Before Paragraph	Lägg till avstånd före stycke
+	Add space between Asian and Latin text	Lägg till avstånd mellan asiatisk och latinsk text
+	Add space between Asian text and numbers	Lägg till avstånd mellan asiatisk text och siffror
+	Add tab stop at:	Lägg till tabbstopp vid:
+	Add Text	Lägg till text
+	Add the chapter number	Lägg till kapitelnumret
+	Add to Dictionary	Lägg till i ordlistan
+	Add to Document	Lägg till i dokumentet
+	Add to Quick Access Toolbar	Lägg till i verktygsfältet Snabbåtkomst
+	Add to Style Gallery	Lägg till i formatgalleriet
+	Add-ins	Tillägg
+	Add/Edit\nBibliography	Lägg till/redigera\nlitteraturförteckning
+	Add/Edit\nCitation	Lägg till/redigera\ncitat
+	Add\nNote	Lägg till\nanteckning
+	Add\nPen	Lägg till\npenna
+	Add\nShape	Lägg till\nform
+	Added	Tillagd
+	Added Fonts	Tillagda teckensnitt
+	Address	Adress
+	Address Block	Adressblock
+	Address labels	Adressetiketter
+	Address:	Adress:
+	Address\nBlock	Adress-\nblock
+	Adjust	Justera
+	Advanced	Avancerat
+	Advanced Find	Avancerad sökning
+	Advanced Find…	Avancerad sökning…
+	After:	Efter:
+	Agents	Agenter
+	Align	Justera
+	Align Bottom Center	Justera nederkant centrerat
+	Align Bottom Left	Justera nederkant vänster
+	Align Bottom Right	Justera nederkant höger
+	Align Center	Centrera
+	Align Center Left	Justera mitten vänster
+	Align Center Right	Justera mitten höger
+	Align Left	Vänsterjustera
+	Align Right	Högerjustera
+	Align Text	Justera text
+	Align Top Center	Justera överkant centrerat
+	Align Top Left	Justera överkant vänster
+	Align Top Right	Justera överkant höger
+	Aligned at:	Justerad vid:
+	Alignment	Justering
+	Alignment:	Justering:
+	All	Alla
+	All - Linear	Alla – linjärt
+	All - Professional	Alla – professionellt
+	All Borders	Alla kantlinjer
+	All Caps	Versaler
+	All caps	Endast versaler
+	All Commands	Alla kommandon
+	All files	Alla filer
+	All Levels	Alla nivåer
+	All Markup	Alla markeringar
+	All pages	Alla sidor
+	All pages in the range	Alla sidor i intervallet
+	All records	Alla poster
+	All symbol sets	Alla symboluppsättningar
+	Allow Doc4Me to use online services	Tillåt Doc4Me att använda onlinetjänster
+	Allow hanging punctuation	Tillåt hängande skiljetecken
+	Allow Latin text to wrap in the middle of a word	Tillåt att latinsk text bryts mitt i ett ord
+	Allow line breaks	Tillåt radbrytningar
+	Allow overlap	Tillåt överlappning
+	Allow row to break across pages	Tillåt att raden bryts över sidor
+	Alphabetical	Alfabetisk
+	Alt Text	Alternativ text
+	Alt text	Alternativ text
+	Alt Text Pane	Fönstret Alternativ text
+	Alt:	Alt:
+	Alt\nText	Alternativ\ntext
+	And	Och
+	Angle Brackets	Vinkelparenteser
+	Angle Brackets with Separator	Vinkelparenteser med avgränsare
+	Angle Brackets with Two Separators	Vinkelparenteser med två avgränsare
+	Animate the caret (it glides and fades)	Animera markören (den glider och tonas)
+	Animation	Animering
+	Animation effects:	Animeringseffekter:
+	Annotation Reference	Anteckningsreferens
+	Annotation Subject	Anteckningsämne
+	Annotation Text	Anteckningstext
+	Another file	En annan fil
+	Any Character	Valfritt tecken
+	Any Digit	Valfri siffra
+	Any Letter	Valfri bokstav
+	Anyone can open this document. Encrypt it with a password to keep it private.	Vem som helst kan öppna dokumentet. Kryptera det med ett lösenord för att hålla det privat.
+	Anyone who opens the document will need this password.	Alla som öppnar dokumentet behöver det här lösenordet.
+	APA	APA
+	API key (if the server needs one)	API-nyckel (om servern behöver en)
+	Apply	Använd
+	Apply as you type	Använd medan du skriver
+	Apply Asian line-breaking rules (kinsoku)	Använd asiatiska radbrytningsregler (kinsoku)
+	Apply Character Style	Använd teckenformat
+	Apply formatting to:	Använd formatering på:
+	Apply special formats to	Använd specialformat på
+	Apply Style	Använd format
+	Apply Styles	Använd format
+	Apply to:	Använd på:
+	Arabic	Arabiska
+	Arch Down	Båge nedåt
+	Arch Up	Båge uppåt
+	Area	Yta
+	Around	Runt
+	Arrange	Ordna
+	Arrange All	Ordna alla
+	Arrange\nAll	Ordna\nalla
+	Arrow	Pil
+	Arrows	Pilar
+	Artistic Effects	Konstnärliga effekter
+	As Recommended	Som rekommenderat
+	As you type	Medan du skriver
+	ASAP	ASAP
+	Ascending	Stigande
+	Asian text font:	Teckensnitt för asiatisk text:
+	Asian Typography	Asiatisk typografi
+	Assign	Tilldela
+	At least	Minst
+	At least {n}	Minst {n}
+	Atelier	Atelier
+	Atmosphere	Atmosfär
+	Attach Template	Bifoga mall
+	Attach…	Bifoga…
+	Author	Författare
+	Auto	Auto
+	AutoCaption	Autobeskrivning
+	AutoCaption…	Autobeskrivning…
+	AutoComplete	Autokomplettering
+	AutoCorrect	Autokorrigering
+	AutoCorrect Options	Alternativ för autokorrigering
+	AutoFit	Autopassa
+	AutoFit Contents	Autopassa innehåll
+	AutoFit Window	Autopassa fönster
+	AutoFormat	Autoformat
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Autoformat (Ctrl+Alt+K) formaterar de markerade styckena eller hela dokumentet.
+	AutoFormat and Review Changes…	Autoformat och granska ändringar…
+	AutoFormat As You Type	Autoformat medan du skriver
+	AutoFormat changed {count} paragraphs	Autoformat ändrade {count} stycken
+	AutoFormat Now	Autoformatera nu
+	Automatic	Automatiskt
+	Automatic ({language})	Automatiskt ({language})
+	Automatic bulleted lists	Automatiska punktlistor
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Automatiskt följer systemets språk. Menyer och kommandon ändras; dina dokument gör det inte.
+	Automatic numbered lists	Automatiska numrerade listor
+	Automatic Table 1 (3 levels)	Automatisk tabell 1 (3 nivåer)
+	Automatic Table 2 (2 levels)	Automatisk tabell 2 (2 nivåer)
+	Automatically hyphenate document	Avstava dokumentet automatiskt
+	Automatically Update Document Styles	Uppdatera dokumentformat automatiskt
+	Automatically update document styles	Uppdatera dokumentformat automatiskt
+	AutoSave	Autospara
+	AutoSave documents you have saved in Doc4Me	Autospara dokument som du har sparat i Doc4Me
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Autospara misslyckades: {error}. Spara dokumentet för att aktivera Autospara igen.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Autospara är inte tillgängligt i webbläsaren: den kan inte skriva till dina filer. Spara laddar ned en kopia.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Autospara behåller bara .docx-, .odt- och .rtf-filer; {name} kan inte behålla all formatering. Spara som .docx för att aktivera Autospara.
+	AutoSave saves every change to the file (needs a saved document)	Autospara sparar varje ändring i filen (kräver ett sparat dokument)
+	AutoSave writes your changes to the file a moment after you stop typing.	Autospara skriver dina ändringar till filen strax efter att du slutat skriva.
+	AutoText	Autotext
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Back	Tillbaka
+	Backspace	Backsteg
+	Balloons	Pratbubblor
+	Banded Columns	Kolumner med ränder
+	Banded Rows	Rader med ränder
+	Bar	Liggande stapel
+	Base text:	Bastext:
+	Based on: {style}	Baserat på: {style}
+	Baseline Dots	Punkter på baslinjen
+	Basic Cycle	Enkel cykel
+	Basic List	Enkel lista
+	Basic Math	Grundläggande matematik
+	Basic Matrix	Enkel matris
+	Basic Process	Enkel process
+	Basic Pyramid	Enkel pyramid
+	Basic Radial	Enkel radiell
+	Basic Venn	Enkelt venndiagram
+	Bayes' rule	Bayes sats
+	Before:	Före:
+	Beginning of Word	Början av ord
+	Behind Text	Bakom text
+	Below text	Under text
+	Below the item	Under objektet
+	Between	Mellan
+	Bibliography	Litteraturförteckning
+	Binary assets added	Binära filer har lagts till
+	Binary assets removed	Binära filer har tagits bort
+	Binomial Coefficient	Binomialkoefficient
+	Binomial Coefficient (angle)	Binomialkoefficient (vinkel)
+	Binomial Coefficient with Angle Brackets	Binomialkoefficient med vinkelparenteser
+	Binomial expansion of (x+a)ⁿ	Binomialutveckling av (x+a)ⁿ
+	Blank	Tom
+	Blank (Three Columns)	Tom (tre kolumner)
+	Blank document	Tomt dokument
+	Blank Page	Tom sida
+	Block\nAuthors	Blockera\nförfattare
+	Blue:	Blå:
+	Body Text	Brödtext
+	Body text in a short paragraph to show spacing.	Brödtext i ett kort stycke för att visa avstånd.
+	Bold	Fet
+	Book	Bok
+	Book Title	Boktitel
+	Book title	Boktitel
+	Bookmark	Bokmärke
+	Bookmark name:	Bokmärkesnamn:
+	Border lines	Kantlinjer
+	Border Painter	Kantlinjemålare
+	Border\nPainter	Kantlinje-\nmålare
+	Borders	Kantlinjer
+	Borders and Shading	Kantlinjer och fyllning
+	Borders and Shading…	Kantlinjer och fyllning…
+	Border…	Kantlinje…
+	Both Sides	Båda sidor
+	Both sides	Båda sidor
+	Bottom	Nederkant
+	Bottom Border	Nedre kantlinje
+	Bottom Margin	Nedre marginal
+	Bottom of Page	Längst ned på sidan
+	Bottom of the Window	Längst ned i fönstret
+	Bottom:	Nederkant:
+	Box	Ruta
+	Boxed Formula	Formel i ruta
+	Boxed Formula (example)	Formel i ruta (exempel)
+	Boxed Formulas	Formler i ruta
+	Braces	Klammerparenteser
+	Braces with Separator	Klammerparenteser med avgränsare
+	Bracket	Parentes
+	Brackets	Parenteser
+	Brackets with Separators	Parenteser med avgränsare
+	Break Link	Bryt länk
+	Breaks	Brytningar
+	Breve	Kortecken
+	Brightness, contrast and transparency change the picture from how it looks now.	Ljusstyrka, kontrast och genomskinlighet ändrar bilden utifrån hur den ser ut nu.
+	Brightness:	Ljusstyrka:
+	Bring Forward	Flytta framåt
+	Browse in Doc4Me…	Bläddra i Doc4Me…
+	Browse…	Bläddra…
+	Build table of figures from:	Skapa figurförteckning från:
+	Building Block Gallery Content Control	Innehållskontroll för byggblocksgalleri
+	Built from the style or table entry fields chosen in Options.	Byggd från formatet eller tabellpostfälten som valts i Alternativ.
+	Built-In	Inbyggd
+	Built-in Heading styles	Inbyggda rubrikformat
+	Built-in style	Inbyggt format
+	Built-in styles can't be deleted.	Inbyggda format kan inte tas bort.
+	Bullet	Punkt
+	Bullet Library	Punktbibliotek
+	Bullets	Punkter
+	By author	Efter författare
+	By:	Av:
+	Calendar	Kalender
+	Can't be deleted	Kan inte tas bort
+	Cancel	Avbryt
+	Canvas Member	Arbetsytans medlem
+	Capitalization	Versalisering
+	Capitalize Each Word	Versal I Varje Ord
+	Capitalize first letter of sentences	Versal i början av meningar
+	Capitalize first letter of table cells	Versal i början av tabellceller
+	Capitalize names of days	Versal i veckodagarnas namn
+	Capitalize the first word of a sentence	Versal i det första ordet i en mening
+	Caption	Beskrivning
+	Caption label:	Beskrivningsetikett:
+	Caption Numbering	Numrering av beskrivningar
+	Caption text	Beskrivningstext
+	Caption:	Beskrivning:
+	Captions	Beskrivningar
+	Caret Character	Cirkumflextecken
+	Case changes	Ändringar av skiftläge
+	Cases	Rättsfall
+	Cases (Three Conditions)	Fall (tre villkor)
+	Cases (Two Conditions)	Fall (två villkor)
+	Cases and Stacks	Fall och staplar
+	Catalog	Katalog
+	Categories	Kategorier
+	Categories:	Kategorier:
+	Category	Kategori
+	Category {n}	Kategori {n}
+	Category:	Kategori:
+	Category…	Kategori…
+	Ceiling	Tak
+	Cell	Cell
+	Cell Margins	Cellmarginaler
+	Cell margins	Cellmarginaler
+	Cell Options	Cellalternativ
+	Cell Size	Cellstorlek
+	Cell\nMargins	Cell-\nmarginaler
+	Center	Centrera
+	Centered	Centrerad
+	Centered as Group	Centrerad som grupp
+	Centimeters	Centimeter
+	Change	Ändra
+	Change Case	Ändra skiftläge
+	Change Chart Type	Ändra diagramtyp
+	Change Colors	Ändra färger
+	Change in y over change in x	Förändring i y genom förändring i x
+	Change Layout	Ändra layout
+	Change List Level	Ändra listnivå
+	Change Password…	Ändra lösenord…
+	Change Picture	Ändra bild
+	Change Picture…	Ändra bild…
+	Change Shape	Ändra form
+	Change Structure	Ändra struktur
+	Change to Display	Ändra till visning
+	Change to Inline	Ändra till infogad
+	Change to Level 1	Ändra till nivå 1
+	Change to Level 2	Ändra till nivå 2
+	Change to Level 3	Ändra till nivå 3
+	Change to Level 4	Ändra till nivå 4
+	Change to Level 5	Ändra till nivå 5
+	Change to Level 6	Ändra till nivå 6
+	Change to Level 7	Ändra till nivå 7
+	Change to Level 8	Ändra till nivå 8
+	Change to Level 9	Ändra till nivå 9
+	Change\nChart Type	Ändra\ndiagramtyp
+	Change\nColors	Ändra\nfärger
+	Changed	Ändrad
+	Changed lines:	Ändrade rader:
+	Changes	Ändringar
+	Changes with highlighting	Ändringar med markering
+	Changes without highlighting	Ändringar utan markering
+	Chapter in a book	Kapitel i en bok
+	Chapters begin at:	Kapitel börjar med:
+	Character	Tecken
+	Character Border	Teckenkantlinje
+	Character code:	Teckenkod:
+	Character in Range	Tecken i intervall
+	Character level	Teckennivå
+	Character Position	Teckenposition
+	Character Scale	Teckenskala
+	Character Shading	Teckenfyllning
+	Character Spacing	Teckenavstånd
+	Character spacing	Teckenavstånd
+	Character style	Teckenformat
+	Characters	Tecken
+	Characters (no spaces)	Tecken (utan blanksteg)
+	Characters (with spaces)	Tecken (med blanksteg)
+	Characters per line:	Tecken per rad:
+	Chart	Diagram
+	Chart Design	Diagramdesign
+	Chart Layouts	Diagramlayouter
+	Chart Title	Diagramrubrik
+	Check	Kontrollera
+	Check Accessibility	Kontrollera hjälpmedel
+	Check Box Content Control	Innehållskontroll för kryssruta
+	Check Compatibility	Kontrollera kompatibilitet
+	Check Errors…	Sök efter fel…
+	Check for Errors	Sök efter fel
+	Check Spelling as You Type	Kontrollera stavning medan du skriver
+	Check spelling as you type	Kontrollera stavning medan du skriver
+	Check\nAccessibility	Kontrollera\nhjälpmedel
+	Checked styles are allowed:	Markerade format är tillåtna:
+	Checked symbol	Symbol för markerad
+	Chevron Down	Vinkel nedåt
+	Chevron Up	Vinkel uppåt
+	Chicago	Chicago
+	Chinese (Simplified)	Kinesiska (förenklad)
+	Chinese (Traditional)	Kinesiska (traditionell)
+	Choose a command	Välj ett kommando
+	Choose a shortcut	Välj ett kortkommando
+	Choose List Item	Välj listobjekt
+	Choose the sheet that holds the recipients.	Välj kalkylbladet som innehåller mottagarna.
+	Circle	Cirkel
+	Circle area from its radius	Cirkelns area från radien
+	Circled Dot	Punkt i cirkel
+	Circled Plus	Plus i cirkel
+	Circled Times	Gånger i cirkel
+	Citation marked.	Citatet har markerats.
+	Citation Style	Citatformat
+	Citations	Citat
+	Citations & Bibliography	Citat och litteraturförteckning
+	City	Ort
+	Clear	Rensa
+	Clear All	Rensa alla
+	Clear All Formatting	Rensa all formatering
+	Clear Character Formatting	Rensa teckenformatering
+	Clear Character Style	Rensa teckenformat
+	Clear Formatting Level	Rensa formateringsnivå
+	Clear Paragraph Formatting	Rensa styckeformatering
+	Click a border between two cells to merge them. Esc stops.	Klicka på en kantlinje mellan två celler för att sammanfoga dem. Esc avslutar.
+	Click an item to paste it.	Klicka på ett objekt för att klistra in det.
+	Click level to modify:	Klicka på nivån som ska ändras:
+	Click the empty text box the text should continue in (Esc cancels)	Klicka på den tomma textrutan där texten ska fortsätta (Esc avbryter)
+	Click to switch back to inserting	Klicka för att växla tillbaka till infogning
+	Clipboard	Urklipp
+	Clipboard Contents	Innehåll i Urklipp
+	Clipboard Items	Urklippsobjekt
+	Clipboard Pane	Fönstret Urklipp
+	Close	Stäng
+	Close Equation	Stäng ekvation
+	Close Header and Footer	Stäng sidhuvud och sidfot
+	Close Outline View	Stäng dispositionsvyn
+	Close Outline\nView	Stäng\ndispositionsvyn
+	Close Reviewing Pane	Stäng granskningsfönstret
+	Clustered Bar	Grupperad liggande stapel
+	Clustered Column	Grupperad stående stapel
+	Col #:	Kol nr:
+	Collapse	Dölj
+	Collapse Selection	Minska markering
+	Collapse the Ribbon	Minimera menyfliksområdet
+	Collate copies	Sortera kopior
+	Collect entries from:	Samla poster från:
+	Colon Equal	Kolon lika med
+	Color	Färg
+	Color model:	Färgmodell:
+	Color only	Endast färg
+	Color:	Färg:
+	Color: {color}	Färg: {color}
+	Colorful	Färgrik
+	Colors	Färger
+	Colors:	Färger:
+	Column	Kolumn
+	Column Break	Kolumnbrytning
+	Column Selection	Kolumnmarkering
+	Column selection: the arrow keys extend the block, Esc ends it	Kolumnmarkering: piltangenterna utökar blocket, Esc avslutar det
+	Column width	Kolumnbredd
+	Column:	Kolumn:
+	Columns	Kolumner
+	Columns:	Kolumner:
+	Combine	Kombinera
+	Combine Documents	Kombinera dokument
+	Combo Box Content Control	Innehållskontroll för kombinationsruta
+	Commands	Kommandon
+	Commands:	Kommandon:
+	Comment	Kommentar
+	Comments	Kommentarer
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Kommentarer bredvid varje sida och spårade ändringar i PDF-filer, utskrifter och bilder; en kommentarlista i slutet av webbsidor, Markdown och text.
+	Comments on version	Kommentarer till versionen
+	Comments Pane	Fönstret Kommentarer
+	Commits	Commits
+	Common Accent Objects	Vanliga accentobjekt
+	Common Brackets	Vanliga parenteser
+	Common Fractions	Vanliga bråk
+	Common Functions	Vanliga funktioner
+	Common Large Operators	Vanliga stora operatorer
+	Common Operator Structures	Vanliga operatorstrukturer
+	Common Operators	Vanliga operatorer
+	Common Radicals	Vanliga rotuttryck
+	Common Subscripts and Superscripts	Vanliga nedsänkta och upphöjda tecken
+	Communication	Kommunikation
+	Compact	Kompakt
+	Company	Företag
+	Compare	Jämför
+	Compare Documents	Jämför dokument
+	Compare to	Jämför med
+	Compared: {changes} changes	Jämfört: {changes} ändringar
+	Comparing with another file needs the desktop app.	Jämförelse med en annan fil kräver skrivbordsappen.
+	Comparison	Jämförelse
+	Comparison settings	Jämförelseinställningar
+	Compatibility mode: {version}	Kompatibilitetsläge: {version}
+	Compatibility Options	Kompatibilitetsalternativ
+	Compatibility Options…	Kompatibilitetsalternativ…
+	Compress Pictures	Komprimera bilder
+	Compress punctuation at the start of a line	Komprimera skiljetecken i början av en rad
+	Condensed	Förtätad
+	Conference	Konferens
+	Conference paper	Konferensbidrag
+	CONFIDENTIAL	KONFIDENTIELLT
+	Confirm password:	Bekräfta lösenord:
+	Connect Shapes	Anslut former
+	Constitutional Provisions	Grundlagsbestämmelser
+	Container Title	Titel på överordnat verk
+	Contains	Innehåller
+	Content Control at Selection	Innehållskontroll vid markeringen
+	Content Control Properties	Egenskaper för innehållskontroll
+	Contents can't be edited	Innehållet kan inte redigeras
+	Context	Sammanhang
+	Contextual	Kontextuell
+	Continuous	Löpande
+	Continuous numbering	Löpande numrering
+	Contour Integral	Kurvintegral
+	Contour Integral with Limits	Kurvintegral med gränser
+	Contour Integral with Stacked Limits	Kurvintegral med staplade gränser
+	Contour Integrals	Kurvintegraler
+	Contrast:	Kontrast:
+	Contributors	Bidragsgivare
+	Controls	Kontroller
+	Conversions	Konverteringar
+	Convert	Konvertera
+	Convert between built-up and linear form	Konvertera mellan uppbyggd och linjär form
+	Convert Notes	Konvertera anteckningar
+	Convert Permanently	Konvertera permanent
+	Convert Text to Table	Konvertera text till tabell
+	Convert Text to Table…	Konvertera text till tabell…
+	Convert to Arabic Digits	Konvertera till arabiska siffror
+	Convert to Shapes	Konvertera till former
+	Convert to Text	Konvertera till text
+	Convert to Thai Digits	Konvertera till thailändska siffror
+	Copies	Kopior
+	Coproduct	Koprodukt
+	Coproduct with Limits	Koprodukt med gränser
+	Coproduct with Lower Limit	Koprodukt med undre gräns
+	Coproduct with Subscript-Superscript Limits	Koprodukt med nedsänkta och upphöjda gränser
+	Copy	Kopiera
+	Copy Formatting	Kopiera formatering
+	Copy of the text a bookmark marks	Kopia av texten som ett bokmärke markerar
+	Copy Styles	Kopiera format
+	Copy Text	Kopiera text
+	Copy to where?	Kopiera till var?
+	Copyright	Upphovsrätt
+	Copyright Sign	Upphovsrättstecken
+	Corrections	Korrigeringar
+	Cosecant Function	Cosekansfunktion
+	Cosine 2x	Cosinus 2x
+	Cosine Function	Cosinusfunktion
+	Cotangent Function	Cotangensfunktion
+	Couldn't add {name}: {reason}	Det gick inte att lägga till {name}: {reason}
+	Couldn't download the picture: {reason}	Det gick inte att ladda ned bilden: {reason}
+	Couldn't download {name}: {error}	Det gick inte att ladda ned {name}: {error}
+	Couldn't get the add-in list: {reason}	Det gick inte att hämta tilläggslistan: {reason}
+	Couldn't make Doc4Me the default: {error}	Det gick inte att göra Doc4Me till standard: {error}
+	Couldn't open {path}: {error}	Det gick inte att öppna {path}: {error}
+	Couldn't search: {reason}	Det gick inte att söka: {reason}
+	Couldn't translate: {reason}	Det gick inte att översätta: {reason}
+	Count by:	Räkna med:
+	Count words in text boxes and notes	Räkna ord i textrutor och anteckningar
+	Country	Land
+	Courtesy Title	Titel
+	Cover Page	Försättsblad
+	Craft	Craft
+	Create	Skapa
+	Create a Style	Skapa ett format
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Skapa en interaktiv disposition av dokumentet.\n\nDet är ett bra sätt att hålla reda på var du är eller snabbt flytta runt innehållet.\n\nKom igång genom att gå till fliken Start och använda rubrikformat på rubrikerna i dokumentet.
+	Create Data Source…	Skapa datakälla…
+	Create Graphic	Skapa grafik
+	Create Header Source	Skapa rubrikkälla
+	Create Link	Skapa länk
+	Create New Style	Skapa nytt format
+	Create Source	Skapa källa
+	Create…	Skapa…
+	Crop	Beskär
+	Cross-reference	Korsreferens
+	Cross-reference:	Korsreferens:
+	Cube Root	Kubikrot
+	Current	Aktuell
+	Current - Linear	Aktuell – linjärt
+	Current - Professional	Aktuell – professionellt
+	Current keyboard settings	Aktuella tangentbordsinställningar
+	Current page	Aktuell sida
+	Current Position	Aktuell position
+	Current record	Aktuell post
+	Current style: {style}	Aktuellt format: {style}
+	Curved Arrow Connector	Böjd pilkoppling
+	Curved Connector	Böjd koppling
+	Custom	Anpassad
+	Custom dictionary	Anpassad ordlista
+	Custom Margins…	Anpassade marginaler…
+	Custom mark:	Anpassad markering:
+	Custom range	Anpassat intervall
+	Custom Table of Contents	Anpassad innehållsförteckning
+	Custom Table of Contents…	Anpassad innehållsförteckning…
+	Custom Watermark	Anpassad vattenstämpel
+	Custom Watermark…	Anpassad vattenstämpel…
+	Customize	Anpassa
+	Customize Keyboard	Anpassa tangentbord
+	Customize Quick Access Toolbar	Anpassa verktygsfältet Snabbåtkomst
+	Customize Quick Access Toolbar…	Anpassa verktygsfältet Snabbåtkomst…
+	Customize Ribbon	Anpassa menyfliksområdet
+	Customize the Ribbon…	Anpassa menyfliksområdet…
+	Customize…	Anpassa…
+	Cut	Klipp ut
+	Cut, copy, and paste	Klipp ut, kopiera och klistra in
+	Cycle	Cykel
+	Czech	Tjeckiska
+	Danish	Danska
+	Dark	Mörk
+	Dark Mode	Mörkt läge
+	Dark page (white text on black)	Mörk sida (vit text på svart)
+	Dark with Shadow	Mörk med skugga
+	Darkroom	Mörkrum
+	Dashed	Streckad
+	Data	Data
+	Data Labels	Dataetiketter
+	Data source:	Datakälla:
+	Date	Datum
+	Date & Time	Datum och tid
+	Date and Time	Datum och tid
+	Date format	Datumformat
+	Date formats:	Datumformat:
+	Date Picker Content Control	Innehållskontroll för datumväljare
+	Day	Dag
+	Decimal	Decimal
+	Decorative objects only add visual interest: screen readers skip them.	Dekorativa objekt tillför bara visuellt intresse: skärmläsare hoppar över dem.
+	Decrease Font Size	Minska teckenstorlek
+	Decrease Indent	Minska indrag
+	Default	Standard
+	Default Paragraph Font	Standardstycketeckensnitt
+	Default tab stops:	Standardtabbstopp:
+	Define New Bullet	Definiera ny punkt
+	Define New Multilevel List	Definiera ny lista med flera nivåer
+	Define New Multilevel List…	Definiera ny lista med flera nivåer…
+	Define New Number Format	Definiera nytt talformat
+	Deflate	Töm
+	Delete	Ta bort
+	Delete Back in Equation	Ta bort bakåt i ekvation
+	Delete Cells	Ta bort celler
+	Delete Clipboard Item	Ta bort urklippsobjekt
+	Delete Columns	Ta bort kolumner
+	Delete Comment	Ta bort kommentar
+	Delete in Equation	Ta bort i ekvation
+	Delete Label	Ta bort etikett
+	Delete Next Word	Ta bort nästa ord
+	Delete Previous Word	Ta bort föregående ord
+	Delete Rows	Ta bort rader
+	Delete Selected Ink	Ta bort markerat bläck
+	Delete Style	Ta bort format
+	Delete Table	Ta bort tabell
+	Delete Table Style	Ta bort tabellformat
+	Deleted	Borttagen
+	Deletions:	Borttagningar:
+	Delivery address:	Leveransadress:
+	Delta Equal To	Delta lika med
+	Delta over arrow	Delta över pil
+	Demote	Sänk nivå
+	Demote to Body Text	Sänk till brödtext
+	Derivative as a limit	Derivata som gränsvärde
+	Descending	Fallande
+	Describe what this object shows, for people who can't see it.	Beskriv vad objektet visar, för personer som inte kan se det.
+	Describe what this table shows, for people who can't see it.	Beskriv vad tabellen visar, för personer som inte kan se den.
+	Description:	Beskrivning:
+	Design	Design
+	Design Mode	Designläge
+	Detach Template	Koppla från mall
+	Detect language automatically	Identifiera språk automatiskt
+	Developer	Utvecklare
+	development build	utvecklingsversion
+	Diagonal	Diagonal
+	Diagonal Dots	Diagonala punkter
+	Diamond	Romb
+	Dictate	Diktera
+	Dictation isn't available here.	Diktering är inte tillgänglig här.
+	Dictation stopped.	Dikteringen stoppades.
+	Dictation stopped: {reason}	Dikteringen stoppades: {reason}
+	Different First Page	Annorlunda första sida
+	Different Odd & Even Pages	Olika udda och jämna sidor
+	Differential	Differential
+	Differential theta	Differential theta
+	Differential x	Differential x
+	Differential y	Differential y
+	Differentials	Differentialer
+	Direct formatting	Direktformatering
+	Direction:	Riktning:
+	Directory	Katalog
+	Display	Visning
+	Display for Review	Visa för granskning
+	Display gridlines on screen	Visa stödlinjer på skärmen
+	Display name	Visningsnamn
+	Display text	Visad text
+	Distance from surrounding text	Avstånd från omgivande text
+	Distribute Columns	Fördela kolumner
+	Distribute letters	Fördela bokstäver
+	Distribute Rows	Fördela rader
+	Distribute spacing	Fördela avstånd
+	Distributed	Fördelad
+	Do Not Check Spelling or Grammar	Kontrollera inte stavning eller grammatik
+	Do not check spelling or grammar	Kontrollera inte stavning eller grammatik
+	DO NOT COPY	FÅR EJ KOPIERAS
+	Do Not Show in TOC	Visa inte i innehållsförteckningen
+	Do you want to save changes to {name}?	Vill du spara ändringarna i {name}?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me-tillägg är kostnadsfria makropaket från Doc4Me:s tilläggskatalog. De kan bara redigera dokumentet.
+	Doc4Me is now the default app for Word documents.	Doc4Me är nu standardappen för Word-dokument.
+	Document	Dokument
+	Document End	Slutet av dokumentet
+	Document Formatting	Dokumentformatering
+	Document Grid	Dokumentrutnät
+	Document Information	Dokumentinformation
+	Document Property	Dokumentegenskap
+	Document Start	Början av dokumentet
+	Document template:	Dokumentmall:
+	Document Text	Dokumenttext
+	Document Title	Dokumenttitel
+	Document1	Dokument1
+	Document\nPreferences	Dokument-\ninställningar
+	Documents	Dokument
+	Documents you open will show up here.	Dokument som du öppnar visas här.
+	Does not contain	Innehåller inte
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Lägg inte till avstånd mellan stycken med samma format
+	Don't capitalize after:	Ingen versal efter:
+	Don't hyphenate	Avstava inte
+	Don't print blank lines when data fields are empty	Skriv inte ut tomma rader när datafält är tomma
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Läs inte citat och litteraturförteckningar från Zotero, Mendeley eller EndNote
+	Don't Save	Spara inte
+	Don't use HTML paragraph auto spacing	Använd inte automatiskt styckeavstånd för HTML
+	Dot	Punkt
+	Dot dash	Punkt streck
+	Dot-dash	Punkt-streck
+	Dots	Punkter
+	Dotted	Prickad
+	Double	Dubbel
+	Double Bar	Dubbelt lodstreck
+	Double Closing Quote	Dubbelt avslutande citattecken
+	Double Dot	Dubbel punkt
+	Double Integral	Dubbelintegral
+	Double Integral with Limits	Dubbelintegral med gränser
+	Double Integral with Stacked Limits	Dubbelintegral med staplade gränser
+	Double Left Arrow with Text Above	Dubbel vänsterpil med text ovanför
+	Double Left Arrow with Text Below	Dubbel vänsterpil med text nedanför
+	Double Left Right Arrow with Text Above	Dubbel vänster-högerpil med text ovanför
+	Double Left Right Arrow with Text Below	Dubbel vänster-högerpil med text nedanför
+	Double Opening Quote	Dubbelt inledande citattecken
+	Double Right Arrow with Text Above	Dubbel högerpil med text ovanför
+	Double Right Arrow with Text Below	Dubbel högerpil med text nedanför
+	Double Spacing	Dubbelt radavstånd
+	Double Square Brackets	Dubbla hakparenteser
+	Double Strikethrough	Dubbel genomstrykning
+	Double strikethrough	Dubbel genomstrykning
+	Double summation	Dubbel summa
+	Double Underline	Dubbel understrykning
+	Double Vertical Bars	Dubbla lodstreck
+	Doughnut	Ring
+	Down	Ned
+	Downloading the speech model ({mb} MB, once)…	Laddar ned talmodellen ({mb} MB, en gång)…
+	Downloading…	Laddar ned…
+	DRAFT	UTKAST
+	Draft	Utkast
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Dra en rektangel för att rita en tabell, eller en linje över celler för att dela dem. Esc avslutar.
+	Draw	Rita
+	Draw Ink	Rita med bläck
+	Draw Table	Rita tabell
+	Draw\nTable	Rita\ntabell
+	Drawing Canvas	Arbetsyta
+	Drawing Grid	Ritrutnät
+	Drawing Tools	Ritverktyg
+	Drawing\nCanvas	Arbets-\nyta
+	Drop Cap	Anfang
+	Drop cap	Anfang
+	Drop-Down List Content Control	Innehållskontroll för listruta
+	Drops all formatting and pastes plain text.	Tar bort all formatering och klistrar in oformaterad text.
+	Dutch	Nederländska
+	E-mail Messages	E-postmeddelanden
+	Edit Category	Redigera kategori
+	Edit Comment	Redigera kommentar
+	Edit Data	Redigera data
+	Edit Document	Redigera dokument
+	Edit Equation	Redigera ekvation
+	Edit Field Code	Redigera fältkod
+	Edit Field…	Redigera fält…
+	Edit Footer	Redigera sidfot
+	Edit Header	Redigera sidhuvud
+	Edit Individual Documents…	Redigera enskilda dokument…
+	Edit Items	Redigera objekt
+	Edit Recipient List	Redigera mottagarlista
+	Edit Source	Redigera källa
+	Edit\nData	Redigera\ndata
+	Edit\nRecipient List	Redigera\nmottagarlista
+	Edited	Redigerad
+	Editing	Redigering
+	Editing header/footer	Redigerar sidhuvud/sidfot
+	Editing in this document is restricted.	Redigering i dokumentet är begränsad.
+	Editing — edit the document directly	Redigering – redigera dokumentet direkt
+	Edition	Utgåva
+	Editor	Redaktör
+	Edit…	Redigera…
+	Effects	Effekter
+	Elbow Arrow Connector	Vinklad pilkoppling
+	Elbow Connector	Vinklad koppling
+	Ellipsis	Ellips
+	Em Dash	Fyrkantstreck
+	Em Space	Em-blanksteg
+	Email address (optional)	E-postadress (valfritt)
+	Emboss	Relief
+	Emphasis	Betoning
+	Empty Matrices	Tomma matriser
+	En Dash	Tankstreck
+	En Space	En-blanksteg
+	Enclose Characters	Inneslut tecken
+	Enclosure	Inneslutning
+	Encrypt with Password	Kryptera med lösenord
+	Encrypt with Password…	Kryptera med lösenord…
+	End of document	Slutet av dokumentet
+	End of section	Slutet av avsnittet
+	End of Word	Slutet av ord
+	Endnote Reference	Slutkommentarsreferens
+	Endnote Text	Slutkommentarstext
+	Endnotes	Slutkommentarer
+	Endnotes to footnotes	Slutkommentarer till fotnoter
+	English	Engelska
+	English (United Kingdom)	Engelska (Storbritannien)
+	English (United States)	Engelska (USA)
+	Engrave	Gravyr
+	Enlarge symbol	Förstora symbol
+	Enter formatting for number:	Ange formatering för tal:
+	Enter in Equation	Retur i ekvation
+	Enter page number:	Ange sidnummer:
+	Enter the web address or embed code of an online video:	Ange webbadressen eller inbäddningskoden för en onlinevideo:
+	Entry marked.	Posten har markerats.
+	Entry:	Post:
+	Envelope #10   4.12" × 9.50"	Kuvert #10   4,12" × 9,50"
+	Envelope Address	Adress på kuvert
+	Envelope DL   4.33" × 8.66"	Kuvert DL   4,33" × 8,66"
+	Envelope Return	Returadress på kuvert
+	Envelope size:	Kuvertstorlek:
+	Envelopes	Kuvert
+	Equal by Definition	Lika med per definition
+	Equal column width	Lika kolumnbredd
+	Equal Equal	Lika lika
+	Equal to	Lika med
+	Equals:	Är lika med:
+	Equation	Ekvation
+	Equation Gallery	Ekvationsgalleri
+	Equation Info	Ekvationsinformation
+	Equation Number	Ekvationsnummer
+	Equation Options	Ekvationsalternativ
+	Erase Ink	Sudda bläck
+	Eraser	Suddgummi
+	Errors ({n})	Fel ({n})
+	Estonian	Estniska
+	Euler's identity	Eulers identitet
+	Even Page	Jämn sida
+	Even pages only	Endast jämna sidor
+	Every change is recorded as a tracked change.	Varje ändring registreras som en spårad ändring.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Alla kommandon är tillgängliga för skript och AI-agenter: kör `doc4me-cli mcp` för en MCP-server, eller starta appen med `--control <port>` för JSON-kontrollkanalen.
+	Every field needs a name.	Varje fält behöver ett namn.
+	Every font this document uses is installed.	Alla teckensnitt som dokumentet använder är installerade.
+	Everyone	Alla
+	Exactly	Exakt
+	Exactly {n}	Exakt {n}
+	Example: {sample}	Exempel: {sample}
+	Exceptions (optional)	Undantag (valfritt)
+	Exceptions…	Undantag…
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exit	Avsluta
+	Expand	Visa
+	Expand or Collapse Heading	Visa eller dölj rubrik
+	Expanded	Expanderad
+	Exponential	Exponentiell
+	Exponential series	Exponentialserie
+	Export	Exportera
+	Export a copy to share (PDF, Word document)	Exportera en kopia att dela (PDF, Word-dokument)
+	Export Page as JPEG	Exportera sidan som JPEG
+	Export Page as PNG	Exportera sidan som PNG
+	Export PDF	Exportera PDF
+	Exported {path}	{path} exporterades
+	Expression	Uttryck
+	Extend Selection	Utöka markering
+	Extend Selection by Units	Utöka markering med enheter
+	Extra space	Extra blanksteg
+	Extra spaces between words.	Extra blanksteg mellan ord.
+	Field	Fält
+	Field Click	Fältklick
+	Field code:	Fältkod:
+	Field Codes	Fältkoder
+	Field codes:	Fältkoder:
+	Field name	Fältnamn
+	Field name:	Fältnamn:
+	Field names must be different.	Fältnamnen måste vara olika.
+	Field names:	Fältnamn:
+	Field properties	Fältegenskaper
+	Field:	Fält:
+	Fields	Fält
+	Fields to insert:	Fält att infoga:
+	Fields:	Fält:
+	Field…	Fält…
+	Figure	Figur
+	File	Arkiv
+	File name:	Filnamn:
+	Fill	Fyllning
+	Fill & Line	Fyllning och linje
+	Fill color:	Fyllningsfärg:
+	Fill:	Fyllning:
+	Filling in forms	Ifyllning av formulär
+	Film	Film
+	Filter and Sort	Filtrera och sortera
+	Filter and Sort…	Filtrera och sortera…
+	Filter Records	Filtrera poster
+	Find	Sök
+	Find and Replace	Sök och ersätt
+	Find Next	Sök nästa
+	Find Next Editable Region	Sök nästa redigerbara område
+	Find Previous	Sök föregående
+	Find Recipient	Sök mottagare
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Sök markerar nästa ändrade stycke; Avvisa återställer det markerade som det var.
+	Find What Expression	Uttryck för Sök efter
+	Find What Text	Text för Sök efter
+	Find what:	Sök efter:
+	Find →	Sök →
+	Find:	Sök:
+	Finish	Slutför
+	Finish & Merge	Slutför och koppla
+	Finish &\nMerge	Slutför och\nkoppla
+	Finished	Klar
+	Finnish	Finska
+	First	Första
+	First Cell in Column	Första cellen i kolumnen
+	First Cell in Row	Första cellen i raden
+	First Column	Första kolumnen
+	First commit	Första commit
+	First line	Första raden
+	First line:	Första raden:
+	First Name	Förnamn
+	First row of data contains column headers	Första dataraden innehåller kolumnrubriker
+	Fit	Anpassa
+	Fit text	Anpassa text
+	Fix Position on Page	Fast position på sidan
+	Fixed Column Width	Fast kolumnbredd
+	Flip Horizontal	Vänd vågrätt
+	Flip Vertical	Vänd lodrätt
+	Floor	Golv
+	Focus	Fokus
+	Follow number with:	Efter numret:
+	Font	Teckensnitt
+	Font Color	Teckenfärg
+	Font color	Teckenfärg
+	Font color:	Teckenfärg:
+	Font Dialog	Dialogrutan Teckensnitt
+	Font not installed	Teckensnittet är inte installerat
+	Font Size	Teckenstorlek
+	Font Substitution	Ersättning av teckensnitt
+	Font Substitution…	Ersättning av teckensnitt…
+	Font:	Teckensnitt:
+	Font: {font}	Teckensnitt: {font}
+	Fonts	Teckensnitt
+	Font…	Teckensnitt…
+	Footer	Sidfot
+	Footnote and Endnote	Fotnot och slutkommentar
+	Footnote Reference	Fotnotsreferens
+	Footnote Text	Fotnotstext
+	Footnotes	Fotnoter
+	Footnotes and endnotes	Fotnoter och slutkommentarer
+	Footnotes to endnotes	Fotnoter till slutkommentarer
+	Form Letters	Standardbrev
+	Format	Format
+	Format Page Numbers	Formatera sidnummer
+	Format Page Numbers…	Formatera sidnummer…
+	Format Painter	Hämta format
+	Format Picture	Formatera bild
+	Format Shape	Formatera form
+	Format:	Format:
+	Formatted	Formaterad
+	Formatted Text	Formaterad text
+	Formatting	Formatering
+	Formatting at Selection	Formatering vid markeringen
+	Formatting completed. You can now:	Formateringen är klar. Nu kan du:
+	Formatting exceptions	Formateringsundantag
+	Formatting marks	Formateringstecken
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Formatering, ändringar av skiftläge, blanksteg och tabeller jämförs; övriga inställningar sparas till senare.
+	Formula	Formel
+	Forward	Framåt
+	Fraction	Bråk
+	Fractions (1/2) as fraction characters (½)	Bråk (1/2) som bråktecken (½)
+	French	Franska
+	French (France)	Franska (Frankrike)
+	From	Från
+	From text:	Från text:
+	from Unicode (hex)	från Unicode (hex)
+	From:	Från:
+	Full page of the same label	Hel sida med samma etikett
+	Function	Funktion
+	Functions	Funktioner
+	Gallery	Galleri
+	GB/T 7714	GB/T 7714
+	General	Allmänt
+	Geometry	Geometri
+	German	Tyska
+	German (Germany)	Tyska (Tyskland)
+	Get Add-ins	Hämta tillägg
+	Get Data	Hämta data
+	Get Data…	Hämta data…
+	Getting ready…	Förbereder…
+	Glow	Glöd
+	Glow Colors	Glödfärger
+	Go Back	Gå tillbaka
+	Go To	Gå till
+	Go to	Gå till
+	Go To…	Gå till…
+	Good afternoon	God eftermiddag
+	Good evening	God kväll
+	Good morning	God morgon
+	GOST (name sort)	GOST (sortering efter namn)
+	GOST (title sort)	GOST (sortering efter titel)
+	Grab bag	Blandat
+	Grammar	Grammatik
+	Grammar Settings	Grammatikinställningar
+	Graphic	Grafik
+	Grave	Grav accent
+	Greater than	Större än
+	Greater than or equal	Större än eller lika med
+	Greek	Grekiska
+	Greek Letters	Grekiska bokstäver
+	Green:	Grön:
+	Greeting Line	Hälsningsrad
+	Greeting\nLine	Hälsnings-\nrad
+	Grid Settings	Rutnätsinställningar
+	Grid Table 1 Light	Rutnätstabell 1 ljus
+	Grid Table 4 – Blue	Rutnätstabell 4 – blå
+	Grid Table 4 – Green	Rutnätstabell 4 – grön
+	Grid Table 4 – Orange	Rutnätstabell 4 – orange
+	Grid Table 4 – Purple	Rutnätstabell 4 – lila
+	Gridlines	Stödlinjer
+	Group	Gruppera
+	Grouping Character Above	Grupperingstecken ovanför
+	Grouping Character Below	Grupperingstecken nedanför
+	Grow Font 1 Point	Öka teckensnittet 1 punkt
+	H:	H:
+	Hanging Indent	Hängande indrag
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Hatt
+	Header	Sidhuvud
+	Header & Footer	Sidhuvud och sidfot
+	Header Options	Rubrikalternativ
+	Header Options:	Rubrikalternativ:
+	Header Row	Rubrikrad
+	Header source: {file} (the next data source opened here takes its field names)	Rubrikkälla: {file} (nästa datakälla som öppnas här får dess fältnamn)
+	Header/Footer Position	Sidhuvudets/sidfotens position
+	Headers and footers	Sidhuvuden och sidfötter
+	Heading 1	Rubrik 1
+	Heading 2	Rubrik 2
+	Heading 3	Rubrik 3
+	Heading styles (levels 1–{n})	Rubrikformat (nivå 1–{n})
+	Heading {n}	Rubrik {n}
+	Headings	Rubriker
+	Heart	Hjärta
+	Hebrew	Hebreiska
+	Height:	Höjd:
+	Help	Hjälp
+	Hex:	Hex:
+	Hidden	Dold
+	Hidden text	Dold text
+	Hide Codes	Dölj koder
+	Hide from style lists	Dölj i formatlistor
+	Hide Ink	Dölj bläck
+	Hide White Space	Dölj tomt utrymme
+	Hide\nInk	Dölj\nbläck
+	Hierarchy	Hierarki
+	Highlight	Markera
+	Highlight Changes	Markera ändringar
+	Highlight changes in printed document	Markera ändringar i utskrivet dokument
+	Highlight changes on screen	Markera ändringar på skärmen
+	Highlight Merge Fields	Markera kopplingsfält
+	Highlight\nMerge Fields	Markera\nkopplingsfält
+	Highlighter	Överstrykningspenna
+	Hindi	Hindi
+	Historical and Discretional	Historiskt och valfritt
+	Hollow	Ihålig
+	Home	Start
+	Home folder	Hemmapp
+	Horizontal	Vågrät
+	Horizontal Line	Vågrät linje
+	Horizontal spacing:	Vågrätt avstånd:
+	How many pages the whole document has	Hur många sidor hela dokumentet har
+	How many pages this section has	Hur många sidor avsnittet har
+	How many words the document holds	Hur många ord dokumentet innehåller
+	HTML Format	HTML-format
+	Hue:	Nyans:
+	Hungarian	Ungerska
+	Hyperbolic Cosecant Function	Hyperbolisk cosekansfunktion
+	Hyperbolic Cosine Function	Hyperbolisk cosinusfunktion
+	Hyperbolic Cotangent Function	Hyperbolisk cotangensfunktion
+	Hyperbolic Functions	Hyperboliska funktioner
+	Hyperbolic Secant Function	Hyperbolisk sekansfunktion
+	Hyperbolic Sine Function	Hyperbolisk sinusfunktion
+	Hyperbolic Tangent Function	Hyperbolisk tangensfunktion
+	Hyperlink	Hyperlänk
+	Hyphenate at:	Avstava vid:
+	Hyphenate words in CAPS	Avstava ord med VERSALER
+	Hyphenation	Avstavning
+	Hyphenation Options…	Avstavningsalternativ…
+	Hyphenation zone:	Avstavningszon:
+	Hyphens (--) as dashes (—)	Bindestreck (--) som tankstreck (—)
+	Hypotenuse	Hypotenusa
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Ikonfärg
+	Icons	Ikoner
+	Identity Matrices	Enhetsmatriser
+	IEEE	IEEE
+	If…Then…Else	Om…Då…Annars
+	If…Then…Else…	Om…Då…Annars…
+	Ignore All	Ignorera alla
+	Ignore punctuation characters	Ignorera skiljetecken
+	Ignore web and file addresses	Ignorera webb- och filadresser
+	Ignore white-space characters	Ignorera blankstegstecken
+	Ignore words in capitals	Ignorera ord med versaler
+	Ignore words with numbers	Ignorera ord med siffror
+	Illustrations	Illustrationer
+	Immersive	Fördjupad
+	Immersive Reader	Fördjupad läsare
+	Immersive\nReader	Fördjupad\nläsare
+	In Default apps, choose Doc4Me for the document types you want it to open.	Välj Doc4Me i Standardappar för de dokumenttyper som programmet ska öppna.
+	In equations, typing a name after a backslash replaces it with its symbol.	I ekvationer ersätts ett namn efter ett omvänt snedstreck med motsvarande symbol.
+	In Front of Text	Framför text
+	In Line with Text	I nivå med text
+	Inches	Tum
+	Include label and number	Ta med etikett och nummer
+	Include level number from:	Ta med nivånummer från:
+	Include page numbers	Ta med sidnummer
+	Increase Font Size	Öka teckenstorlek
+	Increase Indent	Öka indrag
+	Indent	Indrag
+	Indent from left:	Indrag från vänster:
+	Indentation	Indrag
+	Indented	Indragen
+	Indents	Indrag
+	Indents and Spacing	Indrag och avstånd
+	Index	Register
+	Index and Tables	Register och förteckningar
+	Index Heading	Registerrubrik
+	Index {n}	Register {n}
+	Indonesian	Indonesiska
+	Inflate	Blås upp
+	Info	Info
+	Initials:	Initialer:
+	Ink	Bläck
+	Ink Equation	Bläckekvation
+	Ink Replay	Spela upp bläck
+	Ink to Math	Bläck till matematik
+	Ink to Shape	Bläck till form
+	Ink to\nMath	Bläck till\nmatematik
+	Ink to\nShape	Bläck till\nform
+	Ink\nReplay	Spela upp\nbläck
+	Inline	Infogad
+	Input Format	Indataformat
+	Insert	Infoga
+	Insert a 3D model from a file (.glb, .stl, .obj)	Infoga en 3D-modell från en fil (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Infoga en ny ekvation (Alt+=)
+	Insert Above	Infoga ovanför
+	Insert Below	Infoga nedanför
+	Insert Caption	Infoga beskrivning
+	Insert Cells	Infoga celler
+	Insert Chart	Infoga diagram
+	Insert Citation	Infoga citat
+	Insert Columns to the Left	Infoga kolumner till vänster
+	Insert Columns to the Right	Infoga kolumner till höger
+	Insert Data	Infoga data
+	Insert Database	Infoga databas
+	Insert Database…	Infoga databas…
+	Insert Date Field	Infoga datumfält
+	Insert Endnote	Infoga slutkommentar
+	Insert entire column	Infoga hel kolumn
+	Insert entire row	Infoga hel rad
+	Insert Footnote	Infoga fotnot
+	Insert Hyperlink	Infoga hyperlänk
+	Insert Index	Infoga register
+	Insert Left	Infoga till vänster
+	Insert LISTNUM Field	Infoga LISTNUM-fält
+	Insert Merge Field	Infoga kopplingsfält
+	Insert Merge\nField	Infoga\nkopplingsfält
+	Insert New Equation	Infoga ny ekvation
+	Insert one text or another, depending on a field's value.	Infoga en text eller en annan beroende på ett fälts värde.
+	Insert Page Field	Infoga sidfält
+	Insert Right	Infoga till höger
+	Insert Rows	Infoga rader
+	Insert Rows Above	Infoga rader ovanför
+	Insert Rows Below	Infoga rader nedanför
+	Insert Shapes	Infoga former
+	Insert SmartArt	Infoga SmartArt
+	Insert Structure	Infoga struktur
+	Insert Symbol	Infoga symbol
+	Insert Table	Infoga tabell
+	Insert Table of Authorities	Infoga rättsfallsförteckning
+	Insert Table of Figures	Infoga figurförteckning
+	Insert Table…	Infoga tabell…
+	Insert Time Field	Infoga tidsfält
+	Insert Video	Infoga video
+	Insert\nAbove	Infoga\novanför
+	Insert\nCaption	Infoga\nbeskrivning
+	Insert\nCitation	Infoga\ncitat
+	Insert\nFootnote	Infoga\nfotnot
+	Inserted	Infogad
+	Insertions and Deletions	Infogningar och borttagningar
+	Insertions:	Infogningar:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Infogningar: {ins}, borttagningar: {del}, flyttningar: {moves}, formatering: {fmt}, kommentarer: {comments}
+	Inside	Inuti
+	Inside Borders	Inre kantlinjer
+	Inside Margin	Inre marginal
+	Inside:	Inuti:
+	Inspect Document	Granska dokument
+	Inspect Styles at Selection	Granska format vid markeringen
+	Institution	Institution
+	Integral	Integral
+	Integral of e^(−x²)	Integralen av e^(−x²)
+	Integral with Limits	Integral med gränser
+	Integral with Stacked Limits	Integral med staplade gränser
+	Integrals	Integraler
+	Intense Emphasis	Stark betoning
+	Intense Quote	Starkt citat
+	Intense Reference	Stark referens
+	Interface	Gränssnitt
+	Interface language	Gränssnittsspråk
+	Interface language:	Gränssnittsspråk:
+	Interface size:	Gränssnittsstorlek:
+	Interface Theme	Gränssnittstema
+	Interface theme:	Gränssnittstema:
+	Interface\nTheme	Gränssnitts-\ntema
+	Internet addresses as links	Internetadresser som länkar
+	Intersection	Snitt
+	Intersection with Limits	Snitt med gränser
+	Intersection with Lower Limit	Snitt med undre gräns
+	Intersection with Subscript-Superscript Limits	Snitt med nedsänkta och upphöjda gränser
+	Inverse Cosecant Function	Invers cosekansfunktion
+	Inverse Cosine Function	Invers cosinusfunktion
+	Inverse Cotangent Function	Invers cotangensfunktion
+	Inverse Functions	Inversa funktioner
+	Inverse Hyperbolic Cosecant Function	Invers hyperbolisk cosekansfunktion
+	Inverse Hyperbolic Cosine Function	Invers hyperbolisk cosinusfunktion
+	Inverse Hyperbolic Cotangent Function	Invers hyperbolisk cotangensfunktion
+	Inverse Hyperbolic Functions	Inversa hyperboliska funktioner
+	Inverse Hyperbolic Secant Function	Invers hyperbolisk sekansfunktion
+	Inverse Hyperbolic Sine Function	Invers hyperbolisk sinusfunktion
+	Inverse Hyperbolic Tangent Function	Invers hyperbolisk tangensfunktion
+	Inverse Secant Function	Invers sekansfunktion
+	Inverse Sine Function	Invers sinusfunktion
+	Inverse Tangent Function	Invers tangensfunktion
+	Ionosphere	Jonosfär
+	Is blank	Är tom
+	Is not blank	Är inte tom
+	ISO 690 (author-date)	ISO 690 (författare-datum)
+	ISO 690 (numerical)	ISO 690 (numerisk)
+	Issue	Nummer
+	it isn't a picture Doc4Me can read	det är inte en bild som Doc4Me kan läsa
+	Italian	Italienska
+	Italic	Kursiv
+	Japanese	Japanska
+	Journal	Tidskrift
+	Justification	Justering
+	Justification of a display equation	Justering av en visad ekvation
+	Justified	Marginaljusterad
+	Justify	Marginaljustera
+	Keep Lines Together	Håll ihop rader
+	Keep lines together	Håll ihop rader
+	Keep Source Formatting	Behåll källformatering
+	Keep Text Only	Behåll endast text
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Förvara lösenordet på ett säkert ställe: utan det kan ingen, inte heller Doc4Me, öppna dokumentet. Lämna båda rutorna tomma för att ta bort lösenordet.
+	Keep with Next	Håll ihop med nästa
+	Keep with next	Håll ihop med nästa
+	Keeps the fonts and formatting of the copied text.	Behåller teckensnitt och formatering för den kopierade texten.
+	Kerning for fonts:	Kerning för teckensnitt:
+	Keyboard shortcuts:	Kortkommandon:
+	Keys for this command:	Tangenter för kommandot:
+	Keywords	Nyckelord
+	Korean	Koreanska
+	Label changes with:	Etiketten ändras med:
+	Label:	Etikett:
+	Labels	Etiketter
+	Landscape	Liggande
+	Language	Språk
+	Language Preferences…	Språkinställningar…
+	Language…	Språk…
+	Large\nOperator	Stor\noperator
+	Largest Only	Endast största
+	Largest only	Endast största
+	Lasso	Lasso
+	Lasso Select	Lassomarkering
+	Last	Sista
+	Last Cell in Column	Sista cellen i kolumnen
+	Last Cell in Row	Sista cellen i raden
+	Last Column	Sista kolumnen
+	Last commit	Senaste commit
+	Last Name	Efternamn
+	Last, First; Last, First	Efternamn, Förnamn; Efternamn, Förnamn
+	Latin text font:	Teckensnitt för latinsk text:
+	Layout	Layout
+	Layout options for this document	Layoutalternativ för dokumentet
+	Layout Summary	Layoutsammanfattning
+	Layouts	Layouter
+	Leader	Utfyllnad
+	Leave a recipient out of the merge when a field has this value.	Utelämna en mottagare från kopplingen när ett fält har detta värde.
+	Leave Equation	Lämna ekvation
+	Leave the equation (Esc)	Lämna ekvationen (Esc)
+	Leave the label out of the caption	Utelämna etiketten i beskrivningen
+	Left	Vänster
+	Left Arrow with Text Above	Vänsterpil med text ovanför
+	Left Arrow with Text Below	Vänsterpil med text nedanför
+	Left Border	Vänster kantlinje
+	Left border	Vänster kantlinje
+	Left Bracket Twice	Vänster parentes två gånger
+	Left indent	Vänsterindrag
+	Left Margin	Vänstermarginal
+	Left Only	Endast vänster
+	Left only	Endast vänster
+	Left Right Arrow Above	Vänster-högerpil ovanför
+	Left Right Arrow with Text Above	Vänster-högerpil med text ovanför
+	Left Right Arrow with Text Below	Vänster-högerpil med text nedanför
+	Left Subscript-Superscript	Nedsänkt-upphöjt till vänster
+	Left-to-right	Vänster till höger
+	Left-to-Right Text Direction	Textriktning vänster till höger
+	Left:	Vänster:
+	Leftwards Arrow Above	Vänsterpil ovanför
+	Leftwards Harpoon Above	Vänsterharpun ovanför
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Legal style numbering	Numrering i juridisk stil
+	Legend	Förklaring
+	Less than	Mindre än
+	Less than or equal	Mindre än eller lika med
+	Letter	Brev
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter headings	Bokstavsrubriker
+	Letter-Like Symbols	Bokstavsliknande symboler
+	Letters	Brev
+	Level 1	Nivå 1
+	Level 2	Nivå 2
+	Level 3	Nivå 3
+	Level 4	Nivå 4
+	Level 5	Nivå 5
+	Level 6	Nivå 6
+	Level 7	Nivå 7
+	Level 8	Nivå 8
+	Level 9	Nivå 9
+	Level {n}	Nivå {n}
+	Level:	Nivå:
+	Levels:	Nivåer:
+	LibreTranslate server (open source)	LibreTranslate-server (öppen källkod)
+	Ligatures:	Ligaturer:
+	Light	Ljus
+	Light with Outline	Ljus med kontur
+	Limit	Gränsvärde
+	Limit and\nLog	Gränsvärde och\nlogaritm
+	Limit consecutive hyphens to:	Begränsa antal bindestreck i följd till:
+	Limit Example	Exempel på gränsvärde
+	Limit formatting to a selection of styles	Begränsa formateringen till ett urval av format
+	Line	Linje
+	Line and Page Breaks	Rad- och sidbrytningar
+	Line and Paragraph Spacing	Rad- och styckeavstånd
+	Line between	Linje mellan
+	Line Break	Radbrytning
+	Line breaking	Radbrytning
+	Line delta	Raddifferens
+	Line End	Radslut
+	Line Number	Radnummer
+	Line Numbering Options…	Alternativ för radnumrering…
+	Line Numbers	Radnummer
+	Line Spacing	Radavstånd
+	Line spacing	Radavstånd
+	Line Spacing Options…	Alternativ för radavstånd…
+	Line spacing:	Radavstånd:
+	Line Start	Radbörjan
+	Line width:	Linjebredd:
+	Line:	Linje:
+	Linear	Linjär
+	Linear Fraction	Linjärt bråk
+	Lines	Rader
+	Lines +/−	Rader +/−
+	Lines added	Tillagda rader
+	Lines and characters	Rader och tecken
+	Lines deleted	Borttagna rader
+	Lines only	Endast rader
+	Lines per page:	Rader per sida:
+	Link	Länk
+	Link entries to their headings	Länka poster till sina rubriker
+	Link level to style:	Länka nivå till format:
+	Link to Previous	Länka till föregående
+	Linked style (paragraph and character)	Länkat format (stycke och tecken)
+	Links	Länkar
+	Links and References	Länkar och referenser
+	Link…	Länk…
+	List	Lista
+	List Commands	Lista kommandon
+	List Definition	Listdefinition
+	List entries	Listposter
+	List Paragraph	Liststycke
+	List styles	Listformat
+	List Table 3 – Blue	Listtabell 3 – blå
+	List Table 3 – Green	Listtabell 3 – grön
+	List Table 3 – Orange	Listtabell 3 – orange
+	List Table 3 – Purple	Listtabell 3 – lila
+	Listening… speak now	Lyssnar… tala nu
+	Location	Plats
+	Location: {path}	Plats: {path}
+	Lock aspect ratio	Lås proportioner
+	Lock Fields	Lås fält
+	Logarithm	Logaritm
+	Logarithm with Base	Logaritm med bas
+	Logical AND	Logiskt OCH
+	Logical AND with Limits	Logiskt OCH med gränser
+	Logical OR	Logiskt ELLER
+	Logical OR with Limits	Logiskt ELLER med gränser
+	Long citation:	Långt citat:
+	lowercase	gemener
+	Lum:	Lum:
+	Macros	Makron
+	Made from the author and year when empty	Bildas av författare och år om det är tomt
+	Magazine or newspaper article	Tidnings- eller tidskriftsartikel
+	Mail Merge	Koppla dokument
+	Mail Merge Helper	Kopplingshjälpen
+	Mail Merge Helper…	Kopplingshjälpen…
+	Mailing Labels	Adressetiketter
+	Mailings	Utskick
+	Main entry:	Huvudpost:
+	Make Doc4Me the default for Word documents…	Gör Doc4Me till standard för Word-dokument…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Gör menyfliksområdet, menyerna och dialogrutorna större eller mindre, utöver systemets skalning. Dokumentets zoom är separat.
+	Malay	Malajiska
+	Manage Sources	Hantera källor
+	Manage Styles	Hantera format
+	Manage Styles…	Hantera format…
+	Manual Hyphenation	Manuell avstavning
+	Manual hyphenation is complete.	Den manuella avstavningen är klar.
+	Manual Line Break	Manuell radbrytning
+	Manual Page Break	Manuell sidbrytning
+	Manual…	Manuellt…
+	Many pages	Många sidor
+	Margin	Marginal
+	Margins	Marginaler
+	Mark	Markera
+	Mark All	Markera alla
+	Mark as decorative	Markera som dekorativ
+	Mark Citation	Markera citat
+	Mark Citation…	Markera citat…
+	Mark Entry	Markera post
+	Mark Entry…	Markera post…
+	Mark grammar errors as you type	Markera grammatikfel medan du skriver
+	Mark Index Entry	Markera registerpost
+	Mark selected text as:	Markera den markerade texten som:
+	Mark Table of Contents Entry	Markera post för innehållsförteckning
+	Mark\nCitation	Markera\ncitat
+	Mark\nEntry	Markera\npost
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Matcha gemener/VERSALER
+	Match Fields	Matcha fält
+	Match prefix	Matcha prefix
+	Match suffix	Matcha suffix
+	Math AutoCorrect	Autokorrigering för matematik
+	Math Input Control	Kontroll för matematisk inmatning
+	Matrices with Brackets	Matriser med parenteser
+	Matrix	Matris
+	Maximize	Maximera
+	Maximum	Maximum
+	Maximum Example	Exempel på maximum
+	Measured By	Mätt i
+	Measurement units:	Måttenheter:
+	Media	Media
+	Merge	Koppla
+	Merge Cells	Sammanfoga celler
+	Merge Formatting	Sammanfoga formatering
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Sammanfoga formatering klistrar in texten med formateringen där den hamnar, precis som Behåll endast text.
+	Merge Record #	Kopplingspostnummer
+	Merge records	Koppla poster
+	Merge to New Document	Koppla till nytt dokument
+	Merge to Printer	Koppla till skrivare
+	Merge to:	Koppla till:
+	Merge type: {type}	Kopplingstyp: {type}
+	Merged PRs	Sammanfogade PR:er
+	Merge…	Koppla…
+	Mesosphere	Mesosfär
+	Middle	Mitten
+	Midline Dots	Punkter på mittlinjen
+	Millimeters	Millimeter
+	Minimum	Minimum
+	Minus Equal	Minus lika med
+	Mirror indents	Spegelvända indrag
+	Mirrored	Spegelvänd
+	Missing document font	Teckensnitt i dokumentet saknas
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT ELLER Apache-2.0. Copyright (c) 2026 ArtCraft Team och WordCrafts bidragsgivare.
+	MLA	MLA
+	Model	Modell
+	Models	Modeller
+	Moderate	Måttlig
+	Modify Style	Ändra format
+	Modify Table Style	Ändra tabellformat
+	Modify Table Style…	Ändra tabellformat…
+	Modify…	Ändra…
+	Mon	mån
+	Month	Månad
+	More >>	Mer >>
+	More Colors…	Fler färger…
+	More Columns…	Fler kolumner…
+	More Commands…	Fler kommandon…
+	More Symbols…	Fler symboler…
+	More templates →	Fler mallar →
+	Move Down	Flytta ned
+	Move in Equation	Flytta i ekvation
+	Move object with text	Flytta objekt med text
+	Move or Resize	Flytta eller ändra storlek
+	Move Paragraph Down	Flytta stycke nedåt
+	Move Paragraph Up	Flytta stycke uppåt
+	Move Past Citation	Flytta förbi citat
+	Move Past\nCitation	Flytta förbi\ncitat
+	Move Selected Ink	Flytta markerat bläck
+	Move Text	Flytta text
+	Move to where?	Flytta till var?
+	Move Up	Flytta upp
+	Move with Text	Flytta med text
+	Move with text	Flytta med text
+	Moved from	Flyttad från
+	Moved to	Flyttad till
+	Moves	Flyttningar
+	Multilevel List	Lista med flera nivåer
+	Multiple Pages	Flera sidor
+	My Add-ins	Mina tillägg
+	MyMemory (free, no account)	MyMemory (kostnadsfritt, inget konto)
+	Name	Namn
+	Name (A–Z)	Namn (A–Ö)
+	Name of the file this document is saved as	Namnet på filen som dokumentet sparas som
+	Name:	Namn:
+	Narrow  0.5" all	Smal  0,5" överallt
+	Natural Logarithm	Naturlig logaritm
+	Nature	Natur
+	Navigation	Navigering
+	Navigation Pane	Navigeringsfönstret
+	Negated Relations	Negerade relationer
+	New	Nytt
+	New Comment	Ny kommentar
+	New comments and tracked changes are recorded under this name and these initials.	Nya kommentarer och spårade ändringar registreras under det här namnet och dessa initialer.
+	New Document	Nytt dokument
+	New document	Nytt dokument
+	New Drawing Canvas	Ny arbetsyta
+	New Entry	Ny post
+	New Folder	Ny mapp
+	New from Template	Nytt från mall
+	New Group	Ny grupp
+	New Label	Ny etikett
+	New Label…	Ny etikett…
+	New Paragraph	Nytt stycke
+	New shortcut:	Nytt kortkommando:
+	New Style…	Nytt format…
+	New Tab	Ny flik
+	New Table Style	Nytt tabellformat
+	New Table Style…	Nytt tabellformat…
+	New Window	Nytt fönster
+	New word	Nytt ord
+	New\nComment	Ny\nkommentar
+	New\nWindow	Nytt\nfönster
+	New…	Nytt…
+	Next	Nästa
+	Next Change	Nästa ändring
+	Next Comment	Nästa kommentar
+	Next Field	Nästa fält
+	Next Footnote	Nästa fotnot
+	Next Page	Nästa sida
+	Next Record	Nästa post
+	Next Section	Nästa avsnitt
+	Next Sentence	Nästa mening
+	Next sentence	Nästa mening
+	Next Window	Nästa fönster
+	No	Nej
+	No accessibility issues found.	Inga hjälpmedelsproblem hittades.
+	No add-ins are listed yet.	Inga tillägg finns i listan ännu.
+	No add-ins yet. Add one from the Store.	Inga tillägg ännu. Lägg till ett från butiken.
+	No Border	Ingen kantlinje
+	No changes (read only)	Inga ändringar (skrivskyddat)
+	No Color	Ingen färg
+	No contributor data was built into this copy.	Inga uppgifter om bidragsgivare ingår i den här kopian.
+	No data source yet.	Ingen datakälla ännu.
+	No errors found: every merge field is in the recipient list.	Inga fel hittades: alla kopplingsfält finns i mottagarlistan.
+	No Fill	Ingen fyllning
+	No Glow	Ingen glöd
+	No grid	Inget rutnät
+	No icons match your search.	Inga ikoner matchar sökningen.
+	No limit	Ingen gräns
+	No Line	Ingen linje
+	No Markup	Inga markeringar
+	No model credits were built into this copy.	Inga modellerkännanden ingår i den här kopian.
+	No Outline	Ingen kontur
+	No Paragraph Space	Inget styckeavstånd
+	No pictures found.	Inga bilder hittades.
+	No Reflection	Ingen reflektion
+	No revisions	Inga revideringar
+	No Shadow	Ingen skugga
+	No Soft Edges	Inga mjuka kanter
+	No sources yet.	Inga källor ännu.
+	No Spacing	Inget avstånd
+	no speech program on this system	inget talprogram på det här systemet
+	No templates match your search.	Inga mallar matchar sökningen.
+	No Transform	Ingen transformering
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Inga ord ännu. Lägg till i ordlistan på ett felstavat ord placerar det här.
+	No-Width Non Break	Hårt blanksteg utan bredd
+	No-Width Optional Break	Valfri brytning utan bredd
+	Nonbreaking Hyphen	Hårt bindestreck
+	Nonbreaking Space	Hårt blanksteg
+	None	Ingen
+	Normal	Normal
+	Normal  1" all	Normal  1" överallt
+	Normal Indent	Normalt indrag
+	Normal probability density	Normalfördelningens täthet
+	Normal speed	Normal hastighet
+	Normal Style	Normalt format
+	Normal Table	Normal tabell
+	Normal Text	Normal text
+	Normal Word Document	Normalt Word-dokument
+	North	Norr
+	Norwegian (Bokmål)	Norska (bokmål)
+	Not	Inte
+	Not available right now	Inte tillgängligt just nu
+	Not equal to	Inte lika med
+	Not linked: click a text box	Inte länkad: klicka på en textruta
+	Not saved	Inte sparat
+	Not saved yet	Inte sparat ännu
+	Not used by any command	Används inte av något kommando
+	Not {name}	Inte {name}
+	Nothing	Inget
+	Nothing collected yet. Items you copy or cut appear here.	Inget har samlats in ännu. Objekt som du kopierar eller klipper ut visas här.
+	Now used by {command}	Används nu av {command}
+	Nudge	Knuffa
+	Num Occurrences	Antal förekomster
+	Number	Nummer
+	Number alignment:	Nummerjustering:
+	Number format	Talformat
+	Number of columns:	Antal kolumner:
+	Number of rows:	Antal rader:
+	Number of the page the field sits on	Numret på sidan som fältet står på
+	Number of the section the field sits in	Numret på avsnittet som fältet står i
+	Number style for this level:	Numreringsformat för den här nivån:
+	Number the equation; the number sits at the right margin (or type # then the number)	Numrera ekvationen; numret står i högermarginalen (eller skriv # och sedan numret)
+	Number type:	Nummertyp:
+	Number:	Nummer:
+	Numbering	Numrering
+	Numbering:	Numrering:
+	Numbering…	Numrering…
+	Numerals	Siffror
+	Numerals:	Siffror:
+	n×n Identity Matrix	n×n-enhetsmatris
+	n×n Matrix	n×n-matris
+	Object	Objekt
+	Odd Page	Udda sida
+	Odd pages only	Endast udda sidor
+	Off	Av
+	Office	Office
+	Office 2003 Default	Office 2003-standard
+	Offset (pt):	Förskjutning (pt):
+	Offset: Bottom	Förskjutning: nederkant
+	Offset: Bottom Left	Förskjutning: nederkant vänster
+	Offset: Bottom Right	Förskjutning: nederkant höger
+	Offset: Center	Förskjutning: mitten
+	Offset: Left	Förskjutning: vänster
+	Offset: Right	Förskjutning: höger
+	Offset: Top	Förskjutning: överkant
+	Offset: Top Left	Förskjutning: överkant vänster
+	Offset: Top Right	Förskjutning: överkant höger
+	OK	OK
+	Omit	Utelämna
+	On	På
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	På: markören glider till sin nya plats när du skriver eller använder piltangenterna, och blinkningen tonas. Av: den hoppar och blinkar av och på.
+	One	En
+	One half	En halv
+	One label per recipient	En etikett per mottagare
+	One line per item. Enter adds an item.	En rad per objekt. Retur lägger till ett objekt.
+	One Page	En sida
+	Online Pictures	Onlinebilder
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Onlinebilder (Openverse), Översätt (MyMemory eller din LibreTranslate-server), Hämta tillägg och nedladdningen av Dikteras talmodell ansluter till internet, och bara när du använder dem. Avstängt gör Doc4Me inga egna anslutningar.
+	Online Pictures…	Onlinebilder…
+	Online services are turned off (File › Options › Trust Center).	Onlinetjänster är avstängda (Arkiv › Alternativ › Säkerhetscenter).
+	Online Video	Onlinevideo
+	Only allow this kind of editing:	Tillåt endast den här typen av redigering:
+	Only comments can be added, except in regions marked editable.	Endast kommentarer kan läggas till, utom i områden som markerats som redigerbara.
+	Only form fields can be filled in.	Endast formulärfält kan fyllas i.
+	only https addresses can be used	endast https-adresser kan användas
+	Only pictures I may use commercially	Endast bilder som jag får använda kommersiellt
+	Only the allowed styles can be applied.	Endast tillåtna format kan användas.
+	Only web (http, https) and email (mailto) links can be followed	Endast webblänkar (http, https) och e-postlänkar (mailto) kan följas
+	Open	Öppna
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Öppna en fil med Doc4Me:s egen filbläddrare när systemets fildialogruta inte visas.
+	Open Data Source…	Öppna datakälla…
+	Open Hyperlink	Öppna hyperlänk
+	OpenDocument Text (*.odt)	OpenDocument-text (*.odt)
+	Opening print dialog…	Öppnar utskriftsdialogrutan…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Öppnar .docx-, .doc-, .rtf- och .odt-filer och Word-mallar med Doc4Me från och med nu.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Öppnar Inställningar › Standardappar, där du väljer Doc4Me för .docx och de andra dokumenttyperna.
+	Open…	Öppna…
+	Operator	Operator
+	Operator Structures	Operatorstrukturer
+	Operators	Operatorer
+	Optional Hyphen	Valfritt bindestreck
+	Options	Alternativ
+	Options…	Alternativ…
+	Or	Eller
+	Or save a copy in another format:	Eller spara en kopia i ett annat format:
+	Ordinals (1st) as superscript	Ordningstal (1st) som upphöjt
+	Organizer	Organisatör
+	Organizer…	Organisatör…
+	Orientation	Orientering
+	Original document	Originaldokument
+	Other	Annat
+	Other Authorities	Andra rättskällor
+	Other Large Operators	Andra stora operatorer
+	Other paragraph styles	Andra styckeformat
+	Other styles and their TOC level:	Andra format och deras nivå i innehållsförteckningen:
+	Otherwise insert:	Annars infoga:
+	Outline	Disposition
+	Outline Level	Dispositionsnivå
+	Outline level	Dispositionsnivå
+	Outline levels	Dispositionsnivåer
+	Outline State	Dispositionsstatus
+	Outline Tools	Dispositionsverktyg
+	Outlining	Disposition
+	Outside	Utanför
+	Outside border	Yttre kantlinje
+	Outside Borders	Yttre kantlinjer
+	Outside Margin	Yttre marginal
+	Outside:	Utanför:
+	Outward Brackets	Utåtriktade parenteser
+	Oval	Oval
+	Overbar	Streck ovanför
+	Overbars and Underbars	Streck ovanför och under
+	Overbrace	Klammer ovanför
+	Overtype	Skriv över
+	Overtype (typing replaces the characters after the caret)	Skriv över (det du skriver ersätter tecknen efter markören)
+	Page	Sida
+	Page Background	Sidbakgrund
+	Page Border	Sidkantlinje
+	Page Borders	Sidkantlinjer
+	Page Break	Sidbrytning
+	Page Break Before	Sidbrytning före
+	Page break before	Sidbrytning före
+	Page Breaks	Sidbrytningar
+	Page Color	Sidfärg
+	Page display	Sidvisning
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Sidbild (*.jpg, *.jpeg)
+	Page image (*.png)	Sidbild (*.png)
+	Page Movement	Sidförflyttning
+	Page Number	Sidnummer
+	Page number style	Sidnummerformat
+	Page numbers at the right margin	Sidnummer vid högermarginalen
+	Page on which a bookmarked passage falls	Sidan där ett bokmärkt avsnitt finns
+	Page Setup	Utskriftsformat
+	Page title	Sidrubrik
+	Page Up	Page Up
+	Page Width	Sidbredd
+	Page width	Sidbredd
+	Page X of Y	Sida X av Y
+	Page {page}	Sida {page}
+	Page {page} of {pages}	Sida {page} av {pages}
+	Page\nBorders	Sid-\nkantlinjer
+	Page\nColor	Sid-\nfärg
+	Page\nNumber	Sid-\nnummer
+	Pages	Sidor
+	Pages like 1-3, 5	Sidor som 1-3, 5
+	Pages of bookmark:	Sidor för bokmärke:
+	Paragraph	Stycke
+	Paragraph Character	Stycketecken
+	Paragraph Details	Styckeinformation
+	Paragraph Down	Stycke ned
+	Paragraph Mark	Styckemarkering
+	Paragraph marks	Styckemarkeringar
+	Paragraph Settings	Styckeinställningar
+	Paragraph Spacing	Styckeavstånd
+	Paragraph style	Styckeformat
+	Paragraph Up	Stycke upp
+	Paragraphs	Stycken
+	Paragraph…	Stycke…
+	Parentheses	Parenteser
+	Parentheses with Separator	Parenteser med avgränsare
+	Partial Differential	Partiell differential
+	Password	Lösenord
+	Password:	Lösenord:
+	Paste	Klistra in
+	Paste All	Klistra in alla
+	Paste as:	Klistra in som:
+	Paste Clipboard Item	Klistra in urklippsobjekt
+	Paste Formatting	Klistra in formatering
+	Paste Special	Klistra in special
+	Paste Special…	Klistra in special…
+	Paste Spike	Klistra in samlingsklipp
+	Paste: Keep Text Only	Klistra in: behåll endast text
+	Paste: Merge Formatting	Klistra in: sammanfoga formatering
+	Pasting between documents:	Inklistring mellan dokument:
+	Pasting from other programs:	Inklistring från andra program:
+	Pasting within the same document:	Inklistring i samma dokument:
+	Pause	Pausa
+	Paused	Pausad
+	PDF document (*.pdf)	PDF-dokument (*.pdf)
+	Pen	Penna
+	Pencil	Blyerts
+	Pens	Pennor
+	People	Personer
+	Periodical	Periodisk publikation
+	Personalize	Anpassa
+	Phonetic Guide	Uttalsguide
+	Pi Over 2	Pi genom 2
+	Picas	Pica
+	Pick a custom group (New Group makes one)	Välj en anpassad grupp (Ny grupp skapar en)
+	Pick a field from the list	Välj ett fält i listan
+	Picture	Bild
+	Picture Border	Bildkantlinje
+	Picture Content Control	Innehållskontroll för bild
+	Picture Format	Bildformat
+	Picture Styles	Bildformat
+	Pictures	Bilder
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Bilder från Openverse. Respektera varje bilds licens: Doc4Me lägger till en upphovsrad under den.
+	Pie	Cirkel
+	Placeholder Name	Platshållarens namn
+	Placeholder text	Platshållartext
+	Plain Table 1	Oformaterad tabell 1
+	Plain text (*.txt)	Oformaterad text (*.txt)
+	Plain Text Content Control	Innehållskontroll för oformaterad text
+	Play	Spela upp
+	Play Video	Spela upp video
+	Play/Pause	Spela upp/pausa
+	Plus Equal	Plus lika med
+	Points	Punkter
+	points and above	punkter och större
+	Polish	Polska
+	Portrait	Stående
+	Portuguese (Brazil)	Portugisiska (Brasilien)
+	Portuguese (Portugal)	Portugisiska (Portugal)
+	Position	Position
+	Position:	Position:
+	Positioning…	Placering…
+	Possible spelling mistake	Möjligt stavfel
+	Postal Code	Postnummer
+	Power series of (1+x)ⁿ	Potensserie för (1+x)ⁿ
+	Preferred width:	Önskad bredd:
+	Preserve	Bevara
+	Preserve formatting during updates	Bevara formatering vid uppdatering
+	Presets	Förinställningar
+	Press a key combination	Tryck på en tangentkombination
+	Preview	Förhandsgranska
+	Preview Results	Förhandsgranska resultat
+	Preview\nResults	Förhandsgranska\nresultat
+	Previous	Föregående
+	Previous 1 or More	Föregående 1 eller fler
+	Previous Change	Föregående ändring
+	Previous Comment	Föregående kommentar
+	Previous Field	Föregående fält
+	Previous Footnote	Föregående fotnot
+	Previous Page	Föregående sida
+	Previous Record	Föregående post
+	Previous Section	Föregående avsnitt
+	Previous Sentence	Föregående mening
+	Previous sentence	Föregående mening
+	Previous Window	Föregående fönster
+	Print	Skriv ut
+	Print blank lines when data fields are empty	Skriv ut tomma rader när datafält är tomma
+	Print Documents	Skriv ut dokument
+	Print Documents…	Skriv ut dokument…
+	Print failed: {error}	Utskriften misslyckades: {error}
+	Print Layout	Utskriftslayout
+	Print Markup	Skriv ut markeringar
+	Print the page color	Skriv ut sidfärgen
+	Print to PDF	Skriv ut till PDF
+	Print\nLayout	Utskrifts-\nlayout
+	Printer	Skrivare
+	Printing	Utskrift
+	Process	Process
+	Product	Produkt
+	Product of A	Produkt av A
+	Product with Limits	Produkt med gränser
+	Product with Lower Limit	Produkt med undre gräns
+	Product with Subscript-Superscript Limits	Produkt med nedsänkta och upphöjda gränser
+	Products and Coproducts	Produkter och koprodukter
+	Professional	Professionell
+	Promote	Höj nivå
+	Promote to Heading 1	Höj till rubrik 1
+	Proofing	Språkkontroll
+	Proofing Issues	Språkkontrollproblem
+	Proofing language	Språk för språkkontroll
+	Properties	Egenskaper
+	Protect	Skydda
+	Protect Document	Skydda dokument
+	PRs	PR:er
+	pt	pt
+	Publisher	Förlag
+	Punctuation	Skiljetecken
+	Put the caret in a content control first.	Placera markören i en innehållskontroll först.
+	Put the default commands back on the Quick Access Toolbar?	Vill du lägga tillbaka standardkommandona i verktygsfältet Snabbåtkomst?
+	Pyramid	Pyramid
+	Quadratic Root	Kvadratisk rot
+	Query Options…	Frågealternativ…
+	Quick Access Toolbar	Verktygsfältet Snabbåtkomst
+	Quick Parts	Snabbdelar
+	Quick Tables	Snabbtabeller
+	Quote	Citat
+	Radical	Rotuttryck
+	Radical with Degree	Rotuttryck med grad
+	Radicals	Rotuttryck
+	Raised/lowered	Upphöjd/nedsänkt
+	Read Aloud	Läs upp
+	Read Aloud couldn't start the speech program: {reason}	Läs upp kunde inte starta talprogrammet: {reason}
+	Read Aloud couldn't start: {reason}	Läs upp kunde inte starta: {reason}
+	Read Aloud isn't available in the browser	Läs upp är inte tillgängligt i webbläsaren
+	Read Aloud Status	Status för Läs upp
+	Read Aloud stopped: {reason}	Läs upp stoppades: {reason}
+	Read Mode	Läsläge
+	Read\nAloud	Läs\nupp
+	Read\nMode	Läs-\nläge
+	Reading	Läsning
+	Reading Column Width	Kolumnbredd vid läsning
+	Reading Highlight	Läsmarkering
+	Reading Line Spacing	Radavstånd vid läsning
+	Reading Mode	Läsläge
+	Reading Speed	Läshastighet
+	Reading Text Size	Textstorlek vid läsning
+	Reads the clipboard's rich text and keeps its formatting.	Läser Urklipps formaterade text och behåller formateringen.
+	Reads the clipboard's web content and keeps its formatting.	Läser Urklipps webbinnehåll och behåller formateringen.
+	Real name	Riktigt namn
+	Recent	Senaste
+	Recent Colors	Senaste färger
+	Recent documents to show:	Antal senaste dokument som visas:
+	Recently used symbols:	Senast använda symboler:
+	Recipient List	Mottagarlista
+	Recipient lists	Mottagarlistor
+	Recipients: {count}	Mottagare: {count}
+	Recognized (you can correct it):	Igenkänt (du kan rätta det):
+	Recognized Functions	Igenkända funktioner
+	Recognized Functions…	Igenkända funktioner…
+	Recolor a one-color picture, such as an icon	Färga om en enfärgad bild, till exempel en ikon
+	Recolor Selected Ink	Färga om markerat bläck
+	Record Macro	Spela in makro
+	Recover Unsaved Documents	Återställ osparade dokument
+	Rectangle	Rektangel
+	Red:	Röd:
+	Redo	Gör om
+	Reduce Hanging Indent	Minska hängande indrag
+	References	Referenser
+	Reflection	Reflektion
+	Refresh	Uppdatera
+	Registered	Registrerat
+	Registered Sign	Tecken för registrerat varumärke
+	Regular expressions	Reguljära uttryck
+	Regulations	Förordningar
+	Reject	Avvisa
+	Reject All	Avvisa alla
+	Reject All Changes	Avvisa alla ändringar
+	Reject Change	Avvisa ändring
+	Relationship	Relation
+	relative to	i förhållande till
+	Relative to:	I förhållande till:
+	Relaxed	Avslappnad
+	Remove	Ta bort
+	Remove Added Font	Ta bort tillagt teckensnitt
+	Remove Background	Ta bort bakgrund
+	Remove Content Control	Ta bort innehållskontroll
+	Remove every custom shortcut and restore the built-in keys?	Vill du ta bort alla anpassade kortkommandon och återställa de inbyggda tangenterna?
+	Remove every custom tab and group and show all tabs again?	Vill du ta bort alla anpassade flikar och grupper och visa alla flikar igen?
+	Remove field	Ta bort fält
+	Remove Field Name	Ta bort fältnamn
+	Remove Footer	Ta bort sidfot
+	Remove from Quick Access Toolbar	Ta bort från verktygsfältet Snabbåtkomst
+	Remove Header	Ta bort sidhuvud
+	Remove Hyperlink	Ta bort hyperlänk
+	Remove Password	Ta bort lösenord
+	Remove Pen	Ta bort penna
+	Remove Positioning	Ta bort placering
+	Remove recipient	Ta bort mottagare
+	Remove row	Ta bort rad
+	Remove series	Ta bort serie
+	Remove Space After Paragraph	Ta bort avstånd efter stycke
+	Remove Table of Contents	Ta bort innehållsförteckning
+	Remove the control once edited	Ta bort kontrollen när den har redigerats
+	Remove the space before the punctuation	Ta bort blanksteget före skiljetecknet
+	Remove Watermark	Ta bort vattenstämpel
+	Rename Style	Byt namn på format
+	Rename…	Byt namn…
+	Reopen	Öppna igen
+	Repeat	Upprepa
+	Repeat as header row on each page	Upprepa som rubrikrad på varje sida
+	Repeat Header Rows	Upprepa rubrikrader
+	Repeated words	Upprepade ord
+	Repeating Section Content Control	Innehållskontroll för upprepande avsnitt
+	Replace	Ersätt
+	Replace All	Ersätt alla
+	Replace as you type	Ersätt medan du skriver
+	Replace Document Text	Ersätt dokumenttext
+	Replace text as you type	Ersätt text medan du skriver
+	Replace with:	Ersätt med:
+	Replace:	Ersätt:
+	Replay	Spela upp igen
+	Reply	Svara
+	Report	Rapport
+	Research	Forskning
+	Researcher	Forskare
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Forskare kräver en onlinetjänst; Doc4Me håller dina dokument offline.
+	Reset	Återställ
+	Reset All	Återställ alla
+	Reset All…	Återställ alla…
+	Reset Character Formatting	Återställ teckenformatering
+	Reset Crop	Återställ beskärning
+	Reset Graphic	Återställ grafik
+	Reset Paragraph Formatting	Återställ styckeformatering
+	Reset Picture	Återställ bild
+	Reset to Normal	Återställ till Normal
+	Reset\nGraphic	Återställ\ngrafik
+	Reset…	Återställ…
+	Resize Table by Dragging	Ändra tabellstorlek genom att dra
+	Resolve	Lös
+	Resolved	Löst
+	Restart at 1	Börja om vid 1
+	Restart Each Page	Börja om på varje sida
+	Restart Each Section	Börja om i varje avsnitt
+	Restart list after:	Börja om listan efter:
+	Restore	Återställ
+	Restore Defaults	Återställ standardvärden
+	Restore Down	Återställ fönster
+	Restore to Normal Word Document	Återställ till normalt Word-dokument
+	Restrict Editing	Begränsa redigering
+	Restrict\nEditing	Begränsa\nredigering
+	Result	Resultat
+	Results	Resultat
+	Return address labels	Returadressetiketter
+	Return address:	Returadress:
+	Reverse the order	Vänd ordningen
+	Review	Granska
+	Review AutoFormat Changes	Granska ändringar från Autoformat
+	Review Changes…	Granska ändringar…
+	Reviewing	Granskning
+	Reviewing Pane	Granskningsfönstret
+	Reviewing — edits become suggestions	Granskning – redigeringar blir förslag
+	Revised document	Reviderat dokument
+	Revisions	Revideringar
+	Rewind	Spola tillbaka
+	Ribbon	Menyfliksområde
+	Ribbon and Quick Access Toolbar:	Menyfliksområde och verktygsfältet Snabbåtkomst:
+	Ribbon tabs	Flikar i menyfliksområdet
+	Rich Text Content Control	Innehållskontroll för RTF-text
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Höger
+	Right (vertical)	Höger (lodrät)
+	Right align page numbers	Högerjustera sidnummer
+	Right Arrow with Text Above	Högerpil med text ovanför
+	Right Arrow with Text Below	Högerpil med text nedanför
+	Right Border	Höger kantlinje
+	Right border	Höger kantlinje
+	Right Bracket Twice	Höger parentes två gånger
+	Right indent	Högerindrag
+	Right Margin	Högermarginal
+	Right Only	Endast höger
+	Right only	Endast höger
+	Right-to-left	Höger till vänster
+	Right-to-Left Section	Avsnitt från höger till vänster
+	Right-to-Left Table	Tabell från höger till vänster
+	Right-to-Left Text Direction	Textriktning höger till vänster
+	Right:	Höger:
+	Rightwards Arrow Above	Högerpil ovanför
+	Rightwards Harpoon Above	Högerharpun ovanför
+	Roots of ax²+bx+c	Rötterna till ax²+bx+c
+	Rotate	Rotera
+	Rotate all text 270°	Rotera all text 270°
+	Rotate all text 90°	Rotera all text 90°
+	Rotate Left 90°	Rotera vänster 90°
+	Rotate Right 90°	Rotera höger 90°
+	Rotation	Rotation
+	Rotation:	Rotation:
+	Rounded Rectangle	Rektangel med rundade hörn
+	Row	Rad
+	Row:	Rad:
+	Rows & Columns	Rader och kolumner
+	Ruby text:	Rubytext:
+	Ruler	Linjal
+	Rules	Regler
+	Run	Kör
+	Run-in	Inline
+	Russian	Ryska
+	Résumé	Meritförteckning
+	Same as the whole table	Samma som hela tabellen
+	SAMPLE	EXEMPEL
+	Sat:	lör:
+	Save	Spara
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Spara en kopia i ett annat format. Utskrift sker via en PDF som du kan skriva ut från valfri visare.
+	Save As	Spara som
+	Save as Template	Spara som mall
+	Save documents	Spara dokument
+	Save the document to turn on AutoSave	Spara dokumentet för att aktivera Autospara
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Spara dokumentet för att aktivera Autospara (en fil som du bara har öppnat skrivs inte om förrän du sparar den)
+	Save these pages as PDF…	Spara de här sidorna som PDF…
+	Save Version	Spara version
+	Saved	Sparat
+	Scale	Skala
+	Scale Drawing	Skala ritning
+	Scatter	Punkt
+	Screen Clipping	Skärmklipp
+	Screen clipping didn't work: {reason}	Skärmklippet fungerade inte: {reason}
+	Screen clipping ended without a picture.	Skärmklippet avslutades utan bild.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Skärmklipp är inte tillgängligt här. Kopiera en bild av skärmen och klistra sedan in den.
+	Screenshot	Skärmbild
+	Script	Skript
+	Scripts	Skript
+	Scroll ribbon left	Rulla menyfliksområdet åt vänster
+	Scroll ribbon right	Rulla menyfliksområdet åt höger
+	Search	Sök
+	Search Commands	Sök efter kommandon
+	Search commands and help	Sök efter kommandon och hjälp
+	Search document	Sök i dokumentet
+	Search for templates	Sök efter mallar
+	Search icons	Sök efter ikoner
+	Search Openverse (Creative Commons pictures)	Sök i Openverse (Creative Commons-bilder)
+	Search Options	Sökalternativ
+	Searching…	Söker…
+	Secant Function	Sekansfunktion
+	Section Break	Avsnittsbrytning
+	Section Breaks	Avsnittsbrytningar
+	Section Character	Avsnittstecken
+	Section direction:	Avsnittets riktning:
+	Section Mark	Avsnittsmarkering
+	Section Properties	Avsnittsegenskaper
+	Sections	Avsnitt
+	See	Se
+	Select	Markera
+	Select a picture, shape, chart or table to describe it.	Markera en bild, form, ett diagram eller en tabell för att beskriva den.
+	Select All	Markera alla
+	Select Cell	Markera cell
+	Select Floating Shapes	Markera flytande former
+	Select Heading and Content	Markera rubrik och innehåll
+	Select Line	Markera rad
+	Select Objects	Markera objekt
+	Select Paragraph	Markera stycke
+	Select Range	Markera område
+	Select Recipients	Välj mottagare
+	Select recipients first to choose from their fields.	Välj mottagare först för att välja bland deras fält.
+	Select recipients first to match their fields.	Välj mottagare först för att matcha deras fält.
+	Select Row	Markera rad
+	Select Sentence	Markera mening
+	Select Table	Markera tabell
+	Select Text	Markera text
+	Select text in the document to translate it.	Markera text i dokumentet för att översätta den.
+	Select Text with Similar Formatting	Markera text med liknande formatering
+	Select text, then tick who can still edit it.	Markera text och kryssa sedan i vem som fortfarande får redigera den.
+	Select the part of the screen to insert.	Markera den del av skärmen som ska infogas.
+	Select Word	Markera ord
+	Select\nRecipients	Välj\nmottagare
+	Selected Fields	Valda fält
+	Selected pages	Valda sidor
+	Selection	Markering
+	Selection Pane	Markeringsfönstret
+	Send Backward	Flytta bakåt
+	Send the document straight to the system print dialog, or save a copy in another format below.	Skicka dokumentet direkt till systemets utskriftsdialogruta, eller spara en kopia i ett annat format nedan.
+	Sentence	Mening
+	Sentence case.	Versal i början av mening.
+	Separator:	Avgränsare:
+	Sequence name:	Seriens namn:
+	Serbian	Serbiska
+	Serbian (Cyrillic)	Serbiska (kyrillisk)
+	Serbian (Latin)	Serbiska (latinsk)
+	Series name	Seriens namn
+	Series {n}	Serie {n}
+	Server address (https://…)	Serveradress (https://…)
+	Set	Ange
+	Set As Default	Ange som standard
+	Set as Default	Ange som standard
+	Set Caret	Placera markören
+	Set Character Formatting	Ange teckenformatering
+	Set Date	Ange datum
+	Set Equation	Ange ekvation
+	Set Numbering Value	Ange numreringsvärde
+	Set Paragraph Formatting	Ange styckeformatering
+	Set Proofing Language…	Ange språk för språkkontroll…
+	Setting:	Inställning:
+	Settings…	Inställningar…
+	Shading	Fyllning
+	Shadow	Skugga
+	Shadow, glow and soft edges	Skugga, glöd och mjuka kanter
+	Shape Effects	Formeffekter
+	Shape Fill	Formfyllning
+	Shape Format	Formformat
+	Shape Outline	Formkontur
+	Shape Styles	Formformat
+	Shapes	Former
+	Share	Dela
+	Sheet:	Kalkylblad:
+	Shift cells down	Flytta celler nedåt
+	Shift cells right	Flytta celler åt höger
+	Shift+Tab	Skift+Tabb
+	Shipping labels	Fraktetiketter
+	Short citation:	Kort citat:
+	Shortcut key:	Kortkommando:
+	Show	Visa
+	Show all formatting marks	Visa alla formateringstecken
+	Show All Levels	Visa alla nivåer
+	Show all revisions inline	Visa alla revideringar i texten
+	Show changes at:	Visa ändringar vid:
+	Show changes in:	Visa ändringar i:
+	Show Comments	Visa kommentarer
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Visa dokument med inverterade färger, som Visa › Växla lägen. Sparande, utskrift och PDF-filer påverkas inte.
+	Show every bibliography field	Visa alla fält för litteraturförteckning
+	Show First Line Only	Visa endast första raden
+	Show in the Styles gallery	Visa i formatgalleriet
+	Show KeyTips (Alt or F10)	Visa tangenttips (Alt eller F10)
+	Show Level	Visa nivå
+	Show Level 1	Visa nivå 1
+	Show Level 2	Visa nivå 2
+	Show Level 3	Visa nivå 3
+	Show Level 4	Visa nivå 4
+	Show Level 5	Visa nivå 5
+	Show Level 6	Visa nivå 6
+	Show Level 7	Visa nivå 7
+	Show Level 8	Visa nivå 8
+	Show Level 9	Visa nivå 9
+	Show Markup	Visa markeringar
+	Show Notes	Visa anteckningar
+	Show only comments and formatting in balloons	Visa endast kommentarer och formatering i pratbubblor
+	Show or Hide Style	Visa eller dölj format
+	Show page numbers	Visa sidnummer
+	Show revisions in balloons	Visa revideringar i pratbubblor
+	Show rulers	Visa linjaler
+	Show Text Formatting	Visa textformatering
+	Show the equation in the line of text	Visa ekvationen i textraden
+	Show the equation on a line of its own	Visa ekvationen på en egen rad
+	Show the mini toolbar when text is selected	Visa minifältet när text är markerad
+	Show/Hide ¶	Visa/dölj ¶
+	Show\nComments	Visa\nkommentarer
+	Showing the first {count} items.	De första {count} objekten visas.
+	Shows a tree: each item below the item it belongs to.	Visar ett träd: varje objekt under objektet det hör till.
+	Shows items around a central idea: the first item is the centre.	Visar objekt runt en central idé: det första objektet är mitten.
+	Shows items of equal weight as blocks in rows.	Visar objekt med lika vikt som block i rader.
+	Shows overlapping ideas as overlapping circles.	Visar överlappande idéer som överlappande cirklar.
+	Shows parts of a whole as quadrants.	Visar delar av en helhet som kvadranter.
+	Shows parts that build on each other, largest at the bottom.	Visar delar som bygger på varandra, den största längst ned.
+	Shows steps in order, left to right, with arrows between them.	Visar steg i ordning, från vänster till höger, med pilar emellan.
+	Shows steps that repeat, around a circle.	Visar steg som upprepas, i en cirkel.
+	Shrink Font 1 Point	Minska teckensnittet 1 punkt
+	Shrink Selection	Minska markering
+	Shrink text	Krymp text
+	Side to Side	Sida vid sida
+	Side\nto Side	Sida vid\nsida
+	Sides of a right triangle	Sidorna i en rätvinklig triangel
+	Signature Line	Signaturrad
+	Sine and cosine series of f(x)	Sinus- och cosinusserie för f(x)
+	Sine Function	Sinusfunktion
+	Sine theta	Sinus theta
+	Single	Enkel
+	Single Brackets	Enkla parenteser
+	Single Closing Quote	Enkelt avslutande citattecken
+	Single label	En etikett
+	Single Left Angle	Enkel vänster vinkelparentes
+	Single Left Bar	Enkelt vänster lodstreck
+	Single Left Brace	Enkel vänster klammerparentes
+	Single Left Bracket	Enkel vänster hakparentes
+	Single Left Parenthesis	Enkel vänster parentes
+	Single Opening Quote	Enkelt inledande citattecken
+	Single Right Brace	Enkel höger klammerparentes
+	Single Right Bracket	Enkel höger hakparentes
+	Single Right Parenthesis	Enkel höger parentes
+	Single Spacing	Enkelt radavstånd
+	SIST02	SIST02
+	Site name	Webbplatsens namn
+	Size	Storlek
+	Size (pt):	Storlek (pt):
+	Size and Crop…	Storlek och beskärning…
+	Size:	Storlek:
+	Sketchbook	Skissbok
+	Skewed Fraction	Snett bråk
+	Skip citations & bibliography	Hoppa över citat och litteraturförteckning
+	Skip Citations and Bibliography	Hoppa över citat och litteraturförteckning
+	Skip Record If	Hoppa över post om
+	Skip Record If…	Hoppa över post om…
+	Slant Down	Lutning nedåt
+	Slant Up	Lutning uppåt
+	Small Caps	Kapitäler
+	Small caps	Kapitäler
+	Small change	Liten ändring
+	Smart quotes instead of straight quotes	Typografiska citattecken i stället för raka citattecken
+	SmartArt	SmartArt
+	SmartArt Design	SmartArt-design
+	SmartArt Styles	SmartArt-format
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Mjuk rullning och zoomning, och menyer och knappar som tonas in. Av visar varje ändring direkt.
+	Soft Edges	Mjuka kanter
+	Soft Glow	Mjuk glöd
+	Solid Accent	Enfärgad dekor
+	Sort	Sortera
+	Sort by	Sortera efter
+	Sort order:	Sorteringsordning:
+	Sort Records	Sortera poster
+	Source code: github.com/chatraweechai/doc4me	Källkod: github.com/chatraweechai/doc4me
+	Source Manager	Källhanteraren
+	Source type:	Källtyp:
+	Sources in this document:	Källor i dokumentet:
+	South	Söder
+	Space	Blanksteg
+	Space after	Avstånd efter
+	Space after: {pt} pt	Avstånd efter: {pt} pt
+	Space before	Avstånd före
+	Space before/after:	Avstånd före/efter:
+	Space before: {pt} pt	Avstånd före: {pt} pt
+	Spaces	Blanksteg
+	Spacing	Avstånd
+	Spacing (pt):	Avstånd (pt):
+	Spacing:	Avstånd:
+	Spanish	Spanska
+	Spanish (Mexico)	Spanska (Mexiko)
+	Spanish (Spain)	Spanska (Spanien)
+	Sparse Matrices	Glesa matriser
+	Special	Special
+	Special Characters	Specialtecken
+	Specify height:	Ange höjd:
+	Speech	Tal
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Tal känns igen på den här datorn (whisper.cpp); inget skickas online.
+	Speed	Hastighet
+	Spelling	Stavning
+	Spelling & Grammar	Stavning och grammatik
+	Spelling &\nGrammar	Stavning och\ngrammatik
+	Spelling and grammar are checked in English (United States).	Stavning och grammatik kontrolleras på engelska (USA).
+	Spelling Suggestions	Stavningsförslag
+	Spike	Samlingsklipp
+	Split	Dela
+	Split apart page break and paragraph mark	Skilj sidbrytning och styckemarkering åt
+	Split Cells	Dela celler
+	Split Table	Dela tabell
+	Spreadsheet Table	Kalkylbladstabell
+	Square	Kvadrat
+	Square Root	Kvadratrot
+	Square Root with Degree	Kvadratrot med grad
+	Square Union	Kvadratisk union
+	Stack Object	Staplat objekt
+	Stack Object (Three)	Staplat objekt (tre)
+	Stacked	Staplad
+	Stacked Bar	Staplad liggande stapel
+	Stacked Column	Staplad stående stapel
+	Stacked Fraction	Staplat bråk
+	Stacked, no bar	Staplat, utan bråkstreck
+	Standard	Standard
+	Standard and Contextual	Standard och kontextuella
+	Standard Colors	Standardfärger
+	Standard Only	Endast standard
+	Star	Stjärna
+	Start at:	Börja vid:
+	Start Enforcing Protection	Starta tvingande skydd
+	Start Mail Merge	Starta koppling
+	Start Mail\nMerge	Starta\nkoppling
+	State	Delstat
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Statistics	Statistik
+	Status Bar	Statusfält
+	Statutes	Lagar
+	Stop	Stoppa
+	Stop Protection	Avsluta skydd
+	Stop Reading	Sluta läsa
+	Stopped	Stoppad
+	Store	Butik
+	Straight Arrow Connector	Rak pilkoppling
+	Straight Connector	Rak koppling
+	Strikethrough	Genomstrykning
+	Stroke {n} of {total}	Drag {n} av {total}
+	Strong	Stark
+	Structure Actions	Strukturåtgärder
+	Structures	Strukturer
+	Studio	Studio
+	Studio cover	Studioomslag
+	Studio handbook (sample)	Studiohandbok (exempel)
+	Style	Format
+	Style based on:	Format baserat på:
+	Style Inspector	Formatgranskaren
+	Style Set	Formatuppsättning
+	Style:	Format:
+	Style: APA	Format: APA
+	Style: {style}	Format: {style}
+	Styles	Format
+	Styles Pane	Fönstret Format
+	Styles:	Format:
+	Subentry:	Underpost:
+	Subject	Ämne
+	Subscript	Nedsänkt
+	Subscript-Superscript	Nedsänkt-upphöjt
+	Subscripts and Superscripts	Nedsänkta och upphöjda tecken
+	Subset:	Delmängd:
+	Substituted font	Ersatt teckensnitt
+	Subtitle	Underrubrik
+	Subtle Emphasis	Diskret betoning
+	Subtle Reference	Diskret referens
+	Sum	Summa
+	Sum of cosines	Summa av cosinusar
+	Sum or difference of sines	Summa eller differens av sinusar
+	Summation	Summering
+	Summation from 0 to n	Summering från 0 till n
+	Summation over binomials	Summering över binomialer
+	Summation with Limits	Summering med gränser
+	Summation with Lower Limit	Summering med undre gräns
+	Summation with Subscript Limit	Summering med nedsänkt gräns
+	Summation with Subscript-Superscript Limits	Summering med nedsänkta och upphöjda gränser
+	Summations	Summeringar
+	Superscript	Upphöjd
+	Suppress line numbers	Ignorera radnummer
+	Surface Integral	Ytintegral
+	Surface Integral with Limits	Ytintegral med gränser
+	Surface Integral with Stacked Limits	Ytintegral med staplade gränser
+	Swap footnotes and endnotes	Byt fotnoter och slutkommentarer
+	Swedish	Svenska
+	Switch Modes	Växla lägen
+	Switch Windows	Växla fönster
+	Switch\nModes	Växla\nlägen
+	Symbol	Symbol
+	Symbol Font	Symbolteckensnitt
+	Symbols	Symboler
+	Synchronous Scrolling	Synkron rullning
+	Synonyms	Synonymer
+	System	System
+	Tab	Tabb
+	Tab Character	Tabbtecken
+	Tab character	Tabbtecken
+	Tab characters	Tabbtecken
+	Tab leader:	Utfyllnadstecken:
+	Tab stop position:	Tabbstoppets position:
+	Tab stops to be cleared:	Tabbstopp som ska tas bort:
+	Table	Tabell
+	Table AutoFormat	Autoformat för tabell
+	Table AutoFormat…	Autoformat för tabell…
+	Table Column Width	Tabellens kolumnbredd
+	Table Design	Tabelldesign
+	Table direction:	Tabellens riktning:
+	Table entry fields	Tabellpostfält
+	Table Grid	Tabellrutnät
+	Table identifier:	Tabellidentifierare:
+	Table Layout	Tabellayout
+	Table of Authorities	Rättsfallsförteckning
+	Table of Contents	Innehållsförteckning
+	Table of Contents Options	Alternativ för innehållsförteckning
+	Table of Contents Styles	Format för innehållsförteckning
+	Table of Figures	Figurförteckning
+	Table of Figures Options	Alternativ för figurförteckning
+	Table of\nContents	Innehålls-\nförteckning
+	Table Positioning	Tabellplacering
+	Table Properties	Tabellegenskaper
+	Table Row Height	Tabellens radhöjd
+	Table style	Tabellformat
+	Table Style Options	Alternativ för tabellformat
+	Table Styles	Tabellformat
+	Table styles:	Tabellformat:
+	Tables	Tabeller
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tabs	Tabbar
+	Tabs…	Tabbar…
+	Tabular List	Tabellista
+	Tag	Tagg
+	Tangent formula	Tangensformel
+	Tangent Function	Tangensfunktion
+	TC entry fields	TC-postfält
+	Technology	Teknik
+	Templates	Mallar
+	Templates and Add-ins	Mallar och tillägg
+	Text	Text
+	Text Box	Textruta
+	Text boxes	Textrutor
+	Text Direction	Textriktning
+	Text Effects	Texteffekter
+	Text Effects and Typography	Texteffekter och typografi
+	Text Fill	Textfyllning
+	Text from File	Text från fil
+	Text Highlight Color	Färg för textmarkering
+	Text indent at:	Textindrag vid:
+	Text isn't squeezed to fit its cell yet.	Texten pressas ännu inte ihop för att passa i cellen.
+	Text Outline	Textkontur
+	Text over Colon Equal	Text över kolon lika med
+	Text over Equal	Text över lika med
+	Text Pane	Textfönster
+	Text size	Textstorlek
+	Text snaps to characters	Texten fäster vid tecken
+	Text to display:	Text som ska visas:
+	Text Wrapping	Radbyte
+	Text wrapping:	Radbyte:
+	Text:	Text:
+	Text\nBox	Text-\nruta
+	Text\nDirection	Text-\nriktning
+	Thai	Thailändska
+	Thai Distributed	Thailändsk fördelning
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Det formatet behåller inte allt, så dokumentet är fortfarande öppet. Spara det som ett Word-dokument (.docx) för att fortsätta.
+	That isn't the web address or embed code of an online video.	Det är inte webbadressen eller inbäddningskoden för en onlinevideo.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Lösenordet är fel. Kontrollera det (lösenord är skiftlägeskänsliga) och försök igen.
+	The clipboard is empty.	Urklipp är tomt.
+	The date it is today	Dagens datum
+	The document contains no tracked changes.	Dokumentet innehåller inga spårade ändringar.
+	The document has no bookmarks yet.	Dokumentet har inga bokmärken ännu.
+	The document is read only, except for regions marked editable.	Dokumentet är skrivskyddat, utom områden som markerats som redigerbara.
+	The document will be saved with a password. Save it to protect it.	Dokumentet sparas med ett lösenord. Spara det för att skydda det.
+	The first word of a sentence starts with a capital.	Det första ordet i en mening börjar med versal.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	den kostnadsfria dagskvoten är förbrukad (försök igen i morgon eller ange en e-postadress)
+	the LibreTranslate server	LibreTranslate-servern
+	The Mail Merge Helper sets up a merge in three steps.	Kopplingshjälpen konfigurerar en koppling i tre steg.
+	The new style takes the formatting of the current paragraph.	Det nya formatet får formateringen från det aktuella stycket.
+	The password is optional; without it anyone can stop the protection.	Lösenordet är valfritt; utan det kan vem som helst avsluta skyddet.
+	The password is removed. Save the document to keep the change.	Lösenordet har tagits bort. Spara dokumentet för att behålla ändringen.
+	The passwords don't match.	Lösenorden matchar inte.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Skrivare, dubbelsidig utskrift och sidor per ark väljs i den dialogrutan.
+	The recipient-list field that fills each part of an address block and greeting line.	Fältet i mottagarlistan som fyller varje del av ett adressblock och en hälsningsrad.
+	The same word twice in a row.	Samma ord två gånger i följd.
+	The spelling and grammar check is complete.	Stavnings- och grammatikkontrollen är klar.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Systemets fildialogruta är inte tillgänglig, så Doc4Me visar sin egen. Installera en filväljarportal (till exempel xdg-desktop-portal-gtk) eller zenity för att få systemets dialogruta.
+	The text is sent to {service} to be translated.	Texten skickas till {service} för översättning.
+	The time right now	Tiden just nu
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Videon visas som en bild i dokumentet. Dubbelklicka på den för att titta i webbläsaren.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Hela dokumentet översätts till ett nytt dokument som ersätter detta. Spara ditt arbete först.
+	Theme Colors	Temafärger
+	Theme Fonts	Temateckensnitt
+	Theme List	Temalista
+	Themes	Teman
+	Then by	Sedan efter
+	Then insert:	Infoga sedan:
+	There's no text to translate.	Det finns ingen text att översätta.
+	Thesaurus	Synonymordlista
+	These marks show even when Show/Hide ¶ is off.	De här markeringarna visas även när Visa/dölj ¶ är av.
+	These merge fields aren't in the recipient list:	De här kopplingsfälten finns inte i mottagarlistan:
+	These settings will be used for new documents.	De här inställningarna används för nya dokument.
+	Thick	Tjock
+	Thickness	Tjocklek
+	This Device…	Den här enheten…
+	This document	Det här dokumentet
+	This field has no options.	Fältet har inga alternativ.
+	This folder can't be read: {error}	Mappen kan inte läsas: {error}
+	This font has no characters to show.	Teckensnittet har inga tecken att visa.
+	This page	Den här sidan
+	This password type isn't supported.	Lösenordstypen stöds inte.
+	This point forward	Från den här punkten
+	This section	Det här avsnittet
+	Three	Tre
+	Through	Genom
+	Tight	Tät
+	Tilde	Tilde
+	Tips ({n})	Tips ({n})
+	Title	Rubrik
+	Title from the document properties	Rubrik från dokumentegenskaperna
+	Title:	Rubrik:
+	To	Till
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Så öppnar du Word-dokument med Doc4Me som standard: markera ett i Finder, välj Arkiv › Visa info, välj Doc4Me under Öppna med och klicka på Ändra alla.
+	To:	Till:
+	TOA Heading	Rubrik för rättsfallsförteckning
+	TOC Heading	Rubrik för innehållsförteckning
+	TOC {n}	Innehåll {n}
+	Today	I dag
+	tOGGLE cASE	vÄXLA sKIFTLÄGE
+	Toggle Check Box	Växla kryssruta
+	Toggle Field Codes	Växla fältkoder
+	Toggle Unicode Character	Växla Unicode-tecken
+	Tools	Verktyg
+	Top	Överkant
+	Top and Bottom	Över och under
+	Top Border	Övre kantlinje
+	Top Margin	Övre marginal
+	Top of Next Page	Överst på nästa sida
+	Top of Page	Överst på sidan
+	Top of Previous Page	Överst på föregående sida
+	Top of the Window	Överst i fönstret
+	Top:	Överkant:
+	Total	Summa
+	Total Row	Summarad
+	Track Changes	Spåra ändringar
+	Track Changes Options	Alternativ för Spåra ändringar
+	Track changes while editing	Spåra ändringar vid redigering
+	Track Changes: On	Spåra ändringar: på
+	Track formatting	Spåra formatering
+	Track\nChanges	Spåra\nändringar
+	Track\nChanges ✓	Spåra\nändringar ✓
+	Tracked changes	Spårade ändringar
+	Tracking	Spårning
+	Trademark	Varumärke
+	Trademark Sign	Varumärkestecken
+	Transform	Transformera
+	Translate	Översätt
+	Translate Document	Översätt dokument
+	Translating {done} of {total}	Översätter {done} av {total}
+	Translation service	Översättningstjänst
+	Translator	Översättare
+	Transparency	Genomskinlighet
+	Transparency:	Genomskinlighet:
+	Transport	Transport
+	Treatises	Avhandlingar
+	Triangle	Triangel
+	Triangle Down	Triangel nedåt
+	Triangle Up	Triangel uppåt
+	Trigonometric Functions	Trigonometriska funktioner
+	Triple	Trippel
+	Triple Dot	Tre punkter
+	Triple Integral	Trippelintegral
+	Triple Integral with Limits	Trippelintegral med gränser
+	Triple Integral with Stacked Limits	Trippelintegral med staplade gränser
+	Trust Center	Säkerhetscenter
+	Tue	tis
+	Turabian	Turabian
+	Turkish	Turkiska
+	Two	Två
+	Type	Typ
+	Type a command, e.g. "insert table"	Skriv ett kommando, t.ex. "infoga tabell"
+	Type a New List	Skriv en ny lista
+	Type a New List…	Skriv en ny lista…
+	Type at least one recipient.	Skriv minst en mottagare.
+	Type equations in LaTeX	Skriv ekvationer i LaTeX
+	Type equations in the linear format (UnicodeMath)	Skriv ekvationer i linjärt format (UnicodeMath)
+	Type in Equation	Skriv i ekvation
+	Type normal (non-math) text in the equation	Skriv normal (icke-matematisk) text i ekvationen
+	Type Text	Skriv text
+	Type the categories down the side and a column of values per series.	Skriv kategorierna längs sidan och en kolumn med värden per serie.
+	Type the field's name and its switches, for example PAGE \\* roman.	Skriv fältets namn och dess växlar, till exempel PAGE \\* roman.
+	Type the password to stop the protection.	Skriv lösenordet för att avsluta skyddet.
+	Type the recipients, or load them from a file.	Skriv mottagarna eller läs in dem från en fil.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Skriv taggnamnet för källan. Du kan lägga till mer information om källan senare genom att redigera den.
+	Type:	Typ:
+	Typing	Skrivning
+	Typing replaces selected text	Det du skriver ersätter markerad text
+	Ukrainian	Ukrainska
+	Unchecked symbol	Symbol för omarkerad
+	Underbar	Streck under
+	Underbrace	Klammer under
+	Underline	Understrykning
+	Underline color	Understrykningsfärg
+	Underline Words Only	Stryk endast under ord
+	Undo	Ångra
+	Undo Stroke	Ångra drag
+	Undo {action}	Ångra {action}
+	Unformatted Text	Oformaterad text
+	Ungroup	Dela upp grupp
+	Union	Union
+	Union of intersections	Union av snitt
+	Union with Limits	Union med gränser
+	Union with Lower Limit	Union med undre gräns
+	Union with Plus	Union med plus
+	Union with Subscript-Superscript Limits	Union med nedsänkta och upphöjda gränser
+	Unions and Intersections	Unioner och snitt
+	Unlink Fields	Ta bort länk till fält
+	Unlink\nCitations	Ta bort länk\ntill citat
+	Unlock Fields	Lås upp fält
+	Up	Upp
+	Up Diagonal Dots	Diagonala punkter uppåt
+	Up one level	En nivå upp
+	Update Field	Uppdatera fält
+	Update fields before printing	Uppdatera fält före utskrift
+	Update Index	Uppdatera register
+	Update Style to Match Selection	Uppdatera format så att det matchar markeringen
+	Update Styles from Template	Uppdatera format från mall
+	Update Table	Uppdatera tabell
+	Update Table of Figures	Uppdatera figurförteckning
+	Update to Match	Uppdatera så att det matchar
+	Update to Match Selection	Uppdatera så att det matchar markeringen
+	UPPERCASE	VERSALER
+	URGENT	BRÅDSKANDE
+	URL	URL
+	Use "a" before a consonant sound	Använd "a" före ett konsonantljud
+	Use "an" before a vowel sound	Använd "an" före ett vokalljud
+	Use an Existing List…	Använd en befintlig lista…
+	Use passim (five or more pages)	Använd passim (fem eller fler sidor)
+	Use system setting	Använd systeminställningen
+	Use the Insert key to switch overtype on and off	Använd Insert-tangenten för att växla överskrivning av och på
+	Use wildcards	Använd jokertecken
+	User Name	Användarnamn
+	User name:	Användarnamn:
+	Username	Användarnamn
+	Value	Värde
+	Vector A	Vektor A
+	Vector AB	Vektor AB
+	Version	Version
+	Version History	Versionshistorik
+	Version {version} ({build})	Version {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Versioner sparas medan dokumentet är öppet (en .docx-fil har inga versioner).
+	Vertical	Lodrät
+	Vertical Alignment	Lodrät justering
+	Vertical alignment:	Lodrät justering:
+	Vertical Bars	Lodstreck
+	Vertical Dots	Lodräta punkter
+	Vertical spacing:	Lodrätt avstånd:
+	Vietnamese	Vietnamesiska
+	View	Visa
+	View Alt Text…	Visa alternativ text…
+	View Gridlines	Visa stödlinjer
+	View Side by Side	Visa sida vid sida
+	View State	Visningsstatus
+	Views	Vyer
+	Visual effects	Visuella effekter
+	Voice	Röst
+	Volume	Volym
+	Volume Integral	Volymintegral
+	Volume Integral with Limits	Volymintegral med gränser
+	Volume Integral with Stacked Limits	Volymintegral med staplade gränser
+	W:	B:
+	Waiting for Zotero…	Väntar på Zotero…
+	Warm Gradient with Outline	Varm toning med kontur
+	Warnings ({n})	Varningar ({n})
+	Watermark	Vattenstämpel
+	Wave	Våg
+	Weather	Väder
+	web access isn't available here	webbåtkomst är inte tillgänglig här
+	Web Layout	Webblayout
+	Web page (*.html)	Webbsida (*.html)
+	Web\nLayout	Webb-\nlayout
+	Website	Webbplats
+	Wed	ons
+	Weight	Tjocklek
+	West	Väster
+	When merging records	Vid koppling av poster
+	When this document was first created	När dokumentet först skapades
+	When this document was most recently printed	När dokumentet senast skrevs ut
+	When this document was most recently saved	När dokumentet senast sparades
+	White Space	Tomt utrymme
+	White space	Tomt utrymme
+	Who the document properties name as author	Vem dokumentegenskaperna anger som författare
+	Whole document	Hela dokumentet
+	Whole page	Hela sidan
+	Whole Table	Hela tabellen
+	Whole words	Hela ord
+	Wide	Bred
+	Widow/Orphan Control	Änkor och föräldralösa rader
+	Widow/Orphan control	Änkor och föräldralösa rader
+	Width and spacing	Bredd och avstånd
+	Width:	Bredd:
+	Wildcards (regex)	Jokertecken (regex)
+	Window	Fönster
+	With:	Med:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 och senare
+	Word 97–2003	Word 97–2003
+	Word Count	Ordräkning
+	Word document	Word-dokument
+	Word document (*.docx)	Word-dokument (*.docx)
+	Word forms	Ordformer
+	Word Left	Ord åt vänster
+	Word level	Ordnivå
+	Word Right	Ord åt höger
+	Word XML Document (*.xml)	Word XML-dokument (*.xml)
+	WordArt	WordArt
+	WordArt Styles	WordArt-format
+	Words	Ord
+	Words only	Endast ord
+	Wrap Text	Radbyte
+	Wrap text	Radbyte
+	Wrap Text Sides	Sidor för radbyte
+	Wrap\nText	Rad-\nbyte
+	Write & Insert Fields	Skriv och infoga fält
+	Write a reply	Skriv ett svar
+	Write math here with the mouse or a pen.	Skriv matematik här med musen eller en penna.
+	Writing Style: Grammar	Skrivstil: grammatik
+	x bar	x streck
+	Year	År
+	Yes	Ja
+	Yields	Ger
+	Your changes will be lost if you don't save them.	Dina ändringar går förlorade om du inte sparar dem.
+	Your system doesn't report an animation setting, so animation effects stay on.	Systemet rapporterar ingen animeringsinställning, så animeringseffekterna är på.
+	Your system has animation effects turned off.	Systemet har animeringseffekter avstängda.
+	Your system has animation effects turned on.	Systemet har animeringseffekter påslagna.
+	Zoom	Zoom
+	Zoom In	Zooma in
+	Zoom Out	Zooma ut
+	Zoom to Page	Zooma till sida
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: avbrutet
+	Zotero: done	Zotero: klart
+	{cols}×{rows} Table	Tabell {cols}×{rows}
+	{contributors} contributors · {commits} commits	{contributors} bidragsgivare · {commits} commits
+	{count} items highlighted	{count} objekt markerade
+	{count} of {total} pages will print	{count} av {total} sidor skrivs ut
+	{count} paragraphs were changed.	{count} stycken ändrades.
+	{count} records; fields: {fields}	{count} poster; fält: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} är inte installerat på den här datorn, så dokumentet visas med {with}. Rader och sidor kan brytas annorlunda än med det ursprungliga teckensnittet.
+	{group} settings	Inställningar för {group}
+	{key}+Click to follow link	{key}+klicka för att följa länken
+	{language} is now the document's default language.	{language} är nu dokumentets standardspråk.
+	{name} (Press ENTER to Insert)	{name} (tryck på Retur för att infoga)
+	{name} already exists. Choose Save again to replace it.	{name} finns redan. Välj Spara igen för att ersätta den.
+	{name} can't be a folder's name.	{name} kan inte vara namnet på en mapp.
+	{name} is protected with a password.	{name} är skyddat med ett lösenord.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} har lagts till. Makrona finns under Mina tillägg och Visa › Makron.
+	{name} wasn't found.	{name} hittades inte.
+	{n} entries marked.	{n} poster markerade.
+	{n} lines	{n} rader
+	{n} of {of} recipients	{n} av {of} mottagare
+	{n} pt	{n} pt
+	{n} records	{n} poster
+	{n} revisions	{n} revideringar
+	{selected} of {words} words	{selected} av {words} ord
+	{size} pt	{size} pt
+	{words} words	{words} ord
+	{w} × {h} in	{w} × {h} tum
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	”{text}” ({row}, {series}) är inte ett tal.
+	← Find	← Sök
+	✓ None	✓ Ingen
+	➕ New comment	➕ Ny kommentar
+	📂  Browse…	📂  Bläddra…

@@ -51,8 +51,8 @@ fn the_first_supported_preferred_language_wins() {
     assert_eq!(first_supported(["en-US", "ja-JP"]), Some(Lang::EN));
     assert_eq!(first_supported([UNSUPPORTED, "qtz"]), None);
     assert_eq!(first_supported(["fr-FR", "de-DE"]), Some(lang("fr")));
-    assert_eq!(first_supported(["nl-NL", "de-DE"]), Some(lang("de")));
-    assert_eq!(first_supported(["nl-NL", UNSUPPORTED]), None);
+    assert_eq!(first_supported(["ka-GE", "de-DE"]), Some(lang("de")));
+    assert_eq!(first_supported(["ka-GE", UNSUPPORTED]), None);
     assert_eq!(first_supported([]), None);
 }
 
@@ -779,7 +779,7 @@ fn hungarian_locales_and_saved_preference_work_without_changing_the_document() {
     for tag in ["hu", "hu-HU", "hu_HU.UTF-8", "HU_hu.UTF-8@euro", "hu-Latn-HU"] {
         assert_eq!(lang_from_tag(tag), Some(hu), "{tag}");
     }
-    assert_eq!(first_supported(["sv-SE", "hu-HU", "en-US"]), Some(hu));
+    assert_eq!(first_supported([UNSUPPORTED, "hu-HU", "en-US"]), Some(hu));
     assert_eq!(normalize_pref("HU"), Some("hu"));
     let mut app = crate::WordApp::new(doc4me_engine::Session::new(doc4me_engine::sample::sample_document()), Default::default());
     let before = serde_json::to_value(&app.session.doc).unwrap();
@@ -913,6 +913,48 @@ fn british_english_and_canadian_french_follow_their_regions() {
     for tag in ["es-MX", "es_MX.UTF-8", "es-419", "es-ES"] {
         assert_eq!(lang_from_tag(tag), Some(lang("es")), "{tag}");
     }
+}
+
+/// Catalogs written whole, one entry per interface string: the code, the language's own name and
+/// locale tags that resolve to it.
+const WHOLE_CATALOGS: [(&str, &str, &[&str]); 4] = [
+    ("nl", "Nederlands", &["nl", "nl-NL", "nl_BE.UTF-8"]),
+    ("sv", "Svenska", &["sv", "sv-SE", "sv_FI.UTF-8"]),
+    ("da", "Dansk", &["da", "da-DK", "da_DK.UTF-8"]),
+    ("nb", "Norsk bokmål", &["nb", "nb-NO", "no", "no_NO.UTF-8"]),
+];
+
+/// Each whole catalog resolves from its locales, translates every interface string, and is drawn
+/// by the bundled interface faces (no system fallback needed for its letters).
+#[test]
+fn whole_catalogs_resolve_translate_everything_and_draw_with_bundled_faces() {
+    use std::collections::HashSet;
+    let keys = |source| parse_entries(source).0.into_iter().map(|e| e.source).collect::<HashSet<_>>();
+    let reference = keys(lang("en-gb").0.source);
+    let db = doc4me_fonts::FontDb::with_font_dirs(Vec::new());
+    let faces: Vec<_> = ["Regular", "Medium", "SemiBold"].iter().map(|style| db.face("Inter", style)).collect();
+    for face in &faces {
+        assert_eq!(face.family, "Inter", "must use the bundled interface face");
+    }
+    for (code, name, tags) in WHOLE_CATALOGS {
+        let l = lang(code);
+        assert_eq!(l.name(), name);
+        for tag in tags {
+            assert_eq!(lang_from_tag(tag), Some(l), "{tag}");
+        }
+        assert_eq!(keys(l.0.source), reference, "{code} translates every interface string");
+        assert_ne!(tr(l, "Insert"), "Insert", "{code}");
+        assert_eq!(l.editing_lang(), None);
+        let (entries, errors) = parse_entries(l.0.source);
+        assert!(errors.is_empty(), "{code}: {errors:?}");
+        let letters: HashSet<char> = entries.iter().flat_map(|e| e.translation.chars()).filter(|c| c.is_alphabetic() && !c.is_ascii()).collect();
+        for face in &faces {
+            for ch in &letters {
+                assert_ne!(face.glyph_for(*ch), 0, "{code}: Inter lacks {ch:?}");
+            }
+        }
+    }
+    assert_eq!(lang_from_tag("nn-NO"), None, "Nynorsk has no catalog of its own yet");
 }
 
 #[test]
@@ -1163,7 +1205,7 @@ fn thai_locales_and_saved_preference_work_without_changing_the_document() {
     for tag in ["th", "th-TH", "th_TH.UTF-8", "TH_th.UTF-8", "th-TH-u-nu-thai", "th-Thai-TH"] {
         assert_eq!(lang_from_tag(tag), Some(th), "{tag}");
     }
-    assert_eq!(first_supported(["sv-SE", "th-TH", "en-US"]), Some(th));
+    assert_eq!(first_supported([UNSUPPORTED, "th-TH", "en-US"]), Some(th));
     assert_eq!(normalize_pref("TH"), Some("th"));
     assert_eq!(th.name(), "ไทย");
     assert!(!th.uses_cjk());
