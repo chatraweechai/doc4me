@@ -15,6 +15,7 @@ doc4me-fonts = { workspace = true }
 doc4me-layout = { workspace = true }
 doc4me-render = { workspace = true }
 doc4me-proof = { workspace = true }
+icu_segmenter = { workspace = true }
 doc4me-docx = { workspace = true }
 doc4me-docbin = { workspace = true }
 doc4me-pdf = { workspace = true }

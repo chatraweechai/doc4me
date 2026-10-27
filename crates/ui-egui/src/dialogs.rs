@@ -959,7 +959,7 @@ impl Dialog {
         if let Some(d) = crate::dialogs_object::open(name, app) {
             return Some(Dialog::Object(Box::new(d)));
         }
-        if matches!(name, "insertFormField" | "formFieldOptions" | "formFieldHelp" | "sectionProtection") {
+        if matches!(name, "insertFormField" | "formFieldOptions" | "formFieldHelp" | "sectionProtection" | "autoSummarize") {
             return crate::dialogs_forms::open(name, app).map(|d| Dialog::Forms(Box::new(d)));
         }
         if matches!(name, "compare" | "combine" | "autoCorrect" | "restrictEditing" | "acceptRejectChanges" | "highlightChanges") {
@@ -2021,8 +2021,13 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 ui.add(crate::widgets::text_line(page));
             });
             let (ok, cancel) = buttons(ui, tl!("Go To"));
-            if ok && let Ok(n) = page.trim().parse::<u64>() {
-                let _ = app.run("edit.goto", json!({"page": n}));
+            // Word's destinations as well as a page number: p3, s2, l10, s2p3, +2, -1, %50.
+            if ok
+                && !page.trim().is_empty()
+                && let Err(e) = app.run("edit.goto", json!({"to": page.trim()}))
+            {
+                app.status(e);
+                return false;
             }
             ok || cancel
         }

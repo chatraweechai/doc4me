@@ -2902,3 +2902,14 @@ spacing	Normal	ปกติ
 	Section Protection	การป้องกันส่วน
 	Section {n}	ส่วนที่ {n}
 	Select sections…	เลือกส่วน…
+	AutoSummarize	สรุปอัตโนมัติ
+	Create a new document and put the summary there	สร้างเอกสารใหม่และใส่บทสรุปไว้ที่นั่น
+	Highlight key points	เน้นประเด็นสำคัญ
+	Insert an executive summary or abstract at the top of the document	แทรกบทสรุปผู้บริหารหรือบทคัดย่อที่ด้านบนของเอกสาร
+	Length of summary	ความยาวของบทสรุป
+	Percent of original:	เปอร์เซ็นต์ของต้นฉบับ:
+	Summary: {words} of {of} words	บทสรุป: {words} จาก {of} คำ
+	Type of summary	ชนิดของบทสรุป
+	Update document statistics	อัปเดตสถิติของเอกสาร
+	{n} sentences	{n} ประโยค
+	{n} words or less	ไม่เกิน {n} คำ

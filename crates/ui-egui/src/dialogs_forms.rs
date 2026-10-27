@@ -176,6 +176,35 @@ pub enum FormDialog {
     Sections {
         protected: Vec<bool>,
     },
+    /// AutoSummarize: how the summary is shown and how long it is.
+    Summarize {
+        /// highlight, top or newDocument.
+        kind: String,
+        /// Index into [`SUMMARY_LENGTHS`].
+        length: usize,
+        update_properties: bool,
+    },
+}
+
+/// AutoSummarize's lengths, as Word offers them: (sentences, words, percent).
+pub const SUMMARY_LENGTHS: [(Option<u64>, Option<u64>, Option<u64>); 8] = [
+    (Some(10), None, None),
+    (Some(20), None, None),
+    (None, Some(100), None),
+    (None, Some(500), None),
+    (None, None, Some(10)),
+    (None, None, Some(25)),
+    (None, None, Some(50)),
+    (None, None, Some(75)),
+];
+
+fn summary_length_label((sentences, words, percent): (Option<u64>, Option<u64>, Option<u64>)) -> String {
+    match (sentences, words, percent) {
+        (Some(n), _, _) => crate::i18n::fmt(tl!("{n} sentences"), &[("n", &n.to_string())]),
+        (_, Some(n), _) => crate::i18n::fmt(tl!("{n} words or less"), &[("n", &n.to_string())]),
+        (_, _, Some(n)) => format!("{n}%"),
+        _ => String::new(),
+    }
 }
 
 impl FormDialog {
@@ -185,6 +214,7 @@ impl FormDialog {
             FormDialog::Options { .. } => "formFieldOptions",
             FormDialog::Help { .. } => "formFieldHelp",
             FormDialog::Sections { .. } => "sectionProtection",
+            FormDialog::Summarize { .. } => "autoSummarize",
         }
     }
 
@@ -199,6 +229,7 @@ impl FormDialog {
             },
             FormDialog::Help { .. } => "Form Field Help Text",
             FormDialog::Sections { .. } => "Section Protection",
+            FormDialog::Summarize { .. } => "AutoSummarize",
         }
     }
 }
@@ -208,6 +239,7 @@ impl FormDialog {
 pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
     match name {
         "insertFormField" => Some(FormDialog::Insert { kind: "text".into() }),
+        "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
         "sectionProtection" => {
             let v = app.session.run("review.protectSections", &json!({})).ok()?;
             let protected = v["sections"].as_array().map(|a| a.iter().map(|b| b.as_bool().unwrap_or(true)).collect()).unwrap_or_default();
@@ -231,6 +263,51 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
 /// Draws the dialog; returns true to close it.
 pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
     match d {
+        FormDialog::Summarize { kind, length, update_properties } => {
+            ui.label(egui::RichText::new(tl!("Type of summary")).strong());
+            for (k, label) in [
+                ("highlight", "Highlight key points"),
+                ("top", "Insert an executive summary or abstract at the top of the document"),
+                ("newDocument", "Create a new document and put the summary there"),
+            ] {
+                ui.radio_value(kind, k.to_string(), tl!(label));
+            }
+            ui.add_space(6.0);
+            ui.label(egui::RichText::new(tl!("Length of summary")).strong());
+            ui.horizontal(|ui| {
+                ui.label(tl!("Percent of original:"));
+                let shown = summary_length_label(SUMMARY_LENGTHS[(*length).min(SUMMARY_LENGTHS.len() - 1)]);
+                egui::ComboBox::from_id_salt("summary_length").selected_text(shown).show_ui(ui, |ui| {
+                    for (i, l) in SUMMARY_LENGTHS.iter().enumerate() {
+                        ui.selectable_value(length, i, summary_length_label(*l));
+                    }
+                });
+            });
+            ui.checkbox(update_properties, tl!("Update document statistics"));
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok {
+                let (sentences, words, percent) = SUMMARY_LENGTHS[(*length).min(SUMMARY_LENGTHS.len() - 1)];
+                let mut p = json!({"type": kind.as_str(), "updateProperties": *update_properties});
+                if let Some(n) = sentences {
+                    p["sentences"] = json!(n);
+                }
+                if let Some(n) = words {
+                    p["words"] = json!(n);
+                }
+                if let Some(n) = percent {
+                    p["percent"] = json!(n);
+                }
+                match app.run("tools.autoSummarize", p) {
+                    Ok(v) => {
+                        let (w, of) = (v["words"].as_u64().unwrap_or(0), v["of"].as_u64().unwrap_or(0));
+                        app.status(crate::i18n::fmt(tl!("Summary: {words} of {of} words"), &[("words", &w.to_string()), ("of", &of.to_string())]));
+                        return true;
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
         FormDialog::Sections { protected } => {
             ui.label(tl!("Protected sections:"));
             egui::Frame::group(ui.style()).show(ui, |ui| {
@@ -632,5 +709,38 @@ mod tests {
         h.state_mut().session.run("select.collapse", &json!({})).unwrap();
         h.state_mut().run("developer.formFieldOptions", json!({})).ok();
         h.run_steps(2);
+    }
+
+    #[test]
+    fn auto_summarize_dialog_puts_the_summary_at_the_top() {
+        let mut d = doc4me_doc::Document::from_text("Solar panels turn sunlight into electricity.");
+        for t in [
+            "My cat likes the garden.",
+            "Solar panels on roofs make electricity for homes.",
+            "Lunch was late.",
+            "Cheap solar panels made electricity common.",
+        ] {
+            d.body.push(std::sync::Arc::new(doc4me_doc::Block::Para(doc4me_doc::Paragraph::with_text(t, Default::default()))));
+        }
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(d), Services::default()));
+        h.state_mut().run("tools.autoSummarize", json!({})).unwrap();
+        h.run_steps(3);
+        // Word's defaults: highlight, 25%, update the statistics.
+        assert!(matches!(form(&mut h), FormDialog::Summarize { kind, length: 5, update_properties: true } if kind == "highlight"));
+        h.get_by_label("Insert an executive summary or abstract at the top of the document").click();
+        h.run_steps(1);
+        if let FormDialog::Summarize { length, .. } = form(&mut h) {
+            // 10%: one sentence of five.
+            *length = 4;
+        }
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        let doc = &h.state().session.doc;
+        assert_eq!(doc.body.len(), 6, "a paragraph of its own");
+        let top = doc.para(doc4me_doc::StoryRef::Body, &doc4me_doc::Path::top(0)).unwrap();
+        assert!(top.text.contains("olar panels"), "{:?}", top.text);
+        assert_eq!(doc.core.keywords.split(", ").next(), Some("electricity"));
     }
 }

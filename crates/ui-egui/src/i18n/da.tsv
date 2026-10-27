@@ -2890,3 +2890,14 @@
 	Section Protection	Sektionsbeskyttelse
 	Section {n}	Sektion {n}
 	Select sections…	Vælg sektioner…
+	AutoSummarize	Autoresumé
+	Create a new document and put the summary there	Opret et nyt dokument, og placer resuméet der
+	Highlight key points	Fremhæv nøglepunkter
+	Insert an executive summary or abstract at the top of the document	Indsæt et resumé eller abstrakt øverst i dokumentet
+	Length of summary	Resuméets længde
+	Percent of original:	Procent af originalen:
+	Summary: {words} of {of} words	Resumé: {words} af {of} ord
+	Type of summary	Resumétype
+	Update document statistics	Opdater dokumentstatistik
+	{n} sentences	{n} sætninger
+	{n} words or less	Højst {n} ord

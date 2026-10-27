@@ -2890,3 +2890,14 @@
 	Section Protection	Inndelingsbeskyttelse
 	Section {n}	Inndeling {n}
 	Select sections…	Velg inndelinger…
+	AutoSummarize	Autosammendrag
+	Create a new document and put the summary there	Opprett et nytt dokument, og legg sammendraget der
+	Highlight key points	Uthev nøkkelpunkter
+	Insert an executive summary or abstract at the top of the document	Sett inn et sammendrag øverst i dokumentet
+	Length of summary	Sammendragets lengde
+	Percent of original:	Prosent av originalen:
+	Summary: {words} of {of} words	Sammendrag: {words} av {of} ord
+	Type of summary	Type sammendrag
+	Update document statistics	Oppdater dokumentstatistikk
+	{n} sentences	{n} setninger
+	{n} words or less	Høyst {n} ord

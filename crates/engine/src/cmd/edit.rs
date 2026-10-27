@@ -103,7 +103,7 @@ pub fn specs() -> Vec<CommandSpec> {
             .params(r#"{"text": string, "with": string (^p ^t ^& ^c …; \\1 with wildcards), …options of edit.find}"#),
         CommandSpec::new("edit.goto", "Go To", "Home › Editing › Find", goto)
             .key(super::mac_or("Mod+Alt+G / F5", "Mod+G / Mod+Alt+G / F5"))
-            .params(r#"{"page"?: n, "bookmark"?: string, "paragraph"?: n}"#)
+            .params(r#"{"page"?: n, "bookmark"?: string, "paragraph"?: n, "to"?: "p3" | "s2" | "l10" | "s2p3" | "p3l4" | "+2" | "-1" | "%50" (Word's Go To destinations; a bare number is a page)}"#)
             .pure(),
         CommandSpec::new("edit.goBack", "Go Back", "Navigation", |s, _| {
             let p = s.go_back().ok_or_else(|| CmdError::Failed("no edits to go back to yet".into()))?;
@@ -729,7 +729,139 @@ fn replace_all(s: &mut Session, v: &Value) -> CmdResult {
     Ok(json!({"replaced": n}))
 }
 
+/// One part of a Go To destination.
+#[derive(Clone, Copy, Debug, PartialEq)]
+enum Dest {
+    Page(u64),
+    Section(u64),
+    Line(u64),
+    /// Pages on (+) or back (−) from the caret's page.
+    Relative(i64),
+    /// Percent through the document.
+    Percent(u64),
+}
+
+/// Word's Go To destinations: `p3` (page 3), `s2` (section 2), `l10` (line 10), together
+/// (`s2p3`: page 3 of section 2, `p3l4`: line 4 of page 3), `+2` / `-1` (pages on or back),
+/// `%50` (halfway); a bare number is a page. Letters in either case, Thai digits as well as
+/// ASCII ones; spaces are ignored.
+fn parse_destination(t: &str) -> Option<Vec<Dest>> {
+    let t: String = t
+        .chars()
+        .filter(|c| !c.is_whitespace())
+        .map(|c| match c {
+            '๐'..='๙' => char::from(b'0' + (c as u32 - '๐' as u32) as u8),
+            c => c.to_ascii_lowercase(),
+        })
+        .collect();
+    if t.is_empty() || t.len() > 64 {
+        return None;
+    }
+    let mut out = Vec::new();
+    let mut chars = t.chars().peekable();
+    while let Some(&c) = chars.peek() {
+        let kind = if c.is_ascii_digit() {
+            None
+        } else {
+            chars.next();
+            Some(c)
+        };
+        let mut digits = String::new();
+        while let Some(&d) = chars.peek() {
+            if !d.is_ascii_digit() {
+                break;
+            }
+            digits.push(d);
+            chars.next();
+        }
+        let n: Option<u64> = digits.parse().ok().filter(|n| *n <= 1_000_000);
+        out.push(match (kind, n) {
+            (None | Some('p'), Some(n)) => Dest::Page(n.max(1)),
+            (Some('s'), Some(n)) => Dest::Section(n.max(1)),
+            (Some('l'), Some(n)) => Dest::Line(n.max(1)),
+            (Some('%'), Some(n)) => Dest::Percent(n.min(100)),
+            (Some('+'), n) => Dest::Relative(n.unwrap_or(1) as i64),
+            (Some('-'), n) => Dest::Relative(-(n.unwrap_or(1) as i64)),
+            _ => return None,
+        });
+    }
+    (!out.is_empty()).then_some(out)
+}
+
+/// Where a destination is: the start of the line it names (the first line of the page or
+/// section it names), with that line's page.
+fn destination(s: &mut Session, to: &[Dest]) -> Option<(Pos, usize)> {
+    let l = s.layout();
+    // Every body line in order: (page, start).
+    let mut lines: Vec<(usize, Pos)> = Vec::new();
+    for (pi, page) in l.pages.iter().enumerate() {
+        for it in &page.items {
+            if let doc4me_layout::Placed::Lines { story: StoryRef::Body, path, para, l0, l1, .. } = it {
+                for li in *l0..*l1 {
+                    if let Some(ln) = para.lines.get(li) {
+                        lines.push((pi, Pos { story: StoryRef::Body, path: path.clone(), off: ln.start }));
+                    }
+                }
+            }
+        }
+    }
+    if lines.is_empty() {
+        return None;
+    }
+    let pages = l.pages.len();
+    let current = s.page_hint.min(pages.saturating_sub(1));
+    // The pages the destination narrows to, then the line within them.
+    let (mut first, mut last) = (0usize, pages.saturating_sub(1));
+    let mut line = None;
+    for d in to {
+        match *d {
+            Dest::Section(n) => {
+                let in_section: Vec<usize> = (0..pages).filter(|i| l.pages[*i].section + 1 == n as usize).collect();
+                let (a, b) = match (in_section.first(), in_section.last()) {
+                    (Some(a), Some(b)) => (*a, *b),
+                    // Past the last section: the last one.
+                    _ => {
+                        let sec = l.pages.last().map(|p| p.section).unwrap_or(0);
+                        let v: Vec<usize> = (0..pages).filter(|i| l.pages[*i].section == sec).collect();
+                        (v.first().copied().unwrap_or(0), v.last().copied().unwrap_or(0))
+                    }
+                };
+                (first, last) = (a, b);
+            }
+            Dest::Page(n) => {
+                let p = (first + n as usize - 1).min(last);
+                (first, last) = (p, p);
+            }
+            Dest::Relative(n) => {
+                let p = (current as i64 + n).clamp(0, pages as i64 - 1) as usize;
+                (first, last) = (p, p);
+            }
+            Dest::Percent(pc) => {
+                let i = ((lines.len() as u64 * pc) / 100).min(lines.len() as u64 - 1) as usize;
+                return lines.get(i).map(|(pg, pos)| (pos.clone(), *pg));
+            }
+            Dest::Line(n) => line = Some(n as usize),
+        }
+    }
+    let within: Vec<&(usize, Pos)> = lines.iter().filter(|(pg, _)| (first..=last).contains(pg)).collect();
+    let pick = match line {
+        Some(n) => within.get(n - 1).or(within.last()),
+        None => within.first(),
+    };
+    pick.map(|(pg, pos)| (pos.clone(), *pg))
+}
+
 fn goto(s: &mut Session, v: &Value) -> CmdResult {
+    if let Some(t) = p::str(v, "to") {
+        let to = parse_destination(t).ok_or_else(|| CmdError::Params(format!("{t:?} isn't a destination (p3, s2, l10, s2p3, +2, -1, %50)")))?;
+        if let Some((at, page)) = destination(s, &to) {
+            s.sel = Selection::caret(at);
+            s.page_hint = page;
+            s.goal_x = None;
+        }
+        s.ui_requests.push(json!({"scrollTo": "caret"}));
+        return sel_result(s);
+    }
     if let Some(pg) = p::u64(v, "page") {
         let l = s.layout();
         let idx = (pg.max(1) as usize - 1).min(l.pages.len().saturating_sub(1));

@@ -40,6 +40,7 @@ pub mod references;
 pub mod review;
 pub mod smart_art;
 pub mod speech;
+pub mod summarize;
 pub mod table;
 pub mod table_draw;
 pub mod table_resize;
@@ -105,6 +106,7 @@ pub fn registry() -> Registry {
     v.extend(speech::specs());
     v.extend(controls::specs());
     v.extend(forms::specs());
+    v.extend(summarize::specs());
     Registry::new(v)
 }
 

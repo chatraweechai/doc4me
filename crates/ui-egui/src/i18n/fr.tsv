@@ -2890,3 +2890,14 @@ spacing	Normal	Normal
 	Section Protection	Protection des sections
 	Section {n}	Section {n}
 	Select sections…	Sélectionner les sections…
+	AutoSummarize	Synthèse automatique
+	Create a new document and put the summary there	Créer un nouveau document et y placer la synthèse
+	Highlight key points	Surligner les points clés
+	Insert an executive summary or abstract at the top of the document	Insérer une synthèse ou un résumé au début du document
+	Length of summary	Longueur de la synthèse
+	Percent of original:	Pourcentage de l’original :
+	Summary: {words} of {of} words	Synthèse : {words} mots sur {of}
+	Type of summary	Type de synthèse
+	Update document statistics	Mettre à jour les statistiques du document
+	{n} sentences	{n} phrases
+	{n} words or less	{n} mots ou moins

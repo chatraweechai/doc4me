@@ -1214,6 +1214,7 @@ dependencies = [
  "doc4me-pdf",
  "doc4me-proof",
  "doc4me-render",
+ "icu_segmenter",
  "image",
  "js-sys",
  "log",

@@ -2901,3 +2901,14 @@ spacing	Normal	Tavaline
 	Section Protection	Jaotiste kaitse
 	Section {n}	Jaotis {n}
 	Select sections…	Vali jaotised…
+	AutoSummarize	Automaatkokkuvõte
+	Create a new document and put the summary there	Loo uus dokument ja pane kokkuvõte sinna
+	Highlight key points	Tõsta esile põhipunktid
+	Insert an executive summary or abstract at the top of the document	Lisa kokkuvõte või annotatsioon dokumendi algusse
+	Length of summary	Kokkuvõtte pikkus
+	Percent of original:	Protsent originaalist:
+	Summary: {words} of {of} words	Kokkuvõte: {words} sõna {of}-st
+	Type of summary	Kokkuvõtte tüüp
+	Update document statistics	Värskenda dokumendi statistikat
+	{n} sentences	{n} lauset
+	{n} words or less	Kuni {n} sõna

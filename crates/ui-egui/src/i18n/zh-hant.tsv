@@ -2894,3 +2894,14 @@ spacing	Normal	標準
 	Section Protection	節保護
 	Section {n}	第 {n} 節
 	Select sections…	選取節…
+	AutoSummarize	自動摘要
+	Create a new document and put the summary there	建立新文件並將摘要放在其中
+	Highlight key points	醒目提示重點
+	Insert an executive summary or abstract at the top of the document	在文件頂端插入摘要
+	Length of summary	摘要長度
+	Percent of original:	佔原文的百分比：
+	Summary: {words} of {of} words	摘要：{words} 個字（共 {of} 個）
+	Type of summary	摘要類型
+	Update document statistics	更新文件統計資料
+	{n} sentences	{n} 句
+	{n} words or less	不超過 {n} 個字

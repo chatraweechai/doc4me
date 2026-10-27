@@ -2893,3 +2893,14 @@ spacing	Normal	標準
 	Section Protection	セクションの保護
 	Section {n}	セクション {n}
 	Select sections…	セクションの選択…
+	AutoSummarize	自動要約
+	Create a new document and put the summary there	新しい文書を作成して要約を挿入する
+	Highlight key points	要点を強調表示する
+	Insert an executive summary or abstract at the top of the document	文書の先頭に要約を挿入する
+	Length of summary	要約の長さ
+	Percent of original:	元の文書に対する割合:
+	Summary: {words} of {of} words	要約: {of} 語中 {words} 語
+	Type of summary	要約の種類
+	Update document statistics	文書の統計情報を更新する
+	{n} sentences	{n} 文
+	{n} words or less	{n} 語以下

@@ -2886,3 +2886,14 @@
 	Section Protection	Section Protection
 	Section {n}	Section {n}
 	Select sections…	Select sections…
+	AutoSummarize	AutoSummarize
+	Create a new document and put the summary there	Create a new document and put the summary there
+	Highlight key points	Highlight key points
+	Insert an executive summary or abstract at the top of the document	Insert an executive summary or abstract at the top of the document
+	Length of summary	Length of summary
+	Percent of original:	Percent of original:
+	Summary: {words} of {of} words	Summary: {words} of {of} words
+	Type of summary	Type of summary
+	Update document statistics	Update document statistics
+	{n} sentences	{n} sentences
+	{n} words or less	{n} words or less

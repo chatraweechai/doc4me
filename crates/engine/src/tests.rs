@@ -5418,3 +5418,37 @@ fn grammar_settings_turn_rules_off() {
     assert!(s.run("file.options", &json!({"grammarRules": {"style": false}})).is_err());
     assert!(s.run("file.options", &json!({"grammarRules": {"spacing": "no"}})).is_err());
 }
+
+#[test]
+fn go_to_takes_word_s_destinations() {
+    // Section 1: "Intro"; section 2 (new page): 150 numbered lines, so four or more pages.
+    let mut s = Session::new(doc4me_doc::Document::from_text("Intro"));
+    run(&mut s, "caret.docEnd", json!({}));
+    run(&mut s, "layout.break", json!({"kind": "nextPage"}));
+    for i in 1..=150 {
+        run(&mut s, "text.insert", json!({"text": format!("Line {i}")}));
+        run(&mut s, "text.newParagraph", json!({}));
+    }
+    let pages = s.layout().pages.len();
+    assert!(pages >= 4, "{pages} pages");
+    let at = |s: &mut Session, to: &str| {
+        s.run("edit.goto", &json!({"to": to})).unwrap_or_else(|e| panic!("{to}: {e}"));
+        (s.page_hint, s.doc.para_at(&s.sel.focus).map(|p| p.text.clone()).unwrap_or_default(), s.sel.focus.off)
+    };
+    assert_eq!(at(&mut s, "p1").0, 0);
+    assert_eq!(at(&mut s, "2").0, 1, "a bare number is a page");
+    assert_eq!(at(&mut s, "s2"), (1, "Line 1".into(), 0), "section 2 starts on page 2");
+    assert_eq!(at(&mut s, "s2p2").0, 2, "page 2 of section 2");
+    assert_eq!(at(&mut s, "+1").0, 3, "a page on");
+    assert_eq!(at(&mut s, "-2").0, 1, "two back");
+    assert_eq!(at(&mut s, "l2").1, "Line 1", "the document's second line");
+    assert_eq!(at(&mut s, "S2L3").1, "Line 3", "line 3 of section 2, any case");
+    assert_eq!(at(&mut s, "s๒p๒").0, 2, "Thai digits");
+    let (page, last, _) = at(&mut s, "%100");
+    assert_eq!(page, pages - 1, "all the way");
+    assert!(last.is_empty() || last == "Line 150", "{last:?}");
+    assert_eq!(at(&mut s, "p999").0, pages - 1, "past the end: the last page");
+    for bad in ["x", "p", "pp3", "3x", ""] {
+        assert!(s.run("edit.goto", &json!({"to": bad})).is_err(), "{bad:?}");
+    }
+}

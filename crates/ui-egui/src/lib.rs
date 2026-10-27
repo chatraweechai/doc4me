@@ -1833,6 +1833,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "developer.formFieldOptions" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formFieldOptions"),
         "developer.formFieldHelp" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formFieldHelp"),
         "review.protectSections" if !has("protected") => Some("sectionProtection"),
+        // AutoSummarize without a type asks how to show the summary.
+        "tools.autoSummarize" if !has("type") => Some("autoSummarize"),
         // Enclose Characters without a shape (null is one: it takes the enclosure away).
         "format.enclose" if params.get("shape").is_none() => Some("enclose"),
         // Footnote and Endnote without settings shows its dialog (#385).
@@ -1904,6 +1906,7 @@ fn discards_document(id: &str, params: &Value) -> bool {
         "file.open" => params.get("path").is_some(),
         "mailings.finish" => params.get("path").and_then(Value::as_str).is_none(),
         "mailings.print" => true,
+        "tools.autoSummarize" => params.get("type").and_then(Value::as_str) == Some("newDocument"),
         _ => false,
     }
 }

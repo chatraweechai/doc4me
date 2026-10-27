@@ -2890,3 +2890,14 @@
 	Section Protection	Osien suojaus
 	Section {n}	Osa {n}
 	Select sections…	Valitse osat…
+	AutoSummarize	Automaattinen tiivistelmä
+	Create a new document and put the summary there	Luo uusi tiedosto ja lisää tiivistelmä siihen
+	Highlight key points	Korosta tärkeimmät kohdat
+	Insert an executive summary or abstract at the top of the document	Lisää tiivistelmä asiakirjan alkuun
+	Length of summary	Tiivistelmän pituus
+	Percent of original:	Prosenttia alkuperäisestä:
+	Summary: {words} of {of} words	Tiivistelmä: {words}/{of} sanaa
+	Type of summary	Tiivistelmän tyyppi
+	Update document statistics	Päivitä asiakirjan tilastot
+	{n} sentences	{n} virkettä
+	{n} words or less	Enintään {n} sanaa

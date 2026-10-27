@@ -2894,3 +2894,14 @@ spacing	Normal	Normál
 	Section Protection	Szakaszvédelem
 	Section {n}	{n}. szakasz
 	Select sections…	Szakaszok kiválasztása…
+	AutoSummarize	Automatikus összefoglaló
+	Create a new document and put the summary there	Új dokumentum létrehozása az összefoglalóval
+	Highlight key points	Fő pontok kiemelése
+	Insert an executive summary or abstract at the top of the document	Vezetői összefoglaló vagy kivonat beszúrása a dokumentum elejére
+	Length of summary	Az összefoglaló hossza
+	Percent of original:	Az eredeti százaléka:
+	Summary: {words} of {of} words	Összefoglaló: {words} / {of} szó
+	Type of summary	Az összefoglaló típusa
+	Update document statistics	Dokumentumstatisztika frissítése
+	{n} sentences	{n} mondat
+	{n} words or less	Legfeljebb {n} szó

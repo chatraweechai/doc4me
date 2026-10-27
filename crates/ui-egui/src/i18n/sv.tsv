@@ -2890,3 +2890,14 @@
 	Section Protection	Avsnittsskydd
 	Section {n}	Avsnitt {n}
 	Select sections…	Välj avsnitt…
+	AutoSummarize	Autosammanfatta
+	Create a new document and put the summary there	Skapa ett nytt dokument och placera sammanfattningen där
+	Highlight key points	Markera viktiga punkter
+	Insert an executive summary or abstract at the top of the document	Infoga en sammanfattning överst i dokumentet
+	Length of summary	Sammanfattningens längd
+	Percent of original:	Procent av originalet:
+	Summary: {words} of {of} words	Sammanfattning: {words} av {of} ord
+	Type of summary	Typ av sammanfattning
+	Update document statistics	Uppdatera dokumentstatistik
+	{n} sentences	{n} meningar
+	{n} words or less	Högst {n} ord

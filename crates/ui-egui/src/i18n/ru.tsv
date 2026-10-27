@@ -2921,3 +2921,14 @@ spacing	Normal	Обычный
 	Section Protection	Защита разделов
 	Section {n}	Раздел {n}
 	Select sections…	Выбрать разделы…
+	AutoSummarize	Автореферат
+	Create a new document and put the summary there	Создать новый документ и поместить в него реферат
+	Highlight key points	Выделить основные положения
+	Insert an executive summary or abstract at the top of the document	Вставить реферат или аннотацию в начало документа
+	Length of summary	Длина реферата
+	Percent of original:	Процент от оригинала:
+	Summary: {words} of {of} words	Реферат: {words} из {of} слов
+	Type of summary	Тип реферата
+	Update document statistics	Обновить статистику документа
+	{n} sentences	{n} предложений
+	{n} words or less	Не более {n} слов

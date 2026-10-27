@@ -18,7 +18,7 @@ dlg-016	wdDialogEditCreatePublisher	732	Macintosh-only. For information about th
 dlg-017	wdDialogEditFind	112	Find, Replace, Direction, MatchCase, WholeWord, PatternMatch, SoundsLike, FindNext, ReplaceOne, ReplaceAll, Format, Wrap, FindAllWordForms, MatchByte, FuzzyFind, Destination, CorrectEnd, MatchKashida, MatchDiacritics, MatchAlefHamza, MatchControl	edit.find	registry		
 dlg-018	wdDialogEditFrame	458	Wrap, WidthRule, FixedWidth, HeightRule, FixedHeight, PositionHorz, PositionHorzRel, DistFromText, PositionVert, PositionVertRel, DistVertFromText, MoveWithText, LockAnchor, RemoveFrame	-	registry		frames
 dlg-019	wdDialogEditGoTo	896	Find, Replace, Direction, MatchCase, WholeWord, PatternMatch, SoundsLike, FindNext, ReplaceOne, ReplaceAll, Format, Wrap, FindAllWordForms, MatchByte, FuzzyFind, Destination, CorrectEnd, MatchKashida, MatchDiacritics, MatchAlefHamza, MatchControl	edit.goto	registry		
-dlg-020	wdDialogEditGoToOld	811	(none)	-	registry		legacy
+dlg-020	wdDialogEditGoToOld	811	(none)	edit.goto	registry		Go To (old): Word's destinations typed as text — p3, s2, l10, s2p3, p3l4, +2, -1, %50; a bare number is a page
 dlg-021	wdDialogEditLinks	124	UpdateMode, Locked, SavePictureInDoc, UpdateNow, OpenSource, KillLink, Link, Application, Item, FileName, PreserveFormatLinkUpdate	-	registry		Edit Links to Files
 dlg-022	wdDialogEditObject	125	Verb	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): OLE objects are edited by their Windows server programs; OLE edit
 dlg-023	wdDialogEditPasteSpecial	111	IconNumber, Link, DisplayIcon, Class, DataType, IconFileName, Caption, Floating	edit.pasteSpecial	registry		
@@ -179,7 +179,7 @@ dlg-177	wdDialogToolsAdvancedSettings	206	(none)	-	registry		legacy
 dlg-178	wdDialogToolsAutoCorrect	378	(none)	tools.autocorrect	registry		
 dlg-179	wdDialogToolsAutoCorrectExceptions	762	(none)	tools.autocorrect	registry		AutoCorrect › Exceptions… (first letter)
 dlg-180	wdDialogToolsAutoManager	915	(none)	tools.autocorrect	registry		
-dlg-181	wdDialogToolsAutoSummarize	874	(none)	-	registry		legacy
+dlg-181	wdDialogToolsAutoSummarize	874	(none)	tools.autoSummarize	registry		AutoSummarize: key sentences by word frequency on this computer (no AI or online service); highlight, summary at the top, or a new document; Thai and CJK counted word by word
 dlg-182	wdDialogToolsBulletsNumbers	196	(none)	list.define	registry		
 dlg-183	wdDialogToolsCompareDocuments	198	(none)	review.compare	registry		
 dlg-184	wdDialogToolsCreateDirectory	833	(none)	-	manual	pass	New Folder in Doc4Me's own file browser (Open/Save As when the system dialog isn't used): makes the folder where the browser is and opens it (UI test file_browser::new_folder_is_made_here_and_opened, 2026-10-26); the system dialogs have their own

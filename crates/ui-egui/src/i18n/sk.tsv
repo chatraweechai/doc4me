@@ -2890,3 +2890,14 @@
 	Section Protection	Ochrana sekcií
 	Section {n}	Sekcia {n}
 	Select sections…	Vybrať sekcie…
+	AutoSummarize	Automatické zhrnutie
+	Create a new document and put the summary there	Vytvoriť nový dokument a vložiť doň zhrnutie
+	Highlight key points	Zvýrazniť kľúčové body
+	Insert an executive summary or abstract at the top of the document	Vložiť súhrn alebo abstrakt na začiatok dokumentu
+	Length of summary	Dĺžka zhrnutia
+	Percent of original:	Percento originálu:
+	Summary: {words} of {of} words	Zhrnutie: {words} z {of} slov
+	Type of summary	Typ zhrnutia
+	Update document statistics	Aktualizovať štatistiku dokumentu
+	{n} sentences	{n} viet
+	{n} words or less	Najviac {n} slov
