@@ -1,0 +1,2849 @@
+# Finnish (fi) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts here)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" tai "an" ennen seuraavaa sanaa; puolan "w"/"we", "z"/"ze".
+	% of all commits	% kaikista commiteista
+	(All)	(Kaikki)
+	(Custom)	(Mukautettu)
+	(no style)	(ei tyyliä)
+	(no suggestions)	(ei ehdotuksia)
+	(none)	(ei mitään)
+	(normal text)	(normaali teksti)
+	(not matched)	(ei vastaavuutta)
+	(picture or object)	(kuva tai objekti)
+	*Bold* and _italic_ with real formatting	*Lihavointi* ja _kursivointi_ oikealla muotoilulla
+	0 or More Characters	0 tai useampi merkki
+	1. Formatting restrictions	1. Muotoilurajoitukset
+	1. Main document	1. Päätiedosto
+	1.5 Line Spacing	Riviväli 1,5
+	1/4 Em Space	1/4 em-välilyönti
+	1×2 Empty Matrix	Tyhjä 1×2-matriisi
+	1×3 Empty Matrix	Tyhjä 1×3-matriisi
+	2. Data source	2. Tietolähde
+	2. Editing restrictions	2. Muokkausrajoitukset
+	2×1 Empty Matrix	Tyhjä 2×1-matriisi
+	2×2 Determinant	2×2-determinantti
+	2×2 Empty Matrix	Tyhjä 2×2-matriisi
+	2×2 Identity Matrix	2×2-yksikkömatriisi
+	2×2 Identity Matrix (sparse)	2×2-yksikkömatriisi (harva)
+	2×2 Matrix in Brackets	2×2-matriisi hakasulkeissa
+	2×2 Matrix in Double Bars	2×2-matriisi kaksoispystyviivoissa
+	2×2 Matrix in Parentheses	2×2-matriisi kaarisulkeissa
+	2×3 Empty Matrix	Tyhjä 2×3-matriisi
+	3-D	3D
+	3. Merge the data with the document	3. Yhdistä tiedot asiakirjaan
+	3. Start enforcement	3. Ota suojaus käyttöön
+	3D Models	3D-mallit
+	3×1 Empty Matrix	Tyhjä 3×1-matriisi
+	3×2 Empty Matrix	Tyhjä 3×2-matriisi
+	3×3 Empty Matrix	Tyhjä 3×3-matriisi
+	3×3 Identity Matrix	3×3-yksikkömatriisi
+	3×3 Identity Matrix (sparse)	3×3-yksikkömatriisi (harva)
+	5,000 characters a day; give an email address for 50,000.	5 000 merkkiä päivässä; anna sähköpostiosoite saadaksesi 50 000.
+	<< Less	<< Vähemmän
+	<< Remove	<< Poista
+	A file dialog is already open.	Tiedostovalintaikkuna on jo auki.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Ilmainen avoimen lähdekoodin tekstinkäsittelyohjelma, kirjoitettu alusta alkaen Rustilla.\nPerustuu ArtCraft-tiimin WordCraftiin.
+	A header source holds the field names for a data source without a header row.	Otsikkolähde sisältää kenttien nimet tietolähteelle, jossa ei ole otsikkoriviä.
+	A mail merge field	Yhdistämiskenttä
+	A new document lists the commands with their shortcuts.	Uudessa asiakirjassa luetellaan komennot ja niiden pikanäppäimet.
+	A numbered sequence (figures, tables…)	Numeroitu sarja (kuvat, taulukot…)
+	A password is required to open this document.	Tämän asiakirjan avaaminen edellyttää salasanaa.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Välilyönti ennen välimerkkiä, kaksinkertaiset merkit, puolan pilkut ennen konjunktioita.
+	A table of contents	Sisällysluettelo
+	A table's rows keep the same columns here.	Taulukon rivit säilyttävät tässä samat sarakkeet.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Tietoja
+	About Doc4Me	Tietoja Doc4Mestä
+	Above Chart	Kaavion yläpuolella
+	Above the item	Kohteen yläpuolella
+	Absolute position	Absoluuttinen sijainti
+	Absolute value cases	Itseisarvon tapaukset
+	Accent	Korostusväri
+	Accent Gradient	Korostusvärin liukuväri
+	Accent with Reflection	Korostusväri ja heijastus
+	Accent {n}	Korostusväri {n}
+	Accents	Aksentit
+	Accept	Hyväksy
+	Accept All	Hyväksy kaikki
+	Accept All Changes	Hyväksy kaikki muutokset
+	Accept or Reject Changes	Hyväksy tai hylkää muutoksia
+	Accept This Change	Hyväksy tämä muutos
+	Accessed on	Luettu
+	Accessibility	Helppokäyttöisyys
+	Accessibility Pane	Helppokäyttöisyysruutu
+	Acute	Akuutti
+	Add	Lisää
+	Add >>	Lisää >>
+	Add a comment	Lisää kommentti
+	Add a Table	Lisää taulukko
+	Add at least one field.	Lisää vähintään yksi kenttä.
+	Add caption when inserting:	Lisää kuvateksti lisättäessä:
+	Add Chart Element	Lisää kaavion osa
+	Add Field	Lisää kenttä
+	Add Field Name	Lisää kentän nimi
+	Add Font…	Lisää fontti…
+	Add line numbering	Lisää rivinumerointi
+	Add New Placeholder	Lisää uusi paikkamerkki
+	Add New Placeholder…	Lisää uusi paikkamerkki…
+	Add New Source…	Lisää uusi lähde…
+	Add Object to Selection	Lisää objekti valintaan
+	Add Pen	Lisää kynä
+	Add Row	Lisää rivi
+	Add Series	Lisää sarja
+	Add Shape	Lisää muoto
+	Add Space Before Paragraph	Lisää väli ennen kappaletta
+	Add space between Asian and Latin text	Lisää väli aasialaisen ja latinalaisen tekstin väliin
+	Add space between Asian text and numbers	Lisää väli aasialaisen tekstin ja numeroiden väliin
+	Add tab stop at:	Lisää sarkainkohta kohtaan:
+	Add Text	Lisää tekstiä
+	Add the chapter number	Lisää luvun numero
+	Add to Dictionary	Lisää sanastoon
+	Add to Document	Lisää asiakirjaan
+	Add to Quick Access Toolbar	Lisää pikatyökaluriville
+	Add to Style Gallery	Lisää tyyligalleriaan
+	Add-ins	Apuohjelmat
+	Add/Edit\nBibliography	Lisää/muokkaa\nlähdeluetteloa
+	Add/Edit\nCitation	Lisää/muokkaa\nlähdeviitettä
+	Add\nNote	Lisää\nmuistiinpano
+	Add\nPen	Lisää\nkynä
+	Add\nShape	Lisää\nmuoto
+	Added	Lisätty
+	Added Fonts	Lisätyt fontit
+	Address	Osoite
+	Address Block	Osoitelohko
+	Address labels	Osoitetarrat
+	Address:	Osoite:
+	Address\nBlock	Osoite-\nlohko
+	Adjust	Säädä
+	Advanced	Lisäasetukset
+	Advanced Find	Tarkka haku
+	Advanced Find…	Tarkka haku…
+	After:	Jälkeen:
+	Agents	Agentit
+	Align	Tasaa
+	Align Bottom Center	Tasaa alas keskelle
+	Align Bottom Left	Tasaa alas vasemmalle
+	Align Bottom Right	Tasaa alas oikealle
+	Align Center	Keskitä
+	Align Center Left	Tasaa keskelle vasemmalle
+	Align Center Right	Tasaa keskelle oikealle
+	Align Left	Tasaa vasemmalle
+	Align Right	Tasaa oikealle
+	Align Text	Tasaa teksti
+	Align Top Center	Tasaa ylös keskelle
+	Align Top Left	Tasaa ylös vasemmalle
+	Align Top Right	Tasaa ylös oikealle
+	Aligned at:	Tasattu kohtaan:
+	Alignment	Tasaus
+	Alignment:	Tasaus:
+	All	Kaikki
+	All - Linear	Kaikki – lineaarinen
+	All - Professional	Kaikki – ammattimainen
+	All Borders	Kaikki reunat
+	All Caps	Isot kirjaimet
+	All caps	Vain isot kirjaimet
+	All Commands	Kaikki komennot
+	All files	Kaikki tiedostot
+	All Levels	Kaikki tasot
+	All Markup	Kaikki merkinnät
+	All pages	Kaikki sivut
+	All pages in the range	Kaikki alueen sivut
+	All records	Kaikki tietueet
+	All symbol sets	Kaikki symbolijoukot
+	Allow Doc4Me to use online services	Salli Doc4Men käyttää verkkopalveluja
+	Allow hanging punctuation	Salli riippuvat välimerkit
+	Allow Latin text to wrap in the middle of a word	Salli latinalaisen tekstin rivittyä kesken sanan
+	Allow line breaks	Salli rivinvaihdot
+	Allow overlap	Salli päällekkäisyys
+	Allow row to break across pages	Salli rivin jakautua sivujen välillä
+	Alphabetical	Aakkosellinen
+	Alt Text	Vaihtoehtoinen teksti
+	Alt text	Vaihtoehtoinen teksti
+	Alt Text Pane	Vaihtoehtoinen teksti -ruutu
+	Alt:	Alt:
+	Alt\nText	Vaihtoehtoinen\nteksti
+	And	Ja
+	Angle Brackets	Kulmasulkeet
+	Angle Brackets with Separator	Kulmasulkeet ja erotin
+	Angle Brackets with Two Separators	Kulmasulkeet ja kaksi erotinta
+	Animate the caret (it glides and fades)	Animoi kohdistin (se liukuu ja himmenee)
+	Animation	Animaatio
+	Animation effects:	Animaatiotehosteet:
+	Annotation Reference	Huomautusviittaus
+	Annotation Subject	Huomautuksen aihe
+	Annotation Text	Huomautusteksti
+	Another file	Toinen tiedosto
+	Any Character	Mikä tahansa merkki
+	Any Digit	Mikä tahansa numero
+	Any Letter	Mikä tahansa kirjain
+	Anyone can open this document. Encrypt it with a password to keep it private.	Kuka tahansa voi avata tämän asiakirjan. Salaa se salasanalla, jotta se pysyy yksityisenä.
+	Anyone who opens the document will need this password.	Jokainen asiakirjan avaaja tarvitsee tämän salasanan.
+	APA	APA
+	API key (if the server needs one)	API-avain (jos palvelin tarvitsee sellaisen)
+	Apply	Käytä
+	Apply as you type	Käytä kirjoitettaessa
+	Apply Asian line-breaking rules (kinsoku)	Käytä aasialaisia rivinvaihtosääntöjä (kinsoku)
+	Apply Character Style	Käytä merkkityyliä
+	Apply formatting to:	Käytä muotoilua kohteeseen:
+	Apply special formats to	Käytä erikoismuotoiluja kohteeseen
+	Apply Style	Käytä tyyliä
+	Apply Styles	Käytä tyylejä
+	Apply to:	Käytä kohteeseen:
+	Arabic	Arabia
+	Arch Down	Kaari alas
+	Arch Up	Kaari ylös
+	Area	Alue
+	Around	Ympäröivä
+	Arrange	Järjestä
+	Arrange All	Järjestä kaikki
+	Arrange\nAll	Järjestä\nkaikki
+	Arrow	Nuoli
+	Arrows	Nuolet
+	Artistic Effects	Taiteelliset tehosteet
+	As Recommended	Suositusten mukaan
+	As you type	Kirjoitettaessa
+	ASAP	ASAP
+	Ascending	Nouseva
+	Asian text font:	Aasialaisen tekstin fontti:
+	Asian Typography	Aasialainen typografia
+	Assign	Määritä
+	At least	Vähintään
+	At least {n}	Vähintään {n}
+	Atelier	Atelier
+	Atmosphere	Tunnelma
+	Attach Template	Liitä malli
+	Attach…	Liitä…
+	Author	Tekijä
+	Auto	Automaattinen
+	AutoCaption	Automaattinen kuvateksti
+	AutoCaption…	Automaattinen kuvateksti…
+	AutoComplete	Automaattinen täydennys
+	AutoCorrect	Automaattinen korjaus
+	AutoCorrect Options	Automaattisen korjauksen asetukset
+	AutoFit	Automaattinen sovitus
+	AutoFit Contents	Sovita sisältöön
+	AutoFit Window	Sovita ikkunaan
+	AutoFormat	Automaattinen muotoilu
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Automaattinen muotoilu (Ctrl+Alt+K) muotoilee valitut kappaleet tai koko asiakirjan.
+	AutoFormat and Review Changes…	Automaattinen muotoilu ja muutosten tarkistus…
+	AutoFormat As You Type	Automaattinen muotoilu kirjoitettaessa
+	AutoFormat changed {count} paragraphs	Automaattinen muotoilu muutti {count} kappaletta
+	AutoFormat Now	Muotoile nyt
+	Automatic	Automaattinen
+	Automatic ({language})	Automaattinen ({language})
+	Automatic bulleted lists	Automaattiset luettelomerkkiluettelot
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Automaattinen seuraa järjestelmän kieltä. Valikot ja komennot vaihtuvat; asiakirjasi eivät.
+	Automatic numbered lists	Automaattiset numeroidut luettelot
+	Automatic Table 1 (3 levels)	Automaattinen taulukko 1 (3 tasoa)
+	Automatic Table 2 (2 levels)	Automaattinen taulukko 2 (2 tasoa)
+	Automatically hyphenate document	Tavuta asiakirja automaattisesti
+	Automatically Update Document Styles	Päivitä asiakirjan tyylit automaattisesti
+	Automatically update document styles	Päivitä asiakirjan tyylit automaattisesti
+	AutoSave	Automaattinen tallennus
+	AutoSave documents you have saved in Doc4Me	Tallenna automaattisesti asiakirjat, jotka olet tallentanut Doc4Mellä
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Automaattinen tallennus epäonnistui: {error}. Ota automaattinen tallennus uudelleen käyttöön tallentamalla asiakirja.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Automaattinen tallennus ei ole käytettävissä selaimessa: se ei voi kirjoittaa tiedostoihisi. Tallenna lataa kopion.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Automaattinen tallennus säilyttää vain .docx-, .odt- ja .rtf-tiedostot; {name} ei voi säilyttää kaikkea muotoilua. Ota automaattinen tallennus käyttöön tallentamalla .docx-muodossa.
+	AutoSave saves every change to the file (needs a saved document)	Automaattinen tallennus tallentaa jokaisen muutoksen tiedostoon (edellyttää tallennettua asiakirjaa)
+	AutoSave writes your changes to the file a moment after you stop typing.	Automaattinen tallennus kirjoittaa muutoksesi tiedostoon hetken kuluttua siitä, kun lopetat kirjoittamisen.
+	AutoText	Pikateksti
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Back	Takaisin
+	Backspace	Askelpalautin
+	Balloons	Selitekuplat
+	Banded Columns	Raidalliset sarakkeet
+	Banded Rows	Raidalliset rivit
+	Bar	Palkki
+	Base text:	Perusteksti:
+	Based on: {style}	Perustuu tyyliin: {style}
+	Baseline Dots	Pisteet perusviivalla
+	Basic Cycle	Peruskierto
+	Basic List	Perusluettelo
+	Basic Math	Perusmatematiikka
+	Basic Matrix	Perusmatriisi
+	Basic Process	Perusprosessi
+	Basic Pyramid	Peruspyramidi
+	Basic Radial	Perussäteittäinen
+	Basic Venn	Perus-Venn
+	Bayes' rule	Bayesin kaava
+	Before:	Ennen:
+	Beginning of Word	Sanan alku
+	Behind Text	Tekstin takana
+	Below text	Tekstin alla
+	Below the item	Kohteen alla
+	Between	Välissä
+	Bibliography	Lähdeluettelo
+	Binary assets added	Binääritiedostoja lisätty
+	Binary assets removed	Binääritiedostoja poistettu
+	Binomial Coefficient	Binomikerroin
+	Binomial Coefficient (angle)	Binomikerroin (kulma)
+	Binomial Coefficient with Angle Brackets	Binomikerroin kulmasulkeissa
+	Binomial expansion of (x+a)ⁿ	Binomin (x+a)ⁿ kehitelmä
+	Blank	Tyhjä
+	Blank (Three Columns)	Tyhjä (kolme saraketta)
+	Blank document	Tyhjä asiakirja
+	Blank Page	Tyhjä sivu
+	Block\nAuthors	Estä\ntekijät
+	Blue:	Sininen:
+	Body Text	Leipäteksti
+	Body text in a short paragraph to show spacing.	Leipätekstiä lyhyessä kappaleessa välien näyttämiseksi.
+	Bold	Lihavointi
+	Book	Kirja
+	Book Title	Kirjan nimi
+	Book title	Kirjan nimi
+	Bookmark	Kirjanmerkki
+	Bookmark name:	Kirjanmerkin nimi:
+	Border lines	Reunaviivat
+	Border Painter	Reunasivellin
+	Border\nPainter	Reuna-\nsivellin
+	Borders	Reunat
+	Borders and Shading	Reunat ja sävytys
+	Borders and Shading…	Reunat ja sävytys…
+	Border…	Reuna…
+	Both Sides	Molemmat puolet
+	Both sides	Molemmat puolet
+	Bottom	Ala
+	Bottom Border	Alareuna
+	Bottom Margin	Alamarginaali
+	Bottom of Page	Sivun alareuna
+	Bottom of the Window	Ikkunan alareuna
+	Bottom:	Ala:
+	Box	Ruutu
+	Boxed Formula	Kaava ruudussa
+	Boxed Formula (example)	Kaava ruudussa (esimerkki)
+	Boxed Formulas	Kaavat ruudussa
+	Braces	Aaltosulkeet
+	Braces with Separator	Aaltosulkeet ja erotin
+	Bracket	Sulje
+	Brackets	Sulkeet
+	Brackets with Separators	Sulkeet ja erottimet
+	Break Link	Katkaise linkitys
+	Breaks	Vaihdot
+	Breve	Lyhytmerkki
+	Brightness, contrast and transparency change the picture from how it looks now.	Kirkkaus, kontrasti ja läpinäkyvyys muuttavat kuvaa sen nykyisestä ulkoasusta.
+	Brightness:	Kirkkaus:
+	Bring Forward	Tuo eteenpäin
+	Browse in Doc4Me…	Selaa Doc4Mellä…
+	Browse…	Selaa…
+	Build table of figures from:	Muodosta kuvaluettelo kohteesta:
+	Building Block Gallery Content Control	Rakenneosagalleria-sisältöohjausobjekti
+	Built from the style or table entry fields chosen in Options.	Muodostettu asetuksissa valitusta tyylistä tai taulukkomerkintäkentistä.
+	Built-In	Valmis
+	Built-in Heading styles	Valmiit otsikkotyylit
+	Built-in style	Valmis tyyli
+	Built-in styles can't be deleted.	Valmiita tyylejä ei voi poistaa.
+	Bullet	Luettelomerkki
+	Bullet Library	Luettelomerkkikirjasto
+	Bullets	Luettelomerkit
+	By author	Tekijän mukaan
+	By:	Tekijä:
+	Calendar	Kalenteri
+	Can't be deleted	Ei voi poistaa
+	Cancel	Peruuta
+	Canvas Member	Piirtoalustan jäsen
+	Capitalization	Kirjainkoko
+	Capitalize Each Word	Jokainen Sana Isolla
+	Capitalize first letter of sentences	Virkkeiden ensimmäinen kirjain isolla
+	Capitalize first letter of table cells	Taulukon solujen ensimmäinen kirjain isolla
+	Capitalize names of days	Viikonpäivien nimet isolla
+	Capitalize the first word of a sentence	Virkkeen ensimmäinen sana isolla
+	Caption	Kuvateksti
+	Caption label:	Kuvatekstin nimi:
+	Caption Numbering	Kuvatekstien numerointi
+	Caption text	Kuvatekstin teksti
+	Caption:	Kuvateksti:
+	Captions	Kuvatekstit
+	Caret Character	Sirkumfleksimerkki
+	Case changes	Kirjainkoon muutokset
+	Cases	Oikeustapaukset
+	Cases (Three Conditions)	Tapaukset (kolme ehtoa)
+	Cases (Two Conditions)	Tapaukset (kaksi ehtoa)
+	Cases and Stacks	Tapaukset ja pinot
+	Catalog	Luettelo
+	Categories	Luokat
+	Categories:	Luokat:
+	Category	Luokka
+	Category {n}	Luokka {n}
+	Category:	Luokka:
+	Category…	Luokka…
+	Ceiling	Katto
+	Cell	Solu
+	Cell Margins	Solun reunukset
+	Cell margins	Solun reunukset
+	Cell Options	Solun asetukset
+	Cell Size	Solun koko
+	Cell\nMargins	Solun\nreunukset
+	Center	Keskitä
+	Centered	Keskitetty
+	Centered as Group	Keskitetty ryhmänä
+	Centimeters	Senttimetrit
+	Change	Muuta
+	Change Case	Muuta kirjainkokoa
+	Change Chart Type	Muuta kaaviotyyppiä
+	Change Colors	Muuta värejä
+	Change in y over change in x	y:n muutos jaettuna x:n muutoksella
+	Change Layout	Muuta asettelua
+	Change List Level	Muuta luettelotasoa
+	Change Password…	Vaihda salasana…
+	Change Picture	Vaihda kuva
+	Change Picture…	Vaihda kuva…
+	Change Shape	Muuta muotoa
+	Change Structure	Muuta rakennetta
+	Change to Display	Muuta erilliseksi
+	Change to Inline	Muuta tekstinsisäiseksi
+	Change to Level 1	Muuta tasoksi 1
+	Change to Level 2	Muuta tasoksi 2
+	Change to Level 3	Muuta tasoksi 3
+	Change to Level 4	Muuta tasoksi 4
+	Change to Level 5	Muuta tasoksi 5
+	Change to Level 6	Muuta tasoksi 6
+	Change to Level 7	Muuta tasoksi 7
+	Change to Level 8	Muuta tasoksi 8
+	Change to Level 9	Muuta tasoksi 9
+	Change\nChart Type	Muuta\nkaaviotyyppiä
+	Change\nColors	Muuta\nvärejä
+	Changed	Muutettu
+	Changed lines:	Muutetut rivit:
+	Changes	Muutokset
+	Changes with highlighting	Muutokset korostettuina
+	Changes without highlighting	Muutokset ilman korostusta
+	Chapter in a book	Kirjan luku
+	Chapters begin at:	Luvut alkavat:
+	Character	Merkki
+	Character Border	Merkin reuna
+	Character code:	Merkkikoodi:
+	Character in Range	Merkki alueella
+	Character level	Merkkitaso
+	Character Position	Merkin sijainti
+	Character Scale	Merkin skaalaus
+	Character Shading	Merkin sävytys
+	Character Spacing	Merkkiväli
+	Character spacing	Merkkiväli
+	Character style	Merkkityyli
+	Characters	Merkit
+	Characters (no spaces)	Merkit (ilman välilyöntejä)
+	Characters (with spaces)	Merkit (välilyönnit mukaan lukien)
+	Characters per line:	Merkkejä rivillä:
+	Chart	Kaavio
+	Chart Design	Kaavion rakenne
+	Chart Layouts	Kaavioasettelut
+	Chart Title	Kaavion otsikko
+	Check	Tarkista
+	Check Accessibility	Tarkista helppokäyttöisyys
+	Check Box Content Control	Valintaruutu-sisältöohjausobjekti
+	Check Compatibility	Tarkista yhteensopivuus
+	Check Errors…	Tarkista virheet…
+	Check for Errors	Tarkista virheet
+	Check Spelling as You Type	Tarkista oikeinkirjoitus kirjoitettaessa
+	Check spelling as you type	Tarkista oikeinkirjoitus kirjoitettaessa
+	Check\nAccessibility	Tarkista\nhelppokäyttöisyys
+	Checked styles are allowed:	Valitut tyylit sallitaan:
+	Checked symbol	Valitun symboli
+	Chevron Down	Kulma alas
+	Chevron Up	Kulma ylös
+	Chicago	Chicago
+	Chinese (Simplified)	Kiina (yksinkertaistettu)
+	Chinese (Traditional)	Kiina (perinteinen)
+	Choose a command	Valitse komento
+	Choose a shortcut	Valitse pikanäppäin
+	Choose List Item	Valitse luettelon kohde
+	Choose the sheet that holds the recipients.	Valitse taulukko, jossa vastaanottajat ovat.
+	Circle	Ympyrä
+	Circle area from its radius	Ympyrän pinta-ala säteestä
+	Circled Dot	Piste ympyrässä
+	Circled Plus	Plus ympyrässä
+	Circled Times	Kertomerkki ympyrässä
+	Citation marked.	Lähdeviite merkitty.
+	Citation Style	Lähdeviitteen tyyli
+	Citations	Lähdeviitteet
+	Citations & Bibliography	Lähdeviitteet ja lähdeluettelo
+	City	Kaupunki
+	Clear	Tyhjennä
+	Clear All	Tyhjennä kaikki
+	Clear All Formatting	Poista kaikki muotoilu
+	Clear Character Formatting	Poista merkkimuotoilu
+	Clear Character Style	Poista merkkityyli
+	Clear Formatting Level	Poista muotoilutaso
+	Clear Paragraph Formatting	Poista kappalemuotoilu
+	Click a border between two cells to merge them. Esc stops.	Yhdistä kaksi solua napsauttamalla niiden välistä reunaa. Esc lopettaa.
+	Click an item to paste it.	Liitä kohde napsauttamalla sitä.
+	Click level to modify:	Valitse muokattava taso:
+	Click the empty text box the text should continue in (Esc cancels)	Napsauta tyhjää tekstiruutua, jossa tekstin pitää jatkua (Esc peruuttaa)
+	Click to switch back to inserting	Palaa lisäystilaan napsauttamalla
+	Clipboard	Leikepöytä
+	Clipboard Contents	Leikepöydän sisältö
+	Clipboard Items	Leikepöydän kohteet
+	Clipboard Pane	Leikepöytäruutu
+	Close	Sulje
+	Close Equation	Sulje kaava
+	Close Header and Footer	Sulje ylä- ja alatunniste
+	Close Outline View	Sulje jäsennysnäkymä
+	Close Outline\nView	Sulje\njäsennysnäkymä
+	Close Reviewing Pane	Sulje tarkistusruutu
+	Clustered Bar	Ryhmitelty palkki
+	Clustered Column	Ryhmitelty pylväs
+	Col #:	Sar. nro:
+	Collapse	Kutista
+	Collapse Selection	Supista valintaa
+	Collapse the Ribbon	Kutista valintanauha
+	Collate copies	Lajittele kopiot
+	Collect entries from:	Kerää merkinnät kohteesta:
+	Colon Equal	Kaksoispiste-yhtäsuuruus
+	Color	Väri
+	Color model:	Värimalli:
+	Color only	Vain väri
+	Color:	Väri:
+	Color: {color}	Väri: {color}
+	Colorful	Värikäs
+	Colors	Värit
+	Colors:	Värit:
+	Column	Sarake
+	Column Break	Palstanvaihto
+	Column Selection	Sarakevalinta
+	Column selection: the arrow keys extend the block, Esc ends it	Sarakevalinta: nuolinäppäimet laajentavat lohkoa, Esc lopettaa sen
+	Column width	Sarakkeen leveys
+	Column:	Sarake:
+	Columns	Palstat
+	Columns:	Palstat:
+	Combine	Yhdistä
+	Combine Documents	Yhdistä asiakirjat
+	Combo Box Content Control	Yhdistelmäruutu-sisältöohjausobjekti
+	Commands	Komennot
+	Commands:	Komennot:
+	Comment	Kommentti
+	Comments	Kommentit
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Kommentit jokaisen sivun vieressä ja jäljitetyt muutokset PDF-tiedostoissa, tulosteissa ja kuvissa; kommenttiluettelo verkkosivujen, Markdownin ja tekstin lopussa.
+	Comments on version	Version kommentit
+	Comments Pane	Kommenttiruutu
+	Commits	Commitit
+	Common Accent Objects	Yleiset aksenttiobjektit
+	Common Brackets	Yleiset sulkeet
+	Common Fractions	Yleiset murtoluvut
+	Common Functions	Yleiset funktiot
+	Common Large Operators	Yleiset suuret operaattorit
+	Common Operator Structures	Yleiset operaattorirakenteet
+	Common Operators	Yleiset operaattorit
+	Common Radicals	Yleiset juuret
+	Common Subscripts and Superscripts	Yleiset ala- ja yläindeksit
+	Communication	Viestintä
+	Compact	Tiivis
+	Company	Yritys
+	Compare	Vertaa
+	Compare Documents	Vertaa asiakirjoja
+	Compare to	Vertaa kohteeseen
+	Compared: {changes} changes	Verrattu: {changes} muutosta
+	Comparing with another file needs the desktop app.	Vertailu toiseen tiedostoon edellyttää työpöytäsovellusta.
+	Comparison	Vertailu
+	Comparison settings	Vertailuasetukset
+	Compatibility mode: {version}	Yhteensopivuustila: {version}
+	Compatibility Options	Yhteensopivuusasetukset
+	Compatibility Options…	Yhteensopivuusasetukset…
+	Compress Pictures	Pakkaa kuvat
+	Compress punctuation at the start of a line	Pakkaa välimerkit rivin alussa
+	Condensed	Tiivistetty
+	Conference	Konferenssi
+	Conference paper	Konferenssiesitelmä
+	CONFIDENTIAL	LUOTTAMUKSELLINEN
+	Confirm password:	Vahvista salasana:
+	Connect Shapes	Yhdistä muodot
+	Constitutional Provisions	Perustuslain säännökset
+	Container Title	Julkaisun nimi
+	Contains	Sisältää
+	Content Control at Selection	Sisältöohjausobjekti valinnan kohdalla
+	Content Control Properties	Sisältöohjausobjektin ominaisuudet
+	Contents can't be edited	Sisältöä ei voi muokata
+	Context	Konteksti
+	Contextual	Kontekstikohtainen
+	Continuous	Jatkuva
+	Continuous numbering	Jatkuva numerointi
+	Contour Integral	Käyräintegraali
+	Contour Integral with Limits	Käyräintegraali ja rajat
+	Contour Integral with Stacked Limits	Käyräintegraali ja pinotut rajat
+	Contour Integrals	Käyräintegraalit
+	Contrast:	Kontrasti:
+	Contributors	Osallistujat
+	Controls	Ohjausobjektit
+	Conversions	Muunnokset
+	Convert	Muunna
+	Convert between built-up and linear form	Muunna rakennetun ja lineaarisen muodon välillä
+	Convert Notes	Muunna alaviitteet
+	Convert Permanently	Muunna pysyvästi
+	Convert Text to Table	Muunna teksti taulukoksi
+	Convert Text to Table…	Muunna teksti taulukoksi…
+	Convert to Arabic Digits	Muunna arabialaisiksi numeroiksi
+	Convert to Shapes	Muunna muodoiksi
+	Convert to Text	Muunna tekstiksi
+	Convert to Thai Digits	Muunna thaimaalaisiksi numeroiksi
+	Copies	Kopiot
+	Coproduct	Koprodukti
+	Coproduct with Limits	Koprodukti ja rajat
+	Coproduct with Lower Limit	Koprodukti ja alaraja
+	Coproduct with Subscript-Superscript Limits	Koprodukti ja ala-/yläindeksirajat
+	Copy	Kopioi
+	Copy Formatting	Kopioi muotoilu
+	Copy of the text a bookmark marks	Kopio kirjanmerkin merkitsemästä tekstistä
+	Copy Styles	Kopioi tyylit
+	Copy Text	Kopioi teksti
+	Copy to where?	Kopioidaanko minne?
+	Copyright	Tekijänoikeus
+	Copyright Sign	Tekijänoikeusmerkki
+	Corrections	Korjaukset
+	Cosecant Function	Kosekanttifunktio
+	Cosine 2x	Kosini 2x
+	Cosine Function	Kosinifunktio
+	Cotangent Function	Kotangenttifunktio
+	Couldn't add {name}: {reason}	Kohdetta {name} ei voitu lisätä: {reason}
+	Couldn't download the picture: {reason}	Kuvaa ei voitu ladata: {reason}
+	Couldn't download {name}: {error}	Kohdetta {name} ei voitu ladata: {error}
+	Couldn't get the add-in list: {reason}	Apuohjelmaluetteloa ei voitu hakea: {reason}
+	Couldn't make Doc4Me the default: {error}	Doc4Mestä ei voitu tehdä oletusta: {error}
+	Couldn't open {path}: {error}	Kohdetta {path} ei voitu avata: {error}
+	Couldn't search: {reason}	Hakeminen ei onnistunut: {reason}
+	Couldn't translate: {reason}	Kääntäminen ei onnistunut: {reason}
+	Count by:	Laskentaväli:
+	Count words in text boxes and notes	Laske tekstiruutujen ja alaviitteiden sanat
+	Country	Maa
+	Courtesy Title	Kohteliaisuusnimike
+	Cover Page	Kansilehti
+	Craft	Craft
+	Create	Luo
+	Create a Style	Luo tyyli
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Luo asiakirjastasi vuorovaikutteinen jäsennys.\n\nSen avulla pysyt helposti kärryillä siitä, missä olet, tai voit siirrellä sisältöä nopeasti.\n\nAloita siirtymällä Aloitus-välilehdelle ja käyttämällä otsikkotyylejä asiakirjan otsikoissa.
+	Create Data Source…	Luo tietolähde…
+	Create Graphic	Luo grafiikka
+	Create Header Source	Luo otsikkolähde
+	Create Link	Luo linkki
+	Create New Style	Luo uusi tyyli
+	Create Source	Luo lähde
+	Create…	Luo…
+	Crop	Rajaa
+	Cross-reference	Ristiviittaus
+	Cross-reference:	Ristiviittaus:
+	Cube Root	Kuutiojuuri
+	Current	Nykyinen
+	Current - Linear	Nykyinen – lineaarinen
+	Current - Professional	Nykyinen – ammattimainen
+	Current keyboard settings	Nykyiset näppäimistöasetukset
+	Current page	Nykyinen sivu
+	Current Position	Nykyinen sijainti
+	Current record	Nykyinen tietue
+	Current style: {style}	Nykyinen tyyli: {style}
+	Curved Arrow Connector	Kaareva nuoliyhdysviiva
+	Curved Connector	Kaareva yhdysviiva
+	Custom	Mukautettu
+	Custom dictionary	Mukautettu sanasto
+	Custom Margins…	Mukautetut reunukset…
+	Custom mark:	Mukautettu merkki:
+	Custom range	Mukautettu alue
+	Custom Table of Contents	Mukautettu sisällysluettelo
+	Custom Table of Contents…	Mukautettu sisällysluettelo…
+	Custom Watermark	Mukautettu vesileima
+	Custom Watermark…	Mukautettu vesileima…
+	Customize	Mukauta
+	Customize Keyboard	Mukauta näppäimistöä
+	Customize Quick Access Toolbar	Mukauta pikatyökaluriviä
+	Customize Quick Access Toolbar…	Mukauta pikatyökaluriviä…
+	Customize Ribbon	Mukauta valintanauhaa
+	Customize the Ribbon…	Mukauta valintanauhaa…
+	Customize…	Mukauta…
+	Cut	Leikkaa
+	Cut, copy, and paste	Leikkaaminen, kopioiminen ja liittäminen
+	Cycle	Kierto
+	Czech	Tšekki
+	Danish	Tanska
+	Dark	Tumma
+	Dark Mode	Tumma tila
+	Dark page (white text on black)	Tumma sivu (valkoinen teksti mustalla)
+	Dark with Shadow	Tumma ja varjo
+	Darkroom	Pimiö
+	Dashed	Katkoviiva
+	Data	Tiedot
+	Data Labels	Arvopisteiden otsikot
+	Data source:	Tietolähde:
+	Date	Päivämäärä
+	Date & Time	Päivämäärä ja aika
+	Date and Time	Päivämäärä ja aika
+	Date format	Päivämäärän muoto
+	Date formats:	Päivämäärämuodot:
+	Date Picker Content Control	Päivämäärävalitsin-sisältöohjausobjekti
+	Day	Päivä
+	Decimal	Desimaali
+	Decorative objects only add visual interest: screen readers skip them.	Koristeelliset objektit tuovat vain visuaalista kiinnostavuutta: näytönlukuohjelmat ohittavat ne.
+	Decrease Font Size	Pienennä fonttikokoa
+	Decrease Indent	Pienennä sisennystä
+	Default	Oletus
+	Default Paragraph Font	Kappaleen oletusfontti
+	Default tab stops:	Oletussarkainkohdat:
+	Define New Bullet	Määritä uusi luettelomerkki
+	Define New Multilevel List	Määritä uusi monitasoinen luettelo
+	Define New Multilevel List…	Määritä uusi monitasoinen luettelo…
+	Define New Number Format	Määritä uusi lukumuoto
+	Deflate	Tyhjennä
+	Delete	Poista
+	Delete Back in Equation	Poista taaksepäin kaavassa
+	Delete Cells	Poista solut
+	Delete Clipboard Item	Poista leikepöydän kohde
+	Delete Columns	Poista sarakkeet
+	Delete Comment	Poista kommentti
+	Delete in Equation	Poista kaavassa
+	Delete Label	Poista nimi
+	Delete Next Word	Poista seuraava sana
+	Delete Previous Word	Poista edellinen sana
+	Delete Rows	Poista rivit
+	Delete Selected Ink	Poista valittu käsinkirjoitus
+	Delete Style	Poista tyyli
+	Delete Table	Poista taulukko
+	Delete Table Style	Poista taulukkotyyli
+	Deleted	Poistettu
+	Deletions:	Poistot:
+	Delivery address:	Toimitusosoite:
+	Delta Equal To	Delta yhtä suuri kuin
+	Delta over arrow	Delta nuolen yläpuolella
+	Demote	Siirrä alemmalle tasolle
+	Demote to Body Text	Siirrä leipätekstiksi
+	Derivative as a limit	Derivaatta raja-arvona
+	Descending	Laskeva
+	Describe what this object shows, for people who can't see it.	Kuvaile, mitä objekti esittää, niille, jotka eivät näe sitä.
+	Describe what this table shows, for people who can't see it.	Kuvaile, mitä taulukko esittää, niille, jotka eivät näe sitä.
+	Description:	Kuvaus:
+	Design	Rakenne
+	Design Mode	Rakennetila
+	Detach Template	Irrota malli
+	Detect language automatically	Tunnista kieli automaattisesti
+	Developer	Kehittäjä
+	development build	kehitysversio
+	Diagonal	Lävistäjä
+	Diagonal Dots	Vinot pisteet
+	Diamond	Vinoneliö
+	Dictate	Sanele
+	Dictation isn't available here.	Sanelu ei ole käytettävissä tässä.
+	Dictation stopped.	Sanelu lopetettiin.
+	Dictation stopped: {reason}	Sanelu lopetettiin: {reason}
+	Different First Page	Erilainen ensimmäinen sivu
+	Different Odd & Even Pages	Erilaiset parilliset ja parittomat sivut
+	Differential	Differentiaali
+	Differential theta	Differentiaali theta
+	Differential x	Differentiaali x
+	Differential y	Differentiaali y
+	Differentials	Differentiaalit
+	Direct formatting	Suora muotoilu
+	Direction:	Suunta:
+	Directory	Hakemisto
+	Display	Näyttö
+	Display for Review	Näytä tarkistusta varten
+	Display gridlines on screen	Näytä ruudukkoviivat näytössä
+	Display name	Näyttönimi
+	Display text	Näytettävä teksti
+	Distance from surrounding text	Etäisyys ympäröivästä tekstistä
+	Distribute Columns	Tasaa sarakkeet
+	Distribute letters	Jaa kirjaimet tasaisesti
+	Distribute Rows	Tasaa rivit
+	Distribute spacing	Jaa välistys tasaisesti
+	Distributed	Tasajako
+	Do Not Check Spelling or Grammar	Älä tarkista oikeinkirjoitusta tai kielioppia
+	Do not check spelling or grammar	Älä tarkista oikeinkirjoitusta tai kielioppia
+	DO NOT COPY	EI SAA KOPIOIDA
+	Do Not Show in TOC	Älä näytä sisällysluettelossa
+	Do you want to save changes to {name}?	Haluatko tallentaa tiedostoon {name} tehdyt muutokset?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me-apuohjelmat ovat ilmaisia makropaketteja Doc4Men apuohjelmaluettelosta. Ne voivat vain muokata asiakirjaa.
+	Doc4Me is now the default app for Word documents.	Doc4Me on nyt Word-asiakirjojen oletussovellus.
+	Document	Asiakirja
+	Document End	Asiakirjan loppu
+	Document Formatting	Asiakirjan muotoilu
+	Document Grid	Asiakirjan ruudukko
+	Document Information	Asiakirjan tiedot
+	Document Property	Asiakirjan ominaisuus
+	Document Start	Asiakirjan alku
+	Document template:	Asiakirjamalli:
+	Document Text	Asiakirjan teksti
+	Document Title	Asiakirjan otsikko
+	Document1	Asiakirja1
+	Document\nPreferences	Asiakirjan\nasetukset
+	Documents	Asiakirjat
+	Documents you open will show up here.	Avaamasi asiakirjat näkyvät tässä.
+	Does not contain	Ei sisällä
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Älä lisää väliä saman tyylin kappaleiden väliin
+	Don't capitalize after:	Älä käytä isoa kirjainta seuraavan jälkeen:
+	Don't hyphenate	Älä tavuta
+	Don't print blank lines when data fields are empty	Älä tulosta tyhjiä rivejä, kun tietokentät ovat tyhjiä
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Älä lue Zoteron, Mendeleyn tai EndNoten lähdeviitteitä ja lähdeluetteloita
+	Don't Save	Älä tallenna
+	Don't use HTML paragraph auto spacing	Älä käytä HTML-kappaleiden automaattista välistystä
+	Dot	Piste
+	Dot dash	Piste viiva
+	Dot-dash	Piste-viiva
+	Dots	Pisteet
+	Dotted	Pisteviiva
+	Double	Kaksinkertainen
+	Double Bar	Kaksoispystyviiva
+	Double Closing Quote	Kaksinkertainen loppulainausmerkki
+	Double Dot	Kaksoispiste
+	Double Integral	Kaksoisintegraali
+	Double Integral with Limits	Kaksoisintegraali ja rajat
+	Double Integral with Stacked Limits	Kaksoisintegraali ja pinotut rajat
+	Double Left Arrow with Text Above	Kaksinkertainen vasen nuoli ja teksti yllä
+	Double Left Arrow with Text Below	Kaksinkertainen vasen nuoli ja teksti alla
+	Double Left Right Arrow with Text Above	Kaksinkertainen vasen-oikea nuoli ja teksti yllä
+	Double Left Right Arrow with Text Below	Kaksinkertainen vasen-oikea nuoli ja teksti alla
+	Double Opening Quote	Kaksinkertainen alkulainausmerkki
+	Double Right Arrow with Text Above	Kaksinkertainen oikea nuoli ja teksti yllä
+	Double Right Arrow with Text Below	Kaksinkertainen oikea nuoli ja teksti alla
+	Double Spacing	Kaksinkertainen riviväli
+	Double Square Brackets	Kaksinkertaiset hakasulkeet
+	Double Strikethrough	Kaksinkertainen yliviivaus
+	Double strikethrough	Kaksinkertainen yliviivaus
+	Double summation	Kaksinkertainen summa
+	Double Underline	Kaksinkertainen alleviivaus
+	Double Vertical Bars	Kaksinkertaiset pystyviivat
+	Doughnut	Rengas
+	Down	Alas
+	Downloading the speech model ({mb} MB, once)…	Ladataan puhemallia ({mb} Mt, kerran)…
+	Downloading…	Ladataan…
+	DRAFT	LUONNOS
+	Draft	Luonnos
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Piirrä taulukko vetämällä suorakulmio tai jaa soluja vetämällä viiva niiden poikki. Esc lopettaa.
+	Draw	Piirrä
+	Draw Ink	Piirrä käsin
+	Draw Table	Piirrä taulukko
+	Draw\nTable	Piirrä\ntaulukko
+	Drawing Canvas	Piirtoalusta
+	Drawing Grid	Piirtoruudukko
+	Drawing Tools	Piirtotyökalut
+	Drawing\nCanvas	Piirto-\nalusta
+	Drop Cap	Anfangi
+	Drop cap	Anfangi
+	Drop-Down List Content Control	Avattava luettelo -sisältöohjausobjekti
+	Drops all formatting and pastes plain text.	Poistaa kaiken muotoilun ja liittää pelkän tekstin.
+	Dutch	Hollanti
+	E-mail Messages	Sähköpostiviestit
+	Edit Category	Muokkaa luokkaa
+	Edit Comment	Muokkaa kommenttia
+	Edit Data	Muokkaa tietoja
+	Edit Document	Muokkaa asiakirjaa
+	Edit Equation	Muokkaa kaavaa
+	Edit Field Code	Muokkaa kenttäkoodia
+	Edit Field…	Muokkaa kenttää…
+	Edit Footer	Muokkaa alatunnistetta
+	Edit Header	Muokkaa ylätunnistetta
+	Edit Individual Documents…	Muokkaa yksittäisiä asiakirjoja…
+	Edit Items	Muokkaa kohteita
+	Edit Recipient List	Muokkaa vastaanottajaluetteloa
+	Edit Source	Muokkaa lähdettä
+	Edit\nData	Muokkaa\ntietoja
+	Edit\nRecipient List	Muokkaa vastaanottaja-\nluetteloa
+	Edited	Muokattu
+	Editing	Muokkaaminen
+	Editing header/footer	Muokataan ylä- tai alatunnistetta
+	Editing in this document is restricted.	Tämän asiakirjan muokkaamista on rajoitettu.
+	Editing — edit the document directly	Muokkaaminen – muokkaa asiakirjaa suoraan
+	Edition	Painos
+	Editor	Toimittaja
+	Edit…	Muokkaa…
+	Effects	Tehosteet
+	Elbow Arrow Connector	Kulmikas nuoliyhdysviiva
+	Elbow Connector	Kulmikas yhdysviiva
+	Ellipsis	Kolme pistettä
+	Em Dash	Pitkä ajatusviiva
+	Em Space	Em-välilyönti
+	Email address (optional)	Sähköpostiosoite (valinnainen)
+	Emboss	Kohokuvio
+	Emphasis	Korostus
+	Empty Matrices	Tyhjät matriisit
+	En Dash	Ajatusviiva
+	En Space	En-välilyönti
+	Enclose Characters	Merkkien ympäröinti
+	Enclosure	Ympäröinti
+	Encrypt with Password	Salaa salasanalla
+	Encrypt with Password…	Salaa salasanalla…
+	End of document	Asiakirjan loppu
+	End of section	Osan loppu
+	End of Word	Sanan loppu
+	Endnote Reference	Loppuviitteen merkki
+	Endnote Text	Loppuviitteen teksti
+	Endnotes	Loppuviitteet
+	Endnotes to footnotes	Loppuviitteet alaviitteiksi
+	English	Englanti
+	English (United Kingdom)	Englanti (Yhdistynyt kuningaskunta)
+	English (United States)	Englanti (Yhdysvallat)
+	Engrave	Kaiverrus
+	Enlarge symbol	Suurenna symbolia
+	Enter formatting for number:	Kirjoita numeron muotoilu:
+	Enter in Equation	Enter kaavassa
+	Enter page number:	Kirjoita sivunumero:
+	Enter the web address or embed code of an online video:	Kirjoita verkkovideon verkko-osoite tai upotuskoodi:
+	Entry marked.	Merkintä merkitty.
+	Entry:	Merkintä:
+	Envelope #10   4.12" × 9.50"	Kirjekuori #10   4,12" × 9,50"
+	Envelope Address	Kirjekuoren osoite
+	Envelope DL   4.33" × 8.66"	Kirjekuori DL   4,33" × 8,66"
+	Envelope Return	Kirjekuoren palautusosoite
+	Envelope size:	Kirjekuoren koko:
+	Envelopes	Kirjekuoret
+	Equal by Definition	Yhtä suuri määritelmän mukaan
+	Equal column width	Yhtä leveät sarakkeet
+	Equal Equal	Yhtäsuuruus yhtäsuuruus
+	Equal to	Yhtä suuri kuin
+	Equals:	On yhtä suuri kuin:
+	Equation	Kaava
+	Equation Gallery	Kaavavalikoima
+	Equation Info	Kaavan tiedot
+	Equation Number	Kaavan numero
+	Equation Options	Kaava-asetukset
+	Erase Ink	Pyyhi käsinkirjoitus
+	Eraser	Pyyhekumi
+	Errors ({n})	Virheet ({n})
+	Estonian	Viro
+	Euler's identity	Eulerin identiteetti
+	Even Page	Parillinen sivu
+	Even pages only	Vain parilliset sivut
+	Every change is recorded as a tracked change.	Jokainen muutos tallennetaan jäljitettynä muutoksena.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Jokainen komento on komentosarjojen ja tekoälyagenttien käytettävissä: suorita `doc4me-cli mcp` saadaksesi MCP-palvelimen tai käynnistä sovellus valitsimella `--control <port>` saadaksesi JSON-ohjauskanavan.
+	Every field needs a name.	Jokainen kenttä tarvitsee nimen.
+	Every font this document uses is installed.	Kaikki tämän asiakirjan käyttämät fontit on asennettu.
+	Everyone	Kaikki
+	Exactly	Täsmälleen
+	Exactly {n}	Täsmälleen {n}
+	Example: {sample}	Esimerkki: {sample}
+	Exceptions (optional)	Poikkeukset (valinnainen)
+	Exceptions…	Poikkeukset…
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exit	Lopeta
+	Expand	Laajenna
+	Expand or Collapse Heading	Laajenna tai kutista otsikko
+	Expanded	Laajennettu
+	Exponential	Eksponentiaalinen
+	Exponential series	Eksponenttisarja
+	Export	Vie
+	Export a copy to share (PDF, Word document)	Vie kopio jaettavaksi (PDF, Word-asiakirja)
+	Export Page as JPEG	Vie sivu JPEG-muodossa
+	Export Page as PNG	Vie sivu PNG-muodossa
+	Export PDF	Vie PDF
+	Exported {path}	{path} vietiin
+	Expression	Lauseke
+	Extend Selection	Laajenna valintaa
+	Extend Selection by Units	Laajenna valintaa yksiköittäin
+	Extra space	Ylimääräinen välilyönti
+	Extra spaces between words.	Ylimääräisiä välilyöntejä sanojen välissä.
+	Field	Kenttä
+	Field Click	Kentän napsautus
+	Field code:	Kenttäkoodi:
+	Field Codes	Kenttäkoodit
+	Field codes:	Kenttäkoodit:
+	Field name	Kentän nimi
+	Field name:	Kentän nimi:
+	Field names must be different.	Kenttien nimien on oltava erilaiset.
+	Field names:	Kenttien nimet:
+	Field properties	Kentän ominaisuudet
+	Field:	Kenttä:
+	Fields	Kentät
+	Fields to insert:	Lisättävät kentät:
+	Fields:	Kentät:
+	Field…	Kenttä…
+	Figure	Kuva
+	File	Tiedosto
+	File name:	Tiedostonimi:
+	Fill	Täyttö
+	Fill & Line	Täyttö ja viiva
+	Fill color:	Täyttöväri:
+	Fill:	Täyttö:
+	Filling in forms	Lomakkeiden täyttäminen
+	Film	Filmi
+	Filter and Sort	Suodata ja lajittele
+	Filter and Sort…	Suodata ja lajittele…
+	Filter Records	Suodata tietueet
+	Find	Etsi
+	Find and Replace	Etsi ja korvaa
+	Find Next	Etsi seuraava
+	Find Next Editable Region	Etsi seuraava muokattava alue
+	Find Previous	Etsi edellinen
+	Find Recipient	Etsi vastaanottaja
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Etsi valitsee seuraavan muutetun kappaleen; Hylkää palauttaa valitun ennalleen.
+	Find What Expression	Etsittävä lauseke
+	Find What Text	Etsittävä teksti
+	Find what:	Etsittävä:
+	Find →	Etsi →
+	Find:	Etsi:
+	Finish	Valmis
+	Finish & Merge	Viimeistele ja yhdistä
+	Finish &\nMerge	Viimeistele\nja yhdistä
+	Finished	Valmis
+	Finnish	Suomi
+	First	Ensimmäinen
+	First Cell in Column	Sarakkeen ensimmäinen solu
+	First Cell in Row	Rivin ensimmäinen solu
+	First Column	Ensimmäinen sarake
+	First commit	Ensimmäinen commit
+	First line	Ensimmäinen rivi
+	First line:	Ensimmäinen rivi:
+	First Name	Etunimi
+	First row of data contains column headers	Tietojen ensimmäinen rivi sisältää sarakeotsikot
+	Fit	Sovita
+	Fit text	Sovita teksti
+	Fix Position on Page	Kiinteä sijainti sivulla
+	Fixed Column Width	Kiinteä sarakeleveys
+	Flip Horizontal	Käännä vaakasuunnassa
+	Flip Vertical	Käännä pystysuunnassa
+	Floor	Lattia
+	Focus	Kohdistus
+	Follow number with:	Numeron jälkeen:
+	Font	Fontti
+	Font Color	Fontin väri
+	Font color	Fontin väri
+	Font color:	Fontin väri:
+	Font Dialog	Fontti-valintaikkuna
+	Font not installed	Fonttia ei ole asennettu
+	Font Size	Fonttikoko
+	Font Substitution	Fonttien korvaus
+	Font Substitution…	Fonttien korvaus…
+	Font:	Fontti:
+	Font: {font}	Fontti: {font}
+	Fonts	Fontit
+	Font…	Fontti…
+	Footer	Alatunniste
+	Footnote and Endnote	Alaviite ja loppuviite
+	Footnote Reference	Alaviitteen merkki
+	Footnote Text	Alaviitteen teksti
+	Footnotes	Alaviitteet
+	Footnotes and endnotes	Alaviitteet ja loppuviitteet
+	Footnotes to endnotes	Alaviitteet loppuviitteiksi
+	Form Letters	Lomakirjeet
+	Format	Muotoile
+	Format Page Numbers	Muotoile sivunumerot
+	Format Page Numbers…	Muotoile sivunumerot…
+	Format Painter	Muotoilusivellin
+	Format Picture	Muotoile kuva
+	Format Shape	Muotoile muoto
+	Format:	Muoto:
+	Formatted	Muotoiltu
+	Formatted Text	Muotoiltu teksti
+	Formatting	Muotoilu
+	Formatting at Selection	Muotoilu valinnan kohdalla
+	Formatting completed. You can now:	Muotoilu valmis. Nyt voit:
+	Formatting exceptions	Muotoilupoikkeukset
+	Formatting marks	Muotoilumerkit
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Muotoilua, kirjainkoon muutoksia, tyhjää tilaa ja taulukoita verrataan; muut asetukset säilytetään myöhempää varten.
+	Formula	Kaava
+	Forward	Eteenpäin
+	Fraction	Murtoluku
+	Fractions (1/2) as fraction characters (½)	Murtoluvut (1/2) murtolukumerkeiksi (½)
+	French	Ranska
+	French (France)	Ranska (Ranska)
+	From	Lähettäjä
+	From text:	Tekstistä:
+	from Unicode (hex)	Unicodesta (heksa)
+	From:	Lähettäjä:
+	Full page of the same label	Koko sivu samaa tarraa
+	Function	Funktio
+	Functions	Funktiot
+	Gallery	Valikoima
+	GB/T 7714	GB/T 7714
+	General	Yleiset
+	Geometry	Geometria
+	German	Saksa
+	German (Germany)	Saksa (Saksa)
+	Get Add-ins	Hae apuohjelmia
+	Get Data	Nouda tiedot
+	Get Data…	Nouda tiedot…
+	Getting ready…	Valmistellaan…
+	Glow	Hehku
+	Glow Colors	Hehkuvärit
+	Go Back	Palaa
+	Go To	Siirry
+	Go to	Siirry
+	Go To…	Siirry…
+	Good afternoon	Hyvää iltapäivää
+	Good evening	Hyvää iltaa
+	Good morning	Hyvää huomenta
+	GOST (name sort)	GOST (nimen mukaan)
+	GOST (title sort)	GOST (otsikon mukaan)
+	Grab bag	Sekalaiset
+	Grammar	Kielioppi
+	Grammar Settings	Kielioppiasetukset
+	Graphic	Grafiikka
+	Grave	Graavi
+	Greater than	Suurempi kuin
+	Greater than or equal	Suurempi tai yhtä suuri kuin
+	Greek	Kreikka
+	Greek Letters	Kreikkalaiset kirjaimet
+	Green:	Vihreä:
+	Greeting Line	Tervehdysrivi
+	Greeting\nLine	Tervehdys-\nrivi
+	Grid Settings	Ruudukkoasetukset
+	Grid Table 1 Light	Ruudukkotaulukko 1, vaalea
+	Grid Table 4 – Blue	Ruudukkotaulukko 4 – sininen
+	Grid Table 4 – Green	Ruudukkotaulukko 4 – vihreä
+	Grid Table 4 – Orange	Ruudukkotaulukko 4 – oranssi
+	Grid Table 4 – Purple	Ruudukkotaulukko 4 – violetti
+	Gridlines	Ruudukkoviivat
+	Group	Ryhmitä
+	Grouping Character Above	Ryhmittelymerkki yllä
+	Grouping Character Below	Ryhmittelymerkki alla
+	Grow Font 1 Point	Suurenna fonttia 1 pisteellä
+	H:	K:
+	Hanging Indent	Riippuva sisennys
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Hattu
+	Header	Ylätunniste
+	Header & Footer	Ylä- ja alatunniste
+	Header Options	Otsikkoasetukset
+	Header Options:	Otsikkoasetukset:
+	Header Row	Otsikkorivi
+	Header source: {file} (the next data source opened here takes its field names)	Otsikkolähde: {file} (seuraava täällä avattava tietolähde saa sen kenttien nimet)
+	Header/Footer Position	Ylä- tai alatunnisteen sijainti
+	Headers and footers	Ylä- ja alatunnisteet
+	Heading 1	Otsikko 1
+	Heading 2	Otsikko 2
+	Heading 3	Otsikko 3
+	Heading styles (levels 1–{n})	Otsikkotyylit (tasot 1–{n})
+	Heading {n}	Otsikko {n}
+	Headings	Otsikot
+	Heart	Sydän
+	Hebrew	Heprea
+	Height:	Korkeus:
+	Help	Ohje
+	Hex:	Heksa:
+	Hidden	Piilotettu
+	Hidden text	Piilotettu teksti
+	Hide Codes	Piilota koodit
+	Hide from style lists	Piilota tyyliluetteloista
+	Hide Ink	Piilota käsinkirjoitus
+	Hide White Space	Piilota tyhjä tila
+	Hide\nInk	Piilota\nkäsinkirjoitus
+	Hierarchy	Hierarkia
+	Highlight	Korosta
+	Highlight Changes	Korosta muutokset
+	Highlight changes in printed document	Korosta muutokset tulostetussa asiakirjassa
+	Highlight changes on screen	Korosta muutokset näytössä
+	Highlight Merge Fields	Korosta yhdistämiskentät
+	Highlight\nMerge Fields	Korosta\nyhdistämiskentät
+	Highlighter	Korostuskynä
+	Hindi	Hindi
+	Historical and Discretional	Historialliset ja valinnaiset
+	Hollow	Ontto
+	Home	Aloitus
+	Home folder	Kotikansio
+	Horizontal	Vaaka
+	Horizontal Line	Vaakaviiva
+	Horizontal spacing:	Vaakaväli:
+	How many pages the whole document has	Montako sivua koko asiakirjassa on
+	How many pages this section has	Montako sivua tässä osassa on
+	How many words the document holds	Montako sanaa asiakirjassa on
+	HTML Format	HTML-muoto
+	Hue:	Sävy:
+	Hungarian	Unkari
+	Hyperbolic Cosecant Function	Hyperbolinen kosekanttifunktio
+	Hyperbolic Cosine Function	Hyperbolinen kosinifunktio
+	Hyperbolic Cotangent Function	Hyperbolinen kotangenttifunktio
+	Hyperbolic Functions	Hyperboliset funktiot
+	Hyperbolic Secant Function	Hyperbolinen sekanttifunktio
+	Hyperbolic Sine Function	Hyperbolinen sinifunktio
+	Hyperbolic Tangent Function	Hyperbolinen tangenttifunktio
+	Hyperlink	Hyperlinkki
+	Hyphenate at:	Tavuta kohdasta:
+	Hyphenate words in CAPS	Tavuta ISOILLA KIRJAIMILLA kirjoitetut sanat
+	Hyphenation	Tavutus
+	Hyphenation Options…	Tavutusasetukset…
+	Hyphenation zone:	Tavutusalue:
+	Hyphens (--) as dashes (—)	Yhdysmerkit (--) ajatusviivoiksi (—)
+	Hypotenuse	Hypotenuusa
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Kuvakkeen väri
+	Icons	Kuvakkeet
+	Identity Matrices	Yksikkömatriisit
+	IEEE	IEEE
+	If…Then…Else	Jos…Niin…Muuten
+	If…Then…Else…	Jos…Niin…Muuten…
+	Ignore All	Ohita kaikki
+	Ignore punctuation characters	Ohita välimerkit
+	Ignore web and file addresses	Ohita verkko- ja tiedosto-osoitteet
+	Ignore white-space characters	Ohita tyhjämerkit
+	Ignore words in capitals	Ohita isoilla kirjaimilla kirjoitetut sanat
+	Ignore words with numbers	Ohita numeroita sisältävät sanat
+	Illustrations	Kuvitukset
+	Immersive	Mukaansatempaava
+	Immersive Reader	Syventävä lukuohjelma
+	Immersive\nReader	Syventävä\nlukuohjelma
+	In Default apps, choose Doc4Me for the document types you want it to open.	Valitse Oletussovellukset-kohdassa Doc4Me niille asiakirjatyypeille, jotka haluat sen avaavan.
+	In equations, typing a name after a backslash replaces it with its symbol.	Kaavoissa kenoviivan jälkeen kirjoitettu nimi korvataan sen symbolilla.
+	In Front of Text	Tekstin edessä
+	In Line with Text	Tekstin tasossa
+	Inches	Tuumat
+	Include label and number	Sisällytä nimi ja numero
+	Include level number from:	Sisällytä tason numero kohteesta:
+	Include page numbers	Sisällytä sivunumerot
+	Increase Font Size	Suurenna fonttikokoa
+	Increase Indent	Suurenna sisennystä
+	Indent	Sisennä
+	Indent from left:	Sisennys vasemmalta:
+	Indentation	Sisennys
+	Indented	Sisennetty
+	Indents	Sisennykset
+	Indents and Spacing	Sisennykset ja välistys
+	Index	Hakemisto
+	Index and Tables	Hakemisto ja luettelot
+	Index Heading	Hakemiston otsikko
+	Index {n}	Hakemisto {n}
+	Indonesian	Indonesia
+	Inflate	Täytä
+	Info	Tiedot
+	Initials:	Nimikirjaimet:
+	Ink	Käsinkirjoitus
+	Ink Equation	Käsin kirjoitettu kaava
+	Ink Replay	Käsinkirjoituksen toisto
+	Ink to Math	Käsinkirjoitus kaavaksi
+	Ink to Shape	Käsinkirjoitus muodoksi
+	Ink to\nMath	Käsinkirjoitus\nkaavaksi
+	Ink to\nShape	Käsinkirjoitus\nmuodoksi
+	Ink\nReplay	Käsinkirjoituksen\ntoisto
+	Inline	Tekstinsisäinen
+	Input Format	Syöttömuoto
+	Insert	Lisää
+	Insert a 3D model from a file (.glb, .stl, .obj)	Lisää 3D-malli tiedostosta (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Lisää uusi kaava (Alt+=)
+	Insert Above	Lisää yläpuolelle
+	Insert Below	Lisää alapuolelle
+	Insert Caption	Lisää kuvateksti
+	Insert Cells	Lisää soluja
+	Insert Chart	Lisää kaavio
+	Insert Citation	Lisää lähdeviite
+	Insert Columns to the Left	Lisää sarakkeita vasemmalle
+	Insert Columns to the Right	Lisää sarakkeita oikealle
+	Insert Data	Lisää tiedot
+	Insert Database	Lisää tietokanta
+	Insert Database…	Lisää tietokanta…
+	Insert Date Field	Lisää päivämääräkenttä
+	Insert Endnote	Lisää loppuviite
+	Insert entire column	Lisää koko sarake
+	Insert entire row	Lisää koko rivi
+	Insert Footnote	Lisää alaviite
+	Insert Hyperlink	Lisää hyperlinkki
+	Insert Index	Lisää hakemisto
+	Insert Left	Lisää vasemmalle
+	Insert LISTNUM Field	Lisää LISTNUM-kenttä
+	Insert Merge Field	Lisää yhdistämiskenttä
+	Insert Merge\nField	Lisää\nyhdistämiskenttä
+	Insert New Equation	Lisää uusi kaava
+	Insert one text or another, depending on a field's value.	Lisää yksi tai toinen teksti kentän arvon mukaan.
+	Insert Page Field	Lisää sivukenttä
+	Insert Right	Lisää oikealle
+	Insert Rows	Lisää rivejä
+	Insert Rows Above	Lisää rivejä yläpuolelle
+	Insert Rows Below	Lisää rivejä alapuolelle
+	Insert Shapes	Lisää muotoja
+	Insert SmartArt	Lisää SmartArt
+	Insert Structure	Lisää rakenne
+	Insert Symbol	Lisää symboli
+	Insert Table	Lisää taulukko
+	Insert Table of Authorities	Lisää oikeuslähdeluettelo
+	Insert Table of Figures	Lisää kuvaluettelo
+	Insert Table…	Lisää taulukko…
+	Insert Time Field	Lisää aikakenttä
+	Insert Video	Lisää video
+	Insert\nAbove	Lisää\nyläpuolelle
+	Insert\nCaption	Lisää\nkuvateksti
+	Insert\nCitation	Lisää\nlähdeviite
+	Insert\nFootnote	Lisää\nalaviite
+	Inserted	Lisätty
+	Insertions and Deletions	Lisäykset ja poistot
+	Insertions:	Lisäykset:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Lisäykset: {ins}, poistot: {del}, siirrot: {moves}, muotoilu: {fmt}, kommentit: {comments}
+	Inside	Sisäpuoli
+	Inside Borders	Sisäreunat
+	Inside Margin	Sisäreunus
+	Inside:	Sisäpuoli:
+	Inspect Document	Tarkista asiakirja
+	Inspect Styles at Selection	Tarkista valinnan tyylit
+	Institution	Laitos
+	Integral	Integraali
+	Integral of e^(−x²)	Funktion e^(−x²) integraali
+	Integral with Limits	Integraali ja rajat
+	Integral with Stacked Limits	Integraali ja pinotut rajat
+	Integrals	Integraalit
+	Intense Emphasis	Voimakas korostus
+	Intense Quote	Voimakas lainaus
+	Intense Reference	Voimakas viittaus
+	Interface	Käyttöliittymä
+	Interface language	Käyttöliittymän kieli
+	Interface language:	Käyttöliittymän kieli:
+	Interface size:	Käyttöliittymän koko:
+	Interface Theme	Käyttöliittymän teema
+	Interface theme:	Käyttöliittymän teema:
+	Interface\nTheme	Käyttöliittymän\nteema
+	Internet addresses as links	Internet-osoitteet linkeiksi
+	Intersection	Leikkaus
+	Intersection with Limits	Leikkaus ja rajat
+	Intersection with Lower Limit	Leikkaus ja alaraja
+	Intersection with Subscript-Superscript Limits	Leikkaus ja ala-/yläindeksirajat
+	Inverse Cosecant Function	Käänteinen kosekanttifunktio
+	Inverse Cosine Function	Käänteinen kosinifunktio
+	Inverse Cotangent Function	Käänteinen kotangenttifunktio
+	Inverse Functions	Käänteisfunktiot
+	Inverse Hyperbolic Cosecant Function	Käänteinen hyperbolinen kosekanttifunktio
+	Inverse Hyperbolic Cosine Function	Käänteinen hyperbolinen kosinifunktio
+	Inverse Hyperbolic Cotangent Function	Käänteinen hyperbolinen kotangenttifunktio
+	Inverse Hyperbolic Functions	Käänteiset hyperboliset funktiot
+	Inverse Hyperbolic Secant Function	Käänteinen hyperbolinen sekanttifunktio
+	Inverse Hyperbolic Sine Function	Käänteinen hyperbolinen sinifunktio
+	Inverse Hyperbolic Tangent Function	Käänteinen hyperbolinen tangenttifunktio
+	Inverse Secant Function	Käänteinen sekanttifunktio
+	Inverse Sine Function	Käänteinen sinifunktio
+	Inverse Tangent Function	Käänteinen tangenttifunktio
+	Ionosphere	Ionosfääri
+	Is blank	On tyhjä
+	Is not blank	Ei ole tyhjä
+	ISO 690 (author-date)	ISO 690 (tekijä–vuosi)
+	ISO 690 (numerical)	ISO 690 (numeerinen)
+	Issue	Numero
+	it isn't a picture Doc4Me can read	se ei ole kuva, jota Doc4Me osaa lukea
+	Italian	Italia
+	Italic	Kursivointi
+	Japanese	Japani
+	Journal	Aikakauslehti
+	Justification	Tasaus
+	Justification of a display equation	Erillisen kaavan tasaus
+	Justified	Tasattu
+	Justify	Tasaa reunat
+	Keep Lines Together	Pidä rivit yhdessä
+	Keep lines together	Pidä rivit yhdessä
+	Keep Source Formatting	Säilytä lähteen muotoilu
+	Keep Text Only	Säilytä vain teksti
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Säilytä salasana turvallisessa paikassa: ilman sitä kukaan, ei myöskään Doc4Me, voi avata asiakirjaa. Poista salasana jättämällä molemmat kentät tyhjiksi.
+	Keep with Next	Sido seuraavaan
+	Keep with next	Sido seuraavaan
+	Keeps the fonts and formatting of the copied text.	Säilyttää kopioidun tekstin fontit ja muotoilun.
+	Kerning for fonts:	Fonttien parivälistys:
+	Keyboard shortcuts:	Pikanäppäimet:
+	Keys for this command:	Tämän komennon näppäimet:
+	Keywords	Avainsanat
+	Korean	Korea
+	Label changes with:	Nimi vaihtuu seuraavan mukaan:
+	Label:	Nimi:
+	Labels	Tarrat
+	Landscape	Vaaka
+	Language	Kieli
+	Language Preferences…	Kieliasetukset…
+	Language…	Kieli…
+	Large\nOperator	Suuri\noperaattori
+	Largest Only	Vain suurin
+	Largest only	Vain suurin
+	Lasso	Lasso
+	Lasso Select	Lassovalinta
+	Last	Viimeinen
+	Last Cell in Column	Sarakkeen viimeinen solu
+	Last Cell in Row	Rivin viimeinen solu
+	Last Column	Viimeinen sarake
+	Last commit	Viimeisin commit
+	Last Name	Sukunimi
+	Last, First; Last, First	Sukunimi, Etunimi; Sukunimi, Etunimi
+	Latin text font:	Latinalaisen tekstin fontti:
+	Layout	Asettelu
+	Layout options for this document	Tämän asiakirjan asetteluasetukset
+	Layout Summary	Asettelun yhteenveto
+	Layouts	Asettelut
+	Leader	Täyttömerkki
+	Leave a recipient out of the merge when a field has this value.	Jätä vastaanottaja pois yhdistämisestä, kun kentällä on tämä arvo.
+	Leave Equation	Poistu kaavasta
+	Leave the equation (Esc)	Poistu kaavasta (Esc)
+	Leave the label out of the caption	Jätä nimi pois kuvatekstistä
+	Left	Vasen
+	Left Arrow with Text Above	Vasen nuoli ja teksti yllä
+	Left Arrow with Text Below	Vasen nuoli ja teksti alla
+	Left Border	Vasen reuna
+	Left border	Vasen reuna
+	Left Bracket Twice	Vasen sulje kahdesti
+	Left indent	Vasen sisennys
+	Left Margin	Vasen reunus
+	Left Only	Vain vasen
+	Left only	Vain vasen
+	Left Right Arrow Above	Vasen-oikea nuoli yllä
+	Left Right Arrow with Text Above	Vasen-oikea nuoli ja teksti yllä
+	Left Right Arrow with Text Below	Vasen-oikea nuoli ja teksti alla
+	Left Subscript-Superscript	Ala- ja yläindeksi vasemmalla
+	Left-to-right	Vasemmalta oikealle
+	Left-to-Right Text Direction	Tekstin suunta vasemmalta oikealle
+	Left:	Vasen:
+	Leftwards Arrow Above	Vasemmalle osoittava nuoli yllä
+	Leftwards Harpoon Above	Vasemmalle osoittava harppuuna yllä
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Legal style numbering	Juridinen numerointityyli
+	Legend	Selite
+	Less than	Pienempi kuin
+	Less than or equal	Pienempi tai yhtä suuri kuin
+	Letter	Kirje
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter headings	Kirjainotsikot
+	Letter-Like Symbols	Kirjainten kaltaiset symbolit
+	Letters	Kirjeet
+	Level 1	Taso 1
+	Level 2	Taso 2
+	Level 3	Taso 3
+	Level 4	Taso 4
+	Level 5	Taso 5
+	Level 6	Taso 6
+	Level 7	Taso 7
+	Level 8	Taso 8
+	Level 9	Taso 9
+	Level {n}	Taso {n}
+	Level:	Taso:
+	Levels:	Tasot:
+	LibreTranslate server (open source)	LibreTranslate-palvelin (avoin lähdekoodi)
+	Ligatures:	Ligatuurit:
+	Light	Vaalea
+	Light with Outline	Vaalea ja ääriviiva
+	Limit	Raja-arvo
+	Limit and\nLog	Raja-arvo ja\nlogaritmi
+	Limit consecutive hyphens to:	Rajoita peräkkäiset tavuviivat:
+	Limit Example	Raja-arvon esimerkki
+	Limit formatting to a selection of styles	Rajoita muotoilu valittuihin tyyleihin
+	Line	Viiva
+	Line and Page Breaks	Rivin- ja sivunvaihdot
+	Line and Paragraph Spacing	Rivi- ja kappaleväli
+	Line between	Viiva välissä
+	Line Break	Rivinvaihto
+	Line breaking	Rivitys
+	Line delta	Rivien erotus
+	Line End	Rivin loppu
+	Line Number	Rivinumero
+	Line Numbering Options…	Rivinumeroinnin asetukset…
+	Line Numbers	Rivinumerot
+	Line Spacing	Riviväli
+	Line spacing	Riviväli
+	Line Spacing Options…	Rivivälin asetukset…
+	Line spacing:	Riviväli:
+	Line Start	Rivin alku
+	Line width:	Viivan leveys:
+	Line:	Viiva:
+	Linear	Lineaarinen
+	Linear Fraction	Lineaarinen murtoluku
+	Lines	Rivit
+	Lines +/−	Rivit +/−
+	Lines added	Lisätyt rivit
+	Lines and characters	Rivit ja merkit
+	Lines deleted	Poistetut rivit
+	Lines only	Vain rivit
+	Lines per page:	Rivejä sivulla:
+	Link	Linkki
+	Link entries to their headings	Linkitä merkinnät otsikoihinsa
+	Link level to style:	Linkitä taso tyyliin:
+	Link to Previous	Linkitä edelliseen
+	Linked style (paragraph and character)	Linkitetty tyyli (kappale ja merkki)
+	Links	Linkit
+	Links and References	Linkit ja viittaukset
+	Link…	Linkki…
+	List	Luettelo
+	List Commands	Luettele komennot
+	List Definition	Luettelon määritys
+	List entries	Luettelon merkinnät
+	List Paragraph	Luettelokappale
+	List styles	Luettelotyylit
+	List Table 3 – Blue	Luettelotaulukko 3 – sininen
+	List Table 3 – Green	Luettelotaulukko 3 – vihreä
+	List Table 3 – Orange	Luettelotaulukko 3 – oranssi
+	List Table 3 – Purple	Luettelotaulukko 3 – violetti
+	Listening… speak now	Kuunnellaan… puhu nyt
+	Location	Sijainti
+	Location: {path}	Sijainti: {path}
+	Lock aspect ratio	Lukitse kuvasuhde
+	Lock Fields	Lukitse kentät
+	Logarithm	Logaritmi
+	Logarithm with Base	Logaritmi ja kantaluku
+	Logical AND	Looginen JA
+	Logical AND with Limits	Looginen JA ja rajat
+	Logical OR	Looginen TAI
+	Logical OR with Limits	Looginen TAI ja rajat
+	Long citation:	Pitkä lähdeviite:
+	lowercase	pienet kirjaimet
+	Lum:	Kirk.:
+	Macros	Makrot
+	Made from the author and year when empty	Muodostetaan tekijästä ja vuodesta, jos kenttä on tyhjä
+	Magazine or newspaper article	Aikakaus- tai sanomalehtiartikkeli
+	Mail Merge	Joukkokirje
+	Mail Merge Helper	Joukkokirjeavustaja
+	Mail Merge Helper…	Joukkokirjeavustaja…
+	Mailing Labels	Osoitetarrat
+	Mailings	Postitukset
+	Main entry:	Päämerkintä:
+	Make Doc4Me the default for Word documents…	Tee Doc4Mestä Word-asiakirjojen oletus…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Suurentaa tai pienentää valintanauhaa, valikoita ja valintaikkunoita järjestelmän näytön skaalauksen lisäksi. Asiakirjan zoomaus on erillinen.
+	Malay	Malaiji
+	Manage Sources	Hallitse lähteitä
+	Manage Styles	Hallitse tyylejä
+	Manage Styles…	Hallitse tyylejä…
+	Manual Hyphenation	Manuaalinen tavutus
+	Manual hyphenation is complete.	Manuaalinen tavutus on valmis.
+	Manual Line Break	Manuaalinen rivinvaihto
+	Manual Page Break	Manuaalinen sivunvaihto
+	Manual…	Manuaalinen…
+	Many pages	Monta sivua
+	Margin	Reunus
+	Margins	Reunukset
+	Mark	Merkitse
+	Mark All	Merkitse kaikki
+	Mark as decorative	Merkitse koristeelliseksi
+	Mark Citation	Merkitse lähdeviite
+	Mark Citation…	Merkitse lähdeviite…
+	Mark Entry	Merkitse merkintä
+	Mark Entry…	Merkitse merkintä…
+	Mark grammar errors as you type	Merkitse kielioppivirheet kirjoitettaessa
+	Mark Index Entry	Merkitse hakemistomerkintä
+	Mark selected text as:	Merkitse valittu teksti seuraavaksi:
+	Mark Table of Contents Entry	Merkitse sisällysluettelon merkintä
+	Mark\nCitation	Merkitse\nlähdeviite
+	Mark\nEntry	Merkitse\nmerkintä
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Sama kirjainkoko
+	Match Fields	Vastaavat kentät
+	Match prefix	Sama etuliite
+	Match suffix	Sama jälkiliite
+	Math AutoCorrect	Matematiikan automaattinen korjaus
+	Math Input Control	Matemaattisen syötteen ohjausobjekti
+	Matrices with Brackets	Matriisit ja sulkeet
+	Matrix	Matriisi
+	Maximize	Suurenna
+	Maximum	Maksimi
+	Maximum Example	Maksimin esimerkki
+	Measured By	Mittayksikkö
+	Measurement units:	Mittayksiköt:
+	Media	Media
+	Merge	Yhdistä
+	Merge Cells	Yhdistä solut
+	Merge Formatting	Yhdistä muotoilu
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Yhdistä muotoilu liittää tekstin sen kohdan muotoilulla, johon se päätyy, kuten Säilytä vain teksti.
+	Merge Record #	Yhdistettävän tietueen numero
+	Merge records	Yhdistä tietueet
+	Merge to New Document	Yhdistä uuteen asiakirjaan
+	Merge to Printer	Yhdistä tulostimeen
+	Merge to:	Yhdistä kohteeseen:
+	Merge type: {type}	Yhdistämisen tyyppi: {type}
+	Merged PRs	Yhdistetyt PR:t
+	Merge…	Yhdistä…
+	Mesosphere	Mesosfääri
+	Middle	Keskellä
+	Midline Dots	Pisteet keskiviivalla
+	Millimeters	Millimetrit
+	Minimum	Minimi
+	Minus Equal	Miinus yhtä suuri
+	Mirror indents	Peilaa sisennykset
+	Mirrored	Peilattu
+	Missing document font	Puuttuva asiakirjan fontti
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT TAI Apache-2.0. Copyright (c) 2026 ArtCraft Team ja WordCraftin osallistujat.
+	MLA	MLA
+	Model	Malli
+	Models	Mallit
+	Moderate	Kohtalainen
+	Modify Style	Muokkaa tyyliä
+	Modify Table Style	Muokkaa taulukkotyyliä
+	Modify Table Style…	Muokkaa taulukkotyyliä…
+	Modify…	Muokkaa…
+	Mon	ma
+	Month	Kuukausi
+	More >>	Lisää >>
+	More Colors…	Lisää värejä…
+	More Columns…	Lisää palstoja…
+	More Commands…	Lisää komentoja…
+	More Symbols…	Lisää symboleja…
+	More templates →	Lisää malleja →
+	Move Down	Siirrä alas
+	Move in Equation	Siirry kaavassa
+	Move object with text	Siirrä objektia tekstin mukana
+	Move or Resize	Siirrä tai muuta kokoa
+	Move Paragraph Down	Siirrä kappaletta alas
+	Move Paragraph Up	Siirrä kappaletta ylös
+	Move Past Citation	Siirry lähdeviitteen ohi
+	Move Past\nCitation	Siirry lähde-\nviitteen ohi
+	Move Selected Ink	Siirrä valittua käsinkirjoitusta
+	Move Text	Siirrä tekstiä
+	Move to where?	Siirretäänkö minne?
+	Move Up	Siirrä ylös
+	Move with Text	Siirrä tekstin mukana
+	Move with text	Siirrä tekstin mukana
+	Moved from	Siirretty kohteesta
+	Moved to	Siirretty kohteeseen
+	Moves	Siirrot
+	Multilevel List	Monitasoinen luettelo
+	Multiple Pages	Useita sivuja
+	My Add-ins	Omat apuohjelmat
+	MyMemory (free, no account)	MyMemory (ilmainen, ei tiliä)
+	Name	Nimi
+	Name (A–Z)	Nimi (A–Ö)
+	Name of the file this document is saved as	Tiedoston nimi, jolla asiakirja on tallennettu
+	Name:	Nimi:
+	Narrow  0.5" all	Kapea  0,5" kaikki
+	Natural Logarithm	Luonnollinen logaritmi
+	Nature	Luonto
+	Navigation	Siirtyminen
+	Navigation Pane	Siirtymisruutu
+	Negated Relations	Kielteiset relaatiot
+	New	Uusi
+	New Comment	Uusi kommentti
+	New comments and tracked changes are recorded under this name and these initials.	Uudet kommentit ja jäljitetyt muutokset tallennetaan tällä nimellä ja näillä nimikirjaimilla.
+	New Document	Uusi asiakirja
+	New document	Uusi asiakirja
+	New Drawing Canvas	Uusi piirtoalusta
+	New Entry	Uusi merkintä
+	New Folder	Uusi kansio
+	New from Template	Uusi mallista
+	New Group	Uusi ryhmä
+	New Label	Uusi nimi
+	New Label…	Uusi nimi…
+	New Paragraph	Uusi kappale
+	New shortcut:	Uusi pikanäppäin:
+	New Style…	Uusi tyyli…
+	New Tab	Uusi välilehti
+	New Table Style	Uusi taulukkotyyli
+	New Table Style…	Uusi taulukkotyyli…
+	New Window	Uusi ikkuna
+	New word	Uusi sana
+	New\nComment	Uusi\nkommentti
+	New\nWindow	Uusi\nikkuna
+	New…	Uusi…
+	Next	Seuraava
+	Next Change	Seuraava muutos
+	Next Comment	Seuraava kommentti
+	Next Field	Seuraava kenttä
+	Next Footnote	Seuraava alaviite
+	Next Page	Seuraava sivu
+	Next Record	Seuraava tietue
+	Next Section	Seuraava osa
+	Next Sentence	Seuraava virke
+	Next sentence	Seuraava virke
+	Next Window	Seuraava ikkuna
+	No	Ei
+	No accessibility issues found.	Helppokäyttöisyysongelmia ei löytynyt.
+	No add-ins are listed yet.	Apuohjelmia ei ole vielä luettelossa.
+	No add-ins yet. Add one from the Store.	Ei vielä apuohjelmia. Lisää sellainen kaupasta.
+	No Border	Ei reunaa
+	No changes (read only)	Ei muutoksia (vain luku)
+	No Color	Ei väriä
+	No contributor data was built into this copy.	Tähän kopioon ei ole sisällytetty osallistujatietoja.
+	No data source yet.	Ei vielä tietolähdettä.
+	No errors found: every merge field is in the recipient list.	Virheitä ei löytynyt: jokainen yhdistämiskenttä on vastaanottajaluettelossa.
+	No Fill	Ei täyttöä
+	No Glow	Ei hehkua
+	No grid	Ei ruudukkoa
+	No icons match your search.	Hakuasi vastaavia kuvakkeita ei ole.
+	No limit	Ei rajoitusta
+	No Line	Ei viivaa
+	No Markup	Ei merkintöjä
+	No model credits were built into this copy.	Tähän kopioon ei ole sisällytetty mallien tekijätietoja.
+	No Outline	Ei ääriviivaa
+	No Paragraph Space	Ei kappaleväliä
+	No pictures found.	Kuvia ei löytynyt.
+	No Reflection	Ei heijastusta
+	No revisions	Ei muutoksia
+	No Shadow	Ei varjoa
+	No Soft Edges	Ei pehmeitä reunoja
+	No sources yet.	Ei vielä lähteitä.
+	No Spacing	Ei välistystä
+	no speech program on this system	tässä järjestelmässä ei ole puheohjelmaa
+	No templates match your search.	Hakuasi vastaavia malleja ei ole.
+	No Transform	Ei muunnosta
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Ei vielä sanoja. Väärin kirjoitetun sanan Lisää sanastoon tuo sen tähän.
+	No-Width Non Break	Leveydetön sitova väli
+	No-Width Optional Break	Leveydetön valinnainen katko
+	Nonbreaking Hyphen	Sitova yhdysmerkki
+	Nonbreaking Space	Sitova välilyönti
+	None	Ei mitään
+	Normal	Normaali
+	Normal  1" all	Normaali  1" kaikki
+	Normal Indent	Normaali sisennys
+	Normal probability density	Normaalijakauman tiheys
+	Normal speed	Normaali nopeus
+	Normal Style	Normaali tyyli
+	Normal Table	Normaali taulukko
+	Normal Text	Normaali teksti
+	Normal Word Document	Normaali Word-asiakirja
+	North	Pohjoinen
+	Norwegian (Bokmål)	Norja (bokmål)
+	Not	Ei
+	Not available right now	Ei käytettävissä juuri nyt
+	Not equal to	Eri suuri kuin
+	Not linked: click a text box	Ei linkitetty: napsauta tekstiruutua
+	Not saved	Ei tallennettu
+	Not saved yet	Ei vielä tallennettu
+	Not used by any command	Mikään komento ei käytä
+	Not {name}	Ei {name}
+	Nothing	Ei mitään
+	Nothing collected yet. Items you copy or cut appear here.	Mitään ei ole vielä kerätty. Kopioimasi tai leikkaamasi kohteet näkyvät tässä.
+	Now used by {command}	Käytössä nyt: {command}
+	Nudge	Siirrä hieman
+	Num Occurrences	Esiintymiskerrat
+	Number	Numero
+	Number alignment:	Numeron tasaus:
+	Number format	Lukumuoto
+	Number of columns:	Sarakkeiden määrä:
+	Number of rows:	Rivien määrä:
+	Number of the page the field sits on	Sen sivun numero, jolla kenttä on
+	Number of the section the field sits in	Sen osan numero, jossa kenttä on
+	Number style for this level:	Tämän tason numerotyyli:
+	Number the equation; the number sits at the right margin (or type # then the number)	Numeroi kaava; numero on oikeassa reunuksessa (tai kirjoita # ja sitten numero)
+	Number type:	Numerotyyppi:
+	Number:	Numero:
+	Numbering	Numerointi
+	Numbering:	Numerointi:
+	Numbering…	Numerointi…
+	Numerals	Numerot
+	Numerals:	Numerot:
+	n×n Identity Matrix	n×n-yksikkömatriisi
+	n×n Matrix	n×n-matriisi
+	Object	Objekti
+	Odd Page	Pariton sivu
+	Odd pages only	Vain parittomat sivut
+	Off	Ei käytössä
+	Office	Office
+	Office 2003 Default	Office 2003 -oletus
+	Offset (pt):	Siirtymä (pt):
+	Offset: Bottom	Siirtymä: alas
+	Offset: Bottom Left	Siirtymä: alas vasemmalle
+	Offset: Bottom Right	Siirtymä: alas oikealle
+	Offset: Center	Siirtymä: keskelle
+	Offset: Left	Siirtymä: vasemmalle
+	Offset: Right	Siirtymä: oikealle
+	Offset: Top	Siirtymä: ylös
+	Offset: Top Left	Siirtymä: ylös vasemmalle
+	Offset: Top Right	Siirtymä: ylös oikealle
+	OK	OK
+	Omit	Jätä pois
+	On	Käytössä
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Käytössä: kohdistin liukuu uuteen paikkaansa kirjoittaessasi tai käyttäessäsi nuolinäppäimiä, ja sen vilkkuminen himmenee. Ei käytössä: se hyppää ja vilkkuu päälle ja pois.
+	One	Yksi
+	One half	Puolikas
+	One label per recipient	Yksi tarra vastaanottajaa kohden
+	One line per item. Enter adds an item.	Yksi rivi kohdetta kohden. Enter lisää kohteen.
+	One Page	Yksi sivu
+	Online Pictures	Verkkokuvat
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Verkkokuvat (Openverse), Käännä (MyMemory tai oma LibreTranslate-palvelimesi), Hae apuohjelmia ja Sanele-toiminnon puhemallin lataus muodostavat yhteyden internetiin, ja vain kun käytät niitä. Kun tämä on poissa käytöstä, Doc4Me ei muodosta omia yhteyksiä.
+	Online Pictures…	Verkkokuvat…
+	Online services are turned off (File › Options › Trust Center).	Verkkopalvelut ovat poissa käytöstä (Tiedosto › Asetukset › Luottamuskeskus).
+	Online Video	Verkkovideo
+	Only allow this kind of editing:	Salli vain tällainen muokkaaminen:
+	Only comments can be added, except in regions marked editable.	Vain kommentteja voi lisätä, paitsi muokattaviksi merkityillä alueilla.
+	Only form fields can be filled in.	Vain lomakekenttiä voi täyttää.
+	only https addresses can be used	vain https-osoitteita voi käyttää
+	Only pictures I may use commercially	Vain kuvia, joita saan käyttää kaupallisesti
+	Only the allowed styles can be applied.	Vain sallittuja tyylejä voi käyttää.
+	Only web (http, https) and email (mailto) links can be followed	Vain verkkolinkkejä (http, https) ja sähköpostilinkkejä (mailto) voi seurata
+	Open	Avaa
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Avaa tiedosto Doc4Men omalla tiedostoselaimella, kun järjestelmän tiedostovalintaikkuna ei tule näkyviin.
+	Open Data Source…	Avaa tietolähde…
+	Open Hyperlink	Avaa hyperlinkki
+	OpenDocument Text (*.odt)	OpenDocument-teksti (*.odt)
+	Opening print dialog…	Avataan tulostusvalintaikkunaa…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Avaa tästä lähtien .docx-, .doc-, .rtf- ja .odt-tiedostot sekä Word-mallit Doc4Mellä.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Avaa Asetukset › Oletussovellukset, jossa valitset Doc4Men .docx-tiedostoille ja muille asiakirjatyypeille.
+	Open…	Avaa…
+	Operator	Operaattori
+	Operator Structures	Operaattorirakenteet
+	Operators	Operaattorit
+	Optional Hyphen	Valinnainen yhdysmerkki
+	Options	Asetukset
+	Options…	Asetukset…
+	Or	Tai
+	Or save a copy in another format:	Tai tallenna kopio toisessa muodossa:
+	Ordinals (1st) as superscript	Järjestysluvut (1st) yläindeksiksi
+	Organizer	Järjestäjä
+	Organizer…	Järjestäjä…
+	Orientation	Suunta
+	Original document	Alkuperäinen asiakirja
+	Other	Muu
+	Other Authorities	Muut oikeuslähteet
+	Other Large Operators	Muut suuret operaattorit
+	Other paragraph styles	Muut kappaletyylit
+	Other styles and their TOC level:	Muut tyylit ja niiden sisällysluettelon taso:
+	Otherwise insert:	Muussa tapauksessa lisää:
+	Outline	Jäsennys
+	Outline Level	Jäsennystaso
+	Outline level	Jäsennystaso
+	Outline levels	Jäsennystasot
+	Outline State	Jäsennyksen tila
+	Outline Tools	Jäsennystyökalut
+	Outlining	Jäsentäminen
+	Outside	Ulkopuoli
+	Outside border	Ulkoreuna
+	Outside Borders	Ulkoreunat
+	Outside Margin	Ulkoreunus
+	Outside:	Ulkopuoli:
+	Outward Brackets	Ulospäin avautuvat sulkeet
+	Oval	Soikio
+	Overbar	Yläviiva
+	Overbars and Underbars	Ylä- ja alaviivat
+	Overbrace	Aaltosulje yllä
+	Overtype	Korvaa
+	Overtype (typing replaces the characters after the caret)	Korvaa (kirjoittaminen korvaa kohdistimen jälkeiset merkit)
+	Page	Sivu
+	Page Background	Sivun tausta
+	Page Border	Sivun reuna
+	Page Borders	Sivun reunat
+	Page Break	Sivunvaihto
+	Page Break Before	Sivunvaihto ennen
+	Page break before	Sivunvaihto ennen
+	Page Breaks	Sivunvaihdot
+	Page Color	Sivun väri
+	Page display	Sivun näyttö
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Sivukuva (*.jpg, *.jpeg)
+	Page image (*.png)	Sivukuva (*.png)
+	Page Movement	Sivun siirtyminen
+	Page Number	Sivunumero
+	Page number style	Sivunumeron tyyli
+	Page numbers at the right margin	Sivunumerot oikeaan reunukseen
+	Page on which a bookmarked passage falls	Sivu, jolla kirjanmerkitty kohta on
+	Page Setup	Sivun asetukset
+	Page title	Sivun otsikko
+	Page Up	Page Up
+	Page Width	Sivun leveys
+	Page width	Sivun leveys
+	Page X of Y	Sivu X / Y
+	Page {page}	Sivu {page}
+	Page {page} of {pages}	Sivu {page}/{pages}
+	Page\nBorders	Sivun\nreunat
+	Page\nColor	Sivun\nväri
+	Page\nNumber	Sivu-\nnumero
+	Pages	Sivut
+	Pages like 1-3, 5	Sivut, esimerkiksi 1-3, 5
+	Pages of bookmark:	Kirjanmerkin sivut:
+	Paragraph	Kappale
+	Paragraph Character	Kappaleen merkki
+	Paragraph Details	Kappaleen tiedot
+	Paragraph Down	Kappale alas
+	Paragraph Mark	Kappalemerkki
+	Paragraph marks	Kappalemerkit
+	Paragraph Settings	Kappaleen asetukset
+	Paragraph Spacing	Kappaleväli
+	Paragraph style	Kappaletyyli
+	Paragraph Up	Kappale ylös
+	Paragraphs	Kappaleet
+	Paragraph…	Kappale…
+	Parentheses	Kaarisulkeet
+	Parentheses with Separator	Kaarisulkeet ja erotin
+	Partial Differential	Osittaisdifferentiaali
+	Password	Salasana
+	Password:	Salasana:
+	Paste	Liitä
+	Paste All	Liitä kaikki
+	Paste as:	Liitä muodossa:
+	Paste Clipboard Item	Liitä leikepöydän kohde
+	Paste Formatting	Liitä muotoilu
+	Paste Special	Liitä määräten
+	Paste Special…	Liitä määräten…
+	Paste Spike	Liitä keräilyleike
+	Paste: Keep Text Only	Liitä: säilytä vain teksti
+	Paste: Merge Formatting	Liitä: yhdistä muotoilu
+	Pasting between documents:	Liittäminen asiakirjojen välillä:
+	Pasting from other programs:	Liittäminen muista ohjelmista:
+	Pasting within the same document:	Liittäminen saman asiakirjan sisällä:
+	Pause	Tauko
+	Paused	Keskeytetty
+	PDF document (*.pdf)	PDF-asiakirja (*.pdf)
+	Pen	Kynä
+	Pencil	Lyijykynä
+	Pens	Kynät
+	People	Ihmiset
+	Periodical	Aikakausjulkaisu
+	Personalize	Mukauta
+	Phonetic Guide	Ääntämisopas
+	Pi Over 2	Pii jaettuna kahdella
+	Picas	Picat
+	Pick a custom group (New Group makes one)	Valitse mukautettu ryhmä (Uusi ryhmä luo sellaisen)
+	Pick a field from the list	Valitse kenttä luettelosta
+	Picture	Kuva
+	Picture Border	Kuvan reuna
+	Picture Content Control	Kuva-sisältöohjausobjekti
+	Picture Format	Kuvan muotoilu
+	Picture Styles	Kuvatyylit
+	Pictures	Kuvat
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Kuvia Openversesta. Kunnioita kunkin kuvan lisenssiä: Doc4Me lisää kuvan alle tekijärivin.
+	Pie	Ympyrä
+	Placeholder Name	Paikkamerkin nimi
+	Placeholder text	Paikkamerkkiteksti
+	Plain Table 1	Yksinkertainen taulukko 1
+	Plain text (*.txt)	Pelkkä teksti (*.txt)
+	Plain Text Content Control	Pelkkä teksti -sisältöohjausobjekti
+	Play	Toista
+	Play Video	Toista video
+	Play/Pause	Toista/tauko
+	Plus Equal	Plus yhtä suuri
+	Points	Pisteet
+	points and above	pistettä ja suuremmat
+	Polish	Puola
+	Portrait	Pysty
+	Portuguese (Brazil)	Portugali (Brasilia)
+	Portuguese (Portugal)	Portugali (Portugali)
+	Position	Sijainti
+	Position:	Sijainti:
+	Positioning…	Sijoittelu…
+	Possible spelling mistake	Mahdollinen kirjoitusvirhe
+	Postal Code	Postinumero
+	Power series of (1+x)ⁿ	Potenssisarja (1+x)ⁿ
+	Preferred width:	Ensisijainen leveys:
+	Preserve	Säilytä
+	Preserve formatting during updates	Säilytä muotoilu päivitettäessä
+	Presets	Esiasetukset
+	Press a key combination	Paina näppäinyhdistelmää
+	Preview	Esikatselu
+	Preview Results	Esikatsele tuloksia
+	Preview\nResults	Esikatsele\ntuloksia
+	Previous	Edellinen
+	Previous 1 or More	Edellinen 1 tai useampi
+	Previous Change	Edellinen muutos
+	Previous Comment	Edellinen kommentti
+	Previous Field	Edellinen kenttä
+	Previous Footnote	Edellinen alaviite
+	Previous Page	Edellinen sivu
+	Previous Record	Edellinen tietue
+	Previous Section	Edellinen osa
+	Previous Sentence	Edellinen virke
+	Previous sentence	Edellinen virke
+	Previous Window	Edellinen ikkuna
+	Print	Tulosta
+	Print blank lines when data fields are empty	Tulosta tyhjät rivit, kun tietokentät ovat tyhjiä
+	Print Documents	Tulosta asiakirjat
+	Print Documents…	Tulosta asiakirjat…
+	Print failed: {error}	Tulostus epäonnistui: {error}
+	Print Layout	Tulostusasettelu
+	Print Markup	Tulosta merkinnät
+	Print the page color	Tulosta sivun väri
+	Print to PDF	Tulosta PDF-tiedostoon
+	Print\nLayout	Tulostus-\nasettelu
+	Printer	Tulostin
+	Printing	Tulostus
+	Process	Prosessi
+	Product	Tulo
+	Product of A	A:n tulo
+	Product with Limits	Tulo ja rajat
+	Product with Lower Limit	Tulo ja alaraja
+	Product with Subscript-Superscript Limits	Tulo ja ala-/yläindeksirajat
+	Products and Coproducts	Tulot ja kotulot
+	Professional	Ammattimainen
+	Promote	Siirrä ylemmälle tasolle
+	Promote to Heading 1	Nosta otsikoksi 1
+	Proofing	Tekstin tarkistus
+	Proofing Issues	Tekstin tarkistuksen ongelmat
+	Proofing language	Tarkistuskieli
+	Properties	Ominaisuudet
+	Protect	Suojaa
+	Protect Document	Suojaa asiakirja
+	PRs	PR:t
+	pt	pt
+	Publisher	Julkaisija
+	Punctuation	Välimerkit
+	Put the caret in a content control first.	Sijoita kohdistin ensin sisältöohjausobjektiin.
+	Put the default commands back on the Quick Access Toolbar?	Palautetaanko oletuskomennot pikatyökaluriville?
+	Pyramid	Pyramidi
+	Quadratic Root	Neliöjuuri
+	Query Options…	Kyselyasetukset…
+	Quick Access Toolbar	Pikatyökalurivi
+	Quick Parts	Pikaosat
+	Quick Tables	Pikataulukot
+	Quote	Lainaus
+	Radical	Juuri
+	Radical with Degree	Juuri ja aste
+	Radicals	Juuret
+	Raised/lowered	Korotettu/alennettu
+	Read Aloud	Lue ääneen
+	Read Aloud couldn't start the speech program: {reason}	Lue ääneen ei voinut käynnistää puheohjelmaa: {reason}
+	Read Aloud couldn't start: {reason}	Lue ääneen ei voinut käynnistyä: {reason}
+	Read Aloud isn't available in the browser	Lue ääneen ei ole käytettävissä selaimessa
+	Read Aloud Status	Lue ääneen -tila
+	Read Aloud stopped: {reason}	Lue ääneen pysähtyi: {reason}
+	Read Mode	Lukutila
+	Read\nAloud	Lue\nääneen
+	Read\nMode	Luku-\ntila
+	Reading	Lukeminen
+	Reading Column Width	Sarakkeen leveys luettaessa
+	Reading Highlight	Lukukorostus
+	Reading Line Spacing	Riviväli luettaessa
+	Reading Mode	Lukutila
+	Reading Speed	Lukunopeus
+	Reading Text Size	Tekstin koko luettaessa
+	Reads the clipboard's rich text and keeps its formatting.	Lukee leikepöydän muotoillun tekstin ja säilyttää sen muotoilun.
+	Reads the clipboard's web content and keeps its formatting.	Lukee leikepöydän verkkosisällön ja säilyttää sen muotoilun.
+	Real name	Oikea nimi
+	Recent	Viimeisimmät
+	Recent Colors	Viimeksi käytetyt värit
+	Recent documents to show:	Näytettävien viimeisimpien asiakirjojen määrä:
+	Recently used symbols:	Viimeksi käytetyt symbolit:
+	Recipient List	Vastaanottajaluettelo
+	Recipient lists	Vastaanottajaluettelot
+	Recipients: {count}	Vastaanottajat: {count}
+	Recognized (you can correct it):	Tunnistettu (voit korjata sen):
+	Recognized Functions	Tunnistetut funktiot
+	Recognized Functions…	Tunnistetut funktiot…
+	Recolor a one-color picture, such as an icon	Väritä yksivärinen kuva, kuten kuvake, uudelleen
+	Recolor Selected Ink	Väritä valittu käsinkirjoitus uudelleen
+	Record Macro	Tallenna makro
+	Recover Unsaved Documents	Palauta tallentamattomat asiakirjat
+	Rectangle	Suorakulmio
+	Red:	Punainen:
+	Redo	Tee uudelleen
+	Reduce Hanging Indent	Pienennä riippuvaa sisennystä
+	References	Viittaukset
+	Reflection	Heijastus
+	Refresh	Päivitä
+	Registered	Rekisteröity
+	Registered Sign	Rekisteröidyn tavaramerkin merkki
+	Regular expressions	Säännölliset lausekkeet
+	Regulations	Asetukset ja määräykset
+	Reject	Hylkää
+	Reject All	Hylkää kaikki
+	Reject All Changes	Hylkää kaikki muutokset
+	Reject Change	Hylkää muutos
+	Relationship	Suhde
+	relative to	suhteessa kohteeseen
+	Relative to:	Suhteessa kohteeseen:
+	Relaxed	Väljä
+	Remove	Poista
+	Remove Added Font	Poista lisätty fontti
+	Remove Background	Poista tausta
+	Remove Content Control	Poista sisältöohjausobjekti
+	Remove every custom shortcut and restore the built-in keys?	Poistetaanko kaikki mukautetut pikanäppäimet ja palautetaanko valmiit näppäimet?
+	Remove every custom tab and group and show all tabs again?	Poistetaanko kaikki mukautetut välilehdet ja ryhmät ja näytetäänkö kaikki välilehdet uudelleen?
+	Remove field	Poista kenttä
+	Remove Field Name	Poista kentän nimi
+	Remove Footer	Poista alatunniste
+	Remove from Quick Access Toolbar	Poista pikatyökaluriviltä
+	Remove Header	Poista ylätunniste
+	Remove Hyperlink	Poista hyperlinkki
+	Remove Password	Poista salasana
+	Remove Pen	Poista kynä
+	Remove Positioning	Poista sijoittelu
+	Remove recipient	Poista vastaanottaja
+	Remove row	Poista rivi
+	Remove series	Poista sarja
+	Remove Space After Paragraph	Poista väli kappaleen jälkeen
+	Remove Table of Contents	Poista sisällysluettelo
+	Remove the control once edited	Poista ohjausobjekti muokkauksen jälkeen
+	Remove the space before the punctuation	Poista välimerkkiä edeltävä välilyönti
+	Remove Watermark	Poista vesileima
+	Rename Style	Nimeä tyyli uudelleen
+	Rename…	Nimeä uudelleen…
+	Reopen	Avaa uudelleen
+	Repeat	Toista
+	Repeat as header row on each page	Toista otsikkorivinä jokaisella sivulla
+	Repeat Header Rows	Toista otsikkorivit
+	Repeated words	Toistuvat sanat
+	Repeating Section Content Control	Toistuva osa -sisältöohjausobjekti
+	Replace	Korvaa
+	Replace All	Korvaa kaikki
+	Replace as you type	Korvaa kirjoitettaessa
+	Replace Document Text	Korvaa asiakirjan teksti
+	Replace text as you type	Korvaa teksti kirjoitettaessa
+	Replace with:	Korvaava:
+	Replace:	Korvaa:
+	Replay	Toista uudelleen
+	Reply	Vastaa
+	Report	Raportti
+	Research	Tutkimus
+	Researcher	Tutkija
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Tutkija tarvitsee verkkopalvelun; Doc4Me pitää asiakirjasi offline-tilassa.
+	Reset	Palauta
+	Reset All	Palauta kaikki
+	Reset All…	Palauta kaikki…
+	Reset Character Formatting	Palauta merkkimuotoilu
+	Reset Crop	Palauta rajaus
+	Reset Graphic	Palauta grafiikka
+	Reset Paragraph Formatting	Palauta kappalemuotoilu
+	Reset Picture	Palauta kuva
+	Reset to Normal	Palauta Normaali-tyyliin
+	Reset\nGraphic	Palauta\ngrafiikka
+	Reset…	Palauta…
+	Resize Table by Dragging	Muuta taulukon kokoa vetämällä
+	Resolve	Ratkaise
+	Resolved	Ratkaistu
+	Restart at 1	Aloita uudelleen 1:stä
+	Restart Each Page	Aloita alusta joka sivulla
+	Restart Each Section	Aloita alusta joka osassa
+	Restart list after:	Aloita luettelo uudelleen kohteen jälkeen:
+	Restore	Palauta
+	Restore Defaults	Palauta oletukset
+	Restore Down	Palauta koko
+	Restore to Normal Word Document	Palauta normaaliksi Word-asiakirjaksi
+	Restrict Editing	Rajoita muokkaamista
+	Restrict\nEditing	Rajoita\nmuokkaamista
+	Result	Tulos
+	Results	Tulokset
+	Return address labels	Palautusosoitetarrat
+	Return address:	Palautusosoite:
+	Reverse the order	Käännä järjestys
+	Review	Tarkista
+	Review AutoFormat Changes	Tarkista automaattisen muotoilun muutokset
+	Review Changes…	Tarkista muutokset…
+	Reviewing	Tarkistaminen
+	Reviewing Pane	Tarkistusruutu
+	Reviewing — edits become suggestions	Tarkistaminen – muokkauksista tulee ehdotuksia
+	Revised document	Muokattu asiakirja
+	Revisions	Muutokset
+	Rewind	Kelaa taaksepäin
+	Ribbon	Valintanauha
+	Ribbon and Quick Access Toolbar:	Valintanauha ja pikatyökalurivi:
+	Ribbon tabs	Valintanauhan välilehdet
+	Rich Text Content Control	RTF-teksti-sisältöohjausobjekti
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Oikea
+	Right (vertical)	Oikea (pysty)
+	Right align page numbers	Tasaa sivunumerot oikealle
+	Right Arrow with Text Above	Oikea nuoli ja teksti yllä
+	Right Arrow with Text Below	Oikea nuoli ja teksti alla
+	Right Border	Oikea reuna
+	Right border	Oikea reuna
+	Right Bracket Twice	Oikea sulje kahdesti
+	Right indent	Oikea sisennys
+	Right Margin	Oikea reunus
+	Right Only	Vain oikea
+	Right only	Vain oikea
+	Right-to-left	Oikealta vasemmalle
+	Right-to-Left Section	Oikealta vasemmalle -osa
+	Right-to-Left Table	Oikealta vasemmalle -taulukko
+	Right-to-Left Text Direction	Tekstin suunta oikealta vasemmalle
+	Right:	Oikea:
+	Rightwards Arrow Above	Oikealle osoittava nuoli yllä
+	Rightwards Harpoon Above	Oikealle osoittava harppuuna yllä
+	Roots of ax²+bx+c	Polynomin ax²+bx+c juuret
+	Rotate	Kierrä
+	Rotate all text 270°	Kierrä kaikkea tekstiä 270°
+	Rotate all text 90°	Kierrä kaikkea tekstiä 90°
+	Rotate Left 90°	Kierrä vasemmalle 90°
+	Rotate Right 90°	Kierrä oikealle 90°
+	Rotation	Kierto
+	Rotation:	Kierto:
+	Rounded Rectangle	Pyöristetty suorakulmio
+	Row	Rivi
+	Row:	Rivi:
+	Rows & Columns	Rivit ja sarakkeet
+	Ruby text:	Ruby-teksti:
+	Ruler	Viivain
+	Rules	Säännöt
+	Run	Suorita
+	Run-in	Upotettu
+	Russian	Venäjä
+	Résumé	Ansioluettelo
+	Same as the whole table	Sama kuin koko taulukko
+	SAMPLE	MALLI
+	Sat:	la:
+	Save	Tallenna
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Tallenna kopio toisessa muodossa. Tulostus tapahtuu PDF-tiedoston kautta, jonka voit tulostaa mistä tahansa katseluohjelmasta.
+	Save As	Tallenna nimellä
+	Save as Template	Tallenna mallina
+	Save documents	Tallenna asiakirjat
+	Save the document to turn on AutoSave	Ota automaattinen tallennus käyttöön tallentamalla asiakirja
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Ota automaattinen tallennus käyttöön tallentamalla asiakirja (pelkästään avaamaasi tiedostoa ei kirjoiteta uudelleen ennen kuin tallennat sen)
+	Save these pages as PDF…	Tallenna nämä sivut PDF-tiedostona…
+	Save Version	Tallenna versio
+	Saved	Tallennettu
+	Scale	Skaalaa
+	Scale Drawing	Skaalaa piirros
+	Scatter	Piste
+	Screen Clipping	Näyttöleike
+	Screen clipping didn't work: {reason}	Näyttöleike ei onnistunut: {reason}
+	Screen clipping ended without a picture.	Näyttöleike päättyi ilman kuvaa.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Näyttöleike ei ole käytettävissä tässä. Kopioi kuva näytöstä ja liitä se sitten.
+	Screenshot	Kuvakaappaus
+	Script	Kirjoitusjärjestelmä
+	Scripts	Komentosarjat
+	Scroll ribbon left	Vieritä valintanauhaa vasemmalle
+	Scroll ribbon right	Vieritä valintanauhaa oikealle
+	Search	Haku
+	Search Commands	Hae komentoja
+	Search commands and help	Hae komentoja ja ohjeita
+	Search document	Hae asiakirjasta
+	Search for templates	Hae malleja
+	Search icons	Hae kuvakkeita
+	Search Openverse (Creative Commons pictures)	Hae Openversesta (Creative Commons -kuvat)
+	Search Options	Hakuasetukset
+	Searching…	Haetaan…
+	Secant Function	Sekanttifunktio
+	Section Break	Osanvaihto
+	Section Breaks	Osanvaihdot
+	Section Character	Osan merkki
+	Section direction:	Osan suunta:
+	Section Mark	Osamerkki
+	Section Properties	Osan ominaisuudet
+	Sections	Osat
+	See	Katso
+	Select	Valitse
+	Select a picture, shape, chart or table to describe it.	Valitse kuva, muoto, kaavio tai taulukko, jotta voit kuvailla sen.
+	Select All	Valitse kaikki
+	Select Cell	Valitse solu
+	Select Floating Shapes	Valitse kelluvat muodot
+	Select Heading and Content	Valitse otsikko ja sisältö
+	Select Line	Valitse rivi
+	Select Objects	Valitse objektit
+	Select Paragraph	Valitse kappale
+	Select Range	Valitse alue
+	Select Recipients	Valitse vastaanottajat
+	Select recipients first to choose from their fields.	Valitse ensin vastaanottajat, jotta voit valita heidän kentistään.
+	Select recipients first to match their fields.	Valitse ensin vastaanottajat, jotta voit yhdistää heidän kenttänsä.
+	Select Row	Valitse rivi
+	Select Sentence	Valitse virke
+	Select Table	Valitse taulukko
+	Select Text	Valitse teksti
+	Select text in the document to translate it.	Valitse asiakirjasta teksti, jonka haluat kääntää.
+	Select Text with Similar Formatting	Valitse samoin muotoiltu teksti
+	Select text, then tick who can still edit it.	Valitse teksti ja valitse sitten, kuka voi yhä muokata sitä.
+	Select the part of the screen to insert.	Valitse lisättävä näytön osa.
+	Select Word	Valitse sana
+	Select\nRecipients	Valitse\nvastaanottajat
+	Selected Fields	Valitut kentät
+	Selected pages	Valitut sivut
+	Selection	Valinta
+	Selection Pane	Valintaruutu
+	Send Backward	Vie taaksepäin
+	Send the document straight to the system print dialog, or save a copy in another format below.	Lähetä asiakirja suoraan järjestelmän tulostusvalintaikkunaan tai tallenna kopio toisessa muodossa alla.
+	Sentence	Virke
+	Sentence case.	Virkkeen ensimmäinen kirjain isolla.
+	Separator:	Erotin:
+	Sequence name:	Sarjan nimi:
+	Serbian	Serbia
+	Serbian (Cyrillic)	Serbia (kyrillinen)
+	Serbian (Latin)	Serbia (latinalainen)
+	Series name	Sarjan nimi
+	Series {n}	Sarja {n}
+	Server address (https://…)	Palvelimen osoite (https://…)
+	Set	Aseta
+	Set As Default	Aseta oletukseksi
+	Set as Default	Aseta oletukseksi
+	Set Caret	Aseta kohdistin
+	Set Character Formatting	Aseta merkkimuotoilu
+	Set Date	Aseta päivämäärä
+	Set Equation	Aseta kaava
+	Set Numbering Value	Aseta numerointiarvo
+	Set Paragraph Formatting	Aseta kappalemuotoilu
+	Set Proofing Language…	Aseta tarkistuskieli…
+	Setting:	Asetus:
+	Settings…	Asetukset…
+	Shading	Sävytys
+	Shadow	Varjo
+	Shadow, glow and soft edges	Varjo, hehku ja pehmeät reunat
+	Shape Effects	Muototehosteet
+	Shape Fill	Muodon täyttö
+	Shape Format	Muodon muotoilu
+	Shape Outline	Muodon ääriviiva
+	Shape Styles	Muototyylit
+	Shapes	Muodot
+	Share	Jaa
+	Sheet:	Taulukko:
+	Shift cells down	Siirrä soluja alaspäin
+	Shift cells right	Siirrä soluja oikealle
+	Shift+Tab	Vaihto+Sarkain
+	Shipping labels	Lähetystarrat
+	Short citation:	Lyhyt lähdeviite:
+	Shortcut key:	Pikanäppäin:
+	Show	Näytä
+	Show all formatting marks	Näytä kaikki muotoilumerkit
+	Show All Levels	Näytä kaikki tasot
+	Show all revisions inline	Näytä kaikki muutokset tekstissä
+	Show changes at:	Näytä muutokset kohdassa:
+	Show changes in:	Näytä muutokset kohteessa:
+	Show Comments	Näytä kommentit
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Näytä asiakirjat käänteisin värein, kuten Näytä › Vaihda tilaa. Tallennus, tulostus ja PDF-tiedostot eivät muutu.
+	Show every bibliography field	Näytä kaikki lähdeluettelon kentät
+	Show First Line Only	Näytä vain ensimmäinen rivi
+	Show in the Styles gallery	Näytä tyylivalikoimassa
+	Show KeyTips (Alt or F10)	Näytä pikanäppäinvihjeet (Alt tai F10)
+	Show Level	Näytä taso
+	Show Level 1	Näytä taso 1
+	Show Level 2	Näytä taso 2
+	Show Level 3	Näytä taso 3
+	Show Level 4	Näytä taso 4
+	Show Level 5	Näytä taso 5
+	Show Level 6	Näytä taso 6
+	Show Level 7	Näytä taso 7
+	Show Level 8	Näytä taso 8
+	Show Level 9	Näytä taso 9
+	Show Markup	Näytä merkinnät
+	Show Notes	Näytä alaviitteet
+	Show only comments and formatting in balloons	Näytä vain kommentit ja muotoilu selitekuplissa
+	Show or Hide Style	Näytä tai piilota tyyli
+	Show page numbers	Näytä sivunumerot
+	Show revisions in balloons	Näytä muutokset selitekuplissa
+	Show rulers	Näytä viivaimet
+	Show Text Formatting	Näytä tekstin muotoilu
+	Show the equation in the line of text	Näytä kaava tekstirivillä
+	Show the equation on a line of its own	Näytä kaava omalla rivillään
+	Show the mini toolbar when text is selected	Näytä pienoistyökalurivi, kun tekstiä on valittu
+	Show/Hide ¶	Näytä/piilota ¶
+	Show\nComments	Näytä\nkommentit
+	Showing the first {count} items.	Näytetään ensimmäiset {count} kohdetta.
+	Shows a tree: each item below the item it belongs to.	Näyttää puun: jokainen kohde sen kohteen alla, johon se kuuluu.
+	Shows items around a central idea: the first item is the centre.	Näyttää kohteet keskeisen ajatuksen ympärillä: ensimmäinen kohde on keskus.
+	Shows items of equal weight as blocks in rows.	Näyttää samanarvoiset kohteet lohkoina riveissä.
+	Shows overlapping ideas as overlapping circles.	Näyttää päällekkäiset ajatukset päällekkäisinä ympyröinä.
+	Shows parts of a whole as quadrants.	Näyttää kokonaisuuden osat neljänneksinä.
+	Shows parts that build on each other, largest at the bottom.	Näyttää toisiinsa perustuvat osat, suurin alimpana.
+	Shows steps in order, left to right, with arrows between them.	Näyttää vaiheet järjestyksessä vasemmalta oikealle nuolin erotettuina.
+	Shows steps that repeat, around a circle.	Näyttää toistuvat vaiheet ympyrässä.
+	Shrink Font 1 Point	Pienennä fonttia 1 pisteellä
+	Shrink Selection	Supista valintaa
+	Shrink text	Kutista teksti
+	Side to Side	Rinnakkain
+	Side\nto Side	Rinnak-\nkain
+	Sides of a right triangle	Suorakulmaisen kolmion sivut
+	Signature Line	Allekirjoitusrivi
+	Sine and cosine series of f(x)	Funktion f(x) sini- ja kosinisarja
+	Sine Function	Sinifunktio
+	Sine theta	Sini theta
+	Single	Yksinkertainen
+	Single Brackets	Yksinkertaiset sulkeet
+	Single Closing Quote	Yksinkertainen loppulainausmerkki
+	Single label	Yksittäinen tarra
+	Single Left Angle	Yksinkertainen vasen kulma
+	Single Left Bar	Yksinkertainen vasen pystyviiva
+	Single Left Brace	Yksinkertainen vasen aaltosulje
+	Single Left Bracket	Yksinkertainen vasen hakasulje
+	Single Left Parenthesis	Yksinkertainen vasen kaarisulje
+	Single Opening Quote	Yksinkertainen alkulainausmerkki
+	Single Right Brace	Yksinkertainen oikea aaltosulje
+	Single Right Bracket	Yksinkertainen oikea hakasulje
+	Single Right Parenthesis	Yksinkertainen oikea kaarisulje
+	Single Spacing	Riviväli 1
+	SIST02	SIST02
+	Site name	Sivuston nimi
+	Size	Koko
+	Size (pt):	Koko (pt):
+	Size and Crop…	Koko ja rajaus…
+	Size:	Koko:
+	Sketchbook	Luonnoskirja
+	Skewed Fraction	Vino murtoluku
+	Skip citations & bibliography	Ohita lähdeviitteet ja lähdeluettelo
+	Skip Citations and Bibliography	Ohita lähdeviitteet ja lähdeluettelo
+	Skip Record If	Ohita tietue, jos
+	Skip Record If…	Ohita tietue, jos…
+	Slant Down	Vino alas
+	Slant Up	Vino ylös
+	Small Caps	Kapiteelit
+	Small caps	Kapiteelit
+	Small change	Pieni muutos
+	Smart quotes instead of straight quotes	Typografiset lainausmerkit suorien sijaan
+	SmartArt	SmartArt
+	SmartArt Design	SmartArt-rakenne
+	SmartArt Styles	SmartArt-tyylit
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Sujuva vieritys ja zoomaus sekä esiin häivytettävät valikot ja painikkeet. Ei käytössä näyttää jokaisen muutoksen heti.
+	Soft Edges	Pehmeät reunat
+	Soft Glow	Pehmeä hehku
+	Solid Accent	Yhtenäinen korostus
+	Sort	Lajittele
+	Sort by	Lajitteluperuste
+	Sort order:	Lajittelujärjestys:
+	Sort Records	Lajittele tietueet
+	Source code: github.com/chatraweechai/doc4me	Lähdekoodi: github.com/chatraweechai/doc4me
+	Source Manager	Lähteiden hallinta
+	Source type:	Lähteen tyyppi:
+	Sources in this document:	Tämän asiakirjan lähteet:
+	South	Etelä
+	Space	Välilyönti
+	Space after	Väli jälkeen
+	Space after: {pt} pt	Väli jälkeen: {pt} pt
+	Space before	Väli ennen
+	Space before/after:	Väli ennen/jälkeen:
+	Space before: {pt} pt	Väli ennen: {pt} pt
+	Spaces	Välilyönnit
+	Spacing	Välistys
+	Spacing (pt):	Välistys (pt):
+	Spacing:	Välistys:
+	Spanish	Espanja
+	Spanish (Mexico)	Espanja (Meksiko)
+	Spanish (Spain)	Espanja (Espanja)
+	Sparse Matrices	Harvat matriisit
+	Special	Erityinen
+	Special Characters	Erikoismerkit
+	Specify height:	Määritä korkeus:
+	Speech	Puhe
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Puhe tunnistetaan tällä tietokoneella (whisper.cpp); mitään ei lähetetä verkkoon.
+	Speed	Nopeus
+	Spelling	Oikeinkirjoitus
+	Spelling & Grammar	Oikeinkirjoitus ja kielioppi
+	Spelling &\nGrammar	Oikeinkirjoitus\nja kielioppi
+	Spelling and grammar are checked in English (United States).	Oikeinkirjoitus ja kielioppi tarkistetaan englanniksi (Yhdysvallat).
+	Spelling Suggestions	Oikeinkirjoitusehdotukset
+	Spike	Keräilyleike
+	Split	Jaa
+	Split apart page break and paragraph mark	Erota sivunvaihto ja kappalemerkki
+	Split Cells	Jaa solut
+	Split Table	Jaa taulukko
+	Spreadsheet Table	Laskentataulukko
+	Square	Neliö
+	Square Root	Neliöjuuri
+	Square Root with Degree	Neliöjuuri ja aste
+	Square Union	Neliöunioni
+	Stack Object	Pino-objekti
+	Stack Object (Three)	Pino-objekti (kolme)
+	Stacked	Pinottu
+	Stacked Bar	Pinottu palkki
+	Stacked Column	Pinottu pylväs
+	Stacked Fraction	Pinottu murtoluku
+	Stacked, no bar	Pinottu, ei viivaa
+	Standard	Normaali
+	Standard and Contextual	Normaalit ja kontekstikohtaiset
+	Standard Colors	Vakiovärit
+	Standard Only	Vain normaalit
+	Star	Tähti
+	Start at:	Aloitusarvo:
+	Start Enforcing Protection	Ota suojaus käyttöön
+	Start Mail Merge	Aloita joukkokirje
+	Start Mail\nMerge	Aloita\njoukkokirje
+	State	Osavaltio
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Statistics	Tilastot
+	Status Bar	Tilarivi
+	Statutes	Lait
+	Stop	Pysäytä
+	Stop Protection	Lopeta suojaus
+	Stop Reading	Lopeta lukeminen
+	Stopped	Pysäytetty
+	Store	Kauppa
+	Straight Arrow Connector	Suora nuoliyhdysviiva
+	Straight Connector	Suora yhdysviiva
+	Strikethrough	Yliviivaus
+	Stroke {n} of {total}	Veto {n}/{total}
+	Strong	Vahva
+	Structure Actions	Rakennetoiminnot
+	Structures	Rakenteet
+	Studio	Studio
+	Studio cover	Studion kansi
+	Studio handbook (sample)	Studion käsikirja (malli)
+	Style	Tyyli
+	Style based on:	Tyylin perusta:
+	Style Inspector	Tyylin tarkastaja
+	Style Set	Tyylijoukko
+	Style:	Tyyli:
+	Style: APA	Tyyli: APA
+	Style: {style}	Tyyli: {style}
+	Styles	Tyylit
+	Styles Pane	Tyylit-ruutu
+	Styles:	Tyylit:
+	Subentry:	Alamerkintä:
+	Subject	Aihe
+	Subscript	Alaindeksi
+	Subscript-Superscript	Ala- ja yläindeksi
+	Subscripts and Superscripts	Ala- ja yläindeksit
+	Subset:	Osajoukko:
+	Substituted font	Korvattu fontti
+	Subtitle	Alaotsikko
+	Subtle Emphasis	Hienovarainen korostus
+	Subtle Reference	Hienovarainen viittaus
+	Sum	Summa
+	Sum of cosines	Kosinien summa
+	Sum or difference of sines	Sinien summa tai erotus
+	Summation	Summa
+	Summation from 0 to n	Summa 0:sta n:ään
+	Summation over binomials	Summa binomien yli
+	Summation with Limits	Summa ja rajat
+	Summation with Lower Limit	Summa ja alaraja
+	Summation with Subscript Limit	Summa ja alaindeksiraja
+	Summation with Subscript-Superscript Limits	Summa ja ala-/yläindeksirajat
+	Summations	Summat
+	Superscript	Yläindeksi
+	Suppress line numbers	Estä rivinumerot
+	Surface Integral	Pintaintegraali
+	Surface Integral with Limits	Pintaintegraali ja rajat
+	Surface Integral with Stacked Limits	Pintaintegraali ja pinotut rajat
+	Swap footnotes and endnotes	Vaihda ala- ja loppuviitteet keskenään
+	Swedish	Ruotsi
+	Switch Modes	Vaihda tilaa
+	Switch Windows	Vaihda ikkunaa
+	Switch\nModes	Vaihda\ntilaa
+	Symbol	Symboli
+	Symbol Font	Symbolifontti
+	Symbols	Symbolit
+	Synchronous Scrolling	Synkroninen vieritys
+	Synonyms	Synonyymit
+	System	Järjestelmä
+	Tab	Sarkain
+	Tab Character	Sarkainmerkki
+	Tab character	Sarkainmerkki
+	Tab characters	Sarkainmerkit
+	Tab leader:	Täyttömerkki:
+	Tab stop position:	Sarkainkohdan sijainti:
+	Tab stops to be cleared:	Poistettavat sarkainkohdat:
+	Table	Taulukko
+	Table AutoFormat	Taulukon automaattinen muotoilu
+	Table AutoFormat…	Taulukon automaattinen muotoilu…
+	Table Column Width	Taulukon sarakeleveys
+	Table Design	Taulukon rakenne
+	Table direction:	Taulukon suunta:
+	Table entry fields	Taulukkomerkintäkentät
+	Table Grid	Taulukkoruudukko
+	Table identifier:	Taulukon tunnus:
+	Table Layout	Taulukon asettelu
+	Table of Authorities	Oikeuslähdeluettelo
+	Table of Contents	Sisällysluettelo
+	Table of Contents Options	Sisällysluettelon asetukset
+	Table of Contents Styles	Sisällysluettelon tyylit
+	Table of Figures	Kuvaluettelo
+	Table of Figures Options	Kuvaluettelon asetukset
+	Table of\nContents	Sisällys-\nluettelo
+	Table Positioning	Taulukon sijoittelu
+	Table Properties	Taulukon ominaisuudet
+	Table Row Height	Taulukon rivin korkeus
+	Table style	Taulukkotyyli
+	Table Style Options	Taulukkotyylin asetukset
+	Table Styles	Taulukkotyylit
+	Table styles:	Taulukkotyylit:
+	Tables	Taulukot
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tabs	Sarkaimet
+	Tabs…	Sarkaimet…
+	Tabular List	Taulukkoluettelo
+	Tag	Tunniste
+	Tangent formula	Tangenttikaava
+	Tangent Function	Tangenttifunktio
+	TC entry fields	TC-merkintäkentät
+	Technology	Tekniikka
+	Templates	Mallit
+	Templates and Add-ins	Mallit ja apuohjelmat
+	Text	Teksti
+	Text Box	Tekstiruutu
+	Text boxes	Tekstiruudut
+	Text Direction	Tekstin suunta
+	Text Effects	Tekstitehosteet
+	Text Effects and Typography	Tekstitehosteet ja typografia
+	Text Fill	Tekstin täyttö
+	Text from File	Teksti tiedostosta
+	Text Highlight Color	Tekstin korostusväri
+	Text indent at:	Tekstin sisennys:
+	Text isn't squeezed to fit its cell yet.	Tekstiä ei vielä tiivistetä mahtumaan soluunsa.
+	Text Outline	Tekstin ääriviiva
+	Text over Colon Equal	Teksti kaksoispiste-yhtäsuuruuden yllä
+	Text over Equal	Teksti yhtäsuuruusmerkin yllä
+	Text Pane	Tekstiruutu
+	Text size	Tekstin koko
+	Text snaps to characters	Teksti kohdistuu merkkeihin
+	Text to display:	Näytettävä teksti:
+	Text Wrapping	Tekstin rivitys
+	Text wrapping:	Tekstin rivitys:
+	Text:	Teksti:
+	Text\nBox	Teksti-\nruutu
+	Text\nDirection	Tekstin\nsuunta
+	Thai	Thai
+	Thai Distributed	Thaimaalainen tasajako
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Tämä muoto ei säilytä kaikkea, joten asiakirja on yhä auki. Jatka tallentamalla se Word-asiakirjana (.docx).
+	That isn't the web address or embed code of an online video.	Se ei ole verkkovideon verkko-osoite tai upotuskoodi.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Salasana on väärä. Tarkista se (salasanoissa isot ja pienet kirjaimet erotellaan) ja yritä uudelleen.
+	The clipboard is empty.	Leikepöytä on tyhjä.
+	The date it is today	Tämän päivän päivämäärä
+	The document contains no tracked changes.	Asiakirja ei sisällä jäljitettyjä muutoksia.
+	The document has no bookmarks yet.	Asiakirjassa ei ole vielä kirjanmerkkejä.
+	The document is read only, except for regions marked editable.	Asiakirja on vain luku -tilassa paitsi muokattaviksi merkityillä alueilla.
+	The document will be saved with a password. Save it to protect it.	Asiakirja tallennetaan salasanalla. Suojaa se tallentamalla.
+	The first word of a sentence starts with a capital.	Virkkeen ensimmäinen sana alkaa isolla kirjaimella.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	päivän ilmainen kiintiö on käytetty (yritä huomenna uudelleen tai anna sähköpostiosoite)
+	the LibreTranslate server	LibreTranslate-palvelin
+	The Mail Merge Helper sets up a merge in three steps.	Joukkokirjeavustaja määrittää yhdistämisen kolmessa vaiheessa.
+	The new style takes the formatting of the current paragraph.	Uusi tyyli saa nykyisen kappaleen muotoilun.
+	The password is optional; without it anyone can stop the protection.	Salasana on valinnainen; ilman sitä kuka tahansa voi lopettaa suojauksen.
+	The password is removed. Save the document to keep the change.	Salasana on poistettu. Säilytä muutos tallentamalla asiakirja.
+	The passwords don't match.	Salasanat eivät täsmää.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Tulostin, kaksipuolinen tulostus ja sivuja arkille valitaan siinä valintaikkunassa.
+	The recipient-list field that fills each part of an address block and greeting line.	Vastaanottajaluettelon kenttä, joka täyttää osoitelohkon ja tervehdysrivin kunkin osan.
+	The same word twice in a row.	Sama sana kahdesti peräkkäin.
+	The spelling and grammar check is complete.	Oikeinkirjoituksen ja kieliopin tarkistus on valmis.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Järjestelmän tiedostovalintaikkuna ei ole käytettävissä, joten Doc4Me näyttää omansa. Saat järjestelmän valintaikkunan asentamalla tiedostovalitsinportaalin (kuten xdg-desktop-portal-gtk) tai zenityn.
+	The text is sent to {service} to be translated.	Teksti lähetetään käännettäväksi palveluun {service}.
+	The time right now	Kellonaika juuri nyt
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Video näkyy asiakirjassa kuvana. Katso se selaimessa kaksoisnapsauttamalla.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Koko asiakirja käännetään uudeksi asiakirjaksi, joka korvaa tämän. Tallenna työsi ensin.
+	Theme Colors	Teeman värit
+	Theme Fonts	Teeman fontit
+	Theme List	Teemaluettelo
+	Themes	Teemat
+	Then by	Sitten
+	Then insert:	Lisää sitten:
+	There's no text to translate.	Käännettävää tekstiä ei ole.
+	Thesaurus	Synonyymisanasto
+	These marks show even when Show/Hide ¶ is off.	Nämä merkit näkyvät, vaikka Näytä/piilota ¶ ei ole käytössä.
+	These merge fields aren't in the recipient list:	Nämä yhdistämiskentät eivät ole vastaanottajaluettelossa:
+	These settings will be used for new documents.	Näitä asetuksia käytetään uusissa asiakirjoissa.
+	Thick	Paksu
+	Thickness	Paksuus
+	This Device…	Tämä laite…
+	This document	Tämä asiakirja
+	This field has no options.	Tällä kentällä ei ole asetuksia.
+	This folder can't be read: {error}	Tätä kansiota ei voi lukea: {error}
+	This font has no characters to show.	Tässä fontissa ei ole näytettäviä merkkejä.
+	This page	Tämä sivu
+	This password type isn't supported.	Tätä salasanatyyppiä ei tueta.
+	This point forward	Tästä eteenpäin
+	This section	Tämä osa
+	Three	Kolme
+	Through	Läpi
+	Tight	Tiivis
+	Tilde	Tilde
+	Tips ({n})	Vinkit ({n})
+	Title	Otsikko
+	Title from the document properties	Otsikko asiakirjan ominaisuuksista
+	Title:	Otsikko:
+	To	Vastaanottaja
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Word-asiakirjojen avaaminen oletusarvoisesti Doc4Mellä: valitse asiakirja Finderissa, valitse Arkisto › Näytä tiedot, valitse Doc4Me kohdassa Avaa sovelluksella ja napsauta sitten Muuta kaikki.
+	To:	Vastaanottaja:
+	TOA Heading	Oikeuslähdeluettelon otsikko
+	TOC Heading	Sisällysluettelon otsikko
+	TOC {n}	Sisällys {n}
+	Today	Tänään
+	tOGGLE cASE	vAIHDA kIRJAINKOKO
+	Toggle Check Box	Vaihda valintaruudun tila
+	Toggle Field Codes	Näytä/piilota kenttäkoodit
+	Toggle Unicode Character	Vaihda Unicode-merkki
+	Tools	Työkalut
+	Top	Ylä
+	Top and Bottom	Ylä- ja alapuoli
+	Top Border	Yläreuna
+	Top Margin	Ylämarginaali
+	Top of Next Page	Seuraavan sivun yläreuna
+	Top of Page	Sivun yläreuna
+	Top of Previous Page	Edellisen sivun yläreuna
+	Top of the Window	Ikkunan yläreuna
+	Top:	Ylä:
+	Total	Yhteensä
+	Total Row	Summarivi
+	Track Changes	Jäljitä muutokset
+	Track Changes Options	Jäljitä muutokset -asetukset
+	Track changes while editing	Jäljitä muutokset muokattaessa
+	Track Changes: On	Jäljitä muutokset: käytössä
+	Track formatting	Jäljitä muotoilu
+	Track\nChanges	Jäljitä\nmuutokset
+	Track\nChanges ✓	Jäljitä\nmuutokset ✓
+	Tracked changes	Jäljitetyt muutokset
+	Tracking	Jäljitys
+	Trademark	Tavaramerkki
+	Trademark Sign	Tavaramerkin merkki
+	Transform	Muunna
+	Translate	Käännä
+	Translate Document	Käännä asiakirja
+	Translating {done} of {total}	Käännetään {done}/{total}
+	Translation service	Käännöspalvelu
+	Translator	Kääntäjä
+	Transparency	Läpinäkyvyys
+	Transparency:	Läpinäkyvyys:
+	Transport	Liikenne
+	Treatises	Tutkielmat
+	Triangle	Kolmio
+	Triangle Down	Kolmio alas
+	Triangle Up	Kolmio ylös
+	Trigonometric Functions	Trigonometriset funktiot
+	Triple	Kolminkertainen
+	Triple Dot	Kolme pistettä
+	Triple Integral	Kolmoisintegraali
+	Triple Integral with Limits	Kolmoisintegraali ja rajat
+	Triple Integral with Stacked Limits	Kolmoisintegraali ja pinotut rajat
+	Trust Center	Luottamuskeskus
+	Tue	ti
+	Turabian	Turabian
+	Turkish	Turkki
+	Two	Kaksi
+	Type	Tyyppi
+	Type a command, e.g. "insert table"	Kirjoita komento, esimerkiksi "lisää taulukko"
+	Type a New List	Kirjoita uusi luettelo
+	Type a New List…	Kirjoita uusi luettelo…
+	Type at least one recipient.	Kirjoita vähintään yksi vastaanottaja.
+	Type equations in LaTeX	Kirjoita kaavat LaTeXina
+	Type equations in the linear format (UnicodeMath)	Kirjoita kaavat lineaarisessa muodossa (UnicodeMath)
+	Type in Equation	Kirjoita kaavaan
+	Type normal (non-math) text in the equation	Kirjoita kaavaan tavallista (ei matemaattista) tekstiä
+	Type Text	Kirjoita teksti
+	Type the categories down the side and a column of values per series.	Kirjoita luokat sivulle allekkain ja yksi arvosarake kutakin sarjaa kohden.
+	Type the field's name and its switches, for example PAGE \\* roman.	Kirjoita kentän nimi ja sen valitsimet, esimerkiksi PAGE \\* roman.
+	Type the password to stop the protection.	Lopeta suojaus kirjoittamalla salasana.
+	Type the recipients, or load them from a file.	Kirjoita vastaanottajat tai lataa ne tiedostosta.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Kirjoita lähteen tunnisteen nimi. Voit lisätä lähteeseen tietoja myöhemmin muokkaamalla sitä.
+	Type:	Tyyppi:
+	Typing	Kirjoittaminen
+	Typing replaces selected text	Kirjoittaminen korvaa valitun tekstin
+	Ukrainian	Ukraina
+	Unchecked symbol	Valitsemattoman symboli
+	Underbar	Alaviiva
+	Underbrace	Aaltosulje alla
+	Underline	Alleviivaus
+	Underline color	Alleviivauksen väri
+	Underline Words Only	Alleviivaa vain sanat
+	Undo	Kumoa
+	Undo Stroke	Kumoa veto
+	Undo {action}	Kumoa {action}
+	Unformatted Text	Muotoilematon teksti
+	Ungroup	Pura ryhmä
+	Union	Yhdiste
+	Union of intersections	Leikkausten yhdiste
+	Union with Limits	Yhdiste ja rajat
+	Union with Lower Limit	Yhdiste ja alaraja
+	Union with Plus	Yhdiste ja plus
+	Union with Subscript-Superscript Limits	Yhdiste ja ala-/yläindeksirajat
+	Unions and Intersections	Yhdisteet ja leikkaukset
+	Unlink Fields	Pura kenttien linkitys
+	Unlink\nCitations	Pura lähdeviitteiden\nlinkitys
+	Unlock Fields	Avaa kenttien lukitus
+	Up	Ylös
+	Up Diagonal Dots	Vinot pisteet ylös
+	Up one level	Yksi taso ylöspäin
+	Update Field	Päivitä kenttä
+	Update fields before printing	Päivitä kentät ennen tulostusta
+	Update Index	Päivitä hakemisto
+	Update Style to Match Selection	Päivitä tyyli vastaamaan valintaa
+	Update Styles from Template	Päivitä tyylit mallista
+	Update Table	Päivitä taulukko
+	Update Table of Figures	Päivitä kuvaluettelo
+	Update to Match	Päivitä vastaamaan
+	Update to Match Selection	Päivitä vastaamaan valintaa
+	UPPERCASE	ISOT KIRJAIMET
+	URGENT	KIIREELLINEN
+	URL	URL
+	Use "a" before a consonant sound	Käytä "a" ennen konsonanttiäännettä
+	Use "an" before a vowel sound	Käytä "an" ennen vokaaliäännettä
+	Use an Existing List…	Käytä aiemmin luotua luetteloa…
+	Use passim (five or more pages)	Käytä passim-merkintää (viisi sivua tai enemmän)
+	Use system setting	Käytä järjestelmän asetusta
+	Use the Insert key to switch overtype on and off	Vaihda korvaustila Insert-näppäimellä
+	Use wildcards	Käytä yleismerkkejä
+	User Name	Käyttäjänimi
+	User name:	Käyttäjänimi:
+	Username	Käyttäjänimi
+	Value	Arvo
+	Vector A	Vektori A
+	Vector AB	Vektori AB
+	Version	Versio
+	Version History	Versiohistoria
+	Version {version} ({build})	Versio {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Versiot säilytetään, kun asiakirja on auki (.docx-tiedostossa ei ole versioita).
+	Vertical	Pysty
+	Vertical Alignment	Pystytasaus
+	Vertical alignment:	Pystytasaus:
+	Vertical Bars	Pystyviivat
+	Vertical Dots	Pystysuuntaiset pisteet
+	Vertical spacing:	Pystyväli:
+	Vietnamese	Vietnam
+	View	Näytä
+	View Alt Text…	Näytä vaihtoehtoinen teksti…
+	View Gridlines	Näytä ruudukkoviivat
+	View Side by Side	Näytä rinnakkain
+	View State	Näkymän tila
+	Views	Näkymät
+	Visual effects	Visuaaliset tehosteet
+	Voice	Ääni
+	Volume	Vuosikerta
+	Volume Integral	Tilavuusintegraali
+	Volume Integral with Limits	Tilavuusintegraali ja rajat
+	Volume Integral with Stacked Limits	Tilavuusintegraali ja pinotut rajat
+	W:	L:
+	Waiting for Zotero…	Odotetaan Zoteroa…
+	Warm Gradient with Outline	Lämmin liukuväri ja ääriviiva
+	Warnings ({n})	Varoitukset ({n})
+	Watermark	Vesileima
+	Wave	Aalto
+	Weather	Sää
+	web access isn't available here	verkkoyhteys ei ole käytettävissä tässä
+	Web Layout	Verkkoasettelu
+	Web page (*.html)	Verkkosivu (*.html)
+	Web\nLayout	Verkko-\nasettelu
+	Website	Verkkosivusto
+	Wed	ke
+	Weight	Paksuus
+	West	Länsi
+	When merging records	Tietueita yhdistettäessä
+	When this document was first created	Milloin tämä asiakirja luotiin
+	When this document was most recently printed	Milloin tämä asiakirja viimeksi tulostettiin
+	When this document was most recently saved	Milloin tämä asiakirja viimeksi tallennettiin
+	White Space	Tyhjä tila
+	White space	Tyhjä tila
+	Who the document properties name as author	Kuka on asiakirjan ominaisuuksissa tekijänä
+	Whole document	Koko asiakirja
+	Whole page	Koko sivu
+	Whole Table	Koko taulukko
+	Whole words	Kokonaiset sanat
+	Wide	Leveä
+	Widow/Orphan Control	Leski- ja orporivien hallinta
+	Widow/Orphan control	Leski- ja orporivien hallinta
+	Width and spacing	Leveys ja välistys
+	Width:	Leveys:
+	Wildcards (regex)	Yleismerkit (regex)
+	Window	Ikkuna
+	With:	Kanssa:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 ja uudemmat
+	Word 97–2003	Word 97–2003
+	Word Count	Sanamäärä
+	Word document	Word-asiakirja
+	Word document (*.docx)	Word-asiakirja (*.docx)
+	Word forms	Sanamuodot
+	Word Left	Sana vasemmalle
+	Word level	Sanataso
+	Word Right	Sana oikealle
+	Word XML Document (*.xml)	Word XML -asiakirja (*.xml)
+	WordArt	WordArt
+	WordArt Styles	WordArt-tyylit
+	Words	Sanat
+	Words only	Vain sanat
+	Wrap Text	Rivitä teksti
+	Wrap text	Rivitä teksti
+	Wrap Text Sides	Rivityksen puolet
+	Wrap\nText	Rivitä\nteksti
+	Write & Insert Fields	Kirjoita ja lisää kenttiä
+	Write a reply	Kirjoita vastaus
+	Write math here with the mouse or a pen.	Kirjoita matematiikkaa tähän hiirellä tai kynällä.
+	Writing Style: Grammar	Kirjoitustyyli: kielioppi
+	x bar	x viiva
+	Year	Vuosi
+	Yes	Kyllä
+	Yields	Tuottaa
+	Your changes will be lost if you don't save them.	Muutokset menetetään, jos et tallenna niitä.
+	Your system doesn't report an animation setting, so animation effects stay on.	Järjestelmä ei ilmoita animaatioasetusta, joten animaatiotehosteet ovat käytössä.
+	Your system has animation effects turned off.	Järjestelmässä animaatiotehosteet ovat poissa käytöstä.
+	Your system has animation effects turned on.	Järjestelmässä animaatiotehosteet ovat käytössä.
+	Zoom	Zoomaus
+	Zoom In	Lähennä
+	Zoom Out	Loitonna
+	Zoom to Page	Sovita sivu
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: peruutettu
+	Zotero: done	Zotero: valmis
+	{cols}×{rows} Table	{cols}×{rows}-taulukko
+	{contributors} contributors · {commits} commits	{contributors} osallistujaa · {commits} committia
+	{count} items highlighted	{count} kohdetta korostettu
+	{count} of {total} pages will print	{count}/{total} sivua tulostetaan
+	{count} paragraphs were changed.	{count} kappaletta muutettiin.
+	{count} records; fields: {fields}	{count} tietuetta; kentät: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Fonttia {fonts} ei ole asennettu tähän tietokoneeseen, joten asiakirja näytetään fontilla {with}. Rivit ja sivut voivat katketa eri kohdista kuin alkuperäisellä fontilla.
+	{group} settings	Ryhmän {group} asetukset
+	{key}+Click to follow link	{key}+napsautus seuraa linkkiä
+	{language} is now the document's default language.	{language} on nyt asiakirjan oletuskieli.
+	{name} (Press ENTER to Insert)	{name} (lisää painamalla Enter)
+	{name} already exists. Choose Save again to replace it.	{name} on jo olemassa. Korvaa se valitsemalla Tallenna uudelleen.
+	{name} can't be a folder's name.	{name} ei voi olla kansion nimi.
+	{name} is protected with a password.	{name} on suojattu salasanalla.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} lisättiin. Sen makrot ovat kohdissa Omat apuohjelmat ja Näytä › Makrot.
+	{name} wasn't found.	Kohdetta {name} ei löytynyt.
+	{n} entries marked.	{n} merkintää merkitty.
+	{n} lines	{n} riviä
+	{n} of {of} recipients	{n}/{of} vastaanottajaa
+	{n} pt	{n} pt
+	{n} records	{n} tietuetta
+	{n} revisions	{n} muutosta
+	{selected} of {words} words	{selected}/{words} sanaa
+	{size} pt	{size} pt
+	{words} words	{words} sanaa
+	{w} × {h} in	{w} × {h} tuumaa
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	”{text}” ({row}, {series}) ei ole luku.
+	← Find	← Etsi
+	✓ None	✓ Ei mitään
+	➕ New comment	➕ Uusi kommentti
+	📂  Browse…	📂  Selaa…

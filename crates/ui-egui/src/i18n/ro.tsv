@@ -1,0 +1,2849 @@
+# Romanian (ro) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts here)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	„a” sau „an” înaintea cuvântului următor; în poloneză „w”/„we”, „z”/„ze”.
+	% of all commits	% din toate commiturile
+	(All)	(Toate)
+	(Custom)	(Particularizat)
+	(no style)	(fără stil)
+	(no suggestions)	(nicio sugestie)
+	(none)	(niciunul)
+	(normal text)	(text normal)
+	(not matched)	(fără potrivire)
+	(picture or object)	(imagine sau obiect)
+	*Bold* and _italic_ with real formatting	*Aldin* și _cursiv_ cu formatare reală
+	0 or More Characters	0 sau mai multe caractere
+	1. Formatting restrictions	1. Restricții de formatare
+	1. Main document	1. Documentul principal
+	1.5 Line Spacing	Spațiere 1,5 rânduri
+	1/4 Em Space	Spațiu de 1/4 em
+	1×2 Empty Matrix	Matrice goală 1×2
+	1×3 Empty Matrix	Matrice goală 1×3
+	2. Data source	2. Sursa de date
+	2. Editing restrictions	2. Restricții de editare
+	2×1 Empty Matrix	Matrice goală 2×1
+	2×2 Determinant	Determinant 2×2
+	2×2 Empty Matrix	Matrice goală 2×2
+	2×2 Identity Matrix	Matrice unitate 2×2
+	2×2 Identity Matrix (sparse)	Matrice unitate 2×2 (rară)
+	2×2 Matrix in Brackets	Matrice 2×2 între paranteze drepte
+	2×2 Matrix in Double Bars	Matrice 2×2 între bare duble
+	2×2 Matrix in Parentheses	Matrice 2×2 între paranteze rotunde
+	2×3 Empty Matrix	Matrice goală 2×3
+	3-D	3D
+	3. Merge the data with the document	3. Îmbinați datele cu documentul
+	3. Start enforcement	3. Porniți protecția
+	3D Models	Modele 3D
+	3×1 Empty Matrix	Matrice goală 3×1
+	3×2 Empty Matrix	Matrice goală 3×2
+	3×3 Empty Matrix	Matrice goală 3×3
+	3×3 Identity Matrix	Matrice unitate 3×3
+	3×3 Identity Matrix (sparse)	Matrice unitate 3×3 (rară)
+	5,000 characters a day; give an email address for 50,000.	5.000 de caractere pe zi; indicați o adresă de e-mail pentru 50.000.
+	<< Less	<< Mai puțin
+	<< Remove	<< Eliminare
+	A file dialog is already open.	O casetă de dialog pentru fișiere este deja deschisă.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Un procesor de text gratuit, open source, scris de la zero în Rust.\nBazat pe WordCraft de echipa ArtCraft.
+	A header source holds the field names for a data source without a header row.	O sursă de antet conține numele câmpurilor pentru o sursă de date fără rând de antet.
+	A mail merge field	Un câmp de îmbinare
+	A new document lists the commands with their shortcuts.	Un document nou listează comenzile cu comenzile rapide ale acestora.
+	A numbered sequence (figures, tables…)	O secvență numerotată (figuri, tabele…)
+	A password is required to open this document.	Este necesară o parolă pentru a deschide acest document.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Un spațiu înaintea semnelor de punctuație, semne dublate, virgule poloneze înaintea conjuncțiilor.
+	A table of contents	Un cuprins
+	A table's rows keep the same columns here.	Rândurile unui tabel păstrează aici aceleași coloane.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Despre
+	About Doc4Me	Despre Doc4Me
+	Above Chart	Deasupra diagramei
+	Above the item	Deasupra elementului
+	Absolute position	Poziție absolută
+	Absolute value cases	Cazuri cu valoare absolută
+	Accent	Accent
+	Accent Gradient	Gradient de accent
+	Accent with Reflection	Accent cu reflexie
+	Accent {n}	Accent {n}
+	Accents	Accente
+	Accept	Acceptare
+	Accept All	Acceptare totală
+	Accept All Changes	Acceptați toate modificările
+	Accept or Reject Changes	Acceptați sau respingeți modificările
+	Accept This Change	Acceptați această modificare
+	Accessed on	Accesat la
+	Accessibility	Accesibilitate
+	Accessibility Pane	Panoul Accesibilitate
+	Acute	Accent ascuțit
+	Add	Adăugare
+	Add >>	Adăugare >>
+	Add a comment	Adăugați un comentariu
+	Add a Table	Adăugați un tabel
+	Add at least one field.	Adăugați cel puțin un câmp.
+	Add caption when inserting:	Adăugați legendă la inserare:
+	Add Chart Element	Adăugare element de diagramă
+	Add Field	Adăugare câmp
+	Add Field Name	Adăugare nume de câmp
+	Add Font…	Adăugare font…
+	Add line numbering	Adăugați numerotarea rândurilor
+	Add New Placeholder	Adăugare substituent nou
+	Add New Placeholder…	Adăugare substituent nou…
+	Add New Source…	Adăugare sursă nouă…
+	Add Object to Selection	Adăugare obiect la selecție
+	Add Pen	Adăugare stilou
+	Add Row	Adăugare rând
+	Add Series	Adăugare serie
+	Add Shape	Adăugare formă
+	Add Space Before Paragraph	Adăugare spațiu înainte de paragraf
+	Add space between Asian and Latin text	Adăugați spațiu între textul asiatic și cel latin
+	Add space between Asian text and numbers	Adăugați spațiu între textul asiatic și cifre
+	Add tab stop at:	Adăugați un tabulator la:
+	Add Text	Adăugare text
+	Add the chapter number	Adăugați numărul capitolului
+	Add to Dictionary	Adăugare la dicționar
+	Add to Document	Adăugare la document
+	Add to Quick Access Toolbar	Adăugare la bara de instrumente Acces rapid
+	Add to Style Gallery	Adăugare la galeria de stiluri
+	Add-ins	Programe de completare
+	Add/Edit\nBibliography	Adăugare/editare\nbibliografie
+	Add/Edit\nCitation	Adăugare/editare\ncitat
+	Add\nNote	Adăugare\nnotă
+	Add\nPen	Adăugare\nstilou
+	Add\nShape	Adăugare\nformă
+	Added	Adăugat
+	Added Fonts	Fonturi adăugate
+	Address	Adresă
+	Address Block	Bloc de adresă
+	Address labels	Etichete de adresă
+	Address:	Adresă:
+	Address\nBlock	Bloc de\nadresă
+	Adjust	Ajustare
+	Advanced	Complex
+	Advanced Find	Căutare complexă
+	Advanced Find…	Căutare complexă…
+	After:	După:
+	Agents	Agenți
+	Align	Aliniere
+	Align Bottom Center	Aliniere jos la centru
+	Align Bottom Left	Aliniere jos la stânga
+	Align Bottom Right	Aliniere jos la dreapta
+	Align Center	Aliniere la centru
+	Align Center Left	Aliniere la mijloc la stânga
+	Align Center Right	Aliniere la mijloc la dreapta
+	Align Left	Aliniere la stânga
+	Align Right	Aliniere la dreapta
+	Align Text	Aliniere text
+	Align Top Center	Aliniere sus la centru
+	Align Top Left	Aliniere sus la stânga
+	Align Top Right	Aliniere sus la dreapta
+	Aligned at:	Aliniat la:
+	Alignment	Aliniere
+	Alignment:	Aliniere:
+	All	Toate
+	All - Linear	Toate – liniar
+	All - Professional	Toate – profesional
+	All Borders	Toate bordurile
+	All Caps	Toate majusculele
+	All caps	Numai majuscule
+	All Commands	Toate comenzile
+	All files	Toate fișierele
+	All Levels	Toate nivelurile
+	All Markup	Toate marcajele
+	All pages	Toate paginile
+	All pages in the range	Toate paginile din interval
+	All records	Toate înregistrările
+	All symbol sets	Toate seturile de simboluri
+	Allow Doc4Me to use online services	Permiteți ca Doc4Me să utilizeze servicii online
+	Allow hanging punctuation	Permiteți punctuația suspendată
+	Allow Latin text to wrap in the middle of a word	Permiteți încadrarea textului latin în mijlocul unui cuvânt
+	Allow line breaks	Permiteți întreruperi de rând
+	Allow overlap	Permiteți suprapunerea
+	Allow row to break across pages	Permiteți despărțirea rândului între pagini
+	Alphabetical	Alfabetic
+	Alt Text	Text alternativ
+	Alt text	Text alternativ
+	Alt Text Pane	Panoul Text alternativ
+	Alt:	Alt:
+	Alt\nText	Text\nalternativ
+	And	Și
+	Angle Brackets	Paranteze unghiulare
+	Angle Brackets with Separator	Paranteze unghiulare cu separator
+	Angle Brackets with Two Separators	Paranteze unghiulare cu doi separatori
+	Animate the caret (it glides and fades)	Animare cursor (alunecă și se estompează)
+	Animation	Animație
+	Animation effects:	Efecte de animație:
+	Annotation Reference	Referință la adnotare
+	Annotation Subject	Subiectul adnotării
+	Annotation Text	Textul adnotării
+	Another file	Alt fișier
+	Any Character	Orice caracter
+	Any Digit	Orice cifră
+	Any Letter	Orice literă
+	Anyone can open this document. Encrypt it with a password to keep it private.	Oricine poate deschide acest document. Criptați-l cu o parolă pentru a-l păstra privat.
+	Anyone who opens the document will need this password.	Oricine deschide documentul va avea nevoie de această parolă.
+	APA	APA
+	API key (if the server needs one)	Cheie API (dacă serverul necesită una)
+	Apply	Aplicare
+	Apply as you type	Aplicare în timpul tastării
+	Apply Asian line-breaking rules (kinsoku)	Aplicați regulile asiatice de întrerupere a rândului (kinsoku)
+	Apply Character Style	Aplicare stil de caracter
+	Apply formatting to:	Aplicați formatarea la:
+	Apply special formats to	Aplicați formate speciale la
+	Apply Style	Aplicare stil
+	Apply Styles	Aplicare stiluri
+	Apply to:	Aplicare la:
+	Arabic	Arabă
+	Arch Down	Arc în jos
+	Arch Up	Arc în sus
+	Area	Zonă
+	Around	Încadrat
+	Arrange	Aranjare
+	Arrange All	Aranjare totală
+	Arrange\nAll	Aranjare\ntotală
+	Arrow	Săgeată
+	Arrows	Săgeți
+	Artistic Effects	Efecte artistice
+	As Recommended	Așa cum se recomandă
+	As you type	În timpul tastării
+	ASAP	ASAP
+	Ascending	Ascendent
+	Asian text font:	Font pentru text asiatic:
+	Asian Typography	Tipografie asiatică
+	Assign	Atribuire
+	At least	Cel puțin
+	At least {n}	Cel puțin {n}
+	Atelier	Atelier
+	Atmosphere	Atmosferă
+	Attach Template	Atașare șablon
+	Attach…	Atașare…
+	Author	Autor
+	Auto	Automat
+	AutoCaption	Legendă automată
+	AutoCaption…	Legendă automată…
+	AutoComplete	Completare automată
+	AutoCorrect	Corectare automată
+	AutoCorrect Options	Opțiuni de corectare automată
+	AutoFit	Potrivire automată
+	AutoFit Contents	Potrivire automată la conținut
+	AutoFit Window	Potrivire automată la fereastră
+	AutoFormat	Formatare automată
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Formatarea automată (Ctrl+Alt+K) formatează paragrafele selectate sau întregul document.
+	AutoFormat and Review Changes…	Formatare automată și revizuire modificări…
+	AutoFormat As You Type	Formatare automată în timpul tastării
+	AutoFormat changed {count} paragraphs	Formatarea automată a modificat {count} paragrafe
+	AutoFormat Now	Formatare automată acum
+	Automatic	Automat
+	Automatic ({language})	Automat ({language})
+	Automatic bulleted lists	Liste automate cu marcatori
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Automat urmează limba sistemului. Meniurile și comenzile se schimbă; documentele dvs. nu.
+	Automatic numbered lists	Liste numerotate automate
+	Automatic Table 1 (3 levels)	Tabel automat 1 (3 niveluri)
+	Automatic Table 2 (2 levels)	Tabel automat 2 (2 niveluri)
+	Automatically hyphenate document	Despărțire automată în silabe a documentului
+	Automatically Update Document Styles	Actualizare automată a stilurilor documentului
+	Automatically update document styles	Actualizare automată a stilurilor documentului
+	AutoSave	Salvare automată
+	AutoSave documents you have saved in Doc4Me	Salvați automat documentele pe care le-ați salvat în Doc4Me
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Salvarea automată nu a reușit: {error}. Salvați documentul pentru a reactiva salvarea automată.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Salvarea automată nu este disponibilă în browser: acesta nu poate scrie în fișierele dvs. Salvarea descarcă o copie.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Salvarea automată păstrează doar fișierele .docx, .odt și .rtf; {name} nu poate păstra toată formatarea. Salvați ca .docx pentru a activa salvarea automată.
+	AutoSave saves every change to the file (needs a saved document)	Salvarea automată salvează fiecare modificare în fișier (necesită un document salvat)
+	AutoSave writes your changes to the file a moment after you stop typing.	Salvarea automată scrie modificările în fișier la scurt timp după ce opriți tastarea.
+	AutoText	Text automat
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Back	Înapoi
+	Backspace	Backspace
+	Balloons	Baloane
+	Banded Columns	Coloane alternante
+	Banded Rows	Rânduri alternante
+	Bar	Bară
+	Base text:	Text de bază:
+	Based on: {style}	Bazat pe: {style}
+	Baseline Dots	Puncte pe linia de bază
+	Basic Cycle	Ciclu de bază
+	Basic List	Listă de bază
+	Basic Math	Matematică de bază
+	Basic Matrix	Matrice de bază
+	Basic Process	Proces de bază
+	Basic Pyramid	Piramidă de bază
+	Basic Radial	Radial de bază
+	Basic Venn	Venn de bază
+	Bayes' rule	Regula lui Bayes
+	Before:	Înainte:
+	Beginning of Word	Începutul cuvântului
+	Behind Text	În spatele textului
+	Below text	Sub text
+	Below the item	Sub element
+	Between	Între
+	Bibliography	Bibliografie
+	Binary assets added	Fișiere binare adăugate
+	Binary assets removed	Fișiere binare eliminate
+	Binomial Coefficient	Coeficient binomial
+	Binomial Coefficient (angle)	Coeficient binomial (unghi)
+	Binomial Coefficient with Angle Brackets	Coeficient binomial cu paranteze unghiulare
+	Binomial expansion of (x+a)ⁿ	Dezvoltarea binomială a lui (x+a)ⁿ
+	Blank	Necompletat
+	Blank (Three Columns)	Necompletat (trei coloane)
+	Blank document	Document necompletat
+	Blank Page	Pagină necompletată
+	Block\nAuthors	Blocare\nautori
+	Blue:	Albastru:
+	Body Text	Corp text
+	Body text in a short paragraph to show spacing.	Corp text într-un paragraf scurt pentru a arăta spațierea.
+	Bold	Aldin
+	Book	Carte
+	Book Title	Titlu de carte
+	Book title	Titlu de carte
+	Bookmark	Marcaj în document
+	Bookmark name:	Numele marcajului:
+	Border lines	Linii de bordură
+	Border Painter	Pictor de borduri
+	Border\nPainter	Pictor de\nborduri
+	Borders	Borduri
+	Borders and Shading	Borduri și umbrire
+	Borders and Shading…	Borduri și umbrire…
+	Border…	Bordură…
+	Both Sides	Ambele părți
+	Both sides	Ambele părți
+	Bottom	Jos
+	Bottom Border	Bordură de jos
+	Bottom Margin	Margine de jos
+	Bottom of Page	Partea de jos a paginii
+	Bottom of the Window	Partea de jos a ferestrei
+	Bottom:	Jos:
+	Box	Casetă
+	Boxed Formula	Formulă în casetă
+	Boxed Formula (example)	Formulă în casetă (exemplu)
+	Boxed Formulas	Formule în casetă
+	Braces	Acolade
+	Braces with Separator	Acolade cu separator
+	Bracket	Paranteză
+	Brackets	Paranteze
+	Brackets with Separators	Paranteze cu separatori
+	Break Link	Întrerupere legătură
+	Breaks	Întreruperi
+	Breve	Breve
+	Brightness, contrast and transparency change the picture from how it looks now.	Luminozitatea, contrastul și transparența modifică imaginea față de aspectul ei actual.
+	Brightness:	Luminozitate:
+	Bring Forward	Aducere în față
+	Browse in Doc4Me…	Răsfoire în Doc4Me…
+	Browse…	Răsfoire…
+	Build table of figures from:	Generați tabelul de figuri din:
+	Building Block Gallery Content Control	Control de conținut pentru galeria de blocuri de construcție
+	Built from the style or table entry fields chosen in Options.	Generat din stilul sau din câmpurile de intrări de tabel alese în Opțiuni.
+	Built-In	Predefinit
+	Built-in Heading styles	Stiluri de titlu predefinite
+	Built-in style	Stil predefinit
+	Built-in styles can't be deleted.	Stilurile predefinite nu pot fi șterse.
+	Bullet	Marcator
+	Bullet Library	Bibliotecă de marcatori
+	Bullets	Marcatori
+	By author	După autor
+	By:	De:
+	Calendar	Calendar
+	Can't be deleted	Nu se poate șterge
+	Cancel	Anulare
+	Canvas Member	Membru al pânzei
+	Capitalization	Scriere cu majuscule
+	Capitalize Each Word	Fiecare Cuvânt Cu Majusculă
+	Capitalize first letter of sentences	Prima literă a propozițiilor cu majusculă
+	Capitalize first letter of table cells	Prima literă din celulele de tabel cu majusculă
+	Capitalize names of days	Numele zilelor cu majusculă
+	Capitalize the first word of a sentence	Primul cuvânt al unei propoziții cu majusculă
+	Caption	Legendă
+	Caption label:	Etichetă legendă:
+	Caption Numbering	Numerotarea legendelor
+	Caption text	Textul legendei
+	Caption:	Legendă:
+	Captions	Legende
+	Caret Character	Caracterul ^
+	Case changes	Modificări de scriere cu majuscule
+	Cases	Cazuri
+	Cases (Three Conditions)	Cazuri (trei condiții)
+	Cases (Two Conditions)	Cazuri (două condiții)
+	Cases and Stacks	Cazuri și stive
+	Catalog	Catalog
+	Categories	Categorii
+	Categories:	Categorii:
+	Category	Categorie
+	Category {n}	Categoria {n}
+	Category:	Categorie:
+	Category…	Categorie…
+	Ceiling	Parte întreagă superioară
+	Cell	Celulă
+	Cell Margins	Marginile celulei
+	Cell margins	Marginile celulei
+	Cell Options	Opțiuni celulă
+	Cell Size	Dimensiune celulă
+	Cell\nMargins	Marginile\ncelulei
+	Center	Centrat
+	Centered	Centrat
+	Centered as Group	Centrat ca grup
+	Centimeters	Centimetri
+	Change	Modificare
+	Change Case	Modificare scriere cu majuscule
+	Change Chart Type	Modificare tip diagramă
+	Change Colors	Modificare culori
+	Change in y over change in x	Variația lui y raportată la variația lui x
+	Change Layout	Modificare aspect
+	Change List Level	Modificare nivel de listă
+	Change Password…	Modificare parolă…
+	Change Picture	Modificare imagine
+	Change Picture…	Modificare imagine…
+	Change Shape	Modificare formă
+	Change Structure	Modificare structură
+	Change to Display	Modificare în afișat
+	Change to Inline	Modificare în aliniat cu textul
+	Change to Level 1	Modificare în nivelul 1
+	Change to Level 2	Modificare în nivelul 2
+	Change to Level 3	Modificare în nivelul 3
+	Change to Level 4	Modificare în nivelul 4
+	Change to Level 5	Modificare în nivelul 5
+	Change to Level 6	Modificare în nivelul 6
+	Change to Level 7	Modificare în nivelul 7
+	Change to Level 8	Modificare în nivelul 8
+	Change to Level 9	Modificare în nivelul 9
+	Change\nChart Type	Modificare\ntip diagramă
+	Change\nColors	Modificare\nculori
+	Changed	Modificat
+	Changed lines:	Rânduri modificate:
+	Changes	Modificări
+	Changes with highlighting	Modificări cu evidențiere
+	Changes without highlighting	Modificări fără evidențiere
+	Chapter in a book	Capitol dintr-o carte
+	Chapters begin at:	Capitolele încep cu:
+	Character	Caracter
+	Character Border	Bordură caracter
+	Character code:	Cod caracter:
+	Character in Range	Caracter din interval
+	Character level	Nivel caracter
+	Character Position	Poziție caracter
+	Character Scale	Scalare caractere
+	Character Shading	Umbrire caractere
+	Character Spacing	Spațiere caractere
+	Character spacing	Spațiere caractere
+	Character style	Stil de caracter
+	Characters	Caractere
+	Characters (no spaces)	Caractere (fără spații)
+	Characters (with spaces)	Caractere (cu spații)
+	Characters per line:	Caractere pe rând:
+	Chart	Diagramă
+	Chart Design	Proiectare diagramă
+	Chart Layouts	Aspecte diagramă
+	Chart Title	Titlu diagramă
+	Check	Verificare
+	Check Accessibility	Verificare accesibilitate
+	Check Box Content Control	Control de conținut casetă de selectare
+	Check Compatibility	Verificare compatibilitate
+	Check Errors…	Verificare erori…
+	Check for Errors	Verificare erori
+	Check Spelling as You Type	Verificare ortografie în timpul tastării
+	Check spelling as you type	Verificați ortografia în timpul tastării
+	Check\nAccessibility	Verificare\naccesibilitate
+	Checked styles are allowed:	Stilurile bifate sunt permise:
+	Checked symbol	Simbol bifat
+	Chevron Down	Chevron în jos
+	Chevron Up	Chevron în sus
+	Chicago	Chicago
+	Chinese (Simplified)	Chineză (simplificată)
+	Chinese (Traditional)	Chineză (tradițională)
+	Choose a command	Alegeți o comandă
+	Choose a shortcut	Alegeți o comandă rapidă
+	Choose List Item	Alegeți un element din listă
+	Choose the sheet that holds the recipients.	Alegeți foaia care conține destinatarii.
+	Circle	Cerc
+	Circle area from its radius	Aria cercului din rază
+	Circled Dot	Punct încercuit
+	Circled Plus	Plus încercuit
+	Circled Times	Înmulțire încercuită
+	Citation marked.	Citat marcat.
+	Citation Style	Stil de citare
+	Citations	Citate
+	Citations & Bibliography	Citate și bibliografie
+	City	Oraș
+	Clear	Golire
+	Clear All	Golire totală
+	Clear All Formatting	Golire toată formatarea
+	Clear Character Formatting	Golire formatare caractere
+	Clear Character Style	Golire stil de caracter
+	Clear Formatting Level	Golire nivel de formatare
+	Clear Paragraph Formatting	Golire formatare paragraf
+	Click a border between two cells to merge them. Esc stops.	Faceți clic pe o bordură dintre două celule pentru a le îmbina. Esc oprește.
+	Click an item to paste it.	Faceți clic pe un element pentru a-l lipi.
+	Click level to modify:	Faceți clic pe nivelul de modificat:
+	Click the empty text box the text should continue in (Esc cancels)	Faceți clic pe caseta text goală în care trebuie să continue textul (Esc anulează)
+	Click to switch back to inserting	Faceți clic pentru a reveni la inserare
+	Clipboard	Clipboard
+	Clipboard Contents	Conținutul clipboardului
+	Clipboard Items	Elemente din clipboard
+	Clipboard Pane	Panoul Clipboard
+	Close	Închidere
+	Close Equation	Închidere ecuație
+	Close Header and Footer	Închidere antet și subsol
+	Close Outline View	Închidere vizualizare schiță
+	Close Outline\nView	Închidere\nvizualizare schiță
+	Close Reviewing Pane	Închidere panou de revizuire
+	Clustered Bar	Bară grupată
+	Clustered Column	Coloană grupată
+	Col #:	Nr. col.:
+	Collapse	Restrângere
+	Collapse Selection	Restrângere selecție
+	Collapse the Ribbon	Restrângere panglică
+	Collate copies	Colaționare copii
+	Collect entries from:	Colectați intrări din:
+	Colon Equal	Două puncte egal
+	Color	Culoare
+	Color model:	Model de culoare:
+	Color only	Doar culoare
+	Color:	Culoare:
+	Color: {color}	Culoare: {color}
+	Colorful	Colorat
+	Colors	Culori
+	Colors:	Culori:
+	Column	Coloană
+	Column Break	Întrerupere de coloană
+	Column Selection	Selecție coloană
+	Column selection: the arrow keys extend the block, Esc ends it	Selecție coloană: tastele săgeată extind blocul, Esc îl încheie
+	Column width	Lățime coloană
+	Column:	Coloană:
+	Columns	Coloane
+	Columns:	Coloane:
+	Combine	Combinare
+	Combine Documents	Combinare documente
+	Combo Box Content Control	Control de conținut casetă combo
+	Commands	Comenzi
+	Commands:	Comenzi:
+	Comment	Comentariu
+	Comments	Comentarii
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Comentarii lângă fiecare pagină și modificări urmărite în PDF-uri, imprimări și imagini; o listă de comentarii la sfârșitul paginilor web, Markdown și text.
+	Comments on version	Comentarii despre versiune
+	Comments Pane	Panoul Comentarii
+	Commits	Commituri
+	Common Accent Objects	Obiecte de accent uzuale
+	Common Brackets	Paranteze uzuale
+	Common Fractions	Fracții uzuale
+	Common Functions	Funcții uzuale
+	Common Large Operators	Operatori mari uzuali
+	Common Operator Structures	Structuri de operatori uzuale
+	Common Operators	Operatori uzuali
+	Common Radicals	Radicali uzuali
+	Common Subscripts and Superscripts	Indici și exponenți uzuali
+	Communication	Comunicare
+	Compact	Compact
+	Company	Companie
+	Compare	Comparare
+	Compare Documents	Comparare documente
+	Compare to	Comparare cu
+	Compared: {changes} changes	Comparat: {changes} modificări
+	Comparing with another file needs the desktop app.	Compararea cu alt fișier necesită aplicația desktop.
+	Comparison	Comparație
+	Comparison settings	Setări de comparare
+	Compatibility mode: {version}	Mod de compatibilitate: {version}
+	Compatibility Options	Opțiuni de compatibilitate
+	Compatibility Options…	Opțiuni de compatibilitate…
+	Compress Pictures	Comprimare imagini
+	Compress punctuation at the start of a line	Comprimați punctuația de la începutul unui rând
+	Condensed	Condensat
+	Conference	Conferință
+	Conference paper	Lucrare de conferință
+	CONFIDENTIAL	CONFIDENȚIAL
+	Confirm password:	Confirmare parolă:
+	Connect Shapes	Conectare forme
+	Constitutional Provisions	Dispoziții constituționale
+	Container Title	Titlul lucrării-gazdă
+	Contains	Conține
+	Content Control at Selection	Control de conținut la selecție
+	Content Control Properties	Proprietăți control de conținut
+	Contents can't be edited	Conținutul nu poate fi editat
+	Context	Context
+	Contextual	Contextual
+	Continuous	Continuu
+	Continuous numbering	Numerotare continuă
+	Contour Integral	Integrală de contur
+	Contour Integral with Limits	Integrală de contur cu limite
+	Contour Integral with Stacked Limits	Integrală de contur cu limite suprapuse
+	Contour Integrals	Integrale de contur
+	Contrast:	Contrast:
+	Contributors	Contribuitori
+	Controls	Controale
+	Conversions	Conversii
+	Convert	Conversie
+	Convert between built-up and linear form	Conversie între forma construită și cea liniară
+	Convert Notes	Conversie note
+	Convert Permanently	Conversie permanentă
+	Convert Text to Table	Conversie text în tabel
+	Convert Text to Table…	Conversie text în tabel…
+	Convert to Arabic Digits	Conversie în cifre arabe
+	Convert to Shapes	Conversie în forme
+	Convert to Text	Conversie în text
+	Convert to Thai Digits	Conversie în cifre thailandeze
+	Copies	Copii
+	Coproduct	Coprodus
+	Coproduct with Limits	Coprodus cu limite
+	Coproduct with Lower Limit	Coprodus cu limită inferioară
+	Coproduct with Subscript-Superscript Limits	Coprodus cu limite indice-exponent
+	Copy	Copiere
+	Copy Formatting	Copiere formatare
+	Copy of the text a bookmark marks	Copia textului marcat de un marcaj
+	Copy Styles	Copiere stiluri
+	Copy Text	Copiere text
+	Copy to where?	Copiere unde?
+	Copyright	Drepturi de autor
+	Copyright Sign	Semnul drepturilor de autor
+	Corrections	Corecții
+	Cosecant Function	Funcția cosecantă
+	Cosine 2x	Cosinus 2x
+	Cosine Function	Funcția cosinus
+	Cotangent Function	Funcția cotangentă
+	Couldn't add {name}: {reason}	Nu s-a putut adăuga {name}: {reason}
+	Couldn't download the picture: {reason}	Nu s-a putut descărca imaginea: {reason}
+	Couldn't download {name}: {error}	Nu s-a putut descărca {name}: {error}
+	Couldn't get the add-in list: {reason}	Nu s-a putut obține lista de programe de completare: {reason}
+	Couldn't make Doc4Me the default: {error}	Nu s-a putut seta Doc4Me ca implicit: {error}
+	Couldn't open {path}: {error}	Nu s-a putut deschide {path}: {error}
+	Couldn't search: {reason}	Nu s-a putut căuta: {reason}
+	Couldn't translate: {reason}	Nu s-a putut traduce: {reason}
+	Count by:	Pas de numărare:
+	Count words in text boxes and notes	Numărați cuvintele din casetele text și din note
+	Country	Țară
+	Courtesy Title	Titlu de politețe
+	Cover Page	Pagină de copertă
+	Craft	Craft
+	Create	Creare
+	Create a Style	Creați un stil
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Creați o schiță interactivă a documentului.\n\nEste o modalitate excelentă de a ști unde vă aflați sau de a muta rapid conținutul.\n\nPentru a începe, accesați fila Pornire și aplicați stiluri de titlu titlurilor din document.
+	Create Data Source…	Creare sursă de date…
+	Create Graphic	Creare grafică
+	Create Header Source	Creare sursă de antet
+	Create Link	Creare legătură
+	Create New Style	Creare stil nou
+	Create Source	Creare sursă
+	Create…	Creare…
+	Crop	Decupare
+	Cross-reference	Referință încrucișată
+	Cross-reference:	Referință încrucișată:
+	Cube Root	Rădăcină cubică
+	Current	Curent
+	Current - Linear	Curent – liniar
+	Current - Professional	Curent – profesional
+	Current keyboard settings	Setări curente ale tastaturii
+	Current page	Pagina curentă
+	Current Position	Poziția curentă
+	Current record	Înregistrarea curentă
+	Current style: {style}	Stil curent: {style}
+	Curved Arrow Connector	Conector săgeată curbat
+	Curved Connector	Conector curbat
+	Custom	Particularizat
+	Custom dictionary	Dicționar particularizat
+	Custom Margins…	Margini particularizate…
+	Custom mark:	Marcaj particularizat:
+	Custom range	Interval particularizat
+	Custom Table of Contents	Cuprins particularizat
+	Custom Table of Contents…	Cuprins particularizat…
+	Custom Watermark	Inscripționare particularizată
+	Custom Watermark…	Inscripționare particularizată…
+	Customize	Particularizare
+	Customize Keyboard	Particularizare tastatură
+	Customize Quick Access Toolbar	Particularizare bară de instrumente Acces rapid
+	Customize Quick Access Toolbar…	Particularizare bară de instrumente Acces rapid…
+	Customize Ribbon	Particularizare panglică
+	Customize the Ribbon…	Particularizare panglică…
+	Customize…	Particularizare…
+	Cut	Decupare
+	Cut, copy, and paste	Decupare, copiere și lipire
+	Cycle	Ciclu
+	Czech	Cehă
+	Danish	Daneză
+	Dark	Întunecat
+	Dark Mode	Mod întunecat
+	Dark page (white text on black)	Pagină întunecată (text alb pe negru)
+	Dark with Shadow	Întunecat cu umbră
+	Darkroom	Cameră obscură
+	Dashed	Întrerupt
+	Data	Date
+	Data Labels	Etichete de date
+	Data source:	Sursă de date:
+	Date	Dată
+	Date & Time	Dată și oră
+	Date and Time	Dată și oră
+	Date format	Format dată
+	Date formats:	Formate de dată:
+	Date Picker Content Control	Control de conținut selector de date
+	Day	Zi
+	Decimal	Zecimal
+	Decorative objects only add visual interest: screen readers skip them.	Obiectele decorative adaugă doar interes vizual: cititoarele de ecran le omit.
+	Decrease Font Size	Micșorare dimensiune font
+	Decrease Indent	Micșorare indent
+	Default	Implicit
+	Default Paragraph Font	Font paragraf implicit
+	Default tab stops:	Tabulatori impliciți:
+	Define New Bullet	Definire marcator nou
+	Define New Multilevel List	Definire listă nouă cu mai multe niveluri
+	Define New Multilevel List…	Definire listă nouă cu mai multe niveluri…
+	Define New Number Format	Definire format nou de număr
+	Deflate	Dezumflare
+	Delete	Ștergere
+	Delete Back in Equation	Ștergere înapoi în ecuație
+	Delete Cells	Ștergere celule
+	Delete Clipboard Item	Ștergere element din clipboard
+	Delete Columns	Ștergere coloane
+	Delete Comment	Ștergere comentariu
+	Delete in Equation	Ștergere în ecuație
+	Delete Label	Ștergere etichetă
+	Delete Next Word	Ștergere cuvânt următor
+	Delete Previous Word	Ștergere cuvânt anterior
+	Delete Rows	Ștergere rânduri
+	Delete Selected Ink	Ștergere cerneală selectată
+	Delete Style	Ștergere stil
+	Delete Table	Ștergere tabel
+	Delete Table Style	Ștergere stil de tabel
+	Deleted	Șters
+	Deletions:	Ștergeri:
+	Delivery address:	Adresă de livrare:
+	Delta Equal To	Delta egal cu
+	Delta over arrow	Delta deasupra săgeții
+	Demote	Retrogradare
+	Demote to Body Text	Retrogradare la corp text
+	Derivative as a limit	Derivata ca limită
+	Descending	Descendent
+	Describe what this object shows, for people who can't see it.	Descrieți ce arată acest obiect, pentru persoanele care nu îl pot vedea.
+	Describe what this table shows, for people who can't see it.	Descrieți ce arată acest tabel, pentru persoanele care nu îl pot vedea.
+	Description:	Descriere:
+	Design	Proiectare
+	Design Mode	Mod proiectare
+	Detach Template	Detașare șablon
+	Detect language automatically	Detectare automată a limbii
+	Developer	Dezvoltator
+	development build	versiune de dezvoltare
+	Diagonal	Diagonală
+	Diagonal Dots	Puncte diagonale
+	Diamond	Romb
+	Dictate	Dictare
+	Dictation isn't available here.	Dictarea nu este disponibilă aici.
+	Dictation stopped.	Dictarea s-a oprit.
+	Dictation stopped: {reason}	Dictarea s-a oprit: {reason}
+	Different First Page	Prima pagină diferită
+	Different Odd & Even Pages	Pagini pare și impare diferite
+	Differential	Diferențială
+	Differential theta	Diferențiala theta
+	Differential x	Diferențiala x
+	Differential y	Diferențiala y
+	Differentials	Diferențiale
+	Direct formatting	Formatare directă
+	Direction:	Direcție:
+	Directory	Director
+	Display	Afișare
+	Display for Review	Afișare pentru revizuire
+	Display gridlines on screen	Afișați liniile de grilă pe ecran
+	Display name	Nume afișat
+	Display text	Text afișat
+	Distance from surrounding text	Distanța față de textul din jur
+	Distribute Columns	Distribuire coloane
+	Distribute letters	Distribuire litere
+	Distribute Rows	Distribuire rânduri
+	Distribute spacing	Distribuire spațiere
+	Distributed	Distribuit
+	Do Not Check Spelling or Grammar	Nu se verifică ortografia sau gramatica
+	Do not check spelling or grammar	Nu se verifică ortografia sau gramatica
+	DO NOT COPY	A NU SE COPIA
+	Do Not Show in TOC	Nu se afișează în cuprins
+	Do you want to save changes to {name}?	Salvați modificările aduse la {name}?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Programele de completare Doc4Me sunt pachete gratuite de macrocomenzi din catalogul de programe de completare Doc4Me. Ele pot doar să editeze documentul.
+	Doc4Me is now the default app for Word documents.	Doc4Me este acum aplicația implicită pentru documentele Word.
+	Document	Document
+	Document End	Sfârșitul documentului
+	Document Formatting	Formatare document
+	Document Grid	Grilă document
+	Document Information	Informații document
+	Document Property	Proprietate document
+	Document Start	Începutul documentului
+	Document template:	Șablon document:
+	Document Text	Textul documentului
+	Document Title	Titlul documentului
+	Document1	Document1
+	Document\nPreferences	Preferințe\ndocument
+	Documents	Documente
+	Documents you open will show up here.	Documentele pe care le deschideți vor apărea aici.
+	Does not contain	Nu conține
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Nu se adaugă spațiu între paragrafele cu același stil
+	Don't capitalize after:	Fără majusculă după:
+	Don't hyphenate	Fără despărțire în silabe
+	Don't print blank lines when data fields are empty	Nu se imprimă rândurile goale când câmpurile de date sunt goale
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Nu se citesc citatele și bibliografiile Zotero, Mendeley sau EndNote
+	Don't Save	Nu salvez
+	Don't use HTML paragraph auto spacing	Nu se utilizează spațierea automată a paragrafelor HTML
+	Dot	Punct
+	Dot dash	Punct liniuță
+	Dot-dash	Punct-liniuță
+	Dots	Puncte
+	Dotted	Punctat
+	Double	Dublu
+	Double Bar	Bară dublă
+	Double Closing Quote	Ghilimele de închidere duble
+	Double Dot	Punct dublu
+	Double Integral	Integrală dublă
+	Double Integral with Limits	Integrală dublă cu limite
+	Double Integral with Stacked Limits	Integrală dublă cu limite suprapuse
+	Double Left Arrow with Text Above	Săgeată dublă la stânga cu text deasupra
+	Double Left Arrow with Text Below	Săgeată dublă la stânga cu text dedesubt
+	Double Left Right Arrow with Text Above	Săgeată dublă stânga-dreapta cu text deasupra
+	Double Left Right Arrow with Text Below	Săgeată dublă stânga-dreapta cu text dedesubt
+	Double Opening Quote	Ghilimele de deschidere duble
+	Double Right Arrow with Text Above	Săgeată dublă la dreapta cu text deasupra
+	Double Right Arrow with Text Below	Săgeată dublă la dreapta cu text dedesubt
+	Double Spacing	Spațiere dublă
+	Double Square Brackets	Paranteze drepte duble
+	Double Strikethrough	Tăiere cu două linii
+	Double strikethrough	Tăiere cu două linii
+	Double summation	Sumă dublă
+	Double Underline	Subliniere dublă
+	Double Vertical Bars	Bare verticale duble
+	Doughnut	Inelară
+	Down	Jos
+	Downloading the speech model ({mb} MB, once)…	Se descarcă modelul vocal ({mb} MB, o singură dată)…
+	Downloading…	Se descarcă…
+	DRAFT	SCHIȚĂ
+	Draft	Schiță
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Glisați un dreptunghi pentru a desena un tabel sau o linie peste celule pentru a le scinda. Esc oprește.
+	Draw	Desenare
+	Draw Ink	Desenare cu cerneală
+	Draw Table	Desenare tabel
+	Draw\nTable	Desenare\ntabel
+	Drawing Canvas	Pânză de desen
+	Drawing Grid	Grilă de desen
+	Drawing Tools	Instrumente de desen
+	Drawing\nCanvas	Pânză\nde desen
+	Drop Cap	Letrină
+	Drop cap	Letrină
+	Drop-Down List Content Control	Control de conținut listă verticală
+	Drops all formatting and pastes plain text.	Elimină toată formatarea și lipește text simplu.
+	Dutch	Neerlandeză
+	E-mail Messages	Mesaje de e-mail
+	Edit Category	Editare categorie
+	Edit Comment	Editare comentariu
+	Edit Data	Editare date
+	Edit Document	Editare document
+	Edit Equation	Editare ecuație
+	Edit Field Code	Editare cod de câmp
+	Edit Field…	Editare câmp…
+	Edit Footer	Editare subsol
+	Edit Header	Editare antet
+	Edit Individual Documents…	Editare documente individuale…
+	Edit Items	Editare elemente
+	Edit Recipient List	Editare listă de destinatari
+	Edit Source	Editare sursă
+	Edit\nData	Editare\ndate
+	Edit\nRecipient List	Editare listă\nde destinatari
+	Edited	Editat
+	Editing	Editare
+	Editing header/footer	Se editează antetul/subsolul
+	Editing in this document is restricted.	Editarea în acest document este restricționată.
+	Editing — edit the document directly	Editare – editați documentul direct
+	Edition	Ediție
+	Editor	Editor
+	Edit…	Editare…
+	Effects	Efecte
+	Elbow Arrow Connector	Conector săgeată cu cot
+	Elbow Connector	Conector cu cot
+	Ellipsis	Puncte de suspensie
+	Em Dash	Linie de pauză lungă
+	Em Space	Spațiu em
+	Email address (optional)	Adresă de e-mail (opțional)
+	Emboss	Reliefat
+	Emphasis	Accentuare
+	Empty Matrices	Matrice goale
+	En Dash	Linie de pauză scurtă
+	En Space	Spațiu en
+	Enclose Characters	Încadrare caractere
+	Enclosure	Încadrare
+	Encrypt with Password	Criptare cu parolă
+	Encrypt with Password…	Criptare cu parolă…
+	End of document	Sfârșitul documentului
+	End of section	Sfârșitul secțiunii
+	End of Word	Sfârșitul cuvântului
+	Endnote Reference	Referință notă de final
+	Endnote Text	Text notă de final
+	Endnotes	Note de final
+	Endnotes to footnotes	Note de final în note de subsol
+	English	Engleză
+	English (United Kingdom)	Engleză (Regatul Unit)
+	English (United States)	Engleză (Statele Unite)
+	Engrave	Gravat
+	Enlarge symbol	Mărire simbol
+	Enter formatting for number:	Introduceți formatarea pentru număr:
+	Enter in Equation	Enter în ecuație
+	Enter page number:	Introduceți numărul paginii:
+	Enter the web address or embed code of an online video:	Introduceți adresa web sau codul de încorporare al unui videoclip online:
+	Entry marked.	Intrare marcată.
+	Entry:	Intrare:
+	Envelope #10   4.12" × 9.50"	Plic #10   4,12" × 9,50"
+	Envelope Address	Adresă plic
+	Envelope DL   4.33" × 8.66"	Plic DL   4,33" × 8,66"
+	Envelope Return	Adresă de retur plic
+	Envelope size:	Dimensiune plic:
+	Envelopes	Plicuri
+	Equal by Definition	Egal prin definiție
+	Equal column width	Lățime egală a coloanelor
+	Equal Equal	Egal egal
+	Equal to	Egal cu
+	Equals:	Egal cu:
+	Equation	Ecuație
+	Equation Gallery	Galerie de ecuații
+	Equation Info	Informații ecuație
+	Equation Number	Număr ecuație
+	Equation Options	Opțiuni ecuație
+	Erase Ink	Ștergere cerneală
+	Eraser	Radieră
+	Errors ({n})	Erori ({n})
+	Estonian	Estonă
+	Euler's identity	Identitatea lui Euler
+	Even Page	Pagină pară
+	Even pages only	Doar paginile pare
+	Every change is recorded as a tracked change.	Fiecare modificare este înregistrată ca modificare urmărită.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Fiecare comandă este disponibilă pentru scripturi și agenți AI: rulați `doc4me-cli mcp` pentru un server MCP sau porniți aplicația cu `--control <port>` pentru canalul de control JSON.
+	Every field needs a name.	Fiecare câmp are nevoie de un nume.
+	Every font this document uses is installed.	Toate fonturile utilizate de acest document sunt instalate.
+	Everyone	Toată lumea
+	Exactly	Exact
+	Exactly {n}	Exact {n}
+	Example: {sample}	Exemplu: {sample}
+	Exceptions (optional)	Excepții (opțional)
+	Exceptions…	Excepții…
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exit	Ieșire
+	Expand	Extindere
+	Expand or Collapse Heading	Extindere sau restrângere titlu
+	Expanded	Extins
+	Exponential	Exponențială
+	Exponential series	Serie exponențială
+	Export	Export
+	Export a copy to share (PDF, Word document)	Exportați o copie pentru partajare (PDF, document Word)
+	Export Page as JPEG	Export pagină ca JPEG
+	Export Page as PNG	Export pagină ca PNG
+	Export PDF	Export PDF
+	Exported {path}	{path} a fost exportat
+	Expression	Expresie
+	Extend Selection	Extindere selecție
+	Extend Selection by Units	Extindere selecție pe unități
+	Extra space	Spațiu suplimentar
+	Extra spaces between words.	Spații suplimentare între cuvinte.
+	Field	Câmp
+	Field Click	Clic pe câmp
+	Field code:	Cod de câmp:
+	Field Codes	Coduri de câmp
+	Field codes:	Coduri de câmp:
+	Field name	Nume de câmp
+	Field name:	Nume de câmp:
+	Field names must be different.	Numele câmpurilor trebuie să fie diferite.
+	Field names:	Nume de câmpuri:
+	Field properties	Proprietăți câmp
+	Field:	Câmp:
+	Fields	Câmpuri
+	Fields to insert:	Câmpuri de inserat:
+	Fields:	Câmpuri:
+	Field…	Câmp…
+	Figure	Figură
+	File	Fișier
+	File name:	Nume fișier:
+	Fill	Umplere
+	Fill & Line	Umplere și linie
+	Fill color:	Culoare de umplere:
+	Fill:	Umplere:
+	Filling in forms	Completarea formularelor
+	Film	Film
+	Filter and Sort	Filtrare și sortare
+	Filter and Sort…	Filtrare și sortare…
+	Filter Records	Filtrare înregistrări
+	Find	Găsire
+	Find and Replace	Găsire și înlocuire
+	Find Next	Următorul găsit
+	Find Next Editable Region	Găsire regiune editabilă următoare
+	Find Previous	Anteriorul găsit
+	Find Recipient	Găsire destinatar
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Găsire selectează paragraful modificat următor; Respingere readuce paragraful selectat la forma inițială.
+	Find What Expression	Expresia de găsit
+	Find What Text	Textul de găsit
+	Find what:	De găsit:
+	Find →	Găsire →
+	Find:	Găsire:
+	Finish	Terminare
+	Finish & Merge	Terminare și îmbinare
+	Finish &\nMerge	Terminare\nși îmbinare
+	Finished	Terminat
+	Finnish	Finlandeză
+	First	Primul
+	First Cell in Column	Prima celulă din coloană
+	First Cell in Row	Prima celulă din rând
+	First Column	Prima coloană
+	First commit	Primul commit
+	First line	Primul rând
+	First line:	Primul rând:
+	First Name	Prenume
+	First row of data contains column headers	Primul rând de date conține anteturile coloanelor
+	Fit	Potrivire
+	Fit text	Potrivire text
+	Fix Position on Page	Poziție fixă pe pagină
+	Fixed Column Width	Lățime fixă a coloanei
+	Flip Horizontal	Răsturnare pe orizontală
+	Flip Vertical	Răsturnare pe verticală
+	Floor	Parte întreagă inferioară
+	Focus	Focalizare
+	Follow number with:	Numărul urmat de:
+	Font	Font
+	Font Color	Culoare font
+	Font color	Culoare font
+	Font color:	Culoare font:
+	Font Dialog	Caseta de dialog Font
+	Font not installed	Fontul nu este instalat
+	Font Size	Dimensiune font
+	Font Substitution	Substituire font
+	Font Substitution…	Substituire font…
+	Font:	Font:
+	Font: {font}	Font: {font}
+	Fonts	Fonturi
+	Font…	Font…
+	Footer	Subsol
+	Footnote and Endnote	Notă de subsol și notă de final
+	Footnote Reference	Referință notă de subsol
+	Footnote Text	Text notă de subsol
+	Footnotes	Note de subsol
+	Footnotes and endnotes	Note de subsol și note de final
+	Footnotes to endnotes	Note de subsol în note de final
+	Form Letters	Scrisori formular
+	Format	Format
+	Format Page Numbers	Formatare numere de pagină
+	Format Page Numbers…	Formatare numere de pagină…
+	Format Painter	Descriptor de formate
+	Format Picture	Formatare imagine
+	Format Shape	Formatare formă
+	Format:	Format:
+	Formatted	Formatat
+	Formatted Text	Text formatat
+	Formatting	Formatare
+	Formatting at Selection	Formatare la selecție
+	Formatting completed. You can now:	Formatarea s-a terminat. Acum puteți:
+	Formatting exceptions	Excepții de formatare
+	Formatting marks	Semne de formatare
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Se compară formatarea, modificările de scriere cu majuscule, spațiile albe și tabelele; celelalte setări sunt păstrate pentru mai târziu.
+	Formula	Formulă
+	Forward	Înainte
+	Fraction	Fracție
+	Fractions (1/2) as fraction characters (½)	Fracții (1/2) cu caractere de fracție (½)
+	French	Franceză
+	French (France)	Franceză (Franța)
+	From	De la
+	From text:	Din text:
+	from Unicode (hex)	din Unicode (hex)
+	From:	De la:
+	Full page of the same label	Pagină întreagă cu aceeași etichetă
+	Function	Funcție
+	Functions	Funcții
+	Gallery	Galerie
+	GB/T 7714	GB/T 7714
+	General	General
+	Geometry	Geometrie
+	German	Germană
+	German (Germany)	Germană (Germania)
+	Get Add-ins	Obținere programe de completare
+	Get Data	Preluare date
+	Get Data…	Preluare date…
+	Getting ready…	Se pregătește…
+	Glow	Strălucire
+	Glow Colors	Culori de strălucire
+	Go Back	Revenire
+	Go To	Salt la
+	Go to	Salt la
+	Go To…	Salt la…
+	Good afternoon	Bună ziua
+	Good evening	Bună seara
+	Good morning	Bună dimineața
+	GOST (name sort)	GOST (sortare după nume)
+	GOST (title sort)	GOST (sortare după titlu)
+	Grab bag	Diverse
+	Grammar	Gramatică
+	Grammar Settings	Setări gramatică
+	Graphic	Grafică
+	Grave	Accent grav
+	Greater than	Mai mare decât
+	Greater than or equal	Mai mare sau egal
+	Greek	Greacă
+	Greek Letters	Litere grecești
+	Green:	Verde:
+	Greeting Line	Linie de salut
+	Greeting\nLine	Linie\nde salut
+	Grid Settings	Setări grilă
+	Grid Table 1 Light	Tabel grilă 1 luminos
+	Grid Table 4 – Blue	Tabel grilă 4 – albastru
+	Grid Table 4 – Green	Tabel grilă 4 – verde
+	Grid Table 4 – Orange	Tabel grilă 4 – portocaliu
+	Grid Table 4 – Purple	Tabel grilă 4 – violet
+	Gridlines	Linii de grilă
+	Group	Grupare
+	Grouping Character Above	Caracter de grupare deasupra
+	Grouping Character Below	Caracter de grupare dedesubt
+	Grow Font 1 Point	Mărire font cu 1 punct
+	H:	Î:
+	Hanging Indent	Indent agățat
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Căciulă
+	Header	Antet
+	Header & Footer	Antet și subsol
+	Header Options	Opțiuni antet
+	Header Options:	Opțiuni antet:
+	Header Row	Rând antet
+	Header source: {file} (the next data source opened here takes its field names)	Sursă de antet: {file} (următoarea sursă de date deschisă aici preia numele câmpurilor sale)
+	Header/Footer Position	Poziția antetului/subsolului
+	Headers and footers	Anteturi și subsoluri
+	Heading 1	Titlu 1
+	Heading 2	Titlu 2
+	Heading 3	Titlu 3
+	Heading styles (levels 1–{n})	Stiluri de titlu (nivelurile 1–{n})
+	Heading {n}	Titlu {n}
+	Headings	Titluri
+	Heart	Inimă
+	Hebrew	Ebraică
+	Height:	Înălțime:
+	Help	Ajutor
+	Hex:	Hex:
+	Hidden	Ascuns
+	Hidden text	Text ascuns
+	Hide Codes	Ascundere coduri
+	Hide from style lists	Ascundeți din listele de stiluri
+	Hide Ink	Ascundere cerneală
+	Hide White Space	Ascundere spațiu alb
+	Hide\nInk	Ascundere\ncerneală
+	Hierarchy	Ierarhie
+	Highlight	Evidențiere
+	Highlight Changes	Evidențiere modificări
+	Highlight changes in printed document	Evidențiați modificările în documentul imprimat
+	Highlight changes on screen	Evidențiați modificările pe ecran
+	Highlight Merge Fields	Evidențiere câmpuri de îmbinare
+	Highlight\nMerge Fields	Evidențiere\ncâmpuri de îmbinare
+	Highlighter	Marker
+	Hindi	Hindi
+	Historical and Discretional	Istorice și discreționare
+	Hollow	Gol
+	Home	Pornire
+	Home folder	Folder principal
+	Horizontal	Orizontal
+	Horizontal Line	Linie orizontală
+	Horizontal spacing:	Spațiere orizontală:
+	How many pages the whole document has	Câte pagini are întregul document
+	How many pages this section has	Câte pagini are această secțiune
+	How many words the document holds	Câte cuvinte conține documentul
+	HTML Format	Format HTML
+	Hue:	Nuanță:
+	Hungarian	Maghiară
+	Hyperbolic Cosecant Function	Funcția cosecantă hiperbolică
+	Hyperbolic Cosine Function	Funcția cosinus hiperbolic
+	Hyperbolic Cotangent Function	Funcția cotangentă hiperbolică
+	Hyperbolic Functions	Funcții hiperbolice
+	Hyperbolic Secant Function	Funcția secantă hiperbolică
+	Hyperbolic Sine Function	Funcția sinus hiperbolic
+	Hyperbolic Tangent Function	Funcția tangentă hiperbolică
+	Hyperlink	Hyperlink
+	Hyphenate at:	Despărțire la:
+	Hyphenate words in CAPS	Despărțiți în silabe cuvintele cu MAJUSCULE
+	Hyphenation	Despărțire în silabe
+	Hyphenation Options…	Opțiuni de despărțire în silabe…
+	Hyphenation zone:	Zonă de despărțire în silabe:
+	Hyphens (--) as dashes (—)	Cratime (--) cu linii de pauză (—)
+	Hypotenuse	Ipotenuză
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Culoare pictogramă
+	Icons	Pictograme
+	Identity Matrices	Matrice unitate
+	IEEE	IEEE
+	If…Then…Else	Dacă…Atunci…Altfel
+	If…Then…Else…	Dacă…Atunci…Altfel…
+	Ignore All	Ignorare totală
+	Ignore punctuation characters	Ignorați caracterele de punctuație
+	Ignore web and file addresses	Ignorați adresele web și de fișiere
+	Ignore white-space characters	Ignorați caracterele spațiu alb
+	Ignore words in capitals	Ignorați cuvintele cu majuscule
+	Ignore words with numbers	Ignorați cuvintele cu cifre
+	Illustrations	Ilustrații
+	Immersive	Imersiv
+	Immersive Reader	Cititor imersiv
+	Immersive\nReader	Cititor\nimersiv
+	In Default apps, choose Doc4Me for the document types you want it to open.	În Aplicații implicite, alegeți Doc4Me pentru tipurile de documente pe care doriți să le deschidă.
+	In equations, typing a name after a backslash replaces it with its symbol.	În ecuații, un nume tastat după o bară oblică inversă este înlocuit cu simbolul său.
+	In Front of Text	În fața textului
+	In Line with Text	În linie cu textul
+	Inches	Inchi
+	Include label and number	Includeți eticheta și numărul
+	Include level number from:	Includeți numărul nivelului de la:
+	Include page numbers	Includeți numerele de pagină
+	Increase Font Size	Mărire dimensiune font
+	Increase Indent	Mărire indent
+	Indent	Indent
+	Indent from left:	Indent de la stânga:
+	Indentation	Indentare
+	Indented	Indentat
+	Indents	Indenturi
+	Indents and Spacing	Indenturi și spațiere
+	Index	Index
+	Index and Tables	Index și tabele
+	Index Heading	Titlu index
+	Index {n}	Index {n}
+	Indonesian	Indoneziană
+	Inflate	Umflare
+	Info	Informații
+	Initials:	Inițiale:
+	Ink	Cerneală
+	Ink Equation	Ecuație de cerneală
+	Ink Replay	Redare cerneală
+	Ink to Math	Cerneală în formule
+	Ink to Shape	Cerneală în forme
+	Ink to\nMath	Cerneală\nîn formule
+	Ink to\nShape	Cerneală\nîn forme
+	Ink\nReplay	Redare\ncerneală
+	Inline	În linie
+	Input Format	Format de intrare
+	Insert	Inserare
+	Insert a 3D model from a file (.glb, .stl, .obj)	Inserați un model 3D dintr-un fișier (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Inserați o ecuație nouă (Alt+=)
+	Insert Above	Inserare deasupra
+	Insert Below	Inserare dedesubt
+	Insert Caption	Inserare legendă
+	Insert Cells	Inserare celule
+	Insert Chart	Inserare diagramă
+	Insert Citation	Inserare citat
+	Insert Columns to the Left	Inserare coloane la stânga
+	Insert Columns to the Right	Inserare coloane la dreapta
+	Insert Data	Inserare date
+	Insert Database	Inserare bază de date
+	Insert Database…	Inserare bază de date…
+	Insert Date Field	Inserare câmp dată
+	Insert Endnote	Inserare notă de final
+	Insert entire column	Inserare coloană întreagă
+	Insert entire row	Inserare rând întreg
+	Insert Footnote	Inserare notă de subsol
+	Insert Hyperlink	Inserare hyperlink
+	Insert Index	Inserare index
+	Insert Left	Inserare la stânga
+	Insert LISTNUM Field	Inserare câmp LISTNUM
+	Insert Merge Field	Inserare câmp de îmbinare
+	Insert Merge\nField	Inserare câmp\nde îmbinare
+	Insert New Equation	Inserare ecuație nouă
+	Insert one text or another, depending on a field's value.	Inserați un text sau altul, în funcție de valoarea unui câmp.
+	Insert Page Field	Inserare câmp pagină
+	Insert Right	Inserare la dreapta
+	Insert Rows	Inserare rânduri
+	Insert Rows Above	Inserare rânduri deasupra
+	Insert Rows Below	Inserare rânduri dedesubt
+	Insert Shapes	Inserare forme
+	Insert SmartArt	Inserare SmartArt
+	Insert Structure	Inserare structură
+	Insert Symbol	Inserare simbol
+	Insert Table	Inserare tabel
+	Insert Table of Authorities	Inserare tabel de referințe juridice
+	Insert Table of Figures	Inserare tabel de figuri
+	Insert Table…	Inserare tabel…
+	Insert Time Field	Inserare câmp oră
+	Insert Video	Inserare videoclip
+	Insert\nAbove	Inserare\ndeasupra
+	Insert\nCaption	Inserare\nlegendă
+	Insert\nCitation	Inserare\ncitat
+	Insert\nFootnote	Inserare notă\nde subsol
+	Inserted	Inserat
+	Insertions and Deletions	Inserări și ștergeri
+	Insertions:	Inserări:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Inserări: {ins}, ștergeri: {del}, mutări: {moves}, formatare: {fmt}, comentarii: {comments}
+	Inside	Interior
+	Inside Borders	Borduri interioare
+	Inside Margin	Margine interioară
+	Inside:	Interior:
+	Inspect Document	Inspectare document
+	Inspect Styles at Selection	Inspectare stiluri la selecție
+	Institution	Instituție
+	Integral	Integrală
+	Integral of e^(−x²)	Integrala lui e^(−x²)
+	Integral with Limits	Integrală cu limite
+	Integral with Stacked Limits	Integrală cu limite suprapuse
+	Integrals	Integrale
+	Intense Emphasis	Accentuare intensă
+	Intense Quote	Citat intens
+	Intense Reference	Referință intensă
+	Interface	Interfață
+	Interface language	Limba interfeței
+	Interface language:	Limba interfeței:
+	Interface size:	Dimensiunea interfeței:
+	Interface Theme	Tema interfeței
+	Interface theme:	Tema interfeței:
+	Interface\nTheme	Tema\ninterfeței
+	Internet addresses as links	Adrese internet ca legături
+	Intersection	Intersecție
+	Intersection with Limits	Intersecție cu limite
+	Intersection with Lower Limit	Intersecție cu limită inferioară
+	Intersection with Subscript-Superscript Limits	Intersecție cu limite indice-exponent
+	Inverse Cosecant Function	Funcția cosecantă inversă
+	Inverse Cosine Function	Funcția cosinus invers
+	Inverse Cotangent Function	Funcția cotangentă inversă
+	Inverse Functions	Funcții inverse
+	Inverse Hyperbolic Cosecant Function	Funcția cosecantă hiperbolică inversă
+	Inverse Hyperbolic Cosine Function	Funcția cosinus hiperbolic invers
+	Inverse Hyperbolic Cotangent Function	Funcția cotangentă hiperbolică inversă
+	Inverse Hyperbolic Functions	Funcții hiperbolice inverse
+	Inverse Hyperbolic Secant Function	Funcția secantă hiperbolică inversă
+	Inverse Hyperbolic Sine Function	Funcția sinus hiperbolic invers
+	Inverse Hyperbolic Tangent Function	Funcția tangentă hiperbolică inversă
+	Inverse Secant Function	Funcția secantă inversă
+	Inverse Sine Function	Funcția sinus invers
+	Inverse Tangent Function	Funcția tangentă inversă
+	Ionosphere	Ionosferă
+	Is blank	Este gol
+	Is not blank	Nu este gol
+	ISO 690 (author-date)	ISO 690 (autor-dată)
+	ISO 690 (numerical)	ISO 690 (numeric)
+	Issue	Număr
+	it isn't a picture Doc4Me can read	nu este o imagine pe care Doc4Me o poate citi
+	Italian	Italiană
+	Italic	Cursiv
+	Japanese	Japoneză
+	Journal	Jurnal
+	Justification	Aliniere stânga-dreapta
+	Justification of a display equation	Alinierea unei ecuații afișate
+	Justified	Aliniat stânga-dreapta
+	Justify	Aliniere stânga-dreapta
+	Keep Lines Together	Păstrare rânduri împreună
+	Keep lines together	Păstrați rândurile împreună
+	Keep Source Formatting	Păstrare formatare sursă
+	Keep Text Only	Păstrare numai text
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Păstrați parola într-un loc sigur: fără ea nimeni, inclusiv Doc4Me, nu poate deschide documentul. Lăsați ambele casete goale pentru a elimina parola.
+	Keep with Next	Păstrare cu următorul
+	Keep with next	Păstrați cu următorul
+	Keeps the fonts and formatting of the copied text.	Păstrează fonturile și formatarea textului copiat.
+	Kerning for fonts:	Kerning pentru fonturi:
+	Keyboard shortcuts:	Comenzi rapide de la tastatură:
+	Keys for this command:	Taste pentru această comandă:
+	Keywords	Cuvinte cheie
+	Korean	Coreeană
+	Label changes with:	Eticheta se schimbă cu:
+	Label:	Etichetă:
+	Labels	Etichete
+	Landscape	Peisaj
+	Language	Limbă
+	Language Preferences…	Preferințe de limbă…
+	Language…	Limbă…
+	Large\nOperator	Operator\nmare
+	Largest Only	Doar cel mai mare
+	Largest only	Doar cel mai mare
+	Lasso	Lasou
+	Lasso Select	Selectare cu lasoul
+	Last	Ultimul
+	Last Cell in Column	Ultima celulă din coloană
+	Last Cell in Row	Ultima celulă din rând
+	Last Column	Ultima coloană
+	Last commit	Ultimul commit
+	Last Name	Nume
+	Last, First; Last, First	Nume, Prenume; Nume, Prenume
+	Latin text font:	Font pentru text latin:
+	Layout	Aspect
+	Layout options for this document	Opțiuni de aspect pentru acest document
+	Layout Summary	Rezumat aspect
+	Layouts	Aspecte
+	Leader	Caracter de umplere
+	Leave a recipient out of the merge when a field has this value.	Excludeți un destinatar din îmbinare atunci când un câmp are această valoare.
+	Leave Equation	Părăsire ecuație
+	Leave the equation (Esc)	Părăsiți ecuația (Esc)
+	Leave the label out of the caption	Omiteți eticheta din legendă
+	Left	Stânga
+	Left Arrow with Text Above	Săgeată la stânga cu text deasupra
+	Left Arrow with Text Below	Săgeată la stânga cu text dedesubt
+	Left Border	Bordură stânga
+	Left border	Bordură stânga
+	Left Bracket Twice	Paranteză stânga dublată
+	Left indent	Indent stânga
+	Left Margin	Margine stânga
+	Left Only	Doar stânga
+	Left only	Doar stânga
+	Left Right Arrow Above	Săgeată stânga-dreapta deasupra
+	Left Right Arrow with Text Above	Săgeată stânga-dreapta cu text deasupra
+	Left Right Arrow with Text Below	Săgeată stânga-dreapta cu text dedesubt
+	Left Subscript-Superscript	Indice-exponent la stânga
+	Left-to-right	De la stânga la dreapta
+	Left-to-Right Text Direction	Direcție text de la stânga la dreapta
+	Left:	Stânga:
+	Leftwards Arrow Above	Săgeată spre stânga deasupra
+	Leftwards Harpoon Above	Harpon spre stânga deasupra
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Legal style numbering	Numerotare în stil juridic
+	Legend	Legendă
+	Less than	Mai mic decât
+	Less than or equal	Mai mic sau egal
+	Letter	Scrisoare
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter headings	Titluri cu litere
+	Letter-Like Symbols	Simboluri asemănătoare literelor
+	Letters	Scrisori
+	Level 1	Nivelul 1
+	Level 2	Nivelul 2
+	Level 3	Nivelul 3
+	Level 4	Nivelul 4
+	Level 5	Nivelul 5
+	Level 6	Nivelul 6
+	Level 7	Nivelul 7
+	Level 8	Nivelul 8
+	Level 9	Nivelul 9
+	Level {n}	Nivelul {n}
+	Level:	Nivel:
+	Levels:	Niveluri:
+	LibreTranslate server (open source)	Server LibreTranslate (open source)
+	Ligatures:	Ligaturi:
+	Light	Luminos
+	Light with Outline	Luminos cu contur
+	Limit	Limită
+	Limit and\nLog	Limită și\nlogaritm
+	Limit consecutive hyphens to:	Limitați cratimele consecutive la:
+	Limit Example	Exemplu de limită
+	Limit formatting to a selection of styles	Limitați formatarea la o selecție de stiluri
+	Line	Linie
+	Line and Page Breaks	Întreruperi de rând și de pagină
+	Line and Paragraph Spacing	Spațiere între rânduri și paragrafe
+	Line between	Linie între
+	Line Break	Întrerupere de rând
+	Line breaking	Întreruperea rândurilor
+	Line delta	Diferență de rânduri
+	Line End	Sfârșitul rândului
+	Line Number	Număr de rând
+	Line Numbering Options…	Opțiuni de numerotare a rândurilor…
+	Line Numbers	Numere de rând
+	Line Spacing	Spațiere între rânduri
+	Line spacing	Spațiere între rânduri
+	Line Spacing Options…	Opțiuni de spațiere între rânduri…
+	Line spacing:	Spațiere între rânduri:
+	Line Start	Începutul rândului
+	Line width:	Lățime linie:
+	Line:	Linie:
+	Linear	Liniar
+	Linear Fraction	Fracție liniară
+	Lines	Rânduri
+	Lines +/−	Rânduri +/−
+	Lines added	Rânduri adăugate
+	Lines and characters	Rânduri și caractere
+	Lines deleted	Rânduri șterse
+	Lines only	Doar rânduri
+	Lines per page:	Rânduri pe pagină:
+	Link	Legătură
+	Link entries to their headings	Legați intrările de titlurile lor
+	Link level to style:	Legare nivel la stil:
+	Link to Previous	Legare la anterior
+	Linked style (paragraph and character)	Stil legat (paragraf și caracter)
+	Links	Legături
+	Links and References	Legături și referințe
+	Link…	Legătură…
+	List	Listă
+	List Commands	Listare comenzi
+	List Definition	Definiție listă
+	List entries	Intrări de listă
+	List Paragraph	Paragraf listă
+	List styles	Stiluri de listă
+	List Table 3 – Blue	Tabel listă 3 – albastru
+	List Table 3 – Green	Tabel listă 3 – verde
+	List Table 3 – Orange	Tabel listă 3 – portocaliu
+	List Table 3 – Purple	Tabel listă 3 – violet
+	Listening… speak now	Se ascultă… vorbiți acum
+	Location	Locație
+	Location: {path}	Locație: {path}
+	Lock aspect ratio	Blocare raport aspect
+	Lock Fields	Blocare câmpuri
+	Logarithm	Logaritm
+	Logarithm with Base	Logaritm cu bază
+	Logical AND	ȘI logic
+	Logical AND with Limits	ȘI logic cu limite
+	Logical OR	SAU logic
+	Logical OR with Limits	SAU logic cu limite
+	Long citation:	Citat lung:
+	lowercase	litere mici
+	Lum:	Lum:
+	Macros	Macrocomenzi
+	Made from the author and year when empty	Format din autor și an când este gol
+	Magazine or newspaper article	Articol de revistă sau de ziar
+	Mail Merge	Îmbinare corespondență
+	Mail Merge Helper	Asistent îmbinare corespondență
+	Mail Merge Helper…	Asistent îmbinare corespondență…
+	Mailing Labels	Etichete poștale
+	Mailings	Corespondență
+	Main entry:	Intrare principală:
+	Make Doc4Me the default for Word documents…	Setați Doc4Me ca implicit pentru documentele Word…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Mărește sau micșorează panglica, meniurile și casetele de dialog, peste scalarea afișajului din sistem. Zoomul documentului este separat.
+	Malay	Malaeză
+	Manage Sources	Gestionare surse
+	Manage Styles	Gestionare stiluri
+	Manage Styles…	Gestionare stiluri…
+	Manual Hyphenation	Despărțire manuală în silabe
+	Manual hyphenation is complete.	Despărțirea manuală în silabe s-a terminat.
+	Manual Line Break	Întrerupere manuală de rând
+	Manual Page Break	Întrerupere manuală de pagină
+	Manual…	Manual…
+	Many pages	Mai multe pagini
+	Margin	Margine
+	Margins	Margini
+	Mark	Marcare
+	Mark All	Marcare totală
+	Mark as decorative	Marcare ca decorativ
+	Mark Citation	Marcare citat
+	Mark Citation…	Marcare citat…
+	Mark Entry	Marcare intrare
+	Mark Entry…	Marcare intrare…
+	Mark grammar errors as you type	Marcați erorile gramaticale în timpul tastării
+	Mark Index Entry	Marcare intrare de index
+	Mark selected text as:	Marcați textul selectat ca:
+	Mark Table of Contents Entry	Marcare intrare de cuprins
+	Mark\nCitation	Marcare\ncitat
+	Mark\nEntry	Marcare\nintrare
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Potrivire litere mari și mici
+	Match Fields	Potrivire câmpuri
+	Match prefix	Potrivire prefix
+	Match suffix	Potrivire sufix
+	Math AutoCorrect	Corectare automată matematică
+	Math Input Control	Control de intrare matematică
+	Matrices with Brackets	Matrice cu paranteze
+	Matrix	Matrice
+	Maximize	Maximizare
+	Maximum	Maxim
+	Maximum Example	Exemplu de maxim
+	Measured By	Măsurat în
+	Measurement units:	Unități de măsură:
+	Media	Media
+	Merge	Îmbinare
+	Merge Cells	Îmbinare celule
+	Merge Formatting	Îmbinare formatare
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Îmbinare formatare lipește textul cu formatarea locului în care ajunge, la fel ca Păstrare numai text.
+	Merge Record #	Nr. înregistrare de îmbinat
+	Merge records	Îmbinare înregistrări
+	Merge to New Document	Îmbinare în document nou
+	Merge to Printer	Îmbinare la imprimantă
+	Merge to:	Îmbinare în:
+	Merge type: {type}	Tip de îmbinare: {type}
+	Merged PRs	PR-uri îmbinate
+	Merge…	Îmbinare…
+	Mesosphere	Mezosferă
+	Middle	Mijloc
+	Midline Dots	Puncte pe linia mediană
+	Millimeters	Milimetri
+	Minimum	Minim
+	Minus Equal	Minus egal
+	Mirror indents	Indenturi în oglindă
+	Mirrored	În oglindă
+	Missing document font	Font lipsă din document
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT SAU Apache-2.0. Copyright (c) 2026 ArtCraft Team și contribuitorii WordCraft.
+	MLA	MLA
+	Model	Model
+	Models	Modele
+	Moderate	Moderat
+	Modify Style	Modificare stil
+	Modify Table Style	Modificare stil de tabel
+	Modify Table Style…	Modificare stil de tabel…
+	Modify…	Modificare…
+	Mon	lun.
+	Month	Lună
+	More >>	Mai mult >>
+	More Colors…	Mai multe culori…
+	More Columns…	Mai multe coloane…
+	More Commands…	Mai multe comenzi…
+	More Symbols…	Mai multe simboluri…
+	More templates →	Mai multe șabloane →
+	Move Down	Mutare în jos
+	Move in Equation	Deplasare în ecuație
+	Move object with text	Mutați obiectul cu textul
+	Move or Resize	Mutare sau redimensionare
+	Move Paragraph Down	Mutare paragraf în jos
+	Move Paragraph Up	Mutare paragraf în sus
+	Move Past Citation	Trecere după citat
+	Move Past\nCitation	Trecere\ndupă citat
+	Move Selected Ink	Mutare cerneală selectată
+	Move Text	Mutare text
+	Move to where?	Mutare unde?
+	Move Up	Mutare în sus
+	Move with Text	Mutare cu textul
+	Move with text	Mutare cu textul
+	Moved from	Mutat din
+	Moved to	Mutat în
+	Moves	Mutări
+	Multilevel List	Listă cu mai multe niveluri
+	Multiple Pages	Mai multe pagini
+	My Add-ins	Programele mele de completare
+	MyMemory (free, no account)	MyMemory (gratuit, fără cont)
+	Name	Nume
+	Name (A–Z)	Nume (A–Z)
+	Name of the file this document is saved as	Numele fișierului în care este salvat documentul
+	Name:	Nume:
+	Narrow  0.5" all	Îngust  0,5" peste tot
+	Natural Logarithm	Logaritm natural
+	Nature	Natură
+	Navigation	Navigare
+	Navigation Pane	Panou de navigare
+	Negated Relations	Relații negate
+	New	Nou
+	New Comment	Comentariu nou
+	New comments and tracked changes are recorded under this name and these initials.	Comentariile noi și modificările urmărite sunt înregistrate cu acest nume și aceste inițiale.
+	New Document	Document nou
+	New document	Document nou
+	New Drawing Canvas	Pânză de desen nouă
+	New Entry	Intrare nouă
+	New Folder	Folder nou
+	New from Template	Nou din șablon
+	New Group	Grup nou
+	New Label	Etichetă nouă
+	New Label…	Etichetă nouă…
+	New Paragraph	Paragraf nou
+	New shortcut:	Comandă rapidă nouă:
+	New Style…	Stil nou…
+	New Tab	Filă nouă
+	New Table Style	Stil de tabel nou
+	New Table Style…	Stil de tabel nou…
+	New Window	Fereastră nouă
+	New word	Cuvânt nou
+	New\nComment	Comentariu\nnou
+	New\nWindow	Fereastră\nnouă
+	New…	Nou…
+	Next	Următorul
+	Next Change	Modificarea următoare
+	Next Comment	Comentariul următor
+	Next Field	Câmpul următor
+	Next Footnote	Nota de subsol următoare
+	Next Page	Pagina următoare
+	Next Record	Înregistrarea următoare
+	Next Section	Secțiunea următoare
+	Next Sentence	Propoziția următoare
+	Next sentence	Propoziția următoare
+	Next Window	Fereastra următoare
+	No	Nu
+	No accessibility issues found.	Nu s-au găsit probleme de accesibilitate.
+	No add-ins are listed yet.	Nu există încă programe de completare în listă.
+	No add-ins yet. Add one from the Store.	Încă nu aveți programe de completare. Adăugați unul din Magazin.
+	No Border	Fără bordură
+	No changes (read only)	Fără modificări (doar citire)
+	No Color	Fără culoare
+	No contributor data was built into this copy.	Această copie nu include date despre contribuitori.
+	No data source yet.	Încă nu există o sursă de date.
+	No errors found: every merge field is in the recipient list.	Nu s-au găsit erori: fiecare câmp de îmbinare este în lista de destinatari.
+	No Fill	Fără umplere
+	No Glow	Fără strălucire
+	No grid	Fără grilă
+	No icons match your search.	Nicio pictogramă nu corespunde căutării.
+	No limit	Fără limită
+	No Line	Fără linie
+	No Markup	Fără marcaje
+	No model credits were built into this copy.	Această copie nu include mențiuni despre modele.
+	No Outline	Fără contur
+	No Paragraph Space	Fără spațiu între paragrafe
+	No pictures found.	Nu s-au găsit imagini.
+	No Reflection	Fără reflexie
+	No revisions	Fără revizuiri
+	No Shadow	Fără umbră
+	No Soft Edges	Fără margini estompate
+	No sources yet.	Încă nu există surse.
+	No Spacing	Fără spațiere
+	no speech program on this system	nu există niciun program de vorbire pe acest sistem
+	No templates match your search.	Niciun șablon nu corespunde căutării.
+	No Transform	Fără transformare
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Încă nu există cuvinte. Adăugare la dicționar pentru un cuvânt greșit îl pune aici.
+	No-Width Non Break	Spațiu nedespărțitor fără lățime
+	No-Width Optional Break	Întrerupere opțională fără lățime
+	Nonbreaking Hyphen	Cratimă nedespărțitoare
+	Nonbreaking Space	Spațiu nedespărțitor
+	None	Niciunul
+	Normal	Normal
+	Normal  1" all	Normal  1" peste tot
+	Normal Indent	Indent normal
+	Normal probability density	Densitatea de probabilitate normală
+	Normal speed	Viteză normală
+	Normal Style	Stil normal
+	Normal Table	Tabel normal
+	Normal Text	Text normal
+	Normal Word Document	Document Word normal
+	North	Nord
+	Norwegian (Bokmål)	Norvegiană (bokmål)
+	Not	Nu
+	Not available right now	Indisponibil momentan
+	Not equal to	Diferit de
+	Not linked: click a text box	Nelegat: faceți clic pe o casetă text
+	Not saved	Nesalvat
+	Not saved yet	Încă nesalvat
+	Not used by any command	Nu este utilizat de nicio comandă
+	Not {name}	Nu {name}
+	Nothing	Nimic
+	Nothing collected yet. Items you copy or cut appear here.	Încă nu s-a colectat nimic. Elementele pe care le copiați sau le decupați apar aici.
+	Now used by {command}	Utilizat acum de {command}
+	Nudge	Deplasare fină
+	Num Occurrences	Număr de apariții
+	Number	Număr
+	Number alignment:	Alinierea numărului:
+	Number format	Format număr
+	Number of columns:	Număr de coloane:
+	Number of rows:	Număr de rânduri:
+	Number of the page the field sits on	Numărul paginii pe care se află câmpul
+	Number of the section the field sits in	Numărul secțiunii în care se află câmpul
+	Number style for this level:	Stilul de numerotare pentru acest nivel:
+	Number the equation; the number sits at the right margin (or type # then the number)	Numerotați ecuația; numărul stă la marginea din dreapta (sau tastați # și apoi numărul)
+	Number type:	Tip de număr:
+	Number:	Număr:
+	Numbering	Numerotare
+	Numbering:	Numerotare:
+	Numbering…	Numerotare…
+	Numerals	Cifre
+	Numerals:	Cifre:
+	n×n Identity Matrix	Matrice unitate n×n
+	n×n Matrix	Matrice n×n
+	Object	Obiect
+	Odd Page	Pagină impară
+	Odd pages only	Doar paginile impare
+	Off	Dezactivat
+	Office	Office
+	Office 2003 Default	Implicit Office 2003
+	Offset (pt):	Decalaj (pt):
+	Offset: Bottom	Decalaj: jos
+	Offset: Bottom Left	Decalaj: jos stânga
+	Offset: Bottom Right	Decalaj: jos dreapta
+	Offset: Center	Decalaj: centru
+	Offset: Left	Decalaj: stânga
+	Offset: Right	Decalaj: dreapta
+	Offset: Top	Decalaj: sus
+	Offset: Top Left	Decalaj: sus stânga
+	Offset: Top Right	Decalaj: sus dreapta
+	OK	OK
+	Omit	Omitere
+	On	Activat
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Activat: cursorul alunecă spre noul loc atunci când tastați sau utilizați tastele săgeată, iar clipirea lui se estompează. Dezactivat: sare și clipește intermitent.
+	One	Unu
+	One half	O jumătate
+	One label per recipient	O etichetă pentru fiecare destinatar
+	One line per item. Enter adds an item.	Un rând pentru fiecare element. Enter adaugă un element.
+	One Page	O pagină
+	Online Pictures	Imagini online
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Imagini online (Openverse), Traducere (MyMemory sau serverul dvs. LibreTranslate), Obținere programe de completare și descărcarea modelului vocal pentru Dictare se conectează la internet, și doar atunci când le utilizați. Dezactivat, Doc4Me nu face nicio conexiune proprie.
+	Online Pictures…	Imagini online…
+	Online services are turned off (File › Options › Trust Center).	Serviciile online sunt dezactivate (Fișier › Opțiuni › Centru de autorizare).
+	Online Video	Videoclip online
+	Only allow this kind of editing:	Permiteți doar acest tip de editare:
+	Only comments can be added, except in regions marked editable.	Se pot adăuga doar comentarii, cu excepția regiunilor marcate ca editabile.
+	Only form fields can be filled in.	Se pot completa doar câmpurile formularului.
+	only https addresses can be used	se pot utiliza doar adrese https
+	Only pictures I may use commercially	Doar imagini pe care le pot utiliza comercial
+	Only the allowed styles can be applied.	Se pot aplica doar stilurile permise.
+	Only web (http, https) and email (mailto) links can be followed	Se pot urma doar legăturile web (http, https) și de e-mail (mailto)
+	Open	Deschidere
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Deschideți un fișier cu browserul propriu al Doc4Me atunci când caseta de dialog a sistemului nu apare.
+	Open Data Source…	Deschidere sursă de date…
+	Open Hyperlink	Deschidere hyperlink
+	OpenDocument Text (*.odt)	Text OpenDocument (*.odt)
+	Opening print dialog…	Se deschide caseta de dialog de imprimare…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	De acum înainte, deschide cu Doc4Me fișierele .docx, .doc, .rtf și .odt și șabloanele Word.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Deschide Setări › Aplicații implicite, unde alegeți Doc4Me pentru .docx și celelalte tipuri de documente.
+	Open…	Deschidere…
+	Operator	Operator
+	Operator Structures	Structuri de operatori
+	Operators	Operatori
+	Optional Hyphen	Cratimă opțională
+	Options	Opțiuni
+	Options…	Opțiuni…
+	Or	Sau
+	Or save a copy in another format:	Sau salvați o copie în alt format:
+	Ordinals (1st) as superscript	Numerale ordinale (1st) ca exponent
+	Organizer	Organizator
+	Organizer…	Organizator…
+	Orientation	Orientare
+	Original document	Document original
+	Other	Altele
+	Other Authorities	Alte referințe juridice
+	Other Large Operators	Alți operatori mari
+	Other paragraph styles	Alte stiluri de paragraf
+	Other styles and their TOC level:	Alte stiluri și nivelul lor din cuprins:
+	Otherwise insert:	Altfel inserați:
+	Outline	Schiță
+	Outline Level	Nivel de schiță
+	Outline level	Nivel de schiță
+	Outline levels	Niveluri de schiță
+	Outline State	Starea schiței
+	Outline Tools	Instrumente de schiță
+	Outlining	Schițare
+	Outside	Exterior
+	Outside border	Bordură exterioară
+	Outside Borders	Borduri exterioare
+	Outside Margin	Margine exterioară
+	Outside:	Exterior:
+	Outward Brackets	Paranteze spre exterior
+	Oval	Oval
+	Overbar	Bară deasupra
+	Overbars and Underbars	Bare deasupra și dedesubt
+	Overbrace	Acoladă deasupra
+	Overtype	Suprascriere
+	Overtype (typing replaces the characters after the caret)	Suprascriere (tastarea înlocuiește caracterele de după cursor)
+	Page	Pagină
+	Page Background	Fundal pagină
+	Page Border	Bordură pagină
+	Page Borders	Borduri de pagină
+	Page Break	Întrerupere de pagină
+	Page Break Before	Întrerupere de pagină înainte
+	Page break before	Întrerupere de pagină înainte
+	Page Breaks	Întreruperi de pagină
+	Page Color	Culoare pagină
+	Page display	Afișare pagină
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Imagine de pagină (*.jpg, *.jpeg)
+	Page image (*.png)	Imagine de pagină (*.png)
+	Page Movement	Deplasare pagină
+	Page Number	Număr de pagină
+	Page number style	Stil de număr de pagină
+	Page numbers at the right margin	Numere de pagină la marginea din dreapta
+	Page on which a bookmarked passage falls	Pagina pe care se află un pasaj marcat
+	Page Setup	Inițializare pagină
+	Page title	Titlul paginii
+	Page Up	Page Up
+	Page Width	Lățime pagină
+	Page width	Lățime pagină
+	Page X of Y	Pagina X din Y
+	Page {page}	Pagina {page}
+	Page {page} of {pages}	Pagina {page} din {pages}
+	Page\nBorders	Borduri\nde pagină
+	Page\nColor	Culoare\npagină
+	Page\nNumber	Număr\nde pagină
+	Pages	Pagini
+	Pages like 1-3, 5	Pagini precum 1-3, 5
+	Pages of bookmark:	Paginile marcajului:
+	Paragraph	Paragraf
+	Paragraph Character	Caracter de paragraf
+	Paragraph Details	Detalii paragraf
+	Paragraph Down	Paragraf în jos
+	Paragraph Mark	Semn de paragraf
+	Paragraph marks	Semne de paragraf
+	Paragraph Settings	Setări paragraf
+	Paragraph Spacing	Spațiere paragraf
+	Paragraph style	Stil de paragraf
+	Paragraph Up	Paragraf în sus
+	Paragraphs	Paragrafe
+	Paragraph…	Paragraf…
+	Parentheses	Paranteze rotunde
+	Parentheses with Separator	Paranteze rotunde cu separator
+	Partial Differential	Diferențială parțială
+	Password	Parolă
+	Password:	Parolă:
+	Paste	Lipire
+	Paste All	Lipire totală
+	Paste as:	Lipire ca:
+	Paste Clipboard Item	Lipire element din clipboard
+	Paste Formatting	Lipire formatare
+	Paste Special	Lipire specială
+	Paste Special…	Lipire specială…
+	Paste Spike	Lipire din colector
+	Paste: Keep Text Only	Lipire: păstrare numai text
+	Paste: Merge Formatting	Lipire: îmbinare formatare
+	Pasting between documents:	Lipire între documente:
+	Pasting from other programs:	Lipire din alte programe:
+	Pasting within the same document:	Lipire în același document:
+	Pause	Pauză
+	Paused	În pauză
+	PDF document (*.pdf)	Document PDF (*.pdf)
+	Pen	Stilou
+	Pencil	Creion
+	Pens	Stilouri
+	People	Persoane
+	Periodical	Periodic
+	Personalize	Personalizare
+	Phonetic Guide	Ghid fonetic
+	Pi Over 2	Pi supra 2
+	Picas	Pica
+	Pick a custom group (New Group makes one)	Alegeți un grup particularizat (Grup nou creează unul)
+	Pick a field from the list	Alegeți un câmp din listă
+	Picture	Imagine
+	Picture Border	Bordură imagine
+	Picture Content Control	Control de conținut imagine
+	Picture Format	Format imagine
+	Picture Styles	Stiluri de imagine
+	Pictures	Imagini
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Imagini din Openverse. Respectați licența fiecărei imagini: Doc4Me adaugă un rând de credit sub ea.
+	Pie	Radială
+	Placeholder Name	Nume substituent
+	Placeholder text	Text substituent
+	Plain Table 1	Tabel simplu 1
+	Plain text (*.txt)	Text simplu (*.txt)
+	Plain Text Content Control	Control de conținut text simplu
+	Play	Redare
+	Play Video	Redare videoclip
+	Play/Pause	Redare/pauză
+	Plus Equal	Plus egal
+	Points	Puncte
+	points and above	puncte și mai mare
+	Polish	Poloneză
+	Portrait	Portret
+	Portuguese (Brazil)	Portugheză (Brazilia)
+	Portuguese (Portugal)	Portugheză (Portugalia)
+	Position	Poziție
+	Position:	Poziție:
+	Positioning…	Poziționare…
+	Possible spelling mistake	Posibilă greșeală de ortografie
+	Postal Code	Cod poștal
+	Power series of (1+x)ⁿ	Seria de puteri a lui (1+x)ⁿ
+	Preferred width:	Lățime preferată:
+	Preserve	Păstrare
+	Preserve formatting during updates	Păstrați formatarea la actualizare
+	Presets	Presetări
+	Press a key combination	Apăsați o combinație de taste
+	Preview	Previzualizare
+	Preview Results	Previzualizare rezultate
+	Preview\nResults	Previzualizare\nrezultate
+	Previous	Anterior
+	Previous 1 or More	1 sau mai multe anterioare
+	Previous Change	Modificarea anterioară
+	Previous Comment	Comentariul anterior
+	Previous Field	Câmpul anterior
+	Previous Footnote	Nota de subsol anterioară
+	Previous Page	Pagina anterioară
+	Previous Record	Înregistrarea anterioară
+	Previous Section	Secțiunea anterioară
+	Previous Sentence	Propoziția anterioară
+	Previous sentence	Propoziția anterioară
+	Previous Window	Fereastra anterioară
+	Print	Imprimare
+	Print blank lines when data fields are empty	Imprimați rândurile goale când câmpurile de date sunt goale
+	Print Documents	Imprimare documente
+	Print Documents…	Imprimare documente…
+	Print failed: {error}	Imprimarea nu a reușit: {error}
+	Print Layout	Aspect pagină imprimată
+	Print Markup	Imprimare marcaje
+	Print the page color	Imprimați culoarea paginii
+	Print to PDF	Imprimare în PDF
+	Print\nLayout	Aspect pagină\nimprimată
+	Printer	Imprimantă
+	Printing	Imprimare
+	Process	Proces
+	Product	Produs
+	Product of A	Produsul lui A
+	Product with Limits	Produs cu limite
+	Product with Lower Limit	Produs cu limită inferioară
+	Product with Subscript-Superscript Limits	Produs cu limite indice-exponent
+	Products and Coproducts	Produse și coproduse
+	Professional	Profesional
+	Promote	Promovare
+	Promote to Heading 1	Promovare la Titlu 1
+	Proofing	Verificare
+	Proofing Issues	Probleme de verificare
+	Proofing language	Limbă de verificare
+	Properties	Proprietăți
+	Protect	Protejare
+	Protect Document	Protejare document
+	PRs	PR-uri
+	pt	pt
+	Publisher	Editură
+	Punctuation	Punctuație
+	Put the caret in a content control first.	Puneți mai întâi cursorul într-un control de conținut.
+	Put the default commands back on the Quick Access Toolbar?	Readuceți comenzile implicite pe bara de instrumente Acces rapid?
+	Pyramid	Piramidă
+	Quadratic Root	Rădăcină pătrată
+	Query Options…	Opțiuni interogare…
+	Quick Access Toolbar	Bara de instrumente Acces rapid
+	Quick Parts	Părți rapide
+	Quick Tables	Tabele rapide
+	Quote	Citat
+	Radical	Radical
+	Radical with Degree	Radical cu ordin
+	Radicals	Radicali
+	Raised/lowered	Ridicat/coborât
+	Read Aloud	Citire cu voce tare
+	Read Aloud couldn't start the speech program: {reason}	Citirea cu voce tare nu a putut porni programul de vorbire: {reason}
+	Read Aloud couldn't start: {reason}	Citirea cu voce tare nu a putut porni: {reason}
+	Read Aloud isn't available in the browser	Citirea cu voce tare nu este disponibilă în browser
+	Read Aloud Status	Stare citire cu voce tare
+	Read Aloud stopped: {reason}	Citirea cu voce tare s-a oprit: {reason}
+	Read Mode	Mod citire
+	Read\nAloud	Citire cu\nvoce tare
+	Read\nMode	Mod\ncitire
+	Reading	Citire
+	Reading Column Width	Lățime coloană la citire
+	Reading Highlight	Evidențiere la citire
+	Reading Line Spacing	Spațiere rânduri la citire
+	Reading Mode	Mod de citire
+	Reading Speed	Viteză de citire
+	Reading Text Size	Dimensiune text la citire
+	Reads the clipboard's rich text and keeps its formatting.	Citește textul formatat din clipboard și îi păstrează formatarea.
+	Reads the clipboard's web content and keeps its formatting.	Citește conținutul web din clipboard și îi păstrează formatarea.
+	Real name	Nume real
+	Recent	Recente
+	Recent Colors	Culori recente
+	Recent documents to show:	Documente recente de afișat:
+	Recently used symbols:	Simboluri utilizate recent:
+	Recipient List	Listă de destinatari
+	Recipient lists	Liste de destinatari
+	Recipients: {count}	Destinatari: {count}
+	Recognized (you can correct it):	Recunoscut (îl puteți corecta):
+	Recognized Functions	Funcții recunoscute
+	Recognized Functions…	Funcții recunoscute…
+	Recolor a one-color picture, such as an icon	Recolorați o imagine monocromă, cum ar fi o pictogramă
+	Recolor Selected Ink	Recolorare cerneală selectată
+	Record Macro	Înregistrare macrocomandă
+	Recover Unsaved Documents	Recuperare documente nesalvate
+	Rectangle	Dreptunghi
+	Red:	Roșu:
+	Redo	Refacere
+	Reduce Hanging Indent	Reducere indent agățat
+	References	Referințe
+	Reflection	Reflexie
+	Refresh	Reîmprospătare
+	Registered	Înregistrat
+	Registered Sign	Semnul marcă înregistrată
+	Regular expressions	Expresii regulate
+	Regulations	Regulamente
+	Reject	Respingere
+	Reject All	Respingere totală
+	Reject All Changes	Respingeți toate modificările
+	Reject Change	Respingere modificare
+	Relationship	Relație
+	relative to	relativ la
+	Relative to:	Relativ la:
+	Relaxed	Lejer
+	Remove	Eliminare
+	Remove Added Font	Eliminare font adăugat
+	Remove Background	Eliminare fundal
+	Remove Content Control	Eliminare control de conținut
+	Remove every custom shortcut and restore the built-in keys?	Eliminați toate comenzile rapide particularizate și restabiliți tastele predefinite?
+	Remove every custom tab and group and show all tabs again?	Eliminați toate filele și grupurile particularizate și afișați din nou toate filele?
+	Remove field	Eliminare câmp
+	Remove Field Name	Eliminare nume de câmp
+	Remove Footer	Eliminare subsol
+	Remove from Quick Access Toolbar	Eliminare din bara de instrumente Acces rapid
+	Remove Header	Eliminare antet
+	Remove Hyperlink	Eliminare hyperlink
+	Remove Password	Eliminare parolă
+	Remove Pen	Eliminare stilou
+	Remove Positioning	Eliminare poziționare
+	Remove recipient	Eliminare destinatar
+	Remove row	Eliminare rând
+	Remove series	Eliminare serie
+	Remove Space After Paragraph	Eliminare spațiu după paragraf
+	Remove Table of Contents	Eliminare cuprins
+	Remove the control once edited	Eliminați controlul după editare
+	Remove the space before the punctuation	Eliminați spațiul dinaintea semnului de punctuație
+	Remove Watermark	Eliminare inscripționare
+	Rename Style	Redenumire stil
+	Rename…	Redenumire…
+	Reopen	Redeschidere
+	Repeat	Repetare
+	Repeat as header row on each page	Repetați ca rând antet pe fiecare pagină
+	Repeat Header Rows	Repetare rânduri antet
+	Repeated words	Cuvinte repetate
+	Repeating Section Content Control	Control de conținut secțiune repetitivă
+	Replace	Înlocuire
+	Replace All	Înlocuire totală
+	Replace as you type	Înlocuire în timpul tastării
+	Replace Document Text	Înlocuire text document
+	Replace text as you type	Înlocuiți textul în timpul tastării
+	Replace with:	Înlocuire cu:
+	Replace:	Înlocuire:
+	Replay	Reluare
+	Reply	Răspuns
+	Report	Raport
+	Research	Cercetare
+	Researcher	Cercetător
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Cercetătorul necesită un serviciu online; Doc4Me vă păstrează documentele offline.
+	Reset	Resetare
+	Reset All	Resetare totală
+	Reset All…	Resetare totală…
+	Reset Character Formatting	Resetare formatare caractere
+	Reset Crop	Resetare decupare
+	Reset Graphic	Resetare grafică
+	Reset Paragraph Formatting	Resetare formatare paragraf
+	Reset Picture	Resetare imagine
+	Reset to Normal	Resetare la Normal
+	Reset\nGraphic	Resetare\ngrafică
+	Reset…	Resetare…
+	Resize Table by Dragging	Redimensionare tabel prin glisare
+	Resolve	Rezolvare
+	Resolved	Rezolvat
+	Restart at 1	Repornire de la 1
+	Restart Each Page	Repornire la fiecare pagină
+	Restart Each Section	Repornire la fiecare secțiune
+	Restart list after:	Reporniți lista după:
+	Restore	Restabilire
+	Restore Defaults	Restabilire valori implicite
+	Restore Down	Restabilire jos
+	Restore to Normal Word Document	Restabilire la document Word normal
+	Restrict Editing	Restricționare editare
+	Restrict\nEditing	Restricționare\neditare
+	Result	Rezultat
+	Results	Rezultate
+	Return address labels	Etichete cu adresa de retur
+	Return address:	Adresă de retur:
+	Reverse the order	Inversați ordinea
+	Review	Revizuire
+	Review AutoFormat Changes	Revizuire modificări de formatare automată
+	Review Changes…	Revizuire modificări…
+	Reviewing	Revizuire
+	Reviewing Pane	Panou de revizuire
+	Reviewing — edits become suggestions	Revizuire – editările devin sugestii
+	Revised document	Document revizuit
+	Revisions	Revizuiri
+	Rewind	Derulare înapoi
+	Ribbon	Panglică
+	Ribbon and Quick Access Toolbar:	Panglica și bara de instrumente Acces rapid:
+	Ribbon tabs	File ale panglicii
+	Rich Text Content Control	Control de conținut text îmbogățit
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Dreapta
+	Right (vertical)	Dreapta (vertical)
+	Right align page numbers	Aliniați la dreapta numerele de pagină
+	Right Arrow with Text Above	Săgeată la dreapta cu text deasupra
+	Right Arrow with Text Below	Săgeată la dreapta cu text dedesubt
+	Right Border	Bordură dreapta
+	Right border	Bordură dreapta
+	Right Bracket Twice	Paranteză dreapta dublată
+	Right indent	Indent dreapta
+	Right Margin	Margine dreapta
+	Right Only	Doar dreapta
+	Right only	Doar dreapta
+	Right-to-left	De la dreapta la stânga
+	Right-to-Left Section	Secțiune de la dreapta la stânga
+	Right-to-Left Table	Tabel de la dreapta la stânga
+	Right-to-Left Text Direction	Direcție text de la dreapta la stânga
+	Right:	Dreapta:
+	Rightwards Arrow Above	Săgeată spre dreapta deasupra
+	Rightwards Harpoon Above	Harpon spre dreapta deasupra
+	Roots of ax²+bx+c	Rădăcinile lui ax²+bx+c
+	Rotate	Rotire
+	Rotate all text 270°	Rotiți tot textul la 270°
+	Rotate all text 90°	Rotiți tot textul la 90°
+	Rotate Left 90°	Rotire la stânga cu 90°
+	Rotate Right 90°	Rotire la dreapta cu 90°
+	Rotation	Rotație
+	Rotation:	Rotație:
+	Rounded Rectangle	Dreptunghi rotunjit
+	Row	Rând
+	Row:	Rând:
+	Rows & Columns	Rânduri și coloane
+	Ruby text:	Text ruby:
+	Ruler	Riglă
+	Rules	Reguli
+	Run	Rulare
+	Run-in	În text
+	Russian	Rusă
+	Résumé	CV
+	Same as the whole table	La fel ca întregul tabel
+	SAMPLE	EȘANTION
+	Sat:	sâm.:
+	Save	Salvare
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Salvați o copie în alt format. Imprimarea se face printr-un PDF pe care îl puteți imprima din orice vizualizator.
+	Save As	Salvare ca
+	Save as Template	Salvare ca șablon
+	Save documents	Salvare documente
+	Save the document to turn on AutoSave	Salvați documentul pentru a activa salvarea automată
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Salvați documentul pentru a activa salvarea automată (un fișier pe care doar l-ați deschis nu este rescris până când nu îl salvați)
+	Save these pages as PDF…	Salvați aceste pagini ca PDF…
+	Save Version	Salvare versiune
+	Saved	Salvat
+	Scale	Scalare
+	Scale Drawing	Scalare desen
+	Scatter	Prin puncte
+	Screen Clipping	Decupare ecran
+	Screen clipping didn't work: {reason}	Decuparea ecranului nu a funcționat: {reason}
+	Screen clipping ended without a picture.	Decuparea ecranului s-a încheiat fără imagine.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Decuparea ecranului nu este disponibilă aici. Copiați o imagine a ecranului, apoi lipiți-o.
+	Screenshot	Captură de ecran
+	Script	Scriere
+	Scripts	Scripturi
+	Scroll ribbon left	Defilare panglică la stânga
+	Scroll ribbon right	Defilare panglică la dreapta
+	Search	Căutare
+	Search Commands	Căutare comenzi
+	Search commands and help	Căutați comenzi și ajutor
+	Search document	Căutare în document
+	Search for templates	Căutare șabloane
+	Search icons	Căutare pictograme
+	Search Openverse (Creative Commons pictures)	Căutare în Openverse (imagini Creative Commons)
+	Search Options	Opțiuni de căutare
+	Searching…	Se caută…
+	Secant Function	Funcția secantă
+	Section Break	Întrerupere de secțiune
+	Section Breaks	Întreruperi de secțiune
+	Section Character	Caracter de secțiune
+	Section direction:	Direcția secțiunii:
+	Section Mark	Semn de secțiune
+	Section Properties	Proprietăți secțiune
+	Sections	Secțiuni
+	See	Vedeți
+	Select	Selectare
+	Select a picture, shape, chart or table to describe it.	Selectați o imagine, o formă, o diagramă sau un tabel pentru a-l descrie.
+	Select All	Selectare totală
+	Select Cell	Selectare celulă
+	Select Floating Shapes	Selectare forme flotante
+	Select Heading and Content	Selectare titlu și conținut
+	Select Line	Selectare rând
+	Select Objects	Selectare obiecte
+	Select Paragraph	Selectare paragraf
+	Select Range	Selectare zonă
+	Select Recipients	Selectare destinatari
+	Select recipients first to choose from their fields.	Selectați mai întâi destinatarii pentru a alege din câmpurile lor.
+	Select recipients first to match their fields.	Selectați mai întâi destinatarii pentru a le potrivi câmpurile.
+	Select Row	Selectare rând
+	Select Sentence	Selectare propoziție
+	Select Table	Selectare tabel
+	Select Text	Selectare text
+	Select text in the document to translate it.	Selectați text în document pentru a-l traduce.
+	Select Text with Similar Formatting	Selectare text cu formatare similară
+	Select text, then tick who can still edit it.	Selectați textul, apoi bifați cine îl mai poate edita.
+	Select the part of the screen to insert.	Selectați partea ecranului de inserat.
+	Select Word	Selectare cuvânt
+	Select\nRecipients	Selectare\ndestinatari
+	Selected Fields	Câmpuri selectate
+	Selected pages	Pagini selectate
+	Selection	Selecție
+	Selection Pane	Panou de selecție
+	Send Backward	Trimitere în spate
+	Send the document straight to the system print dialog, or save a copy in another format below.	Trimiteți documentul direct la caseta de dialog de imprimare a sistemului sau salvați mai jos o copie în alt format.
+	Sentence	Propoziție
+	Sentence case.	Prima literă a propoziției cu majusculă.
+	Separator:	Separator:
+	Sequence name:	Nume secvență:
+	Serbian	Sârbă
+	Serbian (Cyrillic)	Sârbă (chirilică)
+	Serbian (Latin)	Sârbă (latină)
+	Series name	Nume serie
+	Series {n}	Seria {n}
+	Server address (https://…)	Adresa serverului (https://…)
+	Set	Setare
+	Set As Default	Setare ca implicit
+	Set as Default	Setare ca implicit
+	Set Caret	Setare cursor
+	Set Character Formatting	Setare formatare caractere
+	Set Date	Setare dată
+	Set Equation	Setare ecuație
+	Set Numbering Value	Setare valoare de numerotare
+	Set Paragraph Formatting	Setare formatare paragraf
+	Set Proofing Language…	Setare limbă de verificare…
+	Setting:	Setare:
+	Settings…	Setări…
+	Shading	Umbrire
+	Shadow	Umbră
+	Shadow, glow and soft edges	Umbră, strălucire și margini estompate
+	Shape Effects	Efecte formă
+	Shape Fill	Umplere formă
+	Shape Format	Format formă
+	Shape Outline	Contur formă
+	Shape Styles	Stiluri de formă
+	Shapes	Forme
+	Share	Partajare
+	Sheet:	Foaie:
+	Shift cells down	Deplasare celule în jos
+	Shift cells right	Deplasare celule la dreapta
+	Shift+Tab	Shift+Tab
+	Shipping labels	Etichete de expediere
+	Short citation:	Citat scurt:
+	Shortcut key:	Tastă de comandă rapidă:
+	Show	Afișare
+	Show all formatting marks	Afișați toate semnele de formatare
+	Show All Levels	Afișare toate nivelurile
+	Show all revisions inline	Afișați toate revizuirile în text
+	Show changes at:	Afișare modificări la:
+	Show changes in:	Afișare modificări în:
+	Show Comments	Afișare comentarii
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Afișați documentele cu culorile inversate, ca Vizualizare › Comutare moduri. Salvarea, imprimarea și PDF-urile nu se modifică.
+	Show every bibliography field	Afișați toate câmpurile bibliografiei
+	Show First Line Only	Afișare doar primul rând
+	Show in the Styles gallery	Afișați în galeria Stiluri
+	Show KeyTips (Alt or F10)	Afișați sfaturile de taste (Alt sau F10)
+	Show Level	Afișare nivel
+	Show Level 1	Afișare nivelul 1
+	Show Level 2	Afișare nivelul 2
+	Show Level 3	Afișare nivelul 3
+	Show Level 4	Afișare nivelul 4
+	Show Level 5	Afișare nivelul 5
+	Show Level 6	Afișare nivelul 6
+	Show Level 7	Afișare nivelul 7
+	Show Level 8	Afișare nivelul 8
+	Show Level 9	Afișare nivelul 9
+	Show Markup	Afișare marcaje
+	Show Notes	Afișare note
+	Show only comments and formatting in balloons	Afișați doar comentariile și formatarea în baloane
+	Show or Hide Style	Afișare sau ascundere stil
+	Show page numbers	Afișați numerele de pagină
+	Show revisions in balloons	Afișați revizuirile în baloane
+	Show rulers	Afișați riglele
+	Show Text Formatting	Afișare formatare text
+	Show the equation in the line of text	Afișați ecuația în rândul de text
+	Show the equation on a line of its own	Afișați ecuația pe un rând separat
+	Show the mini toolbar when text is selected	Afișați mini bara de instrumente când textul este selectat
+	Show/Hide ¶	Afișare/ascundere ¶
+	Show\nComments	Afișare\ncomentarii
+	Showing the first {count} items.	Se afișează primele {count} elemente.
+	Shows a tree: each item below the item it belongs to.	Afișează un arbore: fiecare element sub elementul căruia îi aparține.
+	Shows items around a central idea: the first item is the centre.	Afișează elemente în jurul unei idei centrale: primul element este centrul.
+	Shows items of equal weight as blocks in rows.	Afișează elemente de aceeași importanță ca blocuri pe rânduri.
+	Shows overlapping ideas as overlapping circles.	Afișează idei suprapuse ca cercuri suprapuse.
+	Shows parts of a whole as quadrants.	Afișează părțile unui întreg drept cadrane.
+	Shows parts that build on each other, largest at the bottom.	Afișează părți care se construiesc una pe alta, cea mai mare jos.
+	Shows steps in order, left to right, with arrows between them.	Afișează pașii în ordine, de la stânga la dreapta, cu săgeți între ei.
+	Shows steps that repeat, around a circle.	Afișează pași care se repetă, în jurul unui cerc.
+	Shrink Font 1 Point	Micșorare font cu 1 punct
+	Shrink Selection	Restrângere selecție
+	Shrink text	Micșorare text
+	Side to Side	Alăturat
+	Side\nto Side	Alătu-\nrat
+	Sides of a right triangle	Laturile unui triunghi dreptunghic
+	Signature Line	Linie de semnătură
+	Sine and cosine series of f(x)	Seria de sinusuri și cosinusuri a lui f(x)
+	Sine Function	Funcția sinus
+	Sine theta	Sinus theta
+	Single	Simplu
+	Single Brackets	Paranteze simple
+	Single Closing Quote	Ghilimea simplă de închidere
+	Single label	O singură etichetă
+	Single Left Angle	Unghi stânga simplu
+	Single Left Bar	Bară stânga simplă
+	Single Left Brace	Acoladă stânga simplă
+	Single Left Bracket	Paranteză dreaptă stânga simplă
+	Single Left Parenthesis	Paranteză rotundă stânga simplă
+	Single Opening Quote	Ghilimea simplă de deschidere
+	Single Right Brace	Acoladă dreapta simplă
+	Single Right Bracket	Paranteză dreaptă dreapta simplă
+	Single Right Parenthesis	Paranteză rotundă dreapta simplă
+	Single Spacing	Spațiere simplă
+	SIST02	SIST02
+	Site name	Numele site-ului
+	Size	Dimensiune
+	Size (pt):	Dimensiune (pt):
+	Size and Crop…	Dimensiune și decupare…
+	Size:	Dimensiune:
+	Sketchbook	Carnet de schițe
+	Skewed Fraction	Fracție oblică
+	Skip citations & bibliography	Omiteți citatele și bibliografia
+	Skip Citations and Bibliography	Omitere citate și bibliografie
+	Skip Record If	Omitere înregistrare dacă
+	Skip Record If…	Omitere înregistrare dacă…
+	Slant Down	Înclinare în jos
+	Slant Up	Înclinare în sus
+	Small Caps	Majuscule mici
+	Small caps	Majuscule mici
+	Small change	Modificare mică
+	Smart quotes instead of straight quotes	Ghilimele tipografice în locul ghilimelelor drepte
+	SmartArt	SmartArt
+	SmartArt Design	Proiectare SmartArt
+	SmartArt Styles	Stiluri SmartArt
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Defilare și zoom line, iar meniurile și butoanele apar treptat. Dezactivat afișează imediat fiecare modificare.
+	Soft Edges	Margini estompate
+	Soft Glow	Strălucire difuză
+	Solid Accent	Accent solid
+	Sort	Sortare
+	Sort by	Sortare după
+	Sort order:	Ordine de sortare:
+	Sort Records	Sortare înregistrări
+	Source code: github.com/chatraweechai/doc4me	Cod sursă: github.com/chatraweechai/doc4me
+	Source Manager	Gestionar de surse
+	Source type:	Tip de sursă:
+	Sources in this document:	Surse din acest document:
+	South	Sud
+	Space	Spațiu
+	Space after	Spațiu după
+	Space after: {pt} pt	Spațiu după: {pt} pt
+	Space before	Spațiu înainte
+	Space before/after:	Spațiu înainte/după:
+	Space before: {pt} pt	Spațiu înainte: {pt} pt
+	Spaces	Spații
+	Spacing	Spațiere
+	Spacing (pt):	Spațiere (pt):
+	Spacing:	Spațiere:
+	Spanish	Spaniolă
+	Spanish (Mexico)	Spaniolă (Mexic)
+	Spanish (Spain)	Spaniolă (Spania)
+	Sparse Matrices	Matrice rare
+	Special	Special
+	Special Characters	Caractere speciale
+	Specify height:	Specificați înălțimea:
+	Speech	Vorbire
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Vorbirea este recunoscută pe acest computer (whisper.cpp); nu se trimite nimic online.
+	Speed	Viteză
+	Spelling	Ortografie
+	Spelling & Grammar	Ortografie și gramatică
+	Spelling &\nGrammar	Ortografie\nși gramatică
+	Spelling and grammar are checked in English (United States).	Ortografia și gramatica sunt verificate în engleză (Statele Unite).
+	Spelling Suggestions	Sugestii de ortografie
+	Spike	Colector
+	Split	Scindare
+	Split apart page break and paragraph mark	Separați întreruperea de pagină de semnul de paragraf
+	Split Cells	Scindare celule
+	Split Table	Scindare tabel
+	Spreadsheet Table	Tabel de foaie de calcul
+	Square	Pătrat
+	Square Root	Rădăcină pătrată
+	Square Root with Degree	Rădăcină pătrată cu ordin
+	Square Union	Reuniune pătrată
+	Stack Object	Obiect stivă
+	Stack Object (Three)	Obiect stivă (trei)
+	Stacked	Stivuit
+	Stacked Bar	Bară stivuită
+	Stacked Column	Coloană stivuită
+	Stacked Fraction	Fracție stivuită
+	Stacked, no bar	Stivuit, fără bară
+	Standard	Standard
+	Standard and Contextual	Standard și contextuale
+	Standard Colors	Culori standard
+	Standard Only	Doar standard
+	Star	Stea
+	Start at:	Începe de la:
+	Start Enforcing Protection	Pornire impunere protecție
+	Start Mail Merge	Pornire îmbinare corespondență
+	Start Mail\nMerge	Pornire îmbinare\ncorespondență
+	State	Județ/stat
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Statistics	Statistici
+	Status Bar	Bară de stare
+	Statutes	Legi
+	Stop	Oprire
+	Stop Protection	Oprire protecție
+	Stop Reading	Oprire citire
+	Stopped	Oprit
+	Store	Magazin
+	Straight Arrow Connector	Conector săgeată drept
+	Straight Connector	Conector drept
+	Strikethrough	Tăiere cu o linie
+	Stroke {n} of {total}	Trasarea {n} din {total}
+	Strong	Puternic
+	Structure Actions	Acțiuni de structură
+	Structures	Structuri
+	Studio	Studio
+	Studio cover	Copertă studio
+	Studio handbook (sample)	Manual de studio (eșantion)
+	Style	Stil
+	Style based on:	Stil bazat pe:
+	Style Inspector	Inspector de stiluri
+	Style Set	Set de stiluri
+	Style:	Stil:
+	Style: APA	Stil: APA
+	Style: {style}	Stil: {style}
+	Styles	Stiluri
+	Styles Pane	Panoul Stiluri
+	Styles:	Stiluri:
+	Subentry:	Subintrare:
+	Subject	Subiect
+	Subscript	Indice
+	Subscript-Superscript	Indice-exponent
+	Subscripts and Superscripts	Indici și exponenți
+	Subset:	Subset:
+	Substituted font	Font substituit
+	Subtitle	Subtitlu
+	Subtle Emphasis	Accentuare discretă
+	Subtle Reference	Referință discretă
+	Sum	Sumă
+	Sum of cosines	Suma cosinusurilor
+	Sum or difference of sines	Suma sau diferența sinusurilor
+	Summation	Sumă
+	Summation from 0 to n	Sumă de la 0 la n
+	Summation over binomials	Sumă peste binomiale
+	Summation with Limits	Sumă cu limite
+	Summation with Lower Limit	Sumă cu limită inferioară
+	Summation with Subscript Limit	Sumă cu limită indice
+	Summation with Subscript-Superscript Limits	Sumă cu limite indice-exponent
+	Summations	Sume
+	Superscript	Exponent
+	Suppress line numbers	Suprimați numerele de rând
+	Surface Integral	Integrală de suprafață
+	Surface Integral with Limits	Integrală de suprafață cu limite
+	Surface Integral with Stacked Limits	Integrală de suprafață cu limite suprapuse
+	Swap footnotes and endnotes	Inversați notele de subsol și notele de final
+	Swedish	Suedeză
+	Switch Modes	Comutare moduri
+	Switch Windows	Comutare ferestre
+	Switch\nModes	Comutare\nmoduri
+	Symbol	Simbol
+	Symbol Font	Font de simboluri
+	Symbols	Simboluri
+	Synchronous Scrolling	Defilare sincronă
+	Synonyms	Sinonime
+	System	Sistem
+	Tab	Tab
+	Tab Character	Caracter tabulator
+	Tab character	Caracter tabulator
+	Tab characters	Caractere tabulator
+	Tab leader:	Caracter de umplere:
+	Tab stop position:	Poziție tabulator:
+	Tab stops to be cleared:	Tabulatori de golit:
+	Table	Tabel
+	Table AutoFormat	Formatare automată tabel
+	Table AutoFormat…	Formatare automată tabel…
+	Table Column Width	Lățime coloană tabel
+	Table Design	Proiectare tabel
+	Table direction:	Direcția tabelului:
+	Table entry fields	Câmpuri de intrări de tabel
+	Table Grid	Grilă tabel
+	Table identifier:	Identificator tabel:
+	Table Layout	Aspect tabel
+	Table of Authorities	Tabel de referințe juridice
+	Table of Contents	Cuprins
+	Table of Contents Options	Opțiuni cuprins
+	Table of Contents Styles	Stiluri cuprins
+	Table of Figures	Tabel de figuri
+	Table of Figures Options	Opțiuni tabel de figuri
+	Table of\nContents	Cuprins
+	Table Positioning	Poziționare tabel
+	Table Properties	Proprietăți tabel
+	Table Row Height	Înălțime rând tabel
+	Table style	Stil de tabel
+	Table Style Options	Opțiuni stil de tabel
+	Table Styles	Stiluri de tabel
+	Table styles:	Stiluri de tabel:
+	Tables	Tabele
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tabs	Tabulatori
+	Tabs…	Tabulatori…
+	Tabular List	Listă tabelară
+	Tag	Etichetă
+	Tangent formula	Formula tangentei
+	Tangent Function	Funcția tangentă
+	TC entry fields	Câmpuri de intrări TC
+	Technology	Tehnologie
+	Templates	Șabloane
+	Templates and Add-ins	Șabloane și programe de completare
+	Text	Text
+	Text Box	Casetă text
+	Text boxes	Casete text
+	Text Direction	Direcție text
+	Text Effects	Efecte text
+	Text Effects and Typography	Efecte text și tipografie
+	Text Fill	Umplere text
+	Text from File	Text din fișier
+	Text Highlight Color	Culoare de evidențiere text
+	Text indent at:	Indentare text la:
+	Text isn't squeezed to fit its cell yet.	Textul nu este încă comprimat pentru a încăpea în celulă.
+	Text Outline	Contur text
+	Text over Colon Equal	Text deasupra semnului două puncte egal
+	Text over Equal	Text deasupra semnului egal
+	Text Pane	Panou de text
+	Text size	Dimensiune text
+	Text snaps to characters	Textul se aliniază la caractere
+	Text to display:	Text de afișat:
+	Text Wrapping	Încadrare text
+	Text wrapping:	Încadrare text:
+	Text:	Text:
+	Text\nBox	Casetă\ntext
+	Text\nDirection	Direcție\ntext
+	Thai	Thailandeză
+	Thai Distributed	Distribuit thailandez
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Acest format nu păstrează totul, așa că documentul este încă deschis. Salvați-l ca document Word (.docx) pentru a continua.
+	That isn't the web address or embed code of an online video.	Aceasta nu este adresa web sau codul de încorporare al unui videoclip online.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Parola nu este corectă. Verificați-o (parolele țin cont de litere mari și mici) și încercați din nou.
+	The clipboard is empty.	Clipboardul este gol.
+	The date it is today	Data de azi
+	The document contains no tracked changes.	Documentul nu conține modificări urmărite.
+	The document has no bookmarks yet.	Documentul nu are încă marcaje.
+	The document is read only, except for regions marked editable.	Documentul este doar în citire, cu excepția regiunilor marcate ca editabile.
+	The document will be saved with a password. Save it to protect it.	Documentul va fi salvat cu o parolă. Salvați-l pentru a-l proteja.
+	The first word of a sentence starts with a capital.	Primul cuvânt al unei propoziții începe cu majusculă.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	cota zilnică gratuită s-a epuizat (încercați din nou mâine sau indicați o adresă de e-mail)
+	the LibreTranslate server	serverul LibreTranslate
+	The Mail Merge Helper sets up a merge in three steps.	Asistentul de îmbinare corespondență configurează o îmbinare în trei pași.
+	The new style takes the formatting of the current paragraph.	Stilul nou preia formatarea paragrafului curent.
+	The password is optional; without it anyone can stop the protection.	Parola este opțională; fără ea, oricine poate opri protecția.
+	The password is removed. Save the document to keep the change.	Parola a fost eliminată. Salvați documentul pentru a păstra modificarea.
+	The passwords don't match.	Parolele nu se potrivesc.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Imprimanta, imprimarea față-verso și numărul de pagini pe foaie se aleg în acea casetă de dialog.
+	The recipient-list field that fills each part of an address block and greeting line.	Câmpul din lista de destinatari care completează fiecare parte a unui bloc de adresă și a unei linii de salut.
+	The same word twice in a row.	Același cuvânt de două ori la rând.
+	The spelling and grammar check is complete.	Verificarea ortografiei și a gramaticii s-a terminat.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Caseta de dialog pentru fișiere a sistemului nu este disponibilă, așa că Doc4Me o afișează pe a sa. Pentru caseta de dialog a sistemului, instalați un portal de selectare a fișierelor (cum ar fi xdg-desktop-portal-gtk) sau zenity.
+	The text is sent to {service} to be translated.	Textul este trimis la {service} pentru a fi tradus.
+	The time right now	Ora exactă
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Videoclipul apare ca imagine în document. Faceți dublu clic pe el pentru a-l viziona în browser.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Întregul document este tradus într-un document nou, care îl înlocuiește pe acesta. Salvați-vă mai întâi lucrul.
+	Theme Colors	Culori temă
+	Theme Fonts	Fonturi temă
+	Theme List	Listă de teme
+	Themes	Teme
+	Then by	Apoi după
+	Then insert:	Apoi inserați:
+	There's no text to translate.	Nu există text de tradus.
+	Thesaurus	Tezaur
+	These marks show even when Show/Hide ¶ is off.	Aceste semne apar chiar și atunci când Afișare/ascundere ¶ este dezactivat.
+	These merge fields aren't in the recipient list:	Aceste câmpuri de îmbinare nu sunt în lista de destinatari:
+	These settings will be used for new documents.	Aceste setări vor fi utilizate pentru documente noi.
+	Thick	Gros
+	Thickness	Grosime
+	This Device…	Acest dispozitiv…
+	This document	Acest document
+	This field has no options.	Acest câmp nu are opțiuni.
+	This folder can't be read: {error}	Acest folder nu poate fi citit: {error}
+	This font has no characters to show.	Acest font nu are caractere de afișat.
+	This page	Această pagină
+	This password type isn't supported.	Acest tip de parolă nu este acceptat.
+	This point forward	De aici înainte
+	This section	Această secțiune
+	Three	Trei
+	Through	Prin
+	Tight	Strâns
+	Tilde	Tildă
+	Tips ({n})	Sfaturi ({n})
+	Title	Titlu
+	Title from the document properties	Titlu din proprietățile documentului
+	Title:	Titlu:
+	To	Către
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Pentru a deschide implicit documentele Word cu Doc4Me: selectați unul în Finder, alegeți Fișier › Obține informații, alegeți Doc4Me la Deschide cu, apoi faceți clic pe Modifică tot.
+	To:	Către:
+	TOA Heading	Titlu tabel de referințe juridice
+	TOC Heading	Titlu cuprins
+	TOC {n}	Cuprins {n}
+	Today	Astăzi
+	tOGGLE cASE	cOMUTARE mAJUSCULE
+	Toggle Check Box	Comutare casetă de selectare
+	Toggle Field Codes	Comutare coduri de câmp
+	Toggle Unicode Character	Comutare caracter Unicode
+	Tools	Instrumente
+	Top	Sus
+	Top and Bottom	Sus și jos
+	Top Border	Bordură sus
+	Top Margin	Margine sus
+	Top of Next Page	Sus pe pagina următoare
+	Top of Page	Sus pe pagină
+	Top of Previous Page	Sus pe pagina anterioară
+	Top of the Window	Partea de sus a ferestrei
+	Top:	Sus:
+	Total	Total
+	Total Row	Rând total
+	Track Changes	Urmărire modificări
+	Track Changes Options	Opțiuni de urmărire a modificărilor
+	Track changes while editing	Urmăriți modificările în timpul editării
+	Track Changes: On	Urmărire modificări: activată
+	Track formatting	Urmăriți formatarea
+	Track\nChanges	Urmărire\nmodificări
+	Track\nChanges ✓	Urmărire\nmodificări ✓
+	Tracked changes	Modificări urmărite
+	Tracking	Urmărire
+	Trademark	Marcă comercială
+	Trademark Sign	Semnul mărcii comerciale
+	Transform	Transformare
+	Translate	Traducere
+	Translate Document	Traducere document
+	Translating {done} of {total}	Se traduce {done} din {total}
+	Translation service	Serviciu de traducere
+	Translator	Traducător
+	Transparency	Transparență
+	Transparency:	Transparență:
+	Transport	Transport
+	Treatises	Tratate
+	Triangle	Triunghi
+	Triangle Down	Triunghi în jos
+	Triangle Up	Triunghi în sus
+	Trigonometric Functions	Funcții trigonometrice
+	Triple	Triplu
+	Triple Dot	Trei puncte
+	Triple Integral	Integrală triplă
+	Triple Integral with Limits	Integrală triplă cu limite
+	Triple Integral with Stacked Limits	Integrală triplă cu limite suprapuse
+	Trust Center	Centru de autorizare
+	Tue	mar.
+	Turabian	Turabian
+	Turkish	Turcă
+	Two	Doi
+	Type	Tip
+	Type a command, e.g. "insert table"	Tastați o comandă, de exemplu „inserare tabel”
+	Type a New List	Tastați o listă nouă
+	Type a New List…	Tastați o listă nouă…
+	Type at least one recipient.	Tastați cel puțin un destinatar.
+	Type equations in LaTeX	Tastați ecuațiile în LaTeX
+	Type equations in the linear format (UnicodeMath)	Tastați ecuațiile în format liniar (UnicodeMath)
+	Type in Equation	Tastare în ecuație
+	Type normal (non-math) text in the equation	Tastați text normal (nematematic) în ecuație
+	Type Text	Tastare text
+	Type the categories down the side and a column of values per series.	Tastați categoriile pe verticală și o coloană de valori pentru fiecare serie.
+	Type the field's name and its switches, for example PAGE \\* roman.	Tastați numele câmpului și comutatoarele sale, de exemplu PAGE \\* roman.
+	Type the password to stop the protection.	Tastați parola pentru a opri protecția.
+	Type the recipients, or load them from a file.	Tastați destinatarii sau încărcați-i dintr-un fișier.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Tastați numele etichetei sursei. Puteți adăuga mai multe informații la această sursă ulterior, editând-o.
+	Type:	Tip:
+	Typing	Tastare
+	Typing replaces selected text	Tastarea înlocuiește textul selectat
+	Ukrainian	Ucraineană
+	Unchecked symbol	Simbol nebifat
+	Underbar	Bară dedesubt
+	Underbrace	Acoladă dedesubt
+	Underline	Subliniere
+	Underline color	Culoare subliniere
+	Underline Words Only	Subliniere doar cuvinte
+	Undo	Anulare
+	Undo Stroke	Anulare trasare
+	Undo {action}	Anulare {action}
+	Unformatted Text	Text neformatat
+	Ungroup	Anulare grupare
+	Union	Reuniune
+	Union of intersections	Reuniunea intersecțiilor
+	Union with Limits	Reuniune cu limite
+	Union with Lower Limit	Reuniune cu limită inferioară
+	Union with Plus	Reuniune cu plus
+	Union with Subscript-Superscript Limits	Reuniune cu limite indice-exponent
+	Unions and Intersections	Reuniuni și intersecții
+	Unlink Fields	Anulare legătură câmpuri
+	Unlink\nCitations	Anulare legătură\ncitate
+	Unlock Fields	Deblocare câmpuri
+	Up	Sus
+	Up Diagonal Dots	Puncte diagonale în sus
+	Up one level	Un nivel mai sus
+	Update Field	Actualizare câmp
+	Update fields before printing	Actualizați câmpurile înainte de imprimare
+	Update Index	Actualizare index
+	Update Style to Match Selection	Actualizați stilul pentru a se potrivi cu selecția
+	Update Styles from Template	Actualizare stiluri din șablon
+	Update Table	Actualizare tabel
+	Update Table of Figures	Actualizare tabel de figuri
+	Update to Match	Actualizare pentru potrivire
+	Update to Match Selection	Actualizare pentru potrivire cu selecția
+	UPPERCASE	MAJUSCULE
+	URGENT	URGENT
+	URL	URL
+	Use "a" before a consonant sound	Utilizați „a” înaintea unui sunet consonant
+	Use "an" before a vowel sound	Utilizați „an” înaintea unui sunet vocalic
+	Use an Existing List…	Utilizare listă existentă…
+	Use passim (five or more pages)	Utilizați passim (cinci sau mai multe pagini)
+	Use system setting	Utilizați setarea sistemului
+	Use the Insert key to switch overtype on and off	Utilizați tasta Insert pentru a activa și dezactiva suprascrierea
+	Use wildcards	Utilizați metacaractere
+	User Name	Nume de utilizator
+	User name:	Nume de utilizator:
+	Username	Nume de utilizator
+	Value	Valoare
+	Vector A	Vectorul A
+	Vector AB	Vectorul AB
+	Version	Versiune
+	Version History	Istoric versiuni
+	Version {version} ({build})	Versiunea {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Versiunile sunt păstrate cât timp documentul este deschis (un fișier .docx nu are versiuni).
+	Vertical	Vertical
+	Vertical Alignment	Aliniere verticală
+	Vertical alignment:	Aliniere verticală:
+	Vertical Bars	Bare verticale
+	Vertical Dots	Puncte verticale
+	Vertical spacing:	Spațiere verticală:
+	Vietnamese	Vietnameză
+	View	Vizualizare
+	View Alt Text…	Vizualizare text alternativ…
+	View Gridlines	Vizualizare linii de grilă
+	View Side by Side	Vizualizare alăturată
+	View State	Starea vizualizării
+	Views	Vizualizări
+	Visual effects	Efecte vizuale
+	Voice	Voce
+	Volume	Volum
+	Volume Integral	Integrală de volum
+	Volume Integral with Limits	Integrală de volum cu limite
+	Volume Integral with Stacked Limits	Integrală de volum cu limite suprapuse
+	W:	L:
+	Waiting for Zotero…	Se așteaptă Zotero…
+	Warm Gradient with Outline	Gradient cald cu contur
+	Warnings ({n})	Avertismente ({n})
+	Watermark	Inscripționare
+	Wave	Val
+	Weather	Vreme
+	web access isn't available here	accesul web nu este disponibil aici
+	Web Layout	Aspect web
+	Web page (*.html)	Pagină web (*.html)
+	Web\nLayout	Aspect\nweb
+	Website	Site web
+	Wed	mie.
+	Weight	Grosime
+	West	Vest
+	When merging records	La îmbinarea înregistrărilor
+	When this document was first created	Când a fost creat prima dată acest document
+	When this document was most recently printed	Când a fost imprimat ultima dată acest document
+	When this document was most recently saved	Când a fost salvat ultima dată acest document
+	White Space	Spațiu alb
+	White space	Spațiu alb
+	Who the document properties name as author	Cine este numit autor în proprietățile documentului
+	Whole document	Întregul document
+	Whole page	Întreaga pagină
+	Whole Table	Întregul tabel
+	Whole words	Cuvinte întregi
+	Wide	Lat
+	Widow/Orphan Control	Control rânduri văduve/orfane
+	Widow/Orphan control	Control rânduri văduve/orfane
+	Width and spacing	Lățime și spațiere
+	Width:	Lățime:
+	Wildcards (regex)	Metacaractere (regex)
+	Window	Fereastră
+	With:	Cu:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 și versiunile ulterioare
+	Word 97–2003	Word 97–2003
+	Word Count	Contor de cuvinte
+	Word document	Document Word
+	Word document (*.docx)	Document Word (*.docx)
+	Word forms	Forme ale cuvintelor
+	Word Left	Cuvânt la stânga
+	Word level	Nivel cuvânt
+	Word Right	Cuvânt la dreapta
+	Word XML Document (*.xml)	Document Word XML (*.xml)
+	WordArt	WordArt
+	WordArt Styles	Stiluri WordArt
+	Words	Cuvinte
+	Words only	Doar cuvinte
+	Wrap Text	Încadrare text
+	Wrap text	Încadrare text
+	Wrap Text Sides	Părți de încadrare a textului
+	Wrap\nText	Încadrare\ntext
+	Write & Insert Fields	Scriere și inserare câmpuri
+	Write a reply	Scrieți un răspuns
+	Write math here with the mouse or a pen.	Scrieți aici formule cu mouse-ul sau cu un stilou.
+	Writing Style: Grammar	Stil de scriere: gramatică
+	x bar	x barat
+	Year	An
+	Yes	Da
+	Yields	Rezultă
+	Your changes will be lost if you don't save them.	Modificările se vor pierde dacă nu le salvați.
+	Your system doesn't report an animation setting, so animation effects stay on.	Sistemul nu raportează o setare de animație, așa că efectele de animație rămân activate.
+	Your system has animation effects turned off.	Sistemul are efectele de animație dezactivate.
+	Your system has animation effects turned on.	Sistemul are efectele de animație activate.
+	Zoom	Zoom
+	Zoom In	Mărire
+	Zoom Out	Micșorare
+	Zoom to Page	Zoom la pagină
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: anulat
+	Zotero: done	Zotero: terminat
+	{cols}×{rows} Table	Tabel {cols}×{rows}
+	{contributors} contributors · {commits} commits	{contributors} contribuitori · {commits} commituri
+	{count} items highlighted	{count} elemente evidențiate
+	{count} of {total} pages will print	Se vor imprima {count} din {total} pagini
+	{count} paragraphs were changed.	Au fost modificate {count} paragrafe.
+	{count} records; fields: {fields}	{count} înregistrări; câmpuri: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} nu este instalat pe acest computer, așa că documentul este afișat cu {with}. Rândurile și paginile se pot întrerupe altfel decât cu fontul original.
+	{group} settings	Setări {group}
+	{key}+Click to follow link	{key}+clic pentru a urma legătura
+	{language} is now the document's default language.	{language} este acum limba implicită a documentului.
+	{name} (Press ENTER to Insert)	{name} (apăsați Enter pentru a insera)
+	{name} already exists. Choose Save again to replace it.	{name} există deja. Alegeți din nou Salvare pentru a-l înlocui.
+	{name} can't be a folder's name.	{name} nu poate fi numele unui folder.
+	{name} is protected with a password.	{name} este protejat cu o parolă.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} a fost adăugat. Macrocomenzile sale sunt în Programele mele de completare și Vizualizare › Macrocomenzi.
+	{name} wasn't found.	{name} nu a fost găsit.
+	{n} entries marked.	{n} intrări marcate.
+	{n} lines	{n} rânduri
+	{n} of {of} recipients	{n} din {of} destinatari
+	{n} pt	{n} pt
+	{n} records	{n} înregistrări
+	{n} revisions	{n} revizuiri
+	{selected} of {words} words	{selected} din {words} cuvinte
+	{size} pt	{size} pt
+	{words} words	{words} cuvinte
+	{w} × {h} in	{w} × {h} in
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	„{text}” ({row}, {series}) nu este un număr.
+	← Find	← Găsire
+	✓ None	✓ Niciunul
+	➕ New comment	➕ Comentariu nou
+	📂  Browse…	📂  Răsfoire…

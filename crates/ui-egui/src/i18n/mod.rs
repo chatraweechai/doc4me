@@ -52,7 +52,7 @@ pub struct LangInfo {
 }
 
 /// The registry. English first: it is the fallback and the source language.
-pub static LANGUAGES: [LangInfo; 25] = [
+pub static LANGUAGES: [LangInfo; 27] = [
     LangInfo { code: "en", name: "English", source: "", prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // British English (colour, centre, customise); `en-GB` and `en_GB.UTF-8` resolve here, other
     // English regions keep the built-in US English. New documents stay in Doc4Me's default
@@ -158,6 +158,10 @@ pub static LANGUAGES: [LangInfo; 25] = [
     LangInfo { code: "da", name: "Dansk", source: include_str!("da.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // Norwegian Bokmål; `nb`, `nb-NO`, and plain Norwegian `no`/`no-NO` resolve here (see `candidates`).
     LangInfo { code: "nb", name: "Norsk bokmål", source: include_str!("nb.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    // Finnish; `fi`, `fi-FI` resolve here.
+    LangInfo { code: "fi", name: "Suomi", source: include_str!("fi.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    // Romanian; `ro`, `ro-RO`, `ro-MD` resolve here.
+    LangInfo { code: "ro", name: "Română", source: include_str!("ro.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
 ];
 
 impl LangInfo {
