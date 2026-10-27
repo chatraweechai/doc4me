@@ -768,6 +768,134 @@ pub struct ParaProps {
     /// `w:snapToGrid`: lines snap to the section's document grid. Unset = on.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub snap_to_grid: Option<bool>,
+    /// A text frame (`w:framePr` without a drop cap): see [`FrameProps`].
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub frame: Option<FrameProps>,
+}
+
+/// A text frame (`w:framePr`, Word's Insert Frame and Format › Frame…): the paragraph — with the
+/// paragraphs next to it that have the same frame — stands at its own position, out of the text
+/// flow, and the text around it wraps around it (or stays above and below it, or runs under it).
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+pub struct FrameProps {
+    /// Width, points (`None`: as wide as its widest line, up to the column's width).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub w: Option<f32>,
+    /// Height, points (`None`: as tall as its text); `h_rule` says how it applies.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub h: Option<f32>,
+    pub h_rule: HeightRule,
+    pub wrap: FrameWrap,
+    /// What `x` is measured from: the column (`Column`, Word's "text"), the margin or the page.
+    pub h_rel: crate::para::Anchor,
+    /// What `y` is measured from: the paragraph after the frame (`Paragraph`, Word's "text"), the
+    /// margin or the page.
+    pub v_rel: crate::para::Anchor,
+    /// Offsets, points (used when the matching alignment is `None`).
+    pub x: f32,
+    pub y: f32,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub h_align: Option<crate::para::FloatAlign>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub v_align: Option<crate::para::FloatAlign>,
+    /// `w:yAlign="inline"`: vertically where the text is.
+    #[serde(skip_serializing_if = "is_false")]
+    pub v_inline: bool,
+    /// Distance from the text beside it (left and right) and above and below it, points.
+    pub h_space: f32,
+    pub v_space: f32,
+    /// `w:anchorLock`: the anchor stays with its paragraph when the frame moves.
+    #[serde(skip_serializing_if = "is_false")]
+    pub anchor_lock: bool,
+    /// No frame: set on a paragraph (or a style) to cancel the frame its style gives it. Never
+    /// written to a file, which has no way to say it.
+    #[serde(skip_serializing_if = "is_false")]
+    pub off: bool,
+}
+
+fn is_false(v: &bool) -> bool {
+    !*v
+}
+
+impl Default for FrameProps {
+    /// Word's defaults: as wide and tall as its text, wrapped around, at the column's left edge
+    /// and the top of the paragraph after it.
+    fn default() -> Self {
+        FrameProps {
+            w: None,
+            h: None,
+            h_rule: HeightRule::Auto,
+            wrap: FrameWrap::Around,
+            h_rel: crate::para::Anchor::Column,
+            v_rel: crate::para::Anchor::Paragraph,
+            x: 0.0,
+            y: 0.0,
+            h_align: None,
+            v_align: None,
+            v_inline: false,
+            h_space: 0.0,
+            v_space: 0.0,
+            anchor_lock: false,
+            off: false,
+        }
+    }
+}
+
+impl FrameProps {
+    /// The frame's width and height (points, finite and in range; `None` for automatic ones),
+    /// offsets and distances from text.
+    pub fn clamped(mut self) -> FrameProps {
+        let fin = |v: f32, lo: f32, hi: f32| if v.is_finite() { v.clamp(lo, hi) } else { 0.0 };
+        self.w = self.w.filter(|v| v.is_finite() && *v > 0.0).map(|v| v.clamp(1.0, 1584.0));
+        self.h = self.h.filter(|v| v.is_finite() && *v > 0.0).map(|v| v.clamp(1.0, 1584.0));
+        self.x = fin(self.x, -1584.0, 1584.0);
+        self.y = fin(self.y, -1584.0, 1584.0);
+        self.h_space = fin(self.h_space, 0.0, 1584.0);
+        self.v_space = fin(self.v_space, 0.0, 1584.0);
+        self
+    }
+}
+
+/// How the text around a frame wraps (`w:wrap`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub enum FrameWrap {
+    /// Around it (`around`; `auto`, `tight` and `through` wrap the same way here).
+    #[default]
+    Around,
+    Auto,
+    Tight,
+    Through,
+    /// Above and below it only (`notBeside`).
+    NotBeside,
+    /// Under it: the frame stands over the text (`none`).
+    None,
+}
+
+impl FrameWrap {
+    pub fn from_ooxml(v: &str) -> Option<FrameWrap> {
+        Some(match v {
+            "around" => FrameWrap::Around,
+            "auto" => FrameWrap::Auto,
+            "tight" => FrameWrap::Tight,
+            "through" => FrameWrap::Through,
+            "notBeside" => FrameWrap::NotBeside,
+            "none" => FrameWrap::None,
+            _ => return None,
+        })
+    }
+
+    pub fn ooxml(self) -> &'static str {
+        match self {
+            FrameWrap::Around => "around",
+            FrameWrap::Auto => "auto",
+            FrameWrap::Tight => "tight",
+            FrameWrap::Through => "through",
+            FrameWrap::NotBeside => "notBeside",
+            FrameWrap::None => "none",
+        }
+    }
 }
 
 impl ParaProps {
@@ -775,7 +903,7 @@ impl ParaProps {
         overlay_fields!(self, patch; style, align, indent_left, indent_right, indent_first, indent_left_chars, indent_right_chars, indent_first_chars, space_before, space_after, space_before_auto, space_after_auto, line_spacing,
             contextual_spacing, mirror_indents, keep_next, keep_lines, page_break_before, widow_control, outline_level, numbering, tabs, shading, borders,
             suppress_hyphens, suppress_line_numbers, bidi, drop_cap, kinsoku, word_wrap, overflow_punct, top_line_punct, auto_space_de, auto_space_dn,
-            snap_to_grid);
+            snap_to_grid, frame);
     }
     pub fn overlaid(mut self, patch: &ParaProps) -> ParaProps {
         self.overlay(patch);

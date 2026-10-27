@@ -28,7 +28,7 @@ use std::sync::Arc;
 
 use doc4me_doc::numbering::{Counters, Level};
 use doc4me_doc::para::{Anchor, Float, FloatAlign, InlineObject, Wrap, WrapText};
-use doc4me_doc::props::{Border, CharProps, Rgb, TableFloat, TextDirection};
+use doc4me_doc::props::{Border, CharProps, FrameProps, Rgb, TableFloat, TextDirection};
 use doc4me_doc::section::{HeaderSet, SectionProps, SectionStart};
 use doc4me_doc::{Block, Blocks, Document, Paragraph, Path, StoryRef};
 use doc4me_geom::{Point, Rect, Spin};
@@ -881,6 +881,27 @@ fn layout_box(
     depth: usize,
     frame: Option<PageFrame>,
 ) -> BoxLayout {
+    // Text frames stand out of the flow of a header, footer or note; in a cell or a text box
+    // (where Word allows none) their paragraphs stay in the text.
+    let frames = table.is_none() && depth == 0;
+    layout_blocks(ctx, story, blocks, prefix, 0..blocks.len(), width, table, depth, frame, frames)
+}
+
+/// [`layout_box`] for `blocks[range]` (paths still count from the start of `blocks`); `frames`:
+/// paragraphs in a text frame stand at the frame's position, out of the flow.
+#[allow(clippy::too_many_arguments)]
+fn layout_blocks(
+    ctx: &mut Ctx,
+    story: StoryRef,
+    blocks: &Blocks,
+    prefix: &[u32],
+    range: std::ops::Range<usize>,
+    width: f32,
+    table: Option<&para::CellText>,
+    depth: usize,
+    frame: Option<PageFrame>,
+    frames: bool,
+) -> BoxLayout {
     // Deletions in balloons leave the body's text only: a header, note or text box keeps its own
     // inline (restored for the story around this box when it's done).
     let outer_hide = std::mem::replace(&mut ctx.hide_deleted, ctx.opts.hides_deleted(story));
@@ -896,11 +917,29 @@ fn layout_box(
     // Where the last paragraph's lines ended, for the gap a border box runs through.
     let mut prev_end = 0.0f32;
     let mut prev_style: Option<(String, bool)> = None;
-    for (i, b) in blocks.iter().enumerate() {
+    // The paragraphs of a frame placed with its first one are skipped up to here.
+    let mut skip_to = range.start;
+    let first = range.start;
+    for (i, b) in blocks.iter().enumerate().take(range.end).skip(range.start) {
+        if i < skip_to {
+            continue;
+        }
         let mut path = prefix.to_vec();
         path.push(i as u32);
         match &**b {
             Block::Para(p) => {
+                if frames && let Some(f) = ctx.resolved(p).frame {
+                    let last = frame_group_end(ctx, blocks, i, &f);
+                    let fb = frame_box(ctx, story, blocks, prefix, (i, last), &f, width, depth);
+                    let r = frame_rect(frame, (0.0, width), y, (fb.w, fb.h), &f);
+                    items.extend(fb.items.into_iter().map(|mut it| {
+                        it.translate(r.x, r.y);
+                        it
+                    }));
+                    excl.extend(frame_wrap_area(r, &f));
+                    skip_to = last + 1;
+                    continue;
+                }
                 let label = ctx.next_label(p);
                 let mut pl = ctx.para_labelled(p, width, table, &[], label.clone());
                 let ctxl = pl.rp.contextual_spacing;
@@ -910,8 +949,9 @@ fn layout_box(
                     y -= prev_after;
                 }
                 // Word: space between paragraphs is before + after (no collapsing).
-                y += if i == 0 { before } else { before.max(0.0) };
-                let mut bx = block_border_box(ctx, blocks, i);
+                y += if i == first { before } else { before.max(0.0) };
+                // (A frame's paragraphs are a box of their own: the range's ends close it.)
+                let mut bx = block_border_box_in(ctx, blocks, i, &range);
                 if bx.joined_prev {
                     bx.gap = (y - prev_end).max(0.0);
                 }
@@ -1038,6 +1078,144 @@ fn box_float_table_rect(
     (r, r.inset(-dl, -dt, -dr, -db))
 }
 
+/// The last paragraph of the text frame that paragraph `i` of `blocks` (in frame `f`) starts:
+/// Word puts the paragraphs next to each other with the same frame in one, up to a section break.
+fn frame_group_end(ctx: &mut Ctx, blocks: &Blocks, i: usize, f: &FrameProps) -> usize {
+    let mut last = i;
+    while let Some(Block::Para(p)) = blocks.get(last).map(|b| &**b)
+        && p.section.is_none()
+        && let Some(Block::Para(q)) = blocks.get(last + 1).map(|b| &**b)
+        && ctx.resolved(q).frame.as_ref() == Some(f)
+    {
+        last += 1;
+    }
+    last
+}
+
+/// A text frame's paragraphs laid out from (0, 0), and the frame's width and height.
+struct FrameBox {
+    items: Vec<Placed>,
+    w: f32,
+    h: f32,
+}
+
+/// Paragraphs `first..=last` of `blocks`, in text frame `f`, laid out at the frame's width: its
+/// own, or (an automatic one) as wide as their widest line, up to `avail`. An exact height keeps
+/// the lines that fit.
+#[allow(clippy::too_many_arguments)]
+fn frame_box(
+    ctx: &mut Ctx,
+    story: StoryRef,
+    blocks: &Blocks,
+    prefix: &[u32],
+    (first, last): (usize, usize),
+    f: &FrameProps,
+    avail: f32,
+    depth: usize,
+) -> FrameBox {
+    let range = first..last + 1;
+    let width = f.w.unwrap_or(avail).clamp(1.0, 4000.0);
+    // Laid out twice for an automatic width: the list numbers count once.
+    let (counters, eq_count) = (ctx.counters.clone(), ctx.eq_count);
+    let mut b = layout_blocks(ctx, story, blocks, prefix, range.clone(), width, None, depth, None, false);
+    let mut w = width;
+    if f.w.is_none() {
+        let need = natural_width(&b.items, width);
+        if need + 0.5 < width {
+            w = (need + 0.5).max(1.0);
+            (ctx.counters, ctx.eq_count) = (counters, eq_count);
+            b = layout_blocks(ctx, story, blocks, prefix, range, w, None, depth, None, false);
+        }
+    }
+    let exact = f.h.is_some() && f.h_rule == doc4me_doc::props::HeightRule::Exact;
+    let h = match f.h {
+        Some(h) if exact => h,
+        Some(h) => b.height.max(h),
+        None => b.height,
+    }
+    .clamp(1.0, 100_000.0);
+    let items = if exact { fit_box(b.items, h) } else { b.items };
+    FrameBox { items, w, h }
+}
+
+/// The width the lines in `items` (laid out `width` wide) need: their text and the paragraphs'
+/// indents.
+fn natural_width(items: &[Placed], width: f32) -> f32 {
+    let mut need = 0.0f32;
+    for it in items {
+        let Placed::Lines { para, l0, l1, .. } = it else { continue };
+        for l in para.lines.get(*l0..*l1).unwrap_or(&[]) {
+            let (a, b) = if l.vis.is_empty() {
+                (l.xs.first().copied().unwrap_or(l.left), l.xs.last().copied().unwrap_or(l.left))
+            } else {
+                (l.vis.iter().map(|v| v.x).fold(f32::MAX, f32::min), l.vis.iter().map(|v| v.x + v.w).fold(f32::MIN, f32::max))
+            };
+            let text = if b.is_finite() && a.is_finite() { (b - a).max(0.0) } else { 0.0 };
+            need = need.max(l.left.max(0.0) + text + (width - l.right).max(0.0));
+        }
+    }
+    need.min(width)
+}
+
+/// Where a text frame of `size` goes, in the coordinates of the box `page` places on its page
+/// (origin (0, 0) for the body). `col` is the column's left edge and width and `y0` where the
+/// paragraph after the frame starts, which a frame placed from the text is measured from. Without
+/// `page` (a box measured before it is placed) positions on the page fall back to the text.
+fn frame_rect(page: Option<PageFrame>, col: (f32, f32), y0: f32, (w, h): (f32, f32), f: &FrameProps) -> Rect {
+    let h_area = match (page, f.h_rel) {
+        (Some(p), Anchor::Page) => (-p.origin.0, p.sect.page_w),
+        (Some(p), Anchor::Margin) => (p.sect.margin_left + p.sect.gutter - p.origin.0, p.sect.text_width()),
+        _ => col,
+    };
+    let from_text = y0 + if f.v_align.is_none() { f.y } else { 0.0 };
+    let y = match (page, f.v_rel) {
+        _ if f.v_inline => y0,
+        (Some(p), Anchor::Page) => align_in((-p.origin.1, p.sect.page_h), f.y, h, f.v_align),
+        (Some(p), Anchor::Margin) => align_in((p.sect.margin_top - p.origin.1, p.sect.text_height()), f.y, h, f.v_align),
+        _ => from_text,
+    };
+    Rect::new(align_in(h_area, f.x, w, f.h_align), y, w, h)
+}
+
+/// What the text around text frame `r` keeps clear of: the frame and its distances from text,
+/// beside it (Around) or only above and below it (Not beside); `None`: the text runs under it.
+fn frame_wrap_area(r: Rect, f: &FrameProps) -> Option<WrapArea> {
+    let area = Rect::new(r.x - f.h_space, r.y - f.v_space, r.w + 2.0 * f.h_space, r.h + 2.0 * f.v_space);
+    match f.wrap {
+        doc4me_doc::props::FrameWrap::None => None,
+        doc4me_doc::props::FrameWrap::NotBeside => Some((area, true, None, WrapText::BothSides)),
+        _ => Some((area, false, None, WrapText::BothSides)),
+    }
+}
+
+/// Text frame paragraphs `first..=last` of the body: laid out at the frame's width and placed at
+/// its position, out of the text flow (one placed from the text that would run off the page goes
+/// to the next one, with the paragraph after it); the text after it wraps around it, stays above
+/// and below it, or runs under it.
+fn place_frame(ctx: &mut Ctx, pb: &mut PageBuilder, (first, last): (usize, usize), f: &FrameProps, body_top: f32) {
+    let doc = ctx.doc;
+    let fb = frame_box(ctx, StoryRef::Body, &doc.body, &[], (first, last), f, pb.col_w(), 0);
+    let rect = |pb: &PageBuilder| frame_rect(Some(PageFrame { sect: pb.sect, origin: (0.0, 0.0) }), (pb.col_x(), pb.col_w()), pb.y, (fb.w, fb.h), f);
+    let mut r = rect(pb);
+    if f.v_rel == Anchor::Paragraph && r.bottom() > pb.bottom + 0.01 && !pb.at_top() {
+        pb.advance(first, body_top);
+        r = rect(pb);
+    }
+    if let Some(pg) = pb.page() {
+        pg.items.extend(fb.items.into_iter().map(|mut it| {
+            it.translate(r.x, r.y);
+            it
+        }));
+    }
+    pb.excl.extend(frame_wrap_area(r, f));
+}
+
+/// Whether a body paragraph has a footnote or endnote reference (or a text box holding one),
+/// which only the text flow places at the foot of its page.
+fn has_notes(doc: &Document, p: &Paragraph) -> bool {
+    p.objects.iter().any(|o| matches!(o, InlineObject::NoteRef { .. }) || o.text_boxes().into_iter().any(|id| !doc.notes_in_text_box(id).is_empty()))
+}
+
 /// Floating table `f` at `r`, moved below the floating tables in its way when it may not
 /// overlap them. In Word 2013+ layout one placed by an offset keeps its distance from the text's
 /// left edge (`text_left`).
@@ -1141,6 +1319,8 @@ fn same_border_box(a: &doc4me_doc::resolve::ResolvedPara, b: &doc4me_doc::resolv
         && a.borders == b.borders
         && a.indent_left == b.indent_left
         && a.indent_right == b.indent_right
+        // A text frame is a box of its own.
+        && a.frame == b.frame
 }
 
 /// The border box of a paragraph with formatting `rp` between `prev` and `next` (the resolved
@@ -1288,6 +1468,9 @@ struct PageBuilder<'a> {
     /// Top of the footer of the pages being started: a footer reaching above the bottom margin
     /// pushes the body up (`f32::MAX`: no footer).
     foot_top: f32,
+    /// The text frame placed last: its first and last paragraphs, and whether they stay in the
+    /// text flow instead (one has a note).
+    frame_group: Option<(usize, usize, bool)>,
 }
 
 /// Gap above the footnote separator and its length.
@@ -1862,6 +2045,7 @@ fn layout_pass(
         sect_beneath: false,
         beneath: false,
         foot_top: f32::MAX,
+        frame_group: None,
     };
     // Endnotes in document order, with the section of their reference; placed at the end of a
     // section that keeps them there, else at the end of the document.
@@ -2661,6 +2845,28 @@ fn para_notes(doc: &Document, p: &Paragraph, pl: &ParaLayout) -> Vec<(usize, u32
 }
 
 fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, body_top: f32) {
+    // A text frame: placed with its first paragraph (in a web page, in the text).
+    if !pb.web
+        && let Some(f) = ctx.resolved(p).frame
+    {
+        match pb.frame_group {
+            Some((first, last, inline)) if first < block && block <= last => {
+                if !inline {
+                    return;
+                }
+            }
+            _ => {
+                let doc = ctx.doc;
+                let last = frame_group_end(ctx, &doc.body, block, &f);
+                let inline = (block..=last).any(|i| matches!(doc.body.get(i).map(|b| &**b), Some(Block::Para(q)) if has_notes(doc, q)));
+                pb.frame_group = Some((block, last, inline));
+                if !inline {
+                    place_frame(ctx, pb, (block, last), &f, body_top);
+                    return;
+                }
+            }
+        }
+    }
     let width = pb.col_w();
     // Floating objects anchored here join the page's wrap areas before the text is laid out; if
     // the paragraph then starts somewhere else (another column or page, or contextual spacing
@@ -2987,7 +3193,12 @@ fn body_border_box(ctx: &mut Ctx, p: &Paragraph, block: usize) -> BorderBox {
 
 /// The border box of paragraph `i` of `blocks`, from the paragraphs next to it there.
 fn block_border_box(ctx: &mut Ctx, blocks: &Blocks, i: usize) -> BorderBox {
-    let mut resolved = |i: Option<usize>| match i.and_then(|i| blocks.get(i)).map(|b| &**b) {
+    block_border_box_in(ctx, blocks, i, &(0..blocks.len()))
+}
+
+/// [`block_border_box`] counting only the paragraphs in `range` (a frame's) as next to it.
+fn block_border_box_in(ctx: &mut Ctx, blocks: &Blocks, i: usize, range: &std::ops::Range<usize>) -> BorderBox {
+    let mut resolved = |i: Option<usize>| match i.filter(|i| range.contains(i)).and_then(|i| blocks.get(i)).map(|b| &**b) {
         Some(Block::Para(q)) => Some(ctx.resolved(q)),
         _ => None,
     };

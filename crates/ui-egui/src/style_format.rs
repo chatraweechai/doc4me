@@ -1,4 +1,4 @@
-//! Modify Style › Format: Font…, Paragraph…, Tabs…, Border… and Language… edit a style with the
+//! Modify Style › Format: Font…, Paragraph…, Tabs…, Border…, Language… and Frame… edit a style with the
 //! dialogs that format the selection. The dialog works on a scratch document — one paragraph in
 //! the style (or, for a character style, one run), all selected — swapped in only while the
 //! dialog draws; when it closes, the formatting it set there goes back into Modify Style, which
@@ -14,12 +14,13 @@ use crate::dialogs::Dialog;
 use crate::dialogs_layout::{EnvelopeForm, LayoutDialog};
 
 /// The Format menu: (label, the dialog `ui.dialog` names, for paragraph styles only).
-pub const ITEMS: [(&str, &str, bool); 5] = [
+pub const ITEMS: [(&str, &str, bool); 6] = [
     ("Font…", "font", false),
     ("Paragraph…", "paragraph", true),
     ("Tabs…", "tabs", true),
     ("Border…", "borders", true),
     ("Language…", "language", false),
+    ("Frame…", "formatFrame", true),
 ];
 
 /// The text of the scratch paragraph.
@@ -37,7 +38,7 @@ pub struct StyleScratch {
 
 /// Whether `name` is one of the Format dialogs (or one they lead to), which draw on the scratch.
 pub fn uses_scratch(name: &str) -> bool {
-    matches!(name, "font" | "paragraph" | "asianTypography" | "tabs" | "borders" | "pageBorders" | "shading" | "language")
+    matches!(name, "font" | "paragraph" | "asianTypography" | "tabs" | "borders" | "pageBorders" | "shading" | "language" | "formatFrame")
 }
 
 /// Opens Format › `which` for the style `md` (a Modify Style dialog) edits.
@@ -257,6 +258,39 @@ mod tests {
         assert!(st.para.tabs.as_ref().is_some_and(|t| t.iter().any(|t| (t.pos - 144.0).abs() < 0.1)), "{:?}", st.para.tabs);
         // A character style has no paragraph to format.
         assert!(ITEMS.iter().any(|(_, w, para_only)| *w == "paragraph" && *para_only));
+    }
+
+    /// Format › Frame… opens the Frame dialog on the scratch paragraph: a frame set there goes
+    /// into the style on OK; Remove Frame on a style that has one cancels it in the style.
+    #[test]
+    fn modify_style_format_frame() {
+        let mut a = WordApp::new(Session::new(Document::from_text("Kilns")), Services::default());
+        let md = Dialog::modify_style(&a, "Quote").unwrap();
+        open(&mut a, "formatFrame", md);
+        assert!(matches!(&a.dialog, Some(Dialog::Forms(f)) if f.name() == "formatFrame"), "{:?}", a.dialog);
+        let mut sc = a.style_scratch.take().unwrap();
+        std::mem::swap(&mut a.session, &mut sc.session);
+        a.run("format.frame", json!({"hRel": "margin", "hAlign": "center", "wrap": "notBeside"})).unwrap();
+        std::mem::swap(&mut a.session, &mut sc.session);
+        a.dialog = None;
+        finish(&mut a, sc);
+        let (chr, para) = pending(a.dialog.as_ref().unwrap());
+        a.run("styles.modify", json!({"style": "Quote", "chr": chr, "para": para})).unwrap();
+        let f = a.session.doc.styles.get("Quote").and_then(|st| st.para.frame).expect("the style has a frame");
+        assert_eq!((f.h_align, f.wrap), (Some(doc4me_doc::para::FloatAlign::Center), doc4me_doc::props::FrameWrap::NotBeside));
+        // Remove Frame in the style.
+        let md = Dialog::modify_style(&a, "Quote").unwrap();
+        open(&mut a, "formatFrame", md);
+        let mut sc = a.style_scratch.take().unwrap();
+        std::mem::swap(&mut a.session, &mut sc.session);
+        a.run("format.frame", json!({"remove": true})).unwrap();
+        std::mem::swap(&mut a.session, &mut sc.session);
+        a.dialog = None;
+        finish(&mut a, sc);
+        let (chr, para) = pending(a.dialog.as_ref().unwrap());
+        a.run("styles.modify", json!({"style": "Quote", "chr": chr, "para": para})).unwrap();
+        let quote = doc4me_doc::ParaProps { style: Some("Quote".into()), ..Default::default() };
+        assert!(a.session.doc.styles.resolve_para(&quote).frame.is_none());
     }
 
     /// Envelopes › Font… opens the Font dialog on a scratch address in Word's 12 pt; the font it

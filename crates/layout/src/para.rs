@@ -1742,6 +1742,12 @@ fn break_lines(pl: &mut ParaLayout, env: &ParaEnv, mark_style: u16, level: Optio
                     has_tab = true;
                     resolve_tab(pl, &mut pending_tab, &mut xs, c0, x, &mut x);
                     let stop = next_tab(x, &rp.tabs, default_tab, hanging_at);
+                    // A tab whose stop is past a floating object (or frame) in the row goes on
+                    // from the far side of it, to its stop there, as in Word.
+                    if stop.pos > right_edge + 0.01 && j > c0 && !row_rest.is_empty() {
+                        end = LineEnd::Wrap;
+                        break;
+                    }
                     xs.push(x);
                     if stop.pos > right_edge + 0.01 && j > c0 && stop.align == TabAlign::Left {
                         // Tab past the right indent wraps (Word moves it to the next line).

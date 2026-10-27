@@ -180,6 +180,8 @@ pub struct ResolvedPara {
     pub borders: Option<Borders>,
     pub bidi: bool,
     pub drop_cap: u8,
+    /// The text frame the paragraph is in (not for a drop cap, which has its own).
+    pub frame: Option<crate::props::FrameProps>,
     pub suppress_hyphens: bool,
     pub suppress_line_numbers: bool,
     /// Asian typography (see `ParaProps`): East Asian line-breaking rules.
@@ -260,6 +262,7 @@ impl ResolvedPara {
             borders: p.borders.filter(Borders::any_visible),
             bidi: p.bidi.unwrap_or(false),
             drop_cap: p.drop_cap.unwrap_or(0).min(10),
+            frame: p.frame.filter(|f| !f.off && p.drop_cap.unwrap_or(0) == 0).map(crate::props::FrameProps::clamped),
             suppress_hyphens: p.suppress_hyphens.unwrap_or(false),
             suppress_line_numbers: p.suppress_line_numbers.unwrap_or(false),
             kinsoku: p.kinsoku.unwrap_or(true),

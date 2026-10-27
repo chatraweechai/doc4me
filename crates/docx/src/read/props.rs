@@ -219,6 +219,8 @@ impl PropCtx {
                 "w:framePr" => {
                     if matches!(k.attr("w:dropCap"), Some("drop") | Some("margin")) {
                         p.drop_cap = Some(k.attr("w:lines").and_then(u32_of).unwrap_or(3).clamp(1, 10) as u8);
+                    } else {
+                        p.frame = Some(frame(k));
                     }
                 }
                 "w:numPr" => {
@@ -647,6 +649,51 @@ pub fn note_pr(e: &El, fmt: bool) -> NoteProps {
         num_fmt: if fmt { e.child_val("w:numFmt").map(NumFormat::from_ooxml) } else { None },
         num_start: e.child_val("w:numStart").and_then(int).map(|v| v.clamp(1, doc4me_doc::section::MAX_NOTE_START as i64) as u32),
         num_restart: e.child_val("w:numRestart").and_then(NoteRestart::from_ooxml),
+    }
+}
+
+/// `w:framePr` (not a drop cap): a text frame. Omitted anchors are Word's: the column
+/// horizontally and the margin vertically (the standard says the page for both, which Word's
+/// own Envelope Address style, centred on the page near its bottom margin, shows it doesn't use).
+fn frame(e: &El) -> doc4me_doc::props::FrameProps {
+    use doc4me_doc::para::{Anchor, FloatAlign};
+    use doc4me_doc::props::{FrameProps, FrameWrap, HeightRule};
+    let pt = |n: &str| e.attr(n).and_then(|v| measure(v, 20.0)).filter(|v| v.is_finite());
+    let size = |n: &str| pt(n).filter(|v| *v > 0.0).map(|v| v.clamp(1.0, 1584.0));
+    let h = size("w:h");
+    let h_rule = match e.attr("w:hRule") {
+        Some("exact") => HeightRule::Exact,
+        Some("atLeast") => HeightRule::AtLeast,
+        Some("auto") => HeightRule::Auto,
+        // A height without a rule is a minimum.
+        _ if h.is_some() => HeightRule::AtLeast,
+        _ => HeightRule::Auto,
+    };
+    let y_align = e.attr("w:yAlign");
+    FrameProps {
+        w: size("w:w"),
+        h,
+        h_rule,
+        wrap: e.attr("w:wrap").and_then(FrameWrap::from_ooxml).unwrap_or(FrameWrap::Auto),
+        h_rel: match e.attr("w:hAnchor") {
+            Some("page") => Anchor::Page,
+            Some("margin") => Anchor::Margin,
+            _ => Anchor::Column,
+        },
+        v_rel: match e.attr("w:vAnchor") {
+            Some("page") => Anchor::Page,
+            Some("text") => Anchor::Paragraph,
+            _ => Anchor::Margin,
+        },
+        x: pt("w:x").unwrap_or(0.0).clamp(-1584.0, 1584.0),
+        y: pt("w:y").unwrap_or(0.0).clamp(-1584.0, 1584.0),
+        h_align: e.attr("w:xAlign").and_then(FloatAlign::from_ooxml),
+        v_align: y_align.and_then(FloatAlign::from_ooxml),
+        v_inline: y_align == Some("inline"),
+        h_space: pt("w:hSpace").unwrap_or(0.0).clamp(0.0, 1584.0),
+        v_space: pt("w:vSpace").unwrap_or(0.0).clamp(0.0, 1584.0),
+        anchor_lock: e.attr("w:anchorLock").is_some_and(|v| !matches!(v, "0" | "false" | "off")),
+        off: false,
     }
 }
 

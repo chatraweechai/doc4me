@@ -4291,3 +4291,51 @@ fn a_bigger_mark_sets_the_height_of_a_blank_last_line() {
     assert!(height("\t", 26.0) > height("\t", 11.0) + 10.0);
     assert!((height("words", 26.0) - height("words", 11.0)).abs() < 0.01);
 }
+
+/// A page number in a frame centred on the footer's margins (Word's classic footer): it stands
+/// beside the footer's next paragraph, on its line (the frame takes no room of its own), and that
+/// paragraph's tab goes on past the frame to its stop.
+#[test]
+fn a_footer_page_number_frame_stands_beside_the_text() {
+    use doc4me_doc::para::{Anchor, FloatAlign};
+    use doc4me_doc::props::{FrameProps, TabAlign, TabLeader, TabStop};
+    let mut d = Document::from_text("Body");
+    let mut num = doc4me_doc::Paragraph::new();
+    num.insert_object(
+        0,
+        InlineObject::Field { instr: "PAGE".into(), result: String::new(), locked: false, code: false, form: None },
+        &Default::default(),
+    )
+    .unwrap();
+    num.props.frame =
+        Some(FrameProps { h_rel: Anchor::Margin, h_align: Some(FloatAlign::Center), v_rel: Anchor::Paragraph, y: 0.05, ..Default::default() });
+    let mut text = doc4me_doc::Paragraph::with_text("IER\tOctober 2018", Default::default());
+    text.props.tabs = Some(vec![TabStop { pos: 340.0, align: TabAlign::Left, leader: TabLeader::None }]);
+    let id = d.add_part(doc4me_doc::PartKind::Footer, vec![doc4me_doc::para_block(num), doc4me_doc::para_block(text)]);
+    d.last_section.footers.default = Some(id);
+    let l = lay(&d);
+    let s = &d.last_section;
+    let lines: Vec<(u32, f32, f32, f32)> = l.pages[0]
+        .footer
+        .iter()
+        .filter_map(|it| match it {
+            Placed::Lines { path, para, l0, l1, x, y, .. } => {
+                Some((*l0..*l1).filter_map(|k| para.lines.get(k).map(|ln| (path.0[0], *x + ln.xs[0], *y + ln.top, ln.top))))
+            }
+            _ => None,
+        })
+        .flatten()
+        .collect();
+    let num_line = lines.iter().find(|l| l.0 == 0).copied().expect("the page number is drawn");
+    let centre = s.margin_left + s.gutter + s.text_width() / 2.0;
+    assert!((num_line.1 - centre).abs() < 6.0, "centred on the margins: {num_line:?} (centre {centre})");
+    let text_lines: Vec<_> = lines.iter().filter(|l| l.0 == 1).collect();
+    assert!(text_lines.iter().all(|l| (l.2 - num_line.2).abs() < 1.0), "on the page number's line: {lines:?}");
+    // "October 2018" on the far side of the frame, at its tab stop.
+    let stop = s.margin_left + s.gutter + 340.0;
+    let at_stop = l.pages[0].footer.iter().any(|it| match it {
+        Placed::Lines { path, para, x, .. } if path.0 == [1] => para.lines.iter().any(|ln| ln.xs.iter().any(|v| (x + v - stop).abs() < 0.5)),
+        _ => false,
+    });
+    assert!(at_stop, "{lines:?}");
+}

@@ -1680,6 +1680,10 @@ fn developer(app: &mut WordApp, ui: &mut Ui) {
                             ui.separator();
                             mi_check(ui, app, "Form Field Shading", shading, "developer.formFieldShading", json!({}));
                             mi(ui, app, "Reset Form Fields", "developer.resetFormFields", json!({}));
+                            ui.separator();
+                            // Frames: Word 97–2003's positioned paragraphs.
+                            mi(ui, app, "Insert Frame", "developer.insertFrame", json!({}));
+                            mi(ui, app, "Format Frame…", "format.frame", json!({}));
                         });
                     }
                 });

@@ -1835,6 +1835,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "review.protectSections" if !has("protected") => Some("sectionProtection"),
         // AutoSummarize without a type asks how to show the summary.
         "tools.autoSummarize" if !has("type") => Some("autoSummarize"),
+        // Format Frame without settings: the Frame dialog.
+        "format.frame" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formatFrame"),
         // Enclose Characters without a shape (null is one: it takes the enclosure away).
         "format.enclose" if params.get("shape").is_none() => Some("enclose"),
         // Footnote and Endnote without settings shows its dialog (#385).

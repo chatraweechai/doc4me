@@ -176,6 +176,10 @@ pub enum FormDialog {
     Sections {
         protected: Vec<bool>,
     },
+    /// Format Frame (Word's Frame dialog) for the frame at the selection.
+    Frame {
+        form: FrameForm,
+    },
     /// AutoSummarize: how the summary is shown and how long it is.
     Summarize {
         /// highlight, top or newDocument.
@@ -184,6 +188,241 @@ pub enum FormDialog {
         length: usize,
         update_properties: bool,
     },
+}
+
+/// The Frame dialog's fields; `orig` is what they said when it opened, so OK changes only what
+/// was changed there (a frame's other settings, such as a wrapping the dialog doesn't offer, stay).
+#[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FrameForm {
+    /// Text wrapping: Around, or None (the text stays above and below the frame).
+    pub around: bool,
+    pub width_auto: bool,
+    pub width: f32,
+    /// auto, atLeast or exact.
+    pub height_rule: String,
+    pub height: f32,
+    /// left, right, center, inside, outside, or at (`x`).
+    pub h_pos: String,
+    pub x: f32,
+    /// column, margin or page.
+    pub h_rel: String,
+    pub h_space: f32,
+    /// top, bottom, center, inside, outside, inline, or at (`y`).
+    pub v_pos: String,
+    pub y: f32,
+    /// paragraph, margin or page.
+    pub v_rel: String,
+    pub v_space: f32,
+    pub lock_anchor: bool,
+    /// The paragraph had a frame when the dialog opened.
+    pub framed: bool,
+    orig: Value,
+}
+
+/// The frame dialog's alignments: (field value, the frame's `hAlign`/`vAlign`, horizontal label,
+/// vertical label).
+const FRAME_ALIGNS: [(&str, &str, &str, &str); 5] = [
+    ("start", "start", "Left", "Top"),
+    ("end", "end", "Right", "Bottom"),
+    ("center", "center", "Center", "Center"),
+    ("inside", "inside", "Inside", "Inside"),
+    ("outside", "outside", "Outside", "Outside"),
+];
+
+impl FrameForm {
+    /// The frame at the selection (Word's defaults when there is none).
+    pub fn read(app: &mut WordApp) -> FrameForm {
+        let v = app.session.run("format.frame", &json!({})).map(|v| v["frame"].clone()).unwrap_or(Value::Null);
+        let framed = !v.is_null();
+        let num = |k: &str| v[k].as_f64().unwrap_or(0.0) as f32;
+        let s = |k: &str, d: &str| v[k].as_str().unwrap_or(d).to_string();
+        let wrap = s("wrap", "around");
+        let mut f = FrameForm {
+            around: !matches!(wrap.as_str(), "notBeside" | "none"),
+            width_auto: v["w"].is_null(),
+            width: if v["w"].is_null() { 72.0 } else { num("w") },
+            height_rule: if v["h"].is_null() { "auto".into() } else { s("hRule", "atLeast") },
+            height: if v["h"].is_null() { 72.0 } else { num("h") },
+            h_pos: v["hAlign"].as_str().map_or("at".into(), str::to_string),
+            x: num("x"),
+            h_rel: s("hRel", "column"),
+            h_space: num("hSpace"),
+            v_pos: if v["vInline"].as_bool() == Some(true) { "inline".into() } else { v["vAlign"].as_str().map_or("at".into(), str::to_string) },
+            y: num("y"),
+            v_rel: s("vRel", "paragraph"),
+            v_space: num("vSpace"),
+            lock_anchor: v["anchorLock"].as_bool().unwrap_or(false),
+            framed,
+            orig: Value::Null,
+        };
+        f.orig = f.params(Some(&wrap));
+        f
+    }
+
+    /// The `format.frame` parameters the fields say (`wrap`: the frame's own wrapping, kept while
+    /// the choice between Around and None is the one it had).
+    fn params(&self, wrap: Option<&str>) -> Value {
+        let mut p = serde_json::Map::new();
+        let kept = wrap.filter(|w| self.around != matches!(*w, "notBeside" | "none"));
+        p.insert("wrap".into(), json!(kept.unwrap_or(if self.around { "around" } else { "notBeside" })));
+        p.insert("w".into(), if self.width_auto { Value::Null } else { json!(self.width) });
+        p.insert("h".into(), if self.height_rule == "auto" { Value::Null } else { json!(self.height) });
+        p.insert("hRule".into(), json!(self.height_rule));
+        match self.h_pos.as_str() {
+            "at" => {
+                p.insert("x".into(), json!(self.x));
+                p.insert("hAlign".into(), Value::Null);
+            }
+            a => {
+                p.insert("hAlign".into(), json!(a));
+            }
+        }
+        p.insert("hRel".into(), json!(self.h_rel));
+        p.insert("hSpace".into(), json!(self.h_space));
+        match self.v_pos.as_str() {
+            "at" => {
+                p.insert("y".into(), json!(self.y));
+                p.insert("vAlign".into(), Value::Null);
+                p.insert("vInline".into(), json!(false));
+            }
+            "inline" => {
+                p.insert("vInline".into(), json!(true));
+            }
+            a => {
+                p.insert("vAlign".into(), json!(a));
+                p.insert("vInline".into(), json!(false));
+            }
+        }
+        p.insert("vRel".into(), json!(self.v_rel));
+        p.insert("vSpace".into(), json!(self.v_space));
+        p.insert("anchorLock".into(), json!(self.lock_anchor));
+        Value::Object(p)
+    }
+
+    /// What OK sends: every field for a paragraph without a frame; else the ones changed (the
+    /// wrapping as it was unless Around / None changed).
+    fn changes(&self) -> Value {
+        let wrap = self.orig["wrap"].as_str().map(str::to_string);
+        let now = self.params(wrap.as_deref());
+        if !self.framed {
+            return now;
+        }
+        let mut out = serde_json::Map::new();
+        for (k, v) in now.as_object().into_iter().flatten() {
+            if self.orig.get(k) != Some(v) {
+                out.insert(k.clone(), v.clone());
+            }
+        }
+        Value::Object(out)
+    }
+}
+
+fn frame_body(app: &mut WordApp, ui: &mut Ui, f: &mut FrameForm) -> bool {
+    let pt = |ui: &mut Ui, v: &mut f32, enabled: bool| {
+        ui.add_enabled(enabled, egui::DragValue::new(v).range(0.0..=1584.0).clamp_existing_to_range(false).speed(0.5).suffix(" pt"));
+    };
+    ui.label(egui::RichText::new(tl!("Text wrapping")).strong());
+    ui.horizontal(|ui| {
+        ui.radio_value(&mut f.around, false, tl!("None"));
+        ui.radio_value(&mut f.around, true, tl!("Around"));
+    });
+    ui.add_space(6.0);
+    ui.label(egui::RichText::new(tl!("Size")).strong());
+    egui::Grid::new("frame_size").num_columns(4).show(ui, |ui| {
+        ui.label(tl!("Width:"));
+        let shown = if f.width_auto { tl!("Auto") } else { tl!("Exactly") };
+        egui::ComboBox::from_id_salt("frame_width").selected_text(shown).show_ui(ui, |ui| {
+            ui.selectable_value(&mut f.width_auto, true, tl!("Auto"));
+            ui.selectable_value(&mut f.width_auto, false, tl!("Exactly"));
+        });
+        ui.label(tl!("At:"));
+        pt(ui, &mut f.width, !f.width_auto);
+        ui.end_row();
+        ui.label(tl!("Height:"));
+        let label = |r: &str| match r {
+            "atLeast" => tl!("At least"),
+            "exact" => tl!("Exactly"),
+            _ => tl!("Auto"),
+        };
+        egui::ComboBox::from_id_salt("frame_height").selected_text(label(&f.height_rule)).show_ui(ui, |ui| {
+            for r in ["auto", "atLeast", "exact"] {
+                ui.selectable_value(&mut f.height_rule, r.to_string(), label(r));
+            }
+        });
+        ui.label(tl!("At:"));
+        pt(ui, &mut f.height, f.height_rule != "auto");
+        ui.end_row();
+    });
+    ui.add_space(6.0);
+    for horizontal in [true, false] {
+        ui.label(egui::RichText::new(if horizontal { tl!("Horizontal") } else { tl!("Vertical") }).strong());
+        let (pos, at, rel, space) =
+            if horizontal { (&mut f.h_pos, &mut f.x, &mut f.h_rel, &mut f.h_space) } else { (&mut f.v_pos, &mut f.y, &mut f.v_rel, &mut f.v_space) };
+        egui::Grid::new(if horizontal { "frame_h" } else { "frame_v" }).num_columns(4).show(ui, |ui| {
+            ui.label(tl!("Position:"));
+            let name = |p: &str| match FRAME_ALIGNS.iter().find(|a| a.0 == p) {
+                Some(a) => tl!(if horizontal { a.2 } else { a.3 }).to_string(),
+                None if p == "inline" => tl!("In Line with Text").to_string(),
+                // A measurement, set in At.
+                None => tl!("Custom").to_string(),
+            };
+            egui::ComboBox::from_id_salt(if horizontal { "frame_hpos" } else { "frame_vpos" }).selected_text(name(pos)).show_ui(ui, |ui| {
+                for a in FRAME_ALIGNS {
+                    ui.selectable_value(pos, a.1.to_string(), name(a.0));
+                }
+                if !horizontal {
+                    ui.selectable_value(pos, "inline".to_string(), name("inline"));
+                }
+                ui.selectable_value(pos, "at".to_string(), name("at"));
+            });
+            ui.label(tl!("At:"));
+            ui.add_enabled(*pos == "at", egui::DragValue::new(at).range(-1584.0..=1584.0).clamp_existing_to_range(false).speed(0.5).suffix(" pt"));
+            ui.end_row();
+            ui.label(tl!("Relative to:"));
+            let rels: [(&str, &str); 3] = if horizontal {
+                [("column", "Column"), ("margin", "Margin"), ("page", "Page")]
+            } else {
+                [("paragraph", "Paragraph"), ("margin", "Margin"), ("page", "Page")]
+            };
+            let shown = rels.iter().find(|r| r.0 == rel.as_str()).map_or("", |r| tl!(r.1));
+            egui::ComboBox::from_id_salt(if horizontal { "frame_hrel" } else { "frame_vrel" }).selected_text(shown).show_ui(ui, |ui| {
+                for (k, l) in rels {
+                    ui.selectable_value(rel, k.to_string(), tl!(l));
+                }
+            });
+            ui.label(tl!("Distance from text:"));
+            ui.add(egui::DragValue::new(space).range(0.0..=1584.0).clamp_existing_to_range(false).speed(0.5).suffix(" pt"));
+            ui.end_row();
+        });
+    }
+    ui.horizontal(|ui| {
+        // Move with text: placed from the paragraph after the frame.
+        let mut moves = f.v_rel == "paragraph";
+        if ui.checkbox(&mut moves, tl!("Move with text")).changed() {
+            f.v_rel = if moves { "paragraph".into() } else { "margin".into() };
+        }
+        ui.checkbox(&mut f.lock_anchor, tl!("Lock anchor"));
+    });
+    ui.add_space(4.0);
+    if ui.add_enabled(f.framed, egui::Button::new(tl!("Remove Frame"))).clicked() {
+        match app.run("format.frame", json!({"remove": true})) {
+            Ok(_) => return true,
+            Err(e) => app.status(e),
+        }
+    }
+    let (ok, cancel) = buttons(ui, tl!("OK"));
+    if ok {
+        let p = f.changes();
+        if p.as_object().is_none_or(|m| m.is_empty()) {
+            return true;
+        }
+        match app.run("format.frame", p) {
+            Ok(_) => return true,
+            Err(e) => app.status(e),
+        }
+    }
+    cancel
 }
 
 /// AutoSummarize's lengths, as Word offers them: (sentences, words, percent).
@@ -215,6 +454,7 @@ impl FormDialog {
             FormDialog::Help { .. } => "formFieldHelp",
             FormDialog::Sections { .. } => "sectionProtection",
             FormDialog::Summarize { .. } => "autoSummarize",
+            FormDialog::Frame { .. } => "formatFrame",
         }
     }
 
@@ -230,6 +470,7 @@ impl FormDialog {
             FormDialog::Help { .. } => "Form Field Help Text",
             FormDialog::Sections { .. } => "Section Protection",
             FormDialog::Summarize { .. } => "AutoSummarize",
+            FormDialog::Frame { .. } => "Frame",
         }
     }
 }
@@ -240,6 +481,7 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
     match name {
         "insertFormField" => Some(FormDialog::Insert { kind: "text".into() }),
         "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
+        "formatFrame" => Some(FormDialog::Frame { form: FrameForm::read(app) }),
         "sectionProtection" => {
             let v = app.session.run("review.protectSections", &json!({})).ok()?;
             let protected = v["sections"].as_array().map(|a| a.iter().map(|b| b.as_bool().unwrap_or(true)).collect()).unwrap_or_default();
@@ -263,6 +505,7 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
 /// Draws the dialog; returns true to close it.
 pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
     match d {
+        FormDialog::Frame { form } => frame_body(app, ui, form),
         FormDialog::Summarize { kind, length, update_properties } => {
             ui.label(egui::RichText::new(tl!("Type of summary")).strong());
             for (k, label) in [
@@ -709,6 +952,53 @@ mod tests {
         h.state_mut().session.run("select.collapse", &json!({})).unwrap();
         h.state_mut().run("developer.formFieldOptions", json!({})).ok();
         h.run_steps(2);
+    }
+
+    #[test]
+    fn frame_dialog_sets_changes_and_removes_a_frame() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("Boxed")), Services::default()));
+        let frame = |h: &mut Harness<'_, WordApp>| h.state_mut().session.run("format.frame", &json!({})).unwrap()["frame"].clone();
+        // Format Frame on a paragraph without one: the dialog, and OK puts it in a frame.
+        h.state_mut().run("format.frame", json!({})).unwrap();
+        h.run_steps(3);
+        match form(&mut h) {
+            FormDialog::Frame { form } => {
+                assert!(!form.framed && form.width_auto && form.around);
+                form.width_auto = false;
+                form.width = 100.0;
+                form.h_pos = "end".into();
+                form.h_rel = "margin".into();
+            }
+            other => panic!("{other:?}"),
+        }
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        let f = frame(&mut h);
+        assert_eq!(
+            (f["w"].as_f64(), f["hAlign"].as_str(), f["hRel"].as_str(), f["wrap"].as_str()),
+            (Some(100.0), Some("end"), Some("margin"), Some("around"))
+        );
+        // Again: Text wrapping None keeps the text above and below; the rest stays.
+        h.state_mut().run("format.frame", json!({})).unwrap();
+        h.run_steps(3);
+        if let FormDialog::Frame { form } = form(&mut h) {
+            assert!(form.framed && !form.width_auto && form.h_pos == "end");
+        }
+        h.get_by_label("None").click();
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(12);
+        let f = frame(&mut h);
+        assert_eq!((f["wrap"].as_str(), f["w"].as_f64(), f["hAlign"].as_str()), (Some("notBeside"), Some(100.0), Some("end")));
+        // Remove Frame.
+        h.state_mut().run("format.frame", json!({})).unwrap();
+        h.run_steps(3);
+        h.get_by_label("Remove Frame").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        assert!(frame(&mut h).is_null());
     }
 
     #[test]

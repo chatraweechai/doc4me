@@ -2904,3 +2904,13 @@ spacing	Normal	標準
 	Update document statistics	文書の統計情報を更新する
 	{n} sentences	{n} 文
 	{n} words or less	{n} 語以下
+	At:	値:
+	Distance from text:	文字列との間隔:
+	Format Frame	フレームの書式設定
+	Format Frame…	フレームの書式設定…
+	Frame	フレーム
+	Frame…	フレーム…
+	Insert Frame	フレームの挿入
+	Lock anchor	アンカーを固定する
+	Remove Frame	フレームの削除
+	Text wrapping	文字列の折り返し

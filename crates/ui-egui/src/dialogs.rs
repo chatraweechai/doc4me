@@ -959,7 +959,7 @@ impl Dialog {
         if let Some(d) = crate::dialogs_object::open(name, app) {
             return Some(Dialog::Object(Box::new(d)));
         }
-        if matches!(name, "insertFormField" | "formFieldOptions" | "formFieldHelp" | "sectionProtection" | "autoSummarize") {
+        if matches!(name, "insertFormField" | "formFieldOptions" | "formFieldHelp" | "sectionProtection" | "autoSummarize" | "formatFrame") {
             return crate::dialogs_forms::open(name, app).map(|d| Dialog::Forms(Box::new(d)));
         }
         if matches!(name, "compare" | "combine" | "autoCorrect" | "restrictEditing" | "acceptRejectChanges" | "highlightChanges") {

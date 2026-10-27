@@ -172,6 +172,8 @@ mod tests_fonts;
 #[cfg(test)]
 mod tests_forms;
 #[cfg(test)]
+mod tests_frames;
+#[cfg(test)]
 mod tests_typing;
 #[cfg(test)]
 mod tests_wordart;

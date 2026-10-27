@@ -21,6 +21,7 @@ pub mod fmt_revisions;
 pub mod font;
 pub mod format;
 pub mod forms;
+pub mod frames;
 pub mod index;
 pub mod ink_shape;
 pub mod insert;
@@ -106,6 +107,7 @@ pub fn registry() -> Registry {
     v.extend(speech::specs());
     v.extend(controls::specs());
     v.extend(forms::specs());
+    v.extend(frames::specs());
     v.extend(summarize::specs());
     Registry::new(v)
 }

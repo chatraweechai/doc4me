@@ -214,6 +214,10 @@ pub fn ppr_inner(w: &mut W, p: &ParaProps, framed: bool, num_change: Option<&Cha
             "w:framePr",
             &[("w:dropCap", "drop"), ("w:lines", &n(lines.min(10) as i64)), ("w:wrap", "around"), ("w:vAnchor", "text"), ("w:hAnchor", "text")],
         );
+    } else if p.drop_cap.is_none_or(|l| l == 0)
+        && let Some(f) = p.frame.filter(|f| !f.off)
+    {
+        frame(w, &f.clamped());
     }
     toggle(w, "w:widowControl", p.widow_control);
     if let Some(nr) = p.numbering {
@@ -513,6 +517,65 @@ fn tcpr_inner(w: &mut W, c: &CellProps) {
         VAlign::Center => w.val("w:vAlign", "center"),
         VAlign::Bottom => w.val("w:vAlign", "bottom"),
     }
+}
+
+/// `w:framePr` for a text frame (every anchor written: Word's defaults aren't the standard's).
+fn frame(w: &mut W, f: &doc4me_doc::props::FrameProps) {
+    use doc4me_doc::para::Anchor;
+    use doc4me_doc::props::HeightRule;
+    let (fw, fh) = (f.w.map(twips), f.h.map(twips));
+    let (x, y, hs, vs) = (twips(f.x), twips(f.y), twips(f.h_space), twips(f.v_space));
+    let mut a: Vec<(&str, &str)> = Vec::new();
+    if let Some(v) = &fw {
+        a.push(("w:w", v));
+    }
+    if let Some(v) = &fh {
+        a.push(("w:h", v));
+        a.push((
+            "w:hRule",
+            match f.h_rule {
+                HeightRule::Exact => "exact",
+                HeightRule::AtLeast => "atLeast",
+                HeightRule::Auto => "auto",
+            },
+        ));
+    }
+    if f.h_space > 0.0 {
+        a.push(("w:hSpace", &hs));
+    }
+    if f.v_space > 0.0 {
+        a.push(("w:vSpace", &vs));
+    }
+    a.push(("w:wrap", f.wrap.ooxml()));
+    a.push((
+        "w:vAnchor",
+        match f.v_rel {
+            Anchor::Page => "page",
+            Anchor::Paragraph => "text",
+            _ => "margin",
+        },
+    ));
+    a.push((
+        "w:hAnchor",
+        match f.h_rel {
+            Anchor::Page => "page",
+            Anchor::Margin => "margin",
+            _ => "text",
+        },
+    ));
+    match f.h_align {
+        Some(h) => a.push(("w:xAlign", h.ooxml(true))),
+        None => a.push(("w:x", &x)),
+    }
+    match (f.v_inline, f.v_align) {
+        (true, _) => a.push(("w:yAlign", "inline")),
+        (false, Some(v)) => a.push(("w:yAlign", v.ooxml(false))),
+        (false, None) => a.push(("w:y", &y)),
+    }
+    if f.anchor_lock {
+        a.push(("w:anchorLock", "1"));
+    }
+    w.empty("w:framePr", &a);
 }
 
 /// `w:tblpPr` and `w:tblOverlap` for a floating table.

@@ -5,8 +5,8 @@ use std::sync::Arc;
 use doc4me_doc::numbering::ListKind;
 use doc4me_doc::para::{Anchor, Float, FloatAlign, NoteKind, ShapeKind, Wrap};
 use doc4me_doc::props::{
-    Align, Border, BorderStyle, Borders, CharProps, HeightRule, Highlight, LineSpacing, NumRef, ParaProps, Rgb, RowProps, TabAlign, TabLeader,
-    TabStop, TableLook, TextColor, TextDirection, Underline, VAlign, VMerge, VertAlign,
+    Align, Border, BorderStyle, Borders, CharProps, FrameProps, FrameWrap, HeightRule, Highlight, LineSpacing, NumRef, ParaProps, Rgb, RowProps,
+    TabAlign, TabLeader, TabStop, TableLook, TextColor, TextDirection, Underline, VAlign, VMerge, VertAlign,
 };
 use doc4me_doc::section::{Columns, DocGrid, DocGridType, LineNumberRestart, LineNumbering, NumFormat, SectionProps, SectionStart};
 use doc4me_doc::styles::{Style, StyleKind};
@@ -180,6 +180,21 @@ fn every_para_prop_round_trips() {
         num_change: None,
         fmt_change: None,
         snap_to_grid: Some(false),
+        // A text frame: exact size, above and below the text, right of the margin, 1" down the page.
+        frame: Some(FrameProps {
+            w: Some(144.0),
+            h: Some(36.0),
+            h_rule: HeightRule::Exact,
+            wrap: FrameWrap::NotBeside,
+            h_rel: Anchor::Margin,
+            v_rel: Anchor::Page,
+            y: 72.0,
+            h_align: Some(FloatAlign::End),
+            h_space: 9.0,
+            v_space: 4.5,
+            anchor_lock: true,
+            ..Default::default()
+        }),
     };
     let variants = [
         ParaProps { line_spacing: Some(LineSpacing::AtLeast(14.0)), indent_first: Some(24.0), align: Some(Align::Center), ..Default::default() },
@@ -188,6 +203,22 @@ fn every_para_prop_round_trips() {
         // Thai Distributed stays Thai Distributed (it used to be saved as Distributed).
         ParaProps { align: Some(Align::ThaiDistribute), ..Default::default() },
         ParaProps { kinsoku: Some(true), word_wrap: Some(true), auto_space_dn: Some(false), ..Default::default() },
+        // Frames placed from the text: as wide and tall as their text, an offset from the column
+        // and the paragraph after them; in line with the text, centred, over the text.
+        ParaProps { frame: Some(FrameProps { x: -18.0, y: 6.0, ..Default::default() }), ..Default::default() },
+        ParaProps {
+            frame: Some(FrameProps {
+                h: Some(20.0),
+                h_rule: HeightRule::AtLeast,
+                wrap: FrameWrap::None,
+                h_rel: Anchor::Page,
+                v_rel: Anchor::Margin,
+                h_align: Some(FloatAlign::Center),
+                v_inline: true,
+                ..Default::default()
+            }),
+            ..Default::default()
+        },
         ParaProps::default(),
     ];
     let mut ps = vec![Paragraph::with_text("main", CharProps::default())];
