@@ -1447,6 +1447,13 @@ pub fn paint(p: &Painter, r: Rect, name: &str, c: Color32, accent: Color32) {
             pen.rect(5.0, 11.0, 15.0, 15.0, c);
             pen.line_c(&[(10.0, 15.0), (10.0, 18.5)], a);
         }
+        // Legacy Tools: a toolbox.
+        "legacyTools" => {
+            pen.rect(2.5, 8.0, 17.5, 16.5, c);
+            pen.line(&[(7.0, 8.0), (7.0, 5.0), (13.0, 5.0), (13.0, 8.0)]);
+            pen.line_c(&[(2.5, 11.5), (17.5, 11.5)], a);
+            pen.frect(8.5, 10.5, 11.5, 12.5, a);
+        }
         "designMode" => {
             pen.line(&[(4.0, 16.0), (16.0, 16.0), (4.0, 4.0), (4.0, 16.0)]);
             pen.line_c(&[(4.0, 12.0), (8.0, 16.0)], a);

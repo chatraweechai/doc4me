@@ -120,6 +120,10 @@ pub struct ViewState {
     /// Show field codes instead of their results (`view.fieldCodes`, Alt+F9).
     #[serde(default)]
     pub field_codes: bool,
+    /// Grey behind legacy form fields on screen (Developer › Legacy Tools › Form Field Shading;
+    /// on by default, as in Word).
+    #[serde(default = "on")]
+    pub form_shading: bool,
     /// Print Layout › Hide White Space: pages run together, the top and bottom margins (with
     /// headers and footers) between pages collapse to a thin line. On screen only; the layout
     /// and page count are unchanged.
@@ -184,6 +188,7 @@ impl Default for ViewState {
             hide_ink: false,
             draw: Default::default(),
             field_codes: false,
+            form_shading: true,
             hide_white_space: false,
             outline: Default::default(),
             design_mode: false,
@@ -784,6 +789,7 @@ impl Session {
             numeral: self.view.numeral.resolve(SYSTEM_LOCALE.get().map(String::as_str)),
             comment_balloons: false,
             field_codes: self.view.field_codes,
+            form_shading: self.view.form_shading,
             outline: outline.clone(),
             proof: doc4me_layout::ProofOptions { grammar: self.prefs.mark_grammar, spelling: self.prefs.spelling() },
         };

@@ -480,6 +480,8 @@ pub enum Dialog {
     /// Layout (Position, Text Wrapping, Size), Format Picture and Format Shape for the selected
     /// object ([`crate::dialogs_object`]).
     Object(Box<crate::dialogs_object::ObjectDialog>),
+    /// Developer › Legacy Tools: Form Field, Form Field Options and Help Text.
+    Forms(Box<crate::dialogs_forms::FormDialog>),
 }
 
 /// The Table Properties dialog's fields. Lengths are in the interface unit
@@ -918,6 +920,7 @@ impl Dialog {
             Dialog::Organizer { .. } => "organizer",
             Dialog::Layout(d) => d.name(),
             Dialog::Object(d) => d.name(),
+            Dialog::Forms(d) => d.name(),
         }
     }
 
@@ -955,6 +958,9 @@ impl Dialog {
         }
         if let Some(d) = crate::dialogs_object::open(name, app) {
             return Some(Dialog::Object(Box::new(d)));
+        }
+        if matches!(name, "insertFormField" | "formFieldOptions" | "formFieldHelp") {
+            return crate::dialogs_forms::open(name, app).map(|d| Dialog::Forms(Box::new(d)));
         }
         if matches!(name, "compare" | "combine" | "autoCorrect" | "restrictEditing" | "acceptRejectChanges" | "highlightChanges") {
             return crate::dialogs_review::open(name, app).map(|d| Dialog::Review(Box::new(d)));
@@ -1390,6 +1396,7 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context) {
         Dialog::Organizer { .. } => "Organizer",
         Dialog::Layout(d) => d.title(),
         Dialog::Object(d) => d.title(),
+        Dialog::Forms(d) => d.title(),
     };
     let id = egui::Id::new(("dialog", title));
     let shown = place_dialog(ctx, id, egui::Window::new(tl!(title)).id(id).collapsible(false).resizable(false)).open(&mut open).show(ctx, |ui| {
@@ -2820,6 +2827,7 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         Dialog::Organizer { form } => crate::dialogs_templates::organizer(app, ui, form),
         Dialog::Layout(d) => crate::dialogs_layout::body(app, ui, d),
         Dialog::Object(d) => crate::dialogs_object::body(app, ui, d),
+        Dialog::Forms(d) => crate::dialogs_forms::body(app, ui, d),
         Dialog::FindRecipient { text, message } => {
             ui.horizontal(|ui| {
                 ui.label(tl!("Find:"));

@@ -21,6 +21,7 @@ pub mod effects;
 pub mod encoding;
 pub mod eq;
 pub mod fields;
+pub mod form;
 pub mod freeform;
 pub mod graphic;
 pub mod link;

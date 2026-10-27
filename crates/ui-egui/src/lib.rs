@@ -35,6 +35,7 @@ pub mod dialogs;
 pub mod dialogs_chart;
 pub mod dialogs_controls;
 pub mod dialogs_data;
+pub mod dialogs_forms;
 pub mod dialogs_insert;
 pub mod dialogs_keyboard;
 pub mod dialogs_layout;
@@ -55,6 +56,7 @@ pub mod equation_tab;
 pub mod file_browser;
 pub mod file_dialogs;
 mod font_notice;
+pub mod form_fields;
 pub mod frame;
 pub mod get_addins;
 pub mod i18n;
@@ -360,6 +362,8 @@ pub struct WordApp {
     pub(crate) font_notice: Option<String>,
     /// Content control frames, check boxes and lists on the page.
     pub controls: content_controls::ControlUi,
+    /// Legacy form fields on the page: clicks, lists and text boxes in a protected form.
+    pub forms: form_fields::FormUi,
     pub dialog: Option<dialogs::Dialog>,
     /// The Colors dialog (More Colors…), shown above any other dialog (#606).
     pub colors: Option<colors::ColorsDialog>,
@@ -513,6 +517,7 @@ impl WordApp {
             dictation: None,
             font_notice: None,
             controls: Default::default(),
+            forms: Default::default(),
             dialog: None,
             colors: None,
             restrict: Default::default(),
@@ -1578,6 +1583,7 @@ impl WordApp {
             });
         }
         content_controls::popup(self, &ctx);
+        form_fields::popup(self, &ctx);
         dialogs::show(self, &ctx);
         #[cfg(not(target_arch = "wasm32"))]
         file_browser::show(self, &ctx);
@@ -1822,6 +1828,10 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "review.wordCount" if params.as_object().is_none_or(|m| m.is_empty()) => Some("wordCount"),
         // Content control Properties without settings shows the dialog.
         "developer.properties" if params.as_object().is_none_or(|m| m.is_empty()) => Some("controlProperties"),
+        // Legacy form fields: Form Field without a kind, Options and Help Text without settings.
+        "developer.formField" if !has("type") => Some("insertFormField"),
+        "developer.formFieldOptions" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formFieldOptions"),
+        "developer.formFieldHelp" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formFieldHelp"),
         // Enclose Characters without a shape (null is one: it takes the enclosure away).
         "format.enclose" if params.get("shape").is_none() => Some("enclose"),
         // Footnote and Endnote without settings shows its dialog (#385).

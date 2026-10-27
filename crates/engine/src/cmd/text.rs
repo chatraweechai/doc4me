@@ -457,7 +457,17 @@ fn new_paragraph(s: &mut Session, _: &Value) -> CmdResult {
 }
 
 /// In a table: next cell (adds a row at the end). At the start of a list item: demote. Else a tab.
+/// In a document protected for filling in forms, Tab and Shift+Tab go from field to field
+/// (inside a content control they type as usual).
+fn form_tab(s: &mut Session, back: bool) -> Option<CmdResult> {
+    (s.doc.settings.protection.as_deref() == Some("forms") && s.doc.control_at(&s.sel.focus).is_none())
+        .then(|| super::forms::next(s, &serde_json::json!({"back": back})))
+}
+
 fn tab(s: &mut Session, _: &Value) -> CmdResult {
+    if let Some(r) = form_tab(s, false) {
+        return r;
+    }
     if let Some((tpath, r, c)) = s.sel.focus.path.cell() {
         let story = s.sel.focus.story;
         let Some(t) = s.doc.table(story, &tpath) else { return ins_char(s, '\t') };
@@ -537,6 +547,9 @@ fn cell_jump(s: &mut Session, v: &Value, in_row: bool, first: bool) -> CmdResult
 }
 
 fn back_tab(s: &mut Session, _: &Value) -> CmdResult {
+    if let Some(r) = form_tab(s, true) {
+        return r;
+    }
     if let Some((tpath, r, c)) = s.sel.focus.path.cell() {
         let story = s.sel.focus.story;
         let (nr, nc) = if c > 0 {

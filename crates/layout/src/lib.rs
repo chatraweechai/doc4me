@@ -164,6 +164,9 @@ pub struct LayoutOptions {
     /// Show field codes (`{ PAGE }`, shaded) instead of field results (View › Field Codes, Alt+F9).
     /// A field whose own `code` flag is set shows the other one.
     pub field_codes: bool,
+    /// Grey shading behind legacy form fields (Developer › Legacy Tools › Form Field Shading):
+    /// on screen only, as Word (prints and PDFs leave it off).
+    pub form_shading: bool,
     /// Outline view: what's collapsed and shown (used when `view` is [`ViewMode::Outline`]).
     pub outline: Option<outline::OutlineView>,
     /// What the spelling check skips, and whether grammar is marked too (File › Options › Proofing).
@@ -507,6 +510,7 @@ fn env_hash(doc: &Document, opts: &LayoutOptions) -> u64 {
         opts.proofing,
         opts.numeral,
         opts.field_codes,
+        opts.form_shading,
         opts.proof,
         doc4me_proof::dictionary_generation(),
         hyphenation_key(doc),
@@ -643,6 +647,7 @@ impl Ctx<'_> {
             fields: &self.fields,
             show_hidden: false,
             field_codes: false,
+            form_shading: false,
             hide_deleted: false,
             table: None,
             proofing: None,
@@ -729,6 +734,7 @@ impl Ctx<'_> {
             fields: &self.fields,
             show_hidden: self.opts.show_hidden,
             field_codes: self.opts.field_codes,
+            form_shading: self.opts.form_shading,
             hide_deleted: self.hide_deleted,
             table,
             proofing: self.opts.proofing.then_some(self.opts.proof),
@@ -3118,6 +3124,7 @@ fn lookahead_para(ctx: &Ctx, p: &doc4me_doc::Paragraph, width: f32) -> para::Par
         fields: &ctx.fields,
         show_hidden: ctx.opts.show_hidden,
         field_codes: ctx.opts.field_codes,
+        form_shading: ctx.opts.form_shading,
         hide_deleted: ctx.opts.hides_deleted(StoryRef::Body),
         table: None,
         proofing: None,

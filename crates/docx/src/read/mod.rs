@@ -399,9 +399,10 @@ fn toc_field_to_heading(body: &mut Blocks) {
         }
         let Some((field, props, end)) = body[i].as_para().and_then(|p| {
             let (field, end) = match p.object_at(0) {
-                Some(InlineObject::FieldStart { instr, locked }) if is_toc(instr) => {
-                    (InlineObject::Field { instr: instr.clone(), result: String::new(), locked: *locked, code: false }, Some(toc_range_end(body, i)?))
-                }
+                Some(InlineObject::FieldStart { instr, locked }) if is_toc(instr) => (
+                    InlineObject::Field { instr: instr.clone(), result: String::new(), locked: *locked, code: false, form: None },
+                    Some(toc_range_end(body, i)?),
+                ),
                 Some(f @ InlineObject::Field { result, .. }) if result.is_empty() && has_toc(f) => (f.clone(), None),
                 _ => return None,
             };

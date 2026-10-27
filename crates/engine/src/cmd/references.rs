@@ -352,7 +352,7 @@ fn range_toc_to_field(s: &mut Session) -> Result<(), CmdError> {
     let end = Pos { off: after_end, ..r.end.clone() };
     let props = s.doc.para_at(&r.start).map(|p| p.props_of_char(r.start.off).clone()).unwrap_or_default();
     let at = s.doc.delete_range(&r.start, &end)?;
-    let field = InlineObject::Field { instr: r.instr.trim().to_string(), result: String::new(), locked: false, code: false };
+    let field = InlineObject::Field { instr: r.instr.trim().to_string(), result: String::new(), locked: false, code: false, form: None };
     let after = s.doc.insert_object(&at, field, &props)?;
     if s.doc.para_at(&after).is_some_and(|p| after.off < p.len()) {
         s.doc.split_paragraph(&after)?;
@@ -402,7 +402,7 @@ fn insert_toc(s: &mut Session, v: &Value) -> CmdResult {
     let mut head = Paragraph::with_text(&title, CharProps::default()).styled("TOCHeading");
     head.insert_object(
         head.len(),
-        InlineObject::Field { instr: toc_instr(v), result: String::new(), locked: false, code: false },
+        InlineObject::Field { instr: toc_instr(v), result: String::new(), locked: false, code: false, form: None },
         &CharProps::default(),
     )?;
     let i = if s.doc.para_at(&at).is_some_and(|p| p.is_empty()) {
@@ -770,7 +770,7 @@ fn caption(s: &mut Session, v: &Value) -> CmdResult {
     let chapter = p::u64(v, "chapter").filter(|l| (1..=9).contains(l));
     let sep = p::str(v, "separator").and_then(|x| CHAPTER_SEPARATORS.iter().find(|s| **s == x)).copied().unwrap_or("-");
     let mut para = Paragraph::new().styled("Caption");
-    let field = |instr: String| InlineObject::Field { instr, result: String::new(), locked: false, code: false };
+    let field = |instr: String| InlineObject::Field { instr, result: String::new(), locked: false, code: false, form: None };
     if !p::bool(v, "excludeLabel").unwrap_or(false) {
         para.insert_text(0, &format!("{label} "), &CharProps::default())?;
     }

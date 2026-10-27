@@ -6,6 +6,10 @@
 //! Enforcement lives in [`crate::Session::run`]: [`check_before`] refuses commands the
 //! restrictions forbid outright, and while exceptions exist [`outside_unchanged`] checks after the
 //! command that nothing outside them changed (the command is rolled back otherwise).
+//!
+//! Filling in forms: only the form's fields change — legacy form fields' values (through
+//! `developer.formFieldValue`) and the content of content controls that can be edited (typing,
+//! deleting, pasting, ticking, choosing); everything else stays as it is.
 
 use doc4me_doc::para::{InlineObject, OBJ};
 use doc4me_doc::props::CharProps;
@@ -204,10 +208,32 @@ pub(crate) fn check_before(s: &Session, id: &str, params: &Value) -> Result<bool
         check_formatting(s, id, params)?;
     }
     let comment_ok = id.starts_with("review.") && (id.contains("Comment") || id == "review.reply");
+    // What filling in a form does; checked afterwards to have changed only the fields.
+    let fills_form = matches!(
+        id,
+        "developer.formFieldValue"
+            | "developer.toggleCheckBox"
+            | "developer.chooseItem"
+            | "developer.setDate"
+            | "text.insert"
+            | "text.backspace"
+            | "text.delete"
+            | "text.deleteWordBack"
+            | "text.deleteWord"
+            | "text.newParagraph"
+            | "text.lineBreak"
+            | "text.tab"
+            | "text.backTab"
+            | "edit.cut"
+            | "edit.paste"
+            | "edit.pasteText"
+    );
     let exceptions = || s.doc.perm_ranges().iter().any(|r| editable_by(r, &s.author));
     match mode {
         "readOnly" if exceptions() => Ok(true),
-        "readOnly" | "forms" => Err(CmdError::Disabled(format!("{id}: the document is protected (read only)"))),
+        "forms" if fills_form => Ok(true),
+        "forms" => Err(CmdError::Disabled(format!("{id}: only the form's fields can be filled in"))),
+        "readOnly" => Err(CmdError::Disabled(format!("{id}: the document is protected (read only)"))),
         "comments" if comment_ok => Ok(false),
         "comments" if exceptions() => Ok(true),
         "comments" => Err(CmdError::Disabled(format!("{id}: only comments are allowed in this document"))),
@@ -254,15 +280,22 @@ enum Piece {
     Text(String, CharProps),
     Object(Option<InlineObject>),
     Mark(Box<doc4me_doc::ParaProps>, CharProps),
+    /// A form's field, whose value may change when the form is filled in: what it is, not what
+    /// it holds.
+    Field(String),
 }
 
 /// Everything outside the editable ranges, in order.
 fn outside(doc: &Document, author: &str) -> Vec<Piece> {
     let editable: Vec<u32> = doc.perm_ranges().iter().filter(|r| editable_by(r, author)).map(|r| r.id).collect();
+    let forms = doc.settings.protection.as_deref() == Some("forms");
     let mut out = Vec::new();
     let stories = std::iter::once(StoryRef::Body).chain(doc.parts.keys().map(|k| StoryRef::Part(*k)));
     for story in stories {
         let mut open: Vec<u32> = Vec::new();
+        // Content controls being filled in (forms): their content may change. Tracked as a
+        // permission range would be, under ids no range has.
+        let mut controls = 0u32;
         for path in doc.para_paths(story) {
             let Some(p) = doc.para(story, &path) else { continue };
             let mut k = 0;
@@ -283,6 +316,31 @@ fn outside(doc: &Document, author: &str) -> Vec<Piece> {
                                 flush(&mut out, &mut piece, props, &open);
                                 if let Some(j) = open.iter().rposition(|x| x == id) {
                                     open.remove(j);
+                                }
+                                continue;
+                            }
+                            Some(InlineObject::ControlStart { control }) if forms && control.lock.can_edit() => {
+                                flush(&mut out, &mut piece, props, &open);
+                                if open.is_empty() {
+                                    out.push(Piece::Field(format!("control {:?} {:?} {}", control.tag, control.title, control.kind.name())));
+                                }
+                                controls += 1;
+                                open.push(u32::MAX - controls);
+                                continue;
+                            }
+                            Some(InlineObject::ControlEnd) if forms && open.last() == Some(&(u32::MAX - controls)) && controls > 0 => {
+                                flush(&mut out, &mut piece, props, &open);
+                                open.pop();
+                                controls -= 1;
+                                if open.is_empty() {
+                                    out.push(Piece::Field("/control".into()));
+                                }
+                                continue;
+                            }
+                            Some(InlineObject::Field { instr, form: Some(f), .. }) if forms => {
+                                flush(&mut out, &mut piece, props, &open);
+                                if open.is_empty() {
+                                    out.push(Piece::Field(format!("{instr} {:?} {}", f.name, f.kind_name())));
                                 }
                                 continue;
                             }

@@ -2859,3 +2859,42 @@ spacing	Normal	ปกติ
 	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" หรือ "an" หน้าคำถัดไป และภาษาโปแลนด์ "w"/"we", "z"/"ze"
 	A space before punctuation, doubled marks, Polish commas before conjunctions.	ช่องว่างหน้าเครื่องหมายวรรคตอน เครื่องหมายซ้ำ และจุลภาคหน้าคำเชื่อมภาษาโปแลนด์
 	Extra spaces between words.	ช่องว่างเกินระหว่างคำ
+	Add Help Text…	เพิ่มข้อความวิธีใช้…
+	AutoText entry:	รายการข้อความอัตโนมัติ:
+	Calculate on exit	คำนวณเมื่อออก
+	Calculation	การคำนวณ
+	Check Box Form Field	เขตข้อมูลแบบฟอร์มกล่องกาเครื่องหมาย
+	Check Box Form Field Options	ตัวเลือกเขตข้อมูลแบบฟอร์มกล่องกาเครื่องหมาย
+	Check box	กล่องกาเครื่องหมาย
+	Check box enabled	เปิดใช้งานกล่องกาเครื่องหมาย
+	Check box size:	ขนาดกล่องกาเครื่องหมาย:
+	Checked	กาเครื่องหมายแล้ว
+	Current date	วันที่ปัจจุบัน
+	Current time	เวลาปัจจุบัน
+	Default value:	ค่าเริ่มต้น:
+	Drop-Down Form Field	เขตข้อมูลแบบฟอร์มดรอปดาวน์
+	Drop-Down Form Field Options	ตัวเลือกเขตข้อมูลแบบฟอร์มดรอปดาวน์
+	Drop-down	ดรอปดาวน์
+	Drop-down enabled	เปิดใช้งานดรอปดาวน์
+	Drop-down item:	รายการดรอปดาวน์:
+	Fill In Form Field	กรอกเขตข้อมูลแบบฟอร์ม
+	Fill-in enabled	เปิดใช้งานการกรอก
+	Form Field	เขตข้อมูลแบบฟอร์ม
+	Form Field Help Text	ข้อความวิธีใช้ของเขตข้อมูลแบบฟอร์ม
+	Form Field Options	ตัวเลือกเขตข้อมูลแบบฟอร์ม
+	Form Field Shading	การแรเงาเขตข้อมูลแบบฟอร์ม
+	Form Field at Selection	เขตข้อมูลแบบฟอร์มที่ส่วนที่เลือก
+	Help Key (F1)	แป้นวิธีใช้ (F1)
+	Insert Form Field	แทรกเขตข้อมูลแบบฟอร์ม
+	Items in drop-down list:	รายการในดรอปดาวน์:
+	Legacy Tools	เครื่องมือรุ่นเก่า
+	Maximum length:	ความยาวสูงสุด:
+	Next Form Field	เขตข้อมูลแบบฟอร์มถัดไป
+	Not checked	ไม่ได้กาเครื่องหมาย
+	Put the caret on a form field first.	วางเคอร์เซอร์บนเขตข้อมูลแบบฟอร์มก่อน
+	Regular text	ข้อความปกติ
+	Reset Form Fields	รีเซ็ตเขตข้อมูลแบบฟอร์ม
+	Text Form Field	เขตข้อมูลแบบฟอร์มข้อความ
+	Text Form Field Options	ตัวเลือกเขตข้อมูลแบบฟอร์มข้อความ
+	Type your own:	พิมพ์ข้อความเอง:
+	Unlimited	ไม่จำกัด

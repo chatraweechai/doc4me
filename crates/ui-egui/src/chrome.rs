@@ -321,6 +321,10 @@ pub fn status_bar(app: &mut WordApp, ui: &mut Ui) {
                 if let Some(m) = &app.session.move_text {
                     st(ui, tl!(if m.copy { "Copy to where?" } else { "Move to where?" }));
                 }
+                // A protected form's selected field: its status bar text.
+                if let Some(s) = crate::form_fields::status_text(app) {
+                    st(ui, &s);
+                }
                 if let Some((msg, at)) = &app.status_msg
                     && crate::now_ms() - at < 6000.0
                 {

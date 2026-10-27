@@ -11,6 +11,7 @@ mod chart_spec;
 mod crypt;
 mod custom;
 mod flat;
+mod form;
 mod package;
 mod read;
 mod smart_art;

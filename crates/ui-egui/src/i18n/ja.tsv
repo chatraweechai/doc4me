@@ -2850,3 +2850,42 @@ spacing	Normal	標準
 	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	次の単語の前の "a" と "an"、ポーランド語の "w"/"we"、"z"/"ze"。
 	A space before punctuation, doubled marks, Polish commas before conjunctions.	句読点の前の空白、重複した記号、ポーランド語の接続詞の前のコンマ。
 	Extra spaces between words.	単語間の余分な空白。
+	Add Help Text…	ヘルプ テキストの追加…
+	AutoText entry:	定型句:
+	Calculate on exit	終了時に計算
+	Calculation	計算
+	Check Box Form Field	チェック ボックス フォーム フィールド
+	Check Box Form Field Options	チェック ボックス フォーム フィールドのオプション
+	Check box	チェック ボックス
+	Check box enabled	チェック ボックスを有効にする
+	Check box size:	チェック ボックスのサイズ:
+	Checked	オン
+	Current date	現在の日付
+	Current time	現在の時刻
+	Default value:	既定値:
+	Drop-Down Form Field	ドロップダウン フォーム フィールド
+	Drop-Down Form Field Options	ドロップダウン フォーム フィールドのオプション
+	Drop-down	ドロップダウン
+	Drop-down enabled	ドロップダウンを有効にする
+	Drop-down item:	ドロップダウン項目:
+	Fill In Form Field	フォーム フィールドへの入力
+	Fill-in enabled	入力を有効にする
+	Form Field	フォーム フィールド
+	Form Field Help Text	フォーム フィールドのヘルプ テキスト
+	Form Field Options	フォーム フィールドのオプション
+	Form Field Shading	フォーム フィールドの網かけ
+	Form Field at Selection	選択範囲のフォーム フィールド
+	Help Key (F1)	ヘルプ キー (F1)
+	Insert Form Field	フォーム フィールドの挿入
+	Items in drop-down list:	ドロップダウン リストの項目:
+	Legacy Tools	以前のバージョンのツール
+	Maximum length:	最大文字数:
+	Next Form Field	次のフォーム フィールド
+	Not checked	オフ
+	Put the caret on a form field first.	先にカーソルをフォーム フィールドに置いてください。
+	Regular text	標準テキスト
+	Reset Form Fields	フォーム フィールドのリセット
+	Text Form Field	テキスト フォーム フィールド
+	Text Form Field Options	テキスト フォーム フィールドのオプション
+	Type your own:	直接入力:
+	Unlimited	無制限

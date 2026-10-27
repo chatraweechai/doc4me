@@ -5,6 +5,7 @@ use std::sync::Arc;
 use doc4me_doc::connector::{ConnEnd, ShapeExtra};
 use doc4me_doc::control::{ContentControl, ControlKind, ControlWrap};
 use doc4me_doc::effects::{Glow, Shadow, ShapeEffects};
+use doc4me_doc::form::{FormField, FormKind};
 use doc4me_doc::graphic::{Embedded, Graphic, GraphicItem, GraphicKind};
 use doc4me_doc::para::{AltText, Anchor, Float, FloatAlign, NoteKind, ShapeKind, Wrap, WrapText, cap_alt};
 use doc4me_doc::props::{CharProps, NumChange, PropChange, Rgb};
@@ -62,6 +63,8 @@ struct FieldState {
     /// The font size of each piece of the code (where it starts in `instr`): an enclosure's
     /// style is the size of its symbol and text (see [`doc4me_doc::eq`]).
     sizes: Vec<(usize, Option<f32>)>,
+    /// A legacy form field's `w:ffData` (read once the code says which kind it is).
+    ff: Option<Box<El>>,
 }
 
 /// Enclosed characters (`eq \o\ac(○,字)`), with their style from the code's font sizes: Word
@@ -452,7 +455,7 @@ impl Reader<'_> {
             "w:fldSimple" => {
                 let instr = k.attr("w:instr").unwrap_or("").to_string();
                 let props = k.child("w:r").and_then(|r| r.child("w:rPr")).map(|p| self.run_props(p, ctx)).unwrap_or_else(|| self.run_props_none(ctx));
-                self.begin_field(sc, props, instr, on_off_attr(k, "w:fldLock"));
+                self.begin_field(sc, props, instr, on_off_attr(k, "w:fldLock"), None);
                 self.separate_field(sc, pb);
                 self.read_inline_children(sc, pb, k, rels, ctx, depth + 1);
                 self.end_field(sc, pb);
@@ -605,7 +608,7 @@ impl Reader<'_> {
                 }
             }
             "w:fldChar" => match k.attr("w:fldCharType") {
-                Some("begin") => self.begin_field(sc, props.clone(), String::new(), on_off_attr(k, "w:fldLock")),
+                Some("begin") => self.begin_field(sc, props.clone(), String::new(), on_off_attr(k, "w:fldLock"), k.child("w:ffData")),
                 Some("separate") => self.separate_field(sc, pb),
                 Some("end") => self.end_field(sc, pb),
                 _ => {}
@@ -656,9 +659,12 @@ impl Reader<'_> {
                     pb.push_obj(InlineObject::CommentEnd { id: cid }, props);
                 }
             }
-            "w:pgNum" => {
-                self.emit_obj(sc, pb, InlineObject::Field { instr: "PAGE".into(), result: String::new(), locked: false, code: false }, props)
-            }
+            "w:pgNum" => self.emit_obj(
+                sc,
+                pb,
+                InlineObject::Field { instr: "PAGE".into(), result: String::new(), locked: false, code: false, form: None },
+                props,
+            ),
             "w:ruby" => self.read_ruby(sc, pb, k, props),
             "mc:AlternateContent" => {
                 if let Some(c) = children_of_choice(k) {
@@ -728,13 +734,24 @@ impl Reader<'_> {
 
     // ---- fields ----
 
-    fn begin_field(&mut self, sc: &mut StoryCtx, props: CharProps, instr: String, locked: bool) {
+    fn begin_field(&mut self, sc: &mut StoryCtx, props: CharProps, instr: String, locked: bool, ff: Option<&El>) {
         if sc.fields.len() >= MAX_FIELD_DEPTH || sc.ignored_begins > 0 {
             sc.ignored_begins += 1;
             return;
         }
         // Fields nested deeper than the cap are ignored (their content flows to the enclosing field).
-        sc.fields.push(FieldState { instr, phase: Phase::Instr, spilled: false, buf: Vec::new(), props, locked, range: false, sizes: Vec::new() });
+        let ff = ff.map(|e| Box::new(e.clone()));
+        sc.fields.push(FieldState {
+            instr,
+            phase: Phase::Instr,
+            spilled: false,
+            buf: Vec::new(),
+            props,
+            locked,
+            range: false,
+            sizes: Vec::new(),
+            ff,
+        });
     }
 
     /// Whether the field below the innermost one is still collecting its code (a field nested
@@ -808,7 +825,13 @@ impl Reader<'_> {
             Some(e) => (e.instr(), if result.is_empty() { e.text } else { result }),
             None => (f.instr.trim().to_string(), result),
         };
-        let obj = InlineObject::Field { instr, result, locked: f.locked, code: false };
+        let form = form_data(&f);
+        let result = match form.as_deref() {
+            // Word writes no result for these: the box and the chosen entry come from the data.
+            Some(d) if !matches!(d.kind, FormKind::Text { .. }) => d.chosen_text().to_string(),
+            _ => result,
+        };
+        let obj = InlineObject::Field { instr, result, locked: f.locked, code: false, form };
         if let Some(parent) = sc.fields.last_mut()
             && !parent.spilled
             && parent.phase == Phase::Instr
@@ -827,7 +850,11 @@ impl Reader<'_> {
                 continue;
             }
             f.spilled = true;
-            pb.push_obj(InlineObject::Field { instr: f.instr.trim().to_string(), result: String::new(), locked: f.locked, code: false }, &f.props);
+            let form = form_data(f);
+            pb.push_obj(
+                InlineObject::Field { instr: f.instr.trim().to_string(), result: String::new(), locked: f.locked, code: false, form },
+                &f.props,
+            );
             for (it, p) in f.buf.drain(..) {
                 match it {
                     Item::Text(t) => pb.push_text(&t, &p),
@@ -1396,6 +1423,13 @@ fn collect<'a>(e: &'a El, name: &str, out: &mut Vec<(&'a El, ControlWrap)>, pend
 /// Placeholder text as read from a control showing it: one line, bounded.
 fn placeholder_of(s: &str) -> String {
     s.chars().map(|c| if c.is_control() { ' ' } else { c }).take(doc4me_doc::control::MAX_CONTROL_TEXT).collect::<String>().trim().to_string()
+}
+
+/// A legacy form field's data, when the field is one (`FORMTEXT`, `FORMCHECKBOX`,
+/// `FORMDROPDOWN`) and has its `w:ffData`.
+fn form_data(f: &FieldState) -> Option<Box<FormField>> {
+    let word = f.instr.split_whitespace().next()?.to_ascii_uppercase();
+    crate::form::read(f.ff.as_deref()?, &word).map(Box::new)
 }
 
 fn on_off_attr(e: &El, name: &str) -> bool {

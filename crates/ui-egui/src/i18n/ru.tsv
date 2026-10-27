@@ -2878,3 +2878,42 @@ spacing	Normal	Обычный
 	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	«a» или «an» перед следующим словом; польские «w»/«we», «z»/«ze».
 	A space before punctuation, doubled marks, Polish commas before conjunctions.	Пробел перед знаком препинания, двойные знаки, польские запятые перед союзами.
 	Extra spaces between words.	Лишние пробелы между словами.
+	Add Help Text…	Добавить текст справки…
+	AutoText entry:	Элемент автотекста:
+	Calculate on exit	Вычислять при выходе
+	Calculation	Вычисление
+	Check Box Form Field	Поле формы «флажок»
+	Check Box Form Field Options	Параметры поля формы «флажок»
+	Check box	Флажок
+	Check box enabled	Флажок включен
+	Check box size:	Размер флажка:
+	Checked	Установлен
+	Current date	Текущая дата
+	Current time	Текущее время
+	Default value:	Значение по умолчанию:
+	Drop-Down Form Field	Поле формы «раскрывающийся список»
+	Drop-Down Form Field Options	Параметры поля формы «раскрывающийся список»
+	Drop-down	Раскрывающийся список
+	Drop-down enabled	Раскрывающийся список включен
+	Drop-down item:	Элемент списка:
+	Fill In Form Field	Заполнить поле формы
+	Fill-in enabled	Заполнение включено
+	Form Field	Поле формы
+	Form Field Help Text	Текст справки поля формы
+	Form Field Options	Параметры поля формы
+	Form Field Shading	Затенение полей форм
+	Form Field at Selection	Поле формы в выделении
+	Help Key (F1)	Клавиша справки (F1)
+	Insert Form Field	Вставить поле формы
+	Items in drop-down list:	Элементы раскрывающегося списка:
+	Legacy Tools	Инструменты предыдущих версий
+	Maximum length:	Максимальная длина:
+	Next Form Field	Следующее поле формы
+	Not checked	Снят
+	Put the caret on a form field first.	Сначала поместите курсор на поле формы.
+	Regular text	Обычный текст
+	Reset Form Fields	Сбросить поля форм
+	Text Form Field	Текстовое поле формы
+	Text Form Field Options	Параметры текстового поля формы
+	Type your own:	Введите свой текст:
+	Unlimited	Без ограничений

@@ -1664,11 +1664,23 @@ fn developer(app: &mut WordApp, ui: &mut Ui) {
                 ("ccRepeat", "Repeating Section Content Control", "developer.repeatingSection"),
             ],
         ];
+        let shading = app.session.view.form_shading;
         stack(ui, |ui| {
-            for row in rows {
+            for (i, row) in rows.into_iter().enumerate() {
                 crate::widgets::row(ui, |ui| {
                     for (icon, tip, id) in row {
                         small(ui, app, icon, None, tip, id, json!({}), false);
+                    }
+                    // Legacy Tools: Word's form fields from before content controls.
+                    if i == 2 {
+                        menu_button(ui, app, "legacyTools", None, "Legacy Tools", false, "", |ui, app| {
+                            mi(ui, app, "Text Form Field", "developer.formField", json!({"type": "text"}));
+                            mi(ui, app, "Check Box Form Field", "developer.formField", json!({"type": "checkBox"}));
+                            mi(ui, app, "Drop-Down Form Field", "developer.formField", json!({"type": "dropDown"}));
+                            ui.separator();
+                            mi_check(ui, app, "Form Field Shading", shading, "developer.formFieldShading", json!({}));
+                            mi(ui, app, "Reset Form Fields", "developer.resetFormFields", json!({}));
+                        });
                     }
                 });
                 ui.add_space(3.0);

@@ -20,6 +20,7 @@ pub mod find_pattern;
 pub mod fmt_revisions;
 pub mod font;
 pub mod format;
+pub mod forms;
 pub mod index;
 pub mod ink_shape;
 pub mod insert;
@@ -103,6 +104,7 @@ pub fn registry() -> Registry {
     v.extend(addins::specs());
     v.extend(speech::specs());
     v.extend(controls::specs());
+    v.extend(forms::specs());
     Registry::new(v)
 }
 

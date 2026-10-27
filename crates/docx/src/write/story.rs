@@ -1,6 +1,7 @@
 //! Blocks, paragraphs, runs, objects and tables → WordprocessingML.
 
 use doc4me_doc::effects::ShapeEffects;
+use doc4me_doc::form::{FormField, FormKind};
 use doc4me_doc::para::{AltText, Anchor, Float, NoteKind, ShapeKind, Wrap};
 use doc4me_doc::props::{CharProps, PropChange, Rgb};
 use doc4me_doc::section::{LineNumberRestart, NoteProps, SectionProps, SectionStart};
@@ -209,7 +210,7 @@ impl Writer<'_> {
             && let Some((instr, locked, props)) = self.toc_field.take()
         {
             self.rev_open(w, &props);
-            self.field_start(w, &instr, locked, &props);
+            self.field_start(w, &instr, locked, None, &props);
             self.rev_close(w, &props);
         }
         let toc_end = std::mem::take(&mut self.toc_end_here);
@@ -474,10 +475,10 @@ impl Writer<'_> {
                     None => super::math::write_equation(w, linear, *display, math),
                 }
             }
-            InlineObject::Field { instr, result, locked, .. } => self.field(w, instr, result, *locked, props),
+            InlineObject::Field { instr, result, locked, form, .. } => self.field(w, instr, result, *locked, form.as_deref(), props),
             InlineObject::FieldStart { instr, locked } => {
                 self.rev_open(w, props);
-                self.field_start(w, instr, *locked, props);
+                self.field_start(w, instr, *locked, None, props);
                 self.rev_close(w, props);
             }
             InlineObject::FieldEnd => {
@@ -746,7 +747,7 @@ impl Writer<'_> {
         }
     }
 
-    fn field(&mut self, w: &mut W, instr: &str, result: &str, locked: bool, props: &CharProps) {
+    fn field(&mut self, w: &mut W, instr: &str, result: &str, locked: bool, form: Option<&FormField>, props: &CharProps) {
         if self.toc_hold_end && is_toc(instr) {
             // A TOC heading's field opens in the first entry and closes after the last (see `toc_span`).
             self.toc_hold_end = false;
@@ -767,7 +768,9 @@ impl Writer<'_> {
             w.close("w:r");
         };
         self.rev_open(w, props);
-        self.field_start(w, instr, locked, props);
+        self.field_start(w, instr, locked, form, props);
+        // A form check box or drop-down has no result in the file (Word draws them from the data).
+        let result = if form.is_some_and(|f| !matches!(f.kind, FormKind::Text { .. })) { "" } else { result };
         if !result.is_empty() {
             run(w, &|w| {
                 let mut buf = String::new();
@@ -844,8 +847,8 @@ impl Writer<'_> {
         run(w, props, &|w| w.empty("w:fldChar", &[("w:fldCharType", "end")]));
     }
 
-    /// A field's begin, instruction and separate runs.
-    fn field_start(&self, w: &mut W, instr: &str, locked: bool, props: &CharProps) {
+    /// A field's begin (with a form field's data), instruction and separate runs.
+    fn field_start(&self, w: &mut W, instr: &str, locked: bool, form: Option<&FormField>, props: &CharProps) {
         let del = self.is_del(props);
         let run = |w: &mut W, f: &dyn Fn(&mut W)| {
             w.open("w:r", &[]);
@@ -854,10 +857,14 @@ impl Writer<'_> {
             w.close("w:r");
         };
         run(w, &|w| {
-            if locked {
-                w.empty("w:fldChar", &[("w:fldCharType", "begin"), ("w:fldLock", "1")])
-            } else {
-                w.empty("w:fldChar", &[("w:fldCharType", "begin")])
+            let attrs: &[(&str, &str)] = if locked { &[("w:fldCharType", "begin"), ("w:fldLock", "1")] } else { &[("w:fldCharType", "begin")] };
+            match form {
+                Some(f) => {
+                    w.open("w:fldChar", attrs);
+                    crate::form::write(w, f);
+                    w.close("w:fldChar");
+                }
+                None => w.empty("w:fldChar", attrs),
             }
         });
         let instr_text = format!(" {} ", instr.trim());

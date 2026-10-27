@@ -467,7 +467,7 @@ pub fn specs() -> Vec<CommandSpec> {
             };
             let props = s.typing_props();
             let at = delete_selection(s)?;
-            let end = s.doc.insert_object(&at, InlineObject::Field { instr, result: val, locked: false, code: false }, &props)?;
+            let end = s.doc.insert_object(&at, InlineObject::Field { instr, result: val, locked: false, code: false, form: None }, &props)?;
             s.sel = Selection::caret(end);
             sel_result(s)
         })

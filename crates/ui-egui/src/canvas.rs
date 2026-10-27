@@ -1154,6 +1154,8 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
         }
         // Content controls: the frame of the one the caret is in (all of them in Design Mode).
         crate::content_controls::paint(app, &painter, &t, &layout, &rects, geo.scale);
+        // Legacy form fields: where they are, and a protected form's text box.
+        crate::form_fields::paint(app, &layout, &rects, geo.scale);
         // Read Aloud: the sentence being spoken.
         if let Some((a, b)) = crate::read_aloud::highlight(app) {
             for (pi, r) in layout.selection_rects(&app.session.doc, &a, &b, app.session.page_hint) {
@@ -1308,6 +1310,8 @@ pub fn show(app: &mut WordApp, ui: &mut Ui) {
     }
     // A click on a check box ticks it; on a list's button opens the list.
     crate::content_controls::clicks(app, &resp);
+    // In a protected form a click fills a form field in; otherwise a double-click opens its Options.
+    crate::form_fields::clicks(app, &resp);
     // Right-click: move the caret there (unless inside the selection), then the context menu.
     // Right-click in an equation puts the caret there and opens the equation menu.
     if resp.secondary_clicked()

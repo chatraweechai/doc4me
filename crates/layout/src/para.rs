@@ -342,6 +342,8 @@ pub struct ParaEnv<'a> {
     pub show_hidden: bool,
     /// Show field codes instead of results ([`crate::LayoutOptions::field_codes`]).
     pub field_codes: bool,
+    /// Shade legacy form fields ([`crate::LayoutOptions::form_shading`]).
+    pub form_shading: bool,
     /// Leave tracked deletions out, like hidden text (the final, "No Markup" text).
     pub hide_deleted: bool,
     /// The table style's formatting for text in this paragraph's cell (`None` outside tables).
@@ -1304,7 +1306,7 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
                                 push(&mut b, ClKind::Object(k), 0.0, 0.0);
                             }
                         }
-                        Some(InlineObject::Field { instr, result, code, .. }) => {
+                        Some(InlineObject::Field { instr, result, code, form, .. }) => {
                             if env.field_codes != *code {
                                 // The code in braces on grey, like Word's field shading.
                                 let mut shaded = (*rc).clone();
@@ -1315,11 +1317,26 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
                             } else {
                                 match doc4me_doc::eq::parse_overstrike(instr) {
                                     Some(o) => overstrike(&mut b, &o, instr, start, end, &rc, &mut enclosures),
-                                    None => {
-                                        let (t, page_dep) = field_text(instr, result, env.fields);
-                                        has_page_fields |= page_dep;
-                                        b.shape_atomic(&t, start, end, &rc);
-                                    }
+                                    None => match form.as_deref() {
+                                        // A legacy form field shows its box, chosen entry or text
+                                        // (a sized check box at its own size).
+                                        Some(f) => {
+                                            let t = f.display(result);
+                                            let mut look = (*rc).clone();
+                                            if let doc4me_doc::form::FormKind::CheckBox { size: Some(pt), .. } = f.kind {
+                                                look.size = pt;
+                                            }
+                                            if env.form_shading && look.highlight.is_none() && look.shading.is_none() {
+                                                look.shading = Some(FIELD_SHADING);
+                                            }
+                                            b.shape_atomic(&t, start, end, &Arc::new(look));
+                                        }
+                                        None => {
+                                            let (t, page_dep) = field_text(instr, result, env.fields);
+                                            has_page_fields |= page_dep;
+                                            b.shape_atomic(&t, start, end, &rc);
+                                        }
+                                    },
                                 }
                             }
                         }

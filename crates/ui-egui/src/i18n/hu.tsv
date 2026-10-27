@@ -2851,3 +2851,42 @@ spacing	Normal	Normál
 	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	„a” vagy „an” a következő szó előtt; lengyel „w”/„we”, „z”/„ze”.
 	A space before punctuation, doubled marks, Polish commas before conjunctions.	Szóköz az írásjel előtt, kettőzött jelek, lengyel vessző kötőszavak előtt.
 	Extra spaces between words.	Felesleges szóközök a szavak között.
+	Add Help Text…	Súgószöveg hozzáadása…
+	AutoText entry:	Autoszöveg-bejegyzés:
+	Calculate on exit	Számítás kilépéskor
+	Calculation	Számítás
+	Check Box Form Field	Jelölőnégyzet űrlapmező
+	Check Box Form Field Options	Jelölőnégyzet űrlapmező beállításai
+	Check box	Jelölőnégyzet
+	Check box enabled	Jelölőnégyzet engedélyezve
+	Check box size:	Jelölőnégyzet mérete:
+	Checked	Bejelölve
+	Current date	Aktuális dátum
+	Current time	Aktuális idő
+	Default value:	Alapértelmezett érték:
+	Drop-Down Form Field	Legördülő űrlapmező
+	Drop-Down Form Field Options	Legördülő űrlapmező beállításai
+	Drop-down	Legördülő lista
+	Drop-down enabled	Legördülő lista engedélyezve
+	Drop-down item:	Listaelem:
+	Fill In Form Field	Űrlapmező kitöltése
+	Fill-in enabled	Kitöltés engedélyezve
+	Form Field	Űrlapmező
+	Form Field Help Text	Űrlapmező súgószövege
+	Form Field Options	Űrlapmező beállításai
+	Form Field Shading	Űrlapmezők árnyékolása
+	Form Field at Selection	Űrlapmező a kijelölésnél
+	Help Key (F1)	Súgóbillentyű (F1)
+	Insert Form Field	Űrlapmező beszúrása
+	Items in drop-down list:	A legördülő lista elemei:
+	Legacy Tools	Régebbi eszközök
+	Maximum length:	Maximális hossz:
+	Next Form Field	Következő űrlapmező
+	Not checked	Nincs bejelölve
+	Put the caret on a form field first.	Előbb vidd a kurzort egy űrlapmezőre.
+	Regular text	Normál szöveg
+	Reset Form Fields	Űrlapmezők alaphelyzetbe állítása
+	Text Form Field	Szöveges űrlapmező
+	Text Form Field Options	Szöveges űrlapmező beállításai
+	Type your own:	Saját szöveg beírása:
+	Unlimited	Korlátlan

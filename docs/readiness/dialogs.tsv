@@ -75,8 +75,8 @@ dlg-073	wdDialogFormatStylesCustom	1248	(none)	styles.modify	registry
 dlg-074	wdDialogFormatTabs	179	Position, DefTabs, Align, Leader, Set, Clear, ClearAll	para.tabs	registry		
 dlg-075	wdDialogFormatTheme	855	(none)	design.themes	registry		
 dlg-076	wdDialogFormattingRestrictions	1427	(none)	review.restrict	registry		
-dlg-077	wdDialogFormFieldHelp	361	(none)	-	registry		legacy form fields
-dlg-078	wdDialogFormFieldOptions	353	Entry, Exit, Name, Enable, TextType, TextWidth, TextDefault, TextFormat, CheckSize, CheckWidth, CheckDefault, Type, OwnHelp, HelpText, OwnStat, StatText, Calculate	-	registry		legacy form fields
+dlg-077	wdDialogFormFieldHelp	361	(none)	developer.formFieldHelp	registry		Form Field Help Text: status bar and F1 help (typed or an AutoText entry), on its own or from Options › Add Help Text…
+dlg-078	wdDialogFormFieldOptions	353	Entry, Exit, Name, Enable, TextType, TextWidth, TextDefault, TextFormat, CheckSize, CheckWidth, CheckDefault, Type, OwnHelp, HelpText, OwnStat, StatText, Calculate	developer.formFieldOptions	registry		Text, Check Box and Drop-Down Form Field Options (type, default, maximum length, format, size, entries, bookmark, fill-in enabled, calculate on exit)
 dlg-079	wdDialogFrameSetProperties	1074	(none)	-	registry		legacy frames page
 dlg-080	wdDialogHelpAbout	9	APPNAME, APPCOPYRIGHT, APPUSERNAME, APPORGANIZATION, APPSERIALNUMBER	help.show	registry		F1 and File › About open the About dialog
 dlg-081	wdDialogHelpWordPerfectHelp	10	WPCommand, HelpText, DemoGuidance	-	registry		legacy
@@ -95,7 +95,7 @@ dlg-093	wdDialogInsertDateTime	165	DateTimePic, InsertAsField, DbCharField, Date
 dlg-094	wdDialogInsertField	166	Field	insert.field	registry		
 dlg-095	wdDialogInsertFile	164	Name, Range, ConfirmConversions, Link, Attachment	insert.textFromFile	registry		
 dlg-096	wdDialogInsertFootnote	370	Reference, NoteType, Symbol, FootNumberAs, EndNumberAs, FootnotesAt, EndnotesAt, FootNumberingStyle, EndNumberingStyle, FootStartingNum, FootRestartNum, EndStartingNum, EndRestartNum, ApplyPropsTo	references.noteOptions	registry		Footnote and Endnote
-dlg-097	wdDialogInsertFormField	483	Entry, Exit, Name, Enable, TextType, TextWidth, TextDefault, TextFormat, CheckSize, CheckWidth, CheckDefault, Type, OwnHelp, HelpText, OwnStat, StatText, Calculate	-	registry		legacy form fields
+dlg-097	wdDialogInsertFormField	483	Entry, Exit, Name, Enable, TextType, TextWidth, TextDefault, TextFormat, CheckSize, CheckWidth, CheckDefault, Type, OwnHelp, HelpText, OwnStat, StatText, Calculate	developer.formField	registry		Form Field (Developer › Legacy Tools): text, check box or drop-down form field, with Options…
 dlg-098	wdDialogInsertHyperlink	925	(none)	insert.link	registry		
 dlg-099	wdDialogInsertIndex	170	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	references.index	registry		
 dlg-100	wdDialogInsertIndexAndTables	473	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	references.index	registry		
