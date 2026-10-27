@@ -1,10 +1,10 @@
 id	word_dialog	word_value	word_arguments	command	check	status	note
 dlg-001	wdDialogBuildingBlockOrganizer	2067	(none)	insert.quickParts	registry		Quick Parts organizer
-dlg-002	wdDialogConnect	420	Drive, Path, Password	-	registry		network drive connect (legacy)
+dlg-002	wdDialogConnect	420	Drive, Path, Password	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Windows network drives; network drive connect (legacy)
 dlg-003	wdDialogConsistencyChecker	1121	(none)	-	registry		
 dlg-004	wdDialogContentControlProperties	2394	(none)	developer.properties	registry		Content Control Properties
-dlg-005	wdDialogControlRun	235	Application	-	registry		runs Control Panel or Clipboard (legacy)
-dlg-006	wdDialogConvertObject	392	IconNumber, ActivateAs, IconFileName, Caption, Class, DisplayIcon, Floating	-	registry		
+dlg-005	wdDialogControlRun	235	Application	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Windows Control Panel; runs Control Panel or Clipboard (legacy)
+dlg-006	wdDialogConvertObject	392	IconNumber, ActivateAs, IconFileName, Caption, Class, DisplayIcon, Floating	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): OLE objects are converted by their Windows server programs
 dlg-007	wdDialogCopyFile	300	FileName, Directory	-	registry		legacy
 dlg-008	wdDialogCreateAutoText	872	(none)	insert.autoText	registry		save selection as AutoText
 dlg-009	wdDialogCreateSource	1922	(none)	references.citation	registry		Create Source
@@ -14,21 +14,21 @@ dlg-012	wdDialogDocumentStatistics	78	FileName, Directory, Template, Title, Crea
 dlg-013	wdDialogDrawAlign	634	Horizontal, Vertical, RelativeTo	arrange.align	registry		
 dlg-014	wdDialogDrawSnapToGrid	633	SnapToGrid, XGrid, YGrid, XOrigin, YOrigin, SnapToShapes, XGridDisplay, YGridDisplay, FollowMargins, ViewGridLines, DefineLineBasedOnGrid	layout.drawingGrid	registry		Drawing Grid: grid spacing and gridlines on screen (no snapping settings)
 dlg-015	wdDialogEditAutoText	985	Name, Context, InsertAs, Insert, Add, Define, InsertAsText, Delete, CompleteAT	insert.autoText	registry		
-dlg-016	wdDialogEditCreatePublisher	732	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry		legacy (Mac publish/subscribe)
+dlg-016	wdDialogEditCreatePublisher	732	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Mac OS publish and subscribe (another platform); legacy (Mac publish/subscribe)
 dlg-017	wdDialogEditFind	112	Find, Replace, Direction, MatchCase, WholeWord, PatternMatch, SoundsLike, FindNext, ReplaceOne, ReplaceAll, Format, Wrap, FindAllWordForms, MatchByte, FuzzyFind, Destination, CorrectEnd, MatchKashida, MatchDiacritics, MatchAlefHamza, MatchControl	edit.find	registry		
 dlg-018	wdDialogEditFrame	458	Wrap, WidthRule, FixedWidth, HeightRule, FixedHeight, PositionHorz, PositionHorzRel, DistFromText, PositionVert, PositionVertRel, DistVertFromText, MoveWithText, LockAnchor, RemoveFrame	-	registry		frames
 dlg-019	wdDialogEditGoTo	896	Find, Replace, Direction, MatchCase, WholeWord, PatternMatch, SoundsLike, FindNext, ReplaceOne, ReplaceAll, Format, Wrap, FindAllWordForms, MatchByte, FuzzyFind, Destination, CorrectEnd, MatchKashida, MatchDiacritics, MatchAlefHamza, MatchControl	edit.goto	registry		
 dlg-020	wdDialogEditGoToOld	811	(none)	-	registry		legacy
 dlg-021	wdDialogEditLinks	124	UpdateMode, Locked, SavePictureInDoc, UpdateNow, OpenSource, KillLink, Link, Application, Item, FileName, PreserveFormatLinkUpdate	-	registry		Edit Links to Files
-dlg-022	wdDialogEditObject	125	Verb	-	registry		OLE edit
+dlg-022	wdDialogEditObject	125	Verb	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): OLE objects are edited by their Windows server programs; OLE edit
 dlg-023	wdDialogEditPasteSpecial	111	IconNumber, Link, DisplayIcon, Class, DataType, IconFileName, Caption, Floating	edit.pasteSpecial	registry		
-dlg-024	wdDialogEditPublishOptions	735	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry		legacy
+dlg-024	wdDialogEditPublishOptions	735	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Mac OS publish and subscribe (another platform); legacy
 dlg-025	wdDialogEditReplace	117	Find, Replace, Direction, MatchCase, WholeWord, PatternMatch, SoundsLike, FindNext, ReplaceOne, ReplaceAll, Format, Wrap, FindAllWordForms, MatchByte, FuzzyFind, Destination, CorrectEnd, MatchKashida, MatchDiacritics, MatchAlefHamza, MatchControl	edit.replace	registry		
 dlg-026	wdDialogEditStyle	120	(none)	styles.modify	registry		Modify Style
-dlg-027	wdDialogEditSubscribeOptions	736	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry		legacy
-dlg-028	wdDialogEditSubscribeTo	733	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry		legacy
+dlg-027	wdDialogEditSubscribeOptions	736	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Mac OS publish and subscribe (another platform); legacy
+dlg-028	wdDialogEditSubscribeTo	733	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Mac OS publish and subscribe (another platform); legacy
 dlg-029	wdDialogEditTOACategory	625	Category, CategoryName	references.toaCategory	registry		Edit Category (Mark Citation › Category…): categories 1–16 with Word's names, Replace with renames one (per user, as Word keeps them in Normal); Mark Citation files the citation under a category (TA \l \s \c), Insert Table of Authorities lists one or All categories under their names, with passim
-dlg-030	wdDialogEmailOptions	863	(none)	-	registry		
+dlg-030	wdDialogEmailOptions	863	(none)	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Outlook e-mail stationery and signatures (Microsoft service)
 dlg-031	wdDialogFileDocumentLayout	178	Tab, PaperSize, TopMargin, BottomMargin, LeftMargin, RightMargin, Gutter, PageWidth, PageHeight, Orientation, FirstPage, OtherPages, VertAlign, ApplyPropsTo, Default, FacingPages, HeaderDistance, FooterDistance, SectionStart, OddAndEvenPages, DifferentFirstPage, Endnotes, LineNum, StartingNum, FromText, CountBy, NumMode, TwoOnOne, GutterPosition, LayoutMode, CharsLine, LinesPage, CharPitch, LinePitch, DocFontName, DocFontSize, PageColumns, TextFlow, FirstPageOnLeft, SectionType, RTLAlignment	layout.pageSetup	registry		Page Setup › Layout
 dlg-032	wdDialogFileFind	99	SearchName, SearchPath, Name, SubDir, Title, Author, Keywords, Subject, Options, MatchCase, Text, PatternMatch, DateSavedFrom, DateSavedTo, SavedBy, DateCreatedFrom, DateCreatedTo, View, SortBy, ListBy, SelectedFile, Add, Delete, ShowFolders, MatchByte	-	registry		legacy
 dlg-033	wdDialogFileMacCustomPageSetupGX	737	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.		excluded		Word for Mac only
@@ -40,7 +40,7 @@ dlg-038	wdDialogFilePageSetup	178	Tab, PaperSize, TopMargin, BottomMargin, LeftM
 dlg-039	wdDialogFilePrint	88	Background, AppendPrFile, Range, PrToFileName, From, To, Type, NumCopies, Pages, Order, PrintToFile, Collate, FileName, Printer, OutputPrinter, DuplexPrint, PrintZoomColumn, PrintZoomRow, PrintZoomPaperWidth, PrintZoomPaperHeight, ZoomPaper	file.print	registry		
 dlg-040	wdDialogFilePrintOneCopy	445	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry		
 dlg-041	wdDialogFilePrintSetup	97	Printer, Options, Network, DoNotSetAsSysDefault	-	registry		printer setup
-dlg-042	wdDialogFileRoutingSlip	624	Subject, Message, AllAtOnce, ReturnWhenDone, TrackStatus, Protect, AddSlip, RouteDocument, AddRecipient, OldRecipient, ResetSlip, ClearSlip, ClearRecipients, Address	-	registry		legacy
+dlg-042	wdDialogFileRoutingSlip	624	Subject, Message, AllAtOnce, ReturnWhenDone, TrackStatus, Protect, AddSlip, RouteDocument, AddRecipient, OldRecipient, ResetSlip, ClearSlip, ClearRecipients, Address	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Exchange/MAPI routing slips (Microsoft service); legacy
 dlg-043	wdDialogFileSaveAs	84	Name, Format, LockAnnot, Password, AddToMru, WritePassword, RecommendReadOnly, EmbedFonts, NativePictureFormat, FormsData, SaveAsAOCELetter, WriteVersion, VersionDesc, InsertLineBreaks, AllowSubstitutions, LineEnding, AddBiDiMarks	file.saveAs	registry		
 dlg-044	wdDialogFileSaveVersion	1007	(none)	file.versions	registry		Save Version: File › Info › Version History saves the document as a named version (`file.versions` {"save": label}); Word 2002–2003's versions feature
 dlg-045	wdDialogFileSummaryInfo	86	Title, Subject, Author, Keywords, Comments, FileName, Directory, Template, CreateDate, LastSavedDate, LastSavedBy, RevisionNumber, EditTime, LastPrintedDate, NumPages, NumWords, NumChars, NumParas, NumLines, Update, FileSize	file.properties	registry		Properties
@@ -82,7 +82,7 @@ dlg-080	wdDialogHelpAbout	9	APPNAME, APPCOPYRIGHT, APPUSERNAME, APPORGANIZATION,
 dlg-081	wdDialogHelpWordPerfectHelp	10	WPCommand, HelpText, DemoGuidance	-	registry		legacy
 dlg-082	wdDialogHelpWordPerfectHelpOptions	511	CommandKeyHelp, DocNavKeys, MouseSimulation, DemoGuidance, DemoSpeed, HelpType	-	registry		legacy
 dlg-083	wdDialogHorizontalInVertical	1160	(none)	-	registry		
-dlg-084	wdDialogIMESetDefault	1094	(none)	-	registry		
+dlg-084	wdDialogIMESetDefault	1094	(none)	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): the Windows IME
 dlg-085	wdDialogInsertAddCaption	402	Name	references.caption	registry		Caption › New Label
 dlg-086	wdDialogInsertAutoCaption	359	Clear, ClearAll, Object, Label, Position	references.autoCaption	registry		Caption › AutoCaption…: tables and pictures (Word lists tables and OLE objects), label, above or below
 dlg-087	wdDialogInsertBookmark	168	Name, SortBy, Add, Delete, Goto, Hidden	insert.bookmark	registry		
@@ -111,7 +111,7 @@ dlg-109	wdDialogInsertSymbol	162	Font, Tab, CharNum, CharNumLow, Unicode, Hint	i
 dlg-110	wdDialogInsertTableOfAuthorities	471	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	references.tableOfAuthorities	registry		
 dlg-111	wdDialogInsertTableOfContents	171	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	references.customToc	registry		Custom Table of Contents (dialogs_refs.rs)
 dlg-112	wdDialogInsertTableOfFigures	472	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	references.tableOfFigures	registry		
-dlg-113	wdDialogInsertWebComponent	1324	IconNumber, FileName, Link, DisplayIcon, Tab, Class, IconFileName, Caption, Floating	-	registry		legacy
+dlg-113	wdDialogInsertWebComponent	1324	IconNumber, FileName, Link, DisplayIcon, Tab, Class, IconFileName, Caption, Floating	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Office Web Components (Microsoft ActiveX); legacy
 dlg-114	wdDialogLabelOptions	1367	(none)	mailings.labels	registry		
 dlg-115	wdDialogLetterWizard	821	SenderCity, DateFormat, IncludeHeaderFooter, LetterStyle, Letterhead, LetterheadLocation, LetterheadSize, RecipientName, RecipientAddress, Salutation, SalutationType, RecipientGender, RecipientReference, MailingInstructions, AttentionLine, LetterSubject, CCList, SenderName, ReturnAddress, Closing, SenderJobTitle, SenderCompany, SenderInitials, EnclosureNumber, PageDesign, InfoBlock, SenderGender, ReturnAddressSF, RecipientCode, SenderCode, SenderReference	-	registry		legacy
 dlg-116	wdDialogListCommands	723	ListType	tools.listCommands	registry		List Commands: current keyboard settings or all commands, into a new document

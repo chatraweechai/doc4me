@@ -437,6 +437,17 @@ fn requested_line(family: &str) -> Option<(f64, f64)> {
         // 1.136 em; Source Serif 4 is 1.371), every style alike.
         "verdana" => Some((2059.0 / 2048.0, 430.0 / 2048.0)),
         "georgia" => Some((1878.0 / 2048.0, 449.0 / 2048.0)),
+        // Fonts Word's lists and check boxes draw with, as embedded in Word's own PDFs (OS/2 win
+        // ascent / descent; their hhea values are the same and have no line gap). Symbol's bullet
+        // is taller than Calibri's or Arial's ascent, so a bulleted line is taller in Word: 20.4 pt
+        // against 19.65 for 14 pt Calibri at 1.15 lines (zenodo-052).
+        "symbol" => Some((2059.0 / 2048.0, 450.0 / 2048.0)),
+        "wingdings" => Some((1841.0 / 2048.0, 432.0 / 2048.0)),
+        "wingdings 2" => Some((1727.0 / 2048.0, 432.0 / 2048.0)),
+        "segoe ui" | "segoe ui symbol" | "segoe ui emoji" | "segoe ui semibold" | "segoe ui light" | "segoe ui semilight" | "segoe ui black" => {
+            Some((2210.0 / 2048.0, 514.0 / 2048.0))
+        }
+        "ms gothic" | "ms pgothic" => Some((220.0 / 256.0, 36.0 / 256.0)),
         // Every Aptos family (Display, Narrow, Serif, Mono, each weight): hhea 1923 / 577.
         f if is_aptos(f) => Some((1923.0 / 2048.0, 577.0 / 2048.0)),
         _ => None,
@@ -609,6 +620,21 @@ mod tests {
         assert_eq!(face_name("Arial Black"), None);
         assert_eq!(face_name("Bold"), None);
         assert_eq!(face_name("Bembo Regular"), Some(("Bembo", false, false)));
+    }
+
+    /// Symbol and Wingdings keep Word's line when drawn with a substitute: a Symbol bullet makes
+    /// a Calibri line taller, as in Word (win ascent 2059 / 2048 against Calibri's 1950).
+    #[test]
+    fn list_symbol_fonts_keep_their_line() {
+        let face = crate::FontDb::global().face(crate::FALLBACK_FAMILY, "Regular");
+        let em = |f: &str| {
+            let (a, d) = single_line(f, &face, true, 1.0);
+            ((a * 10000.0).round() / 10000.0, (d * 10000.0).round() / 10000.0)
+        };
+        assert_eq!(em("Symbol"), (1.0054, 0.2197));
+        assert_eq!(em("Wingdings"), (0.8989, 0.2109));
+        assert_eq!(em("Segoe UI Symbol"), (1.0791, 0.251));
+        assert_eq!(em("MS Gothic"), (0.8594, 0.1406));
     }
 
     #[test]

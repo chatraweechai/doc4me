@@ -2,7 +2,7 @@
 
 The measured readiness number comes from these files, not from estimates. `cargo xtask readiness`
 reads them, runs what can be run, and writes [`../readiness.md`](../readiness.md). The plan that
-uses the number is in [`../roadmap.md`](../roadmap.md#path-to-95-measured-readiness).
+uses the number is in [`../roadmap.md`](../roadmap.md#path-to-100-measured-readiness).
 
 ## Rules
 
@@ -37,6 +37,16 @@ uses the number is in [`../roadmap.md`](../roadmap.md#path-to-95-measured-readin
 
 - Lists are fixed: rows may be added, and a status may change with evidence, but rows are never
   removed to move the number. A row out of scope stays with `check` = `excluded` and the reason.
+- A row whose check can't be made or met in a development session waits with `status` =
+  `deferred` until the owner asks for it (owner's rule of 2026-10-27): checks only the owner's own
+  hardware or Windows PC can make (a printer, pen, microphone, scanner, several monitors, a
+  numeric keypad, Windows' input methods), builds the owner hasn't asked for (Windows arm64 and the
+  other platforms, 2026-10-26), and Word's dialogs for Microsoft services, Windows components or
+  another platform (Outlook, Exchange, OLE servers, ActiveX, Mac OS publish and subscribe). Its
+  note or evidence says why and what it was before. A deferred row counts as not passing in the
+  measured number; `readiness.md` also gives the number without the deferred rows (each check
+  set's pass rate over its rows that aren't deferred), the target for the work that isn't waiting
+  on the owner. Both targets are 100%.
 - The number counts as final once the corpus checks have run on at least 200 documents.
 
 ## Files

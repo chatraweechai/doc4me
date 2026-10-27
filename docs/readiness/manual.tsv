@@ -5,7 +5,7 @@ stab-003	stability	No open freeze report (WordCraft #77, #59 Thai fonts, #31 fon
 stab-004	stability	Saving works without administrator rights on Windows 11 (WordCraft #218)	pass	2026-10-26	Session check `cargo xtask window save` as uid 30033, a non-root user who cannot write to the app folder (owner rule 2026-10-26): Thai and English typed, Save As then Ctrl+S into ~/Documents, the saved file matched the window
 stab-005	stability	Every command with junk parameters returns an error, never a panic (hostile_params_never_panic)	pass	2026-10-25	cargo test --workspace: 1,813 passed
 plat-001	platforms	Windows x64: CI builds the MSI and portable zip, and the build starts (doc4me-cli --version)	pass	2026-10-25	Actions run 40191882219
-plat-002	platforms	Windows arm64: a packaged build	fail	2026-10-26	Actions runs 40282854563 (1fece99) and 40296576868 (ccfd919): the arm64 build fails in whisper.cpp (ggml needs clang for ARM); work on it is paused by the owner (2026-10-26) until asked
+plat-002	platforms	Windows arm64: a packaged build	deferred	2026-10-27	deferred 2026-10-27 (owner: skip until asked): a Windows arm64 build waits on the owner (2026-10-26); was fail: Actions runs 40282854563 (1fece99) and 40296576868 (ccfd919): the arm64 build fails in whisper.cpp (ggml needs clang for ARM); work on it is paused by the owner (2026-10-26) until asked
 plat-003	platforms	macOS: a packaged build (packaging/macos/package.sh)	pass	2026-10-26	Actions run 40282854563 (workflow "Windows arm64 and macOS builds", job macos, commit 1fece99): packaging/macos/package.sh --arch universal built the DMG and CLI zip (ad-hoc signed) and ran doc4me-cli --version
 plat-004	platforms	Linux x64: a packaged build (packaging/linux)	pass	2026-10-25	packaging/linux/package.sh --formats tar built doc4me-1.1.1-linux-x86_64.tar.gz (Ubuntu 24.04 x86_64); extracted, doc4me --version 1.1.1, and the window opened govuk-001.docx (29 pages) under Xvfb; needs libxkbcommon-x11 on X11 (now in the deb/rpm recommends)
 plat-005	platforms	Web: the wasm build loads in a browser and opens a document	pass	2026-10-25	trunk 0.22.0 `trunk build --release` (apps/doc4me-web, wasm 51 MB) served over http://127.0.0.1; Playwright Chromium (WebGL2, SwiftShader) started it in 0.8 s, Ctrl+O file chooser opened govuk-001.docx: title govuk-001, status bar Page 1 of 29, 6396 words
@@ -13,13 +13,13 @@ eco-001	ecosystem	Macros: record and play commands (Doc4Me's replacement for VBA
 eco-002	ecosystem	Add-ins: install and remove from Doc4Me's own catalog (replacement for Office add-ins)	pass	2026-10-25	addins.get, crates/ui-egui/src/get_addins.rs tests
 eco-003	ecosystem	Cloud storage: open and save in place in a folder kept in sync by Nextcloud Desktop or Syncthing	untested	2026-10-25	not tried
 eco-004	ecosystem	Reference manager: Zotero cite while you write	pass	2026-10-25	doc4me-cli zotero, crates/zotero tests
-eco-005	ecosystem	Reference manager: Mendeley Cite	fail	2026-10-25	no plugin
+eco-005	ecosystem	Reference manager: Mendeley Cite	deferred	2026-10-27	deferred 2026-10-27 (owner: skip until asked): Mendeley Cite is a Microsoft Office add-in (Microsoft ecosystem); was fail: no plugin
 eco-006	ecosystem	Agents drive the editor through MCP and the CLI	pass	2026-10-25	docs/mcp.md, crates/mcp tests
-hw-001	hardware	Printing through the system's print dialog: printer, copies, two-sided	fail	2026-10-25	File › Print opens the PDF in the system viewer (gap #6)
+hw-001	hardware	Printing through the system's print dialog: printer, copies, two-sided	deferred	2026-10-27	deferred 2026-10-27 (owner: skip until asked): needs a real printer on the owner's computer; was fail: File › Print opens the PDF in the system viewer (gap #6)
 hw-002	hardware	GPU rendering, HiDPI and crisp text	pass	2026-10-25	docs/hardware-parity.md
-hw-003	hardware	Several monitors with different DPI on Windows	untested	2026-10-25	winit DPI fix pending (WordCraft #155)
-hw-004	hardware	Pen: ink with pressure	fail	2026-10-25	no pressure (gap #12)
-hw-005	hardware	Microphone: Dictate on Windows with a real microphone	untested	2026-10-25	tested with synthetic speech only
+hw-003	hardware	Several monitors with different DPI on Windows	deferred	2026-10-27	deferred 2026-10-27 (owner: skip until asked): needs several monitors on the owner's Windows PC; was untested: winit DPI fix pending (WordCraft #155)
+hw-004	hardware	Pen: ink with pressure	deferred	2026-10-27	deferred 2026-10-27 (owner: skip until asked): needs a pen with pressure on the owner's computer; was fail: no pressure (gap #12)
+hw-005	hardware	Microphone: Dictate on Windows with a real microphone	deferred	2026-10-27	deferred 2026-10-27 (owner: skip until asked): needs a microphone on the owner's Windows PC; was untested: tested with synthetic speech only
 hw-006	hardware	Speakers: Read Aloud	pass	2026-10-25	review.readAloud (#190)
-hw-007	hardware	Scanner or camera: insert a picture from a device	fail	2026-10-25	not available
+hw-007	hardware	Scanner or camera: insert a picture from a device	deferred	2026-10-27	deferred 2026-10-27 (owner: skip until asked): needs a scanner or camera on the owner's computer; was fail: not available
 hw-008	hardware	Touch: scroll, zoom and select with fingers on Windows	pass	2026-10-26	Session check `cargo xtask window touch` (owner rule 2026-10-26): one-finger pan scrolled the page, two-finger pinch zoomed (scale 1.33 → 6.67) and a tap placed the caret, through egui touch events as winit delivers them

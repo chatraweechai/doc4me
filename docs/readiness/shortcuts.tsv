@@ -162,7 +162,7 @@ ks-160	Insert special characters	Insert a line break.	Shift+Enter	Shift+Enter	te
 ks-161	Insert special characters	Insert a page break.	Ctrl+Enter	Mod+Enter	text.pageBreak	registry		
 ks-162	Insert special characters	Insert a column break.	Ctrl+Shift+Enter	Mod+Shift+Enter	text.columnBreak	registry		
 ks-163	Insert special characters	Insert an em dash (—).	Ctrl+Alt+Minus sign (on the numeric keypad)	Mod+Alt+-	text.emDash	registry		
-ks-164	Insert special characters	Insert an en dash (–).	Ctrl+Minus sign (on the numeric keypad)	Mod+-	-	registry		Mod+- is Optional Hyphen in Doc4Me (as classic Word); no such command in Doc4Me
+ks-164	Insert special characters	Insert an en dash (–).	Ctrl+Minus sign (on the numeric keypad)	Mod+-	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): a numeric keypad on the owner's Windows PC; Mod+- is Optional Hyphen in Doc4Me (as classic Word); no such command in Doc4Me
 ks-165	Insert special characters	Insert an optional hyphen.	Ctrl+Alt+Minus sign (-)	Mod+Alt+-	text.optionalHyphen	registry		published as Ctrl+Alt+Minus; Doc4Me uses Mod+- — verify on Word for Windows
 ks-166	Insert special characters	Insert a nonbreaking hyphen.	Shift+Alt+Minus sign(-)	Alt+Shift+-	text.nbHyphen	registry		published as Shift+Alt+Minus; Doc4Me uses Mod+Shift+- — verify on Word for Windows
 ks-167	Insert special characters	Insert a nonbreaking space.	Ctrl+Shift+Spacebar	Mod+Shift+Space	text.nbsp	registry		
@@ -171,7 +171,7 @@ ks-169	Insert special characters	Insert a registered trademark symbol (®).	Ctrl
 ks-170	Insert special characters	Insert a trademark symbol (™).	Ctrl+Alt+T	Mod+Alt+T	text.trademark	registry		
 ks-171	Insert special characters	Insert an ellipsis (…)	Ctrl+Alt+Period (.)	Mod+Alt+.	text.ellipsis	registry		
 ks-172	Insert special characters	Insert the Unicode character for the specified Unicode (hexadecimal) character code. For example, to insert the euro currency symbol ( ), type 20AC, and then hold down Alt and press X. Tip: To find out the Unicode character code for a selected character, press Alt+X.	The character code, then press Alt+X	Alt+X	text.toggleUnicode	registry		
-ks-173	Insert special characters	Insert the ANSI character for the specified ANSI (decimal) character code. For example, to insert the euro currency symbol, hold down Alt and press 0128 on the numeric keypad.	Alt+the character code (on the numeric keypad)	Alt+numpad	-	manual	untested	Windows turns Alt+numpad codes into typed text
+ks-173	Insert special characters	Insert the ANSI character for the specified ANSI (decimal) character code. For example, to insert the euro currency symbol, hold down Alt and press 0128 on the numeric keypad.	Alt+the character code (on the numeric keypad)	Alt+numpad	-	manual	deferred	deferred 2026-10-27 (owner: skip until asked): Windows' Alt+numeric keypad input on the owner's PC; Windows turns Alt+numpad codes into typed text
 ks-174	Work with web content	Insert a hyperlink.	Ctrl+K	Mod+K	insert.link	registry		
 ks-175	Work with web content	Go back one page.	Alt+Left arrow key	Alt+Left	web.back	registry		Back through followed hyperlinks (engine test hyperlinks_back_and_forward); Alt+Left stays Word Left on a Mac
 ks-176	Work with web content	Go forward one page.	Alt+Right arrow key	Alt+Right	web.forward	registry		Forward through followed hyperlinks (engine test hyperlinks_back_and_forward)
@@ -191,7 +191,7 @@ ks-189	Select table content	Select the content in the previous cell.	Shift+Tab		
 ks-190	Select table content	Extend a selection to adjacent cells.	Shift+Arrow keys	Shift+Arrows	-	manual	pass	engine test shift_alt_keys_select_table_rows_and_columns: Shift+Right and Shift+Down from a cell reach the next cells
 ks-191	Select table content	Select a column.	Select the top or bottom cell of the column, and then press Shift+ Page up or Page down arrow key	Shift+Alt+PageDown|Shift+Alt+PageUp	-	manual	pass	UI test shift_alt_end_and_page_down_select_a_row_and_a_column (Shift+Alt+Page Down selects to the bottom of the column, as Word); Shift+Down extends cell by cell (engine test shift_alt_keys_select_table_rows_and_columns)
 ks-192	Select table content	Select a row.	Select the first or last cell in the row, and then press Shift+Alt+End or Home.	Shift+Alt+End|Shift+Alt+Home	-	manual	pass	UI test shift_alt_end_and_page_down_select_a_row_and_a_column: Shift+Alt+End selects to the end of the row
-ks-193	Select table content	Select the whole table.	Alt+5 on the numeric keypad, with Num Lock switched off	Alt+numpad 5	-	manual	fail	
+ks-193	Select table content	Select the whole table.	Alt+5 on the numeric keypad, with Num Lock switched off	Alt+numpad 5	-	manual	deferred	deferred 2026-10-27 (owner: skip until asked): a numeric keypad with Num Lock off on the owner's Windows PC
 ks-194	Insert paragraphs and tab characters in a table	Insert a new paragraph in a cell.	Enter	Enter	text.newParagraph	registry		
 ks-195	Insert paragraphs and tab characters in a table	Insert a tab character in a cell.	Ctrl+Tab	Mod+Tab	text.tabCharacter	registry		text.tabCharacter
 ks-196	Review a document	Open the Review tab.	Alt, R			duplicate	ks-035	same shortcut and action as ks-035
@@ -243,9 +243,9 @@ ks-241	Insert international characters	ø, Ø	Ctrl+Forward slash (/), o or O	dea
 ks-242	Insert international characters	¿	Ctrl+Alt+Shift+Question mark (?)	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
 ks-243	Insert international characters	¡	Ctrl+Alt+Shift+Exclamation point (!)	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
 ks-244	Insert international characters	ß	Ctrl+Shift+Ampersand (&), s	dead key	-	manual	pass	keys.rs test ctrl_accent_keys_compose_like_word
-ks-245	Use Input Method Editors for East Asian languages	Switch to the Japanese Input Method Editor (IME) for a 101-key keyboard, if available.	Alt+Back quote (`)	Alt+`	-	manual	untested	system input method
-ks-246	Use Input Method Editors for East Asian languages	Switch to the Korean Input Method Editor (IME) for a 101-key keyboard, if available.	Right Alt	Right Alt	-	manual	untested	system input method
-ks-247	Use Input Method Editors for East Asian languages	Switch to the Chinese Input Method Editor (IME) for a 101-key keyboard, if available.	Ctrl+Spacebar	Mod+Space	-	manual	untested	system input method
+ks-245	Use Input Method Editors for East Asian languages	Switch to the Japanese Input Method Editor (IME) for a 101-key keyboard, if available.	Alt+Back quote (`)	Alt+`	-	manual	deferred	deferred 2026-10-27 (owner: skip until asked): the Japanese IME on Windows; system input method
+ks-246	Use Input Method Editors for East Asian languages	Switch to the Korean Input Method Editor (IME) for a 101-key keyboard, if available.	Right Alt	Right Alt	-	manual	deferred	deferred 2026-10-27 (owner: skip until asked): the Korean IME on Windows; system input method
+ks-247	Use Input Method Editors for East Asian languages	Switch to the Chinese Input Method Editor (IME) for a 101-key keyboard, if available.	Ctrl+Spacebar	Mod+Space	-	manual	deferred	deferred 2026-10-27 (owner: skip until asked): the Chinese IME on Windows; system input method
 ks-248	Switch the document view	Switch to the Read Mode view.	Alt+W, F	Alt,W,F	-	manual	pass	keytips.rs test word_keytips_reach_object_smartart_wordart_and_read_mode
 ks-249	Switch the document view	Switch to the Print Layout view.	Ctrl+Alt+P	Mod+Alt+P	view.printLayout	registry		
 ks-250	Switch the document view	Switch to the Outline view.	Ctrl+Alt+O	Mod+Alt+O	view.outline	registry		
@@ -258,7 +258,7 @@ ks-256	Outline a document	Move the selected paragraphs down.	Alt+Shift+Down arro
 ks-257	Outline a document	Expand the text under a heading.	Alt+Shift+Plus sign (+)	Alt+Shift+=	outline.expand	registry		
 ks-258	Outline a document	Collapse the text under a heading.	Alt+Shift+Plus sign (+)	Alt+Shift+=	outline.collapse	registry		published as Alt+Shift+Plus (same as Expand); Doc4Me collapses with Alt+Shift+-
 ks-259	Outline a document	Expand or collapse all text or headings.	Alt+Shift+A	Alt+Shift+A	outline.showAll	registry		
-ks-260	Outline a document	Hide or display the character formatting.	Forward slash (/) (on the numeric keypad)	numpad /	-	manual	fail	
+ks-260	Outline a document	Hide or display the character formatting.	Forward slash (/) (on the numeric keypad)	numpad /	-	manual	deferred	deferred 2026-10-27 (owner: skip until asked): a numeric keypad on the owner's Windows PC
 ks-261	Outline a document	Switch between showing the first line of body text and showing all body text.	Alt+Shift+L	Alt+Shift+L	outline.firstLineOnly	registry		outline.firstLineOnly
 ks-262	Outline a document	Show all headings with the Heading 1 style.	Alt+Shift+1	Alt+Shift+1	outline.showLevel1	registry		
 ks-263	Outline a document	Show all headings with the specified heading level.	Alt+Shift+Heading level number	Alt+Shift+2	outline.showLevel2	registry		

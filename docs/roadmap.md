@@ -111,7 +111,10 @@ microphone, scanner, touch and multi-monitor rows; the platform rows also need t
 Linux and macOS builds, which wait on the owner's go-ahead (2026-10-26). 100% further needs every
 corpus document to paginate exactly as Word does, an interface catalog for each of the 95 languages
 Microsoft 365 offers, and every Word dialog and shortcut in the lists, including the ones tied to
-Microsoft services (owner rule: out of scope), so those rows decide how close the number can get. The work: real-world DOCX failures (gap #1), pagination
+Microsoft services (owner rule: out of scope), so those rows decide how close the number can get.
+Those rows wait as `deferred` until the owner asks for them (owner, 2026-10-27), and
+[`readiness.md`](readiness.md) reports a second number beside the measured one: readiness without
+the deferred rows, also aimed at 100% ([rules](readiness/README.md)). The work: real-world DOCX failures (gap #1), pagination
 (gap #4), crashes and hangs on Windows (gap #3), Word ink round trip (gap #2), native printing
 (gap #6), missing dialogs and options (gap #7) and shortcuts (gap #24), editing Word's charts and
 SmartArt (gap #13), and the alpha gate re-run on Windows.
