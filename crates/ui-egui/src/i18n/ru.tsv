@@ -2917,3 +2917,7 @@ spacing	Normal	Обычный
 	Text Form Field Options	Параметры текстового поля формы
 	Type your own:	Введите свой текст:
 	Unlimited	Без ограничений
+	Protected sections:	Защищенные разделы:
+	Section Protection	Защита разделов
+	Section {n}	Раздел {n}
+	Select sections…	Выбрать разделы…

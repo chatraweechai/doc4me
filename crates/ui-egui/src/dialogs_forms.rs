@@ -171,6 +171,11 @@ pub enum FormDialog {
         form: HelpForm,
         back: Option<Box<OptionsForm>>,
     },
+    /// Section Protection (Restrict Editing › Filling in forms › Select sections…): which
+    /// sections stay protected.
+    Sections {
+        protected: Vec<bool>,
+    },
 }
 
 impl FormDialog {
@@ -179,6 +184,7 @@ impl FormDialog {
             FormDialog::Insert { .. } => "insertFormField",
             FormDialog::Options { .. } => "formFieldOptions",
             FormDialog::Help { .. } => "formFieldHelp",
+            FormDialog::Sections { .. } => "sectionProtection",
         }
     }
 
@@ -192,6 +198,7 @@ impl FormDialog {
                 _ => "Drop-Down Form Field Options",
             },
             FormDialog::Help { .. } => "Form Field Help Text",
+            FormDialog::Sections { .. } => "Section Protection",
         }
     }
 }
@@ -201,6 +208,11 @@ impl FormDialog {
 pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
     match name {
         "insertFormField" => Some(FormDialog::Insert { kind: "text".into() }),
+        "sectionProtection" => {
+            let v = app.session.run("review.protectSections", &json!({})).ok()?;
+            let protected = v["sections"].as_array().map(|a| a.iter().map(|b| b.as_bool().unwrap_or(true)).collect()).unwrap_or_default();
+            Some(FormDialog::Sections { protected })
+        }
         "formFieldOptions" | "formFieldHelp" => {
             let Some(form) = OptionsForm::read(app, None) else {
                 app.status(tl!("Put the caret on a form field first."));
@@ -219,6 +231,25 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
 /// Draws the dialog; returns true to close it.
 pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
     match d {
+        FormDialog::Sections { protected } => {
+            ui.label(tl!("Protected sections:"));
+            egui::Frame::group(ui.style()).show(ui, |ui| {
+                ui.set_min_width(240.0);
+                egui::ScrollArea::vertical().id_salt("section_protection").max_height(220.0).show(ui, |ui| {
+                    for (i, on) in protected.iter_mut().enumerate() {
+                        ui.checkbox(on, crate::i18n::fmt(tl!("Section {n}"), &[("n", &(i + 1).to_string())]));
+                    }
+                });
+            });
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok {
+                match app.run("review.protectSections", json!({"protected": protected})) {
+                    Ok(_) => return true,
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
         FormDialog::Insert { kind } => {
             ui.label(tl!("Type:"));
             for (k, label) in [("text", "Text"), ("checkBox", "Check box"), ("dropDown", "Drop-down")] {
@@ -531,6 +562,22 @@ mod tests {
         h.run_steps(2);
         assert!(h.state().dialog.is_none());
         assert_eq!(info(&mut h, "Dropdown1")["help"]["text"], "Small fits a pocket");
+    }
+
+    #[test]
+    fn section_protection_dialog() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("One")), Services::default()));
+        h.state_mut().session.run("caret.docEnd", &json!({})).unwrap();
+        h.state_mut().run("layout.break", json!({"kind": "nextPage"})).unwrap();
+        h.state_mut().run("review.protectSections", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Sections { protected } if protected == &vec![true, true]));
+        h.get_by_label("Section 2").click();
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(2);
+        assert!(h.state().dialog.is_none());
+        assert_eq!(h.state_mut().session.run("review.protectSections", &json!({})).unwrap()["sections"], json!([true, false]));
     }
 
     #[test]

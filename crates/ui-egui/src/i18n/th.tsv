@@ -2898,3 +2898,7 @@ spacing	Normal	ปกติ
 	Text Form Field Options	ตัวเลือกเขตข้อมูลแบบฟอร์มข้อความ
 	Type your own:	พิมพ์ข้อความเอง:
 	Unlimited	ไม่จำกัด
+	Protected sections:	ส่วนที่ป้องกัน:
+	Section Protection	การป้องกันส่วน
+	Section {n}	ส่วนที่ {n}
+	Select sections…	เลือกส่วน…

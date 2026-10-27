@@ -2890,3 +2890,7 @@ spacing	Normal	Normál
 	Text Form Field Options	Szöveges űrlapmező beállításai
 	Type your own:	Saját szöveg beírása:
 	Unlimited	Korlátlan
+	Protected sections:	Védett szakaszok:
+	Section Protection	Szakaszvédelem
+	Section {n}	{n}. szakasz
+	Select sections…	Szakaszok kiválasztása…

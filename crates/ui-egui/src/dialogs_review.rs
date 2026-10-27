@@ -851,6 +851,10 @@ fn setup_ui(app: &mut WordApp, ui: &mut Ui, st: &mut RestrictPane) {
             }
         }
     }
+    // Filling in forms in a document of several sections: which of them stay protected.
+    if st.editing && mode == "forms" && app.session.doc.sections().len() > 1 && ui.small_button(tl!("Select sections…")).clicked() {
+        crate::widgets::run_from_ribbon(app, "review.protectSections", json!({}));
+    }
     heading(ui, "3. Start enforcement");
     let ready = st.formatting || st.editing;
     if !st.asking {

@@ -9,7 +9,8 @@
 //!
 //! Filling in forms: only the form's fields change — legacy form fields' values (through
 //! `developer.formFieldValue`) and the content of content controls that can be edited (typing,
-//! deleting, pasting, ticking, choosing); everything else stays as it is.
+//! deleting, pasting, ticking, choosing) — and the sections left unprotected (Select sections…,
+//! `review.protectSections`), which edit as usual; everything else stays as it is.
 
 use doc4me_doc::para::{InlineObject, OBJ};
 use doc4me_doc::props::CharProps;
@@ -26,7 +27,55 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("review.restrict", "Restrict Editing", "Review › Protect", restrict).params(
             r#"{"mode"?: "none|readOnly|comments|trackedChanges|forms" (start enforcing; "none" stops), "formatting"?: bool (limit formatting to unlocked styles), "lockedStyles"?: [style id or name] (the styles that can't be applied; every other style is unlocked), "password"?: string (set when enforcing; required to stop a password-protected document), "stop"?: bool, "exception"?: "add" (the selection stays editable for everyone) | "remove" (exceptions touching the selection) | "removeAll"} → state"#,
         ),
+        CommandSpec::new("review.protectSections", "Section Protection", "Review › Protect", protect_sections).params(
+            r#"{"protected"?: [bool] (one per section, in order: protected when the document is protected for filling in forms)} → {"sections": [bool]}"#,
+        ),
     ]
+}
+
+/// Which body sections stay protected for filling in forms; with `protected`, sets them first
+/// (not while protection is on).
+fn protect_sections(s: &mut Session, v: &Value) -> CmdResult {
+    if let Some(list) = v.get("protected") {
+        let Some(list) = list.as_array().filter(|l| l.iter().all(Value::is_boolean)) else {
+            return Err(CmdError::Params("`protected` is a list of true/false, one per section".into()));
+        };
+        if enforced(&s.doc) {
+            return Err(CmdError::Disabled("stop protection before changing which sections are protected".into()));
+        }
+        let ends: Vec<usize> = s.doc.sections().iter().map(|(end, _)| *end).collect();
+        if list.len() != ends.len() {
+            return Err(CmdError::Params(format!("the document has {} sections", ends.len())));
+        }
+        for (end, on) in ends.into_iter().zip(list) {
+            s.doc.section_mut(end).form_unprotected = !on.as_bool().unwrap_or(true);
+        }
+    }
+    Ok(json!({"sections": s.doc.sections().iter().map(|(_, sp)| !sp.form_unprotected).collect::<Vec<_>>()}))
+}
+
+/// Body blocks in sections left unprotected for filling in forms (empty unless some are).
+fn unprotected_blocks(doc: &Document) -> Vec<bool> {
+    let secs = doc.sections();
+    if !secs.iter().any(|(_, sp)| sp.form_unprotected) {
+        return Vec::new();
+    }
+    let mut out = Vec::with_capacity(doc.body.len());
+    let mut i = 0;
+    for b in 0..doc.body.len() {
+        while secs.get(i).is_some_and(|(end, _)| b > *end) {
+            i += 1;
+        }
+        out.push(secs.get(i).is_some_and(|(_, sp)| sp.form_unprotected));
+    }
+    out
+}
+
+/// Is all of the selection in body sections left unprotected for filling in forms?
+fn in_unprotected_section(s: &Session) -> bool {
+    let (a, b) = s.sel.ordered();
+    let open = unprotected_blocks(&s.doc);
+    [a, b].iter().all(|p| p.story == StoryRef::Body && p.path.0.first().is_some_and(|i| open.get(*i as usize) == Some(&true)))
 }
 
 /// The protection state, as `review.restrict` returns it and the Restrict Editing pane shows it.
@@ -232,6 +281,13 @@ pub(crate) fn check_before(s: &Session, id: &str, params: &Value) -> Result<bool
     match mode {
         "readOnly" if exceptions() => Ok(true),
         "forms" if fills_form => Ok(true),
+        // An unprotected section edits as usual (checked afterwards to have changed only there).
+        "forms"
+            if ["text.", "edit.", "format.", "para.", "insert.", "table.", "list.", "picture."].iter().any(|p| id.starts_with(p))
+                && in_unprotected_section(s) =>
+        {
+            Ok(true)
+        }
         "forms" => Err(CmdError::Disabled(format!("{id}: only the form's fields can be filled in"))),
         "readOnly" => Err(CmdError::Disabled(format!("{id}: the document is protected (read only)"))),
         "comments" if comment_ok => Ok(false),
@@ -289,6 +345,7 @@ enum Piece {
 fn outside(doc: &Document, author: &str) -> Vec<Piece> {
     let editable: Vec<u32> = doc.perm_ranges().iter().filter(|r| editable_by(r, author)).map(|r| r.id).collect();
     let forms = doc.settings.protection.as_deref() == Some("forms");
+    let open_blocks = if forms { unprotected_blocks(doc) } else { Vec::new() };
     let mut out = Vec::new();
     let stories = std::iter::once(StoryRef::Body).chain(doc.parts.keys().map(|k| StoryRef::Part(*k)));
     for story in stories {
@@ -297,6 +354,10 @@ fn outside(doc: &Document, author: &str) -> Vec<Piece> {
         // permission range would be, under ids no range has.
         let mut controls = 0u32;
         for path in doc.para_paths(story) {
+            // A section left unprotected for filling in forms may change throughout.
+            if story == StoryRef::Body && path.0.first().is_some_and(|i| open_blocks.get(*i as usize) == Some(&true)) {
+                continue;
+            }
             let Some(p) = doc.para(story, &path) else { continue };
             let mut k = 0;
             for (r, props) in p.run_ranges() {

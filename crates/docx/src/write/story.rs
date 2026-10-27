@@ -1297,6 +1297,10 @@ fn sectpr_body(w: &mut W, s: &SectionProps) {
             let refs: Vec<(&str, &str)> = ca.iter().map(|(k, v)| (*k, v.as_str())).collect();
             w.empty("w:cols", &refs);
         }
+        // After w:cols, before w:vAlign (CT_SectPr's order).
+        if s.form_unprotected {
+            w.val("w:formProt", "0");
+        }
         match s.valign {
             doc4me_doc::props::VAlign::Top => {}
             doc4me_doc::props::VAlign::Center => w.val("w:vAlign", "center"),

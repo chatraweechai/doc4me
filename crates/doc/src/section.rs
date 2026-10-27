@@ -761,6 +761,10 @@ pub struct SectionProps {
     pub footnote_pr: NoteProps,
     #[serde(skip_serializing_if = "NoteProps::is_empty")]
     pub endnote_pr: NoteProps,
+    /// Left editable when the document is protected for filling in forms (`w:formProt
+    /// w:val="0"`, Restrict Editing › Select sections…); sections are protected by default.
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    pub form_unprotected: bool,
 }
 
 impl Default for SectionProps {
@@ -793,6 +797,7 @@ impl Default for SectionProps {
             doc_grid: None,
             footnote_pr: NoteProps::default(),
             endnote_pr: NoteProps::default(),
+            form_unprotected: false,
         }
     }
 }

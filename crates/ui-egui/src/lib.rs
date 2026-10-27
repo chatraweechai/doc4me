@@ -1832,6 +1832,7 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "developer.formField" if !has("type") => Some("insertFormField"),
         "developer.formFieldOptions" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formFieldOptions"),
         "developer.formFieldHelp" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formFieldHelp"),
+        "review.protectSections" if !has("protected") => Some("sectionProtection"),
         // Enclose Characters without a shape (null is one: it takes the enclosure away).
         "format.enclose" if params.get("shape").is_none() => Some("enclose"),
         // Footnote and Endnote without settings shows its dialog (#385).

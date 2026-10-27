@@ -586,6 +586,7 @@ pub fn sectpr(e: &El) -> (SectionProps, Vec<HfRef>) {
             "w:footnotePr" => s.footnote_pr = note_pr(k, true),
             "w:endnotePr" => s.endnote_pr = note_pr(k, true),
             "w:titlePg" => s.title_page = on_off(k),
+            "w:formProt" => s.form_unprotected = !on_off(k),
             "w:bidi" => s.rtl = on_off(k),
             "w:textDirection" => s.text_direction = doc4me_doc::props::TextDirection::from_ooxml(k.attr("w:val").unwrap_or("")),
             "w:pgNumType" => {

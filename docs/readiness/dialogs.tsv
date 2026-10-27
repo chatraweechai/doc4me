@@ -220,7 +220,7 @@ dlg-218	wdDialogToolsOptionsTypography	739	(none)	-	registry		East Asian typogra
 dlg-219	wdDialogToolsOptionsUserInfo	213	(none)	file.options	registry		General › user name
 dlg-220	wdDialogToolsOptionsView	204	(none)	file.options	registry		Display
 dlg-221	wdDialogToolsProtectDocument	503	(none)	review.restrict	registry		
-dlg-222	wdDialogToolsProtectSection	578	(none)	-	registry		
+dlg-222	wdDialogToolsProtectSection	578	(none)	review.protectSections	registry		Section Protection (Restrict Editing › Filling in forms › Select sections…): sections left unprotected (w:formProt) edit as usual in a protected form
 dlg-223	wdDialogToolsRevisions	197	(none)	review.highlightChanges	registry		Highlight Changes: track while editing, show on screen, print markup
 dlg-224	wdDialogToolsSpellingAndGrammar	828	(none)	review.spelling	registry		
 dlg-225	wdDialogToolsTemplates	87	(none)	tools.templates	registry		

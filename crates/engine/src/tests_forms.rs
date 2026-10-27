@@ -198,3 +198,30 @@ fn form_fields_save_and_open_with_their_data() {
     // Form field shading is a view setting (on, as Word), never saved.
     assert_eq!(run(&mut s, "developer.formFieldShading", json!({}))["value"], false);
 }
+
+#[test]
+fn sections_left_unprotected_edit_as_usual_in_a_protected_form() {
+    let mut s = form();
+    run(&mut s, "layout.break", json!({"kind": "continuous"}));
+    run(&mut s, "text.insert", json!({"text": "Notes"}));
+    assert_eq!(run(&mut s, "review.protectSections", json!({}))["sections"], json!([true, true]));
+    assert!(s.run("review.protectSections", &json!({"protected": [true]})).is_err(), "one per section");
+    assert_eq!(run(&mut s, "review.protectSections", json!({"protected": [true, false]}))["sections"], json!([true, false]));
+    run(&mut s, "review.restrict", json!({"mode": "forms"}));
+    assert!(s.run("review.protectSections", &json!({"protected": [false, false]})).is_err(), "not while protected");
+    // The second section types and formats as usual.
+    run(&mut s, "text.insert", json!({"text": " and more"}));
+    let end = s.doc.end_of(StoryRef::Body);
+    let last = end.path.clone();
+    s.sel = crate::Selection { anchor: doc4me_doc::Pos::new(StoryRef::Body, last.clone(), 0), focus: end };
+    run(&mut s, "format.bold", json!({}));
+    assert!(text(&s).ends_with("Notes and more"));
+    // The first still takes only its fields.
+    s.sel = crate::Selection::caret(doc4me_doc::Pos::new(StoryRef::Body, doc4me_doc::Path::top(0), 0));
+    assert!(s.run("text.insert", &json!({"text": "x"})).is_err());
+    run(&mut s, "developer.formFieldValue", json!({"field": "Text1", "value": "ada"}));
+    // The file keeps which sections are protected.
+    let back = doc4me_docx::read(&doc4me_docx::write(&s.doc).unwrap()).unwrap();
+    let secs: Vec<bool> = back.sections().iter().map(|(_, sp)| sp.form_unprotected).collect();
+    assert_eq!(secs, [false, true]);
+}
