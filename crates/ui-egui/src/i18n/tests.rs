@@ -19,7 +19,9 @@ fn system_locales_map_to_languages() {
     assert_eq!(lang_from_tag("zh-Hant"), Some(lang("zh-hant")));
     assert_eq!(lang_from_tag("ja-JP"), Some(lang("ja")));
     assert_eq!(lang_from_tag("ja_JP.eucJP@euro"), Some(lang("ja")));
-    assert_eq!(lang_from_tag("en-GB"), Some(Lang::EN));
+    assert_eq!(lang_from_tag("en-GB"), Some(lang("en-gb")));
+    assert_eq!(lang_from_tag("en_GB.UTF-8"), Some(lang("en-gb")));
+    assert_eq!(lang_from_tag("en-AU"), Some(Lang::EN));
     assert_eq!(lang_from_tag("C"), Some(Lang::EN));
     assert_eq!(lang_from_tag("POSIX"), Some(Lang::EN));
     assert_eq!(lang_from_tag("fr-FR"), Some(lang("fr")));
@@ -855,10 +857,10 @@ fn bundled_interface_fonts_cover_hungarian_without_system_fallbacks() {
 #[test]
 fn french_locales_and_saved_preference_work_without_changing_the_document() {
     let fr = lang("fr");
-    for tag in ["fr", "fr-FR", "FR_fr.UTF-8", "fr-CA", "fr_BE.UTF-8@euro", "fr-CH", "fr-Latn-FR"] {
+    for tag in ["fr", "fr-FR", "FR_fr.UTF-8", "fr_BE.UTF-8@euro", "fr-CH", "fr-Latn-FR"] {
         assert_eq!(lang_from_tag(tag), Some(fr), "{tag}");
     }
-    assert_eq!(first_supported([UNSUPPORTED, "fr-CA", "en-US"]), Some(fr));
+    assert_eq!(first_supported([UNSUPPORTED, "fr-BE", "en-US"]), Some(fr));
     assert_eq!(normalize_pref("FR"), Some("fr"));
     assert_eq!(fr.name(), "Français");
     assert_eq!(tr(fr, "Home"), "Accueil");
@@ -879,6 +881,38 @@ fn french_locales_and_saved_preference_work_without_changing_the_document() {
     assert_eq!(app.ui.language, "fr", "invalid preferences must keep the saved language");
     app.run("ui.language", serde_json::json!({"value": "auto"})).unwrap();
     assert_eq!(app.ui.language, AUTO);
+}
+
+#[test]
+fn british_english_and_canadian_french_follow_their_regions() {
+    use std::collections::HashSet;
+    let keys = |source| parse_entries(source).0.into_iter().map(|e| e.source).collect::<HashSet<_>>();
+    let gb = lang("en-gb");
+    assert_eq!(gb.name(), "English (United Kingdom)");
+    assert_eq!(gb.editing_lang(), None);
+    assert_eq!(tr(gb, "Font Color"), "Font Colour");
+    assert_eq!(tr(gb, "Align Center"), "Align Centre");
+    assert_eq!(tr(gb, "Customize the Ribbon…"), "Customise the Ribbon…");
+    assert_eq!(tr(gb, "Centimeters"), "Centimetres");
+    assert_eq!(tr(gb, "Color: {color}"), "Colour: {color}", "placeholders keep their names");
+    assert_eq!(tr(gb, "Insert"), "Insert");
+    // Every string any other catalog has is listed (spelt the same or not).
+    let all: HashSet<String> = LANGUAGES.iter().filter(|l| l.code != "en-gb").flat_map(|l| keys(l.source)).collect();
+    assert_eq!(keys(gb.0.source), all);
+    let ca = lang("fr-ca");
+    for tag in ["fr-CA", "fr_CA.UTF-8", "FR_ca", "fr-CA-u-nu-latn"] {
+        assert_eq!(lang_from_tag(tag), Some(ca), "{tag}");
+    }
+    assert_eq!(first_supported([UNSUPPORTED, "fr-CA", "en-US"]), Some(ca));
+    assert_eq!(tr(ca, "Email address (optional)"), "Adresse courriel (facultatif)");
+    assert_eq!(tr(ca, "Move to where?"), "Déplacer vers où?");
+    assert_eq!(fmt(tr(ca, "{count} records; fields: {fields}"), &[("count", "3"), ("fields", "Nom")]), "3 enregistrements; champs : Nom");
+    assert_eq!(tr(ca, "Home"), tr(lang("fr"), "Home"));
+    assert_eq!(keys(ca.0.source), keys(lang("fr").0.source));
+    // The Spanish catalog is written for Spain and Latin America alike: Mexico uses it.
+    for tag in ["es-MX", "es_MX.UTF-8", "es-419", "es-ES"] {
+        assert_eq!(lang_from_tag(tag), Some(lang("es")), "{tag}");
+    }
 }
 
 #[test]

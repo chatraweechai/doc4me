@@ -4221,3 +4221,69 @@ fn footer_page_total_needs_one_body_pass() {
     p.insert_object(n, field(), &Default::default()).unwrap();
     assert!(matches!(first(&d), Pass::Again(t) if t.pages == 3));
 }
+
+/// The tops of the body's laid-out paragraphs on the first page, in order.
+fn para_tops(l: &DocLayout) -> Vec<f32> {
+    l.pages[0].items.iter().filter_map(|it| if let Placed::Lines { y, .. } = it { Some(*y) } else { None }).collect()
+}
+
+/// A paragraph's top and bottom borders take their width plus their distance from the text above
+/// and below it, as in Word (govuk-029's boxed note, 1.5pt + 4pt); paragraphs in a row with the
+/// same borders make one box, with nothing between them unless they have a between border.
+#[test]
+fn paragraph_borders_take_room_and_join_into_boxes() {
+    let plain = Document::from_text("before\nfirst boxed\nsecond boxed\nafter");
+    let mut boxed = plain.clone();
+    let line = Border { style: BorderStyle::Single, width: 1.5, color: None, space: 4.0 };
+    for i in [1, 2] {
+        if let Some(doc4me_doc::Block::Para(p)) = boxed.body.get_mut(i).map(Arc::make_mut) {
+            p.props.borders = Some(Borders::box_(line));
+        }
+    }
+    let (a, b) = (para_tops(&lay(&plain)), para_tops(&lay(&boxed)));
+    assert_eq!((a.len(), b.len()), (4, 4));
+    let shift: Vec<f32> = a.iter().zip(&b).map(|(x, y)| y - x).collect();
+    assert!(shift[0].abs() < 0.01, "{shift:?}");
+    // Below the top border: the box's first paragraph, and the second one with it.
+    assert!((shift[1] - 5.5).abs() < 0.01 && (shift[2] - 5.5).abs() < 0.01, "{shift:?}");
+    // Below the bottom border too.
+    assert!((shift[3] - 11.0).abs() < 0.01, "{shift:?}");
+    let l = lay(&boxed);
+    let rules: Vec<_> = l.pages[0].items.iter().filter_map(|it| if let Placed::Rule { y0, y1, .. } = it { Some((*y0, *y1)) } else { None }).collect();
+    // One box: a top and a bottom rule, and each side as two pieces running into each other.
+    let across = rules.iter().filter(|(y0, y1)| (y0 - y1).abs() < 0.01).count();
+    assert_eq!(across, 2, "{rules:?}");
+    let mut sides: Vec<(f32, f32)> = rules.iter().copied().filter(|(y0, y1)| (y0 - y1).abs() >= 0.01).collect();
+    sides.sort_by(|p, q| p.0.total_cmp(&q.0));
+    assert_eq!(sides.len(), 4, "{rules:?}");
+    let (top, bottom) = (sides[0].0, sides[3].1);
+    assert!(top < b[1] - 5.0 && bottom > b[2] + 5.0, "{rules:?} {b:?}");
+    for w in sides.windows(2) {
+        assert!(w[1].0 <= w[0].1 + 0.01, "the sides have no gap: {sides:?}");
+    }
+    // A between border separates the two paragraphs with its own room.
+    let mut between = boxed.clone();
+    for i in [1, 2] {
+        if let Some(doc4me_doc::Block::Para(p)) = between.body.get_mut(i).map(Arc::make_mut) {
+            p.props.borders = Some(Borders { between: Some(line), ..Borders::box_(line) });
+        }
+    }
+    let c = para_tops(&lay(&between));
+    assert!((c[2] - b[2] - 5.5).abs() < 0.01 && (c[3] - b[3] - 5.5).abs() < 0.01, "{b:?} {c:?}");
+}
+
+/// A last line of nothing but a tab is as tall as a bigger paragraph mark after it (govuk-015's
+/// title page: a 26pt mark after a tab); a line with text keeps its text's height.
+#[test]
+fn a_bigger_mark_sets_the_height_of_a_blank_last_line() {
+    let height = |text: &str, mark: f32| {
+        let mut d = Document::from_text(&format!("{text}\nnext"));
+        if let Some(doc4me_doc::Block::Para(p)) = d.body.get_mut(0).map(Arc::make_mut) {
+            p.mark.size = Some(mark);
+        }
+        let t = para_tops(&lay(&d));
+        t[1] - t[0]
+    };
+    assert!(height("\t", 26.0) > height("\t", 11.0) + 10.0);
+    assert!((height("words", 26.0) - height("words", 11.0)).abs() < 0.01);
+}

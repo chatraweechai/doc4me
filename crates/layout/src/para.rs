@@ -1946,6 +1946,22 @@ fn break_lines(pl: &mut ParaLayout, env: &ParaEnv, mark_style: u16, level: Optio
         {
             asc = st.ascent;
             desc = st.descent;
+        } else if c1 >= n
+            && end == LineEnd::Para
+            && env.table.is_none()
+            && pl.clusters.get(c0..c1).is_some_and(|cs| {
+                cs.iter().all(|c| {
+                    matches!(c.kind, ClKind::Space | ClKind::Tab | ClKind::Marker) || (matches!(c.kind, ClKind::Object(_)) && c.obj_h <= 0.0)
+                })
+            })
+            && let Some(st) = pl.styles.get(mark_style as usize)
+        {
+            // A last line of only tabs, spaces and floating objects' anchors is as tall as its
+            // paragraph mark when that is bigger (govuk-015: a 26pt mark after a tab and a
+            // floating text box). Lines with text keep their text's height, and so do lines in
+            // table cells (zenodo-072, -093, -118: a bigger mark there doesn't count).
+            asc = asc.max(st.ascent);
+            desc = desc.max(st.descent);
         }
         if first && let Some(lab) = &pl.label {
             for st in lab.runs.iter().filter_map(|r| pl.styles.get(r.style as usize)) {

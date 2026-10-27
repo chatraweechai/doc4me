@@ -52,8 +52,19 @@ pub struct LangInfo {
 }
 
 /// The registry. English first: it is the fallback and the source language.
-pub static LANGUAGES: [LangInfo; 19] = [
+pub static LANGUAGES: [LangInfo; 21] = [
     LangInfo { code: "en", name: "English", source: "", prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    // British English (colour, centre, customise); `en-GB` and `en_GB.UTF-8` resolve here, other
+    // English regions keep the built-in US English. New documents stay in Doc4Me's default
+    // language, as with every interface but Polish (English is proofed whatever the region).
+    LangInfo {
+        code: "en-gb",
+        name: "English (United Kingdom)",
+        source: include_str!("en-gb.tsv"),
+        prefer_hans: false,
+        editing_lang: None,
+        catalog: OnceLock::new(),
+    },
     // Simplified Chinese; `zh`, `zh-CN`, `zh-SG` and `zh-Hans-*` resolve here (see `candidates`).
     LangInfo {
         code: "zh-hans",
@@ -127,8 +138,18 @@ pub static LANGUAGES: [LangInfo; 19] = [
     // US English as their editing language: Thai text is proofed whatever its run's language, and
     // Latin words typed beside it stay checked as English.
     LangInfo { code: "th", name: "ไทย", source: include_str!("th.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
-    // French; `fr`, `fr-FR`, `fr_CA` and other regions resolve here.
+    // French; `fr`, `fr-FR`, `fr-BE`, `fr-CH` and other regions but Canada resolve here.
     LangInfo { code: "fr", name: "Français", source: include_str!("fr.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    // Canadian French (the French catalog with "courriel" and no space before ; ? !); `fr-CA` and
+    // `fr_CA.UTF-8` resolve here.
+    LangInfo {
+        code: "fr-ca",
+        name: "Français (Canada)",
+        source: include_str!("fr-ca.tsv"),
+        prefer_hans: false,
+        editing_lang: None,
+        catalog: OnceLock::new(),
+    },
 ];
 
 impl LangInfo {

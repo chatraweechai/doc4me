@@ -19,11 +19,11 @@ lang-017	Czech	cs-CZ	cs
 lang-018	Danish	da-DK	-
 lang-019	Dutch	nl-NL	-
 lang-020	English	en-US	en
-lang-021	English UK [1]	en-GB	-
+lang-021	English UK [1]	en-GB	en-gb
 lang-022	Estonian	et-EE	et
 lang-023	Finnish	fi-FI	-
 lang-024	French	fr-FR	fr
-lang-025	French Canada [1]	fr-CA	-
+lang-025	French Canada [1]	fr-CA	fr-ca
 lang-026	Galician	gl-ES	-
 lang-027	Georgian	ka-GE	-
 lang-028	German	de-DE	de
@@ -80,7 +80,7 @@ lang-078	Sinhala	si-LK	-
 lang-079	Slovak	sk-SK	-
 lang-080	Slovenian	sl-SI	-
 lang-081	Spanish	es-ES	es
-lang-082	Spanish Mexico [1]	es-MX	-
+lang-082	Spanish Mexico [1]	es-MX	es
 lang-083	Swedish	sv-SE	-
 lang-084	Tamil	ta-IN	-
 lang-085	Tatar (Cyrillic)	tt-RU	-

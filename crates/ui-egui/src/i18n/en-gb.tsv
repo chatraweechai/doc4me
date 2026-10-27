@@ -1,0 +1,2845 @@
+# English (United Kingdom) (en-gb) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in US English.
+#
+# The interface strings in British spelling: colour, centre, centimetre, catalogue, -ise verbs
+# (customise, maximise, capitalise, personalise, organiser, recognised). Every string is listed,
+# the ones spelt the same too, so the catalog says it covers the whole interface. Computing words
+# keep their usual British form (program, dialog). License: MIT OR Apache-2.0.
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".
+	% of all commits	% of all commits
+	(All)	(All)
+	(Custom)	(Custom)
+	(no style)	(no style)
+	(no suggestions)	(no suggestions)
+	(none)	(none)
+	(normal text)	(normal text)
+	(not matched)	(not matched)
+	(picture or object)	(picture or object)
+	*Bold* and _italic_ with real formatting	*Bold* and _italic_ with real formatting
+	0 or More Characters	0 or More Characters
+	1. Formatting restrictions	1. Formatting restrictions
+	1. Main document	1. Main document
+	1.5 Line Spacing	1.5 Line Spacing
+	1/4 Em Space	1/4 Em Space
+	1×2 Empty Matrix	1×2 Empty Matrix
+	1×3 Empty Matrix	1×3 Empty Matrix
+	2. Data source	2. Data source
+	2. Editing restrictions	2. Editing restrictions
+	2×1 Empty Matrix	2×1 Empty Matrix
+	2×2 Determinant	2×2 Determinant
+	2×2 Empty Matrix	2×2 Empty Matrix
+	2×2 Identity Matrix	2×2 Identity Matrix
+	2×2 Identity Matrix (sparse)	2×2 Identity Matrix (sparse)
+	2×2 Matrix in Brackets	2×2 Matrix in Brackets
+	2×2 Matrix in Double Bars	2×2 Matrix in Double Bars
+	2×2 Matrix in Parentheses	2×2 Matrix in Parentheses
+	2×3 Empty Matrix	2×3 Empty Matrix
+	3-D	3-D
+	3. Merge the data with the document	3. Merge the data with the document
+	3. Start enforcement	3. Start enforcement
+	3D Models	3D Models
+	3×1 Empty Matrix	3×1 Empty Matrix
+	3×2 Empty Matrix	3×2 Empty Matrix
+	3×3 Empty Matrix	3×3 Empty Matrix
+	3×3 Identity Matrix	3×3 Identity Matrix
+	3×3 Identity Matrix (sparse)	3×3 Identity Matrix (sparse)
+	5,000 characters a day; give an email address for 50,000.	5,000 characters a day; give an email address for 50,000.
+	<< Less	<< Less
+	<< Remove	<< Remove
+	A file dialog is already open.	A file dialog is already open.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.
+	A header source holds the field names for a data source without a header row.	A header source holds the field names for a data source without a header row.
+	A mail merge field	A mail merge field
+	A new document lists the commands with their shortcuts.	A new document lists the commands with their shortcuts.
+	A numbered sequence (figures, tables…)	A numbered sequence (figures, tables…)
+	A password is required to open this document.	A password is required to open this document.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	A space before punctuation, doubled marks, Polish commas before conjunctions.
+	A table of contents	A table of contents
+	A table's rows keep the same columns here.	A table's rows keep the same columns here.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	About
+	About Doc4Me	About Doc4Me
+	Above Chart	Above Chart
+	Above the item	Above the item
+	Absolute position	Absolute position
+	Absolute value cases	Absolute value cases
+	Accent	Accent
+	Accent Gradient	Accent Gradient
+	Accent with Reflection	Accent with Reflection
+	Accent {n}	Accent {n}
+	Accents	Accents
+	Accept	Accept
+	Accept All	Accept All
+	Accept All Changes	Accept All Changes
+	Accept or Reject Changes	Accept or Reject Changes
+	Accept This Change	Accept This Change
+	Accessed on	Accessed on
+	Accessibility	Accessibility
+	Accessibility Pane	Accessibility Pane
+	Acute	Acute
+	Add	Add
+	Add >>	Add >>
+	Add a comment	Add a comment
+	Add a Table	Add a Table
+	Add at least one field.	Add at least one field.
+	Add caption when inserting:	Add caption when inserting:
+	Add Chart Element	Add Chart Element
+	Add Field	Add Field
+	Add Field Name	Add Field Name
+	Add Font…	Add Font…
+	Add line numbering	Add line numbering
+	Add New Placeholder	Add New Placeholder
+	Add New Placeholder…	Add New Placeholder…
+	Add New Source…	Add New Source…
+	Add Object to Selection	Add Object to Selection
+	Add Pen	Add Pen
+	Add Row	Add Row
+	Add Series	Add Series
+	Add Shape	Add Shape
+	Add Space Before Paragraph	Add Space Before Paragraph
+	Add space between Asian and Latin text	Add space between Asian and Latin text
+	Add space between Asian text and numbers	Add space between Asian text and numbers
+	Add tab stop at:	Add tab stop at:
+	Add Text	Add Text
+	Add the chapter number	Add the chapter number
+	Add to Dictionary	Add to Dictionary
+	Add to Document	Add to Document
+	Add to Quick Access Toolbar	Add to Quick Access Toolbar
+	Add to Style Gallery	Add to Style Gallery
+	Add-ins	Add-ins
+	Add/Edit\nBibliography	Add/Edit\nBibliography
+	Add/Edit\nCitation	Add/Edit\nCitation
+	Add\nNote	Add\nNote
+	Add\nPen	Add\nPen
+	Add\nShape	Add\nShape
+	Added	Added
+	Added Fonts	Added Fonts
+	Address	Address
+	Address Block	Address Block
+	Address labels	Address labels
+	Address:	Address:
+	Address\nBlock	Address\nBlock
+	Adjust	Adjust
+	Advanced	Advanced
+	Advanced Find	Advanced Find
+	Advanced Find…	Advanced Find…
+	After:	After:
+	Agents	Agents
+	Align	Align
+	Align Bottom Center	Align Bottom Centre
+	Align Bottom Left	Align Bottom Left
+	Align Bottom Right	Align Bottom Right
+	Align Center	Align Centre
+	Align Center Left	Align Centre Left
+	Align Center Right	Align Centre Right
+	Align Left	Align Left
+	Align Right	Align Right
+	Align Text	Align Text
+	Align Top Center	Align Top Centre
+	Align Top Left	Align Top Left
+	Align Top Right	Align Top Right
+	Aligned at:	Aligned at:
+	Alignment	Alignment
+	Alignment:	Alignment:
+	All	All
+	All - Linear	All - Linear
+	All - Professional	All - Professional
+	All Borders	All Borders
+	All Caps	All Caps
+	All caps	All caps
+	All Commands	All Commands
+	All files	All files
+	All Levels	All Levels
+	All Markup	All Markup
+	All pages	All pages
+	All pages in the range	All pages in the range
+	All records	All records
+	All symbol sets	All symbol sets
+	Allow Doc4Me to use online services	Allow Doc4Me to use online services
+	Allow hanging punctuation	Allow hanging punctuation
+	Allow Latin text to wrap in the middle of a word	Allow Latin text to wrap in the middle of a word
+	Allow line breaks	Allow line breaks
+	Allow overlap	Allow overlap
+	Allow row to break across pages	Allow row to break across pages
+	Alphabetical	Alphabetical
+	Alt Text	Alt Text
+	Alt text	Alt text
+	Alt Text Pane	Alt Text Pane
+	Alt:	Alt:
+	Alt\nText	Alt\nText
+	And	And
+	Angle Brackets	Angle Brackets
+	Angle Brackets with Separator	Angle Brackets with Separator
+	Angle Brackets with Two Separators	Angle Brackets with Two Separators
+	Animate the caret (it glides and fades)	Animate the caret (it glides and fades)
+	Animation	Animation
+	Animation effects:	Animation effects:
+	Annotation Reference	Annotation Reference
+	Annotation Subject	Annotation Subject
+	Annotation Text	Annotation Text
+	Another file	Another file
+	Any Character	Any Character
+	Any Digit	Any Digit
+	Any Letter	Any Letter
+	Anyone can open this document. Encrypt it with a password to keep it private.	Anyone can open this document. Encrypt it with a password to keep it private.
+	Anyone who opens the document will need this password.	Anyone who opens the document will need this password.
+	APA	APA
+	API key (if the server needs one)	API key (if the server needs one)
+	Apply	Apply
+	Apply as you type	Apply as you type
+	Apply Asian line-breaking rules (kinsoku)	Apply Asian line-breaking rules (kinsoku)
+	Apply Character Style	Apply Character Style
+	Apply formatting to:	Apply formatting to:
+	Apply special formats to	Apply special formats to
+	Apply Style	Apply Style
+	Apply Styles	Apply Styles
+	Apply to:	Apply to:
+	Arabic	Arabic
+	Arch Down	Arch Down
+	Arch Up	Arch Up
+	Area	Area
+	Around	Around
+	Arrange	Arrange
+	Arrange All	Arrange All
+	Arrange\nAll	Arrange\nAll
+	Arrow	Arrow
+	Arrows	Arrows
+	Artistic Effects	Artistic Effects
+	As Recommended	As Recommended
+	As you type	As you type
+	ASAP	ASAP
+	Ascending	Ascending
+	Asian text font:	Asian text font:
+	Asian Typography	Asian Typography
+	Assign	Assign
+	At least	At least
+	At least {n}	At least {n}
+	Atelier	Atelier
+	Atmosphere	Atmosphere
+	Attach Template	Attach Template
+	Attach…	Attach…
+	Author	Author
+	Auto	Auto
+	AutoCaption	AutoCaption
+	AutoCaption…	AutoCaption…
+	AutoComplete	AutoComplete
+	AutoCorrect	AutoCorrect
+	AutoCorrect Options	AutoCorrect Options
+	AutoFit	AutoFit
+	AutoFit Contents	AutoFit Contents
+	AutoFit Window	AutoFit Window
+	AutoFormat	AutoFormat
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.
+	AutoFormat and Review Changes…	AutoFormat and Review Changes…
+	AutoFormat As You Type	AutoFormat As You Type
+	AutoFormat changed {count} paragraphs	AutoFormat changed {count} paragraphs
+	AutoFormat Now	AutoFormat Now
+	Automatic	Automatic
+	Automatic ({language})	Automatic ({language})
+	Automatic bulleted lists	Automatic bulleted lists
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Automatic follows your system's language. Menus and commands change; your documents don't.
+	Automatic numbered lists	Automatic numbered lists
+	Automatic Table 1 (3 levels)	Automatic Table 1 (3 levels)
+	Automatic Table 2 (2 levels)	Automatic Table 2 (2 levels)
+	Automatically hyphenate document	Automatically hyphenate document
+	Automatically Update Document Styles	Automatically Update Document Styles
+	Automatically update document styles	Automatically update document styles
+	AutoSave	AutoSave
+	AutoSave documents you have saved in Doc4Me	AutoSave documents you have saved in Doc4Me
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	AutoSave failed: {error}. Save the document to turn AutoSave back on.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.
+	AutoSave saves every change to the file (needs a saved document)	AutoSave saves every change to the file (needs a saved document)
+	AutoSave writes your changes to the file a moment after you stop typing.	AutoSave writes your changes to the file a moment after you stop typing.
+	AutoText	AutoText
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10.12" × 14.33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7.17" × 10.12"
+	Back	Back
+	Backspace	Backspace
+	Balloons	Balloons
+	Banded Columns	Banded Columns
+	Banded Rows	Banded Rows
+	Bar	Bar
+	Base text:	Base text:
+	Based on: {style}	Based on: {style}
+	Baseline Dots	Baseline Dots
+	Basic Cycle	Basic Cycle
+	Basic List	Basic List
+	Basic Math	Basic Math
+	Basic Matrix	Basic Matrix
+	Basic Process	Basic Process
+	Basic Pyramid	Basic Pyramid
+	Basic Radial	Basic Radial
+	Basic Venn	Basic Venn
+	Bayes' rule	Bayes' rule
+	Before:	Before:
+	Beginning of Word	Beginning of Word
+	Behind Text	Behind Text
+	Below text	Below text
+	Below the item	Below the item
+	Between	Between
+	Bibliography	Bibliography
+	Binary assets added	Binary assets added
+	Binary assets removed	Binary assets removed
+	Binomial Coefficient	Binomial Coefficient
+	Binomial Coefficient (angle)	Binomial Coefficient (angle)
+	Binomial Coefficient with Angle Brackets	Binomial Coefficient with Angle Brackets
+	Binomial expansion of (x+a)ⁿ	Binomial expansion of (x+a)ⁿ
+	Blank	Blank
+	Blank (Three Columns)	Blank (Three Columns)
+	Blank document	Blank document
+	Blank Page	Blank Page
+	Block\nAuthors	Block\nAuthors
+	Blue:	Blue:
+	Body Text	Body Text
+	Body text in a short paragraph to show spacing.	Body text in a short paragraph to show spacing.
+	Bold	Bold
+	Book	Book
+	Book Title	Book Title
+	Book title	Book title
+	Bookmark	Bookmark
+	Bookmark name:	Bookmark name:
+	Border lines	Border lines
+	Border Painter	Border Painter
+	Border\nPainter	Border\nPainter
+	Borders	Borders
+	Borders and Shading	Borders and Shading
+	Borders and Shading…	Borders and Shading…
+	Border…	Border…
+	Both Sides	Both Sides
+	Both sides	Both sides
+	Bottom	Bottom
+	Bottom Border	Bottom Border
+	Bottom Margin	Bottom Margin
+	Bottom of Page	Bottom of Page
+	Bottom of the Window	Bottom of the Window
+	Bottom:	Bottom:
+	Box	Box
+	Boxed Formula	Boxed Formula
+	Boxed Formula (example)	Boxed Formula (example)
+	Boxed Formulas	Boxed Formulas
+	Braces	Braces
+	Braces with Separator	Braces with Separator
+	Bracket	Bracket
+	Brackets	Brackets
+	Brackets with Separators	Brackets with Separators
+	Break Link	Break Link
+	Breaks	Breaks
+	Breve	Breve
+	Brightness, contrast and transparency change the picture from how it looks now.	Brightness, contrast and transparency change the picture from how it looks now.
+	Brightness:	Brightness:
+	Bring Forward	Bring Forward
+	Browse in Doc4Me…	Browse in Doc4Me…
+	Browse…	Browse…
+	Build table of figures from:	Build table of figures from:
+	Building Block Gallery Content Control	Building Block Gallery Content Control
+	Built from the style or table entry fields chosen in Options.	Built from the style or table entry fields chosen in Options.
+	Built-In	Built-In
+	Built-in Heading styles	Built-in Heading styles
+	Built-in style	Built-in style
+	Built-in styles can't be deleted.	Built-in styles can't be deleted.
+	Bullet	Bullet
+	Bullet Library	Bullet Library
+	Bullets	Bullets
+	By author	By author
+	By:	By:
+	Calendar	Calendar
+	Can't be deleted	Can't be deleted
+	Cancel	Cancel
+	Canvas Member	Canvas Member
+	Capitalization	Capitalisation
+	Capitalize Each Word	Capitalise Each Word
+	Capitalize first letter of sentences	Capitalise first letter of sentences
+	Capitalize first letter of table cells	Capitalise first letter of table cells
+	Capitalize names of days	Capitalise names of days
+	Capitalize the first word of a sentence	Capitalise the first word of a sentence
+	Caption	Caption
+	Caption label:	Caption label:
+	Caption Numbering	Caption Numbering
+	Caption text	Caption text
+	Caption:	Caption:
+	Captions	Captions
+	Caret Character	Caret Character
+	Case changes	Case changes
+	Cases	Cases
+	Cases (Three Conditions)	Cases (Three Conditions)
+	Cases (Two Conditions)	Cases (Two Conditions)
+	Cases and Stacks	Cases and Stacks
+	Catalog	Catalogue
+	Categories	Categories
+	Categories:	Categories:
+	Category	Category
+	Category {n}	Category {n}
+	Category:	Category:
+	Category…	Category…
+	Ceiling	Ceiling
+	Cell	Cell
+	Cell Margins	Cell Margins
+	Cell margins	Cell margins
+	Cell Options	Cell Options
+	Cell Size	Cell Size
+	Cell\nMargins	Cell\nMargins
+	Center	Centre
+	Centered	Centred
+	Centered as Group	Centred as Group
+	Centimeters	Centimetres
+	Change	Change
+	Change Case	Change Case
+	Change Chart Type	Change Chart Type
+	Change Colors	Change Colours
+	Change in y over change in x	Change in y over change in x
+	Change Layout	Change Layout
+	Change List Level	Change List Level
+	Change Password…	Change Password…
+	Change Picture	Change Picture
+	Change Picture…	Change Picture…
+	Change Shape	Change Shape
+	Change Structure	Change Structure
+	Change to Display	Change to Display
+	Change to Inline	Change to Inline
+	Change to Level 1	Change to Level 1
+	Change to Level 2	Change to Level 2
+	Change to Level 3	Change to Level 3
+	Change to Level 4	Change to Level 4
+	Change to Level 5	Change to Level 5
+	Change to Level 6	Change to Level 6
+	Change to Level 7	Change to Level 7
+	Change to Level 8	Change to Level 8
+	Change to Level 9	Change to Level 9
+	Change\nChart Type	Change\nChart Type
+	Change\nColors	Change\nColours
+	Changed	Changed
+	Changed lines:	Changed lines:
+	Changes	Changes
+	Changes with highlighting	Changes with highlighting
+	Changes without highlighting	Changes without highlighting
+	Chapter in a book	Chapter in a book
+	Chapters begin at:	Chapters begin at:
+	Character	Character
+	Character Border	Character Border
+	Character code:	Character code:
+	Character in Range	Character in Range
+	Character level	Character level
+	Character Position	Character Position
+	Character Scale	Character Scale
+	Character Shading	Character Shading
+	Character Spacing	Character Spacing
+	Character spacing	Character spacing
+	Character style	Character style
+	Characters	Characters
+	Characters (no spaces)	Characters (no spaces)
+	Characters (with spaces)	Characters (with spaces)
+	Characters per line:	Characters per line:
+	Chart	Chart
+	Chart Design	Chart Design
+	Chart Layouts	Chart Layouts
+	Chart Title	Chart Title
+	Check	Check
+	Check Accessibility	Check Accessibility
+	Check Box Content Control	Check Box Content Control
+	Check Compatibility	Check Compatibility
+	Check Errors…	Check Errors…
+	Check for Errors	Check for Errors
+	Check Spelling as You Type	Check Spelling as You Type
+	Check spelling as you type	Check spelling as you type
+	Check\nAccessibility	Check\nAccessibility
+	Checked styles are allowed:	Checked styles are allowed:
+	Checked symbol	Checked symbol
+	Chevron Down	Chevron Down
+	Chevron Up	Chevron Up
+	Chicago	Chicago
+	Chinese (Simplified)	Chinese (Simplified)
+	Chinese (Traditional)	Chinese (Traditional)
+	Choose a command	Choose a command
+	Choose a shortcut	Choose a shortcut
+	Choose List Item	Choose List Item
+	Choose the sheet that holds the recipients.	Choose the sheet that holds the recipients.
+	Circle	Circle
+	Circle area from its radius	Circle area from its radius
+	Circled Dot	Circled Dot
+	Circled Plus	Circled Plus
+	Circled Times	Circled Times
+	Citation marked.	Citation marked.
+	Citation Style	Citation Style
+	Citations	Citations
+	Citations & Bibliography	Citations & Bibliography
+	City	City
+	Clear	Clear
+	Clear All	Clear All
+	Clear All Formatting	Clear All Formatting
+	Clear Character Formatting	Clear Character Formatting
+	Clear Character Style	Clear Character Style
+	Clear Formatting Level	Clear Formatting Level
+	Clear Paragraph Formatting	Clear Paragraph Formatting
+	Click a border between two cells to merge them. Esc stops.	Click a border between two cells to merge them. Esc stops.
+	Click an item to paste it.	Click an item to paste it.
+	Click level to modify:	Click level to modify:
+	Click the empty text box the text should continue in (Esc cancels)	Click the empty text box the text should continue in (Esc cancels)
+	Click to switch back to inserting	Click to switch back to inserting
+	Clipboard	Clipboard
+	Clipboard Contents	Clipboard Contents
+	Clipboard Items	Clipboard Items
+	Clipboard Pane	Clipboard Pane
+	Close	Close
+	Close Equation	Close Equation
+	Close Header and Footer	Close Header and Footer
+	Close Outline View	Close Outline View
+	Close Outline\nView	Close Outline\nView
+	Close Reviewing Pane	Close Reviewing Pane
+	Clustered Bar	Clustered Bar
+	Clustered Column	Clustered Column
+	Col #:	Col #:
+	Collapse	Collapse
+	Collapse Selection	Collapse Selection
+	Collapse the Ribbon	Collapse the Ribbon
+	Collate copies	Collate copies
+	Collect entries from:	Collect entries from:
+	Colon Equal	Colon Equal
+	Color	Colour
+	Color model:	Colour model:
+	Color only	Colour only
+	Color:	Colour:
+	Color: {color}	Colour: {color}
+	Colorful	Colourful
+	Colors	Colours
+	Colors:	Colours:
+	Column	Column
+	Column Break	Column Break
+	Column Selection	Column Selection
+	Column selection: the arrow keys extend the block, Esc ends it	Column selection: the arrow keys extend the block, Esc ends it
+	Column width	Column width
+	Column:	Column:
+	Columns	Columns
+	Columns:	Columns:
+	Combine	Combine
+	Combine Documents	Combine Documents
+	Combo Box Content Control	Combo Box Content Control
+	Commands	Commands
+	Commands:	Commands:
+	Comment	Comment
+	Comments	Comments
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.
+	Comments on version	Comments on version
+	Comments Pane	Comments Pane
+	Commits	Commits
+	Common Accent Objects	Common Accent Objects
+	Common Brackets	Common Brackets
+	Common Fractions	Common Fractions
+	Common Functions	Common Functions
+	Common Large Operators	Common Large Operators
+	Common Operator Structures	Common Operator Structures
+	Common Operators	Common Operators
+	Common Radicals	Common Radicals
+	Common Subscripts and Superscripts	Common Subscripts and Superscripts
+	Communication	Communication
+	Compact	Compact
+	Company	Company
+	Compare	Compare
+	Compare Documents	Compare Documents
+	Compare to	Compare to
+	Compared: {changes} changes	Compared: {changes} changes
+	Comparing with another file needs the desktop app.	Comparing with another file needs the desktop app.
+	Comparison	Comparison
+	Comparison settings	Comparison settings
+	Compatibility mode: {version}	Compatibility mode: {version}
+	Compatibility Options	Compatibility Options
+	Compatibility Options…	Compatibility Options…
+	Compress Pictures	Compress Pictures
+	Compress punctuation at the start of a line	Compress punctuation at the start of a line
+	Condensed	Condensed
+	Conference	Conference
+	Conference paper	Conference paper
+	CONFIDENTIAL	CONFIDENTIAL
+	Confirm password:	Confirm password:
+	Connect Shapes	Connect Shapes
+	Constitutional Provisions	Constitutional Provisions
+	Container Title	Container Title
+	Contains	Contains
+	Content Control at Selection	Content Control at Selection
+	Content Control Properties	Content Control Properties
+	Contents can't be edited	Contents can't be edited
+	Context	Context
+	Contextual	Contextual
+	Continuous	Continuous
+	Continuous numbering	Continuous numbering
+	Contour Integral	Contour Integral
+	Contour Integral with Limits	Contour Integral with Limits
+	Contour Integral with Stacked Limits	Contour Integral with Stacked Limits
+	Contour Integrals	Contour Integrals
+	Contrast:	Contrast:
+	Contributors	Contributors
+	Controls	Controls
+	Conversions	Conversions
+	Convert	Convert
+	Convert between built-up and linear form	Convert between built-up and linear form
+	Convert Notes	Convert Notes
+	Convert Permanently	Convert Permanently
+	Convert Text to Table	Convert Text to Table
+	Convert Text to Table…	Convert Text to Table…
+	Convert to Arabic Digits	Convert to Arabic Digits
+	Convert to Shapes	Convert to Shapes
+	Convert to Text	Convert to Text
+	Convert to Thai Digits	Convert to Thai Digits
+	Copies	Copies
+	Coproduct	Coproduct
+	Coproduct with Limits	Coproduct with Limits
+	Coproduct with Lower Limit	Coproduct with Lower Limit
+	Coproduct with Subscript-Superscript Limits	Coproduct with Subscript-Superscript Limits
+	Copy	Copy
+	Copy Formatting	Copy Formatting
+	Copy of the text a bookmark marks	Copy of the text a bookmark marks
+	Copy Styles	Copy Styles
+	Copy Text	Copy Text
+	Copy to where?	Copy to where?
+	Copyright	Copyright
+	Copyright Sign	Copyright Sign
+	Corrections	Corrections
+	Cosecant Function	Cosecant Function
+	Cosine 2x	Cosine 2x
+	Cosine Function	Cosine Function
+	Cotangent Function	Cotangent Function
+	Couldn't add {name}: {reason}	Couldn't add {name}: {reason}
+	Couldn't download the picture: {reason}	Couldn't download the picture: {reason}
+	Couldn't download {name}: {error}	Couldn't download {name}: {error}
+	Couldn't get the add-in list: {reason}	Couldn't get the add-in list: {reason}
+	Couldn't make Doc4Me the default: {error}	Couldn't make Doc4Me the default: {error}
+	Couldn't open {path}: {error}	Couldn't open {path}: {error}
+	Couldn't search: {reason}	Couldn't search: {reason}
+	Couldn't translate: {reason}	Couldn't translate: {reason}
+	Count by:	Count by:
+	Count words in text boxes and notes	Count words in text boxes and notes
+	Country	Country
+	Courtesy Title	Courtesy Title
+	Cover Page	Cover Page
+	Craft	Craft
+	Create	Create
+	Create a Style	Create a Style
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.
+	Create Data Source…	Create Data Source…
+	Create Graphic	Create Graphic
+	Create Header Source	Create Header Source
+	Create Link	Create Link
+	Create New Style	Create New Style
+	Create Source	Create Source
+	Create…	Create…
+	Crop	Crop
+	Cross-reference	Cross-reference
+	Cross-reference:	Cross-reference:
+	Cube Root	Cube Root
+	Current	Current
+	Current - Linear	Current - Linear
+	Current - Professional	Current - Professional
+	Current keyboard settings	Current keyboard settings
+	Current page	Current page
+	Current Position	Current Position
+	Current record	Current record
+	Current style: {style}	Current style: {style}
+	Curved Arrow Connector	Curved Arrow Connector
+	Curved Connector	Curved Connector
+	Custom	Custom
+	Custom dictionary	Custom dictionary
+	Custom Margins…	Custom Margins…
+	Custom mark:	Custom mark:
+	Custom range	Custom range
+	Custom Table of Contents	Custom Table of Contents
+	Custom Table of Contents…	Custom Table of Contents…
+	Custom Watermark	Custom Watermark
+	Custom Watermark…	Custom Watermark…
+	Customize	Customise
+	Customize Keyboard	Customise Keyboard
+	Customize Quick Access Toolbar	Customise Quick Access Toolbar
+	Customize Quick Access Toolbar…	Customise Quick Access Toolbar…
+	Customize Ribbon	Customise Ribbon
+	Customize the Ribbon…	Customise the Ribbon…
+	Customize…	Customise…
+	Cut	Cut
+	Cut, copy, and paste	Cut, copy, and paste
+	Cycle	Cycle
+	Czech	Czech
+	Danish	Danish
+	Dark	Dark
+	Dark Mode	Dark Mode
+	Dark page (white text on black)	Dark page (white text on black)
+	Dark with Shadow	Dark with Shadow
+	Darkroom	Darkroom
+	Dashed	Dashed
+	Data	Data
+	Data Labels	Data Labels
+	Data source:	Data source:
+	Date	Date
+	Date & Time	Date & Time
+	Date and Time	Date and Time
+	Date format	Date format
+	Date formats:	Date formats:
+	Date Picker Content Control	Date Picker Content Control
+	Day	Day
+	Decimal	Decimal
+	Decorative objects only add visual interest: screen readers skip them.	Decorative objects only add visual interest: screen readers skip them.
+	Decrease Font Size	Decrease Font Size
+	Decrease Indent	Decrease Indent
+	Default	Default
+	Default Paragraph Font	Default Paragraph Font
+	Default tab stops:	Default tab stops:
+	Define New Bullet	Define New Bullet
+	Define New Multilevel List	Define New Multilevel List
+	Define New Multilevel List…	Define New Multilevel List…
+	Define New Number Format	Define New Number Format
+	Deflate	Deflate
+	Delete	Delete
+	Delete Back in Equation	Delete Back in Equation
+	Delete Cells	Delete Cells
+	Delete Clipboard Item	Delete Clipboard Item
+	Delete Columns	Delete Columns
+	Delete Comment	Delete Comment
+	Delete in Equation	Delete in Equation
+	Delete Label	Delete Label
+	Delete Next Word	Delete Next Word
+	Delete Previous Word	Delete Previous Word
+	Delete Rows	Delete Rows
+	Delete Selected Ink	Delete Selected Ink
+	Delete Style	Delete Style
+	Delete Table	Delete Table
+	Delete Table Style	Delete Table Style
+	Deleted	Deleted
+	Deletions:	Deletions:
+	Delivery address:	Delivery address:
+	Delta Equal To	Delta Equal To
+	Delta over arrow	Delta over arrow
+	Demote	Demote
+	Demote to Body Text	Demote to Body Text
+	Derivative as a limit	Derivative as a limit
+	Descending	Descending
+	Describe what this object shows, for people who can't see it.	Describe what this object shows, for people who can't see it.
+	Describe what this table shows, for people who can't see it.	Describe what this table shows, for people who can't see it.
+	Description:	Description:
+	Design	Design
+	Design Mode	Design Mode
+	Detach Template	Detach Template
+	Detect language automatically	Detect language automatically
+	Developer	Developer
+	development build	development build
+	Diagonal	Diagonal
+	Diagonal Dots	Diagonal Dots
+	Diamond	Diamond
+	Dictate	Dictate
+	Dictation isn't available here.	Dictation isn't available here.
+	Dictation stopped.	Dictation stopped.
+	Dictation stopped: {reason}	Dictation stopped: {reason}
+	Different First Page	Different First Page
+	Different Odd & Even Pages	Different Odd & Even Pages
+	Differential	Differential
+	Differential theta	Differential theta
+	Differential x	Differential x
+	Differential y	Differential y
+	Differentials	Differentials
+	Direct formatting	Direct formatting
+	Direction:	Direction:
+	Directory	Directory
+	Display	Display
+	Display for Review	Display for Review
+	Display gridlines on screen	Display gridlines on screen
+	Display name	Display name
+	Display text	Display text
+	Distance from surrounding text	Distance from surrounding text
+	Distribute Columns	Distribute Columns
+	Distribute letters	Distribute letters
+	Distribute Rows	Distribute Rows
+	Distribute spacing	Distribute spacing
+	Distributed	Distributed
+	Do Not Check Spelling or Grammar	Do Not Check Spelling or Grammar
+	Do not check spelling or grammar	Do not check spelling or grammar
+	DO NOT COPY	DO NOT COPY
+	Do Not Show in TOC	Do Not Show in TOC
+	Do you want to save changes to {name}?	Do you want to save changes to {name}?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalogue. They can only edit the document.
+	Doc4Me is now the default app for Word documents.	Doc4Me is now the default app for Word documents.
+	Document	Document
+	Document End	Document End
+	Document Formatting	Document Formatting
+	Document Grid	Document Grid
+	Document Information	Document Information
+	Document Property	Document Property
+	Document Start	Document Start
+	Document template:	Document template:
+	Document Text	Document Text
+	Document Title	Document Title
+	Document1	Document1
+	Document\nPreferences	Document\nPreferences
+	Documents	Documents
+	Documents you open will show up here.	Documents you open will show up here.
+	Does not contain	Does not contain
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Don't add space between paragraphs of the same style
+	Don't capitalize after:	Don't capitalise after:
+	Don't hyphenate	Don't hyphenate
+	Don't print blank lines when data fields are empty	Don't print blank lines when data fields are empty
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Don't read Zotero, Mendeley or EndNote citations and bibliographies
+	Don't Save	Don't Save
+	Don't use HTML paragraph auto spacing	Don't use HTML paragraph auto spacing
+	Dot	Dot
+	Dot dash	Dot dash
+	Dot-dash	Dot-dash
+	Dots	Dots
+	Dotted	Dotted
+	Double	Double
+	Double Bar	Double Bar
+	Double Closing Quote	Double Closing Quote
+	Double Dot	Double Dot
+	Double Integral	Double Integral
+	Double Integral with Limits	Double Integral with Limits
+	Double Integral with Stacked Limits	Double Integral with Stacked Limits
+	Double Left Arrow with Text Above	Double Left Arrow with Text Above
+	Double Left Arrow with Text Below	Double Left Arrow with Text Below
+	Double Left Right Arrow with Text Above	Double Left Right Arrow with Text Above
+	Double Left Right Arrow with Text Below	Double Left Right Arrow with Text Below
+	Double Opening Quote	Double Opening Quote
+	Double Right Arrow with Text Above	Double Right Arrow with Text Above
+	Double Right Arrow with Text Below	Double Right Arrow with Text Below
+	Double Spacing	Double Spacing
+	Double Square Brackets	Double Square Brackets
+	Double Strikethrough	Double Strikethrough
+	Double strikethrough	Double strikethrough
+	Double summation	Double summation
+	Double Underline	Double Underline
+	Double Vertical Bars	Double Vertical Bars
+	Doughnut	Doughnut
+	Down	Down
+	Downloading the speech model ({mb} MB, once)…	Downloading the speech model ({mb} MB, once)…
+	Downloading…	Downloading…
+	DRAFT	DRAFT
+	Draft	Draft
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.
+	Draw	Draw
+	Draw Ink	Draw Ink
+	Draw Table	Draw Table
+	Draw\nTable	Draw\nTable
+	Drawing Canvas	Drawing Canvas
+	Drawing Grid	Drawing Grid
+	Drawing Tools	Drawing Tools
+	Drawing\nCanvas	Drawing\nCanvas
+	Drop Cap	Drop Cap
+	Drop cap	Drop cap
+	Drop-Down List Content Control	Drop-Down List Content Control
+	Drops all formatting and pastes plain text.	Drops all formatting and pastes plain text.
+	Dutch	Dutch
+	E-mail Messages	E-mail Messages
+	Edit Category	Edit Category
+	Edit Comment	Edit Comment
+	Edit Data	Edit Data
+	Edit Document	Edit Document
+	Edit Equation	Edit Equation
+	Edit Field Code	Edit Field Code
+	Edit Field…	Edit Field…
+	Edit Footer	Edit Footer
+	Edit Header	Edit Header
+	Edit Individual Documents…	Edit Individual Documents…
+	Edit Items	Edit Items
+	Edit Recipient List	Edit Recipient List
+	Edit Source	Edit Source
+	Edit\nData	Edit\nData
+	Edit\nRecipient List	Edit\nRecipient List
+	Edited	Edited
+	Editing	Editing
+	Editing header/footer	Editing header/footer
+	Editing in this document is restricted.	Editing in this document is restricted.
+	Editing — edit the document directly	Editing — edit the document directly
+	Edition	Edition
+	Editor	Editor
+	Edit…	Edit…
+	Effects	Effects
+	Elbow Arrow Connector	Elbow Arrow Connector
+	Elbow Connector	Elbow Connector
+	Ellipsis	Ellipsis
+	Em Dash	Em Dash
+	Em Space	Em Space
+	Email address (optional)	Email address (optional)
+	Emboss	Emboss
+	Emphasis	Emphasis
+	Empty Matrices	Empty Matrices
+	En Dash	En Dash
+	En Space	En Space
+	Enclose Characters	Enclose Characters
+	Enclosure	Enclosure
+	Encrypt with Password	Encrypt with Password
+	Encrypt with Password…	Encrypt with Password…
+	End of document	End of document
+	End of section	End of section
+	End of Word	End of Word
+	Endnote Reference	Endnote Reference
+	Endnote Text	Endnote Text
+	Endnotes	Endnotes
+	Endnotes to footnotes	Endnotes to footnotes
+	English	English
+	English (United Kingdom)	English (United Kingdom)
+	English (United States)	English (United States)
+	Engrave	Engrave
+	Enlarge symbol	Enlarge symbol
+	Enter formatting for number:	Enter formatting for number:
+	Enter in Equation	Enter in Equation
+	Enter page number:	Enter page number:
+	Enter the web address or embed code of an online video:	Enter the web address or embed code of an online video:
+	Entry marked.	Entry marked.
+	Entry:	Entry:
+	Envelope #10   4.12" × 9.50"	Envelope #10   4.12" × 9.50"
+	Envelope Address	Envelope Address
+	Envelope DL   4.33" × 8.66"	Envelope DL   4.33" × 8.66"
+	Envelope Return	Envelope Return
+	Envelope size:	Envelope size:
+	Envelopes	Envelopes
+	Equal by Definition	Equal by Definition
+	Equal column width	Equal column width
+	Equal Equal	Equal Equal
+	Equal to	Equal to
+	Equals:	Equals:
+	Equation	Equation
+	Equation Gallery	Equation Gallery
+	Equation Info	Equation Info
+	Equation Number	Equation Number
+	Equation Options	Equation Options
+	Erase Ink	Erase Ink
+	Eraser	Eraser
+	Errors ({n})	Errors ({n})
+	Estonian	Estonian
+	Euler's identity	Euler's identity
+	Even Page	Even Page
+	Even pages only	Even pages only
+	Every change is recorded as a tracked change.	Every change is recorded as a tracked change.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.
+	Every field needs a name.	Every field needs a name.
+	Every font this document uses is installed.	Every font this document uses is installed.
+	Everyone	Everyone
+	Exactly	Exactly
+	Exactly {n}	Exactly {n}
+	Example: {sample}	Example: {sample}
+	Exceptions (optional)	Exceptions (optional)
+	Exceptions…	Exceptions…
+	Executive   7.25" × 10.50"	Executive   7.25" × 10.50"
+	Exit	Exit
+	Expand	Expand
+	Expand or Collapse Heading	Expand or Collapse Heading
+	Expanded	Expanded
+	Exponential	Exponential
+	Exponential series	Exponential series
+	Export	Export
+	Export a copy to share (PDF, Word document)	Export a copy to share (PDF, Word document)
+	Export Page as JPEG	Export Page as JPEG
+	Export Page as PNG	Export Page as PNG
+	Export PDF	Export PDF
+	Exported {path}	Exported {path}
+	Expression	Expression
+	Extend Selection	Extend Selection
+	Extend Selection by Units	Extend Selection by Units
+	Extra space	Extra space
+	Extra spaces between words.	Extra spaces between words.
+	Field	Field
+	Field Click	Field Click
+	Field code:	Field code:
+	Field Codes	Field Codes
+	Field codes:	Field codes:
+	Field name	Field name
+	Field name:	Field name:
+	Field names must be different.	Field names must be different.
+	Field names:	Field names:
+	Field properties	Field properties
+	Field:	Field:
+	Fields	Fields
+	Fields to insert:	Fields to insert:
+	Fields:	Fields:
+	Field…	Field…
+	Figure	Figure
+	File	File
+	File name:	File name:
+	Fill	Fill
+	Fill & Line	Fill & Line
+	Fill color:	Fill colour:
+	Fill:	Fill:
+	Filling in forms	Filling in forms
+	Film	Film
+	Filter and Sort	Filter and Sort
+	Filter and Sort…	Filter and Sort…
+	Filter Records	Filter Records
+	Find	Find
+	Find and Replace	Find and Replace
+	Find Next	Find Next
+	Find Next Editable Region	Find Next Editable Region
+	Find Previous	Find Previous
+	Find Recipient	Find Recipient
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Find selects the next changed paragraph; Reject puts the selected one back as it was.
+	Find What Expression	Find What Expression
+	Find What Text	Find What Text
+	Find what:	Find what:
+	Find →	Find →
+	Find:	Find:
+	Finish	Finish
+	Finish & Merge	Finish & Merge
+	Finish &\nMerge	Finish &\nMerge
+	Finished	Finished
+	Finnish	Finnish
+	First	First
+	First Cell in Column	First Cell in Column
+	First Cell in Row	First Cell in Row
+	First Column	First Column
+	First commit	First commit
+	First line	First line
+	First line:	First line:
+	First Name	First Name
+	First row of data contains column headers	First row of data contains column headers
+	Fit	Fit
+	Fit text	Fit text
+	Fix Position on Page	Fix Position on Page
+	Fixed Column Width	Fixed Column Width
+	Flip Horizontal	Flip Horizontal
+	Flip Vertical	Flip Vertical
+	Floor	Floor
+	Focus	Focus
+	Follow number with:	Follow number with:
+	Font	Font
+	Font Color	Font Colour
+	Font color	Font colour
+	Font color:	Font colour:
+	Font Dialog	Font Dialog
+	Font not installed	Font not installed
+	Font Size	Font Size
+	Font Substitution	Font Substitution
+	Font Substitution…	Font Substitution…
+	Font:	Font:
+	Font: {font}	Font: {font}
+	Fonts	Fonts
+	Font…	Font…
+	Footer	Footer
+	Footnote and Endnote	Footnote and Endnote
+	Footnote Reference	Footnote Reference
+	Footnote Text	Footnote Text
+	Footnotes	Footnotes
+	Footnotes and endnotes	Footnotes and endnotes
+	Footnotes to endnotes	Footnotes to endnotes
+	Form Letters	Form Letters
+	Format	Format
+	Format Page Numbers	Format Page Numbers
+	Format Page Numbers…	Format Page Numbers…
+	Format Painter	Format Painter
+	Format Picture	Format Picture
+	Format Shape	Format Shape
+	Format:	Format:
+	Formatted	Formatted
+	Formatted Text	Formatted Text
+	Formatting	Formatting
+	Formatting at Selection	Formatting at Selection
+	Formatting completed. You can now:	Formatting completed. You can now:
+	Formatting exceptions	Formatting exceptions
+	Formatting marks	Formatting marks
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Formatting, case changes, white space and tables are compared; the other settings are kept for later.
+	Formula	Formula
+	Forward	Forward
+	Fraction	Fraction
+	Fractions (1/2) as fraction characters (½)	Fractions (1/2) as fraction characters (½)
+	French	French
+	French (France)	French (France)
+	From	From
+	From text:	From text:
+	from Unicode (hex)	from Unicode (hex)
+	From:	From:
+	Full page of the same label	Full page of the same label
+	Function	Function
+	Functions	Functions
+	Gallery	Gallery
+	GB/T 7714	GB/T 7714
+	General	General
+	Geometry	Geometry
+	German	German
+	German (Germany)	German (Germany)
+	Get Add-ins	Get Add-ins
+	Get Data	Get Data
+	Get Data…	Get Data…
+	Getting ready…	Getting ready…
+	Glow	Glow
+	Glow Colors	Glow Colours
+	Go Back	Go Back
+	Go To	Go To
+	Go to	Go to
+	Go To…	Go To…
+	Good afternoon	Good afternoon
+	Good evening	Good evening
+	Good morning	Good morning
+	GOST (name sort)	GOST (name sort)
+	GOST (title sort)	GOST (title sort)
+	Grab bag	Grab bag
+	Grammar	Grammar
+	Grammar Settings	Grammar Settings
+	Graphic	Graphic
+	Grave	Grave
+	Greater than	Greater than
+	Greater than or equal	Greater than or equal
+	Greek	Greek
+	Greek Letters	Greek Letters
+	Green:	Green:
+	Greeting Line	Greeting Line
+	Greeting\nLine	Greeting\nLine
+	Grid Settings	Grid Settings
+	Grid Table 1 Light	Grid Table 1 Light
+	Grid Table 4 – Blue	Grid Table 4 – Blue
+	Grid Table 4 – Green	Grid Table 4 – Green
+	Grid Table 4 – Orange	Grid Table 4 – Orange
+	Grid Table 4 – Purple	Grid Table 4 – Purple
+	Gridlines	Gridlines
+	Group	Group
+	Grouping Character Above	Grouping Character Above
+	Grouping Character Below	Grouping Character Below
+	Grow Font 1 Point	Grow Font 1 Point
+	H:	H:
+	Hanging Indent	Hanging Indent
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Hat
+	Header	Header
+	Header & Footer	Header & Footer
+	Header Options	Header Options
+	Header Options:	Header Options:
+	Header Row	Header Row
+	Header source: {file} (the next data source opened here takes its field names)	Header source: {file} (the next data source opened here takes its field names)
+	Header/Footer Position	Header/Footer Position
+	Headers and footers	Headers and footers
+	Heading 1	Heading 1
+	Heading 2	Heading 2
+	Heading 3	Heading 3
+	Heading styles (levels 1–{n})	Heading styles (levels 1–{n})
+	Heading {n}	Heading {n}
+	Headings	Headings
+	Heart	Heart
+	Hebrew	Hebrew
+	Height:	Height:
+	Help	Help
+	Hex:	Hex:
+	Hidden	Hidden
+	Hidden text	Hidden text
+	Hide Codes	Hide Codes
+	Hide from style lists	Hide from style lists
+	Hide Ink	Hide Ink
+	Hide White Space	Hide White Space
+	Hide\nInk	Hide\nInk
+	Hierarchy	Hierarchy
+	Highlight	Highlight
+	Highlight Changes	Highlight Changes
+	Highlight changes in printed document	Highlight changes in printed document
+	Highlight changes on screen	Highlight changes on screen
+	Highlight Merge Fields	Highlight Merge Fields
+	Highlight\nMerge Fields	Highlight\nMerge Fields
+	Highlighter	Highlighter
+	Hindi	Hindi
+	Historical and Discretional	Historical and Discretional
+	Hollow	Hollow
+	Home	Home
+	Home folder	Home folder
+	Horizontal	Horizontal
+	Horizontal Line	Horizontal Line
+	Horizontal spacing:	Horizontal spacing:
+	How many pages the whole document has	How many pages the whole document has
+	How many pages this section has	How many pages this section has
+	How many words the document holds	How many words the document holds
+	HTML Format	HTML Format
+	Hue:	Hue:
+	Hungarian	Hungarian
+	Hyperbolic Cosecant Function	Hyperbolic Cosecant Function
+	Hyperbolic Cosine Function	Hyperbolic Cosine Function
+	Hyperbolic Cotangent Function	Hyperbolic Cotangent Function
+	Hyperbolic Functions	Hyperbolic Functions
+	Hyperbolic Secant Function	Hyperbolic Secant Function
+	Hyperbolic Sine Function	Hyperbolic Sine Function
+	Hyperbolic Tangent Function	Hyperbolic Tangent Function
+	Hyperlink	Hyperlink
+	Hyphenate at:	Hyphenate at:
+	Hyphenate words in CAPS	Hyphenate words in CAPS
+	Hyphenation	Hyphenation
+	Hyphenation Options…	Hyphenation Options…
+	Hyphenation zone:	Hyphenation zone:
+	Hyphens (--) as dashes (—)	Hyphens (--) as dashes (—)
+	Hypotenuse	Hypotenuse
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Icon Colour
+	Icons	Icons
+	Identity Matrices	Identity Matrices
+	IEEE	IEEE
+	If…Then…Else	If…Then…Else
+	If…Then…Else…	If…Then…Else…
+	Ignore All	Ignore All
+	Ignore punctuation characters	Ignore punctuation characters
+	Ignore web and file addresses	Ignore web and file addresses
+	Ignore white-space characters	Ignore white-space characters
+	Ignore words in capitals	Ignore words in capitals
+	Ignore words with numbers	Ignore words with numbers
+	Illustrations	Illustrations
+	Immersive	Immersive
+	Immersive Reader	Immersive Reader
+	Immersive\nReader	Immersive\nReader
+	In Default apps, choose Doc4Me for the document types you want it to open.	In Default apps, choose Doc4Me for the document types you want it to open.
+	In equations, typing a name after a backslash replaces it with its symbol.	In equations, typing a name after a backslash replaces it with its symbol.
+	In Front of Text	In Front of Text
+	In Line with Text	In Line with Text
+	Inches	Inches
+	Include label and number	Include label and number
+	Include level number from:	Include level number from:
+	Include page numbers	Include page numbers
+	Increase Font Size	Increase Font Size
+	Increase Indent	Increase Indent
+	Indent	Indent
+	Indent from left:	Indent from left:
+	Indentation	Indentation
+	Indented	Indented
+	Indents	Indents
+	Indents and Spacing	Indents and Spacing
+	Index	Index
+	Index and Tables	Index and Tables
+	Index Heading	Index Heading
+	Index {n}	Index {n}
+	Indonesian	Indonesian
+	Inflate	Inflate
+	Info	Info
+	Initials:	Initials:
+	Ink	Ink
+	Ink Equation	Ink Equation
+	Ink Replay	Ink Replay
+	Ink to Math	Ink to Math
+	Ink to Shape	Ink to Shape
+	Ink to\nMath	Ink to\nMath
+	Ink to\nShape	Ink to\nShape
+	Ink\nReplay	Ink\nReplay
+	Inline	Inline
+	Input Format	Input Format
+	Insert	Insert
+	Insert a 3D model from a file (.glb, .stl, .obj)	Insert a 3D model from a file (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Insert a new equation (Alt+=)
+	Insert Above	Insert Above
+	Insert Below	Insert Below
+	Insert Caption	Insert Caption
+	Insert Cells	Insert Cells
+	Insert Chart	Insert Chart
+	Insert Citation	Insert Citation
+	Insert Columns to the Left	Insert Columns to the Left
+	Insert Columns to the Right	Insert Columns to the Right
+	Insert Data	Insert Data
+	Insert Database	Insert Database
+	Insert Database…	Insert Database…
+	Insert Date Field	Insert Date Field
+	Insert Endnote	Insert Endnote
+	Insert entire column	Insert entire column
+	Insert entire row	Insert entire row
+	Insert Footnote	Insert Footnote
+	Insert Hyperlink	Insert Hyperlink
+	Insert Index	Insert Index
+	Insert Left	Insert Left
+	Insert LISTNUM Field	Insert LISTNUM Field
+	Insert Merge Field	Insert Merge Field
+	Insert Merge\nField	Insert Merge\nField
+	Insert New Equation	Insert New Equation
+	Insert one text or another, depending on a field's value.	Insert one text or another, depending on a field's value.
+	Insert Page Field	Insert Page Field
+	Insert Right	Insert Right
+	Insert Rows	Insert Rows
+	Insert Rows Above	Insert Rows Above
+	Insert Rows Below	Insert Rows Below
+	Insert Shapes	Insert Shapes
+	Insert SmartArt	Insert SmartArt
+	Insert Structure	Insert Structure
+	Insert Symbol	Insert Symbol
+	Insert Table	Insert Table
+	Insert Table of Authorities	Insert Table of Authorities
+	Insert Table of Figures	Insert Table of Figures
+	Insert Table…	Insert Table…
+	Insert Time Field	Insert Time Field
+	Insert Video	Insert Video
+	Insert\nAbove	Insert\nAbove
+	Insert\nCaption	Insert\nCaption
+	Insert\nCitation	Insert\nCitation
+	Insert\nFootnote	Insert\nFootnote
+	Inserted	Inserted
+	Insertions and Deletions	Insertions and Deletions
+	Insertions:	Insertions:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}
+	Inside	Inside
+	Inside Borders	Inside Borders
+	Inside Margin	Inside Margin
+	Inside:	Inside:
+	Inspect Document	Inspect Document
+	Inspect Styles at Selection	Inspect Styles at Selection
+	Institution	Institution
+	Integral	Integral
+	Integral of e^(−x²)	Integral of e^(−x²)
+	Integral with Limits	Integral with Limits
+	Integral with Stacked Limits	Integral with Stacked Limits
+	Integrals	Integrals
+	Intense Emphasis	Intense Emphasis
+	Intense Quote	Intense Quote
+	Intense Reference	Intense Reference
+	Interface	Interface
+	Interface language	Interface language
+	Interface language:	Interface language:
+	Interface size:	Interface size:
+	Interface Theme	Interface Theme
+	Interface theme:	Interface theme:
+	Interface\nTheme	Interface\nTheme
+	Internet addresses as links	Internet addresses as links
+	Intersection	Intersection
+	Intersection with Limits	Intersection with Limits
+	Intersection with Lower Limit	Intersection with Lower Limit
+	Intersection with Subscript-Superscript Limits	Intersection with Subscript-Superscript Limits
+	Inverse Cosecant Function	Inverse Cosecant Function
+	Inverse Cosine Function	Inverse Cosine Function
+	Inverse Cotangent Function	Inverse Cotangent Function
+	Inverse Functions	Inverse Functions
+	Inverse Hyperbolic Cosecant Function	Inverse Hyperbolic Cosecant Function
+	Inverse Hyperbolic Cosine Function	Inverse Hyperbolic Cosine Function
+	Inverse Hyperbolic Cotangent Function	Inverse Hyperbolic Cotangent Function
+	Inverse Hyperbolic Functions	Inverse Hyperbolic Functions
+	Inverse Hyperbolic Secant Function	Inverse Hyperbolic Secant Function
+	Inverse Hyperbolic Sine Function	Inverse Hyperbolic Sine Function
+	Inverse Hyperbolic Tangent Function	Inverse Hyperbolic Tangent Function
+	Inverse Secant Function	Inverse Secant Function
+	Inverse Sine Function	Inverse Sine Function
+	Inverse Tangent Function	Inverse Tangent Function
+	Ionosphere	Ionosphere
+	Is blank	Is blank
+	Is not blank	Is not blank
+	ISO 690 (author-date)	ISO 690 (author-date)
+	ISO 690 (numerical)	ISO 690 (numerical)
+	Issue	Issue
+	it isn't a picture Doc4Me can read	it isn't a picture Doc4Me can read
+	Italian	Italian
+	Italic	Italic
+	Japanese	Japanese
+	Journal	Journal
+	Justification	Justification
+	Justification of a display equation	Justification of a display equation
+	Justified	Justified
+	Justify	Justify
+	Keep Lines Together	Keep Lines Together
+	Keep lines together	Keep lines together
+	Keep Source Formatting	Keep Source Formatting
+	Keep Text Only	Keep Text Only
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.
+	Keep with Next	Keep with Next
+	Keep with next	Keep with next
+	Keeps the fonts and formatting of the copied text.	Keeps the fonts and formatting of the copied text.
+	Kerning for fonts:	Kerning for fonts:
+	Keyboard shortcuts:	Keyboard shortcuts:
+	Keys for this command:	Keys for this command:
+	Keywords	Keywords
+	Korean	Korean
+	Label changes with:	Label changes with:
+	Label:	Label:
+	Labels	Labels
+	Landscape	Landscape
+	Language	Language
+	Language Preferences…	Language Preferences…
+	Language…	Language…
+	Large\nOperator	Large\nOperator
+	Largest Only	Largest Only
+	Largest only	Largest only
+	Lasso	Lasso
+	Lasso Select	Lasso Select
+	Last	Last
+	Last Cell in Column	Last Cell in Column
+	Last Cell in Row	Last Cell in Row
+	Last Column	Last Column
+	Last commit	Last commit
+	Last Name	Last Name
+	Last, First; Last, First	Last, First; Last, First
+	Latin text font:	Latin text font:
+	Layout	Layout
+	Layout options for this document	Layout options for this document
+	Layout Summary	Layout Summary
+	Layouts	Layouts
+	Leader	Leader
+	Leave a recipient out of the merge when a field has this value.	Leave a recipient out of the merge when a field has this value.
+	Leave Equation	Leave Equation
+	Leave the equation (Esc)	Leave the equation (Esc)
+	Leave the label out of the caption	Leave the label out of the caption
+	Left	Left
+	Left Arrow with Text Above	Left Arrow with Text Above
+	Left Arrow with Text Below	Left Arrow with Text Below
+	Left Border	Left Border
+	Left border	Left border
+	Left Bracket Twice	Left Bracket Twice
+	Left indent	Left indent
+	Left Margin	Left Margin
+	Left Only	Left Only
+	Left only	Left only
+	Left Right Arrow Above	Left Right Arrow Above
+	Left Right Arrow with Text Above	Left Right Arrow with Text Above
+	Left Right Arrow with Text Below	Left Right Arrow with Text Below
+	Left Subscript-Superscript	Left Subscript-Superscript
+	Left-to-right	Left-to-right
+	Left-to-Right Text Direction	Left-to-Right Text Direction
+	Left:	Left:
+	Leftwards Arrow Above	Leftwards Arrow Above
+	Leftwards Harpoon Above	Leftwards Harpoon Above
+	Legal   8.50" × 14.00"	Legal   8.50" × 14.00"
+	Legal style numbering	Legal style numbering
+	Legend	Legend
+	Less than	Less than
+	Less than or equal	Less than or equal
+	Letter	Letter
+	Letter   8.50" × 11.00"	Letter   8.50" × 11.00"
+	Letter headings	Letter headings
+	Letter-Like Symbols	Letter-Like Symbols
+	Letters	Letters
+	Level 1	Level 1
+	Level 2	Level 2
+	Level 3	Level 3
+	Level 4	Level 4
+	Level 5	Level 5
+	Level 6	Level 6
+	Level 7	Level 7
+	Level 8	Level 8
+	Level 9	Level 9
+	Level {n}	Level {n}
+	Level:	Level:
+	Levels:	Levels:
+	LibreTranslate server (open source)	LibreTranslate server (open source)
+	Ligatures:	Ligatures:
+	Light	Light
+	Light with Outline	Light with Outline
+	Limit	Limit
+	Limit and\nLog	Limit and\nLog
+	Limit consecutive hyphens to:	Limit consecutive hyphens to:
+	Limit Example	Limit Example
+	Limit formatting to a selection of styles	Limit formatting to a selection of styles
+	Line	Line
+	Line and Page Breaks	Line and Page Breaks
+	Line and Paragraph Spacing	Line and Paragraph Spacing
+	Line between	Line between
+	Line Break	Line Break
+	Line breaking	Line breaking
+	Line delta	Line delta
+	Line End	Line End
+	Line Number	Line Number
+	Line Numbering Options…	Line Numbering Options…
+	Line Numbers	Line Numbers
+	Line Spacing	Line Spacing
+	Line spacing	Line spacing
+	Line Spacing Options…	Line Spacing Options…
+	Line spacing:	Line spacing:
+	Line Start	Line Start
+	Line width:	Line width:
+	Line:	Line:
+	Linear	Linear
+	Linear Fraction	Linear Fraction
+	Lines	Lines
+	Lines +/−	Lines +/−
+	Lines added	Lines added
+	Lines and characters	Lines and characters
+	Lines deleted	Lines deleted
+	Lines only	Lines only
+	Lines per page:	Lines per page:
+	Link	Link
+	Link entries to their headings	Link entries to their headings
+	Link level to style:	Link level to style:
+	Link to Previous	Link to Previous
+	Linked style (paragraph and character)	Linked style (paragraph and character)
+	Links	Links
+	Links and References	Links and References
+	Link…	Link…
+	List	List
+	List Commands	List Commands
+	List Definition	List Definition
+	List entries	List entries
+	List Paragraph	List Paragraph
+	List styles	List styles
+	List Table 3 – Blue	List Table 3 – Blue
+	List Table 3 – Green	List Table 3 – Green
+	List Table 3 – Orange	List Table 3 – Orange
+	List Table 3 – Purple	List Table 3 – Purple
+	Listening… speak now	Listening… speak now
+	Location	Location
+	Location: {path}	Location: {path}
+	Lock aspect ratio	Lock aspect ratio
+	Lock Fields	Lock Fields
+	Logarithm	Logarithm
+	Logarithm with Base	Logarithm with Base
+	Logical AND	Logical AND
+	Logical AND with Limits	Logical AND with Limits
+	Logical OR	Logical OR
+	Logical OR with Limits	Logical OR with Limits
+	Long citation:	Long citation:
+	lowercase	lowercase
+	Lum:	Lum:
+	Macros	Macros
+	Made from the author and year when empty	Made from the author and year when empty
+	Magazine or newspaper article	Magazine or newspaper article
+	Mail Merge	Mail Merge
+	Mail Merge Helper	Mail Merge Helper
+	Mail Merge Helper…	Mail Merge Helper…
+	Mailing Labels	Mailing Labels
+	Mailings	Mailings
+	Main entry:	Main entry:
+	Make Doc4Me the default for Word documents…	Make Doc4Me the default for Word documents…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.
+	Malay	Malay
+	Manage Sources	Manage Sources
+	Manage Styles	Manage Styles
+	Manage Styles…	Manage Styles…
+	Manual Hyphenation	Manual Hyphenation
+	Manual hyphenation is complete.	Manual hyphenation is complete.
+	Manual Line Break	Manual Line Break
+	Manual Page Break	Manual Page Break
+	Manual…	Manual…
+	Many pages	Many pages
+	Margin	Margin
+	Margins	Margins
+	Mark	Mark
+	Mark All	Mark All
+	Mark as decorative	Mark as decorative
+	Mark Citation	Mark Citation
+	Mark Citation…	Mark Citation…
+	Mark Entry	Mark Entry
+	Mark Entry…	Mark Entry…
+	Mark grammar errors as you type	Mark grammar errors as you type
+	Mark Index Entry	Mark Index Entry
+	Mark selected text as:	Mark selected text as:
+	Mark Table of Contents Entry	Mark Table of Contents Entry
+	Mark\nCitation	Mark\nCitation
+	Mark\nEntry	Mark\nEntry
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Match case
+	Match Fields	Match Fields
+	Match prefix	Match prefix
+	Match suffix	Match suffix
+	Math AutoCorrect	Math AutoCorrect
+	Math Input Control	Math Input Control
+	Matrices with Brackets	Matrices with Brackets
+	Matrix	Matrix
+	Maximize	Maximise
+	Maximum	Maximum
+	Maximum Example	Maximum Example
+	Measured By	Measured By
+	Measurement units:	Measurement units:
+	Media	Media
+	Merge	Merge
+	Merge Cells	Merge Cells
+	Merge Formatting	Merge Formatting
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.
+	Merge Record #	Merge Record #
+	Merge records	Merge records
+	Merge to New Document	Merge to New Document
+	Merge to Printer	Merge to Printer
+	Merge to:	Merge to:
+	Merge type: {type}	Merge type: {type}
+	Merged PRs	Merged PRs
+	Merge…	Merge…
+	Mesosphere	Mesosphere
+	Middle	Middle
+	Midline Dots	Midline Dots
+	Millimeters	Millimetres
+	Minimum	Minimum
+	Minus Equal	Minus Equal
+	Mirror indents	Mirror indents
+	Mirrored	Mirrored
+	Missing document font	Missing document font
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.
+	MLA	MLA
+	Model	Model
+	Models	Models
+	Moderate	Moderate
+	Modify Style	Modify Style
+	Modify Table Style	Modify Table Style
+	Modify Table Style…	Modify Table Style…
+	Modify…	Modify…
+	Mon	Mon
+	Month	Month
+	More >>	More >>
+	More Colors…	More Colours…
+	More Columns…	More Columns…
+	More Commands…	More Commands…
+	More Symbols…	More Symbols…
+	More templates →	More templates →
+	Move Down	Move Down
+	Move in Equation	Move in Equation
+	Move object with text	Move object with text
+	Move or Resize	Move or Resize
+	Move Paragraph Down	Move Paragraph Down
+	Move Paragraph Up	Move Paragraph Up
+	Move Past Citation	Move Past Citation
+	Move Past\nCitation	Move Past\nCitation
+	Move Selected Ink	Move Selected Ink
+	Move Text	Move Text
+	Move to where?	Move to where?
+	Move Up	Move Up
+	Move with Text	Move with Text
+	Move with text	Move with text
+	Moved from	Moved from
+	Moved to	Moved to
+	Moves	Moves
+	Multilevel List	Multilevel List
+	Multiple Pages	Multiple Pages
+	My Add-ins	My Add-ins
+	MyMemory (free, no account)	MyMemory (free, no account)
+	Name	Name
+	Name (A–Z)	Name (A–Z)
+	Name of the file this document is saved as	Name of the file this document is saved as
+	Name:	Name:
+	Narrow  0.5" all	Narrow  0.5" all
+	Natural Logarithm	Natural Logarithm
+	Nature	Nature
+	Navigation	Navigation
+	Navigation Pane	Navigation Pane
+	Negated Relations	Negated Relations
+	New	New
+	New Comment	New Comment
+	New comments and tracked changes are recorded under this name and these initials.	New comments and tracked changes are recorded under this name and these initials.
+	New Document	New Document
+	New document	New document
+	New Drawing Canvas	New Drawing Canvas
+	New Entry	New Entry
+	New Folder	New Folder
+	New from Template	New from Template
+	New Group	New Group
+	New Label	New Label
+	New Label…	New Label…
+	New Paragraph	New Paragraph
+	New shortcut:	New shortcut:
+	New Style…	New Style…
+	New Tab	New Tab
+	New Table Style	New Table Style
+	New Table Style…	New Table Style…
+	New Window	New Window
+	New word	New word
+	New\nComment	New\nComment
+	New\nWindow	New\nWindow
+	New…	New…
+	Next	Next
+	Next Change	Next Change
+	Next Comment	Next Comment
+	Next Field	Next Field
+	Next Footnote	Next Footnote
+	Next Page	Next Page
+	Next Record	Next Record
+	Next Section	Next Section
+	Next Sentence	Next Sentence
+	Next sentence	Next sentence
+	Next Window	Next Window
+	No	No
+	No accessibility issues found.	No accessibility issues found.
+	No add-ins are listed yet.	No add-ins are listed yet.
+	No add-ins yet. Add one from the Store.	No add-ins yet. Add one from the Store.
+	No Border	No Border
+	No changes (read only)	No changes (read only)
+	No Color	No Colour
+	No contributor data was built into this copy.	No contributor data was built into this copy.
+	No data source yet.	No data source yet.
+	No errors found: every merge field is in the recipient list.	No errors found: every merge field is in the recipient list.
+	No Fill	No Fill
+	No Glow	No Glow
+	No grid	No grid
+	No icons match your search.	No icons match your search.
+	No limit	No limit
+	No Line	No Line
+	No Markup	No Markup
+	No model credits were built into this copy.	No model credits were built into this copy.
+	No Outline	No Outline
+	No Paragraph Space	No Paragraph Space
+	No pictures found.	No pictures found.
+	No Reflection	No Reflection
+	No revisions	No revisions
+	No Shadow	No Shadow
+	No Soft Edges	No Soft Edges
+	No sources yet.	No sources yet.
+	No Spacing	No Spacing
+	no speech program on this system	no speech program on this system
+	No templates match your search.	No templates match your search.
+	No Transform	No Transform
+	No words yet. Add to Dictionary on a misspelled word puts it here.	No words yet. Add to Dictionary on a misspelled word puts it here.
+	No-Width Non Break	No-Width Non Break
+	No-Width Optional Break	No-Width Optional Break
+	Nonbreaking Hyphen	Nonbreaking Hyphen
+	Nonbreaking Space	Nonbreaking Space
+	None	None
+	Normal	Normal
+	Normal  1" all	Normal  1" all
+	Normal Indent	Normal Indent
+	Normal probability density	Normal probability density
+	Normal speed	Normal speed
+	Normal Style	Normal Style
+	Normal Table	Normal Table
+	Normal Text	Normal Text
+	Normal Word Document	Normal Word Document
+	North	North
+	Norwegian (Bokmål)	Norwegian (Bokmål)
+	Not	Not
+	Not available right now	Not available right now
+	Not equal to	Not equal to
+	Not linked: click a text box	Not linked: click a text box
+	Not saved	Not saved
+	Not saved yet	Not saved yet
+	Not used by any command	Not used by any command
+	Not {name}	Not {name}
+	Nothing	Nothing
+	Nothing collected yet. Items you copy or cut appear here.	Nothing collected yet. Items you copy or cut appear here.
+	Now used by {command}	Now used by {command}
+	Nudge	Nudge
+	Num Occurrences	Num Occurrences
+	Number	Number
+	Number alignment:	Number alignment:
+	Number format	Number format
+	Number of columns:	Number of columns:
+	Number of rows:	Number of rows:
+	Number of the page the field sits on	Number of the page the field sits on
+	Number of the section the field sits in	Number of the section the field sits in
+	Number style for this level:	Number style for this level:
+	Number the equation; the number sits at the right margin (or type # then the number)	Number the equation; the number sits at the right margin (or type # then the number)
+	Number type:	Number type:
+	Number:	Number:
+	Numbering	Numbering
+	Numbering:	Numbering:
+	Numbering…	Numbering…
+	Numerals	Numerals
+	Numerals:	Numerals:
+	n×n Identity Matrix	n×n Identity Matrix
+	n×n Matrix	n×n Matrix
+	Object	Object
+	Odd Page	Odd Page
+	Odd pages only	Odd pages only
+	Off	Off
+	Office	Office
+	Office 2003 Default	Office 2003 Default
+	Offset (pt):	Offset (pt):
+	Offset: Bottom	Offset: Bottom
+	Offset: Bottom Left	Offset: Bottom Left
+	Offset: Bottom Right	Offset: Bottom Right
+	Offset: Center	Offset: Centre
+	Offset: Left	Offset: Left
+	Offset: Right	Offset: Right
+	Offset: Top	Offset: Top
+	Offset: Top Left	Offset: Top Left
+	Offset: Top Right	Offset: Top Right
+	OK	OK
+	Omit	Omit
+	On	On
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.
+	One	One
+	One half	One half
+	One label per recipient	One label per recipient
+	One line per item. Enter adds an item.	One line per item. Enter adds an item.
+	One Page	One Page
+	Online Pictures	Online Pictures
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.
+	Online Pictures…	Online Pictures…
+	Online services are turned off (File › Options › Trust Center).	Online services are turned off (File › Options › Trust Centre).
+	Online Video	Online Video
+	Only allow this kind of editing:	Only allow this kind of editing:
+	Only comments can be added, except in regions marked editable.	Only comments can be added, except in regions marked editable.
+	Only form fields can be filled in.	Only form fields can be filled in.
+	only https addresses can be used	only https addresses can be used
+	Only pictures I may use commercially	Only pictures I may use commercially
+	Only the allowed styles can be applied.	Only the allowed styles can be applied.
+	Only web (http, https) and email (mailto) links can be followed	Only web (http, https) and email (mailto) links can be followed
+	Open	Open
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.
+	Open Data Source…	Open Data Source…
+	Open Hyperlink	Open Hyperlink
+	OpenDocument Text (*.odt)	OpenDocument Text (*.odt)
+	Opening print dialog…	Opening print dialog…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.
+	Open…	Open…
+	Operator	Operator
+	Operator Structures	Operator Structures
+	Operators	Operators
+	Optional Hyphen	Optional Hyphen
+	Options	Options
+	Options…	Options…
+	Or	Or
+	Or save a copy in another format:	Or save a copy in another format:
+	Ordinals (1st) as superscript	Ordinals (1st) as superscript
+	Organizer	Organiser
+	Organizer…	Organiser…
+	Orientation	Orientation
+	Original document	Original document
+	Other	Other
+	Other Authorities	Other Authorities
+	Other Large Operators	Other Large Operators
+	Other paragraph styles	Other paragraph styles
+	Other styles and their TOC level:	Other styles and their TOC level:
+	Otherwise insert:	Otherwise insert:
+	Outline	Outline
+	Outline Level	Outline Level
+	Outline level	Outline level
+	Outline levels	Outline levels
+	Outline State	Outline State
+	Outline Tools	Outline Tools
+	Outlining	Outlining
+	Outside	Outside
+	Outside border	Outside border
+	Outside Borders	Outside Borders
+	Outside Margin	Outside Margin
+	Outside:	Outside:
+	Outward Brackets	Outward Brackets
+	Oval	Oval
+	Overbar	Overbar
+	Overbars and Underbars	Overbars and Underbars
+	Overbrace	Overbrace
+	Overtype	Overtype
+	Overtype (typing replaces the characters after the caret)	Overtype (typing replaces the characters after the caret)
+	Page	Page
+	Page Background	Page Background
+	Page Border	Page Border
+	Page Borders	Page Borders
+	Page Break	Page Break
+	Page Break Before	Page Break Before
+	Page break before	Page break before
+	Page Breaks	Page Breaks
+	Page Color	Page Colour
+	Page display	Page display
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Page image (*.jpg, *.jpeg)
+	Page image (*.png)	Page image (*.png)
+	Page Movement	Page Movement
+	Page Number	Page Number
+	Page number style	Page number style
+	Page numbers at the right margin	Page numbers at the right margin
+	Page on which a bookmarked passage falls	Page on which a bookmarked passage falls
+	Page Setup	Page Setup
+	Page title	Page title
+	Page Up	Page Up
+	Page Width	Page Width
+	Page width	Page width
+	Page X of Y	Page X of Y
+	Page {page}	Page {page}
+	Page {page} of {pages}	Page {page} of {pages}
+	Page\nBorders	Page\nBorders
+	Page\nColor	Page\nColour
+	Page\nNumber	Page\nNumber
+	Pages	Pages
+	Pages like 1-3, 5	Pages like 1-3, 5
+	Pages of bookmark:	Pages of bookmark:
+	Paragraph	Paragraph
+	Paragraph Character	Paragraph Character
+	Paragraph Details	Paragraph Details
+	Paragraph Down	Paragraph Down
+	Paragraph Mark	Paragraph Mark
+	Paragraph marks	Paragraph marks
+	Paragraph Settings	Paragraph Settings
+	Paragraph Spacing	Paragraph Spacing
+	Paragraph style	Paragraph style
+	Paragraph Up	Paragraph Up
+	Paragraphs	Paragraphs
+	Paragraph…	Paragraph…
+	Parentheses	Parentheses
+	Parentheses with Separator	Parentheses with Separator
+	Partial Differential	Partial Differential
+	Password	Password
+	Password:	Password:
+	Paste	Paste
+	Paste All	Paste All
+	Paste as:	Paste as:
+	Paste Clipboard Item	Paste Clipboard Item
+	Paste Formatting	Paste Formatting
+	Paste Special	Paste Special
+	Paste Special…	Paste Special…
+	Paste Spike	Paste Spike
+	Paste: Keep Text Only	Paste: Keep Text Only
+	Paste: Merge Formatting	Paste: Merge Formatting
+	Pasting between documents:	Pasting between documents:
+	Pasting from other programs:	Pasting from other programs:
+	Pasting within the same document:	Pasting within the same document:
+	Pause	Pause
+	Paused	Paused
+	PDF document (*.pdf)	PDF document (*.pdf)
+	Pen	Pen
+	Pencil	Pencil
+	Pens	Pens
+	People	People
+	Periodical	Periodical
+	Personalize	Personalise
+	Phonetic Guide	Phonetic Guide
+	Pi Over 2	Pi Over 2
+	Picas	Picas
+	Pick a custom group (New Group makes one)	Pick a custom group (New Group makes one)
+	Pick a field from the list	Pick a field from the list
+	Picture	Picture
+	Picture Border	Picture Border
+	Picture Content Control	Picture Content Control
+	Picture Format	Picture Format
+	Picture Styles	Picture Styles
+	Pictures	Pictures
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.
+	Pie	Pie
+	Placeholder Name	Placeholder Name
+	Placeholder text	Placeholder text
+	Plain Table 1	Plain Table 1
+	Plain text (*.txt)	Plain text (*.txt)
+	Plain Text Content Control	Plain Text Content Control
+	Play	Play
+	Play Video	Play Video
+	Play/Pause	Play/Pause
+	Plus Equal	Plus Equal
+	Points	Points
+	points and above	points and above
+	Polish	Polish
+	Portrait	Portrait
+	Portuguese (Brazil)	Portuguese (Brazil)
+	Portuguese (Portugal)	Portuguese (Portugal)
+	Position	Position
+	Position:	Position:
+	Positioning…	Positioning…
+	Possible spelling mistake	Possible spelling mistake
+	Postal Code	Postal Code
+	Power series of (1+x)ⁿ	Power series of (1+x)ⁿ
+	Preferred width:	Preferred width:
+	Preserve	Preserve
+	Preserve formatting during updates	Preserve formatting during updates
+	Presets	Presets
+	Press a key combination	Press a key combination
+	Preview	Preview
+	Preview Results	Preview Results
+	Preview\nResults	Preview\nResults
+	Previous	Previous
+	Previous 1 or More	Previous 1 or More
+	Previous Change	Previous Change
+	Previous Comment	Previous Comment
+	Previous Field	Previous Field
+	Previous Footnote	Previous Footnote
+	Previous Page	Previous Page
+	Previous Record	Previous Record
+	Previous Section	Previous Section
+	Previous Sentence	Previous Sentence
+	Previous sentence	Previous sentence
+	Previous Window	Previous Window
+	Print	Print
+	Print blank lines when data fields are empty	Print blank lines when data fields are empty
+	Print Documents	Print Documents
+	Print Documents…	Print Documents…
+	Print failed: {error}	Print failed: {error}
+	Print Layout	Print Layout
+	Print Markup	Print Markup
+	Print the page color	Print the page colour
+	Print to PDF	Print to PDF
+	Print\nLayout	Print\nLayout
+	Printer	Printer
+	Printing	Printing
+	Process	Process
+	Product	Product
+	Product of A	Product of A
+	Product with Limits	Product with Limits
+	Product with Lower Limit	Product with Lower Limit
+	Product with Subscript-Superscript Limits	Product with Subscript-Superscript Limits
+	Products and Coproducts	Products and Coproducts
+	Professional	Professional
+	Promote	Promote
+	Promote to Heading 1	Promote to Heading 1
+	Proofing	Proofing
+	Proofing Issues	Proofing Issues
+	Proofing language	Proofing language
+	Properties	Properties
+	Protect	Protect
+	Protect Document	Protect Document
+	PRs	PRs
+	pt	pt
+	Publisher	Publisher
+	Punctuation	Punctuation
+	Put the caret in a content control first.	Put the caret in a content control first.
+	Put the default commands back on the Quick Access Toolbar?	Put the default commands back on the Quick Access Toolbar?
+	Pyramid	Pyramid
+	Quadratic Root	Quadratic Root
+	Query Options…	Query Options…
+	Quick Access Toolbar	Quick Access Toolbar
+	Quick Parts	Quick Parts
+	Quick Tables	Quick Tables
+	Quote	Quote
+	Radical	Radical
+	Radical with Degree	Radical with Degree
+	Radicals	Radicals
+	Raised/lowered	Raised/lowered
+	Read Aloud	Read Aloud
+	Read Aloud couldn't start the speech program: {reason}	Read Aloud couldn't start the speech program: {reason}
+	Read Aloud couldn't start: {reason}	Read Aloud couldn't start: {reason}
+	Read Aloud isn't available in the browser	Read Aloud isn't available in the browser
+	Read Aloud Status	Read Aloud Status
+	Read Aloud stopped: {reason}	Read Aloud stopped: {reason}
+	Read Mode	Read Mode
+	Read\nAloud	Read\nAloud
+	Read\nMode	Read\nMode
+	Reading	Reading
+	Reading Column Width	Reading Column Width
+	Reading Highlight	Reading Highlight
+	Reading Line Spacing	Reading Line Spacing
+	Reading Mode	Reading Mode
+	Reading Speed	Reading Speed
+	Reading Text Size	Reading Text Size
+	Reads the clipboard's rich text and keeps its formatting.	Reads the clipboard's rich text and keeps its formatting.
+	Reads the clipboard's web content and keeps its formatting.	Reads the clipboard's web content and keeps its formatting.
+	Real name	Real name
+	Recent	Recent
+	Recent Colors	Recent Colours
+	Recent documents to show:	Recent documents to show:
+	Recently used symbols:	Recently used symbols:
+	Recipient List	Recipient List
+	Recipient lists	Recipient lists
+	Recipients: {count}	Recipients: {count}
+	Recognized (you can correct it):	Recognised (you can correct it):
+	Recognized Functions	Recognised Functions
+	Recognized Functions…	Recognised Functions…
+	Recolor a one-color picture, such as an icon	Recolour a one-colour picture, such as an icon
+	Recolor Selected Ink	Recolour Selected Ink
+	Record Macro	Record Macro
+	Recover Unsaved Documents	Recover Unsaved Documents
+	Rectangle	Rectangle
+	Red:	Red:
+	Redo	Redo
+	Reduce Hanging Indent	Reduce Hanging Indent
+	References	References
+	Reflection	Reflection
+	Refresh	Refresh
+	Registered	Registered
+	Registered Sign	Registered Sign
+	Regular expressions	Regular expressions
+	Regulations	Regulations
+	Reject	Reject
+	Reject All	Reject All
+	Reject All Changes	Reject All Changes
+	Reject Change	Reject Change
+	Relationship	Relationship
+	relative to	relative to
+	Relative to:	Relative to:
+	Relaxed	Relaxed
+	Remove	Remove
+	Remove Added Font	Remove Added Font
+	Remove Background	Remove Background
+	Remove Content Control	Remove Content Control
+	Remove every custom shortcut and restore the built-in keys?	Remove every custom shortcut and restore the built-in keys?
+	Remove every custom tab and group and show all tabs again?	Remove every custom tab and group and show all tabs again?
+	Remove field	Remove field
+	Remove Field Name	Remove Field Name
+	Remove Footer	Remove Footer
+	Remove from Quick Access Toolbar	Remove from Quick Access Toolbar
+	Remove Header	Remove Header
+	Remove Hyperlink	Remove Hyperlink
+	Remove Password	Remove Password
+	Remove Pen	Remove Pen
+	Remove Positioning	Remove Positioning
+	Remove recipient	Remove recipient
+	Remove row	Remove row
+	Remove series	Remove series
+	Remove Space After Paragraph	Remove Space After Paragraph
+	Remove Table of Contents	Remove Table of Contents
+	Remove the control once edited	Remove the control once edited
+	Remove the space before the punctuation	Remove the space before the punctuation
+	Remove Watermark	Remove Watermark
+	Rename Style	Rename Style
+	Rename…	Rename…
+	Reopen	Reopen
+	Repeat	Repeat
+	Repeat as header row on each page	Repeat as header row on each page
+	Repeat Header Rows	Repeat Header Rows
+	Repeated words	Repeated words
+	Repeating Section Content Control	Repeating Section Content Control
+	Replace	Replace
+	Replace All	Replace All
+	Replace as you type	Replace as you type
+	Replace Document Text	Replace Document Text
+	Replace text as you type	Replace text as you type
+	Replace with:	Replace with:
+	Replace:	Replace:
+	Replay	Replay
+	Reply	Reply
+	Report	Report
+	Research	Research
+	Researcher	Researcher
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Researcher needs an online service; Doc4Me keeps your documents offline.
+	Reset	Reset
+	Reset All	Reset All
+	Reset All…	Reset All…
+	Reset Character Formatting	Reset Character Formatting
+	Reset Crop	Reset Crop
+	Reset Graphic	Reset Graphic
+	Reset Paragraph Formatting	Reset Paragraph Formatting
+	Reset Picture	Reset Picture
+	Reset to Normal	Reset to Normal
+	Reset\nGraphic	Reset\nGraphic
+	Reset…	Reset…
+	Resize Table by Dragging	Resize Table by Dragging
+	Resolve	Resolve
+	Resolved	Resolved
+	Restart at 1	Restart at 1
+	Restart Each Page	Restart Each Page
+	Restart Each Section	Restart Each Section
+	Restart list after:	Restart list after:
+	Restore	Restore
+	Restore Defaults	Restore Defaults
+	Restore Down	Restore Down
+	Restore to Normal Word Document	Restore to Normal Word Document
+	Restrict Editing	Restrict Editing
+	Restrict\nEditing	Restrict\nEditing
+	Result	Result
+	Results	Results
+	Return address labels	Return address labels
+	Return address:	Return address:
+	Reverse the order	Reverse the order
+	Review	Review
+	Review AutoFormat Changes	Review AutoFormat Changes
+	Review Changes…	Review Changes…
+	Reviewing	Reviewing
+	Reviewing Pane	Reviewing Pane
+	Reviewing — edits become suggestions	Reviewing — edits become suggestions
+	Revised document	Revised document
+	Revisions	Revisions
+	Rewind	Rewind
+	Ribbon	Ribbon
+	Ribbon and Quick Access Toolbar:	Ribbon and Quick Access Toolbar:
+	Ribbon tabs	Ribbon tabs
+	Rich Text Content Control	Rich Text Content Control
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Right
+	Right (vertical)	Right (vertical)
+	Right align page numbers	Right align page numbers
+	Right Arrow with Text Above	Right Arrow with Text Above
+	Right Arrow with Text Below	Right Arrow with Text Below
+	Right Border	Right Border
+	Right border	Right border
+	Right Bracket Twice	Right Bracket Twice
+	Right indent	Right indent
+	Right Margin	Right Margin
+	Right Only	Right Only
+	Right only	Right only
+	Right-to-left	Right-to-left
+	Right-to-Left Section	Right-to-Left Section
+	Right-to-Left Table	Right-to-Left Table
+	Right-to-Left Text Direction	Right-to-Left Text Direction
+	Right:	Right:
+	Rightwards Arrow Above	Rightwards Arrow Above
+	Rightwards Harpoon Above	Rightwards Harpoon Above
+	Roots of ax²+bx+c	Roots of ax²+bx+c
+	Rotate	Rotate
+	Rotate all text 270°	Rotate all text 270°
+	Rotate all text 90°	Rotate all text 90°
+	Rotate Left 90°	Rotate Left 90°
+	Rotate Right 90°	Rotate Right 90°
+	Rotation	Rotation
+	Rotation:	Rotation:
+	Rounded Rectangle	Rounded Rectangle
+	Row	Row
+	Row:	Row:
+	Rows & Columns	Rows & Columns
+	Ruby text:	Ruby text:
+	Ruler	Ruler
+	Rules	Rules
+	Run	Run
+	Run-in	Run-in
+	Russian	Russian
+	Résumé	Résumé
+	Same as the whole table	Same as the whole table
+	SAMPLE	SAMPLE
+	Sat:	Sat:
+	Save	Save
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Save a copy in another format. Printing goes through a PDF you can print from any viewer.
+	Save As	Save As
+	Save as Template	Save as Template
+	Save documents	Save documents
+	Save the document to turn on AutoSave	Save the document to turn on AutoSave
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)
+	Save these pages as PDF…	Save these pages as PDF…
+	Save Version	Save Version
+	Saved	Saved
+	Scale	Scale
+	Scale Drawing	Scale Drawing
+	Scatter	Scatter
+	Screen Clipping	Screen Clipping
+	Screen clipping didn't work: {reason}	Screen clipping didn't work: {reason}
+	Screen clipping ended without a picture.	Screen clipping ended without a picture.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Screen clipping isn't available here. Copy a picture of the screen, then paste it.
+	Screenshot	Screenshot
+	Script	Script
+	Scripts	Scripts
+	Scroll ribbon left	Scroll ribbon left
+	Scroll ribbon right	Scroll ribbon right
+	Search	Search
+	Search Commands	Search Commands
+	Search commands and help	Search commands and help
+	Search document	Search document
+	Search for templates	Search for templates
+	Search icons	Search icons
+	Search Openverse (Creative Commons pictures)	Search Openverse (Creative Commons pictures)
+	Search Options	Search Options
+	Searching…	Searching…
+	Secant Function	Secant Function
+	Section Break	Section Break
+	Section Breaks	Section Breaks
+	Section Character	Section Character
+	Section direction:	Section direction:
+	Section Mark	Section Mark
+	Section Properties	Section Properties
+	Sections	Sections
+	See	See
+	Select	Select
+	Select a picture, shape, chart or table to describe it.	Select a picture, shape, chart or table to describe it.
+	Select All	Select All
+	Select Cell	Select Cell
+	Select Floating Shapes	Select Floating Shapes
+	Select Heading and Content	Select Heading and Content
+	Select Line	Select Line
+	Select Objects	Select Objects
+	Select Paragraph	Select Paragraph
+	Select Range	Select Range
+	Select Recipients	Select Recipients
+	Select recipients first to choose from their fields.	Select recipients first to choose from their fields.
+	Select recipients first to match their fields.	Select recipients first to match their fields.
+	Select Row	Select Row
+	Select Sentence	Select Sentence
+	Select Table	Select Table
+	Select Text	Select Text
+	Select text in the document to translate it.	Select text in the document to translate it.
+	Select Text with Similar Formatting	Select Text with Similar Formatting
+	Select text, then tick who can still edit it.	Select text, then tick who can still edit it.
+	Select the part of the screen to insert.	Select the part of the screen to insert.
+	Select Word	Select Word
+	Select\nRecipients	Select\nRecipients
+	Selected Fields	Selected Fields
+	Selected pages	Selected pages
+	Selection	Selection
+	Selection Pane	Selection Pane
+	Send Backward	Send Backward
+	Send the document straight to the system print dialog, or save a copy in another format below.	Send the document straight to the system print dialog, or save a copy in another format below.
+	Sentence	Sentence
+	Sentence case.	Sentence case.
+	Separator:	Separator:
+	Sequence name:	Sequence name:
+	Serbian	Serbian
+	Serbian (Cyrillic)	Serbian (Cyrillic)
+	Serbian (Latin)	Serbian (Latin)
+	Series name	Series name
+	Series {n}	Series {n}
+	Server address (https://…)	Server address (https://…)
+	Set	Set
+	Set As Default	Set As Default
+	Set as Default	Set as Default
+	Set Caret	Set Caret
+	Set Character Formatting	Set Character Formatting
+	Set Date	Set Date
+	Set Equation	Set Equation
+	Set Numbering Value	Set Numbering Value
+	Set Paragraph Formatting	Set Paragraph Formatting
+	Set Proofing Language…	Set Proofing Language…
+	Setting:	Setting:
+	Settings…	Settings…
+	Shading	Shading
+	Shadow	Shadow
+	Shadow, glow and soft edges	Shadow, glow and soft edges
+	Shape Effects	Shape Effects
+	Shape Fill	Shape Fill
+	Shape Format	Shape Format
+	Shape Outline	Shape Outline
+	Shape Styles	Shape Styles
+	Shapes	Shapes
+	Share	Share
+	Sheet:	Sheet:
+	Shift cells down	Shift cells down
+	Shift cells right	Shift cells right
+	Shift+Tab	Shift+Tab
+	Shipping labels	Shipping labels
+	Short citation:	Short citation:
+	Shortcut key:	Shortcut key:
+	Show	Show
+	Show all formatting marks	Show all formatting marks
+	Show All Levels	Show All Levels
+	Show all revisions inline	Show all revisions inline
+	Show changes at:	Show changes at:
+	Show changes in:	Show changes in:
+	Show Comments	Show Comments
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.
+	Show every bibliography field	Show every bibliography field
+	Show First Line Only	Show First Line Only
+	Show in the Styles gallery	Show in the Styles gallery
+	Show KeyTips (Alt or F10)	Show KeyTips (Alt or F10)
+	Show Level	Show Level
+	Show Level 1	Show Level 1
+	Show Level 2	Show Level 2
+	Show Level 3	Show Level 3
+	Show Level 4	Show Level 4
+	Show Level 5	Show Level 5
+	Show Level 6	Show Level 6
+	Show Level 7	Show Level 7
+	Show Level 8	Show Level 8
+	Show Level 9	Show Level 9
+	Show Markup	Show Markup
+	Show Notes	Show Notes
+	Show only comments and formatting in balloons	Show only comments and formatting in balloons
+	Show or Hide Style	Show or Hide Style
+	Show page numbers	Show page numbers
+	Show revisions in balloons	Show revisions in balloons
+	Show rulers	Show rulers
+	Show Text Formatting	Show Text Formatting
+	Show the equation in the line of text	Show the equation in the line of text
+	Show the equation on a line of its own	Show the equation on a line of its own
+	Show the mini toolbar when text is selected	Show the mini toolbar when text is selected
+	Show/Hide ¶	Show/Hide ¶
+	Show\nComments	Show\nComments
+	Showing the first {count} items.	Showing the first {count} items.
+	Shows a tree: each item below the item it belongs to.	Shows a tree: each item below the item it belongs to.
+	Shows items around a central idea: the first item is the centre.	Shows items around a central idea: the first item is the centre.
+	Shows items of equal weight as blocks in rows.	Shows items of equal weight as blocks in rows.
+	Shows overlapping ideas as overlapping circles.	Shows overlapping ideas as overlapping circles.
+	Shows parts of a whole as quadrants.	Shows parts of a whole as quadrants.
+	Shows parts that build on each other, largest at the bottom.	Shows parts that build on each other, largest at the bottom.
+	Shows steps in order, left to right, with arrows between them.	Shows steps in order, left to right, with arrows between them.
+	Shows steps that repeat, around a circle.	Shows steps that repeat, around a circle.
+	Shrink Font 1 Point	Shrink Font 1 Point
+	Shrink Selection	Shrink Selection
+	Shrink text	Shrink text
+	Side to Side	Side to Side
+	Side\nto Side	Side\nto Side
+	Sides of a right triangle	Sides of a right triangle
+	Signature Line	Signature Line
+	Sine and cosine series of f(x)	Sine and cosine series of f(x)
+	Sine Function	Sine Function
+	Sine theta	Sine theta
+	Single	Single
+	Single Brackets	Single Brackets
+	Single Closing Quote	Single Closing Quote
+	Single label	Single label
+	Single Left Angle	Single Left Angle
+	Single Left Bar	Single Left Bar
+	Single Left Brace	Single Left Brace
+	Single Left Bracket	Single Left Bracket
+	Single Left Parenthesis	Single Left Parenthesis
+	Single Opening Quote	Single Opening Quote
+	Single Right Brace	Single Right Brace
+	Single Right Bracket	Single Right Bracket
+	Single Right Parenthesis	Single Right Parenthesis
+	Single Spacing	Single Spacing
+	SIST02	SIST02
+	Site name	Site name
+	Size	Size
+	Size (pt):	Size (pt):
+	Size and Crop…	Size and Crop…
+	Size:	Size:
+	Sketchbook	Sketchbook
+	Skewed Fraction	Skewed Fraction
+	Skip citations & bibliography	Skip citations & bibliography
+	Skip Citations and Bibliography	Skip Citations and Bibliography
+	Skip Record If	Skip Record If
+	Skip Record If…	Skip Record If…
+	Slant Down	Slant Down
+	Slant Up	Slant Up
+	Small Caps	Small Caps
+	Small caps	Small caps
+	Small change	Small change
+	Smart quotes instead of straight quotes	Smart quotes instead of straight quotes
+	SmartArt	SmartArt
+	SmartArt Design	SmartArt Design
+	SmartArt Styles	SmartArt Styles
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.
+	Soft Edges	Soft Edges
+	Soft Glow	Soft Glow
+	Solid Accent	Solid Accent
+	Sort	Sort
+	Sort by	Sort by
+	Sort order:	Sort order:
+	Sort Records	Sort Records
+	Source code: github.com/chatraweechai/doc4me	Source code: github.com/chatraweechai/doc4me
+	Source Manager	Source Manager
+	Source type:	Source type:
+	Sources in this document:	Sources in this document:
+	South	South
+	Space	Space
+	Space after	Space after
+	Space after: {pt} pt	Space after: {pt} pt
+	Space before	Space before
+	Space before/after:	Space before/after:
+	Space before: {pt} pt	Space before: {pt} pt
+	Spaces	Spaces
+	Spacing	Spacing
+	Spacing (pt):	Spacing (pt):
+	Spacing:	Spacing:
+	Spanish	Spanish
+	Spanish (Mexico)	Spanish (Mexico)
+	Spanish (Spain)	Spanish (Spain)
+	Sparse Matrices	Sparse Matrices
+	Special	Special
+	Special Characters	Special Characters
+	Specify height:	Specify height:
+	Speech	Speech
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Speech is recognised on this computer (whisper.cpp); nothing is sent online.
+	Speed	Speed
+	Spelling	Spelling
+	Spelling & Grammar	Spelling & Grammar
+	Spelling &\nGrammar	Spelling &\nGrammar
+	Spelling and grammar are checked in English (United States).	Spelling and grammar are checked in English (United States).
+	Spelling Suggestions	Spelling Suggestions
+	Spike	Spike
+	Split	Split
+	Split apart page break and paragraph mark	Split apart page break and paragraph mark
+	Split Cells	Split Cells
+	Split Table	Split Table
+	Spreadsheet Table	Spreadsheet Table
+	Square	Square
+	Square Root	Square Root
+	Square Root with Degree	Square Root with Degree
+	Square Union	Square Union
+	Stack Object	Stack Object
+	Stack Object (Three)	Stack Object (Three)
+	Stacked	Stacked
+	Stacked Bar	Stacked Bar
+	Stacked Column	Stacked Column
+	Stacked Fraction	Stacked Fraction
+	Stacked, no bar	Stacked, no bar
+	Standard	Standard
+	Standard and Contextual	Standard and Contextual
+	Standard Colors	Standard Colours
+	Standard Only	Standard Only
+	Star	Star
+	Start at:	Start at:
+	Start Enforcing Protection	Start Enforcing Protection
+	Start Mail Merge	Start Mail Merge
+	Start Mail\nMerge	Start Mail\nMerge
+	State	State
+	Statement   5.50" × 8.50"	Statement   5.50" × 8.50"
+	Statistics	Statistics
+	Status Bar	Status Bar
+	Statutes	Statutes
+	Stop	Stop
+	Stop Protection	Stop Protection
+	Stop Reading	Stop Reading
+	Stopped	Stopped
+	Store	Store
+	Straight Arrow Connector	Straight Arrow Connector
+	Straight Connector	Straight Connector
+	Strikethrough	Strikethrough
+	Stroke {n} of {total}	Stroke {n} of {total}
+	Strong	Strong
+	Structure Actions	Structure Actions
+	Structures	Structures
+	Studio	Studio
+	Studio cover	Studio cover
+	Studio handbook (sample)	Studio handbook (sample)
+	Style	Style
+	Style based on:	Style based on:
+	Style Inspector	Style Inspector
+	Style Set	Style Set
+	Style:	Style:
+	Style: APA	Style: APA
+	Style: {style}	Style: {style}
+	Styles	Styles
+	Styles Pane	Styles Pane
+	Styles:	Styles:
+	Subentry:	Subentry:
+	Subject	Subject
+	Subscript	Subscript
+	Subscript-Superscript	Subscript-Superscript
+	Subscripts and Superscripts	Subscripts and Superscripts
+	Subset:	Subset:
+	Substituted font	Substituted font
+	Subtitle	Subtitle
+	Subtle Emphasis	Subtle Emphasis
+	Subtle Reference	Subtle Reference
+	Sum	Sum
+	Sum of cosines	Sum of cosines
+	Sum or difference of sines	Sum or difference of sines
+	Summation	Summation
+	Summation from 0 to n	Summation from 0 to n
+	Summation over binomials	Summation over binomials
+	Summation with Limits	Summation with Limits
+	Summation with Lower Limit	Summation with Lower Limit
+	Summation with Subscript Limit	Summation with Subscript Limit
+	Summation with Subscript-Superscript Limits	Summation with Subscript-Superscript Limits
+	Summations	Summations
+	Superscript	Superscript
+	Suppress line numbers	Suppress line numbers
+	Surface Integral	Surface Integral
+	Surface Integral with Limits	Surface Integral with Limits
+	Surface Integral with Stacked Limits	Surface Integral with Stacked Limits
+	Swap footnotes and endnotes	Swap footnotes and endnotes
+	Swedish	Swedish
+	Switch Modes	Switch Modes
+	Switch Windows	Switch Windows
+	Switch\nModes	Switch\nModes
+	Symbol	Symbol
+	Symbol Font	Symbol Font
+	Symbols	Symbols
+	Synchronous Scrolling	Synchronous Scrolling
+	Synonyms	Synonyms
+	System	System
+	Tab	Tab
+	Tab Character	Tab Character
+	Tab character	Tab character
+	Tab characters	Tab characters
+	Tab leader:	Tab leader:
+	Tab stop position:	Tab stop position:
+	Tab stops to be cleared:	Tab stops to be cleared:
+	Table	Table
+	Table AutoFormat	Table AutoFormat
+	Table AutoFormat…	Table AutoFormat…
+	Table Column Width	Table Column Width
+	Table Design	Table Design
+	Table direction:	Table direction:
+	Table entry fields	Table entry fields
+	Table Grid	Table Grid
+	Table identifier:	Table identifier:
+	Table Layout	Table Layout
+	Table of Authorities	Table of Authorities
+	Table of Contents	Table of Contents
+	Table of Contents Options	Table of Contents Options
+	Table of Contents Styles	Table of Contents Styles
+	Table of Figures	Table of Figures
+	Table of Figures Options	Table of Figures Options
+	Table of\nContents	Table of\nContents
+	Table Positioning	Table Positioning
+	Table Properties	Table Properties
+	Table Row Height	Table Row Height
+	Table style	Table style
+	Table Style Options	Table Style Options
+	Table Styles	Table Styles
+	Table styles:	Table styles:
+	Tables	Tables
+	Tabloid   11.00" × 17.00"	Tabloid   11.00" × 17.00"
+	Tabs	Tabs
+	Tabs…	Tabs…
+	Tabular List	Tabular List
+	Tag	Tag
+	Tangent formula	Tangent formula
+	Tangent Function	Tangent Function
+	TC entry fields	TC entry fields
+	Technology	Technology
+	Templates	Templates
+	Templates and Add-ins	Templates and Add-ins
+	Text	Text
+	Text Box	Text Box
+	Text boxes	Text boxes
+	Text Direction	Text Direction
+	Text Effects	Text Effects
+	Text Effects and Typography	Text Effects and Typography
+	Text Fill	Text Fill
+	Text from File	Text from File
+	Text Highlight Color	Text Highlight Colour
+	Text indent at:	Text indent at:
+	Text isn't squeezed to fit its cell yet.	Text isn't squeezed to fit its cell yet.
+	Text Outline	Text Outline
+	Text over Colon Equal	Text over Colon Equal
+	Text over Equal	Text over Equal
+	Text Pane	Text Pane
+	Text size	Text size
+	Text snaps to characters	Text snaps to characters
+	Text to display:	Text to display:
+	Text Wrapping	Text Wrapping
+	Text wrapping:	Text wrapping:
+	Text:	Text:
+	Text\nBox	Text\nBox
+	Text\nDirection	Text\nDirection
+	Thai	Thai
+	Thai Distributed	Thai Distributed
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.
+	That isn't the web address or embed code of an online video.	That isn't the web address or embed code of an online video.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	That password isn't right. Check it (passwords are case-sensitive) and try again.
+	The clipboard is empty.	The clipboard is empty.
+	The date it is today	The date it is today
+	The document contains no tracked changes.	The document contains no tracked changes.
+	The document has no bookmarks yet.	The document has no bookmarks yet.
+	The document is read only, except for regions marked editable.	The document is read only, except for regions marked editable.
+	The document will be saved with a password. Save it to protect it.	The document will be saved with a password. Save it to protect it.
+	The first word of a sentence starts with a capital.	The first word of a sentence starts with a capital.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	the free daily allowance is used up (try again tomorrow, or give an email address)
+	the LibreTranslate server	the LibreTranslate server
+	The Mail Merge Helper sets up a merge in three steps.	The Mail Merge Helper sets up a merge in three steps.
+	The new style takes the formatting of the current paragraph.	The new style takes the formatting of the current paragraph.
+	The password is optional; without it anyone can stop the protection.	The password is optional; without it anyone can stop the protection.
+	The password is removed. Save the document to keep the change.	The password is removed. Save the document to keep the change.
+	The passwords don't match.	The passwords don't match.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	The printer, two-sided printing and pages per sheet are chosen in that dialog.
+	The recipient-list field that fills each part of an address block and greeting line.	The recipient-list field that fills each part of an address block and greeting line.
+	The same word twice in a row.	The same word twice in a row.
+	The spelling and grammar check is complete.	The spelling and grammar check is complete.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.
+	The text is sent to {service} to be translated.	The text is sent to {service} to be translated.
+	The time right now	The time right now
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	The video shows as a picture in the document. Double-click it to watch it in your browser.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	The whole document is translated into a new document, which replaces this one. Save your work first.
+	Theme Colors	Theme Colours
+	Theme Fonts	Theme Fonts
+	Theme List	Theme List
+	Themes	Themes
+	Then by	Then by
+	Then insert:	Then insert:
+	There's no text to translate.	There's no text to translate.
+	Thesaurus	Thesaurus
+	These marks show even when Show/Hide ¶ is off.	These marks show even when Show/Hide ¶ is off.
+	These merge fields aren't in the recipient list:	These merge fields aren't in the recipient list:
+	These settings will be used for new documents.	These settings will be used for new documents.
+	Thick	Thick
+	Thickness	Thickness
+	This Device…	This Device…
+	This document	This document
+	This field has no options.	This field has no options.
+	This folder can't be read: {error}	This folder can't be read: {error}
+	This font has no characters to show.	This font has no characters to show.
+	This page	This page
+	This password type isn't supported.	This password type isn't supported.
+	This point forward	This point forward
+	This section	This section
+	Three	Three
+	Through	Through
+	Tight	Tight
+	Tilde	Tilde
+	Tips ({n})	Tips ({n})
+	Title	Title
+	Title from the document properties	Title from the document properties
+	Title:	Title:
+	To	To
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.
+	To:	To:
+	TOA Heading	TOA Heading
+	TOC Heading	TOC Heading
+	TOC {n}	TOC {n}
+	Today	Today
+	tOGGLE cASE	tOGGLE cASE
+	Toggle Check Box	Toggle Check Box
+	Toggle Field Codes	Toggle Field Codes
+	Toggle Unicode Character	Toggle Unicode Character
+	Tools	Tools
+	Top	Top
+	Top and Bottom	Top and Bottom
+	Top Border	Top Border
+	Top Margin	Top Margin
+	Top of Next Page	Top of Next Page
+	Top of Page	Top of Page
+	Top of Previous Page	Top of Previous Page
+	Top of the Window	Top of the Window
+	Top:	Top:
+	Total	Total
+	Total Row	Total Row
+	Track Changes	Track Changes
+	Track Changes Options	Track Changes Options
+	Track changes while editing	Track changes while editing
+	Track Changes: On	Track Changes: On
+	Track formatting	Track formatting
+	Track\nChanges	Track\nChanges
+	Track\nChanges ✓	Track\nChanges ✓
+	Tracked changes	Tracked changes
+	Tracking	Tracking
+	Trademark	Trademark
+	Trademark Sign	Trademark Sign
+	Transform	Transform
+	Translate	Translate
+	Translate Document	Translate Document
+	Translating {done} of {total}	Translating {done} of {total}
+	Translation service	Translation service
+	Translator	Translator
+	Transparency	Transparency
+	Transparency:	Transparency:
+	Transport	Transport
+	Treatises	Treatises
+	Triangle	Triangle
+	Triangle Down	Triangle Down
+	Triangle Up	Triangle Up
+	Trigonometric Functions	Trigonometric Functions
+	Triple	Triple
+	Triple Dot	Triple Dot
+	Triple Integral	Triple Integral
+	Triple Integral with Limits	Triple Integral with Limits
+	Triple Integral with Stacked Limits	Triple Integral with Stacked Limits
+	Trust Center	Trust Centre
+	Tue	Tue
+	Turabian	Turabian
+	Turkish	Turkish
+	Two	Two
+	Type	Type
+	Type a command, e.g. "insert table"	Type a command, e.g. "insert table"
+	Type a New List	Type a New List
+	Type a New List…	Type a New List…
+	Type at least one recipient.	Type at least one recipient.
+	Type equations in LaTeX	Type equations in LaTeX
+	Type equations in the linear format (UnicodeMath)	Type equations in the linear format (UnicodeMath)
+	Type in Equation	Type in Equation
+	Type normal (non-math) text in the equation	Type normal (non-math) text in the equation
+	Type Text	Type Text
+	Type the categories down the side and a column of values per series.	Type the categories down the side and a column of values per series.
+	Type the field's name and its switches, for example PAGE \\* roman.	Type the field's name and its switches, for example PAGE \\* roman.
+	Type the password to stop the protection.	Type the password to stop the protection.
+	Type the recipients, or load them from a file.	Type the recipients, or load them from a file.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Type the tag name of the source. You can add more information to this source later by editing the source.
+	Type:	Type:
+	Typing	Typing
+	Typing replaces selected text	Typing replaces selected text
+	Ukrainian	Ukrainian
+	Unchecked symbol	Unchecked symbol
+	Underbar	Underbar
+	Underbrace	Underbrace
+	Underline	Underline
+	Underline color	Underline colour
+	Underline Words Only	Underline Words Only
+	Undo	Undo
+	Undo Stroke	Undo Stroke
+	Undo {action}	Undo {action}
+	Unformatted Text	Unformatted Text
+	Ungroup	Ungroup
+	Union	Union
+	Union of intersections	Union of intersections
+	Union with Limits	Union with Limits
+	Union with Lower Limit	Union with Lower Limit
+	Union with Plus	Union with Plus
+	Union with Subscript-Superscript Limits	Union with Subscript-Superscript Limits
+	Unions and Intersections	Unions and Intersections
+	Unlink Fields	Unlink Fields
+	Unlink\nCitations	Unlink\nCitations
+	Unlock Fields	Unlock Fields
+	Up	Up
+	Up Diagonal Dots	Up Diagonal Dots
+	Up one level	Up one level
+	Update Field	Update Field
+	Update fields before printing	Update fields before printing
+	Update Index	Update Index
+	Update Style to Match Selection	Update Style to Match Selection
+	Update Styles from Template	Update Styles from Template
+	Update Table	Update Table
+	Update Table of Figures	Update Table of Figures
+	Update to Match	Update to Match
+	Update to Match Selection	Update to Match Selection
+	UPPERCASE	UPPERCASE
+	URGENT	URGENT
+	URL	URL
+	Use "a" before a consonant sound	Use "a" before a consonant sound
+	Use "an" before a vowel sound	Use "an" before a vowel sound
+	Use an Existing List…	Use an Existing List…
+	Use passim (five or more pages)	Use passim (five or more pages)
+	Use system setting	Use system setting
+	Use the Insert key to switch overtype on and off	Use the Insert key to switch overtype on and off
+	Use wildcards	Use wildcards
+	User Name	User Name
+	User name:	User name:
+	Username	Username
+	Value	Value
+	Vector A	Vector A
+	Vector AB	Vector AB
+	Version	Version
+	Version History	Version History
+	Version {version} ({build})	Version {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Versions are kept while the document is open (a .docx file has no versions).
+	Vertical	Vertical
+	Vertical Alignment	Vertical Alignment
+	Vertical alignment:	Vertical alignment:
+	Vertical Bars	Vertical Bars
+	Vertical Dots	Vertical Dots
+	Vertical spacing:	Vertical spacing:
+	Vietnamese	Vietnamese
+	View	View
+	View Alt Text…	View Alt Text…
+	View Gridlines	View Gridlines
+	View Side by Side	View Side by Side
+	View State	View State
+	Views	Views
+	Visual effects	Visual effects
+	Voice	Voice
+	Volume	Volume
+	Volume Integral	Volume Integral
+	Volume Integral with Limits	Volume Integral with Limits
+	Volume Integral with Stacked Limits	Volume Integral with Stacked Limits
+	W:	W:
+	Waiting for Zotero…	Waiting for Zotero…
+	Warm Gradient with Outline	Warm Gradient with Outline
+	Warnings ({n})	Warnings ({n})
+	Watermark	Watermark
+	Wave	Wave
+	Weather	Weather
+	web access isn't available here	web access isn't available here
+	Web Layout	Web Layout
+	Web page (*.html)	Web page (*.html)
+	Web\nLayout	Web\nLayout
+	Website	Website
+	Wed	Wed
+	Weight	Weight
+	West	West
+	When merging records	When merging records
+	When this document was first created	When this document was first created
+	When this document was most recently printed	When this document was most recently printed
+	When this document was most recently saved	When this document was most recently saved
+	White Space	White Space
+	White space	White space
+	Who the document properties name as author	Who the document properties name as author
+	Whole document	Whole document
+	Whole page	Whole page
+	Whole Table	Whole Table
+	Whole words	Whole words
+	Wide	Wide
+	Widow/Orphan Control	Widow/Orphan Control
+	Widow/Orphan control	Widow/Orphan control
+	Width and spacing	Width and spacing
+	Width:	Width:
+	Wildcards (regex)	Wildcards (regex)
+	Window	Window
+	With:	With:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 and later
+	Word 97–2003	Word 97–2003
+	Word Count	Word Count
+	Word document	Word document
+	Word document (*.docx)	Word document (*.docx)
+	Word forms	Word forms
+	Word Left	Word Left
+	Word level	Word level
+	Word Right	Word Right
+	Word XML Document (*.xml)	Word XML Document (*.xml)
+	WordArt	WordArt
+	WordArt Styles	WordArt Styles
+	Words	Words
+	Words only	Words only
+	Wrap Text	Wrap Text
+	Wrap text	Wrap text
+	Wrap Text Sides	Wrap Text Sides
+	Wrap\nText	Wrap\nText
+	Write & Insert Fields	Write & Insert Fields
+	Write a reply	Write a reply
+	Write math here with the mouse or a pen.	Write math here with the mouse or a pen.
+	Writing Style: Grammar	Writing Style: Grammar
+	x bar	x bar
+	Year	Year
+	Yes	Yes
+	Yields	Yields
+	Your changes will be lost if you don't save them.	Your changes will be lost if you don't save them.
+	Your system doesn't report an animation setting, so animation effects stay on.	Your system doesn't report an animation setting, so animation effects stay on.
+	Your system has animation effects turned off.	Your system has animation effects turned off.
+	Your system has animation effects turned on.	Your system has animation effects turned on.
+	Zoom	Zoom
+	Zoom In	Zoom In
+	Zoom Out	Zoom Out
+	Zoom to Page	Zoom to Page
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: cancelled
+	Zotero: done	Zotero: done
+	{cols}×{rows} Table	{cols}×{rows} Table
+	{contributors} contributors · {commits} commits	{contributors} contributors · {commits} commits
+	{count} items highlighted	{count} items highlighted
+	{count} of {total} pages will print	{count} of {total} pages will print
+	{count} paragraphs were changed.	{count} paragraphs were changed.
+	{count} records; fields: {fields}	{count} records; fields: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.
+	{group} settings	{group} settings
+	{key}+Click to follow link	{key}+Click to follow link
+	{language} is now the document's default language.	{language} is now the document's default language.
+	{name} (Press ENTER to Insert)	{name} (Press ENTER to Insert)
+	{name} already exists. Choose Save again to replace it.	{name} already exists. Choose Save again to replace it.
+	{name} can't be a folder's name.	{name} can't be a folder's name.
+	{name} is protected with a password.	{name} is protected with a password.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} was added. Its macros are under My Add-ins and View › Macros.
+	{name} wasn't found.	{name} wasn't found.
+	{n} entries marked.	{n} entries marked.
+	{n} lines	{n} lines
+	{n} of {of} recipients	{n} of {of} recipients
+	{n} pt	{n} pt
+	{n} records	{n} records
+	{n} revisions	{n} revisions
+	{selected} of {words} words	{selected} of {words} words
+	{size} pt	{size} pt
+	{words} words	{words} words
+	{w} × {h} in	{w} × {h} in
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	“{text}” ({row}, {series}) isn't a number.
+	← Find	← Find
+	✓ None	✓ None
+	➕ New comment	➕ New comment
+	📂  Browse…	📂  Browse…

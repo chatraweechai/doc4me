@@ -887,6 +887,8 @@ fn layout_box(
     let mut float_tables: Vec<Rect> = Vec::new();
     let mut y = 0.0f32;
     let mut prev_after = 0.0f32;
+    // Where the last paragraph's lines ended, for the gap a border box runs through.
+    let mut prev_end = 0.0f32;
     let mut prev_style: Option<(String, bool)> = None;
     for (i, b) in blocks.iter().enumerate() {
         let mut path = prefix.to_vec();
@@ -903,6 +905,10 @@ fn layout_box(
                 }
                 // Word: space between paragraphs is before + after (no collapsing).
                 y += if i == 0 { before } else { before.max(0.0) };
+                let mut bx = block_border_box(ctx, blocks, i);
+                if bx.joined_prev {
+                    bx.gap = (y - prev_end).max(0.0);
+                }
                 // Floating objects anchored here: place them, then wrap the text around them.
                 // One left out of the layout (hidden, or deleted in the final text) takes no room.
                 let mut floats = HashMap::new();
@@ -917,12 +923,12 @@ fn layout_box(
                     excl.extend(wrap_area(r, float, outline.as_deref().map(|v| v.as_slice())));
                     floats.insert(oi, r);
                 }
-                let rel = rel_exclusions(&excl, 0.0, y);
+                let rel = rel_exclusions(&excl, 0.0, y + bx.top);
                 if !rel.is_empty() {
                     pl = ctx.para_labelled(p, width, table, &rel, label);
                 }
-                let lead = pl.lines.first().map_or(0.0, |l| l.top.max(0.0));
-                push_para(&mut items, story, &path, &pl, 0, pl.lines.len(), 0.0, y + lead, width);
+                let lead = pl.lines.first().map_or(0.0, |l| l.top.max(0.0)) + bx.top;
+                push_para(&mut items, story, &path, &pl, (0, pl.lines.len()), (0.0, y + lead), width, bx);
                 // Pictures, shapes and text boxes: drawn, their areas and text boxes' text.
                 if !p.objects.is_empty() {
                     let at = ObjFrame { page: frame, col: (0.0, width), para_y: y, table_chr: table.map(|t| &t.chr) };
@@ -932,7 +938,9 @@ fn layout_box(
                     items.splice(at..at, back);
                     items.extend(front);
                 }
-                y += pl.height + pl.rp.space_after;
+                y += bx.top + pl.height;
+                prev_end = y;
+                y += bx.bottom + pl.rp.space_after;
                 prev_after = if same && ctxl { 0.0 } else { pl.rp.space_after };
                 prev_style = Some((pl.rp.style.clone(), ctxl));
             }
@@ -1098,8 +1106,69 @@ fn fit_box(items: Vec<Placed>, height: f32) -> Vec<Placed> {
     out
 }
 
-/// Paragraph lines plus their shading and borders.
-fn push_para(items: &mut Vec<Placed>, story: StoryRef, path: &[u32], pl: &Arc<ParaLayout>, l0: usize, l1: usize, x: f32, y: f32, width: f32) {
+/// The room Word keeps for a paragraph's borders, points. Paragraphs in a row with the same
+/// borders and indents make one box: the top border goes above the first of them, the bottom
+/// border below the last, and the between border (if any) between each two.
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+struct BorderBox {
+    /// Above the first line: the top border's width and its distance from the text (the between
+    /// border's, inside a box).
+    top: f32,
+    /// Below the last line: the bottom border's (nothing inside a box).
+    bottom: f32,
+    /// The paragraph before / after is in the same box.
+    joined_prev: bool,
+    joined_next: bool,
+    /// The space between the paragraph before (in the same box) and this one's top band, which
+    /// the box's sides and shading run through.
+    gap: f32,
+}
+
+/// A border's width plus its distance from the text, points (nothing for no border).
+fn border_band(b: Option<Border>) -> f32 {
+    b.filter(Border::is_visible).map_or(0.0, |b| b.width.clamp(0.0, 12.0) + b.space.clamp(0.0, 31.0))
+}
+
+/// Whether paragraphs `a` and `b` (in this order) share one border box.
+fn same_border_box(a: &doc4me_doc::resolve::ResolvedPara, b: &doc4me_doc::resolve::ResolvedPara) -> bool {
+    a.borders.is_some_and(|x| [x.top, x.bottom, x.left, x.right, x.between].iter().any(|e| e.is_some_and(|e| e.is_visible())))
+        && a.borders == b.borders
+        && a.indent_left == b.indent_left
+        && a.indent_right == b.indent_right
+}
+
+/// The border box of a paragraph with formatting `rp` between `prev` and `next` (the resolved
+/// formatting of the paragraphs around it, when they are paragraphs).
+fn border_box(
+    rp: &doc4me_doc::resolve::ResolvedPara,
+    prev: Option<&doc4me_doc::resolve::ResolvedPara>,
+    next: Option<&doc4me_doc::resolve::ResolvedPara>,
+) -> BorderBox {
+    let Some(b) = rp.borders else { return BorderBox::default() };
+    let joined_prev = prev.is_some_and(|p| same_border_box(p, rp));
+    let joined_next = next.is_some_and(|n| same_border_box(rp, n));
+    BorderBox {
+        top: border_band(if joined_prev { b.between } else { b.top }),
+        bottom: if joined_next { 0.0 } else { border_band(b.bottom) },
+        joined_prev,
+        joined_next,
+        gap: 0.0,
+    }
+}
+
+/// Paragraph lines plus their shading and borders. `y` is the top of the first line; the border
+/// box's bands are above and below the lines.
+#[allow(clippy::too_many_arguments)]
+fn push_para(
+    items: &mut Vec<Placed>,
+    story: StoryRef,
+    path: &[u32],
+    pl: &Arc<ParaLayout>,
+    (l0, l1): (usize, usize),
+    (x, y): (f32, f32),
+    width: f32,
+    bx: BorderBox,
+) {
     let (Some(first), Some(last)) = (pl.lines.get(l0), l1.checked_sub(1).and_then(|k| pl.lines.get(k))) else {
         return;
     };
@@ -1109,30 +1178,53 @@ fn push_para(items: &mut Vec<Placed>, story: StoryRef, path: &[u32], pl: &Arc<Pa
     let (li, ri) = if pl.rp.bidi { (pl.rp.indent_right, start) } else { (start, pl.rp.indent_right) };
     let left = x + li;
     let right = x + width - ri;
+    let (first_piece, last_piece) = (l0 == 0, l1 >= pl.lines.len());
+    // The box's top and bottom edges around this piece: past the bands where the box starts or
+    // ends, and on through the space above where it goes on from the paragraph before.
+    let top_edge = if bx.joined_prev { None } else { pl.rp.borders.and_then(|b| b.top) };
+    let edge = |e: Option<Border>| e.filter(Border::is_visible).map_or(0.0, |e| e.space.clamp(0.0, 31.0));
+    let (ty, by) = match &pl.rp.borders {
+        Some(_) => (
+            if !first_piece {
+                y
+            } else if bx.joined_prev {
+                y - bx.top - bx.gap
+            } else {
+                y - edge(top_edge)
+            },
+            if last_piece && !bx.joined_next { y + h + edge(pl.rp.borders.and_then(|b| b.bottom)) } else { y + h },
+        ),
+        None => (y, y + h),
+    };
     if let Some(c) = pl.rp.shading {
         let pad = pl.rp.borders.as_ref().map(|b| b.left.map(|l| l.space).unwrap_or(4.0)).unwrap_or(0.0);
-        items.push(Placed::Fill { rect: Rect::new(left - pad, y, right - left + pad * 2.0, h), color: c });
+        items.push(Placed::Fill { rect: Rect::new(left - pad, ty, right - left + pad * 2.0, by - ty), color: c });
     }
     items.push(Placed::Lines { story, path: Path(path.to_vec()), para: pl.clone(), l0, l1, x, y, turn: TextDirection::Horizontal });
     if let Some(b) = &pl.rp.borders {
         let sp = |o: &Option<Border>| o.map(|b| b.space).unwrap_or(0.0);
         let (lx, rx) = (left - sp(&b.left), right + sp(&b.right));
-        let (ty, by) = (y - sp(&b.top), y + h + sp(&b.bottom));
-        if let Some(t) = b.top.filter(|_| l0 == 0)
-            && t.is_visible()
-        {
-            items.push(Placed::Rule { x0: lx, y0: ty, x1: rx, y1: ty, border: t });
+        // A rule is drawn on its middle: half its width further out than its distance.
+        let mid = |e: Border| e.space.clamp(0.0, 31.0) + e.width.clamp(0.0, 12.0) / 2.0;
+        let rule_top = if bx.joined_prev { b.between } else { b.top };
+        if let Some(t) = rule_top.filter(|t| first_piece && t.is_visible()) {
+            let ry = y - mid(t);
+            items.push(Placed::Rule { x0: lx, y0: ry, x1: rx, y1: ry, border: t });
         }
-        if let Some(t) = b.bottom.filter(|_| l1 >= pl.lines.len())
-            && t.is_visible()
-        {
-            items.push(Placed::Rule { x0: lx, y0: by, x1: rx, y1: by, border: t });
+        if let Some(t) = b.bottom.filter(|t| last_piece && !bx.joined_next && t.is_visible()) {
+            let ry = y + h + mid(t);
+            items.push(Placed::Rule { x0: lx, y0: ry, x1: rx, y1: ry, border: t });
         }
+        // The sides run the whole box: from the top rule's outer edge to the bottom rule's.
+        let out_top = if first_piece && !bx.joined_prev { b.top.filter(Border::is_visible).map_or(0.0, |t| t.width.clamp(0.0, 12.0)) } else { 0.0 };
+        let out_bottom =
+            if last_piece && !bx.joined_next { b.bottom.filter(Border::is_visible).map_or(0.0, |t| t.width.clamp(0.0, 12.0)) } else { 0.0 };
+        let (sy0, sy1) = (ty - out_top, by + out_bottom);
         if let Some(t) = b.left.filter(Border::is_visible) {
-            items.push(Placed::Rule { x0: lx, y0: ty, x1: lx, y1: by, border: t });
+            items.push(Placed::Rule { x0: lx, y0: sy0, x1: lx, y1: sy1, border: t });
         }
         if let Some(t) = b.right.filter(Border::is_visible) {
-            items.push(Placed::Rule { x0: rx, y0: ty, x1: rx, y1: by, border: t });
+            items.push(Placed::Rule { x0: rx, y0: sy0, x1: rx, y1: sy1, border: t });
         }
     }
 }
@@ -2410,10 +2502,12 @@ fn anchor_floats(
     ctx: &mut Ctx,
     pb: &mut PageBuilder,
     p: &Paragraph,
-    y0: f32,
+    (y0, band): (f32, f32),
     excl_mark: usize,
     label: &Option<(String, Level)>,
 ) -> (HashMap<usize, Rect>, Arc<ParaLayout>) {
+    // `y0` is the paragraph's top, where its floats are positioned from; its lines start `band`
+    // lower, below its top border.
     pb.excl.truncate(excl_mark);
     ctx.fields.page = pb.number;
     let (col_x, width) = (pb.col_x(), pb.col_w());
@@ -2436,7 +2530,7 @@ fn anchor_floats(
             }
         }
     }
-    let rel = rel_exclusions(&pb.excl, col_x, y0);
+    let rel = rel_exclusions(&pb.excl, col_x, y0 + band);
     (rects, ctx.para_labelled(p, width, None, &rel, label.clone()))
 }
 
@@ -2566,10 +2660,13 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
     // the paragraph then starts somewhere else (another column or page, or contextual spacing
     // drops its space before), they are placed again there.
     let space_before = ctx.resolved(p).space_before;
+    let mut bx = body_border_box(ctx, p, block);
+    // Where the paragraph before ended (above its space after), for the gap a border box runs through.
+    let prev_end = pb.y - pb.prev.as_ref().map_or(0.0, |prev| prev.2);
     let excl_mark = pb.excl.len();
     let guess = pb.y + space_before;
     let label = ctx.next_label(p);
-    let (mut float_rects, mut pl) = anchor_floats(ctx, pb, p, guess, excl_mark, &label);
+    let (mut float_rects, mut pl) = anchor_floats(ctx, pb, p, (guess, bx.top), excl_mark, &label);
     // The anchor paragraph's top the floats were placed from.
     let mut anchor_y = guess;
     let spot = |pb: &PageBuilder| (pb.pages.len(), pb.col);
@@ -2611,6 +2708,8 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
         }
     }
     pb.y += before;
+    // A box going on from the paragraph before runs through the space between them.
+    bx.gap = if bx.joined_prev && spot(pb) == placed_at && !pb.at_top() { (pb.y - prev_end).max(0.0) } else { 0.0 };
     // Keep lines together: if it doesn't fit but would on an empty column, move it. (Not a
     // paragraph holding a page or column break: that ends the page itself.)
     let breaks = |pl: &para::ParaLayout| pl.lines.iter().any(|l| matches!(l.end, para::LineEnd::PageBreak | para::LineEnd::ColumnBreak));
@@ -2620,7 +2719,7 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
     if pl.rp.keep_next && !pl.rp.keep_lines && may_split(&pl) && !breaks(&pl) {
         keep_tail = Some(keep_next_need(ctx, block, width, pl.rp.space_after));
     } else if (pl.rp.keep_lines || pl.rp.keep_next) && !breaks(&pl) {
-        let need = pl.height + if pl.rp.keep_next { keep_next_need(ctx, block, width, pl.rp.space_after) } else { 0.0 };
+        let need = bx.top + pl.height + bx.bottom + if pl.rp.keep_next { keep_next_need(ctx, block, width, pl.rp.space_after) } else { 0.0 };
         // (Against the whole column: balanced columns grow to hold it.)
         if pb.y + need > pb.bottom && !pb.at_top() && need <= pb.uncapped_bottom() - pb.top {
             pb.advance(block, body_top);
@@ -2630,7 +2729,7 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
     // A different top only matters when there is something to wrap around.
     if spot(pb) != placed_at || ((pb.y - guess).abs() > 0.01 && !pb.excl.is_empty()) {
         let y0 = pb.y;
-        (float_rects, pl) = anchor_floats(ctx, pb, p, y0, excl_mark, &label);
+        (float_rects, pl) = anchor_floats(ctx, pb, p, (y0, bx.top), excl_mark, &label);
         anchor_y = y0;
     }
     let mut n = pl.lines.len();
@@ -2641,8 +2740,9 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
     while l0 < n {
         // How many lines fit?
         let Some(first) = pl.lines.get(l0) else { break };
-        // A paragraph's first line may start below its top (pushed down by a floating object).
-        let lead = if l0 == 0 { first.top.max(0.0) } else { 0.0 };
+        // A paragraph's first line may start below its top (pushed down by a floating object),
+        // and starts below its top border.
+        let lead = if l0 == 0 { first.top.max(0.0) + bx.top } else { 0.0 };
         let mut l1 = l0;
         let mut forced_break = None;
         let mut new_notes: Vec<NoteBox> = Vec::new();
@@ -2741,8 +2841,8 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
             && !pb.at_top()
             && let (Some(first), Some(last)) = (pl.lines.get(l0), pl.lines.get(n - 1))
         {
-            let lead = if l0 == 0 { first.top.max(0.0) } else { 0.0 };
-            let end = pb.y + lead + (last.top + last.height - first.top);
+            let lead = if l0 == 0 { first.top.max(0.0) + bx.top } else { 0.0 };
+            let end = pb.y + lead + (last.top + last.height - first.top) + bx.bottom;
             let take = if pl.rp.widow_control { 2 } else { 1 };
             let carried: f32 = pl.lines.iter().skip(n.saturating_sub(take)).map(|l| l.height).sum();
             if end + tail > pb.bottom + 0.01 && carried + tail <= pb.uncapped_bottom() - pb.top {
@@ -2761,9 +2861,11 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
                 pb.advance(block, body_top);
                 if l0 == 0 {
                     let y0 = pb.y;
-                    (float_rects, pl) = anchor_floats(ctx, pb, p, y0, excl_mark, &label);
+                    (float_rects, pl) = anchor_floats(ctx, pb, p, (y0, bx.top), excl_mark, &label);
                     anchor_y = y0;
                     n = pl.lines.len();
+                    // At the top of a column the box doesn't reach up to the paragraph before.
+                    bx.gap = 0.0;
                 }
                 continue;
             }
@@ -2794,7 +2896,7 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
             pb.bottom = pb.body_floor().max(placed_bottom).min(pb.orig_bottom);
         }
         let mut items = Vec::new();
-        push_para(&mut items, StoryRef::Body, &[block as u32], &pl, l0, l1, x, y, width);
+        push_para(&mut items, StoryRef::Body, &[block as u32], &pl, (l0, l1), (x, y), width, bx);
         // Pictures, shapes and text boxes in these lines (web view: floats placed by this piece).
         let at = ObjFrame {
             page: Some(PageFrame { sect: pb.sect, origin: (0.0, 0.0) }),
@@ -2859,8 +2961,34 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
     if ends_on_break {
         return;
     }
+    // The bottom border's band below the last line.
+    if bx.bottom > 0.0 {
+        pb.y += bx.bottom;
+        pb.content_bottom = pb.content_bottom.max(pb.y);
+    }
     pb.y += pl.rp.space_after;
     pb.prev = Some((pl.rp.style.clone(), pl.rp.contextual_spacing, pl.rp.space_after, is_list(&pl.rp) && pl.rp.space_after_auto));
+}
+
+/// The border box of body paragraph `p` (block `block`), from the body paragraphs around it.
+fn body_border_box(ctx: &mut Ctx, p: &Paragraph, block: usize) -> BorderBox {
+    if ctx.resolved(p).borders.is_none() {
+        return BorderBox::default();
+    }
+    let doc = ctx.doc;
+    block_border_box(ctx, &doc.body, block)
+}
+
+/// The border box of paragraph `i` of `blocks`, from the paragraphs next to it there.
+fn block_border_box(ctx: &mut Ctx, blocks: &Blocks, i: usize) -> BorderBox {
+    let mut resolved = |i: Option<usize>| match i.and_then(|i| blocks.get(i)).map(|b| &**b) {
+        Some(Block::Para(q)) => Some(ctx.resolved(q)),
+        _ => None,
+    };
+    let Some(me) = resolved(Some(i)).filter(|r| r.borders.is_some()) else { return BorderBox::default() };
+    let prev = resolved(i.checked_sub(1));
+    let next = resolved(i.checked_add(1));
+    border_box(&me, prev.as_deref(), next.as_deref())
 }
 
 /// The outline of the body for an Outline view pass.
@@ -2899,7 +3027,7 @@ fn place_outline_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block:
     let l1 = if o.view.first_line_only && level >= outline::BODY { n.min(1) } else { n };
     let y = pb.y + pl.lines.first().map(|f| f.top.max(0.0)).unwrap_or(0.0);
     let mut items = Vec::new();
-    push_para(&mut items, StoryRef::Body, &[block as u32], &pl, 0, l1, x, y, width);
+    push_para(&mut items, StoryRef::Body, &[block as u32], &pl, (0, l1), (x, y), width, BorderBox::default());
     let at = ObjFrame { page: Some(PageFrame { sect: pb.sect, origin: (0.0, 0.0) }), col: (x, width), para_y: y, table_chr: None };
     let (behind, front) = place_objects(ctx, StoryRef::Body, &[block as u32], &q, &pl, (0, l1), (x, y), &at, &HashMap::new(), 0);
     items.extend(front);

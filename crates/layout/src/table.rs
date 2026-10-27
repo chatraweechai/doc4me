@@ -309,8 +309,9 @@ fn region_borders(p: &TableStyleParts, (ri, nrows): (usize, usize), (first_g, la
 pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], avail: f32, depth: usize) -> TableLayout {
     let style = table_style(ctx, t);
     let parts = style.as_ref().map(|s| &s.parts);
-    // Cell text formatting per region, built once per table.
+    // Cell text formatting per region, built once per table (nothing without a table style).
     let mut cell_text: Vec<(Region, CellText)> = Vec::new();
+    let no_style = CellText::default();
     let ncols = t.cols().max(1);
     // Column widths.
     let mut grid: Vec<f32> = if t.grid.len() == ncols {
@@ -459,7 +460,9 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
             {
                 cell_text.push((region, region_text(st, region)));
             }
-            let text = cell_text.iter().find(|(r, _)| *r == region).map(|(_, c)| c);
+            // Cell text always has one (empty without a table style), so its paragraphs know
+            // they are in a cell.
+            let text = Some(cell_text.iter().find(|(r, _)| *r == region).map_or(&no_style, |(_, c)| c));
             let mut cpath = path.to_vec();
             cpath.push(ri as u32);
             cpath.push(ci as u32);
@@ -626,7 +629,7 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
                 {
                     let mut cpath = path.to_vec();
                     cpath.extend([ri as u32, tn.ci as u32]);
-                    let text = cell_text.iter().find(|(r, _)| *r == tn.region).map(|(_, c)| c);
+                    let text = Some(cell_text.iter().find(|(r, _)| *r == tn.region).map_or(&no_style, |(_, c)| c));
                     // Same list numbers as the first layout: lay it out from the same counters.
                     let now = (std::mem::replace(&mut ctx.counters, tn.snap.0), std::mem::replace(&mut ctx.eq_count, tn.snap.1));
                     let b = layout_box(ctx, story, &cell.blocks, &cpath, len, text, depth, None);

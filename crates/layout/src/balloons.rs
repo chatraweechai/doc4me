@@ -158,7 +158,7 @@ pub(crate) fn add(ctx: &mut Ctx, lay: &mut DocLayout) {
             );
             let pl = ctx.para_labelled(&head, inner, None, &[], None);
             let lead = pl.lines.first().map_or(0.0, |l| l.top.max(0.0));
-            push_para(&mut items, story, &[HEADER_PATH], &pl, 0, pl.lines.len(), x, y + lead, inner);
+            push_para(&mut items, story, &[HEADER_PATH], &pl, (0, pl.lines.len()), (x, y + lead), inner, Default::default());
             y += pl.height + 2.0;
             // The comment itself, as written (its own formatting).
             if let Some(part) = doc.parts.get(&cm.part) {
