@@ -27,7 +27,7 @@ dlg-025	wdDialogEditReplace	117	Find, Replace, Direction, MatchCase, WholeWord, 
 dlg-026	wdDialogEditStyle	120	(none)	styles.modify	registry		Modify Style
 dlg-027	wdDialogEditSubscribeOptions	736	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry		legacy
 dlg-028	wdDialogEditSubscribeTo	733	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry		legacy
-dlg-029	wdDialogEditTOACategory	625	Category, CategoryName	-	registry		
+dlg-029	wdDialogEditTOACategory	625	Category, CategoryName	references.toaCategory	registry		Edit Category (Mark Citation › Category…): categories 1–16 with Word's names, Replace with renames one (per user, as Word keeps them in Normal); Mark Citation files the citation under a category (TA \l \s \c), Insert Table of Authorities lists one or All categories under their names, with passim
 dlg-030	wdDialogEmailOptions	863	(none)	-	registry		
 dlg-031	wdDialogFileDocumentLayout	178	Tab, PaperSize, TopMargin, BottomMargin, LeftMargin, RightMargin, Gutter, PageWidth, PageHeight, Orientation, FirstPage, OtherPages, VertAlign, ApplyPropsTo, Default, FacingPages, HeaderDistance, FooterDistance, SectionStart, OddAndEvenPages, DifferentFirstPage, Endnotes, LineNum, StartingNum, FromText, CountBy, NumMode, TwoOnOne, GutterPosition, LayoutMode, CharsLine, LinesPage, CharPitch, LinePitch, DocFontName, DocFontSize, PageColumns, TextFlow, FirstPageOnLeft, SectionType, RTLAlignment	layout.pageSetup	registry		Page Setup › Layout
 dlg-032	wdDialogFileFind	99	SearchName, SearchPath, Name, SubDir, Title, Author, Keywords, Subject, Options, MatchCase, Text, PatternMatch, DateSavedFrom, DateSavedTo, SavedBy, DateCreatedFrom, DateCreatedTo, View, SortBy, ListBy, SelectedFile, Add, Delete, ShowFolders, MatchByte	-	registry		legacy
@@ -163,7 +163,7 @@ dlg-161	wdDialogTableFormula	348	(none)	table.formula	registry
 dlg-162	wdDialogTableInsertCells	130	(none)	table.insertCells	registry		Insert Cells: shift down, entire row, entire column (shift right not offered: rows keep the same columns)
 dlg-163	wdDialogTableInsertRow	131	(none)	table.insertRows	registry		Insert Rows: how many, above or below
 dlg-164	wdDialogTableInsertTable	129	(none)	insert.table	registry		Insert Table
-dlg-165	wdDialogTableOfCaptionsOptions	551	(none)	-	registry		
+dlg-165	wdDialogTableOfCaptionsOptions	551	(none)	references.tableOfFigures	registry		Table of Figures Options (Insert Table of Figures › Options…): Build table of figures from Style and/or Table entry fields with a Table identifier (TOC \t … \f … \c); the dialog also has Caption label, Include label and number (\a), Show page numbers (\n), Right align page numbers (\p), Tab leader
 dlg-166	wdDialogTableOfContentsOptions	470	(none)	references.customToc	registry		Custom Table of Contents › Options
 dlg-167	wdDialogTableProperties	861	(none)	table.properties	registry		
 dlg-168	wdDialogTableRowHeight	142	(none)	table.properties	registry		

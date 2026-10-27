@@ -323,36 +323,26 @@ pub fn specs() -> Vec<CommandSpec> {
             sel_result(s)
         })
         .params(r#"{"title"?: string}"#),
-        CommandSpec::new("references.tableOfFigures", "Insert Table of Figures", "References › Captions", |s, v| {
-            let label = p::str(v, "label").unwrap_or("Figure").to_string();
-            generated_list(s, &format!("TOC \\c \"{label}\""), "")?;
-            sel_result(s)
-        })
-        .params(r#"{"label"?: "Figure|Table|Equation"}"#),
+        CommandSpec::new("references.tableOfFigures", "Insert Table of Figures", "References › Captions", table_of_figures).params(
+            r#"{"label"?: string (captions with this label; default Figure), "style"?: string (Options › Style: paragraphs of this style instead), "identifier"?: "A"-"Z" (Options › Table entry fields: TC fields with this \f letter), "includeLabel"?: bool (default true: "Figure 1: …"; false drops the label and number), "pages"?: bool (default true), "rightAlign"?: bool (default true), "leader"?: "dot|hyphen|underscore|middleDot|none"}"#,
+        ),
         CommandSpec::new("references.updateFigures", "Update Table", "References › Captions", |s, _| {
             update_generated(s)?;
             sel_result(s)
         }),
-        CommandSpec::new("references.markCitation", "Mark Citation", "References › Table of Authorities", |s, v| {
-            let entry = p::str(v, "entry").map(str::to_string).unwrap_or_else(|| s.selected_text().trim().to_string());
-            if entry.is_empty() {
-                return Err(CmdError::Params("select a citation or give `entry`".into()));
-            }
-            let (_, b) = s.sel.ordered();
-            s.doc.insert_object(&b, InlineObject::Field { instr: format!("TA \\l \"{}\"", entry.replace('"', "")), result: String::new(), locked: false, code: false }, &CharProps { hidden: Some(true), ..Default::default() })?;
-            Ok(json!({"entry": entry}))
-        })
-        .params(r#"{"entry"?: string}"#)
-        .key(super::non_mac("Alt+Shift+I")),
+        CommandSpec::new("references.markCitation", "Mark Citation", "References › Table of Authorities", mark_citation)
+            .params(r#"{"entry"?: string (the long citation; default the selection), "short"?: string (the short citation; default the long one), "category"?: 1-16 (default 1, Cases)}"#)
+            .key(super::non_mac("Alt+Shift+I")),
+        CommandSpec::new("references.toaCategory", "Edit Category", "References › Table of Authorities", toa_category)
+            .params(r#"{"category"?: 1-16, "name"?: string (empty: Word's name again)} → {"categories": [16 names]}"#)
+            .pure(),
         // Mark Table of Contents Entry (Alt+Shift+O): a hidden TC field that a table of contents
         // with "Table entry fields" (`tcFields`, TOC's \f) lists.
         CommandSpec::new("references.markTocEntry", "Mark Table of Contents Entry", "References › Table of Contents", mark_toc_entry)
             .params(r#"{"entry"?: string (the selection), "identifier"?: "A"-"Z" (which table; default C, a table of contents), "level"?: 1-9 (default 1)}"#)
             .key(super::non_mac("Alt+Shift+O")),
-        CommandSpec::new("references.tableOfAuthorities", "Insert Table of Authorities", "References › Table of Authorities", |s, _| {
-            generated_list(s, "TOA", "Table of Authorities")?;
-            sel_result(s)
-        }),
+        CommandSpec::new("references.tableOfAuthorities", "Insert Table of Authorities", "References › Table of Authorities", table_of_authorities)
+            .params(r#"{"category"?: 0-16 (0 = All: one table per category in use, each under its name), "passim"?: bool (default true: five or more pages read "passim"), "leader"?: "dot|hyphen|underscore|middleDot|none", "names"?: [16 strings] (headings for the categories the user hasn't renamed, e.g. Word's names in the interface language)}"#),
         CommandSpec::new("references.updateAuthorities", "Update Table", "References › Table of Authorities", |s, _| {
             update_generated(s)?;
             sel_result(s)
@@ -732,27 +722,38 @@ fn mark_toc_entry(s: &mut Session, v: &Value) -> CmdResult {
 /// Generated lists (BIBLIOGRAPHY, INDEX, table of figures, TOA): a heading paragraph holding
 /// the field, then entry paragraphs marked with the "GeneratedEntry" style family.
 pub(crate) fn generated_list(s: &mut Session, instr: &str, title: &str) -> Result<(), CmdError> {
+    generated_lists(s, &[(instr.to_string(), title.to_string())], None)
+}
+
+/// Several lists one after another at the caret (Table of Authorities › All: one per category),
+/// their entries' tab leader `leader` (dots when `None`).
+fn generated_lists(s: &mut Session, lists: &[(String, String)], leader: Option<TabLeader>) -> Result<(), CmdError> {
     let at = delete_selection(s)?;
     if at.story != StoryRef::Body || at.path.depth() > 0 {
         return Err(CmdError::Failed("lists go in the main text".into()));
     }
-    let mut head = if title.is_empty() { Paragraph::new() } else { Paragraph::with_text(title, CharProps::default()).styled("Heading1") };
-    let end = head.len();
-    head.insert_object(
-        end,
-        InlineObject::Field { instr: instr.to_string(), result: String::new(), locked: false, code: false },
-        &CharProps::default(),
-    )?;
     let i = if s.doc.para_at(&at).is_some_and(|p| p.is_empty()) { at.path.last() } else { s.doc.split_paragraph(&at)?.path.last() };
-    s.doc.insert_block(StoryRef::Body, &Path::top(i), Block::Para(head))?;
-    update_generated(s)
+    for (k, (instr, title)) in lists.iter().enumerate() {
+        let mut head = if title.is_empty() { Paragraph::new() } else { Paragraph::with_text(title, CharProps::default()).styled("Heading1") };
+        let end = head.len();
+        head.insert_object(
+            end,
+            InlineObject::Field { instr: instr.clone(), result: String::new(), locked: false, code: false },
+            &CharProps::default(),
+        )?;
+        s.doc.insert_block(StoryRef::Body, &Path::top(i + k), Block::Para(head))?;
+    }
+    rebuild_generated(s, leader)
 }
 
+/// The generated list a paragraph's field makes: BIBLIOGRAPHY, INDEX, TOA, or a TOC with `\c`
+/// (a table of figures; a TOC without it is the table of contents).
 fn list_kind(p: &Paragraph) -> Option<String> {
     p.objects.iter().find_map(|o| match o {
         InlineObject::Field { instr, .. } => {
             let t = instr.trim_start();
-            (t.starts_with("BIBLIOGRAPHY") || t.starts_with("INDEX") || t.starts_with("TOA") || t.starts_with("TOC \\c")).then(|| t.to_string())
+            let f = super::references::FieldCode::parse(t);
+            (matches!(f.name.as_str(), "BIBLIOGRAPHY" | "INDEX" | "TOA") || (f.name == "TOC" && f.has('c'))).then(|| t.to_string())
         }
         _ => None,
     })
@@ -762,6 +763,12 @@ const ENTRY_STYLE: &str = "ListEntry";
 
 /// Rebuild every generated list.
 pub fn update_generated(s: &mut Session) -> Result<(), CmdError> {
+    rebuild_generated(s, None)
+}
+
+/// Rebuild every generated list; each keeps its entries' tab leader, and a list without entries
+/// yet takes `leader` (dots when `None`).
+fn rebuild_generated(s: &mut Session, leader: Option<TabLeader>) -> Result<(), CmdError> {
     if s.doc.styles.get(ENTRY_STYLE).is_none() {
         s.doc.styles.upsert(doc4me_doc::Style {
             id: ENTRY_STYLE.into(),
@@ -785,10 +792,13 @@ pub fn update_generated(s: &mut Session) -> Result<(), CmdError> {
             i += 1;
             continue;
         }
-        // Remove old entries.
-        while s.doc.body.get(i + 1).and_then(|b| b.as_para()).is_some_and(|p| p.props.style.as_deref() == Some(ENTRY_STYLE)) {
+        // Remove old entries, keeping the leader they had.
+        let mut kept = None;
+        while let Some(p) = s.doc.body.get(i + 1).and_then(|b| b.as_para()).filter(|p| p.props.style.as_deref() == Some(ENTRY_STYLE)) {
+            kept = kept.or_else(|| p.props.tabs.as_ref().and_then(|t| t.last()).map(|t| t.leader));
             s.doc.remove_block(StoryRef::Body, &Path::top(i + 1))?;
         }
+        let leader = kept.or(leader).unwrap_or(TabLeader::Dot);
         let lines = entries_for(s, &kind);
         let width = super::page::sect(s).text_width();
         for (k, (text, hanging)) in lines.into_iter().enumerate() {
@@ -798,7 +808,7 @@ pub fn update_generated(s: &mut Session) -> Result<(), CmdError> {
                 para.props.indent_first = Some(-36.0);
             }
             if text.contains('\t') {
-                para.props.tabs = Some(vec![TabStop { pos: width - 0.5, align: TabAlign::Right, leader: TabLeader::Dot }]);
+                para.props.tabs = Some(vec![TabStop { pos: width - 0.5, align: TabAlign::Right, leader }]);
             }
             s.doc.insert_block(StoryRef::Body, &Path::top(i + 1 + k), Block::Para(para))?;
         }
@@ -823,82 +833,306 @@ fn entries_for(s: &mut Session, kind: &str) -> Vec<(String, bool)> {
             .filter_map(|(k, i)| s.doc.sources.get(i).map(|x| (entry(x, st.name, k.saturating_add(1)), !st.numbered())))
             .collect();
     }
-    // Collect marks with positions.
+    let f = super::references::FieldCode::parse(kind);
+    if f.name == "TOC" {
+        return figure_entries(s, &f);
+    }
+    if f.name == "TOA" {
+        return authority_entries(s, &f);
+    }
+    // Index: group by entry, sort, list pages.
     let mut marks: Vec<(String, Pos)> = Vec::new();
-    let caption_label = kind.split('"').nth(1).unwrap_or("Figure").to_string();
     for path in s.doc.para_paths(StoryRef::Body) {
         let Some(p) = s.doc.para(StoryRef::Body, &path) else { continue };
-        if kind.starts_with("TOC \\c") {
-            if p.props.style.as_deref() == Some("Caption") && p.plain_text().starts_with(&caption_label) {
-                marks.push((p.plain_text(), Pos { story: StoryRef::Body, path: path.clone(), off: 0 }));
-            }
-            continue;
-        }
         for off in p.object_offsets() {
-            if let Some(InlineObject::Field { instr, .. }) = p.object_at(off) {
-                let t = instr.trim_start();
-                let want = if kind.starts_with("INDEX") { "XE" } else { "TA" };
-                if t.starts_with(want) {
-                    let e = t.split('"').nth(1).unwrap_or("").to_string();
-                    marks.push((e, Pos { story: StoryRef::Body, path: path.clone(), off }));
-                }
+            if let Some(InlineObject::Field { instr, .. }) = p.object_at(off)
+                && instr.trim_start().starts_with("XE")
+            {
+                marks.push((instr.split('"').nth(1).unwrap_or("").to_string(), Pos { story: StoryRef::Body, path: path.clone(), off }));
             }
         }
     }
-    let mut with_pages: Vec<(String, u32)> = marks.into_iter().map(|(e, _)| (e, 0)).collect();
-    // Pages (layout once).
-    let positions: Vec<Pos> = {
-        let mut v = Vec::new();
-        for path in s.doc.para_paths(StoryRef::Body) {
-            let Some(p) = s.doc.para(StoryRef::Body, &path) else { continue };
-            if kind.starts_with("TOC \\c") {
-                if p.props.style.as_deref() == Some("Caption") && p.plain_text().starts_with(&caption_label) {
-                    v.push(Pos { story: StoryRef::Body, path: path.clone(), off: 0 });
-                }
-                continue;
-            }
-            for off in p.object_offsets() {
-                if let Some(InlineObject::Field { instr, .. }) = p.object_at(off) {
-                    let want = if kind.starts_with("INDEX") { "XE" } else { "TA" };
-                    if instr.trim_start().starts_with(want) {
-                        v.push(Pos { story: StoryRef::Body, path: path.clone(), off });
-                    }
-                }
-            }
-        }
-        v
-    };
-    for (i, pos) in positions.iter().enumerate() {
-        let pg = page_of(s, pos);
-        if let Some(x) = with_pages.get_mut(i) {
-            x.1 = pg;
-        }
-    }
-    if kind.starts_with("TOC \\c") {
-        return with_pages.into_iter().map(|(t, p)| (format!("{t}\t{p}"), false)).collect();
-    }
-    // Index / TOA: group by entry, sort, list pages.
     let mut grouped: std::collections::BTreeMap<String, Vec<u32>> = Default::default();
-    for (e, p) in with_pages {
+    for (e, pos) in marks {
+        let pg = page_of(s, &pos);
         let pages = grouped.entry(e).or_default();
-        if !pages.contains(&p) {
-            pages.push(p);
+        if !pages.contains(&pg) {
+            pages.push(pg);
         }
     }
     let mut out = Vec::new();
     let mut letter = None;
     for (e, pages) in grouped {
         let first = e.chars().next().map(|c| c.to_ascii_uppercase());
-        if kind.starts_with("INDEX") && first != letter {
+        if first != letter {
             letter = first;
             if let Some(l) = first {
                 out.push((l.to_string(), false));
             }
         }
         let list = pages.iter().map(|p| p.to_string()).collect::<Vec<_>>().join(", ");
-        out.push(if kind.starts_with("INDEX") { (format!("{e}, {list}"), true) } else { (format!("{e}\t{list}"), false) });
+        out.push((format!("{e}, {list}"), true));
     }
     out
+}
+
+/// The line for an entry on `page`: after a tab (right-aligned with the leader), after the `\p`
+/// separator, or without a page number (`\n`).
+fn with_page(f: &super::references::FieldCode, text: &str, page: &str) -> String {
+    if f.has('n') {
+        text.to_string()
+    } else if let Some(sep) = f.arg('p') {
+        format!("{text}{sep}{page}")
+    } else {
+        format!("{text}\t{page}")
+    }
+}
+
+/// "Figure 1: A kiln" without its label and number (`\a`): "A kiln".
+fn without_label(text: &str, label: &str) -> String {
+    let rest = text.strip_prefix(label).unwrap_or(text).trim_start();
+    let rest = rest.trim_start_matches(|c: char| c.is_ascii_digit() || matches!(c, '.' | '-' | '\u{2013}' | '\u{2014}'));
+    let rest = rest.trim_start().trim_start_matches([':', '.', '\u{2013}', '\u{2014}', '-']).trim_start();
+    if rest.is_empty() { text.to_string() } else { rest.to_string() }
+}
+
+/// A table of figures (TOC with `\c`): captions with the `\c` label, paragraphs of the `\t`
+/// style, and TC fields with the `\f` identifier, in document order.
+fn figure_entries(s: &mut Session, f: &super::references::FieldCode) -> Vec<(String, bool)> {
+    let label = f.arg('c').map(str::to_string).filter(|l| !l.is_empty());
+    let style_name = f.arg('t').and_then(|t| t.split([',', ';']).next()).map(|t| t.trim().to_string()).filter(|t| !t.is_empty());
+    let tc = f.has('f').then(|| f.arg('f').unwrap_or("").to_ascii_uppercase());
+    let mut found: Vec<(String, Pos)> = Vec::new();
+    for path in s.doc.para_paths(StoryRef::Body) {
+        let Some(p) = s.doc.para(StoryRef::Body, &path) else { continue };
+        let st = p.props.style.as_deref().unwrap_or("Normal");
+        let text = p.plain_text().replace(['\u{000C}', '\n', '\t'], " ").trim().to_string();
+        let by_label = label.as_deref().filter(|l| st == "Caption" && text.starts_with(l));
+        let by_style = style_name.as_deref().is_some_and(|n| st == n || s.doc.styles.get(st).is_some_and(|x| x.name.eq_ignore_ascii_case(n)));
+        if !text.is_empty() && (by_label.is_some() || by_style) {
+            let shown = match by_label {
+                Some(l) if f.has('a') => without_label(&text, l),
+                _ => text,
+            };
+            found.push((shown, Pos { story: StoryRef::Body, path: path.clone(), off: 0 }));
+        }
+        if let Some(id) = &tc {
+            for off in p.object_offsets() {
+                let Some(InlineObject::Field { instr, .. }) = p.object_at(off) else { continue };
+                let c = super::references::FieldCode::parse(instr);
+                let kind = c.arg('f').unwrap_or("C").to_ascii_uppercase();
+                let text = c.args.first().map(|t| t.trim().to_string()).unwrap_or_default();
+                if c.name == "TC" && *id == kind && !text.is_empty() {
+                    found.push((text, Pos { story: StoryRef::Body, path: path.clone(), off }));
+                }
+            }
+        }
+    }
+    found.into_iter().map(|(t, pos)| (with_page(f, &t, &page_of(s, &pos).to_string()), false)).collect()
+}
+
+/// Word's Table of Authorities categories.
+pub const TOA_CATEGORIES: [&str; 16] = [
+    "Cases",
+    "Statutes",
+    "Other Authorities",
+    "Rules",
+    "Treatises",
+    "Regulations",
+    "Constitutional Provisions",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+];
+
+/// Category `n`'s name (1–16): the user's, or Word's.
+pub fn toa_category_name(s: &Session, n: u32) -> String {
+    let i = n.clamp(1, 16) as usize - 1;
+    s.prefs.toa_categories.get(i).map(|x| x.trim()).filter(|x| !x.is_empty()).unwrap_or(TOA_CATEGORIES[i]).to_string()
+}
+
+/// The citations a TA field marks: long citation, category (1–16; Cases when missing).
+fn ta_of(instr: &str) -> Option<(String, u32)> {
+    let f = super::references::FieldCode::parse(instr);
+    if f.name != "TA" {
+        return None;
+    }
+    let long = f.arg('l').or(f.arg('s')).map(str::trim).filter(|t| !t.is_empty())?.to_string();
+    Some((long, f.arg('c').and_then(|c| c.trim().parse::<u32>().ok()).unwrap_or(1).clamp(1, 16)))
+}
+
+/// A table of authorities: the TA citations of the `\c` category (all without one), each with
+/// its pages, alphabetically; `\p`: five or more pages read "passim".
+fn authority_entries(s: &mut Session, f: &super::references::FieldCode) -> Vec<(String, bool)> {
+    let want = f.arg('c').and_then(|c| c.trim().parse::<u32>().ok());
+    let mut marks: Vec<(String, Pos)> = Vec::new();
+    for path in s.doc.para_paths(StoryRef::Body) {
+        let Some(p) = s.doc.para(StoryRef::Body, &path) else { continue };
+        for off in p.object_offsets() {
+            if let Some(InlineObject::Field { instr, .. }) = p.object_at(off)
+                && let Some((long, cat)) = ta_of(instr)
+                && want.is_none_or(|w| w == cat)
+            {
+                marks.push((long, Pos { story: StoryRef::Body, path: path.clone(), off }));
+            }
+        }
+    }
+    let mut grouped: std::collections::BTreeMap<String, (String, Vec<u32>)> = Default::default();
+    for (long, pos) in marks {
+        let pg = page_of(s, &pos);
+        let (_, pages) = grouped.entry(long.to_lowercase()).or_insert_with(|| (long.clone(), Vec::new()));
+        if !pages.contains(&pg) {
+            pages.push(pg);
+        }
+    }
+    grouped
+        .into_values()
+        .map(|(long, mut pages)| {
+            pages.sort_unstable();
+            let list =
+                if f.has('p') && pages.len() >= 5 { "passim".to_string() } else { pages.iter().map(u32::to_string).collect::<Vec<_>>().join(", ") };
+            // TOA's `\p` is passim, not a separator: the pages always follow a tab.
+            (format!("{long}\t{list}"), false)
+        })
+        .collect()
+}
+
+/// Insert Table of Figures with its options.
+fn table_of_figures(s: &mut Session, v: &Value) -> CmdResult {
+    let text = |k: &str| p::str(v, k).map(str::trim).filter(|t| !t.is_empty());
+    let clean = |t: &str, what: &str| -> Result<String, CmdError> {
+        if t.chars().count() > 255 || t.contains(['"', '\\', '\n', '\r']) {
+            return Err(CmdError::Params(format!("{what} can't have quotes, backslashes or line breaks")));
+        }
+        Ok(t.to_string())
+    };
+    let style = text("style").map(|t| clean(t, "the style")).transpose()?;
+    if let Some(st) = &style
+        && s.doc.styles.find(st).is_none()
+        && s.doc.styles.get(st).is_none()
+    {
+        return Err(CmdError::Params(format!("no style `{st}`")));
+    }
+    let id = text("identifier").map(str::to_ascii_uppercase);
+    if id.as_deref().is_some_and(|i| i.len() != 1 || !i.chars().all(|c| c.is_ascii_uppercase())) {
+        return Err(CmdError::Params("the identifier is one letter, A–Z".into()));
+    }
+    let mut instr = String::from("TOC");
+    if style.is_none() && id.is_none() {
+        instr += &format!(" \\c \"{}\"", clean(text("label").unwrap_or("Figure"), "the label")?);
+        if p::bool(v, "includeLabel") == Some(false) {
+            instr += " \\a";
+        }
+    } else {
+        if let Some(st) = &style {
+            let name = s.doc.styles.find(st).or(s.doc.styles.get(st)).map(|x| x.name.clone()).unwrap_or_else(|| st.clone());
+            instr += &format!(" \\t \"{name},1\"");
+        }
+        if let Some(i) = &id {
+            instr += &format!(" \\f {i}");
+        }
+        instr += " \\c";
+    }
+    if p::bool(v, "pages") == Some(false) {
+        instr += " \\n";
+    } else if p::bool(v, "rightAlign") == Some(false) {
+        instr += " \\p \" \"";
+    }
+    let leader = p::str(v, "leader").map(super::references::leader);
+    generated_lists(s, &[(instr, String::new())], leader)?;
+    sel_result(s)
+}
+
+/// Mark Citation: a hidden TA field after the selection, with its long and short citation and
+/// category.
+fn mark_citation(s: &mut Session, v: &Value) -> CmdResult {
+    let entry = p::str(v, "entry").map(str::to_string).unwrap_or_else(|| s.selected_text().trim().to_string());
+    let entry = entry.replace(['"', '\\', '\n', '\r'], " ").trim().to_string();
+    if entry.is_empty() {
+        return Err(CmdError::Params("select a citation or give `entry`".into()));
+    }
+    let short = p::str(v, "short")
+        .map(|t| t.replace(['"', '\\', '\n', '\r'], " ").trim().to_string())
+        .filter(|t| !t.is_empty())
+        .unwrap_or_else(|| entry.clone());
+    let category = p::u64(v, "category").unwrap_or(1);
+    if !(1..=16).contains(&category) {
+        return Err(CmdError::Params("the category is 1–16".into()));
+    }
+    let (_, b) = s.sel.ordered();
+    let instr = format!("TA \\l \"{entry}\" \\s \"{short}\" \\c {category}");
+    s.doc.insert_object(
+        &b,
+        InlineObject::Field { instr, result: String::new(), locked: false, code: false },
+        &CharProps { hidden: Some(true), ..Default::default() },
+    )?;
+    Ok(json!({"entry": entry, "short": short, "category": category}))
+}
+
+/// Edit Category: rename category 1–16 (an empty name is Word's again); the names either way.
+fn toa_category(s: &mut Session, v: &Value) -> CmdResult {
+    if let Some(n) = p::u64(v, "category") {
+        if !(1..=16).contains(&n) {
+            return Err(CmdError::Params("the category is 1–16".into()));
+        }
+        let name = p::str(v, "name").unwrap_or("").trim().to_string();
+        if name.chars().count() > 40 || name.contains(['\n', '\r', '"', '\\']) {
+            return Err(CmdError::Params("a category name has up to 40 characters, on one line, without quotes".into()));
+        }
+        let c = &mut s.prefs.toa_categories;
+        c.resize(16, String::new());
+        c[n as usize - 1] = if name == TOA_CATEGORIES[n as usize - 1] { String::new() } else { name };
+        if c.iter().all(String::is_empty) {
+            c.clear();
+        }
+    }
+    Ok(json!({"categories": (1..=16).map(|n| toa_category_name(s, n)).collect::<Vec<_>>()}))
+}
+
+/// Insert Table of Authorities: one category, or All (a table for each category in use, under
+/// its name).
+fn table_of_authorities(s: &mut Session, v: &Value) -> CmdResult {
+    let category = p::u64(v, "category").unwrap_or(0);
+    if category > 16 {
+        return Err(CmdError::Params("the category is 0 (All) or 1–16".into()));
+    }
+    let passim = if p::bool(v, "passim").unwrap_or(true) { " \\p" } else { "" };
+    let cats: Vec<u32> = if category == 0 {
+        let mut used: Vec<u32> = s
+            .doc
+            .para_paths(StoryRef::Body)
+            .iter()
+            .filter_map(|path| s.doc.para(StoryRef::Body, path))
+            .flat_map(|p| p.objects.iter())
+            .filter_map(|o| match o {
+                InlineObject::Field { instr, .. } => ta_of(instr).map(|(_, c)| c),
+                _ => None,
+            })
+            .collect();
+        used.sort_unstable();
+        used.dedup();
+        if used.is_empty() { vec![1] } else { used }
+    } else {
+        vec![category as u32]
+    };
+    // A heading per category: the user's name, else the caller's (Word's names in the interface
+    // language), else Word's English one.
+    let given: Vec<&str> = v.get("names").and_then(Value::as_array).map(|a| a.iter().map(|n| n.as_str().unwrap_or("")).collect()).unwrap_or_default();
+    let heading = |c: u32| {
+        let own = s.prefs.toa_categories.get(c as usize - 1).map(|x| x.trim()).filter(|x| !x.is_empty());
+        let local = given.get(c as usize - 1).map(|x| x.trim()).filter(|x| !x.is_empty() && x.chars().count() <= 40 && !x.contains(['\n', '\r']));
+        own.or(local).map(str::to_string).unwrap_or_else(|| toa_category_name(s, c))
+    };
+    let lists: Vec<(String, String)> = cats.iter().map(|&c| (format!("TOA \\h \\c \"{c}\"{passim}"), heading(c))).collect();
+    let leader = p::str(v, "leader").map(super::references::leader);
+    generated_lists(s, &lists, leader)?;
+    sel_result(s)
 }
 
 fn cross_ref(s: &mut Session, v: &Value) -> CmdResult {
@@ -1140,6 +1374,93 @@ mod tests {
         s.run("references.updateAuthorities", &json!({})).unwrap();
         let after = s.doc.plain_text(StoryRef::Body);
         assert!(after.matches("Doe v. Roe").count() > t.matches("Doe v. Roe").count(), "{after}");
+    }
+
+    /// dlg-165: Table of Figures › Options: from a style or from TC fields with an identifier,
+    /// without the label and number, without page numbers or not right-aligned, with a leader.
+    #[test]
+    fn table_of_figures_options() {
+        let mut s = Session::new(doc4me_doc::Document::from_text("A kiln\nQuote here\nBody"));
+        s.run("caret.docStart", &json!({})).unwrap();
+        s.run("references.caption", &json!({"label": "Figure", "text": "The kiln"})).unwrap();
+        s.sel = Selection::caret(Pos::body(2, 0));
+        s.run("styles.apply", &json!({"style": "Quote"})).unwrap();
+        s.run("select.text", &json!({"text": "Body"})).unwrap();
+        s.run("references.markTocEntry", &json!({"entry": "Marked entry", "identifier": "F"})).unwrap();
+        let end = |s: &mut Session| {
+            s.run("caret.docEnd", &json!({})).unwrap();
+            s.run("text.newParagraph", &json!({})).unwrap();
+        };
+        let lines = |s: &Session| {
+            s.doc
+                .body
+                .iter()
+                .filter_map(|b| b.as_para())
+                .filter(|p| p.props.style.as_deref() == Some(ENTRY_STYLE))
+                .map(|p| p.plain_text())
+                .collect::<Vec<_>>()
+        };
+        end(&mut s);
+        s.run("references.tableOfFigures", &json!({"includeLabel": false, "leader": "hyphen"})).unwrap();
+        assert_eq!(lines(&s), ["The kiln\t1"]);
+        let tab =
+            s.doc.body.iter().filter_map(|b| b.as_para()).find(|p| p.props.style.as_deref() == Some(ENTRY_STYLE)).and_then(|p| p.props.tabs.clone());
+        assert_eq!(tab.unwrap()[0].leader, TabLeader::Hyphen);
+        assert!(fields(&s).iter().any(|(i, _)| i == "TOC \\c \"Figure\" \\a"), "{:?}", fields(&s));
+        s.run("edit.undo", &json!({})).unwrap();
+        // Options › Style and Table entry fields together, page numbers not right-aligned.
+        end(&mut s);
+        s.run("references.tableOfFigures", &json!({"style": "Quote", "identifier": "f", "rightAlign": false})).unwrap();
+        assert_eq!(lines(&s), ["Quote here 1", "Marked entry 1"]);
+        // The leader and the entries stay through Update Table; a table of figures isn't the
+        // table of contents.
+        s.run("references.updateFigures", &json!({})).unwrap();
+        assert_eq!(lines(&s), ["Quote here 1", "Marked entry 1"]);
+        s.run("edit.undo", &json!({})).unwrap();
+        s.run("edit.undo", &json!({})).unwrap();
+        end(&mut s);
+        s.run("references.tableOfFigures", &json!({"pages": false})).unwrap();
+        assert_eq!(lines(&s), ["Figure 1: The kiln"]);
+        for bad in [json!({"style": "No such"}), json!({"identifier": "AB"}), json!({"label": "Fig\"ure"})] {
+            assert!(s.run("references.tableOfFigures", &bad).is_err(), "{bad}");
+        }
+    }
+
+    /// dlg-029: Edit Category renames Table of Authorities categories; Mark Citation files a
+    /// citation under one, and All makes a table per category in use, under its name.
+    #[test]
+    fn table_of_authorities_categories() {
+        let mut s = Session::new(doc4me_doc::Document::from_text("Smith v. Jones held it.\nThe Clean Air Act applies.\nSmith v. Jones again."));
+        let cats = s.run("references.toaCategory", &json!({})).unwrap();
+        assert_eq!(cats["categories"][0], "Cases");
+        assert_eq!(cats["categories"][15], "16");
+        let cats = s.run("references.toaCategory", &json!({"category": 8, "name": "Treaties"})).unwrap();
+        assert_eq!(cats["categories"][7], "Treaties");
+        assert!(s.run("references.toaCategory", &json!({"category": 17, "name": "x"})).is_err());
+        s.run("select.text", &json!({"text": "Smith v. Jones"})).unwrap();
+        s.run("references.markCitation", &json!({"short": "Smith"})).unwrap();
+        s.run("select.text", &json!({"text": "Clean Air Act"})).unwrap();
+        s.run("references.markCitation", &json!({"category": 2})).unwrap();
+        s.sel = Selection::caret(Pos::body(2, 0));
+        s.run("select.text", &json!({"text": "Smith v. Jones"})).ok();
+        s.run("references.markCitation", &json!({"entry": "Treaty of Rome", "category": 8})).unwrap();
+        assert!(s.run("references.markCitation", &json!({"entry": "x", "category": 0})).is_err());
+        assert!(fields(&s).iter().any(|(i, _)| i == "TA \\l \"Smith v. Jones\" \\s \"Smith\" \\c 1"), "{:?}", fields(&s));
+        s.run("caret.docEnd", &json!({})).unwrap();
+        s.run("text.newParagraph", &json!({})).unwrap();
+        s.run("references.tableOfAuthorities", &json!({})).unwrap();
+        let t: Vec<String> = s.doc.body.iter().filter_map(|b| b.as_para()).map(|p| p.plain_text()).filter(|t| !t.is_empty()).collect();
+        let at = |w: &str| t.iter().position(|x| x == w || x.starts_with(w)).unwrap_or_else(|| panic!("{w}: {t:?}"));
+        assert!(
+            at("Cases") < at("Smith v. Jones\t1") && at("Statutes") < at("Clean Air Act\t1") && at("Treaties") < at("Treaty of Rome\t1"),
+            "{t:?}"
+        );
+        // One category only.
+        s.run("edit.undo", &json!({})).unwrap();
+        s.run("references.tableOfAuthorities", &json!({"category": 2})).unwrap();
+        let t = s.doc.plain_text(StoryRef::Body);
+        assert!(t.contains("Clean Air Act\t1") && !t.contains("Smith v. Jones\t1"), "{t}");
+        assert!(s.run("references.tableOfAuthorities", &json!({"category": 17})).is_err());
     }
 
     /// Field instructions and results in the body, in order.

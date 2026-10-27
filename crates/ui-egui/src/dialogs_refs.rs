@@ -55,6 +55,22 @@ pub enum RefsDialog {
         selected: Option<usize>,
     },
     Source(Box<SourceForm>),
+    /// Insert Table of Figures, and its Options… (`was` comes back on Cancel).
+    Figures(FiguresForm),
+    FiguresOptions {
+        form: FiguresForm,
+        #[serde(skip)]
+        was: Box<FiguresForm>,
+    },
+    /// Insert Table of Authorities.
+    Authorities(AuthoritiesForm),
+    /// Mark Citation (Alt+Shift+I), and its Category… (Edit Category; back to Mark Citation).
+    MarkCitation(MarkCitationForm),
+    EditCategory {
+        back: MarkCitationForm,
+        selected: usize,
+        name: String,
+    },
 }
 
 impl RefsDialog {
@@ -73,6 +89,11 @@ impl RefsDialog {
             RefsDialog::Sources { .. } => "sourceManager",
             RefsDialog::Source(f) if f.edit => "editSource",
             RefsDialog::Source(_) => "createSource",
+            RefsDialog::Figures(_) => "tableOfFigures",
+            RefsDialog::FiguresOptions { .. } => "tableOfFiguresOptions",
+            RefsDialog::Authorities(_) => "tableOfAuthorities",
+            RefsDialog::MarkCitation(_) => "markCitation",
+            RefsDialog::EditCategory { .. } => "editCategory",
         }
     }
 
@@ -92,6 +113,11 @@ impl RefsDialog {
             RefsDialog::Sources { .. } => "Source Manager",
             RefsDialog::Source(f) if f.edit => "Edit Source",
             RefsDialog::Source(_) => "Create Source",
+            RefsDialog::Figures(_) => "Table of Figures",
+            RefsDialog::FiguresOptions { .. } => "Table of Figures Options",
+            RefsDialog::Authorities(_) => "Table of Authorities",
+            RefsDialog::MarkCitation(_) => "Mark Citation",
+            RefsDialog::EditCategory { .. } => "Edit Category",
         }
     }
 }
@@ -113,6 +139,9 @@ pub fn open(name: &str, app: &WordApp) -> Option<RefsDialog> {
         "autoCaption" => auto_caption_dialog(app, None),
         "sourceManager" => RefsDialog::Sources { selected: None },
         "createSource" => RefsDialog::Source(Box::new(SourceForm::new(true, false))),
+        "tableOfFigures" => RefsDialog::Figures(FiguresForm::default()),
+        "tableOfAuthorities" => RefsDialog::Authorities(AuthoritiesForm { category: 0, passim: true, leader: "dot".into() }),
+        "markCitation" => RefsDialog::MarkCitation(MarkCitationForm::new(app)),
         _ => return None,
     })
 }
@@ -132,6 +161,11 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut RefsDialog) -> bool {
         RefsDialog::TocStyles { form, level } => toc_styles_ui(app, ui, form, level),
         RefsDialog::Sources { selected } => sources_ui(app, ui, selected),
         RefsDialog::Source(f) => source_ui(app, ui, f),
+        RefsDialog::Figures(f) => figures_ui(app, ui, f),
+        RefsDialog::FiguresOptions { form, was } => figures_options_ui(app, ui, form, was),
+        RefsDialog::Authorities(f) => authorities_ui(app, ui, f),
+        RefsDialog::MarkCitation(f) => mark_citation_ui(app, ui, f),
+        RefsDialog::EditCategory { back, selected, name } => edit_category_ui(app, ui, back, selected, name),
     };
     match next {
         Next::Stay => false,
@@ -750,6 +784,293 @@ fn mark_toc_ui(app: &mut WordApp, ui: &mut Ui, f: &mut MarkTocForm) -> Next {
         });
     });
     if close { Next::Close } else { Next::Stay }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Table of Figures and Table of Authorities
+
+/// Insert Table of Figures: the caption label, or (Options) a style and TC fields with an
+/// identifier; label and number, page numbers and their alignment, the tab leader.
+#[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FiguresForm {
+    pub label: String,
+    pub include_label: bool,
+    pub page_numbers: bool,
+    pub right_align: bool,
+    pub leader: String,
+    /// Options: build from a style (`style`) and/or TC fields with `identifier`.
+    pub use_style: bool,
+    pub style: String,
+    pub use_tc: bool,
+    pub identifier: String,
+}
+
+impl Default for FiguresForm {
+    fn default() -> Self {
+        FiguresForm {
+            label: "Figure".into(),
+            include_label: true,
+            page_numbers: true,
+            right_align: true,
+            leader: "dot".into(),
+            use_style: false,
+            style: "Caption".into(),
+            use_tc: false,
+            identifier: "F".into(),
+        }
+    }
+}
+
+impl FiguresForm {
+    /// `references.tableOfFigures` parameters.
+    pub fn params(&self) -> Value {
+        let mut v = json!({
+            "label": self.label,
+            "includeLabel": self.include_label,
+            "pages": self.page_numbers,
+            "rightAlign": self.right_align,
+            "leader": self.leader,
+        });
+        if self.use_style {
+            v["style"] = json!(self.style);
+        }
+        if self.use_tc {
+            v["identifier"] = json!(self.identifier);
+        }
+        v
+    }
+}
+
+const FIGURE_LABELS: [&str; 3] = ["Figure", "Table", "Equation"];
+
+fn figures_ui(app: &mut WordApp, ui: &mut Ui, f: &mut FiguresForm) -> Next {
+    let from_options = f.use_style || f.use_tc;
+    ui.add_enabled_ui(!from_options, |ui| {
+        ui.horizontal(|ui| {
+            ui.label(tl!("Caption label:"));
+            egui::ComboBox::from_id_salt("tof_label").selected_text(tl!(f.label.as_str())).width(120.0).show_ui(ui, |ui| {
+                for l in FIGURE_LABELS {
+                    ui.selectable_value(&mut f.label, l.to_string(), tl!(l));
+                }
+            });
+        });
+        ui.checkbox(&mut f.include_label, tl!("Include label and number"));
+    });
+    if from_options {
+        ui.label(egui::RichText::new(tl!("Built from the style or table entry fields chosen in Options.")).small().weak());
+    }
+    ui.checkbox(&mut f.page_numbers, tl!("Show page numbers"));
+    ui.add_enabled_ui(f.page_numbers, |ui| {
+        ui.checkbox(&mut f.right_align, tl!("Right align page numbers"));
+        ui.horizontal(|ui| {
+            ui.label(tl!("Tab leader:"));
+            ui.add_enabled_ui(f.right_align, |ui| {
+                let opts: Vec<(String, &str)> = LEADERS.iter().map(|(v, l)| (v.to_string(), *l)).collect();
+                choice(ui, "tof_leader", &mut f.leader, &opts);
+            });
+        });
+    });
+    ui.add_space(4.0);
+    if ui.button(tl!("Options…")).clicked() {
+        return go(RefsDialog::FiguresOptions { was: Box::new(f.clone()), form: f.clone() });
+    }
+    let (ok, cancel) = buttons(ui, tl!("OK"));
+    if ok && let Err(e) = app.run("references.tableOfFigures", f.params()) {
+        app.status(e);
+    }
+    if ok || cancel { Next::Close } else { Next::Stay }
+}
+
+/// Table of Figures Options: build the table from a style, and/or from TC fields with an
+/// identifier (Mark Table of Contents Entry's).
+fn figures_options_ui(app: &mut WordApp, ui: &mut Ui, f: &mut FiguresForm, was: &FiguresForm) -> Next {
+    heading(ui, "Build table of figures from:");
+    ui.horizontal(|ui| {
+        ui.checkbox(&mut f.use_style, tl!("Style:"));
+        ui.add_enabled_ui(f.use_style, |ui| {
+            let mut names: Vec<String> =
+                app.session.doc.styles.styles.iter().filter(|s| s.kind == StyleKind::Paragraph && !s.hidden).map(|s| s.name.clone()).collect();
+            names.sort_by_key(|n| n.to_lowercase());
+            egui::ComboBox::from_id_salt("tof_style").selected_text(f.style.clone()).width(160.0).show_ui(ui, |ui| {
+                egui::ScrollArea::vertical().max_height(220.0).show(ui, |ui| {
+                    for n in names {
+                        ui.selectable_value(&mut f.style, n.clone(), n);
+                    }
+                });
+            });
+        });
+    });
+    ui.horizontal(|ui| {
+        ui.checkbox(&mut f.use_tc, tl!("Table entry fields"));
+        ui.add_enabled_ui(f.use_tc, |ui| {
+            ui.label(tl!("Table identifier:"));
+            egui::ComboBox::from_id_salt("tof_id").selected_text(f.identifier.clone()).width(60.0).show_ui(ui, |ui| {
+                for id in TABLE_IDS {
+                    ui.selectable_value(&mut f.identifier, id.to_string(), id);
+                }
+            });
+        });
+    });
+    let (ok, cancel) = buttons(ui, tl!("OK"));
+    if ok {
+        return go(RefsDialog::Figures(f.clone()));
+    }
+    if cancel {
+        return go(RefsDialog::Figures(was.clone()));
+    }
+    Next::Stay
+}
+
+/// Insert Table of Authorities: a category (0 = All), passim, the tab leader.
+#[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct AuthoritiesForm {
+    pub category: u8,
+    pub passim: bool,
+    pub leader: String,
+}
+
+/// The category names, from the engine (the user's, or Word's in the interface language).
+fn categories(app: &mut WordApp) -> Vec<String> {
+    app.session
+        .run("references.toaCategory", &json!({}))
+        .ok()
+        .and_then(|v| {
+            v.get("categories").and_then(Value::as_array).map(|a| a.iter().filter_map(|n| n.as_str().map(|n| tl!(n).to_string())).collect())
+        })
+        .unwrap_or_default()
+}
+
+fn category_combo(ui: &mut Ui, id: &str, value: &mut u8, names: &[String], all: bool) {
+    let shown = if *value == 0 { tl!("All").to_string() } else { names.get(*value as usize - 1).cloned().unwrap_or_default() };
+    egui::ComboBox::from_id_salt(id).selected_text(shown).width(200.0).show_ui(ui, |ui| {
+        if all {
+            ui.selectable_value(value, 0, tl!("All"));
+        }
+        for (i, n) in names.iter().enumerate() {
+            ui.selectable_value(value, i as u8 + 1, n.as_str());
+        }
+    });
+}
+
+fn authorities_ui(app: &mut WordApp, ui: &mut Ui, f: &mut AuthoritiesForm) -> Next {
+    let names = categories(app);
+    ui.horizontal(|ui| {
+        ui.label(tl!("Category:"));
+        category_combo(ui, "toa_category", &mut f.category, &names, true);
+    });
+    ui.checkbox(&mut f.passim, tl!("Use passim (five or more pages)"));
+    ui.horizontal(|ui| {
+        ui.label(tl!("Tab leader:"));
+        let opts: Vec<(String, &str)> = LEADERS.iter().map(|(v, l)| (v.to_string(), *l)).collect();
+        choice(ui, "toa_leader", &mut f.leader, &opts);
+    });
+    ui.add_space(4.0);
+    if ui.button(tl!("Mark Citation…")).clicked() {
+        return go(RefsDialog::MarkCitation(MarkCitationForm::new(app)));
+    }
+    let (ok, cancel) = buttons(ui, tl!("OK"));
+    // The headings in the interface language, for the categories the user hasn't renamed.
+    let local: Vec<&str> = doc4me_engine::cmd::citations::TOA_CATEGORIES.iter().map(|n| tl!(n)).collect();
+    if ok
+        && let Err(e) =
+            app.run("references.tableOfAuthorities", json!({"category": f.category, "passim": f.passim, "leader": f.leader, "names": local}))
+    {
+        app.status(e);
+    }
+    if ok || cancel { Next::Close } else { Next::Stay }
+}
+
+/// Mark Citation: the long citation (the selection), the short one, the category.
+#[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct MarkCitationForm {
+    pub long: String,
+    pub short: String,
+    pub category: u8,
+    pub message: String,
+}
+
+impl MarkCitationForm {
+    fn new(app: &WordApp) -> MarkCitationForm {
+        let t = app.session.selected_text().trim().replace(['\n', '\r'], " ");
+        MarkCitationForm { short: t.clone(), long: t, category: 1, message: String::new() }
+    }
+}
+
+fn mark_citation_ui(app: &mut WordApp, ui: &mut Ui, f: &mut MarkCitationForm) -> Next {
+    let names = categories(app);
+    egui::Grid::new("ta").num_columns(2).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
+        ui.label(tl!("Long citation:"));
+        ui.add(crate::widgets::text_line(&mut f.long).desired_width(260.0));
+        ui.end_row();
+        ui.label(tl!("Category:"));
+        ui.horizontal(|ui| {
+            category_combo(ui, "ta_category", &mut f.category, &names, false);
+        });
+        ui.end_row();
+        ui.label(tl!("Short citation:"));
+        ui.add(crate::widgets::text_line(&mut f.short).desired_width(260.0));
+        ui.end_row();
+    });
+    if ui.button(tl!("Category…")).clicked() {
+        let selected = f.category.max(1) as usize - 1;
+        let name = names.get(selected).cloned().unwrap_or_default();
+        return go(RefsDialog::EditCategory { back: f.clone(), selected, name });
+    }
+    if !f.message.is_empty() {
+        ui.label(egui::RichText::new(&f.message).small());
+    }
+    let mut close = false;
+    ui.add_space(8.0);
+    ui.horizontal(|ui| {
+        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+            if ui.button(tl!("Close")).clicked() || ui.input(|i| i.key_pressed(egui::Key::Escape)) {
+                close = true;
+            }
+            if ui.add_enabled(!f.long.trim().is_empty(), crate::widgets::primary_button(ui, tl!("Mark"))).clicked() {
+                let params = json!({"entry": f.long.trim(), "short": f.short.trim(), "category": f.category.max(1)});
+                f.message = match app.run("references.markCitation", params) {
+                    Ok(_) => tl!("Citation marked.").to_string(),
+                    Err(e) => e,
+                };
+            }
+        });
+    });
+    if close { Next::Close } else { Next::Stay }
+}
+
+/// Edit Category: rename a category (Replace); OK goes back to Mark Citation.
+fn edit_category_ui(app: &mut WordApp, ui: &mut Ui, back: &mut MarkCitationForm, selected: &mut usize, name: &mut String) -> Next {
+    let names = categories(app);
+    ui.label(tl!("Category:"));
+    egui::Frame::group(ui.style()).show(ui, |ui| {
+        ui.set_min_width(240.0);
+        egui::ScrollArea::vertical().id_salt("toa_categories").max_height(200.0).show(ui, |ui| {
+            for (i, n) in names.iter().enumerate() {
+                if ui.selectable_label(*selected == i, format!("{}  {n}", i + 1)).clicked() {
+                    *selected = i;
+                    *name = n.clone();
+                }
+            }
+        });
+    });
+    ui.horizontal(|ui| {
+        ui.label(tl!("Replace with:"));
+        ui.add(crate::widgets::text_line(name).desired_width(170.0).char_limit(40));
+        if ui.button(tl!("Replace")).clicked()
+            && let Err(e) = app.run("references.toaCategory", json!({"category": *selected + 1, "name": name.trim()}))
+        {
+            app.status(e);
+        }
+    });
+    let (ok, cancel) = buttons(ui, tl!("OK"));
+    if ok || cancel {
+        back.message.clear();
+        return go(RefsDialog::MarkCitation(back.clone()));
+    }
+    Next::Stay
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -1389,5 +1710,86 @@ mod tests {
         assert!(matches!(form(&a), RefsDialog::Toc(_)));
         a.run("mailings.newList", json!({})).unwrap();
         assert_eq!(a.dialog.as_ref().map(|d| d.name()), Some("recipientList"));
+    }
+
+    /// dlg-165 and dlg-029: Insert Table of Figures › Options… builds from a style; Mark Citation
+    /// › Category… renames a category, the citation is filed under it, and Insert Table of
+    /// Authorities lists it under the new name.
+    #[test]
+    fn figures_options_and_authority_categories() {
+        use egui_kittest::kittest::Queryable;
+        let mut a = app("Quoted words\nSmith v. Jones held it.\nEnd");
+        a.run("select.text", json!({"text": "Quoted words"})).unwrap();
+        a.run("styles.apply", json!({"style": "Quote"})).unwrap();
+        a.run("select.text", json!({"text": "Smith v. Jones"})).unwrap();
+        assert_eq!(a.run("references.markCitation", json!({})).unwrap(), json!({"pending": "markCitation"}));
+        let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            a,
+        );
+        h.run_steps(3);
+        assert!(matches!(form(h.state()), RefsDialog::MarkCitation(f) if f.long == "Smith v. Jones" && f.category == 1));
+        h.get_by_label("Category…").click();
+        h.run_steps(3);
+        if let Some(Dialog::Refs(d)) = &mut h.state_mut().dialog
+            && let RefsDialog::EditCategory { selected, name, .. } = &mut **d
+        {
+            *selected = 8;
+            *name = "Treaties".into();
+        } else {
+            panic!("no Edit Category: {:?}", h.state().dialog);
+        }
+        h.run_steps(2);
+        h.query_all_by_label("Replace").last().expect("Replace").click();
+        h.run_steps(2);
+        h.get_by_label("OK").click();
+        h.run_steps(3);
+        if let Some(Dialog::Refs(d)) = &mut h.state_mut().dialog
+            && let RefsDialog::MarkCitation(f) = &mut **d
+        {
+            f.category = 9;
+        } else {
+            panic!("back to Mark Citation: {:?}", h.state().dialog);
+        }
+        h.run_steps(2);
+        h.get_by_label("Mark").click();
+        h.run_steps(2);
+        assert!(instrs(h.state()).contains(&"TA \\l \"Smith v. Jones\" \\s \"Smith v. Jones\" \\c 9".to_string()), "{:?}", instrs(h.state()));
+        h.get_by_label("Close").click();
+        h.run_steps(2);
+        let a = h.state_mut();
+        a.run("caret.docEnd", json!({})).unwrap();
+        a.run("text.newParagraph", json!({})).unwrap();
+        assert_eq!(a.run("references.tableOfAuthorities", json!({})).unwrap(), json!({"pending": "tableOfAuthorities"}));
+        let RefsDialog::Authorities(f) = form(a) else { panic!() };
+        a.run("references.tableOfAuthorities", json!({"category": f.category, "passim": f.passim, "leader": f.leader})).unwrap();
+        let t = a.session.doc.plain_text(StoryRef::Body);
+        assert!(t.contains("Treaties") && t.contains("Smith v. Jones\t1"), "{t}");
+        assert_eq!(a.prefs().editing.toa_categories.get(8).map(String::as_str), Some("Treaties"));
+        // Table of Figures › Options…: from the Quote style.
+        assert_eq!(a.run("references.tableOfFigures", json!({})).unwrap(), json!({"pending": "tableOfFigures"}));
+        h.run_steps(3);
+        h.get_by_label("Options…").click();
+        h.run_steps(3);
+        if let Some(Dialog::Refs(d)) = &mut h.state_mut().dialog
+            && let RefsDialog::FiguresOptions { form, .. } = &mut **d
+        {
+            form.use_style = true;
+            form.style = "Quote".into();
+        } else {
+            panic!("no Options: {:?}", h.state().dialog);
+        }
+        h.run_steps(2);
+        h.get_by_label("OK").click();
+        h.run_steps(3);
+        assert!(matches!(form(h.state()), RefsDialog::Figures(f) if f.use_style));
+        h.get_by_label("OK").click();
+        h.run_steps(3);
+        assert!(instrs(h.state()).iter().any(|i| i.starts_with("TOC \\t \"Quote,1\" \\c")), "{:?}", instrs(h.state()));
+        assert!(h.state().session.doc.plain_text(StoryRef::Body).contains("Quoted words\t1"));
     }
 }

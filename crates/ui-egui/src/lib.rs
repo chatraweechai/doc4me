@@ -1833,6 +1833,10 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         }
         "references.markEntry" if !has("entry") => Some("markEntry"),
         "references.markTocEntry" if !has("entry") => Some("markTocEntry"),
+        // Insert Table of Figures, Insert Table of Authorities and Mark Citation (Alt+Shift+I).
+        "references.tableOfFigures" if params.as_object().is_none_or(|m| m.is_empty()) => Some("tableOfFigures"),
+        "references.tableOfAuthorities" if params.as_object().is_none_or(|m| m.is_empty()) => Some("tableOfAuthorities"),
+        "references.markCitation" if !has("entry") => Some("markCitation"),
         "references.sources" if params.as_object().is_none_or(|m| m.is_empty()) => Some("sourceManager"),
         "references.citation" if !has("tag") && !has("source") => Some("createSource"),
         // Templates and Add-ins, and the Organizer without a file to list (#377).

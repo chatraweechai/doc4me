@@ -2816,3 +2816,25 @@ spacing	Normal	標準
 	Form Letters	套印信件
 	Mailing Labels	郵寄標籤
 	Catalog	目錄
+	Caption label:	標號類型：
+	Include label and number	包含標籤及編號
+	Built from the style or table entry fields chosen in Options.	根據「選項」中選擇的樣式或目錄項目功能變數建立。
+	Show page numbers	顯示頁碼
+	Right align page numbers	頁碼靠右對齊
+	Build table of figures from:	圖表目錄建立自：
+	Table entry fields	目錄項目功能變數
+	Category:	類別：
+	Use passim (five or more pages)	使用 passim (五頁以上)
+	Mark Citation…	標記引文…
+	Long citation:	完整引文：
+	Short citation:	簡短引文：
+	Category…	類別…
+	Citation marked.	已標記引文。
+	Edit Category	編輯類別
+	Table of Figures Options	圖表目錄選項
+	Cases	案例
+	Statutes	法規
+	Other Authorities	其他權威資料
+	Treatises	論著
+	Regulations	條例
+	Constitutional Provisions	憲法條款

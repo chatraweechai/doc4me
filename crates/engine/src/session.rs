@@ -447,6 +447,9 @@ pub struct Prefs {
     /// Equation Options › Recognized Functions: the names set upright as functions when an
     /// equation builds up (per user, as in Word); `None`, the built-in list.
     pub math_functions: Option<Vec<String>>,
+    /// Table of Authorities › Category…: the names of categories 1–16 the user changed (per
+    /// user, as Word keeps them in Normal); empty or blank entries are Word's names.
+    pub toa_categories: Vec<String>,
     /// File › Options › Advanced › Cut, copy, and paste: what Paste keeps when the content comes
     /// from this document, from another document, or from another program.
     pub paste_same: PasteMode,
@@ -486,6 +489,7 @@ impl Default for Prefs {
             autocorrect: Default::default(),
             auto_caption: Vec::new(),
             math_functions: None,
+            toa_categories: Vec::new(),
             paste_same: PasteMode::Keep,
             paste_between: PasteMode::Keep,
             paste_other: PasteMode::Keep,

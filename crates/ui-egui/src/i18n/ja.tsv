@@ -2815,3 +2815,25 @@ spacing	Normal	標準
 	Form Letters	レター
 	Mailing Labels	宛名ラベル
 	Catalog	カタログ
+	Caption label:	図表番号のラベル:
+	Include label and number	ラベルと番号を含める
+	Built from the style or table entry fields chosen in Options.	[オプション] で選んだスタイルまたは目次登録フィールドから作成します。
+	Show page numbers	ページ番号を表示する
+	Right align page numbers	ページ番号を右揃えにする
+	Build table of figures from:	図表目次の作成元:
+	Table entry fields	目次登録フィールド
+	Category:	分類:
+	Use passim (five or more pages)	passim を使う (5 ページ以上)
+	Mark Citation…	引用文の登録…
+	Long citation:	長い引用文:
+	Short citation:	短い引用文:
+	Category…	分類…
+	Citation marked.	引用文を登録しました。
+	Edit Category	分類の編集
+	Table of Figures Options	図表目次オプション
+	Cases	判例
+	Statutes	法令
+	Other Authorities	その他の典拠
+	Treatises	論文
+	Regulations	規則
+	Constitutional Provisions	憲法の規定
