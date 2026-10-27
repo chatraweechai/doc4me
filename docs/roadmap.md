@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-25 · **Change:** trivial (measured 73.4% during stage C; previously trivial: target raised to 95%; previously trivial: stage B done: readiness measured, 66.1%; previously trivial: path to 80% measured readiness; previously trivial: beta list item 5: Aptos drawn with Intos; previously trivial: Next after beta: ecosystem decisions and the in-app assistant removed; previously trivial: M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-27 · **Change:** trivial (target raised to 100%; previously trivial: measured 73.4% during stage C; previously trivial: target raised to 95%; previously trivial: stage B done: readiness measured, 66.1%; previously trivial: path to 80% measured readiness; previously trivial: beta list item 5: Aptos drawn with Intos; previously trivial: Next after beta: ecosystem decisions and the in-app assistant removed; previously trivial: M1, M2, M3, M8, M11 and M12 rows match the code: window commands, Screenshot, Online Video and 3D Models landed, 618 commands; previously trivial: target is Word for Windows; command count, M14 and M15 rows corrected; previously minor: Polish interface and Polish proofing; previously trivial: M7: formatting revisions landed, #41; previously trivial: M5: Draw Table and Eraser landed, #303; previously minor: beta distance restated: ~15 points, ~150–230 h; previously: alpha gate checked: six core workflows pass; previously major: milestones moved here from ROADMAP.md; Current focus set from the re-measured gaps) · **Target:** Microsoft Word (Microsoft 365) for Windows (measured until 2026-10-21 against Word for Mac 16.113.4; not re-measured on Windows yet)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -66,12 +66,12 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 | M15 | Localization (12 key languages, RTL interface, proofing languages) | 19 UI languages; English, Polish and Thai proofing, a proofing language per run | 75–120 h |
 | M16 | Right-to-left and East Asian typography | RTL paragraphs done (#207) | 30–45 h |
 
-## Path to 95% measured readiness
+## Path to 100% measured readiness
 
 The readiness number in [`ROADMAP.md`](../ROADMAP.md) was an estimate (~60%): a weighted sum of
 estimated dimension parities. Since stage B it is measured: **66.1%** at first, **73.4%** during stage C (2026-10-25,
-[`readiness.md`](readiness.md)), 21.6 points short of the target. The target is **95% ready for real work, measured**
-(raised from 80% by the owner on 2026-10-25): every dimension
+[`readiness.md`](readiness.md)), 26.6 points short of the target. The target is **100% ready for real work, measured**
+(raised from 80% to 95% by the owner on 2026-10-25, and to 100% on 2026-10-27): every dimension
 comes from a fixed pass/fail check set, and one command computes the number. Checks may be added,
 never removed, so the number can't drift by editing the list.
 
@@ -104,11 +104,14 @@ never removed, so the number can't drift by editing the list.
 replaces ~60% in `ROADMAP.md`, `target-app-parity.md` and `gaps.md`).
 
 **C. Fix what the checks fail**, highest weight per hour first, until `cargo xtask readiness`
-reports at least 95.0% on the latest commit. Some rows can only pass on the owner's hardware: the
-Windows field reports of stability (startup crash, freezes, saving without administrator rights),
-typing and scrolling on a Windows PC, and the printer, pen, microphone, scanner, touch and
-multi-monitor rows. Without them the number tops out at about 94%, so 95% needs the owner's checks
-too. The work: real-world DOCX failures (gap #1), pagination
+reports 100.0% on the latest commit: every row of every check set passing. Some rows can only pass
+on the owner's hardware: the Windows field reports of stability (startup crash, freezes, saving
+without administrator rights), typing and scrolling on a Windows PC, and the printer, pen,
+microphone, scanner, touch and multi-monitor rows; the platform rows also need the Windows arm64,
+Linux and macOS builds, which wait on the owner's go-ahead (2026-10-26). 100% further needs every
+corpus document to paginate exactly as Word does, an interface catalog for each of the 95 languages
+Microsoft 365 offers, and every Word dialog and shortcut in the lists, including the ones tied to
+Microsoft services (owner rule: out of scope), so those rows decide how close the number can get. The work: real-world DOCX failures (gap #1), pagination
 (gap #4), crashes and hangs on Windows (gap #3), Word ink round trip (gap #2), native printing
 (gap #6), missing dialogs and options (gap #7) and shortcuts (gap #24), editing Word's charts and
 SmartArt (gap #13), and the alpha gate re-run on Windows.
@@ -122,6 +125,7 @@ languages, screen-reader access.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-27 | trivial | Target raised from 95% to 100% measured (owner); what 100% needs |
 | 2026-10-25 | trivial | Target raised from 80% to 95% measured (owner); the rows only the owner can check |
 | 2026-10-25 | trivial | Stage C so far: measured 73.4% |
 | 2026-10-25 | trivial | Path to 80%: stage B done, 66.1% measured replaces the ~60% estimate; alpha-gate row for received .docx from the corpus |
