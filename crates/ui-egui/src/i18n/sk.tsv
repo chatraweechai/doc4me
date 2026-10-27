@@ -74,7 +74,7 @@
 	Above the item	Nad položkou
 	Absolute position	Absolútna poloha
 	Absolute value cases	Prípady s absolútnou hodnotou
-	Accent	Zvýraznenie
+	Accent	Diakritika
 	Accent Gradient	Prechod zvýraznenia
 	Accent with Reflection	Zvýraznenie s odrazom
 	Accent {n}	Zvýraznenie {n}
@@ -270,7 +270,7 @@
 	Balloons	Bubliny
 	Banded Columns	Pruhované stĺpce
 	Banded Rows	Pruhované riadky
-	Bar	Pruhový
+	Bar	Čiara
 	Base text:	Základný text:
 	Based on: {style}	Založené na: {style}
 	Baseline Dots	Bodky na základnej čiare
@@ -353,7 +353,7 @@
 	Bullet Library	Knižnica odrážok
 	Bullets	Odrážky
 	By author	Podľa autora
-	By:	Od:
+	By:	O:
 	Calendar	Kalendár
 	Can't be deleted	Nedá sa odstrániť
 	Cancel	Zrušiť
@@ -445,7 +445,7 @@
 	Chart Design	Návrh grafu
 	Chart Layouts	Rozloženia grafu
 	Chart Title	Názov grafu
-	Check	Skontrolovať
+	Check	Mäkčeň
 	Check Accessibility	Skontrolovať zjednodušenie ovládania
 	Check Box Content Control	Ovládací prvok obsahu začiarkavacieho políčka
 	Check Compatibility	Skontrolovať kompatibilitu
@@ -1391,7 +1391,7 @@
 	Less than or equal	Menší alebo rovný
 	Letter	List
 	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
-	Letter headings	Hlavičky listu
+	Letter headings	Abecedné nadpisy
 	Letter-Like Symbols	Symboly podobné písmenám
 	Letters	Listy
 	Level 1	Úroveň 1
@@ -2177,7 +2177,7 @@
 	Section Breaks	Zlomy sekcií
 	Section Character	Znak paragrafu
 	Section direction:	Smer sekcie:
-	Section Mark	Značka sekcie
+	Section Mark	Znak paragrafu
 	Section Properties	Vlastnosti sekcie
 	Sections	Sekcie
 	See	Pozri
@@ -2783,7 +2783,7 @@
 	Word Count	Počet slov
 	Word document	Dokument Wordu
 	Word document (*.docx)	Dokument Wordu (*.docx)
-	Word forms	Formuláre Wordu
+	Word forms	Tvary slov
 	Word Left	O slovo doľava
 	Word level	Úroveň slov
 	Word Right	O slovo doprava

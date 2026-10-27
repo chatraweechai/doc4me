@@ -74,7 +74,7 @@
 	Above the item	Kohteen yläpuolella
 	Absolute position	Absoluuttinen sijainti
 	Absolute value cases	Itseisarvon tapaukset
-	Accent	Korostusväri
+	Accent	Diakriitti
 	Accent Gradient	Korostusvärin liukuväri
 	Accent with Reflection	Korostusväri ja heijastus
 	Accent {n}	Korostusväri {n}
@@ -353,7 +353,7 @@
 	Bullet Library	Luettelomerkkikirjasto
 	Bullets	Luettelomerkit
 	By author	Tekijän mukaan
-	By:	Tekijä:
+	By:	Määrä:
 	Calendar	Kalenteri
 	Can't be deleted	Ei voi poistaa
 	Cancel	Peruuta
@@ -445,7 +445,7 @@
 	Chart Design	Kaavion rakenne
 	Chart Layouts	Kaavioasettelut
 	Chart Title	Kaavion otsikko
-	Check	Tarkista
+	Check	Väkänen
 	Check Accessibility	Tarkista helppokäyttöisyys
 	Check Box Content Control	Valintaruutu-sisältöohjausobjekti
 	Check Compatibility	Tarkista yhteensopivuus
@@ -2177,7 +2177,7 @@
 	Section Breaks	Osanvaihdot
 	Section Character	Osan merkki
 	Section direction:	Osan suunta:
-	Section Mark	Osamerkki
+	Section Mark	Pykälämerkki
 	Section Properties	Osan ominaisuudet
 	Sections	Osat
 	See	Katso

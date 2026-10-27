@@ -270,7 +270,7 @@
 	Balloons	Ballonnen
 	Banded Columns	Gestreepte kolommen
 	Banded Rows	Gestreepte rijen
-	Bar	Staaf
+	Bar	Streep
 	Base text:	Basistekst:
 	Based on: {style}	Gebaseerd op: {style}
 	Baseline Dots	Puntjes op basislijn
@@ -353,7 +353,7 @@
 	Bullet Library	Bibliotheek met opsommingstekens
 	Bullets	Opsommingstekens
 	By author	Per auteur
-	By:	Door:
+	By:	Met:
 	Calendar	Kalender
 	Can't be deleted	Kan niet worden verwijderd
 	Cancel	Annuleren
@@ -445,7 +445,7 @@
 	Chart Design	Grafiekontwerp
 	Chart Layouts	Grafiekindelingen
 	Chart Title	Grafiektitel
-	Check	Controleren
+	Check	Hatsjek
 	Check Accessibility	Toegankelijkheid controleren
 	Check Box Content Control	Inhoudsbesturingselement Selectievakje
 	Check Compatibility	Compatibiliteit controleren
@@ -2177,7 +2177,7 @@
 	Section Breaks	Sectie-einden
 	Section Character	Sectieteken
 	Section direction:	Richting van sectie:
-	Section Mark	Sectiemarkering
+	Section Mark	Paragraafteken
 	Section Properties	Sectie-eigenschappen
 	Sections	Secties
 	See	Zie

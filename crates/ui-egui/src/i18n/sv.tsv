@@ -74,7 +74,7 @@
 	Above the item	Ovanför objektet
 	Absolute position	Absolut position
 	Absolute value cases	Fall med absolutbelopp
-	Accent	Dekorfärg
+	Accent	Accent
 	Accent Gradient	Dekorfärgtoning
 	Accent with Reflection	Dekorfärg med reflektion
 	Accent {n}	Dekorfärg {n}
@@ -270,7 +270,7 @@
 	Balloons	Pratbubblor
 	Banded Columns	Kolumner med ränder
 	Banded Rows	Rader med ränder
-	Bar	Liggande stapel
+	Bar	Streck
 	Base text:	Bastext:
 	Based on: {style}	Baserat på: {style}
 	Baseline Dots	Punkter på baslinjen
@@ -353,7 +353,7 @@
 	Bullet Library	Punktbibliotek
 	Bullets	Punkter
 	By author	Efter författare
-	By:	Av:
+	By:	Med:
 	Calendar	Kalender
 	Can't be deleted	Kan inte tas bort
 	Cancel	Avbryt
@@ -445,7 +445,7 @@
 	Chart Design	Diagramdesign
 	Chart Layouts	Diagramlayouter
 	Chart Title	Diagramrubrik
-	Check	Kontrollera
+	Check	Hake
 	Check Accessibility	Kontrollera hjälpmedel
 	Check Box Content Control	Innehållskontroll för kryssruta
 	Check Compatibility	Kontrollera kompatibilitet
@@ -2177,7 +2177,7 @@
 	Section Breaks	Avsnittsbrytningar
 	Section Character	Avsnittstecken
 	Section direction:	Avsnittets riktning:
-	Section Mark	Avsnittsmarkering
+	Section Mark	Paragraftecken
 	Section Properties	Avsnittsegenskaper
 	Sections	Avsnitt
 	See	Se

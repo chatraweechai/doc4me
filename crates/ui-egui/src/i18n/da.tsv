@@ -74,7 +74,7 @@
 	Above the item	Over elementet
 	Absolute position	Absolut placering
 	Absolute value cases	Tilfælde med numerisk værdi
-	Accent	Farve
+	Accent	Accent
 	Accent Gradient	Farvegradering
 	Accent with Reflection	Farve med refleksion
 	Accent {n}	Farve {n}
@@ -270,7 +270,7 @@
 	Balloons	Bobler
 	Banded Columns	Kolonner med striber
 	Banded Rows	Rækker med striber
-	Bar	Liggende søjle
+	Bar	Streg
 	Base text:	Basistekst:
 	Based on: {style}	Baseret på: {style}
 	Baseline Dots	Prikker på grundlinjen
@@ -353,7 +353,7 @@
 	Bullet Library	Punkttegnsbibliotek
 	Bullets	Punkttegn
 	By author	Efter forfatter
-	By:	Af:
+	By:	Med:
 	Calendar	Kalender
 	Can't be deleted	Kan ikke slettes
 	Cancel	Annuller
@@ -445,7 +445,7 @@
 	Chart Design	Diagramdesign
 	Chart Layouts	Diagramlayout
 	Chart Title	Diagramtitel
-	Check	Kontroller
+	Check	Hacek
 	Check Accessibility	Kontroller tilgængelighed
 	Check Box Content Control	Indholdskontrolelement til afkrydsningsfelt
 	Check Compatibility	Kontroller kompatibilitet
@@ -2177,7 +2177,7 @@
 	Section Breaks	Sektionsskift
 	Section Character	Sektionstegn
 	Section direction:	Sektionens retning:
-	Section Mark	Sektionsmærke
+	Section Mark	Paragraftegn
 	Section Properties	Sektionsegenskaber
 	Sections	Sektioner
 	See	Se
