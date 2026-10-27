@@ -263,9 +263,35 @@ fn style_name(bold: bool, italic: bool) -> &'static str {
     }
 }
 
+/// A face name used as a font name, as documents do ("Arial Bold", "Times New Roman Bold
+/// Italic"): the family and the style it names, when `family` isn't itself an installed family.
+/// Windows finds such faces by their full names, so Word draws "Arial Bold" with Arial's bold;
+/// families whose names end in other words ("Calibri Light", "Arial Black") stay as they are.
+pub fn face_name(family: &str) -> Option<(&str, bool, bool)> {
+    const STYLES: [(&str, bool, bool); 7] = [
+        (" bold italic", true, true),
+        (" bold oblique", true, true),
+        (" bolditalic", true, true),
+        (" italic", false, true),
+        (" oblique", false, true),
+        (" bold", true, false),
+        (" regular", false, false),
+    ];
+    let lower = family.to_ascii_lowercase();
+    let (suffix, bold, italic) = STYLES.iter().find(|(s, ..)| lower.ends_with(s))?;
+    let base = family.get(..family.len() - suffix.len())?.trim_end();
+    if base.is_empty() || FontDb::global().has_family(family) {
+        return None;
+    }
+    Some((base, *bold, *italic))
+}
+
 /// The family `family` is drawn with when it isn't installed (Word's Font Substitution), or
 /// `None` when it is.
 pub fn substitute_for(family: &str) -> Option<String> {
+    if let Some((base, ..)) = face_name(family) {
+        return substitute_for(base);
+    }
     let db = FontDb::global();
     if db.has_family(family) {
         return None;
@@ -290,6 +316,14 @@ pub fn resolve(family: &str, bold: bool, italic: bool) -> Resolved {
         if let Some(r) = c.1.get(&key) {
             return *r;
         }
+    }
+    if let Some((base, b, i)) = face_name(family) {
+        let r = resolve(base, bold || b, italic || i);
+        let mut c = cache.lock().unwrap_or_else(|e| e.into_inner());
+        if c.0 == generation {
+            c.1.insert(key, r);
+        }
+        return r;
     }
     let (fam, substituted) = if db.has_family(family) {
         (family.to_string(), false)
@@ -424,6 +458,8 @@ fn is_aptos(family: &str) -> bool {
 /// with Sarabun (Angsana New, Cordia New…) near its own small-letter spacing (1.30 em, not
 /// Sarabun's 1.853 em).
 pub fn single_line(family: &str, face: &crate::FontFace, substituted: bool, size: f64) -> (f64, f64) {
+    // "Arial Bold" spaces lines as Arial does.
+    let family = face_name(family).map_or(family, |(base, ..)| base);
     // Aptos's own win metrics aren't what Word spaces it by, so its line holds when it is installed.
     if let Some((a, d)) = requested_line(family).filter(|_| substituted || is_aptos(family)) {
         return (a * size, d * size);
@@ -556,6 +592,25 @@ mod tests {
     /// A substitute keeps the spacing of the font it stands in for: Cambria 1.172 em and Courier
     /// New 1.133 em whatever draws them, a Thai font drawn with Sarabun near 1.30 em, and the
     /// font asked for its own Word for Windows line (Sarabun 1.853 em).
+    #[test]
+    fn face_names_resolve_to_their_family_and_style() {
+        // govuk-029's headings ask for "Arial Bold": Word draws Arial's bold, not a fallback.
+        let a = resolve("Arial Bold", false, false);
+        let b = resolve("Arial", true, false);
+        assert_eq!(a.face.id(), b.face.id());
+        assert_eq!((a.synth_bold, a.substituted), (b.synth_bold, b.substituted));
+        assert_eq!(resolve("Times New Roman Bold Italic", false, false).face.id(), resolve("Times New Roman", true, true).face.id());
+        assert_eq!(resolve("arial italic", false, false).face.id(), resolve("Arial", false, true).face.id());
+        let face = crate::FontDb::global().face(crate::FALLBACK_FAMILY, "Regular");
+        assert_eq!(single_line("Arial Bold", &face, true, 12.0), single_line("Arial", &face, true, 12.0));
+        assert_eq!(substitute_for("Arial Bold"), substitute_for("Arial"));
+        // Other words are part of the family name.
+        assert_eq!(face_name("Calibri Light"), None);
+        assert_eq!(face_name("Arial Black"), None);
+        assert_eq!(face_name("Bold"), None);
+        assert_eq!(face_name("Bembo Regular"), Some(("Bembo", false, false)));
+    }
+
     #[test]
     fn substitutes_keep_the_requested_fonts_line() {
         let r = resolve("Sarabun", false, false);
