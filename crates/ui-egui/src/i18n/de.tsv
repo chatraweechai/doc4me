@@ -2775,3 +2775,42 @@ spacing	Normal	Normal
 	Preserve	Beibehalten
 	Review Changes…	Änderungen überprüfen…
 	{count} paragraphs were changed.	{count} Absätze wurden geändert.
+	Merge to:	Zusammenführen in:
+	Printer	Drucker
+	Merge records	Datensätze zusammenführen
+	Current record	Aktueller Datensatz
+	From:	Von:
+	To:	Bis:
+	When merging records	Beim Zusammenführen von Datensätzen
+	Don't print blank lines when data fields are empty	Leere Zeilen nicht drucken, wenn Datenfelder leer sind
+	Print blank lines when data fields are empty	Leere Zeilen drucken, wenn Datenfelder leer sind
+	Check Errors…	Fehler prüfen…
+	Query Options…	Abfrageoptionen…
+	The Mail Merge Helper sets up a merge in three steps.	Der Seriendruck-Manager richtet einen Seriendruck in drei Schritten ein.
+	1. Main document	1. Hauptdokument
+	Restore to Normal Word Document	Als normales Word-Dokument wiederherstellen
+	Merge type: {type}	Seriendrucktyp: {type}
+	2. Data source	2. Datenquelle
+	Get Data	Daten importieren
+	Create Data Source…	Datenquelle erstellen…
+	Open Data Source…	Datenquelle öffnen…
+	No data source yet.	Noch keine Datenquelle.
+	{count} records; fields: {fields}	{count} Datensätze; Felder: {fields}
+	Header Options:	Steuersatzoptionen:
+	Header Options	Steuersatzoptionen
+	Create…	Erstellen…
+	Open…	Öffnen…
+	Header source: {file} (the next data source opened here takes its field names)	Steuersatzquelle: {file} (die nächste hier geöffnete Datenquelle übernimmt ihre Feldnamen)
+	3. Merge the data with the document	3. Daten mit dem Dokument zusammenführen
+	Merge…	Zusammenführen…
+	A header source holds the field names for a data source without a header row.	Eine Steuersatzquelle enthält die Feldnamen für eine Datenquelle ohne Kopfzeile.
+	Add Field Name	Feldnamen hinzufügen
+	Remove Field Name	Feldnamen entfernen
+	Mail Merge Helper…	Seriendruck-Manager…
+	Mail Merge Helper	Seriendruck-Manager
+	Merge to New Document	Seriendruck in neues Dokument
+	Merge to Printer	Seriendruck an Drucker
+	Create Header Source	Steuersatzquelle erstellen
+	Form Letters	Serienbriefe
+	Mailing Labels	Adressetiketten
+	Catalog	Katalog

@@ -2777,3 +2777,42 @@ spacing	Normal	Normál
 	Preserve	Megőrzés
 	Review Changes…	Változások áttekintése…
 	{count} paragraphs were changed.	{count} bekezdés módosult.
+	Merge to:	Egyesítés ide:
+	Printer	Nyomtató
+	Merge records	Rekordok egyesítése
+	Current record	Aktuális rekord
+	From:	Ettől:
+	To:	Eddig:
+	When merging records	Rekordok egyesítésekor
+	Don't print blank lines when data fields are empty	Ne nyomtasson üres sorokat, ha az adatmezők üresek
+	Print blank lines when data fields are empty	Üres sorok nyomtatása, ha az adatmezők üresek
+	Check Errors…	Hibák ellenőrzése…
+	Query Options…	Lekérdezés beállításai…
+	The Mail Merge Helper sets up a merge in three steps.	A körlevél-segéd három lépésben készíti elő az egyesítést.
+	1. Main document	1. Fődokumentum
+	Restore to Normal Word Document	Visszaállítás normál Word-dokumentummá
+	Merge type: {type}	Egyesítés típusa: {type}
+	2. Data source	2. Adatforrás
+	Get Data	Adatok beolvasása
+	Create Data Source…	Adatforrás létrehozása…
+	Open Data Source…	Adatforrás megnyitása…
+	No data source yet.	Még nincs adatforrás.
+	{count} records; fields: {fields}	{count} rekord; mezők: {fields}
+	Header Options:	Fejléc beállításai:
+	Header Options	Fejléc beállításai
+	Create…	Létrehozás…
+	Open…	Megnyitás…
+	Header source: {file} (the next data source opened here takes its field names)	Fejlécforrás: {file} (az itt legközelebb megnyitott adatforrás ennek mezőneveit kapja)
+	3. Merge the data with the document	3. Az adatok egyesítése a dokumentummal
+	Merge…	Egyesítés…
+	A header source holds the field names for a data source without a header row.	A fejlécforrás a fejlécsor nélküli adatforrás mezőneveit tartalmazza.
+	Add Field Name	Mezőnév hozzáadása
+	Remove Field Name	Mezőnév eltávolítása
+	Mail Merge Helper…	Körlevél-segéd…
+	Mail Merge Helper	Körlevél-segéd
+	Merge to New Document	Egyesítés új dokumentumba
+	Merge to Printer	Egyesítés nyomtatóra
+	Create Header Source	Fejlécforrás létrehozása
+	Form Letters	Levelek
+	Mailing Labels	Postacímkék
+	Catalog	Katalógus

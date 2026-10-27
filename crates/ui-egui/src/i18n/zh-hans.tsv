@@ -2788,3 +2788,42 @@ spacing	Normal	标准
 	Preserve	保留
 	Review Changes…	审阅更改…
 	{count} paragraphs were changed.	已更改 {count} 个段落。
+	Merge to:	合并到：
+	Printer	打印机
+	Merge records	合并记录
+	Current record	当前记录
+	From:	从：
+	To:	到：
+	When merging records	合并记录时
+	Don't print blank lines when data fields are empty	数据域为空时不打印空行
+	Print blank lines when data fields are empty	数据域为空时打印空行
+	Check Errors…	检查错误…
+	Query Options…	查询选项…
+	The Mail Merge Helper sets up a merge in three steps.	邮件合并帮助器分三步设置合并。
+	1. Main document	1. 主文档
+	Restore to Normal Word Document	还原为普通文档
+	Merge type: {type}	合并类型：{type}
+	2. Data source	2. 数据源
+	Get Data	获取数据
+	Create Data Source…	创建数据源…
+	Open Data Source…	打开数据源…
+	No data source yet.	还没有数据源。
+	{count} records; fields: {fields}	{count} 条记录；域：{fields}
+	Header Options:	标题选项：
+	Header Options	标题选项
+	Create…	创建…
+	Open…	打开…
+	Header source: {file} (the next data source opened here takes its field names)	标题源：{file}（此处打开的下一个数据源使用其中的域名）
+	3. Merge the data with the document	3. 将数据与文档合并
+	Merge…	合并…
+	A header source holds the field names for a data source without a header row.	标题源保存没有标题行的数据源的域名。
+	Add Field Name	添加域名
+	Remove Field Name	删除域名
+	Mail Merge Helper…	邮件合并帮助器…
+	Mail Merge Helper	邮件合并帮助器
+	Merge to New Document	合并到新文档
+	Merge to Printer	合并到打印机
+	Create Header Source	创建标题源
+	Form Letters	套用信函
+	Mailing Labels	邮件标签
+	Catalog	目录

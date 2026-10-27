@@ -2790,3 +2790,42 @@ spacing	Normal	Normal
 	Preserve	Conservar
 	Review Changes…	Revisar cambios…
 	{count} paragraphs were changed.	Se cambiaron {count} párrafos.
+	Merge to:	Combinar en:
+	Printer	Impresora
+	Merge records	Combinar registros
+	Current record	Registro actual
+	From:	Desde:
+	To:	Hasta:
+	When merging records	Al combinar registros
+	Don't print blank lines when data fields are empty	No imprimir líneas en blanco cuando los campos de datos estén vacíos
+	Print blank lines when data fields are empty	Imprimir líneas en blanco cuando los campos de datos estén vacíos
+	Check Errors…	Comprobar errores…
+	Query Options…	Opciones de consulta…
+	The Mail Merge Helper sets up a merge in three steps.	El Asistente para combinar correspondencia prepara una combinación en tres pasos.
+	1. Main document	1. Documento principal
+	Restore to Normal Word Document	Restaurar a documento de Word normal
+	Merge type: {type}	Tipo de combinación: {type}
+	2. Data source	2. Origen de datos
+	Get Data	Obtener datos
+	Create Data Source…	Crear origen de datos…
+	Open Data Source…	Abrir origen de datos…
+	No data source yet.	Todavía no hay origen de datos.
+	{count} records; fields: {fields}	{count} registros; campos: {fields}
+	Header Options:	Opciones de encabezado:
+	Header Options	Opciones de encabezado
+	Create…	Crear…
+	Open…	Abrir…
+	Header source: {file} (the next data source opened here takes its field names)	Origen de encabezado: {file} (el siguiente origen de datos abierto aquí toma sus nombres de campo)
+	3. Merge the data with the document	3. Combinar los datos con el documento
+	Merge…	Combinar…
+	A header source holds the field names for a data source without a header row.	Un origen de encabezado contiene los nombres de campo para un origen de datos sin fila de encabezado.
+	Add Field Name	Agregar nombre de campo
+	Remove Field Name	Quitar nombre de campo
+	Mail Merge Helper…	Asistente para combinar correspondencia…
+	Mail Merge Helper	Asistente para combinar correspondencia
+	Merge to New Document	Combinar en un documento nuevo
+	Merge to Printer	Combinar al imprimir
+	Create Header Source	Crear origen de encabezado
+	Form Letters	Cartas modelo
+	Mailing Labels	Etiquetas postales
+	Catalog	Catálogo

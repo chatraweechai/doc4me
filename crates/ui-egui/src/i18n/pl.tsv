@@ -2781,3 +2781,42 @@ spacing	Normal	Normalne
 	Preserve	Zachowaj
 	Review Changes…	Przejrzyj zmiany…
 	{count} paragraphs were changed.	Zmienione akapity: {count}.
+	Merge to:	Scal do:
+	Printer	Drukarka
+	Merge records	Scal rekordy
+	Current record	Bieżący rekord
+	From:	Od:
+	To:	Do:
+	When merging records	Podczas scalania rekordów
+	Don't print blank lines when data fields are empty	Nie drukuj pustych wierszy, gdy pola danych są puste
+	Print blank lines when data fields are empty	Drukuj puste wiersze, gdy pola danych są puste
+	Check Errors…	Sprawdź błędy…
+	Query Options…	Opcje kwerendy…
+	The Mail Merge Helper sets up a merge in three steps.	Pomocnik korespondencji seryjnej przygotowuje scalanie w trzech krokach.
+	1. Main document	1. Dokument główny
+	Restore to Normal Word Document	Przywróć do normalnego dokumentu programu Word
+	Merge type: {type}	Typ scalania: {type}
+	2. Data source	2. Źródło danych
+	Get Data	Pobierz dane
+	Create Data Source…	Utwórz źródło danych…
+	Open Data Source…	Otwórz źródło danych…
+	No data source yet.	Brak jeszcze źródła danych.
+	{count} records; fields: {fields}	Rekordy: {count}; pola: {fields}
+	Header Options:	Opcje nagłówka:
+	Header Options	Opcje nagłówka
+	Create…	Utwórz…
+	Open…	Otwórz…
+	Header source: {file} (the next data source opened here takes its field names)	Źródło nagłówka: {file} (następne otwarte tu źródło danych przejmie jego nazwy pól)
+	3. Merge the data with the document	3. Scal dane z dokumentem
+	Merge…	Scal…
+	A header source holds the field names for a data source without a header row.	Źródło nagłówka zawiera nazwy pól dla źródła danych bez wiersza nagłówka.
+	Add Field Name	Dodaj nazwę pola
+	Remove Field Name	Usuń nazwę pola
+	Mail Merge Helper…	Pomocnik korespondencji seryjnej…
+	Mail Merge Helper	Pomocnik korespondencji seryjnej
+	Merge to New Document	Scal do nowego dokumentu
+	Merge to Printer	Scal do drukarki
+	Create Header Source	Utwórz źródło nagłówka
+	Form Letters	Listy seryjne
+	Mailing Labels	Etykiety adresowe
+	Catalog	Katalog

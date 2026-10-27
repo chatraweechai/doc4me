@@ -2773,3 +2773,42 @@ spacing	Normal	Normal
 	Preserve	Conserver
 	Review Changes…	Vérifier les modifications…
 	{count} paragraphs were changed.	{count} paragraphes ont été modifiés.
+	Merge to:	Fusionner vers :
+	Printer	Imprimante
+	Merge records	Fusionner les enregistrements
+	Current record	Enregistrement en cours
+	From:	De :
+	To:	À :
+	When merging records	Lors de la fusion des enregistrements
+	Don't print blank lines when data fields are empty	Ne pas imprimer les lignes vides si les champs de données sont vides
+	Print blank lines when data fields are empty	Imprimer les lignes vides si les champs de données sont vides
+	Check Errors…	Vérifier les erreurs…
+	Query Options…	Options de requête…
+	The Mail Merge Helper sets up a merge in three steps.	L'assistant Fusion et publipostage prépare une fusion en trois étapes.
+	1. Main document	1. Document principal
+	Restore to Normal Word Document	Rétablir en document Word normal
+	Merge type: {type}	Type de fusion : {type}
+	2. Data source	2. Source de données
+	Get Data	Obtenir les données
+	Create Data Source…	Créer la source de données…
+	Open Data Source…	Ouvrir la source de données…
+	No data source yet.	Pas encore de source de données.
+	{count} records; fields: {fields}	{count} enregistrements ; champs : {fields}
+	Header Options:	Options d'en-tête :
+	Header Options	Options d'en-tête
+	Create…	Créer…
+	Open…	Ouvrir…
+	Header source: {file} (the next data source opened here takes its field names)	Source d'en-tête : {file} (la prochaine source de données ouverte ici prend ses noms de champs)
+	3. Merge the data with the document	3. Fusionner les données avec le document
+	Merge…	Fusionner…
+	A header source holds the field names for a data source without a header row.	Une source d'en-tête contient les noms de champs d'une source de données sans ligne d'en-tête.
+	Add Field Name	Ajouter le nom de champ
+	Remove Field Name	Supprimer le nom de champ
+	Mail Merge Helper…	Assistant Fusion et publipostage…
+	Mail Merge Helper	Assistant Fusion et publipostage
+	Merge to New Document	Fusionner dans un nouveau document
+	Merge to Printer	Fusionner vers l'imprimante
+	Create Header Source	Créer la source d'en-tête
+	Form Letters	Lettres types
+	Mailing Labels	Étiquettes de publipostage
+	Catalog	Catalogue

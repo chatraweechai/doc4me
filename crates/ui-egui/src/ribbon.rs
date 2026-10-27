@@ -1495,6 +1495,9 @@ fn mailings(app: &mut WordApp, ui: &mut Ui) {
                 let current = kind == k || (k == "normal" && kind.is_empty());
                 mi_check(ui, app, label, current, "mailings.start", json!({"kind": k}));
             }
+            ui.separator();
+            // The whole merge in three steps (Word's Mail Merge Helper).
+            mi(ui, app, "Mail Merge Helper…", "ui.dialog", json!({"name": "mailMergeHelper"}));
         });
         // The command needs data, so the button offers the two ways to give it (#240).
         menu_button(ui, app, "recipients", Some("Select\nRecipients"), "Select Recipients", true, "mailings.recipients", |ui, app| {

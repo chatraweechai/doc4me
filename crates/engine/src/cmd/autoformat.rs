@@ -188,7 +188,12 @@ fn replace_in(s: &mut Session, path: &Path, o: &AutoFormatPrefs) -> Result<(), C
         // Text in a link stays as it is (an address with "--" or "_" in it), and so does text
         // deleted under Track Changes.
         let kept = |a: usize, b: usize| {
-            (a..b.max(a + 1)).any(|i| para.text.is_char_boundary(i) && { let c = para.props_of_char(i); c.link.is_some() || c.del.is_some() })
+            (a..b.max(a + 1)).any(|i| {
+                para.text.is_char_boundary(i) && {
+                    let c = para.props_of_char(i);
+                    c.link.is_some() || c.del.is_some()
+                }
+            })
         };
         let mut edits: Vec<Edit> = rule(&para.text).into_iter().filter(|e| !para.text[e.a..e.b].contains(OBJ) && !kept(e.a, e.b)).collect();
         edits.sort_by_key(|e| std::cmp::Reverse(e.a));

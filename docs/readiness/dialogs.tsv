@@ -115,14 +115,14 @@ dlg-113	wdDialogInsertWebComponent	1324	IconNumber, FileName, Link, DisplayIcon,
 dlg-114	wdDialogLabelOptions	1367	(none)	mailings.labels	registry		
 dlg-115	wdDialogLetterWizard	821	SenderCity, DateFormat, IncludeHeaderFooter, LetterStyle, Letterhead, LetterheadLocation, LetterheadSize, RecipientName, RecipientAddress, Salutation, SalutationType, RecipientGender, RecipientReference, MailingInstructions, AttentionLine, LetterSubject, CCList, SenderName, ReturnAddress, Closing, SenderJobTitle, SenderCompany, SenderInitials, EnclosureNumber, PageDesign, InfoBlock, SenderGender, ReturnAddressSF, RecipientCode, SenderCode, SenderReference	-	registry		legacy
 dlg-116	wdDialogListCommands	723	ListType	tools.listCommands	registry		List Commands: current keyboard settings or all commands, into a new document
-dlg-117	wdDialogMailMerge	676	CheckErrors, Destination, MergeRecords, From, To, Suppression, MailMerge, QueryOptions, MailSubject, MailAsAttachment, MailAddress	-	registry		no step-by-step wizard
+dlg-117	wdDialogMailMerge	676	CheckErrors, Destination, MergeRecords, From, To, Suppression, MailMerge, QueryOptions, MailSubject, MailAsAttachment, MailAddress	mailings.finish	registry		Merge (Merge to New Document / Merge to Printer from Finish & Merge, Alt+Shift+N / Alt+Shift+M; Merge… in the Mail Merge Helper with Merge to): All / Current record / From–To, Don't print blank lines when data fields are empty (default) or print them, Check Errors…, Query Options…; UI test dialogs_data::tests::merge_dialog_helper_and_header_sources
 dlg-118	wdDialogMailMergeCheck	677	CheckErrors	mailings.checkErrors	registry		Check for Errors
 dlg-119	wdDialogMailMergeCreateDataSource	642	FileName, PasswordDoc, PasswordDot, HeaderRecord, MSQuery, SQLStatement, SQLStatement1, Connection, LinkToSource, WritePasswordDoc	mailings.newList	registry		Type a New List (the New Address List)
-dlg-120	wdDialogMailMergeCreateHeaderSource	643	FileName, PasswordDoc, PasswordDot, HeaderRecord, MSQuery, SQLStatement, SQLStatement1, Connection, LinkToSource, WritePasswordDoc	-	registry		
+dlg-120	wdDialogMailMergeCreateHeaderSource	643	FileName, PasswordDoc, PasswordDot, HeaderRecord, MSQuery, SQLStatement, SQLStatement1, Connection, LinkToSource, WritePasswordDoc	mailings.headerSource	registry		Create Header Source (Mail Merge Helper › Header Options › Create…): Word's field list to start, Add/Remove Field Name, Move Up/Down, saved as a one-row CSV/TSV header source
 dlg-121	wdDialogMailMergeFieldMapping	1304	(none)	mailings.matchFields	registry		Match Fields
 dlg-122	wdDialogMailMergeFindRecipient	1326	(none)	mailings.findRecipient	registry		
 dlg-123	wdDialogMailMergeFindRecord	569	(none)	mailings.findRecipient	registry		
-dlg-124	wdDialogMailMergeHelper	680	(none)	-	registry		
+dlg-124	wdDialogMailMergeHelper	680	(none)	mailings.start	registry		Mail Merge Helper (Start Mail Merge › Mail Merge Helper…): 1 Main document Create (Form Letters, E-mail Messages, Envelopes, Mailing Labels, Catalog, Restore to Normal), 2 Data source Get Data (Create Data Source…, Open Data Source…), Edit…, Header Options, 3 Merge…, Query Options…
 dlg-125	wdDialogMailMergeInsertAddressBlock	1305	(none)	mailings.addressBlock	registry		
 dlg-126	wdDialogMailMergeInsertAsk	4047	(none)	mailings.rules	registry		Rules › Ask
 dlg-127	wdDialogMailMergeInsertFields	1307	(none)	mailings.insertField	registry		
@@ -133,7 +133,7 @@ dlg-131	wdDialogMailMergeInsertNextIf	4053	(none)	mailings.rules	registry
 dlg-132	wdDialogMailMergeInsertSet	4054	(none)	mailings.rules	registry		
 dlg-133	wdDialogMailMergeInsertSkipIf	4055	(none)	mailings.rules	registry		ruleSkipIf
 dlg-134	wdDialogMailMergeOpenDataSource	81	(none)	mailings.recipients	registry		
-dlg-135	wdDialogMailMergeOpenHeaderSource	82	(none)	-	registry		
+dlg-135	wdDialogMailMergeOpenHeaderSource	82	(none)	mailings.headerSource	registry		Open Header Source (Mail Merge Helper › Header Options › Open…): its first row names the fields of the next data source opened there (mailings.recipients headerSource / headerFields)
 dlg-136	wdDialogMailMergeQueryOptions	681	(none)	mailings.query	registry		Filter and Sort (Edit Recipient List › Filter and Sort…): Filter Records (six rules, And/Or, ten comparisons, numbers compared as numbers) and Sort Records (three fields, ascending/descending); Clear All
 dlg-137	wdDialogMailMergeRecipients	1308	(none)	mailings.editRecipients	registry		recipientList
 dlg-138	wdDialogMailMergeSetDocumentType	1339	(none)	mailings.start	registry		

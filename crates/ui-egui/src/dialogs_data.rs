@@ -69,6 +69,16 @@ pub enum DataDialog {
     /// After AutoFormat with review: the changed paragraphs (before, after), and whether the
     /// list of changes is open (Review Changes).
     AutoFormatReview { changes: Vec<(String, String)>, reviewing: bool },
+    /// Merge (Word's Merge to New Document and Merge to Printer, or the Mail Merge Helper's Merge
+    /// with its Merge to choice; `fixed` when the button chose where): to the printer or a new
+    /// document, which records (0 all, 1 the current one, 2 from–to), whether blank lines print.
+    Merge { fixed: bool, printer: bool, records: u8, from: u32, to: u32, blank_lines: bool },
+    /// The Mail Merge Helper: a merge set up in three steps. `picking` says what the next picked
+    /// file is (1 a header source, 2 a data source).
+    MergeHelper { picking: u8, message: String },
+    /// Header Options › Create: the field names (Word's list to start), the name being typed and
+    /// the one selected; `saving` once the file name is asked for.
+    HeaderSource { fields: Vec<String>, name: String, selected: Option<usize>, saving: bool, message: String },
 }
 
 impl DataDialog {
@@ -79,6 +89,11 @@ impl DataDialog {
             DataDialog::FilterSort { .. } => "filterSort",
             DataDialog::TableAutoFormat { .. } => "tableAutoFormat",
             DataDialog::AutoFormatReview { .. } => "autoFormatReview",
+            DataDialog::Merge { fixed: false, .. } => "merge",
+            DataDialog::Merge { printer: false, .. } => "mergeToNew",
+            DataDialog::Merge { .. } => "mergeToPrinter",
+            DataDialog::MergeHelper { .. } => "mailMergeHelper",
+            DataDialog::HeaderSource { .. } => "createHeaderSource",
         }
     }
 
@@ -90,6 +105,11 @@ impl DataDialog {
             DataDialog::FilterSort { .. } => "Filter and Sort",
             DataDialog::TableAutoFormat { .. } => "Table AutoFormat",
             DataDialog::AutoFormatReview { .. } => "AutoFormat",
+            DataDialog::Merge { fixed: false, .. } => "Merge",
+            DataDialog::Merge { printer: false, .. } => "Merge to New Document",
+            DataDialog::Merge { .. } => "Merge to Printer",
+            DataDialog::MergeHelper { .. } => "Mail Merge Helper",
+            DataDialog::HeaderSource { .. } => "Create Header Source",
         }
     }
 }
@@ -167,6 +187,18 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<DataDialog> {
             let v = app.session.run("format.autoFormatReview", &json!({})).ok()?;
             DataDialog::AutoFormatReview { changes: review_changes(&v), reviewing: false }
         }
+        "merge" | "mergeToNew" | "mergeToPrinter" => {
+            let n = app.session.merge.rows.len().max(1) as u32;
+            DataDialog::Merge { fixed: name != "merge", printer: name == "mergeToPrinter", records: 0, from: 1, to: n, blank_lines: false }
+        }
+        "mailMergeHelper" => DataDialog::MergeHelper { picking: 0, message: String::new() },
+        "createHeaderSource" => DataDialog::HeaderSource {
+            fields: doc4me_engine::cmd::mailings::DEFAULT_FIELDS.iter().map(|f| f.to_string()).collect(),
+            name: String::new(),
+            selected: None,
+            saving: false,
+            message: String::new(),
+        },
         _ => return None,
     })
 }
@@ -179,6 +211,9 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut DataDialog) -> bool {
         DataDialog::FilterSort { tab, fields, rules, sort } => filter_sort(app, ui, tab, fields, rules, sort),
         DataDialog::TableAutoFormat { styles, style, look } => table_autoformat(app, ui, styles, style, look),
         DataDialog::AutoFormatReview { changes, reviewing } => autoformat_review(app, ui, changes, reviewing),
+        DataDialog::Merge { fixed, printer, records, from, to, blank_lines } => merge(app, ui, *fixed, printer, records, from, to, blank_lines),
+        DataDialog::MergeHelper { picking, message } => merge_helper(app, ui, picking, message),
+        DataDialog::HeaderSource { fields, name, selected, saving, message } => header_source(app, ui, fields, name, selected, saving, message),
     }
 }
 
@@ -579,6 +614,300 @@ fn autoformat_review(app: &mut WordApp, ui: &mut Ui, changes: &mut Vec<(String, 
     done
 }
 
+/// Merge (Merge to New Document, Merge to Printer): which records, and whether a line whose
+/// merge fields are all empty prints. Check Errors… and Query Options… open their dialogs.
+#[allow(clippy::too_many_arguments)]
+fn merge(
+    app: &mut WordApp,
+    ui: &mut Ui,
+    fixed: bool,
+    printer: &mut bool,
+    records: &mut u8,
+    from: &mut u32,
+    to: &mut u32,
+    blank_lines: &mut bool,
+) -> bool {
+    let n = app.session.merge.rows.len();
+    let last = n.max(1) as u32;
+    if !fixed {
+        ui.horizontal(|ui| {
+            ui.label(tl!("Merge to:"));
+            egui::ComboBox::from_id_salt("merge_to").selected_text(if *printer { tl!("Printer") } else { tl!("New document") }).show_ui(ui, |ui| {
+                ui.selectable_value(printer, false, tl!("New document"));
+                ui.selectable_value(printer, true, tl!("Printer"));
+            });
+        });
+    }
+    heading(ui, "Merge records");
+    ui.radio_value(records, 0, tl!("All"));
+    ui.radio_value(records, 1, tl!("Current record"));
+    ui.horizontal(|ui| {
+        ui.radio_value(records, 2, tl!("From:"));
+        ui.add(egui::DragValue::new(from).range(1..=last).clamp_existing_to_range(false));
+        ui.label(tl!("To:"));
+        ui.add(egui::DragValue::new(to).range(1..=last).clamp_existing_to_range(false));
+    });
+    *from = (*from).clamp(1, last);
+    *to = (*to).clamp(*from, last);
+    heading(ui, "When merging records");
+    ui.radio_value(blank_lines, false, tl!("Don't print blank lines when data fields are empty"));
+    ui.radio_value(blank_lines, true, tl!("Print blank lines when data fields are empty"));
+    let mut other = None;
+    ui.horizontal(|ui| {
+        if ui.button(tl!("Check Errors…")).clicked() {
+            other = Some(("mailings.checkErrors", json!({})));
+        }
+        if ui.button(tl!("Query Options…")).clicked() {
+            other = Some(("ui.dialog", json!({"name": "filterSort"})));
+        }
+    });
+    if let Some((id, p)) = other {
+        // Its dialog takes this one's place.
+        run(app, id, p);
+        return true;
+    }
+    let (ok, cancel) = buttons(ui, "Merge", n > 0);
+    if ok {
+        let mut p = json!({"blankLines": *blank_lines});
+        match *records {
+            1 => p["current"] = json!(true),
+            2 => {
+                p["from"] = json!(*from);
+                p["to"] = json!(*to);
+            }
+            _ => {}
+        }
+        // The merge replaces the document: the window asks to save it first.
+        return run(app, if *printer { "mailings.print" } else { "mailings.finish" }, p).is_some();
+    }
+    cancel
+}
+
+/// The Mail Merge Helper: 1 the main document (its type), 2 the data source (create, open, a
+/// header source, edit), 3 the merge (Merge…, Query Options…).
+fn merge_helper(app: &mut WordApp, ui: &mut Ui, picking: &mut u8, message: &mut String) -> bool {
+    // The file picked for Header Options › Open or Get Data › Open Data Source.
+    if let Some(path) = app.dialog_pick.take() {
+        match std::mem::take(picking) {
+            1 => match app.run("mailings.headerSource", json!({"path": path})) {
+                Ok(_) => {
+                    app.header_source = Some(path);
+                    message.clear();
+                }
+                Err(e) => *message = e,
+            },
+            2 => {
+                let mut p = json!({"path": path});
+                if let Some(h) = &app.header_source {
+                    p["headerSource"] = json!(h);
+                }
+                match app.load_recipients(p) {
+                    Ok(_) => message.clear(),
+                    Err(e) => *message = e,
+                }
+                // A workbook with several sheets asks which one first.
+                if app.dialog.is_some() {
+                    return true;
+                }
+            }
+            _ => {}
+        }
+    }
+    let mut open = None;
+    ui.label(tl!("The Mail Merge Helper sets up a merge in three steps."));
+    ui.add_space(4.0);
+    heading(ui, "1. Main document");
+    let kind = app.session.merge.kind.clone();
+    const TYPES: [(&str, &str); 5] = [
+        ("letters", "Form Letters"),
+        ("emails", "E-mail Messages"),
+        ("envelopes", "Envelopes"),
+        ("labels", "Mailing Labels"),
+        ("directory", "Catalog"),
+    ];
+    ui.horizontal(|ui| {
+        ui.menu_button(tl!("Create"), |ui| {
+            for (k, label) in TYPES {
+                if ui.button(tl!(label)).clicked() {
+                    run(app, "mailings.start", json!({"kind": k}));
+                    ui.close();
+                }
+            }
+            ui.separator();
+            if ui.button(tl!("Restore to Normal Word Document")).clicked() {
+                run(app, "mailings.start", json!({"kind": "normal"}));
+                ui.close();
+            }
+        });
+        let shown = TYPES.iter().find(|(k, _)| *k == kind).map_or(tl!("Normal Word Document"), |(_, l)| tl!(l));
+        ui.label(crate::i18n::fmt(tl!("Merge type: {type}"), &[("type", shown)]));
+    });
+    ui.add_space(4.0);
+    heading(ui, "2. Data source");
+    ui.horizontal(|ui| {
+        ui.menu_button(tl!("Get Data"), |ui| {
+            if ui.button(tl!("Create Data Source…")).clicked() {
+                open = Some(("mailings.newList", json!({})));
+                ui.close();
+            }
+            if ui.button(tl!("Open Data Source…")).clicked() {
+                *picking = 2;
+                let _ = app.ask_file(FileDialogRequest::Open { purpose: "recipients".into() }, AfterPick::ForDialog);
+                ui.close();
+            }
+        });
+        let has_list = !app.session.merge.headers.is_empty();
+        if ui.add_enabled(has_list, egui::Button::new(tl!("Edit…"))).clicked() {
+            open = Some(("mailings.editRecipients", json!({})));
+        }
+    });
+    let m = &app.session.merge;
+    if m.headers.is_empty() {
+        ui.label(egui::RichText::new(tl!("No data source yet.")).small().weak());
+    } else {
+        let n = m.rows.len().to_string();
+        let fields = m.headers.join(", ");
+        ui.label(
+            egui::RichText::new(crate::i18n::fmt(tl!("{count} records; fields: {fields}"), &[("count", &n), ("fields", &fields)])).small().weak(),
+        );
+    }
+    ui.horizontal(|ui| {
+        ui.label(tl!("Header Options:"));
+        if ui.button(tl!("Create…")).clicked() {
+            open = Some(("ui.dialog", json!({"name": "createHeaderSource"})));
+        }
+        if ui.button(tl!("Open…")).clicked() {
+            *picking = 1;
+            let _ = app.ask_file(FileDialogRequest::Open { purpose: "recipients".into() }, AfterPick::ForDialog);
+        }
+        if ui.add_enabled(app.header_source.is_some(), egui::Button::new(tl!("Remove"))).clicked() {
+            app.header_source = None;
+        }
+    });
+    if let Some(h) = &app.header_source {
+        let file = std::path::Path::new(h).file_name().map_or(h.clone(), |f| f.to_string_lossy().to_string());
+        ui.label(
+            egui::RichText::new(crate::i18n::fmt(
+                tl!("Header source: {file} (the next data source opened here takes its field names)"),
+                &[("file", &file)],
+            ))
+            .small()
+            .weak(),
+        );
+    }
+    ui.add_space(4.0);
+    heading(ui, "3. Merge the data with the document");
+    ui.horizontal(|ui| {
+        if ui.add_enabled(!app.session.merge.rows.is_empty(), egui::Button::new(tl!("Merge…"))).clicked() {
+            open = Some(("ui.dialog", json!({"name": "merge"})));
+        }
+        if ui.add_enabled(!app.session.merge.headers.is_empty(), egui::Button::new(tl!("Query Options…"))).clicked() {
+            open = Some(("ui.dialog", json!({"name": "filterSort"})));
+        }
+    });
+    if !message.is_empty() {
+        ui.colored_label(ui.visuals().error_fg_color, message.as_str());
+    }
+    if let Some((id, p)) = open {
+        // That step's dialog takes this one's place.
+        run(app, id, p);
+        return true;
+    }
+    ui.add_space(8.0);
+    let mut done = ui.input(|i| i.key_pressed(egui::Key::Escape));
+    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+        done |= ui.button(tl!("Close")).clicked();
+    });
+    done
+}
+
+/// Header Options › Create: the field names, saved as a header source; back to the Helper.
+#[allow(clippy::too_many_arguments)]
+fn header_source(
+    app: &mut WordApp,
+    ui: &mut Ui,
+    fields: &mut Vec<String>,
+    name: &mut String,
+    selected: &mut Option<usize>,
+    saving: &mut bool,
+    message: &mut String,
+) -> bool {
+    let back = |app: &mut WordApp| {
+        let _ = app.run("ui.dialog", json!({"name": "mailMergeHelper"}));
+    };
+    if *saving && let Some(path) = app.dialog_pick.take() {
+        *saving = false;
+        match app.run("mailings.headerSource", json!({"path": path, "fields": fields})) {
+            Ok(_) => {
+                app.header_source = Some(path);
+                back(app);
+                return true;
+            }
+            Err(e) => *message = e,
+        }
+    }
+    ui.label(tl!("A header source holds the field names for a data source without a header row."));
+    ui.horizontal(|ui| {
+        ui.label(tl!("Field name:"));
+        let r = ui.add(crate::widgets::text_line(name).desired_width(160.0).char_limit(40));
+        let typed = name.trim().to_string();
+        let known = fields.iter().any(|f| f.eq_ignore_ascii_case(&typed));
+        let add = ui.add_enabled(!typed.is_empty() && !known, egui::Button::new(tl!("Add Field Name"))).clicked()
+            || (r.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter)) && !typed.is_empty() && !known);
+        if add {
+            fields.push(typed);
+            name.clear();
+            *selected = Some(fields.len() - 1);
+        }
+    });
+    ui.horizontal_top(|ui| {
+        egui::Frame::group(ui.style()).show(ui, |ui| {
+            ui.set_min_width(200.0);
+            egui::ScrollArea::vertical().id_salt("header_fields").max_height(180.0).show(ui, |ui| {
+                for (i, f) in fields.iter().enumerate() {
+                    if ui.selectable_label(*selected == Some(i), f.as_str()).clicked() {
+                        *selected = Some(i);
+                    }
+                }
+            });
+        });
+        ui.vertical(|ui| {
+            let sel = selected.filter(|i| *i < fields.len());
+            if ui.add_enabled(sel.is_some(), egui::Button::new(tl!("Remove Field Name"))).clicked()
+                && let Some(i) = sel
+            {
+                *name = fields.remove(i);
+                *selected = None;
+            }
+            if ui.add_enabled(sel.is_some_and(|i| i > 0), egui::Button::new(tl!("Move Up"))).clicked()
+                && let Some(i) = sel
+            {
+                fields.swap(i, i - 1);
+                *selected = Some(i - 1);
+            }
+            if ui.add_enabled(sel.is_some_and(|i| i + 1 < fields.len()), egui::Button::new(tl!("Move Down"))).clicked()
+                && let Some(i) = sel
+            {
+                fields.swap(i, i + 1);
+                *selected = Some(i + 1);
+            }
+        });
+    });
+    if !message.is_empty() {
+        ui.colored_label(ui.visuals().error_fg_color, message.as_str());
+    }
+    let (ok, cancel) = buttons(ui, "OK", !fields.is_empty() && !*saving);
+    if ok {
+        *saving = true;
+        let _ = app.ask_file(FileDialogRequest::Save { name: "Header.csv".into() }, AfterPick::ForDialog);
+    }
+    if cancel {
+        back(app);
+        return true;
+    }
+    false
+}
+
 #[cfg(test)]
 mod tests {
     use egui_kittest::Harness;
@@ -772,5 +1101,76 @@ mod tests {
         h.run_steps(2);
         assert!(h.state().dialog.is_none());
         assert!(text(&h).contains("\u{201C}fine\u{201D}"), "the other changes stay");
+    }
+
+    /// dlg-117: Edit Individual Documents shows Merge to New Document (records, blank lines);
+    /// dlg-124: the Mail Merge Helper; dlg-120 and dlg-135: Header Options › Create writes a
+    /// header source and the next data source opened there takes its names.
+    #[test]
+    fn merge_dialog_helper_and_header_sources() {
+        let dir = std::env::temp_dir().join(format!("doc4me-merge-ui-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let mut h = harness(app(""));
+        {
+            let a = h.state_mut();
+            a.run("mailings.recipients", json!({"csv": "Name,City\nAda,London\nAlan,"})).unwrap();
+            a.run("mailings.insertField", json!({"field": "Name"})).unwrap();
+            a.run("text.newParagraph", json!({})).unwrap();
+            a.run("mailings.insertField", json!({"field": "City"})).unwrap();
+            a.run("text.newParagraph", json!({})).unwrap();
+            a.run("text.insert", json!({"text": "End"})).unwrap();
+            a.session.dirty = false;
+            assert_eq!(a.run("mailings.finish", json!({})).unwrap()["pending"], "mergeToNew");
+        }
+        h.run_steps(3);
+        match form(&mut h) {
+            DataDialog::Merge { fixed, printer, records, from, to, blank_lines } => {
+                assert!(*fixed && !*printer && !*blank_lines && *to == 2);
+                *records = 2;
+                *from = 2;
+            }
+            other => panic!("{other:?}"),
+        }
+        h.run_steps(1);
+        h.get_by_label("Merge").click();
+        h.run_steps(2);
+        let paras: Vec<String> = h.state().session.doc.body.iter().filter_map(|b| b.as_para()).map(|p| p.plain_text()).collect();
+        assert_eq!(paras, ["Alan", "End"], "record 2 only, without the blank City line");
+        // The Helper: Create… opens Create Header Source with Word's fields.
+        h.state_mut().run("ui.dialog", json!({"name": "mailMergeHelper"})).unwrap();
+        h.run_steps(3);
+        h.get_by_label("Create…").click();
+        h.run_steps(3);
+        let header = dir.join("names.csv").to_string_lossy().to_string();
+        match form(&mut h) {
+            DataDialog::HeaderSource { fields, saving, .. } => {
+                assert_eq!(fields[0], "Title");
+                *fields = vec!["Guest".into(), "Town".into()];
+                // OK asked for a file name; the answer comes.
+                *saving = true;
+            }
+            other => panic!("{other:?}"),
+        }
+        h.state_mut().dialog_pick = Some(header.clone());
+        h.run_steps(3);
+        assert_eq!(std::fs::read_to_string(&header).unwrap(), "Guest,Town\r\n");
+        assert_eq!(h.state().header_source.as_deref(), Some(header.as_str()));
+        // Back in the Helper: Open Data Source takes a list without a header row.
+        let data = dir.join("guests.csv");
+        std::fs::write(&data, "Grace,Arlington\nKath,\n").unwrap();
+        match form(&mut h) {
+            DataDialog::MergeHelper { picking, .. } => *picking = 2,
+            other => panic!("{other:?}"),
+        }
+        h.state_mut().dialog_pick = Some(data.to_string_lossy().to_string());
+        h.run_steps(3);
+        let m = &h.state().session.merge;
+        assert_eq!(m.headers, ["Guest", "Town"]);
+        assert_eq!(m.rows.len(), 2);
+        // Merge… opens Merge with its Merge to choice.
+        h.get_by_label("Merge…").click();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), DataDialog::Merge { fixed: false, .. }));
+        std::fs::remove_dir_all(&dir).ok();
     }
 }

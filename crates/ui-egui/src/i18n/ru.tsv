@@ -2804,3 +2804,42 @@ spacing	Normal	Обычный
 	Preserve	Сохранять
 	Review Changes…	Просмотреть изменения…
 	{count} paragraphs were changed.	Изменено абзацев: {count}.
+	Merge to:	Слить в:
+	Printer	Принтер
+	Merge records	Объединить записи
+	Current record	Текущая запись
+	From:	С:
+	To:	По:
+	When merging records	При объединении записей
+	Don't print blank lines when data fields are empty	Не печатать пустые строки, если поля данных пусты
+	Print blank lines when data fields are empty	Печатать пустые строки, если поля данных пусты
+	Check Errors…	Проверить ошибки…
+	Query Options…	Параметры запроса…
+	The Mail Merge Helper sets up a merge in three steps.	Помощник по слиянию настраивает слияние за три шага.
+	1. Main document	1. Основной документ
+	Restore to Normal Word Document	Восстановить обычный документ Word
+	Merge type: {type}	Тип слияния: {type}
+	2. Data source	2. Источник данных
+	Get Data	Получить данные
+	Create Data Source…	Создать источник данных…
+	Open Data Source…	Открыть источник данных…
+	No data source yet.	Источник данных еще не выбран.
+	{count} records; fields: {fields}	Записей: {count}; поля: {fields}
+	Header Options:	Параметры заголовка:
+	Header Options	Параметры заголовка
+	Create…	Создать…
+	Open…	Открыть…
+	Header source: {file} (the next data source opened here takes its field names)	Источник заголовков: {file} (следующий открытый здесь источник данных получит его имена полей)
+	3. Merge the data with the document	3. Объединить данные с документом
+	Merge…	Объединить…
+	A header source holds the field names for a data source without a header row.	Источник заголовков содержит имена полей для источника данных без строки заголовков.
+	Add Field Name	Добавить имя поля
+	Remove Field Name	Удалить имя поля
+	Mail Merge Helper…	Помощник по слиянию…
+	Mail Merge Helper	Помощник по слиянию
+	Merge to New Document	Слияние в новый документ
+	Merge to Printer	Слияние при печати
+	Create Header Source	Создать источник заголовков
+	Form Letters	Документы на бланке
+	Mailing Labels	Почтовые наклейки
+	Catalog	Каталог

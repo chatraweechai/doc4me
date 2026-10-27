@@ -2788,3 +2788,42 @@ spacing	Normal	Normal
 	Preserve	Preservar
 	Review Changes…	Revisar Alterações…
 	{count} paragraphs were changed.	{count} parágrafos foram alterados.
+	Merge to:	Mesclar para:
+	Printer	Impressora
+	Merge records	Mesclar registros
+	Current record	Registro atual
+	From:	De:
+	To:	Até:
+	When merging records	Ao mesclar registros
+	Don't print blank lines when data fields are empty	Não imprimir linhas em branco quando os campos de dados estiverem vazios
+	Print blank lines when data fields are empty	Imprimir linhas em branco quando os campos de dados estiverem vazios
+	Check Errors…	Verificar Erros…
+	Query Options…	Opções de Consulta…
+	The Mail Merge Helper sets up a merge in three steps.	O Auxiliar de Mala Direta prepara uma mesclagem em três etapas.
+	1. Main document	1. Documento principal
+	Restore to Normal Word Document	Restaurar para Documento Normal do Word
+	Merge type: {type}	Tipo de mesclagem: {type}
+	2. Data source	2. Fonte de dados
+	Get Data	Obter Dados
+	Create Data Source…	Criar Fonte de Dados…
+	Open Data Source…	Abrir Fonte de Dados…
+	No data source yet.	Ainda não há fonte de dados.
+	{count} records; fields: {fields}	{count} registros; campos: {fields}
+	Header Options:	Opções de Cabeçalho:
+	Header Options	Opções de Cabeçalho
+	Create…	Criar…
+	Open…	Abrir…
+	Header source: {file} (the next data source opened here takes its field names)	Origem do cabeçalho: {file} (a próxima fonte de dados aberta aqui usa os nomes de campo dela)
+	3. Merge the data with the document	3. Mesclar os dados com o documento
+	Merge…	Mesclar…
+	A header source holds the field names for a data source without a header row.	Uma origem de cabeçalho contém os nomes de campo de uma fonte de dados sem linha de cabeçalho.
+	Add Field Name	Adicionar Nome de Campo
+	Remove Field Name	Remover Nome de Campo
+	Mail Merge Helper…	Auxiliar de Mala Direta…
+	Mail Merge Helper	Auxiliar de Mala Direta
+	Merge to New Document	Mesclar para Novo Documento
+	Merge to Printer	Mesclar para Impressora
+	Create Header Source	Criar Origem do Cabeçalho
+	Form Letters	Cartas Modelo
+	Mailing Labels	Etiquetas de Endereçamento
+	Catalog	Catálogo

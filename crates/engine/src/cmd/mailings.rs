@@ -52,7 +52,10 @@ pub fn specs() -> Vec<CommandSpec> {
         .params(r#"{"kind": "letters|emails|envelopes|labels|directory|normal"}"#)
         .pure(),
         CommandSpec::new("mailings.recipients", "Select Recipients", "Mailings › Start Mail Merge", recipients)
-            .params(r#"{"csv"?: string, "path"?: string (.csv/.tsv/.txt, or a .xlsx/.xlsm/.ods workbook), "data"?: base64 (a file's bytes, as for path), "sheet"?: name | number (1 = first; a workbook with several sheets and no sheet answers {"sheets": [...], "chooseSheet": true} and loads nothing), "headers"?: bool (default true: the first non-blank row names the fields; false: fields are Column 1…N), "rows"?: [{field: value}] | [[value]], "fields"?: [string] (column order; required with array rows)}"#)
+            .params(r#"{"csv"?: string, "path"?: string (.csv/.tsv/.txt, or a .xlsx/.xlsm/.ods workbook), "data"?: base64 (a file's bytes, as for path), "sheet"?: name | number (1 = first; a workbook with several sheets and no sheet answers {"sheets": [...], "chooseSheet": true} and loads nothing), "headers"?: bool (default true: the first non-blank row names the fields; false: fields are Column 1…N), "rows"?: [{field: value}] | [[value]], "fields"?: [string] (column order; required with array rows), "headerSource"?: path | "headerFields"?: [string] (Header Options: the field names, from a header source's first row or listed; every data row is then a record)}"#)
+            .pure(),
+        CommandSpec::new("mailings.headerSource", "Header Options", "Mailings › Mail Merge Helper", header_source)
+            .params(r#"{"path": string, "fields"?: [string]} — with fields: create a header source (one row of field names; .tsv/.txt tab-separated, else CSV); without: read its field names"#)
             .pure(),
         // Select Recipients › Type a New List…: Word's New Address List dialog, whose rows become
         // the recipients (`mailings.recipients` with `rows`).
@@ -146,7 +149,7 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .pure(),
         CommandSpec::new("mailings.finish", "Finish & Merge", "Mailings › Finish", finish)
-            .params(r#"{"path"?: string (save the merged document), "from"?: n, "to"?: n}"#)
+            .params(r#"{"path"?: string (save the merged document), "from"?: n, "to"?: n, "current"?: bool (only the record Preview Results shows), "blankLines"?: bool (default false: a paragraph whose merge fields came out empty, with nothing else in it, is left out — Word's "Don't print blank lines when data fields are empty")}"#)
             .key(super::non_mac("Alt+Shift+N"))
             .when(has_recipients),
         // Word's Merge to Printer (Alt+Shift+M): the merged letters, then the Print page. Doc4Me
@@ -157,7 +160,7 @@ pub fn specs() -> Vec<CommandSpec> {
             s.ui_requests.push(json!({"open": "print"}));
             Ok(r)
         })
-        .params(r#"{"from"?: n, "to"?: n}"#)
+        .params(r#"{"from"?: n, "to"?: n, "current"?: bool, "blankLines"?: bool (as for mailings.finish)}"#)
         .key(super::non_mac("Alt+Shift+M"))
         .when(has_recipients),
         CommandSpec::new("mailings.query", "Filter and Sort", "Mailings › Edit Recipient List", query)
@@ -334,12 +337,23 @@ fn recipients(s: &mut Session, v: &Value) -> CmdResult {
     let (headers, rows) = if let Some(arr) = v.get("rows").and_then(Value::as_array) {
         table_from_rows(v.get("fields").and_then(Value::as_array), arr)?
     } else {
-        let (all, chosen) = match read_source(v)? {
+        let (mut all, chosen) = match read_source(v)? {
             Ok(x) => x,
             Err(names) => return Ok(json!({"sheets": names, "chooseSheet": true})),
         };
         sheet = chosen;
-        header_split(all, p::bool(v, "headers").unwrap_or(true))?
+        // Header Options: the field names come from a header source, and every row of the data
+        // source is a record.
+        match header_fields(v)? {
+            Some(mut names) => {
+                // Columns past the names are kept, as Column N.
+                let width = all.iter().map(Vec::len).max().unwrap_or(0);
+                names.resize(width.max(names.len()), String::new());
+                all.insert(0, names);
+                header_split(all, true)?
+            }
+            None => header_split(all, p::bool(v, "headers").unwrap_or(true))?,
+        }
     };
     s.merge.headers = headers;
     s.merge.rows = rows;
@@ -352,6 +366,85 @@ fn recipients(s: &mut Session, v: &Value) -> CmdResult {
         r["sheet"] = sheet;
     }
     Ok(r)
+}
+
+/// Word's fields for a new data or header source (Create Data Source, Create Header Source).
+pub const DEFAULT_FIELDS: [&str; 13] = [
+    "Title",
+    "FirstName",
+    "LastName",
+    "JobTitle",
+    "Company",
+    "Address1",
+    "Address2",
+    "City",
+    "State",
+    "PostalCode",
+    "Country",
+    "HomePhone",
+    "WorkPhone",
+];
+
+/// Longest field name a header source keeps, in characters.
+const MAX_FIELD_CHARS: usize = 40;
+
+/// `headerFields` (the names) or `headerSource` (a file whose first row has them), if given.
+fn header_fields(v: &Value) -> Result<Option<Vec<String>>, CmdError> {
+    if let Some(a) = v.get("headerFields").filter(|x| !x.is_null()) {
+        return field_list(a).map(Some);
+    }
+    match p::str(v, "headerSource") {
+        Some(path) => read_header_source(path).map(Some),
+        None => Ok(None),
+    }
+}
+
+/// A list of field names: 1–1000 different names of up to 40 characters, one line each.
+fn field_list(a: &Value) -> Result<Vec<String>, CmdError> {
+    let names: Vec<String> = a
+        .as_array()
+        .ok_or_else(|| CmdError::Params("the fields are a list of names".into()))?
+        .iter()
+        .map(|n| n.as_str().map(|t| t.trim().to_string()).ok_or_else(|| CmdError::Params("a field name is text".into())))
+        .collect::<Result<_, _>>()?;
+    if names.is_empty() || names.len() > MAX_FIELDS {
+        return Err(CmdError::Params(format!("give 1–{MAX_FIELDS} field names")));
+    }
+    if let Some(bad) = names.iter().find(|n| n.is_empty() || n.chars().count() > MAX_FIELD_CHARS || n.contains(['\n', '\r', '\t'])) {
+        return Err(CmdError::Params(format!("a field name has 1–{MAX_FIELD_CHARS} characters on one line: {bad:?}")));
+    }
+    let mut seen = std::collections::HashSet::new();
+    if let Some(dup) = names.iter().find(|n| !seen.insert(n.to_lowercase())) {
+        return Err(CmdError::Params(format!("the field {dup:?} is listed twice")));
+    }
+    Ok(names)
+}
+
+/// The field names in a header source: its first row with any text (a workbook's first sheet).
+fn read_header_source(path: &str) -> Result<Vec<String>, CmdError> {
+    let (rows, _) = match read_source(&json!({"path": path, "sheet": 1}))? {
+        Ok(x) => x,
+        Err(_) => return Err(CmdError::Failed("the header source has no sheet to read".into())),
+    };
+    let first =
+        rows.into_iter().find(|r| r.iter().any(|c| !c.trim().is_empty())).ok_or_else(|| CmdError::Failed("the header source is empty".into()))?;
+    Ok(first.into_iter().take(MAX_FIELDS).collect())
+}
+
+/// Header Options › Create: write a header source, the field names as one row (tab-separated
+/// for .tsv and .txt, comma-separated otherwise). Header Options › Open: read its names.
+fn header_source(_: &mut Session, v: &Value) -> CmdResult {
+    let path = p::req_str(v, "path")?;
+    let Some(a) = v.get("fields").filter(|x| !x.is_null()) else {
+        return Ok(json!({"fields": read_header_source(path)?}));
+    };
+    let names = field_list(a)?;
+    let tab = matches!(extension(path).as_deref(), Some("tsv" | "txt"));
+    let cell = |n: &String| if !tab && n.contains([',', '"']) { format!("\"{}\"", n.replace('"', "\"\"")) } else { n.clone() };
+    let line = names.iter().map(cell).collect::<Vec<_>>().join(if tab { "\t" } else { "," });
+    // Through `io`, which keeps automation inside its write root.
+    crate::io::write_file(path, format!("{line}\r\n").as_bytes()).map_err(|e| CmdError::Failed(format!("couldn't save the header source: {e}")))?;
+    Ok(json!({"fields": names, "path": path}))
 }
 
 /// Most rules a Filter Records query keeps (Word offers six).
@@ -773,8 +866,14 @@ const MAX_MERGED_BLOCKS: usize = 200_000;
 /// header/footer copies.
 fn finish(s: &mut Session, v: &Value) -> CmdResult {
     let n = s.merge.rows.len();
-    let from = (p::u64(v, "from").unwrap_or(1).max(1) as usize).saturating_sub(1);
-    let to = (p::u64(v, "to").unwrap_or(n as u64).min(n as u64)) as usize;
+    let (from, to) = if p::bool(v, "current") == Some(true) {
+        // Merge the current record: the one Preview Results shows.
+        let r = s.merge.record.min(n.saturating_sub(1));
+        (r, (r + 1).min(n))
+    } else {
+        ((p::u64(v, "from").unwrap_or(1).max(1) as usize).saturating_sub(1), (p::u64(v, "to").unwrap_or(n as u64).min(n as u64)) as usize)
+    };
+    let blank_lines = p::bool(v, "blankLines").unwrap_or(false);
     let directory = s.merge.kind == "directory";
     let hf: Vec<u32> =
         header_footer_ids(&s.doc).into_iter().filter(|id| s.doc.story(StoryRef::Part(*id)).is_some_and(|b| has_merge_fields(b, 0))).collect();
@@ -795,6 +894,9 @@ fn finish(s: &mut Session, v: &Value) -> CmdResult {
         start = cur.saturating_add(1);
         if !keep {
             continue;
+        }
+        if !blank_lines {
+            drop_blank_lines(&s.doc.body, &mut body, 0);
         }
         first_record.get_or_insert(record);
         if per_record {
@@ -904,6 +1006,42 @@ fn has_merge_fields(blocks: &Blocks, depth: usize) -> bool {
 /// Replace the merge fields in `blocks` by their text, in document order, starting with record
 /// `*cur`. NEXT moves `*cur` on (records from `end` on are blank). Returns false when a SKIPIF
 /// drops this merged document.
+/// "Don't print blank lines when data fields are empty": drop the paragraphs of a merged copy
+/// that had merge fields and are now blank (`template` is the copy before merging: merging keeps
+/// every block in its place). A table cell keeps its last paragraph, and a paragraph that ends a
+/// section stays.
+fn drop_blank_lines(template: &Blocks, merged: &mut Blocks, depth: usize) {
+    if depth > MAX_DEPTH || template.len() != merged.len() {
+        return;
+    }
+    let mut gone = Vec::new();
+    for (i, (t, m)) in template.iter().zip(merged.iter_mut()).enumerate() {
+        match (&**t, std::sync::Arc::make_mut(m)) {
+            (Block::Para(tp), Block::Para(mp)) => {
+                let had_fields = tp.objects.iter().any(|o| matches!(o, InlineObject::Field { instr, .. } if placeholder(instr).is_some()));
+                let blank = mp.plain_text().trim().is_empty()
+                    && mp.objects.iter().all(|o| matches!(o, InlineObject::BookmarkStart { .. } | InlineObject::BookmarkEnd { .. }))
+                    && mp.section.is_none();
+                if had_fields && blank {
+                    gone.push(i);
+                }
+            }
+            (Block::Table(tt), Block::Table(mt)) => {
+                for (tc, mc) in tt.rows.iter().flat_map(|r| &r.cells).zip(mt.rows.iter_mut().flat_map(|r| &mut r.cells)) {
+                    drop_blank_lines(&tc.blocks, &mut mc.blocks, depth + 1);
+                }
+            }
+            _ => {}
+        }
+    }
+    for i in gone.into_iter().rev() {
+        // A cell ends with a paragraph: its last block stays.
+        if depth == 0 || i + 1 < merged.len() {
+            merged.remove(i);
+        }
+    }
+}
+
 fn merge_blocks(s: &Session, blocks: &mut Blocks, cur: &mut usize, end: usize, depth: usize) -> bool {
     if depth > MAX_DEPTH {
         return true;
@@ -1422,6 +1560,53 @@ mod tests {
         let t = s.doc.plain_text(StoryRef::Body);
         assert!(t.contains("Hello Alan") && t.contains("Hello Grace") && !t.contains("Ada"), "{t}");
         assert_eq!(s.ui_requests.last(), Some(&json!({"open": "print"})));
+    }
+
+    /// dlg-120 and dlg-135: Header Options › Create writes a header source, Open reads it, and a
+    /// data source without a header row takes its field names. dlg-117: the Merge dialog's
+    /// options: the current record, and blank lines left out unless asked for.
+    #[test]
+    fn header_sources_current_record_and_blank_lines() {
+        let dir = std::env::temp_dir().join(format!("doc4me-header-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let csv = dir.join("header.csv");
+        let path = csv.to_string_lossy().to_string();
+        let mut s = Session::new(Document::new());
+        let r = s.run("mailings.headerSource", &json!({"path": path, "fields": ["Name", "City", "Note, quoted \"x\""]})).unwrap();
+        assert_eq!(r["fields"], json!(["Name", "City", "Note, quoted \"x\""]));
+        assert_eq!(std::fs::read_to_string(&csv).unwrap(), "Name,City,\"Note, quoted \"\"x\"\"\"\r\n");
+        assert_eq!(s.run("mailings.headerSource", &json!({"path": path})).unwrap()["fields"], json!(["Name", "City", "Note, quoted \"x\""]));
+        let tsv = dir.join("header.tsv").to_string_lossy().to_string();
+        s.run("mailings.headerSource", &json!({"path": tsv, "fields": ["Name", "City"]})).unwrap();
+        assert_eq!(std::fs::read_to_string(&tsv).unwrap(), "Name\tCity\r\n");
+        for bad in [json!([]), json!(["Name", "name"]), json!(["  "]), json!(["a\nb"]), json!([7])] {
+            assert!(s.run("mailings.headerSource", &json!({"path": tsv, "fields": bad})).is_err(), "{bad}");
+        }
+        // Every row of the data is a record; the names come from the header source.
+        let r = s.run("mailings.recipients", &json!({"csv": "Ada,London\nAlan,", "headerSource": tsv})).unwrap();
+        assert_eq!(r, json!({"fields": ["Name", "City"], "records": 2}));
+        let r = s.run("mailings.recipients", &json!({"csv": "Ada,London,x\nAlan,", "headerFields": ["Name", "City"]})).unwrap();
+        assert_eq!(r["fields"], json!(["Name", "City", "Column 3"]));
+        // «Name» / «City» / End: Alan has no city, so his letter has no blank line.
+        s.run("mailings.insertField", &json!({"field": "Name"})).unwrap();
+        s.run("text.newParagraph", &json!({})).unwrap();
+        s.run("mailings.insertField", &json!({"field": "City"})).unwrap();
+        s.run("text.newParagraph", &json!({})).unwrap();
+        s.run("text.insert", &json!({"text": "End"})).unwrap();
+        let template = s.doc.clone();
+        let paras = |s: &Session| s.doc.body.iter().filter_map(|b| b.as_para()).map(|p| p.plain_text()).collect::<Vec<_>>();
+        s.run("mailings.finish", &json!({})).unwrap();
+        assert_eq!(paras(&s), ["Ada", "London", "End\u{000C}", "Alan", "End"]);
+        s.set_document(template.clone());
+        s.run("mailings.finish", &json!({"blankLines": true})).unwrap();
+        assert_eq!(paras(&s), ["Ada", "London", "End\u{000C}", "Alan", "", "End"], "Print blank lines");
+        // The current record only.
+        s.set_document(template);
+        s.merge.record = 1;
+        let r = s.run("mailings.finish", &json!({"current": true})).unwrap();
+        assert_eq!(r["records"], 1);
+        assert_eq!(paras(&s), ["Alan", "End"]);
+        std::fs::remove_dir_all(&dir).ok();
     }
 
     /// A typed list (#240) keeps its column order, and rows may be arrays in that order.

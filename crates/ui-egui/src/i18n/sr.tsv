@@ -2790,3 +2790,42 @@ spacing	Normal	Нормално
 	Preserve	Задржи
 	Review Changes…	Прегледај измене…
 	{count} paragraphs were changed.	Измењено пасуса: {count}.
+	Merge to:	Обједини у:
+	Printer	Штампач
+	Merge records	Обједини записе
+	Current record	Тренутни запис
+	From:	Од:
+	To:	До:
+	When merging records	При обједињавању записа
+	Don't print blank lines when data fields are empty	Не штампај празне редове када су поља података празна
+	Print blank lines when data fields are empty	Штампај празне редове када су поља података празна
+	Check Errors…	Провери грешке…
+	Query Options…	Опције упита…
+	The Mail Merge Helper sets up a merge in three steps.	Помоћник за обједињавање поште припрема обједињавање у три корака.
+	1. Main document	1. Главни документ
+	Restore to Normal Word Document	Врати у обичан Word документ
+	Merge type: {type}	Тип обједињавања: {type}
+	2. Data source	2. Извор података
+	Get Data	Преузми податке
+	Create Data Source…	Креирај извор података…
+	Open Data Source…	Отвори извор података…
+	No data source yet.	Још нема извора података.
+	{count} records; fields: {fields}	Записа: {count}; поља: {fields}
+	Header Options:	Опције заглавља:
+	Header Options	Опције заглавља
+	Create…	Креирај…
+	Open…	Отвори…
+	Header source: {file} (the next data source opened here takes its field names)	Извор заглавља: {file} (следећи извор података отворен овде преузима његове називе поља)
+	3. Merge the data with the document	3. Обједини податке са документом
+	Merge…	Обједини…
+	A header source holds the field names for a data source without a header row.	Извор заглавља садржи називе поља за извор података без реда заглавља.
+	Add Field Name	Додај назив поља
+	Remove Field Name	Уклони назив поља
+	Mail Merge Helper…	Помоћник за обједињавање поште…
+	Mail Merge Helper	Помоћник за обједињавање поште
+	Merge to New Document	Обједини у нови документ
+	Merge to Printer	Обједини на штампач
+	Create Header Source	Креирај извор заглавља
+	Form Letters	Шаблонска писма
+	Mailing Labels	Поштанске налепнице
+	Catalog	Каталог

@@ -2803,3 +2803,42 @@ spacing	Normal	Normal
 	Preserve	Koru
 	Review Changes…	Değişiklikleri Gözden Geçir…
 	{count} paragraphs were changed.	{count} paragraf değiştirildi.
+	Merge to:	Birleştirme hedefi:
+	Printer	Yazıcı
+	Merge records	Kayıtları birleştir
+	Current record	Geçerli kayıt
+	From:	Başlangıç:
+	To:	Bitiş:
+	When merging records	Kayıtları birleştirirken
+	Don't print blank lines when data fields are empty	Veri alanları boş olduğunda boş satırları yazdırma
+	Print blank lines when data fields are empty	Veri alanları boş olduğunda boş satırları yazdır
+	Check Errors…	Hataları Denetle…
+	Query Options…	Sorgu Seçenekleri…
+	The Mail Merge Helper sets up a merge in three steps.	Adres Mektup Yardımcısı birleştirmeyi üç adımda hazırlar.
+	1. Main document	1. Ana belge
+	Restore to Normal Word Document	Normal Word Belgesine Geri Döndür
+	Merge type: {type}	Birleştirme türü: {type}
+	2. Data source	2. Veri kaynağı
+	Get Data	Veri Al
+	Create Data Source…	Veri Kaynağı Oluştur…
+	Open Data Source…	Veri Kaynağını Aç…
+	No data source yet.	Henüz veri kaynağı yok.
+	{count} records; fields: {fields}	{count} kayıt; alanlar: {fields}
+	Header Options:	Başlık Seçenekleri:
+	Header Options	Başlık Seçenekleri
+	Create…	Oluştur…
+	Open…	Aç…
+	Header source: {file} (the next data source opened here takes its field names)	Başlık kaynağı: {file} (burada açılan sonraki veri kaynağı alan adlarını bundan alır)
+	3. Merge the data with the document	3. Verileri belgeyle birleştir
+	Merge…	Birleştir…
+	A header source holds the field names for a data source without a header row.	Başlık kaynağı, başlık satırı olmayan bir veri kaynağının alan adlarını tutar.
+	Add Field Name	Alan Adı Ekle
+	Remove Field Name	Alan Adını Kaldır
+	Mail Merge Helper…	Adres Mektup Yardımcısı…
+	Mail Merge Helper	Adres Mektup Yardımcısı
+	Merge to New Document	Yeni Belgede Birleştir
+	Merge to Printer	Yazıcıda Birleştir
+	Create Header Source	Başlık Kaynağı Oluştur
+	Form Letters	Form Mektupları
+	Mailing Labels	Posta Etiketleri
+	Catalog	Katalog

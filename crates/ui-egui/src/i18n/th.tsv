@@ -2785,3 +2785,42 @@ spacing	Normal	ปกติ
 	Preserve	คงไว้
 	Review Changes…	ตรวจทานการเปลี่ยนแปลง…
 	{count} paragraphs were changed.	มีการเปลี่ยน {count} ย่อหน้า
+	Merge to:	ผสานไปยัง:
+	Printer	เครื่องพิมพ์
+	Merge records	ผสานระเบียน
+	Current record	ระเบียนปัจจุบัน
+	From:	จาก:
+	To:	ถึง:
+	When merging records	เมื่อผสานระเบียน
+	Don't print blank lines when data fields are empty	ไม่พิมพ์บรรทัดว่างเมื่อเขตข้อมูลว่าง
+	Print blank lines when data fields are empty	พิมพ์บรรทัดว่างเมื่อเขตข้อมูลว่าง
+	Check Errors…	ตรวจหาข้อผิดพลาด…
+	Query Options…	ตัวเลือกคิวรี…
+	The Mail Merge Helper sets up a merge in three steps.	ตัวช่วยจดหมายเวียนจะตั้งค่าการผสานใน 3 ขั้นตอน
+	1. Main document	1. เอกสารหลัก
+	Restore to Normal Word Document	คืนค่าเป็นเอกสาร Word ปกติ
+	Merge type: {type}	ชนิดการผสาน: {type}
+	2. Data source	2. แหล่งข้อมูล
+	Get Data	รับข้อมูล
+	Create Data Source…	สร้างแหล่งข้อมูล…
+	Open Data Source…	เปิดแหล่งข้อมูล…
+	No data source yet.	ยังไม่มีแหล่งข้อมูล
+	{count} records; fields: {fields}	{count} ระเบียน เขตข้อมูล: {fields}
+	Header Options:	ตัวเลือกส่วนหัว:
+	Header Options	ตัวเลือกส่วนหัว
+	Create…	สร้าง…
+	Open…	เปิด…
+	Header source: {file} (the next data source opened here takes its field names)	แหล่งส่วนหัว: {file} (แหล่งข้อมูลถัดไปที่เปิดจากที่นี่จะใช้ชื่อเขตข้อมูลจากไฟล์นี้)
+	3. Merge the data with the document	3. ผสานข้อมูลกับเอกสาร
+	Merge…	ผสาน…
+	A header source holds the field names for a data source without a header row.	แหล่งส่วนหัวเก็บชื่อเขตข้อมูลสำหรับแหล่งข้อมูลที่ไม่มีแถวส่วนหัว
+	Add Field Name	เพิ่มชื่อเขตข้อมูล
+	Remove Field Name	เอาชื่อเขตข้อมูลออก
+	Mail Merge Helper…	ตัวช่วยจดหมายเวียน…
+	Mail Merge Helper	ตัวช่วยจดหมายเวียน
+	Merge to New Document	ผสานไปยังเอกสารใหม่
+	Merge to Printer	ผสานไปยังเครื่องพิมพ์
+	Create Header Source	สร้างแหล่งส่วนหัว
+	Form Letters	จดหมายแบบฟอร์ม
+	Mailing Labels	ฉลากจดหมาย
+	Catalog	แค็ตตาล็อก

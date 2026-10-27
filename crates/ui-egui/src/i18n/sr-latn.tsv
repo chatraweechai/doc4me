@@ -2786,3 +2786,42 @@ spacing	Normal	Normalno
 	Preserve	Zadrži
 	Review Changes…	Pregledaj izmene…
 	{count} paragraphs were changed.	Izmenjeno pasusa: {count}.
+	Merge to:	Objedini u:
+	Printer	Štampač
+	Merge records	Objedini zapise
+	Current record	Trenutni zapis
+	From:	Od:
+	To:	Do:
+	When merging records	Pri objedinjavanju zapisa
+	Don't print blank lines when data fields are empty	Ne štampaj prazne redove kada su polja podataka prazna
+	Print blank lines when data fields are empty	Štampaj prazne redove kada su polja podataka prazna
+	Check Errors…	Proveri greške…
+	Query Options…	Opcije upita…
+	The Mail Merge Helper sets up a merge in three steps.	Pomoćnik za objedinjavanje pošte priprema objedinjavanje u tri koraka.
+	1. Main document	1. Glavni dokument
+	Restore to Normal Word Document	Vrati u običan Word dokument
+	Merge type: {type}	Tip objedinjavanja: {type}
+	2. Data source	2. Izvor podataka
+	Get Data	Preuzmi podatke
+	Create Data Source…	Kreiraj izvor podataka…
+	Open Data Source…	Otvori izvor podataka…
+	No data source yet.	Još nema izvora podataka.
+	{count} records; fields: {fields}	Zapisa: {count}; polja: {fields}
+	Header Options:	Opcije zaglavlja:
+	Header Options	Opcije zaglavlja
+	Create…	Kreiraj…
+	Open…	Otvori…
+	Header source: {file} (the next data source opened here takes its field names)	Izvor zaglavlja: {file} (sledeći izvor podataka otvoren ovde preuzima njegove nazive polja)
+	3. Merge the data with the document	3. Objedini podatke sa dokumentom
+	Merge…	Objedini…
+	A header source holds the field names for a data source without a header row.	Izvor zaglavlja sadrži nazive polja za izvor podataka bez reda zaglavlja.
+	Add Field Name	Dodaj naziv polja
+	Remove Field Name	Ukloni naziv polja
+	Mail Merge Helper…	Pomoćnik za objedinjavanje pošte…
+	Mail Merge Helper	Pomoćnik za objedinjavanje pošte
+	Merge to New Document	Objedini u novi dokument
+	Merge to Printer	Objedini na štampač
+	Create Header Source	Kreiraj izvor zaglavlja
+	Form Letters	Šablonska pisma
+	Mailing Labels	Poštanske nalepnice
+	Catalog	Katalog

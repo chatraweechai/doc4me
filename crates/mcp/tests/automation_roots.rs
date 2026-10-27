@@ -101,6 +101,9 @@ fn commands_that_read_a_path_are_held_to_the_read_root() {
         ("insert.object", json!({"path": outside})),
         ("insert.picture", json!({"path": s(&base.join("outside/pic.png"))})),
         ("mailings.recipients", json!({"path": outside})),
+        ("mailings.recipients", json!({"csv": "Ada", "headerSource": outside})),
+        ("mailings.headerSource", json!({"path": outside})),
+        ("insert.database", json!({"path": outside})),
         ("file.newFromTemplate", json!({"path": outside})),
         ("review.compare", json!({"path": outside})),
         ("review.compare", json!({"text": "x", "original": outside})),
@@ -162,6 +165,7 @@ fn saves_and_exports_go_only_into_the_write_root() {
         ("file.exportJpeg", json!({"path": s(&base.join("outside/x.jpg"))})),
         ("file.saveTemplate", json!({"path": s(&base.join("outside/x.dotx"))})),
         ("mailings.finish", json!({"path": s(&base.join("outside/merged.docx"))})),
+        ("mailings.headerSource", json!({"path": s(&base.join("outside/header.csv")), "fields": ["Name"]})),
     ] {
         let (error, text) = run(&mut server, command, params);
         assert!(error && text.contains("outside the write root"), "{command}: {text}");

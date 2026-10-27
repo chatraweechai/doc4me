@@ -2784,3 +2784,42 @@ spacing	Normal	Tavaline
 	Preserve	Säilita
 	Review Changes…	Vaata muudatused üle…
 	{count} paragraphs were changed.	Muudeti {count} lõiku.
+	Merge to:	Ühenda:
+	Printer	Printer
+	Merge records	Ühenda kirjed
+	Current record	Praegune kirje
+	From:	Alates:
+	To:	Kuni:
+	When merging records	Kirjete ühendamisel
+	Don't print blank lines when data fields are empty	Ära prindi tühje ridu, kui andmeväljad on tühjad
+	Print blank lines when data fields are empty	Prindi tühjad read, kui andmeväljad on tühjad
+	Check Errors…	Kontrolli vigu…
+	Query Options…	Päringu suvandid…
+	The Mail Merge Helper sets up a merge in three steps.	Kirjakoosteabiline seab ühendamise sisse kolme sammuga.
+	1. Main document	1. Põhidokument
+	Restore to Normal Word Document	Taasta tavaliseks Wordi dokumendiks
+	Merge type: {type}	Ühendamise tüüp: {type}
+	2. Data source	2. Andmeallikas
+	Get Data	Too andmed
+	Create Data Source…	Loo andmeallikas…
+	Open Data Source…	Ava andmeallikas…
+	No data source yet.	Andmeallikat veel pole.
+	{count} records; fields: {fields}	{count} kirjet; väljad: {fields}
+	Header Options:	Päise suvandid:
+	Header Options	Päise suvandid
+	Create…	Loo…
+	Open…	Ava…
+	Header source: {file} (the next data source opened here takes its field names)	Päiseallikas: {file} (järgmine siin avatud andmeallikas võtab selle väljanimed)
+	3. Merge the data with the document	3. Ühenda andmed dokumendiga
+	Merge…	Ühenda…
+	A header source holds the field names for a data source without a header row.	Päiseallikas sisaldab väljanimesid päisereata andmeallika jaoks.
+	Add Field Name	Lisa väljanimi
+	Remove Field Name	Eemalda väljanimi
+	Mail Merge Helper…	Kirjakoosteabiline…
+	Mail Merge Helper	Kirjakoosteabiline
+	Merge to New Document	Ühenda uude dokumenti
+	Merge to Printer	Ühenda printerisse
+	Create Header Source	Loo päiseallikas
+	Form Letters	Vormkirjad
+	Mailing Labels	Postisildid
+	Catalog	Kataloog

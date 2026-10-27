@@ -2788,3 +2788,42 @@ spacing	Normal	Звичайний
 	Preserve	Зберігати
 	Review Changes…	Переглянути зміни…
 	{count} paragraphs were changed.	Змінено абзаців: {count}.
+	Merge to:	Злити в:
+	Printer	Принтер
+	Merge records	Злити записи
+	Current record	Поточний запис
+	From:	З:
+	To:	По:
+	When merging records	Під час злиття записів
+	Don't print blank lines when data fields are empty	Не друкувати порожні рядки, якщо поля даних порожні
+	Print blank lines when data fields are empty	Друкувати порожні рядки, якщо поля даних порожні
+	Check Errors…	Перевірити помилки…
+	Query Options…	Параметри запиту…
+	The Mail Merge Helper sets up a merge in three steps.	Помічник злиття налаштовує злиття за три кроки.
+	1. Main document	1. Основний документ
+	Restore to Normal Word Document	Відновити звичайний документ Word
+	Merge type: {type}	Тип злиття: {type}
+	2. Data source	2. Джерело даних
+	Get Data	Отримати дані
+	Create Data Source…	Створити джерело даних…
+	Open Data Source…	Відкрити джерело даних…
+	No data source yet.	Джерела даних ще немає.
+	{count} records; fields: {fields}	Записів: {count}; поля: {fields}
+	Header Options:	Параметри заголовка:
+	Header Options	Параметри заголовка
+	Create…	Створити…
+	Open…	Відкрити…
+	Header source: {file} (the next data source opened here takes its field names)	Джерело заголовків: {file} (наступне відкрите тут джерело даних отримає його назви полів)
+	3. Merge the data with the document	3. Злити дані з документом
+	Merge…	Злити…
+	A header source holds the field names for a data source without a header row.	Джерело заголовків містить назви полів для джерела даних без рядка заголовків.
+	Add Field Name	Додати назву поля
+	Remove Field Name	Видалити назву поля
+	Mail Merge Helper…	Помічник злиття…
+	Mail Merge Helper	Помічник злиття
+	Merge to New Document	Злиття в новий документ
+	Merge to Printer	Злиття на принтер
+	Create Header Source	Створити джерело заголовків
+	Form Letters	Листи на бланку
+	Mailing Labels	Поштові наклейки
+	Catalog	Каталог

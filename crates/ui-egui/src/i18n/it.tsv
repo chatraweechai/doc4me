@@ -2783,3 +2783,42 @@ spacing	Normal	Normale
 	Preserve	Mantieni
 	Review Changes…	Rivedi modifiche…
 	{count} paragraphs were changed.	Sono stati modificati {count} paragrafi.
+	Merge to:	Unisci in:
+	Printer	Stampante
+	Merge records	Unisci record
+	Current record	Record corrente
+	From:	Da:
+	To:	A:
+	When merging records	Durante l'unione dei record
+	Don't print blank lines when data fields are empty	Non stampare righe vuote quando i campi dati sono vuoti
+	Print blank lines when data fields are empty	Stampa righe vuote quando i campi dati sono vuoti
+	Check Errors…	Controlla errori…
+	Query Options…	Opzioni query…
+	The Mail Merge Helper sets up a merge in three steps.	La procedura guidata Stampa unione prepara un'unione in tre passaggi.
+	1. Main document	1. Documento principale
+	Restore to Normal Word Document	Ripristina documento di Word normale
+	Merge type: {type}	Tipo di unione: {type}
+	2. Data source	2. Origine dati
+	Get Data	Carica dati
+	Create Data Source…	Crea origine dati…
+	Open Data Source…	Apri origine dati…
+	No data source yet.	Nessuna origine dati per ora.
+	{count} records; fields: {fields}	{count} record; campi: {fields}
+	Header Options:	Opzioni intestazione:
+	Header Options	Opzioni intestazione
+	Create…	Crea…
+	Open…	Apri…
+	Header source: {file} (the next data source opened here takes its field names)	Origine intestazione: {file} (la prossima origine dati aperta qui ne prende i nomi dei campi)
+	3. Merge the data with the document	3. Unisci i dati con il documento
+	Merge…	Unisci…
+	A header source holds the field names for a data source without a header row.	Un'origine intestazione contiene i nomi dei campi per un'origine dati senza riga di intestazione.
+	Add Field Name	Aggiungi nome campo
+	Remove Field Name	Rimuovi nome campo
+	Mail Merge Helper…	Procedura guidata Stampa unione…
+	Mail Merge Helper	Procedura guidata Stampa unione
+	Merge to New Document	Unisci in nuovo documento
+	Merge to Printer	Unisci alla stampante
+	Create Header Source	Crea origine intestazione
+	Form Letters	Lettere tipo
+	Mailing Labels	Etichette postali
+	Catalog	Catalogo

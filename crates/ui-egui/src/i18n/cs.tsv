@@ -2781,3 +2781,42 @@ spacing	Normal	Normální
 	Preserve	Zachovat
 	Review Changes…	Zkontrolovat změny…
 	{count} paragraphs were changed.	Změněné odstavce: {count}.
+	Merge to:	Sloučit do:
+	Printer	Tiskárna
+	Merge records	Sloučit záznamy
+	Current record	Aktuální záznam
+	From:	Od:
+	To:	Do:
+	When merging records	Při slučování záznamů
+	Don't print blank lines when data fields are empty	Netisknout prázdné řádky, když jsou datová pole prázdná
+	Print blank lines when data fields are empty	Tisknout prázdné řádky, když jsou datová pole prázdná
+	Check Errors…	Kontrola chyb…
+	Query Options…	Možnosti dotazu…
+	The Mail Merge Helper sets up a merge in three steps.	Pomocník hromadné korespondence připraví slučování ve třech krocích.
+	1. Main document	1. Hlavní dokument
+	Restore to Normal Word Document	Obnovit na běžný dokument Word
+	Merge type: {type}	Typ slučování: {type}
+	2. Data source	2. Zdroj dat
+	Get Data	Načíst data
+	Create Data Source…	Vytvořit zdroj dat…
+	Open Data Source…	Otevřít zdroj dat…
+	No data source yet.	Zatím žádný zdroj dat.
+	{count} records; fields: {fields}	Záznamy: {count}; pole: {fields}
+	Header Options:	Možnosti záhlaví:
+	Header Options	Možnosti záhlaví
+	Create…	Vytvořit…
+	Open…	Otevřít…
+	Header source: {file} (the next data source opened here takes its field names)	Zdroj záhlaví: {file} (další zdroj dat otevřený zde převezme jeho názvy polí)
+	3. Merge the data with the document	3. Sloučit data s dokumentem
+	Merge…	Sloučit…
+	A header source holds the field names for a data source without a header row.	Zdroj záhlaví obsahuje názvy polí pro zdroj dat bez řádku záhlaví.
+	Add Field Name	Přidat název pole
+	Remove Field Name	Odebrat název pole
+	Mail Merge Helper…	Pomocník hromadné korespondence…
+	Mail Merge Helper	Pomocník hromadné korespondence
+	Merge to New Document	Sloučit do nového dokumentu
+	Merge to Printer	Sloučit na tiskárnu
+	Create Header Source	Vytvořit zdroj záhlaví
+	Form Letters	Standardní dopisy
+	Mailing Labels	Poštovní štítky
+	Catalog	Katalog

@@ -2777,3 +2777,42 @@ spacing	Normal	標準
 	Preserve	保留
 	Review Changes…	檢閱變更…
 	{count} paragraphs were changed.	已變更 {count} 個段落。
+	Merge to:	合併到：
+	Printer	印表機
+	Merge records	合併記錄
+	Current record	目前記錄
+	From:	從：
+	To:	到：
+	When merging records	合併記錄時
+	Don't print blank lines when data fields are empty	資料欄位為空白時不列印空白行
+	Print blank lines when data fields are empty	資料欄位為空白時列印空白行
+	Check Errors…	檢查錯誤…
+	Query Options…	查詢選項…
+	The Mail Merge Helper sets up a merge in three steps.	合併列印協助程式會分三個步驟設定合併。
+	1. Main document	1. 主文件
+	Restore to Normal Word Document	還原為一般文件
+	Merge type: {type}	合併類型：{type}
+	2. Data source	2. 資料來源
+	Get Data	取得資料
+	Create Data Source…	建立資料來源…
+	Open Data Source…	開啟資料來源…
+	No data source yet.	尚無資料來源。
+	{count} records; fields: {fields}	{count} 筆記錄；欄位：{fields}
+	Header Options:	標題選項：
+	Header Options	標題選項
+	Create…	建立…
+	Open…	開啟…
+	Header source: {file} (the next data source opened here takes its field names)	標題來源：{file}（在此開啟的下一個資料來源會使用其中的欄位名稱）
+	3. Merge the data with the document	3. 將資料與文件合併
+	Merge…	合併…
+	A header source holds the field names for a data source without a header row.	標題來源儲存沒有標題列之資料來源的欄位名稱。
+	Add Field Name	新增欄位名稱
+	Remove Field Name	移除欄位名稱
+	Mail Merge Helper…	合併列印協助程式…
+	Mail Merge Helper	合併列印協助程式
+	Merge to New Document	合併至新文件
+	Merge to Printer	合併至印表機
+	Create Header Source	建立標題來源
+	Form Letters	套印信件
+	Mailing Labels	郵寄標籤
+	Catalog	目錄

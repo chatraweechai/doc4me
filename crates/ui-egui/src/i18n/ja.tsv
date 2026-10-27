@@ -2776,3 +2776,42 @@ spacing	Normal	標準
 	Preserve	保持
 	Review Changes…	変更の確認…
 	{count} paragraphs were changed.	{count} 個の段落が変更されました。
+	Merge to:	差し込み先:
+	Printer	プリンター
+	Merge records	差し込むレコード
+	Current record	現在のレコード
+	From:	開始:
+	To:	終了:
+	When merging records	レコードの差し込み時
+	Don't print blank lines when data fields are empty	データ フィールドが空の場合は空白行を印刷しない
+	Print blank lines when data fields are empty	データ フィールドが空の場合も空白行を印刷する
+	Check Errors…	エラーのチェック…
+	Query Options…	クエリ オプション…
+	The Mail Merge Helper sets up a merge in three steps.	差し込み印刷ヘルパーは、3 つの手順で差し込み印刷を設定します。
+	1. Main document	1. メイン文書
+	Restore to Normal Word Document	通常の文書に戻す
+	Merge type: {type}	差し込みの種類: {type}
+	2. Data source	2. データ ファイル
+	Get Data	データの取得
+	Create Data Source…	データ ファイルの作成…
+	Open Data Source…	データ ファイルを開く…
+	No data source yet.	データ ファイルはまだありません。
+	{count} records; fields: {fields}	{count} 件のレコード、フィールド: {fields}
+	Header Options:	ヘッダー オプション:
+	Header Options	ヘッダー オプション
+	Create…	作成…
+	Open…	開く…
+	Header source: {file} (the next data source opened here takes its field names)	ヘッダー ファイル: {file} (ここで次に開くデータ ファイルはこのフィールド名を使います)
+	3. Merge the data with the document	3. データを文書に差し込む
+	Merge…	差し込み…
+	A header source holds the field names for a data source without a header row.	ヘッダー ファイルには、見出し行のないデータ ファイル用のフィールド名が入ります。
+	Add Field Name	フィールド名の追加
+	Remove Field Name	フィールド名の削除
+	Mail Merge Helper…	差し込み印刷ヘルパー…
+	Mail Merge Helper	差し込み印刷ヘルパー
+	Merge to New Document	新規文書への差し込み
+	Merge to Printer	プリンターに差し込み
+	Create Header Source	ヘッダー ファイルの作成
+	Form Letters	レター
+	Mailing Labels	宛名ラベル
+	Catalog	カタログ

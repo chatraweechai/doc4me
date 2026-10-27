@@ -374,6 +374,9 @@ pub struct WordApp {
     /// Web: a recipient list was asked for (Select Recipients › Use an Existing List…), so the
     /// next text file from the picker loads as recipients instead of opening (#240).
     pub recipient_list_pending: bool,
+    /// Mail Merge Helper › Header Options: the header source whose field names the next data
+    /// source opened there takes (`mailings.recipients` `headerSource`).
+    pub(crate) header_source: Option<String>,
     /// The font database's [`generation`](doc4me_fonts::FontDb::generation) last seen: when
     /// fonts are added or removed (by any route) the font lists and the layout are refreshed.
     font_generation: u64,
@@ -560,6 +563,7 @@ impl WordApp {
             change_picture_target: None,
             style_scratch: None,
             recipient_list_pending: false,
+            header_source: None,
             font_generation: doc4me_fonts::FontDb::global().generation(),
             dialog_pick: None,
             file_dialog: None,
@@ -1865,6 +1869,11 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "shape.format" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formatShape"),
         // Modify Style without a style: the style of the paragraph at the caret.
         "styles.modify" if !has("style") => Some("modifyStyle"),
+        // Finish & Merge › Edit Individual Documents and Print Documents (Alt+Shift+N / M): Word's
+        // Merge to New Document and Merge to Printer dialogs (which records, blank lines).
+        "mailings.finish" | "mailings.print" if params.as_object().is_none_or(|m| m.is_empty()) => {
+            Some(if id == "mailings.finish" { "mergeToNew" } else { "mergeToPrinter" })
+        }
         _ => None,
     }
 }
@@ -3243,7 +3252,8 @@ mod tests {
         match id {
             "mailings.envelopes" => json!({"delivery": "Ada"}),
             "mailings.labels" => json!({"text": "Ada"}),
-            _ => json!({}),
+            // What the Merge to New Document dialog sends.
+            _ => json!({"blankLines": false}),
         }
     }
 
