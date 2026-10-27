@@ -2846,3 +2846,16 @@ spacing	Normal	ปกติ
 	Treatises	ตำรา
 	Regulations	ระเบียบ
 	Constitutional Provisions	บทบัญญัติรัฐธรรมนูญ
+	Writing Style: Grammar	ลักษณะการเขียน: ไวยากรณ์
+	Grammar Settings	การตั้งค่าไวยากรณ์
+	Grammar	ไวยากรณ์
+	Capitalization	การใช้อักษรตัวพิมพ์ใหญ่
+	Repeated words	คำซ้ำ
+	Word forms	รูปคำ
+	Punctuation	เครื่องหมายวรรคตอน
+	Reset All	รีเซ็ตทั้งหมด
+	The first word of a sentence starts with a capital.	คำแรกของประโยคขึ้นต้นด้วยตัวพิมพ์ใหญ่
+	The same word twice in a row.	คำเดียวกันสองครั้งติดกัน
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" หรือ "an" หน้าคำถัดไป และภาษาโปแลนด์ "w"/"we", "z"/"ze"
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	ช่องว่างหน้าเครื่องหมายวรรคตอน เครื่องหมายซ้ำ และจุลภาคหน้าคำเชื่อมภาษาโปแลนด์
+	Extra spaces between words.	ช่องว่างเกินระหว่างคำ

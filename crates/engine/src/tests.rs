@@ -5386,3 +5386,35 @@ fn paste_options_follow_where_the_content_came_from() {
     assert!(s.doc.plain_text(StoryRef::Body).contains("Outside plain"));
     assert!(s.run("file.options", &json!({"pasteOther": "html"})).is_err());
 }
+
+/// dlg-193: Writing Style › Settings (Grammar Settings) turns grammar rules off and on; the
+/// Spelling & Grammar check and the squiggles follow (`Prefs::spelling`).
+#[test]
+fn grammar_settings_turn_rules_off() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("this is is a apple ,  fine."));
+    let messages = |s: &mut Session| -> Vec<String> {
+        let v = s.run("review.issues", &json!({})).unwrap();
+        v.as_array().unwrap().iter().filter_map(|i| i["message"].as_str().map(str::to_string)).collect()
+    };
+    let all = messages(&mut s);
+    for want in ["Capitalize", "Repeated", "\"an\"", "space before", "Extra space"] {
+        assert!(all.iter().any(|m| m.contains(want)), "{want}: {all:?}");
+    }
+    let r = s.run("file.options", &json!({"grammarRules": {"capitalization": false, "repeated": false, "wordForms": false}})).unwrap();
+    assert_eq!(r["grammarRules"]["repeated"], false);
+    assert_eq!(r["grammarRules"]["spacing"], true);
+    let left = messages(&mut s);
+    assert!(left.iter().all(|m| !m.contains("Capitalize") && !m.contains("Repeated") && !m.contains("\"an\"")), "{left:?}");
+    assert!(left.iter().any(|m| m.contains("Extra space")), "{left:?}");
+    s.run("file.options", &json!({"grammarRules": {"punctuation": false, "spacing": false}})).unwrap();
+    assert!(messages(&mut s).iter().all(|m| !m.contains("space")));
+    s.run(
+        "file.options",
+        &json!({"grammarRules": {"capitalization": true, "repeated": true, "wordForms": true, "punctuation": true, "spacing": true}}),
+    )
+    .unwrap();
+    assert_eq!(messages(&mut s), all);
+    assert!(s.prefs.grammar_off.is_empty());
+    assert!(s.run("file.options", &json!({"grammarRules": {"style": false}})).is_err());
+    assert!(s.run("file.options", &json!({"grammarRules": {"spacing": "no"}})).is_err());
+}

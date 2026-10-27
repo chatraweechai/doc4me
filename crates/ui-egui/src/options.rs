@@ -209,6 +209,12 @@ fn proofing(app: &mut WordApp, ui: &mut Ui) {
     let spelling = app.session.view.proofing;
     flag(app, ui, "Check spelling as you type", "checkSpelling", spelling);
     ui.add_enabled_ui(app.session.view.proofing, |ui| flag(app, ui, "Mark grammar errors as you type", "markGrammar", pr.mark_grammar));
+    ui.horizontal(|ui| {
+        ui.label(tl!("Writing Style: Grammar"));
+        if ui.button(tl!("Settings…")).clicked() {
+            let _ = app.run("ui.dialog", json!({"name": "grammarSettings"}));
+        }
+    });
     ui.add_space(8.0);
     section(ui, "Custom dictionary");
     custom_dictionary(app, ui);

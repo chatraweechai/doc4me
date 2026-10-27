@@ -20,7 +20,7 @@ pub fn specs() -> Vec<CommandSpec> {
     vec![
         CommandSpec::new("file.options", "Options", "File", options)
             .params(
-                r#"{"pane"?: "general|display|proofing|save|language|accessibility|advanced|trustCenter|agents", "author"?: string, "initials"?: string, "units"?: "inches|centimeters|millimeters|points|picas", "typingReplacesSelection"?: bool, "insertKeyOvertype"?: bool, "overtype"?: bool, "marks"?: {"tabs"?: bool, "spaces"?: bool, "paragraphs"?: bool, "hidden"?: bool}, "checkSpelling"?: bool, "markGrammar"?: bool, "ignoreUppercase"?: bool, "ignoreNumbers"?: bool, "ignoreInternet"?: bool, "addWords"?: [string], "removeWords"?: [string], "pasteSame"|"pasteBetween"|"pasteOther"?: "keep|merge|text" (Paste within this document, between documents, from other programs)} — with any setting it changes them and opens nothing; without, it opens File › Options (at `pane`). Returns the settings."#,
+                r#"{"pane"?: "general|display|proofing|save|language|accessibility|advanced|trustCenter|agents", "author"?: string, "initials"?: string, "units"?: "inches|centimeters|millimeters|points|picas", "typingReplacesSelection"?: bool, "insertKeyOvertype"?: bool, "overtype"?: bool, "marks"?: {"tabs"?: bool, "spaces"?: bool, "paragraphs"?: bool, "hidden"?: bool}, "checkSpelling"?: bool, "markGrammar"?: bool, "ignoreUppercase"?: bool, "ignoreNumbers"?: bool, "ignoreInternet"?: bool, "addWords"?: [string], "removeWords"?: [string], "pasteSame"|"pasteBetween"|"pasteOther"?: "keep|merge|text" (Paste within this document, between documents, from other programs), "grammarRules"?: {"capitalization"|"repeated"|"wordForms"|"punctuation"|"spacing"?: bool} (Writing Style › Settings)} — with any setting it changes them and opens nothing; without, it opens File › Options (at `pane`). Returns the settings."#,
             )
             .pure(),
         CommandSpec::new("text.overtype", "Overtype", "File › Options › Advanced", |s, v| {
@@ -130,6 +130,22 @@ fn options(s: &mut Session, v: &Value) -> CmdResult {
             )),
         }
     }
+    // Writing Style › Settings: {rule: on/off}.
+    let mut grammar = Vec::new();
+    match v.get("grammarRules") {
+        None | Some(Value::Null) => {}
+        Some(m @ Value::Object(o)) => {
+            if let Some(k) = o.keys().find(|k| !GRAMMAR_RULES.contains(&k.as_str())) {
+                return Err(CmdError::Params(format!("unknown grammar rule `{k}`; one of {}", GRAMMAR_RULES.join(", "))));
+            }
+            for k in GRAMMAR_RULES {
+                if let Some(b) = bool_param(m, k)? {
+                    grammar.push((k, b));
+                }
+            }
+        }
+        Some(_) => return Err(CmdError::Params("`grammarRules` must be an object of true/false".into())),
+    }
     let add = words_param(v, "addWords")?;
     let remove = words_param(v, "removeWords")?;
 
@@ -140,6 +156,7 @@ fn options(s: &mut Session, v: &Value) -> CmdResult {
         || !mark_values.is_empty()
         || check_spelling.is_some()
         || !paste_values.is_empty()
+        || !grammar.is_empty()
         || !add.is_empty()
         || !remove.is_empty();
     if let Some(name) = author {
@@ -159,6 +176,12 @@ fn options(s: &mut Session, v: &Value) -> CmdResult {
     }
     for (f, m) in paste_values {
         *f(&mut s.prefs) = m;
+    }
+    for (k, on) in grammar {
+        s.prefs.grammar_off.retain(|x| x != k);
+        if !on {
+            s.prefs.grammar_off.push(k.to_string());
+        }
     }
     if let Some(b) = check_spelling {
         s.view.proofing = b;
@@ -201,9 +224,13 @@ pub fn current(s: &Session) -> Value {
         "pasteSame": pr.paste_same,
         "pasteBetween": pr.paste_between,
         "pasteOther": pr.paste_other,
+        "grammarRules": GRAMMAR_RULES.iter().map(|k| (k.to_string(), json!(!pr.grammar_off.iter().any(|x| x == k)))).collect::<serde_json::Map<_, _>>(),
         "dictionary": doc4me_proof::user_dictionary(),
     })
 }
+
+/// Grammar Settings: the rules Doc4Me's grammar check has, by their `grammarRules` name.
+pub const GRAMMAR_RULES: [&str; 5] = ["capitalization", "repeated", "wordForms", "punctuation", "spacing"];
 
 /// Cut, copy, and paste: the `file.options` names of the three paste defaults.
 fn paste_modes() -> [(&'static str, fn(&mut Prefs) -> &mut crate::session::PasteMode); 3] {

@@ -9,6 +9,8 @@ use egui::{Ui, vec2};
 use serde::Serialize;
 use serde_json::{Value, json};
 
+use doc4me_engine::cmd::options::GRAMMAR_RULES;
+
 use crate::WordApp;
 use crate::file_dialogs::{AfterPick, FileDialogRequest};
 use crate::theme::semibold;
@@ -79,6 +81,8 @@ pub enum DataDialog {
     /// Header Options › Create: the field names (Word's list to start), the name being typed and
     /// the one selected; `saving` once the file name is asked for.
     HeaderSource { fields: Vec<String>, name: String, selected: Option<usize>, saving: bool, message: String },
+    /// Writing Style › Settings: each grammar rule on or off, in `GRAMMAR_RULES` order.
+    GrammarSettings { rules: Vec<bool> },
 }
 
 impl DataDialog {
@@ -94,6 +98,7 @@ impl DataDialog {
             DataDialog::Merge { .. } => "mergeToPrinter",
             DataDialog::MergeHelper { .. } => "mailMergeHelper",
             DataDialog::HeaderSource { .. } => "createHeaderSource",
+            DataDialog::GrammarSettings { .. } => "grammarSettings",
         }
     }
 
@@ -110,6 +115,7 @@ impl DataDialog {
             DataDialog::Merge { .. } => "Merge to Printer",
             DataDialog::MergeHelper { .. } => "Mail Merge Helper",
             DataDialog::HeaderSource { .. } => "Create Header Source",
+            DataDialog::GrammarSettings { .. } => "Grammar Settings",
         }
     }
 }
@@ -192,6 +198,10 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<DataDialog> {
             DataDialog::Merge { fixed: name != "merge", printer: name == "mergeToPrinter", records: 0, from: 1, to: n, blank_lines: false }
         }
         "mailMergeHelper" => DataDialog::MergeHelper { picking: 0, message: String::new() },
+        "grammarSettings" => {
+            let off = &app.session.prefs.grammar_off;
+            DataDialog::GrammarSettings { rules: GRAMMAR_RULES.iter().map(|r| !off.iter().any(|x| x == r)).collect() }
+        }
         "createHeaderSource" => DataDialog::HeaderSource {
             fields: doc4me_engine::cmd::mailings::DEFAULT_FIELDS.iter().map(|f| f.to_string()).collect(),
             name: String::new(),
@@ -214,6 +224,7 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut DataDialog) -> bool {
         DataDialog::Merge { fixed, printer, records, from, to, blank_lines } => merge(app, ui, *fixed, printer, records, from, to, blank_lines),
         DataDialog::MergeHelper { picking, message } => merge_helper(app, ui, picking, message),
         DataDialog::HeaderSource { fields, name, selected, saving, message } => header_source(app, ui, fields, name, selected, saving, message),
+        DataDialog::GrammarSettings { rules } => grammar_settings(app, ui, rules),
     }
 }
 
@@ -612,6 +623,33 @@ fn autoformat_review(app: &mut WordApp, ui: &mut Ui, changes: &mut Vec<(String, 
         done |= ui.button(tl!("Close")).clicked();
     });
     done
+}
+
+/// Grammar Settings (File › Options › Proofing › Writing Style › Settings…): the kinds of rule
+/// Doc4Me's grammar check has, each on or off, in English and Polish alike.
+fn grammar_settings(app: &mut WordApp, ui: &mut Ui, rules: &mut [bool]) -> bool {
+    const LABELS: [(&str, &str); 5] = [
+        ("Capitalization", "The first word of a sentence starts with a capital."),
+        ("Repeated words", "The same word twice in a row."),
+        ("Word forms", "\"a\" or \"an\" before the next word; Polish \"w\"/\"we\", \"z\"/\"ze\"."),
+        ("Punctuation", "A space before punctuation, doubled marks, Polish commas before conjunctions."),
+        ("Spacing", "Extra spaces between words."),
+    ];
+    heading(ui, "Grammar");
+    for ((label, why), on) in LABELS.iter().zip(rules.iter_mut()) {
+        ui.checkbox(on, tl!(label)).on_hover_text(tl!(why));
+        ui.label(egui::RichText::new(tl!(why)).small().weak());
+    }
+    ui.add_space(4.0);
+    if ui.button(tl!("Reset All")).clicked() {
+        rules.iter_mut().for_each(|r| *r = true);
+    }
+    let (ok, cancel) = buttons(ui, "OK", true);
+    if ok {
+        let set: serde_json::Map<String, Value> = GRAMMAR_RULES.iter().zip(rules.iter()).map(|(k, on)| (k.to_string(), json!(on))).collect();
+        return run(app, "file.options", json!({"grammarRules": set})).is_some();
+    }
+    cancel
 }
 
 /// Merge (Merge to New Document, Merge to Printer): which records, and whether a line whose
@@ -1172,5 +1210,34 @@ mod tests {
         h.run_steps(3);
         assert!(matches!(form(&mut h), DataDialog::Merge { fixed: false, .. }));
         std::fs::remove_dir_all(&dir).ok();
+    }
+
+    /// dlg-193: File › Options › Proofing › Writing Style › Settings… (Grammar Settings) turns a
+    /// rule off with OK and back on with Reset All.
+    #[test]
+    fn grammar_settings_dialog() {
+        let mut h = harness(app("this is is it."));
+        h.state_mut().run("ui.dialog", json!({"name": "grammarSettings"})).unwrap();
+        h.run_steps(3);
+        match form(&mut h) {
+            DataDialog::GrammarSettings { rules } => {
+                assert_eq!(rules, &vec![true; 5]);
+                rules[1] = false;
+            }
+            other => panic!("{other:?}"),
+        }
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(2);
+        assert_eq!(h.state().session.prefs.grammar_off, ["repeated"]);
+        assert!(h.state().dialog.is_none());
+        h.state_mut().run("ui.dialog", json!({"name": "grammarSettings"})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), DataDialog::GrammarSettings { rules } if !rules[1]));
+        h.get_by_label("Reset All").click();
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(2);
+        assert!(h.state().session.prefs.grammar_off.is_empty());
     }
 }

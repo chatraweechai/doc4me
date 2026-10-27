@@ -450,6 +450,10 @@ pub struct Prefs {
     /// Table of Authorities › Category…: the names of categories 1–16 the user changed (per
     /// user, as Word keeps them in Normal); empty or blank entries are Word's names.
     pub toa_categories: Vec<String>,
+    /// Writing Style › Settings (Grammar Settings): the grammar rules turned off, by name
+    /// (`capitalization`, `repeated`, `wordForms`, `punctuation`, `spacing`; see
+    /// [`crate::cmd::options::GRAMMAR_RULES`]).
+    pub grammar_off: Vec<String>,
     /// File › Options › Advanced › Cut, copy, and paste: what Paste keeps when the content comes
     /// from this document, from another document, or from another program.
     pub paste_same: PasteMode,
@@ -490,6 +494,7 @@ impl Default for Prefs {
             auto_caption: Vec::new(),
             math_functions: None,
             toa_categories: Vec::new(),
+            grammar_off: Vec::new(),
             paste_same: PasteMode::Keep,
             paste_between: PasteMode::Keep,
             paste_other: PasteMode::Keep,
@@ -500,7 +505,19 @@ impl Default for Prefs {
 impl Prefs {
     /// What the spelling check skips.
     pub fn spelling(&self) -> doc4me_proof::Options {
-        doc4me_proof::Options { ignore_uppercase: self.ignore_uppercase, ignore_numbers: self.ignore_numbers, ignore_internet: self.ignore_internet }
+        let off = |r: &str| self.grammar_off.iter().any(|x| x == r);
+        doc4me_proof::Options {
+            ignore_uppercase: self.ignore_uppercase,
+            ignore_numbers: self.ignore_numbers,
+            ignore_internet: self.ignore_internet,
+            grammar: doc4me_proof::GrammarRules {
+                capitalization: !off("capitalization"),
+                repeated: !off("repeated"),
+                word_forms: !off("wordForms"),
+                punctuation: !off("punctuation"),
+                spacing: !off("spacing"),
+            },
+        }
     }
 }
 

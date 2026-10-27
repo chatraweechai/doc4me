@@ -18,7 +18,7 @@
 //!
 //! No English rule (such as `a`/`an`) applies to Polish text.
 
-use crate::{Issue, IssueKind, ProofLang, words};
+use crate::{GrammarRules, Issue, IssueKind, ProofLang, words};
 
 /// Words Polish repeats on purpose: interjections, onomatopoeia and emphatic doubling.
 const ALLOWED_REPEATS: &[&str] = &[
@@ -245,14 +245,29 @@ fn is_consonant(c: char) -> bool {
 
 /// Grammar issues in a paragraph of Polish text, in order.
 pub fn check(text: &str) -> Vec<Issue> {
+    check_with(text, &GrammarRules::default())
+}
+
+/// [`check`] with only the rules Grammar Settings keeps on.
+pub fn check_with(text: &str, rules: &GrammarRules) -> Vec<Issue> {
     let ws: Vec<(usize, usize)> = words(text);
     let mut v = Vec::new();
-    repeated_words(text, &ws, &mut v);
-    spaces(text, &mut v);
-    sentence_capitals(text, &ws, &mut v);
-    missing_commas(text, &ws, &mut v);
-    we_ze(text, &ws, &mut v);
-    doubled_punctuation(text, &mut v);
+    if rules.repeated {
+        repeated_words(text, &ws, &mut v);
+    }
+    if rules.spacing {
+        spaces(text, &mut v);
+    }
+    if rules.capitalization {
+        sentence_capitals(text, &ws, &mut v);
+    }
+    if rules.punctuation {
+        missing_commas(text, &ws, &mut v);
+        doubled_punctuation(text, &mut v);
+    }
+    if rules.word_forms {
+        we_ze(text, &ws, &mut v);
+    }
     v.sort_by_key(|i| (i.start, i.end));
     v
 }

@@ -46,11 +46,35 @@ pub struct Options {
     pub ignore_numbers: bool,
     /// Web and email addresses and file paths (`https://…`, `a@b.org`, `www.…`) are skipped.
     pub ignore_internet: bool,
+    /// Writing Style › Settings: the grammar rules checked.
+    pub grammar: GrammarRules,
 }
 
 impl Default for Options {
     fn default() -> Self {
-        Options { ignore_uppercase: true, ignore_numbers: true, ignore_internet: true }
+        Options { ignore_uppercase: true, ignore_numbers: true, ignore_internet: true, grammar: GrammarRules::default() }
+    }
+}
+
+/// Grammar Settings: which kinds of grammar rule are checked, in every language Doc4Me proofs.
+/// Word's defaults: all on.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct GrammarRules {
+    /// The first word of a sentence starts with a capital.
+    pub capitalization: bool,
+    /// The same word twice ("the the").
+    pub repeated: bool,
+    /// Word forms that depend on the next word: English "a"/"an", Polish "w"/"we", "z"/"ze".
+    pub word_forms: bool,
+    /// Punctuation: a space before it, doubled marks, Polish commas before conjunctions.
+    pub punctuation: bool,
+    /// Extra spaces between words.
+    pub spacing: bool,
+}
+
+impl Default for GrammarRules {
+    fn default() -> Self {
+        GrammarRules { capitalization: true, repeated: true, word_forms: true, punctuation: true, spacing: true }
     }
 }
 
@@ -426,9 +450,14 @@ pub fn suggest_in(word: &str, max: usize, lang: ProofLang) -> Vec<String> {
 /// Grammar issues in a paragraph of text in `lang`: the English rules, the Polish ones
 /// ([`pl::grammar`]), or none for a language Doc4Me doesn't proof.
 pub fn check_grammar_in(text: &str, lang: ProofLang) -> Vec<Issue> {
+    check_grammar_in_with(text, lang, &GrammarRules::default())
+}
+
+/// [`check_grammar_in`] with only the rules Grammar Settings keeps on.
+pub fn check_grammar_in_with(text: &str, lang: ProofLang, rules: &GrammarRules) -> Vec<Issue> {
     match lang {
-        ProofLang::En => check_grammar(text),
-        ProofLang::Pl => pl::grammar::check(text),
+        ProofLang::En => check_grammar_with(text, rules),
+        ProofLang::Pl => pl::grammar::check_with(text, rules),
         ProofLang::Th | ProofLang::Other => Vec::new(),
     }
 }
@@ -481,7 +510,7 @@ pub fn check_text_with(text: &str, spans: &[(Range<usize>, ProofLang)], opts: &O
     langs.sort();
     langs.dedup();
     for lang in langs {
-        v.extend(check_grammar_in(text, lang).into_iter().filter(|i| lang_at(i.start) == lang));
+        v.extend(check_grammar_in_with(text, lang, &opts.grammar).into_iter().filter(|i| lang_at(i.start) == lang));
     }
     v.sort_by_key(|i| (i.start, i.end));
     v
@@ -489,12 +518,18 @@ pub fn check_text_with(text: &str, spans: &[(Range<usize>, ProofLang)], opts: &O
 
 /// Grammar issues in a paragraph of English text.
 pub fn check_grammar(text: &str) -> Vec<Issue> {
+    check_grammar_with(text, &GrammarRules::default())
+}
+
+/// [`check_grammar`] with only the rules Grammar Settings keeps on.
+pub fn check_grammar_with(text: &str, rules: &GrammarRules) -> Vec<Issue> {
     let mut v = Vec::new();
     let ws = words(text);
     for pair in ws.windows(2) {
         let [(a0, b0), (a1, b1)] = pair else { continue };
         let (Some(w0), Some(w1), Some(gap)) = (text.get(*a0..*b0), text.get(*a1..*b1), text.get(*b0..*a1)) else { continue };
-        if gap.trim().is_empty()
+        if rules.repeated
+            && gap.trim().is_empty()
             && w0.eq_ignore_ascii_case(w1)
             && w0.chars().all(char::is_alphabetic)
             && !matches!(w0.to_lowercase().as_str(), "had" | "that" | "bye" | "so")
@@ -508,7 +543,12 @@ pub fn check_grammar(text: &str) -> Vec<Issue> {
                 lang: ProofLang::En,
             });
         }
-        if gap == " " && (w0 == "a" || w0 == "A") && w1.chars().next().is_some_and(|c| "aeiouAEIOU".contains(c)) && !starts_consonant_sound(w1) {
+        if rules.word_forms
+            && gap == " "
+            && (w0 == "a" || w0 == "A")
+            && w1.chars().next().is_some_and(|c| "aeiouAEIOU".contains(c))
+            && !starts_consonant_sound(w1)
+        {
             v.push(Issue {
                 start: *a0,
                 end: *b0,
@@ -518,7 +558,8 @@ pub fn check_grammar(text: &str) -> Vec<Issue> {
                 lang: ProofLang::En,
             });
         }
-        if gap == " "
+        if rules.word_forms
+            && gap == " "
             && (w0 == "an" || w0 == "An")
             && w1.chars().next().is_some_and(|c| c.is_alphabetic() && !"aeiouAEIOUhH".contains(c))
             && !w1.chars().all(|c| c.is_uppercase())
@@ -534,7 +575,7 @@ pub fn check_grammar(text: &str) -> Vec<Issue> {
         }
     }
     // Space before punctuation; doubled spaces.
-    for (i, _) in text.match_indices(" ,").chain(text.match_indices(" .")).chain(text.match_indices(" ;")) {
+    for (i, _) in text.match_indices(" ,").chain(text.match_indices(" .")).chain(text.match_indices(" ;")).filter(|_| rules.punctuation) {
         if text.get(i + 2..).is_some_and(|r| r.starts_with('.') || r.starts_with(',')) {
             continue; // "..." or numbers like " .5"
         }
@@ -547,7 +588,7 @@ pub fn check_grammar(text: &str) -> Vec<Issue> {
             lang: ProofLang::En,
         });
     }
-    for (i, _) in text.match_indices("  ") {
+    for (i, _) in text.match_indices("  ").filter(|_| rules.spacing) {
         if i > 0 && text.get(..i).is_some_and(|t| t.ends_with(' ')) {
             continue;
         }
@@ -564,7 +605,7 @@ pub fn check_grammar(text: &str) -> Vec<Issue> {
     let mut after_end = true;
     for (a, b) in &ws {
         let Some(w) = text.get(*a..*b) else { continue };
-        if after_end && w.chars().next().is_some_and(char::is_lowercase) && w.chars().all(char::is_alphabetic) {
+        if rules.capitalization && after_end && w.chars().next().is_some_and(char::is_lowercase) && w.chars().all(char::is_alphabetic) {
             let fixed: String = w.chars().next().map(|f| f.to_uppercase().chain(w.chars().skip(1)).collect()).unwrap_or_default();
             v.push(Issue {
                 start: *a,
@@ -776,7 +817,7 @@ mod tests {
         let t = "SENTENSE helo2 www.exampel.org";
         let bad = |o: Options| check_spelling_with(t, &o).iter().map(|i| t[i.start..i.end].to_string()).collect::<Vec<_>>();
         assert!(bad(Options::default()).is_empty(), "Word's defaults skip all three");
-        let all = Options { ignore_uppercase: false, ignore_numbers: false, ignore_internet: false };
+        let all = Options { ignore_uppercase: false, ignore_numbers: false, ignore_internet: false, ..Options::default() };
         assert_eq!(bad(all), ["SENTENSE", "helo2", "www", "exampel"]);
         assert_eq!(bad(Options { ignore_uppercase: false, ..Options::default() }), ["SENTENSE"]);
         assert!(is_correct_with("NASA", &all), "capitals that are a word stay correct");
