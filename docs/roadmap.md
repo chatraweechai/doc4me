@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-02 · **Change:** minor (M14: Doc4Me v1.0.0, v1.1.0, v1.1.1 and v1.1.2 published on the fork `veevie55/doc4me`, v1.1.2 the latest; readiness is still 86.0% as measured on Windows on 2026-11-01 (page-count passes 162/222, page-boundary passes 87/222); a page break before an empty paragraph ending a section no longer leaves a blank page, not yet remeasured on Windows) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
+> **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-02 · **Change:** minor (M14: Doc4Me v1.0.0, v1.1.0, v1.1.1 and v1.1.2 published on the fork `veevie55/doc4me`, v1.1.2 the latest; readiness is still 86.0% as measured on Windows on 2026-11-01 (page-count passes 162/222, page-boundary passes 87/222); a page break before an empty paragraph ending a section, or ending a section's last paragraph, no longer leaves a blank page, and hidden table rows and `w:hideMark` are kept and laid out as in Word; Linux page counts 171/222 and page breaks 91/222, not yet remeasured on Windows) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -138,6 +138,7 @@ languages, screen-reader access.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-11-02 | minor | Hidden table rows and `w:hideMark` kept and laid out as in Word (govuk-066 6 pages like Word); a page break ending a section's last paragraph leaves no blank page (zenodo-029, zenodo-140); Linux corpus 171/222 page counts, 91/222 page breaks |
 | 2026-11-02 | minor | M14: v1.0.0–v1.1.2 published on the fork `veevie55/doc4me` (v1.1.2 the latest), after Actions of `chatraweechai/doc4me` stopped over a billing lock; a page break before an empty paragraph ending a section leaves no blank page (Linux corpus: page counts 166 → 168, page breaks 89 → 90) |
 | 2026-11-01 | minor | Map classic New Toolbar and menu customization dialogs to the tested Customize Ribbon replacement; dialogs 187/228, readiness 86.0% (88.5% without deferred) |
 | 2026-11-01 | minor | Map the legacy Advanced Settings dialog to the tested File › Options › Advanced pane; dialogs 184/228, readiness 85.8% (88.3% without deferred) |
