@@ -465,6 +465,12 @@ fn trpr_inner(w: &mut W, r: &RowProps) {
         let after = r.grid_after.min(doc4me_doc::table::MAX_COLS as u32).to_string();
         w.val("w:gridAfter", &after);
     }
+    // CT_TrPrBase: wBefore and wAfter come after gridBefore and gridAfter.
+    for (tag, omitted, width) in [("w:wBefore", r.grid_before, r.w_before), ("w:wAfter", r.grid_after, r.w_after)] {
+        if let Some(v) = width.filter(|v| omitted > 0 && v.is_finite()) {
+            w.empty(tag, &[("w:w", &twips(v.clamp(0.0, 1584.0))), ("w:type", "dxa")]);
+        }
+    }
     if r.cant_split {
         w.empty("w:cantSplit", &[]);
     }

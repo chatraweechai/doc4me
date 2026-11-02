@@ -250,6 +250,8 @@ pub(crate) fn assemble(paras: Vec<ParaOut>) -> Blocks {
                 height_rule: info.height_rule,
                 grid_before: 0,
                 grid_after: 0,
+                w_before: None,
+                w_after: None,
                 header: info.header,
                 cant_split: info.cant_split,
                 fmt_change: None,

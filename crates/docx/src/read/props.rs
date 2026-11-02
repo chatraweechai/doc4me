@@ -473,10 +473,21 @@ pub fn trpr(e: &El) -> RowProps {
                 r.grid_before = k.attr("w:val").and_then(int).map(|v| v.clamp(0, doc4me_doc::table::MAX_COLS as i64) as u32).unwrap_or(0)
             }
             "w:gridAfter" => r.grid_after = k.attr("w:val").and_then(int).map(|v| v.clamp(0, doc4me_doc::table::MAX_COLS as i64) as u32).unwrap_or(0),
+            "w:wBefore" => r.w_before = omitted_width(k),
+            "w:wAfter" => r.w_after = omitted_width(k),
             _ => {}
         }
     }
     r
+}
+
+/// `w:wBefore` / `w:wAfter`: points, for a width in twips (a percentage or `auto` leaves the
+/// omitted columns to the grid).
+fn omitted_width(k: &El) -> Option<f32> {
+    match k.attr("w:type") {
+        None | Some("dxa") => tw(k, "w:w").filter(|v| v.is_finite() && *v >= 0.0).map(|v| v.min(1584.0)),
+        _ => None,
+    }
 }
 
 /// `w:tcPr`; returns the props and whether the cell is a legacy `hMerge` continuation.

@@ -1147,6 +1147,12 @@ pub struct RowProps {
     pub grid_before: u32,
     /// Number of trailing grid columns omitted from this row (`w:gridAfter`).
     pub grid_after: u32,
+    /// Preferred widths of the omitted columns before and after the row's cells, points
+    /// (`w:wBefore`, `w:wAfter` in twips; kept for saving, the layout uses the grid's widths).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub w_before: Option<f32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub w_after: Option<f32>,
     /// Repeat as a header row at the top of each page.
     pub header: bool,
     /// Don't let the row break across pages.

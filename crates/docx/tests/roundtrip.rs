@@ -308,6 +308,8 @@ fn tables_with_merges_round_trip() {
         height_rule: HeightRule::Exact,
         grid_before: 0,
         grid_after: 0,
+        w_before: None,
+        w_after: None,
         header: true,
         cant_split: true,
         fmt_change: None,
@@ -315,6 +317,7 @@ fn tables_with_merges_round_trip() {
     t.rows[1].props = RowProps { height: Some(15.0), height_rule: HeightRule::AtLeast, ..Default::default() };
     t.rows[1].cells.pop();
     t.rows[1].props.grid_after = 1;
+    t.rows[1].props.w_after = Some(36.5);
     t.merge(0, 0, 0, 1); // horizontal
     t.merge(1, 2, 2, 2); // vertical
     {
@@ -334,6 +337,7 @@ fn tables_with_merges_round_trip() {
     t.rows[2].cells[0].blocks = vec![Arc::new(Block::Table(inner)), para_block(Paragraph::new())];
     t.rows[2].cells.pop();
     t.rows[2].props.grid_before = 1;
+    t.rows[2].props.w_before = Some(72.0);
     let mut d = Document::new();
     d.body = vec![para_block(Paragraph::with_text("before", CharProps::default())), Arc::new(Block::Table(t.clone())), para_block(Paragraph::new())];
     let r = rt(&d);
