@@ -1,8 +1,34 @@
-# Handoff: Doc4Me 1.1.2 · readiness 86.0% (วัดบน Windows รอบที่ 17; งานรอบที่ 18 ยังไม่ได้วัดซ้ำบน Windows) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
+# Handoff: Doc4Me 1.1.2 · readiness 86.0% (วัดบน Windows รอบที่ 17; งานรอบที่ 18 ยังไม่ได้วัดซ้ำบน Windows) · ยังไม่มี Release (รอเปิด Actions ใน fork) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
 
-อัปเดต: 2026-11-02 · สาขา `main` · รอบที่ 19 (ออกรุ่น) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
+อัปเดต: 2026-11-02 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 20 (ออกรุ่นต่อ) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
-## สถานะปัจจุบัน (2026-11-02 รอบที่ 19: ออก v1.0.0, v1.1.0, v1.1.1 และ v1.1.2)
+## สถานะปัจจุบัน (2026-11-02 รอบที่ 20: ออกรุ่นต่อใน fork `veevie55/doc4me`)
+
+ผู้ใช้สั่ง (2026-11-02): "อ่าน handoff.md แล้วดำเนินการต่อ" (งานที่ค้างคือการออก v1.0.0, v1.1.0, v1.1.1 แล้วจึง v1.1.2 ของรอบที่ 19)
+
+### สิ่งที่พบ (ตรวจ 2026-11-02 ราว 10:00–10:30 UTC)
+
+- session นี้เชื่อมกับ `veevie55/doc4me` ซึ่งเป็น fork (public) ของ `chatraweechai/doc4me`; บัญชี GitHub ของ session คือ `veevie55` (สร้าง 2026-11-02 09:44 UTC) จึงไม่มีสิทธิ์ API กับ repo ต้นทาง อ่านได้เฉพาะ git (`git ls-remote`) และหน้าเว็บสาธารณะ; `main` ของทั้งสอง repo อยู่ที่ `4b8325c` เท่ากัน
+- เจ้าของ repo push tag ของรุ่นเก่าแล้ว (annotated, tagger `envburiram`, 09:27–09:28 UTC) ชี้ commit ถูกต้องทั้งสาม: `v1.0.0` (`f6055dd`) → `7946cbb57a0f4618711e765a844f46194150ec1f`, `v1.1.0` (`4cfa336`) → `51a9658096d7f5f8b2ea6ed00acd49b5db463a47`, `v1.1.1` (`091a436`) → `be5893e7ab2fe40285205e976ad366bd1d27d50d` (ตรวจด้วย `git ls-remote` ทั้งต้นทางและ fork และ `get_tag`; fork ได้ tag ชุดเดียวกันมาตอน fork)
+- **สาเหตุที่ Actions ไม่จ่าย runner (ปัญหาของรอบที่ 19)**: run ของ tag ใน repo ต้นทาง #154 (41420985373, `v1.0.0`), #155 (41421019066, `v1.1.0`), #156 (41421048403, `v1.1.1`) ล้มภายใน 4–11 วินาที และ annotation ของ job `build` ทั้งสาม run (อ่านจากหน้า run สาธารณะด้วย WebFetch) คือ "The job was not started because your account is locked due to a billing issue." คือบัญชี `chatraweechai` ถูกล็อกเพราะปัญหาการชำระเงิน ไม่ใช่ไฟล์ workflow หรือสิทธิ์ของ action; push build #153 (41413504791) ของ `main` มีข้อความเดียวกัน (#151–#152 ล้มภายในไม่กี่วินาทีเหมือนกัน แต่ไม่ได้เปิดอ่าน) และหน้า Releases ของต้นทางยังว่าง ("There aren't any releases here.")
+- fork `veevie55/doc4me`: ไม่มี Release (Release ไม่ติดมากับการ fork), `list_workflows` ได้ 0 และ `run_workflow` (build อย่างเดียว `release: false`) ได้ HTTP 404 เพราะ GitHub ปิด workflow ของ fork ไว้จนกว่าเจ้าของจะกดเปิดในแท็บ Actions
+- ลิงก์ในโค้ดและเอกสารยังชี้ `chatraweechai/doc4me` (ลิงก์ Releases ใน `README.md`/`README.en.md`, หน้า About, `repository` ใน `Cargo.toml`, URL แค็ตตาล็อก Add-in ใน `crates/engine/src/cmd/addins.rs`, `websiteUrl` ของ MCP, app id `io.github.chatraweechai.doc4me`) Release ที่ออกใน fork จึงไม่มีลิงก์จาก README; session ไม่ได้เปลี่ยน เพราะการย้ายบ้านของโปรเจกต์เป็นการตัดสินใจของเจ้าของ (app id ไม่ควรเปลี่ยน เพราะเป็นชื่อไฟล์ .desktop ไอคอน และ Flatpak ที่ติดตั้งไว้แล้ว)
+
+### [เจ้าของ repo] ทำก่อน (เลือกทางใดทางหนึ่ง)
+
+- ทาง ก ออกใน fork: เปิด https://github.com/veevie55/doc4me/actions กด "I understand my workflows, go ahead and enable them" แล้วบอก session ให้ทำต่อ
+- ทาง ข ออกใน repo ต้นทาง: แก้การชำระเงินของบัญชี `chatraweechai` (Settings › Billing and licensing) แล้ว re-run #154–#156 (re-run ใช้ commit และ workflow เดิมของ tag ไม่ต้อง push tag ซ้ำ) เมื่อทั้งสามออก Release แล้วจึงออก v1.1.2 ด้วย Actions › Windows x64 installer › Run workflow บน `main` ติ๊ก `release`; session ที่เชื่อมกับ fork สั่ง run ในต้นทางไม่ได้
+
+### งานของ session หลังเปิด Actions ใน fork (ทาง ก)
+
+1. tag อยู่ใน fork แล้วโดยไม่มีเหตุการณ์ push จึงไม่มี run ของ tag ให้ใช้ทางสำรองของ workflow: `actions_run_trigger` `run_workflow` workflow `windows-x64-installer.yml` ref `main` inputs `release: true` และ `commit: <sha ข้างบน>` ทีละรุ่น (รันพร้อมกันได้ เพราะ concurrency แยกตาม `commit`)
+   - job `build` เห็นว่ามี tag แล้วจึง build ต่อด้วย `package.ps1` ของ commit นั้น (ขั้นเดียว ไม่ลงนาม เหมือนตอนออกครั้งแรก); job `release` รับ tag ที่ชี้ commit เดียวกัน (`TAG_EXISTS`) ข้ามการสร้าง tag แล้วรัน `gh release create --verify-tag --latest=false` บันทึกของ Release มาจากหัวข้อของรุ่นนั้นใน `CHANGELOG.md` ของ `main`
+   - ข้อจำกัด workflow scope ของ GitHub ([changelog 2023-11-02](https://github.blog/changelog/2023-11-02-github-actions-enforcing-workflow-scope-when-creating-a-release/)) ใช้เฉพาะเมื่อ commit เป้าหมาย "does not have an existing ref (branch head or tag)" จึงไม่ติดเพราะมี tag แล้ว
+2. รอทั้งสามจบ ตรวจว่า Release มี `doc4me-<เวอร์ชัน>-windows-x64.msi` และ `-portable.zip` และไม่เป็น Latest
+3. แล้วจึงออก v1.1.2: inputs `release: true` ไม่ใส่ `commit` (tag สร้างที่ HEAD ของ `main` ซึ่งไฟล์ workflow เหมือน default branch) ห้าม push ไป `main` ระหว่างที่ job `release` รัน; บันทึกของ Release จะย่อเพราะหัวข้อ `[1.1.2]` ยาวเกิน 125,000 ตัวอักษร; โค้ดของ HEAD ของ `main` เท่ากับ `861e994` (หลังจากนั้นแก้แค่ workflow, `docs/releasing.md`, `CHANGELOG.md` หัวข้อ `[1.1.2]` และ handoff) ห้าม push โค้ดแอปก่อน v1.1.2 ออก เพราะ release ของ HEAD จะรวมโค้ดที่ไม่อยู่ในหัวข้อ `[1.1.2]`
+4. ตรวจว่า v1.1.2 เป็น Latest แล้วอัปเดต handoff, `ROADMAP.md` แถว Releases และ `docs/roadmap.md` M14
+
+## สถานะรอบที่ 19 (2026-11-02: ออก v1.0.0, v1.1.0, v1.1.1 และ v1.1.2; ประวัติ เจ้าของ push tag แล้วและพบสาเหตุในรอบที่ 20)
 
 ผู้ใช้สั่ง (2026-11-02): "ออกเวอร์ชันเก่าทั้ง v1.0.0 v1.1.0 v1.1.1 และเวอร์ชันใหม่จากโค้ดล่าสุด v1.1.2" ระหว่างทำสั่งเพิ่มให้ตรวจ tag/draft release อีกครั้ง แล้วให้ตรวจสคริปต์ build ของแต่ละรุ่นเพื่อแก้ workflow ให้ออกรุ่นเก่าจาก commit เดิมได้
 
