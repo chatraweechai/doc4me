@@ -254,6 +254,7 @@ pub(crate) fn assemble(paras: Vec<ParaOut>) -> Blocks {
                 w_after: None,
                 header: info.header,
                 cant_split: info.cant_split,
+                hidden: false,
                 fmt_change: None,
             },
             cells,

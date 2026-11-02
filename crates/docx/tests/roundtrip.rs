@@ -312,6 +312,7 @@ fn tables_with_merges_round_trip() {
         w_after: None,
         header: true,
         cant_split: true,
+        hidden: true,
         fmt_change: None,
     };
     t.rows[1].props = RowProps { height: Some(15.0), height_rule: HeightRule::AtLeast, ..Default::default() };
@@ -326,6 +327,7 @@ fn tables_with_merges_round_trip() {
         c.props.valign = VAlign::Bottom;
         c.props.text_direction = TextDirection::Up;
         c.props.no_wrap = true;
+        c.props.hide_mark = true;
         c.props.margins = Some([2.0, 3.0, 4.0, 5.0]);
         c.props.width = None;
         c.props.width_pct = Some(40.0);

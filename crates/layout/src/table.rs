@@ -3,7 +3,7 @@
 //! moves whole rows or splits them between lines (`split_row`).
 
 use doc4me_doc::numbering::Counters;
-use doc4me_doc::props::{Align, Border, Borders, HeightRule, Rgb, TextDirection, VAlign, VMerge};
+use doc4me_doc::props::{Align, Border, Borders, CharProps, HeightRule, Rgb, TextDirection, VAlign, VMerge};
 use doc4me_doc::styles::{TableStyleParts, TableStyleProps};
 use doc4me_doc::{Block, Blocks, Paragraph, StoryRef, Table};
 use doc4me_geom::Rect;
@@ -307,6 +307,64 @@ fn region_borders(p: &TableStyleParts, (ri, nrows): (usize, usize), (first_g, la
     out
 }
 
+/// Whether `p.text[r]` is only zero-width markers (bookmarks, comment anchors, field and content
+/// control boundaries), which show nothing.
+fn markers_only(p: &Paragraph, r: std::ops::Range<usize>) -> bool {
+    p.text.get(r.clone()).is_some_and(|t| {
+        t.char_indices().all(|(i, c)| c == doc4me_doc::para::OBJ && p.object_at(r.start + i).is_some_and(doc4me_doc::para::InlineObject::is_marker))
+    })
+}
+
+/// Whether everything in `cell` is hidden text: it holds only paragraphs whose runs (but for
+/// zero-width markers such as bookmarks) and paragraph mark are hidden, resolved with its table
+/// style's character formatting `chr`, and no table.
+fn cell_hidden(ctx: &Ctx, cell: &doc4me_doc::table::Cell, chr: Option<&CharProps>) -> bool {
+    cell.blocks.iter().all(|b| match &**b {
+        Block::Para(p) => {
+            let style = p.props.style.as_deref();
+            let hidden = |c: &CharProps| ctx.doc.styles.resolve_char_in(style, chr, c).hidden;
+            hidden(&p.mark) && p.run_ranges().all(|(r, c)| r.is_empty() || hidden(c) || markers_only(p, r))
+        }
+        Block::Table(_) => false,
+    })
+}
+
+/// Whether `p` holds nothing but its paragraph mark: no text, object (but for zero-width markers
+/// such as bookmarks) or list number.
+fn mark_only(ctx: &mut Ctx, p: &Paragraph) -> bool {
+    markers_only(p, 0..p.text.len()) && p.props.numbering.or_else(|| ctx.resolved(p).numbering).filter(|n| n.num != 0).is_none()
+}
+
+/// Lay out the blocks of a cell `cw` wide. With the end-of-cell mark ignored (`w:hideMark`), an
+/// empty last paragraph (the mark alone) is still laid out below the rest, so the caret can go
+/// there, but its height doesn't count towards the row's (ECMA-376 §17.4.21; govuk-066: a 28.25pt
+/// row holding a line, a 15pt line and the empty mark is 29pt tall in Word, not 44pt).
+#[allow(clippy::too_many_arguments)]
+fn layout_cell(
+    ctx: &mut Ctx,
+    story: StoryRef,
+    cell: &doc4me_doc::table::Cell,
+    cpath: &[u32],
+    cw: f32,
+    text: Option<&CellText>,
+    depth: usize,
+) -> BoxLayout {
+    let n = cell.blocks.len();
+    let ignored = cell.props.hide_mark && cell.blocks.last().and_then(|b| b.as_para()).is_some_and(|p| mark_only(ctx, p));
+    if !ignored || n == 0 {
+        return layout_box(ctx, story, &cell.blocks, cpath, cw, text, depth, None);
+    }
+    // As `layout_box` lays out a cell's blocks (no text frames out of the flow in a cell).
+    let mut rest = crate::layout_blocks(ctx, story, &cell.blocks, cpath, 0..n - 1, cw, text, depth, None, false);
+    let mark = crate::layout_blocks(ctx, story, &cell.blocks, cpath, n - 1..n, cw, text, depth, None, false);
+    let top = rest.height;
+    rest.items.extend(mark.items.into_iter().map(|mut it| {
+        it.translate(0.0, top);
+        it
+    }));
+    rest
+}
+
 pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], avail: f32, depth: usize) -> TableLayout {
     let style = table_style(ctx, t);
     let parts = style.as_ref().map(|s| &s.parts);
@@ -410,10 +468,15 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
     }
     let mut rows: Vec<Vec<CellBox>> = Vec::with_capacity(nrows);
     let mut heights: Vec<f32> = Vec::with_capacity(nrows);
+    // Rows Word doesn't show while hidden text isn't shown: the end-of-row mark is hidden and so
+    // is everything in the row. They take no room and draw nothing (their cells are still laid
+    // out, so list numbers count on as before).
+    let mut hidden_rows: Vec<bool> = Vec::with_capacity(nrows);
     for (ri, row) in t.rows.iter().enumerate() {
         let mut g = row.props.grid_before.min(doc4me_doc::table::MAX_COLS as u32) as usize;
         let mut cells = Vec::with_capacity(row.cells.len());
         let mut rh = 0.0f32;
+        let mut row_hidden = row.props.hidden && !ctx.opts.show_hidden && !row.cells.is_empty();
         // The tallest cell margins plus border bands in the row.
         let mut row_insets = 0.0f32;
         let is_header = header_rows && ri == 0;
@@ -464,6 +527,9 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
             // Cell text always has one (empty without a table style), so its paragraphs know
             // they are in a cell.
             let text = Some(cell_text.iter().find(|(r, _)| *r == region).map_or(&no_style, |(_, c)| c));
+            if row_hidden {
+                row_hidden = cell_hidden(ctx, cell, text.map(|t| &t.chr));
+            }
             let mut cpath = path.to_vec();
             cpath.push(ri as u32);
             cpath.push(ci as u32);
@@ -521,7 +587,7 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
                 turned = Some(Turned { turn, len, across, snap, region, ci, top: margins[0] + band_t });
                 (items, len)
             } else {
-                let BoxLayout { mut items, height, floats_bottom } = layout_box(ctx, story, &cell.blocks, &cpath, cw, text, depth, None);
+                let BoxLayout { mut items, height, floats_bottom } = layout_cell(ctx, story, cell, &cpath, cw, text, depth);
                 for it in &mut items {
                     it.translate(x0 + margins[1], margins[0] + band_t);
                 }
@@ -556,9 +622,15 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
             (Some(h), _) if h > 0.0 => rh.max(h + row_insets),
             _ => rh,
         };
-        heights.push(rh.max(4.0));
+        if row_hidden {
+            // Nor does a vertical merge starting here make the rows below taller.
+            cells.iter_mut().for_each(|c| c.h = 0.0);
+        }
+        heights.push(if row_hidden { 0.0 } else { rh.max(4.0) });
+        hidden_rows.push(row_hidden);
         rows.push(cells);
     }
+    let is_hidden = |ri: usize| hidden_rows.get(ri).copied().unwrap_or(false);
     // Vertically merged cells: grow the last row of the merge if the content is taller.
     for ri in 0..rows.len() {
         let restarts: Vec<(usize, f32, usize)> =
@@ -569,8 +641,10 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
                 end += 1;
             }
             let have: f32 = heights.get(ri..=end).map(|s| s.iter().sum()).unwrap_or(0.0);
+            // The last row of the merge that is shown (a hidden row stays without height).
+            let grow = (ri..=end).rev().find(|k| !is_hidden(*k)).unwrap_or(end);
             if h > have
-                && let Some(last) = heights.get_mut(end)
+                && let Some(last) = heights.get_mut(grow)
             {
                 *last += h - have;
             }
@@ -595,6 +669,10 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
     // Second pass: place cells with their row height, fills and borders.
     let mut out = Vec::with_capacity(rows.len());
     for (ri, cells) in rows.into_iter().enumerate() {
+        if is_hidden(ri) {
+            out.push(RowLayout { height: 0.0, items: Vec::new() });
+            continue;
+        }
         let rh = heights.get(ri).copied().unwrap_or(0.0);
         let mut items = Vec::new();
         for (ci, c) in cells.into_iter().enumerate() {
@@ -659,11 +737,27 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
             }
             let b = c.borders;
             let (x0, x1, y0, y1) = (c.x, c.x + c.w, 0.0, rh);
-            let top_vis = c.vmerge != VMerge::Continue;
+            // A continuation draws the merge's top border when the rows above it in the merge,
+            // its first row included, are all hidden.
+            let top_vis = c.vmerge != VMerge::Continue || {
+                let mut k = ri;
+                loop {
+                    let Some(up) = k.checked_sub(1) else { break true };
+                    k = up;
+                    if !is_hidden(k) {
+                        break false;
+                    }
+                    if !cont.get(k).is_some_and(|v| v.contains(&c.g)) {
+                        break true;
+                    }
+                }
+            };
             if top_vis && let Some(e) = b.top.filter(Border::is_visible) {
                 items.push(Placed::Rule { x0, y0, x1, y1: y0, border: e });
             }
-            let last_of_merge = c.vmerge == VMerge::None || !cont.get(ri + 1).is_some_and(|v| v.contains(&c.g));
+            // The merge ends here when no row below that is shown continues it (a hidden row draws
+            // nothing, so the bottom border goes on the last row shown).
+            let last_of_merge = c.vmerge == VMerge::None || (ri + 1..).take_while(|k| cont.get(*k).is_some_and(|v| v.contains(&c.g))).all(is_hidden);
             if last_of_merge && let Some(e) = b.bottom.filter(Border::is_visible) {
                 items.push(Placed::Rule { x0, y0: y1, x1, y1, border: e });
             }
