@@ -2,7 +2,7 @@
 
 **Stage: alpha** · ready for real work **86.0%, measured** ([`docs/readiness.md`](docs/readiness.md), full 222-document corpus, 2026-11-01); the target is 100% measured (raised from 95% by the owner, 2026-10-27), 14.0 points away · 88.5% without 26 deferred owner-bound checks · next: beta, the blocking gaps #1–#7, ~150–230 h away
 
-> **Last reviewed:** 2026-11-01 · **Last updated:** 2026-11-01 · **Change:** minor (readiness is 86.0%; Syncthing save-in-place and two-peer sync are verified; legacy toolbar/menu dialogs map to tested Customize Ribbon replacements; page-count checks are 162/222 while page-break checks remain 87/222) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
+> **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-02 · **Change:** minor (since the 2026-11-01 measurement, not yet remeasured on Windows: text boxes use their own margins (`lIns`…), floating-object anchors no longer make lines taller, an empty paragraph ending a section no longer makes a blank page, rows keep `w:wBefore`/`w:wAfter`, and Review › Chinese Conversion maps `dlg-174` (dialogs 188/228 by the registry); on Linux the same comparator moved page counts 160 → 166 and page breaks 82 → 89 with no document worse; readiness stays 86.0% until `docs/readiness.md` is regenerated) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
 
 Doc4Me aims for complete parity with Microsoft Word, then goes further on speed, openness and
 agent control. This page is the summary; the assessment is
