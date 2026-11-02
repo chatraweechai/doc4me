@@ -4568,3 +4568,48 @@ fn a_vertical_merge_through_hidden_rows_keeps_its_borders() {
     assert_eq!(rules(1), 2, "the merge's top and bottom borders, the hidden last row drawing nothing");
     assert_eq!(rules(0), 2, "the merge's top and bottom borders, the hidden first row drawing nothing");
 }
+
+/// A page break ending a paragraph that itself ends its section, when the next section starts on a
+/// new page, makes no page of its own: the section break starts the next page (zenodo-149's title
+/// page). A continuous next section goes on on the page the break starts.
+#[test]
+fn a_page_break_ending_a_sections_last_paragraph_leaves_no_blank_page() {
+    // (pages, page of the next section's paragraph)
+    let pages = |start: SectionStart| {
+        let mut d = Document::new();
+        let mut a = doc4me_doc::Paragraph::with_text(&format!("A{}", doc4me_doc::para::PAGE_BREAK), Default::default());
+        a.section = Some(Box::new(SectionProps::default()));
+        d.body = vec![doc4me_doc::para_block(a), doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("B", Default::default()))];
+        d.last_section.start = start;
+        let l = lay(&d);
+        (l.pages.len(), l.page_of(&Pos::body(1, 0)).unwrap())
+    };
+    assert_eq!(pages(SectionStart::NextPage), (2, 1));
+    assert_eq!(pages(SectionStart::EvenPage), (2, 1));
+    assert_eq!(pages(SectionStart::OddPage), (3, 2), "page 2 is left blank for the parity");
+    assert_eq!(pages(SectionStart::Continuous), (2, 1));
+}
+
+/// A line holding a page break and floating objects anchored there (no text) stays at the foot of
+/// the page even when it doesn't fit, like a line holding only a page break: the objects take no
+/// room in the line (zenodo-149's title page ends with a logo anchored beside its break).
+#[test]
+fn a_page_break_line_with_a_floating_object_stays_at_the_foot_of_the_page() {
+    let float = doc4me_doc::para::Float {
+        wrap: doc4me_doc::para::Wrap::InFrontOfText,
+        h_rel: doc4me_doc::para::Anchor::Margin,
+        v_rel: doc4me_doc::para::Anchor::Paragraph,
+        ..Default::default()
+    };
+    for fillers in 40..60 {
+        let mut d = Document::from_text(&format!("{}\nNext", "Filler line\n".repeat(fillers)));
+        // Before "Next": a paragraph holding a floating picture and a page break.
+        let mut p = doc4me_doc::Paragraph::with_text(&doc4me_doc::para::PAGE_BREAK.to_string(), Default::default());
+        p.insert_object(0, picture(40.0, 20.0, float.clone()), &Default::default()).unwrap();
+        d.insert_block(StoryRef::Body, &Path::top(fillers), doc4me_doc::Block::Para(p)).unwrap();
+        let l = lay(&d);
+        let last_filler = l.page_of(&Pos::body(fillers - 1, 0)).unwrap();
+        let next = l.page_of(&Pos::body(fillers + 1, 0)).unwrap();
+        assert_eq!(next, last_filler + 1, "{fillers} fillers: Next starts the page after the last filler's");
+    }
+}
