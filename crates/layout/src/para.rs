@@ -1942,6 +1942,12 @@ fn break_lines(pl: &mut ParaLayout, env: &ParaEnv, mark_style: u16, level: Optio
             if c.kind == ClKind::Marker || c0 + k < dropped {
                 continue;
             }
+            // A floating object's anchor isn't text: its run's font doesn't make the line taller
+            // (govuk-005: anchors in runs of the text's size in a paragraph with a 1pt mark,
+            // which Word fits below a table at the foot of the page).
+            if matches!(c.kind, ClKind::Object(_)) && c.obj_h <= 0.0 && !pl.maths.iter().any(|(m, _)| c.kind == ClKind::Object(*m)) {
+                continue;
+            }
             if let Some(st) = pl.styles.get(c.style as usize) {
                 // A picture sits on the baseline of its run: the line keeps that font's ascent
                 // and descent, and grows above the baseline to fit a taller picture.

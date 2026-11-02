@@ -60,9 +60,10 @@ fn tiny_png() -> Vec<u8> {
 #[test]
 fn direction_alignment_and_links_round_trip() {
     let mut d = Document::from_text("a\nb\nc");
-    let a = text_box(&mut d, "Flows on", TextBody { vert: TextVert::Vert, anchor: VAlign::Center, next: None });
-    let b = text_box(&mut d, "", TextBody::default());
-    let c = text_box(&mut d, "", TextBody { vert: TextVert::Stacked, anchor: VAlign::Bottom, next: None });
+    let a = text_box(&mut d, "Flows on", TextBody { vert: TextVert::Vert, anchor: VAlign::Center, next: None, insets: None });
+    // Margins of the box's own (none on the left and top, as forms often have).
+    let b = text_box(&mut d, "", TextBody { insets: Some([0, 0, 91_440, 12_700]), ..Default::default() });
+    let c = text_box(&mut d, "", TextBody { vert: TextVert::Stacked, anchor: VAlign::Bottom, next: None, insets: None });
     for (i, o) in [a, b, c].into_iter().enumerate() {
         d.insert_object(&doc4me_doc::Pos::body(i, 1), o, &Default::default()).unwrap();
     }
@@ -74,6 +75,7 @@ fn direction_alignment_and_links_round_trip() {
     assert!(xml.contains(r#"<wps:txbx id="1">"#), "{xml}");
     assert!(xml.contains(r#"<wps:linkedTxbx id="1" seq="1"/>"#) && xml.contains(r#"<wps:linkedTxbx id="1" seq="2"/>"#));
     assert!(xml.contains(r#"<wps:bodyPr vert="vert" anchor="ctr"/>"#) && xml.contains(r#"<wps:bodyPr vert="wordArtVert" anchor="b"/>"#));
+    assert!(xml.contains(r#"<wps:bodyPr lIns="0" tIns="0" rIns="91440" bIns="12700"/>"#), "{xml}");
     let r = doc4me_docx::read(&bytes).unwrap();
     let got = boxes(&r);
     assert_eq!(r.text_box_chains(), vec![got.clone()]);
@@ -81,6 +83,7 @@ fn direction_alignment_and_links_round_trip() {
     let body = |id: u32| r.parts.get(&id).unwrap().body;
     assert_eq!((body(got[0]).vert, body(got[0]).anchor), (TextVert::Vert, VAlign::Center));
     assert_eq!((body(got[2]).vert, body(got[2]).anchor), (TextVert::Stacked, VAlign::Bottom));
+    assert_eq!((body(got[1]).insets, body(got[0]).insets), (Some([0, 0, 91_440, 12_700]), None));
 }
 
 /// A paragraph with an inline text box whose `wps:wsp` children are `inner`.

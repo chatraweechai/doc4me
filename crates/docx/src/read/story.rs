@@ -1192,6 +1192,17 @@ impl Reader<'_> {
             if let Some(a) = bp.attr("anchor") {
                 part.body.anchor = doc4me_doc::props::valign_from_anchor(a);
             }
+            // Margins: a side the file leaves out keeps Word's default.
+            let sides = ["lIns", "tIns", "rIns", "bIns"];
+            if sides.iter().any(|k| bp.attr(k).is_some()) {
+                let mut insets = doc4me_doc::DEFAULT_BOX_INSETS;
+                for (slot, k) in insets.iter_mut().zip(sides) {
+                    if let Some(v) = bp.attr(k).and_then(|v| v.trim().parse::<i64>().ok()) {
+                        *slot = v.clamp(0, doc4me_doc::MAX_BOX_INSET as i64) as u32;
+                    }
+                }
+                part.body.insets = (insets != doc4me_doc::DEFAULT_BOX_INSETS).then_some(insets);
+            }
         }
         let mut extra = ShapeExtra::default();
         // Arrowheads: any end type but `none` (ECMA-376 §20.1.10.33) is drawn as a triangle.

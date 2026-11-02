@@ -1239,10 +1239,6 @@ fn clear_of_float_tables(mut r: Rect, f: &TableFloat, legacy: f32, text_left: f3
     r
 }
 
-/// A text box's internal margins (Word's defaults: 0.1" left/right, 0.05" top/bottom).
-const BOX_INSET_X: f32 = 7.2;
-const BOX_INSET_Y: f32 = 3.6;
-
 /// Keep what fits in a box `height` tall (items relative to its top): lines that don't fit are
 /// dropped (whole lines; a line that only partly fits too) and so is anything starting below.
 /// The first line always stays, so even a tiny box shows the start of its text.

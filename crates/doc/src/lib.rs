@@ -281,11 +281,27 @@ pub struct TextBody {
     /// continues in when it doesn't fit this one. The linked box shows the rest of this box's
     /// story; its own blocks are unused. See [`Document::text_box_chains`].
     pub next: Option<u32>,
+    /// The margins between the box's edge and its text (Shape Format › Text Box › Left, Top,
+    /// Right and Bottom margin; `wps:bodyPr` `lIns`, `tIns`, `rIns`, `bIns`), EMU: left, top,
+    /// right, bottom. `None`: Word's 0.1" left and right and 0.05" top and bottom.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub insets: Option<[u32; 4]>,
 }
+
+/// Word's text box margins, EMU: left, top, right, bottom (0.1", 0.05", 0.1", 0.05").
+pub const DEFAULT_BOX_INSETS: [u32; 4] = [91_440, 45_720, 91_440, 45_720];
+
+/// Widest text box margin kept, EMU (4": wider margins than any box of a page leave no text).
+pub const MAX_BOX_INSET: u32 = 3_657_600;
 
 impl TextBody {
     pub fn is_default(&self) -> bool {
         *self == TextBody::default()
+    }
+
+    /// The margins between the box's edge and its text, points: left, top, right, bottom.
+    pub fn insets_pt(&self) -> [f32; 4] {
+        self.insets.unwrap_or(DEFAULT_BOX_INSETS).map(|v| v.min(MAX_BOX_INSET) as f32 / 12_700.0)
     }
 }
 

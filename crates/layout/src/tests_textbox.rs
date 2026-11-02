@@ -4,6 +4,10 @@ use super::*;
 use doc4me_doc::props::{TextVert, VAlign};
 use doc4me_doc::{PartKind, Pos, TextBody, para_block};
 
+/// Word's default text box margins: 0.1" left and right, 0.05" top and bottom.
+const BOX_INSET_X: f32 = 7.2;
+const BOX_INSET_Y: f32 = 3.6;
+
 fn lay(doc: &Document) -> DocLayout {
     let mut c = LayoutCache::new();
     layout(doc, &mut c, &LayoutOptions::default())
@@ -71,6 +75,11 @@ fn align_text_and_text_direction_place_the_text_in_the_box() {
     let ((x, y, turn, ..), r) = at(TextBody { vert: TextVert::Vert270, anchor: VAlign::Bottom, ..Default::default() });
     assert_eq!(turn, TextDirection::Up);
     assert!(x > r.x + 100.0 && (y - (r.bottom() - BOX_INSET_Y)).abs() < 1.0, "bottom-aligned turned text sits at the far side: {x},{y} in {r:?}");
+    // The box's own margins (`lIns`…): none at all puts the text at the box's corner.
+    let ((x, y, ..), r) = at(TextBody { insets: Some([0, 0, 0, 0]), ..Default::default() });
+    assert!((x - r.x).abs() < 0.5 && (y - r.y).abs() < 1.0, "{x},{y} in {r:?}");
+    let ((x, ..), r) = at(TextBody { insets: Some([254_000, 0, 0, 0]), ..Default::default() });
+    assert!((x - (r.x + 20.0)).abs() < 0.5, "a 20pt left margin: {x} in {r:?}");
     // Stacked: one letter to a line, upright.
     let mut d = Document::from_text("x");
     let id = text_box(&mut d, 0, "Hi", 144.0, 144.0, TextBody { vert: TextVert::Stacked, ..Default::default() });
