@@ -2,7 +2,7 @@
 
 **Stage: alpha** · ready for real work **86.0%, measured** ([`docs/readiness.md`](docs/readiness.md), full 222-document corpus, 2026-11-01); the target is 100% measured (raised from 95% by the owner, 2026-10-27), 14.0 points away · 88.5% without 26 deferred owner-bound checks · next: beta, the blocking gaps #1–#7, ~150–230 h away
 
-> **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-02 · **Change:** minor (since the 2026-11-01 measurement, not yet remeasured on Windows: text boxes use their own margins (`lIns`…), floating-object anchors no longer make lines taller, an empty paragraph ending a section no longer makes a blank page, rows keep `w:wBefore`/`w:wAfter`, and Review › Chinese Conversion maps `dlg-174` (dialogs 188/228 by the registry); on Linux the same comparator moved page counts 160 → 166 and page breaks 82 → 89 with no document worse; readiness stays 86.0% until `docs/readiness.md` is regenerated) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
+> **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-02 · **Change:** minor (Doc4Me v1.0.0, v1.1.0, v1.1.1 and v1.1.2 released on the fork [`veevie55/doc4me`](https://github.com/veevie55/doc4me/releases), v1.1.2 the latest, after Actions of `chatraweechai/doc4me` stopped over a billing lock; since the 2026-11-01 measurement, not yet remeasured on Windows: text boxes use their own margins (`lIns`…), floating-object anchors no longer make lines taller, an empty paragraph ending a section no longer makes a blank page, nor does a page break before one, rows keep `w:wBefore`/`w:wAfter`, and Review › Chinese Conversion maps `dlg-174` (dialogs 188/228 by the registry); on Linux the same comparator moved page counts 160 → 168 and page breaks 82 → 90 with no document worse; readiness stays 86.0% until `docs/readiness.md` is regenerated) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
 
 Doc4Me aims for complete parity with Microsoft Word, then goes further on speed, openness and
 agent control. This page is the summary; the assessment is
@@ -22,7 +22,7 @@ agent control. This page is the summary; the assessment is
 | Remaining to **beta** | **~150–230 h** of Opus 5.5 agent wall-clock (gaps #1–#7) | estimated |
 | Remaining to **full parity** with Word desktop | **~750–1,250 h** (70–80% parallelizable) | estimated |
 | Commands / tests / code | 625 commands · 1,816 tests · ~188,000 lines of Rust (2026-10-25) | measured (source: `CommandSpec::new` ids, `#[test]` functions, `.rs` lines in `crates`, `apps`, `xtask`) |
-| Releases | Doc4Me v1.1.1 (2026-10-22, GitHub Release, made from the Actions tab; v1.1.0 of 2026-10-21; v1.0.0 of 2026-10-15 was built by Actions but is not tagged yet): Windows MSI and portable zip, x64, unsigned, built by GitHub Actions (WordCraft, upstream, last shipped v0.4.0 on every platform) | measured |
+| Releases | Doc4Me v1.1.2 (2026-11-02, the latest GitHub Release), with v1.1.1, v1.1.0 and v1.0.0 released again from their own commits the same day, all on the fork [`veevie55/doc4me`](https://github.com/veevie55/doc4me/releases) (Actions of `chatraweechai/doc4me` stopped: its account is locked over billing, and its earlier releases and tags were gone): Windows MSI and portable zip, x64, unsigned, built by GitHub Actions (WordCraft, upstream, last shipped v0.4.0 on every platform) | measured |
 
 Hours are calibrated from this repo's PRs (equations #191: ~9.7k lines in ~5 h; `.doc` reader
 #145: ~4.5k lines in ~10 h; layout fidelity PRs run 5–10× slower per line). The earlier "≈120–150 h
@@ -144,6 +144,7 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 
 | Date | What landed |
 |---|---|
+| 2026-11-02 | Released Doc4Me v1.0.0, v1.1.0 and v1.1.1 again from their own commits, then v1.1.2 (the latest), on the fork `veevie55/doc4me`: Actions of `chatraweechai/doc4me` stopped because its account is locked over billing (runs 41430786475, 41430819045, 41430823465, 41433220035; MSI and portable zip each). A page break ending the paragraph before an empty paragraph that only ends its section no longer leaves a blank page when the next section starts on a new page: zenodo-160 and zenodo-169 now have Word's page count, and on Linux the corpus moved from 166 to 168 page counts and from 89 to 90 page breaks, none worse. |
 | 2026-11-01 | Mapped three classic toolbar/menu dialogs to the tested Word 365 replacement, Customize Ribbon; dialogs 187/228 and readiness 86.0% (88.5% without 26 deferred). Verified by `customize_ribbon_opens_and_the_layout_persists` and the full 222-document readiness corpus; commit `3f9b4f3`, report refreshed in `4a7e28d`. |
 | 2026-11-01 | Mapped the legacy `wdDialogToolsAdvancedSettings` check to Doc4Me's tested File › Options › Advanced pane; dialogs 184/228, readiness 85.8% (88.3% without 26 deferred). |
 | 2026-11-01 | Verified `eco-003` with Syncthing 2.1.7: Doc4Me created a DOCX in peer A's synced folder, opened and saved it in place on peer B, and both edits were verified after sync/reopen. Ecosystem is 5/6 (one deferred); readiness rises to 85.7% (88.2% without 26 deferred). |
@@ -245,6 +246,7 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-11-02 | minor | Releases row and progress log: v1.0.0–v1.1.2 released on the fork `veevie55/doc4me` (v1.1.2 the latest); Change line: a page break before an empty paragraph ending a section leaves no blank page (Linux: page counts 168/222, page breaks 90/222) |
 | 2026-10-25 | trivial | Measured readiness 66.1% → 73.4% (stage C: Word's default shortcuts, 23 more Word dialogs, every interface string in all 18 languages, Linux and web builds checked, paragraph spacing, page-break marks and picture lines like Word) |
 | 2026-10-27 | trivial | Readiness target raised from 95% to 100% measured (owner) |
 | 2026-10-25 | trivial | Readiness target raised from 80% to 95% measured (owner) |
