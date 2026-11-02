@@ -4466,3 +4466,105 @@ fn a_page_break_before_an_empty_section_break_paragraph_leaves_no_blank_page() {
     let l = lay(&d);
     assert_eq!((l.pages.len(), l.page_of(&Pos::body(1, 0)).unwrap()), (3, 1), "End on page 2");
 }
+
+/// A one-column table of `rows` (each a cell of paragraphs) followed by a paragraph "after".
+fn table_then_after(rows: Vec<(doc4me_doc::props::RowProps, doc4me_doc::props::CellProps, Vec<doc4me_doc::Paragraph>)>) -> Document {
+    let mut t = Table::new(rows.len(), 1, 200.0);
+    for (r, (rp, cp, paras)) in t.rows.iter_mut().zip(rows) {
+        r.props = rp;
+        r.cells[0].props = doc4me_doc::props::CellProps { span: 1, ..cp };
+        r.cells[0].blocks = paras.into_iter().map(doc4me_doc::para_block).collect();
+    }
+    let mut d = Document::new();
+    d.body =
+        vec![std::sync::Arc::new(doc4me_doc::Block::Table(t)), doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("after", Default::default()))];
+    d
+}
+
+/// The top of the caret at the start of body block 1 (the paragraph after the table).
+fn top_after(d: &Document, opts: &LayoutOptions) -> f32 {
+    layout(d, &mut LayoutCache::new(), opts).caret(&Pos::body(1, 0)).unwrap().top
+}
+
+/// A table row whose end-of-row mark is hidden (`w:trPr/w:hidden`) and whose content is all
+/// hidden text takes no room while hidden text isn't shown, as in Word (govuk-066's forms hide 58
+/// rows); a bookmark in it (a zero-width marker without the hidden formatting) doesn't make it
+/// show. It shows with hidden text shown, when its text isn't hidden, and without the hidden mark.
+#[test]
+fn a_hidden_table_row_takes_no_room() {
+    use doc4me_doc::props::{CellProps, CharProps, RowProps};
+    let hidden = CharProps { hidden: Some(true), ..Default::default() };
+    let plain = |s: &str| doc4me_doc::Paragraph::with_text(s, Default::default());
+    let middle = |text_hidden: bool| {
+        let mut p = doc4me_doc::Paragraph::with_text("two", if text_hidden { hidden.clone() } else { Default::default() });
+        p.mark = hidden.clone();
+        p.insert_object(0, InlineObject::BookmarkStart { name: "b".into() }, &Default::default()).unwrap();
+        p
+    };
+    let three = |row_hidden: bool, text_hidden: bool| {
+        table_then_after(vec![
+            (RowProps::default(), CellProps::default(), vec![plain("one")]),
+            (RowProps { hidden: row_hidden, ..Default::default() }, CellProps::default(), vec![middle(text_hidden)]),
+            (RowProps::default(), CellProps::default(), vec![plain("three")]),
+        ])
+    };
+    let two = table_then_after(vec![
+        (RowProps::default(), CellProps::default(), vec![plain("one")]),
+        (RowProps::default(), CellProps::default(), vec![plain("three")]),
+    ]);
+    let normal = LayoutOptions::default();
+    let shown = LayoutOptions { show_hidden: true, ..Default::default() };
+    let without = top_after(&two, &normal);
+    assert!((top_after(&three(true, true), &normal) - without).abs() < 0.01, "the hidden row takes no room");
+    let full = top_after(&three(false, true), &normal);
+    assert!(full > without + 4.0, "without the hidden end-of-row mark the row shows: {full} vs {without}");
+    assert!((top_after(&three(true, false), &normal) - full).abs() < 0.01, "text that isn't hidden shows the row");
+    assert!((top_after(&three(true, true), &shown) - top_after(&three(false, true), &shown)).abs() < 0.01, "hidden text shown");
+}
+
+/// With the end-of-cell mark ignored (`w:hideMark`), an empty last paragraph in a cell doesn't
+/// count towards the row's height (govuk-066: a 28.25pt row holding a line, a 15pt line and the
+/// empty mark is 29pt tall in Word, not 44pt). The caret can still go into it. A last paragraph
+/// holding text counts, and so does the empty mark without `hideMark`.
+#[test]
+fn hide_mark_leaves_an_empty_last_paragraph_out_of_the_row_height() {
+    use doc4me_doc::props::{CellProps, RowProps};
+    let plain = |s: &str| doc4me_doc::Paragraph::with_text(s, Default::default());
+    let cell = |hide_mark: bool, last: &str| {
+        table_then_after(vec![(RowProps::default(), CellProps { hide_mark, ..Default::default() }, vec![plain("text"), plain(last)])])
+    };
+    let normal = LayoutOptions::default();
+    let one = top_after(&table_then_after(vec![(RowProps::default(), CellProps::default(), vec![plain("text")])]), &normal);
+    let d = cell(true, "");
+    assert!((top_after(&d, &normal) - one).abs() < 0.01, "the empty end-of-cell mark takes no room");
+    let l = lay(&d);
+    let mark = l.caret(&Pos { story: StoryRef::Body, path: Path(vec![0, 0, 0, 1]), off: 0 }).unwrap();
+    let text = l.caret(&Pos { story: StoryRef::Body, path: Path(vec![0, 0, 0, 0]), off: 0 }).unwrap();
+    assert!(mark.top > text.top, "the empty paragraph is laid out below the text: {mark:?}");
+    assert!(top_after(&cell(false, ""), &normal) > one + 5.0, "without hideMark the mark's line counts");
+    assert!(top_after(&cell(true, "more"), &normal) > one + 5.0, "a last paragraph with text counts");
+}
+
+/// A vertical merge running into or out of hidden rows keeps its borders on the rows shown: its
+/// bottom border on the last row shown, its top border on the first.
+#[test]
+fn a_vertical_merge_through_hidden_rows_keeps_its_borders() {
+    use doc4me_doc::props::{CharProps, VMerge};
+    let hidden = CharProps { hidden: Some(true), ..Default::default() };
+    // Horizontal rules drawn on page one.
+    let rules = |hide: usize| {
+        let mut t = Table::new(2, 1, 200.0);
+        t.props.borders = Some(Borders::all(Border::single(0.5)));
+        t.rows[0].cells[0].props.vmerge = VMerge::Restart;
+        t.rows[1].cells[0].props.vmerge = VMerge::Continue;
+        t.rows[hide].props.hidden = true;
+        let mut p = doc4me_doc::Paragraph::with_text(if hide == 0 { "a" } else { "" }, hidden.clone());
+        p.mark = hidden.clone();
+        t.rows[hide].cells[0].blocks = vec![doc4me_doc::para_block(p)];
+        let mut d = Document::new();
+        d.body = vec![std::sync::Arc::new(doc4me_doc::Block::Table(t)), doc4me_doc::para_block(doc4me_doc::Paragraph::new())];
+        lay(&d).pages[0].items.iter().filter(|it| matches!(it, Placed::Rule { y0, y1, .. } if (y0 - y1).abs() < 0.01)).count()
+    };
+    assert_eq!(rules(1), 2, "the merge's top and bottom borders, the hidden last row drawing nothing");
+    assert_eq!(rules(0), 2, "the merge's top and bottom borders, the hidden first row drawing nothing");
+}

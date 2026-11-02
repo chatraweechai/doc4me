@@ -1157,6 +1157,10 @@ pub struct RowProps {
     pub header: bool,
     /// Don't let the row break across pages.
     pub cant_split: bool,
+    /// The end-of-row mark is hidden text (`w:hidden`, ECMA-376 §17.4.20). When everything in the
+    /// row is hidden too, Word doesn't show the row while hidden text isn't shown or printed.
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    pub hidden: bool,
     /// Tracked formatting change (`w:trPrChange`).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fmt_change: Option<Box<PropChange<RowProps>>>,
@@ -1192,6 +1196,10 @@ pub struct CellProps {
     /// Which way the cell's text runs.
     pub text_direction: TextDirection,
     pub no_wrap: bool,
+    /// The end-of-cell mark doesn't count towards the row's height (`w:hideMark`, ECMA-376
+    /// §17.4.21): an empty last paragraph takes no room, as in Word.
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    pub hide_mark: bool,
     /// Tracked formatting change (`w:tcPrChange`).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fmt_change: Option<Box<PropChange<CellProps>>>,

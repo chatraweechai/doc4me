@@ -445,7 +445,7 @@ fn tblpr_inner(w: &mut W, t: &TableProps) {
 /// `w:trPr` (when the row has any), with a tracked change last as for [`tblpr`].
 pub fn trpr(w: &mut W, r: &RowProps, change: Option<&ChangeAttrs>) {
     let change = change.zip(r.fmt_change.as_ref());
-    if r.height.is_none() && r.grid_before == 0 && r.grid_after == 0 && !r.header && !r.cant_split && change.is_none() {
+    if r.height.is_none() && r.grid_before == 0 && r.grid_after == 0 && !r.header && !r.cant_split && !r.hidden && change.is_none() {
         return;
     }
     w.open("w:trPr", &[]);
@@ -484,6 +484,10 @@ fn trpr_inner(w: &mut W, r: &RowProps) {
     }
     if r.header {
         w.empty("w:tblHeader", &[]);
+    }
+    // After tblHeader, as CT_TrPrBase lists them.
+    if r.hidden {
+        w.empty("w:hidden", &[]);
     }
 }
 
@@ -530,6 +534,10 @@ fn tcpr_inner(w: &mut W, c: &CellProps) {
         VAlign::Top => {}
         VAlign::Center => w.val("w:vAlign", "center"),
         VAlign::Bottom => w.val("w:vAlign", "bottom"),
+    }
+    // CT_TcPr: hideMark comes after vAlign.
+    if c.hide_mark {
+        w.empty("w:hideMark", &[]);
     }
 }
 

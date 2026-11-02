@@ -469,6 +469,7 @@ pub fn trpr(e: &El) -> RowProps {
             }
             "w:tblHeader" => r.header = on_off(k),
             "w:cantSplit" => r.cant_split = on_off(k),
+            "w:hidden" => r.hidden = on_off(k),
             "w:gridBefore" => {
                 r.grid_before = k.attr("w:val").and_then(int).map(|v| v.clamp(0, doc4me_doc::table::MAX_COLS as i64) as u32).unwrap_or(0)
             }
@@ -512,6 +513,7 @@ pub fn tcpr(pc: &PropCtx, e: &El) -> (CellProps, bool) {
             "w:tcBorders" => c.borders = Some(borders(k)),
             "w:shd" => c.shading = pc.shd_fill(k),
             "w:noWrap" => c.no_wrap = on_off(k),
+            "w:hideMark" => c.hide_mark = on_off(k),
             "w:tcMar" => c.margins = Some(margins(k)),
             "w:textDirection" => c.text_direction = TextDirection::from_ooxml(k.attr("w:val").unwrap_or("")),
             "w:vAlign" => {
