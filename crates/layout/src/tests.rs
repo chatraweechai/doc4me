@@ -4416,3 +4416,53 @@ fn an_empty_section_break_paragraph_at_the_foot_of_a_page_leaves_no_blank_page()
         assert_eq!(next, last_filler + 1, "{fillers} fillers: section 2 starts right after the page of the last filler");
     }
 }
+
+/// A page break ending the paragraph before an empty paragraph that only ends its section leaves
+/// no blank page when the next section starts on a new page: that paragraph stays on the break's
+/// page and the next section starts the page after it (zenodo-160, as in Word). Before a
+/// continuous section the break still starts a page, where that section goes on.
+#[test]
+fn a_page_break_before_an_empty_section_break_paragraph_leaves_no_blank_page() {
+    // (pages, page of the section's end, page of B)
+    let pages = |start: SectionStart| {
+        let mut d = Document::new();
+        let a = doc4me_doc::Paragraph::with_text(&format!("A{}", doc4me_doc::para::PAGE_BREAK), Default::default());
+        let mut end = doc4me_doc::Paragraph::new();
+        end.section = Some(Box::new(SectionProps::default()));
+        let b = doc4me_doc::Paragraph::with_text("B", Default::default());
+        d.body = vec![doc4me_doc::para_block(a), doc4me_doc::para_block(end), doc4me_doc::para_block(b)];
+        d.last_section.start = start;
+        let l = lay(&d);
+        (l.pages.len(), l.page_of(&Pos::body(1, 0)).unwrap(), l.page_of(&Pos::body(2, 0)).unwrap())
+    };
+    for start in [SectionStart::NextPage, SectionStart::NextColumn, SectionStart::EvenPage] {
+        assert_eq!(pages(start), (2, 0, 1), "{start:?}: A and the section's end on page 1, B on page 2");
+    }
+    // An odd page: page 2 is left blank for the parity, as before.
+    assert_eq!(pages(SectionStart::OddPage), (3, 0, 2));
+    assert_eq!(pages(SectionStart::Continuous), (2, 1, 1));
+    // A page break in the middle of the paragraph, or a section's end holding text, still starts
+    // a page.
+    let mut d = Document::new();
+    let a = doc4me_doc::Paragraph::with_text(&format!("A{}C", doc4me_doc::para::PAGE_BREAK), Default::default());
+    let mut end = doc4me_doc::Paragraph::new();
+    end.section = Some(Box::new(SectionProps::default()));
+    d.body = vec![
+        doc4me_doc::para_block(a),
+        doc4me_doc::para_block(end),
+        doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("B", Default::default())),
+    ];
+    let l = lay(&d);
+    assert_eq!((l.pages.len(), l.page_of(&Pos::body(1, 0)).unwrap()), (3, 1), "C and the section's end on page 2");
+    let mut d = Document::new();
+    let a = doc4me_doc::Paragraph::with_text(&format!("A{}", doc4me_doc::para::PAGE_BREAK), Default::default());
+    let mut end = doc4me_doc::Paragraph::with_text("End", Default::default());
+    end.section = Some(Box::new(SectionProps::default()));
+    d.body = vec![
+        doc4me_doc::para_block(a),
+        doc4me_doc::para_block(end),
+        doc4me_doc::para_block(doc4me_doc::Paragraph::with_text("B", Default::default())),
+    ];
+    let l = lay(&d);
+    assert_eq!((l.pages.len(), l.page_of(&Pos::body(1, 0)).unwrap()), (3, 1), "End on page 2");
+}
