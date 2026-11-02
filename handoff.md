@@ -6,7 +6,15 @@
 
 ผู้ใช้สั่ง (2026-11-02): "ออกเวอร์ชันเก่าทั้ง v1.0.0 v1.1.0 v1.1.1 และเวอร์ชันใหม่จากโค้ดล่าสุด v1.1.2" ระหว่างทำสั่งเพิ่มให้ตรวจ tag/draft release อีกครั้ง แล้วให้ตรวจสคริปต์ build ของแต่ละรุ่นเพื่อแก้ workflow ให้ออกรุ่นเก่าจาก commit เดิมได้
 
-### สถานะ: รอเจ้าของ repo push tag รุ่นเก่า แล้วจึงออก v1.1.2 (ผู้ใช้เลือก 2026-11-02 ให้ออก v1.1.2 หลังรุ่นเก่า เพื่อให้ v1.1.2 เป็น Latest)
+### สถานะ: รอเจ้าของ repo แก้ปัญหา Actions ไม่จ่าย runner และ push tag รุ่นเก่า แล้วจึงออก v1.1.2 (ผู้ใช้เลือก 2026-11-02 ให้ออก v1.1.2 หลังรุ่นเก่า เพื่อให้ v1.1.2 เป็น Latest)
+
+- **ปัญหาใหม่ (พบ 2026-11-02 08:25 UTC): GitHub Actions ไม่จ่าย runner ให้ job ใดเลย** เริ่มระหว่าง 03:47 ถึง 07:51 UTC (job ล่าสุดที่ได้ runner คือ attempt 9 ของ run 41379963417 เวลา 03:37–03:47 UTC ซึ่งถูกยกเลิก)
+  - job `build` (windows) ของ push build `8f7d2e2` (run 41409013327, 07:51 UTC) และ `ee4e1ee` (run 41409192856, 07:53 UTC และ attempt 2 ที่ session re-run 08:25 UTC) ล้มภายใน 2 วินาที: `runner_id` 0, ไม่มี step, log ได้ HTTP 404
+  - job `release` (ubuntu) ของ run 41379967784 ที่ session re-run (attempt 3, 08:28 UTC) ล้มแบบเดียวกัน จึงไม่ได้เป็นเฉพาะ Windows
+  - ไม่ได้เกิดจากไฟล์ workflow: ส่วนระดับ job (`runs-on`, `timeout-minutes`, `outputs`) ไม่เปลี่ยนตั้งแต่ run 41379931795 (`861e994`) ที่ผ่าน และ job ubuntu ข้างบนใช้ workflow ของ `861e994` นั้นเอง; repo เป็น public (นาทีของ runner มาตรฐานฟรี); githubstatus.com ทุกระบบ Operational ไม่มี incident
+  - ข้อความสาเหตุอยู่ใน annotation ของ run ซึ่งเครื่องมือของ session อ่านไม่ได้ (`get_check_run` ได้ output ว่าง)
+  - **[เจ้าของ repo]** เปิด https://github.com/chatraweechai/doc4me/actions/runs/41409192856 อ่านข้อความใต้ "Annotations" แล้วแก้ตามนั้น สาเหตุที่ให้อาการนี้: Settings › Actions › General › Actions permissions ไม่อนุญาต action ที่ใช้ (`actions/checkout`, `actions/upload-artifact`, `actions/download-artifact`, `dtolnay/rust-toolchain`, `Swatinem/rust-cache`) หรือบัญชีถูกล็อกเพราะการชำระเงิน (Settings › Billing and licensing)
+  - push tag ได้ก่อนแก้ แต่ run ของ tag จะล้มแบบเดียวกัน หลังแก้แล้ว re-run run นั้นได้เลย ไม่ต้อง push tag ซ้ำ (re-run ใช้ commit และ workflow เดิมของ tag)
 
 - push ไป `main` แล้ว:
   - `861e994` ออกเวอร์ชัน 1.1.2 (`cargo xtask version set 1.1.2`, ย้าย `[Unreleased]` เป็น `## [1.1.2] - 2026-11-02`) และ workflow รับ input `commit` เพื่อ build/ออก Release ของ commit เก่าบน `main` (ทางสำรอง)
@@ -20,7 +28,8 @@
   - `git tag -a v1.1.0 51a9658096d7f5f8b2ea6ed00acd49b5db463a47 -m "Doc4Me 1.1.0"`
   - `git tag -a v1.1.1 be5893e7ab2fe40285205e976ad366bd1d27d50d -m "Doc4Me 1.1.1"`
   - `git push origin v1.0.0`, `git push origin v1.1.0`, `git push origin v1.1.1` (แยกทีละตัว) แต่ละ tag รัน workflow ของ commit นั้นเองซึ่ง build และออก Release พร้อมหัวข้อ CHANGELOG ของรุ่นนั้น
-- งานของ session หลังเจ้าของ repo push tag:
+- งานของ session หลังเจ้าของ repo แก้ปัญหา Actions และ push tag:
+  0. re-run push build ล่าสุดของ `main` ให้ผ่านก่อน เพื่อยืนยันว่า Actions จ่าย runner แล้ว และ re-run run ของ tag ที่ล้มเพราะปัญหานั้น
   1. รอ run ของ tag ทั้งสามจบ ตรวจว่า Release มี `doc4me-<เวอร์ชัน>-windows-x64.msi` และ `-portable.zip` และ tag ชี้ commit ข้างบน
   2. ถ้า run ของ tag ใดออก Release ไม่ได้ (เช่น workflow ของ `be5893e` ส่ง `--target` ทั้งที่มี tag แล้ว) ให้ใช้ทางสำรอง: re-run failed jobs ของ run 41379967784 (หรือ run ใหม่ `release: true`, `commit: <sha>`) ซึ่งจะเจอ tag ที่ commit เดียวกันแล้วออก Release แบบไม่ย้ายป้าย Latest
   3. แล้วจึงออก v1.1.2: `actions_run_trigger` workflow `windows-x64-installer.yml` ref `main` input `release: true` (ไม่ใส่ `commit`) บันทึกของ Release จะย่อเพราะหัวข้อ `[1.1.2]` ยาวเกิน 125,000 ตัวอักษร; ห้าม push ไป `main` ระหว่างที่ job `release` รัน
@@ -32,7 +41,7 @@
 - draft ที่เจ้าของ repo สร้างไว้ 4 รายการ (ยังไม่มี tag, body ว่าง): `v1.0.0` "Doc4Me v1.0.0", `v1.1.0` "Doc4Me v1.1.0", `v.1.1.1` "Doc4Me v1.1.1" (ชื่อ tag มีจุดเกินหลัง v) และ `v1.1.2` "Doc4Me v1.1.2"; draft ไม่ขวาง `gh release create` (gh ตรวจเฉพาะ Release ที่เผยแพร่แล้วด้วย HEAD `releases/tags/<tag>`) session จึงไม่ได้แตะ draft เหล่านี้
 - commit ของรุ่นเก่า (ยืนยันด้วย `git merge-base --is-ancestor` ว่าอยู่บน `main` ทั้งหมด และ `Cargo.toml` ตรงเวอร์ชัน): 1.0.0 = `7946cbb57a0f4618711e765a844f46194150ec1f` (handoff ข้อ 5.1 เดิม), 1.1.0 = `51a9658096d7f5f8b2ea6ed00acd49b5db463a47`, 1.1.1 = `be5893e7ab2fe40285205e976ad366bd1d27d50d`
 - สคริปต์ build ของทั้งสามรุ่น: workflow รัน `package.ps1 -Arch x64` ขั้นเดียวไม่มี secret (ยังไม่มี `-BuildOnly`), `DOC4ME_BUILD_SHA` มาจาก `git rev-parse HEAD` จึงตรงกับ commit ที่ checkout, `cargo build --release --locked`, ไม่มี `rust-toolchain.toml` (ใช้ Rust stable ปัจจุบัน) และไม่มี workflow รุ่นใดตั้ง `CRAFT_FONTS_DIR`
-- ข้อจำกัดของ GitHub: เอกสาร REST "Create a release" ระบุว่า `GITHUB_TOKEN` ให้ Release สร้าง tag ที่ commit ซึ่งไฟล์ workflow ต่างจาก default branch ไม่ได้ (commit ของรุ่นเก่าต่างทั้งหมด) workflow ใหม่จึงสร้าง tag ด้วย git refs API ก่อนแล้วค่อยออก Release ของ tag นั้น
+- ข้อจำกัดของ GitHub: เอกสาร REST "Create a release" ระบุว่า `GITHUB_TOKEN` ให้ Release สร้าง tag ที่ commit ซึ่งไฟล์ workflow ต่างจาก default branch ไม่ได้ (commit ของรุ่นเก่าต่างทั้งหมด) `861e994` จึงให้ workflow สร้าง tag ด้วย git refs API ก่อนแล้วค่อยออก Release ของ tag นั้น แต่ API นั้นก็ตอบ 403 (ข้างบน) tag ของรุ่นเก่าจึงต้อง push จาก clone
 
 ## สถานะรอบที่ 18 (2026-11-02)
 
