@@ -2914,3 +2914,11 @@ spacing	Normal	標準
 	Lock anchor	アンカーを固定する
 	Remove Frame	フレームの削除
 	Text wrapping	文字列の折り返し
+	Chinese Conversion	中国語の変換
+	Chinese Conversion…	中国語の変換…
+	Converted {n} characters	{n} 文字を変換しました
+	Simplified Chinese to Traditional Chinese	簡体字中国語から繁体字中国語に変換
+	Simplified to Traditional	簡体字から繁体字へ
+	Traditional Chinese to Simplified Chinese	繁体字中国語から簡体字中国語に変換
+	Traditional to Simplified	繁体字から簡体字へ
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	台湾、香港特別行政区、マカオ特別行政区の文字のバリエーションを使用する

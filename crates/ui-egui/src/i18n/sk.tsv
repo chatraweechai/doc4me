@@ -2911,3 +2911,11 @@
 	Lock anchor	Zamknúť ukotvenie
 	Remove Frame	Odstrániť rámec
 	Text wrapping	Obtekanie textu
+	Chinese Conversion	Konverzia čínštiny
+	Chinese Conversion…	Konverzia čínštiny…
+	Converted {n} characters	Konvertované znaky: {n}
+	Simplified Chinese to Traditional Chinese	Zjednodušená čínština na tradičnú čínštinu
+	Simplified to Traditional	Zo zjednodušenej na tradičnú
+	Traditional Chinese to Simplified Chinese	Tradičná čínština na zjednodušenú čínštinu
+	Traditional to Simplified	Z tradičnej na zjednodušenú
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Použiť varianty znakov pre Taiwan, OAO Hongkong a OAO Macao

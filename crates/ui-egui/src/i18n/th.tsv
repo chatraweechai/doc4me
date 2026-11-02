@@ -2923,3 +2923,11 @@ spacing	Normal	ปกติ
 	Lock anchor	ล็อกจุดยึด
 	Remove Frame	เอากรอบออก
 	Text wrapping	การตัดข้อความ
+	Chinese Conversion	การแปลงภาษาจีน
+	Chinese Conversion…	การแปลงภาษาจีน…
+	Converted {n} characters	แปลงแล้ว {n} อักขระ
+	Simplified Chinese to Traditional Chinese	ภาษาจีนตัวย่อเป็นภาษาจีนตัวเต็ม
+	Simplified to Traditional	จีนตัวย่อเป็นตัวเต็ม
+	Traditional Chinese to Simplified Chinese	ภาษาจีนตัวเต็มเป็นภาษาจีนตัวย่อ
+	Traditional to Simplified	จีนตัวเต็มเป็นตัวย่อ
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	ใช้รูปอักขระแบบไต้หวัน เขตปกครองพิเศษฮ่องกง และเขตปกครองพิเศษมาเก๊า

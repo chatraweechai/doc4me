@@ -456,6 +456,11 @@ pub(crate) fn language_menu(ui: &mut Ui, app: &mut WordApp) {
     ui.separator();
     mi(ui, app, "Set Proofing Language…", "ui.dialog", json!({"name": "language"}));
     mi(ui, app, "Language Preferences…", "file.options", json!({"pane": "language"}));
+    // Chinese Conversion (Word's own group when a Chinese editing language is on).
+    ui.separator();
+    mi(ui, app, "Traditional to Simplified", "review.toSimplified", json!({}));
+    mi(ui, app, "Simplified to Traditional", "review.toTraditional", json!({}));
+    mi(ui, app, "Chinese Conversion…", "review.chineseConversion", json!({}));
 }
 
 /// A menu item with a check mark when `checked` (the current choice of several).

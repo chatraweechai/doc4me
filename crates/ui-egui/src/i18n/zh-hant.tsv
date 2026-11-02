@@ -2915,3 +2915,11 @@ spacing	Normal	標準
 	Lock anchor	鎖定錨點
 	Remove Frame	移除框架
 	Text wrapping	文繞圖
+	Chinese Conversion	中文繁簡轉換
+	Chinese Conversion…	中文繁簡轉換…
+	Converted {n} characters	已轉換 {n} 個字元
+	Simplified Chinese to Traditional Chinese	簡體中文轉換為繁體中文
+	Simplified to Traditional	簡轉繁
+	Traditional Chinese to Simplified Chinese	繁體中文轉換為簡體中文
+	Traditional to Simplified	繁轉簡
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	使用台灣、香港特別行政區和澳門特別行政區的字元異體字

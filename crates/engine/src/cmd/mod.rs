@@ -6,6 +6,7 @@ pub mod autoformat;
 pub mod canvas;
 pub mod caret;
 pub mod chart;
+pub mod chinese;
 pub mod citations;
 pub mod column;
 pub mod connectors;
@@ -107,6 +108,7 @@ pub fn registry() -> Registry {
     v.extend(speech::specs());
     v.extend(controls::specs());
     v.extend(forms::specs());
+    v.extend(chinese::specs());
     v.extend(frames::specs());
     v.extend(summarize::specs());
     Registry::new(v)

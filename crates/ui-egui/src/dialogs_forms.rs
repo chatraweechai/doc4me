@@ -180,6 +180,12 @@ pub enum FormDialog {
     Frame {
         form: FrameForm,
     },
+    /// Review › Chinese Conversion: which way, and (to Traditional) the Taiwan, Hong Kong SAR
+    /// and Macao SAR forms.
+    Chinese {
+        to_traditional: bool,
+        variants: bool,
+    },
     /// AutoSummarize: how the summary is shown and how long it is.
     Summarize {
         /// highlight, top or newDocument.
@@ -455,6 +461,7 @@ impl FormDialog {
             FormDialog::Sections { .. } => "sectionProtection",
             FormDialog::Summarize { .. } => "autoSummarize",
             FormDialog::Frame { .. } => "formatFrame",
+            FormDialog::Chinese { .. } => "chineseConversion",
         }
     }
 
@@ -471,6 +478,7 @@ impl FormDialog {
             FormDialog::Sections { .. } => "Section Protection",
             FormDialog::Summarize { .. } => "AutoSummarize",
             FormDialog::Frame { .. } => "Frame",
+            FormDialog::Chinese { .. } => "Chinese Conversion",
         }
     }
 }
@@ -482,6 +490,7 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         "insertFormField" => Some(FormDialog::Insert { kind: "text".into() }),
         "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
         "formatFrame" => Some(FormDialog::Frame { form: FrameForm::read(app) }),
+        "chineseConversion" => Some(FormDialog::Chinese { to_traditional: false, variants: false }),
         "sectionProtection" => {
             let v = app.session.run("review.protectSections", &json!({})).ok()?;
             let protected = v["sections"].as_array().map(|a| a.iter().map(|b| b.as_bool().unwrap_or(true)).collect()).unwrap_or_default();
@@ -506,6 +515,24 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
 pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
     match d {
         FormDialog::Frame { form } => frame_body(app, ui, form),
+        FormDialog::Chinese { to_traditional, variants } => {
+            ui.radio_value(to_traditional, false, tl!("Traditional Chinese to Simplified Chinese"));
+            ui.radio_value(to_traditional, true, tl!("Simplified Chinese to Traditional Chinese"));
+            ui.add_enabled(*to_traditional, egui::Checkbox::new(variants, tl!("Use Taiwan, Hong Kong SAR, and Macao SAR character variants")));
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok {
+                let to = if *to_traditional { "traditional" } else { "simplified" };
+                match app.run("review.chineseConversion", json!({"to": to, "variants": *to_traditional && *variants})) {
+                    Ok(v) => {
+                        let n = v["changed"].as_u64().unwrap_or(0);
+                        app.status(crate::i18n::fmt(tl!("Converted {n} characters"), &[("n", &n.to_string())]));
+                        return true;
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
         FormDialog::Summarize { kind, length, update_properties } => {
             ui.label(egui::RichText::new(tl!("Type of summary")).strong());
             for (k, label) in [
@@ -999,6 +1026,20 @@ mod tests {
         h.run_steps(12);
         assert!(h.state().dialog.is_none());
         assert!(frame(&mut h).is_null());
+    }
+
+    #[test]
+    fn chinese_conversion_dialog_converts_the_document() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("汉语")), Services::default()));
+        h.state_mut().run("review.chineseConversion", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Chinese { to_traditional: false, variants: false }));
+        h.get_by_label("Simplified Chinese to Traditional Chinese").click();
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "漢語");
     }
 
     #[test]

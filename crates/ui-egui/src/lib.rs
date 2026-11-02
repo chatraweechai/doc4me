@@ -1837,6 +1837,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "tools.autoSummarize" if !has("type") => Some("autoSummarize"),
         // Format Frame without settings: the Frame dialog.
         "format.frame" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formatFrame"),
+        // Chinese Conversion without a direction asks which way.
+        "review.chineseConversion" if !has("to") => Some("chineseConversion"),
         // Enclose Characters without a shape (null is one: it takes the enclosure away).
         "format.enclose" if params.get("shape").is_none() => Some("enclose"),
         // Footnote and Endnote without settings shows its dialog (#385).

@@ -2926,3 +2926,11 @@ spacing	Normal	标准
 	Lock anchor	锁定标记
 	Remove Frame	删除图文框
 	Text wrapping	文字环绕
+	Chinese Conversion	中文简繁转换
+	Chinese Conversion…	中文简繁转换…
+	Converted {n} characters	已转换 {n} 个字符
+	Simplified Chinese to Traditional Chinese	简体中文转换为繁体中文
+	Simplified to Traditional	简转繁
+	Traditional Chinese to Simplified Chinese	繁体中文转换为简体中文
+	Traditional to Simplified	繁转简
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	使用台湾、香港特别行政区和澳门特别行政区的字符变体

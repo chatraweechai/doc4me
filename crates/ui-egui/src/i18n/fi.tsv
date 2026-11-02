@@ -2911,3 +2911,11 @@
 	Lock anchor	Lukitse ankkuri
 	Remove Frame	Poista kehys
 	Text wrapping	Tekstin rivitys
+	Chinese Conversion	Kiinan muunto
+	Chinese Conversion…	Kiinan muunto…
+	Converted {n} characters	Muunnettu {n} merkkiä
+	Simplified Chinese to Traditional Chinese	Yksinkertaistettu kiina perinteiseksi kiinaksi
+	Simplified to Traditional	Yksinkertaistetusta perinteiseen
+	Traditional Chinese to Simplified Chinese	Perinteinen kiina yksinkertaistetuksi kiinaksi
+	Traditional to Simplified	Perinteisestä yksinkertaistettuun
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Käytä Taiwanin, Hongkongin erityishallintoalueen ja Macaon erityishallintoalueen merkkivariantteja

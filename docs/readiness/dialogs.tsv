@@ -172,7 +172,7 @@ dlg-170	wdDialogTableSplitCells	137	(none)	table.split	registry
 dlg-171	wdDialogTableTableOptions	1080	(none)	table.cellMargins	registry		Table Options: default cell margins
 dlg-172	wdDialogTableToText	128	(none)	table.toText	registry		
 dlg-173	wdDialogTableWrapping	854	(none)	table.positioning	registry		Table Positioning: position, relative to, distance from text, move with text, overlap
-dlg-174	wdDialogTCSCTranslator	1156	(none)	-	registry		Chinese conversion
+dlg-174	wdDialogTCSCTranslator	1156	(none)	review.chineseConversion	registry		Chinese Conversion: Traditional ↔ Simplified Chinese with OpenCC's character tables (assets/opencc), the selection or the whole document, formatting kept, tracked; Taiwan, Hong Kong SAR and Macao SAR variants; UI test chinese_conversion_dialog_converts_the_document
 dlg-175	wdDialogTextToTable	127	(none)	table.fromText	registry		
 dlg-176	wdDialogToolsAcceptRejectChanges	506	(none)	review.acceptReject	registry		Accept or Reject Changes
 dlg-177	wdDialogToolsAdvancedSettings	206	(none)	file.options	registry		Legacy Advanced Settings maps to File › Options › Advanced (`file.options`, `pane=advanced`; UI test `options_panes_open_and_change_settings`)

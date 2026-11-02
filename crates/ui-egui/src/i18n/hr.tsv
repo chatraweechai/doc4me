@@ -2911,3 +2911,11 @@
 	Lock anchor	Zaključaj sidro
 	Remove Frame	Ukloni okvir
 	Text wrapping	Prelamanje teksta
+	Chinese Conversion	Kineska konverzija
+	Chinese Conversion…	Kineska konverzija…
+	Converted {n} characters	Pretvoreno znakova: {n}
+	Simplified Chinese to Traditional Chinese	Pojednostavljeni kineski u tradicionalni kineski
+	Simplified to Traditional	Pojednostavljeni u tradicionalni
+	Traditional Chinese to Simplified Chinese	Tradicionalni kineski u pojednostavljeni kineski
+	Traditional to Simplified	Tradicionalni u pojednostavljeni
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Koristi varijante znakova za Tajvan, PUP Hong Kong i PUP Makao

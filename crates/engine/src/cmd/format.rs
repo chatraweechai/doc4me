@@ -456,11 +456,23 @@ fn convert_digits(s: &mut Session, thai: bool) -> CmdResult {
         convert_generated_numbers(s, &a, &b, thai)?;
         return sel_result(s);
     }
+    map_chars(s, &a, &b, &|c| swap_digit(c, thai))?;
+    convert_generated_numbers(s, &a, &b, thai)?;
+    sel_result(s)
+}
+
+/// Replace each character between `a` and `b` that `map` gives another form of (digits, Chinese
+/// characters), and return how many changed. Each run keeps its formatting; text already deleted
+/// and controls whose contents can't be edited (or still show their placeholder) stay as they
+/// are; with Track Changes on, each changed stretch becomes a deletion and an insertion. The
+/// selection keeps covering the converted text (the new form may be longer or shorter).
+pub(crate) fn map_chars(s: &mut Session, a: &Pos, b: &Pos, map: &dyn Fn(char) -> Option<char>) -> Result<usize, CmdError> {
     let tracked = s.doc.settings.track_changes;
     // A control whose contents can't be edited, or still showing its placeholder, stays as it is.
     let fenced: Vec<doc4me_doc::ControlRange> =
         s.doc.control_ranges(a.story).into_iter().filter(|r| !r.control.lock.can_edit() || r.control.showing_placeholder).collect();
-    for path in s.doc.paths_between(&a, &b) {
+    let mut changed = 0usize;
+    for path in s.doc.paths_between(a, b) {
         let groups = {
             let Some(p) = s.doc.para(a.story, &path) else { continue };
             let from = if path == a.path { a.off } else { 0 };
@@ -469,11 +481,13 @@ fn convert_digits(s: &mut Session, thai: bool) -> CmdResult {
             let deleted: Vec<std::ops::Range<usize>> = p.run_ranges().filter(|(_, c)| c.del.is_some()).map(|(r, _)| r).collect();
             let conv: Vec<String> = src
                 .char_indices()
-                .map(|(i, c)| match swap_digit(c, thai) {
+                .map(|(i, c)| match map(c) {
                     Some(d)
-                        if !deleted.iter().any(|r| r.contains(&(from + i)))
+                        if d != c
+                            && !deleted.iter().any(|r| r.contains(&(from + i)))
                             && !fenced.iter().any(|r| r.contains(&Pos { story: a.story, path: path.clone(), off: from + i })) =>
                     {
+                        changed += 1;
                         d.to_string()
                     }
                     _ => c.to_string(),
@@ -494,7 +508,7 @@ fn convert_digits(s: &mut Session, thai: bool) -> CmdResult {
                 let x = Pos { story: a.story, path: path.clone(), off: *start };
                 let y = Pos { off: *end, ..x.clone() };
                 super::track_delete(s, &x, &y)?;
-                // Text marked deleted stays, and the new digits follow it; the author's own
+                // Text marked deleted stays, and the new characters follow it; the author's own
                 // insertion is gone, and they take its place.
                 let at = if len(s) == before { *end } else { *start };
                 props.ins = Some(super::new_revision(s, doc4me_doc::RevisionKind::Insert));
@@ -518,8 +532,7 @@ fn convert_digits(s: &mut Session, thai: bool) -> CmdResult {
             }
         }
     }
-    convert_generated_numbers(s, &a, &b, thai)?;
-    sel_result(s)
+    Ok(changed)
 }
 
 /// A number field's instruction with its digits switched: `\* Arabic` ↔ `\* ThaiArabic`, and
