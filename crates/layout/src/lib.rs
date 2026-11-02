@@ -3005,7 +3005,15 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
                 && p.text
                     .get(l.start..l.stop)
                     .is_some_and(|t| t.chars().all(|c| matches!(c, doc4me_doc::para::PAGE_BREAK | doc4me_doc::para::COLUMN_BREAK)));
-            if bottom > limit + 0.01 && l1 == l0 && !pb.at_top() && !split && !only_break {
+            // So does an empty paragraph that only ends its section when the next section starts
+            // on a new page (zenodo-135: Word keeps it below the page's last line).
+            let only_section_end = bottom > limit + 0.01
+                && l1 == l0
+                && p.section.is_some()
+                && p.text.is_empty()
+                && p.objects.is_empty()
+                && ctx.doc.sections().iter().find(|(end, _)| *end > block).is_some_and(|(_, s)| s.start != SectionStart::Continuous);
+            if bottom > limit + 0.01 && l1 == l0 && !pb.at_top() && !split && !only_break && !only_section_end {
                 break;
             }
             new_notes.extend(line_notes);

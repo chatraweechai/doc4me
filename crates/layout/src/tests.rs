@@ -4397,3 +4397,22 @@ fn a_footer_page_number_frame_stands_beside_the_text() {
     });
     assert!(at_stop, "{lines:?}");
 }
+
+/// An empty paragraph that only ends its section stays at the foot of the page even when it
+/// doesn't fit there, when the next section starts on a new page: the page after it holds the
+/// next section, never a page of its own (zenodo-135). For a continuous break it still moves.
+#[test]
+fn an_empty_section_break_paragraph_at_the_foot_of_a_page_leaves_no_blank_page() {
+    for fillers in 40..60 {
+        let mut d = Document::from_text(&format!("{}\nNext", "Filler line\n".repeat(fillers)));
+        let n = fillers;
+        // The empty paragraph before "Next" ends section 1; section 2 starts on a new page.
+        d.insert_block(StoryRef::Body, &Path::top(n), doc4me_doc::Block::Para(doc4me_doc::Paragraph::new())).unwrap();
+        d.para_mut(StoryRef::Body, &Path::top(n)).unwrap().section = Some(Box::new(SectionProps::default()));
+        d.last_section.start = SectionStart::NextPage;
+        let l = lay(&d);
+        let last_filler = l.page_of(&Pos::body(n - 1, 0)).unwrap();
+        let next = l.page_of(&Pos::body(n + 1, 0)).unwrap();
+        assert_eq!(next, last_filler + 1, "{fillers} fillers: section 2 starts right after the page of the last filler");
+    }
+}
