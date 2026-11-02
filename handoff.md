@@ -36,7 +36,7 @@
 
 ### ข้อค้นพบที่ต้องให้เจ้าของ repo ตัดสิน
 
-- **บ้านของโปรเจกต์**: ลิงก์ Releases ใน `README.md`/`README.en.md`, หน้า About, `repository` ใน `Cargo.toml`, URL แค็ตตาล็อก Add-in (`crates/engine/src/cmd/addins.rs`), `websiteUrl` ของ MCP และลิงก์ท้าย `CHANGELOG.md` ยังชี้ `chatraweechai/doc4me` ซึ่งไม่มี Release; Release อยู่ที่ https://github.com/veevie55/doc4me/releases session ไม่ได้เปลี่ยน เพราะเป็นการตัดสินใจของเจ้าของ (app id `io.github.chatraweechai.doc4me` ไม่ควรเปลี่ยน เพราะเป็นชื่อไฟล์ .desktop ไอคอน และ Flatpak ที่ติดตั้งไว้แล้ว; แค็ตตาล็อก Add-in ใน `raw.githubusercontent.com/chatraweechai/...` ยังเปิดได้เพราะ repo ต้นทางยัง public)
+- **บ้านของโปรเจกต์ (ตัดสินแล้วสำหรับ README)**: ผู้ใช้สั่ง (2026-11-02) ไม่เปลี่ยนลิงก์ Releases ใน README จึงคงชี้ `chatraweechai/doc4me` แม้ Release อยู่ที่ https://github.com/veevie55/doc4me/releases (บันทึกไว้ในการตัดสินใจถาวรด้านล่าง); ลิงก์อื่นที่ชี้ `chatraweechai/doc4me` (หน้า About, `repository` ใน `Cargo.toml`, URL แค็ตตาล็อก Add-in ใน `crates/engine/src/cmd/addins.rs`, `websiteUrl` ของ MCP และลิงก์ท้าย `CHANGELOG.md`) ก็ยังไม่ได้เปลี่ยน (app id `io.github.chatraweechai.doc4me` ไม่ควรเปลี่ยน เพราะเป็นชื่อไฟล์ .desktop ไอคอน และ Flatpak ที่ติดตั้งไว้แล้ว; แค็ตตาล็อก Add-in ใน `raw.githubusercontent.com/chatraweechai/...` ยังเปิดได้เพราะ repo ต้นทางยัง public)
 - ถ้าจะให้ต้นทางมี Release ด้วย: แก้การชำระเงินของ `chatraweechai` แล้ว re-run #154–#156 (ใช้ commit และ workflow เดิมของ tag) และ sync `main` ของต้นทางกับ fork ก่อนออก v1.1.2 ที่นั่น (tag `v1.1.2` ของ fork ชี้ `3e00170` ซึ่งต้นทางยังไม่มี)
 - `zenodo-160` หน้า 8: หน้า PDF อ้างอิงมีข้อความ comment "Commented [SP1]: I updated this table …" ในแถบ markup แต่ไฟล์ .docx ไม่มี `word/comments.xml` แล้ว (คนละรุ่นในส่วนของ comment) ตัวตรวจต้น/ท้ายหน้าจึงไม่ผ่านทั้งที่เนื้อหาในหน้าตรงกัน (ตารางจบที่ "66 60 60 66 62 62" ทั้งสองฝั่ง); ไม่ได้แก้ manifest หรือ comparator ตามกติกา
 - ข้อค้นพบของรอบที่ 18 (`govuk-026`, `govuk-018`, `zenodo-104`) ยังรอการตัดสินใจ
@@ -179,6 +179,7 @@
 - ไม่มีผู้ให้บริการ AI ในโปรแกรม
 - TH SarabunIT๙ ไม่มีค่าวัด: เครื่องที่ไม่มีฟอนต์นี้แสดงด้วย Sarabun และแจ้งผู้ใช้ตอนเปิดไฟล์; ไม่ต้องให้เจ้าของภาษาตรวจ UI ไทย
 - `.gitignore` คง `/target` ฯลฯ ไว้ (ผู้ใช้เลือกลบแค่บรรทัด `/.claude/`)
+- ไม่เปลี่ยนลิงก์ Releases ใน `README.md`/`README.en.md`: คงชี้ `https://github.com/chatraweechai/doc4me/releases` แม้ Release ของ v1.0.0–v1.1.2 อยู่ที่ fork `veevie55/doc4me` (ผู้ใช้สั่ง 2026-11-02 รอบที่ 20)
 - ลำดับงาน (ผู้ใช้สั่งซ้ำ 2026-11-02): commit/push `main` ก่อน แล้วตรวจทีหลัง; ตรวจเสร็จ commit/push ที่แก้ แล้วบันทึก `handoff.md` และ `ROADMAP.md` ตามสถานะปัจจุบัน
 
 ### ประวัติถึงรอบที่ 8 (2026-10-25; รายละเอียดและผลตรวจอยู่ใน `CHANGELOG.md` `[Unreleased]`)
