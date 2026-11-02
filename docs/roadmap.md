@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-11-01 · **Last updated:** 2026-11-01 · **Change:** minor (readiness is 86.0%; four legacy dialog checks map to tested modern replacements; Syncthing save-in-place and two-peer sync are verified; page-count passes are 162/222 and page-boundary passes 87/222) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
+> **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-02 · **Change:** minor (M14: Doc4Me v1.0.0, v1.1.0, v1.1.1 and v1.1.2 published on the fork `veevie55/doc4me`, v1.1.2 the latest; readiness is still 86.0% as measured on Windows on 2026-11-01 (page-count passes 162/222, page-boundary passes 87/222); a page break before an empty paragraph ending a section no longer leaves a blank page, not yet remeasured on Windows) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -63,7 +63,7 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 | M11 | Draw and objects | text wrap, text boxes, canvas handles, rotation (#332), ink pens and eraser (#307), contour wrap (#354), lasso, Add Pen, Ink to Shape and Ink Replay (#395) done; grouping (`arrange.group`) and Ink to Math (own recogniser, 2026-10-25) done | 30–50 h |
 | M12 | Formats breadth (PDF, ODT, RTF, HTML, MD, TXT, LaTeX, `.doc` import) | done (first versions); encrypted `.docx` opens and saves (agile encryption); `.doc` write, encrypted `.doc`, minor formats missing | 60–100 h |
 | M13 | Performance budgets | on track (1.4 ms relayout); large real-world documents unmeasured | 10–20 h |
-| M14 | 1.0 polish, packaging, signing | Doc4Me v1.1.0 and v1.1.1 published (Windows x64 MSI and portable zip, unsigned; CI signs once the signing secrets are set); WordCraft, upstream, shipped v0.1.0–v0.4.0 on every platform | — |
+| M14 | 1.0 polish, packaging, signing | Doc4Me v1.0.0, v1.1.0, v1.1.1 and v1.1.2 (the latest) published on the fork [`veevie55/doc4me`](https://github.com/veevie55/doc4me/releases) on 2026-11-02, the earlier three rebuilt from their own commits (Windows x64 MSI and portable zip, unsigned; CI signs once the signing secrets are set); WordCraft, upstream, shipped v0.1.0–v0.4.0 on every platform | — |
 | M15 | Localization (12 key languages, RTL interface, proofing languages) | 30/95 catalogs meet the 95% string threshold; English, Polish and Thai proofing, a proofing language per run | 75–120 h |
 | M16 | Right-to-left and East Asian typography | RTL paragraphs done (#207) | 30–45 h |
 
@@ -138,6 +138,7 @@ languages, screen-reader access.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-11-02 | minor | M14: v1.0.0–v1.1.2 published on the fork `veevie55/doc4me` (v1.1.2 the latest), after Actions of `chatraweechai/doc4me` stopped over a billing lock; a page break before an empty paragraph ending a section leaves no blank page (Linux corpus: page counts 166 → 168, page breaks 89 → 90) |
 | 2026-11-01 | minor | Map classic New Toolbar and menu customization dialogs to the tested Customize Ribbon replacement; dialogs 187/228, readiness 86.0% (88.5% without deferred) |
 | 2026-11-01 | minor | Map the legacy Advanced Settings dialog to the tested File › Options › Advanced pane; dialogs 184/228, readiness 85.8% (88.3% without deferred) |
 | 2026-11-01 | minor | Verify eco-003 with Syncthing 2.1.7: save-in-place on peer B synced to peer A and both edits reopened; ecosystem 5/6, readiness 85.7% (88.2% without deferred) |

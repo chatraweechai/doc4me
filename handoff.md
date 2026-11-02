@@ -1,32 +1,50 @@
-# Handoff: Doc4Me 1.1.2 · readiness 86.0% (วัดบน Windows รอบที่ 17; งานรอบที่ 18 ยังไม่ได้วัดซ้ำบน Windows) · ยังไม่มี Release (รอเปิด Actions ใน fork) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
+# Handoff: Doc4Me 1.1.2 · readiness 86.0% (วัดบน Windows รอบที่ 17; งานรอบที่ 18–20 ยังไม่ได้วัดซ้ำบน Windows) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
 
-อัปเดต: 2026-11-02 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 20 (ออกรุ่นต่อ) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
+อัปเดต: 2026-11-02 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 20 (ออกรุ่นครบ และแก้หน้าเปล่าหลังตัวแบ่งหน้า) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
-## สถานะปัจจุบัน (2026-11-02 รอบที่ 20: ออกรุ่นต่อใน fork `veevie55/doc4me`)
+## สถานะปัจจุบัน (2026-11-02 รอบที่ 20: ออกรุ่นครบใน fork `veevie55/doc4me` และแก้หน้าเปล่าหลังตัวแบ่งหน้า)
 
-ผู้ใช้สั่ง (2026-11-02): "อ่าน handoff.md แล้วดำเนินการต่อ" (งานที่ค้างคือการออก v1.0.0, v1.1.0, v1.1.1 แล้วจึง v1.1.2 ของรอบที่ 19)
+ผู้ใช้สั่ง (2026-11-02): "อ่าน handoff.md แล้วดำเนินการต่อ" (งานที่ค้างคือการออก v1.0.0, v1.1.0, v1.1.1 แล้วจึง v1.1.2 ของรอบที่ 19) ระหว่างทำ ผู้ใช้เลือกให้ออก Release ใน fork และเปิด Actions ของ fork เอง
 
-### สิ่งที่พบ (ตรวจ 2026-11-02 ราว 10:00–10:30 UTC)
+### ผลการออกรุ่น (ตรวจด้วย GitHub API และหน้า Releases)
 
-- session นี้เชื่อมกับ `veevie55/doc4me` ซึ่งเป็น fork (public) ของ `chatraweechai/doc4me`; บัญชี GitHub ของ session คือ `veevie55` (สร้าง 2026-11-02 09:44 UTC) จึงไม่มีสิทธิ์ API กับ repo ต้นทาง อ่านได้เฉพาะ git (`git ls-remote`) และหน้าเว็บสาธารณะ; `main` ของทั้งสอง repo อยู่ที่ `4b8325c` เท่ากัน
+| รุ่น | commit ที่ build (tag) | run | ไฟล์แนบ | ป้าย |
+|---|---|---|---|---|
+| v1.0.0 | `7946cbb` (annotated tag ของเจ้าของ) | 41430786475 | `doc4me-1.0.0-windows-x64.msi` 30,146,560 B, `-portable.zip` 40,242,969 B | — |
+| v1.1.0 | `51a9658` (annotated tag ของเจ้าของ) | 41430819045 | msi 33,005,568 B, zip 43,571,345 B | — |
+| v1.1.1 | `be5893e` (annotated tag ของเจ้าของ) | 41430823465 | msi 32,997,376 B, zip 43,584,023 B | — |
+| v1.1.2 | `3e00170` (HEAD ของ `main` ตอนสั่ง; job `release` สร้าง tag เอง; โค้ดแอปเท่ากับ `861e994`) | 41433220035 | msi 36.9 MB, zip 50 MB | Latest |
+
+- ทุกไฟล์ยังไม่ลงนาม (ไม่มี secret ลงนาม) บันทึกของ Release มาจากหัวข้อของรุ่นนั้นใน `CHANGELOG.md` ของ `main` (v1.1.2 ย่อเหลือบรรทัดแรกของแต่ละรายการพร้อมลิงก์ไปหัวข้อเต็มใน fork เพราะยาวเกิน 125,000 ตัวอักษร)
+- วิธี: รุ่นเก่าใช้ทางสำรองของ workflow (`run_workflow` บน `main` inputs `release: true`, `commit: <sha>`) สามรุ่นพร้อมกัน job `build` ราว 16 นาทีต่อรุ่น (fork ยังไม่มี cache) job `release` เห็น tag ที่ชี้ commit เดียวกันจึงข้ามการสร้าง tag แล้ว `gh release create --verify-tag --latest=false` สำเร็จทั้งสาม (ข้อจำกัด workflow scope ไม่ติดเพราะ commit มี tag อยู่แล้ว); จากนั้นจึงสั่ง v1.1.2 (`release: true`) ซึ่ง build แบบปกติ (`-BuildOnly` แล้ว `-SkipBuild`) และสร้าง Release พร้อม tag ที่ HEAD
+- ก่อนมี v1.1.2 `get_latest_release` ตอบ v1.1.1 แม้สร้างด้วย `--latest=false` (API เลือกตาม `created_at` เมื่อไม่มีรุ่นใดถูกตั้ง Latest); หลังออก v1.1.2 หน้า Releases แสดงป้าย Latest ที่ v1.1.2 รุ่นเดียว
+- `chatraweechai/doc4me` ยังไม่มี Release และ `main` ของต้นทางอยู่ที่ `4b8325c` ส่วน `main` ของ fork นำหน้าด้วยงานรอบนี้ (ต้นทางอ่านได้แต่ push ไม่ได้จาก session นี้)
+
+### สิ่งที่พบตอนเริ่มรอบ (ตรวจ 2026-11-02 ราว 10:00–10:30 UTC)
+
+- session นี้เชื่อมกับ `veevie55/doc4me` ซึ่งเป็น fork (public) ของ `chatraweechai/doc4me`; บัญชี GitHub ของ session คือ `veevie55` (สร้าง 2026-11-02 09:44 UTC) จึงไม่มีสิทธิ์ API กับ repo ต้นทาง อ่านได้เฉพาะ git (`git ls-remote`) และหน้าเว็บสาธารณะ
 - เจ้าของ repo push tag ของรุ่นเก่าแล้ว (annotated, tagger `envburiram`, 09:27–09:28 UTC) ชี้ commit ถูกต้องทั้งสาม: `v1.0.0` (`f6055dd`) → `7946cbb57a0f4618711e765a844f46194150ec1f`, `v1.1.0` (`4cfa336`) → `51a9658096d7f5f8b2ea6ed00acd49b5db463a47`, `v1.1.1` (`091a436`) → `be5893e7ab2fe40285205e976ad366bd1d27d50d` (ตรวจด้วย `git ls-remote` ทั้งต้นทางและ fork และ `get_tag`; fork ได้ tag ชุดเดียวกันมาตอน fork)
-- **สาเหตุที่ Actions ไม่จ่าย runner (ปัญหาของรอบที่ 19)**: run ของ tag ใน repo ต้นทาง #154 (41420985373, `v1.0.0`), #155 (41421019066, `v1.1.0`), #156 (41421048403, `v1.1.1`) ล้มภายใน 4–11 วินาที และ annotation ของ job `build` ทั้งสาม run (อ่านจากหน้า run สาธารณะด้วย WebFetch) คือ "The job was not started because your account is locked due to a billing issue." คือบัญชี `chatraweechai` ถูกล็อกเพราะปัญหาการชำระเงิน ไม่ใช่ไฟล์ workflow หรือสิทธิ์ของ action; push build #153 (41413504791) ของ `main` มีข้อความเดียวกัน (#151–#152 ล้มภายในไม่กี่วินาทีเหมือนกัน แต่ไม่ได้เปิดอ่าน) และหน้า Releases ของต้นทางยังว่าง ("There aren't any releases here.")
-- fork `veevie55/doc4me`: ไม่มี Release (Release ไม่ติดมากับการ fork), `list_workflows` ได้ 0 และ `run_workflow` (build อย่างเดียว `release: false`) ได้ HTTP 404 เพราะ GitHub ปิด workflow ของ fork ไว้จนกว่าเจ้าของจะกดเปิดในแท็บ Actions
-- ลิงก์ในโค้ดและเอกสารยังชี้ `chatraweechai/doc4me` (ลิงก์ Releases ใน `README.md`/`README.en.md`, หน้า About, `repository` ใน `Cargo.toml`, URL แค็ตตาล็อก Add-in ใน `crates/engine/src/cmd/addins.rs`, `websiteUrl` ของ MCP, app id `io.github.chatraweechai.doc4me`) Release ที่ออกใน fork จึงไม่มีลิงก์จาก README; session ไม่ได้เปลี่ยน เพราะการย้ายบ้านของโปรเจกต์เป็นการตัดสินใจของเจ้าของ (app id ไม่ควรเปลี่ยน เพราะเป็นชื่อไฟล์ .desktop ไอคอน และ Flatpak ที่ติดตั้งไว้แล้ว)
+- **สาเหตุที่ Actions ไม่จ่าย runner (ปัญหาของรอบที่ 19)**: run ของ tag ใน repo ต้นทาง #154 (41420985373, `v1.0.0`), #155 (41421019066, `v1.1.0`), #156 (41421048403, `v1.1.1`) ล้มภายใน 4–11 วินาที และ annotation ของ job `build` ทั้งสาม run (อ่านจากหน้า run สาธารณะด้วย WebFetch) คือ "The job was not started because your account is locked due to a billing issue." คือบัญชี `chatraweechai` ถูกล็อกเพราะปัญหาการชำระเงิน ไม่ใช่ไฟล์ workflow หรือสิทธิ์ของ action; push build #153 (41413504791) ของ `main` มีข้อความเดียวกัน (#151–#152 ล้มภายในไม่กี่วินาทีเหมือนกัน แต่ไม่ได้เปิดอ่าน)
+- fork ตอนเริ่ม: ไม่มี Release (Release ไม่ติดมากับการ fork), `list_workflows` ได้ 0 และ `run_workflow` ได้ HTTP 404 เพราะ GitHub ปิด workflow ของ fork ไว้จนกว่าเจ้าของจะกดเปิดในแท็บ Actions (เจ้าของเปิดแล้วราว 10:40 UTC)
 
-### [เจ้าของ repo] ทำก่อน (เลือกทางใดทางหนึ่ง)
+### งานรอบนี้ (push ไป `main` แล้ว รายละเอียดและผลตรวจอยู่ใน `CHANGELOG.md` `[Unreleased]`)
 
-- ทาง ก ออกใน fork: เปิด https://github.com/veevie55/doc4me/actions กด "I understand my workflows, go ahead and enable them" แล้วบอก session ให้ทำต่อ
-- ทาง ข ออกใน repo ต้นทาง: แก้การชำระเงินของบัญชี `chatraweechai` (Settings › Billing and licensing) แล้ว re-run #154–#156 (re-run ใช้ commit และ workflow เดิมของ tag ไม่ต้อง push tag ซ้ำ) เมื่อทั้งสามออก Release แล้วจึงออก v1.1.2 ด้วย Actions › Windows x64 installer › Run workflow บน `main` ติ๊ก `release`; session ที่เชื่อมกับ fork สั่ง run ในต้นทางไม่ได้
+- `3e00170` handoff: สิ่งที่พบตอนเริ่มรอบ (ก่อนออกรุ่น)
+- `473e0da` แก้หน้าเปล่าหลังตัวแบ่งหน้า (`crates/layout/src/lib.rs`, เทสต์ `a_page_break_before_an_empty_section_break_paragraph_leaves_no_blank_page`): ย่อหน้าที่จบด้วยตัวแบ่งหน้าแล้วตามด้วยย่อหน้าว่างที่ปิด section ซึ่ง section ถัดไปขึ้นหน้าใหม่ ไม่สร้างหน้าเปล่าแล้ว (ข้อ "zenodo-160" ในงานต่อไปของรอบที่ 18) ทำและ push หลัง v1.1.2 ออกแล้ว Release v1.1.2 จึงไม่มีโค้ดนี้
+- วัดบน Linux ด้วย `cargo xtask readiness --corpus --jobs 4` เทียบ CLI ก่อน/หลังแก้ (ให้รายงานแสดงไฟล์ไม่ผ่านครบชั่วคราว): จำนวนหน้าตรง 166 → 168, ต้น/ท้ายหน้าตรง 89 → 90, ไม่มีไฟล์ที่ผลแย่ลง (zenodo-169 ตรงทั้งสองแบบ, zenodo-160 จำนวนหน้าตรง, zenodo-053 64 → 61 จาก Word 58, zenodo-136 27 → 26 จาก Word 25); govuk-037 มีย่อหน้าแบบเดียวกันแต่ section ถัดไปเป็นแบบต่อเนื่องจึงไม่เปลี่ยน; คลังทั้ง 222 ไฟล์ดาวน์โหลดได้ครบ (zenodo-078.pdf และ zenodo-161.docx ล้มครั้งแรก ดาวน์โหลดซ้ำแล้ว SHA-256 ตรง); ตรวจก่อน push: `cargo test -p doc4me-layout` 240, `-p doc4me-engine` 451 + 13 + 8 ผ่าน, `cargo fmt --all --check` และ `cargo clippy --workspace --all-targets -- -D warnings` ผ่าน (บน Linux ต้อง `apt-get install libasound2-dev` ก่อน ไม่งั้น build script ของ `alsa-sys` ล้ม)
+- push ของ `473e0da` เป็น push build แรกของ `main` ใน fork (ไม่ออก Release): run 41437764535 ผ่าน (build และทำ MSI/zip บน Windows ราว 12 นาที ใช้ cache ที่ run ของ v1.1.2 บันทึกไว้)
 
-### งานของ session หลังเปิด Actions ใน fork (ทาง ก)
+### ข้อค้นพบที่ต้องให้เจ้าของ repo ตัดสิน
 
-1. tag อยู่ใน fork แล้วโดยไม่มีเหตุการณ์ push จึงไม่มี run ของ tag ให้ใช้ทางสำรองของ workflow: `actions_run_trigger` `run_workflow` workflow `windows-x64-installer.yml` ref `main` inputs `release: true` และ `commit: <sha ข้างบน>` ทีละรุ่น (รันพร้อมกันได้ เพราะ concurrency แยกตาม `commit`)
-   - job `build` เห็นว่ามี tag แล้วจึง build ต่อด้วย `package.ps1` ของ commit นั้น (ขั้นเดียว ไม่ลงนาม เหมือนตอนออกครั้งแรก); job `release` รับ tag ที่ชี้ commit เดียวกัน (`TAG_EXISTS`) ข้ามการสร้าง tag แล้วรัน `gh release create --verify-tag --latest=false` บันทึกของ Release มาจากหัวข้อของรุ่นนั้นใน `CHANGELOG.md` ของ `main`
-   - ข้อจำกัด workflow scope ของ GitHub ([changelog 2023-11-02](https://github.blog/changelog/2023-11-02-github-actions-enforcing-workflow-scope-when-creating-a-release/)) ใช้เฉพาะเมื่อ commit เป้าหมาย "does not have an existing ref (branch head or tag)" จึงไม่ติดเพราะมี tag แล้ว
-2. รอทั้งสามจบ ตรวจว่า Release มี `doc4me-<เวอร์ชัน>-windows-x64.msi` และ `-portable.zip` และไม่เป็น Latest
-3. แล้วจึงออก v1.1.2: inputs `release: true` ไม่ใส่ `commit` (tag สร้างที่ HEAD ของ `main` ซึ่งไฟล์ workflow เหมือน default branch) ห้าม push ไป `main` ระหว่างที่ job `release` รัน; บันทึกของ Release จะย่อเพราะหัวข้อ `[1.1.2]` ยาวเกิน 125,000 ตัวอักษร; โค้ดของ HEAD ของ `main` เท่ากับ `861e994` (หลังจากนั้นแก้แค่ workflow, `docs/releasing.md`, `CHANGELOG.md` หัวข้อ `[1.1.2]` และ handoff) ห้าม push โค้ดแอปก่อน v1.1.2 ออก เพราะ release ของ HEAD จะรวมโค้ดที่ไม่อยู่ในหัวข้อ `[1.1.2]`
-4. ตรวจว่า v1.1.2 เป็น Latest แล้วอัปเดต handoff, `ROADMAP.md` แถว Releases และ `docs/roadmap.md` M14
+- **บ้านของโปรเจกต์**: ลิงก์ Releases ใน `README.md`/`README.en.md`, หน้า About, `repository` ใน `Cargo.toml`, URL แค็ตตาล็อก Add-in (`crates/engine/src/cmd/addins.rs`), `websiteUrl` ของ MCP และลิงก์ท้าย `CHANGELOG.md` ยังชี้ `chatraweechai/doc4me` ซึ่งไม่มี Release; Release อยู่ที่ https://github.com/veevie55/doc4me/releases session ไม่ได้เปลี่ยน เพราะเป็นการตัดสินใจของเจ้าของ (app id `io.github.chatraweechai.doc4me` ไม่ควรเปลี่ยน เพราะเป็นชื่อไฟล์ .desktop ไอคอน และ Flatpak ที่ติดตั้งไว้แล้ว; แค็ตตาล็อก Add-in ใน `raw.githubusercontent.com/chatraweechai/...` ยังเปิดได้เพราะ repo ต้นทางยัง public)
+- ถ้าจะให้ต้นทางมี Release ด้วย: แก้การชำระเงินของ `chatraweechai` แล้ว re-run #154–#156 (ใช้ commit และ workflow เดิมของ tag) และ sync `main` ของต้นทางกับ fork ก่อนออก v1.1.2 ที่นั่น (tag `v1.1.2` ของ fork ชี้ `3e00170` ซึ่งต้นทางยังไม่มี)
+- `zenodo-160` หน้า 8: หน้า PDF อ้างอิงมีข้อความ comment "Commented [SP1]: I updated this table …" ในแถบ markup แต่ไฟล์ .docx ไม่มี `word/comments.xml` แล้ว (คนละรุ่นในส่วนของ comment) ตัวตรวจต้น/ท้ายหน้าจึงไม่ผ่านทั้งที่เนื้อหาในหน้าตรงกัน (ตารางจบที่ "66 60 60 66 62 62" ทั้งสองฝั่ง); ไม่ได้แก้ manifest หรือ comparator ตามกติกา
+- ข้อค้นพบของรอบที่ 18 (`govuk-026`, `govuk-018`, `zenodo-104`) ยังรอการตัดสินใจ
+
+### งานต่อไป (ยังไม่ถึงเป้าหมาย 100%)
+
+- ทำต่อจาก "งานต่อไป" ของรอบที่ 18 ด้านล่าง (ข้อ zenodo-160 เสร็จแล้ว): วัดซ้ำบน Windows แล้วสร้าง `docs/readiness.md` ใหม่, pagination (`govuk-005`, `zenodo-023`), dialogs, localization
+- ห้ามออกเวอร์ชันถัดจาก 1.1.2 จนกว่าผู้ใช้สั่ง; release workflow ใน fork เปิดแล้ว push ไป `main` จะ build อัตโนมัติ
 
 ## สถานะรอบที่ 19 (2026-11-02: ออก v1.0.0, v1.1.0, v1.1.1 และ v1.1.2; ประวัติ เจ้าของ push tag แล้วและพบสาเหตุในรอบที่ 20)
 
@@ -151,7 +169,7 @@
 
 
 - ตอบและแสดงข้อความเป็นภาษาไทยเท่านั้น (ชื่อคำสั่ง ชื่อไฟล์ และโค้ดคงเดิมได้)
-- ห้ามออกเวอร์ชันใหม่จนกว่าผู้ใช้สั่ง (งานใหม่อยู่ใต้ `[Unreleased]`, ห้ามสั่ง workflow พร้อม `release: true`); 2026-11-02 ผู้ใช้สั่งออก v1.0.0, v1.1.0, v1.1.1 จาก commit เดิม และ v1.1.2 จากโค้ดล่าสุด (`Cargo.toml` 1.1.2) โดยออก v1.1.2 หลังรุ่นเก่า รุ่นถัดจาก 1.1.2 ยังห้ามออกจนกว่าผู้ใช้สั่ง
+- ห้ามออกเวอร์ชันใหม่จนกว่าผู้ใช้สั่ง (งานใหม่อยู่ใต้ `[Unreleased]`, ห้ามสั่ง workflow พร้อม `release: true`); 2026-11-02 ผู้ใช้สั่งออก v1.0.0, v1.1.0, v1.1.1 จาก commit เดิม และ v1.1.2 จากโค้ดล่าสุด (`Cargo.toml` 1.1.2) โดยออก v1.1.2 หลังรุ่นเก่า (ออกครบแล้วในรอบที่ 20 ที่ fork `veevie55/doc4me` ตามที่ผู้ใช้เลือก) รุ่นถัดจาก 1.1.2 ยังห้ามออกจนกว่าผู้ใช้สั่ง
 - release workflow ไม่ตั้ง `CRAFT_FONTS_DIR` ข้ามฟอนต์ CJK ของ craft-fonts
 - parity ที่ต้องใช้บริการเสียเงินให้ตัดทิ้ง
 - ไม่เพิ่ม job ทดสอบบน Linux ใน CI เว้นแต่ผู้ใช้สั่ง
