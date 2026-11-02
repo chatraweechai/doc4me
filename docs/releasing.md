@@ -43,19 +43,24 @@ platforms (inherited from WordCraft) are in [`packaging/`](../packaging/) and ru
      already exists, so bump the version first. Anyone who can run workflows here can release this
      way. A session can start it with the GitHub tools (`actions_run_trigger`, workflow
      `windows-x64-installer.yml`, ref `main`, input `release: true`).
-   - A version released before whose tag and release are missing: the same run on `main`, with
-     **release** ticked and **commit** set to that version's full 40-character commit SHA
-     (inputs `release: true`, `commit: <sha>`). The run checks that `main` has the commit, builds
-     it with that commit's own `package.ps1` (one from before 1.1.2 has no `-BuildOnly`, so it
-     builds and packages in one run without the signing secrets: unsigned, as that version was
-     released), and releases it as `v<version in its Cargo.toml>` with that version's section
-     of `main`'s `CHANGELOG.md`, not marked as the latest release. `GITHUB_TOKEN` can't have a
-     release create a tag at a commit whose workflow files differ from the default branch's
-     (see below), so the run creates the tag first through the git refs API, then releases the
-     tag. If GitHub refuses that tag too, push it from a clone instead:
-     `git tag -a vx.y.z <sha> -m "Doc4Me x.y.z" && git push origin vx.y.z` (the tag push runs
-     that commit's own workflow, which builds and releases it). Runs for different commits run
-     side by side.
+   - A version released before whose tag and release are missing: push its tag from a clone,
+     `git tag -a vx.y.z <sha> -m "Doc4Me x.y.z" && git push origin vx.y.z`. The tag push runs
+     that commit's own workflow, which builds it with its own `package.ps1` and releases it with
+     its own `CHANGELOG.md` section. GitHub marks each newly published release as the latest,
+     so release the newest version after the earlier ones (or set it as the latest again).
+     The workflow can't make that tag for you: `GITHUB_TOKEN` may not create a tag at a commit
+     whose workflow files differ from the default branch's, through the release API (see below)
+     or the git refs API (HTTP 403, runs 41379965614 and 41379967784, 2026-11-02), and a cloud
+     session's git proxy refuses tag pushes (HTTP 403 again on 2026-11-02).
+   - The same run on `main` with **commit** set to the version's full 40-character commit SHA
+     (inputs `release: true`, `commit: <sha>`) is the fallback, e.g. when that commit's own
+     workflow can't release it: it checks that `main` has the commit, builds it with that
+     commit's own `package.ps1` (one from before 1.1.2 has no `-BuildOnly`, so it builds and
+     packages in one run without the signing secrets: unsigned, as that version was released),
+     and releases the tag at that commit with that version's section of `main`'s
+     `CHANGELOG.md`, not marked as the latest release. It stops before building when the tag is
+     missing and the commit's workflow files differ from `main`'s; when they are the same, it
+     creates the tag itself. Runs for different commits run side by side.
    - Release notes longer than GitHub's limit (125,000 characters, counted in UTF-8 bytes to be
      safe) keep the section's headings and each entry's first line, with a link to the full
      section in `CHANGELOG.md`.

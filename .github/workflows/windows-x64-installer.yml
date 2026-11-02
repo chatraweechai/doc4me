@@ -3,8 +3,9 @@
 # GitHub Release), or by pushing to main. A workflow_dispatch run on main with `release` ticked
 # also publishes a Release and creates its tag, v<version in Cargo.toml>, at the built commit
 # (for sessions that can't push tags). With `commit` set, the run builds that earlier commit of
-# main instead and, with `release`, tags and releases it as the version in its own Cargo.toml
-# (a version whose tag and release are missing). Third-party actions are pinned to commit SHAs.
+# main instead and, with `release`, releases it as the version in its own Cargo.toml, not as the
+# latest release; its tag has to exist at that commit unless its workflow files are main's
+# (GitHub won't let GITHUB_TOKEN create it otherwise). Third-party actions are pinned to commit SHAs.
 name: Windows x64 installer
 
 on:
@@ -18,7 +19,7 @@ on:
         type: boolean
         default: false
       commit:
-        description: "Build this earlier commit of main instead (its full 40-character SHA); with release, tag and release it as the version in its Cargo.toml"
+        description: "Build this earlier commit of main instead (its full 40-character SHA); with release, release it as the version in its Cargo.toml (its tag must exist unless its workflow files are main's)"
         type: string
         default: ""
 
@@ -96,6 +97,33 @@ jobs:
         run: |
           $version = (Select-String -Path Cargo.toml -Pattern '^version = "([^"]+)"' | Select-Object -First 1).Matches[0].Groups[1].Value
           "version=$version" >> $env:GITHUB_OUTPUT
+
+      # GitHub doesn't let GITHUB_TOKEN create a tag at a commit whose workflow files differ from
+      # the default branch's: the git refs API answers 403 like the release API (runs 41379965614
+      # and 41379967784). Such a commit's tag must be pushed from a clone first, so a release run
+      # stops here, before building, when that tag is missing.
+      - name: Check the earlier commit's tag
+        if: inputs.commit != '' && inputs.release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMIT: ${{ inputs.commit }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          tag="v$VERSION"
+          # Where an existing tag points is checked by the release job.
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" > /dev/null 2> "$RUNNER_TEMP/tag.err"; then
+            exit 0
+          elif ! grep -q 'HTTP 404' "$RUNNER_TEMP/tag.err"; then
+            echo "::error::could not check for tag $tag: $(cat "$RUNNER_TEMP/tag.err")"
+            exit 1
+          fi
+          if ! git diff --quiet "$COMMIT" "$GITHUB_SHA" -- .github/workflows; then
+            echo "::error::tag $tag is missing, and GITHUB_TOKEN may not create it at $COMMIT, whose workflow files differ from main's"
+            echo "Push it from a clone, then run this again: git tag -a $tag $COMMIT -m \"Doc4Me $VERSION\" && git push origin $tag"
+            echo "(The tag push also starts that commit's own workflow, which builds it and, when it has a release job, releases it.)"
+            exit 1
+          fi
 
       # package.ps1 builds and then packages in separate runs (-BuildOnly, -SkipBuild) since
       # 1.1.2. An earlier commit's package.ps1 without -BuildOnly does both in one run, as that
@@ -182,10 +210,10 @@ jobs:
           persist-credentials: false
           sparse-checkout: CHANGELOG.md
           sparse-checkout-cone-mode: false
-      # A tag push releases that tag. A manual run releases the built commit's version as a new
-      # tag at that commit (main's, or the earlier commit given); it stops if the tag exists, so
-      # it never moves or reuses one. The one exception: an earlier commit's tag is made before
-      # its release (below), and a run that stopped between the two left it at that very commit.
+      # A tag push releases that tag. A manual run on main's head releases its version as a new
+      # tag at that commit; it stops if the tag exists, so it never moves or reuses one. An
+      # earlier commit's run also takes a tag that is at that very commit: pushed from a clone,
+      # or made below by a run that stopped before releasing. A tag elsewhere stops it.
       - name: Choose the tag
         run: |
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
@@ -218,10 +246,11 @@ jobs:
             tag="$GITHUB_REF_NAME"
           fi
           echo "TAG=$tag" >> "$GITHUB_ENV"
-      # GitHub doesn't let GITHUB_TOKEN create a release's tag at a commit whose workflow files
-      # differ from the default branch's
-      # (https://docs.github.com/en/rest/releases/releases#create-a-release), as an earlier
-      # commit's do; a release of a tag that exists creates none, so the tag is made first.
+      # An earlier commit whose workflow files are main's (the build job stops for any other one
+      # without a tag) gets its tag here, then a release of that tag, which creates none. The
+      # release API refuses GITHUB_TOKEN a tag at a commit whose workflow files differ
+      # (https://docs.github.com/en/rest/releases/releases#create-a-release), and so does this
+      # git refs API call.
       - name: Tag the earlier commit
         if: inputs.commit != '' && env.TAG_EXISTS != 'true'
         run: |
