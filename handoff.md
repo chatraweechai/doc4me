@@ -1,8 +1,40 @@
-# Handoff: Doc4Me 1.1.1 · readiness 86.0% (วัดบน Windows รอบที่ 17; งานรอบที่ 18 ยังไม่ได้วัดซ้ำบน Windows) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันจนกว่าผู้ใช้จะสั่ง
+# Handoff: Doc4Me 1.1.2 · readiness 86.0% (วัดบน Windows รอบที่ 17; งานรอบที่ 18 ยังไม่ได้วัดซ้ำบน Windows) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
 
-อัปเดต: 2026-11-02 · สาขา `main` · รอบที่ 18 · โค้ดล่าสุด `9cd6bff` · เวอร์ชันยังเป็น 1.1.1 ห้ามออกรุ่นใหม่จนกว่าผู้ใช้สั่ง · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
+อัปเดต: 2026-11-02 · สาขา `main` · รอบที่ 19 (ออกรุ่น) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
-## สถานะปัจจุบัน (2026-11-02 รอบที่ 18)
+## สถานะปัจจุบัน (2026-11-02 รอบที่ 19: ออก v1.0.0, v1.1.0, v1.1.1 และ v1.1.2)
+
+ผู้ใช้สั่ง (2026-11-02): "ออกเวอร์ชันเก่าทั้ง v1.0.0 v1.1.0 v1.1.1 และเวอร์ชันใหม่จากโค้ดล่าสุด v1.1.2" ระหว่างทำสั่งเพิ่มให้ตรวจ tag/draft release อีกครั้ง แล้วให้ตรวจสคริปต์ build ของแต่ละรุ่นเพื่อแก้ workflow ให้ออกรุ่นเก่าจาก commit เดิมได้
+
+### สถานะ: รอเจ้าของ repo push tag รุ่นเก่า แล้วจึงออก v1.1.2 (ผู้ใช้เลือก 2026-11-02 ให้ออก v1.1.2 หลังรุ่นเก่า เพื่อให้ v1.1.2 เป็น Latest)
+
+- push ไป `main` แล้ว:
+  - `861e994` ออกเวอร์ชัน 1.1.2 (`cargo xtask version set 1.1.2`, ย้าย `[Unreleased]` เป็น `## [1.1.2] - 2026-11-02`) และ workflow รับ input `commit` เพื่อ build/ออก Release ของ commit เก่าบน `main` (ทางสำรอง)
+  - `8f7d2e2` แก้ workflow หลังรันจริง: tag ของ commit ที่ไฟล์ workflow ต่างจาก `main` ต้อง push จาก clone ก่อน job `build` จึงหยุดตั้งแต่ก่อน build พร้อมบอกคำสั่ง
+- รันจริงบน `861e994`: run 41379963417 (1.0.0), 41379965614 (1.1.0), 41379967784 (1.1.1) ตรวจ input/ancestry และ build MSI/zip ผ่านทั้งหมด แต่ "Tag the earlier commit" ได้ `Resource not accessible by integration (HTTP 403)` ทั้งสามรุ่น จึงยังไม่มี Release; push build ของ `main` (run 41379931795) ผ่านด้วยทางปกติ
+  - เจ้าของ repo re-run เองหลายครั้ง (attempt 2 ของ 41379965614 ล้มที่ "Choose the tag" เพราะตอนนั้นมี tag `v1.1.0` ที่ `861e994` ซึ่งเกิดจากการ Publish draft แล้วลบภายหลัง; 41379963417 ถึง attempt 9 แล้วถูกยกเลิก)
+  - session นี้ลอง push tag `v1.1.1` เองอีกครั้ง ได้ HTTP 403 จาก git proxy เหมือนเดิม (ลบ tag ในเครื่องแล้ว ไม่ลองซ้ำ)
+- **[เจ้าของ repo]** รันใน clone ของตัวเอง (ห้าม Publish draft 4 รายการ เพราะ target เป็น `main` จะได้ tag ผิด commit; ลบทิ้งได้):
+  - `git fetch origin`
+  - `git tag -a v1.0.0 7946cbb57a0f4618711e765a844f46194150ec1f -m "Doc4Me 1.0.0"`
+  - `git tag -a v1.1.0 51a9658096d7f5f8b2ea6ed00acd49b5db463a47 -m "Doc4Me 1.1.0"`
+  - `git tag -a v1.1.1 be5893e7ab2fe40285205e976ad366bd1d27d50d -m "Doc4Me 1.1.1"`
+  - `git push origin v1.0.0`, `git push origin v1.1.0`, `git push origin v1.1.1` (แยกทีละตัว) แต่ละ tag รัน workflow ของ commit นั้นเองซึ่ง build และออก Release พร้อมหัวข้อ CHANGELOG ของรุ่นนั้น
+- งานของ session หลังเจ้าของ repo push tag:
+  1. รอ run ของ tag ทั้งสามจบ ตรวจว่า Release มี `doc4me-<เวอร์ชัน>-windows-x64.msi` และ `-portable.zip` และ tag ชี้ commit ข้างบน
+  2. ถ้า run ของ tag ใดออก Release ไม่ได้ (เช่น workflow ของ `be5893e` ส่ง `--target` ทั้งที่มี tag แล้ว) ให้ใช้ทางสำรอง: re-run failed jobs ของ run 41379967784 (หรือ run ใหม่ `release: true`, `commit: <sha>`) ซึ่งจะเจอ tag ที่ commit เดียวกันแล้วออก Release แบบไม่ย้ายป้าย Latest
+  3. แล้วจึงออก v1.1.2: `actions_run_trigger` workflow `windows-x64-installer.yml` ref `main` input `release: true` (ไม่ใส่ `commit`) บันทึกของ Release จะย่อเพราะหัวข้อ `[1.1.2]` ยาวเกิน 125,000 ตัวอักษร; ห้าม push ไป `main` ระหว่างที่ job `release` รัน
+  4. ตรวจว่า v1.1.2 เป็น Latest แล้วอัปเดต handoff, `ROADMAP.md` แถว Releases และ `docs/roadmap.md` M14
+
+### สิ่งที่พบก่อนออก (ตรวจ 2026-11-02 ด้วย GitHub API)
+
+- ไม่มี tag เลย (`list_tags` ว่าง, `git ls-remote --tags` ว่าง) และไม่มี Release ที่เผยแพร่: Release v1.1.0 (tag ที่ `51a9658`, ออก 2026-10-21 run #31) และ v1.1.1 (`be5893e`, ออก 2026-10-22 run 39788628618 แล้วออกซ้ำที่ `4f1d407` โดย run 40634619053 เมื่อ 2026-10-28) ไม่มีแล้วทั้ง Release และ tag เมื่อตรวจ (ไม่ทราบว่าใครลบเมื่อไร); v1.0.0 (`7946cbb`) ยังไม่เคยมี tag
+- draft ที่เจ้าของ repo สร้างไว้ 4 รายการ (ยังไม่มี tag, body ว่าง): `v1.0.0` "Doc4Me v1.0.0", `v1.1.0` "Doc4Me v1.1.0", `v.1.1.1` "Doc4Me v1.1.1" (ชื่อ tag มีจุดเกินหลัง v) และ `v1.1.2` "Doc4Me v1.1.2"; draft ไม่ขวาง `gh release create` (gh ตรวจเฉพาะ Release ที่เผยแพร่แล้วด้วย HEAD `releases/tags/<tag>`) session จึงไม่ได้แตะ draft เหล่านี้
+- commit ของรุ่นเก่า (ยืนยันด้วย `git merge-base --is-ancestor` ว่าอยู่บน `main` ทั้งหมด และ `Cargo.toml` ตรงเวอร์ชัน): 1.0.0 = `7946cbb57a0f4618711e765a844f46194150ec1f` (handoff ข้อ 5.1 เดิม), 1.1.0 = `51a9658096d7f5f8b2ea6ed00acd49b5db463a47`, 1.1.1 = `be5893e7ab2fe40285205e976ad366bd1d27d50d`
+- สคริปต์ build ของทั้งสามรุ่น: workflow รัน `package.ps1 -Arch x64` ขั้นเดียวไม่มี secret (ยังไม่มี `-BuildOnly`), `DOC4ME_BUILD_SHA` มาจาก `git rev-parse HEAD` จึงตรงกับ commit ที่ checkout, `cargo build --release --locked`, ไม่มี `rust-toolchain.toml` (ใช้ Rust stable ปัจจุบัน) และไม่มี workflow รุ่นใดตั้ง `CRAFT_FONTS_DIR`
+- ข้อจำกัดของ GitHub: เอกสาร REST "Create a release" ระบุว่า `GITHUB_TOKEN` ให้ Release สร้าง tag ที่ commit ซึ่งไฟล์ workflow ต่างจาก default branch ไม่ได้ (commit ของรุ่นเก่าต่างทั้งหมด) workflow ใหม่จึงสร้าง tag ด้วย git refs API ก่อนแล้วค่อยออก Release ของ tag นั้น
+
+## สถานะรอบที่ 18 (2026-11-02)
 
 ผู้ใช้สั่ง (2026-11-02): อ่าน handoff.md และ ROADMAP.md แล้วทำส่วนที่ค้างต่อให้เสร็จ commit/push `main` ก่อนแล้วค่อยตรวจทีหลัง ตรวจเสร็จ commit/push ที่แก้ แล้วบันทึก handoff.md และ ROADMAP.md ตามสถานะปัจจุบัน
 
@@ -84,7 +116,7 @@
 
 
 - ตอบและแสดงข้อความเป็นภาษาไทยเท่านั้น (ชื่อคำสั่ง ชื่อไฟล์ และโค้ดคงเดิมได้)
-- ห้ามออกเวอร์ชันใหม่จนกว่าผู้ใช้สั่ง (`Cargo.toml` 1.1.1, งานใหม่อยู่ใต้ `[Unreleased]`, ห้ามสั่ง workflow พร้อม `release: true`)
+- ห้ามออกเวอร์ชันใหม่จนกว่าผู้ใช้สั่ง (งานใหม่อยู่ใต้ `[Unreleased]`, ห้ามสั่ง workflow พร้อม `release: true`); 2026-11-02 ผู้ใช้สั่งออก v1.0.0, v1.1.0, v1.1.1 จาก commit เดิม และ v1.1.2 จากโค้ดล่าสุด (`Cargo.toml` 1.1.2) โดยออก v1.1.2 หลังรุ่นเก่า รุ่นถัดจาก 1.1.2 ยังห้ามออกจนกว่าผู้ใช้สั่ง
 - release workflow ไม่ตั้ง `CRAFT_FONTS_DIR` ข้ามฟอนต์ CJK ของ craft-fonts
 - parity ที่ต้องใช้บริการเสียเงินให้ตัดทิ้ง
 - ไม่เพิ่ม job ทดสอบบน Linux ใน CI เว้นแต่ผู้ใช้สั่ง
