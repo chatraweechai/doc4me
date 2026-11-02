@@ -2846,6 +2846,17 @@ fn para_notes(doc: &Document, p: &Paragraph, pl: &ParaLayout) -> Vec<(usize, u32
     notes
 }
 
+/// Body paragraph `p` (block `block`) is empty and only ends its section, and the next section
+/// starts on a new page. Word never gives such a paragraph a page of its own: one that doesn't fit
+/// stays below the page's last line (zenodo-135), and one after a page break stays on the break's
+/// page (zenodo-160).
+fn only_ends_section(doc: &Document, p: &Paragraph, block: usize) -> bool {
+    p.section.is_some()
+        && p.text.is_empty()
+        && p.objects.is_empty()
+        && doc.sections().iter().find(|(end, _)| *end > block).is_some_and(|(_, s)| s.start != SectionStart::Continuous)
+}
+
 fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, body_top: f32) {
     // A text frame: placed with its first paragraph (in a web page, in the text).
     if !pb.web
@@ -3007,12 +3018,7 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
                     .is_some_and(|t| t.chars().all(|c| matches!(c, doc4me_doc::para::PAGE_BREAK | doc4me_doc::para::COLUMN_BREAK)));
             // So does an empty paragraph that only ends its section when the next section starts
             // on a new page (zenodo-135: Word keeps it below the page's last line).
-            let only_section_end = bottom > limit + 0.01
-                && l1 == l0
-                && p.section.is_some()
-                && p.text.is_empty()
-                && p.objects.is_empty()
-                && ctx.doc.sections().iter().find(|(end, _)| *end > block).is_some_and(|(_, s)| s.start != SectionStart::Continuous);
+            let only_section_end = bottom > limit + 0.01 && l1 == l0 && only_ends_section(ctx.doc, p, block);
             if bottom > limit + 0.01 && l1 == l0 && !pb.at_top() && !split && !only_break && !only_section_end {
                 break;
             }
@@ -3171,6 +3177,18 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
         }
         l0 = l1;
         match forced_break {
+            // A page break ending the paragraph just before an empty paragraph that only ends its
+            // section, when the next section starts on a new page: that paragraph stays on this
+            // page and the section break starts the next one, leaving no blank page between them
+            // (zenodo-160, as in Word).
+            Some(LineEnd::PageBreak)
+                if l0 >= n
+                    && ctx
+                        .doc
+                        .body
+                        .get(block.saturating_add(1))
+                        .and_then(|b| b.as_para())
+                        .is_some_and(|q| only_ends_section(ctx.doc, q, block.saturating_add(1))) => {}
             Some(LineEnd::PageBreak) => pb.new_page(block, body_top),
             Some(LineEnd::ColumnBreak) => {
                 pb.col_break_page = Some(pb.pages.len().saturating_sub(1));
