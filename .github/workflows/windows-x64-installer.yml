@@ -2,7 +2,9 @@
 # Run it from the Actions tab (workflow_dispatch), by pushing a `v*` tag (also publishes a
 # GitHub Release), or by pushing to main. A workflow_dispatch run on main with `release` ticked
 # also publishes a Release and creates its tag, v<version in Cargo.toml>, at the built commit
-# (for sessions that can't push tags). Third-party actions are pinned to commit SHAs.
+# (for sessions that can't push tags). With `commit` set, the run builds that earlier commit of
+# main instead and, with `release`, tags and releases it as the version in its own Cargo.toml
+# (a version whose tag and release are missing). Third-party actions are pinned to commit SHAs.
 name: Windows x64 installer
 
 on:
@@ -15,23 +17,66 @@ on:
         description: "Publish a GitHub Release and tag v<version in Cargo.toml> (main only)"
         type: boolean
         default: false
+      commit:
+        description: "Build this earlier commit of main instead (its full 40-character SHA); with release, tag and release it as the version in its Cargo.toml"
+        type: string
+        default: ""
 
 permissions:
   contents: read
 
 concurrency:
-  # By event too, so a push to main doesn't cancel a release started from the Actions tab.
-  group: windows-x64-installer-${{ github.ref }}-${{ github.event_name }}
+  # By event too, so a push to main doesn't cancel a release started from the Actions tab, and by
+  # commit, so earlier commits can be built and released side by side.
+  group: windows-x64-installer-${{ github.ref }}-${{ github.event_name }}-${{ inputs.commit }}
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: windows-latest
     timeout-minutes: 90
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
+      # An earlier commit is a full SHA (not a branch, tag or pull request ref), built by a run on
+      # main; that main has it is checked once it is fetched, before any of its code runs.
+      - name: Check the commit input
+        if: inputs.commit != ''
+        shell: bash
+        env:
+          COMMIT: ${{ inputs.commit }}
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "::error::an earlier commit is built by a run on main only (this run is on $GITHUB_REF)"
+            exit 1
+          fi
+          if ! printf '%s' "$COMMIT" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "::error::commit must be a full 40-character commit SHA (got '$COMMIT')"
+            exit 1
+          fi
+
+      # Without `commit`, the commit of the event, as before; an earlier commit comes with the
+      # history of main, to check that main has it.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+          ref: ${{ inputs.commit }}
+          fetch-depth: ${{ inputs.commit != '' && '0' || '1' }}
+
+      - name: Check the commit is on main
+        if: inputs.commit != ''
+        shell: bash
+        env:
+          COMMIT: ${{ inputs.commit }}
+        run: |
+          if ! git merge-base --is-ancestor "$COMMIT" "$GITHUB_SHA"; then
+            echo "::error::$COMMIT is not on main (not an ancestor of $GITHUB_SHA)"
+            exit 1
+          fi
+          if [ "$(git rev-parse HEAD)" != "$COMMIT" ]; then
+            echo "::error::checked out $(git rev-parse HEAD), not $COMMIT"
+            exit 1
+          fi
 
       # A release tag must name the version being built (cargo xtask version set first).
       - name: Check the tag matches the version
@@ -44,13 +89,37 @@ jobs:
             exit 1
           }
 
+      # The built commit's version: a release from the Actions tab tags it.
+      - name: Read the version
+        id: version
+        shell: pwsh
+        run: |
+          $version = (Select-String -Path Cargo.toml -Pattern '^version = "([^"]+)"' | Select-Object -First 1).Matches[0].Groups[1].Value
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      # package.ps1 builds and then packages in separate runs (-BuildOnly, -SkipBuild) since
+      # 1.1.2. An earlier commit's package.ps1 without -BuildOnly does both in one run, as that
+      # commit's own workflow ran it: without the signing secrets, so unsigned, as released then.
+      - name: Check how the commit packages
+        id: package
+        shell: pwsh
+        env:
+          COMMIT: ${{ inputs.commit }}
+        run: |
+          $split = Select-String -Path packaging/windows/package.ps1 -Pattern '\[switch\]\s*\$BuildOnly\b' -Quiet
+          $legacy = [bool]$env:COMMIT -and -not $split
+          "legacy=$($legacy.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+
       - name: Install Rust (MSVC, x64)
         uses: dtolnay/rust-toolchain@686976e191b89faba57d3206551f0f330d8cb249 # stable branch
         with:
           toolchain: stable
           targets: x86_64-pc-windows-msvc
 
+      # An earlier commit's build isn't saved to the cache, which is for main's current code.
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          save-if: ${{ inputs.commit == '' }}
 
       - name: Install WiX v5 and extensions
         shell: pwsh
@@ -62,12 +131,14 @@ jobs:
       # Built without the signing secrets in the environment, so no build script or proc-macro
       # of a dependency can read them; only the packaging step below gets them.
       - name: Build doc4me + doc4me-cli
+        if: steps.package.outputs.legacy != 'true'
         shell: pwsh
         run: pwsh packaging/windows/package.ps1 -Arch x64 -BuildOnly
 
       # Signing is skipped (with a warning) when no signing secrets are configured: a secret
       # that isn't set reads as empty here, and packaging/windows/sign.ps1 treats empty as unset.
       - name: Sign and package MSI + portable zip
+        if: steps.package.outputs.legacy != 'true'
         shell: pwsh
         env:
           WINDOWS_CERTIFICATE: ${{ secrets.WINDOWS_CERTIFICATE }}
@@ -79,6 +150,11 @@ jobs:
           AZURE_SIGNING_ACCOUNT: ${{ secrets.AZURE_SIGNING_ACCOUNT }}
           AZURE_CERT_PROFILE: ${{ secrets.AZURE_CERT_PROFILE }}
         run: pwsh packaging/windows/package.ps1 -Arch x64 -SkipBuild
+
+      - name: Build and package the earlier commit (unsigned)
+        if: steps.package.outputs.legacy == 'true'
+        shell: pwsh
+        run: pwsh packaging/windows/package.ps1 -Arch x64
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
@@ -94,37 +170,46 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      COMMIT: ${{ inputs.commit }}
+      VERSION: ${{ needs.build.outputs.version }}
     steps:
-      # Only CHANGELOG.md (the release notes) and Cargo.toml (the version) are needed.
+      # Only CHANGELOG.md is needed: the release notes, from the commit the run is on, which has
+      # the section of every version released before it.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
-          sparse-checkout: |
-            CHANGELOG.md
-            Cargo.toml
+          sparse-checkout: CHANGELOG.md
           sparse-checkout-cone-mode: false
-      # A tag push releases that tag. A manual run releases main's version as a new tag at the
-      # built commit; it stops if that tag already exists, so it never moves or reuses one.
+      # A tag push releases that tag. A manual run releases the built commit's version as a new
+      # tag at that commit (main's, or the earlier commit given); it stops if the tag exists, so
+      # it never moves or reuses one. The one exception: an earlier commit's tag is made before
+      # its release (below), and a run that stopped between the two left it at that very commit.
       - name: Choose the tag
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
             if [ "$GITHUB_REF" != "refs/heads/main" ]; then
               echo "::error::release from main only (this run is on $GITHUB_REF)"
               exit 1
             fi
-            version=$(sed -n 's/^version = "\([^"]*\)".*/\1/p' Cargo.toml | head -n 1)
-            if ! printf '%s' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
-              echo "::error::no version in Cargo.toml (got '$version')"
+            if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "::error::no version in the built commit's Cargo.toml (got '$VERSION')"
               exit 1
             fi
-            tag="v$version"
+            tag="v$VERSION"
             # Only a 404 means no such tag: any other failure (auth, rate limit, outage) stops
             # the run rather than releasing onto a tag that may exist elsewhere.
-            if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" > /dev/null 2> "$RUNNER_TEMP/tag.err"; then
-              echo "::error::tag $tag already exists; set a new version with cargo xtask version set"
-              exit 1
+            if obj=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" --jq '.object.type + " " + .object.sha' 2> "$RUNNER_TEMP/tag.err"); then
+              read -r type sha <<< "$obj"
+              if [ "$type" = "tag" ]; then
+                sha=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$sha" --jq '.object.sha')
+              fi
+              if [ -z "$COMMIT" ] || [ "$sha" != "$COMMIT" ]; then
+                echo "::error::tag $tag already exists (at $sha); set a new version with cargo xtask version set"
+                exit 1
+              fi
+              echo "TAG_EXISTS=true" >> "$GITHUB_ENV"
             elif ! grep -q 'HTTP 404' "$RUNNER_TEMP/tag.err"; then
               echo "::error::could not check for tag $tag: $(cat "$RUNNER_TEMP/tag.err")"
               exit 1
@@ -133,28 +218,77 @@ jobs:
             tag="$GITHUB_REF_NAME"
           fi
           echo "TAG=$tag" >> "$GITHUB_ENV"
+      # GitHub doesn't let GITHUB_TOKEN create a release's tag at a commit whose workflow files
+      # differ from the default branch's
+      # (https://docs.github.com/en/rest/releases/releases#create-a-release), as an earlier
+      # commit's do; a release of a tag that exists creates none, so the tag is made first.
+      - name: Tag the earlier commit
+        if: inputs.commit != '' && env.TAG_EXISTS != 'true'
+        run: |
+          if ! gh api -X POST "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/tags/$TAG" -f sha="$COMMIT" > /dev/null 2> "$RUNNER_TEMP/ref.err"; then
+            echo "::error::could not create tag $TAG at $COMMIT: $(cat "$RUNNER_TEMP/ref.err")"
+            echo "Push the tag from a clone instead (that tag push builds and releases it): git tag -a $TAG $COMMIT -m \"Doc4Me $VERSION\" && git push origin $TAG"
+            exit 1
+          fi
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: doc4me-windows-x64
           path: dist
-      # The notes are the tag's "## [X.Y.Z]" section of CHANGELOG.md; without one, GitHub's
-      # generated notes.
-      - name: Publish GitHub Release
-        env:
-          GH_TOKEN: ${{ github.token }}
+      # The notes are the tag's "## [X.Y.Z]" section of CHANGELOG.md (without the link
+      # definitions at the end of the file); without one, GitHub's generated notes. A release
+      # takes at most 125,000 characters (counted here in UTF-8 bytes, never fewer): longer notes
+      # keep the headings and each entry's first line, and link to the full section.
+      - name: Write the release notes
         run: |
-          : > "$RUNNER_TEMP/notes.md"
-          if [ -f CHANGELOG.md ]; then
-            awk -v head="## [${TAG#v}]" '
-              /^## \[/ { if (found) exit; found = (index($0, head) == 1); next }
-              found { print }
-            ' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
-          fi
+          python3 - <<'PY'
+          import os, pathlib, re
+
+          tag = os.environ["TAG"]
+          src = pathlib.Path("CHANGELOG.md")
+          lines = src.read_text(encoding="utf-8").split("\n") if src.is_file() else []
+          head = f"## [{tag[1:]}]"
+          notes, found = [], False
+          for line in lines:
+              if line.startswith("## ["):
+                  if found:
+                      break
+                  found = line.startswith(head)
+              elif found and not re.match(r"\[[^\]]+\]: ", line):
+                  notes.append(line)
+          text = "\n".join(notes).strip("\n")
+
+          limit = 125_000
+          if len(text.encode()) > limit:
+              url = "{}/{}/blob/{}/CHANGELOG.md".format(
+                  os.environ["GITHUB_SERVER_URL"], os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_SHA"])
+              tail = ("\n\n---\n\nบันทึกฉบับเต็มยาวเกินที่ GitHub Release รับได้ (125,000 ตัวอักษร) "
+                      f"ที่นี่จึงมีเฉพาะบรรทัดแรกของแต่ละรายการ รายละเอียดทั้งหมดอยู่ในหัวข้อ `[{tag[1:]}]` ของ [CHANGELOG.md]({url})")
+              kept = []
+              for line in notes:
+                  if line[:1] in (" ", "\t"):
+                      continue
+                  if not line.strip() and kept and not kept[-1].strip():
+                      continue
+                  kept.append(line)
+              while kept and len(("\n".join(kept).strip("\n") + tail).encode()) > limit:
+                  kept.pop()
+              text = "\n".join(kept).strip("\n") + tail
+              print(f"::warning::the notes for {tag} are too long for a release; it gets each entry's first line")
+
+          pathlib.Path(os.environ["RUNNER_TEMP"], "notes.md").write_text(text + "\n" if text else "", encoding="utf-8")
+          PY
+      - name: Publish GitHub Release
+        run: |
           if grep -q '[^[:space:]]' "$RUNNER_TEMP/notes.md"; then
             notes=(--notes-file "$RUNNER_TEMP/notes.md")
           else
             echo "::warning::CHANGELOG.md has no section for $TAG; using generated notes"
             notes=(--generate-notes)
           fi
-          # --target creates a missing tag at the commit built (a tag push already has it there).
-          gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Doc4Me $TAG" "${notes[@]}"
+          if [ -n "$COMMIT" ]; then
+            # An earlier version: its tag exists now, and it doesn't become the latest release.
+            gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --verify-tag --latest=false --title "Doc4Me $TAG" "${notes[@]}"
+          else
+            # --target creates a missing tag at the commit built (a tag push already has it there).
+            gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Doc4Me $TAG" "${notes[@]}"
+          fi
