@@ -2846,15 +2846,17 @@ fn para_notes(doc: &Document, p: &Paragraph, pl: &ParaLayout) -> Vec<(usize, u32
     notes
 }
 
+/// The section after the one that body block `block` ends starts on a new page.
+fn next_section_starts_page(doc: &Document, block: usize) -> bool {
+    doc.sections().iter().find(|(end, _)| *end > block).is_some_and(|(_, s)| s.start != SectionStart::Continuous)
+}
+
 /// Body paragraph `p` (block `block`) is empty and only ends its section, and the next section
 /// starts on a new page. Word never gives such a paragraph a page of its own: one that doesn't fit
 /// stays below the page's last line (zenodo-135), and one after a page break stays on the break's
 /// page (zenodo-160).
 fn only_ends_section(doc: &Document, p: &Paragraph, block: usize) -> bool {
-    p.section.is_some()
-        && p.text.is_empty()
-        && p.objects.is_empty()
-        && doc.sections().iter().find(|(end, _)| *end > block).is_some_and(|(_, s)| s.start != SectionStart::Continuous)
+    p.section.is_some() && p.text.is_empty() && p.objects.is_empty() && next_section_starts_page(doc, block)
 }
 
 fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, body_top: f32) {
@@ -3011,11 +3013,16 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
             }
             // A line holding nothing but a page or column break stays at the bottom of the page
             // even when it doesn't fit: it only ends the page, and moving it would leave a blank
-            // page behind it (Word does the same).
+            // page behind it (Word does the same). Floating objects anchored there and zero-width
+            // markers take no room in it (zenodo-149: a logo anchored beside the break).
             let only_break = matches!(l.end, LineEnd::PageBreak | LineEnd::ColumnBreak)
-                && p.text
-                    .get(l.start..l.stop)
-                    .is_some_and(|t| t.chars().all(|c| matches!(c, doc4me_doc::para::PAGE_BREAK | doc4me_doc::para::COLUMN_BREAK)));
+                && p.text.get(l.start..l.stop).is_some_and(|t| {
+                    t.char_indices().all(|(i, c)| match c {
+                        doc4me_doc::para::PAGE_BREAK | doc4me_doc::para::COLUMN_BREAK => true,
+                        doc4me_doc::para::OBJ => p.object_at(l.start + i).is_some_and(|o| o.is_floating() || o.is_marker()),
+                        _ => false,
+                    })
+                });
             // So does an empty paragraph that only ends its section when the next section starts
             // on a new page (zenodo-135: Word keeps it below the page's last line).
             let only_section_end = bottom > limit + 0.01 && l1 == l0 && only_ends_section(ctx.doc, p, block);
@@ -3177,18 +3184,19 @@ fn place_para(ctx: &mut Ctx, pb: &mut PageBuilder, p: &Paragraph, block: usize, 
         }
         l0 = l1;
         match forced_break {
-            // A page break ending the paragraph just before an empty paragraph that only ends its
-            // section, when the next section starts on a new page: that paragraph stays on this
-            // page and the section break starts the next one, leaving no blank page between them
-            // (zenodo-160, as in Word).
+            // A page break ending a paragraph that ends its section, or that comes just before an
+            // empty paragraph only ending its section, when the next section starts on a new page:
+            // the section break starts the next page, leaving no blank page after the break
+            // (zenodo-149 and zenodo-160, as in Word).
             Some(LineEnd::PageBreak)
                 if l0 >= n
-                    && ctx
-                        .doc
-                        .body
-                        .get(block.saturating_add(1))
-                        .and_then(|b| b.as_para())
-                        .is_some_and(|q| only_ends_section(ctx.doc, q, block.saturating_add(1))) => {}
+                    && ((p.section.is_some() && next_section_starts_page(ctx.doc, block))
+                        || ctx
+                            .doc
+                            .body
+                            .get(block.saturating_add(1))
+                            .and_then(|b| b.as_para())
+                            .is_some_and(|q| only_ends_section(ctx.doc, q, block.saturating_add(1)))) => {}
             Some(LineEnd::PageBreak) => pb.new_page(block, body_top),
             Some(LineEnd::ColumnBreak) => {
                 pb.col_break_page = Some(pb.pages.len().saturating_sub(1));
