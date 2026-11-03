@@ -4,6 +4,14 @@
 
 ## สถานะปัจจุบัน (2026-11-02 รอบที่ 20: ออกรุ่นครบใน fork `veevie55/doc4me` แล้วทำงานต่อด้าน pagination)
 
+### ความคืบหน้าสู่ 100% ไม่นับ deferred (รอบที่ 22 ต่อ, 2026-11-03/04)
+
+- Windows run 41673874009 (`4556010`, 16 ภาษาใหม่): **88.4%**, **90.9%** เมื่อไม่นับ deferred, ภาษา 30 → 46/95 (มิติอื่นเท่าเดิม)
+- `24dcde5`: ตัดบรรทัดหลัง `” ` ก่อน `(` (Unicode 15.1 ตัด LB15 แต่ `unicode-linebreak` 0.1.5 ยังใช้) แก้ zenodo-025 (Linux: pages 172 → 173, breaks 91 → 92 ไม่มีเอกสารแย่ลง) และเพิ่มอีก 8 ภาษา (kk mk ms mt nn pt-pt cy sw → 54/95) สั่ง Windows run ถัดไปแล้ว
+- กำลังแปล (subagent): ha ky tt uz lb gd mi rm; ที่เหลือซึ่ง Inter วาดได้: ig xh zu rw nso tn wo yo sr-cyrl-ba (ekavian/ijekavian?) ca-valencia; ภาษาที่ต้องฟอนต์/shaping ใหม่ (ar he fa ur ps hi mr ne kok as bn-BD bn-IN gu pa or ta te kn ml si hy ka ko) ยังไม่เริ่ม — ต้องให้ UI วาดได้ก่อน
+- เครื่องมือแปลอยู่ใน scratchpad ของ session (หายเมื่อ session จบ): `BRIEF.md`, `check_catalog.py` (ตรวจคีย์ตรง `en-gb.tsv`, placeholder, "…", glyph ใน Inter), `register.py` (เพิ่มใน `LANGUAGES`, `WHOLE_CATALOGS`, `languages.tsv` และแก้ความยาว array)
+- วิธีวัด pagination บน Linux: แก้ `take(40)` ใน `xtask/src/readiness.rs` เป็นค่าใหญ่ชั่วคราว (อย่า commit) แล้ว `cargo xtask readiness --corpus --jobs 8 --cli <cli ที่ build ใน CARGO_TARGET_DIR=target-fix>` แล้ว `git checkout docs/readiness.md`; baseline บน Linux ที่ `f65cff1`: pages 172, breaks 91
+
 ### Readiness ล่าสุด (บันทึก 2026-11-03 รอบที่ 22, ยืนยันด้วย run 41608625168): **87.7%**, **90.3%** เมื่อไม่นับ 26 แถว deferred
 
 - **วัดซ้ำ 2026-11-03 (run 41608625168, `windows-latest`, วัด `main` ที่ `3418736`, commit ผล `51dab2f`, job 09:08–09:25 UTC)**: ได้ **87.7%** / 90.3% เท่าเดิมทุกมิติ (ตารางด้านล่างยังถูกต้อง); หัวรายงานเป็น `3418736` **ไม่มี `+changes` แล้ว** ยืนยันการแก้ใน `83b1e0c`; ดาวน์โหลดคลังครบในรอบนี้ (zenodo กลับมาตอบปกติ)
