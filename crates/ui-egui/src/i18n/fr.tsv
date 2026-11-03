@@ -2936,3 +2936,9 @@ spacing	Normal	Normal
 	Strict	Strict
 	Cannot start a line:	Ne peut pas commencer une ligne :
 	Cannot end a line:	Ne peut pas terminer une ligne :
+	Japanese Find Options	Options de recherche japonaise
+	Sounds like (Japanese)	Recherche phonétique (japonais)
+	Match full/half width	Respecter pleine/demi-chasse
+	Match hiragana/katakana	Respecter hiragana/katakana
+	Match small kana	Respecter les petits kanas
+	Match prolonged sound marks and dashes	Respecter les marques d’allongement et les tirets

@@ -2940,3 +2940,9 @@ spacing	Normal	Normál
 	Strict	Szigorú
 	Cannot start a line:	Nem kezdhet sort:
 	Cannot end a line:	Nem zárhat sort:
+	Japanese Find Options	Japán keresés beállításai
+	Sounds like (Japanese)	Hasonló hangzású (japán)
+	Match full/half width	Teljes/fél szélesség egyezése
+	Match hiragana/katakana	Hiragana/katakana egyezése
+	Match small kana	Kis kana egyezése
+	Match prolonged sound marks and dashes	Hosszabbító jelek és kötőjelek egyezése

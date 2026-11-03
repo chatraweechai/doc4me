@@ -24,6 +24,8 @@ pub struct FindExtra {
     pub suffix: bool,
     pub ignore_punct: bool,
     pub ignore_space: bool,
+    /// Sounds like (Japanese).
+    pub fuzzy: bool,
     /// The search options are shown.
     pub more: bool,
     /// Special ▾ inserts into Replace with (it last had the focus), not Find what.
@@ -1067,7 +1069,8 @@ impl Dialog {
                 };
                 Dialog::Borders { form: Box::new(crate::dialogs_para::BordersForm::read(app, tab)?) }
             }
-            "find" | "replace" => Dialog::Find {
+            // Find Options (Japanese) are part of Advanced Find's search options.
+            "find" | "replace" | "fuzzyOptions" => Dialog::Find {
                 query: if app.session.sel.is_collapsed() { app.session.find.query.clone() } else { app.session.selected_text() },
                 replace: app.session.find.replace.clone(),
                 match_case: app.session.find.match_case,
@@ -1079,7 +1082,10 @@ impl Dialog {
                     suffix: app.session.find.match_suffix,
                     ignore_punct: app.session.find.ignore_punct,
                     ignore_space: app.session.find.ignore_space,
-                    more: app.session.find.wildcards
+                    fuzzy: app.session.find.fuzzy.on,
+                    more: name == "fuzzyOptions"
+                        || app.session.find.fuzzy.on
+                        || app.session.find.wildcards
                         || app.session.find.match_prefix
                         || app.session.find.match_suffix
                         || app.session.find.ignore_punct
@@ -1986,6 +1992,24 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     ui.add_enabled(plain, egui::Checkbox::new(&mut extra.ignore_punct, tl!("Ignore punctuation characters")));
                     ui.add_enabled(plain, egui::Checkbox::new(&mut extra.ignore_space, tl!("Ignore white-space characters")));
                 });
+                ui.add_enabled(plain, egui::Checkbox::new(&mut extra.fuzzy, tl!("Sounds like (Japanese)")));
+                if extra.fuzzy && plain {
+                    // Find Options (Japanese): what reads alike.
+                    let f = app.session.find.fuzzy;
+                    ui.indent("fuzzy_options", |ui| {
+                        for (label, key, on) in [
+                            ("Match full/half width", "width", f.width),
+                            ("Match hiragana/katakana", "kana", f.kana),
+                            ("Match small kana", "smallKana", f.small_kana),
+                            ("Match prolonged sound marks and dashes", "longVowel", f.long_vowel),
+                        ] {
+                            let mut v = on;
+                            if ui.checkbox(&mut v, tl!(label)).changed() {
+                                let _ = app.run("edit.fuzzyOptions", json!({ key: v }));
+                            }
+                        }
+                    });
+                }
                 ui.horizontal(|ui| {
                     ui.checkbox(regex, tl!("Regular expressions"));
                     if let Some(code) = special_menu(ui, extra) {
@@ -2004,6 +2028,7 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 "matchSuffix": extra.suffix,
                 "ignorePunct": extra.ignore_punct,
                 "ignoreSpace": extra.ignore_space,
+                "fuzzy": extra.fuzzy,
             });
             if !*replace_mode {
                 ui.horizontal(|ui| {

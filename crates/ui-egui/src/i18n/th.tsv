@@ -2948,3 +2948,9 @@ spacing	Normal	ปกติ
 	Strict	เข้มงวด
 	Cannot start a line:	ห้ามขึ้นต้นบรรทัด:
 	Cannot end a line:	ห้ามลงท้ายบรรทัด:
+	Japanese Find Options	ตัวเลือกการค้นหาภาษาญี่ปุ่น
+	Sounds like (Japanese)	ออกเสียงเหมือน (ญี่ปุ่น)
+	Match full/half width	ถือว่าความกว้างเต็ม/ครึ่งตรงกัน
+	Match hiragana/katakana	ถือว่าฮิรางานะ/คาตาคานะตรงกัน
+	Match small kana	ถือว่าคานะตัวเล็กตรงกัน
+	Match prolonged sound marks and dashes	ถือว่าเครื่องหมายเสียงยาวและขีดตรงกัน

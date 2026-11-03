@@ -2099,6 +2099,18 @@ mod tests {
         assert_eq!((brackets.as_str(), existing), ("square", true));
     }
 
+    /// Find Options (Japanese): `edit.fuzzyOptions` without settings opens Advanced Find with its
+    /// search options shown; Sounds like (Japanese) is remembered for the next time.
+    #[test]
+    fn japanese_find_options_open_in_advanced_find() {
+        let mut a = app();
+        a.run("edit.find", json!({"text": "コーヒー", "fuzzy": true})).unwrap();
+        a.run("edit.fuzzyOptions", json!({})).unwrap();
+        a.logic(&egui::Context::default());
+        let Some(dialogs::Dialog::Find { extra, replace_mode, .. }) = a.dialog.clone() else { panic!("no dialog: {:?}", a.dialog) };
+        assert!(extra.more && extra.fuzzy && !replace_mode, "{extra:?}");
+    }
+
     /// Issue #139: Ctrl+wheel over the page didn't zoom.
     #[test]
     fn ctrl_wheel_over_canvas_zooms() {

@@ -2940,3 +2940,9 @@ spacing	Normal	標準
 	Strict	嚴格
 	Cannot start a line:	不能位於行首的字元：
 	Cannot end a line:	不能位於行尾的字元：
+	Japanese Find Options	日文模糊尋找選項
+	Sounds like (Japanese)	同音（日文）
+	Match full/half width	符合全/半形
+	Match hiragana/katakana	符合平假名/片假名
+	Match small kana	符合小寫假名
+	Match prolonged sound marks and dashes	符合長音符號和破折號

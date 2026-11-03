@@ -76,7 +76,10 @@ pub fn specs() -> Vec<CommandSpec> {
         .pure(),
         CommandSpec::new("edit.find", "Find", "Home › Editing", find)
             .key("Mod+F")
-            .params(r#"{"text": string, "matchCase"?: bool, "wholeWord"?: bool, "matchPrefix"?: bool, "matchSuffix"?: bool, "ignorePunct"?: bool, "ignoreSpace"?: bool, "wildcards"?: bool, "special"?: bool (^p ^t ^# … codes, default true), "regex"?: bool}"#)
+            .params(r#"{"text": string, "matchCase"?: bool, "wholeWord"?: bool, "matchPrefix"?: bool, "matchSuffix"?: bool, "ignorePunct"?: bool, "ignoreSpace"?: bool, "fuzzy"?: bool (Sounds like (Japanese)), "wildcards"?: bool, "special"?: bool (^p ^t ^# … codes, default true), "regex"?: bool}"#)
+            .pure(),
+        CommandSpec::new("edit.fuzzyOptions", "Japanese Find Options", "Home › Editing › Find", fuzzy_options)
+            .params(r#"{"width"?: bool, "kana"?: bool, "smallKana"?: bool, "longVowel"?: bool} — what Sounds like (Japanese) matches (full/half width, hiragana/katakana, small kana, prolonged sound marks and dashes); without settings it opens Advanced Find at its search options. Returns them."#)
             .pure(),
         CommandSpec::new("edit.advancedFind", "Advanced Find", "Home › Editing › Find", advanced_find)
             .params(r#"{"text"?: string, …options of edit.find, "in"?: "main|selection", "highlight"?: bool}"#)
@@ -458,6 +461,7 @@ fn find_opts(f: &crate::session::FindState) -> find_pattern::Opts {
         wildcards: f.wildcards,
         regex: f.regex,
         literal: f.literal,
+        fuzzy: f.fuzzy,
     }
 }
 
@@ -610,9 +614,28 @@ fn read_opts(s: &mut Session, v: &Value) {
     if let Some(b) = p::bool(v, "ignoreSpace") {
         s.find.ignore_space = b;
     }
+    if let Some(b) = p::bool(v, "fuzzy") {
+        s.find.fuzzy.on = b;
+    }
     if let Some(t) = p::str(v, "with") {
         s.find.replace = t.to_string();
     }
+}
+
+/// Find Options (Japanese): which characters Sounds like (Japanese) lets match.
+fn fuzzy_options(s: &mut Session, v: &Value) -> CmdResult {
+    let keys = ["width", "kana", "smallKana", "longVowel"];
+    if !keys.iter().any(|k| v.get(*k).is_some_and(|x| !x.is_null())) {
+        s.ui_requests.push(json!({"open": "fuzzyOptions"}));
+    }
+    let f = &mut s.find.fuzzy;
+    for (k, slot) in keys.into_iter().zip([&mut f.width, &mut f.kana, &mut f.small_kana, &mut f.long_vowel]) {
+        if let Some(b) = p::bool(v, k) {
+            *slot = b;
+        }
+    }
+    let f = s.find.fuzzy;
+    Ok(json!({"fuzzy": f.on, "width": f.width, "kana": f.kana, "smallKana": f.small_kana, "longVowel": f.long_vowel}))
 }
 
 fn find(s: &mut Session, v: &Value) -> CmdResult {

@@ -2939,3 +2939,9 @@ spacing	Normal	標準
 	Strict	高レベル
 	Cannot start a line:	行頭禁則文字:
 	Cannot end a line:	行末禁則文字:
+	Japanese Find Options	あいまい検索 (日本語) のオプション
+	Sounds like (Japanese)	あいまい検索 (日本語)
+	Match full/half width	全角と半角を区別しない
+	Match hiragana/katakana	ひらがなとカタカナを区別しない
+	Match small kana	小書き文字を区別しない
+	Match prolonged sound marks and dashes	長音とダッシュを区別しない

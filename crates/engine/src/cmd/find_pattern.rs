@@ -36,6 +36,119 @@ pub struct Opts {
     pub regex: bool,
     /// Take the text literally: no `^` codes.
     pub literal: bool,
+    /// "Sounds like (Japanese)": Japanese fuzzy matching.
+    pub fuzzy: Fuzzy,
+}
+
+/// Japanese fuzzy find (Word's "Sounds like (Japanese)" and its Find Options (Japanese)):
+/// characters that read alike match one another.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+pub struct Fuzzy {
+    /// Fuzzy matching is on.
+    pub on: bool,
+    /// Full-width and half-width forms match (Ａ/A, カ/ｶ, ガ/ｶﾞ).
+    pub width: bool,
+    /// Hiragana and katakana match (か/カ).
+    pub kana: bool,
+    /// Small kana match their full-size letters (ゃ/や, ッ/ツ).
+    pub small_kana: bool,
+    /// The prolonged sound mark and dashes match (ー/‐/－).
+    pub long_vowel: bool,
+}
+
+impl Default for Fuzzy {
+    fn default() -> Self {
+        Fuzzy { on: false, width: true, kana: true, small_kana: true, long_vowel: true }
+    }
+}
+
+/// Half-width katakana (U+FF61–U+FF9F) and the full-width characters they stand for.
+const HALF_KANA: &str = "｡｢｣､･ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ";
+const FULL_KANA: &str =
+    "。「」、・ヲァィゥェォャュョッーアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜";
+/// Small kana and their full-size letters (hiragana, then katakana).
+const SMALL_KANA: &str = "ぁぃぅぇぉっゃゅょゎゕゖァィゥェォッャュョヮヵヶ";
+const LARGE_KANA: &str = "あいうえおつやゆよわかけアイウエオツヤユヨワカケ";
+/// Voiced and semi-voiced katakana and the letter each adds its mark to.
+const VOICED_KANA: &str = "ガギグゲゴザジズゼゾダヂヅデドバビブベボヴパピプペポ";
+const VOICED_BASE: &str = "カキクケコサシスセソタチツテトハヒフヘホウハヒフヘホ";
+/// The prolonged sound mark and the dashes it is confused with.
+const LONG_VOWELS: &str = "ーｰ‐‑−－";
+
+/// `c` with the foldings `f` turns on: what fuzzy matching compares.
+fn fold(c: char, f: &Fuzzy) -> char {
+    let mut c = c;
+    if f.width {
+        let u = c as u32;
+        if (0xFF01..=0xFF5E).contains(&u) {
+            c = char::from_u32(u - 0xFEE0).unwrap_or(c);
+        } else if c == '\u{3000}' {
+            c = ' ';
+        } else if let Some(i) = HALF_KANA.chars().position(|h| h == c) {
+            c = FULL_KANA.chars().nth(i).unwrap_or(c);
+        }
+    }
+    if f.small_kana
+        && let Some(i) = SMALL_KANA.chars().position(|k| k == c)
+    {
+        c = LARGE_KANA.chars().nth(i).unwrap_or(c);
+    }
+    if f.kana && ('\u{30A1}'..='\u{30F6}').contains(&c) {
+        c = char::from_u32(c as u32 - 0x60).unwrap_or(c);
+    }
+    if f.long_vowel && LONG_VOWELS.contains(c) {
+        c = 'ー';
+    }
+    c
+}
+
+/// The characters fuzzy matching may meet: ASCII, the kana, full-width and half-width forms and
+/// the dashes.
+fn fuzzy_domain() -> impl Iterator<Item = char> {
+    [
+        (0x20u32, 0x7E),
+        (0x3000, 0x3000),
+        (0x3041, 0x3096),
+        (0x309B, 0x309C),
+        (0x30A1, 0x30FA),
+        (0x30FC, 0x30FC),
+        (0xFF01, 0xFF5E),
+        (0xFF61, 0xFF9F),
+        (0x2010, 0x2011),
+        (0x2212, 0x2212),
+    ]
+    .into_iter()
+    .flat_map(|(a, b)| (a..=b).filter_map(char::from_u32))
+}
+
+/// A regex atom matching `c` and every character (or half-width pair, ｶﾞ for ガ) that reads
+/// alike under `f`.
+fn fuzzy_atom(c: char, f: &Fuzzy) -> String {
+    let key = fold(c, f);
+    let mut alts: Vec<String> = vec![lit(c)];
+    for d in fuzzy_domain() {
+        if d != c && fold(d, f) == key {
+            alts.push(lit(d));
+        }
+    }
+    // A voiced kana is two characters in half-width katakana: the letter and its mark.
+    if f.width {
+        let voiced: Vec<char> = VOICED_KANA.chars().collect();
+        for (i, base) in VOICED_BASE.chars().enumerate() {
+            let Some(&v) = voiced.get(i) else { continue };
+            let hira = char::from_u32(v as u32 - 0x60).filter(|_| v != 'ヴ');
+            if fold(v, f) != key && hira.is_none_or(|h| fold(h, f) != key) {
+                continue;
+            }
+            if let Some(hb) = FULL_KANA.chars().position(|k| k == base).and_then(|j| HALF_KANA.chars().nth(j)) {
+                let mark = if "パピプペポ".contains(v) { 'ﾟ' } else { 'ﾞ' };
+                alts.push(format!("{}{}", lit(hb), lit(mark)));
+            }
+        }
+    }
+    alts.dedup();
+    if alts.len() == 1 { alts.remove(0) } else { format!("(?:{})", alts.join("|")) }
 }
 
 /// A pattern ready for the regex engine.
@@ -186,7 +299,7 @@ fn special(query: &str, o: &Opts) -> (String, bool) {
         if (o.ignore_punct && is_punct(c)) || (o.ignore_space && is_space(c)) {
             continue;
         }
-        atoms.push(lit(c));
+        atoms.push(if o.fuzzy.on { fuzzy_atom(c, &o.fuzzy) } else { lit(c) });
     }
     let filler = match (o.ignore_punct, o.ignore_space) {
         (true, true) => r"[\p{P} \t\x{A0}]*",
@@ -414,4 +527,33 @@ pub fn expand(pieces: &[Piece], found: &str, group: &dyn Fn(usize) -> Option<Str
         }
     }
     out
+}
+
+#[cfg(test)]
+mod fuzzy_tests {
+    use super::{Fuzzy, Opts, compile};
+
+    fn finds(query: &str, text: &str, fuzzy: Fuzzy) -> bool {
+        let c = compile(query, &Opts { fuzzy, ..Default::default() }).unwrap();
+        regex::RegexBuilder::new(&c.pattern).case_insensitive(c.case_insensitive).build().unwrap().is_match(text)
+    }
+
+    /// Sounds like (Japanese): width, hiragana/katakana, small kana and the long vowel fold,
+    /// each only with its option; without fuzzy matching the text must be the same.
+    #[test]
+    fn japanese_fuzzy_find_matches_what_reads_alike() {
+        let on = Fuzzy { on: true, ..Default::default() };
+        assert!(finds("コーヒー", "ｺｰﾋｰ", on), "half-width katakana");
+        assert!(finds("ガイド", "ｶﾞｲﾄﾞ", on), "voiced half-width pairs");
+        assert!(finds("がいど", "ｶﾞｲﾄﾞ", on), "hiragana against half-width katakana");
+        assert!(finds("きゃっと", "キヤツト", on), "small kana and kana type");
+        assert!(finds("ＡＢＣ１２", "abc12", on), "full-width Latin, case ignored");
+        assert!(finds("データ", "デ‐タ", on), "a dash for the long vowel");
+        assert!(!finds("コーヒー", "ｺｰﾋｰ", Fuzzy::default()), "off: exact");
+        assert!(!finds("かな", "カナ", Fuzzy { kana: false, ..on }), "kana option off");
+        assert!(!finds("キャ", "キヤ", Fuzzy { small_kana: false, ..on }), "small kana option off");
+        assert!(!finds("ア", "あ", Fuzzy { kana: false, width: false, ..on }));
+        // Other text is unchanged.
+        assert!(finds("漢字", "漢字", on) && !finds("漢字", "漢子", on));
+    }
 }

@@ -2951,3 +2951,9 @@ spacing	Normal	Звичайний
 	Strict	Суворі
 	Cannot start a line:	Не може починати рядок:
 	Cannot end a line:	Не може завершувати рядок:
+	Japanese Find Options	Параметри пошуку японського тексту
+	Sounds like (Japanese)	Звучить як (японська)
+	Match full/half width	Не розрізняти повну/половинну ширину
+	Match hiragana/katakana	Не розрізняти хірагану/катакану
+	Match small kana	Не розрізняти малі кани
+	Match prolonged sound marks and dashes	Не розрізняти знаки довготи й тире

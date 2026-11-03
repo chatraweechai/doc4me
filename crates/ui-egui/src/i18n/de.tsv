@@ -2938,3 +2938,9 @@ spacing	Normal	Normal
 	Strict	Streng
 	Cannot start a line:	Darf keine Zeile beginnen:
 	Cannot end a line:	Darf keine Zeile beenden:
+	Japanese Find Options	Japanische Suchoptionen
+	Sounds like (Japanese)	Ähnliche Schreibweise (Japanisch)
+	Match full/half width	Voll-/Halbbreite gleichsetzen
+	Match hiragana/katakana	Hiragana/Katakana gleichsetzen
+	Match small kana	Kleine Kana gleichsetzen
+	Match prolonged sound marks and dashes	Längezeichen und Striche gleichsetzen
