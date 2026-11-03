@@ -211,9 +211,7 @@ mod tests {
 
     #[test]
     fn lists_groups_and_replaces_the_other_spellings() {
-        let mut s = Session::new(doc4me_doc::Document::from_text(
-            "コンピューターとｺﾝﾋﾟｭｰﾀ、コンピューター。\nＰＤＦとPDFとPDF、データだけ",
-        ));
+        let mut s = Session::new(doc4me_doc::Document::from_text("コンピューターとｺﾝﾋﾟｭｰﾀ、コンピューター。\nＰＤＦとPDFとPDF、データだけ"));
         let v = run(&mut s, "review.consistencyChecker", json!({}));
         let g = v["groups"].as_array().unwrap();
         assert_eq!(g.len(), 2, "{v}");
@@ -227,7 +225,11 @@ mod tests {
         assert_eq!(s.doc.plain_text(StoryRef::Body), "コンピューターとコンピューター、コンピューター。\nPDFとPDFとPDF、データだけ");
         assert!(run(&mut s, "review.consistencyChecker", json!({}))["groups"].as_array().unwrap().is_empty());
         run(&mut s, "edit.undo", json!({}));
-        assert_eq!(s.doc.plain_text(StoryRef::Body), "コンピューターとコンピューター、コンピューター。\nＰＤＦとPDFとPDF、データだけ", "one undo step");
+        assert_eq!(
+            s.doc.plain_text(StoryRef::Body),
+            "コンピューターとコンピューター、コンピューター。\nＰＤＦとPDFとPDF、データだけ",
+            "one undo step"
+        );
     }
 
     #[test]

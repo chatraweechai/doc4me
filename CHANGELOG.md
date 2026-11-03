@@ -102,6 +102,16 @@
 
 ### แก้ไข
 
+- **`cargo xtask readiness` บอกชื่อไฟล์ที่ทำให้หัวรายงานเป็น `<commit>+changes`** (`xtask/src/readiness.rs` ฟังก์ชัน `commit`)
+  - เหตุผล: รายงานที่วัดบน Windows runner (`readiness-windows.yml`) เขียน `at commit d37e836+changes` ทุกรอบ แปลว่า `git status --porcelain --untracked-files=no` เห็นไฟล์ที่ git ติดตามเปลี่ยนไปตอนวัด แต่ไม่รู้ว่าไฟล์ใด จึงยังยืนยันไม่ได้ว่าตัวเลขวัดจากโค้ดของ commit นั้นตรงๆ; ตรวจในโค้ดแล้ว xtask เขียนแค่ `docs/readiness.md` (หลังอ่านสถานะ git) และ `target/`, build script ของ `doc4me-ui-egui`/`doc4me-fonts` เขียนลง `OUT_DIR`, ไม่มี symlink ไฟล์ที่ index เป็น CRLF ชื่อไฟล์ที่ Windows ใช้ไม่ได้ หรือชื่อซ้ำเมื่อไม่สนตัวพิมพ์ และ `cargo metadata --locked` ผ่าน (Cargo.lock ไม่ต้องอัปเดต) จึงต้องให้ runner บอกเอง
+  - เปลี่ยน: เมื่อต้นไม้งานไม่สะอาด พิมพ์รายการจาก `git status --porcelain` ลง stderr (เห็นใน log ของขั้น "Measure readiness") หัวรายงานยังเป็น `+changes` เหมือนเดิม; เมื่อ git ใช้ไม่ได้ผลเหมือนเดิม (ไม่มี `+changes`)
+  - ผลต่อผู้ใช้: ไม่มี (เครื่องมือของนักพัฒนาเท่านั้น ไม่เกี่ยวกับแอป ไฟล์ .docx หรือตัวติดตั้ง)
+  - ตรวจสอบ: `cargo test -p xtask` 29 ผ่าน, `cargo clippy -p xtask --all-targets -- -D warnings` ผ่าน
+- **จัดรูปแบบโค้ดตาม `rustfmt.toml` ที่ค้างจากงานรอบก่อน** (`crates/docx/src/read/mod.rs`, `crates/docx/src/write/mod.rs`, `crates/engine/src/cmd/{consistency,file_tools,mod,typography}.rs`, `crates/ui-egui/src/{dialogs,dialogs_forms,file_browser}.rs`)
+  - เหตุผล: `cargo fmt --all --check` บน `main` (`eb52712`) ไม่ผ่าน จากโค้ดของ Web Options, Japanese Consistency Checker, Copy File/Find Files, Edit Links, Letter Wizard และ Hangul Hanja ที่ commit ไปโดยไม่ได้รัน `cargo fmt`; CI ไม่ได้ตรวจ fmt จึงไม่มีใครเห็น
+  - เปลี่ยน: `cargo fmt --all` เท่านั้น (ตัดบรรทัดยาว และเรียง `pub mod consistency` ตามตัวอักษร) ไม่มีผลต่อพฤติกรรม
+  - ผลต่อผู้ใช้: ไม่มี
+  - ตรวจสอบ: `cargo fmt --all --check` ผ่านหลังแก้
 - **รูปร่างที่มีเรขาคณิตกำหนดเอง (`a:custGeom`) ภายในกลุ่ม (`wpg:wgp`) ไม่ถูกวาดเป็นกรอบสี่เหลี่ยมเต็มขอบเขตอีกต่อไป** (`crates/docx/src/read/story.rs`, `group_members`)
   - เหตุผล: ใน govuk-005 กลุ่มรูปร่างของหน้าแบบฟอร์มมีรูปร่างที่ path ประกอบด้วยสี่เหลี่ยมหลายอัน (ช่อง "Provide details here") แต่เดิมเรขาคณิตกำหนดเองอ่านเป็น freeform เฉพาะรูปร่างเดี่ยว สมาชิกในกลุ่มจึงถูกวาดเป็นกรอบสี่เหลี่ยมใหญ่เท่าขอบเขตทั้งหมด (สูงเกือบทั้งหน้า) พร้อมเส้นแนวตั้งพาดทับตาราง
   - ตอนนี้สมาชิกของกลุ่มที่ไม่ใช่กล่องข้อความและมี `a:custGeom` อ่านเป็น freeform แบบเดียวกับรูปร่างเดี่ยว (แต่ละ sub-path เป็น path ของตัวเอง)

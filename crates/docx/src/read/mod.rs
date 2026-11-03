@@ -960,7 +960,8 @@ impl Reader<'_> {
         for k in root.els() {
             match k.name.as_str() {
                 "w:encoding" => {
-                    w.encoding = k.attr("w:val").map(str::trim).filter(|v| !v.is_empty() && v.len() <= doc4me_doc::MAX_ENCODING_NAME).map(str::to_string);
+                    w.encoding =
+                        k.attr("w:val").map(str::trim).filter(|v| !v.is_empty() && v.len() <= doc4me_doc::MAX_ENCODING_NAME).map(str::to_string);
                 }
                 "w:optimizeForBrowser" => {
                     w.optimize_for_browser = on(k);
@@ -973,7 +974,8 @@ impl Reader<'_> {
                 "w:doNotOrganizeInFolder" => w.organize_in_folder = !on(k),
                 "w:doNotUseLongFileNames" => w.long_file_names = !on(k),
                 "w:pixelsPerInch" => {
-                    w.pixels_per_inch = k.attr("w:val").and_then(|v| v.trim().parse::<u32>().ok()).filter(|n| doc4me_doc::PIXELS_PER_INCH.contains(n));
+                    w.pixels_per_inch =
+                        k.attr("w:val").and_then(|v| v.trim().parse::<u32>().ok()).filter(|n| doc4me_doc::PIXELS_PER_INCH.contains(n));
                 }
                 "w:targetScreenSz" => {
                     w.target_screen = k.attr("w:val").filter(|v| doc4me_doc::TARGET_SCREENS.contains(v)).map(str::to_string);

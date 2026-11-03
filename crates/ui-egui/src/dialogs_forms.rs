@@ -535,7 +535,11 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
             let text = v["text"].as_str().unwrap_or("").to_string();
             let cands: Vec<Vec<String>> = v["candidates"]
                 .as_array()
-                .map(|a| a.iter().map(|c| c.as_array().map(|c| c.iter().filter_map(|h| h.as_str().map(str::to_string)).collect()).unwrap_or_default()).collect())
+                .map(|a| {
+                    a.iter()
+                        .map(|c| c.as_array().map(|c| c.iter().filter_map(|h| h.as_str().map(str::to_string)).collect()).unwrap_or_default())
+                        .collect()
+                })
                 .unwrap_or_default();
             Some(FormDialog::Hanja { chosen: vec![0; cands.len()], text, cands })
         }
@@ -589,7 +593,13 @@ fn file_links(v: &Value) -> Vec<(String, String, bool)> {
         .as_array()
         .map(|a| {
             a.iter()
-                .map(|l| (l["kind"].as_str().unwrap_or("").to_string(), l["source"].as_str().unwrap_or("").to_string(), l["locked"].as_bool().unwrap_or(false)))
+                .map(|l| {
+                    (
+                        l["kind"].as_str().unwrap_or("").to_string(),
+                        l["source"].as_str().unwrap_or("").to_string(),
+                        l["locked"].as_bool().unwrap_or(false),
+                    )
+                })
                 .collect()
         })
         .unwrap_or_default()
@@ -721,7 +731,10 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
                         if ui.checkbox(&mut l, "").on_hover_text(tl!("Locked")).changed() {
                             action = Some(json!({"link": i, "action": if l { "lock" } else { "unlock" }}));
                         }
-                        if ui.add_enabled(text.trim() != source.as_str() && !text.trim().is_empty(), egui::Button::new(tl!("Change Source"))).clicked() {
+                        if ui
+                            .add_enabled(text.trim() != source.as_str() && !text.trim().is_empty(), egui::Button::new(tl!("Change Source")))
+                            .clicked()
+                        {
                             action = Some(json!({"link": i, "action": "changeSource", "source": text.trim()}));
                         }
                         if ui.button(tl!("Break Link")).clicked() {
@@ -757,8 +770,12 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
             });
             let (ok, cancel) = buttons(ui, tl!("Finish"));
             if ok {
-                let params: serde_json::Map<String, Value> =
-                    LETTER_FIELDS.iter().zip(fields.iter()).filter(|(_, v)| !v.trim().is_empty()).map(|((k, _, _), v)| (k.to_string(), json!(v))).collect();
+                let params: serde_json::Map<String, Value> = LETTER_FIELDS
+                    .iter()
+                    .zip(fields.iter())
+                    .filter(|(_, v)| !v.trim().is_empty())
+                    .map(|((k, _, _), v)| (k.to_string(), json!(v)))
+                    .collect();
                 // With every field empty, the letter with the template's wording (an empty field
                 // still writes the letter; no fields at all would only open this dialog again).
                 let params = if params.is_empty() { json!({"date": ""}) } else { Value::Object(params) };
@@ -1313,7 +1330,8 @@ mod tests {
     #[test]
     fn hangul_hanja_dialog_converts_both_ways() {
         let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("大韓 만세")), Services::default()));
-        h.state_mut().session.sel = doc4me_engine::Selection::caret(doc4me_doc::Pos::new(doc4me_doc::StoryRef::Body, doc4me_doc::Path::top(0), "大韓 만".len()));
+        h.state_mut().session.sel =
+            doc4me_engine::Selection::caret(doc4me_doc::Pos::new(doc4me_doc::StoryRef::Body, doc4me_doc::Path::top(0), "大韓 만".len()));
         h.state_mut().run("review.hangulHanja", json!({})).unwrap();
         h.run_steps(3);
         let FormDialog::Hanja { text, cands, chosen } = form(&mut h) else { panic!("the Hangul Hanja dialog") };
