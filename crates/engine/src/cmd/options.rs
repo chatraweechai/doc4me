@@ -30,10 +30,52 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .params(r#"{"value"?: bool (default: toggle)}"#)
         .pure(),
+        CommandSpec::new("file.fileLocations", "File Locations", "File › Options › Advanced", file_locations)
+            .params(r#"{"documents"?: folder | null, "pictures"?: folder | null} — the folders Open and Save As, and Insert Picture, start in (null: the system's choice); without either, opens File › Options › Advanced"#)
+            .pure(),
         CommandSpec::new("file.bidiOptions", "Bidirectional Text", "File › Options › Advanced", bidi_options)
             .params(r#"{"cursorMovement"?: "logical|visual", "defaultDirection"?: "ltr|rtl" (new blank documents)} — without either, opens File › Options › Advanced"#)
             .pure(),
     ]
+}
+
+/// Longest folder path File Locations keeps, in bytes.
+const MAX_FOLDER_PATH: usize = 4096;
+
+/// A File Locations folder: `Some(None)` clears it, `Some(Some(path))` sets it to an existing
+/// folder (absolute), `None` leaves it.
+fn folder_param(v: &Value, k: &str) -> Result<Option<Option<String>>, CmdError> {
+    match v.get(k) {
+        None => Ok(None),
+        Some(Value::Null) => Ok(Some(None)),
+        Some(Value::String(t)) if t.trim().is_empty() => Ok(Some(None)),
+        Some(Value::String(t)) => {
+            let t = t.trim();
+            let path = std::path::Path::new(t);
+            if t.len() > MAX_FOLDER_PATH || t.contains('\0') || !path.is_absolute() || !path.is_dir() {
+                return Err(CmdError::Params(format!("`{k}` must be an existing folder, given as a full path")));
+            }
+            Ok(Some(Some(t.to_string())))
+        }
+        Some(_) => Err(CmdError::Params(format!("`{k}` must be a folder path or null"))),
+    }
+}
+
+/// Word's File Locations: where Open and Save As (Documents) and Insert Picture (Pictures) start.
+fn file_locations(s: &mut Session, v: &Value) -> CmdResult {
+    let documents = folder_param(v, "documents")?;
+    let pictures = folder_param(v, "pictures")?;
+    let opened = documents.is_none() && pictures.is_none();
+    if let Some(d) = documents {
+        s.prefs.documents_dir = d;
+    }
+    if let Some(p) = pictures {
+        s.prefs.pictures_dir = p;
+    }
+    if opened {
+        s.ui_requests.push(json!({"open": "options", "pane": "advanced"}));
+    }
+    Ok(json!({"documents": s.prefs.documents_dir, "pictures": s.prefs.pictures_dir, "opened": opened}))
 }
 
 /// Word's bidirectional (complex scripts) options: Cursor movement and Default direction.
@@ -311,5 +353,29 @@ mod bidi_tests {
         s.run("file.new", &json!({})).unwrap();
         assert_eq!(s.doc.styles.default_para.bidi, None);
         assert!(!s.prefs.logical_cursor);
+    }
+
+    #[test]
+    fn file_locations_keep_existing_folders() {
+        let mut s = Session::new(doc4me_doc::Document::new());
+        let r = s.run("file.fileLocations", &json!({})).unwrap();
+        assert_eq!((r["opened"].as_bool(), r["documents"].is_null()), (Some(true), true));
+        let dir = std::env::temp_dir();
+        let d = dir.to_string_lossy().to_string();
+        let r = s.run("file.fileLocations", &json!({"documents": d, "pictures": d})).unwrap();
+        assert_eq!((r["documents"].as_str(), r["opened"].as_bool()), (Some(d.as_str()), Some(false)));
+        assert_eq!(s.prefs.pictures_dir.as_deref(), Some(d.as_str()));
+        // Not a folder, not a full path, not text: nothing changes.
+        let file = dir.join("doc4me-file-locations-test.txt");
+        std::fs::write(&file, "x").unwrap();
+        assert!(s.run("file.fileLocations", &json!({"documents": file.to_string_lossy()})).is_err());
+        let _ = std::fs::remove_file(&file);
+        assert!(s.run("file.fileLocations", &json!({"documents": "relative/folder"})).is_err());
+        assert!(s.run("file.fileLocations", &json!({"pictures": 3})).is_err());
+        assert!(s.run("file.fileLocations", &json!({"documents": dir.join("no-such-folder-doc4me").to_string_lossy()})).is_err());
+        assert_eq!(s.prefs.documents_dir.as_deref(), Some(d.as_str()));
+        // Null or blank: the system's choice again.
+        s.run("file.fileLocations", &json!({"documents": null, "pictures": ""})).unwrap();
+        assert!(s.prefs.documents_dir.is_none() && s.prefs.pictures_dir.is_none());
     }
 }

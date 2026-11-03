@@ -472,6 +472,11 @@ pub struct Prefs {
     pub logical_cursor: bool,
     /// Bidirectional text › Default direction: new blank documents read right to left.
     pub rtl_default: bool,
+    /// File › Options › Advanced › File Locations › Documents: the folder Open and Save As start
+    /// in (Save As starts beside a document that has a file); `None`, the system's choice.
+    pub documents_dir: Option<String>,
+    /// File Locations › Pictures: the folder Insert Picture starts in.
+    pub pictures_dir: Option<String>,
 }
 
 /// What Paste keeps of the copied content's formatting (Word's Paste Options).
@@ -513,6 +518,8 @@ impl Default for Prefs {
             paste_other: PasteMode::Keep,
             logical_cursor: false,
             rtl_default: false,
+            documents_dir: None,
+            pictures_dir: None,
         }
     }
 }

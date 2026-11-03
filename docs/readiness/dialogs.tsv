@@ -207,7 +207,7 @@ dlg-205	wdDialogToolsOptionsBidi	1029	(none)	file.bidiOptions	registry		Options 
 dlg-206	wdDialogToolsOptionsCompatibility	525	(none)	file.compatibilityOptions	registry		Compatibility Options: the layout options Doc4Me follows (Options › Advanced)
 dlg-207	wdDialogToolsOptionsEdit	224	(none)	file.options	registry		Advanced
 dlg-208	wdDialogToolsOptionsEditCopyPaste	1356	(none)	file.options	registry		File › Options › Advanced › Cut, copy, and paste: Pasting within the same document, between documents, from other programs (Keep Source Formatting, Merge Formatting, Keep Text Only); file.options pasteSame/pasteBetween/pasteOther
-dlg-209	wdDialogToolsOptionsFileLocations	225	(none)	-	registry		
+dlg-209	wdDialogToolsOptionsFileLocations	225	(none)	file.fileLocations	registry		Options › Advanced › File locations (Documents, Pictures)
 dlg-210	wdDialogToolsOptionsFuzzy	790	(none)	edit.fuzzyOptions	registry		Japanese fuzzy find: Find Options (Japanese) (`edit.fuzzyOptions`: match full/half width, hiragana/katakana, small kana, prolonged sound marks and dashes) with Sounds like (Japanese) in Advanced Find (`edit.find` `fuzzy`); tests `japanese_fuzzy_find_matches_what_reads_alike`, `japanese_fuzzy_find_through_the_commands`, UI `japanese_find_options_open_in_advanced_find`
 dlg-211	wdDialogToolsOptionsGeneral	203	(none)	file.options	registry		General
 dlg-212	wdDialogToolsOptionsPrint	208	(none)	file.options	registry		Advanced › Print
