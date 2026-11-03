@@ -165,9 +165,10 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
         r.read_theme(&p);
     }
     // Secondary parts are optional: a broken one is skipped (logged), not fatal.
-    let lenient = |what: &str, res: Result<(), DocxError>| {
+    let lenient = |what: &str, part: &str, res: Result<(), DocxError>| {
         if let Err(e) = res {
             log::warn!("docx: ignoring unreadable {what}: {e}");
+            pkg.note_repair(crate::package::REPAIR_PART, part);
         }
     };
     // Styles come before settings, but their theme colours already follow its colour mapping.
@@ -175,28 +176,28 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
         r.read_color_mapping(&p);
     }
     if let Some(p) = part(rt::STYLES) {
-        lenient("styles", r.read_styles(&p));
+        lenient("styles", &p, r.read_styles(&p));
     }
     if let Some(p) = part(rt::NUMBERING) {
-        lenient("numbering", r.read_numbering(&p));
+        lenient("numbering", &p, r.read_numbering(&p));
     }
     // Without a stated mode (or settings at all) Word lays a document out as Word 2007 did.
     r.doc.settings.compat_mode = doc4me_doc::LEGACY_COMPAT_MODE;
     // Its complex-script properties are the file's: saved back as read.
     r.doc.complex_script_from_file = true;
     if let Some(p) = part(rt::SETTINGS) {
-        lenient("settings", r.read_settings(&p));
+        lenient("settings", &p, r.read_settings(&p));
     }
     if let Some(p) = part(rt::FOOTNOTES) {
-        lenient("footnotes", r.read_notes(&p, true));
+        lenient("footnotes", &p, r.read_notes(&p, true));
     }
     if let Some(p) = part(rt::ENDNOTES) {
-        lenient("endnotes", r.read_notes(&p, false));
+        lenient("endnotes", &p, r.read_notes(&p, false));
     }
     if let Some(p) = part(rt::COMMENTS) {
         let ex = part(rt::COMMENTS_EX);
         let utc = (part(rt::COMMENTS_IDS), part(rt::COMMENTS_EXTENSIBLE));
-        lenient("comments", r.read_comments(&p, ex.as_deref(), (utc.0.as_deref(), utc.1.as_deref())));
+        lenient("comments", &p, r.read_comments(&p, ex.as_deref(), (utc.0.as_deref(), utc.1.as_deref())));
     }
     // Bibliography sources live in a custom XML data store (`b:Sources`), related from the
     // package root or the main part; Word's own files sometimes leave the relationship out, so
@@ -221,7 +222,7 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
         if r.doc.sources.len() >= MAX_SOURCES {
             break;
         }
-        lenient("customXml bibliography", r.read_bibliography(path, &mut seen_sources));
+        lenient("customXml bibliography", path, r.read_bibliography(path, &mut seen_sources));
     }
 
     if let Some(bg) = root.child("w:background").and_then(|b| b.attr("w:color")).and_then(Rgb::parse) {
@@ -268,6 +269,10 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
     }
     let mut doc = r.doc;
     doc.ensure_nonempty();
+    // Show Repairs: what the package and its parts had to leave out.
+    for (message, what) in pkg.repairs() {
+        doc.note_repair(message, what);
+    }
     Ok(doc)
 }
 

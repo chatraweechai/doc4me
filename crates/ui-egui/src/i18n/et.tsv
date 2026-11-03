@@ -2969,3 +2969,10 @@ spacing	Normal	Tavaline
 	Documents:	Dokumendid:
 	Pictures:	Pildid:
 	The system's choice	Süsteemi valik
+	Show Repairs	Kuva parandused
+	No repairs were needed.	Parandusi polnud vaja.
+	These problems were found and repaired when the document was opened:	Dokumendi avamisel leiti ja parandati need probleemid:
+	An unreadable entry in the file was skipped: {what}	Faili loetamatu kirje jäeti vahele: {what}
+	An unreadable part was left out: {what}	Loetamatu osa jäeti välja: {what}
+	Unreadable relationships were ignored: {what}	Loetamatuid seoseid eirati: {what}
+	A missing part of an embedded object was left out: {what}	Manustatud objekti puuduv osa jäeti välja: {what}

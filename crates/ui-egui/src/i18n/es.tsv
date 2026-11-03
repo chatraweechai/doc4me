@@ -2975,3 +2975,10 @@ spacing	Normal	Normal
 	Documents:	Documentos:
 	Pictures:	Imágenes:
 	The system's choice	La elección del sistema
+	Show Repairs	Mostrar reparaciones
+	No repairs were needed.	No fue necesaria ninguna reparación.
+	These problems were found and repaired when the document was opened:	Se encontraron y repararon estos problemas al abrir el documento:
+	An unreadable entry in the file was skipped: {what}	Se omitió una entrada ilegible del archivo: {what}
+	An unreadable part was left out: {what}	Se omitió una parte ilegible: {what}
+	Unreadable relationships were ignored: {what}	Se ignoraron relaciones ilegibles: {what}
+	A missing part of an embedded object was left out: {what}	Se omitió una parte que faltaba de un objeto incrustado: {what}

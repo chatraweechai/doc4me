@@ -2961,3 +2961,10 @@ spacing	Normal	標準
 	Documents:	文書:
 	Pictures:	画像:
 	The system's choice	システムの既定
+	Show Repairs	修復内容の表示
+	No repairs were needed.	修復は必要ありませんでした。
+	These problems were found and repaired when the document was opened:	文書を開くときに次の問題が見つかり、修復されました:
+	An unreadable entry in the file was skipped: {what}	ファイル内の読み取れない項目をスキップしました: {what}
+	An unreadable part was left out: {what}	読み取れないパーツを除外しました: {what}
+	Unreadable relationships were ignored: {what}	読み取れないリレーションシップを無視しました: {what}
+	A missing part of an embedded object was left out: {what}	埋め込みオブジェクトの欠落したパーツを除外しました: {what}

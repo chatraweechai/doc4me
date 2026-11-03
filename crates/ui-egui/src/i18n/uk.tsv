@@ -2973,3 +2973,10 @@ spacing	Normal	Звичайний
 	Documents:	Документи:
 	Pictures:	Зображення:
 	The system's choice	Вибір системи
+	Show Repairs	Показати виправлення
+	No repairs were needed.	Виправлення не знадобилися.
+	These problems were found and repaired when the document was opened:	Під час відкриття документа виявлено та виправлено такі проблеми:
+	An unreadable entry in the file was skipped: {what}	Пропущено нечитабельний запис файлу: {what}
+	An unreadable part was left out: {what}	Нечитабельну частину пропущено: {what}
+	Unreadable relationships were ignored: {what}	Нечитабельні зв’язки проігноровано: {what}
+	A missing part of an embedded object was left out: {what}	Відсутню частину вбудованого об’єкта пропущено: {what}

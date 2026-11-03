@@ -698,6 +698,30 @@ pub struct Document {
     /// when saved ([`Document::make_complex_script_explicit`]).
     #[serde(skip_serializing_if = "std::ops::Not::not")]
     pub complex_script_from_file: bool,
+    /// What reading the file had to repair or leave out (Word's Show Repairs), in the order met.
+    /// Not saved; empty for a document read without trouble or made here.
+    #[serde(skip)]
+    pub repairs: Vec<Repair>,
+}
+
+/// One thing reading a damaged file repaired: `message` is a fixed English sentence with `{what}`
+/// standing for `what` (a part or entry name), so the front end can translate it.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Repair {
+    pub message: String,
+    pub what: String,
+}
+
+/// At most this many repairs are listed for one file (a badly damaged one may have thousands).
+pub const MAX_REPAIRS: usize = 200;
+
+impl Document {
+    /// Note a repair (past [`MAX_REPAIRS`], dropped).
+    pub fn note_repair(&mut self, message: &str, what: impl Into<String>) {
+        if self.repairs.len() < MAX_REPAIRS {
+            self.repairs.push(Repair { message: message.to_string(), what: what.into() });
+        }
+    }
 }
 
 impl Default for Document {
@@ -726,6 +750,7 @@ impl Document {
             media: BTreeMap::new(),
             passthrough: BTreeMap::new(),
             complex_script_from_file: false,
+            repairs: Vec::new(),
         }
     }
 

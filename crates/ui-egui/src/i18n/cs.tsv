@@ -2966,3 +2966,10 @@ spacing	Normal	Normální
 	Documents:	Dokumenty:
 	Pictures:	Obrázky:
 	The system's choice	Volba systému
+	Show Repairs	Zobrazit opravy
+	No repairs were needed.	Nebyly potřeba žádné opravy.
+	These problems were found and repaired when the document was opened:	Při otevírání dokumentu byly nalezeny a opraveny tyto problémy:
+	An unreadable entry in the file was skipped: {what}	Nečitelná položka souboru byla přeskočena: {what}
+	An unreadable part was left out: {what}	Nečitelná část byla vynechána: {what}
+	Unreadable relationships were ignored: {what}	Nečitelné relace byly ignorovány: {what}
+	A missing part of an embedded object was left out: {what}	Chybějící část vloženého objektu byla vynechána: {what}

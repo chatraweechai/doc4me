@@ -33,6 +33,9 @@ pub fn specs() -> Vec<CommandSpec> {
             .key("Mod+O / Mod+F12 / Mod+Alt+F2")
             .params(r#"{"path": string, "data"?: base64 (the file's bytes; `path` then only names it), "password"?: string (for a password-protected Word document)}"#)
             .pure(),
+        CommandSpec::new("file.showRepairs", "Show Repairs", "File", show_repairs)
+            .params(r#"{} → {"repairs": [{"message": string with {what}, "what": string}]}: what opening the document had to repair or leave out (opening a damaged file shows them)"#)
+            .pure(),
         CommandSpec::new("file.save", "Save", "File", save)
             .key("Mod+S / Shift+F12 / Alt+Shift+F2")
             .params(r#"{"path"?: string, "password"?: string (encrypt this and later saves with it, as file.encrypt does), "markup"?: bool (Print Markup for a PDF, PNG, HTML, Markdown or text copy: comments shown; default file.printMarkup)}"#)
@@ -211,13 +214,23 @@ fn open(s: &mut Session, v: &Value) -> CmdResult {
     if !substituted.is_empty() {
         s.ui_requests.push(json!({"fontsSubstituted": substituted, "with": "Sarabun"}));
     }
+    // A damaged file opened with parts left out: Word's Show Repairs says what.
+    if !s.doc.repairs.is_empty() {
+        s.ui_requests.push(json!({"open": "showRepairs"}));
+    }
     Ok(json!({
         "path": path,
         "paragraphs": s.doc.paragraph_count(),
         "words": s.doc.word_count(),
         "encrypted": encrypted,
         "substitutedFonts": substituted,
+        "repairs": s.doc.repairs.len(),
     }))
+}
+
+/// Show Repairs: what reading the document repaired or left out.
+fn show_repairs(s: &mut Session, _: &Value) -> CmdResult {
+    Ok(json!({"repairs": s.doc.repairs}))
 }
 
 /// Fonts Doc4Me has no metrics for that a document may use; when one isn't installed the bundled

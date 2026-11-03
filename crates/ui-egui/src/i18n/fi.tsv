@@ -2958,3 +2958,10 @@
 	Documents:	Tiedostot:
 	Pictures:	Kuvat:
 	The system's choice	Järjestelmän valinta
+	Show Repairs	Näytä korjaukset
+	No repairs were needed.	Korjauksia ei tarvittu.
+	These problems were found and repaired when the document was opened:	Nämä ongelmat löydettiin ja korjattiin tiedostoa avattaessa:
+	An unreadable entry in the file was skipped: {what}	Tiedoston lukukelvoton merkintä ohitettiin: {what}
+	An unreadable part was left out: {what}	Lukukelvoton osa jätettiin pois: {what}
+	Unreadable relationships were ignored: {what}	Lukukelvottomat suhteet ohitettiin: {what}
+	A missing part of an embedded object was left out: {what}	Upotetun objektin puuttuva osa jätettiin pois: {what}

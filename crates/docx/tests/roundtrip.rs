@@ -2462,3 +2462,20 @@ fn typography_settings_round_trip() {
         assert_eq!((back.settings.char_spacing, &back.settings.kinsoku), (spacing, &kinsoku));
     }
 }
+
+/// Show Repairs: a part that can't be read is left out and listed; a sound file lists nothing.
+#[test]
+fn unreadable_parts_are_listed_as_repairs() {
+    let sound = doc4me_docx::write(&Document::from_text("Hello")).unwrap();
+    assert!(doc4me_docx::read(&sound).unwrap().repairs.is_empty());
+    let broken = replace_part(&sound, "word/styles.xml", b"<w:styles w:x=\"unterminated></w:styles>");
+    let d = doc4me_docx::read(&broken).unwrap();
+    assert_eq!(d.plain_text(doc4me_doc::StoryRef::Body), "Hello", "the text is still read");
+    assert_eq!(d.repairs.len(), 1, "{:?}", d.repairs);
+    assert_eq!(d.repairs[0].what, "word/styles.xml");
+    assert!(d.repairs[0].message.contains("{what}"));
+    // Broken relationships of the main part: the document still opens.
+    let broken = replace_part(&sound, "word/_rels/document.xml.rels", b"<Relationships a=\"unterminated>");
+    let d = doc4me_docx::read(&broken).unwrap();
+    assert!(d.repairs.iter().any(|r| r.what == "word/_rels/document.xml.rels"), "{:?}", d.repairs);
+}

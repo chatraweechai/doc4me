@@ -2958,3 +2958,10 @@
 	Documents:	Documente:
 	Pictures:	Imagini:
 	The system's choice	Alegerea sistemului
+	Show Repairs	Afișare reparații
+	No repairs were needed.	Nu au fost necesare reparații.
+	These problems were found and repaired when the document was opened:	La deschiderea documentului au fost găsite și reparate aceste probleme:
+	An unreadable entry in the file was skipped: {what}	O intrare ilizibilă din fișier a fost omisă: {what}
+	An unreadable part was left out: {what}	O parte ilizibilă a fost omisă: {what}
+	Unreadable relationships were ignored: {what}	Relațiile ilizibile au fost ignorate: {what}
+	A missing part of an embedded object was left out: {what}	O parte lipsă a unui obiect încorporat a fost omisă: {what}

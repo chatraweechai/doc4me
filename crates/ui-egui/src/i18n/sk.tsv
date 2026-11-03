@@ -2958,3 +2958,10 @@
 	Documents:	Dokumenty:
 	Pictures:	Obrázky:
 	The system's choice	Voľba systému
+	Show Repairs	Zobraziť opravy
+	No repairs were needed.	Neboli potrebné žiadne opravy.
+	These problems were found and repaired when the document was opened:	Pri otváraní dokumentu sa našli a opravili tieto problémy:
+	An unreadable entry in the file was skipped: {what}	Nečitateľná položka súboru bola preskočená: {what}
+	An unreadable part was left out: {what}	Nečitateľná časť bola vynechaná: {what}
+	Unreadable relationships were ignored: {what}	Nečitateľné vzťahy boli ignorované: {what}
+	A missing part of an embedded object was left out: {what}	Chýbajúca časť vloženého objektu bola vynechaná: {what}

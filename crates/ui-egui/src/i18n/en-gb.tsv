@@ -2954,3 +2954,10 @@
 	Documents:	Documents:
 	Pictures:	Pictures:
 	The system's choice	The system's choice
+	Show Repairs	Show Repairs
+	No repairs were needed.	No repairs were needed.
+	These problems were found and repaired when the document was opened:	These problems were found and repaired when the document was opened:
+	An unreadable entry in the file was skipped: {what}	An unreadable entry in the file was skipped: {what}
+	An unreadable part was left out: {what}	An unreadable part was left out: {what}
+	Unreadable relationships were ignored: {what}	Unreadable relationships were ignored: {what}
+	A missing part of an embedded object was left out: {what}	A missing part of an embedded object was left out: {what}

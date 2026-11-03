@@ -192,6 +192,11 @@ pub enum FormDialog {
         groups: Vec<Vec<(String, u64)>>,
         chosen: Vec<usize>,
     },
+    /// File › Show Repairs: what opening the document repaired or left out, as (message with
+    /// `{what}`, what).
+    Repairs {
+        items: Vec<(String, String)>,
+    },
     /// AutoSummarize: how the summary is shown and how long it is.
     Summarize {
         /// highlight, top or newDocument.
@@ -469,6 +474,7 @@ impl FormDialog {
             FormDialog::Frame { .. } => "formatFrame",
             FormDialog::Chinese { .. } => "chineseConversion",
             FormDialog::Consistency { .. } => "consistencyChecker",
+            FormDialog::Repairs { .. } => "showRepairs",
         }
     }
 
@@ -487,6 +493,7 @@ impl FormDialog {
             FormDialog::Frame { .. } => "Frame",
             FormDialog::Chinese { .. } => "Chinese Conversion",
             FormDialog::Consistency { .. } => "Japanese Consistency Checker",
+            FormDialog::Repairs { .. } => "Show Repairs",
         }
     }
 }
@@ -499,6 +506,14 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
         "formatFrame" => Some(FormDialog::Frame { form: FrameForm::read(app) }),
         "chineseConversion" => Some(FormDialog::Chinese { to_traditional: false, variants: false }),
+        "showRepairs" => {
+            let v = app.session.run("file.showRepairs", &json!({})).unwrap_or_default();
+            let items = v["repairs"]
+                .as_array()
+                .map(|a| a.iter().map(|r| (r["message"].as_str().unwrap_or("").to_string(), r["what"].as_str().unwrap_or("").to_string())).collect())
+                .unwrap_or_default();
+            Some(FormDialog::Repairs { items })
+        }
         "consistencyChecker" => {
             let groups = consistency_groups(app);
             Some(FormDialog::Consistency { chosen: vec![0; groups.len()], groups })
@@ -562,6 +577,20 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
                 }
             }
             cancel
+        }
+        FormDialog::Repairs { items } => {
+            if items.is_empty() {
+                ui.label(tl!("No repairs were needed."));
+            } else {
+                ui.label(tl!("These problems were found and repaired when the document was opened:"));
+                egui::ScrollArea::vertical().max_height(260.0).show(ui, |ui| {
+                    for (message, what) in items.iter() {
+                        ui.label(format!("• {}", crate::i18n::fmt(tl!(message.as_str()), &[("what", what)])));
+                    }
+                });
+            }
+            ui.add_space(6.0);
+            ui.button(tl!("Close")).clicked()
         }
         FormDialog::Consistency { groups, chosen } => {
             if groups.is_empty() {
@@ -1088,6 +1117,20 @@ mod tests {
         h.run_steps(12);
         assert!(h.state().dialog.is_none());
         assert!(frame(&mut h).is_null());
+    }
+
+    #[test]
+    fn show_repairs_lists_what_opening_left_out() {
+        let mut doc = doc4me_doc::Document::from_text("Hello");
+        doc.note_repair("An unreadable part was left out: {what}", "word/styles.xml");
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc), Services::default()));
+        h.state_mut().run("file.showRepairs", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Repairs { items } if items.len() == 1));
+        h.get_by_label("• An unreadable part was left out: word/styles.xml");
+        h.get_by_label("Close").click();
+        h.run_steps(6);
+        assert!(h.state().dialog.is_none());
     }
 
     #[test]
