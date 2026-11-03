@@ -463,6 +463,7 @@ pub(crate) fn language_menu(ui: &mut Ui, app: &mut WordApp) {
     mi(ui, app, "Chinese Conversion…", "review.chineseConversion", json!({}));
     ui.separator();
     mi(ui, app, "Japanese Consistency Checker…", "review.consistencyChecker", json!({}));
+    mi(ui, app, "Hangul Hanja Conversion…", "review.hangulHanja", json!({}));
 }
 
 /// A menu item with a check mark when `checked` (the current choice of several).

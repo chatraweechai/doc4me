@@ -3003,3 +3003,9 @@ spacing	Normal	ปกติ
 	Use long file names whenever possible	ใช้ชื่อแฟ้มยาวเมื่อเป็นไปได้
 	Screen size:	ขนาดหน้าจอ:
 	Pixels per inch:	พิกเซลต่อนิ้ว:
+	Hangul Hanja Conversion	แปลงฮันกึล/ฮันจา
+	Hangul Hanja Conversion…	แปลงฮันกึล/ฮันจา…
+	Hangul to Hanja	ฮันกึลเป็นฮันจา
+	Hanja to Hangul	ฮันจาเป็นฮันกึล
+	Put the caret in Korean text to choose its Hanja.	วางเคอร์เซอร์ในข้อความภาษาเกาหลีเพื่อเลือกฮันจา
+	The selection, or the whole document when nothing is selected.	ส่วนที่เลือก หรือทั้งเอกสารเมื่อไม่ได้เลือกอะไร

@@ -1841,6 +1841,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "format.frame" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formatFrame"),
         // Chinese Conversion without a direction asks which way.
         "review.chineseConversion" if !has("to") => Some("chineseConversion"),
+        // Hangul Hanja Conversion without a direction asks which way (and which Hanja).
+        "review.hangulHanja" if !has("to") => Some("hangulHanja"),
         // Edit Links to Files without an action lists the links in its dialog.
         "file.editLinks" if !has("action") => Some("editLinks"),
         // Show Repairs lists them in its dialog.

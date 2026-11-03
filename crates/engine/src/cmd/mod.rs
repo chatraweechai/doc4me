@@ -26,6 +26,7 @@ pub mod font;
 pub mod format;
 pub mod forms;
 pub mod frames;
+pub mod hanja;
 pub mod index;
 pub mod ink_shape;
 pub mod insert;
@@ -78,6 +79,7 @@ pub fn registry() -> Registry {
     v.extend(asian_layout::specs());
     v.extend(consistency::specs());
     v.extend(file_tools::specs());
+    v.extend(hanja::specs());
     v.extend(typography::specs());
     v.extend(para::specs());
     v.extend(lists::specs());

@@ -197,6 +197,13 @@ pub enum FormDialog {
     Repairs {
         items: Vec<(String, String)>,
     },
+    /// Review › Language › Hangul Hanja Conversion: the Hangul at the caret (empty when there is
+    /// none), each syllable's Hanja and the one chosen (0: keep the syllable).
+    Hanja {
+        text: String,
+        cands: Vec<Vec<String>>,
+        chosen: Vec<usize>,
+    },
     /// File › Info › Edit Links to Files: each link's kind, source and lock, and the source as
     /// edited in the dialog.
     Links {
@@ -487,6 +494,7 @@ impl FormDialog {
             FormDialog::Repairs { .. } => "showRepairs",
             FormDialog::Letter { .. } => "letterWizard",
             FormDialog::Links { .. } => "editLinks",
+            FormDialog::Hanja { .. } => "hangulHanja",
         }
     }
 
@@ -508,6 +516,7 @@ impl FormDialog {
             FormDialog::Repairs { .. } => "Show Repairs",
             FormDialog::Letter { .. } => "Letter Wizard",
             FormDialog::Links { .. } => "Edit Links to Files",
+            FormDialog::Hanja { .. } => "Hangul Hanja Conversion",
         }
     }
 }
@@ -520,6 +529,16 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
         "formatFrame" => Some(FormDialog::Frame { form: FrameForm::read(app) }),
         "chineseConversion" => Some(FormDialog::Chinese { to_traditional: false, variants: false }),
+        "hangulHanja" => {
+            // Without Hangul at the caret, the dialog still converts Hanja to Hangul.
+            let v = app.session.run("review.hangulHanja", &json!({})).unwrap_or_default();
+            let text = v["text"].as_str().unwrap_or("").to_string();
+            let cands: Vec<Vec<String>> = v["candidates"]
+                .as_array()
+                .map(|a| a.iter().map(|c| c.as_array().map(|c| c.iter().filter_map(|h| h.as_str().map(str::to_string)).collect()).unwrap_or_default()).collect())
+                .unwrap_or_default();
+            Some(FormDialog::Hanja { chosen: vec![0; cands.len()], text, cands })
+        }
         "editLinks" => {
             let links = file_links(&app.session.run("file.editLinks", &json!({})).unwrap_or_default());
             Some(FormDialog::Links { edited: links.iter().map(|l| l.1.clone()).collect(), links })
@@ -630,6 +649,60 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
                 }
             }
             cancel
+        }
+        FormDialog::Hanja { text, cands, chosen } => {
+            let mut done = false;
+            ui.label(egui::RichText::new(tl!("Hangul to Hanja")).strong());
+            if text.is_empty() {
+                ui.label(tl!("Put the caret in Korean text to choose its Hanja."));
+            } else {
+                ui.horizontal_wrapped(|ui| {
+                    for (i, syl) in text.chars().enumerate() {
+                        let options = cands.get(i).cloned().unwrap_or_default();
+                        let pick = chosen.get(i).copied().unwrap_or(0);
+                        // 0 keeps the syllable; 1.. are its Hanja.
+                        let shown = if pick == 0 { syl.to_string() } else { options.get(pick - 1).cloned().unwrap_or_else(|| syl.to_string()) };
+                        egui::ComboBox::from_id_salt(("hanja", i)).selected_text(shown).width(48.0).show_ui(ui, |ui| {
+                            if ui.selectable_label(pick == 0, syl.to_string()).clicked() {
+                                chosen[i] = 0;
+                            }
+                            for (k, h) in options.iter().enumerate() {
+                                if ui.selectable_label(pick == k + 1, h.as_str()).clicked() {
+                                    chosen[i] = k + 1;
+                                }
+                            }
+                        });
+                    }
+                });
+                if ui.add_enabled(chosen.iter().any(|c| *c > 0), egui::Button::new(tl!("Convert"))).clicked() {
+                    let hanja: String = text
+                        .chars()
+                        .enumerate()
+                        .map(|(i, syl)| match chosen.get(i).copied().unwrap_or(0) {
+                            0 => syl.to_string(),
+                            k => cands.get(i).and_then(|c| c.get(k - 1)).cloned().unwrap_or_else(|| syl.to_string()),
+                        })
+                        .collect();
+                    match app.run("review.hangulHanja", json!({"to": "hanja", "hanja": hanja})) {
+                        Ok(_) => done = true,
+                        Err(e) => app.status(e),
+                    }
+                }
+            }
+            ui.add_space(6.0);
+            ui.label(egui::RichText::new(tl!("Hanja to Hangul")).strong());
+            if ui.button(tl!("Convert")).on_hover_text(tl!("The selection, or the whole document when nothing is selected.")).clicked() {
+                match app.run("review.hangulHanja", json!({"to": "hangul"})) {
+                    Ok(v) => {
+                        let n = v["changed"].as_u64().unwrap_or(0);
+                        app.status(crate::i18n::fmt(tl!("Converted {n} characters"), &[("n", &n.to_string())]));
+                        done = true;
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            ui.add_space(6.0);
+            done || ui.button(tl!("Close")).clicked()
         }
         FormDialog::Links { links, edited } => {
             let mut action: Option<Value> = None;
@@ -1235,6 +1308,33 @@ mod tests {
         h.run_steps(12);
         assert!(h.state().dialog.is_none());
         assert!(frame(&mut h).is_null());
+    }
+
+    #[test]
+    fn hangul_hanja_dialog_converts_both_ways() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("大韓 만세")), Services::default()));
+        h.state_mut().session.sel = doc4me_engine::Selection::caret(doc4me_doc::Pos::new(doc4me_doc::StoryRef::Body, doc4me_doc::Path::top(0), "大韓 만".len()));
+        h.state_mut().run("review.hangulHanja", json!({})).unwrap();
+        h.run_steps(3);
+        let FormDialog::Hanja { text, cands, chosen } = form(&mut h) else { panic!("the Hangul Hanja dialog") };
+        assert_eq!(text, "만세");
+        let man = cands[0].iter().position(|c| c == "萬").unwrap();
+        let se = cands[1].iter().position(|c| c == "歲").unwrap();
+        chosen[0] = man + 1;
+        chosen[1] = se + 1;
+        h.run_steps(1);
+        h.get_all_by_label("Convert").next().expect("Hangul to Hanja's Convert").click();
+        h.run_steps(8);
+        assert!(h.state().dialog.is_none());
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "大韓 萬歲");
+        // Hanja to Hangul, with nothing selected: the whole document.
+        h.state_mut().session.sel = doc4me_engine::Selection::caret(doc4me_doc::Pos::new(doc4me_doc::StoryRef::Body, doc4me_doc::Path::top(0), 0));
+        h.state_mut().run("review.hangulHanja", json!({})).unwrap();
+        h.run_steps(3);
+        h.get_by_label("Put the caret in Korean text to choose its Hanja.");
+        h.get_by_label("Convert").click();
+        h.run_steps(8);
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "대한 만세");
     }
 
     #[test]
