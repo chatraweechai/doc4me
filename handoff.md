@@ -8,6 +8,7 @@
 
 ### ผลวัด Windows รอบที่ 21 (2026-11-03): **86.7%** (run 41565289539 ที่ `8b685b2` ยืนยันตัวเลขของ run 41559739417; `windows-latest`)
 
+- run 41569447798 (`e184943`, หลังแก้ freeform ในกลุ่มรูปร่าง) วัดได้ 86.7% เท่าเดิม (corpus-pages 171/222, corpus-breaks 96/222) เพราะการแก้เปลี่ยนการวาด ไม่ใช่การจัดหน้า
 - รายการ deferred ทั้ง 26 แถวพร้อมเหตุผลอยู่ใน `docs/readiness.md` หัวข้อ `## Deferred rows (26)` (dialogs 12, shortcuts 6, ecosystem 1, hardware 5, platforms 1)
 - run 41559739417 ล้มครั้งแรกที่ขั้น poppler (feed ของ Chocolatey ตอบ 406) แก้ด้วยการลองซ้ำ `95e46b1` แล้วผ่าน
 
