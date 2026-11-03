@@ -70,7 +70,7 @@ VBA editor (out of scope).
 ## The corpus
 
 `cargo xtask readiness --download` fetches every listed file (except excluded rows) into
-`corpus/readiness/` (never committed) and keeps only files whose SHA-256 matches `corpus.tsv`. `cargo xtask readiness
+`corpus/readiness/` (never committed) and keeps only files whose SHA-256 matches `corpus.tsv`. It fails when any file couldn't be fetched (the files it did fetch are kept, so running it again fetches only the rest), and on its own it writes no report. `cargo xtask readiness
 --corpus` then runs `doc4me-cli` on each document, one process per step with a three-minute
 timeout:
 
