@@ -37,6 +37,9 @@ pub fn specs() -> Vec<CommandSpec> {
             .key("Shift+F11 / Alt+Shift+F1")
             .pure(),
         CommandSpec::new("fields.click", "Field Click", "Insert › Text › Quick Parts", click).key("Alt+Shift+F9"),
+        CommandSpec::new("file.editLinks", "Edit Links to Files", "File › Info", edit_links).params(
+            r#"{"link"?: n (from 0, as listed), "action"?: "lock|unlock|changeSource|breakLink", "source"?: path (changeSource)} → {"links": [{"kind", "source", "locked", "pos"}]}: the document's fields that take content from other files (INCLUDETEXT, INCLUDEPICTURE, INCLUDE, LINK, IMPORT)"#,
+        ),
         CommandSpec::new("fields.selected", "Selected Fields", "Insert › Text › Quick Parts", |s, _| {
             Ok(Value::Array(selected(s).iter().map(|f| f.json()).collect()))
         })
@@ -133,6 +136,140 @@ fn instr_words(instr: &str) -> Vec<String> {
         out.push(w);
     }
     out
+}
+
+/// The field kinds that take their content from another file, as Edit Links to Files lists them.
+const LINK_KINDS: [&str; 5] = ["INCLUDETEXT", "INCLUDEPICTURE", "INCLUDE", "LINK", "IMPORT"];
+/// Longest source path Change Source writes, in characters.
+const MAX_SOURCE: usize = 1024;
+
+/// A field that takes content from a file: the field, its kind, its source path (as the code
+/// spells it, `\\` read as `\`) and the word index of the path in the code.
+struct FileLink {
+    field: FieldAt,
+    kind: String,
+    source: String,
+}
+
+/// The body's fields that take content from other files, in document order.
+fn file_links(s: &Session) -> Vec<FileLink> {
+    story_fields(s, StoryRef::Body)
+        .into_iter()
+        .filter_map(|f| {
+            let words = instr_words(&f.instr);
+            let kind = words.first()?.to_ascii_uppercase();
+            if !LINK_KINDS.contains(&kind.as_str()) {
+                return None;
+            }
+            // LINK names the program's class first, then the file.
+            let args: Vec<&String> = words.iter().skip(1).filter(|w| !w.starts_with('\\')).collect();
+            let source = if kind == "LINK" { args.get(1) } else { args.first() }.map(|w| w.replace("\\\\", "\\")).unwrap_or_default();
+            Some(FileLink { field: f, kind, source })
+        })
+        .collect()
+}
+
+/// `instr` with its file path (the `n`th argument, switches not counted) replaced by `path`,
+/// quoted, with backslashes doubled as Word writes them in field codes.
+fn with_source(instr: &str, kind: &str, path: &str) -> String {
+    let quoted = format!("\"{}\"", path.replace('\\', "\\\\"));
+    let target_arg = if kind == "LINK" { 1 } else { 0 };
+    // Walk the code's words keeping their spans, so the rest of the code stays as written.
+    let mut out = String::with_capacity(instr.len() + path.len());
+    let (mut arg, mut i, mut done) = (0usize, 0usize, false);
+    let b = instr.as_bytes();
+    let mut first = true;
+    while i < b.len() {
+        if b[i].is_ascii_whitespace() {
+            out.push(b[i] as char);
+            i += 1;
+            continue;
+        }
+        let start = i;
+        if b[i] == b'"' {
+            i += 1;
+            while i < b.len() && b[i] != b'"' {
+                i += 1;
+            }
+            i = (i + 1).min(b.len());
+        } else {
+            while i < b.len() && !b[i].is_ascii_whitespace() {
+                i += 1;
+            }
+        }
+        let word = &instr[start..i];
+        let is_arg = !first && !word.starts_with('\\');
+        if is_arg && !done && arg == target_arg {
+            out.push_str(&quoted);
+            done = true;
+        } else {
+            out.push_str(word);
+        }
+        if is_arg {
+            arg += 1;
+        }
+        first = false;
+    }
+    if !done {
+        out.push(' ');
+        out.push_str(&quoted);
+    }
+    out
+}
+
+/// File › Info › Edit Links to Files: list the fields that take content from other files, and
+/// lock, unlock, re-point or break one.
+fn edit_links(s: &mut Session, v: &Value) -> CmdResult {
+    let links = file_links(s);
+    let list = |links: &[FileLink]| -> Value {
+        json!({"links": links.iter().map(|l| json!({
+            "kind": l.kind,
+            "source": l.source,
+            "locked": l.field.locked,
+            "pos": super::pos_json(&l.field.at),
+        })).collect::<Vec<_>>()})
+    };
+    let Some(action) = p::str(v, "action") else {
+        s.only_read();
+        return Ok(list(&links));
+    };
+    let n = p::u64(v, "link").ok_or_else(|| CmdError::Params("`link` (its number in the list, from 0) is required".into()))? as usize;
+    let Some(link) = links.get(n) else {
+        return Err(CmdError::Params(format!("there are {} links; no link {n}", links.len())));
+    };
+    let at = link.field.at.clone();
+    match action {
+        "lock" | "unlock" => {
+            let value = action == "lock";
+            with_field(s, &at, |o| match o {
+                InlineObject::Field { locked, .. } | InlineObject::FieldStart { locked, .. } => *locked = value,
+                _ => {}
+            })?;
+        }
+        "changeSource" => {
+            let path = p::req_str(v, "source")?.trim();
+            if path.is_empty() || path.chars().count() > MAX_SOURCE || path.contains('"') || path.chars().any(char::is_control) {
+                return Err(CmdError::Params(format!("`source` is a file path of 1 to {MAX_SOURCE} characters, without quotes")));
+            }
+            let code = with_source(&link.field.instr, &link.kind, path);
+            if code.len() > MAX_CODE {
+                return Err(CmdError::Params("the field code would be too long".into()));
+            }
+            with_field(s, &at, |o| match o {
+                InlineObject::Field { instr, .. } | InlineObject::FieldStart { instr, .. } => *instr = code.clone(),
+                _ => {}
+            })?;
+        }
+        "breakLink" => {
+            // As Unlink Fields does for this field: it becomes what it shows.
+            let width = OBJ.len_utf8();
+            let end = link.field.end.clone().map_or_else(|| Pos { off: at.off + width, ..at.clone() }, |e| Pos { off: e.off + width, ..e });
+            s.sel = Selection { anchor: at, focus: end };
+            unlink(s, &json!({}))?;
+        }
+        other => return Err(CmdError::Params(format!("unknown action `{other}`: lock, unlock, changeSource or breakLink"))),
+    }
+    Ok(list(&file_links(s)))
 }
 
 /// Alt+Shift+F9 (Word's Do Field Click) on the field at the caret: GOTOBUTTON goes to its
@@ -323,6 +460,40 @@ mod tests {
     use serde_json::json;
 
     use crate::Session;
+
+    #[test]
+    fn edit_links_lists_locks_repoints_and_breaks_file_links() {
+        let mut s = Session::new(doc4me_doc::Document::new());
+        s.run("text.insert", &json!({"text": "A "})).unwrap();
+        s.run("insert.field", &json!({"instr": r#"INCLUDETEXT "C:\\Docs\\part.docx" Intro \* MERGEFORMAT"#, "result": "Included"})).unwrap();
+        s.run("text.insert", &json!({"text": " B "})).unwrap();
+        s.run("insert.field", &json!({"instr": "AUTHOR", "result": "Me"})).unwrap();
+        s.run("insert.field", &json!({"instr": r#"LINK Excel.Sheet.12 "book.xlsx" "Sheet1!R1C1" \a"#, "result": "42"})).unwrap();
+        let r = s.run("file.editLinks", &json!({})).unwrap();
+        let links = r["links"].as_array().unwrap();
+        assert_eq!(links.len(), 2, "AUTHOR takes nothing from a file: {r}");
+        assert_eq!((links[0]["kind"].as_str(), links[0]["source"].as_str()), (Some("INCLUDETEXT"), Some(r"C:\Docs\part.docx")));
+        assert_eq!((links[1]["kind"].as_str(), links[1]["source"].as_str()), (Some("LINK"), Some("book.xlsx")));
+        // Lock, then point the first at another file: the rest of its code stays.
+        let r = s.run("file.editLinks", &json!({"link": 0, "action": "lock"})).unwrap();
+        assert_eq!(r["links"][0]["locked"], json!(true));
+        let r = s.run("file.editLinks", &json!({"link": 0, "action": "changeSource", "source": r"D:\New\other.docx"})).unwrap();
+        assert_eq!(r["links"][0]["source"], json!(r"D:\New\other.docx"));
+        let instr = super::story_fields(&s, doc4me_doc::StoryRef::Body)[0].instr.clone();
+        assert_eq!(instr, r#"INCLUDETEXT "D:\\New\\other.docx" Intro \* MERGEFORMAT"#);
+        s.run("file.editLinks", &json!({"link": 1, "action": "changeSource", "source": "new.xlsx"})).unwrap();
+        assert_eq!(super::story_fields(&s, doc4me_doc::StoryRef::Body)[2].instr, r#"LINK Excel.Sheet.12 "new.xlsx" "Sheet1!R1C1" \a"#);
+        assert!(s.run("file.editLinks", &json!({"link": 0, "action": "changeSource", "source": "a\"b"})).is_err());
+        assert!(s.run("file.editLinks", &json!({"link": 5, "action": "lock"})).is_err());
+        assert!(s.run("file.editLinks", &json!({"link": 0, "action": "explode"})).is_err());
+        // Break Link: the field becomes the text it shows, and the list shrinks.
+        let r = s.run("file.editLinks", &json!({"link": 0, "action": "breakLink"})).unwrap();
+        assert_eq!(r["links"].as_array().unwrap().len(), 1);
+        let text = s.doc.plain_text(doc4me_doc::StoryRef::Body);
+        assert!(text.starts_with("A Included B "), "{text:?}");
+        s.run("edit.undo", &json!({})).unwrap();
+        assert_eq!(s.run("file.editLinks", &json!({})).unwrap()["links"].as_array().unwrap().len(), 2, "one undo step");
+    }
 
     fn session_with_fields() -> Session {
         let mut s = Session::new(doc4me_doc::Document::new());

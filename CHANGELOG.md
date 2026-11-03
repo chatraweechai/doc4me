@@ -13,6 +13,11 @@
 
 ### เพิ่ม
 
+- **File › Info › Edit Links to Files: รายการ ล็อก เปลี่ยนแหล่ง และตัดการเชื่อมโยงของเขตข้อมูลที่ดึงเนื้อหาจากไฟล์อื่น** (คำสั่งใหม่ `file.editLinks` ใน `crates/engine/src/cmd/fields.rs`; `FormDialog::Links` ใน `crates/ui-egui/src/dialogs_forms.rs`, `crates/ui-egui/src/dialogs.rs`, `crates/ui-egui/src/lib.rs`; ข้อความใหม่ 5 รายการในแคตตาล็อกทั้ง 28 ภาษา; `docs/readiness/dialogs.tsv` dlg-021)
+  - เหตุผล: `wdDialogEditLinks` ไม่มีของเทียบเท่า
+  - ตอนนี้: แสดงเขตข้อมูล INCLUDETEXT, INCLUDEPICTURE, INCLUDE, LINK และ IMPORT ในเนื้อหาพร้อมไฟล์ต้นทาง (อ่าน `\\` ในรหัสเป็น `\`) และสถานะล็อก; `{"link": n, "action": "lock|unlock|changeSource|breakLink", "source"?}` ล็อก/ปลดล็อก, เปลี่ยน path ในรหัสเขตข้อมูล (ใส่เครื่องหมายคำพูดและเพิ่ม `\` เป็นสองตัวแบบ Word, ส่วนอื่นของรหัสคงเดิม, ห้ามมี `"` และอักขระควบคุม, ยาวไม่เกิน 1,024) หรือตัดการเชื่อมโยง (เขตข้อมูลกลายเป็นข้อความที่แสดงอยู่ เหมือน Unlink Fields) แต่ละอย่างเป็น undo ขั้นเดียว
+  - ผู้ใช้: ไฟล์ .docx เดิมที่มีเขตข้อมูลเหล่านี้บันทึกกลับตามรหัสที่แก้; ไม่มีผลกับเอกสารที่ไม่มีการเชื่อมโยง
+  - ตรวจสอบ: เทสต์ใหม่ `edit_links_lists_locks_repoints_and_breaks_file_links`, UI `edit_links_dialog_breaks_a_link`; `cargo test -p doc4me-engine` ผ่าน 468, `cargo test -p doc4me-ui-egui` ผ่าน 405, clippy ไม่มีคำเตือน
 - **File › New › Letter Wizard: สร้างจดหมายใหม่จากช่องข้อมูล** (`LetterFields`, `letter_from` ใน `crates/engine/src/sample.rs`; คำสั่งใหม่ `file.letterWizard` ใน `crates/engine/src/cmd/file.rs`; `FormDialog::Letter` ใน `crates/ui-egui/src/dialogs_forms.rs`, `crates/ui-egui/src/dialogs.rs`; ถือเป็นคำสั่งที่แทนที่เอกสารใน `discards_document` ของ `crates/ui-egui/src/lib.rs` จึงถามบันทึกการเปลี่ยนแปลงก่อนเหมือน File › New; ข้อความใหม่ 10 รายการในแคตตาล็อกทั้ง 28 ภาษา; `docs/readiness/dialogs.tsv` dlg-115)
   - เหตุผล: `wdDialogLetterWizard` ไม่มีของเทียบเท่า
   - ตอนนี้: `{"senderName"?, "returnAddress"?, "date"?, "mailingInstructions"?, "recipientName"?, "recipientAddress"?, "attention"?, "subject"?, "salutation"?, "body"?, "closing"?, "senderJobTitle"?, "senderCompany"?, "senderInitials"?, "enclosures"?, "cc"?}` สร้างเอกสารใหม่แทนเอกสารปัจจุบัน วางตามแม่แบบ Letter (ชื่อผู้ส่งเป็นสไตล์ Title, วันที่วันนี้ถ้าไม่ระบุ, ช่องหลายบรรทัดเป็นหนึ่งย่อหน้าต่อบรรทัด, หัวเรื่องตัวหนา, ช่องว่างถูกข้าม, คำขึ้นต้น/คำลงท้าย/เนื้อหาที่ไม่ระบุใช้ของแม่แบบ); ช่องละไม่เกิน 2,000 ตัวอักษร (เนื้อหา 100,000) ตัดอักขระควบคุมยกเว้นขึ้นบรรทัด; ไม่มีช่องใดเลยจะเปิด dialog Letter Wizard ซึ่งใส่ชื่อผู้ใช้เป็นผู้ส่งให้
@@ -127,6 +132,7 @@
 
 ### ข้อจำกัดที่ทราบ
 
+- Edit Links to Files ยังไม่มี Update Now: Doc4Me ยังไม่ประเมินเขตข้อมูล INCLUDETEXT/INCLUDEPICTURE/LINK จากไฟล์ต้นทาง จึงแสดงผลลัพธ์ที่บันทึกไว้ในไฟล์; รายการครอบคลุมเฉพาะเนื้อหาหลัก (ไม่รวมหัว/ท้ายกระดาษ)
 - File locations มีเฉพาะ Documents และ Pictures: Doc4Me ยังไม่มีโฟลเดอร์ AutoRecover, User/Workgroup templates หรือ Startup ให้ตั้ง (ไม่มีฟีเจอร์เหล่านั้นแบบใช้โฟลเดอร์); ยังพิมพ์ path เองแทนการเลือกโฟลเดอร์จาก dialog
 - **การบีบคานะ (`compressPunctuationAndJapaneseKana`)** อ่าน/บันทึกได้และบีบเครื่องหมายวรรคตอนเหมือน `compressPunctuation` แต่ยังไม่บีบคานะ; การบีบใช้กฎคู่เครื่องหมายติดกัน ยังไม่ครอบคลุมกฎ JIS X 4051 ทั้งหมด (เช่น ต้น/ท้ายบรรทัด)
 - **Fit Text ตอนหดข้อความ** ใช้การลดระยะห่างอักขระ (ตัวอักษรอาจซ้อนกัน) ขณะที่ Word บีบความกว้างตัวอักษรด้วย; การขยายตรงกับ Word
