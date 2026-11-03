@@ -1,4 +1,4 @@
-# Handoff: Doc4Me 1.1.2 · readiness 87.5% (วัดบน Windows รอบที่ 21 ด้วย workflow `readiness-windows.yml` run 41592240746, 2026-11-03; ก่อนหน้า 87.3%, 87.2%, 87.1%, 87.0%, 86.9%, 86.8%, 86.7% และ 86.0% รอบที่ 17) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
+# Handoff: Doc4Me 1.1.2 · readiness 87.6% (วัดบน Windows รอบที่ 21 ด้วย workflow `readiness-windows.yml` run 41594385545, 2026-11-03; ก่อนหน้า 87.5%, 87.3%, 87.2%, 87.1%, 87.0%, 86.9%, 86.8%, 86.7% และ 86.0% รอบที่ 17) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
 
 อัปเดต: 2026-11-02 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 20 (ออกรุ่นครบ แล้วทำงานต่อด้าน pagination) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
@@ -8,7 +8,8 @@
 
 ### ผลวัด Windows รอบที่ 21 (2026-11-03): **86.7%** (run 41565289539 ที่ `8b685b2` ยืนยันตัวเลขของ run 41559739417; `windows-latest`)
 
-- run 41592240746 (`40b5402`, รวม `dd16ed6` Copy File/Find Files `dlg-007`/`dlg-032`/`dlg-152` และ `0a41629` Letter Wizard `dlg-115`): **87.5%**, **90.1%** เมื่อไม่นับ deferred, ฟีเจอร์ 94.1%, dialogs 197 → 201/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, open/round-trip 222/222); รอวัด: `bc4fe56` (Edit Links to Files, `dlg-021`) และ `f5f32df` (Web Options, `dlg-232`) (บน Linux dialogs 203/228)
+- run 41594385545 (`d37e836`, รวม `bc4fe56` Edit Links to Files `dlg-021`): **87.6%**, 90.1% เมื่อไม่นับ deferred, ฟีเจอร์ 94.3%, dialogs 201 → 202/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, open/round-trip 222/222); รอวัดใน run 41596836985: `f5f32df` (Web Options, `dlg-232`, เปลี่ยนการเขียน .docx: เพิ่ม `webSettings.xml`) และ `4c69617` (Hangul Hanja Conversion, `dlg-194`) (บน Linux dialogs 204/228)
+- run 41592240746 (`40b5402`, รวม `dd16ed6` Copy File/Find Files `dlg-007`/`dlg-032`/`dlg-152` และ `0a41629` Letter Wizard `dlg-115`): **87.5%**, **90.1%** เมื่อไม่นับ deferred, ฟีเจอร์ 94.1%, dialogs 197 → 201/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, open/round-trip 222/222)
 - run 41590861975 (`bdfba2d`, รวม `7da7541` Show Repairs `dlg-153`): **87.3%**, 89.8% เมื่อไม่นับ deferred, ฟีเจอร์ 93.2%, dialogs 196 → 197/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96)
 - run 41589001124 (`d40ff9b`, รวม `ddb1c52` File locations `dlg-209`): **87.2%**, 89.7% เมื่อไม่นับ deferred, ฟีเจอร์ 93.0%, dialogs 195 → 196/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96)
 - run 41586915428 (`895d0cc`, รวม `8b92537` Bidirectional text `dlg-205` และ `5d6add8` Manage Fields `dlg-200`): **87.1%**, 89.6% เมื่อไม่นับ deferred, ฟีเจอร์ 92.8%, dialogs 193 → 195/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96)
