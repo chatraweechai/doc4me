@@ -2977,3 +2977,5 @@ spacing	Normal	ปกติ
 	An unreadable part was left out: {what}	ละส่วนที่อ่านไม่ได้: {what}
 	Unreadable relationships were ignored: {what}	ละเว้นความสัมพันธ์ที่อ่านไม่ได้: {what}
 	A missing part of an embedded object was left out: {what}	ละส่วนที่หายไปของวัตถุที่ฝังไว้: {what}
+	Copy File	คัดลอกแฟ้ม
+	Find Files	ค้นหาแฟ้ม

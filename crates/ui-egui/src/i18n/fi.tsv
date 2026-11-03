@@ -2965,3 +2965,5 @@
 	An unreadable part was left out: {what}	Lukukelvoton osa jätettiin pois: {what}
 	Unreadable relationships were ignored: {what}	Lukukelvottomat suhteet ohitettiin: {what}
 	A missing part of an embedded object was left out: {what}	Upotetun objektin puuttuva osa jätettiin pois: {what}
+	Copy File	Kopioi tiedosto
+	Find Files	Etsi tiedostoja

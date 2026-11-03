@@ -5,7 +5,7 @@ dlg-003	wdDialogConsistencyChecker	1121	(none)	review.consistencyChecker	registr
 dlg-004	wdDialogContentControlProperties	2394	(none)	developer.properties	registry		Content Control Properties
 dlg-005	wdDialogControlRun	235	Application	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Windows Control Panel; runs Control Panel or Clipboard (legacy)
 dlg-006	wdDialogConvertObject	392	IconNumber, ActivateAs, IconFileName, Caption, Class, DisplayIcon, Floating	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): OLE objects are converted by their Windows server programs
-dlg-007	wdDialogCopyFile	300	FileName, Directory	-	registry		legacy
+dlg-007	wdDialogCopyFile	300	FileName, Directory	file.copyFile	registry		legacy
 dlg-008	wdDialogCreateAutoText	872	(none)	insert.autoText	registry		save selection as AutoText
 dlg-009	wdDialogCreateSource	1922	(none)	references.citation	registry		Create Source
 dlg-010	wdDialogCSSLinks	1261	LinkStyles	-	registry		
@@ -30,7 +30,7 @@ dlg-028	wdDialogEditSubscribeTo	733	Macintosh-only. For information about this c
 dlg-029	wdDialogEditTOACategory	625	Category, CategoryName	references.toaCategory	registry		Edit Category (Mark Citation › Category…): categories 1–16 with Word's names, Replace with renames one (per user, as Word keeps them in Normal); Mark Citation files the citation under a category (TA \l \s \c), Insert Table of Authorities lists one or All categories under their names, with passim
 dlg-030	wdDialogEmailOptions	863	(none)	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Outlook e-mail stationery and signatures (Microsoft service)
 dlg-031	wdDialogFileDocumentLayout	178	Tab, PaperSize, TopMargin, BottomMargin, LeftMargin, RightMargin, Gutter, PageWidth, PageHeight, Orientation, FirstPage, OtherPages, VertAlign, ApplyPropsTo, Default, FacingPages, HeaderDistance, FooterDistance, SectionStart, OddAndEvenPages, DifferentFirstPage, Endnotes, LineNum, StartingNum, FromText, CountBy, NumMode, TwoOnOne, GutterPosition, LayoutMode, CharsLine, LinesPage, CharPitch, LinePitch, DocFontName, DocFontSize, PageColumns, TextFlow, FirstPageOnLeft, SectionType, RTLAlignment	layout.pageSetup	registry		Page Setup › Layout
-dlg-032	wdDialogFileFind	99	SearchName, SearchPath, Name, SubDir, Title, Author, Keywords, Subject, Options, MatchCase, Text, PatternMatch, DateSavedFrom, DateSavedTo, SavedBy, DateCreatedFrom, DateCreatedTo, View, SortBy, ListBy, SelectedFile, Add, Delete, ShowFolders, MatchByte	-	registry		legacy
+dlg-032	wdDialogFileFind	99	SearchName, SearchPath, Name, SubDir, Title, Author, Keywords, Subject, Options, MatchCase, Text, PatternMatch, DateSavedFrom, DateSavedTo, SavedBy, DateCreatedFrom, DateCreatedTo, View, SortBy, ListBy, SelectedFile, Add, Delete, ShowFolders, MatchByte	file.findFiles	registry		legacy: by name, text and subfolders
 dlg-033	wdDialogFileMacCustomPageSetupGX	737	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.		excluded		Word for Mac only
 dlg-034	wdDialogFileMacPageSetup	685	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.		excluded		Word for Mac only
 dlg-035	wdDialogFileMacPageSetupGX	444	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.		excluded		Word for Mac only
@@ -150,7 +150,7 @@ dlg-148	wdDialogPermission	1469	(none)		excluded		Information Rights Management 
 dlg-149	wdDialogPhoneticGuide	986	(none)	format.phonetic	registry		
 dlg-150	wdDialogReviewAfmtRevisions	570	(none)	format.autoFormatReview	registry		"Formatting completed" after AutoFormat and Review Changes: Accept All, Reject All, Review Changes (Find ←/→ selects each changed paragraph, Reject puts it back); UI test dialogs_data::tests::autoformat_tab_and_review_dialog
 dlg-151	wdDialogSchemaLibrary	1417	(none)	-	registry		
-dlg-152	wdDialogSearch	1363	(none)	-	registry		legacy file search
+dlg-152	wdDialogSearch	1363	(none)	file.findFiles	registry		legacy file search
 dlg-153	wdDialogShowRepairs	1381	(none)	file.showRepairs	registry		what opening a damaged .docx repaired or left out
 dlg-154	wdDialogSourceManager	1920	(none)	references.sources	registry		
 dlg-155	wdDialogStyleManagement	1948	(none)	styles.manage	registry		

@@ -51,6 +51,8 @@ fn folder_param(v: &Value, k: &str) -> Result<Option<Option<String>>, CmdError> 
         Some(Value::String(t)) if t.trim().is_empty() => Ok(Some(None)),
         Some(Value::String(t)) => {
             let t = t.trim();
+            // An agent confined to its folders learns nothing of folders outside them.
+            crate::file_access::check_read(t).map_err(CmdError::Failed)?;
             let path = std::path::Path::new(t);
             if t.len() > MAX_FOLDER_PATH || t.contains('\0') || !path.is_absolute() || !path.is_dir() {
                 return Err(CmdError::Params(format!("`{k}` must be an existing folder, given as a full path")));

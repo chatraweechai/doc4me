@@ -19,6 +19,7 @@ pub mod edit;
 pub mod equation;
 pub mod fields;
 pub mod file;
+pub mod file_tools;
 pub mod find_pattern;
 pub mod fmt_revisions;
 pub mod font;
@@ -76,6 +77,7 @@ pub fn registry() -> Registry {
     v.extend(phonetic::specs());
     v.extend(asian_layout::specs());
     v.extend(consistency::specs());
+    v.extend(file_tools::specs());
     v.extend(typography::specs());
     v.extend(para::specs());
     v.extend(lists::specs());

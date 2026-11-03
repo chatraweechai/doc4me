@@ -391,6 +391,63 @@ pub fn write_file(path: &str, _bytes: &[u8]) -> Result<(), String> {
     Err(format!("{path}: files are saved through the browser on the web"))
 }
 
+/// Copy the file at `from` to `to` (File › Open › Copy File), reading inside the automation read
+/// root and writing inside the write root when there are any.
+#[cfg(not(target_arch = "wasm32"))]
+pub fn copy_file(from: &str, to: &str) -> Result<u64, String> {
+    crate::file_access::check_read(from)?;
+    crate::file_access::check_write(to)?;
+    std::fs::copy(from, to).map_err(|e| format!("{to}: {e}"))
+}
+
+#[cfg(target_arch = "wasm32")]
+pub fn copy_file(from: &str, _to: &str) -> Result<u64, String> {
+    Err(format!("{from}: there are no folders to copy files between on the web"))
+}
+
+/// One entry of a folder, as [`list_dir`] reads it. Links are reported as neither file nor
+/// folder, so a search never follows them out of the folder it was given.
+#[derive(Clone, Debug)]
+pub struct DirEntry {
+    pub path: std::path::PathBuf,
+    pub name: String,
+    pub is_dir: bool,
+    pub is_file: bool,
+    pub len: u64,
+    /// Seconds since 1970.
+    pub modified: Option<u64>,
+}
+
+/// The entries of the folder at `path`, in name order (inside the automation read root when
+/// there is one). Entries that can't be read are left out.
+#[cfg(not(target_arch = "wasm32"))]
+pub fn list_dir(path: &str) -> Result<Vec<DirEntry>, String> {
+    crate::file_access::check_read(path)?;
+    let mut out: Vec<DirEntry> = std::fs::read_dir(path)
+        .map_err(|e| format!("{path}: {e}"))?
+        .flatten()
+        .filter_map(|e| {
+            let ft = e.file_type().ok()?;
+            let meta = e.metadata().ok();
+            Some(DirEntry {
+                path: e.path(),
+                name: e.file_name().to_string_lossy().into_owned(),
+                is_dir: ft.is_dir(),
+                is_file: ft.is_file(),
+                len: meta.as_ref().map_or(0, |m| m.len()),
+                modified: meta.and_then(|m| m.modified().ok()).and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok()).map(|d| d.as_secs()),
+            })
+        })
+        .collect();
+    out.sort_by(|a, b| a.name.cmp(&b.name));
+    Ok(out)
+}
+
+#[cfg(target_arch = "wasm32")]
+pub fn list_dir(path: &str) -> Result<Vec<DirEntry>, String> {
+    Err(format!("{path}: there are no folders to list on the web"))
+}
+
 #[cfg(target_arch = "wasm32")]
 pub fn open_path_with(path: &std::path::Path, _password: Option<&str>) -> Result<(Document, bool), String> {
     Err(format!("{}: files are opened through the browser on the web", path.display()))

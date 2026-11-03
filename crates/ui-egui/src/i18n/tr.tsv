@@ -2995,3 +2995,5 @@ spacing	Normal	Normal
 	An unreadable part was left out: {what}	Okunamayan bir bölüm dışarıda bırakıldı: {what}
 	Unreadable relationships were ignored: {what}	Okunamayan ilişkiler yok sayıldı: {what}
 	A missing part of an embedded object was left out: {what}	Katıştırılmış bir nesnenin eksik bölümü dışarıda bırakıldı: {what}
+	Copy File	Dosyayı Kopyala
+	Find Files	Dosyaları Bul

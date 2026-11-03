@@ -2996,3 +2996,5 @@ spacing	Normal	Обычный
 	An unreadable part was left out: {what}	Нечитаемая часть пропущена: {what}
 	Unreadable relationships were ignored: {what}	Нечитаемые связи пропущены: {what}
 	A missing part of an embedded object was left out: {what}	Отсутствующая часть внедрённого объекта пропущена: {what}
+	Copy File	Копировать файл
+	Find Files	Найти файлы

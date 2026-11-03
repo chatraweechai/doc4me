@@ -2961,3 +2961,5 @@
 	An unreadable part was left out: {what}	An unreadable part was left out: {what}
 	Unreadable relationships were ignored: {what}	Unreadable relationships were ignored: {what}
 	A missing part of an embedded object was left out: {what}	A missing part of an embedded object was left out: {what}
+	Copy File	Copy File
+	Find Files	Find Files

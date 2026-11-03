@@ -2980,3 +2980,5 @@ spacing	Normal	标准
 	An unreadable part was left out: {what}	已略去无法读取的部件: {what}
 	Unreadable relationships were ignored: {what}	已忽略无法读取的关系: {what}
 	A missing part of an embedded object was left out: {what}	已略去嵌入对象中缺失的部件: {what}
+	Copy File	复制文件
+	Find Files	查找文件
