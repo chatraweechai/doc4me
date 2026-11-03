@@ -2980,3 +2980,5 @@ spacing	Normal	Звичайний
 	An unreadable part was left out: {what}	Нечитабельну частину пропущено: {what}
 	Unreadable relationships were ignored: {what}	Нечитабельні зв’язки проігноровано: {what}
 	A missing part of an embedded object was left out: {what}	Відсутню частину вбудованого об’єкта пропущено: {what}
+	Copy File	Копіювати файл
+	Find Files	Знайти файли

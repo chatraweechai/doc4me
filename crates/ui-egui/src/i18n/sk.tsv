@@ -2965,3 +2965,5 @@
 	An unreadable part was left out: {what}	Nečitateľná časť bola vynechaná: {what}
 	Unreadable relationships were ignored: {what}	Nečitateľné vzťahy boli ignorované: {what}
 	A missing part of an embedded object was left out: {what}	Chýbajúca časť vloženého objektu bola vynechaná: {what}
+	Copy File	Kopírovať súbor
+	Find Files	Nájsť súbory

@@ -2978,3 +2978,5 @@ spacing	Normal	Normalno
 	An unreadable part was left out: {what}	Nečitljiv deo je izostavljen: {what}
 	Unreadable relationships were ignored: {what}	Nečitljive veze su zanemarene: {what}
 	A missing part of an embedded object was left out: {what}	Deo ugrađenog objekta koji nedostaje je izostavljen: {what}
+	Copy File	Kopiraj datoteku
+	Find Files	Pronađi datoteke

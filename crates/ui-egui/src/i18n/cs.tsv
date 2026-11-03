@@ -2973,3 +2973,5 @@ spacing	Normal	Normální
 	An unreadable part was left out: {what}	Nečitelná část byla vynechána: {what}
 	Unreadable relationships were ignored: {what}	Nečitelné relace byly ignorovány: {what}
 	A missing part of an embedded object was left out: {what}	Chybějící část vloženého objektu byla vynechána: {what}
+	Copy File	Kopírovat soubor
+	Find Files	Najít soubory

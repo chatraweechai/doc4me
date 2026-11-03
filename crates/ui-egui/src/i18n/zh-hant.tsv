@@ -2969,3 +2969,5 @@ spacing	Normal	標準
 	An unreadable part was left out: {what}	已略去無法讀取的組件: {what}
 	Unreadable relationships were ignored: {what}	已忽略無法讀取的關聯: {what}
 	A missing part of an embedded object was left out: {what}	已略去內嵌物件中遺失的組件: {what}
+	Copy File	複製檔案
+	Find Files	尋找檔案

@@ -2965,3 +2965,5 @@ spacing	Normal	Normal
 	An unreadable part was left out: {what}	Une partie illisible a été omise : {what}
 	Unreadable relationships were ignored: {what}	Des relations illisibles ont été ignorées : {what}
 	A missing part of an embedded object was left out: {what}	Une partie manquante d’un objet incorporé a été omise : {what}
+	Copy File	Copier le fichier
+	Find Files	Rechercher des fichiers

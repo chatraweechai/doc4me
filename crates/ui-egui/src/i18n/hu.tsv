@@ -2969,3 +2969,5 @@ spacing	Normal	Normál
 	An unreadable part was left out: {what}	Egy olvashatatlan rész kimaradt: {what}
 	Unreadable relationships were ignored: {what}	Az olvashatatlan kapcsolatok figyelmen kívül maradtak: {what}
 	A missing part of an embedded object was left out: {what}	Egy beágyazott objektum hiányzó része kimaradt: {what}
+	Copy File	Fájl másolása
+	Find Files	Fájlok keresése

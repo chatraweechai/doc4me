@@ -2965,3 +2965,5 @@
 	An unreadable part was left out: {what}	En oläslig del utelämnades: {what}
 	Unreadable relationships were ignored: {what}	Olästa relationer ignorerades: {what}
 	A missing part of an embedded object was left out: {what}	En saknad del av ett inbäddat objekt utelämnades: {what}
+	Copy File	Kopiera fil
+	Find Files	Sök efter filer

@@ -2968,3 +2968,5 @@ spacing	Normal	標準
 	An unreadable part was left out: {what}	読み取れないパーツを除外しました: {what}
 	Unreadable relationships were ignored: {what}	読み取れないリレーションシップを無視しました: {what}
 	A missing part of an embedded object was left out: {what}	埋め込みオブジェクトの欠落したパーツを除外しました: {what}
+	Copy File	ファイルのコピー
+	Find Files	ファイルの検索

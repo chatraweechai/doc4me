@@ -2965,3 +2965,5 @@
 	An unreadable part was left out: {what}	En ulæselig del blev udeladt: {what}
 	Unreadable relationships were ignored: {what}	Ulæselige relationer blev ignoreret: {what}
 	A missing part of an embedded object was left out: {what}	En manglende del af et indlejret objekt blev udeladt: {what}
+	Copy File	Kopiér fil
+	Find Files	Find filer
