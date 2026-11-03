@@ -2479,3 +2479,37 @@ fn unreadable_parts_are_listed_as_repairs() {
     let d = doc4me_docx::read(&broken).unwrap();
     assert!(d.repairs.iter().any(|r| r.what == "word/_rels/document.xml.rels"), "{:?}", d.repairs);
 }
+
+/// Web Options (`word/webSettings.xml`) read and saved back; a document without them gets none.
+#[test]
+fn web_options_round_trip() {
+    let plain = doc4me_docx::write(&Document::from_text("x")).unwrap();
+    let names: Vec<String> = {
+        let z = zip::ZipArchive::new(std::io::Cursor::new(&plain[..])).unwrap();
+        z.file_names().filter_map(Result::ok).map(|n| n.to_string()).collect()
+    };
+    assert!(!names.iter().any(|n| n == "word/webSettings.xml"), "{names:?}");
+    let mut d = Document::from_text("x");
+    d.settings.web = doc4me_doc::WebOptions {
+        encoding: Some("windows-874".into()),
+        optimize_for_browser: true,
+        browser_target: Some("X4".into()),
+        allow_png: true,
+        rely_on_css: false,
+        organize_in_folder: false,
+        pixels_per_inch: Some(120),
+        target_screen: Some("1024x768".into()),
+        ..Default::default()
+    };
+    let back = doc4me_docx::read(&doc4me_docx::write(&d).unwrap()).unwrap();
+    assert_eq!(back.settings.web, doc4me_doc::WebOptions { present: true, ..d.settings.web.clone() });
+    // A file's part with only Word's usual values is kept, and bad values are dropped.
+    let src = replace_part(
+        &doc4me_docx::write(&back).unwrap(),
+        "word/webSettings.xml",
+        br#"<w:webSettings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:optimizeForBrowser/><w:allowPNG/><w:pixelsPerInch w:val="99999"/><w:targetScreenSz w:val="1x1"/></w:webSettings>"#,
+    );
+    let w = doc4me_docx::read(&src).unwrap().settings.web;
+    assert!(w.present && w.optimize_for_browser && w.allow_png && w.rely_on_css);
+    assert_eq!((w.pixels_per_inch, w.target_screen), (None, None));
+}

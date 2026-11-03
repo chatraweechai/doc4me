@@ -409,6 +409,10 @@ pub(crate) fn write_parts(doc: &Document, flavor: Flavor) -> Result<Vec<(String,
         &format!("{CT_WML}settings+xml"),
         settings_rels,
     );
+    if doc.settings.web.write_part() {
+        rels.add(rt::WEB_SETTINGS, "webSettings.xml", false);
+        push_part(&mut entries, &mut overrides, "word/webSettings.xml", web_settings_xml(&doc.settings.web), &format!("{CT_WML}webSettings+xml"), PartRels::default());
+    }
     rels.add(rt::THEME, "theme/theme1.xml", false);
     push_part(
         &mut entries,
@@ -924,6 +928,41 @@ fn note_id_base(doc: &Document, foot: bool) -> usize {
 fn notes_part(doc: &Document, wr: &Writer<'_>, foot: bool) -> bool {
     let (ids, seps) = if foot { (&wr.footnotes, &doc.footnote_separators) } else { (&wr.endnotes, &doc.endnote_separators) };
     !ids.is_empty() || !seps.is_empty()
+}
+
+/// `w:webSettings`, its children in the schema's order (CT_WebSettings is a sequence).
+fn web_settings_xml(w: &doc4me_doc::WebOptions) -> Vec<u8> {
+    let mut out = String::from("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
+    out.push_str("<w:webSettings xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">");
+    if let Some(e) = &w.encoding {
+        out.push_str(&format!("<w:encoding w:val=\"{}\"/>", xml::esc(e)));
+    }
+    if w.optimize_for_browser {
+        match &w.browser_target {
+            Some(t) => out.push_str(&format!("<w:optimizeForBrowser w:target=\"{}\"/>", xml::esc(t))),
+            None => out.push_str("<w:optimizeForBrowser/>"),
+        }
+    }
+    for (on, name) in [
+        (w.rely_on_vml, "relyOnVML"),
+        (w.allow_png, "allowPNG"),
+        (!w.rely_on_css, "doNotRelyOnCSS"),
+        (!w.save_as_single_file, "doNotSaveAsSingleFile"),
+        (!w.organize_in_folder, "doNotOrganizeInFolder"),
+        (!w.long_file_names, "doNotUseLongFileNames"),
+    ] {
+        if on {
+            out.push_str(&format!("<w:{name}/>"));
+        }
+    }
+    if let Some(n) = w.pixels_per_inch {
+        out.push_str(&format!("<w:pixelsPerInch w:val=\"{n}\"/>"));
+    }
+    if let Some(t) = &w.target_screen {
+        out.push_str(&format!("<w:targetScreenSz w:val=\"{}\"/>", xml::esc(t)));
+    }
+    out.push_str("</w:webSettings>");
+    out.into_bytes()
 }
 
 /// `w:settings`, its children in the schema's order (CT_Settings is a sequence). `template_rel`

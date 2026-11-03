@@ -2990,3 +2990,12 @@ spacing	Normal	Normální
 	Locked	Zamknuto
 	Change Source	Změnit zdroj
 	This document has no links to files.	Tento dokument neobsahuje odkazy na soubory.
+	Web options	Možnosti webu
+	Web Options	Možnosti webu
+	Allow PNG as a graphics format	Povolit formát PNG pro obrázky
+	Rely on CSS for font formatting	Formátování písma pomocí CSS
+	Rely on VML for displaying graphics in browsers	Zobrazovat obrázky v prohlížečích pomocí VML
+	Organize supporting files in a folder	Uspořádat podpůrné soubory do složky
+	Use long file names whenever possible	Používat dlouhé názvy souborů, kdykoli je to možné
+	Screen size:	Velikost obrazovky:
+	Pixels per inch:	Pixelů na palec:

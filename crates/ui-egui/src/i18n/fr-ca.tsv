@@ -2981,3 +2981,12 @@ spacing	Normal	Normal
 	Locked	Verrouillé
 	Change Source	Changer la source
 	This document has no links to files.	Ce document ne contient aucun lien vers des fichiers.
+	Web options	Options Web
+	Web Options	Options Web
+	Allow PNG as a graphics format	Autoriser le format graphique PNG
+	Rely on CSS for font formatting	Utiliser CSS pour la mise en forme des polices
+	Rely on VML for displaying graphics in browsers	Utiliser VML pour afficher les graphiques dans les navigateurs
+	Organize supporting files in a folder	Organiser les fichiers de support dans un dossier
+	Use long file names whenever possible	Utiliser des noms de fichiers longs si possible
+	Screen size:	Taille de l’écran :
+	Pixels per inch:	Pixels par pouce :

@@ -2982,3 +2982,12 @@
 	Locked	Lukittu
 	Change Source	Vaihda lähde
 	This document has no links to files.	Tiedostossa ei ole linkkejä tiedostoihin.
+	Web options	Web-asetukset
+	Web Options	Web-asetukset
+	Allow PNG as a graphics format	Salli PNG-grafiikkamuoto
+	Rely on CSS for font formatting	Käytä CSS:ää fonttien muotoiluun
+	Rely on VML for displaying graphics in browsers	Käytä VML:ää grafiikan näyttämiseen selaimissa
+	Organize supporting files in a folder	Järjestä tukitiedostot kansioon
+	Use long file names whenever possible	Käytä pitkiä tiedostonimiä aina kun mahdollista
+	Screen size:	Näytön koko:
+	Pixels per inch:	Pikseliä tuumalla:

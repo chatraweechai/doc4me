@@ -2990,3 +2990,12 @@ spacing	Normal	Normalne
 	Locked	Zablokowane
 	Change Source	Zmień źródło
 	This document has no links to files.	Ten dokument nie zawiera łączy do plików.
+	Web options	Opcje sieci Web
+	Web Options	Opcje sieci Web
+	Allow PNG as a graphics format	Zezwalaj na format grafiki PNG
+	Rely on CSS for font formatting	Formatuj czcionki przy użyciu CSS
+	Rely on VML for displaying graphics in browsers	Wyświetlaj grafikę w przeglądarkach przy użyciu VML
+	Organize supporting files in a folder	Organizuj pliki pomocnicze w folderze
+	Use long file names whenever possible	Używaj długich nazw plików, gdy jest to możliwe
+	Screen size:	Rozmiar ekranu:
+	Pixels per inch:	Pikseli na cal:

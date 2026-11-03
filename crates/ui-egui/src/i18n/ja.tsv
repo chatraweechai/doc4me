@@ -2985,3 +2985,12 @@ spacing	Normal	標準
 	Locked	ロック
 	Change Source	リンク元の変更
 	This document has no links to files.	この文書にはファイルへのリンクがありません。
+	Web options	Web オプション
+	Web Options	Web オプション
+	Allow PNG as a graphics format	PNG をグラフィック形式として使用する
+	Rely on CSS for font formatting	フォントの書式設定に CSS を使用する
+	Rely on VML for displaying graphics in browsers	ブラウザーでの図の表示に VML を使用する
+	Organize supporting files in a folder	関連ファイルをフォルダーにまとめる
+	Use long file names whenever possible	可能な場合は長いファイル名を使用する
+	Screen size:	画面のサイズ:
+	Pixels per inch:	1 インチあたりのピクセル数:

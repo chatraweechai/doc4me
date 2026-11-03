@@ -2993,3 +2993,12 @@ spacing	Normal	Tavaline
 	Locked	Lukus
 	Change Source	Muuda allikat
 	This document has no links to files.	Selles dokumendis pole linke failidele.
+	Web options	Veebisuvandid
+	Web Options	Veebisuvandid
+	Allow PNG as a graphics format	Luba PNG graafikavormingina
+	Rely on CSS for font formatting	Kasuta fondivormingu jaoks CSS-i
+	Rely on VML for displaying graphics in browsers	Kasuta brauserites graafika kuvamiseks VML-i
+	Organize supporting files in a folder	Korralda abifailid kausta
+	Use long file names whenever possible	Kasuta võimaluse korral pikki failinimesid
+	Screen size:	Ekraani suurus:
+	Pixels per inch:	Pikslit tolli kohta:
