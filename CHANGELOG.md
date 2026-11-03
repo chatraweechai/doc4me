@@ -13,6 +13,11 @@
 
 ### เพิ่ม
 
+- **`docs/readiness.md` แสดงรายการ deferred ทุกแถวพร้อมเหตุผล** (`xtask/src/readiness.rs`, `render`)
+  - เหตุผล: ผู้ใช้สั่ง (2026-11-03) ให้ระบุว่ามีรายการ deferred อะไรบ้างและเหตุผลที่กำกับไว้; เดิมรายงานบอกแค่จำนวน และรายการที่ไม่ผ่านแสดงได้ 40 แถวต่อชุด จึงอาจตกหล่น
+  - ตอนนี้มีหัวข้อ `## Deferred rows (n)` ก่อน `## Not passing` ที่แสดงทุกแถว (รหัส ชุด และเหตุผลจากคอลัมน์ในไฟล์ `docs/readiness/*.tsv`) ไม่ถูกตัดที่ 40
+  - ผู้ใช้: ตัวโปรแกรมและไฟล์ .docx ไม่เปลี่ยน; ตัวเลขคะแนนไม่เปลี่ยนจากการแก้นี้
+  - ตรวจสอบ: `cargo test -p xtask readiness` 8 ผ่าน (เทสต์ `deferred_rows_are_left_out_of_the_second_number` ตรวจจำนวนและบรรทัดของแถว), `cargo fmt --all --check` และ `cargo clippy -p xtask --all-targets -- -D warnings` ผ่าน; `docs/readiness.md` จะถูกสร้างใหม่จาก workflow Windows (ดู handoff)
 - **workflow วัด readiness บน Windows** (`.github/workflows/readiness-windows.yml`, เรียกจากแท็บ Actions ด้วย workflow_dispatch เท่านั้น)
   - เหตุผล: ผู้ใช้สั่ง (2026-11-03) ให้วัด readiness บน Windows ทุกครั้งและบันทึกใน handoff กับ roadmap; session นี้เป็น Linux และคลังทดสอบไม่อยู่ใน git จึงวัดบน Windows เองไม่ได้
   - ทำงาน: ติดตั้ง poppler ผ่าน choco, ดาวน์โหลดคลัง (ลองซ้ำสูงสุด 3 ครั้ง), รัน `cargo xtask readiness --corpus --jobs 4` บน windows-latest, สรุปคะแนนลง step summary แล้ว commit `docs/readiness.md` กลับเข้า `main` ด้วย `[skip ci]`
