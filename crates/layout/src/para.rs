@@ -466,6 +466,9 @@ struct Builder<'a> {
     /// Clusters that may end a line though their object's text has no break opportunity (the
     /// words of a form field's text, see `shape_wrappable`).
     wrap_after: Vec<usize>,
+    /// Clusters that never end a line: a bracket of combined text, and the combined text before
+    /// its closing bracket (see `shape_combined`).
+    keep_with_next: Vec<usize>,
 }
 
 /// What a piece of text is shaped as: one face, case, script formatting and direction.
@@ -959,6 +962,85 @@ impl<'a> Builder<'a> {
         self.clusters.push(Cluster { start, end, adv: x, kind: ClKind::Text, style, g0, g1, break_after: false, obj_h: 0.0, obj_d: 0.0, dot: false });
     }
 
+    /// Two Lines in One (`w:eastAsianLayout/@w:combine`): `text` (document range `start..end`)
+    /// set as two lines of half size within one line, the first half of its characters above the
+    /// second, each centred in the width of the longer, between full-size brackets when the run
+    /// asks for them. All of it is one piece of the text: the line never breaks inside it.
+    fn shape_combined(&mut self, text: &str, start: usize, end: usize, rc: &Arc<ResolvedChar>) {
+        let n = text.chars().count();
+        let cut = text.char_indices().nth(n.div_ceil(2)).map_or(text.len(), |(i, _)| i);
+        let (top, bottom) = text.split_at(cut);
+        let mut plain = (**rc).clone();
+        plain.east_asian = None;
+        let size = plain.size;
+        let mut small = plain.clone();
+        small.size = (size * 0.5).max(1.0);
+        let small = Arc::new(small);
+        let brackets = rc.east_asian.and_then(|l| l.brackets.chars());
+        let full = Arc::new(plain);
+        if let Some((open, _)) = brackets {
+            let k = self.clusters.len();
+            self.shape_atomic(&open.to_string(), start, end, &full);
+            self.keep_with_next.extend(k..self.clusters.len());
+        }
+        let c0 = self.clusters.len();
+        // The second line on the baseline, lowered a little; the first raised a small line above it.
+        let (raise, lower) = (size * 0.47, size * 0.09);
+        let texts: Vec<&str> = [top, bottom].into_iter().filter(|t| !t.is_empty()).collect();
+        let k = match texts.as_slice() {
+            [one] => self.shape_overstruck(&[*one], start, end, &small, doc4me_doc::eq::OAlign::Center, 0.0, 0.0),
+            _ => {
+                let a = self.shape_overstruck(&[top], start, end, &small, doc4me_doc::eq::OAlign::Center, 0.0, raise);
+                let b = self.shape_overstruck(&[bottom], start, end, &small, doc4me_doc::eq::OAlign::Center, 0.0, -lower);
+                self.merge_stacked(a, b)
+            }
+        };
+        if let Some(k) = k
+            && let Some(c) = self.clusters.get_mut(k)
+        {
+            // The line grows to fit the raised line, as it does for ruby text.
+            c.obj_h = raise + size * 0.5 * 0.9;
+        }
+        if brackets.is_some() {
+            self.keep_with_next.extend(c0..self.clusters.len());
+        }
+        if let Some((_, close)) = brackets {
+            self.shape_atomic(&close.to_string(), start, end, &full);
+        }
+    }
+
+    /// Two clusters just made (`a` before `b`, the last two) as one, each centred in the wider:
+    /// returns its index.
+    fn merge_stacked(&mut self, a: Option<usize>, b: Option<usize>) -> Option<usize> {
+        let (Some(a), Some(b)) = (a, b) else { return a.or(b) };
+        if b != a + 1 || b + 1 != self.clusters.len() {
+            return Some(b);
+        }
+        let cb = self.clusters.pop()?;
+        let ca = self.clusters.get(a)?.clone();
+        let adv = ca.adv.max(cb.adv);
+        for (c, glyphs) in [(&ca, ca.g0..ca.g1), (&cb, cb.g0..cb.g1)] {
+            let dx = (adv - c.adv) / 2.0;
+            for g in self.glyphs.get_mut(glyphs.start as usize..glyphs.end as usize).into_iter().flatten() {
+                g.dx += dx;
+            }
+        }
+        // The shown text of `b` follows that of `a`, its ranges moved past `a`'s text.
+        if let Some(pos_b) = self.shown.iter().position(|(i, _, _)| *i == b) {
+            let (_, tb, rb) = self.shown.remove(pos_b);
+            if let Some((_, ta, ra)) = self.shown.iter_mut().find(|(i, _, _)| *i == a) {
+                let off = ta.len();
+                ra.extend(rb.into_iter().map(|r| r.start + off..r.end + off));
+                ta.push_str(&tb);
+            }
+        }
+        let c = self.clusters.get_mut(a)?;
+        c.adv = adv;
+        c.g1 = cb.g1.max(c.g1);
+        c.g0 = c.g0.min(cb.g0);
+        Some(a)
+    }
+
     /// Shape `texts` on top of one another as one cluster for `start..end`: each aligned within
     /// the cluster (at least `width` wide) and raised `dy`. Returns the cluster's index.
     #[allow(clippy::too_many_arguments)]
@@ -1198,6 +1280,7 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
         levels,
         shown: Vec::new(),
         wrap_after: Vec::new(),
+        keep_with_next: Vec::new(),
     };
     let mark_rc = resolve(&p.mark);
     let mark_style = b.style(&mark_rc, None, false);
@@ -1440,9 +1523,15 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
             }
         }
         if let Some(s) = text.get(seg..) {
-            b.shape(s, range.start + seg, &rc, None);
+            // Two Lines in One: the run's text as two half-size lines within one line.
+            if rc.east_asian.is_some_and(|l| l.combine) && !s.is_empty() && !s.contains(OBJ) {
+                b.shape_combined(s, range.start + seg, range.end, &rc);
+            } else {
+                b.shape(s, range.start + seg, &rc, None);
+            }
         }
     }
+    fit_text(&mut b);
     if rp.snap_to_grid {
         snap_chars(&mut b, &p.text, &env.grid);
     }
@@ -1502,6 +1591,11 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
     for &k in &b.wrap_after {
         if let Some(c) = b.clusters.get_mut(k) {
             c.break_after = true;
+        }
+    }
+    for &k in &b.keep_with_next {
+        if let Some(c) = b.clusters.get_mut(k) {
+            c.break_after = false;
         }
     }
 
@@ -1636,6 +1730,39 @@ fn slack_word(pl: &ParaLayout, j: usize, x: f32, line_x: f32, right_edge: f32) -
     }
     let word = end_x - line_x;
     (word > 0.0 && end_x - right_edge <= word * SUBSTITUTE_SLACK).then_some(k)
+}
+
+/// Fit Text (`w:fitText`): each piece of fitted text (neighbouring clusters whose runs have the
+/// same Fit Text) set to its width, every character widened or narrowed by the same amount
+/// (ECMA-376 Part 1 §17.3.2.14). Narrowing stops at nothing: characters may overlap but never
+/// move backwards.
+fn fit_text(b: &mut Builder) {
+    let fit_of = |b: &Builder, c: &Cluster| b.styles.get(c.style as usize).and_then(|st| st.rc.fit_text);
+    let mut i = 0;
+    while i < b.clusters.len() {
+        let Some(fit) = b.clusters.get(i).and_then(|c| fit_of(b, c)) else {
+            i += 1;
+            continue;
+        };
+        let mut j = i + 1;
+        while let Some(c) = b.clusters.get(j) {
+            if fit_of(b, c) != Some(fit) || b.clusters.get(j - 1).is_some_and(|p| p.end != c.start) {
+                break;
+            }
+            j += 1;
+        }
+        let sized = |c: &Cluster| matches!(c.kind, ClKind::Text | ClKind::Space);
+        let piece = b.clusters.get_mut(i..j).unwrap_or(&mut []);
+        let n = piece.iter().filter(|c| sized(c)).count();
+        let total: f32 = piece.iter().filter(|c| sized(c)).map(|c| c.adv).sum();
+        if n > 0 && total.is_finite() {
+            let delta = (fit.width - total) / n as f32;
+            for c in piece.iter_mut().filter(|c| sized(c)) {
+                c.adv = (c.adv + delta).max(0.0);
+            }
+        }
+        i = j;
+    }
 }
 
 fn break_lines(pl: &mut ParaLayout, env: &ParaEnv, mark_style: u16, level: Option<&Level>) {

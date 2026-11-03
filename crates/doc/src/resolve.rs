@@ -64,6 +64,12 @@ pub struct ResolvedChar {
     /// OpenType ligatures asked for (`w14:ligatures`, [`CharProps::ligatures`]); none when unset.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ligatures: Option<String>,
+    /// Fit Text (`w:fitText`, [`CharProps::fit_text`]): the width the run's text is set to.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub fit_text: Option<crate::props::FitText>,
+    /// Two Lines in One and Horizontal in Vertical (`w:eastAsianLayout`), when either is on.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub east_asian: Option<crate::props::EastAsianLayout>,
 }
 
 impl ResolvedChar {
@@ -109,6 +115,8 @@ impl ResolvedChar {
             kern: c.kern.filter(|k| k.is_finite()).unwrap_or(0.0).clamp(0.0, 1638.0),
             // Only values a .docx can hold, so what is drawn is what a save keeps.
             ligatures: c.ligatures.as_deref().and_then(crate::props::ligatures_value).map(str::to_string),
+            fit_text: c.fit_text.and_then(crate::props::FitText::sanitized),
+            east_asian: c.east_asian.filter(crate::props::EastAsianLayout::is_set),
         }
     }
     /// The formatting complex-script text in this run is drawn with: the complex-script font,

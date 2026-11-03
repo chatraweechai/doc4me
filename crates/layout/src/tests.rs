@@ -4637,3 +4637,58 @@ fn form_text_field_result_wraps_between_words() {
     assert_eq!(lines_of("short result"), 1);
     assert_eq!(lines_of(&"x".repeat(30)), 1);
 }
+
+/// The laid-out clusters of the first body paragraph.
+fn first_para_clusters(l: &DocLayout) -> Arc<crate::para::ParaLayout> {
+    l.pages[0].items.iter().find_map(|it| if let Placed::Lines { para, .. } = it { Some(para.clone()) } else { None }).expect("a paragraph")
+}
+
+/// Fit Text (`w:fitText`): the fitted characters together take the width asked for, widened or
+/// narrowed alike; the text around them keeps its own width.
+#[test]
+fn fit_text_sets_the_run_to_its_width() {
+    for width in [120.0f32, 12.0] {
+        let mut d = Document::from_text("ab fit me cd");
+        let plain = first_para_clusters(&lay(&d)).clusters.clone();
+        d.format_range(&Pos::body(0, 3), &Pos::body(0, 9), &|c| c.fit_text = Some(doc4me_doc::props::FitText { width, id: Some(1) })).unwrap();
+        let pl = first_para_clusters(&lay(&d));
+        let fitted: f32 = pl.clusters.iter().filter(|c| c.start >= 3 && c.end <= 9).map(|c| c.adv).sum();
+        let natural: f32 = plain.iter().filter(|c| c.start >= 3 && c.end <= 9).map(|c| c.adv).sum();
+        assert!(natural > 12.0 && natural < 120.0, "{natural}");
+        if width > natural {
+            assert!((fitted - width).abs() < 0.01, "{fitted} for {width}");
+        } else {
+            assert!(fitted <= natural && fitted >= 0.0, "{fitted} for {width}");
+        }
+        // Outside the fitted text nothing moves.
+        let others = |cs: &[crate::para::Cluster]| -> Vec<f32> { cs.iter().filter(|c| c.end <= 3 || c.start >= 9).map(|c| c.adv).collect() };
+        assert_eq!(others(&pl.clusters), others(&plain));
+    }
+}
+
+/// Two Lines in One (`w:eastAsianLayout/@w:combine`): the text becomes one piece about half as
+/// wide (two half-size lines), the first half above; brackets come at full size and the line
+/// never breaks inside.
+#[test]
+fn two_lines_in_one_stacks_the_text_in_one_piece() {
+    use doc4me_doc::props::{CombineBrackets, EastAsianLayout};
+    let mut d = Document::from_text("xx ABCDEFGH yy");
+    let plain: f32 = first_para_clusters(&lay(&d)).clusters.iter().filter(|c| c.start >= 3 && c.end <= 11).map(|c| c.adv).sum();
+    let combine = |brackets| EastAsianLayout { combine: true, brackets, ..Default::default() };
+    d.format_range(&Pos::body(0, 3), &Pos::body(0, 11), &|c| c.east_asian = Some(combine(CombineBrackets::None))).unwrap();
+    let pl = first_para_clusters(&lay(&d));
+    let pieces: Vec<&crate::para::Cluster> = pl.clusters.iter().filter(|c| c.start == 3 && c.end == 11).collect();
+    assert_eq!(pieces.len(), 1, "{:?}", pl.clusters);
+    let w = pieces[0].adv;
+    // Four letters at half size: about a quarter of the eight at full size.
+    assert!(w > plain * 0.15 && w < plain * 0.4, "{w} of {plain}");
+    assert!(pieces[0].obj_h > 0.0, "the line makes room for the raised line");
+    let raised: Vec<f32> = pl.glyphs.get(pieces[0].g0 as usize..pieces[0].g1 as usize).unwrap().iter().map(|g| g.dy).collect();
+    assert!(raised.iter().take(4).all(|dy| *dy > 0.0) && raised.iter().skip(4).all(|dy| *dy < 0.0), "{raised:?}");
+    // Brackets: an opening one, the text and a closing one; no break before the closing bracket.
+    d.format_range(&Pos::body(0, 3), &Pos::body(0, 11), &|c| c.east_asian = Some(combine(CombineBrackets::Round))).unwrap();
+    let pl = first_para_clusters(&lay(&d));
+    let pieces: Vec<&crate::para::Cluster> = pl.clusters.iter().filter(|c| c.start == 3 && c.end == 11).collect();
+    assert_eq!(pieces.len(), 3, "{:?}", pl.clusters);
+    assert!(!pieces[0].break_after && !pieces[1].break_after, "{pieces:?}");
+}

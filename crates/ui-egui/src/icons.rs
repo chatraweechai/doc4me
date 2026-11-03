@@ -229,6 +229,13 @@ pub fn paint(p: &Painter, r: Rect, name: &str, c: Color32, accent: Color32) {
             pen.line_c(&[(5.5, 14.5), (3.0, 16.5), (5.5, 18.5)], a);
             pen.line_c(&[(14.5, 14.5), (17.0, 16.5), (14.5, 18.5)], a);
         }
+        // Asian Layout: a letter between arrows pointing out, stretched to a width.
+        "asianLayout" => {
+            pen.text(10.0, 8.5, 10.0, "A", c, false);
+            pen.line_c(&[(3.0, 16.5), (17.0, 16.5)], a);
+            pen.line_c(&[(5.5, 14.5), (3.0, 16.5), (5.5, 18.5)], a);
+            pen.line_c(&[(14.5, 14.5), (17.0, 16.5), (14.5, 18.5)], a);
+        }
         // Thai Distributed: full lines and a Thai letter spread to the far edge.
         "thaiDistribute" => {
             pen.lines(3.0, 17.0, &[4.0, 8.0]);
