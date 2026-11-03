@@ -2936,3 +2936,9 @@
 	Strict	Tiukka
 	Cannot start a line:	Ei voi aloittaa riviä:
 	Cannot end a line:	Ei voi päättää riviä:
+	Japanese Find Options	Japanin haun asetukset
+	Sounds like (Japanese)	Kuulostaa samalta (japani)
+	Match full/half width	Täyden/puolikkaan leveyden vastaavuus
+	Match hiragana/katakana	Hiraganan/katakanan vastaavuus
+	Match small kana	Pienen kanan vastaavuus
+	Match prolonged sound marks and dashes	Pidennysmerkkien ja viivojen vastaavuus

@@ -2967,3 +2967,9 @@ spacing	Normal	Обычный
 	Strict	Строгие
 	Cannot start a line:	Не может начинать строку:
 	Cannot end a line:	Не может завершать строку:
+	Japanese Find Options	Параметры поиска японского текста
+	Sounds like (Japanese)	Произносится как (японский)
+	Match full/half width	Не различать полную/половинную ширину
+	Match hiragana/katakana	Не различать хирагану/катакану
+	Match small kana	Не различать малые каны
+	Match prolonged sound marks and dashes	Не различать знаки долготы и тире

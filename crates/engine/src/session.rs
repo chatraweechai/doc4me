@@ -213,6 +213,8 @@ pub struct FindState {
     pub match_suffix: bool,
     pub ignore_punct: bool,
     pub ignore_space: bool,
+    /// Sounds like (Japanese) and its options.
+    pub fuzzy: crate::cmd::find_pattern::Fuzzy,
     /// Matches from the last search: (start, end).
     #[serde(skip)]
     pub results: Vec<(Pos, Pos)>,

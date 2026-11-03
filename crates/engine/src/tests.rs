@@ -5456,3 +5456,18 @@ fn go_to_takes_word_s_destinations() {
         assert!(s.run("edit.goto", &json!({"to": bad})).is_err(), "{bad:?}");
     }
 }
+
+/// Sounds like (Japanese): `fuzzy` on `edit.find` finds half-width and katakana spellings;
+/// `edit.fuzzyOptions` turns its foldings off one by one, and without settings asks for the dialog.
+#[test]
+fn japanese_fuzzy_find_through_the_commands() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("コーヒー と ｺｰﾋｰ と こーひー"));
+    assert_eq!(run(&mut s, "edit.find", json!({"text": "コーヒー"}))["count"], 1);
+    assert_eq!(run(&mut s, "edit.find", json!({"text": "コーヒー", "fuzzy": true}))["count"], 3);
+    let r = run(&mut s, "edit.fuzzyOptions", json!({"kana": false}));
+    assert_eq!((r["kana"].as_bool(), r["width"].as_bool(), r["fuzzy"].as_bool()), (Some(false), Some(true), Some(true)));
+    assert_eq!(run(&mut s, "edit.find", json!({"text": "コーヒー"}))["count"], 2, "hiragana no longer matches");
+    assert!(s.ui_requests.is_empty() || !s.ui_requests.iter().any(|r| r["open"] == "fuzzyOptions"));
+    run(&mut s, "edit.fuzzyOptions", json!({}));
+    assert!(s.ui_requests.iter().any(|r| r["open"] == "fuzzyOptions"), "without settings it opens the options");
+}

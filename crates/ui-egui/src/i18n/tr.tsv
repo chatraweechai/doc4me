@@ -2966,3 +2966,9 @@ spacing	Normal	Normal
 	Strict	Katı
 	Cannot start a line:	Satır başlatamaz:
 	Cannot end a line:	Satır bitiremez:
+	Japanese Find Options	Japonca Bulma Seçenekleri
+	Sounds like (Japanese)	Benzer okunuş (Japonca)
+	Match full/half width	Tam/yarım genişliği eşleştir
+	Match hiragana/katakana	Hiragana/katakanayı eşleştir
+	Match small kana	Küçük kanayı eşleştir
+	Match prolonged sound marks and dashes	Uzatma işaretlerini ve tireleri eşleştir

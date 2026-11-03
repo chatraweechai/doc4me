@@ -2947,3 +2947,9 @@ spacing	Normal	Tavaline
 	Strict	Range
 	Cannot start a line:	Ei tohi rida alustada:
 	Cannot end a line:	Ei tohi rida lõpetada:
+	Japanese Find Options	Jaapani otsingu suvandid
+	Sounds like (Japanese)	Kõlab nagu (jaapani)
+	Match full/half width	Sobita täis-/poollaius
+	Match hiragana/katakana	Sobita hiragana/katakana
+	Match small kana	Sobita väike kana
+	Match prolonged sound marks and dashes	Sobita pikendusmärgid ja kriipsud
