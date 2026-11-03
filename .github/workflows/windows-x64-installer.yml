@@ -1,6 +1,7 @@
 # Builds the Doc4Me Windows x64 installer (MSI) and portable zip.
 # Run it from the Actions tab (workflow_dispatch), by pushing a `v*` tag (also publishes a
-# GitHub Release), or by pushing to main. A workflow_dispatch run on main with `release` ticked
+# GitHub Release). A push to main doesn't build it (the owner asked, 2026-11-03: build from the
+# Actions tab when wanted). A workflow_dispatch run on main with `release` ticked
 # also publishes a Release and creates its tag, v<version in Cargo.toml>, at the built commit
 # (for sessions that can't push tags). With `commit` set, the run builds that earlier commit of
 # main instead and, with `release`, releases it as the version in its own Cargo.toml, not as the
@@ -10,7 +11,6 @@ name: Windows x64 installer
 
 on:
   push:
-    branches: [main]
     tags: ["v*"]
   workflow_dispatch:
     inputs:
