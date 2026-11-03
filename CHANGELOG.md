@@ -116,7 +116,7 @@
   - เหตุผล: `cargo fmt --all --check` บน `main` (`eb52712`) ไม่ผ่าน จากโค้ดของ Web Options, Japanese Consistency Checker, Copy File/Find Files, Edit Links, Letter Wizard และ Hangul Hanja ที่ commit ไปโดยไม่ได้รัน `cargo fmt`; CI ไม่ได้ตรวจ fmt จึงไม่มีใครเห็น
   - เปลี่ยน: `cargo fmt --all` เท่านั้น (ตัดบรรทัดยาว และเรียง `pub mod consistency` ตามตัวอักษร) ไม่มีผลต่อพฤติกรรม
   - ผลต่อผู้ใช้: ไม่มี
-  - ตรวจสอบ: `cargo fmt --all --check` ผ่านหลังแก้
+  - ตรวจสอบ: `cargo fmt --all --check` ผ่านหลังแก้; `cargo clippy --workspace --all-targets -- -D warnings` ผ่าน (Linux, ติดตั้ง `libasound2-dev` ก่อน); `cargo test -p doc4me-docx -p doc4me-engine -p doc4me-ui-egui` ผ่านทุกชุด (engine 471 + 13 + 8, ui-egui 407, docx 75 และชุดอื่น) ไม่มีล้ม
 - **รูปร่างที่มีเรขาคณิตกำหนดเอง (`a:custGeom`) ภายในกลุ่ม (`wpg:wgp`) ไม่ถูกวาดเป็นกรอบสี่เหลี่ยมเต็มขอบเขตอีกต่อไป** (`crates/docx/src/read/story.rs`, `group_members`)
   - เหตุผล: ใน govuk-005 กลุ่มรูปร่างของหน้าแบบฟอร์มมีรูปร่างที่ path ประกอบด้วยสี่เหลี่ยมหลายอัน (ช่อง "Provide details here") แต่เดิมเรขาคณิตกำหนดเองอ่านเป็น freeform เฉพาะรูปร่างเดี่ยว สมาชิกในกลุ่มจึงถูกวาดเป็นกรอบสี่เหลี่ยมใหญ่เท่าขอบเขตทั้งหมด (สูงเกือบทั้งหน้า) พร้อมเส้นแนวตั้งพาดทับตาราง
   - ตอนนี้สมาชิกของกลุ่มที่ไม่ใช่กล่องข้อความและมี `a:custGeom` อ่านเป็น freeform แบบเดียวกับรูปร่างเดี่ยว (แต่ละ sub-path เป็น path ของตัวเอง)
