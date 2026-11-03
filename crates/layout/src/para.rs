@@ -1572,6 +1572,14 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
             found.push(i);
         }
     }
+    // Unicode 15.1 dropped rule LB15 (`QU SP* × OP`), which `unicode-linebreak` 0.1 still applies:
+    // Word breaks after the space in `estratégicos” (según`, as after any other space.
+    let quoted = quote_space_open_breaks(&text);
+    if !quoted.is_empty() {
+        found.extend(quoted);
+        found.sort_unstable();
+        found.dedup();
+    }
     // Myanmar has no spaces between words: it wraps between syllables.
     if text.chars().any(|c| matches!(u32::from(c), 0x1000..=0x109F | 0xA9E0..=0xA9FF | 0xAA60..=0xAA7F)) {
         found.extend(doc4me_doc::cluster::myanmar_breaks(&text));
@@ -1806,6 +1814,55 @@ fn fit_text(b: &mut Builder) {
         }
         i = j;
     }
+}
+
+/// The places, in `text`, of an opening bracket that follows a quotation mark and spaces
+/// (`” (`, `" [`, `» ¿`): a line may start there under Unicode 15.1 (UAX #14 rule LB18, now
+/// that LB15 is gone), but `unicode-linebreak` 0.1 still forbids it.
+pub(crate) fn quote_space_open_breaks(text: &str) -> Vec<usize> {
+    // Line-break class QU (quotation marks) and OP (opening punctuation), the common members.
+    let quote = |c: char| matches!(c, '"' | '\'' | '«' | '»' | '‘' | '’' | '‛' | '“' | '”' | '‟' | '‹' | '›' | '❛' | '❜' | '❝' | '❞');
+    let open = |c: char| {
+        matches!(
+            c,
+            '(' | '['
+                | '{'
+                | '¡'
+                | '¿'
+                | '‚'
+                | '„'
+                | '⁅'
+                | '⁽'
+                | '₍'
+                | '（'
+                | '［'
+                | '｛'
+                | '｟'
+                | '〈'
+                | '《'
+                | '「'
+                | '『'
+                | '【'
+                | '〔'
+                | '〖'
+                | '〘'
+                | '〚'
+        )
+    };
+    let (mut out, mut after_quote, mut spaced) = (Vec::new(), false, false);
+    for (i, c) in text.char_indices() {
+        if c == ' ' {
+            // LB class SP is U+0020 only.
+            spaced |= after_quote;
+            continue;
+        }
+        if spaced && open(c) {
+            out.push(i);
+        }
+        spaced = false;
+        after_quote = quote(c);
+    }
+    out
 }
 
 fn break_lines(pl: &mut ParaLayout, env: &ParaEnv, mark_style: u16, level: Option<&Level>) {

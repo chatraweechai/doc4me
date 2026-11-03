@@ -298,8 +298,8 @@ fn brazilian_portuguese_locales_and_saved_preference_work_without_changing_the_d
     for tag in ["pt-BR", "pt_BR.UTF-8", "PT-BR", "pt-BR-latn", "pt_BR.UTF-8@euro"] {
         assert_eq!(lang_from_tag(tag), Some(pt), "{tag}");
     }
-    // European Portuguese and a bare `pt` have no catalog yet, so they follow the fallback.
-    assert_eq!(lang_from_tag("pt-PT"), None);
+    // European Portuguese has its own catalog; a bare `pt` names neither, so it follows the fallback.
+    assert_eq!(lang_from_tag("pt-PT"), Some(lang("pt-pt")));
     assert_eq!(lang_from_tag("pt"), None);
     assert_eq!(first_supported([UNSUPPORTED, "pt-BR", "en-US"]), Some(pt));
     let mut app = crate::WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Default::default());
@@ -917,7 +917,7 @@ fn british_english_and_canadian_french_follow_their_regions() {
 
 /// Catalogs written whole, one entry per interface string: the code, the language's own name and
 /// locale tags that resolve to it.
-const WHOLE_CATALOGS: [(&str, &str, &[&str]); 24] = [
+const WHOLE_CATALOGS: [(&str, &str, &[&str]); 32] = [
     ("nl", "Nederlands", &["nl", "nl-NL", "nl_BE.UTF-8"]),
     ("sv", "Svenska", &["sv", "sv-SE", "sv_FI.UTF-8"]),
     ("da", "Dansk", &["da", "da-DK", "da_DK.UTF-8"]),
@@ -926,6 +926,14 @@ const WHOLE_CATALOGS: [(&str, &str, &[&str]); 24] = [
     ("ro", "Română", &["ro", "ro-RO", "ro_MD.UTF-8"]),
     ("sk", "Slovenčina", &["sk", "sk-SK", "sk_SK.UTF-8"]),
     ("hr", "Hrvatski", &["hr", "hr-HR", "hr_BA.UTF-8"]),
+    ("kk", "Қазақ тілі", &["kk", "kk-KZ", "kk_KZ.UTF-8"]),
+    ("sw", "Kiswahili", &["sw", "sw-KE", "sw_KE.UTF-8"]),
+    ("mk", "Македонски", &["mk", "mk-MK", "mk_MK.UTF-8"]),
+    ("ms", "Bahasa Melayu", &["ms", "ms-MY", "ms_MY.UTF-8"]),
+    ("mt", "Malti", &["mt", "mt-MT", "mt_MT.UTF-8"]),
+    ("nn", "Norsk nynorsk", &["nn", "nn-NO", "nn_NO.UTF-8"]),
+    ("pt-pt", "Português (Portugal)", &["pt-pt", "pt-PT", "pt_PT.UTF-8"]),
+    ("cy", "Cymraeg", &["cy", "cy-GB", "cy_GB.UTF-8"]),
     ("az", "Azərbaycan dili", &["az", "az-AZ", "az_AZ.UTF-8"]),
     ("eu", "Euskara", &["eu", "eu-ES", "eu_ES.UTF-8"]),
     ("ga", "Gaeilge", &["ga", "ga-IE", "ga_IE.UTF-8"]),
@@ -974,7 +982,8 @@ fn whole_catalogs_resolve_translate_everything_and_draw_with_bundled_faces() {
             }
         }
     }
-    assert_eq!(lang_from_tag("nn-NO"), None, "Nynorsk has no catalog of its own yet");
+    assert_eq!(lang_from_tag("nn-NO"), Some(lang("nn")), "Nynorsk has a catalog of its own");
+    assert_eq!(lang_from_tag("no-NO"), Some(lang("nb")), "plain Norwegian stays Bokmål");
 }
 
 #[test]

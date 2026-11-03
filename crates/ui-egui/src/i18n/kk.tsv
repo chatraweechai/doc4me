@@ -1,0 +1,3000 @@
+# Kazakh (kk) interface catalog, Cyrillic script. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Counts use count-neutral wording (`Сөздер: 21`), so no plural forms are needed.
+# Machine translation by an AI model (Claude), not yet reviewed by a native speaker.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	Келесі сөздің алдындағы «a» немесе «an»; польшаның «w»/«we», «z»/«ze».
+	% of all commits	Барлық коммиттердің %
+	(All)	(Барлығы)
+	(Custom)	(Реттелетін)
+	(no style)	(стиль жоқ)
+	(no suggestions)	(ұсыныс жоқ)
+	(none)	(жоқ)
+	(normal text)	(қалыпты мәтін)
+	(not matched)	(сәйкес келмеді)
+	(picture or object)	(сурет немесе нысан)
+	*Bold* and _italic_ with real formatting	*Жуан* және _курсив_ нақты пішімдеумен
+	0 or More Characters	0 немесе одан көп таңба
+	1. Formatting restrictions	1. Пішімдеу шектеулері
+	1. Main document	1. Негізгі құжат
+	1.5 Line Spacing	1,5 жол аралығы
+	1/4 Em Space	1/4 Em бос орны
+	1×2 Empty Matrix	1×2 бос матрица
+	1×3 Empty Matrix	1×3 бос матрица
+	2. Data source	2. Деректер көзі
+	2. Editing restrictions	2. Өңдеу шектеулері
+	2×1 Empty Matrix	2×1 бос матрица
+	2×2 Determinant	2×2 анықтауыш
+	2×2 Empty Matrix	2×2 бос матрица
+	2×2 Identity Matrix	2×2 бірлік матрица
+	2×2 Identity Matrix (sparse)	2×2 бірлік матрица (сирек)
+	2×2 Matrix in Brackets	Тік жақшадағы 2×2 матрица
+	2×2 Matrix in Double Bars	Қос тік сызықтағы 2×2 матрица
+	2×2 Matrix in Parentheses	Дөңгелек жақшадағы 2×2 матрица
+	2×3 Empty Matrix	2×3 бос матрица
+	3-D	Көлемді
+	3. Merge the data with the document	3. Деректерді құжатпен біріктіру
+	3. Start enforcement	3. Қорғауды іске қосу
+	3D Models	3D модельдер
+	3×1 Empty Matrix	3×1 бос матрица
+	3×2 Empty Matrix	3×2 бос матрица
+	3×3 Empty Matrix	3×3 бос матрица
+	3×3 Identity Matrix	3×3 бірлік матрица
+	3×3 Identity Matrix (sparse)	3×3 бірлік матрица (сирек)
+	5,000 characters a day; give an email address for 50,000.	Күніне 5000 таңба; электрондық пошта мекенжайын берсеңіз — 50 000.
+	<< Less	<< Азырақ
+	<< Remove	<< Алып тастау
+	A file dialog is already open.	Файл таңдау терезесі ашық тұр.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Rust тілінде нөлден жазылған тегін, ашық бастапқы кодты мәтін өңдегіш.\nArtCraft командасының WordCraft бағдарламасына негізделген.
+	A header source holds the field names for a data source without a header row.	Тақырып көзі тақырып жолы жоқ деректер көзінің өріс атауларын сақтайды.
+	A mail merge field	Хат біріктіру өрісі
+	A new document lists the commands with their shortcuts.	Жаңа құжатта пәрмендер пернелер тіркесімімен бірге тізіледі.
+	A numbered sequence (figures, tables…)	Нөмірленген реттілік (суреттер, кестелер…)
+	A password is required to open this document.	Бұл құжатты ашу үшін құпиясөз қажет.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Тыныс белгісі алдындағы бос орын, қосарланған белгілер, польша тіліндегі жалғаулықтар алдындағы үтірлер.
+	A table of contents	Мазмұн
+	A table's rows keep the same columns here.	Мұнда кесте жолдарының бағандары бірдей болады.
+	A xor B	A XOR B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	АаӘәБбВв
+	AaBbYyZz	АаБбЮюЯя
+	About	Бағдарлама туралы
+	About Doc4Me	Doc4Me туралы
+	Above Chart	Диаграмма үстінде
+	Above the item	Элемент үстінде
+	Absolute position	Абсолюттік орын
+	Absolute value cases	Абсолют шама жағдайлары
+	Accent	Диакритикалық\nбелгілер
+	Accent Gradient	Акцент градиенті
+	Accent with Reflection	Шағылысы бар акцент
+	Accent {n}	Акцент {n}
+	Accents	Диакритикалық белгілер
+	Accept	Қабылдау
+	Accept All	Барлығын қабылдау
+	Accept All Changes	Барлық өзгерістерді қабылдау
+	Accept or Reject Changes	Өзгерістерді қабылдау не қабылдамау
+	Accept This Change	Бұл өзгерісті қабылдау
+	Accessed on	Қаралған күні
+	Accessibility	Арнайы мүмкіндіктер
+	Accessibility Pane	Арнайы мүмкіндіктер тақтасы
+	Acute	Акут
+	Add	Қосу
+	Add >>	Қосу >>
+	Add a comment	Түсініктеме қосу
+	Add a Table	Кесте қосу
+	Add at least one field.	Кемінде бір өріс қосыңыз.
+	Add caption when inserting:	Кірістіру кезінде жазба қосу:
+	Add Chart Element	Диаграмма элементін қосу
+	Add Field	Өріс қосу
+	Add Field Name	Өріс атауын қосу
+	Add Font…	Қаріп қосу…
+	Add line numbering	Жол нөмірлеуін қосу
+	Add New Placeholder	Жаңа толтырғыш қосу
+	Add New Placeholder…	Жаңа толтырғыш қосу…
+	Add New Source…	Жаңа дереккөз қосу…
+	Add Object to Selection	Нысанды бөлектеуге қосу
+	Add Pen	Қалам қосу
+	Add Row	Жол қосу
+	Add Series	Қатар қосу
+	Add Shape	Пішін қосу
+	Add Space Before Paragraph	Абзац алдына аралық қосу
+	Add space between Asian and Latin text	Азиялық және латын мәтіні арасына бос орын қосу
+	Add space between Asian text and numbers	Азиялық мәтін мен сандар арасына бос орын қосу
+	Add tab stop at:	Табуляция позициясын қосу:
+	Add Text	Мәтін қосу
+	Add the chapter number	Тарау нөмірін қосу
+	Add to Dictionary	Сөздікке қосу
+	Add to Document	Құжатқа қосу
+	Add to Quick Access Toolbar	Жылдам қатынау тақтасына қосу
+	Add to Style Gallery	Стильдер жинағына қосу
+	Add-ins	Қондырмалар
+	Add/Edit\nBibliography	Әдебиеттер тізімін\nқосу/өңдеу
+	Add/Edit\nCitation	Дәйексөзді\nқосу/өңдеу
+	Add\nNote	Жазба\nқосу
+	Add\nPen	Қалам\nқосу
+	Add\nShape	Пішін\nқосу
+	Added	Қосылды
+	Added Fonts	Қосылған қаріптер
+	Address	Мекенжай
+	Address Block	Мекенжай блогы
+	Address labels	Мекенжай жапсырмалары
+	Address:	Мекенжай:
+	Address\nBlock	Мекенжай\nблогы
+	Adjust	Реттеу
+	Advanced	Қосымша
+	Advanced Find	Кеңейтілген іздеу
+	Advanced Find…	Кеңейтілген іздеу…
+	After:	Кейін:
+	Agents	Агенттер
+	Align	Туралау
+	Align Bottom Center	Төменгі ортасы бойынша туралау
+	Align Bottom Left	Төменгі сол жақ бойынша туралау
+	Align Bottom Right	Төменгі оң жақ бойынша туралау
+	Align Center	Ортасы бойынша туралау
+	Align Center Left	Ортаңғы сол жақ бойынша туралау
+	Align Center Right	Ортаңғы оң жақ бойынша туралау
+	Align Left	Сол жақ бойынша туралау
+	Align Right	Оң жақ бойынша туралау
+	Align Text	Мәтінді туралау
+	Align Top Center	Жоғарғы ортасы бойынша туралау
+	Align Top Left	Жоғарғы сол жақ бойынша туралау
+	Align Top Right	Жоғарғы оң жақ бойынша туралау
+	Aligned at:	Туралау орны:
+	Alignment	Туралау
+	Alignment:	Туралау:
+	All	Барлығы
+	All - Linear	Барлығы — сызықтық
+	All - Professional	Барлығы — кәсіби
+	All Borders	Барлық жиектер
+	All Caps	Барлығы бас әріппен
+	All caps	Барлығы бас әріппен
+	All Commands	Барлық пәрмендер
+	All files	Барлық файлдар
+	All Levels	Барлық деңгейлер
+	All Markup	Барлық белгілеулер
+	All pages	Барлық беттер
+	All pages in the range	Ауқымдағы барлық беттер
+	All records	Барлық жазбалар
+	All symbol sets	Барлық таңбалар жиынтығы
+	Allow Doc4Me to use online services	Doc4Me-ге онлайн қызметтерді пайдалануға рұқсат беру
+	Allow hanging punctuation	Аспалы тыныс белгілеріне рұқсат беру
+	Allow Latin text to wrap in the middle of a word	Латын мәтінін сөз ортасынан тасымалдауға рұқсат беру
+	Allow line breaks	Жол үзілімдеріне рұқсат беру
+	Allow overlap	Қабаттасуға рұқсат беру
+	Allow row to break across pages	Жолды келесі бетке тасымалдауға рұқсат беру
+	Alphabetical	Әліпби бойынша
+	Alt Text	Балама мәтін
+	Alt text	Балама мәтін
+	Alt Text Pane	Балама мәтін тақтасы
+	Alt:	Балама:
+	Alt\nText	Балама\nмәтін
+	And	Және
+	Angle Brackets	Бұрыштық жақшалар
+	Angle Brackets with Separator	Бөлгіші бар бұрыштық жақшалар
+	Angle Brackets with Two Separators	Екі бөлгіші бар бұрыштық жақшалар
+	Animate the caret (it glides and fades)	Курсорды анимациялау (сырғып, бәсеңдейді)
+	Animation	Анимация
+	Animation effects:	Анимация әсерлері:
+	Annotation Reference	Түсініктеме белгісі
+	Annotation Subject	Түсініктеме тақырыбы
+	Annotation Text	Түсініктеме мәтіні
+	Another file	Басқа файл
+	Any Character	Кез келген таңба
+	Any Digit	Кез келген цифр
+	Any Letter	Кез келген әріп
+	Anyone can open this document. Encrypt it with a password to keep it private.	Бұл құжатты кез келген адам аша алады. Оны жеке сақтау үшін құпиясөзбен шифрлаңыз.
+	Anyone who opens the document will need this password.	Құжатты ашатын кез келген адамға осы құпиясөз қажет болады.
+	APA	APA
+	API key (if the server needs one)	API кілті (сервер талап етсе)
+	Apply	Қолдану
+	Apply as you type	Теру кезінде қолдану
+	Apply Asian line-breaking rules (kinsoku)	Азиялық жол тасымалдау ережелерін қолдану (кинсоку)
+	Apply Character Style	Таңба стилін қолдану
+	Apply formatting to:	Пішімдеуді қолдану:
+	Apply special formats to	Арнайы пішімдерді қолдану
+	Apply Style	Стильді қолдану
+	Apply Styles	Стильдерді қолдану
+	Apply to:	Қолдану аясы:
+	Arabic	Араб
+	Arch Down	Төмен доға
+	Arch Up	Жоғары доға
+	Area	Аумақтық
+	Around	Айнала
+	Arrange	Орналастыру
+	Arrange All	Барлығын орналастыру
+	Arrange\nAll	Барлығын\nорналастыру
+	Arrow	Көрсеткі
+	Arrows	Көрсеткілер
+	Artistic Effects	Көркемдік әсерлер
+	As Recommended	Ұсынылғандай
+	As you type	Теру барысында
+	ASAP	БАРЫНША ТЕЗ
+	Ascending	Өсу ретімен
+	Asian text font:	Азиялық мәтін қарпі:
+	Asian Typography	Азиялық типография
+	Assign	Тағайындау
+	At least	Кемінде
+	At least {n}	Кемінде {n}
+	Atelier	Шеберхана
+	Atmosphere	Атмосфера
+	Attach Template	Үлгіні тіркеу
+	Attach…	Тіркеу…
+	Author	Автор
+	Auto	Авто
+	AutoCaption	Автожазба
+	AutoCaption…	Автожазба…
+	AutoComplete	Автотолықтыру
+	AutoCorrect	Автотүзету
+	AutoCorrect Options	Автотүзету параметрлері
+	AutoFit	Автосыйғызу
+	AutoFit Contents	Мазмұнға қарай сыйғызу
+	AutoFit Window	Терезеге қарай сыйғызу
+	AutoFormat	Автопішім
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Автопішім (Ctrl+Alt+K) бөлектелген абзацтарды немесе бүкіл құжатты пішімдейді.
+	AutoFormat and Review Changes…	Автопішім және өзгерістерді қарап шығу…
+	AutoFormat As You Type	Теру кезіндегі автопішім
+	AutoFormat changed {count} paragraphs	Автопішім өзгерткен абзацтар: {count}
+	AutoFormat Now	Қазір автопішімдеу
+	Automatic	Автоматты
+	Automatic ({language})	Автоматты ({language})
+	Automatic bulleted lists	Автоматты маркерленген тізімдер
+	Automatic follows your system's language. Menus and commands change; your documents don't.	«Автоматты» жүйе тіліне сәйкес келеді. Мәзірлер мен пәрмендер өзгереді; құжаттарыңыз өзгермейді.
+	Automatic numbered lists	Автоматты нөмірленген тізімдер
+	Automatic Table 1 (3 levels)	Автоматты мазмұн 1 (3 деңгей)
+	Automatic Table 2 (2 levels)	Автоматты мазмұн 2 (2 деңгей)
+	Automatically hyphenate document	Құжатта автоматты түрде тасымалдау
+	Automatically Update Document Styles	Құжат стильдерін автоматты түрде жаңарту
+	Automatically update document styles	Құжат стильдерін автоматты түрде жаңарту
+	AutoSave	Автосақтау
+	AutoSave documents you have saved in Doc4Me	Doc4Me-де сақталған құжаттарды автосақтау
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Автосақтау сәтсіз: {error}. Автосақтауды қайта қосу үшін құжатты сақтаңыз.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Браузерде автосақтау қолжетімсіз: ол файлдарыңызға жаза алмайды. «Сақтау» көшірмесін жүктеп алады.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Автосақтау тек .docx, .odt және .rtf файлдарын сақтайды; {name} бүкіл пішімдеуді сақтай алмайды. Автосақтауды қосу үшін .docx ретінде сақтаңыз.
+	AutoSave saves every change to the file (needs a saved document)	Автосақтау әр өзгерісті файлға жазады (сақталған құжат қажет)
+	AutoSave writes your changes to the file a moment after you stop typing.	Автосақтау теруді тоқтатқаннан кейін біраз уақыттан соң өзгерістерді файлға жазады.
+	AutoText	Автомәтін
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Back	Артқа
+	Backspace	Backspace
+	Balloons	Шарлар
+	Banded Columns	Кезектесетін бағандар
+	Banded Rows	Кезектесетін жолдар
+	Bar	Сызық
+	Base text:	Негізгі мәтін:
+	Based on: {style}	Негізі: {style}
+	Baseline Dots	Негізгі сызықтағы көп нүкте
+	Basic Cycle	Қарапайым цикл
+	Basic List	Қарапайым тізім
+	Basic Math	Негізгі математика
+	Basic Matrix	Қарапайым матрица
+	Basic Process	Қарапайым процесс
+	Basic Pyramid	Қарапайым пирамида
+	Basic Radial	Қарапайым радиалды
+	Basic Venn	Қарапайым Венн
+	Bayes' rule	Байес ережесі
+	Before:	Алдында:
+	Beginning of Word	Сөз басы
+	Behind Text	Мәтін артында
+	Below text	Мәтін астында
+	Below the item	Элемент астында
+	Between	Арасында
+	Bibliography	Әдебиеттер тізімі
+	Binary assets added	Екілік ресурстар қосылды
+	Binary assets removed	Екілік ресурстар жойылды
+	Binomial Coefficient	Биномдық коэффициент
+	Binomial Coefficient (angle)	Биномдық коэффициент (бұрыштық)
+	Binomial Coefficient with Angle Brackets	Бұрыштық жақшадағы биномдық коэффициент
+	Binomial expansion of (x+a)ⁿ	(x+a)ⁿ биномдық жіктелуі
+	Blank	Бос
+	Blank (Three Columns)	Бос (үш баған)
+	Blank document	Бос құжат
+	Blank Page	Бос бет
+	Block\nAuthors	Авторларды\nбұғаттау
+	Blue:	Көк:
+	Body Text	Негізгі мәтін
+	Body text in a short paragraph to show spacing.	Аралықтарды көрсету үшін қысқа абзацтағы негізгі мәтін.
+	Bold	Жуан
+	Book	Кітап
+	Book Title	Кітап атауы
+	Book title	Кітап атауы
+	Bookmark	Бетбелгі
+	Bookmark name:	Бетбелгі атауы:
+	Border lines	Жиек сызықтары
+	Border Painter	Жиек бояғышы
+	Border\nPainter	Жиек\nбояғышы
+	Borders	Жиектер
+	Borders and Shading	Жиектер мен бояу
+	Borders and Shading…	Жиектер мен бояу…
+	Border…	Жиек…
+	Both Sides	Екі жағынан
+	Both sides	Екі жағы
+	Bottom	Төменгі
+	Bottom Border	Төменгі жиек
+	Bottom Margin	Төменгі шет
+	Bottom of Page	Бет төменгі жағы
+	Bottom of the Window	Терезенің төменгі жағы
+	Bottom:	Төменгі:
+	Box	Жақтау
+	Boxed Formula	Жақтаудағы формула
+	Boxed Formula (example)	Жақтаудағы формула (мысал)
+	Boxed Formulas	Жақтаудағы формулалар
+	Braces	Ирек жақшалар
+	Braces with Separator	Бөлгіші бар ирек жақшалар
+	Bracket	Жақша
+	Brackets	Тік жақшалар
+	Brackets with Separators	Бөлгіштері бар жақшалар
+	Break Link	Байланысты үзу
+	Breaks	Үзілімдер
+	Breve	Бреве
+	Brightness, contrast and transparency change the picture from how it looks now.	Жарықтық, контраст және мөлдірлік суретті қазіргі көрінісіне қатысты өзгертеді.
+	Brightness:	Жарықтық:
+	Bring Forward	Алға жылжыту
+	Browse in Doc4Me…	Doc4Me ішінде шолу…
+	Browse…	Шолу…
+	Build table of figures from:	Суреттер тізімін құру көзі:
+	Building Block Gallery Content Control	Құрама блоктар жинағының мазмұн басқару элементі
+	Built from the style or table entry fields chosen in Options.	Параметрлерде таңдалған стильден немесе кесте элементі өрістерінен құрылады.
+	Built-In	Кірістірілген
+	Built-in Heading styles	Кірістірілген тақырып стильдері
+	Built-in style	Кірістірілген стиль
+	Built-in styles can't be deleted.	Кірістірілген стильдерді жою мүмкін емес.
+	Bullet	Маркер
+	Bullet Library	Маркерлер кітапханасы
+	Bullets	Маркерлер
+	By author	Автор бойынша
+	By:	Шамасы:
+	Calendar	Күнтізбе
+	Can't be deleted	Жою мүмкін емес
+	Cancel	Бас тарту
+	Canvas Member	Кенеп элементі
+	Capitalization	Бас әріптер
+	Capitalize Each Word	Әр Сөзді Бас Әріппен
+	Capitalize first letter of sentences	Сөйлемдердің бірінші әрпін бас әріп ету
+	Capitalize first letter of table cells	Кесте ұяшықтарының бірінші әрпін бас әріп ету
+	Capitalize names of days	Күн атауларын бас әріппен жазу
+	Capitalize the first word of a sentence	Сөйлемнің бірінші сөзін бас әріппен бастау
+	Caption	Жазба
+	Caption label:	Жазба белгісі:
+	Caption Numbering	Жазбаларды нөмірлеу
+	Caption text	Жазба мәтіні
+	Caption:	Жазба:
+	Captions	Жазбалар
+	Caret Character	Кірістіру белгісі (^)
+	Case changes	Регистр өзгерістері
+	Cases	Жағдайлар
+	Cases (Three Conditions)	Жағдайлар (үш шарт)
+	Cases (Two Conditions)	Жағдайлар (екі шарт)
+	Cases and Stacks	Жағдайлар мен бағаналар
+	Catalog	Каталог
+	Categories	Санаттар
+	Categories:	Санаттар:
+	Category	Санат
+	Category {n}	Санат {n}
+	Category:	Санат:
+	Category…	Санат…
+	Ceiling	Жоғары дөңгелектеу
+	Cell	Ұяшық
+	Cell Margins	Ұяшық шеттері
+	Cell margins	Ұяшық шеттері
+	Cell Options	Ұяшық параметрлері
+	Cell Size	Ұяшық өлшемі
+	Cell\nMargins	Ұяшық\nшеттері
+	Center	Ортасы бойынша
+	Centered	Ортаға
+	Centered as Group	Топ ретінде ортаға
+	Centimeters	Сантиметр
+	Change	Өзгерту
+	Change Case	Регистрді өзгерту
+	Change Chart Type	Диаграмма түрін өзгерту
+	Change Colors	Түстерді өзгерту
+	Change in y over change in x	y өзгерісінің x өзгерісіне қатынасы
+	Change Layout	Макетті өзгерту
+	Change List Level	Тізім деңгейін өзгерту
+	Change Password…	Құпиясөзді өзгерту…
+	Change Picture	Суретті ауыстыру
+	Change Picture…	Суретті ауыстыру…
+	Change Shape	Пішінді өзгерту
+	Change Structure	Құрылымды өзгерту
+	Change to Display	Бөлек жолға ауыстыру
+	Change to Inline	Жол ішіне ауыстыру
+	Change to Level 1	1-деңгейге ауыстыру
+	Change to Level 2	2-деңгейге ауыстыру
+	Change to Level 3	3-деңгейге ауыстыру
+	Change to Level 4	4-деңгейге ауыстыру
+	Change to Level 5	5-деңгейге ауыстыру
+	Change to Level 6	6-деңгейге ауыстыру
+	Change to Level 7	7-деңгейге ауыстыру
+	Change to Level 8	8-деңгейге ауыстыру
+	Change to Level 9	9-деңгейге ауыстыру
+	Change\nChart Type	Диаграмма\nтүрін өзгерту
+	Change\nColors	Түстерді\nөзгерту
+	Changed	Өзгертілді
+	Changed lines:	Өзгертілген жолдар:
+	Changes	Өзгерістер
+	Changes with highlighting	Ерекшеленген өзгерістер
+	Changes without highlighting	Ерекшеленбеген өзгерістер
+	Chapter in a book	Кітаптағы тарау
+	Chapters begin at:	Тараулар басталатын стиль:
+	Character	Таңба
+	Character Border	Таңба жиегі
+	Character code:	Таңба коды:
+	Character in Range	Ауқымдағы таңба
+	Character level	Таңба деңгейі
+	Character Position	Таңба орны
+	Character Scale	Таңба масштабы
+	Character Shading	Таңба бояуы
+	Character Spacing	Таңба аралығы
+	Character spacing	Таңба аралығы
+	Character style	Таңба стилі
+	Characters	Таңбалар
+	Characters (no spaces)	Таңбалар (бос орынсыз)
+	Characters (with spaces)	Таңбалар (бос орынмен)
+	Characters per line:	Жолдағы таңбалар:
+	Chart	Диаграмма
+	Chart Design	Диаграмма дизайны
+	Chart Layouts	Диаграмма макеттері
+	Chart Title	Диаграмма атауы
+	Check	Құсбелгі
+	Check Accessibility	Қолжетімділікті тексеру
+	Check Box Content Control	Құсбелгі мазмұн басқару элементі
+	Check Compatibility	Үйлесімділікті тексеру
+	Check Errors…	Қателерді тексеру…
+	Check for Errors	Қателерге тексеру
+	Check Spelling as You Type	Теру кезінде емлені тексеру
+	Check spelling as you type	Теру кезінде емлені тексеру
+	Check\nAccessibility	Қолжетімділікті\nтексеру
+	Checked styles are allowed:	Белгіленген стильдерге рұқсат:
+	Checked symbol	Белгіленген таңба
+	Chevron Down	Шеврон төмен
+	Chevron Up	Шеврон жоғары
+	Chicago	Chicago
+	Chinese (Simplified)	Қытай (жеңілдетілген)
+	Chinese (Traditional)	Қытай (дәстүрлі)
+	Choose a command	Пәрменді таңдаңыз
+	Choose a shortcut	Пернелер тіркесімін таңдаңыз
+	Choose List Item	Тізім элементін таңдау
+	Choose the sheet that holds the recipients.	Алушылар орналасқан парақты таңдаңыз.
+	Circle	Шеңбер
+	Circle area from its radius	Радиус бойынша шеңбер ауданы
+	Circled Dot	Шеңбердегі нүкте
+	Circled Plus	Шеңбердегі плюс
+	Circled Times	Шеңбердегі көбейту
+	Citation marked.	Дәйексөз белгіленді.
+	Citation Style	Дәйексөз стилі
+	Citations	Дәйексөздер
+	Citations & Bibliography	Дәйексөздер мен әдебиеттер
+	City	Қала
+	Clear	Тазалау
+	Clear All	Барлығын тазалау
+	Clear All Formatting	Барлық пішімдеуді тазалау
+	Clear Character Formatting	Таңба пішімдеуін тазалау
+	Clear Character Style	Таңба стилін тазалау
+	Clear Formatting Level	Пішімдеу деңгейін тазалау
+	Clear Paragraph Formatting	Абзац пішімдеуін тазалау
+	Click a border between two cells to merge them. Esc stops.	Екі ұяшықты біріктіру үшін олардың арасындағы жиекті басыңыз. Esc — тоқтату.
+	Click an item to paste it.	Қою үшін элементті басыңыз.
+	Click level to modify:	Өзгертілетін деңгейді таңдаңыз:
+	Click the empty text box the text should continue in (Esc cancels)	Мәтін жалғасатын бос мәтін өрісін басыңыз (Esc — бас тарту)
+	Click to switch back to inserting	Кірістіруге қайта ауысу үшін басыңыз
+	Clipboard	Алмасу буфері
+	Clipboard Contents	Алмасу буферінің мазмұны
+	Clipboard Items	Алмасу буферінің элементтері
+	Clipboard Pane	Алмасу буфері тақтасы
+	Close	Жабу
+	Close Equation	Теңдеуді жабу
+	Close Header and Footer	Колонтитулдарды жабу
+	Close Outline View	Құрылым көрінісін жабу
+	Close Outline\nView	Құрылым\nкөрінісін жабу
+	Close Reviewing Pane	Рецензиялау тақтасын жабу
+	Clustered Bar	Топталған жолақ
+	Clustered Column	Топталған баған
+	Col #:	Баған №:
+	Collapse	Жию
+	Collapse Selection	Бөлектеуді жию
+	Collapse the Ribbon	Таспаны жию
+	Collate copies	Көшірмелер бойынша топтау
+	Collect entries from:	Жазбаларды жинау көзі:
+	Colon Equal	Қос нүкте-тең
+	Color	Түс
+	Color model:	Түс моделі:
+	Color only	Тек түс
+	Color:	Түс:
+	Color: {color}	Түс: {color}
+	Colorful	Түрлі түсті
+	Colors	Түстер
+	Colors:	Түстер:
+	Column	Баған
+	Column Break	Баған үзілімі
+	Column Selection	Бағанды бөлектеу
+	Column selection: the arrow keys extend the block, Esc ends it	Бағанды бөлектеу: көрсеткі пернелері блокты кеңейтеді, Esc аяқтайды
+	Column width	Баған ені
+	Column:	Баған:
+	Columns	Бағандар
+	Columns:	Бағандар:
+	Combine	Біріктіру
+	Combine Documents	Құжаттарды біріктіру
+	Combo Box Content Control	Құрама өріс мазмұн басқару элементі
+	Commands	Пәрмендер
+	Commands:	Пәрмендер:
+	Comment	Түсініктеме
+	Comments	Түсініктемелер
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	PDF, басып шығару және кескіндерде әр беттің жанында түсініктемелер мен бақыланатын өзгерістер; веб-беттер, Markdown және мәтін соңында түсініктемелер тізімі.
+	Comments on version	Нұсқаға түсініктемелер
+	Comments Pane	Түсініктемелер тақтасы
+	Commits	Коммиттер
+	Common Accent Objects	Жиі қолданылатын диакритикалық нысандар
+	Common Brackets	Жиі қолданылатын жақшалар
+	Common Fractions	Жиі қолданылатын бөлшектер
+	Common Functions	Жиі қолданылатын функциялар
+	Common Large Operators	Жиі қолданылатын үлкен операторлар
+	Common Operator Structures	Жиі қолданылатын оператор құрылымдары
+	Common Operators	Жиі қолданылатын операторлар
+	Common Radicals	Жиі қолданылатын түбірлер
+	Common Subscripts and Superscripts	Жиі қолданылатын төменгі және жоғарғы индекстер
+	Communication	Байланыс
+	Compact	Ықшам
+	Company	Компания
+	Compare	Салыстыру
+	Compare Documents	Құжаттарды салыстыру
+	Compare to	Салыстыру нысаны
+	Compared: {changes} changes	Салыстырылды: {changes} өзгеріс
+	Comparing with another file needs the desktop app.	Басқа файлмен салыстыру үшін жұмыс үстелі қолданбасы қажет.
+	Comparison	Салыстыру
+	Comparison settings	Салыстыру параметрлері
+	Compatibility mode: {version}	Үйлесімділік режимі: {version}
+	Compatibility Options	Үйлесімділік параметрлері
+	Compatibility Options…	Үйлесімділік параметрлері…
+	Compress Pictures	Суреттерді сығу
+	Compress punctuation at the start of a line	Жол басындағы тыныс белгілерін сығу
+	Condensed	Сығылған
+	Conference	Конференция
+	Conference paper	Конференция баяндамасы
+	CONFIDENTIAL	ҚҰПИЯ
+	Confirm password:	Құпиясөзді растаңыз:
+	Connect Shapes	Пішіндерді қосу
+	Constitutional Provisions	Конституциялық ережелер
+	Container Title	Контейнер атауы
+	Contains	Қамтиды
+	Content Control at Selection	Бөлектеудегі мазмұн басқару элементі
+	Content Control Properties	Мазмұн басқару элементінің қасиеттері
+	Contents can't be edited	Мазмұнды өңдеу мүмкін емес
+	Context	Мәнмәтін
+	Contextual	Мәнмәтіндік
+	Continuous	Үздіксіз
+	Continuous numbering	Үздіксіз нөмірлеу
+	Contour Integral	Контурлық интеграл
+	Contour Integral with Limits	Шектері бар контурлық интеграл
+	Contour Integral with Stacked Limits	Үстіңгі-астыңғы шектері бар контурлық интеграл
+	Contour Integrals	Контурлық интегралдар
+	Contrast:	Контраст:
+	Contributors	Үлес қосушылар
+	Controls	Басқару элементтері
+	Conversions	Түрлендірулер
+	Convert	Түрлендіру
+	Convert between built-up and linear form	Құрастырылған және сызықтық пішін арасында түрлендіру
+	Convert Notes	Ескертпелерді түрлендіру
+	Convert Permanently	Біржола түрлендіру
+	Convert Text to Table	Мәтінді кестеге түрлендіру
+	Convert Text to Table…	Мәтінді кестеге түрлендіру…
+	Convert to Arabic Digits	Араб цифрларына түрлендіру
+	Convert to Shapes	Пішіндерге түрлендіру
+	Convert to Text	Мәтінге түрлендіру
+	Convert to Thai Digits	Тай цифрларына түрлендіру
+	Copies	Көшірмелер
+	Coproduct	Копродукт
+	Coproduct with Limits	Шектері бар копродукт
+	Coproduct with Lower Limit	Төменгі шегі бар копродукт
+	Coproduct with Subscript-Superscript Limits	Индекс шектері бар копродукт
+	Copy	Көшіру
+	Copy Formatting	Пішімдеуді көшіру
+	Copy of the text a bookmark marks	Бетбелгі белгілеген мәтіннің көшірмесі
+	Copy Styles	Стильдерді көшіру
+	Copy Text	Мәтінді көшіру
+	Copy to where?	Қайда көшіру керек?
+	Copyright	Авторлық құқық
+	Copyright Sign	Авторлық құқық белгісі
+	Corrections	Түзетулер
+	Cosecant Function	Косеканс функциясы
+	Cosine 2x	Косинус 2x
+	Cosine Function	Косинус функциясы
+	Cotangent Function	Котангенс функциясы
+	Couldn't add {name}: {reason}	{name} қосылмады: {reason}
+	Couldn't download the picture: {reason}	Суретті жүктеп алу мүмкін болмады: {reason}
+	Couldn't download {name}: {error}	{name} жүктеп алынбады: {error}
+	Couldn't get the add-in list: {reason}	Қондырмалар тізімін алу мүмкін болмады: {reason}
+	Couldn't make Doc4Me the default: {error}	Doc4Me әдепкі бағдарлама етілмеді: {error}
+	Couldn't open {path}: {error}	{path} ашылмады: {error}
+	Couldn't search: {reason}	Іздеу мүмкін болмады: {reason}
+	Couldn't translate: {reason}	Аудару мүмкін болмады: {reason}
+	Count by:	Қадам:
+	Count words in text boxes and notes	Мәтін өрістері мен ескертпелердегі сөздерді санау
+	Country	Ел
+	Courtesy Title	Сыпайы атау
+	Cover Page	Титул беті
+	Craft	Қолөнер
+	Create	Жасау
+	Create a Style	Стиль жасау
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Құжатыңыздың интерактивті құрылымын жасаңыз.\n\nБұл қай жерде екеніңізді бақылаудың немесе мазмұнды жылдам жылжытудың тамаша тәсілі.\n\nБастау үшін «Басты» қойындысына өтіп, құжаттағы тақырыптарға тақырып стильдерін қолданыңыз.
+	Create Data Source…	Деректер көзін жасау…
+	Create Graphic	Графика жасау
+	Create Header Source	Тақырып көзін жасау
+	Create Link	Байланыс жасау
+	Create New Style	Жаңа стиль жасау
+	Create Source	Дереккөз жасау
+	Create…	Жасау…
+	Crop	Қию
+	Cross-reference	Айқас сілтеме
+	Cross-reference:	Айқас сілтеме:
+	Cube Root	Текше түбір
+	Current	Ағымдағы
+	Current - Linear	Ағымдағы — сызықтық
+	Current - Professional	Ағымдағы — кәсіби
+	Current keyboard settings	Ағымдағы пернетақта параметрлері
+	Current page	Ағымдағы бет
+	Current Position	Ағымдағы орын
+	Current record	Ағымдағы жазба
+	Current style: {style}	Ағымдағы стиль: {style}
+	Curved Arrow Connector	Иілген көрсеткілі қосқыш
+	Curved Connector	Иілген қосқыш
+	Custom	Реттелетін
+	Custom dictionary	Пайдаланушы сөздігі
+	Custom Margins…	Реттелетін шеттер…
+	Custom mark:	Реттелетін белгі:
+	Custom range	Реттелетін ауқым
+	Custom Table of Contents	Реттелетін мазмұн
+	Custom Table of Contents…	Реттелетін мазмұн…
+	Custom Watermark	Реттелетін су белгісі
+	Custom Watermark…	Реттелетін су белгісі…
+	Customize	Баптау
+	Customize Keyboard	Пернетақтаны баптау
+	Customize Quick Access Toolbar	Жылдам қатынау тақтасын баптау
+	Customize Quick Access Toolbar…	Жылдам қатынау тақтасын баптау…
+	Customize Ribbon	Таспаны баптау
+	Customize the Ribbon…	Таспаны баптау…
+	Customize…	Баптау…
+	Cut	Қиып алу
+	Cut, copy, and paste	Қиып алу, көшіру және қою
+	Cycle	Цикл
+	Czech	Чех
+	Danish	Дат
+	Dark	Күңгірт
+	Dark Mode	Күңгірт режим
+	Dark page (white text on black)	Күңгірт бет (қарада ақ мәтін)
+	Dark with Shadow	Көлеңкелі күңгірт
+	Darkroom	Фотозертхана
+	Dashed	Үзік сызықты
+	Data	Деректер
+	Data Labels	Деректер белгілері
+	Data source:	Деректер көзі:
+	Date	Күні
+	Date & Time	Күн және уақыт
+	Date and Time	Күн және уақыт
+	Date format	Күн пішімі
+	Date formats:	Күн пішімдері:
+	Date Picker Content Control	Күн таңдау мазмұн басқару элементі
+	Day	Күн
+	Decimal	Ондық бөлгіш бойынша
+	Decorative objects only add visual interest: screen readers skip them.	Сәндік нысандар тек көрнекілік қосады: экраннан оқу бағдарламалары оларды өткізіп жібереді.
+	Decrease Font Size	Қаріп өлшемін кішірейту
+	Decrease Indent	Шегіністі азайту
+	Default	Әдепкі
+	Default Paragraph Font	Абзацтың әдепкі қарпі
+	Default tab stops:	Әдепкі табуляция позициялары:
+	Define New Bullet	Жаңа маркерді анықтау
+	Define New Multilevel List	Жаңа көпдеңгейлі тізімді анықтау
+	Define New Multilevel List…	Жаңа көпдеңгейлі тізімді анықтау…
+	Define New Number Format	Жаңа нөмір пішімін анықтау
+	Deflate	Солдыру
+	Delete	Жою
+	Delete Back in Equation	Теңдеуде артқа жою
+	Delete Cells	Ұяшықтарды жою
+	Delete Clipboard Item	Алмасу буфері элементін жою
+	Delete Columns	Бағандарды жою
+	Delete Comment	Түсініктемені жою
+	Delete in Equation	Теңдеуде жою
+	Delete Label	Белгіні жою
+	Delete Next Word	Келесі сөзді жою
+	Delete Previous Word	Алдыңғы сөзді жою
+	Delete Rows	Жолдарды жою
+	Delete Selected Ink	Бөлектелген сия сызықтарын жою
+	Delete Style	Стильді жою
+	Delete Table	Кестені жою
+	Delete Table Style	Кесте стилін жою
+	Deleted	Жойылды
+	Deletions:	Жойылғандар:
+	Delivery address:	Жеткізу мекенжайы:
+	Delta Equal To	Дельта тең
+	Delta over arrow	Көрсеткі үстіндегі дельта
+	Demote	Деңгейін төмендету
+	Demote to Body Text	Негізгі мәтінге дейін төмендету
+	Derivative as a limit	Туынды шек ретінде
+	Descending	Кему ретімен
+	Describe what this object shows, for people who can't see it.	Бұл нысан нені көрсететінін оны көре алмайтын адамдар үшін сипаттаңыз.
+	Describe what this table shows, for people who can't see it.	Бұл кесте нені көрсететінін оны көре алмайтын адамдар үшін сипаттаңыз.
+	Description:	Сипаттама:
+	Design	Дизайн
+	Design Mode	Құрастыру режимі
+	Detach Template	Үлгіні ажырату
+	Detect language automatically	Тілді автоматты түрде анықтау
+	Developer	Әзірлеуші
+	development build	әзірлеу жинағы
+	Diagonal	Диагональ
+	Diagonal Dots	Диагональ көп нүкте
+	Diamond	Ромб
+	Dictate	Айтып жаздыру
+	Dictation isn't available here.	Айтып жаздыру мұнда қолжетімсіз.
+	Dictation stopped.	Айтып жаздыру тоқтатылды.
+	Dictation stopped: {reason}	Айтып жаздыру тоқтатылды: {reason}
+	Different First Page	Ерекше бірінші бет
+	Different Odd & Even Pages	Жұп және тақ беттер әртүрлі
+	Differential	Дифференциал
+	Differential theta	Тета дифференциалы
+	Differential x	x дифференциалы
+	Differential y	y дифференциалы
+	Differentials	Дифференциалдар
+	Direct formatting	Тікелей пішімдеу
+	Direction:	Бағыт:
+	Directory	Анықтамалық
+	Display	Көрсету
+	Display for Review	Рецензиялау көрінісі
+	Display gridlines on screen	Экранда тор сызықтарын көрсету
+	Display name	Көрсетілетін атау
+	Display text	Көрсетілетін мәтін
+	Distance from surrounding text	Айналадағы мәтінге дейінгі қашықтық
+	Distribute Columns	Бағандарды теңестіру
+	Distribute letters	Әріптерді тарату
+	Distribute Rows	Жолдарды теңестіру
+	Distribute spacing	Аралықты тарату
+	Distributed	Таратылған
+	Do Not Check Spelling or Grammar	Емле мен грамматиканы тексермеу
+	Do not check spelling or grammar	Емле мен грамматиканы тексермеу
+	DO NOT COPY	КӨШІРМЕҢІЗ
+	Do Not Show in TOC	Мазмұнда көрсетпеу
+	Do you want to save changes to {name}?	{name} ішіндегі өзгерістерді сақтағыңыз келе ме?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me қондырмалары — Doc4Me қондырмалар каталогындағы тегін макрос жинақтары. Олар тек құжатты өңдей алады.
+	Doc4Me is now the default app for Word documents.	Doc4Me енді Word құжаттары үшін әдепкі қолданба.
+	Document	Құжат
+	Document End	Құжат соңы
+	Document Formatting	Құжатты пішімдеу
+	Document Grid	Құжат торы
+	Document Information	Құжат туралы мәлімет
+	Document Property	Құжат қасиеті
+	Document Start	Құжат басы
+	Document template:	Құжат үлгісі:
+	Document Text	Құжат мәтіні
+	Document Title	Құжат атауы
+	Document1	Құжат1
+	Document\nPreferences	Құжат\nбаптаулары
+	Documents	Құжаттар
+	Documents you open will show up here.	Ашқан құжаттарыңыз осында көрсетіледі.
+	Does not contain	Қамтымайды
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Бір стильдегі абзацтар арасына аралық қоспау
+	Don't capitalize after:	Мына сөздерден кейін бас әріп қоймау:
+	Don't hyphenate	Тасымалдамау
+	Don't print blank lines when data fields are empty	Деректер өрістері бос болса, бос жолдарды басып шығармау
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Zotero, Mendeley немесе EndNote дәйексөздері мен әдебиеттер тізімдерін оқымау
+	Don't Save	Сақтамау
+	Don't use HTML paragraph auto spacing	HTML абзацтарының автоматты аралығын пайдаланбау
+	Dot	Нүкте
+	Dot dash	Нүкте-сызық
+	Dot-dash	Нүкте-сызықты
+	Dots	Көп нүктелер
+	Dotted	Нүктелі
+	Double	Қос
+	Double Bar	Қос сызық
+	Double Closing Quote	Жабатын қос тырнақша
+	Double Dot	Қос нүкте
+	Double Integral	Қос интеграл
+	Double Integral with Limits	Шектері бар қос интеграл
+	Double Integral with Stacked Limits	Үстіңгі-астыңғы шектері бар қос интеграл
+	Double Left Arrow with Text Above	Үстінде мәтіні бар солға қос көрсеткі
+	Double Left Arrow with Text Below	Астында мәтіні бар солға қос көрсеткі
+	Double Left Right Arrow with Text Above	Үстінде мәтіні бар екі жақты қос көрсеткі
+	Double Left Right Arrow with Text Below	Астында мәтіні бар екі жақты қос көрсеткі
+	Double Opening Quote	Ашатын қос тырнақша
+	Double Right Arrow with Text Above	Үстінде мәтіні бар оңға қос көрсеткі
+	Double Right Arrow with Text Below	Астында мәтіні бар оңға қос көрсеткі
+	Double Spacing	Қос аралық
+	Double Square Brackets	Қос тік жақшалар
+	Double Strikethrough	Қос сызылған
+	Double strikethrough	Қос сызылған
+	Double summation	Қос қосынды
+	Double Underline	Қос асты сызу
+	Double Vertical Bars	Қос тік сызықтар
+	Doughnut	Сақиналы
+	Down	Төмен
+	Downloading the speech model ({mb} MB, once)…	Сөйлеу моделі жүктелуде ({mb} МБ, бір рет)…
+	Downloading…	Жүктелуде…
+	DRAFT	ЖОБА
+	Draft	Жоба
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Кесте салу үшін тіктөртбұрыш сызыңыз, немесе ұяшықтарды бөлу үшін олардың бойымен сызық жүргізіңіз. Esc тоқтатады.
+	Draw	Сурет салу
+	Draw Ink	Сиямен салу
+	Draw Table	Кесте салу
+	Draw\nTable	Кесте\nсалу
+	Drawing Canvas	Сурет кенебі
+	Drawing Grid	Сурет торы
+	Drawing Tools	Сурет құралдары
+	Drawing\nCanvas	Сурет\nкенебі
+	Drop Cap	Бас әріп
+	Drop cap	Бас әріп
+	Drop-Down List Content Control	Ашылмалы тізім мазмұн басқару элементі
+	Drops all formatting and pastes plain text.	Бүкіл пішімдеуді алып тастап, қарапайым мәтінді қояды.
+	Dutch	Нидерланд
+	E-mail Messages	Электрондық пошта хабарлары
+	Edit Category	Санатты өңдеу
+	Edit Comment	Түсініктемені өңдеу
+	Edit Data	Деректерді өңдеу
+	Edit Document	Құжатты өңдеу
+	Edit Equation	Теңдеуді өңдеу
+	Edit Field Code	Өріс кодын өңдеу
+	Edit Field…	Өрісті өңдеу…
+	Edit Footer	Төменгі колонтитулды өңдеу
+	Edit Header	Жоғарғы колонтитулды өңдеу
+	Edit Individual Documents…	Жеке құжаттарды өңдеу…
+	Edit Items	Элементтерді өңдеу
+	Edit Recipient List	Алушылар тізімін өңдеу
+	Edit Source	Дереккөзді өңдеу
+	Edit\nData	Деректерді\nөңдеу
+	Edit\nRecipient List	Алушылар тізімін\nөңдеу
+	Edited	Өңделді
+	Editing	Өңдеу
+	Editing header/footer	Колонтитулды өңдеу
+	Editing in this document is restricted.	Бұл құжатты өңдеу шектелген.
+	Editing — edit the document directly	Өңдеу — құжатты тікелей өңдеу
+	Edition	Басылым
+	Editor	Редактор
+	Edit…	Өңдеу…
+	Effects	Әсерлер
+	Elbow Arrow Connector	Бұрышты көрсеткілі қосқыш
+	Elbow Connector	Бұрышты қосқыш
+	Ellipsis	Көп нүкте
+	Em Dash	Ұзын сызықша
+	Em Space	Em бос орны
+	Email address (optional)	Электрондық пошта мекенжайы (міндетті емес)
+	Emboss	Бедерлі
+	Emphasis	Екпін
+	Empty Matrices	Бос матрицалар
+	En Dash	Қысқа сызықша
+	En Space	En бос орны
+	Enclose Characters	Таңбаларды қоршау
+	Enclosure	Қоршау
+	Encrypt with Password	Құпиясөзбен шифрлау
+	Encrypt with Password…	Құпиясөзбен шифрлау…
+	End of document	Құжат соңы
+	End of section	Бөлім соңы
+	End of Word	Сөз соңы
+	Endnote Reference	Соңғы ескертпе белгісі
+	Endnote Text	Соңғы ескертпе мәтіні
+	Endnotes	Соңғы ескертпелер
+	Endnotes to footnotes	Соңғы ескертпелерді төменгі ескертпелерге
+	English	Ағылшын
+	English (United Kingdom)	Ағылшын (Ұлыбритания)
+	English (United States)	Ағылшын (АҚШ)
+	Engrave	Ойып басылған
+	Enlarge symbol	Таңбаны үлкейту
+	Enter formatting for number:	Нөмір пішімін енгізіңіз:
+	Enter in Equation	Теңдеуде Enter
+	Enter page number:	Бет нөмірін енгізіңіз:
+	Enter the web address or embed code of an online video:	Онлайн бейненің веб-мекенжайын немесе ендіру кодын енгізіңіз:
+	Entry marked.	Элемент белгіленді.
+	Entry:	Элемент:
+	Envelope #10   4.12" × 9.50"	№10 конверт   4,12" × 9,50"
+	Envelope Address	Конверттегі мекенжай
+	Envelope DL   4.33" × 8.66"	DL конверт   4,33" × 8,66"
+	Envelope Return	Кері мекенжай
+	Envelope size:	Конверт өлшемі:
+	Envelopes	Конверттер
+	Equal by Definition	Анықтама бойынша тең
+	Equal column width	Бағандар ені бірдей
+	Equal Equal	Тең-тең
+	Equal to	Тең
+	Equals:	Тең:
+	Equation	Теңдеу
+	Equation Gallery	Теңдеулер жинағы
+	Equation Info	Теңдеу туралы мәлімет
+	Equation Number	Теңдеу нөмірі
+	Equation Options	Теңдеу параметрлері
+	Erase Ink	Сияны өшіру
+	Eraser	Өшіргіш
+	Errors ({n})	Қателер ({n})
+	Estonian	Эстон
+	Euler's identity	Эйлер теңдігі
+	Even Page	Жұп бет
+	Even pages only	Тек жұп беттер
+	Every change is recorded as a tracked change.	Әр өзгеріс бақыланатын өзгеріс ретінде жазылады.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Әрбір пәрмен скрипттер мен ЖИ агенттеріне қолжетімді: MCP сервері үшін `doc4me-cli mcp` іске қосыңыз немесе JSON басқару арнасы үшін қолданбаны `--control <port>` арқылы іске қосыңыз.
+	Every field needs a name.	Әр өрістің атауы болуы керек.
+	Every font this document uses is installed.	Бұл құжат пайдаланатын барлық қаріптер орнатылған.
+	Everyone	Барлығы
+	Exactly	Дәл
+	Exactly {n}	Дәл {n}
+	Example: {sample}	Мысал: {sample}
+	Exceptions (optional)	Ерекшеліктер (міндетті емес)
+	Exceptions…	Ерекшеліктер…
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exit	Шығу
+	Expand	Жаю
+	Expand or Collapse Heading	Тақырыпты жаю немесе жию
+	Expanded	Кеңейтілген
+	Exponential	Экспоненциалды
+	Exponential series	Экспоненциалды қатар
+	Export	Экспорттау
+	Export a copy to share (PDF, Word document)	Бөлісу үшін көшірмесін экспорттау (PDF, Word құжаты)
+	Export Page as JPEG	Бетті JPEG ретінде экспорттау
+	Export Page as PNG	Бетті PNG ретінде экспорттау
+	Export PDF	PDF экспорттау
+	Exported {path}	Экспортталды: {path}
+	Expression	Өрнек
+	Extend Selection	Бөлектеуді кеңейту
+	Extend Selection by Units	Бөлектеуді бірліктермен кеңейту
+	Extra space	Артық бос орын
+	Extra spaces between words.	Сөздер арасындағы артық бос орындар.
+	Field	Өріс
+	Field Click	Өрісті басу
+	Field code:	Өріс коды:
+	Field Codes	Өріс кодтары
+	Field codes:	Өріс кодтары:
+	Field name	Өріс атауы
+	Field name:	Өріс атауы:
+	Field names must be different.	Өріс атаулары әртүрлі болуы керек.
+	Field names:	Өріс атаулары:
+	Field properties	Өріс қасиеттері
+	Field:	Өріс:
+	Fields	Өрістер
+	Fields to insert:	Кірістірілетін өрістер:
+	Fields:	Өрістер:
+	Field…	Өріс…
+	Figure	Сурет
+	File	Файл
+	File name:	Файл атауы:
+	Fill	Құйма
+	Fill & Line	Құйма және сызық
+	Fill color:	Құйма түсі:
+	Fill:	Құйма:
+	Filling in forms	Пішіндерді толтыру
+	Film	Фильм
+	Filter and Sort	Сүзу және сұрыптау
+	Filter and Sort…	Сүзу және сұрыптау…
+	Filter Records	Жазбаларды сүзу
+	Find	Табу
+	Find and Replace	Табу және ауыстыру
+	Find Next	Келесісін табу
+	Find Next Editable Region	Келесі өңделетін аймақты табу
+	Find Previous	Алдыңғысын табу
+	Find Recipient	Алушыны табу
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	«Табу» келесі өзгертілген абзацты бөлектейді; «Қабылдамау» бөлектелгенін бұрынғы күйіне қайтарады.
+	Find What Expression	Ізделетін өрнек
+	Find What Text	Ізделетін мәтін
+	Find what:	Не табу:
+	Find →	Табу →
+	Find:	Табу:
+	Finish	Аяқтау
+	Finish & Merge	Аяқтау және біріктіру
+	Finish &\nMerge	Аяқтау және\nбіріктіру
+	Finished	Аяқталды
+	Finnish	Фин
+	First	Бірінші
+	First Cell in Column	Бағандағы бірінші ұяшық
+	First Cell in Row	Жолдағы бірінші ұяшық
+	First Column	Бірінші баған
+	First commit	Бірінші коммит
+	First line	Бірінші жол
+	First line:	Бірінші жол:
+	First Name	Аты
+	First row of data contains column headers	Деректердің бірінші жолында баған тақырыптары бар
+	Fit	Сыйғызу
+	Fit text	Мәтінді сыйғызу
+	Fix Position on Page	Беттегі орнын бекіту
+	Fixed Column Width	Бекітілген баған ені
+	Flip Horizontal	Көлденең аудару
+	Flip Vertical	Тігінен аудару
+	Floor	Төмен дөңгелектеу
+	Focus	Назар
+	Follow number with:	Нөмірден кейін:
+	Font	Қаріп
+	Font Color	Қаріп түсі
+	Font color	Қаріп түсі
+	Font color:	Қаріп түсі:
+	Font Dialog	Қаріп терезесі
+	Font not installed	Қаріп орнатылмаған
+	Font Size	Қаріп өлшемі
+	Font Substitution	Қаріпті ауыстыру
+	Font Substitution…	Қаріпті ауыстыру…
+	Font:	Қаріп:
+	Font: {font}	Қаріп: {font}
+	Fonts	Қаріптер
+	Font…	Қаріп…
+	Footer	Төменгі колонтитул
+	Footnote and Endnote	Төменгі және соңғы ескертпелер
+	Footnote Reference	Төменгі ескертпе белгісі
+	Footnote Text	Төменгі ескертпе мәтіні
+	Footnotes	Төменгі ескертпелер
+	Footnotes and endnotes	Төменгі және соңғы ескертпелер
+	Footnotes to endnotes	Төменгі ескертпелерді соңғы ескертпелерге
+	Form Letters	Үлгі хаттар
+	Format	Пішім
+	Format Page Numbers	Бет нөмірлерін пішімдеу
+	Format Page Numbers…	Бет нөмірлерін пішімдеу…
+	Format Painter	Пішім көшіргіш
+	Format Picture	Сурет пішімі
+	Format Shape	Пішін пішімі
+	Format:	Пішім:
+	Formatted	Пішімделген
+	Formatted Text	Пішімделген мәтін
+	Formatting	Пішімдеу
+	Formatting at Selection	Бөлектеудегі пішімдеу
+	Formatting completed. You can now:	Пішімдеу аяқталды. Енді мыналар мүмкін:
+	Formatting exceptions	Пішімдеу ерекшеліктері
+	Formatting marks	Пішімдеу белгілері
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Пішімдеу, регистр өзгерістері, бос орындар және кестелер салыстырылады; басқа параметрлер кейінге сақталады.
+	Formula	Формула
+	Forward	Алға
+	Fraction	Бөлшек
+	Fractions (1/2) as fraction characters (½)	Бөлшектерді (1/2) бөлшек таңбаларымен (½)
+	French	Француз
+	French (France)	Француз (Франция)
+	From	Қай тілден
+	From text:	Мәтіннен:
+	from Unicode (hex)	Unicode (он алтылық)
+	From:	Кімнен:
+	Full page of the same label	Бірдей жапсырмалардан тұратын толық бет
+	Function	Функция
+	Functions	Функциялар
+	Gallery	Жинақ
+	GB/T 7714	GB/T 7714
+	General	Жалпы
+	Geometry	Геометрия
+	German	Неміс
+	German (Germany)	Неміс (Германия)
+	Get Add-ins	Қондырмаларды алу
+	Get Data	Деректерді алу
+	Get Data…	Деректерді алу…
+	Getting ready…	Дайындалуда…
+	Glow	Жарқырау
+	Glow Colors	Жарқырау түстері
+	Go Back	Кері оралу
+	Go To	Өту
+	Go to	Өту
+	Go To…	Өту…
+	Good afternoon	Қайырлы күн
+	Good evening	Қайырлы кеш
+	Good morning	Қайырлы таң
+	GOST (name sort)	ГОСТ (аты бойынша сұрыптау)
+	GOST (title sort)	ГОСТ (атау бойынша сұрыптау)
+	Grab bag	Әртүрлі
+	Grammar	Грамматика
+	Grammar Settings	Грамматика параметрлері
+	Graphic	Графика
+	Grave	Гравис
+	Greater than	Үлкен
+	Greater than or equal	Үлкен немесе тең
+	Greek	Грек
+	Greek Letters	Грек әріптері
+	Green:	Жасыл:
+	Greeting Line	Сәлемдесу жолы
+	Greeting\nLine	Сәлемдесу\nжолы
+	Grid Settings	Тор параметрлері
+	Grid Table 1 Light	Торлы кесте 1, ашық
+	Grid Table 4 – Blue	Торлы кесте 4 – көк
+	Grid Table 4 – Green	Торлы кесте 4 – жасыл
+	Grid Table 4 – Orange	Торлы кесте 4 – қызғылт сары
+	Grid Table 4 – Purple	Торлы кесте 4 – күлгін
+	Gridlines	Тор сызықтары
+	Group	Топтау
+	Grouping Character Above	Үстіңгі топтау таңбасы
+	Grouping Character Below	Астыңғы топтау таңбасы
+	Grow Font 1 Point	Қаріпті 1 пунктке үлкейту
+	H:	Б:
+	Hanging Indent	Шығыңқы шегініс
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Қалпақша
+	Header	Жоғарғы колонтитул
+	Header & Footer	Колонтитулдар
+	Header Options	Тақырып параметрлері
+	Header Options:	Тақырып параметрлері:
+	Header Row	Тақырып жолы
+	Header source: {file} (the next data source opened here takes its field names)	Тақырып көзі: {file} (мұнда ашылатын келесі деректер көзі оның өріс атауларын алады)
+	Header/Footer Position	Колонтитул орны
+	Headers and footers	Колонтитулдар
+	Heading 1	Тақырып 1
+	Heading 2	Тақырып 2
+	Heading 3	Тақырып 3
+	Heading styles (levels 1–{n})	Тақырып стильдері (1–{n} деңгейлер)
+	Heading {n}	Тақырып {n}
+	Headings	Тақырыптар
+	Heart	Жүрек
+	Hebrew	Иврит
+	Height:	Биіктігі:
+	Help	Анықтама
+	Hex:	Hex:
+	Hidden	Жасырын
+	Hidden text	Жасырын мәтін
+	Hide Codes	Кодтарды жасыру
+	Hide from style lists	Стильдер тізімдерінде жасыру
+	Hide Ink	Сияны жасыру
+	Hide White Space	Бос кеңістікті жасыру
+	Hide\nInk	Сияны\nжасыру
+	Hierarchy	Иерархия
+	Highlight	Ерекшелеу
+	Highlight Changes	Өзгерістерді ерекшелеу
+	Highlight changes in printed document	Басылған құжатта өзгерістерді ерекшелеу
+	Highlight changes on screen	Экранда өзгерістерді ерекшелеу
+	Highlight Merge Fields	Біріктіру өрістерін ерекшелеу
+	Highlight\nMerge Fields	Біріктіру\nөрістерін ерекшелеу
+	Highlighter	Ерекшелегіш
+	Hindi	Хинди
+	Historical and Discretional	Тарихи және қосымша
+	Hollow	Қуыс
+	Home	Басты
+	Home folder	Үй қалтасы
+	Horizontal	Көлденең
+	Horizontal Line	Көлденең сызық
+	Horizontal spacing:	Көлденең аралық:
+	How many pages the whole document has	Бүкіл құжатта неше бет бар
+	How many pages this section has	Бұл бөлімде неше бет бар
+	How many words the document holds	Құжатта неше сөз бар
+	HTML Format	HTML пішімі
+	Hue:	Реңк:
+	Hungarian	Венгр
+	Hyperbolic Cosecant Function	Гиперболалық косеканс функциясы
+	Hyperbolic Cosine Function	Гиперболалық косинус функциясы
+	Hyperbolic Cotangent Function	Гиперболалық котангенс функциясы
+	Hyperbolic Functions	Гиперболалық функциялар
+	Hyperbolic Secant Function	Гиперболалық секанс функциясы
+	Hyperbolic Sine Function	Гиперболалық синус функциясы
+	Hyperbolic Tangent Function	Гиперболалық тангенс функциясы
+	Hyperlink	Гиперсілтеме
+	Hyphenate at:	Тасымалдау орны:
+	Hyphenate words in CAPS	БАС ӘРІПТІ сөздерді тасымалдау
+	Hyphenation	Тасымалдау
+	Hyphenation Options…	Тасымалдау параметрлері…
+	Hyphenation zone:	Тасымалдау аймағы:
+	Hyphens (--) as dashes (—)	Дефистерді (--) сызықшамен (—)
+	Hypotenuse	Гипотенуза
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Белгіше түсі
+	Icons	Белгішелер
+	Identity Matrices	Бірлік матрицалар
+	IEEE	IEEE
+	If…Then…Else	Егер…Онда…Әйтпесе
+	If…Then…Else…	Егер…Онда…Әйтпесе…
+	Ignore All	Барлығын елемеу
+	Ignore punctuation characters	Тыныс белгілерін елемеу
+	Ignore web and file addresses	Веб және файл мекенжайларын елемеу
+	Ignore white-space characters	Бос орын таңбаларын елемеу
+	Ignore words in capitals	Бас әріпті сөздерді елемеу
+	Ignore words with numbers	Сандары бар сөздерді елемеу
+	Illustrations	Иллюстрациялар
+	Immersive	Иммерсивті
+	Immersive Reader	Иммерсивті оқу
+	Immersive\nReader	Иммерсивті\nоқу
+	In Default apps, choose Doc4Me for the document types you want it to open.	«Әдепкі қолданбалар» бөлімінде Doc4Me ашуы тиіс құжат түрлері үшін оны таңдаңыз.
+	In equations, typing a name after a backslash replaces it with its symbol.	Теңдеулерде кері қиғаш сызықтан кейін терілген атау оның таңбасымен ауыстырылады.
+	In Front of Text	Мәтін алдында
+	In Line with Text	Мәтінмен бір жолда
+	Inches	Дюйм
+	Include label and number	Белгі мен нөмірді қосу
+	Include level number from:	Деңгей нөмірін қосу:
+	Include page numbers	Бет нөмірлерін қосу
+	Increase Font Size	Қаріп өлшемін үлкейту
+	Increase Indent	Шегіністі көбейту
+	Indent	Шегініс
+	Indent from left:	Сол жақтан шегініс:
+	Indentation	Шегіністер
+	Indented	Шегіністі
+	Indents	Шегіністер
+	Indents and Spacing	Шегіністер мен аралықтар
+	Index	Көрсеткіш
+	Index and Tables	Көрсеткіштер мен кестелер
+	Index Heading	Көрсеткіш тақырыбы
+	Index {n}	Көрсеткіш {n}
+	Indonesian	Индонезия
+	Inflate	Үрлеу
+	Info	Мәлімет
+	Initials:	Аты-жөнінің бас әріптері:
+	Ink	Сия
+	Ink Equation	Сиямен теңдеу
+	Ink Replay	Сияны қайта ойнату
+	Ink to Math	Сиядан математикаға
+	Ink to Shape	Сиядан пішінге
+	Ink to\nMath	Сиядан\nматематикаға
+	Ink to\nShape	Сиядан\nпішінге
+	Ink\nReplay	Сияны\nқайта ойнату
+	Inline	Жол ішінде
+	Input Format	Енгізу пішімі
+	Insert	Кірістіру
+	Insert a 3D model from a file (.glb, .stl, .obj)	Файлдан 3D модель кірістіру (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Жаңа теңдеу кірістіру (Alt+=)
+	Insert Above	Жоғарыдан кірістіру
+	Insert Below	Төменнен кірістіру
+	Insert Caption	Жазба кірістіру
+	Insert Cells	Ұяшықтарды кірістіру
+	Insert Chart	Диаграмма кірістіру
+	Insert Citation	Дәйексөз кірістіру
+	Insert Columns to the Left	Сол жаққа бағандар кірістіру
+	Insert Columns to the Right	Оң жаққа бағандар кірістіру
+	Insert Data	Деректерді кірістіру
+	Insert Database	Дерекқор кірістіру
+	Insert Database…	Дерекқор кірістіру…
+	Insert Date Field	Күн өрісін кірістіру
+	Insert Endnote	Соңғы ескертпе кірістіру
+	Insert entire column	Бүкіл бағанды кірістіру
+	Insert entire row	Бүкіл жолды кірістіру
+	Insert Footnote	Төменгі ескертпе кірістіру
+	Insert Hyperlink	Гиперсілтеме кірістіру
+	Insert Index	Көрсеткіш кірістіру
+	Insert Left	Сол жаққа кірістіру
+	Insert LISTNUM Field	LISTNUM өрісін кірістіру
+	Insert Merge Field	Біріктіру өрісін кірістіру
+	Insert Merge\nField	Біріктіру\nөрісін кірістіру
+	Insert New Equation	Жаңа теңдеу кірістіру
+	Insert one text or another, depending on a field's value.	Өріс мәніне қарай бір мәтінді немесе басқасын кірістіру.
+	Insert Page Field	Бет өрісін кірістіру
+	Insert Right	Оң жаққа кірістіру
+	Insert Rows	Жолдарды кірістіру
+	Insert Rows Above	Жоғарыдан жолдар кірістіру
+	Insert Rows Below	Төменнен жолдар кірістіру
+	Insert Shapes	Пішіндерді кірістіру
+	Insert SmartArt	SmartArt кірістіру
+	Insert Structure	Құрылым кірістіру
+	Insert Symbol	Таңба кірістіру
+	Insert Table	Кесте кірістіру
+	Insert Table of Authorities	Сілтемелер кестесін кірістіру
+	Insert Table of Figures	Суреттер тізімін кірістіру
+	Insert Table…	Кесте кірістіру…
+	Insert Time Field	Уақыт өрісін кірістіру
+	Insert Video	Бейне кірістіру
+	Insert\nAbove	Жоғарыдан\nкірістіру
+	Insert\nCaption	Жазба\nкірістіру
+	Insert\nCitation	Дәйексөз\nкірістіру
+	Insert\nFootnote	Төменгі ескертпе\nкірістіру
+	Inserted	Кірістірілді
+	Insertions and Deletions	Кірістірулер мен жоюлар
+	Insertions:	Кірістірулер:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Кірістірулер: {ins}, жоюлар: {del}, жылжытулар: {moves}, пішімдеу: {fmt}, түсініктемелер: {comments}
+	Inside	Ішкі
+	Inside Borders	Ішкі жиектер
+	Inside Margin	Ішкі шет
+	Inside:	Ішкі:
+	Inspect Document	Құжатты тексеру
+	Inspect Styles at Selection	Бөлектеудегі стильдерді тексеру
+	Institution	Мекеме
+	Integral	Интеграл
+	Integral of e^(−x²)	e^(−x²) интегралы
+	Integral with Limits	Шектері бар интеграл
+	Integral with Stacked Limits	Үстіңгі-астыңғы шектері бар интеграл
+	Integrals	Интегралдар
+	Intense Emphasis	Күшті екпін
+	Intense Quote	Күшті дәйексөз
+	Intense Reference	Күшті сілтеме
+	Interface	Интерфейс
+	Interface language	Интерфейс тілі
+	Interface language:	Интерфейс тілі:
+	Interface size:	Интерфейс өлшемі:
+	Interface Theme	Интерфейс темасы
+	Interface theme:	Интерфейс темасы:
+	Interface\nTheme	Интерфейс\nтемасы
+	Internet addresses as links	Интернет мекенжайларын сілтемелермен
+	Intersection	Қиылысу
+	Intersection with Limits	Шектері бар қиылысу
+	Intersection with Lower Limit	Төменгі шегі бар қиылысу
+	Intersection with Subscript-Superscript Limits	Индекс шектері бар қиылысу
+	Inverse Cosecant Function	Кері косеканс функциясы
+	Inverse Cosine Function	Кері косинус функциясы
+	Inverse Cotangent Function	Кері котангенс функциясы
+	Inverse Functions	Кері функциялар
+	Inverse Hyperbolic Cosecant Function	Кері гиперболалық косеканс функциясы
+	Inverse Hyperbolic Cosine Function	Кері гиперболалық косинус функциясы
+	Inverse Hyperbolic Cotangent Function	Кері гиперболалық котангенс функциясы
+	Inverse Hyperbolic Functions	Кері гиперболалық функциялар
+	Inverse Hyperbolic Secant Function	Кері гиперболалық секанс функциясы
+	Inverse Hyperbolic Sine Function	Кері гиперболалық синус функциясы
+	Inverse Hyperbolic Tangent Function	Кері гиперболалық тангенс функциясы
+	Inverse Secant Function	Кері секанс функциясы
+	Inverse Sine Function	Кері синус функциясы
+	Inverse Tangent Function	Кері тангенс функциясы
+	Ionosphere	Ионосфера
+	Is blank	Бос
+	Is not blank	Бос емес
+	ISO 690 (author-date)	ISO 690 (автор-күн)
+	ISO 690 (numerical)	ISO 690 (сандық)
+	Issue	Шығарылым
+	it isn't a picture Doc4Me can read	бұл Doc4Me оқи алатын сурет емес
+	Italian	Итальян
+	Italic	Курсив
+	Japanese	Жапон
+	Journal	Журнал
+	Justification	Туралау
+	Justification of a display equation	Бөлек жолдағы теңдеуді туралау
+	Justified	Ені бойынша
+	Justify	Ені бойынша туралау
+	Keep Lines Together	Жолдарды бірге ұстау
+	Keep lines together	Жолдарды бірге ұстау
+	Keep Source Formatting	Бастапқы пішімдеуді сақтау
+	Keep Text Only	Тек мәтінді сақтау
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Құпиясөзді қауіпсіз жерде сақтаңыз: онсыз ешкім, соның ішінде Doc4Me да, құжатты аша алмайды. Құпиясөзді алып тастау үшін екі өрісті де бос қалдырыңыз.
+	Keep with Next	Келесімен бірге ұстау
+	Keep with next	Келесімен бірге ұстау
+	Keeps the fonts and formatting of the copied text.	Көшірілген мәтіннің қаріптері мен пішімдеуін сақтайды.
+	Kerning for fonts:	Қаріптер үшін кернинг:
+	Keyboard shortcuts:	Пернелер тіркесімдері:
+	Keys for this command:	Бұл пәрменнің пернелері:
+	Keywords	Кілт сөздер
+	Korean	Корей
+	Label changes with:	Өзгерістерді белгілеу:
+	Label:	Белгі:
+	Labels	Жапсырмалар
+	Landscape	Альбомдық
+	Language	Тіл
+	Language Preferences…	Тіл баптаулары…
+	Language…	Тіл…
+	Large\nOperator	Үлкен\nоператор
+	Largest Only	Тек ең үлкені
+	Largest only	Тек ең үлкені
+	Lasso	Лассо
+	Lasso Select	Лассомен бөлектеу
+	Last	Соңғы
+	Last Cell in Column	Бағандағы соңғы ұяшық
+	Last Cell in Row	Жолдағы соңғы ұяшық
+	Last Column	Соңғы баған
+	Last commit	Соңғы коммит
+	Last Name	Тегі
+	Last, First; Last, First	Тегі, Аты; Тегі, Аты
+	Latin text font:	Латын мәтінінің қарпі:
+	Layout	Макет
+	Layout options for this document	Осы құжатқа арналған макет параметрлері
+	Layout Summary	Макет қорытындысы
+	Layouts	Макеттер
+	Leader	Толтырғыш
+	Leave a recipient out of the merge when a field has this value.	Өрісте осы мән болғанда алушыны біріктіруге қоспау.
+	Leave Equation	Теңдеуден шығу
+	Leave the equation (Esc)	Теңдеуден шығу (Esc)
+	Leave the label out of the caption	Жазбаға белгіні қоспау
+	Left	Сол жақ
+	Left Arrow with Text Above	Үстінде мәтіні бар солға көрсеткі
+	Left Arrow with Text Below	Астында мәтіні бар солға көрсеткі
+	Left Border	Сол жақ жиек
+	Left border	Сол жақ жиек
+	Left Bracket Twice	Екі сол жақ тік жақша
+	Left indent	Сол жақ шегініс
+	Left Margin	Сол жақ шет
+	Left Only	Тек сол жақ
+	Left only	Тек сол жақ
+	Left Right Arrow Above	Үстіндегі екі жақты көрсеткі
+	Left Right Arrow with Text Above	Үстінде мәтіні бар екі жақты көрсеткі
+	Left Right Arrow with Text Below	Астында мәтіні бар екі жақты көрсеткі
+	Left Subscript-Superscript	Сол жақ төменгі-жоғарғы индекс
+	Left-to-right	Солдан оңға
+	Left-to-Right Text Direction	Солдан оңға мәтін бағыты
+	Left:	Сол жақ:
+	Leftwards Arrow Above	Үстіндегі солға көрсеткі
+	Leftwards Harpoon Above	Үстіндегі солға гарпун
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Legal style numbering	Заңдық стильдегі нөмірлеу
+	Legend	Шартты белгілер
+	Less than	Кіші
+	Less than or equal	Кіші немесе тең
+	Letter	Хат
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter headings	Әріпті тақырыптар
+	Letter-Like Symbols	Әріп тәрізді таңбалар
+	Letters	Хаттар
+	Level 1	1-деңгей
+	Level 2	2-деңгей
+	Level 3	3-деңгей
+	Level 4	4-деңгей
+	Level 5	5-деңгей
+	Level 6	6-деңгей
+	Level 7	7-деңгей
+	Level 8	8-деңгей
+	Level 9	9-деңгей
+	Level {n}	{n}-деңгей
+	Level:	Деңгей:
+	Levels:	Деңгейлер:
+	LibreTranslate server (open source)	LibreTranslate сервері (ашық бастапқы код)
+	Ligatures:	Лигатуралар:
+	Light	Ашық
+	Light with Outline	Контуры бар ашық
+	Limit	Шек
+	Limit and\nLog	Шек және\nлогарифм
+	Limit consecutive hyphens to:	Қатарынан тасымалдау шегі:
+	Limit Example	Шек мысалы
+	Limit formatting to a selection of styles	Пішімдеуді таңдалған стильдермен шектеу
+	Line	Сызық
+	Line and Page Breaks	Жол және бет үзілімдері
+	Line and Paragraph Spacing	Жол және абзац аралығы
+	Line between	Арасындағы сызық
+	Line Break	Жол үзілімі
+	Line breaking	Жол тасымалдау
+	Line delta	Жолдар айырмасы
+	Line End	Жол соңы
+	Line Number	Жол нөмірі
+	Line Numbering Options…	Жол нөмірлеу параметрлері…
+	Line Numbers	Жол нөмірлері
+	Line Spacing	Жол аралығы
+	Line spacing	Жол аралығы
+	Line Spacing Options…	Жол аралығы параметрлері…
+	Line spacing:	Жол аралығы:
+	Line Start	Жол басы
+	Line width:	Сызық ені:
+	Line:	Сызық:
+	Linear	Сызықтық
+	Linear Fraction	Сызықтық бөлшек
+	Lines	Жолдар
+	Lines +/−	Жолдар +/−
+	Lines added	Қосылған жолдар
+	Lines and characters	Жолдар мен таңбалар
+	Lines deleted	Жойылған жолдар
+	Lines only	Тек жолдар
+	Lines per page:	Беттегі жолдар:
+	Link	Сілтеме
+	Link entries to their headings	Элементтерді тақырыптарымен байланыстыру
+	Link level to style:	Деңгейді стильмен байланыстыру:
+	Link to Previous	Алдыңғыға байланыстыру
+	Linked style (paragraph and character)	Байланысқан стиль (абзац және таңба)
+	Links	Сілтемелер
+	Links and References	Сілтемелер мен дереккөздер
+	Link…	Сілтеме…
+	List	Тізім
+	List Commands	Пәрмендер тізімі
+	List Definition	Тізім анықтамасы
+	List entries	Тізім элементтері
+	List Paragraph	Тізім абзацы
+	List styles	Тізім стильдері
+	List Table 3 – Blue	Тізімдік кесте 3 – көк
+	List Table 3 – Green	Тізімдік кесте 3 – жасыл
+	List Table 3 – Orange	Тізімдік кесте 3 – қызғылт сары
+	List Table 3 – Purple	Тізімдік кесте 3 – күлгін
+	Listening… speak now	Тыңдап тұрмын… сөйлеңіз
+	Location	Орналасқан жері
+	Location: {path}	Орналасқан жері: {path}
+	Lock aspect ratio	Пропорцияны бекіту
+	Lock Fields	Өрістерді құлыптау
+	Logarithm	Логарифм
+	Logarithm with Base	Негізі бар логарифм
+	Logical AND	Логикалық ЖӘНЕ
+	Logical AND with Limits	Шектері бар логикалық ЖӘНЕ
+	Logical OR	Логикалық НЕМЕСЕ
+	Logical OR with Limits	Шектері бар логикалық НЕМЕСЕ
+	Long citation:	Толық дәйексөз:
+	lowercase	кіші әріптер
+	Lum:	Жарықтық:
+	Macros	Макростар
+	Made from the author and year when empty	Бос болса, автор мен жылдан құралады
+	Magazine or newspaper article	Журнал немесе газет мақаласы
+	Mail Merge	Хат біріктіру
+	Mail Merge Helper	Хат біріктіру көмекшісі
+	Mail Merge Helper…	Хат біріктіру көмекшісі…
+	Mailing Labels	Пошта жапсырмалары
+	Mailings	Таратылымдар
+	Main entry:	Негізгі элемент:
+	Make Doc4Me the default for Word documents…	Doc4Me-ні Word құжаттары үшін әдепкі ету…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Жүйенің экран масштабына қосымша таспаны, мәзірлерді және терезелерді үлкейтеді немесе кішірейтеді. Құжат масштабы бөлек реттеледі.
+	Malay	Малай
+	Manage Sources	Дереккөздерді басқару
+	Manage Styles	Стильдерді басқару
+	Manage Styles…	Стильдерді басқару…
+	Manual Hyphenation	Қолмен тасымалдау
+	Manual hyphenation is complete.	Қолмен тасымалдау аяқталды.
+	Manual Line Break	Қолмен жол үзілімі
+	Manual Page Break	Қолмен бет үзілімі
+	Manual…	Қолмен…
+	Many pages	Көп бет
+	Margin	Шет
+	Margins	Шеттер
+	Mark	Белгілеу
+	Mark All	Барлығын белгілеу
+	Mark as decorative	Сәндік деп белгілеу
+	Mark Citation	Дәйексөзді белгілеу
+	Mark Citation…	Дәйексөзді белгілеу…
+	Mark Entry	Элементті белгілеу
+	Mark Entry…	Элементті белгілеу…
+	Mark grammar errors as you type	Теру кезінде грамматикалық қателерді белгілеу
+	Mark Index Entry	Көрсеткіш элементін белгілеу
+	Mark selected text as:	Бөлектелген мәтінді былай белгілеу:
+	Mark Table of Contents Entry	Мазмұн элементін белгілеу
+	Mark\nCitation	Дәйексөзді\nбелгілеу
+	Mark\nEntry	Элементті\nбелгілеу
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Регистрді ескеру
+	Match Fields	Өрістерді сәйкестендіру
+	Match prefix	Сөз басын сәйкестендіру
+	Match suffix	Сөз соңын сәйкестендіру
+	Math AutoCorrect	Математикалық автотүзету
+	Math Input Control	Математикалық енгізу тақтасы
+	Matrices with Brackets	Жақшалы матрицалар
+	Matrix	Матрица
+	Maximize	Үлкейту
+	Maximum	Ең көбі
+	Maximum Example	Максимум мысалы
+	Measured By	Өлшем бірлігі
+	Measurement units:	Өлшем бірліктері:
+	Media	Медиа
+	Merge	Біріктіру
+	Merge Cells	Ұяшықтарды біріктіру
+	Merge Formatting	Пішімдеуді біріктіру
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	«Пішімдеуді біріктіру» мәтінді қойылған жердегі пішімдеумен қояды, «Тек мәтінді сақтау» сияқты.
+	Merge Record #	Біріктіру жазбасының №
+	Merge records	Жазбаларды біріктіру
+	Merge to New Document	Жаңа құжатқа біріктіру
+	Merge to Printer	Принтерге біріктіру
+	Merge to:	Біріктіру нысаны:
+	Merge type: {type}	Біріктіру түрі: {type}
+	Merged PRs	Біріктірілген PR-лар
+	Merge…	Біріктіру…
+	Mesosphere	Мезосфера
+	Middle	Ортасы
+	Midline Dots	Ортаңғы сызықтағы көп нүкте
+	Millimeters	Миллиметр
+	Minimum	Ең азы
+	Minus Equal	Минус-тең
+	Mirror indents	Айналы шегіністер
+	Mirrored	Айналы
+	Missing document font	Құжаттың жоқ қарпі
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team және WordCraft үлес қосушылары.
+	MLA	MLA
+	Model	Модель
+	Models	Модельдер
+	Moderate	Орташа
+	Modify Style	Стильді өзгерту
+	Modify Table Style	Кесте стилін өзгерту
+	Modify Table Style…	Кесте стилін өзгерту…
+	Modify…	Өзгерту…
+	Mon	Дс
+	Month	Ай
+	More >>	Көбірек >>
+	More Colors…	Басқа түстер…
+	More Columns…	Басқа бағандар…
+	More Commands…	Басқа пәрмендер…
+	More Symbols…	Басқа таңбалар…
+	More templates →	Басқа үлгілер →
+	Move Down	Төмен жылжыту
+	Move in Equation	Теңдеуде жылжу
+	Move object with text	Нысанды мәтінмен бірге жылжыту
+	Move or Resize	Жылжыту немесе өлшемін өзгерту
+	Move Paragraph Down	Абзацты төмен жылжыту
+	Move Paragraph Up	Абзацты жоғары жылжыту
+	Move Past Citation	Дәйексөзден ары өту
+	Move Past\nCitation	Дәйексөзден\nары өту
+	Move Selected Ink	Бөлектелген сияны жылжыту
+	Move Text	Мәтінді жылжыту
+	Move to where?	Қайда жылжыту керек?
+	Move Up	Жоғары жылжыту
+	Move with Text	Мәтінмен бірге жылжыту
+	Move with text	Мәтінмен бірге жылжыту
+	Moved from	Жылжытылған жер
+	Moved to	Жылжытылған орын
+	Moves	Жылжытулар
+	Multilevel List	Көпдеңгейлі тізім
+	Multiple Pages	Бірнеше бет
+	My Add-ins	Менің қондырмаларым
+	MyMemory (free, no account)	MyMemory (тегін, тіркелгісіз)
+	Name	Атауы
+	Name (A–Z)	Атауы (A–Я)
+	Name of the file this document is saved as	Бұл құжат сақталған файлдың атауы
+	Name:	Атауы:
+	Narrow  0.5" all	Тар  барлығы 0,5"
+	Natural Logarithm	Натурал логарифм
+	Nature	Табиғат
+	Navigation	Шарлау
+	Navigation Pane	Шарлау тақтасы
+	Negated Relations	Терістелген қатынастар
+	New	Жаңа
+	New Comment	Жаңа түсініктеме
+	New comments and tracked changes are recorded under this name and these initials.	Жаңа түсініктемелер мен бақыланатын өзгерістер осы атпен және бас әріптермен жазылады.
+	New Document	Жаңа құжат
+	New document	Жаңа құжат
+	New Drawing Canvas	Жаңа сурет кенебі
+	New Entry	Жаңа жазба
+	New Folder	Жаңа қалта
+	New from Template	Үлгіден жасау
+	New Group	Жаңа топ
+	New Label	Жаңа белгі
+	New Label…	Жаңа белгі…
+	New Paragraph	Жаңа абзац
+	New shortcut:	Жаңа пернелер тіркесімі:
+	New Style…	Жаңа стиль…
+	New Tab	Жаңа қойынды
+	New Table Style	Жаңа кесте стилі
+	New Table Style…	Жаңа кесте стилі…
+	New Window	Жаңа терезе
+	New word	Жаңа сөз
+	New\nComment	Жаңа\nтүсініктеме
+	New\nWindow	Жаңа\nтерезе
+	New…	Жаңа…
+	Next	Келесі
+	Next Change	Келесі өзгеріс
+	Next Comment	Келесі түсініктеме
+	Next Field	Келесі өріс
+	Next Footnote	Келесі төменгі ескертпе
+	Next Page	Келесі бет
+	Next Record	Келесі жазба
+	Next Section	Келесі бөлім
+	Next Sentence	Келесі сөйлем
+	Next sentence	Келесі сөйлем
+	Next Window	Келесі терезе
+	No	Жоқ
+	No accessibility issues found.	Қолжетімділік мәселелері табылмады.
+	No add-ins are listed yet.	Әзірге ешбір қондырма тізілмеген.
+	No add-ins yet. Add one from the Store.	Әзірге қондырмалар жоқ. Дүкеннен қосыңыз.
+	No Border	Жиексіз
+	No changes (read only)	Өзгеріссіз (тек оқу)
+	No Color	Түссіз
+	No contributor data was built into this copy.	Бұл көшірмеге үлес қосушылар туралы деректер енгізілмеген.
+	No data source yet.	Әзірге деректер көзі жоқ.
+	No errors found: every merge field is in the recipient list.	Қате табылмады: әр біріктіру өрісі алушылар тізімінде бар.
+	No Fill	Құймасыз
+	No Glow	Жарқыраусыз
+	No grid	Торсыз
+	No icons match your search.	Іздеуге сәйкес белгішелер жоқ.
+	No limit	Шектеусіз
+	No Line	Сызықсыз
+	No Markup	Белгілеусіз
+	No model credits were built into this copy.	Бұл көшірмеге модельдер туралы мәлімет енгізілмеген.
+	No Outline	Контурсыз
+	No Paragraph Space	Абзац аралығынсыз
+	No pictures found.	Суреттер табылмады.
+	No Reflection	Шағылыссыз
+	No revisions	Түзетулер жоқ
+	No Shadow	Көлеңкесіз
+	No Soft Edges	Жұмсақ жиексіз
+	No sources yet.	Әзірге дереккөздер жоқ.
+	No Spacing	Аралықсыз
+	no speech program on this system	жүйеде сөйлеу бағдарламасы жоқ
+	No templates match your search.	Іздеуге сәйкес үлгілер жоқ.
+	No Transform	Түрлендірусіз
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Әзірге сөздер жоқ. Қате жазылған сөзде «Сөздікке қосу» оны осында қосады.
+	No-Width Non Break	Нөлдік енді үзілмейтін таңба
+	No-Width Optional Break	Нөлдік енді қосымша үзіліс
+	Nonbreaking Hyphen	Үзілмейтін дефис
+	Nonbreaking Space	Үзілмейтін бос орын
+	None	Жоқ
+	Normal	Қалыпты
+	Normal  1" all	Қалыпты  барлығы 1"
+	Normal Indent	Қалыпты шегініс
+	Normal probability density	Қалыпты үлестірім тығыздығы
+	Normal speed	Қалыпты жылдамдық
+	Normal Style	Қалыпты стиль
+	Normal Table	Қалыпты кесте
+	Normal Text	Қалыпты мәтін
+	Normal Word Document	Қалыпты Word құжаты
+	North	Солтүстік
+	Norwegian (Bokmål)	Норвег (букмол)
+	Not	ЕМЕС
+	Not available right now	Қазір қолжетімсіз
+	Not equal to	Тең емес
+	Not linked: click a text box	Байланыспаған: мәтін өрісін басыңыз
+	Not saved	Сақталмаған
+	Not saved yet	Әлі сақталмаған
+	Not used by any command	Ешбір пәрмен пайдаланбайды
+	Not {name}	{name} емес
+	Nothing	Ештеңе
+	Nothing collected yet. Items you copy or cut appear here.	Әзірге ештеңе жиналмаған. Көшірген немесе қиып алған элементтеріңіз осында көрсетіледі.
+	Now used by {command}	Қазір қолданушы: {command}
+	Nudge	Сәл жылжыту
+	Num Occurrences	Кездесу саны
+	Number	Нөмір
+	Number alignment:	Нөмірді туралау:
+	Number format	Нөмір пішімі
+	Number of columns:	Бағандар саны:
+	Number of rows:	Жолдар саны:
+	Number of the page the field sits on	Өріс тұрған беттің нөмірі
+	Number of the section the field sits in	Өріс тұрған бөлімнің нөмірі
+	Number style for this level:	Осы деңгейдің нөмір стилі:
+	Number the equation; the number sits at the right margin (or type # then the number)	Теңдеуді нөмірлеу; нөмір оң жақ шетте тұрады (немесе # теріп, нөмірін жазыңыз)
+	Number type:	Сан түрі:
+	Number:	Сан:
+	Numbering	Нөмірлеу
+	Numbering:	Нөмірлеу:
+	Numbering…	Нөмірлеу…
+	Numerals	Цифрлар
+	Numerals:	Цифрлар:
+	n×n Identity Matrix	n×n бірлік матрица
+	n×n Matrix	n×n матрица
+	Object	Нысан
+	Odd Page	Тақ бет
+	Odd pages only	Тек тақ беттер
+	Off	Өшірулі
+	Office	Кеңсе
+	Office 2003 Default	Office 2003 әдепкі
+	Offset (pt):	Ығысу (pt):
+	Offset: Bottom	Ығысу: төмен
+	Offset: Bottom Left	Ығысу: төмен солға
+	Offset: Bottom Right	Ығысу: төмен оңға
+	Offset: Center	Ығысу: ортаға
+	Offset: Left	Ығысу: солға
+	Offset: Right	Ығысу: оңға
+	Offset: Top	Ығысу: жоғары
+	Offset: Top Left	Ығысу: жоғары солға
+	Offset: Top Right	Ығысу: жоғары оңға
+	OK	OK
+	Omit	Өткізіп жіберу
+	On	Қосулы
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Қосулы: теру немесе көрсеткі пернелерін пайдалану кезінде курсор жаңа орнына сырғып барады, ал жыпылықтауы бәсеңдейді. Өшірулі: ол секіріп, жыпылықтап тұрады.
+	One	Бір
+	One half	Екіден бір
+	One label per recipient	Әр алушыға бір жапсырма
+	One line per item. Enter adds an item.	Әр элементке бір жол. Enter элемент қосады.
+	One Page	Бір бет
+	Online Pictures	Онлайн суреттер
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Онлайн суреттер (Openverse), Аудару (MyMemory немесе сіздің LibreTranslate серверіңіз), Қондырмаларды алу және Айтып жаздыру сөйлеу моделін жүктеу интернетке қосылады, тек оларды пайдаланғанда ғана. Өшірілген кезде Doc4Me өздігінен ешқандай байланыс орнатпайды.
+	Online Pictures…	Онлайн суреттер…
+	Online services are turned off (File › Options › Trust Center).	Онлайн қызметтер өшірілген (Файл › Параметрлер › Сенім орталығы).
+	Online Video	Онлайн бейне
+	Only allow this kind of editing:	Тек осы өңдеу түріне рұқсат беру:
+	Only comments can be added, except in regions marked editable.	Өңделетін деп белгіленген аймақтардан басқа жерде тек түсініктемелер қосуға болады.
+	Only form fields can be filled in.	Тек пішін өрістерін толтыруға болады.
+	only https addresses can be used	тек https мекенжайларын пайдалануға болады
+	Only pictures I may use commercially	Тек коммерциялық мақсатта пайдалануға болатын суреттер
+	Only the allowed styles can be applied.	Тек рұқсат етілген стильдерді қолдануға болады.
+	Only web (http, https) and email (mailto) links can be followed	Тек веб (http, https) және электрондық пошта (mailto) сілтемелері бойынша өтуге болады
+	Open	Ашу
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Жүйелік файл терезесі шықпаса, файлды Doc4Me-нің өз шолғышымен ашу.
+	Open Data Source…	Деректер көзін ашу…
+	Open Hyperlink	Гиперсілтемені ашу
+	OpenDocument Text (*.odt)	OpenDocument мәтіні (*.odt)
+	Opening print dialog…	Басып шығару терезесі ашылуда…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Бұдан былай .docx, .doc, .rtf және .odt файлдары мен Word үлгілерін Doc4Me арқылы ашады.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Параметрлер › Әдепкі қолданбалар ашылады, онда .docx және басқа құжат түрлері үшін Doc4Me таңдайсыз.
+	Open…	Ашу…
+	Operator	Оператор
+	Operator Structures	Оператор құрылымдары
+	Operators	Операторлар
+	Optional Hyphen	Қосымша дефис
+	Options	Параметрлер
+	Options…	Параметрлер…
+	Or	Немесе
+	Or save a copy in another format:	Немесе көшірмесін басқа пішімде сақтаңыз:
+	Ordinals (1st) as superscript	Реттік сандарды (1st) жоғарғы индекспен
+	Organizer	Ұйымдастырғыш
+	Organizer…	Ұйымдастырғыш…
+	Orientation	Бағдар
+	Original document	Бастапқы құжат
+	Other	Басқа
+	Other Authorities	Басқа дереккөздер
+	Other Large Operators	Басқа үлкен операторлар
+	Other paragraph styles	Басқа абзац стильдері
+	Other styles and their TOC level:	Басқа стильдер және олардың мазмұн деңгейі:
+	Otherwise insert:	Әйтпесе кірістіру:
+	Outline	Құрылым
+	Outline Level	Құрылым деңгейі
+	Outline level	Құрылым деңгейі
+	Outline levels	Құрылым деңгейлері
+	Outline State	Құрылым күйі
+	Outline Tools	Құрылым құралдары
+	Outlining	Құрылым
+	Outside	Сыртқы
+	Outside border	Сыртқы жиек
+	Outside Borders	Сыртқы жиектер
+	Outside Margin	Сыртқы шет
+	Outside:	Сыртқы:
+	Outward Brackets	Сыртқа қараған тік жақшалар
+	Oval	Сопақ
+	Overbar	Үстіңгі сызық
+	Overbars and Underbars	Үстіңгі және астыңғы сызықтар
+	Overbrace	Үстіңгі ирек жақша
+	Overtype	Үстінен жазу
+	Overtype (typing replaces the characters after the caret)	Үстінен жазу (теру курсордан кейінгі таңбаларды ауыстырады)
+	Page	Бет
+	Page Background	Бет фоны
+	Page Border	Бет жиегі
+	Page Borders	Бет жиектері
+	Page Break	Бет үзілімі
+	Page Break Before	Алдынан бет үзілімі
+	Page break before	Алдынан бет үзілімі
+	Page Breaks	Бет үзілімдері
+	Page Color	Бет түсі
+	Page display	Беттің көрінісі
+	Page Down	Бір бет төмен
+	Page image (*.jpg, *.jpeg)	Бет кескіні (*.jpg, *.jpeg)
+	Page image (*.png)	Бет кескіні (*.png)
+	Page Movement	Бет парақтау
+	Page Number	Бет нөмірі
+	Page number style	Бет нөмірінің стилі
+	Page numbers at the right margin	Бет нөмірлері оң жақ шетте
+	Page on which a bookmarked passage falls	Бетбелгі қойылған үзінді тұрған бет
+	Page Setup	Бет параметрлері
+	Page title	Бет атауы
+	Page Up	Бір бет жоғары
+	Page Width	Бет ені
+	Page width	Бет ені
+	Page X of Y	X бет / Y
+	Page {page}	{page}-бет
+	Page {page} of {pages}	{page}-бет / {pages}
+	Page\nBorders	Бет\nжиектері
+	Page\nColor	Бет\nтүсі
+	Page\nNumber	Бет\nнөмірі
+	Pages	Беттер
+	Pages like 1-3, 5	Беттер, мысалы 1-3, 5
+	Pages of bookmark:	Бетбелгі беттері:
+	Paragraph	Абзац
+	Paragraph Character	Абзац таңбасы
+	Paragraph Details	Абзац мәліметтері
+	Paragraph Down	Бір абзац төмен
+	Paragraph Mark	Абзац белгісі
+	Paragraph marks	Абзац белгілері
+	Paragraph Settings	Абзац параметрлері
+	Paragraph Spacing	Абзац аралығы
+	Paragraph style	Абзац стилі
+	Paragraph Up	Бір абзац жоғары
+	Paragraphs	Абзацтар
+	Paragraph…	Абзац…
+	Parentheses	Дөңгелек жақшалар
+	Parentheses with Separator	Бөлгіші бар дөңгелек жақшалар
+	Partial Differential	Дербес дифференциал
+	Password	Құпиясөз
+	Password:	Құпиясөз:
+	Paste	Қою
+	Paste All	Барлығын қою
+	Paste as:	Былай қою:
+	Paste Clipboard Item	Алмасу буфері элементін қою
+	Paste Formatting	Пішімдеуді қою
+	Paste Special	Арнайы қою
+	Paste Special…	Арнайы қою…
+	Paste Spike	Жинақтағышты қою
+	Paste: Keep Text Only	Қою: тек мәтінді сақтау
+	Paste: Merge Formatting	Қою: пішімдеуді біріктіру
+	Pasting between documents:	Құжаттар арасында қою:
+	Pasting from other programs:	Басқа бағдарламалардан қою:
+	Pasting within the same document:	Бір құжат ішінде қою:
+	Pause	Кідірту
+	Paused	Кідіртілді
+	PDF document (*.pdf)	PDF құжаты (*.pdf)
+	Pen	Қалам
+	Pencil	Қарындаш
+	Pens	Қаламдар
+	People	Адамдар
+	Periodical	Мерзімді басылым
+	Personalize	Жекелендіру
+	Phonetic Guide	Фонетикалық нұсқаулық
+	Pi Over 2	Пи бөлу 2
+	Picas	Пика
+	Pick a custom group (New Group makes one)	Реттелетін топты таңдаңыз («Жаңа топ» оны жасайды)
+	Pick a field from the list	Тізімнен өрісті таңдаңыз
+	Picture	Сурет
+	Picture Border	Сурет жиегі
+	Picture Content Control	Сурет мазмұн басқару элементі
+	Picture Format	Сурет пішімі
+	Picture Styles	Сурет стильдері
+	Pictures	Суреттер
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Openverse суреттері. Әр суреттің лицензиясын сақтаңыз: Doc4Me оның астына авторлық жол қосады.
+	Pie	Дөңгелек
+	Placeholder Name	Толтырғыш атауы
+	Placeholder text	Толтырғыш мәтін
+	Plain Table 1	Қарапайым кесте 1
+	Plain text (*.txt)	Қарапайым мәтін (*.txt)
+	Plain Text Content Control	Қарапайым мәтін мазмұн басқару элементі
+	Play	Ойнату
+	Play Video	Бейнені ойнату
+	Play/Pause	Ойнату/Кідірту
+	Plus Equal	Плюс-тең
+	Points	Пункт
+	points and above	пункт және одан жоғары
+	Polish	Поляк
+	Portrait	Кітаптық
+	Portuguese (Brazil)	Португал (Бразилия)
+	Portuguese (Portugal)	Португал (Португалия)
+	Position	Орны
+	Position:	Орны:
+	Positioning…	Орналастыру…
+	Possible spelling mistake	Ықтимал емле қатесі
+	Postal Code	Пошта индексі
+	Power series of (1+x)ⁿ	(1+x)ⁿ дәрежелік қатары
+	Preferred width:	Қалаулы ені:
+	Preserve	Сақтау
+	Preserve formatting during updates	Жаңарту кезінде пішімдеуді сақтау
+	Presets	Дайын үлгілер
+	Press a key combination	Пернелер тіркесімін басыңыз
+	Preview	Алдын ала қарау
+	Preview Results	Нәтижелерді алдын ала қарау
+	Preview\nResults	Нәтижелерді\nалдын ала қарау
+	Previous	Алдыңғы
+	Previous 1 or More	Алдыңғысы 1 немесе одан көп
+	Previous Change	Алдыңғы өзгеріс
+	Previous Comment	Алдыңғы түсініктеме
+	Previous Field	Алдыңғы өріс
+	Previous Footnote	Алдыңғы төменгі ескертпе
+	Previous Page	Алдыңғы бет
+	Previous Record	Алдыңғы жазба
+	Previous Section	Алдыңғы бөлім
+	Previous Sentence	Алдыңғы сөйлем
+	Previous sentence	Алдыңғы сөйлем
+	Previous Window	Алдыңғы терезе
+	Print	Басып шығару
+	Print blank lines when data fields are empty	Деректер өрістері бос болса, бос жолдарды басып шығару
+	Print Documents	Құжаттарды басып шығару
+	Print Documents…	Құжаттарды басып шығару…
+	Print failed: {error}	Басып шығару сәтсіз: {error}
+	Print Layout	Бет макеті
+	Print Markup	Белгілеулерді басып шығару
+	Print the page color	Бет түсін басып шығару
+	Print to PDF	PDF-ке басып шығару
+	Print\nLayout	Бет\nмакеті
+	Printer	Принтер
+	Printing	Басып шығару
+	Process	Процесс
+	Product	Көбейтінді
+	Product of A	A көбейтіндісі
+	Product with Limits	Шектері бар көбейтінді
+	Product with Lower Limit	Төменгі шегі бар көбейтінді
+	Product with Subscript-Superscript Limits	Индекс шектері бар көбейтінді
+	Products and Coproducts	Көбейтінділер мен копродуктілер
+	Professional	Кәсіби
+	Promote	Деңгейін көтеру
+	Promote to Heading 1	1-тақырыпқа дейін көтеру
+	Proofing	Емлені тексеру
+	Proofing Issues	Емле мәселелері
+	Proofing language	Тексеру тілі
+	Properties	Қасиеттер
+	Protect	Қорғау
+	Protect Document	Құжатты қорғау
+	PRs	PR-лар
+	pt	pt
+	Publisher	Баспагер
+	Punctuation	Тыныс белгілері
+	Put the caret in a content control first.	Алдымен курсорды мазмұн басқару элементіне қойыңыз.
+	Put the default commands back on the Quick Access Toolbar?	Әдепкі пәрмендерді жылдам қатынау тақтасына қайтару керек пе?
+	Pyramid	Пирамида
+	Quadratic Root	Квадрат теңдеудің түбірі
+	Query Options…	Сұраныс параметрлері…
+	Quick Access Toolbar	Жылдам қатынау тақтасы
+	Quick Parts	Жылдам бөліктер
+	Quick Tables	Жылдам кестелер
+	Quote	Дәйексөз
+	Radical	Түбір
+	Radical with Degree	Дәрежесі бар түбір
+	Radicals	Түбірлер
+	Raised/lowered	Көтерілген/түсірілген
+	Read Aloud	Дауыстап оқу
+	Read Aloud couldn't start the speech program: {reason}	Дауыстап оқу сөйлеу бағдарламасын іске қоса алмады: {reason}
+	Read Aloud couldn't start: {reason}	Дауыстап оқу іске қосылмады: {reason}
+	Read Aloud isn't available in the browser	Дауыстап оқу браузерде қолжетімсіз
+	Read Aloud Status	Дауыстап оқу күйі
+	Read Aloud stopped: {reason}	Дауыстап оқу тоқтады: {reason}
+	Read Mode	Оқу режимі
+	Read\nAloud	Дауыстап\nоқу
+	Read\nMode	Оқу\nрежимі
+	Reading	Оқу
+	Reading Column Width	Оқу бағанының ені
+	Reading Highlight	Оқуды ерекшелеу
+	Reading Line Spacing	Оқу жол аралығы
+	Reading Mode	Оқу режимі
+	Reading Speed	Оқу жылдамдығы
+	Reading Text Size	Оқу мәтінінің өлшемі
+	Reads the clipboard's rich text and keeps its formatting.	Алмасу буферіндегі пішімделген мәтінді оқып, оның пішімдеуін сақтайды.
+	Reads the clipboard's web content and keeps its formatting.	Алмасу буферіндегі веб-мазмұнды оқып, оның пішімдеуін сақтайды.
+	Real name	Шын аты
+	Recent	Соңғылар
+	Recent Colors	Соңғы түстер
+	Recent documents to show:	Көрсетілетін соңғы құжаттар саны:
+	Recently used symbols:	Соңғы пайдаланылған таңбалар:
+	Recipient List	Алушылар тізімі
+	Recipient lists	Алушылар тізімдері
+	Recipients: {count}	Алушылар: {count}
+	Recognized (you can correct it):	Танылды (түзетуге болады):
+	Recognized Functions	Танылатын функциялар
+	Recognized Functions…	Танылатын функциялар…
+	Recolor a one-color picture, such as an icon	Белгіше сияқты бір түсті суретті қайта бояу
+	Recolor Selected Ink	Бөлектелген сияны қайта бояу
+	Record Macro	Макрос жазу
+	Recover Unsaved Documents	Сақталмаған құжаттарды қалпына келтіру
+	Rectangle	Тіктөртбұрыш
+	Red:	Қызыл:
+	Redo	Қайталау
+	Reduce Hanging Indent	Шығыңқы шегіністі азайту
+	References	Сілтемелер
+	Reflection	Шағылыс
+	Refresh	Жаңарту
+	Registered	Тіркелген
+	Registered Sign	Тіркелген белгі
+	Regular expressions	Тұрақты өрнектер
+	Regulations	Ережелер
+	Reject	Қабылдамау
+	Reject All	Барлығын қабылдамау
+	Reject All Changes	Барлық өзгерістерді қабылдамау
+	Reject Change	Өзгерісті қабылдамау
+	Relationship	Қатынас
+	relative to	қатысты
+	Relative to:	Қатысты:
+	Relaxed	Еркін
+	Remove	Алып тастау
+	Remove Added Font	Қосылған қаріпті алып тастау
+	Remove Background	Фонды алып тастау
+	Remove Content Control	Мазмұн басқару элементін алып тастау
+	Remove every custom shortcut and restore the built-in keys?	Барлық реттелетін пернелер тіркесімін алып тастап, кірістірілген пернелерді қалпына келтіру керек пе?
+	Remove every custom tab and group and show all tabs again?	Барлық реттелетін қойындылар мен топтарды алып тастап, барлық қойындыларды қайта көрсету керек пе?
+	Remove field	Өрісті алып тастау
+	Remove Field Name	Өріс атауын алып тастау
+	Remove Footer	Төменгі колонтитулды алып тастау
+	Remove from Quick Access Toolbar	Жылдам қатынау тақтасынан алып тастау
+	Remove Header	Жоғарғы колонтитулды алып тастау
+	Remove Hyperlink	Гиперсілтемені алып тастау
+	Remove Password	Құпиясөзді алып тастау
+	Remove Pen	Қаламды алып тастау
+	Remove Positioning	Орналастыруды алып тастау
+	Remove recipient	Алушыны алып тастау
+	Remove row	Жолды алып тастау
+	Remove series	Қатарды алып тастау
+	Remove Space After Paragraph	Абзацтан кейінгі аралықты алып тастау
+	Remove Table of Contents	Мазмұнды алып тастау
+	Remove the control once edited	Өңделгеннен кейін басқару элементін алып тастау
+	Remove the space before the punctuation	Тыныс белгісі алдындағы бос орынды алып тастау
+	Remove Watermark	Су белгісін алып тастау
+	Rename Style	Стильдің атын өзгерту
+	Rename…	Атын өзгерту…
+	Reopen	Қайта ашу
+	Repeat	Қайталау
+	Repeat as header row on each page	Әр бетте тақырып жолы ретінде қайталау
+	Repeat Header Rows	Тақырып жолдарын қайталау
+	Repeated words	Қайталанған сөздер
+	Repeating Section Content Control	Қайталанатын бөлім мазмұн басқару элементі
+	Replace	Ауыстыру
+	Replace All	Барлығын ауыстыру
+	Replace as you type	Теру кезінде ауыстыру
+	Replace Document Text	Құжат мәтінін ауыстыру
+	Replace text as you type	Теру кезінде мәтінді ауыстыру
+	Replace with:	Немен ауыстыру:
+	Replace:	Ауыстыру:
+	Replay	Қайта ойнату
+	Reply	Жауап беру
+	Report	Есеп
+	Research	Зерттеу
+	Researcher	Зерттеуші
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Зерттеушіге онлайн қызмет қажет; Doc4Me құжаттарыңызды желіден тыс сақтайды.
+	Reset	Қалпына келтіру
+	Reset All	Барлығын қалпына келтіру
+	Reset All…	Барлығын қалпына келтіру…
+	Reset Character Formatting	Таңба пішімдеуін қалпына келтіру
+	Reset Crop	Қиюды қалпына келтіру
+	Reset Graphic	Графиканы қалпына келтіру
+	Reset Paragraph Formatting	Абзац пішімдеуін қалпына келтіру
+	Reset Picture	Суретті қалпына келтіру
+	Reset to Normal	«Қалыпты» стиліне қайтару
+	Reset\nGraphic	Графиканы\nқалпына келтіру
+	Reset…	Қалпына келтіру…
+	Resize Table by Dragging	Сүйреу арқылы кесте өлшемін өзгерту
+	Resolve	Шешілді деп белгілеу
+	Resolved	Шешілді
+	Restart at 1	1-ден қайта бастау
+	Restart Each Page	Әр бетте қайта бастау
+	Restart Each Section	Әр бөлімде қайта бастау
+	Restart list after:	Тізімді мынадан кейін қайта бастау:
+	Restore	Қалпына келтіру
+	Restore Defaults	Әдепкі мәндерді қалпына келтіру
+	Restore Down	Терезеге қайтару
+	Restore to Normal Word Document	Қалыпты Word құжатына қайтару
+	Restrict Editing	Өңдеуді шектеу
+	Restrict\nEditing	Өңдеуді\nшектеу
+	Result	Нәтиже
+	Results	Нәтижелер
+	Return address labels	Кері мекенжай жапсырмалары
+	Return address:	Кері мекенжай:
+	Reverse the order	Ретін керісінше ету
+	Review	Рецензиялау
+	Review AutoFormat Changes	Автопішім өзгерістерін қарап шығу
+	Review Changes…	Өзгерістерді қарап шығу…
+	Reviewing	Рецензиялау
+	Reviewing Pane	Рецензиялау тақтасы
+	Reviewing — edits become suggestions	Рецензиялау — түзетулер ұсыныстарға айналады
+	Revised document	Түзетілген құжат
+	Revisions	Түзетулер
+	Rewind	Кері айналдыру
+	Ribbon	Таспа
+	Ribbon and Quick Access Toolbar:	Таспа және жылдам қатынау тақтасы:
+	Ribbon tabs	Таспа қойындылары
+	Rich Text Content Control	Пішімделген мәтін мазмұн басқару элементі
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Оң жақ
+	Right (vertical)	Оң жақ (тігінен)
+	Right align page numbers	Бет нөмірлерін оң жаққа туралау
+	Right Arrow with Text Above	Үстінде мәтіні бар оңға көрсеткі
+	Right Arrow with Text Below	Астында мәтіні бар оңға көрсеткі
+	Right Border	Оң жақ жиек
+	Right border	Оң жақ жиек
+	Right Bracket Twice	Екі оң жақ тік жақша
+	Right indent	Оң жақ шегініс
+	Right Margin	Оң жақ шет
+	Right Only	Тек оң жақ
+	Right only	Тек оң жақ
+	Right-to-left	Оңнан солға
+	Right-to-Left Section	Оңнан солға бөлім
+	Right-to-Left Table	Оңнан солға кесте
+	Right-to-Left Text Direction	Оңнан солға мәтін бағыты
+	Right:	Оң жақ:
+	Rightwards Arrow Above	Үстіндегі оңға көрсеткі
+	Rightwards Harpoon Above	Үстіндегі оңға гарпун
+	Roots of ax²+bx+c	ax²+bx+c түбірлері
+	Rotate	Бұру
+	Rotate all text 270°	Бүкіл мәтінді 270° бұру
+	Rotate all text 90°	Бүкіл мәтінді 90° бұру
+	Rotate Left 90°	Солға 90° бұру
+	Rotate Right 90°	Оңға 90° бұру
+	Rotation	Бұрылу
+	Rotation:	Бұрылу:
+	Rounded Rectangle	Дөңгеленген тіктөртбұрыш
+	Row	Жол
+	Row:	Жол:
+	Rows & Columns	Жолдар мен бағандар
+	Ruby text:	Руби мәтіні:
+	Ruler	Сызғыш
+	Rules	Ережелер
+	Run	Іске қосу
+	Run-in	Жалғас
+	Russian	Орыс
+	Résumé	Түйіндеме
+	Same as the whole table	Бүкіл кестедегідей
+	SAMPLE	ҮЛГІ
+	Sat:	Қан.:
+	Save	Сақтау
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Көшірмесін басқа пішімде сақтаңыз. Басып шығару кез келген қарау бағдарламасынан басып шығаруға болатын PDF арқылы өтеді.
+	Save As	Басқаша сақтау
+	Save as Template	Үлгі ретінде сақтау
+	Save documents	Құжаттарды сақтау
+	Save the document to turn on AutoSave	Автосақтауды қосу үшін құжатты сақтаңыз
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Автосақтауды қосу үшін құжатты сақтаңыз (тек ашылған файл сіз сақтағанша қайта жазылмайды)
+	Save these pages as PDF…	Осы беттерді PDF ретінде сақтау…
+	Save Version	Нұсқаны сақтау
+	Saved	Сақталды
+	Scale	Масштаб
+	Scale Drawing	Суретті масштабтау
+	Scatter	Нүктелік
+	Screen Clipping	Экран қиындысы
+	Screen clipping didn't work: {reason}	Экран қиындысы орындалмады: {reason}
+	Screen clipping ended without a picture.	Экран қиындысы суретсіз аяқталды.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Экран қиындысы мұнда қолжетімсіз. Экран суретін көшіріп, содан кейін қойыңыз.
+	Screenshot	Скриншот
+	Script	Индекс
+	Scripts	Индекстер
+	Scroll ribbon left	Таспаны солға айналдыру
+	Scroll ribbon right	Таспаны оңға айналдыру
+	Search	Іздеу
+	Search Commands	Пәрмендерді іздеу
+	Search commands and help	Пәрмендер мен анықтаманы іздеу
+	Search document	Құжаттан іздеу
+	Search for templates	Үлгілерді іздеу
+	Search icons	Белгішелерді іздеу
+	Search Openverse (Creative Commons pictures)	Openverse ішінен іздеу (Creative Commons суреттері)
+	Search Options	Іздеу параметрлері
+	Searching…	Ізделуде…
+	Secant Function	Секанс функциясы
+	Section Break	Бөлім үзілімі
+	Section Breaks	Бөлім үзілімдері
+	Section Character	Бөлім таңбасы
+	Section direction:	Бөлім бағыты:
+	Section Mark	Параграф белгісі
+	Section Properties	Бөлім қасиеттері
+	Sections	Бөлімдер
+	See	Қараңыз
+	Select	Бөлектеу
+	Select a picture, shape, chart or table to describe it.	Сипаттау үшін суретті, пішінді, диаграмманы немесе кестені бөлектеңіз.
+	Select All	Барлығын бөлектеу
+	Select Cell	Ұяшықты бөлектеу
+	Select Floating Shapes	Қалқымалы пішіндерді бөлектеу
+	Select Heading and Content	Тақырып пен мазмұнды бөлектеу
+	Select Line	Жолды бөлектеу
+	Select Objects	Нысандарды бөлектеу
+	Select Paragraph	Абзацты бөлектеу
+	Select Range	Ауқымды бөлектеу
+	Select Recipients	Алушыларды таңдау
+	Select recipients first to choose from their fields.	Алушылардың өрістерінен таңдау үшін алдымен алушыларды таңдаңыз.
+	Select recipients first to match their fields.	Алушылардың өрістерін сәйкестендіру үшін алдымен оларды таңдаңыз.
+	Select Row	Кесте жолын бөлектеу
+	Select Sentence	Сөйлемді бөлектеу
+	Select Table	Кестені бөлектеу
+	Select Text	Мәтінді бөлектеу
+	Select text in the document to translate it.	Аудару үшін құжаттағы мәтінді бөлектеңіз.
+	Select Text with Similar Formatting	Ұқсас пішімделген мәтінді бөлектеу
+	Select text, then tick who can still edit it.	Мәтінді бөлектеп, оны кім өңдей алатынын белгілеңіз.
+	Select the part of the screen to insert.	Кірістірілетін экран бөлігін бөлектеңіз.
+	Select Word	Сөзді бөлектеу
+	Select\nRecipients	Алушыларды\nтаңдау
+	Selected Fields	Таңдалған өрістер
+	Selected pages	Таңдалған беттер
+	Selection	Бөлектеу
+	Selection Pane	Бөлектеу тақтасы
+	Send Backward	Артқа жылжыту
+	Send the document straight to the system print dialog, or save a copy in another format below.	Құжатты тікелей жүйелік басып шығару терезесіне жіберіңіз немесе төменде көшірмесін басқа пішімде сақтаңыз.
+	Sentence	Сөйлем
+	Sentence case.	Сөйлемдегідей.
+	Separator:	Бөлгіш:
+	Sequence name:	Реттілік атауы:
+	Serbian	Серб
+	Serbian (Cyrillic)	Серб (кирилл)
+	Serbian (Latin)	Серб (латын)
+	Series name	Қатар атауы
+	Series {n}	Қатар {n}
+	Server address (https://…)	Сервер мекенжайы (https://…)
+	Set	Орнату
+	Set As Default	Әдепкі ету
+	Set as Default	Әдепкі ету
+	Set Caret	Курсорды қою
+	Set Character Formatting	Таңба пішімдеуін орнату
+	Set Date	Күнді орнату
+	Set Equation	Теңдеуді орнату
+	Set Numbering Value	Нөмірлеу мәнін орнату
+	Set Paragraph Formatting	Абзац пішімдеуін орнату
+	Set Proofing Language…	Тексеру тілін орнату…
+	Setting:	Баптау:
+	Settings…	Параметрлер…
+	Shading	Бояу
+	Shadow	Көлеңке
+	Shadow, glow and soft edges	Көлеңке, жарқырау және жұмсақ жиектер
+	Shape Effects	Пішін әсерлері
+	Shape Fill	Пішін құймасы
+	Shape Format	Пішін пішімі
+	Shape Outline	Пішін контуры
+	Shape Styles	Пішін стильдері
+	Shapes	Пішіндер
+	Share	Бөлісу
+	Sheet:	Парақ:
+	Shift cells down	Ұяшықтарды төмен жылжыту
+	Shift cells right	Ұяшықтарды оңға жылжыту
+	Shift+Tab	Shift+Tab
+	Shipping labels	Жөнелту жапсырмалары
+	Short citation:	Қысқа дәйексөз:
+	Shortcut key:	Пернелер тіркесімі:
+	Show	Көрсету
+	Show all formatting marks	Барлық пішімдеу белгілерін көрсету
+	Show All Levels	Барлық деңгейлерді көрсету
+	Show all revisions inline	Барлық түзетулерді мәтін ішінде көрсету
+	Show changes at:	Өзгерістерді көрсету орны:
+	Show changes in:	Өзгерістерді көрсету:
+	Show Comments	Түсініктемелерді көрсету
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Құжаттарды «Көрініс › Режимдерді ауыстыру» сияқты түстерін инверсиялап көрсету. Сақтау, басып шығару және PDF өзгермейді.
+	Show every bibliography field	Әдебиеттер тізімінің барлық өрістерін көрсету
+	Show First Line Only	Тек бірінші жолды көрсету
+	Show in the Styles gallery	Стильдер жинағында көрсету
+	Show KeyTips (Alt or F10)	Перне кеңестерін көрсету (Alt немесе F10)
+	Show Level	Деңгейді көрсету
+	Show Level 1	1-деңгейді көрсету
+	Show Level 2	2-деңгейді көрсету
+	Show Level 3	3-деңгейді көрсету
+	Show Level 4	4-деңгейді көрсету
+	Show Level 5	5-деңгейді көрсету
+	Show Level 6	6-деңгейді көрсету
+	Show Level 7	7-деңгейді көрсету
+	Show Level 8	8-деңгейді көрсету
+	Show Level 9	9-деңгейді көрсету
+	Show Markup	Белгілеулерді көрсету
+	Show Notes	Ескертпелерді көрсету
+	Show only comments and formatting in balloons	Шарларда тек түсініктемелер мен пішімдеуді көрсету
+	Show or Hide Style	Стильді көрсету немесе жасыру
+	Show page numbers	Бет нөмірлерін көрсету
+	Show revisions in balloons	Түзетулерді шарларда көрсету
+	Show rulers	Сызғыштарды көрсету
+	Show Text Formatting	Мәтін пішімдеуін көрсету
+	Show the equation in the line of text	Теңдеуді мәтін жолында көрсету
+	Show the equation on a line of its own	Теңдеуді бөлек жолда көрсету
+	Show the mini toolbar when text is selected	Мәтін бөлектелгенде шағын құралдар тақтасын көрсету
+	Show/Hide ¶	¶ көрсету/жасыру
+	Show\nComments	Түсініктемелерді\nкөрсету
+	Showing the first {count} items.	Алғашқы {count} элемент көрсетілуде.
+	Shows a tree: each item below the item it belongs to.	Ағашты көрсетеді: әр элемент өзі тиесілі элементтің астында.
+	Shows items around a central idea: the first item is the centre.	Орталық идея айналасындағы элементтерді көрсетеді: бірінші элемент — орталық.
+	Shows items of equal weight as blocks in rows.	Бірдей маңызды элементтерді жолдардағы блоктар ретінде көрсетеді.
+	Shows overlapping ideas as overlapping circles.	Қиылысатын идеяларды қиылысатын шеңберлер ретінде көрсетеді.
+	Shows parts of a whole as quadrants.	Бүтіннің бөліктерін ширектер ретінде көрсетеді.
+	Shows parts that build on each other, largest at the bottom.	Бір-біріне сүйенетін бөліктерді көрсетеді, ең үлкені төменде.
+	Shows steps in order, left to right, with arrows between them.	Қадамдарды солдан оңға ретімен, араларында көрсеткілермен көрсетеді.
+	Shows steps that repeat, around a circle.	Қайталанатын қадамдарды шеңбер бойымен көрсетеді.
+	Shrink Font 1 Point	Қаріпті 1 пунктке кішірейту
+	Shrink Selection	Бөлектеуді тарылту
+	Shrink text	Мәтінді кішірейту
+	Side to Side	Қатар
+	Side\nto Side	Қатар\nорналастыру
+	Sides of a right triangle	Тікбұрышты үшбұрыштың қабырғалары
+	Signature Line	Қолтаңба жолы
+	Sine and cosine series of f(x)	f(x) синус-косинус қатары
+	Sine Function	Синус функциясы
+	Sine theta	Синус тета
+	Single	Дара
+	Single Brackets	Дара жақшалар
+	Single Closing Quote	Жабатын дара тырнақша
+	Single label	Жалғыз жапсырма
+	Single Left Angle	Дара сол жақ бұрыштық жақша
+	Single Left Bar	Дара сол жақ тік сызық
+	Single Left Brace	Дара сол жақ ирек жақша
+	Single Left Bracket	Дара сол жақ тік жақша
+	Single Left Parenthesis	Дара сол жақ дөңгелек жақша
+	Single Opening Quote	Ашатын дара тырнақша
+	Single Right Brace	Дара оң жақ ирек жақша
+	Single Right Bracket	Дара оң жақ тік жақша
+	Single Right Parenthesis	Дара оң жақ дөңгелек жақша
+	Single Spacing	Дара аралық
+	SIST02	SIST02
+	Site name	Сайт атауы
+	Size	Өлшем
+	Size (pt):	Өлшем (pt):
+	Size and Crop…	Өлшемі және қию…
+	Size:	Өлшем:
+	Sketchbook	Эскиз дәптері
+	Skewed Fraction	Қиғаш бөлшек
+	Skip citations & bibliography	Дәйексөздер мен әдебиеттер тізімін өткізіп жіберу
+	Skip Citations and Bibliography	Дәйексөздер мен әдебиеттер тізімін өткізіп жіберу
+	Skip Record If	Жазбаны өткізіп жіберу, егер
+	Skip Record If…	Жазбаны өткізіп жіберу, егер…
+	Slant Down	Төмен көлбеу
+	Slant Up	Жоғары көлбеу
+	Small Caps	Кіші бас әріптер
+	Small caps	Кіші бас әріптер
+	Small change	Шағын өзгеріс
+	Smart quotes instead of straight quotes	Түзу тырнақшалардың орнына «ақылды» тырнақшалар
+	SmartArt	SmartArt
+	SmartArt Design	SmartArt дизайны
+	SmartArt Styles	SmartArt стильдері
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Біркелкі айналдыру мен масштабтау, баяу пайда болатын мәзірлер мен түймелер. Өшірулі болса, әр өзгеріс бірден көрсетіледі.
+	Soft Edges	Жұмсақ жиектер
+	Soft Glow	Жұмсақ жарқырау
+	Solid Accent	Тұтас акцент
+	Sort	Сұрыптау
+	Sort by	Сұрыптау негізі
+	Sort order:	Сұрыптау реті:
+	Sort Records	Жазбаларды сұрыптау
+	Source code: github.com/chatraweechai/doc4me	Бастапқы код: github.com/chatraweechai/doc4me
+	Source Manager	Дереккөздер реттегіші
+	Source type:	Дереккөз түрі:
+	Sources in this document:	Осы құжаттағы дереккөздер:
+	South	Оңтүстік
+	Space	Бос орын
+	Space after	Кейінгі аралық
+	Space after: {pt} pt	Кейінгі аралық: {pt} pt
+	Space before	Алдыңғы аралық
+	Space before/after:	Алдыңғы/кейінгі аралық:
+	Space before: {pt} pt	Алдыңғы аралық: {pt} pt
+	Spaces	Бос орындар
+	Spacing	Аралық
+	Spacing (pt):	Аралық (pt):
+	Spacing:	Аралық:
+	Spanish	Испан
+	Spanish (Mexico)	Испан (Мексика)
+	Spanish (Spain)	Испан (Испания)
+	Sparse Matrices	Сирек матрицалар
+	Special	Арнайы
+	Special Characters	Арнайы таңбалар
+	Specify height:	Биіктігін көрсету:
+	Speech	Сөйлеу
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Сөйлеу осы компьютерде танылады (whisper.cpp); ештеңе желіге жіберілмейді.
+	Speed	Жылдамдық
+	Spelling	Емле
+	Spelling & Grammar	Емле және грамматика
+	Spelling &\nGrammar	Емле және\nграмматика
+	Spelling and grammar are checked in English (United States).	Емле мен грамматика ағылшын (АҚШ) тілінде тексеріледі.
+	Spelling Suggestions	Емле ұсыныстары
+	Spike	Жинақтағыш
+	Split	Бөлу
+	Split apart page break and paragraph mark	Бет үзілімі мен абзац белгісін бөлу
+	Split Cells	Ұяшықтарды бөлу
+	Split Table	Кестені бөлу
+	Spreadsheet Table	Электрондық кесте
+	Square	Шаршы
+	Square Root	Квадрат түбір
+	Square Root with Degree	Дәрежесі бар квадрат түбір
+	Square Union	Шаршы бірігу
+	Stack Object	Үйінді нысан
+	Stack Object (Three)	Үйінді нысан (үш)
+	Stacked	Үйінді
+	Stacked Bar	Жинақталған жолақ
+	Stacked Column	Жинақталған баған
+	Stacked Fraction	Тік бөлшек
+	Stacked, no bar	Үйінді, сызықсыз
+	Standard	Стандартты
+	Standard and Contextual	Стандартты және мәнмәтіндік
+	Standard Colors	Стандартты түстер
+	Standard Only	Тек стандартты
+	Star	Жұлдыз
+	Start at:	Бастау:
+	Start Enforcing Protection	Қорғауды қосу
+	Start Mail Merge	Хат біріктіруді бастау
+	Start Mail\nMerge	Хат біріктіруді\nбастау
+	State	Облыс
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Statistics	Статистика
+	Status Bar	Күй жолағы
+	Statutes	Заңдар
+	Stop	Тоқтату
+	Stop Protection	Қорғауды тоқтату
+	Stop Reading	Оқуды тоқтату
+	Stopped	Тоқтатылды
+	Store	Дүкен
+	Straight Arrow Connector	Түзу көрсеткілі қосқыш
+	Straight Connector	Түзу қосқыш
+	Strikethrough	Сызылған
+	Stroke {n} of {total}	{n}/{total} штрих
+	Strong	Күшті
+	Structure Actions	Құрылым әрекеттері
+	Structures	Құрылымдар
+	Studio	Студия
+	Studio cover	Studio мұқабасы
+	Studio handbook (sample)	Studio анықтамалығы (үлгі)
+	Style	Стиль
+	Style based on:	Негізгі стиль:
+	Style Inspector	Стиль тексергіші
+	Style Set	Стильдер жиынтығы
+	Style:	Стиль:
+	Style: APA	Стиль: APA
+	Style: {style}	Стиль: {style}
+	Styles	Стильдер
+	Styles Pane	Стильдер тақтасы
+	Styles:	Стильдер:
+	Subentry:	Ішкі элемент:
+	Subject	Тақырып
+	Subscript	Төменгі индекс
+	Subscript-Superscript	Төменгі-жоғарғы индекс
+	Subscripts and Superscripts	Төменгі және жоғарғы индекстер
+	Subset:	Жиынтық:
+	Substituted font	Ауыстырылған қаріп
+	Subtitle	Тақырыпша
+	Subtle Emphasis	Әлсіз екпін
+	Subtle Reference	Әлсіз сілтеме
+	Sum	Қосынды
+	Sum of cosines	Косинустар қосындысы
+	Sum or difference of sines	Синустардың қосындысы немесе айырымы
+	Summation	Қосынды
+	Summation from 0 to n	0-ден n-ге дейінгі қосынды
+	Summation over binomials	Биномдар бойынша қосынды
+	Summation with Limits	Шектері бар қосынды
+	Summation with Lower Limit	Төменгі шегі бар қосынды
+	Summation with Subscript Limit	Төменгі индекс шегі бар қосынды
+	Summation with Subscript-Superscript Limits	Индекс шектері бар қосынды
+	Summations	Қосындылар
+	Superscript	Жоғарғы индекс
+	Suppress line numbers	Жол нөмірлерін басу
+	Surface Integral	Беттік интеграл
+	Surface Integral with Limits	Шектері бар беттік интеграл
+	Surface Integral with Stacked Limits	Үстіңгі-астыңғы шектері бар беттік интеграл
+	Swap footnotes and endnotes	Төменгі және соңғы ескертпелерді алмастыру
+	Swedish	Швед
+	Switch Modes	Режимдерді ауыстыру
+	Switch Windows	Терезелерді ауыстыру
+	Switch\nModes	Режимдерді\nауыстыру
+	Symbol	Таңба
+	Symbol Font	Symbol қарпі
+	Symbols	Таңбалар
+	Synchronous Scrolling	Синхронды айналдыру
+	Synonyms	Синонимдер
+	System	Жүйелік
+	Tab	Tab
+	Tab Character	Табуляция таңбасы
+	Tab character	Табуляция таңбасы
+	Tab characters	Табуляция таңбалары
+	Tab leader:	Табуляция толтырғышы:
+	Tab stop position:	Табуляция позициясы:
+	Tab stops to be cleared:	Тазаланатын табуляция позициялары:
+	Table	Кесте
+	Table AutoFormat	Кесте автопішімі
+	Table AutoFormat…	Кесте автопішімі…
+	Table Column Width	Кесте бағанының ені
+	Table Design	Кесте дизайны
+	Table direction:	Кесте бағыты:
+	Table entry fields	Кесте элементі өрістері
+	Table Grid	Кесте торы
+	Table identifier:	Кесте идентификаторы:
+	Table Layout	Кесте макеті
+	Table of Authorities	Сілтемелер кестесі
+	Table of Contents	Мазмұн
+	Table of Contents Options	Мазмұн параметрлері
+	Table of Contents Styles	Мазмұн стильдері
+	Table of Figures	Суреттер тізімі
+	Table of Figures Options	Суреттер тізімінің параметрлері
+	Table of\nContents	Мазмұн
+	Table Positioning	Кестені орналастыру
+	Table Properties	Кесте қасиеттері
+	Table Row Height	Кесте жолының биіктігі
+	Table style	Кесте стилі
+	Table Style Options	Кесте стилінің параметрлері
+	Table Styles	Кесте стильдері
+	Table styles:	Кесте стильдері:
+	Tables	Кестелер
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tabs	Табуляция
+	Tabs…	Табуляция…
+	Tabular List	Кестелік тізім
+	Tag	Тег
+	Tangent formula	Тангенс формуласы
+	Tangent Function	Тангенс функциясы
+	TC entry fields	TC элементі өрістері
+	Technology	Технология
+	Templates	Үлгілер
+	Templates and Add-ins	Үлгілер мен қондырмалар
+	Text	Мәтін
+	Text Box	Мәтін өрісі
+	Text boxes	Мәтін өрістері
+	Text Direction	Мәтін бағыты
+	Text Effects	Мәтін әсерлері
+	Text Effects and Typography	Мәтін әсерлері және типография
+	Text Fill	Мәтін құймасы
+	Text from File	Файлдағы мәтін
+	Text Highlight Color	Мәтінді ерекшелеу түсі
+	Text indent at:	Мәтін шегінісі:
+	Text isn't squeezed to fit its cell yet.	Мәтін әзірге ұяшыққа сыю үшін сығылмайды.
+	Text Outline	Мәтін контуры
+	Text over Colon Equal	Қос нүкте-тең үстіндегі мәтін
+	Text over Equal	Тең белгісі үстіндегі мәтін
+	Text Pane	Мәтін тақтасы
+	Text size	Мәтін өлшемі
+	Text snaps to characters	Мәтін таңбаларға тартылады
+	Text to display:	Көрсетілетін мәтін:
+	Text Wrapping	Мәтінді орау
+	Text wrapping:	Мәтінді орау:
+	Text:	Мәтін:
+	Text\nBox	Мәтін\nөрісі
+	Text\nDirection	Мәтін\nбағыты
+	Thai	Тай
+	Thai Distributed	Тайша таратылған
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Бұл пішім бәрін сақтамайды, сондықтан құжат әлі ашық. Жалғастыру үшін оны Word құжаты (.docx) ретінде сақтаңыз.
+	That isn't the web address or embed code of an online video.	Бұл онлайн бейненің веб-мекенжайы немесе ендіру коды емес.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Құпиясөз дұрыс емес. Оны тексеріп (құпиясөздер регистрді ажыратады), қайталап көріңіз.
+	The clipboard is empty.	Алмасу буфері бос.
+	The date it is today	Бүгінгі күн
+	The document contains no tracked changes.	Құжатта бақыланатын өзгерістер жоқ.
+	The document has no bookmarks yet.	Құжатта әзірге бетбелгілер жоқ.
+	The document is read only, except for regions marked editable.	Өңделетін деп белгіленген аймақтардан басқа құжат тек оқуға арналған.
+	The document will be saved with a password. Save it to protect it.	Құжат құпиясөзбен сақталады. Қорғау үшін оны сақтаңыз.
+	The first word of a sentence starts with a capital.	Сөйлемнің бірінші сөзі бас әріппен басталады.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	тегін күндік лимит таусылды (ертең қайталап көріңіз немесе электрондық пошта мекенжайын беріңіз)
+	the LibreTranslate server	LibreTranslate сервері
+	The Mail Merge Helper sets up a merge in three steps.	Хат біріктіру көмекшісі біріктіруді үш қадаммен баптайды.
+	The new style takes the formatting of the current paragraph.	Жаңа стиль ағымдағы абзацтың пішімдеуін алады.
+	The password is optional; without it anyone can stop the protection.	Құпиясөз міндетті емес; онсыз кез келген адам қорғауды тоқтата алады.
+	The password is removed. Save the document to keep the change.	Құпиясөз алынып тасталды. Өзгерісті сақтау үшін құжатты сақтаңыз.
+	The passwords don't match.	Құпиясөздер сәйкес келмейді.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Принтер, екі жақты басып шығару және парақтағы беттер саны сол терезеде таңдалады.
+	The recipient-list field that fills each part of an address block and greeting line.	Мекенжай блогы мен сәлемдесу жолының әр бөлігін толтыратын алушылар тізімінің өрісі.
+	The same word twice in a row.	Бір сөз қатарынан екі рет.
+	The spelling and grammar check is complete.	Емле мен грамматиканы тексеру аяқталды.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Жүйелік файл терезесі қолжетімсіз, сондықтан Doc4Me өз терезесін көрсетеді. Жүйелік терезені алу үшін файл таңдау порталын (мысалы, xdg-desktop-portal-gtk) немесе zenity орнатыңыз.
+	The text is sent to {service} to be translated.	Мәтін аудару үшін {service} қызметіне жіберіледі.
+	The time right now	Қазіргі уақыт
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Бейне құжатта сурет ретінде көрсетіледі. Оны браузерде көру үшін екі рет басыңыз.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Бүкіл құжат осы құжатты алмастыратын жаңа құжатқа аударылады. Алдымен жұмысыңызды сақтаңыз.
+	Theme Colors	Тема түстері
+	Theme Fonts	Тема қаріптері
+	Theme List	Темалар тізімі
+	Themes	Темалар
+	Then by	Содан кейін
+	Then insert:	Онда кірістіру:
+	There's no text to translate.	Аударатын мәтін жоқ.
+	Thesaurus	Тезаурус
+	These marks show even when Show/Hide ¶ is off.	Бұл белгілер ¶ көрсету/жасыру өшірулі болса да көрінеді.
+	These merge fields aren't in the recipient list:	Бұл біріктіру өрістері алушылар тізімінде жоқ:
+	These settings will be used for new documents.	Бұл параметрлер жаңа құжаттар үшін пайдаланылады.
+	Thick	Қалың
+	Thickness	Қалыңдығы
+	This Device…	Осы құрылғы…
+	This document	Осы құжат
+	This field has no options.	Бұл өрістің параметрлері жоқ.
+	This folder can't be read: {error}	Бұл қалтаны оқу мүмкін емес: {error}
+	This font has no characters to show.	Бұл қаріпте көрсететін таңбалар жоқ.
+	This page	Осы бет
+	This password type isn't supported.	Бұл құпиясөз түріне қолдау көрсетілмейді.
+	This point forward	Осы жерден бастап
+	This section	Осы бөлім
+	Three	Үш
+	Through	Арқылы
+	Tight	Тығыз
+	Tilde	Тильда
+	Tips ({n})	Кеңестер ({n})
+	Title	Атау
+	Title from the document properties	Құжат қасиеттеріндегі атау
+	Title:	Атауы:
+	To	Қай тілге
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Word құжаттарын әдепкі бойынша Doc4Me арқылы ашу үшін: Finder ішінде біреуін таңдап, Файл › Мәлімет алу тармағын таңдаңыз, «Ашу бағдарламасы» астынан Doc4Me таңдап, «Барлығын өзгерту» түймесін басыңыз.
+	To:	Кімге:
+	TOA Heading	Сілтемелер кестесінің тақырыбы
+	TOC Heading	Мазмұн тақырыбы
+	TOC {n}	Мазмұн {n}
+	Today	Бүгін
+	tOGGLE cASE	рЕГИСТРДІ аУЫСТЫРУ
+	Toggle Check Box	Құсбелгіні ауыстыру
+	Toggle Field Codes	Өріс кодтарын ауыстыру
+	Toggle Unicode Character	Unicode таңбасын ауыстыру
+	Tools	Құралдар
+	Top	Жоғарғы
+	Top and Bottom	Жоғарыда және төменде
+	Top Border	Жоғарғы жиек
+	Top Margin	Жоғарғы шет
+	Top of Next Page	Келесі беттің басы
+	Top of Page	Бет басы
+	Top of Previous Page	Алдыңғы беттің басы
+	Top of the Window	Терезенің жоғарғы жағы
+	Top:	Жоғарғы:
+	Total	Барлығы
+	Total Row	Қорытынды жол
+	Track Changes	Өзгерістерді бақылау
+	Track Changes Options	Өзгерістерді бақылау параметрлері
+	Track changes while editing	Өңдеу кезінде өзгерістерді бақылау
+	Track Changes: On	Өзгерістерді бақылау: қосулы
+	Track formatting	Пішімдеуді бақылау
+	Track\nChanges	Өзгерістерді\nбақылау
+	Track\nChanges ✓	Өзгерістерді\nбақылау ✓
+	Tracked changes	Бақыланатын өзгерістер
+	Tracking	Бақылау
+	Trademark	Сауда белгісі
+	Trademark Sign	Сауда белгісі таңбасы
+	Transform	Түрлендіру
+	Translate	Аудару
+	Translate Document	Құжатты аудару
+	Translating {done} of {total}	Аударылуда: {done}/{total}
+	Translation service	Аударма қызметі
+	Translator	Аудармашы
+	Transparency	Мөлдірлік
+	Transparency:	Мөлдірлік:
+	Transport	Көлік
+	Treatises	Трактаттар
+	Triangle	Үшбұрыш
+	Triangle Down	Төмен үшбұрыш
+	Triangle Up	Жоғары үшбұрыш
+	Trigonometric Functions	Тригонометриялық функциялар
+	Triple	Үштік
+	Triple Dot	Үш нүкте
+	Triple Integral	Үштік интеграл
+	Triple Integral with Limits	Шектері бар үштік интеграл
+	Triple Integral with Stacked Limits	Үстіңгі-астыңғы шектері бар үштік интеграл
+	Trust Center	Сенім орталығы
+	Tue	Сс
+	Turabian	Turabian
+	Turkish	Түрік
+	Two	Екі
+	Type	Түрі
+	Type a command, e.g. "insert table"	Пәрменді теріңіз, мысалы «кесте кірістіру»
+	Type a New List	Жаңа тізім теру
+	Type a New List…	Жаңа тізім теру…
+	Type at least one recipient.	Кемінде бір алушыны теріңіз.
+	Type equations in LaTeX	Теңдеулерді LaTeX тілінде теру
+	Type equations in the linear format (UnicodeMath)	Теңдеулерді сызықтық пішімде теру (UnicodeMath)
+	Type in Equation	Теңдеуде теру
+	Type normal (non-math) text in the equation	Теңдеуде қалыпты (математикалық емес) мәтін теру
+	Type Text	Мәтін теру
+	Type the categories down the side and a column of values per series.	Санаттарды бүйір жағына төмен қарай, әр қатар үшін бір баған мәндерді теріңіз.
+	Type the field's name and its switches, for example PAGE \\* roman.	Өріс атауы мен оның қосқыштарын теріңіз, мысалы PAGE \\* roman.
+	Type the password to stop the protection.	Қорғауды тоқтату үшін құпиясөзді теріңіз.
+	Type the recipients, or load them from a file.	Алушыларды теріңіз немесе файлдан жүктеңіз.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Дереккөздің тег атауын теріңіз. Бұл дереккөзге кейінірек оны өңдеу арқылы қосымша мәлімет қосуға болады.
+	Type:	Түрі:
+	Typing	Теру
+	Typing replaces selected text	Теру бөлектелген мәтінді ауыстырады
+	Ukrainian	Украин
+	Unchecked symbol	Белгіленбеген таңба
+	Underbar	Астыңғы сызық
+	Underbrace	Астыңғы ирек жақша
+	Underline	Асты сызылған
+	Underline color	Асты сызу түсі
+	Underline Words Only	Тек сөздердің астын сызу
+	Undo	Болдырмау
+	Undo Stroke	Штрихты болдырмау
+	Undo {action}	Болдырмау: {action}
+	Unformatted Text	Пішімделмеген мәтін
+	Ungroup	Топтан шығару
+	Union	Бірігу
+	Union of intersections	Қиылыстардың бірігуі
+	Union with Limits	Шектері бар бірігу
+	Union with Lower Limit	Төменгі шегі бар бірігу
+	Union with Plus	Плюсі бар бірігу
+	Union with Subscript-Superscript Limits	Индекс шектері бар бірігу
+	Unions and Intersections	Бірігулер мен қиылысулар
+	Unlink Fields	Өрістерді ажырату
+	Unlink\nCitations	Дәйексөздерді\nажырату
+	Unlock Fields	Өрістердің құлпын ашу
+	Up	Жоғары
+	Up Diagonal Dots	Жоғары диагональ көп нүкте
+	Up one level	Бір деңгей жоғары
+	Update Field	Өрісті жаңарту
+	Update fields before printing	Басып шығару алдында өрістерді жаңарту
+	Update Index	Көрсеткішті жаңарту
+	Update Style to Match Selection	Стильді бөлектеуге сәйкес жаңарту
+	Update Styles from Template	Стильдерді үлгіден жаңарту
+	Update Table	Кестені жаңарту
+	Update Table of Figures	Суреттер тізімін жаңарту
+	Update to Match	Сәйкестендіріп жаңарту
+	Update to Match Selection	Бөлектеуге сәйкес жаңарту
+	UPPERCASE	БАС ӘРІПТЕР
+	URGENT	ШҰҒЫЛ
+	URL	URL
+	Use "a" before a consonant sound	Дауыссыз дыбыс алдында "a" қолданыңыз
+	Use "an" before a vowel sound	Дауысты дыбыс алдында "an" қолданыңыз
+	Use an Existing List…	Бар тізімді пайдалану…
+	Use passim (five or more pages)	passim пайдалану (бес немесе одан көп бет)
+	Use system setting	Жүйе параметрін пайдалану
+	Use the Insert key to switch overtype on and off	Үстінен жазуды қосу және өшіру үшін Insert пернесін пайдалану
+	Use wildcards	Қойылмалы таңбаларды пайдалану
+	User Name	Пайдаланушы аты
+	User name:	Пайдаланушы аты:
+	Username	Пайдаланушы аты
+	Value	Мән
+	Vector A	A векторы
+	Vector AB	AB векторы
+	Version	Нұсқа
+	Version History	Нұсқалар тарихы
+	Version {version} ({build})	Нұсқа {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Нұсқалар құжат ашық тұрғанда сақталады (.docx файлында нұсқалар жоқ).
+	Vertical	Тік
+	Vertical Alignment	Тік туралау
+	Vertical alignment:	Тік туралау:
+	Vertical Bars	Тік сызықтар
+	Vertical Dots	Тік көп нүкте
+	Vertical spacing:	Тік аралық:
+	Vietnamese	Вьетнам
+	View	Көрініс
+	View Alt Text…	Балама мәтінді көру…
+	View Gridlines	Тор сызықтарын көру
+	View Side by Side	Қатар көру
+	View State	Көрініс күйі
+	Views	Көріністер
+	Visual effects	Көрнекі әсерлер
+	Voice	Дауыс
+	Volume	Том
+	Volume Integral	Көлемдік интеграл
+	Volume Integral with Limits	Шектері бар көлемдік интеграл
+	Volume Integral with Stacked Limits	Үстіңгі-астыңғы шектері бар көлемдік интеграл
+	W:	Е:
+	Waiting for Zotero…	Zotero күтілуде…
+	Warm Gradient with Outline	Контуры бар жылы градиент
+	Warnings ({n})	Ескертулер ({n})
+	Watermark	Су белгісі
+	Wave	Толқын
+	Weather	Ауа райы
+	web access isn't available here	мұнда веб қатынауы қолжетімсіз
+	Web Layout	Веб-макет
+	Web page (*.html)	Веб-бет (*.html)
+	Web\nLayout	Веб-\nмакет
+	Website	Веб-сайт
+	Wed	Ср
+	Weight	Қалыңдығы
+	West	Батыс
+	When merging records	Жазбаларды біріктіру кезінде
+	When this document was first created	Бұл құжат алғаш жасалған уақыт
+	When this document was most recently printed	Бұл құжат соңғы рет басып шығарылған уақыт
+	When this document was most recently saved	Бұл құжат соңғы рет сақталған уақыт
+	White Space	Бос кеңістік
+	White space	Бос орындар
+	Who the document properties name as author	Құжат қасиеттерінде автор ретінде аталған адам
+	Whole document	Бүкіл құжат
+	Whole page	Бүкіл бет
+	Whole Table	Бүкіл кесте
+	Whole words	Тұтас сөздер
+	Wide	Кең
+	Widow/Orphan Control	Жалғыз жолдарды бақылау
+	Widow/Orphan control	Жалғыз жолдарды бақылау
+	Width and spacing	Ені және аралығы
+	Width:	Ені:
+	Wildcards (regex)	Қойылмалы таңбалар (regex)
+	Window	Терезе
+	With:	Немен:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 және кейінгі
+	Word 97–2003	Word 97–2003
+	Word Count	Сөздер саны
+	Word document	Word құжаты
+	Word document (*.docx)	Word құжаты (*.docx)
+	Word forms	Сөз формалары
+	Word Left	Бір сөз солға
+	Word level	Сөз деңгейі
+	Word Right	Бір сөз оңға
+	Word XML Document (*.xml)	Word XML құжаты (*.xml)
+	WordArt	WordArt
+	WordArt Styles	WordArt стильдері
+	Words	Сөздер
+	Words only	Тек сөздер
+	Wrap Text	Мәтінді орау
+	Wrap text	Мәтінді тасымалдау
+	Wrap Text Sides	Орау жақтары
+	Wrap\nText	Мәтінді\nорау
+	Write & Insert Fields	Жазу және өрістерді кірістіру
+	Write a reply	Жауап жазу
+	Write math here with the mouse or a pen.	Математиканы мұнда тінтуірмен немесе қаламмен жазыңыз.
+	Writing Style: Grammar	Жазу стилі: грамматика
+	x bar	x сызықшамен
+	Year	Жыл
+	Yes	Иә
+	Yields	Шығады
+	Your changes will be lost if you don't save them.	Өзгерістерді сақтамасаңыз, олар жоғалады.
+	Your system doesn't report an animation setting, so animation effects stay on.	Жүйеңіз анимация параметрін хабарламайды, сондықтан анимация әсерлері қосулы қалады.
+	Your system has animation effects turned off.	Жүйеңізде анимация әсерлері өшірілген.
+	Your system has animation effects turned on.	Жүйеңізде анимация әсерлері қосулы.
+	Zoom	Масштаб
+	Zoom In	Үлкейту
+	Zoom Out	Кішірейту
+	Zoom to Page	Бетке сыйғызу
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: бас тартылды
+	Zotero: done	Zotero: дайын
+	{cols}×{rows} Table	{cols}×{rows} кесте
+	{contributors} contributors · {commits} commits	Үлес қосушылар: {contributors} · коммиттер: {commits}
+	{count} items highlighted	Ерекшеленген элементтер: {count}
+	{count} of {total} pages will print	{total} беттің {count} беті басып шығарылады
+	{count} paragraphs were changed.	Өзгертілген абзацтар: {count}.
+	{count} records; fields: {fields}	Жазбалар: {count}; өрістер: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} бұл компьютерде орнатылмаған, сондықтан құжат {with} қарпімен көрсетіледі. Жолдар мен беттер бастапқы қаріптегіден басқаша бөлінуі мүмкін.
+	{group} settings	{group} параметрлері
+	{key}+Click to follow link	Сілтемеге өту үшін {key}+басу
+	{language} is now the document's default language.	{language} енді құжаттың әдепкі тілі.
+	{name} (Press ENTER to Insert)	{name} (кірістіру үшін ENTER басыңыз)
+	{name} already exists. Choose Save again to replace it.	{name} бұрыннан бар. Оны ауыстыру үшін «Сақтау» пәрменін қайта таңдаңыз.
+	{name} can't be a folder's name.	{name} қалта атауы бола алмайды.
+	{name} is protected with a password.	{name} құпиясөзбен қорғалған.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} қосылды. Оның макростары «Менің қондырмаларым» және «Көрініс › Макростар» бөлімдерінде.
+	{name} wasn't found.	{name} табылмады.
+	{n} entries marked.	Белгіленген элементтер: {n}.
+	{n} lines	Көбейткіш {n}
+	{n} of {of} recipients	{of} алушының {n}
+	{n} pt	{n} pt
+	{n} records	Жазбалар: {n}
+	{n} revisions	Түзетулер: {n}
+	{selected} of {words} words	Сөздер: {selected} / {words}
+	{size} pt	{size} pt
+	{words} words	Сөздер: {words}
+	{w} × {h} in	{w} × {h} дюйм
+	{w} × {h} mm	{w} × {h} мм
+	“{text}” ({row}, {series}) isn't a number.	«{text}» ({row}, {series}) сан емес.
+	← Find	← Табу
+	✓ None	✓ Жоқ
+	➕ New comment	➕ Жаңа түсініктеме
+	📂  Browse…	📂  Шолу…
+	Add Help Text…	Анықтама мәтінін қосу…
+	AutoText entry:	Автомәтін элементі:
+	Calculate on exit	Шыққанда есептеу
+	Calculation	Есептеу
+	Check Box Form Field	Құсбелгі пішін өрісі
+	Check Box Form Field Options	Құсбелгі пішін өрісінің параметрлері
+	Check box	Құсбелгі
+	Check box enabled	Құсбелгі қосулы
+	Check box size:	Құсбелгі өлшемі:
+	Checked	Белгіленген
+	Current date	Ағымдағы күн
+	Current time	Ағымдағы уақыт
+	Default value:	Әдепкі мән:
+	Drop-Down Form Field	Ашылмалы пішін өрісі
+	Drop-Down Form Field Options	Ашылмалы пішін өрісінің параметрлері
+	Drop-down	Ашылмалы тізім
+	Drop-down enabled	Ашылмалы тізім қосулы
+	Drop-down item:	Ашылмалы элемент:
+	Fill In Form Field	Толтырылатын пішін өрісі
+	Fill-in enabled	Толтыру қосулы
+	Form Field	Пішін өрісі
+	Form Field Help Text	Пішін өрісінің анықтама мәтіні
+	Form Field Options	Пішін өрісінің параметрлері
+	Form Field Shading	Пішін өрістерін бояу
+	Form Field at Selection	Бөлектеудегі пішін өрісі
+	Help Key (F1)	Анықтама пернесі (F1)
+	Insert Form Field	Пішін өрісін кірістіру
+	Items in drop-down list:	Ашылмалы тізімдегі элементтер:
+	Legacy Tools	Бұрынғы құралдар
+	Maximum length:	Ең үлкен ұзындық:
+	Next Form Field	Келесі пішін өрісі
+	Not checked	Белгіленбеген
+	Put the caret on a form field first.	Алдымен курсорды пішін өрісіне қойыңыз.
+	Regular text	Қалыпты мәтін
+	Reset Form Fields	Пішін өрістерін қалпына келтіру
+	Text Form Field	Мәтіндік пішін өрісі
+	Text Form Field Options	Мәтіндік пішін өрісінің параметрлері
+	Type your own:	Өзіңіздікін теріңіз:
+	Unlimited	Шектеусіз
+	Protected sections:	Қорғалған бөлімдер:
+	Section Protection	Бөлімді қорғау
+	Section {n}	{n}-бөлім
+	Select sections…	Бөлімдерді таңдау…
+	AutoSummarize	Автоқорытынды
+	Create a new document and put the summary there	Жаңа құжат жасап, қорытындыны соған қою
+	Highlight key points	Негізгі тұстарды ерекшелеу
+	Insert an executive summary or abstract at the top of the document	Құжаттың басына қысқаша мазмұн немесе аннотация кірістіру
+	Length of summary	Қорытынды ұзындығы
+	Percent of original:	Түпнұсқаның пайызы:
+	Summary: {words} of {of} words	Қорытынды: {of} сөздің {words}
+	Type of summary	Қорытынды түрі
+	Update document statistics	Құжат статистикасын жаңарту
+	{n} sentences	Сөйлемдер: {n}
+	{n} words or less	{n} сөз немесе одан аз
+	At:	Мәні:
+	Distance from text:	Мәтіннен қашықтық:
+	Format Frame	Жақтауды пішімдеу
+	Format Frame…	Жақтауды пішімдеу…
+	Frame	Жақтау
+	Frame…	Жақтау…
+	Insert Frame	Жақтау кірістіру
+	Lock anchor	Зәкірді бекіту
+	Remove Frame	Жақтауды алып тастау
+	Text wrapping	Мәтінді орау
+	Chinese Conversion	Қытай тілін түрлендіру
+	Chinese Conversion…	Қытай тілін түрлендіру…
+	Converted {n} characters	Түрлендірілген таңбалар: {n}
+	Simplified Chinese to Traditional Chinese	Жеңілдетілген қытайшадан дәстүрлі қытайшаға
+	Simplified to Traditional	Жеңілдетілгеннен дәстүрліге
+	Traditional Chinese to Simplified Chinese	Дәстүрлі қытайшадан жеңілдетілген қытайшаға
+	Traditional to Simplified	Дәстүрліден жеңілдетілгенге
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Тайвань, Гонконг АӘА және Макао АӘА таңба нұсқаларын пайдалану
+	Asian Layout	Азиялық макет
+	Fit Text	Мәтінді сыйғызу
+	Fit Text…	Мәтінді сыйғызу…
+	Two Lines in One	Бір жолда екі жол
+	Two Lines in One…	Бір жолда екі жол…
+	New text width (pt):	Мәтіннің жаңа ені (pt):
+	Enclose in brackets	Жақшаға алу
+	Bracket pair:	Жақша жұбы:
+	Typography	Типография
+	Character spacing control	Таңба аралығын басқару
+	Don't compress	Сықпау
+	Compress punctuation only	Тек тыныс белгілерін сығу
+	Compress punctuation and Japanese kana	Тыныс белгілері мен жапон канасын сығу
+	First and last characters	Бірінші және соңғы таңбалар
+	Strict	Қатаң
+	Cannot start a line:	Жолды бастай алмайды:
+	Cannot end a line:	Жолды аяқтай алмайды:
+	Japanese Find Options	Жапон тілінде іздеу параметрлері
+	Sounds like (Japanese)	Дыбысталуы ұқсас (жапон)
+	Match full/half width	Толық/жарты енді ажыратпау
+	Match hiragana/katakana	Хирагана/катаканы ажыратпау
+	Match small kana	Кіші кананы ажыратпау
+	Match prolonged sound marks and dashes	Созылыңқы дыбыс белгілері мен сызықшаларды ажыратпау
+	Japanese Consistency Checker	Жапон мәтінінің біркелкілігін тексеру
+	Japanese Consistency Checker…	Жапон мәтінінің біркелкілігін тексеру…
+	No inconsistent spellings were found.	Біркелкі емес жазылымдар табылмады.
+	Pick the spelling to keep in each group.	Әр топта сақталатын жазылымды таңдаңыз.
+	Bidirectional text	Екі бағытты мәтін
+	Bidirectional Text	Екі бағытты мәтін
+	Default direction:	Әдепкі бағыт:
+	Cursor movement:	Курсор қозғалысы:
+	Logical	Логикалық
+	Visual	Көрнекі
+	Manage Fields	Өрістерді басқару
+	File locations	Файл орындары
+	File Locations	Файл орындары
+	Documents:	Құжаттар:
+	Pictures:	Суреттер:
+	The system's choice	Жүйе таңдауы
+	Show Repairs	Жөндеулерді көрсету
+	No repairs were needed.	Жөндеу қажет болмады.
+	These problems were found and repaired when the document was opened:	Құжат ашылғанда мына мәселелер табылып, жөнделді:
+	An unreadable entry in the file was skipped: {what}	Файлдағы оқылмайтын жазба өткізіп жіберілді: {what}
+	An unreadable part was left out: {what}	Оқылмайтын бөлік алынып тасталды: {what}
+	Unreadable relationships were ignored: {what}	Оқылмайтын байланыстар еленбеді: {what}
+	A missing part of an embedded object was left out: {what}	Ендірілген нысанның жетіспейтін бөлігі алынып тасталды: {what}
+	Copy File	Файлды көшіру
+	Find Files	Файлдарды табу
+	Letter Wizard	Хат шебері
+	Recipient's name:	Алушының аты:
+	Salutation:	Қаратпа сөз:
+	Subject:	Тақырыбы:
+	Complimentary closing:	Қоштасу сөзі:
+	Sender's name:	Жіберушінің аты:
+	Job title:	Лауазымы:
+	Company:	Компания:
+	Enclosures:	Қосымшалар:
+	Cc:	Көшірме:
+	Edit Links to Files	Файлдарға сілтемелерді өңдеу
+	Source file	Бастапқы файл
+	Locked	Құлыпталған
+	Change Source	Дереккөзді өзгерту
+	This document has no links to files.	Бұл құжатта файлдарға сілтемелер жоқ.
+	Web options	Веб параметрлері
+	Web Options	Веб параметрлері
+	Allow PNG as a graphics format	Графика пішімі ретінде PNG-ге рұқсат беру
+	Rely on CSS for font formatting	Қаріп пішімдеуі үшін CSS-ке сүйену
+	Rely on VML for displaying graphics in browsers	Браузерлерде графиканы көрсету үшін VML-ге сүйену
+	Organize supporting files in a folder	Қосалқы файлдарды қалтаға орналастыру
+	Use long file names whenever possible	Мүмкіндігінше ұзын файл атауларын пайдалану
+	Screen size:	Экран өлшемі:
+	Pixels per inch:	Дюймдегі пиксельдер:
+	Hangul Hanja Conversion	Хангыль-ханча түрлендіру
+	Hangul Hanja Conversion…	Хангыль-ханча түрлендіру…
+	Hangul to Hanja	Хангыльдан ханчаға
+	Hanja to Hangul	Ханчадан хангыльге
+	Put the caret in Korean text to choose its Hanja.	Ханча таңдау үшін курсорды корей мәтініне қойыңыз.
+	The selection, or the whole document when nothing is selected.	Бөлектеу немесе ештеңе бөлектелмесе, бүкіл құжат.

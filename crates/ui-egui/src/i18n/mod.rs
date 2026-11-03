@@ -52,7 +52,7 @@ pub struct LangInfo {
 }
 
 /// The registry. English first: it is the fallback and the source language.
-pub static LANGUAGES: [LangInfo; 45] = [
+pub static LANGUAGES: [LangInfo; 53] = [
     LangInfo { code: "en", name: "English", source: "", prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // British English (colour, centre, customise); `en-GB` and `en_GB.UTF-8` resolve here, other
     // English regions keep the built-in US English. New documents stay in Doc4Me's default
@@ -89,8 +89,8 @@ pub static LANGUAGES: [LangInfo; 45] = [
     },
     // Spanish, neutral across Spain and Latin America; `es-ES`, `es-MX`, `es-419` … resolve here.
     LangInfo { code: "es", name: "Español", source: include_str!("es.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
-    // Brazilian Portuguese; `pt-BR` and `pt-BR-*` resolve here. Plain `pt` and `pt-PT` have no
-    // catalog yet (the European vocabulary differs), so they stay in English.
+    // Brazilian Portuguese; `pt-BR` and `pt-BR-*` resolve here. European Portuguese (`pt-PT`)
+    // has its own catalog (`pt-pt`); a plain `pt` names neither, so it stays in English.
     LangInfo {
         code: "pt-br",
         name: "Português (Brasil)",
@@ -166,6 +166,25 @@ pub static LANGUAGES: [LangInfo; 45] = [
     LangInfo { code: "sk", name: "Slovenčina", source: include_str!("sk.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // Croatian; `hr`, `hr-HR`, `hr-BA` resolve here.
     LangInfo { code: "hr", name: "Hrvatski", source: include_str!("hr.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "kk", name: "Қазақ тілі", source: include_str!("kk.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo { code: "sw", name: "Kiswahili", source: include_str!("sw.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "mk", name: "Македонски", source: include_str!("mk.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo { code: "ms", name: "Bahasa Melayu", source: include_str!("ms.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "mt", name: "Malti", source: include_str!("mt.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "nn", name: "Norsk nynorsk", source: include_str!("nn.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "pt-pt",
+        name: "Português (Portugal)",
+        source: include_str!("pt-pt.tsv"),
+        prefer_hans: false,
+        editing_lang: None,
+        catalog: OnceLock::new(),
+    },
+    LangInfo { code: "cy", name: "Cymraeg", source: include_str!("cy.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     LangInfo {
         code: "az",
         name: "Azərbaycan dili",

@@ -2817,6 +2817,26 @@ fn no_line_break_right_after_a_slash() {
 }
 
 #[test]
+fn a_line_may_start_at_a_bracket_after_a_quote_and_a_space() {
+    // Unicode 15.1 dropped LB15 (`QU SP* × OP`): Word breaks in `estratégicos” (según` after the
+    // space, as anywhere else (zenodo-025 wrapped a table row one line earlier than Word).
+    let text: String = (0..80).map(|i| format!("w{} “q{}” (p{}) ", "x".repeat(i % 7), "y".repeat(i % 5), i)).collect();
+    let d = Document::from_text(&text);
+    let l = lay(&d);
+    let mut starts = Vec::new();
+    for p in &l.pages {
+        for it in &p.items {
+            if let Placed::Lines { para, l0, l1, .. } = it {
+                starts.extend(para.lines[*l0..*l1].iter().map(|line| text[line.start..].chars().next().unwrap_or(' ')));
+            }
+        }
+    }
+    assert!(starts.len() > 5, "{} lines", starts.len());
+    assert!(starts.contains(&'('), "no line starts at a bracket: {starts:?}");
+    assert_eq!(super::para::quote_space_open_breaks("a” (b \"c\" [d x (e"), vec![5, 12]);
+}
+
+#[test]
 fn unequal_formats_lay_out_in_linear_time() {
     // Runs whose formats never compare equal (NaN spacing from a hostile file) each get a style;
     // finding a run's style must not compare it against every earlier one.
