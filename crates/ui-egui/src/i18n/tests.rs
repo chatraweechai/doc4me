@@ -917,7 +917,7 @@ fn british_english_and_canadian_french_follow_their_regions() {
 
 /// Catalogs written whole, one entry per interface string: the code, the language's own name and
 /// locale tags that resolve to it.
-const WHOLE_CATALOGS: [(&str, &str, &[&str]); 8] = [
+const WHOLE_CATALOGS: [(&str, &str, &[&str]); 24] = [
     ("nl", "Nederlands", &["nl", "nl-NL", "nl_BE.UTF-8"]),
     ("sv", "Svenska", &["sv", "sv-SE", "sv_FI.UTF-8"]),
     ("da", "Dansk", &["da", "da-DK", "da_DK.UTF-8"]),
@@ -926,6 +926,22 @@ const WHOLE_CATALOGS: [(&str, &str, &[&str]); 8] = [
     ("ro", "Română", &["ro", "ro-RO", "ro_MD.UTF-8"]),
     ("sk", "Slovenčina", &["sk", "sk-SK", "sk_SK.UTF-8"]),
     ("hr", "Hrvatski", &["hr", "hr-HR", "hr_BA.UTF-8"]),
+    ("az", "Azərbaycan dili", &["az", "az-AZ", "az_AZ.UTF-8"]),
+    ("eu", "Euskara", &["eu", "eu-ES", "eu_ES.UTF-8"]),
+    ("ga", "Gaeilge", &["ga", "ga-IE", "ga_IE.UTF-8"]),
+    ("af", "Afrikaans", &["af", "af-ZA", "af_ZA.UTF-8"]),
+    ("sq", "Shqip", &["sq", "sq-AL", "sq_AL.UTF-8"]),
+    ("bs", "Bosanski", &["bs", "bs-BA", "bs_BA.UTF-8"]),
+    ("gl", "Galego", &["gl", "gl-ES", "gl_ES.UTF-8"]),
+    ("is", "Íslenska", &["is", "is-IS", "is_IS.UTF-8"]),
+    ("bg", "Български", &["bg", "bg-BG", "bg_BG.UTF-8"]),
+    ("ca", "Català", &["ca", "ca-ES", "ca_ES.UTF-8"]),
+    ("el", "Ελληνικά", &["el", "el-GR", "el_GR.UTF-8"]),
+    ("id", "Bahasa Indonesia", &["id", "id-ID", "id_ID.UTF-8"]),
+    ("lv", "Latviešu", &["lv", "lv-LV", "lv_LV.UTF-8"]),
+    ("lt", "Lietuvių", &["lt", "lt-LT", "lt_LT.UTF-8"]),
+    ("sl", "Slovenščina", &["sl", "sl-SI", "sl_SI.UTF-8"]),
+    ("vi", "Tiếng Việt", &["vi", "vi-VN", "vi_VN.UTF-8"]),
 ];
 
 /// Each whole catalog resolves from its locales, translates every interface string, and is drawn
