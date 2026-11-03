@@ -116,6 +116,11 @@ pub fn run(root: &Path, args: &[&str]) -> Result<(), String> {
     let manifest = corpus_rows(read_tsv(&dir.join("corpus.tsv"))?)?;
     if opts.download {
         download(&manifest, &corpus_dir)?;
+        // Fetching only: no report, so a later `--corpus` run sees a clean tree and the
+        // committed report isn't replaced by one without the corpus.
+        if !opts.corpus {
+            return Ok(());
+        }
     }
     if opts.corpus && !["pdfinfo", "pdftotext"].iter().all(|t| Command::new(t).arg("-v").output().is_ok()) {
         return Err("--corpus compares pages with poppler's pdfinfo and pdftotext; install poppler-utils (Windows: poppler for Windows) first".into());
@@ -529,7 +534,9 @@ fn download(manifest: &[BTreeMap<String, String>], dir: &Path) -> Result<(), Str
         }
     }
     println!("corpus: {got} files downloaded, {bad} failed, into {}", dir.display());
-    Ok(())
+    // A missing file would count as "not run" and pull the number down, so a partial download
+    // fails: callers (the Windows workflow) retry it, and files already fetched are kept.
+    if bad > 0 { Err(format!("corpus: {bad} files couldn't be downloaded; run --download again")) } else { Ok(()) }
 }
 
 /// One corpus document's results.
@@ -824,7 +831,11 @@ fn render(sets: &[SetResult], corpus_run: usize, corpus_listed: usize, commit: &
 fn commit(root: &Path) -> String {
     let out = Command::new("git").current_dir(root).args(["rev-parse", "--short", "HEAD"]).output();
     let hash = out.map(|o| String::from_utf8_lossy(&o.stdout).trim().to_string()).unwrap_or_default();
-    let status = Command::new("git").current_dir(root).args(["status", "--porcelain", "--untracked-files=no"]).output();
+    // The report itself is left out: an earlier run rewriting it doesn't change what is measured.
+    let status = Command::new("git")
+        .current_dir(root)
+        .args(["status", "--porcelain", "--untracked-files=no", "--", ".", ":(exclude)docs/readiness.md"])
+        .output();
     let changed = status.map(|o| String::from_utf8_lossy(&o.stdout).trim_end().to_string()).unwrap_or_default();
     if changed.is_empty() {
         return hash;
@@ -857,6 +868,22 @@ pub fn civil_date(days: i64) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_partial_download_is_an_error() {
+        let dir = std::env::temp_dir().join(format!("xtask-download-{}", std::process::id()));
+        let row = |id: &str, url: &str| -> BTreeMap<String, String> {
+            [("id", id), ("docx_url", url), ("docx_sha256", "00"), ("pdf_url", url), ("pdf_sha256", "00")]
+                .into_iter()
+                .map(|(k, v)| (k.to_string(), v.to_string()))
+                .collect()
+        };
+        // A URL that isn't https is never fetched and counts as failed, so no network is used.
+        let err = download(&[row("doc-1", "http://example.invalid/a")], &dir).unwrap_err();
+        assert!(err.contains("2 files"), "{err}");
+        assert!(download(&[], &dir).is_ok(), "nothing listed, nothing missing");
+        let _ = std::fs::remove_dir_all(&dir);
+    }
 
     fn registry() -> Registry {
         Registry::from_json(&serde_json::json!([
