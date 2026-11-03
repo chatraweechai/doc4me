@@ -13,6 +13,11 @@
 
 ### เพิ่ม
 
+- **File › Options › Advanced › File locations: โฟลเดอร์เริ่มต้นของ Documents และ Pictures** (`Prefs::documents_dir`/`pictures_dir` ใน `crates/engine/src/session.rs`; คำสั่งใหม่ `file.fileLocations` ใน `crates/engine/src/cmd/options.rs`; `FileDialogRequest` มีช่อง `dir` และ `WordApp::with_start_dir` ใน `crates/ui-egui/src/file_dialogs.rs`; ตัวเลือกไฟล์ในตัวใน `crates/ui-egui/src/file_browser.rs`; dialog ของระบบใช้ `set_directory` ใน `apps/doc4me/src/file_dialogs.rs`; ส่วน File locations ในหน้า Advanced ของ `crates/ui-egui/src/options.rs`; ข้อความใหม่ 5 รายการในแคตตาล็อกทั้ง 28 ภาษา; `docs/readiness/dialogs.tsv` dlg-209)
+  - เหตุผล: `wdDialogToolsOptionsFileLocations` ไม่มีของเทียบเท่า และ handoff ระบุว่าติดที่ `FileDialogRequest` ไม่มีช่องโฟลเดอร์
+  - ตอนนี้: Documents เป็นโฟลเดอร์ที่ Open, Templates, Use an Existing List และ Save As เริ่มต้น (Save As ของเอกสารที่มีไฟล์แล้วเริ่มข้างไฟล์นั้น), Pictures เป็นโฟลเดอร์ที่ Insert Picture และ 3D Models เริ่มต้น; ใช้ได้ทั้ง dialog ของระบบและตัวเลือกไฟล์ในตัว (ตัวในตัวยังเริ่มที่โฟลเดอร์ที่ใช้ล่าสุดในรอบนั้นก่อน); `file.fileLocations` (`{"documents"?: โฟลเดอร์ | null, "pictures"?: โฟลเดอร์ | null}`) รับเฉพาะโฟลเดอร์ที่มีอยู่จริงแบบ path เต็ม ยาวไม่เกิน 4096 ไบต์ ค่าว่างหรือ null คืนเป็นค่าของระบบ; ไม่มีค่าจะเปิด File › Options › Advanced
+  - ผู้ใช้: ค่าเริ่มต้นไม่ตั้ง จึงทำงานเหมือนเดิมทุกอย่าง; การตั้งค่าเก็บใน prefs ของผู้ใช้ (ไฟล์ prefs เดิมอ่านได้); โฟลเดอร์ที่ถูกลบไปภายหลังจะถูกข้าม; ไม่มีผลกับไฟล์ .docx
+  - ตรวจสอบ: เทสต์ใหม่ `file_locations_keep_existing_folders`, UI `file_locations_in_advanced_set_where_dialogs_start`; `cargo test -p doc4me-engine` ผ่าน 462, `cargo test -p doc4me-ui-egui` ผ่าน 402, clippy ของ engine, ui-egui และแอป `doc4me` ไม่มีคำเตือน
 - **Mailings › Manage Fields: เพิ่ม ลบ หรือเปลี่ยนชื่อเขตข้อมูลของรายชื่อผู้รับ** (คำสั่งใหม่ `mailings.manageFields` ใน `crates/engine/src/cmd/mailings.rs`; การเปิด dialog ใน `crates/ui-egui/src/lib.rs`; ข้อความใหม่ 1 รายการในแคตตาล็อกทั้ง 28 ภาษา; `docs/readiness/dialogs.tsv` dlg-200)
   - เหตุผล: `wdDialogToolsManageFields` (จัดการเขตข้อมูลของแหล่งข้อมูลจดหมายเวียน) ไม่มีของเทียบเท่าสำหรับสคริปต์และ agent ส่วน UI แก้ชื่อ/เพิ่ม/ลบคอลัมน์ได้อยู่แล้วใน Edit Recipient List
   - ตอนนี้: `{"add"?: ชื่อ, "remove"?: ชื่อ, "rename"?: {"from", "to"}}` เปลี่ยนเขตข้อมูลของรายชื่อ (เขตข้อมูลใหม่ว่างในทุกระเบียน, ชื่อซ้ำแบบไม่สนตัวพิมพ์ถูกปฏิเสธ, เก็บอย่างน้อยหนึ่งเขตข้อมูล, ชื่อ 1–40 ตัวอักษร, ตรวจทุกค่าก่อนเปลี่ยน) การเปลี่ยนจะยกเลิก Filter and Sort ที่ใช้อยู่ (กฎอ้างชื่อเขตข้อมูล) เหมือนการแก้รายชื่อ; ไม่มีค่าใดเลยจะเปิด Edit Recipient List; ต้องมีรายชื่อก่อน
@@ -105,6 +110,7 @@
 
 ### ข้อจำกัดที่ทราบ
 
+- File locations มีเฉพาะ Documents และ Pictures: Doc4Me ยังไม่มีโฟลเดอร์ AutoRecover, User/Workgroup templates หรือ Startup ให้ตั้ง (ไม่มีฟีเจอร์เหล่านั้นแบบใช้โฟลเดอร์); ยังพิมพ์ path เองแทนการเลือกโฟลเดอร์จาก dialog
 - **การบีบคานะ (`compressPunctuationAndJapaneseKana`)** อ่าน/บันทึกได้และบีบเครื่องหมายวรรคตอนเหมือน `compressPunctuation` แต่ยังไม่บีบคานะ; การบีบใช้กฎคู่เครื่องหมายติดกัน ยังไม่ครอบคลุมกฎ JIS X 4051 ทั้งหมด (เช่น ต้น/ท้ายบรรทัด)
 - **Fit Text ตอนหดข้อความ** ใช้การลดระยะห่างอักขระ (ตัวอักษรอาจซ้อนกัน) ขณะที่ Word บีบความกว้างตัวอักษรด้วย; การขยายตรงกับ Word
 - **Horizontal in Vertical (`w:eastAsianLayout/@w:vert`)** อ่านและบันทึกกลับได้ แต่ยังไม่วาดข้อความแนวนอนในข้อความแนวตั้ง เพราะการจัดบรรทัดของ Doc4Me ไม่รู้ทิศทางข้อความจนหมุนหลังจัดเสร็จ (`dlg-083` จึงยังไม่นับผ่าน)

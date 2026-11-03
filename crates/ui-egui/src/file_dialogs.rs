@@ -22,9 +22,10 @@ use crate::WordApp;
 pub enum FileDialogRequest {
     /// Pick a file to open; `purpose` says what for (`document`, `picture`, `recipients`, `font`), as for
     /// `pick_open`.
-    Open { purpose: String },
+    /// `dir` is the folder the dialog starts in (`None`: the system's choice).
+    Open { purpose: String, dir: Option<String> },
     /// Pick a path to save to, given a suggested file name.
-    Save { name: String },
+    Save { name: String, dir: Option<String> },
 }
 
 /// The host's answer to a [`FileDialogRequest`]: the picked path, `Ok(None)` when the user
@@ -119,9 +120,33 @@ impl WordApp {
         false
     }
 
+    /// The request with the folder it starts in, from File › Options › Advanced › File Locations:
+    /// Documents for documents, templates and recipient lists (Save As beside a document that has
+    /// a file), Pictures for pictures. A folder already given, or none set, is left as it is.
+    pub(crate) fn with_start_dir(&self, req: FileDialogRequest) -> FileDialogRequest {
+        let prefs = &self.session.prefs;
+        let usable = |d: &Option<String>| d.clone().filter(|d| std::path::Path::new(d).is_dir());
+        match req {
+            FileDialogRequest::Open { purpose, dir: None } => {
+                let dir = match purpose.as_str() {
+                    "picture" | "model3d" => usable(&prefs.pictures_dir),
+                    "document" | "template" | "recipients" => usable(&prefs.documents_dir),
+                    _ => None,
+                };
+                FileDialogRequest::Open { purpose, dir }
+            }
+            FileDialogRequest::Save { name, dir: None } if prefs.documents_dir.is_some() => {
+                let beside = self.session.path.as_ref().and_then(|p| p.parent()).filter(|d| d.is_dir()).map(|d| d.to_string_lossy().into_owned());
+                FileDialogRequest::Save { name, dir: beside.or_else(|| usable(&prefs.documents_dir)) }
+            }
+            req => req,
+        }
+    }
+
     /// Ask the host for a file and do `after` with the answer: now for a blocking dialog, on a
     /// later frame for an asynchronous one. Ignored while another dialog is open.
     pub(crate) fn ask_file(&mut self, req: FileDialogRequest, after: AfterPick) -> Asked {
+        let req = self.with_start_dir(req);
         if self.file_dialog_open() {
             log::debug!("file dialog already open; ignoring {req:?}");
             self.status(tl!("A file dialog is already open."));
@@ -134,8 +159,8 @@ impl WordApp {
             return self.poll_file_dialog().map_or(Asked::Pending, Asked::Done);
         }
         let picked = match &req {
-            FileDialogRequest::Open { purpose } => self.services.pick_open.as_ref().and_then(|f| f(purpose)),
-            FileDialogRequest::Save { name } => self.services.pick_save.as_ref().and_then(|f| f(name)),
+            FileDialogRequest::Open { purpose, .. } => self.services.pick_open.as_ref().and_then(|f| f(purpose)),
+            FileDialogRequest::Save { name, .. } => self.services.pick_save.as_ref().and_then(|f| f(name)),
         };
         Asked::Done(self.finish_pick(after, picked))
     }
@@ -278,13 +303,13 @@ impl WordApp {
     /// Ask where to save, save there, then do `after`.
     pub(crate) fn save_as(&mut self, after: AfterSave) -> Asked {
         let name = self.default_save_name();
-        self.ask_file(FileDialogRequest::Save { name }, AfterPick::SaveAs(after))
+        self.ask_file(FileDialogRequest::Save { name, dir: None }, AfterPick::SaveAs(after))
     }
 
     /// File › Export: ask where to save a copy in this format, then write it.
     pub(crate) fn export_dialog(&mut self, ext: &str) {
         let name = format!("{}.{ext}", self.title_stem());
-        let _ = self.ask_file(FileDialogRequest::Save { name }, AfterPick::Export { ext: ext.to_string() });
+        let _ = self.ask_file(FileDialogRequest::Save { name, dir: None }, AfterPick::Export { ext: ext.to_string() });
     }
 
     /// File › Print › Save these pages as PDF: ask where, then write the pages the print
@@ -292,7 +317,7 @@ impl WordApp {
     pub(crate) fn print_pdf_dialog(&mut self) {
         let name = format!("{}.pdf", self.title_stem());
         let settings = self.ui.print.params();
-        let _ = self.ask_file(FileDialogRequest::Save { name }, AfterPick::PrintPdf { settings });
+        let _ = self.ask_file(FileDialogRequest::Save { name, dir: None }, AfterPick::PrintPdf { settings });
     }
 
     pub(crate) fn open_dialog(&mut self) {
@@ -300,7 +325,7 @@ impl WordApp {
             f("document");
             return;
         }
-        let _ = self.ask_file(FileDialogRequest::Open { purpose: "document".into() }, AfterPick::OpenDocument);
+        let _ = self.ask_file(FileDialogRequest::Open { purpose: "document".into(), dir: None }, AfterPick::OpenDocument);
     }
 
     pub(crate) fn pick_picture(&mut self) {
@@ -308,7 +333,7 @@ impl WordApp {
             f("picture");
             return;
         }
-        let _ = self.ask_file(FileDialogRequest::Open { purpose: "picture".into() }, AfterPick::Picture);
+        let _ = self.ask_file(FileDialogRequest::Open { purpose: "picture".into(), dir: None }, AfterPick::Picture);
     }
 
     /// Pick a 3D model to insert (Insert › 3D Models; web: it arrives through the inbox).
@@ -317,7 +342,7 @@ impl WordApp {
             f("model3d");
             return;
         }
-        let _ = self.ask_file(FileDialogRequest::Open { purpose: "model3d".into() }, AfterPick::Model3d);
+        let _ = self.ask_file(FileDialogRequest::Open { purpose: "model3d".into(), dir: None }, AfterPick::Model3d);
     }
 
     /// Pick a font file to add (Add Font…; web: it arrives through the inbox).
@@ -326,7 +351,7 @@ impl WordApp {
             f("font");
             return;
         }
-        let _ = self.ask_file(FileDialogRequest::Open { purpose: "font".into() }, AfterPick::Font);
+        let _ = self.ask_file(FileDialogRequest::Open { purpose: "font".into(), dir: None }, AfterPick::Font);
     }
 }
 
@@ -395,7 +420,7 @@ mod tests {
         typed(&mut a);
         a.save_as_dialog();
         assert!(a.file_dialog_open());
-        assert_eq!(shown.borrow()[0].0, FileDialogRequest::Save { name: "Document1.docx".into() });
+        assert_eq!(shown.borrow()[0].0, FileDialogRequest::Save { name: "Document1.docx".into(), dir: None });
         let ctx = egui::Context::default();
         let frame = |a: &mut WordApp| ctx.run_ui(egui::RawInput::default(), |ui| a.logic(ui.ctx())).drop_without_applying_deltas();
         frame(&mut a);
@@ -433,7 +458,7 @@ mod tests {
         let r = a.run("file.saveAs", json!({})).unwrap();
         assert_eq!(r, json!({"saved": false}));
         assert!(a.file_dialog_open(), "F12's saveAs request opens the dialog");
-        assert_eq!(shown.borrow()[0].0, FileDialogRequest::Save { name: "two.docx".into() });
+        assert_eq!(shown.borrow()[0].0, FileDialogRequest::Save { name: "two.docx".into(), dir: None });
         let _ = std::fs::remove_dir_all(&dir);
     }
 
@@ -445,7 +470,7 @@ mod tests {
         let (mut a, shown) = async_app();
         typed(&mut a);
         a.export_dialog("jpg");
-        assert!(matches!(&shown.borrow()[0].0, FileDialogRequest::Save { name } if name.ends_with(".jpg")));
+        assert!(matches!(&shown.borrow()[0].0, FileDialogRequest::Save { name, .. } if name.ends_with(".jpg")));
         let picked = dir.join("page.jpg");
         answer(&shown, Some(&picked.to_string_lossy()));
         let r = a.poll_file_dialog().unwrap().unwrap();
@@ -470,7 +495,7 @@ mod tests {
         assert!(!a.file_dialog_open());
         a.open_dialog();
         assert_eq!(shown.borrow().len(), 1, "a new dialog once the first was answered");
-        assert_eq!(shown.borrow()[0].0, FileDialogRequest::Open { purpose: "document".into() });
+        assert_eq!(shown.borrow()[0].0, FileDialogRequest::Open { purpose: "document".into(), dir: None });
     }
 
     /// "Save changes?" → Save on a new document: the held-back Close runs only once the later
@@ -510,7 +535,7 @@ mod tests {
         let (mut a, shown) = async_app();
         typed(&mut a);
         a.run("ui.openRecipientList", json!({})).unwrap();
-        assert_eq!(shown.borrow()[0].0, FileDialogRequest::Open { purpose: "recipients".into() });
+        assert_eq!(shown.borrow()[0].0, FileDialogRequest::Open { purpose: "recipients".into(), dir: None });
         assert!(a.file_dialog_open());
         answer(&shown, Some(&csv.to_string_lossy()));
         a.poll_file_dialog().unwrap().unwrap();

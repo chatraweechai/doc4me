@@ -316,7 +316,7 @@ fn insert_database(app: &mut WordApp, ui: &mut Ui, d: &mut DataDialog) -> bool {
         let r = ui.add(crate::widgets::text_line(path).desired_width(300.0));
         reload |= r.lost_focus() && !path.trim().is_empty();
         if ui.button(tl!("Get Data…")).clicked() {
-            let _ = app.ask_file(FileDialogRequest::Open { purpose: "recipients".into() }, AfterPick::ForDialog);
+            let _ = app.ask_file(FileDialogRequest::Open { purpose: "recipients".into(), dir: None }, AfterPick::ForDialog);
         }
     });
     if !sheets.is_empty() {
@@ -790,7 +790,7 @@ fn merge_helper(app: &mut WordApp, ui: &mut Ui, picking: &mut u8, message: &mut 
             }
             if ui.button(tl!("Open Data Source…")).clicked() {
                 *picking = 2;
-                let _ = app.ask_file(FileDialogRequest::Open { purpose: "recipients".into() }, AfterPick::ForDialog);
+                let _ = app.ask_file(FileDialogRequest::Open { purpose: "recipients".into(), dir: None }, AfterPick::ForDialog);
                 ui.close();
             }
         });
@@ -816,7 +816,7 @@ fn merge_helper(app: &mut WordApp, ui: &mut Ui, picking: &mut u8, message: &mut 
         }
         if ui.button(tl!("Open…")).clicked() {
             *picking = 1;
-            let _ = app.ask_file(FileDialogRequest::Open { purpose: "recipients".into() }, AfterPick::ForDialog);
+            let _ = app.ask_file(FileDialogRequest::Open { purpose: "recipients".into(), dir: None }, AfterPick::ForDialog);
         }
         if ui.add_enabled(app.header_source.is_some(), egui::Button::new(tl!("Remove"))).clicked() {
             app.header_source = None;
@@ -937,7 +937,7 @@ fn header_source(
     let (ok, cancel) = buttons(ui, "OK", !fields.is_empty() && !*saving);
     if ok {
         *saving = true;
-        let _ = app.ask_file(FileDialogRequest::Save { name: "Header.csv".into() }, AfterPick::ForDialog);
+        let _ = app.ask_file(FileDialogRequest::Save { name: "Header.csv".into(), dir: None }, AfterPick::ForDialog);
     }
     if cancel {
         back(app);

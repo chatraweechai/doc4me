@@ -387,6 +387,33 @@ fn advanced(app: &mut WordApp, ui: &mut Ui) {
     });
     note(ui, "Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.");
     ui.add_space(8.0);
+    // Word's File Locations: the folders Open and Save As, and Insert Picture, start in.
+    section(ui, "File locations");
+    egui::Grid::new("options_locations").num_columns(3).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
+        for (label, key, current) in [("Documents:", "documents", pr.documents_dir.clone()), ("Pictures:", "pictures", pr.pictures_dir.clone())] {
+            ui.label(tl!(label));
+            let current = current.unwrap_or_default();
+            let id = ui.id().with(("file_location", key));
+            let mut buf: String = ui.data_mut(|d| d.get_temp::<String>(id)).unwrap_or_else(|| current.clone());
+            let resp = ui.add(crate::widgets::text_line(&mut buf).desired_width(320.0).char_limit(4096).hint_text(tl!("The system's choice")));
+            if resp.lost_focus()
+                && buf.trim() != current
+                && let Err(e) = app.run("file.fileLocations", json!({ key: buf.trim() }))
+            {
+                app.status(e);
+            }
+            // Away from the box it shows the folder in effect again.
+            if !resp.has_focus() && !resp.lost_focus() {
+                buf = current.clone();
+            }
+            ui.data_mut(|d| d.insert_temp(id, buf));
+            if ui.add_enabled(!current.is_empty(), egui::Button::new(tl!("Reset"))).clicked() {
+                let _ = app.run("file.fileLocations", json!({ key: null }));
+            }
+            ui.end_row();
+        }
+    });
+    ui.add_space(8.0);
     // Word's bidirectional (complex scripts) options.
     section(ui, "Bidirectional text");
     egui::Grid::new("options_bidi").num_columns(3).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
@@ -755,6 +782,40 @@ mod tests {
         h.run_steps(2);
         assert!(h.state().session.doc.settings.kinsoku.strict);
         assert!(h.query_by_label("Cannot start a line:").is_some());
+    }
+
+    #[test]
+    fn file_locations_in_advanced_set_where_dialogs_start() {
+        use crate::file_dialogs::FileDialogRequest;
+        let mut a = app();
+        a.run("file.fileLocations", json!({})).unwrap();
+        let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            a,
+        );
+        h.run_steps(4);
+        assert_eq!(h.state().ui.options_pane, "advanced");
+        assert!(h.query_by_label("Documents:").is_some() && h.query_by_label("Pictures:").is_some());
+        let dir = std::env::temp_dir().to_string_lossy().to_string();
+        h.state_mut().run("file.fileLocations", json!({"documents": dir})).unwrap();
+        let a = h.state();
+        // Open starts in Documents; pictures are not documents; a folder already given stays.
+        let req = a.with_start_dir(FileDialogRequest::Open { purpose: "document".into(), dir: None });
+        assert!(matches!(&req, FileDialogRequest::Open { dir: Some(d), .. } if *d == dir), "{req:?}");
+        let req = a.with_start_dir(FileDialogRequest::Open { purpose: "picture".into(), dir: None });
+        assert!(matches!(req, FileDialogRequest::Open { dir: None, .. }));
+        let req = a.with_start_dir(FileDialogRequest::Save { name: "a.docx".into(), dir: None });
+        assert!(matches!(&req, FileDialogRequest::Save { dir: Some(d), .. } if *d == dir), "an unsaved document saves to Documents");
+        let req = a.with_start_dir(FileDialogRequest::Save { name: "a.docx".into(), dir: Some("/elsewhere".into()) });
+        assert!(matches!(&req, FileDialogRequest::Save { dir: Some(d), .. } if d == "/elsewhere"));
+        // Reset: the system's choice again.
+        h.get_all_by_label("Reset").next().expect("Documents' Reset").click();
+        h.run_steps(2);
+        assert!(h.state().session.prefs.documents_dir.is_none());
     }
 
     #[test]
