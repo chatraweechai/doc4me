@@ -1086,6 +1086,24 @@ fn hostile_embedded_relationships_stay_bounded() {
     assert_eq!(files.keys().filter(|k| k.starts_with("word/charts/") && !k.contains("_rels")).count(), 1);
 }
 
+/// A group member with custom geometry (`a:custGeom`) is a freeform of its own paths, as a shape
+/// on its own is (govuk-005: three boxes in one path were drawn as one box over the whole page).
+#[test]
+fn group_member_with_custom_geometry_keeps_its_paths() {
+    let body = r#"<w:p><w:r><mc:AlternateContent><mc:Choice Requires="wpg"><w:drawing><wp:anchor behindDoc="0" distT="0" distB="0" distL="114300" distR="114300" simplePos="0" relativeHeight="1" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset></wp:positionH><wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV><wp:extent cx="2540000" cy="1270000"/><wp:wrapNone/><wp:docPr id="1" name="Group 1"/><wp:cNvGraphicFramePr/>
+<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"><wpg:wgp><wpg:cNvGrpSpPr/><wpg:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="2540000" cy="1270000"/><a:chOff x="0" y="0"/><a:chExt cx="2540000" cy="1270000"/></a:xfrm></wpg:grpSpPr>
+<wps:wsp><wps:cNvPr id="2" name="AutoShape 2"/><wps:cNvSpPr/><wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1270000" cy="1270000"/></a:xfrm><a:custGeom><a:avLst/><a:gdLst/><a:ahLst/><a:cxnLst/><a:rect l="0" t="0" r="r" b="b"/><a:pathLst><a:path w="100" h="100"><a:moveTo><a:pt x="0" y="0"/></a:moveTo><a:lnTo><a:pt x="100" y="0"/></a:lnTo><a:lnTo><a:pt x="100" y="10"/></a:lnTo><a:lnTo><a:pt x="0" y="10"/></a:lnTo><a:close/><a:moveTo><a:pt x="0" y="90"/></a:moveTo><a:lnTo><a:pt x="100" y="90"/></a:lnTo><a:lnTo><a:pt x="100" y="100"/></a:lnTo><a:lnTo><a:pt x="0" y="100"/></a:lnTo><a:close/></a:path></a:pathLst></a:custGeom></wps:spPr><wps:bodyPr/></wps:wsp>
+</wpg:wgp></a:graphicData></a:graphic></wp:anchor></w:drawing></mc:Choice><mc:Fallback><w:pict/></mc:Fallback></mc:AlternateContent></w:r></w:p>"#;
+    let d = read_body(body);
+    let p = paras(&d);
+    let InlineObject::Group { children, .. } = &p[0].objects[0] else { panic!("{:?}", p[0].objects) };
+    let [child] = children.as_slice() else { panic!("{} members", children.len()) };
+    let InlineObject::Shape { kind, freeform, .. } = &child.obj else { panic!("{:?}", child.obj) };
+    assert_eq!(*kind, ShapeKind::Freeform);
+    let f = freeform.as_ref().expect("the member keeps its geometry");
+    assert_eq!(f.paths.len(), 2, "each box is a path of its own, not one outline of the bounding box");
+}
+
 /// A group as Word saves one (in `mc:AlternateContent`, needing `wpg`): its members' space
 /// starts at `a:chOff`, and a nested group is flattened into it through its own transform.
 #[test]
