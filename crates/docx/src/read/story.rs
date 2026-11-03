@@ -1125,6 +1125,18 @@ impl Reader<'_> {
                 self.read_pic(e, rels, w, h, alt.clone(), float)
             } else {
                 let mut o = self.read_wsp(sc, e, rels, w, h, float);
+                // A member with custom geometry (a path of several boxes, say) is a freeform, as
+                // a shape on its own is; otherwise it would be drawn as its whole bounding box.
+                let has_text_box = e.child("wps:txbx").and_then(|t| t.child("w:txbxContent")).is_some();
+                if !has_text_box
+                    && let InlineObject::Shape { kind, freeform, .. } = &mut o
+                    && let Some(sppr) = e.child("wps:spPr")
+                    && let Some(mut f) = super::freeform::cust_geom(sppr, w, h)
+                {
+                    f.alpha = super::freeform::line_alpha(sppr.child("a:ln"));
+                    *kind = ShapeKind::Freeform;
+                    *freeform = Some(Arc::new(f));
+                }
                 self.set_shape_id(&mut o, e.child("wps:cNvPr").and_then(|p| p.attr("id")));
                 Some(o)
             };
