@@ -2945,3 +2945,7 @@ spacing	Normal	標準
 	Match hiragana/katakana	ひらがなとカタカナを区別しない
 	Match small kana	小書き文字を区別しない
 	Match prolonged sound marks and dashes	長音とダッシュを区別しない
+	Japanese Consistency Checker	表記ゆれチェック
+	Japanese Consistency Checker…	表記ゆれチェック…
+	No inconsistent spellings were found.	表記ゆれは見つかりませんでした。
+	Pick the spelling to keep in each group.	各グループで残す表記を選んでください。

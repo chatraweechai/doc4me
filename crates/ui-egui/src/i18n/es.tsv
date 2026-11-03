@@ -2959,3 +2959,7 @@ spacing	Normal	Normal
 	Match hiragana/katakana	Coincidir hiragana/katakana
 	Match small kana	Coincidir kana pequeño
 	Match prolonged sound marks and dashes	Coincidir marcas de sonido largo y guiones
+	Japanese Consistency Checker	Comprobador de coherencia en japonés
+	Japanese Consistency Checker…	Comprobador de coherencia en japonés…
+	No inconsistent spellings were found.	No se encontraron grafías incoherentes.
+	Pick the spelling to keep in each group.	Elija la grafía que desea conservar en cada grupo.

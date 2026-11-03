@@ -2954,3 +2954,7 @@ spacing	Normal	ปกติ
 	Match hiragana/katakana	ถือว่าฮิรางานะ/คาตาคานะตรงกัน
 	Match small kana	ถือว่าคานะตัวเล็กตรงกัน
 	Match prolonged sound marks and dashes	ถือว่าเครื่องหมายเสียงยาวและขีดตรงกัน
+	Japanese Consistency Checker	ตรวจความสม่ำเสมอภาษาญี่ปุ่น
+	Japanese Consistency Checker…	ตรวจความสม่ำเสมอภาษาญี่ปุ่น…
+	No inconsistent spellings were found.	ไม่พบการสะกดที่ไม่สม่ำเสมอ
+	Pick the spelling to keep in each group.	เลือกการสะกดที่จะเก็บไว้ในแต่ละกลุ่ม

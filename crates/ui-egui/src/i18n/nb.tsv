@@ -2942,3 +2942,7 @@
 	Match hiragana/katakana	Samsvar hiragana/katakana
 	Match small kana	Samsvar liten kana
 	Match prolonged sound marks and dashes	Samsvar lengdemerker og tankestreker
+	Japanese Consistency Checker	Japansk konsistenskontroll
+	Japanese Consistency Checker…	Japansk konsistenskontroll…
+	No inconsistent spellings were found.	Fant ingen inkonsekvente stavemåter.
+	Pick the spelling to keep in each group.	Velg stavemåten som skal beholdes i hver gruppe.

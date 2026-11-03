@@ -77,7 +77,7 @@ const VOICED_BASE: &str = "カキクケコサシスセソタチツテトハヒ�
 const LONG_VOWELS: &str = "ーｰ‐‑−－";
 
 /// `c` with the foldings `f` turns on: what fuzzy matching compares.
-fn fold(c: char, f: &Fuzzy) -> char {
+pub(crate) fn fold(c: char, f: &Fuzzy) -> char {
     let mut c = c;
     if f.width {
         let u = c as u32;

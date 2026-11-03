@@ -186,6 +186,12 @@ pub enum FormDialog {
         to_traditional: bool,
         variants: bool,
     },
+    /// Review › Language › Japanese Consistency Checker: each word written more than one way,
+    /// its spellings with their counts, and the one to keep.
+    Consistency {
+        groups: Vec<Vec<(String, u64)>>,
+        chosen: Vec<usize>,
+    },
     /// AutoSummarize: how the summary is shown and how long it is.
     Summarize {
         /// highlight, top or newDocument.
@@ -462,6 +468,7 @@ impl FormDialog {
             FormDialog::Summarize { .. } => "autoSummarize",
             FormDialog::Frame { .. } => "formatFrame",
             FormDialog::Chinese { .. } => "chineseConversion",
+            FormDialog::Consistency { .. } => "consistencyChecker",
         }
     }
 
@@ -479,6 +486,7 @@ impl FormDialog {
             FormDialog::Summarize { .. } => "AutoSummarize",
             FormDialog::Frame { .. } => "Frame",
             FormDialog::Chinese { .. } => "Chinese Conversion",
+            FormDialog::Consistency { .. } => "Japanese Consistency Checker",
         }
     }
 }
@@ -491,6 +499,10 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
         "formatFrame" => Some(FormDialog::Frame { form: FrameForm::read(app) }),
         "chineseConversion" => Some(FormDialog::Chinese { to_traditional: false, variants: false }),
+        "consistencyChecker" => {
+            let groups = consistency_groups(app);
+            Some(FormDialog::Consistency { chosen: vec![0; groups.len()], groups })
+        }
         "sectionProtection" => {
             let v = app.session.run("review.protectSections", &json!({})).ok()?;
             let protected = v["sections"].as_array().map(|a| a.iter().map(|b| b.as_bool().unwrap_or(true)).collect()).unwrap_or_default();
@@ -509,6 +521,24 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         }
         _ => None,
     }
+}
+
+/// The Japanese Consistency Checker's groups of spellings, as the command lists them.
+fn consistency_groups(app: &mut WordApp) -> Vec<Vec<(String, u64)>> {
+    let v = app.session.run("review.consistencyChecker", &json!({})).unwrap_or_default();
+    v["groups"]
+        .as_array()
+        .map(|g| {
+            g.iter()
+                .map(|g| {
+                    g["forms"]
+                        .as_array()
+                        .map(|f| f.iter().map(|f| (f["text"].as_str().unwrap_or("").to_string(), f["count"].as_u64().unwrap_or(0))).collect())
+                        .unwrap_or_default()
+                })
+                .collect()
+        })
+        .unwrap_or_default()
 }
 
 /// Draws the dialog; returns true to close it.
@@ -532,6 +562,38 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
                 }
             }
             cancel
+        }
+        FormDialog::Consistency { groups, chosen } => {
+            if groups.is_empty() {
+                ui.label(tl!("No inconsistent spellings were found."));
+            } else {
+                ui.label(tl!("Pick the spelling to keep in each group."));
+                let mut replace = None;
+                egui::ScrollArea::vertical().max_height(320.0).show(ui, |ui| {
+                    for (i, g) in groups.iter().enumerate() {
+                        ui.separator();
+                        ui.horizontal_wrapped(|ui| {
+                            for (k, (text, n)) in g.iter().enumerate() {
+                                ui.radio_value(&mut chosen[i], k, format!("{text} ({n})"));
+                            }
+                            if ui.button(tl!("Replace")).clicked() {
+                                replace = g.get(chosen[i]).map(|(t, _)| t.clone());
+                            }
+                        });
+                    }
+                });
+                if let Some(to) = replace {
+                    match app.run("review.consistencyChecker", json!({"to": to})) {
+                        Ok(_) => {
+                            *groups = consistency_groups(app);
+                            *chosen = vec![0; groups.len()];
+                        }
+                        Err(e) => app.status(e),
+                    }
+                }
+            }
+            ui.add_space(6.0);
+            ui.button(tl!("Close")).clicked()
         }
         FormDialog::Summarize { kind, length, update_properties } => {
             ui.label(egui::RichText::new(tl!("Type of summary")).strong());
@@ -1026,6 +1088,23 @@ mod tests {
         h.run_steps(12);
         assert!(h.state().dialog.is_none());
         assert!(frame(&mut h).is_null());
+    }
+
+    #[test]
+    fn consistency_checker_dialog_replaces_the_other_spellings() {
+        let doc = doc4me_doc::Document::from_text("ﾃﾞｰﾀとデータとデータ");
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc), Services::default()));
+        h.state_mut().run("review.consistencyChecker", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Consistency { groups, .. } if groups.len() == 1 && groups[0][0] == ("データ".to_string(), 2)));
+        // The ribbon has a Replace button too; the dialog's is drawn last.
+        h.get_all_by_label("Replace").last().expect("the dialog's Replace").click();
+        h.run_steps(6);
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "データとデータとデータ");
+        h.get_by_label("No inconsistent spellings were found.");
+        h.get_by_label("Close").click();
+        h.run_steps(6);
+        assert!(h.state().dialog.is_none());
     }
 
     #[test]

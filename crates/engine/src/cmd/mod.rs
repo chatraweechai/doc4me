@@ -10,6 +10,7 @@ pub mod chart;
 pub mod chinese;
 pub mod citations;
 pub mod column;
+pub mod consistency;
 pub mod connectors;
 pub mod controls;
 pub mod design;
@@ -74,6 +75,7 @@ pub fn registry() -> Registry {
     v.extend(font::specs());
     v.extend(phonetic::specs());
     v.extend(asian_layout::specs());
+    v.extend(consistency::specs());
     v.extend(typography::specs());
     v.extend(para::specs());
     v.extend(lists::specs());

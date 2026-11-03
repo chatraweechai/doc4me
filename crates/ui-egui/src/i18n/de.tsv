@@ -2944,3 +2944,7 @@ spacing	Normal	Normal
 	Match hiragana/katakana	Hiragana/Katakana gleichsetzen
 	Match small kana	Kleine Kana gleichsetzen
 	Match prolonged sound marks and dashes	Längezeichen und Striche gleichsetzen
+	Japanese Consistency Checker	Japanische Konsistenzprüfung
+	Japanese Consistency Checker…	Japanische Konsistenzprüfung…
+	No inconsistent spellings were found.	Es wurden keine uneinheitlichen Schreibweisen gefunden.
+	Pick the spelling to keep in each group.	Wählen Sie in jeder Gruppe die Schreibweise, die erhalten bleiben soll.

@@ -729,8 +729,16 @@ fn replace_all(s: &mut Session, v: &Value) -> CmdResult {
     let story = s.sel.focus.story;
     let results = search_full(s, story, true)?;
     let n = results.len();
-    for Found { a, b, rep } in results.into_iter().rev() {
-        let with = rep.unwrap_or_default();
+    replace_each(s, results.into_iter().map(|Found { a, b, rep }| (a, b, rep.unwrap_or_default())).collect())?;
+    s.status = format!("All done. We made {n} replacements.");
+    Ok(json!({"replaced": n}))
+}
+
+/// Replaces each range (in document order, not overlapping) with its text, last first so earlier
+/// positions stay valid. A `\r` in the text splits the paragraph; with Track Changes on, each
+/// replacement is a reviewable revision.
+pub(super) fn replace_each(s: &mut Session, edits: Vec<(Pos, Pos, String)>) -> Result<(), CmdError> {
+    for (a, b, with) in edits.into_iter().rev() {
         if s.doc.settings.track_changes {
             // Same path as a single replace, so the change is a reviewable revision.
             s.sel = Selection { anchor: a, focus: b };
@@ -748,8 +756,7 @@ fn replace_all(s: &mut Session, v: &Value) -> CmdResult {
             }
         }
     }
-    s.status = format!("All done. We made {n} replacements.");
-    Ok(json!({"replaced": n}))
+    Ok(())
 }
 
 /// One part of a Go To destination.

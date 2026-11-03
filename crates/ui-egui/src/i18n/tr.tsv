@@ -2972,3 +2972,7 @@ spacing	Normal	Normal
 	Match hiragana/katakana	Hiragana/katakanayı eşleştir
 	Match small kana	Küçük kanayı eşleştir
 	Match prolonged sound marks and dashes	Uzatma işaretlerini ve tireleri eşleştir
+	Japanese Consistency Checker	Japonca Tutarlılık Denetleyicisi
+	Japanese Consistency Checker…	Japonca Tutarlılık Denetleyicisi…
+	No inconsistent spellings were found.	Tutarsız yazım bulunamadı.
+	Pick the spelling to keep in each group.	Her grupta korunacak yazımı seçin.

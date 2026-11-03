@@ -2946,3 +2946,7 @@ spacing	Normal	Normál
 	Match hiragana/katakana	Hiragana/katakana egyezése
 	Match small kana	Kis kana egyezése
 	Match prolonged sound marks and dashes	Hosszabbító jelek és kötőjelek egyezése
+	Japanese Consistency Checker	Japán következetesség-ellenőrző
+	Japanese Consistency Checker…	Japán következetesség-ellenőrző…
+	No inconsistent spellings were found.	Nem található következetlen írásmód.
+	Pick the spelling to keep in each group.	Válassza ki minden csoportban a megtartandó írásmódot.
