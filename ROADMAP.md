@@ -1,6 +1,6 @@
 # Doc4Me roadmap
 
-**Stage: alpha** · ready for real work **86.8%, measured on Windows** ([`docs/readiness.md`](docs/readiness.md), full 222-document corpus, Windows run 41579621418, 2026-11-03; 86.7% earlier that day; 86.0% on 2026-11-01; the 26 deferred rows and their reasons are listed in readiness.md); the target is 100% measured (raised from 95% by the owner, 2026-10-27), 13.2 points away · 89.3% without 26 deferred owner-bound checks · next: beta, the blocking gaps #1–#7, ~150–230 h away
+**Stage: alpha** · ready for real work **86.9%, measured on Windows** ([`docs/readiness.md`](docs/readiness.md), full 222-document corpus, Windows run 41584013643, 2026-11-03; 86.8% and 86.7% earlier that day; 86.0% on 2026-11-01; the 26 deferred rows and their reasons are listed in readiness.md); the target is 100% measured (raised from 95% by the owner, 2026-10-27), 13.1 points away · 89.4% without 26 deferred owner-bound checks · next: beta, the blocking gaps #1–#7, ~150–230 h away
 
 > **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-03 · **Change:** minor (Doc4Me v1.0.0, v1.1.0, v1.1.1 and v1.1.2 released on the fork [`veevie55/doc4me`](https://github.com/veevie55/doc4me/releases), v1.1.2 the latest, after Actions of `chatraweechai/doc4me` stopped over a billing lock; since the 2026-11-01 measurement, not yet remeasured on Windows: text boxes use their own margins (`lIns`…), floating-object anchors no longer make lines taller, an empty paragraph ending a section no longer makes a blank page, nor does a page break before one or a page break ending a section's last paragraph, hidden table rows (`w:trPr/w:hidden`) take no room and an empty end-of-cell paragraph with `w:hideMark` doesn't count towards the row height (both now kept when saving), rows keep `w:wBefore`/`w:wAfter`, and Review › Chinese Conversion maps `dlg-174` (dialogs 188/228 by the registry); on Linux the same comparator moved page counts 160 → 171 and page breaks 82 → 91 with no document worse; readiness stays 86.0% until `docs/readiness.md` is regenerated) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
 
@@ -16,7 +16,7 @@ agent control. This page is the summary; the assessment is
 |---|---|---|
 | Ribbon/menu catalog coverage | **499 / 499 (100%)** | measured (`cargo xtask parity` → [`docs/parity-checklist.md`](docs/parity-checklist.md)) |
 | **Feature breadth** (weighted, incl. dialog options, styles, languages beyond the ribbon) | **~80%** | estimated |
-| **Ready for real work** (full target) | **86.8%** | measured 2026-11-03 on Windows (run 41559739417; 86.0% on 2026-11-01): `cargo xtask readiness --corpus` → [`docs/readiness.md`](docs/readiness.md), fixed pass/fail check sets and all 222 real-world documents with Word-made reference PDFs; 88.5% excluding 26 deferred rows; replaces the stale 73.4% report |
+| **Ready for real work** (full target) | **86.9%** | measured 2026-11-03 on Windows (run 41584013643: features 92.1%, dialogs 192/228; 86.0% on 2026-11-01): `cargo xtask readiness --corpus` → [`docs/readiness.md`](docs/readiness.md), fixed pass/fail check sets and all 222 real-world documents with Word-made reference PDFs; 89.4% excluding 26 deferred rows; replaces the stale 73.4% report |
 | **Mainstream practitioner** | **~55%** | estimated: weekly-work depth × discounts for interaction (×0.93), stability (×0.90), file exchange (×0.90) |
 | **Essentials user** | **~63%** | estimated: core-feature depth × discounts for launch (×0.90), discoverability (×0.95), opening received files (×0.92) |
 | Remaining to **beta** | **~150–230 h** of Opus 5.5 agent wall-clock (gaps #1–#7) | estimated |
@@ -35,7 +35,7 @@ discounts and the user evidence (120 issues from outside users, 4 praise, 0 "swi
 
 | Audience | Ready | Opus 5.5 agent wall-clock hours to ~95% | Work that dominates |
 |---|---|---|---|
-| Full target (ready for real work) | **86.8%** (measured on Windows) | **~650–1,100 h** (70–80% parallelizes; estimate unchanged) | Pagination and document fidelity, missing dialogs, 65 unsupported interface languages, and owner-deferred hardware/platform/service checks; plus everything below |
+| Full target (ready for real work) | **86.9%** (measured on Windows) | **~650–1,100 h** (70–80% parallelizes; estimate unchanged) | Pagination and document fidelity, missing dialogs, 65 unsupported interface languages, and owner-deferred hardware/platform/service checks; plus everything below |
 | Mainstream practitioner | **~55%** | **~300–500 h** (~65% parallelizes) | DOCX real-world fidelity and preserving charts/SmartArt, pagination fidelity, formatting revisions, dialog depth, objects, stability |
 | Essentials user | **~63%** | **~90–140 h** (~50% parallelizes) | Install/launch stability, opening files people send (corpus subset, chart fallbacks), native printing, picture handling, English spelling depth |
 
