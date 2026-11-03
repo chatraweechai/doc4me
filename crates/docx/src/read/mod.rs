@@ -989,6 +989,23 @@ impl Reader<'_> {
                 "m:mathPr" => s.math = Some(math::read_math_pr(k)),
                 "w:mirrorMargins" => s.mirror_margins = on_off(k),
                 "w:autoHyphenation" => s.auto_hyphenation = on_off(k),
+                "w:characterSpacingControl" => {
+                    if let Some(v) = k.attr("w:val").and_then(doc4me_doc::CharSpacing::from_ooxml) {
+                        s.char_spacing = v;
+                    }
+                }
+                "w:strictFirstAndLastChars" => s.kinsoku.strict = on_off(k),
+                "w:noLineBreaksBefore" | "w:noLineBreaksAfter" => {
+                    let list = k.attr("w:val").and_then(doc4me_doc::Kinsoku::clean_list);
+                    if k.name == "w:noLineBreaksBefore" {
+                        s.kinsoku.no_start = list;
+                    } else {
+                        s.kinsoku.no_end = list;
+                    }
+                    if let Some(l) = k.attr("w:lang").filter(|l| !l.is_empty() && l.len() < 64) {
+                        s.kinsoku.lang = Some(l.to_string());
+                    }
+                }
                 "w:doNotHyphenateCaps" => s.hyphenate_caps = !on_off(k),
                 "w:hyphenationZone" => {
                     if let Some(v) = tw(k, "w:val").filter(|v| v.is_finite() && *v >= 0.0) {

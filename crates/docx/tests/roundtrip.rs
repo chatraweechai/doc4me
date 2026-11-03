@@ -2441,3 +2441,24 @@ fn asian_layout_run_properties_round_trip() {
     assert!(pos("<w:shd ") < pos("<w:fitText ") && pos("<w:lang ") < pos("<w:eastAsianLayout "), "{xml}");
     assert!(xml.contains(r#"<w:fitText w:val="1440" w:id="3"/>"#) && xml.contains(r#"w:vert="1" w:vertCompress="1""#), "{xml}");
 }
+
+/// File › Options › Typography: the character spacing control (written as `doNotCompress` before,
+/// whatever the file had) and the first and last characters come back as saved.
+#[test]
+fn typography_settings_round_trip() {
+    use doc4me_doc::{CharSpacing, Kinsoku};
+    for (spacing, kinsoku) in [
+        (CharSpacing::CompressPunctuation, Kinsoku { strict: true, ..Default::default() }),
+        (
+            CharSpacing::CompressPunctuationAndJapaneseKana,
+            Kinsoku { no_start: Some("、。ー".into()), no_end: Some("「（".into()), lang: Some("ja-JP".into()), ..Default::default() },
+        ),
+        (CharSpacing::DoNotCompress, Kinsoku::default()),
+    ] {
+        let mut d = doc_with(vec![Paragraph::with_text("日本語。", Default::default())]);
+        d.settings.char_spacing = spacing;
+        d.settings.kinsoku = kinsoku.clone();
+        let back = rt(&d);
+        assert_eq!((back.settings.char_spacing, &back.settings.kinsoku), (spacing, &kinsoku));
+    }
+}

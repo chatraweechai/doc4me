@@ -1532,6 +1532,9 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
         }
     }
     fit_text(&mut b);
+    if env.doc.settings.char_spacing.compresses() {
+        compress_punctuation(&mut b, &p.text);
+    }
     if rp.snap_to_grid {
         snap_chars(&mut b, &p.text, &env.grid);
     }
@@ -1583,7 +1586,7 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
         found.dedup();
     }
     // Asian typography: kinsoku and breaking Latin words anywhere.
-    crate::kinsoku::apply(&text, &mut found, rp.kinsoku, rp.word_wrap);
+    crate::kinsoku::apply(&text, &mut found, rp.kinsoku, rp.word_wrap, &env.doc.settings.kinsoku);
     let opps: std::collections::HashSet<usize> = found.into_iter().filter_map(to_para).collect();
     for c in &mut b.clusters {
         c.break_after = opps.contains(&c.end) || matches!(c.kind, ClKind::Object(_) | ClKind::Tab);
@@ -1730,6 +1733,46 @@ fn slack_word(pl: &ParaLayout, j: usize, x: f32, line_x: f32, right_edge: f32) -
     }
     let word = end_x - line_x;
     (word > 0.0 && end_x - right_edge <= word * SUBSTITUTE_SLACK).then_some(k)
+}
+
+/// Character spacing control "compress punctuation" (`w:characterSpacingControl`): where two
+/// full-width punctuation marks meet, the blank half of one of them goes, as Japanese
+/// typesetting closes up "。」" or "」「" (JIS X 4051): a closing mark loses the right half of
+/// its square, else an opening mark after it the left half. Other text keeps its width.
+fn compress_punctuation(b: &mut Builder, text: &str) {
+    let side = |c: &Cluster| -> Option<bool> {
+        if c.kind != ClKind::Text {
+            return None;
+        }
+        let mut chars = text.get(c.start..c.end)?.chars();
+        let ch = chars.next()?;
+        if chars.next().is_some() {
+            return None;
+        }
+        crate::kinsoku::punct_side(ch)
+    };
+    for i in 1..b.clusters.len() {
+        let (Some(a), Some(n)) = (b.clusters.get(i - 1), b.clusters.get(i)) else { continue };
+        let (Some(sa), Some(sn)) = (side(a), side(n)) else { continue };
+        // Only marks set at full width (a square as wide as the font size) have a blank half.
+        let em = |c: &Cluster| b.styles.get(c.style as usize).map_or(0.0, |st| st.rc.size);
+        let full = |c: &Cluster| c.adv > em(c) * 0.75;
+        if sa && full(a) {
+            let half = em(a) / 2.0;
+            if let Some(a) = b.clusters.get_mut(i - 1) {
+                a.adv = (a.adv - half).max(0.0);
+            }
+        } else if !sn && full(n) {
+            let half = em(n) / 2.0;
+            let (g0, g1) = (n.g0 as usize, n.g1 as usize);
+            for g in b.glyphs.get_mut(g0..g1).into_iter().flatten() {
+                g.dx -= half;
+            }
+            if let Some(n) = b.clusters.get_mut(i) {
+                n.adv = (n.adv - half).max(0.0);
+            }
+        }
+    }
 }
 
 /// Fit Text (`w:fitText`): each piece of fitted text (neighbouring clusters whose runs have the

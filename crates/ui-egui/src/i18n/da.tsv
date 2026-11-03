@@ -2927,3 +2927,12 @@
 	New text width (pt):	Ny tekstbredde (pt):
 	Enclose in brackets	Omgiv med parenteser
 	Bracket pair:	Parentespar:
+	Typography	Typografi
+	Character spacing control	Kontrol af tegnafstand
+	Don't compress	Komprimer ikke
+	Compress punctuation only	Komprimer kun tegnsætning
+	Compress punctuation and Japanese kana	Komprimer tegnsætning og japansk kana
+	First and last characters	Første og sidste tegn
+	Strict	Streng
+	Cannot start a line:	Må ikke starte en linje:
+	Cannot end a line:	Må ikke afslutte en linje:

@@ -2942,3 +2942,12 @@ spacing	Normal	标准
 	New text width (pt):	新文字宽度（磅）：
 	Enclose in brackets	带括号
 	Bracket pair:	括号样式：
+	Typography	中文版式
+	Character spacing control	字符间距控制
+	Don't compress	不压缩
+	Compress punctuation only	只压缩标点符号
+	Compress punctuation and Japanese kana	压缩标点符号和日文假名
+	First and last characters	首尾字符
+	Strict	严格
+	Cannot start a line:	不能位于行首的字符：
+	Cannot end a line:	不能位于行尾的字符：

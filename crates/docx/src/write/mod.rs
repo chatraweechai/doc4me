@@ -990,7 +990,17 @@ fn settings_xml(doc: &Document, footnotes: bool, endnotes: bool, template_rel: O
             w.val(tag, &crate::units::twips(v.clamp(0.5, 1584.0)));
         }
     }
-    w.val("w:characterSpacingControl", "doNotCompress");
+    w.val("w:characterSpacingControl", s.char_spacing.ooxml());
+    if s.kinsoku.strict {
+        w.empty("w:strictFirstAndLastChars", &[]);
+    }
+    // `noLineBreaksAfter` comes before `noLineBreaksBefore` in the schema (CT_Settings).
+    let lang = s.kinsoku.lang.as_deref().unwrap_or("ja-JP");
+    for (tag, list) in [("w:noLineBreaksAfter", &s.kinsoku.no_end), ("w:noLineBreaksBefore", &s.kinsoku.no_start)] {
+        if let Some(l) = list.as_deref().and_then(doc4me_doc::Kinsoku::clean_list) {
+            w.empty(tag, &[("w:lang", lang), ("w:val", &l)]);
+        }
+    }
     for (tag, fmt, pr, used, el) in [
         ("w:footnotePr", s.footnote_format, &s.footnote_pr, footnotes, "w:footnote"),
         ("w:endnotePr", s.endnote_format, &s.endnote_pr, endnotes, "w:endnote"),

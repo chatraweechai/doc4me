@@ -2942,3 +2942,12 @@ spacing	Normal	Звичайний
 	New text width (pt):	Нова ширина тексту (пункти):
 	Enclose in brackets	Узяти в дужки
 	Bracket pair:	Тип дужок:
+	Typography	Типографіка
+	Character spacing control	Керування інтервалом між символами
+	Don't compress	Не стискати
+	Compress punctuation only	Стискати лише розділові знаки
+	Compress punctuation and Japanese kana	Стискати розділові знаки та японську кану
+	First and last characters	Перші й останні символи
+	Strict	Суворі
+	Cannot start a line:	Не може починати рядок:
+	Cannot end a line:	Не може завершувати рядок:

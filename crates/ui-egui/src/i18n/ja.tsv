@@ -2930,3 +2930,12 @@ spacing	Normal	標準
 	New text width (pt):	新しい文字列の幅 (pt):
 	Enclose in brackets	括弧で囲む
 	Bracket pair:	括弧の種類:
+	Typography	文字体裁
+	Character spacing control	文字間隔の調整
+	Don't compress	間隔を詰めない
+	Compress punctuation only	句読点を詰める
+	Compress punctuation and Japanese kana	句読点とかなを詰める
+	First and last characters	禁則文字の設定
+	Strict	高レベル
+	Cannot start a line:	行頭禁則文字:
+	Cannot end a line:	行末禁則文字:

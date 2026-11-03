@@ -2929,3 +2929,12 @@ spacing	Normal	Normal
 	New text width (pt):	Neue Textbreite (pt):
 	Enclose in brackets	In Klammern einschließen
 	Bracket pair:	Klammerpaar:
+	Typography	Typografie
+	Character spacing control	Zeichenabstandssteuerung
+	Don't compress	Nicht komprimieren
+	Compress punctuation only	Nur Satzzeichen komprimieren
+	Compress punctuation and Japanese kana	Satzzeichen und japanisches Kana komprimieren
+	First and last characters	Erste und letzte Zeichen
+	Strict	Streng
+	Cannot start a line:	Darf keine Zeile beginnen:
+	Cannot end a line:	Darf keine Zeile beenden:

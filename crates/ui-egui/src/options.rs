@@ -47,6 +47,7 @@ fn pane_label(id: &str) -> &'static str {
         "display" => "Display",
         "proofing" => "Proofing",
         "save" => "Save",
+        "typography" => "Typography",
         "language" => "Language",
         "accessibility" => "Accessibility",
         "advanced" => "Advanced",
@@ -92,6 +93,7 @@ pub fn page(app: &mut WordApp, ui: &mut Ui) {
                 "display" => display(app, ui),
                 "proofing" => proofing(app, ui),
                 "save" => save(app, ui),
+                "typography" => typography(app, ui),
                 "language" => language(app, ui),
                 "accessibility" => accessibility(app, ui),
                 "advanced" => advanced(app, ui),
@@ -163,6 +165,60 @@ fn general(app: &mut WordApp, ui: &mut Ui) {
         ui.end_row();
     });
     note(ui, "New comments and tracked changes are recorded under this name and these initials.");
+}
+
+/// Change the document's typography through `file.typography` (an undoable document setting).
+fn set_typography(app: &mut WordApp, params: Value) {
+    if let Err(e) = app.run("file.typography", params) {
+        app.status(e);
+    }
+}
+
+/// Typography (East Asian text): the document's character spacing control and its first and
+/// last characters. A custom list is applied when its box loses focus.
+fn typography(app: &mut WordApp, ui: &mut Ui) {
+    let v = doc4me_engine::cmd::typography::state(&app.session);
+    let text = |k: &str| v.get(k).and_then(Value::as_str).unwrap_or("").to_string();
+    section(ui, "Character spacing control");
+    let spacing = text("charSpacing");
+    for (k, l) in [
+        ("doNotCompress", "Don't compress"),
+        ("compressPunctuation", "Compress punctuation only"),
+        ("compressPunctuationAndJapaneseKana", "Compress punctuation and Japanese kana"),
+    ] {
+        if ui.radio(spacing == k, tl!(l)).clicked() && spacing != k {
+            set_typography(app, json!({"charSpacing": k}));
+        }
+    }
+    ui.add_space(8.0);
+    section(ui, "First and last characters");
+    let level = text("kinsoku");
+    ui.horizontal(|ui| {
+        for (k, l) in [("standard", "Standard"), ("strict", "Strict"), ("custom", "Custom")] {
+            if ui.radio(level == k, tl!(l)).clicked() && level != k {
+                set_typography(app, json!({"kinsoku": k}));
+            }
+        }
+    });
+    let custom = level == "custom";
+    egui::Grid::new("options_kinsoku").num_columns(2).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
+        for (label, key) in [("Cannot start a line:", "noLineStart"), ("Cannot end a line:", "noLineEnd")] {
+            ui.label(tl!(label));
+            let current = text(key);
+            let id = ui.id().with(("kinsoku_list", key));
+            let mut buf: String = ui.data_mut(|d| d.get_temp::<String>(id)).unwrap_or_else(|| current.clone());
+            let resp = ui.add_enabled(custom, crate::widgets::text_line(&mut buf).desired_width(320.0).char_limit(doc4me_doc::MAX_KINSOKU_CHARS));
+            if resp.lost_focus() && buf != current {
+                set_typography(app, json!({ key: buf.clone() }));
+            }
+            // Away from the box it shows the list in effect again.
+            if !resp.has_focus() && !resp.lost_focus() {
+                buf = current;
+            }
+            ui.data_mut(|d| d.insert_temp(id, buf));
+            ui.end_row();
+        }
+    });
 }
 
 fn display(app: &mut WordApp, ui: &mut Ui) {
@@ -655,6 +711,31 @@ mod tests {
         h.run_steps(2);
         assert!(!h.state().session.prefs.typing_replaces_selection);
         assert!(h.query_by_label("Measurement units:").is_some());
+    }
+
+    /// File › Options › Typography (`file.typography` without settings opens it): the radio
+    /// buttons change the document's character spacing control and kinsoku level, undoably.
+    #[test]
+    fn typography_pane_changes_the_document_settings() {
+        let mut a = app();
+        a.run("file.typography", json!({})).unwrap();
+        let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            a,
+        );
+        h.run_steps(4);
+        assert_eq!(h.state().ui.options_pane, "typography");
+        h.get_by_label("Compress punctuation only").click();
+        h.run_steps(2);
+        assert_eq!(h.state().session.doc.settings.char_spacing, doc4me_doc::CharSpacing::CompressPunctuation);
+        h.get_by_label("Strict").click();
+        h.run_steps(2);
+        assert!(h.state().session.doc.settings.kinsoku.strict);
+        assert!(h.query_by_label("Cannot start a line:").is_some());
     }
 
     /// File › Options › Accessibility › Animation effects: Use system setting (the default), On

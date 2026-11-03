@@ -2927,3 +2927,12 @@
 	New text width (pt):	Nieuwe tekstbreedte (pt):
 	Enclose in brackets	Tussen haakjes plaatsen
 	Bracket pair:	Soort haakjes:
+	Typography	Typografie
+	Character spacing control	Tekenafstand beheren
+	Don't compress	Niet comprimeren
+	Compress punctuation only	Alleen interpunctie comprimeren
+	Compress punctuation and Japanese kana	Interpunctie en Japanse kana comprimeren
+	First and last characters	Eerste en laatste tekens
+	Strict	Strikt
+	Cannot start a line:	Mag geen regel beginnen:
+	Cannot end a line:	Mag geen regel beëindigen:

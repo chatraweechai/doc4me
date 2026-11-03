@@ -2931,3 +2931,12 @@ spacing	Normal	Normál
 	New text width (pt):	Új szövegszélesség (pt):
 	Enclose in brackets	Zárójelbe foglalás
 	Bracket pair:	Zárójelpár:
+	Typography	Tipográfia
+	Character spacing control	Karakterköz szabályozása
+	Don't compress	Nincs tömörítés
+	Compress punctuation only	Csak az írásjelek tömörítése
+	Compress punctuation and Japanese kana	Írásjelek és japán kana tömörítése
+	First and last characters	Első és utolsó karakterek
+	Strict	Szigorú
+	Cannot start a line:	Nem kezdhet sort:
+	Cannot end a line:	Nem zárhat sort:

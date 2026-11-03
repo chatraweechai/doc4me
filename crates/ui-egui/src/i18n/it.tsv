@@ -2937,3 +2937,12 @@ spacing	Normal	Normale
 	New text width (pt):	Nuova larghezza testo (pt):
 	Enclose in brackets	Racchiudi tra parentesi
 	Bracket pair:	Coppia di parentesi:
+	Typography	Tipografia
+	Character spacing control	Controllo della spaziatura dei caratteri
+	Don't compress	Non comprimere
+	Compress punctuation only	Comprimi solo la punteggiatura
+	Compress punctuation and Japanese kana	Comprimi la punteggiatura e i kana giapponesi
+	First and last characters	Primi e ultimi caratteri
+	Strict	Rigoroso
+	Cannot start a line:	Non può iniziare una riga:
+	Cannot end a line:	Non può terminare una riga:

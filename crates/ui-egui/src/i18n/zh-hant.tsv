@@ -2931,3 +2931,12 @@ spacing	Normal	標準
 	New text width (pt):	新文字寬度（點）：
 	Enclose in brackets	加括號
 	Bracket pair:	括號樣式：
+	Typography	亞洲方式配置
+	Character spacing control	字元間距控制
+	Don't compress	不壓縮
+	Compress punctuation only	僅壓縮標點符號
+	Compress punctuation and Japanese kana	壓縮標點符號和日文假名
+	First and last characters	首尾字元
+	Strict	嚴格
+	Cannot start a line:	不能位於行首的字元：
+	Cannot end a line:	不能位於行尾的字元：

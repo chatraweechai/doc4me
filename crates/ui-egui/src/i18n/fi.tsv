@@ -2927,3 +2927,12 @@
 	New text width (pt):	Uusi tekstin leveys (pt):
 	Enclose in brackets	Sulje sulkeisiin
 	Bracket pair:	Sulkeiden tyyppi:
+	Typography	Typografia
+	Character spacing control	Merkkivälin hallinta
+	Don't compress	Älä tiivistä
+	Compress punctuation only	Tiivistä vain välimerkit
+	Compress punctuation and Japanese kana	Tiivistä välimerkit ja japanin kana
+	First and last characters	Ensimmäiset ja viimeiset merkit
+	Strict	Tiukka
+	Cannot start a line:	Ei voi aloittaa riviä:
+	Cannot end a line:	Ei voi päättää riviä:

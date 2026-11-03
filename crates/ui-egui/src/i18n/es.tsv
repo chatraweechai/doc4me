@@ -2944,3 +2944,12 @@ spacing	Normal	Normal
 	New text width (pt):	Nuevo ancho del texto (pt):
 	Enclose in brackets	Encerrar entre paréntesis
 	Bracket pair:	Tipo de paréntesis:
+	Typography	Tipografía
+	Character spacing control	Control del espaciado entre caracteres
+	Don't compress	No comprimir
+	Compress punctuation only	Comprimir solo la puntuación
+	Compress punctuation and Japanese kana	Comprimir la puntuación y el kana japonés
+	First and last characters	Primeros y últimos caracteres
+	Strict	Estricto
+	Cannot start a line:	No puede iniciar una línea:
+	Cannot end a line:	No puede terminar una línea:
