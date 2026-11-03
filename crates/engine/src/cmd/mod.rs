@@ -2,6 +2,7 @@
 
 pub mod accessibility;
 pub mod addins;
+pub mod asian_layout;
 pub mod autoformat;
 pub mod canvas;
 pub mod caret;
@@ -71,6 +72,7 @@ pub fn registry() -> Registry {
     v.extend(format::specs());
     v.extend(font::specs());
     v.extend(phonetic::specs());
+    v.extend(asian_layout::specs());
     v.extend(para::specs());
     v.extend(lists::specs());
     v.extend(inspector::specs());

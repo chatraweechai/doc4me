@@ -13,6 +13,13 @@
 
 ### เพิ่ม
 
+- **Home › Paragraph › Asian Layout: Fit Text และ Two Lines in One** (model `crates/doc/src/props.rs` `FitText`, `EastAsianLayout`, `CombineBrackets` และ `CharProps::fit_text`/`east_asian`, `crates/doc/src/resolve.rs`; อ่าน/เขียน `crates/docx/src/read/props.rs`, `crates/docx/src/write/props.rs`; layout `crates/layout/src/para.rs` `fit_text`, `shape_combined`, `merge_stacked`; คำสั่ง `crates/engine/src/cmd/asian_layout.rs`; UI `crates/ui-egui/src/dialogs.rs`, `ribbon.rs`, `lib.rs`, `icons.rs`; คำแปล 8 ข้อความใน catalog ทั้ง 28 ภาษา; `docs/readiness/dialogs.tsv` แถว `dlg-047` และ `dlg-229`)
+  - เหตุผล: dialog `wdDialogFitText` และ `wdDialogTwoLinesInOne` ไม่มีของเทียบเท่า และไฟล์ .docx ที่ใช้ `w:fitText` หรือ `w:eastAsianLayout` (เอกสารจีน/ญี่ปุ่น) ทำค่าหายเมื่อบันทึกด้วย Doc4Me
+  - Fit Text (`format.fitText`, `{"width": จุด | null}`): ข้อความที่เลือกกว้างตามค่าที่กำหนด ทุกอักขระขยายหรือหดเท่ากัน (ECMA-376 §17.3.2.14) run ที่ติดกันซึ่งมีค่าเดียวกันเป็นชิ้นเดียว และแต่ละชิ้นใหม่ได้ `w:id` ของตัวเองจึงไม่รวมกับชิ้นข้างเคียง; null เอาออก
+  - Two Lines in One (`format.twoLinesInOne`, `{"value": bool, "brackets"?: "none|round|square|angle|curly"}`): ข้อความที่เลือกเป็นสองบรรทัดขนาดครึ่งหนึ่งในบรรทัดเดียว ครึ่งแรกของอักขระอยู่บน แต่ละบรรทัดจัดกลาง มีวงเล็บขนาดเต็มเมื่อเลือก บรรทัดสูงขึ้นพอให้บรรทัดบน และไม่ตัดบรรทัดกลางชิ้น; Horizontal in Vertical (`w:vert`, `w:vertCompress`) ที่มาจากไฟล์คงอยู่เมื่อเปิด/ปิด Two Lines in One
+  - UI: ปุ่ม Asian Layout ในกลุ่ม Paragraph ของ Home มีเมนู Two Lines in One… และ Fit Text… ซึ่งเปิด dialog ที่แสดงค่าปัจจุบัน และมีปุ่ม Remove เมื่อข้อความมีค่านั้นอยู่แล้ว
+  - ผู้ใช้: ไฟล์ .docx ที่มี `w:fitText`/`w:eastAsianLayout` แสดงตามค่าและบันทึกกลับครบ (รวม `w:id`, `w:combineBrackets`, `w:vert`, `w:vertCompress`) ตามลำดับ element ของ `CT_RPr`; ไฟล์ที่ไม่มีค่าเหล่านี้ไม่เปลี่ยน; ข้อความไทยไม่ได้รับผลกระทบ
+  - ตรวจสอบ: เทสต์ใหม่ layout `fit_text_sets_the_run_to_its_width`, `two_lines_in_one_stacks_the_text_in_one_piece`; engine `fit_text_applies_reports_and_removes`, `two_lines_in_one_sets_brackets_and_keeps_horizontal_in_vertical`; docx `asian_layout_run_properties_round_trip` และค่าใหม่ใน `every_char_prop_round_trips`; UI `asian_layout_buttons_open_their_dialogs`; ผ่านทั้งหมด: layout 248, engine 453 + 13 + 8, docx 75 + round-trip 50 + 49, doc 118, docbin 65, xtask, ui-egui `--lib` 397 (รวม `every_tab_and_command_is_translated`, `bundled_catalogs_are_well_formed`), mcp/formats/pdf/render; `cargo fmt --all --check` และ `cargo clippy --workspace --all-targets -- -D warnings` ผ่าน; วัดบน Linux: dialogs 188 → 190/228 จำนวนหน้าตรง 172 ต้น/ท้ายหน้าตรง 91 และ round-trip 222/222 เท่าเดิม ไม่มีไฟล์ใดแย่ลง
 - **workflow วัด readiness ลองติดตั้ง poppler ซ้ำเมื่อ feed ของ Chocolatey ตอบผิด** (`.github/workflows/readiness-windows.yml`)
   - เหตุผล: run 41564657737 ล้มเพราะ feed ตอบ 406 ตอนดึง metadata ของ poppler; run แรก (41559739417) ผ่าน จึงเป็นปัญหาชั่วคราว
   - ตอนนี้ลองติดตั้งสูงสุด 3 ครั้ง เว้น 30 วินาที; ไม่เปลี่ยนการวัดหรือไฟล์ที่ได้
@@ -68,6 +75,12 @@
   - คงพฤติกรรมเดิมเมื่อ: section ถัดไปเป็นแบบต่อเนื่อง (ตัวแบ่งหน้ายังขึ้นหน้าใหม่และ section ถัดไปต่อในหน้านั้น), ตัวแบ่งหน้าอยู่กลางย่อหน้า, ย่อหน้าที่ปิด section มีข้อความหรือวัตถุ, เอกสารโหมด Word 2010 หรือมี `w:splitPgBreakAndParaMark` (เครื่องหมายย่อหน้าตามตัวแบ่งไปหน้าใหม่); section ที่ต้องเริ่มหน้าคี่ยังเว้นหน้าว่างให้เลขหน้าเป็นคี่เหมือนเดิม
   - ผู้ใช้: ไฟล์ .docx ไม่เปลี่ยน (เปลี่ยนแค่การจัดหน้า การพิมพ์ และ PDF ที่ส่งออก); ไม่กระทบการติดตั้งทับหรือภาษาไทย
   - ตรวจสอบ: เทสต์ใหม่ครอบคลุมหน้าถัดไป คอลัมน์ถัดไป และหน้าคู่ (2 หน้า), หน้าคี่ (3 หน้า หน้า 2 ว่างเพื่อเลขคี่), แบบต่อเนื่อง, ตัวแบ่งกลางย่อหน้า และย่อหน้าปิด section ที่มีข้อความ ถ้าถอยโค้ดใน `lib.rs` กลับ เทสต์ล้มด้วย `(3, 1, 2)` แทน `(2, 0, 1)`; `cargo test -p doc4me-layout` 240 ผ่าน, `cargo test -p doc4me-engine` 451 + 13 + 8 ผ่าน, `cargo fmt --all --check` ผ่าน, `cargo clippy --workspace --all-targets -- -D warnings` ผ่าน (เครื่อง session ต้องติดตั้ง `libasound2-dev` ก่อน เพราะ build script ของ `alsa-sys` หา ALSA ไม่เจอ ไม่เกี่ยวกับโค้ดที่แก้); วัดคลังเอกสารจริงบน Linux ด้วย `cargo xtask readiness --corpus --jobs 4` เทียบ CLI ก่อนและหลังแก้บนเครื่องเดียวกัน โดยให้รายงานแสดงไฟล์ที่ไม่ผ่านครบทุกไฟล์ (แก้ `take(40)` ชั่วคราวแล้วคืน ไม่ได้ commit): จำนวนหน้าตรง 166 → 168, ต้นและท้ายหน้าตรง 89 → 90 — zenodo-169 ตรงทั้งสองแบบ (13 → 12 หน้า), zenodo-160 จำนวนหน้าตรง (11 → 10) ส่วนหน้า 8 ยังต่างเพราะ PDF อ้างอิงพิมพ์ comment "Commented [SP1]: …" ไว้ในแถบ markup ซึ่งไฟล์ .docx ไม่มีแล้ว (ไม่มี `word/comments.xml`), zenodo-053 64 → 61 หน้า (Word 58), zenodo-136 27 → 26 หน้า (Word 25); การเปิดไฟล์ round-trip และความเสถียรคงที่ 222/222 และไม่มีไฟล์ที่ผลแย่ลง
+
+### ข้อจำกัดที่ทราบ
+
+- **Fit Text ตอนหดข้อความ** ใช้การลดระยะห่างอักขระ (ตัวอักษรอาจซ้อนกัน) ขณะที่ Word บีบความกว้างตัวอักษรด้วย; การขยายตรงกับ Word
+- **Horizontal in Vertical (`w:eastAsianLayout/@w:vert`)** อ่านและบันทึกกลับได้ แต่ยังไม่วาดข้อความแนวนอนในข้อความแนวตั้ง เพราะการจัดบรรทัดของ Doc4Me ไม่รู้ทิศทางข้อความจนหมุนหลังจัดเสร็จ (`dlg-083` จึงยังไม่นับผ่าน)
+- รูปแบบอื่น (RTF `\fittext`, ODT) ยังไม่เขียน/อ่าน Fit Text และ Two Lines in One
 
 ## [1.1.2] - 2026-11-02
 

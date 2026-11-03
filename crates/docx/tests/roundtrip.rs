@@ -107,6 +107,14 @@ fn every_char_prop_round_trips() {
         })),
         lang: Some("fr-FR".into()),
         ligatures: Some("standardContextual".into()),
+        fit_text: Some(doc4me_doc::props::FitText { width: 36.0, id: Some(2) }),
+        east_asian: Some(doc4me_doc::props::EastAsianLayout {
+            id: Some(5),
+            combine: true,
+            brackets: doc4me_doc::props::CombineBrackets::Square,
+            vert: false,
+            vert_compress: false,
+        }),
         no_proof: Some(true),
         rtl: Some(false),
         cs: Some(true),
@@ -2390,4 +2398,46 @@ fn kerning_and_ligatures_round_trip() {
     let bytes = doc4me_docx::write(&d).expect("write");
     let r = doc4me_docx::read(&bytes).expect("read");
     assert_eq!(r.styles.default_chr.ligatures, None);
+}
+
+/// Fit Text (`w:fitText`) and Two Lines in One / Horizontal in Vertical (`w:eastAsianLayout`)
+/// come back as they were saved, ids and brackets too; `rPr` keeps the schema's element order.
+#[test]
+fn asian_layout_run_properties_round_trip() {
+    use doc4me_doc::props::{CharProps, CombineBrackets, EastAsianLayout, FitText};
+    let fit = CharProps { fit_text: Some(FitText { width: 72.0, id: Some(3) }), ..Default::default() };
+    let combine = CharProps {
+        east_asian: Some(EastAsianLayout { id: Some(7), combine: true, brackets: CombineBrackets::Curly, ..Default::default() }),
+        ..Default::default()
+    };
+    let vert = CharProps {
+        east_asian: Some(EastAsianLayout { vert: true, vert_compress: true, ..Default::default() }),
+        shading: Some(Rgb::parse("FFFF00").unwrap()),
+        lang: Some("ja-JP".into()),
+        ..Default::default()
+    };
+    let mut p = Paragraph::new();
+    for (text, props) in [("東京都", &fit), ("株式会社", &combine), ("12", &vert)] {
+        let n = p.len();
+        p.insert_text(n, text, props).unwrap();
+    }
+    let d = rt(&doc_with(vec![p]));
+    let q = paras(&d)[0];
+    let at = |w: &str| q.props_at(q.text.find(w).unwrap() + w.len()).clone();
+    assert_eq!(at("東京都").fit_text, fit.fit_text);
+    assert_eq!(at("株式会社").east_asian, combine.east_asian);
+    assert_eq!(at("12").east_asian, vert.east_asian);
+    // The written XML: fitText after shd, eastAsianLayout after lang (ECMA-376 CT_RPr order).
+    let out = doc4me_docx::write(&doc_with(vec![{
+        let mut p = Paragraph::new();
+        p.insert_text(0, "12", &CharProps { fit_text: fit.fit_text, ..vert.clone() }).unwrap();
+        p
+    }]))
+    .unwrap();
+    let mut z = zip::ZipArchive::new(std::io::Cursor::new(out)).unwrap();
+    let mut xml = String::new();
+    std::io::Read::read_to_string(&mut z.by_name("word/document.xml").unwrap(), &mut xml).unwrap();
+    let pos = |t: &str| xml.find(t).unwrap_or_else(|| panic!("{t} missing from {xml}"));
+    assert!(pos("<w:shd ") < pos("<w:fitText ") && pos("<w:lang ") < pos("<w:eastAsianLayout "), "{xml}");
+    assert!(xml.contains(r#"<w:fitText w:val="1440" w:id="3"/>"#) && xml.contains(r#"w:vert="1" w:vertCompress="1""#), "{xml}");
 }

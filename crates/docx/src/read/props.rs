@@ -168,6 +168,21 @@ impl PropCtx {
                 }
                 "w:bdr" => c.border = Some(border(k)),
                 "w:shd" => c.shading = self.shd_fill(k),
+                "w:fitText" => {
+                    let id = k.attr("w:id").and_then(|v| v.trim().parse::<u32>().ok());
+                    c.fit_text = tw(k, "w:val").and_then(|width| doc4me_doc::props::FitText { width, id }.sanitized());
+                }
+                "w:eastAsianLayout" => {
+                    let on = |a: &str| k.attr(a).is_some_and(|v| matches!(v, "1" | "true" | "on"));
+                    let l = doc4me_doc::props::EastAsianLayout {
+                        id: k.attr("w:id").and_then(|v| v.trim().parse::<u32>().ok()),
+                        combine: on("w:combine"),
+                        brackets: k.attr("w:combineBrackets").map_or_else(Default::default, doc4me_doc::props::CombineBrackets::from_ooxml),
+                        vert: on("w:vert"),
+                        vert_compress: on("w:vertCompress"),
+                    };
+                    c.east_asian = Some(l);
+                }
                 "w:vertAlign" => {
                     c.vert_align = k.attr("w:val").map(|v| match v {
                         "superscript" => VertAlign::Superscript,

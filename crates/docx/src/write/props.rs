@@ -93,6 +93,13 @@ pub fn rpr_inner(w: &mut W, c: &CharProps) {
     if let Some(s) = c.shading {
         w.empty("w:shd", &[("w:val", "clear"), ("w:color", "auto"), ("w:fill", &s.hex())]);
     }
+    if let Some(f) = c.fit_text.and_then(doc4me_doc::props::FitText::sanitized) {
+        let val = twips(f.width);
+        match f.id {
+            Some(id) => w.empty("w:fitText", &[("w:val", &val), ("w:id", &id.to_string())]),
+            None => w.val("w:fitText", &val),
+        }
+    }
     if let Some(v) = c.vert_align {
         w.val(
             "w:vertAlign",
@@ -110,6 +117,26 @@ pub fn rpr_inner(w: &mut W, c: &CharProps) {
         (Some(l), None) => w.val("w:lang", l),
         (None, Some(b)) => w.empty("w:lang", &[("w:bidi", b)]),
         (None, None) => {}
+    }
+    if let Some(l) = &c.east_asian {
+        let id = l.id.map(|v| v.to_string());
+        let mut a: Vec<(&str, &str)> = Vec::new();
+        if let Some(id) = &id {
+            a.push(("w:id", id));
+        }
+        if l.combine {
+            a.push(("w:combine", "1"));
+            if l.brackets != doc4me_doc::props::CombineBrackets::None {
+                a.push(("w:combineBrackets", l.brackets.ooxml()));
+            }
+        }
+        if l.vert {
+            a.push(("w:vert", "1"));
+            if l.vert_compress {
+                a.push(("w:vertCompress", "1"));
+            }
+        }
+        w.empty("w:eastAsianLayout", &a);
     }
     if let Some(fx) = &c.text_effects {
         super::wordart::rpr_effects(w, fx);

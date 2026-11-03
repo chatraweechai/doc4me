@@ -1841,6 +1841,9 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "review.chineseConversion" if !has("to") => Some("chineseConversion"),
         // Enclose Characters without a shape (null is one: it takes the enclosure away).
         "format.enclose" if params.get("shape").is_none() => Some("enclose"),
+        // Asian Layout: Fit Text without a width, Two Lines in One without on or off.
+        "format.fitText" if params.get("width").is_none() => Some("fitText"),
+        "format.twoLinesInOne" if !has("value") => Some("twoLinesInOne"),
         // Footnote and Endnote without settings shows its dialog (#385).
         "references.noteOptions" if params.as_object().is_none_or(|m| m.is_empty()) => Some("noteOptions"),
         // References dialogs (#402): Insert Caption, Insert Index, Mark Entry, Manage Sources and
@@ -2067,6 +2070,33 @@ mod tests {
         a.run("format.enclose", json!({})).unwrap();
         let Some(dialogs::Dialog::Enclose { style, shape, .. }) = a.dialog.clone() else { panic!("no dialog") };
         assert_eq!((style.as_str(), shape.as_str()), ("enlarge", "square"));
+    }
+
+    /// Home › Paragraph › Asian Layout: Fit Text and Two Lines in One open their dialogs on the
+    /// selected text, which show what it has; a value applies without the dialog.
+    #[test]
+    fn asian_layout_buttons_open_their_dialogs() {
+        let mut a = app();
+        a.run("text.insert", json!({"text": "a 東京都 b"})).unwrap();
+        a.run("select.text", json!({"text": "東京都"})).unwrap();
+        a.run("format.fitText", json!({})).unwrap();
+        let Some(dialogs::Dialog::FitText { width, existing }) = a.dialog.clone() else { panic!("no dialog: {:?}", a.dialog) };
+        assert_eq!((width, existing), (72.0, false));
+        a.dialog = None;
+        a.run("format.fitText", json!({"width": 60})).unwrap();
+        assert!(a.dialog.is_none(), "a width applies without the dialog");
+        a.run("format.fitText", json!({})).unwrap();
+        let Some(dialogs::Dialog::FitText { width, existing }) = a.dialog.clone() else { panic!("no dialog") };
+        assert_eq!((width, existing), (60.0, true));
+        a.dialog = None;
+        a.run("format.twoLinesInOne", json!({})).unwrap();
+        let Some(dialogs::Dialog::TwoLinesInOne { on, brackets, existing }) = a.dialog.clone() else { panic!("no dialog") };
+        assert_eq!((on, brackets.as_str(), existing), (true, "none", false));
+        a.dialog = None;
+        a.run("format.twoLinesInOne", json!({"value": true, "brackets": "square"})).unwrap();
+        a.run("format.twoLinesInOne", json!({})).unwrap();
+        let Some(dialogs::Dialog::TwoLinesInOne { brackets, existing, .. }) = a.dialog.clone() else { panic!("no dialog") };
+        assert_eq!((brackets.as_str(), existing), ("square", true));
     }
 
     /// Issue #139: Ctrl+wheel over the page didn't zoom.
