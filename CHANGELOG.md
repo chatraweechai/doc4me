@@ -11,6 +11,15 @@
 
 ## [Unreleased]
 
+### เพิ่ม
+
+- **workflow วัด readiness บน Windows** (`.github/workflows/readiness-windows.yml`, เรียกจากแท็บ Actions ด้วย workflow_dispatch เท่านั้น)
+  - เหตุผล: ผู้ใช้สั่ง (2026-11-03) ให้วัด readiness บน Windows ทุกครั้งและบันทึกใน handoff กับ roadmap; session นี้เป็น Linux และคลังทดสอบไม่อยู่ใน git จึงวัดบน Windows เองไม่ได้
+  - ทำงาน: ติดตั้ง poppler ผ่าน choco, ดาวน์โหลดคลัง (ลองซ้ำสูงสุด 3 ครั้ง), รัน `cargo xtask readiness --corpus --jobs 4` บน windows-latest, สรุปคะแนนลง step summary แล้ว commit `docs/readiness.md` กลับเข้า `main` ด้วย `[skip ci]`
+  - ผู้ใช้: ไม่กระทบตัวโปรแกรมหรือไฟล์ .docx; ไม่รันเองตอน push (ใช้นาทีของ runner เฉพาะเมื่อกดรัน)
+  - ตรวจสอบ: ตรวจ YAML ด้วย parser แล้ว; ผลวัดจริงจะบันทึกหลังรัน workflow ครั้งแรก (ดู handoff/ROADMAP)
+  - ความปลอดภัย: สิทธิ์ `contents: write` ให้เฉพาะ job นี้เพื่อ push ผลวัด; action ทุกตัวปักที่ SHA เดียวกับ workflow installer
+
 ### แก้ไข
 
 - **ผลลัพธ์ของฟิลด์ (FORMTEXT, FILLIN ฯลฯ) ตัดบรรทัดตามช่องว่างเหมือนข้อความปกติ** (`crates/layout/src/para.rs`: `shape_wrappable`, `shape_pieces`, `Builder::wrap_after`)
