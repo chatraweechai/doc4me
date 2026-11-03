@@ -1,16 +1,16 @@
 id	language	culture	catalog
-lang-001	Afrikaans	af-ZA	-
-lang-002	Albanian	sq-AL	-
+lang-001	Afrikaans	af-ZA	af
+lang-002	Albanian	sq-AL	sq
 lang-003	Arabic	ar-SA	-
 lang-004	Armenian	hy-AM	-
 lang-005	Assamese	as-IN	-
-lang-006	Azerbaijani (Latin)	az-Latn-AZ	-
+lang-006	Azerbaijani (Latin)	az-Latn-AZ	az
 lang-007	Bangla (Bangladesh)	bn-BD	-
 lang-008	Bangla (Bengali India)	bn-IN	-
-lang-009	Basque (Basque)	eu-ES	-
-lang-010	Bosnian (Latin)	bs-latn-BA	-
-lang-011	Bulgarian	bg-BG	-
-lang-012	Catalan	ca-ES	-
+lang-009	Basque (Basque)	eu-ES	eu
+lang-010	Bosnian (Latin)	bs-latn-BA	bs
+lang-011	Bulgarian	bg-BG	bg
+lang-012	Catalan	ca-ES	ca
 lang-013	Catalan (Valencia)	ca-ES-valencia	-
 lang-014	Chinese (Simplified)	zh-CN	zh-hans
 lang-015	Chinese (Traditional)	zh-TW	zh-hant
@@ -24,19 +24,19 @@ lang-022	Estonian	et-EE	et
 lang-023	Finnish	fi-FI	fi
 lang-024	French	fr-FR	fr
 lang-025	French Canada [1]	fr-CA	fr-ca
-lang-026	Galician	gl-ES	-
+lang-026	Galician	gl-ES	gl
 lang-027	Georgian	ka-GE	-
 lang-028	German	de-DE	de
-lang-029	Greek	el-GR	-
+lang-029	Greek	el-GR	el
 lang-030	Gujarati	gu-IN	-
 lang-031	Hausa	ha-Latn-NG	-
 lang-032	Hebrew	he-IL	-
 lang-033	Hindi	hi-IN	-
 lang-034	Hungarian	hu-HU	hu
-lang-035	Icelandic	is-IS	-
+lang-035	Icelandic	is-IS	is
 lang-036	Igbo	ig-NG	-
-lang-037	Indonesian	id-ID	-
-lang-038	Irish	ga-IE	-
+lang-037	Indonesian	id-ID	id
+lang-038	Irish	ga-IE	ga
 lang-039	isiXhosa	xh-ZA	-
 lang-040	isiZulu	zu-ZA	-
 lang-041	Italian	it-IT	it
@@ -48,8 +48,8 @@ lang-046	KiSwahili	sw-KE	-
 lang-047	Konkani	kok-IN	-
 lang-048	Korean	ko-KR	-
 lang-049	Kyrgyz	ky-KG	-
-lang-050	Latvian	lv-LV	-
-lang-051	Lithuanian	lt-LT	-
+lang-050	Latvian	lv-LV	lv
+lang-051	Lithuanian	lt-LT	lt
 lang-052	Luxembourgish	lb-LU	-
 lang-053	Macedonian (North Macedonia)	mk-MK	-
 lang-054	Malay (Latin)	ms-MY	-
@@ -78,7 +78,7 @@ lang-076	Sesotho sa Leboa	nso-ZA	-
 lang-077	Setswana	tn-ZA	-
 lang-078	Sinhala	si-LK	-
 lang-079	Slovak	sk-SK	sk
-lang-080	Slovenian	sl-SI	-
+lang-080	Slovenian	sl-SI	sl
 lang-081	Spanish	es-ES	es
 lang-082	Spanish Mexico [1]	es-MX	es
 lang-083	Swedish	sv-SE	sv
@@ -90,7 +90,7 @@ lang-088	Turkish	tr-TR	tr
 lang-089	Ukrainian	uk-UA	uk
 lang-090	Urdu	ur-PK	-
 lang-091	Uzbek (Latin)	uz-Latn-UZ	-
-lang-092	Vietnamese	vi-VN	-
+lang-092	Vietnamese	vi-VN	vi
 lang-093	Welsh	cy-GB	-
 lang-094	Wolof	wo-SN	-
 lang-095	Yoruba	yo-NG	-

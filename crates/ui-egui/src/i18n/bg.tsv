@@ -1,0 +1,3002 @@
+# Bulgarian (bg) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts yet)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+# Glossary: document = документ, paragraph = абзац, style = стил, table = таблица, field = поле,
+# section (of a document) = секция, ribbon tab = раздел, header/footer = горен/долен колонтитул,
+# bookmark = отметка, comment = коментар, track changes = проследяване на промените,
+# mail merge = циркулярни писма, footnote/endnote = бележка под линия / в края.
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Machine translation by an AI model (Claude), not yet reviewed by a native speaker.
+# License: MIT OR Apache-2.0.
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	„a“ или „an“ пред следващата дума; полски „w“/„we“, „z“/„ze“.
+	% of all commits	% от всички подавания
+	(All)	(Всички)
+	(Custom)	(Потребителски)
+	(no style)	(без стил)
+	(no suggestions)	(няма предложения)
+	(none)	(няма)
+	(normal text)	(нормален текст)
+	(not matched)	(няма съответствие)
+	(picture or object)	(картина или обект)
+	*Bold* and _italic_ with real formatting	*Удебелен* и _курсив_ с истинско форматиране
+	0 or More Characters	0 или повече знака
+	1. Formatting restrictions	1. Ограничения за форматиране
+	1. Main document	1. Основен документ
+	1.5 Line Spacing	Разредка 1,5 реда
+	1/4 Em Space	Интервал 1/4 em
+	1×2 Empty Matrix	Празна матрица 1×2
+	1×3 Empty Matrix	Празна матрица 1×3
+	2. Data source	2. Източник на данни
+	2. Editing restrictions	2. Ограничения за редактиране
+	2×1 Empty Matrix	Празна матрица 2×1
+	2×2 Determinant	Детерминанта 2×2
+	2×2 Empty Matrix	Празна матрица 2×2
+	2×2 Identity Matrix	Единична матрица 2×2
+	2×2 Identity Matrix (sparse)	Единична матрица 2×2 (разредена)
+	2×2 Matrix in Brackets	Матрица 2×2 в квадратни скоби
+	2×2 Matrix in Double Bars	Матрица 2×2 в двойни черти
+	2×2 Matrix in Parentheses	Матрица 2×2 в кръгли скоби
+	2×3 Empty Matrix	Празна матрица 2×3
+	3-D	3D
+	3. Merge the data with the document	3. Слейте данните с документа
+	3. Start enforcement	3. Започнете прилагането
+	3D Models	3D модели
+	3×1 Empty Matrix	Празна матрица 3×1
+	3×2 Empty Matrix	Празна матрица 3×2
+	3×3 Empty Matrix	Празна матрица 3×3
+	3×3 Identity Matrix	Единична матрица 3×3
+	3×3 Identity Matrix (sparse)	Единична матрица 3×3 (разредена)
+	5,000 characters a day; give an email address for 50,000.	5000 знака на ден; посочете имейл адрес за 50 000.
+	<< Less	<< По-малко
+	<< Remove	<< Премахни
+	A file dialog is already open.	Вече е отворен диалогов прозорец за файл.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Безплатен текстов редактор с отворен код, написан от нулата на Rust.\nБазиран на WordCraft от екипа на ArtCraft.
+	A header source holds the field names for a data source without a header row.	Файлът със заглавен ред съдържа имената на полетата за източник на данни без заглавен ред.
+	A mail merge field	Поле за циркулярно писмо
+	A new document lists the commands with their shortcuts.	Нов документ изброява командите с техните клавишни комбинации.
+	A numbered sequence (figures, tables…)	Номерирана поредица (фигури, таблици…)
+	A password is required to open this document.	За отваряне на този документ е нужна парола.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Интервал преди пунктуация, удвоени знаци, полски запетаи пред съюзи.
+	A table of contents	Съдържание
+	A table's rows keep the same columns here.	Редовете на таблицата запазват едни и същи колони тук.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Относно
+	About Doc4Me	Относно Doc4Me
+	Above Chart	Над диаграмата
+	Above the item	Над елемента
+	Absolute position	Абсолютна позиция
+	Absolute value cases	Случаи с абсолютна стойност
+	Accent	Акцент
+	Accent Gradient	Акцентен градиент
+	Accent with Reflection	Акцент с отражение
+	Accent {n}	Акцент {n}
+	Accents	Акценти
+	Accept	Приеми
+	Accept All	Приеми всички
+	Accept All Changes	Приеми всички промени
+	Accept or Reject Changes	Приемане или отхвърляне на промени
+	Accept This Change	Приеми тази промяна
+	Accessed on	Достъпено на
+	Accessibility	Достъпност
+	Accessibility Pane	Екран за достъпност
+	Acute	Остро ударение
+	Add	Добави
+	Add >>	Добави >>
+	Add a comment	Добавете коментар
+	Add a Table	Добави таблица
+	Add at least one field.	Добавете поне едно поле.
+	Add caption when inserting:	Добавяне на надпис при вмъкване:
+	Add Chart Element	Добави елемент на диаграма
+	Add Field	Добави поле
+	Add Field Name	Добави име на поле
+	Add Font…	Добави шрифт…
+	Add line numbering	Добави номериране на редовете
+	Add New Placeholder	Добави нов контейнер
+	Add New Placeholder…	Добави нов контейнер…
+	Add New Source…	Добави нов източник…
+	Add Object to Selection	Добави обект към селекцията
+	Add Pen	Добави писалка
+	Add Row	Добави ред
+	Add Series	Добави серия
+	Add Shape	Добави фигура
+	Add Space Before Paragraph	Добави интервал преди абзаца
+	Add space between Asian and Latin text	Добавяне на интервал между азиатски и латински текст
+	Add space between Asian text and numbers	Добавяне на интервал между азиатски текст и числа
+	Add tab stop at:	Добавяне на позиция за табулация при:
+	Add Text	Добави текст
+	Add the chapter number	Добавяне на номера на главата
+	Add to Dictionary	Добави в речника
+	Add to Document	Добави към документа
+	Add to Quick Access Toolbar	Добави в лентата с инструменти за бърз достъп
+	Add to Style Gallery	Добави в галерията със стилове
+	Add-ins	Добавки
+	Add/Edit\nBibliography	Добавяне/редактиране\nна библиография
+	Add/Edit\nCitation	Добавяне/редактиране\nна цитат
+	Add\nNote	Добави\nбележка
+	Add\nPen	Добави\nписалка
+	Add\nShape	Добави\nфигура
+	Added	Добавено
+	Added Fonts	Добавени шрифтове
+	Address	Адрес
+	Address Block	Адресен блок
+	Address labels	Етикети с адреси
+	Address:	Адрес:
+	Address\nBlock	Адресен\nблок
+	Adjust	Корекции
+	Advanced	Разширени
+	Advanced Find	Разширено търсене
+	Advanced Find…	Разширено търсене…
+	After:	След:
+	Agents	Агенти
+	Align	Подравняване
+	Align Bottom Center	Подравни долу в центъра
+	Align Bottom Left	Подравни долу вляво
+	Align Bottom Right	Подравни долу вдясно
+	Align Center	Подравни в центъра
+	Align Center Left	Подравни в центъра вляво
+	Align Center Right	Подравни в центъра вдясно
+	Align Left	Подравни вляво
+	Align Right	Подравни вдясно
+	Align Text	Подравняване на текста
+	Align Top Center	Подравни горе в центъра
+	Align Top Left	Подравни горе вляво
+	Align Top Right	Подравни горе вдясно
+	Aligned at:	Подравнено при:
+	Alignment	Подравняване
+	Alignment:	Подравняване:
+	All	Всички
+	All - Linear	Всички – линейно
+	All - Professional	Всички – професионално
+	All Borders	Всички граници
+	All Caps	Всички главни
+	All caps	Всички главни
+	All Commands	Всички команди
+	All files	Всички файлове
+	All Levels	Всички нива
+	All Markup	Всички маркировки
+	All pages	Всички страници
+	All pages in the range	Всички страници в диапазона
+	All records	Всички записи
+	All symbol sets	Всички набори символи
+	Allow Doc4Me to use online services	Позволи на Doc4Me да използва онлайн услуги
+	Allow hanging punctuation	Разрешаване на висяща пунктуация
+	Allow Latin text to wrap in the middle of a word	Разрешаване на пренасяне на латински текст в средата на дума
+	Allow line breaks	Разрешаване на нов ред
+	Allow overlap	Разрешаване на застъпване
+	Allow row to break across pages	Разрешаване на реда да се разделя между страници
+	Alphabetical	По азбучен ред
+	Alt Text	Алтернативен текст
+	Alt text	Алтернативен текст
+	Alt Text Pane	Екран за алтернативен текст
+	Alt:	Alt:
+	Alt\nText	Алтернативен\nтекст
+	And	И
+	Angle Brackets	Ъглови скоби
+	Angle Brackets with Separator	Ъглови скоби с разделител
+	Angle Brackets with Two Separators	Ъглови скоби с два разделителя
+	Animate the caret (it glides and fades)	Анимиране на курсора (плъзга се и избледнява)
+	Animation	Анимация
+	Animation effects:	Ефекти на анимация:
+	Annotation Reference	Препратка към анотация
+	Annotation Subject	Тема на анотация
+	Annotation Text	Текст на анотация
+	Another file	Друг файл
+	Any Character	Произволен знак
+	Any Digit	Произволна цифра
+	Any Letter	Произволна буква
+	Anyone can open this document. Encrypt it with a password to keep it private.	Всеки може да отвори този документ. Шифровайте го с парола, за да остане поверителен.
+	Anyone who opens the document will need this password.	Всеки, който отваря документа, ще има нужда от тази парола.
+	APA	APA
+	API key (if the server needs one)	API ключ (ако сървърът изисква такъв)
+	Apply	Приложи
+	Apply as you type	Прилагане при въвеждане
+	Apply Asian line-breaking rules (kinsoku)	Прилагане на азиатските правила за пренасяне на редове (кинсоку)
+	Apply Character Style	Приложи стил на знаци
+	Apply formatting to:	Прилагане на форматирането към:
+	Apply special formats to	Прилагане на специални формати към
+	Apply Style	Приложи стил
+	Apply Styles	Приложи стилове
+	Apply to:	Приложи към:
+	Arabic	Арабски
+	Arch Down	Арка надолу
+	Arch Up	Арка нагоре
+	Area	Площ
+	Around	Около
+	Arrange	Подреждане
+	Arrange All	Подреди всички
+	Arrange\nAll	Подреди\nвсички
+	Arrow	Стрелка
+	Arrows	Стрелки
+	Artistic Effects	Художествени ефекти
+	As Recommended	Както е препоръчано
+	As you type	При въвеждане
+	ASAP	Възможно най-скоро
+	Ascending	Възходящо
+	Asian text font:	Шрифт за азиатски текст:
+	Asian Typography	Азиатска типография
+	Assign	Присвои
+	At least	Най-малко
+	At least {n}	Най-малко {n}
+	Atelier	Ателие
+	Atmosphere	Атмосфера
+	Attach Template	Прикачи шаблон
+	Attach…	Прикачи…
+	Author	Автор
+	Auto	Автоматично
+	AutoCaption	Автонадпис
+	AutoCaption…	Автонадпис…
+	AutoComplete	Автодовършване
+	AutoCorrect	Автокорекция
+	AutoCorrect Options	Опции за автокорекция
+	AutoFit	Автопобиране
+	AutoFit Contents	Автопобиране по съдържанието
+	AutoFit Window	Автопобиране по прозореца
+	AutoFormat	Автоформатиране
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Автоформатирането (Ctrl+Alt+K) форматира избраните абзаци или целия документ.
+	AutoFormat and Review Changes…	Автоформатиране и преглед на промените…
+	AutoFormat As You Type	Автоформатиране при въвеждане
+	AutoFormat changed {count} paragraphs	Автоформатирането промени {count} абзаца
+	AutoFormat Now	Автоформатирай сега
+	Automatic	Автоматично
+	Automatic ({language})	Автоматично ({language})
+	Automatic bulleted lists	Автоматични списъци с водещи символи
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Автоматично следва езика на системата. Менютата и командите се променят; документите ви не.
+	Automatic numbered lists	Автоматични номерирани списъци
+	Automatic Table 1 (3 levels)	Автоматична таблица 1 (3 нива)
+	Automatic Table 2 (2 levels)	Автоматична таблица 2 (2 нива)
+	Automatically hyphenate document	Автоматично сричкопренасяне в документа
+	Automatically Update Document Styles	Автоматично актуализиране на стиловете на документа
+	Automatically update document styles	Автоматично актуализиране на стиловете на документа
+	AutoSave	Автозаписване
+	AutoSave documents you have saved in Doc4Me	Автозаписване на документите, които сте записали в Doc4Me
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Автозаписването е неуспешно: {error}. Запишете документа, за да включите отново автозаписването.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Автозаписването не е налично в браузъра: то не може да записва във вашите файлове. „Запиши“ изтегля копие.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Автозаписването поддържа само файлове .docx, .odt и .rtf; {name} не може да запази цялото форматиране. Запишете като .docx, за да включите автозаписването.
+	AutoSave saves every change to the file (needs a saved document)	Автозаписването записва всяка промяна във файла (нужен е записан документ)
+	AutoSave writes your changes to the file a moment after you stop typing.	Автозаписването записва промените ви във файла малко след като спрете да пишете.
+	AutoText	Автотекст
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Back	Назад
+	Backspace	Backspace
+	Balloons	Балончета
+	Banded Columns	Редуващи се колони
+	Banded Rows	Редуващи се редове
+	Bar	Лента
+	Base text:	Основен текст:
+	Based on: {style}	Базиран на: {style}
+	Baseline Dots	Точки на базовата линия
+	Basic Cycle	Основен цикъл
+	Basic List	Основен списък
+	Basic Math	Основна математика
+	Basic Matrix	Основна матрица
+	Basic Process	Основен процес
+	Basic Pyramid	Основна пирамида
+	Basic Radial	Основна радиална
+	Basic Venn	Основна диаграма на Вен
+	Bayes' rule	Правило на Бейс
+	Before:	Преди:
+	Beginning of Word	Начало на дума
+	Behind Text	Зад текста
+	Below text	Под текста
+	Below the item	Под елемента
+	Between	Между
+	Bibliography	Библиография
+	Binary assets added	Добавени двоични ресурси
+	Binary assets removed	Премахнати двоични ресурси
+	Binomial Coefficient	Биномен коефициент
+	Binomial Coefficient (angle)	Биномен коефициент (ъглов)
+	Binomial Coefficient with Angle Brackets	Биномен коефициент с ъглови скоби
+	Binomial expansion of (x+a)ⁿ	Биномно разлагане на (x+a)ⁿ
+	Blank	Празно
+	Blank (Three Columns)	Празно (три колони)
+	Blank document	Празен документ
+	Blank Page	Празна страница
+	Block\nAuthors	Блокиране\nна автори
+	Blue:	Синьо:
+	Body Text	Основен текст
+	Body text in a short paragraph to show spacing.	Основен текст в кратък абзац, за да се покаже разстоянието.
+	Bold	Удебелен
+	Book	Книга
+	Book Title	Заглавие на книга
+	Book title	Заглавие на книга
+	Bookmark	Отметка
+	Bookmark name:	Име на отметката:
+	Border lines	Линии на границите
+	Border Painter	Рисуване на граници
+	Border\nPainter	Рисуване\nна граници
+	Borders	Граници
+	Borders and Shading	Граници и засенчване
+	Borders and Shading…	Граници и засенчване…
+	Border…	Граница…
+	Both Sides	От двете страни
+	Both sides	От двете страни
+	Bottom	Долу
+	Bottom Border	Долна граница
+	Bottom Margin	Долно поле
+	Bottom of Page	Долу на страницата
+	Bottom of the Window	Долу в прозореца
+	Bottom:	Долу:
+	Box	Каре
+	Boxed Formula	Формула в каре
+	Boxed Formula (example)	Формула в каре (пример)
+	Boxed Formulas	Формули в каре
+	Braces	Фигурни скоби
+	Braces with Separator	Фигурни скоби с разделител
+	Bracket	Скоба
+	Brackets	Скоби
+	Brackets with Separators	Скоби с разделители
+	Break Link	Прекъсни връзката
+	Breaks	Прекъсвания
+	Breve	Бреве
+	Brightness, contrast and transparency change the picture from how it looks now.	Яркостта, контрастът и прозрачността променят картината спрямо сегашния ѝ вид.
+	Brightness:	Яркост:
+	Bring Forward	Премести напред
+	Browse in Doc4Me…	Преглед в Doc4Me…
+	Browse…	Преглед…
+	Build table of figures from:	Изграждане на таблица с фигури от:
+	Building Block Gallery Content Control	Контрола за съдържание „Галерия със стандартни блокове“
+	Built from the style or table entry fields chosen in Options.	Изградено от стиловете или полетата за елементи на таблица, избрани в „Опции“.
+	Built-In	Вградени
+	Built-in Heading styles	Вградени стилове за заглавия
+	Built-in style	Вграден стил
+	Built-in styles can't be deleted.	Вградените стилове не могат да се изтриват.
+	Bullet	Водещ символ
+	Bullet Library	Библиотека с водещи символи
+	Bullets	Водещи символи
+	By author	По автор
+	By:	От:
+	Calendar	Календар
+	Can't be deleted	Не може да се изтрие
+	Cancel	Отказ
+	Canvas Member	Член на платното
+	Capitalization	Главни букви
+	Capitalize Each Word	Всяка дума с главна буква
+	Capitalize first letter of sentences	Главна първа буква на изреченията
+	Capitalize first letter of table cells	Главна първа буква в клетките на таблица
+	Capitalize names of days	Главна буква в имената на дните
+	Capitalize the first word of a sentence	Главна буква на първата дума в изречение
+	Caption	Надпис
+	Caption label:	Етикет на надписа:
+	Caption Numbering	Номериране на надписите
+	Caption text	Текст на надписа
+	Caption:	Надпис:
+	Captions	Надписи
+	Caret Character	Знак „карет“
+	Case changes	Промени на регистъра
+	Cases	Случаи
+	Cases (Three Conditions)	Случаи (три условия)
+	Cases (Two Conditions)	Случаи (две условия)
+	Cases and Stacks	Случаи и стекове
+	Catalog	Каталог
+	Categories	Категории
+	Categories:	Категории:
+	Category	Категория
+	Category {n}	Категория {n}
+	Category:	Категория:
+	Category…	Категория…
+	Ceiling	Таван
+	Cell	Клетка
+	Cell Margins	Полета на клетката
+	Cell margins	Полета на клетката
+	Cell Options	Опции за клетката
+	Cell Size	Размер на клетката
+	Cell\nMargins	Полета на\nклетката
+	Center	Центриране
+	Centered	Центрирано
+	Centered as Group	Центрирано като група
+	Centimeters	Сантиметри
+	Change	Промени
+	Change Case	Промяна на регистъра
+	Change Chart Type	Промени типа на диаграмата
+	Change Colors	Промени цветовете
+	Change in y over change in x	Промяна на y спрямо промяна на x
+	Change Layout	Промени оформлението
+	Change List Level	Промени нивото в списъка
+	Change Password…	Промени паролата…
+	Change Picture	Промени картината
+	Change Picture…	Промени картината…
+	Change Shape	Промени фигурата
+	Change Structure	Промени структурата
+	Change to Display	Превърни в показано
+	Change to Inline	Превърни във вградено
+	Change to Level 1	Превърни в ниво 1
+	Change to Level 2	Превърни в ниво 2
+	Change to Level 3	Превърни в ниво 3
+	Change to Level 4	Превърни в ниво 4
+	Change to Level 5	Превърни в ниво 5
+	Change to Level 6	Превърни в ниво 6
+	Change to Level 7	Превърни в ниво 7
+	Change to Level 8	Превърни в ниво 8
+	Change to Level 9	Превърни в ниво 9
+	Change\nChart Type	Промяна на\nтипа диаграма
+	Change\nColors	Промяна на\nцветовете
+	Changed	Променено
+	Changed lines:	Променени редове:
+	Changes	Промени
+	Changes with highlighting	Промени с осветяване
+	Changes without highlighting	Промени без осветяване
+	Chapter in a book	Глава от книга
+	Chapters begin at:	Главите започват с:
+	Character	Знак
+	Character Border	Граница на знаците
+	Character code:	Код на знака:
+	Character in Range	Знак в диапазон
+	Character level	Ниво на знак
+	Character Position	Позиция на знаците
+	Character Scale	Мащаб на знаците
+	Character Shading	Засенчване на знаците
+	Character Spacing	Разредка на знаците
+	Character spacing	Разредка на знаците
+	Character style	Стил на знаци
+	Characters	Знаци
+	Characters (no spaces)	Знаци (без интервали)
+	Characters (with spaces)	Знаци (с интервали)
+	Characters per line:	Знаци на ред:
+	Chart	Диаграма
+	Chart Design	Дизайн на диаграма
+	Chart Layouts	Оформления на диаграма
+	Chart Title	Заглавие на диаграмата
+	Check	Проверка
+	Check Accessibility	Провери достъпността
+	Check Box Content Control	Контрола за съдържание „Квадратче за отметка“
+	Check Compatibility	Провери съвместимостта
+	Check Errors…	Провери за грешки…
+	Check for Errors	Провери за грешки
+	Check Spelling as You Type	Проверка на правописа при въвеждане
+	Check spelling as you type	Проверка на правописа при въвеждане
+	Check\nAccessibility	Проверка на\nдостъпността
+	Checked styles are allowed:	Отметнатите стилове са разрешени:
+	Checked symbol	Отметнат символ
+	Chevron Down	Шеврон надолу
+	Chevron Up	Шеврон нагоре
+	Chicago	Chicago
+	Chinese (Simplified)	Китайски (опростен)
+	Chinese (Traditional)	Китайски (традиционен)
+	Choose a command	Изберете команда
+	Choose a shortcut	Изберете клавишна комбинация
+	Choose List Item	Избор на елемент от списъка
+	Choose the sheet that holds the recipients.	Изберете листа, който съдържа получателите.
+	Circle	Кръг
+	Circle area from its radius	Лице на кръг по радиуса му
+	Circled Dot	Точка в кръг
+	Circled Plus	Плюс в кръг
+	Circled Times	Знак за умножение в кръг
+	Citation marked.	Цитатът е маркиран.
+	Citation Style	Стил на цитиране
+	Citations	Цитати
+	Citations & Bibliography	Цитати и библиография
+	City	Град
+	Clear	Изчисти
+	Clear All	Изчисти всички
+	Clear All Formatting	Изчисти цялото форматиране
+	Clear Character Formatting	Изчисти форматирането на знаците
+	Clear Character Style	Изчисти стила на знаците
+	Clear Formatting Level	Ниво на изчистване на форматирането
+	Clear Paragraph Formatting	Изчисти форматирането на абзаца
+	Click a border between two cells to merge them. Esc stops.	Щракнете върху граница между две клетки, за да ги слеете. Esc спира.
+	Click an item to paste it.	Щракнете върху елемент, за да го поставите.
+	Click level to modify:	Щракнете върху нивото за промяна:
+	Click the empty text box the text should continue in (Esc cancels)	Щракнете върху празното текстово поле, в което текстът да продължи (Esc отказва)
+	Click to switch back to inserting	Щракнете, за да се върнете към вмъкване
+	Clipboard	Клипборд
+	Clipboard Contents	Съдържание на клипборда
+	Clipboard Items	Елементи в клипборда
+	Clipboard Pane	Екран за клипборда
+	Close	Затвори
+	Close Equation	Затвори уравнението
+	Close Header and Footer	Затвори горния и долния колонтитул
+	Close Outline View	Затвори изгледа „Структура“
+	Close Outline\nView	Затвори изгледа\n„Структура“
+	Close Reviewing Pane	Затвори екрана за преглед
+	Clustered Bar	Групирани ленти
+	Clustered Column	Групирани колони
+	Col #:	Колона №:
+	Collapse	Свий
+	Collapse Selection	Свий селекцията
+	Collapse the Ribbon	Свий лентата
+	Collate copies	Подреждане на копията
+	Collect entries from:	Събиране на елементи от:
+	Colon Equal	Двоеточие равно
+	Color	Цвят
+	Color model:	Цветови модел:
+	Color only	Само цвят
+	Color:	Цвят:
+	Color: {color}	Цвят: {color}
+	Colorful	Цветно
+	Colors	Цветове
+	Colors:	Цветове:
+	Column	Колона
+	Column Break	Прекъсване на колона
+	Column Selection	Избор на колона
+	Column selection: the arrow keys extend the block, Esc ends it	Избор на колона: клавишите със стрелки разширяват блока, Esc го приключва
+	Column width	Ширина на колоната
+	Column:	Колона:
+	Columns	Колони
+	Columns:	Колони:
+	Combine	Комбиниране
+	Combine Documents	Комбиниране на документи
+	Combo Box Content Control	Контрола за съдържание „Разгъващо се поле“
+	Commands	Команди
+	Commands:	Команди:
+	Comment	Коментар
+	Comments	Коментари
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Коментари до всяка страница и проследени промени в PDF файлове, разпечатки и изображения; списък с коментари в края на уеб страници, Markdown и текст.
+	Comments on version	Коментари към версията
+	Comments Pane	Екран за коментари
+	Commits	Подавания
+	Common Accent Objects	Често използвани обекти с акценти
+	Common Brackets	Често използвани скоби
+	Common Fractions	Често използвани дроби
+	Common Functions	Често използвани функции
+	Common Large Operators	Често използвани големи оператори
+	Common Operator Structures	Често използвани структури с оператори
+	Common Operators	Често използвани оператори
+	Common Radicals	Често използвани корени
+	Common Subscripts and Superscripts	Често използвани долни и горни индекси
+	Communication	Комуникация
+	Compact	Компактно
+	Company	Фирма
+	Compare	Сравни
+	Compare Documents	Сравняване на документи
+	Compare to	Сравняване с
+	Compared: {changes} changes	Сравнено: {changes} промени
+	Comparing with another file needs the desktop app.	Сравняването с друг файл изисква настолното приложение.
+	Comparison	Сравнение
+	Comparison settings	Настройки за сравнение
+	Compatibility mode: {version}	Режим на съвместимост: {version}
+	Compatibility Options	Опции за съвместимост
+	Compatibility Options…	Опции за съвместимост…
+	Compress Pictures	Компресиране на картини
+	Compress punctuation at the start of a line	Сгъстяване на пунктуацията в началото на реда
+	Condensed	Сгъстено
+	Conference	Конференция
+	Conference paper	Доклад от конференция
+	CONFIDENTIAL	ПОВЕРИТЕЛНО
+	Confirm password:	Потвърдете паролата:
+	Connect Shapes	Свързване на фигури
+	Constitutional Provisions	Конституционни разпоредби
+	Container Title	Заглавие на контейнера
+	Contains	Съдържа
+	Content Control at Selection	Контрола за съдържание в селекцията
+	Content Control Properties	Свойства на контролата за съдържание
+	Contents can't be edited	Съдържанието не може да се редактира
+	Context	Контекст
+	Contextual	Контекстуални
+	Continuous	Непрекъснато
+	Continuous numbering	Непрекъснато номериране
+	Contour Integral	Контурен интеграл
+	Contour Integral with Limits	Контурен интеграл с граници
+	Contour Integral with Stacked Limits	Контурен интеграл с граници една над друга
+	Contour Integrals	Контурни интеграли
+	Contrast:	Контраст:
+	Contributors	Сътрудници
+	Controls	Контроли
+	Conversions	Преобразувания
+	Convert	Преобразувай
+	Convert between built-up and linear form	Преобразуване между двумерна и линейна форма
+	Convert Notes	Преобразувай бележките
+	Convert Permanently	Преобразувай за постоянно
+	Convert Text to Table	Преобразуване на текст в таблица
+	Convert Text to Table…	Преобразуване на текст в таблица…
+	Convert to Arabic Digits	Преобразувай в арабски цифри
+	Convert to Shapes	Преобразувай във фигури
+	Convert to Text	Преобразувай в текст
+	Convert to Thai Digits	Преобразувай в тайландски цифри
+	Copies	Копия
+	Coproduct	Копроизведение
+	Coproduct with Limits	Копроизведение с граници
+	Coproduct with Lower Limit	Копроизведение с долна граница
+	Coproduct with Subscript-Superscript Limits	Копроизведение с граници като долен и горен индекс
+	Copy	Копирай
+	Copy Formatting	Копирай форматирането
+	Copy of the text a bookmark marks	Копие на текста, маркиран с отметка
+	Copy Styles	Копирай стиловете
+	Copy Text	Копирай текста
+	Copy to where?	Къде да се копира?
+	Copyright	Авторско право
+	Copyright Sign	Знак за авторско право
+	Corrections	Корекции
+	Cosecant Function	Функция косеканс
+	Cosine 2x	Косинус от 2x
+	Cosine Function	Функция косинус
+	Cotangent Function	Функция котангенс
+	Couldn't add {name}: {reason}	Не може да се добави {name}: {reason}
+	Couldn't download the picture: {reason}	Картината не може да се изтегли: {reason}
+	Couldn't download {name}: {error}	{name} не може да се изтегли: {error}
+	Couldn't get the add-in list: {reason}	Списъкът с добавки не може да се получи: {reason}
+	Couldn't make Doc4Me the default: {error}	Doc4Me не може да стане приложение по подразбиране: {error}
+	Couldn't open {path}: {error}	{path} не може да се отвори: {error}
+	Couldn't search: {reason}	Търсенето е неуспешно: {reason}
+	Couldn't translate: {reason}	Преводът е неуспешен: {reason}
+	Count by:	Брой през:
+	Count words in text boxes and notes	Броене на думите в текстови полета и бележки
+	Country	Държава
+	Courtesy Title	Обръщение
+	Cover Page	Заглавна страница
+	Craft	Занаят
+	Create	Създай
+	Create a Style	Създаване на стил
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Създайте интерактивна структура на документа си.\n\nТова е чудесен начин да следите къде се намирате или бързо да премествате съдържанието.\n\nЗа да започнете, отидете в раздела „Начало“ и приложете стилове за заглавия към заглавията в документа.
+	Create Data Source…	Създаване на източник на данни…
+	Create Graphic	Създаване на графика
+	Create Header Source	Създаване на източник на заглавен ред
+	Create Link	Създай връзка
+	Create New Style	Създаване на нов стил
+	Create Source	Създай източник
+	Create…	Създай…
+	Crop	Изрязване
+	Cross-reference	Кръстосана препратка
+	Cross-reference:	Кръстосана препратка:
+	Cube Root	Кубичен корен
+	Current	Текущ
+	Current - Linear	Текущ – линейно
+	Current - Professional	Текущ – професионално
+	Current keyboard settings	Текущи настройки на клавиатурата
+	Current page	Текуща страница
+	Current Position	Текуща позиция
+	Current record	Текущ запис
+	Current style: {style}	Текущ стил: {style}
+	Curved Arrow Connector	Извита съединителна стрелка
+	Curved Connector	Извит съединител
+	Custom	Потребителски
+	Custom dictionary	Потребителски речник
+	Custom Margins…	Потребителски полета…
+	Custom mark:	Потребителски знак:
+	Custom range	Потребителски диапазон
+	Custom Table of Contents	Потребителско съдържание
+	Custom Table of Contents…	Потребителско съдържание…
+	Custom Watermark	Потребителски воден знак
+	Custom Watermark…	Потребителски воден знак…
+	Customize	Персонализиране
+	Customize Keyboard	Персонализиране на клавиатурата
+	Customize Quick Access Toolbar	Персонализиране на лентата с инструменти за бърз достъп
+	Customize Quick Access Toolbar…	Персонализиране на лентата с инструменти за бърз достъп…
+	Customize Ribbon	Персонализиране на лентата
+	Customize the Ribbon…	Персонализиране на лентата…
+	Customize…	Персонализиране…
+	Cut	Изрежи
+	Cut, copy, and paste	Изрязване, копиране и поставяне
+	Cycle	Цикъл
+	Czech	Чешки
+	Danish	Датски
+	Dark	Тъмно
+	Dark Mode	Тъмен режим
+	Dark page (white text on black)	Тъмна страница (бял текст на черно)
+	Dark with Shadow	Тъмно със сянка
+	Darkroom	Тъмна стая
+	Dashed	Пунктир
+	Data	Данни
+	Data Labels	Етикети на данните
+	Data source:	Източник на данни:
+	Date	Дата
+	Date & Time	Дата и час
+	Date and Time	Дата и час
+	Date format	Формат на датата
+	Date formats:	Формати на датата:
+	Date Picker Content Control	Контрола за съдържание „Избор на дата“
+	Day	Ден
+	Decimal	Десетична
+	Decorative objects only add visual interest: screen readers skip them.	Декоративните обекти само добавят визуален интерес: екранните четци ги пропускат.
+	Decrease Font Size	Намали размера на шрифта
+	Decrease Indent	Намали отстъпа
+	Default	По подразбиране
+	Default Paragraph Font	Шрифт на абзаца по подразбиране
+	Default tab stops:	Позиции за табулация по подразбиране:
+	Define New Bullet	Дефиниране на нов водещ символ
+	Define New Multilevel List	Дефиниране на нов многостепенен списък
+	Define New Multilevel List…	Дефиниране на нов многостепенен списък…
+	Define New Number Format	Дефиниране на нов числов формат
+	Deflate	Издуване навътре
+	Delete	Изтрий
+	Delete Back in Equation	Изтриване назад в уравнението
+	Delete Cells	Изтрий клетки
+	Delete Clipboard Item	Изтрий елемента от клипборда
+	Delete Columns	Изтрий колони
+	Delete Comment	Изтрий коментара
+	Delete in Equation	Изтриване в уравнението
+	Delete Label	Изтрий етикета
+	Delete Next Word	Изтрий следващата дума
+	Delete Previous Word	Изтрий предишната дума
+	Delete Rows	Изтрий редове
+	Delete Selected Ink	Изтрий избраното мастило
+	Delete Style	Изтрий стила
+	Delete Table	Изтрий таблицата
+	Delete Table Style	Изтрий стила на таблицата
+	Deleted	Изтрито
+	Deletions:	Изтривания:
+	Delivery address:	Адрес за доставка:
+	Delta Equal To	Делта равно на
+	Delta over arrow	Делта над стрелка
+	Demote	Понижи
+	Demote to Body Text	Понижи до основен текст
+	Derivative as a limit	Производната като граница
+	Descending	Низходящо
+	Describe what this object shows, for people who can't see it.	Опишете какво показва този обект за хората, които не могат да го видят.
+	Describe what this table shows, for people who can't see it.	Опишете какво показва тази таблица за хората, които не могат да я видят.
+	Description:	Описание:
+	Design	Дизайн
+	Design Mode	Режим на проектиране
+	Detach Template	Откачи шаблона
+	Detect language automatically	Автоматично откриване на езика
+	Developer	Разработчик
+	development build	компилация за разработка
+	Diagonal	Диагонал
+	Diagonal Dots	Диагонални точки
+	Diamond	Ромб
+	Dictate	Диктуване
+	Dictation isn't available here.	Диктуването не е налично тук.
+	Dictation stopped.	Диктуването е спряно.
+	Dictation stopped: {reason}	Диктуването е спряно: {reason}
+	Different First Page	Различна първа страница
+	Different Odd & Even Pages	Различни четни и нечетни страници
+	Differential	Диференциал
+	Differential theta	Диференциал на тета
+	Differential x	Диференциал на x
+	Differential y	Диференциал на y
+	Differentials	Диференциали
+	Direct formatting	Пряко форматиране
+	Direction:	Посока:
+	Directory	Указател
+	Display	Показване
+	Display for Review	Показване за преглед
+	Display gridlines on screen	Показване на линиите на мрежата на екрана
+	Display name	Показвано име
+	Display text	Показван текст
+	Distance from surrounding text	Разстояние от околния текст
+	Distribute Columns	Разпредели колоните
+	Distribute letters	Разпределяне на буквите
+	Distribute Rows	Разпредели редовете
+	Distribute spacing	Разпределяне на разредката
+	Distributed	Разпределено
+	Do Not Check Spelling or Grammar	Без проверка на правописа и граматиката
+	Do not check spelling or grammar	Без проверка на правописа и граматиката
+	DO NOT COPY	НЕ КОПИРАЙ
+	Do Not Show in TOC	Да не се показва в съдържанието
+	Do you want to save changes to {name}?	Искате ли да запишете промените в {name}?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Добавките за Doc4Me са безплатни пакети с макроси от каталога с добавки на Doc4Me. Те могат само да редактират документа.
+	Doc4Me is now the default app for Word documents.	Doc4Me вече е приложението по подразбиране за документи на Word.
+	Document	Документ
+	Document End	Край на документа
+	Document Formatting	Форматиране на документа
+	Document Grid	Мрежа на документа
+	Document Information	Информация за документа
+	Document Property	Свойство на документа
+	Document Start	Начало на документа
+	Document template:	Шаблон на документа:
+	Document Text	Текст на документа
+	Document Title	Заглавие на документа
+	Document1	Документ1
+	Document\nPreferences	Предпочитания\nза документа
+	Documents	Документи
+	Documents you open will show up here.	Документите, които отваряте, ще се показват тук.
+	Does not contain	Не съдържа
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Без интервал между абзаци с един и същ стил
+	Don't capitalize after:	Без главна буква след:
+	Don't hyphenate	Без сричкопренасяне
+	Don't print blank lines when data fields are empty	Да не се отпечатват празни редове, когато полетата с данни са празни
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Да не се четат цитати и библиографии от Zotero, Mendeley или EndNote
+	Don't Save	Не записвай
+	Don't use HTML paragraph auto spacing	Без автоматична разредка на абзаците в HTML
+	Dot	Точка
+	Dot dash	Точка-тире
+	Dot-dash	Точка-тире
+	Dots	Точки
+	Dotted	Точкова
+	Double	Двойна
+	Double Bar	Двойна черта
+	Double Closing Quote	Затварящи двойни кавички
+	Double Dot	Двойна точка
+	Double Integral	Двоен интеграл
+	Double Integral with Limits	Двоен интеграл с граници
+	Double Integral with Stacked Limits	Двоен интеграл с граници една над друга
+	Double Left Arrow with Text Above	Двойна стрелка наляво с текст отгоре
+	Double Left Arrow with Text Below	Двойна стрелка наляво с текст отдолу
+	Double Left Right Arrow with Text Above	Двойна стрелка наляво-надясно с текст отгоре
+	Double Left Right Arrow with Text Below	Двойна стрелка наляво-надясно с текст отдолу
+	Double Opening Quote	Отварящи двойни кавички
+	Double Right Arrow with Text Above	Двойна стрелка надясно с текст отгоре
+	Double Right Arrow with Text Below	Двойна стрелка надясно с текст отдолу
+	Double Spacing	Двойна разредка
+	Double Square Brackets	Двойни квадратни скоби
+	Double Strikethrough	Двойно зачертаване
+	Double strikethrough	Двойно зачертаване
+	Double summation	Двойна сума
+	Double Underline	Двойно подчертаване
+	Double Vertical Bars	Двойни вертикални черти
+	Doughnut	Пръстен
+	Down	Надолу
+	Downloading the speech model ({mb} MB, once)…	Изтегляне на модела за реч ({mb} MB, еднократно)…
+	Downloading…	Изтегляне…
+	DRAFT	ЧЕРНОВА
+	Draft	Чернова
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Плъзнете правоъгълник, за да начертаете таблица, или линия през клетки, за да ги разделите. Esc спира.
+	Draw	Рисуване
+	Draw Ink	Рисуване с мастило
+	Draw Table	Начертай таблица
+	Draw\nTable	Начертай\nтаблица
+	Drawing Canvas	Платно за рисуване
+	Drawing Grid	Мрежа за рисуване
+	Drawing Tools	Инструменти за рисуване
+	Drawing\nCanvas	Платно за\nрисуване
+	Drop Cap	Буквица
+	Drop cap	Буквица
+	Drop-Down List Content Control	Контрола за съдържание „Падащ списък“
+	Drops all formatting and pastes plain text.	Премахва цялото форматиране и поставя обикновен текст.
+	Dutch	Нидерландски
+	E-mail Messages	Имейл съобщения
+	Edit Category	Редактирай категорията
+	Edit Comment	Редактирай коментара
+	Edit Data	Редактирай данните
+	Edit Document	Редактирай документа
+	Edit Equation	Редактирай уравнението
+	Edit Field Code	Редактирай кода на полето
+	Edit Field…	Редактирай поле…
+	Edit Footer	Редактирай долния колонтитул
+	Edit Header	Редактирай горния колонтитул
+	Edit Individual Documents…	Редактиране на отделните документи…
+	Edit Items	Редактиране на елементите
+	Edit Recipient List	Редактиране на списъка с получатели
+	Edit Source	Редактирай източника
+	Edit\nData	Редактиране\nна данните
+	Edit\nRecipient List	Редактиране на\nсписъка с получатели
+	Edited	Редактирано
+	Editing	Редактиране
+	Editing header/footer	Редактиране на горен/долен колонтитул
+	Editing in this document is restricted.	Редактирането в този документ е ограничено.
+	Editing — edit the document directly	Редактиране – редактирайте документа директно
+	Edition	Издание
+	Editor	Редактор
+	Edit…	Редактирай…
+	Effects	Ефекти
+	Elbow Arrow Connector	Съединителна стрелка с чупка
+	Elbow Connector	Съединител с чупка
+	Ellipsis	Многоточие
+	Em Dash	Дълго тире
+	Em Space	Интервал em
+	Email address (optional)	Имейл адрес (по избор)
+	Emboss	Релеф
+	Emphasis	Акцентиране
+	Empty Matrices	Празни матрици
+	En Dash	Средно тире
+	En Space	Интервал en
+	Enclose Characters	Ограждане на знаци
+	Enclosure	Ограждане
+	Encrypt with Password	Шифроване с парола
+	Encrypt with Password…	Шифроване с парола…
+	End of document	Край на документа
+	End of section	Край на секцията
+	End of Word	Край на дума
+	Endnote Reference	Препратка към бележка в края
+	Endnote Text	Текст на бележка в края
+	Endnotes	Бележки в края
+	Endnotes to footnotes	От бележки в края в бележки под линия
+	English	Английски
+	English (United Kingdom)	Английски (Обединено кралство)
+	English (United States)	Английски (САЩ)
+	Engrave	Гравиране
+	Enlarge symbol	Уголемяване на символа
+	Enter formatting for number:	Въведете форматиране за числото:
+	Enter in Equation	Enter в уравнението
+	Enter page number:	Въведете номер на страница:
+	Enter the web address or embed code of an online video:	Въведете уеб адреса или кода за вграждане на онлайн видео:
+	Entry marked.	Елементът е маркиран.
+	Entry:	Елемент:
+	Envelope #10   4.12" × 9.50"	Плик №10   4,12" × 9,50"
+	Envelope Address	Адрес върху плика
+	Envelope DL   4.33" × 8.66"	Плик DL   4,33" × 8,66"
+	Envelope Return	Обратен адрес на плика
+	Envelope size:	Размер на плика:
+	Envelopes	Пликове
+	Equal by Definition	Равно по дефиниция
+	Equal column width	Еднаква ширина на колоните
+	Equal Equal	Равно равно
+	Equal to	Равно на
+	Equals:	Равно на:
+	Equation	Уравнение
+	Equation Gallery	Галерия с уравнения
+	Equation Info	Информация за уравнението
+	Equation Number	Номер на уравнението
+	Equation Options	Опции за уравнението
+	Erase Ink	Изтрий мастилото
+	Eraser	Гума
+	Errors ({n})	Грешки ({n})
+	Estonian	Естонски
+	Euler's identity	Тъждество на Ойлер
+	Even Page	Четна страница
+	Even pages only	Само четните страници
+	Every change is recorded as a tracked change.	Всяка промяна се записва като проследена промяна.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Всяка команда е достъпна за скриптове и агенти с ИИ: изпълнете `doc4me-cli mcp` за MCP сървър или стартирайте приложението с `--control <port>` за управляващия канал с JSON.
+	Every field needs a name.	Всяко поле трябва да има име.
+	Every font this document uses is installed.	Всички шрифтове, използвани в този документ, са инсталирани.
+	Everyone	Всички
+	Exactly	Точно
+	Exactly {n}	Точно {n}
+	Example: {sample}	Пример: {sample}
+	Exceptions (optional)	Изключения (по избор)
+	Exceptions…	Изключения…
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exit	Изход
+	Expand	Разгъни
+	Expand or Collapse Heading	Разгъване или свиване на заглавие
+	Expanded	Разредено
+	Exponential	Експоненциално
+	Exponential series	Експоненциален ред
+	Export	Експортиране
+	Export a copy to share (PDF, Word document)	Експортиране на копие за споделяне (PDF, документ на Word)
+	Export Page as JPEG	Експортирай страницата като JPEG
+	Export Page as PNG	Експортирай страницата като PNG
+	Export PDF	Експортирай PDF
+	Exported {path}	Експортирано: {path}
+	Expression	Израз
+	Extend Selection	Разшири селекцията
+	Extend Selection by Units	Разширяване на селекцията с единици
+	Extra space	Излишен интервал
+	Extra spaces between words.	Излишни интервали между думите.
+	Field	Поле
+	Field Click	Щракване в поле
+	Field code:	Код на полето:
+	Field Codes	Кодове на полетата
+	Field codes:	Кодове на полетата:
+	Field name	Име на полето
+	Field name:	Име на полето:
+	Field names must be different.	Имената на полетата трябва да са различни.
+	Field names:	Имена на полетата:
+	Field properties	Свойства на полето
+	Field:	Поле:
+	Fields	Полета
+	Fields to insert:	Полета за вмъкване:
+	Fields:	Полета:
+	Field…	Поле…
+	Figure	Фигура
+	File	Файл
+	File name:	Име на файла:
+	Fill	Запълване
+	Fill & Line	Запълване и линия
+	Fill color:	Цвят на запълването:
+	Fill:	Запълване:
+	Filling in forms	Попълване на формуляри
+	Film	Филм
+	Filter and Sort	Филтриране и сортиране
+	Filter and Sort…	Филтриране и сортиране…
+	Filter Records	Филтриране на записи
+	Find	Намери
+	Find and Replace	Намиране и замяна
+	Find Next	Намери следващо
+	Find Next Editable Region	Намери следващата област за редактиране
+	Find Previous	Намери предишно
+	Find Recipient	Намери получател
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	„Намери“ избира следващия променен абзац; „Отхвърли“ връща избрания в предишния му вид.
+	Find What Expression	Израз за търсене
+	Find What Text	Текст за търсене
+	Find what:	Търси:
+	Find →	Намери →
+	Find:	Търсене:
+	Finish	Готово
+	Finish & Merge	Завършване и сливане
+	Finish &\nMerge	Завършване\nи сливане
+	Finished	Завършено
+	Finnish	Фински
+	First	Първи
+	First Cell in Column	Първа клетка в колоната
+	First Cell in Row	Първа клетка в реда
+	First Column	Първа колона
+	First commit	Първо подаване
+	First line	Първи ред
+	First line:	Първи ред:
+	First Name	Собствено име
+	First row of data contains column headers	Първият ред с данни съдържа заглавия на колоните
+	Fit	Побиране
+	Fit text	Побиране на текста
+	Fix Position on Page	Фиксирана позиция на страницата
+	Fixed Column Width	Фиксирана ширина на колоните
+	Flip Horizontal	Обърни хоризонтално
+	Flip Vertical	Обърни вертикално
+	Floor	Под
+	Focus	Фокус
+	Follow number with:	След номера:
+	Font	Шрифт
+	Font Color	Цвят на шрифта
+	Font color	Цвят на шрифта
+	Font color:	Цвят на шрифта:
+	Font Dialog	Диалогов прозорец „Шрифт“
+	Font not installed	Шрифтът не е инсталиран
+	Font Size	Размер на шрифта
+	Font Substitution	Заместване на шрифтове
+	Font Substitution…	Заместване на шрифтове…
+	Font:	Шрифт:
+	Font: {font}	Шрифт: {font}
+	Fonts	Шрифтове
+	Font…	Шрифт…
+	Footer	Долен колонтитул
+	Footnote and Endnote	Бележка под линия и бележка в края
+	Footnote Reference	Препратка към бележка под линия
+	Footnote Text	Текст на бележка под линия
+	Footnotes	Бележки под линия
+	Footnotes and endnotes	Бележки под линия и в края
+	Footnotes to endnotes	От бележки под линия в бележки в края
+	Form Letters	Писма по образец
+	Format	Формат
+	Format Page Numbers	Формат на номерата на страниците
+	Format Page Numbers…	Формат на номерата на страниците…
+	Format Painter	Копиране на формат
+	Format Picture	Формат на картината
+	Format Shape	Формат на фигурата
+	Format:	Формат:
+	Formatted	Форматиран
+	Formatted Text	Форматиран текст
+	Formatting	Форматиране
+	Formatting at Selection	Форматиране в селекцията
+	Formatting completed. You can now:	Форматирането завърши. Сега можете да:
+	Formatting exceptions	Изключения от форматирането
+	Formatting marks	Знаци за форматиране
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Сравняват се форматирането, промените на регистъра, празните знаци и таблиците; другите настройки се пазят за по-късно.
+	Formula	Формула
+	Forward	Напред
+	Fraction	Дроб
+	Fractions (1/2) as fraction characters (½)	Дроби (1/2) като знаци за дроби (½)
+	French	Френски
+	French (France)	Френски (Франция)
+	From	От
+	From text:	От текста:
+	from Unicode (hex)	от Unicode (шестнадесетично)
+	From:	От:
+	Full page of the same label	Цяла страница с един и същ етикет
+	Function	Функция
+	Functions	Функции
+	Gallery	Галерия
+	GB/T 7714	GB/T 7714
+	General	Общи
+	Geometry	Геометрия
+	German	Немски
+	German (Germany)	Немски (Германия)
+	Get Add-ins	Вземи добавки
+	Get Data	Вземи данни
+	Get Data…	Вземи данни…
+	Getting ready…	Подготовка…
+	Glow	Сияние
+	Glow Colors	Цветове на сиянието
+	Go Back	Върни се
+	Go To	Отиди на
+	Go to	Отиди на
+	Go To…	Отиди на…
+	Good afternoon	Добър ден
+	Good evening	Добър вечер
+	Good morning	Добро утро
+	GOST (name sort)	ГОСТ (сортиране по име)
+	GOST (title sort)	ГОСТ (сортиране по заглавие)
+	Grab bag	Смесица
+	Grammar	Граматика
+	Grammar Settings	Настройки на граматиката
+	Graphic	Графика
+	Grave	Тежко ударение
+	Greater than	По-голямо от
+	Greater than or equal	По-голямо или равно
+	Greek	Гръцки
+	Greek Letters	Гръцки букви
+	Green:	Зелено:
+	Greeting Line	Ред с обръщение
+	Greeting\nLine	Ред с\nобръщение
+	Grid Settings	Настройки на мрежата
+	Grid Table 1 Light	Таблица с мрежа 1, светла
+	Grid Table 4 – Blue	Таблица с мрежа 4 – синьо
+	Grid Table 4 – Green	Таблица с мрежа 4 – зелено
+	Grid Table 4 – Orange	Таблица с мрежа 4 – оранжево
+	Grid Table 4 – Purple	Таблица с мрежа 4 – лилаво
+	Gridlines	Линии на мрежата
+	Group	Групиране
+	Grouping Character Above	Групиращ знак отгоре
+	Grouping Character Below	Групиращ знак отдолу
+	Grow Font 1 Point	Увеличи шрифта с 1 пункт
+	H:	В:
+	Hanging Indent	Висящ отстъп
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Шапка
+	Header	Горен колонтитул
+	Header & Footer	Горен и долен колонтитул
+	Header Options	Опции за горния колонтитул
+	Header Options:	Опции за горния колонтитул:
+	Header Row	Заглавен ред
+	Header source: {file} (the next data source opened here takes its field names)	Източник на заглавен ред: {file} (следващият източник на данни, отворен тук, взема имената на полетата от него)
+	Header/Footer Position	Позиция на горния/долния колонтитул
+	Headers and footers	Горни и долни колонтитули
+	Heading 1	Заглавие 1
+	Heading 2	Заглавие 2
+	Heading 3	Заглавие 3
+	Heading styles (levels 1–{n})	Стилове за заглавия (нива 1–{n})
+	Heading {n}	Заглавие {n}
+	Headings	Заглавия
+	Heart	Сърце
+	Hebrew	Иврит
+	Height:	Височина:
+	Help	Помощ
+	Hex:	Шестнадесетично:
+	Hidden	Скрит
+	Hidden text	Скрит текст
+	Hide Codes	Скрий кодовете
+	Hide from style lists	Скриване от списъците със стилове
+	Hide Ink	Скрий мастилото
+	Hide White Space	Скрий празното място
+	Hide\nInk	Скрий\nмастилото
+	Hierarchy	Йерархия
+	Highlight	Осветяване
+	Highlight Changes	Осветяване на промените
+	Highlight changes in printed document	Осветяване на промените в отпечатания документ
+	Highlight changes on screen	Осветяване на промените на екрана
+	Highlight Merge Fields	Осветяване на полетата за сливане
+	Highlight\nMerge Fields	Осветяване на\nполетата за сливане
+	Highlighter	Маркер
+	Hindi	Хинди
+	Historical and Discretional	Исторически и по избор
+	Hollow	Кухо
+	Home	Начало
+	Home folder	Домашна папка
+	Horizontal	Хоризонтално
+	Horizontal Line	Хоризонтална линия
+	Horizontal spacing:	Хоризонтално разстояние:
+	How many pages the whole document has	Колко страници има целият документ
+	How many pages this section has	Колко страници има тази секция
+	How many words the document holds	Колко думи съдържа документът
+	HTML Format	Формат HTML
+	Hue:	Нюанс:
+	Hungarian	Унгарски
+	Hyperbolic Cosecant Function	Функция хиперболичен косеканс
+	Hyperbolic Cosine Function	Функция хиперболичен косинус
+	Hyperbolic Cotangent Function	Функция хиперболичен котангенс
+	Hyperbolic Functions	Хиперболични функции
+	Hyperbolic Secant Function	Функция хиперболичен секанс
+	Hyperbolic Sine Function	Функция хиперболичен синус
+	Hyperbolic Tangent Function	Функция хиперболичен тангенс
+	Hyperlink	Хипервръзка
+	Hyphenate at:	Пренасяне при:
+	Hyphenate words in CAPS	Пренасяне на думи с ГЛАВНИ букви
+	Hyphenation	Сричкопренасяне
+	Hyphenation Options…	Опции за сричкопренасяне…
+	Hyphenation zone:	Зона на сричкопренасяне:
+	Hyphens (--) as dashes (—)	Тирета (--) като дълги тирета (—)
+	Hypotenuse	Хипотенуза
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Цвят на иконата
+	Icons	Икони
+	Identity Matrices	Единични матрици
+	IEEE	IEEE
+	If…Then…Else	Ако…То…Иначе
+	If…Then…Else…	Ако…То…Иначе…
+	Ignore All	Игнорирай всички
+	Ignore punctuation characters	Игнориране на пунктуационните знаци
+	Ignore web and file addresses	Игнориране на уеб и файлови адреси
+	Ignore white-space characters	Игнориране на празните знаци
+	Ignore words in capitals	Игнориране на думи с главни букви
+	Ignore words with numbers	Игнориране на думи с цифри
+	Illustrations	Илюстрации
+	Immersive	Потапящ
+	Immersive Reader	Потапящ четец
+	Immersive\nReader	Потапящ\nчетец
+	In Default apps, choose Doc4Me for the document types you want it to open.	В „Приложения по подразбиране“ изберете Doc4Me за типовете документи, които искате да отваря.
+	In equations, typing a name after a backslash replaces it with its symbol.	В уравненията въвеждането на име след обратна наклонена черта го заменя със символа му.
+	In Front of Text	Пред текста
+	In Line with Text	На един ред с текста
+	Inches	Инчове
+	Include label and number	Включване на етикет и номер
+	Include level number from:	Включване на номер на ниво от:
+	Include page numbers	Включване на номера на страници
+	Increase Font Size	Увеличи размера на шрифта
+	Increase Indent	Увеличи отстъпа
+	Indent	Отстъп
+	Indent from left:	Отстъп отляво:
+	Indentation	Отстъпи
+	Indented	С отстъп
+	Indents	Отстъпи
+	Indents and Spacing	Отстъпи и разредка
+	Index	Азбучен указател
+	Index and Tables	Указател и таблици
+	Index Heading	Заглавие на указател
+	Index {n}	Указател {n}
+	Indonesian	Индонезийски
+	Inflate	Издуване навън
+	Info	Информация
+	Initials:	Инициали:
+	Ink	Мастило
+	Ink Equation	Уравнение с мастило
+	Ink Replay	Повторение на мастилото
+	Ink to Math	От мастило в математика
+	Ink to Shape	От мастило във фигура
+	Ink to\nMath	От мастило\nв математика
+	Ink to\nShape	От мастило\nвъв фигура
+	Ink\nReplay	Повторение\nна мастилото
+	Inline	Вградено
+	Input Format	Формат на въвеждане
+	Insert	Вмъкване
+	Insert a 3D model from a file (.glb, .stl, .obj)	Вмъкване на 3D модел от файл (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Вмъкване на ново уравнение (Alt+=)
+	Insert Above	Вмъкни отгоре
+	Insert Below	Вмъкни отдолу
+	Insert Caption	Вмъкни надпис
+	Insert Cells	Вмъкни клетки
+	Insert Chart	Вмъкни диаграма
+	Insert Citation	Вмъкни цитат
+	Insert Columns to the Left	Вмъкни колони отляво
+	Insert Columns to the Right	Вмъкни колони отдясно
+	Insert Data	Вмъкни данни
+	Insert Database	Вмъкни база данни
+	Insert Database…	Вмъкни база данни…
+	Insert Date Field	Вмъкни поле за дата
+	Insert Endnote	Вмъкни бележка в края
+	Insert entire column	Вмъкване на цяла колона
+	Insert entire row	Вмъкване на цял ред
+	Insert Footnote	Вмъкни бележка под линия
+	Insert Hyperlink	Вмъкни хипервръзка
+	Insert Index	Вмъкни азбучен указател
+	Insert Left	Вмъкни отляво
+	Insert LISTNUM Field	Вмъкни поле LISTNUM
+	Insert Merge Field	Вмъкни поле за сливане
+	Insert Merge\nField	Вмъкни поле\nза сливане
+	Insert New Equation	Вмъкни ново уравнение
+	Insert one text or another, depending on a field's value.	Вмъкване на един или друг текст в зависимост от стойността на поле.
+	Insert Page Field	Вмъкни поле за страница
+	Insert Right	Вмъкни отдясно
+	Insert Rows	Вмъкни редове
+	Insert Rows Above	Вмъкни редове отгоре
+	Insert Rows Below	Вмъкни редове отдолу
+	Insert Shapes	Вмъкни фигури
+	Insert SmartArt	Вмъкни SmartArt
+	Insert Structure	Вмъкни структура
+	Insert Symbol	Вмъкни символ
+	Insert Table	Вмъкни таблица
+	Insert Table of Authorities	Вмъкни таблица с източници
+	Insert Table of Figures	Вмъкни таблица с фигури
+	Insert Table…	Вмъкни таблица…
+	Insert Time Field	Вмъкни поле за час
+	Insert Video	Вмъкни видео
+	Insert\nAbove	Вмъкни\nотгоре
+	Insert\nCaption	Вмъкни\nнадпис
+	Insert\nCitation	Вмъкни\nцитат
+	Insert\nFootnote	Вмъкни бележка\nпод линия
+	Inserted	Вмъкнато
+	Insertions and Deletions	Вмъквания и изтривания
+	Insertions:	Вмъквания:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Вмъквания: {ins}, изтривания: {del}, премествания: {moves}, форматиране: {fmt}, коментари: {comments}
+	Inside	Отвътре
+	Inside Borders	Вътрешни граници
+	Inside Margin	Вътрешно поле
+	Inside:	Отвътре:
+	Inspect Document	Инспектиране на документа
+	Inspect Styles at Selection	Инспектиране на стиловете в селекцията
+	Institution	Институция
+	Integral	Интеграл
+	Integral of e^(−x²)	Интеграл от e^(−x²)
+	Integral with Limits	Интеграл с граници
+	Integral with Stacked Limits	Интеграл с граници една над друга
+	Integrals	Интеграли
+	Intense Emphasis	Силно акцентиране
+	Intense Quote	Силен цитат
+	Intense Reference	Силна препратка
+	Interface	Интерфейс
+	Interface language	Език на интерфейса
+	Interface language:	Език на интерфейса:
+	Interface size:	Размер на интерфейса:
+	Interface Theme	Тема на интерфейса
+	Interface theme:	Тема на интерфейса:
+	Interface\nTheme	Тема на\nинтерфейса
+	Internet addresses as links	Интернет адреси като връзки
+	Intersection	Сечение
+	Intersection with Limits	Сечение с граници
+	Intersection with Lower Limit	Сечение с долна граница
+	Intersection with Subscript-Superscript Limits	Сечение с граници като долен и горен индекс
+	Inverse Cosecant Function	Функция обратен косеканс
+	Inverse Cosine Function	Функция обратен косинус
+	Inverse Cotangent Function	Функция обратен котангенс
+	Inverse Functions	Обратни функции
+	Inverse Hyperbolic Cosecant Function	Функция обратен хиперболичен косеканс
+	Inverse Hyperbolic Cosine Function	Функция обратен хиперболичен косинус
+	Inverse Hyperbolic Cotangent Function	Функция обратен хиперболичен котангенс
+	Inverse Hyperbolic Functions	Обратни хиперболични функции
+	Inverse Hyperbolic Secant Function	Функция обратен хиперболичен секанс
+	Inverse Hyperbolic Sine Function	Функция обратен хиперболичен синус
+	Inverse Hyperbolic Tangent Function	Функция обратен хиперболичен тангенс
+	Inverse Secant Function	Функция обратен секанс
+	Inverse Sine Function	Функция обратен синус
+	Inverse Tangent Function	Функция обратен тангенс
+	Ionosphere	Йоносфера
+	Is blank	Е празно
+	Is not blank	Не е празно
+	ISO 690 (author-date)	ISO 690 (автор-дата)
+	ISO 690 (numerical)	ISO 690 (числово)
+	Issue	Брой
+	it isn't a picture Doc4Me can read	това не е картина, която Doc4Me може да прочете
+	Italian	Италиански
+	Italic	Курсив
+	Japanese	Японски
+	Journal	Списание
+	Justification	Подравняване
+	Justification of a display equation	Подравняване на изведено уравнение
+	Justified	Двустранно подравнено
+	Justify	Двустранно подравняване
+	Keep Lines Together	Редовете заедно
+	Keep lines together	Редовете заедно
+	Keep Source Formatting	Запази форматирането на източника
+	Keep Text Only	Запази само текста
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Пазете паролата на сигурно място: без нея никой, включително Doc4Me, не може да отвори документа. Оставете двете полета празни, за да премахнете паролата.
+	Keep with Next	Със следващия
+	Keep with next	Със следващия
+	Keeps the fonts and formatting of the copied text.	Запазва шрифтовете и форматирането на копирания текст.
+	Kerning for fonts:	Кернинг за шрифтове:
+	Keyboard shortcuts:	Клавишни комбинации:
+	Keys for this command:	Клавиши за тази команда:
+	Keywords	Ключови думи
+	Korean	Корейски
+	Label changes with:	Етикетът се променя с:
+	Label:	Етикет:
+	Labels	Етикети
+	Landscape	Хоризонтално
+	Language	Език
+	Language Preferences…	Езикови предпочитания…
+	Language…	Език…
+	Large\nOperator	Голям\nоператор
+	Largest Only	Само най-големия
+	Largest only	Само най-големия
+	Lasso	Ласо
+	Lasso Select	Избор с ласо
+	Last	Последен
+	Last Cell in Column	Последна клетка в колоната
+	Last Cell in Row	Последна клетка в реда
+	Last Column	Последна колона
+	Last commit	Последно подаване
+	Last Name	Фамилия
+	Last, First; Last, First	Фамилия, Име; Фамилия, Име
+	Latin text font:	Шрифт за латински текст:
+	Layout	Оформление
+	Layout options for this document	Опции за оформление на този документ
+	Layout Summary	Обобщение на оформлението
+	Layouts	Оформления
+	Leader	Водач
+	Leave a recipient out of the merge when a field has this value.	Изключване на получател от сливането, когато поле има тази стойност.
+	Leave Equation	Напусни уравнението
+	Leave the equation (Esc)	Напускане на уравнението (Esc)
+	Leave the label out of the caption	Без етикет в надписа
+	Left	Вляво
+	Left Arrow with Text Above	Стрелка наляво с текст отгоре
+	Left Arrow with Text Below	Стрелка наляво с текст отдолу
+	Left Border	Лява граница
+	Left border	Лява граница
+	Left Bracket Twice	Двойна лява скоба
+	Left indent	Ляв отстъп
+	Left Margin	Ляво поле
+	Left Only	Само отляво
+	Left only	Само отляво
+	Left Right Arrow Above	Стрелка наляво-надясно отгоре
+	Left Right Arrow with Text Above	Стрелка наляво-надясно с текст отгоре
+	Left Right Arrow with Text Below	Стрелка наляво-надясно с текст отдолу
+	Left Subscript-Superscript	Ляв долен и горен индекс
+	Left-to-right	Отляво надясно
+	Left-to-Right Text Direction	Посока на текста отляво надясно
+	Left:	Отляво:
+	Leftwards Arrow Above	Стрелка наляво отгоре
+	Leftwards Harpoon Above	Харпун наляво отгоре
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Legal style numbering	Номериране в юридически стил
+	Legend	Легенда
+	Less than	По-малко от
+	Less than or equal	По-малко или равно
+	Letter	Писмо
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter headings	Заглавия на писма
+	Letter-Like Symbols	Буквоподобни символи
+	Letters	Писма
+	Level 1	Ниво 1
+	Level 2	Ниво 2
+	Level 3	Ниво 3
+	Level 4	Ниво 4
+	Level 5	Ниво 5
+	Level 6	Ниво 6
+	Level 7	Ниво 7
+	Level 8	Ниво 8
+	Level 9	Ниво 9
+	Level {n}	Ниво {n}
+	Level:	Ниво:
+	Levels:	Нива:
+	LibreTranslate server (open source)	Сървър LibreTranslate (отворен код)
+	Ligatures:	Лигатури:
+	Light	Светло
+	Light with Outline	Светло с контур
+	Limit	Граница
+	Limit and\nLog	Граница и\nлогаритъм
+	Limit consecutive hyphens to:	Ограничаване на последователните тирета до:
+	Limit Example	Пример за граница
+	Limit formatting to a selection of styles	Ограничаване на форматирането до избрани стилове
+	Line	Линия
+	Line and Page Breaks	Нов ред и нова страница
+	Line and Paragraph Spacing	Разредка между редовете и абзаците
+	Line between	Линия между
+	Line Break	Нов ред
+	Line breaking	Пренасяне на редове
+	Line delta	Делта на линия
+	Line End	Край на ред
+	Line Number	Номер на ред
+	Line Numbering Options…	Опции за номериране на редовете…
+	Line Numbers	Номера на редовете
+	Line Spacing	Разредка между редовете
+	Line spacing	Разредка между редовете
+	Line Spacing Options…	Опции за разредка между редовете…
+	Line spacing:	Разредка между редовете:
+	Line Start	Начало на ред
+	Line width:	Дебелина на линията:
+	Line:	Линия:
+	Linear	Линейна
+	Linear Fraction	Линейна дроб
+	Lines	Линии
+	Lines +/−	Редове +/−
+	Lines added	Добавени редове
+	Lines and characters	Редове и знаци
+	Lines deleted	Изтрити редове
+	Lines only	Само линии
+	Lines per page:	Редове на страница:
+	Link	Връзка
+	Link entries to their headings	Свързване на елементите с техните заглавия
+	Link level to style:	Свързване на нивото със стил:
+	Link to Previous	Връзка с предишния
+	Linked style (paragraph and character)	Свързан стил (абзац и знаци)
+	Links	Връзки
+	Links and References	Връзки и препратки
+	Link…	Връзка…
+	List	Списък
+	List Commands	Списък с команди
+	List Definition	Дефиниция на списък
+	List entries	Елементи на списъка
+	List Paragraph	Абзац от списък
+	List styles	Стилове на списъци
+	List Table 3 – Blue	Таблица със списък 3 – синьо
+	List Table 3 – Green	Таблица със списък 3 – зелено
+	List Table 3 – Orange	Таблица със списък 3 – оранжево
+	List Table 3 – Purple	Таблица със списък 3 – лилаво
+	Listening… speak now	Слушам… говорете сега
+	Location	Местоположение
+	Location: {path}	Местоположение: {path}
+	Lock aspect ratio	Заключване на пропорциите
+	Lock Fields	Заключи полетата
+	Logarithm	Логаритъм
+	Logarithm with Base	Логаритъм с основа
+	Logical AND	Логическо И
+	Logical AND with Limits	Логическо И с граници
+	Logical OR	Логическо ИЛИ
+	Logical OR with Limits	Логическо ИЛИ с граници
+	Long citation:	Дълъг цитат:
+	lowercase	малки букви
+	Lum:	Яркост:
+	Macros	Макроси
+	Made from the author and year when empty	Съставя се от автора и годината, ако е празно
+	Magazine or newspaper article	Статия в списание или вестник
+	Mail Merge	Циркулярни писма
+	Mail Merge Helper	Помощник за циркулярни писма
+	Mail Merge Helper…	Помощник за циркулярни писма…
+	Mailing Labels	Пощенски етикети
+	Mailings	Писма
+	Main entry:	Основен елемент:
+	Make Doc4Me the default for Word documents…	Направи Doc4Me приложение по подразбиране за документи на Word…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Уголемява или смалява лентата, менютата и диалоговите прозорци в допълнение към мащабирането на дисплея в системата. Мащабът на документа е отделен.
+	Malay	Малайски
+	Manage Sources	Управление на източници
+	Manage Styles	Управление на стилове
+	Manage Styles…	Управление на стилове…
+	Manual Hyphenation	Ръчно сричкопренасяне
+	Manual hyphenation is complete.	Ръчното сричкопренасяне завърши.
+	Manual Line Break	Ръчен нов ред
+	Manual Page Break	Ръчна нова страница
+	Manual…	Ръчно…
+	Many pages	Много страници
+	Margin	Поле
+	Margins	Полета
+	Mark	Маркирай
+	Mark All	Маркирай всички
+	Mark as decorative	Маркиране като декоративен
+	Mark Citation	Маркирай цитат
+	Mark Citation…	Маркирай цитат…
+	Mark Entry	Маркирай елемент
+	Mark Entry…	Маркирай елемент…
+	Mark grammar errors as you type	Маркиране на граматичните грешки при въвеждане
+	Mark Index Entry	Маркиране на елемент от указател
+	Mark selected text as:	Маркиране на избрания текст като:
+	Mark Table of Contents Entry	Маркиране на елемент от съдържанието
+	Mark\nCitation	Маркирай\nцитат
+	Mark\nEntry	Маркирай\nелемент
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Съвпадение на регистъра
+	Match Fields	Съпоставяне на полета
+	Match prefix	Съвпадение на представката
+	Match suffix	Съвпадение на наставката
+	Math AutoCorrect	Математическа автокорекция
+	Math Input Control	Контрола за математическо въвеждане
+	Matrices with Brackets	Матрици със скоби
+	Matrix	Матрица
+	Maximize	Максимизирай
+	Maximum	Максимум
+	Maximum Example	Пример за максимум
+	Measured By	Измервано по
+	Measurement units:	Мерни единици:
+	Media	Мултимедия
+	Merge	Сливане
+	Merge Cells	Слей клетките
+	Merge Formatting	Сливане на форматирането
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	„Сливане на форматирането“ поставя текста с форматирането на мястото, където попада, както прави „Запази само текста“.
+	Merge Record #	Запис за сливане №
+	Merge records	Сливане на записи
+	Merge to New Document	Сливане в нов документ
+	Merge to Printer	Сливане към принтер
+	Merge to:	Сливане в:
+	Merge type: {type}	Тип на сливането: {type}
+	Merged PRs	Слети заявки за промени
+	Merge…	Сливане…
+	Mesosphere	Мезосфера
+	Middle	Средата
+	Midline Dots	Точки в средата на реда
+	Millimeters	Милиметри
+	Minimum	Минимум
+	Minus Equal	Минус равно
+	Mirror indents	Огледални отстъпи
+	Mirrored	Огледални
+	Missing document font	Липсващ шрифт на документа
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Авторско право (c) 2026 ArtCraft Team и сътрудниците на WordCraft.
+	MLA	MLA
+	Model	Модел
+	Models	Модели
+	Moderate	Умерено
+	Modify Style	Промяна на стил
+	Modify Table Style	Промяна на стил на таблица
+	Modify Table Style…	Промяна на стил на таблица…
+	Modify…	Промени…
+	Mon	пн
+	Month	Месец
+	More >>	Още >>
+	More Colors…	Още цветове…
+	More Columns…	Още колони…
+	More Commands…	Още команди…
+	More Symbols…	Още символи…
+	More templates →	Още шаблони →
+	Move Down	Премести надолу
+	Move in Equation	Придвижване в уравнението
+	Move object with text	Преместване на обекта с текста
+	Move or Resize	Преместване или преоразмеряване
+	Move Paragraph Down	Премести абзаца надолу
+	Move Paragraph Up	Премести абзаца нагоре
+	Move Past Citation	Премини след цитата
+	Move Past\nCitation	Премини след\nцитата
+	Move Selected Ink	Премести избраното мастило
+	Move Text	Премести текста
+	Move to where?	Къде да се премести?
+	Move Up	Премести нагоре
+	Move with Text	Премествай с текста
+	Move with text	Премествай с текста
+	Moved from	Преместено от
+	Moved to	Преместено в
+	Moves	Премествания
+	Multilevel List	Многостепенен списък
+	Multiple Pages	Няколко страници
+	My Add-ins	Моите добавки
+	MyMemory (free, no account)	MyMemory (безплатно, без акаунт)
+	Name	Име
+	Name (A–Z)	Име (А–Я)
+	Name of the file this document is saved as	Име на файла, под което е записан този документ
+	Name:	Име:
+	Narrow  0.5" all	Тесни  0,5" навсякъде
+	Natural Logarithm	Натурален логаритъм
+	Nature	Природа
+	Navigation	Навигация
+	Navigation Pane	Екран за навигация
+	Negated Relations	Отрицания на релации
+	New	Нов
+	New Comment	Нов коментар
+	New comments and tracked changes are recorded under this name and these initials.	Новите коментари и проследените промени се записват под това име и тези инициали.
+	New Document	Нов документ
+	New document	Нов документ
+	New Drawing Canvas	Ново платно за рисуване
+	New Entry	Нов елемент
+	New Folder	Нова папка
+	New from Template	Нов от шаблон
+	New Group	Нова група
+	New Label	Нов етикет
+	New Label…	Нов етикет…
+	New Paragraph	Нов абзац
+	New shortcut:	Нова клавишна комбинация:
+	New Style…	Нов стил…
+	New Tab	Нов раздел
+	New Table Style	Нов стил на таблица
+	New Table Style…	Нов стил на таблица…
+	New Window	Нов прозорец
+	New word	Нова дума
+	New\nComment	Нов\nкоментар
+	New\nWindow	Нов\nпрозорец
+	New…	Нов…
+	Next	Следващ
+	Next Change	Следваща промяна
+	Next Comment	Следващ коментар
+	Next Field	Следващо поле
+	Next Footnote	Следваща бележка под линия
+	Next Page	Следваща страница
+	Next Record	Следващ запис
+	Next Section	Следваща секция
+	Next Sentence	Следващо изречение
+	Next sentence	Следващо изречение
+	Next Window	Следващ прозорец
+	No	Не
+	No accessibility issues found.	Не са открити проблеми с достъпността.
+	No add-ins are listed yet.	Все още няма изброени добавки.
+	No add-ins yet. Add one from the Store.	Все още няма добавки. Добавете от магазина.
+	No Border	Без граница
+	No changes (read only)	Без промени (само за четене)
+	No Color	Без цвят
+	No contributor data was built into this copy.	В това копие не са вградени данни за сътрудниците.
+	No data source yet.	Все още няма източник на данни.
+	No errors found: every merge field is in the recipient list.	Не са открити грешки: всяко поле за сливане е в списъка с получатели.
+	No Fill	Без запълване
+	No Glow	Без сияние
+	No grid	Без мрежа
+	No icons match your search.	Няма икони, отговарящи на търсенето.
+	No limit	Без ограничение
+	No Line	Без линия
+	No Markup	Без маркировки
+	No model credits were built into this copy.	В това копие не са вградени благодарности за моделите.
+	No Outline	Без контур
+	No Paragraph Space	Без разредка между абзаците
+	No pictures found.	Не са намерени картини.
+	No Reflection	Без отражение
+	No revisions	Няма редакции
+	No Shadow	Без сянка
+	No Soft Edges	Без меки ръбове
+	No sources yet.	Все още няма източници.
+	No Spacing	Без разредка
+	no speech program on this system	в системата няма програма за реч
+	No templates match your search.	Няма шаблони, отговарящи на търсенето.
+	No Transform	Без трансформация
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Все още няма думи. „Добави в речника“ върху сгрешена дума я поставя тук.
+	No-Width Non Break	Неразделящ знак с нулева ширина
+	No-Width Optional Break	Незадължителен нов ред с нулева ширина
+	Nonbreaking Hyphen	Неразделящо тире
+	Nonbreaking Space	Неразделящ интервал
+	None	Няма
+	Normal	Нормален
+	Normal  1" all	Нормални  1" навсякъде
+	Normal Indent	Нормален отстъп
+	Normal probability density	Плътност на нормалното разпределение
+	Normal speed	Нормална скорост
+	Normal Style	Нормален стил
+	Normal Table	Нормална таблица
+	Normal Text	Нормален текст
+	Normal Word Document	Нормален документ на Word
+	North	Север
+	Norwegian (Bokmål)	Норвежки (букмол)
+	Not	Не
+	Not available right now	В момента не е налично
+	Not equal to	Не е равно на
+	Not linked: click a text box	Не е свързано: щракнете върху текстово поле
+	Not saved	Не е записан
+	Not saved yet	Още не е записан
+	Not used by any command	Не се използва от команда
+	Not {name}	Не {name}
+	Nothing	Нищо
+	Nothing collected yet. Items you copy or cut appear here.	Все още нищо не е събрано. Елементите, които копирате или изрязвате, се показват тук.
+	Now used by {command}	Сега се използва от {command}
+	Nudge	Побутване
+	Num Occurrences	Брой срещания
+	Number	Число
+	Number alignment:	Подравняване на номера:
+	Number format	Числов формат
+	Number of columns:	Брой колони:
+	Number of rows:	Брой редове:
+	Number of the page the field sits on	Номер на страницата, на която е полето
+	Number of the section the field sits in	Номер на секцията, в която е полето
+	Number style for this level:	Стил на номериране за това ниво:
+	Number the equation; the number sits at the right margin (or type # then the number)	Номериране на уравнението; номерът е при дясното поле (или въведете # и номера)
+	Number type:	Тип на номера:
+	Number:	Номер:
+	Numbering	Номериране
+	Numbering:	Номериране:
+	Numbering…	Номериране…
+	Numerals	Цифри
+	Numerals:	Цифри:
+	n×n Identity Matrix	Единична матрица n×n
+	n×n Matrix	Матрица n×n
+	Object	Обект
+	Odd Page	Нечетна страница
+	Odd pages only	Само нечетните страници
+	Off	Изключено
+	Office	Office
+	Office 2003 Default	По подразбиране за Office 2003
+	Offset (pt):	Отместване (pt):
+	Offset: Bottom	Отместване: долу
+	Offset: Bottom Left	Отместване: долу вляво
+	Offset: Bottom Right	Отместване: долу вдясно
+	Offset: Center	Отместване: център
+	Offset: Left	Отместване: вляво
+	Offset: Right	Отместване: вдясно
+	Offset: Top	Отместване: горе
+	Offset: Top Left	Отместване: горе вляво
+	Offset: Top Right	Отместване: горе вдясно
+	OK	OK
+	Omit	Пропусни
+	On	Включено
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Включено: курсорът се плъзга към новото си място, когато пишете или използвате клавишите със стрелки, а мигането му избледнява. Изключено: той прескача и мига.
+	One	Един
+	One half	Една втора
+	One label per recipient	По един етикет за всеки получател
+	One line per item. Enter adds an item.	По един ред за елемент. Enter добавя елемент.
+	One Page	Една страница
+	Online Pictures	Онлайн картини
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	„Онлайн картини“ (Openverse), „Превод“ (MyMemory или вашия сървър LibreTranslate), „Вземи добавки“ и изтеглянето на модела за реч на „Диктуване“ се свързват с интернет и само когато ги използвате. Когато е изключено, Doc4Me не прави собствени връзки.
+	Online Pictures…	Онлайн картини…
+	Online services are turned off (File › Options › Trust Center).	Онлайн услугите са изключени (Файл › Опции › Център за сигурност).
+	Online Video	Онлайн видео
+	Only allow this kind of editing:	Разрешаване само на този вид редактиране:
+	Only comments can be added, except in regions marked editable.	Могат да се добавят само коментари, освен в областите, маркирани за редактиране.
+	Only form fields can be filled in.	Могат да се попълват само полетата на формуляра.
+	only https addresses can be used	могат да се използват само адреси с https
+	Only pictures I may use commercially	Само картини, които мога да използвам с търговска цел
+	Only the allowed styles can be applied.	Могат да се прилагат само разрешените стилове.
+	Only web (http, https) and email (mailto) links can be followed	Могат да се следват само уеб връзки (http, https) и имейл връзки (mailto)
+	Open	Отвори
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Отваряне на файл със собствения браузър на Doc4Me, когато системният диалогов прозорец за файлове не се появява.
+	Open Data Source…	Отвори източник на данни…
+	Open Hyperlink	Отвори хипервръзката
+	OpenDocument Text (*.odt)	Текст OpenDocument (*.odt)
+	Opening print dialog…	Отваряне на диалоговия прозорец за печат…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Отсега нататък отваря файлове .docx, .doc, .rtf и .odt и шаблони на Word с Doc4Me.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Отваря „Настройки › Приложения по подразбиране“, където избирате Doc4Me за .docx и другите типове документи.
+	Open…	Отвори…
+	Operator	Оператор
+	Operator Structures	Структури с оператори
+	Operators	Оператори
+	Optional Hyphen	Незадължително тире
+	Options	Опции
+	Options…	Опции…
+	Or	Или
+	Or save a copy in another format:	Или запишете копие в друг формат:
+	Ordinals (1st) as superscript	Поредни числителни (1-ви) като горен индекс
+	Organizer	Организатор
+	Organizer…	Организатор…
+	Orientation	Ориентация
+	Original document	Оригинален документ
+	Other	Друго
+	Other Authorities	Други източници
+	Other Large Operators	Други големи оператори
+	Other paragraph styles	Други стилове за абзаци
+	Other styles and their TOC level:	Други стилове и нивото им в съдържанието:
+	Otherwise insert:	Иначе вмъкни:
+	Outline	Структура
+	Outline Level	Ниво в структурата
+	Outline level	Ниво в структурата
+	Outline levels	Нива в структурата
+	Outline State	Състояние на структурата
+	Outline Tools	Инструменти за структура
+	Outlining	Структуриране
+	Outside	Отвън
+	Outside border	Външна граница
+	Outside Borders	Външни граници
+	Outside Margin	Външно поле
+	Outside:	Отвън:
+	Outward Brackets	Скоби навън
+	Oval	Овал
+	Overbar	Черта отгоре
+	Overbars and Underbars	Черти отгоре и отдолу
+	Overbrace	Фигурна скоба отгоре
+	Overtype	Заместване
+	Overtype (typing replaces the characters after the caret)	Заместване (въвежданият текст заменя знаците след курсора)
+	Page	Страница
+	Page Background	Фон на страницата
+	Page Border	Граница на страницата
+	Page Borders	Граници на страницата
+	Page Break	Нова страница
+	Page Break Before	Нова страница преди
+	Page break before	Нова страница преди
+	Page Breaks	Нови страници
+	Page Color	Цвят на страницата
+	Page display	Показване на страниците
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Изображение на страница (*.jpg, *.jpeg)
+	Page image (*.png)	Изображение на страница (*.png)
+	Page Movement	Придвижване по страници
+	Page Number	Номер на страница
+	Page number style	Стил на номерата на страниците
+	Page numbers at the right margin	Номера на страниците при дясното поле
+	Page on which a bookmarked passage falls	Страница, на която се намира откъсът с отметка
+	Page Setup	Настройка на страниците
+	Page title	Заглавие на страницата
+	Page Up	Page Up
+	Page Width	Ширина на страницата
+	Page width	Ширина на страницата
+	Page X of Y	Страница X от Y
+	Page {page}	Страница {page}
+	Page {page} of {pages}	Страница {page} от {pages}
+	Page\nBorders	Граници на\nстраницата
+	Page\nColor	Цвят на\nстраницата
+	Page\nNumber	Номер на\nстраница
+	Pages	Страници
+	Pages like 1-3, 5	Страници, напр. 1-3, 5
+	Pages of bookmark:	Страници на отметката:
+	Paragraph	Абзац
+	Paragraph Character	Знак на абзац
+	Paragraph Details	Подробности за абзаца
+	Paragraph Down	Абзац надолу
+	Paragraph Mark	Знак за край на абзац
+	Paragraph marks	Знаци за край на абзац
+	Paragraph Settings	Настройки на абзаца
+	Paragraph Spacing	Разредка между абзаците
+	Paragraph style	Стил на абзац
+	Paragraph Up	Абзац нагоре
+	Paragraphs	Абзаци
+	Paragraph…	Абзац…
+	Parentheses	Кръгли скоби
+	Parentheses with Separator	Кръгли скоби с разделител
+	Partial Differential	Частен диференциал
+	Password	Парола
+	Password:	Парола:
+	Paste	Постави
+	Paste All	Постави всички
+	Paste as:	Постави като:
+	Paste Clipboard Item	Постави елемента от клипборда
+	Paste Formatting	Постави форматирането
+	Paste Special	Специално поставяне
+	Paste Special…	Специално поставяне…
+	Paste Spike	Постави от натрупването
+	Paste: Keep Text Only	Поставяне: само текст
+	Paste: Merge Formatting	Поставяне: сливане на форматирането
+	Pasting between documents:	Поставяне между документи:
+	Pasting from other programs:	Поставяне от други програми:
+	Pasting within the same document:	Поставяне в същия документ:
+	Pause	Пауза
+	Paused	На пауза
+	PDF document (*.pdf)	Документ PDF (*.pdf)
+	Pen	Писалка
+	Pencil	Молив
+	Pens	Писалки
+	People	Хора
+	Periodical	Периодично издание
+	Personalize	Персонализиране
+	Phonetic Guide	Фонетично ръководство
+	Pi Over 2	Пи върху 2
+	Picas	Пики
+	Pick a custom group (New Group makes one)	Изберете потребителска група („Нова група“ създава такава)
+	Pick a field from the list	Изберете поле от списъка
+	Picture	Картина
+	Picture Border	Граница на картината
+	Picture Content Control	Контрола за съдържание „Картина“
+	Picture Format	Формат на картината
+	Picture Styles	Стилове на картини
+	Pictures	Картини
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Картини от Openverse. Спазвайте лиценза на всяка картина: Doc4Me добавя ред с източника под нея.
+	Pie	Кръгова
+	Placeholder Name	Име на контейнера
+	Placeholder text	Текст в контейнера
+	Plain Table 1	Обикновена таблица 1
+	Plain text (*.txt)	Обикновен текст (*.txt)
+	Plain Text Content Control	Контрола за съдържание „Обикновен текст“
+	Play	Възпроизведи
+	Play Video	Възпроизведи видеото
+	Play/Pause	Възпроизвеждане/пауза
+	Plus Equal	Плюс равно
+	Points	Пунктове
+	points and above	пункта и повече
+	Polish	Полски
+	Portrait	Вертикално
+	Portuguese (Brazil)	Португалски (Бразилия)
+	Portuguese (Portugal)	Португалски (Португалия)
+	Position	Позиция
+	Position:	Позиция:
+	Positioning…	Позициониране…
+	Possible spelling mistake	Възможна правописна грешка
+	Postal Code	Пощенски код
+	Power series of (1+x)ⁿ	Степенен ред на (1+x)ⁿ
+	Preferred width:	Предпочитана ширина:
+	Preserve	Запазване
+	Preserve formatting during updates	Запазване на форматирането при актуализиране
+	Presets	Готови настройки
+	Press a key combination	Натиснете клавишна комбинация
+	Preview	Визуализация
+	Preview Results	Визуализация на резултатите
+	Preview\nResults	Визуализация на\nрезултатите
+	Previous	Предишен
+	Previous 1 or More	Предишни 1 или повече
+	Previous Change	Предишна промяна
+	Previous Comment	Предишен коментар
+	Previous Field	Предишно поле
+	Previous Footnote	Предишна бележка под линия
+	Previous Page	Предишна страница
+	Previous Record	Предишен запис
+	Previous Section	Предишна секция
+	Previous Sentence	Предишно изречение
+	Previous sentence	Предишно изречение
+	Previous Window	Предишен прозорец
+	Print	Печат
+	Print blank lines when data fields are empty	Отпечатване на празни редове, когато полетата с данни са празни
+	Print Documents	Отпечатай документите
+	Print Documents…	Отпечатай документите…
+	Print failed: {error}	Печатът е неуспешен: {error}
+	Print Layout	Оформление за печат
+	Print Markup	Отпечатване на маркировките
+	Print the page color	Отпечатване на цвета на страницата
+	Print to PDF	Печат в PDF
+	Print\nLayout	Оформление\nза печат
+	Printer	Принтер
+	Printing	Печат
+	Process	Процес
+	Product	Произведение
+	Product of A	Произведение на A
+	Product with Limits	Произведение с граници
+	Product with Lower Limit	Произведение с долна граница
+	Product with Subscript-Superscript Limits	Произведение с граници като долен и горен индекс
+	Products and Coproducts	Произведения и копроизведения
+	Professional	Професионално
+	Promote	Повиши
+	Promote to Heading 1	Повиши до Заглавие 1
+	Proofing	Коректура
+	Proofing Issues	Проблеми при коректурата
+	Proofing language	Език за коректура
+	Properties	Свойства
+	Protect	Защита
+	Protect Document	Защити документа
+	PRs	Заявки за промени
+	pt	pt
+	Publisher	Издател
+	Punctuation	Пунктуация
+	Put the caret in a content control first.	Първо поставете курсора в контрола за съдържание.
+	Put the default commands back on the Quick Access Toolbar?	Да се върнат ли командите по подразбиране в лентата с инструменти за бърз достъп?
+	Pyramid	Пирамида
+	Quadratic Root	Квадратен корен
+	Query Options…	Опции на заявката…
+	Quick Access Toolbar	Лента с инструменти за бърз достъп
+	Quick Parts	Бързи части
+	Quick Tables	Бързи таблици
+	Quote	Цитат
+	Radical	Корен
+	Radical with Degree	Корен със степен
+	Radicals	Корени
+	Raised/lowered	Повдигнато/понижено
+	Read Aloud	Четене на глас
+	Read Aloud couldn't start the speech program: {reason}	„Четене на глас“ не можа да стартира програмата за реч: {reason}
+	Read Aloud couldn't start: {reason}	„Четене на глас“ не можа да стартира: {reason}
+	Read Aloud isn't available in the browser	„Четене на глас“ не е налично в браузъра
+	Read Aloud Status	Състояние на четенето на глас
+	Read Aloud stopped: {reason}	„Четене на глас“ спря: {reason}
+	Read Mode	Режим на четене
+	Read\nAloud	Четене\nна глас
+	Read\nMode	Режим на\nчетене
+	Reading	Четене
+	Reading Column Width	Ширина на колоната за четене
+	Reading Highlight	Осветяване при четене
+	Reading Line Spacing	Разредка на редовете при четене
+	Reading Mode	Режим на четене
+	Reading Speed	Скорост на четене
+	Reading Text Size	Размер на текста при четене
+	Reads the clipboard's rich text and keeps its formatting.	Чете форматирания текст от клипборда и запазва форматирането му.
+	Reads the clipboard's web content and keeps its formatting.	Чете уеб съдържанието от клипборда и запазва форматирането му.
+	Real name	Истинско име
+	Recent	Скорошни
+	Recent Colors	Скорошни цветове
+	Recent documents to show:	Брой показвани скорошни документи:
+	Recently used symbols:	Скоро използвани символи:
+	Recipient List	Списък с получатели
+	Recipient lists	Списъци с получатели
+	Recipients: {count}	Получатели: {count}
+	Recognized (you can correct it):	Разпознато (можете да го коригирате):
+	Recognized Functions	Разпознати функции
+	Recognized Functions…	Разпознати функции…
+	Recolor a one-color picture, such as an icon	Преоцветяване на едноцветна картина, например икона
+	Recolor Selected Ink	Преоцвети избраното мастило
+	Record Macro	Запиши макрос
+	Recover Unsaved Documents	Възстанови незаписаните документи
+	Rectangle	Правоъгълник
+	Red:	Червено:
+	Redo	Повтори
+	Reduce Hanging Indent	Намали висящия отстъп
+	References	Препратки
+	Reflection	Отражение
+	Refresh	Обнови
+	Registered	Регистрирана
+	Registered Sign	Знак за регистрирана марка
+	Regular expressions	Регулярни изрази
+	Regulations	Наредби
+	Reject	Отхвърли
+	Reject All	Отхвърли всички
+	Reject All Changes	Отхвърли всички промени
+	Reject Change	Отхвърли промяната
+	Relationship	Взаимовръзка
+	relative to	спрямо
+	Relative to:	Спрямо:
+	Relaxed	Свободно
+	Remove	Премахни
+	Remove Added Font	Премахни добавения шрифт
+	Remove Background	Премахни фона
+	Remove Content Control	Премахни контролата за съдържание
+	Remove every custom shortcut and restore the built-in keys?	Да се премахнат ли всички потребителски клавишни комбинации и да се възстановят вградените клавиши?
+	Remove every custom tab and group and show all tabs again?	Да се премахнат ли всички потребителски раздели и групи и да се покажат отново всички раздели?
+	Remove field	Премахни полето
+	Remove Field Name	Премахни името на полето
+	Remove Footer	Премахни долния колонтитул
+	Remove from Quick Access Toolbar	Премахни от лентата с инструменти за бърз достъп
+	Remove Header	Премахни горния колонтитул
+	Remove Hyperlink	Премахни хипервръзката
+	Remove Password	Премахни паролата
+	Remove Pen	Премахни писалката
+	Remove Positioning	Премахни позиционирането
+	Remove recipient	Премахни получателя
+	Remove row	Премахни реда
+	Remove series	Премахни серията
+	Remove Space After Paragraph	Премахни интервала след абзаца
+	Remove Table of Contents	Премахни съдържанието
+	Remove the control once edited	Премахване на контролата след редактиране
+	Remove the space before the punctuation	Премахване на интервала преди пунктуацията
+	Remove Watermark	Премахни водния знак
+	Rename Style	Преименувай стила
+	Rename…	Преименувай…
+	Reopen	Отвори отново
+	Repeat	Повтаряне
+	Repeat as header row on each page	Повтаряне като заглавен ред на всяка страница
+	Repeat Header Rows	Повтаряне на заглавните редове
+	Repeated words	Повторени думи
+	Repeating Section Content Control	Контрола за съдържание „Повтаряща се секция“
+	Replace	Замени
+	Replace All	Замени всички
+	Replace as you type	Замяна при въвеждане
+	Replace Document Text	Замени текста на документа
+	Replace text as you type	Замяна на текст при въвеждане
+	Replace with:	Замени с:
+	Replace:	Замяна:
+	Replay	Повтори отново
+	Reply	Отговори
+	Report	Доклад
+	Research	Проучване
+	Researcher	Изследовател
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Изследователят изисква онлайн услуга; Doc4Me пази документите ви офлайн.
+	Reset	Нулиране
+	Reset All	Нулирай всички
+	Reset All…	Нулирай всички…
+	Reset Character Formatting	Нулирай форматирането на знаците
+	Reset Crop	Нулирай изрязването
+	Reset Graphic	Нулирай графиката
+	Reset Paragraph Formatting	Нулирай форматирането на абзаца
+	Reset Picture	Нулирай картината
+	Reset to Normal	Върни към Нормален
+	Reset\nGraphic	Нулирай\nграфиката
+	Reset…	Нулирай…
+	Resize Table by Dragging	Преоразмеряване на таблицата чрез плъзгане
+	Resolve	Разреши
+	Resolved	Разрешено
+	Restart at 1	Започни отново от 1
+	Restart Each Page	Отначало на всяка страница
+	Restart Each Section	Отначало във всяка секция
+	Restart list after:	Започване на списъка отначало след:
+	Restore	Възстанови
+	Restore Defaults	Възстанови стойностите по подразбиране
+	Restore Down	Възстанови надолу
+	Restore to Normal Word Document	Възстанови като нормален документ на Word
+	Restrict Editing	Ограничаване на редактирането
+	Restrict\nEditing	Ограничаване на\nредактирането
+	Result	Резултат
+	Results	Резултати
+	Return address labels	Етикети с обратен адрес
+	Return address:	Обратен адрес:
+	Reverse the order	Обръщане на реда
+	Review	Преглед
+	Review AutoFormat Changes	Преглед на промените от автоформатирането
+	Review Changes…	Преглед на промените…
+	Reviewing	Преглеждане
+	Reviewing Pane	Екран за преглед
+	Reviewing — edits become suggestions	Преглеждане – редакциите стават предложения
+	Revised document	Ревизиран документ
+	Revisions	Редакции
+	Rewind	Превърти назад
+	Ribbon	Лента
+	Ribbon and Quick Access Toolbar:	Лента и лента с инструменти за бърз достъп:
+	Ribbon tabs	Раздели на лентата
+	Rich Text Content Control	Контрола за съдържание „Форматиран текст“
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Вдясно
+	Right (vertical)	Вдясно (вертикално)
+	Right align page numbers	Подравняване на номерата на страниците вдясно
+	Right Arrow with Text Above	Стрелка надясно с текст отгоре
+	Right Arrow with Text Below	Стрелка надясно с текст отдолу
+	Right Border	Дясна граница
+	Right border	Дясна граница
+	Right Bracket Twice	Двойна дясна скоба
+	Right indent	Десен отстъп
+	Right Margin	Дясно поле
+	Right Only	Само отдясно
+	Right only	Само отдясно
+	Right-to-left	Отдясно наляво
+	Right-to-Left Section	Секция отдясно наляво
+	Right-to-Left Table	Таблица отдясно наляво
+	Right-to-Left Text Direction	Посока на текста отдясно наляво
+	Right:	Отдясно:
+	Rightwards Arrow Above	Стрелка надясно отгоре
+	Rightwards Harpoon Above	Харпун надясно отгоре
+	Roots of ax²+bx+c	Корени на ax²+bx+c
+	Rotate	Завърти
+	Rotate all text 270°	Завъртане на целия текст на 270°
+	Rotate all text 90°	Завъртане на целия текст на 90°
+	Rotate Left 90°	Завърти наляво на 90°
+	Rotate Right 90°	Завърти надясно на 90°
+	Rotation	Завъртане
+	Rotation:	Завъртане:
+	Rounded Rectangle	Заоблен правоъгълник
+	Row	Ред
+	Row:	Ред:
+	Rows & Columns	Редове и колони
+	Ruby text:	Текст руби:
+	Ruler	Линийка
+	Rules	Правила
+	Run	Изпълни
+	Run-in	В един абзац
+	Russian	Руски
+	Résumé	Автобиография
+	Same as the whole table	Като цялата таблица
+	SAMPLE	ОБРАЗЕЦ
+	Sat:	Наситеност:
+	Save	Запиши
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Запишете копие в друг формат. Печатът минава през PDF, който можете да отпечатате от всяка програма за преглед.
+	Save As	Запиши като
+	Save as Template	Запиши като шаблон
+	Save documents	Записване на документи
+	Save the document to turn on AutoSave	Запишете документа, за да включите автозаписването
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Запишете документа, за да включите автозаписването (файл, който само сте отворили, не се презаписва, докато не го запишете)
+	Save these pages as PDF…	Запиши тези страници като PDF…
+	Save Version	Запиши версия
+	Saved	Записано
+	Scale	Мащаб
+	Scale Drawing	Мащабиране на чертежа
+	Scatter	Точкова
+	Screen Clipping	Изрезка от екрана
+	Screen clipping didn't work: {reason}	Изрязването от екрана не успя: {reason}
+	Screen clipping ended without a picture.	Изрязването от екрана завърши без картина.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Изрязването от екрана не е налично тук. Копирайте картина на екрана и след това я поставете.
+	Screenshot	Екранна снимка
+	Script	Писменост
+	Scripts	Писмености
+	Scroll ribbon left	Превърти лентата наляво
+	Scroll ribbon right	Превърти лентата надясно
+	Search	Търсене
+	Search Commands	Търсене на команди
+	Search commands and help	Търсене на команди и помощ
+	Search document	Търсене в документа
+	Search for templates	Търсене на шаблони
+	Search icons	Търсене на икони
+	Search Openverse (Creative Commons pictures)	Търсене в Openverse (картини с Creative Commons)
+	Search Options	Опции за търсене
+	Searching…	Търсене…
+	Secant Function	Функция секанс
+	Section Break	Прекъсване на секция
+	Section Breaks	Прекъсвания на секции
+	Section Character	Знак за секция
+	Section direction:	Посока на секцията:
+	Section Mark	Знак за секция
+	Section Properties	Свойства на секцията
+	Sections	Секции
+	See	Вижте
+	Select	Избери
+	Select a picture, shape, chart or table to describe it.	Изберете картина, фигура, диаграма или таблица, за да я опишете.
+	Select All	Избери всичко
+	Select Cell	Избери клетка
+	Select Floating Shapes	Избери плаващи фигури
+	Select Heading and Content	Избери заглавие и съдържание
+	Select Line	Избери ред
+	Select Objects	Избери обекти
+	Select Paragraph	Избери абзац
+	Select Range	Избери диапазон
+	Select Recipients	Избери получатели
+	Select recipients first to choose from their fields.	Първо изберете получатели, за да избирате от техните полета.
+	Select recipients first to match their fields.	Първо изберете получатели, за да съпоставите техните полета.
+	Select Row	Избери ред
+	Select Sentence	Избери изречение
+	Select Table	Избери таблица
+	Select Text	Избери текст
+	Select text in the document to translate it.	Изберете текст в документа, за да го преведете.
+	Select Text with Similar Formatting	Избери текст с подобно форматиране
+	Select text, then tick who can still edit it.	Изберете текст, след това отметнете кой все още може да го редактира.
+	Select the part of the screen to insert.	Изберете частта от екрана за вмъкване.
+	Select Word	Избери дума
+	Select\nRecipients	Избери\nполучатели
+	Selected Fields	Избрани полета
+	Selected pages	Избрани страници
+	Selection	Селекция
+	Selection Pane	Екран за селекция
+	Send Backward	Премести назад
+	Send the document straight to the system print dialog, or save a copy in another format below.	Изпратете документа директно към системния диалогов прозорец за печат или запишете копие в друг формат по-долу.
+	Sentence	Изречение
+	Sentence case.	Като в изречение.
+	Separator:	Разделител:
+	Sequence name:	Име на поредицата:
+	Serbian	Сръбски
+	Serbian (Cyrillic)	Сръбски (кирилица)
+	Serbian (Latin)	Сръбски (латиница)
+	Series name	Име на серията
+	Series {n}	Серия {n}
+	Server address (https://…)	Адрес на сървъра (https://…)
+	Set	Задай
+	Set As Default	Задай по подразбиране
+	Set as Default	Задай по подразбиране
+	Set Caret	Постави курсора
+	Set Character Formatting	Задай форматиране на знаците
+	Set Date	Задай дата
+	Set Equation	Задай уравнение
+	Set Numbering Value	Задаване на стойност за номериране
+	Set Paragraph Formatting	Задай форматиране на абзаца
+	Set Proofing Language…	Задаване на език за коректура…
+	Setting:	Настройка:
+	Settings…	Настройки…
+	Shading	Засенчване
+	Shadow	Сянка
+	Shadow, glow and soft edges	Сянка, сияние и меки ръбове
+	Shape Effects	Ефекти за фигури
+	Shape Fill	Запълване на фигура
+	Shape Format	Формат на фигура
+	Shape Outline	Контур на фигура
+	Shape Styles	Стилове на фигури
+	Shapes	Фигури
+	Share	Сподели
+	Sheet:	Лист:
+	Shift cells down	Преместване на клетките надолу
+	Shift cells right	Преместване на клетките надясно
+	Shift+Tab	Shift+Tab
+	Shipping labels	Етикети за пратки
+	Short citation:	Кратък цитат:
+	Shortcut key:	Клавишна комбинация:
+	Show	Покажи
+	Show all formatting marks	Показване на всички знаци за форматиране
+	Show All Levels	Покажи всички нива
+	Show all revisions inline	Показване на всички редакции в текста
+	Show changes at:	Показване на промените при:
+	Show changes in:	Показване на промените в:
+	Show Comments	Покажи коментарите
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Показване на документите с обърнати цветове, като „Изглед › Смяна на режимите“. Записването, печатът и PDF файловете не се променят.
+	Show every bibliography field	Показване на всички полета на библиографията
+	Show First Line Only	Покажи само първия ред
+	Show in the Styles gallery	Показване в галерията със стилове
+	Show KeyTips (Alt or F10)	Показване на подсказките за клавиши (Alt или F10)
+	Show Level	Покажи ниво
+	Show Level 1	Покажи ниво 1
+	Show Level 2	Покажи ниво 2
+	Show Level 3	Покажи ниво 3
+	Show Level 4	Покажи ниво 4
+	Show Level 5	Покажи ниво 5
+	Show Level 6	Покажи ниво 6
+	Show Level 7	Покажи ниво 7
+	Show Level 8	Покажи ниво 8
+	Show Level 9	Покажи ниво 9
+	Show Markup	Покажи маркировките
+	Show Notes	Покажи бележките
+	Show only comments and formatting in balloons	Показване само на коментарите и форматирането в балончета
+	Show or Hide Style	Показване или скриване на стил
+	Show page numbers	Показване на номерата на страниците
+	Show revisions in balloons	Показване на редакциите в балончета
+	Show rulers	Показване на линийките
+	Show Text Formatting	Показване на форматирането на текста
+	Show the equation in the line of text	Показване на уравнението в реда на текста
+	Show the equation on a line of its own	Показване на уравнението на отделен ред
+	Show the mini toolbar when text is selected	Показване на мини лентата с инструменти при избран текст
+	Show/Hide ¶	Покажи/скрий ¶
+	Show\nComments	Покажи\nкоментарите
+	Showing the first {count} items.	Показани са първите {count} елемента.
+	Shows a tree: each item below the item it belongs to.	Показва дърво: всеки елемент под елемента, към който принадлежи.
+	Shows items around a central idea: the first item is the centre.	Показва елементи около централна идея: първият елемент е центърът.
+	Shows items of equal weight as blocks in rows.	Показва елементи с еднаква тежест като блокове в редове.
+	Shows overlapping ideas as overlapping circles.	Показва застъпващи се идеи като застъпващи се кръгове.
+	Shows parts of a whole as quadrants.	Показва частите на едно цяло като квадранти.
+	Shows parts that build on each other, largest at the bottom.	Показва части, които надграждат една върху друга, с най-голямата отдолу.
+	Shows steps in order, left to right, with arrows between them.	Показва стъпки по ред, отляво надясно, със стрелки между тях.
+	Shows steps that repeat, around a circle.	Показва повтарящи се стъпки в кръг.
+	Shrink Font 1 Point	Намали шрифта с 1 пункт
+	Shrink Selection	Свий селекцията
+	Shrink text	Свиване на текста
+	Side to Side	Една до друга
+	Side\nto Side	Една до\nдруга
+	Sides of a right triangle	Страни на правоъгълен триъгълник
+	Signature Line	Ред за подпис
+	Sine and cosine series of f(x)	Синусов и косинусов ред на f(x)
+	Sine Function	Функция синус
+	Sine theta	Синус от тета
+	Single	Единична
+	Single Brackets	Единични скоби
+	Single Closing Quote	Затваряща единична кавичка
+	Single label	Единичен етикет
+	Single Left Angle	Единична лява ъглова скоба
+	Single Left Bar	Единична лява черта
+	Single Left Brace	Единична лява фигурна скоба
+	Single Left Bracket	Единична лява квадратна скоба
+	Single Left Parenthesis	Единична лява кръгла скоба
+	Single Opening Quote	Отваряща единична кавичка
+	Single Right Brace	Единична дясна фигурна скоба
+	Single Right Bracket	Единична дясна квадратна скоба
+	Single Right Parenthesis	Единична дясна кръгла скоба
+	Single Spacing	Единична разредка
+	SIST02	SIST02
+	Site name	Име на сайта
+	Size	Размер
+	Size (pt):	Размер (pt):
+	Size and Crop…	Размер и изрязване…
+	Size:	Размер:
+	Sketchbook	Скицник
+	Skewed Fraction	Наклонена дроб
+	Skip citations & bibliography	Пропускане на цитати и библиография
+	Skip Citations and Bibliography	Пропусни цитатите и библиографията
+	Skip Record If	Пропусни запис, ако
+	Skip Record If…	Пропусни запис, ако…
+	Slant Down	Наклон надолу
+	Slant Up	Наклон нагоре
+	Small Caps	Малки главни
+	Small caps	Малки главни
+	Small change	Малка промяна
+	Smart quotes instead of straight quotes	Типографски кавички вместо прави кавички
+	SmartArt	SmartArt
+	SmartArt Design	Дизайн на SmartArt
+	SmartArt Styles	Стилове на SmartArt
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Плавно превъртане и мащабиране и менюта и бутони, които се появяват плавно. Изключено показва всяка промяна наведнъж.
+	Soft Edges	Меки ръбове
+	Soft Glow	Меко сияние
+	Solid Accent	Плътен акцент
+	Sort	Сортиране
+	Sort by	Сортиране по
+	Sort order:	Ред на сортиране:
+	Sort Records	Сортиране на записите
+	Source code: github.com/chatraweechai/doc4me	Програмен код: github.com/chatraweechai/doc4me
+	Source Manager	Диспечер на източници
+	Source type:	Тип на източника:
+	Sources in this document:	Източници в този документ:
+	South	Юг
+	Space	Интервал
+	Space after	Разредка след
+	Space after: {pt} pt	Разредка след: {pt} pt
+	Space before	Разредка преди
+	Space before/after:	Разредка преди/след:
+	Space before: {pt} pt	Разредка преди: {pt} pt
+	Spaces	Интервали
+	Spacing	Разредка
+	Spacing (pt):	Разредка (pt):
+	Spacing:	Разредка:
+	Spanish	Испански
+	Spanish (Mexico)	Испански (Мексико)
+	Spanish (Spain)	Испански (Испания)
+	Sparse Matrices	Разредени матрици
+	Special	Специални
+	Special Characters	Специални знаци
+	Specify height:	Задаване на височина:
+	Speech	Реч
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Речта се разпознава на този компютър (whisper.cpp); нищо не се изпраща онлайн.
+	Speed	Скорост
+	Spelling	Правопис
+	Spelling & Grammar	Правопис и граматика
+	Spelling &\nGrammar	Правопис и\nграматика
+	Spelling and grammar are checked in English (United States).	Правописът и граматиката се проверяват на английски (САЩ).
+	Spelling Suggestions	Предложения за правопис
+	Spike	Натрупване
+	Split	Раздели
+	Split apart page break and paragraph mark	Разделяне на знака за нова страница и знака за край на абзац
+	Split Cells	Раздели клетките
+	Split Table	Раздели таблицата
+	Spreadsheet Table	Таблица от електронна таблица
+	Square	Квадрат
+	Square Root	Квадратен корен
+	Square Root with Degree	Квадратен корен със степен
+	Square Union	Квадратно обединение
+	Stack Object	Обект в стек
+	Stack Object (Three)	Обект в стек (три)
+	Stacked	Една над друга
+	Stacked Bar	Натрупани ленти
+	Stacked Column	Натрупани колони
+	Stacked Fraction	Вертикална дроб
+	Stacked, no bar	Една над друга, без черта
+	Standard	Стандартни
+	Standard and Contextual	Стандартни и контекстуални
+	Standard Colors	Стандартни цветове
+	Standard Only	Само стандартни
+	Star	Звезда
+	Start at:	Започни от:
+	Start Enforcing Protection	Започни прилагането на защитата
+	Start Mail Merge	Започни циркулярно писмо
+	Start Mail\nMerge	Започни\nциркулярно писмо
+	State	Област
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Statistics	Статистика
+	Status Bar	Лента на състоянието
+	Statutes	Закони
+	Stop	Спри
+	Stop Protection	Спри защитата
+	Stop Reading	Спри четенето
+	Stopped	Спряно
+	Store	Магазин
+	Straight Arrow Connector	Права съединителна стрелка
+	Straight Connector	Прав съединител
+	Strikethrough	Зачертаване
+	Stroke {n} of {total}	Щрих {n} от {total}
+	Strong	Силно
+	Structure Actions	Действия със структурата
+	Structures	Структури
+	Studio	Студио
+	Studio cover	Корица „Студио“
+	Studio handbook (sample)	Наръчник „Студио“ (образец)
+	Style	Стил
+	Style based on:	Стил, базиран на:
+	Style Inspector	Инспектор на стилове
+	Style Set	Набор от стилове
+	Style:	Стил:
+	Style: APA	Стил: APA
+	Style: {style}	Стил: {style}
+	Styles	Стилове
+	Styles Pane	Екран за стилове
+	Styles:	Стилове:
+	Subentry:	Поделемент:
+	Subject	Тема
+	Subscript	Долен индекс
+	Subscript-Superscript	Долен и горен индекс
+	Subscripts and Superscripts	Долни и горни индекси
+	Subset:	Подмножество:
+	Substituted font	Заместен шрифт
+	Subtitle	Подзаглавие
+	Subtle Emphasis	Леко акцентиране
+	Subtle Reference	Лека препратка
+	Sum	Сума
+	Sum of cosines	Сума от косинуси
+	Sum or difference of sines	Сума или разлика на синуси
+	Summation	Сумиране
+	Summation from 0 to n	Сума от 0 до n
+	Summation over binomials	Сума от биномни коефициенти
+	Summation with Limits	Сума с граници
+	Summation with Lower Limit	Сума с долна граница
+	Summation with Subscript Limit	Сума с граница като долен индекс
+	Summation with Subscript-Superscript Limits	Сума с граници като долен и горен индекс
+	Summations	Суми
+	Superscript	Горен индекс
+	Suppress line numbers	Без номера на редовете
+	Surface Integral	Повърхностен интеграл
+	Surface Integral with Limits	Повърхностен интеграл с граници
+	Surface Integral with Stacked Limits	Повърхностен интеграл с граници една над друга
+	Swap footnotes and endnotes	Размяна на бележките под линия и в края
+	Swedish	Шведски
+	Switch Modes	Смяна на режимите
+	Switch Windows	Превключване на прозорците
+	Switch\nModes	Смяна на\nрежимите
+	Symbol	Символ
+	Symbol Font	Шрифт за символи
+	Symbols	Символи
+	Synchronous Scrolling	Синхронно превъртане
+	Synonyms	Синоними
+	System	Системна
+	Tab	Tab
+	Tab Character	Знак за табулация
+	Tab character	Знак за табулация
+	Tab characters	Знаци за табулация
+	Tab leader:	Водач на табулацията:
+	Tab stop position:	Позиция на табулацията:
+	Tab stops to be cleared:	Позиции за табулация за изчистване:
+	Table	Таблица
+	Table AutoFormat	Автоформатиране на таблица
+	Table AutoFormat…	Автоформатиране на таблица…
+	Table Column Width	Ширина на колоната на таблицата
+	Table Design	Дизайн на таблица
+	Table direction:	Посока на таблицата:
+	Table entry fields	Полета за елементи на таблица
+	Table Grid	Мрежа на таблица
+	Table identifier:	Идентификатор на таблицата:
+	Table Layout	Оформление на таблица
+	Table of Authorities	Таблица с източници
+	Table of Contents	Съдържание
+	Table of Contents Options	Опции за съдържанието
+	Table of Contents Styles	Стилове на съдържанието
+	Table of Figures	Таблица с фигури
+	Table of Figures Options	Опции за таблицата с фигури
+	Table of\nContents	Съдържание
+	Table Positioning	Позициониране на таблицата
+	Table Properties	Свойства на таблицата
+	Table Row Height	Височина на реда на таблицата
+	Table style	Стил на таблица
+	Table Style Options	Опции за стила на таблица
+	Table Styles	Стилове на таблици
+	Table styles:	Стилове на таблици:
+	Tables	Таблици
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tabs	Табулации
+	Tabs…	Табулации…
+	Tabular List	Табличен списък
+	Tag	Етикет
+	Tangent formula	Формула за тангенс
+	Tangent Function	Функция тангенс
+	TC entry fields	Полета за елементи TC
+	Technology	Технологии
+	Templates	Шаблони
+	Templates and Add-ins	Шаблони и добавки
+	Text	Текст
+	Text Box	Текстово поле
+	Text boxes	Текстови полета
+	Text Direction	Посока на текста
+	Text Effects	Текстови ефекти
+	Text Effects and Typography	Текстови ефекти и типография
+	Text Fill	Запълване на текста
+	Text from File	Текст от файл
+	Text Highlight Color	Цвят за осветяване на текста
+	Text indent at:	Отстъп на текста при:
+	Text isn't squeezed to fit its cell yet.	Текстът все още не се сгъстява, за да се побере в клетката.
+	Text Outline	Контур на текста
+	Text over Colon Equal	Текст над двоеточие равно
+	Text over Equal	Текст над равно
+	Text Pane	Екран за текст
+	Text size	Размер на текста
+	Text snaps to characters	Текстът се прилепва към знаците
+	Text to display:	Текст за показване:
+	Text Wrapping	Обтичане на текста
+	Text wrapping:	Обтичане на текста:
+	Text:	Текст:
+	Text\nBox	Текстово\nполе
+	Text\nDirection	Посока на\nтекста
+	Thai	Тайландски
+	Thai Distributed	Тайландско разпределено
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Този формат не запазва всичко, затова документът остава отворен. Запишете го като документ на Word (.docx), за да продължите.
+	That isn't the web address or embed code of an online video.	Това не е уеб адрес или код за вграждане на онлайн видео.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Паролата не е правилна. Проверете я (паролите различават главни и малки букви) и опитайте отново.
+	The clipboard is empty.	Клипбордът е празен.
+	The date it is today	Днешната дата
+	The document contains no tracked changes.	Документът не съдържа проследени промени.
+	The document has no bookmarks yet.	Документът все още няма отметки.
+	The document is read only, except for regions marked editable.	Документът е само за четене, с изключение на областите, маркирани за редактиране.
+	The document will be saved with a password. Save it to protect it.	Документът ще бъде записан с парола. Запишете го, за да го защитите.
+	The first word of a sentence starts with a capital.	Първата дума на изречението започва с главна буква.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	безплатната дневна квота е изчерпана (опитайте отново утре или посочете имейл адрес)
+	the LibreTranslate server	сървърът LibreTranslate
+	The Mail Merge Helper sets up a merge in three steps.	Помощникът за циркулярни писма настройва сливането в три стъпки.
+	The new style takes the formatting of the current paragraph.	Новият стил взема форматирането на текущия абзац.
+	The password is optional; without it anyone can stop the protection.	Паролата не е задължителна; без нея всеки може да спре защитата.
+	The password is removed. Save the document to keep the change.	Паролата е премахната. Запишете документа, за да запазите промяната.
+	The passwords don't match.	Паролите не съвпадат.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Принтерът, двустранният печат и страниците на лист се избират в този диалогов прозорец.
+	The recipient-list field that fills each part of an address block and greeting line.	Полето от списъка с получатели, което попълва всяка част от адресния блок и реда с обръщение.
+	The same word twice in a row.	Една и съща дума два пъти подред.
+	The spelling and grammar check is complete.	Проверката на правописа и граматиката завърши.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Системният диалогов прозорец за файлове не е наличен, затова Doc4Me показва свой. За системния диалогов прозорец инсталирайте портал за избор на файлове (например xdg-desktop-portal-gtk) или zenity.
+	The text is sent to {service} to be translated.	Текстът се изпраща към {service} за превод.
+	The time right now	Точният час в момента
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Видеото се показва като картина в документа. Щракнете двукратно върху него, за да го гледате в браузъра.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Целият документ се превежда в нов документ, който заменя този. Първо запишете работата си.
+	Theme Colors	Цветове на темата
+	Theme Fonts	Шрифтове на темата
+	Theme List	Списък с теми
+	Themes	Теми
+	Then by	След това по
+	Then insert:	Тогава вмъкни:
+	There's no text to translate.	Няма текст за превод.
+	Thesaurus	Тезаурус
+	These marks show even when Show/Hide ¶ is off.	Тези знаци се показват дори когато „Покажи/скрий ¶“ е изключено.
+	These merge fields aren't in the recipient list:	Тези полета за сливане не са в списъка с получатели:
+	These settings will be used for new documents.	Тези настройки ще се използват за новите документи.
+	Thick	Дебела
+	Thickness	Дебелина
+	This Device…	Това устройство…
+	This document	Този документ
+	This field has no options.	Това поле няма опции.
+	This folder can't be read: {error}	Тази папка не може да се прочете: {error}
+	This font has no characters to show.	Този шрифт няма знаци за показване.
+	This page	Тази страница
+	This password type isn't supported.	Този тип парола не се поддържа.
+	This point forward	От тази точка нататък
+	This section	Тази секция
+	Three	Три
+	Through	През
+	Tight	Плътно
+	Tilde	Тилда
+	Tips ({n})	Съвети ({n})
+	Title	Заглавие
+	Title from the document properties	Заглавие от свойствата на документа
+	Title:	Заглавие:
+	To	До
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	За да отваряте документи на Word с Doc4Me по подразбиране: изберете един във Finder, изберете File › Get Info, посочете Doc4Me под Open with и щракнете върху Change All.
+	To:	До:
+	TOA Heading	Заглавие на таблица с източници
+	TOC Heading	Заглавие на съдържание
+	TOC {n}	Съдържание {n}
+	Today	Днес
+	tOGGLE cASE	оБЪРНАТ рЕГИСТЪР
+	Toggle Check Box	Превключи квадратчето за отметка
+	Toggle Field Codes	Превключи кодовете на полетата
+	Toggle Unicode Character	Превключи знак от Unicode
+	Tools	Инструменти
+	Top	Горе
+	Top and Bottom	Горе и долу
+	Top Border	Горна граница
+	Top Margin	Горно поле
+	Top of Next Page	Горе на следващата страница
+	Top of Page	Горе на страницата
+	Top of Previous Page	Горе на предишната страница
+	Top of the Window	Горе в прозореца
+	Top:	Горе:
+	Total	Общо
+	Total Row	Ред за общия сбор
+	Track Changes	Проследяване на промените
+	Track Changes Options	Опции за проследяване на промените
+	Track changes while editing	Проследяване на промените при редактиране
+	Track Changes: On	Проследяване на промените: включено
+	Track formatting	Проследяване на форматирането
+	Track\nChanges	Проследяване\nна промените
+	Track\nChanges ✓	Проследяване\nна промените ✓
+	Tracked changes	Проследени промени
+	Tracking	Разредка на знаците
+	Trademark	Търговска марка
+	Trademark Sign	Знак за търговска марка
+	Transform	Трансформиране
+	Translate	Превод
+	Translate Document	Преведи документа
+	Translating {done} of {total}	Превеждане: {done} от {total}
+	Translation service	Услуга за превод
+	Translator	Преводач
+	Transparency	Прозрачност
+	Transparency:	Прозрачност:
+	Transport	Транспорт
+	Treatises	Договори
+	Triangle	Триъгълник
+	Triangle Down	Триъгълник надолу
+	Triangle Up	Триъгълник нагоре
+	Trigonometric Functions	Тригонометрични функции
+	Triple	Тройна
+	Triple Dot	Тройна точка
+	Triple Integral	Троен интеграл
+	Triple Integral with Limits	Троен интеграл с граници
+	Triple Integral with Stacked Limits	Троен интеграл с граници една над друга
+	Trust Center	Център за сигурност
+	Tue	вт
+	Turabian	Turabian
+	Turkish	Турски
+	Two	Две
+	Type	Тип
+	Type a command, e.g. "insert table"	Въведете команда, напр. „вмъкни таблица“
+	Type a New List	Въведете нов списък
+	Type a New List…	Въведете нов списък…
+	Type at least one recipient.	Въведете поне един получател.
+	Type equations in LaTeX	Въвеждане на уравнения в LaTeX
+	Type equations in the linear format (UnicodeMath)	Въвеждане на уравнения в линеен формат (UnicodeMath)
+	Type in Equation	Въвеждане в уравнението
+	Type normal (non-math) text in the equation	Въвеждане на нормален (нематематически) текст в уравнението
+	Type Text	Въведи текст
+	Type the categories down the side and a column of values per series.	Въведете категориите отстрани и по една колона със стойности за всяка серия.
+	Type the field's name and its switches, for example PAGE \\* roman.	Въведете името на полето и неговите превключватели, например PAGE \\* roman.
+	Type the password to stop the protection.	Въведете паролата, за да спрете защитата.
+	Type the recipients, or load them from a file.	Въведете получателите или ги заредете от файл.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Въведете името на етикета на източника. Можете да добавите още информация към този източник по-късно, като го редактирате.
+	Type:	Тип:
+	Typing	Въвеждане
+	Typing replaces selected text	Въвежданият текст заменя избрания
+	Ukrainian	Украински
+	Unchecked symbol	Неотметнат символ
+	Underbar	Черта отдолу
+	Underbrace	Фигурна скоба отдолу
+	Underline	Подчертаване
+	Underline color	Цвят на подчертаването
+	Underline Words Only	Подчертаване само на думите
+	Undo	Отмени
+	Undo Stroke	Отмени щриха
+	Undo {action}	Отмени {action}
+	Unformatted Text	Неформатиран текст
+	Ungroup	Разгрупирай
+	Union	Обединение
+	Union of intersections	Обединение на сечения
+	Union with Limits	Обединение с граници
+	Union with Lower Limit	Обединение с долна граница
+	Union with Plus	Обединение с плюс
+	Union with Subscript-Superscript Limits	Обединение с граници като долен и горен индекс
+	Unions and Intersections	Обединения и сечения
+	Unlink Fields	Прекъсни връзката на полетата
+	Unlink\nCitations	Прекъсни връзката\nна цитатите
+	Unlock Fields	Отключи полетата
+	Up	Нагоре
+	Up Diagonal Dots	Диагонални точки нагоре
+	Up one level	Едно ниво нагоре
+	Update Field	Актуализирай полето
+	Update fields before printing	Актуализиране на полетата преди печат
+	Update Index	Актуализирай указателя
+	Update Style to Match Selection	Актуализирай стила според селекцията
+	Update Styles from Template	Актуализиране на стиловете от шаблона
+	Update Table	Актуализирай таблицата
+	Update Table of Figures	Актуализирай таблицата с фигури
+	Update to Match	Актуализирай за съответствие
+	Update to Match Selection	Актуализирай според селекцията
+	UPPERCASE	ГЛАВНИ БУКВИ
+	URGENT	СПЕШНО
+	URL	URL адрес
+	Use "a" before a consonant sound	„a“ пред съгласен звук
+	Use "an" before a vowel sound	„an“ пред гласен звук
+	Use an Existing List…	Използване на съществуващ списък…
+	Use passim (five or more pages)	Използване на passim (пет или повече страници)
+	Use system setting	Използване на системната настройка
+	Use the Insert key to switch overtype on and off	Използване на клавиша Insert за включване и изключване на заместването
+	Use wildcards	Използване на заместващи знаци
+	User Name	Потребителско име
+	User name:	Потребителско име:
+	Username	Потребителско име
+	Value	Стойност
+	Vector A	Вектор A
+	Vector AB	Вектор AB
+	Version	Версия
+	Version History	Хронология на версиите
+	Version {version} ({build})	Версия {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Версиите се пазят, докато документът е отворен (файлът .docx няма версии).
+	Vertical	Вертикално
+	Vertical Alignment	Вертикално подравняване
+	Vertical alignment:	Вертикално подравняване:
+	Vertical Bars	Вертикални черти
+	Vertical Dots	Вертикални точки
+	Vertical spacing:	Вертикално разстояние:
+	Vietnamese	Виетнамски
+	View	Изглед
+	View Alt Text…	Покажи алтернативния текст…
+	View Gridlines	Покажи линиите на мрежата
+	View Side by Side	Изглед един до друг
+	View State	Състояние на изгледа
+	Views	Изгледи
+	Visual effects	Визуални ефекти
+	Voice	Глас
+	Volume	Том
+	Volume Integral	Обемен интеграл
+	Volume Integral with Limits	Обемен интеграл с граници
+	Volume Integral with Stacked Limits	Обемен интеграл с граници една над друга
+	W:	Ш:
+	Waiting for Zotero…	Изчакване на Zotero…
+	Warm Gradient with Outline	Топъл градиент с контур
+	Warnings ({n})	Предупреждения ({n})
+	Watermark	Воден знак
+	Wave	Вълна
+	Weather	Време
+	web access isn't available here	тук няма достъп до уеб
+	Web Layout	Уеб оформление
+	Web page (*.html)	Уеб страница (*.html)
+	Web\nLayout	Уеб\nоформление
+	Website	Уеб сайт
+	Wed	ср
+	Weight	Тегло
+	West	Запад
+	When merging records	При сливане на записи
+	When this document was first created	Кога е създаден за първи път този документ
+	When this document was most recently printed	Кога е отпечатан за последно този документ
+	When this document was most recently saved	Кога е записан за последно този документ
+	White Space	Празно място
+	White space	Празни знаци
+	Who the document properties name as author	Кого свойствата на документа посочват като автор
+	Whole document	Целият документ
+	Whole page	Цялата страница
+	Whole Table	Цялата таблица
+	Whole words	Цели думи
+	Wide	Широки
+	Widow/Orphan Control	Контрол на вдовици/сираци
+	Widow/Orphan control	Контрол на вдовици/сираци
+	Width and spacing	Ширина и разстояние
+	Width:	Ширина:
+	Wildcards (regex)	Заместващи знаци (регулярни изрази)
+	Window	Прозорец
+	With:	С:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 и по-нови
+	Word 97–2003	Word 97–2003
+	Word Count	Брой думи
+	Word document	Документ на Word
+	Word document (*.docx)	Документ на Word (*.docx)
+	Word forms	Словоформи
+	Word Left	Дума наляво
+	Word level	Ниво на дума
+	Word Right	Дума надясно
+	Word XML Document (*.xml)	XML документ на Word (*.xml)
+	WordArt	WordArt
+	WordArt Styles	Стилове на WordArt
+	Words	Думи
+	Words only	Само думи
+	Wrap Text	Обтичане на текста
+	Wrap text	Обтичане на текста
+	Wrap Text Sides	Страни на обтичане на текста
+	Wrap\nText	Обтичане\nна текста
+	Write & Insert Fields	Писане и вмъкване на полета
+	Write a reply	Напишете отговор
+	Write math here with the mouse or a pen.	Пишете математика тук с мишката или писалка.
+	Writing Style: Grammar	Стил на писане: граматика
+	x bar	x с черта
+	Year	Година
+	Yes	Да
+	Yields	Дава
+	Your changes will be lost if you don't save them.	Промените ви ще бъдат загубени, ако не ги запишете.
+	Your system doesn't report an animation setting, so animation effects stay on.	Системата ви не съобщава настройка за анимации, затова ефектите на анимация остават включени.
+	Your system has animation effects turned off.	Системата ви е с изключени ефекти на анимация.
+	Your system has animation effects turned on.	Системата ви е с включени ефекти на анимация.
+	Zoom	Мащаб
+	Zoom In	Увеличи
+	Zoom Out	Намали
+	Zoom to Page	Мащаб по страницата
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: отказано
+	Zotero: done	Zotero: готово
+	{cols}×{rows} Table	Таблица {cols}×{rows}
+	{contributors} contributors · {commits} commits	{contributors} сътрудници · {commits} подавания
+	{count} items highlighted	Осветени елементи: {count}
+	{count} of {total} pages will print	Ще се отпечатат {count} от {total} страници
+	{count} paragraphs were changed.	Променени абзаци: {count}.
+	{count} records; fields: {fields}	{count} записа; полета: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} не е инсталиран на този компютър, затова документът се показва с {with}. Редовете и страниците може да се пренасят различно от оригиналния шрифт.
+	{group} settings	Настройки за {group}
+	{key}+Click to follow link	{key}+щракване за следване на връзката
+	{language} is now the document's default language.	{language} вече е езикът по подразбиране на документа.
+	{name} (Press ENTER to Insert)	{name} (натиснете ENTER за вмъкване)
+	{name} already exists. Choose Save again to replace it.	{name} вече съществува. Изберете отново „Запиши“, за да го замените.
+	{name} can't be a folder's name.	{name} не може да бъде име на папка.
+	{name} is protected with a password.	{name} е защитен с парола.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} беше добавен. Макросите му са в „Моите добавки“ и „Изглед › Макроси“.
+	{name} wasn't found.	{name} не е намерен.
+	{n} entries marked.	Маркирани елементи: {n}.
+	{n} lines	{n} реда
+	{n} of {of} recipients	{n} от {of} получатели
+	{n} pt	{n} pt
+	{n} records	{n} записа
+	{n} revisions	{n} редакции
+	{selected} of {words} words	{selected} от {words} думи
+	{size} pt	{size} pt
+	{words} words	{words} думи
+	{w} × {h} in	{w} × {h} in
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	„{text}“ ({row}, {series}) не е число.
+	← Find	← Намери
+	✓ None	✓ Няма
+	➕ New comment	➕ Нов коментар
+	📂  Browse…	📂  Преглед…
+	Add Help Text…	Добави помощен текст…
+	AutoText entry:	Елемент на автотекст:
+	Calculate on exit	Изчисляване при излизане
+	Calculation	Изчисление
+	Check Box Form Field	Поле за формуляр „Квадратче за отметка“
+	Check Box Form Field Options	Опции на полето за формуляр „Квадратче за отметка“
+	Check box	Квадратче за отметка
+	Check box enabled	Квадратчето за отметка е активно
+	Check box size:	Размер на квадратчето:
+	Checked	Отметнато
+	Current date	Текуща дата
+	Current time	Текущ час
+	Default value:	Стойност по подразбиране:
+	Drop-Down Form Field	Поле за формуляр „Падащ списък“
+	Drop-Down Form Field Options	Опции на полето за формуляр „Падащ списък“
+	Drop-down	Падащ списък
+	Drop-down enabled	Падащият списък е активен
+	Drop-down item:	Елемент на падащия списък:
+	Fill In Form Field	Поле за формуляр за попълване
+	Fill-in enabled	Попълването е активно
+	Form Field	Поле за формуляр
+	Form Field Help Text	Помощен текст на полето за формуляр
+	Form Field Options	Опции на полето за формуляр
+	Form Field Shading	Засенчване на полетата за формуляр
+	Form Field at Selection	Поле за формуляр в селекцията
+	Help Key (F1)	Клавиш за помощ (F1)
+	Insert Form Field	Вмъкни поле за формуляр
+	Items in drop-down list:	Елементи в падащия списък:
+	Legacy Tools	Наследени инструменти
+	Maximum length:	Максимална дължина:
+	Next Form Field	Следващо поле за формуляр
+	Not checked	Неотметнато
+	Put the caret on a form field first.	Първо поставете курсора върху поле за формуляр.
+	Regular text	Обикновен текст
+	Reset Form Fields	Нулирай полетата за формуляр
+	Text Form Field	Текстово поле за формуляр
+	Text Form Field Options	Опции на текстовото поле за формуляр
+	Type your own:	Въведете свой:
+	Unlimited	Неограничено
+	Protected sections:	Защитени секции:
+	Section Protection	Защита на секции
+	Section {n}	Секция {n}
+	Select sections…	Избор на секции…
+	AutoSummarize	Автоматично резюме
+	Create a new document and put the summary there	Създаване на нов документ и поставяне на резюмето там
+	Highlight key points	Осветяване на ключовите моменти
+	Insert an executive summary or abstract at the top of the document	Вмъкване на обобщение или резюме в началото на документа
+	Length of summary	Дължина на резюмето
+	Percent of original:	Процент от оригинала:
+	Summary: {words} of {of} words	Резюме: {words} от {of} думи
+	Type of summary	Тип на резюмето
+	Update document statistics	Актуализиране на статистиката на документа
+	{n} sentences	{n} изречения
+	{n} words or less	{n} думи или по-малко
+	At:	При:
+	Distance from text:	Разстояние от текста:
+	Format Frame	Формат на рамка
+	Format Frame…	Формат на рамка…
+	Frame	Рамка
+	Frame…	Рамка…
+	Insert Frame	Вмъкни рамка
+	Lock anchor	Заключване на котвата
+	Remove Frame	Премахни рамката
+	Text wrapping	Обтичане на текста
+	Chinese Conversion	Китайско преобразуване
+	Chinese Conversion…	Китайско преобразуване…
+	Converted {n} characters	Преобразувани знаци: {n}
+	Simplified Chinese to Traditional Chinese	От опростен в традиционен китайски
+	Simplified to Traditional	От опростен в традиционен
+	Traditional Chinese to Simplified Chinese	От традиционен в опростен китайски
+	Traditional to Simplified	От традиционен в опростен
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Използване на вариантите на знаци за Тайван, САР Хонконг и САР Макао
+	Asian Layout	Азиатско оформление
+	Fit Text	Побиране на текста
+	Fit Text…	Побиране на текста…
+	Two Lines in One	Два реда в един
+	Two Lines in One…	Два реда в един…
+	New text width (pt):	Нова ширина на текста (pt):
+	Enclose in brackets	Ограждане в скоби
+	Bracket pair:	Двойка скоби:
+	Typography	Типография
+	Character spacing control	Управление на разредката на знаците
+	Don't compress	Без сгъстяване
+	Compress punctuation only	Сгъстяване само на пунктуацията
+	Compress punctuation and Japanese kana	Сгъстяване на пунктуацията и японската кана
+	First and last characters	Първи и последни знаци
+	Strict	Строго
+	Cannot start a line:	Не може да започва ред:
+	Cannot end a line:	Не може да завършва ред:
+	Japanese Find Options	Опции за търсене на японски
+	Sounds like (Japanese)	Звучи като (японски)
+	Match full/half width	Съвпадение на пълна/половин ширина
+	Match hiragana/katakana	Съвпадение на хирагана/катакана
+	Match small kana	Съвпадение на малка кана
+	Match prolonged sound marks and dashes	Съвпадение на знаците за удължен звук и тиретата
+	Japanese Consistency Checker	Проверка за еднаквост на японски
+	Japanese Consistency Checker…	Проверка за еднаквост на японски…
+	No inconsistent spellings were found.	Не са открити несъответстващи изписвания.
+	Pick the spelling to keep in each group.	Изберете изписването, което да остане във всяка група.
+	Bidirectional text	Двупосочен текст
+	Bidirectional Text	Двупосочен текст
+	Default direction:	Посока по подразбиране:
+	Cursor movement:	Движение на курсора:
+	Logical	Логическо
+	Visual	Визуално
+	Manage Fields	Управление на полетата
+	File locations	Местоположения на файлове
+	File Locations	Местоположения на файлове
+	Documents:	Документи:
+	Pictures:	Картини:
+	The system's choice	Изборът на системата
+	Show Repairs	Покажи поправките
+	No repairs were needed.	Не бяха нужни поправки.
+	These problems were found and repaired when the document was opened:	Тези проблеми бяха открити и поправени при отварянето на документа:
+	An unreadable entry in the file was skipped: {what}	Нечетим запис във файла беше пропуснат: {what}
+	An unreadable part was left out: {what}	Нечетима част беше изпусната: {what}
+	Unreadable relationships were ignored: {what}	Нечетими връзки бяха игнорирани: {what}
+	A missing part of an embedded object was left out: {what}	Липсваща част от вграден обект беше изпусната: {what}
+	Copy File	Копирай файла
+	Find Files	Търсене на файлове
+	Letter Wizard	Съветник за писма
+	Recipient's name:	Име на получателя:
+	Salutation:	Обръщение:
+	Subject:	Относно:
+	Complimentary closing:	Заключителен поздрав:
+	Sender's name:	Име на подателя:
+	Job title:	Длъжност:
+	Company:	Фирма:
+	Enclosures:	Приложения:
+	Cc:	Копие до:
+	Edit Links to Files	Редактиране на връзките към файлове
+	Source file	Файл източник
+	Locked	Заключено
+	Change Source	Смени източника
+	This document has no links to files.	Този документ няма връзки към файлове.
+	Web options	Уеб опции
+	Web Options	Уеб опции
+	Allow PNG as a graphics format	Разрешаване на PNG като графичен формат
+	Rely on CSS for font formatting	Използване на CSS за форматиране на шрифта
+	Rely on VML for displaying graphics in browsers	Използване на VML за показване на графики в браузърите
+	Organize supporting files in a folder	Организиране на помощните файлове в папка
+	Use long file names whenever possible	Използване на дълги имена на файлове, когато е възможно
+	Screen size:	Размер на екрана:
+	Pixels per inch:	Пиксели на инч:
+	Hangul Hanja Conversion	Преобразуване хангъл–ханджа
+	Hangul Hanja Conversion…	Преобразуване хангъл–ханджа…
+	Hangul to Hanja	От хангъл в ханджа
+	Hanja to Hangul	От ханджа в хангъл
+	Put the caret in Korean text to choose its Hanja.	Поставете курсора в корейски текст, за да изберете ханджа за него.
+	The selection, or the whole document when nothing is selected.	Селекцията или целият документ, когато нищо не е избрано.
