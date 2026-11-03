@@ -34,7 +34,15 @@ jobs:
       - name: Install poppler
         shell: pwsh
         run: |
-          choco install poppler -y --no-progress
+          # The community feed sometimes answers 406 for the package's metadata (run 41564657737);
+          # a retry fetches it again.
+          $installed = $false
+          for ($i = 1; $i -le 3; $i++) {
+            choco install poppler -y --no-progress
+            if ($LASTEXITCODE -eq 0) { $installed = $true; break }
+            Start-Sleep -Seconds 30
+          }
+          if (-not $installed) { Write-Error "choco could not install poppler after 3 attempts"; exit 1 }
           $bin = Get-ChildItem "C:\ProgramData\chocolatey\lib\poppler" -Recurse -Filter pdfinfo.exe -ErrorAction SilentlyContinue | Select-Object -First 1
           if (-not $bin) { Write-Error "pdfinfo.exe not found after installing poppler"; exit 1 }
           Add-Content -Path $env:GITHUB_PATH -Value $bin.DirectoryName
