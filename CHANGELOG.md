@@ -13,6 +13,11 @@
 
 ### เพิ่ม
 
+- **Mailings › Manage Fields: เพิ่ม ลบ หรือเปลี่ยนชื่อเขตข้อมูลของรายชื่อผู้รับ** (คำสั่งใหม่ `mailings.manageFields` ใน `crates/engine/src/cmd/mailings.rs`; การเปิด dialog ใน `crates/ui-egui/src/lib.rs`; ข้อความใหม่ 1 รายการในแคตตาล็อกทั้ง 28 ภาษา; `docs/readiness/dialogs.tsv` dlg-200)
+  - เหตุผล: `wdDialogToolsManageFields` (จัดการเขตข้อมูลของแหล่งข้อมูลจดหมายเวียน) ไม่มีของเทียบเท่าสำหรับสคริปต์และ agent ส่วน UI แก้ชื่อ/เพิ่ม/ลบคอลัมน์ได้อยู่แล้วใน Edit Recipient List
+  - ตอนนี้: `{"add"?: ชื่อ, "remove"?: ชื่อ, "rename"?: {"from", "to"}}` เปลี่ยนเขตข้อมูลของรายชื่อ (เขตข้อมูลใหม่ว่างในทุกระเบียน, ชื่อซ้ำแบบไม่สนตัวพิมพ์ถูกปฏิเสธ, เก็บอย่างน้อยหนึ่งเขตข้อมูล, ชื่อ 1–40 ตัวอักษร, ตรวจทุกค่าก่อนเปลี่ยน) การเปลี่ยนจะยกเลิก Filter and Sort ที่ใช้อยู่ (กฎอ้างชื่อเขตข้อมูล) เหมือนการแก้รายชื่อ; ไม่มีค่าใดเลยจะเปิด Edit Recipient List; ต้องมีรายชื่อก่อน
+  - ผู้ใช้: ไม่มีผลกับเอกสารหรือไฟล์ .docx (รายชื่ออยู่ใน session); MERGEFIELD ในเอกสารไม่ถูกเปลี่ยนชื่อตาม เช่นเดียวกับ Word
+  - ตรวจสอบ: เทสต์ใหม่ `manage_fields_adds_removes_and_renames_fields`, ส่วนที่เพิ่มในเทสต์ UI `select_recipients_opens_the_recipient_list`; engine และ ui-egui ผ่านทั้งหมด, clippy ไม่มีคำเตือน
 - **File › Options › Advanced › Bidirectional text: Default direction และ Cursor movement** (`Prefs::logical_cursor`/`rtl_default` ใน `crates/engine/src/session.rs`; `file.options` รับ `logicalCursor`/`rtlDefault` และคำสั่งใหม่ `file.bidiOptions` ใน `crates/engine/src/cmd/options.rs`; ปุ่มลูกศรใน `crates/engine/src/cmd/caret.rs`; เอกสารเปล่าใหม่ใน `crates/engine/src/cmd/file.rs`; ส่วน Bidirectional text ในหน้า Advanced ของ `crates/ui-egui/src/options.rs`; ข้อความใหม่ 6 รายการในแคตตาล็อกทั้ง 28 ภาษา; `docs/readiness/dialogs.tsv` dlg-205)
   - เหตุผล: `wdDialogToolsOptionsBidi` (ตัวเลือกข้อความสองทิศทาง) ไม่มีของเทียบเท่า
   - ตอนนี้: Cursor movement แบบ Logical ให้ปุ่มลูกศรเลื่อนตามลำดับการอ่าน (ในย่อหน้าขวาไปซ้าย ลูกศรซ้ายเลื่อนไปข้างหน้า) แบบ Visual (ค่าเริ่มต้น เหมือนเดิม) เลื่อนตามตำแหน่งบนจอ; Default direction ขวาไปซ้ายทำให้เอกสารเปล่าใหม่ (File › New แบบ blank) ตั้งค่าเริ่มต้นย่อหน้า `w:bidi` ใน `w:pPrDefault`; `file.bidiOptions` (`{"cursorMovement"?: "logical|visual", "defaultDirection"?: "ltr|rtl"}`) ไม่มีค่าจะเปิด File › Options › Advanced
