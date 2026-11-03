@@ -1,4 +1,4 @@
-# Handoff: Doc4Me 1.1.2 · readiness 86.9% (วัดบน Windows รอบที่ 21 ด้วย workflow `readiness-windows.yml` run 41584013643, 2026-11-03; ก่อนหน้า 86.8%, 86.7% และ 86.0% รอบที่ 17) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
+# Handoff: Doc4Me 1.1.2 · readiness 87.0% (วัดบน Windows รอบที่ 21 ด้วย workflow `readiness-windows.yml` run 41585979571, 2026-11-03; ก่อนหน้า 86.9%, 86.8%, 86.7% และ 86.0% รอบที่ 17) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
 
 อัปเดต: 2026-11-02 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 20 (ออกรุ่นครบ แล้วทำงานต่อด้าน pagination) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
@@ -8,7 +8,8 @@
 
 ### ผลวัด Windows รอบที่ 21 (2026-11-03): **86.7%** (run 41565289539 ที่ `8b685b2` ยืนยันตัวเลขของ run 41559739417; `windows-latest`)
 
-- run 41584013643 (`b3bf68f`, Japanese Find: Sounds like (Japanese) และ Find Options (Japanese), `dlg-210`): **86.9%**, 89.4% เมื่อไม่นับ deferred, ฟีเจอร์ 92.1%, dialogs 191 → 192/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, round-trip 222/222); `1ff4c31` (Japanese Consistency Checker, `dlg-003`) กำลังวัดใน run 41585979571 และ `8b92537` (Options › Bidirectional text, `dlg-205`) push แล้ว รอวัดรอบถัดไป (บน Linux dialogs 194/228)
+- run 41585979571 (`5914683`, รวม `1ff4c31` Japanese Consistency Checker, `dlg-003`): **87.0%**, 89.5% เมื่อไม่นับ deferred, ฟีเจอร์ 92.3%, dialogs 192 → 193/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, round-trip 222/222); push แล้วรอวัด: `8b92537` (Bidirectional text, `dlg-205`), `5d6add8` (Manage Fields, `dlg-200`), `ddb1c52` (File locations, `dlg-209`) — run 41586915428 เริ่มหลัง `5d6add8` (บน Linux dialogs 197/228)
+- run 41584013643 (`b3bf68f`, Japanese Find: Sounds like (Japanese) และ Find Options (Japanese), `dlg-210`): **86.9%**, 89.4% เมื่อไม่นับ deferred, ฟีเจอร์ 92.1%, dialogs 191 → 192/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, round-trip 222/222)
 - run 41582181218 (`0ebfb7d`, Options › Typography, `dlg-218`): **86.9%**, 89.4% เมื่อไม่นับ deferred, ฟีเจอร์ 91.9%, dialogs 190 → 191/228; คลังเท่าเดิม
 - run 41579621418 (`293f915`, Fit Text และ Two Lines in One): **86.8%**, 89.3% เมื่อไม่นับ deferred, dialogs 188 → 190/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, round-trip 222/222); `0ebfb7d` (Options › Typography, `dlg-218`) push แล้ว รอผลวัด Windows run ถัดไป (บน Linux dialogs 191/228)
 - งานรอบนี้ (Opus): `e184943` freeform ในกลุ่มรูปร่าง, `293f915` Asian Layout (Fit Text `dlg-047`, Two Lines in One `dlg-229`; Horizontal in Vertical `dlg-083` เก็บค่าได้แต่ยังไม่วาด เพราะ layout ไม่รู้ทิศทางข้อความ), `0ebfb7d` Typography (`dlg-218`) ทั้งหมดมีเทสต์และคำแปล 28 ภาษา รายละเอียดใน `CHANGELOG.md`
