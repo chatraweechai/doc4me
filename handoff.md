@@ -1,12 +1,35 @@
 # Handoff: Doc4Me 1.1.2 · readiness 87.7% (วัดบน Windows รอบที่ 21 ด้วย workflow `readiness-windows.yml` run 41596836985, 2026-11-03; ก่อนหน้า 87.6%, 87.5%, 87.3%, 87.2%, 87.1%, 87.0%, 86.9%, 86.8%, 86.7% และ 86.0% รอบที่ 17) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
 
-อัปเดต: 2026-11-02 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 20 (ออกรุ่นครบ แล้วทำงานต่อด้าน pagination) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
+อัปเดต: 2026-11-03 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 22 (บันทึกผลวัด readiness ล่าสุด และแก้การวัดบน Windows) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
 ## สถานะปัจจุบัน (2026-11-02 รอบที่ 20: ออกรุ่นครบใน fork `veevie55/doc4me` แล้วทำงานต่อด้าน pagination)
 
+### Readiness ล่าสุด (บันทึก 2026-11-03 รอบที่ 22): **87.7%**, **90.3%** เมื่อไม่นับ 26 แถว deferred
+
+- ที่มา: `docs/readiness.md` จาก Windows run 41596836985 (`windows-latest`, วัด `main` ที่ `24ad50b`, commit ผล `bc99ca1`; คืนไฟล์นี้ใน `83b1e0c` หลัง run 41599589867 commit ผลที่ไม่ครบ 60.8% ทับ) ห่างเป้าหมาย 100% อยู่ 12.3 จุด
+- รายมิติ (คะแนน / ไม่นับ deferred / ชุดตรวจ):
+
+| มิติ | น้ำหนัก | คะแนน | ไม่นับ deferred | ชุดตรวจ |
+|---|---|---|---|---|
+| Features | 0.30 | 94.7% | 97.2% | ribbon 499/499; dialogs 204/228 (deferred 12) |
+| File formats | 0.20 | 100.0% | 100.0% | corpus-open 222/222; corpus-roundtrip 222/222 |
+| Layout and pagination | 0.15 | 60.1% | 60.1% | corpus-pages 171/222; corpus-breaks 96/222 |
+| UI/UX | 0.10 | 95.7% | 98.2% | shortcuts 268/280 (deferred 7) |
+| Stability | 0.10 | 100.0% | 100.0% | corpus-stability 222/222; stability 5/5 |
+| Performance | 0.05 | 100.0% | 100.0% | performance 6/6 |
+| Localization | 0.04 | 31.6% | 31.6% | languages 30/95 |
+| Platforms | 0.03 | 80.0% | 100.0% | platforms 4/5 (deferred 1) |
+| Ecosystem | 0.02 | 83.3% | 100.0% | ecosystem 5/6 (deferred 1) |
+| Hardware | 0.01 | 37.5% | 100.0% | hardware 3/8 (deferred 5) |
+
+- ที่ยังไม่ผ่านและไม่ deferred: dialogs 12 แถว (รอเจ้าของตัดสินว่าจะ defer หรือไม่ ดู "ข้อค้นพบที่ต้องให้เจ้าของ repo ตัดสิน"), shortcuts 5 รายการ (`ks-165`, `ks-177`, `ks-203`, `ks-219`, `ks-329`), corpus-pages 51 และ corpus-breaks 126 เอกสาร, ภาษา 65 ภาษา
+- แก้ข้อมูล: deferred 26 แถวแบ่งเป็น dialogs 12, shortcuts **7**, ecosystem 1, hardware 5, platforms 1 (บรรทัดเดิมด้านล่างที่เขียน shortcuts 6 รวมได้ 25 ไม่ตรง)
+- ป้าย `24ad50b+changes` ในหัวรายงานมาจากขั้น `--download` ที่เขียน `docs/readiness.md` ก่อนขั้นวัด ไม่ได้แปลว่าวัดจากโค้ดที่ไม่ตรง commit (แก้แล้วใน `83b1e0c`) รอบถัดไปที่สั่ง workflow ควรได้หัวรายงานไม่มี `+changes`
+- ยังไม่ได้วัดซ้ำบน Windows หลัง `83b1e0c` (การเปลี่ยนตั้งแต่ `24ad50b` เป็น xtask, rustfmt และเอกสาร ไม่เปลี่ยนโค้ดแอป จึงไม่คาดว่าตัวเลขจะเปลี่ยน)
+
 ผู้ใช้สั่ง (2026-11-02): "อ่าน handoff.md แล้วดำเนินการต่อ" (งานที่ค้างคือการออก v1.0.0, v1.1.0, v1.1.1 แล้วจึง v1.1.2 ของรอบที่ 19) ระหว่างทำ ผู้ใช้เลือกให้ออก Release ใน fork และเปิด Actions ของ fork เอง; หลังออกรุ่นผู้ใช้สั่งไม่เปลี่ยนลิงก์ Releases ใน README แล้วสั่ง "ทำงานต่อจากงานต่อไปใน handoff"
 
-### ผลวัด Windows รอบที่ 21 (2026-11-03): **86.7%** (run 41565289539 ที่ `8b685b2` ยืนยันตัวเลขของ run 41559739417; `windows-latest`)
+### ประวัติผลวัด Windows รอบที่ 21–22 (2026-11-03; เริ่มที่ **86.7%** จาก run 41565289539 ที่ `8b685b2` ยืนยันตัวเลขของ run 41559739417; ล่าสุดอยู่ในหัวข้อด้านบน)
 
 - run 41596836985 (เช็กเอาต์ `main` ตอนเริ่ม job คือ `24ad50b` ซึ่งรวม `f5f32df` Web Options `dlg-232` และ `4c69617` Hangul Hanja `dlg-194`; `head_sha` ของ run เป็น `3a0372e` แต่ workflow ใช้ `ref: main` จึงวัด `main` ณ เวลาที่ job เริ่ม ไม่ใช่ commit ที่สั่ง): **87.7%**, **90.3%** เมื่อไม่นับ deferred, ฟีเจอร์ 94.7%, dialogs 202 → 204/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, open/round-trip 222/222); commit ผล `bc99ca1`
 - รอบที่ 22 (2026-11-03, session ต่อจาก handoff): `f05eeb3` (1) xtask พิมพ์รายการ `git status --porcelain` ลง stderr เมื่อหัวรายงานเป็น `+changes` เพื่อหาสาเหตุที่ทุกรายงานจาก Windows runner เป็น `+changes` (ตรวจในโค้ดแล้วไม่พบตัวเขียนไฟล์ที่ git ติดตาม: xtask เขียนแค่ `docs/readiness.md` หลังอ่านสถานะ, build script เขียนลง `OUT_DIR`, ไม่มี symlink/CRLF ใน index/ชื่อไฟล์ที่ Windows ใช้ไม่ได้, `cargo metadata --locked` ผ่าน; log ของ runner มีแค่คำเตือน LF→CRLF ของ `docs/readiness.md` ตอน commit) (2) `cargo fmt --all` ของโค้ดรอบก่อนที่ทำให้ `cargo fmt --all --check` ไม่ผ่าน (CI ไม่ได้ตรวจ fmt); สั่ง run 41599589867 ต่อคิวไว้ (วัด `main` หลัง `f05eeb3`) ผล run 41599589867: **60.8% ไม่ใช่ผลจริง** — zenodo.org ตอบ 503 ไป 344 ไฟล์แต่ `--download` คืนสำเร็จ จึงวัดแค่ 50 เอกสาร และ bot commit `77fd3b8` ทับ; log ยืนยันว่า `+changes` มาจาก `docs/readiness.md` ที่ขั้น `--download` เขียนไว้ก่อน; แก้ในรอบนี้ (ดู `CHANGELOG.md`): `--download` ล้มเมื่อไม่ครบ (workflow จึงลองซ้ำ/ล้มก่อน commit), สั่งเดี่ยวไม่เขียนรายงาน, การตรวจ `+changes` ไม่นับรายงานเอง, และคืน `docs/readiness.md` เป็นผลของ `bc99ca1` (87.7%); ตัวเลขปัจจุบันจึงยังเป็น 87.7%; รอบถัดไปที่สั่ง workflow ควรได้หัวรายงานไม่มี `+changes`; ยังไม่ได้แก้ `.github/workflows/readiness-windows.yml` ให้ปฏิเสธการ commit รายงานที่มี "Not final" (เป็นชั้นป้องกันเพิ่ม ไม่จำเป็นหลังแก้ `--download`)
