@@ -4613,3 +4613,27 @@ fn a_page_break_line_with_a_floating_object_stays_at_the_foot_of_the_page() {
         assert_eq!(next, last_filler + 1, "{fillers} fillers: Next starts the page after the last filler's");
     }
 }
+
+/// A legacy text form field's result wraps after its spaces like ordinary text (govuk-024: a
+/// long FORMTEXT result used to be one unbreakable word that stretched its table column); a blank
+/// field and a result without spaces stay whole.
+#[test]
+fn form_text_field_result_wraps_between_words() {
+    let lines_of = |result: &str| {
+        let mut d = Document::from_text("");
+        let form = doc4me_doc::form::FormField::text();
+        let field = InlineObject::Field { instr: " FORMTEXT ".into(), result: result.into(), locked: false, code: false, form: Some(Box::new(form)) };
+        d.para_mut(StoryRef::Body, &Path::top(0)).unwrap().insert_object(0, field, &Default::default()).unwrap();
+        let l = lay(&d);
+        l.pages[0]
+            .items
+            .iter()
+            .filter_map(|it| if let Placed::Lines { para, l0, l1, .. } = it { Some((para.clone(), *l0, *l1)) } else { None })
+            .map(|(_, a, b)| b - a)
+            .sum::<usize>()
+    };
+    let long = "word ".repeat(200);
+    assert!(lines_of(&long) > 1, "a long result wraps");
+    assert_eq!(lines_of("short result"), 1);
+    assert_eq!(lines_of(&"x".repeat(30)), 1);
+}

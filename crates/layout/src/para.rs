@@ -463,6 +463,9 @@ struct Builder<'a> {
     levels: Vec<u8>,
     /// Text drawn by clusters that stand for an object, by cluster index (see `ParaLayout::shown`).
     shown: Vec<(usize, String, Vec<std::ops::Range<usize>>)>,
+    /// Clusters that may end a line though their object's text has no break opportunity (the
+    /// words of a form field's text, see `shape_wrappable`).
+    wrap_after: Vec<usize>,
 }
 
 /// What a piece of text is shaped as: one face, case, script formatting and direction.
@@ -884,6 +887,32 @@ impl<'a> Builder<'a> {
 
     /// One cluster for a whole object with its display text (fields, note references).
     fn shape_atomic(&mut self, text: &str, start: usize, end: usize, rc: &Arc<ResolvedChar>) {
+        self.shape_pieces(&[text], start, end, rc);
+    }
+
+    /// Like `shape_atomic`, but a field's result text wraps after each space as ordinary text does
+    /// (a blank field stays whole). Every word is a cluster of the object's `start..end`.
+    fn shape_wrappable(&mut self, text: &str, start: usize, end: usize, rc: &Arc<ResolvedChar>) {
+        let mut pieces: Vec<&str> = text.split_inclusive(' ').collect();
+        if pieces.len() < 2 || text.chars().all(char::is_whitespace) {
+            pieces = vec![text];
+        }
+        self.shape_pieces(&pieces, start, end, rc);
+    }
+
+    /// One cluster for each of `pieces` (the text of one object cut into words), the first
+    /// pieces being places where a line may end.
+    fn shape_pieces(&mut self, pieces: &[&str], start: usize, end: usize, rc: &Arc<ResolvedChar>) {
+        for (i, text) in pieces.iter().enumerate() {
+            let c0 = self.clusters.len();
+            self.shape_one(text, start, end, rc);
+            if i + 1 < pieces.len() && self.clusters.len() == c0 + 1 {
+                self.wrap_after.push(c0);
+            }
+        }
+    }
+
+    fn shape_one(&mut self, text: &str, start: usize, end: usize, rc: &Arc<ResolvedChar>) {
         let before = self.clusters.len();
         self.shape_with(text, start, rc, None, false);
         let added: Vec<Cluster> = self.clusters.drain(before..).collect();
@@ -1018,6 +1047,7 @@ fn overstrike(
     b.clusters.truncate(c0);
     b.glyphs.truncate(g0);
     b.shown.truncate(s0);
+    b.wrap_after.retain(|&k| k < c0);
     // The shape's box (`bw` × `bh`, centred `cy` above the baseline) and the text's size.
     let cy = s * 0.34;
     let (bw, bh, size) = match style {
@@ -1159,8 +1189,16 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
     }
     let resolve = |c: &CharProps| -> Arc<ResolvedChar> { Arc::new(doc.styles.resolve_char_in(para_style, table_chr, c)) };
     let levels = bidi_levels(&p.text, rp.bidi);
-    let mut b =
-        Builder { env, styles: Vec::new(), style_index: Default::default(), glyphs: Vec::new(), clusters: Vec::new(), levels, shown: Vec::new() };
+    let mut b = Builder {
+        env,
+        styles: Vec::new(),
+        style_index: Default::default(),
+        glyphs: Vec::new(),
+        clusters: Vec::new(),
+        levels,
+        shown: Vec::new(),
+        wrap_after: Vec::new(),
+    };
     let mark_rc = resolve(&p.mark);
     let mark_style = b.style(&mark_rc, None, false);
     let mut has_page_fields = false;
@@ -1329,12 +1367,12 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
                                             if env.form_shading && look.highlight.is_none() && look.shading.is_none() {
                                                 look.shading = Some(FIELD_SHADING);
                                             }
-                                            b.shape_atomic(&t, start, end, &Arc::new(look));
+                                            b.shape_wrappable(&t, start, end, &Arc::new(look));
                                         }
                                         None => {
                                             let (t, page_dep) = field_text(instr, result, env.fields);
                                             has_page_fields |= page_dep;
-                                            b.shape_atomic(&t, start, end, &rc);
+                                            b.shape_wrappable(&t, start, end, &rc);
                                         }
                                     },
                                 }
@@ -1460,6 +1498,11 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
     let opps: std::collections::HashSet<usize> = found.into_iter().filter_map(to_para).collect();
     for c in &mut b.clusters {
         c.break_after = opps.contains(&c.end) || matches!(c.kind, ClKind::Object(_) | ClKind::Tab);
+    }
+    for &k in &b.wrap_after {
+        if let Some(c) = b.clusters.get_mut(k) {
+            c.break_after = true;
+        }
     }
 
     // List label.
