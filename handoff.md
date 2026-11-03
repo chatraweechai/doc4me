@@ -244,6 +244,9 @@
 
 ### การตัดสินใจถาวรของผู้ใช้ (ทำตามเสมอ ไม่ต้องถามหรือแจ้งอีก)
 
+- เป้าหมาย (สั่ง 2026-11-03): ทำงานต่อจน readiness **100% เมื่อไม่นับ 26 แถว deferred** แล้วรายงานผล; ลำดับ: **pagination ก่อน** แล้วจึง localization และ dialogs/shortcuts; ไม่เพิ่มแถว deferred (เกณฑ์คงที่ 26 แถว)
+- Localization (สั่ง 2026-11-03): **ใช้ subagent แปลหลายภาษาพร้อมกันได้**; ระบุในหัวไฟล์และ `CHANGELOG.md` ว่าเป็นคำแปลจาก AI ที่ยังไม่ได้ให้เจ้าของภาษาตรวจ; คง clean room (ไม่ดูคำแปลของ Microsoft); ภาษาที่ต้องใช้ฟอนต์/การจัดรูปอักษรนอกเหนือ Inter (อารบิก ฮีบรู อินเดีย อาร์เมเนีย จอร์เจีย สิงหล เกาหลี ฯลฯ) ต้องให้ UI วาดได้จริงก่อนนับว่าผ่าน
+- Dialog 8 แถวที่ Word รุ่นปัจจุบันตัดออกแล้ว (`dlg-081`/`dlg-082` WordPerfect Help, `dlg-151` Schema Library, `dlg-234` XML Element Attributes, `dlg-235` XML Options, `dlg-215` Smart Tag Options, `dlg-079` Frames Page, `dlg-010` CSS Links, `dlg-052` Format Callout) **ให้สร้างให้ใช้งานได้จริง** (มีผลจริงต่อเอกสาร ไม่ใช่ dialog เปล่า) ไม่ defer (สั่ง 2026-11-03)
 - แจ้งสถานะความคืบหน้า readiness ให้ผู้ใช้เป็นระยะ (สั่ง 2026-11-03): หลังผลวัด Windows แต่ละรอบ ให้รายงานตัวเลข (รวม, ไม่นับ deferred, dialogs, การจัดหน้า) และสิ่งที่เปลี่ยน
 - วัด readiness บน Windows ทุกครั้งหลังเปลี่ยนโค้ด ด้วย workflow `readiness-windows.yml` (สั่ง 2026-11-03) แล้วบันทึกผลใน handoff และ ROADMAP พร้อม commit/push `main`
 - ไม่ต้องสั่งรัน workflow Windows x64 installer ทุกครั้งที่ commit push `main` เว้นแต่จะสั่งให้ออกเวอร์ชันใหม่ (สั่ง 2026-11-03; trigger ของ `main` ถูกเอาออกแล้ว)
