@@ -2982,3 +2982,13 @@ spacing	Normal	标准
 	A missing part of an embedded object was left out: {what}	已略去嵌入对象中缺失的部件: {what}
 	Copy File	复制文件
 	Find Files	查找文件
+	Letter Wizard	信函向导
+	Recipient's name:	收信人姓名:
+	Salutation:	称呼:
+	Subject:	主题:
+	Complimentary closing:	结束语:
+	Sender's name:	寄信人姓名:
+	Job title:	职务:
+	Company:	公司:
+	Enclosures:	附件:
+	Cc:	抄送:

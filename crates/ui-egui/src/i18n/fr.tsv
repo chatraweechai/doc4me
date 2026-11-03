@@ -2967,3 +2967,13 @@ spacing	Normal	Normal
 	A missing part of an embedded object was left out: {what}	Une partie manquante d’un objet incorporé a été omise : {what}
 	Copy File	Copier le fichier
 	Find Files	Rechercher des fichiers
+	Letter Wizard	Assistant Lettre
+	Recipient's name:	Nom du destinataire :
+	Salutation:	Formule d’appel :
+	Subject:	Objet :
+	Complimentary closing:	Formule de politesse :
+	Sender's name:	Nom de l’expéditeur :
+	Job title:	Fonction :
+	Company:	Société :
+	Enclosures:	Pièces jointes :
+	Cc:	Cc :

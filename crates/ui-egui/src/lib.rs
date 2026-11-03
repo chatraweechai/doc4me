@@ -1917,6 +1917,8 @@ fn discards_document(id: &str, params: &Value) -> bool {
         "file.new" | "file.close" | "mailings.labels" | "review.translateDocument" | "tools.listCommands" => true,
         "mailings.envelopes" => params.get("add").and_then(Value::as_bool) != Some(true),
         "file.open" => params.get("path").is_some(),
+        // The Letter Wizard writes its letter in place of the document (without fields it only opens).
+        "file.letterWizard" => params.as_object().is_some_and(|m| m.values().any(|v| !v.is_null())),
         "mailings.finish" => params.get("path").and_then(Value::as_str).is_none(),
         "mailings.print" => true,
         "tools.autoSummarize" => params.get("type").and_then(Value::as_str) == Some("newDocument"),

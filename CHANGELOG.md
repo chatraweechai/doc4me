@@ -13,6 +13,11 @@
 
 ### เพิ่ม
 
+- **File › New › Letter Wizard: สร้างจดหมายใหม่จากช่องข้อมูล** (`LetterFields`, `letter_from` ใน `crates/engine/src/sample.rs`; คำสั่งใหม่ `file.letterWizard` ใน `crates/engine/src/cmd/file.rs`; `FormDialog::Letter` ใน `crates/ui-egui/src/dialogs_forms.rs`, `crates/ui-egui/src/dialogs.rs`; ถือเป็นคำสั่งที่แทนที่เอกสารใน `discards_document` ของ `crates/ui-egui/src/lib.rs` จึงถามบันทึกการเปลี่ยนแปลงก่อนเหมือน File › New; ข้อความใหม่ 10 รายการในแคตตาล็อกทั้ง 28 ภาษา; `docs/readiness/dialogs.tsv` dlg-115)
+  - เหตุผล: `wdDialogLetterWizard` ไม่มีของเทียบเท่า
+  - ตอนนี้: `{"senderName"?, "returnAddress"?, "date"?, "mailingInstructions"?, "recipientName"?, "recipientAddress"?, "attention"?, "subject"?, "salutation"?, "body"?, "closing"?, "senderJobTitle"?, "senderCompany"?, "senderInitials"?, "enclosures"?, "cc"?}` สร้างเอกสารใหม่แทนเอกสารปัจจุบัน วางตามแม่แบบ Letter (ชื่อผู้ส่งเป็นสไตล์ Title, วันที่วันนี้ถ้าไม่ระบุ, ช่องหลายบรรทัดเป็นหนึ่งย่อหน้าต่อบรรทัด, หัวเรื่องตัวหนา, ช่องว่างถูกข้าม, คำขึ้นต้น/คำลงท้าย/เนื้อหาที่ไม่ระบุใช้ของแม่แบบ); ช่องละไม่เกิน 2,000 ตัวอักษร (เนื้อหา 100,000) ตัดอักขระควบคุมยกเว้นขึ้นบรรทัด; ไม่มีช่องใดเลยจะเปิด dialog Letter Wizard ซึ่งใส่ชื่อผู้ใช้เป็นผู้ส่งให้
+  - ผู้ใช้: เอกสารเดิมไม่เปลี่ยนจนกว่าจะกด Finish และถามบันทึกถ้ามีการแก้ไข; ข้อความในจดหมายเป็นสิ่งที่ผู้ใช้พิมพ์ (ภาษาไทยได้) ส่วนข้อความแทนที่ของแม่แบบเป็นภาษาอังกฤษเหมือน File › New › Letter
+  - ตรวจสอบ: เทสต์ใหม่ `letter_wizard_writes_a_letter_from_its_fields` (engine), UI `letter_wizard_writes_the_letter`; `cargo test -p doc4me-engine` ผ่าน 467, `cargo test -p doc4me-ui-egui` ผ่าน 404, clippy ไม่มีคำเตือน
 - **File › Open: Copy File และ Find Files สำหรับสคริปต์และ agent** (`crates/engine/src/cmd/file_tools.rs` ใหม่, คำสั่ง `file.copyFile` และ `file.findFiles`; ตัวช่วยที่ตรวจโฟลเดอร์ `copy_file`, `list_dir`, `DirEntry` ใน `crates/engine/src/io.rs`; ข้อความใหม่ 2 รายการในแคตตาล็อกทั้ง 28 ภาษา; `docs/readiness/dialogs.tsv` dlg-007, dlg-032, dlg-152)
   - เหตุผล: dialog คลาสสิก `wdDialogCopyFile`, `wdDialogFileFind` และ `wdDialogSearch` ไม่มีของเทียบเท่า
   - Copy File (`{"fileName", "directory", "overwrite"?}`): คัดลอกไฟล์ไปไว้ในโฟลเดอร์ด้วยชื่อเดิม ไม่ทับไฟล์ที่มีอยู่เว้นแต่ `overwrite: true` ปฏิเสธการคัดลอกทับตัวเองและต้นทางที่ไม่ใช่ไฟล์

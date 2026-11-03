@@ -5502,3 +5502,36 @@ fn opening_a_damaged_file_shows_its_repairs() {
     assert!(s.run("file.showRepairs", &json!({})).unwrap()["repairs"].as_array().unwrap().is_empty());
     assert!(!s.ui_requests.iter().any(|u| u["open"] == "showRepairs"));
 }
+
+/// Letter Wizard: a new letter from the fields given, empty ones left out; none opens the wizard.
+#[test]
+fn letter_wizard_writes_a_letter_from_its_fields() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("old"));
+    let r = s.run("file.letterWizard", &json!({})).unwrap();
+    assert_eq!(r["opened"], json!(true));
+    assert!(s.ui_requests.iter().any(|u| u["open"] == "letterWizard"));
+    assert_eq!(s.doc.plain_text(StoryRef::Body), "old", "nothing changes until there is something to write");
+    assert!(s.run("file.letterWizard", &json!({"recipientName": 3})).is_err());
+    assert!(s.run("file.letterWizard", &json!({"cc": "x".repeat(2001)})).is_err());
+    s.run(
+        "file.letterWizard",
+        &json!({
+            "senderName": "Somchai Jaidee",
+            "date": "3 November 2026",
+            "recipientName": "Ms. Lee",
+            "recipientAddress": "1 Main Street\r\nBangkok 10110",
+            "salutation": "Dear Ms. Lee,",
+            "body": "Thank you for your letter.\nI enclose the form.",
+            "closing": "Yours sincerely,",
+            "enclosures": "Enclosure: form",
+            "cc": "Mr. Chan",
+        }),
+    )
+    .unwrap();
+    let text = s.doc.plain_text(StoryRef::Body);
+    assert_eq!(
+        text,
+        "Somchai Jaidee\n\n3 November 2026\n\nMs. Lee\n1 Main Street\nBangkok 10110\n\nDear Ms. Lee,\nThank you for your letter.\nI enclose the form.\nYours sincerely,\n\n\nSomchai Jaidee\n\nEnclosure: form\ncc: Mr. Chan"
+    );
+    assert!(s.path.is_none());
+}
