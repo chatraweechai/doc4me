@@ -1789,6 +1789,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         },
         "mailings.recipients" if !["csv", "path", "data", "rows"].into_iter().any(has) => Some("recipientList"),
         "mailings.editRecipients" if !has("rows") => Some("recipientList"),
+        // Manage Fields without a change: the fields are edited in the recipient list.
+        "mailings.manageFields" if !has("add") && !has("remove") && !has("rename") => Some("recipientList"),
         "mailings.insertField" if !has("field") => Some("insertMergeField"),
         "mailings.findRecipient" if !has("text") => Some("findRecipient"),
         // Symbol without a character and Field without a code show their dialogs (#321).
@@ -3923,6 +3925,12 @@ mod tests {
         a.run("mailings.editRecipients", json!({})).unwrap();
         let Some(dialogs::Dialog::RecipientList { fields, rows, .. }) = &a.dialog else { panic!() };
         assert_eq!((fields.clone(), rows.clone()), (vec!["Name".to_string(), "City".into()], vec![vec!["Ada".to_string(), "London".into()]]));
+        // Manage Fields without a change: the fields are edited in the same dialog.
+        a.dialog = None;
+        assert_eq!(a.run("mailings.manageFields", json!({})).unwrap(), json!({"pending": "recipientList"}));
+        assert_eq!(dialog_name(&a), Some("recipientList"));
+        a.run("mailings.manageFields", json!({"add": "Phone"})).unwrap();
+        assert_eq!(a.session.merge.headers, vec!["Name", "City", "Phone"]);
         // Type a New List… always starts fresh.
         a.run("ui.dialog", json!({"name": "newRecipientList"})).unwrap();
         let Some(dialogs::Dialog::RecipientList { fields, .. }) = &a.dialog else { panic!() };
