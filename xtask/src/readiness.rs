@@ -797,6 +797,20 @@ fn render(sets: &[SetResult], corpus_run: usize, corpus_listed: usize, commit: &
             .collect();
         md.push_str(&format!("| {name} | {weight:.2} | {:.1}% | {:.1}% | {} |\n", dim * 100.0, dim_ahead * 100.0, detail.join("; ")));
     }
+    // Every deferred row with its recorded reason, none left out (the list below caps at 40 per set).
+    let deferred_rows: Vec<(&str, &str, &str)> = sets
+        .iter()
+        .flat_map(|s| s.failing.iter().filter_map(move |(id, why)| why.strip_prefix("deferred: ").map(|w| (s.name.as_str(), id.as_str(), w))))
+        .collect();
+    if !deferred_rows.is_empty() {
+        md.push_str(&format!(
+            "\n## Deferred rows ({})\n\nNot counted as passing until the owner asks for them. Each reason is the one recorded with the row (`docs/readiness/*.tsv`).\n\n",
+            deferred_rows.len()
+        ));
+        for (set, id, why) in &deferred_rows {
+            md.push_str(&format!("- `{id}` ({set}) {}\n", why.replace('\n', " ").replace('|', "/")));
+        }
+    }
     md.push_str("\n## Not passing\n\nThe first 40 of each set; the rest are counted above.\n");
     for s in sets.iter().filter(|s| !s.failing.is_empty()) {
         md.push_str(&format!("\n### {} ({} of {})\n\n", s.name, s.failing.len(), s.total));
@@ -929,6 +943,9 @@ mod tests {
         assert!(d.failing.iter().any(|(id, why)| id == "d2" && why.starts_with("deferred: Mail: Outlook")));
         let md = render(&sets, 3, 5, "abc", "2026-10-27");
         assert!(md.contains("**Without the deferred rows: ") && md.contains("hardware 1/4 (2 deferred)"), "{md}");
+        // Every deferred row is listed with its reason, not only the first 40 of a set.
+        assert!(md.contains("## Deferred rows (2)"), "{md}");
+        assert!(md.contains("- `h2` (hardware) pen") && md.contains("- `h4` (hardware) mic"), "{md}");
         // Every row deferred: nothing left to do counts as done.
         let mut all = SetResult::new("platforms");
         all.defer("p", "arm64");
