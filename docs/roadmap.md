@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-02 · **Change:** minor (M14: Doc4Me v1.0.0, v1.1.0, v1.1.1 and v1.1.2 published on the fork `veevie55/doc4me`, v1.1.2 the latest; readiness is still 86.0% as measured on Windows on 2026-11-01 (page-count passes 162/222, page-boundary passes 87/222); a page break before an empty paragraph ending a section, or ending a section's last paragraph, no longer leaves a blank page, and hidden table rows and `w:hideMark` are kept and laid out as in Word; Linux page counts 171/222 and page breaks 91/222, not yet remeasured on Windows) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
+> **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-03 · **Change:** minor (M14: Doc4Me v1.0.0, v1.1.0, v1.1.1 and v1.1.2 published on the fork `veevie55/doc4me`, v1.1.2 the latest; readiness is still 86.0% as measured on Windows on 2026-11-01 (page-count passes 162/222, page-boundary passes 87/222); a page break before an empty paragraph ending a section, or ending a section's last paragraph, no longer leaves a blank page, and hidden table rows and `w:hideMark` are kept and laid out as in Word; Linux page counts 171/222 and page breaks 91/222, not yet remeasured on Windows) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -71,8 +71,8 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 
 The readiness number in [`ROADMAP.md`](../ROADMAP.md) was an estimate (~60%): a weighted sum of
 estimated dimension parities. Since stage B it is measured: **66.1%** at first, **73.4%** in the
-2026-10-25 report, and **86.0%** on 2026-11-01 (`readiness.md`, all 222 corpus documents; DOCX open and round-trip 222/222), 14.0
-points short of the target. The current score excluding 26 deferred owner-bound checks is 88.5%.
+2026-10-25 report, and **86.7%** measured on Windows on 2026-11-03 (run 41559739417; 86.0% on 2026-11-01; `readiness.md`, all 222 corpus documents; DOCX open and round-trip 222/222), 14.0
+points short of the target. The current score excluding 26 deferred owner-bound checks is 89.2%.
 The target is **100% ready for real work, measured**
 (raised from 80% to 95% by the owner on 2026-10-25, and to 100% on 2026-10-27): every dimension
 comes from a fixed pass/fail check set, and one command computes the number. Checks may be added,
