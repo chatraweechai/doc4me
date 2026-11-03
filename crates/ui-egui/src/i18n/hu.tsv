@@ -2986,3 +2986,12 @@ spacing	Normal	Normál
 	Locked	Zárolt
 	Change Source	Forrás módosítása
 	This document has no links to files.	Ez a dokumentum nem tartalmaz fájlhivatkozást.
+	Web options	Webes beállítások
+	Web Options	Webes beállítások
+	Allow PNG as a graphics format	PNG grafikus formátum engedélyezése
+	Rely on CSS for font formatting	Betűformázás CSS segítségével
+	Rely on VML for displaying graphics in browsers	Grafikák megjelenítése böngészőkben VML segítségével
+	Organize supporting files in a folder	Kiegészítő fájlok rendezése mappába
+	Use long file names whenever possible	Hosszú fájlnevek használata, amikor lehetséges
+	Screen size:	Képernyőméret:
+	Pixels per inch:	Képpont/hüvelyk:

@@ -3013,3 +3013,12 @@ spacing	Normal	Обычный
 	Locked	Заблокировано
 	Change Source	Сменить источник
 	This document has no links to files.	В этом документе нет связей с файлами.
+	Web options	Параметры веб-документа
+	Web Options	Параметры веб-документа
+	Allow PNG as a graphics format	Разрешить формат PNG для графики
+	Rely on CSS for font formatting	Использовать CSS для форматирования шрифтов
+	Rely on VML for displaying graphics in browsers	Использовать VML для отображения графики в браузерах
+	Organize supporting files in a folder	Размещать вспомогательные файлы в папке
+	Use long file names whenever possible	По возможности использовать длинные имена файлов
+	Screen size:	Размер экрана:
+	Pixels per inch:	Пикселей на дюйм:

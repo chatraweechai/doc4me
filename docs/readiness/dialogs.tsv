@@ -230,7 +230,7 @@ dlg-228	wdDialogToolsWordCount	228	(none)	review.wordCount	registry
 dlg-229	wdDialogTwoLinesInOne	1161	(none)	format.twoLinesInOne	registry		Home › Paragraph › Asian Layout › Two Lines in One (`format.twoLinesInOne`, `w:eastAsianLayout/@w:combine` with brackets, read and saved; layout test `two_lines_in_one_stacks_the_text_in_one_piece`, UI test `asian_layout_buttons_open_their_dialogs`)
 dlg-230	wdDialogUpdateTOC	331	(none)	references.updateToc	registry		
 dlg-231	wdDialogViewZoom	577	(none)	view.zoom	registry		
-dlg-232	wdDialogWebOptions	898	(none)	-	registry		
+dlg-232	wdDialogWebOptions	898	(none)	file.webOptions	registry		Options › Advanced › Web options (word/webSettings.xml read and saved)
 dlg-233	wdDialogWindowActivate	220	(none)	view.switchWindows	registry		
 dlg-234	wdDialogXMLElementAttributes	1460	(none)	-	registry		
 dlg-235	wdDialogXMLOptions	1425	(none)	-	registry		

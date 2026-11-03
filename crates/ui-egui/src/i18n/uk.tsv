@@ -2997,3 +2997,12 @@ spacing	Normal	Звичайний
 	Locked	Заблоковано
 	Change Source	Змінити джерело
 	This document has no links to files.	У цьому документі немає зв’язків із файлами.
+	Web options	Веб-параметри
+	Web Options	Веб-параметри
+	Allow PNG as a graphics format	Дозволити формат PNG для графіки
+	Rely on CSS for font formatting	Використовувати CSS для форматування шрифту
+	Rely on VML for displaying graphics in browsers	Використовувати VML для відображення графіки в браузерах
+	Organize supporting files in a folder	Упорядковувати допоміжні файли в папці
+	Use long file names whenever possible	За можливості використовувати довгі імена файлів
+	Screen size:	Розмір екрана:
+	Pixels per inch:	Пікселів на дюйм:

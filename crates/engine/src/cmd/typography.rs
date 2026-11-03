@@ -8,9 +8,111 @@ use serde_json::{Value, json};
 use crate::{CmdError, CmdResult, CommandSpec, Session, p};
 
 pub fn specs() -> Vec<CommandSpec> {
-    vec![CommandSpec::new("file.typography", "Typography", "File › Options", typography).params(
-        r#"{"charSpacing"?: "doNotCompress|compressPunctuation|compressPunctuationAndJapaneseKana", "kinsoku"?: "standard|strict|custom", "noLineStart"?: string, "noLineEnd"?: string} — with any setting it changes them; without, it opens File › Options › Typography. Returns the settings (with the lists in effect)."#,
-    )]
+    vec![
+        CommandSpec::new("file.typography", "Typography", "File › Options", typography).params(
+            r#"{"charSpacing"?: "doNotCompress|compressPunctuation|compressPunctuationAndJapaneseKana", "kinsoku"?: "standard|strict|custom", "noLineStart"?: string, "noLineEnd"?: string} — with any setting it changes them; without, it opens File › Options › Typography. Returns the settings (with the lists in effect)."#,
+        ),
+        CommandSpec::new("file.webOptions", "Web Options", "File › Options › Advanced", web_options).params(
+            r#"{"allowPng"?: bool, "relyOnCss"?: bool, "relyOnVml"?: bool, "organizeInFolder"?: bool, "longFileNames"?: bool, "optimizeForBrowser"?: bool, "pixelsPerInch"?: 19–480 | null, "targetScreen"?: "800x600|1024x768|…" | null, "encoding"?: string | null} — the document's Web Options (saved in the .docx); without any, opens File › Options › Advanced. Returns them."#,
+        ),
+    ]
+}
+
+/// The document's Web Options as `file.webOptions` names them.
+pub fn web_state(s: &Session) -> Value {
+    let w = &s.doc.settings.web;
+    json!({
+        "allowPng": w.allow_png,
+        "relyOnCss": w.rely_on_css,
+        "relyOnVml": w.rely_on_vml,
+        "organizeInFolder": w.organize_in_folder,
+        "longFileNames": w.long_file_names,
+        "optimizeForBrowser": w.optimize_for_browser,
+        "pixelsPerInch": w.pixels_per_inch,
+        "targetScreen": w.target_screen,
+        "encoding": w.encoding,
+    })
+}
+
+/// File › Options › Advanced › Web Options: settings Word uses when it saves the document as a
+/// web page, kept in the .docx and undone like edits. Every value is checked before any changes.
+fn web_options(s: &mut Session, v: &Value) -> CmdResult {
+    let mut w = s.doc.settings.web.clone();
+    let mut any = false;
+    for (k, slot) in [
+        ("allowPng", &mut w.allow_png),
+        ("relyOnCss", &mut w.rely_on_css),
+        ("relyOnVml", &mut w.rely_on_vml),
+        ("organizeInFolder", &mut w.organize_in_folder),
+        ("longFileNames", &mut w.long_file_names),
+        ("optimizeForBrowser", &mut w.optimize_for_browser),
+    ] {
+        match v.get(k) {
+            None | Some(Value::Null) => {}
+            Some(Value::Bool(b)) => {
+                *slot = *b;
+                any = true;
+            }
+            Some(_) => return Err(CmdError::Params(format!("`{k}` must be true or false"))),
+        }
+    }
+    match v.get("pixelsPerInch") {
+        None => {}
+        Some(Value::Null) => {
+            w.pixels_per_inch = None;
+            any = true;
+        }
+        Some(n) => {
+            let n = n.as_u64().and_then(|n| u32::try_from(n).ok()).filter(|n| doc4me_doc::PIXELS_PER_INCH.contains(n));
+            let Some(n) = n else {
+                return Err(CmdError::Params("`pixelsPerInch` is 19 to 480".into()));
+            };
+            w.pixels_per_inch = Some(n);
+            any = true;
+        }
+    }
+    match v.get("targetScreen") {
+        None => {}
+        Some(Value::Null) => {
+            w.target_screen = None;
+            any = true;
+        }
+        Some(t) => {
+            let Some(t) = t.as_str().filter(|t| doc4me_doc::TARGET_SCREENS.contains(t)) else {
+                return Err(CmdError::Params(format!("`targetScreen` is one of {}", doc4me_doc::TARGET_SCREENS.join(", "))));
+            };
+            w.target_screen = Some(t.to_string());
+            any = true;
+        }
+    }
+    match v.get("encoding") {
+        None => {}
+        Some(Value::Null) => {
+            w.encoding = None;
+            any = true;
+        }
+        Some(Value::String(e)) => {
+            let e = e.trim();
+            let ok = e.len() <= doc4me_doc::MAX_ENCODING_NAME && e.chars().all(|c| c.is_ascii_alphanumeric() || "-_.:".contains(c));
+            if !ok {
+                return Err(CmdError::Params("`encoding` is a character set name such as utf-8".into()));
+            }
+            w.encoding = (!e.is_empty()).then(|| e.to_string());
+            any = true;
+        }
+        Some(_) => return Err(CmdError::Params("`encoding` must be a string or null".into())),
+    }
+    if !any {
+        s.only_read();
+        s.ui_requests.push(json!({"open": "options", "pane": "advanced"}));
+        let mut r = web_state(s);
+        if let Some(o) = r.as_object_mut() {
+            o.insert("opened".into(), json!(true));
+        }
+        return Ok(r);
+    }
+    s.doc.settings.web = w;
+    Ok(web_state(s))
 }
 
 /// The document's typography settings: `charSpacing`, `kinsoku` (standard, strict or custom)
@@ -115,5 +217,29 @@ mod tests {
         assert_eq!(s.doc.settings.kinsoku, doc4me_doc::Kinsoku::default());
         s.run("edit.undo", &json!({})).unwrap();
         assert_eq!(s.doc.settings.kinsoku.no_start.as_deref(), Some("。、x"));
+    }
+}
+
+#[cfg(test)]
+mod web_tests {
+    use serde_json::json;
+
+    use crate::Session;
+
+    #[test]
+    fn web_options_change_check_and_undo() {
+        let mut s = Session::new(doc4me_doc::Document::new());
+        let r = s.run("file.webOptions", &json!({})).unwrap();
+        assert_eq!((r["opened"].as_bool(), r["relyOnCss"].as_bool()), (Some(true), Some(true)));
+        assert!(s.run("file.webOptions", &json!({"pixelsPerInch": 5})).is_err());
+        assert!(s.run("file.webOptions", &json!({"targetScreen": "2x2"})).is_err());
+        assert!(s.run("file.webOptions", &json!({"encoding": "utf-8\"><x"})).is_err());
+        assert!(s.run("file.webOptions", &json!({"allowPng": "yes"})).is_err());
+        assert!(s.doc.settings.web.is_default(), "nothing changed by a bad call");
+        let r = s.run("file.webOptions", &json!({"allowPng": true, "relyOnCss": false, "pixelsPerInch": 120, "targetScreen": "1024x768", "encoding": "utf-8"})).unwrap();
+        assert_eq!((r["allowPng"].as_bool(), r["pixelsPerInch"].as_u64(), r["targetScreen"].as_str()), (Some(true), Some(120), Some("1024x768")));
+        assert!(!s.doc.settings.web.rely_on_css && s.doc.settings.web.write_part());
+        s.run("edit.undo", &json!({})).unwrap();
+        assert!(s.doc.settings.web.is_default(), "undone like an edit");
     }
 }

@@ -2982,3 +2982,12 @@
 	Locked	Låst
 	Change Source	Endre kilde
 	This document has no links to files.	Dette dokumentet har ingen koblinger til filer.
+	Web options	Webalternativer
+	Web Options	Webalternativer
+	Allow PNG as a graphics format	Tillat PNG som grafikkformat
+	Rely on CSS for font formatting	Bruk CSS til skriftformatering
+	Rely on VML for displaying graphics in browsers	Bruk VML til å vise grafikk i nettlesere
+	Organize supporting files in a folder	Organiser støttefiler i en mappe
+	Use long file names whenever possible	Bruk lange filnavn når det er mulig
+	Screen size:	Skjermstørrelse:
+	Pixels per inch:	Piksler per tomme:

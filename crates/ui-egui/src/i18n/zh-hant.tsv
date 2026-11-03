@@ -2986,3 +2986,12 @@ spacing	Normal	標準
 	Locked	已鎖定
 	Change Source	變更來源
 	This document has no links to files.	此文件沒有檔案連結。
+	Web options	Web 選項
+	Web Options	Web 選項
+	Allow PNG as a graphics format	允許使用 PNG 圖形格式
+	Rely on CSS for font formatting	使用 CSS 設定字型格式
+	Rely on VML for displaying graphics in browsers	在瀏覽器中使用 VML 顯示圖形
+	Organize supporting files in a folder	將支援檔案整理到資料夾中
+	Use long file names whenever possible	盡可能使用長檔名
+	Screen size:	螢幕大小:
+	Pixels per inch:	每英吋像素:

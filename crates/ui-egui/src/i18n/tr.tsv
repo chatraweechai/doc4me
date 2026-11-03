@@ -3012,3 +3012,12 @@ spacing	Normal	Normal
 	Locked	Kilitli
 	Change Source	Kaynağı Değiştir
 	This document has no links to files.	Bu belgede dosya bağlantısı yok.
+	Web options	Web seçenekleri
+	Web Options	Web Seçenekleri
+	Allow PNG as a graphics format	PNG'ye grafik biçimi olarak izin ver
+	Rely on CSS for font formatting	Yazı tipi biçimlendirmesi için CSS kullan
+	Rely on VML for displaying graphics in browsers	Tarayıcılarda grafikleri görüntülemek için VML kullan
+	Organize supporting files in a folder	Destek dosyalarını bir klasörde düzenle
+	Use long file names whenever possible	Mümkün olduğunda uzun dosya adları kullan
+	Screen size:	Ekran boyutu:
+	Pixels per inch:	İnç başına piksel:

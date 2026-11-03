@@ -188,6 +188,9 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
     if let Some(p) = part(rt::SETTINGS) {
         lenient("settings", &p, r.read_settings(&p));
     }
+    if let Some(p) = part(rt::WEB_SETTINGS) {
+        lenient("web settings", &p, r.read_web_settings(&p));
+    }
     if let Some(p) = part(rt::FOOTNOTES) {
         lenient("footnotes", &p, r.read_notes(&p, true));
     }
@@ -946,6 +949,39 @@ impl Reader<'_> {
             .map(|v| v.clamp(-1584.0, 1584.0));
         lv.style = l.child_val("w:pStyle").filter(|s| !s.is_empty()).map(|s| self.pc.style_id(s));
         lv
+    }
+
+    /// `w:webSettings` (§17.15.2): Web Options. Frames and HTML `div`s are not kept.
+    fn read_web_settings(&mut self, path: &str) -> Result<(), DocxError> {
+        let Some(root) = self.xml(path)? else { return Ok(()) };
+        let w = &mut self.doc.settings.web;
+        w.present = true;
+        let on = |k: &El| !k.attr("w:val").is_some_and(|v| matches!(v, "0" | "false" | "off"));
+        for k in root.els() {
+            match k.name.as_str() {
+                "w:encoding" => {
+                    w.encoding = k.attr("w:val").map(str::trim).filter(|v| !v.is_empty() && v.len() <= doc4me_doc::MAX_ENCODING_NAME).map(str::to_string);
+                }
+                "w:optimizeForBrowser" => {
+                    w.optimize_for_browser = on(k);
+                    w.browser_target = k.attr("w:target").map(str::trim).filter(|v| !v.is_empty() && v.len() <= 64).map(str::to_string);
+                }
+                "w:relyOnVML" => w.rely_on_vml = on(k),
+                "w:allowPNG" => w.allow_png = on(k),
+                "w:doNotRelyOnCSS" => w.rely_on_css = !on(k),
+                "w:doNotSaveAsSingleFile" => w.save_as_single_file = !on(k),
+                "w:doNotOrganizeInFolder" => w.organize_in_folder = !on(k),
+                "w:doNotUseLongFileNames" => w.long_file_names = !on(k),
+                "w:pixelsPerInch" => {
+                    w.pixels_per_inch = k.attr("w:val").and_then(|v| v.trim().parse::<u32>().ok()).filter(|n| doc4me_doc::PIXELS_PER_INCH.contains(n));
+                }
+                "w:targetScreenSz" => {
+                    w.target_screen = k.attr("w:val").filter(|v| doc4me_doc::TARGET_SCREENS.contains(v)).map(str::to_string);
+                }
+                _ => {}
+            }
+        }
+        Ok(())
     }
 
     fn read_settings(&mut self, path: &str) -> Result<(), DocxError> {

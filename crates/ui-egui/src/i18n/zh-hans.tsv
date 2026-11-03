@@ -2997,3 +2997,12 @@ spacing	Normal	标准
 	Locked	已锁定
 	Change Source	更改源
 	This document has no links to files.	此文档没有指向文件的链接。
+	Web options	Web 选项
+	Web Options	Web 选项
+	Allow PNG as a graphics format	允许 PNG 作为图形格式
+	Rely on CSS for font formatting	使用 CSS 设置字体格式
+	Rely on VML for displaying graphics in browsers	在浏览器中使用 VML 显示图形
+	Organize supporting files in a folder	将支持文件组织到文件夹中
+	Use long file names whenever possible	尽可能使用长文件名
+	Screen size:	屏幕大小:
+	Pixels per inch:	每英寸像素数:

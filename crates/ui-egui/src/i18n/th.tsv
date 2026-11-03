@@ -2994,3 +2994,12 @@ spacing	Normal	ปกติ
 	Locked	ล็อก
 	Change Source	เปลี่ยนแหล่งที่มา
 	This document has no links to files.	เอกสารนี้ไม่มีการเชื่อมโยงไปยังแฟ้ม
+	Web options	ตัวเลือกเว็บ
+	Web Options	ตัวเลือกเว็บ
+	Allow PNG as a graphics format	อนุญาต PNG เป็นรูปแบบกราฟิก
+	Rely on CSS for font formatting	ใช้ CSS สำหรับการจัดรูปแบบแบบอักษร
+	Rely on VML for displaying graphics in browsers	ใช้ VML สำหรับแสดงกราฟิกในเบราว์เซอร์
+	Organize supporting files in a folder	จัดแฟ้มประกอบไว้ในโฟลเดอร์
+	Use long file names whenever possible	ใช้ชื่อแฟ้มยาวเมื่อเป็นไปได้
+	Screen size:	ขนาดหน้าจอ:
+	Pixels per inch:	พิกเซลต่อนิ้ว:
