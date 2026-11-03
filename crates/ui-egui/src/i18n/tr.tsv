@@ -2988,3 +2988,10 @@ spacing	Normal	Normal
 	Documents:	Belgeler:
 	Pictures:	Resimler:
 	The system's choice	Sistemin seçimi
+	Show Repairs	Onarımları Göster
+	No repairs were needed.	Onarım gerekmedi.
+	These problems were found and repaired when the document was opened:	Belge açılırken şu sorunlar bulundu ve onarıldı:
+	An unreadable entry in the file was skipped: {what}	Dosyadaki okunamayan bir giriş atlandı: {what}
+	An unreadable part was left out: {what}	Okunamayan bir bölüm dışarıda bırakıldı: {what}
+	Unreadable relationships were ignored: {what}	Okunamayan ilişkiler yok sayıldı: {what}
+	A missing part of an embedded object was left out: {what}	Katıştırılmış bir nesnenin eksik bölümü dışarıda bırakıldı: {what}

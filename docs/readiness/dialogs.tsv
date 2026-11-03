@@ -151,7 +151,7 @@ dlg-149	wdDialogPhoneticGuide	986	(none)	format.phonetic	registry
 dlg-150	wdDialogReviewAfmtRevisions	570	(none)	format.autoFormatReview	registry		"Formatting completed" after AutoFormat and Review Changes: Accept All, Reject All, Review Changes (Find ←/→ selects each changed paragraph, Reject puts it back); UI test dialogs_data::tests::autoformat_tab_and_review_dialog
 dlg-151	wdDialogSchemaLibrary	1417	(none)	-	registry		
 dlg-152	wdDialogSearch	1363	(none)	-	registry		legacy file search
-dlg-153	wdDialogShowRepairs	1381	(none)	-	registry		
+dlg-153	wdDialogShowRepairs	1381	(none)	file.showRepairs	registry		what opening a damaged .docx repaired or left out
 dlg-154	wdDialogSourceManager	1920	(none)	references.sources	registry		
 dlg-155	wdDialogStyleManagement	1948	(none)	styles.manage	registry		
 dlg-156	wdDialogTableAutoFormat	563	(none)	table.style	registry		Table AutoFormat (Table Design › Styles › Table AutoFormat…): the table styles and Apply special formats to Header Row, First Column, Total Row, Last Column (table.style + table.look in one undo step)

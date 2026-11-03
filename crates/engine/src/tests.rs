@@ -5471,3 +5471,34 @@ fn japanese_fuzzy_find_through_the_commands() {
     run(&mut s, "edit.fuzzyOptions", json!({}));
     assert!(s.ui_requests.iter().any(|r| r["open"] == "fuzzyOptions"), "without settings it opens the options");
 }
+
+/// Show Repairs: opening a damaged .docx lists the part left out and asks the front end to show
+/// it; a sound file lists nothing.
+#[test]
+fn opening_a_damaged_file_shows_its_repairs() {
+    let sound = doc4me_docx::write(&doc4me_doc::Document::from_text("Hello")).unwrap();
+    let mut src = zip::ZipArchive::new(std::io::Cursor::new(&sound[..])).unwrap();
+    let mut out = zip::ZipWriter::new(std::io::Cursor::new(Vec::new()));
+    for i in 0..src.len() {
+        let mut f = src.by_index(i).unwrap();
+        let n = f.name().unwrap().to_string();
+        out.start_file(n.as_str(), zip::write::SimpleFileOptions::default()).unwrap();
+        if n == "word/styles.xml" {
+            std::io::Write::write_all(&mut out, b"<w:styles w:x=\"unterminated></w:styles>").unwrap();
+        } else {
+            std::io::copy(&mut f, &mut out).unwrap();
+        }
+    }
+    let broken = out.finish().unwrap().into_inner();
+    let mut s = Session::new(doc4me_doc::Document::new());
+    let data = crate::cmd::insert::base64_encode(&broken);
+    let r = s.run("file.open", &json!({"path": "broken.docx", "data": data})).unwrap();
+    assert_eq!(r["repairs"], json!(1));
+    assert!(s.ui_requests.iter().any(|u| u["open"] == "showRepairs"), "{:?}", s.ui_requests);
+    let r = s.run("file.showRepairs", &json!({})).unwrap();
+    assert_eq!(r["repairs"][0]["what"], json!("word/styles.xml"));
+    s.ui_requests.clear();
+    s.run("file.open", &json!({"path": "sound.docx", "data": crate::cmd::insert::base64_encode(&sound)})).unwrap();
+    assert!(s.run("file.showRepairs", &json!({})).unwrap()["repairs"].as_array().unwrap().is_empty());
+    assert!(!s.ui_requests.iter().any(|u| u["open"] == "showRepairs"));
+}

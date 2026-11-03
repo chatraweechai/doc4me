@@ -2958,3 +2958,10 @@
 	Documents:	Dokument:
 	Pictures:	Bilder:
 	The system's choice	Systemets val
+	Show Repairs	Visa reparationer
+	No repairs were needed.	Inga reparationer behövdes.
+	These problems were found and repaired when the document was opened:	Dessa problem hittades och reparerades när dokumentet öppnades:
+	An unreadable entry in the file was skipped: {what}	En oläslig post i filen hoppades över: {what}
+	An unreadable part was left out: {what}	En oläslig del utelämnades: {what}
+	Unreadable relationships were ignored: {what}	Olästa relationer ignorerades: {what}
+	A missing part of an embedded object was left out: {what}	En saknad del av ett inbäddat objekt utelämnades: {what}

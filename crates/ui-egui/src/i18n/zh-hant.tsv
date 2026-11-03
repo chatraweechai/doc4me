@@ -2962,3 +2962,10 @@ spacing	Normal	標準
 	Documents:	文件:
 	Pictures:	圖片:
 	The system's choice	系統預設
+	Show Repairs	顯示修復
+	No repairs were needed.	無需修復。
+	These problems were found and repaired when the document was opened:	開啟文件時發現並修復了下列問題:
+	An unreadable entry in the file was skipped: {what}	已略過檔案中無法讀取的項目: {what}
+	An unreadable part was left out: {what}	已略去無法讀取的組件: {what}
+	Unreadable relationships were ignored: {what}	已忽略無法讀取的關聯: {what}
+	A missing part of an embedded object was left out: {what}	已略去內嵌物件中遺失的組件: {what}

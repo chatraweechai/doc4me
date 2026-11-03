@@ -2989,3 +2989,10 @@ spacing	Normal	Обычный
 	Documents:	Документы:
 	Pictures:	Рисунки:
 	The system's choice	Выбор системы
+	Show Repairs	Показать исправления
+	No repairs were needed.	Исправления не потребовались.
+	These problems were found and repaired when the document was opened:	При открытии документа обнаружены и исправлены следующие проблемы:
+	An unreadable entry in the file was skipped: {what}	Пропущена нечитаемая запись файла: {what}
+	An unreadable part was left out: {what}	Нечитаемая часть пропущена: {what}
+	Unreadable relationships were ignored: {what}	Нечитаемые связи пропущены: {what}
+	A missing part of an embedded object was left out: {what}	Отсутствующая часть внедрённого объекта пропущена: {what}

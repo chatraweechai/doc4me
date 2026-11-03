@@ -2975,3 +2975,10 @@ spacing	Normal	Нормално
 	Documents:	Документи:
 	Pictures:	Слике:
 	The system's choice	Избор система
+	Show Repairs	Прикажи поправке
+	No repairs were needed.	Поправке нису биле потребне.
+	These problems were found and repaired when the document was opened:	При отварању документа пронађени су и поправљени ови проблеми:
+	An unreadable entry in the file was skipped: {what}	Нечитљив унос у датотеци је прескочен: {what}
+	An unreadable part was left out: {what}	Нечитљив део је изостављен: {what}
+	Unreadable relationships were ignored: {what}	Нечитљиве везе су занемарене: {what}
+	A missing part of an embedded object was left out: {what}	Део уграђеног објекта који недостаје је изостављен: {what}

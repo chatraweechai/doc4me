@@ -2973,3 +2973,10 @@ spacing	Normal	标准
 	Documents:	文档:
 	Pictures:	图片:
 	The system's choice	系统默认
+	Show Repairs	显示修复
+	No repairs were needed.	无需修复。
+	These problems were found and repaired when the document was opened:	打开文档时发现并修复了以下问题:
+	An unreadable entry in the file was skipped: {what}	已跳过文件中无法读取的条目: {what}
+	An unreadable part was left out: {what}	已略去无法读取的部件: {what}
+	Unreadable relationships were ignored: {what}	已忽略无法读取的关系: {what}
+	A missing part of an embedded object was left out: {what}	已略去嵌入对象中缺失的部件: {what}

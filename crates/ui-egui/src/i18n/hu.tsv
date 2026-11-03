@@ -2962,3 +2962,10 @@ spacing	Normal	Normál
 	Documents:	Dokumentumok:
 	Pictures:	Képek:
 	The system's choice	A rendszer választása
+	Show Repairs	Javítások megjelenítése
+	No repairs were needed.	Nem volt szükség javításra.
+	These problems were found and repaired when the document was opened:	A dokumentum megnyitásakor a következő hibák találhatók és javíthatók voltak:
+	An unreadable entry in the file was skipped: {what}	A fájl egy olvashatatlan bejegyzése kimaradt: {what}
+	An unreadable part was left out: {what}	Egy olvashatatlan rész kimaradt: {what}
+	Unreadable relationships were ignored: {what}	Az olvashatatlan kapcsolatok figyelmen kívül maradtak: {what}
+	A missing part of an embedded object was left out: {what}	Egy beágyazott objektum hiányzó része kimaradt: {what}

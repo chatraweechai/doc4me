@@ -2970,3 +2970,10 @@ spacing	Normal	ปกติ
 	Documents:	เอกสาร:
 	Pictures:	รูปภาพ:
 	The system's choice	ตามที่ระบบเลือก
+	Show Repairs	แสดงการซ่อมแซม
+	No repairs were needed.	ไม่จำเป็นต้องซ่อมแซม
+	These problems were found and repaired when the document was opened:	พบและซ่อมแซมปัญหาเหล่านี้ขณะเปิดเอกสาร:
+	An unreadable entry in the file was skipped: {what}	ข้ามรายการในแฟ้มที่อ่านไม่ได้: {what}
+	An unreadable part was left out: {what}	ละส่วนที่อ่านไม่ได้: {what}
+	Unreadable relationships were ignored: {what}	ละเว้นความสัมพันธ์ที่อ่านไม่ได้: {what}
+	A missing part of an embedded object was left out: {what}	ละส่วนที่หายไปของวัตถุที่ฝังไว้: {what}

@@ -2958,3 +2958,10 @@
 	Documents:	Dokumenti:
 	Pictures:	Slike:
 	The system's choice	Odabir sustava
+	Show Repairs	Prikaži popravke
+	No repairs were needed.	Popravci nisu bili potrebni.
+	These problems were found and repaired when the document was opened:	Pri otvaranju dokumenta pronađeni su i popravljeni ovi problemi:
+	An unreadable entry in the file was skipped: {what}	Nečitljiv unos u datoteci je preskočen: {what}
+	An unreadable part was left out: {what}	Nečitljiv dio je izostavljen: {what}
+	Unreadable relationships were ignored: {what}	Nečitljivi odnosi su zanemareni: {what}
+	A missing part of an embedded object was left out: {what}	Nedostajući dio ugrađenog objekta je izostavljen: {what}

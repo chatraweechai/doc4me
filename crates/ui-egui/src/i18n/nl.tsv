@@ -2958,3 +2958,10 @@
 	Documents:	Documenten:
 	Pictures:	Afbeeldingen:
 	The system's choice	De keuze van het systeem
+	Show Repairs	Reparaties weergeven
+	No repairs were needed.	Er waren geen reparaties nodig.
+	These problems were found and repaired when the document was opened:	Deze problemen zijn gevonden en gerepareerd bij het openen van het document:
+	An unreadable entry in the file was skipped: {what}	Een onleesbaar item in het bestand is overgeslagen: {what}
+	An unreadable part was left out: {what}	Een onleesbaar onderdeel is weggelaten: {what}
+	Unreadable relationships were ignored: {what}	Onleesbare relaties zijn genegeerd: {what}
+	A missing part of an embedded object was left out: {what}	Een ontbrekend onderdeel van een ingesloten object is weggelaten: {what}
