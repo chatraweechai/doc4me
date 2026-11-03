@@ -2957,3 +2957,9 @@ spacing	Normal	Tavaline
 	Japanese Consistency Checker…	Jaapani keele järjepidevuse kontroll…
 	No inconsistent spellings were found.	Ebajärjekindlaid kirjaviise ei leitud.
 	Pick the spelling to keep in each group.	Valige igas rühmas kirjaviis, mis alles jääb.
+	Bidirectional text	Kahesuunaline tekst
+	Bidirectional Text	Kahesuunaline tekst
+	Default direction:	Vaikesuund:
+	Cursor movement:	Kursori liikumine:
+	Logical	Loogiline
+	Visual	Visuaalne

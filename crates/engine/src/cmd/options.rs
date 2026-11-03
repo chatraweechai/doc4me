@@ -21,7 +21,7 @@ pub fn specs() -> Vec<CommandSpec> {
     vec![
         CommandSpec::new("file.options", "Options", "File", options)
             .params(
-                r#"{"pane"?: "general|display|proofing|save|typography|language|accessibility|advanced|trustCenter|agents", "author"?: string, "initials"?: string, "units"?: "inches|centimeters|millimeters|points|picas", "typingReplacesSelection"?: bool, "insertKeyOvertype"?: bool, "overtype"?: bool, "marks"?: {"tabs"?: bool, "spaces"?: bool, "paragraphs"?: bool, "hidden"?: bool}, "checkSpelling"?: bool, "markGrammar"?: bool, "ignoreUppercase"?: bool, "ignoreNumbers"?: bool, "ignoreInternet"?: bool, "addWords"?: [string], "removeWords"?: [string], "pasteSame"|"pasteBetween"|"pasteOther"?: "keep|merge|text" (Paste within this document, between documents, from other programs), "grammarRules"?: {"capitalization"|"repeated"|"wordForms"|"punctuation"|"spacing"?: bool} (Writing Style › Settings)} — with any setting it changes them and opens nothing; without, it opens File › Options (at `pane`). Returns the settings."#,
+                r#"{"pane"?: "general|display|proofing|save|typography|language|accessibility|advanced|trustCenter|agents", "author"?: string, "initials"?: string, "units"?: "inches|centimeters|millimeters|points|picas", "typingReplacesSelection"?: bool, "insertKeyOvertype"?: bool, "overtype"?: bool, "marks"?: {"tabs"?: bool, "spaces"?: bool, "paragraphs"?: bool, "hidden"?: bool}, "checkSpelling"?: bool, "markGrammar"?: bool, "ignoreUppercase"?: bool, "ignoreNumbers"?: bool, "ignoreInternet"?: bool, "addWords"?: [string], "removeWords"?: [string], "pasteSame"|"pasteBetween"|"pasteOther"?: "keep|merge|text" (Paste within this document, between documents, from other programs), "logicalCursor"?: bool, "rtlDefault"?: bool (Bidirectional text), "grammarRules"?: {"capitalization"|"repeated"|"wordForms"|"punctuation"|"spacing"?: bool} (Writing Style › Settings)} — with any setting it changes them and opens nothing; without, it opens File › Options (at `pane`). Returns the settings."#,
             )
             .pure(),
         CommandSpec::new("text.overtype", "Overtype", "File › Options › Advanced", |s, v| {
@@ -30,11 +30,42 @@ pub fn specs() -> Vec<CommandSpec> {
         })
         .params(r#"{"value"?: bool (default: toggle)}"#)
         .pure(),
+        CommandSpec::new("file.bidiOptions", "Bidirectional Text", "File › Options › Advanced", bidi_options)
+            .params(r#"{"cursorMovement"?: "logical|visual", "defaultDirection"?: "ltr|rtl" (new blank documents)} — without either, opens File › Options › Advanced"#)
+            .pure(),
     ]
 }
 
+/// Word's bidirectional (complex scripts) options: Cursor movement and Default direction.
+fn bidi_options(s: &mut Session, v: &Value) -> CmdResult {
+    let mut set = serde_json::Map::new();
+    match p::str(v, "cursorMovement") {
+        None => {}
+        Some(m @ ("logical" | "visual")) => {
+            set.insert("logicalCursor".into(), json!(m == "logical"));
+        }
+        Some(m) => return Err(CmdError::Params(format!("unknown cursorMovement `{m}`: logical or visual"))),
+    }
+    match p::str(v, "defaultDirection") {
+        None => {}
+        Some(d @ ("ltr" | "rtl")) => {
+            set.insert("rtlDefault".into(), json!(d == "rtl"));
+        }
+        Some(d) => return Err(CmdError::Params(format!("unknown defaultDirection `{d}`: ltr or rtl"))),
+    }
+    if set.is_empty() {
+        set.insert("pane".into(), json!("advanced"));
+    }
+    let r = options(s, &Value::Object(set))?;
+    Ok(json!({
+        "cursorMovement": if s.prefs.logical_cursor { "logical" } else { "visual" },
+        "defaultDirection": if s.prefs.rtl_default { "rtl" } else { "ltr" },
+        "opened": r["opened"],
+    }))
+}
+
 /// The on/off settings by their `file.options` name.
-fn flags() -> [(&'static str, fn(&mut Prefs) -> &mut bool); 7] {
+fn flags() -> [(&'static str, fn(&mut Prefs) -> &mut bool); 9] {
     [
         ("typingReplacesSelection", |p| &mut p.typing_replaces_selection),
         ("insertKeyOvertype", |p| &mut p.insert_key_overtype),
@@ -43,6 +74,8 @@ fn flags() -> [(&'static str, fn(&mut Prefs) -> &mut bool); 7] {
         ("ignoreUppercase", |p| &mut p.ignore_uppercase),
         ("ignoreNumbers", |p| &mut p.ignore_numbers),
         ("ignoreInternet", |p| &mut p.ignore_internet),
+        ("logicalCursor", |p| &mut p.logical_cursor),
+        ("rtlDefault", |p| &mut p.rtl_default),
     ]
 }
 
@@ -225,6 +258,8 @@ pub fn current(s: &Session) -> Value {
         "pasteSame": pr.paste_same,
         "pasteBetween": pr.paste_between,
         "pasteOther": pr.paste_other,
+        "logicalCursor": pr.logical_cursor,
+        "rtlDefault": pr.rtl_default,
         "grammarRules": GRAMMAR_RULES.iter().map(|k| (k.to_string(), json!(!pr.grammar_off.iter().any(|x| x == k)))).collect::<serde_json::Map<_, _>>(),
         "dictionary": doc4me_proof::user_dictionary(),
     })
@@ -236,4 +271,45 @@ pub const GRAMMAR_RULES: [&str; 5] = ["capitalization", "repeated", "wordForms",
 /// Cut, copy, and paste: the `file.options` names of the three paste defaults.
 fn paste_modes() -> [(&'static str, fn(&mut Prefs) -> &mut crate::session::PasteMode); 3] {
     [("pasteSame", |p| &mut p.paste_same), ("pasteBetween", |p| &mut p.paste_between), ("pasteOther", |p| &mut p.paste_other)]
+}
+
+#[cfg(test)]
+mod bidi_tests {
+    use doc4me_doc::{Path, Pos, StoryRef};
+    use serde_json::json;
+
+    use crate::{Selection, Session};
+
+    #[test]
+    fn bidi_options_set_cursor_movement_and_the_default_direction() {
+        let mut d = doc4me_doc::Document::from_text("שלום");
+        if let Some(b) = d.body.first_mut()
+            && let doc4me_doc::Block::Para(p) = std::sync::Arc::make_mut(b)
+        {
+            p.props.bidi = Some(true);
+        }
+        let mut s = Session::new(d);
+        // Without settings it opens Options at Advanced.
+        let r = s.run("file.bidiOptions", &json!({})).unwrap();
+        assert_eq!((r["opened"].as_bool(), r["cursorMovement"].as_str()), (Some(true), Some("visual")));
+        assert!(s.run("file.bidiOptions", &json!({"cursorMovement": "sideways"})).is_err());
+        assert!(s.run("file.bidiOptions", &json!({"defaultDirection": "up"})).is_err());
+        // Logical: Left goes on through a right-to-left paragraph, Right goes back.
+        let r = s.run("file.bidiOptions", &json!({"cursorMovement": "logical"})).unwrap();
+        assert_eq!((r["opened"].as_bool(), r["cursorMovement"].as_str()), (Some(false), Some("logical")));
+        s.sel = Selection::caret(Pos::new(StoryRef::Body, Path::top(0), 0));
+        s.run("caret.left", &json!({})).unwrap();
+        assert_eq!(s.sel.focus.off, "ש".len(), "Left moves on in reading order");
+        s.run("caret.right", &json!({})).unwrap();
+        assert_eq!(s.sel.focus.off, 0);
+        assert_eq!(s.run("file.options", &json!({})).unwrap()["logicalCursor"], json!(true));
+        // Default direction: a new blank document reads right to left.
+        s.run("file.bidiOptions", &json!({"defaultDirection": "rtl"})).unwrap();
+        s.run("file.new", &json!({})).unwrap();
+        assert_eq!(s.doc.styles.default_para.bidi, Some(true));
+        s.run("file.bidiOptions", &json!({"defaultDirection": "ltr", "cursorMovement": "visual"})).unwrap();
+        s.run("file.new", &json!({})).unwrap();
+        assert_eq!(s.doc.styles.default_para.bidi, None);
+        assert!(!s.prefs.logical_cursor);
+    }
 }

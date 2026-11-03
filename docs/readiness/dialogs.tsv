@@ -203,7 +203,7 @@ dlg-201	wdDialogToolsMergeDocuments	435	(none)	review.combine	registry
 dlg-202	wdDialogToolsOptions	974	(none)	file.options	registry		
 dlg-203	wdDialogToolsOptionsAutoFormat	959	(none)	tools.autocorrect	registry		AutoCorrect Options › AutoFormat: Apply (Built-in Heading styles, List styles, Automatic bulleted lists, Other paragraph styles), Replace (quotes, ordinals, fractions, dashes, *bold* and _italic_, links), Preserve Styles; AutoFormat Now / AutoFormat and Review Changes
 dlg-204	wdDialogToolsOptionsAutoFormatAsYouType	778	(none)	tools.autocorrect	registry		
-dlg-205	wdDialogToolsOptionsBidi	1029	(none)	-	registry		
+dlg-205	wdDialogToolsOptionsBidi	1029	(none)	file.bidiOptions	registry		Options › Advanced › Bidirectional text (default direction, cursor movement)
 dlg-206	wdDialogToolsOptionsCompatibility	525	(none)	file.compatibilityOptions	registry		Compatibility Options: the layout options Doc4Me follows (Options › Advanced)
 dlg-207	wdDialogToolsOptionsEdit	224	(none)	file.options	registry		Advanced
 dlg-208	wdDialogToolsOptionsEditCopyPaste	1356	(none)	file.options	registry		File › Options › Advanced › Cut, copy, and paste: Pasting within the same document, between documents, from other programs (Keep Source Formatting, Merge Formatting, Keep Text Only); file.options pasteSame/pasteBetween/pasteOther

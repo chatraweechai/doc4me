@@ -125,6 +125,11 @@ fn lr(s: &mut Session, v: &Value, is_left: bool) -> CmdResult {
         s.goal_x = None;
         return sel_result(s);
     }
+    if s.prefs.logical_cursor {
+        // Logical cursor movement: reading order, so Left goes on in a right-to-left paragraph.
+        let back = is_left != rtl_para(s);
+        return mv(s, v, if back { left } else { right });
+    }
     if bidi_para(s) {
         return visual_lr(s, v, is_left);
     }
