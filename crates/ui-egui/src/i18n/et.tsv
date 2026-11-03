@@ -2953,3 +2953,7 @@ spacing	Normal	Tavaline
 	Match hiragana/katakana	Sobita hiragana/katakana
 	Match small kana	Sobita väike kana
 	Match prolonged sound marks and dashes	Sobita pikendusmärgid ja kriipsud
+	Japanese Consistency Checker	Jaapani keele järjepidevuse kontroll
+	Japanese Consistency Checker…	Jaapani keele järjepidevuse kontroll…
+	No inconsistent spellings were found.	Ebajärjekindlaid kirjaviise ei leitud.
+	Pick the spelling to keep in each group.	Valige igas rühmas kirjaviis, mis alles jääb.

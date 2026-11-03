@@ -2946,3 +2946,7 @@ spacing	Normal	標準
 	Match hiragana/katakana	符合平假名/片假名
 	Match small kana	符合小寫假名
 	Match prolonged sound marks and dashes	符合長音符號和破折號
+	Japanese Consistency Checker	日文一致性檢查
+	Japanese Consistency Checker…	日文一致性檢查…
+	No inconsistent spellings were found.	未發現不一致的寫法。
+	Pick the spelling to keep in each group.	在每組中選擇要保留的寫法。

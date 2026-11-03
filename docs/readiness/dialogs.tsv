@@ -1,7 +1,7 @@
 id	word_dialog	word_value	word_arguments	command	check	status	note
 dlg-001	wdDialogBuildingBlockOrganizer	2067	(none)	insert.quickParts	registry		Quick Parts organizer
 dlg-002	wdDialogConnect	420	Drive, Path, Password	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Windows network drives; network drive connect (legacy)
-dlg-003	wdDialogConsistencyChecker	1121	(none)	-	registry		
+dlg-003	wdDialogConsistencyChecker	1121	(none)	review.consistencyChecker	registry		Japanese Consistency Checker (表記ゆれチェック)
 dlg-004	wdDialogContentControlProperties	2394	(none)	developer.properties	registry		Content Control Properties
 dlg-005	wdDialogControlRun	235	Application	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Windows Control Panel; runs Control Panel or Clipboard (legacy)
 dlg-006	wdDialogConvertObject	392	IconNumber, ActivateAs, IconFileName, Caption, Class, DisplayIcon, Floating	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): OLE objects are converted by their Windows server programs

@@ -2942,3 +2942,7 @@ spacing	Normal	Normal
 	Match hiragana/katakana	Respecter hiragana/katakana
 	Match small kana	Respecter les petits kanas
 	Match prolonged sound marks and dashes	Respecter les marques d’allongement et les tirets
+	Japanese Consistency Checker	Vérificateur de cohérence japonais
+	Japanese Consistency Checker…	Vérificateur de cohérence japonais…
+	No inconsistent spellings were found.	Aucune graphie incohérente n’a été trouvée.
+	Pick the spelling to keep in each group.	Choisissez la graphie à conserver dans chaque groupe.

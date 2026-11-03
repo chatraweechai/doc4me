@@ -461,6 +461,8 @@ pub(crate) fn language_menu(ui: &mut Ui, app: &mut WordApp) {
     mi(ui, app, "Traditional to Simplified", "review.toSimplified", json!({}));
     mi(ui, app, "Simplified to Traditional", "review.toTraditional", json!({}));
     mi(ui, app, "Chinese Conversion…", "review.chineseConversion", json!({}));
+    ui.separator();
+    mi(ui, app, "Japanese Consistency Checker…", "review.consistencyChecker", json!({}));
 }
 
 /// A menu item with a check mark when `checked` (the current choice of several).

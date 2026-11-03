@@ -1839,6 +1839,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "format.frame" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formatFrame"),
         // Chinese Conversion without a direction asks which way.
         "review.chineseConversion" if !has("to") => Some("chineseConversion"),
+        // The Japanese Consistency Checker without a spelling to keep lists the spellings.
+        "review.consistencyChecker" if !has("to") => Some("consistencyChecker"),
         // Enclose Characters without a shape (null is one: it takes the enclosure away).
         "format.enclose" if params.get("shape").is_none() => Some("enclose"),
         // Asian Layout: Fit Text without a width, Two Lines in One without on or off.

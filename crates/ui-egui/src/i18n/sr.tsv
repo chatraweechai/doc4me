@@ -2959,3 +2959,7 @@ spacing	Normal	Нормално
 	Match hiragana/katakana	Подударање хирагане/катакане
 	Match small kana	Подударање мале кане
 	Match prolonged sound marks and dashes	Подударање ознака продужења и цртица
+	Japanese Consistency Checker	Провера доследности јапанског
+	Japanese Consistency Checker…	Провера доследности јапанског…
+	No inconsistent spellings were found.	Нису пронађени недоследни записи.
+	Pick the spelling to keep in each group.	У свакој групи изаберите запис који желите да задржите.

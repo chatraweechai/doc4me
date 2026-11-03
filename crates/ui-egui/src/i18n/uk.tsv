@@ -2957,3 +2957,7 @@ spacing	Normal	Звичайний
 	Match hiragana/katakana	Не розрізняти хірагану/катакану
 	Match small kana	Не розрізняти малі кани
 	Match prolonged sound marks and dashes	Не розрізняти знаки довготи й тире
+	Japanese Consistency Checker	Перевірка узгодженості японського тексту
+	Japanese Consistency Checker…	Перевірка узгодженості японського тексту…
+	No inconsistent spellings were found.	Різних написань одного слова не знайдено.
+	Pick the spelling to keep in each group.	Виберіть у кожній групі написання, яке слід залишити.

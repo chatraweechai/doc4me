@@ -2950,3 +2950,7 @@ spacing	Normal	Normální
 	Match hiragana/katakana	Shodovat hiraganu/katakanu
 	Match small kana	Shodovat malou kanu
 	Match prolonged sound marks and dashes	Shodovat znaky prodloužení a pomlčky
+	Japanese Consistency Checker	Kontrola konzistence japonštiny
+	Japanese Consistency Checker…	Kontrola konzistence japonštiny…
+	No inconsistent spellings were found.	Nebyly nalezeny žádné nejednotné zápisy.
+	Pick the spelling to keep in each group.	V každé skupině vyberte zápis, který chcete zachovat.
