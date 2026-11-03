@@ -2979,3 +2979,13 @@ spacing	Normal	ปกติ
 	A missing part of an embedded object was left out: {what}	ละส่วนที่หายไปของวัตถุที่ฝังไว้: {what}
 	Copy File	คัดลอกแฟ้ม
 	Find Files	ค้นหาแฟ้ม
+	Letter Wizard	ตัวช่วยสร้างจดหมาย
+	Recipient's name:	ชื่อผู้รับ:
+	Salutation:	คำขึ้นต้น:
+	Subject:	เรื่อง:
+	Complimentary closing:	คำลงท้าย:
+	Sender's name:	ชื่อผู้ส่ง:
+	Job title:	ตำแหน่ง:
+	Company:	บริษัท:
+	Enclosures:	สิ่งที่ส่งมาด้วย:
+	Cc:	สำเนาถึง:

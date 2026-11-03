@@ -197,6 +197,10 @@ pub enum FormDialog {
     Repairs {
         items: Vec<(String, String)>,
     },
+    /// File › New › Letter Wizard: the letter's parts, by [`LETTER_FIELDS`] order.
+    Letter {
+        fields: Vec<String>,
+    },
     /// AutoSummarize: how the summary is shown and how long it is.
     Summarize {
         /// highlight, top or newDocument.
@@ -475,6 +479,7 @@ impl FormDialog {
             FormDialog::Chinese { .. } => "chineseConversion",
             FormDialog::Consistency { .. } => "consistencyChecker",
             FormDialog::Repairs { .. } => "showRepairs",
+            FormDialog::Letter { .. } => "letterWizard",
         }
     }
 
@@ -494,6 +499,7 @@ impl FormDialog {
             FormDialog::Chinese { .. } => "Chinese Conversion",
             FormDialog::Consistency { .. } => "Japanese Consistency Checker",
             FormDialog::Repairs { .. } => "Show Repairs",
+            FormDialog::Letter { .. } => "Letter Wizard",
         }
     }
 }
@@ -506,6 +512,14 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
         "formatFrame" => Some(FormDialog::Frame { form: FrameForm::read(app) }),
         "chineseConversion" => Some(FormDialog::Chinese { to_traditional: false, variants: false }),
+        "letterWizard" => {
+            // The sender is the user, as Word fills it in.
+            let mut fields = vec![String::new(); LETTER_FIELDS.len()];
+            if let Some(i) = LETTER_FIELDS.iter().position(|(k, _, _)| *k == "senderName") {
+                fields[i] = app.session.author.clone();
+            }
+            Some(FormDialog::Letter { fields })
+        }
         "showRepairs" => {
             let v = app.session.run("file.showRepairs", &json!({})).unwrap_or_default();
             let items = v["repairs"]
@@ -537,6 +551,21 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         _ => None,
     }
 }
+
+/// The Letter Wizard's fields: `file.letterWizard` parameter, label, several lines.
+const LETTER_FIELDS: [(&str, &str, bool); 11] = [
+    ("recipientName", "Recipient's name:", false),
+    ("recipientAddress", "Delivery address:", true),
+    ("salutation", "Salutation:", false),
+    ("subject", "Subject:", false),
+    ("closing", "Complimentary closing:", false),
+    ("senderName", "Sender's name:", false),
+    ("returnAddress", "Return address:", true),
+    ("senderJobTitle", "Job title:", false),
+    ("senderCompany", "Company:", false),
+    ("enclosures", "Enclosures:", false),
+    ("cc", "Cc:", false),
+];
 
 /// The Japanese Consistency Checker's groups of spellings, as the command lists them.
 fn consistency_groups(app: &mut WordApp) -> Vec<Vec<(String, u64)>> {
@@ -573,6 +602,32 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
                         app.status(crate::i18n::fmt(tl!("Converted {n} characters"), &[("n", &n.to_string())]));
                         return true;
                     }
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
+        FormDialog::Letter { fields } => {
+            egui::Grid::new("letter_wizard").num_columns(2).spacing(egui::vec2(8.0, 6.0)).show(ui, |ui| {
+                for ((_, label, multi), value) in LETTER_FIELDS.iter().zip(fields.iter_mut()) {
+                    ui.label(tl!(label));
+                    if *multi {
+                        ui.add(egui::TextEdit::multiline(value).desired_rows(3).desired_width(320.0).char_limit(2000));
+                    } else {
+                        ui.add(crate::widgets::text_line(value).desired_width(320.0).char_limit(2000));
+                    }
+                    ui.end_row();
+                }
+            });
+            let (ok, cancel) = buttons(ui, tl!("Finish"));
+            if ok {
+                let params: serde_json::Map<String, Value> =
+                    LETTER_FIELDS.iter().zip(fields.iter()).filter(|(_, v)| !v.trim().is_empty()).map(|((k, _, _), v)| (k.to_string(), json!(v))).collect();
+                // With every field empty, the letter with the template's wording (an empty field
+                // still writes the letter; no fields at all would only open this dialog again).
+                let params = if params.is_empty() { json!({"date": ""}) } else { Value::Object(params) };
+                match app.run("file.letterWizard", params) {
+                    Ok(_) => return true,
                     Err(e) => app.status(e),
                 }
             }
@@ -1117,6 +1172,23 @@ mod tests {
         h.run_steps(12);
         assert!(h.state().dialog.is_none());
         assert!(frame(&mut h).is_null());
+    }
+
+    #[test]
+    fn letter_wizard_writes_the_letter() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("old")), Services::default()));
+        h.state_mut().session.author = "Somchai".into();
+        h.state_mut().run("file.letterWizard", json!({})).unwrap();
+        h.run_steps(3);
+        let FormDialog::Letter { fields } = form(&mut h) else { panic!("the Letter Wizard") };
+        assert!(fields.contains(&"Somchai".to_string()), "the sender is the user");
+        fields[0] = "Ms. Lee".into();
+        h.run_steps(1);
+        h.get_by_label("Finish").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        let text = h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body);
+        assert!(text.contains("Ms. Lee") && text.contains("Dear Sir or Madam,") && text.contains("Somchai"), "{text}");
     }
 
     #[test]

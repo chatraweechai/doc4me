@@ -163,6 +163,87 @@ pub fn letter() -> Document {
     d
 }
 
+/// What the Letter Wizard puts in a letter (Word's `wdDialogLetterWizard` fields); empty fields
+/// are left out, and a missing body or closing gets the template's.
+#[derive(Clone, Debug, Default)]
+pub struct LetterFields {
+    pub sender_name: String,
+    pub return_address: String,
+    /// The date line; empty, today's date.
+    pub date: String,
+    pub mailing_instructions: String,
+    pub recipient_name: String,
+    pub recipient_address: String,
+    pub attention: String,
+    pub subject: String,
+    pub salutation: String,
+    pub body: String,
+    pub closing: String,
+    pub sender_title: String,
+    pub sender_company: String,
+    pub initials: String,
+    pub enclosures: String,
+    pub cc: String,
+}
+
+/// A letter laid out as the letter template is, from the Letter Wizard's fields. Multi-line fields
+/// (addresses, the body) give one paragraph per line.
+pub fn letter_from(f: &LetterFields) -> Document {
+    let mut d = Document::new();
+    let mut b: Vec<Paragraph> = Vec::new();
+    let lines = |t: &str| t.lines().map(str::trim_end).map(str::to_string).collect::<Vec<_>>();
+    let block = |b: &mut Vec<Paragraph>, t: &str| {
+        for l in lines(t) {
+            b.push(para(&l));
+        }
+    };
+    if !f.sender_name.trim().is_empty() {
+        b.push(styled(f.sender_name.trim(), "Title"));
+    }
+    block(&mut b, &f.return_address);
+    if !b.is_empty() {
+        b.push(para(""));
+    }
+    let date = if f.date.trim().is_empty() { crate::cmd::insert::format_date("MMMM d, yyyy") } else { f.date.trim().to_string() };
+    b.push(para(&date));
+    b.push(para(""));
+    block(&mut b, &f.mailing_instructions);
+    block(&mut b, &f.recipient_name);
+    block(&mut b, &f.recipient_address);
+    b.push(para(""));
+    block(&mut b, &f.attention);
+    if !f.subject.trim().is_empty() {
+        let mut p = Paragraph::new();
+        add(&mut p, f.subject.trim(), bold());
+        b.push(p);
+    }
+    let salutation = if f.salutation.trim().is_empty() { "Dear Sir or Madam," } else { f.salutation.trim() };
+    b.push(para(salutation));
+    if f.body.trim().is_empty() {
+        b.push(para(
+            "Start with a sentence that says why you are writing. Keep paragraphs short and specific, and close with what you would like to happen next.",
+        ));
+    } else {
+        block(&mut b, &f.body);
+    }
+    b.push(para(if f.closing.trim().is_empty() { "Sincerely," } else { f.closing.trim() }));
+    b.push(para(""));
+    b.push(para(""));
+    block(&mut b, &f.sender_name);
+    block(&mut b, &f.sender_title);
+    block(&mut b, &f.sender_company);
+    if !(f.initials.trim().is_empty() && f.enclosures.trim().is_empty() && f.cc.trim().is_empty()) {
+        b.push(para(""));
+    }
+    block(&mut b, &f.initials);
+    block(&mut b, &f.enclosures);
+    if !f.cc.trim().is_empty() {
+        b.push(para(&format!("cc: {}", f.cc.trim())));
+    }
+    d.body = b.into_iter().map(para_block).collect();
+    d
+}
+
 /// A one-page résumé.
 pub fn resume() -> Document {
     let mut d = Document::new();
