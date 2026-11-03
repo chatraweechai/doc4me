@@ -2946,3 +2946,9 @@
 	Japanese Consistency Checker…	Japanin johdonmukaisuuden tarkistus…
 	No inconsistent spellings were found.	Epäjohdonmukaisia kirjoitusasuja ei löytynyt.
 	Pick the spelling to keep in each group.	Valitse kustakin ryhmästä säilytettävä kirjoitusasu.
+	Bidirectional text	Kaksisuuntainen teksti
+	Bidirectional Text	Kaksisuuntainen teksti
+	Default direction:	Oletussuunta:
+	Cursor movement:	Kohdistimen liike:
+	Logical	Looginen
+	Visual	Visuaalinen

@@ -387,6 +387,25 @@ fn advanced(app: &mut WordApp, ui: &mut Ui) {
     });
     note(ui, "Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.");
     ui.add_space(8.0);
+    // Word's bidirectional (complex scripts) options.
+    section(ui, "Bidirectional text");
+    egui::Grid::new("options_bidi").num_columns(3).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
+        ui.label(tl!("Default direction:"));
+        for (label, rtl) in [("Right-to-left", true), ("Left-to-right", false)] {
+            if ui.radio(pr.rtl_default == rtl, tl!(label)).clicked() {
+                set(app, json!({"rtlDefault": rtl}));
+            }
+        }
+        ui.end_row();
+        ui.label(tl!("Cursor movement:"));
+        for (label, logical) in [("Logical", true), ("Visual", false)] {
+            if ui.radio(pr.logical_cursor == logical, tl!(label)).clicked() {
+                set(app, json!({"logicalCursor": logical}));
+            }
+        }
+        ui.end_row();
+    });
+    ui.add_space(8.0);
     section(ui, "Display");
     egui::Grid::new("options_display").num_columns(2).spacing(vec2(8.0, 6.0)).show(ui, |ui| {
         ui.label(tl!("Recent documents to show:"));
@@ -736,6 +755,31 @@ mod tests {
         h.run_steps(2);
         assert!(h.state().session.doc.settings.kinsoku.strict);
         assert!(h.query_by_label("Cannot start a line:").is_some());
+    }
+
+    #[test]
+    fn bidirectional_text_options_in_advanced() {
+        let mut a = app();
+        a.run("file.bidiOptions", json!({})).unwrap();
+        let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            a,
+        );
+        h.run_steps(4);
+        assert_eq!(h.state().ui.options_pane, "advanced");
+        h.get_by_label("Logical").click();
+        h.run_steps(2);
+        assert!(h.state().session.prefs.logical_cursor);
+        h.get_by_label("Right-to-left").click();
+        h.run_steps(2);
+        assert!(h.state().session.prefs.rtl_default);
+        h.get_by_label("Visual").click();
+        h.run_steps(2);
+        assert!(!h.state().session.prefs.logical_cursor);
     }
 
     /// File › Options › Accessibility › Animation effects: Use system setting (the default), On

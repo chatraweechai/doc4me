@@ -170,6 +170,10 @@ fn new(s: &mut Session, v: &Value) -> CmdResult {
             if let Some(lang) = &s.editing_lang {
                 d.styles.default_chr.lang = Some(lang.clone());
             }
+            // Options › Advanced › Bidirectional text › Default direction: right to left.
+            if s.prefs.rtl_default {
+                d.styles.default_para.bidi = Some(true);
+            }
             d
         }
     };

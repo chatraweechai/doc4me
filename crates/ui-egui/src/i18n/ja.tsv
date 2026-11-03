@@ -2949,3 +2949,9 @@ spacing	Normal	標準
 	Japanese Consistency Checker…	表記ゆれチェック…
 	No inconsistent spellings were found.	表記ゆれは見つかりませんでした。
 	Pick the spelling to keep in each group.	各グループで残す表記を選んでください。
+	Bidirectional text	双方向テキスト
+	Bidirectional Text	双方向テキスト
+	Default direction:	既定の方向:
+	Cursor movement:	カーソルの移動:
+	Logical	論理順
+	Visual	表示順

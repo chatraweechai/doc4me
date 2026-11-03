@@ -2958,3 +2958,9 @@ spacing	Normal	ปกติ
 	Japanese Consistency Checker…	ตรวจความสม่ำเสมอภาษาญี่ปุ่น…
 	No inconsistent spellings were found.	ไม่พบการสะกดที่ไม่สม่ำเสมอ
 	Pick the spelling to keep in each group.	เลือกการสะกดที่จะเก็บไว้ในแต่ละกลุ่ม
+	Bidirectional text	ข้อความสองทิศทาง
+	Bidirectional Text	ข้อความสองทิศทาง
+	Default direction:	ทิศทางเริ่มต้น:
+	Cursor movement:	การเลื่อนเคอร์เซอร์:
+	Logical	ตามลำดับตรรกะ
+	Visual	ตามที่แสดง

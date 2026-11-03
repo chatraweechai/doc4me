@@ -2977,3 +2977,9 @@ spacing	Normal	Обычный
 	Japanese Consistency Checker…	Проверка единообразия японского текста…
 	No inconsistent spellings were found.	Разные написания одного слова не найдены.
 	Pick the spelling to keep in each group.	Выберите в каждой группе написание, которое нужно оставить.
+	Bidirectional text	Двунаправленный текст
+	Bidirectional Text	Двунаправленный текст
+	Default direction:	Направление по умолчанию:
+	Cursor movement:	Перемещение курсора:
+	Logical	Логическое
+	Visual	Визуальное

@@ -466,6 +466,12 @@ pub struct Prefs {
     pub paste_same: PasteMode,
     pub paste_between: PasteMode,
     pub paste_other: PasteMode,
+    /// File › Options › Advanced › Bidirectional text › Cursor movement: Logical (the arrow keys
+    /// move through the text in reading order, Left going on in right-to-left paragraphs);
+    /// off, Visual (one place to the left or right on the screen).
+    pub logical_cursor: bool,
+    /// Bidirectional text › Default direction: new blank documents read right to left.
+    pub rtl_default: bool,
 }
 
 /// What Paste keeps of the copied content's formatting (Word's Paste Options).
@@ -505,6 +511,8 @@ impl Default for Prefs {
             paste_same: PasteMode::Keep,
             paste_between: PasteMode::Keep,
             paste_other: PasteMode::Keep,
+            logical_cursor: false,
+            rtl_default: false,
         }
     }
 }
