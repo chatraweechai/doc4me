@@ -71,8 +71,8 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 
 The readiness number in [`ROADMAP.md`](../ROADMAP.md) was an estimate (~60%): a weighted sum of
 estimated dimension parities. Since stage B it is measured: **66.1%** at first, **73.4%** in the
-2026-10-25 report, and **87.2%** measured on Windows on 2026-11-03 (run 41589001124, dialogs 196/228; 87.1%, 87.0%, 86.9%, 86.8% and 86.7% earlier that day; 86.0% on 2026-11-01; `readiness.md`, all 222 corpus documents; DOCX open and round-trip 222/222), 12.8
-points short of the target. The current score excluding 26 deferred owner-bound checks is 89.7%.
+2026-10-25 report, and **87.3%** measured on Windows on 2026-11-03 (run 41590861975, dialogs 197/228; 87.2%, 87.1%, 87.0%, 86.9%, 86.8% and 86.7% earlier that day; 86.0% on 2026-11-01; `readiness.md`, all 222 corpus documents; DOCX open and round-trip 222/222), 12.7
+points short of the target. The current score excluding 26 deferred owner-bound checks is 89.8%.
 The target is **100% ready for real work, measured**
 (raised from 80% to 95% by the owner on 2026-10-25, and to 100% on 2026-10-27): every dimension
 comes from a fixed pass/fail check set, and one command computes the number. Checks may be added,
