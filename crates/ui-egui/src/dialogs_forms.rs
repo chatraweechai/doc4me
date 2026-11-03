@@ -197,6 +197,12 @@ pub enum FormDialog {
     Repairs {
         items: Vec<(String, String)>,
     },
+    /// File › Info › Edit Links to Files: each link's kind, source and lock, and the source as
+    /// edited in the dialog.
+    Links {
+        links: Vec<(String, String, bool)>,
+        edited: Vec<String>,
+    },
     /// File › New › Letter Wizard: the letter's parts, by [`LETTER_FIELDS`] order.
     Letter {
         fields: Vec<String>,
@@ -480,6 +486,7 @@ impl FormDialog {
             FormDialog::Consistency { .. } => "consistencyChecker",
             FormDialog::Repairs { .. } => "showRepairs",
             FormDialog::Letter { .. } => "letterWizard",
+            FormDialog::Links { .. } => "editLinks",
         }
     }
 
@@ -500,6 +507,7 @@ impl FormDialog {
             FormDialog::Consistency { .. } => "Japanese Consistency Checker",
             FormDialog::Repairs { .. } => "Show Repairs",
             FormDialog::Letter { .. } => "Letter Wizard",
+            FormDialog::Links { .. } => "Edit Links to Files",
         }
     }
 }
@@ -512,6 +520,10 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
         "formatFrame" => Some(FormDialog::Frame { form: FrameForm::read(app) }),
         "chineseConversion" => Some(FormDialog::Chinese { to_traditional: false, variants: false }),
+        "editLinks" => {
+            let links = file_links(&app.session.run("file.editLinks", &json!({})).unwrap_or_default());
+            Some(FormDialog::Links { edited: links.iter().map(|l| l.1.clone()).collect(), links })
+        }
         "letterWizard" => {
             // The sender is the user, as Word fills it in.
             let mut fields = vec![String::new(); LETTER_FIELDS.len()];
@@ -550,6 +562,18 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         }
         _ => None,
     }
+}
+
+/// Edit Links to Files' list from `file.editLinks`: (kind, source, locked).
+fn file_links(v: &Value) -> Vec<(String, String, bool)> {
+    v["links"]
+        .as_array()
+        .map(|a| {
+            a.iter()
+                .map(|l| (l["kind"].as_str().unwrap_or("").to_string(), l["source"].as_str().unwrap_or("").to_string(), l["locked"].as_bool().unwrap_or(false)))
+                .collect()
+        })
+        .unwrap_or_default()
 }
 
 /// The Letter Wizard's fields: `file.letterWizard` parameter, label, several lines.
@@ -606,6 +630,45 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
                 }
             }
             cancel
+        }
+        FormDialog::Links { links, edited } => {
+            let mut action: Option<Value> = None;
+            if links.is_empty() {
+                ui.label(tl!("This document has no links to files."));
+            } else {
+                egui::Grid::new("edit_links").num_columns(5).spacing(egui::vec2(8.0, 6.0)).show(ui, |ui| {
+                    ui.label(egui::RichText::new(tl!("Type")).strong());
+                    ui.label(egui::RichText::new(tl!("Source file")).strong());
+                    ui.label(egui::RichText::new(tl!("Locked")).strong());
+                    ui.end_row();
+                    for (i, ((kind, source, locked), text)) in links.iter().zip(edited.iter_mut()).enumerate() {
+                        ui.label(kind.as_str());
+                        ui.add(crate::widgets::text_line(text).desired_width(300.0).char_limit(1024));
+                        let mut l = *locked;
+                        if ui.checkbox(&mut l, "").on_hover_text(tl!("Locked")).changed() {
+                            action = Some(json!({"link": i, "action": if l { "lock" } else { "unlock" }}));
+                        }
+                        if ui.add_enabled(text.trim() != source.as_str() && !text.trim().is_empty(), egui::Button::new(tl!("Change Source"))).clicked() {
+                            action = Some(json!({"link": i, "action": "changeSource", "source": text.trim()}));
+                        }
+                        if ui.button(tl!("Break Link")).clicked() {
+                            action = Some(json!({"link": i, "action": "breakLink"}));
+                        }
+                        ui.end_row();
+                    }
+                });
+            }
+            if let Some(a) = action {
+                match app.run("file.editLinks", a) {
+                    Ok(v) => {
+                        *links = file_links(&v);
+                        *edited = links.iter().map(|l| l.1.clone()).collect();
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            ui.add_space(6.0);
+            ui.button(tl!("Close")).clicked()
         }
         FormDialog::Letter { fields } => {
             egui::Grid::new("letter_wizard").num_columns(2).spacing(egui::vec2(8.0, 6.0)).show(ui, |ui| {
@@ -1172,6 +1235,19 @@ mod tests {
         h.run_steps(12);
         assert!(h.state().dialog.is_none());
         assert!(frame(&mut h).is_null());
+    }
+
+    #[test]
+    fn edit_links_dialog_breaks_a_link() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Services::default()));
+        h.state_mut().session.run("insert.field", &json!({"instr": "INCLUDETEXT \"part.docx\"", "result": "Part"})).unwrap();
+        h.state_mut().run("file.editLinks", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Links { links, .. } if links.len() == 1 && links[0].1 == "part.docx"));
+        h.get_by_label("Break Link").click();
+        h.run_steps(4);
+        h.get_by_label("This document has no links to files.");
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "Part");
     }
 
     #[test]
