@@ -1,4 +1,4 @@
-# Handoff: Doc4Me 1.1.2 · readiness 86.7% (วัดบน Windows รอบที่ 21 ด้วย workflow `readiness-windows.yml` run 41559739417, 2026-11-03; ก่อนหน้า 86.0% รอบที่ 17) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
+# Handoff: Doc4Me 1.1.2 · readiness 86.8% (วัดบน Windows รอบที่ 21 ด้วย workflow `readiness-windows.yml` run 41579621418, 2026-11-03; ก่อนหน้า 86.7% และ 86.0% รอบที่ 17) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
 
 อัปเดต: 2026-11-02 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 20 (ออกรุ่นครบ แล้วทำงานต่อด้าน pagination) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
@@ -8,6 +8,9 @@
 
 ### ผลวัด Windows รอบที่ 21 (2026-11-03): **86.7%** (run 41565289539 ที่ `8b685b2` ยืนยันตัวเลขของ run 41559739417; `windows-latest`)
 
+- run 41579621418 (`293f915`, Fit Text และ Two Lines in One): **86.8%**, 89.3% เมื่อไม่นับ deferred, dialogs 188 → 190/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, round-trip 222/222); `0ebfb7d` (Options › Typography, `dlg-218`) push แล้ว รอผลวัด Windows run ถัดไป (บน Linux dialogs 191/228)
+- งานรอบนี้ (Opus): `e184943` freeform ในกลุ่มรูปร่าง, `293f915` Asian Layout (Fit Text `dlg-047`, Two Lines in One `dlg-229`; Horizontal in Vertical `dlg-083` เก็บค่าได้แต่ยังไม่วาด เพราะ layout ไม่รู้ทิศทางข้อความ), `0ebfb7d` Typography (`dlg-218`) ทั้งหมดมีเทสต์และคำแปล 28 ภาษา รายละเอียดใน `CHANGELOG.md`
+- หมายเหตุ build ใน session: ดิสก์ของ session เต็มได้จาก `target/debug/incremental` และไฟล์ทดสอบซ้ำหลายรุ่น ให้ใช้ `CARGO_INCREMENTAL=0` และลบ `target/debug/incremental` เมื่อเต็ม
 - run 41569447798 (`e184943`, หลังแก้ freeform ในกลุ่มรูปร่าง) วัดได้ 86.7% เท่าเดิม (corpus-pages 171/222, corpus-breaks 96/222) เพราะการแก้เปลี่ยนการวาด ไม่ใช่การจัดหน้า
 - รายการ deferred ทั้ง 26 แถวพร้อมเหตุผลอยู่ใน `docs/readiness.md` หัวข้อ `## Deferred rows (26)` (dialogs 12, shortcuts 6, ecosystem 1, hardware 5, platforms 1)
 - run 41559739417 ล้มครั้งแรกที่ขั้น poppler (feed ของ Chocolatey ตอบ 406) แก้ด้วยการลองซ้ำ `95e46b1` แล้วผ่าน
