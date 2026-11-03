@@ -6,7 +6,10 @@
 
 ผู้ใช้สั่ง (2026-11-02): "อ่าน handoff.md แล้วดำเนินการต่อ" (งานที่ค้างคือการออก v1.0.0, v1.1.0, v1.1.1 แล้วจึง v1.1.2 ของรอบที่ 19) ระหว่างทำ ผู้ใช้เลือกให้ออก Release ใน fork และเปิด Actions ของ fork เอง; หลังออกรุ่นผู้ใช้สั่งไม่เปลี่ยนลิงก์ Releases ใน README แล้วสั่ง "ทำงานต่อจากงานต่อไปใน handoff"
 
-### ผลวัด Windows รอบที่ 21 (2026-11-03): **86.7%** (run 41559739417, `windows-latest`)
+### ผลวัด Windows รอบที่ 21 (2026-11-03): **86.7%** (run 41565289539 ที่ `8b685b2` ยืนยันตัวเลขของ run 41559739417; `windows-latest`)
+
+- รายการ deferred ทั้ง 26 แถวพร้อมเหตุผลอยู่ใน `docs/readiness.md` หัวข้อ `## Deferred rows (26)` (dialogs 12, shortcuts 6, ecosystem 1, hardware 5, platforms 1)
+- run 41559739417 ล้มครั้งแรกที่ขั้น poppler (feed ของ Chocolatey ตอบ 406) แก้ด้วยการลองซ้ำ `95e46b1` แล้วผ่าน
 
 - ที่มา: workflow `.github/workflows/readiness-windows.yml` (สั่งเองจากแท็บ Actions ด้วย workflow_dispatch) รัน `cargo xtask readiness --download` (ลองซ้ำได้ 3 ครั้ง) แล้ว `--corpus --jobs 4`; run สำเร็จ ใช้เวลาราว 22 นาที; commit ผล `cab15d4` บน `main` (`docs/readiness.md`)
 - คะแนน: 86.7% รวม, 89.2% เมื่อไม่นับ 26 deferred (เดิม 86.0% และ 88.5%); ฟีเจอร์ 91.2% (dialogs 188/228), การจัดหน้า 60.1% (corpus-pages 171/222, corpus-breaks 96/222), UI/UX 95.7%, ภาษา 31.6% (30/95)
