@@ -52,6 +52,7 @@ pub mod templates;
 pub mod text;
 pub mod tools;
 pub mod translate;
+pub mod typography;
 pub mod view;
 pub mod wordart;
 
@@ -73,6 +74,7 @@ pub fn registry() -> Registry {
     v.extend(font::specs());
     v.extend(phonetic::specs());
     v.extend(asian_layout::specs());
+    v.extend(typography::specs());
     v.extend(para::specs());
     v.extend(lists::specs());
     v.extend(inspector::specs());

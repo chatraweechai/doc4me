@@ -2939,3 +2939,12 @@ spacing	Normal	ปกติ
 	New text width (pt):	ความกว้างข้อความใหม่ (pt):
 	Enclose in brackets	ล้อมด้วยวงเล็บ
 	Bracket pair:	คู่วงเล็บ:
+	Typography	การจัดตัวอักษร
+	Character spacing control	การควบคุมระยะห่างอักขระ
+	Don't compress	ไม่บีบ
+	Compress punctuation only	บีบเฉพาะเครื่องหมายวรรคตอน
+	Compress punctuation and Japanese kana	บีบเครื่องหมายวรรคตอนและคานะญี่ปุ่น
+	First and last characters	อักขระต้นและท้ายบรรทัด
+	Strict	เข้มงวด
+	Cannot start a line:	ห้ามขึ้นต้นบรรทัด:
+	Cannot end a line:	ห้ามลงท้ายบรรทัด:

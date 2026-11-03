@@ -2935,3 +2935,12 @@ spacing	Normal	Normalne
 	New text width (pt):	Nowa szerokość tekstu (pt):
 	Enclose in brackets	Ujmij w nawiasy
 	Bracket pair:	Para nawiasów:
+	Typography	Typografia
+	Character spacing control	Kontrola odstępów między znakami
+	Don't compress	Nie kompresuj
+	Compress punctuation only	Kompresuj tylko interpunkcję
+	Compress punctuation and Japanese kana	Kompresuj interpunkcję i japońskie kana
+	First and last characters	Pierwsze i ostatnie znaki
+	Strict	Ścisłe
+	Cannot start a line:	Nie może rozpoczynać wiersza:
+	Cannot end a line:	Nie może kończyć wiersza:

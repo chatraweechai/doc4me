@@ -2944,3 +2944,12 @@ spacing	Normal	Нормално
 	New text width (pt):	Нова ширина текста (пт):
 	Enclose in brackets	Стави у заграде
 	Bracket pair:	Пар заграда:
+	Typography	Типографија
+	Character spacing control	Контрола размака између знакова
+	Don't compress	Не сажимај
+	Compress punctuation only	Сажми само интерпункцију
+	Compress punctuation and Japanese kana	Сажми интерпункцију и јапанску кану
+	First and last characters	Први и последњи знакови
+	Strict	Строго
+	Cannot start a line:	Не може да започне ред:
+	Cannot end a line:	Не може да заврши ред:

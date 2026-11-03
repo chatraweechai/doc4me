@@ -2935,3 +2935,12 @@ spacing	Normal	Normální
 	New text width (pt):	Nová šířka textu (b.):
 	Enclose in brackets	Uzavřít do závorek
 	Bracket pair:	Pár závorek:
+	Typography	Typografie
+	Character spacing control	Řízení mezer mezi znaky
+	Don't compress	Nekomprimovat
+	Compress punctuation only	Komprimovat pouze interpunkci
+	Compress punctuation and Japanese kana	Komprimovat interpunkci a japonskou kanu
+	First and last characters	První a poslední znaky
+	Strict	Striktní
+	Cannot start a line:	Nemůže začínat řádek:
+	Cannot end a line:	Nemůže končit řádek:

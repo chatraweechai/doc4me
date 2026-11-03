@@ -513,7 +513,8 @@ fn env_hash(doc: &Document, opts: &LayoutOptions) -> u64 {
         opts.form_shading,
         opts.proof,
         doc4me_proof::dictionary_generation(),
-        hyphenation_key(doc),
+        // With File › Options › Typography: punctuation compression and the kinsoku lists.
+        (hyphenation_key(doc), doc.settings.char_spacing, &doc.settings.kinsoku),
         outline,
     ))
 }

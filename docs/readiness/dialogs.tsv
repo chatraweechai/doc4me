@@ -216,7 +216,7 @@ dlg-214	wdDialogToolsOptionsSecurity	1361	(none)	file.options	registry		File ›
 dlg-215	wdDialogToolsOptionsSmartTag	1395	(none)	-	registry		legacy
 dlg-216	wdDialogToolsOptionsSpellingAndGrammar	211	(none)	file.options	registry		Proofing
 dlg-217	wdDialogToolsOptionsTrackChanges	386	(none)	review.trackingOptions	registry		
-dlg-218	wdDialogToolsOptionsTypography	739	(none)	-	registry		East Asian typography options
+dlg-218	wdDialogToolsOptionsTypography	739	(none)	file.typography	registry		File › Options › Typography (`file.typography`): Character spacing control (`w:characterSpacingControl`, compress punctuation between neighbouring full-width marks) and First and last characters standard/strict/custom (`w:strictFirstAndLastChars`, `w:noLineBreaksBefore`/`After`), read, laid out and saved; tests `typography_settings_change_reopen_and_undo`, `strict_and_custom_first_and_last_characters`, `compress_punctuation_closes_up_neighbouring_marks`, UI `typography_pane_changes_the_document_settings`
 dlg-219	wdDialogToolsOptionsUserInfo	213	(none)	file.options	registry		General › user name
 dlg-220	wdDialogToolsOptionsView	204	(none)	file.options	registry		Display
 dlg-221	wdDialogToolsProtectDocument	503	(none)	review.restrict	registry		

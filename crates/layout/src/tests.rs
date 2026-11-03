@@ -4692,3 +4692,29 @@ fn two_lines_in_one_stacks_the_text_in_one_piece() {
     assert_eq!(pieces.len(), 3, "{:?}", pl.clusters);
     assert!(!pieces[0].break_after && !pieces[1].break_after, "{pieces:?}");
 }
+
+/// Character spacing control "compress punctuation": where two full-width marks meet, the blank
+/// half of one goes ("。」" and "」「" close up); other text and the setting's default keep widths.
+#[test]
+fn compress_punctuation_closes_up_neighbouring_marks() {
+    let text = "日本。」「語」";
+    let width = |spacing| {
+        let mut d = Document::from_text(text);
+        d.settings.char_spacing = spacing;
+        let pl = first_para_clusters(&lay(&d));
+        (pl.clusters.iter().map(|c| c.adv).sum::<f32>(), pl.clusters.iter().map(|c| c.adv).collect::<Vec<f32>>())
+    };
+    let (plain, each) = width(doc4me_doc::CharSpacing::DoNotCompress);
+    let (tight, each_tight) = width(doc4me_doc::CharSpacing::CompressPunctuation);
+    // The em: an ideograph's width.
+    let size = each.first().copied().unwrap_or(0.0);
+    if each.get(2).is_some_and(|a| *a > size * 0.75) {
+        // 。」 → 。 loses half; 」「 → 」 loses half: one em in all.
+        assert!((plain - tight - size).abs() < 0.5, "{plain} → {tight}: {each:?} {each_tight:?}");
+        assert_eq!(each[0], each_tight[0], "an ideograph keeps its width");
+        assert_eq!(each.last(), each_tight.last(), "a closing mark with nothing after it keeps its width");
+    } else {
+        // No full-width CJK face here: nothing is compressed.
+        assert_eq!(plain, tight);
+    }
+}

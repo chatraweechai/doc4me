@@ -2958,3 +2958,12 @@ spacing	Normal	Обычный
 	New text width (pt):	Новая ширина текста (пт):
 	Enclose in brackets	Заключить в скобки
 	Bracket pair:	Тип скобок:
+	Typography	Типографика
+	Character spacing control	Управление интервалом между знаками
+	Don't compress	Не сжимать
+	Compress punctuation only	Сжимать только знаки препинания
+	Compress punctuation and Japanese kana	Сжимать знаки препинания и японскую кану
+	First and last characters	Первые и последние знаки
+	Strict	Строгие
+	Cannot start a line:	Не может начинать строку:
+	Cannot end a line:	Не может завершать строку:

@@ -2927,3 +2927,12 @@
 	New text width (pt):	Nová šírka textu (pt):
 	Enclose in brackets	Uzavrieť do zátvoriek
 	Bracket pair:	Pár zátvoriek:
+	Typography	Typografia
+	Character spacing control	Riadenie medzier medzi znakmi
+	Don't compress	Nekomprimovať
+	Compress punctuation only	Komprimovať len interpunkciu
+	Compress punctuation and Japanese kana	Komprimovať interpunkciu a japonskú kanu
+	First and last characters	Prvé a posledné znaky
+	Strict	Prísne
+	Cannot start a line:	Nemôže začínať riadok:
+	Cannot end a line:	Nemôže končiť riadok:

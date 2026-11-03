@@ -2957,3 +2957,12 @@ spacing	Normal	Normal
 	New text width (pt):	Yeni metin genişliği (pt):
 	Enclose in brackets	Ayraç içine al
 	Bracket pair:	Ayraç çifti:
+	Typography	Tipografi
+	Character spacing control	Karakter aralığı denetimi
+	Don't compress	Sıkıştırma
+	Compress punctuation only	Yalnızca noktalama işaretlerini sıkıştır
+	Compress punctuation and Japanese kana	Noktalama işaretlerini ve Japonca kanayı sıkıştır
+	First and last characters	İlk ve son karakterler
+	Strict	Katı
+	Cannot start a line:	Satır başlatamaz:
+	Cannot end a line:	Satır bitiremez:

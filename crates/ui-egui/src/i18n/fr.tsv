@@ -2927,3 +2927,12 @@ spacing	Normal	Normal
 	New text width (pt):	Nouvelle largeur du texte (pt) :
 	Enclose in brackets	Entourer de parenthèses
 	Bracket pair:	Type de parenthèses :
+	Typography	Typographie
+	Character spacing control	Contrôle de l’espacement des caractères
+	Don't compress	Ne pas compresser
+	Compress punctuation only	Compresser la ponctuation uniquement
+	Compress punctuation and Japanese kana	Compresser la ponctuation et les kanas japonais
+	First and last characters	Premiers et derniers caractères
+	Strict	Strict
+	Cannot start a line:	Ne peut pas commencer une ligne :
+	Cannot end a line:	Ne peut pas terminer une ligne :

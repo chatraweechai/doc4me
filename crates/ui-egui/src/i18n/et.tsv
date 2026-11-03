@@ -2938,3 +2938,12 @@ spacing	Normal	Tavaline
 	New text width (pt):	Uus teksti laius (pt):
 	Enclose in brackets	Ümbritse sulgudega
 	Bracket pair:	Sulupaar:
+	Typography	Tüpograafia
+	Character spacing control	Märgivahe juhtimine
+	Don't compress	Ära tihenda
+	Compress punctuation only	Tihenda ainult kirjavahemärke
+	Compress punctuation and Japanese kana	Tihenda kirjavahemärke ja jaapani kanat
+	First and last characters	Esimesed ja viimased märgid
+	Strict	Range
+	Cannot start a line:	Ei tohi rida alustada:
+	Cannot end a line:	Ei tohi rida lõpetada:

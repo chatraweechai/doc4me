@@ -2923,3 +2923,12 @@
 	New text width (pt):	New text width (pt):
 	Enclose in brackets	Enclose in brackets
 	Bracket pair:	Bracket pair:
+	Typography	Typography
+	Character spacing control	Character spacing control
+	Don't compress	Don't compress
+	Compress punctuation only	Compress punctuation only
+	Compress punctuation and Japanese kana	Compress punctuation and Japanese kana
+	First and last characters	First and last characters
+	Strict	Strict
+	Cannot start a line:	Cannot start a line:
+	Cannot end a line:	Cannot end a line:
