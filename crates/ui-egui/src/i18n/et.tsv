@@ -3002,3 +3002,9 @@ spacing	Normal	Tavaline
 	Use long file names whenever possible	Kasuta võimaluse korral pikki failinimesid
 	Screen size:	Ekraani suurus:
 	Pixels per inch:	Pikslit tolli kohta:
+	Hangul Hanja Conversion	Hanguli/hanja teisendus
+	Hangul Hanja Conversion…	Hanguli/hanja teisendus…
+	Hangul to Hanja	Hangulist hanjaks
+	Hanja to Hangul	Hanjast hanguliks
+	Put the caret in Korean text to choose its Hanja.	Hanja valimiseks asetage kursor korea teksti.
+	The selection, or the whole document when nothing is selected.	Valik või kogu dokument, kui midagi pole valitud.

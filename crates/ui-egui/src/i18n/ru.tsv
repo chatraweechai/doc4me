@@ -3022,3 +3022,9 @@ spacing	Normal	Обычный
 	Use long file names whenever possible	По возможности использовать длинные имена файлов
 	Screen size:	Размер экрана:
 	Pixels per inch:	Пикселей на дюйм:
+	Hangul Hanja Conversion	Преобразование хангыль/ханча
+	Hangul Hanja Conversion…	Преобразование хангыль/ханча…
+	Hangul to Hanja	Хангыль в ханча
+	Hanja to Hangul	Ханча в хангыль
+	Put the caret in Korean text to choose its Hanja.	Поместите курсор в корейский текст, чтобы выбрать ханча.
+	The selection, or the whole document when nothing is selected.	Выделенный фрагмент или весь документ, если ничего не выделено.

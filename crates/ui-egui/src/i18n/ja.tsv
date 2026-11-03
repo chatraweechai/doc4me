@@ -2994,3 +2994,9 @@ spacing	Normal	標準
 	Use long file names whenever possible	可能な場合は長いファイル名を使用する
 	Screen size:	画面のサイズ:
 	Pixels per inch:	1 インチあたりのピクセル数:
+	Hangul Hanja Conversion	ハングル/漢字変換
+	Hangul Hanja Conversion…	ハングル/漢字変換…
+	Hangul to Hanja	ハングルを漢字に
+	Hanja to Hangul	漢字をハングルに
+	Put the caret in Korean text to choose its Hanja.	漢字を選ぶには、韓国語のテキストにカーソルを置いてください。
+	The selection, or the whole document when nothing is selected.	選択範囲 (選択していない場合は文書全体)。

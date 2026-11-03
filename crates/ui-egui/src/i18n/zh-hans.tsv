@@ -3006,3 +3006,9 @@ spacing	Normal	标准
 	Use long file names whenever possible	尽可能使用长文件名
 	Screen size:	屏幕大小:
 	Pixels per inch:	每英寸像素数:
+	Hangul Hanja Conversion	韩文/汉字转换
+	Hangul Hanja Conversion…	韩文/汉字转换…
+	Hangul to Hanja	韩文转汉字
+	Hanja to Hangul	汉字转韩文
+	Put the caret in Korean text to choose its Hanja.	将光标放在韩文文本中以选择汉字。
+	The selection, or the whole document when nothing is selected.	所选内容；未选择时为整个文档。

@@ -192,7 +192,7 @@ dlg-190	wdDialogToolsCustomizeMenus	433	(none)	tools.customizeRibbon	registry		W
 dlg-191	wdDialogToolsDictionary	989	(none)	file.options	registry		Options › Proofing › Custom dictionary (add and remove words)
 dlg-192	wdDialogToolsEnvelopesAndLabels	607	(none)	mailings.envelopes	registry		
 dlg-193	wdDialogToolsGrammarSettings	885	(none)	file.options	registry		Grammar Settings (File › Options › Proofing › Writing Style: Grammar › Settings…): Capitalization, Repeated words, Word forms (a/an; Polish w/we, z/ze), Punctuation, Spacing — the kinds of rule Doc4Me checks, in English and Polish; Reset All; file.options grammarRules
-dlg-194	wdDialogToolsHangulHanjaConversion	784	(none)	-	registry		
+dlg-194	wdDialogToolsHangulHanjaConversion	784	(none)	review.hangulHanja	registry		character by character with Unihan kHangul readings
 dlg-195	wdDialogToolsHighlightChanges	197	(none)	review.trackingOptions	registry		
 dlg-196	wdDialogToolsHyphenation	195	(none)	layout.hyphenation	registry		
 dlg-197	wdDialogToolsLanguage	188	(none)	review.language	registry		

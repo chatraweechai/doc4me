@@ -980,7 +980,7 @@ impl Dialog {
         }
         if matches!(
             name,
-            "insertFormField" | "formFieldOptions" | "formFieldHelp" | "sectionProtection" | "autoSummarize" | "formatFrame" | "chineseConversion" | "consistencyChecker" | "showRepairs" | "letterWizard" | "editLinks"
+            "insertFormField" | "formFieldOptions" | "formFieldHelp" | "sectionProtection" | "autoSummarize" | "formatFrame" | "chineseConversion" | "consistencyChecker" | "showRepairs" | "letterWizard" | "editLinks" | "hangulHanja"
         ) {
             return crate::dialogs_forms::open(name, app).map(|d| Dialog::Forms(Box::new(d)));
         }
