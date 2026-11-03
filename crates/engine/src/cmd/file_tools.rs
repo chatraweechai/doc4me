@@ -223,7 +223,9 @@ mod tests {
         run(&mut s, "file.copyFile", json!({"fileName": src.to_string_lossy(), "directory": out.to_string_lossy(), "overwrite": true})).unwrap();
         assert_eq!(std::fs::read_to_string(out.join("a.txt")).unwrap(), "changed");
         // Onto itself, from a folder, into a file: refused.
-        assert!(run(&mut s, "file.copyFile", json!({"fileName": src.to_string_lossy(), "directory": d.to_string_lossy(), "overwrite": true})).is_err());
+        assert!(
+            run(&mut s, "file.copyFile", json!({"fileName": src.to_string_lossy(), "directory": d.to_string_lossy(), "overwrite": true})).is_err()
+        );
         assert_eq!(std::fs::read_to_string(&src).unwrap(), "changed");
         assert!(run(&mut s, "file.copyFile", json!({"fileName": out.to_string_lossy(), "directory": d.to_string_lossy()})).is_err());
         assert!(run(&mut s, "file.copyFile", json!({"fileName": src.to_string_lossy(), "directory": src.to_string_lossy()})).is_err());
@@ -248,7 +250,12 @@ mod tests {
         std::fs::write(d.join("delta.docx"), docx).unwrap();
         let mut s = Session::new(doc4me_doc::Document::new());
         let names = |r: &Value| -> Vec<String> {
-            r["files"].as_array().unwrap().iter().map(|f| Path::new(f["path"].as_str().unwrap()).file_name().unwrap().to_string_lossy().into_owned()).collect()
+            r["files"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .map(|f| Path::new(f["path"].as_str().unwrap()).file_name().unwrap().to_string_lossy().into_owned())
+                .collect()
         };
         let path = d.to_string_lossy().to_string();
         // Every document (not the picture), this folder only.

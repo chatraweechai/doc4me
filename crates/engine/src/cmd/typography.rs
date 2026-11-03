@@ -236,7 +236,12 @@ mod web_tests {
         assert!(s.run("file.webOptions", &json!({"encoding": "utf-8\"><x"})).is_err());
         assert!(s.run("file.webOptions", &json!({"allowPng": "yes"})).is_err());
         assert!(s.doc.settings.web.is_default(), "nothing changed by a bad call");
-        let r = s.run("file.webOptions", &json!({"allowPng": true, "relyOnCss": false, "pixelsPerInch": 120, "targetScreen": "1024x768", "encoding": "utf-8"})).unwrap();
+        let r = s
+            .run(
+                "file.webOptions",
+                &json!({"allowPng": true, "relyOnCss": false, "pixelsPerInch": 120, "targetScreen": "1024x768", "encoding": "utf-8"}),
+            )
+            .unwrap();
         assert_eq!((r["allowPng"].as_bool(), r["pixelsPerInch"].as_u64(), r["targetScreen"].as_str()), (Some(true), Some(120), Some("1024x768")));
         assert!(!s.doc.settings.web.rely_on_css && s.doc.settings.web.write_part());
         s.run("edit.undo", &json!({})).unwrap();

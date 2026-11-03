@@ -303,7 +303,9 @@ impl WordApp {
             "picture" => (FileDialogRequest::Open { purpose: "picture".into(), dir: None }, AfterPick::Picture),
             "model3d" => (FileDialogRequest::Open { purpose: "model3d".into(), dir: None }, AfterPick::Model3d),
             "recipients" => (FileDialogRequest::Open { purpose: "recipients".into(), dir: None }, AfterPick::Recipients),
-            "save" => (FileDialogRequest::Save { name: self.default_save_name(), dir: None }, AfterPick::SaveAs(crate::file_dialogs::AfterSave::Nothing)),
+            "save" => {
+                (FileDialogRequest::Save { name: self.default_save_name(), dir: None }, AfterPick::SaveAs(crate::file_dialogs::AfterSave::Nothing))
+            }
             _ => (FileDialogRequest::Open { purpose: "document".into(), dir: None }, AfterPick::OpenDocument),
         };
         self.show_file_browser(req, after, false);

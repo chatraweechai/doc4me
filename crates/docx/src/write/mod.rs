@@ -411,7 +411,14 @@ pub(crate) fn write_parts(doc: &Document, flavor: Flavor) -> Result<Vec<(String,
     );
     if doc.settings.web.write_part() {
         rels.add(rt::WEB_SETTINGS, "webSettings.xml", false);
-        push_part(&mut entries, &mut overrides, "word/webSettings.xml", web_settings_xml(&doc.settings.web), &format!("{CT_WML}webSettings+xml"), PartRels::default());
+        push_part(
+            &mut entries,
+            &mut overrides,
+            "word/webSettings.xml",
+            web_settings_xml(&doc.settings.web),
+            &format!("{CT_WML}webSettings+xml"),
+            PartRels::default(),
+        );
     }
     rels.add(rt::THEME, "theme/theme1.xml", false);
     push_part(

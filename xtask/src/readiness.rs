@@ -824,9 +824,14 @@ fn render(sets: &[SetResult], corpus_run: usize, corpus_listed: usize, commit: &
 fn commit(root: &Path) -> String {
     let out = Command::new("git").current_dir(root).args(["rev-parse", "--short", "HEAD"]).output();
     let hash = out.map(|o| String::from_utf8_lossy(&o.stdout).trim().to_string()).unwrap_or_default();
-    let dirty =
-        Command::new("git").current_dir(root).args(["status", "--porcelain", "--untracked-files=no"]).output().is_ok_and(|o| !o.stdout.is_empty());
-    if dirty { format!("{hash}+changes") } else { hash }
+    let status = Command::new("git").current_dir(root).args(["status", "--porcelain", "--untracked-files=no"]).output();
+    let changed = status.map(|o| String::from_utf8_lossy(&o.stdout).trim_end().to_string()).unwrap_or_default();
+    if changed.is_empty() {
+        return hash;
+    }
+    // Names the tracked files that differ, so a "+changes" label in a CI report can be traced.
+    eprintln!("readiness: the working tree differs from {hash}:\n{changed}");
+    format!("{hash}+changes")
 }
 
 /// Today's date (UTC), as YYYY-MM-DD.
