@@ -6,7 +6,9 @@
 
 ### ความคืบหน้าสู่ 100% ไม่นับ deferred (รอบที่ 22 ต่อ, 2026-11-03/04)
 
-- Windows run 41673874009 (`4556010`, 16 ภาษาใหม่): **88.4%**, **90.9%** เมื่อไม่นับ deferred, ภาษา 30 → 46/95 (มิติอื่นเท่าเดิม)
+- **เจ้าของเขียนทับ `main` ของ fork อีกครั้ง (2026-11-04 02:02–02:37 UTC)**: `main` ใหม่ = `d084ccc` (เนื้อไฟล์เท่า `c9ff26b` เดิม, tag `v1.1.3` ชี้ที่นี่) + 6 commit "Release 1.1.3"/"Initial commit" ที่แก้แค่ `Cargo.toml` (1.1.3) และ `Cargo.lock`; commit 65 รายการหลัง `c9ff26b` (dialogs รอบที่ 21, 40 ภาษา, ตัดบรรทัด LB15, แก้ readiness xtask ฯลฯ) หายจาก `main` จึง rebase ต่อบนงานของเจ้าของแบบ fast-forward (ไม่ force; ต้นไม้ต่างจากก่อน rebase แค่เลขเวอร์ชัน) และแก้ `Cargo.lock` ให้ตรง 1.1.3 (`3030a22`); hash ของ commit รอบนี้จึงเปลี่ยนทั้งหมด ถ้าเจ้าของตั้งใจตัดงานหลัง `c9ff26b` ทิ้ง ต้องตัดสินใหม่
+- ลองแก้ "ด้านที่ `w:tblCellMar`/`w:tcMar` ไม่ระบุให้สืบทอดจาก style" แล้ว**ย้อนออก**: zenodo-154 แสดงว่า Word ใช้ 0 กับด้านที่ `w:tblCellMar` ไม่ระบุ (บรรทัด "LEVEL 1 USE means that" ตรงเมื่อใช้ 0) และไม่แก้ govuk-006; สาเหตุจริงของ govuk-006 (หน้า 5 มีแค่ย่อหน้า "© Crown copyright" ที่ Word ใส่ท้ายหน้า 4) ยังไม่พบ — แถวสูงของเราเกิน Word ~16 pt ที่หน้า 4
+- Windows run 41673874009 (`4556010`, 16 ภาษาใหม่): **88.4%**, **90.9%** เมื่อไม่นับ deferred, ภาษา 30 → 46/95 (มิติอื่นเท่าเดิม); หลัง `a128314` มี 62/95 (ha ky tt uz lb gd mi rm เพิ่ม)
 - `24dcde5`: ตัดบรรทัดหลัง `” ` ก่อน `(` (Unicode 15.1 ตัด LB15 แต่ `unicode-linebreak` 0.1.5 ยังใช้) แก้ zenodo-025 (Linux: pages 172 → 173, breaks 91 → 92 ไม่มีเอกสารแย่ลง) และเพิ่มอีก 8 ภาษา (kk mk ms mt nn pt-pt cy sw → 54/95) สั่ง Windows run ถัดไปแล้ว
 - กำลังแปล (subagent): ha ky tt uz lb gd mi rm; ที่เหลือซึ่ง Inter วาดได้: ig xh zu rw nso tn wo yo sr-cyrl-ba (ekavian/ijekavian?) ca-valencia; ภาษาที่ต้องฟอนต์/shaping ใหม่ (ar he fa ur ps hi mr ne kok as bn-BD bn-IN gu pa or ta te kn ml si hy ka ko) ยังไม่เริ่ม — ต้องให้ UI วาดได้ก่อน
 - เครื่องมือแปลอยู่ใน scratchpad ของ session (หายเมื่อ session จบ): `BRIEF.md`, `check_catalog.py` (ตรวจคีย์ตรง `en-gb.tsv`, placeholder, "…", glyph ใน Inter), `register.py` (เพิ่มใน `LANGUAGES`, `WHOLE_CATALOGS`, `languages.tsv` และแก้ความยาว array)
