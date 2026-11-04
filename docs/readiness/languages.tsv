@@ -29,7 +29,7 @@ lang-027	Georgian	ka-GE	-
 lang-028	German	de-DE	de
 lang-029	Greek	el-GR	el
 lang-030	Gujarati	gu-IN	-
-lang-031	Hausa	ha-Latn-NG	-
+lang-031	Hausa	ha-Latn-NG	ha
 lang-032	Hebrew	he-IL	-
 lang-033	Hindi	hi-IN	-
 lang-034	Hungarian	hu-HU	hu
@@ -47,15 +47,15 @@ lang-045	Kinyarwanda	rw-RW	-
 lang-046	KiSwahili	sw-KE	sw
 lang-047	Konkani	kok-IN	-
 lang-048	Korean	ko-KR	-
-lang-049	Kyrgyz	ky-KG	-
+lang-049	Kyrgyz	ky-KG	ky
 lang-050	Latvian	lv-LV	lv
 lang-051	Lithuanian	lt-LT	lt
-lang-052	Luxembourgish	lb-LU	-
+lang-052	Luxembourgish	lb-LU	lb
 lang-053	Macedonian (North Macedonia)	mk-MK	mk
 lang-054	Malay (Latin)	ms-MY	ms
 lang-055	Malayalam	ml-IN	-
 lang-056	Maltese	mt-MT	mt
-lang-057	Maori	mi-NZ	-
+lang-057	Maori	mi-NZ	mi
 lang-058	Marathi	mr-IN	-
 lang-059	Nepali	ne-NP	-
 lang-060	Norwegian Bokmål	nb-NO	nb
@@ -68,9 +68,9 @@ lang-066	Portuguese (Portugal)	pt-PT	pt-pt
 lang-067	Portuguese (Brazil)	pt-BR	pt-br
 lang-068	Punjabi (Gurmukhi)	pa-IN	-
 lang-069	Romanian	ro-RO	ro
-lang-070	Romansh	rm-CH	-
+lang-070	Romansh	rm-CH	rm
 lang-071	Russian	ru-RU	ru
-lang-072	Scottish Gaelic	gd-GB	-
+lang-072	Scottish Gaelic	gd-GB	gd
 lang-073	Serbian (Cyrillic, Serbia)	sr-cyrl-RS	sr
 lang-074	Serbian (Latin, Serbia)	sr-latn-RS	sr-latn
 lang-075	Serbian (Cyrillic, Bosnia & Herzegovina)	sr-cyrl-BA	-
@@ -83,13 +83,13 @@ lang-081	Spanish	es-ES	es
 lang-082	Spanish Mexico [1]	es-MX	es
 lang-083	Swedish	sv-SE	sv
 lang-084	Tamil	ta-IN	-
-lang-085	Tatar (Cyrillic)	tt-RU	-
+lang-085	Tatar (Cyrillic)	tt-RU	tt
 lang-086	Telugu	te-IN	-
 lang-087	Thai	th-TH	th
 lang-088	Turkish	tr-TR	tr
 lang-089	Ukrainian	uk-UA	uk
 lang-090	Urdu	ur-PK	-
-lang-091	Uzbek (Latin)	uz-Latn-UZ	-
+lang-091	Uzbek (Latin)	uz-Latn-UZ	uz
 lang-092	Vietnamese	vi-VN	vi
 lang-093	Welsh	cy-GB	cy
 lang-094	Wolof	wo-SN	-

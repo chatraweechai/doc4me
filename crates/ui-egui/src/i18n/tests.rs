@@ -917,7 +917,7 @@ fn british_english_and_canadian_french_follow_their_regions() {
 
 /// Catalogs written whole, one entry per interface string: the code, the language's own name and
 /// locale tags that resolve to it.
-const WHOLE_CATALOGS: [(&str, &str, &[&str]); 32] = [
+const WHOLE_CATALOGS: [(&str, &str, &[&str]); 40] = [
     ("nl", "Nederlands", &["nl", "nl-NL", "nl_BE.UTF-8"]),
     ("sv", "Svenska", &["sv", "sv-SE", "sv_FI.UTF-8"]),
     ("da", "Dansk", &["da", "da-DK", "da_DK.UTF-8"]),
@@ -926,6 +926,14 @@ const WHOLE_CATALOGS: [(&str, &str, &[&str]); 32] = [
     ("ro", "Română", &["ro", "ro-RO", "ro_MD.UTF-8"]),
     ("sk", "Slovenčina", &["sk", "sk-SK", "sk_SK.UTF-8"]),
     ("hr", "Hrvatski", &["hr", "hr-HR", "hr_BA.UTF-8"]),
+    ("ha", "Hausa", &["ha", "ha-NG", "ha_NG.UTF-8"]),
+    ("ky", "Кыргызча", &["ky", "ky-KG", "ky_KG.UTF-8"]),
+    ("lb", "Lëtzebuergesch", &["lb", "lb-LU", "lb_LU.UTF-8"]),
+    ("mi", "Te reo Māori", &["mi", "mi-NZ", "mi_NZ.UTF-8"]),
+    ("rm", "Rumantsch", &["rm", "rm-CH", "rm_CH.UTF-8"]),
+    ("gd", "Gàidhlig", &["gd", "gd-GB", "gd_GB.UTF-8"]),
+    ("tt", "Татар теле", &["tt", "tt-RU", "tt_RU.UTF-8"]),
+    ("uz", "Oʻzbekcha", &["uz", "uz-UZ", "uz_UZ.UTF-8"]),
     ("kk", "Қазақ тілі", &["kk", "kk-KZ", "kk_KZ.UTF-8"]),
     ("sw", "Kiswahili", &["sw", "sw-KE", "sw_KE.UTF-8"]),
     ("mk", "Македонски", &["mk", "mk-MK", "mk_MK.UTF-8"]),

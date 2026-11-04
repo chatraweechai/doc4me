@@ -52,7 +52,7 @@ pub struct LangInfo {
 }
 
 /// The registry. English first: it is the fallback and the source language.
-pub static LANGUAGES: [LangInfo; 53] = [
+pub static LANGUAGES: [LangInfo; 61] = [
     LangInfo { code: "en", name: "English", source: "", prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // British English (colour, centre, customise); `en-GB` and `en_GB.UTF-8` resolve here, other
     // English regions keep the built-in US English. New documents stay in Doc4Me's default
@@ -166,6 +166,20 @@ pub static LANGUAGES: [LangInfo; 53] = [
     LangInfo { code: "sk", name: "Slovenčina", source: include_str!("sk.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // Croatian; `hr`, `hr-HR`, `hr-BA` resolve here.
     LangInfo { code: "hr", name: "Hrvatski", source: include_str!("hr.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "ha", name: "Hausa", source: include_str!("ha.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "ky", name: "Кыргызча", source: include_str!("ky.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo {
+        code: "lb", name: "Lëtzebuergesch", source: include_str!("lb.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo { code: "mi", name: "Te reo Māori", source: include_str!("mi.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "rm", name: "Rumantsch", source: include_str!("rm.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "gd", name: "Gàidhlig", source: include_str!("gd.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "tt", name: "Татар теле", source: include_str!("tt.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo { code: "uz", name: "Oʻzbekcha", source: include_str!("uz.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     LangInfo {
         code: "kk", name: "Қазақ тілі", source: include_str!("kk.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
     },
