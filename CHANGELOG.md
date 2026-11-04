@@ -117,6 +117,11 @@
 
 ### แก้ไข
 
+- **`Cargo.lock` ตรงกับเลขเวอร์ชัน 1.1.3 ใน `Cargo.toml`** (`Cargo.lock`)
+  - เหตุผล: เจ้าของ repo เขียนทับ `main` ของ fork เมื่อ 2026-11-04 02:02–02:37 UTC (เริ่มจาก `d084ccc` ซึ่งเนื้อไฟล์เท่ากับ `c9ff26b` ของเดิม แล้วเพิ่ม 6 commit "Release 1.1.3" และ "Initial commit" ที่แก้แค่ `Cargo.toml` เป็น 1.1.3 กับ `Cargo.lock`) และ commit สุดท้ายคืน `Cargo.lock` ของ crate ใน workspace เป็น 1.1.2 จน `cargo metadata --locked` ล้ม ("cannot update the lock file")
+  - เปลี่ยน: crate ใน workspace (`doc4me`, `doc4me-*`, `xtask`) ใน `Cargo.lock` เป็น 1.1.3 ตาม `Cargo.toml` ไม่แตะ dependency ภายนอก; commit 65 รายการของ session ที่หายจาก `main` ถูก rebase ต่อบนงานของเจ้าของแบบ fast-forward (ไม่ force) โดยเนื้อไฟล์ต่างจากก่อน rebase แค่เลขเวอร์ชัน
+  - ผลต่อผู้ใช้: ไม่มี (build แบบ `--locked` ใน CI ผ่านได้อีกครั้ง)
+  - ตรวจสอบ: `cargo metadata --locked` ผ่านหลังแก้; `git diff --stat` ระหว่างต้นไม้ก่อนและหลัง rebase ต่างแค่ `Cargo.toml`/`Cargo.lock`
 - **ตัดบรรทัดได้หลังเว้นวรรคที่ตามเครื่องหมายคำพูดและก่อนวงเล็บเปิด เช่น `estratégicos” (según` ตามที่ Word ทำ** (`crates/layout/src/para.rs` ฟังก์ชันใหม่ `quote_space_open_breaks` เรียกตอนหาจุดตัดบรรทัด; เทสต์ `a_line_may_start_at_a_bracket_after_a_quote_and_a_space` ใน `crates/layout/src/tests.rs`)
   - เหตุผล: crate `unicode-linebreak` 0.1.5 ยังใช้กฎ LB15 ของ UAX #14 (`QU SP* × OP`) ซึ่ง Unicode 15.1 ตัดออกแล้ว คำที่ปิดด้วยเครื่องหมายคำพูด เว้นวรรค และคำที่ขึ้นต้นด้วยวงเล็บ จึงถูกนับเป็นก้อนเดียวที่ตัดไม่ได้ (ทดสอบตรงกับ crate แล้ว: `en “grupos estratégicos” (según la` ไม่มีจุดตัดก่อน `(`); ใน zenodo-025 แถวตารางแถวหนึ่งจึงขึ้นบรรทัดใหม่เร็วกว่า Word หนึ่งบรรทัด หน้า 2 เลื่อนลง 18 pt และย่อหน้าว่างสุดท้ายตกไปเป็นหน้า 3 ที่ว่างเปล่า (Word 2 หน้า)
   - เปลี่ยน: เพิ่มจุดตัดที่ต้นวงเล็บเปิด (คลาส OP ที่พบบ่อย: `( [ { ¡ ¿ ‚ „` และวงเล็บเต็มความกว้าง) ซึ่งอยู่หลังเครื่องหมายคำพูด (คลาส QU: `" ' « » ‘ ’ “ ” ‹ ›` …) ตามด้วยเว้นวรรค U+0020 อย่างน้อยหนึ่งตัว; ทำบนข้อความที่จัดวางจริง (ข้อความซ่อนถูกตัดออกก่อนเหมือนจุดตัดอื่น) แล้วจึงใช้กฎ kinsoku ตามเดิม
