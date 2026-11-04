@@ -54,10 +54,14 @@ impl Launcher {
     pub fn show(&self, parent: &eframe::Frame) {
         while let Ok((req, answer)) = self.queue.try_recv() {
             // Built here, on the UI thread: macOS shows the panel as a sheet on the window now.
-            let dialog = rfd::AsyncFileDialog::new().set_parent(parent);
+            let mut dialog = rfd::AsyncFileDialog::new().set_parent(parent);
+            // File › Options › Advanced › File Locations: the folder to start in.
+            if let FileDialogRequest::Open { dir: Some(d), .. } | FileDialogRequest::Save { dir: Some(d), .. } = &req {
+                dialog = dialog.set_directory(d);
+            }
             let picking: Picking = match req {
-                FileDialogRequest::Open { purpose } => Box::pin(open_filters(dialog, &purpose).pick_file()),
-                FileDialogRequest::Save { name } => {
+                FileDialogRequest::Open { purpose, .. } => Box::pin(open_filters(dialog, &purpose).pick_file()),
+                FileDialogRequest::Save { name, .. } => {
                     let exts = save_exts(&name);
                     Box::pin(dialog.set_file_name(name).add_filter("Documents", &exts).save_file())
                 }

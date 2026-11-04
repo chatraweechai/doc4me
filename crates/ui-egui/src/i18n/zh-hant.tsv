@@ -2923,3 +2923,81 @@ spacing	Normal	標準
 	Traditional Chinese to Simplified Chinese	繁體中文轉換為簡體中文
 	Traditional to Simplified	繁轉簡
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	使用台灣、香港特別行政區和澳門特別行政區的字元異體字
+	Asian Layout	亞洲方式配置
+	Fit Text	最適文字大小
+	Fit Text…	最適文字大小…
+	Two Lines in One	雙行合一
+	Two Lines in One…	雙行合一…
+	New text width (pt):	新文字寬度（點）：
+	Enclose in brackets	加括號
+	Bracket pair:	括號樣式：
+	Typography	亞洲方式配置
+	Character spacing control	字元間距控制
+	Don't compress	不壓縮
+	Compress punctuation only	僅壓縮標點符號
+	Compress punctuation and Japanese kana	壓縮標點符號和日文假名
+	First and last characters	首尾字元
+	Strict	嚴格
+	Cannot start a line:	不能位於行首的字元：
+	Cannot end a line:	不能位於行尾的字元：
+	Japanese Find Options	日文模糊尋找選項
+	Sounds like (Japanese)	同音（日文）
+	Match full/half width	符合全/半形
+	Match hiragana/katakana	符合平假名/片假名
+	Match small kana	符合小寫假名
+	Match prolonged sound marks and dashes	符合長音符號和破折號
+	Japanese Consistency Checker	日文一致性檢查
+	Japanese Consistency Checker…	日文一致性檢查…
+	No inconsistent spellings were found.	未發現不一致的寫法。
+	Pick the spelling to keep in each group.	在每組中選擇要保留的寫法。
+	Bidirectional text	雙向文字
+	Bidirectional Text	雙向文字
+	Default direction:	預設方向:
+	Cursor movement:	游標移動:
+	Logical	邏輯
+	Visual	視覺
+	Manage Fields	管理功能變數
+	File locations	檔案位置
+	File Locations	檔案位置
+	Documents:	文件:
+	Pictures:	圖片:
+	The system's choice	系統預設
+	Show Repairs	顯示修復
+	No repairs were needed.	無需修復。
+	These problems were found and repaired when the document was opened:	開啟文件時發現並修復了下列問題:
+	An unreadable entry in the file was skipped: {what}	已略過檔案中無法讀取的項目: {what}
+	An unreadable part was left out: {what}	已略去無法讀取的組件: {what}
+	Unreadable relationships were ignored: {what}	已忽略無法讀取的關聯: {what}
+	A missing part of an embedded object was left out: {what}	已略去內嵌物件中遺失的組件: {what}
+	Copy File	複製檔案
+	Find Files	尋找檔案
+	Letter Wizard	信函精靈
+	Recipient's name:	收件人姓名:
+	Salutation:	稱謂:
+	Subject:	主旨:
+	Complimentary closing:	結尾敬詞:
+	Sender's name:	寄件人姓名:
+	Job title:	職稱:
+	Company:	公司:
+	Enclosures:	附件:
+	Cc:	副本:
+	Edit Links to Files	編輯檔案連結
+	Source file	來源檔案
+	Locked	已鎖定
+	Change Source	變更來源
+	This document has no links to files.	此文件沒有檔案連結。
+	Web options	Web 選項
+	Web Options	Web 選項
+	Allow PNG as a graphics format	允許使用 PNG 圖形格式
+	Rely on CSS for font formatting	使用 CSS 設定字型格式
+	Rely on VML for displaying graphics in browsers	在瀏覽器中使用 VML 顯示圖形
+	Organize supporting files in a folder	將支援檔案整理到資料夾中
+	Use long file names whenever possible	盡可能使用長檔名
+	Screen size:	螢幕大小:
+	Pixels per inch:	每英吋像素:
+	Hangul Hanja Conversion	韓文/漢字轉換
+	Hangul Hanja Conversion…	韓文/漢字轉換…
+	Hangul to Hanja	韓文轉漢字
+	Hanja to Hangul	漢字轉韓文
+	Put the caret in Korean text to choose its Hanja.	將游標放在韓文文字中以選擇漢字。
+	The selection, or the whole document when nothing is selected.	所選內容；未選取時為整份文件。

@@ -1,0 +1,3003 @@
+# Basque (eu) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts yet)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Standard Basque (euskara batua). Commands use the verb's bare participle form (Gorde, Kopiatu,
+# Txertatu); labels use sentence case; placeholders are placed so that no case suffix has to be
+# attached to them where possible.
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Machine translation by an AI model (Claude), not yet reviewed by a native speaker.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" edo "an" hurrengo hitzaren aurretik; poloniera: "w"/"we", "z"/"ze".
+	% of all commits	Commit guztien %
+	(All)	(Guztiak)
+	(Custom)	(Pertsonalizatua)
+	(no style)	(estilorik ez)
+	(no suggestions)	(iradokizunik ez)
+	(none)	(bat ere ez)
+	(normal text)	(testu normala)
+	(not matched)	(ez dator bat)
+	(picture or object)	(irudia edo objektua)
+	*Bold* and _italic_ with real formatting	*Lodia* eta _etzana_ benetako formatuarekin
+	0 or More Characters	0 karaktere edo gehiago
+	1. Formatting restrictions	1. Formatu-murriztapenak
+	1. Main document	1. Dokumentu nagusia
+	1.5 Line Spacing	1,5 lerroartea
+	1/4 Em Space	1/4 em-eko tartea
+	1×2 Empty Matrix	1×2 matrize hutsa
+	1×3 Empty Matrix	1×3 matrize hutsa
+	2. Data source	2. Datu-iturburua
+	2. Editing restrictions	2. Edizio-murriztapenak
+	2×1 Empty Matrix	2×1 matrize hutsa
+	2×2 Determinant	2×2 determinantea
+	2×2 Empty Matrix	2×2 matrize hutsa
+	2×2 Identity Matrix	2×2 identitate-matrizea
+	2×2 Identity Matrix (sparse)	2×2 identitate-matrizea (sakabanatua)
+	2×2 Matrix in Brackets	2×2 matrizea kortxeteen artean
+	2×2 Matrix in Double Bars	2×2 matrizea barra bikoitzen artean
+	2×2 Matrix in Parentheses	2×2 matrizea parentesi artean
+	2×3 Empty Matrix	2×3 matrize hutsa
+	3-D	3D
+	3. Merge the data with the document	3. Konbinatu datuak dokumentuarekin
+	3. Start enforcement	3. Hasi babesa aplikatzen
+	3D Models	3D ereduak
+	3×1 Empty Matrix	3×1 matrize hutsa
+	3×2 Empty Matrix	3×2 matrize hutsa
+	3×3 Empty Matrix	3×3 matrize hutsa
+	3×3 Identity Matrix	3×3 identitate-matrizea
+	3×3 Identity Matrix (sparse)	3×3 identitate-matrizea (sakabanatua)
+	5,000 characters a day; give an email address for 50,000.	5.000 karaktere egunean; eman helbide elektroniko bat 50.000 lortzeko.
+	<< Less	<< Gutxiago
+	<< Remove	<< Kendu
+	A file dialog is already open.	Fitxategi-elkarrizketa bat irekita dago dagoeneko.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Testu-prozesadore doakoa eta kode irekikoa, hutsetik Rust-en idatzia.\nArtCraft taldearen WordCraft-en oinarritua.
+	A header source holds the field names for a data source without a header row.	Goiburu-iturburu batek goiburu-errenkadarik gabeko datu-iturburu baten eremu-izenak gordetzen ditu.
+	A mail merge field	Posta-konbinazioko eremu bat
+	A new document lists the commands with their shortcuts.	Dokumentu berri batek komandoak eta haien lasterbideak zerrendatzen ditu.
+	A numbered sequence (figures, tables…)	Zenbakitutako sekuentzia bat (irudiak, taulak…)
+	A password is required to open this document.	Pasahitza behar da dokumentu hau irekitzeko.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Zuriunea puntuazioaren aurretik, marka bikoiztuak, poloniar komak juntagailuen aurretik.
+	A table of contents	Aurkibide bat
+	A table's rows keep the same columns here.	Hemen, taula baten errenkadek zutabe berberak dituzte.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Honi buruz
+	About Doc4Me	Doc4Me-ri buruz
+	Above Chart	Grafikoaren gainean
+	Above the item	Elementuaren gainean
+	Absolute position	Posizio absolutua
+	Absolute value cases	Balio absolutuaren kasuak
+	Accent	Azentua
+	Accent Gradient	Azentu-gradientea
+	Accent with Reflection	Azentua islarekin
+	Accent {n}	{n}. azentua
+	Accents	Azentuak
+	Accept	Onartu
+	Accept All	Onartu guztiak
+	Accept All Changes	Onartu aldaketa guztiak
+	Accept or Reject Changes	Onartu edo baztertu aldaketak
+	Accept This Change	Onartu aldaketa hau
+	Accessed on	Kontsulta-data
+	Accessibility	Irisgarritasuna
+	Accessibility Pane	Irisgarritasun-panela
+	Acute	Azentu zorrotza
+	Add	Gehitu
+	Add >>	Gehitu >>
+	Add a comment	Gehitu iruzkin bat
+	Add a Table	Gehitu taula bat
+	Add at least one field.	Gehitu eremu bat gutxienez.
+	Add caption when inserting:	Gehitu epigrafea txertatzean:
+	Add Chart Element	Gehitu grafiko-elementua
+	Add Field	Gehitu eremua
+	Add Field Name	Gehitu eremu-izena
+	Add Font…	Gehitu letra-tipoa…
+	Add line numbering	Gehitu lerro-zenbakiak
+	Add New Placeholder	Gehitu leku-marka berria
+	Add New Placeholder…	Gehitu leku-marka berria…
+	Add New Source…	Gehitu iturburu berria…
+	Add Object to Selection	Gehitu objektua hautapenari
+	Add Pen	Gehitu luma
+	Add Row	Gehitu errenkada
+	Add Series	Gehitu seriea
+	Add Shape	Gehitu forma
+	Add Space Before Paragraph	Gehitu tartea paragrafoaren aurretik
+	Add space between Asian and Latin text	Gehitu tartea testu asiarraren eta latindarraren artean
+	Add space between Asian text and numbers	Gehitu tartea testu asiarraren eta zenbakien artean
+	Add tab stop at:	Gehitu tabulazio-marka hemen:
+	Add Text	Gehitu testua
+	Add the chapter number	Gehitu kapitulu-zenbakia
+	Add to Dictionary	Gehitu hiztegira
+	Add to Document	Gehitu dokumentura
+	Add to Quick Access Toolbar	Gehitu sarbide azkarreko tresna-barrara
+	Add to Style Gallery	Gehitu estilo-galeriara
+	Add-ins	Gehigarriak
+	Add/Edit\nBibliography	Gehitu/editatu\nbibliografia
+	Add/Edit\nCitation	Gehitu/editatu\naipamena
+	Add\nNote	Gehitu\noharra
+	Add\nPen	Gehitu\nluma
+	Add\nShape	Gehitu\nforma
+	Added	Gehitua
+	Added Fonts	Gehitutako letra-tipoak
+	Address	Helbidea
+	Address Block	Helbide-blokea
+	Address labels	Helbide-etiketak
+	Address:	Helbidea:
+	Address\nBlock	Helbide-\nblokea
+	Adjust	Doitu
+	Advanced	Aurreratua
+	Advanced Find	Bilaketa aurreratua
+	Advanced Find…	Bilaketa aurreratua…
+	After:	Ondoren:
+	Agents	Agenteak
+	Align	Lerrokatu
+	Align Bottom Center	Lerrokatu behean erdian
+	Align Bottom Left	Lerrokatu behean ezkerrean
+	Align Bottom Right	Lerrokatu behean eskuinean
+	Align Center	Lerrokatu erdian
+	Align Center Left	Lerrokatu erdian ezkerrean
+	Align Center Right	Lerrokatu erdian eskuinean
+	Align Left	Lerrokatu ezkerrean
+	Align Right	Lerrokatu eskuinean
+	Align Text	Lerrokatu testua
+	Align Top Center	Lerrokatu goian erdian
+	Align Top Left	Lerrokatu goian ezkerrean
+	Align Top Right	Lerrokatu goian eskuinean
+	Aligned at:	Lerrokatze-posizioa:
+	Alignment	Lerrokatzea
+	Alignment:	Lerrokatzea:
+	All	Guztiak
+	All - Linear	Guztiak - lineala
+	All - Professional	Guztiak - profesionala
+	All Borders	Ertz guztiak
+	All Caps	Maiuskula guztiak
+	All caps	Maiuskula guztiak
+	All Commands	Komando guztiak
+	All files	Fitxategi guztiak
+	All Levels	Maila guztiak
+	All Markup	Marka guztiak
+	All pages	Orrialde guztiak
+	All pages in the range	Barrutiko orrialde guztiak
+	All records	Erregistro guztiak
+	All symbol sets	Ikur-multzo guztiak
+	Allow Doc4Me to use online services	Baimendu Doc4Me-k lineako zerbitzuak erabiltzea
+	Allow hanging punctuation	Baimendu puntuazio zintzilikatua
+	Allow Latin text to wrap in the middle of a word	Baimendu testu latindarra hitz baten erdian zatitzea
+	Allow line breaks	Baimendu lerro-jauziak
+	Allow overlap	Baimendu gainjartzea
+	Allow row to break across pages	Baimendu errenkada orrialdeen artean zatitzea
+	Alphabetical	Alfabetikoa
+	Alt Text	Testu alternatiboa
+	Alt text	Testu alternatiboa
+	Alt Text Pane	Testu alternatiboaren panela
+	Alt:	Alt:
+	Alt\nText	Testu\nalternatiboa
+	And	Eta
+	Angle Brackets	Angelu-parentesiak
+	Angle Brackets with Separator	Angelu-parentesiak bereizlearekin
+	Angle Brackets with Two Separators	Angelu-parentesiak bi bereizlerekin
+	Animate the caret (it glides and fades)	Animatu kurtsorea (irristatu eta itzaltzen da)
+	Animation	Animazioa
+	Animation effects:	Animazio-efektuak:
+	Annotation Reference	Oharpen-erreferentzia
+	Annotation Subject	Oharpenaren gaia
+	Annotation Text	Oharpen-testua
+	Another file	Beste fitxategi bat
+	Any Character	Edozein karaktere
+	Any Digit	Edozein digitu
+	Any Letter	Edozein letra
+	Anyone can open this document. Encrypt it with a password to keep it private.	Edonork ireki dezake dokumentu hau. Zifratu pasahitz batekin pribatua izan dadin.
+	Anyone who opens the document will need this password.	Dokumentua irekitzen duen edonork pasahitz hau beharko du.
+	APA	APA
+	API key (if the server needs one)	API gakoa (zerbitzariak behar badu)
+	Apply	Aplikatu
+	Apply as you type	Aplikatu idatzi ahala
+	Apply Asian line-breaking rules (kinsoku)	Aplikatu lerro-jauzien arau asiarrak (kinsoku)
+	Apply Character Style	Aplikatu karaktere-estiloa
+	Apply formatting to:	Aplikatu formatua honi:
+	Apply special formats to	Aplikatu formatu bereziak honi
+	Apply Style	Aplikatu estiloa
+	Apply Styles	Aplikatu estiloak
+	Apply to:	Aplikatu honi:
+	Arabic	Arabiarra
+	Arch Down	Arkua behera
+	Arch Up	Arkua gora
+	Area	Azalera
+	Around	Inguruan
+	Arrange	Antolatu
+	Arrange All	Antolatu guztiak
+	Arrange\nAll	Antolatu\nguztiak
+	Arrow	Gezia
+	Arrows	Geziak
+	Artistic Effects	Efektu artistikoak
+	As Recommended	Gomendatutakoa
+	As you type	Idatzi ahala
+	ASAP	Lehenbailehen
+	Ascending	Gorantz
+	Asian text font:	Testu asiarraren letra-tipoa:
+	Asian Typography	Tipografia asiarra
+	Assign	Esleitu
+	At least	Gutxienez
+	At least {n}	Gutxienez {n}
+	Atelier	Atelier
+	Atmosphere	Atmosfera
+	Attach Template	Erantsi txantiloia
+	Attach…	Erantsi…
+	Author	Egilea
+	Auto	Automatikoa
+	AutoCaption	Epigrafe automatikoa
+	AutoCaption…	Epigrafe automatikoa…
+	AutoComplete	Osatze automatikoa
+	AutoCorrect	Zuzenketa automatikoa
+	AutoCorrect Options	Zuzenketa automatikoaren aukerak
+	AutoFit	Doikuntza automatikoa
+	AutoFit Contents	Doitu edukira
+	AutoFit Window	Doitu leihora
+	AutoFormat	Formatu automatikoa
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Formatu automatikoak (Ctrl+Alt+K) hautatutako paragrafoei edo dokumentu osoari ematen die formatua.
+	AutoFormat and Review Changes…	Formatu automatikoa eta berrikusi aldaketak…
+	AutoFormat As You Type	Formatu automatikoa idatzi ahala
+	AutoFormat changed {count} paragraphs	Formatu automatikoak {count} paragrafo aldatu ditu
+	AutoFormat Now	Formatu automatikoa orain
+	Automatic	Automatikoa
+	Automatic ({language})	Automatikoa ({language})
+	Automatic bulleted lists	Buletdun zerrenda automatikoak
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Automatikoak sistemaren hizkuntza jarraitzen du. Menuak eta komandoak aldatzen dira; zure dokumentuak ez.
+	Automatic numbered lists	Zerrenda zenbakidun automatikoak
+	Automatic Table 1 (3 levels)	1. taula automatikoa (3 maila)
+	Automatic Table 2 (2 levels)	2. taula automatikoa (2 maila)
+	Automatically hyphenate document	Zatitu hitzak automatikoki dokumentuan
+	Automatically Update Document Styles	Eguneratu automatikoki dokumentuaren estiloak
+	Automatically update document styles	Eguneratu automatikoki dokumentuaren estiloak
+	AutoSave	Gordetze automatikoa
+	AutoSave documents you have saved in Doc4Me	Gorde automatikoki Doc4Me-n gordetako dokumentuak
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Gordetze automatikoak huts egin du: {error}. Gorde dokumentua gordetze automatikoa berriro aktibatzeko.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Gordetze automatikoa ez dago erabilgarri arakatzailean: ezin du zure fitxategietan idatzi. Gorde aukerak kopia bat deskargatzen du.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Gordetze automatikoak .docx, .odt eta .rtf fitxategiak soilik gordetzen ditu; {name} fitxategiak ezin du formatu guztia gorde. Gorde .docx gisa gordetze automatikoa aktibatzeko.
+	AutoSave saves every change to the file (needs a saved document)	Gordetze automatikoak aldaketa guztiak gordetzen ditu fitxategian (gordetako dokumentu bat behar du)
+	AutoSave writes your changes to the file a moment after you stop typing.	Gordetze automatikoak zure aldaketak fitxategian idazten ditu idazteari utzi eta une batera.
+	AutoText	Testu automatikoa
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10.12" × 14.33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7.17" × 10.12"
+	Back	Atzera
+	Backspace	Atzera-tekla
+	Balloons	Bunbuiloak
+	Banded Columns	Zutabe bandadunak
+	Banded Rows	Errenkada bandadunak
+	Bar	Barra
+	Base text:	Oinarrizko testua:
+	Based on: {style}	Oinarria: {style}
+	Baseline Dots	Oinarri-lerroko puntuak
+	Basic Cycle	Oinarrizko zikloa
+	Basic List	Oinarrizko zerrenda
+	Basic Math	Oinarrizko matematika
+	Basic Matrix	Oinarrizko matrizea
+	Basic Process	Oinarrizko prozesua
+	Basic Pyramid	Oinarrizko piramidea
+	Basic Radial	Oinarrizko erradiala
+	Basic Venn	Oinarrizko Venn
+	Bayes' rule	Bayesen erregela
+	Before:	Aurretik:
+	Beginning of Word	Hitzaren hasiera
+	Behind Text	Testuaren atzean
+	Below text	Testuaren azpian
+	Below the item	Elementuaren azpian
+	Between	Artean
+	Bibliography	Bibliografia
+	Binary assets added	Baliabide bitarrak gehituta
+	Binary assets removed	Baliabide bitarrak kenduta
+	Binomial Coefficient	Koefiziente binomiala
+	Binomial Coefficient (angle)	Koefiziente binomiala (angelua)
+	Binomial Coefficient with Angle Brackets	Koefiziente binomiala angelu-parentesiekin
+	Binomial expansion of (x+a)ⁿ	(x+a)ⁿ-ren garapen binomiala
+	Blank	Hutsa
+	Blank (Three Columns)	Hutsa (hiru zutabe)
+	Blank document	Dokumentu hutsa
+	Blank Page	Orrialde hutsa
+	Block\nAuthors	Blokeatu\negileak
+	Blue:	Urdina:
+	Body Text	Gorputz-testua
+	Body text in a short paragraph to show spacing.	Gorputz-testua paragrafo labur batean, tartea erakusteko.
+	Bold	Lodia
+	Book	Liburua
+	Book Title	Liburuaren izenburua
+	Book title	Liburuaren izenburua
+	Bookmark	Laster-marka
+	Bookmark name:	Laster-markaren izena:
+	Border lines	Ertz-lerroak
+	Border Painter	Ertz-margotzailea
+	Border\nPainter	Ertz-\nmargotzailea
+	Borders	Ertzak
+	Borders and Shading	Ertzak eta itzaldura
+	Borders and Shading…	Ertzak eta itzaldura…
+	Border…	Ertza…
+	Both Sides	Bi aldeak
+	Both sides	Bi aldeak
+	Bottom	Behean
+	Bottom Border	Beheko ertza
+	Bottom Margin	Beheko marjina
+	Bottom of Page	Orrialdearen behean
+	Bottom of the Window	Leihoaren behean
+	Bottom:	Behean:
+	Box	Koadroa
+	Boxed Formula	Koadroko formula
+	Boxed Formula (example)	Koadroko formula (adibidea)
+	Boxed Formulas	Koadroko formulak
+	Braces	Giltzak
+	Braces with Separator	Giltzak bereizlearekin
+	Bracket	Kortxetea
+	Brackets	Kortxeteak
+	Brackets with Separators	Kortxeteak bereizleekin
+	Break Link	Hautsi esteka
+	Breaks	Jauziak
+	Breve	Breve
+	Brightness, contrast and transparency change the picture from how it looks now.	Distirak, kontrasteak eta gardentasunak irudia orain duen itxuratik abiatuta aldatzen dute.
+	Brightness:	Distira:
+	Bring Forward	Ekarri aurrerago
+	Browse in Doc4Me…	Arakatu Doc4Me-n…
+	Browse…	Arakatu…
+	Build table of figures from:	Sortu irudien aurkibidea honetatik:
+	Building Block Gallery Content Control	Eraikuntza-blokeen galeriako eduki-kontrola
+	Built from the style or table entry fields chosen in Options.	Aukeretan hautatutako estilo edo taula-sarrerako eremuetatik sortua.
+	Built-In	Integratua
+	Built-in Heading styles	Izenburu-estilo integratuak
+	Built-in style	Estilo integratua
+	Built-in styles can't be deleted.	Estilo integratuak ezin dira ezabatu.
+	Bullet	Buleta
+	Bullet Library	Buleten liburutegia
+	Bullets	Buletak
+	By author	Egilearen arabera
+	By:	Nork:
+	Calendar	Egutegia
+	Can't be deleted	Ezin da ezabatu
+	Cancel	Utzi
+	Canvas Member	Oihaleko kidea
+	Capitalization	Maiuskulak
+	Capitalize Each Word	Hitz bakoitza maiuskulaz
+	Capitalize first letter of sentences	Esaldien lehen letra maiuskulaz
+	Capitalize first letter of table cells	Taula-gelaxken lehen letra maiuskulaz
+	Capitalize names of days	Asteko egunen izenak maiuskulaz
+	Capitalize the first word of a sentence	Esaldi baten lehen hitza maiuskulaz
+	Caption	Epigrafea
+	Caption label:	Epigrafearen etiketa:
+	Caption Numbering	Epigrafeen zenbakitzea
+	Caption text	Epigrafearen testua
+	Caption:	Epigrafea:
+	Captions	Epigrafeak
+	Caret Character	Karet karakterea
+	Case changes	Maiuskula/minuskula aldaketak
+	Cases	Kasuak
+	Cases (Three Conditions)	Kasuak (hiru baldintza)
+	Cases (Two Conditions)	Kasuak (bi baldintza)
+	Cases and Stacks	Kasuak eta pilak
+	Catalog	Katalogoa
+	Categories	Kategoriak
+	Categories:	Kategoriak:
+	Category	Kategoria
+	Category {n}	{n}. kategoria
+	Category:	Kategoria:
+	Category…	Kategoria…
+	Ceiling	Sabaia
+	Cell	Gelaxka
+	Cell Margins	Gelaxka-marjinak
+	Cell margins	Gelaxka-marjinak
+	Cell Options	Gelaxka-aukerak
+	Cell Size	Gelaxka-tamaina
+	Cell\nMargins	Gelaxka-\nmarjinak
+	Center	Erdian
+	Centered	Erdiratua
+	Centered as Group	Talde gisa erdiratua
+	Centimeters	Zentimetroak
+	Change	Aldatu
+	Change Case	Aldatu maiuskulak/minuskulak
+	Change Chart Type	Aldatu grafiko mota
+	Change Colors	Aldatu koloreak
+	Change in y over change in x	y-ren aldaketa x-ren aldaketarekiko
+	Change Layout	Aldatu diseinua
+	Change List Level	Aldatu zerrenda-maila
+	Change Password…	Aldatu pasahitza…
+	Change Picture	Aldatu irudia
+	Change Picture…	Aldatu irudia…
+	Change Shape	Aldatu forma
+	Change Structure	Aldatu egitura
+	Change to Display	Aldatu bistaratze-modura
+	Change to Inline	Aldatu lerroko modura
+	Change to Level 1	Aldatu 1. mailara
+	Change to Level 2	Aldatu 2. mailara
+	Change to Level 3	Aldatu 3. mailara
+	Change to Level 4	Aldatu 4. mailara
+	Change to Level 5	Aldatu 5. mailara
+	Change to Level 6	Aldatu 6. mailara
+	Change to Level 7	Aldatu 7. mailara
+	Change to Level 8	Aldatu 8. mailara
+	Change to Level 9	Aldatu 9. mailara
+	Change\nChart Type	Aldatu\ngrafiko mota
+	Change\nColors	Aldatu\nkoloreak
+	Changed	Aldatua
+	Changed lines:	Aldatutako lerroak:
+	Changes	Aldaketak
+	Changes with highlighting	Aldaketak nabarmenduta
+	Changes without highlighting	Aldaketak nabarmendu gabe
+	Chapter in a book	Liburu bateko kapitulua
+	Chapters begin at:	Kapituluak honela hasten dira:
+	Character	Karakterea
+	Character Border	Karaktere-ertza
+	Character code:	Karaktere-kodea:
+	Character in Range	Barrutiko karakterea
+	Character level	Karaktere-maila
+	Character Position	Karaktere-posizioa
+	Character Scale	Karaktere-eskala
+	Character Shading	Karaktere-itzaldura
+	Character Spacing	Karaktere-tartea
+	Character spacing	Karaktere-tartea
+	Character style	Karaktere-estiloa
+	Characters	Karaktereak
+	Characters (no spaces)	Karaktereak (zuriunerik gabe)
+	Characters (with spaces)	Karaktereak (zuriuneekin)
+	Characters per line:	Karaktere lerroko:
+	Chart	Grafikoa
+	Chart Design	Grafikoaren diseinua
+	Chart Layouts	Grafiko-diseinuak
+	Chart Title	Grafikoaren izenburua
+	Check	Egiaztatu
+	Check Accessibility	Egiaztatu irisgarritasuna
+	Check Box Content Control	Kontrol-laukiaren eduki-kontrola
+	Check Compatibility	Egiaztatu bateragarritasuna
+	Check Errors…	Egiaztatu erroreak…
+	Check for Errors	Bilatu erroreak
+	Check Spelling as You Type	Egiaztatu ortografia idatzi ahala
+	Check spelling as you type	Egiaztatu ortografia idatzi ahala
+	Check\nAccessibility	Egiaztatu\nirisgarritasuna
+	Checked styles are allowed:	Markatutako estiloak baimenduta daude:
+	Checked symbol	Markatutako ikurra
+	Chevron Down	Gezi-punta behera
+	Chevron Up	Gezi-punta gora
+	Chicago	Chicago
+	Chinese (Simplified)	Txinera (sinplifikatua)
+	Chinese (Traditional)	Txinera (tradizionala)
+	Choose a command	Aukeratu komando bat
+	Choose a shortcut	Aukeratu lasterbide bat
+	Choose List Item	Aukeratu zerrendako elementua
+	Choose the sheet that holds the recipients.	Aukeratu hartzaileak dituen orria.
+	Circle	Zirkulua
+	Circle area from its radius	Zirkuluaren azalera erradiotik
+	Circled Dot	Puntu inguratua
+	Circled Plus	Plus inguratua
+	Circled Times	Biderkadura inguratua
+	Citation marked.	Aipamena markatuta.
+	Citation Style	Aipamen-estiloa
+	Citations	Aipamenak
+	Citations & Bibliography	Aipamenak eta bibliografia
+	City	Hiria
+	Clear	Garbitu
+	Clear All	Garbitu guztiak
+	Clear All Formatting	Garbitu formatu guztia
+	Clear Character Formatting	Garbitu karaktere-formatua
+	Clear Character Style	Garbitu karaktere-estiloa
+	Clear Formatting Level	Garbitu formatu-maila
+	Clear Paragraph Formatting	Garbitu paragrafo-formatua
+	Click a border between two cells to merge them. Esc stops.	Egin klik bi gelaxkaren arteko ertz batean haiek konbinatzeko. Esc sakatuta amaitzen da.
+	Click an item to paste it.	Egin klik elementu batean itsasteko.
+	Click level to modify:	Egin klik aldatu beharreko mailan:
+	Click the empty text box the text should continue in (Esc cancels)	Egin klik testuak jarraitu behar duen testu-koadro hutsean (Esc sakatuta bertan behera uzten da)
+	Click to switch back to inserting	Egin klik txertatze modura itzultzeko
+	Clipboard	Arbela
+	Clipboard Contents	Arbelaren edukia
+	Clipboard Items	Arbeleko elementuak
+	Clipboard Pane	Arbelaren panela
+	Close	Itxi
+	Close Equation	Itxi ekuazioa
+	Close Header and Footer	Itxi goiburua eta orri-oina
+	Close Outline View	Itxi eskema-ikuspegia
+	Close Outline\nView	Itxi eskema-\nikuspegia
+	Close Reviewing Pane	Itxi berrikuspen-panela
+	Clustered Bar	Barra multzokatuak
+	Clustered Column	Zutabe multzokatuak
+	Col #:	Zutabe zk.:
+	Collapse	Tolestu
+	Collapse Selection	Tolestu hautapena
+	Collapse the Ribbon	Tolestu zinta
+	Collate copies	Ordenatu kopiak
+	Collect entries from:	Bildu sarrerak honetatik:
+	Colon Equal	Bi puntu eta berdin
+	Color	Kolorea
+	Color model:	Kolore-eredua:
+	Color only	Kolorea soilik
+	Color:	Kolorea:
+	Color: {color}	Kolorea: {color}
+	Colorful	Koloretsua
+	Colors	Koloreak
+	Colors:	Koloreak:
+	Column	Zutabea
+	Column Break	Zutabe-jauzia
+	Column Selection	Zutabe-hautapena
+	Column selection: the arrow keys extend the block, Esc ends it	Zutabe-hautapena: gezi-teklek blokea zabaltzen dute, Esc teklak amaitzen du
+	Column width	Zutabe-zabalera
+	Column:	Zutabea:
+	Columns	Zutabeak
+	Columns:	Zutabeak:
+	Combine	Konbinatu
+	Combine Documents	Konbinatu dokumentuak
+	Combo Box Content Control	Konbinazio-koadroaren eduki-kontrola
+	Commands	Komandoak
+	Commands:	Komandoak:
+	Comment	Iruzkina
+	Comments	Iruzkinak
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Iruzkinak orrialde bakoitzaren alboan eta aldaketen jarraipena PDFetan, inprimaketetan eta irudietan; iruzkin-zerrenda bat web-orrien, Markdown-en eta testuaren amaieran.
+	Comments on version	Bertsioari buruzko iruzkinak
+	Comments Pane	Iruzkinen panela
+	Commits	Commit-ak
+	Common Accent Objects	Azentu-objektu ohikoak
+	Common Brackets	Parentesi ohikoak
+	Common Fractions	Zatiki ohikoak
+	Common Functions	Funtzio ohikoak
+	Common Large Operators	Eragile handi ohikoak
+	Common Operator Structures	Eragile-egitura ohikoak
+	Common Operators	Eragile ohikoak
+	Common Radicals	Erro ohikoak
+	Common Subscripts and Superscripts	Azpiindize eta goi-indize ohikoak
+	Communication	Komunikazioa
+	Compact	Trinkoa
+	Company	Enpresa
+	Compare	Konparatu
+	Compare Documents	Konparatu dokumentuak
+	Compare to	Konparatu honekin
+	Compared: {changes} changes	Konparatuta: {changes} aldaketa
+	Comparing with another file needs the desktop app.	Beste fitxategi batekin konparatzeko mahaigaineko aplikazioa behar da.
+	Comparison	Konparazioa
+	Comparison settings	Konparazio-ezarpenak
+	Compatibility mode: {version}	Bateragarritasun modua: {version}
+	Compatibility Options	Bateragarritasun-aukerak
+	Compatibility Options…	Bateragarritasun-aukerak…
+	Compress Pictures	Konprimatu irudiak
+	Compress punctuation at the start of a line	Konprimatu puntuazioa lerro-hasieran
+	Condensed	Estua
+	Conference	Biltzarra
+	Conference paper	Biltzarreko artikulua
+	CONFIDENTIAL	ISILPEKOA
+	Confirm password:	Berretsi pasahitza:
+	Connect Shapes	Konektatu formak
+	Constitutional Provisions	Xedapen konstituzionalak
+	Container Title	Edukiontziaren izenburua
+	Contains	Barne hartzen du
+	Content Control at Selection	Eduki-kontrola hautapenean
+	Content Control Properties	Eduki-kontrolaren propietateak
+	Contents can't be edited	Edukia ezin da editatu
+	Context	Testuingurua
+	Contextual	Testuinguruzkoa
+	Continuous	Jarraitua
+	Continuous numbering	Zenbakitze jarraitua
+	Contour Integral	Inguru-integrala
+	Contour Integral with Limits	Inguru-integrala limiteekin
+	Contour Integral with Stacked Limits	Inguru-integrala limite pilatuekin
+	Contour Integrals	Inguru-integralak
+	Contrast:	Kontrastea:
+	Contributors	Laguntzaileak
+	Controls	Kontrolak
+	Conversions	Bihurketak
+	Convert	Bihurtu
+	Convert between built-up and linear form	Bihurtu forma eraiki eta linealaren artean
+	Convert Notes	Bihurtu oharrak
+	Convert Permanently	Bihurtu betiko
+	Convert Text to Table	Bihurtu testua taula
+	Convert Text to Table…	Bihurtu testua taula…
+	Convert to Arabic Digits	Bihurtu digitu arabiarretara
+	Convert to Shapes	Bihurtu forma
+	Convert to Text	Bihurtu testu
+	Convert to Thai Digits	Bihurtu digitu thailandiarretara
+	Copies	Kopiak
+	Coproduct	Kobiderkadura
+	Coproduct with Limits	Kobiderkadura limiteekin
+	Coproduct with Lower Limit	Kobiderkadura beheko limitearekin
+	Coproduct with Subscript-Superscript Limits	Kobiderkadura azpiindize eta goi-indize limiteekin
+	Copy	Kopiatu
+	Copy Formatting	Kopiatu formatua
+	Copy of the text a bookmark marks	Laster-marka batek markatzen duen testuaren kopia
+	Copy Styles	Kopiatu estiloak
+	Copy Text	Kopiatu testua
+	Copy to where?	Nora kopiatu?
+	Copyright	Copyrighta
+	Copyright Sign	Copyright ikurra
+	Corrections	Zuzenketak
+	Cosecant Function	Kosekante funtzioa
+	Cosine 2x	Kosinua 2x
+	Cosine Function	Kosinu funtzioa
+	Cotangent Function	Kotangente funtzioa
+	Couldn't add {name}: {reason}	Ezin izan da {name} gehitu: {reason}
+	Couldn't download the picture: {reason}	Ezin izan da irudia deskargatu: {reason}
+	Couldn't download {name}: {error}	Ezin izan da {name} deskargatu: {error}
+	Couldn't get the add-in list: {reason}	Ezin izan da gehigarrien zerrenda lortu: {reason}
+	Couldn't make Doc4Me the default: {error}	Ezin izan da Doc4Me lehenetsi: {error}
+	Couldn't open {path}: {error}	Ezin izan da {path} ireki: {error}
+	Couldn't search: {reason}	Ezin izan da bilatu: {reason}
+	Couldn't translate: {reason}	Ezin izan da itzuli: {reason}
+	Count by:	Zenbatu honela:
+	Count words in text boxes and notes	Zenbatu testu-koadroetako eta oharretako hitzak
+	Country	Herrialdea
+	Courtesy Title	Tratamendua
+	Cover Page	Azala
+	Craft	Artisautza
+	Create	Sortu
+	Create a Style	Sortu estilo bat
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Sortu dokumentuaren eskema interaktibo bat.\n\nNon zauden jakiteko edo edukia azkar mugitzeko modu bikaina da.\n\nHasteko, joan Hasiera fitxara eta aplikatu izenburu-estiloak dokumentuko izenburuei.
+	Create Data Source…	Sortu datu-iturburua…
+	Create Graphic	Sortu grafikoa
+	Create Header Source	Sortu goiburu-iturburua
+	Create Link	Sortu esteka
+	Create New Style	Sortu estilo berria
+	Create Source	Sortu iturburua
+	Create…	Sortu…
+	Crop	Moztu
+	Cross-reference	Erreferentzia gurutzatua
+	Cross-reference:	Erreferentzia gurutzatua:
+	Cube Root	Erro kubikoa
+	Current	Unekoa
+	Current - Linear	Unekoa - lineala
+	Current - Professional	Unekoa - profesionala
+	Current keyboard settings	Uneko teklatu-ezarpenak
+	Current page	Uneko orrialdea
+	Current Position	Uneko posizioa
+	Current record	Uneko erregistroa
+	Current style: {style}	Uneko estiloa: {style}
+	Curved Arrow Connector	Gezi-lotura kurbatua
+	Curved Connector	Lotura kurbatua
+	Custom	Pertsonalizatua
+	Custom dictionary	Hiztegi pertsonalizatua
+	Custom Margins…	Marjina pertsonalizatuak…
+	Custom mark:	Marka pertsonalizatua:
+	Custom range	Barruti pertsonalizatua
+	Custom Table of Contents	Aurkibide pertsonalizatua
+	Custom Table of Contents…	Aurkibide pertsonalizatua…
+	Custom Watermark	Ur-marka pertsonalizatua
+	Custom Watermark…	Ur-marka pertsonalizatua…
+	Customize	Pertsonalizatu
+	Customize Keyboard	Pertsonalizatu teklatua
+	Customize Quick Access Toolbar	Pertsonalizatu sarbide azkarreko tresna-barra
+	Customize Quick Access Toolbar…	Pertsonalizatu sarbide azkarreko tresna-barra…
+	Customize Ribbon	Pertsonalizatu zinta
+	Customize the Ribbon…	Pertsonalizatu zinta…
+	Customize…	Pertsonalizatu…
+	Cut	Ebaki
+	Cut, copy, and paste	Ebaki, kopiatu eta itsatsi
+	Cycle	Zikloa
+	Czech	Txekiera
+	Danish	Daniera
+	Dark	Iluna
+	Dark Mode	Modu iluna
+	Dark page (white text on black)	Orrialde iluna (testu zuria beltzaren gainean)
+	Dark with Shadow	Iluna itzalarekin
+	Darkroom	Laborategi iluna
+	Dashed	Marratxoduna
+	Data	Datuak
+	Data Labels	Datu-etiketak
+	Data source:	Datu-iturburua:
+	Date	Data
+	Date & Time	Data eta ordua
+	Date and Time	Data eta ordua
+	Date format	Data-formatua
+	Date formats:	Data-formatuak:
+	Date Picker Content Control	Data-hautatzailearen eduki-kontrola
+	Day	Eguna
+	Decimal	Hamartarra
+	Decorative objects only add visual interest: screen readers skip them.	Objektu apaingarriek interes bisuala soilik ematen dute: pantaila-irakurgailuek saltatu egiten dituzte.
+	Decrease Font Size	Txikitu letra-tamaina
+	Decrease Indent	Txikitu koska
+	Default	Lehenetsia
+	Default Paragraph Font	Paragrafoaren letra-tipo lehenetsia
+	Default tab stops:	Tabulazio-marka lehenetsiak:
+	Define New Bullet	Definitu buleta berria
+	Define New Multilevel List	Definitu maila anitzeko zerrenda berria
+	Define New Multilevel List…	Definitu maila anitzeko zerrenda berria…
+	Define New Number Format	Definitu zenbaki-formatu berria
+	Deflate	Hustu
+	Delete	Ezabatu
+	Delete Back in Equation	Ezabatu atzera ekuazioan
+	Delete Cells	Ezabatu gelaxkak
+	Delete Clipboard Item	Ezabatu arbeleko elementua
+	Delete Columns	Ezabatu zutabeak
+	Delete Comment	Ezabatu iruzkina
+	Delete in Equation	Ezabatu ekuazioan
+	Delete Label	Ezabatu etiketa
+	Delete Next Word	Ezabatu hurrengo hitza
+	Delete Previous Word	Ezabatu aurreko hitza
+	Delete Rows	Ezabatu errenkadak
+	Delete Selected Ink	Ezabatu hautatutako tinta
+	Delete Style	Ezabatu estiloa
+	Delete Table	Ezabatu taula
+	Delete Table Style	Ezabatu taula-estiloa
+	Deleted	Ezabatua
+	Deletions:	Ezabaketak:
+	Delivery address:	Bidalketa-helbidea:
+	Delta Equal To	Delta berdin
+	Delta over arrow	Delta geziaren gainean
+	Demote	Jaitsi maila
+	Demote to Body Text	Jaitsi gorputz-testura
+	Derivative as a limit	Deribatua limite gisa
+	Descending	Beherantz
+	Describe what this object shows, for people who can't see it.	Deskribatu objektu honek zer erakusten duen, ikusi ezin dutenentzat.
+	Describe what this table shows, for people who can't see it.	Deskribatu taula honek zer erakusten duen, ikusi ezin dutenentzat.
+	Description:	Deskribapena:
+	Design	Diseinua
+	Design Mode	Diseinu modua
+	Detach Template	Askatu txantiloia
+	Detect language automatically	Hauteman hizkuntza automatikoki
+	Developer	Garatzailea
+	development build	garapen-konpilazioa
+	Diagonal	Diagonala
+	Diagonal Dots	Puntu diagonalak
+	Diamond	Erronboa
+	Dictate	Diktatu
+	Dictation isn't available here.	Diktaketa ez dago erabilgarri hemen.
+	Dictation stopped.	Diktaketa gelditu da.
+	Dictation stopped: {reason}	Diktaketa gelditu da: {reason}
+	Different First Page	Lehen orrialde desberdina
+	Different Odd & Even Pages	Orrialde bakoiti eta bikoiti desberdinak
+	Differential	Diferentziala
+	Differential theta	Theta diferentziala
+	Differential x	x diferentziala
+	Differential y	y diferentziala
+	Differentials	Diferentzialak
+	Direct formatting	Formatu zuzena
+	Direction:	Norabidea:
+	Directory	Direktorioa
+	Display	Bistaratzea
+	Display for Review	Bistaratu berrikusteko
+	Display gridlines on screen	Bistaratu sareta-lerroak pantailan
+	Display name	Bistaratzeko izena
+	Display text	Bistaratzeko testua
+	Distance from surrounding text	Inguruko testurainoko distantzia
+	Distribute Columns	Banatu zutabeak
+	Distribute letters	Banatu letrak
+	Distribute Rows	Banatu errenkadak
+	Distribute spacing	Banatu tartea
+	Distributed	Banatua
+	Do Not Check Spelling or Grammar	Ez egiaztatu ortografia edo gramatika
+	Do not check spelling or grammar	Ez egiaztatu ortografia edo gramatika
+	DO NOT COPY	EZ KOPIATU
+	Do Not Show in TOC	Ez erakutsi aurkibidean
+	Do you want to save changes to {name}?	{name} dokumentuaren aldaketak gorde nahi dituzu?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me gehigarriak Doc4Me-ren gehigarri-katalogoko makro-pakete doakoak dira. Dokumentua editatu besterik ezin dute egin.
+	Doc4Me is now the default app for Word documents.	Doc4Me da orain Word dokumentuen aplikazio lehenetsia.
+	Document	Dokumentua
+	Document End	Dokumentuaren amaiera
+	Document Formatting	Dokumentuaren formatua
+	Document Grid	Dokumentu-sareta
+	Document Information	Dokumentuaren informazioa
+	Document Property	Dokumentuaren propietatea
+	Document Start	Dokumentuaren hasiera
+	Document template:	Dokumentu-txantiloia:
+	Document Text	Dokumentuaren testua
+	Document Title	Dokumentuaren izenburua
+	Document1	Dokumentua1
+	Document\nPreferences	Dokumentuaren\nhobespenak
+	Documents	Dokumentuak
+	Documents you open will show up here.	Irekitzen dituzun dokumentuak hemen agertuko dira.
+	Does not contain	Ez du barne hartzen
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Ez gehitu tarterik estilo bereko paragrafoen artean
+	Don't capitalize after:	Ez jarri maiuskula honen ondoren:
+	Don't hyphenate	Ez zatitu hitzak
+	Don't print blank lines when data fields are empty	Ez inprimatu lerro hutsak datu-eremuak hutsik daudenean
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Ez irakurri Zotero, Mendeley edo EndNote aipamenak eta bibliografiak
+	Don't Save	Ez gorde
+	Don't use HTML paragraph auto spacing	Ez erabili HTML paragrafoen tarte automatikoa
+	Dot	Puntua
+	Dot dash	Puntu-marra
+	Dot-dash	Puntu-marra
+	Dots	Puntuak
+	Dotted	Puntukatua
+	Double	Bikoitza
+	Double Bar	Barra bikoitza
+	Double Closing Quote	Komatxo bikoitz ixtekoa
+	Double Dot	Puntu bikoitza
+	Double Integral	Integral bikoitza
+	Double Integral with Limits	Integral bikoitza limiteekin
+	Double Integral with Stacked Limits	Integral bikoitza limite pilatuekin
+	Double Left Arrow with Text Above	Ezkerreko gezi bikoitza testua gainean duela
+	Double Left Arrow with Text Below	Ezkerreko gezi bikoitza testua azpian duela
+	Double Left Right Arrow with Text Above	Ezker-eskuin gezi bikoitza testua gainean duela
+	Double Left Right Arrow with Text Below	Ezker-eskuin gezi bikoitza testua azpian duela
+	Double Opening Quote	Komatxo bikoitz irekitzekoa
+	Double Right Arrow with Text Above	Eskuineko gezi bikoitza testua gainean duela
+	Double Right Arrow with Text Below	Eskuineko gezi bikoitza testua azpian duela
+	Double Spacing	Lerroarte bikoitza
+	Double Square Brackets	Kortxete bikoitzak
+	Double Strikethrough	Marratu bikoitza
+	Double strikethrough	Marratu bikoitza
+	Double summation	Batukari bikoitza
+	Double Underline	Azpimarra bikoitza
+	Double Vertical Bars	Barra bertikal bikoitzak
+	Doughnut	Eraztuna
+	Down	Behera
+	Downloading the speech model ({mb} MB, once)…	Hizketa-eredua deskargatzen ({mb} MB, behin)…
+	Downloading…	Deskargatzen…
+	DRAFT	ZIRRIBORROA
+	Draft	Zirriborroa
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Arrastatu laukizuzen bat taula marrazteko, edo lerro bat gelaxketan zehar haiek zatitzeko. Esc sakatuta amaitzen da.
+	Draw	Marraztu
+	Draw Ink	Marraztu tinta
+	Draw Table	Marraztu taula
+	Draw\nTable	Marraztu\ntaula
+	Drawing Canvas	Marrazki-oihala
+	Drawing Grid	Marrazki-sareta
+	Drawing Tools	Marrazketa-tresnak
+	Drawing\nCanvas	Marrazki-\noihala
+	Drop Cap	Letra kapitala
+	Drop cap	Letra kapitala
+	Drop-Down List Content Control	Goitibeherako zerrendaren eduki-kontrola
+	Drops all formatting and pastes plain text.	Formatu guztia kentzen du eta testu arrunta itsasten du.
+	Dutch	Nederlandera
+	E-mail Messages	Mezu elektronikoak
+	Edit Category	Editatu kategoria
+	Edit Comment	Editatu iruzkina
+	Edit Data	Editatu datuak
+	Edit Document	Editatu dokumentua
+	Edit Equation	Editatu ekuazioa
+	Edit Field Code	Editatu eremu-kodea
+	Edit Field…	Editatu eremua…
+	Edit Footer	Editatu orri-oina
+	Edit Header	Editatu goiburua
+	Edit Individual Documents…	Editatu dokumentu indibidualak…
+	Edit Items	Editatu elementuak
+	Edit Recipient List	Editatu hartzaileen zerrenda
+	Edit Source	Editatu iturburua
+	Edit\nData	Editatu\ndatuak
+	Edit\nRecipient List	Editatu\nhartzaileen zerrenda
+	Edited	Editatua
+	Editing	Edizioa
+	Editing header/footer	Goiburua/orri-oina editatzen
+	Editing in this document is restricted.	Dokumentu honetako edizioa murriztuta dago.
+	Editing — edit the document directly	Edizioa — editatu dokumentua zuzenean
+	Edition	Argitalpena
+	Editor	Editorea
+	Edit…	Editatu…
+	Effects	Efektuak
+	Elbow Arrow Connector	Ukondo-formako gezi-lotura
+	Elbow Connector	Ukondo-formako lotura
+	Ellipsis	Eten-puntuak
+	Em Dash	Em marra
+	Em Space	Em tartea
+	Email address (optional)	Helbide elektronikoa (aukerakoa)
+	Emboss	Erliebea
+	Emphasis	Enfasia
+	Empty Matrices	Matrize hutsak
+	En Dash	En marra
+	En Space	En tartea
+	Enclose Characters	Inguratu karaktereak
+	Enclosure	Ingurukia
+	Encrypt with Password	Zifratu pasahitzarekin
+	Encrypt with Password…	Zifratu pasahitzarekin…
+	End of document	Dokumentuaren amaiera
+	End of section	Atalaren amaiera
+	End of Word	Hitzaren amaiera
+	Endnote Reference	Amaiera-oharraren erreferentzia
+	Endnote Text	Amaiera-oharraren testua
+	Endnotes	Amaiera-oharrak
+	Endnotes to footnotes	Amaiera-oharrak oin-ohar bihurtu
+	English	Ingelesa
+	English (United Kingdom)	Ingelesa (Erresuma Batua)
+	English (United States)	Ingelesa (Ameriketako Estatu Batuak)
+	Engrave	Grabatua
+	Enlarge symbol	Handitu ikurra
+	Enter formatting for number:	Idatzi zenbakiaren formatua:
+	Enter in Equation	Sartu ekuazioan
+	Enter page number:	Idatzi orrialde-zenbakia:
+	Enter the web address or embed code of an online video:	Idatzi lineako bideo baten web-helbidea edo txertatze-kodea:
+	Entry marked.	Sarrera markatuta.
+	Entry:	Sarrera:
+	Envelope #10   4.12" × 9.50"	Gutun-azala #10   4.12" × 9.50"
+	Envelope Address	Gutun-azaleko helbidea
+	Envelope DL   4.33" × 8.66"	Gutun-azala DL   4.33" × 8.66"
+	Envelope Return	Gutun-azaleko itzulera-helbidea
+	Envelope size:	Gutun-azalaren tamaina:
+	Envelopes	Gutun-azalak
+	Equal by Definition	Definizioz berdina
+	Equal column width	Zutabe-zabalera berdina
+	Equal Equal	Berdin berdin
+	Equal to	Honen berdina
+	Equals:	Berdin:
+	Equation	Ekuazioa
+	Equation Gallery	Ekuazio-galeria
+	Equation Info	Ekuazioaren informazioa
+	Equation Number	Ekuazio-zenbakia
+	Equation Options	Ekuazio-aukerak
+	Erase Ink	Ezabatu tinta
+	Eraser	Borragoma
+	Errors ({n})	Erroreak ({n})
+	Estonian	Estoniera
+	Euler's identity	Eulerren identitatea
+	Even Page	Orrialde bikoitia
+	Even pages only	Orrialde bikoitiak soilik
+	Every change is recorded as a tracked change.	Aldaketa oro aldaketen jarraipenean erregistratzen da.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Komando guztiak scriptentzat eta AA agenteentzat daude erabilgarri: exekutatu `doc4me-cli mcp` MCP zerbitzari baterako, edo abiarazi aplikazioa `--control <port>` aukerarekin JSON kontrol-kanalerako.
+	Every field needs a name.	Eremu orok izen bat behar du.
+	Every font this document uses is installed.	Dokumentu honek erabiltzen dituen letra-tipo guztiak instalatuta daude.
+	Everyone	Denak
+	Exactly	Zehazki
+	Exactly {n}	Zehazki {n}
+	Example: {sample}	Adibidea: {sample}
+	Exceptions (optional)	Salbuespenak (aukerakoa)
+	Exceptions…	Salbuespenak…
+	Executive   7.25" × 10.50"	Executive   7.25" × 10.50"
+	Exit	Irten
+	Expand	Zabaldu
+	Expand or Collapse Heading	Zabaldu edo tolestu izenburua
+	Expanded	Zabaldua
+	Exponential	Esponentziala
+	Exponential series	Serie esponentziala
+	Export	Esportatu
+	Export a copy to share (PDF, Word document)	Esportatu kopia bat partekatzeko (PDF, Word dokumentua)
+	Export Page as JPEG	Esportatu orrialdea JPEG gisa
+	Export Page as PNG	Esportatu orrialdea PNG gisa
+	Export PDF	Esportatu PDFa
+	Exported {path}	Esportatuta: {path}
+	Expression	Adierazpena
+	Extend Selection	Zabaldu hautapena
+	Extend Selection by Units	Zabaldu hautapena unitateka
+	Extra space	Tarte gehigarria
+	Extra spaces between words.	Hitzen arteko zuriune gehigarriak.
+	Field	Eremua
+	Field Click	Eremuan klik
+	Field code:	Eremu-kodea:
+	Field Codes	Eremu-kodeak
+	Field codes:	Eremu-kodeak:
+	Field name	Eremu-izena
+	Field name:	Eremu-izena:
+	Field names must be different.	Eremu-izenek desberdinak izan behar dute.
+	Field names:	Eremu-izenak:
+	Field properties	Eremuaren propietateak
+	Field:	Eremua:
+	Fields	Eremuak
+	Fields to insert:	Txertatu beharreko eremuak:
+	Fields:	Eremuak:
+	Field…	Eremua…
+	Figure	Irudia
+	File	Fitxategia
+	File name:	Fitxategi-izena:
+	Fill	Betegarria
+	Fill & Line	Betegarria eta lerroa
+	Fill color:	Betegarri-kolorea:
+	Fill:	Betegarria:
+	Filling in forms	Inprimakiak betetzea
+	Film	Filma
+	Filter and Sort	Iragazi eta ordenatu
+	Filter and Sort…	Iragazi eta ordenatu…
+	Filter Records	Iragazi erregistroak
+	Find	Bilatu
+	Find and Replace	Bilatu eta ordeztu
+	Find Next	Bilatu hurrengoa
+	Find Next Editable Region	Bilatu hurrengo eskualde editagarria
+	Find Previous	Bilatu aurrekoa
+	Find Recipient	Bilatu hartzailea
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Bilatu aukerak aldatutako hurrengo paragrafoa hautatzen du; Baztertu aukerak hautatutakoa lehen zegoen bezala uzten du.
+	Find What Expression	Bilatu beharreko adierazpena
+	Find What Text	Bilatu beharreko testua
+	Find what:	Bilatu hau:
+	Find →	Bilatu →
+	Find:	Bilatu:
+	Finish	Amaitu
+	Finish & Merge	Amaitu eta konbinatu
+	Finish &\nMerge	Amaitu eta\nkonbinatu
+	Finished	Amaituta
+	Finnish	Finlandiera
+	First	Lehena
+	First Cell in Column	Zutabeko lehen gelaxka
+	First Cell in Row	Errenkadako lehen gelaxka
+	First Column	Lehen zutabea
+	First commit	Lehen commit-a
+	First line	Lehen lerroa
+	First line:	Lehen lerroa:
+	First Name	Izena
+	First row of data contains column headers	Datuen lehen errenkadak zutabe-goiburuak ditu
+	Fit	Doitu
+	Fit text	Doitu testua
+	Fix Position on Page	Finkatu posizioa orrialdean
+	Fixed Column Width	Zutabe-zabalera finkoa
+	Flip Horizontal	Irauli horizontalki
+	Flip Vertical	Irauli bertikalki
+	Floor	Zorua
+	Focus	Fokua
+	Follow number with:	Zenbakiaren ondoren:
+	Font	Letra-tipoa
+	Font Color	Letra-kolorea
+	Font color	Letra-kolorea
+	Font color:	Letra-kolorea:
+	Font Dialog	Letra-tipoaren elkarrizketa-koadroa
+	Font not installed	Letra-tipoa ez dago instalatuta
+	Font Size	Letra-tamaina
+	Font Substitution	Letra-tipoen ordezkapena
+	Font Substitution…	Letra-tipoen ordezkapena…
+	Font:	Letra-tipoa:
+	Font: {font}	Letra-tipoa: {font}
+	Fonts	Letra-tipoak
+	Font…	Letra-tipoa…
+	Footer	Orri-oina
+	Footnote and Endnote	Oin-oharra eta amaiera-oharra
+	Footnote Reference	Oin-oharraren erreferentzia
+	Footnote Text	Oin-oharraren testua
+	Footnotes	Oin-oharrak
+	Footnotes and endnotes	Oin-oharrak eta amaiera-oharrak
+	Footnotes to endnotes	Oin-oharrak amaiera-ohar bihurtu
+	Form Letters	Gutun ereduak
+	Format	Formatua
+	Format Page Numbers	Formateatu orrialde-zenbakiak
+	Format Page Numbers…	Formateatu orrialde-zenbakiak…
+	Format Painter	Formatu-kopiatzailea
+	Format Picture	Formateatu irudia
+	Format Shape	Formateatu forma
+	Format:	Formatua:
+	Formatted	Formatuduna
+	Formatted Text	Formatudun testua
+	Formatting	Formatua
+	Formatting at Selection	Formatua hautapenean
+	Formatting completed. You can now:	Formatua amaitu da. Orain hau egin dezakezu:
+	Formatting exceptions	Formatu-salbuespenak
+	Formatting marks	Formatu-markak
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Formatua, maiuskula/minuskula aldaketak, zuriuneak eta taulak konparatzen dira; beste ezarpenak geroko gordetzen dira.
+	Formula	Formula
+	Forward	Aurrera
+	Fraction	Zatikia
+	Fractions (1/2) as fraction characters (½)	Zatikiak (1/2) zatiki-karaktere gisa (½)
+	French	Frantsesa
+	French (France)	Frantsesa (Frantzia)
+	From	Nondik
+	From text:	Testutik:
+	from Unicode (hex)	Unicode-tik (hex)
+	From:	Nork:
+	Full page of the same label	Etiketa bereko orrialde osoa
+	Function	Funtzioa
+	Functions	Funtzioak
+	Gallery	Galeria
+	GB/T 7714	GB/T 7714
+	General	Orokorra
+	Geometry	Geometria
+	German	Alemana
+	German (Germany)	Alemana (Alemania)
+	Get Add-ins	Eskuratu gehigarriak
+	Get Data	Eskuratu datuak
+	Get Data…	Eskuratu datuak…
+	Getting ready…	Prestatzen…
+	Glow	Distira-ertza
+	Glow Colors	Distira-ertzaren koloreak
+	Go Back	Itzuli
+	Go To	Joan hona
+	Go to	Joan hona
+	Go To…	Joan hona…
+	Good afternoon	Arratsalde on
+	Good evening	Gabon
+	Good morning	Egun on
+	GOST (name sort)	GOST (izenaren arabera ordenatuta)
+	GOST (title sort)	GOST (izenburuaren arabera ordenatuta)
+	Grab bag	Denetarik
+	Grammar	Gramatika
+	Grammar Settings	Gramatika-ezarpenak
+	Graphic	Grafikoa
+	Grave	Azentu kamutsa
+	Greater than	Handiagoa
+	Greater than or equal	Handiagoa edo berdina
+	Greek	Greziera
+	Greek Letters	Greziar letrak
+	Green:	Berdea:
+	Greeting Line	Agur-lerroa
+	Greeting\nLine	Agur-\nlerroa
+	Grid Settings	Sareta-ezarpenak
+	Grid Table 1 Light	Sareta-taula 1 argia
+	Grid Table 4 – Blue	Sareta-taula 4 – urdina
+	Grid Table 4 – Green	Sareta-taula 4 – berdea
+	Grid Table 4 – Orange	Sareta-taula 4 – laranja
+	Grid Table 4 – Purple	Sareta-taula 4 – morea
+	Gridlines	Sareta-lerroak
+	Group	Taldekatu
+	Grouping Character Above	Taldekatze-karakterea gainean
+	Grouping Character Below	Taldekatze-karakterea azpian
+	Grow Font 1 Point	Handitu letra puntu 1
+	H:	A:
+	Hanging Indent	Koska frantsesa
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Txapela
+	Header	Goiburua
+	Header & Footer	Goiburua eta orri-oina
+	Header Options	Goiburu-aukerak
+	Header Options:	Goiburu-aukerak:
+	Header Row	Goiburu-errenkada
+	Header source: {file} (the next data source opened here takes its field names)	Goiburu-iturburua: {file} (hemen irekitzen den hurrengo datu-iturburuak hartuko ditu bere eremu-izenak)
+	Header/Footer Position	Goiburuaren/orri-oinaren posizioa
+	Headers and footers	Goiburuak eta orri-oinak
+	Heading 1	1. izenburua
+	Heading 2	2. izenburua
+	Heading 3	3. izenburua
+	Heading styles (levels 1–{n})	Izenburu-estiloak (1–{n} mailak)
+	Heading {n}	{n}. izenburua
+	Headings	Izenburuak
+	Heart	Bihotza
+	Hebrew	Hebreera
+	Height:	Altuera:
+	Help	Laguntza
+	Hex:	Hex:
+	Hidden	Ezkutua
+	Hidden text	Testu ezkutua
+	Hide Codes	Ezkutatu kodeak
+	Hide from style lists	Ezkutatu estilo-zerrendetatik
+	Hide Ink	Ezkutatu tinta
+	Hide White Space	Ezkutatu zuriunea
+	Hide\nInk	Ezkutatu\ntinta
+	Hierarchy	Hierarkia
+	Highlight	Nabarmendu
+	Highlight Changes	Nabarmendu aldaketak
+	Highlight changes in printed document	Nabarmendu aldaketak inprimatutako dokumentuan
+	Highlight changes on screen	Nabarmendu aldaketak pantailan
+	Highlight Merge Fields	Nabarmendu konbinazio-eremuak
+	Highlight\nMerge Fields	Nabarmendu\nkonbinazio-eremuak
+	Highlighter	Nabarmentzailea
+	Hindi	Hindia
+	Historical and Discretional	Historikoak eta aukerakoak
+	Hollow	Hutsa
+	Home	Hasiera
+	Home folder	Karpeta nagusia
+	Horizontal	Horizontala
+	Horizontal Line	Lerro horizontala
+	Horizontal spacing:	Tarte horizontala:
+	How many pages the whole document has	Dokumentu osoak zenbat orrialde dituen
+	How many pages this section has	Atal honek zenbat orrialde dituen
+	How many words the document holds	Dokumentuak zenbat hitz dituen
+	HTML Format	HTML formatua
+	Hue:	Ñabardura:
+	Hungarian	Hungariera
+	Hyperbolic Cosecant Function	Kosekante hiperbolikoa funtzioa
+	Hyperbolic Cosine Function	Kosinu hiperbolikoa funtzioa
+	Hyperbolic Cotangent Function	Kotangente hiperbolikoa funtzioa
+	Hyperbolic Functions	Funtzio hiperbolikoak
+	Hyperbolic Secant Function	Sekante hiperbolikoa funtzioa
+	Hyperbolic Sine Function	Sinu hiperbolikoa funtzioa
+	Hyperbolic Tangent Function	Tangente hiperbolikoa funtzioa
+	Hyperlink	Hiperesteka
+	Hyphenate at:	Zatitu hitzak hemen:
+	Hyphenate words in CAPS	Zatitu MAIUSKULAZ dauden hitzak
+	Hyphenation	Hitz-zatiketa
+	Hyphenation Options…	Hitz-zatiketaren aukerak…
+	Hyphenation zone:	Hitz-zatiketaren eremua:
+	Hyphens (--) as dashes (—)	Marratxoak (--) marra gisa (—)
+	Hypotenuse	Hipotenusa
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Ikonoaren kolorea
+	Icons	Ikonoak
+	Identity Matrices	Identitate-matrizeak
+	IEEE	IEEE
+	If…Then…Else	Baldin…Orduan…Bestela
+	If…Then…Else…	Baldin…Orduan…Bestela…
+	Ignore All	Ez ikusi guztiak
+	Ignore punctuation characters	Ez ikusi puntuazio-karaktereak
+	Ignore web and file addresses	Ez ikusi web- eta fitxategi-helbideak
+	Ignore white-space characters	Ez ikusi zuriune-karaktereak
+	Ignore words in capitals	Ez ikusi maiuskulaz dauden hitzak
+	Ignore words with numbers	Ez ikusi zenbakiak dituzten hitzak
+	Illustrations	Ilustrazioak
+	Immersive	Murgiltzailea
+	Immersive Reader	Irakurgailu murgiltzailea
+	Immersive\nReader	Irakurgailu\nmurgiltzailea
+	In Default apps, choose Doc4Me for the document types you want it to open.	Aplikazio lehenetsietan, aukeratu Doc4Me ireki dezan nahi dituzun dokumentu motetarako.
+	In equations, typing a name after a backslash replaces it with its symbol.	Ekuazioetan, alderantzizko barraren ondoren izen bat idaztean, bere ikurrarekin ordezten da.
+	In Front of Text	Testuaren aurrean
+	In Line with Text	Testuarekin lerroan
+	Inches	Hazbeteak
+	Include label and number	Sartu etiketa eta zenbakia
+	Include level number from:	Sartu maila-zenbakia honetatik:
+	Include page numbers	Sartu orrialde-zenbakiak
+	Increase Font Size	Handitu letra-tamaina
+	Increase Indent	Handitu koska
+	Indent	Koska
+	Indent from left:	Ezkerreko koska:
+	Indentation	Koska
+	Indented	Koskaduna
+	Indents	Koskak
+	Indents and Spacing	Koskak eta tartea
+	Index	Indizea
+	Index and Tables	Indizea eta aurkibideak
+	Index Heading	Indizearen izenburua
+	Index {n}	{n}. indizea
+	Indonesian	Indonesiera
+	Inflate	Puztu
+	Info	Informazioa
+	Initials:	Inizialak:
+	Ink	Tinta
+	Ink Equation	Tinta-ekuazioa
+	Ink Replay	Tinta-erreprodukzioa
+	Ink to Math	Tintatik matematikara
+	Ink to Shape	Tintatik formara
+	Ink to\nMath	Tintatik\nmatematikara
+	Ink to\nShape	Tintatik\nformara
+	Ink\nReplay	Tinta-\nerreprodukzioa
+	Inline	Lerroan
+	Input Format	Sarrera-formatua
+	Insert	Txertatu
+	Insert a 3D model from a file (.glb, .stl, .obj)	Txertatu 3D eredu bat fitxategi batetik (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Txertatu ekuazio berri bat (Alt+=)
+	Insert Above	Txertatu gainean
+	Insert Below	Txertatu azpian
+	Insert Caption	Txertatu epigrafea
+	Insert Cells	Txertatu gelaxkak
+	Insert Chart	Txertatu grafikoa
+	Insert Citation	Txertatu aipamena
+	Insert Columns to the Left	Txertatu zutabeak ezkerrean
+	Insert Columns to the Right	Txertatu zutabeak eskuinean
+	Insert Data	Txertatu datuak
+	Insert Database	Txertatu datu-basea
+	Insert Database…	Txertatu datu-basea…
+	Insert Date Field	Txertatu data-eremua
+	Insert Endnote	Txertatu amaiera-oharra
+	Insert entire column	Txertatu zutabe osoa
+	Insert entire row	Txertatu errenkada osoa
+	Insert Footnote	Txertatu oin-oharra
+	Insert Hyperlink	Txertatu hiperesteka
+	Insert Index	Txertatu indizea
+	Insert Left	Txertatu ezkerrean
+	Insert LISTNUM Field	Txertatu LISTNUM eremua
+	Insert Merge Field	Txertatu konbinazio-eremua
+	Insert Merge\nField	Txertatu konbinazio-\neremua
+	Insert New Equation	Txertatu ekuazio berria
+	Insert one text or another, depending on a field's value.	Txertatu testu bat edo beste, eremu baten balioaren arabera.
+	Insert Page Field	Txertatu orrialde-eremua
+	Insert Right	Txertatu eskuinean
+	Insert Rows	Txertatu errenkadak
+	Insert Rows Above	Txertatu errenkadak gainean
+	Insert Rows Below	Txertatu errenkadak azpian
+	Insert Shapes	Txertatu formak
+	Insert SmartArt	Txertatu SmartArt
+	Insert Structure	Txertatu egitura
+	Insert Symbol	Txertatu ikurra
+	Insert Table	Txertatu taula
+	Insert Table of Authorities	Txertatu autoritate-aurkibidea
+	Insert Table of Figures	Txertatu irudien aurkibidea
+	Insert Table…	Txertatu taula…
+	Insert Time Field	Txertatu ordu-eremua
+	Insert Video	Txertatu bideoa
+	Insert\nAbove	Txertatu\ngainean
+	Insert\nCaption	Txertatu\nepigrafea
+	Insert\nCitation	Txertatu\naipamena
+	Insert\nFootnote	Txertatu\noin-oharra
+	Inserted	Txertatua
+	Insertions and Deletions	Txertaketak eta ezabaketak
+	Insertions:	Txertaketak:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Txertaketak: {ins}, ezabaketak: {del}, mugimenduak: {moves}, formatua: {fmt}, iruzkinak: {comments}
+	Inside	Barruan
+	Inside Borders	Barneko ertzak
+	Inside Margin	Barneko marjina
+	Inside:	Barruan:
+	Inspect Document	Ikuskatu dokumentua
+	Inspect Styles at Selection	Ikuskatu hautapeneko estiloak
+	Institution	Erakundea
+	Integral	Integrala
+	Integral of e^(−x²)	e^(−x²)-ren integrala
+	Integral with Limits	Integrala limiteekin
+	Integral with Stacked Limits	Integrala limite pilatuekin
+	Integrals	Integralak
+	Intense Emphasis	Enfasi bizia
+	Intense Quote	Aipu bizia
+	Intense Reference	Erreferentzia bizia
+	Interface	Interfazea
+	Interface language	Interfazearen hizkuntza
+	Interface language:	Interfazearen hizkuntza:
+	Interface size:	Interfazearen tamaina:
+	Interface Theme	Interfazearen gaia
+	Interface theme:	Interfazearen gaia:
+	Interface\nTheme	Interfazearen\ngaia
+	Internet addresses as links	Interneteko helbideak esteka gisa
+	Intersection	Ebakidura
+	Intersection with Limits	Ebakidura limiteekin
+	Intersection with Lower Limit	Ebakidura beheko limitearekin
+	Intersection with Subscript-Superscript Limits	Ebakidura azpiindize eta goi-indize limiteekin
+	Inverse Cosecant Function	Alderantzizko kosekante funtzioa
+	Inverse Cosine Function	Alderantzizko kosinu funtzioa
+	Inverse Cotangent Function	Alderantzizko kotangente funtzioa
+	Inverse Functions	Alderantzizko funtzioak
+	Inverse Hyperbolic Cosecant Function	Alderantzizko kosekante hiperbolikoa funtzioa
+	Inverse Hyperbolic Cosine Function	Alderantzizko kosinu hiperbolikoa funtzioa
+	Inverse Hyperbolic Cotangent Function	Alderantzizko kotangente hiperbolikoa funtzioa
+	Inverse Hyperbolic Functions	Alderantzizko funtzio hiperbolikoak
+	Inverse Hyperbolic Secant Function	Alderantzizko sekante hiperbolikoa funtzioa
+	Inverse Hyperbolic Sine Function	Alderantzizko sinu hiperbolikoa funtzioa
+	Inverse Hyperbolic Tangent Function	Alderantzizko tangente hiperbolikoa funtzioa
+	Inverse Secant Function	Alderantzizko sekante funtzioa
+	Inverse Sine Function	Alderantzizko sinu funtzioa
+	Inverse Tangent Function	Alderantzizko tangente funtzioa
+	Ionosphere	Ionosfera
+	Is blank	Hutsik dago
+	Is not blank	Ez dago hutsik
+	ISO 690 (author-date)	ISO 690 (egilea-data)
+	ISO 690 (numerical)	ISO 690 (zenbakizkoa)
+	Issue	Zenbakia
+	it isn't a picture Doc4Me can read	ez da Doc4Me-k irakur dezakeen irudia
+	Italian	Italiera
+	Italic	Etzana
+	Japanese	Japoniera
+	Journal	Aldizkaria
+	Justification	Justifikazioa
+	Justification of a display equation	Bistaratze-ekuazio baten justifikazioa
+	Justified	Justifikatua
+	Justify	Justifikatu
+	Keep Lines Together	Mantendu lerroak elkarrekin
+	Keep lines together	Mantendu lerroak elkarrekin
+	Keep Source Formatting	Mantendu jatorrizko formatua
+	Keep Text Only	Mantendu testua soilik
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Gorde pasahitza leku seguru batean: hura gabe inork ezin du dokumentua ireki, ezta Doc4Me-k ere. Utzi bi koadroak hutsik pasahitza kentzeko.
+	Keep with Next	Mantendu hurrengoarekin
+	Keep with next	Mantendu hurrengoarekin
+	Keeps the fonts and formatting of the copied text.	Kopiatutako testuaren letra-tipoak eta formatua mantentzen ditu.
+	Kerning for fonts:	Letra-tipoen kerning-a:
+	Keyboard shortcuts:	Laster-teklak:
+	Keys for this command:	Komando honen teklak:
+	Keywords	Gako-hitzak
+	Korean	Koreera
+	Label changes with:	Etiketa honekin aldatzen da:
+	Label:	Etiketa:
+	Labels	Etiketak
+	Landscape	Horizontala
+	Language	Hizkuntza
+	Language Preferences…	Hizkuntza-hobespenak…
+	Language…	Hizkuntza…
+	Large\nOperator	Eragile\nhandia
+	Largest Only	Handiena soilik
+	Largest only	Handiena soilik
+	Lasso	Lazoa
+	Lasso Select	Lazo bidezko hautapena
+	Last	Azkena
+	Last Cell in Column	Zutabeko azken gelaxka
+	Last Cell in Row	Errenkadako azken gelaxka
+	Last Column	Azken zutabea
+	Last commit	Azken commit-a
+	Last Name	Abizena
+	Last, First; Last, First	Abizena, Izena; Abizena, Izena
+	Latin text font:	Testu latindarraren letra-tipoa:
+	Layout	Maketazioa
+	Layout options for this document	Dokumentu honen maketazio-aukerak
+	Layout Summary	Maketazioaren laburpena
+	Layouts	Diseinuak
+	Leader	Betegarri-karakterea
+	Leave a recipient out of the merge when a field has this value.	Utzi hartzaile bat konbinaziotik kanpo eremu batek balio hau duenean.
+	Leave Equation	Irten ekuaziotik
+	Leave the equation (Esc)	Irten ekuaziotik (Esc)
+	Leave the label out of the caption	Utzi etiketa epigrafetik kanpo
+	Left	Ezkerrean
+	Left Arrow with Text Above	Ezkerreko gezia testua gainean duela
+	Left Arrow with Text Below	Ezkerreko gezia testua azpian duela
+	Left Border	Ezkerreko ertza
+	Left border	Ezkerreko ertza
+	Left Bracket Twice	Ezkerreko kortxetea bi aldiz
+	Left indent	Ezkerreko koska
+	Left Margin	Ezkerreko marjina
+	Left Only	Ezkerrekoa soilik
+	Left only	Ezkerrekoa soilik
+	Left Right Arrow Above	Ezker-eskuin gezia gainean
+	Left Right Arrow with Text Above	Ezker-eskuin gezia testua gainean duela
+	Left Right Arrow with Text Below	Ezker-eskuin gezia testua azpian duela
+	Left Subscript-Superscript	Ezkerreko azpiindizea eta goi-indizea
+	Left-to-right	Ezkerretik eskuinera
+	Left-to-Right Text Direction	Ezkerretik eskuinerako testu-norabidea
+	Left:	Ezkerrean:
+	Leftwards Arrow Above	Ezkerrerako gezia gainean
+	Leftwards Harpoon Above	Ezkerrerako arpoia gainean
+	Legal   8.50" × 14.00"	Legal   8.50" × 14.00"
+	Legal style numbering	Zenbakitze juridikoa
+	Legend	Legenda
+	Less than	Txikiagoa
+	Less than or equal	Txikiagoa edo berdina
+	Letter	Gutuna
+	Letter   8.50" × 11.00"	Letter   8.50" × 11.00"
+	Letter headings	Gutun-izenburuak
+	Letter-Like Symbols	Letra-itxurako ikurrak
+	Letters	Gutunak
+	Level 1	1. maila
+	Level 2	2. maila
+	Level 3	3. maila
+	Level 4	4. maila
+	Level 5	5. maila
+	Level 6	6. maila
+	Level 7	7. maila
+	Level 8	8. maila
+	Level 9	9. maila
+	Level {n}	{n}. maila
+	Level:	Maila:
+	Levels:	Mailak:
+	LibreTranslate server (open source)	LibreTranslate zerbitzaria (kode irekikoa)
+	Ligatures:	Loturak:
+	Light	Argia
+	Light with Outline	Argia ingeradarekin
+	Limit	Limitea
+	Limit and\nLog	Limitea eta\nlogaritmoa
+	Limit consecutive hyphens to:	Mugatu jarraian dauden marratxoak:
+	Limit Example	Limite-adibidea
+	Limit formatting to a selection of styles	Mugatu formatua estilo-hautapen batera
+	Line	Lerroa
+	Line and Page Breaks	Lerro- eta orrialde-jauziak
+	Line and Paragraph Spacing	Lerro- eta paragrafo-tartea
+	Line between	Lerroa artean
+	Line Break	Lerro-jauzia
+	Line breaking	Lerro-zatiketa
+	Line delta	Lerro-delta
+	Line End	Lerroaren amaiera
+	Line Number	Lerro-zenbakia
+	Line Numbering Options…	Lerro-zenbakien aukerak…
+	Line Numbers	Lerro-zenbakiak
+	Line Spacing	Lerroartea
+	Line spacing	Lerroartea
+	Line Spacing Options…	Lerroartearen aukerak…
+	Line spacing:	Lerroartea:
+	Line Start	Lerroaren hasiera
+	Line width:	Lerro-zabalera:
+	Line:	Lerroa:
+	Linear	Lineala
+	Linear Fraction	Zatiki lineala
+	Lines	Lerroak
+	Lines +/−	Lerroak +/−
+	Lines added	Gehitutako lerroak
+	Lines and characters	Lerroak eta karaktereak
+	Lines deleted	Ezabatutako lerroak
+	Lines only	Lerroak soilik
+	Lines per page:	Lerro orrialdeko:
+	Link	Esteka
+	Link entries to their headings	Estekatu sarrerak beren izenburuekin
+	Link level to style:	Estekatu maila estiloarekin:
+	Link to Previous	Estekatu aurrekoarekin
+	Linked style (paragraph and character)	Estilo estekatua (paragrafoa eta karakterea)
+	Links	Estekak
+	Links and References	Estekak eta erreferentziak
+	Link…	Esteka…
+	List	Zerrenda
+	List Commands	Zerrendatu komandoak
+	List Definition	Zerrenda-definizioa
+	List entries	Zerrendako sarrerak
+	List Paragraph	Zerrenda-paragrafoa
+	List styles	Zerrenda-estiloak
+	List Table 3 – Blue	Zerrenda-taula 3 – urdina
+	List Table 3 – Green	Zerrenda-taula 3 – berdea
+	List Table 3 – Orange	Zerrenda-taula 3 – laranja
+	List Table 3 – Purple	Zerrenda-taula 3 – morea
+	Listening… speak now	Entzuten… hitz egin orain
+	Location	Kokapena
+	Location: {path}	Kokapena: {path}
+	Lock aspect ratio	Blokeatu aspektu-erlazioa
+	Lock Fields	Blokeatu eremuak
+	Logarithm	Logaritmoa
+	Logarithm with Base	Logaritmoa oinarriarekin
+	Logical AND	ETA logikoa
+	Logical AND with Limits	ETA logikoa limiteekin
+	Logical OR	EDO logikoa
+	Logical OR with Limits	EDO logikoa limiteekin
+	Long citation:	Aipamen luzea:
+	lowercase	minuskulak
+	Lum:	Arg.:
+	Macros	Makroak
+	Made from the author and year when empty	Egiletik eta urtetik sortua hutsik dagoenean
+	Magazine or newspaper article	Aldizkari- edo egunkari-artikulua
+	Mail Merge	Posta-konbinazioa
+	Mail Merge Helper	Posta-konbinazioaren laguntzailea
+	Mail Merge Helper…	Posta-konbinazioaren laguntzailea…
+	Mailing Labels	Posta-etiketak
+	Mailings	Posta-bidalketak
+	Main entry:	Sarrera nagusia:
+	Make Doc4Me the default for Word documents…	Ezarri Doc4Me Word dokumentuen aplikazio lehenetsi gisa…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Zinta, menuak eta elkarrizketa-koadroak handiago edo txikiago egiten ditu, sistemaren pantaila-eskalatzeaz gain. Dokumentuaren zooma bereizia da.
+	Malay	Malaysiera
+	Manage Sources	Kudeatu iturburuak
+	Manage Styles	Kudeatu estiloak
+	Manage Styles…	Kudeatu estiloak…
+	Manual Hyphenation	Eskuzko hitz-zatiketa
+	Manual hyphenation is complete.	Eskuzko hitz-zatiketa osatu da.
+	Manual Line Break	Eskuzko lerro-jauzia
+	Manual Page Break	Eskuzko orrialde-jauzia
+	Manual…	Eskuz…
+	Many pages	Orrialde asko
+	Margin	Marjina
+	Margins	Marjinak
+	Mark	Markatu
+	Mark All	Markatu guztiak
+	Mark as decorative	Markatu apaingarri gisa
+	Mark Citation	Markatu aipamena
+	Mark Citation…	Markatu aipamena…
+	Mark Entry	Markatu sarrera
+	Mark Entry…	Markatu sarrera…
+	Mark grammar errors as you type	Markatu gramatika-erroreak idatzi ahala
+	Mark Index Entry	Markatu indize-sarrera
+	Mark selected text as:	Markatu hautatutako testua honela:
+	Mark Table of Contents Entry	Markatu aurkibide-sarrera
+	Mark\nCitation	Markatu\naipamena
+	Mark\nEntry	Markatu\nsarrera
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Maiuskulak/minuskulak bereizi
+	Match Fields	Lotu eremuak
+	Match prefix	Aurrizkia bat etorri
+	Match suffix	Atzizkia bat etorri
+	Math AutoCorrect	Zuzenketa automatiko matematikoa
+	Math Input Control	Sarrera matematikoko kontrola
+	Matrices with Brackets	Matrizeak kortxeteekin
+	Matrix	Matrizea
+	Maximize	Maximizatu
+	Maximum	Maximoa
+	Maximum Example	Maximo-adibidea
+	Measured By	Neurtzeko oinarria
+	Measurement units:	Neurri-unitateak:
+	Media	Multimedia
+	Merge	Konbinatu
+	Merge Cells	Konbinatu gelaxkak
+	Merge Formatting	Konbinatu formatua
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Konbinatu formatua aukerak testua iristen den lekuko formatuarekin itsasten du, Mantendu testua soilik aukerak bezala.
+	Merge Record #	Konbinatu erregistro zk.
+	Merge records	Konbinatu erregistroak
+	Merge to New Document	Konbinatu dokumentu berri batean
+	Merge to Printer	Konbinatu inprimagailura
+	Merge to:	Konbinatu hona:
+	Merge type: {type}	Konbinazio mota: {type}
+	Merged PRs	Batutako PRak
+	Merge…	Konbinatu…
+	Mesosphere	Mesosfera
+	Middle	Erdikoa
+	Midline Dots	Erdiko lerroko puntuak
+	Millimeters	Milimetroak
+	Minimum	Minimoa
+	Minus Equal	Ken berdin
+	Mirror indents	Ispilu-koskak
+	Mirrored	Ispilatua
+	Missing document font	Dokumentuko letra-tipoa falta da
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft taldea eta WordCraft-en laguntzaileak.
+	MLA	MLA
+	Model	Eredua
+	Models	Ereduak
+	Moderate	Moderatua
+	Modify Style	Aldatu estiloa
+	Modify Table Style	Aldatu taula-estiloa
+	Modify Table Style…	Aldatu taula-estiloa…
+	Modify…	Aldatu…
+	Mon	Al.
+	Month	Hilabetea
+	More >>	Gehiago >>
+	More Colors…	Kolore gehiago…
+	More Columns…	Zutabe gehiago…
+	More Commands…	Komando gehiago…
+	More Symbols…	Ikur gehiago…
+	More templates →	Txantiloi gehiago →
+	Move Down	Eraman behera
+	Move in Equation	Mugitu ekuazioan
+	Move object with text	Mugitu objektua testuarekin
+	Move or Resize	Mugitu edo aldatu tamaina
+	Move Paragraph Down	Eraman paragrafoa behera
+	Move Paragraph Up	Eraman paragrafoa gora
+	Move Past Citation	Igaro aipamenaz haratago
+	Move Past\nCitation	Igaro aipamenaz\nharatago
+	Move Selected Ink	Mugitu hautatutako tinta
+	Move Text	Mugitu testua
+	Move to where?	Nora mugitu?
+	Move Up	Eraman gora
+	Move with Text	Mugitu testuarekin
+	Move with text	Mugitu testuarekin
+	Moved from	Hemendik mugitua
+	Moved to	Hona mugitua
+	Moves	Mugimenduak
+	Multilevel List	Maila anitzeko zerrenda
+	Multiple Pages	Orrialde anitz
+	My Add-ins	Nire gehigarriak
+	MyMemory (free, no account)	MyMemory (doakoa, konturik gabe)
+	Name	Izena
+	Name (A–Z)	Izena (A–Z)
+	Name of the file this document is saved as	Dokumentu hau gordeta dagoen fitxategiaren izena
+	Name:	Izena:
+	Narrow  0.5" all	Estua  0.5" guztiak
+	Natural Logarithm	Logaritmo naturala
+	Nature	Natura
+	Navigation	Nabigazioa
+	Navigation Pane	Nabigazio-panela
+	Negated Relations	Erlazio ukatuak
+	New	Berria
+	New Comment	Iruzkin berria
+	New comments and tracked changes are recorded under this name and these initials.	Iruzkin berriak eta aldaketen jarraipena izen eta inizial hauekin erregistratzen dira.
+	New Document	Dokumentu berria
+	New document	Dokumentu berria
+	New Drawing Canvas	Marrazki-oihal berria
+	New Entry	Sarrera berria
+	New Folder	Karpeta berria
+	New from Template	Berria txantiloitik
+	New Group	Talde berria
+	New Label	Etiketa berria
+	New Label…	Etiketa berria…
+	New Paragraph	Paragrafo berria
+	New shortcut:	Lasterbide berria:
+	New Style…	Estilo berria…
+	New Tab	Fitxa berria
+	New Table Style	Taula-estilo berria
+	New Table Style…	Taula-estilo berria…
+	New Window	Leiho berria
+	New word	Hitz berria
+	New\nComment	Iruzkin\nberria
+	New\nWindow	Leiho\nberria
+	New…	Berria…
+	Next	Hurrengoa
+	Next Change	Hurrengo aldaketa
+	Next Comment	Hurrengo iruzkina
+	Next Field	Hurrengo eremua
+	Next Footnote	Hurrengo oin-oharra
+	Next Page	Hurrengo orrialdea
+	Next Record	Hurrengo erregistroa
+	Next Section	Hurrengo atala
+	Next Sentence	Hurrengo esaldia
+	Next sentence	Hurrengo esaldia
+	Next Window	Hurrengo leihoa
+	No	Ez
+	No accessibility issues found.	Ez da irisgarritasun-arazorik aurkitu.
+	No add-ins are listed yet.	Oraindik ez dago gehigarririk zerrendan.
+	No add-ins yet. Add one from the Store.	Oraindik ez dago gehigarririk. Gehitu bat dendatik.
+	No Border	Ertzik ez
+	No changes (read only)	Aldaketarik ez (irakurtzeko soilik)
+	No Color	Kolorerik ez
+	No contributor data was built into this copy.	Kopia honetan ez da laguntzaileen daturik sartu.
+	No data source yet.	Oraindik ez dago datu-iturbururik.
+	No errors found: every merge field is in the recipient list.	Ez da errorerik aurkitu: konbinazio-eremu guztiak hartzaileen zerrendan daude.
+	No Fill	Betegarririk ez
+	No Glow	Distira-ertzik ez
+	No grid	Saretarik ez
+	No icons match your search.	Ez dago bilaketarekin bat datorren ikonorik.
+	No limit	Mugarik ez
+	No Line	Lerrorik ez
+	No Markup	Markarik ez
+	No model credits were built into this copy.	Kopia honetan ez da ereduen kreditu-daturik sartu.
+	No Outline	Ingeradarik ez
+	No Paragraph Space	Paragrafo-tarterik ez
+	No pictures found.	Ez da irudirik aurkitu.
+	No Reflection	Islarik ez
+	No revisions	Berrikuspenik ez
+	No Shadow	Itzalik ez
+	No Soft Edges	Ertz leunik ez
+	No sources yet.	Oraindik ez dago iturbururik.
+	No Spacing	Tarterik ez
+	no speech program on this system	ez dago hizketa-programarik sistema honetan
+	No templates match your search.	Ez dago bilaketarekin bat datorren txantiloirik.
+	No Transform	Eraldaketarik ez
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Oraindik ez dago hitzik. Gaizki idatzitako hitz batean Gehitu hiztegira sakatuz gero, hemen agertuko da.
+	No-Width Non Break	Zabalerarik gabeko jauzi ezina
+	No-Width Optional Break	Zabalerarik gabeko aukerako jauzia
+	Nonbreaking Hyphen	Marratxo zatiezina
+	Nonbreaking Space	Zuriune zatiezina
+	None	Bat ere ez
+	Normal	Normala
+	Normal  1" all	Normala  1" guztiak
+	Normal Indent	Koska normala
+	Normal probability density	Probabilitate-dentsitate normala
+	Normal speed	Abiadura normala
+	Normal Style	Estilo normala
+	Normal Table	Taula normala
+	Normal Text	Testu normala
+	Normal Word Document	Word dokumentu normala
+	North	Iparraldea
+	Norwegian (Bokmål)	Norvegiera (bokmål)
+	Not	Ez
+	Not available right now	Ez dago erabilgarri orain
+	Not equal to	Ez berdina
+	Not linked: click a text box	Estekatu gabe: egin klik testu-koadro batean
+	Not saved	Gorde gabe
+	Not saved yet	Oraindik gorde gabe
+	Not used by any command	Ez du inongo komandok erabiltzen
+	Not {name}	Ez {name}
+	Nothing	Ezer ez
+	Nothing collected yet. Items you copy or cut appear here.	Oraindik ez da ezer bildu. Kopiatzen edo ebakitzen dituzun elementuak hemen agertzen dira.
+	Now used by {command}	Orain erabiltzen du: {command}
+	Nudge	Mugitu apur bat
+	Num Occurrences	Agerraldi kopurua
+	Number	Zenbakia
+	Number alignment:	Zenbakiaren lerrokatzea:
+	Number format	Zenbaki-formatua
+	Number of columns:	Zutabe kopurua:
+	Number of rows:	Errenkada kopurua:
+	Number of the page the field sits on	Eremua dagoen orrialdearen zenbakia
+	Number of the section the field sits in	Eremua dagoen atalaren zenbakia
+	Number style for this level:	Maila honetako zenbaki-estiloa:
+	Number the equation; the number sits at the right margin (or type # then the number)	Zenbakitu ekuazioa; zenbakia eskuineko marjinan kokatzen da (edo idatzi # eta gero zenbakia)
+	Number type:	Zenbaki mota:
+	Number:	Zenbakia:
+	Numbering	Zenbakitzea
+	Numbering:	Zenbakitzea:
+	Numbering…	Zenbakitzea…
+	Numerals	Zenbakiak
+	Numerals:	Zenbakiak:
+	n×n Identity Matrix	n×n identitate-matrizea
+	n×n Matrix	n×n matrizea
+	Object	Objektua
+	Odd Page	Orrialde bakoitia
+	Odd pages only	Orrialde bakoitiak soilik
+	Off	Desaktibatuta
+	Office	Office
+	Office 2003 Default	Office 2003 lehenetsia
+	Offset (pt):	Desplazamendua (pt):
+	Offset: Bottom	Desplazamendua: behean
+	Offset: Bottom Left	Desplazamendua: behean ezkerrean
+	Offset: Bottom Right	Desplazamendua: behean eskuinean
+	Offset: Center	Desplazamendua: erdian
+	Offset: Left	Desplazamendua: ezkerrean
+	Offset: Right	Desplazamendua: eskuinean
+	Offset: Top	Desplazamendua: goian
+	Offset: Top Left	Desplazamendua: goian ezkerrean
+	Offset: Top Right	Desplazamendua: goian eskuinean
+	OK	Ados
+	Omit	Kendu
+	On	Aktibatuta
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Aktibatuta: kurtsorea irristatuz doa leku berrira idaztean edo gezi-teklak erabiltzean, eta keinua leunki itzaltzen da. Desaktibatuta: jauzi egiten du eta keinu egiten du piztu eta itzali.
+	One	Bat
+	One half	Erdia
+	One label per recipient	Etiketa bat hartzaile bakoitzeko
+	One line per item. Enter adds an item.	Lerro bat elementu bakoitzeko. Sartu teklak elementu bat gehitzen du.
+	One Page	Orrialde bat
+	Online Pictures	Lineako irudiak
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Lineako irudiak (Openverse), Itzuli (MyMemory edo zure LibreTranslate zerbitzaria), Eskuratu gehigarriak eta Diktatu aukeraren hizketa-ereduaren deskarga Internetera konektatzen dira, eta erabiltzen dituzunean soilik. Desaktibatuta, Doc4Me-k ez du konexiorik egiten bere kabuz.
+	Online Pictures…	Lineako irudiak…
+	Online services are turned off (File › Options › Trust Center).	Lineako zerbitzuak desaktibatuta daude (Fitxategia › Aukerak › Konfiantza-zentroa).
+	Online Video	Lineako bideoa
+	Only allow this kind of editing:	Baimendu edizio mota hau soilik:
+	Only comments can be added, except in regions marked editable.	Iruzkinak soilik gehi daitezke, editagarri gisa markatutako eskualdeetan izan ezik.
+	Only form fields can be filled in.	Inprimakietako eremuak soilik bete daitezke.
+	only https addresses can be used	https helbideak soilik erabil daitezke
+	Only pictures I may use commercially	Komertzialki erabil ditzakedan irudiak soilik
+	Only the allowed styles can be applied.	Baimendutako estiloak soilik aplika daitezke.
+	Only web (http, https) and email (mailto) links can be followed	Web (http, https) eta posta elektronikoko (mailto) estekak soilik jarrai daitezke
+	Open	Ireki
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Ireki fitxategi bat Doc4Me-ren arakatzailearekin sistemaren fitxategi-elkarrizketa agertzen ez denean.
+	Open Data Source…	Ireki datu-iturburua…
+	Open Hyperlink	Ireki hiperesteka
+	OpenDocument Text (*.odt)	OpenDocument testua (*.odt)
+	Opening print dialog…	Inprimatze-elkarrizketa irekitzen…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Hemendik aurrera .docx, .doc, .rtf eta .odt fitxategiak eta Word txantiloiak Doc4Me-rekin irekiko dira.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Ezarpenak › Aplikazio lehenetsiak irekitzen du; han aukeratu Doc4Me .docx eta beste dokumentu motetarako.
+	Open…	Ireki…
+	Operator	Eragilea
+	Operator Structures	Eragile-egiturak
+	Operators	Eragileak
+	Optional Hyphen	Aukerako marratxoa
+	Options	Aukerak
+	Options…	Aukerak…
+	Or	Edo
+	Or save a copy in another format:	Edo gorde kopia bat beste formatu batean:
+	Ordinals (1st) as superscript	Ordinalak (1st) goi-indize gisa
+	Organizer	Antolatzailea
+	Organizer…	Antolatzailea…
+	Orientation	Orientazioa
+	Original document	Jatorrizko dokumentua
+	Other	Bestelakoa
+	Other Authorities	Beste autoritate batzuk
+	Other Large Operators	Beste eragile handi batzuk
+	Other paragraph styles	Beste paragrafo-estilo batzuk
+	Other styles and their TOC level:	Beste estilo batzuk eta haien aurkibide-maila:
+	Otherwise insert:	Bestela, txertatu:
+	Outline	Eskema
+	Outline Level	Eskema-maila
+	Outline level	Eskema-maila
+	Outline levels	Eskema-mailak
+	Outline State	Eskemaren egoera
+	Outline Tools	Eskema-tresnak
+	Outlining	Eskematzea
+	Outside	Kanpoan
+	Outside border	Kanpoko ertza
+	Outside Borders	Kanpoko ertzak
+	Outside Margin	Kanpoko marjina
+	Outside:	Kanpoan:
+	Outward Brackets	Kanporako kortxeteak
+	Oval	Obaloa
+	Overbar	Goiko barra
+	Overbars and Underbars	Goiko eta beheko barrak
+	Overbrace	Goiko giltza
+	Overtype	Gainidatzi
+	Overtype (typing replaces the characters after the caret)	Gainidatzi (idazteak kurtsorearen ondorengo karaktereak ordezten ditu)
+	Page	Orrialdea
+	Page Background	Orrialde-atzeko planoa
+	Page Border	Orrialde-ertza
+	Page Borders	Orrialde-ertzak
+	Page Break	Orrialde-jauzia
+	Page Break Before	Orrialde-jauzia aurretik
+	Page break before	Orrialde-jauzia aurretik
+	Page Breaks	Orrialde-jauziak
+	Page Color	Orrialde-kolorea
+	Page display	Orrialde-bistaratzea
+	Page Down	Orrialdea behera
+	Page image (*.jpg, *.jpeg)	Orrialde-irudia (*.jpg, *.jpeg)
+	Page image (*.png)	Orrialde-irudia (*.png)
+	Page Movement	Orrialde-mugimendua
+	Page Number	Orrialde-zenbakia
+	Page number style	Orrialde-zenbakiaren estiloa
+	Page numbers at the right margin	Orrialde-zenbakiak eskuineko marjinan
+	Page on which a bookmarked passage falls	Laster-markadun pasartea dagoen orrialdea
+	Page Setup	Orrialde-konfigurazioa
+	Page title	Orrialdearen izenburua
+	Page Up	Orrialdea gora
+	Page Width	Orrialde-zabalera
+	Page width	Orrialde-zabalera
+	Page X of Y	X orrialdea / Y
+	Page {page}	{page}. orrialdea
+	Page {page} of {pages}	{page}. orrialdea / {pages}
+	Page\nBorders	Orrialde-\nertzak
+	Page\nColor	Orrialde-\nkolorea
+	Page\nNumber	Orrialde-\nzenbakia
+	Pages	Orrialdeak
+	Pages like 1-3, 5	Orrialdeak, adib. 1-3, 5
+	Pages of bookmark:	Laster-markaren orrialdeak:
+	Paragraph	Paragrafoa
+	Paragraph Character	Paragrafo-karakterea
+	Paragraph Details	Paragrafoaren xehetasunak
+	Paragraph Down	Paragrafoa behera
+	Paragraph Mark	Paragrafo-marka
+	Paragraph marks	Paragrafo-markak
+	Paragraph Settings	Paragrafo-ezarpenak
+	Paragraph Spacing	Paragrafo-tartea
+	Paragraph style	Paragrafo-estiloa
+	Paragraph Up	Paragrafoa gora
+	Paragraphs	Paragrafoak
+	Paragraph…	Paragrafoa…
+	Parentheses	Parentesiak
+	Parentheses with Separator	Parentesiak bereizlearekin
+	Partial Differential	Diferentzial partziala
+	Password	Pasahitza
+	Password:	Pasahitza:
+	Paste	Itsatsi
+	Paste All	Itsatsi guztiak
+	Paste as:	Itsatsi honela:
+	Paste Clipboard Item	Itsatsi arbeleko elementua
+	Paste Formatting	Itsatsi formatua
+	Paste Special	Itsatsi berezia
+	Paste Special…	Itsatsi berezia…
+	Paste Spike	Itsatsi bilduma
+	Paste: Keep Text Only	Itsatsi: mantendu testua soilik
+	Paste: Merge Formatting	Itsatsi: konbinatu formatua
+	Pasting between documents:	Dokumentuen artean itsastean:
+	Pasting from other programs:	Beste programetatik itsastean:
+	Pasting within the same document:	Dokumentu berean itsastean:
+	Pause	Pausatu
+	Paused	Pausatuta
+	PDF document (*.pdf)	PDF dokumentua (*.pdf)
+	Pen	Luma
+	Pencil	Arkatza
+	Pens	Lumak
+	People	Pertsonak
+	Periodical	Aldizkako argitalpena
+	Personalize	Pertsonalizatu
+	Phonetic Guide	Gida fonetikoa
+	Pi Over 2	Pi zati 2
+	Picas	Pikak
+	Pick a custom group (New Group makes one)	Aukeratu talde pertsonalizatu bat (Talde berria aukerak bat sortzen du)
+	Pick a field from the list	Aukeratu zerrendako eremu bat
+	Picture	Irudia
+	Picture Border	Irudiaren ertza
+	Picture Content Control	Irudiaren eduki-kontrola
+	Picture Format	Irudi-formatua
+	Picture Styles	Irudi-estiloak
+	Pictures	Irudiak
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Openverse-ko irudiak. Errespetatu irudi bakoitzaren lizentzia: Doc4Me-k kreditu-lerro bat gehitzen du azpian.
+	Pie	Tarta
+	Placeholder Name	Leku-markaren izena
+	Placeholder text	Leku-markaren testua
+	Plain Table 1	Taula arrunta 1
+	Plain text (*.txt)	Testu arrunta (*.txt)
+	Plain Text Content Control	Testu arruntaren eduki-kontrola
+	Play	Erreproduzitu
+	Play Video	Erreproduzitu bideoa
+	Play/Pause	Erreproduzitu/pausatu
+	Plus Equal	Gehi berdin
+	Points	Puntuak
+	points and above	puntu eta gehiago
+	Polish	Poloniera
+	Portrait	Bertikala
+	Portuguese (Brazil)	Portugesa (Brasil)
+	Portuguese (Portugal)	Portugesa (Portugal)
+	Position	Posizioa
+	Position:	Posizioa:
+	Positioning…	Kokatzea…
+	Possible spelling mistake	Ortografia-akats posiblea
+	Postal Code	Posta-kodea
+	Power series of (1+x)ⁿ	(1+x)ⁿ-ren berretura-seriea
+	Preferred width:	Zabalera hobetsia:
+	Preserve	Gorde
+	Preserve formatting during updates	Gorde formatua eguneratzean
+	Presets	Aurrezarpenak
+	Press a key combination	Sakatu tekla-konbinazio bat
+	Preview	Aurrebista
+	Preview Results	Aurreikusi emaitzak
+	Preview\nResults	Aurreikusi\nemaitzak
+	Previous	Aurrekoa
+	Previous 1 or More	Aurreko 1 edo gehiago
+	Previous Change	Aurreko aldaketa
+	Previous Comment	Aurreko iruzkina
+	Previous Field	Aurreko eremua
+	Previous Footnote	Aurreko oin-oharra
+	Previous Page	Aurreko orrialdea
+	Previous Record	Aurreko erregistroa
+	Previous Section	Aurreko atala
+	Previous Sentence	Aurreko esaldia
+	Previous sentence	Aurreko esaldia
+	Previous Window	Aurreko leihoa
+	Print	Inprimatu
+	Print blank lines when data fields are empty	Inprimatu lerro hutsak datu-eremuak hutsik daudenean
+	Print Documents	Inprimatu dokumentuak
+	Print Documents…	Inprimatu dokumentuak…
+	Print failed: {error}	Inprimatzeak huts egin du: {error}
+	Print Layout	Inprimatze-diseinua
+	Print Markup	Inprimatu markak
+	Print the page color	Inprimatu orrialde-kolorea
+	Print to PDF	Inprimatu PDFra
+	Print\nLayout	Inprimatze-\ndiseinua
+	Printer	Inprimagailua
+	Printing	Inprimatzea
+	Process	Prozesua
+	Product	Produktua
+	Product of A	A-ren biderkadura
+	Product with Limits	Biderkadura limiteekin
+	Product with Lower Limit	Biderkadura beheko limitearekin
+	Product with Subscript-Superscript Limits	Biderkadura azpiindize eta goi-indize limiteekin
+	Products and Coproducts	Biderkadurak eta kobiderkadurak
+	Professional	Profesionala
+	Promote	Igo maila
+	Promote to Heading 1	Igo 1. izenburura
+	Proofing	Zuzenketa
+	Proofing Issues	Zuzenketa-arazoak
+	Proofing language	Zuzenketa-hizkuntza
+	Properties	Propietateak
+	Protect	Babestu
+	Protect Document	Babestu dokumentua
+	PRs	PRak
+	pt	pt
+	Publisher	Argitaletxea
+	Punctuation	Puntuazioa
+	Put the caret in a content control first.	Jarri kurtsorea eduki-kontrol batean lehenik.
+	Put the default commands back on the Quick Access Toolbar?	Berrezarri komando lehenetsiak sarbide azkarreko tresna-barran?
+	Pyramid	Piramidea
+	Quadratic Root	Erro karratua
+	Query Options…	Kontsulta-aukerak…
+	Quick Access Toolbar	Sarbide azkarreko tresna-barra
+	Quick Parts	Zati azkarrak
+	Quick Tables	Taula azkarrak
+	Quote	Aipua
+	Radical	Errokizuna
+	Radical with Degree	Errokizuna mailarekin
+	Radicals	Errokizunak
+	Raised/lowered	Goratua/beheratua
+	Read Aloud	Irakurri ozen
+	Read Aloud couldn't start the speech program: {reason}	Irakurri ozen aukerak ezin izan du hizketa-programa abiarazi: {reason}
+	Read Aloud couldn't start: {reason}	Irakurri ozen aukerak ezin izan du abiarazi: {reason}
+	Read Aloud isn't available in the browser	Irakurri ozen ez dago erabilgarri arakatzailean
+	Read Aloud Status	Irakurri ozen aukeraren egoera
+	Read Aloud stopped: {reason}	Irakurri ozen gelditu da: {reason}
+	Read Mode	Irakurketa modua
+	Read\nAloud	Irakurri\nozen
+	Read\nMode	Irakurketa\nmodua
+	Reading	Irakurketa
+	Reading Column Width	Irakurketa-zutabearen zabalera
+	Reading Highlight	Irakurketa-nabarmentzea
+	Reading Line Spacing	Irakurketa-lerroartea
+	Reading Mode	Irakurketa modua
+	Reading Speed	Irakurketa-abiadura
+	Reading Text Size	Irakurketa-testuaren tamaina
+	Reads the clipboard's rich text and keeps its formatting.	Arbeleko testu aberatsa irakurtzen du eta haren formatua mantentzen du.
+	Reads the clipboard's web content and keeps its formatting.	Arbeleko web-edukia irakurtzen du eta haren formatua mantentzen du.
+	Real name	Benetako izena
+	Recent	Azkenak
+	Recent Colors	Azken koloreak
+	Recent documents to show:	Erakutsi beharreko azken dokumentuak:
+	Recently used symbols:	Azken aldian erabilitako ikurrak:
+	Recipient List	Hartzaileen zerrenda
+	Recipient lists	Hartzaile-zerrendak
+	Recipients: {count}	Hartzaileak: {count}
+	Recognized (you can correct it):	Ezagututakoa (zuzen dezakezu):
+	Recognized Functions	Ezagututako funtzioak
+	Recognized Functions…	Ezagututako funtzioak…
+	Recolor a one-color picture, such as an icon	Koloreztatu berriro kolore bakarreko irudi bat, ikono bat adibidez
+	Recolor Selected Ink	Koloreztatu berriro hautatutako tinta
+	Record Macro	Grabatu makroa
+	Recover Unsaved Documents	Berreskuratu gorde gabeko dokumentuak
+	Rectangle	Laukizuzena
+	Red:	Gorria:
+	Redo	Berregin
+	Reduce Hanging Indent	Txikitu koska frantsesa
+	References	Erreferentziak
+	Reflection	Isla
+	Refresh	Freskatu
+	Registered	Erregistratua
+	Registered Sign	Marka erregistratuaren ikurra
+	Regular expressions	Adierazpen erregularrak
+	Regulations	Araudiak
+	Reject	Baztertu
+	Reject All	Baztertu guztiak
+	Reject All Changes	Baztertu aldaketa guztiak
+	Reject Change	Baztertu aldaketa
+	Relationship	Erlazioa
+	relative to	honekiko
+	Relative to:	Honekiko:
+	Relaxed	Lasaia
+	Remove	Kendu
+	Remove Added Font	Kendu gehitutako letra-tipoa
+	Remove Background	Kendu atzeko planoa
+	Remove Content Control	Kendu eduki-kontrola
+	Remove every custom shortcut and restore the built-in keys?	Kendu lasterbide pertsonalizatu guztiak eta berrezarri tekla integratuak?
+	Remove every custom tab and group and show all tabs again?	Kendu fitxa eta talde pertsonalizatu guztiak eta erakutsi berriro fitxa guztiak?
+	Remove field	Kendu eremua
+	Remove Field Name	Kendu eremu-izena
+	Remove Footer	Kendu orri-oina
+	Remove from Quick Access Toolbar	Kendu sarbide azkarreko tresna-barratik
+	Remove Header	Kendu goiburua
+	Remove Hyperlink	Kendu hiperesteka
+	Remove Password	Kendu pasahitza
+	Remove Pen	Kendu luma
+	Remove Positioning	Kendu kokapena
+	Remove recipient	Kendu hartzailea
+	Remove row	Kendu errenkada
+	Remove series	Kendu seriea
+	Remove Space After Paragraph	Kendu tartea paragrafoaren ondoren
+	Remove Table of Contents	Kendu aurkibidea
+	Remove the control once edited	Kendu kontrola editatu ondoren
+	Remove the space before the punctuation	Kendu puntuazioaren aurreko zuriunea
+	Remove Watermark	Kendu ur-marka
+	Rename Style	Aldatu estiloaren izena
+	Rename…	Aldatu izena…
+	Reopen	Ireki berriro
+	Repeat	Errepikatu
+	Repeat as header row on each page	Errepikatu goiburu-errenkada gisa orrialde bakoitzean
+	Repeat Header Rows	Errepikatu goiburu-errenkadak
+	Repeated words	Errepikatutako hitzak
+	Repeating Section Content Control	Atal errepikakorraren eduki-kontrola
+	Replace	Ordeztu
+	Replace All	Ordeztu guztiak
+	Replace as you type	Ordeztu idatzi ahala
+	Replace Document Text	Ordeztu dokumentuaren testua
+	Replace text as you type	Ordeztu testua idatzi ahala
+	Replace with:	Ordeztu honekin:
+	Replace:	Ordeztu:
+	Replay	Erreproduzitu berriro
+	Reply	Erantzun
+	Report	Txostena
+	Research	Ikerketa
+	Researcher	Ikertzailea
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Ikertzaileak lineako zerbitzu bat behar du; Doc4Me-k zure dokumentuak lineaz kanpo mantentzen ditu.
+	Reset	Berrezarri
+	Reset All	Berrezarri guztiak
+	Reset All…	Berrezarri guztiak…
+	Reset Character Formatting	Berrezarri karaktere-formatua
+	Reset Crop	Berrezarri moztea
+	Reset Graphic	Berrezarri grafikoa
+	Reset Paragraph Formatting	Berrezarri paragrafo-formatua
+	Reset Picture	Berrezarri irudia
+	Reset to Normal	Berrezarri normalera
+	Reset\nGraphic	Berrezarri\ngrafikoa
+	Reset…	Berrezarri…
+	Resize Table by Dragging	Aldatu taularen tamaina arrastatuz
+	Resolve	Ebatzi
+	Resolved	Ebatzita
+	Restart at 1	Hasi berriro 1etik
+	Restart Each Page	Hasi berriro orrialde bakoitzean
+	Restart Each Section	Hasi berriro atal bakoitzean
+	Restart list after:	Hasi berriro zerrenda honen ondoren:
+	Restore	Leheneratu
+	Restore Defaults	Leheneratu balio lehenetsiak
+	Restore Down	Leheneratu tamaina
+	Restore to Normal Word Document	Leheneratu Word dokumentu normalera
+	Restrict Editing	Murriztu edizioa
+	Restrict\nEditing	Murriztu\nedizioa
+	Result	Emaitza
+	Results	Emaitzak
+	Return address labels	Itzulera-helbidearen etiketak
+	Return address:	Itzulera-helbidea:
+	Reverse the order	Alderantzikatu ordena
+	Review	Berrikusi
+	Review AutoFormat Changes	Berrikusi formatu automatikoaren aldaketak
+	Review Changes…	Berrikusi aldaketak…
+	Reviewing	Berrikusketa
+	Reviewing Pane	Berrikuspen-panela
+	Reviewing — edits become suggestions	Berrikusketa — edizioak iradokizun bihurtzen dira
+	Revised document	Dokumentu berrikusia
+	Revisions	Berrikuspenak
+	Rewind	Atzeratu
+	Ribbon	Zinta
+	Ribbon and Quick Access Toolbar:	Zinta eta sarbide azkarreko tresna-barra:
+	Ribbon tabs	Zintaren fitxak
+	Rich Text Content Control	Testu aberatsaren eduki-kontrola
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Eskuinean
+	Right (vertical)	Eskuinean (bertikala)
+	Right align page numbers	Lerrokatu orrialde-zenbakiak eskuinean
+	Right Arrow with Text Above	Eskuineko gezia testua gainean duela
+	Right Arrow with Text Below	Eskuineko gezia testua azpian duela
+	Right Border	Eskuineko ertza
+	Right border	Eskuineko ertza
+	Right Bracket Twice	Eskuineko kortxetea bi aldiz
+	Right indent	Eskuineko koska
+	Right Margin	Eskuineko marjina
+	Right Only	Eskuinekoa soilik
+	Right only	Eskuinekoa soilik
+	Right-to-left	Eskuinetik ezkerrera
+	Right-to-Left Section	Eskuinetik ezkerrerako atala
+	Right-to-Left Table	Eskuinetik ezkerrerako taula
+	Right-to-Left Text Direction	Eskuinetik ezkerrerako testu-norabidea
+	Right:	Eskuinean:
+	Rightwards Arrow Above	Eskuinerako gezia gainean
+	Rightwards Harpoon Above	Eskuinerako arpoia gainean
+	Roots of ax²+bx+c	ax²+bx+c-ren erroak
+	Rotate	Biratu
+	Rotate all text 270°	Biratu testu guztia 270°
+	Rotate all text 90°	Biratu testu guztia 90°
+	Rotate Left 90°	Biratu 90° ezkerrera
+	Rotate Right 90°	Biratu 90° eskuinera
+	Rotation	Biraketa
+	Rotation:	Biraketa:
+	Rounded Rectangle	Laukizuzen biribildua
+	Row	Errenkada
+	Row:	Errenkada:
+	Rows & Columns	Errenkadak eta zutabeak
+	Ruby text:	Ruby testua:
+	Ruler	Erregela
+	Rules	Arauak
+	Run	Exekutatu
+	Run-in	Lerroan jarraian
+	Russian	Errusiera
+	Résumé	Curriculuma
+	Same as the whole table	Taula osoaren berdina
+	SAMPLE	LAGINA
+	Sat:	Ase.:
+	Save	Gorde
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Gorde kopia bat beste formatu batean. Inprimatzeko, edozein ikustailetatik inprima dezakezun PDF bat erabiltzen da.
+	Save As	Gorde honela
+	Save as Template	Gorde txantiloi gisa
+	Save documents	Gorde dokumentuak
+	Save the document to turn on AutoSave	Gorde dokumentua gordetze automatikoa aktibatzeko
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Gorde dokumentua gordetze automatikoa aktibatzeko (ireki besterik egin ez duzun fitxategi bat ez da berridazten gorde arte)
+	Save these pages as PDF…	Gorde orrialde hauek PDF gisa…
+	Save Version	Gorde bertsioa
+	Saved	Gordeta
+	Scale	Eskala
+	Scale Drawing	Eskalatu marrazkia
+	Scatter	Sakabanaketa
+	Screen Clipping	Pantaila-ebakina
+	Screen clipping didn't work: {reason}	Pantaila-ebakinak ez du funtzionatu: {reason}
+	Screen clipping ended without a picture.	Pantaila-ebakina irudirik gabe amaitu da.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Pantaila-ebakina ez dago erabilgarri hemen. Kopiatu pantailaren irudi bat eta itsatsi.
+	Screenshot	Pantaila-argazkia
+	Script	Idazkera
+	Scripts	Scriptak
+	Scroll ribbon left	Korritu zinta ezkerrera
+	Scroll ribbon right	Korritu zinta eskuinera
+	Search	Bilatu
+	Search Commands	Bilatu komandoak
+	Search commands and help	Bilatu komandoak eta laguntza
+	Search document	Bilatu dokumentuan
+	Search for templates	Bilatu txantiloiak
+	Search icons	Bilatu ikonoak
+	Search Openverse (Creative Commons pictures)	Bilatu Openverse-n (Creative Commons irudiak)
+	Search Options	Bilaketa-aukerak
+	Searching…	Bilatzen…
+	Secant Function	Sekante funtzioa
+	Section Break	Atal-jauzia
+	Section Breaks	Atal-jauziak
+	Section Character	Atal-karakterea
+	Section direction:	Atalaren norabidea:
+	Section Mark	Atal-marka
+	Section Properties	Atalaren propietateak
+	Sections	Atalak
+	See	Ikus
+	Select	Hautatu
+	Select a picture, shape, chart or table to describe it.	Hautatu irudi, forma, grafiko edo taula bat hura deskribatzeko.
+	Select All	Hautatu guztiak
+	Select Cell	Hautatu gelaxka
+	Select Floating Shapes	Hautatu forma flotatzaileak
+	Select Heading and Content	Hautatu izenburua eta edukia
+	Select Line	Hautatu lerroa
+	Select Objects	Hautatu objektuak
+	Select Paragraph	Hautatu paragrafoa
+	Select Range	Hautatu barrutia
+	Select Recipients	Hautatu hartzaileak
+	Select recipients first to choose from their fields.	Hautatu hartzaileak lehenik haien eremuetatik aukeratzeko.
+	Select recipients first to match their fields.	Hautatu hartzaileak lehenik haien eremuak lotzeko.
+	Select Row	Hautatu errenkada
+	Select Sentence	Hautatu esaldia
+	Select Table	Hautatu taula
+	Select Text	Hautatu testua
+	Select text in the document to translate it.	Hautatu dokumentuko testua hura itzultzeko.
+	Select Text with Similar Formatting	Hautatu antzeko formatua duen testua
+	Select text, then tick who can still edit it.	Hautatu testua, eta markatu nork editatu dezakeen oraindik.
+	Select the part of the screen to insert.	Hautatu txertatu beharreko pantaila-zatia.
+	Select Word	Hautatu hitza
+	Select\nRecipients	Hautatu\nhartzaileak
+	Selected Fields	Hautatutako eremuak
+	Selected pages	Hautatutako orrialdeak
+	Selection	Hautapena
+	Selection Pane	Hautapen-panela
+	Send Backward	Eraman atzerago
+	Send the document straight to the system print dialog, or save a copy in another format below.	Bidali dokumentua zuzenean sistemaren inprimatze-elkarrizketara, edo gorde kopia bat beste formatu batean behean.
+	Sentence	Esaldia
+	Sentence case.	Esaldi-maiuskula.
+	Separator:	Bereizlea:
+	Sequence name:	Sekuentziaren izena:
+	Serbian	Serbiera
+	Serbian (Cyrillic)	Serbiera (zirilikoa)
+	Serbian (Latin)	Serbiera (latindarra)
+	Series name	Seriearen izena
+	Series {n}	{n}. seriea
+	Server address (https://…)	Zerbitzariaren helbidea (https://…)
+	Set	Ezarri
+	Set As Default	Ezarri lehenetsi gisa
+	Set as Default	Ezarri lehenetsi gisa
+	Set Caret	Ezarri kurtsorea
+	Set Character Formatting	Ezarri karaktere-formatua
+	Set Date	Ezarri data
+	Set Equation	Ezarri ekuazioa
+	Set Numbering Value	Ezarri zenbakitze-balioa
+	Set Paragraph Formatting	Ezarri paragrafo-formatua
+	Set Proofing Language…	Ezarri zuzenketa-hizkuntza…
+	Setting:	Ezarpena:
+	Settings…	Ezarpenak…
+	Shading	Itzaldura
+	Shadow	Itzala
+	Shadow, glow and soft edges	Itzala, distira-ertza eta ertz leunak
+	Shape Effects	Forma-efektuak
+	Shape Fill	Formaren betegarria
+	Shape Format	Forma-formatua
+	Shape Outline	Formaren ingerada
+	Shape Styles	Forma-estiloak
+	Shapes	Formak
+	Share	Partekatu
+	Sheet:	Orria:
+	Shift cells down	Desplazatu gelaxkak behera
+	Shift cells right	Desplazatu gelaxkak eskuinera
+	Shift+Tab	Shift+Tab
+	Shipping labels	Bidalketa-etiketak
+	Short citation:	Aipamen laburra:
+	Shortcut key:	Laster-tekla:
+	Show	Erakutsi
+	Show all formatting marks	Erakutsi formatu-marka guztiak
+	Show All Levels	Erakutsi maila guztiak
+	Show all revisions inline	Erakutsi berrikuspen guztiak lerroan
+	Show changes at:	Erakutsi aldaketak hemen:
+	Show changes in:	Erakutsi aldaketak honetan:
+	Show Comments	Erakutsi iruzkinak
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Erakutsi dokumentuak koloreak alderantzikatuta, Ikusi › Aldatu modua bezala. Gordetzea, inprimatzea eta PDFak ez dira aldatzen.
+	Show every bibliography field	Erakutsi bibliografiako eremu guztiak
+	Show First Line Only	Erakutsi lehen lerroa soilik
+	Show in the Styles gallery	Erakutsi estilo-galerian
+	Show KeyTips (Alt or F10)	Erakutsi tekla-aholkuak (Alt edo F10)
+	Show Level	Erakutsi maila
+	Show Level 1	Erakutsi 1. maila
+	Show Level 2	Erakutsi 2. maila
+	Show Level 3	Erakutsi 3. maila
+	Show Level 4	Erakutsi 4. maila
+	Show Level 5	Erakutsi 5. maila
+	Show Level 6	Erakutsi 6. maila
+	Show Level 7	Erakutsi 7. maila
+	Show Level 8	Erakutsi 8. maila
+	Show Level 9	Erakutsi 9. maila
+	Show Markup	Erakutsi markak
+	Show Notes	Erakutsi oharrak
+	Show only comments and formatting in balloons	Erakutsi iruzkinak eta formatua soilik bunbuiloetan
+	Show or Hide Style	Erakutsi edo ezkutatu estiloa
+	Show page numbers	Erakutsi orrialde-zenbakiak
+	Show revisions in balloons	Erakutsi berrikuspenak bunbuiloetan
+	Show rulers	Erakutsi erregelak
+	Show Text Formatting	Erakutsi testu-formatua
+	Show the equation in the line of text	Erakutsi ekuazioa testu-lerroan
+	Show the equation on a line of its own	Erakutsi ekuazioa bere lerroan
+	Show the mini toolbar when text is selected	Erakutsi tresna-barra txikia testua hautatzean
+	Show/Hide ¶	Erakutsi/ezkutatu ¶
+	Show\nComments	Erakutsi\niruzkinak
+	Showing the first {count} items.	Lehen {count} elementuak erakusten.
+	Shows a tree: each item below the item it belongs to.	Zuhaitz bat erakusten du: elementu bakoitza dagokion elementuaren azpian.
+	Shows items around a central idea: the first item is the centre.	Elementuak ideia nagusi baten inguruan erakusten ditu: lehen elementua erdigunea da.
+	Shows items of equal weight as blocks in rows.	Pisu bereko elementuak bloke gisa erakusten ditu errenkadetan.
+	Shows overlapping ideas as overlapping circles.	Gainjarritako ideiak gainjarritako zirkulu gisa erakusten ditu.
+	Shows parts of a whole as quadrants.	Oso baten zatiak koadrante gisa erakusten ditu.
+	Shows parts that build on each other, largest at the bottom.	Elkarren gainean eraikitzen diren zatiak erakusten ditu, handiena behean.
+	Shows steps in order, left to right, with arrows between them.	Urratsak ordenan erakusten ditu, ezkerretik eskuinera, tartean geziak dituztela.
+	Shows steps that repeat, around a circle.	Errepikatzen diren urratsak erakusten ditu, zirkulu baten inguruan.
+	Shrink Font 1 Point	Txikitu letra puntu 1
+	Shrink Selection	Txikitu hautapena
+	Shrink text	Txikitu testua
+	Side to Side	Alboz albo
+	Side\nto Side	Alboz\nalbo
+	Sides of a right triangle	Triangelu angeluzuzen baten aldeak
+	Signature Line	Sinadura-lerroa
+	Sine and cosine series of f(x)	f(x)-ren sinu eta kosinu serieak
+	Sine Function	Sinu funtzioa
+	Sine theta	Sinu theta
+	Single	Bakuna
+	Single Brackets	Kortxete bakunak
+	Single Closing Quote	Komatxo bakun ixtekoa
+	Single label	Etiketa bakarra
+	Single Left Angle	Ezkerreko angelu bakuna
+	Single Left Bar	Ezkerreko barra bakuna
+	Single Left Brace	Ezkerreko giltza bakuna
+	Single Left Bracket	Ezkerreko kortxete bakuna
+	Single Left Parenthesis	Ezkerreko parentesi bakuna
+	Single Opening Quote	Komatxo bakun irekitzekoa
+	Single Right Brace	Eskuineko giltza bakuna
+	Single Right Bracket	Eskuineko kortxete bakuna
+	Single Right Parenthesis	Eskuineko parentesi bakuna
+	Single Spacing	Lerroarte bakuna
+	SIST02	SIST02
+	Site name	Gunearen izena
+	Size	Tamaina
+	Size (pt):	Tamaina (pt):
+	Size and Crop…	Tamaina eta moztea…
+	Size:	Tamaina:
+	Sketchbook	Zirriborro-koadernoa
+	Skewed Fraction	Zatiki makurtua
+	Skip citations & bibliography	Saltatu aipamenak eta bibliografia
+	Skip Citations and Bibliography	Saltatu aipamenak eta bibliografia
+	Skip Record If	Saltatu erregistroa baldin
+	Skip Record If…	Saltatu erregistroa baldin…
+	Slant Down	Inklinatu behera
+	Slant Up	Inklinatu gora
+	Small Caps	Maiuskula txikiak
+	Small caps	Maiuskula txikiak
+	Small change	Aldaketa txikia
+	Smart quotes instead of straight quotes	Komatxo tipografikoak komatxo zuzenen ordez
+	SmartArt	SmartArt
+	SmartArt Design	SmartArt diseinua
+	SmartArt Styles	SmartArt estiloak
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Korritze eta zoom leuna, eta poliki agertzen diren menuak eta botoiak. Desaktibatuta, aldaketa guztiak berehala erakusten dira.
+	Soft Edges	Ertz leunak
+	Soft Glow	Distira leuna
+	Solid Accent	Azentu solidoa
+	Sort	Ordenatu
+	Sort by	Ordenatu honen arabera
+	Sort order:	Ordena:
+	Sort Records	Ordenatu erregistroak
+	Source code: github.com/chatraweechai/doc4me	Iturburu-kodea: github.com/chatraweechai/doc4me
+	Source Manager	Iturburu-kudeatzailea
+	Source type:	Iturburu mota:
+	Sources in this document:	Dokumentu honetako iturburuak:
+	South	Hegoaldea
+	Space	Zuriunea
+	Space after	Tartea ondoren
+	Space after: {pt} pt	Tartea ondoren: {pt} pt
+	Space before	Tartea aurretik
+	Space before/after:	Tartea aurretik/ondoren:
+	Space before: {pt} pt	Tartea aurretik: {pt} pt
+	Spaces	Zuriuneak
+	Spacing	Tartea
+	Spacing (pt):	Tartea (pt):
+	Spacing:	Tartea:
+	Spanish	Gaztelania
+	Spanish (Mexico)	Gaztelania (Mexiko)
+	Spanish (Spain)	Gaztelania (Espainia)
+	Sparse Matrices	Matrize sakabanatuak
+	Special	Berezia
+	Special Characters	Karaktere bereziak
+	Specify height:	Zehaztu altuera:
+	Speech	Hizketa
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Hizketa ordenagailu honetan ezagutzen da (whisper.cpp); ez da ezer bidaltzen sarera.
+	Speed	Abiadura
+	Spelling	Ortografia
+	Spelling & Grammar	Ortografia eta gramatika
+	Spelling &\nGrammar	Ortografia eta\ngramatika
+	Spelling and grammar are checked in English (United States).	Ortografia eta gramatika ingelesez (Ameriketako Estatu Batuak) egiaztatzen dira.
+	Spelling Suggestions	Ortografia-iradokizunak
+	Spike	Bilduma
+	Split	Zatitu
+	Split apart page break and paragraph mark	Bereizi orrialde-jauzia eta paragrafo-marka
+	Split Cells	Zatitu gelaxkak
+	Split Table	Zatitu taula
+	Spreadsheet Table	Kalkulu-orriko taula
+	Square	Karratua
+	Square Root	Erro karratua
+	Square Root with Degree	Erro karratua mailarekin
+	Square Union	Bildura karratua
+	Stack Object	Pilatu objektua
+	Stack Object (Three)	Pilatu objektua (hiru)
+	Stacked	Pilatua
+	Stacked Bar	Barra pilatuak
+	Stacked Column	Zutabe pilatuak
+	Stacked Fraction	Zatiki pilatua
+	Stacked, no bar	Pilatua, barrarik gabe
+	Standard	Estandarra
+	Standard and Contextual	Estandarrak eta testuinguruzkoak
+	Standard Colors	Kolore estandarrak
+	Standard Only	Estandarrak soilik
+	Star	Izarra
+	Start at:	Hasi hemen:
+	Start Enforcing Protection	Hasi babesa aplikatzen
+	Start Mail Merge	Hasi posta-konbinazioa
+	Start Mail\nMerge	Hasi posta-\nkonbinazioa
+	State	Probintzia
+	Statement   5.50" × 8.50"	Statement   5.50" × 8.50"
+	Statistics	Estatistikak
+	Status Bar	Egoera-barra
+	Statutes	Legeak
+	Stop	Gelditu
+	Stop Protection	Gelditu babesa
+	Stop Reading	Gelditu irakurketa
+	Stopped	Geldituta
+	Store	Denda
+	Straight Arrow Connector	Gezi-lotura zuzena
+	Straight Connector	Lotura zuzena
+	Strikethrough	Marratua
+	Stroke {n} of {total}	{n}. trazua / {total}
+	Strong	Indartsua
+	Structure Actions	Egitura-ekintzak
+	Structures	Egiturak
+	Studio	Estudioa
+	Studio cover	Estudioko azala
+	Studio handbook (sample)	Estudioko eskuliburua (lagina)
+	Style	Estiloa
+	Style based on:	Estiloaren oinarria:
+	Style Inspector	Estilo-ikuskatzailea
+	Style Set	Estilo-multzoa
+	Style:	Estiloa:
+	Style: APA	Estiloa: APA
+	Style: {style}	Estiloa: {style}
+	Styles	Estiloak
+	Styles Pane	Estiloen panela
+	Styles:	Estiloak:
+	Subentry:	Azpisarrera:
+	Subject	Gaia
+	Subscript	Azpiindizea
+	Subscript-Superscript	Azpiindizea eta goi-indizea
+	Subscripts and Superscripts	Azpiindizeak eta goi-indizeak
+	Subset:	Azpimultzoa:
+	Substituted font	Ordezko letra-tipoa
+	Subtitle	Azpititulua
+	Subtle Emphasis	Enfasi leuna
+	Subtle Reference	Erreferentzia leuna
+	Sum	Batura
+	Sum of cosines	Kosinuen batura
+	Sum or difference of sines	Sinuen batura edo kendura
+	Summation	Batukaria
+	Summation from 0 to n	Batukaria 0tik n-ra
+	Summation over binomials	Binomialen gaineko batukaria
+	Summation with Limits	Batukaria limiteekin
+	Summation with Lower Limit	Batukaria beheko limitearekin
+	Summation with Subscript Limit	Batukaria azpiindize-limitearekin
+	Summation with Subscript-Superscript Limits	Batukaria azpiindize eta goi-indize limiteekin
+	Summations	Batukariak
+	Superscript	Goi-indizea
+	Suppress line numbers	Ezabatu lerro-zenbakiak
+	Surface Integral	Gainazal-integrala
+	Surface Integral with Limits	Gainazal-integrala limiteekin
+	Surface Integral with Stacked Limits	Gainazal-integrala limite pilatuekin
+	Swap footnotes and endnotes	Trukatu oin-oharrak eta amaiera-oharrak
+	Swedish	Suediera
+	Switch Modes	Aldatu modua
+	Switch Windows	Aldatu leihoa
+	Switch\nModes	Aldatu\nmodua
+	Symbol	Ikurra
+	Symbol Font	Ikur-letra-tipoa
+	Symbols	Ikurrak
+	Synchronous Scrolling	Korritze sinkronoa
+	Synonyms	Sinonimoak
+	System	Sistema
+	Tab	Tab
+	Tab Character	Tabulazio-karakterea
+	Tab character	Tabulazio-karakterea
+	Tab characters	Tabulazio-karaktereak
+	Tab leader:	Tabulazio-betegarria:
+	Tab stop position:	Tabulazio-markaren posizioa:
+	Tab stops to be cleared:	Garbitu beharreko tabulazio-markak:
+	Table	Taula
+	Table AutoFormat	Taularen formatu automatikoa
+	Table AutoFormat…	Taularen formatu automatikoa…
+	Table Column Width	Taula-zutabearen zabalera
+	Table Design	Taularen diseinua
+	Table direction:	Taularen norabidea:
+	Table entry fields	Taula-sarrerako eremuak
+	Table Grid	Taula-sareta
+	Table identifier:	Taularen identifikatzailea:
+	Table Layout	Taularen maketazioa
+	Table of Authorities	Autoritate-aurkibidea
+	Table of Contents	Aurkibidea
+	Table of Contents Options	Aurkibidearen aukerak
+	Table of Contents Styles	Aurkibide-estiloak
+	Table of Figures	Irudien aurkibidea
+	Table of Figures Options	Irudien aurkibidearen aukerak
+	Table of\nContents	Aurkibidea
+	Table Positioning	Taularen kokapena
+	Table Properties	Taularen propietateak
+	Table Row Height	Taula-errenkadaren altuera
+	Table style	Taula-estiloa
+	Table Style Options	Taula-estiloaren aukerak
+	Table Styles	Taula-estiloak
+	Table styles:	Taula-estiloak:
+	Tables	Taulak
+	Tabloid   11.00" × 17.00"	Tabloid   11.00" × 17.00"
+	Tabs	Tabulazioak
+	Tabs…	Tabulazioak…
+	Tabular List	Zerrenda tabularra
+	Tag	Etiketa
+	Tangent formula	Tangentearen formula
+	Tangent Function	Tangente funtzioa
+	TC entry fields	TC sarrera-eremuak
+	Technology	Teknologia
+	Templates	Txantiloiak
+	Templates and Add-ins	Txantiloiak eta gehigarriak
+	Text	Testua
+	Text Box	Testu-koadroa
+	Text boxes	Testu-koadroak
+	Text Direction	Testu-norabidea
+	Text Effects	Testu-efektuak
+	Text Effects and Typography	Testu-efektuak eta tipografia
+	Text Fill	Testuaren betegarria
+	Text from File	Fitxategiko testua
+	Text Highlight Color	Testua nabarmentzeko kolorea
+	Text indent at:	Testuaren koska:
+	Text isn't squeezed to fit its cell yet.	Testua oraindik ez da estutzen bere gelaxkan sartzeko.
+	Text Outline	Testuaren ingerada
+	Text over Colon Equal	Testua bi puntu eta berdinaren gainean
+	Text over Equal	Testua berdinaren gainean
+	Text Pane	Testu-panela
+	Text size	Testu-tamaina
+	Text snaps to characters	Testua karaktereetara egokitzen da
+	Text to display:	Bistaratzeko testua:
+	Text Wrapping	Testu-doikuntza
+	Text wrapping:	Testu-doikuntza:
+	Text:	Testua:
+	Text\nBox	Testu-\nkoadroa
+	Text\nDirection	Testu-\nnorabidea
+	Thai	Thailandiera
+	Thai Distributed	Thai banatua
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Formatu horrek ez du dena gordetzen, beraz dokumentua irekita dago oraindik. Gorde Word dokumentu gisa (.docx) jarraitzeko.
+	That isn't the web address or embed code of an online video.	Hori ez da lineako bideo baten web-helbidea edo txertatze-kodea.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Pasahitza ez da zuzena. Egiaztatu (pasahitzek maiuskulak eta minuskulak bereizten dituzte) eta saiatu berriro.
+	The clipboard is empty.	Arbela hutsik dago.
+	The date it is today	Gaurko data
+	The document contains no tracked changes.	Dokumentuak ez du aldaketen jarraipenik.
+	The document has no bookmarks yet.	Dokumentuak ez du laster-markarik oraindik.
+	The document is read only, except for regions marked editable.	Dokumentua irakurtzeko soilik da, editagarri gisa markatutako eskualdeetan izan ezik.
+	The document will be saved with a password. Save it to protect it.	Dokumentua pasahitz batekin gordeko da. Gorde ezazu babesteko.
+	The first word of a sentence starts with a capital.	Esaldi baten lehen hitza maiuskulaz hasten da.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	eguneko doako kuota agortu da (saiatu berriro bihar, edo eman helbide elektroniko bat)
+	the LibreTranslate server	LibreTranslate zerbitzaria
+	The Mail Merge Helper sets up a merge in three steps.	Posta-konbinazioaren laguntzaileak hiru urratsetan konfiguratzen du konbinazioa.
+	The new style takes the formatting of the current paragraph.	Estilo berriak uneko paragrafoaren formatua hartzen du.
+	The password is optional; without it anyone can stop the protection.	Pasahitza aukerakoa da; hura gabe edonork geldi dezake babesa.
+	The password is removed. Save the document to keep the change.	Pasahitza kendu da. Gorde dokumentua aldaketa mantentzeko.
+	The passwords don't match.	Pasahitzak ez datoz bat.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Inprimagailua, bi aldeko inprimatzea eta orri bakoitzeko orrialdeak elkarrizketa-koadro horretan aukeratzen dira.
+	The recipient-list field that fills each part of an address block and greeting line.	Helbide-bloke eta agur-lerro baten zati bakoitza betetzen duen hartzaile-zerrendako eremua.
+	The same word twice in a row.	Hitz bera bi aldiz jarraian.
+	The spelling and grammar check is complete.	Ortografia- eta gramatika-egiaztapena osatu da.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Sistemaren fitxategi-elkarrizketa ez dago erabilgarri; beraz, Doc4Me-k berea erakusten du. Sistemaren elkarrizketa izateko, instalatu fitxategi-hautatzaile atari bat (xdg-desktop-portal-gtk, adibidez) edo zenity.
+	The text is sent to {service} to be translated.	Testua zerbitzu honetara bidaltzen da itzul dadin: {service}.
+	The time right now	Oraingo ordua
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Bideoa irudi gisa ageri da dokumentuan. Egin klik bikoitza gainean arakatzailean ikusteko.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Dokumentu osoa dokumentu berri batera itzultzen da, eta horrek hau ordezten du. Gorde zure lana lehenik.
+	Theme Colors	Gaiaren koloreak
+	Theme Fonts	Gaiaren letra-tipoak
+	Theme List	Gai-zerrenda
+	Themes	Gaiak
+	Then by	Gero honen arabera
+	Then insert:	Orduan, txertatu:
+	There's no text to translate.	Ez dago itzultzeko testurik.
+	Thesaurus	Tesauroa
+	These marks show even when Show/Hide ¶ is off.	Marka hauek ageri dira Erakutsi/ezkutatu ¶ desaktibatuta dagoenean ere.
+	These merge fields aren't in the recipient list:	Konbinazio-eremu hauek ez daude hartzaileen zerrendan:
+	These settings will be used for new documents.	Ezarpen hauek dokumentu berrietarako erabiliko dira.
+	Thick	Lodia
+	Thickness	Lodiera
+	This Device…	Gailu hau…
+	This document	Dokumentu hau
+	This field has no options.	Eremu honek ez du aukerarik.
+	This folder can't be read: {error}	Ezin da karpeta hau irakurri: {error}
+	This font has no characters to show.	Letra-tipo honek ez du erakusteko karaktererik.
+	This page	Orrialde hau
+	This password type isn't supported.	Pasahitz mota hau ez da onartzen.
+	This point forward	Puntu honetatik aurrera
+	This section	Atal hau
+	Three	Hiru
+	Through	Zeharka
+	Tight	Estua
+	Tilde	Tilde
+	Tips ({n})	Aholkuak ({n})
+	Title	Izenburua
+	Title from the document properties	Dokumentuaren propietateetako izenburua
+	Title:	Izenburua:
+	To	Nora
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Word dokumentuak Doc4Me-rekin modu lehenetsian irekitzeko: hautatu bat Finder-en, aukeratu Fitxategia › Lortu informazioa, hautatu Doc4Me Ireki honekin atalean, eta egin klik Aldatu guztiak aukeran.
+	To:	Nori:
+	TOA Heading	Autoritate-aurkibidearen izenburua
+	TOC Heading	Aurkibidearen izenburua
+	TOC {n}	{n}. aurkibidea
+	Today	Gaur
+	tOGGLE cASE	mAIUSKULAK aLDERANTZIZ
+	Toggle Check Box	Aldatu kontrol-laukia
+	Toggle Field Codes	Aldatu eremu-kodeak
+	Toggle Unicode Character	Aldatu Unicode karakterea
+	Tools	Tresnak
+	Top	Goian
+	Top and Bottom	Goian eta behean
+	Top Border	Goiko ertza
+	Top Margin	Goiko marjina
+	Top of Next Page	Hurrengo orrialdearen goialdea
+	Top of Page	Orrialdearen goialdea
+	Top of Previous Page	Aurreko orrialdearen goialdea
+	Top of the Window	Leihoaren goialdea
+	Top:	Goian:
+	Total	Guztira
+	Total Row	Guztizkoen errenkada
+	Track Changes	Aldaketen jarraipena
+	Track Changes Options	Aldaketen jarraipenaren aukerak
+	Track changes while editing	Egin aldaketen jarraipena editatzean
+	Track Changes: On	Aldaketen jarraipena: aktibatuta
+	Track formatting	Egin formatuaren jarraipena
+	Track\nChanges	Aldaketen\njarraipena
+	Track\nChanges ✓	Aldaketen\njarraipena ✓
+	Tracked changes	Aldaketen jarraipena
+	Tracking	Jarraipena
+	Trademark	Marka komertziala
+	Trademark Sign	Marka komertzialaren ikurra
+	Transform	Eraldatu
+	Translate	Itzuli
+	Translate Document	Itzuli dokumentua
+	Translating {done} of {total}	Itzultzen: {done} / {total}
+	Translation service	Itzulpen-zerbitzua
+	Translator	Itzultzailea
+	Transparency	Gardentasuna
+	Transparency:	Gardentasuna:
+	Transport	Garraioa
+	Treatises	Tratatuak
+	Triangle	Triangelua
+	Triangle Down	Triangelua behera
+	Triangle Up	Triangelua gora
+	Trigonometric Functions	Funtzio trigonometrikoak
+	Triple	Hirukoitza
+	Triple Dot	Hiru puntu
+	Triple Integral	Integral hirukoitza
+	Triple Integral with Limits	Integral hirukoitza limiteekin
+	Triple Integral with Stacked Limits	Integral hirukoitza limite pilatuekin
+	Trust Center	Konfiantza-zentroa
+	Tue	Ar.
+	Turabian	Turabian
+	Turkish	Turkiera
+	Two	Bi
+	Type	Mota
+	Type a command, e.g. "insert table"	Idatzi komando bat, adib. "txertatu taula"
+	Type a New List	Idatzi zerrenda berri bat
+	Type a New List…	Idatzi zerrenda berri bat…
+	Type at least one recipient.	Idatzi hartzaile bat gutxienez.
+	Type equations in LaTeX	Idatzi ekuazioak LaTeX-en
+	Type equations in the linear format (UnicodeMath)	Idatzi ekuazioak formatu linealean (UnicodeMath)
+	Type in Equation	Idatzi ekuazioan
+	Type normal (non-math) text in the equation	Idatzi testu normala (ez matematikoa) ekuazioan
+	Type Text	Idatzi testua
+	Type the categories down the side and a column of values per series.	Idatzi kategoriak alboan behera eta balio-zutabe bat serie bakoitzeko.
+	Type the field's name and its switches, for example PAGE \\* roman.	Idatzi eremuaren izena eta haren aldagailuak, adibidez PAGE \\* roman.
+	Type the password to stop the protection.	Idatzi pasahitza babesa gelditzeko.
+	Type the recipients, or load them from a file.	Idatzi hartzaileak, edo kargatu fitxategi batetik.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Idatzi iturburuaren etiketa-izena. Geroago informazio gehiago gehi diezaiokezu iturburu honi, iturburua editatuz.
+	Type:	Mota:
+	Typing	Idazketa
+	Typing replaces selected text	Idazteak hautatutako testua ordezten du
+	Ukrainian	Ukrainera
+	Unchecked symbol	Markatu gabeko ikurra
+	Underbar	Beheko barra
+	Underbrace	Beheko giltza
+	Underline	Azpimarratua
+	Underline color	Azpimarraren kolorea
+	Underline Words Only	Azpimarratu hitzak soilik
+	Undo	Desegin
+	Undo Stroke	Desegin trazua
+	Undo {action}	Desegin: {action}
+	Unformatted Text	Formaturik gabeko testua
+	Ungroup	Banandu
+	Union	Bildura
+	Union of intersections	Ebakiduren bildura
+	Union with Limits	Bildura limiteekin
+	Union with Lower Limit	Bildura beheko limitearekin
+	Union with Plus	Bildura plusarekin
+	Union with Subscript-Superscript Limits	Bildura azpiindize eta goi-indize limiteekin
+	Unions and Intersections	Bildurak eta ebakidurak
+	Unlink Fields	Desestekatu eremuak
+	Unlink\nCitations	Desestekatu\naipamenak
+	Unlock Fields	Desblokeatu eremuak
+	Up	Gora
+	Up Diagonal Dots	Gorako puntu diagonalak
+	Up one level	Maila bat gora
+	Update Field	Eguneratu eremua
+	Update fields before printing	Eguneratu eremuak inprimatu aurretik
+	Update Index	Eguneratu indizea
+	Update Style to Match Selection	Eguneratu estiloa hautapenarekin bat etor dadin
+	Update Styles from Template	Eguneratu estiloak txantiloitik
+	Update Table	Eguneratu taula
+	Update Table of Figures	Eguneratu irudien aurkibidea
+	Update to Match	Eguneratu bat etor dadin
+	Update to Match Selection	Eguneratu hautapenarekin bat etor dadin
+	UPPERCASE	MAIUSKULAK
+	URGENT	PREMIAZKOA
+	URL	URLa
+	Use "a" before a consonant sound	Erabili "a" kontsonante-soinu baten aurretik
+	Use "an" before a vowel sound	Erabili "an" bokal-soinu baten aurretik
+	Use an Existing List…	Erabili lehendik dagoen zerrenda bat…
+	Use passim (five or more pages)	Erabili passim (bost orrialde edo gehiago)
+	Use system setting	Erabili sistemaren ezarpena
+	Use the Insert key to switch overtype on and off	Erabili Txertatu tekla gainidazketa aktibatu eta desaktibatzeko
+	Use wildcards	Erabili komodinak
+	User Name	Erabiltzaile-izena
+	User name:	Erabiltzaile-izena:
+	Username	Erabiltzaile-izena
+	Value	Balioa
+	Vector A	A bektorea
+	Vector AB	AB bektorea
+	Version	Bertsioa
+	Version History	Bertsio-historia
+	Version {version} ({build})	{version} bertsioa ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Bertsioak dokumentua irekita dagoen bitartean gordetzen dira (.docx fitxategi batek ez du bertsiorik).
+	Vertical	Bertikala
+	Vertical Alignment	Lerrokatze bertikala
+	Vertical alignment:	Lerrokatze bertikala:
+	Vertical Bars	Barra bertikalak
+	Vertical Dots	Puntu bertikalak
+	Vertical spacing:	Tarte bertikala:
+	Vietnamese	Vietnamera
+	View	Ikusi
+	View Alt Text…	Ikusi testu alternatiboa…
+	View Gridlines	Ikusi sareta-lerroak
+	View Side by Side	Ikusi alboz albo
+	View State	Ikuspegiaren egoera
+	Views	Ikuspegiak
+	Visual effects	Efektu bisualak
+	Voice	Ahotsa
+	Volume	Liburukia
+	Volume Integral	Bolumen-integrala
+	Volume Integral with Limits	Bolumen-integrala limiteekin
+	Volume Integral with Stacked Limits	Bolumen-integrala limite pilatuekin
+	W:	Z:
+	Waiting for Zotero…	Zoteroren zain…
+	Warm Gradient with Outline	Gradiente beroa ingeradarekin
+	Warnings ({n})	Abisuak ({n})
+	Watermark	Ur-marka
+	Wave	Uhina
+	Weather	Eguraldia
+	web access isn't available here	web-sarbidea ez dago erabilgarri hemen
+	Web Layout	Web-diseinua
+	Web page (*.html)	Web-orria (*.html)
+	Web\nLayout	Web-\ndiseinua
+	Website	Webgunea
+	Wed	Az.
+	Weight	Pisua
+	West	Mendebaldea
+	When merging records	Erregistroak konbinatzean
+	When this document was first created	Dokumentu hau lehen aldiz noiz sortu zen
+	When this document was most recently printed	Dokumentu hau azken aldiz noiz inprimatu zen
+	When this document was most recently saved	Dokumentu hau azken aldiz noiz gorde zen
+	White Space	Zuriunea
+	White space	Zuriunea
+	Who the document properties name as author	Dokumentuaren propietateek egile gisa nor izendatzen duten
+	Whole document	Dokumentu osoa
+	Whole page	Orrialde osoa
+	Whole Table	Taula osoa
+	Whole words	Hitz osoak
+	Wide	Zabala
+	Widow/Orphan Control	Lerro alargun/umezurtzen kontrola
+	Widow/Orphan control	Lerro alargun/umezurtzen kontrola
+	Width and spacing	Zabalera eta tartea
+	Width:	Zabalera:
+	Wildcards (regex)	Komodinak (regex)
+	Window	Leihoa
+	With:	Honekin:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 eta ondorengoak
+	Word 97–2003	Word 97–2003
+	Word Count	Hitz kopurua
+	Word document	Word dokumentua
+	Word document (*.docx)	Word dokumentua (*.docx)
+	Word forms	Hitz-formak
+	Word Left	Hitza ezkerrera
+	Word level	Hitz-maila
+	Word Right	Hitza eskuinera
+	Word XML Document (*.xml)	Word XML dokumentua (*.xml)
+	WordArt	WordArt
+	WordArt Styles	WordArt estiloak
+	Words	Hitzak
+	Words only	Hitzak soilik
+	Wrap Text	Doitu testua
+	Wrap text	Doitu testua
+	Wrap Text Sides	Testu-doikuntzaren aldeak
+	Wrap\nText	Doitu\ntestua
+	Write & Insert Fields	Idatzi eta txertatu eremuak
+	Write a reply	Idatzi erantzun bat
+	Write math here with the mouse or a pen.	Idatzi matematika hemen saguarekin edo luma batekin.
+	Writing Style: Grammar	Idazkera-estiloa: gramatika
+	x bar	x barra
+	Year	Urtea
+	Yes	Bai
+	Yields	Ematen du
+	Your changes will be lost if you don't save them.	Zure aldaketak galdu egingo dira gordetzen ez badituzu.
+	Your system doesn't report an animation setting, so animation effects stay on.	Sistemak ez du animazio-ezarpenik adierazten; beraz, animazio-efektuak aktibatuta jarraitzen dute.
+	Your system has animation effects turned off.	Sistemak animazio-efektuak desaktibatuta ditu.
+	Your system has animation effects turned on.	Sistemak animazio-efektuak aktibatuta ditu.
+	Zoom	Zooma
+	Zoom In	Handiagotu
+	Zoom Out	Txikiagotu
+	Zoom to Page	Zoom orrialdera
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: bertan behera utzita
+	Zotero: done	Zotero: eginda
+	{cols}×{rows} Table	{cols}×{rows} taula
+	{contributors} contributors · {commits} commits	{contributors} laguntzaile · {commits} commit
+	{count} items highlighted	{count} elementu nabarmenduta
+	{count} of {total} pages will print	{count} / {total} orrialde inprimatuko dira
+	{count} paragraphs were changed.	{count} paragrafo aldatu dira.
+	{count} records; fields: {fields}	{count} erregistro; eremuak: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} ez dago instalatuta ordenagailu honetan; beraz, dokumentu hau {with} letra-tipoarekin erakusten da. Lerroak eta orrialdeak jatorrizko letra-tipoarekin ez bezala zatitu daitezke.
+	{group} settings	{group} ezarpenak
+	{key}+Click to follow link	{key}+klik esteka jarraitzeko
+	{language} is now the document's default language.	{language} da orain dokumentuaren hizkuntza lehenetsia.
+	{name} (Press ENTER to Insert)	{name} (sakatu SARTU txertatzeko)
+	{name} already exists. Choose Save again to replace it.	{name} badago lehendik. Aukeratu Gorde berriro hura ordezteko.
+	{name} can't be a folder's name.	{name} ezin da karpeta baten izena izan.
+	{name} is protected with a password.	{name} pasahitz batekin babestuta dago.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} gehitu da. Haren makroak Nire gehigarriak atalean eta Ikusi › Makroak menuan daude.
+	{name} wasn't found.	Ez da aurkitu: {name}.
+	{n} entries marked.	{n} sarrera markatuta.
+	{n} lines	{n} lerro
+	{n} of {of} recipients	{n} / {of} hartzaile
+	{n} pt	{n} pt
+	{n} records	{n} erregistro
+	{n} revisions	{n} berrikuspen
+	{selected} of {words} words	{selected} / {words} hitz
+	{size} pt	{size} pt
+	{words} words	{words} hitz
+	{w} × {h} in	{w} × {h} in
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	“{text}” ({row}, {series}) ez da zenbaki bat.
+	← Find	← Bilatu
+	✓ None	✓ Bat ere ez
+	➕ New comment	➕ Iruzkin berria
+	📂  Browse…	📂  Arakatu…
+	Add Help Text…	Gehitu laguntza-testua…
+	AutoText entry:	Testu automatikoaren sarrera:
+	Calculate on exit	Kalkulatu irtetean
+	Calculation	Kalkulua
+	Check Box Form Field	Kontrol-laukiaren inprimaki-eremua
+	Check Box Form Field Options	Kontrol-laukiaren inprimaki-eremuaren aukerak
+	Check box	Kontrol-laukia
+	Check box enabled	Kontrol-laukia gaituta
+	Check box size:	Kontrol-laukiaren tamaina:
+	Checked	Markatuta
+	Current date	Uneko data
+	Current time	Uneko ordua
+	Default value:	Balio lehenetsia:
+	Drop-Down Form Field	Goitibeherako inprimaki-eremua
+	Drop-Down Form Field Options	Goitibeherako inprimaki-eremuaren aukerak
+	Drop-down	Goitibeherakoa
+	Drop-down enabled	Goitibeherakoa gaituta
+	Drop-down item:	Goitibeherako elementua:
+	Fill In Form Field	Betetzeko inprimaki-eremua
+	Fill-in enabled	Betetzea gaituta
+	Form Field	Inprimaki-eremua
+	Form Field Help Text	Inprimaki-eremuaren laguntza-testua
+	Form Field Options	Inprimaki-eremuaren aukerak
+	Form Field Shading	Inprimaki-eremuen itzaldura
+	Form Field at Selection	Inprimaki-eremua hautapenean
+	Help Key (F1)	Laguntza-tekla (F1)
+	Insert Form Field	Txertatu inprimaki-eremua
+	Items in drop-down list:	Goitibeherako zerrendako elementuak:
+	Legacy Tools	Tresna zaharrak
+	Maximum length:	Gehieneko luzera:
+	Next Form Field	Hurrengo inprimaki-eremua
+	Not checked	Markatu gabe
+	Put the caret on a form field first.	Jarri kurtsorea inprimaki-eremu batean lehenik.
+	Regular text	Testu arrunta
+	Reset Form Fields	Berrezarri inprimaki-eremuak
+	Text Form Field	Testuko inprimaki-eremua
+	Text Form Field Options	Testuko inprimaki-eremuaren aukerak
+	Type your own:	Idatzi zurea:
+	Unlimited	Mugagabea
+	Protected sections:	Babestutako atalak:
+	Section Protection	Atalen babesa
+	Section {n}	{n}. atala
+	Select sections…	Hautatu atalak…
+	AutoSummarize	Laburpen automatikoa
+	Create a new document and put the summary there	Sortu dokumentu berri bat eta jarri laburpena bertan
+	Highlight key points	Nabarmendu puntu nagusiak
+	Insert an executive summary or abstract at the top of the document	Txertatu laburpen exekutibo bat edo abstract bat dokumentuaren hasieran
+	Length of summary	Laburpenaren luzera
+	Percent of original:	Jatorrizkoaren ehunekoa:
+	Summary: {words} of {of} words	Laburpena: {words} / {of} hitz
+	Type of summary	Laburpen mota
+	Update document statistics	Eguneratu dokumentuaren estatistikak
+	{n} sentences	{n} esaldi
+	{n} words or less	{n} hitz edo gutxiago
+	At:	Posizioa:
+	Distance from text:	Testurainoko distantzia:
+	Format Frame	Formateatu markoa
+	Format Frame…	Formateatu markoa…
+	Frame	Markoa
+	Frame…	Markoa…
+	Insert Frame	Txertatu markoa
+	Lock anchor	Blokeatu aingura
+	Remove Frame	Kendu markoa
+	Text wrapping	Testu-doikuntza
+	Chinese Conversion	Txinerazko bihurketa
+	Chinese Conversion…	Txinerazko bihurketa…
+	Converted {n} characters	{n} karaktere bihurtu dira
+	Simplified Chinese to Traditional Chinese	Txinera sinplifikatutik txinera tradizionalera
+	Simplified to Traditional	Sinplifikatutik tradizionalera
+	Traditional Chinese to Simplified Chinese	Txinera tradizionaletik txinera sinplifikatura
+	Traditional to Simplified	Tradizionaletik sinplifikatura
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Erabili Taiwan, Hong Kong AEB eta Macao AEBko karaktere-aldaerak
+	Asian Layout	Diseinu asiarra
+	Fit Text	Doitu testua
+	Fit Text…	Doitu testua…
+	Two Lines in One	Bi lerro batean
+	Two Lines in One…	Bi lerro batean…
+	New text width (pt):	Testu-zabalera berria (pt):
+	Enclose in brackets	Sartu parentesi artean
+	Bracket pair:	Parentesi-bikotea:
+	Typography	Tipografia
+	Character spacing control	Karaktere-tartearen kontrola
+	Don't compress	Ez konprimatu
+	Compress punctuation only	Konprimatu puntuazioa soilik
+	Compress punctuation and Japanese kana	Konprimatu puntuazioa eta kana japoniarra
+	First and last characters	Lehen eta azken karaktereak
+	Strict	Zorrotza
+	Cannot start a line:	Ezin du lerroa hasi:
+	Cannot end a line:	Ezin du lerroa amaitu:
+	Japanese Find Options	Bilaketa-aukera japoniarrak
+	Sounds like (Japanese)	Antzeko soinua (japoniera)
+	Match full/half width	Bereizi zabalera osoa/erdia
+	Match hiragana/katakana	Bereizi hiragana/katakana
+	Match small kana	Bereizi kana txikiak
+	Match prolonged sound marks and dashes	Bereizi soinu luzatuen markak eta marrak
+	Japanese Consistency Checker	Japonierako koherentzia-egiaztatzailea
+	Japanese Consistency Checker…	Japonierako koherentzia-egiaztatzailea…
+	No inconsistent spellings were found.	Ez da idazkera inkoherenterik aurkitu.
+	Pick the spelling to keep in each group.	Aukeratu talde bakoitzean mantendu beharreko idazkera.
+	Bidirectional text	Testu bidirekzionala
+	Bidirectional Text	Testu bidirekzionala
+	Default direction:	Norabide lehenetsia:
+	Cursor movement:	Kurtsorearen mugimendua:
+	Logical	Logikoa
+	Visual	Bisuala
+	Manage Fields	Kudeatu eremuak
+	File locations	Fitxategien kokapenak
+	File Locations	Fitxategien kokapenak
+	Documents:	Dokumentuak:
+	Pictures:	Irudiak:
+	The system's choice	Sistemaren aukera
+	Show Repairs	Erakutsi konponketak
+	No repairs were needed.	Ez da konponketarik behar izan.
+	These problems were found and repaired when the document was opened:	Arazo hauek aurkitu eta konpondu dira dokumentua irekitzean:
+	An unreadable entry in the file was skipped: {what}	Fitxategiko sarrera irakurgaitz bat saltatu da: {what}
+	An unreadable part was left out: {what}	Zati irakurgaitz bat kanpoan utzi da: {what}
+	Unreadable relationships were ignored: {what}	Erlazio irakurgaitzak ez dira kontuan hartu: {what}
+	A missing part of an embedded object was left out: {what}	Objektu txertatu baten falta den zati bat kanpoan utzi da: {what}
+	Copy File	Kopiatu fitxategia
+	Find Files	Bilatu fitxategiak
+	Letter Wizard	Gutun-morroia
+	Recipient's name:	Hartzailearen izena:
+	Salutation:	Agurra:
+	Subject:	Gaia:
+	Complimentary closing:	Amaierako agurra:
+	Sender's name:	Bidaltzailearen izena:
+	Job title:	Lanpostua:
+	Company:	Enpresa:
+	Enclosures:	Eranskinak:
+	Cc:	Cc:
+	Edit Links to Files	Editatu fitxategietarako estekak
+	Source file	Iturburu-fitxategia
+	Locked	Blokeatuta
+	Change Source	Aldatu iturburua
+	This document has no links to files.	Dokumentu honek ez du fitxategietarako estekarik.
+	Web options	Web-aukerak
+	Web Options	Web-aukerak
+	Allow PNG as a graphics format	Baimendu PNG formatu grafiko gisa
+	Rely on CSS for font formatting	Erabili CSS letra-formaturako
+	Rely on VML for displaying graphics in browsers	Erabili VML grafikoak arakatzaileetan bistaratzeko
+	Organize supporting files in a folder	Antolatu laguntza-fitxategiak karpeta batean
+	Use long file names whenever possible	Erabili fitxategi-izen luzeak ahal den guztietan
+	Screen size:	Pantailaren tamaina:
+	Pixels per inch:	Pixel hazbeteko:
+	Hangul Hanja Conversion	Hangul-hanja bihurketa
+	Hangul Hanja Conversion…	Hangul-hanja bihurketa…
+	Hangul to Hanja	Hangul-etik hanja-ra
+	Hanja to Hangul	Hanja-tik hangul-era
+	Put the caret in Korean text to choose its Hanja.	Jarri kurtsorea koreerazko testuan haren hanja aukeratzeko.
+	The selection, or the whole document when nothing is selected.	Hautapena, edo dokumentu osoa ezer hautatuta ez dagoenean.

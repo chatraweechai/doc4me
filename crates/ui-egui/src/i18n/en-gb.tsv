@@ -2915,3 +2915,81 @@
 	Traditional Chinese to Simplified Chinese	Traditional Chinese to Simplified Chinese
 	Traditional to Simplified	Traditional to Simplified
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Use Taiwan, Hong Kong SAR, and Macao SAR character variants
+	Asian Layout	Asian Layout
+	Fit Text	Fit Text
+	Fit Text…	Fit Text…
+	Two Lines in One	Two Lines in One
+	Two Lines in One…	Two Lines in One…
+	New text width (pt):	New text width (pt):
+	Enclose in brackets	Enclose in brackets
+	Bracket pair:	Bracket pair:
+	Typography	Typography
+	Character spacing control	Character spacing control
+	Don't compress	Don't compress
+	Compress punctuation only	Compress punctuation only
+	Compress punctuation and Japanese kana	Compress punctuation and Japanese kana
+	First and last characters	First and last characters
+	Strict	Strict
+	Cannot start a line:	Cannot start a line:
+	Cannot end a line:	Cannot end a line:
+	Japanese Find Options	Japanese Find Options
+	Sounds like (Japanese)	Sounds like (Japanese)
+	Match full/half width	Match full/half width
+	Match hiragana/katakana	Match hiragana/katakana
+	Match small kana	Match small kana
+	Match prolonged sound marks and dashes	Match prolonged sound marks and dashes
+	Japanese Consistency Checker	Japanese Consistency Checker
+	Japanese Consistency Checker…	Japanese Consistency Checker…
+	No inconsistent spellings were found.	No inconsistent spellings were found.
+	Pick the spelling to keep in each group.	Pick the spelling to keep in each group.
+	Bidirectional text	Bidirectional text
+	Bidirectional Text	Bidirectional Text
+	Default direction:	Default direction:
+	Cursor movement:	Cursor movement:
+	Logical	Logical
+	Visual	Visual
+	Manage Fields	Manage Fields
+	File locations	File locations
+	File Locations	File Locations
+	Documents:	Documents:
+	Pictures:	Pictures:
+	The system's choice	The system's choice
+	Show Repairs	Show Repairs
+	No repairs were needed.	No repairs were needed.
+	These problems were found and repaired when the document was opened:	These problems were found and repaired when the document was opened:
+	An unreadable entry in the file was skipped: {what}	An unreadable entry in the file was skipped: {what}
+	An unreadable part was left out: {what}	An unreadable part was left out: {what}
+	Unreadable relationships were ignored: {what}	Unreadable relationships were ignored: {what}
+	A missing part of an embedded object was left out: {what}	A missing part of an embedded object was left out: {what}
+	Copy File	Copy File
+	Find Files	Find Files
+	Letter Wizard	Letter Wizard
+	Recipient's name:	Recipient's name:
+	Salutation:	Salutation:
+	Subject:	Subject:
+	Complimentary closing:	Complimentary closing:
+	Sender's name:	Sender's name:
+	Job title:	Job title:
+	Company:	Company:
+	Enclosures:	Enclosures:
+	Cc:	Cc:
+	Edit Links to Files	Edit Links to Files
+	Source file	Source file
+	Locked	Locked
+	Change Source	Change Source
+	This document has no links to files.	This document has no links to files.
+	Web options	Web options
+	Web Options	Web Options
+	Allow PNG as a graphics format	Allow PNG as a graphics format
+	Rely on CSS for font formatting	Rely on CSS for font formatting
+	Rely on VML for displaying graphics in browsers	Rely on VML for displaying graphics in browsers
+	Organize supporting files in a folder	Organise supporting files in a folder
+	Use long file names whenever possible	Use long file names whenever possible
+	Screen size:	Screen size:
+	Pixels per inch:	Pixels per inch:
+	Hangul Hanja Conversion	Hangul Hanja Conversion
+	Hangul Hanja Conversion…	Hangul Hanja Conversion…
+	Hangul to Hanja	Hangul to Hanja
+	Hanja to Hangul	Hanja to Hangul
+	Put the caret in Korean text to choose its Hanja.	Put the caret in Korean text to choose its Hanja.
+	The selection, or the whole document when nothing is selected.	The selection, or the whole document when nothing is selected.

@@ -151,10 +151,10 @@ pub(crate) struct FileBrowser {
 impl FileBrowser {
     pub(crate) fn new(req: FileDialogRequest, after: AfterPick, start: PathBuf, unavailable: bool) -> Self {
         let (name, filters) = match &req {
-            FileDialogRequest::Open { purpose } => {
+            FileDialogRequest::Open { purpose, .. } => {
                 (String::new(), open_filters(purpose).iter().map(|(l, e)| ((*l).to_string(), e.iter().map(|x| (*x).to_string()).collect())).collect())
             }
-            FileDialogRequest::Save { name } => {
+            FileDialogRequest::Save { name, .. } => {
                 let ext = Path::new(name).extension().and_then(|e| e.to_str()).filter(|e| !e.is_empty());
                 let mut f: Vec<(String, Vec<String>)> = ext.map(|e| (format!("*.{e}"), vec![e.to_string()])).into_iter().collect();
                 f.push(("All files".into(), vec!["*".into()]));
@@ -275,11 +275,16 @@ impl FileBrowser {
 impl WordApp {
     /// Ask for a file in the built-in browser and do `after` with the answer when it closes.
     pub(crate) fn show_file_browser(&mut self, req: FileDialogRequest, after: AfterPick, unavailable: bool) {
+        let req = self.with_start_dir(req);
+        let asked = match &req {
+            FileDialogRequest::Open { dir, .. } | FileDialogRequest::Save { dir, .. } => dir.as_ref().map(PathBuf::from),
+        };
         let start = self
             .file_browser
             .last_dir
             .clone()
             .filter(|d| d.is_dir())
+            .or_else(|| asked.filter(|d| d.is_dir()))
             .or_else(|| self.session.path.as_ref().and_then(|p| p.parent()).map(Path::to_path_buf).filter(|d| d.is_dir()))
             .or_else(home)
             .or_else(|| std::env::current_dir().ok())
@@ -295,11 +300,13 @@ impl WordApp {
             return;
         }
         let (req, after) = match purpose {
-            "picture" => (FileDialogRequest::Open { purpose: "picture".into() }, AfterPick::Picture),
-            "model3d" => (FileDialogRequest::Open { purpose: "model3d".into() }, AfterPick::Model3d),
-            "recipients" => (FileDialogRequest::Open { purpose: "recipients".into() }, AfterPick::Recipients),
-            "save" => (FileDialogRequest::Save { name: self.default_save_name() }, AfterPick::SaveAs(crate::file_dialogs::AfterSave::Nothing)),
-            _ => (FileDialogRequest::Open { purpose: "document".into() }, AfterPick::OpenDocument),
+            "picture" => (FileDialogRequest::Open { purpose: "picture".into(), dir: None }, AfterPick::Picture),
+            "model3d" => (FileDialogRequest::Open { purpose: "model3d".into(), dir: None }, AfterPick::Model3d),
+            "recipients" => (FileDialogRequest::Open { purpose: "recipients".into(), dir: None }, AfterPick::Recipients),
+            "save" => {
+                (FileDialogRequest::Save { name: self.default_save_name(), dir: None }, AfterPick::SaveAs(crate::file_dialogs::AfterSave::Nothing))
+            }
+            _ => (FileDialogRequest::Open { purpose: "document".into(), dir: None }, AfterPick::OpenDocument),
         };
         self.show_file_browser(req, after, false);
     }
@@ -540,7 +547,7 @@ mod tests {
     #[test]
     fn new_folder_is_made_here_and_opened() {
         let dir = scratch("new-folder");
-        let mut b = FileBrowser::new(FileDialogRequest::Save { name: "a.docx".into() }, AfterPick::OpenDocument, dir.clone(), false);
+        let mut b = FileBrowser::new(FileDialogRequest::Save { name: "a.docx".into(), dir: None }, AfterPick::OpenDocument, dir.clone(), false);
         b.create_folder(" Drafts ").unwrap();
         assert!(dir.join("Drafts").is_dir());
         assert_eq!(b.dir, dir.join("Drafts"), "inside it");
@@ -580,7 +587,7 @@ mod tests {
         let dir = scratch("save");
         std::fs::create_dir(dir.join("drafts")).unwrap();
         std::fs::write(dir.join("drafts").join("old.docx"), b"x").unwrap();
-        let req = FileDialogRequest::Save { name: "Document1.docx".into() };
+        let req = FileDialogRequest::Save { name: "Document1.docx".into(), dir: None };
         let mut b = FileBrowser::new(req, AfterPick::OpenDocument, dir.clone(), false);
         b.name = "drafts".into();
         assert_eq!(b.accept(), Step::Stay);

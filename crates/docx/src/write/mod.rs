@@ -409,6 +409,17 @@ pub(crate) fn write_parts(doc: &Document, flavor: Flavor) -> Result<Vec<(String,
         &format!("{CT_WML}settings+xml"),
         settings_rels,
     );
+    if doc.settings.web.write_part() {
+        rels.add(rt::WEB_SETTINGS, "webSettings.xml", false);
+        push_part(
+            &mut entries,
+            &mut overrides,
+            "word/webSettings.xml",
+            web_settings_xml(&doc.settings.web),
+            &format!("{CT_WML}webSettings+xml"),
+            PartRels::default(),
+        );
+    }
     rels.add(rt::THEME, "theme/theme1.xml", false);
     push_part(
         &mut entries,
@@ -926,6 +937,41 @@ fn notes_part(doc: &Document, wr: &Writer<'_>, foot: bool) -> bool {
     !ids.is_empty() || !seps.is_empty()
 }
 
+/// `w:webSettings`, its children in the schema's order (CT_WebSettings is a sequence).
+fn web_settings_xml(w: &doc4me_doc::WebOptions) -> Vec<u8> {
+    let mut out = String::from("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
+    out.push_str("<w:webSettings xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">");
+    if let Some(e) = &w.encoding {
+        out.push_str(&format!("<w:encoding w:val=\"{}\"/>", xml::esc(e)));
+    }
+    if w.optimize_for_browser {
+        match &w.browser_target {
+            Some(t) => out.push_str(&format!("<w:optimizeForBrowser w:target=\"{}\"/>", xml::esc(t))),
+            None => out.push_str("<w:optimizeForBrowser/>"),
+        }
+    }
+    for (on, name) in [
+        (w.rely_on_vml, "relyOnVML"),
+        (w.allow_png, "allowPNG"),
+        (!w.rely_on_css, "doNotRelyOnCSS"),
+        (!w.save_as_single_file, "doNotSaveAsSingleFile"),
+        (!w.organize_in_folder, "doNotOrganizeInFolder"),
+        (!w.long_file_names, "doNotUseLongFileNames"),
+    ] {
+        if on {
+            out.push_str(&format!("<w:{name}/>"));
+        }
+    }
+    if let Some(n) = w.pixels_per_inch {
+        out.push_str(&format!("<w:pixelsPerInch w:val=\"{n}\"/>"));
+    }
+    if let Some(t) = &w.target_screen {
+        out.push_str(&format!("<w:targetScreenSz w:val=\"{}\"/>", xml::esc(t)));
+    }
+    out.push_str("</w:webSettings>");
+    out.into_bytes()
+}
+
 /// `w:settings`, its children in the schema's order (CT_Settings is a sequence). `template_rel`
 /// is the id of the attached template's relationship, when there is one.
 fn settings_xml(doc: &Document, footnotes: bool, endnotes: bool, template_rel: Option<&str>) -> Vec<u8> {
@@ -990,7 +1036,17 @@ fn settings_xml(doc: &Document, footnotes: bool, endnotes: bool, template_rel: O
             w.val(tag, &crate::units::twips(v.clamp(0.5, 1584.0)));
         }
     }
-    w.val("w:characterSpacingControl", "doNotCompress");
+    w.val("w:characterSpacingControl", s.char_spacing.ooxml());
+    if s.kinsoku.strict {
+        w.empty("w:strictFirstAndLastChars", &[]);
+    }
+    // `noLineBreaksAfter` comes before `noLineBreaksBefore` in the schema (CT_Settings).
+    let lang = s.kinsoku.lang.as_deref().unwrap_or("ja-JP");
+    for (tag, list) in [("w:noLineBreaksAfter", &s.kinsoku.no_end), ("w:noLineBreaksBefore", &s.kinsoku.no_start)] {
+        if let Some(l) = list.as_deref().and_then(doc4me_doc::Kinsoku::clean_list) {
+            w.empty(tag, &[("w:lang", lang), ("w:val", &l)]);
+        }
+    }
     for (tag, fmt, pr, used, el) in [
         ("w:footnotePr", s.footnote_format, &s.footnote_pr, footnotes, "w:footnote"),
         ("w:endnotePr", s.endnote_format, &s.endnote_pr, endnotes, "w:endnote"),

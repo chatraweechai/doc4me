@@ -2919,3 +2919,81 @@
 	Traditional Chinese to Simplified Chinese	Tradičná čínština na zjednodušenú čínštinu
 	Traditional to Simplified	Z tradičnej na zjednodušenú
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Použiť varianty znakov pre Taiwan, OAO Hongkong a OAO Macao
+	Asian Layout	Ázijské rozloženie
+	Fit Text	Prispôsobiť text
+	Fit Text…	Prispôsobiť text…
+	Two Lines in One	Dva riadky v jednom
+	Two Lines in One…	Dva riadky v jednom…
+	New text width (pt):	Nová šírka textu (pt):
+	Enclose in brackets	Uzavrieť do zátvoriek
+	Bracket pair:	Pár zátvoriek:
+	Typography	Typografia
+	Character spacing control	Riadenie medzier medzi znakmi
+	Don't compress	Nekomprimovať
+	Compress punctuation only	Komprimovať len interpunkciu
+	Compress punctuation and Japanese kana	Komprimovať interpunkciu a japonskú kanu
+	First and last characters	Prvé a posledné znaky
+	Strict	Prísne
+	Cannot start a line:	Nemôže začínať riadok:
+	Cannot end a line:	Nemôže končiť riadok:
+	Japanese Find Options	Možnosti japonského hľadania
+	Sounds like (Japanese)	Znie ako (japončina)
+	Match full/half width	Zhoda plnej/polovičnej šírky
+	Match hiragana/katakana	Zhoda hiragany/katakany
+	Match small kana	Zhoda malej kany
+	Match prolonged sound marks and dashes	Zhoda znakov predĺženia a pomlčiek
+	Japanese Consistency Checker	Kontrola konzistencie japončiny
+	Japanese Consistency Checker…	Kontrola konzistencie japončiny…
+	No inconsistent spellings were found.	Nenašli sa žiadne nejednotné zápisy.
+	Pick the spelling to keep in each group.	V každej skupine vyberte zápis, ktorý chcete zachovať.
+	Bidirectional text	Obojsmerný text
+	Bidirectional Text	Obojsmerný text
+	Default direction:	Predvolený smer:
+	Cursor movement:	Pohyb kurzora:
+	Logical	Logický
+	Visual	Vizuálny
+	Manage Fields	Správa polí
+	File locations	Umiestnenia súborov
+	File Locations	Umiestnenia súborov
+	Documents:	Dokumenty:
+	Pictures:	Obrázky:
+	The system's choice	Voľba systému
+	Show Repairs	Zobraziť opravy
+	No repairs were needed.	Neboli potrebné žiadne opravy.
+	These problems were found and repaired when the document was opened:	Pri otváraní dokumentu sa našli a opravili tieto problémy:
+	An unreadable entry in the file was skipped: {what}	Nečitateľná položka súboru bola preskočená: {what}
+	An unreadable part was left out: {what}	Nečitateľná časť bola vynechaná: {what}
+	Unreadable relationships were ignored: {what}	Nečitateľné vzťahy boli ignorované: {what}
+	A missing part of an embedded object was left out: {what}	Chýbajúca časť vloženého objektu bola vynechaná: {what}
+	Copy File	Kopírovať súbor
+	Find Files	Nájsť súbory
+	Letter Wizard	Sprievodca listom
+	Recipient's name:	Meno príjemcu:
+	Salutation:	Oslovenie:
+	Subject:	Predmet:
+	Complimentary closing:	Záverečný pozdrav:
+	Sender's name:	Meno odosielateľa:
+	Job title:	Funkcia:
+	Company:	Spoločnosť:
+	Enclosures:	Prílohy:
+	Cc:	Kópia:
+	Edit Links to Files	Upraviť prepojenia na súbory
+	Source file	Zdrojový súbor
+	Locked	Zamknuté
+	Change Source	Zmeniť zdroj
+	This document has no links to files.	Tento dokument neobsahuje prepojenia na súbory.
+	Web options	Možnosti webu
+	Web Options	Možnosti webu
+	Allow PNG as a graphics format	Povoliť formát PNG pre obrázky
+	Rely on CSS for font formatting	Formátovanie písma pomocou CSS
+	Rely on VML for displaying graphics in browsers	Zobrazovať obrázky v prehliadačoch pomocou VML
+	Organize supporting files in a folder	Usporiadať podporné súbory do priečinka
+	Use long file names whenever possible	Používať dlhé názvy súborov, kedykoľvek je to možné
+	Screen size:	Veľkosť obrazovky:
+	Pixels per inch:	Pixelov na palec:
+	Hangul Hanja Conversion	Prevod Hangul/Hanja
+	Hangul Hanja Conversion…	Prevod Hangul/Hanja…
+	Hangul to Hanja	Hangul na Hanja
+	Hanja to Hangul	Hanja na Hangul
+	Put the caret in Korean text to choose its Hanja.	Ak chcete zvoliť Hanja, umiestnite kurzor do kórejského textu.
+	The selection, or the whole document when nothing is selected.	Výber alebo celý dokument, ak nie je nič vybraté.

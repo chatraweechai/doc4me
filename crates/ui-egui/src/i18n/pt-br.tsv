@@ -2934,3 +2934,81 @@ spacing	Normal	Normal
 	Traditional Chinese to Simplified Chinese	Chinês Tradicional para Chinês Simplificado
 	Traditional to Simplified	Tradicional para Simplificado
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Usar variantes de caracteres de Taiwan, RAE de Hong Kong e RAE de Macau
+	Asian Layout	Layout asiático
+	Fit Text	Ajustar texto
+	Fit Text…	Ajustar texto…
+	Two Lines in One	Duas linhas em uma
+	Two Lines in One…	Duas linhas em uma…
+	New text width (pt):	Nova largura do texto (pt):
+	Enclose in brackets	Colocar entre parênteses
+	Bracket pair:	Tipo de parênteses:
+	Typography	Tipografia
+	Character spacing control	Controle de espaçamento entre caracteres
+	Don't compress	Não compactar
+	Compress punctuation only	Compactar somente a pontuação
+	Compress punctuation and Japanese kana	Compactar a pontuação e o kana japonês
+	First and last characters	Primeiros e últimos caracteres
+	Strict	Rígido
+	Cannot start a line:	Não pode iniciar uma linha:
+	Cannot end a line:	Não pode terminar uma linha:
+	Japanese Find Options	Opções de localização em japonês
+	Sounds like (Japanese)	Soa como (japonês)
+	Match full/half width	Corresponder largura total/meia
+	Match hiragana/katakana	Corresponder hiragana/katakana
+	Match small kana	Corresponder kana pequeno
+	Match prolonged sound marks and dashes	Corresponder marcas de som longo e traços
+	Japanese Consistency Checker	Verificador de consistência do japonês
+	Japanese Consistency Checker…	Verificador de consistência do japonês…
+	No inconsistent spellings were found.	Nenhuma grafia inconsistente foi encontrada.
+	Pick the spelling to keep in each group.	Escolha a grafia a manter em cada grupo.
+	Bidirectional text	Texto bidirecional
+	Bidirectional Text	Texto bidirecional
+	Default direction:	Direção padrão:
+	Cursor movement:	Movimento do cursor:
+	Logical	Lógico
+	Visual	Visual
+	Manage Fields	Gerenciar campos
+	File locations	Locais de arquivos
+	File Locations	Locais de Arquivos
+	Documents:	Documentos:
+	Pictures:	Imagens:
+	The system's choice	A escolha do sistema
+	Show Repairs	Mostrar Reparos
+	No repairs were needed.	Nenhum reparo foi necessário.
+	These problems were found and repaired when the document was opened:	Estes problemas foram encontrados e reparados ao abrir o documento:
+	An unreadable entry in the file was skipped: {what}	Uma entrada ilegível do arquivo foi ignorada: {what}
+	An unreadable part was left out: {what}	Uma parte ilegível foi omitida: {what}
+	Unreadable relationships were ignored: {what}	Relações ilegíveis foram ignoradas: {what}
+	A missing part of an embedded object was left out: {what}	Uma parte ausente de um objeto inserido foi omitida: {what}
+	Copy File	Copiar Arquivo
+	Find Files	Localizar Arquivos
+	Letter Wizard	Assistente de Carta
+	Recipient's name:	Nome do destinatário:
+	Salutation:	Saudação:
+	Subject:	Assunto:
+	Complimentary closing:	Despedida:
+	Sender's name:	Nome do remetente:
+	Job title:	Cargo:
+	Company:	Empresa:
+	Enclosures:	Anexos:
+	Cc:	Cc:
+	Edit Links to Files	Editar Links para Arquivos
+	Source file	Arquivo de origem
+	Locked	Bloqueado
+	Change Source	Alterar Fonte
+	This document has no links to files.	Este documento não tem links para arquivos.
+	Web options	Opções da Web
+	Web Options	Opções da Web
+	Allow PNG as a graphics format	Permitir PNG como formato gráfico
+	Rely on CSS for font formatting	Usar CSS para formatação de fonte
+	Rely on VML for displaying graphics in browsers	Usar VML para exibir gráficos em navegadores
+	Organize supporting files in a folder	Organizar arquivos de suporte em uma pasta
+	Use long file names whenever possible	Usar nomes de arquivo longos sempre que possível
+	Screen size:	Tamanho da tela:
+	Pixels per inch:	Pixels por polegada:
+	Hangul Hanja Conversion	Conversão Hangul/Hanja
+	Hangul Hanja Conversion…	Conversão Hangul/Hanja…
+	Hangul to Hanja	Hangul para Hanja
+	Hanja to Hangul	Hanja para Hangul
+	Put the caret in Korean text to choose its Hanja.	Coloque o cursor em um texto coreano para escolher seu Hanja.
+	The selection, or the whole document when nothing is selected.	A seleção ou o documento inteiro quando nada está selecionado.

@@ -1,0 +1,3000 @@
+# Albanian (sq) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts here)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Machine translation by an AI model (Claude), not yet reviewed by a native speaker.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	„a“ ose „an“ para fjalës pasuese; në polonisht „w“/„we“, „z“/„ze“.
+	% of all commits	% e të gjitha commit-eve
+	(All)	(Të gjitha)
+	(Custom)	(I personalizuar)
+	(no style)	(pa stil)
+	(no suggestions)	(nuk ka sugjerime)
+	(none)	(asnjë)
+	(normal text)	(tekst normal)
+	(not matched)	(pa përputhje)
+	(picture or object)	(figurë ose objekt)
+	*Bold* and _italic_ with real formatting	*Të trasha* dhe _të pjerrëta_ me formatim të vërtetë
+	0 or More Characters	0 ose më shumë karaktere
+	1. Formatting restrictions	1. Kufizimet e formatimit
+	1. Main document	1. Dokumenti kryesor
+	1.5 Line Spacing	Hapësirë rreshti 1,5
+	1/4 Em Space	Hapësirë 1/4 em
+	1×2 Empty Matrix	Matricë bosh 1×2
+	1×3 Empty Matrix	Matricë bosh 1×3
+	2. Data source	2. Burimi i të dhënave
+	2. Editing restrictions	2. Kufizimet e redaktimit
+	2×1 Empty Matrix	Matricë bosh 2×1
+	2×2 Determinant	Përcaktor 2×2
+	2×2 Empty Matrix	Matricë bosh 2×2
+	2×2 Identity Matrix	Matricë njësi 2×2
+	2×2 Identity Matrix (sparse)	Matricë njësi 2×2 (e rrallë)
+	2×2 Matrix in Brackets	Matricë 2×2 në kllapa katrore
+	2×2 Matrix in Double Bars	Matricë 2×2 në vija të dyfishta
+	2×2 Matrix in Parentheses	Matricë 2×2 në kllapa të rrumbullakëta
+	2×3 Empty Matrix	Matricë bosh 2×3
+	3-D	3D
+	3. Merge the data with the document	3. Bashko të dhënat me dokumentin
+	3. Start enforcement	3. Fillo zbatimin
+	3D Models	Modele 3D
+	3×1 Empty Matrix	Matricë bosh 3×1
+	3×2 Empty Matrix	Matricë bosh 3×2
+	3×3 Empty Matrix	Matricë bosh 3×3
+	3×3 Identity Matrix	Matricë njësi 3×3
+	3×3 Identity Matrix (sparse)	Matricë njësi 3×3 (e rrallë)
+	5,000 characters a day; give an email address for 50,000.	5.000 karaktere në ditë; jepni një adresë email-i për 50.000.
+	<< Less	<< Më pak
+	<< Remove	<< Hiq
+	A file dialog is already open.	Një dialog skedarësh është tashmë i hapur.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Një përpunues teksti falas dhe me burim të hapur, i shkruar nga e para në Rust.\nBazuar në WordCraft nga ekipi ArtCraft.
+	A header source holds the field names for a data source without a header row.	Një burim koke mban emrat e fushave për një burim të dhënash pa rresht koke.
+	A mail merge field	Një fushë bashkimi postar
+	A new document lists the commands with their shortcuts.	Një dokument i ri liston komandat me shkurtoret e tyre.
+	A numbered sequence (figures, tables…)	Një varg i numëruar (figura, tabela…)
+	A password is required to open this document.	Kërkohet një fjalëkalim për të hapur këtë dokument.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Një hapësirë para pikësimit, shenja të dyfishuara, presje polonisht para lidhëzave.
+	A table of contents	Një tabelë e përmbajtjes
+	A table's rows keep the same columns here.	Rreshtat e një tabele mbajnë të njëjtat kolona këtu.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Rreth
+	About Doc4Me	Rreth Doc4Me
+	Above Chart	Mbi grafik
+	Above the item	Mbi elementin
+	Absolute position	Pozicion absolut
+	Absolute value cases	Raste me vlerë absolute
+	Accent	Theks
+	Accent Gradient	Gradient theksi
+	Accent with Reflection	Theks me reflektim
+	Accent {n}	Theks {n}
+	Accents	Theksa
+	Accept	Prano
+	Accept All	Prano të gjitha
+	Accept All Changes	Prano të gjitha ndryshimet
+	Accept or Reject Changes	Prano ose refuzo ndryshimet
+	Accept This Change	Prano këtë ndryshim
+	Accessed on	Aksesuar më
+	Accessibility	Aksesueshmëria
+	Accessibility Pane	Paneli i aksesueshmërisë
+	Acute	Theks i mprehtë
+	Add	Shto
+	Add >>	Shto >>
+	Add a comment	Shto një koment
+	Add a Table	Shto një tabelë
+	Add at least one field.	Shtoni të paktën një fushë.
+	Add caption when inserting:	Shto titull gjatë futjes:
+	Add Chart Element	Shto element grafiku
+	Add Field	Shto fushë
+	Add Field Name	Shto emër fushe
+	Add Font…	Shto shkronja…
+	Add line numbering	Shto numërim rreshtash
+	Add New Placeholder	Shto mbajtës të ri vendi
+	Add New Placeholder…	Shto mbajtës të ri vendi…
+	Add New Source…	Shto burim të ri…
+	Add Object to Selection	Shto objektin në përzgjedhje
+	Add Pen	Shto stilolaps
+	Add Row	Shto rresht
+	Add Series	Shto seri
+	Add Shape	Shto formë
+	Add Space Before Paragraph	Shto hapësirë para paragrafit
+	Add space between Asian and Latin text	Shto hapësirë midis tekstit aziatik dhe atij latin
+	Add space between Asian text and numbers	Shto hapësirë midis tekstit aziatik dhe numrave
+	Add tab stop at:	Shto ndalesë tabulimi te:
+	Add Text	Shto tekst
+	Add the chapter number	Shto numrin e kapitullit
+	Add to Dictionary	Shto në fjalor
+	Add to Document	Shto në dokument
+	Add to Quick Access Toolbar	Shto në shiritin e qasjes së shpejtë
+	Add to Style Gallery	Shto në galerinë e stileve
+	Add-ins	Shtesa
+	Add/Edit\nBibliography	Shto/Redakto\nbibliografinë
+	Add/Edit\nCitation	Shto/Redakto\ncitimin
+	Add\nNote	Shto\nshënim
+	Add\nPen	Shto\nstilolaps
+	Add\nShape	Shto\nformë
+	Added	U shtua
+	Added Fonts	Shkronja të shtuara
+	Address	Adresa
+	Address Block	Blloku i adresës
+	Address labels	Etiketa adresash
+	Address:	Adresa:
+	Address\nBlock	Blloku i\nadresës
+	Adjust	Rregullo
+	Advanced	Të avancuara
+	Advanced Find	Kërkim i avancuar
+	Advanced Find…	Kërkim i avancuar…
+	After:	Pas:
+	Agents	Agjentë
+	Align	Rreshto
+	Align Bottom Center	Rreshto poshtë në qendër
+	Align Bottom Left	Rreshto poshtë majtas
+	Align Bottom Right	Rreshto poshtë djathtas
+	Align Center	Rreshto në qendër
+	Align Center Left	Rreshto në qendër majtas
+	Align Center Right	Rreshto në qendër djathtas
+	Align Left	Rreshto majtas
+	Align Right	Rreshto djathtas
+	Align Text	Rreshto tekstin
+	Align Top Center	Rreshto lart në qendër
+	Align Top Left	Rreshto lart majtas
+	Align Top Right	Rreshto lart djathtas
+	Aligned at:	Rreshtuar te:
+	Alignment	Rreshtimi
+	Alignment:	Rreshtimi:
+	All	Të gjitha
+	All - Linear	Të gjitha - Linear
+	All - Professional	Të gjitha - Profesional
+	All Borders	Të gjitha kufijtë
+	All Caps	Të gjitha me shkronja të mëdha
+	All caps	Të gjitha me të mëdha
+	All Commands	Të gjitha komandat
+	All files	Të gjithë skedarët
+	All Levels	Të gjitha nivelet
+	All Markup	Të gjitha shënjimet
+	All pages	Të gjitha faqet
+	All pages in the range	Të gjitha faqet në interval
+	All records	Të gjitha regjistrimet
+	All symbol sets	Të gjitha grupet e simboleve
+	Allow Doc4Me to use online services	Lejo Doc4Me të përdorë shërbime në linjë
+	Allow hanging punctuation	Lejo pikësim të varur
+	Allow Latin text to wrap in the middle of a word	Lejo tekstin latin të mbështillet në mes të fjalës
+	Allow line breaks	Lejo ndërprerje rreshtash
+	Allow overlap	Lejo mbivendosje
+	Allow row to break across pages	Lejo rreshtin të ndahet midis faqeve
+	Alphabetical	Alfabetik
+	Alt Text	Tekst alternativ
+	Alt text	Tekst alternativ
+	Alt Text Pane	Paneli i tekstit alternativ
+	Alt:	Alt:
+	Alt\nText	Tekst\nalternativ
+	And	Dhe
+	Angle Brackets	Kllapa këndore
+	Angle Brackets with Separator	Kllapa këndore me ndarës
+	Angle Brackets with Two Separators	Kllapa këndore me dy ndarës
+	Animate the caret (it glides and fades)	Animo kursorin (rrëshqet dhe zbehet)
+	Animation	Animacion
+	Animation effects:	Efekte animacioni:
+	Annotation Reference	Referencë shënimi
+	Annotation Subject	Subjekti i shënimit
+	Annotation Text	Teksti i shënimit
+	Another file	Një skedar tjetër
+	Any Character	Çdo karakter
+	Any Digit	Çdo shifër
+	Any Letter	Çdo shkronjë
+	Anyone can open this document. Encrypt it with a password to keep it private.	Kushdo mund ta hapë këtë dokument. Shifrojeni me fjalëkalim për ta mbajtur privat.
+	Anyone who opens the document will need this password.	Kushdo që hap dokumentin do të ketë nevojë për këtë fjalëkalim.
+	APA	APA
+	API key (if the server needs one)	Çelësi API (nëse serveri ka nevojë)
+	Apply	Zbato
+	Apply as you type	Zbato ndërsa shkruani
+	Apply Asian line-breaking rules (kinsoku)	Zbato rregullat aziatike të ndërprerjes së rreshtave (kinsoku)
+	Apply Character Style	Zbato stil karakteri
+	Apply formatting to:	Zbato formatimin te:
+	Apply special formats to	Zbato formate të veçanta te
+	Apply Style	Zbato stilin
+	Apply Styles	Zbato stilet
+	Apply to:	Zbato te:
+	Arabic	Arabe
+	Arch Down	Hark poshtë
+	Arch Up	Hark lart
+	Area	Sipërfaqe
+	Around	Përreth
+	Arrange	Rregullo
+	Arrange All	Rregulloji të gjitha
+	Arrange\nAll	Rregulloji\ntë gjitha
+	Arrow	Shigjetë
+	Arrows	Shigjeta
+	Artistic Effects	Efekte artistike
+	As Recommended	Siç rekomandohet
+	As you type	Ndërsa shkruani
+	ASAP	Sa më shpejt
+	Ascending	Në rritje
+	Asian text font:	Shkronjat e tekstit aziatik:
+	Asian Typography	Tipografi aziatike
+	Assign	Cakto
+	At least	Të paktën
+	At least {n}	Të paktën {n}
+	Atelier	Atelier
+	Atmosphere	Atmosferë
+	Attach Template	Bashkëngjit shabllon
+	Attach…	Bashkëngjit…
+	Author	Autori
+	Auto	Auto
+	AutoCaption	Titull automatik
+	AutoCaption…	Titull automatik…
+	AutoComplete	Plotësim automatik
+	AutoCorrect	Korrigjim automatik
+	AutoCorrect Options	Opsionet e korrigjimit automatik
+	AutoFit	Përshtatje automatike
+	AutoFit Contents	Përshtat automatikisht përmbajtjen
+	AutoFit Window	Përshtat automatikisht dritaren
+	AutoFormat	Formatim automatik
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Formatimi automatik (Ctrl+Alt+K) formaton paragrafët e përzgjedhur ose gjithë dokumentin.
+	AutoFormat and Review Changes…	Formatim automatik dhe rishikim ndryshimesh…
+	AutoFormat As You Type	Formatim automatik ndërsa shkruani
+	AutoFormat changed {count} paragraphs	Formatimi automatik ndryshoi {count} paragrafë
+	AutoFormat Now	Formato automatikisht tani
+	Automatic	Automatik
+	Automatic ({language})	Automatike ({language})
+	Automatic bulleted lists	Lista automatike me pika
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Automatike ndjek gjuhën e sistemit tuaj. Menytë dhe komandat ndryshojnë; dokumentet tuaja jo.
+	Automatic numbered lists	Lista automatike me numra
+	Automatic Table 1 (3 levels)	Tabelë automatike 1 (3 nivele)
+	Automatic Table 2 (2 levels)	Tabelë automatike 2 (2 nivele)
+	Automatically hyphenate document	Ndaj automatikisht fjalët me vizë në dokument
+	Automatically Update Document Styles	Përditëso automatikisht stilet e dokumentit
+	Automatically update document styles	Përditëso automatikisht stilet e dokumentit
+	AutoSave	Ruajtje automatike
+	AutoSave documents you have saved in Doc4Me	Ruaj automatikisht dokumentet që keni ruajtur në Doc4Me
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Ruajtja automatike dështoi: {error}. Ruajeni dokumentin për ta rindezur ruajtjen automatike.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Ruajtja automatike nuk ofrohet në shfletues: nuk mund të shkruajë në skedarët tuaj. Ruaj shkarkon një kopje.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Ruajtja automatike mban vetëm skedarë .docx, .odt dhe .rtf; {name} nuk mund të mbajë gjithë formatimin. Ruajeni si .docx për të ndezur ruajtjen automatike.
+	AutoSave saves every change to the file (needs a saved document)	Ruajtja automatike ruan çdo ndryshim në skedar (kërkon një dokument të ruajtur)
+	AutoSave writes your changes to the file a moment after you stop typing.	Ruajtja automatike shkruan ndryshimet tuaja në skedar një çast pasi ndaloni së shkruari.
+	AutoText	Tekst automatik
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10.12" × 14.33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7.17" × 10.12"
+	Back	Prapa
+	Backspace	Backspace
+	Balloons	Flluska
+	Banded Columns	Kolona me breza
+	Banded Rows	Rreshta me breza
+	Bar	Shirit
+	Base text:	Teksti bazë:
+	Based on: {style}	Bazuar në: {style}
+	Baseline Dots	Pika në vijën bazë
+	Basic Cycle	Cikël bazë
+	Basic List	Listë bazë
+	Basic Math	Matematikë bazë
+	Basic Matrix	Matricë bazë
+	Basic Process	Proces bazë
+	Basic Pyramid	Piramidë bazë
+	Basic Radial	Radial bazë
+	Basic Venn	Venn bazë
+	Bayes' rule	Rregulli i Bayes-it
+	Before:	Para:
+	Beginning of Word	Fillimi i fjalës
+	Behind Text	Pas tekstit
+	Below text	Poshtë tekstit
+	Below the item	Poshtë elementit
+	Between	Midis
+	Bibliography	Bibliografia
+	Binary assets added	Asete binare të shtuara
+	Binary assets removed	Asete binare të hequra
+	Binomial Coefficient	Koeficient binomial
+	Binomial Coefficient (angle)	Koeficient binomial (këndor)
+	Binomial Coefficient with Angle Brackets	Koeficient binomial me kllapa këndore
+	Binomial expansion of (x+a)ⁿ	Zbërthimi binomial i (x+a)ⁿ
+	Blank	Bosh
+	Blank (Three Columns)	Bosh (tri kolona)
+	Blank document	Dokument bosh
+	Blank Page	Faqe bosh
+	Block\nAuthors	Blloko\nautorët
+	Blue:	Blu:
+	Body Text	Teksti kryesor
+	Body text in a short paragraph to show spacing.	Tekst kryesor në një paragraf të shkurtër për të treguar hapësirat.
+	Bold	Të trasha
+	Book	Libër
+	Book Title	Titull libri
+	Book title	Titull libri
+	Bookmark	Faqeshënues
+	Bookmark name:	Emri i faqeshënuesit:
+	Border lines	Vija kufiri
+	Border Painter	Piktori i kufijve
+	Border\nPainter	Piktori i\nkufijve
+	Borders	Kufijtë
+	Borders and Shading	Kufij dhe hijezim
+	Borders and Shading…	Kufij dhe hijezim…
+	Border…	Kufiri…
+	Both Sides	Të dyja anët
+	Both sides	Të dyja anët
+	Bottom	Poshtë
+	Bottom Border	Kufiri i poshtëm
+	Bottom Margin	Mënjana e poshtme
+	Bottom of Page	Fundi i faqes
+	Bottom of the Window	Fundi i dritares
+	Bottom:	Poshtë:
+	Box	Kuti
+	Boxed Formula	Formulë në kuti
+	Boxed Formula (example)	Formulë në kuti (shembull)
+	Boxed Formulas	Formula në kuti
+	Braces	Kllapa gjarpërore
+	Braces with Separator	Kllapa gjarpërore me ndarës
+	Bracket	Kllapë
+	Brackets	Kllapa
+	Brackets with Separators	Kllapa me ndarës
+	Break Link	Këput lidhjen
+	Breaks	Ndërprerje
+	Breve	Theks i shkurtër
+	Brightness, contrast and transparency change the picture from how it looks now.	Ndriçimi, kontrasti dhe transparenca e ndryshojnë figurën nga pamja e saj aktuale.
+	Brightness:	Ndriçimi:
+	Bring Forward	Sill përpara
+	Browse in Doc4Me…	Shfleto në Doc4Me…
+	Browse…	Shfleto…
+	Build table of figures from:	Ndërto tabelën e figurave nga:
+	Building Block Gallery Content Control	Kontroll përmbajtjeje i galerisë së blloqeve ndërtuese
+	Built from the style or table entry fields chosen in Options.	Ndërtuar nga fushat e stilit ose të hyrjeve të tabelës të zgjedhura te Opsionet.
+	Built-In	I integruar
+	Built-in Heading styles	Stilet e integruara të titujve
+	Built-in style	Stil i integruar
+	Built-in styles can't be deleted.	Stilet e integruara nuk mund të fshihen.
+	Bullet	Pikë liste
+	Bullet Library	Biblioteka e pikave
+	Bullets	Pika liste
+	By author	Sipas autorit
+	By:	Nga:
+	Calendar	Kalendar
+	Can't be deleted	Nuk mund të fshihet
+	Cancel	Anulo
+	Canvas Member	Anëtar i kanavacës
+	Capitalization	Shkronjat e mëdha
+	Capitalize Each Word	Çdo fjalë me shkronjë të madhe
+	Capitalize first letter of sentences	Shkronjë e madhe në fillim të fjalive
+	Capitalize first letter of table cells	Shkronjë e madhe në fillim të qelizave të tabelës
+	Capitalize names of days	Shkronjë e madhe në emrat e ditëve
+	Capitalize the first word of a sentence	Fjala e parë e fjalisë me shkronjë të madhe
+	Caption	Titull
+	Caption label:	Etiketa e titullit:
+	Caption Numbering	Numërimi i titujve
+	Caption text	Teksti i titullit
+	Caption:	Titulli:
+	Captions	Titujt
+	Caret Character	Karakteri ^
+	Case changes	Ndryshime shkronjash
+	Cases	Raste
+	Cases (Three Conditions)	Raste (tri kushte)
+	Cases (Two Conditions)	Raste (dy kushte)
+	Cases and Stacks	Raste dhe stiva
+	Catalog	Katalog
+	Categories	Kategoritë
+	Categories:	Kategoritë:
+	Category	Kategoria
+	Category {n}	Kategoria {n}
+	Category:	Kategoria:
+	Category…	Kategoria…
+	Ceiling	Tavan
+	Cell	Qeliza
+	Cell Margins	Mënjanat e qelizës
+	Cell margins	Mënjanat e qelizës
+	Cell Options	Opsionet e qelizës
+	Cell Size	Madhësia e qelizës
+	Cell\nMargins	Mënjanat e\nqelizës
+	Center	Qendër
+	Centered	Në qendër
+	Centered as Group	Në qendër si grup
+	Centimeters	Centimetra
+	Change	Ndrysho
+	Change Case	Ndrysho shkronjat
+	Change Chart Type	Ndrysho llojin e grafikut
+	Change Colors	Ndrysho ngjyrat
+	Change in y over change in x	Ndryshimi i y mbi ndryshimin e x
+	Change Layout	Ndrysho faqosjen
+	Change List Level	Ndrysho nivelin e listës
+	Change Password…	Ndrysho fjalëkalimin…
+	Change Picture	Ndrysho figurën
+	Change Picture…	Ndrysho figurën…
+	Change Shape	Ndrysho formën
+	Change Structure	Ndrysho strukturën
+	Change to Display	Ndrysho në shfaqje
+	Change to Inline	Ndrysho në rresht
+	Change to Level 1	Ndrysho në nivelin 1
+	Change to Level 2	Ndrysho në nivelin 2
+	Change to Level 3	Ndrysho në nivelin 3
+	Change to Level 4	Ndrysho në nivelin 4
+	Change to Level 5	Ndrysho në nivelin 5
+	Change to Level 6	Ndrysho në nivelin 6
+	Change to Level 7	Ndrysho në nivelin 7
+	Change to Level 8	Ndrysho në nivelin 8
+	Change to Level 9	Ndrysho në nivelin 9
+	Change\nChart Type	Ndrysho llojin\ne grafikut
+	Change\nColors	Ndrysho\nngjyrat
+	Changed	U ndryshua
+	Changed lines:	Rreshta të ndryshuar:
+	Changes	Ndryshimet
+	Changes with highlighting	Ndryshime me theksim
+	Changes without highlighting	Ndryshime pa theksim
+	Chapter in a book	Kapitull në një libër
+	Chapters begin at:	Kapitujt fillojnë te:
+	Character	Karakter
+	Character Border	Kufiri i karakterit
+	Character code:	Kodi i karakterit:
+	Character in Range	Karakter në interval
+	Character level	Niveli i karakterit
+	Character Position	Pozicioni i karakterit
+	Character Scale	Shkalla e karakterit
+	Character Shading	Hijezimi i karakterit
+	Character Spacing	Hapësira e karaktereve
+	Character spacing	Hapësira e karaktereve
+	Character style	Stil karakteri
+	Characters	Karaktere
+	Characters (no spaces)	Karaktere (pa hapësira)
+	Characters (with spaces)	Karaktere (me hapësira)
+	Characters per line:	Karaktere për rresht:
+	Chart	Grafik
+	Chart Design	Dizajni i grafikut
+	Chart Layouts	Faqosjet e grafikut
+	Chart Title	Titulli i grafikut
+	Check	Kontrollo
+	Check Accessibility	Kontrollo aksesueshmërinë
+	Check Box Content Control	Kontroll përmbajtjeje me kuti zgjedhjeje
+	Check Compatibility	Kontrollo përputhshmërinë
+	Check Errors…	Kontrollo gabimet…
+	Check for Errors	Kontrollo për gabime
+	Check Spelling as You Type	Kontrollo drejtshkrimin ndërsa shkruani
+	Check spelling as you type	Kontrollo drejtshkrimin ndërsa shkruani
+	Check\nAccessibility	Kontrollo\naksesueshmërinë
+	Checked styles are allowed:	Stilet e shënuara lejohen:
+	Checked symbol	Simbol i shënuar
+	Chevron Down	Kënd poshtë
+	Chevron Up	Kënd lart
+	Chicago	Chicago
+	Chinese (Simplified)	Kinezisht (e thjeshtuar)
+	Chinese (Traditional)	Kinezisht (tradicionale)
+	Choose a command	Zgjidhni një komandë
+	Choose a shortcut	Zgjidhni një shkurtore
+	Choose List Item	Zgjidh elementin e listës
+	Choose the sheet that holds the recipients.	Zgjidhni fletën që mban marrësit.
+	Circle	Rreth
+	Circle area from its radius	Sipërfaqja e rrethit nga rrezja
+	Circled Dot	Pikë në rreth
+	Circled Plus	Plus në rreth
+	Circled Times	Herë në rreth
+	Citation marked.	Citimi u shënua.
+	Citation Style	Stili i citimit
+	Citations	Citimet
+	Citations & Bibliography	Citimet dhe bibliografia
+	City	Qyteti
+	Clear	Pastro
+	Clear All	Pastroji të gjitha
+	Clear All Formatting	Pastro gjithë formatimin
+	Clear Character Formatting	Pastro formatimin e karaktereve
+	Clear Character Style	Pastro stilin e karakterit
+	Clear Formatting Level	Pastro nivelin e formatimit
+	Clear Paragraph Formatting	Pastro formatimin e paragrafit
+	Click a border between two cells to merge them. Esc stops.	Klikoni një kufi midis dy qelizave për t'i bashkuar. Esc ndalon.
+	Click an item to paste it.	Klikoni një element për ta ngjitur.
+	Click level to modify:	Klikoni nivelin për ta ndryshuar:
+	Click the empty text box the text should continue in (Esc cancels)	Klikoni kutinë bosh të tekstit ku duhet të vazhdojë teksti (Esc anulon)
+	Click to switch back to inserting	Klikoni për t'u kthyer te futja
+	Clipboard	Kujtesa e fragmenteve
+	Clipboard Contents	Përmbajtja e kujtesës
+	Clipboard Items	Elementet e kujtesës
+	Clipboard Pane	Paneli i kujtesës
+	Close	Mbyll
+	Close Equation	Mbyll ekuacionin
+	Close Header and Footer	Mbyll kokën dhe fundin e faqes
+	Close Outline View	Mbyll pamjen e skicës
+	Close Outline\nView	Mbyll pamjen\ne skicës
+	Close Reviewing Pane	Mbyll panelin e rishikimit
+	Clustered Bar	Shirita të grupuar
+	Clustered Column	Kolona të grupuara
+	Col #:	Kol. nr.:
+	Collapse	Palos
+	Collapse Selection	Palos përzgjedhjen
+	Collapse the Ribbon	Palos shiritin e veglave
+	Collate copies	Rendit kopjet
+	Collect entries from:	Mblidh hyrjet nga:
+	Colon Equal	Dy pika baras
+	Color	Ngjyra
+	Color model:	Modeli i ngjyrave:
+	Color only	Vetëm ngjyrë
+	Color:	Ngjyra:
+	Color: {color}	Ngjyra: {color}
+	Colorful	Shumëngjyrësh
+	Colors	Ngjyrat
+	Colors:	Ngjyrat:
+	Column	Kolona
+	Column Break	Ndërprerje kolone
+	Column Selection	Përzgjedhje kolone
+	Column selection: the arrow keys extend the block, Esc ends it	Përzgjedhje kolone: tastet e shigjetave zgjerojnë bllokun, Esc e përfundon
+	Column width	Gjerësia e kolonës
+	Column:	Kolona:
+	Columns	Kolonat
+	Columns:	Kolonat:
+	Combine	Kombino
+	Combine Documents	Kombino dokumentet
+	Combo Box Content Control	Kontroll përmbajtjeje me kuti kombinuese
+	Commands	Komandat
+	Commands:	Komandat:
+	Comment	Koment
+	Comments	Komentet
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Komente pranë çdo faqeje dhe ndryshime të gjurmuara në PDF, printime dhe imazhe; një listë komentesh në fund të faqeve web, Markdown dhe tekstit.
+	Comments on version	Komente për versionin
+	Comments Pane	Paneli i komenteve
+	Commits	Commit-et
+	Common Accent Objects	Objekte theksi të zakonshme
+	Common Brackets	Kllapa të zakonshme
+	Common Fractions	Thyesa të zakonshme
+	Common Functions	Funksione të zakonshme
+	Common Large Operators	Operatorë të mëdhenj të zakonshëm
+	Common Operator Structures	Struktura operatorësh të zakonshme
+	Common Operators	Operatorë të zakonshëm
+	Common Radicals	Rrënjë të zakonshme
+	Common Subscripts and Superscripts	Indekse të poshtme dhe të sipërme të zakonshme
+	Communication	Komunikim
+	Compact	Kompakt
+	Company	Kompania
+	Compare	Krahaso
+	Compare Documents	Krahaso dokumentet
+	Compare to	Krahaso me
+	Compared: {changes} changes	U krahasua: {changes} ndryshime
+	Comparing with another file needs the desktop app.	Krahasimi me një skedar tjetër kërkon aplikacionin e desktopit.
+	Comparison	Krahasim
+	Comparison settings	Cilësimet e krahasimit
+	Compatibility mode: {version}	Modaliteti i përputhshmërisë: {version}
+	Compatibility Options	Opsionet e përputhshmërisë
+	Compatibility Options…	Opsionet e përputhshmërisë…
+	Compress Pictures	Ngjesh figurat
+	Compress punctuation at the start of a line	Ngjesh pikësimin në fillim të rreshtit
+	Condensed	I ngjeshur
+	Conference	Konferencë
+	Conference paper	Punim konference
+	CONFIDENTIAL	KONFIDENCIALE
+	Confirm password:	Konfirmo fjalëkalimin:
+	Connect Shapes	Lidh format
+	Constitutional Provisions	Dispozita kushtetuese
+	Container Title	Titulli i përmbledhjes
+	Contains	Përmban
+	Content Control at Selection	Kontroll përmbajtjeje te përzgjedhja
+	Content Control Properties	Vetitë e kontrollit të përmbajtjes
+	Contents can't be edited	Përmbajtja nuk mund të redaktohet
+	Context	Konteksti
+	Contextual	Kontekstual
+	Continuous	I vazhdueshëm
+	Continuous numbering	Numërim i vazhdueshëm
+	Contour Integral	Integral konturi
+	Contour Integral with Limits	Integral konturi me kufij
+	Contour Integral with Stacked Limits	Integral konturi me kufij të mbivendosur
+	Contour Integrals	Integrale konturi
+	Contrast:	Kontrasti:
+	Contributors	Kontribuues
+	Controls	Kontrollet
+	Conversions	Konvertime
+	Convert	Konverto
+	Convert between built-up and linear form	Konverto midis formës së ndërtuar dhe asaj lineare
+	Convert Notes	Konverto shënimet
+	Convert Permanently	Konverto përgjithmonë
+	Convert Text to Table	Konverto tekstin në tabelë
+	Convert Text to Table…	Konverto tekstin në tabelë…
+	Convert to Arabic Digits	Konverto në shifra arabe
+	Convert to Shapes	Konverto në forma
+	Convert to Text	Konverto në tekst
+	Convert to Thai Digits	Konverto në shifra tajlandeze
+	Copies	Kopje
+	Coproduct	Koprodukt
+	Coproduct with Limits	Koprodukt me kufij
+	Coproduct with Lower Limit	Koprodukt me kufi të poshtëm
+	Coproduct with Subscript-Superscript Limits	Koprodukt me kufij indeks i poshtëm-i sipërm
+	Copy	Kopjo
+	Copy Formatting	Kopjo formatimin
+	Copy of the text a bookmark marks	Kopje e tekstit që shënon një faqeshënues
+	Copy Styles	Kopjo stilet
+	Copy Text	Kopjo tekstin
+	Copy to where?	Ku të kopjohet?
+	Copyright	E drejta e autorit
+	Copyright Sign	Shenja e së drejtës së autorit
+	Corrections	Korrigjime
+	Cosecant Function	Funksioni kosekant
+	Cosine 2x	Kosinusi 2x
+	Cosine Function	Funksioni kosinus
+	Cotangent Function	Funksioni kotangjent
+	Couldn't add {name}: {reason}	{name} nuk u shtua dot: {reason}
+	Couldn't download the picture: {reason}	Figura nuk u shkarkua dot: {reason}
+	Couldn't download {name}: {error}	{name} nuk u shkarkua dot: {error}
+	Couldn't get the add-in list: {reason}	Lista e shtesave nuk u mor dot: {reason}
+	Couldn't make Doc4Me the default: {error}	Doc4Me nuk u bë dot aplikacioni i parazgjedhur: {error}
+	Couldn't open {path}: {error}	{path} nuk u hap dot: {error}
+	Couldn't search: {reason}	Kërkimi nuk u krye dot: {reason}
+	Couldn't translate: {reason}	Përkthimi nuk u krye dot: {reason}
+	Count by:	Numëro me hap:
+	Count words in text boxes and notes	Numëro fjalët në kutitë e tekstit dhe shënimet
+	Country	Shteti
+	Courtesy Title	Titull mirësjelljeje
+	Cover Page	Faqja e kopertinës
+	Craft	Zanat
+	Create	Krijo
+	Create a Style	Krijo një stil
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Krijoni një skicë interaktive të dokumentit tuaj.\n\nËshtë një mënyrë e shkëlqyer për të ditur ku ndodheni ose për të zhvendosur shpejt përmbajtjen.\n\nPër të filluar, shkoni te skeda Kreu dhe zbatoni stilet e titujve te titujt e dokumentit.
+	Create Data Source…	Krijo burim të dhënash…
+	Create Graphic	Krijo grafikë
+	Create Header Source	Krijo burim koke
+	Create Link	Krijo lidhje
+	Create New Style	Krijo stil të ri
+	Create Source	Krijo burim
+	Create…	Krijo…
+	Crop	Prit
+	Cross-reference	Referencë e kryqëzuar
+	Cross-reference:	Referencë e kryqëzuar:
+	Cube Root	Rrënjë kubike
+	Current	Aktuale
+	Current - Linear	Aktuale - Linear
+	Current - Professional	Aktuale - Profesional
+	Current keyboard settings	Cilësimet aktuale të tastierës
+	Current page	Faqja aktuale
+	Current Position	Pozicioni aktual
+	Current record	Regjistrimi aktual
+	Current style: {style}	Stili aktual: {style}
+	Curved Arrow Connector	Lidhës me shigjetë të lakuar
+	Curved Connector	Lidhës i lakuar
+	Custom	I personalizuar
+	Custom dictionary	Fjalor i personalizuar
+	Custom Margins…	Mënjana të personalizuara…
+	Custom mark:	Shenjë e personalizuar:
+	Custom range	Interval i personalizuar
+	Custom Table of Contents	Tabelë e personalizuar e përmbajtjes
+	Custom Table of Contents…	Tabelë e personalizuar e përmbajtjes…
+	Custom Watermark	Filigran i personalizuar
+	Custom Watermark…	Filigran i personalizuar…
+	Customize	Personalizo
+	Customize Keyboard	Personalizo tastierën
+	Customize Quick Access Toolbar	Personalizo shiritin e qasjes së shpejtë
+	Customize Quick Access Toolbar…	Personalizo shiritin e qasjes së shpejtë…
+	Customize Ribbon	Personalizo shiritin e veglave
+	Customize the Ribbon…	Personalizo shiritin e veglave…
+	Customize…	Personalizo…
+	Cut	Prit
+	Cut, copy, and paste	Prit, kopjo dhe ngjit
+	Cycle	Cikël
+	Czech	Çekisht
+	Danish	Danisht
+	Dark	E errët
+	Dark Mode	Modaliteti i errët
+	Dark page (white text on black)	Faqe e errët (tekst i bardhë mbi të zezë)
+	Dark with Shadow	E errët me hije
+	Darkroom	Dhoma e errët
+	Dashed	Me viza
+	Data	Të dhënat
+	Data Labels	Etiketat e të dhënave
+	Data source:	Burimi i të dhënave:
+	Date	Data
+	Date & Time	Data dhe ora
+	Date and Time	Data dhe ora
+	Date format	Formati i datës
+	Date formats:	Formatet e datës:
+	Date Picker Content Control	Kontroll përmbajtjeje me zgjedhës date
+	Day	Dita
+	Decimal	Dhjetore
+	Decorative objects only add visual interest: screen readers skip them.	Objektet dekorative shtojnë vetëm interes pamor: lexuesit e ekranit i anashkalojnë.
+	Decrease Font Size	Zvogëlo madhësinë e shkronjave
+	Decrease Indent	Zvogëlo dhëmbëzimin
+	Default	I parazgjedhur
+	Default Paragraph Font	Shkronjat e parazgjedhura të paragrafit
+	Default tab stops:	Ndalesat e parazgjedhura të tabulimit:
+	Define New Bullet	Përcakto pikë të re liste
+	Define New Multilevel List	Përcakto listë të re me shumë nivele
+	Define New Multilevel List…	Përcakto listë të re me shumë nivele…
+	Define New Number Format	Përcakto format të ri numrash
+	Deflate	Shfryj
+	Delete	Fshi
+	Delete Back in Equation	Fshi prapa në ekuacion
+	Delete Cells	Fshi qelizat
+	Delete Clipboard Item	Fshi elementin e kujtesës
+	Delete Columns	Fshi kolonat
+	Delete Comment	Fshi komentin
+	Delete in Equation	Fshi në ekuacion
+	Delete Label	Fshi etiketën
+	Delete Next Word	Fshi fjalën pasuese
+	Delete Previous Word	Fshi fjalën paraardhëse
+	Delete Rows	Fshi rreshtat
+	Delete Selected Ink	Fshi bojën e përzgjedhur
+	Delete Style	Fshi stilin
+	Delete Table	Fshi tabelën
+	Delete Table Style	Fshi stilin e tabelës
+	Deleted	U fshi
+	Deletions:	Fshirjet:
+	Delivery address:	Adresa e dorëzimit:
+	Delta Equal To	Delta baras me
+	Delta over arrow	Delta mbi shigjetë
+	Demote	Ul nivelin
+	Demote to Body Text	Ul në tekst kryesor
+	Derivative as a limit	Derivati si limit
+	Descending	Në zbritje
+	Describe what this object shows, for people who can't see it.	Përshkruani çfarë tregon ky objekt, për njerëzit që nuk e shohin dot.
+	Describe what this table shows, for people who can't see it.	Përshkruani çfarë tregon kjo tabelë, për njerëzit që nuk e shohin dot.
+	Description:	Përshkrimi:
+	Design	Dizajni
+	Design Mode	Modaliteti i dizajnit
+	Detach Template	Shkëput shabllonin
+	Detect language automatically	Zbulo gjuhën automatikisht
+	Developer	Zhvilluesi
+	development build	ndërtim zhvillimi
+	Diagonal	Diagonal
+	Diagonal Dots	Pika diagonale
+	Diamond	Romb
+	Dictate	Dikto
+	Dictation isn't available here.	Diktimi nuk ofrohet këtu.
+	Dictation stopped.	Diktimi u ndal.
+	Dictation stopped: {reason}	Diktimi u ndal: {reason}
+	Different First Page	Faqe e parë e ndryshme
+	Different Odd & Even Pages	Faqe tek dhe çift të ndryshme
+	Differential	Diferencial
+	Differential theta	Diferenciali theta
+	Differential x	Diferenciali x
+	Differential y	Diferenciali y
+	Differentials	Diferencialë
+	Direct formatting	Formatim i drejtpërdrejtë
+	Direction:	Drejtimi:
+	Directory	Drejtori
+	Display	Shfaqja
+	Display for Review	Shfaq për rishikim
+	Display gridlines on screen	Shfaq vijat e rrjetës në ekran
+	Display name	Emri i shfaqur
+	Display text	Teksti i shfaqur
+	Distance from surrounding text	Distanca nga teksti përreth
+	Distribute Columns	Shpërndaj kolonat
+	Distribute letters	Shpërndaj shkronjat
+	Distribute Rows	Shpërndaj rreshtat
+	Distribute spacing	Shpërndaj hapësirat
+	Distributed	I shpërndarë
+	Do Not Check Spelling or Grammar	Mos kontrollo drejtshkrimin ose gramatikën
+	Do not check spelling or grammar	Mos kontrollo drejtshkrimin ose gramatikën
+	DO NOT COPY	MOS KOPJO
+	Do Not Show in TOC	Mos e shfaq në tabelën e përmbajtjes
+	Do you want to save changes to {name}?	Doni t'i ruani ndryshimet në {name}?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Shtesat e Doc4Me janë paketa falas makrosh nga katalogu i shtesave të Doc4Me. Ato mund të redaktojnë vetëm dokumentin.
+	Doc4Me is now the default app for Word documents.	Doc4Me tani është aplikacioni i parazgjedhur për dokumentet Word.
+	Document	Dokument
+	Document End	Fundi i dokumentit
+	Document Formatting	Formatimi i dokumentit
+	Document Grid	Rrjeta e dokumentit
+	Document Information	Informacioni i dokumentit
+	Document Property	Veti e dokumentit
+	Document Start	Fillimi i dokumentit
+	Document template:	Shablloni i dokumentit:
+	Document Text	Teksti i dokumentit
+	Document Title	Titulli i dokumentit
+	Document1	Dokumenti1
+	Document\nPreferences	Preferencat e\ndokumentit
+	Documents	Dokumentet
+	Documents you open will show up here.	Dokumentet që hapni do të shfaqen këtu.
+	Does not contain	Nuk përmban
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Mos shto hapësirë midis paragrafëve me të njëjtin stil
+	Don't capitalize after:	Mos vendos shkronjë të madhe pas:
+	Don't hyphenate	Mos ndaj me vizë
+	Don't print blank lines when data fields are empty	Mos printo rreshta bosh kur fushat e të dhënave janë bosh
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Mos lexo citimet dhe bibliografitë e Zotero, Mendeley ose EndNote
+	Don't Save	Mos ruaj
+	Don't use HTML paragraph auto spacing	Mos përdor hapësirat automatike HTML të paragrafëve
+	Dot	Pikë
+	Dot dash	Pikë vizë
+	Dot-dash	Pikë-vizë
+	Dots	Pika
+	Dotted	Me pika
+	Double	Dyfish
+	Double Bar	Vijë e dyfishtë
+	Double Closing Quote	Thonjëz e dyfishtë mbyllëse
+	Double Dot	Pikë e dyfishtë
+	Double Integral	Integral i dyfishtë
+	Double Integral with Limits	Integral i dyfishtë me kufij
+	Double Integral with Stacked Limits	Integral i dyfishtë me kufij të mbivendosur
+	Double Left Arrow with Text Above	Shigjetë e dyfishtë majtas me tekst sipër
+	Double Left Arrow with Text Below	Shigjetë e dyfishtë majtas me tekst poshtë
+	Double Left Right Arrow with Text Above	Shigjetë e dyfishtë majtas-djathtas me tekst sipër
+	Double Left Right Arrow with Text Below	Shigjetë e dyfishtë majtas-djathtas me tekst poshtë
+	Double Opening Quote	Thonjëz e dyfishtë hapëse
+	Double Right Arrow with Text Above	Shigjetë e dyfishtë djathtas me tekst sipër
+	Double Right Arrow with Text Below	Shigjetë e dyfishtë djathtas me tekst poshtë
+	Double Spacing	Hapësirë e dyfishtë
+	Double Square Brackets	Kllapa katrore të dyfishta
+	Double Strikethrough	Vijëzim i dyfishtë në mes
+	Double strikethrough	Vijëzim i dyfishtë në mes
+	Double summation	Shumëzim i dyfishtë
+	Double Underline	Nënvizim i dyfishtë
+	Double Vertical Bars	Vija vertikale të dyfishta
+	Doughnut	Unazë
+	Down	Poshtë
+	Downloading the speech model ({mb} MB, once)…	Po shkarkohet modeli i të folurit ({mb} MB, një herë)…
+	Downloading…	Po shkarkohet…
+	DRAFT	PROJEKT
+	Draft	Projekt
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Tërhiqni një drejtkëndësh për të vizatuar një tabelë, ose një vijë përmes qelizave për t'i ndarë. Esc ndalon.
+	Draw	Vizato
+	Draw Ink	Vizato me bojë
+	Draw Table	Vizato tabelë
+	Draw\nTable	Vizato\ntabelë
+	Drawing Canvas	Kanavaca e vizatimit
+	Drawing Grid	Rrjeta e vizatimit
+	Drawing Tools	Veglat e vizatimit
+	Drawing\nCanvas	Kanavaca e\nvizatimit
+	Drop Cap	Shkronjë e zmadhuar fillestare
+	Drop cap	Shkronjë e zmadhuar fillestare
+	Drop-Down List Content Control	Kontroll përmbajtjeje me listë rënëse
+	Drops all formatting and pastes plain text.	Heq gjithë formatimin dhe ngjit tekst të thjeshtë.
+	Dutch	Holandisht
+	E-mail Messages	Mesazhe email
+	Edit Category	Redakto kategorinë
+	Edit Comment	Redakto komentin
+	Edit Data	Redakto të dhënat
+	Edit Document	Redakto dokumentin
+	Edit Equation	Redakto ekuacionin
+	Edit Field Code	Redakto kodin e fushës
+	Edit Field…	Redakto fushën…
+	Edit Footer	Redakto fundin e faqes
+	Edit Header	Redakto kokën e faqes
+	Edit Individual Documents…	Redakto dokumentet individuale…
+	Edit Items	Redakto elementet
+	Edit Recipient List	Redakto listën e marrësve
+	Edit Source	Redakto burimin
+	Edit\nData	Redakto\ntë dhënat
+	Edit\nRecipient List	Redakto listën\ne marrësve
+	Edited	I redaktuar
+	Editing	Redaktimi
+	Editing header/footer	Redaktim i kokës/fundit të faqes
+	Editing in this document is restricted.	Redaktimi në këtë dokument është i kufizuar.
+	Editing — edit the document directly	Redaktim — redaktoni dokumentin drejtpërdrejt
+	Edition	Botimi
+	Editor	Redaktori
+	Edit…	Redakto…
+	Effects	Efektet
+	Elbow Arrow Connector	Lidhës me shigjetë me kënd
+	Elbow Connector	Lidhës me kënd
+	Ellipsis	Tre pika
+	Em Dash	Vizë em
+	Em Space	Hapësirë em
+	Email address (optional)	Adresa email (opsionale)
+	Emboss	Reliev
+	Emphasis	Theksim
+	Empty Matrices	Matrica bosh
+	En Dash	Vizë en
+	En Space	Hapësirë en
+	Enclose Characters	Rrethoji karakteret
+	Enclosure	Rrethim
+	Encrypt with Password	Shifro me fjalëkalim
+	Encrypt with Password…	Shifro me fjalëkalim…
+	End of document	Fundi i dokumentit
+	End of section	Fundi i seksionit
+	End of Word	Fundi i fjalës
+	Endnote Reference	Referencë e shënimit përfundimtar
+	Endnote Text	Teksti i shënimit përfundimtar
+	Endnotes	Shënimet përfundimtare
+	Endnotes to footnotes	Shënimet përfundimtare në shënime në fund të faqes
+	English	Anglisht
+	English (United Kingdom)	Anglisht (Mbretëria e Bashkuar)
+	English (United States)	Anglisht (Shtetet e Bashkuara)
+	Engrave	Gdhendje
+	Enlarge symbol	Zmadho simbolin
+	Enter formatting for number:	Shkruani formatimin për numrin:
+	Enter in Equation	Enter në ekuacion
+	Enter page number:	Shkruani numrin e faqes:
+	Enter the web address or embed code of an online video:	Shkruani adresën web ose kodin e përfshirjes së një videoje në linjë:
+	Entry marked.	Hyrja u shënua.
+	Entry:	Hyrja:
+	Envelope #10   4.12" × 9.50"	Zarf #10   4.12" × 9.50"
+	Envelope Address	Adresa në zarf
+	Envelope DL   4.33" × 8.66"	Zarf DL   4.33" × 8.66"
+	Envelope Return	Adresa e kthimit në zarf
+	Envelope size:	Madhësia e zarfit:
+	Envelopes	Zarfe
+	Equal by Definition	Baras sipas përkufizimit
+	Equal column width	Gjerësi e barabartë kolonash
+	Equal Equal	Baras baras
+	Equal to	Baras me
+	Equals:	Baras:
+	Equation	Ekuacion
+	Equation Gallery	Galeria e ekuacioneve
+	Equation Info	Informacion ekuacioni
+	Equation Number	Numri i ekuacionit
+	Equation Options	Opsionet e ekuacionit
+	Erase Ink	Fshi bojën
+	Eraser	Gomë
+	Errors ({n})	Gabime ({n})
+	Estonian	Estonisht
+	Euler's identity	Identiteti i Euler-it
+	Even Page	Faqe çift
+	Even pages only	Vetëm faqet çift
+	Every change is recorded as a tracked change.	Çdo ndryshim regjistrohet si ndryshim i gjurmuar.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Çdo komandë është e disponueshme për skriptet dhe agjentët AI: ekzekutoni `doc4me-cli mcp` për një server MCP, ose nisni aplikacionin me `--control <port>` për kanalin e kontrollit JSON.
+	Every field needs a name.	Çdo fushë ka nevojë për një emër.
+	Every font this document uses is installed.	Çdo shkronjë që përdor ky dokument është e instaluar.
+	Everyone	Të gjithë
+	Exactly	Saktësisht
+	Exactly {n}	Saktësisht {n}
+	Example: {sample}	Shembull: {sample}
+	Exceptions (optional)	Përjashtime (opsionale)
+	Exceptions…	Përjashtime…
+	Executive   7.25" × 10.50"	Executive   7.25" × 10.50"
+	Exit	Dil
+	Expand	Zgjero
+	Expand or Collapse Heading	Zgjero ose palos titullin
+	Expanded	I zgjeruar
+	Exponential	Eksponencial
+	Exponential series	Seri eksponenciale
+	Export	Eksporto
+	Export a copy to share (PDF, Word document)	Eksporto një kopje për ta ndarë (PDF, dokument Word)
+	Export Page as JPEG	Eksporto faqen si JPEG
+	Export Page as PNG	Eksporto faqen si PNG
+	Export PDF	Eksporto PDF
+	Exported {path}	U eksportua {path}
+	Expression	Shprehje
+	Extend Selection	Zgjero përzgjedhjen
+	Extend Selection by Units	Zgjero përzgjedhjen me njësi
+	Extra space	Hapësirë e tepërt
+	Extra spaces between words.	Hapësira të tepërta midis fjalëve.
+	Field	Fushë
+	Field Click	Klikim në fushë
+	Field code:	Kodi i fushës:
+	Field Codes	Kodet e fushave
+	Field codes:	Kodet e fushave:
+	Field name	Emri i fushës
+	Field name:	Emri i fushës:
+	Field names must be different.	Emrat e fushave duhet të jenë të ndryshëm.
+	Field names:	Emrat e fushave:
+	Field properties	Vetitë e fushës
+	Field:	Fusha:
+	Fields	Fushat
+	Fields to insert:	Fushat për t'u futur:
+	Fields:	Fushat:
+	Field…	Fushë…
+	Figure	Figurë
+	File	Skedari
+	File name:	Emri i skedarit:
+	Fill	Mbushje
+	Fill & Line	Mbushje dhe vijë
+	Fill color:	Ngjyra e mbushjes:
+	Fill:	Mbushja:
+	Filling in forms	Plotësim formularësh
+	Film	Film
+	Filter and Sort	Filtro dhe rendit
+	Filter and Sort…	Filtro dhe rendit…
+	Filter Records	Filtro regjistrimet
+	Find	Gjej
+	Find and Replace	Gjej dhe zëvendëso
+	Find Next	Gjej pasuesin
+	Find Next Editable Region	Gjej rajonin pasues të redaktueshëm
+	Find Previous	Gjej paraardhësin
+	Find Recipient	Gjej marrësin
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Gjej përzgjedh paragrafin pasues të ndryshuar; Refuzo e kthen të përzgjedhurin siç ishte.
+	Find What Expression	Shprehja për të gjetur
+	Find What Text	Teksti për të gjetur
+	Find what:	Gjej çfarë:
+	Find →	Gjej →
+	Find:	Gjej:
+	Finish	Përfundo
+	Finish & Merge	Përfundo dhe bashko
+	Finish &\nMerge	Përfundo dhe\nbashko
+	Finished	Përfunduar
+	Finnish	Finlandisht
+	First	E para
+	First Cell in Column	Qeliza e parë në kolonë
+	First Cell in Row	Qeliza e parë në rresht
+	First Column	Kolona e parë
+	First commit	Commit-i i parë
+	First line	Rreshti i parë
+	First line:	Rreshti i parë:
+	First Name	Emri
+	First row of data contains column headers	Rreshti i parë i të dhënave përmban titujt e kolonave
+	Fit	Përshtat
+	Fit text	Përshtat tekstin
+	Fix Position on Page	Fikso pozicionin në faqe
+	Fixed Column Width	Gjerësi fikse kolone
+	Flip Horizontal	Përmbys horizontalisht
+	Flip Vertical	Përmbys vertikalisht
+	Floor	Dysheme
+	Focus	Fokus
+	Follow number with:	Pas numrit vendos:
+	Font	Shkronjat
+	Font Color	Ngjyra e shkronjave
+	Font color	Ngjyra e shkronjave
+	Font color:	Ngjyra e shkronjave:
+	Font Dialog	Dialogu i shkronjave
+	Font not installed	Shkronjat nuk janë të instaluara
+	Font Size	Madhësia e shkronjave
+	Font Substitution	Zëvendësimi i shkronjave
+	Font Substitution…	Zëvendësimi i shkronjave…
+	Font:	Shkronjat:
+	Font: {font}	Shkronjat: {font}
+	Fonts	Shkronjat
+	Font…	Shkronjat…
+	Footer	Fundi i faqes
+	Footnote and Endnote	Shënim në fund të faqes dhe shënim përfundimtar
+	Footnote Reference	Referencë e shënimit në fund të faqes
+	Footnote Text	Teksti i shënimit në fund të faqes
+	Footnotes	Shënimet në fund të faqes
+	Footnotes and endnotes	Shënimet në fund të faqes dhe përfundimtare
+	Footnotes to endnotes	Shënimet në fund të faqes në përfundimtare
+	Form Letters	Letra formulare
+	Format	Formati
+	Format Page Numbers	Formato numrat e faqeve
+	Format Page Numbers…	Formato numrat e faqeve…
+	Format Painter	Piktori i formatit
+	Format Picture	Formato figurën
+	Format Shape	Formato formën
+	Format:	Formati:
+	Formatted	I formatuar
+	Formatted Text	Tekst i formatuar
+	Formatting	Formatimi
+	Formatting at Selection	Formatimi te përzgjedhja
+	Formatting completed. You can now:	Formatimi përfundoi. Tani mund të:
+	Formatting exceptions	Përjashtime formatimi
+	Formatting marks	Shenjat e formatimit
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Krahasohen formatimi, ndryshimet e shkronjave, hapësirat e bardha dhe tabelat; cilësimet e tjera ruhen për më vonë.
+	Formula	Formula
+	Forward	Përpara
+	Fraction	Thyesë
+	Fractions (1/2) as fraction characters (½)	Thyesat (1/2) si karaktere thyesash (½)
+	French	Frëngjisht
+	French (France)	Frëngjisht (Francë)
+	From	Nga
+	From text:	Nga teksti:
+	from Unicode (hex)	nga Unicode (hex)
+	From:	Nga:
+	Full page of the same label	Faqe e plotë me të njëjtën etiketë
+	Function	Funksion
+	Functions	Funksionet
+	Gallery	Galeria
+	GB/T 7714	GB/T 7714
+	General	Të përgjithshme
+	Geometry	Gjeometri
+	German	Gjermanisht
+	German (Germany)	Gjermanisht (Gjermani)
+	Get Add-ins	Merr shtesa
+	Get Data	Merr të dhëna
+	Get Data…	Merr të dhëna…
+	Getting ready…	Po përgatitet…
+	Glow	Shkëlqim
+	Glow Colors	Ngjyrat e shkëlqimit
+	Go Back	Kthehu prapa
+	Go To	Shko te
+	Go to	Shko te
+	Go To…	Shko te…
+	Good afternoon	Mirëdita
+	Good evening	Mirëmbrëma
+	Good morning	Mirëmëngjes
+	GOST (name sort)	GOST (renditje sipas emrit)
+	GOST (title sort)	GOST (renditje sipas titullit)
+	Grab bag	Përzierje
+	Grammar	Gramatika
+	Grammar Settings	Cilësimet e gramatikës
+	Graphic	Grafikë
+	Grave	Theks i rëndë
+	Greater than	Më i madh se
+	Greater than or equal	Më i madh ose baras
+	Greek	Greqisht
+	Greek Letters	Shkronja greke
+	Green:	E gjelbër:
+	Greeting Line	Rreshti i përshëndetjes
+	Greeting\nLine	Rreshti i\npërshëndetjes
+	Grid Settings	Cilësimet e rrjetës
+	Grid Table 1 Light	Tabelë rrjetë 1 e çelët
+	Grid Table 4 – Blue	Tabelë rrjetë 4 – blu
+	Grid Table 4 – Green	Tabelë rrjetë 4 – e gjelbër
+	Grid Table 4 – Orange	Tabelë rrjetë 4 – portokalli
+	Grid Table 4 – Purple	Tabelë rrjetë 4 – vjollcë
+	Gridlines	Vijat e rrjetës
+	Group	Grupo
+	Grouping Character Above	Karakter grupimi sipër
+	Grouping Character Below	Karakter grupimi poshtë
+	Grow Font 1 Point	Zmadho shkronjat 1 pikë
+	H:	L:
+	Hanging Indent	Dhëmbëzim i varur
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Kapelë
+	Header	Koka e faqes
+	Header & Footer	Koka dhe fundi i faqes
+	Header Options	Opsionet e kokës
+	Header Options:	Opsionet e kokës:
+	Header Row	Rreshti i kokës
+	Header source: {file} (the next data source opened here takes its field names)	Burimi i kokës: {file} (burimi pasues i të dhënave i hapur këtu merr emrat e fushave prej tij)
+	Header/Footer Position	Pozicioni i kokës/fundit të faqes
+	Headers and footers	Kokat dhe fundet e faqeve
+	Heading 1	Titulli 1
+	Heading 2	Titulli 2
+	Heading 3	Titulli 3
+	Heading styles (levels 1–{n})	Stilet e titujve (nivelet 1–{n})
+	Heading {n}	Titulli {n}
+	Headings	Titujt
+	Heart	Zemër
+	Hebrew	Hebraisht
+	Height:	Lartësia:
+	Help	Ndihmë
+	Hex:	Hex:
+	Hidden	I fshehur
+	Hidden text	Tekst i fshehur
+	Hide Codes	Fshih kodet
+	Hide from style lists	Fshihe nga listat e stileve
+	Hide Ink	Fshih bojën
+	Hide White Space	Fshih hapësirën e bardhë
+	Hide\nInk	Fshih\nbojën
+	Hierarchy	Hierarki
+	Highlight	Thekso
+	Highlight Changes	Thekso ndryshimet
+	Highlight changes in printed document	Thekso ndryshimet në dokumentin e printuar
+	Highlight changes on screen	Thekso ndryshimet në ekran
+	Highlight Merge Fields	Thekso fushat e bashkimit
+	Highlight\nMerge Fields	Thekso fushat\ne bashkimit
+	Highlighter	Theksues
+	Hindi	Hindisht
+	Historical and Discretional	Historike dhe sipas dëshirës
+	Hollow	I zbrazët
+	Home	Kreu
+	Home folder	Dosja kryesore
+	Horizontal	Horizontal
+	Horizontal Line	Vijë horizontale
+	Horizontal spacing:	Hapësira horizontale:
+	How many pages the whole document has	Sa faqe ka i gjithë dokumenti
+	How many pages this section has	Sa faqe ka ky seksion
+	How many words the document holds	Sa fjalë përmban dokumenti
+	HTML Format	Format HTML
+	Hue:	Nuanca:
+	Hungarian	Hungarisht
+	Hyperbolic Cosecant Function	Funksioni kosekant hiperbolik
+	Hyperbolic Cosine Function	Funksioni kosinus hiperbolik
+	Hyperbolic Cotangent Function	Funksioni kotangjent hiperbolik
+	Hyperbolic Functions	Funksione hiperbolike
+	Hyperbolic Secant Function	Funksioni sekant hiperbolik
+	Hyperbolic Sine Function	Funksioni sinus hiperbolik
+	Hyperbolic Tangent Function	Funksioni tangjent hiperbolik
+	Hyperlink	Hiperlidhje
+	Hyphenate at:	Ndaj me vizë te:
+	Hyphenate words in CAPS	Ndaj me vizë fjalët me SHKRONJA TË MËDHA
+	Hyphenation	Ndarja me vizë
+	Hyphenation Options…	Opsionet e ndarjes me vizë…
+	Hyphenation zone:	Zona e ndarjes me vizë:
+	Hyphens (--) as dashes (—)	Vizat (--) si viza të gjata (—)
+	Hypotenuse	Hipotenuza
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Ngjyra e ikonës
+	Icons	Ikonat
+	Identity Matrices	Matrica njësi
+	IEEE	IEEE
+	If…Then…Else	Nëse…Atëherë…Përndryshe
+	If…Then…Else…	Nëse…Atëherë…Përndryshe…
+	Ignore All	Shpërfill të gjitha
+	Ignore punctuation characters	Shpërfill karakteret e pikësimit
+	Ignore web and file addresses	Shpërfill adresat web dhe të skedarëve
+	Ignore white-space characters	Shpërfill karakteret e hapësirave të bardha
+	Ignore words in capitals	Shpërfill fjalët me shkronja të mëdha
+	Ignore words with numbers	Shpërfill fjalët me numra
+	Illustrations	Ilustrime
+	Immersive	Zhytës
+	Immersive Reader	Lexuesi zhytës
+	Immersive\nReader	Lexuesi\nzhytës
+	In Default apps, choose Doc4Me for the document types you want it to open.	Te Aplikacionet e parazgjedhura, zgjidhni Doc4Me për llojet e dokumenteve që doni të hapë.
+	In equations, typing a name after a backslash replaces it with its symbol.	Në ekuacione, shkrimi i një emri pas një vize të pjerrët së prapthi e zëvendëson me simbolin e tij.
+	In Front of Text	Përpara tekstit
+	In Line with Text	Në rresht me tekstin
+	Inches	Inç
+	Include label and number	Përfshi etiketën dhe numrin
+	Include level number from:	Përfshi numrin e nivelit nga:
+	Include page numbers	Përfshi numrat e faqeve
+	Increase Font Size	Rrit madhësinë e shkronjave
+	Increase Indent	Rrit dhëmbëzimin
+	Indent	Dhëmbëzim
+	Indent from left:	Dhëmbëzim nga e majta:
+	Indentation	Dhëmbëzimi
+	Indented	I dhëmbëzuar
+	Indents	Dhëmbëzimet
+	Indents and Spacing	Dhëmbëzimet dhe hapësirat
+	Index	Indeksi
+	Index and Tables	Indeksi dhe tabelat
+	Index Heading	Titulli i indeksit
+	Index {n}	Indeksi {n}
+	Indonesian	Indonezisht
+	Inflate	Fryj
+	Info	Informacion
+	Initials:	Inicialet:
+	Ink	Bojë
+	Ink Equation	Ekuacion me bojë
+	Ink Replay	Riluaj bojën
+	Ink to Math	Bojë në matematikë
+	Ink to Shape	Bojë në formë
+	Ink to\nMath	Bojë në\nmatematikë
+	Ink to\nShape	Bojë në\nformë
+	Ink\nReplay	Riluaj\nbojën
+	Inline	Në rresht
+	Input Format	Formati i hyrjes
+	Insert	Fut
+	Insert a 3D model from a file (.glb, .stl, .obj)	Fut një model 3D nga një skedar (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Fut një ekuacion të ri (Alt+=)
+	Insert Above	Fut sipër
+	Insert Below	Fut poshtë
+	Insert Caption	Fut titull
+	Insert Cells	Fut qeliza
+	Insert Chart	Fut grafik
+	Insert Citation	Fut citim
+	Insert Columns to the Left	Fut kolona majtas
+	Insert Columns to the Right	Fut kolona djathtas
+	Insert Data	Fut të dhëna
+	Insert Database	Fut bazë të dhënash
+	Insert Database…	Fut bazë të dhënash…
+	Insert Date Field	Fut fushë date
+	Insert Endnote	Fut shënim përfundimtar
+	Insert entire column	Fut gjithë kolonën
+	Insert entire row	Fut gjithë rreshtin
+	Insert Footnote	Fut shënim në fund të faqes
+	Insert Hyperlink	Fut hiperlidhje
+	Insert Index	Fut indeks
+	Insert Left	Fut majtas
+	Insert LISTNUM Field	Fut fushë LISTNUM
+	Insert Merge Field	Fut fushë bashkimi
+	Insert Merge\nField	Fut fushë\nbashkimi
+	Insert New Equation	Fut ekuacion të ri
+	Insert one text or another, depending on a field's value.	Fut një tekst ose një tjetër, në varësi të vlerës së një fushe.
+	Insert Page Field	Fut fushë faqeje
+	Insert Right	Fut djathtas
+	Insert Rows	Fut rreshta
+	Insert Rows Above	Fut rreshta sipër
+	Insert Rows Below	Fut rreshta poshtë
+	Insert Shapes	Fut forma
+	Insert SmartArt	Fut SmartArt
+	Insert Structure	Fut strukturë
+	Insert Symbol	Fut simbol
+	Insert Table	Fut tabelë
+	Insert Table of Authorities	Fut tabelë autoritetesh
+	Insert Table of Figures	Fut tabelë figurash
+	Insert Table…	Fut tabelë…
+	Insert Time Field	Fut fushë ore
+	Insert Video	Fut video
+	Insert\nAbove	Fut\nsipër
+	Insert\nCaption	Fut\ntitull
+	Insert\nCitation	Fut\ncitim
+	Insert\nFootnote	Fut shënim në\nfund të faqes
+	Inserted	U fut
+	Insertions and Deletions	Futje dhe fshirje
+	Insertions:	Futjet:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Futje: {ins}, fshirje: {del}, zhvendosje: {moves}, formatim: {fmt}, komente: {comments}
+	Inside	Brenda
+	Inside Borders	Kufijtë e brendshëm
+	Inside Margin	Mënjana e brendshme
+	Inside:	Brenda:
+	Inspect Document	Inspekto dokumentin
+	Inspect Styles at Selection	Inspekto stilet te përzgjedhja
+	Institution	Institucioni
+	Integral	Integral
+	Integral of e^(−x²)	Integrali i e^(−x²)
+	Integral with Limits	Integral me kufij
+	Integral with Stacked Limits	Integral me kufij të mbivendosur
+	Integrals	Integrale
+	Intense Emphasis	Theksim i fortë
+	Intense Quote	Citat i fortë
+	Intense Reference	Referencë e fortë
+	Interface	Ndërfaqja
+	Interface language	Gjuha e ndërfaqes
+	Interface language:	Gjuha e ndërfaqes:
+	Interface size:	Madhësia e ndërfaqes:
+	Interface Theme	Tema e ndërfaqes
+	Interface theme:	Tema e ndërfaqes:
+	Interface\nTheme	Tema e\nndërfaqes
+	Internet addresses as links	Adresat e internetit si lidhje
+	Intersection	Prerje
+	Intersection with Limits	Prerje me kufij
+	Intersection with Lower Limit	Prerje me kufi të poshtëm
+	Intersection with Subscript-Superscript Limits	Prerje me kufij indeks i poshtëm-i sipërm
+	Inverse Cosecant Function	Funksioni kosekant i anasjellë
+	Inverse Cosine Function	Funksioni kosinus i anasjellë
+	Inverse Cotangent Function	Funksioni kotangjent i anasjellë
+	Inverse Functions	Funksione të anasjella
+	Inverse Hyperbolic Cosecant Function	Funksioni kosekant hiperbolik i anasjellë
+	Inverse Hyperbolic Cosine Function	Funksioni kosinus hiperbolik i anasjellë
+	Inverse Hyperbolic Cotangent Function	Funksioni kotangjent hiperbolik i anasjellë
+	Inverse Hyperbolic Functions	Funksione hiperbolike të anasjella
+	Inverse Hyperbolic Secant Function	Funksioni sekant hiperbolik i anasjellë
+	Inverse Hyperbolic Sine Function	Funksioni sinus hiperbolik i anasjellë
+	Inverse Hyperbolic Tangent Function	Funksioni tangjent hiperbolik i anasjellë
+	Inverse Secant Function	Funksioni sekant i anasjellë
+	Inverse Sine Function	Funksioni sinus i anasjellë
+	Inverse Tangent Function	Funksioni tangjent i anasjellë
+	Ionosphere	Jonosferë
+	Is blank	Është bosh
+	Is not blank	Nuk është bosh
+	ISO 690 (author-date)	ISO 690 (autor-datë)
+	ISO 690 (numerical)	ISO 690 (numerik)
+	Issue	Numri
+	it isn't a picture Doc4Me can read	nuk është figurë që Doc4Me mund ta lexojë
+	Italian	Italisht
+	Italic	Të pjerrëta
+	Japanese	Japonisht
+	Journal	Revistë shkencore
+	Justification	Justifikimi
+	Justification of a display equation	Justifikimi i një ekuacioni të shfaqur
+	Justified	I justifikuar
+	Justify	Justifiko
+	Keep Lines Together	Mbaji rreshtat bashkë
+	Keep lines together	Mbaji rreshtat bashkë
+	Keep Source Formatting	Mbaj formatimin e burimit
+	Keep Text Only	Mbaj vetëm tekstin
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Ruajeni fjalëkalimin diku të sigurt: pa të askush, as Doc4Me, nuk mund ta hapë dokumentin. Lini të dyja kutitë bosh për ta hequr fjalëkalimin.
+	Keep with Next	Mbaje me pasuesin
+	Keep with next	Mbaje me pasuesin
+	Keeps the fonts and formatting of the copied text.	Mban shkronjat dhe formatimin e tekstit të kopjuar.
+	Kerning for fonts:	Kerning për shkronjat:
+	Keyboard shortcuts:	Shkurtoret e tastierës:
+	Keys for this command:	Tastet për këtë komandë:
+	Keywords	Fjalë kyçe
+	Korean	Koreanisht
+	Label changes with:	Etiketa ndryshon me:
+	Label:	Etiketa:
+	Labels	Etiketat
+	Landscape	Horizontale
+	Language	Gjuha
+	Language Preferences…	Preferencat e gjuhës…
+	Language…	Gjuha…
+	Large\nOperator	Operator\ni madh
+	Largest Only	Vetëm më i madhi
+	Largest only	Vetëm më i madhi
+	Lasso	Laso
+	Lasso Select	Përzgjedhje me laso
+	Last	I fundit
+	Last Cell in Column	Qeliza e fundit në kolonë
+	Last Cell in Row	Qeliza e fundit në rresht
+	Last Column	Kolona e fundit
+	Last commit	Commit-i i fundit
+	Last Name	Mbiemri
+	Last, First; Last, First	Mbiemër, Emër; Mbiemër, Emër
+	Latin text font:	Shkronjat e tekstit latin:
+	Layout	Faqosja
+	Layout options for this document	Opsionet e faqosjes për këtë dokument
+	Layout Summary	Përmbledhje e faqosjes
+	Layouts	Faqosjet
+	Leader	Vijë udhëzuese
+	Leave a recipient out of the merge when a field has this value.	Lëre një marrës jashtë bashkimit kur një fushë ka këtë vlerë.
+	Leave Equation	Dil nga ekuacioni
+	Leave the equation (Esc)	Dil nga ekuacioni (Esc)
+	Leave the label out of the caption	Lëre etiketën jashtë titullit
+	Left	Majtas
+	Left Arrow with Text Above	Shigjetë majtas me tekst sipër
+	Left Arrow with Text Below	Shigjetë majtas me tekst poshtë
+	Left Border	Kufiri i majtë
+	Left border	Kufiri i majtë
+	Left Bracket Twice	Kllapë majtas dy herë
+	Left indent	Dhëmbëzimi majtas
+	Left Margin	Mënjana e majtë
+	Left Only	Vetëm majtas
+	Left only	Vetëm majtas
+	Left Right Arrow Above	Shigjetë majtas-djathtas sipër
+	Left Right Arrow with Text Above	Shigjetë majtas-djathtas me tekst sipër
+	Left Right Arrow with Text Below	Shigjetë majtas-djathtas me tekst poshtë
+	Left Subscript-Superscript	Indeks i poshtëm-i sipërm majtas
+	Left-to-right	Nga e majta në të djathtë
+	Left-to-Right Text Direction	Drejtimi i tekstit nga e majta në të djathtë
+	Left:	Majtas:
+	Leftwards Arrow Above	Shigjetë drejt majtas sipër
+	Leftwards Harpoon Above	Harpun drejt majtas sipër
+	Legal   8.50" × 14.00"	Legal   8.50" × 14.00"
+	Legal style numbering	Numërim në stil juridik
+	Legend	Legjenda
+	Less than	Më i vogël se
+	Less than or equal	Më i vogël ose baras
+	Letter	Letër
+	Letter   8.50" × 11.00"	Letter   8.50" × 11.00"
+	Letter headings	Krerët e letrës
+	Letter-Like Symbols	Simbole si shkronja
+	Letters	Letra
+	Level 1	Niveli 1
+	Level 2	Niveli 2
+	Level 3	Niveli 3
+	Level 4	Niveli 4
+	Level 5	Niveli 5
+	Level 6	Niveli 6
+	Level 7	Niveli 7
+	Level 8	Niveli 8
+	Level 9	Niveli 9
+	Level {n}	Niveli {n}
+	Level:	Niveli:
+	Levels:	Nivelet:
+	LibreTranslate server (open source)	Server LibreTranslate (me burim të hapur)
+	Ligatures:	Ligaturat:
+	Light	E çelët
+	Light with Outline	E çelët me kontur
+	Limit	Limit
+	Limit and\nLog	Limit dhe\nlogaritëm
+	Limit consecutive hyphens to:	Kufizo vizat e njëpasnjëshme në:
+	Limit Example	Shembull limiti
+	Limit formatting to a selection of styles	Kufizo formatimin në një përzgjedhje stilesh
+	Line	Vijë
+	Line and Page Breaks	Ndërprerje rreshtash dhe faqesh
+	Line and Paragraph Spacing	Hapësira e rreshtave dhe paragrafëve
+	Line between	Vijë ndërmjet
+	Line Break	Ndërprerje rreshti
+	Line breaking	Ndërprerja e rreshtave
+	Line delta	Delta e vijës
+	Line End	Fundi i rreshtit
+	Line Number	Numri i rreshtit
+	Line Numbering Options…	Opsionet e numërimit të rreshtave…
+	Line Numbers	Numrat e rreshtave
+	Line Spacing	Hapësira e rreshtave
+	Line spacing	Hapësira e rreshtave
+	Line Spacing Options…	Opsionet e hapësirës së rreshtave…
+	Line spacing:	Hapësira e rreshtave:
+	Line Start	Fillimi i rreshtit
+	Line width:	Gjerësia e vijës:
+	Line:	Vija:
+	Linear	Linear
+	Linear Fraction	Thyesë lineare
+	Lines	Rreshta
+	Lines +/−	Rreshta +/−
+	Lines added	Rreshta të shtuar
+	Lines and characters	Rreshta dhe karaktere
+	Lines deleted	Rreshta të fshirë
+	Lines only	Vetëm rreshta
+	Lines per page:	Rreshta për faqe:
+	Link	Lidhje
+	Link entries to their headings	Lidh hyrjet me titujt e tyre
+	Link level to style:	Lidh nivelin me stilin:
+	Link to Previous	Lidh me të mëparshmin
+	Linked style (paragraph and character)	Stil i lidhur (paragraf dhe karakter)
+	Links	Lidhjet
+	Links and References	Lidhje dhe referenca
+	Link…	Lidhje…
+	List	Listë
+	List Commands	Listo komandat
+	List Definition	Përkufizimi i listës
+	List entries	Hyrjet e listës
+	List Paragraph	Paragraf liste
+	List styles	Stilet e listave
+	List Table 3 – Blue	Tabelë listë 3 – blu
+	List Table 3 – Green	Tabelë listë 3 – e gjelbër
+	List Table 3 – Orange	Tabelë listë 3 – portokalli
+	List Table 3 – Purple	Tabelë listë 3 – vjollcë
+	Listening… speak now	Po dëgjoj… flisni tani
+	Location	Vendndodhja
+	Location: {path}	Vendndodhja: {path}
+	Lock aspect ratio	Kyç raportin e pamjes
+	Lock Fields	Kyç fushat
+	Logarithm	Logaritëm
+	Logarithm with Base	Logaritëm me bazë
+	Logical AND	DHE logjik
+	Logical AND with Limits	DHE logjik me kufij
+	Logical OR	OSE logjik
+	Logical OR with Limits	OSE logjik me kufij
+	Long citation:	Citim i gjatë:
+	lowercase	shkronja të vogla
+	Lum:	Ndriç.:
+	Macros	Makro
+	Made from the author and year when empty	Krijohet nga autori dhe viti kur është bosh
+	Magazine or newspaper article	Artikull reviste ose gazete
+	Mail Merge	Bashkim postar
+	Mail Merge Helper	Ndihmës i bashkimit postar
+	Mail Merge Helper…	Ndihmës i bashkimit postar…
+	Mailing Labels	Etiketa postare
+	Mailings	Postimet
+	Main entry:	Hyrja kryesore:
+	Make Doc4Me the default for Word documents…	Bëje Doc4Me të parazgjedhur për dokumentet Word…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	E bën shiritin e veglave, menytë dhe dialogët më të mëdhenj ose më të vegjël, mbi shkallëzimin e ekranit të sistemit tuaj. Zmadhimi i dokumentit është më vete.
+	Malay	Malajisht
+	Manage Sources	Menaxho burimet
+	Manage Styles	Menaxho stilet
+	Manage Styles…	Menaxho stilet…
+	Manual Hyphenation	Ndarje manuale me vizë
+	Manual hyphenation is complete.	Ndarja manuale me vizë përfundoi.
+	Manual Line Break	Ndërprerje manuale rreshti
+	Manual Page Break	Ndërprerje manuale faqeje
+	Manual…	Manuale…
+	Many pages	Shumë faqe
+	Margin	Mënjana
+	Margins	Mënjanat
+	Mark	Shëno
+	Mark All	Shëno të gjitha
+	Mark as decorative	Shëno si dekorativ
+	Mark Citation	Shëno citimin
+	Mark Citation…	Shëno citimin…
+	Mark Entry	Shëno hyrjen
+	Mark Entry…	Shëno hyrjen…
+	Mark grammar errors as you type	Shëno gabimet gramatikore ndërsa shkruani
+	Mark Index Entry	Shëno hyrje indeksi
+	Mark selected text as:	Shëno tekstin e përzgjedhur si:
+	Mark Table of Contents Entry	Shëno hyrje të tabelës së përmbajtjes
+	Mark\nCitation	Shëno\ncitimin
+	Mark\nEntry	Shëno\nhyrjen
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Përputh shkronjat e mëdha/të vogla
+	Match Fields	Përputh fushat
+	Match prefix	Përputh parashtesën
+	Match suffix	Përputh prapashtesën
+	Math AutoCorrect	Korrigjim automatik matematikor
+	Math Input Control	Kontrolli i hyrjes matematikore
+	Matrices with Brackets	Matrica me kllapa
+	Matrix	Matricë
+	Maximize	Maksimizo
+	Maximum	Maksimumi
+	Maximum Example	Shembull maksimumi
+	Measured By	Matur nga
+	Measurement units:	Njësitë matëse:
+	Media	Media
+	Merge	Bashko
+	Merge Cells	Bashko qelizat
+	Merge Formatting	Bashko formatimin
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Bashko formatimin e ngjit tekstin me formatimin e vendit ku bie, siç bën Mbaj vetëm tekstin.
+	Merge Record #	Regjistrimi i bashkimit nr.
+	Merge records	Bashko regjistrimet
+	Merge to New Document	Bashko në dokument të ri
+	Merge to Printer	Bashko te printeri
+	Merge to:	Bashko në:
+	Merge type: {type}	Lloji i bashkimit: {type}
+	Merged PRs	PR-të e bashkuara
+	Merge…	Bashko…
+	Mesosphere	Mezosferë
+	Middle	Mes
+	Midline Dots	Pika në mes të vijës
+	Millimeters	Milimetra
+	Minimum	Minimumi
+	Minus Equal	Minus baras
+	Mirror indents	Dhëmbëzime pasqyrë
+	Mirrored	Pasqyruar
+	Missing document font	Shkronjat e dokumentit mungojnë
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team dhe kontribuuesit e WordCraft.
+	MLA	MLA
+	Model	Modeli
+	Models	Modelet
+	Moderate	Mesatar
+	Modify Style	Ndrysho stilin
+	Modify Table Style	Ndrysho stilin e tabelës
+	Modify Table Style…	Ndrysho stilin e tabelës…
+	Modify…	Ndrysho…
+	Mon	Hën
+	Month	Muaji
+	More >>	Më shumë >>
+	More Colors…	Më shumë ngjyra…
+	More Columns…	Më shumë kolona…
+	More Commands…	Më shumë komanda…
+	More Symbols…	Më shumë simbole…
+	More templates →	Më shumë shabllone →
+	Move Down	Lëviz poshtë
+	Move in Equation	Lëviz në ekuacion
+	Move object with text	Lëviz objektin me tekstin
+	Move or Resize	Lëviz ose ripërmaso
+	Move Paragraph Down	Lëviz paragrafin poshtë
+	Move Paragraph Up	Lëviz paragrafin lart
+	Move Past Citation	Kalo pas citimit
+	Move Past\nCitation	Kalo pas\ncitimit
+	Move Selected Ink	Lëviz bojën e përzgjedhur
+	Move Text	Zhvendos tekstin
+	Move to where?	Ku të zhvendoset?
+	Move Up	Lëviz lart
+	Move with Text	Lëviz me tekstin
+	Move with text	Lëviz me tekstin
+	Moved from	Zhvendosur nga
+	Moved to	Zhvendosur te
+	Moves	Zhvendosje
+	Multilevel List	Listë me shumë nivele
+	Multiple Pages	Shumë faqe
+	My Add-ins	Shtesat e mia
+	MyMemory (free, no account)	MyMemory (falas, pa llogari)
+	Name	Emri
+	Name (A–Z)	Emri (A–Z)
+	Name of the file this document is saved as	Emri i skedarit me të cilin ruhet ky dokument
+	Name:	Emri:
+	Narrow  0.5" all	E ngushtë  0.5" të gjitha
+	Natural Logarithm	Logaritëm natyror
+	Nature	Natyrë
+	Navigation	Navigimi
+	Navigation Pane	Paneli i navigimit
+	Negated Relations	Relacione të mohuara
+	New	E re
+	New Comment	Koment i ri
+	New comments and tracked changes are recorded under this name and these initials.	Komentet e reja dhe ndryshimet e gjurmuara regjistrohen me këtë emër dhe këto iniciale.
+	New Document	Dokument i ri
+	New document	Dokument i ri
+	New Drawing Canvas	Kanavacë e re vizatimi
+	New Entry	Hyrje e re
+	New Folder	Dosje e re
+	New from Template	E re nga shablloni
+	New Group	Grup i ri
+	New Label	Etiketë e re
+	New Label…	Etiketë e re…
+	New Paragraph	Paragraf i ri
+	New shortcut:	Shkurtore e re:
+	New Style…	Stil i ri…
+	New Tab	Skedë e re
+	New Table Style	Stil i ri tabele
+	New Table Style…	Stil i ri tabele…
+	New Window	Dritare e re
+	New word	Fjalë e re
+	New\nComment	Koment\ni ri
+	New\nWindow	Dritare\ne re
+	New…	E re…
+	Next	Pasuesi
+	Next Change	Ndryshimi pasues
+	Next Comment	Komenti pasues
+	Next Field	Fusha pasuese
+	Next Footnote	Shënimi pasues në fund të faqes
+	Next Page	Faqja pasuese
+	Next Record	Regjistrimi pasues
+	Next Section	Seksioni pasues
+	Next Sentence	Fjalia pasuese
+	Next sentence	Fjalia pasuese
+	Next Window	Dritarja pasuese
+	No	Jo
+	No accessibility issues found.	Nuk u gjetën probleme aksesueshmërie.
+	No add-ins are listed yet.	Ende nuk ka shtesa të listuara.
+	No add-ins yet. Add one from the Store.	Ende nuk ka shtesa. Shtoni një nga Dyqani.
+	No Border	Pa kufi
+	No changes (read only)	Pa ndryshime (vetëm lexim)
+	No Color	Pa ngjyrë
+	No contributor data was built into this copy.	Në këtë kopje nuk janë përfshirë të dhëna kontribuuesish.
+	No data source yet.	Ende nuk ka burim të dhënash.
+	No errors found: every merge field is in the recipient list.	Nuk u gjetën gabime: çdo fushë bashkimi është në listën e marrësve.
+	No Fill	Pa mbushje
+	No Glow	Pa shkëlqim
+	No grid	Pa rrjetë
+	No icons match your search.	Asnjë ikonë nuk përputhet me kërkimin tuaj.
+	No limit	Pa kufizim
+	No Line	Pa vijë
+	No Markup	Pa shënjime
+	No model credits were built into this copy.	Në këtë kopje nuk janë përfshirë kreditë e modeleve.
+	No Outline	Pa kontur
+	No Paragraph Space	Pa hapësirë paragrafi
+	No pictures found.	Nuk u gjetën figura.
+	No Reflection	Pa reflektim
+	No revisions	Pa rishikime
+	No Shadow	Pa hije
+	No Soft Edges	Pa skaje të buta
+	No sources yet.	Ende nuk ka burime.
+	No Spacing	Pa hapësirë
+	no speech program on this system	nuk ka program të foluri në këtë sistem
+	No templates match your search.	Asnjë shabllon nuk përputhet me kërkimin tuaj.
+	No Transform	Pa transformim
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Ende nuk ka fjalë. Shto në fjalor te një fjalë e gabuar e vendos këtu.
+	No-Width Non Break	Pa gjerësi, pa ndërprerje
+	No-Width Optional Break	Ndërprerje opsionale pa gjerësi
+	Nonbreaking Hyphen	Vizë e pandashme
+	Nonbreaking Space	Hapësirë e pandashme
+	None	Asnjë
+	Normal	Normal
+	Normal  1" all	Normal  1" të gjitha
+	Normal Indent	Dhëmbëzim normal
+	Normal probability density	Dendësia normale e probabilitetit
+	Normal speed	Shpejtësi normale
+	Normal Style	Stili normal
+	Normal Table	Tabelë normale
+	Normal Text	Tekst normal
+	Normal Word Document	Dokument normal Word
+	North	Veri
+	Norwegian (Bokmål)	Norvegjisht (Bokmål)
+	Not	Jo
+	Not available right now	Nuk ofrohet tani
+	Not equal to	Jo baras me
+	Not linked: click a text box	E palidhur: klikoni një kuti teksti
+	Not saved	E paruajtur
+	Not saved yet	Ende e paruajtur
+	Not used by any command	Nuk përdoret nga asnjë komandë
+	Not {name}	Jo {name}
+	Nothing	Asgjë
+	Nothing collected yet. Items you copy or cut appear here.	Ende nuk është mbledhur asgjë. Elementet që kopjoni ose pritni shfaqen këtu.
+	Now used by {command}	Tani përdoret nga {command}
+	Nudge	Shtyje pak
+	Num Occurrences	Nr. i shfaqjeve
+	Number	Numër
+	Number alignment:	Rreshtimi i numrit:
+	Number format	Formati i numrit
+	Number of columns:	Numri i kolonave:
+	Number of rows:	Numri i rreshtave:
+	Number of the page the field sits on	Numri i faqes ku ndodhet fusha
+	Number of the section the field sits in	Numri i seksionit ku ndodhet fusha
+	Number style for this level:	Stili i numrave për këtë nivel:
+	Number the equation; the number sits at the right margin (or type # then the number)	Numëro ekuacionin; numri vendoset te mënjana e djathtë (ose shkruani # dhe pastaj numrin)
+	Number type:	Lloji i numrit:
+	Number:	Numri:
+	Numbering	Numërimi
+	Numbering:	Numërimi:
+	Numbering…	Numërimi…
+	Numerals	Shifrat
+	Numerals:	Shifrat:
+	n×n Identity Matrix	Matricë njësi n×n
+	n×n Matrix	Matricë n×n
+	Object	Objekt
+	Odd Page	Faqe tek
+	Odd pages only	Vetëm faqet tek
+	Off	Joaktiv
+	Office	Office
+	Office 2003 Default	Parazgjedhja Office 2003
+	Offset (pt):	Zhvendosja (pt):
+	Offset: Bottom	Zhvendosje: poshtë
+	Offset: Bottom Left	Zhvendosje: poshtë majtas
+	Offset: Bottom Right	Zhvendosje: poshtë djathtas
+	Offset: Center	Zhvendosje: qendër
+	Offset: Left	Zhvendosje: majtas
+	Offset: Right	Zhvendosje: djathtas
+	Offset: Top	Zhvendosje: lart
+	Offset: Top Left	Zhvendosje: lart majtas
+	Offset: Top Right	Zhvendosje: lart djathtas
+	OK	OK
+	Omit	Anashkalo
+	On	Aktiv
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Aktiv: kursori rrëshqet në vendin e ri kur shkruani ose përdorni tastet e shigjetave, dhe pulsimi i tij zbehet. Joaktiv: ai kërcen dhe ndizet e fiket.
+	One	Një
+	One half	Një gjysmë
+	One label per recipient	Një etiketë për marrës
+	One line per item. Enter adds an item.	Një rresht për element. Enter shton një element.
+	One Page	Një faqe
+	Online Pictures	Figura në linjë
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Figura në linjë (Openverse), Përkthe (MyMemory ose serveri juaj LibreTranslate), Merr shtesa dhe shkarkimi i modelit të të folurit të Diktimit lidhen me internetin, dhe vetëm kur i përdorni. Kur janë të çaktivizuara, Doc4Me nuk bën asnjë lidhje vetë.
+	Online Pictures…	Figura në linjë…
+	Online services are turned off (File › Options › Trust Center).	Shërbimet në linjë janë të çaktivizuara (Skedari › Opsionet › Qendra e besimit).
+	Online Video	Video në linjë
+	Only allow this kind of editing:	Lejo vetëm këtë lloj redaktimi:
+	Only comments can be added, except in regions marked editable.	Mund të shtohen vetëm komente, përveç rajoneve të shënuara si të redaktueshme.
+	Only form fields can be filled in.	Mund të plotësohen vetëm fushat e formularit.
+	only https addresses can be used	mund të përdoren vetëm adresa https
+	Only pictures I may use commercially	Vetëm figura që mund t'i përdor për qëllime tregtare
+	Only the allowed styles can be applied.	Mund të zbatohen vetëm stilet e lejuara.
+	Only web (http, https) and email (mailto) links can be followed	Mund të ndiqen vetëm lidhjet web (http, https) dhe email (mailto)
+	Open	Hap
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Hap një skedar me shfletuesin e vetë Doc4Me kur dialogu i skedarëve i sistemit nuk shfaqet.
+	Open Data Source…	Hap burim të dhënash…
+	Open Hyperlink	Hap hiperlidhjen
+	OpenDocument Text (*.odt)	Tekst OpenDocument (*.odt)
+	Opening print dialog…	Po hapet dialogu i printimit…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Hap skedarët .docx, .doc, .rtf dhe .odt dhe shabllonet Word me Doc4Me nga tani e tutje.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Hap Cilësimet › Aplikacionet e parazgjedhura, ku zgjidhni Doc4Me për .docx dhe llojet e tjera të dokumenteve.
+	Open…	Hap…
+	Operator	Operator
+	Operator Structures	Struktura operatorësh
+	Operators	Operatorët
+	Optional Hyphen	Vizë opsionale
+	Options	Opsionet
+	Options…	Opsionet…
+	Or	Ose
+	Or save a copy in another format:	Ose ruani një kopje në format tjetër:
+	Ordinals (1st) as superscript	Numrat rendorë (1st) si indeks i sipërm
+	Organizer	Organizuesi
+	Organizer…	Organizuesi…
+	Orientation	Orientimi
+	Original document	Dokumenti origjinal
+	Other	Tjetër
+	Other Authorities	Autoritete të tjera
+	Other Large Operators	Operatorë të tjerë të mëdhenj
+	Other paragraph styles	Stile të tjera paragrafi
+	Other styles and their TOC level:	Stile të tjera dhe niveli i tyre në tabelën e përmbajtjes:
+	Otherwise insert:	Përndryshe fut:
+	Outline	Skicë
+	Outline Level	Niveli i skicës
+	Outline level	Niveli i skicës
+	Outline levels	Nivelet e skicës
+	Outline State	Gjendja e skicës
+	Outline Tools	Veglat e skicës
+	Outlining	Skicimi
+	Outside	Jashtë
+	Outside border	Kufiri i jashtëm
+	Outside Borders	Kufijtë e jashtëm
+	Outside Margin	Mënjana e jashtme
+	Outside:	Jashtë:
+	Outward Brackets	Kllapa nga jashtë
+	Oval	Ovale
+	Overbar	Vijë sipër
+	Overbars and Underbars	Vija sipër dhe poshtë
+	Overbrace	Kllapë gjarpërore sipër
+	Overtype	Mbishkrim
+	Overtype (typing replaces the characters after the caret)	Mbishkrim (shkrimi zëvendëson karakteret pas kursorit)
+	Page	Faqja
+	Page Background	Sfondi i faqes
+	Page Border	Kufiri i faqes
+	Page Borders	Kufijtë e faqes
+	Page Break	Ndërprerje faqeje
+	Page Break Before	Ndërprerje faqeje përpara
+	Page break before	Ndërprerje faqeje përpara
+	Page Breaks	Ndërprerjet e faqeve
+	Page Color	Ngjyra e faqes
+	Page display	Shfaqja e faqes
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Imazh faqeje (*.jpg, *.jpeg)
+	Page image (*.png)	Imazh faqeje (*.png)
+	Page Movement	Lëvizja e faqeve
+	Page Number	Numri i faqes
+	Page number style	Stili i numrave të faqeve
+	Page numbers at the right margin	Numrat e faqeve te mënjana e djathtë
+	Page on which a bookmarked passage falls	Faqja ku bie një pjesë e shënuar me faqeshënues
+	Page Setup	Konfigurimi i faqes
+	Page title	Titulli i faqes
+	Page Up	Page Up
+	Page Width	Gjerësia e faqes
+	Page width	Gjerësia e faqes
+	Page X of Y	Faqja X nga Y
+	Page {page}	Faqja {page}
+	Page {page} of {pages}	Faqja {page} nga {pages}
+	Page\nBorders	Kufijtë e\nfaqes
+	Page\nColor	Ngjyra e\nfaqes
+	Page\nNumber	Numri i\nfaqes
+	Pages	Faqet
+	Pages like 1-3, 5	Faqe si 1-3, 5
+	Pages of bookmark:	Faqet e faqeshënuesit:
+	Paragraph	Paragraf
+	Paragraph Character	Karakter paragrafi
+	Paragraph Details	Detajet e paragrafit
+	Paragraph Down	Paragrafi poshtë
+	Paragraph Mark	Shenja e paragrafit
+	Paragraph marks	Shenjat e paragrafit
+	Paragraph Settings	Cilësimet e paragrafit
+	Paragraph Spacing	Hapësira e paragrafit
+	Paragraph style	Stil paragrafi
+	Paragraph Up	Paragrafi lart
+	Paragraphs	Paragrafë
+	Paragraph…	Paragrafi…
+	Parentheses	Kllapa të rrumbullakëta
+	Parentheses with Separator	Kllapa të rrumbullakëta me ndarës
+	Partial Differential	Diferencial i pjesshëm
+	Password	Fjalëkalimi
+	Password:	Fjalëkalimi:
+	Paste	Ngjit
+	Paste All	Ngjiti të gjitha
+	Paste as:	Ngjit si:
+	Paste Clipboard Item	Ngjit elementin e kujtesës
+	Paste Formatting	Ngjit formatimin
+	Paste Special	Ngjitje e veçantë
+	Paste Special…	Ngjitje e veçantë…
+	Paste Spike	Ngjit grumbullin
+	Paste: Keep Text Only	Ngjit: mbaj vetëm tekstin
+	Paste: Merge Formatting	Ngjit: bashko formatimin
+	Pasting between documents:	Ngjitje midis dokumenteve:
+	Pasting from other programs:	Ngjitje nga programe të tjera:
+	Pasting within the same document:	Ngjitje brenda të njëjtit dokument:
+	Pause	Pauzë
+	Paused	Në pauzë
+	PDF document (*.pdf)	Dokument PDF (*.pdf)
+	Pen	Stilolaps
+	Pencil	Laps
+	Pens	Stilolapsa
+	People	Njerëz
+	Periodical	Periodik
+	Personalize	Personalizo
+	Phonetic Guide	Udhëzues fonetik
+	Pi Over 2	Pi mbi 2
+	Picas	Pica
+	Pick a custom group (New Group makes one)	Zgjidhni një grup të personalizuar (Grup i ri krijon një)
+	Pick a field from the list	Zgjidhni një fushë nga lista
+	Picture	Figurë
+	Picture Border	Kufiri i figurës
+	Picture Content Control	Kontroll përmbajtjeje me figurë
+	Picture Format	Formati i figurës
+	Picture Styles	Stilet e figurës
+	Pictures	Figura
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Figura nga Openverse. Respektoni licencën e çdo figure: Doc4Me shton një rresht kreditimi poshtë saj.
+	Pie	Pite
+	Placeholder Name	Emri i mbajtësit të vendit
+	Placeholder text	Tekst mbajtës vendi
+	Plain Table 1	Tabelë e thjeshtë 1
+	Plain text (*.txt)	Tekst i thjeshtë (*.txt)
+	Plain Text Content Control	Kontroll përmbajtjeje me tekst të thjeshtë
+	Play	Luaj
+	Play Video	Luaj videon
+	Play/Pause	Luaj/Pauzë
+	Plus Equal	Plus baras
+	Points	Pikë
+	points and above	pikë e lart
+	Polish	Polonisht
+	Portrait	Vertikale
+	Portuguese (Brazil)	Portugalisht (Brazil)
+	Portuguese (Portugal)	Portugalisht (Portugali)
+	Position	Pozicioni
+	Position:	Pozicioni:
+	Positioning…	Pozicionimi…
+	Possible spelling mistake	Gabim i mundshëm drejtshkrimor
+	Postal Code	Kodi postar
+	Power series of (1+x)ⁿ	Seria fuqi e (1+x)ⁿ
+	Preferred width:	Gjerësia e preferuar:
+	Preserve	Ruaj
+	Preserve formatting during updates	Ruaj formatimin gjatë përditësimeve
+	Presets	Paravendosje
+	Press a key combination	Shtypni një kombinim tastesh
+	Preview	Parapamje
+	Preview Results	Parapamje e rezultateve
+	Preview\nResults	Parapamje e\nrezultateve
+	Previous	Paraardhësi
+	Previous 1 or More	1 ose më shumë paraardhës
+	Previous Change	Ndryshimi paraardhës
+	Previous Comment	Komenti paraardhës
+	Previous Field	Fusha paraardhëse
+	Previous Footnote	Shënimi paraardhës në fund të faqes
+	Previous Page	Faqja paraardhëse
+	Previous Record	Regjistrimi paraardhës
+	Previous Section	Seksioni paraardhës
+	Previous Sentence	Fjalia paraardhëse
+	Previous sentence	Fjalia paraardhëse
+	Previous Window	Dritarja paraardhëse
+	Print	Printo
+	Print blank lines when data fields are empty	Printo rreshta bosh kur fushat e të dhënave janë bosh
+	Print Documents	Printo dokumentet
+	Print Documents…	Printo dokumentet…
+	Print failed: {error}	Printimi dështoi: {error}
+	Print Layout	Faqosje printimi
+	Print Markup	Printo shënjimet
+	Print the page color	Printo ngjyrën e faqes
+	Print to PDF	Printo në PDF
+	Print\nLayout	Faqosje\nprintimi
+	Printer	Printeri
+	Printing	Printimi
+	Process	Proces
+	Product	Produkt
+	Product of A	Produkti i A
+	Product with Limits	Produkt me kufij
+	Product with Lower Limit	Produkt me kufi të poshtëm
+	Product with Subscript-Superscript Limits	Produkt me kufij indeks i poshtëm-i sipërm
+	Products and Coproducts	Produkte dhe koprodukte
+	Professional	Profesional
+	Promote	Ngri nivelin
+	Promote to Heading 1	Ngri në Titulli 1
+	Proofing	Korrektimi
+	Proofing Issues	Probleme korrektimi
+	Proofing language	Gjuha e korrektimit
+	Properties	Vetitë
+	Protect	Mbro
+	Protect Document	Mbro dokumentin
+	PRs	PR-të
+	pt	pt
+	Publisher	Botuesi
+	Punctuation	Pikësimi
+	Put the caret in a content control first.	Vendosni fillimisht kursorin në një kontroll përmbajtjeje.
+	Put the default commands back on the Quick Access Toolbar?	T'i rikthej komandat e parazgjedhura në shiritin e qasjes së shpejtë?
+	Pyramid	Piramidë
+	Quadratic Root	Rrënjë katrore
+	Query Options…	Opsionet e pyetësorit…
+	Quick Access Toolbar	Shiriti i qasjes së shpejtë
+	Quick Parts	Pjesë të shpejta
+	Quick Tables	Tabela të shpejta
+	Quote	Citat
+	Radical	Rrënjë
+	Radical with Degree	Rrënjë me shkallë
+	Radicals	Rrënjë
+	Raised/lowered	Ngritur/ulur
+	Read Aloud	Lexo me zë
+	Read Aloud couldn't start the speech program: {reason}	Leximi me zë nuk e nisi dot programin e të folurit: {reason}
+	Read Aloud couldn't start: {reason}	Leximi me zë nuk u nis dot: {reason}
+	Read Aloud isn't available in the browser	Leximi me zë nuk ofrohet në shfletues
+	Read Aloud Status	Gjendja e leximit me zë
+	Read Aloud stopped: {reason}	Leximi me zë u ndal: {reason}
+	Read Mode	Modaliteti i leximit
+	Read\nAloud	Lexo\nme zë
+	Read\nMode	Modaliteti\ni leximit
+	Reading	Leximi
+	Reading Column Width	Gjerësia e kolonës së leximit
+	Reading Highlight	Theksimi i leximit
+	Reading Line Spacing	Hapësira e rreshtave të leximit
+	Reading Mode	Modaliteti i leximit
+	Reading Speed	Shpejtësia e leximit
+	Reading Text Size	Madhësia e tekstit të leximit
+	Reads the clipboard's rich text and keeps its formatting.	Lexon tekstin e pasur të kujtesës dhe mban formatimin e tij.
+	Reads the clipboard's web content and keeps its formatting.	Lexon përmbajtjen web të kujtesës dhe mban formatimin e saj.
+	Real name	Emri i vërtetë
+	Recent	Të fundit
+	Recent Colors	Ngjyrat e fundit
+	Recent documents to show:	Dokumentet e fundit për t'u shfaqur:
+	Recently used symbols:	Simbolet e përdorura së fundi:
+	Recipient List	Lista e marrësve
+	Recipient lists	Listat e marrësve
+	Recipients: {count}	Marrës: {count}
+	Recognized (you can correct it):	U njoh (mund ta korrigjoni):
+	Recognized Functions	Funksione të njohura
+	Recognized Functions…	Funksione të njohura…
+	Recolor a one-color picture, such as an icon	Ringjyros një figurë njëngjyrëshe, si një ikonë
+	Recolor Selected Ink	Ringjyros bojën e përzgjedhur
+	Record Macro	Regjistro makro
+	Recover Unsaved Documents	Rikupero dokumentet e paruajtura
+	Rectangle	Drejtkëndësh
+	Red:	E kuqe:
+	Redo	Ribëj
+	Reduce Hanging Indent	Zvogëlo dhëmbëzimin e varur
+	References	Referencat
+	Reflection	Reflektim
+	Refresh	Rifresko
+	Registered	E regjistruar
+	Registered Sign	Shenja e regjistrimit
+	Regular expressions	Shprehje të rregullta
+	Regulations	Rregullore
+	Reject	Refuzo
+	Reject All	Refuzoji të gjitha
+	Reject All Changes	Refuzo të gjitha ndryshimet
+	Reject Change	Refuzo ndryshimin
+	Relationship	Marrëdhënie
+	relative to	në lidhje me
+	Relative to:	Në lidhje me:
+	Relaxed	I shtendosur
+	Remove	Hiq
+	Remove Added Font	Hiq shkronjat e shtuara
+	Remove Background	Hiq sfondin
+	Remove Content Control	Hiq kontrollin e përmbajtjes
+	Remove every custom shortcut and restore the built-in keys?	Të hiqen të gjitha shkurtoret e personalizuara dhe të rikthehen tastet e integruara?
+	Remove every custom tab and group and show all tabs again?	Të hiqen të gjitha skedat dhe grupet e personalizuara dhe të shfaqen sërish të gjitha skedat?
+	Remove field	Hiq fushën
+	Remove Field Name	Hiq emrin e fushës
+	Remove Footer	Hiq fundin e faqes
+	Remove from Quick Access Toolbar	Hiq nga shiriti i qasjes së shpejtë
+	Remove Header	Hiq kokën e faqes
+	Remove Hyperlink	Hiq hiperlidhjen
+	Remove Password	Hiq fjalëkalimin
+	Remove Pen	Hiq stilolapsin
+	Remove Positioning	Hiq pozicionimin
+	Remove recipient	Hiq marrësin
+	Remove row	Hiq rreshtin
+	Remove series	Hiq serinë
+	Remove Space After Paragraph	Hiq hapësirën pas paragrafit
+	Remove Table of Contents	Hiq tabelën e përmbajtjes
+	Remove the control once edited	Hiq kontrollin pasi të redaktohet
+	Remove the space before the punctuation	Hiq hapësirën para pikësimit
+	Remove Watermark	Hiq filigranin
+	Rename Style	Riemërto stilin
+	Rename…	Riemërto…
+	Reopen	Rihap
+	Repeat	Përsërit
+	Repeat as header row on each page	Përsërit si rresht koke në çdo faqe
+	Repeat Header Rows	Përsërit rreshtat e kokës
+	Repeated words	Fjalë të përsëritura
+	Repeating Section Content Control	Kontroll përmbajtjeje me seksion të përsëritur
+	Replace	Zëvendëso
+	Replace All	Zëvendësoji të gjitha
+	Replace as you type	Zëvendëso ndërsa shkruani
+	Replace Document Text	Zëvendëso tekstin e dokumentit
+	Replace text as you type	Zëvendëso tekstin ndërsa shkruani
+	Replace with:	Zëvendëso me:
+	Replace:	Zëvendëso:
+	Replay	Riluaj
+	Reply	Përgjigju
+	Report	Raport
+	Research	Hulumtim
+	Researcher	Hulumtuesi
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Hulumtuesi kërkon një shërbim në linjë; Doc4Me i mban dokumentet tuaja jashtë linje.
+	Reset	Rivendos
+	Reset All	Rivendosi të gjitha
+	Reset All…	Rivendosi të gjitha…
+	Reset Character Formatting	Rivendos formatimin e karaktereve
+	Reset Crop	Rivendos prerjen
+	Reset Graphic	Rivendos grafikën
+	Reset Paragraph Formatting	Rivendos formatimin e paragrafit
+	Reset Picture	Rivendos figurën
+	Reset to Normal	Rivendos në normal
+	Reset\nGraphic	Rivendos\ngrafikën
+	Reset…	Rivendos…
+	Resize Table by Dragging	Ripërmaso tabelën duke e tërhequr
+	Resolve	Zgjidh
+	Resolved	E zgjidhur
+	Restart at 1	Rinis nga 1
+	Restart Each Page	Rinis në çdo faqe
+	Restart Each Section	Rinis në çdo seksion
+	Restart list after:	Rinis listën pas:
+	Restore	Rikthe
+	Restore Defaults	Rikthe parazgjedhjet
+	Restore Down	Rikthe madhësinë
+	Restore to Normal Word Document	Rikthe në dokument normal Word
+	Restrict Editing	Kufizo redaktimin
+	Restrict\nEditing	Kufizo\nredaktimin
+	Result	Rezultati
+	Results	Rezultatet
+	Return address labels	Etiketa me adresë kthimi
+	Return address:	Adresa e kthimit:
+	Reverse the order	Përmbys renditjen
+	Review	Rishikim
+	Review AutoFormat Changes	Rishiko ndryshimet e formatimit automatik
+	Review Changes…	Rishiko ndryshimet…
+	Reviewing	Rishikimi
+	Reviewing Pane	Paneli i rishikimit
+	Reviewing — edits become suggestions	Rishikim — redaktimet bëhen sugjerime
+	Revised document	Dokumenti i rishikuar
+	Revisions	Rishikimet
+	Rewind	Rikthe mbrapsht
+	Ribbon	Shiriti i veglave
+	Ribbon and Quick Access Toolbar:	Shiriti i veglave dhe shiriti i qasjes së shpejtë:
+	Ribbon tabs	Skedat e shiritit të veglave
+	Rich Text Content Control	Kontroll përmbajtjeje me tekst të pasur
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Djathtas
+	Right (vertical)	Djathtas (vertikal)
+	Right align page numbers	Rreshto djathtas numrat e faqeve
+	Right Arrow with Text Above	Shigjetë djathtas me tekst sipër
+	Right Arrow with Text Below	Shigjetë djathtas me tekst poshtë
+	Right Border	Kufiri i djathtë
+	Right border	Kufiri i djathtë
+	Right Bracket Twice	Kllapë djathtas dy herë
+	Right indent	Dhëmbëzimi djathtas
+	Right Margin	Mënjana e djathtë
+	Right Only	Vetëm djathtas
+	Right only	Vetëm djathtas
+	Right-to-left	Nga e djathta në të majtë
+	Right-to-Left Section	Seksion nga e djathta në të majtë
+	Right-to-Left Table	Tabelë nga e djathta në të majtë
+	Right-to-Left Text Direction	Drejtimi i tekstit nga e djathta në të majtë
+	Right:	Djathtas:
+	Rightwards Arrow Above	Shigjetë drejt djathtas sipër
+	Rightwards Harpoon Above	Harpun drejt djathtas sipër
+	Roots of ax²+bx+c	Rrënjët e ax²+bx+c
+	Rotate	Rrotullo
+	Rotate all text 270°	Rrotullo gjithë tekstin 270°
+	Rotate all text 90°	Rrotullo gjithë tekstin 90°
+	Rotate Left 90°	Rrotullo majtas 90°
+	Rotate Right 90°	Rrotullo djathtas 90°
+	Rotation	Rrotullimi
+	Rotation:	Rrotullimi:
+	Rounded Rectangle	Drejtkëndësh i rrumbullakosur
+	Row	Rresht
+	Row:	Rreshti:
+	Rows & Columns	Rreshta dhe kolona
+	Ruby text:	Teksti ruby:
+	Ruler	Viza matëse
+	Rules	Rregullat
+	Run	Ekzekuto
+	Run-in	Në vijim
+	Russian	Rusisht
+	Résumé	CV
+	Same as the whole table	Njëlloj si gjithë tabela
+	SAMPLE	SHEMBULL
+	Sat:	Sht:
+	Save	Ruaj
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Ruani një kopje në format tjetër. Printimi kalon përmes një PDF-je që mund ta printoni nga çdo shikues.
+	Save As	Ruaj si
+	Save as Template	Ruaj si shabllon
+	Save documents	Ruaj dokumentet
+	Save the document to turn on AutoSave	Ruajeni dokumentin për të ndezur ruajtjen automatike
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Ruajeni dokumentin për të ndezur ruajtjen automatike (një skedar që vetëm e keni hapur nuk rishkruhet derisa ta ruani)
+	Save these pages as PDF…	Ruaji këto faqe si PDF…
+	Save Version	Ruaj versionin
+	Saved	U ruajt
+	Scale	Shkalla
+	Scale Drawing	Shkallëzo vizatimin
+	Scatter	Shpërndarje
+	Screen Clipping	Prerje ekrani
+	Screen clipping didn't work: {reason}	Prerja e ekranit nuk funksionoi: {reason}
+	Screen clipping ended without a picture.	Prerja e ekranit përfundoi pa figurë.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Prerja e ekranit nuk ofrohet këtu. Kopjoni një figurë të ekranit, pastaj ngjiteni.
+	Screenshot	Pamje ekrani
+	Script	Shkrimi
+	Scripts	Skriptet
+	Scroll ribbon left	Rrëshqit shiritin e veglave majtas
+	Scroll ribbon right	Rrëshqit shiritin e veglave djathtas
+	Search	Kërko
+	Search Commands	Kërko komanda
+	Search commands and help	Kërko komanda dhe ndihmë
+	Search document	Kërko në dokument
+	Search for templates	Kërko shabllone
+	Search icons	Kërko ikona
+	Search Openverse (Creative Commons pictures)	Kërko në Openverse (figura Creative Commons)
+	Search Options	Opsionet e kërkimit
+	Searching…	Po kërkohet…
+	Secant Function	Funksioni sekant
+	Section Break	Ndërprerje seksioni
+	Section Breaks	Ndërprerjet e seksioneve
+	Section Character	Karakteri i seksionit
+	Section direction:	Drejtimi i seksionit:
+	Section Mark	Shenja e seksionit
+	Section Properties	Vetitë e seksionit
+	Sections	Seksionet
+	See	Shih
+	Select	Përzgjidh
+	Select a picture, shape, chart or table to describe it.	Përzgjidhni një figurë, formë, grafik ose tabelë për ta përshkruar.
+	Select All	Përzgjidh të gjitha
+	Select Cell	Përzgjidh qelizën
+	Select Floating Shapes	Përzgjidh format pluskuese
+	Select Heading and Content	Përzgjidh titullin dhe përmbajtjen
+	Select Line	Përzgjidh rreshtin
+	Select Objects	Përzgjidh objektet
+	Select Paragraph	Përzgjidh paragrafin
+	Select Range	Përzgjidh intervalin
+	Select Recipients	Përzgjidh marrësit
+	Select recipients first to choose from their fields.	Përzgjidhni fillimisht marrësit për të zgjedhur nga fushat e tyre.
+	Select recipients first to match their fields.	Përzgjidhni fillimisht marrësit për të përputhur fushat e tyre.
+	Select Row	Përzgjidh rreshtin
+	Select Sentence	Përzgjidh fjalinë
+	Select Table	Përzgjidh tabelën
+	Select Text	Përzgjidh tekstin
+	Select text in the document to translate it.	Përzgjidhni tekst në dokument për ta përkthyer.
+	Select Text with Similar Formatting	Përzgjidh tekst me formatim të ngjashëm
+	Select text, then tick who can still edit it.	Përzgjidhni tekstin, pastaj shënoni kush mund ta redaktojë ende.
+	Select the part of the screen to insert.	Përzgjidhni pjesën e ekranit për të futur.
+	Select Word	Përzgjidh fjalën
+	Select\nRecipients	Përzgjidh\nmarrësit
+	Selected Fields	Fushat e përzgjedhura
+	Selected pages	Faqet e përzgjedhura
+	Selection	Përzgjedhja
+	Selection Pane	Paneli i përzgjedhjes
+	Send Backward	Dërgo prapa
+	Send the document straight to the system print dialog, or save a copy in another format below.	Dërgojeni dokumentin drejt e në dialogun e printimit të sistemit, ose ruani një kopje në format tjetër më poshtë.
+	Sentence	Fjali
+	Sentence case.	Si në fjali.
+	Separator:	Ndarësi:
+	Sequence name:	Emri i vargut:
+	Serbian	Serbisht
+	Serbian (Cyrillic)	Serbisht (cirilike)
+	Serbian (Latin)	Serbisht (latine)
+	Series name	Emri i serisë
+	Series {n}	Seria {n}
+	Server address (https://…)	Adresa e serverit (https://…)
+	Set	Cakto
+	Set As Default	Cakto si parazgjedhje
+	Set as Default	Cakto si parazgjedhje
+	Set Caret	Vendos kursorin
+	Set Character Formatting	Cakto formatimin e karaktereve
+	Set Date	Cakto datën
+	Set Equation	Cakto ekuacionin
+	Set Numbering Value	Cakto vlerën e numërimit
+	Set Paragraph Formatting	Cakto formatimin e paragrafit
+	Set Proofing Language…	Cakto gjuhën e korrektimit…
+	Setting:	Cilësimi:
+	Settings…	Cilësimet…
+	Shading	Hijezim
+	Shadow	Hije
+	Shadow, glow and soft edges	Hije, shkëlqim dhe skaje të buta
+	Shape Effects	Efektet e formës
+	Shape Fill	Mbushja e formës
+	Shape Format	Formati i formës
+	Shape Outline	Kontura e formës
+	Shape Styles	Stilet e formave
+	Shapes	Format
+	Share	Ndaj
+	Sheet:	Fleta:
+	Shift cells down	Zhvendos qelizat poshtë
+	Shift cells right	Zhvendos qelizat djathtas
+	Shift+Tab	Shift+Tab
+	Shipping labels	Etiketa transporti
+	Short citation:	Citim i shkurtër:
+	Shortcut key:	Tasti i shkurtores:
+	Show	Shfaq
+	Show all formatting marks	Shfaq të gjitha shenjat e formatimit
+	Show All Levels	Shfaq të gjitha nivelet
+	Show all revisions inline	Shfaq të gjitha rishikimet në rresht
+	Show changes at:	Shfaq ndryshimet te:
+	Show changes in:	Shfaq ndryshimet në:
+	Show Comments	Shfaq komentet
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Shfaq dokumentet me ngjyra të përmbysura, si Pamja › Ndërro modalitetet. Ruajtja, printimi dhe PDF-të nuk ndryshojnë.
+	Show every bibliography field	Shfaq çdo fushë bibliografie
+	Show First Line Only	Shfaq vetëm rreshtin e parë
+	Show in the Styles gallery	Shfaq në galerinë e stileve
+	Show KeyTips (Alt or F10)	Shfaq këshillat e tasteve (Alt ose F10)
+	Show Level	Shfaq nivelin
+	Show Level 1	Shfaq nivelin 1
+	Show Level 2	Shfaq nivelin 2
+	Show Level 3	Shfaq nivelin 3
+	Show Level 4	Shfaq nivelin 4
+	Show Level 5	Shfaq nivelin 5
+	Show Level 6	Shfaq nivelin 6
+	Show Level 7	Shfaq nivelin 7
+	Show Level 8	Shfaq nivelin 8
+	Show Level 9	Shfaq nivelin 9
+	Show Markup	Shfaq shënjimet
+	Show Notes	Shfaq shënimet
+	Show only comments and formatting in balloons	Shfaq vetëm komentet dhe formatimin në flluska
+	Show or Hide Style	Shfaq ose fshih stilin
+	Show page numbers	Shfaq numrat e faqeve
+	Show revisions in balloons	Shfaq rishikimet në flluska
+	Show rulers	Shfaq vizat matëse
+	Show Text Formatting	Shfaq formatimin e tekstit
+	Show the equation in the line of text	Shfaq ekuacionin në rreshtin e tekstit
+	Show the equation on a line of its own	Shfaq ekuacionin në një rresht më vete
+	Show the mini toolbar when text is selected	Shfaq mini-shiritin e veglave kur përzgjidhet tekst
+	Show/Hide ¶	Shfaq/Fshih ¶
+	Show\nComments	Shfaq\nkomentet
+	Showing the first {count} items.	Po shfaqen {count} elementet e para.
+	Shows a tree: each item below the item it belongs to.	Shfaq një pemë: çdo element poshtë elementit të cilit i përket.
+	Shows items around a central idea: the first item is the centre.	Shfaq elemente rreth një ideje qendrore: elementi i parë është qendra.
+	Shows items of equal weight as blocks in rows.	Shfaq elemente me peshë të barabartë si blloqe në rreshta.
+	Shows overlapping ideas as overlapping circles.	Shfaq ide që mbivendosen si rrathë që mbivendosen.
+	Shows parts of a whole as quadrants.	Shfaq pjesët e një të tëre si kuadrante.
+	Shows parts that build on each other, largest at the bottom.	Shfaq pjesë që ndërtohen mbi njëra-tjetrën, më e madhja në fund.
+	Shows steps in order, left to right, with arrows between them.	Shfaq hapat sipas radhës, nga e majta në të djathtë, me shigjeta midis tyre.
+	Shows steps that repeat, around a circle.	Shfaq hapa që përsëriten, rreth një rrethi.
+	Shrink Font 1 Point	Zvogëlo shkronjat 1 pikë
+	Shrink Selection	Ngushto përzgjedhjen
+	Shrink text	Ngushto tekstin
+	Side to Side	Krah për krah
+	Side\nto Side	Krah\npër krah
+	Sides of a right triangle	Brinjët e një trekëndëshi kënddrejtë
+	Signature Line	Rresht nënshkrimi
+	Sine and cosine series of f(x)	Seritë sinus dhe kosinus të f(x)
+	Sine Function	Funksioni sinus
+	Sine theta	Sinus theta
+	Single	Njëfish
+	Single Brackets	Kllapa të njëfishta
+	Single Closing Quote	Thonjëz e njëfishtë mbyllëse
+	Single label	Etiketë e vetme
+	Single Left Angle	Kënd i vetëm majtas
+	Single Left Bar	Vijë e vetme majtas
+	Single Left Brace	Kllapë gjarpërore e vetme majtas
+	Single Left Bracket	Kllapë katrore e vetme majtas
+	Single Left Parenthesis	Kllapë e rrumbullakët e vetme majtas
+	Single Opening Quote	Thonjëz e njëfishtë hapëse
+	Single Right Brace	Kllapë gjarpërore e vetme djathtas
+	Single Right Bracket	Kllapë katrore e vetme djathtas
+	Single Right Parenthesis	Kllapë e rrumbullakët e vetme djathtas
+	Single Spacing	Hapësirë e njëfishtë
+	SIST02	SIST02
+	Site name	Emri i sajtit
+	Size	Madhësia
+	Size (pt):	Madhësia (pt):
+	Size and Crop…	Madhësia dhe prerja…
+	Size:	Madhësia:
+	Sketchbook	Bllok skicash
+	Skewed Fraction	Thyesë e pjerrët
+	Skip citations & bibliography	Kapërce citimet dhe bibliografinë
+	Skip Citations and Bibliography	Kapërce citimet dhe bibliografinë
+	Skip Record If	Kapërce regjistrimin nëse
+	Skip Record If…	Kapërce regjistrimin nëse…
+	Slant Down	Pjerrësi poshtë
+	Slant Up	Pjerrësi lart
+	Small Caps	Shkronja kapitale të vogla
+	Small caps	Shkronja kapitale të vogla
+	Small change	Ndryshim i vogël
+	Smart quotes instead of straight quotes	Thonjëza tipografike në vend të atyre të drejta
+	SmartArt	SmartArt
+	SmartArt Design	Dizajni SmartArt
+	SmartArt Styles	Stilet SmartArt
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Lëvizje dhe zmadhim i butë, si dhe meny e butona që shfaqen gradualisht. Joaktiv i shfaq të gjitha ndryshimet menjëherë.
+	Soft Edges	Skaje të buta
+	Soft Glow	Shkëlqim i butë
+	Solid Accent	Theks i plotë
+	Sort	Rendit
+	Sort by	Rendit sipas
+	Sort order:	Renditja:
+	Sort Records	Rendit regjistrimet
+	Source code: github.com/chatraweechai/doc4me	Kodi burimor: github.com/chatraweechai/doc4me
+	Source Manager	Menaxheri i burimeve
+	Source type:	Lloji i burimit:
+	Sources in this document:	Burimet në këtë dokument:
+	South	Jug
+	Space	Hapësirë
+	Space after	Hapësirë pas
+	Space after: {pt} pt	Hapësirë pas: {pt} pt
+	Space before	Hapësirë para
+	Space before/after:	Hapësirë para/pas:
+	Space before: {pt} pt	Hapësirë para: {pt} pt
+	Spaces	Hapësira
+	Spacing	Hapësirat
+	Spacing (pt):	Hapësira (pt):
+	Spacing:	Hapësira:
+	Spanish	Spanjisht
+	Spanish (Mexico)	Spanjisht (Meksikë)
+	Spanish (Spain)	Spanjisht (Spanjë)
+	Sparse Matrices	Matrica të rralla
+	Special	E veçantë
+	Special Characters	Karaktere të veçanta
+	Specify height:	Specifiko lartësinë:
+	Speech	E folura
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	E folura njihet në këtë kompjuter (whisper.cpp); asgjë nuk dërgohet në linjë.
+	Speed	Shpejtësia
+	Spelling	Drejtshkrimi
+	Spelling & Grammar	Drejtshkrimi dhe gramatika
+	Spelling &\nGrammar	Drejtshkrimi dhe\ngramatika
+	Spelling and grammar are checked in English (United States).	Drejtshkrimi dhe gramatika kontrollohen në anglisht (Shtetet e Bashkuara).
+	Spelling Suggestions	Sugjerime drejtshkrimore
+	Spike	Grumbulli
+	Split	Ndaj
+	Split apart page break and paragraph mark	Ndaj ndërprerjen e faqes nga shenja e paragrafit
+	Split Cells	Ndaj qelizat
+	Split Table	Ndaj tabelën
+	Spreadsheet Table	Tabelë fletëllogaritëse
+	Square	Katror
+	Square Root	Rrënjë katrore
+	Square Root with Degree	Rrënjë katrore me shkallë
+	Square Union	Bashkim katror
+	Stack Object	Objekt i mbivendosur
+	Stack Object (Three)	Objekt i mbivendosur (tre)
+	Stacked	I mbivendosur
+	Stacked Bar	Shirita të mbivendosur
+	Stacked Column	Kolona të mbivendosura
+	Stacked Fraction	Thyesë e mbivendosur
+	Stacked, no bar	E mbivendosur, pa vijë
+	Standard	Standard
+	Standard and Contextual	Standard dhe kontekstual
+	Standard Colors	Ngjyra standarde
+	Standard Only	Vetëm standard
+	Star	Yll
+	Start at:	Fillo nga:
+	Start Enforcing Protection	Fillo zbatimin e mbrojtjes
+	Start Mail Merge	Fillo bashkimin postar
+	Start Mail\nMerge	Fillo bashkimin\npostar
+	State	Shteti/krahina
+	Statement   5.50" × 8.50"	Statement   5.50" × 8.50"
+	Statistics	Statistika
+	Status Bar	Shiriti i gjendjes
+	Statutes	Statute
+	Stop	Ndalo
+	Stop Protection	Ndalo mbrojtjen
+	Stop Reading	Ndalo leximin
+	Stopped	U ndal
+	Store	Dyqani
+	Straight Arrow Connector	Lidhës me shigjetë të drejtë
+	Straight Connector	Lidhës i drejtë
+	Strikethrough	Vijëzim në mes
+	Stroke {n} of {total}	Vija {n} nga {total}
+	Strong	I fortë
+	Structure Actions	Veprime strukture
+	Structures	Struktura
+	Studio	Studio
+	Studio cover	Kopertinë Studio
+	Studio handbook (sample)	Manuali Studio (shembull)
+	Style	Stili
+	Style based on:	Stili bazohet në:
+	Style Inspector	Inspektori i stileve
+	Style Set	Grup stilesh
+	Style:	Stili:
+	Style: APA	Stili: APA
+	Style: {style}	Stili: {style}
+	Styles	Stilet
+	Styles Pane	Paneli i stileve
+	Styles:	Stilet:
+	Subentry:	Nënhyrja:
+	Subject	Subjekti
+	Subscript	Indeks i poshtëm
+	Subscript-Superscript	Indeks i poshtëm-i sipërm
+	Subscripts and Superscripts	Indekse të poshtme dhe të sipërme
+	Subset:	Nëngrupi:
+	Substituted font	Shkronja zëvendësuese
+	Subtitle	Nëntitull
+	Subtle Emphasis	Theksim i lehtë
+	Subtle Reference	Referencë e lehtë
+	Sum	Shuma
+	Sum of cosines	Shuma e kosinusëve
+	Sum or difference of sines	Shuma ose diferenca e sinusëve
+	Summation	Shumë
+	Summation from 0 to n	Shumë nga 0 në n
+	Summation over binomials	Shumë mbi binomë
+	Summation with Limits	Shumë me kufij
+	Summation with Lower Limit	Shumë me kufi të poshtëm
+	Summation with Subscript Limit	Shumë me kufi në indeks të poshtëm
+	Summation with Subscript-Superscript Limits	Shumë me kufij indeks i poshtëm-i sipërm
+	Summations	Shuma
+	Superscript	Indeks i sipërm
+	Suppress line numbers	Pezullo numrat e rreshtave
+	Surface Integral	Integral sipërfaqeje
+	Surface Integral with Limits	Integral sipërfaqeje me kufij
+	Surface Integral with Stacked Limits	Integral sipërfaqeje me kufij të mbivendosur
+	Swap footnotes and endnotes	Këmbe shënimet në fund të faqes dhe përfundimtare
+	Swedish	Suedisht
+	Switch Modes	Ndërro modalitetet
+	Switch Windows	Ndërro dritaret
+	Switch\nModes	Ndërro\nmodalitetet
+	Symbol	Simbol
+	Symbol Font	Shkronjat e simboleve
+	Symbols	Simbolet
+	Synchronous Scrolling	Rrëshqitje e sinkronizuar
+	Synonyms	Sinonime
+	System	Sistemi
+	Tab	Tab
+	Tab Character	Karakteri tab
+	Tab character	Karakteri tab
+	Tab characters	Karakteret tab
+	Tab leader:	Vija udhëzuese e tabulimit:
+	Tab stop position:	Pozicioni i ndalesës së tabulimit:
+	Tab stops to be cleared:	Ndalesat e tabulimit për t'u pastruar:
+	Table	Tabelë
+	Table AutoFormat	Formatim automatik i tabelës
+	Table AutoFormat…	Formatim automatik i tabelës…
+	Table Column Width	Gjerësia e kolonës së tabelës
+	Table Design	Dizajni i tabelës
+	Table direction:	Drejtimi i tabelës:
+	Table entry fields	Fushat e hyrjeve të tabelës
+	Table Grid	Rrjeta e tabelës
+	Table identifier:	Identifikuesi i tabelës:
+	Table Layout	Faqosja e tabelës
+	Table of Authorities	Tabela e autoriteteve
+	Table of Contents	Tabela e përmbajtjes
+	Table of Contents Options	Opsionet e tabelës së përmbajtjes
+	Table of Contents Styles	Stilet e tabelës së përmbajtjes
+	Table of Figures	Tabela e figurave
+	Table of Figures Options	Opsionet e tabelës së figurave
+	Table of\nContents	Tabela e\npërmbajtjes
+	Table Positioning	Pozicionimi i tabelës
+	Table Properties	Vetitë e tabelës
+	Table Row Height	Lartësia e rreshtit të tabelës
+	Table style	Stili i tabelës
+	Table Style Options	Opsionet e stilit të tabelës
+	Table Styles	Stilet e tabelave
+	Table styles:	Stilet e tabelave:
+	Tables	Tabelat
+	Tabloid   11.00" × 17.00"	Tabloid   11.00" × 17.00"
+	Tabs	Tabulimet
+	Tabs…	Tabulimet…
+	Tabular List	Listë tabelare
+	Tag	Etiketë
+	Tangent formula	Formula e tangjentes
+	Tangent Function	Funksioni tangjent
+	TC entry fields	Fushat e hyrjeve TC
+	Technology	Teknologji
+	Templates	Shabllonet
+	Templates and Add-ins	Shabllonet dhe shtesat
+	Text	Tekst
+	Text Box	Kuti teksti
+	Text boxes	Kutitë e tekstit
+	Text Direction	Drejtimi i tekstit
+	Text Effects	Efektet e tekstit
+	Text Effects and Typography	Efektet e tekstit dhe tipografia
+	Text Fill	Mbushja e tekstit
+	Text from File	Tekst nga skedari
+	Text Highlight Color	Ngjyra e theksimit të tekstit
+	Text indent at:	Dhëmbëzimi i tekstit te:
+	Text isn't squeezed to fit its cell yet.	Teksti ende nuk ngjeshet për t'u përshtatur në qelizën e tij.
+	Text Outline	Kontura e tekstit
+	Text over Colon Equal	Tekst mbi dy pika baras
+	Text over Equal	Tekst mbi baras
+	Text Pane	Paneli i tekstit
+	Text size	Madhësia e tekstit
+	Text snaps to characters	Teksti ngjitet te karakteret
+	Text to display:	Teksti për t'u shfaqur:
+	Text Wrapping	Mbështjellja e tekstit
+	Text wrapping:	Mbështjellja e tekstit:
+	Text:	Teksti:
+	Text\nBox	Kuti\nteksti
+	Text\nDirection	Drejtimi i\ntekstit
+	Thai	Tajlandisht
+	Thai Distributed	Tajlandisht i shpërndarë
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Ai format nuk i mban të gjitha, ndaj dokumenti mbetet i hapur. Ruajeni si dokument Word (.docx) për të vazhduar.
+	That isn't the web address or embed code of an online video.	Kjo nuk është adresa web ose kodi i përfshirjes së një videoje në linjë.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Ai fjalëkalim nuk është i saktë. Kontrollojeni (fjalëkalimet dallojnë shkronjat e mëdha nga të voglat) dhe provoni përsëri.
+	The clipboard is empty.	Kujtesa është bosh.
+	The date it is today	Data e sotme
+	The document contains no tracked changes.	Dokumenti nuk përmban ndryshime të gjurmuara.
+	The document has no bookmarks yet.	Dokumenti ende nuk ka faqeshënues.
+	The document is read only, except for regions marked editable.	Dokumenti është vetëm për lexim, përveç rajoneve të shënuara si të redaktueshme.
+	The document will be saved with a password. Save it to protect it.	Dokumenti do të ruhet me fjalëkalim. Ruajeni për ta mbrojtur.
+	The first word of a sentence starts with a capital.	Fjala e parë e fjalisë fillon me shkronjë të madhe.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	kuota ditore falas është shteruar (provoni përsëri nesër ose jepni një adresë email-i)
+	the LibreTranslate server	serveri LibreTranslate
+	The Mail Merge Helper sets up a merge in three steps.	Ndihmësi i bashkimit postar e përgatit një bashkim në tri hapa.
+	The new style takes the formatting of the current paragraph.	Stili i ri merr formatimin e paragrafit aktual.
+	The password is optional; without it anyone can stop the protection.	Fjalëkalimi është opsional; pa të kushdo mund ta ndalë mbrojtjen.
+	The password is removed. Save the document to keep the change.	Fjalëkalimi u hoq. Ruajeni dokumentin për ta mbajtur ndryshimin.
+	The passwords don't match.	Fjalëkalimet nuk përputhen.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Printeri, printimi në të dyja anët dhe faqet për fletë zgjidhen në atë dialog.
+	The recipient-list field that fills each part of an address block and greeting line.	Fusha e listës së marrësve që plotëson secilën pjesë të bllokut të adresës dhe rreshtit të përshëndetjes.
+	The same word twice in a row.	E njëjta fjalë dy herë radhazi.
+	The spelling and grammar check is complete.	Kontrolli i drejtshkrimit dhe gramatikës përfundoi.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Dialogu i skedarëve i sistemit nuk ofrohet, ndaj Doc4Me shfaq të vetin. Për dialogun e sistemit, instaloni një portal zgjedhësi skedarësh (si xdg-desktop-portal-gtk) ose zenity.
+	The text is sent to {service} to be translated.	Teksti dërgohet te {service} për t'u përkthyer.
+	The time right now	Ora tani
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Videoja shfaqet si figurë në dokument. Klikojeni dy herë për ta parë në shfletues.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	I gjithë dokumenti përkthehet në një dokument të ri, që e zëvendëson këtë. Ruani më parë punën tuaj.
+	Theme Colors	Ngjyrat e temës
+	Theme Fonts	Shkronjat e temës
+	Theme List	Lista e temave
+	Themes	Temat
+	Then by	Pastaj sipas
+	Then insert:	Atëherë fut:
+	There's no text to translate.	Nuk ka tekst për t'u përkthyer.
+	Thesaurus	Fjalor sinonimesh
+	These marks show even when Show/Hide ¶ is off.	Këto shenja shfaqen edhe kur Shfaq/Fshih ¶ është joaktiv.
+	These merge fields aren't in the recipient list:	Këto fusha bashkimi nuk janë në listën e marrësve:
+	These settings will be used for new documents.	Këto cilësime do të përdoren për dokumentet e reja.
+	Thick	E trashë
+	Thickness	Trashësia
+	This Device…	Kjo pajisje…
+	This document	Ky dokument
+	This field has no options.	Kjo fushë nuk ka opsione.
+	This folder can't be read: {error}	Kjo dosje nuk mund të lexohet: {error}
+	This font has no characters to show.	Këto shkronja nuk kanë karaktere për të shfaqur.
+	This page	Kjo faqe
+	This password type isn't supported.	Ky lloj fjalëkalimi nuk mbështetet.
+	This point forward	Nga kjo pikë e tutje
+	This section	Ky seksion
+	Three	Tre
+	Through	Përmes
+	Tight	I ngushtë
+	Tilde	Tildë
+	Tips ({n})	Këshilla ({n})
+	Title	Titulli
+	Title from the document properties	Titulli nga vetitë e dokumentit
+	Title:	Titulli:
+	To	Deri
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Për t'i hapur dokumentet Word me Doc4Me si parazgjedhje: përzgjidhni një në Finder, zgjidhni File › Get Info, zgjidhni Doc4Me te Open with, pastaj klikoni Change All.
+	To:	Deri:
+	TOA Heading	Titull i tabelës së autoriteteve
+	TOC Heading	Titull i tabelës së përmbajtjes
+	TOC {n}	TP {n}
+	Today	Sot
+	tOGGLE cASE	nDËRRO sHKRONJAT
+	Toggle Check Box	Ndërro kutinë e zgjedhjes
+	Toggle Field Codes	Ndërro kodet e fushave
+	Toggle Unicode Character	Ndërro karakterin Unicode
+	Tools	Veglat
+	Top	Lart
+	Top and Bottom	Lart dhe poshtë
+	Top Border	Kufiri i sipërm
+	Top Margin	Mënjana e sipërme
+	Top of Next Page	Krye i faqes pasuese
+	Top of Page	Krye i faqes
+	Top of Previous Page	Krye i faqes paraardhëse
+	Top of the Window	Krye i dritares
+	Top:	Lart:
+	Total	Gjithsej
+	Total Row	Rreshti i totalit
+	Track Changes	Gjurmo ndryshimet
+	Track Changes Options	Opsionet e gjurmimit të ndryshimeve
+	Track changes while editing	Gjurmo ndryshimet gjatë redaktimit
+	Track Changes: On	Gjurmo ndryshimet: aktiv
+	Track formatting	Gjurmo formatimin
+	Track\nChanges	Gjurmo\nndryshimet
+	Track\nChanges ✓	Gjurmo\nndryshimet ✓
+	Tracked changes	Ndryshime të gjurmuara
+	Tracking	Gjurmimi
+	Trademark	Markë tregtare
+	Trademark Sign	Shenja e markës tregtare
+	Transform	Transformo
+	Translate	Përkthe
+	Translate Document	Përkthe dokumentin
+	Translating {done} of {total}	Po përkthehet {done} nga {total}
+	Translation service	Shërbimi i përkthimit
+	Translator	Përkthyesi
+	Transparency	Transparenca
+	Transparency:	Transparenca:
+	Transport	Transport
+	Treatises	Traktate
+	Triangle	Trekëndësh
+	Triangle Down	Trekëndësh poshtë
+	Triangle Up	Trekëndësh lart
+	Trigonometric Functions	Funksione trigonometrike
+	Triple	Trefish
+	Triple Dot	Pikë e trefishtë
+	Triple Integral	Integral i trefishtë
+	Triple Integral with Limits	Integral i trefishtë me kufij
+	Triple Integral with Stacked Limits	Integral i trefishtë me kufij të mbivendosur
+	Trust Center	Qendra e besimit
+	Tue	Mar
+	Turabian	Turabian
+	Turkish	Turqisht
+	Two	Dy
+	Type	Lloji
+	Type a command, e.g. "insert table"	Shkruani një komandë, p.sh. "fut tabelë"
+	Type a New List	Shkruani një listë të re
+	Type a New List…	Shkruani një listë të re…
+	Type at least one recipient.	Shkruani të paktën një marrës.
+	Type equations in LaTeX	Shkruani ekuacione në LaTeX
+	Type equations in the linear format (UnicodeMath)	Shkruani ekuacione në formatin linear (UnicodeMath)
+	Type in Equation	Shkruaj në ekuacion
+	Type normal (non-math) text in the equation	Shkruani tekst normal (jomatematikor) në ekuacion
+	Type Text	Shkruaj tekst
+	Type the categories down the side and a column of values per series.	Shkruani kategoritë poshtë anës dhe një kolonë vlerash për çdo seri.
+	Type the field's name and its switches, for example PAGE \\* roman.	Shkruani emrin e fushës dhe çelësat e saj, për shembull PAGE \\* roman.
+	Type the password to stop the protection.	Shkruani fjalëkalimin për të ndalur mbrojtjen.
+	Type the recipients, or load them from a file.	Shkruani marrësit ose ngarkojini nga një skedar.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Shkruani emrin e etiketës së burimit. Mund t'i shtoni më shumë informacion këtij burimi më vonë duke e redaktuar.
+	Type:	Lloji:
+	Typing	Shkrimi
+	Typing replaces selected text	Shkrimi zëvendëson tekstin e përzgjedhur
+	Ukrainian	Ukrainisht
+	Unchecked symbol	Simbol i pashënuar
+	Underbar	Vijë poshtë
+	Underbrace	Kllapë gjarpërore poshtë
+	Underline	Nënvizo
+	Underline color	Ngjyra e nënvizimit
+	Underline Words Only	Nënvizo vetëm fjalët
+	Undo	Zhbëj
+	Undo Stroke	Zhbëj vijën
+	Undo {action}	Zhbëj {action}
+	Unformatted Text	Tekst i paformatuar
+	Ungroup	Çgrupo
+	Union	Bashkim
+	Union of intersections	Bashkim prerjesh
+	Union with Limits	Bashkim me kufij
+	Union with Lower Limit	Bashkim me kufi të poshtëm
+	Union with Plus	Bashkim me plus
+	Union with Subscript-Superscript Limits	Bashkim me kufij indeks i poshtëm-i sipërm
+	Unions and Intersections	Bashkime dhe prerje
+	Unlink Fields	Shkëput fushat
+	Unlink\nCitations	Shkëput\ncitimet
+	Unlock Fields	Shkyç fushat
+	Up	Lart
+	Up Diagonal Dots	Pika diagonale lart
+	Up one level	Një nivel lart
+	Update Field	Përditëso fushën
+	Update fields before printing	Përditëso fushat para printimit
+	Update Index	Përditëso indeksin
+	Update Style to Match Selection	Përditëso stilin sipas përzgjedhjes
+	Update Styles from Template	Përditëso stilet nga shablloni
+	Update Table	Përditëso tabelën
+	Update Table of Figures	Përditëso tabelën e figurave
+	Update to Match	Përditëso për t'u përputhur
+	Update to Match Selection	Përditëso sipas përzgjedhjes
+	UPPERCASE	SHKRONJA TË MËDHA
+	URGENT	URGJENTE
+	URL	URL
+	Use "a" before a consonant sound	Përdor "a" para një tingulli bashkëtingëllor
+	Use "an" before a vowel sound	Përdor "an" para një tingulli zanor
+	Use an Existing List…	Përdor një listë ekzistuese…
+	Use passim (five or more pages)	Përdor passim (pesë ose më shumë faqe)
+	Use system setting	Përdor cilësimin e sistemit
+	Use the Insert key to switch overtype on and off	Përdor tastin Insert për të ndezur e fikur mbishkrimin
+	Use wildcards	Përdor shenja zëvendësuese
+	User Name	Emri i përdoruesit
+	User name:	Emri i përdoruesit:
+	Username	Emri i përdoruesit
+	Value	Vlera
+	Vector A	Vektori A
+	Vector AB	Vektori AB
+	Version	Versioni
+	Version History	Historiku i versioneve
+	Version {version} ({build})	Versioni {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Versionet mbahen sa kohë dokumenti është i hapur (një skedar .docx nuk ka versione).
+	Vertical	Vertikal
+	Vertical Alignment	Rreshtimi vertikal
+	Vertical alignment:	Rreshtimi vertikal:
+	Vertical Bars	Vija vertikale
+	Vertical Dots	Pika vertikale
+	Vertical spacing:	Hapësira vertikale:
+	Vietnamese	Vietnamisht
+	View	Pamja
+	View Alt Text…	Shih tekstin alternativ…
+	View Gridlines	Shfaq vijat e rrjetës
+	View Side by Side	Shih krah për krah
+	View State	Gjendja e pamjes
+	Views	Pamjet
+	Visual effects	Efekte pamore
+	Voice	Zëri
+	Volume	Vëllimi
+	Volume Integral	Integral vëllimi
+	Volume Integral with Limits	Integral vëllimi me kufij
+	Volume Integral with Stacked Limits	Integral vëllimi me kufij të mbivendosur
+	W:	Gj:
+	Waiting for Zotero…	Po pritet Zotero…
+	Warm Gradient with Outline	Gradient i ngrohtë me kontur
+	Warnings ({n})	Paralajmërime ({n})
+	Watermark	Filigran
+	Wave	Valë
+	Weather	Moti
+	web access isn't available here	qasja në web nuk ofrohet këtu
+	Web Layout	Faqosje web
+	Web page (*.html)	Faqe web (*.html)
+	Web\nLayout	Faqosje\nweb
+	Website	Sajti web
+	Wed	Mër
+	Weight	Pesha
+	West	Perëndim
+	When merging records	Gjatë bashkimit të regjistrimeve
+	When this document was first created	Kur u krijua për herë të parë ky dokument
+	When this document was most recently printed	Kur u printua për herë të fundit ky dokument
+	When this document was most recently saved	Kur u ruajt për herë të fundit ky dokument
+	White Space	Hapësirë e bardhë
+	White space	Hapësirë e bardhë
+	Who the document properties name as author	Kë emërtojnë vetitë e dokumentit si autor
+	Whole document	I gjithë dokumenti
+	Whole page	E gjithë faqja
+	Whole Table	E gjithë tabela
+	Whole words	Fjalë të plota
+	Wide	E gjerë
+	Widow/Orphan Control	Kontrolli i rreshtave të vetmuar
+	Widow/Orphan control	Kontrolli i rreshtave të vetmuar
+	Width and spacing	Gjerësia dhe hapësira
+	Width:	Gjerësia:
+	Wildcards (regex)	Shenja zëvendësuese (regex)
+	Window	Dritarja
+	With:	Me:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 e më vonë
+	Word 97–2003	Word 97–2003
+	Word Count	Numri i fjalëve
+	Word document	Dokument Word
+	Word document (*.docx)	Dokument Word (*.docx)
+	Word forms	Formularë Word
+	Word Left	Fjala majtas
+	Word level	Niveli i fjalës
+	Word Right	Fjala djathtas
+	Word XML Document (*.xml)	Dokument Word XML (*.xml)
+	WordArt	WordArt
+	WordArt Styles	Stilet WordArt
+	Words	Fjalë
+	Words only	Vetëm fjalët
+	Wrap Text	Mbështill tekstin
+	Wrap text	Mbështill tekstin
+	Wrap Text Sides	Anët e mbështjelljes së tekstit
+	Wrap\nText	Mbështill\ntekstin
+	Write & Insert Fields	Shkruaj dhe fut fusha
+	Write a reply	Shkruani një përgjigje
+	Write math here with the mouse or a pen.	Shkruani matematikë këtu me miun ose me stilolaps.
+	Writing Style: Grammar	Stili i të shkruarit: gramatika
+	x bar	x me vijë
+	Year	Viti
+	Yes	Po
+	Yields	Jep
+	Your changes will be lost if you don't save them.	Ndryshimet tuaja do të humbasin nëse nuk i ruani.
+	Your system doesn't report an animation setting, so animation effects stay on.	Sistemi juaj nuk raporton cilësim animacioni, ndaj efektet e animacionit mbeten aktive.
+	Your system has animation effects turned off.	Sistemi juaj i ka efektet e animacionit të çaktivizuara.
+	Your system has animation effects turned on.	Sistemi juaj i ka efektet e animacionit të aktivizuara.
+	Zoom	Zmadhimi
+	Zoom In	Zmadho
+	Zoom Out	Zvogëlo
+	Zoom to Page	Zmadho sa faqja
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: u anulua
+	Zotero: done	Zotero: u krye
+	{cols}×{rows} Table	Tabelë {cols}×{rows}
+	{contributors} contributors · {commits} commits	{contributors} kontribuues · {commits} commit-e
+	{count} items highlighted	{count} elemente të theksuara
+	{count} of {total} pages will print	Do të printohen {count} nga {total} faqe
+	{count} paragraphs were changed.	U ndryshuan {count} paragrafë.
+	{count} records; fields: {fields}	{count} regjistrime; fusha: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} nuk është instaluar në këtë kompjuter, ndaj ky dokument shfaqet me {with}. Rreshtat dhe faqet mund të ndahen ndryshe nga shkronjat origjinale.
+	{group} settings	Cilësimet e {group}
+	{key}+Click to follow link	{key}+Klik për të ndjekur lidhjen
+	{language} is now the document's default language.	{language} tani është gjuha e parazgjedhur e dokumentit.
+	{name} (Press ENTER to Insert)	{name} (Shtypni ENTER për ta futur)
+	{name} already exists. Choose Save again to replace it.	{name} ekziston tashmë. Zgjidhni sërish Ruaj për ta zëvendësuar.
+	{name} can't be a folder's name.	{name} nuk mund të jetë emër dosjeje.
+	{name} is protected with a password.	{name} është i mbrojtur me fjalëkalim.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} u shtua. Makrot e tij janë te Shtesat e mia dhe Pamja › Makro.
+	{name} wasn't found.	{name} nuk u gjet.
+	{n} entries marked.	U shënuan {n} hyrje.
+	{n} lines	{n} rreshta
+	{n} of {of} recipients	{n} nga {of} marrës
+	{n} pt	{n} pt
+	{n} records	{n} regjistrime
+	{n} revisions	{n} rishikime
+	{selected} of {words} words	{selected} nga {words} fjalë
+	{size} pt	{size} pt
+	{words} words	{words} fjalë
+	{w} × {h} in	{w} × {h} in
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	“{text}” ({row}, {series}) nuk është numër.
+	← Find	← Gjej
+	✓ None	✓ Asnjë
+	➕ New comment	➕ Koment i ri
+	📂  Browse…	📂  Shfleto…
+	Add Help Text…	Shto tekst ndihme…
+	AutoText entry:	Hyrja e tekstit automatik:
+	Calculate on exit	Llogarit në dalje
+	Calculation	Llogaritja
+	Check Box Form Field	Fushë formulari me kuti zgjedhjeje
+	Check Box Form Field Options	Opsionet e fushës së formularit me kuti zgjedhjeje
+	Check box	Kuti zgjedhjeje
+	Check box enabled	Kutia e zgjedhjes e aktivizuar
+	Check box size:	Madhësia e kutisë së zgjedhjes:
+	Checked	E shënuar
+	Current date	Data aktuale
+	Current time	Ora aktuale
+	Default value:	Vlera e parazgjedhur:
+	Drop-Down Form Field	Fushë formulari me listë rënëse
+	Drop-Down Form Field Options	Opsionet e fushës së formularit me listë rënëse
+	Drop-down	Listë rënëse
+	Drop-down enabled	Lista rënëse e aktivizuar
+	Drop-down item:	Elementi i listës rënëse:
+	Fill In Form Field	Fushë formulari për plotësim
+	Fill-in enabled	Plotësimi i aktivizuar
+	Form Field	Fushë formulari
+	Form Field Help Text	Teksti i ndihmës së fushës së formularit
+	Form Field Options	Opsionet e fushës së formularit
+	Form Field Shading	Hijezimi i fushave të formularit
+	Form Field at Selection	Fushë formulari te përzgjedhja
+	Help Key (F1)	Tasti i ndihmës (F1)
+	Insert Form Field	Fut fushë formulari
+	Items in drop-down list:	Elementet në listën rënëse:
+	Legacy Tools	Vegla të vjetra
+	Maximum length:	Gjatësia maksimale:
+	Next Form Field	Fusha pasuese e formularit
+	Not checked	E pashënuar
+	Put the caret on a form field first.	Vendosni fillimisht kursorin në një fushë formulari.
+	Regular text	Tekst i rregullt
+	Reset Form Fields	Rivendos fushat e formularit
+	Text Form Field	Fushë formulari me tekst
+	Text Form Field Options	Opsionet e fushës së formularit me tekst
+	Type your own:	Shkruani tuajin:
+	Unlimited	Pa kufizim
+	Protected sections:	Seksionet e mbrojtura:
+	Section Protection	Mbrojtja e seksioneve
+	Section {n}	Seksioni {n}
+	Select sections…	Përzgjidh seksionet…
+	AutoSummarize	Përmbledhje automatike
+	Create a new document and put the summary there	Krijo një dokument të ri dhe vendos përmbledhjen atje
+	Highlight key points	Thekso pikat kryesore
+	Insert an executive summary or abstract at the top of the document	Fut një përmbledhje ekzekutive ose abstrakt në krye të dokumentit
+	Length of summary	Gjatësia e përmbledhjes
+	Percent of original:	Përqindja e origjinalit:
+	Summary: {words} of {of} words	Përmbledhja: {words} nga {of} fjalë
+	Type of summary	Lloji i përmbledhjes
+	Update document statistics	Përditëso statistikat e dokumentit
+	{n} sentences	{n} fjali
+	{n} words or less	{n} fjalë ose më pak
+	At:	Te:
+	Distance from text:	Distanca nga teksti:
+	Format Frame	Formato kornizën
+	Format Frame…	Formato kornizën…
+	Frame	Kornizë
+	Frame…	Kornizë…
+	Insert Frame	Fut kornizë
+	Lock anchor	Kyç ankorën
+	Remove Frame	Hiq kornizën
+	Text wrapping	Mbështjellja e tekstit
+	Chinese Conversion	Konvertim kinezisht
+	Chinese Conversion…	Konvertim kinezisht…
+	Converted {n} characters	U konvertuan {n} karaktere
+	Simplified Chinese to Traditional Chinese	Kinezisht e thjeshtuar në kinezisht tradicionale
+	Simplified to Traditional	E thjeshtuar në tradicionale
+	Traditional Chinese to Simplified Chinese	Kinezisht tradicionale në kinezisht të thjeshtuar
+	Traditional to Simplified	Tradicionale në të thjeshtuar
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Përdor variantet e karaktereve të Tajvanit, RPA të Hong Kongut dhe RPA të Makaos
+	Asian Layout	Faqosje aziatike
+	Fit Text	Përshtat tekstin
+	Fit Text…	Përshtat tekstin…
+	Two Lines in One	Dy rreshta në një
+	Two Lines in One…	Dy rreshta në një…
+	New text width (pt):	Gjerësia e re e tekstit (pt):
+	Enclose in brackets	Mbylle në kllapa
+	Bracket pair:	Çifti i kllapave:
+	Typography	Tipografia
+	Character spacing control	Kontrolli i hapësirës së karaktereve
+	Don't compress	Mos ngjesh
+	Compress punctuation only	Ngjesh vetëm pikësimin
+	Compress punctuation and Japanese kana	Ngjesh pikësimin dhe kana japoneze
+	First and last characters	Karakteret e para dhe të fundit
+	Strict	Strikt
+	Cannot start a line:	Nuk mund të fillojë rresht:
+	Cannot end a line:	Nuk mund të mbyllë rresht:
+	Japanese Find Options	Opsionet e kërkimit në japonisht
+	Sounds like (Japanese)	Tingëllon si (japonisht)
+	Match full/half width	Përputh gjerësinë e plotë/gjysmë
+	Match hiragana/katakana	Përputh hiragana/katakana
+	Match small kana	Përputh kana të vogla
+	Match prolonged sound marks and dashes	Përputh shenjat e zgjatjes së tingullit dhe vizat
+	Japanese Consistency Checker	Kontrolluesi i njëtrajtshmërisë në japonisht
+	Japanese Consistency Checker…	Kontrolluesi i njëtrajtshmërisë në japonisht…
+	No inconsistent spellings were found.	Nuk u gjetën drejtshkrime jo të njëtrajtshme.
+	Pick the spelling to keep in each group.	Zgjidhni drejtshkrimin që do të mbahet në secilin grup.
+	Bidirectional text	Tekst dydrejtimësh
+	Bidirectional Text	Tekst dydrejtimësh
+	Default direction:	Drejtimi i parazgjedhur:
+	Cursor movement:	Lëvizja e kursorit:
+	Logical	Logjike
+	Visual	Pamore
+	Manage Fields	Menaxho fushat
+	File locations	Vendndodhjet e skedarëve
+	File Locations	Vendndodhjet e skedarëve
+	Documents:	Dokumentet:
+	Pictures:	Figurat:
+	The system's choice	Zgjedhja e sistemit
+	Show Repairs	Shfaq riparimet
+	No repairs were needed.	Nuk u nevojitën riparime.
+	These problems were found and repaired when the document was opened:	Këto probleme u gjetën dhe u riparuan kur u hap dokumenti:
+	An unreadable entry in the file was skipped: {what}	U kapërce një hyrje e palexueshme në skedar: {what}
+	An unreadable part was left out: {what}	U la jashtë një pjesë e palexueshme: {what}
+	Unreadable relationships were ignored: {what}	U shpërfillën marrëdhënie të palexueshme: {what}
+	A missing part of an embedded object was left out: {what}	U la jashtë një pjesë që mungonte e një objekti të përfshirë: {what}
+	Copy File	Kopjo skedarin
+	Find Files	Gjej skedarë
+	Letter Wizard	Magjistari i letrave
+	Recipient's name:	Emri i marrësit:
+	Salutation:	Përshëndetja:
+	Subject:	Subjekti:
+	Complimentary closing:	Mbyllja e mirësjelljes:
+	Sender's name:	Emri i dërguesit:
+	Job title:	Titulli i punës:
+	Company:	Kompania:
+	Enclosures:	Bashkëngjitjet:
+	Cc:	Cc:
+	Edit Links to Files	Redakto lidhjet me skedarët
+	Source file	Skedari burimor
+	Locked	I kyçur
+	Change Source	Ndrysho burimin
+	This document has no links to files.	Ky dokument nuk ka lidhje me skedarë.
+	Web options	Opsionet web
+	Web Options	Opsionet web
+	Allow PNG as a graphics format	Lejo PNG si format grafik
+	Rely on CSS for font formatting	Mbështetu te CSS për formatimin e shkronjave
+	Rely on VML for displaying graphics in browsers	Mbështetu te VML për shfaqjen e grafikëve në shfletues
+	Organize supporting files in a folder	Organizo skedarët ndihmës në një dosje
+	Use long file names whenever possible	Përdor emra të gjatë skedarësh kur është e mundur
+	Screen size:	Madhësia e ekranit:
+	Pixels per inch:	Piksela për inç:
+	Hangul Hanja Conversion	Konvertim Hangul Hanja
+	Hangul Hanja Conversion…	Konvertim Hangul Hanja…
+	Hangul to Hanja	Hangul në Hanja
+	Hanja to Hangul	Hanja në Hangul
+	Put the caret in Korean text to choose its Hanja.	Vendosni kursorin në tekst koreanisht për të zgjedhur Hanja-n e tij.
+	The selection, or the whole document when nothing is selected.	Përzgjedhja, ose i gjithë dokumenti kur nuk është përzgjedhur asgjë.

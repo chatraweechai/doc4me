@@ -2936,3 +2936,81 @@ spacing	Normal	Нормално
 	Traditional Chinese to Simplified Chinese	Традиционални кинески у поједностављени кинески
 	Traditional to Simplified	Из традиционалног у поједностављени
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Користи варијанте знакова за Тајван, САР Хонгконг и САР Макао
+	Asian Layout	Азијски распоред
+	Fit Text	Прилагоди текст
+	Fit Text…	Прилагоди текст…
+	Two Lines in One	Два реда у једном
+	Two Lines in One…	Два реда у једном…
+	New text width (pt):	Нова ширина текста (пт):
+	Enclose in brackets	Стави у заграде
+	Bracket pair:	Пар заграда:
+	Typography	Типографија
+	Character spacing control	Контрола размака између знакова
+	Don't compress	Не сажимај
+	Compress punctuation only	Сажми само интерпункцију
+	Compress punctuation and Japanese kana	Сажми интерпункцију и јапанску кану
+	First and last characters	Први и последњи знакови
+	Strict	Строго
+	Cannot start a line:	Не може да започне ред:
+	Cannot end a line:	Не може да заврши ред:
+	Japanese Find Options	Опције јапанске претраге
+	Sounds like (Japanese)	Звучи као (јапански)
+	Match full/half width	Подударање пуне/половичне ширине
+	Match hiragana/katakana	Подударање хирагане/катакане
+	Match small kana	Подударање мале кане
+	Match prolonged sound marks and dashes	Подударање ознака продужења и цртица
+	Japanese Consistency Checker	Провера доследности јапанског
+	Japanese Consistency Checker…	Провера доследности јапанског…
+	No inconsistent spellings were found.	Нису пронађени недоследни записи.
+	Pick the spelling to keep in each group.	У свакој групи изаберите запис који желите да задржите.
+	Bidirectional text	Двосмерни текст
+	Bidirectional Text	Двосмерни текст
+	Default direction:	Подразумевани смер:
+	Cursor movement:	Кретање курсора:
+	Logical	Логичко
+	Visual	Визуелно
+	Manage Fields	Управљање пољима
+	File locations	Локације датотека
+	File Locations	Локације датотека
+	Documents:	Документи:
+	Pictures:	Слике:
+	The system's choice	Избор система
+	Show Repairs	Прикажи поправке
+	No repairs were needed.	Поправке нису биле потребне.
+	These problems were found and repaired when the document was opened:	При отварању документа пронађени су и поправљени ови проблеми:
+	An unreadable entry in the file was skipped: {what}	Нечитљив унос у датотеци је прескочен: {what}
+	An unreadable part was left out: {what}	Нечитљив део је изостављен: {what}
+	Unreadable relationships were ignored: {what}	Нечитљиве везе су занемарене: {what}
+	A missing part of an embedded object was left out: {what}	Део уграђеног објекта који недостаје је изостављен: {what}
+	Copy File	Копирај датотеку
+	Find Files	Пронађи датотеке
+	Letter Wizard	Чаробњак за писма
+	Recipient's name:	Име примаоца:
+	Salutation:	Поздрав:
+	Subject:	Тема:
+	Complimentary closing:	Завршни поздрав:
+	Sender's name:	Име пошиљаоца:
+	Job title:	Радно место:
+	Company:	Предузеће:
+	Enclosures:	Прилози:
+	Cc:	Копија:
+	Edit Links to Files	Уреди везе ка датотекама
+	Source file	Изворна датотека
+	Locked	Закључано
+	Change Source	Промени извор
+	This document has no links to files.	Овај документ нема веза ка датотекама.
+	Web options	Веб опције
+	Web Options	Веб опције
+	Allow PNG as a graphics format	Дозволи PNG као графички формат
+	Rely on CSS for font formatting	Користи CSS за обликовање фонта
+	Rely on VML for displaying graphics in browsers	Користи VML за приказ графике у прегледачима
+	Organize supporting files in a folder	Организуј помоћне датотеке у фасцикли
+	Use long file names whenever possible	Кад год је могуће, користи дуге називе датотека
+	Screen size:	Величина екрана:
+	Pixels per inch:	Пиксела по инчу:
+	Hangul Hanja Conversion	Конверзија хангул/ханча
+	Hangul Hanja Conversion…	Конверзија хангул/ханча…
+	Hangul to Hanja	Хангул у ханча
+	Hanja to Hangul	Ханча у хангул
+	Put the caret in Korean text to choose its Hanja.	Поставите курсор у корејски текст да бисте изабрали његове ханча.
+	The selection, or the whole document when nothing is selected.	Избор или цео документ када ништа није изабрано.

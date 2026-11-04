@@ -166,6 +166,10 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("mailings.query", "Filter and Sort", "Mailings › Edit Recipient List", query)
             .params(r#"{"filter"?: [{"field": name, "op": "eq|ne|lt|gt|le|ge|blank|notBlank|contains|notContains", "value"?: string, "or"?: bool (joined to the rule before by Or; And binds first)}], "sort"?: [{"field": name, "descending"?: bool}], "clear"?: true} → {"records", "of", "query"}: the records the merge uses and their order (numbers compare as numbers, text without regard to case); no parameters returns the query in effect"#)
             .when(has_list),
+        CommandSpec::new("mailings.manageFields", "Manage Fields", "Mailings › Edit Recipient List", manage_fields)
+            .params(r#"{"add"?: name, "remove"?: name, "rename"?: {"from": name, "to": name}} → {"fields"}: the recipient list's fields changed (a new field is blank in every record; a change ends Filter and Sort); none of them opens Edit Recipient List"#)
+            .when(has_list)
+            .pure(),
         CommandSpec::new("insert.database", "Insert Database", "Customize Ribbon › All Commands", database).params(
             r#"{"csv"?: string, "path"?: string (.csv/.tsv/.txt, or a .xlsx/.xlsm/.ods workbook), "data"?: base64, "sheet"?: name | number, "headers"?: bool (the first row names the fields; default true), "fields"?: [name] (the columns, in order; default all), "from"?: n, "to"?: n (the records; default all), "preview"?: true (only the source's {"fields", "records"})} → {"rows", "cols"}: the data as a table at the caret, field names in a header row; a workbook with several sheets and none chosen returns {"sheets", "chooseSheet": true}"#,
         ),
@@ -384,6 +388,84 @@ pub const DEFAULT_FIELDS: [&str; 13] = [
     "HomePhone",
     "WorkPhone",
 ];
+
+/// Word's Manage Fields (the data source's fields): add one, remove one, or rename one.
+fn manage_fields(s: &mut Session, v: &Value) -> CmdResult {
+    let name = |k: &str, x: Option<&Value>| -> Result<Option<String>, CmdError> {
+        match x {
+            None | Some(Value::Null) => Ok(None),
+            Some(Value::String(t)) => {
+                let t: String = t.trim().chars().filter(|c| !c.is_control()).collect();
+                if t.is_empty() || t.chars().count() > MAX_FIELD_CHARS {
+                    return Err(CmdError::Params(format!("`{k}` is a field name of 1 to {MAX_FIELD_CHARS} characters")));
+                }
+                Ok(Some(t))
+            }
+            Some(_) => Err(CmdError::Params(format!("`{k}` must be a field name"))),
+        }
+    };
+    let add = name("add", v.get("add"))?;
+    let remove = name("remove", v.get("remove"))?;
+    let rename = match v.get("rename") {
+        None | Some(Value::Null) => None,
+        Some(r @ Value::Object(_)) => match (name("rename.from", r.get("from"))?, name("rename.to", r.get("to"))?) {
+            (Some(f), Some(t)) => Some((f, t)),
+            _ => return Err(CmdError::Params("`rename` needs `from` and `to`".into())),
+        },
+        Some(_) => return Err(CmdError::Params("`rename` must be {\"from\", \"to\"}".into())),
+    };
+    if add.is_none() && remove.is_none() && rename.is_none() {
+        s.ui_requests.push(json!({"open": "recipientList"}));
+        return Ok(json!({"fields": s.merge.headers, "opened": true}));
+    }
+    // Check everything against the fields as they will be before changing anything.
+    let mut headers = s.merge.headers.clone();
+    let find = |h: &[String], n: &str| h.iter().position(|x| x == n).or_else(|| h.iter().position(|x| x.eq_ignore_ascii_case(n)));
+    let taken = |h: &[String], n: &str, except: Option<usize>| h.iter().enumerate().any(|(i, x)| Some(i) != except && x.eq_ignore_ascii_case(n));
+    let mut removed = None;
+    if let Some((f, t)) = &rename {
+        let i = find(&headers, f).ok_or_else(|| CmdError::Params(format!("no field `{f}`")))?;
+        if taken(&headers, t, Some(i)) {
+            return Err(CmdError::Params(format!("there is already a field `{t}`")));
+        }
+        headers[i] = t.clone();
+    }
+    if let Some(r) = &remove {
+        let i = find(&headers, r).ok_or_else(|| CmdError::Params(format!("no field `{r}`")))?;
+        if headers.len() == 1 {
+            return Err(CmdError::Params("a recipient list keeps at least one field".into()));
+        }
+        headers.remove(i);
+        removed = Some(i);
+    }
+    if let Some(a) = &add {
+        if taken(&headers, a, None) {
+            return Err(CmdError::Params(format!("there is already a field `{a}`")));
+        }
+        if headers.len() >= MAX_FIELDS {
+            return Err(CmdError::Params(format!("a recipient list has at most {MAX_FIELDS} fields")));
+        }
+        headers.push(a.clone());
+    }
+    // Changing the fields ends Filter and Sort (its rules name fields), as editing the list does.
+    if let Some(all) = s.merge.all_rows.take() {
+        s.merge.rows = all;
+        s.merge.query = Value::Null;
+    }
+    let width = s.merge.headers.len();
+    for row in &mut s.merge.rows {
+        row.resize(width, String::new());
+        if let Some(i) = removed {
+            row.remove(i);
+        }
+        if add.is_some() {
+            row.push(String::new());
+        }
+    }
+    s.merge.headers = headers;
+    s.merge.record = s.merge.record.min(s.merge.rows.len().saturating_sub(1));
+    Ok(json!({"fields": s.merge.headers}))
+}
 
 /// Longest field name a header source keeps, in characters.
 const MAX_FIELD_CHARS: usize = 40;
@@ -1432,6 +1514,31 @@ fn labels(s: &mut Session, v: &Value) -> CmdResult {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn manage_fields_adds_removes_and_renames_fields() {
+        let mut s = Session::new(Document::new());
+        assert!(s.run("mailings.manageFields", &json!({"add": "Phone"})).is_err(), "needs a list");
+        s.run("mailings.recipients", &json!({"csv": "Name,City\nAda,Paris\nBo,Rome"})).unwrap();
+        let r = s.run("mailings.manageFields", &json!({})).unwrap();
+        assert_eq!(r["opened"], json!(true));
+        s.run("mailings.query", &json!({"filter": [{"field": "City", "op": "eq", "value": "Rome"}]})).unwrap();
+        assert_eq!(s.merge.rows.len(), 1);
+        let r = s.run("mailings.manageFields", &json!({"add": "Phone"})).unwrap();
+        assert_eq!(r["fields"], json!(["Name", "City", "Phone"]));
+        assert_eq!(s.merge.rows, vec![vec!["Ada", "Paris", ""], vec!["Bo", "Rome", ""]], "the query ended; every record has the field");
+        assert!(s.merge.all_rows.is_none());
+        assert!(s.run("mailings.manageFields", &json!({"add": "phone"})).is_err(), "names differ by more than case");
+        assert!(s.run("mailings.manageFields", &json!({"remove": "Nope"})).is_err());
+        assert!(s.run("mailings.manageFields", &json!({"rename": {"from": "City", "to": "name"}})).is_err());
+        assert!(s.run("mailings.manageFields", &json!({"add": "  "})).is_err());
+        s.run("mailings.manageFields", &json!({"rename": {"from": "city", "to": "Town"}, "remove": "Phone"})).unwrap();
+        assert_eq!(s.merge.headers, vec!["Name", "Town"]);
+        assert_eq!(s.merge.rows, vec![vec!["Ada", "Paris"], vec!["Bo", "Rome"]]);
+        s.run("mailings.manageFields", &json!({"remove": "Name"})).unwrap();
+        assert!(s.run("mailings.manageFields", &json!({"remove": "Town"})).is_err(), "the last field stays");
+        assert_eq!(s.merge.rows, vec![vec!["Paris"], vec!["Rome"]]);
+    }
 
     #[test]
     fn csv_parsing() {

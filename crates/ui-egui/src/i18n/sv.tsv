@@ -2919,3 +2919,81 @@
 	Traditional Chinese to Simplified Chinese	Traditionell kinesiska till förenklad kinesiska
 	Traditional to Simplified	Traditionell till förenklad
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Använd teckenvarianter för Taiwan, Hongkong SAR och Macao SAR
+	Asian Layout	Asiatisk layout
+	Fit Text	Anpassa text
+	Fit Text…	Anpassa text…
+	Two Lines in One	Två rader i en
+	Two Lines in One…	Två rader i en…
+	New text width (pt):	Ny textbredd (pt):
+	Enclose in brackets	Omge med parenteser
+	Bracket pair:	Parentespar:
+	Typography	Typografi
+	Character spacing control	Kontroll av teckenavstånd
+	Don't compress	Komprimera inte
+	Compress punctuation only	Komprimera endast skiljetecken
+	Compress punctuation and Japanese kana	Komprimera skiljetecken och japansk kana
+	First and last characters	Första och sista tecken
+	Strict	Strikt
+	Cannot start a line:	Får inte inleda en rad:
+	Cannot end a line:	Får inte avsluta en rad:
+	Japanese Find Options	Alternativ för japansk sökning
+	Sounds like (Japanese)	Låter som (japanska)
+	Match full/half width	Matcha hel/halv bredd
+	Match hiragana/katakana	Matcha hiragana/katakana
+	Match small kana	Matcha liten kana
+	Match prolonged sound marks and dashes	Matcha förlängningstecken och tankstreck
+	Japanese Consistency Checker	Japansk konsekvenskontroll
+	Japanese Consistency Checker…	Japansk konsekvenskontroll…
+	No inconsistent spellings were found.	Inga inkonsekventa stavningar hittades.
+	Pick the spelling to keep in each group.	Välj den stavning som ska behållas i varje grupp.
+	Bidirectional text	Dubbelriktad text
+	Bidirectional Text	Dubbelriktad text
+	Default direction:	Standardriktning:
+	Cursor movement:	Markörförflyttning:
+	Logical	Logisk
+	Visual	Visuell
+	Manage Fields	Hantera fält
+	File locations	Filplatser
+	File Locations	Filplatser
+	Documents:	Dokument:
+	Pictures:	Bilder:
+	The system's choice	Systemets val
+	Show Repairs	Visa reparationer
+	No repairs were needed.	Inga reparationer behövdes.
+	These problems were found and repaired when the document was opened:	Dessa problem hittades och reparerades när dokumentet öppnades:
+	An unreadable entry in the file was skipped: {what}	En oläslig post i filen hoppades över: {what}
+	An unreadable part was left out: {what}	En oläslig del utelämnades: {what}
+	Unreadable relationships were ignored: {what}	Olästa relationer ignorerades: {what}
+	A missing part of an embedded object was left out: {what}	En saknad del av ett inbäddat objekt utelämnades: {what}
+	Copy File	Kopiera fil
+	Find Files	Sök efter filer
+	Letter Wizard	Guiden Brev
+	Recipient's name:	Mottagarens namn:
+	Salutation:	Hälsningsfras:
+	Subject:	Ämne:
+	Complimentary closing:	Avslutningsfras:
+	Sender's name:	Avsändarens namn:
+	Job title:	Befattning:
+	Company:	Företag:
+	Enclosures:	Bilagor:
+	Cc:	Kopia:
+	Edit Links to Files	Redigera länkar till filer
+	Source file	Källfil
+	Locked	Låst
+	Change Source	Ändra källa
+	This document has no links to files.	Det här dokumentet har inga länkar till filer.
+	Web options	Webbalternativ
+	Web Options	Webbalternativ
+	Allow PNG as a graphics format	Tillåt PNG som grafikformat
+	Rely on CSS for font formatting	Använd CSS för teckenformatering
+	Rely on VML for displaying graphics in browsers	Använd VML för att visa grafik i webbläsare
+	Organize supporting files in a folder	Ordna stödfiler i en mapp
+	Use long file names whenever possible	Använd långa filnamn när det är möjligt
+	Screen size:	Skärmstorlek:
+	Pixels per inch:	Bildpunkter per tum:
+	Hangul Hanja Conversion	Hangul/Hanja-konvertering
+	Hangul Hanja Conversion…	Hangul/Hanja-konvertering…
+	Hangul to Hanja	Hangul till Hanja
+	Hanja to Hangul	Hanja till Hangul
+	Put the caret in Korean text to choose its Hanja.	Placera markören i koreansk text för att välja dess Hanja.
+	The selection, or the whole document when nothing is selected.	Markeringen, eller hela dokumentet om inget är markerat.

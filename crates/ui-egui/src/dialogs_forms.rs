@@ -186,6 +186,34 @@ pub enum FormDialog {
         to_traditional: bool,
         variants: bool,
     },
+    /// Review › Language › Japanese Consistency Checker: each word written more than one way,
+    /// its spellings with their counts, and the one to keep.
+    Consistency {
+        groups: Vec<Vec<(String, u64)>>,
+        chosen: Vec<usize>,
+    },
+    /// File › Show Repairs: what opening the document repaired or left out, as (message with
+    /// `{what}`, what).
+    Repairs {
+        items: Vec<(String, String)>,
+    },
+    /// Review › Language › Hangul Hanja Conversion: the Hangul at the caret (empty when there is
+    /// none), each syllable's Hanja and the one chosen (0: keep the syllable).
+    Hanja {
+        text: String,
+        cands: Vec<Vec<String>>,
+        chosen: Vec<usize>,
+    },
+    /// File › Info › Edit Links to Files: each link's kind, source and lock, and the source as
+    /// edited in the dialog.
+    Links {
+        links: Vec<(String, String, bool)>,
+        edited: Vec<String>,
+    },
+    /// File › New › Letter Wizard: the letter's parts, by [`LETTER_FIELDS`] order.
+    Letter {
+        fields: Vec<String>,
+    },
     /// AutoSummarize: how the summary is shown and how long it is.
     Summarize {
         /// highlight, top or newDocument.
@@ -462,6 +490,11 @@ impl FormDialog {
             FormDialog::Summarize { .. } => "autoSummarize",
             FormDialog::Frame { .. } => "formatFrame",
             FormDialog::Chinese { .. } => "chineseConversion",
+            FormDialog::Consistency { .. } => "consistencyChecker",
+            FormDialog::Repairs { .. } => "showRepairs",
+            FormDialog::Letter { .. } => "letterWizard",
+            FormDialog::Links { .. } => "editLinks",
+            FormDialog::Hanja { .. } => "hangulHanja",
         }
     }
 
@@ -479,6 +512,11 @@ impl FormDialog {
             FormDialog::Summarize { .. } => "AutoSummarize",
             FormDialog::Frame { .. } => "Frame",
             FormDialog::Chinese { .. } => "Chinese Conversion",
+            FormDialog::Consistency { .. } => "Japanese Consistency Checker",
+            FormDialog::Repairs { .. } => "Show Repairs",
+            FormDialog::Letter { .. } => "Letter Wizard",
+            FormDialog::Links { .. } => "Edit Links to Files",
+            FormDialog::Hanja { .. } => "Hangul Hanja Conversion",
         }
     }
 }
@@ -491,6 +529,44 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
         "formatFrame" => Some(FormDialog::Frame { form: FrameForm::read(app) }),
         "chineseConversion" => Some(FormDialog::Chinese { to_traditional: false, variants: false }),
+        "hangulHanja" => {
+            // Without Hangul at the caret, the dialog still converts Hanja to Hangul.
+            let v = app.session.run("review.hangulHanja", &json!({})).unwrap_or_default();
+            let text = v["text"].as_str().unwrap_or("").to_string();
+            let cands: Vec<Vec<String>> = v["candidates"]
+                .as_array()
+                .map(|a| {
+                    a.iter()
+                        .map(|c| c.as_array().map(|c| c.iter().filter_map(|h| h.as_str().map(str::to_string)).collect()).unwrap_or_default())
+                        .collect()
+                })
+                .unwrap_or_default();
+            Some(FormDialog::Hanja { chosen: vec![0; cands.len()], text, cands })
+        }
+        "editLinks" => {
+            let links = file_links(&app.session.run("file.editLinks", &json!({})).unwrap_or_default());
+            Some(FormDialog::Links { edited: links.iter().map(|l| l.1.clone()).collect(), links })
+        }
+        "letterWizard" => {
+            // The sender is the user, as Word fills it in.
+            let mut fields = vec![String::new(); LETTER_FIELDS.len()];
+            if let Some(i) = LETTER_FIELDS.iter().position(|(k, _, _)| *k == "senderName") {
+                fields[i] = app.session.author.clone();
+            }
+            Some(FormDialog::Letter { fields })
+        }
+        "showRepairs" => {
+            let v = app.session.run("file.showRepairs", &json!({})).unwrap_or_default();
+            let items = v["repairs"]
+                .as_array()
+                .map(|a| a.iter().map(|r| (r["message"].as_str().unwrap_or("").to_string(), r["what"].as_str().unwrap_or("").to_string())).collect())
+                .unwrap_or_default();
+            Some(FormDialog::Repairs { items })
+        }
+        "consistencyChecker" => {
+            let groups = consistency_groups(app);
+            Some(FormDialog::Consistency { chosen: vec![0; groups.len()], groups })
+        }
         "sectionProtection" => {
             let v = app.session.run("review.protectSections", &json!({})).ok()?;
             let protected = v["sections"].as_array().map(|a| a.iter().map(|b| b.as_bool().unwrap_or(true)).collect()).unwrap_or_default();
@@ -509,6 +585,57 @@ pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
         }
         _ => None,
     }
+}
+
+/// Edit Links to Files' list from `file.editLinks`: (kind, source, locked).
+fn file_links(v: &Value) -> Vec<(String, String, bool)> {
+    v["links"]
+        .as_array()
+        .map(|a| {
+            a.iter()
+                .map(|l| {
+                    (
+                        l["kind"].as_str().unwrap_or("").to_string(),
+                        l["source"].as_str().unwrap_or("").to_string(),
+                        l["locked"].as_bool().unwrap_or(false),
+                    )
+                })
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+/// The Letter Wizard's fields: `file.letterWizard` parameter, label, several lines.
+const LETTER_FIELDS: [(&str, &str, bool); 11] = [
+    ("recipientName", "Recipient's name:", false),
+    ("recipientAddress", "Delivery address:", true),
+    ("salutation", "Salutation:", false),
+    ("subject", "Subject:", false),
+    ("closing", "Complimentary closing:", false),
+    ("senderName", "Sender's name:", false),
+    ("returnAddress", "Return address:", true),
+    ("senderJobTitle", "Job title:", false),
+    ("senderCompany", "Company:", false),
+    ("enclosures", "Enclosures:", false),
+    ("cc", "Cc:", false),
+];
+
+/// The Japanese Consistency Checker's groups of spellings, as the command lists them.
+fn consistency_groups(app: &mut WordApp) -> Vec<Vec<(String, u64)>> {
+    let v = app.session.run("review.consistencyChecker", &json!({})).unwrap_or_default();
+    v["groups"]
+        .as_array()
+        .map(|g| {
+            g.iter()
+                .map(|g| {
+                    g["forms"]
+                        .as_array()
+                        .map(|f| f.iter().map(|f| (f["text"].as_str().unwrap_or("").to_string(), f["count"].as_u64().unwrap_or(0))).collect())
+                        .unwrap_or_default()
+                })
+                .collect()
+        })
+        .unwrap_or_default()
 }
 
 /// Draws the dialog; returns true to close it.
@@ -532,6 +659,178 @@ pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
                 }
             }
             cancel
+        }
+        FormDialog::Hanja { text, cands, chosen } => {
+            let mut done = false;
+            ui.label(egui::RichText::new(tl!("Hangul to Hanja")).strong());
+            if text.is_empty() {
+                ui.label(tl!("Put the caret in Korean text to choose its Hanja."));
+            } else {
+                ui.horizontal_wrapped(|ui| {
+                    for (i, syl) in text.chars().enumerate() {
+                        let options = cands.get(i).cloned().unwrap_or_default();
+                        let pick = chosen.get(i).copied().unwrap_or(0);
+                        // 0 keeps the syllable; 1.. are its Hanja.
+                        let shown = if pick == 0 { syl.to_string() } else { options.get(pick - 1).cloned().unwrap_or_else(|| syl.to_string()) };
+                        egui::ComboBox::from_id_salt(("hanja", i)).selected_text(shown).width(48.0).show_ui(ui, |ui| {
+                            if ui.selectable_label(pick == 0, syl.to_string()).clicked() {
+                                chosen[i] = 0;
+                            }
+                            for (k, h) in options.iter().enumerate() {
+                                if ui.selectable_label(pick == k + 1, h.as_str()).clicked() {
+                                    chosen[i] = k + 1;
+                                }
+                            }
+                        });
+                    }
+                });
+                if ui.add_enabled(chosen.iter().any(|c| *c > 0), egui::Button::new(tl!("Convert"))).clicked() {
+                    let hanja: String = text
+                        .chars()
+                        .enumerate()
+                        .map(|(i, syl)| match chosen.get(i).copied().unwrap_or(0) {
+                            0 => syl.to_string(),
+                            k => cands.get(i).and_then(|c| c.get(k - 1)).cloned().unwrap_or_else(|| syl.to_string()),
+                        })
+                        .collect();
+                    match app.run("review.hangulHanja", json!({"to": "hanja", "hanja": hanja})) {
+                        Ok(_) => done = true,
+                        Err(e) => app.status(e),
+                    }
+                }
+            }
+            ui.add_space(6.0);
+            ui.label(egui::RichText::new(tl!("Hanja to Hangul")).strong());
+            if ui.button(tl!("Convert")).on_hover_text(tl!("The selection, or the whole document when nothing is selected.")).clicked() {
+                match app.run("review.hangulHanja", json!({"to": "hangul"})) {
+                    Ok(v) => {
+                        let n = v["changed"].as_u64().unwrap_or(0);
+                        app.status(crate::i18n::fmt(tl!("Converted {n} characters"), &[("n", &n.to_string())]));
+                        done = true;
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            ui.add_space(6.0);
+            done || ui.button(tl!("Close")).clicked()
+        }
+        FormDialog::Links { links, edited } => {
+            let mut action: Option<Value> = None;
+            if links.is_empty() {
+                ui.label(tl!("This document has no links to files."));
+            } else {
+                egui::Grid::new("edit_links").num_columns(5).spacing(egui::vec2(8.0, 6.0)).show(ui, |ui| {
+                    ui.label(egui::RichText::new(tl!("Type")).strong());
+                    ui.label(egui::RichText::new(tl!("Source file")).strong());
+                    ui.label(egui::RichText::new(tl!("Locked")).strong());
+                    ui.end_row();
+                    for (i, ((kind, source, locked), text)) in links.iter().zip(edited.iter_mut()).enumerate() {
+                        ui.label(kind.as_str());
+                        ui.add(crate::widgets::text_line(text).desired_width(300.0).char_limit(1024));
+                        let mut l = *locked;
+                        if ui.checkbox(&mut l, "").on_hover_text(tl!("Locked")).changed() {
+                            action = Some(json!({"link": i, "action": if l { "lock" } else { "unlock" }}));
+                        }
+                        if ui
+                            .add_enabled(text.trim() != source.as_str() && !text.trim().is_empty(), egui::Button::new(tl!("Change Source")))
+                            .clicked()
+                        {
+                            action = Some(json!({"link": i, "action": "changeSource", "source": text.trim()}));
+                        }
+                        if ui.button(tl!("Break Link")).clicked() {
+                            action = Some(json!({"link": i, "action": "breakLink"}));
+                        }
+                        ui.end_row();
+                    }
+                });
+            }
+            if let Some(a) = action {
+                match app.run("file.editLinks", a) {
+                    Ok(v) => {
+                        *links = file_links(&v);
+                        *edited = links.iter().map(|l| l.1.clone()).collect();
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            ui.add_space(6.0);
+            ui.button(tl!("Close")).clicked()
+        }
+        FormDialog::Letter { fields } => {
+            egui::Grid::new("letter_wizard").num_columns(2).spacing(egui::vec2(8.0, 6.0)).show(ui, |ui| {
+                for ((_, label, multi), value) in LETTER_FIELDS.iter().zip(fields.iter_mut()) {
+                    ui.label(tl!(label));
+                    if *multi {
+                        ui.add(egui::TextEdit::multiline(value).desired_rows(3).desired_width(320.0).char_limit(2000));
+                    } else {
+                        ui.add(crate::widgets::text_line(value).desired_width(320.0).char_limit(2000));
+                    }
+                    ui.end_row();
+                }
+            });
+            let (ok, cancel) = buttons(ui, tl!("Finish"));
+            if ok {
+                let params: serde_json::Map<String, Value> = LETTER_FIELDS
+                    .iter()
+                    .zip(fields.iter())
+                    .filter(|(_, v)| !v.trim().is_empty())
+                    .map(|((k, _, _), v)| (k.to_string(), json!(v)))
+                    .collect();
+                // With every field empty, the letter with the template's wording (an empty field
+                // still writes the letter; no fields at all would only open this dialog again).
+                let params = if params.is_empty() { json!({"date": ""}) } else { Value::Object(params) };
+                match app.run("file.letterWizard", params) {
+                    Ok(_) => return true,
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
+        FormDialog::Repairs { items } => {
+            if items.is_empty() {
+                ui.label(tl!("No repairs were needed."));
+            } else {
+                ui.label(tl!("These problems were found and repaired when the document was opened:"));
+                egui::ScrollArea::vertical().max_height(260.0).show(ui, |ui| {
+                    for (message, what) in items.iter() {
+                        ui.label(format!("• {}", crate::i18n::fmt(tl!(message.as_str()), &[("what", what)])));
+                    }
+                });
+            }
+            ui.add_space(6.0);
+            ui.button(tl!("Close")).clicked()
+        }
+        FormDialog::Consistency { groups, chosen } => {
+            if groups.is_empty() {
+                ui.label(tl!("No inconsistent spellings were found."));
+            } else {
+                ui.label(tl!("Pick the spelling to keep in each group."));
+                let mut replace = None;
+                egui::ScrollArea::vertical().max_height(320.0).show(ui, |ui| {
+                    for (i, g) in groups.iter().enumerate() {
+                        ui.separator();
+                        ui.horizontal_wrapped(|ui| {
+                            for (k, (text, n)) in g.iter().enumerate() {
+                                ui.radio_value(&mut chosen[i], k, format!("{text} ({n})"));
+                            }
+                            if ui.button(tl!("Replace")).clicked() {
+                                replace = g.get(chosen[i]).map(|(t, _)| t.clone());
+                            }
+                        });
+                    }
+                });
+                if let Some(to) = replace {
+                    match app.run("review.consistencyChecker", json!({"to": to})) {
+                        Ok(_) => {
+                            *groups = consistency_groups(app);
+                            *chosen = vec![0; groups.len()];
+                        }
+                        Err(e) => app.status(e),
+                    }
+                }
+            }
+            ui.add_space(6.0);
+            ui.button(tl!("Close")).clicked()
         }
         FormDialog::Summarize { kind, length, update_properties } => {
             ui.label(egui::RichText::new(tl!("Type of summary")).strong());
@@ -1026,6 +1325,95 @@ mod tests {
         h.run_steps(12);
         assert!(h.state().dialog.is_none());
         assert!(frame(&mut h).is_null());
+    }
+
+    #[test]
+    fn hangul_hanja_dialog_converts_both_ways() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("大韓 만세")), Services::default()));
+        h.state_mut().session.sel =
+            doc4me_engine::Selection::caret(doc4me_doc::Pos::new(doc4me_doc::StoryRef::Body, doc4me_doc::Path::top(0), "大韓 만".len()));
+        h.state_mut().run("review.hangulHanja", json!({})).unwrap();
+        h.run_steps(3);
+        let FormDialog::Hanja { text, cands, chosen } = form(&mut h) else { panic!("the Hangul Hanja dialog") };
+        assert_eq!(text, "만세");
+        let man = cands[0].iter().position(|c| c == "萬").unwrap();
+        let se = cands[1].iter().position(|c| c == "歲").unwrap();
+        chosen[0] = man + 1;
+        chosen[1] = se + 1;
+        h.run_steps(1);
+        h.get_all_by_label("Convert").next().expect("Hangul to Hanja's Convert").click();
+        h.run_steps(8);
+        assert!(h.state().dialog.is_none());
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "大韓 萬歲");
+        // Hanja to Hangul, with nothing selected: the whole document.
+        h.state_mut().session.sel = doc4me_engine::Selection::caret(doc4me_doc::Pos::new(doc4me_doc::StoryRef::Body, doc4me_doc::Path::top(0), 0));
+        h.state_mut().run("review.hangulHanja", json!({})).unwrap();
+        h.run_steps(3);
+        h.get_by_label("Put the caret in Korean text to choose its Hanja.");
+        h.get_by_label("Convert").click();
+        h.run_steps(8);
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "대한 만세");
+    }
+
+    #[test]
+    fn edit_links_dialog_breaks_a_link() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Services::default()));
+        h.state_mut().session.run("insert.field", &json!({"instr": "INCLUDETEXT \"part.docx\"", "result": "Part"})).unwrap();
+        h.state_mut().run("file.editLinks", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Links { links, .. } if links.len() == 1 && links[0].1 == "part.docx"));
+        h.get_by_label("Break Link").click();
+        h.run_steps(4);
+        h.get_by_label("This document has no links to files.");
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "Part");
+    }
+
+    #[test]
+    fn letter_wizard_writes_the_letter() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("old")), Services::default()));
+        h.state_mut().session.author = "Somchai".into();
+        h.state_mut().run("file.letterWizard", json!({})).unwrap();
+        h.run_steps(3);
+        let FormDialog::Letter { fields } = form(&mut h) else { panic!("the Letter Wizard") };
+        assert!(fields.contains(&"Somchai".to_string()), "the sender is the user");
+        fields[0] = "Ms. Lee".into();
+        h.run_steps(1);
+        h.get_by_label("Finish").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        let text = h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body);
+        assert!(text.contains("Ms. Lee") && text.contains("Dear Sir or Madam,") && text.contains("Somchai"), "{text}");
+    }
+
+    #[test]
+    fn show_repairs_lists_what_opening_left_out() {
+        let mut doc = doc4me_doc::Document::from_text("Hello");
+        doc.note_repair("An unreadable part was left out: {what}", "word/styles.xml");
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc), Services::default()));
+        h.state_mut().run("file.showRepairs", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Repairs { items } if items.len() == 1));
+        h.get_by_label("• An unreadable part was left out: word/styles.xml");
+        h.get_by_label("Close").click();
+        h.run_steps(6);
+        assert!(h.state().dialog.is_none());
+    }
+
+    #[test]
+    fn consistency_checker_dialog_replaces_the_other_spellings() {
+        let doc = doc4me_doc::Document::from_text("ﾃﾞｰﾀとデータとデータ");
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc), Services::default()));
+        h.state_mut().run("review.consistencyChecker", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Consistency { groups, .. } if groups.len() == 1 && groups[0][0] == ("データ".to_string(), 2)));
+        // The ribbon has a Replace button too; the dialog's is drawn last.
+        h.get_all_by_label("Replace").last().expect("the dialog's Replace").click();
+        h.run_steps(6);
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "データとデータとデータ");
+        h.get_by_label("No inconsistent spellings were found.");
+        h.get_by_label("Close").click();
+        h.run_steps(6);
+        assert!(h.state().dialog.is_none());
     }
 
     #[test]

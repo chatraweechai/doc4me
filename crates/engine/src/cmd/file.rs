@@ -33,6 +33,12 @@ pub fn specs() -> Vec<CommandSpec> {
             .key("Mod+O / Mod+F12 / Mod+Alt+F2")
             .params(r#"{"path": string, "data"?: base64 (the file's bytes; `path` then only names it), "password"?: string (for a password-protected Word document)}"#)
             .pure(),
+        CommandSpec::new("file.letterWizard", "Letter Wizard", "File › New", letter_wizard)
+            .params(r#"{"senderName"?, "returnAddress"?, "date"?, "mailingInstructions"?, "recipientName"?, "recipientAddress"?, "attention"?, "subject"?, "salutation"?, "body"?, "closing"?, "senderJobTitle"?, "senderCompany"?, "senderInitials"?, "enclosures"?, "cc"?: string (lines separated by \n)} → a new letter from these; none of them opens the Letter Wizard"#)
+            .pure(),
+        CommandSpec::new("file.showRepairs", "Show Repairs", "File", show_repairs)
+            .params(r#"{} → {"repairs": [{"message": string with {what}, "what": string}]}: what opening the document had to repair or leave out (opening a damaged file shows them)"#)
+            .pure(),
         CommandSpec::new("file.save", "Save", "File", save)
             .key("Mod+S / Shift+F12 / Alt+Shift+F2")
             .params(r#"{"path"?: string, "password"?: string (encrypt this and later saves with it, as file.encrypt does), "markup"?: bool (Print Markup for a PDF, PNG, HTML, Markdown or text copy: comments shown; default file.printMarkup)}"#)
@@ -170,6 +176,10 @@ fn new(s: &mut Session, v: &Value) -> CmdResult {
             if let Some(lang) = &s.editing_lang {
                 d.styles.default_chr.lang = Some(lang.clone());
             }
+            // Options › Advanced › Bidirectional text › Default direction: right to left.
+            if s.prefs.rtl_default {
+                d.styles.default_para.bidi = Some(true);
+            }
             d
         }
     };
@@ -207,13 +217,101 @@ fn open(s: &mut Session, v: &Value) -> CmdResult {
     if !substituted.is_empty() {
         s.ui_requests.push(json!({"fontsSubstituted": substituted, "with": "Sarabun"}));
     }
+    // A damaged file opened with parts left out: Word's Show Repairs says what.
+    if !s.doc.repairs.is_empty() {
+        s.ui_requests.push(json!({"open": "showRepairs"}));
+    }
     Ok(json!({
         "path": path,
         "paragraphs": s.doc.paragraph_count(),
         "words": s.doc.word_count(),
         "encrypted": encrypted,
         "substitutedFonts": substituted,
+        "repairs": s.doc.repairs.len(),
     }))
+}
+
+/// The Letter Wizard's fields by parameter name.
+const LETTER_FIELDS: [&str; 16] = [
+    "senderName",
+    "returnAddress",
+    "date",
+    "mailingInstructions",
+    "recipientName",
+    "recipientAddress",
+    "attention",
+    "subject",
+    "salutation",
+    "body",
+    "closing",
+    "senderJobTitle",
+    "senderCompany",
+    "senderInitials",
+    "enclosures",
+    "cc",
+];
+/// Longest letter field, in characters (the body may be longer).
+const MAX_LETTER_FIELD: usize = 2_000;
+const MAX_LETTER_BODY: usize = 100_000;
+
+/// Letter Wizard: a new letter from the fields given (as File › New › Letter does from the
+/// template), replacing the document like File › New.
+fn letter_wizard(s: &mut Session, v: &Value) -> CmdResult {
+    let mut got = std::collections::HashMap::new();
+    for k in LETTER_FIELDS {
+        match v.get(k) {
+            None | Some(Value::Null) => {}
+            Some(Value::String(t)) => {
+                let max = if k == "body" { MAX_LETTER_BODY } else { MAX_LETTER_FIELD };
+                if t.chars().count() > max {
+                    return Err(CmdError::Params(format!("`{k}` is at most {max} characters")));
+                }
+                // Control characters other than line breaks have no place in a letter.
+                let clean: String = t.replace("\r\n", "\n").chars().filter(|c| *c == '\n' || !c.is_control()).collect();
+                got.insert(k, clean);
+            }
+            Some(_) => return Err(CmdError::Params(format!("`{k}` must be text"))),
+        }
+    }
+    if got.is_empty() {
+        s.ui_requests.push(json!({"open": "letterWizard"}));
+        return Ok(json!({"opened": true}));
+    }
+    let mut take = |k: &str| got.remove(k).unwrap_or_default();
+    let f = crate::sample::LetterFields {
+        sender_name: take("senderName"),
+        return_address: take("returnAddress"),
+        date: take("date"),
+        mailing_instructions: take("mailingInstructions"),
+        recipient_name: take("recipientName"),
+        recipient_address: take("recipientAddress"),
+        attention: take("attention"),
+        subject: take("subject"),
+        salutation: take("salutation"),
+        body: take("body"),
+        closing: take("closing"),
+        sender_title: take("senderJobTitle"),
+        sender_company: take("senderCompany"),
+        initials: take("senderInitials"),
+        enclosures: take("enclosures"),
+        cc: take("cc"),
+    };
+    let mut doc = crate::sample::letter_from(&f);
+    if let Some(lang) = &s.editing_lang {
+        doc.styles.default_chr.lang = Some(lang.clone());
+    }
+    s.set_document(doc);
+    s.path = None;
+    let mut r = sel_result(s)?;
+    if let Some(o) = r.as_object_mut() {
+        o.insert("opened".into(), json!(false));
+    }
+    Ok(r)
+}
+
+/// Show Repairs: what reading the document repaired or left out.
+fn show_repairs(s: &mut Session, _: &Value) -> CmdResult {
+    Ok(json!({"repairs": s.doc.repairs}))
 }
 
 /// Fonts Doc4Me has no metrics for that a document may use; when one isn't installed the bundled

@@ -2950,3 +2950,81 @@ spacing	Normal	Обычный
 	Traditional Chinese to Simplified Chinese	Традиционный китайский в упрощенный китайский
 	Traditional to Simplified	Из традиционного в упрощенный
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Использовать варианты знаков для Тайваня, САР Гонконг и САР Макао
+	Asian Layout	Азиатская разметка
+	Fit Text	Подгонка текста
+	Fit Text…	Подгонка текста…
+	Two Lines in One	Две строки в одной
+	Two Lines in One…	Две строки в одной…
+	New text width (pt):	Новая ширина текста (пт):
+	Enclose in brackets	Заключить в скобки
+	Bracket pair:	Тип скобок:
+	Typography	Типографика
+	Character spacing control	Управление интервалом между знаками
+	Don't compress	Не сжимать
+	Compress punctuation only	Сжимать только знаки препинания
+	Compress punctuation and Japanese kana	Сжимать знаки препинания и японскую кану
+	First and last characters	Первые и последние знаки
+	Strict	Строгие
+	Cannot start a line:	Не может начинать строку:
+	Cannot end a line:	Не может завершать строку:
+	Japanese Find Options	Параметры поиска японского текста
+	Sounds like (Japanese)	Произносится как (японский)
+	Match full/half width	Не различать полную/половинную ширину
+	Match hiragana/katakana	Не различать хирагану/катакану
+	Match small kana	Не различать малые каны
+	Match prolonged sound marks and dashes	Не различать знаки долготы и тире
+	Japanese Consistency Checker	Проверка единообразия японского текста
+	Japanese Consistency Checker…	Проверка единообразия японского текста…
+	No inconsistent spellings were found.	Разные написания одного слова не найдены.
+	Pick the spelling to keep in each group.	Выберите в каждой группе написание, которое нужно оставить.
+	Bidirectional text	Двунаправленный текст
+	Bidirectional Text	Двунаправленный текст
+	Default direction:	Направление по умолчанию:
+	Cursor movement:	Перемещение курсора:
+	Logical	Логическое
+	Visual	Визуальное
+	Manage Fields	Управление полями
+	File locations	Расположение файлов
+	File Locations	Расположение файлов
+	Documents:	Документы:
+	Pictures:	Рисунки:
+	The system's choice	Выбор системы
+	Show Repairs	Показать исправления
+	No repairs were needed.	Исправления не потребовались.
+	These problems were found and repaired when the document was opened:	При открытии документа обнаружены и исправлены следующие проблемы:
+	An unreadable entry in the file was skipped: {what}	Пропущена нечитаемая запись файла: {what}
+	An unreadable part was left out: {what}	Нечитаемая часть пропущена: {what}
+	Unreadable relationships were ignored: {what}	Нечитаемые связи пропущены: {what}
+	A missing part of an embedded object was left out: {what}	Отсутствующая часть внедрённого объекта пропущена: {what}
+	Copy File	Копировать файл
+	Find Files	Найти файлы
+	Letter Wizard	Мастер писем
+	Recipient's name:	Имя получателя:
+	Salutation:	Обращение:
+	Subject:	Тема:
+	Complimentary closing:	Заключительная фраза:
+	Sender's name:	Имя отправителя:
+	Job title:	Должность:
+	Company:	Организация:
+	Enclosures:	Вложения:
+	Cc:	Копия:
+	Edit Links to Files	Изменить связи с файлами
+	Source file	Исходный файл
+	Locked	Заблокировано
+	Change Source	Сменить источник
+	This document has no links to files.	В этом документе нет связей с файлами.
+	Web options	Параметры веб-документа
+	Web Options	Параметры веб-документа
+	Allow PNG as a graphics format	Разрешить формат PNG для графики
+	Rely on CSS for font formatting	Использовать CSS для форматирования шрифтов
+	Rely on VML for displaying graphics in browsers	Использовать VML для отображения графики в браузерах
+	Organize supporting files in a folder	Размещать вспомогательные файлы в папке
+	Use long file names whenever possible	По возможности использовать длинные имена файлов
+	Screen size:	Размер экрана:
+	Pixels per inch:	Пикселей на дюйм:
+	Hangul Hanja Conversion	Преобразование хангыль/ханча
+	Hangul Hanja Conversion…	Преобразование хангыль/ханча…
+	Hangul to Hanja	Хангыль в ханча
+	Hanja to Hangul	Ханча в хангыль
+	Put the caret in Korean text to choose its Hanja.	Поместите курсор в корейский текст, чтобы выбрать ханча.
+	The selection, or the whole document when nothing is selected.	Выделенный фрагмент или весь документ, если ничего не выделено.

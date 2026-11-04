@@ -2929,3 +2929,81 @@ spacing	Normal	Normale
 	Traditional Chinese to Simplified Chinese	Da cinese tradizionale a cinese semplificato
 	Traditional to Simplified	Da tradizionale a semplificato
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Usa le varianti dei caratteri di Taiwan, RAS di Hong Kong e RAS di Macao
+	Asian Layout	Layout asiatico
+	Fit Text	Adatta testo
+	Fit Text…	Adatta testo…
+	Two Lines in One	Due righe in una
+	Two Lines in One…	Due righe in una…
+	New text width (pt):	Nuova larghezza testo (pt):
+	Enclose in brackets	Racchiudi tra parentesi
+	Bracket pair:	Coppia di parentesi:
+	Typography	Tipografia
+	Character spacing control	Controllo della spaziatura dei caratteri
+	Don't compress	Non comprimere
+	Compress punctuation only	Comprimi solo la punteggiatura
+	Compress punctuation and Japanese kana	Comprimi la punteggiatura e i kana giapponesi
+	First and last characters	Primi e ultimi caratteri
+	Strict	Rigoroso
+	Cannot start a line:	Non può iniziare una riga:
+	Cannot end a line:	Non può terminare una riga:
+	Japanese Find Options	Opzioni di ricerca giapponese
+	Sounds like (Japanese)	Suona come (giapponese)
+	Match full/half width	Corrispondenza a larghezza intera/metà
+	Match hiragana/katakana	Corrispondenza hiragana/katakana
+	Match small kana	Corrispondenza kana piccoli
+	Match prolonged sound marks and dashes	Corrispondenza segni di allungamento e trattini
+	Japanese Consistency Checker	Controllo coerenza giapponese
+	Japanese Consistency Checker…	Controllo coerenza giapponese…
+	No inconsistent spellings were found.	Non sono state trovate grafie incoerenti.
+	Pick the spelling to keep in each group.	Scegli la grafia da mantenere in ogni gruppo.
+	Bidirectional text	Testo bidirezionale
+	Bidirectional Text	Testo bidirezionale
+	Default direction:	Direzione predefinita:
+	Cursor movement:	Movimento del cursore:
+	Logical	Logico
+	Visual	Visivo
+	Manage Fields	Gestisci campi
+	File locations	Percorsi dei file
+	File Locations	Percorsi dei file
+	Documents:	Documenti:
+	Pictures:	Immagini:
+	The system's choice	La scelta del sistema
+	Show Repairs	Mostra riparazioni
+	No repairs were needed.	Non è stata necessaria alcuna riparazione.
+	These problems were found and repaired when the document was opened:	All’apertura del documento sono stati trovati e riparati questi problemi:
+	An unreadable entry in the file was skipped: {what}	Una voce illeggibile del file è stata saltata: {what}
+	An unreadable part was left out: {what}	Una parte illeggibile è stata omessa: {what}
+	Unreadable relationships were ignored: {what}	Le relazioni illeggibili sono state ignorate: {what}
+	A missing part of an embedded object was left out: {what}	Una parte mancante di un oggetto incorporato è stata omessa: {what}
+	Copy File	Copia file
+	Find Files	Trova file
+	Letter Wizard	Creazione guidata lettera
+	Recipient's name:	Nome del destinatario:
+	Salutation:	Formula di apertura:
+	Subject:	Oggetto:
+	Complimentary closing:	Formula di chiusura:
+	Sender's name:	Nome del mittente:
+	Job title:	Posizione:
+	Company:	Società:
+	Enclosures:	Allegati:
+	Cc:	Cc:
+	Edit Links to Files	Modifica collegamenti ai file
+	Source file	File di origine
+	Locked	Bloccato
+	Change Source	Cambia origine
+	This document has no links to files.	Questo documento non contiene collegamenti a file.
+	Web options	Opzioni Web
+	Web Options	Opzioni Web
+	Allow PNG as a graphics format	Consenti PNG come formato grafico
+	Rely on CSS for font formatting	Usa CSS per la formattazione dei caratteri
+	Rely on VML for displaying graphics in browsers	Usa VML per visualizzare la grafica nei browser
+	Organize supporting files in a folder	Organizza i file di supporto in una cartella
+	Use long file names whenever possible	Usa nomi di file lunghi se possibile
+	Screen size:	Dimensioni schermo:
+	Pixels per inch:	Pixel per pollice:
+	Hangul Hanja Conversion	Conversione Hangul/Hanja
+	Hangul Hanja Conversion…	Conversione Hangul/Hanja…
+	Hangul to Hanja	Da Hangul a Hanja
+	Hanja to Hangul	Da Hanja a Hangul
+	Put the caret in Korean text to choose its Hanja.	Posiziona il cursore nel testo coreano per sceglierne gli Hanja.
+	The selection, or the whole document when nothing is selected.	La selezione o l’intero documento se non è selezionato nulla.

@@ -2919,3 +2919,81 @@
 	Traditional Chinese to Simplified Chinese	Traditioneel Chinees naar vereenvoudigd Chinees
 	Traditional to Simplified	Traditioneel naar vereenvoudigd
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Tekenvarianten van Taiwan, SAR Hongkong en SAR Macau gebruiken
+	Asian Layout	Aziatische indeling
+	Fit Text	Tekst passend maken
+	Fit Text…	Tekst passend maken…
+	Two Lines in One	Twee regels in één
+	Two Lines in One…	Twee regels in één…
+	New text width (pt):	Nieuwe tekstbreedte (pt):
+	Enclose in brackets	Tussen haakjes plaatsen
+	Bracket pair:	Soort haakjes:
+	Typography	Typografie
+	Character spacing control	Tekenafstand beheren
+	Don't compress	Niet comprimeren
+	Compress punctuation only	Alleen interpunctie comprimeren
+	Compress punctuation and Japanese kana	Interpunctie en Japanse kana comprimeren
+	First and last characters	Eerste en laatste tekens
+	Strict	Strikt
+	Cannot start a line:	Mag geen regel beginnen:
+	Cannot end a line:	Mag geen regel beëindigen:
+	Japanese Find Options	Opties voor Japans zoeken
+	Sounds like (Japanese)	Klinkt als (Japans)
+	Match full/half width	Volle/halve breedte gelijkstellen
+	Match hiragana/katakana	Hiragana/katakana gelijkstellen
+	Match small kana	Kleine kana gelijkstellen
+	Match prolonged sound marks and dashes	Verlengingstekens en streepjes gelijkstellen
+	Japanese Consistency Checker	Japanse consistentiecontrole
+	Japanese Consistency Checker…	Japanse consistentiecontrole…
+	No inconsistent spellings were found.	Er zijn geen inconsistente spellingen gevonden.
+	Pick the spelling to keep in each group.	Kies in elke groep de spelling die u wilt behouden.
+	Bidirectional text	Bidirectionele tekst
+	Bidirectional Text	Bidirectionele tekst
+	Default direction:	Standaardrichting:
+	Cursor movement:	Cursorbeweging:
+	Logical	Logisch
+	Visual	Visueel
+	Manage Fields	Velden beheren
+	File locations	Bestandslocaties
+	File Locations	Bestandslocaties
+	Documents:	Documenten:
+	Pictures:	Afbeeldingen:
+	The system's choice	De keuze van het systeem
+	Show Repairs	Reparaties weergeven
+	No repairs were needed.	Er waren geen reparaties nodig.
+	These problems were found and repaired when the document was opened:	Deze problemen zijn gevonden en gerepareerd bij het openen van het document:
+	An unreadable entry in the file was skipped: {what}	Een onleesbaar item in het bestand is overgeslagen: {what}
+	An unreadable part was left out: {what}	Een onleesbaar onderdeel is weggelaten: {what}
+	Unreadable relationships were ignored: {what}	Onleesbare relaties zijn genegeerd: {what}
+	A missing part of an embedded object was left out: {what}	Een ontbrekend onderdeel van een ingesloten object is weggelaten: {what}
+	Copy File	Bestand kopiëren
+	Find Files	Bestanden zoeken
+	Letter Wizard	Wizard Brief
+	Recipient's name:	Naam van geadresseerde:
+	Salutation:	Aanhef:
+	Subject:	Onderwerp:
+	Complimentary closing:	Afsluiting:
+	Sender's name:	Naam van afzender:
+	Job title:	Functie:
+	Company:	Bedrijf:
+	Enclosures:	Bijlagen:
+	Cc:	Cc:
+	Edit Links to Files	Koppelingen naar bestanden bewerken
+	Source file	Bronbestand
+	Locked	Vergrendeld
+	Change Source	Bron wijzigen
+	This document has no links to files.	Dit document bevat geen koppelingen naar bestanden.
+	Web options	Webopties
+	Web Options	Webopties
+	Allow PNG as a graphics format	PNG als grafische indeling toestaan
+	Rely on CSS for font formatting	CSS gebruiken voor tekenopmaak
+	Rely on VML for displaying graphics in browsers	VML gebruiken voor het weergeven van afbeeldingen in browsers
+	Organize supporting files in a folder	Ondersteunende bestanden in een map ordenen
+	Use long file names whenever possible	Waar mogelijk lange bestandsnamen gebruiken
+	Screen size:	Schermgrootte:
+	Pixels per inch:	Pixels per inch:
+	Hangul Hanja Conversion	Hangul/Hanja-conversie
+	Hangul Hanja Conversion…	Hangul/Hanja-conversie…
+	Hangul to Hanja	Hangul naar Hanja
+	Hanja to Hangul	Hanja naar Hangul
+	Put the caret in Korean text to choose its Hanja.	Plaats de cursor in Koreaanse tekst om de Hanja te kiezen.
+	The selection, or the whole document when nothing is selected.	De selectie, of het hele document als er niets is geselecteerd.

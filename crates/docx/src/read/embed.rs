@@ -119,6 +119,7 @@ impl Reader<'_> {
         }
         let Some(bytes) = self.pkg.get(part) else {
             log::warn!("docx: part {part} of an embedded object is missing");
+            self.pkg.note_repair(crate::package::REPAIR_EMBEDDED, part);
             return false;
         };
         let pkg = self.pkg;

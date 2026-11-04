@@ -2919,3 +2919,81 @@
 	Traditional Chinese to Simplified Chinese	Perinteinen kiina yksinkertaistetuksi kiinaksi
 	Traditional to Simplified	Perinteisestä yksinkertaistettuun
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Käytä Taiwanin, Hongkongin erityishallintoalueen ja Macaon erityishallintoalueen merkkivariantteja
+	Asian Layout	Aasialainen asettelu
+	Fit Text	Sovita teksti
+	Fit Text…	Sovita teksti…
+	Two Lines in One	Kaksi riviä yhdessä
+	Two Lines in One…	Kaksi riviä yhdessä…
+	New text width (pt):	Uusi tekstin leveys (pt):
+	Enclose in brackets	Sulje sulkeisiin
+	Bracket pair:	Sulkeiden tyyppi:
+	Typography	Typografia
+	Character spacing control	Merkkivälin hallinta
+	Don't compress	Älä tiivistä
+	Compress punctuation only	Tiivistä vain välimerkit
+	Compress punctuation and Japanese kana	Tiivistä välimerkit ja japanin kana
+	First and last characters	Ensimmäiset ja viimeiset merkit
+	Strict	Tiukka
+	Cannot start a line:	Ei voi aloittaa riviä:
+	Cannot end a line:	Ei voi päättää riviä:
+	Japanese Find Options	Japanin haun asetukset
+	Sounds like (Japanese)	Kuulostaa samalta (japani)
+	Match full/half width	Täyden/puolikkaan leveyden vastaavuus
+	Match hiragana/katakana	Hiraganan/katakanan vastaavuus
+	Match small kana	Pienen kanan vastaavuus
+	Match prolonged sound marks and dashes	Pidennysmerkkien ja viivojen vastaavuus
+	Japanese Consistency Checker	Japanin johdonmukaisuuden tarkistus
+	Japanese Consistency Checker…	Japanin johdonmukaisuuden tarkistus…
+	No inconsistent spellings were found.	Epäjohdonmukaisia kirjoitusasuja ei löytynyt.
+	Pick the spelling to keep in each group.	Valitse kustakin ryhmästä säilytettävä kirjoitusasu.
+	Bidirectional text	Kaksisuuntainen teksti
+	Bidirectional Text	Kaksisuuntainen teksti
+	Default direction:	Oletussuunta:
+	Cursor movement:	Kohdistimen liike:
+	Logical	Looginen
+	Visual	Visuaalinen
+	Manage Fields	Kenttien hallinta
+	File locations	Tiedostojen sijainnit
+	File Locations	Tiedostojen sijainnit
+	Documents:	Tiedostot:
+	Pictures:	Kuvat:
+	The system's choice	Järjestelmän valinta
+	Show Repairs	Näytä korjaukset
+	No repairs were needed.	Korjauksia ei tarvittu.
+	These problems were found and repaired when the document was opened:	Nämä ongelmat löydettiin ja korjattiin tiedostoa avattaessa:
+	An unreadable entry in the file was skipped: {what}	Tiedoston lukukelvoton merkintä ohitettiin: {what}
+	An unreadable part was left out: {what}	Lukukelvoton osa jätettiin pois: {what}
+	Unreadable relationships were ignored: {what}	Lukukelvottomat suhteet ohitettiin: {what}
+	A missing part of an embedded object was left out: {what}	Upotetun objektin puuttuva osa jätettiin pois: {what}
+	Copy File	Kopioi tiedosto
+	Find Files	Etsi tiedostoja
+	Letter Wizard	Kirjeen ohjattu toiminto
+	Recipient's name:	Vastaanottajan nimi:
+	Salutation:	Tervehdys:
+	Subject:	Aihe:
+	Complimentary closing:	Lopputervehdys:
+	Sender's name:	Lähettäjän nimi:
+	Job title:	Tehtävänimike:
+	Company:	Yritys:
+	Enclosures:	Liitteet:
+	Cc:	Kopio:
+	Edit Links to Files	Muokkaa tiedostolinkkejä
+	Source file	Lähdetiedosto
+	Locked	Lukittu
+	Change Source	Vaihda lähde
+	This document has no links to files.	Tiedostossa ei ole linkkejä tiedostoihin.
+	Web options	Web-asetukset
+	Web Options	Web-asetukset
+	Allow PNG as a graphics format	Salli PNG-grafiikkamuoto
+	Rely on CSS for font formatting	Käytä CSS:ää fonttien muotoiluun
+	Rely on VML for displaying graphics in browsers	Käytä VML:ää grafiikan näyttämiseen selaimissa
+	Organize supporting files in a folder	Järjestä tukitiedostot kansioon
+	Use long file names whenever possible	Käytä pitkiä tiedostonimiä aina kun mahdollista
+	Screen size:	Näytön koko:
+	Pixels per inch:	Pikseliä tuumalla:
+	Hangul Hanja Conversion	Hangul-Hanja-muunnos
+	Hangul Hanja Conversion…	Hangul-Hanja-muunnos…
+	Hangul to Hanja	Hangul Hanjaksi
+	Hanja to Hangul	Hanja Hanguliksi
+	Put the caret in Korean text to choose its Hanja.	Valitse Hanja viemällä kohdistin korealaiseen tekstiin.
+	The selection, or the whole document when nothing is selected.	Valinta tai koko tiedosto, jos mitään ei ole valittu.

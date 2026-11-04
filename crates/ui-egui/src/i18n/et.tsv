@@ -2930,3 +2930,81 @@ spacing	Normal	Tavaline
 	Traditional Chinese to Simplified Chinese	Traditsiooniline hiina keel lihtsustatud hiina keeleks
 	Traditional to Simplified	Traditsiooniline lihtsustatuks
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Kasuta Taiwani, Hongkongi erihalduspiirkonna ja Aomeni erihalduspiirkonna märgivariante
+	Asian Layout	Aasia paigutus
+	Fit Text	Teksti sobitamine
+	Fit Text…	Teksti sobitamine…
+	Two Lines in One	Kaks rida üheks
+	Two Lines in One…	Kaks rida üheks…
+	New text width (pt):	Uus teksti laius (pt):
+	Enclose in brackets	Ümbritse sulgudega
+	Bracket pair:	Sulupaar:
+	Typography	Tüpograafia
+	Character spacing control	Märgivahe juhtimine
+	Don't compress	Ära tihenda
+	Compress punctuation only	Tihenda ainult kirjavahemärke
+	Compress punctuation and Japanese kana	Tihenda kirjavahemärke ja jaapani kanat
+	First and last characters	Esimesed ja viimased märgid
+	Strict	Range
+	Cannot start a line:	Ei tohi rida alustada:
+	Cannot end a line:	Ei tohi rida lõpetada:
+	Japanese Find Options	Jaapani otsingu suvandid
+	Sounds like (Japanese)	Kõlab nagu (jaapani)
+	Match full/half width	Sobita täis-/poollaius
+	Match hiragana/katakana	Sobita hiragana/katakana
+	Match small kana	Sobita väike kana
+	Match prolonged sound marks and dashes	Sobita pikendusmärgid ja kriipsud
+	Japanese Consistency Checker	Jaapani keele järjepidevuse kontroll
+	Japanese Consistency Checker…	Jaapani keele järjepidevuse kontroll…
+	No inconsistent spellings were found.	Ebajärjekindlaid kirjaviise ei leitud.
+	Pick the spelling to keep in each group.	Valige igas rühmas kirjaviis, mis alles jääb.
+	Bidirectional text	Kahesuunaline tekst
+	Bidirectional Text	Kahesuunaline tekst
+	Default direction:	Vaikesuund:
+	Cursor movement:	Kursori liikumine:
+	Logical	Loogiline
+	Visual	Visuaalne
+	Manage Fields	Väljade haldamine
+	File locations	Failide asukohad
+	File Locations	Failide asukohad
+	Documents:	Dokumendid:
+	Pictures:	Pildid:
+	The system's choice	Süsteemi valik
+	Show Repairs	Kuva parandused
+	No repairs were needed.	Parandusi polnud vaja.
+	These problems were found and repaired when the document was opened:	Dokumendi avamisel leiti ja parandati need probleemid:
+	An unreadable entry in the file was skipped: {what}	Faili loetamatu kirje jäeti vahele: {what}
+	An unreadable part was left out: {what}	Loetamatu osa jäeti välja: {what}
+	Unreadable relationships were ignored: {what}	Loetamatuid seoseid eirati: {what}
+	A missing part of an embedded object was left out: {what}	Manustatud objekti puuduv osa jäeti välja: {what}
+	Copy File	Kopeeri fail
+	Find Files	Otsi faile
+	Letter Wizard	Kirjaviisard
+	Recipient's name:	Adressaadi nimi:
+	Salutation:	Pöördumine:
+	Subject:	Teema:
+	Complimentary closing:	Lõpetus:
+	Sender's name:	Saatja nimi:
+	Job title:	Ametinimetus:
+	Company:	Ettevõte:
+	Enclosures:	Lisad:
+	Cc:	Koopia:
+	Edit Links to Files	Redigeeri linke failidele
+	Source file	Lähtefail
+	Locked	Lukus
+	Change Source	Muuda allikat
+	This document has no links to files.	Selles dokumendis pole linke failidele.
+	Web options	Veebisuvandid
+	Web Options	Veebisuvandid
+	Allow PNG as a graphics format	Luba PNG graafikavormingina
+	Rely on CSS for font formatting	Kasuta fondivormingu jaoks CSS-i
+	Rely on VML for displaying graphics in browsers	Kasuta brauserites graafika kuvamiseks VML-i
+	Organize supporting files in a folder	Korralda abifailid kausta
+	Use long file names whenever possible	Kasuta võimaluse korral pikki failinimesid
+	Screen size:	Ekraani suurus:
+	Pixels per inch:	Pikslit tolli kohta:
+	Hangul Hanja Conversion	Hanguli/hanja teisendus
+	Hangul Hanja Conversion…	Hanguli/hanja teisendus…
+	Hangul to Hanja	Hangulist hanjaks
+	Hanja to Hangul	Hanjast hanguliks
+	Put the caret in Korean text to choose its Hanja.	Hanja valimiseks asetage kursor korea teksti.
+	The selection, or the whole document when nothing is selected.	Valik või kogu dokument, kui midagi pole valitud.

@@ -219,6 +219,97 @@ impl Highlight {
     }
 }
 
+/// Fit Text (`w:fitText`, ECMA-376 Part 1 §17.3.2.14; Home › Paragraph › Asian Layout › Fit
+/// Text): the run's text is set this wide, each character widened or narrowed by the same amount.
+/// Neighbouring runs with the same value (width and `id`) are one piece of fitted text.
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FitText {
+    /// Points.
+    pub width: f32,
+    /// Ties the runs of one fitted piece together (`w:id`).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<u32>,
+}
+
+/// The widest Fit Text Word allows (22 inches), points.
+pub const MAX_FIT_TEXT: f32 = 1584.0;
+
+impl FitText {
+    /// Within Word's limits: a width above zero and at most [`MAX_FIT_TEXT`]; `None` otherwise.
+    pub fn sanitized(self) -> Option<FitText> {
+        (self.width.is_finite() && self.width > 0.0).then(|| FitText { width: self.width.min(MAX_FIT_TEXT), id: self.id })
+    }
+}
+
+/// The brackets around text combined into one line (`w:combineBrackets`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub enum CombineBrackets {
+    #[default]
+    None,
+    Round,
+    Square,
+    Angle,
+    Curly,
+}
+
+impl CombineBrackets {
+    pub fn ooxml(self) -> &'static str {
+        match self {
+            CombineBrackets::None => "none",
+            CombineBrackets::Round => "round",
+            CombineBrackets::Square => "square",
+            CombineBrackets::Angle => "angle",
+            CombineBrackets::Curly => "curly",
+        }
+    }
+    pub fn from_ooxml(v: &str) -> CombineBrackets {
+        match v {
+            "round" => CombineBrackets::Round,
+            "square" => CombineBrackets::Square,
+            "angle" => CombineBrackets::Angle,
+            "curly" => CombineBrackets::Curly,
+            _ => CombineBrackets::None,
+        }
+    }
+    /// The opening and closing bracket drawn around the two lines.
+    pub fn chars(self) -> Option<(char, char)> {
+        match self {
+            CombineBrackets::None => None,
+            CombineBrackets::Round => Some(('(', ')')),
+            CombineBrackets::Square => Some(('[', ']')),
+            CombineBrackets::Angle => Some(('<', '>')),
+            CombineBrackets::Curly => Some(('{', '}')),
+        }
+    }
+}
+
+/// East Asian typography of a run (`w:eastAsianLayout`, ECMA-376 Part 1 §17.3.2.10; Home ›
+/// Paragraph › Asian Layout): Two Lines in One (`combine`) and Horizontal in Vertical (`vert`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
+#[serde(default, rename_all = "camelCase")]
+pub struct EastAsianLayout {
+    /// Ties the runs of one piece together (`w:id`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub id: Option<u32>,
+    /// Two Lines in One: the text set as two lines of half size within one line.
+    pub combine: bool,
+    /// Brackets around the combined lines.
+    pub brackets: CombineBrackets,
+    /// Horizontal in Vertical: the text stays horizontal within vertical text.
+    pub vert: bool,
+    /// …and is compressed to the width of the vertical line.
+    pub vert_compress: bool,
+}
+
+impl EastAsianLayout {
+    /// Does it change anything? (an element with neither setting has no effect).
+    pub fn is_set(&self) -> bool {
+        self.combine || self.vert
+    }
+}
+
 /// Character formatting (direct or in a style). `None` = inherit.
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 #[serde(default, rename_all = "camelCase")]
@@ -319,6 +410,12 @@ pub struct CharProps {
     /// sets none unless asked, and neither does Doc4Me.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ligatures: Option<String>,
+    /// Fit Text (`w:fitText`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fit_text: Option<FitText>,
+    /// Two Lines in One and Horizontal in Vertical (`w:eastAsianLayout`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub east_asian: Option<EastAsianLayout>,
     /// Hyperlink target: a URL, or `#bookmark` for an internal link.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub link: Option<String>,
@@ -389,7 +486,7 @@ impl CharProps {
     pub fn minus(mut self, base: &CharProps) -> CharProps {
         drop_same_fields!(self, base; style, font, size, bold, italic, underline, underline_color, strike, double_strike, color, highlight,
             shading, border, vert_align, caps, small_caps, hidden, spacing, scale, position, kern, outline, shadow, emboss, engrave, lang, no_proof, rtl,
-            cs, font_cs, size_cs, bold_cs, italic_cs, lang_bidi, link, ins, del);
+            cs, font_cs, size_cs, bold_cs, italic_cs, lang_bidi, fit_text, east_asian, link, ins, del);
         self
     }
 
@@ -400,7 +497,7 @@ impl CharProps {
     pub fn overlay(&mut self, patch: &CharProps) {
         overlay_fields!(self, patch; style, font, size, bold, italic, underline, underline_color, strike, double_strike, color, highlight,
             shading, border, vert_align, caps, small_caps, hidden, spacing, scale, position, kern, outline, shadow, emboss, engrave, lang, no_proof, rtl,
-            cs, font_cs, font_ea, size_cs, bold_cs, italic_cs, lang_bidi, ligatures, link, ins, del, fmt_change);
+            cs, font_cs, font_ea, size_cs, bold_cs, italic_cs, lang_bidi, ligatures, fit_text, east_asian, link, ins, del, fmt_change);
         if let Some(p) = &patch.text_effects {
             self.text_effects.get_or_insert_with(Default::default).overlay(p);
         }

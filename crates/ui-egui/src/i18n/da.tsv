@@ -2919,3 +2919,81 @@
 	Traditional Chinese to Simplified Chinese	Traditionel kinesisk til forenklet kinesisk
 	Traditional to Simplified	Traditionel til forenklet
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Brug tegnvarianter for Taiwan, Hongkong SAR og Macao SAR
+	Asian Layout	Asiatisk layout
+	Fit Text	Tilpas tekst
+	Fit Text…	Tilpas tekst…
+	Two Lines in One	To linjer i én
+	Two Lines in One…	To linjer i én…
+	New text width (pt):	Ny tekstbredde (pt):
+	Enclose in brackets	Omgiv med parenteser
+	Bracket pair:	Parentespar:
+	Typography	Typografi
+	Character spacing control	Kontrol af tegnafstand
+	Don't compress	Komprimer ikke
+	Compress punctuation only	Komprimer kun tegnsætning
+	Compress punctuation and Japanese kana	Komprimer tegnsætning og japansk kana
+	First and last characters	Første og sidste tegn
+	Strict	Streng
+	Cannot start a line:	Må ikke starte en linje:
+	Cannot end a line:	Må ikke afslutte en linje:
+	Japanese Find Options	Indstillinger for japansk søgning
+	Sounds like (Japanese)	Lyder som (japansk)
+	Match full/half width	Match hel/halv bredde
+	Match hiragana/katakana	Match hiragana/katakana
+	Match small kana	Match lille kana
+	Match prolonged sound marks and dashes	Match lange vokaltegn og tankestreger
+	Japanese Consistency Checker	Japansk konsistenskontrol
+	Japanese Consistency Checker…	Japansk konsistenskontrol…
+	No inconsistent spellings were found.	Der blev ikke fundet nogen uensartede stavemåder.
+	Pick the spelling to keep in each group.	Vælg den stavemåde, der skal bevares i hver gruppe.
+	Bidirectional text	Tovejstekst
+	Bidirectional Text	Tovejstekst
+	Default direction:	Standardretning:
+	Cursor movement:	Markørbevægelse:
+	Logical	Logisk
+	Visual	Visuel
+	Manage Fields	Administrer felter
+	File locations	Filplaceringer
+	File Locations	Filplaceringer
+	Documents:	Dokumenter:
+	Pictures:	Billeder:
+	The system's choice	Systemets valg
+	Show Repairs	Vis reparationer
+	No repairs were needed.	Der var ikke behov for reparationer.
+	These problems were found and repaired when the document was opened:	Disse problemer blev fundet og repareret, da dokumentet blev åbnet:
+	An unreadable entry in the file was skipped: {what}	En ulæselig post i filen blev sprunget over: {what}
+	An unreadable part was left out: {what}	En ulæselig del blev udeladt: {what}
+	Unreadable relationships were ignored: {what}	Ulæselige relationer blev ignoreret: {what}
+	A missing part of an embedded object was left out: {what}	En manglende del af et indlejret objekt blev udeladt: {what}
+	Copy File	Kopiér fil
+	Find Files	Find filer
+	Letter Wizard	Brevguide
+	Recipient's name:	Modtagerens navn:
+	Salutation:	Starthilsen:
+	Subject:	Emne:
+	Complimentary closing:	Sluthilsen:
+	Sender's name:	Afsenderens navn:
+	Job title:	Stilling:
+	Company:	Firma:
+	Enclosures:	Bilag:
+	Cc:	Cc:
+	Edit Links to Files	Rediger kæder til filer
+	Source file	Kildefil
+	Locked	Låst
+	Change Source	Skift kilde
+	This document has no links to files.	Dette dokument har ingen kæder til filer.
+	Web options	Weboptioner
+	Web Options	Weboptioner
+	Allow PNG as a graphics format	Tillad PNG som grafikformat
+	Rely on CSS for font formatting	Brug CSS til skrifttypeformatering
+	Rely on VML for displaying graphics in browsers	Brug VML til visning af grafik i browsere
+	Organize supporting files in a folder	Organiser understøttende filer i en mappe
+	Use long file names whenever possible	Brug lange filnavne, når det er muligt
+	Screen size:	Skærmstørrelse:
+	Pixels per inch:	Pixel pr. tomme:
+	Hangul Hanja Conversion	Hangul/Hanja-konvertering
+	Hangul Hanja Conversion…	Hangul/Hanja-konvertering…
+	Hangul to Hanja	Hangul til Hanja
+	Hanja to Hangul	Hanja til Hangul
+	Put the caret in Korean text to choose its Hanja.	Placer markøren i koreansk tekst for at vælge dens Hanja.
+	The selection, or the whole document when nothing is selected.	Markeringen, eller hele dokumentet når intet er markeret.

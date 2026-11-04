@@ -2922,3 +2922,81 @@ spacing	Normal	標準
 	Traditional Chinese to Simplified Chinese	繁体字中国語から簡体字中国語に変換
 	Traditional to Simplified	繁体字から簡体字へ
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	台湾、香港特別行政区、マカオ特別行政区の文字のバリエーションを使用する
+	Asian Layout	拡張書式
+	Fit Text	文字の均等割り付け
+	Fit Text…	文字の均等割り付け…
+	Two Lines in One	割注
+	Two Lines in One…	割注…
+	New text width (pt):	新しい文字列の幅 (pt):
+	Enclose in brackets	括弧で囲む
+	Bracket pair:	括弧の種類:
+	Typography	文字体裁
+	Character spacing control	文字間隔の調整
+	Don't compress	間隔を詰めない
+	Compress punctuation only	句読点を詰める
+	Compress punctuation and Japanese kana	句読点とかなを詰める
+	First and last characters	禁則文字の設定
+	Strict	高レベル
+	Cannot start a line:	行頭禁則文字:
+	Cannot end a line:	行末禁則文字:
+	Japanese Find Options	あいまい検索 (日本語) のオプション
+	Sounds like (Japanese)	あいまい検索 (日本語)
+	Match full/half width	全角と半角を区別しない
+	Match hiragana/katakana	ひらがなとカタカナを区別しない
+	Match small kana	小書き文字を区別しない
+	Match prolonged sound marks and dashes	長音とダッシュを区別しない
+	Japanese Consistency Checker	表記ゆれチェック
+	Japanese Consistency Checker…	表記ゆれチェック…
+	No inconsistent spellings were found.	表記ゆれは見つかりませんでした。
+	Pick the spelling to keep in each group.	各グループで残す表記を選んでください。
+	Bidirectional text	双方向テキスト
+	Bidirectional Text	双方向テキスト
+	Default direction:	既定の方向:
+	Cursor movement:	カーソルの移動:
+	Logical	論理順
+	Visual	表示順
+	Manage Fields	フィールドの管理
+	File locations	既定のフォルダー
+	File Locations	既定のフォルダー
+	Documents:	文書:
+	Pictures:	画像:
+	The system's choice	システムの既定
+	Show Repairs	修復内容の表示
+	No repairs were needed.	修復は必要ありませんでした。
+	These problems were found and repaired when the document was opened:	文書を開くときに次の問題が見つかり、修復されました:
+	An unreadable entry in the file was skipped: {what}	ファイル内の読み取れない項目をスキップしました: {what}
+	An unreadable part was left out: {what}	読み取れないパーツを除外しました: {what}
+	Unreadable relationships were ignored: {what}	読み取れないリレーションシップを無視しました: {what}
+	A missing part of an embedded object was left out: {what}	埋め込みオブジェクトの欠落したパーツを除外しました: {what}
+	Copy File	ファイルのコピー
+	Find Files	ファイルの検索
+	Letter Wizard	手紙ウィザード
+	Recipient's name:	宛先の名前:
+	Salutation:	頭語:
+	Subject:	件名:
+	Complimentary closing:	結語:
+	Sender's name:	差出人の名前:
+	Job title:	役職:
+	Company:	会社:
+	Enclosures:	同封物:
+	Cc:	CC:
+	Edit Links to Files	ファイルへのリンクの編集
+	Source file	リンク元ファイル
+	Locked	ロック
+	Change Source	リンク元の変更
+	This document has no links to files.	この文書にはファイルへのリンクがありません。
+	Web options	Web オプション
+	Web Options	Web オプション
+	Allow PNG as a graphics format	PNG をグラフィック形式として使用する
+	Rely on CSS for font formatting	フォントの書式設定に CSS を使用する
+	Rely on VML for displaying graphics in browsers	ブラウザーでの図の表示に VML を使用する
+	Organize supporting files in a folder	関連ファイルをフォルダーにまとめる
+	Use long file names whenever possible	可能な場合は長いファイル名を使用する
+	Screen size:	画面のサイズ:
+	Pixels per inch:	1 インチあたりのピクセル数:
+	Hangul Hanja Conversion	ハングル/漢字変換
+	Hangul Hanja Conversion…	ハングル/漢字変換…
+	Hangul to Hanja	ハングルを漢字に
+	Hanja to Hangul	漢字をハングルに
+	Put the caret in Korean text to choose its Hanja.	漢字を選ぶには、韓国語のテキストにカーソルを置いてください。
+	The selection, or the whole document when nothing is selected.	選択範囲 (選択していない場合は文書全体)。

@@ -1311,7 +1311,7 @@ impl WordApp {
             self.recipient_list_pending = true;
             return;
         }
-        let _ = self.ask_file(file_dialogs::FileDialogRequest::Open { purpose: "recipients".into() }, file_dialogs::AfterPick::Recipients);
+        let _ = self.ask_file(file_dialogs::FileDialogRequest::Open { purpose: "recipients".into(), dir: None }, file_dialogs::AfterPick::Recipients);
     }
 
     /// Load mail-merge recipients and say how many there are. A workbook with several sheets
@@ -1789,6 +1789,8 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         },
         "mailings.recipients" if !["csv", "path", "data", "rows"].into_iter().any(has) => Some("recipientList"),
         "mailings.editRecipients" if !has("rows") => Some("recipientList"),
+        // Manage Fields without a change: the fields are edited in the recipient list.
+        "mailings.manageFields" if !has("add") && !has("remove") && !has("rename") => Some("recipientList"),
         "mailings.insertField" if !has("field") => Some("insertMergeField"),
         "mailings.findRecipient" if !has("text") => Some("findRecipient"),
         // Symbol without a character and Field without a code show their dialogs (#321).
@@ -1839,8 +1841,19 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         "format.frame" if params.as_object().is_none_or(|m| m.is_empty()) => Some("formatFrame"),
         // Chinese Conversion without a direction asks which way.
         "review.chineseConversion" if !has("to") => Some("chineseConversion"),
+        // Hangul Hanja Conversion without a direction asks which way (and which Hanja).
+        "review.hangulHanja" if !has("to") => Some("hangulHanja"),
+        // Edit Links to Files without an action lists the links in its dialog.
+        "file.editLinks" if !has("action") => Some("editLinks"),
+        // Show Repairs lists them in its dialog.
+        "file.showRepairs" => Some("showRepairs"),
+        // The Japanese Consistency Checker without a spelling to keep lists the spellings.
+        "review.consistencyChecker" if !has("to") => Some("consistencyChecker"),
         // Enclose Characters without a shape (null is one: it takes the enclosure away).
         "format.enclose" if params.get("shape").is_none() => Some("enclose"),
+        // Asian Layout: Fit Text without a width, Two Lines in One without on or off.
+        "format.fitText" if params.get("width").is_none() => Some("fitText"),
+        "format.twoLinesInOne" if !has("value") => Some("twoLinesInOne"),
         // Footnote and Endnote without settings shows its dialog (#385).
         "references.noteOptions" if params.as_object().is_none_or(|m| m.is_empty()) => Some("noteOptions"),
         // References dialogs (#402): Insert Caption, Insert Index, Mark Entry, Manage Sources and
@@ -1908,6 +1921,8 @@ fn discards_document(id: &str, params: &Value) -> bool {
         "file.new" | "file.close" | "mailings.labels" | "review.translateDocument" | "tools.listCommands" => true,
         "mailings.envelopes" => params.get("add").and_then(Value::as_bool) != Some(true),
         "file.open" => params.get("path").is_some(),
+        // The Letter Wizard writes its letter in place of the document (without fields it only opens).
+        "file.letterWizard" => params.as_object().is_some_and(|m| m.values().any(|v| !v.is_null())),
         "mailings.finish" => params.get("path").and_then(Value::as_str).is_none(),
         "mailings.print" => true,
         "tools.autoSummarize" => params.get("type").and_then(Value::as_str) == Some("newDocument"),
@@ -2067,6 +2082,45 @@ mod tests {
         a.run("format.enclose", json!({})).unwrap();
         let Some(dialogs::Dialog::Enclose { style, shape, .. }) = a.dialog.clone() else { panic!("no dialog") };
         assert_eq!((style.as_str(), shape.as_str()), ("enlarge", "square"));
+    }
+
+    /// Home › Paragraph › Asian Layout: Fit Text and Two Lines in One open their dialogs on the
+    /// selected text, which show what it has; a value applies without the dialog.
+    #[test]
+    fn asian_layout_buttons_open_their_dialogs() {
+        let mut a = app();
+        a.run("text.insert", json!({"text": "a 東京都 b"})).unwrap();
+        a.run("select.text", json!({"text": "東京都"})).unwrap();
+        a.run("format.fitText", json!({})).unwrap();
+        let Some(dialogs::Dialog::FitText { width, existing }) = a.dialog.clone() else { panic!("no dialog: {:?}", a.dialog) };
+        assert_eq!((width, existing), (72.0, false));
+        a.dialog = None;
+        a.run("format.fitText", json!({"width": 60})).unwrap();
+        assert!(a.dialog.is_none(), "a width applies without the dialog");
+        a.run("format.fitText", json!({})).unwrap();
+        let Some(dialogs::Dialog::FitText { width, existing }) = a.dialog.clone() else { panic!("no dialog") };
+        assert_eq!((width, existing), (60.0, true));
+        a.dialog = None;
+        a.run("format.twoLinesInOne", json!({})).unwrap();
+        let Some(dialogs::Dialog::TwoLinesInOne { on, brackets, existing }) = a.dialog.clone() else { panic!("no dialog") };
+        assert_eq!((on, brackets.as_str(), existing), (true, "none", false));
+        a.dialog = None;
+        a.run("format.twoLinesInOne", json!({"value": true, "brackets": "square"})).unwrap();
+        a.run("format.twoLinesInOne", json!({})).unwrap();
+        let Some(dialogs::Dialog::TwoLinesInOne { brackets, existing, .. }) = a.dialog.clone() else { panic!("no dialog") };
+        assert_eq!((brackets.as_str(), existing), ("square", true));
+    }
+
+    /// Find Options (Japanese): `edit.fuzzyOptions` without settings opens Advanced Find with its
+    /// search options shown; Sounds like (Japanese) is remembered for the next time.
+    #[test]
+    fn japanese_find_options_open_in_advanced_find() {
+        let mut a = app();
+        a.run("edit.find", json!({"text": "コーヒー", "fuzzy": true})).unwrap();
+        a.run("edit.fuzzyOptions", json!({})).unwrap();
+        a.logic(&egui::Context::default());
+        let Some(dialogs::Dialog::Find { extra, replace_mode, .. }) = a.dialog.clone() else { panic!("no dialog: {:?}", a.dialog) };
+        assert!(extra.more && extra.fuzzy && !replace_mode, "{extra:?}");
     }
 
     /// Issue #139: Ctrl+wheel over the page didn't zoom.
@@ -3879,6 +3933,12 @@ mod tests {
         a.run("mailings.editRecipients", json!({})).unwrap();
         let Some(dialogs::Dialog::RecipientList { fields, rows, .. }) = &a.dialog else { panic!() };
         assert_eq!((fields.clone(), rows.clone()), (vec!["Name".to_string(), "City".into()], vec![vec!["Ada".to_string(), "London".into()]]));
+        // Manage Fields without a change: the fields are edited in the same dialog.
+        a.dialog = None;
+        assert_eq!(a.run("mailings.manageFields", json!({})).unwrap(), json!({"pending": "recipientList"}));
+        assert_eq!(dialog_name(&a), Some("recipientList"));
+        a.run("mailings.manageFields", json!({"add": "Phone"})).unwrap();
+        assert_eq!(a.session.merge.headers, vec!["Name", "City", "Phone"]);
         // Type a New List… always starts fresh.
         a.run("ui.dialog", json!({"name": "newRecipientList"})).unwrap();
         let Some(dialogs::Dialog::RecipientList { fields, .. }) = &a.dialog else { panic!() };

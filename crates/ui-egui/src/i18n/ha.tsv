@@ -1,0 +1,3001 @@
+# Hausa (ha) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts yet)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Hausa (Nigeria), Latin (Boko) script, standard orthography with the hooked letters ɓ ɗ ƙ and ʼy.
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Machine translation by an AI model (Claude), not yet reviewed by a native speaker.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" ko "an" kafin kalma ta gaba; harshen Poland "w"/"we", "z"/"ze".
+	% of all commits	% na dukkan commit
+	(All)	(Duka)
+	(Custom)	(Na musamman)
+	(no style)	(babu salo)
+	(no suggestions)	(babu shawarwari)
+	(none)	(babu)
+	(normal text)	(rubutu na yau da kullum)
+	(not matched)	(bai dace ba)
+	(picture or object)	(hoto ko abu)
+	*Bold* and _italic_ with real formatting	*Mai kauri* da _karkatacce_ tare da tsari na gaske
+	0 or More Characters	Haruffa 0 ko Fiye
+	1. Formatting restrictions	1. Ƙuntatawar tsari
+	1. Main document	1. Babban takarda
+	1.5 Line Spacing	Tazarar Layi 1.5
+	1/4 Em Space	Sarari 1/4 Em
+	1×2 Empty Matrix	Matris Fanko 1×2
+	1×3 Empty Matrix	Matris Fanko 1×3
+	2. Data source	2. Tushen bayanai
+	2. Editing restrictions	2. Ƙuntatawar gyara
+	2×1 Empty Matrix	Matris Fanko 2×1
+	2×2 Determinant	Ɗetaminan 2×2
+	2×2 Empty Matrix	Matris Fanko 2×2
+	2×2 Identity Matrix	Matris Shaida 2×2
+	2×2 Identity Matrix (sparse)	Matris Shaida 2×2 (sassauƙa)
+	2×2 Matrix in Brackets	Matris 2×2 a Cikin Baka Mai Kusurwa
+	2×2 Matrix in Double Bars	Matris 2×2 a Cikin Layuka Biyu
+	2×2 Matrix in Parentheses	Matris 2×2 a Cikin Baka
+	2×3 Empty Matrix	Matris Fanko 2×3
+	3-D	3-D
+	3. Merge the data with the document	3. Haɗa bayanan da takardar
+	3. Start enforcement	3. Fara aiwatarwa
+	3D Models	Samfuran 3D
+	3×1 Empty Matrix	Matris Fanko 3×1
+	3×2 Empty Matrix	Matris Fanko 3×2
+	3×3 Empty Matrix	Matris Fanko 3×3
+	3×3 Identity Matrix	Matris Shaida 3×3
+	3×3 Identity Matrix (sparse)	Matris Shaida 3×3 (sassauƙa)
+	5,000 characters a day; give an email address for 50,000.	Haruffa 5,000 a rana; ba da adireshin imel don 50,000.
+	<< Less	<< Ƙasa
+	<< Remove	<< Cire
+	A file dialog is already open.	An riga an buɗe akwatin zaɓen fayil.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Shirin sarrafa rubutu kyauta, mai buɗaɗɗen tushe, wanda aka rubuta daga farko da Rust.\nAn gina shi bisa WordCraft na ƙungiyar ArtCraft.
+	A header source holds the field names for a data source without a header row.	Tushen kanu yana riƙe da sunayen filaye ga tushen bayanai da ba shi da layin kanu.
+	A mail merge field	Filin haɗa wasiƙu
+	A new document lists the commands with their shortcuts.	Sabuwar takarda tana jera umarnin tare da gajerun hanyoyinsu.
+	A numbered sequence (figures, tables…)	Jerin lambobi (hotuna, teburori…)
+	A password is required to open this document.	Ana buƙatar kalmar sirri don buɗe wannan takarda.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Sarari kafin alamar rubutu, alamomi biyu-biyu, waƙafin harshen Poland kafin kalmomin haɗi.
+	A table of contents	Jerin abubuwan ciki
+	A table's rows keep the same columns here.	Layukan tebur suna riƙe da ginshiƙai iri ɗaya a nan.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Game da
+	About Doc4Me	Game da Doc4Me
+	Above Chart	Saman Jadawali
+	Above the item	Saman abin
+	Absolute position	Matsayi cikakke
+	Absolute value cases	Lamurran cikakkiyar ƙima
+	Accent	Lafazi
+	Accent Gradient	Gaurayen Lafazi
+	Accent with Reflection	Lafazi da Tunani
+	Accent {n}	Lafazi {n}
+	Accents	Lafuzza
+	Accept	Karɓa
+	Accept All	Karɓi Duka
+	Accept All Changes	Karɓi Duk Canje-canje
+	Accept or Reject Changes	Karɓa ko Ƙi Canje-canje
+	Accept This Change	Karɓi Wannan Canji
+	Accessed on	An shiga ranar
+	Accessibility	Samun dama
+	Accessibility Pane	Faifan Samun Dama
+	Acute	Kaifi
+	Add	Ƙara
+	Add >>	Ƙara >>
+	Add a comment	Ƙara sharhi
+	Add a Table	Ƙara Tebur
+	Add at least one field.	Ƙara aƙalla fili ɗaya.
+	Add caption when inserting:	Ƙara taken bayani lokacin sakawa:
+	Add Chart Element	Ƙara Ɓangaren Jadawali
+	Add Field	Ƙara Fili
+	Add Field Name	Ƙara Sunan Fili
+	Add Font…	Ƙara Nau'in Rubutu…
+	Add line numbering	Ƙara lambobin layi
+	Add New Placeholder	Ƙara Sabon Mai Riƙe Wuri
+	Add New Placeholder…	Ƙara Sabon Mai Riƙe Wuri…
+	Add New Source…	Ƙara Sabon Tushe…
+	Add Object to Selection	Ƙara Abu cikin Zaɓi
+	Add Pen	Ƙara Alƙalami
+	Add Row	Ƙara Jere
+	Add Series	Ƙara Jerin Bayanai
+	Add Shape	Ƙara Siffa
+	Add Space Before Paragraph	Ƙara Sarari Kafin Sakin Layi
+	Add space between Asian and Latin text	Ƙara sarari tsakanin rubutun Asiya da na Latin
+	Add space between Asian text and numbers	Ƙara sarari tsakanin rubutun Asiya da lambobi
+	Add tab stop at:	Ƙara tasha a:
+	Add Text	Ƙara Rubutu
+	Add the chapter number	Ƙara lambar babi
+	Add to Dictionary	Ƙara cikin Ƙamus
+	Add to Document	Ƙara cikin Takarda
+	Add to Quick Access Toolbar	Ƙara cikin Sandar Kayan Aiki ta Gaggawa
+	Add to Style Gallery	Ƙara cikin Tarin Salo
+	Add-ins	Ƙarin shirye-shirye
+	Add/Edit\nBibliography	Ƙara/Gyara\nManazarta
+	Add/Edit\nCitation	Ƙara/Gyara\nAmbato
+	Add\nNote	Ƙara\nBayani
+	Add\nPen	Ƙara\nAlƙalami
+	Add\nShape	Ƙara\nSiffa
+	Added	An ƙara
+	Added Fonts	Nau'ukan Rubutu da Aka Ƙara
+	Address	Adireshi
+	Address Block	Tubalin Adireshi
+	Address labels	Lakabin adireshi
+	Address:	Adireshi:
+	Address\nBlock	Tubalin\nAdireshi
+	Adjust	Daidaita
+	Advanced	Na gaba-gaba
+	Advanced Find	Bincike Na Gaba-gaba
+	Advanced Find…	Bincike Na Gaba-gaba…
+	After:	Bayan:
+	Agents	Wakilai
+	Align	Jeri
+	Align Bottom Center	Jera Ƙasa a Tsakiya
+	Align Bottom Left	Jera Ƙasa a Hagu
+	Align Bottom Right	Jera Ƙasa a Dama
+	Align Center	Jera a Tsakiya
+	Align Center Left	Jera Tsakiya a Hagu
+	Align Center Right	Jera Tsakiya a Dama
+	Align Left	Jera Hagu
+	Align Right	Jera Dama
+	Align Text	Jera Rubutu
+	Align Top Center	Jera Sama a Tsakiya
+	Align Top Left	Jera Sama a Hagu
+	Align Top Right	Jera Sama a Dama
+	Aligned at:	An jera a:
+	Alignment	Jeruwa
+	Alignment:	Jeruwa:
+	All	Duka
+	All - Linear	Duka - Layi Ɗaya
+	All - Professional	Duka - Ƙwararre
+	All Borders	Duk Iyakoki
+	All Caps	Duk Manyan Baƙaƙe
+	All caps	Duk manyan baƙaƙe
+	All Commands	Duk Umarni
+	All files	Duk fayiloli
+	All Levels	Duk Matakai
+	All Markup	Duk Alamomi
+	All pages	Duk shafuka
+	All pages in the range	Duk shafukan da ke cikin kewayon
+	All records	Duk bayanai
+	All symbol sets	Duk rukunin alamomi
+	Allow Doc4Me to use online services	Bar Doc4Me ta yi amfani da sabis na intanet
+	Allow hanging punctuation	Bar alamomin rubutu su rataya
+	Allow Latin text to wrap in the middle of a word	Bar rubutun Latin ya naɗe a tsakiyar kalma
+	Allow line breaks	Bar karya layi
+	Allow overlap	Bar zoba
+	Allow row to break across pages	Bar jere ya rabu tsakanin shafuka
+	Alphabetical	Bisa haruffa
+	Alt Text	Rubutun Madadi
+	Alt text	Rubutun madadi
+	Alt Text Pane	Faifan Rubutun Madadi
+	Alt:	Madadi:
+	Alt\nText	Rubutun\nMadadi
+	And	Da
+	Angle Brackets	Baka Mai Kusurwa
+	Angle Brackets with Separator	Baka Mai Kusurwa da Mai Raba
+	Angle Brackets with Two Separators	Baka Mai Kusurwa da Masu Raba Biyu
+	Animate the caret (it glides and fades)	Motsa alamar shigarwa (tana zamewa tana dusashewa)
+	Animation	Motsi
+	Animation effects:	Tasirin motsi:
+	Annotation Reference	Madogarar Bayani
+	Annotation Subject	Batun Bayani
+	Annotation Text	Rubutun Bayani
+	Another file	Wani fayil
+	Any Character	Kowane Harafi
+	Any Digit	Kowace Lamba
+	Any Letter	Kowane Baƙi
+	Anyone can open this document. Encrypt it with a password to keep it private.	Kowa zai iya buɗe wannan takarda. Ɓoye ta da kalmar sirri don ta zama sirri.
+	Anyone who opens the document will need this password.	Duk wanda ya buɗe takardar zai buƙaci wannan kalmar sirri.
+	APA	APA
+	API key (if the server needs one)	Maɓallin API (idan sabar na buƙatar ɗaya)
+	Apply	Aiwatar
+	Apply as you type	Aiwatar yayin da kake bugawa
+	Apply Asian line-breaking rules (kinsoku)	Aiwatar da dokokin karya layi na Asiya (kinsoku)
+	Apply Character Style	Aiwatar da Salon Harafi
+	Apply formatting to:	Aiwatar da tsari ga:
+	Apply special formats to	Aiwatar da tsare-tsare na musamman ga
+	Apply Style	Aiwatar da Salo
+	Apply Styles	Aiwatar da Salo
+	Apply to:	Aiwatar ga:
+	Arabic	Larabci
+	Arch Down	Baka Ƙasa
+	Arch Up	Baka Sama
+	Area	Yanki
+	Around	Kewaye
+	Arrange	Shirya
+	Arrange All	Shirya Duka
+	Arrange\nAll	Shirya\nDuka
+	Arrow	Kibiya
+	Arrows	Kibiyoyi
+	Artistic Effects	Tasirin Fasaha
+	As Recommended	Kamar Yadda Aka Ba da Shawara
+	As you type	Yayin bugawa
+	ASAP	DA WURI
+	Ascending	Mai hawa
+	Asian text font:	Nau'in rubutun Asiya:
+	Asian Typography	Rubutun Asiya
+	Assign	Sanya
+	At least	Aƙalla
+	At least {n}	Aƙalla {n}
+	Atelier	Atelier
+	Atmosphere	Yanayi
+	Attach Template	Haɗa Samfuri
+	Attach…	Haɗa…
+	Author	Marubuci
+	Auto	Kai-tsaye
+	AutoCaption	Taken Bayani Kai-tsaye
+	AutoCaption…	Taken Bayani Kai-tsaye…
+	AutoComplete	Kammalawa Kai-tsaye
+	AutoCorrect	Gyara Kai-tsaye
+	AutoCorrect Options	Zaɓuɓɓukan Gyara Kai-tsaye
+	AutoFit	Daidaita Kai-tsaye
+	AutoFit Contents	Daidaita da Abun Ciki
+	AutoFit Window	Daidaita da Taga
+	AutoFormat	Tsara Kai-tsaye
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Tsara Kai-tsaye (Ctrl+Alt+K) yana tsara sakin layin da aka zaɓa, ko dukkan takardar.
+	AutoFormat and Review Changes…	Tsara Kai-tsaye da Duba Canje-canje…
+	AutoFormat As You Type	Tsara Kai-tsaye Yayin Bugawa
+	AutoFormat changed {count} paragraphs	Tsara Kai-tsaye ya canza sakin layi {count}
+	AutoFormat Now	Tsara Kai-tsaye Yanzu
+	Automatic	Kai-tsaye
+	Automatic ({language})	Kai-tsaye ({language})
+	Automatic bulleted lists	Jerin ɗigogi kai-tsaye
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Kai-tsaye yana bin harshen tsarinka. Menu da umarni suna canzawa; takardunka ba sa canzawa.
+	Automatic numbered lists	Jerin lambobi kai-tsaye
+	Automatic Table 1 (3 levels)	Tebur Kai-tsaye 1 (matakai 3)
+	Automatic Table 2 (2 levels)	Tebur Kai-tsaye 2 (matakai 2)
+	Automatically hyphenate document	Raba kalmomin takarda kai-tsaye
+	Automatically Update Document Styles	Sabunta Salon Takarda Kai-tsaye
+	Automatically update document styles	Sabunta salon takarda kai-tsaye
+	AutoSave	Ajiyewa Kai-tsaye
+	AutoSave documents you have saved in Doc4Me	Ajiye kai-tsaye takardun da ka ajiye a Doc4Me
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Ajiyewa Kai-tsaye ya kasa: {error}. Ajiye takardar don sake kunna Ajiyewa Kai-tsaye.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Ajiyewa Kai-tsaye ba ya samuwa a cikin burauza: ba zai iya rubutawa a fayilolinka ba. Ajiye yana sauke kwafi.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Ajiyewa Kai-tsaye yana riƙe fayilolin .docx, .odt da .rtf kawai; {name} ba zai iya riƙe duk tsari ba. Ajiye a matsayin .docx don kunna Ajiyewa Kai-tsaye.
+	AutoSave saves every change to the file (needs a saved document)	Ajiyewa Kai-tsaye yana ajiye kowane canji a fayil (yana buƙatar takardar da aka ajiye)
+	AutoSave writes your changes to the file a moment after you stop typing.	Ajiyewa Kai-tsaye yana rubuta canje-canjenka a fayil jim kaɗan bayan ka daina bugawa.
+	AutoText	Rubutu Kai-tsaye
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10.12" × 14.33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7.17" × 10.12"
+	Back	Baya
+	Backspace	Backspace
+	Balloons	Kumfa
+	Banded Columns	Ginshiƙai Masu Ratsi
+	Banded Rows	Jeruka Masu Ratsi
+	Bar	Sanda
+	Base text:	Rubutun tushe:
+	Based on: {style}	An gina bisa: {style}
+	Baseline Dots	Ɗigogin Layin Tushe
+	Basic Cycle	Zagaye Mai Sauƙi
+	Basic List	Jeri Mai Sauƙi
+	Basic Math	Lissafi Mai Sauƙi
+	Basic Matrix	Matris Mai Sauƙi
+	Basic Process	Tsari Mai Sauƙi
+	Basic Pyramid	Dala Mai Sauƙi
+	Basic Radial	Da'ira Mai Sauƙi
+	Basic Venn	Venn Mai Sauƙi
+	Bayes' rule	Dokar Bayes
+	Before:	Kafin:
+	Beginning of Word	Farkon Kalma
+	Behind Text	Bayan Rubutu
+	Below text	Ƙasan rubutu
+	Below the item	Ƙasan abin
+	Between	Tsakanin
+	Bibliography	Manazarta
+	Binary assets added	An ƙara kadarorin binary
+	Binary assets removed	An cire kadarorin binary
+	Binomial Coefficient	Ma'aunin Binomial
+	Binomial Coefficient (angle)	Ma'aunin Binomial (kusurwa)
+	Binomial Coefficient with Angle Brackets	Ma'aunin Binomial da Baka Mai Kusurwa
+	Binomial expansion of (x+a)ⁿ	Faɗaɗa binomial na (x+a)ⁿ
+	Blank	Fanko
+	Blank (Three Columns)	Fanko (Ginshiƙai Uku)
+	Blank document	Takarda fanko
+	Blank Page	Shafi Fanko
+	Block\nAuthors	Toshe\nMarubuta
+	Blue:	Shuɗi:
+	Body Text	Rubutun Jiki
+	Body text in a short paragraph to show spacing.	Rubutun jiki a cikin gajeren sakin layi don nuna tazara.
+	Bold	Mai kauri
+	Book	Littafi
+	Book Title	Taken Littafi
+	Book title	Taken littafi
+	Bookmark	Alamar shafi
+	Bookmark name:	Sunan alamar shafi:
+	Border lines	Layukan iyaka
+	Border Painter	Mai Zanen Iyaka
+	Border\nPainter	Mai Zanen\nIyaka
+	Borders	Iyakoki
+	Borders and Shading	Iyakoki da Inuwa
+	Borders and Shading…	Iyakoki da Inuwa…
+	Border…	Iyaka…
+	Both Sides	Ɓangarori Biyu
+	Both sides	Ɓangarori biyu
+	Bottom	Ƙasa
+	Bottom Border	Iyakar Ƙasa
+	Bottom Margin	Gefen Ƙasa
+	Bottom of Page	Ƙasan Shafi
+	Bottom of the Window	Ƙasan Taga
+	Bottom:	Ƙasa:
+	Box	Akwati
+	Boxed Formula	Dabara a Akwati
+	Boxed Formula (example)	Dabara a Akwati (misali)
+	Boxed Formulas	Dabaru a Akwati
+	Braces	Baka Mai Lanƙwasa
+	Braces with Separator	Baka Mai Lanƙwasa da Mai Raba
+	Bracket	Baka
+	Brackets	Bakuna
+	Brackets with Separators	Bakuna da Masu Raba
+	Break Link	Yanke Mahaɗi
+	Breaks	Karye-karye
+	Breve	Breve
+	Brightness, contrast and transparency change the picture from how it looks now.	Haske, bambanci da bayyanuwa suna canza hoton daga yadda yake a yanzu.
+	Brightness:	Haske:
+	Bring Forward	Kawo Gaba
+	Browse in Doc4Me…	Bincika a Doc4Me…
+	Browse…	Bincika…
+	Build table of figures from:	Gina teburin hotuna daga:
+	Building Block Gallery Content Control	Sarrafa Abun Ciki na Tarin Tubalan Gini
+	Built from the style or table entry fields chosen in Options.	An gina daga salo ko filayen shigarwar tebur da aka zaɓa a Zaɓuɓɓuka.
+	Built-In	Ginanne
+	Built-in Heading styles	Ginannun salon Kanu
+	Built-in style	Ginannen salo
+	Built-in styles can't be deleted.	Ba za a iya share ginannun salo ba.
+	Bullet	Ɗigo
+	Bullet Library	Ɗakin Ɗigogi
+	Bullets	Ɗigogi
+	By author	Bisa marubuci
+	By:	Daga:
+	Calendar	Kalanda
+	Can't be deleted	Ba za a iya sharewa ba
+	Cancel	Soke
+	Canvas Member	Memba na Zane
+	Capitalization	Manyan Baƙaƙe
+	Capitalize Each Word	Babban Baƙi a Farkon Kowace Kalma
+	Capitalize first letter of sentences	Babban baƙi a farkon jimloli
+	Capitalize first letter of table cells	Babban baƙi a farkon sel na tebur
+	Capitalize names of days	Babban baƙi a sunayen kwanaki
+	Capitalize the first word of a sentence	Babban baƙi a kalmar farko ta jimla
+	Caption	Taken bayani
+	Caption label:	Alamar taken bayani:
+	Caption Numbering	Lambobin Taken Bayani
+	Caption text	Rubutun taken bayani
+	Caption:	Taken bayani:
+	Captions	Takunan Bayani
+	Caret Character	Alamar Caret
+	Case changes	Canje-canjen girman baƙaƙe
+	Cases	Lamurra
+	Cases (Three Conditions)	Lamurra (Sharuɗɗa Uku)
+	Cases (Two Conditions)	Lamurra (Sharuɗɗa Biyu)
+	Cases and Stacks	Lamurra da Tari
+	Catalog	Kundi
+	Categories	Rukunoni
+	Categories:	Rukunoni:
+	Category	Rukuni
+	Category {n}	Rukuni {n}
+	Category:	Rukuni:
+	Category…	Rukuni…
+	Ceiling	Rufi
+	Cell	Sel
+	Cell Margins	Gefen Sel
+	Cell margins	Gefen sel
+	Cell Options	Zaɓuɓɓukan Sel
+	Cell Size	Girman Sel
+	Cell\nMargins	Gefen\nSel
+	Center	Tsakiya
+	Centered	A tsakiya
+	Centered as Group	A Tsakiya a Matsayin Rukuni
+	Centimeters	Santimita
+	Change	Canza
+	Change Case	Canza Girman Baƙaƙe
+	Change Chart Type	Canza Nau'in Jadawali
+	Change Colors	Canza Launuka
+	Change in y over change in x	Canjin y bisa canjin x
+	Change Layout	Canza Tsari
+	Change List Level	Canza Matakin Jeri
+	Change Password…	Canza Kalmar Sirri…
+	Change Picture	Canza Hoto
+	Change Picture…	Canza Hoto…
+	Change Shape	Canza Siffa
+	Change Structure	Canza Tsari
+	Change to Display	Canza zuwa Nuni
+	Change to Inline	Canza zuwa Cikin Layi
+	Change to Level 1	Canza zuwa Mataki na 1
+	Change to Level 2	Canza zuwa Mataki na 2
+	Change to Level 3	Canza zuwa Mataki na 3
+	Change to Level 4	Canza zuwa Mataki na 4
+	Change to Level 5	Canza zuwa Mataki na 5
+	Change to Level 6	Canza zuwa Mataki na 6
+	Change to Level 7	Canza zuwa Mataki na 7
+	Change to Level 8	Canza zuwa Mataki na 8
+	Change to Level 9	Canza zuwa Mataki na 9
+	Change\nChart Type	Canza Nau'in\nJadawali
+	Change\nColors	Canza\nLaunuka
+	Changed	An canza
+	Changed lines:	Layukan da aka canza:
+	Changes	Canje-canje
+	Changes with highlighting	Canje-canje tare da haskakawa
+	Changes without highlighting	Canje-canje ba tare da haskakawa ba
+	Chapter in a book	Babi a cikin littafi
+	Chapters begin at:	Babuka suna farawa a:
+	Character	Harafi
+	Character Border	Iyakar Harafi
+	Character code:	Lambar harafi:
+	Character in Range	Harafi a Cikin Kewayo
+	Character level	Matakin harafi
+	Character Position	Matsayin Harafi
+	Character Scale	Ma'aunin Harafi
+	Character Shading	Inuwar Harafi
+	Character Spacing	Tazarar Haruffa
+	Character spacing	Tazarar haruffa
+	Character style	Salon harafi
+	Characters	Haruffa
+	Characters (no spaces)	Haruffa (ba tare da sarari ba)
+	Characters (with spaces)	Haruffa (tare da sarari)
+	Characters per line:	Haruffa a kowane layi:
+	Chart	Jadawali
+	Chart Design	Zanen Jadawali
+	Chart Layouts	Tsare-tsaren Jadawali
+	Chart Title	Taken Jadawali
+	Check	Duba
+	Check Accessibility	Duba Samun Dama
+	Check Box Content Control	Sarrafa Abun Ciki na Akwatin Zaɓi
+	Check Compatibility	Duba Dacewa
+	Check Errors…	Duba Kurakurai…
+	Check for Errors	Duba Kurakurai
+	Check Spelling as You Type	Duba Rubutun Kalmomi Yayin Bugawa
+	Check spelling as you type	Duba rubutun kalmomi yayin bugawa
+	Check\nAccessibility	Duba\nSamun Dama
+	Checked styles are allowed:	Salon da aka yi wa alama an yarda da su:
+	Checked symbol	Alamar zaɓi
+	Chevron Down	Kibiyar Ƙasa
+	Chevron Up	Kibiyar Sama
+	Chicago	Chicago
+	Chinese (Simplified)	Sinanci (Sauƙaƙe)
+	Chinese (Traditional)	Sinanci (Na Gargajiya)
+	Choose a command	Zaɓi umarni
+	Choose a shortcut	Zaɓi gajeriyar hanya
+	Choose List Item	Zaɓi Abu a Jeri
+	Choose the sheet that holds the recipients.	Zaɓi takardar da ke riƙe da masu karɓa.
+	Circle	Da'ira
+	Circle area from its radius	Yankin da'ira daga rabin diamitarta
+	Circled Dot	Ɗigo a Da'ira
+	Circled Plus	Ƙari a Da'ira
+	Circled Times	Sau a Da'ira
+	Citation marked.	An yi wa ambato alama.
+	Citation Style	Salon Ambato
+	Citations	Ambato
+	Citations & Bibliography	Ambato da Manazarta
+	City	Birni
+	Clear	Share
+	Clear All	Share Duka
+	Clear All Formatting	Share Duk Tsari
+	Clear Character Formatting	Share Tsarin Harafi
+	Clear Character Style	Share Salon Harafi
+	Clear Formatting Level	Share Matakin Tsari
+	Clear Paragraph Formatting	Share Tsarin Sakin Layi
+	Click a border between two cells to merge them. Esc stops.	Danna iyaka tsakanin sel biyu don haɗa su. Esc yana tsayarwa.
+	Click an item to paste it.	Danna abu don liƙa shi.
+	Click level to modify:	Danna mataki don gyarawa:
+	Click the empty text box the text should continue in (Esc cancels)	Danna akwatin rubutu fanko da rubutun zai ci gaba a ciki (Esc yana sokewa)
+	Click to switch back to inserting	Danna don komawa sakawa
+	Clipboard	Allon Kwafi
+	Clipboard Contents	Abubuwan Allon Kwafi
+	Clipboard Items	Abubuwan Allon Kwafi
+	Clipboard Pane	Faifan Allon Kwafi
+	Close	Rufe
+	Close Equation	Rufe Lissafi
+	Close Header and Footer	Rufe Kan Shafi da Ƙasan Shafi
+	Close Outline View	Rufe Duban Shaci
+	Close Outline\nView	Rufe Duban\nShaci
+	Close Reviewing Pane	Rufe Faifan Bita
+	Clustered Bar	Sanduna a Rukuni
+	Clustered Column	Ginshiƙai a Rukuni
+	Col #:	Ginshiƙi #:
+	Collapse	Naɗe
+	Collapse Selection	Naɗe Zaɓi
+	Collapse the Ribbon	Naɗe Sandar Umarni
+	Collate copies	Jera kwafe-kwafe
+	Collect entries from:	Tattara shigarwa daga:
+	Colon Equal	Hanji Daidai
+	Color	Launi
+	Color model:	Tsarin launi:
+	Color only	Launi kawai
+	Color:	Launi:
+	Color: {color}	Launi: {color}
+	Colorful	Mai launi-launi
+	Colors	Launuka
+	Colors:	Launuka:
+	Column	Ginshiƙi
+	Column Break	Karya Ginshiƙi
+	Column Selection	Zaɓin Ginshiƙi
+	Column selection: the arrow keys extend the block, Esc ends it	Zaɓin ginshiƙi: maɓallan kibiya suna faɗaɗa tubalin, Esc yana kammala shi
+	Column width	Faɗin ginshiƙi
+	Column:	Ginshiƙi:
+	Columns	Ginshiƙai
+	Columns:	Ginshiƙai:
+	Combine	Haɗa
+	Combine Documents	Haɗa Takardu
+	Combo Box Content Control	Sarrafa Abun Ciki na Akwatin Haɗaka
+	Commands	Umarni
+	Commands:	Umarni:
+	Comment	Sharhi
+	Comments	Sharhohi
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Sharhohi a gefen kowane shafi da canje-canjen da ake bibiya a PDF, bugawa da hotuna; jerin sharhohi a ƙarshen shafukan yanar gizo, Markdown da rubutu.
+	Comments on version	Sharhohi kan sigar
+	Comments Pane	Faifan Sharhohi
+	Commits	Commit
+	Common Accent Objects	Abubuwan Lafazi na Gama-gari
+	Common Brackets	Bakuna na Gama-gari
+	Common Fractions	Ɓangarori na Gama-gari
+	Common Functions	Ayyuka na Gama-gari
+	Common Large Operators	Manyan Masu Aiki na Gama-gari
+	Common Operator Structures	Tsarin Masu Aiki na Gama-gari
+	Common Operators	Masu Aiki na Gama-gari
+	Common Radicals	Saiwoyi na Gama-gari
+	Common Subscripts and Superscripts	Rubutun Ƙasa da na Sama na Gama-gari
+	Communication	Sadarwa
+	Compact	Matse
+	Company	Kamfani
+	Compare	Kwatanta
+	Compare Documents	Kwatanta Takardu
+	Compare to	Kwatanta da
+	Compared: {changes} changes	An kwatanta: canje-canje {changes}
+	Comparing with another file needs the desktop app.	Kwatantawa da wani fayil yana buƙatar manhajar kwamfuta.
+	Comparison	Kwatance
+	Comparison settings	Saitunan kwatantawa
+	Compatibility mode: {version}	Yanayin dacewa: {version}
+	Compatibility Options	Zaɓuɓɓukan Dacewa
+	Compatibility Options…	Zaɓuɓɓukan Dacewa…
+	Compress Pictures	Matse Hotuna
+	Compress punctuation at the start of a line	Matse alamomin rubutu a farkon layi
+	Condensed	Matsattse
+	Conference	Taro
+	Conference paper	Takardar taro
+	CONFIDENTIAL	SIRRI
+	Confirm password:	Tabbatar da kalmar sirri:
+	Connect Shapes	Haɗa Siffofi
+	Constitutional Provisions	Tanade-tanaden Kundin Tsarin Mulki
+	Container Title	Taken Mai Ɗauke
+	Contains	Ya ƙunshi
+	Content Control at Selection	Sarrafa Abun Ciki a Wurin Zaɓi
+	Content Control Properties	Kaddarorin Sarrafa Abun Ciki
+	Contents can't be edited	Ba za a iya gyara abun ciki ba
+	Context	Mahallin
+	Contextual	Bisa mahallin
+	Continuous	Ci gaba
+	Continuous numbering	Lambobi masu ci gaba
+	Contour Integral	Haɗin Kewaye
+	Contour Integral with Limits	Haɗin Kewaye da Iyakoki
+	Contour Integral with Stacked Limits	Haɗin Kewaye da Iyakoki a Tari
+	Contour Integrals	Haɗe-haɗen Kewaye
+	Contrast:	Bambanci:
+	Contributors	Masu ba da gudummawa
+	Controls	Masu sarrafawa
+	Conversions	Juye-juye
+	Convert	Juya
+	Convert between built-up and linear form	Juya tsakanin tsarin ginanne da na layi ɗaya
+	Convert Notes	Juya Bayanai
+	Convert Permanently	Juya Har Abada
+	Convert Text to Table	Juya Rubutu zuwa Tebur
+	Convert Text to Table…	Juya Rubutu zuwa Tebur…
+	Convert to Arabic Digits	Juya zuwa Lambobin Larabci
+	Convert to Shapes	Juya zuwa Siffofi
+	Convert to Text	Juya zuwa Rubutu
+	Convert to Thai Digits	Juya zuwa Lambobin Thai
+	Copies	Kwafe-kwafe
+	Coproduct	Coproduct
+	Coproduct with Limits	Coproduct da Iyakoki
+	Coproduct with Lower Limit	Coproduct da Iyakar Ƙasa
+	Coproduct with Subscript-Superscript Limits	Coproduct da Iyakokin Ƙasa-Sama
+	Copy	Kwafa
+	Copy Formatting	Kwafi Tsari
+	Copy of the text a bookmark marks	Kwafin rubutun da alamar shafi ke nunawa
+	Copy Styles	Kwafi Salo
+	Copy Text	Kwafi Rubutu
+	Copy to where?	Kwafa zuwa ina?
+	Copyright	Haƙƙin mallaka
+	Copyright Sign	Alamar Haƙƙin Mallaka
+	Corrections	Gyare-gyare
+	Cosecant Function	Aikin Cosecant
+	Cosine 2x	Cosine 2x
+	Cosine Function	Aikin Cosine
+	Cotangent Function	Aikin Cotangent
+	Couldn't add {name}: {reason}	An kasa ƙara {name}: {reason}
+	Couldn't download the picture: {reason}	An kasa sauke hoton: {reason}
+	Couldn't download {name}: {error}	An kasa sauke {name}: {error}
+	Couldn't get the add-in list: {reason}	An kasa samun jerin ƙarin shirye-shirye: {reason}
+	Couldn't make Doc4Me the default: {error}	An kasa mai da Doc4Me tsoho: {error}
+	Couldn't open {path}: {error}	An kasa buɗe {path}: {error}
+	Couldn't search: {reason}	An kasa bincike: {reason}
+	Couldn't translate: {reason}	An kasa fassara: {reason}
+	Count by:	Ƙirga da:
+	Count words in text boxes and notes	Ƙirga kalmomi a akwatunan rubutu da bayanai
+	Country	Ƙasa
+	Courtesy Title	Laƙabin Girmamawa
+	Cover Page	Shafin Murfi
+	Craft	Sana'a
+	Create	Ƙirƙira
+	Create a Style	Ƙirƙiri Salo
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Ƙirƙiri shaci mai mu'amala na takardarka.\n\nHanya ce mai kyau ta sanin inda kake ko saurin motsa abun cikinka.\n\nDon farawa, je shafin Gida ka aiwatar da salon Kanu ga kanun da ke cikin takardarka.
+	Create Data Source…	Ƙirƙiri Tushen Bayanai…
+	Create Graphic	Ƙirƙiri Zane
+	Create Header Source	Ƙirƙiri Tushen Kanu
+	Create Link	Ƙirƙiri Mahaɗi
+	Create New Style	Ƙirƙiri Sabon Salo
+	Create Source	Ƙirƙiri Tushe
+	Create…	Ƙirƙira…
+	Crop	Datse
+	Cross-reference	Nuni-giciye
+	Cross-reference:	Nuni-giciye:
+	Cube Root	Saiwar Kubi
+	Current	Na yanzu
+	Current - Linear	Na Yanzu - Layi Ɗaya
+	Current - Professional	Na Yanzu - Ƙwararre
+	Current keyboard settings	Saitunan madannai na yanzu
+	Current page	Shafin yanzu
+	Current Position	Matsayin Yanzu
+	Current record	Bayanin yanzu
+	Current style: {style}	Salon yanzu: {style}
+	Curved Arrow Connector	Mahaɗin Kibiya Mai Lanƙwasa
+	Curved Connector	Mahaɗi Mai Lanƙwasa
+	Custom	Na musamman
+	Custom dictionary	Ƙamus na musamman
+	Custom Margins…	Gefuna na Musamman…
+	Custom mark:	Alama ta musamman:
+	Custom range	Kewayo na musamman
+	Custom Table of Contents	Jerin Abubuwan Ciki na Musamman
+	Custom Table of Contents…	Jerin Abubuwan Ciki na Musamman…
+	Custom Watermark	Alamar Ruwa ta Musamman
+	Custom Watermark…	Alamar Ruwa ta Musamman…
+	Customize	Keɓance
+	Customize Keyboard	Keɓance Madannai
+	Customize Quick Access Toolbar	Keɓance Sandar Kayan Aiki ta Gaggawa
+	Customize Quick Access Toolbar…	Keɓance Sandar Kayan Aiki ta Gaggawa…
+	Customize Ribbon	Keɓance Sandar Umarni
+	Customize the Ribbon…	Keɓance Sandar Umarni…
+	Customize…	Keɓance…
+	Cut	Yanke
+	Cut, copy, and paste	Yanke, kwafa, da liƙa
+	Cycle	Zagaye
+	Czech	Cek
+	Danish	Harshen Danish
+	Dark	Duhu
+	Dark Mode	Yanayin Duhu
+	Dark page (white text on black)	Shafi mai duhu (farin rubutu a kan baƙi)
+	Dark with Shadow	Duhu da Inuwa
+	Darkroom	Ɗakin Duhu
+	Dashed	Mai karye-karye
+	Data	Bayanai
+	Data Labels	Lakabin Bayanai
+	Data source:	Tushen bayanai:
+	Date	Kwanan wata
+	Date & Time	Kwanan Wata da Lokaci
+	Date and Time	Kwanan Wata da Lokaci
+	Date format	Tsarin kwanan wata
+	Date formats:	Tsare-tsaren kwanan wata:
+	Date Picker Content Control	Sarrafa Abun Ciki na Mai Zaɓen Kwanan Wata
+	Day	Rana
+	Decimal	Goma-goma
+	Decorative objects only add visual interest: screen readers skip them.	Abubuwan ado suna ƙara kyan gani kawai: masu karanta allo suna tsallake su.
+	Decrease Font Size	Rage Girman Rubutu
+	Decrease Indent	Rage Shigar Ciki
+	Default	Tsoho
+	Default Paragraph Font	Tsohon Nau'in Rubutun Sakin Layi
+	Default tab stops:	Tsoffin tasoshi:
+	Define New Bullet	Ayyana Sabon Ɗigo
+	Define New Multilevel List	Ayyana Sabon Jeri Mai Matakai Da Yawa
+	Define New Multilevel List…	Ayyana Sabon Jeri Mai Matakai Da Yawa…
+	Define New Number Format	Ayyana Sabon Tsarin Lamba
+	Deflate	Kwance
+	Delete	Share
+	Delete Back in Equation	Share Baya a Lissafi
+	Delete Cells	Share Sel
+	Delete Clipboard Item	Share Abun Allon Kwafi
+	Delete Columns	Share Ginshiƙai
+	Delete Comment	Share Sharhi
+	Delete in Equation	Share a Lissafi
+	Delete Label	Share Lakabi
+	Delete Next Word	Share Kalma ta Gaba
+	Delete Previous Word	Share Kalma ta Baya
+	Delete Rows	Share Jeruka
+	Delete Selected Ink	Share Tawadar da Aka Zaɓa
+	Delete Style	Share Salo
+	Delete Table	Share Tebur
+	Delete Table Style	Share Salon Tebur
+	Deleted	An share
+	Deletions:	Abubuwan da aka share:
+	Delivery address:	Adireshin isarwa:
+	Delta Equal To	Delta Daidai Da
+	Delta over arrow	Delta a kan kibiya
+	Demote	Rage matsayi
+	Demote to Body Text	Rage zuwa Rubutun Jiki
+	Derivative as a limit	Derivative a matsayin iyaka
+	Descending	Mai sauka
+	Describe what this object shows, for people who can't see it.	Bayyana abin da wannan abu ke nunawa, don mutanen da ba sa iya gani.
+	Describe what this table shows, for people who can't see it.	Bayyana abin da wannan tebur ke nunawa, don mutanen da ba sa iya gani.
+	Description:	Bayani:
+	Design	Zane
+	Design Mode	Yanayin Zane
+	Detach Template	Cire Samfuri
+	Detect language automatically	Gano harshe kai-tsaye
+	Developer	Mai Haɓakawa
+	development build	ginin haɓakawa
+	Diagonal	Mai karkata
+	Diagonal Dots	Ɗigogi Masu Karkata
+	Diamond	Lu'u-lu'u
+	Dictate	Furta
+	Dictation isn't available here.	Furtawa ba ta samuwa a nan.
+	Dictation stopped.	Furtawa ta tsaya.
+	Dictation stopped: {reason}	Furtawa ta tsaya: {reason}
+	Different First Page	Shafin Farko Daban
+	Different Odd & Even Pages	Shafuka Masu Mara da Masu Cika Daban
+	Differential	Bambancin lissafi
+	Differential theta	Bambancin theta
+	Differential x	Bambancin x
+	Differential y	Bambancin y
+	Differentials	Bambance-bambancen lissafi
+	Direct formatting	Tsari kai tsaye
+	Direction:	Alƙibla:
+	Directory	Kundin adireshi
+	Display	Nuni
+	Display for Review	Nuni don Bita
+	Display gridlines on screen	Nuna layukan grid a allo
+	Display name	Sunan nuni
+	Display text	Rubutun nuni
+	Distance from surrounding text	Nisa daga rubutun da ke kewaye
+	Distribute Columns	Raba Ginshiƙai Daidai
+	Distribute letters	Raba haruffa daidai
+	Distribute Rows	Raba Jeruka Daidai
+	Distribute spacing	Raba tazara daidai
+	Distributed	An raba daidai
+	Do Not Check Spelling or Grammar	Kada a Duba Rubutun Kalmomi ko Nahawu
+	Do not check spelling or grammar	Kada a duba rubutun kalmomi ko nahawu
+	DO NOT COPY	KADA A KWAFA
+	Do Not Show in TOC	Kada a Nuna a Jerin Abubuwan Ciki
+	Do you want to save changes to {name}?	Kana son ajiye canje-canje a {name}?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Ƙarin shirye-shiryen Doc4Me fakitin macro ne kyauta daga kundin ƙarin shirye-shirye na Doc4Me. Suna iya gyara takardar kawai.
+	Doc4Me is now the default app for Word documents.	Doc4Me yanzu ita ce tsohuwar manhaja don takardun Word.
+	Document	Takarda
+	Document End	Ƙarshen Takarda
+	Document Formatting	Tsarin Takarda
+	Document Grid	Grid na Takarda
+	Document Information	Bayanan Takarda
+	Document Property	Kadarar Takarda
+	Document Start	Farkon Takarda
+	Document template:	Samfurin takarda:
+	Document Text	Rubutun Takarda
+	Document Title	Taken Takarda
+	Document1	Takarda1
+	Document\nPreferences	Fifikon\nTakarda
+	Documents	Takardu
+	Documents you open will show up here.	Takardun da ka buɗe za su bayyana a nan.
+	Does not contain	Bai ƙunshi ba
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Kada a ƙara sarari tsakanin sakin layi masu salo iri ɗaya
+	Don't capitalize after:	Kada a sa babban baƙi bayan:
+	Don't hyphenate	Kada a raba kalma
+	Don't print blank lines when data fields are empty	Kada a buga layuka fanko idan filayen bayanai babu komai
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Kada a karanta ambato da manazartan Zotero, Mendeley ko EndNote
+	Don't Save	Kada a Ajiye
+	Don't use HTML paragraph auto spacing	Kada a yi amfani da tazarar sakin layi ta HTML kai-tsaye
+	Dot	Ɗigo
+	Dot dash	Ɗigo da karan layi
+	Dot-dash	Ɗigo-karan layi
+	Dots	Ɗigogi
+	Dotted	Mai ɗigo-ɗigo
+	Double	Biyu
+	Double Bar	Sanda Biyu
+	Double Closing Quote	Alamar Rufe Zance Biyu
+	Double Dot	Ɗigo Biyu
+	Double Integral	Haɗi Biyu
+	Double Integral with Limits	Haɗi Biyu da Iyakoki
+	Double Integral with Stacked Limits	Haɗi Biyu da Iyakoki a Tari
+	Double Left Arrow with Text Above	Kibiya Biyu ta Hagu da Rubutu a Sama
+	Double Left Arrow with Text Below	Kibiya Biyu ta Hagu da Rubutu a Ƙasa
+	Double Left Right Arrow with Text Above	Kibiya Biyu ta Hagu da Dama da Rubutu a Sama
+	Double Left Right Arrow with Text Below	Kibiya Biyu ta Hagu da Dama da Rubutu a Ƙasa
+	Double Opening Quote	Alamar Buɗe Zance Biyu
+	Double Right Arrow with Text Above	Kibiya Biyu ta Dama da Rubutu a Sama
+	Double Right Arrow with Text Below	Kibiya Biyu ta Dama da Rubutu a Ƙasa
+	Double Spacing	Tazara Biyu
+	Double Square Brackets	Bakuna Masu Kusurwa Biyu
+	Double Strikethrough	Layin Gogewa Biyu
+	Double strikethrough	Layin gogewa biyu
+	Double summation	Jimla biyu
+	Double Underline	Ja Layi Biyu a Ƙasa
+	Double Vertical Bars	Sanduna Biyu a Tsaye
+	Doughnut	Fanke
+	Down	Ƙasa
+	Downloading the speech model ({mb} MB, once)…	Ana sauke samfurin magana ({mb} MB, sau ɗaya)…
+	Downloading…	Ana saukewa…
+	DRAFT	DAFTARI
+	Draft	Daftari
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Ja murabba'i don zana tebur, ko layi a kan sel don raba su. Esc yana tsayarwa.
+	Draw	Zana
+	Draw Ink	Zana da Tawada
+	Draw Table	Zana Tebur
+	Draw\nTable	Zana\nTebur
+	Drawing Canvas	Allon Zane
+	Drawing Grid	Grid na Zane
+	Drawing Tools	Kayan Aikin Zane
+	Drawing\nCanvas	Allon\nZane
+	Drop Cap	Babban Baƙin Farko
+	Drop cap	Babban baƙin farko
+	Drop-Down List Content Control	Sarrafa Abun Ciki na Jerin Zaɓe
+	Drops all formatting and pastes plain text.	Yana cire duk tsari ya liƙa rubutu zalla.
+	Dutch	Holanci
+	E-mail Messages	Saƙonnin Imel
+	Edit Category	Gyara Rukuni
+	Edit Comment	Gyara Sharhi
+	Edit Data	Gyara Bayanai
+	Edit Document	Gyara Takarda
+	Edit Equation	Gyara Lissafi
+	Edit Field Code	Gyara Lambar Fili
+	Edit Field…	Gyara Fili…
+	Edit Footer	Gyara Ƙasan Shafi
+	Edit Header	Gyara Kan Shafi
+	Edit Individual Documents…	Gyara Takardu Ɗaiɗaiku…
+	Edit Items	Gyara Abubuwa
+	Edit Recipient List	Gyara Jerin Masu Karɓa
+	Edit Source	Gyara Tushe
+	Edit\nData	Gyara\nBayanai
+	Edit\nRecipient List	Gyara Jerin\nMasu Karɓa
+	Edited	An gyara
+	Editing	Gyarawa
+	Editing header/footer	Ana gyara kan shafi/ƙasan shafi
+	Editing in this document is restricted.	An ƙuntata gyara a wannan takarda.
+	Editing — edit the document directly	Gyarawa — gyara takardar kai tsaye
+	Edition	Bugu
+	Editor	Edita
+	Edit…	Gyara…
+	Effects	Tasiri
+	Elbow Arrow Connector	Mahaɗin Kibiya Mai Gwiwa
+	Elbow Connector	Mahaɗi Mai Gwiwa
+	Ellipsis	Ɗigo Uku
+	Em Dash	Doguwar Karan Layi
+	Em Space	Sararin Em
+	Email address (optional)	Adireshin imel (na zaɓi)
+	Emboss	Ɗago
+	Emphasis	Ƙarfafawa
+	Empty Matrices	Matris Fanko
+	En Dash	Matsakaiciyar Karan Layi
+	En Space	Sararin En
+	Enclose Characters	Kewaye Haruffa
+	Enclosure	Kewayewa
+	Encrypt with Password	Ɓoye da Kalmar Sirri
+	Encrypt with Password…	Ɓoye da Kalmar Sirri…
+	End of document	Ƙarshen takarda
+	End of section	Ƙarshen sashe
+	End of Word	Ƙarshen Kalma
+	Endnote Reference	Madogarar Bayanin Ƙarshe
+	Endnote Text	Rubutun Bayanin Ƙarshe
+	Endnotes	Bayanan Ƙarshe
+	Endnotes to footnotes	Bayanan ƙarshe zuwa bayanan ƙasa
+	English	Turanci
+	English (United Kingdom)	Turanci (Birtaniya)
+	English (United States)	Turanci (Amurka)
+	Engrave	Sassaƙa
+	Enlarge symbol	Ƙara girman alama
+	Enter formatting for number:	Shigar da tsari don lamba:
+	Enter in Equation	Shigarwa a Lissafi
+	Enter page number:	Shigar da lambar shafi:
+	Enter the web address or embed code of an online video:	Shigar da adireshin yanar gizo ko lambar sakawa na bidiyon intanet:
+	Entry marked.	An yi wa shigarwa alama.
+	Entry:	Shigarwa:
+	Envelope #10   4.12" × 9.50"	Ambulan #10   4.12" × 9.50"
+	Envelope Address	Adireshin Ambulan
+	Envelope DL   4.33" × 8.66"	Ambulan DL   4.33" × 8.66"
+	Envelope Return	Adireshin Mai Aikawa
+	Envelope size:	Girman ambulan:
+	Envelopes	Ambulan
+	Equal by Definition	Daidai bisa Ma'ana
+	Equal column width	Faɗin ginshiƙi daidai
+	Equal Equal	Daidai Daidai
+	Equal to	Daidai da
+	Equals:	Daidai:
+	Equation	Lissafi
+	Equation Gallery	Tarin Lissafi
+	Equation Info	Bayanan Lissafi
+	Equation Number	Lambar Lissafi
+	Equation Options	Zaɓuɓɓukan Lissafi
+	Erase Ink	Goge Tawada
+	Eraser	Magogi
+	Errors ({n})	Kurakurai ({n})
+	Estonian	Harshen Estoniya
+	Euler's identity	Shaidar Euler
+	Even Page	Shafi Mai Cika
+	Even pages only	Shafuka masu cika kawai
+	Every change is recorded as a tracked change.	Ana rubuta kowane canji a matsayin canjin da ake bibiya.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Kowane umarni yana samuwa ga rubutun shirye-shirye da wakilan AI: gudanar da `doc4me-cli mcp` don sabar MCP, ko fara manhajar da `--control <port>` don tashar sarrafa JSON.
+	Every field needs a name.	Kowane fili yana buƙatar suna.
+	Every font this document uses is installed.	An shigar da duk nau'in rubutun da wannan takarda ke amfani da shi.
+	Everyone	Kowa
+	Exactly	Daidai
+	Exactly {n}	Daidai {n}
+	Example: {sample}	Misali: {sample}
+	Exceptions (optional)	Keɓaɓɓu (na zaɓi)
+	Exceptions…	Keɓaɓɓu…
+	Executive   7.25" × 10.50"	Executive   7.25" × 10.50"
+	Exit	Fita
+	Expand	Faɗaɗa
+	Expand or Collapse Heading	Faɗaɗa ko Naɗe Kanu
+	Expanded	Faɗaɗɗe
+	Exponential	Mai ƙarfi
+	Exponential series	Jerin mai ƙarfi
+	Export	Fitarwa
+	Export a copy to share (PDF, Word document)	Fitar da kwafi don rabawa (PDF, takardar Word)
+	Export Page as JPEG	Fitar da Shafi a Matsayin JPEG
+	Export Page as PNG	Fitar da Shafi a Matsayin PNG
+	Export PDF	Fitar da PDF
+	Exported {path}	An fitar da {path}
+	Expression	Furuci
+	Extend Selection	Faɗaɗa Zaɓi
+	Extend Selection by Units	Faɗaɗa Zaɓi da Raka'a
+	Extra space	Ƙarin sarari
+	Extra spaces between words.	Ƙarin sarari tsakanin kalmomi.
+	Field	Fili
+	Field Click	Danna Fili
+	Field code:	Lambar fili:
+	Field Codes	Lambobin Fili
+	Field codes:	Lambobin fili:
+	Field name	Sunan fili
+	Field name:	Sunan fili:
+	Field names must be different.	Dole sunayen filaye su bambanta.
+	Field names:	Sunayen filaye:
+	Field properties	Kaddarorin fili
+	Field:	Fili:
+	Fields	Filaye
+	Fields to insert:	Filayen da za a saka:
+	Fields:	Filaye:
+	Field…	Fili…
+	Figure	Hoto
+	File	Fayil
+	File name:	Sunan fayil:
+	Fill	Cikawa
+	Fill & Line	Cikawa da Layi
+	Fill color:	Launin cikawa:
+	Fill:	Cikawa:
+	Filling in forms	Cike fom
+	Film	Fim
+	Filter and Sort	Tace da Jera
+	Filter and Sort…	Tace da Jera…
+	Filter Records	Tace Bayanai
+	Find	Nemo
+	Find and Replace	Nemo da Maye Gurbin
+	Find Next	Nemo Na Gaba
+	Find Next Editable Region	Nemo Yanki na Gaba da Za a Iya Gyarawa
+	Find Previous	Nemo Na Baya
+	Find Recipient	Nemo Mai Karɓa
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Nemo yana zaɓar sakin layi na gaba da aka canza; Ƙi yana mayar da wanda aka zaɓa yadda yake a da.
+	Find What Expression	Furucin Abin da Za a Nemo
+	Find What Text	Rubutun Abin da Za a Nemo
+	Find what:	Nemo me:
+	Find →	Nemo →
+	Find:	Nemo:
+	Finish	Kammala
+	Finish & Merge	Kammala da Haɗa
+	Finish &\nMerge	Kammala da\nHaɗa
+	Finished	An kammala
+	Finnish	Harshen Finland
+	First	Na farko
+	First Cell in Column	Sel na Farko a Ginshiƙi
+	First Cell in Row	Sel na Farko a Jere
+	First Column	Ginshiƙi na Farko
+	First commit	Commit na farko
+	First line	Layin farko
+	First line:	Layin farko:
+	First Name	Sunan Farko
+	First row of data contains column headers	Jeren farko na bayanai yana ɗauke da kanun ginshiƙai
+	Fit	Daidaita
+	Fit text	Daidaita rubutu
+	Fix Position on Page	Kafa Matsayi a Shafi
+	Fixed Column Width	Faɗin Ginshiƙi Tsayayye
+	Flip Horizontal	Juya a Kwance
+	Flip Vertical	Juya a Tsaye
+	Floor	Bene
+	Focus	Mai da hankali
+	Follow number with:	Bi lamba da:
+	Font	Nau'in rubutu
+	Font Color	Launin Rubutu
+	Font color	Launin rubutu
+	Font color:	Launin rubutu:
+	Font Dialog	Akwatin Nau'in Rubutu
+	Font not installed	Ba a shigar da nau'in rubutun ba
+	Font Size	Girman Rubutu
+	Font Substitution	Maye Gurbin Nau'in Rubutu
+	Font Substitution…	Maye Gurbin Nau'in Rubutu…
+	Font:	Nau'in rubutu:
+	Font: {font}	Nau'in rubutu: {font}
+	Fonts	Nau'ukan rubutu
+	Font…	Nau'in rubutu…
+	Footer	Ƙasan shafi
+	Footnote and Endnote	Bayanin Ƙasa da Bayanin Ƙarshe
+	Footnote Reference	Madogarar Bayanin Ƙasa
+	Footnote Text	Rubutun Bayanin Ƙasa
+	Footnotes	Bayanan Ƙasa
+	Footnotes and endnotes	Bayanan ƙasa da bayanan ƙarshe
+	Footnotes to endnotes	Bayanan ƙasa zuwa bayanan ƙarshe
+	Form Letters	Wasiƙun Samfuri
+	Format	Tsari
+	Format Page Numbers	Tsara Lambobin Shafi
+	Format Page Numbers…	Tsara Lambobin Shafi…
+	Format Painter	Mai Zanen Tsari
+	Format Picture	Tsara Hoto
+	Format Shape	Tsara Siffa
+	Format:	Tsari:
+	Formatted	An tsara
+	Formatted Text	Rubutu Mai Tsari
+	Formatting	Tsarawa
+	Formatting at Selection	Tsari a Wurin Zaɓi
+	Formatting completed. You can now:	An kammala tsarawa. Yanzu za ka iya:
+	Formatting exceptions	Keɓaɓɓun tsari
+	Formatting marks	Alamomin tsari
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Ana kwatanta tsari, canjin girman baƙaƙe, sarari da teburori; sauran saitunan ana ajiye su don gaba.
+	Formula	Dabara
+	Forward	Gaba
+	Fraction	Ɓangare
+	Fractions (1/2) as fraction characters (½)	Ɓangarori (1/2) a matsayin haruffan ɓangare (½)
+	French	Faransanci
+	French (France)	Faransanci (Faransa)
+	From	Daga
+	From text:	Daga rubutu:
+	from Unicode (hex)	daga Unicode (hex)
+	From:	Daga:
+	Full page of the same label	Cikakken shafi na lakabi iri ɗaya
+	Function	Aiki
+	Functions	Ayyuka
+	Gallery	Tari
+	GB/T 7714	GB/T 7714
+	General	Gama-gari
+	Geometry	Lissafin siffofi
+	German	Jamusanci
+	German (Germany)	Jamusanci (Jamus)
+	Get Add-ins	Samo Ƙarin Shirye-shirye
+	Get Data	Samo Bayanai
+	Get Data…	Samo Bayanai…
+	Getting ready…	Ana shiryawa…
+	Glow	Haske
+	Glow Colors	Launukan Haske
+	Go Back	Koma Baya
+	Go To	Je Zuwa
+	Go to	Je zuwa
+	Go To…	Je Zuwa…
+	Good afternoon	Barka da rana
+	Good evening	Barka da yamma
+	Good morning	Barka da safiya
+	GOST (name sort)	GOST (jera bisa suna)
+	GOST (title sort)	GOST (jera bisa take)
+	Grab bag	Haɗe-haɗe
+	Grammar	Nahawu
+	Grammar Settings	Saitunan Nahawu
+	Graphic	Zane
+	Grave	Grave
+	Greater than	Ya fi
+	Greater than or equal	Ya fi ko daidai
+	Greek	Girkanci
+	Greek Letters	Haruffan Girkanci
+	Green:	Kore:
+	Greeting Line	Layin Gaisuwa
+	Greeting\nLine	Layin\nGaisuwa
+	Grid Settings	Saitunan Grid
+	Grid Table 1 Light	Teburin Grid 1 Mai Haske
+	Grid Table 4 – Blue	Teburin Grid 4 – Shuɗi
+	Grid Table 4 – Green	Teburin Grid 4 – Kore
+	Grid Table 4 – Orange	Teburin Grid 4 – Lemu
+	Grid Table 4 – Purple	Teburin Grid 4 – Shunayya
+	Gridlines	Layukan grid
+	Group	Rukuni
+	Grouping Character Above	Alamar Haɗawa a Sama
+	Grouping Character Below	Alamar Haɗawa a Ƙasa
+	Grow Font 1 Point	Ƙara Rubutu da Maki 1
+	H:	T:
+	Hanging Indent	Shigar Ciki Mai Rataya
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Hula
+	Header	Kan shafi
+	Header & Footer	Kan Shafi da Ƙasan Shafi
+	Header Options	Zaɓuɓɓukan Kan Shafi
+	Header Options:	Zaɓuɓɓukan Kan Shafi:
+	Header Row	Jeren Kanu
+	Header source: {file} (the next data source opened here takes its field names)	Tushen kanu: {file} (tushen bayanai na gaba da aka buɗe a nan zai ɗauki sunayen filayensa)
+	Header/Footer Position	Matsayin Kan Shafi/Ƙasan Shafi
+	Headers and footers	Kan shafi da ƙasan shafi
+	Heading 1	Kanu 1
+	Heading 2	Kanu 2
+	Heading 3	Kanu 3
+	Heading styles (levels 1–{n})	Salon kanu (matakai 1–{n})
+	Heading {n}	Kanu {n}
+	Headings	Kanu
+	Heart	Zuciya
+	Hebrew	Ibrananci
+	Height:	Tsayi:
+	Help	Taimako
+	Hex:	Hex:
+	Hidden	Ɓoyayye
+	Hidden text	Rubutu ɓoyayye
+	Hide Codes	Ɓoye Lambobi
+	Hide from style lists	Ɓoye daga jerin salo
+	Hide Ink	Ɓoye Tawada
+	Hide White Space	Ɓoye Farin Sarari
+	Hide\nInk	Ɓoye\nTawada
+	Hierarchy	Matsayi-matsayi
+	Highlight	Haskaka
+	Highlight Changes	Haskaka Canje-canje
+	Highlight changes in printed document	Haskaka canje-canje a takardar da aka buga
+	Highlight changes on screen	Haskaka canje-canje a allo
+	Highlight Merge Fields	Haskaka Filayen Haɗawa
+	Highlight\nMerge Fields	Haskaka\nFilayen Haɗawa
+	Highlighter	Alƙalamin haskakawa
+	Hindi	Hindi
+	Historical and Discretional	Na Tarihi da Na Zaɓi
+	Hollow	Mai rami
+	Home	Gida
+	Home folder	Babban fayil na gida
+	Horizontal	A kwance
+	Horizontal Line	Layi a Kwance
+	Horizontal spacing:	Tazara a kwance:
+	How many pages the whole document has	Shafuka nawa dukkan takardar ke da su
+	How many pages this section has	Shafuka nawa wannan sashe ke da su
+	How many words the document holds	Kalmomi nawa takardar ke ɗauke da su
+	HTML Format	Tsarin HTML
+	Hue:	Launin asali:
+	Hungarian	Harshen Hungary
+	Hyperbolic Cosecant Function	Aikin Cosecant na Hyperbolic
+	Hyperbolic Cosine Function	Aikin Cosine na Hyperbolic
+	Hyperbolic Cotangent Function	Aikin Cotangent na Hyperbolic
+	Hyperbolic Functions	Ayyukan Hyperbolic
+	Hyperbolic Secant Function	Aikin Secant na Hyperbolic
+	Hyperbolic Sine Function	Aikin Sine na Hyperbolic
+	Hyperbolic Tangent Function	Aikin Tangent na Hyperbolic
+	Hyperlink	Mahaɗin yanar gizo
+	Hyphenate at:	Raba kalma a:
+	Hyphenate words in CAPS	Raba kalmomi masu MANYAN BAƘAƘE
+	Hyphenation	Raba kalmomi
+	Hyphenation Options…	Zaɓuɓɓukan Raba Kalmomi…
+	Hyphenation zone:	Yankin raba kalmomi:
+	Hyphens (--) as dashes (—)	Karan layi (--) a matsayin doguwar karan layi (—)
+	Hypotenuse	Hypotenuse
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Launin Gunki
+	Icons	Gumaka
+	Identity Matrices	Matris Shaida
+	IEEE	IEEE
+	If…Then…Else	Idan…To…In ba haka ba
+	If…Then…Else…	Idan…To…In ba haka ba…
+	Ignore All	Yi Watsi da Duka
+	Ignore punctuation characters	Yi watsi da alamomin rubutu
+	Ignore web and file addresses	Yi watsi da adireshin yanar gizo da na fayil
+	Ignore white-space characters	Yi watsi da haruffan sarari
+	Ignore words in capitals	Yi watsi da kalmomi masu manyan baƙaƙe
+	Ignore words with numbers	Yi watsi da kalmomi masu lambobi
+	Illustrations	Misalai
+	Immersive	Mai nutsarwa
+	Immersive Reader	Mai Karatu Mai Nutsarwa
+	Immersive\nReader	Mai Karatu\nMai Nutsarwa
+	In Default apps, choose Doc4Me for the document types you want it to open.	A cikin Tsoffin manhajoji, zaɓi Doc4Me don nau'ukan takardun da kake son ta buɗe.
+	In equations, typing a name after a backslash replaces it with its symbol.	A cikin lissafi, buga suna bayan backslash yana maye gurbinsa da alamarsa.
+	In Front of Text	A Gaban Rubutu
+	In Line with Text	A Cikin Layi da Rubutu
+	Inches	Inci
+	Include label and number	Haɗa lakabi da lamba
+	Include level number from:	Haɗa lambar mataki daga:
+	Include page numbers	Haɗa lambobin shafi
+	Increase Font Size	Ƙara Girman Rubutu
+	Increase Indent	Ƙara Shigar Ciki
+	Indent	Shigar ciki
+	Indent from left:	Shigar ciki daga hagu:
+	Indentation	Shigar ciki
+	Indented	Mai shigar ciki
+	Indents	Shigar Ciki
+	Indents and Spacing	Shigar Ciki da Tazara
+	Index	Fihirisa
+	Index and Tables	Fihirisa da Teburori
+	Index Heading	Kanun Fihirisa
+	Index {n}	Fihirisa {n}
+	Indonesian	Harshen Indonesiya
+	Inflate	Kumbura
+	Info	Bayani
+	Initials:	Baƙaƙen farko:
+	Ink	Tawada
+	Ink Equation	Lissafi da Tawada
+	Ink Replay	Maimaita Tawada
+	Ink to Math	Tawada zuwa Lissafi
+	Ink to Shape	Tawada zuwa Siffa
+	Ink to\nMath	Tawada zuwa\nLissafi
+	Ink to\nShape	Tawada zuwa\nSiffa
+	Ink\nReplay	Maimaita\nTawada
+	Inline	A cikin layi
+	Input Format	Tsarin Shigarwa
+	Insert	Saka
+	Insert a 3D model from a file (.glb, .stl, .obj)	Saka samfurin 3D daga fayil (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Saka sabon lissafi (Alt+=)
+	Insert Above	Saka a Sama
+	Insert Below	Saka a Ƙasa
+	Insert Caption	Saka Taken Bayani
+	Insert Cells	Saka Sel
+	Insert Chart	Saka Jadawali
+	Insert Citation	Saka Ambato
+	Insert Columns to the Left	Saka Ginshiƙai a Hagu
+	Insert Columns to the Right	Saka Ginshiƙai a Dama
+	Insert Data	Saka Bayanai
+	Insert Database	Saka Rumbun Bayanai
+	Insert Database…	Saka Rumbun Bayanai…
+	Insert Date Field	Saka Filin Kwanan Wata
+	Insert Endnote	Saka Bayanin Ƙarshe
+	Insert entire column	Saka dukkan ginshiƙi
+	Insert entire row	Saka dukkan jere
+	Insert Footnote	Saka Bayanin Ƙasa
+	Insert Hyperlink	Saka Mahaɗin Yanar Gizo
+	Insert Index	Saka Fihirisa
+	Insert Left	Saka a Hagu
+	Insert LISTNUM Field	Saka Filin LISTNUM
+	Insert Merge Field	Saka Filin Haɗawa
+	Insert Merge\nField	Saka Filin\nHaɗawa
+	Insert New Equation	Saka Sabon Lissafi
+	Insert one text or another, depending on a field's value.	Saka wani rubutu ko wani, gwargwadon ƙimar fili.
+	Insert Page Field	Saka Filin Shafi
+	Insert Right	Saka a Dama
+	Insert Rows	Saka Jeruka
+	Insert Rows Above	Saka Jeruka a Sama
+	Insert Rows Below	Saka Jeruka a Ƙasa
+	Insert Shapes	Saka Siffofi
+	Insert SmartArt	Saka SmartArt
+	Insert Structure	Saka Tsari
+	Insert Symbol	Saka Alama
+	Insert Table	Saka Tebur
+	Insert Table of Authorities	Saka Teburin Hukumomi
+	Insert Table of Figures	Saka Teburin Hotuna
+	Insert Table…	Saka Tebur…
+	Insert Time Field	Saka Filin Lokaci
+	Insert Video	Saka Bidiyo
+	Insert\nAbove	Saka\na Sama
+	Insert\nCaption	Saka\nTaken Bayani
+	Insert\nCitation	Saka\nAmbato
+	Insert\nFootnote	Saka Bayanin\nƘasa
+	Inserted	An saka
+	Insertions and Deletions	Sakawa da Sharewa
+	Insertions:	Abubuwan da aka saka:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Sakawa: {ins}, sharewa: {del}, motsawa: {moves}, tsari: {fmt}, sharhohi: {comments}
+	Inside	Ciki
+	Inside Borders	Iyakokin Ciki
+	Inside Margin	Gefen Ciki
+	Inside:	Ciki:
+	Inspect Document	Bincika Takarda
+	Inspect Styles at Selection	Bincika Salo a Wurin Zaɓi
+	Institution	Cibiya
+	Integral	Haɗi
+	Integral of e^(−x²)	Haɗin e^(−x²)
+	Integral with Limits	Haɗi da Iyakoki
+	Integral with Stacked Limits	Haɗi da Iyakoki a Tari
+	Integrals	Haɗe-haɗe
+	Intense Emphasis	Ƙarfafawa Mai Tsanani
+	Intense Quote	Zance Mai Tsanani
+	Intense Reference	Nuni Mai Tsanani
+	Interface	Fuskar manhaja
+	Interface language	Harshen fuskar manhaja
+	Interface language:	Harshen fuskar manhaja:
+	Interface size:	Girman fuskar manhaja:
+	Interface Theme	Jigon Fuskar Manhaja
+	Interface theme:	Jigon fuskar manhaja:
+	Interface\nTheme	Jigon Fuskar\nManhaja
+	Internet addresses as links	Adireshin intanet a matsayin mahaɗi
+	Intersection	Mahaɗa
+	Intersection with Limits	Mahaɗa da Iyakoki
+	Intersection with Lower Limit	Mahaɗa da Iyakar Ƙasa
+	Intersection with Subscript-Superscript Limits	Mahaɗa da Iyakokin Ƙasa-Sama
+	Inverse Cosecant Function	Aikin Cosecant na Juyawa
+	Inverse Cosine Function	Aikin Cosine na Juyawa
+	Inverse Cotangent Function	Aikin Cotangent na Juyawa
+	Inverse Functions	Ayyukan Juyawa
+	Inverse Hyperbolic Cosecant Function	Aikin Cosecant na Hyperbolic na Juyawa
+	Inverse Hyperbolic Cosine Function	Aikin Cosine na Hyperbolic na Juyawa
+	Inverse Hyperbolic Cotangent Function	Aikin Cotangent na Hyperbolic na Juyawa
+	Inverse Hyperbolic Functions	Ayyukan Hyperbolic na Juyawa
+	Inverse Hyperbolic Secant Function	Aikin Secant na Hyperbolic na Juyawa
+	Inverse Hyperbolic Sine Function	Aikin Sine na Hyperbolic na Juyawa
+	Inverse Hyperbolic Tangent Function	Aikin Tangent na Hyperbolic na Juyawa
+	Inverse Secant Function	Aikin Secant na Juyawa
+	Inverse Sine Function	Aikin Sine na Juyawa
+	Inverse Tangent Function	Aikin Tangent na Juyawa
+	Ionosphere	Ionosphere
+	Is blank	Babu komai
+	Is not blank	Ba fanko ba ne
+	ISO 690 (author-date)	ISO 690 (marubuci-kwanan wata)
+	ISO 690 (numerical)	ISO 690 (na lambobi)
+	Issue	Fitowa
+	it isn't a picture Doc4Me can read	ba hoto ne da Doc4Me za ta iya karantawa ba
+	Italian	Italiyanci
+	Italic	Karkatacce
+	Japanese	Japananci
+	Journal	Mujalla
+	Justification	Daidaitawa
+	Justification of a display equation	Daidaita lissafin nuni
+	Justified	An daidaita gefe biyu
+	Justify	Daidaita gefe biyu
+	Keep Lines Together	Riƙe Layuka Tare
+	Keep lines together	Riƙe layuka tare
+	Keep Source Formatting	Riƙe Tsarin Tushe
+	Keep Text Only	Riƙe Rubutu Kawai
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Ajiye kalmar sirri a wuri mai aminci: in ba ita, babu wanda zai iya buɗe takardar, har da Doc4Me. Bar akwatunan biyu fanko don cire kalmar sirri.
+	Keep with Next	Riƙe da Na Gaba
+	Keep with next	Riƙe da na gaba
+	Keeps the fonts and formatting of the copied text.	Yana riƙe nau'ukan rubutu da tsarin rubutun da aka kwafa.
+	Kerning for fonts:	Matse haruffa ga nau'in rubutu:
+	Keyboard shortcuts:	Gajerun hanyoyin madannai:
+	Keys for this command:	Maɓallan wannan umarni:
+	Keywords	Kalmomin maɓalli
+	Korean	Koriyanci
+	Label changes with:	Lakabi yana canzawa tare da:
+	Label:	Lakabi:
+	Labels	Lakabi
+	Landscape	A kwance
+	Language	Harshe
+	Language Preferences…	Fifikon Harshe…
+	Language…	Harshe…
+	Large\nOperator	Babban Mai\nAiki
+	Largest Only	Mafi Girma Kawai
+	Largest only	Mafi girma kawai
+	Lasso	Igiya
+	Lasso Select	Zaɓi da Igiya
+	Last	Na ƙarshe
+	Last Cell in Column	Sel na Ƙarshe a Ginshiƙi
+	Last Cell in Row	Sel na Ƙarshe a Jere
+	Last Column	Ginshiƙi na Ƙarshe
+	Last commit	Commit na ƙarshe
+	Last Name	Sunan Ƙarshe
+	Last, First; Last, First	Ƙarshe, Farko; Ƙarshe, Farko
+	Latin text font:	Nau'in rubutun Latin:
+	Layout	Tsari
+	Layout options for this document	Zaɓuɓɓukan tsari don wannan takarda
+	Layout Summary	Taƙaitaccen Tsari
+	Layouts	Tsare-tsare
+	Leader	Jagora
+	Leave a recipient out of the merge when a field has this value.	Cire mai karɓa daga haɗawa idan fili yana da wannan ƙima.
+	Leave Equation	Bar Lissafi
+	Leave the equation (Esc)	Bar lissafin (Esc)
+	Leave the label out of the caption	Cire lakabin daga taken bayani
+	Left	Hagu
+	Left Arrow with Text Above	Kibiyar Hagu da Rubutu a Sama
+	Left Arrow with Text Below	Kibiyar Hagu da Rubutu a Ƙasa
+	Left Border	Iyakar Hagu
+	Left border	Iyakar hagu
+	Left Bracket Twice	Baka na Hagu Sau Biyu
+	Left indent	Shigar ciki na hagu
+	Left Margin	Gefen Hagu
+	Left Only	Hagu Kawai
+	Left only	Hagu kawai
+	Left Right Arrow Above	Kibiyar Hagu da Dama a Sama
+	Left Right Arrow with Text Above	Kibiyar Hagu da Dama da Rubutu a Sama
+	Left Right Arrow with Text Below	Kibiyar Hagu da Dama da Rubutu a Ƙasa
+	Left Subscript-Superscript	Rubutun Ƙasa-Sama na Hagu
+	Left-to-right	Hagu-zuwa-dama
+	Left-to-Right Text Direction	Alƙiblar Rubutu Hagu-zuwa-Dama
+	Left:	Hagu:
+	Leftwards Arrow Above	Kibiya Mai Nufin Hagu a Sama
+	Leftwards Harpoon Above	Ƙugiya Mai Nufin Hagu a Sama
+	Legal   8.50" × 14.00"	Legal   8.50" × 14.00"
+	Legal style numbering	Lambobi irin na shari'a
+	Legend	Mabuɗi
+	Less than	Ya gaza
+	Less than or equal	Ya gaza ko daidai
+	Letter	Wasiƙa
+	Letter   8.50" × 11.00"	Letter   8.50" × 11.00"
+	Letter headings	Kanun wasiƙa
+	Letter-Like Symbols	Alamomi Masu Kama da Haruffa
+	Letters	Wasiƙu
+	Level 1	Mataki na 1
+	Level 2	Mataki na 2
+	Level 3	Mataki na 3
+	Level 4	Mataki na 4
+	Level 5	Mataki na 5
+	Level 6	Mataki na 6
+	Level 7	Mataki na 7
+	Level 8	Mataki na 8
+	Level 9	Mataki na 9
+	Level {n}	Mataki na {n}
+	Level:	Mataki:
+	Levels:	Matakai:
+	LibreTranslate server (open source)	Sabar LibreTranslate (buɗaɗɗen tushe)
+	Ligatures:	Haɗaɗɗun haruffa:
+	Light	Mai haske
+	Light with Outline	Mai Haske da Shaci
+	Limit	Iyaka
+	Limit and\nLog	Iyaka da\nLog
+	Limit consecutive hyphens to:	Iyakance zaren haɗa a jere zuwa:
+	Limit Example	Misalin Iyaka
+	Limit formatting to a selection of styles	Iyakance tsari zuwa zaɓaɓɓun salo
+	Line	Layi
+	Line and Page Breaks	Karya Layi da Shafi
+	Line and Paragraph Spacing	Tazarar Layi da Sakin Layi
+	Line between	Layi a tsakani
+	Line Break	Karya Layi
+	Line breaking	Karya layi
+	Line delta	Delta na layi
+	Line End	Ƙarshen Layi
+	Line Number	Lambar Layi
+	Line Numbering Options…	Zaɓuɓɓukan Lambobin Layi…
+	Line Numbers	Lambobin Layi
+	Line Spacing	Tazarar Layi
+	Line spacing	Tazarar layi
+	Line Spacing Options…	Zaɓuɓɓukan Tazarar Layi…
+	Line spacing:	Tazarar layi:
+	Line Start	Farkon Layi
+	Line width:	Faɗin layi:
+	Line:	Layi:
+	Linear	Layi ɗaya
+	Linear Fraction	Ɓangare a Layi Ɗaya
+	Lines	Layuka
+	Lines +/−	Layuka +/−
+	Lines added	Layukan da aka ƙara
+	Lines and characters	Layuka da haruffa
+	Lines deleted	Layukan da aka share
+	Lines only	Layuka kawai
+	Lines per page:	Layuka a kowane shafi:
+	Link	Mahaɗi
+	Link entries to their headings	Haɗa shigarwa da kanunsu
+	Link level to style:	Haɗa mataki da salo:
+	Link to Previous	Haɗa da Na Baya
+	Linked style (paragraph and character)	Salo mai haɗi (sakin layi da harafi)
+	Links	Mahaɗai
+	Links and References	Mahaɗai da Nassoshi
+	Link…	Mahaɗi…
+	List	Jeri
+	List Commands	Jera Umarni
+	List Definition	Ma'anar Jeri
+	List entries	Shigarwar jeri
+	List Paragraph	Sakin Layi na Jeri
+	List styles	Salon jeri
+	List Table 3 – Blue	Teburin Jeri 3 – Shuɗi
+	List Table 3 – Green	Teburin Jeri 3 – Kore
+	List Table 3 – Orange	Teburin Jeri 3 – Lemu
+	List Table 3 – Purple	Teburin Jeri 3 – Shunayya
+	Listening… speak now	Ana saurare… yi magana yanzu
+	Location	Wuri
+	Location: {path}	Wuri: {path}
+	Lock aspect ratio	Kulle rabon girma
+	Lock Fields	Kulle Filaye
+	Logarithm	Logarithm
+	Logarithm with Base	Logarithm da Tushe
+	Logical AND	AND na Hankali
+	Logical AND with Limits	AND na Hankali da Iyakoki
+	Logical OR	OR na Hankali
+	Logical OR with Limits	OR na Hankali da Iyakoki
+	Long citation:	Dogon ambato:
+	lowercase	ƙananan baƙaƙe
+	Lum:	Haske:
+	Macros	Macro
+	Made from the author and year when empty	Ana yin sa daga marubuci da shekara idan babu komai
+	Magazine or newspaper article	Maƙala a mujalla ko jarida
+	Mail Merge	Haɗa Wasiƙu
+	Mail Merge Helper	Mataimakin Haɗa Wasiƙu
+	Mail Merge Helper…	Mataimakin Haɗa Wasiƙu…
+	Mailing Labels	Lakabin Aika Wasiƙa
+	Mailings	Wasiƙu
+	Main entry:	Babban shigarwa:
+	Make Doc4Me the default for Word documents…	Mai da Doc4Me tsoho don takardun Word…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Yana ƙara ko rage girman sandar umarni, menu da akwatunan tattaunawa, a kan girman nunin tsarinka. Zuƙowar takarda daban ce.
+	Malay	Harshen Malay
+	Manage Sources	Sarrafa Tushe
+	Manage Styles	Sarrafa Salo
+	Manage Styles…	Sarrafa Salo…
+	Manual Hyphenation	Raba Kalmomi da Hannu
+	Manual hyphenation is complete.	An kammala raba kalmomi da hannu.
+	Manual Line Break	Karya Layi da Hannu
+	Manual Page Break	Karya Shafi da Hannu
+	Manual…	Da hannu…
+	Many pages	Shafuka da yawa
+	Margin	Gefe
+	Margins	Gefuna
+	Mark	Alama
+	Mark All	Yi wa Duka Alama
+	Mark as decorative	Yi alama a matsayin ado
+	Mark Citation	Yi wa Ambato Alama
+	Mark Citation…	Yi wa Ambato Alama…
+	Mark Entry	Yi wa Shigarwa Alama
+	Mark Entry…	Yi wa Shigarwa Alama…
+	Mark grammar errors as you type	Yi wa kurakuran nahawu alama yayin bugawa
+	Mark Index Entry	Yi wa Shigarwar Fihirisa Alama
+	Mark selected text as:	Yi wa rubutun da aka zaɓa alama a matsayin:
+	Mark Table of Contents Entry	Yi wa Shigarwar Jerin Abubuwan Ciki Alama
+	Mark\nCitation	Yi wa\nAmbato Alama
+	Mark\nEntry	Yi wa\nShigarwa Alama
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Daidaita girman baƙaƙe
+	Match Fields	Daidaita Filaye
+	Match prefix	Daidaita farko
+	Match suffix	Daidaita ƙarshe
+	Math AutoCorrect	Gyara Kai-tsaye na Lissafi
+	Math Input Control	Sarrafa Shigar da Lissafi
+	Matrices with Brackets	Matris da Bakuna
+	Matrix	Matris
+	Maximize	Girmama
+	Maximum	Mafi yawa
+	Maximum Example	Misalin Mafi Yawa
+	Measured By	Ana Auna da
+	Measurement units:	Raka'o'in aunawa:
+	Media	Kafofin watsa labarai
+	Merge	Haɗa
+	Merge Cells	Haɗa Sel
+	Merge Formatting	Haɗa Tsari
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Haɗa Tsari yana liƙa rubutun a tsarin wurin da ya sauka, kamar yadda Riƙe Rubutu Kawai ke yi.
+	Merge Record #	Bayanin Haɗawa #
+	Merge records	Haɗa bayanai
+	Merge to New Document	Haɗa zuwa Sabuwar Takarda
+	Merge to Printer	Haɗa zuwa Firinta
+	Merge to:	Haɗa zuwa:
+	Merge type: {type}	Nau'in haɗawa: {type}
+	Merged PRs	PR da aka haɗa
+	Merge…	Haɗa…
+	Mesosphere	Mesosphere
+	Middle	Tsakiya
+	Midline Dots	Ɗigogin Tsakiyar Layi
+	Millimeters	Milimita
+	Minimum	Mafi ƙaranci
+	Minus Equal	Ragi Daidai
+	Mirror indents	Shigar ciki mai madubi
+	Mirrored	Mai madubi
+	Missing document font	Nau'in rubutun takarda ya ɓace
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team da masu ba da gudummawar WordCraft.
+	MLA	MLA
+	Model	Samfuri
+	Models	Samfura
+	Moderate	Matsakaici
+	Modify Style	Gyara Salo
+	Modify Table Style	Gyara Salon Tebur
+	Modify Table Style…	Gyara Salon Tebur…
+	Modify…	Gyara…
+	Mon	Lit
+	Month	Wata
+	More >>	Ƙari >>
+	More Colors…	Ƙarin Launuka…
+	More Columns…	Ƙarin Ginshiƙai…
+	More Commands…	Ƙarin Umarni…
+	More Symbols…	Ƙarin Alamomi…
+	More templates →	Ƙarin samfura →
+	Move Down	Matsa Ƙasa
+	Move in Equation	Motsawa a Lissafi
+	Move object with text	Motsa abu tare da rubutu
+	Move or Resize	Motsa ko Canza Girma
+	Move Paragraph Down	Matsa Sakin Layi Ƙasa
+	Move Paragraph Up	Matsa Sakin Layi Sama
+	Move Past Citation	Wuce Ambato
+	Move Past\nCitation	Wuce\nAmbato
+	Move Selected Ink	Motsa Tawadar da Aka Zaɓa
+	Move Text	Motsa Rubutu
+	Move to where?	Motsa zuwa ina?
+	Move Up	Matsa Sama
+	Move with Text	Motsa tare da Rubutu
+	Move with text	Motsa tare da rubutu
+	Moved from	An motsa daga
+	Moved to	An motsa zuwa
+	Moves	Motsawa
+	Multilevel List	Jeri Mai Matakai Da Yawa
+	Multiple Pages	Shafuka Da Yawa
+	My Add-ins	Ƙarin Shirye-shiryena
+	MyMemory (free, no account)	MyMemory (kyauta, babu asusu)
+	Name	Suna
+	Name (A–Z)	Suna (A–Z)
+	Name of the file this document is saved as	Sunan fayil ɗin da aka ajiye wannan takarda da shi
+	Name:	Suna:
+	Narrow  0.5" all	Ƙunƙuntacce  0.5" duka
+	Natural Logarithm	Logarithm na Halitta
+	Nature	Halitta
+	Navigation	Kewayawa
+	Navigation Pane	Faifan Kewayawa
+	Negated Relations	Dangantaka Marasa Inganci
+	New	Sabo
+	New Comment	Sabon Sharhi
+	New comments and tracked changes are recorded under this name and these initials.	Ana rubuta sabbin sharhohi da canje-canjen da ake bibiya a ƙarƙashin wannan suna da waɗannan baƙaƙen farko.
+	New Document	Sabuwar Takarda
+	New document	Sabuwar takarda
+	New Drawing Canvas	Sabon Allon Zane
+	New Entry	Sabuwar Shigarwa
+	New Folder	Sabon Babban Fayil
+	New from Template	Sabo daga Samfuri
+	New Group	Sabon Rukuni
+	New Label	Sabon Lakabi
+	New Label…	Sabon Lakabi…
+	New Paragraph	Sabon Sakin Layi
+	New shortcut:	Sabuwar gajeriyar hanya:
+	New Style…	Sabon Salo…
+	New Tab	Sabon Shafi
+	New Table Style	Sabon Salon Tebur
+	New Table Style…	Sabon Salon Tebur…
+	New Window	Sabuwar Taga
+	New word	Sabuwar kalma
+	New\nComment	Sabon\nSharhi
+	New\nWindow	Sabuwar\nTaga
+	New…	Sabo…
+	Next	Na gaba
+	Next Change	Canji na Gaba
+	Next Comment	Sharhi na Gaba
+	Next Field	Fili na Gaba
+	Next Footnote	Bayanin Ƙasa na Gaba
+	Next Page	Shafi na Gaba
+	Next Record	Bayani na Gaba
+	Next Section	Sashe na Gaba
+	Next Sentence	Jimla ta Gaba
+	Next sentence	Jimla ta gaba
+	Next Window	Taga ta Gaba
+	No	A'a
+	No accessibility issues found.	Ba a sami matsalolin samun dama ba.
+	No add-ins are listed yet.	Babu ƙarin shirye-shiryen da aka jera tukuna.
+	No add-ins yet. Add one from the Store.	Babu ƙarin shirye-shirye tukuna. Ƙara ɗaya daga Kasuwa.
+	No Border	Babu Iyaka
+	No changes (read only)	Babu canje-canje (karatu kawai)
+	No Color	Babu Launi
+	No contributor data was built into this copy.	Ba a gina bayanan masu ba da gudummawa a cikin wannan kwafi ba.
+	No data source yet.	Babu tushen bayanai tukuna.
+	No errors found: every merge field is in the recipient list.	Ba a sami kurakurai ba: kowane filin haɗawa yana cikin jerin masu karɓa.
+	No Fill	Babu Cikawa
+	No Glow	Babu Haske
+	No grid	Babu grid
+	No icons match your search.	Babu gumakan da suka dace da bincikenka.
+	No limit	Babu iyaka
+	No Line	Babu Layi
+	No Markup	Babu Alamomi
+	No model credits were built into this copy.	Ba a gina yabon samfura a cikin wannan kwafi ba.
+	No Outline	Babu Layin Kewaye
+	No Paragraph Space	Babu Sararin Sakin Layi
+	No pictures found.	Ba a sami hotuna ba.
+	No Reflection	Babu Tunani
+	No revisions	Babu bita
+	No Shadow	Babu Inuwa
+	No Soft Edges	Babu Gefuna Masu Laushi
+	No sources yet.	Babu tushe tukuna.
+	No Spacing	Babu Tazara
+	no speech program on this system	babu shirin magana a wannan tsarin
+	No templates match your search.	Babu samfuran da suka dace da bincikenka.
+	No Transform	Babu Sauyi
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Babu kalmomi tukuna. Ƙara cikin Ƙamus a kan kalmar da aka rubuta ba daidai ba yana sanya ta nan.
+	No-Width Non Break	Mara Faɗi Mara Karyewa
+	No-Width Optional Break	Karyewa ta Zaɓi Mara Faɗi
+	Nonbreaking Hyphen	Zaren Haɗa Mara Karyewa
+	Nonbreaking Space	Sarari Mara Karyewa
+	None	Babu
+	Normal	Na yau da kullum
+	Normal  1" all	Na yau da kullum  1" duka
+	Normal Indent	Shigar Ciki na Yau da Kullum
+	Normal probability density	Yawan yiwuwa na yau da kullum
+	Normal speed	Gudun yau da kullum
+	Normal Style	Salon Yau da Kullum
+	Normal Table	Tebur na Yau da Kullum
+	Normal Text	Rubutu na Yau da Kullum
+	Normal Word Document	Takardar Word ta Yau da Kullum
+	North	Arewa
+	Norwegian (Bokmål)	Harshen Norway (Bokmål)
+	Not	Ba
+	Not available right now	Ba ya samuwa a yanzu
+	Not equal to	Bai yi daidai da
+	Not linked: click a text box	Ba a haɗa ba: danna akwatin rubutu
+	Not saved	Ba a ajiye ba
+	Not saved yet	Ba a ajiye ba tukuna
+	Not used by any command	Babu umarnin da ke amfani da shi
+	Not {name}	Ba {name} ba
+	Nothing	Babu komai
+	Nothing collected yet. Items you copy or cut appear here.	Ba a tattara komai ba tukuna. Abubuwan da ka kwafa ko ka yanke suna bayyana a nan.
+	Now used by {command}	Yanzu {command} ke amfani da shi
+	Nudge	Ɗan matsawa
+	Num Occurrences	Adadin Bayyanuwa
+	Number	Lamba
+	Number alignment:	Jeruwar lamba:
+	Number format	Tsarin lamba
+	Number of columns:	Adadin ginshiƙai:
+	Number of rows:	Adadin jeruka:
+	Number of the page the field sits on	Lambar shafin da filin yake a kai
+	Number of the section the field sits in	Lambar sashen da filin yake a ciki
+	Number style for this level:	Salon lamba don wannan mataki:
+	Number the equation; the number sits at the right margin (or type # then the number)	Sanya lamba ga lissafin; lambar tana zama a gefen dama (ko buga # sannan lambar)
+	Number type:	Nau'in lamba:
+	Number:	Lamba:
+	Numbering	Lambobi
+	Numbering:	Lambobi:
+	Numbering…	Lambobi…
+	Numerals	Alƙaluma
+	Numerals:	Alƙaluma:
+	n×n Identity Matrix	Matris Shaida n×n
+	n×n Matrix	Matris n×n
+	Object	Abu
+	Odd Page	Shafi Mai Mara
+	Odd pages only	Shafuka masu mara kawai
+	Off	A kashe
+	Office	Office
+	Office 2003 Default	Tsohon Office 2003
+	Offset (pt):	Kauce (pt):
+	Offset: Bottom	Kauce: Ƙasa
+	Offset: Bottom Left	Kauce: Ƙasa a Hagu
+	Offset: Bottom Right	Kauce: Ƙasa a Dama
+	Offset: Center	Kauce: Tsakiya
+	Offset: Left	Kauce: Hagu
+	Offset: Right	Kauce: Dama
+	Offset: Top	Kauce: Sama
+	Offset: Top Left	Kauce: Sama a Hagu
+	Offset: Top Right	Kauce: Sama a Dama
+	OK	To
+	Omit	Tsallake
+	On	A kunne
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	A kunne: alamar shigarwa tana zamewa zuwa sabon wurinta lokacin da kake bugawa ko amfani da maɓallan kibiya, kuma ƙyaftawarta tana dusashewa. A kashe: tana tsalle tana ƙyaftawa kunna-kashe.
+	One	Ɗaya
+	One half	Rabi ɗaya
+	One label per recipient	Lakabi ɗaya ga kowane mai karɓa
+	One line per item. Enter adds an item.	Layi ɗaya ga kowane abu. Enter yana ƙara abu.
+	One Page	Shafi Ɗaya
+	Online Pictures	Hotunan Intanet
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Hotunan Intanet (Openverse), Fassara (MyMemory ko sabar LibreTranslate ɗinka), Samo Ƙarin Shirye-shirye da saukar da samfurin magana na Furta suna haɗawa da intanet, kuma sai lokacin da ka yi amfani da su. Idan an kashe, Doc4Me ba ta yin wata haɗi da kanta.
+	Online Pictures…	Hotunan Intanet…
+	Online services are turned off (File › Options › Trust Center).	An kashe sabis na intanet (Fayil › Zaɓuɓɓuka › Cibiyar Amincewa).
+	Online Video	Bidiyon Intanet
+	Only allow this kind of editing:	Bar irin wannan gyara kawai:
+	Only comments can be added, except in regions marked editable.	Sharhohi kawai za a iya ƙarawa, sai a yankunan da aka yi wa alama ana iya gyarawa.
+	Only form fields can be filled in.	Filayen fom kawai za a iya cikewa.
+	only https addresses can be used	adireshin https kawai za a iya amfani da su
+	Only pictures I may use commercially	Hotunan da zan iya amfani da su don kasuwanci kawai
+	Only the allowed styles can be applied.	Salon da aka yarda da su kawai za a iya aiwatarwa.
+	Only web (http, https) and email (mailto) links can be followed	Mahaɗan yanar gizo (http, https) da na imel (mailto) kawai za a iya bi
+	Open	Buɗe
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Buɗe fayil da burauzar Doc4Me ta kanta lokacin da akwatin zaɓen fayil na tsarin bai bayyana ba.
+	Open Data Source…	Buɗe Tushen Bayanai…
+	Open Hyperlink	Buɗe Mahaɗin Yanar Gizo
+	OpenDocument Text (*.odt)	OpenDocument Text (*.odt)
+	Opening print dialog…	Ana buɗe akwatin bugawa…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Daga yanzu yana buɗe fayilolin .docx, .doc, .rtf da .odt da samfuran Word da Doc4Me.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Yana buɗe Saituna › Tsoffin manhajoji, inda kake zaɓar Doc4Me don .docx da sauran nau'ukan takardu.
+	Open…	Buɗe…
+	Operator	Mai aiki
+	Operator Structures	Tsarin Masu Aiki
+	Operators	Masu aiki
+	Optional Hyphen	Zaren Haɗa na Zaɓi
+	Options	Zaɓuɓɓuka
+	Options…	Zaɓuɓɓuka…
+	Or	Ko
+	Or save a copy in another format:	Ko ajiye kwafi a wani tsari:
+	Ordinals (1st) as superscript	Lambobin jeri (1st) a matsayin rubutun sama
+	Organizer	Mai Tsarawa
+	Organizer…	Mai Tsarawa…
+	Orientation	Fuskanta
+	Original document	Takarda ta asali
+	Other	Wani
+	Other Authorities	Sauran Hukumomi
+	Other Large Operators	Sauran Manyan Masu Aiki
+	Other paragraph styles	Sauran salon sakin layi
+	Other styles and their TOC level:	Sauran salo da matakinsu a jerin abubuwan ciki:
+	Otherwise insert:	In ba haka ba saka:
+	Outline	Shaci
+	Outline Level	Matakin Shaci
+	Outline level	Matakin shaci
+	Outline levels	Matakan shaci
+	Outline State	Yanayin Shaci
+	Outline Tools	Kayan Aikin Shaci
+	Outlining	Yin shaci
+	Outside	Waje
+	Outside border	Iyakar waje
+	Outside Borders	Iyakokin Waje
+	Outside Margin	Gefen Waje
+	Outside:	Waje:
+	Outward Brackets	Bakuna Masu Fuskantar Waje
+	Oval	Kwai
+	Overbar	Sanda a Sama
+	Overbars and Underbars	Sanduna a Sama da Ƙasa
+	Overbrace	Baka Mai Lanƙwasa a Sama
+	Overtype	Rubuta a Kai
+	Overtype (typing replaces the characters after the caret)	Rubuta a kai (bugawa yana maye gurbin haruffan da ke bayan alamar shigarwa)
+	Page	Shafi
+	Page Background	Bangon Shafi
+	Page Border	Iyakar Shafi
+	Page Borders	Iyakokin Shafi
+	Page Break	Karya Shafi
+	Page Break Before	Karya Shafi Kafin
+	Page break before	Karya shafi kafin
+	Page Breaks	Karye-karyen Shafi
+	Page Color	Launin Shafi
+	Page display	Nunin shafi
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Hoton shafi (*.jpg, *.jpeg)
+	Page image (*.png)	Hoton shafi (*.png)
+	Page Movement	Motsin Shafi
+	Page Number	Lambar Shafi
+	Page number style	Salon lambar shafi
+	Page numbers at the right margin	Lambobin shafi a gefen dama
+	Page on which a bookmarked passage falls	Shafin da sashin da aka yi wa alamar shafi yake
+	Page Setup	Saitin Shafi
+	Page title	Taken shafi
+	Page Up	Page Up
+	Page Width	Faɗin Shafi
+	Page width	Faɗin shafi
+	Page X of Y	Shafi X na Y
+	Page {page}	Shafi {page}
+	Page {page} of {pages}	Shafi {page} na {pages}
+	Page\nBorders	Iyakokin\nShafi
+	Page\nColor	Launin\nShafi
+	Page\nNumber	Lambar\nShafi
+	Pages	Shafuka
+	Pages like 1-3, 5	Shafuka kamar 1-3, 5
+	Pages of bookmark:	Shafukan alamar shafi:
+	Paragraph	Sakin layi
+	Paragraph Character	Harafin Sakin Layi
+	Paragraph Details	Bayanan Sakin Layi
+	Paragraph Down	Sakin Layi Ƙasa
+	Paragraph Mark	Alamar Sakin Layi
+	Paragraph marks	Alamomin sakin layi
+	Paragraph Settings	Saitunan Sakin Layi
+	Paragraph Spacing	Tazarar Sakin Layi
+	Paragraph style	Salon sakin layi
+	Paragraph Up	Sakin Layi Sama
+	Paragraphs	Sakin layi
+	Paragraph…	Sakin layi…
+	Parentheses	Baka
+	Parentheses with Separator	Baka da Mai Raba
+	Partial Differential	Bambancin Ɓangare
+	Password	Kalmar sirri
+	Password:	Kalmar sirri:
+	Paste	Liƙa
+	Paste All	Liƙa Duka
+	Paste as:	Liƙa a matsayin:
+	Paste Clipboard Item	Liƙa Abun Allon Kwafi
+	Paste Formatting	Liƙa Tsari
+	Paste Special	Liƙawa ta Musamman
+	Paste Special…	Liƙawa ta Musamman…
+	Paste Spike	Liƙa Tarin Ƙusa
+	Paste: Keep Text Only	Liƙa: Riƙe Rubutu Kawai
+	Paste: Merge Formatting	Liƙa: Haɗa Tsari
+	Pasting between documents:	Liƙawa tsakanin takardu:
+	Pasting from other programs:	Liƙawa daga wasu shirye-shirye:
+	Pasting within the same document:	Liƙawa a cikin takarda ɗaya:
+	Pause	Dakata
+	Paused	An dakata
+	PDF document (*.pdf)	Takardar PDF (*.pdf)
+	Pen	Alƙalami
+	Pencil	Fensir
+	Pens	Alƙaluma
+	People	Mutane
+	Periodical	Mujalla ta lokaci-lokaci
+	Personalize	Keɓance
+	Phonetic Guide	Jagoran Lafazi
+	Pi Over 2	Pi bisa 2
+	Picas	Picas
+	Pick a custom group (New Group makes one)	Zaɓi rukuni na musamman (Sabon Rukuni yana ƙirƙirar ɗaya)
+	Pick a field from the list	Zaɓi fili daga jerin
+	Picture	Hoto
+	Picture Border	Iyakar Hoto
+	Picture Content Control	Sarrafa Abun Ciki na Hoto
+	Picture Format	Tsarin Hoto
+	Picture Styles	Salon Hoto
+	Pictures	Hotuna
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Hotuna daga Openverse. Mutunta lasisin kowane hoto: Doc4Me tana ƙara layin yabo a ƙarƙashinsa.
+	Pie	Fanke Mai Yanka
+	Placeholder Name	Sunan Mai Riƙe Wuri
+	Placeholder text	Rubutun mai riƙe wuri
+	Plain Table 1	Tebur Zalla 1
+	Plain text (*.txt)	Rubutu zalla (*.txt)
+	Plain Text Content Control	Sarrafa Abun Ciki na Rubutu Zalla
+	Play	Kunna
+	Play Video	Kunna Bidiyo
+	Play/Pause	Kunna/Dakata
+	Plus Equal	Ƙari Daidai
+	Points	Maki
+	points and above	maki da sama
+	Polish	Harshen Poland
+	Portrait	A tsaye
+	Portuguese (Brazil)	Fotuganci (Brazil)
+	Portuguese (Portugal)	Fotuganci (Portugal)
+	Position	Matsayi
+	Position:	Matsayi:
+	Positioning…	Sanya Wuri…
+	Possible spelling mistake	Yiwuwar kuskuren rubutun kalma
+	Postal Code	Lambar Gidan Waya
+	Power series of (1+x)ⁿ	Jerin ƙarfi na (1+x)ⁿ
+	Preferred width:	Faɗin da aka fi so:
+	Preserve	Kiyaye
+	Preserve formatting during updates	Kiyaye tsari yayin sabuntawa
+	Presets	Saitunan da aka shirya
+	Press a key combination	Danna haɗin maɓallai
+	Preview	Hangen nesa
+	Preview Results	Hangen Sakamako
+	Preview\nResults	Hangen\nSakamako
+	Previous	Na baya
+	Previous 1 or More	1 ko Fiye na Baya
+	Previous Change	Canji na Baya
+	Previous Comment	Sharhi na Baya
+	Previous Field	Fili na Baya
+	Previous Footnote	Bayanin Ƙasa na Baya
+	Previous Page	Shafi na Baya
+	Previous Record	Bayani na Baya
+	Previous Section	Sashe na Baya
+	Previous Sentence	Jimla ta Baya
+	Previous sentence	Jimla ta baya
+	Previous Window	Taga ta Baya
+	Print	Buga
+	Print blank lines when data fields are empty	Buga layuka fanko idan filayen bayanai babu komai
+	Print Documents	Buga Takardu
+	Print Documents…	Buga Takardu…
+	Print failed: {error}	Bugawa ya kasa: {error}
+	Print Layout	Tsarin Bugawa
+	Print Markup	Buga Alamomi
+	Print the page color	Buga launin shafi
+	Print to PDF	Buga zuwa PDF
+	Print\nLayout	Tsarin\nBugawa
+	Printer	Firinta
+	Printing	Bugawa
+	Process	Tsari
+	Product	Samfur
+	Product of A	Samfurin A
+	Product with Limits	Samfur da Iyakoki
+	Product with Lower Limit	Samfur da Iyakar Ƙasa
+	Product with Subscript-Superscript Limits	Samfur da Iyakokin Ƙasa-Sama
+	Products and Coproducts	Samfura da Coproduct
+	Professional	Ƙwararre
+	Promote	Ƙara matsayi
+	Promote to Heading 1	Ƙara zuwa Kanu 1
+	Proofing	Tantancewa
+	Proofing Issues	Matsalolin Tantancewa
+	Proofing language	Harshen tantancewa
+	Properties	Kaddarori
+	Protect	Kare
+	Protect Document	Kare Takarda
+	PRs	PR
+	pt	pt
+	Publisher	Mawallafi
+	Punctuation	Alamomin rubutu
+	Put the caret in a content control first.	Fara sanya alamar shigarwa a cikin sarrafa abun ciki.
+	Put the default commands back on the Quick Access Toolbar?	Mayar da tsoffin umarni a kan Sandar Kayan Aiki ta Gaggawa?
+	Pyramid	Dala
+	Quadratic Root	Saiwar Murabba'i
+	Query Options…	Zaɓuɓɓukan Tambaya…
+	Quick Access Toolbar	Sandar Kayan Aiki ta Gaggawa
+	Quick Parts	Sassa na Gaggawa
+	Quick Tables	Teburori na Gaggawa
+	Quote	Zance
+	Radical	Saiwa
+	Radical with Degree	Saiwa da Daraja
+	Radicals	Saiwoyi
+	Raised/lowered	Ɗagawa/saukarwa
+	Read Aloud	Karanta da Babbar Murya
+	Read Aloud couldn't start the speech program: {reason}	Karanta da Babbar Murya ya kasa fara shirin magana: {reason}
+	Read Aloud couldn't start: {reason}	Karanta da Babbar Murya ya kasa farawa: {reason}
+	Read Aloud isn't available in the browser	Karanta da Babbar Murya ba ya samuwa a burauza
+	Read Aloud Status	Matsayin Karanta da Babbar Murya
+	Read Aloud stopped: {reason}	Karanta da Babbar Murya ya tsaya: {reason}
+	Read Mode	Yanayin Karatu
+	Read\nAloud	Karanta da\nBabbar Murya
+	Read\nMode	Yanayin\nKaratu
+	Reading	Karatu
+	Reading Column Width	Faɗin Ginshiƙin Karatu
+	Reading Highlight	Haskaka Karatu
+	Reading Line Spacing	Tazarar Layin Karatu
+	Reading Mode	Yanayin Karatu
+	Reading Speed	Gudun Karatu
+	Reading Text Size	Girman Rubutun Karatu
+	Reads the clipboard's rich text and keeps its formatting.	Yana karanta rubutu mai tsari na allon kwafi kuma yana riƙe tsarinsa.
+	Reads the clipboard's web content and keeps its formatting.	Yana karanta abun ciki na yanar gizo na allon kwafi kuma yana riƙe tsarinsa.
+	Real name	Sunan gaskiya
+	Recent	Na kwanan nan
+	Recent Colors	Launukan Kwanan Nan
+	Recent documents to show:	Takardun kwanan nan da za a nuna:
+	Recently used symbols:	Alamomin da aka yi amfani da su kwanan nan:
+	Recipient List	Jerin Masu Karɓa
+	Recipient lists	Jerin masu karɓa
+	Recipients: {count}	Masu karɓa: {count}
+	Recognized (you can correct it):	An gane (za ka iya gyara shi):
+	Recognized Functions	Ayyukan da Aka Gane
+	Recognized Functions…	Ayyukan da Aka Gane…
+	Recolor a one-color picture, such as an icon	Sake launin hoto mai launi ɗaya, kamar gunki
+	Recolor Selected Ink	Sake Launin Tawadar da Aka Zaɓa
+	Record Macro	Naɗi Macro
+	Recover Unsaved Documents	Dawo da Takardun da Ba a Ajiye ba
+	Rectangle	Murabba'i mai tsawo
+	Red:	Ja:
+	Redo	Maimaita
+	Reduce Hanging Indent	Rage Shigar Ciki Mai Rataya
+	References	Manazarta
+	Reflection	Tunani
+	Refresh	Sabunta
+	Registered	Rajistacce
+	Registered Sign	Alamar Rajista
+	Regular expressions	Furucin regex
+	Regulations	Dokoki
+	Reject	Ƙi
+	Reject All	Ƙi Duka
+	Reject All Changes	Ƙi Duk Canje-canje
+	Reject Change	Ƙi Canji
+	Relationship	Dangantaka
+	relative to	dangane da
+	Relative to:	Dangane da:
+	Relaxed	Mai sassauci
+	Remove	Cire
+	Remove Added Font	Cire Nau'in Rubutun da Aka Ƙara
+	Remove Background	Cire Bango
+	Remove Content Control	Cire Sarrafa Abun Ciki
+	Remove every custom shortcut and restore the built-in keys?	Cire duk gajerun hanyoyi na musamman ka mayar da ginannun maɓallai?
+	Remove every custom tab and group and show all tabs again?	Cire duk shafuka da rukunoni na musamman ka sake nuna duk shafuka?
+	Remove field	Cire fili
+	Remove Field Name	Cire Sunan Fili
+	Remove Footer	Cire Ƙasan Shafi
+	Remove from Quick Access Toolbar	Cire daga Sandar Kayan Aiki ta Gaggawa
+	Remove Header	Cire Kan Shafi
+	Remove Hyperlink	Cire Mahaɗin Yanar Gizo
+	Remove Password	Cire Kalmar Sirri
+	Remove Pen	Cire Alƙalami
+	Remove Positioning	Cire Sanya Wuri
+	Remove recipient	Cire mai karɓa
+	Remove row	Cire jere
+	Remove series	Cire jerin bayanai
+	Remove Space After Paragraph	Cire Sarari Bayan Sakin Layi
+	Remove Table of Contents	Cire Jerin Abubuwan Ciki
+	Remove the control once edited	Cire mai sarrafawa bayan an gyara
+	Remove the space before the punctuation	Cire sararin da ke kafin alamar rubutu
+	Remove Watermark	Cire Alamar Ruwa
+	Rename Style	Sake Sunan Salo
+	Rename…	Sake Suna…
+	Reopen	Sake Buɗewa
+	Repeat	Maimaita
+	Repeat as header row on each page	Maimaita a matsayin jeren kanu a kowane shafi
+	Repeat Header Rows	Maimaita Jerukan Kanu
+	Repeated words	Kalmomin da aka maimaita
+	Repeating Section Content Control	Sarrafa Abun Ciki na Sashe Mai Maimaituwa
+	Replace	Maye gurbin
+	Replace All	Maye Gurbin Duka
+	Replace as you type	Maye gurbin yayin bugawa
+	Replace Document Text	Maye Gurbin Rubutun Takarda
+	Replace text as you type	Maye gurbin rubutu yayin bugawa
+	Replace with:	Maye gurbin da:
+	Replace:	Maye gurbin:
+	Replay	Sake kunnawa
+	Reply	Amsa
+	Report	Rahoto
+	Research	Bincike
+	Researcher	Mai Bincike
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Mai Bincike yana buƙatar sabis na intanet; Doc4Me tana riƙe takardunka ba tare da intanet ba.
+	Reset	Sake saita
+	Reset All	Sake Saita Duka
+	Reset All…	Sake Saita Duka…
+	Reset Character Formatting	Sake Saita Tsarin Harafi
+	Reset Crop	Sake Saita Datsewa
+	Reset Graphic	Sake Saita Zane
+	Reset Paragraph Formatting	Sake Saita Tsarin Sakin Layi
+	Reset Picture	Sake Saita Hoto
+	Reset to Normal	Mayar zuwa Na Yau da Kullum
+	Reset\nGraphic	Sake Saita\nZane
+	Reset…	Sake saita…
+	Resize Table by Dragging	Canza Girman Tebur ta Jawowa
+	Resolve	Warware
+	Resolved	An warware
+	Restart at 1	Sake farawa daga 1
+	Restart Each Page	Sake Farawa a Kowane Shafi
+	Restart Each Section	Sake Farawa a Kowane Sashe
+	Restart list after:	Sake fara jeri bayan:
+	Restore	Mayar
+	Restore Defaults	Mayar da Tsoffin Saituna
+	Restore Down	Mayar Ƙasa
+	Restore to Normal Word Document	Mayar zuwa Takardar Word ta Yau da Kullum
+	Restrict Editing	Ƙuntata Gyara
+	Restrict\nEditing	Ƙuntata\nGyara
+	Result	Sakamako
+	Results	Sakamako
+	Return address labels	Lakabin adireshin mai aikawa
+	Return address:	Adireshin mai aikawa:
+	Reverse the order	Juya tsari
+	Review	Bita
+	Review AutoFormat Changes	Duba Canje-canjen Tsara Kai-tsaye
+	Review Changes…	Duba Canje-canje…
+	Reviewing	Bita
+	Reviewing Pane	Faifan Bita
+	Reviewing — edits become suggestions	Bita — gyare-gyare suna zama shawarwari
+	Revised document	Takardar da aka gyara
+	Revisions	Gyare-gyare
+	Rewind	Koma baya
+	Ribbon	Sandar umarni
+	Ribbon and Quick Access Toolbar:	Sandar umarni da Sandar Kayan Aiki ta Gaggawa:
+	Ribbon tabs	Shafukan sandar umarni
+	Rich Text Content Control	Sarrafa Abun Ciki na Rubutu Mai Tsari
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Dama
+	Right (vertical)	Dama (a tsaye)
+	Right align page numbers	Jera lambobin shafi a dama
+	Right Arrow with Text Above	Kibiyar Dama da Rubutu a Sama
+	Right Arrow with Text Below	Kibiyar Dama da Rubutu a Ƙasa
+	Right Border	Iyakar Dama
+	Right border	Iyakar dama
+	Right Bracket Twice	Baka na Dama Sau Biyu
+	Right indent	Shigar ciki na dama
+	Right Margin	Gefen Dama
+	Right Only	Dama Kawai
+	Right only	Dama kawai
+	Right-to-left	Dama-zuwa-hagu
+	Right-to-Left Section	Sashe Dama-zuwa-Hagu
+	Right-to-Left Table	Tebur Dama-zuwa-Hagu
+	Right-to-Left Text Direction	Alƙiblar Rubutu Dama-zuwa-Hagu
+	Right:	Dama:
+	Rightwards Arrow Above	Kibiya Mai Nufin Dama a Sama
+	Rightwards Harpoon Above	Ƙugiya Mai Nufin Dama a Sama
+	Roots of ax²+bx+c	Saiwoyin ax²+bx+c
+	Rotate	Juya
+	Rotate all text 270°	Juya duk rubutu 270°
+	Rotate all text 90°	Juya duk rubutu 90°
+	Rotate Left 90°	Juya Hagu 90°
+	Rotate Right 90°	Juya Dama 90°
+	Rotation	Juyawa
+	Rotation:	Juyawa:
+	Rounded Rectangle	Murabba'i Mai Kusurwoyi Masu Zagaye
+	Row	Jere
+	Row:	Jere:
+	Rows & Columns	Jeruka da Ginshiƙai
+	Ruby text:	Rubutun ruby:
+	Ruler	Mai aunawa
+	Rules	Dokoki
+	Run	Gudanar
+	Run-in	A cikin layi
+	Russian	Rashanci
+	Résumé	Takardar tarihin aiki
+	Same as the whole table	Daidai da dukkan tebur
+	SAMPLE	SAMFURI
+	Sat:	Asa:
+	Save	Ajiye
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Ajiye kwafi a wani tsari. Bugawa yana bi ta PDF da za ka iya bugawa daga kowace manhajar dubawa.
+	Save As	Ajiye a Matsayin
+	Save as Template	Ajiye a Matsayin Samfuri
+	Save documents	Ajiye takardu
+	Save the document to turn on AutoSave	Ajiye takardar don kunna Ajiyewa Kai-tsaye
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Ajiye takardar don kunna Ajiyewa Kai-tsaye (ba a sake rubuta fayil da ka buɗe kawai ba sai ka ajiye shi)
+	Save these pages as PDF…	Ajiye waɗannan shafuka a matsayin PDF…
+	Save Version	Ajiye Siga
+	Saved	An ajiye
+	Scale	Ma'auni
+	Scale Drawing	Ma'aunin Zane
+	Scatter	Warwatse
+	Screen Clipping	Yankan Allo
+	Screen clipping didn't work: {reason}	Yankan allo bai yi aiki ba: {reason}
+	Screen clipping ended without a picture.	Yankan allo ya ƙare ba tare da hoto ba.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Yankan allo ba ya samuwa a nan. Kwafi hoton allo, sannan ka liƙa shi.
+	Screenshot	Hoton allo
+	Script	Rubutun haruffa
+	Scripts	Rubutun haruffa
+	Scroll ribbon left	Gungura sandar umarni zuwa hagu
+	Scroll ribbon right	Gungura sandar umarni zuwa dama
+	Search	Bincika
+	Search Commands	Bincika Umarni
+	Search commands and help	Bincika umarni da taimako
+	Search document	Bincika takarda
+	Search for templates	Bincika samfura
+	Search icons	Bincika gumaka
+	Search Openverse (Creative Commons pictures)	Bincika Openverse (hotunan Creative Commons)
+	Search Options	Zaɓuɓɓukan Bincike
+	Searching…	Ana bincike…
+	Secant Function	Aikin Secant
+	Section Break	Karya Sashe
+	Section Breaks	Karye-karyen Sashe
+	Section Character	Harafin Sashe
+	Section direction:	Alƙiblar sashe:
+	Section Mark	Alamar Sashe
+	Section Properties	Kaddarorin Sashe
+	Sections	Sassa
+	See	Duba
+	Select	Zaɓa
+	Select a picture, shape, chart or table to describe it.	Zaɓi hoto, siffa, jadawali ko tebur don bayyana shi.
+	Select All	Zaɓi Duka
+	Select Cell	Zaɓi Sel
+	Select Floating Shapes	Zaɓi Siffofi Masu Shawagi
+	Select Heading and Content	Zaɓi Kanu da Abun Ciki
+	Select Line	Zaɓi Layi
+	Select Objects	Zaɓi Abubuwa
+	Select Paragraph	Zaɓi Sakin Layi
+	Select Range	Zaɓi Kewayo
+	Select Recipients	Zaɓi Masu Karɓa
+	Select recipients first to choose from their fields.	Fara zaɓar masu karɓa don zaɓa daga filayensu.
+	Select recipients first to match their fields.	Fara zaɓar masu karɓa don daidaita filayensu.
+	Select Row	Zaɓi Jere
+	Select Sentence	Zaɓi Jimla
+	Select Table	Zaɓi Tebur
+	Select Text	Zaɓi Rubutu
+	Select text in the document to translate it.	Zaɓi rubutu a takardar don fassara shi.
+	Select Text with Similar Formatting	Zaɓi Rubutu Mai Kama da Tsari
+	Select text, then tick who can still edit it.	Zaɓi rubutu, sannan ka yi alama a kan wanda zai iya gyara shi har yanzu.
+	Select the part of the screen to insert.	Zaɓi ɓangaren allon da za a saka.
+	Select Word	Zaɓi Kalma
+	Select\nRecipients	Zaɓi\nMasu Karɓa
+	Selected Fields	Zaɓaɓɓun Filaye
+	Selected pages	Zaɓaɓɓun shafuka
+	Selection	Zaɓi
+	Selection Pane	Faifan Zaɓi
+	Send Backward	Mayar Baya
+	Send the document straight to the system print dialog, or save a copy in another format below.	Aika takardar kai tsaye zuwa akwatin bugawa na tsarin, ko ajiye kwafi a wani tsari a ƙasa.
+	Sentence	Jimla
+	Sentence case.	Babban baƙi a farkon jimla.
+	Separator:	Mai raba:
+	Sequence name:	Sunan jeri:
+	Serbian	Sabiyanci
+	Serbian (Cyrillic)	Sabiyanci (Cyrillic)
+	Serbian (Latin)	Sabiyanci (Latin)
+	Series name	Sunan jerin bayanai
+	Series {n}	Jerin Bayanai {n}
+	Server address (https://…)	Adireshin sabar (https://…)
+	Set	Saita
+	Set As Default	Saita a Matsayin Tsoho
+	Set as Default	Saita a matsayin Tsoho
+	Set Caret	Saita Alamar Shigarwa
+	Set Character Formatting	Saita Tsarin Harafi
+	Set Date	Saita Kwanan Wata
+	Set Equation	Saita Lissafi
+	Set Numbering Value	Saita Ƙimar Lamba
+	Set Paragraph Formatting	Saita Tsarin Sakin Layi
+	Set Proofing Language…	Saita Harshen Tantancewa…
+	Setting:	Saiti:
+	Settings…	Saituna…
+	Shading	Inuwa
+	Shadow	Inuwa
+	Shadow, glow and soft edges	Inuwa, haske da gefuna masu laushi
+	Shape Effects	Tasirin Siffa
+	Shape Fill	Cikawar Siffa
+	Shape Format	Tsarin Siffa
+	Shape Outline	Layin Kewayen Siffa
+	Shape Styles	Salon Siffa
+	Shapes	Siffofi
+	Share	Raba
+	Sheet:	Takarda:
+	Shift cells down	Matsar da sel ƙasa
+	Shift cells right	Matsar da sel dama
+	Shift+Tab	Shift+Tab
+	Shipping labels	Lakabin jigilar kaya
+	Short citation:	Gajeren ambato:
+	Shortcut key:	Maɓallin gajeriyar hanya:
+	Show	Nuna
+	Show all formatting marks	Nuna duk alamomin tsari
+	Show All Levels	Nuna Duk Matakai
+	Show all revisions inline	Nuna duk gyare-gyare a cikin layi
+	Show changes at:	Nuna canje-canje a:
+	Show changes in:	Nuna canje-canje a cikin:
+	Show Comments	Nuna Sharhohi
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Nuna takardu da launukansu a juye, kamar Duba › Sauya Yanayi. Ajiyewa, bugawa da PDF ba sa canzawa.
+	Show every bibliography field	Nuna kowane filin manazarta
+	Show First Line Only	Nuna Layin Farko Kawai
+	Show in the Styles gallery	Nuna a cikin tarin Salo
+	Show KeyTips (Alt or F10)	Nuna Alamomin Maɓalli (Alt ko F10)
+	Show Level	Nuna Mataki
+	Show Level 1	Nuna Mataki na 1
+	Show Level 2	Nuna Mataki na 2
+	Show Level 3	Nuna Mataki na 3
+	Show Level 4	Nuna Mataki na 4
+	Show Level 5	Nuna Mataki na 5
+	Show Level 6	Nuna Mataki na 6
+	Show Level 7	Nuna Mataki na 7
+	Show Level 8	Nuna Mataki na 8
+	Show Level 9	Nuna Mataki na 9
+	Show Markup	Nuna Alamomi
+	Show Notes	Nuna Bayanai
+	Show only comments and formatting in balloons	Nuna sharhohi da tsari kawai a cikin kumfa
+	Show or Hide Style	Nuna ko Ɓoye Salo
+	Show page numbers	Nuna lambobin shafi
+	Show revisions in balloons	Nuna gyare-gyare a cikin kumfa
+	Show rulers	Nuna masu aunawa
+	Show Text Formatting	Nuna Tsarin Rubutu
+	Show the equation in the line of text	Nuna lissafin a cikin layin rubutu
+	Show the equation on a line of its own	Nuna lissafin a layinsa na kansa
+	Show the mini toolbar when text is selected	Nuna ƙaramar sandar kayan aiki idan an zaɓi rubutu
+	Show/Hide ¶	Nuna/Ɓoye ¶
+	Show\nComments	Nuna\nSharhohi
+	Showing the first {count} items.	Ana nuna abubuwa {count} na farko.
+	Shows a tree: each item below the item it belongs to.	Yana nuna bishiya: kowane abu a ƙarƙashin abin da ya mallake shi.
+	Shows items around a central idea: the first item is the centre.	Yana nuna abubuwa kewaye da babban ra'ayi: abu na farko shi ne cibiya.
+	Shows items of equal weight as blocks in rows.	Yana nuna abubuwa masu nauyi daidai a matsayin tubala a jeruka.
+	Shows overlapping ideas as overlapping circles.	Yana nuna ra'ayoyi masu zoba a matsayin da'irori masu zoba.
+	Shows parts of a whole as quadrants.	Yana nuna sassan abu guda a matsayin kashi huɗu.
+	Shows parts that build on each other, largest at the bottom.	Yana nuna sassan da ke gina juna, mafi girma a ƙasa.
+	Shows steps in order, left to right, with arrows between them.	Yana nuna matakai bisa tsari, daga hagu zuwa dama, da kibiyoyi a tsakaninsu.
+	Shows steps that repeat, around a circle.	Yana nuna matakai masu maimaituwa, kewaye da da'ira.
+	Shrink Font 1 Point	Rage Rubutu da Maki 1
+	Shrink Selection	Rage Zaɓi
+	Shrink text	Rage rubutu
+	Side to Side	Gefe da Gefe
+	Side\nto Side	Gefe\nda Gefe
+	Sides of a right triangle	Gefunan triangle mai kusurwa madaidaiciya
+	Signature Line	Layin Sa Hannu
+	Sine and cosine series of f(x)	Jerin sine da cosine na f(x)
+	Sine Function	Aikin Sine
+	Sine theta	Sine theta
+	Single	Ɗaya
+	Single Brackets	Baka Guda
+	Single Closing Quote	Alamar Rufe Zance Guda
+	Single label	Lakabi guda
+	Single Left Angle	Kusurwar Hagu Guda
+	Single Left Bar	Sandar Hagu Guda
+	Single Left Brace	Baka Mai Lanƙwasa na Hagu Guda
+	Single Left Bracket	Baka Mai Kusurwa na Hagu Guda
+	Single Left Parenthesis	Baka na Hagu Guda
+	Single Opening Quote	Alamar Buɗe Zance Guda
+	Single Right Brace	Baka Mai Lanƙwasa na Dama Guda
+	Single Right Bracket	Baka Mai Kusurwa na Dama Guda
+	Single Right Parenthesis	Baka na Dama Guda
+	Single Spacing	Tazara Ɗaya
+	SIST02	SIST02
+	Site name	Sunan shafin yanar gizo
+	Size	Girma
+	Size (pt):	Girma (pt):
+	Size and Crop…	Girma da Datsewa…
+	Size:	Girma:
+	Sketchbook	Littafin zane
+	Skewed Fraction	Ɓangare Mai Karkata
+	Skip citations & bibliography	Tsallake ambato da manazarta
+	Skip Citations and Bibliography	Tsallake Ambato da Manazarta
+	Skip Record If	Tsallake Bayani Idan
+	Skip Record If…	Tsallake Bayani Idan…
+	Slant Down	Karkata Ƙasa
+	Slant Up	Karkata Sama
+	Small Caps	Ƙananan Manyan Baƙaƙe
+	Small caps	Ƙananan manyan baƙaƙe
+	Small change	Ƙaramin canji
+	Smart quotes instead of straight quotes	Alamomin zance masu lanƙwasa maimakon madaidaita
+	SmartArt	SmartArt
+	SmartArt Design	Zanen SmartArt
+	SmartArt Styles	Salon SmartArt
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Gungurawa da zuƙowa masu santsi, da menu da maɓallai masu bayyana a hankali. A kashe yana nuna kowane canji nan take.
+	Soft Edges	Gefuna Masu Laushi
+	Soft Glow	Haske Mai Laushi
+	Solid Accent	Lafazi Mai Ƙarfi
+	Sort	Jera
+	Sort by	Jera bisa
+	Sort order:	Tsarin jerawa:
+	Sort Records	Jera Bayanai
+	Source code: github.com/chatraweechai/doc4me	Lambar tushe: github.com/chatraweechai/doc4me
+	Source Manager	Mai Sarrafa Tushe
+	Source type:	Nau'in tushe:
+	Sources in this document:	Tushe a cikin wannan takarda:
+	South	Kudu
+	Space	Sarari
+	Space after	Sarari bayan
+	Space after: {pt} pt	Sarari bayan: {pt} pt
+	Space before	Sarari kafin
+	Space before/after:	Sarari kafin/bayan:
+	Space before: {pt} pt	Sarari kafin: {pt} pt
+	Spaces	Sarari
+	Spacing	Tazara
+	Spacing (pt):	Tazara (pt):
+	Spacing:	Tazara:
+	Spanish	Sifaniyanci
+	Spanish (Mexico)	Sifaniyanci (Mexico)
+	Spanish (Spain)	Sifaniyanci (Sifaniya)
+	Sparse Matrices	Matris Sassauƙa
+	Special	Na musamman
+	Special Characters	Haruffa na Musamman
+	Specify height:	Ƙayyade tsayi:
+	Speech	Magana
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Ana gane magana a wannan kwamfuta (whisper.cpp); ba a aika komai zuwa intanet ba.
+	Speed	Gudu
+	Spelling	Rubutun kalmomi
+	Spelling & Grammar	Rubutun Kalmomi da Nahawu
+	Spelling &\nGrammar	Rubutun Kalmomi\nda Nahawu
+	Spelling and grammar are checked in English (United States).	Ana duba rubutun kalmomi da nahawu da Turanci (Amurka).
+	Spelling Suggestions	Shawarwarin Rubutun Kalmomi
+	Spike	Tarin Ƙusa
+	Split	Raba
+	Split apart page break and paragraph mark	Raba karya shafi da alamar sakin layi
+	Split Cells	Raba Sel
+	Split Table	Raba Tebur
+	Spreadsheet Table	Teburin Maƙunsar Bayanai
+	Square	Murabba'i
+	Square Root	Saiwar Murabba'i
+	Square Root with Degree	Saiwar Murabba'i da Daraja
+	Square Union	Haɗaka Mai Murabba'i
+	Stack Object	Abu a Tari
+	Stack Object (Three)	Abu a Tari (Uku)
+	Stacked	A tari
+	Stacked Bar	Sanduna a Tari
+	Stacked Column	Ginshiƙai a Tari
+	Stacked Fraction	Ɓangare a Tari
+	Stacked, no bar	A tari, babu sanda
+	Standard	Daidaitacce
+	Standard and Contextual	Daidaitacce da Bisa Mahallin
+	Standard Colors	Daidaitattun Launuka
+	Standard Only	Daidaitacce Kawai
+	Star	Tauraro
+	Start at:	Fara a:
+	Start Enforcing Protection	Fara Aiwatar da Kariya
+	Start Mail Merge	Fara Haɗa Wasiƙu
+	Start Mail\nMerge	Fara Haɗa\nWasiƙu
+	State	Jiha
+	Statement   5.50" × 8.50"	Statement   5.50" × 8.50"
+	Statistics	Ƙididdiga
+	Status Bar	Sandar Matsayi
+	Statutes	Dokokin majalisa
+	Stop	Tsaya
+	Stop Protection	Dakatar da Kariya
+	Stop Reading	Daina Karatu
+	Stopped	An tsaya
+	Store	Kasuwa
+	Straight Arrow Connector	Mahaɗin Kibiya Madaidaici
+	Straight Connector	Mahaɗi Madaidaici
+	Strikethrough	Layin gogewa
+	Stroke {n} of {total}	Bugu {n} na {total}
+	Strong	Mai ƙarfi
+	Structure Actions	Ayyukan Tsari
+	Structures	Tsare-tsare
+	Studio	Situdiyo
+	Studio cover	Murfin situdiyo
+	Studio handbook (sample)	Littafin jagora na situdiyo (misali)
+	Style	Salo
+	Style based on:	Salo bisa:
+	Style Inspector	Mai Binciken Salo
+	Style Set	Rukunin Salo
+	Style:	Salo:
+	Style: APA	Salo: APA
+	Style: {style}	Salo: {style}
+	Styles	Salo
+	Styles Pane	Faifan Salo
+	Styles:	Salo:
+	Subentry:	Ƙaramar shigarwa:
+	Subject	Batu
+	Subscript	Rubutun ƙasa
+	Subscript-Superscript	Rubutun Ƙasa-Sama
+	Subscripts and Superscripts	Rubutun Ƙasa da na Sama
+	Subset:	Rukuni:
+	Substituted font	Nau'in rubutun da aka maye gurbinsa
+	Subtitle	Ƙaramin take
+	Subtle Emphasis	Ƙarfafawa Mara Ƙarfi
+	Subtle Reference	Nuni Mara Ƙarfi
+	Sum	Jimla
+	Sum of cosines	Jimlar cosine
+	Sum or difference of sines	Jimla ko bambancin sine
+	Summation	Tara jimla
+	Summation from 0 to n	Jimla daga 0 zuwa n
+	Summation over binomials	Jimla kan binomial
+	Summation with Limits	Jimla da Iyakoki
+	Summation with Lower Limit	Jimla da Iyakar Ƙasa
+	Summation with Subscript Limit	Jimla da Iyakar Rubutun Ƙasa
+	Summation with Subscript-Superscript Limits	Jimla da Iyakokin Ƙasa-Sama
+	Summations	Jimloli
+	Superscript	Rubutun sama
+	Suppress line numbers	Danne lambobin layi
+	Surface Integral	Haɗin Saman Abu
+	Surface Integral with Limits	Haɗin Saman Abu da Iyakoki
+	Surface Integral with Stacked Limits	Haɗin Saman Abu da Iyakoki a Tari
+	Swap footnotes and endnotes	Musanya bayanan ƙasa da bayanan ƙarshe
+	Swedish	Harshen Sweden
+	Switch Modes	Sauya Yanayi
+	Switch Windows	Sauya Taga
+	Switch\nModes	Sauya\nYanayi
+	Symbol	Alama
+	Symbol Font	Nau'in Rubutun Alama
+	Symbols	Alamomi
+	Synchronous Scrolling	Gungurawa Tare
+	Synonyms	Kalmomi masu ma'ana ɗaya
+	System	Tsarin kwamfuta
+	Tab	Tab
+	Tab Character	Harafin Tab
+	Tab character	Harafin tab
+	Tab characters	Haruffan tab
+	Tab leader:	Jagoran tab:
+	Tab stop position:	Matsayin tasha:
+	Tab stops to be cleared:	Tashoshin da za a share:
+	Table	Tebur
+	Table AutoFormat	Tsara Tebur Kai-tsaye
+	Table AutoFormat…	Tsara Tebur Kai-tsaye…
+	Table Column Width	Faɗin Ginshiƙin Tebur
+	Table Design	Zanen Tebur
+	Table direction:	Alƙiblar tebur:
+	Table entry fields	Filayen shigarwar tebur
+	Table Grid	Grid na Tebur
+	Table identifier:	Mai gano tebur:
+	Table Layout	Tsarin Tebur
+	Table of Authorities	Teburin Hukumomi
+	Table of Contents	Jerin Abubuwan Ciki
+	Table of Contents Options	Zaɓuɓɓukan Jerin Abubuwan Ciki
+	Table of Contents Styles	Salon Jerin Abubuwan Ciki
+	Table of Figures	Teburin Hotuna
+	Table of Figures Options	Zaɓuɓɓukan Teburin Hotuna
+	Table of\nContents	Jerin Abubuwan\nCiki
+	Table Positioning	Sanya Wurin Tebur
+	Table Properties	Kaddarorin Tebur
+	Table Row Height	Tsayin Jeren Tebur
+	Table style	Salon tebur
+	Table Style Options	Zaɓuɓɓukan Salon Tebur
+	Table Styles	Salon Tebur
+	Table styles:	Salon tebur:
+	Tables	Teburori
+	Tabloid   11.00" × 17.00"	Tabloid   11.00" × 17.00"
+	Tabs	Tasoshi
+	Tabs…	Tasoshi…
+	Tabular List	Jeri a Tebur
+	Tag	Alama
+	Tangent formula	Dabarar tangent
+	Tangent Function	Aikin Tangent
+	TC entry fields	Filayen shigarwar TC
+	Technology	Fasaha
+	Templates	Samfura
+	Templates and Add-ins	Samfura da Ƙarin Shirye-shirye
+	Text	Rubutu
+	Text Box	Akwatin Rubutu
+	Text boxes	Akwatunan rubutu
+	Text Direction	Alƙiblar Rubutu
+	Text Effects	Tasirin Rubutu
+	Text Effects and Typography	Tasirin Rubutu da Fasahar Haruffa
+	Text Fill	Cikawar Rubutu
+	Text from File	Rubutu daga Fayil
+	Text Highlight Color	Launin Haskaka Rubutu
+	Text indent at:	Shigar ciki na rubutu a:
+	Text isn't squeezed to fit its cell yet.	Ba a matse rubutu don ya dace da sel ɗinsa ba tukuna.
+	Text Outline	Layin Kewayen Rubutu
+	Text over Colon Equal	Rubutu a kan Hanji Daidai
+	Text over Equal	Rubutu a kan Daidai
+	Text Pane	Faifan Rubutu
+	Text size	Girman rubutu
+	Text snaps to characters	Rubutu yana manne wa haruffa
+	Text to display:	Rubutun da za a nuna:
+	Text Wrapping	Naɗe Rubutu
+	Text wrapping:	Naɗe rubutu:
+	Text:	Rubutu:
+	Text\nBox	Akwatin\nRubutu
+	Text\nDirection	Alƙiblar\nRubutu
+	Thai	Harshen Thai
+	Thai Distributed	Thai An Raba Daidai
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Wannan tsari ba ya riƙe komai, don haka takardar tana buɗe har yanzu. Ajiye ta a matsayin takardar Word (.docx) don ci gaba.
+	That isn't the web address or embed code of an online video.	Wannan ba adireshin yanar gizo ko lambar sakawa na bidiyon intanet ba ne.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Wannan kalmar sirri ba daidai ba ce. Duba ta (kalmomin sirri suna bambanta manya da ƙananan baƙaƙe) ka sake gwadawa.
+	The clipboard is empty.	Allon kwafi babu komai.
+	The date it is today	Kwanan watan yau
+	The document contains no tracked changes.	Takardar ba ta ƙunshi canje-canjen da ake bibiya ba.
+	The document has no bookmarks yet.	Takardar ba ta da alamomin shafi tukuna.
+	The document is read only, except for regions marked editable.	Takardar karatu kawai ce, sai yankunan da aka yi wa alama ana iya gyarawa.
+	The document will be saved with a password. Save it to protect it.	Za a ajiye takardar da kalmar sirri. Ajiye ta don kare ta.
+	The first word of a sentence starts with a capital.	Kalmar farko ta jimla tana farawa da babban baƙi.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	an gama alawus na kyauta na yau (sake gwadawa gobe, ko ba da adireshin imel)
+	the LibreTranslate server	sabar LibreTranslate
+	The Mail Merge Helper sets up a merge in three steps.	Mataimakin Haɗa Wasiƙu yana shirya haɗawa a matakai uku.
+	The new style takes the formatting of the current paragraph.	Sabon salon yana ɗaukar tsarin sakin layi na yanzu.
+	The password is optional; without it anyone can stop the protection.	Kalmar sirri na zaɓi ce; in ba ita kowa zai iya dakatar da kariyar.
+	The password is removed. Save the document to keep the change.	An cire kalmar sirri. Ajiye takardar don riƙe canjin.
+	The passwords don't match.	Kalmomin sirri ba su yi daidai ba.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Ana zaɓar firinta, bugawa a gefe biyu da shafuka a kowace takarda a wannan akwatin.
+	The recipient-list field that fills each part of an address block and greeting line.	Filin jerin masu karɓa da ke cike kowane ɓangare na tubalin adireshi da layin gaisuwa.
+	The same word twice in a row.	Kalma ɗaya sau biyu a jere.
+	The spelling and grammar check is complete.	An kammala duba rubutun kalmomi da nahawu.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Akwatin zaɓen fayil na tsarin ba ya samuwa, don haka Doc4Me tana nuna nata. Don samun akwatin tsarin, shigar da tashar zaɓen fayil (kamar xdg-desktop-portal-gtk) ko zenity.
+	The text is sent to {service} to be translated.	Ana aika rubutun zuwa {service} don a fassara shi.
+	The time right now	Lokacin yanzu
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Bidiyon yana bayyana a matsayin hoto a takardar. Danna shi sau biyu don kallon sa a burauzarka.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Ana fassara dukkan takardar zuwa sabuwar takarda, wadda za ta maye gurbin wannan. Fara ajiye aikinka.
+	Theme Colors	Launukan Jigo
+	Theme Fonts	Nau'ukan Rubutun Jigo
+	Theme List	Jerin Jigo
+	Themes	Jigogi
+	Then by	Sannan bisa
+	Then insert:	Sannan saka:
+	There's no text to translate.	Babu rubutun da za a fassara.
+	Thesaurus	Ƙamus na ma'ana
+	These marks show even when Show/Hide ¶ is off.	Waɗannan alamomi suna bayyana ko da Nuna/Ɓoye ¶ a kashe yake.
+	These merge fields aren't in the recipient list:	Waɗannan filayen haɗawa ba sa cikin jerin masu karɓa:
+	These settings will be used for new documents.	Za a yi amfani da waɗannan saituna don sabbin takardu.
+	Thick	Mai kauri
+	Thickness	Kauri
+	This Device…	Wannan Na'ura…
+	This document	Wannan takarda
+	This field has no options.	Wannan fili ba shi da zaɓuɓɓuka.
+	This folder can't be read: {error}	Ba za a iya karanta wannan babban fayil ba: {error}
+	This font has no characters to show.	Wannan nau'in rubutu ba shi da haruffan da za a nuna.
+	This page	Wannan shafi
+	This password type isn't supported.	Ba a goyi bayan wannan nau'in kalmar sirri ba.
+	This point forward	Daga nan zuwa gaba
+	This section	Wannan sashe
+	Three	Uku
+	Through	Ta ciki
+	Tight	Matsattse
+	Tilde	Tilde
+	Tips ({n})	Shawarwari ({n})
+	Title	Take
+	Title from the document properties	Take daga kaddarorin takarda
+	Title:	Take:
+	To	Zuwa
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Don buɗe takardun Word da Doc4Me a matsayin tsoho: zaɓi ɗaya a Finder, zaɓi File › Get Info, zaɓi Doc4Me a ƙarƙashin Open with, sannan ka danna Change All.
+	To:	Zuwa:
+	TOA Heading	Kanun Teburin Hukumomi
+	TOC Heading	Kanun Jerin Abubuwan Ciki
+	TOC {n}	Jerin Abubuwan Ciki {n}
+	Today	Yau
+	tOGGLE cASE	jUYA gIRMAN bAƘAƘE
+	Toggle Check Box	Kunna/Kashe Akwatin Zaɓi
+	Toggle Field Codes	Nuna/Ɓoye Lambobin Fili
+	Toggle Unicode Character	Juya Harafin Unicode
+	Tools	Kayan aiki
+	Top	Sama
+	Top and Bottom	Sama da Ƙasa
+	Top Border	Iyakar Sama
+	Top Margin	Gefen Sama
+	Top of Next Page	Saman Shafi na Gaba
+	Top of Page	Saman Shafi
+	Top of Previous Page	Saman Shafi na Baya
+	Top of the Window	Saman Taga
+	Top:	Sama:
+	Total	Jimilla
+	Total Row	Jeren Jimilla
+	Track Changes	Bin Diddigin Canje-canje
+	Track Changes Options	Zaɓuɓɓukan Bin Diddigin Canje-canje
+	Track changes while editing	Bi diddigin canje-canje yayin gyarawa
+	Track Changes: On	Bin Diddigin Canje-canje: A Kunne
+	Track formatting	Bi diddigin tsari
+	Track\nChanges	Bin Diddigin\nCanje-canje
+	Track\nChanges ✓	Bin Diddigin\nCanje-canje ✓
+	Tracked changes	Canje-canjen da ake bibiya
+	Tracking	Tazarar haruffa
+	Trademark	Alamar kasuwanci
+	Trademark Sign	Alamar Kasuwanci
+	Transform	Sauyi
+	Translate	Fassara
+	Translate Document	Fassara Takarda
+	Translating {done} of {total}	Ana fassara {done} na {total}
+	Translation service	Sabis na fassara
+	Translator	Mai fassara
+	Transparency	Bayyanuwa
+	Transparency:	Bayyanuwa:
+	Transport	Sufuri
+	Treatises	Littattafan nazari
+	Triangle	Mai kusurwa uku
+	Triangle Down	Mai Kusurwa Uku Ƙasa
+	Triangle Up	Mai Kusurwa Uku Sama
+	Trigonometric Functions	Ayyukan Trigonometry
+	Triple	Uku
+	Triple Dot	Ɗigo Uku
+	Triple Integral	Haɗi Uku
+	Triple Integral with Limits	Haɗi Uku da Iyakoki
+	Triple Integral with Stacked Limits	Haɗi Uku da Iyakoki a Tari
+	Trust Center	Cibiyar Amincewa
+	Tue	Tal
+	Turabian	Turabian
+	Turkish	Turkanci
+	Two	Biyu
+	Type	Nau'i
+	Type a command, e.g. "insert table"	Buga umarni, misali "insert table"
+	Type a New List	Buga Sabon Jeri
+	Type a New List…	Buga Sabon Jeri…
+	Type at least one recipient.	Buga aƙalla mai karɓa ɗaya.
+	Type equations in LaTeX	Buga lissafi da LaTeX
+	Type equations in the linear format (UnicodeMath)	Buga lissafi a tsarin layi ɗaya (UnicodeMath)
+	Type in Equation	Bugawa a Lissafi
+	Type normal (non-math) text in the equation	Buga rubutu na yau da kullum (ba na lissafi ba) a cikin lissafin
+	Type Text	Buga Rubutu
+	Type the categories down the side and a column of values per series.	Buga rukunoni a gefe da ginshiƙin ƙima ga kowane jerin bayanai.
+	Type the field's name and its switches, for example PAGE \\* roman.	Buga sunan filin da maɓallansa, misali PAGE \\* roman.
+	Type the password to stop the protection.	Buga kalmar sirri don dakatar da kariyar.
+	Type the recipients, or load them from a file.	Buga masu karɓa, ko ɗauko su daga fayil.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Buga sunan alamar tushen. Za ka iya ƙara ƙarin bayani ga wannan tushe daga baya ta hanyar gyara tushen.
+	Type:	Nau'i:
+	Typing	Bugawa
+	Typing replaces selected text	Bugawa yana maye gurbin rubutun da aka zaɓa
+	Ukrainian	Ukraniyanci
+	Unchecked symbol	Alamar rashin zaɓi
+	Underbar	Sanda a Ƙasa
+	Underbrace	Baka Mai Lanƙwasa a Ƙasa
+	Underline	Ja layi ƙasa
+	Underline color	Launin layin ƙasa
+	Underline Words Only	Ja Layi a Ƙarƙashin Kalmomi Kawai
+	Undo	Warware
+	Undo Stroke	Warware Bugu
+	Undo {action}	Warware {action}
+	Unformatted Text	Rubutu Mara Tsari
+	Ungroup	Raba Rukuni
+	Union	Haɗaka
+	Union of intersections	Haɗakar mahaɗa
+	Union with Limits	Haɗaka da Iyakoki
+	Union with Lower Limit	Haɗaka da Iyakar Ƙasa
+	Union with Plus	Haɗaka da Ƙari
+	Union with Subscript-Superscript Limits	Haɗaka da Iyakokin Ƙasa-Sama
+	Unions and Intersections	Haɗaka da Mahaɗa
+	Unlink Fields	Cire Haɗin Filaye
+	Unlink\nCitations	Cire Haɗin\nAmbato
+	Unlock Fields	Buɗe Kullin Filaye
+	Up	Sama
+	Up Diagonal Dots	Ɗigogi Masu Karkata Sama
+	Up one level	Hau mataki ɗaya
+	Update Field	Sabunta Fili
+	Update fields before printing	Sabunta filaye kafin bugawa
+	Update Index	Sabunta Fihirisa
+	Update Style to Match Selection	Sabunta Salo don Ya Dace da Zaɓi
+	Update Styles from Template	Sabunta Salo daga Samfuri
+	Update Table	Sabunta Tebur
+	Update Table of Figures	Sabunta Teburin Hotuna
+	Update to Match	Sabunta don Ya Dace
+	Update to Match Selection	Sabunta don Ya Dace da Zaɓi
+	UPPERCASE	MANYAN BAƘAƘE
+	URGENT	GAGGAWA
+	URL	URL
+	Use "a" before a consonant sound	Yi amfani da "a" kafin sautin baƙi
+	Use "an" before a vowel sound	Yi amfani da "an" kafin sautin wasali
+	Use an Existing List…	Yi Amfani da Jerin da Ke Akwai…
+	Use passim (five or more pages)	Yi amfani da passim (shafuka biyar ko fiye)
+	Use system setting	Yi amfani da saitin tsarin
+	Use the Insert key to switch overtype on and off	Yi amfani da maɓallin Insert don kunna da kashe rubutu a kai
+	Use wildcards	Yi amfani da alamomin maye
+	User Name	Sunan Mai Amfani
+	User name:	Sunan mai amfani:
+	Username	Sunan mai amfani
+	Value	Ƙima
+	Vector A	Vector A
+	Vector AB	Vector AB
+	Version	Siga
+	Version History	Tarihin Siga
+	Version {version} ({build})	Siga {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Ana riƙe sigogi yayin da takardar take buɗe (fayil .docx ba shi da sigogi).
+	Vertical	A tsaye
+	Vertical Alignment	Jeruwa a Tsaye
+	Vertical alignment:	Jeruwa a tsaye:
+	Vertical Bars	Sanduna a Tsaye
+	Vertical Dots	Ɗigogi a Tsaye
+	Vertical spacing:	Tazara a tsaye:
+	Vietnamese	Harshen Vietnam
+	View	Duba
+	View Alt Text…	Duba Rubutun Madadi…
+	View Gridlines	Duba Layukan Grid
+	View Side by Side	Duba Gefe da Gefe
+	View State	Yanayin Dubawa
+	Views	Hanyoyin Dubawa
+	Visual effects	Tasirin gani
+	Voice	Murya
+	Volume	Juzu'i
+	Volume Integral	Haɗin Girma
+	Volume Integral with Limits	Haɗin Girma da Iyakoki
+	Volume Integral with Stacked Limits	Haɗin Girma da Iyakoki a Tari
+	W:	F:
+	Waiting for Zotero…	Ana jiran Zotero…
+	Warm Gradient with Outline	Gaurayen Launi Mai Ɗumi da Shaci
+	Warnings ({n})	Gargaɗi ({n})
+	Watermark	Alamar ruwa
+	Wave	Igiyar ruwa
+	Weather	Yanayi
+	web access isn't available here	shiga yanar gizo ba ya samuwa a nan
+	Web Layout	Tsarin Yanar Gizo
+	Web page (*.html)	Shafin yanar gizo (*.html)
+	Web\nLayout	Tsarin\nYanar Gizo
+	Website	Shafin yanar gizo
+	Wed	Lar
+	Weight	Nauyi
+	West	Yamma
+	When merging records	Lokacin haɗa bayanai
+	When this document was first created	Lokacin da aka fara ƙirƙirar wannan takarda
+	When this document was most recently printed	Lokacin da aka buga wannan takarda na ƙarshe
+	When this document was most recently saved	Lokacin da aka ajiye wannan takarda na ƙarshe
+	White Space	Farin Sarari
+	White space	Farin sarari
+	Who the document properties name as author	Wanda kaddarorin takarda suka ambata a matsayin marubuci
+	Whole document	Dukkan takarda
+	Whole page	Dukkan shafi
+	Whole Table	Dukkan Tebur
+	Whole words	Cikakkun kalmomi
+	Wide	Mai faɗi
+	Widow/Orphan Control	Sarrafa Layin Marayu
+	Widow/Orphan control	Sarrafa layin marayu
+	Width and spacing	Faɗi da tazara
+	Width:	Faɗi:
+	Wildcards (regex)	Alamomin maye (regex)
+	Window	Taga
+	With:	Da:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 da gaba
+	Word 97–2003	Word 97–2003
+	Word Count	Ƙidayar Kalmomi
+	Word document	Takardar Word
+	Word document (*.docx)	Takardar Word (*.docx)
+	Word forms	Siffofin kalma
+	Word Left	Kalma Hagu
+	Word level	Matakin kalma
+	Word Right	Kalma Dama
+	Word XML Document (*.xml)	Takardar Word XML (*.xml)
+	WordArt	WordArt
+	WordArt Styles	Salon WordArt
+	Words	Kalmomi
+	Words only	Kalmomi kawai
+	Wrap Text	Naɗe Rubutu
+	Wrap text	Naɗe rubutu
+	Wrap Text Sides	Gefunan Naɗe Rubutu
+	Wrap\nText	Naɗe\nRubutu
+	Write & Insert Fields	Rubuta da Saka Filaye
+	Write a reply	Rubuta amsa
+	Write math here with the mouse or a pen.	Rubuta lissafi a nan da linzamin kwamfuta ko alƙalami.
+	Writing Style: Grammar	Salon Rubutu: Nahawu
+	x bar	x bar
+	Year	Shekara
+	Yes	Ee
+	Yields	Yana bayarwa
+	Your changes will be lost if you don't save them.	Canje-canjenka za su ɓace idan ba ka ajiye su ba.
+	Your system doesn't report an animation setting, so animation effects stay on.	Tsarinka ba ya bayyana saitin motsi, don haka tasirin motsi yana ci gaba da aiki.
+	Your system has animation effects turned off.	Tsarinka ya kashe tasirin motsi.
+	Your system has animation effects turned on.	Tsarinka ya kunna tasirin motsi.
+	Zoom	Zuƙowa
+	Zoom In	Zuƙo Ciki
+	Zoom Out	Zuƙo Waje
+	Zoom to Page	Zuƙo zuwa Shafi
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: an soke
+	Zotero: done	Zotero: an gama
+	{cols}×{rows} Table	Tebur {cols}×{rows}
+	{contributors} contributors · {commits} commits	Masu ba da gudummawa {contributors} · commit {commits}
+	{count} items highlighted	An haskaka abubuwa {count}
+	{count} of {total} pages will print	Za a buga shafuka {count} daga cikin {total}
+	{count} paragraphs were changed.	An canza sakin layi {count}.
+	{count} records; fields: {fields}	Bayanai {count}; filaye: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Ba a shigar da {fonts} a wannan kwamfuta ba, don haka ana nuna wannan takarda da {with}. Layuka da shafuka na iya karyewa daban da yadda suke da nau'in rubutu na asali.
+	{group} settings	Saitunan {group}
+	{key}+Click to follow link	{key}+Danna don bin mahaɗi
+	{language} is now the document's default language.	{language} yanzu shi ne tsohon harshen takardar.
+	{name} (Press ENTER to Insert)	{name} (Danna ENTER don Sakawa)
+	{name} already exists. Choose Save again to replace it.	{name} ya riga ya wanzu. Sake zaɓar Ajiye don maye gurbinsa.
+	{name} can't be a folder's name.	{name} ba zai iya zama sunan babban fayil ba.
+	{name} is protected with a password.	An kare {name} da kalmar sirri.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	An ƙara {name}. Macro ɗinsa suna ƙarƙashin Ƙarin Shirye-shiryena da Duba › Macro.
+	{name} wasn't found.	Ba a sami {name} ba.
+	{n} entries marked.	An yi wa shigarwa {n} alama.
+	{n} lines	Layuka {n}
+	{n} of {of} recipients	Masu karɓa {n} daga cikin {of}
+	{n} pt	{n} pt
+	{n} records	Bayanai {n}
+	{n} revisions	Gyare-gyare {n}
+	{selected} of {words} words	Kalmomi {selected} daga cikin {words}
+	{size} pt	{size} pt
+	{words} words	Kalmomi {words}
+	{w} × {h} in	{w} × {h} in
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	“{text}” ({row}, {series}) ba lamba ba ce.
+	← Find	← Nemo
+	✓ None	✓ Babu
+	➕ New comment	➕ Sabon sharhi
+	📂  Browse…	📂  Bincika…
+	Add Help Text…	Ƙara Rubutun Taimako…
+	AutoText entry:	Shigarwar Rubutu Kai-tsaye:
+	Calculate on exit	Yi lissafi yayin fita
+	Calculation	Lissafi
+	Check Box Form Field	Filin Fom na Akwatin Zaɓi
+	Check Box Form Field Options	Zaɓuɓɓukan Filin Fom na Akwatin Zaɓi
+	Check box	Akwatin zaɓi
+	Check box enabled	An kunna akwatin zaɓi
+	Check box size:	Girman akwatin zaɓi:
+	Checked	An zaɓa
+	Current date	Kwanan watan yanzu
+	Current time	Lokacin yanzu
+	Default value:	Tsohuwar ƙima:
+	Drop-Down Form Field	Filin Fom na Jerin Zaɓe
+	Drop-Down Form Field Options	Zaɓuɓɓukan Filin Fom na Jerin Zaɓe
+	Drop-down	Jerin zaɓe
+	Drop-down enabled	An kunna jerin zaɓe
+	Drop-down item:	Abun jerin zaɓe:
+	Fill In Form Field	Filin Fom na Cikewa
+	Fill-in enabled	An kunna cikewa
+	Form Field	Filin Fom
+	Form Field Help Text	Rubutun Taimakon Filin Fom
+	Form Field Options	Zaɓuɓɓukan Filin Fom
+	Form Field Shading	Inuwar Filin Fom
+	Form Field at Selection	Filin Fom a Wurin Zaɓi
+	Help Key (F1)	Maɓallin Taimako (F1)
+	Insert Form Field	Saka Filin Fom
+	Items in drop-down list:	Abubuwa a jerin zaɓe:
+	Legacy Tools	Tsoffin Kayan Aiki
+	Maximum length:	Mafi tsayi:
+	Next Form Field	Filin Fom na Gaba
+	Not checked	Ba a zaɓa ba
+	Put the caret on a form field first.	Fara sanya alamar shigarwa a kan filin fom.
+	Regular text	Rubutu na yau da kullum
+	Reset Form Fields	Sake Saita Filayen Fom
+	Text Form Field	Filin Fom na Rubutu
+	Text Form Field Options	Zaɓuɓɓukan Filin Fom na Rubutu
+	Type your own:	Buga naka:
+	Unlimited	Mara iyaka
+	Protected sections:	Sassan da aka kare:
+	Section Protection	Kariyar Sashe
+	Section {n}	Sashe {n}
+	Select sections…	Zaɓi sassa…
+	AutoSummarize	Taƙaitawa Kai-tsaye
+	Create a new document and put the summary there	Ƙirƙiri sabuwar takarda ka sanya taƙaitawar a ciki
+	Highlight key points	Haskaka muhimman batutuwa
+	Insert an executive summary or abstract at the top of the document	Saka taƙaitaccen bayani ko tsakure a saman takardar
+	Length of summary	Tsawon taƙaitawa
+	Percent of original:	Kashi na asali:
+	Summary: {words} of {of} words	Taƙaitawa: kalmomi {words} daga cikin {of}
+	Type of summary	Nau'in taƙaitawa
+	Update document statistics	Sabunta ƙididdigar takarda
+	{n} sentences	Jimloli {n}
+	{n} words or less	Kalmomi {n} ko ƙasa da haka
+	At:	A:
+	Distance from text:	Nisa daga rubutu:
+	Format Frame	Tsara Firam
+	Format Frame…	Tsara Firam…
+	Frame	Firam
+	Frame…	Firam…
+	Insert Frame	Saka Firam
+	Lock anchor	Kulle anga
+	Remove Frame	Cire Firam
+	Text wrapping	Naɗe rubutu
+	Chinese Conversion	Juyar da Sinanci
+	Chinese Conversion…	Juyar da Sinanci…
+	Converted {n} characters	An juya haruffa {n}
+	Simplified Chinese to Traditional Chinese	Sinanci Sauƙaƙe zuwa Sinanci na Gargajiya
+	Simplified to Traditional	Sauƙaƙe zuwa na Gargajiya
+	Traditional Chinese to Simplified Chinese	Sinanci na Gargajiya zuwa Sinanci Sauƙaƙe
+	Traditional to Simplified	Na Gargajiya zuwa Sauƙaƙe
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Yi amfani da bambance-bambancen haruffa na Taiwan, Hong Kong SAR, da Macao SAR
+	Asian Layout	Tsarin Asiya
+	Fit Text	Daidaita Rubutu
+	Fit Text…	Daidaita Rubutu…
+	Two Lines in One	Layi Biyu a Ɗaya
+	Two Lines in One…	Layi Biyu a Ɗaya…
+	New text width (pt):	Sabon faɗin rubutu (pt):
+	Enclose in brackets	Kewaye da baka
+	Bracket pair:	Nau'in baka:
+	Typography	Fasahar haruffa
+	Character spacing control	Sarrafa tazarar haruffa
+	Don't compress	Kada a matse
+	Compress punctuation only	Matse alamomin rubutu kawai
+	Compress punctuation and Japanese kana	Matse alamomin rubutu da kana na Japananci
+	First and last characters	Haruffa na farko da na ƙarshe
+	Strict	Tsauri
+	Cannot start a line:	Ba za a iya fara layi ba:
+	Cannot end a line:	Ba za a iya ƙare layi ba:
+	Japanese Find Options	Zaɓuɓɓukan Neman Japananci
+	Sounds like (Japanese)	Yana kama da sauti (Japananci)
+	Match full/half width	Daidaita cikakken/rabin faɗi
+	Match hiragana/katakana	Daidaita hiragana/katakana
+	Match small kana	Daidaita ƙananan kana
+	Match prolonged sound marks and dashes	Daidaita alamomin tsawaita sauti da karan layi
+	Japanese Consistency Checker	Mai Duba Daidaiton Japananci
+	Japanese Consistency Checker…	Mai Duba Daidaiton Japananci…
+	No inconsistent spellings were found.	Ba a sami rubutun kalmomi marasa daidaito ba.
+	Pick the spelling to keep in each group.	Zaɓi rubutun kalmar da za a riƙe a kowane rukuni.
+	Bidirectional text	Rubutu mai alƙibla biyu
+	Bidirectional Text	Rubutu Mai Alƙibla Biyu
+	Default direction:	Tsohuwar alƙibla:
+	Cursor movement:	Motsin alamar shigarwa:
+	Logical	Bisa ma'ana
+	Visual	Bisa gani
+	Manage Fields	Sarrafa Filaye
+	File locations	Wuraren fayiloli
+	File Locations	Wuraren Fayiloli
+	Documents:	Takardu:
+	Pictures:	Hotuna:
+	The system's choice	Zaɓin tsarin
+	Show Repairs	Nuna Gyare-gyaren Lalacewa
+	No repairs were needed.	Ba a buƙaci gyaran lalacewa ba.
+	These problems were found and repaired when the document was opened:	An gano waɗannan matsaloli kuma an gyara su lokacin da aka buɗe takardar:
+	An unreadable entry in the file was skipped: {what}	An tsallake wata shigarwa da ba a iya karantawa a fayil ɗin: {what}
+	An unreadable part was left out: {what}	An cire wani ɓangare da ba a iya karantawa: {what}
+	Unreadable relationships were ignored: {what}	An yi watsi da dangantaka da ba a iya karantawa: {what}
+	A missing part of an embedded object was left out: {what}	An cire wani ɓataccen ɓangare na abin da aka saka: {what}
+	Copy File	Kwafi Fayil
+	Find Files	Nemo Fayiloli
+	Letter Wizard	Mataimakin Wasiƙa
+	Recipient's name:	Sunan mai karɓa:
+	Salutation:	Gaisuwa:
+	Subject:	Batu:
+	Complimentary closing:	Kalmar rufewa:
+	Sender's name:	Sunan mai aikawa:
+	Job title:	Matsayin aiki:
+	Company:	Kamfani:
+	Enclosures:	Abubuwan da aka haɗa:
+	Cc:	Cc:
+	Edit Links to Files	Gyara Mahaɗai zuwa Fayiloli
+	Source file	Fayil na tushe
+	Locked	A kulle
+	Change Source	Canza Tushe
+	This document has no links to files.	Wannan takarda ba ta da mahaɗai zuwa fayiloli.
+	Web options	Zaɓuɓɓukan yanar gizo
+	Web Options	Zaɓuɓɓukan Yanar Gizo
+	Allow PNG as a graphics format	Bar PNG a matsayin tsarin zane
+	Rely on CSS for font formatting	Dogara da CSS don tsarin nau'in rubutu
+	Rely on VML for displaying graphics in browsers	Dogara da VML don nuna zane a burauza
+	Organize supporting files in a folder	Shirya fayilolin tallafi a babban fayil
+	Use long file names whenever possible	Yi amfani da dogayen sunayen fayil a duk lokacin da zai yiwu
+	Screen size:	Girman allo:
+	Pixels per inch:	Pixel a kowane inci:
+	Hangul Hanja Conversion	Juyar da Hangul Hanja
+	Hangul Hanja Conversion…	Juyar da Hangul Hanja…
+	Hangul to Hanja	Hangul zuwa Hanja
+	Hanja to Hangul	Hanja zuwa Hangul
+	Put the caret in Korean text to choose its Hanja.	Sanya alamar shigarwa a rubutun Koriyanci don zaɓar Hanja ɗinsa.
+	The selection, or the whole document when nothing is selected.	Zaɓi, ko dukkan takardar idan ba a zaɓi komai ba.

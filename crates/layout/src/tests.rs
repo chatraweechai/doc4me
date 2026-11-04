@@ -2817,6 +2817,26 @@ fn no_line_break_right_after_a_slash() {
 }
 
 #[test]
+fn a_line_may_start_at_a_bracket_after_a_quote_and_a_space() {
+    // Unicode 15.1 dropped LB15 (`QU SP* × OP`): Word breaks in `estratégicos” (según` after the
+    // space, as anywhere else (zenodo-025 wrapped a table row one line earlier than Word).
+    let text: String = (0..80).map(|i| format!("w{} “q{}” (p{}) ", "x".repeat(i % 7), "y".repeat(i % 5), i)).collect();
+    let d = Document::from_text(&text);
+    let l = lay(&d);
+    let mut starts = Vec::new();
+    for p in &l.pages {
+        for it in &p.items {
+            if let Placed::Lines { para, l0, l1, .. } = it {
+                starts.extend(para.lines[*l0..*l1].iter().map(|line| text[line.start..].chars().next().unwrap_or(' ')));
+            }
+        }
+    }
+    assert!(starts.len() > 5, "{} lines", starts.len());
+    assert!(starts.contains(&'('), "no line starts at a bracket: {starts:?}");
+    assert_eq!(super::para::quote_space_open_breaks("a” (b \"c\" [d x (e"), vec![5, 12]);
+}
+
+#[test]
 fn unequal_formats_lay_out_in_linear_time() {
     // Runs whose formats never compare equal (NaN spacing from a hostile file) each get a style;
     // finding a run's style must not compare it against every earlier one.
@@ -4611,5 +4631,110 @@ fn a_page_break_line_with_a_floating_object_stays_at_the_foot_of_the_page() {
         let last_filler = l.page_of(&Pos::body(fillers - 1, 0)).unwrap();
         let next = l.page_of(&Pos::body(fillers + 1, 0)).unwrap();
         assert_eq!(next, last_filler + 1, "{fillers} fillers: Next starts the page after the last filler's");
+    }
+}
+
+/// A legacy text form field's result wraps after its spaces like ordinary text (govuk-024: a
+/// long FORMTEXT result used to be one unbreakable word that stretched its table column); a blank
+/// field and a result without spaces stay whole.
+#[test]
+fn form_text_field_result_wraps_between_words() {
+    let lines_of = |result: &str| {
+        let mut d = Document::from_text("");
+        let form = doc4me_doc::form::FormField::text();
+        let field = InlineObject::Field { instr: " FORMTEXT ".into(), result: result.into(), locked: false, code: false, form: Some(Box::new(form)) };
+        d.para_mut(StoryRef::Body, &Path::top(0)).unwrap().insert_object(0, field, &Default::default()).unwrap();
+        let l = lay(&d);
+        l.pages[0]
+            .items
+            .iter()
+            .filter_map(|it| if let Placed::Lines { para, l0, l1, .. } = it { Some((para.clone(), *l0, *l1)) } else { None })
+            .map(|(_, a, b)| b - a)
+            .sum::<usize>()
+    };
+    let long = "word ".repeat(200);
+    assert!(lines_of(&long) > 1, "a long result wraps");
+    assert_eq!(lines_of("short result"), 1);
+    assert_eq!(lines_of(&"x".repeat(30)), 1);
+}
+
+/// The laid-out clusters of the first body paragraph.
+fn first_para_clusters(l: &DocLayout) -> Arc<crate::para::ParaLayout> {
+    l.pages[0].items.iter().find_map(|it| if let Placed::Lines { para, .. } = it { Some(para.clone()) } else { None }).expect("a paragraph")
+}
+
+/// Fit Text (`w:fitText`): the fitted characters together take the width asked for, widened or
+/// narrowed alike; the text around them keeps its own width.
+#[test]
+fn fit_text_sets_the_run_to_its_width() {
+    for width in [120.0f32, 12.0] {
+        let mut d = Document::from_text("ab fit me cd");
+        let plain = first_para_clusters(&lay(&d)).clusters.clone();
+        d.format_range(&Pos::body(0, 3), &Pos::body(0, 9), &|c| c.fit_text = Some(doc4me_doc::props::FitText { width, id: Some(1) })).unwrap();
+        let pl = first_para_clusters(&lay(&d));
+        let fitted: f32 = pl.clusters.iter().filter(|c| c.start >= 3 && c.end <= 9).map(|c| c.adv).sum();
+        let natural: f32 = plain.iter().filter(|c| c.start >= 3 && c.end <= 9).map(|c| c.adv).sum();
+        assert!(natural > 12.0 && natural < 120.0, "{natural}");
+        if width > natural {
+            assert!((fitted - width).abs() < 0.01, "{fitted} for {width}");
+        } else {
+            assert!(fitted <= natural && fitted >= 0.0, "{fitted} for {width}");
+        }
+        // Outside the fitted text nothing moves.
+        let others = |cs: &[crate::para::Cluster]| -> Vec<f32> { cs.iter().filter(|c| c.end <= 3 || c.start >= 9).map(|c| c.adv).collect() };
+        assert_eq!(others(&pl.clusters), others(&plain));
+    }
+}
+
+/// Two Lines in One (`w:eastAsianLayout/@w:combine`): the text becomes one piece about half as
+/// wide (two half-size lines), the first half above; brackets come at full size and the line
+/// never breaks inside.
+#[test]
+fn two_lines_in_one_stacks_the_text_in_one_piece() {
+    use doc4me_doc::props::{CombineBrackets, EastAsianLayout};
+    let mut d = Document::from_text("xx ABCDEFGH yy");
+    let plain: f32 = first_para_clusters(&lay(&d)).clusters.iter().filter(|c| c.start >= 3 && c.end <= 11).map(|c| c.adv).sum();
+    let combine = |brackets| EastAsianLayout { combine: true, brackets, ..Default::default() };
+    d.format_range(&Pos::body(0, 3), &Pos::body(0, 11), &|c| c.east_asian = Some(combine(CombineBrackets::None))).unwrap();
+    let pl = first_para_clusters(&lay(&d));
+    let pieces: Vec<&crate::para::Cluster> = pl.clusters.iter().filter(|c| c.start == 3 && c.end == 11).collect();
+    assert_eq!(pieces.len(), 1, "{:?}", pl.clusters);
+    let w = pieces[0].adv;
+    // Four letters at half size: about a quarter of the eight at full size.
+    assert!(w > plain * 0.15 && w < plain * 0.4, "{w} of {plain}");
+    assert!(pieces[0].obj_h > 0.0, "the line makes room for the raised line");
+    let raised: Vec<f32> = pl.glyphs.get(pieces[0].g0 as usize..pieces[0].g1 as usize).unwrap().iter().map(|g| g.dy).collect();
+    assert!(raised.iter().take(4).all(|dy| *dy > 0.0) && raised.iter().skip(4).all(|dy| *dy < 0.0), "{raised:?}");
+    // Brackets: an opening one, the text and a closing one; no break before the closing bracket.
+    d.format_range(&Pos::body(0, 3), &Pos::body(0, 11), &|c| c.east_asian = Some(combine(CombineBrackets::Round))).unwrap();
+    let pl = first_para_clusters(&lay(&d));
+    let pieces: Vec<&crate::para::Cluster> = pl.clusters.iter().filter(|c| c.start == 3 && c.end == 11).collect();
+    assert_eq!(pieces.len(), 3, "{:?}", pl.clusters);
+    assert!(!pieces[0].break_after && !pieces[1].break_after, "{pieces:?}");
+}
+
+/// Character spacing control "compress punctuation": where two full-width marks meet, the blank
+/// half of one goes ("。」" and "」「" close up); other text and the setting's default keep widths.
+#[test]
+fn compress_punctuation_closes_up_neighbouring_marks() {
+    let text = "日本。」「語」";
+    let width = |spacing| {
+        let mut d = Document::from_text(text);
+        d.settings.char_spacing = spacing;
+        let pl = first_para_clusters(&lay(&d));
+        (pl.clusters.iter().map(|c| c.adv).sum::<f32>(), pl.clusters.iter().map(|c| c.adv).collect::<Vec<f32>>())
+    };
+    let (plain, each) = width(doc4me_doc::CharSpacing::DoNotCompress);
+    let (tight, each_tight) = width(doc4me_doc::CharSpacing::CompressPunctuation);
+    // The em: an ideograph's width.
+    let size = each.first().copied().unwrap_or(0.0);
+    if each.get(2).is_some_and(|a| *a > size * 0.75) {
+        // 。」 → 。 loses half; 」「 → 」 loses half: one em in all.
+        assert!((plain - tight - size).abs() < 0.5, "{plain} → {tight}: {each:?} {each_tight:?}");
+        assert_eq!(each[0], each_tight[0], "an ideograph keeps its width");
+        assert_eq!(each.last(), each_tight.last(), "a closing mark with nothing after it keeps its width");
+    } else {
+        // No full-width CJK face here: nothing is compressed.
+        assert_eq!(plain, tight);
     }
 }

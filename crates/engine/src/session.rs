@@ -213,6 +213,8 @@ pub struct FindState {
     pub match_suffix: bool,
     pub ignore_punct: bool,
     pub ignore_space: bool,
+    /// Sounds like (Japanese) and its options.
+    pub fuzzy: crate::cmd::find_pattern::Fuzzy,
     /// Matches from the last search: (start, end).
     #[serde(skip)]
     pub results: Vec<(Pos, Pos)>,
@@ -464,6 +466,17 @@ pub struct Prefs {
     pub paste_same: PasteMode,
     pub paste_between: PasteMode,
     pub paste_other: PasteMode,
+    /// File › Options › Advanced › Bidirectional text › Cursor movement: Logical (the arrow keys
+    /// move through the text in reading order, Left going on in right-to-left paragraphs);
+    /// off, Visual (one place to the left or right on the screen).
+    pub logical_cursor: bool,
+    /// Bidirectional text › Default direction: new blank documents read right to left.
+    pub rtl_default: bool,
+    /// File › Options › Advanced › File Locations › Documents: the folder Open and Save As start
+    /// in (Save As starts beside a document that has a file); `None`, the system's choice.
+    pub documents_dir: Option<String>,
+    /// File Locations › Pictures: the folder Insert Picture starts in.
+    pub pictures_dir: Option<String>,
 }
 
 /// What Paste keeps of the copied content's formatting (Word's Paste Options).
@@ -503,6 +516,10 @@ impl Default for Prefs {
             paste_same: PasteMode::Keep,
             paste_between: PasteMode::Keep,
             paste_other: PasteMode::Keep,
+            logical_cursor: false,
+            rtl_default: false,
+            documents_dir: None,
+            pictures_dir: None,
         }
     }
 }

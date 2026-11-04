@@ -116,6 +116,11 @@ pub fn run(root: &Path, args: &[&str]) -> Result<(), String> {
     let manifest = corpus_rows(read_tsv(&dir.join("corpus.tsv"))?)?;
     if opts.download {
         download(&manifest, &corpus_dir)?;
+        // Fetching only: no report, so a later `--corpus` run sees a clean tree and the
+        // committed report isn't replaced by one without the corpus.
+        if !opts.corpus {
+            return Ok(());
+        }
     }
     if opts.corpus && !["pdfinfo", "pdftotext"].iter().all(|t| Command::new(t).arg("-v").output().is_ok()) {
         return Err("--corpus compares pages with poppler's pdfinfo and pdftotext; install poppler-utils (Windows: poppler for Windows) first".into());
@@ -529,7 +534,9 @@ fn download(manifest: &[BTreeMap<String, String>], dir: &Path) -> Result<(), Str
         }
     }
     println!("corpus: {got} files downloaded, {bad} failed, into {}", dir.display());
-    Ok(())
+    // A missing file would count as "not run" and pull the number down, so a partial download
+    // fails: callers (the Windows workflow) retry it, and files already fetched are kept.
+    if bad > 0 { Err(format!("corpus: {bad} files couldn't be downloaded; run --download again")) } else { Ok(()) }
 }
 
 /// One corpus document's results.
@@ -797,6 +804,20 @@ fn render(sets: &[SetResult], corpus_run: usize, corpus_listed: usize, commit: &
             .collect();
         md.push_str(&format!("| {name} | {weight:.2} | {:.1}% | {:.1}% | {} |\n", dim * 100.0, dim_ahead * 100.0, detail.join("; ")));
     }
+    // Every deferred row with its recorded reason, none left out (the list below caps at 40 per set).
+    let deferred_rows: Vec<(&str, &str, &str)> = sets
+        .iter()
+        .flat_map(|s| s.failing.iter().filter_map(move |(id, why)| why.strip_prefix("deferred: ").map(|w| (s.name.as_str(), id.as_str(), w))))
+        .collect();
+    if !deferred_rows.is_empty() {
+        md.push_str(&format!(
+            "\n## Deferred rows ({})\n\nNot counted as passing until the owner asks for them. Each reason is the one recorded with the row (`docs/readiness/*.tsv`).\n\n",
+            deferred_rows.len()
+        ));
+        for (set, id, why) in &deferred_rows {
+            md.push_str(&format!("- `{id}` ({set}) {}\n", why.replace('\n', " ").replace('|', "/")));
+        }
+    }
     md.push_str("\n## Not passing\n\nThe first 40 of each set; the rest are counted above.\n");
     for s in sets.iter().filter(|s| !s.failing.is_empty()) {
         md.push_str(&format!("\n### {} ({} of {})\n\n", s.name, s.failing.len(), s.total));
@@ -810,9 +831,18 @@ fn render(sets: &[SetResult], corpus_run: usize, corpus_listed: usize, commit: &
 fn commit(root: &Path) -> String {
     let out = Command::new("git").current_dir(root).args(["rev-parse", "--short", "HEAD"]).output();
     let hash = out.map(|o| String::from_utf8_lossy(&o.stdout).trim().to_string()).unwrap_or_default();
-    let dirty =
-        Command::new("git").current_dir(root).args(["status", "--porcelain", "--untracked-files=no"]).output().is_ok_and(|o| !o.stdout.is_empty());
-    if dirty { format!("{hash}+changes") } else { hash }
+    // The report itself is left out: an earlier run rewriting it doesn't change what is measured.
+    let status = Command::new("git")
+        .current_dir(root)
+        .args(["status", "--porcelain", "--untracked-files=no", "--", ".", ":(exclude)docs/readiness.md"])
+        .output();
+    let changed = status.map(|o| String::from_utf8_lossy(&o.stdout).trim_end().to_string()).unwrap_or_default();
+    if changed.is_empty() {
+        return hash;
+    }
+    // Names the tracked files that differ, so a "+changes" label in a CI report can be traced.
+    eprintln!("readiness: the working tree differs from {hash}:\n{changed}");
+    format!("{hash}+changes")
 }
 
 /// Today's date (UTC), as YYYY-MM-DD.
@@ -838,6 +868,22 @@ pub fn civil_date(days: i64) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_partial_download_is_an_error() {
+        let dir = std::env::temp_dir().join(format!("xtask-download-{}", std::process::id()));
+        let row = |id: &str, url: &str| -> BTreeMap<String, String> {
+            [("id", id), ("docx_url", url), ("docx_sha256", "00"), ("pdf_url", url), ("pdf_sha256", "00")]
+                .into_iter()
+                .map(|(k, v)| (k.to_string(), v.to_string()))
+                .collect()
+        };
+        // A URL that isn't https is never fetched and counts as failed, so no network is used.
+        let err = download(&[row("doc-1", "http://example.invalid/a")], &dir).unwrap_err();
+        assert!(err.contains("2 files"), "{err}");
+        assert!(download(&[], &dir).is_ok(), "nothing listed, nothing missing");
+        let _ = std::fs::remove_dir_all(&dir);
+    }
 
     fn registry() -> Registry {
         Registry::from_json(&serde_json::json!([
@@ -929,6 +975,9 @@ mod tests {
         assert!(d.failing.iter().any(|(id, why)| id == "d2" && why.starts_with("deferred: Mail: Outlook")));
         let md = render(&sets, 3, 5, "abc", "2026-10-27");
         assert!(md.contains("**Without the deferred rows: ") && md.contains("hardware 1/4 (2 deferred)"), "{md}");
+        // Every deferred row is listed with its reason, not only the first 40 of a set.
+        assert!(md.contains("## Deferred rows (2)"), "{md}");
+        assert!(md.contains("- `h2` (hardware) pen") && md.contains("- `h4` (hardware) mic"), "{md}");
         // Every row deferred: nothing left to do counts as done.
         let mut all = SetResult::new("platforms");
         all.defer("p", "arm64");

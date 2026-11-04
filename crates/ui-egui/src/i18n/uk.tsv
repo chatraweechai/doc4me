@@ -2934,3 +2934,81 @@ spacing	Normal	Звичайний
 	Traditional Chinese to Simplified Chinese	Традиційна китайська на спрощену китайську
 	Traditional to Simplified	З традиційної на спрощену
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Використовувати варіанти символів для Тайваню, САР Гонконг і САР Макао
+	Asian Layout	Азійна розмітка
+	Fit Text	Підгонка тексту
+	Fit Text…	Підгонка тексту…
+	Two Lines in One	Два рядки в одному
+	Two Lines in One…	Два рядки в одному…
+	New text width (pt):	Нова ширина тексту (пункти):
+	Enclose in brackets	Узяти в дужки
+	Bracket pair:	Тип дужок:
+	Typography	Типографіка
+	Character spacing control	Керування інтервалом між символами
+	Don't compress	Не стискати
+	Compress punctuation only	Стискати лише розділові знаки
+	Compress punctuation and Japanese kana	Стискати розділові знаки та японську кану
+	First and last characters	Перші й останні символи
+	Strict	Суворі
+	Cannot start a line:	Не може починати рядок:
+	Cannot end a line:	Не може завершувати рядок:
+	Japanese Find Options	Параметри пошуку японського тексту
+	Sounds like (Japanese)	Звучить як (японська)
+	Match full/half width	Не розрізняти повну/половинну ширину
+	Match hiragana/katakana	Не розрізняти хірагану/катакану
+	Match small kana	Не розрізняти малі кани
+	Match prolonged sound marks and dashes	Не розрізняти знаки довготи й тире
+	Japanese Consistency Checker	Перевірка узгодженості японського тексту
+	Japanese Consistency Checker…	Перевірка узгодженості японського тексту…
+	No inconsistent spellings were found.	Різних написань одного слова не знайдено.
+	Pick the spelling to keep in each group.	Виберіть у кожній групі написання, яке слід залишити.
+	Bidirectional text	Двонапрямлений текст
+	Bidirectional Text	Двонапрямлений текст
+	Default direction:	Напрямок за замовчуванням:
+	Cursor movement:	Переміщення курсора:
+	Logical	Логічне
+	Visual	Візуальне
+	Manage Fields	Керування полями
+	File locations	Розташування файлів
+	File Locations	Розташування файлів
+	Documents:	Документи:
+	Pictures:	Зображення:
+	The system's choice	Вибір системи
+	Show Repairs	Показати виправлення
+	No repairs were needed.	Виправлення не знадобилися.
+	These problems were found and repaired when the document was opened:	Під час відкриття документа виявлено та виправлено такі проблеми:
+	An unreadable entry in the file was skipped: {what}	Пропущено нечитабельний запис файлу: {what}
+	An unreadable part was left out: {what}	Нечитабельну частину пропущено: {what}
+	Unreadable relationships were ignored: {what}	Нечитабельні зв’язки проігноровано: {what}
+	A missing part of an embedded object was left out: {what}	Відсутню частину вбудованого об’єкта пропущено: {what}
+	Copy File	Копіювати файл
+	Find Files	Знайти файли
+	Letter Wizard	Майстер листів
+	Recipient's name:	Ім’я одержувача:
+	Salutation:	Звертання:
+	Subject:	Тема:
+	Complimentary closing:	Завершальна фраза:
+	Sender's name:	Ім’я відправника:
+	Job title:	Посада:
+	Company:	Організація:
+	Enclosures:	Вкладення:
+	Cc:	Копія:
+	Edit Links to Files	Редагувати зв’язки з файлами
+	Source file	Вихідний файл
+	Locked	Заблоковано
+	Change Source	Змінити джерело
+	This document has no links to files.	У цьому документі немає зв’язків із файлами.
+	Web options	Веб-параметри
+	Web Options	Веб-параметри
+	Allow PNG as a graphics format	Дозволити формат PNG для графіки
+	Rely on CSS for font formatting	Використовувати CSS для форматування шрифту
+	Rely on VML for displaying graphics in browsers	Використовувати VML для відображення графіки в браузерах
+	Organize supporting files in a folder	Упорядковувати допоміжні файли в папці
+	Use long file names whenever possible	За можливості використовувати довгі імена файлів
+	Screen size:	Розмір екрана:
+	Pixels per inch:	Пікселів на дюйм:
+	Hangul Hanja Conversion	Перетворення хангиль/ханча
+	Hangul Hanja Conversion…	Перетворення хангиль/ханча…
+	Hangul to Hanja	Хангиль у ханча
+	Hanja to Hangul	Ханча у хангиль
+	Put the caret in Korean text to choose its Hanja.	Поставте курсор у корейський текст, щоб вибрати ханча.
+	The selection, or the whole document when nothing is selected.	Виділений фрагмент або весь документ, якщо нічого не виділено.

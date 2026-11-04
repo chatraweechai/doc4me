@@ -1,11 +1,11 @@
 id	word_dialog	word_value	word_arguments	command	check	status	note
 dlg-001	wdDialogBuildingBlockOrganizer	2067	(none)	insert.quickParts	registry		Quick Parts organizer
 dlg-002	wdDialogConnect	420	Drive, Path, Password	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Windows network drives; network drive connect (legacy)
-dlg-003	wdDialogConsistencyChecker	1121	(none)	-	registry		
+dlg-003	wdDialogConsistencyChecker	1121	(none)	review.consistencyChecker	registry		Japanese Consistency Checker (表記ゆれチェック)
 dlg-004	wdDialogContentControlProperties	2394	(none)	developer.properties	registry		Content Control Properties
 dlg-005	wdDialogControlRun	235	Application	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Windows Control Panel; runs Control Panel or Clipboard (legacy)
 dlg-006	wdDialogConvertObject	392	IconNumber, ActivateAs, IconFileName, Caption, Class, DisplayIcon, Floating	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): OLE objects are converted by their Windows server programs
-dlg-007	wdDialogCopyFile	300	FileName, Directory	-	registry		legacy
+dlg-007	wdDialogCopyFile	300	FileName, Directory	file.copyFile	registry		legacy
 dlg-008	wdDialogCreateAutoText	872	(none)	insert.autoText	registry		save selection as AutoText
 dlg-009	wdDialogCreateSource	1922	(none)	references.citation	registry		Create Source
 dlg-010	wdDialogCSSLinks	1261	LinkStyles	-	registry		
@@ -19,7 +19,7 @@ dlg-017	wdDialogEditFind	112	Find, Replace, Direction, MatchCase, WholeWord, Pat
 dlg-018	wdDialogEditFrame	458	Wrap, WidthRule, FixedWidth, HeightRule, FixedHeight, PositionHorz, PositionHorzRel, DistFromText, PositionVert, PositionVertRel, DistVertFromText, MoveWithText, LockAnchor, RemoveFrame	format.frame	registry		Frame (Word's Edit › Frame): text wrapping Around / None, width Auto / Exactly, height Auto / At least / Exactly, horizontal and vertical position (alignment or measurement) relative to column / margin / page and paragraph / margin / page, distance from text, Move with text, Lock anchor, Remove Frame
 dlg-019	wdDialogEditGoTo	896	Find, Replace, Direction, MatchCase, WholeWord, PatternMatch, SoundsLike, FindNext, ReplaceOne, ReplaceAll, Format, Wrap, FindAllWordForms, MatchByte, FuzzyFind, Destination, CorrectEnd, MatchKashida, MatchDiacritics, MatchAlefHamza, MatchControl	edit.goto	registry		
 dlg-020	wdDialogEditGoToOld	811	(none)	edit.goto	registry		Go To (old): Word's destinations typed as text — p3, s2, l10, s2p3, p3l4, +2, -1, %50; a bare number is a page
-dlg-021	wdDialogEditLinks	124	UpdateMode, Locked, SavePictureInDoc, UpdateNow, OpenSource, KillLink, Link, Application, Item, FileName, PreserveFormatLinkUpdate	-	registry		Edit Links to Files
+dlg-021	wdDialogEditLinks	124	UpdateMode, Locked, SavePictureInDoc, UpdateNow, OpenSource, KillLink, Link, Application, Item, FileName, PreserveFormatLinkUpdate	file.editLinks	registry		Edit Links to Files: list, lock, change source, break link
 dlg-022	wdDialogEditObject	125	Verb	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): OLE objects are edited by their Windows server programs; OLE edit
 dlg-023	wdDialogEditPasteSpecial	111	IconNumber, Link, DisplayIcon, Class, DataType, IconFileName, Caption, Floating	edit.pasteSpecial	registry		
 dlg-024	wdDialogEditPublishOptions	735	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Mac OS publish and subscribe (another platform); legacy
@@ -30,7 +30,7 @@ dlg-028	wdDialogEditSubscribeTo	733	Macintosh-only. For information about this c
 dlg-029	wdDialogEditTOACategory	625	Category, CategoryName	references.toaCategory	registry		Edit Category (Mark Citation › Category…): categories 1–16 with Word's names, Replace with renames one (per user, as Word keeps them in Normal); Mark Citation files the citation under a category (TA \l \s \c), Insert Table of Authorities lists one or All categories under their names, with passim
 dlg-030	wdDialogEmailOptions	863	(none)	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Outlook e-mail stationery and signatures (Microsoft service)
 dlg-031	wdDialogFileDocumentLayout	178	Tab, PaperSize, TopMargin, BottomMargin, LeftMargin, RightMargin, Gutter, PageWidth, PageHeight, Orientation, FirstPage, OtherPages, VertAlign, ApplyPropsTo, Default, FacingPages, HeaderDistance, FooterDistance, SectionStart, OddAndEvenPages, DifferentFirstPage, Endnotes, LineNum, StartingNum, FromText, CountBy, NumMode, TwoOnOne, GutterPosition, LayoutMode, CharsLine, LinesPage, CharPitch, LinePitch, DocFontName, DocFontSize, PageColumns, TextFlow, FirstPageOnLeft, SectionType, RTLAlignment	layout.pageSetup	registry		Page Setup › Layout
-dlg-032	wdDialogFileFind	99	SearchName, SearchPath, Name, SubDir, Title, Author, Keywords, Subject, Options, MatchCase, Text, PatternMatch, DateSavedFrom, DateSavedTo, SavedBy, DateCreatedFrom, DateCreatedTo, View, SortBy, ListBy, SelectedFile, Add, Delete, ShowFolders, MatchByte	-	registry		legacy
+dlg-032	wdDialogFileFind	99	SearchName, SearchPath, Name, SubDir, Title, Author, Keywords, Subject, Options, MatchCase, Text, PatternMatch, DateSavedFrom, DateSavedTo, SavedBy, DateCreatedFrom, DateCreatedTo, View, SortBy, ListBy, SelectedFile, Add, Delete, ShowFolders, MatchByte	file.findFiles	registry		legacy: by name, text and subfolders
 dlg-033	wdDialogFileMacCustomPageSetupGX	737	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.		excluded		Word for Mac only
 dlg-034	wdDialogFileMacPageSetup	685	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.		excluded		Word for Mac only
 dlg-035	wdDialogFileMacPageSetupGX	444	Macintosh-only. For information about this constant, consult the language reference Help included with Microsoft Office Macintosh Edition.		excluded		Word for Mac only
@@ -45,7 +45,7 @@ dlg-043	wdDialogFileSaveAs	84	Name, Format, LockAnnot, Password, AddToMru, Write
 dlg-044	wdDialogFileSaveVersion	1007	(none)	file.versions	registry		Save Version: File › Info › Version History saves the document as a named version (`file.versions` {"save": label}); Word 2002–2003's versions feature
 dlg-045	wdDialogFileSummaryInfo	86	Title, Subject, Author, Keywords, Comments, FileName, Directory, Template, CreateDate, LastSavedDate, LastSavedBy, RevisionNumber, EditTime, LastPrintedDate, NumPages, NumWords, NumChars, NumParas, NumLines, Update, FileSize	file.properties	registry		Properties
 dlg-046	wdDialogFileVersions	945	AutoVersion, VersionDesc	file.versions	registry		
-dlg-047	wdDialogFitText	983	FitTextWidth	-	registry		
+dlg-047	wdDialogFitText	983	FitTextWidth	format.fitText	registry		Home › Paragraph › Asian Layout › Fit Text (`format.fitText`, `w:fitText`: the selected text set to a width, read and saved; layout test `fit_text_sets_the_run_to_its_width`, UI test `asian_layout_buttons_open_their_dialogs`)
 dlg-048	wdDialogFontSubstitution	581	UnavailableFont, SubstituteFont	file.fontSubstitution	registry		Font Substitution with Convert Permanently (Options › Advanced)
 dlg-049	wdDialogFormatAddrFonts	103	Points, Underline, Color, StrikeThrough, Superscript, Subscript, Hidden, SmallCaps, AllCaps, Spacing, Position, Kerning, KerningMin, Default, Tab, Font, Bold, Italic, DoubleStrikeThrough, Shadow, Outline, Emboss, Engrave, Scale, Animations, CharAccent, FontMajor, FontLowAnsi, FontHighAnsi, CharacterWidthGrid, ColorRGB, UnderlineColor, PointsBi, ColorBi, FontNameBi, BoldBi, ItalicBi, DiacColor	mailings.envelopes	registry		Envelopes › Delivery address Font…: the Font dialog, kept in the Envelope Address style
 dlg-050	wdDialogFormatBordersAndShading	189	ApplyTo, Shadow, TopBorder, LeftBorder, BottomBorder, RightBorder, HorizBorder, VertBorder, TopColor, LeftColor, BottomColor, RightColor, HorizColor, VertColor, FromText, Shading, Foreground, Background, Tab, FineShading, TopStyle, LeftStyle, BottomStyle, RightStyle, HorizStyle, VertStyle, TopWeight, LeftWeight, BottomWeight, RightWeight, HorizWeight, VertWeight, BorderObjectType, BorderArtWeight, BorderArt, FromTextTop, FromTextBottom, FromTextLeft, FromTextRight, OffsetFrom, InFront, SurroundHeader, SurroundFooter, JoinBorder, LineColor, WhichPages, TL2BRBorder, TR2BLBorder, TL2BRColor, TR2BLColor, TL2BRStyle, TR2BLStyle, TL2BRWeight, TR2BLWeight, ForegroundRGB, BackgroundRGB, TopColorRGB, LeftColorRGB, BottomColorRGB, RightColorRGB, HorizColorRGB, VertColorRGB, TL2BRColorRGB, TR2BLColorRGB, LineColorRGB	para.borders	registry		Borders and Shading
@@ -113,7 +113,7 @@ dlg-111	wdDialogInsertTableOfContents	171	Outline, Fields, From, To, TableId, Ad
 dlg-112	wdDialogInsertTableOfFigures	472	Outline, Fields, From, To, TableId, AddedStyles, Caption, HeadingSeparator, Replace, MarkEntry, AutoMark, MarkCitation, Type, RightAlignPageNumbers, Passim, KeepFormatting, Columns, Category, Label, ShowPageNumbers, AccentedLetters, Filter, SortBy, Leader, TOCUseHyperlinks, TOCHidePageNumInWeb, IndexLanguage, UseOutlineLevel	references.tableOfFigures	registry		
 dlg-113	wdDialogInsertWebComponent	1324	IconNumber, FileName, Link, DisplayIcon, Tab, Class, IconFileName, Caption, Floating	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): Office Web Components (Microsoft ActiveX); legacy
 dlg-114	wdDialogLabelOptions	1367	(none)	mailings.labels	registry		
-dlg-115	wdDialogLetterWizard	821	SenderCity, DateFormat, IncludeHeaderFooter, LetterStyle, Letterhead, LetterheadLocation, LetterheadSize, RecipientName, RecipientAddress, Salutation, SalutationType, RecipientGender, RecipientReference, MailingInstructions, AttentionLine, LetterSubject, CCList, SenderName, ReturnAddress, Closing, SenderJobTitle, SenderCompany, SenderInitials, EnclosureNumber, PageDesign, InfoBlock, SenderGender, ReturnAddressSF, RecipientCode, SenderCode, SenderReference	-	registry		legacy
+dlg-115	wdDialogLetterWizard	821	SenderCity, DateFormat, IncludeHeaderFooter, LetterStyle, Letterhead, LetterheadLocation, LetterheadSize, RecipientName, RecipientAddress, Salutation, SalutationType, RecipientGender, RecipientReference, MailingInstructions, AttentionLine, LetterSubject, CCList, SenderName, ReturnAddress, Closing, SenderJobTitle, SenderCompany, SenderInitials, EnclosureNumber, PageDesign, InfoBlock, SenderGender, ReturnAddressSF, RecipientCode, SenderCode, SenderReference	file.letterWizard	registry		legacy: a new letter from its fields
 dlg-116	wdDialogListCommands	723	ListType	tools.listCommands	registry		List Commands: current keyboard settings or all commands, into a new document
 dlg-117	wdDialogMailMerge	676	CheckErrors, Destination, MergeRecords, From, To, Suppression, MailMerge, QueryOptions, MailSubject, MailAsAttachment, MailAddress	mailings.finish	registry		Merge (Merge to New Document / Merge to Printer from Finish & Merge, Alt+Shift+N / Alt+Shift+M; Merge… in the Mail Merge Helper with Merge to): All / Current record / From–To, Don't print blank lines when data fields are empty (default) or print them, Check Errors…, Query Options…; UI test dialogs_data::tests::merge_dialog_helper_and_header_sources
 dlg-118	wdDialogMailMergeCheck	677	CheckErrors	mailings.checkErrors	registry		Check for Errors
@@ -150,8 +150,8 @@ dlg-148	wdDialogPermission	1469	(none)		excluded		Information Rights Management 
 dlg-149	wdDialogPhoneticGuide	986	(none)	format.phonetic	registry		
 dlg-150	wdDialogReviewAfmtRevisions	570	(none)	format.autoFormatReview	registry		"Formatting completed" after AutoFormat and Review Changes: Accept All, Reject All, Review Changes (Find ←/→ selects each changed paragraph, Reject puts it back); UI test dialogs_data::tests::autoformat_tab_and_review_dialog
 dlg-151	wdDialogSchemaLibrary	1417	(none)	-	registry		
-dlg-152	wdDialogSearch	1363	(none)	-	registry		legacy file search
-dlg-153	wdDialogShowRepairs	1381	(none)	-	registry		
+dlg-152	wdDialogSearch	1363	(none)	file.findFiles	registry		legacy file search
+dlg-153	wdDialogShowRepairs	1381	(none)	file.showRepairs	registry		what opening a damaged .docx repaired or left out
 dlg-154	wdDialogSourceManager	1920	(none)	references.sources	registry		
 dlg-155	wdDialogStyleManagement	1948	(none)	styles.manage	registry		
 dlg-156	wdDialogTableAutoFormat	563	(none)	table.style	registry		Table AutoFormat (Table Design › Styles › Table AutoFormat…): the table styles and Apply special formats to Header Row, First Column, Total Row, Last Column (table.style + table.look in one undo step)
@@ -192,23 +192,23 @@ dlg-190	wdDialogToolsCustomizeMenus	433	(none)	tools.customizeRibbon	registry		W
 dlg-191	wdDialogToolsDictionary	989	(none)	file.options	registry		Options › Proofing › Custom dictionary (add and remove words)
 dlg-192	wdDialogToolsEnvelopesAndLabels	607	(none)	mailings.envelopes	registry		
 dlg-193	wdDialogToolsGrammarSettings	885	(none)	file.options	registry		Grammar Settings (File › Options › Proofing › Writing Style: Grammar › Settings…): Capitalization, Repeated words, Word forms (a/an; Polish w/we, z/ze), Punctuation, Spacing — the kinds of rule Doc4Me checks, in English and Polish; Reset All; file.options grammarRules
-dlg-194	wdDialogToolsHangulHanjaConversion	784	(none)	-	registry		
+dlg-194	wdDialogToolsHangulHanjaConversion	784	(none)	review.hangulHanja	registry		character by character with Unihan kHangul readings
 dlg-195	wdDialogToolsHighlightChanges	197	(none)	review.trackingOptions	registry		
 dlg-196	wdDialogToolsHyphenation	195	(none)	layout.hyphenation	registry		
 dlg-197	wdDialogToolsLanguage	188	(none)	review.language	registry		
 dlg-198	wdDialogToolsMacro	215	(none)	tools.macros	registry		
 dlg-199	wdDialogToolsMacroRecord	214	(none)	tools.recordMacro	registry		
-dlg-200	wdDialogToolsManageFields	631	(none)	-	registry		
+dlg-200	wdDialogToolsManageFields	631	(none)	mailings.manageFields	registry		add, remove or rename the recipient list's fields
 dlg-201	wdDialogToolsMergeDocuments	435	(none)	review.combine	registry		
 dlg-202	wdDialogToolsOptions	974	(none)	file.options	registry		
 dlg-203	wdDialogToolsOptionsAutoFormat	959	(none)	tools.autocorrect	registry		AutoCorrect Options › AutoFormat: Apply (Built-in Heading styles, List styles, Automatic bulleted lists, Other paragraph styles), Replace (quotes, ordinals, fractions, dashes, *bold* and _italic_, links), Preserve Styles; AutoFormat Now / AutoFormat and Review Changes
 dlg-204	wdDialogToolsOptionsAutoFormatAsYouType	778	(none)	tools.autocorrect	registry		
-dlg-205	wdDialogToolsOptionsBidi	1029	(none)	-	registry		
+dlg-205	wdDialogToolsOptionsBidi	1029	(none)	file.bidiOptions	registry		Options › Advanced › Bidirectional text (default direction, cursor movement)
 dlg-206	wdDialogToolsOptionsCompatibility	525	(none)	file.compatibilityOptions	registry		Compatibility Options: the layout options Doc4Me follows (Options › Advanced)
 dlg-207	wdDialogToolsOptionsEdit	224	(none)	file.options	registry		Advanced
 dlg-208	wdDialogToolsOptionsEditCopyPaste	1356	(none)	file.options	registry		File › Options › Advanced › Cut, copy, and paste: Pasting within the same document, between documents, from other programs (Keep Source Formatting, Merge Formatting, Keep Text Only); file.options pasteSame/pasteBetween/pasteOther
-dlg-209	wdDialogToolsOptionsFileLocations	225	(none)	-	registry		
-dlg-210	wdDialogToolsOptionsFuzzy	790	(none)	-	registry		Japanese fuzzy find
+dlg-209	wdDialogToolsOptionsFileLocations	225	(none)	file.fileLocations	registry		Options › Advanced › File locations (Documents, Pictures)
+dlg-210	wdDialogToolsOptionsFuzzy	790	(none)	edit.fuzzyOptions	registry		Japanese fuzzy find: Find Options (Japanese) (`edit.fuzzyOptions`: match full/half width, hiragana/katakana, small kana, prolonged sound marks and dashes) with Sounds like (Japanese) in Advanced Find (`edit.find` `fuzzy`); tests `japanese_fuzzy_find_matches_what_reads_alike`, `japanese_fuzzy_find_through_the_commands`, UI `japanese_find_options_open_in_advanced_find`
 dlg-211	wdDialogToolsOptionsGeneral	203	(none)	file.options	registry		General
 dlg-212	wdDialogToolsOptionsPrint	208	(none)	file.options	registry		Advanced › Print
 dlg-213	wdDialogToolsOptionsSave	209	(none)	file.options	registry		Save
@@ -216,7 +216,7 @@ dlg-214	wdDialogToolsOptionsSecurity	1361	(none)	file.options	registry		File ›
 dlg-215	wdDialogToolsOptionsSmartTag	1395	(none)	-	registry		legacy
 dlg-216	wdDialogToolsOptionsSpellingAndGrammar	211	(none)	file.options	registry		Proofing
 dlg-217	wdDialogToolsOptionsTrackChanges	386	(none)	review.trackingOptions	registry		
-dlg-218	wdDialogToolsOptionsTypography	739	(none)	-	registry		East Asian typography options
+dlg-218	wdDialogToolsOptionsTypography	739	(none)	file.typography	registry		File › Options › Typography (`file.typography`): Character spacing control (`w:characterSpacingControl`, compress punctuation between neighbouring full-width marks) and First and last characters standard/strict/custom (`w:strictFirstAndLastChars`, `w:noLineBreaksBefore`/`After`), read, laid out and saved; tests `typography_settings_change_reopen_and_undo`, `strict_and_custom_first_and_last_characters`, `compress_punctuation_closes_up_neighbouring_marks`, UI `typography_pane_changes_the_document_settings`
 dlg-219	wdDialogToolsOptionsUserInfo	213	(none)	file.options	registry		General › user name
 dlg-220	wdDialogToolsOptionsView	204	(none)	file.options	registry		Display
 dlg-221	wdDialogToolsProtectDocument	503	(none)	review.restrict	registry		
@@ -227,10 +227,10 @@ dlg-225	wdDialogToolsTemplates	87	(none)	tools.templates	registry
 dlg-226	wdDialogToolsThesaurus	194	(none)	review.thesaurus	registry		
 dlg-227	wdDialogToolsUnprotectDocument	521	(none)	review.restrict	registry		
 dlg-228	wdDialogToolsWordCount	228	(none)	review.wordCount	registry		
-dlg-229	wdDialogTwoLinesInOne	1161	(none)	-	registry		
+dlg-229	wdDialogTwoLinesInOne	1161	(none)	format.twoLinesInOne	registry		Home › Paragraph › Asian Layout › Two Lines in One (`format.twoLinesInOne`, `w:eastAsianLayout/@w:combine` with brackets, read and saved; layout test `two_lines_in_one_stacks_the_text_in_one_piece`, UI test `asian_layout_buttons_open_their_dialogs`)
 dlg-230	wdDialogUpdateTOC	331	(none)	references.updateToc	registry		
 dlg-231	wdDialogViewZoom	577	(none)	view.zoom	registry		
-dlg-232	wdDialogWebOptions	898	(none)	-	registry		
+dlg-232	wdDialogWebOptions	898	(none)	file.webOptions	registry		Options › Advanced › Web options (word/webSettings.xml read and saved)
 dlg-233	wdDialogWindowActivate	220	(none)	view.switchWindows	registry		
 dlg-234	wdDialogXMLElementAttributes	1460	(none)	-	registry		
 dlg-235	wdDialogXMLOptions	1425	(none)	-	registry		

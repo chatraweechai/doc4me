@@ -165,9 +165,10 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
         r.read_theme(&p);
     }
     // Secondary parts are optional: a broken one is skipped (logged), not fatal.
-    let lenient = |what: &str, res: Result<(), DocxError>| {
+    let lenient = |what: &str, part: &str, res: Result<(), DocxError>| {
         if let Err(e) = res {
             log::warn!("docx: ignoring unreadable {what}: {e}");
+            pkg.note_repair(crate::package::REPAIR_PART, part);
         }
     };
     // Styles come before settings, but their theme colours already follow its colour mapping.
@@ -175,28 +176,31 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
         r.read_color_mapping(&p);
     }
     if let Some(p) = part(rt::STYLES) {
-        lenient("styles", r.read_styles(&p));
+        lenient("styles", &p, r.read_styles(&p));
     }
     if let Some(p) = part(rt::NUMBERING) {
-        lenient("numbering", r.read_numbering(&p));
+        lenient("numbering", &p, r.read_numbering(&p));
     }
     // Without a stated mode (or settings at all) Word lays a document out as Word 2007 did.
     r.doc.settings.compat_mode = doc4me_doc::LEGACY_COMPAT_MODE;
     // Its complex-script properties are the file's: saved back as read.
     r.doc.complex_script_from_file = true;
     if let Some(p) = part(rt::SETTINGS) {
-        lenient("settings", r.read_settings(&p));
+        lenient("settings", &p, r.read_settings(&p));
+    }
+    if let Some(p) = part(rt::WEB_SETTINGS) {
+        lenient("web settings", &p, r.read_web_settings(&p));
     }
     if let Some(p) = part(rt::FOOTNOTES) {
-        lenient("footnotes", r.read_notes(&p, true));
+        lenient("footnotes", &p, r.read_notes(&p, true));
     }
     if let Some(p) = part(rt::ENDNOTES) {
-        lenient("endnotes", r.read_notes(&p, false));
+        lenient("endnotes", &p, r.read_notes(&p, false));
     }
     if let Some(p) = part(rt::COMMENTS) {
         let ex = part(rt::COMMENTS_EX);
         let utc = (part(rt::COMMENTS_IDS), part(rt::COMMENTS_EXTENSIBLE));
-        lenient("comments", r.read_comments(&p, ex.as_deref(), (utc.0.as_deref(), utc.1.as_deref())));
+        lenient("comments", &p, r.read_comments(&p, ex.as_deref(), (utc.0.as_deref(), utc.1.as_deref())));
     }
     // Bibliography sources live in a custom XML data store (`b:Sources`), related from the
     // package root or the main part; Word's own files sometimes leave the relationship out, so
@@ -221,7 +225,7 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
         if r.doc.sources.len() >= MAX_SOURCES {
             break;
         }
-        lenient("customXml bibliography", r.read_bibliography(path, &mut seen_sources));
+        lenient("customXml bibliography", path, r.read_bibliography(path, &mut seen_sources));
     }
 
     if let Some(bg) = root.child("w:background").and_then(|b| b.attr("w:color")).and_then(Rgb::parse) {
@@ -268,6 +272,10 @@ pub(crate) fn read_opened(pkg: &Package) -> Result<Document, DocxError> {
     }
     let mut doc = r.doc;
     doc.ensure_nonempty();
+    // Show Repairs: what the package and its parts had to leave out.
+    for (message, what) in pkg.repairs() {
+        doc.note_repair(message, what);
+    }
     Ok(doc)
 }
 
@@ -943,6 +951,41 @@ impl Reader<'_> {
         lv
     }
 
+    /// `w:webSettings` (§17.15.2): Web Options. Frames and HTML `div`s are not kept.
+    fn read_web_settings(&mut self, path: &str) -> Result<(), DocxError> {
+        let Some(root) = self.xml(path)? else { return Ok(()) };
+        let w = &mut self.doc.settings.web;
+        w.present = true;
+        let on = |k: &El| !k.attr("w:val").is_some_and(|v| matches!(v, "0" | "false" | "off"));
+        for k in root.els() {
+            match k.name.as_str() {
+                "w:encoding" => {
+                    w.encoding =
+                        k.attr("w:val").map(str::trim).filter(|v| !v.is_empty() && v.len() <= doc4me_doc::MAX_ENCODING_NAME).map(str::to_string);
+                }
+                "w:optimizeForBrowser" => {
+                    w.optimize_for_browser = on(k);
+                    w.browser_target = k.attr("w:target").map(str::trim).filter(|v| !v.is_empty() && v.len() <= 64).map(str::to_string);
+                }
+                "w:relyOnVML" => w.rely_on_vml = on(k),
+                "w:allowPNG" => w.allow_png = on(k),
+                "w:doNotRelyOnCSS" => w.rely_on_css = !on(k),
+                "w:doNotSaveAsSingleFile" => w.save_as_single_file = !on(k),
+                "w:doNotOrganizeInFolder" => w.organize_in_folder = !on(k),
+                "w:doNotUseLongFileNames" => w.long_file_names = !on(k),
+                "w:pixelsPerInch" => {
+                    w.pixels_per_inch =
+                        k.attr("w:val").and_then(|v| v.trim().parse::<u32>().ok()).filter(|n| doc4me_doc::PIXELS_PER_INCH.contains(n));
+                }
+                "w:targetScreenSz" => {
+                    w.target_screen = k.attr("w:val").filter(|v| doc4me_doc::TARGET_SCREENS.contains(v)).map(str::to_string);
+                }
+                _ => {}
+            }
+        }
+        Ok(())
+    }
+
     fn read_settings(&mut self, path: &str) -> Result<(), DocxError> {
         let Some(root) = self.xml(path)? else { return Ok(()) };
         let rels = self.pkg.rels(path);
@@ -989,6 +1032,23 @@ impl Reader<'_> {
                 "m:mathPr" => s.math = Some(math::read_math_pr(k)),
                 "w:mirrorMargins" => s.mirror_margins = on_off(k),
                 "w:autoHyphenation" => s.auto_hyphenation = on_off(k),
+                "w:characterSpacingControl" => {
+                    if let Some(v) = k.attr("w:val").and_then(doc4me_doc::CharSpacing::from_ooxml) {
+                        s.char_spacing = v;
+                    }
+                }
+                "w:strictFirstAndLastChars" => s.kinsoku.strict = on_off(k),
+                "w:noLineBreaksBefore" | "w:noLineBreaksAfter" => {
+                    let list = k.attr("w:val").and_then(doc4me_doc::Kinsoku::clean_list);
+                    if k.name == "w:noLineBreaksBefore" {
+                        s.kinsoku.no_start = list;
+                    } else {
+                        s.kinsoku.no_end = list;
+                    }
+                    if let Some(l) = k.attr("w:lang").filter(|l| !l.is_empty() && l.len() < 64) {
+                        s.kinsoku.lang = Some(l.to_string());
+                    }
+                }
                 "w:doNotHyphenateCaps" => s.hyphenate_caps = !on_off(k),
                 "w:hyphenationZone" => {
                     if let Some(v) = tw(k, "w:val").filter(|v| v.is_finite() && *v >= 0.0) {

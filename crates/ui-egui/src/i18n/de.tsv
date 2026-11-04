@@ -2921,3 +2921,81 @@ spacing	Normal	Normal
 	Traditional Chinese to Simplified Chinese	Traditionelles Chinesisch in vereinfachtes Chinesisch
 	Traditional to Simplified	Traditionell in Vereinfacht
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Zeichenvarianten für Taiwan, Sonderverwaltungszone Hongkong und Sonderverwaltungszone Macau verwenden
+	Asian Layout	Asiatisches Layout
+	Fit Text	Text anpassen
+	Fit Text…	Text anpassen…
+	Two Lines in One	Zwei Zeilen in einer
+	Two Lines in One…	Zwei Zeilen in einer…
+	New text width (pt):	Neue Textbreite (pt):
+	Enclose in brackets	In Klammern einschließen
+	Bracket pair:	Klammerpaar:
+	Typography	Typografie
+	Character spacing control	Zeichenabstandssteuerung
+	Don't compress	Nicht komprimieren
+	Compress punctuation only	Nur Satzzeichen komprimieren
+	Compress punctuation and Japanese kana	Satzzeichen und japanisches Kana komprimieren
+	First and last characters	Erste und letzte Zeichen
+	Strict	Streng
+	Cannot start a line:	Darf keine Zeile beginnen:
+	Cannot end a line:	Darf keine Zeile beenden:
+	Japanese Find Options	Japanische Suchoptionen
+	Sounds like (Japanese)	Ähnliche Schreibweise (Japanisch)
+	Match full/half width	Voll-/Halbbreite gleichsetzen
+	Match hiragana/katakana	Hiragana/Katakana gleichsetzen
+	Match small kana	Kleine Kana gleichsetzen
+	Match prolonged sound marks and dashes	Längezeichen und Striche gleichsetzen
+	Japanese Consistency Checker	Japanische Konsistenzprüfung
+	Japanese Consistency Checker…	Japanische Konsistenzprüfung…
+	No inconsistent spellings were found.	Es wurden keine uneinheitlichen Schreibweisen gefunden.
+	Pick the spelling to keep in each group.	Wählen Sie in jeder Gruppe die Schreibweise, die erhalten bleiben soll.
+	Bidirectional text	Bidirektionaler Text
+	Bidirectional Text	Bidirektionaler Text
+	Default direction:	Standardrichtung:
+	Cursor movement:	Cursorbewegung:
+	Logical	Logisch
+	Visual	Visuell
+	Manage Fields	Felder verwalten
+	File locations	Dateispeicherorte
+	File Locations	Dateispeicherorte
+	Documents:	Dokumente:
+	Pictures:	Bilder:
+	The system's choice	Auswahl des Systems
+	Show Repairs	Reparaturen anzeigen
+	No repairs were needed.	Es waren keine Reparaturen nötig.
+	These problems were found and repaired when the document was opened:	Beim Öffnen des Dokuments wurden diese Probleme gefunden und repariert:
+	An unreadable entry in the file was skipped: {what}	Ein unlesbarer Eintrag in der Datei wurde übersprungen: {what}
+	An unreadable part was left out: {what}	Ein unlesbarer Teil wurde ausgelassen: {what}
+	Unreadable relationships were ignored: {what}	Unlesbare Beziehungen wurden ignoriert: {what}
+	A missing part of an embedded object was left out: {what}	Ein fehlender Teil eines eingebetteten Objekts wurde ausgelassen: {what}
+	Copy File	Datei kopieren
+	Find Files	Dateien suchen
+	Letter Wizard	Brief-Assistent
+	Recipient's name:	Name des Empfängers:
+	Salutation:	Anrede:
+	Subject:	Betreff:
+	Complimentary closing:	Grußformel:
+	Sender's name:	Name des Absenders:
+	Job title:	Position:
+	Company:	Firma:
+	Enclosures:	Anlagen:
+	Cc:	Cc:
+	Edit Links to Files	Verknüpfungen mit Dateien bearbeiten
+	Source file	Quelldatei
+	Locked	Gesperrt
+	Change Source	Quelle ändern
+	This document has no links to files.	Dieses Dokument enthält keine Verknüpfungen mit Dateien.
+	Web options	Weboptionen
+	Web Options	Weboptionen
+	Allow PNG as a graphics format	PNG als Grafikformat zulassen
+	Rely on CSS for font formatting	CSS für Schriftformatierung verwenden
+	Rely on VML for displaying graphics in browsers	VML zum Anzeigen von Grafiken in Browsern verwenden
+	Organize supporting files in a folder	Unterstützende Dateien in einem Ordner organisieren
+	Use long file names whenever possible	Wenn möglich, lange Dateinamen verwenden
+	Screen size:	Bildschirmgröße:
+	Pixels per inch:	Pixel pro Zoll:
+	Hangul Hanja Conversion	Hangul/Hanja-Konvertierung
+	Hangul Hanja Conversion…	Hangul/Hanja-Konvertierung…
+	Hangul to Hanja	Hangul in Hanja
+	Hanja to Hangul	Hanja in Hangul
+	Put the caret in Korean text to choose its Hanja.	Setzen Sie den Cursor in koreanischen Text, um dessen Hanja zu wählen.
+	The selection, or the whole document when nothing is selected.	Die Auswahl oder das ganze Dokument, wenn nichts ausgewählt ist.

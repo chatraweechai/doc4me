@@ -1,0 +1,89 @@
+# Measures the readiness percentage on Windows (windows-latest) for the owner's record: downloads
+# the 222-document corpus, runs `cargo xtask readiness --corpus` with Doc4Me's release CLI, and
+# commits the regenerated docs/readiness.md to main with [skip ci]. Run it from the Actions tab
+# (workflow_dispatch) only, so it doesn't use runner minutes on every push.
+name: Readiness (Windows)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: readiness-windows
+  cancel-in-progress: false
+
+jobs:
+  measure:
+    runs-on: windows-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - uses: dtolnay/rust-toolchain@686976e191b89faba57d3206551f0f330d8cb249 # stable branch
+        with:
+          toolchain: stable
+
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+
+      # The corpus check compares page counts and breaks with poppler's pdfinfo and pdftotext.
+      - name: Install poppler
+        shell: pwsh
+        run: |
+          # The community feed sometimes answers 406 for the package's metadata (run 41564657737);
+          # a retry fetches it again.
+          $installed = $false
+          for ($i = 1; $i -le 3; $i++) {
+            choco install poppler -y --no-progress
+            if ($LASTEXITCODE -eq 0) { $installed = $true; break }
+            Start-Sleep -Seconds 30
+          }
+          if (-not $installed) { Write-Error "choco could not install poppler after 3 attempts"; exit 1 }
+          $bin = Get-ChildItem "C:\ProgramData\chocolatey\lib\poppler" -Recurse -Filter pdfinfo.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $bin) { Write-Error "pdfinfo.exe not found after installing poppler"; exit 1 }
+          Add-Content -Path $env:GITHUB_PATH -Value $bin.DirectoryName
+          & $bin.FullName -v
+
+      # Downloads can be reset by the servers; each file is fetched again on the next attempt.
+      - name: Download the corpus
+        shell: pwsh
+        run: |
+          $ok = $false
+          for ($i = 1; $i -le 3; $i++) {
+            cargo xtask readiness --download
+            if ($LASTEXITCODE -eq 0) { $ok = $true; break }
+            Start-Sleep -Seconds 30
+          }
+          if (-not $ok) { Write-Error "corpus download failed after 3 attempts"; exit 1 }
+
+      - name: Measure readiness
+        shell: pwsh
+        run: cargo xtask readiness --corpus --jobs 4
+
+      - name: Summary
+        shell: pwsh
+        run: |
+          $line = Select-String -Path docs/readiness.md -Pattern 'Measured readiness|Not final' | Select-Object -First 1
+          "### Readiness (Windows)`n`n$($line.Line)" >> $env:GITHUB_STEP_SUMMARY
+
+      - name: Commit the measurement to main
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/readiness.md
+          if git diff --cached --quiet; then
+            echo "docs/readiness.md unchanged"
+            exit 0
+          fi
+          git commit -m "Readiness: measured on Windows (run $GITHUB_RUN_ID) [skip ci]"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git pull --rebase origin main
+          done
+          echo "::error::could not push the measurement to main"
+          exit 1

@@ -1,10 +1,78 @@
-# Handoff: Doc4Me 1.1.2 · readiness 86.0% (วัดบน Windows รอบที่ 17; งานรอบที่ 18–20 ยังไม่ได้วัดซ้ำบน Windows) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
+# Handoff: Doc4Me 1.1.2 · readiness 87.7% (วัดบน Windows รอบที่ 21 ด้วย workflow `readiness-windows.yml` run 41608625168 ยืนยันผลของ run 41596836985, 2026-11-03; ก่อนหน้า 87.6%, 87.5%, 87.3%, 87.2%, 87.1%, 87.0%, 86.9%, 86.8%, 86.7% และ 86.0% รอบที่ 17) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
 
-อัปเดต: 2026-11-02 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 20 (ออกรุ่นครบ แล้วทำงานต่อด้าน pagination) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
+อัปเดต: 2026-11-03 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 22 (บันทึกผลวัด readiness ล่าสุด และแก้การวัดบน Windows) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
 ## สถานะปัจจุบัน (2026-11-02 รอบที่ 20: ออกรุ่นครบใน fork `veevie55/doc4me` แล้วทำงานต่อด้าน pagination)
 
+### ความคืบหน้าสู่ 100% ไม่นับ deferred (รอบที่ 22 ต่อ, 2026-11-03/04)
+
+- **เจ้าของเขียนทับ `main` ของ fork อีกครั้ง (2026-11-04 02:02–02:37 UTC)**: `main` ใหม่ = `d084ccc` (เนื้อไฟล์เท่า `c9ff26b` เดิม, tag `v1.1.3` ชี้ที่นี่) + 6 commit "Release 1.1.3"/"Initial commit" ที่แก้แค่ `Cargo.toml` (1.1.3) และ `Cargo.lock`; commit 65 รายการหลัง `c9ff26b` (dialogs รอบที่ 21, 40 ภาษา, ตัดบรรทัด LB15, แก้ readiness xtask ฯลฯ) หายจาก `main` จึง rebase ต่อบนงานของเจ้าของแบบ fast-forward (ไม่ force; ต้นไม้ต่างจากก่อน rebase แค่เลขเวอร์ชัน) และแก้ `Cargo.lock` ให้ตรง 1.1.3 (`3030a22`); hash ของ commit รอบนี้จึงเปลี่ยนทั้งหมด ถ้าเจ้าของตั้งใจตัดงานหลัง `c9ff26b` ทิ้ง ต้องตัดสินใหม่
+- ลองแก้ "ด้านที่ `w:tblCellMar`/`w:tcMar` ไม่ระบุให้สืบทอดจาก style" แล้ว**ย้อนออก**: zenodo-154 แสดงว่า Word ใช้ 0 กับด้านที่ `w:tblCellMar` ไม่ระบุ (บรรทัด "LEVEL 1 USE means that" ตรงเมื่อใช้ 0) และไม่แก้ govuk-006; สาเหตุจริงของ govuk-006 (หน้า 5 มีแค่ย่อหน้า "© Crown copyright" ที่ Word ใส่ท้ายหน้า 4) ยังไม่พบ — แถวสูงของเราเกิน Word ~16 pt ที่หน้า 4
+- Windows run 41673874009 (`4556010`, 16 ภาษาใหม่): **88.4%**, **90.9%** เมื่อไม่นับ deferred, ภาษา 30 → 46/95 (มิติอื่นเท่าเดิม); หลัง `a128314` มี 62/95 (ha ky tt uz lb gd mi rm เพิ่ม)
+- `24dcde5`: ตัดบรรทัดหลัง `” ` ก่อน `(` (Unicode 15.1 ตัด LB15 แต่ `unicode-linebreak` 0.1.5 ยังใช้) แก้ zenodo-025 (Linux: pages 172 → 173, breaks 91 → 92 ไม่มีเอกสารแย่ลง) และเพิ่มอีก 8 ภาษา (kk mk ms mt nn pt-pt cy sw → 54/95) สั่ง Windows run ถัดไปแล้ว
+- กำลังแปล (subagent): ha ky tt uz lb gd mi rm; ที่เหลือซึ่ง Inter วาดได้: ig xh zu rw nso tn wo yo sr-cyrl-ba (ekavian/ijekavian?) ca-valencia; ภาษาที่ต้องฟอนต์/shaping ใหม่ (ar he fa ur ps hi mr ne kok as bn-BD bn-IN gu pa or ta te kn ml si hy ka ko) ยังไม่เริ่ม — ต้องให้ UI วาดได้ก่อน
+- เครื่องมือแปลอยู่ใน scratchpad ของ session (หายเมื่อ session จบ): `BRIEF.md`, `check_catalog.py` (ตรวจคีย์ตรง `en-gb.tsv`, placeholder, "…", glyph ใน Inter), `register.py` (เพิ่มใน `LANGUAGES`, `WHOLE_CATALOGS`, `languages.tsv` และแก้ความยาว array)
+- วิธีวัด pagination บน Linux: แก้ `take(40)` ใน `xtask/src/readiness.rs` เป็นค่าใหญ่ชั่วคราว (อย่า commit) แล้ว `cargo xtask readiness --corpus --jobs 8 --cli <cli ที่ build ใน CARGO_TARGET_DIR=target-fix>` แล้ว `git checkout docs/readiness.md`; baseline บน Linux ที่ `f65cff1`: pages 172, breaks 91
+
+### Readiness ล่าสุด (บันทึก 2026-11-03 รอบที่ 22, ยืนยันด้วย run 41608625168): **87.7%**, **90.3%** เมื่อไม่นับ 26 แถว deferred
+
+- **วัดซ้ำ 2026-11-03 (run 41608625168, `windows-latest`, วัด `main` ที่ `3418736`, commit ผล `51dab2f`, job 09:08–09:25 UTC)**: ได้ **87.7%** / 90.3% เท่าเดิมทุกมิติ (ตารางด้านล่างยังถูกต้อง); หัวรายงานเป็น `3418736` **ไม่มี `+changes` แล้ว** ยืนยันการแก้ใน `83b1e0c`; ดาวน์โหลดคลังครบในรอบนี้ (zenodo กลับมาตอบปกติ)
+- ที่มาเดิม: `docs/readiness.md` จาก Windows run 41596836985 (`windows-latest`, วัด `main` ที่ `24ad50b`, commit ผล `bc99ca1`; คืนไฟล์นี้ใน `83b1e0c` หลัง run 41599589867 commit ผลที่ไม่ครบ 60.8% ทับ) ห่างเป้าหมาย 100% อยู่ 12.3 จุด
+- รายมิติ (คะแนน / ไม่นับ deferred / ชุดตรวจ):
+
+| มิติ | น้ำหนัก | คะแนน | ไม่นับ deferred | ชุดตรวจ |
+|---|---|---|---|---|
+| Features | 0.30 | 94.7% | 97.2% | ribbon 499/499; dialogs 204/228 (deferred 12) |
+| File formats | 0.20 | 100.0% | 100.0% | corpus-open 222/222; corpus-roundtrip 222/222 |
+| Layout and pagination | 0.15 | 60.1% | 60.1% | corpus-pages 171/222; corpus-breaks 96/222 |
+| UI/UX | 0.10 | 95.7% | 98.2% | shortcuts 268/280 (deferred 7) |
+| Stability | 0.10 | 100.0% | 100.0% | corpus-stability 222/222; stability 5/5 |
+| Performance | 0.05 | 100.0% | 100.0% | performance 6/6 |
+| Localization | 0.04 | 31.6% | 31.6% | languages 30/95 |
+| Platforms | 0.03 | 80.0% | 100.0% | platforms 4/5 (deferred 1) |
+| Ecosystem | 0.02 | 83.3% | 100.0% | ecosystem 5/6 (deferred 1) |
+| Hardware | 0.01 | 37.5% | 100.0% | hardware 3/8 (deferred 5) |
+
+- ที่ยังไม่ผ่านและไม่ deferred: dialogs 12 แถว (รอเจ้าของตัดสินว่าจะ defer หรือไม่ ดู "ข้อค้นพบที่ต้องให้เจ้าของ repo ตัดสิน"), shortcuts 5 รายการ (`ks-165`, `ks-177`, `ks-203`, `ks-219`, `ks-329`), corpus-pages 51 และ corpus-breaks 126 เอกสาร, ภาษา 65 ภาษา
+- แก้ข้อมูล: deferred 26 แถวแบ่งเป็น dialogs 12, shortcuts **7**, ecosystem 1, hardware 5, platforms 1 (บรรทัดเดิมด้านล่างที่เขียน shortcuts 6 รวมได้ 25 ไม่ตรง)
+- ป้าย `24ad50b+changes` ของรายงานก่อนหน้ามาจากขั้น `--download` ที่เขียน `docs/readiness.md` ก่อนขั้นวัด ไม่ได้แปลว่าวัดจากโค้ดที่ไม่ตรง commit (แก้ใน `83b1e0c` และยืนยันแล้วด้วย run 41608625168)
+
 ผู้ใช้สั่ง (2026-11-02): "อ่าน handoff.md แล้วดำเนินการต่อ" (งานที่ค้างคือการออก v1.0.0, v1.1.0, v1.1.1 แล้วจึง v1.1.2 ของรอบที่ 19) ระหว่างทำ ผู้ใช้เลือกให้ออก Release ใน fork และเปิด Actions ของ fork เอง; หลังออกรุ่นผู้ใช้สั่งไม่เปลี่ยนลิงก์ Releases ใน README แล้วสั่ง "ทำงานต่อจากงานต่อไปใน handoff"
+
+### ประวัติผลวัด Windows รอบที่ 21–22 (2026-11-03; เริ่มที่ **86.7%** จาก run 41565289539 ที่ `8b685b2` ยืนยันตัวเลขของ run 41559739417; ล่าสุดอยู่ในหัวข้อด้านบน)
+
+- run 41596836985 (เช็กเอาต์ `main` ตอนเริ่ม job คือ `24ad50b` ซึ่งรวม `f5f32df` Web Options `dlg-232` และ `4c69617` Hangul Hanja `dlg-194`; `head_sha` ของ run เป็น `3a0372e` แต่ workflow ใช้ `ref: main` จึงวัด `main` ณ เวลาที่ job เริ่ม ไม่ใช่ commit ที่สั่ง): **87.7%**, **90.3%** เมื่อไม่นับ deferred, ฟีเจอร์ 94.7%, dialogs 202 → 204/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, open/round-trip 222/222); commit ผล `bc99ca1`
+- รอบที่ 22 (2026-11-03, session ต่อจาก handoff): `f05eeb3` (1) xtask พิมพ์รายการ `git status --porcelain` ลง stderr เมื่อหัวรายงานเป็น `+changes` เพื่อหาสาเหตุที่ทุกรายงานจาก Windows runner เป็น `+changes` (ตรวจในโค้ดแล้วไม่พบตัวเขียนไฟล์ที่ git ติดตาม: xtask เขียนแค่ `docs/readiness.md` หลังอ่านสถานะ, build script เขียนลง `OUT_DIR`, ไม่มี symlink/CRLF ใน index/ชื่อไฟล์ที่ Windows ใช้ไม่ได้, `cargo metadata --locked` ผ่าน; log ของ runner มีแค่คำเตือน LF→CRLF ของ `docs/readiness.md` ตอน commit) (2) `cargo fmt --all` ของโค้ดรอบก่อนที่ทำให้ `cargo fmt --all --check` ไม่ผ่าน (CI ไม่ได้ตรวจ fmt); สั่ง run 41599589867 ต่อคิวไว้ (วัด `main` หลัง `f05eeb3`) ผล run 41599589867: **60.8% ไม่ใช่ผลจริง** — zenodo.org ตอบ 503 ไป 344 ไฟล์แต่ `--download` คืนสำเร็จ จึงวัดแค่ 50 เอกสาร และ bot commit `77fd3b8` ทับ; log ยืนยันว่า `+changes` มาจาก `docs/readiness.md` ที่ขั้น `--download` เขียนไว้ก่อน; แก้ในรอบนี้ (ดู `CHANGELOG.md`): `--download` ล้มเมื่อไม่ครบ (workflow จึงลองซ้ำ/ล้มก่อน commit), สั่งเดี่ยวไม่เขียนรายงาน, การตรวจ `+changes` ไม่นับรายงานเอง, และคืน `docs/readiness.md` เป็นผลของ `bc99ca1` (87.7%); ตัวเลขปัจจุบันจึงยังเป็น 87.7%; รอบถัดไปที่สั่ง workflow ควรได้หัวรายงานไม่มี `+changes`; ยังไม่ได้แก้ `.github/workflows/readiness-windows.yml` ให้ปฏิเสธการ commit รายงานที่มี "Not final" (เป็นชั้นป้องกันเพิ่ม ไม่จำเป็นหลังแก้ `--download`)
+- run 41594385545 (`d37e836`, รวม `bc4fe56` Edit Links to Files `dlg-021`): **87.6%**, 90.1% เมื่อไม่นับ deferred, ฟีเจอร์ 94.3%, dialogs 201 → 202/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, open/round-trip 222/222); รอวัดใน run 41596836985: `f5f32df` (Web Options, `dlg-232`, เปลี่ยนการเขียน .docx: เพิ่ม `webSettings.xml`) และ `4c69617` (Hangul Hanja Conversion, `dlg-194`) (บน Linux dialogs 204/228)
+- run 41592240746 (`40b5402`, รวม `dd16ed6` Copy File/Find Files `dlg-007`/`dlg-032`/`dlg-152` และ `0a41629` Letter Wizard `dlg-115`): **87.5%**, **90.1%** เมื่อไม่นับ deferred, ฟีเจอร์ 94.1%, dialogs 197 → 201/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, open/round-trip 222/222)
+- run 41590861975 (`bdfba2d`, รวม `7da7541` Show Repairs `dlg-153`): **87.3%**, 89.8% เมื่อไม่นับ deferred, ฟีเจอร์ 93.2%, dialogs 196 → 197/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96)
+- run 41589001124 (`d40ff9b`, รวม `ddb1c52` File locations `dlg-209`): **87.2%**, 89.7% เมื่อไม่นับ deferred, ฟีเจอร์ 93.0%, dialogs 195 → 196/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96)
+- run 41586915428 (`895d0cc`, รวม `8b92537` Bidirectional text `dlg-205` และ `5d6add8` Manage Fields `dlg-200`): **87.1%**, 89.6% เมื่อไม่นับ deferred, ฟีเจอร์ 92.8%, dialogs 193 → 195/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96)
+- run 41585979571 (`5914683`, รวม `1ff4c31` Japanese Consistency Checker, `dlg-003`): **87.0%**, 89.5% เมื่อไม่นับ deferred, ฟีเจอร์ 92.3%, dialogs 192 → 193/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, round-trip 222/222)
+- run 41584013643 (`b3bf68f`, Japanese Find: Sounds like (Japanese) และ Find Options (Japanese), `dlg-210`): **86.9%**, 89.4% เมื่อไม่นับ deferred, ฟีเจอร์ 92.1%, dialogs 191 → 192/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, round-trip 222/222)
+- run 41582181218 (`0ebfb7d`, Options › Typography, `dlg-218`): **86.9%**, 89.4% เมื่อไม่นับ deferred, ฟีเจอร์ 91.9%, dialogs 190 → 191/228; คลังเท่าเดิม
+- run 41579621418 (`293f915`, Fit Text และ Two Lines in One): **86.8%**, 89.3% เมื่อไม่นับ deferred, dialogs 188 → 190/228; คลังเท่าเดิม (corpus-pages 171, corpus-breaks 96, round-trip 222/222); `0ebfb7d` (Options › Typography, `dlg-218`) push แล้ว รอผลวัด Windows run ถัดไป (บน Linux dialogs 191/228)
+- งานรอบนี้ (Opus): `e184943` freeform ในกลุ่มรูปร่าง, `293f915` Asian Layout (Fit Text `dlg-047`, Two Lines in One `dlg-229`; Horizontal in Vertical `dlg-083` เก็บค่าได้แต่ยังไม่วาด เพราะ layout ไม่รู้ทิศทางข้อความ), `0ebfb7d` Typography (`dlg-218`) ทั้งหมดมีเทสต์และคำแปล 28 ภาษา รายละเอียดใน `CHANGELOG.md`
+- หมายเหตุ build ใน session: ดิสก์ของ session เต็มได้จาก `target/debug/incremental` และไฟล์ทดสอบซ้ำหลายรุ่น ให้ใช้ `CARGO_INCREMENTAL=0` และลบ `target/debug/incremental` เมื่อเต็ม
+- run 41569447798 (`e184943`, หลังแก้ freeform ในกลุ่มรูปร่าง) วัดได้ 86.7% เท่าเดิม (corpus-pages 171/222, corpus-breaks 96/222) เพราะการแก้เปลี่ยนการวาด ไม่ใช่การจัดหน้า
+- รายการ deferred ทั้ง 26 แถวพร้อมเหตุผลอยู่ใน `docs/readiness.md` หัวข้อ `## Deferred rows (26)` (dialogs 12, shortcuts 6, ecosystem 1, hardware 5, platforms 1)
+- run 41559739417 ล้มครั้งแรกที่ขั้น poppler (feed ของ Chocolatey ตอบ 406) แก้ด้วยการลองซ้ำ `95e46b1` แล้วผ่าน
+
+- ที่มา: workflow `.github/workflows/readiness-windows.yml` (สั่งเองจากแท็บ Actions ด้วย workflow_dispatch) รัน `cargo xtask readiness --download` (ลองซ้ำได้ 3 ครั้ง) แล้ว `--corpus --jobs 4`; run สำเร็จ ใช้เวลาราว 22 นาที; commit ผล `cab15d4` บน `main` (`docs/readiness.md`)
+- คะแนน: 86.7% รวม, 89.2% เมื่อไม่นับ 26 deferred (เดิม 86.0% และ 88.5%); ฟีเจอร์ 91.2% (dialogs 188/228), การจัดหน้า 60.1% (corpus-pages 171/222, corpus-breaks 96/222), UI/UX 95.7%, ภาษา 31.6% (30/95)
+- ข้อสังเกต: หัวรายงานเขียน `at commit b6d3056+changes` ซึ่งหมายความว่า xtask เห็นต้นไม้งานไม่สะอาดตอนวัด (น่าจะเป็นไฟล์ที่ดาวน์โหลด/สร้างใน runner) ยังไม่ได้ตรวจว่าเกิดจากอะไร จึงควรดูก่อนถือว่าตัวเลขสะอาด
+- ROADMAP.md และ docs/roadmap.md อัปเดตตามตัวเลขนี้แล้ว
+
+### รอบที่ 21 (2026-11-03, Haiku): govuk-005 ตรวจแล้ว ยังไม่แก้ส่วนที่เหลือ
+
+- ผลของ `a351c88` (ฟิลด์ตัดบรรทัดได้) ทำให้ govuk-005 จาก 40 หน้าเหลือ 37 หน้า (Word 36) จากการวัดก่อน/หลังบน Linux; หน้า 1–12 ของผลเราตรงกับ PDF อ้างอิงทั้งลำดับหัวข้อและหน้า
+- ส่วนที่เหลือ: หน้า 12 ของผลเราไม่ตรงกับอ้างอิงในส่วน 11B (Section 11B "Monetary assets abroad") ข้อความ "Provide details here" กับ "Yes ☐ No ☐" ซ้อนทับกันบางแถว และมีบรรทัด "Provide details here" ตกค้างสามบรรทัดขึ้นหน้า 13 ที่อ้างอิงไม่มี
+- สาเหตุที่ตรวจแล้ว: ย่อหน้าเหล่านี้เป็นข้อความธรรมดา ไม่มี FORMTEXT/ffData/sdt ในไฟล์ จึงไม่เกี่ยวกับการแก้ฟิลด์; ตารางของส่วน 11B ตามด้วยย่อหน้าหัวข้อที่มี `wp:anchor` เป็น `wpg:wgp` (กลุ่มรูปร่าง, `wrapNone`, `positionV` ติดย่อหน้า) ซึ่งวาดเส้นกรอบทับตาราง; การซ้อนทับน่าจะมาจากการวางกลุ่มรูปร่างนี้ ยังไม่ได้พิสูจน์
+- ข้อค้นพบเพิ่มเติม (รอบที่ 21, หลังวัด Windows): ใน govuk-005 ข้อความ "Provide details here" ของส่วน 11B เป็น **กล่องข้อความลอย** (`wps` ใน `wp:anchor`, `wrapTopAndBottom`, `positionV` ติดย่อหน้า) สามกล่องเรียงกันที่ x≈4003675 EMU ห่างกันประมาณ 548k EMU สูงกล่องละ 346075 EMU; กล่องแบบนี้ควรดันบรรทัดลงตามที่ Word ทำ แต่ผลของเรายังซ้อนทับ ทำให้หน้า 12 แน่นกว่า Word จนมีบรรทัดตกไปหน้า 13 งานต่อไปคือเปรียบเทียบ y ของกล่องเหล่านี้กับ PDF อ้างอิง (`pdftotext -bbox`) แล้วดูว่า `wrapTopAndBottom` ของ anchor ที่ติดย่อหน้าในเซลล์ตารางถูกคิดความสูงถูกหรือไม่
+- ตำแหน่งที่วัดด้วย `pdftotext -bbox` (รอบที่ 21, ผลของเราบน Linux เทียบ PDF อ้างอิง, หน่วย pt): หน้า 1 ของเราเริ่มส่วน 11B ที่ y≈491 ส่วนอ้างอิง y≈477 (ต่าง 14 pt ตั้งแต่ก่อนหน้านั้น); แถว "Do you have a PayPal account" ของเราอยู่ y≈591 อ้างอิง y≈561 และ "Yes ☐ No ☐" ของเราอยู่ที่ x≈322/389 (คอลัมน์ Provide) ขณะที่อ้างอิงอยู่ x≈192/258 (คอลัมน์ Yes/No) จึงซ้อนกับ "Provide details here" ที่ x≈319; กลุ่มรูปร่าง `wpg` ที่ตำแหน่ง x≈192.6 pt (`positionH` 2446020 EMU) ตรงกับคอลัมน์ Yes ของอ้างอิงพอดี ควรตรวจว่า `wpg` นี้วาดหรือบังคับให้เซลล์ของแถวนี้ย้ายคอลัมน์หรือไม่ ก่อนแก้ `wrapTopAndBottom`
+- แก้แล้วใน `e184943`: สมาชิกกลุ่มรูปร่าง (`wpg`) ที่มี `a:custGeom` ถูกอ่านเป็น freeform (เดิมวาดเป็นกรอบสี่เหลี่ยมเต็ม bounding box สูงเกือบทั้งหน้า พร้อมเส้นแนวตั้งพาดทับตาราง ซึ่งเป็นสาเหตุของการซ้อนทับใน govuk-005 หน้า 12); จำนวนหน้าไม่เปลี่ยน (37, Word 36) เพราะเป็นการวาด ไม่ใช่การจัดหน้า
+- ส่วนต่างการจัดหน้าที่เหลือของ govuk-005 (วัดจาก `pdftotext -bbox` หน้า 12): ป้ายซ้ายตรงกับอ้างอิงถึง "Investments?" (y≈208.5) แล้วเลื่อนลง +4.4 pt ที่ตาราง Currency/Value, +1 pt ในตาราง และ +8.4 pt ระหว่างตารางกับป้าย "You must provide" (รวม +13.4 pt) +8.4 pt ใกล้เคียงหนึ่งบรรทัดว่างของฟอนต์ 7 pt (8.05 pt) พอดี: หลังตารางมีย่อหน้าว่างสองอัน (อันที่สองถือ `sectPr` แบบ `continuous` ฟอนต์ 7 pt) แล้วจึงเป็นป้าย ขณะที่ช่องว่างในอ้างอิงมีหนึ่งบรรทัดเท่านั้น; ก่อนตารางมีย่อหน้าว่างสองอัน (10 pt) และย่อหน้าถือ `sectPr` แบบสามคอลัมน์หนึ่งอัน สมมติฐานที่ยังไม่พิสูจน์: Word ไม่ให้ความสูงแก่ย่อหน้าว่างที่ถือ `sectPr` แบบ `continuous` (หรือการ balance คอลัมน์ของ section ต่อเนื่องทำให้ต่าง) ต้องหาตัวอย่างเทียบในคลังก่อนแก้ แล้ววัดว่าไม่มีไฟล์แย่ลง
+- ยังไม่มี commit สำหรับการจัดหน้าส่วนนี้ (ไม่ได้เดาแก้โดยไม่มีหลักฐาน); งานต่อไปคือยืนยันว่า wpg anchor ทำให้ย่อหน้าแถวหลังตารางขยับ/ซ้อน แล้วแก้ที่ layout ของ anchor นั้น และวัด govuk-005 ซ้ำ
 
 ### เจ้าของเขียนทับ `main` ของ fork ระหว่างรอบ (พบ 13:02 UTC)
 
@@ -46,7 +114,8 @@
 - `bddb167` ตาราง: `w:trPr/w:hidden` และ `w:hideMark` ไม่หายตอนบันทึกแล้ว (เดิมทิ้งไป ไฟล์ที่บันทึกด้วย Doc4Me จึงแสดงแถวที่ซ่อนใน Word) แถวที่เครื่องหมายท้ายแถวและเนื้อหาทั้งหมดซ่อนไม่กินที่ และย่อหน้าว่างท้ายเซลล์ `hideMark` ไม่นับในความสูงแถว: govuk-066 9 → 6 หน้าตรงทั้งสองแบบ, govuk-068 17 → 16 (Word 15); จำนวนหน้าตรง 168 → 169, ต้น/ท้ายหน้าตรง 90 → 91 (`hideMark` ใช้ใน 36 ไฟล์ แถวซ่อนมีแค่ govuk-066)
 - `3593d05` ตัวแบ่งหน้าท้ายย่อหน้าที่ปิด section เองไม่สร้างหน้าเปล่า และบรรทัดที่มีแค่ตัวแบ่งหน้ากับรูปลอยหรือ marker คงอยู่ท้ายหน้า: zenodo-029 18 → 17 และ zenodo-140 16 → 15 (เท่า Word แต่ยังต่างที่หน้า 2), zenodo-149 42 → 41, zenodo-053 61 → 60; จำนวนหน้าตรง 169 → 171, ต้น/ท้ายหน้าคงที่ 91
 - รวมรอบนี้บน Linux: จำนวนหน้าตรง 166 → 171, ต้น/ท้ายหน้าตรง 89 → 91, ไม่มีไฟล์ที่ผลแย่ลง; ตรวจก่อน push ทุกครั้ง: เทสต์ layout (ล่าสุด 245), docx 75 + 49, docbin 65, doc 118, engine 451 + 13 + 8, ui-egui `--lib` 396, `cargo fmt --all --check`, `cargo clippy` (workspace สำหรับ `bddb167`, crate layout สำหรับ `3593d05`)
-- พบแต่ยังไม่แก้: **govuk-024** (3 หน้า Word 2 ทั้งบน Windows และ Linux) ฟิลด์ฟอร์ม FORMTEXT ที่ผลลัพธ์ยาวถูกจัดเป็น cluster เดียว (`shape_atomic` ใน `crates/layout/src/para.rs`) ตัดบรรทัดไม่ได้ ความกว้างขั้นต่ำของเซลล์จึงเป็นทั้งประโยค (499 และ 1,306 pt) autofit ขยายคอลัมน์ทั้งหมดจนรวม 1,385 pt แล้วย่อทั้งตารางเหลือ 538 pt คอลัมน์หมายเหตุซ้ายจึงแคบจนตัดทีละพยางค์ ตารางสูงจนล้นหน้า; ใน Word ผลลัพธ์ของ FORMTEXT ตัดบรรทัดได้แบบข้อความปกติ ทางแก้คือแตก cluster ของฟิลด์ฟอร์มเป็นคำที่ตัดบรรทัดได้ (ต้องดูการวาง caret การเลือก และข้อความที่ส่งออก PDF) ในคลังมีไฟล์นี้ไฟล์เดียว; **zenodo-149** ยังเกิน 13 หน้า หน้าปกล้นเพราะข้อความในกล่องสัญญาอนุญาตตัดบรรทัดมากกว่า Word (ความกว้างของฟอนต์บน Linux ต้องดูบน Windows); **zenodo-156** หน้า 1 ของ Word จุคำมากกว่าเกือบสองเท่า (น่าจะเป็นฟอนต์)
+- `a351c88` ผลลัพธ์ของฟิลด์ (FORMTEXT, FILLIN) ตัดบรรทัดตามช่องว่าง: govuk-024 3 → 2 หน้า (Word 2) แก้แล้ว (ต้น/ท้ายหน้า 2 ยังต่าง), จำนวนหน้าตรง 171 → 172 บน Linux; zenodo-115 ได้ 10 หน้า (Word 9) ทั้งก่อนและหลังแก้ (ไม่เกี่ยวกับงานนี้ ยังไม่ได้สอบสวน); `cargo xtask readiness --corpus` เขียนทับ `docs/readiness.md` ต้อง `git checkout docs/readiness.md` ก่อน commit (ไฟล์ที่ commit คือผลวัดบน Windows)
+- (แก้แล้วใน `a351c88`; ข้อความต่อไปนี้เป็นบันทึกก่อนแก้) พบแต่ยังไม่แก้: **govuk-024** (3 หน้า Word 2 ทั้งบน Windows และ Linux) ฟิลด์ฟอร์ม FORMTEXT ที่ผลลัพธ์ยาวถูกจัดเป็น cluster เดียว (`shape_atomic` ใน `crates/layout/src/para.rs`) ตัดบรรทัดไม่ได้ ความกว้างขั้นต่ำของเซลล์จึงเป็นทั้งประโยค (499 และ 1,306 pt) autofit ขยายคอลัมน์ทั้งหมดจนรวม 1,385 pt แล้วย่อทั้งตารางเหลือ 538 pt คอลัมน์หมายเหตุซ้ายจึงแคบจนตัดทีละพยางค์ ตารางสูงจนล้นหน้า; ใน Word ผลลัพธ์ของ FORMTEXT ตัดบรรทัดได้แบบข้อความปกติ ทางแก้คือแตก cluster ของฟิลด์ฟอร์มเป็นคำที่ตัดบรรทัดได้ (ต้องดูการวาง caret การเลือก และข้อความที่ส่งออก PDF) ในคลังมีไฟล์นี้ไฟล์เดียว; **zenodo-149** ยังเกิน 13 หน้า หน้าปกล้นเพราะข้อความในกล่องสัญญาอนุญาตตัดบรรทัดมากกว่า Word (ความกว้างของฟอนต์บน Linux ต้องดูบน Windows); **zenodo-156** หน้า 1 ของ Word จุคำมากกว่าเกือบสองเท่า (น่าจะเป็นฟอนต์)
 
 ### ข้อค้นพบที่ต้องให้เจ้าของ repo ตัดสิน
 
@@ -56,10 +125,13 @@
 - `zenodo-160` หน้า 8: หน้า PDF อ้างอิงมีข้อความ comment "Commented [SP1]: I updated this table …" ในแถบ markup แต่ไฟล์ .docx ไม่มี `word/comments.xml` แล้ว (คนละรุ่นในส่วนของ comment) ตัวตรวจต้น/ท้ายหน้าจึงไม่ผ่านทั้งที่เนื้อหาในหน้าตรงกัน (ตารางจบที่ "66 60 60 66 62 62" ทั้งสองฝั่ง); ไม่ได้แก้ manifest หรือ comparator ตามกติกา
 - ข้อค้นพบของรอบที่ 18 (`govuk-026`, `govuk-018`, `zenodo-104`) ยังรอการตัดสินใจ
 
+- **Dialog ที่ยังไม่ผ่าน 12 แถว (ไม่นับ 12 deferred) — ขอให้เจ้าของตัดสินว่าจะ defer หรือไม่** (2026-11-03): เป็นฟีเจอร์ที่ Word รุ่นปัจจุบัน (Microsoft 365) ตัดออกไปแล้ว — `dlg-081`/`dlg-082` WordPerfect Help, `dlg-151` Schema Library / `dlg-234` XML Element Attributes / `dlg-235` XML Options (custom XML markup ถูกตัดตั้งแต่ Word 2010; Doc4Me อ่านเนื้อหาแต่ทิ้ง markup แบบเดียวกัน), `dlg-215` Smart Tag Options (smart tags ถูกตัด; Doc4Me ทิ้ง markup เช่นกัน), `dlg-079` Frames Page properties และ `dlg-010` CSS Links (หน้าเว็บแบบ frames/HTML รุ่นเก่า), `dlg-052` Format Callout (callout ของ Word 97); ที่ยังมีใน Word แต่ต้องงานใหญ่หรือเครื่องของเจ้าของ — `dlg-083` Horizontal in Vertical (ต้องจัดวางที่รู้ทิศทางข้อความ), `dlg-108` Insert Subdocument (master document), `dlg-041` Print Setup (เลือกเครื่องพิมพ์ของระบบ; Doc4Me ส่ง PDF ให้โปรแกรมดู PDF พิมพ์ จึงต้องรายการเครื่องพิมพ์ของแต่ละระบบ)
+- **Shortcut ที่ยังไม่ผ่าน**: `ks-203` (Alt+Shift+F12, Space: ตัวเลือก citation) และ `ks-329` (Alt+Shift+F12: ปุ่ม Table of Contents) ต้องมีปุ่มแท็บของ content control ของ TOC/citation ซึ่ง Doc4Me ยังไม่มี — ไม่ผูกปุ่มกับคำสั่งอื่นแทนเพื่อไม่ให้ผ่านแบบไม่จริง; `ks-219` (Ctrl+Shift+F7 อัปเดตไฟล์ต้นทางของลิงก์) ต้องประเมิน INCLUDETEXT ก่อน; `ks-177` (F9 รีเฟรชหน้าเว็บ) ไม่มีมุมมองเว็บสด; `ks-165` รอเจ้าของตรวจบน Word for Windows
+
 ### งานต่อไป (ยังไม่ถึงเป้าหมาย 100%)
 
 - ทำต่อจาก "งานต่อไป" ของรอบที่ 18 ด้านล่าง (ข้อ zenodo-160 เสร็จแล้ว, zenodo-023 เป็นคนละรุ่น): วัดซ้ำบน Windows แล้วสร้าง `docs/readiness.md` ใหม่, pagination (`govuk-005`, govuk-024 ฟิลด์ฟอร์มที่ตัดบรรทัดได้, zenodo-029/zenodo-140 หน้า 2), dialogs, localization
-- ห้ามออกเวอร์ชันถัดจาก 1.1.2 จนกว่าผู้ใช้สั่ง; release workflow ใน fork เปิดแล้ว push ไป `main` จะ build อัตโนมัติ
+- ห้ามออกเวอร์ชันถัดจาก 1.1.2 จนกว่าผู้ใช้สั่ง; release workflow ใน fork: push ไป `main` ไม่ build installer แล้ว (ผู้ใช้สั่ง 2026-11-03) สั่งจากแท็บ Actions หรือ push tag `v*` เท่านั้น
 
 ## สถานะรอบที่ 19 (2026-11-02: ออก v1.0.0, v1.1.0, v1.1.1 และ v1.1.2; ประวัติ เจ้าของ push tag แล้วและพบสาเหตุในรอบที่ 20)
 
@@ -182,6 +254,12 @@
 
 ### การตัดสินใจถาวรของผู้ใช้ (ทำตามเสมอ ไม่ต้องถามหรือแจ้งอีก)
 
+- เป้าหมาย (สั่ง 2026-11-03): ทำงานต่อจน readiness **100% เมื่อไม่นับ 26 แถว deferred** แล้วรายงานผล; ลำดับ: **pagination ก่อน** แล้วจึง localization และ dialogs/shortcuts; ไม่เพิ่มแถว deferred (เกณฑ์คงที่ 26 แถว)
+- Localization (สั่ง 2026-11-03): **ใช้ subagent แปลหลายภาษาพร้อมกันได้**; ระบุในหัวไฟล์และ `CHANGELOG.md` ว่าเป็นคำแปลจาก AI ที่ยังไม่ได้ให้เจ้าของภาษาตรวจ; คง clean room (ไม่ดูคำแปลของ Microsoft); ภาษาที่ต้องใช้ฟอนต์/การจัดรูปอักษรนอกเหนือ Inter (อารบิก ฮีบรู อินเดีย อาร์เมเนีย จอร์เจีย สิงหล เกาหลี ฯลฯ) ต้องให้ UI วาดได้จริงก่อนนับว่าผ่าน
+- Dialog 8 แถวที่ Word รุ่นปัจจุบันตัดออกแล้ว (`dlg-081`/`dlg-082` WordPerfect Help, `dlg-151` Schema Library, `dlg-234` XML Element Attributes, `dlg-235` XML Options, `dlg-215` Smart Tag Options, `dlg-079` Frames Page, `dlg-010` CSS Links, `dlg-052` Format Callout) **ให้สร้างให้ใช้งานได้จริง** (มีผลจริงต่อเอกสาร ไม่ใช่ dialog เปล่า) ไม่ defer (สั่ง 2026-11-03)
+- แจ้งสถานะความคืบหน้า readiness ให้ผู้ใช้เป็นระยะ (สั่ง 2026-11-03): หลังผลวัด Windows แต่ละรอบ ให้รายงานตัวเลข (รวม, ไม่นับ deferred, dialogs, การจัดหน้า) และสิ่งที่เปลี่ยน
+- วัด readiness บน Windows ทุกครั้งหลังเปลี่ยนโค้ด ด้วย workflow `readiness-windows.yml` (สั่ง 2026-11-03) แล้วบันทึกผลใน handoff และ ROADMAP พร้อม commit/push `main`
+- ไม่ต้องสั่งรัน workflow Windows x64 installer ทุกครั้งที่ commit push `main` เว้นแต่จะสั่งให้ออกเวอร์ชันใหม่ (สั่ง 2026-11-03; trigger ของ `main` ถูกเอาออกแล้ว)
 
 - ตอบและแสดงข้อความเป็นภาษาไทยเท่านั้น (ชื่อคำสั่ง ชื่อไฟล์ และโค้ดคงเดิมได้)
 - ห้ามออกเวอร์ชันใหม่จนกว่าผู้ใช้สั่ง (งานใหม่อยู่ใต้ `[Unreleased]`, ห้ามสั่ง workflow พร้อม `release: true`); 2026-11-02 ผู้ใช้สั่งออก v1.0.0, v1.1.0, v1.1.1 จาก commit เดิม และ v1.1.2 จากโค้ดล่าสุด (`Cargo.toml` 1.1.2) โดยออก v1.1.2 หลังรุ่นเก่า (ออกครบแล้วในรอบที่ 20 ที่ fork `veevie55/doc4me` ตามที่ผู้ใช้เลือก) รุ่นถัดจาก 1.1.2 ยังห้ามออกจนกว่าผู้ใช้สั่ง

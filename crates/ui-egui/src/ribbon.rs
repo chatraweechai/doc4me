@@ -461,6 +461,9 @@ pub(crate) fn language_menu(ui: &mut Ui, app: &mut WordApp) {
     mi(ui, app, "Traditional to Simplified", "review.toSimplified", json!({}));
     mi(ui, app, "Simplified to Traditional", "review.toTraditional", json!({}));
     mi(ui, app, "Chinese Conversion…", "review.chineseConversion", json!({}));
+    ui.separator();
+    mi(ui, app, "Japanese Consistency Checker…", "review.consistencyChecker", json!({}));
+    mi(ui, app, "Hangul Hanja Conversion…", "review.hangulHanja", json!({}));
 }
 
 /// A menu item with a check mark when `checked` (the current choice of several).
@@ -713,6 +716,10 @@ fn home(app: &mut WordApp, ui: &mut Ui) {
                 small(ui, app, "justify", None, "Justify", "para.justify", json!({}), align == A::Justify);
                 small(ui, app, "distribute", None, "Distributed", "para.distribute", json!({}), align == A::Distribute);
                 small(ui, app, "thaiDistribute", None, "Thai Distributed", "para.thaiDistribute", json!({}), align == A::ThaiDistribute);
+                menu_button(ui, app, "asianLayout", None, "Asian Layout", false, "", |ui, app| {
+                    mi(ui, app, "Two Lines in One…", "format.twoLinesInOne", json!({}));
+                    mi(ui, app, "Fit Text…", "format.fitText", json!({}));
+                });
                 ui.add_space(4.0);
                 small(ui, app, "textLtr", None, "Left-to-Right Text Direction", "para.ltr", json!({}), !rtl);
                 small(ui, app, "textRtl", None, "Right-to-Left Text Direction", "para.rtl", json!({}), rtl);

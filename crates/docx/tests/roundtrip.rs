@@ -107,6 +107,14 @@ fn every_char_prop_round_trips() {
         })),
         lang: Some("fr-FR".into()),
         ligatures: Some("standardContextual".into()),
+        fit_text: Some(doc4me_doc::props::FitText { width: 36.0, id: Some(2) }),
+        east_asian: Some(doc4me_doc::props::EastAsianLayout {
+            id: Some(5),
+            combine: true,
+            brackets: doc4me_doc::props::CombineBrackets::Square,
+            vert: false,
+            vert_compress: false,
+        }),
         no_proof: Some(true),
         rtl: Some(false),
         cs: Some(true),
@@ -2390,4 +2398,118 @@ fn kerning_and_ligatures_round_trip() {
     let bytes = doc4me_docx::write(&d).expect("write");
     let r = doc4me_docx::read(&bytes).expect("read");
     assert_eq!(r.styles.default_chr.ligatures, None);
+}
+
+/// Fit Text (`w:fitText`) and Two Lines in One / Horizontal in Vertical (`w:eastAsianLayout`)
+/// come back as they were saved, ids and brackets too; `rPr` keeps the schema's element order.
+#[test]
+fn asian_layout_run_properties_round_trip() {
+    use doc4me_doc::props::{CharProps, CombineBrackets, EastAsianLayout, FitText};
+    let fit = CharProps { fit_text: Some(FitText { width: 72.0, id: Some(3) }), ..Default::default() };
+    let combine = CharProps {
+        east_asian: Some(EastAsianLayout { id: Some(7), combine: true, brackets: CombineBrackets::Curly, ..Default::default() }),
+        ..Default::default()
+    };
+    let vert = CharProps {
+        east_asian: Some(EastAsianLayout { vert: true, vert_compress: true, ..Default::default() }),
+        shading: Some(Rgb::parse("FFFF00").unwrap()),
+        lang: Some("ja-JP".into()),
+        ..Default::default()
+    };
+    let mut p = Paragraph::new();
+    for (text, props) in [("東京都", &fit), ("株式会社", &combine), ("12", &vert)] {
+        let n = p.len();
+        p.insert_text(n, text, props).unwrap();
+    }
+    let d = rt(&doc_with(vec![p]));
+    let q = paras(&d)[0];
+    let at = |w: &str| q.props_at(q.text.find(w).unwrap() + w.len()).clone();
+    assert_eq!(at("東京都").fit_text, fit.fit_text);
+    assert_eq!(at("株式会社").east_asian, combine.east_asian);
+    assert_eq!(at("12").east_asian, vert.east_asian);
+    // The written XML: fitText after shd, eastAsianLayout after lang (ECMA-376 CT_RPr order).
+    let out = doc4me_docx::write(&doc_with(vec![{
+        let mut p = Paragraph::new();
+        p.insert_text(0, "12", &CharProps { fit_text: fit.fit_text, ..vert.clone() }).unwrap();
+        p
+    }]))
+    .unwrap();
+    let mut z = zip::ZipArchive::new(std::io::Cursor::new(out)).unwrap();
+    let mut xml = String::new();
+    std::io::Read::read_to_string(&mut z.by_name("word/document.xml").unwrap(), &mut xml).unwrap();
+    let pos = |t: &str| xml.find(t).unwrap_or_else(|| panic!("{t} missing from {xml}"));
+    assert!(pos("<w:shd ") < pos("<w:fitText ") && pos("<w:lang ") < pos("<w:eastAsianLayout "), "{xml}");
+    assert!(xml.contains(r#"<w:fitText w:val="1440" w:id="3"/>"#) && xml.contains(r#"w:vert="1" w:vertCompress="1""#), "{xml}");
+}
+
+/// File › Options › Typography: the character spacing control (written as `doNotCompress` before,
+/// whatever the file had) and the first and last characters come back as saved.
+#[test]
+fn typography_settings_round_trip() {
+    use doc4me_doc::{CharSpacing, Kinsoku};
+    for (spacing, kinsoku) in [
+        (CharSpacing::CompressPunctuation, Kinsoku { strict: true, ..Default::default() }),
+        (
+            CharSpacing::CompressPunctuationAndJapaneseKana,
+            Kinsoku { no_start: Some("、。ー".into()), no_end: Some("「（".into()), lang: Some("ja-JP".into()), ..Default::default() },
+        ),
+        (CharSpacing::DoNotCompress, Kinsoku::default()),
+    ] {
+        let mut d = doc_with(vec![Paragraph::with_text("日本語。", Default::default())]);
+        d.settings.char_spacing = spacing;
+        d.settings.kinsoku = kinsoku.clone();
+        let back = rt(&d);
+        assert_eq!((back.settings.char_spacing, &back.settings.kinsoku), (spacing, &kinsoku));
+    }
+}
+
+/// Show Repairs: a part that can't be read is left out and listed; a sound file lists nothing.
+#[test]
+fn unreadable_parts_are_listed_as_repairs() {
+    let sound = doc4me_docx::write(&Document::from_text("Hello")).unwrap();
+    assert!(doc4me_docx::read(&sound).unwrap().repairs.is_empty());
+    let broken = replace_part(&sound, "word/styles.xml", b"<w:styles w:x=\"unterminated></w:styles>");
+    let d = doc4me_docx::read(&broken).unwrap();
+    assert_eq!(d.plain_text(doc4me_doc::StoryRef::Body), "Hello", "the text is still read");
+    assert_eq!(d.repairs.len(), 1, "{:?}", d.repairs);
+    assert_eq!(d.repairs[0].what, "word/styles.xml");
+    assert!(d.repairs[0].message.contains("{what}"));
+    // Broken relationships of the main part: the document still opens.
+    let broken = replace_part(&sound, "word/_rels/document.xml.rels", b"<Relationships a=\"unterminated>");
+    let d = doc4me_docx::read(&broken).unwrap();
+    assert!(d.repairs.iter().any(|r| r.what == "word/_rels/document.xml.rels"), "{:?}", d.repairs);
+}
+
+/// Web Options (`word/webSettings.xml`) read and saved back; a document without them gets none.
+#[test]
+fn web_options_round_trip() {
+    let plain = doc4me_docx::write(&Document::from_text("x")).unwrap();
+    let names: Vec<String> = {
+        let z = zip::ZipArchive::new(std::io::Cursor::new(&plain[..])).unwrap();
+        z.file_names().filter_map(Result::ok).map(|n| n.to_string()).collect()
+    };
+    assert!(!names.iter().any(|n| n == "word/webSettings.xml"), "{names:?}");
+    let mut d = Document::from_text("x");
+    d.settings.web = doc4me_doc::WebOptions {
+        encoding: Some("windows-874".into()),
+        optimize_for_browser: true,
+        browser_target: Some("X4".into()),
+        allow_png: true,
+        rely_on_css: false,
+        organize_in_folder: false,
+        pixels_per_inch: Some(120),
+        target_screen: Some("1024x768".into()),
+        ..Default::default()
+    };
+    let back = doc4me_docx::read(&doc4me_docx::write(&d).unwrap()).unwrap();
+    assert_eq!(back.settings.web, doc4me_doc::WebOptions { present: true, ..d.settings.web.clone() });
+    // A file's part with only Word's usual values is kept, and bad values are dropped.
+    let src = replace_part(
+        &doc4me_docx::write(&back).unwrap(),
+        "word/webSettings.xml",
+        br#"<w:webSettings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:optimizeForBrowser/><w:allowPNG/><w:pixelsPerInch w:val="99999"/><w:targetScreenSz w:val="1x1"/></w:webSettings>"#,
+    );
+    let w = doc4me_docx::read(&src).unwrap().settings.web;
+    assert!(w.present && w.optimize_for_browser && w.allow_png && w.rely_on_css);
+    assert_eq!((w.pixels_per_inch, w.target_screen), (None, None));
 }

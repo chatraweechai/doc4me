@@ -2949,3 +2949,81 @@ spacing	Normal	Normal
 	Traditional Chinese to Simplified Chinese	Geleneksel Çinceden Basitleştirilmiş Çinceye
 	Traditional to Simplified	Gelenekselden basitleştirilmişe
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Tayvan, Hong Kong ÖİB ve Makao ÖİB karakter çeşitlerini kullan
+	Asian Layout	Asya Düzeni
+	Fit Text	Metni Sığdır
+	Fit Text…	Metni Sığdır…
+	Two Lines in One	Tek Satırda İki Satır
+	Two Lines in One…	Tek Satırda İki Satır…
+	New text width (pt):	Yeni metin genişliği (pt):
+	Enclose in brackets	Ayraç içine al
+	Bracket pair:	Ayraç çifti:
+	Typography	Tipografi
+	Character spacing control	Karakter aralığı denetimi
+	Don't compress	Sıkıştırma
+	Compress punctuation only	Yalnızca noktalama işaretlerini sıkıştır
+	Compress punctuation and Japanese kana	Noktalama işaretlerini ve Japonca kanayı sıkıştır
+	First and last characters	İlk ve son karakterler
+	Strict	Katı
+	Cannot start a line:	Satır başlatamaz:
+	Cannot end a line:	Satır bitiremez:
+	Japanese Find Options	Japonca Bulma Seçenekleri
+	Sounds like (Japanese)	Benzer okunuş (Japonca)
+	Match full/half width	Tam/yarım genişliği eşleştir
+	Match hiragana/katakana	Hiragana/katakanayı eşleştir
+	Match small kana	Küçük kanayı eşleştir
+	Match prolonged sound marks and dashes	Uzatma işaretlerini ve tireleri eşleştir
+	Japanese Consistency Checker	Japonca Tutarlılık Denetleyicisi
+	Japanese Consistency Checker…	Japonca Tutarlılık Denetleyicisi…
+	No inconsistent spellings were found.	Tutarsız yazım bulunamadı.
+	Pick the spelling to keep in each group.	Her grupta korunacak yazımı seçin.
+	Bidirectional text	Çift yönlü metin
+	Bidirectional Text	Çift Yönlü Metin
+	Default direction:	Varsayılan yön:
+	Cursor movement:	İmleç hareketi:
+	Logical	Mantıksal
+	Visual	Görsel
+	Manage Fields	Alanları Yönet
+	File locations	Dosya konumları
+	File Locations	Dosya Konumları
+	Documents:	Belgeler:
+	Pictures:	Resimler:
+	The system's choice	Sistemin seçimi
+	Show Repairs	Onarımları Göster
+	No repairs were needed.	Onarım gerekmedi.
+	These problems were found and repaired when the document was opened:	Belge açılırken şu sorunlar bulundu ve onarıldı:
+	An unreadable entry in the file was skipped: {what}	Dosyadaki okunamayan bir giriş atlandı: {what}
+	An unreadable part was left out: {what}	Okunamayan bir bölüm dışarıda bırakıldı: {what}
+	Unreadable relationships were ignored: {what}	Okunamayan ilişkiler yok sayıldı: {what}
+	A missing part of an embedded object was left out: {what}	Katıştırılmış bir nesnenin eksik bölümü dışarıda bırakıldı: {what}
+	Copy File	Dosyayı Kopyala
+	Find Files	Dosyaları Bul
+	Letter Wizard	Mektup Sihirbazı
+	Recipient's name:	Alıcının adı:
+	Salutation:	Hitap:
+	Subject:	Konu:
+	Complimentary closing:	Kapanış:
+	Sender's name:	Gönderenin adı:
+	Job title:	Unvan:
+	Company:	Şirket:
+	Enclosures:	Ekler:
+	Cc:	Bilgi:
+	Edit Links to Files	Dosya Bağlantılarını Düzenle
+	Source file	Kaynak dosya
+	Locked	Kilitli
+	Change Source	Kaynağı Değiştir
+	This document has no links to files.	Bu belgede dosya bağlantısı yok.
+	Web options	Web seçenekleri
+	Web Options	Web Seçenekleri
+	Allow PNG as a graphics format	PNG'ye grafik biçimi olarak izin ver
+	Rely on CSS for font formatting	Yazı tipi biçimlendirmesi için CSS kullan
+	Rely on VML for displaying graphics in browsers	Tarayıcılarda grafikleri görüntülemek için VML kullan
+	Organize supporting files in a folder	Destek dosyalarını bir klasörde düzenle
+	Use long file names whenever possible	Mümkün olduğunda uzun dosya adları kullan
+	Screen size:	Ekran boyutu:
+	Pixels per inch:	İnç başına piksel:
+	Hangul Hanja Conversion	Hangul/Hanja Dönüştürme
+	Hangul Hanja Conversion…	Hangul/Hanja Dönüştürme…
+	Hangul to Hanja	Hangul'dan Hanja'ya
+	Hanja to Hangul	Hanja'dan Hangul'a
+	Put the caret in Korean text to choose its Hanja.	Hanja seçmek için imleci Korece metne yerleştirin.
+	The selection, or the whole document when nothing is selected.	Seçim veya hiçbir şey seçili değilse belgenin tamamı.

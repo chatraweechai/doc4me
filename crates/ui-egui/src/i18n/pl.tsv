@@ -2927,3 +2927,81 @@ spacing	Normal	Normalne
 	Traditional Chinese to Simplified Chinese	Chiński tradycyjny na chiński uproszczony
 	Traditional to Simplified	Tradycyjny na uproszczony
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Użyj wariantów znaków dla Tajwanu, SRA Hongkong i SRA Makau
+	Asian Layout	Układ azjatycki
+	Fit Text	Dopasuj tekst
+	Fit Text…	Dopasuj tekst…
+	Two Lines in One	Dwa wiersze w jednym
+	Two Lines in One…	Dwa wiersze w jednym…
+	New text width (pt):	Nowa szerokość tekstu (pt):
+	Enclose in brackets	Ujmij w nawiasy
+	Bracket pair:	Para nawiasów:
+	Typography	Typografia
+	Character spacing control	Kontrola odstępów między znakami
+	Don't compress	Nie kompresuj
+	Compress punctuation only	Kompresuj tylko interpunkcję
+	Compress punctuation and Japanese kana	Kompresuj interpunkcję i japońskie kana
+	First and last characters	Pierwsze i ostatnie znaki
+	Strict	Ścisłe
+	Cannot start a line:	Nie może rozpoczynać wiersza:
+	Cannot end a line:	Nie może kończyć wiersza:
+	Japanese Find Options	Opcje wyszukiwania japońskiego
+	Sounds like (Japanese)	Brzmi jak (japoński)
+	Match full/half width	Dopasuj pełną/połówkową szerokość
+	Match hiragana/katakana	Dopasuj hiraganę/katakanę
+	Match small kana	Dopasuj małe kana
+	Match prolonged sound marks and dashes	Dopasuj znaki przedłużenia i myślniki
+	Japanese Consistency Checker	Sprawdzanie spójności języka japońskiego
+	Japanese Consistency Checker…	Sprawdzanie spójności języka japońskiego…
+	No inconsistent spellings were found.	Nie znaleziono niespójnych zapisów.
+	Pick the spelling to keep in each group.	W każdej grupie wybierz zapis, który chcesz zachować.
+	Bidirectional text	Tekst dwukierunkowy
+	Bidirectional Text	Tekst dwukierunkowy
+	Default direction:	Domyślny kierunek:
+	Cursor movement:	Ruch kursora:
+	Logical	Logiczny
+	Visual	Wizualny
+	Manage Fields	Zarządzaj polami
+	File locations	Lokalizacje plików
+	File Locations	Lokalizacje plików
+	Documents:	Dokumenty:
+	Pictures:	Obrazy:
+	The system's choice	Wybór systemu
+	Show Repairs	Pokaż naprawy
+	No repairs were needed.	Naprawy nie były potrzebne.
+	These problems were found and repaired when the document was opened:	Podczas otwierania dokumentu znaleziono i naprawiono te problemy:
+	An unreadable entry in the file was skipped: {what}	Pominięto nieczytelny wpis w pliku: {what}
+	An unreadable part was left out: {what}	Pominięto nieczytelną część: {what}
+	Unreadable relationships were ignored: {what}	Zignorowano nieczytelne relacje: {what}
+	A missing part of an embedded object was left out: {what}	Pominięto brakującą część obiektu osadzonego: {what}
+	Copy File	Kopiuj plik
+	Find Files	Znajdź pliki
+	Letter Wizard	Kreator listów
+	Recipient's name:	Nazwisko adresata:
+	Salutation:	Zwrot grzecznościowy:
+	Subject:	Temat:
+	Complimentary closing:	Zwrot końcowy:
+	Sender's name:	Nazwisko nadawcy:
+	Job title:	Stanowisko:
+	Company:	Firma:
+	Enclosures:	Załączniki:
+	Cc:	DW:
+	Edit Links to Files	Edytuj łącza do plików
+	Source file	Plik źródłowy
+	Locked	Zablokowane
+	Change Source	Zmień źródło
+	This document has no links to files.	Ten dokument nie zawiera łączy do plików.
+	Web options	Opcje sieci Web
+	Web Options	Opcje sieci Web
+	Allow PNG as a graphics format	Zezwalaj na format grafiki PNG
+	Rely on CSS for font formatting	Formatuj czcionki przy użyciu CSS
+	Rely on VML for displaying graphics in browsers	Wyświetlaj grafikę w przeglądarkach przy użyciu VML
+	Organize supporting files in a folder	Organizuj pliki pomocnicze w folderze
+	Use long file names whenever possible	Używaj długich nazw plików, gdy jest to możliwe
+	Screen size:	Rozmiar ekranu:
+	Pixels per inch:	Pikseli na cal:
+	Hangul Hanja Conversion	Konwersja Hangul/Hanja
+	Hangul Hanja Conversion…	Konwersja Hangul/Hanja…
+	Hangul to Hanja	Hangul na Hanja
+	Hanja to Hangul	Hanja na Hangul
+	Put the caret in Korean text to choose its Hanja.	Umieść kursor w tekście koreańskim, aby wybrać jego Hanja.
+	The selection, or the whole document when nothing is selected.	Zaznaczenie lub cały dokument, gdy nic nie jest zaznaczone.

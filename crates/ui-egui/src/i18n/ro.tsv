@@ -2919,3 +2919,81 @@
 	Traditional Chinese to Simplified Chinese	Chineză tradițională în chineză simplificată
 	Traditional to Simplified	Din tradițională în simplificată
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Utilizați variantele de caractere pentru Taiwan, RAS Hong Kong și RAS Macao
+	Asian Layout	Aspect asiatic
+	Fit Text	Potrivire text
+	Fit Text…	Potrivire text…
+	Two Lines in One	Două rânduri într-unul
+	Two Lines in One…	Două rânduri într-unul…
+	New text width (pt):	Lățime nouă a textului (pt):
+	Enclose in brackets	Încadrare în paranteze
+	Bracket pair:	Pereche de paranteze:
+	Typography	Tipografie
+	Character spacing control	Controlul spațierii caracterelor
+	Don't compress	Fără comprimare
+	Compress punctuation only	Comprimare doar a punctuației
+	Compress punctuation and Japanese kana	Comprimare a punctuației și a kana japoneze
+	First and last characters	Primele și ultimele caractere
+	Strict	Strict
+	Cannot start a line:	Nu poate începe un rând:
+	Cannot end a line:	Nu poate încheia un rând:
+	Japanese Find Options	Opțiuni de căutare japoneză
+	Sounds like (Japanese)	Sună ca (japoneză)
+	Match full/half width	Potrivire lățime completă/jumătate
+	Match hiragana/katakana	Potrivire hiragana/katakana
+	Match small kana	Potrivire kana mică
+	Match prolonged sound marks and dashes	Potrivire semne de prelungire și liniuțe
+	Japanese Consistency Checker	Verificator de consecvență japoneză
+	Japanese Consistency Checker…	Verificator de consecvență japoneză…
+	No inconsistent spellings were found.	Nu s-au găsit scrieri inconsecvente.
+	Pick the spelling to keep in each group.	Alegeți în fiecare grup scrierea de păstrat.
+	Bidirectional text	Text bidirecțional
+	Bidirectional Text	Text bidirecțional
+	Default direction:	Direcție implicită:
+	Cursor movement:	Mișcarea cursorului:
+	Logical	Logic
+	Visual	Vizual
+	Manage Fields	Gestionare câmpuri
+	File locations	Locații fișiere
+	File Locations	Locații fișiere
+	Documents:	Documente:
+	Pictures:	Imagini:
+	The system's choice	Alegerea sistemului
+	Show Repairs	Afișare reparații
+	No repairs were needed.	Nu au fost necesare reparații.
+	These problems were found and repaired when the document was opened:	La deschiderea documentului au fost găsite și reparate aceste probleme:
+	An unreadable entry in the file was skipped: {what}	O intrare ilizibilă din fișier a fost omisă: {what}
+	An unreadable part was left out: {what}	O parte ilizibilă a fost omisă: {what}
+	Unreadable relationships were ignored: {what}	Relațiile ilizibile au fost ignorate: {what}
+	A missing part of an embedded object was left out: {what}	O parte lipsă a unui obiect încorporat a fost omisă: {what}
+	Copy File	Copiere fișier
+	Find Files	Găsire fișiere
+	Letter Wizard	Expert scrisori
+	Recipient's name:	Numele destinatarului:
+	Salutation:	Formulă de adresare:
+	Subject:	Subiect:
+	Complimentary closing:	Formulă de încheiere:
+	Sender's name:	Numele expeditorului:
+	Job title:	Funcție:
+	Company:	Companie:
+	Enclosures:	Anexe:
+	Cc:	Cc:
+	Edit Links to Files	Editare linkuri către fișiere
+	Source file	Fișier sursă
+	Locked	Blocat
+	Change Source	Modificare sursă
+	This document has no links to files.	Acest document nu are linkuri către fișiere.
+	Web options	Opțiuni web
+	Web Options	Opțiuni web
+	Allow PNG as a graphics format	Se permite PNG ca format grafic
+	Rely on CSS for font formatting	Se utilizează CSS pentru formatarea fonturilor
+	Rely on VML for displaying graphics in browsers	Se utilizează VML pentru afișarea graficii în browsere
+	Organize supporting files in a folder	Organizare fișiere suport într-un folder
+	Use long file names whenever possible	Se utilizează nume lungi de fișiere când este posibil
+	Screen size:	Dimensiune ecran:
+	Pixels per inch:	Pixeli per inch:
+	Hangul Hanja Conversion	Conversie Hangul/Hanja
+	Hangul Hanja Conversion…	Conversie Hangul/Hanja…
+	Hangul to Hanja	Hangul în Hanja
+	Hanja to Hangul	Hanja în Hangul
+	Put the caret in Korean text to choose its Hanja.	Plasați cursorul în text coreean pentru a-i alege Hanja.
+	The selection, or the whole document when nothing is selected.	Selecția sau întregul document când nu este selectat nimic.

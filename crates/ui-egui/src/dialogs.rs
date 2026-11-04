@@ -24,6 +24,8 @@ pub struct FindExtra {
     pub suffix: bool,
     pub ignore_punct: bool,
     pub ignore_space: bool,
+    /// Sounds like (Japanese).
+    pub fuzzy: bool,
     /// The search options are shown.
     pub more: bool,
     /// Special ▾ inserts into Replace with (it last had the focus), not Find what.
@@ -255,6 +257,21 @@ pub enum Dialog {
         size: f32,
         offset: f32,
         /// The selection already has a phonetic guide (Remove is offered).
+        existing: bool,
+    },
+    /// Home › Paragraph › Asian Layout › Fit Text: the selected text's width (`format.fitText`).
+    FitText {
+        /// Points.
+        width: f32,
+        /// The selection is already fitted text (Remove is offered).
+        existing: bool,
+    },
+    /// Home › Paragraph › Asian Layout › Two Lines in One (`format.twoLinesInOne`).
+    TwoLinesInOne {
+        on: bool,
+        /// `none`, `round`, `square`, `angle` or `curly`.
+        brackets: String,
+        /// The selection already is two lines in one (Remove is offered).
         existing: bool,
     },
     NewStyle {
@@ -880,6 +897,8 @@ impl Dialog {
             Dialog::Zoom { .. } => "zoom",
             Dialog::Watermark { .. } => "watermark",
             Dialog::Phonetic { .. } => "phonetic",
+            Dialog::FitText { .. } => "fitText",
+            Dialog::TwoLinesInOne { .. } => "twoLinesInOne",
             Dialog::NewStyle { .. } => "newStyle",
             Dialog::ModifyStyle { .. } => "modifyStyle",
             Dialog::ManageStyles { .. } => "manageStyles",
@@ -961,7 +980,18 @@ impl Dialog {
         }
         if matches!(
             name,
-            "insertFormField" | "formFieldOptions" | "formFieldHelp" | "sectionProtection" | "autoSummarize" | "formatFrame" | "chineseConversion"
+            "insertFormField"
+                | "formFieldOptions"
+                | "formFieldHelp"
+                | "sectionProtection"
+                | "autoSummarize"
+                | "formatFrame"
+                | "chineseConversion"
+                | "consistencyChecker"
+                | "showRepairs"
+                | "letterWizard"
+                | "editLinks"
+                | "hangulHanja"
         ) {
             return crate::dialogs_forms::open(name, app).map(|d| Dialog::Forms(Box::new(d)));
         }
@@ -1050,7 +1080,8 @@ impl Dialog {
                 };
                 Dialog::Borders { form: Box::new(crate::dialogs_para::BordersForm::read(app, tab)?) }
             }
-            "find" | "replace" => Dialog::Find {
+            // Find Options (Japanese) are part of Advanced Find's search options.
+            "find" | "replace" | "fuzzyOptions" => Dialog::Find {
                 query: if app.session.sel.is_collapsed() { app.session.find.query.clone() } else { app.session.selected_text() },
                 replace: app.session.find.replace.clone(),
                 match_case: app.session.find.match_case,
@@ -1062,7 +1093,10 @@ impl Dialog {
                     suffix: app.session.find.match_suffix,
                     ignore_punct: app.session.find.ignore_punct,
                     ignore_space: app.session.find.ignore_space,
-                    more: app.session.find.wildcards
+                    fuzzy: app.session.find.fuzzy.on,
+                    more: name == "fuzzyOptions"
+                        || app.session.find.fuzzy.on
+                        || app.session.find.wildcards
                         || app.session.find.match_prefix
                         || app.session.find.match_suffix
                         || app.session.find.ignore_punct
@@ -1113,6 +1147,17 @@ impl Dialog {
                     offset: f("offset"),
                     existing: v.get("existing").and_then(Value::as_bool).unwrap_or(false),
                 }
+            }
+            "fitText" => {
+                let v = doc4me_engine::cmd::asian_layout::state(&app.session);
+                let width = v.get("fitText").and_then(Value::as_f64);
+                Dialog::FitText { width: width.unwrap_or(72.0) as f32, existing: width.is_some() }
+            }
+            "twoLinesInOne" => {
+                let v = doc4me_engine::cmd::asian_layout::state(&app.session);
+                let existing = v.get("twoLinesInOne").and_then(Value::as_bool).unwrap_or(false);
+                let brackets = v.get("brackets").and_then(Value::as_str).unwrap_or("none").to_string();
+                Dialog::TwoLinesInOne { on: true, brackets, existing }
             }
             "newStyle" => Dialog::NewStyle { name: "Style1".into(), based_on: "Normal".into(), back: false },
             "manageStyles" => Dialog::ManageStyles { alphabetical: false, selected: s("style") },
@@ -1359,6 +1404,8 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context) {
         Dialog::Zoom { .. } => "Zoom",
         Dialog::Watermark { .. } => "Custom Watermark",
         Dialog::Phonetic { .. } => "Phonetic Guide",
+        Dialog::FitText { .. } => "Fit Text",
+        Dialog::TwoLinesInOne { .. } => "Two Lines in One",
         Dialog::NewStyle { .. } => "Create New Style",
         Dialog::ModifyStyle { .. } => "Modify Style",
         Dialog::ManageStyles { .. } => "Manage Styles",
@@ -1956,6 +2003,24 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     ui.add_enabled(plain, egui::Checkbox::new(&mut extra.ignore_punct, tl!("Ignore punctuation characters")));
                     ui.add_enabled(plain, egui::Checkbox::new(&mut extra.ignore_space, tl!("Ignore white-space characters")));
                 });
+                ui.add_enabled(plain, egui::Checkbox::new(&mut extra.fuzzy, tl!("Sounds like (Japanese)")));
+                if extra.fuzzy && plain {
+                    // Find Options (Japanese): what reads alike.
+                    let f = app.session.find.fuzzy;
+                    ui.indent("fuzzy_options", |ui| {
+                        for (label, key, on) in [
+                            ("Match full/half width", "width", f.width),
+                            ("Match hiragana/katakana", "kana", f.kana),
+                            ("Match small kana", "smallKana", f.small_kana),
+                            ("Match prolonged sound marks and dashes", "longVowel", f.long_vowel),
+                        ] {
+                            let mut v = on;
+                            if ui.checkbox(&mut v, tl!(label)).changed() {
+                                let _ = app.run("edit.fuzzyOptions", json!({ key: v }));
+                            }
+                        }
+                    });
+                }
                 ui.horizontal(|ui| {
                     ui.checkbox(regex, tl!("Regular expressions"));
                     if let Some(code) = special_menu(ui, extra) {
@@ -1974,6 +2039,7 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 "matchSuffix": extra.suffix,
                 "ignorePunct": extra.ignore_punct,
                 "ignoreSpace": extra.ignore_space,
+                "fuzzy": extra.fuzzy,
             });
             if !*replace_mode {
                 ui.horizontal(|ui| {
@@ -2321,6 +2387,59 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 let _ = app.run("format.phonetic", json!({"ruby": null}));
             } else if ok {
                 let _ = app.run("format.phonetic", json!({"ruby": ruby, "align": align, "size": *size, "offset": *offset}));
+            }
+            ok || cancel || remove
+        }
+        Dialog::FitText { width, existing } => {
+            egui::Grid::new("fit_text").num_columns(2).spacing(vec2(10.0, 6.0)).show(ui, |ui| {
+                ui.label(tl!("New text width (pt):"));
+                ui.add(egui::DragValue::new(width).speed(0.5).range(1.0..=doc4me_doc::props::MAX_FIT_TEXT).clamp_existing_to_range(false));
+                ui.end_row();
+            });
+            let mut remove = false;
+            if *existing {
+                ui.add_space(4.0);
+                remove = ui.button(tl!("Remove")).clicked();
+            }
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if remove {
+                let _ = app.run("format.fitText", json!({"width": null}));
+            } else if ok {
+                let _ = app.run("format.fitText", json!({"width": *width}));
+            }
+            ok || cancel || remove
+        }
+        Dialog::TwoLinesInOne { on, brackets, existing } => {
+            const PAIRS: [(&str, &str); 4] = [("round", "( )"), ("square", "[ ]"), ("angle", "< >"), ("curly", "{ }")];
+            ui.checkbox(on, tl!("Two Lines in One"));
+            let mut enclose = brackets.as_str() != "none";
+            ui.add_enabled_ui(*on, |ui| {
+                if ui.checkbox(&mut enclose, tl!("Enclose in brackets")).changed() {
+                    *brackets = if enclose { "round" } else { "none" }.into();
+                }
+                ui.add_enabled_ui(enclose, |ui| {
+                    ui.horizontal(|ui| {
+                        ui.label(tl!("Bracket pair:"));
+                        let shown = PAIRS.iter().find(|(k, _)| k == brackets).map_or("( )", |(_, l)| l);
+                        egui::ComboBox::from_id_salt("two_lines_brackets").selected_text(shown).show_ui(ui, |ui| {
+                            for (k, l) in PAIRS {
+                                ui.selectable_value(brackets, k.to_string(), l);
+                            }
+                        });
+                    });
+                });
+            });
+            let mut remove = false;
+            if *existing {
+                ui.add_space(4.0);
+                remove = ui.button(tl!("Remove")).clicked();
+            }
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if remove {
+                let _ = app.run("format.twoLinesInOne", json!({"value": false}));
+            } else if ok {
+                let b = if *on { brackets.as_str() } else { "none" };
+                let _ = app.run("format.twoLinesInOne", json!({"value": *on, "brackets": b}));
             }
             ok || cancel || remove
         }

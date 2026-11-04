@@ -5456,3 +5456,82 @@ fn go_to_takes_word_s_destinations() {
         assert!(s.run("edit.goto", &json!({"to": bad})).is_err(), "{bad:?}");
     }
 }
+
+/// Sounds like (Japanese): `fuzzy` on `edit.find` finds half-width and katakana spellings;
+/// `edit.fuzzyOptions` turns its foldings off one by one, and without settings asks for the dialog.
+#[test]
+fn japanese_fuzzy_find_through_the_commands() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("コーヒー と ｺｰﾋｰ と こーひー"));
+    assert_eq!(run(&mut s, "edit.find", json!({"text": "コーヒー"}))["count"], 1);
+    assert_eq!(run(&mut s, "edit.find", json!({"text": "コーヒー", "fuzzy": true}))["count"], 3);
+    let r = run(&mut s, "edit.fuzzyOptions", json!({"kana": false}));
+    assert_eq!((r["kana"].as_bool(), r["width"].as_bool(), r["fuzzy"].as_bool()), (Some(false), Some(true), Some(true)));
+    assert_eq!(run(&mut s, "edit.find", json!({"text": "コーヒー"}))["count"], 2, "hiragana no longer matches");
+    assert!(s.ui_requests.is_empty() || !s.ui_requests.iter().any(|r| r["open"] == "fuzzyOptions"));
+    run(&mut s, "edit.fuzzyOptions", json!({}));
+    assert!(s.ui_requests.iter().any(|r| r["open"] == "fuzzyOptions"), "without settings it opens the options");
+}
+
+/// Show Repairs: opening a damaged .docx lists the part left out and asks the front end to show
+/// it; a sound file lists nothing.
+#[test]
+fn opening_a_damaged_file_shows_its_repairs() {
+    let sound = doc4me_docx::write(&doc4me_doc::Document::from_text("Hello")).unwrap();
+    let mut src = zip::ZipArchive::new(std::io::Cursor::new(&sound[..])).unwrap();
+    let mut out = zip::ZipWriter::new(std::io::Cursor::new(Vec::new()));
+    for i in 0..src.len() {
+        let mut f = src.by_index(i).unwrap();
+        let n = f.name().unwrap().to_string();
+        out.start_file(n.as_str(), zip::write::SimpleFileOptions::default()).unwrap();
+        if n == "word/styles.xml" {
+            std::io::Write::write_all(&mut out, b"<w:styles w:x=\"unterminated></w:styles>").unwrap();
+        } else {
+            std::io::copy(&mut f, &mut out).unwrap();
+        }
+    }
+    let broken = out.finish().unwrap().into_inner();
+    let mut s = Session::new(doc4me_doc::Document::new());
+    let data = crate::cmd::insert::base64_encode(&broken);
+    let r = s.run("file.open", &json!({"path": "broken.docx", "data": data})).unwrap();
+    assert_eq!(r["repairs"], json!(1));
+    assert!(s.ui_requests.iter().any(|u| u["open"] == "showRepairs"), "{:?}", s.ui_requests);
+    let r = s.run("file.showRepairs", &json!({})).unwrap();
+    assert_eq!(r["repairs"][0]["what"], json!("word/styles.xml"));
+    s.ui_requests.clear();
+    s.run("file.open", &json!({"path": "sound.docx", "data": crate::cmd::insert::base64_encode(&sound)})).unwrap();
+    assert!(s.run("file.showRepairs", &json!({})).unwrap()["repairs"].as_array().unwrap().is_empty());
+    assert!(!s.ui_requests.iter().any(|u| u["open"] == "showRepairs"));
+}
+
+/// Letter Wizard: a new letter from the fields given, empty ones left out; none opens the wizard.
+#[test]
+fn letter_wizard_writes_a_letter_from_its_fields() {
+    let mut s = Session::new(doc4me_doc::Document::from_text("old"));
+    let r = s.run("file.letterWizard", &json!({})).unwrap();
+    assert_eq!(r["opened"], json!(true));
+    assert!(s.ui_requests.iter().any(|u| u["open"] == "letterWizard"));
+    assert_eq!(s.doc.plain_text(StoryRef::Body), "old", "nothing changes until there is something to write");
+    assert!(s.run("file.letterWizard", &json!({"recipientName": 3})).is_err());
+    assert!(s.run("file.letterWizard", &json!({"cc": "x".repeat(2001)})).is_err());
+    s.run(
+        "file.letterWizard",
+        &json!({
+            "senderName": "Somchai Jaidee",
+            "date": "3 November 2026",
+            "recipientName": "Ms. Lee",
+            "recipientAddress": "1 Main Street\r\nBangkok 10110",
+            "salutation": "Dear Ms. Lee,",
+            "body": "Thank you for your letter.\nI enclose the form.",
+            "closing": "Yours sincerely,",
+            "enclosures": "Enclosure: form",
+            "cc": "Mr. Chan",
+        }),
+    )
+    .unwrap();
+    let text = s.doc.plain_text(StoryRef::Body);
+    assert_eq!(
+        text,
+        "Somchai Jaidee\n\n3 November 2026\n\nMs. Lee\n1 Main Street\nBangkok 10110\n\nDear Ms. Lee,\nThank you for your letter.\nI enclose the form.\nYours sincerely,\n\n\nSomchai Jaidee\n\nEnclosure: form\ncc: Mr. Chan"
+    );
+    assert!(s.path.is_none());
+}

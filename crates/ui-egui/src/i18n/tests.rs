@@ -298,8 +298,8 @@ fn brazilian_portuguese_locales_and_saved_preference_work_without_changing_the_d
     for tag in ["pt-BR", "pt_BR.UTF-8", "PT-BR", "pt-BR-latn", "pt_BR.UTF-8@euro"] {
         assert_eq!(lang_from_tag(tag), Some(pt), "{tag}");
     }
-    // European Portuguese and a bare `pt` have no catalog yet, so they follow the fallback.
-    assert_eq!(lang_from_tag("pt-PT"), None);
+    // European Portuguese has its own catalog; a bare `pt` names neither, so it follows the fallback.
+    assert_eq!(lang_from_tag("pt-PT"), Some(lang("pt-pt")));
     assert_eq!(lang_from_tag("pt"), None);
     assert_eq!(first_supported([UNSUPPORTED, "pt-BR", "en-US"]), Some(pt));
     let mut app = crate::WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Default::default());
@@ -917,7 +917,7 @@ fn british_english_and_canadian_french_follow_their_regions() {
 
 /// Catalogs written whole, one entry per interface string: the code, the language's own name and
 /// locale tags that resolve to it.
-const WHOLE_CATALOGS: [(&str, &str, &[&str]); 8] = [
+const WHOLE_CATALOGS: [(&str, &str, &[&str]); 40] = [
     ("nl", "Nederlands", &["nl", "nl-NL", "nl_BE.UTF-8"]),
     ("sv", "Svenska", &["sv", "sv-SE", "sv_FI.UTF-8"]),
     ("da", "Dansk", &["da", "da-DK", "da_DK.UTF-8"]),
@@ -926,6 +926,38 @@ const WHOLE_CATALOGS: [(&str, &str, &[&str]); 8] = [
     ("ro", "Română", &["ro", "ro-RO", "ro_MD.UTF-8"]),
     ("sk", "Slovenčina", &["sk", "sk-SK", "sk_SK.UTF-8"]),
     ("hr", "Hrvatski", &["hr", "hr-HR", "hr_BA.UTF-8"]),
+    ("ha", "Hausa", &["ha", "ha-NG", "ha_NG.UTF-8"]),
+    ("ky", "Кыргызча", &["ky", "ky-KG", "ky_KG.UTF-8"]),
+    ("lb", "Lëtzebuergesch", &["lb", "lb-LU", "lb_LU.UTF-8"]),
+    ("mi", "Te reo Māori", &["mi", "mi-NZ", "mi_NZ.UTF-8"]),
+    ("rm", "Rumantsch", &["rm", "rm-CH", "rm_CH.UTF-8"]),
+    ("gd", "Gàidhlig", &["gd", "gd-GB", "gd_GB.UTF-8"]),
+    ("tt", "Татар теле", &["tt", "tt-RU", "tt_RU.UTF-8"]),
+    ("uz", "Oʻzbekcha", &["uz", "uz-UZ", "uz_UZ.UTF-8"]),
+    ("kk", "Қазақ тілі", &["kk", "kk-KZ", "kk_KZ.UTF-8"]),
+    ("sw", "Kiswahili", &["sw", "sw-KE", "sw_KE.UTF-8"]),
+    ("mk", "Македонски", &["mk", "mk-MK", "mk_MK.UTF-8"]),
+    ("ms", "Bahasa Melayu", &["ms", "ms-MY", "ms_MY.UTF-8"]),
+    ("mt", "Malti", &["mt", "mt-MT", "mt_MT.UTF-8"]),
+    ("nn", "Norsk nynorsk", &["nn", "nn-NO", "nn_NO.UTF-8"]),
+    ("pt-pt", "Português (Portugal)", &["pt-pt", "pt-PT", "pt_PT.UTF-8"]),
+    ("cy", "Cymraeg", &["cy", "cy-GB", "cy_GB.UTF-8"]),
+    ("az", "Azərbaycan dili", &["az", "az-AZ", "az_AZ.UTF-8"]),
+    ("eu", "Euskara", &["eu", "eu-ES", "eu_ES.UTF-8"]),
+    ("ga", "Gaeilge", &["ga", "ga-IE", "ga_IE.UTF-8"]),
+    ("af", "Afrikaans", &["af", "af-ZA", "af_ZA.UTF-8"]),
+    ("sq", "Shqip", &["sq", "sq-AL", "sq_AL.UTF-8"]),
+    ("bs", "Bosanski", &["bs", "bs-BA", "bs_BA.UTF-8"]),
+    ("gl", "Galego", &["gl", "gl-ES", "gl_ES.UTF-8"]),
+    ("is", "Íslenska", &["is", "is-IS", "is_IS.UTF-8"]),
+    ("bg", "Български", &["bg", "bg-BG", "bg_BG.UTF-8"]),
+    ("ca", "Català", &["ca", "ca-ES", "ca_ES.UTF-8"]),
+    ("el", "Ελληνικά", &["el", "el-GR", "el_GR.UTF-8"]),
+    ("id", "Bahasa Indonesia", &["id", "id-ID", "id_ID.UTF-8"]),
+    ("lv", "Latviešu", &["lv", "lv-LV", "lv_LV.UTF-8"]),
+    ("lt", "Lietuvių", &["lt", "lt-LT", "lt_LT.UTF-8"]),
+    ("sl", "Slovenščina", &["sl", "sl-SI", "sl_SI.UTF-8"]),
+    ("vi", "Tiếng Việt", &["vi", "vi-VN", "vi_VN.UTF-8"]),
 ];
 
 /// Each whole catalog resolves from its locales, translates every interface string, and is drawn
@@ -958,7 +990,8 @@ fn whole_catalogs_resolve_translate_everything_and_draw_with_bundled_faces() {
             }
         }
     }
-    assert_eq!(lang_from_tag("nn-NO"), None, "Nynorsk has no catalog of its own yet");
+    assert_eq!(lang_from_tag("nn-NO"), Some(lang("nn")), "Nynorsk has a catalog of its own");
+    assert_eq!(lang_from_tag("no-NO"), Some(lang("nb")), "plain Norwegian stays Bokmål");
 }
 
 #[test]

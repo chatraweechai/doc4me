@@ -23,6 +23,7 @@ pub mod rt {
     pub const STYLES: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles";
     pub const NUMBERING: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering";
     pub const SETTINGS: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings";
+    pub const WEB_SETTINGS: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings";
     pub const ATTACHED_TEMPLATE: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate";
     pub const THEME: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme";
     pub const FOOTNOTES: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footnotes";
@@ -139,7 +140,16 @@ pub fn rel_is(t: &str, full: &str) -> bool {
 /// The decompressed parts of a package (bounded).
 pub struct Package {
     files: BTreeMap<String, Vec<u8>>,
+    /// What opening the package and reading its parts had to skip (Word's Show Repairs):
+    /// (message with `{what}`, what).
+    repairs: std::sync::Mutex<Vec<(&'static str, String)>>,
 }
+
+/// Show Repairs messages (`{what}` is the part or entry). Fixed English, translated by the front end.
+pub const REPAIR_ZIP_ENTRY: &str = "An unreadable entry in the file was skipped: {what}";
+pub const REPAIR_PART: &str = "An unreadable part was left out: {what}";
+pub const REPAIR_RELS: &str = "Unreadable relationships were ignored: {what}";
+pub const REPAIR_EMBEDDED: &str = "A missing part of an embedded object was left out: {what}";
 
 impl Package {
     pub fn open(bytes: &[u8]) -> Result<Package, DocxError> {
@@ -152,12 +162,14 @@ impl Package {
             return Err(DocxError::Limit(format!("{} zip entries", zip.len())));
         }
         let mut files = BTreeMap::new();
+        let mut repairs = Vec::new();
         let mut total: u64 = 0;
         for i in 0..zip.len() {
             let mut f = match zip.by_index(i) {
                 Ok(f) => f,
                 Err(e) => {
                     log::warn!("docx: skipping unreadable zip entry {i}: {e}");
+                    repairs.push((REPAIR_ZIP_ENTRY, format!("#{}", i + 1)));
                     continue;
                 }
             };
@@ -168,6 +180,7 @@ impl Package {
                 Ok(n) => n.trim_start_matches('/').to_string(),
                 Err(e) => {
                     log::warn!("docx: skipping zip entry {i} with an unreadable name: {e}");
+                    repairs.push((REPAIR_ZIP_ENTRY, format!("#{}", i + 1)));
                     continue;
                 }
             };
@@ -180,6 +193,7 @@ impl Package {
             if let Err(e) = read {
                 // A corrupt entry: keep going unless it's a part we can't do without.
                 log::warn!("docx: zip entry {name} unreadable: {e}");
+                repairs.push((REPAIR_ZIP_ENTRY, name));
                 continue;
             }
             if buf.len() as u64 > room {
@@ -188,13 +202,27 @@ impl Package {
             total = total.saturating_add(buf.len() as u64);
             files.insert(name, buf);
         }
-        Ok(Package { files })
+        Ok(Package { files, repairs: std::sync::Mutex::new(repairs) })
     }
 
     /// A package from parts already in memory (a Flat OPC file, a converted document), by part
     /// name without the leading `/`.
     pub fn from_parts(files: BTreeMap<String, Vec<u8>>) -> Package {
-        Package { files }
+        Package { files, repairs: Default::default() }
+    }
+
+    /// Note something reading had to skip (bounded by [`doc4me_doc::MAX_REPAIRS`]).
+    pub fn note_repair(&self, message: &'static str, what: impl Into<String>) {
+        if let Ok(mut r) = self.repairs.lock()
+            && r.len() < doc4me_doc::MAX_REPAIRS
+        {
+            r.push((message, what.into()));
+        }
+    }
+
+    /// The repairs noted so far.
+    pub fn repairs(&self) -> Vec<(&'static str, String)> {
+        self.repairs.lock().map(|r| r.clone()).unwrap_or_default()
     }
 
     /// Part bytes by name (leading `/` ignored; case-insensitive fallback).
@@ -223,6 +251,7 @@ impl Package {
             Ok(None) => return rels,
             Err(e) => {
                 log::warn!("docx: ignoring unreadable relationships {path}: {e}");
+                self.note_repair(REPAIR_RELS, path);
                 return rels;
             }
         };
@@ -251,6 +280,7 @@ impl ContentTypes {
             Ok(None) => return ct,
             Err(e) => {
                 log::warn!("docx: ignoring unreadable [Content_Types].xml: {e}");
+                pkg.note_repair(REPAIR_PART, "[Content_Types].xml");
                 return ct;
             }
         };

@@ -496,6 +496,158 @@ pub struct Settings {
     pub attached_template: Option<String>,
     /// Update the document's styles from the attached template when it is opened (`w:linkStyles`).
     pub link_styles: bool,
+    /// Character spacing control (File › Options › Typography; `w:characterSpacingControl`).
+    #[serde(skip_serializing_if = "CharSpacing::is_default")]
+    pub char_spacing: CharSpacing,
+    /// First and last characters, the lines' kinsoku rules (File › Options › Typography).
+    #[serde(skip_serializing_if = "Kinsoku::is_default")]
+    pub kinsoku: Kinsoku,
+    /// Web Options (`word/webSettings.xml`, ECMA-376 Part 1 §17.15.2): how the document is saved
+    /// as a web page in Word, kept so a .docx saves them back.
+    #[serde(skip_serializing_if = "WebOptions::is_default")]
+    pub web: WebOptions,
+}
+
+/// Web Options (File › Options › Advanced › Web Options; `w:webSettings`). `present` keeps the part
+/// of a file that had one even when every value is the default.
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+pub struct WebOptions {
+    pub present: bool,
+    /// `w:encoding`: the character set a web page is saved in (e.g. `utf-8`).
+    pub encoding: Option<String>,
+    /// `w:optimizeForBrowser`, with its `w:target` (a browser version), if any.
+    pub optimize_for_browser: bool,
+    pub browser_target: Option<String>,
+    /// `w:relyOnVML`: graphics shown with VML in browsers.
+    pub rely_on_vml: bool,
+    /// `w:allowPNG`: PNG allowed as a graphics format.
+    pub allow_png: bool,
+    /// Not `w:doNotRelyOnCSS`: CSS used for font formatting.
+    pub rely_on_css: bool,
+    /// Not `w:doNotSaveAsSingleFile`.
+    pub save_as_single_file: bool,
+    /// Not `w:doNotOrganizeInFolder`: supporting files in a folder.
+    pub organize_in_folder: bool,
+    /// Not `w:doNotUseLongFileNames`.
+    pub long_file_names: bool,
+    /// `w:pixelsPerInch` (Word's default 96).
+    pub pixels_per_inch: Option<u32>,
+    /// `w:targetScreenSz` (e.g. `800x600`).
+    pub target_screen: Option<String>,
+}
+
+impl Default for WebOptions {
+    fn default() -> Self {
+        WebOptions {
+            present: false,
+            encoding: None,
+            optimize_for_browser: false,
+            browser_target: None,
+            rely_on_vml: false,
+            allow_png: false,
+            rely_on_css: true,
+            save_as_single_file: true,
+            organize_in_folder: true,
+            long_file_names: true,
+            pixels_per_inch: None,
+            target_screen: None,
+        }
+    }
+}
+
+/// The screen sizes Web Options offers (`ST_TargetScreenSz`).
+pub const TARGET_SCREENS: [&str; 11] =
+    ["544x376", "640x480", "720x512", "800x600", "1024x768", "1152x882", "1152x900", "1280x1024", "1600x1200", "1800x1440", "1920x1200"];
+/// The pixels per inch Web Options takes (Word offers 19, 72, 96 and 120).
+pub const PIXELS_PER_INCH: std::ops::RangeInclusive<u32> = 19..=480;
+/// Longest encoding name kept.
+pub const MAX_ENCODING_NAME: usize = 64;
+
+impl WebOptions {
+    pub fn is_default(&self) -> bool {
+        *self == WebOptions::default()
+    }
+
+    /// Should the .docx have a `webSettings` part?
+    pub fn write_part(&self) -> bool {
+        self.present || *self != WebOptions { present: self.present, ..WebOptions::default() }
+    }
+}
+
+/// How East Asian punctuation is spaced (`w:characterSpacingControl`, ECMA-376 Part 1
+/// §17.15.1.18).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub enum CharSpacing {
+    /// Full-width punctuation keeps its full width (`doNotCompress`).
+    #[default]
+    DoNotCompress,
+    /// Neighbouring full-width punctuation is compressed (`compressPunctuation`).
+    CompressPunctuation,
+    /// …and Japanese kana too (`compressPunctuationAndJapaneseKana`).
+    CompressPunctuationAndJapaneseKana,
+}
+
+impl CharSpacing {
+    pub fn is_default(&self) -> bool {
+        *self == CharSpacing::DoNotCompress
+    }
+    pub fn ooxml(self) -> &'static str {
+        match self {
+            CharSpacing::DoNotCompress => "doNotCompress",
+            CharSpacing::CompressPunctuation => "compressPunctuation",
+            CharSpacing::CompressPunctuationAndJapaneseKana => "compressPunctuationAndJapaneseKana",
+        }
+    }
+    pub fn from_ooxml(v: &str) -> Option<CharSpacing> {
+        match v {
+            "doNotCompress" => Some(CharSpacing::DoNotCompress),
+            "compressPunctuation" => Some(CharSpacing::CompressPunctuation),
+            "compressPunctuationAndJapaneseKana" => Some(CharSpacing::CompressPunctuationAndJapaneseKana),
+            _ => None,
+        }
+    }
+    /// Is punctuation compressed?
+    pub fn compresses(self) -> bool {
+        self != CharSpacing::DoNotCompress
+    }
+}
+
+/// Most characters in a custom kinsoku list (Word's boxes take 100 or so; the schema none).
+pub const MAX_KINSOKU_CHARS: usize = 255;
+
+/// First and last characters (`w:strictFirstAndLastChars`, `w:noLineBreaksBefore`,
+/// `w:noLineBreaksAfter`; ECMA-376 Part 1 §17.15.1.85, §17.15.1.62, §17.15.1.61): which
+/// characters may not start or end a line in East Asian text.
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
+#[serde(default, rename_all = "camelCase")]
+pub struct Kinsoku {
+    /// Strict rules: small kana and the prolonged sound mark may not start a line either.
+    pub strict: bool,
+    /// Custom: the characters no line may start with (`w:noLineBreaksBefore`), replacing the
+    /// standard list.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub no_start: Option<String>,
+    /// Custom: the characters no line may end with (`w:noLineBreaksAfter`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub no_end: Option<String>,
+    /// The language the custom lists are for (`w:lang`, `ja-JP` by default).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub lang: Option<String>,
+}
+
+impl Kinsoku {
+    pub fn is_default(&self) -> bool {
+        *self == Kinsoku::default()
+    }
+    /// A custom list as kept: its characters once each, in order, controls left out, at most
+    /// [`MAX_KINSOKU_CHARS`]; none when empty.
+    pub fn clean_list(s: &str) -> Option<String> {
+        let mut seen = std::collections::HashSet::new();
+        let t: String = s.chars().filter(|c| !c.is_control() && !c.is_whitespace() && seen.insert(*c)).take(MAX_KINSOKU_CHARS).collect();
+        (!t.is_empty()).then_some(t)
+    }
 }
 
 /// Word's compatibility mode for documents that don't state one.
@@ -575,6 +727,9 @@ impl Default for Settings {
             bib_style: None,
             attached_template: None,
             link_styles: false,
+            char_spacing: CharSpacing::DoNotCompress,
+            kinsoku: Kinsoku::default(),
+            web: WebOptions::default(),
         }
     }
 }
@@ -615,6 +770,30 @@ pub struct Document {
     /// when saved ([`Document::make_complex_script_explicit`]).
     #[serde(skip_serializing_if = "std::ops::Not::not")]
     pub complex_script_from_file: bool,
+    /// What reading the file had to repair or leave out (Word's Show Repairs), in the order met.
+    /// Not saved; empty for a document read without trouble or made here.
+    #[serde(skip)]
+    pub repairs: Vec<Repair>,
+}
+
+/// One thing reading a damaged file repaired: `message` is a fixed English sentence with `{what}`
+/// standing for `what` (a part or entry name), so the front end can translate it.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Repair {
+    pub message: String,
+    pub what: String,
+}
+
+/// At most this many repairs are listed for one file (a badly damaged one may have thousands).
+pub const MAX_REPAIRS: usize = 200;
+
+impl Document {
+    /// Note a repair (past [`MAX_REPAIRS`], dropped).
+    pub fn note_repair(&mut self, message: &str, what: impl Into<String>) {
+        if self.repairs.len() < MAX_REPAIRS {
+            self.repairs.push(Repair { message: message.to_string(), what: what.into() });
+        }
+    }
 }
 
 impl Default for Document {
@@ -643,6 +822,7 @@ impl Document {
             media: BTreeMap::new(),
             passthrough: BTreeMap::new(),
             complex_script_from_file: false,
+            repairs: Vec::new(),
         }
     }
 

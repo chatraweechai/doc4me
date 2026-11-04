@@ -52,7 +52,7 @@ pub struct LangInfo {
 }
 
 /// The registry. English first: it is the fallback and the source language.
-pub static LANGUAGES: [LangInfo; 29] = [
+pub static LANGUAGES: [LangInfo; 61] = [
     LangInfo { code: "en", name: "English", source: "", prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // British English (colour, centre, customise); `en-GB` and `en_GB.UTF-8` resolve here, other
     // English regions keep the built-in US English. New documents stay in Doc4Me's default
@@ -89,8 +89,8 @@ pub static LANGUAGES: [LangInfo; 29] = [
     },
     // Spanish, neutral across Spain and Latin America; `es-ES`, `es-MX`, `es-419` … resolve here.
     LangInfo { code: "es", name: "Español", source: include_str!("es.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
-    // Brazilian Portuguese; `pt-BR` and `pt-BR-*` resolve here. Plain `pt` and `pt-PT` have no
-    // catalog yet (the European vocabulary differs), so they stay in English.
+    // Brazilian Portuguese; `pt-BR` and `pt-BR-*` resolve here. European Portuguese (`pt-PT`)
+    // has its own catalog (`pt-pt`); a plain `pt` names neither, so it stays in English.
     LangInfo {
         code: "pt-br",
         name: "Português (Brasil)",
@@ -166,6 +166,73 @@ pub static LANGUAGES: [LangInfo; 29] = [
     LangInfo { code: "sk", name: "Slovenčina", source: include_str!("sk.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // Croatian; `hr`, `hr-HR`, `hr-BA` resolve here.
     LangInfo { code: "hr", name: "Hrvatski", source: include_str!("hr.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "ha", name: "Hausa", source: include_str!("ha.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "ky", name: "Кыргызча", source: include_str!("ky.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo {
+        code: "lb", name: "Lëtzebuergesch", source: include_str!("lb.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo { code: "mi", name: "Te reo Māori", source: include_str!("mi.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "rm", name: "Rumantsch", source: include_str!("rm.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "gd", name: "Gàidhlig", source: include_str!("gd.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "tt", name: "Татар теле", source: include_str!("tt.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo { code: "uz", name: "Oʻzbekcha", source: include_str!("uz.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "kk", name: "Қазақ тілі", source: include_str!("kk.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo { code: "sw", name: "Kiswahili", source: include_str!("sw.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "mk", name: "Македонски", source: include_str!("mk.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo { code: "ms", name: "Bahasa Melayu", source: include_str!("ms.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "mt", name: "Malti", source: include_str!("mt.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "nn", name: "Norsk nynorsk", source: include_str!("nn.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "pt-pt",
+        name: "Português (Portugal)",
+        source: include_str!("pt-pt.tsv"),
+        prefer_hans: false,
+        editing_lang: None,
+        catalog: OnceLock::new(),
+    },
+    LangInfo { code: "cy", name: "Cymraeg", source: include_str!("cy.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "az",
+        name: "Azərbaycan dili",
+        source: include_str!("az.tsv"),
+        prefer_hans: false,
+        editing_lang: None,
+        catalog: OnceLock::new(),
+    },
+    LangInfo { code: "eu", name: "Euskara", source: include_str!("eu.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "ga", name: "Gaeilge", source: include_str!("ga.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "af", name: "Afrikaans", source: include_str!("af.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "sq", name: "Shqip", source: include_str!("sq.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "bs", name: "Bosanski", source: include_str!("bs.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "gl", name: "Galego", source: include_str!("gl.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "is", name: "Íslenska", source: include_str!("is.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "bg", name: "Български", source: include_str!("bg.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo { code: "ca", name: "Català", source: include_str!("ca.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo {
+        code: "el", name: "Ελληνικά", source: include_str!("el.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new()
+    },
+    LangInfo {
+        code: "id",
+        name: "Bahasa Indonesia",
+        source: include_str!("id.tsv"),
+        prefer_hans: false,
+        editing_lang: None,
+        catalog: OnceLock::new(),
+    },
+    LangInfo { code: "lv", name: "Latviešu", source: include_str!("lv.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "lt", name: "Lietuvių", source: include_str!("lt.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "sl", name: "Slovenščina", source: include_str!("sl.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
+    LangInfo { code: "vi", name: "Tiếng Việt", source: include_str!("vi.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
 ];
 
 impl LangInfo {

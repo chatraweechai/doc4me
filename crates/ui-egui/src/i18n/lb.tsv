@@ -1,0 +1,3000 @@
+# Luxembourgish (lb) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts yet)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Machine translation by an AI model (Claude), not yet reviewed by a native speaker.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" oder "an" virum nächste Wuert; polnesch "w"/"we", "z"/"ze".
+	% of all commits	% vun alle Commits
+	(All)	(All)
+	(Custom)	(Personaliséiert)
+	(no style)	(kee Stil)
+	(no suggestions)	(keng Virschléi)
+	(none)	(keng)
+	(normal text)	(normalen Text)
+	(not matched)	(net fonnt)
+	(picture or object)	(Bild oder Objet)
+	*Bold* and _italic_ with real formatting	*Fett* an _kursiv_ mat echter Formatéierung
+	0 or More Characters	0 oder méi Zeechen
+	1. Formatting restrictions	1. Formatéierungsaschränkungen
+	1. Main document	1. Haaptdokument
+	1.5 Line Spacing	Zeilenofstand 1,5
+	1/4 Em Space	1/4-Geviert-Espace
+	1×2 Empty Matrix	Eidel 1×2-Matrix
+	1×3 Empty Matrix	Eidel 1×3-Matrix
+	2. Data source	2. Datequell
+	2. Editing restrictions	2. Beaarbechtungsaschränkungen
+	2×1 Empty Matrix	Eidel 2×1-Matrix
+	2×2 Determinant	2×2-Determinant
+	2×2 Empty Matrix	Eidel 2×2-Matrix
+	2×2 Identity Matrix	2×2-Eenheetsmatrix
+	2×2 Identity Matrix (sparse)	2×2-Eenheetsmatrix (verdënnt)
+	2×2 Matrix in Brackets	2×2-Matrix an eckege Klameren
+	2×2 Matrix in Double Bars	2×2-Matrix an duebele Stréchen
+	2×2 Matrix in Parentheses	2×2-Matrix a ronne Klameren
+	2×3 Empty Matrix	Eidel 2×3-Matrix
+	3-D	3D
+	3. Merge the data with the document	3. D'Daten mam Dokument zesummeféieren
+	3. Start enforcement	3. Schutz aktivéieren
+	3D Models	3D-Modeller
+	3×1 Empty Matrix	Eidel 3×1-Matrix
+	3×2 Empty Matrix	Eidel 3×2-Matrix
+	3×3 Empty Matrix	Eidel 3×3-Matrix
+	3×3 Identity Matrix	3×3-Eenheetsmatrix
+	3×3 Identity Matrix (sparse)	3×3-Eenheetsmatrix (verdënnt)
+	5,000 characters a day; give an email address for 50,000.	5.000 Zeechen den Dag; gitt eng E-Mail-Adress un fir 50.000.
+	<< Less	<< Manner
+	<< Remove	<< Ewechhuelen
+	A file dialog is already open.	Et ass schonn e Fichiersdialog op.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	E gratis Open-Source-Textveraarbechtungsprogramm, vun Null u an Rust geschriwwen.\nBaséiert op WordCraft vum ArtCraft-Team.
+	A header source holds the field names for a data source without a header row.	Eng Kappquell enthält d'Feldnimm fir eng Datequell ouni Kappzeil.
+	A mail merge field	E Seriebréiffeld
+	A new document lists the commands with their shortcuts.	En neit Dokument lëscht d'Befeeler mat hiren Tastekombinatiounen op.
+	A numbered sequence (figures, tables…)	Eng nummeréiert Sequenz (Biller, Tabellen…)
+	A password is required to open this document.	Fir dëst Dokument opzemaachen, brauch een e Passwuert.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	En Espace virun der Punktuatioun, duebel Zeechen, polnesch Kommaen virun Konjunktiounen.
+	A table of contents	En Inhaltsverzeechnes
+	A table's rows keep the same columns here.	D'Reie vun enger Tabell behalen hei déiselwecht Kolonnen.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Iwwer
+	About Doc4Me	Iwwer Doc4Me
+	Above Chart	Iwwer dem Diagramm
+	Above the item	Iwwer dem Element
+	Absolute position	Absolut Positioun
+	Absolute value cases	Fäll mat absolute Wäerter
+	Accent	Akzent
+	Accent Gradient	Akzentverlaf
+	Accent with Reflection	Akzent mat Spigelung
+	Accent {n}	Akzent {n}
+	Accents	Akzenter
+	Accept	Akzeptéieren
+	Accept All	All akzeptéieren
+	Accept All Changes	All Ännerungen akzeptéieren
+	Accept or Reject Changes	Ännerungen akzeptéieren oder refuséieren
+	Accept This Change	Dës Ännerung akzeptéieren
+	Accessed on	Opgeruff den
+	Accessibility	Accessibilitéit
+	Accessibility Pane	Accessibilitéitspanneau
+	Acute	Akut
+	Add	Derbäisetzen
+	Add >>	Derbäisetzen >>
+	Add a comment	E Kommentar derbäisetzen
+	Add a Table	Eng Tabell derbäisetzen
+	Add at least one field.	Setzt mindestens ee Feld derbäi.
+	Add caption when inserting:	Beschrëftung beim Asetzen derbäisetzen:
+	Add Chart Element	Diagrammelement derbäisetzen
+	Add Field	Feld derbäisetzen
+	Add Field Name	Feldnumm derbäisetzen
+	Add Font…	Schrëft derbäisetzen…
+	Add line numbering	Zeilennummeréierung derbäisetzen
+	Add New Placeholder	Neie Plazhalter derbäisetzen
+	Add New Placeholder…	Neie Plazhalter derbäisetzen…
+	Add New Source…	Nei Quell derbäisetzen…
+	Add Object to Selection	Objet zur Auswiel derbäisetzen
+	Add Pen	Stëft derbäisetzen
+	Add Row	Rei derbäisetzen
+	Add Series	Serie derbäisetzen
+	Add Shape	Form derbäisetzen
+	Add Space Before Paragraph	Ofstand virum Paragraf derbäisetzen
+	Add space between Asian and Latin text	Ofstand tëscht asiateschem a laténgeschem Text
+	Add space between Asian text and numbers	Ofstand tëscht asiateschem Text an Zuelen
+	Add tab stop at:	Tabulatiounsstopp derbäisetzen bei:
+	Add Text	Text derbäisetzen
+	Add the chapter number	D'Kapitelnummer derbäisetzen
+	Add to Dictionary	An de Wierderbuch derbäisetzen
+	Add to Document	Zum Dokument derbäisetzen
+	Add to Quick Access Toolbar	Zur Leescht fir de séieren Zougang derbäisetzen
+	Add to Style Gallery	Zur Stilgalerie derbäisetzen
+	Add-ins	Add-ins
+	Add/Edit\nBibliography	Bibliographie\nderbäisetzen/beaarbechten
+	Add/Edit\nCitation	Zitat\nderbäisetzen/beaarbechten
+	Add\nNote	Notiz\nderbäisetzen
+	Add\nPen	Stëft\nderbäisetzen
+	Add\nShape	Form\nderbäisetzen
+	Added	Derbäigesat
+	Added Fonts	Derbäigesate Schrëften
+	Address	Adress
+	Address Block	Adressblock
+	Address labels	Adressetiketten
+	Address:	Adress:
+	Address\nBlock	Adress-\nblock
+	Adjust	Upassen
+	Advanced	Erweidert
+	Advanced Find	Erweidert Sich
+	Advanced Find…	Erweidert Sich…
+	After:	No:
+	Agents	Agenten
+	Align	Ausriichten
+	Align Bottom Center	Ënnen zentréiert ausriichten
+	Align Bottom Left	Ënne lénks ausriichten
+	Align Bottom Right	Ënne riets ausriichten
+	Align Center	Zentréiert ausriichten
+	Align Center Left	Mëtt lénks ausriichten
+	Align Center Right	Mëtt riets ausriichten
+	Align Left	Lénks ausriichten
+	Align Right	Riets ausriichten
+	Align Text	Text ausriichten
+	Align Top Center	Uewen zentréiert ausriichten
+	Align Top Left	Uewe lénks ausriichten
+	Align Top Right	Uewe riets ausriichten
+	Aligned at:	Ausgeriicht bei:
+	Alignment	Ausriichtung
+	Alignment:	Ausriichtung:
+	All	All
+	All - Linear	All – linear
+	All - Professional	All – professionell
+	All Borders	All Rimm
+	All Caps	Alles Groussbuschtawen
+	All caps	Alles Groussbuschtawen
+	All Commands	All Befeeler
+	All files	All Fichieren
+	All Levels	All Niveauen
+	All Markup	All Markéierungen
+	All pages	All Säiten
+	All pages in the range	All Säiten am Beräich
+	All records	All Datesätz
+	All symbol sets	All Symbolsätz
+	Allow Doc4Me to use online services	Doc4Me erlaben, Online-Servicer ze benotzen
+	Allow hanging punctuation	Hängend Punktuatioun erlaben
+	Allow Latin text to wrap in the middle of a word	Laténgeschen Text an der Mëtt vun engem Wuert ëmbrieche loossen
+	Allow line breaks	Zeilenëmbréch erlaben
+	Allow overlap	Iwwerlappung erlaben
+	Allow row to break across pages	Rei iwwer Säiten ëmbrieche loossen
+	Alphabetical	Alphabetesch
+	Alt Text	Alternativen Text
+	Alt text	Alternativen Text
+	Alt Text Pane	Panneau fir alternativen Text
+	Alt:	Alt:
+	Alt\nText	Alternativen\nText
+	And	An
+	Angle Brackets	Spatz Klameren
+	Angle Brackets with Separator	Spatz Klamere mat Trennzeechen
+	Angle Brackets with Two Separators	Spatz Klamere mat zwee Trennzeechen
+	Animate the caret (it glides and fades)	De Cursor animéieren (e gleit a verblasst)
+	Animation	Animatioun
+	Animation effects:	Animatiounseffekter:
+	Annotation Reference	Kommentarreferenz
+	Annotation Subject	Kommentarbetreff
+	Annotation Text	Kommentartext
+	Another file	En anere Fichier
+	Any Character	Iergendee Zeechen
+	Any Digit	Iergendeng Ziffer
+	Any Letter	Iergendee Buschtaf
+	Anyone can open this document. Encrypt it with a password to keep it private.	Jiddereen kann dëst Dokument opmaachen. Verschlësselt et mat engem Passwuert, fir et privat ze halen.
+	Anyone who opens the document will need this password.	Jiddereen, deen d'Dokument opmécht, brauch dëst Passwuert.
+	APA	APA
+	API key (if the server needs one)	API-Schlëssel (wann de Server een brauch)
+	Apply	Uwenden
+	Apply as you type	Beim Tippen uwenden
+	Apply Asian line-breaking rules (kinsoku)	Asiatesch Zeilenëmbrochreegelen uwenden (Kinsoku)
+	Apply Character Style	Zeechestil uwenden
+	Apply formatting to:	Formatéierung uwenden op:
+	Apply special formats to	Speziell Formater uwenden op
+	Apply Style	Stil uwenden
+	Apply Styles	Stiler uwenden
+	Apply to:	Uwenden op:
+	Arabic	Arabesch
+	Arch Down	Bou no ënnen
+	Arch Up	Bou no uewen
+	Area	Fläch
+	Around	Ronderëm
+	Arrange	Arrangéieren
+	Arrange All	All arrangéieren
+	Arrange\nAll	All\narrangéieren
+	Arrow	Feil
+	Arrows	Feiler
+	Artistic Effects	Kënschtleresch Effekter
+	As Recommended	Wéi recommandéiert
+	As you type	Beim Tippen
+	ASAP	ASAP
+	Ascending	Opsteigend
+	Asian text font:	Schrëft fir asiateschen Text:
+	Asian Typography	Asiatesch Typographie
+	Assign	Zouweisen
+	At least	Mindestens
+	At least {n}	Mindestens {n}
+	Atelier	Atelier
+	Atmosphere	Atmosphär
+	Attach Template	Schabloun drunhänken
+	Attach…	Drunhänken…
+	Author	Auteur
+	Auto	Auto
+	AutoCaption	AutoBeschrëftung
+	AutoCaption…	AutoBeschrëftung…
+	AutoComplete	AutoErgänzung
+	AutoCorrect	AutoKorrektur
+	AutoCorrect Options	AutoKorrektur-Optiounen
+	AutoFit	Automatesch upassen
+	AutoFit Contents	Inhalt automatesch upassen
+	AutoFit Window	Fënster automatesch upassen
+	AutoFormat	AutoFormat
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	AutoFormat (Ctrl+Alt+K) formatéiert déi ausgewielte Paragrafen oder dat ganzt Dokument.
+	AutoFormat and Review Changes…	AutoFormat an Ännerungen iwwerpréiwen…
+	AutoFormat As You Type	AutoFormat beim Tippen
+	AutoFormat changed {count} paragraphs	AutoFormat huet {count} Paragrafen geännert
+	AutoFormat Now	Elo AutoFormat
+	Automatic	Automatesch
+	Automatic ({language})	Automatesch ({language})
+	Automatic bulleted lists	Automatesch Lëschte mat Opzielungszeechen
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Automatesch follegt der Sprooch vun Ärem System. Menüen a Befeeler änneren sech; Är Dokumenter net.
+	Automatic numbered lists	Automatesch nummeréiert Lëschten
+	Automatic Table 1 (3 levels)	Automatesch Tabell 1 (3 Niveauen)
+	Automatic Table 2 (2 levels)	Automatesch Tabell 2 (2 Niveauen)
+	Automatically hyphenate document	Silbentrennung am Dokument automatesch
+	Automatically Update Document Styles	Dokumentstiler automatesch aktualiséieren
+	Automatically update document styles	Dokumentstiler automatesch aktualiséieren
+	AutoSave	AutoSpäicheren
+	AutoSave documents you have saved in Doc4Me	Dokumenter, déi Dir an Doc4Me gespäichert hutt, automatesch späicheren
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	AutoSpäicheren ass feelgeschloen: {error}. Späichert d'Dokument, fir AutoSpäicheren nees unzeschalten.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	AutoSpäicheren ass am Browser net disponibel: en ka keng Fichieren schreiwen. Späicheren luet eng Kopie erof.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	AutoSpäicheren hält nëmmen .docx-, .odt- an .rtf-Fichieren; {name} ka net all Formatéierung halen. Späichert als .docx, fir AutoSpäicheren unzeschalten.
+	AutoSave saves every change to the file (needs a saved document)	AutoSpäicheren späichert all Ännerung am Fichier (brauch e gespäichert Dokument)
+	AutoSave writes your changes to the file a moment after you stop typing.	AutoSpäicheren schreift Är Ännerungen e Moment, nodeems Dir ophält ze tippen, an de Fichier.
+	AutoText	AutoText
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10.12" × 14.33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7.17" × 10.12"
+	Back	Zréck
+	Backspace	Réckläschtast
+	Balloons	Bullen
+	Banded Columns	Gestreifte Kolonnen
+	Banded Rows	Gestreifte Reien
+	Bar	Balk
+	Base text:	Basistext:
+	Based on: {style}	Baséiert op: {style}
+	Baseline Dots	Punkten op der Basislinn
+	Basic Cycle	Einfachen Zyklus
+	Basic List	Einfach Lëscht
+	Basic Math	Einfach Mathematik
+	Basic Matrix	Einfach Matrix
+	Basic Process	Einfache Prozess
+	Basic Pyramid	Einfach Pyramid
+	Basic Radial	Einfach radial
+	Basic Venn	Einfache Venn-Diagramm
+	Bayes' rule	Bayes-Reegel
+	Before:	Virun:
+	Beginning of Word	Ufank vum Wuert
+	Behind Text	Hannert dem Text
+	Below text	Ënnert dem Text
+	Below the item	Ënnert dem Element
+	Between	Tëscht
+	Bibliography	Bibliographie
+	Binary assets added	Binär Ressourcen derbäigesat
+	Binary assets removed	Binär Ressourcen ewechgeholl
+	Binomial Coefficient	Binomialkoeffizient
+	Binomial Coefficient (angle)	Binomialkoeffizient (spatz)
+	Binomial Coefficient with Angle Brackets	Binomialkoeffizient mat spatze Klameren
+	Binomial expansion of (x+a)ⁿ	Binomialentwécklung vun (x+a)ⁿ
+	Blank	Eidel
+	Blank (Three Columns)	Eidel (dräi Kolonnen)
+	Blank document	Eidelt Dokument
+	Blank Page	Eidel Säit
+	Block\nAuthors	Auteure\nspären
+	Blue:	Blo:
+	Body Text	Textkierper
+	Body text in a short paragraph to show spacing.	Textkierper an engem kuerze Paragraf, fir den Ofstand ze weisen.
+	Bold	Fett
+	Book	Buch
+	Book Title	Buchtitel
+	Book title	Buchtitel
+	Bookmark	Lieszeechen
+	Bookmark name:	Numm vum Lieszeechen:
+	Border lines	Randlinnen
+	Border Painter	Randmoler
+	Border\nPainter	Rand-\nmoler
+	Borders	Rimm
+	Borders and Shading	Rimm a Schattéierung
+	Borders and Shading…	Rimm a Schattéierung…
+	Border…	Rand…
+	Both Sides	Béid Säiten
+	Both sides	Béid Säiten
+	Bottom	Ënnen
+	Bottom Border	Ënneschte Rand
+	Bottom Margin	Ënnescht Marge
+	Bottom of Page	Ënnen op der Säit
+	Bottom of the Window	Ënnen an der Fënster
+	Bottom:	Ënnen:
+	Box	Kader
+	Boxed Formula	Formel am Kader
+	Boxed Formula (example)	Formel am Kader (Beispill)
+	Boxed Formulas	Formelen am Kader
+	Braces	Geschweiften Klameren
+	Braces with Separator	Geschweiften Klamere mat Trennzeechen
+	Bracket	Klamer
+	Brackets	Eckeg Klameren
+	Brackets with Separators	Eckeg Klamere mat Trennzeechen
+	Break Link	Link ophiewen
+	Breaks	Ëmbréch
+	Breve	Breve
+	Brightness, contrast and transparency change the picture from how it looks now.	Hellegkeet, Kontrast an Transparenz änneren d'Bild ausgoend vu sengem aktuellen Ausgesinn.
+	Brightness:	Hellegkeet:
+	Bring Forward	Eng Ebene no vir
+	Browse in Doc4Me…	An Doc4Me duerchsichen…
+	Browse…	Duerchsichen…
+	Build table of figures from:	Abbildungsverzeechnes erstellen aus:
+	Building Block Gallery Content Control	Inhaltssteierelement fir d'Bausteengalerie
+	Built from the style or table entry fields chosen in Options.	Erstallt aus de Stiler oder Tabellenagabfelder, déi an den Optiounen ausgewielt sinn.
+	Built-In	Agebaut
+	Built-in Heading styles	Agebaute Iwwerschrëftstiler
+	Built-in style	Agebauten Stil
+	Built-in styles can't be deleted.	Agebaute Stiler kënnen net geläscht ginn.
+	Bullet	Opzielungszeechen
+	Bullet Library	Bibliothéik vun Opzielungszeechen
+	Bullets	Opzielungszeechen
+	By author	No Auteur
+	By:	Vun:
+	Calendar	Kalenner
+	Can't be deleted	Kann net geläscht ginn
+	Cancel	Ofbriechen
+	Canvas Member	Element vun der Zeechefläch
+	Capitalization	Grouss- a Klengschreiwung
+	Capitalize Each Word	All Wuert Grouss Ufänken
+	Capitalize first letter of sentences	Éischte Buschtaf vun de Sätz grouss schreiwen
+	Capitalize first letter of table cells	Éischte Buschtaf vun Tabellenzelle grouss schreiwen
+	Capitalize names of days	Nimm vun den Deeg grouss schreiwen
+	Capitalize the first word of a sentence	Dat éischt Wuert vun engem Saz grouss schreiwen
+	Caption	Beschrëftung
+	Caption label:	Beschrëftungsbezeechnung:
+	Caption Numbering	Beschrëftungsnummeréierung
+	Caption text	Beschrëftungstext
+	Caption:	Beschrëftung:
+	Captions	Beschrëftungen
+	Caret Character	Zirkumflex-Zeechen
+	Case changes	Ännerunge vun der Schreiwung
+	Cases	Fäll
+	Cases (Three Conditions)	Fäll (dräi Bedéngungen)
+	Cases (Two Conditions)	Fäll (zwou Bedéngungen)
+	Cases and Stacks	Fäll a Stapelen
+	Catalog	Katalog
+	Categories	Kategorien
+	Categories:	Kategorien:
+	Category	Kategorie
+	Category {n}	Kategorie {n}
+	Category:	Kategorie:
+	Category…	Kategorie…
+	Ceiling	Opronnen
+	Cell	Zell
+	Cell Margins	Zellenmargen
+	Cell margins	Zellenmargen
+	Cell Options	Zellenoptiounen
+	Cell Size	Zellegréisst
+	Cell\nMargins	Zellen-\nmargen
+	Center	Zentréiert
+	Centered	Zentréiert
+	Centered as Group	Als Grupp zentréiert
+	Centimeters	Zentimeter
+	Change	Änneren
+	Change Case	Grouss-/Klengschreiwung änneren
+	Change Chart Type	Diagrammtyp änneren
+	Change Colors	Faarwen änneren
+	Change in y over change in x	Ännerung vun y duerch Ännerung vun x
+	Change Layout	Layout änneren
+	Change List Level	Lëschtenniveau änneren
+	Change Password…	Passwuert änneren…
+	Change Picture	Bild änneren
+	Change Picture…	Bild änneren…
+	Change Shape	Form änneren
+	Change Structure	Struktur änneren
+	Change to Display	An Ofsetzung änneren
+	Change to Inline	An Inline änneren
+	Change to Level 1	An Niveau 1 änneren
+	Change to Level 2	An Niveau 2 änneren
+	Change to Level 3	An Niveau 3 änneren
+	Change to Level 4	An Niveau 4 änneren
+	Change to Level 5	An Niveau 5 änneren
+	Change to Level 6	An Niveau 6 änneren
+	Change to Level 7	An Niveau 7 änneren
+	Change to Level 8	An Niveau 8 änneren
+	Change to Level 9	An Niveau 9 änneren
+	Change\nChart Type	Diagrammtyp\nänneren
+	Change\nColors	Faarwen\nänneren
+	Changed	Geännert
+	Changed lines:	Geännert Zeilen:
+	Changes	Ännerungen
+	Changes with highlighting	Ännerunge mat Markéierung
+	Changes without highlighting	Ännerungen ouni Markéierung
+	Chapter in a book	Kapitel an engem Buch
+	Chapters begin at:	Kapitelen fänken un bei:
+	Character	Zeechen
+	Character Border	Zeecherand
+	Character code:	Zeechecode:
+	Character in Range	Zeechen am Beräich
+	Character level	Zeechenniveau
+	Character Position	Zeechepositioun
+	Character Scale	Zeecheskaléierung
+	Character Shading	Zeecheschattéierung
+	Character Spacing	Zeechenofstand
+	Character spacing	Zeechenofstand
+	Character style	Zeechestil
+	Characters	Zeechen
+	Characters (no spaces)	Zeechen (ouni Espacen)
+	Characters (with spaces)	Zeechen (mat Espacen)
+	Characters per line:	Zeechen pro Zeil:
+	Chart	Diagramm
+	Chart Design	Diagrammdesign
+	Chart Layouts	Diagrammlayouten
+	Chart Title	Diagrammtitel
+	Check	Kontrolléieren
+	Check Accessibility	Accessibilitéit kontrolléieren
+	Check Box Content Control	Inhaltssteierelement fir Kontrollkëschten
+	Check Compatibility	Kompatibilitéit kontrolléieren
+	Check Errors…	Feeler kontrolléieren…
+	Check for Errors	Op Feeler kontrolléieren
+	Check Spelling as You Type	Rechtschreiwung beim Tippe kontrolléieren
+	Check spelling as you type	Rechtschreiwung beim Tippe kontrolléieren
+	Check\nAccessibility	Accessibilitéit\nkontrolléieren
+	Checked styles are allowed:	Ugekräizte Stiler sinn erlaabt:
+	Checked symbol	Ugekräizt Symbol
+	Chevron Down	Wénkel no ënnen
+	Chevron Up	Wénkel no uewen
+	Chicago	Chicago
+	Chinese (Simplified)	Chinesesch (vereinfacht)
+	Chinese (Traditional)	Chinesesch (traditionell)
+	Choose a command	E Befeel auswielen
+	Choose a shortcut	Eng Tastekombinatioun auswielen
+	Choose List Item	Lëschtenelement auswielen
+	Choose the sheet that holds the recipients.	Wielt d'Blat aus, op deem d'Empfänger stinn.
+	Circle	Krees
+	Circle area from its radius	Kreesfläch aus dem Radius
+	Circled Dot	Punkt am Krees
+	Circled Plus	Plus am Krees
+	Circled Times	Mol am Krees
+	Citation marked.	Zitat markéiert.
+	Citation Style	Zitatstil
+	Citations	Zitater
+	Citations & Bibliography	Zitater & Bibliographie
+	City	Stad
+	Clear	Läschen
+	Clear All	All läschen
+	Clear All Formatting	All Formatéierung läschen
+	Clear Character Formatting	Zeecheformatéierung läschen
+	Clear Character Style	Zeechestil läschen
+	Clear Formatting Level	Formatéierungsniveau läschen
+	Clear Paragraph Formatting	Paragrafeformatéierung läschen
+	Click a border between two cells to merge them. Esc stops.	Klickt op e Rand tëscht zwou Zellen, fir se ze verbannen. Esc hält op.
+	Click an item to paste it.	Klickt op en Element, fir et anzepechen.
+	Click level to modify:	Klickt op den Niveau, deen Dir ännere wëllt:
+	Click the empty text box the text should continue in (Esc cancels)	Klickt op déi eidel Textkëscht, an där den Text weidergoe soll (Esc brécht of)
+	Click to switch back to inserting	Klickt, fir zréck op d'Asetzen ze wiesselen
+	Clipboard	Tëschenoflag
+	Clipboard Contents	Inhalt vun der Tëschenoflag
+	Clipboard Items	Elementer vun der Tëschenoflag
+	Clipboard Pane	Panneau vun der Tëschenoflag
+	Close	Zoumaachen
+	Close Equation	Equatioun zoumaachen
+	Close Header and Footer	Kapp- a Fousszeil zoumaachen
+	Close Outline View	Gliederungsusiicht zoumaachen
+	Close Outline\nView	Gliederungsusiicht\nzoumaachen
+	Close Reviewing Pane	Iwwerpréiwungspanneau zoumaachen
+	Clustered Bar	Gruppéiert Balken
+	Clustered Column	Gruppéiert Säulen
+	Col #:	Kol.-Nr.:
+	Collapse	Zesummeklappen
+	Collapse Selection	Auswiel zesummeklappen
+	Collapse the Ribbon	D'Menüband zesummeklappen
+	Collate copies	Kopien sortéieren
+	Collect entries from:	Agaben sammelen aus:
+	Colon Equal	Doppelpunkt-Gläichzeechen
+	Color	Faarf
+	Color model:	Faarfmodell:
+	Color only	Nëmme Faarf
+	Color:	Faarf:
+	Color: {color}	Faarf: {color}
+	Colorful	Faarweg
+	Colors	Faarwen
+	Colors:	Faarwen:
+	Column	Kolonn
+	Column Break	Kolonnenëmbroch
+	Column Selection	Kolonnenauswiel
+	Column selection: the arrow keys extend the block, Esc ends it	Kolonnenauswiel: d'Feiltaste vergréisseren de Block, Esc beent en
+	Column width	Kolonnebreet
+	Column:	Kolonn:
+	Columns	Kolonnen
+	Columns:	Kolonnen:
+	Combine	Kombinéieren
+	Combine Documents	Dokumenter kombinéieren
+	Combo Box Content Control	Inhaltssteierelement fir Kombinatiounsfelder
+	Commands	Befeeler
+	Commands:	Befeeler:
+	Comment	Kommentar
+	Comments	Kommentarer
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Kommentarer nieft all Säit a verfollegt Ännerungen a PDFen, Ausdréck a Biller; eng Kommentarlëscht um Enn vu Websäiten, Markdown an Text.
+	Comments on version	Kommentarer zur Versioun
+	Comments Pane	Kommentarpanneau
+	Commits	Commits
+	Common Accent Objects	Heefeg Akzentobjeten
+	Common Brackets	Heefeg Klameren
+	Common Fractions	Heefeg Brëch
+	Common Functions	Heefeg Funktiounen
+	Common Large Operators	Heefeg grouss Operatoren
+	Common Operator Structures	Heefeg Operatorstrukturen
+	Common Operators	Heefeg Operatoren
+	Common Radicals	Heefeg Wuerzelen
+	Common Subscripts and Superscripts	Heefeg Ënner- an Iwwerschrëften
+	Communication	Kommunikatioun
+	Compact	Kompakt
+	Company	Firma
+	Compare	Vergläichen
+	Compare Documents	Dokumenter vergläichen
+	Compare to	Vergläiche mat
+	Compared: {changes} changes	Verglach: {changes} Ännerungen
+	Comparing with another file needs the desktop app.	Fir mat engem anere Fichier ze vergläichen, brauch een d'Desktop-App.
+	Comparison	Vergläich
+	Comparison settings	Vergläichsastellungen
+	Compatibility mode: {version}	Kompatibilitéitsmodus: {version}
+	Compatibility Options	Kompatibilitéitsoptiounen
+	Compatibility Options…	Kompatibilitéitsoptiounen…
+	Compress Pictures	Biller kompriméieren
+	Compress punctuation at the start of a line	Punktuatioun um Ufank vun enger Zeil kompriméieren
+	Condensed	Kondenséiert
+	Conference	Konferenz
+	Conference paper	Konferenzbäitrag
+	CONFIDENTIAL	VERTRAULECH
+	Confirm password:	Passwuert confirméieren:
+	Connect Shapes	Forme verbannen
+	Constitutional Provisions	Verfassungsbestëmmungen
+	Container Title	Titel vum Container
+	Contains	Enthält
+	Content Control at Selection	Inhaltssteierelement bei der Auswiel
+	Content Control Properties	Eegeschafte vum Inhaltssteierelement
+	Contents can't be edited	Den Inhalt kann net beaarbecht ginn
+	Context	Kontext
+	Contextual	Kontextuell
+	Continuous	Kontinuéierlech
+	Continuous numbering	Duerchgoend Nummeréierung
+	Contour Integral	Konturintegral
+	Contour Integral with Limits	Konturintegral mat Grenzen
+	Contour Integral with Stacked Limits	Konturintegral mat gestapelte Grenzen
+	Contour Integrals	Konturintegraler
+	Contrast:	Kontrast:
+	Contributors	Mataarbechter
+	Controls	Steierelementer
+	Conversions	Konversiounen
+	Convert	Konvertéieren
+	Convert between built-up and linear form	Tëscht opgebauter a linearer Form konvertéieren
+	Convert Notes	Notize konvertéieren
+	Convert Permanently	Definitiv konvertéieren
+	Convert Text to Table	Text an Tabell konvertéieren
+	Convert Text to Table…	Text an Tabell konvertéieren…
+	Convert to Arabic Digits	An arabesch Ziffere konvertéieren
+	Convert to Shapes	A Forme konvertéieren
+	Convert to Text	An Text konvertéieren
+	Convert to Thai Digits	An thailännesch Ziffere konvertéieren
+	Copies	Kopien
+	Coproduct	Koprodukt
+	Coproduct with Limits	Koprodukt mat Grenzen
+	Coproduct with Lower Limit	Koprodukt mat ënneschter Grenz
+	Coproduct with Subscript-Superscript Limits	Koprodukt mat Ënner- an Iwwerschrëftgrenzen
+	Copy	Kopéieren
+	Copy Formatting	Formatéierung kopéieren
+	Copy of the text a bookmark marks	Kopie vum Text, deen e Lieszeechen markéiert
+	Copy Styles	Stiler kopéieren
+	Copy Text	Text kopéieren
+	Copy to where?	Wouhin kopéieren?
+	Copyright	Copyright
+	Copyright Sign	Copyright-Zeechen
+	Corrections	Korrekturen
+	Cosecant Function	Kosekansfunktioun
+	Cosine 2x	Kosinus 2x
+	Cosine Function	Kosinusfunktioun
+	Cotangent Function	Kotangensfunktioun
+	Couldn't add {name}: {reason}	{name} konnt net derbäigesat ginn: {reason}
+	Couldn't download the picture: {reason}	D'Bild konnt net erofgeluede ginn: {reason}
+	Couldn't download {name}: {error}	{name} konnt net erofgeluede ginn: {error}
+	Couldn't get the add-in list: {reason}	D'Lëscht vun den Add-ins konnt net ofgeruff ginn: {reason}
+	Couldn't make Doc4Me the default: {error}	Doc4Me konnt net als Standard agestallt ginn: {error}
+	Couldn't open {path}: {error}	{path} konnt net opgemaach ginn: {error}
+	Couldn't search: {reason}	Sichen ass net gaangen: {reason}
+	Couldn't translate: {reason}	Iwwersetzen ass net gaangen: {reason}
+	Count by:	Zielen ëm:
+	Count words in text boxes and notes	Wierder an Textkëschten an Notizen zielen
+	Country	Land
+	Courtesy Title	Ureedtitel
+	Cover Page	Deckblat
+	Craft	Handwierk
+	Create	Erstellen
+	Create a Style	E Stil erstellen
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Erstellt eng interaktiv Gliederung vun Ärem Dokument.\n\nDat ass e gudde Wee, fir ëmmer ze wëssen, wou Dir sidd, oder fir Ären Inhalt séier ze verréckelen.\n\nFir unzefänken, gitt op den Tab Start an applizéiert Iwwerschrëftstiler op d'Iwwerschrëften an Ärem Dokument.
+	Create Data Source…	Datequell erstellen…
+	Create Graphic	Grafik erstellen
+	Create Header Source	Kappquell erstellen
+	Create Link	Link erstellen
+	Create New Style	Neie Stil erstellen
+	Create Source	Quell erstellen
+	Create…	Erstellen…
+	Crop	Zouschneiden
+	Cross-reference	Querverweis
+	Cross-reference:	Querverweis:
+	Cube Root	Kubikwuerzel
+	Current	Aktuell
+	Current - Linear	Aktuell – linear
+	Current - Professional	Aktuell – professionell
+	Current keyboard settings	Aktuell Tastaturastellungen
+	Current page	Aktuell Säit
+	Current Position	Aktuell Positioun
+	Current record	Aktuellen Datesaz
+	Current style: {style}	Aktuelle Stil: {style}
+	Curved Arrow Connector	Gebogene Feilverbindung
+	Curved Connector	Gebogene Verbinder
+	Custom	Personaliséiert
+	Custom dictionary	Personaliséierte Wierderbuch
+	Custom Margins…	Personaliséiert Margen…
+	Custom mark:	Personaliséiert Markéierung:
+	Custom range	Personaliséierte Beräich
+	Custom Table of Contents	Personaliséiert Inhaltsverzeechnes
+	Custom Table of Contents…	Personaliséiert Inhaltsverzeechnes…
+	Custom Watermark	Personaliséiert Waasserzeechen
+	Custom Watermark…	Personaliséiert Waasserzeechen…
+	Customize	Personaliséieren
+	Customize Keyboard	Tastatur personaliséieren
+	Customize Quick Access Toolbar	Leescht fir de séieren Zougang personaliséieren
+	Customize Quick Access Toolbar…	Leescht fir de séieren Zougang personaliséieren…
+	Customize Ribbon	Menüband personaliséieren
+	Customize the Ribbon…	D'Menüband personaliséieren…
+	Customize…	Personaliséieren…
+	Cut	Erausschneiden
+	Cut, copy, and paste	Erausschneiden, kopéieren an apechen
+	Cycle	Zyklus
+	Czech	Tschechesch
+	Danish	Dänesch
+	Dark	Däischter
+	Dark Mode	Däischtere Modus
+	Dark page (white text on black)	Däischter Säit (wäissen Text op schwaarz)
+	Dark with Shadow	Däischter mat Schiet
+	Darkroom	Donkelkummer
+	Dashed	Gestréchelt
+	Data	Daten
+	Data Labels	Datebeschrëftungen
+	Data source:	Datequell:
+	Date	Datum
+	Date & Time	Datum & Zäit
+	Date and Time	Datum an Zäit
+	Date format	Datumsformat
+	Date formats:	Datumsformater:
+	Date Picker Content Control	Inhaltssteierelement fir d'Datumsauswiel
+	Day	Dag
+	Decimal	Dezimal
+	Decorative objects only add visual interest: screen readers skip them.	Dekorativ Objeten maachen et nëmme visuell méi interessant: Schiermlieser iwwersprangen se.
+	Decrease Font Size	Schrëftgréisst verklengeren
+	Decrease Indent	Aréckung verklengeren
+	Default	Standard
+	Default Paragraph Font	Standardschrëft vum Paragraf
+	Default tab stops:	Standard-Tabulatiounsstoppen:
+	Define New Bullet	Neit Opzielungszeechen definéieren
+	Define New Multilevel List	Nei Lëscht mat e puer Niveauen definéieren
+	Define New Multilevel List…	Nei Lëscht mat e puer Niveauen definéieren…
+	Define New Number Format	Neit Zuelformat definéieren
+	Deflate	Erofloossen
+	Delete	Läschen
+	Delete Back in Equation	Réckwäerts an der Equatioun läschen
+	Delete Cells	Zelle läschen
+	Delete Clipboard Item	Element aus der Tëschenoflag läschen
+	Delete Columns	Kolonne läschen
+	Delete Comment	Kommentar läschen
+	Delete in Equation	An der Equatioun läschen
+	Delete Label	Etikett läschen
+	Delete Next Word	Nächst Wuert läschen
+	Delete Previous Word	Viregt Wuert läschen
+	Delete Rows	Reie läschen
+	Delete Selected Ink	Ausgewielt Tënt läschen
+	Delete Style	Stil läschen
+	Delete Table	Tabell läschen
+	Delete Table Style	Tabellestil läschen
+	Deleted	Geläscht
+	Deletions:	Läschungen:
+	Delivery address:	Liwweradress:
+	Delta Equal To	Delta gläich
+	Delta over arrow	Delta iwwer Feil
+	Demote	Erofstufen
+	Demote to Body Text	Op Textkierper erofstufen
+	Derivative as a limit	Ofleedung als Limes
+	Descending	Ofsteigend
+	Describe what this object shows, for people who can't see it.	Beschreift, wat dësen Objet weist, fir Leit, déi en net gesi kënnen.
+	Describe what this table shows, for people who can't see it.	Beschreift, wat dës Tabell weist, fir Leit, déi se net gesi kënnen.
+	Description:	Beschreiwung:
+	Design	Design
+	Design Mode	Designmodus
+	Detach Template	Schabloun lassmaachen
+	Detect language automatically	Sprooch automatesch erkennen
+	Developer	Entwéckler
+	development build	Entwécklungsversioun
+	Diagonal	Diagonal
+	Diagonal Dots	Diagonal Punkten
+	Diamond	Diamant
+	Dictate	Diktéieren
+	Dictation isn't available here.	Diktéieren ass hei net disponibel.
+	Dictation stopped.	Diktéieren gestoppt.
+	Dictation stopped: {reason}	Diktéieren gestoppt: {reason}
+	Different First Page	Aner éischt Säit
+	Different Odd & Even Pages	Aner ongerued & gerued Säiten
+	Differential	Differential
+	Differential theta	Differential Theta
+	Differential x	Differential x
+	Differential y	Differential y
+	Differentials	Differentialer
+	Direct formatting	Direkt Formatéierung
+	Direction:	Richtung:
+	Directory	Verzeechnes
+	Display	Ofsetzung
+	Display for Review	Uweise fir d'Iwwerpréiwung
+	Display gridlines on screen	Gitterlinnen um Schierm uweisen
+	Display name	Ugewisen Numm
+	Display text	Ugewisenen Text
+	Distance from surrounding text	Ofstand vum ëmgéisenden Text
+	Distribute Columns	Kolonne gläichméisseg verdeelen
+	Distribute letters	Buschtawe verdeelen
+	Distribute Rows	Reie gläichméisseg verdeelen
+	Distribute spacing	Ofstand verdeelen
+	Distributed	Verdeelt
+	Do Not Check Spelling or Grammar	Rechtschreiwung a Grammatik net kontrolléieren
+	Do not check spelling or grammar	Rechtschreiwung a Grammatik net kontrolléieren
+	DO NOT COPY	NET KOPÉIEREN
+	Do Not Show in TOC	Net am Inhaltsverzeechnes weisen
+	Do you want to save changes to {name}?	Wëllt Dir d'Ännerungen un {name} späicheren?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me-Add-ins si gratis Makropäck aus dem Add-in-Katalog vun Doc4Me. Si kënnen nëmmen d'Dokument beaarbechten.
+	Doc4Me is now the default app for Word documents.	Doc4Me ass elo d'Standard-App fir Word-Dokumenter.
+	Document	Dokument
+	Document End	Enn vum Dokument
+	Document Formatting	Dokumentformatéierung
+	Document Grid	Dokumentgitter
+	Document Information	Dokumentinformatiounen
+	Document Property	Dokumenteegeschaft
+	Document Start	Ufank vum Dokument
+	Document template:	Dokumentschabloun:
+	Document Text	Dokumenttext
+	Document Title	Dokumenttitel
+	Document1	Dokument1
+	Document\nPreferences	Dokument-\nastellungen
+	Documents	Dokumenter
+	Documents you open will show up here.	Dokumenter, déi Dir opmaacht, ginn hei ugewisen.
+	Does not contain	Enthält net
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Keen Ofstand tëscht Paragrafe vum selwechte Stil derbäisetzen
+	Don't capitalize after:	Net grouss schreiwen no:
+	Don't hyphenate	Keng Silbentrennung
+	Don't print blank lines when data fields are empty	Keng eidel Zeilen drécken, wann Datefelder eidel sinn
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Zitater a Bibliographië vun Zotero, Mendeley oder EndNote net liesen
+	Don't Save	Net späicheren
+	Don't use HTML paragraph auto spacing	Keen automateschen HTML-Paragrafenofstand benotzen
+	Dot	Punkt
+	Dot dash	Punkt-Strich
+	Dot-dash	Punkt-Strich
+	Dots	Punkten
+	Dotted	Punktéiert
+	Double	Duebel
+	Double Bar	Duebele Strich
+	Double Closing Quote	Duebelt Ofschlossgänseféisschen
+	Double Dot	Duebele Punkt
+	Double Integral	Duebelintegral
+	Double Integral with Limits	Duebelintegral mat Grenzen
+	Double Integral with Stacked Limits	Duebelintegral mat gestapelte Grenzen
+	Double Left Arrow with Text Above	Duebele Feil no lénks mat Text driwwer
+	Double Left Arrow with Text Below	Duebele Feil no lénks mat Text drënner
+	Double Left Right Arrow with Text Above	Duebele Feil lénks-riets mat Text driwwer
+	Double Left Right Arrow with Text Below	Duebele Feil lénks-riets mat Text drënner
+	Double Opening Quote	Duebelt Ufanksgänseféisschen
+	Double Right Arrow with Text Above	Duebele Feil no riets mat Text driwwer
+	Double Right Arrow with Text Below	Duebele Feil no riets mat Text drënner
+	Double Spacing	Duebelen Zeilenofstand
+	Double Square Brackets	Duebel eckeg Klameren
+	Double Strikethrough	Duebel duerchgestrach
+	Double strikethrough	Duebel duerchgestrach
+	Double summation	Duebel Summ
+	Double Underline	Duebel ënnerstrach
+	Double Vertical Bars	Duebel vertikal Stréchen
+	Doughnut	Rank
+	Down	Erof
+	Downloading the speech model ({mb} MB, once)…	D'Sproochmodell gëtt erofgelueden ({mb} MB, eemol)…
+	Downloading…	Gëtt erofgelueden…
+	DRAFT	ENTWORF
+	Draft	Entworf
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Zitt e Rechteck, fir eng Tabell ze zeechnen, oder eng Linn iwwer Zellen, fir se opzedeelen. Esc hält op.
+	Draw	Zeechnen
+	Draw Ink	Mat Tënt zeechnen
+	Draw Table	Tabell zeechnen
+	Draw\nTable	Tabell\nzeechnen
+	Drawing Canvas	Zeechefläch
+	Drawing Grid	Zeechegitter
+	Drawing Tools	Zeecheninstrumenter
+	Drawing\nCanvas	Zeeche-\nfläch
+	Drop Cap	Initial
+	Drop cap	Initial
+	Drop-Down List Content Control	Inhaltssteierelement fir Dropdown-Lëschten
+	Drops all formatting and pastes plain text.	Läscht all Formatéierung a pecht einfachen Text an.
+	Dutch	Hollännesch
+	E-mail Messages	E-Mail-Messagen
+	Edit Category	Kategorie beaarbechten
+	Edit Comment	Kommentar beaarbechten
+	Edit Data	Date beaarbechten
+	Edit Document	Dokument beaarbechten
+	Edit Equation	Equatioun beaarbechten
+	Edit Field Code	Feldcode beaarbechten
+	Edit Field…	Feld beaarbechten…
+	Edit Footer	Fousszeil beaarbechten
+	Edit Header	Kappzeil beaarbechten
+	Edit Individual Documents…	Eenzel Dokumenter beaarbechten…
+	Edit Items	Elementer beaarbechten
+	Edit Recipient List	Empfängerlëscht beaarbechten
+	Edit Source	Quell beaarbechten
+	Edit\nData	Date\nbeaarbechten
+	Edit\nRecipient List	Empfängerlëscht\nbeaarbechten
+	Edited	Beaarbecht
+	Editing	Beaarbechtung
+	Editing header/footer	Kapp-/Fousszeil gëtt beaarbecht
+	Editing in this document is restricted.	D'Beaarbechtung an dësem Dokument ass ageschränkt.
+	Editing — edit the document directly	Beaarbechten — d'Dokument direkt beaarbechten
+	Edition	Editioun
+	Editor	Editeur
+	Edit…	Beaarbechten…
+	Effects	Effekter
+	Elbow Arrow Connector	Gewénkelt Feilverbindung
+	Elbow Connector	Gewénkelte Verbinder
+	Ellipsis	Auslassungspunkten
+	Em Dash	Geviertstrich
+	Em Space	Geviert-Espace
+	Email address (optional)	E-Mail-Adress (fakultativ)
+	Emboss	Reliéf
+	Emphasis	Betounung
+	Empty Matrices	Eidel Matrixen
+	En Dash	Hallefgeviertstrich
+	En Space	Hallefgeviert-Espace
+	Enclose Characters	Zeechen aschléissen
+	Enclosure	Aschléissung
+	Encrypt with Password	Mat Passwuert verschlësselen
+	Encrypt with Password…	Mat Passwuert verschlësselen…
+	End of document	Enn vum Dokument
+	End of section	Enn vun der Sektioun
+	End of Word	Enn vum Wuert
+	Endnote Reference	Endnotereferenz
+	Endnote Text	Endnotetext
+	Endnotes	Endnoten
+	Endnotes to footnotes	Endnoten a Foussnoten
+	English	Englesch
+	English (United Kingdom)	Englesch (Groussbritannien)
+	English (United States)	Englesch (Vereenegt Staaten)
+	Engrave	Gravéiert
+	Enlarge symbol	Symbol vergréisseren
+	Enter formatting for number:	Formatéierung fir d'Zuel aginn:
+	Enter in Equation	Enter an der Equatioun
+	Enter page number:	Säitenummer aginn:
+	Enter the web address or embed code of an online video:	Gitt d'Webadress oder den Abettungscode vun engem Online-Video an:
+	Entry marked.	Agab markéiert.
+	Entry:	Agab:
+	Envelope #10   4.12" × 9.50"	Enveloppe #10   4.12" × 9.50"
+	Envelope Address	Adress op der Enveloppe
+	Envelope DL   4.33" × 8.66"	Enveloppe DL   4.33" × 8.66"
+	Envelope Return	Réckadress op der Enveloppe
+	Envelope size:	Gréisst vun der Enveloppe:
+	Envelopes	Enveloppen
+	Equal by Definition	Gläich per Definitioun
+	Equal column width	Gläich Kolonnebreet
+	Equal Equal	Gläich gläich
+	Equal to	Gläich
+	Equals:	Gläich:
+	Equation	Equatioun
+	Equation Gallery	Equatiounsgalerie
+	Equation Info	Equatiounsinfo
+	Equation Number	Equatiounsnummer
+	Equation Options	Equatiounsoptiounen
+	Erase Ink	Tënt radéieren
+	Eraser	Gummi
+	Errors ({n})	Feeler ({n})
+	Estonian	Estnesch
+	Euler's identity	Euler-Identitéit
+	Even Page	Gerued Säit
+	Even pages only	Nëmme gerued Säiten
+	Every change is recorded as a tracked change.	All Ännerung gëtt als verfollegt Ännerung opgeholl.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	All Befeel steet Skripter an KI-Agenten zur Verfügung: start `doc4me-cli mcp` fir en MCP-Server, oder start d'App mat `--control <port>` fir de JSON-Steierkanal.
+	Every field needs a name.	All Feld brauch en Numm.
+	Every font this document uses is installed.	All Schrëft, déi dëst Dokument benotzt, ass installéiert.
+	Everyone	Jiddereen
+	Exactly	Genee
+	Exactly {n}	Genee {n}
+	Example: {sample}	Beispill: {sample}
+	Exceptions (optional)	Ausnamen (fakultativ)
+	Exceptions…	Ausnamen…
+	Executive   7.25" × 10.50"	Executive   7.25" × 10.50"
+	Exit	Ophalen
+	Expand	Opklappen
+	Expand or Collapse Heading	Iwwerschrëft op- oder zouklappen
+	Expanded	Erweidert
+	Exponential	Exponentiell
+	Exponential series	Exponentialrei
+	Export	Exportéieren
+	Export a copy to share (PDF, Word document)	Eng Kopie zum Deelen exportéieren (PDF, Word-Dokument)
+	Export Page as JPEG	Säit als JPEG exportéieren
+	Export Page as PNG	Säit als PNG exportéieren
+	Export PDF	PDF exportéieren
+	Exported {path}	{path} exportéiert
+	Expression	Ausdrock
+	Extend Selection	Auswiel erweideren
+	Extend Selection by Units	Auswiel ëm Eenheeten erweideren
+	Extra space	Extra Ofstand
+	Extra spaces between words.	Extra Espacen tëscht Wierder.
+	Field	Feld
+	Field Click	Feldklick
+	Field code:	Feldcode:
+	Field Codes	Feldcoden
+	Field codes:	Feldcoden:
+	Field name	Feldnumm
+	Field name:	Feldnumm:
+	Field names must be different.	Feldnimm mussen ënnerschiddlech sinn.
+	Field names:	Feldnimm:
+	Field properties	Feldeegeschaften
+	Field:	Feld:
+	Fields	Felder
+	Fields to insert:	Felder zum Asetzen:
+	Fields:	Felder:
+	Field…	Feld…
+	Figure	Abbildung
+	File	Fichier
+	File name:	Fichiersnumm:
+	Fill	Fëllung
+	Fill & Line	Fëllung & Linn
+	Fill color:	Fëllfaarf:
+	Fill:	Fëllung:
+	Filling in forms	Formulairen ausfëllen
+	Film	Film
+	Filter and Sort	Filteren a sortéieren
+	Filter and Sort…	Filteren a sortéieren…
+	Filter Records	Datesätz filteren
+	Find	Sichen
+	Find and Replace	Sichen an ersetzen
+	Find Next	Weidersichen
+	Find Next Editable Region	Nächste beaarbechtbare Beräich sichen
+	Find Previous	Virdru sichen
+	Find Recipient	Empfänger sichen
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Sichen wielt den nächste geännerte Paragraf aus; Refuséieren setzt den ausgewielten zréck, wéi e war.
+	Find What Expression	Ausdrock sichen
+	Find What Text	Text sichen
+	Find what:	Sichen no:
+	Find →	Sichen →
+	Find:	Sichen:
+	Finish	Fäerdeg maachen
+	Finish & Merge	Fäerdeg maachen & zesummeféieren
+	Finish &\nMerge	Fäerdeg maachen &\nzesummeféieren
+	Finished	Fäerdeg
+	Finnish	Finnesch
+	First	Éischt
+	First Cell in Column	Éischt Zell an der Kolonn
+	First Cell in Row	Éischt Zell an der Rei
+	First Column	Éischt Kolonn
+	First commit	Éischte Commit
+	First line	Éischt Zeil
+	First line:	Éischt Zeil:
+	First Name	Virnumm
+	First row of data contains column headers	Éischt Datenzeil enthält d'Kolonnentitelen
+	Fit	Upassen
+	Fit text	Text upassen
+	Fix Position on Page	Positioun op der Säit fixéieren
+	Fixed Column Width	Fix Kolonnebreet
+	Flip Horizontal	Horizontal spigelen
+	Flip Vertical	Vertikal spigelen
+	Floor	Ofronnen
+	Focus	Fokus
+	Follow number with:	No der Zuel:
+	Font	Schrëft
+	Font Color	Schrëftfaarf
+	Font color	Schrëftfaarf
+	Font color:	Schrëftfaarf:
+	Font Dialog	Schrëftdialog
+	Font not installed	Schrëft net installéiert
+	Font Size	Schrëftgréisst
+	Font Substitution	Schrëftersetzung
+	Font Substitution…	Schrëftersetzung…
+	Font:	Schrëft:
+	Font: {font}	Schrëft: {font}
+	Fonts	Schrëften
+	Font…	Schrëft…
+	Footer	Fousszeil
+	Footnote and Endnote	Foussnot an Endnot
+	Footnote Reference	Foussnotereferenz
+	Footnote Text	Foussnotetext
+	Footnotes	Foussnoten
+	Footnotes and endnotes	Foussnoten an Endnoten
+	Footnotes to endnotes	Foussnoten an Endnoten
+	Form Letters	Seriebréiwer
+	Format	Format
+	Format Page Numbers	Säitenummeren formatéieren
+	Format Page Numbers…	Säitenummeren formatéieren…
+	Format Painter	Formatmoler
+	Format Picture	Bild formatéieren
+	Format Shape	Form formatéieren
+	Format:	Format:
+	Formatted	Formatéiert
+	Formatted Text	Formatéierten Text
+	Formatting	Formatéierung
+	Formatting at Selection	Formatéierung bei der Auswiel
+	Formatting completed. You can now:	Formatéierung ofgeschloss. Dir kënnt elo:
+	Formatting exceptions	Formatéierungsausnamen
+	Formatting marks	Formatéierungszeechen
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Formatéierung, Grouss-/Klengschreiwung, Leerraum an Tabelle ginn verglach; déi aner Astellunge gi fir méi spéit behalen.
+	Formula	Formel
+	Forward	No vir
+	Fraction	Bréch
+	Fractions (1/2) as fraction characters (½)	Brëch (1/2) als Bréchzeechen (½)
+	French	Franséisch
+	French (France)	Franséisch (Frankräich)
+	From	Vun
+	From text:	Aus Text:
+	from Unicode (hex)	vun Unicode (hex)
+	From:	Vun:
+	Full page of the same label	Ganz Säit mat der selwechter Etikett
+	Function	Funktioun
+	Functions	Funktiounen
+	Gallery	Galerie
+	GB/T 7714	GB/T 7714
+	General	Allgemeng
+	Geometry	Geometrie
+	German	Däitsch
+	German (Germany)	Däitsch (Däitschland)
+	Get Add-ins	Add-ins kréien
+	Get Data	Date kréien
+	Get Data…	Date kréien…
+	Getting ready…	Gëtt preparéiert…
+	Glow	Liichten
+	Glow Colors	Liichtfaarwen
+	Go Back	Zréckgoen
+	Go To	Goe bei
+	Go to	Goe bei
+	Go To…	Goe bei…
+	Good afternoon	Gudde Mëtteg
+	Good evening	Gudden Owend
+	Good morning	Gudde Moien
+	GOST (name sort)	GOST (no Numm sortéiert)
+	GOST (title sort)	GOST (no Titel sortéiert)
+	Grab bag	Wonnertuut
+	Grammar	Grammatik
+	Grammar Settings	Grammatikastellungen
+	Graphic	Grafik
+	Grave	Gravis
+	Greater than	Méi grouss wéi
+	Greater than or equal	Méi grouss wéi oder gläich
+	Greek	Griichesch
+	Greek Letters	Griichesch Buschtawen
+	Green:	Gréng:
+	Greeting Line	Begréissungszeil
+	Greeting\nLine	Begréissungs-\nzeil
+	Grid Settings	Gitterastellungen
+	Grid Table 1 Light	Gittertabell 1 hell
+	Grid Table 4 – Blue	Gittertabell 4 – Blo
+	Grid Table 4 – Green	Gittertabell 4 – Gréng
+	Grid Table 4 – Orange	Gittertabell 4 – Orange
+	Grid Table 4 – Purple	Gittertabell 4 – Mof
+	Gridlines	Gitterlinnen
+	Group	Gruppéieren
+	Grouping Character Above	Gruppéierungszeechen uewen
+	Grouping Character Below	Gruppéierungszeechen ënnen
+	Grow Font 1 Point	Schrëft ëm 1 Punkt vergréisseren
+	H:	H:
+	Hanging Indent	Hängend Aréckung
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Hittchen
+	Header	Kappzeil
+	Header & Footer	Kapp- & Fousszeil
+	Header Options	Kappzeilenoptiounen
+	Header Options:	Kappzeilenoptiounen:
+	Header Row	Kappzeil
+	Header source: {file} (the next data source opened here takes its field names)	Kappquell: {file} (déi nächst Datequell, déi hei opgemaach gëtt, iwwerhëlt hir Feldnimm)
+	Header/Footer Position	Positioun vun der Kapp-/Fousszeil
+	Headers and footers	Kapp- a Fousszeilen
+	Heading 1	Iwwerschrëft 1
+	Heading 2	Iwwerschrëft 2
+	Heading 3	Iwwerschrëft 3
+	Heading styles (levels 1–{n})	Iwwerschrëftstiler (Niveauen 1–{n})
+	Heading {n}	Iwwerschrëft {n}
+	Headings	Iwwerschrëften
+	Heart	Häerz
+	Hebrew	Hebräesch
+	Height:	Héicht:
+	Help	Hëllef
+	Hex:	Hex:
+	Hidden	Verstoppt
+	Hidden text	Verstoppten Text
+	Hide Codes	Coden verstoppen
+	Hide from style lists	A Stillëschte verstoppen
+	Hide Ink	Tënt verstoppen
+	Hide White Space	Leerraum verstoppen
+	Hide\nInk	Tënt\nverstoppen
+	Hierarchy	Hierarchie
+	Highlight	Markéieren
+	Highlight Changes	Ännerunge markéieren
+	Highlight changes in printed document	Ännerungen am gedréckten Dokument markéieren
+	Highlight changes on screen	Ännerungen um Schierm markéieren
+	Highlight Merge Fields	Seriebréiffelder markéieren
+	Highlight\nMerge Fields	Seriebréiffelder\nmarkéieren
+	Highlighter	Textmarker
+	Hindi	Hindi
+	Historical and Discretional	Historesch a fakultativ
+	Hollow	Huel
+	Home	Start
+	Home folder	Heemechtsdossier
+	Horizontal	Horizontal
+	Horizontal Line	Horizontal Linn
+	Horizontal spacing:	Horizontalen Ofstand:
+	How many pages the whole document has	Wéi vill Säiten dat ganzt Dokument huet
+	How many pages this section has	Wéi vill Säiten dës Sektioun huet
+	How many words the document holds	Wéi vill Wierder d'Dokument enthält
+	HTML Format	HTML-Format
+	Hue:	Faarftoun:
+	Hungarian	Ungaresch
+	Hyperbolic Cosecant Function	Hyperbolesch Kosekansfunktioun
+	Hyperbolic Cosine Function	Hyperbolesch Kosinusfunktioun
+	Hyperbolic Cotangent Function	Hyperbolesch Kotangensfunktioun
+	Hyperbolic Functions	Hyperbolesch Funktiounen
+	Hyperbolic Secant Function	Hyperbolesch Sekansfunktioun
+	Hyperbolic Sine Function	Hyperbolesch Sinusfunktioun
+	Hyperbolic Tangent Function	Hyperbolesch Tangensfunktioun
+	Hyperlink	Hyperlink
+	Hyphenate at:	Trennen bei:
+	Hyphenate words in CAPS	Wierder a GROUSSBUSCHTAWE trennen
+	Hyphenation	Silbentrennung
+	Hyphenation Options…	Optioune fir d'Silbentrennung…
+	Hyphenation zone:	Trennzon:
+	Hyphens (--) as dashes (—)	Bindestricher (--) als Gedankestricher (—)
+	Hypotenuse	Hypotenus
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Symbolfaarf
+	Icons	Symboler
+	Identity Matrices	Eenheetsmatrixen
+	IEEE	IEEE
+	If…Then…Else	Wann…Dann…Soss
+	If…Then…Else…	Wann…Dann…Soss…
+	Ignore All	All ignoréieren
+	Ignore punctuation characters	Punktuatiounszeechen ignoréieren
+	Ignore web and file addresses	Web- a Fichiersadressen ignoréieren
+	Ignore white-space characters	Leerzeechen ignoréieren
+	Ignore words in capitals	Wierder a Groussbuschtawen ignoréieren
+	Ignore words with numbers	Wierder mat Zuelen ignoréieren
+	Illustrations	Illustratiounen
+	Immersive	Immersiv
+	Immersive Reader	Immersive Lieser
+	Immersive\nReader	Immersive\nLieser
+	In Default apps, choose Doc4Me for the document types you want it to open.	Wielt an de Standard-Appen Doc4Me fir d'Dokumenttypen aus, déi en opmaache soll.
+	In equations, typing a name after a backslash replaces it with its symbol.	An Equatiounen ersetzt en Numm, deen no engem Backslash getippt gëtt, duerch säi Symbol.
+	In Front of Text	Virum Text
+	In Line with Text	Mam Text an der Zeil
+	Inches	Zoll
+	Include label and number	Bezeechnung an Nummer abannen
+	Include level number from:	Niveaunummer abanne vun:
+	Include page numbers	Säitenummeren abannen
+	Increase Font Size	Schrëftgréisst vergréisseren
+	Increase Indent	Aréckung vergréisseren
+	Indent	Aréckung
+	Indent from left:	Aréckung vu lénks:
+	Indentation	Aréckung
+	Indented	Agerréckt
+	Indents	Aréckungen
+	Indents and Spacing	Aréckungen an Ofstänn
+	Index	Index
+	Index and Tables	Index an Tabellen
+	Index Heading	Indexiwwerschrëft
+	Index {n}	Index {n}
+	Indonesian	Indonesesch
+	Inflate	Opblosen
+	Info	Info
+	Initials:	Initialen:
+	Ink	Tënt
+	Ink Equation	Equatioun mat Tënt
+	Ink Replay	Tënt nees ofspillen
+	Ink to Math	Tënt a Mathematik
+	Ink to Shape	Tënt a Form
+	Ink to\nMath	Tënt a\nMathematik
+	Ink to\nShape	Tënt a\nForm
+	Ink\nReplay	Tënt nees\nofspillen
+	Inline	Inline
+	Input Format	Agabformat
+	Insert	Asetzen
+	Insert a 3D model from a file (.glb, .stl, .obj)	En 3D-Modell aus engem Fichier asetzen (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Eng nei Equatioun asetzen (Alt+=)
+	Insert Above	Driwwer asetzen
+	Insert Below	Drënner asetzen
+	Insert Caption	Beschrëftung asetzen
+	Insert Cells	Zellen asetzen
+	Insert Chart	Diagramm asetzen
+	Insert Citation	Zitat asetzen
+	Insert Columns to the Left	Kolonne lénks asetzen
+	Insert Columns to the Right	Kolonne riets asetzen
+	Insert Data	Daten asetzen
+	Insert Database	Datebank asetzen
+	Insert Database…	Datebank asetzen…
+	Insert Date Field	Datumsfeld asetzen
+	Insert Endnote	Endnot asetzen
+	Insert entire column	Ganz Kolonn asetzen
+	Insert entire row	Ganz Rei asetzen
+	Insert Footnote	Foussnot asetzen
+	Insert Hyperlink	Hyperlink asetzen
+	Insert Index	Index asetzen
+	Insert Left	Lénks asetzen
+	Insert LISTNUM Field	LISTNUM-Feld asetzen
+	Insert Merge Field	Seriebréiffeld asetzen
+	Insert Merge\nField	Seriebréif-\nfeld asetzen
+	Insert New Equation	Nei Equatioun asetzen
+	Insert one text or another, depending on a field's value.	Een oder aneren Text asetzen, jee no dem Wäert vun engem Feld.
+	Insert Page Field	Säitefeld asetzen
+	Insert Right	Riets asetzen
+	Insert Rows	Reien asetzen
+	Insert Rows Above	Reien driwwer asetzen
+	Insert Rows Below	Reien drënner asetzen
+	Insert Shapes	Formen asetzen
+	Insert SmartArt	SmartArt asetzen
+	Insert Structure	Struktur asetzen
+	Insert Symbol	Symbol asetzen
+	Insert Table	Tabell asetzen
+	Insert Table of Authorities	Rechtsquellenverzeechnes asetzen
+	Insert Table of Figures	Abbildungsverzeechnes asetzen
+	Insert Table…	Tabell asetzen…
+	Insert Time Field	Zäitfeld asetzen
+	Insert Video	Video asetzen
+	Insert\nAbove	Driwwer\nasetzen
+	Insert\nCaption	Beschrëftung\nasetzen
+	Insert\nCitation	Zitat\nasetzen
+	Insert\nFootnote	Foussnot\nasetzen
+	Inserted	Agesat
+	Insertions and Deletions	Asetzungen a Läschungen
+	Insertions:	Asetzungen:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Asetzungen: {ins}, Läschungen: {del}, Verréckelungen: {moves}, Formatéierung: {fmt}, Kommentarer: {comments}
+	Inside	Bannen
+	Inside Borders	Bannenzeg Rimm
+	Inside Margin	Bannenzeg Marge
+	Inside:	Bannen:
+	Inspect Document	Dokument inspizéieren
+	Inspect Styles at Selection	Stiler bei der Auswiel inspizéieren
+	Institution	Institutioun
+	Integral	Integral
+	Integral of e^(−x²)	Integral vun e^(−x²)
+	Integral with Limits	Integral mat Grenzen
+	Integral with Stacked Limits	Integral mat gestapelte Grenzen
+	Integrals	Integraler
+	Intense Emphasis	Staark Betounung
+	Intense Quote	Staarkt Zitat
+	Intense Reference	Staark Referenz
+	Interface	Interface
+	Interface language	Sprooch vum Interface
+	Interface language:	Sprooch vum Interface:
+	Interface size:	Gréisst vum Interface:
+	Interface Theme	Thema vum Interface
+	Interface theme:	Thema vum Interface:
+	Interface\nTheme	Thema vum\nInterface
+	Internet addresses as links	Internetadressen als Linken
+	Intersection	Schnëttmeng
+	Intersection with Limits	Schnëttmeng mat Grenzen
+	Intersection with Lower Limit	Schnëttmeng mat ënneschter Grenz
+	Intersection with Subscript-Superscript Limits	Schnëttmeng mat Ënner- an Iwwerschrëftgrenzen
+	Inverse Cosecant Function	Invers Kosekansfunktioun
+	Inverse Cosine Function	Invers Kosinusfunktioun
+	Inverse Cotangent Function	Invers Kotangensfunktioun
+	Inverse Functions	Invers Funktiounen
+	Inverse Hyperbolic Cosecant Function	Invers hyperbolesch Kosekansfunktioun
+	Inverse Hyperbolic Cosine Function	Invers hyperbolesch Kosinusfunktioun
+	Inverse Hyperbolic Cotangent Function	Invers hyperbolesch Kotangensfunktioun
+	Inverse Hyperbolic Functions	Invers hyperbolesch Funktiounen
+	Inverse Hyperbolic Secant Function	Invers hyperbolesch Sekansfunktioun
+	Inverse Hyperbolic Sine Function	Invers hyperbolesch Sinusfunktioun
+	Inverse Hyperbolic Tangent Function	Invers hyperbolesch Tangensfunktioun
+	Inverse Secant Function	Invers Sekansfunktioun
+	Inverse Sine Function	Invers Sinusfunktioun
+	Inverse Tangent Function	Invers Tangensfunktioun
+	Ionosphere	Ionosphär
+	Is blank	Ass eidel
+	Is not blank	Ass net eidel
+	ISO 690 (author-date)	ISO 690 (Auteur-Datum)
+	ISO 690 (numerical)	ISO 690 (numeresch)
+	Issue	Nummer
+	it isn't a picture Doc4Me can read	et ass kee Bild, dat Doc4Me liese kann
+	Italian	Italienesch
+	Italic	Kursiv
+	Japanese	Japanesch
+	Journal	Zäitschrëft
+	Justification	Ausriichtung
+	Justification of a display equation	Ausriichtung vun enger ofgesater Equatioun
+	Justified	Blocksaz
+	Justify	Blocksaz
+	Keep Lines Together	Zeilen zesummenhalen
+	Keep lines together	Zeilen zesummenhalen
+	Keep Source Formatting	Formatéierung vun der Quell behalen
+	Keep Text Only	Nëmmen Text behalen
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Haalt d'Passwuert op enger sécherer Plaz: ouni et kann keen, och Doc4Me net, d'Dokument opmaachen. Loosst béid Felder eidel, fir d'Passwuert ewechzehuelen.
+	Keep with Next	Mam nächsten zesummenhalen
+	Keep with next	Mam nächsten zesummenhalen
+	Keeps the fonts and formatting of the copied text.	Behält d'Schrëften an d'Formatéierung vum kopéierten Text.
+	Kerning for fonts:	Kerning fir Schrëften:
+	Keyboard shortcuts:	Tastekombinatiounen:
+	Keys for this command:	Taste fir dëse Befeel:
+	Keywords	Schlësselwierder
+	Korean	Koreanesch
+	Label changes with:	Bezeechnung ännert sech mat:
+	Label:	Etikett:
+	Labels	Etiketten
+	Landscape	Queeschformat
+	Language	Sprooch
+	Language Preferences…	Sproochastellungen…
+	Language…	Sprooch…
+	Large\nOperator	Grousse\nOperator
+	Largest Only	Nëmmen dee gréissten
+	Largest only	Nëmmen dee gréissten
+	Lasso	Lasso
+	Lasso Select	Mam Lasso auswielen
+	Last	Lescht
+	Last Cell in Column	Lescht Zell an der Kolonn
+	Last Cell in Row	Lescht Zell an der Rei
+	Last Column	Lescht Kolonn
+	Last commit	Leschte Commit
+	Last Name	Familljennumm
+	Last, First; Last, First	Numm, Virnumm; Numm, Virnumm
+	Latin text font:	Schrëft fir laténgeschen Text:
+	Layout	Layout
+	Layout options for this document	Layoutoptioune fir dëst Dokument
+	Layout Summary	Layoutiwwersiicht
+	Layouts	Layouten
+	Leader	Fëllzeechen
+	Leave a recipient out of the merge when a field has this value.	En Empfänger aus dem Seriebréif eraushalen, wann e Feld dëse Wäert huet.
+	Leave Equation	Equatioun verloossen
+	Leave the equation (Esc)	D'Equatioun verloossen (Esc)
+	Leave the label out of the caption	D'Bezeechnung aus der Beschrëftung eraushalen
+	Left	Lénks
+	Left Arrow with Text Above	Feil no lénks mat Text driwwer
+	Left Arrow with Text Below	Feil no lénks mat Text drënner
+	Left Border	Lénke Rand
+	Left border	Lénke Rand
+	Left Bracket Twice	Zweemol lénks Klamer
+	Left indent	Lénks Aréckung
+	Left Margin	Lénks Marge
+	Left Only	Nëmme lénks
+	Left only	Nëmme lénks
+	Left Right Arrow Above	Feil lénks-riets driwwer
+	Left Right Arrow with Text Above	Feil lénks-riets mat Text driwwer
+	Left Right Arrow with Text Below	Feil lénks-riets mat Text drënner
+	Left Subscript-Superscript	Lénks Ënner- an Iwwerschrëft
+	Left-to-right	Vu lénks no riets
+	Left-to-Right Text Direction	Textrichtung vu lénks no riets
+	Left:	Lénks:
+	Leftwards Arrow Above	Feil no lénks driwwer
+	Leftwards Harpoon Above	Harpun no lénks driwwer
+	Legal   8.50" × 14.00"	Legal   8.50" × 14.00"
+	Legal style numbering	Nummeréierung am juristesche Stil
+	Legend	Legend
+	Less than	Méi kleng wéi
+	Less than or equal	Méi kleng wéi oder gläich
+	Letter	Bréif
+	Letter   8.50" × 11.00"	Letter   8.50" × 11.00"
+	Letter headings	Bréifiwwerschrëften
+	Letter-Like Symbols	Buschtaweähnlech Symboler
+	Letters	Bréiwer
+	Level 1	Niveau 1
+	Level 2	Niveau 2
+	Level 3	Niveau 3
+	Level 4	Niveau 4
+	Level 5	Niveau 5
+	Level 6	Niveau 6
+	Level 7	Niveau 7
+	Level 8	Niveau 8
+	Level 9	Niveau 9
+	Level {n}	Niveau {n}
+	Level:	Niveau:
+	Levels:	Niveauen:
+	LibreTranslate server (open source)	LibreTranslate-Server (Open Source)
+	Ligatures:	Ligaturen:
+	Light	Hell
+	Light with Outline	Hell mat Kontur
+	Limit	Limes
+	Limit and\nLog	Limes a\nLog
+	Limit consecutive hyphens to:	Openeefolgend Trennstricher limitéieren op:
+	Limit Example	Limes-Beispill
+	Limit formatting to a selection of styles	Formatéierung op eng Auswiel vu Stiler limitéieren
+	Line	Linn
+	Line and Page Breaks	Zeilen- a Säitenëmbréch
+	Line and Paragraph Spacing	Zeilen- a Paragrafenofstand
+	Line between	Linn tëschenan
+	Line Break	Zeilenëmbroch
+	Line breaking	Zeilenëmbroch
+	Line delta	Zeilendelta
+	Line End	Enn vun der Zeil
+	Line Number	Zeilennummer
+	Line Numbering Options…	Optioune fir d'Zeilennummeréierung…
+	Line Numbers	Zeilennummeren
+	Line Spacing	Zeilenofstand
+	Line spacing	Zeilenofstand
+	Line Spacing Options…	Optioune fir den Zeilenofstand…
+	Line spacing:	Zeilenofstand:
+	Line Start	Ufank vun der Zeil
+	Line width:	Linnebreet:
+	Line:	Linn:
+	Linear	Linear
+	Linear Fraction	Lineare Bréch
+	Lines	Zeilen
+	Lines +/−	Zeilen +/−
+	Lines added	Zeilen derbäigesat
+	Lines and characters	Zeilen an Zeechen
+	Lines deleted	Zeilen geläscht
+	Lines only	Nëmmen Zeilen
+	Lines per page:	Zeilen pro Säit:
+	Link	Link
+	Link entries to their headings	Agaben mat hiren Iwwerschrëfte verlinken
+	Link level to style:	Niveau mat Stil verlinken:
+	Link to Previous	Mat der viregter verlinken
+	Linked style (paragraph and character)	Verlinkte Stil (Paragraf an Zeechen)
+	Links	Linken
+	Links and References	Linken a Referenzen
+	Link…	Link…
+	List	Lëscht
+	List Commands	Befeeler oplëschten
+	List Definition	Lëschtendefinitioun
+	List entries	Lëschtenagaben
+	List Paragraph	Lëschtenparagraf
+	List styles	Lëschtestiler
+	List Table 3 – Blue	Lëschtentabell 3 – Blo
+	List Table 3 – Green	Lëschtentabell 3 – Gréng
+	List Table 3 – Orange	Lëschtentabell 3 – Orange
+	List Table 3 – Purple	Lëschtentabell 3 – Mof
+	Listening… speak now	Lauschteren… schwätzt elo
+	Location	Plaz
+	Location: {path}	Plaz: {path}
+	Lock aspect ratio	Säiteverhältnis spären
+	Lock Fields	Felder spären
+	Logarithm	Logarithmus
+	Logarithm with Base	Logarithmus mat Basis
+	Logical AND	Logescht AN
+	Logical AND with Limits	Logescht AN mat Grenzen
+	Logical OR	Logescht ODER
+	Logical OR with Limits	Logescht ODER mat Grenzen
+	Long citation:	Laangt Zitat:
+	lowercase	klengbuschtawen
+	Lum:	Lum.:
+	Macros	Makroen
+	Made from the author and year when empty	Gëtt aus Auteur a Joer gemaach, wann eidel
+	Magazine or newspaper article	Zäitschrëften- oder Zeitungsartikel
+	Mail Merge	Seriebréif
+	Mail Merge Helper	Seriebréif-Assistent
+	Mail Merge Helper…	Seriebréif-Assistent…
+	Mailing Labels	Adressetiketten
+	Mailings	Sendungen
+	Main entry:	Haaptagab:
+	Make Doc4Me the default for Word documents…	Doc4Me als Standard fir Word-Dokumenter astellen…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Mécht d'Menüband, d'Menüen an d'Dialoger méi grouss oder méi kleng, zousätzlech zur Uweisskaléierung vun Ärem System. Den Dokumentzoom ass separat.
+	Malay	Malaiesch
+	Manage Sources	Quelle verwalten
+	Manage Styles	Stiler verwalten
+	Manage Styles…	Stiler verwalten…
+	Manual Hyphenation	Manuell Silbentrennung
+	Manual hyphenation is complete.	D'manuell Silbentrennung ass ofgeschloss.
+	Manual Line Break	Manuellen Zeilenëmbroch
+	Manual Page Break	Manuellen Säitenëmbroch
+	Manual…	Manuell…
+	Many pages	Vill Säiten
+	Margin	Marge
+	Margins	Margen
+	Mark	Markéieren
+	Mark All	All markéieren
+	Mark as decorative	Als dekorativ markéieren
+	Mark Citation	Zitat markéieren
+	Mark Citation…	Zitat markéieren…
+	Mark Entry	Agab markéieren
+	Mark Entry…	Agab markéieren…
+	Mark grammar errors as you type	Grammatikfeeler beim Tippe markéieren
+	Mark Index Entry	Indexagab markéieren
+	Mark selected text as:	Ausgewielten Text markéieren als:
+	Mark Table of Contents Entry	Agab fir den Inhaltsverzeechnes markéieren
+	Mark\nCitation	Zitat\nmarkéieren
+	Mark\nEntry	Agab\nmarkéieren
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Grouss-/Klengschreiwung beuechten
+	Match Fields	Felder zouuerdnen
+	Match prefix	Präfix beuechten
+	Match suffix	Suffix beuechten
+	Math AutoCorrect	Mathematesch AutoKorrektur
+	Math Input Control	Mathematesch Agab
+	Matrices with Brackets	Matrixe mat Klameren
+	Matrix	Matrix
+	Maximize	Maximéieren
+	Maximum	Maximum
+	Maximum Example	Maximum-Beispill
+	Measured By	Gemooss mat
+	Measurement units:	Moosseenheeten:
+	Media	Medien
+	Merge	Zesummeféieren
+	Merge Cells	Zelle verbannen
+	Merge Formatting	Formatéierung iwwerhuelen
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Formatéierung iwwerhuelen pecht den Text an der Formatéierung vun der Plaz an, wou e landt, sou wéi Nëmmen Text behalen.
+	Merge Record #	Datesaz Nr. zesummeféieren
+	Merge records	Datesätz zesummeféieren
+	Merge to New Document	An en neit Dokument zesummeféieren
+	Merge to Printer	Op den Drécker zesummeféieren
+	Merge to:	Zesummeféieren an:
+	Merge type: {type}	Seriebréiftyp: {type}
+	Merged PRs	Fusionéiert PRen
+	Merge…	Zesummeféieren…
+	Mesosphere	Mesosphär
+	Middle	Mëtt
+	Midline Dots	Punkten an der Mëtt
+	Millimeters	Millimeter
+	Minimum	Minimum
+	Minus Equal	Minus gläich
+	Mirror indents	Spigelbildlech Aréckungen
+	Mirrored	Gespigelt
+	Missing document font	Dokumentschrëft feelt
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team an d'Mataarbechter vu WordCraft.
+	MLA	MLA
+	Model	Modell
+	Models	Modeller
+	Moderate	Moderat
+	Modify Style	Stil änneren
+	Modify Table Style	Tabellestil änneren
+	Modify Table Style…	Tabellestil änneren…
+	Modify…	Änneren…
+	Mon	Méi.
+	Month	Mount
+	More >>	Méi >>
+	More Colors…	Méi Faarwen…
+	More Columns…	Méi Kolonnen…
+	More Commands…	Méi Befeeler…
+	More Symbols…	Méi Symboler…
+	More templates →	Méi Schablounen →
+	Move Down	No ënne réckelen
+	Move in Equation	An der Equatioun réckelen
+	Move object with text	Objet mam Text réckelen
+	Move or Resize	Réckelen oder Gréisst änneren
+	Move Paragraph Down	Paragraf no ënne réckelen
+	Move Paragraph Up	Paragraf no uewe réckelen
+	Move Past Citation	Hannert d'Zitat réckelen
+	Move Past\nCitation	Hannert d'Zitat\nréckelen
+	Move Selected Ink	Ausgewielt Tënt réckelen
+	Move Text	Text réckelen
+	Move to where?	Wouhin réckelen?
+	Move Up	No uewe réckelen
+	Move with Text	Mam Text réckelen
+	Move with text	Mam Text réckelen
+	Moved from	Verréckelt vun
+	Moved to	Verréckelt op
+	Moves	Verréckelungen
+	Multilevel List	Lëscht mat e puer Niveauen
+	Multiple Pages	E puer Säiten
+	My Add-ins	Meng Add-ins
+	MyMemory (free, no account)	MyMemory (gratis, ouni Kont)
+	Name	Numm
+	Name (A–Z)	Numm (A–Z)
+	Name of the file this document is saved as	Numm vum Fichier, als deen dëst Dokument gespäichert ass
+	Name:	Numm:
+	Narrow  0.5" all	Schmuel  0.5" iwwerall
+	Natural Logarithm	Natierleche Logarithmus
+	Nature	Natur
+	Navigation	Navigatioun
+	Navigation Pane	Navigatiounspanneau
+	Negated Relations	Negéiert Relatiounen
+	New	Nei
+	New Comment	Neie Kommentar
+	New comments and tracked changes are recorded under this name and these initials.	Nei Kommentarer a verfollegt Ännerunge ginn ënner dësem Numm an dësen Initialen opgeholl.
+	New Document	Neit Dokument
+	New document	Neit Dokument
+	New Drawing Canvas	Nei Zeechefläch
+	New Entry	Nei Agab
+	New Folder	Neien Dossier
+	New from Template	Nei aus Schabloun
+	New Group	Nei Grupp
+	New Label	Nei Bezeechnung
+	New Label…	Nei Bezeechnung…
+	New Paragraph	Neie Paragraf
+	New shortcut:	Nei Tastekombinatioun:
+	New Style…	Neie Stil…
+	New Tab	Neien Tab
+	New Table Style	Neie Tabellestil
+	New Table Style…	Neie Tabellestil…
+	New Window	Nei Fënster
+	New word	Neit Wuert
+	New\nComment	Neie\nKommentar
+	New\nWindow	Nei\nFënster
+	New…	Nei…
+	Next	Nächst
+	Next Change	Nächst Ännerung
+	Next Comment	Nächste Kommentar
+	Next Field	Nächst Feld
+	Next Footnote	Nächst Foussnot
+	Next Page	Nächst Säit
+	Next Record	Nächsten Datesaz
+	Next Section	Nächst Sektioun
+	Next Sentence	Nächste Saz
+	Next sentence	Nächste Saz
+	Next Window	Nächst Fënster
+	No	Neen
+	No accessibility issues found.	Keng Accessibilitéitsproblemer fonnt.
+	No add-ins are listed yet.	Et sinn nach keng Add-ins opgelëscht.
+	No add-ins yet. Add one from the Store.	Nach keng Add-ins. Setzt eent aus dem Store derbäi.
+	No Border	Kee Rand
+	No changes (read only)	Keng Ännerungen (nëmme liesen)
+	No Color	Keng Faarf
+	No contributor data was built into this copy.	An dëser Kopie sinn keng Mataarbechterdaten agebaut.
+	No data source yet.	Nach keng Datequell.
+	No errors found: every merge field is in the recipient list.	Keng Feeler fonnt: all Seriebréiffeld ass an der Empfängerlëscht.
+	No Fill	Keng Fëllung
+	No Glow	Keen Liichten
+	No grid	Kee Gitter
+	No icons match your search.	Keng Symboler entspriechen Ärer Sich.
+	No limit	Keng Limit
+	No Line	Keng Linn
+	No Markup	Keng Markéierungen
+	No model credits were built into this copy.	An dëser Kopie sinn keng Modellcreditter agebaut.
+	No Outline	Keng Kontur
+	No Paragraph Space	Keen Paragrafenofstand
+	No pictures found.	Keng Biller fonnt.
+	No Reflection	Keng Spigelung
+	No revisions	Keng Revisiounen
+	No Shadow	Kee Schiet
+	No Soft Edges	Keng mëll Kanten
+	No sources yet.	Nach keng Quellen.
+	No Spacing	Keen Ofstand
+	no speech program on this system	keen Sproochprogramm op dësem System
+	No templates match your search.	Keng Schablounen entspriechen Ärer Sich.
+	No Transform	Keng Transformatioun
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Nach keng Wierder. „An de Wierderbuch derbäisetzen“ bei engem falsch geschriwwene Wuert setzt et hei hin.
+	No-Width Non Break	Net-Ëmbroch ouni Breet
+	No-Width Optional Break	Fakultativen Ëmbroch ouni Breet
+	Nonbreaking Hyphen	Geschützte Bindestrich
+	Nonbreaking Space	Geschützten Espace
+	None	Keen
+	Normal	Normal
+	Normal  1" all	Normal  1" iwwerall
+	Normal Indent	Normal Aréckung
+	Normal probability density	Normal Wahrscheinlechkeetsdicht
+	Normal speed	Normal Vitess
+	Normal Style	Normal-Stil
+	Normal Table	Normal Tabell
+	Normal Text	Normalen Text
+	Normal Word Document	Normaalt Word-Dokument
+	North	Norden
+	Norwegian (Bokmål)	Norwegesch (Bokmål)
+	Not	Net
+	Not available right now	Momentan net disponibel
+	Not equal to	Net gläich
+	Not linked: click a text box	Net verlinkt: klickt op eng Textkëscht
+	Not saved	Net gespäichert
+	Not saved yet	Nach net gespäichert
+	Not used by any command	Vu kengem Befeel benotzt
+	Not {name}	Net {name}
+	Nothing	Näischt
+	Nothing collected yet. Items you copy or cut appear here.	Nach näischt gesammelt. Elementer, déi Dir kopéiert oder erausschneit, erschéngen hei.
+	Now used by {command}	Elo vun {command} benotzt
+	Nudge	Liicht réckelen
+	Num Occurrences	Unzuel Virkommen
+	Number	Zuel
+	Number alignment:	Ausriichtung vun der Zuel:
+	Number format	Zuelformat
+	Number of columns:	Unzuel vu Kolonnen:
+	Number of rows:	Unzuel vu Reien:
+	Number of the page the field sits on	Nummer vun der Säit, op där d'Feld steet
+	Number of the section the field sits in	Nummer vun der Sektioun, an där d'Feld steet
+	Number style for this level:	Zuelstil fir dësen Niveau:
+	Number the equation; the number sits at the right margin (or type # then the number)	D'Equatioun nummeréieren; d'Nummer steet um rietse Rand (oder tippt # an dann d'Nummer)
+	Number type:	Zuelentyp:
+	Number:	Zuel:
+	Numbering	Nummeréierung
+	Numbering:	Nummeréierung:
+	Numbering…	Nummeréierung…
+	Numerals	Ziffer
+	Numerals:	Ziffer:
+	n×n Identity Matrix	n×n-Eenheetsmatrix
+	n×n Matrix	n×n-Matrix
+	Object	Objet
+	Odd Page	Ongerued Säit
+	Odd pages only	Nëmmen ongerued Säiten
+	Off	Aus
+	Office	Office
+	Office 2003 Default	Office 2003 Standard
+	Offset (pt):	Verrécklung (pt):
+	Offset: Bottom	Verrécklung: ënnen
+	Offset: Bottom Left	Verrécklung: ënne lénks
+	Offset: Bottom Right	Verrécklung: ënne riets
+	Offset: Center	Verrécklung: Mëtt
+	Offset: Left	Verrécklung: lénks
+	Offset: Right	Verrécklung: riets
+	Offset: Top	Verrécklung: uewen
+	Offset: Top Left	Verrécklung: uewe lénks
+	Offset: Top Right	Verrécklung: uewe riets
+	OK	OK
+	Omit	Ausloossen
+	On	Un
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Un: de Cursor gleit op seng nei Plaz, wann Dir tippt oder d'Feiltaste benotzt, a säi Blénke verblasst. Aus: e spréngt a blénkt un an aus.
+	One	Een
+	One half	Eng Halschent
+	One label per recipient	Eng Etikett pro Empfänger
+	One line per item. Enter adds an item.	Eng Zeil pro Element. Enter setzt en Element derbäi.
+	One Page	Eng Säit
+	Online Pictures	Online-Biller
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Online-Biller (Openverse), Iwwersetzen (MyMemory oder Äre LibreTranslate-Server), Add-ins kréien an den Download vum Sproochmodell fir d'Diktéieren verbannen sech mam Internet, an nëmmen, wann Dir se benotzt. Ausgeschalt mécht Doc4Me selwer keng Verbindung.
+	Online Pictures…	Online-Biller…
+	Online services are turned off (File › Options › Trust Center).	Online-Servicer sinn ausgeschalt (Fichier › Optiounen › Vertrauenscenter).
+	Online Video	Online-Video
+	Only allow this kind of editing:	Nëmmen dës Aart vu Beaarbechtung erlaben:
+	Only comments can be added, except in regions marked editable.	Et kënnen nëmme Kommentarer derbäigesat ginn, ausser a Beräicher, déi als beaarbechtbar markéiert sinn.
+	Only form fields can be filled in.	Et kënnen nëmme Formulairfelder ausgefëllt ginn.
+	only https addresses can be used	et kënnen nëmmen https-Adresse benotzt ginn
+	Only pictures I may use commercially	Nëmme Biller, déi ech kommerziell benotze däerf
+	Only the allowed styles can be applied.	Et kënnen nëmmen déi erlaabte Stiler applizéiert ginn.
+	Only web (http, https) and email (mailto) links can be followed	Et kënnen nëmme Web- (http, https) an E-Mail-Linken (mailto) gefollegt ginn
+	Open	Opmaachen
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	E Fichier mam eegene Browser vun Doc4Me opmaachen, wann de Fichiersdialog vum System net erschéngt.
+	Open Data Source…	Datequell opmaachen…
+	Open Hyperlink	Hyperlink opmaachen
+	OpenDocument Text (*.odt)	OpenDocument-Text (*.odt)
+	Opening print dialog…	Drockdialog gëtt opgemaach…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Mécht vun elo un .docx-, .doc-, .rtf- an .odt-Fichieren a Word-Schablounen mat Doc4Me op.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Mécht Astellungen › Standard-Appen op, wou Dir Doc4Me fir .docx an déi aner Dokumenttypen auswielt.
+	Open…	Opmaachen…
+	Operator	Operator
+	Operator Structures	Operatorstrukturen
+	Operators	Operatoren
+	Optional Hyphen	Fakultative Bindestrich
+	Options	Optiounen
+	Options…	Optiounen…
+	Or	Oder
+	Or save a copy in another format:	Oder späichert eng Kopie an engem anere Format:
+	Ordinals (1st) as superscript	Ordinalzuelen (1st) als Héichstellung
+	Organizer	Organisateur
+	Organizer…	Organisateur…
+	Orientation	Orientéierung
+	Original document	Originaldokument
+	Other	Aner
+	Other Authorities	Aner Rechtsquellen
+	Other Large Operators	Aner grouss Operatoren
+	Other paragraph styles	Aner Paragrafestiler
+	Other styles and their TOC level:	Aner Stiler an hiren Niveau am Inhaltsverzeechnes:
+	Otherwise insert:	Soss asetzen:
+	Outline	Gliederung
+	Outline Level	Gliederungsniveau
+	Outline level	Gliederungsniveau
+	Outline levels	Gliederungsniveauen
+	Outline State	Gliederungsstatus
+	Outline Tools	Gliederungsinstrumenter
+	Outlining	Gliederung
+	Outside	Baussen
+	Outside border	Baussenzege Rand
+	Outside Borders	Baussenzeg Rimm
+	Outside Margin	Baussenzeg Marge
+	Outside:	Baussen:
+	Outward Brackets	Klameren no baussen
+	Oval	Oval
+	Overbar	Iwwerstrich
+	Overbars and Underbars	Iwwer- an Ënnerstricher
+	Overbrace	Geschweiften Klamer uewen
+	Overtype	Iwwerschreiwen
+	Overtype (typing replaces the characters after the caret)	Iwwerschreiwen (Tippen ersetzt d'Zeechen nom Cursor)
+	Page	Säit
+	Page Background	Säitenhannergrond
+	Page Border	Säiterand
+	Page Borders	Säiterimm
+	Page Break	Säitenëmbroch
+	Page Break Before	Säitenëmbroch virdrun
+	Page break before	Säitenëmbroch virdrun
+	Page Breaks	Säitenëmbréch
+	Page Color	Säitefaarf
+	Page display	Säitenuweisung
+	Page Down	Bild erof
+	Page image (*.jpg, *.jpeg)	Säitebild (*.jpg, *.jpeg)
+	Page image (*.png)	Säitebild (*.png)
+	Page Movement	Säitebeweegung
+	Page Number	Säitenummer
+	Page number style	Säitenummerstil
+	Page numbers at the right margin	Säitenummeren um rietse Rand
+	Page on which a bookmarked passage falls	Säit, op där e Passage mat Lieszeechen steet
+	Page Setup	Säiteastellung
+	Page title	Säitentitel
+	Page Up	Bild erop
+	Page Width	Säitebreet
+	Page width	Säitebreet
+	Page X of Y	Säit X vun Y
+	Page {page}	Säit {page}
+	Page {page} of {pages}	Säit {page} vun {pages}
+	Page\nBorders	Säite-\nrimm
+	Page\nColor	Säite-\nfaarf
+	Page\nNumber	Säite-\nnummer
+	Pages	Säiten
+	Pages like 1-3, 5	Säite wéi 1-3, 5
+	Pages of bookmark:	Säite vum Lieszeechen:
+	Paragraph	Paragraf
+	Paragraph Character	Paragrafenzeechen
+	Paragraph Details	Paragrafendetailer
+	Paragraph Down	Paragraf erof
+	Paragraph Mark	Paragrafenzeechen
+	Paragraph marks	Paragrafenzeechen
+	Paragraph Settings	Paragrafenastellungen
+	Paragraph Spacing	Paragrafenofstand
+	Paragraph style	Paragrafestil
+	Paragraph Up	Paragraf erop
+	Paragraphs	Paragrafen
+	Paragraph…	Paragraf…
+	Parentheses	Ronn Klameren
+	Parentheses with Separator	Ronn Klamere mat Trennzeechen
+	Partial Differential	Partiellt Differential
+	Password	Passwuert
+	Password:	Passwuert:
+	Paste	Apechen
+	Paste All	All apechen
+	Paste as:	Apechen als:
+	Paste Clipboard Item	Element aus der Tëschenoflag apechen
+	Paste Formatting	Formatéierung apechen
+	Paste Special	Inhalt apechen
+	Paste Special…	Inhalt apechen…
+	Paste Spike	Sammelbehälter apechen
+	Paste: Keep Text Only	Apechen: nëmmen Text behalen
+	Paste: Merge Formatting	Apechen: Formatéierung iwwerhuelen
+	Pasting between documents:	Apeche tëscht Dokumenter:
+	Pasting from other programs:	Apechen aus anere Programmer:
+	Pasting within the same document:	Apechen am selwechten Dokument:
+	Pause	Paus
+	Paused	Pauséiert
+	PDF document (*.pdf)	PDF-Dokument (*.pdf)
+	Pen	Stëft
+	Pencil	Bläistëft
+	Pens	Stëfter
+	People	Leit
+	Periodical	Periodikum
+	Personalize	Personaliséieren
+	Phonetic Guide	Aussproochhëllef
+	Pi Over 2	Pi duerch 2
+	Picas	Pica
+	Pick a custom group (New Group makes one)	Wielt eng personaliséiert Grupp (Nei Grupp mécht eng)
+	Pick a field from the list	Wielt e Feld aus der Lëscht
+	Picture	Bild
+	Picture Border	Billerrand
+	Picture Content Control	Inhaltssteierelement fir Biller
+	Picture Format	Billerformat
+	Picture Styles	Billerstiler
+	Pictures	Biller
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Biller vun Openverse. Respektéiert d'Lizenz vun all Bild: Doc4Me setzt eng Quellenzeil drënner.
+	Pie	Kuch
+	Placeholder Name	Numm vum Plazhalter
+	Placeholder text	Plazhaltertext
+	Plain Table 1	Einfach Tabell 1
+	Plain text (*.txt)	Einfachen Text (*.txt)
+	Plain Text Content Control	Inhaltssteierelement fir einfachen Text
+	Play	Ofspillen
+	Play Video	Video ofspillen
+	Play/Pause	Ofspillen/Paus
+	Plus Equal	Plus gläich
+	Points	Punkten
+	points and above	Punkten a méi
+	Polish	Polnesch
+	Portrait	Héichformat
+	Portuguese (Brazil)	Portugisesch (Brasilien)
+	Portuguese (Portugal)	Portugisesch (Portugal)
+	Position	Positioun
+	Position:	Positioun:
+	Positioning…	Positionéierung…
+	Possible spelling mistake	Méiglechen Rechtschreiffeeler
+	Postal Code	Postleitzuel
+	Power series of (1+x)ⁿ	Potenzrei vun (1+x)ⁿ
+	Preferred width:	Bevirzugt Breet:
+	Preserve	Erhalen
+	Preserve formatting during updates	Formatéierung beim Aktualiséieren erhalen
+	Presets	Virastellungen
+	Press a key combination	Dréckt eng Tastekombinatioun
+	Preview	Virschau
+	Preview Results	Virschau vun de Resultater
+	Preview\nResults	Virschau vun de\nResultater
+	Previous	Viregt
+	Previous 1 or More	Viregt 1 oder méi
+	Previous Change	Vireg Ännerung
+	Previous Comment	Virege Kommentar
+	Previous Field	Viregt Feld
+	Previous Footnote	Vireg Foussnot
+	Previous Page	Vireg Säit
+	Previous Record	Viregen Datesaz
+	Previous Section	Vireg Sektioun
+	Previous Sentence	Virege Saz
+	Previous sentence	Virege Saz
+	Previous Window	Vireg Fënster
+	Print	Drécken
+	Print blank lines when data fields are empty	Eidel Zeilen drécken, wann Datefelder eidel sinn
+	Print Documents	Dokumenter drécken
+	Print Documents…	Dokumenter drécken…
+	Print failed: {error}	Drécken ass feelgeschloen: {error}
+	Print Layout	Drockusiicht
+	Print Markup	Markéierungen drécken
+	Print the page color	D'Säitefaarf drécken
+	Print to PDF	Als PDF drécken
+	Print\nLayout	Drock-\nusiicht
+	Printer	Drécker
+	Printing	Drécken
+	Process	Prozess
+	Product	Produkt
+	Product of A	Produkt vun A
+	Product with Limits	Produkt mat Grenzen
+	Product with Lower Limit	Produkt mat ënneschter Grenz
+	Product with Subscript-Superscript Limits	Produkt mat Ënner- an Iwwerschrëftgrenzen
+	Products and Coproducts	Produkter a Koprodukter
+	Professional	Professionell
+	Promote	Héichstufen
+	Promote to Heading 1	Op Iwwerschrëft 1 héichstufen
+	Proofing	Korrekturliesen
+	Proofing Issues	Korrekturproblemer
+	Proofing language	Korrektursprooch
+	Properties	Eegeschaften
+	Protect	Schützen
+	Protect Document	Dokument schützen
+	PRs	PRen
+	pt	pt
+	Publisher	Verlag
+	Punctuation	Punktuatioun
+	Put the caret in a content control first.	Setzt de Cursor fir d'éischt an en Inhaltssteierelement.
+	Put the default commands back on the Quick Access Toolbar?	D'Standardbefeeler nees op d'Leescht fir de séieren Zougang setzen?
+	Pyramid	Pyramid
+	Quadratic Root	Quadratwuerzel
+	Query Options…	Ufrooptiounen…
+	Quick Access Toolbar	Leescht fir de séieren Zougang
+	Quick Parts	Schnellbausteng
+	Quick Tables	Schnelltabellen
+	Quote	Zitat
+	Radical	Wuerzel
+	Radical with Degree	Wuerzel mat Grad
+	Radicals	Wuerzelen
+	Raised/lowered	Héich-/déifgestallt
+	Read Aloud	Virliesen
+	Read Aloud couldn't start the speech program: {reason}	Virliesen konnt de Sproochprogramm net starten: {reason}
+	Read Aloud couldn't start: {reason}	Virliesen konnt net starten: {reason}
+	Read Aloud isn't available in the browser	Virliesen ass am Browser net disponibel
+	Read Aloud Status	Status vum Virliesen
+	Read Aloud stopped: {reason}	Virliesen gestoppt: {reason}
+	Read Mode	Liesmodus
+	Read\nAloud	Vir-\nliesen
+	Read\nMode	Lies-\nmodus
+	Reading	Liesen
+	Reading Column Width	Kolonnebreet beim Liesen
+	Reading Highlight	Markéierung beim Liesen
+	Reading Line Spacing	Zeilenofstand beim Liesen
+	Reading Mode	Liesmodus
+	Reading Speed	Liesvitess
+	Reading Text Size	Textgréisst beim Liesen
+	Reads the clipboard's rich text and keeps its formatting.	Liest de formatéierten Text aus der Tëschenoflag a behält seng Formatéierung.
+	Reads the clipboard's web content and keeps its formatting.	Liest den Webinhalt aus der Tëschenoflag a behält seng Formatéierung.
+	Real name	Richtegen Numm
+	Recent	Rezent
+	Recent Colors	Rezent Faarwen
+	Recent documents to show:	Unzuel vu rezenten Dokumenter:
+	Recently used symbols:	Rezent benotzt Symboler:
+	Recipient List	Empfängerlëscht
+	Recipient lists	Empfängerlëschten
+	Recipients: {count}	Empfänger: {count}
+	Recognized (you can correct it):	Erkannt (Dir kënnt et korrigéieren):
+	Recognized Functions	Erkannt Funktiounen
+	Recognized Functions…	Erkannt Funktiounen…
+	Recolor a one-color picture, such as an icon	E Bild an enger Faarf nei faerwen, z. B. e Symbol
+	Recolor Selected Ink	Ausgewielt Tënt nei faerwen
+	Record Macro	Makro ophuelen
+	Recover Unsaved Documents	Net gespäichert Dokumenter erëmhuelen
+	Rectangle	Rechteck
+	Red:	Rout:
+	Redo	Widderhuelen
+	Reduce Hanging Indent	Hängend Aréckung verklengeren
+	References	Referenzen
+	Reflection	Spigelung
+	Refresh	Aktualiséieren
+	Registered	Registréiert
+	Registered Sign	Registréiert-Zeechen
+	Regular expressions	Regulär Ausdréck
+	Regulations	Reglementer
+	Reject	Refuséieren
+	Reject All	All refuséieren
+	Reject All Changes	All Ännerunge refuséieren
+	Reject Change	Ännerung refuséieren
+	Relationship	Relatioun
+	relative to	relativ zu
+	Relative to:	Relativ zu:
+	Relaxed	Locker
+	Remove	Ewechhuelen
+	Remove Added Font	Derbäigesat Schrëft ewechhuelen
+	Remove Background	Hannergrond ewechhuelen
+	Remove Content Control	Inhaltssteierelement ewechhuelen
+	Remove every custom shortcut and restore the built-in keys?	All personaliséiert Tastekombinatiounen ewechhuelen an déi agebaute Taste restauréieren?
+	Remove every custom tab and group and show all tabs again?	All personaliséiert Tabs a Gruppen ewechhuelen an all Tabs nees weisen?
+	Remove field	Feld ewechhuelen
+	Remove Field Name	Feldnumm ewechhuelen
+	Remove Footer	Fousszeil ewechhuelen
+	Remove from Quick Access Toolbar	Vun der Leescht fir de séieren Zougang ewechhuelen
+	Remove Header	Kappzeil ewechhuelen
+	Remove Hyperlink	Hyperlink ewechhuelen
+	Remove Password	Passwuert ewechhuelen
+	Remove Pen	Stëft ewechhuelen
+	Remove Positioning	Positionéierung ewechhuelen
+	Remove recipient	Empfänger ewechhuelen
+	Remove row	Rei ewechhuelen
+	Remove series	Serie ewechhuelen
+	Remove Space After Paragraph	Ofstand nom Paragraf ewechhuelen
+	Remove Table of Contents	Inhaltsverzeechnes ewechhuelen
+	Remove the control once edited	D'Steierelement nom Beaarbechten ewechhuelen
+	Remove the space before the punctuation	Den Espace virun der Punktuatioun ewechhuelen
+	Remove Watermark	Waasserzeechen ewechhuelen
+	Rename Style	Stil ëmbenennen
+	Rename…	Ëmbenennen…
+	Reopen	Nees opmaachen
+	Repeat	Widderhuelen
+	Repeat as header row on each page	Op all Säit als Kappzeil widderhuelen
+	Repeat Header Rows	Kappzeilen widderhuelen
+	Repeated words	Widderhollt Wierder
+	Repeating Section Content Control	Inhaltssteierelement fir widderhuelend Sektiounen
+	Replace	Ersetzen
+	Replace All	All ersetzen
+	Replace as you type	Beim Tippen ersetzen
+	Replace Document Text	Dokumenttext ersetzen
+	Replace text as you type	Text beim Tippen ersetzen
+	Replace with:	Ersetzen duerch:
+	Replace:	Ersetzen:
+	Replay	Nees ofspillen
+	Reply	Äntweren
+	Report	Bericht
+	Research	Recherche
+	Researcher	Recherche-Assistent
+	Researcher needs an online service; Doc4Me keeps your documents offline.	De Recherche-Assistent brauch en Online-Service; Doc4Me hält Är Dokumenter offline.
+	Reset	Zrécksetzen
+	Reset All	All zrécksetzen
+	Reset All…	All zrécksetzen…
+	Reset Character Formatting	Zeecheformatéierung zrécksetzen
+	Reset Crop	Zouschnëtt zrécksetzen
+	Reset Graphic	Grafik zrécksetzen
+	Reset Paragraph Formatting	Paragrafeformatéierung zrécksetzen
+	Reset Picture	Bild zrécksetzen
+	Reset to Normal	Op Normal zrécksetzen
+	Reset\nGraphic	Grafik\nzrécksetzen
+	Reset…	Zrécksetzen…
+	Resize Table by Dragging	Tabellegréisst duerch Zéien änneren
+	Resolve	Léisen
+	Resolved	Geléist
+	Restart at 1	Bei 1 nees ufänken
+	Restart Each Page	All Säit nees ufänken
+	Restart Each Section	All Sektioun nees ufänken
+	Restart list after:	Lëscht nees ufänken no:
+	Restore	Restauréieren
+	Restore Defaults	Standardwäerter restauréieren
+	Restore Down	Verklengeren
+	Restore to Normal Word Document	Op en normaalt Word-Dokument zrécksetzen
+	Restrict Editing	Beaarbechtung aschränken
+	Restrict\nEditing	Beaarbechtung\naschränken
+	Result	Resultat
+	Results	Resultater
+	Return address labels	Etikette fir d'Réckadress
+	Return address:	Réckadress:
+	Reverse the order	Reiefolleg ëmdréinen
+	Review	Iwwerpréiwen
+	Review AutoFormat Changes	AutoFormat-Ännerungen iwwerpréiwen
+	Review Changes…	Ännerungen iwwerpréiwen…
+	Reviewing	Iwwerpréiwung
+	Reviewing Pane	Iwwerpréiwungspanneau
+	Reviewing — edits become suggestions	Iwwerpréiwen — Ännerunge ginn zu Virschléi
+	Revised document	Iwwerschafft Dokument
+	Revisions	Revisiounen
+	Rewind	Zréckspullen
+	Ribbon	Menüband
+	Ribbon and Quick Access Toolbar:	Menüband a Leescht fir de séieren Zougang:
+	Ribbon tabs	Tabs vum Menüband
+	Rich Text Content Control	Inhaltssteierelement fir formatéierten Text
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Riets
+	Right (vertical)	Riets (vertikal)
+	Right align page numbers	Säitenummere riets ausriichten
+	Right Arrow with Text Above	Feil no riets mat Text driwwer
+	Right Arrow with Text Below	Feil no riets mat Text drënner
+	Right Border	Rietse Rand
+	Right border	Rietse Rand
+	Right Bracket Twice	Zweemol riets Klamer
+	Right indent	Riets Aréckung
+	Right Margin	Riets Marge
+	Right Only	Nëmme riets
+	Right only	Nëmme riets
+	Right-to-left	Vu riets no lénks
+	Right-to-Left Section	Sektioun vu riets no lénks
+	Right-to-Left Table	Tabell vu riets no lénks
+	Right-to-Left Text Direction	Textrichtung vu riets no lénks
+	Right:	Riets:
+	Rightwards Arrow Above	Feil no riets driwwer
+	Rightwards Harpoon Above	Harpun no riets driwwer
+	Roots of ax²+bx+c	Wuerzele vun ax²+bx+c
+	Rotate	Dréinen
+	Rotate all text 270°	All Text ëm 270° dréinen
+	Rotate all text 90°	All Text ëm 90° dréinen
+	Rotate Left 90°	90° no lénks dréinen
+	Rotate Right 90°	90° no riets dréinen
+	Rotation	Rotatioun
+	Rotation:	Rotatioun:
+	Rounded Rectangle	Ofgeronnt Rechteck
+	Row	Rei
+	Row:	Rei:
+	Rows & Columns	Reien & Kolonnen
+	Ruby text:	Ruby-Text:
+	Ruler	Lineal
+	Rules	Reegelen
+	Run	Ausféieren
+	Run-in	Integréiert
+	Russian	Russesch
+	Résumé	Liewenslaf
+	Same as the whole table	Wéi déi ganz Tabell
+	SAMPLE	MUSTER
+	Sat:	Sätt.:
+	Save	Späicheren
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Späichert eng Kopie an engem anere Format. Drécke leeft iwwer e PDF, deen Dir aus all Viewer drécke kënnt.
+	Save As	Späicheren ënner
+	Save as Template	Als Schabloun späicheren
+	Save documents	Dokumenter späicheren
+	Save the document to turn on AutoSave	Späichert d'Dokument, fir AutoSpäicheren unzeschalten
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Späichert d'Dokument, fir AutoSpäicheren unzeschalten (e Fichier, deen Dir nëmmen opgemaach hutt, gëtt eréischt nei geschriwwen, wann Dir e späichert)
+	Save these pages as PDF…	Dës Säiten als PDF späicheren…
+	Save Version	Versioun späicheren
+	Saved	Gespäichert
+	Scale	Skaléieren
+	Scale Drawing	Zeechnung skaléieren
+	Scatter	Punktwollek
+	Screen Clipping	Bildschiermausschnëtt
+	Screen clipping didn't work: {reason}	De Bildschiermausschnëtt huet net funktionéiert: {reason}
+	Screen clipping ended without a picture.	De Bildschiermausschnëtt ass ouni Bild op en Enn gaangen.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	De Bildschiermausschnëtt ass hei net disponibel. Kopéiert e Bild vum Schierm an pecht et dann an.
+	Screenshot	Screenshot
+	Script	Schrëftsystem
+	Scripts	Skripter
+	Scroll ribbon left	Menüband no lénks scrollen
+	Scroll ribbon right	Menüband no riets scrollen
+	Search	Sichen
+	Search Commands	Befeeler sichen
+	Search commands and help	Befeeler an Hëllef sichen
+	Search document	Dokument duerchsichen
+	Search for templates	No Schablounen sichen
+	Search icons	Symboler sichen
+	Search Openverse (Creative Commons pictures)	Openverse duerchsichen (Creative-Commons-Biller)
+	Search Options	Sichoptiounen
+	Searching…	Gëtt gesicht…
+	Secant Function	Sekansfunktioun
+	Section Break	Sektiounsëmbroch
+	Section Breaks	Sektiounsëmbréch
+	Section Character	Sektiounszeechen
+	Section direction:	Richtung vun der Sektioun:
+	Section Mark	Sektiounszeechen
+	Section Properties	Sektiounseegeschaften
+	Sections	Sektiounen
+	See	Kuckt
+	Select	Auswielen
+	Select a picture, shape, chart or table to describe it.	Wielt e Bild, eng Form, en Diagramm oder eng Tabell aus, fir se ze beschreiwen.
+	Select All	Alles auswielen
+	Select Cell	Zell auswielen
+	Select Floating Shapes	Fräi Formen auswielen
+	Select Heading and Content	Iwwerschrëft an Inhalt auswielen
+	Select Line	Zeil auswielen
+	Select Objects	Objeten auswielen
+	Select Paragraph	Paragraf auswielen
+	Select Range	Beräich auswielen
+	Select Recipients	Empfänger auswielen
+	Select recipients first to choose from their fields.	Wielt fir d'éischt Empfänger aus, fir aus hire Felder ze wielen.
+	Select recipients first to match their fields.	Wielt fir d'éischt Empfänger aus, fir hir Felder zouzeuerdnen.
+	Select Row	Rei auswielen
+	Select Sentence	Saz auswielen
+	Select Table	Tabell auswielen
+	Select Text	Text auswielen
+	Select text in the document to translate it.	Wielt Text am Dokument aus, fir en z'iwwersetzen.
+	Select Text with Similar Formatting	Text mat ähnlecher Formatéierung auswielen
+	Select text, then tick who can still edit it.	Wielt Text aus a kräizt dann un, wien en nach beaarbechte kann.
+	Select the part of the screen to insert.	Wielt den Deel vum Schierm aus, deen agesat soll ginn.
+	Select Word	Wuert auswielen
+	Select\nRecipients	Empfänger\nauswielen
+	Selected Fields	Ausgewielt Felder
+	Selected pages	Ausgewielt Säiten
+	Selection	Auswiel
+	Selection Pane	Auswielpanneau
+	Send Backward	Eng Ebene no hannen
+	Send the document straight to the system print dialog, or save a copy in another format below.	Schéckt d'Dokument direkt un den Drockdialog vum System, oder späichert hei drënner eng Kopie an engem anere Format.
+	Sentence	Saz
+	Sentence case.	Wéi an engem Saz.
+	Separator:	Trennzeechen:
+	Sequence name:	Numm vun der Sequenz:
+	Serbian	Serbesch
+	Serbian (Cyrillic)	Serbesch (kyrillesch)
+	Serbian (Latin)	Serbesch (laténgesch)
+	Series name	Numm vun der Serie
+	Series {n}	Serie {n}
+	Server address (https://…)	Serveradress (https://…)
+	Set	Setzen
+	Set As Default	Als Standard setzen
+	Set as Default	Als Standard setzen
+	Set Caret	Cursor setzen
+	Set Character Formatting	Zeecheformatéierung setzen
+	Set Date	Datum setzen
+	Set Equation	Equatioun setzen
+	Set Numbering Value	Nummeréierungswäert setzen
+	Set Paragraph Formatting	Paragrafeformatéierung setzen
+	Set Proofing Language…	Korrektursprooch setzen…
+	Setting:	Astellung:
+	Settings…	Astellungen…
+	Shading	Schattéierung
+	Shadow	Schiet
+	Shadow, glow and soft edges	Schiet, Liichten a mëll Kanten
+	Shape Effects	Formeffekter
+	Shape Fill	Formfëllung
+	Shape Format	Formformat
+	Shape Outline	Formkontur
+	Shape Styles	Formstiler
+	Shapes	Formen
+	Share	Deelen
+	Sheet:	Blat:
+	Shift cells down	Zellen no ënne verréckelen
+	Shift cells right	Zellen no riets verréckelen
+	Shift+Tab	Shift+Tab
+	Shipping labels	Versandetiketten
+	Short citation:	Kuerzt Zitat:
+	Shortcut key:	Tastekombinatioun:
+	Show	Weisen
+	Show all formatting marks	All Formatéierungszeeche weisen
+	Show All Levels	All Niveaue weisen
+	Show all revisions inline	All Revisiounen an der Zeil weisen
+	Show changes at:	Ännerunge weisen bei:
+	Show changes in:	Ännerunge weisen an:
+	Show Comments	Kommentarer weisen
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Dokumenter mat ëmgedréinte Faarwe weisen, wéi Usiicht › Modus wiesselen. Späicheren, Drécken a PDFe bleiwen onverännert.
+	Show every bibliography field	All Bibliographiefeld weisen
+	Show First Line Only	Nëmmen déi éischt Zeil weisen
+	Show in the Styles gallery	An der Stilgalerie weisen
+	Show KeyTips (Alt or F10)	Tastentipps weisen (Alt oder F10)
+	Show Level	Niveau weisen
+	Show Level 1	Niveau 1 weisen
+	Show Level 2	Niveau 2 weisen
+	Show Level 3	Niveau 3 weisen
+	Show Level 4	Niveau 4 weisen
+	Show Level 5	Niveau 5 weisen
+	Show Level 6	Niveau 6 weisen
+	Show Level 7	Niveau 7 weisen
+	Show Level 8	Niveau 8 weisen
+	Show Level 9	Niveau 9 weisen
+	Show Markup	Markéierunge weisen
+	Show Notes	Notize weisen
+	Show only comments and formatting in balloons	Nëmme Kommentarer a Formatéierung a Bulle weisen
+	Show or Hide Style	Stil weisen oder verstoppen
+	Show page numbers	Säitenummere weisen
+	Show revisions in balloons	Revisiounen a Bulle weisen
+	Show rulers	Lineale weisen
+	Show Text Formatting	Textformatéierung weisen
+	Show the equation in the line of text	D'Equatioun an der Textzeil weisen
+	Show the equation on a line of its own	D'Equatioun op enger eegener Zeil weisen
+	Show the mini toolbar when text is selected	D'Minitoolbar weisen, wann Text ausgewielt ass
+	Show/Hide ¶	¶ weisen/verstoppen
+	Show\nComments	Kommentarer\nweisen
+	Showing the first {count} items.	Déi éischt {count} Elementer ginn ugewisen.
+	Shows a tree: each item below the item it belongs to.	Weist e Bam: all Element ënner dem Element, zu deem et gehéiert.
+	Shows items around a central idea: the first item is the centre.	Weist Elementer ronderëm eng zentral Iddi: dat éischt Element ass d'Mëtt.
+	Shows items of equal weight as blocks in rows.	Weist gläichwäerteg Elementer als Bléck a Reien.
+	Shows overlapping ideas as overlapping circles.	Weist Iddien, déi sech iwwerschneiden, als Kreeser, déi sech iwwerlappen.
+	Shows parts of a whole as quadrants.	Weist Deeler vun engem Ganzen als Quadranten.
+	Shows parts that build on each other, largest at the bottom.	Weist Deeler, déi openee opbauen, dee gréissten ënnen.
+	Shows steps in order, left to right, with arrows between them.	Weist Schrëtt an hirer Reiefolleg, vu lénks no riets, mat Feiler dertëscht.
+	Shows steps that repeat, around a circle.	Weist Schrëtt, déi sech widderhuelen, an engem Krees.
+	Shrink Font 1 Point	Schrëft ëm 1 Punkt verklengeren
+	Shrink Selection	Auswiel verklengeren
+	Shrink text	Text verklengeren
+	Side to Side	Niewentenee
+	Side\nto Side	Niewen-\nenee
+	Sides of a right triangle	Säite vun engem rietwénklegen Dräieck
+	Signature Line	Ënnerschrëftzeil
+	Sine and cosine series of f(x)	Sinus- a Kosinusrei vun f(x)
+	Sine Function	Sinusfunktioun
+	Sine theta	Sinus Theta
+	Single	Einfach
+	Single Brackets	Einfach Klameren
+	Single Closing Quote	Einfach Ofschlossgänseféisschen
+	Single label	Eenzel Etikett
+	Single Left Angle	Einfach spatz Klamer lénks
+	Single Left Bar	Einfache Strich lénks
+	Single Left Brace	Einfach geschweiften Klamer lénks
+	Single Left Bracket	Einfach eckeg Klamer lénks
+	Single Left Parenthesis	Einfach ronn Klamer lénks
+	Single Opening Quote	Einfacht Ufanksgänseféisschen
+	Single Right Brace	Einfach geschweiften Klamer riets
+	Single Right Bracket	Einfach eckeg Klamer riets
+	Single Right Parenthesis	Einfach ronn Klamer riets
+	Single Spacing	Einfachen Zeilenofstand
+	SIST02	SIST02
+	Site name	Numm vun der Websäit
+	Size	Gréisst
+	Size (pt):	Gréisst (pt):
+	Size and Crop…	Gréisst an Zouschnëtt…
+	Size:	Gréisst:
+	Sketchbook	Skizzebuch
+	Skewed Fraction	Schréi Bréch
+	Skip citations & bibliography	Zitater & Bibliographie iwwersprangen
+	Skip Citations and Bibliography	Zitater a Bibliographie iwwersprangen
+	Skip Record If	Datesaz iwwersprangen, wann
+	Skip Record If…	Datesaz iwwersprangen, wann…
+	Slant Down	Schréi no ënnen
+	Slant Up	Schréi no uewen
+	Small Caps	Kapitälchen
+	Small caps	Kapitälchen
+	Small change	Kleng Ännerung
+	Smart quotes instead of straight quotes	Typographesch Gänseféisschen amplaz vu geroden
+	SmartArt	SmartArt
+	SmartArt Design	SmartArt-Design
+	SmartArt Styles	SmartArt-Stiler
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Mëllt Scrollen an Zoomen, a Menüen a Knäppercher, déi agebliendt ginn. Aus weist all Ännerung direkt.
+	Soft Edges	Mëll Kanten
+	Soft Glow	Mëllt Liichten
+	Solid Accent	Massiven Akzent
+	Sort	Sortéieren
+	Sort by	Sortéieren no
+	Sort order:	Sortéierreiefolleg:
+	Sort Records	Datesätz sortéieren
+	Source code: github.com/chatraweechai/doc4me	Quellcode: github.com/chatraweechai/doc4me
+	Source Manager	Quellenverwaltung
+	Source type:	Quellentyp:
+	Sources in this document:	Quellen an dësem Dokument:
+	South	Süden
+	Space	Espace
+	Space after	Ofstand duerno
+	Space after: {pt} pt	Ofstand duerno: {pt} pt
+	Space before	Ofstand virdrun
+	Space before/after:	Ofstand virdrun/duerno:
+	Space before: {pt} pt	Ofstand virdrun: {pt} pt
+	Spaces	Espacen
+	Spacing	Ofstand
+	Spacing (pt):	Ofstand (pt):
+	Spacing:	Ofstand:
+	Spanish	Spuenesch
+	Spanish (Mexico)	Spuenesch (Mexiko)
+	Spanish (Spain)	Spuenesch (Spuenien)
+	Sparse Matrices	Verdënnt Matrixen
+	Special	Speziell
+	Special Characters	Spezialzeechen
+	Specify height:	Héicht uginn:
+	Speech	Sprooch
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	D'Sprooch gëtt op dësem Computer erkannt (whisper.cpp); näischt gëtt online geschéckt.
+	Speed	Vitess
+	Spelling	Rechtschreiwung
+	Spelling & Grammar	Rechtschreiwung & Grammatik
+	Spelling &\nGrammar	Rechtschreiwung &\nGrammatik
+	Spelling and grammar are checked in English (United States).	Rechtschreiwung a Grammatik ginn op Englesch (Vereenegt Staaten) kontrolléiert.
+	Spelling Suggestions	Rechtschreifvirschléi
+	Spike	Sammelbehälter
+	Split	Opdeelen
+	Split apart page break and paragraph mark	Säitenëmbroch a Paragrafenzeechen trennen
+	Split Cells	Zellen opdeelen
+	Split Table	Tabell opdeelen
+	Spreadsheet Table	Tabellekalkulatiounstabell
+	Square	Quadrat
+	Square Root	Quadratwuerzel
+	Square Root with Degree	Quadratwuerzel mat Grad
+	Square Union	Eckeg Vereenegung
+	Stack Object	Gestapelten Objet
+	Stack Object (Three)	Gestapelten Objet (dräi)
+	Stacked	Gestapelt
+	Stacked Bar	Gestapelt Balken
+	Stacked Column	Gestapelt Säulen
+	Stacked Fraction	Gestapelte Bréch
+	Stacked, no bar	Gestapelt, ouni Strich
+	Standard	Standard
+	Standard and Contextual	Standard a kontextuell
+	Standard Colors	Standardfaarwen
+	Standard Only	Nëmme Standard
+	Star	Stär
+	Start at:	Ufänke bei:
+	Start Enforcing Protection	Schutz aktivéieren
+	Start Mail Merge	Seriebréif starten
+	Start Mail\nMerge	Seriebréif\nstarten
+	State	Bundesstaat
+	Statement   5.50" × 8.50"	Statement   5.50" × 8.50"
+	Statistics	Statistiken
+	Status Bar	Statusleescht
+	Statutes	Gesetzer
+	Stop	Stoppen
+	Stop Protection	Schutz ophiewen
+	Stop Reading	Liesen stoppen
+	Stopped	Gestoppt
+	Store	Store
+	Straight Arrow Connector	Riicht Feilverbindung
+	Straight Connector	Riichte Verbinder
+	Strikethrough	Duerchgestrach
+	Stroke {n} of {total}	Strich {n} vun {total}
+	Strong	Staark
+	Structure Actions	Strukturaktiounen
+	Structures	Strukturen
+	Studio	Studio
+	Studio cover	Studio-Deckblat
+	Studio handbook (sample)	Studio-Handbuch (Beispill)
+	Style	Stil
+	Style based on:	Stil baséiert op:
+	Style Inspector	Stilinspekter
+	Style Set	Stilsaz
+	Style:	Stil:
+	Style: APA	Stil: APA
+	Style: {style}	Stil: {style}
+	Styles	Stiler
+	Styles Pane	Stilpanneau
+	Styles:	Stiler:
+	Subentry:	Ënneragab:
+	Subject	Betreff
+	Subscript	Déifgestallt
+	Subscript-Superscript	Déif- an héichgestallt
+	Subscripts and Superscripts	Ënner- an Iwwerschrëften
+	Subset:	Ënnerbegrëff:
+	Substituted font	Ersate Schrëft
+	Subtitle	Ënnertitel
+	Subtle Emphasis	Dezent Betounung
+	Subtle Reference	Dezent Referenz
+	Sum	Summ
+	Sum of cosines	Summ vu Kosinussen
+	Sum or difference of sines	Summ oder Differenz vu Sinussen
+	Summation	Summatioun
+	Summation from 0 to n	Summatioun vun 0 bis n
+	Summation over binomials	Summatioun iwwer Binomialkoeffizienten
+	Summation with Limits	Summatioun mat Grenzen
+	Summation with Lower Limit	Summatioun mat ënneschter Grenz
+	Summation with Subscript Limit	Summatioun mat Ënnerschrëftgrenz
+	Summation with Subscript-Superscript Limits	Summatioun mat Ënner- an Iwwerschrëftgrenzen
+	Summations	Summatiounen
+	Superscript	Héichgestallt
+	Suppress line numbers	Zeilennummeren ënnerdrécken
+	Surface Integral	Uewerflächenintegral
+	Surface Integral with Limits	Uewerflächenintegral mat Grenzen
+	Surface Integral with Stacked Limits	Uewerflächenintegral mat gestapelte Grenzen
+	Swap footnotes and endnotes	Foussnoten an Endnoten tauschen
+	Swedish	Schwedesch
+	Switch Modes	Modus wiesselen
+	Switch Windows	Fënster wiesselen
+	Switch\nModes	Modus\nwiesselen
+	Symbol	Symbol
+	Symbol Font	Symbolschrëft
+	Symbols	Symboler
+	Synchronous Scrolling	Synchront Scrollen
+	Synonyms	Synonymer
+	System	System
+	Tab	Tab
+	Tab Character	Tabulatiounszeechen
+	Tab character	Tabulatiounszeechen
+	Tab characters	Tabulatiounszeechen
+	Tab leader:	Fëllzeeche vum Tabulator:
+	Tab stop position:	Positioun vum Tabulatiounsstopp:
+	Tab stops to be cleared:	Tabulatiounsstoppen, déi geläscht ginn:
+	Table	Tabell
+	Table AutoFormat	Tabellen-AutoFormat
+	Table AutoFormat…	Tabellen-AutoFormat…
+	Table Column Width	Kolonnebreet vun der Tabell
+	Table Design	Tabellendesign
+	Table direction:	Richtung vun der Tabell:
+	Table entry fields	Tabellenagabfelder
+	Table Grid	Tabellegitter
+	Table identifier:	Tabellebezeechner:
+	Table Layout	Tabellelayout
+	Table of Authorities	Rechtsquellenverzeechnes
+	Table of Contents	Inhaltsverzeechnes
+	Table of Contents Options	Optioune fir den Inhaltsverzeechnes
+	Table of Contents Styles	Stiler fir den Inhaltsverzeechnes
+	Table of Figures	Abbildungsverzeechnes
+	Table of Figures Options	Optioune fir d'Abbildungsverzeechnes
+	Table of\nContents	Inhalts-\nverzeechnes
+	Table Positioning	Tabellepositionéierung
+	Table Properties	Tabelleneegeschaften
+	Table Row Height	Reiehéicht vun der Tabell
+	Table style	Tabellestil
+	Table Style Options	Optioune fir den Tabellestil
+	Table Styles	Tabellestiler
+	Table styles:	Tabellestiler:
+	Tables	Tabellen
+	Tabloid   11.00" × 17.00"	Tabloid   11.00" × 17.00"
+	Tabs	Tabulatiounen
+	Tabs…	Tabulatiounen…
+	Tabular List	Tabellaresch Lëscht
+	Tag	Tag
+	Tangent formula	Tangensformel
+	Tangent Function	Tangensfunktioun
+	TC entry fields	TC-Agabfelder
+	Technology	Technologie
+	Templates	Schablounen
+	Templates and Add-ins	Schablounen an Add-ins
+	Text	Text
+	Text Box	Textkëscht
+	Text boxes	Textkëschten
+	Text Direction	Textrichtung
+	Text Effects	Texteffekter
+	Text Effects and Typography	Texteffekter an Typographie
+	Text Fill	Textfëllung
+	Text from File	Text aus Fichier
+	Text Highlight Color	Faarf fir d'Textmarkéierung
+	Text indent at:	Textaréckung bei:
+	Text isn't squeezed to fit its cell yet.	Den Text gëtt nach net zesummegedréckt, fir a seng Zell ze passen.
+	Text Outline	Textkontur
+	Text over Colon Equal	Text iwwer Doppelpunkt-Gläichzeechen
+	Text over Equal	Text iwwer Gläichzeechen
+	Text Pane	Textpanneau
+	Text size	Textgréisst
+	Text snaps to characters	Text riicht sech no Zeechen
+	Text to display:	Text zum Uweisen:
+	Text Wrapping	Textëmbroch
+	Text wrapping:	Textëmbroch:
+	Text:	Text:
+	Text\nBox	Text-\nkëscht
+	Text\nDirection	Text-\nrichtung
+	Thai	Thailännesch
+	Thai Distributed	Thailännesch verdeelt
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Dat Format behält net alles, dofir ass d'Dokument nach op. Späichert et als Word-Dokument (.docx), fir weiderzemaachen.
+	That isn't the web address or embed code of an online video.	Dat ass weder d'Webadress nach den Abettungscode vun engem Online-Video.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Dat Passwuert ass net richteg. Kontrolléiert et (bei Passwierder zielt d'Grouss- a Klengschreiwung) a probéiert nach eng Kéier.
+	The clipboard is empty.	D'Tëschenoflag ass eidel.
+	The date it is today	Den Datum vun haut
+	The document contains no tracked changes.	D'Dokument enthält keng verfollegt Ännerungen.
+	The document has no bookmarks yet.	D'Dokument huet nach keng Lieszeechen.
+	The document is read only, except for regions marked editable.	D'Dokument kann nëmme gelies ginn, ausser a Beräicher, déi als beaarbechtbar markéiert sinn.
+	The document will be saved with a password. Save it to protect it.	D'Dokument gëtt mat engem Passwuert gespäichert. Späichert et, fir et ze schützen.
+	The first word of a sentence starts with a capital.	Dat éischt Wuert vun engem Saz fänkt mat engem Groussbuschtaf un.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	de gratis Dageskontingent ass opgebraucht (probéiert muer nach eng Kéier, oder gitt eng E-Mail-Adress un)
+	the LibreTranslate server	de LibreTranslate-Server
+	The Mail Merge Helper sets up a merge in three steps.	De Seriebréif-Assistent riicht e Seriebréif an dräi Schrëtt an.
+	The new style takes the formatting of the current paragraph.	Den neie Stil iwwerhëlt d'Formatéierung vum aktuelle Paragraf.
+	The password is optional; without it anyone can stop the protection.	D'Passwuert ass fakultativ; ouni et kann jiddereen de Schutz ophiewen.
+	The password is removed. Save the document to keep the change.	D'Passwuert ass ewechgeholl. Späichert d'Dokument, fir d'Ännerung ze behalen.
+	The passwords don't match.	D'Passwierder stëmmen net iwwerteneen.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Den Drécker, den duebelsäitegen Drock an d'Säite pro Blat ginn an deem Dialog ausgewielt.
+	The recipient-list field that fills each part of an address block and greeting line.	D'Feld aus der Empfängerlëscht, dat all Deel vun engem Adressblock an enger Begréissungszeil ausfëllt.
+	The same word twice in a row.	Dat selwecht Wuert zweemol hannerenee.
+	The spelling and grammar check is complete.	D'Kontroll vu Rechtschreiwung a Grammatik ass ofgeschloss.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	De Fichiersdialog vum System ass net disponibel, dofir weist Doc4Me säin eegenen. Fir de Systemdialog ze kréien, installéiert e Fichiersauswiel-Portal (wéi xdg-desktop-portal-gtk) oder zenity.
+	The text is sent to {service} to be translated.	Den Text gëtt fir d'Iwwersetzung un {service} geschéckt.
+	The time right now	D'Zäit elo grad
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	De Video gëtt am Dokument als Bild ugewisen. Duebelklickt drop, fir en an Ärem Browser ze kucken.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Dat ganzt Dokument gëtt an en neit Dokument iwwersat, dat dëst hei ersetzt. Späichert fir d'éischt Är Aarbecht.
+	Theme Colors	Themefaarwen
+	Theme Fonts	Themeschrëften
+	Theme List	Themelëscht
+	Themes	Themen
+	Then by	Duerno no
+	Then insert:	Dann asetzen:
+	There's no text to translate.	Et gëtt keen Text fir z'iwwersetzen.
+	Thesaurus	Synonymwierderbuch
+	These marks show even when Show/Hide ¶ is off.	Dës Zeeche ginn och ugewisen, wann ¶ weisen/verstoppen aus ass.
+	These merge fields aren't in the recipient list:	Dës Seriebréiffelder sinn net an der Empfängerlëscht:
+	These settings will be used for new documents.	Dës Astellunge gi fir nei Dokumenter benotzt.
+	Thick	Déck
+	Thickness	Déckt
+	This Device…	Dësen Apparat…
+	This document	Dëst Dokument
+	This field has no options.	Dëst Feld huet keng Optiounen.
+	This folder can't be read: {error}	Dësen Dossier kann net gelies ginn: {error}
+	This font has no characters to show.	Dës Schrëft huet keng Zeechen, déi ugewise kënne ginn.
+	This page	Dës Säit
+	This password type isn't supported.	Dësen Typ vu Passwuert gëtt net ënnerstëtzt.
+	This point forward	Vun hei un
+	This section	Dës Sektioun
+	Three	Dräi
+	Through	Duerchgoend
+	Tight	Enk
+	Tilde	Tilde
+	Tips ({n})	Tipps ({n})
+	Title	Titel
+	Title from the document properties	Titel aus den Dokumenteegeschaften
+	Title:	Titel:
+	To	Bis
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Fir Word-Dokumenter standardméisseg mat Doc4Me opzemaachen: wielt eent am Finder aus, wielt Fichier › Informatioune kréien, wielt Doc4Me ënner Opmaache mat a klickt dann op All änneren.
+	To:	Un:
+	TOA Heading	Iwwerschrëft vum Rechtsquellenverzeechnes
+	TOC Heading	Iwwerschrëft vum Inhaltsverzeechnes
+	TOC {n}	Inhaltsverzeechnes {n}
+	Today	Haut
+	tOGGLE cASE	gROUSS-/kLENGSCHREIWUNG ËMDRÉINEN
+	Toggle Check Box	Kontrollkëscht ëmschalten
+	Toggle Field Codes	Feldcoden ëmschalten
+	Toggle Unicode Character	Unicode-Zeechen ëmschalten
+	Tools	Werkzeuger
+	Top	Uewen
+	Top and Bottom	Uewen an ënnen
+	Top Border	Ieweschte Rand
+	Top Margin	Iewescht Marge
+	Top of Next Page	Uewen op der nächster Säit
+	Top of Page	Uewen op der Säit
+	Top of Previous Page	Uewen op der viregter Säit
+	Top of the Window	Uewen an der Fënster
+	Top:	Uewen:
+	Total	Total
+	Total Row	Totalrei
+	Track Changes	Ännerunge verfollegen
+	Track Changes Options	Optioune fir d'Verfollege vun Ännerungen
+	Track changes while editing	Ännerunge beim Beaarbechte verfollegen
+	Track Changes: On	Ännerunge verfollegen: Un
+	Track formatting	Formatéierung verfollegen
+	Track\nChanges	Ännerungen\nverfollegen
+	Track\nChanges ✓	Ännerungen\nverfollegen ✓
+	Tracked changes	Verfollegt Ännerungen
+	Tracking	Laafweit
+	Trademark	Marque
+	Trademark Sign	Marquenzeechen
+	Transform	Transforméieren
+	Translate	Iwwersetzen
+	Translate Document	Dokument iwwersetzen
+	Translating {done} of {total}	{done} vun {total} gëtt iwwersat
+	Translation service	Iwwersetzungsservice
+	Translator	Iwwersetzer
+	Transparency	Transparenz
+	Transparency:	Transparenz:
+	Transport	Transport
+	Treatises	Ofhandlungen
+	Triangle	Dräieck
+	Triangle Down	Dräieck no ënnen
+	Triangle Up	Dräieck no uewen
+	Trigonometric Functions	Trigonometresch Funktiounen
+	Triple	Dräifach
+	Triple Dot	Dräifache Punkt
+	Triple Integral	Dräifachintegral
+	Triple Integral with Limits	Dräifachintegral mat Grenzen
+	Triple Integral with Stacked Limits	Dräifachintegral mat gestapelte Grenzen
+	Trust Center	Vertrauenscenter
+	Tue	Dën.
+	Turabian	Turabian
+	Turkish	Tierkesch
+	Two	Zwee
+	Type	Typ
+	Type a command, e.g. "insert table"	Gitt e Befeel an, z. B. "Tabell asetzen"
+	Type a New List	Eng nei Lëscht tippen
+	Type a New List…	Eng nei Lëscht tippen…
+	Type at least one recipient.	Gitt mindestens ee Empfänger an.
+	Type equations in LaTeX	Equatiounen a LaTeX tippen
+	Type equations in the linear format (UnicodeMath)	Equatiounen am lineare Format tippen (UnicodeMath)
+	Type in Equation	An der Equatioun tippen
+	Type normal (non-math) text in the equation	Normalen (net-mathemateschen) Text an der Equatioun tippen
+	Type Text	Text tippen
+	Type the categories down the side and a column of values per series.	Tippt d'Kategorien op der Säit erof an eng Kolonn mat Wäerter pro Serie.
+	Type the field's name and its switches, for example PAGE \\* roman.	Tippt den Numm vum Feld a seng Schalter, zum Beispill PAGE \\* roman.
+	Type the password to stop the protection.	Gitt d'Passwuert an, fir de Schutz opzehiewen.
+	Type the recipients, or load them from a file.	Gitt d'Empfänger an, oder lued se aus engem Fichier.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Gitt den Tag-Numm vun der Quell an. Dir kënnt méi spéit méi Informatiounen derbäisetzen, andeems Dir d'Quell beaarbecht.
+	Type:	Typ:
+	Typing	Tippen
+	Typing replaces selected text	Tippen ersetzt den ausgewielten Text
+	Ukrainian	Ukrainesch
+	Unchecked symbol	Net ugekräizt Symbol
+	Underbar	Ënnerstrich
+	Underbrace	Geschweiften Klamer ënnen
+	Underline	Ënnerstrach
+	Underline color	Faarf vum Ënnerstrach
+	Underline Words Only	Nëmme Wierder ënnerstrach
+	Undo	Réckgängeg maachen
+	Undo Stroke	Strich réckgängeg maachen
+	Undo {action}	{action} réckgängeg maachen
+	Unformatted Text	Onformatéierten Text
+	Ungroup	Grupp ophiewen
+	Union	Vereenegung
+	Union of intersections	Vereenegung vu Schnëttmengen
+	Union with Limits	Vereenegung mat Grenzen
+	Union with Lower Limit	Vereenegung mat ënneschter Grenz
+	Union with Plus	Vereenegung mat Plus
+	Union with Subscript-Superscript Limits	Vereenegung mat Ënner- an Iwwerschrëftgrenzen
+	Unions and Intersections	Vereenegungen a Schnëttmengen
+	Unlink Fields	Feldverknëppung ophiewen
+	Unlink\nCitations	Zitater\nentlinken
+	Unlock Fields	Felder entspären
+	Up	Erop
+	Up Diagonal Dots	Diagonal Punkten no uewen
+	Up one level	Een Niveau erop
+	Update Field	Feld aktualiséieren
+	Update fields before printing	Felder virum Drécken aktualiséieren
+	Update Index	Index aktualiséieren
+	Update Style to Match Selection	Stil un d'Auswiel upassen
+	Update Styles from Template	Stiler vun der Schabloun aktualiséieren
+	Update Table	Tabell aktualiséieren
+	Update Table of Figures	Abbildungsverzeechnes aktualiséieren
+	Update to Match	Upassen
+	Update to Match Selection	Un d'Auswiel upassen
+	UPPERCASE	GROUSSBUSCHTAWEN
+	URGENT	DRÉNGEND
+	URL	URL
+	Use "a" before a consonant sound	"a" virun engem Konsonantlaut benotzen
+	Use "an" before a vowel sound	"an" virun engem Vokallaut benotzen
+	Use an Existing List…	Eng bestoend Lëscht benotzen…
+	Use passim (five or more pages)	Passim benotzen (fënnef Säiten oder méi)
+	Use system setting	Systemastellung benotzen
+	Use the Insert key to switch overtype on and off	D'Asetzen-Tast benotzen, fir den Iwwerschreiwmodus un- an auszeschalten
+	Use wildcards	Platzhalterzeeche benotzen
+	User Name	Benotzernumm
+	User name:	Benotzernumm:
+	Username	Benotzernumm
+	Value	Wäert
+	Vector A	Vektor A
+	Vector AB	Vektor AB
+	Version	Versioun
+	Version History	Versiounsverlaf
+	Version {version} ({build})	Versioun {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Versioune ginn behalen, soulaang d'Dokument op ass (en .docx-Fichier huet keng Versiounen).
+	Vertical	Vertikal
+	Vertical Alignment	Vertikal Ausriichtung
+	Vertical alignment:	Vertikal Ausriichtung:
+	Vertical Bars	Vertikal Stréchen
+	Vertical Dots	Vertikal Punkten
+	Vertical spacing:	Vertikalen Ofstand:
+	Vietnamese	Vietnamesesch
+	View	Usiicht
+	View Alt Text…	Alternativen Text weisen…
+	View Gridlines	Gitterlinne weisen
+	View Side by Side	Niewentenee weisen
+	View State	Usiichtsstatus
+	Views	Usiichten
+	Visual effects	Visuell Effekter
+	Voice	Stëmm
+	Volume	Band
+	Volume Integral	Volumenintegral
+	Volume Integral with Limits	Volumenintegral mat Grenzen
+	Volume Integral with Stacked Limits	Volumenintegral mat gestapelte Grenzen
+	W:	B:
+	Waiting for Zotero…	Waarden op Zotero…
+	Warm Gradient with Outline	Waarme Verlaf mat Kontur
+	Warnings ({n})	Warnungen ({n})
+	Watermark	Waasserzeechen
+	Wave	Well
+	Weather	Wieder
+	web access isn't available here	Webzougang ass hei net disponibel
+	Web Layout	Web-Layout
+	Web page (*.html)	Websäit (*.html)
+	Web\nLayout	Web-\nLayout
+	Website	Websäit
+	Wed	Mët.
+	Weight	Déckt
+	West	Westen
+	When merging records	Beim Zesummeféiere vun Datesätz
+	When this document was first created	Wéini dëst Dokument fir d'éischt erstallt gouf
+	When this document was most recently printed	Wéini dëst Dokument fir d'lescht gedréckt gouf
+	When this document was most recently saved	Wéini dëst Dokument fir d'lescht gespäichert gouf
+	White Space	Leerraum
+	White space	Leerraum
+	Who the document properties name as author	Wien an den Dokumenteegeschaften als Auteur genannt ass
+	Whole document	Ganzt Dokument
+	Whole page	Ganz Säit
+	Whole Table	Ganz Tabell
+	Whole words	Ganz Wierder
+	Wide	Breet
+	Widow/Orphan Control	Kontroll vun Ufanks- an Ofschlosszeilen
+	Widow/Orphan control	Kontroll vun Ufanks- an Ofschlosszeilen
+	Width and spacing	Breet an Ofstand
+	Width:	Breet:
+	Wildcards (regex)	Platzhalterzeechen (Regex)
+	Window	Fënster
+	With:	Mat:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 a méi spéit
+	Word 97–2003	Word 97–2003
+	Word Count	Wierderzuel
+	Word document	Word-Dokument
+	Word document (*.docx)	Word-Dokument (*.docx)
+	Word forms	Word-Formulairen
+	Word Left	Wuert lénks
+	Word level	Wuertniveau
+	Word Right	Wuert riets
+	Word XML Document (*.xml)	Word-XML-Dokument (*.xml)
+	WordArt	WordArt
+	WordArt Styles	WordArt-Stiler
+	Words	Wierder
+	Words only	Nëmme Wierder
+	Wrap Text	Textëmbroch
+	Wrap text	Textëmbroch
+	Wrap Text Sides	Säite vum Textëmbroch
+	Wrap\nText	Text-\nëmbroch
+	Write & Insert Fields	Felder schreiwen & asetzen
+	Write a reply	Eng Äntwert schreiwen
+	Write math here with the mouse or a pen.	Schreift hei Mathematik mat der Maus oder engem Stëft.
+	Writing Style: Grammar	Schreifstil: Grammatik
+	x bar	x Strich
+	Year	Joer
+	Yes	Jo
+	Yields	Ergëtt
+	Your changes will be lost if you don't save them.	Är Ännerunge ginn verluer, wann Dir se net späichert.
+	Your system doesn't report an animation setting, so animation effects stay on.	Äre System mellt keng Animatiounsastellung, dofir bleiwen d'Animatiounseffekter un.
+	Your system has animation effects turned off.	Äre System huet d'Animatiounseffekter ausgeschalt.
+	Your system has animation effects turned on.	Äre System huet d'Animatiounseffekter ugeschalt.
+	Zoom	Zoom
+	Zoom In	Eranzoomen
+	Zoom Out	Erauszoomen
+	Zoom to Page	Op d'Säit zoomen
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: ofgebrach
+	Zotero: done	Zotero: fäerdeg
+	{cols}×{rows} Table	{cols}×{rows}-Tabell
+	{contributors} contributors · {commits} commits	{contributors} Mataarbechter · {commits} Commits
+	{count} items highlighted	{count} Elementer markéiert
+	{count} of {total} pages will print	{count} vun {total} Säite ginn gedréckt
+	{count} paragraphs were changed.	{count} Paragrafe goufe geännert.
+	{count} records; fields: {fields}	{count} Datesätz; Felder: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} ass net op dësem Computer installéiert, dofir gëtt dëst Dokument mat {with} ugewisen. Zeilen a Säite kënnen anescht ëmbriechen wéi mat der Originalschrëft.
+	{group} settings	Astellunge fir {group}
+	{key}+Click to follow link	{key}+Klick, fir de Link ze verfollegen
+	{language} is now the document's default language.	{language} ass elo d'Standardsprooch vum Dokument.
+	{name} (Press ENTER to Insert)	{name} (Dréckt ENTER fir anzesetzen)
+	{name} already exists. Choose Save again to replace it.	{name} gëtt et schonn. Wielt nach eng Kéier Späicheren, fir et z'ersetzen.
+	{name} can't be a folder's name.	{name} ka keen Dossiersnumm sinn.
+	{name} is protected with a password.	{name} ass mat engem Passwuert geschützt.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} gouf derbäigesat. Seng Makroe sinn ënner Meng Add-ins an Usiicht › Makroen.
+	{name} wasn't found.	{name} gouf net fonnt.
+	{n} entries marked.	{n} Agabe markéiert.
+	{n} lines	{n} Zeilen
+	{n} of {of} recipients	{n} vun {of} Empfänger
+	{n} pt	{n} pt
+	{n} records	{n} Datesätz
+	{n} revisions	{n} Revisiounen
+	{selected} of {words} words	{selected} vun {words} Wierder
+	{size} pt	{size} pt
+	{words} words	{words} Wierder
+	{w} × {h} in	{w} × {h} in
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	„{text}“ ({row}, {series}) ass keng Zuel.
+	← Find	← Sichen
+	✓ None	✓ Keen
+	➕ New comment	➕ Neie Kommentar
+	📂  Browse…	📂  Duerchsichen…
+	Add Help Text…	Hëllefstext derbäisetzen…
+	AutoText entry:	AutoText-Agab:
+	Calculate on exit	Beim Verloossen berechnen
+	Calculation	Berechnung
+	Check Box Form Field	Kontrollkëschtformulairfeld
+	Check Box Form Field Options	Optioune fir d'Kontrollkëschtformulairfeld
+	Check box	Kontrollkëscht
+	Check box enabled	Kontrollkëscht aktivéiert
+	Check box size:	Gréisst vun der Kontrollkëscht:
+	Checked	Ugekräizt
+	Current date	Aktuellen Datum
+	Current time	Aktuell Zäit
+	Default value:	Standardwäert:
+	Drop-Down Form Field	Dropdown-Formulairfeld
+	Drop-Down Form Field Options	Optioune fir d'Dropdown-Formulairfeld
+	Drop-down	Dropdown
+	Drop-down enabled	Dropdown aktivéiert
+	Drop-down item:	Dropdown-Element:
+	Fill In Form Field	Textformulairfeld zum Ausfëllen
+	Fill-in enabled	Ausfëllen aktivéiert
+	Form Field	Formulairfeld
+	Form Field Help Text	Hëllefstext vum Formulairfeld
+	Form Field Options	Optioune fir d'Formulairfeld
+	Form Field Shading	Schattéierung vu Formulairfelder
+	Form Field at Selection	Formulairfeld bei der Auswiel
+	Help Key (F1)	Hëllefstast (F1)
+	Insert Form Field	Formulairfeld asetzen
+	Items in drop-down list:	Elementer an der Dropdown-Lëscht:
+	Legacy Tools	Al Werkzeuger
+	Maximum length:	Maximal Längt:
+	Next Form Field	Nächst Formulairfeld
+	Not checked	Net ugekräizt
+	Put the caret on a form field first.	Setzt de Cursor fir d'éischt op e Formulairfeld.
+	Regular text	Normalen Text
+	Reset Form Fields	Formulairfelder zrécksetzen
+	Text Form Field	Textformulairfeld
+	Text Form Field Options	Optioune fir d'Textformulairfeld
+	Type your own:	Gitt Ären eegenen an:
+	Unlimited	Onbegrenzt
+	Protected sections:	Geschützt Sektiounen:
+	Section Protection	Sektiounsschutz
+	Section {n}	Sektioun {n}
+	Select sections…	Sektiounen auswielen…
+	AutoSummarize	AutoResumé
+	Create a new document and put the summary there	En neit Dokument erstellen an de Resumé do drasetzen
+	Highlight key points	Haaptpunkte markéieren
+	Insert an executive summary or abstract at the top of the document	E Resumé oder Abstract uewen am Dokument asetzen
+	Length of summary	Längt vum Resumé
+	Percent of original:	Prozent vum Original:
+	Summary: {words} of {of} words	Resumé: {words} vun {of} Wierder
+	Type of summary	Typ vu Resumé
+	Update document statistics	Dokumentstatistiken aktualiséieren
+	{n} sentences	{n} Sätz
+	{n} words or less	{n} Wierder oder manner
+	At:	Bei:
+	Distance from text:	Ofstand vum Text:
+	Format Frame	Rummen formatéieren
+	Format Frame…	Rummen formatéieren…
+	Frame	Rummen
+	Frame…	Rummen…
+	Insert Frame	Rummen asetzen
+	Lock anchor	Anker spären
+	Remove Frame	Rummen ewechhuelen
+	Text wrapping	Textëmbroch
+	Chinese Conversion	Chinesesch Konversioun
+	Chinese Conversion…	Chinesesch Konversioun…
+	Converted {n} characters	{n} Zeechen konvertéiert
+	Simplified Chinese to Traditional Chinese	Vereinfacht Chinesesch an traditionellt Chinesesch
+	Simplified to Traditional	Vereinfacht an traditionell
+	Traditional Chinese to Simplified Chinese	Traditionellt Chinesesch a vereinfacht Chinesesch
+	Traditional to Simplified	Traditionell a vereinfacht
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Zeechevarianten aus Taiwan, Hong Kong SAR a Macao SAR benotzen
+	Asian Layout	Asiatescht Layout
+	Fit Text	Text upassen
+	Fit Text…	Text upassen…
+	Two Lines in One	Zwou Zeilen an enger
+	Two Lines in One…	Zwou Zeilen an enger…
+	New text width (pt):	Nei Textbreet (pt):
+	Enclose in brackets	A Klameren asetzen
+	Bracket pair:	Klamerpuer:
+	Typography	Typographie
+	Character spacing control	Kontroll vum Zeechenofstand
+	Don't compress	Net kompriméieren
+	Compress punctuation only	Nëmmen d'Punktuatioun kompriméieren
+	Compress punctuation and Japanese kana	Punktuatioun a japanesch Kana kompriméieren
+	First and last characters	Éischt a lescht Zeechen
+	Strict	Strikt
+	Cannot start a line:	Kann eng Zeil net ufänken:
+	Cannot end a line:	Kann eng Zeil net ofschléissen:
+	Japanese Find Options	Japanesch Sichoptiounen
+	Sounds like (Japanese)	Kléngt wéi (japanesch)
+	Match full/half width	Voll/hallef Breet beuechten
+	Match hiragana/katakana	Hiragana/Katakana beuechten
+	Match small kana	Kleng Kana beuechten
+	Match prolonged sound marks and dashes	Längenzeechen a Stricher beuechten
+	Japanese Consistency Checker	Japanesch Konsistenzkontroll
+	Japanese Consistency Checker…	Japanesch Konsistenzkontroll…
+	No inconsistent spellings were found.	Et goufe keng inkonsistent Schreiwunge fonnt.
+	Pick the spelling to keep in each group.	Wielt an all Grupp d'Schreiwung, déi behale soll ginn.
+	Bidirectional text	Bidirektionalen Text
+	Bidirectional Text	Bidirektionalen Text
+	Default direction:	Standardrichtung:
+	Cursor movement:	Cursorbeweegung:
+	Logical	Logesch
+	Visual	Visuell
+	Manage Fields	Felder verwalten
+	File locations	Fichiersplazen
+	File Locations	Fichiersplazen
+	Documents:	Dokumenter:
+	Pictures:	Biller:
+	The system's choice	D'Wiel vum System
+	Show Repairs	Reparaturen weisen
+	No repairs were needed.	Et waren keng Reparaturen néideg.
+	These problems were found and repaired when the document was opened:	Dës Problemer goufe beim Opmaache vum Dokument fonnt a repariert:
+	An unreadable entry in the file was skipped: {what}	Eng onliesbar Agab am Fichier gouf iwwersprongen: {what}
+	An unreadable part was left out: {what}	En onliesbaren Deel gouf ausgelooss: {what}
+	Unreadable relationships were ignored: {what}	Onliesbar Relatioune goufen ignoréiert: {what}
+	A missing part of an embedded object was left out: {what}	E feelenden Deel vun engem agebetten Objet gouf ausgelooss: {what}
+	Copy File	Fichier kopéieren
+	Find Files	Fichiere sichen
+	Letter Wizard	Bréif-Assistent
+	Recipient's name:	Numm vum Empfänger:
+	Salutation:	Ureed:
+	Subject:	Betreff:
+	Complimentary closing:	Schlussformel:
+	Sender's name:	Numm vum Ofsender:
+	Job title:	Beruffstitel:
+	Company:	Firma:
+	Enclosures:	Bäilagen:
+	Cc:	Cc:
+	Edit Links to Files	Linken op Fichieren beaarbechten
+	Source file	Quellfichier
+	Locked	Gespaart
+	Change Source	Quell änneren
+	This document has no links to files.	Dëst Dokument huet keng Linken op Fichieren.
+	Web options	Weboptiounen
+	Web Options	Weboptiounen
+	Allow PNG as a graphics format	PNG als Grafikformat erlaben
+	Rely on CSS for font formatting	Fir d'Schrëftformatéierung op CSS setzen
+	Rely on VML for displaying graphics in browsers	Fir d'Uweise vu Grafiken a Browseren op VML setzen
+	Organize supporting files in a folder	Ënnerstëtzend Fichieren an engem Dossier organiséieren
+	Use long file names whenever possible	Wa méiglech laang Fichiersnimm benotzen
+	Screen size:	Schiermgréisst:
+	Pixels per inch:	Pixel pro Zoll:
+	Hangul Hanja Conversion	Hangul-Hanja-Konversioun
+	Hangul Hanja Conversion…	Hangul-Hanja-Konversioun…
+	Hangul to Hanja	Hangul an Hanja
+	Hanja to Hangul	Hanja an Hangul
+	Put the caret in Korean text to choose its Hanja.	Setzt de Cursor a koreaneschen Text, fir säin Hanja auszewielen.
+	The selection, or the whole document when nothing is selected.	D'Auswiel, oder dat ganzt Dokument, wann näischt ausgewielt ass.

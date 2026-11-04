@@ -2923,3 +2923,81 @@ spacing	Normal	Normál
 	Traditional Chinese to Simplified Chinese	Hagyományos kínai átalakítása egyszerűsített kínaira
 	Traditional to Simplified	Hagyományosból egyszerűsítettbe
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	A tajvani, a hongkongi és a makaói írásjegyváltozatok használata
+	Asian Layout	Ázsiai elrendezés
+	Fit Text	Szöveg igazítása
+	Fit Text…	Szöveg igazítása…
+	Two Lines in One	Két sor egyben
+	Two Lines in One…	Két sor egyben…
+	New text width (pt):	Új szövegszélesség (pt):
+	Enclose in brackets	Zárójelbe foglalás
+	Bracket pair:	Zárójelpár:
+	Typography	Tipográfia
+	Character spacing control	Karakterköz szabályozása
+	Don't compress	Nincs tömörítés
+	Compress punctuation only	Csak az írásjelek tömörítése
+	Compress punctuation and Japanese kana	Írásjelek és japán kana tömörítése
+	First and last characters	Első és utolsó karakterek
+	Strict	Szigorú
+	Cannot start a line:	Nem kezdhet sort:
+	Cannot end a line:	Nem zárhat sort:
+	Japanese Find Options	Japán keresés beállításai
+	Sounds like (Japanese)	Hasonló hangzású (japán)
+	Match full/half width	Teljes/fél szélesség egyezése
+	Match hiragana/katakana	Hiragana/katakana egyezése
+	Match small kana	Kis kana egyezése
+	Match prolonged sound marks and dashes	Hosszabbító jelek és kötőjelek egyezése
+	Japanese Consistency Checker	Japán következetesség-ellenőrző
+	Japanese Consistency Checker…	Japán következetesség-ellenőrző…
+	No inconsistent spellings were found.	Nem található következetlen írásmód.
+	Pick the spelling to keep in each group.	Válassza ki minden csoportban a megtartandó írásmódot.
+	Bidirectional text	Kétirányú szöveg
+	Bidirectional Text	Kétirányú szöveg
+	Default direction:	Alapértelmezett irány:
+	Cursor movement:	Kurzormozgás:
+	Logical	Logikai
+	Visual	Vizuális
+	Manage Fields	Mezők kezelése
+	File locations	Fájlok helye
+	File Locations	Fájlok helye
+	Documents:	Dokumentumok:
+	Pictures:	Képek:
+	The system's choice	A rendszer választása
+	Show Repairs	Javítások megjelenítése
+	No repairs were needed.	Nem volt szükség javításra.
+	These problems were found and repaired when the document was opened:	A dokumentum megnyitásakor a következő hibák találhatók és javíthatók voltak:
+	An unreadable entry in the file was skipped: {what}	A fájl egy olvashatatlan bejegyzése kimaradt: {what}
+	An unreadable part was left out: {what}	Egy olvashatatlan rész kimaradt: {what}
+	Unreadable relationships were ignored: {what}	Az olvashatatlan kapcsolatok figyelmen kívül maradtak: {what}
+	A missing part of an embedded object was left out: {what}	Egy beágyazott objektum hiányzó része kimaradt: {what}
+	Copy File	Fájl másolása
+	Find Files	Fájlok keresése
+	Letter Wizard	Levél varázsló
+	Recipient's name:	Címzett neve:
+	Salutation:	Megszólítás:
+	Subject:	Tárgy:
+	Complimentary closing:	Elköszönés:
+	Sender's name:	Feladó neve:
+	Job title:	Beosztás:
+	Company:	Cég:
+	Enclosures:	Mellékletek:
+	Cc:	Másolat:
+	Edit Links to Files	Fájlhivatkozások szerkesztése
+	Source file	Forrásfájl
+	Locked	Zárolt
+	Change Source	Forrás módosítása
+	This document has no links to files.	Ez a dokumentum nem tartalmaz fájlhivatkozást.
+	Web options	Webes beállítások
+	Web Options	Webes beállítások
+	Allow PNG as a graphics format	PNG grafikus formátum engedélyezése
+	Rely on CSS for font formatting	Betűformázás CSS segítségével
+	Rely on VML for displaying graphics in browsers	Grafikák megjelenítése böngészőkben VML segítségével
+	Organize supporting files in a folder	Kiegészítő fájlok rendezése mappába
+	Use long file names whenever possible	Hosszú fájlnevek használata, amikor lehetséges
+	Screen size:	Képernyőméret:
+	Pixels per inch:	Képpont/hüvelyk:
+	Hangul Hanja Conversion	Hangul/Hanja átalakítás
+	Hangul Hanja Conversion…	Hangul/Hanja átalakítás…
+	Hangul to Hanja	Hangulból Hanja
+	Hanja to Hangul	Hanjából Hangul
+	Put the caret in Korean text to choose its Hanja.	A Hanja kiválasztásához vigye a kurzort koreai szövegbe.
+	The selection, or the whole document when nothing is selected.	A kijelölés, vagy a teljes dokumentum, ha nincs kijelölés.

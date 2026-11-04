@@ -463,6 +463,12 @@ struct Builder<'a> {
     levels: Vec<u8>,
     /// Text drawn by clusters that stand for an object, by cluster index (see `ParaLayout::shown`).
     shown: Vec<(usize, String, Vec<std::ops::Range<usize>>)>,
+    /// Clusters that may end a line though their object's text has no break opportunity (the
+    /// words of a form field's text, see `shape_wrappable`).
+    wrap_after: Vec<usize>,
+    /// Clusters that never end a line: a bracket of combined text, and the combined text before
+    /// its closing bracket (see `shape_combined`).
+    keep_with_next: Vec<usize>,
 }
 
 /// What a piece of text is shaped as: one face, case, script formatting and direction.
@@ -884,6 +890,32 @@ impl<'a> Builder<'a> {
 
     /// One cluster for a whole object with its display text (fields, note references).
     fn shape_atomic(&mut self, text: &str, start: usize, end: usize, rc: &Arc<ResolvedChar>) {
+        self.shape_pieces(&[text], start, end, rc);
+    }
+
+    /// Like `shape_atomic`, but a field's result text wraps after each space as ordinary text does
+    /// (a blank field stays whole). Every word is a cluster of the object's `start..end`.
+    fn shape_wrappable(&mut self, text: &str, start: usize, end: usize, rc: &Arc<ResolvedChar>) {
+        let mut pieces: Vec<&str> = text.split_inclusive(' ').collect();
+        if pieces.len() < 2 || text.chars().all(char::is_whitespace) {
+            pieces = vec![text];
+        }
+        self.shape_pieces(&pieces, start, end, rc);
+    }
+
+    /// One cluster for each of `pieces` (the text of one object cut into words), the first
+    /// pieces being places where a line may end.
+    fn shape_pieces(&mut self, pieces: &[&str], start: usize, end: usize, rc: &Arc<ResolvedChar>) {
+        for (i, text) in pieces.iter().enumerate() {
+            let c0 = self.clusters.len();
+            self.shape_one(text, start, end, rc);
+            if i + 1 < pieces.len() && self.clusters.len() == c0 + 1 {
+                self.wrap_after.push(c0);
+            }
+        }
+    }
+
+    fn shape_one(&mut self, text: &str, start: usize, end: usize, rc: &Arc<ResolvedChar>) {
         let before = self.clusters.len();
         self.shape_with(text, start, rc, None, false);
         let added: Vec<Cluster> = self.clusters.drain(before..).collect();
@@ -928,6 +960,85 @@ impl<'a> Builder<'a> {
         let g1 = added.last().map(|c| c.g1).unwrap_or(g0);
         self.shown.push((self.clusters.len(), text.to_string(), ranges));
         self.clusters.push(Cluster { start, end, adv: x, kind: ClKind::Text, style, g0, g1, break_after: false, obj_h: 0.0, obj_d: 0.0, dot: false });
+    }
+
+    /// Two Lines in One (`w:eastAsianLayout/@w:combine`): `text` (document range `start..end`)
+    /// set as two lines of half size within one line, the first half of its characters above the
+    /// second, each centred in the width of the longer, between full-size brackets when the run
+    /// asks for them. All of it is one piece of the text: the line never breaks inside it.
+    fn shape_combined(&mut self, text: &str, start: usize, end: usize, rc: &Arc<ResolvedChar>) {
+        let n = text.chars().count();
+        let cut = text.char_indices().nth(n.div_ceil(2)).map_or(text.len(), |(i, _)| i);
+        let (top, bottom) = text.split_at(cut);
+        let mut plain = (**rc).clone();
+        plain.east_asian = None;
+        let size = plain.size;
+        let mut small = plain.clone();
+        small.size = (size * 0.5).max(1.0);
+        let small = Arc::new(small);
+        let brackets = rc.east_asian.and_then(|l| l.brackets.chars());
+        let full = Arc::new(plain);
+        if let Some((open, _)) = brackets {
+            let k = self.clusters.len();
+            self.shape_atomic(&open.to_string(), start, end, &full);
+            self.keep_with_next.extend(k..self.clusters.len());
+        }
+        let c0 = self.clusters.len();
+        // The second line on the baseline, lowered a little; the first raised a small line above it.
+        let (raise, lower) = (size * 0.47, size * 0.09);
+        let texts: Vec<&str> = [top, bottom].into_iter().filter(|t| !t.is_empty()).collect();
+        let k = match texts.as_slice() {
+            [one] => self.shape_overstruck(&[*one], start, end, &small, doc4me_doc::eq::OAlign::Center, 0.0, 0.0),
+            _ => {
+                let a = self.shape_overstruck(&[top], start, end, &small, doc4me_doc::eq::OAlign::Center, 0.0, raise);
+                let b = self.shape_overstruck(&[bottom], start, end, &small, doc4me_doc::eq::OAlign::Center, 0.0, -lower);
+                self.merge_stacked(a, b)
+            }
+        };
+        if let Some(k) = k
+            && let Some(c) = self.clusters.get_mut(k)
+        {
+            // The line grows to fit the raised line, as it does for ruby text.
+            c.obj_h = raise + size * 0.5 * 0.9;
+        }
+        if brackets.is_some() {
+            self.keep_with_next.extend(c0..self.clusters.len());
+        }
+        if let Some((_, close)) = brackets {
+            self.shape_atomic(&close.to_string(), start, end, &full);
+        }
+    }
+
+    /// Two clusters just made (`a` before `b`, the last two) as one, each centred in the wider:
+    /// returns its index.
+    fn merge_stacked(&mut self, a: Option<usize>, b: Option<usize>) -> Option<usize> {
+        let (Some(a), Some(b)) = (a, b) else { return a.or(b) };
+        if b != a + 1 || b + 1 != self.clusters.len() {
+            return Some(b);
+        }
+        let cb = self.clusters.pop()?;
+        let ca = self.clusters.get(a)?.clone();
+        let adv = ca.adv.max(cb.adv);
+        for (c, glyphs) in [(&ca, ca.g0..ca.g1), (&cb, cb.g0..cb.g1)] {
+            let dx = (adv - c.adv) / 2.0;
+            for g in self.glyphs.get_mut(glyphs.start as usize..glyphs.end as usize).into_iter().flatten() {
+                g.dx += dx;
+            }
+        }
+        // The shown text of `b` follows that of `a`, its ranges moved past `a`'s text.
+        if let Some(pos_b) = self.shown.iter().position(|(i, _, _)| *i == b) {
+            let (_, tb, rb) = self.shown.remove(pos_b);
+            if let Some((_, ta, ra)) = self.shown.iter_mut().find(|(i, _, _)| *i == a) {
+                let off = ta.len();
+                ra.extend(rb.into_iter().map(|r| r.start + off..r.end + off));
+                ta.push_str(&tb);
+            }
+        }
+        let c = self.clusters.get_mut(a)?;
+        c.adv = adv;
+        c.g1 = cb.g1.max(c.g1);
+        c.g0 = c.g0.min(cb.g0);
+        Some(a)
     }
 
     /// Shape `texts` on top of one another as one cluster for `start..end`: each aligned within
@@ -1018,6 +1129,7 @@ fn overstrike(
     b.clusters.truncate(c0);
     b.glyphs.truncate(g0);
     b.shown.truncate(s0);
+    b.wrap_after.retain(|&k| k < c0);
     // The shape's box (`bw` × `bh`, centred `cy` above the baseline) and the text's size.
     let cy = s * 0.34;
     let (bw, bh, size) = match style {
@@ -1159,8 +1271,17 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
     }
     let resolve = |c: &CharProps| -> Arc<ResolvedChar> { Arc::new(doc.styles.resolve_char_in(para_style, table_chr, c)) };
     let levels = bidi_levels(&p.text, rp.bidi);
-    let mut b =
-        Builder { env, styles: Vec::new(), style_index: Default::default(), glyphs: Vec::new(), clusters: Vec::new(), levels, shown: Vec::new() };
+    let mut b = Builder {
+        env,
+        styles: Vec::new(),
+        style_index: Default::default(),
+        glyphs: Vec::new(),
+        clusters: Vec::new(),
+        levels,
+        shown: Vec::new(),
+        wrap_after: Vec::new(),
+        keep_with_next: Vec::new(),
+    };
     let mark_rc = resolve(&p.mark);
     let mark_style = b.style(&mark_rc, None, false);
     let mut has_page_fields = false;
@@ -1329,12 +1450,12 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
                                             if env.form_shading && look.highlight.is_none() && look.shading.is_none() {
                                                 look.shading = Some(FIELD_SHADING);
                                             }
-                                            b.shape_atomic(&t, start, end, &Arc::new(look));
+                                            b.shape_wrappable(&t, start, end, &Arc::new(look));
                                         }
                                         None => {
                                             let (t, page_dep) = field_text(instr, result, env.fields);
                                             has_page_fields |= page_dep;
-                                            b.shape_atomic(&t, start, end, &rc);
+                                            b.shape_wrappable(&t, start, end, &rc);
                                         }
                                     },
                                 }
@@ -1402,8 +1523,17 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
             }
         }
         if let Some(s) = text.get(seg..) {
-            b.shape(s, range.start + seg, &rc, None);
+            // Two Lines in One: the run's text as two half-size lines within one line.
+            if rc.east_asian.is_some_and(|l| l.combine) && !s.is_empty() && !s.contains(OBJ) {
+                b.shape_combined(s, range.start + seg, range.end, &rc);
+            } else {
+                b.shape(s, range.start + seg, &rc, None);
+            }
         }
+    }
+    fit_text(&mut b);
+    if env.doc.settings.char_spacing.compresses() {
+        compress_punctuation(&mut b, &p.text);
     }
     if rp.snap_to_grid {
         snap_chars(&mut b, &p.text, &env.grid);
@@ -1442,6 +1572,14 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
             found.push(i);
         }
     }
+    // Unicode 15.1 dropped rule LB15 (`QU SP* × OP`), which `unicode-linebreak` 0.1 still applies:
+    // Word breaks after the space in `estratégicos” (según`, as after any other space.
+    let quoted = quote_space_open_breaks(&text);
+    if !quoted.is_empty() {
+        found.extend(quoted);
+        found.sort_unstable();
+        found.dedup();
+    }
     // Myanmar has no spaces between words: it wraps between syllables.
     if text.chars().any(|c| matches!(u32::from(c), 0x1000..=0x109F | 0xA9E0..=0xA9FF | 0xAA60..=0xAA7F)) {
         found.extend(doc4me_doc::cluster::myanmar_breaks(&text));
@@ -1456,10 +1594,20 @@ pub fn layout_para(p: &Paragraph, env: &ParaEnv) -> ParaLayout {
         found.dedup();
     }
     // Asian typography: kinsoku and breaking Latin words anywhere.
-    crate::kinsoku::apply(&text, &mut found, rp.kinsoku, rp.word_wrap);
+    crate::kinsoku::apply(&text, &mut found, rp.kinsoku, rp.word_wrap, &env.doc.settings.kinsoku);
     let opps: std::collections::HashSet<usize> = found.into_iter().filter_map(to_para).collect();
     for c in &mut b.clusters {
         c.break_after = opps.contains(&c.end) || matches!(c.kind, ClKind::Object(_) | ClKind::Tab);
+    }
+    for &k in &b.wrap_after {
+        if let Some(c) = b.clusters.get_mut(k) {
+            c.break_after = true;
+        }
+    }
+    for &k in &b.keep_with_next {
+        if let Some(c) = b.clusters.get_mut(k) {
+            c.break_after = false;
+        }
     }
 
     // List label.
@@ -1593,6 +1741,128 @@ fn slack_word(pl: &ParaLayout, j: usize, x: f32, line_x: f32, right_edge: f32) -
     }
     let word = end_x - line_x;
     (word > 0.0 && end_x - right_edge <= word * SUBSTITUTE_SLACK).then_some(k)
+}
+
+/// Character spacing control "compress punctuation" (`w:characterSpacingControl`): where two
+/// full-width punctuation marks meet, the blank half of one of them goes, as Japanese
+/// typesetting closes up "。」" or "」「" (JIS X 4051): a closing mark loses the right half of
+/// its square, else an opening mark after it the left half. Other text keeps its width.
+fn compress_punctuation(b: &mut Builder, text: &str) {
+    let side = |c: &Cluster| -> Option<bool> {
+        if c.kind != ClKind::Text {
+            return None;
+        }
+        let mut chars = text.get(c.start..c.end)?.chars();
+        let ch = chars.next()?;
+        if chars.next().is_some() {
+            return None;
+        }
+        crate::kinsoku::punct_side(ch)
+    };
+    for i in 1..b.clusters.len() {
+        let (Some(a), Some(n)) = (b.clusters.get(i - 1), b.clusters.get(i)) else { continue };
+        let (Some(sa), Some(sn)) = (side(a), side(n)) else { continue };
+        // Only marks set at full width (a square as wide as the font size) have a blank half.
+        let em = |c: &Cluster| b.styles.get(c.style as usize).map_or(0.0, |st| st.rc.size);
+        let full = |c: &Cluster| c.adv > em(c) * 0.75;
+        if sa && full(a) {
+            let half = em(a) / 2.0;
+            if let Some(a) = b.clusters.get_mut(i - 1) {
+                a.adv = (a.adv - half).max(0.0);
+            }
+        } else if !sn && full(n) {
+            let half = em(n) / 2.0;
+            let (g0, g1) = (n.g0 as usize, n.g1 as usize);
+            for g in b.glyphs.get_mut(g0..g1).into_iter().flatten() {
+                g.dx -= half;
+            }
+            if let Some(n) = b.clusters.get_mut(i) {
+                n.adv = (n.adv - half).max(0.0);
+            }
+        }
+    }
+}
+
+/// Fit Text (`w:fitText`): each piece of fitted text (neighbouring clusters whose runs have the
+/// same Fit Text) set to its width, every character widened or narrowed by the same amount
+/// (ECMA-376 Part 1 §17.3.2.14). Narrowing stops at nothing: characters may overlap but never
+/// move backwards.
+fn fit_text(b: &mut Builder) {
+    let fit_of = |b: &Builder, c: &Cluster| b.styles.get(c.style as usize).and_then(|st| st.rc.fit_text);
+    let mut i = 0;
+    while i < b.clusters.len() {
+        let Some(fit) = b.clusters.get(i).and_then(|c| fit_of(b, c)) else {
+            i += 1;
+            continue;
+        };
+        let mut j = i + 1;
+        while let Some(c) = b.clusters.get(j) {
+            if fit_of(b, c) != Some(fit) || b.clusters.get(j - 1).is_some_and(|p| p.end != c.start) {
+                break;
+            }
+            j += 1;
+        }
+        let sized = |c: &Cluster| matches!(c.kind, ClKind::Text | ClKind::Space);
+        let piece = b.clusters.get_mut(i..j).unwrap_or(&mut []);
+        let n = piece.iter().filter(|c| sized(c)).count();
+        let total: f32 = piece.iter().filter(|c| sized(c)).map(|c| c.adv).sum();
+        if n > 0 && total.is_finite() {
+            let delta = (fit.width - total) / n as f32;
+            for c in piece.iter_mut().filter(|c| sized(c)) {
+                c.adv = (c.adv + delta).max(0.0);
+            }
+        }
+        i = j;
+    }
+}
+
+/// The places, in `text`, of an opening bracket that follows a quotation mark and spaces
+/// (`” (`, `" [`, `» ¿`): a line may start there under Unicode 15.1 (UAX #14 rule LB18, now
+/// that LB15 is gone), but `unicode-linebreak` 0.1 still forbids it.
+pub(crate) fn quote_space_open_breaks(text: &str) -> Vec<usize> {
+    // Line-break class QU (quotation marks) and OP (opening punctuation), the common members.
+    let quote = |c: char| matches!(c, '"' | '\'' | '«' | '»' | '‘' | '’' | '‛' | '“' | '”' | '‟' | '‹' | '›' | '❛' | '❜' | '❝' | '❞');
+    let open = |c: char| {
+        matches!(
+            c,
+            '(' | '['
+                | '{'
+                | '¡'
+                | '¿'
+                | '‚'
+                | '„'
+                | '⁅'
+                | '⁽'
+                | '₍'
+                | '（'
+                | '［'
+                | '｛'
+                | '｟'
+                | '〈'
+                | '《'
+                | '「'
+                | '『'
+                | '【'
+                | '〔'
+                | '〖'
+                | '〘'
+                | '〚'
+        )
+    };
+    let (mut out, mut after_quote, mut spaced) = (Vec::new(), false, false);
+    for (i, c) in text.char_indices() {
+        if c == ' ' {
+            // LB class SP is U+0020 only.
+            spaced |= after_quote;
+            continue;
+        }
+        if spaced && open(c) {
+            out.push(i);
+        }
+        spaced = false;
+        after_quote = quote(c);
+    }
+    out
 }
 
 fn break_lines(pl: &mut ParaLayout, env: &ParaEnv, mark_style: u16, level: Option<&Level>) {

@@ -2934,3 +2934,81 @@ spacing	Normal	标准
 	Traditional Chinese to Simplified Chinese	繁体中文转换为简体中文
 	Traditional to Simplified	繁转简
 	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	使用台湾、香港特别行政区和澳门特别行政区的字符变体
+	Asian Layout	中文版式
+	Fit Text	调整宽度
+	Fit Text…	调整宽度…
+	Two Lines in One	双行合一
+	Two Lines in One…	双行合一…
+	New text width (pt):	新文字宽度（磅）：
+	Enclose in brackets	带括号
+	Bracket pair:	括号样式：
+	Typography	中文版式
+	Character spacing control	字符间距控制
+	Don't compress	不压缩
+	Compress punctuation only	只压缩标点符号
+	Compress punctuation and Japanese kana	压缩标点符号和日文假名
+	First and last characters	首尾字符
+	Strict	严格
+	Cannot start a line:	不能位于行首的字符：
+	Cannot end a line:	不能位于行尾的字符：
+	Japanese Find Options	日文模糊查找选项
+	Sounds like (Japanese)	同音（日语）
+	Match full/half width	匹配全/半角
+	Match hiragana/katakana	匹配平假名/片假名
+	Match small kana	匹配小写假名
+	Match prolonged sound marks and dashes	匹配长音符号和破折号
+	Japanese Consistency Checker	日语一致性检查
+	Japanese Consistency Checker…	日语一致性检查…
+	No inconsistent spellings were found.	未发现不一致的写法。
+	Pick the spelling to keep in each group.	在每组中选择要保留的写法。
+	Bidirectional text	双向文本
+	Bidirectional Text	双向文本
+	Default direction:	默认方向:
+	Cursor movement:	光标移动:
+	Logical	逻辑
+	Visual	可视
+	Manage Fields	管理域
+	File locations	文件位置
+	File Locations	文件位置
+	Documents:	文档:
+	Pictures:	图片:
+	The system's choice	系统默认
+	Show Repairs	显示修复
+	No repairs were needed.	无需修复。
+	These problems were found and repaired when the document was opened:	打开文档时发现并修复了以下问题:
+	An unreadable entry in the file was skipped: {what}	已跳过文件中无法读取的条目: {what}
+	An unreadable part was left out: {what}	已略去无法读取的部件: {what}
+	Unreadable relationships were ignored: {what}	已忽略无法读取的关系: {what}
+	A missing part of an embedded object was left out: {what}	已略去嵌入对象中缺失的部件: {what}
+	Copy File	复制文件
+	Find Files	查找文件
+	Letter Wizard	信函向导
+	Recipient's name:	收信人姓名:
+	Salutation:	称呼:
+	Subject:	主题:
+	Complimentary closing:	结束语:
+	Sender's name:	寄信人姓名:
+	Job title:	职务:
+	Company:	公司:
+	Enclosures:	附件:
+	Cc:	抄送:
+	Edit Links to Files	编辑指向文件的链接
+	Source file	源文件
+	Locked	已锁定
+	Change Source	更改源
+	This document has no links to files.	此文档没有指向文件的链接。
+	Web options	Web 选项
+	Web Options	Web 选项
+	Allow PNG as a graphics format	允许 PNG 作为图形格式
+	Rely on CSS for font formatting	使用 CSS 设置字体格式
+	Rely on VML for displaying graphics in browsers	在浏览器中使用 VML 显示图形
+	Organize supporting files in a folder	将支持文件组织到文件夹中
+	Use long file names whenever possible	尽可能使用长文件名
+	Screen size:	屏幕大小:
+	Pixels per inch:	每英寸像素数:
+	Hangul Hanja Conversion	韩文/汉字转换
+	Hangul Hanja Conversion…	韩文/汉字转换…
+	Hangul to Hanja	韩文转汉字
+	Hanja to Hangul	汉字转韩文
+	Put the caret in Korean text to choose its Hanja.	将光标放在韩文文本中以选择汉字。
+	The selection, or the whole document when nothing is selected.	所选内容；未选择时为整个文档。
