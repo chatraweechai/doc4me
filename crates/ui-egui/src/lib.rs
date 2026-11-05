@@ -639,6 +639,11 @@ impl WordApp {
     /// Close, Envelopes, Labels and Finish & Merge on a document with unsaved changes first ask
     /// Save / Don't Save / Cancel, and the command runs once that is answered (`ui.saveChanges`).
     pub fn run(&mut self, id: &str, params: Value) -> Result<Value, String> {
+        // Insert › Text from File asks for a document when the user hasn't supplied a path.
+        if id == "insert.textFromFile" && params.get("path").is_none() && widgets::enabled(self, id) {
+            self.pick_text_from_file();
+            return Ok(json!({"pending": "insertTextFromFile"}));
+        }
         // 3D Models without a file picks one first (no undo step for asking).
         if id == "insert.model3d" && params.get("path").is_none() && params.get("data").is_none() && widgets::enabled(self, id) {
             self.pick_model3d();

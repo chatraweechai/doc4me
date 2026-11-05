@@ -1,8 +1,8 @@
 # Handoff: Doc4Me 1.1.3 · readiness 89.9% / 92.5% เมื่อไม่นับ 26 deferred (Windows run 42060954134, วัดโค้ด `1fb46d9`, รายงาน commit `d84517d`, 2026-11-05) · รุ่นล่าสุดใน source คือ 1.1.3; ห้ามออก Release หรือเผยแพร่ environment จนกว่าผู้ใช้จะสั่ง
 
-อัปเดต: 2026-11-05 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 27 (แก้ shortcut Optional Hyphen; ยังทำเป้าหมาย 100% ต่อ) · เวอร์ชัน source 1.1.3 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
+อัปเดต: 2026-11-05 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 28 (file picker สำหรับ Text from File; ยังทำเป้าหมาย 100% ต่อ) · เวอร์ชัน source 1.1.3 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
-## สถานะปัจจุบัน (2026-11-05 รอบที่ 27: Windows measurement ล่าสุดยังเป็น run 42060954134; ยังไม่ถึง 100%)
+## สถานะปัจจุบัน (2026-11-05 รอบที่ 28: Windows measurement ล่าสุดยังเป็น run 42060954134; ยังไม่ถึง 100%)
 
 ### ความคืบหน้าล่าสุด — Windows run 42060954134
 
@@ -12,6 +12,7 @@
 - `de3a06e` แก้การยุบ trailing paragraph spacing เมื่อ contextual spacing ใช้ใน table cell; regression test ผ่าน และ full `cargo xtask ci` ผ่านหลังตั้ง ALSA pkg-config path. Linux full-corpus diagnostic: pages 163/222, breaks 82/222 (ไม่ใช้แทน Windows baseline). Windows ได้ pages 174/222, breaks 97/222.
 - งานต่อ (เป้าหมายที่ผู้ใช้สั่ง): dialogs และ shortcuts 100% เมื่อไม่นับ deferred; pagination 222/222 ทั้งจำนวนหน้าและ page boundaries; languages 95/95. Windows baseline ล่าสุดยัง 206 dialogs, 268 shortcuts, pages 174/222, boundaries 97/222 และ languages 64/95; dialogs ที่ยังไม่ deferred เหลือ `dlg-052`, `dlg-108`; shortcuts ที่ยังไม่ deferred คือ `ks-165`, `ks-177`, `ks-203`, `ks-219`, `ks-329`. ห้ามอ้าง Linux diagnostic แทน Windows.
 - รอบที่ 27 แก้ `ks-165`: `text.optionalHyphen` ใช้ `Mod+Alt+-`; เอาคีย์นี้ออกจาก Em Dash เพราะ keymap ไม่แยกปุ่ม minus ปกติกับ numeric keypad จึงชนกัน. เพิ่ม regression assertion ใน `word_default_shortcuts_resolve`; engine tests, `cargo xtask ci` ผ่านครบแล้ว; source commit `74d921d` push ไป `main` แล้ว. ต้องรัน Windows readiness เพื่อยืนยัน 269 shortcuts ก่อนนับเป็นผล readiness ใหม่.
+- รอบที่ 28 ต่อ `insert.textFromFile` เข้ากับ async file picker และเพิ่ม `dlg-108` เป็น static document-content insertion: regression test ผ่าน, `cargo xtask ci` ผ่านครบ, ยังไม่มี Windows score หลัง change นี้. ข้อจำกัด: ไม่รองรับการ link/refresh subdocuments แบบ master document; `dlg-052` และ shortcut `ks-177`, `ks-203`, `ks-219`, `ks-329` ยังไม่มี equivalent ที่พิสูจน์ได้. Windows run 42129697156 ถูกยกเลิกก่อนขั้นวัดเพราะ code เปลี่ยนระหว่าง download; ยังไม่ใช่ผลวัด.
 - Diagnostic เต็ม 222 DOCX บน Linux (`cargo xtask readiness --corpus --jobs 8 --cli target/release/doc4me-cli --dry-run`): 89.0% โดยรวม (ต่าง Windows จากฟอนต์และแพลตฟอร์ม); ไม่มีการเขียนทับรายงาน Windows. `govuk-005` ได้ 37 หน้าเทียบ Word 36 ทั้ง Linux และ Windows; PDF Linux เทียบข้อความพบการเลื่อนเริ่มที่หน้า 13 ในตารางฟอร์ม checkbox (local เหลือแถว “Provide details here” ก่อนคำถามเงินบำนาญ ส่วน Word วางคำถามต่อเนื่องในหน้าเดียว). DOCX ระบุ checkbox `☐` เป็น MS Gothic 12pt และย่อหน้าใช้ `w:line=336`/auto (1.4); Windows-runner ยังมีผล 37/36. นี่เป็นเบาะแสเรื่อง line height ของ table row แต่ยังไม่พิสูจน์กฎแก้ที่ไม่ทำให้เอกสารอื่นแย่ลง; ห้ามลด row height แบบเดา.
 - Full-corpus Linux diagnostic ก่อนหน้าพบ 59 page-count failures และ 31 languages ไม่มี catalog; เป้าหมายยังทำไม่สำเร็จ. ถัดไปตรวจ root cause pagination ของเอกสารชุด MS Gothic แบบหลายไฟล์ก่อนแก้, แล้วเพิ่ม catalog ด้วยการแปลจริงและตรวจ placeholder/glyph/coverage ห้ามนับ English fallback. ทำงานต่อที่ `dlg-052`, `dlg-108` และ shortcut 5 รายการด้วยพฤติกรรมจริง ห้ามแก้สถานะผ่านเฉย ๆ. 26 deferred rows คงเดิม และห้ามออก release/publish.
 
