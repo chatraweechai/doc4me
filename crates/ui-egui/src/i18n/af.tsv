@@ -1,0 +1,3002 @@
+# Afrikaans (af) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts here)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Afrikaans (Suid-Afrika, af-ZA). Commands use the imperative ("Voeg tabel in", "Stoor as");
+# informal "jy/jou" address, as is usual in Afrikaans software.
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Machine translation by an AI model (Claude), not yet reviewed by a native speaker.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" of "an" voor die volgende woord; Pools "w"/"we", "z"/"ze".
+	% of all commits	% van alle commits
+	(All)	(Alles)
+	(Custom)	(Pasgemaak)
+	(no style)	(geen styl)
+	(no suggestions)	(geen voorstelle)
+	(none)	(geen)
+	(normal text)	(normale teks)
+	(not matched)	(nie gevind nie)
+	(picture or object)	(prent of objek)
+	*Bold* and _italic_ with real formatting	*Vet* en _kursief_ met regte formatering
+	0 or More Characters	0 of meer karakters
+	1. Formatting restrictions	1. Formateringsbeperkings
+	1. Main document	1. Hoofdokument
+	1.5 Line Spacing	1,5-reëlspasiëring
+	1/4 Em Space	1/4 em-spasie
+	1×2 Empty Matrix	Leë 1×2-matriks
+	1×3 Empty Matrix	Leë 1×3-matriks
+	2. Data source	2. Databron
+	2. Editing restrictions	2. Redigeerbeperkings
+	2×1 Empty Matrix	Leë 2×1-matriks
+	2×2 Determinant	2×2-determinant
+	2×2 Empty Matrix	Leë 2×2-matriks
+	2×2 Identity Matrix	2×2-eenheidsmatriks
+	2×2 Identity Matrix (sparse)	2×2-eenheidsmatriks (yl)
+	2×2 Matrix in Brackets	2×2-matriks tussen vierkantige hakies
+	2×2 Matrix in Double Bars	2×2-matriks tussen dubbele strepe
+	2×2 Matrix in Parentheses	2×2-matriks tussen ronde hakies
+	2×3 Empty Matrix	Leë 2×3-matriks
+	3-D	3D
+	3. Merge the data with the document	3. Voeg die data met die dokument saam
+	3. Start enforcement	3. Begin afdwinging
+	3D Models	3D-modelle
+	3×1 Empty Matrix	Leë 3×1-matriks
+	3×2 Empty Matrix	Leë 3×2-matriks
+	3×3 Empty Matrix	Leë 3×3-matriks
+	3×3 Identity Matrix	3×3-eenheidsmatriks
+	3×3 Identity Matrix (sparse)	3×3-eenheidsmatriks (yl)
+	5,000 characters a day; give an email address for 50,000.	5 000 karakters per dag; gee ’n e-posadres vir 50 000.
+	<< Less	<< Minder
+	<< Remove	<< Verwyder
+	A file dialog is already open.	’n Lêerdialoog is reeds oop.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	’n Gratis oopbron-woordverwerker, van nuuts af in Rust geskryf.\nGebaseer op WordCraft deur die ArtCraft-span.
+	A header source holds the field names for a data source without a header row.	’n Opskrifbron bevat die veldname vir ’n databron sonder ’n opskrifry.
+	A mail merge field	’n Possamevoegingsveld
+	A new document lists the commands with their shortcuts.	’n Nuwe dokument lys die opdragte met hul kortpaaie.
+	A numbered sequence (figures, tables…)	’n Genommerde reeks (figure, tabelle…)
+	A password is required to open this document.	’n Wagwoord word benodig om hierdie dokument oop te maak.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	’n Spasie voor leestekens, dubbele tekens, Poolse kommas voor voegwoorde.
+	A table of contents	’n Inhoudsopgawe
+	A table's rows keep the same columns here.	’n Tabel se rye behou hier dieselfde kolomme.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Oor
+	About Doc4Me	Oor Doc4Me
+	Above Chart	Bo grafiek
+	Above the item	Bo die item
+	Absolute position	Absolute posisie
+	Absolute value cases	Gevalle met absolute waarde
+	Accent	Aksent
+	Accent Gradient	Aksentgradiënt
+	Accent with Reflection	Aksent met weerkaatsing
+	Accent {n}	Aksent {n}
+	Accents	Aksente
+	Accept	Aanvaar
+	Accept All	Aanvaar alles
+	Accept All Changes	Aanvaar alle veranderinge
+	Accept or Reject Changes	Aanvaar of verwerp veranderinge
+	Accept This Change	Aanvaar hierdie verandering
+	Accessed on	Geraadpleeg op
+	Accessibility	Toeganklikheid
+	Accessibility Pane	Toeganklikheidspaneel
+	Acute	Akuut
+	Add	Voeg by
+	Add >>	Voeg by >>
+	Add a comment	Voeg ’n opmerking by
+	Add a Table	Voeg ’n tabel by
+	Add at least one field.	Voeg minstens een veld by.
+	Add caption when inserting:	Voeg onderskrif by tydens invoeging:
+	Add Chart Element	Voeg grafiekelement by
+	Add Field	Voeg veld by
+	Add Field Name	Voeg veldnaam by
+	Add Font…	Voeg lettertipe by…
+	Add line numbering	Voeg reëlnommering by
+	Add New Placeholder	Voeg nuwe plekhouer by
+	Add New Placeholder…	Voeg nuwe plekhouer by…
+	Add New Source…	Voeg nuwe bron by…
+	Add Object to Selection	Voeg objek by keuse
+	Add Pen	Voeg pen by
+	Add Row	Voeg ry by
+	Add Series	Voeg reeks by
+	Add Shape	Voeg vorm by
+	Add Space Before Paragraph	Voeg spasie voor paragraaf by
+	Add space between Asian and Latin text	Voeg spasie tussen Asiatiese en Latynse teks by
+	Add space between Asian text and numbers	Voeg spasie tussen Asiatiese teks en syfers by
+	Add tab stop at:	Voeg tabstop by op:
+	Add Text	Voeg teks by
+	Add the chapter number	Voeg die hoofstuknommer by
+	Add to Dictionary	Voeg by woordeboek
+	Add to Document	Voeg by dokument
+	Add to Quick Access Toolbar	Voeg by Vinnige Toegang-nutsbalk
+	Add to Style Gallery	Voeg by stylgalery
+	Add-ins	Byvoegings
+	Add/Edit\nBibliography	Voeg by/redigeer\nbibliografie
+	Add/Edit\nCitation	Voeg by/redigeer\naanhaling
+	Add\nNote	Voeg nota\nby
+	Add\nPen	Voeg pen\nby
+	Add\nShape	Voeg vorm\nby
+	Added	Bygevoeg
+	Added Fonts	Bygevoegde lettertipes
+	Address	Adres
+	Address Block	Adresblok
+	Address labels	Adresetikette
+	Address:	Adres:
+	Address\nBlock	Adres-\nblok
+	Adjust	Pas aan
+	Advanced	Gevorderd
+	Advanced Find	Gevorderde soektog
+	Advanced Find…	Gevorderde soektog…
+	After:	Na:
+	Agents	Agente
+	Align	Belyn
+	Align Bottom Center	Belyn onder in die middel
+	Align Bottom Left	Belyn links onder
+	Align Bottom Right	Belyn regs onder
+	Align Center	Belyn in die middel
+	Align Center Left	Belyn links in die middel
+	Align Center Right	Belyn regs in die middel
+	Align Left	Belyn links
+	Align Right	Belyn regs
+	Align Text	Belyn teks
+	Align Top Center	Belyn bo in die middel
+	Align Top Left	Belyn links bo
+	Align Top Right	Belyn regs bo
+	Aligned at:	Belyn by:
+	Alignment	Belyning
+	Alignment:	Belyning:
+	All	Alles
+	All - Linear	Alles - lineêr
+	All - Professional	Alles - professioneel
+	All Borders	Alle rande
+	All Caps	Alles hoofletters
+	All caps	Alles in hoofletters
+	All Commands	Alle opdragte
+	All files	Alle lêers
+	All Levels	Alle vlakke
+	All Markup	Alle opmerkings en merke
+	All pages	Alle bladsye
+	All pages in the range	Alle bladsye in die reeks
+	All records	Alle rekords
+	All symbol sets	Alle simboolstelle
+	Allow Doc4Me to use online services	Laat Doc4Me toe om aanlyn dienste te gebruik
+	Allow hanging punctuation	Laat hangende leestekens toe
+	Allow Latin text to wrap in the middle of a word	Laat Latynse teks toe om in die middel van ’n woord om te vou
+	Allow line breaks	Laat reëlbreuke toe
+	Allow overlap	Laat oorvleueling toe
+	Allow row to break across pages	Laat ry toe om oor bladsye te breek
+	Alphabetical	Alfabeties
+	Alt Text	Alternatiewe teks
+	Alt text	Alternatiewe teks
+	Alt Text Pane	Alternatiewe teks-paneel
+	Alt:	Alt:
+	Alt\nText	Alternatiewe\nteks
+	And	En
+	Angle Brackets	Driehoekige hakies
+	Angle Brackets with Separator	Driehoekige hakies met skeier
+	Angle Brackets with Two Separators	Driehoekige hakies met twee skeiers
+	Animate the caret (it glides and fades)	Animeer die wyser (dit gly en vervaag)
+	Animation	Animasie
+	Animation effects:	Animasie-effekte:
+	Annotation Reference	Annotasieverwysing
+	Annotation Subject	Annotasie-onderwerp
+	Annotation Text	Annotasieteks
+	Another file	’n Ander lêer
+	Any Character	Enige karakter
+	Any Digit	Enige syfer
+	Any Letter	Enige letter
+	Anyone can open this document. Encrypt it with a password to keep it private.	Enigiemand kan hierdie dokument oopmaak. Enkripteer dit met ’n wagwoord om dit privaat te hou.
+	Anyone who opens the document will need this password.	Enigiemand wat die dokument oopmaak, sal hierdie wagwoord nodig hê.
+	APA	APA
+	API key (if the server needs one)	API-sleutel (as die bediener een benodig)
+	Apply	Pas toe
+	Apply as you type	Pas toe terwyl jy tik
+	Apply Asian line-breaking rules (kinsoku)	Pas Asiatiese reëlbreekreëls toe (kinsoku)
+	Apply Character Style	Pas karakterstyl toe
+	Apply formatting to:	Pas formatering toe op:
+	Apply special formats to	Pas spesiale formate toe op
+	Apply Style	Pas styl toe
+	Apply Styles	Pas style toe
+	Apply to:	Pas toe op:
+	Arabic	Arabies
+	Arch Down	Boog af
+	Arch Up	Boog op
+	Area	Area
+	Around	Rondom
+	Arrange	Rangskik
+	Arrange All	Rangskik alles
+	Arrange\nAll	Rangskik\nalles
+	Arrow	Pyl
+	Arrows	Pyle
+	Artistic Effects	Artistieke effekte
+	As Recommended	Soos aanbeveel
+	As you type	Terwyl jy tik
+	ASAP	ASAP
+	Ascending	Stygend
+	Asian text font:	Lettertipe vir Asiatiese teks:
+	Asian Typography	Asiatiese tipografie
+	Assign	Ken toe
+	At least	Minstens
+	At least {n}	Minstens {n}
+	Atelier	Atelier
+	Atmosphere	Atmosfeer
+	Attach Template	Heg sjabloon aan
+	Attach…	Heg aan…
+	Author	Outeur
+	Auto	Outo
+	AutoCaption	OutoOnderskrif
+	AutoCaption…	OutoOnderskrif…
+	AutoComplete	OutoVoltooi
+	AutoCorrect	OutoKorrigeer
+	AutoCorrect Options	OutoKorrigeer-opsies
+	AutoFit	OutoPas
+	AutoFit Contents	OutoPas inhoud
+	AutoFit Window	OutoPas venster
+	AutoFormat	OutoFormateer
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	OutoFormateer (Ctrl+Alt+K) formateer die gekose paragrawe, of die hele dokument.
+	AutoFormat and Review Changes…	OutoFormateer en hersien veranderinge…
+	AutoFormat As You Type	OutoFormateer terwyl jy tik
+	AutoFormat changed {count} paragraphs	OutoFormateer het {count} paragrawe verander
+	AutoFormat Now	OutoFormateer nou
+	Automatic	Outomaties
+	Automatic ({language})	Outomaties ({language})
+	Automatic bulleted lists	Outomatiese kolpuntlyste
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Outomaties volg jou stelsel se taal. Kieslyste en opdragte verander; jou dokumente nie.
+	Automatic numbered lists	Outomatiese genommerde lyste
+	Automatic Table 1 (3 levels)	Outomatiese tabel 1 (3 vlakke)
+	Automatic Table 2 (2 levels)	Outomatiese tabel 2 (2 vlakke)
+	Automatically hyphenate document	Koppel dokument outomaties af
+	Automatically Update Document Styles	Werk dokumentstyle outomaties by
+	Automatically update document styles	Werk dokumentstyle outomaties by
+	AutoSave	OutoStoor
+	AutoSave documents you have saved in Doc4Me	OutoStoor dokumente wat jy in Doc4Me gestoor het
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	OutoStoor het misluk: {error}. Stoor die dokument om OutoStoor weer aan te skakel.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	OutoStoor is nie in die blaaier beskikbaar nie: dit kan nie na jou lêers skryf nie. Stoor laai ’n kopie af.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	OutoStoor hou slegs .docx-, .odt- en .rtf-lêers; {name} kan nie alle formatering behou nie. Stoor as .docx om OutoStoor aan te skakel.
+	AutoSave saves every change to the file (needs a saved document)	OutoStoor stoor elke verandering in die lêer (benodig ’n gestoorde dokument)
+	AutoSave writes your changes to the file a moment after you stop typing.	OutoStoor skryf jou veranderinge na die lêer ’n oomblik nadat jy ophou tik.
+	AutoText	OutoTeks
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Back	Terug
+	Backspace	Backspace
+	Balloons	Ballonne
+	Banded Columns	Gebande kolomme
+	Banded Rows	Gebande rye
+	Bar	Staaf
+	Base text:	Basisteks:
+	Based on: {style}	Gebaseer op: {style}
+	Baseline Dots	Kolletjies op basislyn
+	Basic Cycle	Basiese siklus
+	Basic List	Basiese lys
+	Basic Math	Basiese wiskunde
+	Basic Matrix	Basiese matriks
+	Basic Process	Basiese proses
+	Basic Pyramid	Basiese piramide
+	Basic Radial	Basiese radiaal
+	Basic Venn	Basiese Venn-diagram
+	Bayes' rule	Bayes se reël
+	Before:	Voor:
+	Beginning of Word	Begin van woord
+	Behind Text	Agter teks
+	Below text	Onder teks
+	Below the item	Onder die item
+	Between	Tussen
+	Bibliography	Bibliografie
+	Binary assets added	Binêre bates bygevoeg
+	Binary assets removed	Binêre bates verwyder
+	Binomial Coefficient	Binomiaalkoëffisiënt
+	Binomial Coefficient (angle)	Binomiaalkoëffisiënt (driehoekig)
+	Binomial Coefficient with Angle Brackets	Binomiaalkoëffisiënt met driehoekige hakies
+	Binomial expansion of (x+a)ⁿ	Binomiaaluitbreiding van (x+a)ⁿ
+	Blank	Leeg
+	Blank (Three Columns)	Leeg (drie kolomme)
+	Blank document	Leë dokument
+	Blank Page	Leë bladsy
+	Block\nAuthors	Blokkeer\nouteurs
+	Blue:	Blou:
+	Body Text	Liggaamsteks
+	Body text in a short paragraph to show spacing.	Liggaamsteks in ’n kort paragraaf om spasiëring te wys.
+	Bold	Vet
+	Book	Boek
+	Book Title	Boektitel
+	Book title	Boektitel
+	Bookmark	Boekmerk
+	Bookmark name:	Boekmerknaam:
+	Border lines	Randlyne
+	Border Painter	Randskilder
+	Border\nPainter	Rand-\nskilder
+	Borders	Rande
+	Borders and Shading	Rande en skadu
+	Borders and Shading…	Rande en skadu…
+	Border…	Rand…
+	Both Sides	Albei kante
+	Both sides	Albei kante
+	Bottom	Onder
+	Bottom Border	Onderrand
+	Bottom Margin	Ondermarge
+	Bottom of Page	Onderaan bladsy
+	Bottom of the Window	Onderaan die venster
+	Bottom:	Onder:
+	Box	Raam
+	Boxed Formula	Formule in raam
+	Boxed Formula (example)	Formule in raam (voorbeeld)
+	Boxed Formulas	Formules in raam
+	Braces	Krulhakies
+	Braces with Separator	Krulhakies met skeier
+	Bracket	Hakie
+	Brackets	Hakies
+	Brackets with Separators	Hakies met skeiers
+	Break Link	Verbreek skakel
+	Breaks	Breuke
+	Breve	Breve
+	Brightness, contrast and transparency change the picture from how it looks now.	Helderheid, kontras en deursigtigheid verander die prent vanaf hoe dit nou lyk.
+	Brightness:	Helderheid:
+	Bring Forward	Bring vorentoe
+	Browse in Doc4Me…	Blaai in Doc4Me…
+	Browse…	Blaai…
+	Build table of figures from:	Bou lys van figure uit:
+	Building Block Gallery Content Control	Boublokgalery-inhoudkontrole
+	Built from the style or table entry fields chosen in Options.	Gebou uit die styl- of tabelinskrywingvelde wat in Opsies gekies is.
+	Built-In	Ingebou
+	Built-in Heading styles	Ingeboude opskrifstyle
+	Built-in style	Ingeboude styl
+	Built-in styles can't be deleted.	Ingeboude style kan nie geskrap word nie.
+	Bullet	Kolpunt
+	Bullet Library	Kolpuntbiblioteek
+	Bullets	Kolpunte
+	By author	Volgens outeur
+	By:	Deur:
+	Calendar	Kalender
+	Can't be deleted	Kan nie geskrap word nie
+	Cancel	Kanselleer
+	Canvas Member	Doeklid
+	Capitalization	Hoofletters
+	Capitalize Each Word	Elke Woord Met Hoofletter
+	Capitalize first letter of sentences	Hoofletter aan begin van sinne
+	Capitalize first letter of table cells	Hoofletter aan begin van tabelselle
+	Capitalize names of days	Hoofletter vir name van dae
+	Capitalize the first word of a sentence	Hoofletter vir die eerste woord van ’n sin
+	Caption	Onderskrif
+	Caption label:	Onderskrifetiket:
+	Caption Numbering	Onderskrifnommering
+	Caption text	Onderskrifteks
+	Caption:	Onderskrif:
+	Captions	Onderskrifte
+	Caret Character	Karetkarakter
+	Case changes	Hoofletterveranderinge
+	Cases	Hofsake
+	Cases (Three Conditions)	Gevalle (drie voorwaardes)
+	Cases (Two Conditions)	Gevalle (twee voorwaardes)
+	Cases and Stacks	Gevalle en stapels
+	Catalog	Katalogus
+	Categories	Kategorieë
+	Categories:	Kategorieë:
+	Category	Kategorie
+	Category {n}	Kategorie {n}
+	Category:	Kategorie:
+	Category…	Kategorie…
+	Ceiling	Plafon
+	Cell	Sel
+	Cell Margins	Selmarges
+	Cell margins	Selmarges
+	Cell Options	Selopsies
+	Cell Size	Selgrootte
+	Cell\nMargins	Sel-\nmarges
+	Center	Middel
+	Centered	Gesentreer
+	Centered as Group	Gesentreer as groep
+	Centimeters	Sentimeter
+	Change	Verander
+	Change Case	Verander hoofletters
+	Change Chart Type	Verander grafiektipe
+	Change Colors	Verander kleure
+	Change in y over change in x	Verandering in y oor verandering in x
+	Change Layout	Verander uitleg
+	Change List Level	Verander lysvlak
+	Change Password…	Verander wagwoord…
+	Change Picture	Verander prent
+	Change Picture…	Verander prent…
+	Change Shape	Verander vorm
+	Change Structure	Verander struktuur
+	Change to Display	Verander na vertoon
+	Change to Inline	Verander na inlyn
+	Change to Level 1	Verander na vlak 1
+	Change to Level 2	Verander na vlak 2
+	Change to Level 3	Verander na vlak 3
+	Change to Level 4	Verander na vlak 4
+	Change to Level 5	Verander na vlak 5
+	Change to Level 6	Verander na vlak 6
+	Change to Level 7	Verander na vlak 7
+	Change to Level 8	Verander na vlak 8
+	Change to Level 9	Verander na vlak 9
+	Change\nChart Type	Verander\ngrafiektipe
+	Change\nColors	Verander\nkleure
+	Changed	Gewysig
+	Changed lines:	Veranderde reëls:
+	Changes	Veranderinge
+	Changes with highlighting	Veranderinge met uitlig
+	Changes without highlighting	Veranderinge sonder uitlig
+	Chapter in a book	Hoofstuk in ’n boek
+	Chapters begin at:	Hoofstukke begin met:
+	Character	Karakter
+	Character Border	Karakterrand
+	Character code:	Karakterkode:
+	Character in Range	Karakter in reeks
+	Character level	Karaktervlak
+	Character Position	Karakterposisie
+	Character Scale	Karakterskaal
+	Character Shading	Karakterskadu
+	Character Spacing	Karakterspasiëring
+	Character spacing	Karakterspasiëring
+	Character style	Karakterstyl
+	Characters	Karakters
+	Characters (no spaces)	Karakters (sonder spasies)
+	Characters (with spaces)	Karakters (met spasies)
+	Characters per line:	Karakters per reël:
+	Chart	Grafiek
+	Chart Design	Grafiekontwerp
+	Chart Layouts	Grafiekuitlegte
+	Chart Title	Grafiektitel
+	Check	Haček
+	Check Accessibility	Kontroleer toeganklikheid
+	Check Box Content Control	Merkblokkie-inhoudkontrole
+	Check Compatibility	Kontroleer versoenbaarheid
+	Check Errors…	Kontroleer foute…
+	Check for Errors	Kontroleer vir foute
+	Check Spelling as You Type	Kontroleer spelling terwyl jy tik
+	Check spelling as you type	Kontroleer spelling terwyl jy tik
+	Check\nAccessibility	Kontroleer\ntoeganklikheid
+	Checked styles are allowed:	Gemerkte style word toegelaat:
+	Checked symbol	Gemerkte simbool
+	Chevron Down	Punthaak af
+	Chevron Up	Punthaak op
+	Chicago	Chicago
+	Chinese (Simplified)	Chinees (vereenvoudig)
+	Chinese (Traditional)	Chinees (tradisioneel)
+	Choose a command	Kies ’n opdrag
+	Choose a shortcut	Kies ’n kortpad
+	Choose List Item	Kies lysitem
+	Choose the sheet that holds the recipients.	Kies die blad wat die ontvangers bevat.
+	Circle	Sirkel
+	Circle area from its radius	Sirkeloppervlakte uit sy radius
+	Circled Dot	Kol in sirkel
+	Circled Plus	Plus in sirkel
+	Circled Times	Maal in sirkel
+	Citation marked.	Aanhaling gemerk.
+	Citation Style	Aanhalingstyl
+	Citations	Aanhalings
+	Citations & Bibliography	Aanhalings en bibliografie
+	City	Stad
+	Clear	Vee uit
+	Clear All	Vee alles uit
+	Clear All Formatting	Vee alle formatering uit
+	Clear Character Formatting	Vee karakterformatering uit
+	Clear Character Style	Vee karakterstyl uit
+	Clear Formatting Level	Vee formateringsvlak uit
+	Clear Paragraph Formatting	Vee paragraafformatering uit
+	Click a border between two cells to merge them. Esc stops.	Klik op ’n rand tussen twee selle om hulle saam te voeg. Esc stop.
+	Click an item to paste it.	Klik op ’n item om dit te plak.
+	Click level to modify:	Klik op vlak om te wysig:
+	Click the empty text box the text should continue in (Esc cancels)	Klik op die leë teksblokkie waarin die teks moet voortgaan (Esc kanselleer)
+	Click to switch back to inserting	Klik om terug te skakel na invoeg
+	Clipboard	Knipbord
+	Clipboard Contents	Knipbordinhoud
+	Clipboard Items	Knipborditems
+	Clipboard Pane	Knipbordpaneel
+	Close	Maak toe
+	Close Equation	Maak vergelyking toe
+	Close Header and Footer	Maak kop- en voetskrif toe
+	Close Outline View	Maak buitelynaansig toe
+	Close Outline\nView	Maak buitelyn-\naansig toe
+	Close Reviewing Pane	Maak hersieningspaneel toe
+	Clustered Bar	Gegroepeerde staaf
+	Clustered Column	Gegroepeerde kolom
+	Col #:	Kol. nr.:
+	Collapse	Vou in
+	Collapse Selection	Vou keuse in
+	Collapse the Ribbon	Vou die lint in
+	Collate copies	Sorteer kopieë
+	Collect entries from:	Versamel inskrywings uit:
+	Colon Equal	Dubbelpunt-gelyk
+	Color	Kleur
+	Color model:	Kleurmodel:
+	Color only	Slegs kleur
+	Color:	Kleur:
+	Color: {color}	Kleur: {color}
+	Colorful	Kleurvol
+	Colors	Kleure
+	Colors:	Kleure:
+	Column	Kolom
+	Column Break	Kolombreuk
+	Column Selection	Kolomkeuse
+	Column selection: the arrow keys extend the block, Esc ends it	Kolomkeuse: die pyltjiesleutels vergroot die blok, Esc beëindig dit
+	Column width	Kolomwydte
+	Column:	Kolom:
+	Columns	Kolomme
+	Columns:	Kolomme:
+	Combine	Kombineer
+	Combine Documents	Kombineer dokumente
+	Combo Box Content Control	Kombinasieblokkie-inhoudkontrole
+	Commands	Opdragte
+	Commands:	Opdragte:
+	Comment	Opmerking
+	Comments	Opmerkings
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Opmerkings langs elke bladsy en gevolgde veranderinge in PDF’s, drukstukke en prente; ’n opmerkingslys aan die einde van webblaaie, Markdown en teks.
+	Comments on version	Opmerkings oor weergawe
+	Comments Pane	Opmerkingspaneel
+	Commits	Commits
+	Common Accent Objects	Algemene aksentobjekte
+	Common Brackets	Algemene hakies
+	Common Fractions	Algemene breuke
+	Common Functions	Algemene funksies
+	Common Large Operators	Algemene groot operatore
+	Common Operator Structures	Algemene operatorstrukture
+	Common Operators	Algemene operatore
+	Common Radicals	Algemene wortels
+	Common Subscripts and Superscripts	Algemene onderskrifte en boskrifte
+	Communication	Kommunikasie
+	Compact	Kompak
+	Company	Maatskappy
+	Compare	Vergelyk
+	Compare Documents	Vergelyk dokumente
+	Compare to	Vergelyk met
+	Compared: {changes} changes	Vergelyk: {changes} veranderinge
+	Comparing with another file needs the desktop app.	Vergelyking met ’n ander lêer benodig die rekenaartoepassing.
+	Comparison	Vergelyking
+	Comparison settings	Vergelykingsinstellings
+	Compatibility mode: {version}	Versoenbaarheidsmodus: {version}
+	Compatibility Options	Versoenbaarheidsopsies
+	Compatibility Options…	Versoenbaarheidsopsies…
+	Compress Pictures	Kompakteer prente
+	Compress punctuation at the start of a line	Kompakteer leestekens aan die begin van ’n reël
+	Condensed	Saamgepers
+	Conference	Konferensie
+	Conference paper	Konferensievoordrag
+	CONFIDENTIAL	VERTROULIK
+	Confirm password:	Bevestig wagwoord:
+	Connect Shapes	Verbind vorms
+	Constitutional Provisions	Grondwetlike bepalings
+	Container Title	Houertitel
+	Contains	Bevat
+	Content Control at Selection	Inhoudkontrole by keuse
+	Content Control Properties	Inhoudkontrole-eienskappe
+	Contents can't be edited	Inhoud kan nie geredigeer word nie
+	Context	Konteks
+	Contextual	Kontekstueel
+	Continuous	Deurlopend
+	Continuous numbering	Deurlopende nommering
+	Contour Integral	Kontoerintegraal
+	Contour Integral with Limits	Kontoerintegraal met grense
+	Contour Integral with Stacked Limits	Kontoerintegraal met gestapelde grense
+	Contour Integrals	Kontoerintegrale
+	Contrast:	Kontras:
+	Contributors	Bydraers
+	Controls	Kontroles
+	Conversions	Omskakelings
+	Convert	Skakel om
+	Convert between built-up and linear form	Skakel om tussen opgeboude en lineêre vorm
+	Convert Notes	Skakel notas om
+	Convert Permanently	Skakel permanent om
+	Convert Text to Table	Skakel teks na tabel om
+	Convert Text to Table…	Skakel teks na tabel om…
+	Convert to Arabic Digits	Skakel om na Arabiese syfers
+	Convert to Shapes	Skakel om na vorms
+	Convert to Text	Skakel om na teks
+	Convert to Thai Digits	Skakel om na Thaise syfers
+	Copies	Kopieë
+	Coproduct	Koproduk
+	Coproduct with Limits	Koproduk met grense
+	Coproduct with Lower Limit	Koproduk met ondergrens
+	Coproduct with Subscript-Superscript Limits	Koproduk met onderskrif-boskrifgrense
+	Copy	Kopieer
+	Copy Formatting	Kopieer formatering
+	Copy of the text a bookmark marks	Kopie van die teks wat ’n boekmerk merk
+	Copy Styles	Kopieer style
+	Copy Text	Kopieer teks
+	Copy to where?	Kopieer na waar?
+	Copyright	Kopiereg
+	Copyright Sign	Kopieregteken
+	Corrections	Korreksies
+	Cosecant Function	Kosekansfunksie
+	Cosine 2x	Kosinus 2x
+	Cosine Function	Kosinusfunksie
+	Cotangent Function	Kotangensfunksie
+	Couldn't add {name}: {reason}	Kon nie {name} byvoeg nie: {reason}
+	Couldn't download the picture: {reason}	Kon nie die prent aflaai nie: {reason}
+	Couldn't download {name}: {error}	Kon nie {name} aflaai nie: {error}
+	Couldn't get the add-in list: {reason}	Kon nie die byvoegingslys kry nie: {reason}
+	Couldn't make Doc4Me the default: {error}	Kon nie Doc4Me die verstek maak nie: {error}
+	Couldn't open {path}: {error}	Kon nie {path} oopmaak nie: {error}
+	Couldn't search: {reason}	Kon nie soek nie: {reason}
+	Couldn't translate: {reason}	Kon nie vertaal nie: {reason}
+	Count by:	Tel volgens:
+	Count words in text boxes and notes	Tel woorde in teksblokkies en notas
+	Country	Land
+	Courtesy Title	Aanspreektitel
+	Cover Page	Voorblad
+	Craft	Craft
+	Create	Skep
+	Create a Style	Skep ’n styl
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Skep ’n interaktiewe buitelyn van jou dokument.\n\nDit is ’n uitstekende manier om tred te hou met waar jy is of om jou inhoud vinnig te skuif.\n\nOm te begin, gaan na die Tuis-oortjie en pas opskrifstyle toe op die opskrifte in jou dokument.
+	Create Data Source…	Skep databron…
+	Create Graphic	Skep grafika
+	Create Header Source	Skep opskrifbron
+	Create Link	Skep skakel
+	Create New Style	Skep nuwe styl
+	Create Source	Skep bron
+	Create…	Skep…
+	Crop	Sny by
+	Cross-reference	Kruisverwysing
+	Cross-reference:	Kruisverwysing:
+	Cube Root	Derdemagswortel
+	Current	Huidig
+	Current - Linear	Huidig - lineêr
+	Current - Professional	Huidig - professioneel
+	Current keyboard settings	Huidige sleutelbordinstellings
+	Current page	Huidige bladsy
+	Current Position	Huidige posisie
+	Current record	Huidige rekord
+	Current style: {style}	Huidige styl: {style}
+	Curved Arrow Connector	Geboë pylverbinder
+	Curved Connector	Geboë verbinder
+	Custom	Pasgemaak
+	Custom dictionary	Pasgemaakte woordeboek
+	Custom Margins…	Pasgemaakte marges…
+	Custom mark:	Pasgemaakte merk:
+	Custom range	Pasgemaakte reeks
+	Custom Table of Contents	Pasgemaakte inhoudsopgawe
+	Custom Table of Contents…	Pasgemaakte inhoudsopgawe…
+	Custom Watermark	Pasgemaakte watermerk
+	Custom Watermark…	Pasgemaakte watermerk…
+	Customize	Pas aan
+	Customize Keyboard	Pas sleutelbord aan
+	Customize Quick Access Toolbar	Pas Vinnige Toegang-nutsbalk aan
+	Customize Quick Access Toolbar…	Pas Vinnige Toegang-nutsbalk aan…
+	Customize Ribbon	Pas lint aan
+	Customize the Ribbon…	Pas die lint aan…
+	Customize…	Pas aan…
+	Cut	Knip
+	Cut, copy, and paste	Knip, kopieer en plak
+	Cycle	Siklus
+	Czech	Tsjeggies
+	Danish	Deens
+	Dark	Donker
+	Dark Mode	Donker modus
+	Dark page (white text on black)	Donker bladsy (wit teks op swart)
+	Dark with Shadow	Donker met skaduwee
+	Darkroom	Donkerkamer
+	Dashed	Gestreep
+	Data	Data
+	Data Labels	Data-etikette
+	Data source:	Databron:
+	Date	Datum
+	Date & Time	Datum en tyd
+	Date and Time	Datum en tyd
+	Date format	Datumformaat
+	Date formats:	Datumformate:
+	Date Picker Content Control	Datumkieser-inhoudkontrole
+	Day	Dag
+	Decimal	Desimaal
+	Decorative objects only add visual interest: screen readers skip them.	Dekoratiewe objekte voeg slegs visuele belangstelling by: skermlesers slaan hulle oor.
+	Decrease Font Size	Verklein lettergrootte
+	Decrease Indent	Verminder inkeping
+	Default	Verstek
+	Default Paragraph Font	Verstek-paragraaflettertipe
+	Default tab stops:	Verstek-tabstops:
+	Define New Bullet	Definieer nuwe kolpunt
+	Define New Multilevel List	Definieer nuwe veelvlaklys
+	Define New Multilevel List…	Definieer nuwe veelvlaklys…
+	Define New Number Format	Definieer nuwe getalformaat
+	Deflate	Loop leeg
+	Delete	Skrap
+	Delete Back in Equation	Skrap terug in vergelyking
+	Delete Cells	Skrap selle
+	Delete Clipboard Item	Skrap knipborditem
+	Delete Columns	Skrap kolomme
+	Delete Comment	Skrap opmerking
+	Delete in Equation	Skrap in vergelyking
+	Delete Label	Skrap etiket
+	Delete Next Word	Skrap volgende woord
+	Delete Previous Word	Skrap vorige woord
+	Delete Rows	Skrap rye
+	Delete Selected Ink	Skrap gekose ink
+	Delete Style	Skrap styl
+	Delete Table	Skrap tabel
+	Delete Table Style	Skrap tabelstyl
+	Deleted	Geskrap
+	Deletions:	Skrappings:
+	Delivery address:	Afleweringsadres:
+	Delta Equal To	Delta gelyk aan
+	Delta over arrow	Delta oor pyl
+	Demote	Laer vlak
+	Demote to Body Text	Verlaag na liggaamsteks
+	Derivative as a limit	Afgeleide as ’n limiet
+	Descending	Dalend
+	Describe what this object shows, for people who can't see it.	Beskryf wat hierdie objek wys, vir mense wat dit nie kan sien nie.
+	Describe what this table shows, for people who can't see it.	Beskryf wat hierdie tabel wys, vir mense wat dit nie kan sien nie.
+	Description:	Beskrywing:
+	Design	Ontwerp
+	Design Mode	Ontwerpmodus
+	Detach Template	Ontkoppel sjabloon
+	Detect language automatically	Bespeur taal outomaties
+	Developer	Ontwikkelaar
+	development build	ontwikkelingsbou
+	Diagonal	Diagonaal
+	Diagonal Dots	Diagonale kolletjies
+	Diamond	Ruit
+	Dictate	Dikteer
+	Dictation isn't available here.	Diktering is nie hier beskikbaar nie.
+	Dictation stopped.	Diktering gestop.
+	Dictation stopped: {reason}	Diktering gestop: {reason}
+	Different First Page	Ander eerste bladsy
+	Different Odd & Even Pages	Ander onewe en ewe bladsye
+	Differential	Differensiaal
+	Differential theta	Differensiaal theta
+	Differential x	Differensiaal x
+	Differential y	Differensiaal y
+	Differentials	Differensiale
+	Direct formatting	Direkte formatering
+	Direction:	Rigting:
+	Directory	Gids
+	Display	Vertoon
+	Display for Review	Vertoon vir hersiening
+	Display gridlines on screen	Vertoon roosterlyne op skerm
+	Display name	Vertoonnaam
+	Display text	Vertoonteks
+	Distance from surrounding text	Afstand van omliggende teks
+	Distribute Columns	Versprei kolomme
+	Distribute letters	Versprei letters
+	Distribute Rows	Versprei rye
+	Distribute spacing	Versprei spasiëring
+	Distributed	Versprei
+	Do Not Check Spelling or Grammar	Moenie spelling of grammatika kontroleer nie
+	Do not check spelling or grammar	Moenie spelling of grammatika kontroleer nie
+	DO NOT COPY	MOENIE KOPIEER NIE
+	Do Not Show in TOC	Moenie in inhoudsopgawe wys nie
+	Do you want to save changes to {name}?	Wil jy veranderinge aan {name} stoor?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Doc4Me-byvoegings is gratis pakke makro’s uit Doc4Me se byvoegingskatalogus. Hulle kan slegs die dokument redigeer.
+	Doc4Me is now the default app for Word documents.	Doc4Me is nou die verstektoepassing vir Word-dokumente.
+	Document	Dokument
+	Document End	Einde van dokument
+	Document Formatting	Dokumentformatering
+	Document Grid	Dokumentrooster
+	Document Information	Dokumentinligting
+	Document Property	Dokumenteienskap
+	Document Start	Begin van dokument
+	Document template:	Dokumentsjabloon:
+	Document Text	Dokumentteks
+	Document Title	Dokumenttitel
+	Document1	Dokument1
+	Document\nPreferences	Dokument-\nvoorkeure
+	Documents	Dokumente
+	Documents you open will show up here.	Dokumente wat jy oopmaak, sal hier verskyn.
+	Does not contain	Bevat nie
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Moenie spasie tussen paragrawe van dieselfde styl byvoeg nie
+	Don't capitalize after:	Moenie hoofletter gebruik na:
+	Don't hyphenate	Moenie afkoppel nie
+	Don't print blank lines when data fields are empty	Moenie leë reëls druk wanneer dataveld leeg is nie
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Moenie Zotero-, Mendeley- of EndNote-aanhalings en -bibliografieë lees nie
+	Don't Save	Moenie stoor nie
+	Don't use HTML paragraph auto spacing	Moenie HTML-outospasiëring vir paragrawe gebruik nie
+	Dot	Kol
+	Dot dash	Kol streep
+	Dot-dash	Kol-streep
+	Dots	Kolletjies
+	Dotted	Gestippel
+	Double	Dubbel
+	Double Bar	Dubbele streep
+	Double Closing Quote	Dubbele sluitaanhalingsteken
+	Double Dot	Dubbele kol
+	Double Integral	Dubbele integraal
+	Double Integral with Limits	Dubbele integraal met grense
+	Double Integral with Stacked Limits	Dubbele integraal met gestapelde grense
+	Double Left Arrow with Text Above	Dubbele pyl na links met teks bo
+	Double Left Arrow with Text Below	Dubbele pyl na links met teks onder
+	Double Left Right Arrow with Text Above	Dubbele links-regs-pyl met teks bo
+	Double Left Right Arrow with Text Below	Dubbele links-regs-pyl met teks onder
+	Double Opening Quote	Dubbele openingsaanhalingsteken
+	Double Right Arrow with Text Above	Dubbele pyl na regs met teks bo
+	Double Right Arrow with Text Below	Dubbele pyl na regs met teks onder
+	Double Spacing	Dubbele spasiëring
+	Double Square Brackets	Dubbele vierkantige hakies
+	Double Strikethrough	Dubbele deurhaal
+	Double strikethrough	Dubbele deurhaal
+	Double summation	Dubbele sommasie
+	Double Underline	Dubbele onderstreep
+	Double Vertical Bars	Dubbele vertikale strepe
+	Doughnut	Ring
+	Down	Af
+	Downloading the speech model ({mb} MB, once)…	Laai tans die spraakmodel af ({mb} MB, eenmalig)…
+	Downloading…	Laai tans af…
+	DRAFT	KONSEP
+	Draft	Konsep
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Sleep ’n reghoek om ’n tabel te teken, of ’n lyn oor selle om hulle te verdeel. Esc stop.
+	Draw	Teken
+	Draw Ink	Teken ink
+	Draw Table	Teken tabel
+	Draw\nTable	Teken\ntabel
+	Drawing Canvas	Tekendoek
+	Drawing Grid	Tekenrooster
+	Drawing Tools	Tekengereedskap
+	Drawing\nCanvas	Teken-\ndoek
+	Drop Cap	Hangletter
+	Drop cap	Hangletter
+	Drop-Down List Content Control	Aftreklys-inhoudkontrole
+	Drops all formatting and pastes plain text.	Verwyder alle formatering en plak gewone teks.
+	Dutch	Nederlands
+	E-mail Messages	E-posboodskappe
+	Edit Category	Redigeer kategorie
+	Edit Comment	Redigeer opmerking
+	Edit Data	Redigeer data
+	Edit Document	Redigeer dokument
+	Edit Equation	Redigeer vergelyking
+	Edit Field Code	Redigeer veldkode
+	Edit Field…	Redigeer veld…
+	Edit Footer	Redigeer voetskrif
+	Edit Header	Redigeer kopskrif
+	Edit Individual Documents…	Redigeer individuele dokumente…
+	Edit Items	Redigeer items
+	Edit Recipient List	Redigeer ontvangerlys
+	Edit Source	Redigeer bron
+	Edit\nData	Redigeer\ndata
+	Edit\nRecipient List	Redigeer\nontvangerlys
+	Edited	Geredigeer
+	Editing	Redigering
+	Editing header/footer	Redigeer kop-/voetskrif
+	Editing in this document is restricted.	Redigering in hierdie dokument is beperk.
+	Editing — edit the document directly	Redigering — redigeer die dokument direk
+	Edition	Uitgawe
+	Editor	Redakteur
+	Edit…	Redigeer…
+	Effects	Effekte
+	Elbow Arrow Connector	Elmboog-pylverbinder
+	Elbow Connector	Elmboogverbinder
+	Ellipsis	Weglatingsteken
+	Em Dash	Em-strepie
+	Em Space	Em-spasie
+	Email address (optional)	E-posadres (opsioneel)
+	Emboss	Reliëf
+	Emphasis	Klem
+	Empty Matrices	Leë matrikse
+	En Dash	En-strepie
+	En Space	En-spasie
+	Enclose Characters	Omsluit karakters
+	Enclosure	Omsluiting
+	Encrypt with Password	Enkripteer met wagwoord
+	Encrypt with Password…	Enkripteer met wagwoord…
+	End of document	Einde van dokument
+	End of section	Einde van afdeling
+	End of Word	Einde van woord
+	Endnote Reference	Eindnootverwysing
+	Endnote Text	Eindnootteks
+	Endnotes	Eindnote
+	Endnotes to footnotes	Eindnote na voetnote
+	English	Engels
+	English (United Kingdom)	Engels (Verenigde Koninkryk)
+	English (United States)	Engels (Verenigde State)
+	Engrave	Graveer
+	Enlarge symbol	Vergroot simbool
+	Enter formatting for number:	Voer formatering vir nommer in:
+	Enter in Equation	Enter in vergelyking
+	Enter page number:	Voer bladsynommer in:
+	Enter the web address or embed code of an online video:	Voer die webadres of inbedkode van ’n aanlyn video in:
+	Entry marked.	Inskrywing gemerk.
+	Entry:	Inskrywing:
+	Envelope #10   4.12" × 9.50"	Koevert #10   4,12" × 9,50"
+	Envelope Address	Koevertadres
+	Envelope DL   4.33" × 8.66"	Koevert DL   4,33" × 8,66"
+	Envelope Return	Koevert-terugstuuradres
+	Envelope size:	Koevertgrootte:
+	Envelopes	Koeverte
+	Equal by Definition	Gelyk per definisie
+	Equal column width	Gelyke kolomwydte
+	Equal Equal	Gelyk gelyk
+	Equal to	Gelyk aan
+	Equals:	Is gelyk aan:
+	Equation	Vergelyking
+	Equation Gallery	Vergelykingsgalery
+	Equation Info	Vergelykingsinligting
+	Equation Number	Vergelykingsnommer
+	Equation Options	Vergelykingsopsies
+	Erase Ink	Vee ink uit
+	Eraser	Uitveër
+	Errors ({n})	Foute ({n})
+	Estonian	Estnies
+	Euler's identity	Euler se identiteit
+	Even Page	Ewe bladsy
+	Even pages only	Slegs ewe bladsye
+	Every change is recorded as a tracked change.	Elke verandering word as ’n gevolgde verandering aangeteken.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Elke opdrag is beskikbaar vir skripte en KI-agente: voer `doc4me-cli mcp` uit vir ’n MCP-bediener, of begin die toepassing met `--control <port>` vir die JSON-beheerkanaal.
+	Every field needs a name.	Elke veld het ’n naam nodig.
+	Every font this document uses is installed.	Elke lettertipe wat hierdie dokument gebruik, is geïnstalleer.
+	Everyone	Almal
+	Exactly	Presies
+	Exactly {n}	Presies {n}
+	Example: {sample}	Voorbeeld: {sample}
+	Exceptions (optional)	Uitsonderings (opsioneel)
+	Exceptions…	Uitsonderings…
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exit	Sluit af
+	Expand	Vou uit
+	Expand or Collapse Heading	Vou opskrif uit of in
+	Expanded	Uitgevou
+	Exponential	Eksponensieel
+	Exponential series	Eksponensiële reeks
+	Export	Voer uit
+	Export a copy to share (PDF, Word document)	Voer ’n kopie uit om te deel (PDF, Word-dokument)
+	Export Page as JPEG	Voer bladsy uit as JPEG
+	Export Page as PNG	Voer bladsy uit as PNG
+	Export PDF	Voer PDF uit
+	Exported {path}	{path} uitgevoer
+	Expression	Uitdrukking
+	Extend Selection	Brei keuse uit
+	Extend Selection by Units	Brei keuse uit volgens eenhede
+	Extra space	Ekstra spasie
+	Extra spaces between words.	Ekstra spasies tussen woorde.
+	Field	Veld
+	Field Click	Veldklik
+	Field code:	Veldkode:
+	Field Codes	Veldkodes
+	Field codes:	Veldkodes:
+	Field name	Veldnaam
+	Field name:	Veldnaam:
+	Field names must be different.	Veldname moet verskil.
+	Field names:	Veldname:
+	Field properties	Veldeienskappe
+	Field:	Veld:
+	Fields	Velde
+	Fields to insert:	Velde om in te voeg:
+	Fields:	Velde:
+	Field…	Veld…
+	Figure	Figuur
+	File	Lêer
+	File name:	Lêernaam:
+	Fill	Vulsel
+	Fill & Line	Vulsel en lyn
+	Fill color:	Vulkleur:
+	Fill:	Vulsel:
+	Filling in forms	Invul van vorms
+	Film	Film
+	Filter and Sort	Filtreer en sorteer
+	Filter and Sort…	Filtreer en sorteer…
+	Filter Records	Filtreer rekords
+	Find	Soek
+	Find and Replace	Soek en vervang
+	Find Next	Soek volgende
+	Find Next Editable Region	Soek volgende redigeerbare gebied
+	Find Previous	Soek vorige
+	Find Recipient	Soek ontvanger
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Soek kies die volgende veranderde paragraaf; Verwerp sit die gekose een terug soos dit was.
+	Find What Expression	Soek-na-uitdrukking
+	Find What Text	Soek-na-teks
+	Find what:	Soek na:
+	Find →	Soek →
+	Find:	Soek:
+	Finish	Voltooi
+	Finish & Merge	Voltooi en voeg saam
+	Finish &\nMerge	Voltooi en\nvoeg saam
+	Finished	Voltooi
+	Finnish	Fins
+	First	Eerste
+	First Cell in Column	Eerste sel in kolom
+	First Cell in Row	Eerste sel in ry
+	First Column	Eerste kolom
+	First commit	Eerste commit
+	First line	Eerste reël
+	First line:	Eerste reël:
+	First Name	Voornaam
+	First row of data contains column headers	Eerste datary bevat kolomopskrifte
+	Fit	Pas
+	Fit text	Pas teks
+	Fix Position on Page	Maak posisie op bladsy vas
+	Fixed Column Width	Vaste kolomwydte
+	Flip Horizontal	Draai horisontaal om
+	Flip Vertical	Draai vertikaal om
+	Floor	Vloer
+	Focus	Fokus
+	Follow number with:	Volg nommer met:
+	Font	Lettertipe
+	Font Color	Letterkleur
+	Font color	Letterkleur
+	Font color:	Letterkleur:
+	Font Dialog	Lettertipe-dialoog
+	Font not installed	Lettertipe nie geïnstalleer nie
+	Font Size	Lettergrootte
+	Font Substitution	Lettertipe-vervanging
+	Font Substitution…	Lettertipe-vervanging…
+	Font:	Lettertipe:
+	Font: {font}	Lettertipe: {font}
+	Fonts	Lettertipes
+	Font…	Lettertipe…
+	Footer	Voetskrif
+	Footnote and Endnote	Voetnoot en eindnoot
+	Footnote Reference	Voetnootverwysing
+	Footnote Text	Voetnootteks
+	Footnotes	Voetnote
+	Footnotes and endnotes	Voetnote en eindnote
+	Footnotes to endnotes	Voetnote na eindnote
+	Form Letters	Vormbriewe
+	Format	Formateer
+	Format Page Numbers	Formateer bladsynommers
+	Format Page Numbers…	Formateer bladsynommers…
+	Format Painter	Formaatkwas
+	Format Picture	Formateer prent
+	Format Shape	Formateer vorm
+	Format:	Formaat:
+	Formatted	Geformateer
+	Formatted Text	Geformateerde teks
+	Formatting	Formatering
+	Formatting at Selection	Formatering by keuse
+	Formatting completed. You can now:	Formatering voltooi. Jy kan nou:
+	Formatting exceptions	Formateringsuitsonderings
+	Formatting marks	Formateringsmerke
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Formatering, hoofletterveranderinge, witruimte en tabelle word vergelyk; die ander instellings word vir later gehou.
+	Formula	Formule
+	Forward	Vorentoe
+	Fraction	Breuk
+	Fractions (1/2) as fraction characters (½)	Breuke (1/2) as breukkarakters (½)
+	French	Frans
+	French (France)	Frans (Frankryk)
+	From	Van
+	From text:	Van teks:
+	from Unicode (hex)	vanaf Unicode (heks)
+	From:	Van:
+	Full page of the same label	Volle bladsy van dieselfde etiket
+	Function	Funksie
+	Functions	Funksies
+	Gallery	Galery
+	GB/T 7714	GB/T 7714
+	General	Algemeen
+	Geometry	Meetkunde
+	German	Duits
+	German (Germany)	Duits (Duitsland)
+	Get Add-ins	Kry byvoegings
+	Get Data	Kry data
+	Get Data…	Kry data…
+	Getting ready…	Maak tans gereed…
+	Glow	Gloed
+	Glow Colors	Gloedkleure
+	Go Back	Gaan terug
+	Go To	Gaan na
+	Go to	Gaan na
+	Go To…	Gaan na…
+	Good afternoon	Goeiemiddag
+	Good evening	Goeienaand
+	Good morning	Goeiemôre
+	GOST (name sort)	GOST (sorteer op naam)
+	GOST (title sort)	GOST (sorteer op titel)
+	Grab bag	Allerlei
+	Grammar	Grammatika
+	Grammar Settings	Grammatika-instellings
+	Graphic	Grafika
+	Grave	Gravis
+	Greater than	Groter as
+	Greater than or equal	Groter as of gelyk aan
+	Greek	Grieks
+	Greek Letters	Griekse letters
+	Green:	Groen:
+	Greeting Line	Groetreël
+	Greeting\nLine	Groet-\nreël
+	Grid Settings	Roosterinstellings
+	Grid Table 1 Light	Roostertabel 1 lig
+	Grid Table 4 – Blue	Roostertabel 4 – blou
+	Grid Table 4 – Green	Roostertabel 4 – groen
+	Grid Table 4 – Orange	Roostertabel 4 – oranje
+	Grid Table 4 – Purple	Roostertabel 4 – pers
+	Gridlines	Roosterlyne
+	Group	Groepeer
+	Grouping Character Above	Groeperingskarakter bo
+	Grouping Character Below	Groeperingskarakter onder
+	Grow Font 1 Point	Vergroot lettertipe met 1 punt
+	H:	H:
+	Hanging Indent	Hangende inkeping
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Hoed
+	Header	Kopskrif
+	Header & Footer	Kop- en voetskrif
+	Header Options	Kopskrifopsies
+	Header Options:	Kopskrifopsies:
+	Header Row	Opskrifry
+	Header source: {file} (the next data source opened here takes its field names)	Opskrifbron: {file} (die volgende databron wat hier oopgemaak word, neem sy veldname)
+	Header/Footer Position	Kop-/voetskrifposisie
+	Headers and footers	Kop- en voetskrifte
+	Heading 1	Opskrif 1
+	Heading 2	Opskrif 2
+	Heading 3	Opskrif 3
+	Heading styles (levels 1–{n})	Opskrifstyle (vlakke 1–{n})
+	Heading {n}	Opskrif {n}
+	Headings	Opskrifte
+	Heart	Hart
+	Hebrew	Hebreeus
+	Height:	Hoogte:
+	Help	Hulp
+	Hex:	Heks:
+	Hidden	Versteek
+	Hidden text	Versteekte teks
+	Hide Codes	Versteek kodes
+	Hide from style lists	Versteek uit stylelyste
+	Hide Ink	Versteek ink
+	Hide White Space	Versteek witruimte
+	Hide\nInk	Versteek\nink
+	Hierarchy	Hiërargie
+	Highlight	Uitlig
+	Highlight Changes	Lig veranderinge uit
+	Highlight changes in printed document	Lig veranderinge in gedrukte dokument uit
+	Highlight changes on screen	Lig veranderinge op skerm uit
+	Highlight Merge Fields	Lig samevoegvelde uit
+	Highlight\nMerge Fields	Lig samevoeg-\nvelde uit
+	Highlighter	Uitligpen
+	Hindi	Hindi
+	Historical and Discretional	Histories en diskresionêr
+	Hollow	Hol
+	Home	Tuis
+	Home folder	Tuisvouer
+	Horizontal	Horisontaal
+	Horizontal Line	Horisontale lyn
+	Horizontal spacing:	Horisontale spasiëring:
+	How many pages the whole document has	Hoeveel bladsye die hele dokument het
+	How many pages this section has	Hoeveel bladsye hierdie afdeling het
+	How many words the document holds	Hoeveel woorde die dokument bevat
+	HTML Format	HTML-formaat
+	Hue:	Tint:
+	Hungarian	Hongaars
+	Hyperbolic Cosecant Function	Hiperboliese kosekansfunksie
+	Hyperbolic Cosine Function	Hiperboliese kosinusfunksie
+	Hyperbolic Cotangent Function	Hiperboliese kotangensfunksie
+	Hyperbolic Functions	Hiperboliese funksies
+	Hyperbolic Secant Function	Hiperboliese sekansfunksie
+	Hyperbolic Sine Function	Hiperboliese sinusfunksie
+	Hyperbolic Tangent Function	Hiperboliese tangensfunksie
+	Hyperlink	Hiperskakel
+	Hyphenate at:	Koppel af by:
+	Hyphenate words in CAPS	Koppel woorde in HOOFLETTERS af
+	Hyphenation	Afkoppeling
+	Hyphenation Options…	Afkoppelingsopsies…
+	Hyphenation zone:	Afkoppelsone:
+	Hyphens (--) as dashes (—)	Koppeltekens (--) as strepies (—)
+	Hypotenuse	Skuinssy
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Ikoonkleur
+	Icons	Ikone
+	Identity Matrices	Eenheidsmatrikse
+	IEEE	IEEE
+	If…Then…Else	As…Dan…Anders
+	If…Then…Else…	As…Dan…Anders…
+	Ignore All	Ignoreer alles
+	Ignore punctuation characters	Ignoreer leestekens
+	Ignore web and file addresses	Ignoreer web- en lêeradresse
+	Ignore white-space characters	Ignoreer witruimtekarakters
+	Ignore words in capitals	Ignoreer woorde in hoofletters
+	Ignore words with numbers	Ignoreer woorde met syfers
+	Illustrations	Illustrasies
+	Immersive	Meesleurend
+	Immersive Reader	Meesleurende leser
+	Immersive\nReader	Meesleurende\nleser
+	In Default apps, choose Doc4Me for the document types you want it to open.	Kies Doc4Me in Verstektoepassings vir die dokumenttipes wat dit moet oopmaak.
+	In equations, typing a name after a backslash replaces it with its symbol.	In vergelykings word ’n naam ná ’n agterwaartse skuinsstreep deur sy simbool vervang.
+	In Front of Text	Voor teks
+	In Line with Text	In lyn met teks
+	Inches	Duim
+	Include label and number	Sluit etiket en nommer in
+	Include level number from:	Sluit vlaknommer in van:
+	Include page numbers	Sluit bladsynommers in
+	Increase Font Size	Vergroot lettergrootte
+	Increase Indent	Vermeerder inkeping
+	Indent	Keep in
+	Indent from left:	Inkeping van links:
+	Indentation	Inkeping
+	Indented	Ingekeep
+	Indents	Inkepings
+	Indents and Spacing	Inkepings en spasiëring
+	Index	Indeks
+	Index and Tables	Indeks en tabelle
+	Index Heading	Indeksopskrif
+	Index {n}	Indeks {n}
+	Indonesian	Indonesies
+	Inflate	Blaas op
+	Info	Inligting
+	Initials:	Voorletters:
+	Ink	Ink
+	Ink Equation	Inkvergelyking
+	Ink Replay	Speel ink weer af
+	Ink to Math	Ink na wiskunde
+	Ink to Shape	Ink na vorm
+	Ink to\nMath	Ink na\nwiskunde
+	Ink to\nShape	Ink na\nvorm
+	Ink\nReplay	Speel ink\nweer af
+	Inline	Inlyn
+	Input Format	Invoerformaat
+	Insert	Voeg in
+	Insert a 3D model from a file (.glb, .stl, .obj)	Voeg ’n 3D-model uit ’n lêer in (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Voeg ’n nuwe vergelyking in (Alt+=)
+	Insert Above	Voeg bo in
+	Insert Below	Voeg onder in
+	Insert Caption	Voeg onderskrif in
+	Insert Cells	Voeg selle in
+	Insert Chart	Voeg grafiek in
+	Insert Citation	Voeg aanhaling in
+	Insert Columns to the Left	Voeg kolomme links in
+	Insert Columns to the Right	Voeg kolomme regs in
+	Insert Data	Voeg data in
+	Insert Database	Voeg databasis in
+	Insert Database…	Voeg databasis in…
+	Insert Date Field	Voeg datumveld in
+	Insert Endnote	Voeg eindnoot in
+	Insert entire column	Voeg hele kolom in
+	Insert entire row	Voeg hele ry in
+	Insert Footnote	Voeg voetnoot in
+	Insert Hyperlink	Voeg hiperskakel in
+	Insert Index	Voeg indeks in
+	Insert Left	Voeg links in
+	Insert LISTNUM Field	Voeg LISTNUM-veld in
+	Insert Merge Field	Voeg samevoegveld in
+	Insert Merge\nField	Voeg samevoeg-\nveld in
+	Insert New Equation	Voeg nuwe vergelyking in
+	Insert one text or another, depending on a field's value.	Voeg een teks of ’n ander in, afhangend van ’n veld se waarde.
+	Insert Page Field	Voeg bladsyveld in
+	Insert Right	Voeg regs in
+	Insert Rows	Voeg rye in
+	Insert Rows Above	Voeg rye bo in
+	Insert Rows Below	Voeg rye onder in
+	Insert Shapes	Voeg vorms in
+	Insert SmartArt	Voeg SmartArt in
+	Insert Structure	Voeg struktuur in
+	Insert Symbol	Voeg simbool in
+	Insert Table	Voeg tabel in
+	Insert Table of Authorities	Voeg gesagstabel in
+	Insert Table of Figures	Voeg lys van figure in
+	Insert Table…	Voeg tabel in…
+	Insert Time Field	Voeg tydveld in
+	Insert Video	Voeg video in
+	Insert\nAbove	Voeg bo\nin
+	Insert\nCaption	Voeg onderskrif\nin
+	Insert\nCitation	Voeg aanhaling\nin
+	Insert\nFootnote	Voeg voetnoot\nin
+	Inserted	Ingevoeg
+	Insertions and Deletions	Invoegings en skrappings
+	Insertions:	Invoegings:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Invoegings: {ins}, skrappings: {del}, skuiwe: {moves}, formatering: {fmt}, opmerkings: {comments}
+	Inside	Binne
+	Inside Borders	Binnerande
+	Inside Margin	Binnemarge
+	Inside:	Binne:
+	Inspect Document	Inspekteer dokument
+	Inspect Styles at Selection	Inspekteer style by keuse
+	Institution	Instelling
+	Integral	Integraal
+	Integral of e^(−x²)	Integraal van e^(−x²)
+	Integral with Limits	Integraal met grense
+	Integral with Stacked Limits	Integraal met gestapelde grense
+	Integrals	Integrale
+	Intense Emphasis	Sterk klem
+	Intense Quote	Sterk aanhaling
+	Intense Reference	Sterk verwysing
+	Interface	Koppelvlak
+	Interface language	Koppelvlaktaal
+	Interface language:	Koppelvlaktaal:
+	Interface size:	Koppelvlakgrootte:
+	Interface Theme	Koppelvlaktema
+	Interface theme:	Koppelvlaktema:
+	Interface\nTheme	Koppelvlak-\ntema
+	Internet addresses as links	Internetadresse as skakels
+	Intersection	Snyding
+	Intersection with Limits	Snyding met grense
+	Intersection with Lower Limit	Snyding met ondergrens
+	Intersection with Subscript-Superscript Limits	Snyding met onderskrif-boskrifgrense
+	Inverse Cosecant Function	Inverse kosekansfunksie
+	Inverse Cosine Function	Inverse kosinusfunksie
+	Inverse Cotangent Function	Inverse kotangensfunksie
+	Inverse Functions	Inverse funksies
+	Inverse Hyperbolic Cosecant Function	Inverse hiperboliese kosekansfunksie
+	Inverse Hyperbolic Cosine Function	Inverse hiperboliese kosinusfunksie
+	Inverse Hyperbolic Cotangent Function	Inverse hiperboliese kotangensfunksie
+	Inverse Hyperbolic Functions	Inverse hiperboliese funksies
+	Inverse Hyperbolic Secant Function	Inverse hiperboliese sekansfunksie
+	Inverse Hyperbolic Sine Function	Inverse hiperboliese sinusfunksie
+	Inverse Hyperbolic Tangent Function	Inverse hiperboliese tangensfunksie
+	Inverse Secant Function	Inverse sekansfunksie
+	Inverse Sine Function	Inverse sinusfunksie
+	Inverse Tangent Function	Inverse tangensfunksie
+	Ionosphere	Ionosfeer
+	Is blank	Is leeg
+	Is not blank	Is nie leeg nie
+	ISO 690 (author-date)	ISO 690 (outeur-datum)
+	ISO 690 (numerical)	ISO 690 (numeries)
+	Issue	Uitgawenommer
+	it isn't a picture Doc4Me can read	dit is nie ’n prent wat Doc4Me kan lees nie
+	Italian	Italiaans
+	Italic	Kursief
+	Japanese	Japannees
+	Journal	Joernaal
+	Justification	Belyning
+	Justification of a display equation	Belyning van ’n vertoonvergelyking
+	Justified	Gelykgestel
+	Justify	Stel gelyk
+	Keep Lines Together	Hou reëls saam
+	Keep lines together	Hou reëls saam
+	Keep Source Formatting	Behou bronformatering
+	Keep Text Only	Behou slegs teks
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Hou die wagwoord op ’n veilige plek: daarsonder kan niemand, Doc4Me ingesluit, die dokument oopmaak nie. Laat albei blokkies leeg om die wagwoord te verwyder.
+	Keep with Next	Hou by volgende
+	Keep with next	Hou by volgende
+	Keeps the fonts and formatting of the copied text.	Behou die lettertipes en formatering van die gekopieerde teks.
+	Kerning for fonts:	Kerning vir lettertipes:
+	Keyboard shortcuts:	Kortpaaie:
+	Keys for this command:	Sleutels vir hierdie opdrag:
+	Keywords	Sleutelwoorde
+	Korean	Koreaans
+	Label changes with:	Etiketveranderinge met:
+	Label:	Etiket:
+	Labels	Etikette
+	Landscape	Landskap
+	Language	Taal
+	Language Preferences…	Taalvoorkeure…
+	Language…	Taal…
+	Large\nOperator	Groot\noperator
+	Largest Only	Slegs grootste
+	Largest only	Slegs grootste
+	Lasso	Lasso
+	Lasso Select	Lassokeuse
+	Last	Laaste
+	Last Cell in Column	Laaste sel in kolom
+	Last Cell in Row	Laaste sel in ry
+	Last Column	Laaste kolom
+	Last commit	Laaste commit
+	Last Name	Van
+	Last, First; Last, First	Van, Voornaam; Van, Voornaam
+	Latin text font:	Lettertipe vir Latynse teks:
+	Layout	Uitleg
+	Layout options for this document	Uitlegopsies vir hierdie dokument
+	Layout Summary	Uitlegopsomming
+	Layouts	Uitlegte
+	Leader	Leier
+	Leave a recipient out of the merge when a field has this value.	Laat ’n ontvanger uit die samevoeging weg wanneer ’n veld hierdie waarde het.
+	Leave Equation	Verlaat vergelyking
+	Leave the equation (Esc)	Verlaat die vergelyking (Esc)
+	Leave the label out of the caption	Laat die etiket uit die onderskrif weg
+	Left	Links
+	Left Arrow with Text Above	Pyl na links met teks bo
+	Left Arrow with Text Below	Pyl na links met teks onder
+	Left Border	Linkerrand
+	Left border	Linkerrand
+	Left Bracket Twice	Linkerhakie twee keer
+	Left indent	Linkerinkeping
+	Left Margin	Linkermarge
+	Left Only	Slegs links
+	Left only	Slegs links
+	Left Right Arrow Above	Links-regs-pyl bo
+	Left Right Arrow with Text Above	Links-regs-pyl met teks bo
+	Left Right Arrow with Text Below	Links-regs-pyl met teks onder
+	Left Subscript-Superscript	Linkse onderskrif-boskrif
+	Left-to-right	Links na regs
+	Left-to-Right Text Direction	Teksrigting links na regs
+	Left:	Links:
+	Leftwards Arrow Above	Pyl na links bo
+	Leftwards Harpoon Above	Harpoen na links bo
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Legal style numbering	Regstyl-nommering
+	Legend	Sleutel
+	Less than	Kleiner as
+	Less than or equal	Kleiner as of gelyk aan
+	Letter	Letter
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter headings	Letteropskrifte
+	Letter-Like Symbols	Letteragtige simbole
+	Letters	Briewe
+	Level 1	Vlak 1
+	Level 2	Vlak 2
+	Level 3	Vlak 3
+	Level 4	Vlak 4
+	Level 5	Vlak 5
+	Level 6	Vlak 6
+	Level 7	Vlak 7
+	Level 8	Vlak 8
+	Level 9	Vlak 9
+	Level {n}	Vlak {n}
+	Level:	Vlak:
+	Levels:	Vlakke:
+	LibreTranslate server (open source)	LibreTranslate-bediener (oopbron)
+	Ligatures:	Ligature:
+	Light	Lig
+	Light with Outline	Lig met buitelyn
+	Limit	Limiet
+	Limit and\nLog	Limiet en\nlogaritme
+	Limit consecutive hyphens to:	Beperk opeenvolgende koppeltekens tot:
+	Limit Example	Limietvoorbeeld
+	Limit formatting to a selection of styles	Beperk formatering tot ’n keuse van style
+	Line	Lyn
+	Line and Page Breaks	Reël- en bladsybreuke
+	Line and Paragraph Spacing	Reël- en paragraafspasiëring
+	Line between	Lyn tussen
+	Line Break	Reëlbreuk
+	Line breaking	Reëlbreking
+	Line delta	Reëlverskil
+	Line End	Reëleinde
+	Line Number	Reëlnommer
+	Line Numbering Options…	Reëlnommeringsopsies…
+	Line Numbers	Reëlnommers
+	Line Spacing	Reëlspasiëring
+	Line spacing	Reëlspasiëring
+	Line Spacing Options…	Reëlspasiëringsopsies…
+	Line spacing:	Reëlspasiëring:
+	Line Start	Reëlbegin
+	Line width:	Lyndikte:
+	Line:	Lyn:
+	Linear	Lineêr
+	Linear Fraction	Lineêre breuk
+	Lines	Reëls
+	Lines +/−	Reëls +/−
+	Lines added	Reëls bygevoeg
+	Lines and characters	Reëls en karakters
+	Lines deleted	Reëls geskrap
+	Lines only	Slegs reëls
+	Lines per page:	Reëls per bladsy:
+	Link	Skakel
+	Link entries to their headings	Skakel inskrywings aan hul opskrifte
+	Link level to style:	Skakel vlak aan styl:
+	Link to Previous	Skakel aan vorige
+	Linked style (paragraph and character)	Gekoppelde styl (paragraaf en karakter)
+	Links	Skakels
+	Links and References	Skakels en verwysings
+	Link…	Skakel…
+	List	Lys
+	List Commands	Lys opdragte
+	List Definition	Lysdefinisie
+	List entries	Lysinskrywings
+	List Paragraph	Lysparagraaf
+	List styles	Lysstyle
+	List Table 3 – Blue	Lystabel 3 – blou
+	List Table 3 – Green	Lystabel 3 – groen
+	List Table 3 – Orange	Lystabel 3 – oranje
+	List Table 3 – Purple	Lystabel 3 – pers
+	Listening… speak now	Luister tans… praat nou
+	Location	Ligging
+	Location: {path}	Ligging: {path}
+	Lock aspect ratio	Sluit aspekverhouding
+	Lock Fields	Sluit velde
+	Logarithm	Logaritme
+	Logarithm with Base	Logaritme met grondtal
+	Logical AND	Logiese EN
+	Logical AND with Limits	Logiese EN met grense
+	Logical OR	Logiese OF
+	Logical OR with Limits	Logiese OF met grense
+	Long citation:	Lang aanhaling:
+	lowercase	kleinletters
+	Lum:	Lum:
+	Macros	Makro’s
+	Made from the author and year when empty	Gemaak van die outeur en jaar wanneer leeg
+	Magazine or newspaper article	Tydskrif- of koerantartikel
+	Mail Merge	Possamevoeging
+	Mail Merge Helper	Possamevoeging-helper
+	Mail Merge Helper…	Possamevoeging-helper…
+	Mailing Labels	Posetikette
+	Mailings	Posstukke
+	Main entry:	Hoofinskrywing:
+	Make Doc4Me the default for Word documents…	Maak Doc4Me die verstek vir Word-dokumente…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Maak die lint, kieslyste en dialoë groter of kleiner, bo-op jou stelsel se vertoonskalering. Dokumentzoem is apart.
+	Malay	Maleis
+	Manage Sources	Bestuur bronne
+	Manage Styles	Bestuur style
+	Manage Styles…	Bestuur style…
+	Manual Hyphenation	Handmatige afkoppeling
+	Manual hyphenation is complete.	Handmatige afkoppeling is voltooi.
+	Manual Line Break	Handmatige reëlbreuk
+	Manual Page Break	Handmatige bladsybreuk
+	Manual…	Handmatig…
+	Many pages	Baie bladsye
+	Margin	Marge
+	Margins	Marges
+	Mark	Merk
+	Mark All	Merk alles
+	Mark as decorative	Merk as dekoratief
+	Mark Citation	Merk aanhaling
+	Mark Citation…	Merk aanhaling…
+	Mark Entry	Merk inskrywing
+	Mark Entry…	Merk inskrywing…
+	Mark grammar errors as you type	Merk grammatikafoute terwyl jy tik
+	Mark Index Entry	Merk indeksinskrywing
+	Mark selected text as:	Merk gekose teks as:
+	Mark Table of Contents Entry	Merk inhoudsopgawe-inskrywing
+	Mark\nCitation	Merk\naanhaling
+	Mark\nEntry	Merk\ninskrywing
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Pas hoofletters
+	Match Fields	Pas velde
+	Match prefix	Pas voorvoegsel
+	Match suffix	Pas agtervoegsel
+	Math AutoCorrect	Wiskunde-OutoKorrigeer
+	Math Input Control	Wiskunde-invoerkontrole
+	Matrices with Brackets	Matrikse met hakies
+	Matrix	Matriks
+	Maximize	Maksimeer
+	Maximum	Maksimum
+	Maximum Example	Maksimumvoorbeeld
+	Measured By	Gemeet in
+	Measurement units:	Maateenhede:
+	Media	Media
+	Merge	Voeg saam
+	Merge Cells	Voeg selle saam
+	Merge Formatting	Voeg formatering saam
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Voeg formatering saam plak die teks in die formatering waar dit beland, soos Behou slegs teks doen.
+	Merge Record #	Samevoegrekord #
+	Merge records	Voeg rekords saam
+	Merge to New Document	Voeg saam na nuwe dokument
+	Merge to Printer	Voeg saam na drukker
+	Merge to:	Voeg saam na:
+	Merge type: {type}	Samevoegtipe: {type}
+	Merged PRs	Saamgevoegde PR’s
+	Merge…	Voeg saam…
+	Mesosphere	Mesosfeer
+	Middle	Middel
+	Midline Dots	Middellyn-kolletjies
+	Millimeters	Millimeter
+	Minimum	Minimum
+	Minus Equal	Minus gelyk
+	Mirror indents	Spieël inkepings
+	Mirrored	Gespieël
+	Missing document font	Ontbrekende dokumentlettertipe
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OF Apache-2.0. Kopiereg (c) 2026 ArtCraft Team en die WordCraft-bydraers.
+	MLA	MLA
+	Model	Model
+	Models	Modelle
+	Moderate	Matig
+	Modify Style	Wysig styl
+	Modify Table Style	Wysig tabelstyl
+	Modify Table Style…	Wysig tabelstyl…
+	Modify…	Wysig…
+	Mon	Ma.
+	Month	Maand
+	More >>	Meer >>
+	More Colors…	Meer kleure…
+	More Columns…	Meer kolomme…
+	More Commands…	Meer opdragte…
+	More Symbols…	Meer simbole…
+	More templates →	Meer sjablone →
+	Move Down	Skuif af
+	Move in Equation	Beweeg in vergelyking
+	Move object with text	Skuif objek saam met teks
+	Move or Resize	Skuif of verander grootte
+	Move Paragraph Down	Skuif paragraaf af
+	Move Paragraph Up	Skuif paragraaf op
+	Move Past Citation	Beweeg verby aanhaling
+	Move Past\nCitation	Beweeg verby\naanhaling
+	Move Selected Ink	Skuif gekose ink
+	Move Text	Skuif teks
+	Move to where?	Skuif na waar?
+	Move Up	Skuif op
+	Move with Text	Skuif saam met teks
+	Move with text	Skuif saam met teks
+	Moved from	Geskuif vanaf
+	Moved to	Geskuif na
+	Moves	Skuiwe
+	Multilevel List	Veelvlaklys
+	Multiple Pages	Veelvuldige bladsye
+	My Add-ins	My byvoegings
+	MyMemory (free, no account)	MyMemory (gratis, geen rekening)
+	Name	Naam
+	Name (A–Z)	Naam (A–Z)
+	Name of the file this document is saved as	Naam van die lêer waarin hierdie dokument gestoor is
+	Name:	Naam:
+	Narrow  0.5" all	Smal  0,5" oral
+	Natural Logarithm	Natuurlike logaritme
+	Nature	Natuur
+	Navigation	Navigasie
+	Navigation Pane	Navigasiepaneel
+	Negated Relations	Ontkende relasies
+	New	Nuut
+	New Comment	Nuwe opmerking
+	New comments and tracked changes are recorded under this name and these initials.	Nuwe opmerkings en gevolgde veranderinge word onder hierdie naam en voorletters aangeteken.
+	New Document	Nuwe dokument
+	New document	Nuwe dokument
+	New Drawing Canvas	Nuwe tekendoek
+	New Entry	Nuwe inskrywing
+	New Folder	Nuwe vouer
+	New from Template	Nuut uit sjabloon
+	New Group	Nuwe groep
+	New Label	Nuwe etiket
+	New Label…	Nuwe etiket…
+	New Paragraph	Nuwe paragraaf
+	New shortcut:	Nuwe kortpad:
+	New Style…	Nuwe styl…
+	New Tab	Nuwe oortjie
+	New Table Style	Nuwe tabelstyl
+	New Table Style…	Nuwe tabelstyl…
+	New Window	Nuwe venster
+	New word	Nuwe woord
+	New\nComment	Nuwe\nopmerking
+	New\nWindow	Nuwe\nvenster
+	New…	Nuut…
+	Next	Volgende
+	Next Change	Volgende verandering
+	Next Comment	Volgende opmerking
+	Next Field	Volgende veld
+	Next Footnote	Volgende voetnoot
+	Next Page	Volgende bladsy
+	Next Record	Volgende rekord
+	Next Section	Volgende afdeling
+	Next Sentence	Volgende sin
+	Next sentence	Volgende sin
+	Next Window	Volgende venster
+	No	Nee
+	No accessibility issues found.	Geen toeganklikheidskwessies gevind nie.
+	No add-ins are listed yet.	Nog geen byvoegings is gelys nie.
+	No add-ins yet. Add one from the Store.	Nog geen byvoegings nie. Voeg een uit die Winkel by.
+	No Border	Geen rand
+	No changes (read only)	Geen veranderinge (slegs lees)
+	No Color	Geen kleur
+	No contributor data was built into this copy.	Geen bydraerdata is in hierdie kopie ingebou nie.
+	No data source yet.	Nog geen databron nie.
+	No errors found: every merge field is in the recipient list.	Geen foute gevind nie: elke samevoegveld is in die ontvangerlys.
+	No Fill	Geen vulsel
+	No Glow	Geen gloed
+	No grid	Geen rooster
+	No icons match your search.	Geen ikone pas by jou soektog nie.
+	No limit	Geen limiet
+	No Line	Geen lyn
+	No Markup	Geen merke
+	No model credits were built into this copy.	Geen modelerkennings is in hierdie kopie ingebou nie.
+	No Outline	Geen buitelyn
+	No Paragraph Space	Geen paragraafspasie
+	No pictures found.	Geen prente gevind nie.
+	No Reflection	Geen weerkaatsing
+	No revisions	Geen hersienings nie
+	No Shadow	Geen skaduwee
+	No Soft Edges	Geen sagte rande
+	No sources yet.	Nog geen bronne nie.
+	No Spacing	Geen spasiëring
+	no speech program on this system	geen spraakprogram op hierdie stelsel nie
+	No templates match your search.	Geen sjablone pas by jou soektog nie.
+	No Transform	Geen transformasie
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Nog geen woorde nie. Voeg by woordeboek op ’n verkeerd gespelde woord plaas dit hier.
+	No-Width Non Break	Nulwydte-niebreek
+	No-Width Optional Break	Nulwydte opsionele breuk
+	Nonbreaking Hyphen	Vaste koppelteken
+	Nonbreaking Space	Vaste spasie
+	None	Geen
+	Normal	Normaal
+	Normal  1" all	Normaal  1" oral
+	Normal Indent	Normale inkeping
+	Normal probability density	Normale waarskynlikheidsdigtheid
+	Normal speed	Normale spoed
+	Normal Style	Normale styl
+	Normal Table	Normale tabel
+	Normal Text	Normale teks
+	Normal Word Document	Normale Word-dokument
+	North	Noord
+	Norwegian (Bokmål)	Noors (Bokmål)
+	Not	Nie
+	Not available right now	Nie nou beskikbaar nie
+	Not equal to	Nie gelyk aan nie
+	Not linked: click a text box	Nie gekoppel nie: klik op ’n teksblokkie
+	Not saved	Nie gestoor nie
+	Not saved yet	Nog nie gestoor nie
+	Not used by any command	Deur geen opdrag gebruik nie
+	Not {name}	Nie {name} nie
+	Nothing	Niks
+	Nothing collected yet. Items you copy or cut appear here.	Nog niks versamel nie. Items wat jy kopieer of knip, verskyn hier.
+	Now used by {command}	Nou gebruik deur {command}
+	Nudge	Stoot
+	Num Occurrences	Aantal voorkomste
+	Number	Nommer
+	Number alignment:	Nommerbelyning:
+	Number format	Getalformaat
+	Number of columns:	Aantal kolomme:
+	Number of rows:	Aantal rye:
+	Number of the page the field sits on	Nommer van die bladsy waarop die veld is
+	Number of the section the field sits in	Nommer van die afdeling waarin die veld is
+	Number style for this level:	Nommerstyl vir hierdie vlak:
+	Number the equation; the number sits at the right margin (or type # then the number)	Nommer die vergelyking; die nommer staan by die regtermarge (of tik # en dan die nommer)
+	Number type:	Nommertipe:
+	Number:	Nommer:
+	Numbering	Nommering
+	Numbering:	Nommering:
+	Numbering…	Nommering…
+	Numerals	Syfers
+	Numerals:	Syfers:
+	n×n Identity Matrix	n×n-eenheidsmatriks
+	n×n Matrix	n×n-matriks
+	Object	Objek
+	Odd Page	Onewe bladsy
+	Odd pages only	Slegs onewe bladsye
+	Off	Af
+	Office	Office
+	Office 2003 Default	Office 2003-verstek
+	Offset (pt):	Verskuiwing (pt):
+	Offset: Bottom	Verskuiwing: onder
+	Offset: Bottom Left	Verskuiwing: links onder
+	Offset: Bottom Right	Verskuiwing: regs onder
+	Offset: Center	Verskuiwing: middel
+	Offset: Left	Verskuiwing: links
+	Offset: Right	Verskuiwing: regs
+	Offset: Top	Verskuiwing: bo
+	Offset: Top Left	Verskuiwing: links bo
+	Offset: Top Right	Verskuiwing: regs bo
+	OK	OK
+	Omit	Laat weg
+	On	Aan
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Aan: die wyser gly na sy nuwe plek wanneer jy tik of die pyltjiesleutels gebruik, en sy flikkering vervaag. Af: dit spring en flikker aan en af.
+	One	Een
+	One half	Een helfte
+	One label per recipient	Een etiket per ontvanger
+	One line per item. Enter adds an item.	Een reël per item. Enter voeg ’n item by.
+	One Page	Een bladsy
+	Online Pictures	Aanlyn prente
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Aanlyn prente (Openverse), Vertaal (MyMemory of jou LibreTranslate-bediener), Kry byvoegings en die aflaai van Dikteer se spraakmodel koppel aan die internet, en slegs wanneer jy hulle gebruik. As dit afgeskakel is, maak Doc4Me geen eie verbinding nie.
+	Online Pictures…	Aanlyn prente…
+	Online services are turned off (File › Options › Trust Center).	Aanlyn dienste is afgeskakel (Lêer › Opsies › Vertrouesentrum).
+	Online Video	Aanlyn video
+	Only allow this kind of editing:	Laat slegs hierdie soort redigering toe:
+	Only comments can be added, except in regions marked editable.	Slegs opmerkings kan bygevoeg word, behalwe in gebiede wat as redigeerbaar gemerk is.
+	Only form fields can be filled in.	Slegs vormvelde kan ingevul word.
+	only https addresses can be used	slegs https-adresse kan gebruik word
+	Only pictures I may use commercially	Slegs prente wat ek kommersieel mag gebruik
+	Only the allowed styles can be applied.	Slegs die toegelate style kan toegepas word.
+	Only web (http, https) and email (mailto) links can be followed	Slegs web- (http, https) en e-posskakels (mailto) kan gevolg word
+	Open	Maak oop
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Maak ’n lêer met Doc4Me se eie blaaier oop wanneer die stelsel se lêerdialoog nie verskyn nie.
+	Open Data Source…	Maak databron oop…
+	Open Hyperlink	Maak hiperskakel oop
+	OpenDocument Text (*.odt)	OpenDocument-teks (*.odt)
+	Opening print dialog…	Maak tans drukdialoog oop…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Maak voortaan .docx-, .doc-, .rtf- en .odt-lêers en Word-sjablone met Doc4Me oop.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Maak Instellings › Verstektoepassings oop, waar jy Doc4Me vir .docx en die ander dokumenttipes kies.
+	Open…	Maak oop…
+	Operator	Operator
+	Operator Structures	Operatorstrukture
+	Operators	Operatore
+	Optional Hyphen	Opsionele koppelteken
+	Options	Opsies
+	Options…	Opsies…
+	Or	Of
+	Or save a copy in another format:	Of stoor ’n kopie in ’n ander formaat:
+	Ordinals (1st) as superscript	Rangtelwoorde (1st) as boskrif
+	Organizer	Organiseerder
+	Organizer…	Organiseerder…
+	Orientation	Oriëntasie
+	Original document	Oorspronklike dokument
+	Other	Ander
+	Other Authorities	Ander gesagsbronne
+	Other Large Operators	Ander groot operatore
+	Other paragraph styles	Ander paragraafstyle
+	Other styles and their TOC level:	Ander style en hul inhoudsopgawevlak:
+	Otherwise insert:	Voeg andersins in:
+	Outline	Buitelyn
+	Outline Level	Buitelynvlak
+	Outline level	Buitelynvlak
+	Outline levels	Buitelynvlakke
+	Outline State	Buitelynstatus
+	Outline Tools	Buitelyngereedskap
+	Outlining	Buitelyne
+	Outside	Buite
+	Outside border	Buiterand
+	Outside Borders	Buiterande
+	Outside Margin	Buitemarge
+	Outside:	Buite:
+	Outward Brackets	Uitwaartse hakies
+	Oval	Ovaal
+	Overbar	Boonstreep
+	Overbars and Underbars	Boon- en onderstrepe
+	Overbrace	Boonkrulhakie
+	Overtype	Oortik
+	Overtype (typing replaces the characters after the caret)	Oortik (tik vervang die karakters ná die wyser)
+	Page	Bladsy
+	Page Background	Bladsyagtergrond
+	Page Border	Bladsyrand
+	Page Borders	Bladsyrande
+	Page Break	Bladsybreuk
+	Page Break Before	Bladsybreuk voor
+	Page break before	Bladsybreuk voor
+	Page Breaks	Bladsybreuke
+	Page Color	Bladsykleur
+	Page display	Bladsyvertoon
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Bladsyprent (*.jpg, *.jpeg)
+	Page image (*.png)	Bladsyprent (*.png)
+	Page Movement	Bladsybeweging
+	Page Number	Bladsynommer
+	Page number style	Bladsynommerstyl
+	Page numbers at the right margin	Bladsynommers by die regtermarge
+	Page on which a bookmarked passage falls	Bladsy waarop ’n boekgemerkte gedeelte val
+	Page Setup	Bladsyopstelling
+	Page title	Bladsytitel
+	Page Up	Page Up
+	Page Width	Bladsywydte
+	Page width	Bladsywydte
+	Page X of Y	Bladsy X van Y
+	Page {page}	Bladsy {page}
+	Page {page} of {pages}	Bladsy {page} van {pages}
+	Page\nBorders	Bladsy-\nrande
+	Page\nColor	Bladsy-\nkleur
+	Page\nNumber	Bladsy-\nnommer
+	Pages	Bladsye
+	Pages like 1-3, 5	Bladsye soos 1-3, 5
+	Pages of bookmark:	Bladsye van boekmerk:
+	Paragraph	Paragraaf
+	Paragraph Character	Paragraafkarakter
+	Paragraph Details	Paragraafbesonderhede
+	Paragraph Down	Paragraaf af
+	Paragraph Mark	Paragraafmerk
+	Paragraph marks	Paragraafmerke
+	Paragraph Settings	Paragraafinstellings
+	Paragraph Spacing	Paragraafspasiëring
+	Paragraph style	Paragraafstyl
+	Paragraph Up	Paragraaf op
+	Paragraphs	Paragrawe
+	Paragraph…	Paragraaf…
+	Parentheses	Ronde hakies
+	Parentheses with Separator	Ronde hakies met skeier
+	Partial Differential	Parsiële differensiaal
+	Password	Wagwoord
+	Password:	Wagwoord:
+	Paste	Plak
+	Paste All	Plak alles
+	Paste as:	Plak as:
+	Paste Clipboard Item	Plak knipborditem
+	Paste Formatting	Plak formatering
+	Paste Special	Plak spesiaal
+	Paste Special…	Plak spesiaal…
+	Paste Spike	Plak versamelpen
+	Paste: Keep Text Only	Plak: behou slegs teks
+	Paste: Merge Formatting	Plak: voeg formatering saam
+	Pasting between documents:	Plak tussen dokumente:
+	Pasting from other programs:	Plak uit ander programme:
+	Pasting within the same document:	Plak binne dieselfde dokument:
+	Pause	Pouseer
+	Paused	Gepouseer
+	PDF document (*.pdf)	PDF-dokument (*.pdf)
+	Pen	Pen
+	Pencil	Potlood
+	Pens	Penne
+	People	Mense
+	Periodical	Tydskrif
+	Personalize	Verpersoonlik
+	Phonetic Guide	Fonetiese gids
+	Pi Over 2	Pi oor 2
+	Picas	Pica’s
+	Pick a custom group (New Group makes one)	Kies ’n pasgemaakte groep (Nuwe groep skep een)
+	Pick a field from the list	Kies ’n veld uit die lys
+	Picture	Prent
+	Picture Border	Prentrand
+	Picture Content Control	Prent-inhoudkontrole
+	Picture Format	Prentformaat
+	Picture Styles	Prentstyle
+	Pictures	Prente
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Prente van Openverse. Respekteer elke prent se lisensie: Doc4Me voeg ’n erkenningsreël daaronder by.
+	Pie	Sirkel
+	Placeholder Name	Plekhouernaam
+	Placeholder text	Plekhouerteks
+	Plain Table 1	Gewone tabel 1
+	Plain text (*.txt)	Gewone teks (*.txt)
+	Plain Text Content Control	Gewone teks-inhoudkontrole
+	Play	Speel
+	Play Video	Speel video
+	Play/Pause	Speel/pouseer
+	Plus Equal	Plus gelyk
+	Points	Punte
+	points and above	punte en groter
+	Polish	Pools
+	Portrait	Portret
+	Portuguese (Brazil)	Portugees (Brasilië)
+	Portuguese (Portugal)	Portugees (Portugal)
+	Position	Posisie
+	Position:	Posisie:
+	Positioning…	Posisionering…
+	Possible spelling mistake	Moontlike spelfout
+	Postal Code	Poskode
+	Power series of (1+x)ⁿ	Magreeks van (1+x)ⁿ
+	Preferred width:	Voorkeurwydte:
+	Preserve	Behou
+	Preserve formatting during updates	Behou formatering tydens bywerkings
+	Presets	Voorafinstellings
+	Press a key combination	Druk ’n sleutelkombinasie
+	Preview	Voorskou
+	Preview Results	Voorskou van resultate
+	Preview\nResults	Voorskou van\nresultate
+	Previous	Vorige
+	Previous 1 or More	Vorige 1 of meer
+	Previous Change	Vorige verandering
+	Previous Comment	Vorige opmerking
+	Previous Field	Vorige veld
+	Previous Footnote	Vorige voetnoot
+	Previous Page	Vorige bladsy
+	Previous Record	Vorige rekord
+	Previous Section	Vorige afdeling
+	Previous Sentence	Vorige sin
+	Previous sentence	Vorige sin
+	Previous Window	Vorige venster
+	Print	Druk
+	Print blank lines when data fields are empty	Druk leë reëls wanneer datavelde leeg is
+	Print Documents	Druk dokumente
+	Print Documents…	Druk dokumente…
+	Print failed: {error}	Druk het misluk: {error}
+	Print Layout	Drukuitleg
+	Print Markup	Druk merke
+	Print the page color	Druk die bladsykleur
+	Print to PDF	Druk na PDF
+	Print\nLayout	Druk-\nuitleg
+	Printer	Drukker
+	Printing	Drukwerk
+	Process	Proses
+	Product	Produk
+	Product of A	Produk van A
+	Product with Limits	Produk met grense
+	Product with Lower Limit	Produk met ondergrens
+	Product with Subscript-Superscript Limits	Produk met onderskrif-boskrifgrense
+	Products and Coproducts	Produkte en koprodukte
+	Professional	Professioneel
+	Promote	Hoër vlak
+	Promote to Heading 1	Verhoog na Opskrif 1
+	Proofing	Proeflees
+	Proofing Issues	Proefleeskwessies
+	Proofing language	Proefleestaal
+	Properties	Eienskappe
+	Protect	Beskerm
+	Protect Document	Beskerm dokument
+	PRs	PR’s
+	pt	pt
+	Publisher	Uitgewer
+	Punctuation	Leestekens
+	Put the caret in a content control first.	Plaas eers die wyser in ’n inhoudkontrole.
+	Put the default commands back on the Quick Access Toolbar?	Plaas die verstekopdragte terug op die Vinnige Toegang-nutsbalk?
+	Pyramid	Piramide
+	Quadratic Root	Vierkantswortel
+	Query Options…	Navraagopsies…
+	Quick Access Toolbar	Vinnige Toegang-nutsbalk
+	Quick Parts	Vinnige dele
+	Quick Tables	Vinnige tabelle
+	Quote	Aanhaling
+	Radical	Wortel
+	Radical with Degree	Wortel met graad
+	Radicals	Wortels
+	Raised/lowered	Verhoog/verlaag
+	Read Aloud	Lees hardop
+	Read Aloud couldn't start the speech program: {reason}	Lees hardop kon nie die spraakprogram begin nie: {reason}
+	Read Aloud couldn't start: {reason}	Lees hardop kon nie begin nie: {reason}
+	Read Aloud isn't available in the browser	Lees hardop is nie in die blaaier beskikbaar nie
+	Read Aloud Status	Lees hardop-status
+	Read Aloud stopped: {reason}	Lees hardop gestop: {reason}
+	Read Mode	Leesmodus
+	Read\nAloud	Lees\nhardop
+	Read\nMode	Lees-\nmodus
+	Reading	Lees
+	Reading Column Width	Lees-kolomwydte
+	Reading Highlight	Lees-uitligting
+	Reading Line Spacing	Lees-reëlspasiëring
+	Reading Mode	Leesmodus
+	Reading Speed	Leesspoed
+	Reading Text Size	Lees-teksgrootte
+	Reads the clipboard's rich text and keeps its formatting.	Lees die knipbord se ryk teks en behou sy formatering.
+	Reads the clipboard's web content and keeps its formatting.	Lees die knipbord se webinhoud en behou sy formatering.
+	Real name	Regte naam
+	Recent	Onlangs
+	Recent Colors	Onlangse kleure
+	Recent documents to show:	Onlangse dokumente om te wys:
+	Recently used symbols:	Onlangs gebruikte simbole:
+	Recipient List	Ontvangerlys
+	Recipient lists	Ontvangerlyste
+	Recipients: {count}	Ontvangers: {count}
+	Recognized (you can correct it):	Herken (jy kan dit korrigeer):
+	Recognized Functions	Herkende funksies
+	Recognized Functions…	Herkende funksies…
+	Recolor a one-color picture, such as an icon	Herkleur ’n eenkleurige prent, soos ’n ikoon
+	Recolor Selected Ink	Herkleur gekose ink
+	Record Macro	Neem makro op
+	Recover Unsaved Documents	Herstel ongestoorde dokumente
+	Rectangle	Reghoek
+	Red:	Rooi:
+	Redo	Herdoen
+	Reduce Hanging Indent	Verminder hangende inkeping
+	References	Verwysings
+	Reflection	Weerkaatsing
+	Refresh	Verfris
+	Registered	Geregistreer
+	Registered Sign	Geregistreerd-teken
+	Regular expressions	Gewone uitdrukkings
+	Regulations	Regulasies
+	Reject	Verwerp
+	Reject All	Verwerp alles
+	Reject All Changes	Verwerp alle veranderinge
+	Reject Change	Verwerp verandering
+	Relationship	Verwantskap
+	relative to	relatief tot
+	Relative to:	Relatief tot:
+	Relaxed	Ontspanne
+	Remove	Verwyder
+	Remove Added Font	Verwyder bygevoegde lettertipe
+	Remove Background	Verwyder agtergrond
+	Remove Content Control	Verwyder inhoudkontrole
+	Remove every custom shortcut and restore the built-in keys?	Verwyder elke pasgemaakte kortpad en herstel die ingeboude sleutels?
+	Remove every custom tab and group and show all tabs again?	Verwyder elke pasgemaakte oortjie en groep en wys weer alle oortjies?
+	Remove field	Verwyder veld
+	Remove Field Name	Verwyder veldnaam
+	Remove Footer	Verwyder voetskrif
+	Remove from Quick Access Toolbar	Verwyder van Vinnige Toegang-nutsbalk
+	Remove Header	Verwyder kopskrif
+	Remove Hyperlink	Verwyder hiperskakel
+	Remove Password	Verwyder wagwoord
+	Remove Pen	Verwyder pen
+	Remove Positioning	Verwyder posisionering
+	Remove recipient	Verwyder ontvanger
+	Remove row	Verwyder ry
+	Remove series	Verwyder reeks
+	Remove Space After Paragraph	Verwyder spasie ná paragraaf
+	Remove Table of Contents	Verwyder inhoudsopgawe
+	Remove the control once edited	Verwyder die kontrole sodra geredigeer
+	Remove the space before the punctuation	Verwyder die spasie voor die leesteken
+	Remove Watermark	Verwyder watermerk
+	Rename Style	Hernoem styl
+	Rename…	Hernoem…
+	Reopen	Maak weer oop
+	Repeat	Herhaal
+	Repeat as header row on each page	Herhaal as opskrifry op elke bladsy
+	Repeat Header Rows	Herhaal opskrifrye
+	Repeated words	Herhaalde woorde
+	Repeating Section Content Control	Herhalende afdeling-inhoudkontrole
+	Replace	Vervang
+	Replace All	Vervang alles
+	Replace as you type	Vervang terwyl jy tik
+	Replace Document Text	Vervang dokumentteks
+	Replace text as you type	Vervang teks terwyl jy tik
+	Replace with:	Vervang met:
+	Replace:	Vervang:
+	Replay	Speel weer
+	Reply	Antwoord
+	Report	Verslag
+	Research	Navorsing
+	Researcher	Navorser
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Navorser benodig ’n aanlyn diens; Doc4Me hou jou dokumente vanlyn.
+	Reset	Stel terug
+	Reset All	Stel alles terug
+	Reset All…	Stel alles terug…
+	Reset Character Formatting	Stel karakterformatering terug
+	Reset Crop	Stel bysnyding terug
+	Reset Graphic	Stel grafika terug
+	Reset Paragraph Formatting	Stel paragraafformatering terug
+	Reset Picture	Stel prent terug
+	Reset to Normal	Stel terug na Normaal
+	Reset\nGraphic	Stel grafika\nterug
+	Reset…	Stel terug…
+	Resize Table by Dragging	Verander tabelgrootte deur te sleep
+	Resolve	Los op
+	Resolved	Opgelos
+	Restart at 1	Herbegin by 1
+	Restart Each Page	Herbegin elke bladsy
+	Restart Each Section	Herbegin elke afdeling
+	Restart list after:	Herbegin lys ná:
+	Restore	Herstel
+	Restore Defaults	Herstel verstekke
+	Restore Down	Herstel af
+	Restore to Normal Word Document	Herstel na normale Word-dokument
+	Restrict Editing	Beperk redigering
+	Restrict\nEditing	Beperk\nredigering
+	Result	Resultaat
+	Results	Resultate
+	Return address labels	Terugstuuradres-etikette
+	Return address:	Terugstuuradres:
+	Reverse the order	Keer die volgorde om
+	Review	Hersien
+	Review AutoFormat Changes	Hersien OutoFormateer-veranderinge
+	Review Changes…	Hersien veranderinge…
+	Reviewing	Hersiening
+	Reviewing Pane	Hersieningspaneel
+	Reviewing — edits become suggestions	Hersiening — wysigings word voorstelle
+	Revised document	Hersiene dokument
+	Revisions	Hersienings
+	Rewind	Spoel terug
+	Ribbon	Lint
+	Ribbon and Quick Access Toolbar:	Lint en Vinnige Toegang-nutsbalk:
+	Ribbon tabs	Lintoortjies
+	Rich Text Content Control	Ryk teks-inhoudkontrole
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Regs
+	Right (vertical)	Regs (vertikaal)
+	Right align page numbers	Belyn bladsynommers regs
+	Right Arrow with Text Above	Pyl na regs met teks bo
+	Right Arrow with Text Below	Pyl na regs met teks onder
+	Right Border	Regterrand
+	Right border	Regterrand
+	Right Bracket Twice	Regterhakie twee keer
+	Right indent	Regterinkeping
+	Right Margin	Regtermarge
+	Right Only	Slegs regs
+	Right only	Slegs regs
+	Right-to-left	Regs na links
+	Right-to-Left Section	Regs-na-links-afdeling
+	Right-to-Left Table	Regs-na-links-tabel
+	Right-to-Left Text Direction	Teksrigting regs na links
+	Right:	Regs:
+	Rightwards Arrow Above	Pyl na regs bo
+	Rightwards Harpoon Above	Harpoen na regs bo
+	Roots of ax²+bx+c	Wortels van ax²+bx+c
+	Rotate	Roteer
+	Rotate all text 270°	Roteer alle teks 270°
+	Rotate all text 90°	Roteer alle teks 90°
+	Rotate Left 90°	Roteer 90° links
+	Rotate Right 90°	Roteer 90° regs
+	Rotation	Rotasie
+	Rotation:	Rotasie:
+	Rounded Rectangle	Afgeronde reghoek
+	Row	Ry
+	Row:	Ry:
+	Rows & Columns	Rye en kolomme
+	Ruby text:	Robyn-teks:
+	Ruler	Liniaal
+	Rules	Reëls
+	Run	Voer uit
+	Run-in	Inlopend
+	Russian	Russies
+	Résumé	CV
+	Same as the whole table	Dieselfde as die hele tabel
+	SAMPLE	VOORBEELD
+	Sat:	Versad.:
+	Save	Stoor
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Stoor ’n kopie in ’n ander formaat. Drukwerk gaan deur ’n PDF wat jy uit enige kyker kan druk.
+	Save As	Stoor as
+	Save as Template	Stoor as sjabloon
+	Save documents	Stoor dokumente
+	Save the document to turn on AutoSave	Stoor die dokument om OutoStoor aan te skakel
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Stoor die dokument om OutoStoor aan te skakel (’n lêer wat jy net oopgemaak het, word nie herskryf voordat jy dit stoor nie)
+	Save these pages as PDF…	Stoor hierdie bladsye as PDF…
+	Save Version	Stoor weergawe
+	Saved	Gestoor
+	Scale	Skaal
+	Scale Drawing	Skaal tekening
+	Scatter	Strooi
+	Screen Clipping	Skermuitknipsel
+	Screen clipping didn't work: {reason}	Skermuitknipsel het nie gewerk nie: {reason}
+	Screen clipping ended without a picture.	Skermuitknipsel het sonder ’n prent geëindig.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Skermuitknipsel is nie hier beskikbaar nie. Kopieer ’n prent van die skerm en plak dit dan.
+	Screenshot	Skermskoot
+	Script	Skrif
+	Scripts	Skripte
+	Scroll ribbon left	Rol lint na links
+	Scroll ribbon right	Rol lint na regs
+	Search	Soek
+	Search Commands	Soek opdragte
+	Search commands and help	Soek opdragte en hulp
+	Search document	Deursoek dokument
+	Search for templates	Soek vir sjablone
+	Search icons	Soek ikone
+	Search Openverse (Creative Commons pictures)	Deursoek Openverse (Creative Commons-prente)
+	Search Options	Soekopsies
+	Searching…	Soek tans…
+	Secant Function	Sekansfunksie
+	Section Break	Afdelingsbreuk
+	Section Breaks	Afdelingsbreuke
+	Section Character	Afdelingkarakter
+	Section direction:	Afdelingrigting:
+	Section Mark	Afdelingsteken
+	Section Properties	Afdelingseienskappe
+	Sections	Afdelings
+	See	Sien
+	Select	Kies
+	Select a picture, shape, chart or table to describe it.	Kies ’n prent, vorm, grafiek of tabel om dit te beskryf.
+	Select All	Kies alles
+	Select Cell	Kies sel
+	Select Floating Shapes	Kies swewende vorms
+	Select Heading and Content	Kies opskrif en inhoud
+	Select Line	Kies reël
+	Select Objects	Kies objekte
+	Select Paragraph	Kies paragraaf
+	Select Range	Kies reeks
+	Select Recipients	Kies ontvangers
+	Select recipients first to choose from their fields.	Kies eers ontvangers om uit hul velde te kies.
+	Select recipients first to match their fields.	Kies eers ontvangers om hul velde te pas.
+	Select Row	Kies ry
+	Select Sentence	Kies sin
+	Select Table	Kies tabel
+	Select Text	Kies teks
+	Select text in the document to translate it.	Kies teks in die dokument om dit te vertaal.
+	Select Text with Similar Formatting	Kies teks met soortgelyke formatering
+	Select text, then tick who can still edit it.	Kies teks en merk dan wie dit nog kan redigeer.
+	Select the part of the screen to insert.	Kies die deel van die skerm om in te voeg.
+	Select Word	Kies woord
+	Select\nRecipients	Kies\nontvangers
+	Selected Fields	Gekose velde
+	Selected pages	Gekose bladsye
+	Selection	Keuse
+	Selection Pane	Keusepaneel
+	Send Backward	Stuur agtertoe
+	Send the document straight to the system print dialog, or save a copy in another format below.	Stuur die dokument direk na die stelsel se drukdialoog, of stoor hieronder ’n kopie in ’n ander formaat.
+	Sentence	Sin
+	Sentence case.	Sin met hoofletter.
+	Separator:	Skeier:
+	Sequence name:	Reeksnaam:
+	Serbian	Serwies
+	Serbian (Cyrillic)	Serwies (Cyrillies)
+	Serbian (Latin)	Serwies (Latyn)
+	Series name	Reeksnaam
+	Series {n}	Reeks {n}
+	Server address (https://…)	Bedieneradres (https://…)
+	Set	Stel
+	Set As Default	Stel as verstek
+	Set as Default	Stel as verstek
+	Set Caret	Plaas wyser
+	Set Character Formatting	Stel karakterformatering
+	Set Date	Stel datum
+	Set Equation	Stel vergelyking
+	Set Numbering Value	Stel nommeringwaarde
+	Set Paragraph Formatting	Stel paragraafformatering
+	Set Proofing Language…	Stel proefleestaal…
+	Setting:	Instelling:
+	Settings…	Instellings…
+	Shading	Skadu
+	Shadow	Skaduwee
+	Shadow, glow and soft edges	Skaduwee, gloed en sagte rande
+	Shape Effects	Vormeffekte
+	Shape Fill	Vormvulsel
+	Shape Format	Vormformaat
+	Shape Outline	Vormbuitelyn
+	Shape Styles	Vormstyle
+	Shapes	Vorms
+	Share	Deel
+	Sheet:	Blad:
+	Shift cells down	Skuif selle af
+	Shift cells right	Skuif selle regs
+	Shift+Tab	Shift+Tab
+	Shipping labels	Versendingsetikette
+	Short citation:	Kort aanhaling:
+	Shortcut key:	Kortpadsleutel:
+	Show	Wys
+	Show all formatting marks	Wys alle formateringsmerke
+	Show All Levels	Wys alle vlakke
+	Show all revisions inline	Wys alle hersienings inlyn
+	Show changes at:	Wys veranderinge by:
+	Show changes in:	Wys veranderinge in:
+	Show Comments	Wys opmerkings
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Wys dokumente met hul kleure omgekeer, soos Aansig › Wissel modusse. Stoor, druk en PDF’s bly onveranderd.
+	Show every bibliography field	Wys elke bibliografieveld
+	Show First Line Only	Wys slegs eerste reël
+	Show in the Styles gallery	Wys in die Style-galery
+	Show KeyTips (Alt or F10)	Wys sleutelwenke (Alt of F10)
+	Show Level	Wys vlak
+	Show Level 1	Wys vlak 1
+	Show Level 2	Wys vlak 2
+	Show Level 3	Wys vlak 3
+	Show Level 4	Wys vlak 4
+	Show Level 5	Wys vlak 5
+	Show Level 6	Wys vlak 6
+	Show Level 7	Wys vlak 7
+	Show Level 8	Wys vlak 8
+	Show Level 9	Wys vlak 9
+	Show Markup	Wys merke
+	Show Notes	Wys notas
+	Show only comments and formatting in balloons	Wys slegs opmerkings en formatering in ballonne
+	Show or Hide Style	Wys of versteek styl
+	Show page numbers	Wys bladsynommers
+	Show revisions in balloons	Wys hersienings in ballonne
+	Show rulers	Wys linjale
+	Show Text Formatting	Wys teksformatering
+	Show the equation in the line of text	Wys die vergelyking in die teksreël
+	Show the equation on a line of its own	Wys die vergelyking op ’n eie reël
+	Show the mini toolbar when text is selected	Wys die mini-nutsbalk wanneer teks gekies is
+	Show/Hide ¶	Wys/versteek ¶
+	Show\nComments	Wys\nopmerkings
+	Showing the first {count} items.	Wys die eerste {count} items.
+	Shows a tree: each item below the item it belongs to.	Wys ’n boom: elke item onder die item waaraan dit behoort.
+	Shows items around a central idea: the first item is the centre.	Wys items rondom ’n sentrale idee: die eerste item is die middelpunt.
+	Shows items of equal weight as blocks in rows.	Wys items van gelyke gewig as blokke in rye.
+	Shows overlapping ideas as overlapping circles.	Wys oorvleuelende idees as oorvleuelende sirkels.
+	Shows parts of a whole as quadrants.	Wys dele van ’n geheel as kwadrante.
+	Shows parts that build on each other, largest at the bottom.	Wys dele wat op mekaar voortbou, die grootste onderaan.
+	Shows steps in order, left to right, with arrows between them.	Wys stappe in volgorde, links na regs, met pyle tussen hulle.
+	Shows steps that repeat, around a circle.	Wys stappe wat herhaal, rondom ’n sirkel.
+	Shrink Font 1 Point	Verklein lettertipe met 1 punt
+	Shrink Selection	Krimp keuse
+	Shrink text	Krimp teks
+	Side to Side	Langs mekaar
+	Side\nto Side	Langs\nmekaar
+	Sides of a right triangle	Sye van ’n reghoekige driehoek
+	Signature Line	Handtekeningreël
+	Sine and cosine series of f(x)	Sinus- en kosinusreeks van f(x)
+	Sine Function	Sinusfunksie
+	Sine theta	Sinus theta
+	Single	Enkel
+	Single Brackets	Enkele hakies
+	Single Closing Quote	Enkele sluitaanhalingsteken
+	Single label	Enkele etiket
+	Single Left Angle	Enkele linker driehoekige hakie
+	Single Left Bar	Enkele linkerstreep
+	Single Left Brace	Enkele linkerkrulhakie
+	Single Left Bracket	Enkele linker vierkantige hakie
+	Single Left Parenthesis	Enkele linker ronde hakie
+	Single Opening Quote	Enkele openingsaanhalingsteken
+	Single Right Brace	Enkele regterkrulhakie
+	Single Right Bracket	Enkele regter vierkantige hakie
+	Single Right Parenthesis	Enkele regter ronde hakie
+	Single Spacing	Enkele spasiëring
+	SIST02	SIST02
+	Site name	Webwerfnaam
+	Size	Grootte
+	Size (pt):	Grootte (pt):
+	Size and Crop…	Grootte en bysnyding…
+	Size:	Grootte:
+	Sketchbook	Sketsboek
+	Skewed Fraction	Skuins breuk
+	Skip citations & bibliography	Slaan aanhalings en bibliografie oor
+	Skip Citations and Bibliography	Slaan aanhalings en bibliografie oor
+	Skip Record If	Slaan rekord oor as
+	Skip Record If…	Slaan rekord oor as…
+	Slant Down	Skuins af
+	Slant Up	Skuins op
+	Small Caps	Klein hoofletters
+	Small caps	Klein hoofletters
+	Small change	Klein verandering
+	Smart quotes instead of straight quotes	Slim aanhalingstekens in plaas van reguit aanhalingstekens
+	SmartArt	SmartArt
+	SmartArt Design	SmartArt-ontwerp
+	SmartArt Styles	SmartArt-style
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Gladde rol en zoem, en kieslyste en knoppies wat invervaag. Af wys elke verandering dadelik.
+	Soft Edges	Sagte rande
+	Soft Glow	Sagte gloed
+	Solid Accent	Soliede aksent
+	Sort	Sorteer
+	Sort by	Sorteer volgens
+	Sort order:	Sorteervolgorde:
+	Sort Records	Sorteer rekords
+	Source code: github.com/chatraweechai/doc4me	Bronkode: github.com/chatraweechai/doc4me
+	Source Manager	Bronbestuurder
+	Source type:	Brontipe:
+	Sources in this document:	Bronne in hierdie dokument:
+	South	Suid
+	Space	Spasie
+	Space after	Spasie ná
+	Space after: {pt} pt	Spasie ná: {pt} pt
+	Space before	Spasie voor
+	Space before/after:	Spasie voor/ná:
+	Space before: {pt} pt	Spasie voor: {pt} pt
+	Spaces	Spasies
+	Spacing	Spasiëring
+	Spacing (pt):	Spasiëring (pt):
+	Spacing:	Spasiëring:
+	Spanish	Spaans
+	Spanish (Mexico)	Spaans (Meksiko)
+	Spanish (Spain)	Spaans (Spanje)
+	Sparse Matrices	Yl matrikse
+	Special	Spesiaal
+	Special Characters	Spesiale karakters
+	Specify height:	Spesifiseer hoogte:
+	Speech	Spraak
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Spraak word op hierdie rekenaar herken (whisper.cpp); niks word aanlyn gestuur nie.
+	Speed	Spoed
+	Spelling	Spelling
+	Spelling & Grammar	Spelling en grammatika
+	Spelling &\nGrammar	Spelling en\ngrammatika
+	Spelling and grammar are checked in English (United States).	Spelling en grammatika word in Engels (Verenigde State) gekontroleer.
+	Spelling Suggestions	Spellingvoorstelle
+	Spike	Versamelpen
+	Split	Verdeel
+	Split apart page break and paragraph mark	Skei bladsybreuk en paragraafmerk
+	Split Cells	Verdeel selle
+	Split Table	Verdeel tabel
+	Spreadsheet Table	Sigbladtabel
+	Square	Vierkant
+	Square Root	Vierkantswortel
+	Square Root with Degree	Vierkantswortel met graad
+	Square Union	Vierkantige vereniging
+	Stack Object	Stapelobjek
+	Stack Object (Three)	Stapelobjek (drie)
+	Stacked	Gestapel
+	Stacked Bar	Gestapelde staaf
+	Stacked Column	Gestapelde kolom
+	Stacked Fraction	Gestapelde breuk
+	Stacked, no bar	Gestapel, sonder streep
+	Standard	Standaard
+	Standard and Contextual	Standaard en kontekstueel
+	Standard Colors	Standaardkleure
+	Standard Only	Slegs standaard
+	Star	Ster
+	Start at:	Begin by:
+	Start Enforcing Protection	Begin beskerming afdwing
+	Start Mail Merge	Begin possamevoeging
+	Start Mail\nMerge	Begin pos-\nsamevoeging
+	State	Provinsie
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Statistics	Statistiek
+	Status Bar	Statusbalk
+	Statutes	Statute
+	Stop	Stop
+	Stop Protection	Stop beskerming
+	Stop Reading	Stop lees
+	Stopped	Gestop
+	Store	Winkel
+	Straight Arrow Connector	Reguit pylverbinder
+	Straight Connector	Reguit verbinder
+	Strikethrough	Deurhaal
+	Stroke {n} of {total}	Haal {n} van {total}
+	Strong	Sterk
+	Structure Actions	Struktuuraksies
+	Structures	Strukture
+	Studio	Studio
+	Studio cover	Studio-voorblad
+	Studio handbook (sample)	Studiohandboek (voorbeeld)
+	Style	Styl
+	Style based on:	Styl gebaseer op:
+	Style Inspector	Stylinspekteur
+	Style Set	Stylstel
+	Style:	Styl:
+	Style: APA	Styl: APA
+	Style: {style}	Styl: {style}
+	Styles	Style
+	Styles Pane	Stylepaneel
+	Styles:	Style:
+	Subentry:	Subinskrywing:
+	Subject	Onderwerp
+	Subscript	Onderskrif
+	Subscript-Superscript	Onderskrif-boskrif
+	Subscripts and Superscripts	Onderskrifte en boskrifte
+	Subset:	Substel:
+	Substituted font	Vervangde lettertipe
+	Subtitle	Subtitel
+	Subtle Emphasis	Subtiele klem
+	Subtle Reference	Subtiele verwysing
+	Sum	Som
+	Sum of cosines	Som van kosinusse
+	Sum or difference of sines	Som of verskil van sinusse
+	Summation	Sommasie
+	Summation from 0 to n	Sommasie van 0 tot n
+	Summation over binomials	Sommasie oor binomiale
+	Summation with Limits	Sommasie met grense
+	Summation with Lower Limit	Sommasie met ondergrens
+	Summation with Subscript Limit	Sommasie met onderskrifgrens
+	Summation with Subscript-Superscript Limits	Sommasie met onderskrif-boskrifgrense
+	Summations	Sommasies
+	Superscript	Boskrif
+	Suppress line numbers	Onderdruk reëlnommers
+	Surface Integral	Oppervlakintegraal
+	Surface Integral with Limits	Oppervlakintegraal met grense
+	Surface Integral with Stacked Limits	Oppervlakintegraal met gestapelde grense
+	Swap footnotes and endnotes	Ruil voetnote en eindnote om
+	Swedish	Sweeds
+	Switch Modes	Wissel modusse
+	Switch Windows	Wissel vensters
+	Switch\nModes	Wissel\nmodusse
+	Symbol	Simbool
+	Symbol Font	Simboollettertipe
+	Symbols	Simbole
+	Synchronous Scrolling	Gesinchroniseerde rol
+	Synonyms	Sinonieme
+	System	Stelsel
+	Tab	Tab
+	Tab Character	Tabkarakter
+	Tab character	Tabkarakter
+	Tab characters	Tabkarakters
+	Tab leader:	Tableier:
+	Tab stop position:	Tabstopposisie:
+	Tab stops to be cleared:	Tabstops om uit te vee:
+	Table	Tabel
+	Table AutoFormat	Tabel-OutoFormateer
+	Table AutoFormat…	Tabel-OutoFormateer…
+	Table Column Width	Tabelkolomwydte
+	Table Design	Tabelontwerp
+	Table direction:	Tabelrigting:
+	Table entry fields	Tabelinskrywingvelde
+	Table Grid	Tabelrooster
+	Table identifier:	Tabel-ID:
+	Table Layout	Tabeluitleg
+	Table of Authorities	Gesagstabel
+	Table of Contents	Inhoudsopgawe
+	Table of Contents Options	Inhoudsopgawe-opsies
+	Table of Contents Styles	Inhoudsopgawestyle
+	Table of Figures	Lys van figure
+	Table of Figures Options	Opsies vir lys van figure
+	Table of\nContents	Inhouds-\nopgawe
+	Table Positioning	Tabelposisionering
+	Table Properties	Tabeleienskappe
+	Table Row Height	Tabelryhoogte
+	Table style	Tabelstyl
+	Table Style Options	Tabelstylopsies
+	Table Styles	Tabelstyle
+	Table styles:	Tabelstyle:
+	Tables	Tabelle
+	Tabloid   11.00" × 17.00"	Tabloid   11,00" × 17,00"
+	Tabs	Tabstops
+	Tabs…	Tabstops…
+	Tabular List	Tabelvormige lys
+	Tag	Merker
+	Tangent formula	Tangensformule
+	Tangent Function	Tangensfunksie
+	TC entry fields	TC-inskrywingvelde
+	Technology	Tegnologie
+	Templates	Sjablone
+	Templates and Add-ins	Sjablone en byvoegings
+	Text	Teks
+	Text Box	Teksblokkie
+	Text boxes	Teksblokkies
+	Text Direction	Teksrigting
+	Text Effects	Tekseffekte
+	Text Effects and Typography	Tekseffekte en tipografie
+	Text Fill	Teksvulsel
+	Text from File	Teks uit lêer
+	Text Highlight Color	Teksuitligkleur
+	Text indent at:	Teksinkeping by:
+	Text isn't squeezed to fit its cell yet.	Teks word nog nie saamgedruk om in sy sel te pas nie.
+	Text Outline	Teksbuitelyn
+	Text over Colon Equal	Teks oor dubbelpunt-gelyk
+	Text over Equal	Teks oor gelykaan
+	Text Pane	Tekspaneel
+	Text size	Teksgrootte
+	Text snaps to characters	Teks rig na karakters
+	Text to display:	Teks om te vertoon:
+	Text Wrapping	Teksomvouing
+	Text wrapping:	Teksomvouing:
+	Text:	Teks:
+	Text\nBox	Teks-\nblokkie
+	Text\nDirection	Teks-\nrigting
+	Thai	Thai
+	Thai Distributed	Thai versprei
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Daardie formaat hou nie alles nie, dus is die dokument steeds oop. Stoor dit as ’n Word-dokument (.docx) om voort te gaan.
+	That isn't the web address or embed code of an online video.	Dit is nie die webadres of inbedkode van ’n aanlyn video nie.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Daardie wagwoord is nie reg nie. Kontroleer dit (wagwoorde is hoofletter-sensitief) en probeer weer.
+	The clipboard is empty.	Die knipbord is leeg.
+	The date it is today	Die datum vandag
+	The document contains no tracked changes.	Die dokument bevat geen gevolgde veranderinge nie.
+	The document has no bookmarks yet.	Die dokument het nog geen boekmerke nie.
+	The document is read only, except for regions marked editable.	Die dokument is slegs-lees, behalwe vir gebiede wat as redigeerbaar gemerk is.
+	The document will be saved with a password. Save it to protect it.	Die dokument sal met ’n wagwoord gestoor word. Stoor dit om dit te beskerm.
+	The first word of a sentence starts with a capital.	Die eerste woord van ’n sin begin met ’n hoofletter.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	die gratis daaglikse toelaag is opgebruik (probeer môre weer, of gee ’n e-posadres)
+	the LibreTranslate server	die LibreTranslate-bediener
+	The Mail Merge Helper sets up a merge in three steps.	Die Possamevoeging-helper stel ’n samevoeging in drie stappe op.
+	The new style takes the formatting of the current paragraph.	Die nuwe styl neem die formatering van die huidige paragraaf.
+	The password is optional; without it anyone can stop the protection.	Die wagwoord is opsioneel; daarsonder kan enigiemand die beskerming stop.
+	The password is removed. Save the document to keep the change.	Die wagwoord is verwyder. Stoor die dokument om die verandering te behou.
+	The passwords don't match.	Die wagwoorde stem nie ooreen nie.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Die drukker, dubbelkantige druk en bladsye per vel word in daardie dialoog gekies.
+	The recipient-list field that fills each part of an address block and greeting line.	Die ontvangerlysveld wat elke deel van ’n adresblok en groetreël invul.
+	The same word twice in a row.	Dieselfde woord twee keer na mekaar.
+	The spelling and grammar check is complete.	Die spelling- en grammatikakontrole is voltooi.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Die stelsel se lêerdialoog is nie beskikbaar nie, dus wys Doc4Me sy eie. Om die stelseldialoog te kry, installeer ’n lêerkieserportaal (soos xdg-desktop-portal-gtk) of zenity.
+	The text is sent to {service} to be translated.	Die teks word na {service} gestuur om vertaal te word.
+	The time right now	Die tyd op die oomblik
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Die video verskyn as ’n prent in die dokument. Dubbelklik daarop om dit in jou blaaier te kyk.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Die hele dokument word in ’n nuwe dokument vertaal, wat hierdie een vervang. Stoor eers jou werk.
+	Theme Colors	Temakleure
+	Theme Fonts	Temalettertipes
+	Theme List	Temalys
+	Themes	Temas
+	Then by	Dan volgens
+	Then insert:	Voeg dan in:
+	There's no text to translate.	Daar is geen teks om te vertaal nie.
+	Thesaurus	Tesourus
+	These marks show even when Show/Hide ¶ is off.	Hierdie merke wys selfs wanneer Wys/versteek ¶ af is.
+	These merge fields aren't in the recipient list:	Hierdie samevoegvelde is nie in die ontvangerlys nie:
+	These settings will be used for new documents.	Hierdie instellings sal vir nuwe dokumente gebruik word.
+	Thick	Dik
+	Thickness	Dikte
+	This Device…	Hierdie toestel…
+	This document	Hierdie dokument
+	This field has no options.	Hierdie veld het geen opsies nie.
+	This folder can't be read: {error}	Hierdie vouer kan nie gelees word nie: {error}
+	This font has no characters to show.	Hierdie lettertipe het geen karakters om te wys nie.
+	This page	Hierdie bladsy
+	This password type isn't supported.	Hierdie wagwoordtipe word nie ondersteun nie.
+	This point forward	Van hierdie punt af
+	This section	Hierdie afdeling
+	Three	Drie
+	Through	Deur
+	Tight	Styf
+	Tilde	Tilde
+	Tips ({n})	Wenke ({n})
+	Title	Titel
+	Title from the document properties	Titel uit die dokumenteienskappe
+	Title:	Titel:
+	To	Na
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Om Word-dokumente by verstek met Doc4Me oop te maak: kies een in Finder, kies File › Get Info, kies Doc4Me onder Open with, en klik dan Change All.
+	To:	Aan:
+	TOA Heading	Gesagstabel-opskrif
+	TOC Heading	Inhoudsopgawe-opskrif
+	TOC {n}	IO {n}
+	Today	Vandag
+	tOGGLE cASE	wISSEL hOOFLETTERS
+	Toggle Check Box	Wissel merkblokkie
+	Toggle Field Codes	Wissel veldkodes
+	Toggle Unicode Character	Wissel Unicode-karakter
+	Tools	Gereedskap
+	Top	Bo
+	Top and Bottom	Bo en onder
+	Top Border	Boonste rand
+	Top Margin	Boonste marge
+	Top of Next Page	Bo-aan volgende bladsy
+	Top of Page	Bo-aan bladsy
+	Top of Previous Page	Bo-aan vorige bladsy
+	Top of the Window	Bo-aan die venster
+	Top:	Bo:
+	Total	Totaal
+	Total Row	Totaalry
+	Track Changes	Spoor veranderinge
+	Track Changes Options	Spoor veranderinge-opsies
+	Track changes while editing	Spoor veranderinge tydens redigering
+	Track Changes: On	Spoor veranderinge: aan
+	Track formatting	Spoor formatering
+	Track\nChanges	Spoor\nveranderinge
+	Track\nChanges ✓	Spoor\nveranderinge ✓
+	Tracked changes	Gevolgde veranderinge
+	Tracking	Spoorsnyding
+	Trademark	Handelsmerk
+	Trademark Sign	Handelsmerkteken
+	Transform	Transformeer
+	Translate	Vertaal
+	Translate Document	Vertaal dokument
+	Translating {done} of {total}	Vertaal tans {done} van {total}
+	Translation service	Vertaaldiens
+	Translator	Vertaler
+	Transparency	Deursigtigheid
+	Transparency:	Deursigtigheid:
+	Transport	Vervoer
+	Treatises	Verhandelings
+	Triangle	Driehoek
+	Triangle Down	Driehoek af
+	Triangle Up	Driehoek op
+	Trigonometric Functions	Trigonometriese funksies
+	Triple	Drievoudig
+	Triple Dot	Drie kolletjies
+	Triple Integral	Drievoudige integraal
+	Triple Integral with Limits	Drievoudige integraal met grense
+	Triple Integral with Stacked Limits	Drievoudige integraal met gestapelde grense
+	Trust Center	Vertrouesentrum
+	Tue	Di.
+	Turabian	Turabian
+	Turkish	Turks
+	Two	Twee
+	Type	Tipe
+	Type a command, e.g. "insert table"	Tik ’n opdrag, bv. "voeg tabel in"
+	Type a New List	Tik ’n nuwe lys
+	Type a New List…	Tik ’n nuwe lys…
+	Type at least one recipient.	Tik minstens een ontvanger.
+	Type equations in LaTeX	Tik vergelykings in LaTeX
+	Type equations in the linear format (UnicodeMath)	Tik vergelykings in die lineêre formaat (UnicodeMath)
+	Type in Equation	Tik in vergelyking
+	Type normal (non-math) text in the equation	Tik normale (nie-wiskundige) teks in die vergelyking
+	Type Text	Tik teks
+	Type the categories down the side and a column of values per series.	Tik die kategorieë langs die kant en ’n kolom waardes per reeks.
+	Type the field's name and its switches, for example PAGE \\* roman.	Tik die veld se naam en sy skakelaars, byvoorbeeld PAGE \\* roman.
+	Type the password to stop the protection.	Tik die wagwoord om die beskerming te stop.
+	Type the recipients, or load them from a file.	Tik die ontvangers, of laai hulle uit ’n lêer.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Tik die merkernaam van die bron. Jy kan later meer inligting by hierdie bron voeg deur die bron te redigeer.
+	Type:	Tipe:
+	Typing	Tik
+	Typing replaces selected text	Tik vervang gekose teks
+	Ukrainian	Oekraïens
+	Unchecked symbol	Ongemerkte simbool
+	Underbar	Onderstreep
+	Underbrace	Onderkrulhakie
+	Underline	Onderstreep
+	Underline color	Onderstreepkleur
+	Underline Words Only	Onderstreep slegs woorde
+	Undo	Ontdoen
+	Undo Stroke	Ontdoen haal
+	Undo {action}	Ontdoen {action}
+	Unformatted Text	Ongeformateerde teks
+	Ungroup	Ontgroepeer
+	Union	Vereniging
+	Union of intersections	Vereniging van snydings
+	Union with Limits	Vereniging met grense
+	Union with Lower Limit	Vereniging met ondergrens
+	Union with Plus	Vereniging met plus
+	Union with Subscript-Superscript Limits	Vereniging met onderskrif-boskrifgrense
+	Unions and Intersections	Verenigings en snydings
+	Unlink Fields	Ontkoppel velde
+	Unlink\nCitations	Ontkoppel\naanhalings
+	Unlock Fields	Ontsluit velde
+	Up	Op
+	Up Diagonal Dots	Diagonale kolletjies op
+	Up one level	Een vlak op
+	Update Field	Werk veld by
+	Update fields before printing	Werk velde by voor druk
+	Update Index	Werk indeks by
+	Update Style to Match Selection	Werk styl by om by keuse te pas
+	Update Styles from Template	Werk style by uit sjabloon
+	Update Table	Werk tabel by
+	Update Table of Figures	Werk lys van figure by
+	Update to Match	Werk by om te pas
+	Update to Match Selection	Werk by om by keuse te pas
+	UPPERCASE	HOOFLETTERS
+	URGENT	DRINGEND
+	URL	URL
+	Use "a" before a consonant sound	Gebruik "a" voor ’n konsonantklank
+	Use "an" before a vowel sound	Gebruik "an" voor ’n klinkerklank
+	Use an Existing List…	Gebruik ’n bestaande lys…
+	Use passim (five or more pages)	Gebruik passim (vyf of meer bladsye)
+	Use system setting	Gebruik stelselinstelling
+	Use the Insert key to switch overtype on and off	Gebruik die Insert-sleutel om oortik aan en af te skakel
+	Use wildcards	Gebruik plekhouerkarakters
+	User Name	Gebruikernaam
+	User name:	Gebruikernaam:
+	Username	Gebruikernaam
+	Value	Waarde
+	Vector A	Vektor A
+	Vector AB	Vektor AB
+	Version	Weergawe
+	Version History	Weergawegeskiedenis
+	Version {version} ({build})	Weergawe {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Weergawes word gehou terwyl die dokument oop is (’n .docx-lêer het geen weergawes nie).
+	Vertical	Vertikaal
+	Vertical Alignment	Vertikale belyning
+	Vertical alignment:	Vertikale belyning:
+	Vertical Bars	Vertikale strepe
+	Vertical Dots	Vertikale kolletjies
+	Vertical spacing:	Vertikale spasiëring:
+	Vietnamese	Viëtnamees
+	View	Aansig
+	View Alt Text…	Bekyk alternatiewe teks…
+	View Gridlines	Bekyk roosterlyne
+	View Side by Side	Bekyk langs mekaar
+	View State	Aansigstatus
+	Views	Aansigte
+	Visual effects	Visuele effekte
+	Voice	Stem
+	Volume	Volume
+	Volume Integral	Volume-integraal
+	Volume Integral with Limits	Volume-integraal met grense
+	Volume Integral with Stacked Limits	Volume-integraal met gestapelde grense
+	W:	W:
+	Waiting for Zotero…	Wag tans vir Zotero…
+	Warm Gradient with Outline	Warm gradiënt met buitelyn
+	Warnings ({n})	Waarskuwings ({n})
+	Watermark	Watermerk
+	Wave	Golf
+	Weather	Weer
+	web access isn't available here	webtoegang is nie hier beskikbaar nie
+	Web Layout	Webuitleg
+	Web page (*.html)	Webblad (*.html)
+	Web\nLayout	Web-\nuitleg
+	Website	Webwerf
+	Wed	Wo.
+	Weight	Gewig
+	West	Wes
+	When merging records	Wanneer rekords saamgevoeg word
+	When this document was first created	Wanneer hierdie dokument eerste geskep is
+	When this document was most recently printed	Wanneer hierdie dokument laaste gedruk is
+	When this document was most recently saved	Wanneer hierdie dokument laaste gestoor is
+	White Space	Witruimte
+	White space	Witruimte
+	Who the document properties name as author	Wie die dokumenteienskappe as outeur noem
+	Whole document	Hele dokument
+	Whole page	Hele bladsy
+	Whole Table	Hele tabel
+	Whole words	Hele woorde
+	Wide	Breed
+	Widow/Orphan Control	Wees-/weeskindbeheer
+	Widow/Orphan control	Wees-/weeskindbeheer
+	Width and spacing	Wydte en spasiëring
+	Width:	Wydte:
+	Wildcards (regex)	Plekhouerkarakters (regex)
+	Window	Venster
+	With:	Met:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 en later
+	Word 97–2003	Word 97–2003
+	Word Count	Woordtelling
+	Word document	Word-dokument
+	Word document (*.docx)	Word-dokument (*.docx)
+	Word forms	Woordvorme
+	Word Left	Woord links
+	Word level	Woordvlak
+	Word Right	Woord regs
+	Word XML Document (*.xml)	Word XML-dokument (*.xml)
+	WordArt	WordArt
+	WordArt Styles	WordArt-style
+	Words	Woorde
+	Words only	Slegs woorde
+	Wrap Text	Vou teks om
+	Wrap text	Vou teks om
+	Wrap Text Sides	Teksomvou-kante
+	Wrap\nText	Vou teks\nom
+	Write & Insert Fields	Skryf en voeg velde in
+	Write a reply	Skryf ’n antwoord
+	Write math here with the mouse or a pen.	Skryf wiskunde hier met die muis of ’n pen.
+	Writing Style: Grammar	Skryfstyl: grammatika
+	x bar	x-streep
+	Year	Jaar
+	Yes	Ja
+	Yields	Lewer
+	Your changes will be lost if you don't save them.	Jou veranderinge sal verlore gaan as jy hulle nie stoor nie.
+	Your system doesn't report an animation setting, so animation effects stay on.	Jou stelsel rapporteer nie ’n animasie-instelling nie, dus bly animasie-effekte aan.
+	Your system has animation effects turned off.	Jou stelsel het animasie-effekte afgeskakel.
+	Your system has animation effects turned on.	Jou stelsel het animasie-effekte aangeskakel.
+	Zoom	Zoem
+	Zoom In	Zoem in
+	Zoom Out	Zoem uit
+	Zoom to Page	Zoem na bladsy
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: gekanselleer
+	Zotero: done	Zotero: klaar
+	{cols}×{rows} Table	{cols}×{rows}-tabel
+	{contributors} contributors · {commits} commits	{contributors} bydraers · {commits} commits
+	{count} items highlighted	{count} items uitgelig
+	{count} of {total} pages will print	{count} van {total} bladsye sal gedruk word
+	{count} paragraphs were changed.	{count} paragrawe is verander.
+	{count} records; fields: {fields}	{count} rekords; velde: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	{fonts} is nie op hierdie rekenaar geïnstalleer nie, dus word hierdie dokument met {with} gewys. Reëls en bladsye kan anders breek as met die oorspronklike lettertipe.
+	{group} settings	{group}-instellings
+	{key}+Click to follow link	{key}+klik om skakel te volg
+	{language} is now the document's default language.	{language} is nou die dokument se verstektaal.
+	{name} (Press ENTER to Insert)	{name} (druk Enter om in te voeg)
+	{name} already exists. Choose Save again to replace it.	{name} bestaan reeds. Kies weer Stoor om dit te vervang.
+	{name} can't be a folder's name.	{name} kan nie ’n vouer se naam wees nie.
+	{name} is protected with a password.	{name} is met ’n wagwoord beskerm.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	{name} is bygevoeg. Sy makro’s is onder My byvoegings en Aansig › Makro’s.
+	{name} wasn't found.	{name} is nie gevind nie.
+	{n} entries marked.	{n} inskrywings gemerk.
+	{n} lines	{n} reëls
+	{n} of {of} recipients	{n} van {of} ontvangers
+	{n} pt	{n} pt
+	{n} records	{n} rekords
+	{n} revisions	{n} hersienings
+	{selected} of {words} words	{selected} van {words} woorde
+	{size} pt	{size} pt
+	{words} words	{words} woorde
+	{w} × {h} in	{w} × {h} duim
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	“{text}” ({row}, {series}) is nie ’n getal nie.
+	← Find	← Soek
+	✓ None	✓ Geen
+	➕ New comment	➕ Nuwe opmerking
+	📂  Browse…	📂  Blaai…
+	Add Help Text…	Voeg hulpteks by…
+	AutoText entry:	OutoTeks-inskrywing:
+	Calculate on exit	Bereken by uitgaan
+	Calculation	Berekening
+	Check Box Form Field	Merkblokkie-vormveld
+	Check Box Form Field Options	Merkblokkie-vormveldopsies
+	Check box	Merkblokkie
+	Check box enabled	Merkblokkie geaktiveer
+	Check box size:	Merkblokkiegrootte:
+	Checked	Gemerk
+	Current date	Huidige datum
+	Current time	Huidige tyd
+	Default value:	Verstekwaarde:
+	Drop-Down Form Field	Aftreklys-vormveld
+	Drop-Down Form Field Options	Aftreklys-vormveldopsies
+	Drop-down	Aftreklys
+	Drop-down enabled	Aftreklys geaktiveer
+	Drop-down item:	Aftreklysitem:
+	Fill In Form Field	Invul-vormveld
+	Fill-in enabled	Invul geaktiveer
+	Form Field	Vormveld
+	Form Field Help Text	Vormveld-hulpteks
+	Form Field Options	Vormveldopsies
+	Form Field Shading	Vormveldskadu
+	Form Field at Selection	Vormveld by keuse
+	Help Key (F1)	Hulpsleutel (F1)
+	Insert Form Field	Voeg vormveld in
+	Items in drop-down list:	Items in aftreklys:
+	Legacy Tools	Ouer gereedskap
+	Maximum length:	Maksimum lengte:
+	Next Form Field	Volgende vormveld
+	Not checked	Nie gemerk nie
+	Put the caret on a form field first.	Plaas eers die wyser op ’n vormveld.
+	Regular text	Gewone teks
+	Reset Form Fields	Stel vormvelde terug
+	Text Form Field	Teksvormveld
+	Text Form Field Options	Teksvormveldopsies
+	Type your own:	Tik jou eie:
+	Unlimited	Onbeperk
+	Protected sections:	Beskermde afdelings:
+	Section Protection	Afdelingbeskerming
+	Section {n}	Afdeling {n}
+	Select sections…	Kies afdelings…
+	AutoSummarize	OutoOpsom
+	Create a new document and put the summary there	Skep ’n nuwe dokument en plaas die opsomming daar
+	Highlight key points	Lig sleutelpunte uit
+	Insert an executive summary or abstract at the top of the document	Voeg ’n bestuursopsomming of uittreksel bo-aan die dokument in
+	Length of summary	Lengte van opsomming
+	Percent of original:	Persentasie van oorspronklike:
+	Summary: {words} of {of} words	Opsomming: {words} van {of} woorde
+	Type of summary	Tipe opsomming
+	Update document statistics	Werk dokumentstatistiek by
+	{n} sentences	{n} sinne
+	{n} words or less	{n} woorde of minder
+	At:	By:
+	Distance from text:	Afstand van teks:
+	Format Frame	Formateer raam
+	Format Frame…	Formateer raam…
+	Frame	Raam
+	Frame…	Raam…
+	Insert Frame	Voeg raam in
+	Lock anchor	Sluit anker
+	Remove Frame	Verwyder raam
+	Text wrapping	Teksomvouing
+	Chinese Conversion	Chinese omskakeling
+	Chinese Conversion…	Chinese omskakeling…
+	Converted {n} characters	{n} karakters omgeskakel
+	Simplified Chinese to Traditional Chinese	Vereenvoudigde Chinees na tradisionele Chinees
+	Simplified to Traditional	Vereenvoudig na tradisioneel
+	Traditional Chinese to Simplified Chinese	Tradisionele Chinees na vereenvoudigde Chinees
+	Traditional to Simplified	Tradisioneel na vereenvoudig
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Gebruik karaktervariante van Taiwan, Hongkong SAS en Macau SAS
+	Asian Layout	Asiatiese uitleg
+	Fit Text	Pas teks
+	Fit Text…	Pas teks…
+	Two Lines in One	Twee reëls in een
+	Two Lines in One…	Twee reëls in een…
+	New text width (pt):	Nuwe tekswydte (pt):
+	Enclose in brackets	Omsluit in hakies
+	Bracket pair:	Hakiepaar:
+	Typography	Tipografie
+	Character spacing control	Karakterspasiëringbeheer
+	Don't compress	Moenie kompakteer nie
+	Compress punctuation only	Kompakteer slegs leestekens
+	Compress punctuation and Japanese kana	Kompakteer leestekens en Japannese kana
+	First and last characters	Eerste en laaste karakters
+	Strict	Streng
+	Cannot start a line:	Kan nie ’n reël begin nie:
+	Cannot end a line:	Kan nie ’n reël eindig nie:
+	Japanese Find Options	Japannese soekopsies
+	Sounds like (Japanese)	Klink soos (Japannees)
+	Match full/half width	Pas vol/half wydte
+	Match hiragana/katakana	Pas hiragana/katakana
+	Match small kana	Pas klein kana
+	Match prolonged sound marks and dashes	Pas verlengingstekens en strepies
+	Japanese Consistency Checker	Japannese konsekwentheidskontroleerder
+	Japanese Consistency Checker…	Japannese konsekwentheidskontroleerder…
+	No inconsistent spellings were found.	Geen onkonsekwente spellings is gevind nie.
+	Pick the spelling to keep in each group.	Kies die spelling om in elke groep te hou.
+	Bidirectional text	Tweerigtingteks
+	Bidirectional Text	Tweerigtingteks
+	Default direction:	Verstekrigting:
+	Cursor movement:	Wyserbeweging:
+	Logical	Logies
+	Visual	Visueel
+	Manage Fields	Bestuur velde
+	File locations	Lêerliggings
+	File Locations	Lêerliggings
+	Documents:	Dokumente:
+	Pictures:	Prente:
+	The system's choice	Die stelsel se keuse
+	Show Repairs	Wys herstelwerk
+	No repairs were needed.	Geen herstelwerk was nodig nie.
+	These problems were found and repaired when the document was opened:	Hierdie probleme is gevind en herstel toe die dokument oopgemaak is:
+	An unreadable entry in the file was skipped: {what}	’n Onleesbare inskrywing in die lêer is oorgeslaan: {what}
+	An unreadable part was left out: {what}	’n Onleesbare deel is weggelaat: {what}
+	Unreadable relationships were ignored: {what}	Onleesbare verwantskappe is geïgnoreer: {what}
+	A missing part of an embedded object was left out: {what}	’n Ontbrekende deel van ’n ingebedde objek is weggelaat: {what}
+	Copy File	Kopieer lêer
+	Find Files	Soek lêers
+	Letter Wizard	Briefslimmerd
+	Recipient's name:	Ontvanger se naam:
+	Salutation:	Aanhef:
+	Subject:	Onderwerp:
+	Complimentary closing:	Slotgroet:
+	Sender's name:	Sender se naam:
+	Job title:	Postitel:
+	Company:	Maatskappy:
+	Enclosures:	Bylaes:
+	Cc:	Afskrif:
+	Edit Links to Files	Redigeer skakels na lêers
+	Source file	Bronlêer
+	Locked	Gesluit
+	Change Source	Verander bron
+	This document has no links to files.	Hierdie dokument het geen skakels na lêers nie.
+	Web options	Webopsies
+	Web Options	Webopsies
+	Allow PNG as a graphics format	Laat PNG as grafiese formaat toe
+	Rely on CSS for font formatting	Steun op CSS vir lettertipe-formatering
+	Rely on VML for displaying graphics in browsers	Steun op VML om grafika in blaaiers te vertoon
+	Organize supporting files in a folder	Organiseer ondersteunende lêers in ’n vouer
+	Use long file names whenever possible	Gebruik lang lêername waar moontlik
+	Screen size:	Skermgrootte:
+	Pixels per inch:	Piksels per duim:
+	Hangul Hanja Conversion	Hangul-Hanja-omskakeling
+	Hangul Hanja Conversion…	Hangul-Hanja-omskakeling…
+	Hangul to Hanja	Hangul na Hanja
+	Hanja to Hangul	Hanja na Hangul
+	Put the caret in Korean text to choose its Hanja.	Plaas die wyser in Koreaanse teks om sy Hanja te kies.
+	The selection, or the whole document when nothing is selected.	Die keuse, of die hele dokument wanneer niks gekies is nie.

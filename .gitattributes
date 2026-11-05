@@ -1,0 +1,2 @@
+# Add-in packs are checked by SHA-256 against addins/catalog.json: keep their bytes exact.
+addins/*.json -text

@@ -1,0 +1,198 @@
+<#
+.SYNOPSIS
+  Build, sign and package Doc4Me for Windows.
+
+.DESCRIPTION
+  Produces, in $env:DIST (default: dist/release):
+    doc4me-<version>-windows-<arch>.msi            per-machine installer (WiX v5)
+    doc4me-<version>-windows-<arch>-portable.zip   doc4me.exe + doc4me-cli.exe
+
+  The binaries link the C runtime statically (+crt-static), so neither the MSI nor the portable
+  zip needs the Visual C++ redistributable. Signing is delegated to sign.ps1 (skipped with a
+  warning when no signing secrets are set).
+
+  Needs: Rust (MSVC toolchain + the target), the Windows SDK (rc.exe, signtool.exe),
+  and WiX v5 with its UI and Util extensions (installer dialogs, "Launch Doc4Me" on finish):
+    dotnet tool install --global wix --version 5.0.2
+    wix extension add -g WixToolset.UI.wixext/5.0.2
+    wix extension add -g WixToolset.Util.wixext/5.0.2
+
+.EXAMPLE
+  pwsh packaging/windows/package.ps1 -Arch x64
+  pwsh packaging/windows/package.ps1 -Arch x86 -SkipBuild
+  pwsh packaging/windows/package.ps1 -Arch x64 -BuildOnly  # then -SkipBuild with the signing secrets set
+  pwsh packaging/windows/package.ps1 -Arch arm64     # cross-compiled; needs the MSVC ARM64 build tools, clang-cl and Ninja
+#>
+param(
+  [ValidateSet('x64', 'x86', 'arm64')] [string] $Arch = 'x64',
+  [switch] $SkipBuild,
+  # Build the binaries and stop: CI builds without the signing secrets in the environment (no
+  # build script or proc-macro can read them), then packages and signs with -SkipBuild.
+  [switch] $BuildOnly
+)
+$ErrorActionPreference = 'Stop'
+$Root = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
+
+function Invoke-Native([string] $What, [scriptblock] $Block) {
+  Write-Output "==> $What"
+  & $Block
+  if ($LASTEXITCODE -ne 0) { throw "$What failed with exit code $LASTEXITCODE" }
+}
+
+# The version lives in one place: [workspace.package] version in the root Cargo.toml.
+$Version = $env:DOC4ME_VERSION
+if (-not $Version) {
+  $inPkg = $false
+  foreach ($line in Get-Content (Join-Path $Root 'Cargo.toml')) {
+    if ($line -match '^\s*\[') { $inPkg = ($line.Trim() -eq '[workspace.package]'); continue }
+    if ($inPkg -and $line -match '^\s*version\s*=\s*"([^"]+)"') { $Version = $Matches[1]; break }
+  }
+}
+if (-not $Version) { throw 'could not read [workspace.package] version from Cargo.toml' }
+# MSI ProductVersion is numeric (major.minor.build); pre-release tags are dropped there.
+$MsiVersion = ($Version -split '-')[0]
+
+$Target = switch ($Arch) { 'x64' { 'x86_64-pc-windows-msvc' } 'x86' { 'i686-pc-windows-msvc' } 'arm64' { 'aarch64-pc-windows-msvc' } }
+$Dist = if ($env:DIST) { $env:DIST } else { Join-Path $Root 'dist\release' }
+$TargetDir = if ($env:CARGO_TARGET_DIR) { $env:CARGO_TARGET_DIR } else { Join-Path $Root 'target' }
+New-Item -ItemType Directory -Force -Path $Dist | Out-Null
+
+if (-not $env:DOC4ME_BUILD_SHA) { $env:DOC4ME_BUILD_SHA = (git -C $Root rev-parse HEAD 2>$null) }
+if (-not $env:DOC4ME_BUILD_DATE) { $env:DOC4ME_BUILD_DATE = (Get-Date).ToUniversalTime().ToString('yyyy-MM-dd') }
+
+Write-Output "Doc4Me $Version for Windows $Arch ($Target)"
+
+if (-not $SkipBuild) {
+  # Static CRT: no VC++ redistributable needed. Scoped to the target so host build scripts and
+  # proc-macros are unaffected.
+  $flagVar = 'CARGO_TARGET_' + ($Target.ToUpper() -replace '-', '_') + '_RUSTFLAGS'
+  [Environment]::SetEnvironmentVariable($flagVar, '-C target-feature=+crt-static')
+  # Fail the build (rather than warn) if the icon/VERSIONINFO can't be embedded.
+  $env:DOC4ME_REQUIRE_WINRES = '1'
+  # whisper.cpp (Home > Dictate) builds ggml, which refuses MSVC's compiler for ARM ("use clang"):
+  # on arm64, configure it with clang-cl (LLVM, part of Visual Studio's C++ tools and of the
+  # GitHub runners) through Ninja. whisper-rs-sys passes CMAKE_* and GGML_* variables to CMake,
+  # which runs with the ARM64 headers and libraries the cc crate found; its configure checks build
+  # static libraries, so they need no ARM64 linker. CMake wants forward slashes in compiler paths.
+  if ($Arch -eq 'arm64' -and -not $env:CMAKE_GENERATOR) {
+    $clang = Get-Command clang-cl -ErrorAction SilentlyContinue
+    if (-not $clang) { throw 'arm64 builds need clang-cl (LLVM) on PATH for whisper.cpp' }
+    if (-not (Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'arm64 builds need Ninja on PATH for whisper.cpp' }
+    $clangPath = $clang.Source -replace '\\', '/'
+    $env:CMAKE_GENERATOR = 'Ninja'
+    $env:CMAKE_C_COMPILER = $clangPath
+    $env:CMAKE_CXX_COMPILER = $clangPath
+    $env:CMAKE_ASM_COMPILER = $clangPath
+    $env:CMAKE_C_COMPILER_TARGET = $Target
+    $env:CMAKE_CXX_COMPILER_TARGET = $Target
+    $env:CMAKE_ASM_COMPILER_TARGET = $Target
+    $env:CMAKE_TRY_COMPILE_TARGET_TYPE = 'STATIC_LIBRARY'
+    $env:GGML_NATIVE = 'OFF'
+  }
+  Invoke-Native "cargo build ($Target)" { cargo build --release --locked -p doc4me -p doc4me-cli --target $Target }
+}
+if ($BuildOnly) {
+  if ($SkipBuild) { throw '-BuildOnly and -SkipBuild together do nothing' }
+  Write-Output "built $Target; package with -SkipBuild"
+  exit 0
+}
+
+$Bin = Join-Path $TargetDir "$Target\release"
+
+# Check both binaries' PE headers before packaging. Machine (COFF header) must match -Arch, so an
+# x64 build can never ship labelled arm64. Subsystem (optional header): 2 = Windows GUI, 3 = console.
+# The app must be GUI (no console window opens with it); the CLI must stay console so its output
+# reaches the terminal.
+function Get-PeHeader([string] $Path) {
+  $bytes = [System.IO.File]::ReadAllBytes($Path)
+  $pe = [BitConverter]::ToInt32($bytes, 0x3C)
+  return @{ Machine = [BitConverter]::ToUInt16($bytes, $pe + 4); Subsystem = [BitConverter]::ToUInt16($bytes, $pe + 0x5C) }
+}
+$Machine = switch ($Arch) { 'x64' { 0x8664 } 'x86' { 0x14C } 'arm64' { 0xAA64 } }
+foreach ($check in @(@('doc4me.exe', 2), @('doc4me-cli.exe', 3))) {
+  $h = Get-PeHeader (Join-Path $Bin $check[0])
+  if ($h.Machine -ne $Machine) { throw "$($check[0]) is for machine 0x$('{0:X}' -f $h.Machine), expected 0x$('{0:X}' -f $Machine) ($Arch)" }
+  if ($h.Subsystem -ne $check[1]) { throw "$($check[0]) has PE subsystem $($h.Subsystem), expected $($check[1])" }
+  Write-Output "ok $($check[0]): $Arch, PE subsystem $($h.Subsystem)"
+}
+$Stage = Join-Path $TargetDir "windows-package\$Arch"
+Remove-Item -Recurse -Force $Stage -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Force -Path $Stage | Out-Null
+Copy-Item (Join-Path $Bin 'doc4me.exe'), (Join-Path $Bin 'doc4me-cli.exe') $Stage
+
+& (Join-Path $PSScriptRoot 'sign.ps1') (Join-Path $Stage 'doc4me.exe') (Join-Path $Stage 'doc4me-cli.exe')
+
+# ---- MSI ---------------------------------------------------------------------------------------
+# The installer's welcome page shows the license: build its RTF from LICENSE-MIT and LICENSE-APACHE
+# so it never drifts from them. Hard-wrapped lines are rejoined into paragraphs so the text wraps
+# to the dialog's width.
+function ConvertTo-RtfText([string] $Text) {
+  $sb = [System.Text.StringBuilder]::new()
+  foreach ($ch in $Text.ToCharArray()) {
+    $c = [int] $ch
+    if ($c -eq 0x5C -or $c -eq 0x7B -or $c -eq 0x7D) { [void] $sb.Append('\').Append($ch) }
+    elseif ($c -gt 127) { [void] $sb.Append("\u$(if ($c -gt 32767) { $c - 65536 } else { $c })?") }
+    else { [void] $sb.Append($ch) }
+  }
+  return $sb.ToString()
+}
+$paragraphs = [System.Collections.Generic.List[string]]::new()
+$paragraphs.Add('\b Doc4Me\b0')
+$paragraphs.Add((ConvertTo-RtfText 'Doc4Me is dual-licensed under the MIT License or the Apache License, Version 2.0, at your option. Both license texts follow. Bundled fonts and other third-party material keep their own open licenses, listed in NOTICE and ATTRIBUTION.md at https://github.com/chatraweechai/doc4me; NOTICE.txt and the fonts'' license texts (OFL-*.txt) are installed next to Doc4Me.'))
+foreach ($file in 'LICENSE-MIT', 'LICENSE-APACHE') {
+  $title = $true  # each file opens with its license's name: show it bold
+  foreach ($para in ((Get-Content -Raw (Join-Path $Root $file)) -split '\r?\n\s*\r?\n')) {
+    $joined = (($para -split '\r?\n') | ForEach-Object { $_.Trim() } | Where-Object { $_ }) -join ' '
+    if (-not $joined) { continue }
+    $paragraphs.Add($(if ($title) { "\b $(ConvertTo-RtfText $joined)\b0" } else { ConvertTo-RtfText $joined }))
+    $title = $false
+  }
+}
+$LicenseRtf = Join-Path $Stage 'license.rtf'
+$rtf = '{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0\fswiss\fcharset0 Tahoma;}}\viewkind4\uc1\pard\sa120\f0\fs16 ' +
+  ($paragraphs -join "\par`r`n") + "\par`r`n}`r`n"
+[System.IO.File]::WriteAllText($LicenseRtf, $rtf, [System.Text.Encoding]::ASCII)
+
+$Msi = Join-Path $Dist "doc4me-$Version-windows-$Arch.msi"
+Invoke-Native 'wix build' {
+  wix build (Join-Path $PSScriptRoot 'doc4me.wxs') -arch $Arch `
+    -ext WixToolset.UI.wixext -ext WixToolset.Util.wixext `
+    -d "Version=$MsiVersion" -d "BinDir=$Stage" -d "IconPath=$(Join-Path $Root 'assets\app-icon\doc4me.ico')" `
+    -d "LicenseRtf=$LicenseRtf" -d "RootDir=$Root" `
+    -o $Msi
+}
+# wix writes its debug symbols (.wixpdb) next to the MSI; keep them out of the release assets.
+Remove-Item -Force -ErrorAction SilentlyContinue ([IO.Path]::ChangeExtension($Msi, '.wixpdb'))
+& (Join-Path $PSScriptRoot 'sign.ps1') $Msi
+
+# ---- portable zip ------------------------------------------------------------------------------
+$Portable = Join-Path $TargetDir "windows-package\doc4me-$Version-windows-$Arch-portable"
+Remove-Item -Recurse -Force $Portable -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Force -Path $Portable | Out-Null
+Copy-Item (Join-Path $Stage '*.exe') $Portable
+foreach ($f in 'README.md', 'LICENSE', 'LICENSE-MIT', 'LICENSE-APACHE', 'LICENSE-UNICODE', 'NOTICE') {
+  $p = Join-Path $Root $f
+  if (Test-Path $p) { Copy-Item $p $Portable }
+}
+# The fonts compiled into doc4me.exe (Sarabun, Inter, Source Sans 3 / Serif 4, JetBrains Mono):
+# the OFL asks every copy to carry its license.
+Copy-Item (Join-Path $Root 'assets\fonts\OFL-*.txt') $Portable
+# Builds made with craft-fonts (CRAFT_FONTS_DIR) embed its fonts: ship their licences.
+if ($env:CRAFT_FONTS_DIR) {
+  foreach ($ofl in Get-ChildItem -Path (Join-Path $env:CRAFT_FONTS_DIR 'fonts\*\OFL.txt') -ErrorAction SilentlyContinue) {
+    Copy-Item $ofl.FullName (Join-Path $Portable "OFL-$($ofl.Directory.Name).txt")
+  }
+}
+$Zip = Join-Path $Dist "doc4me-$Version-windows-$Arch-portable.zip"
+Remove-Item -Force $Zip -ErrorAction SilentlyContinue
+Compress-Archive -Path $Portable -DestinationPath $Zip
+
+# Smoke-test the CLI when this machine can run it. An ARM64 build made on an x64 runner (the
+# platform-builds workflow) can't run here: run this script on an ARM64 machine to test one.
+$HostArch = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant()
+if ($Arch -ne 'arm64' -or $HostArch -eq 'arm64') {
+  Invoke-Native 'doc4me-cli --version' { & (Join-Path $Stage 'doc4me-cli.exe') --version }
+} else {
+  Write-Output "skipping doc4me-cli --version: an $Arch build doesn't run on this $HostArch machine"
+}
+Get-Item $Msi, $Zip | Format-Table Name, Length

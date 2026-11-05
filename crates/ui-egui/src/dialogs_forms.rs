@@ -1,0 +1,1465 @@
+//! Developer › Legacy Tools dialogs: Form Field (the kind to insert), Text, Check Box and
+//! Drop-Down Form Field Options, and Form Field Help Text. OK runs `developer.formField`,
+//! `developer.formFieldOptions` and `developer.formFieldHelp`, so scripts and agents get the
+//! same result without them. Macros named in a field are kept in the file but never run, so the
+//! dialogs don't offer them.
+
+use egui::Ui;
+use serde::Serialize;
+use serde_json::{Value, json};
+
+use crate::WordApp;
+use crate::dialogs::buttons;
+
+/// Text types: the engine's name and the dialog's label.
+const TEXT_TYPES: [(&str, &str); 6] = [
+    ("regular", "Regular text"),
+    ("number", "Number"),
+    ("date", "Date"),
+    ("currentDate", "Current date"),
+    ("currentTime", "Current time"),
+    ("calculated", "Calculation"),
+];
+
+/// Word's text formats offered for each text type (any other can be typed).
+fn formats(text_type: &str) -> &'static [&'static str] {
+    match text_type {
+        "number" | "calculated" => &["0", "0.00", "#,##0", "#,##0.00", "$#,##0.00;($#,##0.00)", "0%", "0.00%"],
+        "date" | "currentDate" => &["M/d/yyyy", "dddd, MMMM d, yyyy", "MMMM d, yyyy", "M/d/yy", "yyyy-MM-dd", "d-MMM-yy", "dd/MM/yyyy"],
+        "currentTime" => &["h:mm am/pm", "h:mm:ss am/pm", "H:mm", "H:mm:ss"],
+        _ => &["Uppercase", "Lowercase", "First capital", "Title case"],
+    }
+}
+
+/// One help text being edited: none, an AutoText entry, or typed.
+#[derive(Clone, Debug, Default, PartialEq, Serialize)]
+pub struct HelpText {
+    /// 0 none, 1 AutoText entry, 2 typed.
+    pub mode: u8,
+    pub auto_text: String,
+    pub own: String,
+}
+
+impl HelpText {
+    fn read(v: &Value) -> HelpText {
+        let text = v.get("text").and_then(Value::as_str).unwrap_or("").to_string();
+        match v.get("autoText").and_then(Value::as_bool) {
+            _ if text.is_empty() => HelpText::default(),
+            Some(true) => HelpText { mode: 1, auto_text: text, own: String::new() },
+            _ => HelpText { mode: 2, auto_text: String::new(), own: text },
+        }
+    }
+    fn param(&self) -> Value {
+        match self.mode {
+            1 if !self.auto_text.trim().is_empty() => json!({"text": self.auto_text.trim(), "autoText": true}),
+            2 if !self.own.is_empty() => json!({"text": self.own}),
+            _ => Value::Null,
+        }
+    }
+}
+
+/// Status bar and F1 help text.
+#[derive(Clone, Debug, Default, PartialEq, Serialize)]
+pub struct HelpForm {
+    /// 0 Status Bar, 1 Help Key (F1).
+    pub tab: usize,
+    pub status: HelpText,
+    pub help: HelpText,
+}
+
+/// A form field's options as the dialog edits them.
+#[derive(Clone, Debug, Default, PartialEq, Serialize)]
+pub struct OptionsForm {
+    /// Where the field is (found again there on OK).
+    pub at: Value,
+    /// text, checkBox or dropDown.
+    pub kind: String,
+    pub name: String,
+    pub enabled: bool,
+    pub calc_on_exit: bool,
+    pub text_type: String,
+    pub default_text: String,
+    /// 0: unlimited.
+    pub max_length: u32,
+    pub format: String,
+    pub auto_size: bool,
+    pub size: f32,
+    pub default_checked: bool,
+    pub entries: Vec<String>,
+    pub new_entry: String,
+    pub selected: Option<usize>,
+    pub help: HelpForm,
+}
+
+impl OptionsForm {
+    /// The form for the field at `at` (a position), else at the selection, if there is one.
+    pub fn read(app: &mut WordApp, at: Option<&Value>) -> Option<OptionsForm> {
+        let params = match at {
+            Some(at) => json!({"at": at}),
+            None => json!({}),
+        };
+        let v = app.session.run("developer.formFieldInfo", &params).ok()?;
+        let s = |k: &str| v.get(k).and_then(Value::as_str).unwrap_or("").to_string();
+        let b = |k: &str| v.get(k).and_then(Value::as_bool).unwrap_or(false);
+        let kind = s("type");
+        let size = v.get("size").and_then(Value::as_f64);
+        Some(OptionsForm {
+            at: v.get("at").cloned().unwrap_or(Value::Null),
+            name: s("name"),
+            enabled: b("enabled"),
+            calc_on_exit: b("calcOnExit"),
+            text_type: if kind == "text" { s("textType") } else { String::new() },
+            default_text: if kind == "text" { s("default") } else { String::new() },
+            max_length: v.get("maxLength").and_then(Value::as_u64).unwrap_or(0) as u32,
+            format: s("format"),
+            auto_size: size.is_none(),
+            size: size.unwrap_or(10.0) as f32,
+            default_checked: kind == "checkBox" && b("default"),
+            entries: v
+                .get("entries")
+                .and_then(Value::as_array)
+                .map(|a| a.iter().filter_map(Value::as_str).map(str::to_string).collect())
+                .unwrap_or_default(),
+            new_entry: String::new(),
+            selected: None,
+            help: HelpForm { tab: 0, status: HelpText::read(&v["status"]), help: HelpText::read(&v["help"]) },
+            kind,
+        })
+    }
+
+    /// The `developer.formFieldOptions` parameters the form stands for.
+    pub fn params(&self) -> Value {
+        let mut v = json!({
+            "at": self.at,
+            "name": self.name.trim(),
+            "enabled": self.enabled,
+            "calcOnExit": self.calc_on_exit,
+            "help": self.help.help.param(),
+            "status": self.help.status.param(),
+        });
+        match self.kind.as_str() {
+            "text" => {
+                v["textType"] = json!(self.text_type);
+                v["default"] = json!(self.default_text);
+                v["maxLength"] = json!(self.max_length);
+                v["format"] = json!(self.format.trim());
+            }
+            "checkBox" => {
+                v["size"] = if self.auto_size { Value::Null } else { json!(self.size) };
+                v["default"] = json!(self.default_checked);
+            }
+            _ => v["entries"] = json!(self.entries),
+        }
+        v
+    }
+}
+
+#[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(tag = "dialogKind", rename_all = "camelCase")]
+pub enum FormDialog {
+    /// Form Field: which kind to insert.
+    Insert {
+        kind: String,
+    },
+    Options {
+        form: OptionsForm,
+    },
+    /// Help Text: of the field at `at` on its own, or (`back`) for the Options dialog it was
+    /// opened from, which it returns to.
+    Help {
+        at: Value,
+        form: HelpForm,
+        back: Option<Box<OptionsForm>>,
+    },
+    /// Section Protection (Restrict Editing › Filling in forms › Select sections…): which
+    /// sections stay protected.
+    Sections {
+        protected: Vec<bool>,
+    },
+    /// Format Frame (Word's Frame dialog) for the frame at the selection.
+    Frame {
+        form: FrameForm,
+    },
+    /// Review › Chinese Conversion: which way, and (to Traditional) the Taiwan, Hong Kong SAR
+    /// and Macao SAR forms.
+    Chinese {
+        to_traditional: bool,
+        variants: bool,
+    },
+    /// Review › Language › Japanese Consistency Checker: each word written more than one way,
+    /// its spellings with their counts, and the one to keep.
+    Consistency {
+        groups: Vec<Vec<(String, u64)>>,
+        chosen: Vec<usize>,
+    },
+    /// File › Show Repairs: what opening the document repaired or left out, as (message with
+    /// `{what}`, what).
+    Repairs {
+        items: Vec<(String, String)>,
+    },
+    /// Review › Language › Hangul Hanja Conversion: the Hangul at the caret (empty when there is
+    /// none), each syllable's Hanja and the one chosen (0: keep the syllable).
+    Hanja {
+        text: String,
+        cands: Vec<Vec<String>>,
+        chosen: Vec<usize>,
+    },
+    /// File › Info › Edit Links to Files: each link's kind, source and lock, and the source as
+    /// edited in the dialog.
+    Links {
+        links: Vec<(String, String, bool)>,
+        edited: Vec<String>,
+    },
+    /// File › New › Letter Wizard: the letter's parts, by [`LETTER_FIELDS`] order.
+    Letter {
+        fields: Vec<String>,
+    },
+    /// AutoSummarize: how the summary is shown and how long it is.
+    Summarize {
+        /// highlight, top or newDocument.
+        kind: String,
+        /// Index into [`SUMMARY_LENGTHS`].
+        length: usize,
+        update_properties: bool,
+    },
+}
+
+/// The Frame dialog's fields; `orig` is what they said when it opened, so OK changes only what
+/// was changed there (a frame's other settings, such as a wrapping the dialog doesn't offer, stay).
+#[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FrameForm {
+    /// Text wrapping: Around, or None (the text stays above and below the frame).
+    pub around: bool,
+    pub width_auto: bool,
+    pub width: f32,
+    /// auto, atLeast or exact.
+    pub height_rule: String,
+    pub height: f32,
+    /// left, right, center, inside, outside, or at (`x`).
+    pub h_pos: String,
+    pub x: f32,
+    /// column, margin or page.
+    pub h_rel: String,
+    pub h_space: f32,
+    /// top, bottom, center, inside, outside, inline, or at (`y`).
+    pub v_pos: String,
+    pub y: f32,
+    /// paragraph, margin or page.
+    pub v_rel: String,
+    pub v_space: f32,
+    pub lock_anchor: bool,
+    /// The paragraph had a frame when the dialog opened.
+    pub framed: bool,
+    orig: Value,
+}
+
+/// The frame dialog's alignments: (field value, the frame's `hAlign`/`vAlign`, horizontal label,
+/// vertical label).
+const FRAME_ALIGNS: [(&str, &str, &str, &str); 5] = [
+    ("start", "start", "Left", "Top"),
+    ("end", "end", "Right", "Bottom"),
+    ("center", "center", "Center", "Center"),
+    ("inside", "inside", "Inside", "Inside"),
+    ("outside", "outside", "Outside", "Outside"),
+];
+
+impl FrameForm {
+    /// The frame at the selection (Word's defaults when there is none).
+    pub fn read(app: &mut WordApp) -> FrameForm {
+        let v = app.session.run("format.frame", &json!({})).map(|v| v["frame"].clone()).unwrap_or(Value::Null);
+        let framed = !v.is_null();
+        let num = |k: &str| v[k].as_f64().unwrap_or(0.0) as f32;
+        let s = |k: &str, d: &str| v[k].as_str().unwrap_or(d).to_string();
+        let wrap = s("wrap", "around");
+        let mut f = FrameForm {
+            around: !matches!(wrap.as_str(), "notBeside" | "none"),
+            width_auto: v["w"].is_null(),
+            width: if v["w"].is_null() { 72.0 } else { num("w") },
+            height_rule: if v["h"].is_null() { "auto".into() } else { s("hRule", "atLeast") },
+            height: if v["h"].is_null() { 72.0 } else { num("h") },
+            h_pos: v["hAlign"].as_str().map_or("at".into(), str::to_string),
+            x: num("x"),
+            h_rel: s("hRel", "column"),
+            h_space: num("hSpace"),
+            v_pos: if v["vInline"].as_bool() == Some(true) { "inline".into() } else { v["vAlign"].as_str().map_or("at".into(), str::to_string) },
+            y: num("y"),
+            v_rel: s("vRel", "paragraph"),
+            v_space: num("vSpace"),
+            lock_anchor: v["anchorLock"].as_bool().unwrap_or(false),
+            framed,
+            orig: Value::Null,
+        };
+        f.orig = f.params(Some(&wrap));
+        f
+    }
+
+    /// The `format.frame` parameters the fields say (`wrap`: the frame's own wrapping, kept while
+    /// the choice between Around and None is the one it had).
+    fn params(&self, wrap: Option<&str>) -> Value {
+        let mut p = serde_json::Map::new();
+        let kept = wrap.filter(|w| self.around != matches!(*w, "notBeside" | "none"));
+        p.insert("wrap".into(), json!(kept.unwrap_or(if self.around { "around" } else { "notBeside" })));
+        p.insert("w".into(), if self.width_auto { Value::Null } else { json!(self.width) });
+        p.insert("h".into(), if self.height_rule == "auto" { Value::Null } else { json!(self.height) });
+        p.insert("hRule".into(), json!(self.height_rule));
+        match self.h_pos.as_str() {
+            "at" => {
+                p.insert("x".into(), json!(self.x));
+                p.insert("hAlign".into(), Value::Null);
+            }
+            a => {
+                p.insert("hAlign".into(), json!(a));
+            }
+        }
+        p.insert("hRel".into(), json!(self.h_rel));
+        p.insert("hSpace".into(), json!(self.h_space));
+        match self.v_pos.as_str() {
+            "at" => {
+                p.insert("y".into(), json!(self.y));
+                p.insert("vAlign".into(), Value::Null);
+                p.insert("vInline".into(), json!(false));
+            }
+            "inline" => {
+                p.insert("vInline".into(), json!(true));
+            }
+            a => {
+                p.insert("vAlign".into(), json!(a));
+                p.insert("vInline".into(), json!(false));
+            }
+        }
+        p.insert("vRel".into(), json!(self.v_rel));
+        p.insert("vSpace".into(), json!(self.v_space));
+        p.insert("anchorLock".into(), json!(self.lock_anchor));
+        Value::Object(p)
+    }
+
+    /// What OK sends: every field for a paragraph without a frame; else the ones changed (the
+    /// wrapping as it was unless Around / None changed).
+    fn changes(&self) -> Value {
+        let wrap = self.orig["wrap"].as_str().map(str::to_string);
+        let now = self.params(wrap.as_deref());
+        if !self.framed {
+            return now;
+        }
+        let mut out = serde_json::Map::new();
+        for (k, v) in now.as_object().into_iter().flatten() {
+            if self.orig.get(k) != Some(v) {
+                out.insert(k.clone(), v.clone());
+            }
+        }
+        Value::Object(out)
+    }
+}
+
+fn frame_body(app: &mut WordApp, ui: &mut Ui, f: &mut FrameForm) -> bool {
+    let pt = |ui: &mut Ui, v: &mut f32, enabled: bool| {
+        ui.add_enabled(enabled, egui::DragValue::new(v).range(0.0..=1584.0).clamp_existing_to_range(false).speed(0.5).suffix(" pt"));
+    };
+    ui.label(egui::RichText::new(tl!("Text wrapping")).strong());
+    ui.horizontal(|ui| {
+        ui.radio_value(&mut f.around, false, tl!("None"));
+        ui.radio_value(&mut f.around, true, tl!("Around"));
+    });
+    ui.add_space(6.0);
+    ui.label(egui::RichText::new(tl!("Size")).strong());
+    egui::Grid::new("frame_size").num_columns(4).show(ui, |ui| {
+        ui.label(tl!("Width:"));
+        let shown = if f.width_auto { tl!("Auto") } else { tl!("Exactly") };
+        egui::ComboBox::from_id_salt("frame_width").selected_text(shown).show_ui(ui, |ui| {
+            ui.selectable_value(&mut f.width_auto, true, tl!("Auto"));
+            ui.selectable_value(&mut f.width_auto, false, tl!("Exactly"));
+        });
+        ui.label(tl!("At:"));
+        pt(ui, &mut f.width, !f.width_auto);
+        ui.end_row();
+        ui.label(tl!("Height:"));
+        let label = |r: &str| match r {
+            "atLeast" => tl!("At least"),
+            "exact" => tl!("Exactly"),
+            _ => tl!("Auto"),
+        };
+        egui::ComboBox::from_id_salt("frame_height").selected_text(label(&f.height_rule)).show_ui(ui, |ui| {
+            for r in ["auto", "atLeast", "exact"] {
+                ui.selectable_value(&mut f.height_rule, r.to_string(), label(r));
+            }
+        });
+        ui.label(tl!("At:"));
+        pt(ui, &mut f.height, f.height_rule != "auto");
+        ui.end_row();
+    });
+    ui.add_space(6.0);
+    for horizontal in [true, false] {
+        ui.label(egui::RichText::new(if horizontal { tl!("Horizontal") } else { tl!("Vertical") }).strong());
+        let (pos, at, rel, space) =
+            if horizontal { (&mut f.h_pos, &mut f.x, &mut f.h_rel, &mut f.h_space) } else { (&mut f.v_pos, &mut f.y, &mut f.v_rel, &mut f.v_space) };
+        egui::Grid::new(if horizontal { "frame_h" } else { "frame_v" }).num_columns(4).show(ui, |ui| {
+            ui.label(tl!("Position:"));
+            let name = |p: &str| match FRAME_ALIGNS.iter().find(|a| a.0 == p) {
+                Some(a) => tl!(if horizontal { a.2 } else { a.3 }).to_string(),
+                None if p == "inline" => tl!("In Line with Text").to_string(),
+                // A measurement, set in At.
+                None => tl!("Custom").to_string(),
+            };
+            egui::ComboBox::from_id_salt(if horizontal { "frame_hpos" } else { "frame_vpos" }).selected_text(name(pos)).show_ui(ui, |ui| {
+                for a in FRAME_ALIGNS {
+                    ui.selectable_value(pos, a.1.to_string(), name(a.0));
+                }
+                if !horizontal {
+                    ui.selectable_value(pos, "inline".to_string(), name("inline"));
+                }
+                ui.selectable_value(pos, "at".to_string(), name("at"));
+            });
+            ui.label(tl!("At:"));
+            ui.add_enabled(*pos == "at", egui::DragValue::new(at).range(-1584.0..=1584.0).clamp_existing_to_range(false).speed(0.5).suffix(" pt"));
+            ui.end_row();
+            ui.label(tl!("Relative to:"));
+            let rels: [(&str, &str); 3] = if horizontal {
+                [("column", "Column"), ("margin", "Margin"), ("page", "Page")]
+            } else {
+                [("paragraph", "Paragraph"), ("margin", "Margin"), ("page", "Page")]
+            };
+            let shown = rels.iter().find(|r| r.0 == rel.as_str()).map_or("", |r| tl!(r.1));
+            egui::ComboBox::from_id_salt(if horizontal { "frame_hrel" } else { "frame_vrel" }).selected_text(shown).show_ui(ui, |ui| {
+                for (k, l) in rels {
+                    ui.selectable_value(rel, k.to_string(), tl!(l));
+                }
+            });
+            ui.label(tl!("Distance from text:"));
+            ui.add(egui::DragValue::new(space).range(0.0..=1584.0).clamp_existing_to_range(false).speed(0.5).suffix(" pt"));
+            ui.end_row();
+        });
+    }
+    ui.horizontal(|ui| {
+        // Move with text: placed from the paragraph after the frame.
+        let mut moves = f.v_rel == "paragraph";
+        if ui.checkbox(&mut moves, tl!("Move with text")).changed() {
+            f.v_rel = if moves { "paragraph".into() } else { "margin".into() };
+        }
+        ui.checkbox(&mut f.lock_anchor, tl!("Lock anchor"));
+    });
+    ui.add_space(4.0);
+    if ui.add_enabled(f.framed, egui::Button::new(tl!("Remove Frame"))).clicked() {
+        match app.run("format.frame", json!({"remove": true})) {
+            Ok(_) => return true,
+            Err(e) => app.status(e),
+        }
+    }
+    let (ok, cancel) = buttons(ui, tl!("OK"));
+    if ok {
+        let p = f.changes();
+        if p.as_object().is_none_or(|m| m.is_empty()) {
+            return true;
+        }
+        match app.run("format.frame", p) {
+            Ok(_) => return true,
+            Err(e) => app.status(e),
+        }
+    }
+    cancel
+}
+
+/// AutoSummarize's lengths, as Word offers them: (sentences, words, percent).
+pub const SUMMARY_LENGTHS: [(Option<u64>, Option<u64>, Option<u64>); 8] = [
+    (Some(10), None, None),
+    (Some(20), None, None),
+    (None, Some(100), None),
+    (None, Some(500), None),
+    (None, None, Some(10)),
+    (None, None, Some(25)),
+    (None, None, Some(50)),
+    (None, None, Some(75)),
+];
+
+fn summary_length_label((sentences, words, percent): (Option<u64>, Option<u64>, Option<u64>)) -> String {
+    match (sentences, words, percent) {
+        (Some(n), _, _) => crate::i18n::fmt(tl!("{n} sentences"), &[("n", &n.to_string())]),
+        (_, Some(n), _) => crate::i18n::fmt(tl!("{n} words or less"), &[("n", &n.to_string())]),
+        (_, _, Some(n)) => format!("{n}%"),
+        _ => String::new(),
+    }
+}
+
+impl FormDialog {
+    pub fn name(&self) -> &'static str {
+        match self {
+            FormDialog::Insert { .. } => "insertFormField",
+            FormDialog::Options { .. } => "formFieldOptions",
+            FormDialog::Help { .. } => "formFieldHelp",
+            FormDialog::Sections { .. } => "sectionProtection",
+            FormDialog::Summarize { .. } => "autoSummarize",
+            FormDialog::Frame { .. } => "formatFrame",
+            FormDialog::Chinese { .. } => "chineseConversion",
+            FormDialog::Consistency { .. } => "consistencyChecker",
+            FormDialog::Repairs { .. } => "showRepairs",
+            FormDialog::Letter { .. } => "letterWizard",
+            FormDialog::Links { .. } => "editLinks",
+            FormDialog::Hanja { .. } => "hangulHanja",
+        }
+    }
+
+    /// The window title (English; the caller translates it).
+    pub fn title(&self) -> &'static str {
+        match self {
+            FormDialog::Insert { .. } => "Form Field",
+            FormDialog::Options { form } => match form.kind.as_str() {
+                "text" => "Text Form Field Options",
+                "checkBox" => "Check Box Form Field Options",
+                _ => "Drop-Down Form Field Options",
+            },
+            FormDialog::Help { .. } => "Form Field Help Text",
+            FormDialog::Sections { .. } => "Section Protection",
+            FormDialog::Summarize { .. } => "AutoSummarize",
+            FormDialog::Frame { .. } => "Frame",
+            FormDialog::Chinese { .. } => "Chinese Conversion",
+            FormDialog::Consistency { .. } => "Japanese Consistency Checker",
+            FormDialog::Repairs { .. } => "Show Repairs",
+            FormDialog::Letter { .. } => "Letter Wizard",
+            FormDialog::Links { .. } => "Edit Links to Files",
+            FormDialog::Hanja { .. } => "Hangul Hanja Conversion",
+        }
+    }
+}
+
+/// The dialog `ui.dialog` opens by `name` (`None`: not one of these, or no form field at the
+/// selection for Options and Help Text).
+pub fn open(name: &str, app: &mut WordApp) -> Option<FormDialog> {
+    match name {
+        "insertFormField" => Some(FormDialog::Insert { kind: "text".into() }),
+        "autoSummarize" => Some(FormDialog::Summarize { kind: "highlight".into(), length: 5, update_properties: true }),
+        "formatFrame" => Some(FormDialog::Frame { form: FrameForm::read(app) }),
+        "chineseConversion" => Some(FormDialog::Chinese { to_traditional: false, variants: false }),
+        "hangulHanja" => {
+            // Without Hangul at the caret, the dialog still converts Hanja to Hangul.
+            let v = app.session.run("review.hangulHanja", &json!({})).unwrap_or_default();
+            let text = v["text"].as_str().unwrap_or("").to_string();
+            let cands: Vec<Vec<String>> = v["candidates"]
+                .as_array()
+                .map(|a| {
+                    a.iter()
+                        .map(|c| c.as_array().map(|c| c.iter().filter_map(|h| h.as_str().map(str::to_string)).collect()).unwrap_or_default())
+                        .collect()
+                })
+                .unwrap_or_default();
+            Some(FormDialog::Hanja { chosen: vec![0; cands.len()], text, cands })
+        }
+        "editLinks" => {
+            let links = file_links(&app.session.run("file.editLinks", &json!({})).unwrap_or_default());
+            Some(FormDialog::Links { edited: links.iter().map(|l| l.1.clone()).collect(), links })
+        }
+        "letterWizard" => {
+            // The sender is the user, as Word fills it in.
+            let mut fields = vec![String::new(); LETTER_FIELDS.len()];
+            if let Some(i) = LETTER_FIELDS.iter().position(|(k, _, _)| *k == "senderName") {
+                fields[i] = app.session.author.clone();
+            }
+            Some(FormDialog::Letter { fields })
+        }
+        "showRepairs" => {
+            let v = app.session.run("file.showRepairs", &json!({})).unwrap_or_default();
+            let items = v["repairs"]
+                .as_array()
+                .map(|a| a.iter().map(|r| (r["message"].as_str().unwrap_or("").to_string(), r["what"].as_str().unwrap_or("").to_string())).collect())
+                .unwrap_or_default();
+            Some(FormDialog::Repairs { items })
+        }
+        "consistencyChecker" => {
+            let groups = consistency_groups(app);
+            Some(FormDialog::Consistency { chosen: vec![0; groups.len()], groups })
+        }
+        "sectionProtection" => {
+            let v = app.session.run("review.protectSections", &json!({})).ok()?;
+            let protected = v["sections"].as_array().map(|a| a.iter().map(|b| b.as_bool().unwrap_or(true)).collect()).unwrap_or_default();
+            Some(FormDialog::Sections { protected })
+        }
+        "formFieldOptions" | "formFieldHelp" => {
+            let Some(form) = OptionsForm::read(app, None) else {
+                app.status(tl!("Put the caret on a form field first."));
+                return None;
+            };
+            Some(if name == "formFieldOptions" {
+                FormDialog::Options { form }
+            } else {
+                FormDialog::Help { at: form.at.clone(), form: form.help, back: None }
+            })
+        }
+        _ => None,
+    }
+}
+
+/// Edit Links to Files' list from `file.editLinks`: (kind, source, locked).
+fn file_links(v: &Value) -> Vec<(String, String, bool)> {
+    v["links"]
+        .as_array()
+        .map(|a| {
+            a.iter()
+                .map(|l| {
+                    (
+                        l["kind"].as_str().unwrap_or("").to_string(),
+                        l["source"].as_str().unwrap_or("").to_string(),
+                        l["locked"].as_bool().unwrap_or(false),
+                    )
+                })
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+/// The Letter Wizard's fields: `file.letterWizard` parameter, label, several lines.
+const LETTER_FIELDS: [(&str, &str, bool); 11] = [
+    ("recipientName", "Recipient's name:", false),
+    ("recipientAddress", "Delivery address:", true),
+    ("salutation", "Salutation:", false),
+    ("subject", "Subject:", false),
+    ("closing", "Complimentary closing:", false),
+    ("senderName", "Sender's name:", false),
+    ("returnAddress", "Return address:", true),
+    ("senderJobTitle", "Job title:", false),
+    ("senderCompany", "Company:", false),
+    ("enclosures", "Enclosures:", false),
+    ("cc", "Cc:", false),
+];
+
+/// The Japanese Consistency Checker's groups of spellings, as the command lists them.
+fn consistency_groups(app: &mut WordApp) -> Vec<Vec<(String, u64)>> {
+    let v = app.session.run("review.consistencyChecker", &json!({})).unwrap_or_default();
+    v["groups"]
+        .as_array()
+        .map(|g| {
+            g.iter()
+                .map(|g| {
+                    g["forms"]
+                        .as_array()
+                        .map(|f| f.iter().map(|f| (f["text"].as_str().unwrap_or("").to_string(), f["count"].as_u64().unwrap_or(0))).collect())
+                        .unwrap_or_default()
+                })
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+/// Draws the dialog; returns true to close it.
+pub fn body(app: &mut WordApp, ui: &mut Ui, d: &mut FormDialog) -> bool {
+    match d {
+        FormDialog::Frame { form } => frame_body(app, ui, form),
+        FormDialog::Chinese { to_traditional, variants } => {
+            ui.radio_value(to_traditional, false, tl!("Traditional Chinese to Simplified Chinese"));
+            ui.radio_value(to_traditional, true, tl!("Simplified Chinese to Traditional Chinese"));
+            ui.add_enabled(*to_traditional, egui::Checkbox::new(variants, tl!("Use Taiwan, Hong Kong SAR, and Macao SAR character variants")));
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok {
+                let to = if *to_traditional { "traditional" } else { "simplified" };
+                match app.run("review.chineseConversion", json!({"to": to, "variants": *to_traditional && *variants})) {
+                    Ok(v) => {
+                        let n = v["changed"].as_u64().unwrap_or(0);
+                        app.status(crate::i18n::fmt(tl!("Converted {n} characters"), &[("n", &n.to_string())]));
+                        return true;
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
+        FormDialog::Hanja { text, cands, chosen } => {
+            let mut done = false;
+            ui.label(egui::RichText::new(tl!("Hangul to Hanja")).strong());
+            if text.is_empty() {
+                ui.label(tl!("Put the caret in Korean text to choose its Hanja."));
+            } else {
+                ui.horizontal_wrapped(|ui| {
+                    for (i, syl) in text.chars().enumerate() {
+                        let options = cands.get(i).cloned().unwrap_or_default();
+                        let pick = chosen.get(i).copied().unwrap_or(0);
+                        // 0 keeps the syllable; 1.. are its Hanja.
+                        let shown = if pick == 0 { syl.to_string() } else { options.get(pick - 1).cloned().unwrap_or_else(|| syl.to_string()) };
+                        egui::ComboBox::from_id_salt(("hanja", i)).selected_text(shown).width(48.0).show_ui(ui, |ui| {
+                            if ui.selectable_label(pick == 0, syl.to_string()).clicked() {
+                                chosen[i] = 0;
+                            }
+                            for (k, h) in options.iter().enumerate() {
+                                if ui.selectable_label(pick == k + 1, h.as_str()).clicked() {
+                                    chosen[i] = k + 1;
+                                }
+                            }
+                        });
+                    }
+                });
+                if ui.add_enabled(chosen.iter().any(|c| *c > 0), egui::Button::new(tl!("Convert"))).clicked() {
+                    let hanja: String = text
+                        .chars()
+                        .enumerate()
+                        .map(|(i, syl)| match chosen.get(i).copied().unwrap_or(0) {
+                            0 => syl.to_string(),
+                            k => cands.get(i).and_then(|c| c.get(k - 1)).cloned().unwrap_or_else(|| syl.to_string()),
+                        })
+                        .collect();
+                    match app.run("review.hangulHanja", json!({"to": "hanja", "hanja": hanja})) {
+                        Ok(_) => done = true,
+                        Err(e) => app.status(e),
+                    }
+                }
+            }
+            ui.add_space(6.0);
+            ui.label(egui::RichText::new(tl!("Hanja to Hangul")).strong());
+            if ui.button(tl!("Convert")).on_hover_text(tl!("The selection, or the whole document when nothing is selected.")).clicked() {
+                match app.run("review.hangulHanja", json!({"to": "hangul"})) {
+                    Ok(v) => {
+                        let n = v["changed"].as_u64().unwrap_or(0);
+                        app.status(crate::i18n::fmt(tl!("Converted {n} characters"), &[("n", &n.to_string())]));
+                        done = true;
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            ui.add_space(6.0);
+            done || ui.button(tl!("Close")).clicked()
+        }
+        FormDialog::Links { links, edited } => {
+            let mut action: Option<Value> = None;
+            if links.is_empty() {
+                ui.label(tl!("This document has no links to files."));
+            } else {
+                egui::Grid::new("edit_links").num_columns(5).spacing(egui::vec2(8.0, 6.0)).show(ui, |ui| {
+                    ui.label(egui::RichText::new(tl!("Type")).strong());
+                    ui.label(egui::RichText::new(tl!("Source file")).strong());
+                    ui.label(egui::RichText::new(tl!("Locked")).strong());
+                    ui.end_row();
+                    for (i, ((kind, source, locked), text)) in links.iter().zip(edited.iter_mut()).enumerate() {
+                        ui.label(kind.as_str());
+                        ui.add(crate::widgets::text_line(text).desired_width(300.0).char_limit(1024));
+                        let mut l = *locked;
+                        if ui.checkbox(&mut l, "").on_hover_text(tl!("Locked")).changed() {
+                            action = Some(json!({"link": i, "action": if l { "lock" } else { "unlock" }}));
+                        }
+                        if ui
+                            .add_enabled(text.trim() != source.as_str() && !text.trim().is_empty(), egui::Button::new(tl!("Change Source")))
+                            .clicked()
+                        {
+                            action = Some(json!({"link": i, "action": "changeSource", "source": text.trim()}));
+                        }
+                        if ui.button(tl!("Break Link")).clicked() {
+                            action = Some(json!({"link": i, "action": "breakLink"}));
+                        }
+                        ui.end_row();
+                    }
+                });
+            }
+            if let Some(a) = action {
+                match app.run("file.editLinks", a) {
+                    Ok(v) => {
+                        *links = file_links(&v);
+                        *edited = links.iter().map(|l| l.1.clone()).collect();
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            ui.add_space(6.0);
+            ui.button(tl!("Close")).clicked()
+        }
+        FormDialog::Letter { fields } => {
+            egui::Grid::new("letter_wizard").num_columns(2).spacing(egui::vec2(8.0, 6.0)).show(ui, |ui| {
+                for ((_, label, multi), value) in LETTER_FIELDS.iter().zip(fields.iter_mut()) {
+                    ui.label(tl!(label));
+                    if *multi {
+                        ui.add(egui::TextEdit::multiline(value).desired_rows(3).desired_width(320.0).char_limit(2000));
+                    } else {
+                        ui.add(crate::widgets::text_line(value).desired_width(320.0).char_limit(2000));
+                    }
+                    ui.end_row();
+                }
+            });
+            let (ok, cancel) = buttons(ui, tl!("Finish"));
+            if ok {
+                let params: serde_json::Map<String, Value> = LETTER_FIELDS
+                    .iter()
+                    .zip(fields.iter())
+                    .filter(|(_, v)| !v.trim().is_empty())
+                    .map(|((k, _, _), v)| (k.to_string(), json!(v)))
+                    .collect();
+                // With every field empty, the letter with the template's wording (an empty field
+                // still writes the letter; no fields at all would only open this dialog again).
+                let params = if params.is_empty() { json!({"date": ""}) } else { Value::Object(params) };
+                match app.run("file.letterWizard", params) {
+                    Ok(_) => return true,
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
+        FormDialog::Repairs { items } => {
+            if items.is_empty() {
+                ui.label(tl!("No repairs were needed."));
+            } else {
+                ui.label(tl!("These problems were found and repaired when the document was opened:"));
+                egui::ScrollArea::vertical().max_height(260.0).show(ui, |ui| {
+                    for (message, what) in items.iter() {
+                        ui.label(format!("• {}", crate::i18n::fmt(tl!(message.as_str()), &[("what", what)])));
+                    }
+                });
+            }
+            ui.add_space(6.0);
+            ui.button(tl!("Close")).clicked()
+        }
+        FormDialog::Consistency { groups, chosen } => {
+            if groups.is_empty() {
+                ui.label(tl!("No inconsistent spellings were found."));
+            } else {
+                ui.label(tl!("Pick the spelling to keep in each group."));
+                let mut replace = None;
+                egui::ScrollArea::vertical().max_height(320.0).show(ui, |ui| {
+                    for (i, g) in groups.iter().enumerate() {
+                        ui.separator();
+                        ui.horizontal_wrapped(|ui| {
+                            for (k, (text, n)) in g.iter().enumerate() {
+                                ui.radio_value(&mut chosen[i], k, format!("{text} ({n})"));
+                            }
+                            if ui.button(tl!("Replace")).clicked() {
+                                replace = g.get(chosen[i]).map(|(t, _)| t.clone());
+                            }
+                        });
+                    }
+                });
+                if let Some(to) = replace {
+                    match app.run("review.consistencyChecker", json!({"to": to})) {
+                        Ok(_) => {
+                            *groups = consistency_groups(app);
+                            *chosen = vec![0; groups.len()];
+                        }
+                        Err(e) => app.status(e),
+                    }
+                }
+            }
+            ui.add_space(6.0);
+            ui.button(tl!("Close")).clicked()
+        }
+        FormDialog::Summarize { kind, length, update_properties } => {
+            ui.label(egui::RichText::new(tl!("Type of summary")).strong());
+            for (k, label) in [
+                ("highlight", "Highlight key points"),
+                ("top", "Insert an executive summary or abstract at the top of the document"),
+                ("newDocument", "Create a new document and put the summary there"),
+            ] {
+                ui.radio_value(kind, k.to_string(), tl!(label));
+            }
+            ui.add_space(6.0);
+            ui.label(egui::RichText::new(tl!("Length of summary")).strong());
+            ui.horizontal(|ui| {
+                ui.label(tl!("Percent of original:"));
+                let shown = summary_length_label(SUMMARY_LENGTHS[(*length).min(SUMMARY_LENGTHS.len() - 1)]);
+                egui::ComboBox::from_id_salt("summary_length").selected_text(shown).show_ui(ui, |ui| {
+                    for (i, l) in SUMMARY_LENGTHS.iter().enumerate() {
+                        ui.selectable_value(length, i, summary_length_label(*l));
+                    }
+                });
+            });
+            ui.checkbox(update_properties, tl!("Update document statistics"));
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok {
+                let (sentences, words, percent) = SUMMARY_LENGTHS[(*length).min(SUMMARY_LENGTHS.len() - 1)];
+                let mut p = json!({"type": kind.as_str(), "updateProperties": *update_properties});
+                if let Some(n) = sentences {
+                    p["sentences"] = json!(n);
+                }
+                if let Some(n) = words {
+                    p["words"] = json!(n);
+                }
+                if let Some(n) = percent {
+                    p["percent"] = json!(n);
+                }
+                match app.run("tools.autoSummarize", p) {
+                    Ok(v) => {
+                        let (w, of) = (v["words"].as_u64().unwrap_or(0), v["of"].as_u64().unwrap_or(0));
+                        app.status(crate::i18n::fmt(tl!("Summary: {words} of {of} words"), &[("words", &w.to_string()), ("of", &of.to_string())]));
+                        return true;
+                    }
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
+        FormDialog::Sections { protected } => {
+            ui.label(tl!("Protected sections:"));
+            egui::Frame::group(ui.style()).show(ui, |ui| {
+                ui.set_min_width(240.0);
+                egui::ScrollArea::vertical().id_salt("section_protection").max_height(220.0).show(ui, |ui| {
+                    for (i, on) in protected.iter_mut().enumerate() {
+                        ui.checkbox(on, crate::i18n::fmt(tl!("Section {n}"), &[("n", &(i + 1).to_string())]));
+                    }
+                });
+            });
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok {
+                match app.run("review.protectSections", json!({"protected": protected})) {
+                    Ok(_) => return true,
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
+        FormDialog::Insert { kind } => {
+            ui.label(tl!("Type:"));
+            for (k, label) in [("text", "Text"), ("checkBox", "Check box"), ("dropDown", "Drop-down")] {
+                ui.radio_value(kind, k.to_string(), tl!(label));
+            }
+            let mut options = false;
+            ui.add_space(4.0);
+            if ui.button(tl!("Options…")).clicked() {
+                options = true;
+            }
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok || options {
+                let at = match app.run("developer.formField", json!({"type": kind.as_str()})) {
+                    Ok(v) => v.get("at").cloned(),
+                    Err(e) => {
+                        app.status(e);
+                        return true;
+                    }
+                };
+                // Options… inserts the field and goes on to its options.
+                if options && let Some(form) = OptionsForm::read(app, at.as_ref()) {
+                    *d = FormDialog::Options { form };
+                    return false;
+                }
+                return true;
+            }
+            cancel
+        }
+        FormDialog::Options { form } => {
+            let mut help = false;
+            match form.kind.as_str() {
+                "text" => text_options(ui, form),
+                "checkBox" => check_box_options(ui, form),
+                _ => drop_down_options(ui, form),
+            }
+            ui.add_space(6.0);
+            ui.separator();
+            egui::Grid::new("ff_settings").num_columns(2).spacing([10.0, 6.0]).show(ui, |ui| {
+                ui.label(tl!("Bookmark"));
+                ui.add(crate::widgets::text_line(&mut form.name).char_limit(doc4me_doc::form::MAX_NAME).desired_width(200.0));
+                ui.end_row();
+            });
+            let enabled = match form.kind.as_str() {
+                "text" => "Fill-in enabled",
+                "checkBox" => "Check box enabled",
+                _ => "Drop-down enabled",
+            };
+            ui.checkbox(&mut form.enabled, tl!(enabled));
+            ui.checkbox(&mut form.calc_on_exit, tl!("Calculate on exit"));
+            ui.add_space(4.0);
+            if ui.button(tl!("Add Help Text…")).clicked() {
+                help = true;
+            }
+            if help {
+                let back = Box::new(form.clone());
+                *d = FormDialog::Help { at: back.at.clone(), form: back.help.clone(), back: Some(back) };
+                return false;
+            }
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok {
+                match app.run("developer.formFieldOptions", form.params()) {
+                    Ok(_) => return true,
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
+        FormDialog::Help { at, form, back } => {
+            ui.horizontal(|ui| {
+                ui.selectable_value(&mut form.tab, 0, tl!("Status Bar"));
+                ui.selectable_value(&mut form.tab, 1, tl!("Help Key (F1)"));
+            });
+            ui.separator();
+            let limit = if form.tab == 0 { doc4me_doc::form::MAX_STATUS } else { doc4me_doc::form::MAX_HELP };
+            let h = if form.tab == 0 { &mut form.status } else { &mut form.help };
+            ui.radio_value(&mut h.mode, 0, tl!("None"));
+            ui.horizontal(|ui| {
+                ui.radio_value(&mut h.mode, 1, tl!("AutoText entry:"));
+                ui.add_enabled(h.mode == 1, crate::widgets::text_line(&mut h.auto_text).desired_width(180.0));
+            });
+            ui.radio_value(&mut h.mode, 2, tl!("Type your own:"));
+            ui.add_enabled(h.mode == 2, egui::TextEdit::multiline(&mut h.own).char_limit(limit).desired_rows(4).desired_width(320.0));
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if let Some(b) = back.as_mut()
+                && (ok || cancel)
+            {
+                // Back to the Options dialog, with the help text kept (OK) or as it was.
+                let mut options = (**b).clone();
+                if ok {
+                    options.help = form.clone();
+                }
+                *d = FormDialog::Options { form: options };
+                return false;
+            }
+            if ok {
+                match app.run("developer.formFieldHelp", json!({"at": at, "status": form.status.param(), "help": form.help.param()})) {
+                    Ok(_) => return true,
+                    Err(e) => app.status(e),
+                }
+            }
+            cancel
+        }
+    }
+}
+
+fn text_options(ui: &mut Ui, f: &mut OptionsForm) {
+    egui::Grid::new("ff_text").num_columns(2).spacing([10.0, 6.0]).show(ui, |ui| {
+        ui.label(tl!("Type:"));
+        let shown = TEXT_TYPES.iter().find(|(k, _)| *k == f.text_type).map(|(_, l)| *l).unwrap_or("Regular text");
+        egui::ComboBox::from_id_salt("ff_text_type").width(200.0).selected_text(tl!(shown)).show_ui(ui, |ui| {
+            for (k, label) in TEXT_TYPES {
+                if ui.selectable_label(f.text_type == k, tl!(label)).clicked() && f.text_type != k {
+                    f.text_type = k.to_string();
+                    f.format.clear();
+                }
+            }
+        });
+        ui.end_row();
+        ui.label(tl!("Default"));
+        let fills = matches!(f.text_type.as_str(), "regular" | "number" | "date" | "calculated");
+        ui.add_enabled(fills, crate::widgets::text_line(&mut f.default_text).char_limit(doc4me_doc::form::MAX_TEXT).desired_width(200.0));
+        ui.end_row();
+        ui.label(tl!("Maximum length:"));
+        ui.horizontal(|ui| {
+            let mut unlimited = f.max_length == 0;
+            if ui.checkbox(&mut unlimited, tl!("Unlimited")).changed() {
+                f.max_length = if unlimited { 0 } else { f.default_text.chars().count().max(10) as u32 };
+            }
+            if !unlimited {
+                ui.add(egui::DragValue::new(&mut f.max_length).range(1..=32767).clamp_existing_to_range(false));
+            }
+        });
+        ui.end_row();
+        ui.label(tl!("Format:"));
+        let current = f.format.clone();
+        let items: Vec<String> = formats(&f.text_type).iter().map(|s| s.to_string()).collect();
+        if let Some(v) = crate::widgets::combo(ui, "ff_text_format", 200.0, &current, &items, None) {
+            f.format = v;
+        }
+        ui.end_row();
+    });
+}
+
+fn check_box_options(ui: &mut Ui, f: &mut OptionsForm) {
+    ui.label(tl!("Check box size:"));
+    ui.horizontal(|ui| {
+        ui.radio_value(&mut f.auto_size, true, tl!("Auto"));
+        ui.radio_value(&mut f.auto_size, false, tl!("Exactly"));
+        ui.add_enabled(!f.auto_size, egui::DragValue::new(&mut f.size).range(1.0..=1638.0).clamp_existing_to_range(false).suffix(" pt"));
+    });
+    ui.add_space(4.0);
+    ui.label(tl!("Default value:"));
+    ui.horizontal(|ui| {
+        ui.radio_value(&mut f.default_checked, false, tl!("Not checked"));
+        ui.radio_value(&mut f.default_checked, true, tl!("Checked"));
+    });
+}
+
+fn drop_down_options(ui: &mut Ui, f: &mut OptionsForm) {
+    ui.label(tl!("Drop-down item:"));
+    ui.horizontal(|ui| {
+        let r = ui.add(crate::widgets::text_line(&mut f.new_entry).char_limit(doc4me_doc::form::MAX_ENTRY).desired_width(200.0));
+        let can_add = !f.new_entry.trim().is_empty() && f.entries.len() < doc4me_doc::form::MAX_ENTRIES;
+        let enter = r.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter));
+        if (ui.add_enabled(can_add, egui::Button::new(tl!("Add >>"))).clicked() || (enter && can_add)) && can_add {
+            f.entries.push(f.new_entry.trim().to_string());
+            f.new_entry.clear();
+            f.selected = Some(f.entries.len() - 1);
+        }
+    });
+    ui.add_space(4.0);
+    ui.label(tl!("Items in drop-down list:"));
+    ui.horizontal(|ui| {
+        egui::Frame::group(ui.style()).show(ui, |ui| {
+            ui.set_min_size(egui::vec2(200.0, 120.0));
+            egui::ScrollArea::vertical().id_salt("ff_entries").max_height(160.0).show(ui, |ui| {
+                for (i, e) in f.entries.iter().enumerate() {
+                    if ui.selectable_label(f.selected == Some(i), e.as_str()).clicked() {
+                        f.selected = Some(i);
+                    }
+                }
+            });
+        });
+        ui.vertical(|ui| {
+            let sel = f.selected.filter(|i| *i < f.entries.len());
+            if ui.add_enabled(sel.is_some_and(|i| i > 0), egui::Button::new(tl!("Move Up"))).clicked()
+                && let Some(i) = sel
+            {
+                f.entries.swap(i, i - 1);
+                f.selected = Some(i - 1);
+            }
+            if ui.add_enabled(sel.is_some_and(|i| i + 1 < f.entries.len()), egui::Button::new(tl!("Move Down"))).clicked()
+                && let Some(i) = sel
+            {
+                f.entries.swap(i, i + 1);
+                f.selected = Some(i + 1);
+            }
+            if ui.add_enabled(sel.is_some(), egui::Button::new(tl!("Remove"))).clicked()
+                && let Some(i) = sel
+            {
+                // Word puts a removed entry back in the box, ready to be edited and added again.
+                f.new_entry = f.entries.remove(i);
+                f.selected = None;
+            }
+        });
+    });
+}
+
+#[cfg(test)]
+mod tests {
+    use egui_kittest::Harness;
+    use egui_kittest::kittest::Queryable;
+    use serde_json::json;
+
+    use super::FormDialog;
+    use crate::dialogs::Dialog;
+    use crate::{Services, WordApp};
+
+    fn harness(a: WordApp) -> Harness<'static, WordApp> {
+        let mut h = Harness::builder().with_size(egui::vec2(1440.0, 900.0)).build_ui_state(
+            |ui, app: &mut WordApp| {
+                let ctx = ui.ctx().clone();
+                app.logic(&ctx);
+                app.ui(ui);
+            },
+            a,
+        );
+        h.run_steps(4);
+        h
+    }
+
+    fn form<'a>(h: &'a mut Harness<'_, WordApp>) -> &'a mut FormDialog {
+        match h.state_mut().dialog.as_mut() {
+            Some(Dialog::Forms(d)) => d,
+            other => panic!("{:?}", other.map(|d| d.name())),
+        }
+    }
+
+    fn info(h: &mut Harness<'_, WordApp>, name: &str) -> serde_json::Value {
+        h.state_mut().session.run("developer.formFieldInfo", &json!({"field": name})).unwrap()
+    }
+
+    #[test]
+    fn form_field_dialogs_insert_set_options_and_help() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("Size: ")), Services::default()));
+        h.state_mut().session.run("caret.docEnd", &json!({})).unwrap();
+        // Form Field (Developer › Legacy Tools from the command, without a kind): a drop-down, then Options….
+        h.state_mut().run("developer.formField", json!({})).unwrap();
+        h.run_steps(3);
+        assert_eq!(form(&mut h).name(), "insertFormField");
+        h.get_by_label("Drop-down").click();
+        h.run_steps(1);
+        h.get_by_label("Options…").click();
+        h.run_steps(3);
+        match form(&mut h) {
+            FormDialog::Options { form } => {
+                assert_eq!((form.kind.as_str(), form.name.as_str()), ("dropDown", "Dropdown1"));
+                form.new_entry = "Small".into();
+            }
+            other => panic!("{other:?}"),
+        }
+        h.run_steps(1);
+        h.get_by_label("Add >>").click();
+        h.run_steps(1);
+        if let FormDialog::Options { form } = form(&mut h) {
+            form.new_entry = "Large".into();
+        }
+        h.run_steps(1);
+        h.get_by_label("Add >>").click();
+        h.run_steps(1);
+        // Add Help Text… and back.
+        h.get_by_label("Add Help Text…").click();
+        h.run_steps(2);
+        match form(&mut h) {
+            FormDialog::Help { form, back, .. } => {
+                assert!(back.is_some());
+                form.status.mode = 2;
+                form.status.own = "Pick a size".into();
+            }
+            other => panic!("{other:?}"),
+        }
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        // The Help Text window fades out over the Options window it went back to.
+        h.run_steps(12);
+        assert!(matches!(form(&mut h), FormDialog::Options { form } if form.help.status.own == "Pick a size"));
+        h.get_by_label("OK").click();
+        h.run_steps(2);
+        assert!(h.state().dialog.is_none(), "{:?} {:?}", h.state().status_msg, h.state().dialog.as_ref().map(|d| d.name()));
+        let d = info(&mut h, "Dropdown1");
+        assert_eq!(d["entries"], json!(["Small", "Large"]));
+        assert_eq!(d["status"]["text"], "Pick a size");
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "Size: Small");
+        // Help Text on its own (the field selected).
+        let at = d["at"].clone();
+        h.state_mut().session.run("developer.formFieldInfo", &json!({"at": at})).unwrap();
+        let at: doc4me_doc::Pos = serde_json::from_value(at).unwrap();
+        let end = doc4me_doc::Pos { off: at.off + doc4me_doc::para::OBJ.len_utf8(), ..at.clone() };
+        h.state_mut().session.sel = doc4me_engine::Selection { anchor: at, focus: end };
+        h.state_mut().run("developer.formFieldHelp", json!({})).unwrap();
+        h.run_steps(3);
+        if let FormDialog::Help { form, back, .. } = form(&mut h) {
+            assert!(back.is_none());
+            form.tab = 1;
+            form.help.mode = 2;
+            form.help.own = "Small fits a pocket".into();
+        }
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(2);
+        assert!(h.state().dialog.is_none());
+        assert_eq!(info(&mut h, "Dropdown1")["help"]["text"], "Small fits a pocket");
+    }
+
+    #[test]
+    fn section_protection_dialog() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("One")), Services::default()));
+        h.state_mut().session.run("caret.docEnd", &json!({})).unwrap();
+        h.state_mut().run("layout.break", json!({"kind": "nextPage"})).unwrap();
+        h.state_mut().run("review.protectSections", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Sections { protected } if protected == &vec![true, true]));
+        h.get_by_label("Section 2").click();
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(2);
+        assert!(h.state().dialog.is_none());
+        assert_eq!(h.state_mut().session.run("review.protectSections", &json!({})).unwrap()["sections"], json!([true, false]));
+    }
+
+    #[test]
+    fn text_and_check_box_options() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Services::default()));
+        h.state_mut().run("developer.formField", json!({"type": "text"})).unwrap();
+        h.state_mut().run("developer.formField", json!({"type": "checkBox"})).unwrap();
+        h.state_mut().session.run("caret.left", &json!({"extend": true})).unwrap();
+        // The check box is selected: its options.
+        h.state_mut().run("developer.formFieldOptions", json!({})).unwrap();
+        h.run_steps(3);
+        match form(&mut h) {
+            FormDialog::Options { form } => {
+                assert_eq!(form.kind, "checkBox");
+                assert!(form.auto_size);
+                form.auto_size = false;
+                form.size = 14.0;
+                form.default_checked = true;
+                form.name = "Agree".into();
+            }
+            other => panic!("{other:?}"),
+        }
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(2);
+        let c = info(&mut h, "Agree");
+        assert_eq!((c["size"].as_f64(), c["value"].as_bool()), (Some(14.0), Some(true)));
+        // The text field: a number with a format, a default and a maximum length.
+        let t = info(&mut h, "Text1");
+        let at: doc4me_doc::Pos = serde_json::from_value(t["at"].clone()).unwrap();
+        let end = doc4me_doc::Pos { off: at.off + doc4me_doc::para::OBJ.len_utf8(), ..at.clone() };
+        h.state_mut().session.sel = doc4me_engine::Selection { anchor: at, focus: end };
+        h.state_mut().run("developer.formFieldOptions", json!({})).unwrap();
+        h.run_steps(3);
+        if let FormDialog::Options { form } = form(&mut h) {
+            assert_eq!((form.kind.as_str(), form.text_type.as_str()), ("text", "regular"));
+            form.text_type = "number".into();
+            form.format = "0.00".into();
+            form.default_text = "5".into();
+            form.max_length = 6;
+        }
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(2);
+        let t = info(&mut h, "Text1");
+        assert_eq!(
+            (t["textType"].as_str(), t["format"].as_str(), t["maxLength"].as_u64(), t["value"].as_str()),
+            (Some("number"), Some("0.00"), Some(6), Some("5"))
+        );
+        // Options with nothing selected says what to do.
+        h.state_mut().session.run("select.all", &json!({})).unwrap();
+        h.state_mut().session.run("select.collapse", &json!({})).unwrap();
+        h.state_mut().run("developer.formFieldOptions", json!({})).ok();
+        h.run_steps(2);
+    }
+
+    #[test]
+    fn frame_dialog_sets_changes_and_removes_a_frame() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("Boxed")), Services::default()));
+        let frame = |h: &mut Harness<'_, WordApp>| h.state_mut().session.run("format.frame", &json!({})).unwrap()["frame"].clone();
+        // Format Frame on a paragraph without one: the dialog, and OK puts it in a frame.
+        h.state_mut().run("format.frame", json!({})).unwrap();
+        h.run_steps(3);
+        match form(&mut h) {
+            FormDialog::Frame { form } => {
+                assert!(!form.framed && form.width_auto && form.around);
+                form.width_auto = false;
+                form.width = 100.0;
+                form.h_pos = "end".into();
+                form.h_rel = "margin".into();
+            }
+            other => panic!("{other:?}"),
+        }
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        let f = frame(&mut h);
+        assert_eq!(
+            (f["w"].as_f64(), f["hAlign"].as_str(), f["hRel"].as_str(), f["wrap"].as_str()),
+            (Some(100.0), Some("end"), Some("margin"), Some("around"))
+        );
+        // Again: Text wrapping None keeps the text above and below; the rest stays.
+        h.state_mut().run("format.frame", json!({})).unwrap();
+        h.run_steps(3);
+        if let FormDialog::Frame { form } = form(&mut h) {
+            assert!(form.framed && !form.width_auto && form.h_pos == "end");
+        }
+        h.get_by_label("None").click();
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(12);
+        let f = frame(&mut h);
+        assert_eq!((f["wrap"].as_str(), f["w"].as_f64(), f["hAlign"].as_str()), (Some("notBeside"), Some(100.0), Some("end")));
+        // Remove Frame.
+        h.state_mut().run("format.frame", json!({})).unwrap();
+        h.run_steps(3);
+        h.get_by_label("Remove Frame").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        assert!(frame(&mut h).is_null());
+    }
+
+    #[test]
+    fn hangul_hanja_dialog_converts_both_ways() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("大韓 만세")), Services::default()));
+        h.state_mut().session.sel =
+            doc4me_engine::Selection::caret(doc4me_doc::Pos::new(doc4me_doc::StoryRef::Body, doc4me_doc::Path::top(0), "大韓 만".len()));
+        h.state_mut().run("review.hangulHanja", json!({})).unwrap();
+        h.run_steps(3);
+        let FormDialog::Hanja { text, cands, chosen } = form(&mut h) else { panic!("the Hangul Hanja dialog") };
+        assert_eq!(text, "만세");
+        let man = cands[0].iter().position(|c| c == "萬").unwrap();
+        let se = cands[1].iter().position(|c| c == "歲").unwrap();
+        chosen[0] = man + 1;
+        chosen[1] = se + 1;
+        h.run_steps(1);
+        h.get_all_by_label("Convert").next().expect("Hangul to Hanja's Convert").click();
+        h.run_steps(8);
+        assert!(h.state().dialog.is_none());
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "大韓 萬歲");
+        // Hanja to Hangul, with nothing selected: the whole document.
+        h.state_mut().session.sel = doc4me_engine::Selection::caret(doc4me_doc::Pos::new(doc4me_doc::StoryRef::Body, doc4me_doc::Path::top(0), 0));
+        h.state_mut().run("review.hangulHanja", json!({})).unwrap();
+        h.run_steps(3);
+        h.get_by_label("Put the caret in Korean text to choose its Hanja.");
+        h.get_by_label("Convert").click();
+        h.run_steps(8);
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "대한 만세");
+    }
+
+    #[test]
+    fn edit_links_dialog_breaks_a_link() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::new()), Services::default()));
+        h.state_mut().session.run("insert.field", &json!({"instr": "INCLUDETEXT \"part.docx\"", "result": "Part"})).unwrap();
+        h.state_mut().run("file.editLinks", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Links { links, .. } if links.len() == 1 && links[0].1 == "part.docx"));
+        h.get_by_label("Break Link").click();
+        h.run_steps(4);
+        h.get_by_label("This document has no links to files.");
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "Part");
+    }
+
+    #[test]
+    fn letter_wizard_writes_the_letter() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("old")), Services::default()));
+        h.state_mut().session.author = "Somchai".into();
+        h.state_mut().run("file.letterWizard", json!({})).unwrap();
+        h.run_steps(3);
+        let FormDialog::Letter { fields } = form(&mut h) else { panic!("the Letter Wizard") };
+        assert!(fields.contains(&"Somchai".to_string()), "the sender is the user");
+        fields[0] = "Ms. Lee".into();
+        h.run_steps(1);
+        h.get_by_label("Finish").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        let text = h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body);
+        assert!(text.contains("Ms. Lee") && text.contains("Dear Sir or Madam,") && text.contains("Somchai"), "{text}");
+    }
+
+    #[test]
+    fn show_repairs_lists_what_opening_left_out() {
+        let mut doc = doc4me_doc::Document::from_text("Hello");
+        doc.note_repair("An unreadable part was left out: {what}", "word/styles.xml");
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc), Services::default()));
+        h.state_mut().run("file.showRepairs", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Repairs { items } if items.len() == 1));
+        h.get_by_label("• An unreadable part was left out: word/styles.xml");
+        h.get_by_label("Close").click();
+        h.run_steps(6);
+        assert!(h.state().dialog.is_none());
+    }
+
+    #[test]
+    fn consistency_checker_dialog_replaces_the_other_spellings() {
+        let doc = doc4me_doc::Document::from_text("ﾃﾞｰﾀとデータとデータ");
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc), Services::default()));
+        h.state_mut().run("review.consistencyChecker", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Consistency { groups, .. } if groups.len() == 1 && groups[0][0] == ("データ".to_string(), 2)));
+        // The ribbon has a Replace button too; the dialog's is drawn last.
+        h.get_all_by_label("Replace").last().expect("the dialog's Replace").click();
+        h.run_steps(6);
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "データとデータとデータ");
+        h.get_by_label("No inconsistent spellings were found.");
+        h.get_by_label("Close").click();
+        h.run_steps(6);
+        assert!(h.state().dialog.is_none());
+    }
+
+    #[test]
+    fn chinese_conversion_dialog_converts_the_document() {
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(doc4me_doc::Document::from_text("汉语")), Services::default()));
+        h.state_mut().run("review.chineseConversion", json!({})).unwrap();
+        h.run_steps(3);
+        assert!(matches!(form(&mut h), FormDialog::Chinese { to_traditional: false, variants: false }));
+        h.get_by_label("Simplified Chinese to Traditional Chinese").click();
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        assert_eq!(h.state().session.doc.plain_text(doc4me_doc::StoryRef::Body), "漢語");
+    }
+
+    #[test]
+    fn auto_summarize_dialog_puts_the_summary_at_the_top() {
+        let mut d = doc4me_doc::Document::from_text("Solar panels turn sunlight into electricity.");
+        for t in [
+            "My cat likes the garden.",
+            "Solar panels on roofs make electricity for homes.",
+            "Lunch was late.",
+            "Cheap solar panels made electricity common.",
+        ] {
+            d.body.push(std::sync::Arc::new(doc4me_doc::Block::Para(doc4me_doc::Paragraph::with_text(t, Default::default()))));
+        }
+        let mut h = harness(WordApp::new(doc4me_engine::Session::new(d), Services::default()));
+        h.state_mut().run("tools.autoSummarize", json!({})).unwrap();
+        h.run_steps(3);
+        // Word's defaults: highlight, 25%, update the statistics.
+        assert!(matches!(form(&mut h), FormDialog::Summarize { kind, length: 5, update_properties: true } if kind == "highlight"));
+        h.get_by_label("Insert an executive summary or abstract at the top of the document").click();
+        h.run_steps(1);
+        if let FormDialog::Summarize { length, .. } = form(&mut h) {
+            // 10%: one sentence of five.
+            *length = 4;
+        }
+        h.run_steps(1);
+        h.get_by_label("OK").click();
+        h.run_steps(12);
+        assert!(h.state().dialog.is_none());
+        let doc = &h.state().session.doc;
+        assert_eq!(doc.body.len(), 6, "a paragraph of its own");
+        let top = doc.para(doc4me_doc::StoryRef::Body, &doc4me_doc::Path::top(0)).unwrap();
+        assert!(top.text.contains("olar panels"), "{:?}", top.text);
+        assert_eq!(doc.core.keywords.split(", ").next(), Some("electricity"));
+    }
+}

@@ -1,0 +1,1008 @@
+//! Undo, clipboard, find & replace, Go To, Format Painter.
+
+use doc4me_doc::edit::Fragment;
+use doc4me_doc::{Block, Paragraph, Pos, StoryRef};
+use serde_json::{Value, json};
+
+use super::{delete_selection, find_pattern, pos_json, sel_result};
+use crate::{CmdError, CmdResult, CommandSpec, Selection, Session, p};
+
+fn has_sel(s: &Session) -> Option<&'static str> {
+    if s.sel.is_collapsed() { Some("nothing is selected") } else { None }
+}
+
+pub fn specs() -> Vec<CommandSpec> {
+    vec![
+        CommandSpec::new("edit.undo", "Undo", "Quick Access Toolbar", |s, _| {
+            if s.step_lifts_protection(false) {
+                return Err(CmdError::Disabled("edit.undo: use Stop Protection to lift the document's protection".into()));
+            }
+            s.undo();
+            sel_result(s)
+        })
+        .key("Mod+Z")
+        .pure(),
+        CommandSpec::new("edit.redo", "Redo", "Quick Access Toolbar", |s, _| {
+            if s.step_lifts_protection(true) {
+                return Err(CmdError::Disabled("edit.redo: use Stop Protection to lift the document's protection".into()));
+            }
+            s.redo();
+            sel_result(s)
+        })
+        .key("Mod+Y / Mod+Shift+Z")
+        .pure(),
+        CommandSpec::new("edit.cut", "Cut", "Home › Clipboard", cut).key("Mod+X").when(has_sel),
+        // F2 / Shift+F2: the selection waits while the caret goes where it should go; Enter
+        // moves (or copies) it there, Esc or any edit forgets it.
+        CommandSpec::new("edit.moveText", "Move Text", "Editing", |s, _| move_text(s, false)).key("F2").when(has_sel).pure(),
+        CommandSpec::new("edit.copyText", "Copy Text", "Editing", |s, _| move_text(s, true)).key("Shift+F2").when(has_sel).pure(),
+        // Word's Spike: cuts collected one after another (each ending its paragraph), pasted
+        // together. It is the AutoText entry "Spike", so Quick Parts lists and inserts it too.
+        CommandSpec::new("edit.spike", "Spike", "Editing", spike).key("Mod+F3").when(has_sel),
+        CommandSpec::new("edit.pasteSpike", "Paste Spike", "Editing", paste_spike)
+            .key("Mod+Shift+F3")
+            .when(|s| if s.building_blocks.contains_key(SPIKE) { None } else { Some("the Spike is empty") }),
+        CommandSpec::new("edit.copy", "Copy", "Home › Clipboard", copy).key("Mod+C").pure(),
+        CommandSpec::new("edit.paste", "Paste", "Home › Clipboard", paste).key("Mod+V").params(r#"{"text"?: string}"#),
+        CommandSpec::new("edit.pasteText", "Paste: Keep Text Only", "Home › Clipboard › Paste", paste_text)
+            .params(r#"{"text"?: string}"#)
+            // Word for Windows (Microsoft 365): Ctrl+Shift+V pastes text only.
+            .key(super::mac_or("Mod+Shift+Alt+V", "Mod+Shift+V / Mod+Shift+Alt+V")),
+        CommandSpec::new("edit.pasteMerge", "Paste: Merge Formatting", "Home › Clipboard › Paste", paste_text).params(r#"{"text"?: string}"#),
+        CommandSpec::new("edit.clipboardPane", "Clipboard Pane", "Home › Clipboard", |s, v| {
+            let on = p::bool(v, "value").unwrap_or(!s.view.clipboard_pane);
+            s.view.clipboard_pane = on;
+            Ok(json!({"value": on, "count": s.clip_history.len()}))
+        })
+        .params(r#"{"value"?: bool}"#)
+        .pure(),
+        CommandSpec::new("edit.clipboardItems", "Clipboard Items", "Home › Clipboard › Clipboard Pane", |s, _| Ok(s.clip_history.describe())).pure(),
+        CommandSpec::new("edit.pasteClipboardItem", "Paste Clipboard Item", "Home › Clipboard › Clipboard Pane", paste_clip_item)
+            .params(r#"{"index": n (0 = newest)}"#)
+            .when(has_clips),
+        CommandSpec::new("edit.pasteAllClipboard", "Paste All", "Home › Clipboard › Clipboard Pane", paste_all_clips).when(has_clips),
+        CommandSpec::new("edit.deleteClipboardItem", "Delete Clipboard Item", "Home › Clipboard › Clipboard Pane", |s, v| {
+            let i = clip_index(s, v)?;
+            s.clip_history.items.remove(i);
+            Ok(s.clip_history.describe())
+        })
+        .params(r#"{"index": n (0 = newest)}"#)
+        .when(has_clips)
+        .pure(),
+        CommandSpec::new("edit.clearClipboard", "Clear All", "Home › Clipboard › Clipboard Pane", |s, _| {
+            s.clip_history.items.clear();
+            Ok(s.clip_history.describe())
+        })
+        .pure(),
+        CommandSpec::new("edit.find", "Find", "Home › Editing", find)
+            .key("Mod+F")
+            .params(r#"{"text": string, "matchCase"?: bool, "wholeWord"?: bool, "matchPrefix"?: bool, "matchSuffix"?: bool, "ignorePunct"?: bool, "ignoreSpace"?: bool, "fuzzy"?: bool (Sounds like (Japanese)), "wildcards"?: bool, "special"?: bool (^p ^t ^# … codes, default true), "regex"?: bool}"#)
+            .pure(),
+        CommandSpec::new("edit.fuzzyOptions", "Japanese Find Options", "Home › Editing › Find", fuzzy_options)
+            .params(r#"{"width"?: bool, "kana"?: bool, "smallKana"?: bool, "longVowel"?: bool} — what Sounds like (Japanese) matches (full/half width, hiragana/katakana, small kana, prolonged sound marks and dashes); without settings it opens Advanced Find at its search options. Returns them."#)
+            .pure(),
+        CommandSpec::new("edit.advancedFind", "Advanced Find", "Home › Editing › Find", advanced_find)
+            .params(r#"{"text"?: string, …options of edit.find, "in"?: "main|selection", "highlight"?: bool}"#)
+            .pure(),
+        CommandSpec::new("edit.findNext", "Find Next", "Home › Editing › Find", |s, v| {
+            read_opts(s, v);
+            step(s, 1)
+        })
+        // Word for Windows: Ctrl+G is Go To and Ctrl+Page Down the top of the next page.
+        // Shift+F4 repeats the last Find (Word: or Go To).
+        .key(super::mac_or("Mod+G / F3 / Shift+F4", "F3 / Shift+F4"))
+        .params(r#"{"text"?: string, "matchCase"?: bool, "wholeWord"?: bool, "regex"?: bool}"#)
+        .pure(),
+        CommandSpec::new("edit.findPrevious", "Find Previous", "Home › Editing › Find", |s, v| {
+            read_opts(s, v);
+            step(s, -1)
+        })
+        // Elsewhere Ctrl+Shift+G is Word Count.
+        .key(super::mac_or("Mod+Shift+G", ""))
+        .params(r#"{"text"?: string, "matchCase"?: bool, "wholeWord"?: bool, "regex"?: bool}"#)
+        .pure(),
+        CommandSpec::new("edit.replace", "Replace", "Home › Editing", replace).key("Mod+H").params(r#"{"text": string, "with": string, …options of edit.replaceAll}"#),
+        CommandSpec::new("edit.replaceAll", "Replace All", "Home › Editing › Replace", replace_all)
+            .params(r#"{"text": string, "with": string (^p ^t ^& ^c …; \\1 with wildcards), …options of edit.find}"#),
+        CommandSpec::new("edit.goto", "Go To", "Home › Editing › Find", goto)
+            .key(super::mac_or("Mod+Alt+G / F5", "Mod+G / Mod+Alt+G / F5"))
+            .params(r#"{"page"?: n, "bookmark"?: string, "paragraph"?: n, "to"?: "p3" | "s2" | "l10" | "s2p3" | "p3l4" | "+2" | "-1" | "%50" (Word's Go To destinations; a bare number is a page)}"#)
+            .pure(),
+        CommandSpec::new("edit.goBack", "Go Back", "Navigation", |s, _| {
+            let p = s.go_back().ok_or_else(|| CmdError::Failed("no edits to go back to yet".into()))?;
+            s.sel = Selection::caret(p);
+            s.goal_x = None;
+            sel_result(s)
+        })
+        .key("Shift+F5 / Mod+Alt+Z")
+        .pure(),
+        // Hyperlinks within the document: following one remembers where it was, and Back and
+        // Forward (Alt+Left, Alt+Right, Word's Web toolbar) step through those places.
+        CommandSpec::new("web.follow", "Open Hyperlink", "Navigation", follow_link)
+            .params(r#"{"link"?: string (a URL, or # and a bookmark name; default: the link at the caret)} → {"followed": bookmark} | {"url": string (for the interface to open)}"#)
+            .pure(),
+        CommandSpec::new("web.back", "Back", "Navigation", |s, _| {
+            s.link_step(true).ok_or_else(|| CmdError::Failed("no followed hyperlink to go back from".into()))?;
+            sel_result(s)
+        })
+        .key(super::non_mac("Alt+Left"))
+        .pure(),
+        CommandSpec::new("web.forward", "Forward", "Navigation", |s, _| {
+            s.link_step(false).ok_or_else(|| CmdError::Failed("nothing to go forward to".into()))?;
+            sel_result(s)
+        })
+        .key(super::non_mac("Alt+Right"))
+        .pure(),
+        CommandSpec::new("edit.formatPainter", "Format Painter", "Home › Clipboard", painter).params(r#"{"sticky"?: bool}"#).pure(),
+        CommandSpec::new("edit.copyFormat", "Copy Formatting", "Home › Clipboard", |s, _| {
+            painter_pick(s);
+            sel_result(s)
+        })
+        // Word for Windows (Microsoft 365): Ctrl+Alt+C and Ctrl+Alt+V, since Ctrl+Shift+V pastes text.
+        .key(super::mac_or("Mod+Shift+C", "Mod+Alt+C / Mod+Shift+C"))
+        .pure(),
+        CommandSpec::new("edit.pasteFormat", "Paste Formatting", "Home › Clipboard", paste_format).key(super::mac_or("Mod+Shift+V", "Mod+Alt+V")),
+    ]
+}
+
+fn copy(s: &mut Session, _: &Value) -> CmdResult {
+    let (a, b) = s.sel.ordered();
+    if a == b {
+        return Ok(json!({"text": ""}));
+    }
+    let f = s.doc.copy_range(&a, &b);
+    s.clipboard_text = f.plain_text();
+    s.clip_history.push(&f, &s.clipboard_text);
+    s.clipboard = Some(f);
+    s.clipboard_doc = Some(s.document_id());
+    Ok(json!({"text": s.clipboard_text}))
+}
+
+fn cut(s: &mut Session, v: &Value) -> CmdResult {
+    let r = copy(s, v)?;
+    // A tracked cut of a paragraph or sentence may become a move when pasted.
+    if !super::moves::cut_tracked(s)? {
+        delete_selection(s)?;
+    }
+    super::controls::restore_placeholder(s)?;
+    Ok(r)
+}
+
+/// Move Text / Copy Text waiting for Enter: the text (start, end) and whether to copy it.
+#[derive(Clone, Debug, PartialEq)]
+pub struct MoveText {
+    pub from: (Pos, Pos),
+    pub copy: bool,
+}
+
+fn move_text(s: &mut Session, copy: bool) -> CmdResult {
+    let (a, b) = s.sel.ordered();
+    s.move_text = Some(MoveText { from: (a, b), copy });
+    Ok(json!({ if copy { "copyTo" } else { "moveTo" }: true }))
+}
+
+/// Enter after Move Text / Copy Text: the text goes to the caret (Word's "Move to where?").
+/// `None` when it can't (the caret is in the text itself, or the text is gone): Enter is Enter.
+pub(crate) fn finish_move(s: &mut Session, m: MoveText) -> Option<CmdResult> {
+    let (a, b) = m.from;
+    let c = s.sel.ordered().0;
+    let fits = |p: &Pos| s.doc.para_at(p).is_some_and(|x| p.off <= x.len() && x.text.is_char_boundary(p.off));
+    if a >= b || !fits(&a) || !fits(&b) || (c.story == a.story && c >= a && c <= b) {
+        return None;
+    }
+    Some(place_moved(s, a, b, c, m.copy))
+}
+
+/// The bookmark that keeps the destination while the moved text comes out before it.
+const MOVE_MARK: &str = "_Doc4MeMoveTo";
+
+fn place_moved(s: &mut Session, a: Pos, b: Pos, c: Pos, copy: bool) -> CmdResult {
+    let frag = s.doc.copy_range(&a, &b);
+    let mut at = c.clone();
+    if !copy {
+        // Text before the destination: mark the destination, so taking the text out keeps it.
+        let after = c.story == a.story && c > b;
+        if after {
+            s.doc.para_mut(c.story, &c.path)?.insert_object(
+                c.off,
+                doc4me_doc::para::InlineObject::BookmarkStart { name: MOVE_MARK.into() },
+                &Default::default(),
+            )?;
+        }
+        s.sel = Selection { anchor: a, focus: b };
+        delete_selection(s)?;
+        if after {
+            let mark = s.doc.para_paths(c.story).into_iter().find_map(|path| {
+                let p = s.doc.para(c.story, &path)?;
+                p.object_offsets()
+                    .into_iter()
+                    .find(|off| matches!(p.object_at(*off), Some(doc4me_doc::para::InlineObject::BookmarkStart { name }) if name == MOVE_MARK))
+                    .map(|off| Pos { story: c.story, path: path.clone(), off })
+            });
+            let mark = mark.ok_or_else(|| CmdError::Failed("the place to move to is gone".into()))?;
+            s.doc.para_mut(mark.story, &mark.path)?.delete(mark.off, mark.off + doc4me_doc::para::OBJ.len_utf8())?;
+            at = mark;
+        }
+    }
+    s.sel = Selection::caret(at);
+    super::paste::insert(s, frag)?;
+    sel_result(s)
+}
+
+/// The AutoText entry the Spike collects into (Word's name).
+pub const SPIKE: &str = "Spike";
+
+/// Ctrl+F3: cut the selection onto the end of the Spike, with a paragraph mark after it.
+fn spike(s: &mut Session, _: &Value) -> CmdResult {
+    let (a, b) = s.sel.ordered();
+    let item = s.doc.copy_range(&a, &b);
+    delete_selection(s)?;
+    super::controls::restore_placeholder(s)?;
+    let mut all = s.building_blocks.remove(SPIKE).unwrap_or_default();
+    // A Spike ends with the empty paragraph after its last paragraph mark; the item takes its
+    // place and ends with a paragraph mark of its own (a whole paragraph has one already).
+    let ends_with_mark = |f: &Fragment| f.blocks.last().is_some_and(|b| b.as_para().is_some_and(|p| p.is_empty()));
+    if ends_with_mark(&all) {
+        all.blocks.pop();
+    }
+    all.blocks.extend(item.blocks);
+    if !ends_with_mark(&all) {
+        all.blocks.push(Block::Para(Paragraph::new()));
+    }
+    all.parts.extend(item.parts);
+    let text = all.plain_text();
+    s.building_blocks.insert(SPIKE.into(), all);
+    Ok(json!({"spike": text}))
+}
+
+/// Ctrl+Shift+F3: paste the Spike and empty it.
+fn paste_spike(s: &mut Session, _: &Value) -> CmdResult {
+    let frag = s.building_blocks.get(SPIKE).cloned().ok_or_else(|| CmdError::Disabled("the Spike is empty".into()))?;
+    super::paste::insert(s, frag)?;
+    s.building_blocks.remove(SPIKE);
+    sel_result(s)
+}
+
+fn paste(s: &mut Session, v: &Value) -> CmdResult {
+    // File › Options › Advanced › Cut, copy, and paste: our own copy from this document or
+    // another one, or another program's.
+    let ours = if s.clipboard_doc == Some(s.document_id()) { s.prefs.paste_same } else { s.prefs.paste_between };
+    // An explicit text param (from the system clipboard) wins unless it matches our own copy.
+    let (frag, mode) = match (p::str(v, "text"), &s.clipboard) {
+        (Some(t), Some(f)) if f.plain_text() == t.replace("\r\n", "\n") => (f.clone(), ours),
+        (Some(t), _) => (Fragment::from_text(&t.replace("\r\n", "\n")), s.prefs.paste_other),
+        (None, Some(f)) => (f.clone(), ours),
+        (None, None) => return Err(CmdError::Failed("the clipboard is empty".into())),
+    };
+    if mode != crate::session::PasteMode::Keep {
+        return paste_text(s, &json!({"text": frag.plain_text()}));
+    }
+    super::paste::insert(s, frag)?;
+    sel_result(s)
+}
+
+/// Most items the Clipboard pane keeps.
+pub const CLIP_MAX_ITEMS: usize = 24;
+/// A copy bigger than this (estimated) is not collected (it still reaches the clipboard).
+const CLIP_ITEM_BYTES: usize = 4 << 20;
+/// All collected items together stay under this; the oldest go first.
+const CLIP_TOTAL_BYTES: usize = 24 << 20;
+/// Characters of preview per item.
+const CLIP_PREVIEW_CHARS: usize = 120;
+
+/// One item collected by Copy or Cut.
+#[derive(Clone, Debug)]
+pub struct ClipItem {
+    pub fragment: Fragment,
+    /// Its plain text.
+    pub text: String,
+    /// Rough memory use.
+    bytes: usize,
+}
+
+impl ClipItem {
+    /// One line of the item's text for a list: whitespace runs become one space, objects drop out.
+    pub fn preview(&self) -> String {
+        let words = self.text.split(|c: char| c.is_whitespace() || c == doc4me_doc::para::OBJ).filter(|w| !w.is_empty());
+        let mut out = String::new();
+        let mut n = 0;
+        for w in words {
+            if !out.is_empty() {
+                out.push(' ');
+                n += 1;
+            }
+            for c in w.chars() {
+                if n >= CLIP_PREVIEW_CHARS {
+                    out.push('…');
+                    return out;
+                }
+                out.push(c);
+                n += 1;
+            }
+        }
+        out
+    }
+}
+
+/// Items collected by Copy and Cut during the session, newest first: the Clipboard pane
+/// (Home › Clipboard). At most [`CLIP_MAX_ITEMS`]; oversized copies are skipped.
+#[derive(Clone, Debug, Default)]
+pub struct ClipHistory {
+    items: Vec<ClipItem>,
+}
+
+impl ClipHistory {
+    pub fn items(&self) -> &[ClipItem] {
+        &self.items
+    }
+    pub fn len(&self) -> usize {
+        self.items.len()
+    }
+    pub fn is_empty(&self) -> bool {
+        self.items.is_empty()
+    }
+
+    fn push(&mut self, f: &Fragment, text: &str) {
+        // Text plus per-paragraph overhead; pictures are references into the document.
+        let paras = text.matches('\n').count().saturating_add(f.blocks.len()).saturating_add(f.parts.len()).saturating_add(1);
+        let bytes = text.len().saturating_mul(2).saturating_add(paras.saturating_mul(256));
+        if bytes > CLIP_ITEM_BYTES || f.blocks.is_empty() {
+            return;
+        }
+        // Copying the same thing again doesn't add a second item.
+        if self.items.first().is_some_and(|i| i.text == text && i.fragment == *f) {
+            return;
+        }
+        self.items.insert(0, ClipItem { fragment: f.clone(), text: text.to_string(), bytes });
+        self.items.truncate(CLIP_MAX_ITEMS);
+        while self.items.len() > 1 && self.items.iter().map(|i| i.bytes).sum::<usize>() > CLIP_TOTAL_BYTES {
+            self.items.pop();
+        }
+    }
+
+    /// The items for agents and the pane, newest first.
+    fn describe(&self) -> Value {
+        Value::Array(
+            self.items
+                .iter()
+                .enumerate()
+                .map(|(i, it)| {
+                    json!({
+                        "index": i,
+                        "preview": it.preview(),
+                        "chars": it.text.chars().count(),
+                        "objects": it.text.matches(doc4me_doc::para::OBJ).count(),
+                    })
+                })
+                .collect(),
+        )
+    }
+}
+
+fn has_clips(s: &Session) -> Option<&'static str> {
+    if s.clip_history.is_empty() { Some("the Clipboard pane is empty") } else { None }
+}
+
+fn clip_index(s: &Session, v: &Value) -> Result<usize, CmdError> {
+    let i = p::u64(v, "index").ok_or_else(|| CmdError::Params("`index` (number, 0 = newest) is required".into()))?;
+    usize::try_from(i)
+        .ok()
+        .filter(|i| *i < s.clip_history.len())
+        .ok_or_else(|| CmdError::Params(format!("no clipboard item {i} (there are {})", s.clip_history.len())))
+}
+
+/// Paste a collected item through the normal paste path. The clipboard itself stays as it was.
+fn paste_clip(s: &mut Session, f: Fragment) -> CmdResult {
+    let saved = s.clipboard.replace(f);
+    let r = paste(s, &json!({}));
+    s.clipboard = saved;
+    r
+}
+
+fn paste_clip_item(s: &mut Session, v: &Value) -> CmdResult {
+    let i = clip_index(s, v)?;
+    let f = s.clip_history.items.get(i).map(|x| x.fragment.clone()).ok_or_else(|| CmdError::Params("no such clipboard item".into()))?;
+    paste_clip(s, f)
+}
+
+/// Every collected item, in the order they were copied (one undo step).
+fn paste_all_clips(s: &mut Session, _: &Value) -> CmdResult {
+    let all: Vec<Fragment> = s.clip_history.items.iter().rev().map(|x| x.fragment.clone()).collect();
+    let mut r = sel_result(s)?;
+    for f in all {
+        r = paste_clip(s, f)?;
+    }
+    Ok(r)
+}
+
+fn paste_text(s: &mut Session, v: &Value) -> CmdResult {
+    let text = match p::str(v, "text") {
+        Some(t) => t.to_string(),
+        None => s.clipboard.as_ref().map(Fragment::plain_text).unwrap_or_default(),
+    };
+    super::paste_text(s, &text.replace("\r\n", "\r").replace('\n', "\r"))?;
+    sel_result(s)
+}
+
+/// One match: its range and, when asked for, the Replace with text filled in for it.
+pub(crate) struct Found {
+    pub a: Pos,
+    pub b: Pos,
+    pub rep: Option<String>,
+}
+
+/// A stretch of searched text: `len` bytes from `hay` are paragraph `para`'s bytes from `raw`.
+/// A paragraph mark is a one-byte stretch at the paragraph's end (`mark`).
+struct Seg {
+    hay: usize,
+    para: usize,
+    raw: usize,
+    len: usize,
+    mark: bool,
+}
+
+/// All matches of the find state in the current story. Text marked deleted by
+/// Track Changes is no longer part of the document, so the search reads each
+/// paragraph without it: a match lies within one stretch of live text, and word
+/// boundaries and anchors see the neighbouring live text, not the deleted text.
+/// Otherwise Replace would find its own deleted text again.
+pub(crate) fn search(s: &Session, story: StoryRef) -> Result<Vec<(Pos, Pos)>, CmdError> {
+    Ok(search_full(s, story, false)?.into_iter().map(|f| (f.a, f.b)).collect())
+}
+
+fn find_opts(f: &crate::session::FindState) -> find_pattern::Opts {
+    find_pattern::Opts {
+        match_case: f.match_case,
+        whole_word: f.whole_word,
+        prefix: f.match_prefix,
+        suffix: f.match_suffix,
+        ignore_punct: f.ignore_punct,
+        ignore_space: f.ignore_space,
+        wildcards: f.wildcards,
+        regex: f.regex,
+        literal: f.literal,
+        fuzzy: f.fuzzy,
+    }
+}
+
+/// [`search`], with the Replace with text of each match when `with_rep` (special codes, `^&`,
+/// wildcard groups). A pattern that can match a paragraph mark (`^p`) reads runs of sibling
+/// paragraphs as one text with a mark between them; otherwise each paragraph is read alone.
+pub(crate) fn search_full(s: &Session, story: StoryRef, with_rep: bool) -> Result<Vec<Found>, CmdError> {
+    use regex_automata::{Input, meta, util::syntax};
+    let f = &s.find;
+    if f.query.is_empty() {
+        return Ok(Vec::new());
+    }
+    let opts = find_opts(f);
+    let c = find_pattern::compile(&f.query, &opts).map_err(CmdError::Params)?;
+    let re = meta::Regex::builder()
+        .syntax(syntax::Config::new().case_insensitive(c.case_insensitive))
+        .configure(meta::Config::new().nfa_size_limit(Some(1 << 20)))
+        .build(&c.pattern)
+        .map_err(|e| CmdError::Params(format!("bad pattern: {e}")))?;
+    let pieces = with_rep.then(|| find_pattern::parse_replace(&f.replace, &opts));
+    let paths = s.doc.para_paths(story);
+    // Paragraphs read as one text: consecutive siblings when the pattern spans paragraphs.
+    let mut chunks: Vec<std::ops::Range<usize>> = Vec::new();
+    for i in 0..paths.len() {
+        let joins =
+            c.spans_paras && i > 0 && paths.get(i - 1).zip(paths.get(i)).is_some_and(|(x, y)| x.parent() == y.parent() && x.last() + 1 == y.last());
+        match chunks.last_mut() {
+            Some(r) if joins => r.end = i + 1,
+            _ => chunks.push(i..i + 1),
+        }
+    }
+    let mut out = Vec::new();
+    let mut caps = re.create_captures();
+    for chunk in chunks {
+        let mut hay = String::new();
+        let mut segs: Vec<Seg> = Vec::new();
+        // Where the live text breaks (tracked-deleted text, or a paragraph edge when not spanning).
+        let mut cuts: Vec<usize> = Vec::new();
+        let last = chunk.end.saturating_sub(1);
+        for i in chunk {
+            let Some(p) = paths.get(i).and_then(|path| s.doc.para(story, path)) else {
+                cuts.push(hay.len());
+                continue;
+            };
+            let mut expect = 0;
+            for (r, ch) in p.run_ranges() {
+                let Some(t) = p.text.get(r.clone()).filter(|_| ch.del.is_none()) else { continue };
+                if t.is_empty() {
+                    continue;
+                }
+                if r.start != expect {
+                    cuts.push(hay.len());
+                }
+                match segs.last_mut() {
+                    Some(sg) if !sg.mark && sg.para == i && sg.raw + sg.len == r.start => sg.len += t.len(),
+                    _ => segs.push(Seg { hay: hay.len(), para: i, raw: r.start, len: t.len(), mark: false }),
+                }
+                hay.push_str(t);
+                expect = r.end;
+            }
+            if i < last {
+                if expect != p.text.len() {
+                    cuts.push(hay.len());
+                }
+                segs.push(Seg { hay: hay.len(), para: i, raw: p.text.len(), len: 1, mark: true });
+                hay.push(if p.section.is_some() { find_pattern::SECT_MARK } else { find_pattern::PARA_MARK });
+            }
+        }
+        let pos_of = |x: usize, end: bool| -> Option<Pos> {
+            let k = segs.partition_point(|sg| if end { sg.hay + sg.len < x } else { sg.hay + sg.len <= x });
+            let sg = segs.get(k)?;
+            if (end && sg.hay >= x) || (!end && sg.hay > x) {
+                return None;
+            }
+            if sg.mark && x > sg.hay {
+                let path = paths.get(sg.para)?;
+                return Some(Pos { story, path: path.with_last(path.last() + 1), off: 0 });
+            }
+            Some(Pos { story, path: paths.get(sg.para)?.clone(), off: sg.raw + (x - sg.hay) })
+        };
+        cuts.push(hay.len());
+        let mut from = 0;
+        for cut in cuts {
+            if cut <= from {
+                continue;
+            }
+            let mut input = Input::new(&hay).range(from..cut);
+            from = cut;
+            loop {
+                re.search_captures(&input, &mut caps);
+                let Some(m) = caps.get_match() else { break };
+                // Step past an empty match so the search moves on.
+                let next = if m.is_empty() {
+                    hay.get(m.end()..).and_then(|t| t.chars().next()).map_or(m.end() + 1, |c| m.end() + c.len_utf8())
+                } else {
+                    m.end()
+                };
+                if next > input.end() {
+                    break;
+                }
+                input.set_start(next);
+                if m.is_empty() {
+                    continue;
+                }
+                let (Some(a), Some(b)) = (pos_of(m.start(), false), pos_of(m.end(), true)) else { continue };
+                let rep = pieces.as_ref().map(|pc| {
+                    let group = |n: usize| caps.get_group(n).and_then(|g| hay.get(g.range())).map(str::to_string);
+                    find_pattern::expand(pc, hay.get(m.range()).unwrap_or(""), &group, &s.clipboard_text)
+                });
+                out.push(Found { a, b, rep });
+                if out.len() >= 100_000 {
+                    return Ok(out);
+                }
+            }
+        }
+    }
+    Ok(out)
+}
+
+fn read_opts(s: &mut Session, v: &Value) {
+    // A new search changes what Reading Highlight marks.
+    s.find.highlights = None;
+    if let Some(t) = p::str(v, "text") {
+        s.find.query = t.to_string();
+    }
+    if let Some(b) = p::bool(v, "matchCase") {
+        s.find.match_case = b;
+    }
+    if let Some(b) = p::bool(v, "wholeWord") {
+        s.find.whole_word = b;
+    }
+    if let Some(b) = p::bool(v, "regex") {
+        s.find.regex = b;
+    }
+    if let Some(b) = p::bool(v, "wildcards") {
+        s.find.wildcards = b;
+    }
+    if let Some(b) = p::bool(v, "special") {
+        s.find.literal = !b;
+    }
+    if let Some(b) = p::bool(v, "matchPrefix") {
+        s.find.match_prefix = b;
+    }
+    if let Some(b) = p::bool(v, "matchSuffix") {
+        s.find.match_suffix = b;
+    }
+    if let Some(b) = p::bool(v, "ignorePunct") {
+        s.find.ignore_punct = b;
+    }
+    if let Some(b) = p::bool(v, "ignoreSpace") {
+        s.find.ignore_space = b;
+    }
+    if let Some(b) = p::bool(v, "fuzzy") {
+        s.find.fuzzy.on = b;
+    }
+    if let Some(t) = p::str(v, "with") {
+        s.find.replace = t.to_string();
+    }
+}
+
+/// Find Options (Japanese): which characters Sounds like (Japanese) lets match.
+fn fuzzy_options(s: &mut Session, v: &Value) -> CmdResult {
+    let keys = ["width", "kana", "smallKana", "longVowel"];
+    if !keys.iter().any(|k| v.get(*k).is_some_and(|x| !x.is_null())) {
+        s.ui_requests.push(json!({"open": "fuzzyOptions"}));
+    }
+    let f = &mut s.find.fuzzy;
+    for (k, slot) in keys.into_iter().zip([&mut f.width, &mut f.kana, &mut f.small_kana, &mut f.long_vowel]) {
+        if let Some(b) = p::bool(v, k) {
+            *slot = b;
+        }
+    }
+    let f = s.find.fuzzy;
+    Ok(json!({"fuzzy": f.on, "width": f.width, "kana": f.kana, "smallKana": f.small_kana, "longVowel": f.long_vowel}))
+}
+
+fn find(s: &mut Session, v: &Value) -> CmdResult {
+    read_opts(s, v);
+    if p::str(v, "text").is_none() {
+        s.view.nav_pane = true;
+        s.ui_requests.push(json!({"open": "find"}));
+        return Ok(json!({"count": s.find.results.len()}));
+    }
+    let story = s.sel.focus.story;
+    s.find.results = search(s, story)?;
+    // Select the first match after the caret.
+    let caret = s.sel.focus.clone();
+    let idx = s.find.results.iter().position(|(a, _)| *a >= caret).unwrap_or(0);
+    s.find.current = idx;
+    if let Some((a, b)) = s.find.results.get(idx).cloned() {
+        s.sel = Selection { anchor: a, focus: b };
+    }
+    Ok(json!({
+        "count": s.find.results.len(),
+        "matches": s.find.results.iter().take(200).map(|(a, b)| json!({"start": pos_json(a), "end": pos_json(b)})).collect::<Vec<_>>(),
+    }))
+}
+
+/// Find in the classic dialog: every match in the body or the selection, optionally highlighted while you read.
+fn advanced_find(s: &mut Session, v: &Value) -> CmdResult {
+    if p::str(v, "text").is_none() && v.get("highlight").is_none() {
+        s.ui_requests.push(json!({"open": "find"}));
+        return Ok(json!({"count": s.find.results.len()}));
+    }
+    read_opts(s, v);
+    let within = match p::str(v, "in").unwrap_or("main") {
+        "main" => None,
+        "selection" if !s.sel.is_collapsed() => Some(s.sel.ordered()),
+        "selection" => return Err(CmdError::Params("`in: selection` needs a selection".into())),
+        other => return Err(CmdError::Params(format!("`in` is main or selection, not `{other}`"))),
+    };
+    let story = within.as_ref().map(|(a, _)| a.story).unwrap_or(StoryRef::Body);
+    let mut found = search(s, story)?;
+    if let Some((a, b)) = &within {
+        found.retain(|(x, y)| x >= a && y <= b);
+    }
+    if let Some(h) = p::bool(v, "highlight") {
+        s.find.highlight = h;
+        s.find.highlights = None;
+    }
+    let n = found.len();
+    let matches: Vec<Value> = found.iter().take(200).map(|(a, b)| json!({"start": pos_json(a), "end": pos_json(b)})).collect();
+    s.find.current = 0;
+    s.find.results = found;
+    Ok(json!({"count": n, "matches": matches, "highlight": s.find.highlight}))
+}
+
+fn step(s: &mut Session, dir: i64) -> CmdResult {
+    let story = s.sel.focus.story;
+    s.find.results = search(s, story)?;
+    let n = s.find.results.len();
+    if n == 0 {
+        return Err(CmdError::Failed("no matches".into()));
+    }
+    let caret = if dir > 0 { s.sel.ordered().1 } else { s.sel.ordered().0 };
+    let idx = if dir > 0 {
+        s.find.results.iter().position(|(a, _)| *a >= caret).unwrap_or(0)
+    } else {
+        s.find.results.iter().rposition(|(_, b)| *b <= caret).unwrap_or(n - 1)
+    };
+    s.find.current = idx;
+    if let Some((a, b)) = s.find.results.get(idx).cloned() {
+        s.sel = Selection { anchor: a, focus: b };
+    }
+    Ok(json!({"index": idx, "count": n}))
+}
+
+fn replace(s: &mut Session, v: &Value) -> CmdResult {
+    read_opts(s, v);
+    let story = s.sel.focus.story;
+    let results = search_full(s, story, true)?;
+    let (a, b) = s.sel.ordered();
+    // Replace the current match if selected, then move to the next.
+    if let Some(f) = results.into_iter().find(|f| f.a == a && f.b == b) {
+        super::paste_text(s, &f.rep.unwrap_or_default())?;
+    }
+    let _ = step(s, 1);
+    Ok(json!({"remaining": search(s, story)?.len()}))
+}
+
+/// Every match replaced, last first so earlier positions stay valid (one undo step). A `\r` in
+/// the replacement (`^p`) splits the paragraph.
+fn replace_all(s: &mut Session, v: &Value) -> CmdResult {
+    read_opts(s, v);
+    let story = s.sel.focus.story;
+    let results = search_full(s, story, true)?;
+    let n = results.len();
+    replace_each(s, results.into_iter().map(|Found { a, b, rep }| (a, b, rep.unwrap_or_default())).collect())?;
+    s.status = format!("All done. We made {n} replacements.");
+    Ok(json!({"replaced": n}))
+}
+
+/// Replaces each range (in document order, not overlapping) with its text, last first so earlier
+/// positions stay valid. A `\r` in the text splits the paragraph; with Track Changes on, each
+/// replacement is a reviewable revision.
+pub(super) fn replace_each(s: &mut Session, edits: Vec<(Pos, Pos, String)>) -> Result<(), CmdError> {
+    for (a, b, with) in edits.into_iter().rev() {
+        if s.doc.settings.track_changes {
+            // Same path as a single replace, so the change is a reviewable revision.
+            s.sel = Selection { anchor: a, focus: b };
+            super::paste_text(s, &with)?;
+            continue;
+        }
+        let props = s.doc.para_at(&a).map(|p| p.props_of_char(a.off).clone()).unwrap_or_default();
+        let mut at = s.doc.delete_range(&a, &b)?;
+        for (k, part) in with.split(['\r', '\u{2029}']).enumerate() {
+            if k > 0 {
+                at = s.doc.split_paragraph(&at)?;
+            }
+            if !part.is_empty() {
+                at = s.doc.insert_text(&at, part, &props)?;
+            }
+        }
+    }
+    Ok(())
+}
+
+/// One part of a Go To destination.
+#[derive(Clone, Copy, Debug, PartialEq)]
+enum Dest {
+    Page(u64),
+    Section(u64),
+    Line(u64),
+    /// Pages on (+) or back (−) from the caret's page.
+    Relative(i64),
+    /// Percent through the document.
+    Percent(u64),
+}
+
+/// Word's Go To destinations: `p3` (page 3), `s2` (section 2), `l10` (line 10), together
+/// (`s2p3`: page 3 of section 2, `p3l4`: line 4 of page 3), `+2` / `-1` (pages on or back),
+/// `%50` (halfway); a bare number is a page. Letters in either case, Thai digits as well as
+/// ASCII ones; spaces are ignored.
+fn parse_destination(t: &str) -> Option<Vec<Dest>> {
+    let t: String = t
+        .chars()
+        .filter(|c| !c.is_whitespace())
+        .map(|c| match c {
+            '๐'..='๙' => char::from(b'0' + (c as u32 - '๐' as u32) as u8),
+            c => c.to_ascii_lowercase(),
+        })
+        .collect();
+    if t.is_empty() || t.len() > 64 {
+        return None;
+    }
+    let mut out = Vec::new();
+    let mut chars = t.chars().peekable();
+    while let Some(&c) = chars.peek() {
+        let kind = if c.is_ascii_digit() {
+            None
+        } else {
+            chars.next();
+            Some(c)
+        };
+        let mut digits = String::new();
+        while let Some(&d) = chars.peek() {
+            if !d.is_ascii_digit() {
+                break;
+            }
+            digits.push(d);
+            chars.next();
+        }
+        let n: Option<u64> = digits.parse().ok().filter(|n| *n <= 1_000_000);
+        out.push(match (kind, n) {
+            (None | Some('p'), Some(n)) => Dest::Page(n.max(1)),
+            (Some('s'), Some(n)) => Dest::Section(n.max(1)),
+            (Some('l'), Some(n)) => Dest::Line(n.max(1)),
+            (Some('%'), Some(n)) => Dest::Percent(n.min(100)),
+            (Some('+'), n) => Dest::Relative(n.unwrap_or(1) as i64),
+            (Some('-'), n) => Dest::Relative(-(n.unwrap_or(1) as i64)),
+            _ => return None,
+        });
+    }
+    (!out.is_empty()).then_some(out)
+}
+
+/// Where a destination is: the start of the line it names (the first line of the page or
+/// section it names), with that line's page.
+fn destination(s: &mut Session, to: &[Dest]) -> Option<(Pos, usize)> {
+    let l = s.layout();
+    // Every body line in order: (page, start).
+    let mut lines: Vec<(usize, Pos)> = Vec::new();
+    for (pi, page) in l.pages.iter().enumerate() {
+        for it in &page.items {
+            if let doc4me_layout::Placed::Lines { story: StoryRef::Body, path, para, l0, l1, .. } = it {
+                for li in *l0..*l1 {
+                    if let Some(ln) = para.lines.get(li) {
+                        lines.push((pi, Pos { story: StoryRef::Body, path: path.clone(), off: ln.start }));
+                    }
+                }
+            }
+        }
+    }
+    if lines.is_empty() {
+        return None;
+    }
+    let pages = l.pages.len();
+    let current = s.page_hint.min(pages.saturating_sub(1));
+    // The pages the destination narrows to, then the line within them.
+    let (mut first, mut last) = (0usize, pages.saturating_sub(1));
+    let mut line = None;
+    for d in to {
+        match *d {
+            Dest::Section(n) => {
+                let in_section: Vec<usize> = (0..pages).filter(|i| l.pages[*i].section + 1 == n as usize).collect();
+                let (a, b) = match (in_section.first(), in_section.last()) {
+                    (Some(a), Some(b)) => (*a, *b),
+                    // Past the last section: the last one.
+                    _ => {
+                        let sec = l.pages.last().map(|p| p.section).unwrap_or(0);
+                        let v: Vec<usize> = (0..pages).filter(|i| l.pages[*i].section == sec).collect();
+                        (v.first().copied().unwrap_or(0), v.last().copied().unwrap_or(0))
+                    }
+                };
+                (first, last) = (a, b);
+            }
+            Dest::Page(n) => {
+                let p = (first + n as usize - 1).min(last);
+                (first, last) = (p, p);
+            }
+            Dest::Relative(n) => {
+                let p = (current as i64 + n).clamp(0, pages as i64 - 1) as usize;
+                (first, last) = (p, p);
+            }
+            Dest::Percent(pc) => {
+                let i = ((lines.len() as u64 * pc) / 100).min(lines.len() as u64 - 1) as usize;
+                return lines.get(i).map(|(pg, pos)| (pos.clone(), *pg));
+            }
+            Dest::Line(n) => line = Some(n as usize),
+        }
+    }
+    let within: Vec<&(usize, Pos)> = lines.iter().filter(|(pg, _)| (first..=last).contains(pg)).collect();
+    let pick = match line {
+        Some(n) => within.get(n - 1).or(within.last()),
+        None => within.first(),
+    };
+    pick.map(|(pg, pos)| (pos.clone(), *pg))
+}
+
+fn goto(s: &mut Session, v: &Value) -> CmdResult {
+    if let Some(t) = p::str(v, "to") {
+        let to = parse_destination(t).ok_or_else(|| CmdError::Params(format!("{t:?} isn't a destination (p3, s2, l10, s2p3, +2, -1, %50)")))?;
+        if let Some((at, page)) = destination(s, &to) {
+            s.sel = Selection::caret(at);
+            s.page_hint = page;
+            s.goal_x = None;
+        }
+        s.ui_requests.push(json!({"scrollTo": "caret"}));
+        return sel_result(s);
+    }
+    if let Some(pg) = p::u64(v, "page") {
+        let l = s.layout();
+        let idx = (pg.max(1) as usize - 1).min(l.pages.len().saturating_sub(1));
+        let target = l.pages.get(idx).and_then(|page| {
+            page.items.iter().find_map(|it| match it {
+                doc4me_layout::Placed::Lines { story, path, para, l0, .. } if *story == StoryRef::Body => {
+                    para.lines.get(*l0).map(|ln| Pos { story: *story, path: path.clone(), off: ln.start })
+                }
+                _ => None,
+            })
+        });
+        if let Some(t) = target {
+            s.sel = Selection::caret(t);
+            s.page_hint = idx;
+        }
+        s.ui_requests.push(json!({"scrollTo": "caret"}));
+        return sel_result(s);
+    }
+    if let Some(name) = p::str(v, "bookmark") {
+        let bm = s.doc.bookmarks().into_iter().find(|(n, _)| n == name).ok_or_else(|| CmdError::Failed(format!("no bookmark `{name}`")))?;
+        s.sel = Selection::caret(bm.1);
+        return sel_result(s);
+    }
+    if let Some(n) = p::u64(v, "paragraph") {
+        let paths = s.doc.para_paths(StoryRef::Body);
+        if let Some(path) = paths.get((n.max(1) - 1) as usize) {
+            s.sel = Selection::caret(Pos { story: StoryRef::Body, path: path.clone(), off: 0 });
+        }
+        return sel_result(s);
+    }
+    s.ui_requests.push(json!({"open": "goto"}));
+    sel_result(s)
+}
+
+fn painter_pick(s: &mut Session) {
+    let f = s.sel.ordered().0;
+    let chr = s.doc.para_at(&f).map(|p| p.props_of_char(f.off).clone()).unwrap_or_default();
+    let para = s.doc.para_at(&f).map(|p| p.props.clone()).unwrap_or_default();
+    s.painter = Some((chr, para, false));
+}
+
+fn painter(s: &mut Session, v: &Value) -> CmdResult {
+    if s.painter.is_some() {
+        s.painter = None;
+        return Ok(json!({"active": false}));
+    }
+    painter_pick(s);
+    if let Some((_, _, sticky)) = s.painter.as_mut() {
+        *sticky = p::bool(v, "sticky").unwrap_or(false);
+    }
+    Ok(json!({"active": true}))
+}
+
+/// Apply the format painter's formatting to the selection.
+fn paste_format(s: &mut Session, _: &Value) -> CmdResult {
+    let Some((chr, para, sticky)) = s.painter.clone() else { return Err(CmdError::Failed("no formatting copied".into())) };
+    let (a, b) = s.sel.ordered();
+    if a == b {
+        // No selection: apply paragraph formatting (and word formatting like Word).
+        let f = s.sel.focus.clone();
+        if let Some(pp) = s.doc.para_at(&f) {
+            let (x, y) = pp.word_at(f.off);
+            s.doc.format_range(&Pos { off: x, ..f.clone() }, &Pos { off: y, ..f.clone() }, &|c| *c = chr.cleared().overlaid(&chr))?;
+        }
+        s.doc.format_paragraphs(&a, &b, &|p| *p = para.clone())?;
+    } else {
+        s.doc.format_range(&a, &b, &|c| {
+            let link = c.link.clone();
+            *c = c.cleared().overlaid(&chr);
+            c.link = link;
+        })?;
+        if a.path != b.path || a.off == 0 {
+            s.doc.format_paragraphs(&a, &b, &|p| *p = para.clone())?;
+        }
+    }
+    if !sticky {
+        s.painter = None;
+    }
+    sel_result(s)
+}
+
+/// `web.follow`: a link to a bookmark in this document moves the caret there (Back returns);
+/// any other link comes back as `url`, and the interface opens it if it's a web or email address.
+fn follow_link(s: &mut Session, v: &Value) -> CmdResult {
+    let link = match p::str(v, "link") {
+        Some(l) => l.to_string(),
+        None => {
+            let at = s.sel.focus.clone();
+            let para = s.doc.para_at(&at).ok_or_else(|| CmdError::Failed("the caret isn't in text".into()))?;
+            let mut offs = vec![at.off];
+            if at.off > 0 {
+                offs.push(para.prev_boundary(at.off));
+            }
+            offs.into_iter()
+                .filter(|o| *o < para.len())
+                .find_map(|o| para.props_of_char(o).link.clone())
+                .ok_or_else(|| CmdError::Failed("there is no hyperlink at the caret".into()))?
+        }
+    };
+    let Some(name) = link.strip_prefix('#') else {
+        // The interface opens web and email addresses only.
+        s.ui_requests.push(json!({"openUrl": link}));
+        return Ok(json!({"url": link}));
+    };
+    let at = s
+        .doc
+        .bookmarks()
+        .into_iter()
+        .find(|(n, _)| n == name)
+        .map(|(_, p)| p)
+        .ok_or_else(|| CmdError::Failed(format!("there is no bookmark named `{name}`")))?;
+    s.follow_to(at);
+    Ok(json!({"followed": name}))
+}

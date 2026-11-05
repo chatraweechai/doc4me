@@ -1,0 +1,43 @@
+[package]
+name = "doc4me-engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Doc4Me engine: session, selection, undo, the command registry (every action is a command), Word's command catalog, file I/O dispatch"
+
+[lints]
+workspace = true
+
+[dependencies]
+doc4me-geom = { workspace = true }
+doc4me-doc = { workspace = true }
+doc4me-fonts = { workspace = true }
+doc4me-layout = { workspace = true }
+doc4me-render = { workspace = true }
+doc4me-proof = { workspace = true }
+icu_segmenter = { workspace = true }
+doc4me-docx = { workspace = true }
+doc4me-docbin = { workspace = true }
+doc4me-pdf = { workspace = true }
+doc4me-formats = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+log = { workspace = true }
+regex = { workspace = true }
+regex-automata = { workspace = true }
+image = { workspace = true }
+zeroize = { workspace = true }
+# Insert › Get Add-ins checks each pack against its SHA-256 in the catalog (already used by docx).
+sha2 = { workspace = true }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+# The system time zone for `now_local` (the web reads the browser's instead).
+chrono = { workspace = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+# The browser clock for `now_iso` (`SystemTime::now()` panics on wasm32).
+js-sys = "0.3"
+
+[dev-dependencies]
+zip = { workspace = true }

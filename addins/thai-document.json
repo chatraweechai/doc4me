@@ -1,0 +1,30 @@
+{
+  "id": "thai-document",
+  "name": "Thai Document Tools",
+  "version": "1.0.0",
+  "description": "Thai or Arabic digits throughout, Sarabun 16 pt, and an A4 page with 2.5 cm margins.",
+  "author": "Doc4Me contributors",
+  "license": "MIT OR Apache-2.0",
+  "macros": [
+    {
+      "name": "Thai digits everywhere",
+      "description": "Turns 0-9 in the whole document into Thai digits.",
+      "steps": [{"command": "select.all"}, {"command": "format.thaiDigits"}, {"command": "caret.docStart"}]
+    },
+    {
+      "name": "Arabic digits everywhere",
+      "description": "Turns Thai digits in the whole document into 0-9.",
+      "steps": [{"command": "select.all"}, {"command": "format.arabicDigits"}, {"command": "caret.docStart"}]
+    },
+    {
+      "name": "Sarabun 16 pt",
+      "description": "Sets the whole document in Sarabun, 16 points.",
+      "steps": [{"command": "select.all"}, {"command": "format.font", "params": {"name": "Sarabun"}}, {"command": "format.size", "params": {"size": 16}}, {"command": "caret.docStart"}]
+    },
+    {
+      "name": "A4 page, 2.5 cm margins",
+      "description": "A4 paper with 2.5 cm margins on every side.",
+      "steps": [{"command": "layout.size", "params": {"name": "A4"}}, {"command": "layout.margins", "params": {"top": 70.87, "bottom": 70.87, "left": 70.87, "right": 70.87}}]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "apps/*", "xtask"]
+default-members = ["crates/*", "apps/doc4me", "apps/doc4me-cli", "xtask"]
+
+[workspace.package]
+version = "1.1.3"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+rust-version = "1.90"
+repository = "https://github.com/chatraweechai/doc4me"
+
+[workspace.dependencies]
+# internal
+doc4me-geom = { path = "crates/geom" }
+doc4me-doc = { path = "crates/doc" }
+doc4me-fonts = { path = "crates/fonts" }
+doc4me-layout = { path = "crates/layout" }
+doc4me-docx = { path = "crates/docx" }
+doc4me-docbin = { path = "crates/docbin" }
+doc4me-formats = { path = "crates/formats" }
+doc4me-render = { path = "crates/render" }
+doc4me-pdf = { path = "crates/pdf" }
+doc4me-proof = { path = "crates/proof" }
+doc4me-engine = { path = "crates/engine" }
+doc4me-mcp = { path = "crates/mcp" }
+doc4me-zotero = { path = "crates/zotero" }
+doc4me-control-key = { path = "crates/control-key" }
+doc4me-ui-egui = { path = "crates/ui-egui" }
+doc4me-metafile = { path = "crates/metafile" }
+
+# foundation
+kurbo = { version = "0.13", features = ["serde"] }
+# A fast hasher for the layout caches (already in the tree through vello).
+foldhash = "0.2"
+thiserror = "2"
+serde = { version = "1", features = ["derive", "rc"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+log = "0.4"
+proptest = "1"
+rayon = "1"
+unicode-bidi = "0.3"
+unicode-segmentation = "1"
+unicode-linebreak = "0.1"
+unicode-script = "0.5"
+# Thai, Lao and Khmer word boundaries (line breaks, word selection, word count): ICU4X's
+# dictionary segmenter with its compiled-in data. Unicode-3.0 licence; pure Rust, wasm-safe.
+icu_segmenter = { version = "2.3", default-features = false, features = ["compiled_data"] }
+regex = { version = "1", default-features = false, features = ["std", "unicode", "perf"] }
+regex-automata = { version = "0.4", default-features = false, features = ["std", "syntax", "meta", "nfa-pikevm", "unicode"] }
+
+# text / rendering / formats
+skrifa = "0.47"
+harfrust = "0.13"
+# WOFF / WOFF2 web fonts added by the user (#582): pure Rust (MIT); its brotli and zlib decoders
+# (brotli-decompressor, flate2) are already in the tree.
+wuff = "0.2.9"
+vello_cpu = "0.2"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp", "gif", "bmp", "tiff"] }
+krilla = { version = "0.8", features = ["pdf"] }
+quick-xml = "0.41"
+zip = { version = "9", default-features = false, features = ["deflate"] }
+# zlib streams (compressed metafile pictures in `.doc` drawings); already in the lock as a dependency of other crates.
+miniz_oxide = "0.8"
+cfb = "0.15"
+# Password-protected (agile-encrypted) Word documents: pure-Rust RustCrypto primitives.
+aes = "0.9"
+sha1 = "0.11"
+sha2 = "0.11"
+hmac = "0.13"
+base64 = "0.22"
+getrandom = "0.3"
+zeroize = "1"
+# The computer's time zone for the dates and times people see (desktop; the web asks the browser).
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+
+# ui
+egui = "0.36"
+egui_extras = { version = "0.36", default-features = false }
+eframe = { version = "0.36", default-features = false }
+egui_kittest = "0.36"
+rfd = "0.17"
+arboard = { version = "3.6", default-features = false }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+dbg_macro = "warn"
+todo = "warn"
+too_many_arguments = "allow"
+type_complexity = "allow"
+
+[profile.dev.package."*"]
+opt-level = 2
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 16
+debug = 0

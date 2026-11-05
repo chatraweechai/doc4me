@@ -1,0 +1,20 @@
+[package]
+name = "doc4me-formats"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Doc4Me import/export: plain text, Markdown, HTML, RTF, OpenDocument Text and LaTeX"
+
+[lints]
+workspace = true
+
+[dependencies]
+doc4me-doc = { workspace = true }
+doc4me-geom = { workspace = true }
+image = { workspace = true }
+quick-xml = { workspace = true }
+zip = { workspace = true }
+log = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }

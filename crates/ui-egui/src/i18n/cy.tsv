@@ -1,0 +1,3000 @@
+# Welsh (cy) interface catalog, Cymraeg (cy-GB). Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts yet)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Machine translation by an AI model (Claude), not yet reviewed by a native speaker.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" neu "an" cyn y gair nesaf; Pwyleg "w"/"we", "z"/"ze".
+	% of all commits	% o'r holl ymrwymiadau
+	(All)	(Y cyfan)
+	(Custom)	(Personol)
+	(no style)	(dim arddull)
+	(no suggestions)	(dim awgrymiadau)
+	(none)	(dim)
+	(normal text)	(testun arferol)
+	(not matched)	(dim cyfatebiaeth)
+	(picture or object)	(llun neu wrthrych)
+	*Bold* and _italic_ with real formatting	*Trwm* ac _italig_ gyda fformatio go iawn
+	0 or More Characters	0 nod neu fwy
+	1. Formatting restrictions	1. Cyfyngiadau fformatio
+	1. Main document	1. Prif ddogfen
+	1.5 Line Spacing	Bylchu llinell 1.5
+	1/4 Em Space	Bwlch 1/4 Em
+	1×2 Empty Matrix	Matrics gwag 1×2
+	1×3 Empty Matrix	Matrics gwag 1×3
+	2. Data source	2. Ffynhonnell ddata
+	2. Editing restrictions	2. Cyfyngiadau golygu
+	2×1 Empty Matrix	Matrics gwag 2×1
+	2×2 Determinant	Penderfynydd 2×2
+	2×2 Empty Matrix	Matrics gwag 2×2
+	2×2 Identity Matrix	Matrics unfathiant 2×2
+	2×2 Identity Matrix (sparse)	Matrics unfathiant 2×2 (gwasgaredig)
+	2×2 Matrix in Brackets	Matrics 2×2 mewn cromfachau sgwâr
+	2×2 Matrix in Double Bars	Matrics 2×2 mewn barrau dwbl
+	2×2 Matrix in Parentheses	Matrics 2×2 mewn cromfachau
+	2×3 Empty Matrix	Matrics gwag 2×3
+	3-D	3-D
+	3. Merge the data with the document	3. Cyfuno'r data â'r ddogfen
+	3. Start enforcement	3. Dechrau gorfodi
+	3D Models	Modelau 3D
+	3×1 Empty Matrix	Matrics gwag 3×1
+	3×2 Empty Matrix	Matrics gwag 3×2
+	3×3 Empty Matrix	Matrics gwag 3×3
+	3×3 Identity Matrix	Matrics unfathiant 3×3
+	3×3 Identity Matrix (sparse)	Matrics unfathiant 3×3 (gwasgaredig)
+	5,000 characters a day; give an email address for 50,000.	5,000 nod y dydd; rhowch gyfeiriad e-bost i gael 50,000.
+	<< Less	<< Llai
+	<< Remove	<< Tynnu
+	A file dialog is already open.	Mae deialog ffeil eisoes ar agor.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Prosesydd geiriau rhad ac am ddim, cod agored, wedi'i ysgrifennu o'r dechrau yn Rust.\nYn seiliedig ar WordCraft gan dîm ArtCraft.
+	A header source holds the field names for a data source without a header row.	Mae ffynhonnell pennyn yn dal enwau'r meysydd ar gyfer ffynhonnell ddata heb res bennyn.
+	A mail merge field	Maes cyfuno post
+	A new document lists the commands with their shortcuts.	Mae dogfen newydd yn rhestru'r gorchmynion gyda'u llwybrau byr.
+	A numbered sequence (figures, tables…)	Dilyniant wedi'i rifo (ffigurau, tablau…)
+	A password is required to open this document.	Mae angen cyfrinair i agor y ddogfen hon.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Bwlch cyn atalnodi, nodau dwbl, atalnodau Pwyleg cyn cysyllteiriau.
+	A table of contents	Tabl cynnwys
+	A table's rows keep the same columns here.	Mae rhesi tabl yn cadw'r un colofnau yma.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Ynghylch
+	About Doc4Me	Ynghylch Doc4Me
+	Above Chart	Uwchben y siart
+	Above the item	Uwchben yr eitem
+	Absolute position	Safle absoliwt
+	Absolute value cases	Achosion gwerth absoliwt
+	Accent	Acen
+	Accent Gradient	Graddiant acen
+	Accent with Reflection	Acen gydag adlewyrchiad
+	Accent {n}	Acen {n}
+	Accents	Acenion
+	Accept	Derbyn
+	Accept All	Derbyn y cyfan
+	Accept All Changes	Derbyn pob newid
+	Accept or Reject Changes	Derbyn neu wrthod newidiadau
+	Accept This Change	Derbyn y newid hwn
+	Accessed on	Cyrchwyd ar
+	Accessibility	Hygyrchedd
+	Accessibility Pane	Cwarel hygyrchedd
+	Acute	Acen lem
+	Add	Ychwanegu
+	Add >>	Ychwanegu >>
+	Add a comment	Ychwanegu sylw
+	Add a Table	Ychwanegu tabl
+	Add at least one field.	Ychwanegwch o leiaf un maes.
+	Add caption when inserting:	Ychwanegu capsiwn wrth fewnosod:
+	Add Chart Element	Ychwanegu elfen siart
+	Add Field	Ychwanegu maes
+	Add Field Name	Ychwanegu enw maes
+	Add Font…	Ychwanegu ffont…
+	Add line numbering	Ychwanegu rhifo llinellau
+	Add New Placeholder	Ychwanegu dalfan newydd
+	Add New Placeholder…	Ychwanegu dalfan newydd…
+	Add New Source…	Ychwanegu ffynhonnell newydd…
+	Add Object to Selection	Ychwanegu gwrthrych at y dewis
+	Add Pen	Ychwanegu pen
+	Add Row	Ychwanegu rhes
+	Add Series	Ychwanegu cyfres
+	Add Shape	Ychwanegu siâp
+	Add Space Before Paragraph	Ychwanegu bwlch cyn paragraff
+	Add space between Asian and Latin text	Ychwanegu bwlch rhwng testun Asiaidd a Lladin
+	Add space between Asian text and numbers	Ychwanegu bwlch rhwng testun Asiaidd a rhifau
+	Add tab stop at:	Ychwanegu stop tab yn:
+	Add Text	Ychwanegu testun
+	Add the chapter number	Ychwanegu rhif y bennod
+	Add to Dictionary	Ychwanegu at y geiriadur
+	Add to Document	Ychwanegu at y ddogfen
+	Add to Quick Access Toolbar	Ychwanegu at y bar offer mynediad cyflym
+	Add to Style Gallery	Ychwanegu at oriel arddulliau
+	Add-ins	Ychwanegion
+	Add/Edit\nBibliography	Ychwanegu/Golygu\nLlyfryddiaeth
+	Add/Edit\nCitation	Ychwanegu/Golygu\nDyfyniad
+	Add\nNote	Ychwanegu\nNodyn
+	Add\nPen	Ychwanegu\nPen
+	Add\nShape	Ychwanegu\nSiâp
+	Added	Ychwanegwyd
+	Added Fonts	Ffontiau a ychwanegwyd
+	Address	Cyfeiriad
+	Address Block	Bloc cyfeiriad
+	Address labels	Labeli cyfeiriad
+	Address:	Cyfeiriad:
+	Address\nBlock	Bloc\nCyfeiriad
+	Adjust	Addasu
+	Advanced	Uwch
+	Advanced Find	Canfod uwch
+	Advanced Find…	Canfod uwch…
+	After:	Ar ôl:
+	Agents	Asiantau
+	Align	Alinio
+	Align Bottom Center	Alinio gwaelod canol
+	Align Bottom Left	Alinio gwaelod chwith
+	Align Bottom Right	Alinio gwaelod de
+	Align Center	Alinio canol
+	Align Center Left	Alinio canol chwith
+	Align Center Right	Alinio canol de
+	Align Left	Alinio i'r chwith
+	Align Right	Alinio i'r dde
+	Align Text	Alinio testun
+	Align Top Center	Alinio brig canol
+	Align Top Left	Alinio brig chwith
+	Align Top Right	Alinio brig de
+	Aligned at:	Wedi'i alinio yn:
+	Alignment	Aliniad
+	Alignment:	Aliniad:
+	All	Y cyfan
+	All - Linear	Y cyfan - Llinol
+	All - Professional	Y cyfan - Proffesiynol
+	All Borders	Pob ffin
+	All Caps	Priflythrennau i gyd
+	All caps	Priflythrennau i gyd
+	All Commands	Pob gorchymyn
+	All files	Pob ffeil
+	All Levels	Pob lefel
+	All Markup	Pob marcio
+	All pages	Pob tudalen
+	All pages in the range	Pob tudalen yn yr ystod
+	All records	Pob cofnod
+	All symbol sets	Pob set symbolau
+	Allow Doc4Me to use online services	Caniatáu i Doc4Me ddefnyddio gwasanaethau ar-lein
+	Allow hanging punctuation	Caniatáu atalnodi crog
+	Allow Latin text to wrap in the middle of a word	Caniatáu i destun Lladin lapio yng nghanol gair
+	Allow line breaks	Caniatáu toriadau llinell
+	Allow overlap	Caniatáu gorgyffwrdd
+	Allow row to break across pages	Caniatáu i res dorri ar draws tudalennau
+	Alphabetical	Yn nhrefn yr wyddor
+	Alt Text	Testun amgen
+	Alt text	Testun amgen
+	Alt Text Pane	Cwarel testun amgen
+	Alt:	Alt:
+	Alt\nText	Testun\nAmgen
+	And	A
+	Angle Brackets	Cromfachau ongl
+	Angle Brackets with Separator	Cromfachau ongl gyda gwahanydd
+	Angle Brackets with Two Separators	Cromfachau ongl gyda dau wahanydd
+	Animate the caret (it glides and fades)	Animeiddio'r cyrchwr (mae'n llithro ac yn pylu)
+	Animation	Animeiddiad
+	Animation effects:	Effeithiau animeiddio:
+	Annotation Reference	Cyfeirnod anodiad
+	Annotation Subject	Pwnc anodiad
+	Annotation Text	Testun anodiad
+	Another file	Ffeil arall
+	Any Character	Unrhyw nod
+	Any Digit	Unrhyw ddigid
+	Any Letter	Unrhyw lythyren
+	Anyone can open this document. Encrypt it with a password to keep it private.	Gall unrhyw un agor y ddogfen hon. Amgryptiwch hi â chyfrinair i'w chadw'n breifat.
+	Anyone who opens the document will need this password.	Bydd angen y cyfrinair hwn ar unrhyw un sy'n agor y ddogfen.
+	APA	APA
+	API key (if the server needs one)	Allwedd API (os oes ei hangen ar y gweinydd)
+	Apply	Gweithredu
+	Apply as you type	Gweithredu wrth deipio
+	Apply Asian line-breaking rules (kinsoku)	Gweithredu rheolau torri llinell Asiaidd (kinsoku)
+	Apply Character Style	Gweithredu arddull nodau
+	Apply formatting to:	Gweithredu fformatio i:
+	Apply special formats to	Gweithredu fformatau arbennig i
+	Apply Style	Gweithredu arddull
+	Apply Styles	Gweithredu arddulliau
+	Apply to:	Gweithredu i:
+	Arabic	Arabeg
+	Arch Down	Bwa i lawr
+	Arch Up	Bwa i fyny
+	Area	Arwynebedd
+	Around	O amgylch
+	Arrange	Trefnu
+	Arrange All	Trefnu'r cyfan
+	Arrange\nAll	Trefnu'r\nCyfan
+	Arrow	Saeth
+	Arrows	Saethau
+	Artistic Effects	Effeithiau artistig
+	As Recommended	Yn ôl yr argymhelliad
+	As you type	Wrth deipio
+	ASAP	CYN GYNTED Â PHOSIBL
+	Ascending	Esgynnol
+	Asian text font:	Ffont testun Asiaidd:
+	Asian Typography	Teipograffeg Asiaidd
+	Assign	Neilltuo
+	At least	O leiaf
+	At least {n}	O leiaf {n}
+	Atelier	Atelier
+	Atmosphere	Atmosffer
+	Attach Template	Atodi templed
+	Attach…	Atodi…
+	Author	Awdur
+	Auto	Awto
+	AutoCaption	Capsiwn awtomatig
+	AutoCaption…	Capsiwn awtomatig…
+	AutoComplete	Awtogwblhau
+	AutoCorrect	Awtogywiro
+	AutoCorrect Options	Opsiynau awtogywiro
+	AutoFit	Awtoffitio
+	AutoFit Contents	Awtoffitio'r cynnwys
+	AutoFit Window	Awtoffitio i'r ffenestr
+	AutoFormat	Awtofformatio
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Mae Awtofformatio (Ctrl+Alt+K) yn fformatio'r paragraffau a ddewiswyd, neu'r ddogfen gyfan.
+	AutoFormat and Review Changes…	Awtofformatio ac adolygu newidiadau…
+	AutoFormat As You Type	Awtofformatio wrth deipio
+	AutoFormat changed {count} paragraphs	Newidiodd Awtofformatio {count} paragraff
+	AutoFormat Now	Awtofformatio nawr
+	Automatic	Awtomatig
+	Automatic ({language})	Awtomatig ({language})
+	Automatic bulleted lists	Rhestrau bwledi awtomatig
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Mae Awtomatig yn dilyn iaith eich system. Mae'r dewislenni a'r gorchmynion yn newid; nid yw eich dogfennau'n newid.
+	Automatic numbered lists	Rhestrau wedi'u rhifo awtomatig
+	Automatic Table 1 (3 levels)	Tabl awtomatig 1 (3 lefel)
+	Automatic Table 2 (2 levels)	Tabl awtomatig 2 (2 lefel)
+	Automatically hyphenate document	Cysylltnodi'r ddogfen yn awtomatig
+	Automatically Update Document Styles	Diweddaru arddulliau'r ddogfen yn awtomatig
+	Automatically update document styles	Diweddaru arddulliau'r ddogfen yn awtomatig
+	AutoSave	Awtogadw
+	AutoSave documents you have saved in Doc4Me	Awtogadw dogfennau rydych wedi'u cadw yn Doc4Me
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Methodd Awtogadw: {error}. Cadwch y ddogfen i droi Awtogadw ymlaen eto.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Nid yw Awtogadw ar gael yn y porwr: ni all ysgrifennu i'ch ffeiliau. Mae Cadw yn llwytho copi i lawr.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Dim ond ffeiliau .docx, .odt ac .rtf y mae Awtogadw yn eu cadw; ni all {name} gadw'r holl fformatio. Cadwch fel .docx i droi Awtogadw ymlaen.
+	AutoSave saves every change to the file (needs a saved document)	Mae Awtogadw yn cadw pob newid i'r ffeil (angen dogfen wedi'i chadw)
+	AutoSave writes your changes to the file a moment after you stop typing.	Mae Awtogadw yn ysgrifennu eich newidiadau i'r ffeil eiliad ar ôl i chi stopio teipio.
+	AutoText	Awtodestun
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10.12" × 14.33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7.17" × 10.12"
+	Back	Yn ôl
+	Backspace	Backspace
+	Balloons	Balwnau
+	Banded Columns	Colofnau band
+	Banded Rows	Rhesi band
+	Bar	Bar
+	Base text:	Testun sylfaen:
+	Based on: {style}	Yn seiliedig ar: {style}
+	Baseline Dots	Dotiau llinell sylfaen
+	Basic Cycle	Cylchred sylfaenol
+	Basic List	Rhestr sylfaenol
+	Basic Math	Mathemateg sylfaenol
+	Basic Matrix	Matrics sylfaenol
+	Basic Process	Proses sylfaenol
+	Basic Pyramid	Pyramid sylfaenol
+	Basic Radial	Rheiddiol sylfaenol
+	Basic Venn	Venn sylfaenol
+	Bayes' rule	Rheol Bayes
+	Before:	Cyn:
+	Beginning of Word	Dechrau gair
+	Behind Text	Y tu ôl i'r testun
+	Below text	O dan y testun
+	Below the item	O dan yr eitem
+	Between	Rhwng
+	Bibliography	Llyfryddiaeth
+	Binary assets added	Asedau deuaidd wedi'u hychwanegu
+	Binary assets removed	Asedau deuaidd wedi'u tynnu
+	Binomial Coefficient	Cyfernod binomaidd
+	Binomial Coefficient (angle)	Cyfernod binomaidd (ongl)
+	Binomial Coefficient with Angle Brackets	Cyfernod binomaidd gyda chromfachau ongl
+	Binomial expansion of (x+a)ⁿ	Ehangiad binomaidd (x+a)ⁿ
+	Blank	Gwag
+	Blank (Three Columns)	Gwag (tair colofn)
+	Blank document	Dogfen wag
+	Blank Page	Tudalen wag
+	Block\nAuthors	Rhwystro\nAwduron
+	Blue:	Glas:
+	Body Text	Corff testun
+	Body text in a short paragraph to show spacing.	Corff testun mewn paragraff byr i ddangos y bylchu.
+	Bold	Trwm
+	Book	Llyfr
+	Book Title	Teitl llyfr
+	Book title	Teitl llyfr
+	Bookmark	Nod tudalen
+	Bookmark name:	Enw'r nod tudalen:
+	Border lines	Llinellau ffin
+	Border Painter	Peintiwr ffiniau
+	Border\nPainter	Peintiwr\nFfiniau
+	Borders	Ffiniau
+	Borders and Shading	Ffiniau a graddliwio
+	Borders and Shading…	Ffiniau a graddliwio…
+	Border…	Ffin…
+	Both Sides	Y ddwy ochr
+	Both sides	Y ddwy ochr
+	Bottom	Gwaelod
+	Bottom Border	Ffin waelod
+	Bottom Margin	Ymyl waelod
+	Bottom of Page	Gwaelod y dudalen
+	Bottom of the Window	Gwaelod y ffenestr
+	Bottom:	Gwaelod:
+	Box	Blwch
+	Boxed Formula	Fformiwla mewn blwch
+	Boxed Formula (example)	Fformiwla mewn blwch (enghraifft)
+	Boxed Formulas	Fformiwlâu mewn blwch
+	Braces	Cromfachau cyrliog
+	Braces with Separator	Cromfachau cyrliog gyda gwahanydd
+	Bracket	Cromfach
+	Brackets	Cromfachau sgwâr
+	Brackets with Separators	Cromfachau sgwâr gyda gwahanyddion
+	Break Link	Torri'r ddolen
+	Breaks	Toriadau
+	Breve	Acen fer (breve)
+	Brightness, contrast and transparency change the picture from how it looks now.	Mae disgleirdeb, cyferbyniad a thryloywder yn newid y llun o'i olwg bresennol.
+	Brightness:	Disgleirdeb:
+	Bring Forward	Dod ymlaen
+	Browse in Doc4Me…	Pori yn Doc4Me…
+	Browse…	Pori…
+	Build table of figures from:	Adeiladu tabl ffigurau o:
+	Building Block Gallery Content Control	Rheolydd cynnwys oriel blociau adeiladu
+	Built from the style or table entry fields chosen in Options.	Wedi'i adeiladu o'r arddull neu'r meysydd cofnod tabl a ddewiswyd yn Opsiynau.
+	Built-In	Adeiledig
+	Built-in Heading styles	Arddulliau pennawd adeiledig
+	Built-in style	Arddull adeiledig
+	Built-in styles can't be deleted.	Ni ellir dileu arddulliau adeiledig.
+	Bullet	Bwled
+	Bullet Library	Llyfrgell bwledi
+	Bullets	Bwledi
+	By author	Yn ôl awdur
+	By:	Gan:
+	Calendar	Calendr
+	Can't be deleted	Ni ellir ei ddileu
+	Cancel	Diddymu
+	Canvas Member	Aelod o'r cynfas
+	Capitalization	Priflythrennu
+	Capitalize Each Word	Priflythyren i bob gair
+	Capitalize first letter of sentences	Priflythyren gyntaf brawddegau
+	Capitalize first letter of table cells	Priflythyren gyntaf celloedd tabl
+	Capitalize names of days	Priflythyren i enwau dyddiau
+	Capitalize the first word of a sentence	Priflythyren i air cyntaf brawddeg
+	Caption	Capsiwn
+	Caption label:	Label capsiwn:
+	Caption Numbering	Rhifo capsiynau
+	Caption text	Testun capsiwn
+	Caption:	Capsiwn:
+	Captions	Capsiynau
+	Caret Character	Nod caret
+	Case changes	Newidiadau priflythrennau
+	Cases	Achosion
+	Cases (Three Conditions)	Achosion (tri amod)
+	Cases (Two Conditions)	Achosion (dau amod)
+	Cases and Stacks	Achosion a phentyrrau
+	Catalog	Catalog
+	Categories	Categorïau
+	Categories:	Categorïau:
+	Category	Categori
+	Category {n}	Categori {n}
+	Category:	Categori:
+	Category…	Categori…
+	Ceiling	Nenfwd
+	Cell	Cell
+	Cell Margins	Ymylon cell
+	Cell margins	Ymylon cell
+	Cell Options	Opsiynau cell
+	Cell Size	Maint cell
+	Cell\nMargins	Ymylon\nCell
+	Center	Canol
+	Centered	Wedi'i ganoli
+	Centered as Group	Wedi'i ganoli fel grŵp
+	Centimeters	Centimetrau
+	Change	Newid
+	Change Case	Newid priflythrennau
+	Change Chart Type	Newid math y siart
+	Change Colors	Newid lliwiau
+	Change in y over change in x	Newid yn y dros y newid yn x
+	Change Layout	Newid cynllun
+	Change List Level	Newid lefel y rhestr
+	Change Password…	Newid cyfrinair…
+	Change Picture	Newid llun
+	Change Picture…	Newid llun…
+	Change Shape	Newid siâp
+	Change Structure	Newid strwythur
+	Change to Display	Newid i arddangos
+	Change to Inline	Newid i fewnlin
+	Change to Level 1	Newid i lefel 1
+	Change to Level 2	Newid i lefel 2
+	Change to Level 3	Newid i lefel 3
+	Change to Level 4	Newid i lefel 4
+	Change to Level 5	Newid i lefel 5
+	Change to Level 6	Newid i lefel 6
+	Change to Level 7	Newid i lefel 7
+	Change to Level 8	Newid i lefel 8
+	Change to Level 9	Newid i lefel 9
+	Change\nChart Type	Newid math\ny siart
+	Change\nColors	Newid\nlliwiau
+	Changed	Newidiwyd
+	Changed lines:	Llinellau a newidiwyd:
+	Changes	Newidiadau
+	Changes with highlighting	Newidiadau gydag amlygu
+	Changes without highlighting	Newidiadau heb amlygu
+	Chapter in a book	Pennod mewn llyfr
+	Chapters begin at:	Penodau'n dechrau yn:
+	Character	Nod
+	Character Border	Ffin nodau
+	Character code:	Cod nod:
+	Character in Range	Nod yn yr ystod
+	Character level	Lefel nodau
+	Character Position	Safle nodau
+	Character Scale	Graddfa nodau
+	Character Shading	Graddliwio nodau
+	Character Spacing	Bylchu nodau
+	Character spacing	Bylchu nodau
+	Character style	Arddull nodau
+	Characters	Nodau
+	Characters (no spaces)	Nodau (heb fylchau)
+	Characters (with spaces)	Nodau (gyda bylchau)
+	Characters per line:	Nodau fesul llinell:
+	Chart	Siart
+	Chart Design	Dylunio siart
+	Chart Layouts	Cynlluniau siart
+	Chart Title	Teitl y siart
+	Check	Gwirio
+	Check Accessibility	Gwirio hygyrchedd
+	Check Box Content Control	Rheolydd cynnwys blwch ticio
+	Check Compatibility	Gwirio cydnawsedd
+	Check Errors…	Gwirio gwallau…
+	Check for Errors	Gwirio am wallau
+	Check Spelling as You Type	Gwirio sillafu wrth deipio
+	Check spelling as you type	Gwirio sillafu wrth deipio
+	Check\nAccessibility	Gwirio\nhygyrchedd
+	Checked styles are allowed:	Caniateir yr arddulliau a diciwyd:
+	Checked symbol	Symbol wedi'i dicio
+	Chevron Down	Siefron i lawr
+	Chevron Up	Siefron i fyny
+	Chicago	Chicago
+	Chinese (Simplified)	Tsieinëeg (wedi'i symleiddio)
+	Chinese (Traditional)	Tsieinëeg (traddodiadol)
+	Choose a command	Dewiswch orchymyn
+	Choose a shortcut	Dewiswch lwybr byr
+	Choose List Item	Dewis eitem o'r rhestr
+	Choose the sheet that holds the recipients.	Dewiswch y daflen sy'n dal y derbynwyr.
+	Circle	Cylch
+	Circle area from its radius	Arwynebedd cylch o'i radiws
+	Circled Dot	Dot mewn cylch
+	Circled Plus	Plws mewn cylch
+	Circled Times	Lluosi mewn cylch
+	Citation marked.	Dyfyniad wedi'i farcio.
+	Citation Style	Arddull dyfynnu
+	Citations	Dyfyniadau
+	Citations & Bibliography	Dyfyniadau a llyfryddiaeth
+	City	Dinas
+	Clear	Clirio
+	Clear All	Clirio'r cyfan
+	Clear All Formatting	Clirio pob fformatio
+	Clear Character Formatting	Clirio fformatio nodau
+	Clear Character Style	Clirio arddull nodau
+	Clear Formatting Level	Clirio lefel fformatio
+	Clear Paragraph Formatting	Clirio fformatio paragraff
+	Click a border between two cells to merge them. Esc stops.	Cliciwch ffin rhwng dwy gell i'w cyfuno. Mae Esc yn stopio.
+	Click an item to paste it.	Cliciwch eitem i'w gludo.
+	Click level to modify:	Cliciwch y lefel i'w haddasu:
+	Click the empty text box the text should continue in (Esc cancels)	Cliciwch y blwch testun gwag y dylai'r testun barhau ynddo (mae Esc yn diddymu)
+	Click to switch back to inserting	Cliciwch i newid yn ôl i fewnosod
+	Clipboard	Clipfwrdd
+	Clipboard Contents	Cynnwys y clipfwrdd
+	Clipboard Items	Eitemau'r clipfwrdd
+	Clipboard Pane	Cwarel y clipfwrdd
+	Close	Cau
+	Close Equation	Cau'r hafaliad
+	Close Header and Footer	Cau'r pennyn a'r troedyn
+	Close Outline View	Cau'r golwg amlinell
+	Close Outline\nView	Cau'r golwg\namlinell
+	Close Reviewing Pane	Cau'r cwarel adolygu
+	Clustered Bar	Bar clwstwr
+	Clustered Column	Colofn glwstwr
+	Col #:	Colofn #:
+	Collapse	Cwympo
+	Collapse Selection	Cwympo'r dewis
+	Collapse the Ribbon	Cwympo'r rhuban
+	Collate copies	Coladu copïau
+	Collect entries from:	Casglu cofnodion o:
+	Colon Equal	Colon hafal
+	Color	Lliw
+	Color model:	Model lliw:
+	Color only	Lliw yn unig
+	Color:	Lliw:
+	Color: {color}	Lliw: {color}
+	Colorful	Lliwgar
+	Colors	Lliwiau
+	Colors:	Lliwiau:
+	Column	Colofn
+	Column Break	Toriad colofn
+	Column Selection	Dewis colofn
+	Column selection: the arrow keys extend the block, Esc ends it	Dewis colofn: mae'r bysellau saeth yn ymestyn y bloc, mae Esc yn ei orffen
+	Column width	Lled colofn
+	Column:	Colofn:
+	Columns	Colofnau
+	Columns:	Colofnau:
+	Combine	Cyfuno
+	Combine Documents	Cyfuno dogfennau
+	Combo Box Content Control	Rheolydd cynnwys blwch cyfun
+	Commands	Gorchmynion
+	Commands:	Gorchmynion:
+	Comment	Sylw
+	Comments	Sylwadau
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Sylwadau wrth ymyl pob tudalen a newidiadau wedi'u tracio mewn PDFs, allbrintiau a delweddau; rhestr sylwadau ar ddiwedd tudalennau gwe, Markdown a thestun.
+	Comments on version	Sylwadau ar y fersiwn
+	Comments Pane	Cwarel sylwadau
+	Commits	Ymrwymiadau
+	Common Accent Objects	Gwrthrychau acen cyffredin
+	Common Brackets	Cromfachau cyffredin
+	Common Fractions	Ffracsiynau cyffredin
+	Common Functions	Ffwythiannau cyffredin
+	Common Large Operators	Gweithredwyr mawr cyffredin
+	Common Operator Structures	Strwythurau gweithredwr cyffredin
+	Common Operators	Gweithredwyr cyffredin
+	Common Radicals	Ail isradd cyffredin
+	Common Subscripts and Superscripts	Isysgrifau ac uwchysgrifau cyffredin
+	Communication	Cyfathrebu
+	Compact	Cryno
+	Company	Cwmni
+	Compare	Cymharu
+	Compare Documents	Cymharu dogfennau
+	Compare to	Cymharu â
+	Compared: {changes} changes	Cymharwyd: {changes} newid
+	Comparing with another file needs the desktop app.	Mae angen yr ap bwrdd gwaith i gymharu â ffeil arall.
+	Comparison	Cymhariaeth
+	Comparison settings	Gosodiadau cymharu
+	Compatibility mode: {version}	Modd cydnawsedd: {version}
+	Compatibility Options	Opsiynau cydnawsedd
+	Compatibility Options…	Opsiynau cydnawsedd…
+	Compress Pictures	Cywasgu lluniau
+	Compress punctuation at the start of a line	Cywasgu atalnodi ar ddechrau llinell
+	Condensed	Cywasgedig
+	Conference	Cynhadledd
+	Conference paper	Papur cynhadledd
+	CONFIDENTIAL	CYFRINACHOL
+	Confirm password:	Cadarnhau'r cyfrinair:
+	Connect Shapes	Cysylltu siapiau
+	Constitutional Provisions	Darpariaethau cyfansoddiadol
+	Container Title	Teitl y cynhwysydd
+	Contains	Yn cynnwys
+	Content Control at Selection	Rheolydd cynnwys yn y dewis
+	Content Control Properties	Priodweddau'r rheolydd cynnwys
+	Contents can't be edited	Ni ellir golygu'r cynnwys
+	Context	Cyd-destun
+	Contextual	Cyd-destunol
+	Continuous	Di-dor
+	Continuous numbering	Rhifo di-dor
+	Contour Integral	Integryn cyfuchlin
+	Contour Integral with Limits	Integryn cyfuchlin gyda therfannau
+	Contour Integral with Stacked Limits	Integryn cyfuchlin gyda therfannau wedi'u pentyrru
+	Contour Integrals	Integrynnau cyfuchlin
+	Contrast:	Cyferbyniad:
+	Contributors	Cyfranwyr
+	Controls	Rheolyddion
+	Conversions	Trawsnewidiadau
+	Convert	Trosi
+	Convert between built-up and linear form	Trosi rhwng ffurf adeiledig a ffurf linol
+	Convert Notes	Trosi nodiadau
+	Convert Permanently	Trosi'n barhaol
+	Convert Text to Table	Trosi testun yn dabl
+	Convert Text to Table…	Trosi testun yn dabl…
+	Convert to Arabic Digits	Trosi i ddigidau Arabeg
+	Convert to Shapes	Trosi'n siapiau
+	Convert to Text	Trosi'n destun
+	Convert to Thai Digits	Trosi i ddigidau Thai
+	Copies	Copïau
+	Coproduct	Cyd-gynnyrch
+	Coproduct with Limits	Cyd-gynnyrch gyda therfannau
+	Coproduct with Lower Limit	Cyd-gynnyrch gyda therfan isaf
+	Coproduct with Subscript-Superscript Limits	Cyd-gynnyrch gyda therfannau isysgrif-uwchysgrif
+	Copy	Copïo
+	Copy Formatting	Copïo fformatio
+	Copy of the text a bookmark marks	Copi o'r testun y mae nod tudalen yn ei farcio
+	Copy Styles	Copïo arddulliau
+	Copy Text	Copïo testun
+	Copy to where?	Copïo i ble?
+	Copyright	Hawlfraint
+	Copyright Sign	Arwydd hawlfraint
+	Corrections	Cywiriadau
+	Cosecant Function	Ffwythiant cosecant
+	Cosine 2x	Cosin 2x
+	Cosine Function	Ffwythiant cosin
+	Cotangent Function	Ffwythiant cotangiad
+	Couldn't add {name}: {reason}	Methwyd ychwanegu {name}: {reason}
+	Couldn't download the picture: {reason}	Methwyd llwytho'r llun i lawr: {reason}
+	Couldn't download {name}: {error}	Methwyd llwytho {name} i lawr: {error}
+	Couldn't get the add-in list: {reason}	Methwyd cael y rhestr ychwanegion: {reason}
+	Couldn't make Doc4Me the default: {error}	Methwyd gwneud Doc4Me yn ddiofyn: {error}
+	Couldn't open {path}: {error}	Methwyd agor {path}: {error}
+	Couldn't search: {reason}	Methwyd chwilio: {reason}
+	Couldn't translate: {reason}	Methwyd cyfieithu: {reason}
+	Count by:	Cyfrif fesul:
+	Count words in text boxes and notes	Cyfrif geiriau mewn blychau testun a nodiadau
+	Country	Gwlad
+	Courtesy Title	Teitl cwrteisi
+	Cover Page	Tudalen glawr
+	Craft	Crefft
+	Create	Creu
+	Create a Style	Creu arddull
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Crëwch amlinell ryngweithiol o'ch dogfen.\n\nMae'n ffordd wych o gadw golwg ar ble rydych chi neu symud eich cynnwys yn gyflym.\n\nI ddechrau, ewch i'r tab Hafan a gweithredwch arddulliau Pennawd ar y penawdau yn eich dogfen.
+	Create Data Source…	Creu ffynhonnell ddata…
+	Create Graphic	Creu graffig
+	Create Header Source	Creu ffynhonnell pennyn
+	Create Link	Creu dolen
+	Create New Style	Creu arddull newydd
+	Create Source	Creu ffynhonnell
+	Create…	Creu…
+	Crop	Tocio
+	Cross-reference	Croesgyfeiriad
+	Cross-reference:	Croesgyfeiriad:
+	Cube Root	Trydydd isradd
+	Current	Cyfredol
+	Current - Linear	Cyfredol - Llinol
+	Current - Professional	Cyfredol - Proffesiynol
+	Current keyboard settings	Gosodiadau bysellfwrdd cyfredol
+	Current page	Tudalen gyfredol
+	Current Position	Safle cyfredol
+	Current record	Cofnod cyfredol
+	Current style: {style}	Arddull gyfredol: {style}
+	Curved Arrow Connector	Cysylltydd saeth grom
+	Curved Connector	Cysylltydd crwm
+	Custom	Personol
+	Custom dictionary	Geiriadur personol
+	Custom Margins…	Ymylon personol…
+	Custom mark:	Marc personol:
+	Custom range	Ystod bersonol
+	Custom Table of Contents	Tabl cynnwys personol
+	Custom Table of Contents…	Tabl cynnwys personol…
+	Custom Watermark	Dyfrnod personol
+	Custom Watermark…	Dyfrnod personol…
+	Customize	Addasu
+	Customize Keyboard	Addasu'r bysellfwrdd
+	Customize Quick Access Toolbar	Addasu'r bar offer mynediad cyflym
+	Customize Quick Access Toolbar…	Addasu'r bar offer mynediad cyflym…
+	Customize Ribbon	Addasu'r rhuban
+	Customize the Ribbon…	Addasu'r rhuban…
+	Customize…	Addasu…
+	Cut	Torri
+	Cut, copy, and paste	Torri, copïo a gludo
+	Cycle	Cylchred
+	Czech	Tsieceg
+	Danish	Daneg
+	Dark	Tywyll
+	Dark Mode	Modd tywyll
+	Dark page (white text on black)	Tudalen dywyll (testun gwyn ar ddu)
+	Dark with Shadow	Tywyll gyda chysgod
+	Darkroom	Ystafell dywyll
+	Dashed	Toredig
+	Data	Data
+	Data Labels	Labeli data
+	Data source:	Ffynhonnell ddata:
+	Date	Dyddiad
+	Date & Time	Dyddiad ac amser
+	Date and Time	Dyddiad ac amser
+	Date format	Fformat dyddiad
+	Date formats:	Fformatau dyddiad:
+	Date Picker Content Control	Rheolydd cynnwys dewisydd dyddiad
+	Day	Diwrnod
+	Decimal	Degol
+	Decorative objects only add visual interest: screen readers skip them.	Mae gwrthrychau addurnol yn ychwanegu diddordeb gweledol yn unig: mae darllenwyr sgrin yn eu hepgor.
+	Decrease Font Size	Lleihau maint y ffont
+	Decrease Indent	Lleihau'r mewnoliad
+	Default	Diofyn
+	Default Paragraph Font	Ffont paragraff diofyn
+	Default tab stops:	Stopiau tab diofyn:
+	Define New Bullet	Diffinio bwled newydd
+	Define New Multilevel List	Diffinio rhestr aml-lefel newydd
+	Define New Multilevel List…	Diffinio rhestr aml-lefel newydd…
+	Define New Number Format	Diffinio fformat rhif newydd
+	Deflate	Datchwyddo
+	Delete	Dileu
+	Delete Back in Equation	Dileu yn ôl yn yr hafaliad
+	Delete Cells	Dileu celloedd
+	Delete Clipboard Item	Dileu eitem o'r clipfwrdd
+	Delete Columns	Dileu colofnau
+	Delete Comment	Dileu sylw
+	Delete in Equation	Dileu yn yr hafaliad
+	Delete Label	Dileu label
+	Delete Next Word	Dileu'r gair nesaf
+	Delete Previous Word	Dileu'r gair blaenorol
+	Delete Rows	Dileu rhesi
+	Delete Selected Ink	Dileu'r inc a ddewiswyd
+	Delete Style	Dileu arddull
+	Delete Table	Dileu tabl
+	Delete Table Style	Dileu arddull tabl
+	Deleted	Dilëwyd
+	Deletions:	Dileadau:
+	Delivery address:	Cyfeiriad danfon:
+	Delta Equal To	Delta hafal i
+	Delta over arrow	Delta dros saeth
+	Demote	Israddio
+	Demote to Body Text	Israddio i gorff testun
+	Derivative as a limit	Deilliad fel terfan
+	Descending	Disgynnol
+	Describe what this object shows, for people who can't see it.	Disgrifiwch yr hyn y mae'r gwrthrych hwn yn ei ddangos, ar gyfer pobl na allant ei weld.
+	Describe what this table shows, for people who can't see it.	Disgrifiwch yr hyn y mae'r tabl hwn yn ei ddangos, ar gyfer pobl na allant ei weld.
+	Description:	Disgrifiad:
+	Design	Dylunio
+	Design Mode	Modd dylunio
+	Detach Template	Datgysylltu templed
+	Detect language automatically	Canfod iaith yn awtomatig
+	Developer	Datblygwr
+	development build	fersiwn datblygu
+	Diagonal	Croeslin
+	Diagonal Dots	Dotiau croeslin
+	Diamond	Diemwnt
+	Dictate	Arddweud
+	Dictation isn't available here.	Nid yw arddweud ar gael yma.
+	Dictation stopped.	Arddweud wedi stopio.
+	Dictation stopped: {reason}	Arddweud wedi stopio: {reason}
+	Different First Page	Tudalen gyntaf wahanol
+	Different Odd & Even Pages	Tudalennau odd ac eilrif gwahanol
+	Differential	Differol
+	Differential theta	Differol theta
+	Differential x	Differol x
+	Differential y	Differol y
+	Differentials	Differolion
+	Direct formatting	Fformatio uniongyrchol
+	Direction:	Cyfeiriad:
+	Directory	Cyfeiriadur
+	Display	Dangos
+	Display for Review	Dangos i'w adolygu
+	Display gridlines on screen	Dangos llinellau grid ar y sgrin
+	Display name	Enw dangos
+	Display text	Testun i'w ddangos
+	Distance from surrounding text	Pellter o'r testun o amgylch
+	Distribute Columns	Dosbarthu colofnau
+	Distribute letters	Dosbarthu llythrennau
+	Distribute Rows	Dosbarthu rhesi
+	Distribute spacing	Dosbarthu bylchau
+	Distributed	Wedi'i ddosbarthu
+	Do Not Check Spelling or Grammar	Peidio â gwirio sillafu na gramadeg
+	Do not check spelling or grammar	Peidio â gwirio sillafu na gramadeg
+	DO NOT COPY	PEIDIWCH Â CHOPÏO
+	Do Not Show in TOC	Peidio â dangos yn y tabl cynnwys
+	Do you want to save changes to {name}?	Ydych chi am gadw'r newidiadau i {name}?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Pecynnau rhad ac am ddim o facros o gatalog ychwanegion Doc4Me yw ychwanegion Doc4Me. Dim ond y ddogfen y gallant ei golygu.
+	Doc4Me is now the default app for Word documents.	Doc4Me yw'r ap diofyn ar gyfer dogfennau Word bellach.
+	Document	Dogfen
+	Document End	Diwedd y ddogfen
+	Document Formatting	Fformatio'r ddogfen
+	Document Grid	Grid y ddogfen
+	Document Information	Gwybodaeth am y ddogfen
+	Document Property	Priodwedd y ddogfen
+	Document Start	Dechrau'r ddogfen
+	Document template:	Templed y ddogfen:
+	Document Text	Testun y ddogfen
+	Document Title	Teitl y ddogfen
+	Document1	Dogfen1
+	Document\nPreferences	Dewisiadau'r\nddogfen
+	Documents	Dogfennau
+	Documents you open will show up here.	Bydd y dogfennau rydych yn eu hagor yn ymddangos yma.
+	Does not contain	Ddim yn cynnwys
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Peidio ag ychwanegu bwlch rhwng paragraffau o'r un arddull
+	Don't capitalize after:	Peidio â rhoi priflythyren ar ôl:
+	Don't hyphenate	Peidio â chysylltnodi
+	Don't print blank lines when data fields are empty	Peidio ag argraffu llinellau gwag pan fo meysydd data'n wag
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Peidio â darllen dyfyniadau a llyfryddiaethau Zotero, Mendeley neu EndNote
+	Don't Save	Peidio â chadw
+	Don't use HTML paragraph auto spacing	Peidio â defnyddio bylchu paragraff awtomatig HTML
+	Dot	Dot
+	Dot dash	Dot toriad
+	Dot-dash	Dot-toriad
+	Dots	Dotiau
+	Dotted	Dotiog
+	Double	Dwbl
+	Double Bar	Bar dwbl
+	Double Closing Quote	Dyfynnod cau dwbl
+	Double Dot	Dot dwbl
+	Double Integral	Integryn dwbl
+	Double Integral with Limits	Integryn dwbl gyda therfannau
+	Double Integral with Stacked Limits	Integryn dwbl gyda therfannau wedi'u pentyrru
+	Double Left Arrow with Text Above	Saeth chwith ddwbl gyda thestun uwchben
+	Double Left Arrow with Text Below	Saeth chwith ddwbl gyda thestun oddi tani
+	Double Left Right Arrow with Text Above	Saeth chwith-dde ddwbl gyda thestun uwchben
+	Double Left Right Arrow with Text Below	Saeth chwith-dde ddwbl gyda thestun oddi tani
+	Double Opening Quote	Dyfynnod agor dwbl
+	Double Right Arrow with Text Above	Saeth dde ddwbl gyda thestun uwchben
+	Double Right Arrow with Text Below	Saeth dde ddwbl gyda thestun oddi tani
+	Double Spacing	Bylchu dwbl
+	Double Square Brackets	Cromfachau sgwâr dwbl
+	Double Strikethrough	Llinell drwodd ddwbl
+	Double strikethrough	Llinell drwodd ddwbl
+	Double summation	Symiant dwbl
+	Double Underline	Tanlinellu dwbl
+	Double Vertical Bars	Barrau fertigol dwbl
+	Doughnut	Toesen
+	Down	I lawr
+	Downloading the speech model ({mb} MB, once)…	Wrthi'n llwytho'r model lleferydd i lawr ({mb} MB, unwaith)…
+	Downloading…	Wrthi'n llwytho i lawr…
+	DRAFT	DRAFFT
+	Draft	Drafft
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Llusgwch betryal i lunio tabl, neu linell ar draws celloedd i'w hollti. Mae Esc yn stopio.
+	Draw	Lluniadu
+	Draw Ink	Lluniadu inc
+	Draw Table	Lluniadu tabl
+	Draw\nTable	Lluniadu\ntabl
+	Drawing Canvas	Cynfas lluniadu
+	Drawing Grid	Grid lluniadu
+	Drawing Tools	Offer lluniadu
+	Drawing\nCanvas	Cynfas\nlluniadu
+	Drop Cap	Priflythyren fawr
+	Drop cap	Priflythyren fawr
+	Drop-Down List Content Control	Rheolydd cynnwys rhestr gwympo
+	Drops all formatting and pastes plain text.	Yn gollwng pob fformatio ac yn gludo testun plaen.
+	Dutch	Iseldireg
+	E-mail Messages	Negeseuon e-bost
+	Edit Category	Golygu categori
+	Edit Comment	Golygu sylw
+	Edit Data	Golygu data
+	Edit Document	Golygu'r ddogfen
+	Edit Equation	Golygu hafaliad
+	Edit Field Code	Golygu cod y maes
+	Edit Field…	Golygu maes…
+	Edit Footer	Golygu troedyn
+	Edit Header	Golygu pennyn
+	Edit Individual Documents…	Golygu dogfennau unigol…
+	Edit Items	Golygu eitemau
+	Edit Recipient List	Golygu'r rhestr derbynwyr
+	Edit Source	Golygu ffynhonnell
+	Edit\nData	Golygu\ndata
+	Edit\nRecipient List	Golygu'r rhestr\nderbynwyr
+	Edited	Golygwyd
+	Editing	Golygu
+	Editing header/footer	Wrthi'n golygu'r pennyn/troedyn
+	Editing in this document is restricted.	Mae golygu yn y ddogfen hon wedi'i gyfyngu.
+	Editing — edit the document directly	Golygu — golygu'r ddogfen yn uniongyrchol
+	Edition	Argraffiad
+	Editor	Golygydd
+	Edit…	Golygu…
+	Effects	Effeithiau
+	Elbow Arrow Connector	Cysylltydd saeth penelin
+	Elbow Connector	Cysylltydd penelin
+	Ellipsis	Elipsis
+	Em Dash	Toriad Em
+	Em Space	Bwlch Em
+	Email address (optional)	Cyfeiriad e-bost (dewisol)
+	Emboss	Boglynnu
+	Emphasis	Pwyslais
+	Empty Matrices	Matricsau gwag
+	En Dash	Toriad En
+	En Space	Bwlch En
+	Enclose Characters	Amgáu nodau
+	Enclosure	Amgaead
+	Encrypt with Password	Amgryptio â chyfrinair
+	Encrypt with Password…	Amgryptio â chyfrinair…
+	End of document	Diwedd y ddogfen
+	End of section	Diwedd yr adran
+	End of Word	Diwedd gair
+	Endnote Reference	Cyfeirnod ôl-nodyn
+	Endnote Text	Testun ôl-nodyn
+	Endnotes	Ôl-nodiadau
+	Endnotes to footnotes	Ôl-nodiadau i droednodiadau
+	English	Saesneg
+	English (United Kingdom)	Saesneg (Y Deyrnas Unedig)
+	English (United States)	Saesneg (Unol Daleithiau)
+	Engrave	Ysgythru
+	Enlarge symbol	Chwyddo'r symbol
+	Enter formatting for number:	Rhowch y fformatio ar gyfer y rhif:
+	Enter in Equation	Enter yn yr hafaliad
+	Enter page number:	Rhowch rif y dudalen:
+	Enter the web address or embed code of an online video:	Rhowch gyfeiriad gwe neu god mewnblannu fideo ar-lein:
+	Entry marked.	Cofnod wedi'i farcio.
+	Entry:	Cofnod:
+	Envelope #10   4.12" × 9.50"	Amlen #10   4.12" × 9.50"
+	Envelope Address	Cyfeiriad yr amlen
+	Envelope DL   4.33" × 8.66"	Amlen DL   4.33" × 8.66"
+	Envelope Return	Cyfeiriad dychwelyd yr amlen
+	Envelope size:	Maint yr amlen:
+	Envelopes	Amlenni
+	Equal by Definition	Hafal drwy ddiffiniad
+	Equal column width	Lled colofnau cyfartal
+	Equal Equal	Hafal hafal
+	Equal to	Hafal i
+	Equals:	Hafal i:
+	Equation	Hafaliad
+	Equation Gallery	Oriel hafaliadau
+	Equation Info	Gwybodaeth am yr hafaliad
+	Equation Number	Rhif hafaliad
+	Equation Options	Opsiynau hafaliad
+	Erase Ink	Dileu inc
+	Eraser	Rhwbiwr
+	Errors ({n})	Gwallau ({n})
+	Estonian	Estoneg
+	Euler's identity	Unfathiant Euler
+	Even Page	Tudalen eilrif
+	Even pages only	Tudalennau eilrif yn unig
+	Every change is recorded as a tracked change.	Caiff pob newid ei gofnodi fel newid wedi'i dracio.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Mae pob gorchymyn ar gael i sgriptiau ac asiantau AI: rhedwch `doc4me-cli mcp` am weinydd MCP, neu dechreuwch yr ap gyda `--control <port>` am y sianel reoli JSON.
+	Every field needs a name.	Mae angen enw ar bob maes.
+	Every font this document uses is installed.	Mae pob ffont a ddefnyddir gan y ddogfen hon wedi'i osod.
+	Everyone	Pawb
+	Exactly	Yn union
+	Exactly {n}	Yn union {n}
+	Example: {sample}	Enghraifft: {sample}
+	Exceptions (optional)	Eithriadau (dewisol)
+	Exceptions…	Eithriadau…
+	Executive   7.25" × 10.50"	Executive   7.25" × 10.50"
+	Exit	Gadael
+	Expand	Ehangu
+	Expand or Collapse Heading	Ehangu neu gwympo pennawd
+	Expanded	Wedi'i ehangu
+	Exponential	Esbonyddol
+	Exponential series	Cyfres esbonyddol
+	Export	Allforio
+	Export a copy to share (PDF, Word document)	Allforio copi i'w rannu (PDF, dogfen Word)
+	Export Page as JPEG	Allforio'r dudalen fel JPEG
+	Export Page as PNG	Allforio'r dudalen fel PNG
+	Export PDF	Allforio PDF
+	Exported {path}	Allforiwyd {path}
+	Expression	Mynegiad
+	Extend Selection	Ymestyn y dewis
+	Extend Selection by Units	Ymestyn y dewis fesul uned
+	Extra space	Bwlch ychwanegol
+	Extra spaces between words.	Bylchau ychwanegol rhwng geiriau.
+	Field	Maes
+	Field Click	Clic maes
+	Field code:	Cod y maes:
+	Field Codes	Codau maes
+	Field codes:	Codau maes:
+	Field name	Enw'r maes
+	Field name:	Enw'r maes:
+	Field names must be different.	Rhaid i enwau meysydd fod yn wahanol.
+	Field names:	Enwau meysydd:
+	Field properties	Priodweddau'r maes
+	Field:	Maes:
+	Fields	Meysydd
+	Fields to insert:	Meysydd i'w mewnosod:
+	Fields:	Meysydd:
+	Field…	Maes…
+	Figure	Ffigur
+	File	Ffeil
+	File name:	Enw'r ffeil:
+	Fill	Llenwi
+	Fill & Line	Llenwi a llinell
+	Fill color:	Lliw llenwi:
+	Fill:	Llenwi:
+	Filling in forms	Llenwi ffurflenni
+	Film	Ffilm
+	Filter and Sort	Hidlo a didoli
+	Filter and Sort…	Hidlo a didoli…
+	Filter Records	Hidlo cofnodion
+	Find	Canfod
+	Find and Replace	Canfod ac amnewid
+	Find Next	Canfod nesaf
+	Find Next Editable Region	Canfod y rhanbarth golygadwy nesaf
+	Find Previous	Canfod blaenorol
+	Find Recipient	Canfod derbynnydd
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Mae Canfod yn dewis y paragraff nesaf a newidiwyd; mae Gwrthod yn rhoi'r un a ddewiswyd yn ôl fel yr oedd.
+	Find What Expression	Mynegiad i'w ganfod
+	Find What Text	Testun i'w ganfod
+	Find what:	Canfod beth:
+	Find →	Canfod →
+	Find:	Canfod:
+	Finish	Gorffen
+	Finish & Merge	Gorffen a chyfuno
+	Finish &\nMerge	Gorffen a\nchyfuno
+	Finished	Wedi gorffen
+	Finnish	Ffinneg
+	First	Cyntaf
+	First Cell in Column	Cell gyntaf y golofn
+	First Cell in Row	Cell gyntaf y rhes
+	First Column	Colofn gyntaf
+	First commit	Ymrwymiad cyntaf
+	First line	Llinell gyntaf
+	First line:	Llinell gyntaf:
+	First Name	Enw cyntaf
+	First row of data contains column headers	Mae rhes gyntaf y data yn cynnwys penawdau colofnau
+	Fit	Ffitio
+	Fit text	Ffitio testun
+	Fix Position on Page	Sefydlogi'r safle ar y dudalen
+	Fixed Column Width	Lled colofn sefydlog
+	Flip Horizontal	Fflipio'n llorweddol
+	Flip Vertical	Fflipio'n fertigol
+	Floor	Llawr
+	Focus	Ffocws
+	Follow number with:	Dilyn y rhif â:
+	Font	Ffont
+	Font Color	Lliw'r ffont
+	Font color	Lliw'r ffont
+	Font color:	Lliw'r ffont:
+	Font Dialog	Deialog ffont
+	Font not installed	Ffont heb ei osod
+	Font Size	Maint y ffont
+	Font Substitution	Amnewid ffontiau
+	Font Substitution…	Amnewid ffontiau…
+	Font:	Ffont:
+	Font: {font}	Ffont: {font}
+	Fonts	Ffontiau
+	Font…	Ffont…
+	Footer	Troedyn
+	Footnote and Endnote	Troednodyn ac ôl-nodyn
+	Footnote Reference	Cyfeirnod troednodyn
+	Footnote Text	Testun troednodyn
+	Footnotes	Troednodiadau
+	Footnotes and endnotes	Troednodiadau ac ôl-nodiadau
+	Footnotes to endnotes	Troednodiadau i ôl-nodiadau
+	Form Letters	Llythyrau ffurf
+	Format	Fformat
+	Format Page Numbers	Fformatio rhifau tudalen
+	Format Page Numbers…	Fformatio rhifau tudalen…
+	Format Painter	Peintiwr fformat
+	Format Picture	Fformatio llun
+	Format Shape	Fformatio siâp
+	Format:	Fformat:
+	Formatted	Wedi'i fformatio
+	Formatted Text	Testun wedi'i fformatio
+	Formatting	Fformatio
+	Formatting at Selection	Fformatio yn y dewis
+	Formatting completed. You can now:	Fformatio wedi'i gwblhau. Gallwch nawr:
+	Formatting exceptions	Eithriadau fformatio
+	Formatting marks	Nodau fformatio
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Caiff fformatio, newidiadau priflythrennau, gofod gwyn a thablau eu cymharu; cedwir y gosodiadau eraill ar gyfer yn nes ymlaen.
+	Formula	Fformiwla
+	Forward	Ymlaen
+	Fraction	Ffracsiwn
+	Fractions (1/2) as fraction characters (½)	Ffracsiynau (1/2) fel nodau ffracsiwn (½)
+	French	Ffrangeg
+	French (France)	Ffrangeg (Ffrainc)
+	From	Oddi wrth
+	From text:	O'r testun:
+	from Unicode (hex)	o Unicode (hecs)
+	From:	Oddi wrth:
+	Full page of the same label	Tudalen lawn o'r un label
+	Function	Ffwythiant
+	Functions	Ffwythiannau
+	Gallery	Oriel
+	GB/T 7714	GB/T 7714
+	General	Cyffredinol
+	Geometry	Geometreg
+	German	Almaeneg
+	German (Germany)	Almaeneg (Yr Almaen)
+	Get Add-ins	Cael ychwanegion
+	Get Data	Cael data
+	Get Data…	Cael data…
+	Getting ready…	Wrthi'n paratoi…
+	Glow	Tywyn
+	Glow Colors	Lliwiau tywyn
+	Go Back	Mynd yn ôl
+	Go To	Mynd i
+	Go to	Mynd i
+	Go To…	Mynd i…
+	Good afternoon	Prynhawn da
+	Good evening	Noswaith dda
+	Good morning	Bore da
+	GOST (name sort)	GOST (trefnu yn ôl enw)
+	GOST (title sort)	GOST (trefnu yn ôl teitl)
+	Grab bag	Bag cymysg
+	Grammar	Gramadeg
+	Grammar Settings	Gosodiadau gramadeg
+	Graphic	Graffig
+	Grave	Acen ddisgynedig
+	Greater than	Mwy na
+	Greater than or equal	Mwy na neu hafal i
+	Greek	Groeg
+	Greek Letters	Llythrennau Groeg
+	Green:	Gwyrdd:
+	Greeting Line	Llinell gyfarch
+	Greeting\nLine	Llinell\ngyfarch
+	Grid Settings	Gosodiadau grid
+	Grid Table 1 Light	Tabl grid 1 golau
+	Grid Table 4 – Blue	Tabl grid 4 – Glas
+	Grid Table 4 – Green	Tabl grid 4 – Gwyrdd
+	Grid Table 4 – Orange	Tabl grid 4 – Oren
+	Grid Table 4 – Purple	Tabl grid 4 – Porffor
+	Gridlines	Llinellau grid
+	Group	Grwpio
+	Grouping Character Above	Nod grwpio uwchben
+	Grouping Character Below	Nod grwpio oddi tano
+	Grow Font 1 Point	Cynyddu'r ffont 1 pwynt
+	H:	U:
+	Hanging Indent	Mewnoliad crog
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Het
+	Header	Pennyn
+	Header & Footer	Pennyn a throedyn
+	Header Options	Opsiynau pennyn
+	Header Options:	Opsiynau pennyn:
+	Header Row	Rhes bennyn
+	Header source: {file} (the next data source opened here takes its field names)	Ffynhonnell pennyn: {file} (bydd y ffynhonnell ddata nesaf a agorir yma yn cymryd ei henwau meysydd)
+	Header/Footer Position	Safle pennyn/troedyn
+	Headers and footers	Penynnau a throedynnau
+	Heading 1	Pennawd 1
+	Heading 2	Pennawd 2
+	Heading 3	Pennawd 3
+	Heading styles (levels 1–{n})	Arddulliau pennawd (lefelau 1–{n})
+	Heading {n}	Pennawd {n}
+	Headings	Penawdau
+	Heart	Calon
+	Hebrew	Hebraeg
+	Height:	Uchder:
+	Help	Cymorth
+	Hex:	Hecs:
+	Hidden	Cudd
+	Hidden text	Testun cudd
+	Hide Codes	Cuddio codau
+	Hide from style lists	Cuddio o restrau arddulliau
+	Hide Ink	Cuddio inc
+	Hide White Space	Cuddio gofod gwyn
+	Hide\nInk	Cuddio\ninc
+	Hierarchy	Hierarchaeth
+	Highlight	Amlygu
+	Highlight Changes	Amlygu newidiadau
+	Highlight changes in printed document	Amlygu newidiadau yn y ddogfen wedi'i hargraffu
+	Highlight changes on screen	Amlygu newidiadau ar y sgrin
+	Highlight Merge Fields	Amlygu meysydd cyfuno
+	Highlight\nMerge Fields	Amlygu\nmeysydd cyfuno
+	Highlighter	Amlygwr
+	Hindi	Hindi
+	Historical and Discretional	Hanesyddol a dewisol
+	Hollow	Gwag
+	Home	Hafan
+	Home folder	Ffolder cartref
+	Horizontal	Llorweddol
+	Horizontal Line	Llinell lorweddol
+	Horizontal spacing:	Bylchu llorweddol:
+	How many pages the whole document has	Faint o dudalennau sydd gan y ddogfen gyfan
+	How many pages this section has	Faint o dudalennau sydd gan yr adran hon
+	How many words the document holds	Faint o eiriau sydd yn y ddogfen
+	HTML Format	Fformat HTML
+	Hue:	Arlliw:
+	Hungarian	Hwngareg
+	Hyperbolic Cosecant Function	Ffwythiant cosecant hyperbolig
+	Hyperbolic Cosine Function	Ffwythiant cosin hyperbolig
+	Hyperbolic Cotangent Function	Ffwythiant cotangiad hyperbolig
+	Hyperbolic Functions	Ffwythiannau hyperbolig
+	Hyperbolic Secant Function	Ffwythiant secant hyperbolig
+	Hyperbolic Sine Function	Ffwythiant sin hyperbolig
+	Hyperbolic Tangent Function	Ffwythiant tangiad hyperbolig
+	Hyperlink	Hyperddolen
+	Hyphenate at:	Cysylltnodi yn:
+	Hyphenate words in CAPS	Cysylltnodi geiriau mewn PRIFLYTHRENNAU
+	Hyphenation	Cysylltnodi
+	Hyphenation Options…	Opsiynau cysylltnodi…
+	Hyphenation zone:	Parth cysylltnodi:
+	Hyphens (--) as dashes (—)	Cysylltnodau (--) fel toriadau (—)
+	Hypotenuse	Hypotenws
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Lliw eicon
+	Icons	Eiconau
+	Identity Matrices	Matricsau unfathiant
+	IEEE	IEEE
+	If…Then…Else	Os…Yna…Fel arall
+	If…Then…Else…	Os…Yna…Fel arall…
+	Ignore All	Anwybyddu'r cyfan
+	Ignore punctuation characters	Anwybyddu nodau atalnodi
+	Ignore web and file addresses	Anwybyddu cyfeiriadau gwe a ffeiliau
+	Ignore white-space characters	Anwybyddu nodau gofod gwyn
+	Ignore words in capitals	Anwybyddu geiriau mewn priflythrennau
+	Ignore words with numbers	Anwybyddu geiriau gyda rhifau
+	Illustrations	Darluniau
+	Immersive	Trochol
+	Immersive Reader	Darllenydd trochol
+	Immersive\nReader	Darllenydd\ntrochol
+	In Default apps, choose Doc4Me for the document types you want it to open.	Yn Apiau diofyn, dewiswch Doc4Me ar gyfer y mathau o ddogfennau rydych am iddo eu hagor.
+	In equations, typing a name after a backslash replaces it with its symbol.	Mewn hafaliadau, mae teipio enw ar ôl ôl-slaes yn ei amnewid â'i symbol.
+	In Front of Text	O flaen y testun
+	In Line with Text	Yn unol â'r testun
+	Inches	Modfeddi
+	Include label and number	Cynnwys y label a'r rhif
+	Include level number from:	Cynnwys rhif y lefel o:
+	Include page numbers	Cynnwys rhifau tudalen
+	Increase Font Size	Cynyddu maint y ffont
+	Increase Indent	Cynyddu'r mewnoliad
+	Indent	Mewnoli
+	Indent from left:	Mewnoli o'r chwith:
+	Indentation	Mewnoliad
+	Indented	Wedi'i fewnoli
+	Indents	Mewnoliadau
+	Indents and Spacing	Mewnoliadau a bylchu
+	Index	Mynegai
+	Index and Tables	Mynegai a thablau
+	Index Heading	Pennawd mynegai
+	Index {n}	Mynegai {n}
+	Indonesian	Indoneseg
+	Inflate	Chwyddo
+	Info	Gwybodaeth
+	Initials:	Blaenlythrennau:
+	Ink	Inc
+	Ink Equation	Hafaliad inc
+	Ink Replay	Ailchwarae inc
+	Ink to Math	Inc i fathemateg
+	Ink to Shape	Inc i siâp
+	Ink to\nMath	Inc i\nfathemateg
+	Ink to\nShape	Inc i\nsiâp
+	Ink\nReplay	Ailchwarae\ninc
+	Inline	Mewnlin
+	Input Format	Fformat mewnbwn
+	Insert	Mewnosod
+	Insert a 3D model from a file (.glb, .stl, .obj)	Mewnosod model 3D o ffeil (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Mewnosod hafaliad newydd (Alt+=)
+	Insert Above	Mewnosod uwchben
+	Insert Below	Mewnosod oddi tano
+	Insert Caption	Mewnosod capsiwn
+	Insert Cells	Mewnosod celloedd
+	Insert Chart	Mewnosod siart
+	Insert Citation	Mewnosod dyfyniad
+	Insert Columns to the Left	Mewnosod colofnau i'r chwith
+	Insert Columns to the Right	Mewnosod colofnau i'r dde
+	Insert Data	Mewnosod data
+	Insert Database	Mewnosod cronfa ddata
+	Insert Database…	Mewnosod cronfa ddata…
+	Insert Date Field	Mewnosod maes dyddiad
+	Insert Endnote	Mewnosod ôl-nodyn
+	Insert entire column	Mewnosod colofn gyfan
+	Insert entire row	Mewnosod rhes gyfan
+	Insert Footnote	Mewnosod troednodyn
+	Insert Hyperlink	Mewnosod hyperddolen
+	Insert Index	Mewnosod mynegai
+	Insert Left	Mewnosod i'r chwith
+	Insert LISTNUM Field	Mewnosod maes LISTNUM
+	Insert Merge Field	Mewnosod maes cyfuno
+	Insert Merge\nField	Mewnosod maes\ncyfuno
+	Insert New Equation	Mewnosod hafaliad newydd
+	Insert one text or another, depending on a field's value.	Mewnosod un testun neu'r llall, yn dibynnu ar werth maes.
+	Insert Page Field	Mewnosod maes tudalen
+	Insert Right	Mewnosod i'r dde
+	Insert Rows	Mewnosod rhesi
+	Insert Rows Above	Mewnosod rhesi uwchben
+	Insert Rows Below	Mewnosod rhesi oddi tano
+	Insert Shapes	Mewnosod siapiau
+	Insert SmartArt	Mewnosod SmartArt
+	Insert Structure	Mewnosod strwythur
+	Insert Symbol	Mewnosod symbol
+	Insert Table	Mewnosod tabl
+	Insert Table of Authorities	Mewnosod tabl awdurdodau
+	Insert Table of Figures	Mewnosod tabl ffigurau
+	Insert Table…	Mewnosod tabl…
+	Insert Time Field	Mewnosod maes amser
+	Insert Video	Mewnosod fideo
+	Insert\nAbove	Mewnosod\nuwchben
+	Insert\nCaption	Mewnosod\ncapsiwn
+	Insert\nCitation	Mewnosod\ndyfyniad
+	Insert\nFootnote	Mewnosod\ntroednodyn
+	Inserted	Mewnosodwyd
+	Insertions and Deletions	Mewnosodiadau a dileadau
+	Insertions:	Mewnosodiadau:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Mewnosodiadau: {ins}, dileadau: {del}, symudiadau: {moves}, fformatio: {fmt}, sylwadau: {comments}
+	Inside	Y tu mewn
+	Inside Borders	Ffiniau mewnol
+	Inside Margin	Ymyl fewnol
+	Inside:	Y tu mewn:
+	Inspect Document	Archwilio'r ddogfen
+	Inspect Styles at Selection	Archwilio arddulliau yn y dewis
+	Institution	Sefydliad
+	Integral	Integryn
+	Integral of e^(−x²)	Integryn e^(−x²)
+	Integral with Limits	Integryn gyda therfannau
+	Integral with Stacked Limits	Integryn gyda therfannau wedi'u pentyrru
+	Integrals	Integrynnau
+	Intense Emphasis	Pwyslais dwys
+	Intense Quote	Dyfyniad dwys
+	Intense Reference	Cyfeiriad dwys
+	Interface	Rhyngwyneb
+	Interface language	Iaith y rhyngwyneb
+	Interface language:	Iaith y rhyngwyneb:
+	Interface size:	Maint y rhyngwyneb:
+	Interface Theme	Thema'r rhyngwyneb
+	Interface theme:	Thema'r rhyngwyneb:
+	Interface\nTheme	Thema'r\nrhyngwyneb
+	Internet addresses as links	Cyfeiriadau rhyngrwyd fel dolenni
+	Intersection	Croestoriad
+	Intersection with Limits	Croestoriad gyda therfannau
+	Intersection with Lower Limit	Croestoriad gyda therfan isaf
+	Intersection with Subscript-Superscript Limits	Croestoriad gyda therfannau isysgrif-uwchysgrif
+	Inverse Cosecant Function	Ffwythiant cosecant gwrthdro
+	Inverse Cosine Function	Ffwythiant cosin gwrthdro
+	Inverse Cotangent Function	Ffwythiant cotangiad gwrthdro
+	Inverse Functions	Ffwythiannau gwrthdro
+	Inverse Hyperbolic Cosecant Function	Ffwythiant cosecant hyperbolig gwrthdro
+	Inverse Hyperbolic Cosine Function	Ffwythiant cosin hyperbolig gwrthdro
+	Inverse Hyperbolic Cotangent Function	Ffwythiant cotangiad hyperbolig gwrthdro
+	Inverse Hyperbolic Functions	Ffwythiannau hyperbolig gwrthdro
+	Inverse Hyperbolic Secant Function	Ffwythiant secant hyperbolig gwrthdro
+	Inverse Hyperbolic Sine Function	Ffwythiant sin hyperbolig gwrthdro
+	Inverse Hyperbolic Tangent Function	Ffwythiant tangiad hyperbolig gwrthdro
+	Inverse Secant Function	Ffwythiant secant gwrthdro
+	Inverse Sine Function	Ffwythiant sin gwrthdro
+	Inverse Tangent Function	Ffwythiant tangiad gwrthdro
+	Ionosphere	Ionosffer
+	Is blank	Yn wag
+	Is not blank	Ddim yn wag
+	ISO 690 (author-date)	ISO 690 (awdur-dyddiad)
+	ISO 690 (numerical)	ISO 690 (rhifol)
+	Issue	Rhifyn
+	it isn't a picture Doc4Me can read	nid yw'n llun y gall Doc4Me ei ddarllen
+	Italian	Eidaleg
+	Italic	Italig
+	Japanese	Japaneg
+	Journal	Cyfnodolyn
+	Justification	Unioni
+	Justification of a display equation	Unioni hafaliad arddangos
+	Justified	Wedi'i unioni
+	Justify	Unioni
+	Keep Lines Together	Cadw llinellau gyda'i gilydd
+	Keep lines together	Cadw llinellau gyda'i gilydd
+	Keep Source Formatting	Cadw fformatio'r ffynhonnell
+	Keep Text Only	Cadw testun yn unig
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Cadwch y cyfrinair yn rhywle diogel: hebddo ni all neb, gan gynnwys Doc4Me, agor y ddogfen. Gadewch y ddau flwch yn wag i dynnu'r cyfrinair.
+	Keep with Next	Cadw gyda'r nesaf
+	Keep with next	Cadw gyda'r nesaf
+	Keeps the fonts and formatting of the copied text.	Yn cadw ffontiau a fformatio'r testun a gopïwyd.
+	Kerning for fonts:	Cnewyllo ar gyfer ffontiau:
+	Keyboard shortcuts:	Llwybrau byr bysellfwrdd:
+	Keys for this command:	Bysellau ar gyfer y gorchymyn hwn:
+	Keywords	Allweddeiriau
+	Korean	Coreeg
+	Label changes with:	Mae'r label yn newid gyda:
+	Label:	Label:
+	Labels	Labeli
+	Landscape	Tirlun
+	Language	Iaith
+	Language Preferences…	Dewisiadau iaith…
+	Language…	Iaith…
+	Large\nOperator	Gweithredwr\nmawr
+	Largest Only	Y mwyaf yn unig
+	Largest only	Y mwyaf yn unig
+	Lasso	Lasŵ
+	Lasso Select	Dewis â lasŵ
+	Last	Olaf
+	Last Cell in Column	Cell olaf y golofn
+	Last Cell in Row	Cell olaf y rhes
+	Last Column	Colofn olaf
+	Last commit	Ymrwymiad olaf
+	Last Name	Cyfenw
+	Last, First; Last, First	Cyfenw, Enw cyntaf; Cyfenw, Enw cyntaf
+	Latin text font:	Ffont testun Lladin:
+	Layout	Cynllun
+	Layout options for this document	Opsiynau cynllun ar gyfer y ddogfen hon
+	Layout Summary	Crynodeb cynllun
+	Layouts	Cynlluniau
+	Leader	Arweinydd
+	Leave a recipient out of the merge when a field has this value.	Gadael derbynnydd allan o'r cyfuno pan fo gan faes y gwerth hwn.
+	Leave Equation	Gadael yr hafaliad
+	Leave the equation (Esc)	Gadael yr hafaliad (Esc)
+	Leave the label out of the caption	Gadael y label allan o'r capsiwn
+	Left	Chwith
+	Left Arrow with Text Above	Saeth chwith gyda thestun uwchben
+	Left Arrow with Text Below	Saeth chwith gyda thestun oddi tani
+	Left Border	Ffin chwith
+	Left border	Ffin chwith
+	Left Bracket Twice	Cromfach chwith ddwywaith
+	Left indent	Mewnoliad chwith
+	Left Margin	Ymyl chwith
+	Left Only	Chwith yn unig
+	Left only	Chwith yn unig
+	Left Right Arrow Above	Saeth chwith-dde uwchben
+	Left Right Arrow with Text Above	Saeth chwith-dde gyda thestun uwchben
+	Left Right Arrow with Text Below	Saeth chwith-dde gyda thestun oddi tani
+	Left Subscript-Superscript	Isysgrif-uwchysgrif chwith
+	Left-to-right	Chwith-i'r-dde
+	Left-to-Right Text Direction	Cyfeiriad testun chwith-i'r-dde
+	Left:	Chwith:
+	Leftwards Arrow Above	Saeth tua'r chwith uwchben
+	Leftwards Harpoon Above	Telyn tua'r chwith uwchben
+	Legal   8.50" × 14.00"	Legal   8.50" × 14.00"
+	Legal style numbering	Rhifo arddull gyfreithiol
+	Legend	Allwedd
+	Less than	Llai na
+	Less than or equal	Llai na neu hafal i
+	Letter	Llythyr
+	Letter   8.50" × 11.00"	Letter   8.50" × 11.00"
+	Letter headings	Penawdau llythyr
+	Letter-Like Symbols	Symbolau tebyg i lythrennau
+	Letters	Llythyrau
+	Level 1	Lefel 1
+	Level 2	Lefel 2
+	Level 3	Lefel 3
+	Level 4	Lefel 4
+	Level 5	Lefel 5
+	Level 6	Lefel 6
+	Level 7	Lefel 7
+	Level 8	Lefel 8
+	Level 9	Lefel 9
+	Level {n}	Lefel {n}
+	Level:	Lefel:
+	Levels:	Lefelau:
+	LibreTranslate server (open source)	Gweinydd LibreTranslate (cod agored)
+	Ligatures:	Clymlythrennau:
+	Light	Golau
+	Light with Outline	Golau gydag amlinell
+	Limit	Terfan
+	Limit and\nLog	Terfan a\nlog
+	Limit consecutive hyphens to:	Cyfyngu cysylltnodau olynol i:
+	Limit Example	Enghraifft terfan
+	Limit formatting to a selection of styles	Cyfyngu fformatio i ddetholiad o arddulliau
+	Line	Llinell
+	Line and Page Breaks	Toriadau llinell a thudalen
+	Line and Paragraph Spacing	Bylchu llinell a pharagraff
+	Line between	Llinell rhyngddynt
+	Line Break	Toriad llinell
+	Line breaking	Torri llinellau
+	Line delta	Delta llinell
+	Line End	Diwedd llinell
+	Line Number	Rhif llinell
+	Line Numbering Options…	Opsiynau rhifo llinellau…
+	Line Numbers	Rhifau llinell
+	Line Spacing	Bylchu llinell
+	Line spacing	Bylchu llinell
+	Line Spacing Options…	Opsiynau bylchu llinell…
+	Line spacing:	Bylchu llinell:
+	Line Start	Dechrau llinell
+	Line width:	Lled y llinell:
+	Line:	Llinell:
+	Linear	Llinol
+	Linear Fraction	Ffracsiwn llinol
+	Lines	Llinellau
+	Lines +/−	Llinellau +/−
+	Lines added	Llinellau a ychwanegwyd
+	Lines and characters	Llinellau a nodau
+	Lines deleted	Llinellau a ddilëwyd
+	Lines only	Llinellau yn unig
+	Lines per page:	Llinellau fesul tudalen:
+	Link	Dolen
+	Link entries to their headings	Cysylltu cofnodion â'u penawdau
+	Link level to style:	Cysylltu lefel ag arddull:
+	Link to Previous	Cysylltu â'r blaenorol
+	Linked style (paragraph and character)	Arddull gysylltiedig (paragraff a nodau)
+	Links	Dolenni
+	Links and References	Dolenni a chyfeiriadau
+	Link…	Dolen…
+	List	Rhestr
+	List Commands	Rhestru gorchmynion
+	List Definition	Diffiniad rhestr
+	List entries	Cofnodion rhestr
+	List Paragraph	Paragraff rhestr
+	List styles	Arddulliau rhestr
+	List Table 3 – Blue	Tabl rhestr 3 – Glas
+	List Table 3 – Green	Tabl rhestr 3 – Gwyrdd
+	List Table 3 – Orange	Tabl rhestr 3 – Oren
+	List Table 3 – Purple	Tabl rhestr 3 – Porffor
+	Listening… speak now	Wrthi'n gwrando… siaradwch nawr
+	Location	Lleoliad
+	Location: {path}	Lleoliad: {path}
+	Lock aspect ratio	Cloi'r gymhareb agwedd
+	Lock Fields	Cloi meysydd
+	Logarithm	Logarithm
+	Logarithm with Base	Logarithm gyda bôn
+	Logical AND	AND rhesymegol
+	Logical AND with Limits	AND rhesymegol gyda therfannau
+	Logical OR	OR rhesymegol
+	Logical OR with Limits	OR rhesymegol gyda therfannau
+	Long citation:	Dyfyniad hir:
+	lowercase	llythrennau bach
+	Lum:	Goleuedd:
+	Macros	Macros
+	Made from the author and year when empty	Wedi'i wneud o'r awdur a'r flwyddyn pan fo'n wag
+	Magazine or newspaper article	Erthygl cylchgrawn neu bapur newydd
+	Mail Merge	Cyfuno post
+	Mail Merge Helper	Cynorthwyydd cyfuno post
+	Mail Merge Helper…	Cynorthwyydd cyfuno post…
+	Mailing Labels	Labeli postio
+	Mailings	Postio
+	Main entry:	Prif gofnod:
+	Make Doc4Me the default for Word documents…	Gwneud Doc4Me yn ddiofyn ar gyfer dogfennau Word…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Yn gwneud y rhuban, y dewislenni a'r deialogau'n fwy neu'n llai, ar ben graddio arddangos eich system. Mae chwyddo'r ddogfen ar wahân.
+	Malay	Maleieg
+	Manage Sources	Rheoli ffynonellau
+	Manage Styles	Rheoli arddulliau
+	Manage Styles…	Rheoli arddulliau…
+	Manual Hyphenation	Cysylltnodi â llaw
+	Manual hyphenation is complete.	Mae'r cysylltnodi â llaw wedi'i gwblhau.
+	Manual Line Break	Toriad llinell â llaw
+	Manual Page Break	Toriad tudalen â llaw
+	Manual…	Â llaw…
+	Many pages	Llawer o dudalennau
+	Margin	Ymyl
+	Margins	Ymylon
+	Mark	Marcio
+	Mark All	Marcio'r cyfan
+	Mark as decorative	Marcio'n addurnol
+	Mark Citation	Marcio dyfyniad
+	Mark Citation…	Marcio dyfyniad…
+	Mark Entry	Marcio cofnod
+	Mark Entry…	Marcio cofnod…
+	Mark grammar errors as you type	Marcio gwallau gramadeg wrth deipio
+	Mark Index Entry	Marcio cofnod mynegai
+	Mark selected text as:	Marcio'r testun a ddewiswyd fel:
+	Mark Table of Contents Entry	Marcio cofnod tabl cynnwys
+	Mark\nCitation	Marcio\ndyfyniad
+	Mark\nEntry	Marcio\ncofnod
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Cyfateb priflythrennau
+	Match Fields	Cyfateb meysydd
+	Match prefix	Cyfateb rhagddodiad
+	Match suffix	Cyfateb ôl-ddodiad
+	Math AutoCorrect	Awtogywiro mathemateg
+	Math Input Control	Rheolydd mewnbwn mathemateg
+	Matrices with Brackets	Matricsau gyda chromfachau
+	Matrix	Matrics
+	Maximize	Mwyhau
+	Maximum	Uchafswm
+	Maximum Example	Enghraifft uchafswm
+	Measured By	Wedi'i fesur gan
+	Measurement units:	Unedau mesur:
+	Media	Cyfryngau
+	Merge	Cyfuno
+	Merge Cells	Cyfuno celloedd
+	Merge Formatting	Cyfuno fformatio
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Mae Cyfuno fformatio yn gludo'r testun yn y fformatio lle mae'n glanio, fel y mae Cadw testun yn unig yn ei wneud.
+	Merge Record #	Cyfuno cofnod #
+	Merge records	Cyfuno cofnodion
+	Merge to New Document	Cyfuno i ddogfen newydd
+	Merge to Printer	Cyfuno i argraffydd
+	Merge to:	Cyfuno i:
+	Merge type: {type}	Math o gyfuno: {type}
+	Merged PRs	PRs a gyfunwyd
+	Merge…	Cyfuno…
+	Mesosphere	Mesosffer
+	Middle	Canol
+	Midline Dots	Dotiau canol llinell
+	Millimeters	Milimetrau
+	Minimum	Lleiafswm
+	Minus Equal	Minws hafal
+	Mirror indents	Drychu mewnoliadau
+	Mirrored	Wedi'i ddrychu
+	Missing document font	Ffont dogfen ar goll
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Hawlfraint (c) 2026 Tîm ArtCraft a chyfranwyr WordCraft.
+	MLA	MLA
+	Model	Model
+	Models	Modelau
+	Moderate	Cymedrol
+	Modify Style	Addasu arddull
+	Modify Table Style	Addasu arddull tabl
+	Modify Table Style…	Addasu arddull tabl…
+	Modify…	Addasu…
+	Mon	Llun
+	Month	Mis
+	More >>	Mwy >>
+	More Colors…	Mwy o liwiau…
+	More Columns…	Mwy o golofnau…
+	More Commands…	Mwy o orchmynion…
+	More Symbols…	Mwy o symbolau…
+	More templates →	Mwy o dempledi →
+	Move Down	Symud i lawr
+	Move in Equation	Symud yn yr hafaliad
+	Move object with text	Symud y gwrthrych gyda'r testun
+	Move or Resize	Symud neu newid maint
+	Move Paragraph Down	Symud paragraff i lawr
+	Move Paragraph Up	Symud paragraff i fyny
+	Move Past Citation	Symud heibio'r dyfyniad
+	Move Past\nCitation	Symud heibio'r\ndyfyniad
+	Move Selected Ink	Symud yr inc a ddewiswyd
+	Move Text	Symud testun
+	Move to where?	Symud i ble?
+	Move Up	Symud i fyny
+	Move with Text	Symud gyda'r testun
+	Move with text	Symud gyda'r testun
+	Moved from	Symudwyd o
+	Moved to	Symudwyd i
+	Moves	Symudiadau
+	Multilevel List	Rhestr aml-lefel
+	Multiple Pages	Tudalennau lluosog
+	My Add-ins	Fy ychwanegion
+	MyMemory (free, no account)	MyMemory (am ddim, dim cyfrif)
+	Name	Enw
+	Name (A–Z)	Enw (A–Z)
+	Name of the file this document is saved as	Enw'r ffeil y caiff y ddogfen hon ei chadw fel
+	Name:	Enw:
+	Narrow  0.5" all	Cul  0.5" bob ochr
+	Natural Logarithm	Logarithm naturiol
+	Nature	Natur
+	Navigation	Llywio
+	Navigation Pane	Cwarel llywio
+	Negated Relations	Perthnasoedd negyddol
+	New	Newydd
+	New Comment	Sylw newydd
+	New comments and tracked changes are recorded under this name and these initials.	Caiff sylwadau newydd a newidiadau wedi'u tracio eu cofnodi o dan yr enw hwn a'r blaenlythrennau hyn.
+	New Document	Dogfen newydd
+	New document	Dogfen newydd
+	New Drawing Canvas	Cynfas lluniadu newydd
+	New Entry	Cofnod newydd
+	New Folder	Ffolder newydd
+	New from Template	Newydd o dempled
+	New Group	Grŵp newydd
+	New Label	Label newydd
+	New Label…	Label newydd…
+	New Paragraph	Paragraff newydd
+	New shortcut:	Llwybr byr newydd:
+	New Style…	Arddull newydd…
+	New Tab	Tab newydd
+	New Table Style	Arddull tabl newydd
+	New Table Style…	Arddull tabl newydd…
+	New Window	Ffenestr newydd
+	New word	Gair newydd
+	New\nComment	Sylw\nnewydd
+	New\nWindow	Ffenestr\nnewydd
+	New…	Newydd…
+	Next	Nesaf
+	Next Change	Newid nesaf
+	Next Comment	Sylw nesaf
+	Next Field	Maes nesaf
+	Next Footnote	Troednodyn nesaf
+	Next Page	Tudalen nesaf
+	Next Record	Cofnod nesaf
+	Next Section	Adran nesaf
+	Next Sentence	Brawddeg nesaf
+	Next sentence	Brawddeg nesaf
+	Next Window	Ffenestr nesaf
+	No	Na
+	No accessibility issues found.	Ni chanfuwyd unrhyw broblemau hygyrchedd.
+	No add-ins are listed yet.	Nid oes ychwanegion wedi'u rhestru eto.
+	No add-ins yet. Add one from the Store.	Dim ychwanegion eto. Ychwanegwch un o'r Siop.
+	No Border	Dim ffin
+	No changes (read only)	Dim newidiadau (darllen yn unig)
+	No Color	Dim lliw
+	No contributor data was built into this copy.	Ni chafodd unrhyw ddata cyfranwyr ei gynnwys yn y copi hwn.
+	No data source yet.	Dim ffynhonnell ddata eto.
+	No errors found: every merge field is in the recipient list.	Ni chanfuwyd gwallau: mae pob maes cyfuno yn y rhestr derbynwyr.
+	No Fill	Dim llenwad
+	No Glow	Dim tywyn
+	No grid	Dim grid
+	No icons match your search.	Nid oes eiconau'n cyfateb i'ch chwiliad.
+	No limit	Dim terfyn
+	No Line	Dim llinell
+	No Markup	Dim marcio
+	No model credits were built into this copy.	Ni chafodd unrhyw gydnabyddiaethau model eu cynnwys yn y copi hwn.
+	No Outline	Dim amlinell
+	No Paragraph Space	Dim bwlch paragraff
+	No pictures found.	Ni chanfuwyd lluniau.
+	No Reflection	Dim adlewyrchiad
+	No revisions	Dim diwygiadau
+	No Shadow	Dim cysgod
+	No Soft Edges	Dim ymylon meddal
+	No sources yet.	Dim ffynonellau eto.
+	No Spacing	Dim bylchu
+	no speech program on this system	dim rhaglen lleferydd ar y system hon
+	No templates match your search.	Nid oes templedi'n cyfateb i'ch chwiliad.
+	No Transform	Dim trawsffurfio
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Dim geiriau eto. Mae Ychwanegu at y geiriadur ar air wedi'i gamsillafu yn ei roi yma.
+	No-Width Non Break	Di-dor heb led
+	No-Width Optional Break	Toriad dewisol heb led
+	Nonbreaking Hyphen	Cysylltnod di-dor
+	Nonbreaking Space	Bwlch di-dor
+	None	Dim
+	Normal	Arferol
+	Normal  1" all	Arferol  1" bob ochr
+	Normal Indent	Mewnoliad arferol
+	Normal probability density	Dwysedd tebygolrwydd normal
+	Normal speed	Cyflymder arferol
+	Normal Style	Arddull arferol
+	Normal Table	Tabl arferol
+	Normal Text	Testun arferol
+	Normal Word Document	Dogfen Word arferol
+	North	Gogledd
+	Norwegian (Bokmål)	Norwyeg (Bokmål)
+	Not	Nid
+	Not available right now	Ddim ar gael ar hyn o bryd
+	Not equal to	Ddim yn hafal i
+	Not linked: click a text box	Heb ei gysylltu: cliciwch flwch testun
+	Not saved	Heb ei gadw
+	Not saved yet	Heb ei gadw eto
+	Not used by any command	Heb ei ddefnyddio gan unrhyw orchymyn
+	Not {name}	Nid {name}
+	Nothing	Dim byd
+	Nothing collected yet. Items you copy or cut appear here.	Dim byd wedi'i gasglu eto. Mae eitemau rydych yn eu copïo neu'n eu torri yn ymddangos yma.
+	Now used by {command}	Defnyddir gan {command} bellach
+	Nudge	Hwb bach
+	Num Occurrences	Nifer y digwyddiadau
+	Number	Rhif
+	Number alignment:	Aliniad rhif:
+	Number format	Fformat rhif
+	Number of columns:	Nifer y colofnau:
+	Number of rows:	Nifer y rhesi:
+	Number of the page the field sits on	Rhif y dudalen y mae'r maes arni
+	Number of the section the field sits in	Rhif yr adran y mae'r maes ynddi
+	Number style for this level:	Arddull rhif ar gyfer y lefel hon:
+	Number the equation; the number sits at the right margin (or type # then the number)	Rhifo'r hafaliad; mae'r rhif wrth yr ymyl dde (neu teipiwch # ac yna'r rhif)
+	Number type:	Math o rif:
+	Number:	Rhif:
+	Numbering	Rhifo
+	Numbering:	Rhifo:
+	Numbering…	Rhifo…
+	Numerals	Rhifolion
+	Numerals:	Rhifolion:
+	n×n Identity Matrix	Matrics unfathiant n×n
+	n×n Matrix	Matrics n×n
+	Object	Gwrthrych
+	Odd Page	Tudalen odrif
+	Odd pages only	Tudalennau odrif yn unig
+	Off	I ffwrdd
+	Office	Office
+	Office 2003 Default	Diofyn Office 2003
+	Offset (pt):	Gwrthbwyso (pt):
+	Offset: Bottom	Gwrthbwyso: Gwaelod
+	Offset: Bottom Left	Gwrthbwyso: Gwaelod chwith
+	Offset: Bottom Right	Gwrthbwyso: Gwaelod de
+	Offset: Center	Gwrthbwyso: Canol
+	Offset: Left	Gwrthbwyso: Chwith
+	Offset: Right	Gwrthbwyso: De
+	Offset: Top	Gwrthbwyso: Brig
+	Offset: Top Left	Gwrthbwyso: Brig chwith
+	Offset: Top Right	Gwrthbwyso: Brig de
+	OK	Iawn
+	Omit	Hepgor
+	On	Ymlaen
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Ymlaen: mae'r cyrchwr yn llithro i'w le newydd pan fyddwch yn teipio neu'n defnyddio'r bysellau saeth, ac mae ei amrantu'n pylu. I ffwrdd: mae'n neidio ac yn amrantu ymlaen ac i ffwrdd.
+	One	Un
+	One half	Hanner
+	One label per recipient	Un label fesul derbynnydd
+	One line per item. Enter adds an item.	Un llinell fesul eitem. Mae Enter yn ychwanegu eitem.
+	One Page	Un dudalen
+	Online Pictures	Lluniau ar-lein
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Mae Lluniau ar-lein (Openverse), Cyfieithu (MyMemory neu eich gweinydd LibreTranslate), Cael ychwanegion a llwytho model lleferydd Arddweud i lawr yn cysylltu â'r rhyngrwyd, a dim ond pan fyddwch yn eu defnyddio. Pan fyddant wedi'u diffodd, nid yw Doc4Me yn gwneud unrhyw gysylltiad ei hun.
+	Online Pictures…	Lluniau ar-lein…
+	Online services are turned off (File › Options › Trust Center).	Mae gwasanaethau ar-lein wedi'u diffodd (Ffeil › Opsiynau › Canolfan ymddiriedaeth).
+	Online Video	Fideo ar-lein
+	Only allow this kind of editing:	Caniatáu'r math hwn o olygu yn unig:
+	Only comments can be added, except in regions marked editable.	Dim ond sylwadau y gellir eu hychwanegu, ac eithrio mewn rhanbarthau wedi'u marcio'n olygadwy.
+	Only form fields can be filled in.	Dim ond meysydd ffurflen y gellir eu llenwi.
+	only https addresses can be used	dim ond cyfeiriadau https y gellir eu defnyddio
+	Only pictures I may use commercially	Dim ond lluniau y caf eu defnyddio'n fasnachol
+	Only the allowed styles can be applied.	Dim ond yr arddulliau a ganiateir y gellir eu gweithredu.
+	Only web (http, https) and email (mailto) links can be followed	Dim ond dolenni gwe (http, https) ac e-bost (mailto) y gellir eu dilyn
+	Open	Agor
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Agor ffeil â phorwr Doc4Me ei hun pan nad yw deialog ffeiliau'r system yn ymddangos.
+	Open Data Source…	Agor ffynhonnell ddata…
+	Open Hyperlink	Agor hyperddolen
+	OpenDocument Text (*.odt)	Testun OpenDocument (*.odt)
+	Opening print dialog…	Wrthi'n agor y ddeialog argraffu…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Yn agor ffeiliau .docx, .doc, .rtf ac .odt a thempledi Word gyda Doc4Me o hyn ymlaen.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Yn agor Gosodiadau › Apiau diofyn, lle rydych yn dewis Doc4Me ar gyfer .docx a'r mathau eraill o ddogfennau.
+	Open…	Agor…
+	Operator	Gweithredwr
+	Operator Structures	Strwythurau gweithredwr
+	Operators	Gweithredwyr
+	Optional Hyphen	Cysylltnod dewisol
+	Options	Opsiynau
+	Options…	Opsiynau…
+	Or	Neu
+	Or save a copy in another format:	Neu cadwch gopi mewn fformat arall:
+	Ordinals (1st) as superscript	Trefnolion (1af) fel uwchysgrif
+	Organizer	Trefnydd
+	Organizer…	Trefnydd…
+	Orientation	Cyfeiriadedd
+	Original document	Dogfen wreiddiol
+	Other	Arall
+	Other Authorities	Awdurdodau eraill
+	Other Large Operators	Gweithredwyr mawr eraill
+	Other paragraph styles	Arddulliau paragraff eraill
+	Other styles and their TOC level:	Arddulliau eraill a'u lefel yn y tabl cynnwys:
+	Otherwise insert:	Fel arall mewnosod:
+	Outline	Amlinell
+	Outline Level	Lefel amlinell
+	Outline level	Lefel amlinell
+	Outline levels	Lefelau amlinell
+	Outline State	Cyflwr amlinell
+	Outline Tools	Offer amlinell
+	Outlining	Amlinellu
+	Outside	Y tu allan
+	Outside border	Ffin allanol
+	Outside Borders	Ffiniau allanol
+	Outside Margin	Ymyl allanol
+	Outside:	Y tu allan:
+	Outward Brackets	Cromfachau tuag allan
+	Oval	Hirgrwn
+	Overbar	Bar uwchben
+	Overbars and Underbars	Barrau uwchben ac oddi tano
+	Overbrace	Cromfach gyrliog uwchben
+	Overtype	Trosysgrifo
+	Overtype (typing replaces the characters after the caret)	Trosysgrifo (mae teipio'n amnewid y nodau ar ôl y cyrchwr)
+	Page	Tudalen
+	Page Background	Cefndir y dudalen
+	Page Border	Ffin tudalen
+	Page Borders	Ffiniau tudalen
+	Page Break	Toriad tudalen
+	Page Break Before	Toriad tudalen cyn
+	Page break before	Toriad tudalen cyn
+	Page Breaks	Toriadau tudalen
+	Page Color	Lliw'r dudalen
+	Page display	Dangos tudalennau
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Delwedd tudalen (*.jpg, *.jpeg)
+	Page image (*.png)	Delwedd tudalen (*.png)
+	Page Movement	Symud tudalennau
+	Page Number	Rhif tudalen
+	Page number style	Arddull rhif tudalen
+	Page numbers at the right margin	Rhifau tudalen wrth yr ymyl dde
+	Page on which a bookmarked passage falls	Y dudalen y mae darn â nod tudalen arni
+	Page Setup	Gosod tudalen
+	Page title	Teitl y dudalen
+	Page Up	Page Up
+	Page Width	Lled y dudalen
+	Page width	Lled y dudalen
+	Page X of Y	Tudalen X o Y
+	Page {page}	Tudalen {page}
+	Page {page} of {pages}	Tudalen {page} o {pages}
+	Page\nBorders	Ffiniau\ntudalen
+	Page\nColor	Lliw'r\ndudalen
+	Page\nNumber	Rhif\ntudalen
+	Pages	Tudalennau
+	Pages like 1-3, 5	Tudalennau fel 1-3, 5
+	Pages of bookmark:	Tudalennau'r nod tudalen:
+	Paragraph	Paragraff
+	Paragraph Character	Nod paragraff
+	Paragraph Details	Manylion paragraff
+	Paragraph Down	Paragraff i lawr
+	Paragraph Mark	Marc paragraff
+	Paragraph marks	Marciau paragraff
+	Paragraph Settings	Gosodiadau paragraff
+	Paragraph Spacing	Bylchu paragraff
+	Paragraph style	Arddull paragraff
+	Paragraph Up	Paragraff i fyny
+	Paragraphs	Paragraffau
+	Paragraph…	Paragraff…
+	Parentheses	Cromfachau
+	Parentheses with Separator	Cromfachau gyda gwahanydd
+	Partial Differential	Differol rhannol
+	Password	Cyfrinair
+	Password:	Cyfrinair:
+	Paste	Gludo
+	Paste All	Gludo'r cyfan
+	Paste as:	Gludo fel:
+	Paste Clipboard Item	Gludo eitem o'r clipfwrdd
+	Paste Formatting	Gludo fformatio
+	Paste Special	Gludo arbennig
+	Paste Special…	Gludo arbennig…
+	Paste Spike	Gludo'r pigyn
+	Paste: Keep Text Only	Gludo: Cadw testun yn unig
+	Paste: Merge Formatting	Gludo: Cyfuno fformatio
+	Pasting between documents:	Gludo rhwng dogfennau:
+	Pasting from other programs:	Gludo o raglenni eraill:
+	Pasting within the same document:	Gludo o fewn yr un ddogfen:
+	Pause	Saib
+	Paused	Wedi oedi
+	PDF document (*.pdf)	Dogfen PDF (*.pdf)
+	Pen	Pen
+	Pencil	Pensil
+	Pens	Pennau
+	People	Pobl
+	Periodical	Cyfnodolyn
+	Personalize	Personoli
+	Phonetic Guide	Canllaw ffonetig
+	Pi Over 2	Pi dros 2
+	Picas	Picas
+	Pick a custom group (New Group makes one)	Dewiswch grŵp personol (mae Grŵp newydd yn creu un)
+	Pick a field from the list	Dewiswch faes o'r rhestr
+	Picture	Llun
+	Picture Border	Ffin y llun
+	Picture Content Control	Rheolydd cynnwys llun
+	Picture Format	Fformat llun
+	Picture Styles	Arddulliau llun
+	Pictures	Lluniau
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Lluniau o Openverse. Parchwch drwydded pob llun: mae Doc4Me yn ychwanegu llinell gydnabod oddi tano.
+	Pie	Cylch
+	Placeholder Name	Enw'r dalfan
+	Placeholder text	Testun dalfan
+	Plain Table 1	Tabl plaen 1
+	Plain text (*.txt)	Testun plaen (*.txt)
+	Plain Text Content Control	Rheolydd cynnwys testun plaen
+	Play	Chwarae
+	Play Video	Chwarae fideo
+	Play/Pause	Chwarae/Saib
+	Plus Equal	Plws hafal
+	Points	Pwyntiau
+	points and above	pwynt ac uwch
+	Polish	Pwyleg
+	Portrait	Portread
+	Portuguese (Brazil)	Portiwgaleg (Brasil)
+	Portuguese (Portugal)	Portiwgaleg (Portiwgal)
+	Position	Safle
+	Position:	Safle:
+	Positioning…	Lleoli…
+	Possible spelling mistake	Camgymeriad sillafu posibl
+	Postal Code	Cod post
+	Power series of (1+x)ⁿ	Cyfres bŵer (1+x)ⁿ
+	Preferred width:	Lled dewisol:
+	Preserve	Cadw
+	Preserve formatting during updates	Cadw fformatio wrth ddiweddaru
+	Presets	Rhagosodiadau
+	Press a key combination	Pwyswch gyfuniad o fysellau
+	Preview	Rhagolwg
+	Preview Results	Rhagolwg o'r canlyniadau
+	Preview\nResults	Rhagolwg o'r\ncanlyniadau
+	Previous	Blaenorol
+	Previous 1 or More	Blaenorol 1 neu fwy
+	Previous Change	Newid blaenorol
+	Previous Comment	Sylw blaenorol
+	Previous Field	Maes blaenorol
+	Previous Footnote	Troednodyn blaenorol
+	Previous Page	Tudalen flaenorol
+	Previous Record	Cofnod blaenorol
+	Previous Section	Adran flaenorol
+	Previous Sentence	Brawddeg flaenorol
+	Previous sentence	Brawddeg flaenorol
+	Previous Window	Ffenestr flaenorol
+	Print	Argraffu
+	Print blank lines when data fields are empty	Argraffu llinellau gwag pan fo meysydd data'n wag
+	Print Documents	Argraffu dogfennau
+	Print Documents…	Argraffu dogfennau…
+	Print failed: {error}	Methodd yr argraffu: {error}
+	Print Layout	Cynllun argraffu
+	Print Markup	Argraffu marcio
+	Print the page color	Argraffu lliw'r dudalen
+	Print to PDF	Argraffu i PDF
+	Print\nLayout	Cynllun\nargraffu
+	Printer	Argraffydd
+	Printing	Argraffu
+	Process	Proses
+	Product	Lluoswm
+	Product of A	Lluoswm A
+	Product with Limits	Lluoswm gyda therfannau
+	Product with Lower Limit	Lluoswm gyda therfan isaf
+	Product with Subscript-Superscript Limits	Lluoswm gyda therfannau isysgrif-uwchysgrif
+	Products and Coproducts	Lluosymiau a chyd-gynhyrchion
+	Professional	Proffesiynol
+	Promote	Dyrchafu
+	Promote to Heading 1	Dyrchafu i Bennawd 1
+	Proofing	Prawfddarllen
+	Proofing Issues	Problemau prawfddarllen
+	Proofing language	Iaith prawfddarllen
+	Properties	Priodweddau
+	Protect	Diogelu
+	Protect Document	Diogelu'r ddogfen
+	PRs	PRs
+	pt	pt
+	Publisher	Cyhoeddwr
+	Punctuation	Atalnodi
+	Put the caret in a content control first.	Rhowch y cyrchwr mewn rheolydd cynnwys yn gyntaf.
+	Put the default commands back on the Quick Access Toolbar?	Rhoi'r gorchmynion diofyn yn ôl ar y bar offer mynediad cyflym?
+	Pyramid	Pyramid
+	Quadratic Root	Gwreiddyn cwadratig
+	Query Options…	Opsiynau ymholiad…
+	Quick Access Toolbar	Bar offer mynediad cyflym
+	Quick Parts	Rhannau cyflym
+	Quick Tables	Tablau cyflym
+	Quote	Dyfyniad
+	Radical	Isradd
+	Radical with Degree	Isradd gyda gradd
+	Radicals	Israddau
+	Raised/lowered	Wedi'i godi/ostwng
+	Read Aloud	Darllen yn uchel
+	Read Aloud couldn't start the speech program: {reason}	Methodd Darllen yn uchel gychwyn y rhaglen lleferydd: {reason}
+	Read Aloud couldn't start: {reason}	Methodd Darllen yn uchel gychwyn: {reason}
+	Read Aloud isn't available in the browser	Nid yw Darllen yn uchel ar gael yn y porwr
+	Read Aloud Status	Statws Darllen yn uchel
+	Read Aloud stopped: {reason}	Darllen yn uchel wedi stopio: {reason}
+	Read Mode	Modd darllen
+	Read\nAloud	Darllen\nyn uchel
+	Read\nMode	Modd\ndarllen
+	Reading	Darllen
+	Reading Column Width	Lled colofn darllen
+	Reading Highlight	Amlygu darllen
+	Reading Line Spacing	Bylchu llinell darllen
+	Reading Mode	Modd darllen
+	Reading Speed	Cyflymder darllen
+	Reading Text Size	Maint testun darllen
+	Reads the clipboard's rich text and keeps its formatting.	Yn darllen testun cyfoethog y clipfwrdd ac yn cadw ei fformatio.
+	Reads the clipboard's web content and keeps its formatting.	Yn darllen cynnwys gwe'r clipfwrdd ac yn cadw ei fformatio.
+	Real name	Enw go iawn
+	Recent	Diweddar
+	Recent Colors	Lliwiau diweddar
+	Recent documents to show:	Dogfennau diweddar i'w dangos:
+	Recently used symbols:	Symbolau a ddefnyddiwyd yn ddiweddar:
+	Recipient List	Rhestr derbynwyr
+	Recipient lists	Rhestrau derbynwyr
+	Recipients: {count}	Derbynwyr: {count}
+	Recognized (you can correct it):	Wedi'i adnabod (gallwch ei gywiro):
+	Recognized Functions	Ffwythiannau a adnabyddir
+	Recognized Functions…	Ffwythiannau a adnabyddir…
+	Recolor a one-color picture, such as an icon	Ail-liwio llun un lliw, fel eicon
+	Recolor Selected Ink	Ail-liwio'r inc a ddewiswyd
+	Record Macro	Recordio macro
+	Recover Unsaved Documents	Adfer dogfennau heb eu cadw
+	Rectangle	Petryal
+	Red:	Coch:
+	Redo	Ail-wneud
+	Reduce Hanging Indent	Lleihau'r mewnoliad crog
+	References	Cyfeiriadau
+	Reflection	Adlewyrchiad
+	Refresh	Adnewyddu
+	Registered	Cofrestredig
+	Registered Sign	Arwydd cofrestredig
+	Regular expressions	Mynegiadau rheolaidd
+	Regulations	Rheoliadau
+	Reject	Gwrthod
+	Reject All	Gwrthod y cyfan
+	Reject All Changes	Gwrthod pob newid
+	Reject Change	Gwrthod y newid
+	Relationship	Perthynas
+	relative to	o'i gymharu â
+	Relative to:	O'i gymharu â:
+	Relaxed	Hamddenol
+	Remove	Tynnu
+	Remove Added Font	Tynnu'r ffont a ychwanegwyd
+	Remove Background	Tynnu'r cefndir
+	Remove Content Control	Tynnu'r rheolydd cynnwys
+	Remove every custom shortcut and restore the built-in keys?	Tynnu pob llwybr byr personol ac adfer y bysellau adeiledig?
+	Remove every custom tab and group and show all tabs again?	Tynnu pob tab a grŵp personol a dangos pob tab eto?
+	Remove field	Tynnu'r maes
+	Remove Field Name	Tynnu enw'r maes
+	Remove Footer	Tynnu'r troedyn
+	Remove from Quick Access Toolbar	Tynnu o'r bar offer mynediad cyflym
+	Remove Header	Tynnu'r pennyn
+	Remove Hyperlink	Tynnu'r hyperddolen
+	Remove Password	Tynnu'r cyfrinair
+	Remove Pen	Tynnu'r pen
+	Remove Positioning	Tynnu'r lleoli
+	Remove recipient	Tynnu'r derbynnydd
+	Remove row	Tynnu'r rhes
+	Remove series	Tynnu'r gyfres
+	Remove Space After Paragraph	Tynnu'r bwlch ar ôl paragraff
+	Remove Table of Contents	Tynnu'r tabl cynnwys
+	Remove the control once edited	Tynnu'r rheolydd ar ôl ei olygu
+	Remove the space before the punctuation	Tynnu'r bwlch cyn yr atalnod
+	Remove Watermark	Tynnu'r dyfrnod
+	Rename Style	Ailenwi arddull
+	Rename…	Ailenwi…
+	Reopen	Ailagor
+	Repeat	Ailadrodd
+	Repeat as header row on each page	Ailadrodd fel rhes bennyn ar bob tudalen
+	Repeat Header Rows	Ailadrodd rhesi pennyn
+	Repeated words	Geiriau wedi'u hailadrodd
+	Repeating Section Content Control	Rheolydd cynnwys adran ailadroddus
+	Replace	Amnewid
+	Replace All	Amnewid y cyfan
+	Replace as you type	Amnewid wrth deipio
+	Replace Document Text	Amnewid testun y ddogfen
+	Replace text as you type	Amnewid testun wrth deipio
+	Replace with:	Amnewid â:
+	Replace:	Amnewid:
+	Replay	Ailchwarae
+	Reply	Ateb
+	Report	Adroddiad
+	Research	Ymchwil
+	Researcher	Ymchwilydd
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Mae angen gwasanaeth ar-lein ar Ymchwilydd; mae Doc4Me yn cadw eich dogfennau all-lein.
+	Reset	Ailosod
+	Reset All	Ailosod y cyfan
+	Reset All…	Ailosod y cyfan…
+	Reset Character Formatting	Ailosod fformatio nodau
+	Reset Crop	Ailosod tocio
+	Reset Graphic	Ailosod graffig
+	Reset Paragraph Formatting	Ailosod fformatio paragraff
+	Reset Picture	Ailosod llun
+	Reset to Normal	Ailosod i Arferol
+	Reset\nGraphic	Ailosod\ngraffig
+	Reset…	Ailosod…
+	Resize Table by Dragging	Newid maint tabl drwy lusgo
+	Resolve	Datrys
+	Resolved	Wedi'i ddatrys
+	Restart at 1	Ailddechrau o 1
+	Restart Each Page	Ailddechrau ar bob tudalen
+	Restart Each Section	Ailddechrau ym mhob adran
+	Restart list after:	Ailddechrau'r rhestr ar ôl:
+	Restore	Adfer
+	Restore Defaults	Adfer y rhagosodiadau
+	Restore Down	Adfer i lawr
+	Restore to Normal Word Document	Adfer i ddogfen Word arferol
+	Restrict Editing	Cyfyngu ar olygu
+	Restrict\nEditing	Cyfyngu ar\nolygu
+	Result	Canlyniad
+	Results	Canlyniadau
+	Return address labels	Labeli cyfeiriad dychwelyd
+	Return address:	Cyfeiriad dychwelyd:
+	Reverse the order	Gwrthdroi'r drefn
+	Review	Adolygu
+	Review AutoFormat Changes	Adolygu newidiadau Awtofformatio
+	Review Changes…	Adolygu newidiadau…
+	Reviewing	Adolygu
+	Reviewing Pane	Cwarel adolygu
+	Reviewing — edits become suggestions	Adolygu — mae golygiadau'n troi'n awgrymiadau
+	Revised document	Dogfen ddiwygiedig
+	Revisions	Diwygiadau
+	Rewind	Ailddirwyn
+	Ribbon	Rhuban
+	Ribbon and Quick Access Toolbar:	Rhuban a bar offer mynediad cyflym:
+	Ribbon tabs	Tabiau'r rhuban
+	Rich Text Content Control	Rheolydd cynnwys testun cyfoethog
+	Rich Text Format (*.rtf)	Fformat testun cyfoethog (*.rtf)
+	Rich Text Format (RTF)	Fformat testun cyfoethog (RTF)
+	Right	De
+	Right (vertical)	De (fertigol)
+	Right align page numbers	Alinio rhifau tudalen i'r dde
+	Right Arrow with Text Above	Saeth dde gyda thestun uwchben
+	Right Arrow with Text Below	Saeth dde gyda thestun oddi tani
+	Right Border	Ffin dde
+	Right border	Ffin dde
+	Right Bracket Twice	Cromfach dde ddwywaith
+	Right indent	Mewnoliad de
+	Right Margin	Ymyl dde
+	Right Only	De yn unig
+	Right only	De yn unig
+	Right-to-left	De-i'r-chwith
+	Right-to-Left Section	Adran de-i'r-chwith
+	Right-to-Left Table	Tabl de-i'r-chwith
+	Right-to-Left Text Direction	Cyfeiriad testun de-i'r-chwith
+	Right:	De:
+	Rightwards Arrow Above	Saeth tua'r dde uwchben
+	Rightwards Harpoon Above	Telyn tua'r dde uwchben
+	Roots of ax²+bx+c	Gwreiddiau ax²+bx+c
+	Rotate	Cylchdroi
+	Rotate all text 270°	Cylchdroi'r holl destun 270°
+	Rotate all text 90°	Cylchdroi'r holl destun 90°
+	Rotate Left 90°	Cylchdroi i'r chwith 90°
+	Rotate Right 90°	Cylchdroi i'r dde 90°
+	Rotation	Cylchdro
+	Rotation:	Cylchdro:
+	Rounded Rectangle	Petryal crwn
+	Row	Rhes
+	Row:	Rhes:
+	Rows & Columns	Rhesi a cholofnau
+	Ruby text:	Testun ruby:
+	Ruler	Pren mesur
+	Rules	Rheolau
+	Run	Rhedeg
+	Run-in	Rhedeg ymlaen
+	Russian	Rwseg
+	Résumé	CV
+	Same as the whole table	Yr un fath â'r tabl cyfan
+	SAMPLE	SAMPL
+	Sat:	Dirlawnder:
+	Save	Cadw
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Cadw copi mewn fformat arall. Mae argraffu'n mynd drwy PDF y gallwch ei argraffu o unrhyw wyliwr.
+	Save As	Cadw fel
+	Save as Template	Cadw fel templed
+	Save documents	Cadw dogfennau
+	Save the document to turn on AutoSave	Cadwch y ddogfen i droi Awtogadw ymlaen
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Cadwch y ddogfen i droi Awtogadw ymlaen (nid yw ffeil rydych wedi'i hagor yn unig yn cael ei hailysgrifennu nes i chi ei chadw)
+	Save these pages as PDF…	Cadw'r tudalennau hyn fel PDF…
+	Save Version	Cadw fersiwn
+	Saved	Wedi'i chadw
+	Scale	Graddfa
+	Scale Drawing	Graddio'r lluniad
+	Scatter	Gwasgariad
+	Screen Clipping	Clipio sgrin
+	Screen clipping didn't work: {reason}	Methodd clipio sgrin: {reason}
+	Screen clipping ended without a picture.	Daeth clipio sgrin i ben heb lun.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Nid yw clipio sgrin ar gael yma. Copïwch lun o'r sgrin, yna gludwch ef.
+	Screenshot	Sgrinlun
+	Script	Sgript
+	Scripts	Sgriptiau
+	Scroll ribbon left	Sgrolio'r rhuban i'r chwith
+	Scroll ribbon right	Sgrolio'r rhuban i'r dde
+	Search	Chwilio
+	Search Commands	Chwilio gorchmynion
+	Search commands and help	Chwilio gorchmynion a chymorth
+	Search document	Chwilio'r ddogfen
+	Search for templates	Chwilio am dempledi
+	Search icons	Chwilio eiconau
+	Search Openverse (Creative Commons pictures)	Chwilio Openverse (lluniau Creative Commons)
+	Search Options	Opsiynau chwilio
+	Searching…	Wrthi'n chwilio…
+	Secant Function	Ffwythiant secant
+	Section Break	Toriad adran
+	Section Breaks	Toriadau adran
+	Section Character	Nod adran
+	Section direction:	Cyfeiriad yr adran:
+	Section Mark	Marc adran
+	Section Properties	Priodweddau'r adran
+	Sections	Adrannau
+	See	Gweler
+	Select	Dewis
+	Select a picture, shape, chart or table to describe it.	Dewiswch lun, siâp, siart neu dabl i'w ddisgrifio.
+	Select All	Dewis y cyfan
+	Select Cell	Dewis cell
+	Select Floating Shapes	Dewis siapiau arnofiol
+	Select Heading and Content	Dewis pennawd a chynnwys
+	Select Line	Dewis llinell
+	Select Objects	Dewis gwrthrychau
+	Select Paragraph	Dewis paragraff
+	Select Range	Dewis ystod
+	Select Recipients	Dewis derbynwyr
+	Select recipients first to choose from their fields.	Dewiswch dderbynwyr yn gyntaf i ddewis o'u meysydd.
+	Select recipients first to match their fields.	Dewiswch dderbynwyr yn gyntaf i gyfateb eu meysydd.
+	Select Row	Dewis rhes
+	Select Sentence	Dewis brawddeg
+	Select Table	Dewis tabl
+	Select Text	Dewis testun
+	Select text in the document to translate it.	Dewiswch destun yn y ddogfen i'w gyfieithu.
+	Select Text with Similar Formatting	Dewis testun â fformatio tebyg
+	Select text, then tick who can still edit it.	Dewiswch destun, yna ticiwch pwy all ei olygu o hyd.
+	Select the part of the screen to insert.	Dewiswch y rhan o'r sgrin i'w mewnosod.
+	Select Word	Dewis gair
+	Select\nRecipients	Dewis\nderbynwyr
+	Selected Fields	Meysydd a ddewiswyd
+	Selected pages	Tudalennau a ddewiswyd
+	Selection	Dewis
+	Selection Pane	Cwarel dewis
+	Send Backward	Anfon yn ôl
+	Send the document straight to the system print dialog, or save a copy in another format below.	Anfon y ddogfen yn syth i ddeialog argraffu'r system, neu gadw copi mewn fformat arall isod.
+	Sentence	Brawddeg
+	Sentence case.	Priflythyren gyntaf brawddeg.
+	Separator:	Gwahanydd:
+	Sequence name:	Enw'r dilyniant:
+	Serbian	Serbeg
+	Serbian (Cyrillic)	Serbeg (Cyrilig)
+	Serbian (Latin)	Serbeg (Lladin)
+	Series name	Enw'r gyfres
+	Series {n}	Cyfres {n}
+	Server address (https://…)	Cyfeiriad y gweinydd (https://…)
+	Set	Gosod
+	Set As Default	Gosod fel diofyn
+	Set as Default	Gosod fel diofyn
+	Set Caret	Gosod y cyrchwr
+	Set Character Formatting	Gosod fformatio nodau
+	Set Date	Gosod dyddiad
+	Set Equation	Gosod hafaliad
+	Set Numbering Value	Gosod gwerth rhifo
+	Set Paragraph Formatting	Gosod fformatio paragraff
+	Set Proofing Language…	Gosod iaith prawfddarllen…
+	Setting:	Gosodiad:
+	Settings…	Gosodiadau…
+	Shading	Graddliwio
+	Shadow	Cysgod
+	Shadow, glow and soft edges	Cysgod, tywyn ac ymylon meddal
+	Shape Effects	Effeithiau siâp
+	Shape Fill	Llenwad siâp
+	Shape Format	Fformat siâp
+	Shape Outline	Amlinell siâp
+	Shape Styles	Arddulliau siâp
+	Shapes	Siapiau
+	Share	Rhannu
+	Sheet:	Taflen:
+	Shift cells down	Symud celloedd i lawr
+	Shift cells right	Symud celloedd i'r dde
+	Shift+Tab	Shift+Tab
+	Shipping labels	Labeli cludo
+	Short citation:	Dyfyniad byr:
+	Shortcut key:	Bysell llwybr byr:
+	Show	Dangos
+	Show all formatting marks	Dangos pob nod fformatio
+	Show All Levels	Dangos pob lefel
+	Show all revisions inline	Dangos pob diwygiad yn y testun
+	Show changes at:	Dangos newidiadau yn:
+	Show changes in:	Dangos newidiadau mewn:
+	Show Comments	Dangos sylwadau
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Dangos dogfennau â'u lliwiau wedi'u gwrthdroi, fel Gweld › Newid moddau. Nid yw cadw, argraffu a PDFs yn newid.
+	Show every bibliography field	Dangos pob maes llyfryddiaeth
+	Show First Line Only	Dangos y llinell gyntaf yn unig
+	Show in the Styles gallery	Dangos yn oriel Arddulliau
+	Show KeyTips (Alt or F10)	Dangos awgrymiadau bysell (Alt neu F10)
+	Show Level	Dangos lefel
+	Show Level 1	Dangos lefel 1
+	Show Level 2	Dangos lefel 2
+	Show Level 3	Dangos lefel 3
+	Show Level 4	Dangos lefel 4
+	Show Level 5	Dangos lefel 5
+	Show Level 6	Dangos lefel 6
+	Show Level 7	Dangos lefel 7
+	Show Level 8	Dangos lefel 8
+	Show Level 9	Dangos lefel 9
+	Show Markup	Dangos marcio
+	Show Notes	Dangos nodiadau
+	Show only comments and formatting in balloons	Dangos sylwadau a fformatio yn unig mewn balwnau
+	Show or Hide Style	Dangos neu guddio arddull
+	Show page numbers	Dangos rhifau tudalen
+	Show revisions in balloons	Dangos diwygiadau mewn balwnau
+	Show rulers	Dangos prennau mesur
+	Show Text Formatting	Dangos fformatio testun
+	Show the equation in the line of text	Dangos yr hafaliad yn y llinell destun
+	Show the equation on a line of its own	Dangos yr hafaliad ar linell ei hun
+	Show the mini toolbar when text is selected	Dangos y bar offer bach pan fydd testun wedi'i ddewis
+	Show/Hide ¶	Dangos/Cuddio ¶
+	Show\nComments	Dangos\nsylwadau
+	Showing the first {count} items.	Yn dangos y {count} eitem gyntaf.
+	Shows a tree: each item below the item it belongs to.	Yn dangos coeden: pob eitem o dan yr eitem y mae'n perthyn iddi.
+	Shows items around a central idea: the first item is the centre.	Yn dangos eitemau o amgylch syniad canolog: yr eitem gyntaf yw'r canol.
+	Shows items of equal weight as blocks in rows.	Yn dangos eitemau o bwysau cyfartal fel blociau mewn rhesi.
+	Shows overlapping ideas as overlapping circles.	Yn dangos syniadau sy'n gorgyffwrdd fel cylchoedd sy'n gorgyffwrdd.
+	Shows parts of a whole as quadrants.	Yn dangos rhannau o gyfanwaith fel pedrannau.
+	Shows parts that build on each other, largest at the bottom.	Yn dangos rhannau sy'n adeiladu ar ei gilydd, y mwyaf ar y gwaelod.
+	Shows steps in order, left to right, with arrows between them.	Yn dangos camau mewn trefn, o'r chwith i'r dde, gyda saethau rhyngddynt.
+	Shows steps that repeat, around a circle.	Yn dangos camau sy'n ailadrodd, o amgylch cylch.
+	Shrink Font 1 Point	Crebachu'r ffont 1 pwynt
+	Shrink Selection	Crebachu'r dewis
+	Shrink text	Crebachu testun
+	Side to Side	Ochr yn ochr
+	Side\nto Side	Ochr\nyn ochr
+	Sides of a right triangle	Ochrau triongl ongl sgwâr
+	Signature Line	Llinell llofnod
+	Sine and cosine series of f(x)	Cyfresi sin a chosin f(x)
+	Sine Function	Ffwythiant sin
+	Sine theta	Sin theta
+	Single	Sengl
+	Single Brackets	Cromfachau sengl
+	Single Closing Quote	Dyfynnod cau sengl
+	Single label	Label sengl
+	Single Left Angle	Ongl chwith sengl
+	Single Left Bar	Bar chwith sengl
+	Single Left Brace	Cromfach gyrliog chwith sengl
+	Single Left Bracket	Cromfach sgwâr chwith sengl
+	Single Left Parenthesis	Cromfach gron chwith sengl
+	Single Opening Quote	Dyfynnod agor sengl
+	Single Right Brace	Cromfach gyrliog dde sengl
+	Single Right Bracket	Cromfach sgwâr dde sengl
+	Single Right Parenthesis	Cromfach gron dde sengl
+	Single Spacing	Bylchu sengl
+	SIST02	SIST02
+	Site name	Enw'r wefan
+	Size	Maint
+	Size (pt):	Maint (pt):
+	Size and Crop…	Maint a thocio…
+	Size:	Maint:
+	Sketchbook	Llyfr brasluniau
+	Skewed Fraction	Ffracsiwn gogwydd
+	Skip citations & bibliography	Hepgor dyfyniadau a llyfryddiaeth
+	Skip Citations and Bibliography	Hepgor dyfyniadau a llyfryddiaeth
+	Skip Record If	Hepgor cofnod os
+	Skip Record If…	Hepgor cofnod os…
+	Slant Down	Goleddf i lawr
+	Slant Up	Goleddf i fyny
+	Small Caps	Priflythrennau bach
+	Small caps	Priflythrennau bach
+	Small change	Newid bach
+	Smart quotes instead of straight quotes	Dyfynodau clyfar yn lle dyfynodau syth
+	SmartArt	SmartArt
+	SmartArt Design	Dylunio SmartArt
+	SmartArt Styles	Arddulliau SmartArt
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Sgrolio a chwyddo llyfn, a dewislenni a botymau sy'n pylu i mewn. Mae I ffwrdd yn dangos pob newid ar unwaith.
+	Soft Edges	Ymylon meddal
+	Soft Glow	Tywyn meddal
+	Solid Accent	Acen solet
+	Sort	Trefnu
+	Sort by	Trefnu yn ôl
+	Sort order:	Trefn:
+	Sort Records	Trefnu cofnodion
+	Source code: github.com/chatraweechai/doc4me	Cod ffynhonnell: github.com/chatraweechai/doc4me
+	Source Manager	Rheolwr ffynonellau
+	Source type:	Math o ffynhonnell:
+	Sources in this document:	Ffynonellau yn y ddogfen hon:
+	South	De
+	Space	Bwlch
+	Space after	Bwlch ar ôl
+	Space after: {pt} pt	Bwlch ar ôl: {pt} pt
+	Space before	Bwlch cyn
+	Space before/after:	Bwlch cyn/ar ôl:
+	Space before: {pt} pt	Bwlch cyn: {pt} pt
+	Spaces	Bylchau
+	Spacing	Bylchu
+	Spacing (pt):	Bylchu (pt):
+	Spacing:	Bylchu:
+	Spanish	Sbaeneg
+	Spanish (Mexico)	Sbaeneg (Mecsico)
+	Spanish (Spain)	Sbaeneg (Sbaen)
+	Sparse Matrices	Matricsau gwasgaredig
+	Special	Arbennig
+	Special Characters	Nodau arbennig
+	Specify height:	Pennu uchder:
+	Speech	Lleferydd
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Caiff lleferydd ei adnabod ar y cyfrifiadur hwn (whisper.cpp); nid oes dim yn cael ei anfon ar-lein.
+	Speed	Cyflymder
+	Spelling	Sillafu
+	Spelling & Grammar	Sillafu a gramadeg
+	Spelling &\nGrammar	Sillafu a\ngramadeg
+	Spelling and grammar are checked in English (United States).	Caiff sillafu a gramadeg eu gwirio yn Saesneg (Unol Daleithiau).
+	Spelling Suggestions	Awgrymiadau sillafu
+	Spike	Pigyn
+	Split	Hollti
+	Split apart page break and paragraph mark	Gwahanu toriad tudalen a marc paragraff
+	Split Cells	Hollti celloedd
+	Split Table	Hollti tabl
+	Spreadsheet Table	Tabl taenlen
+	Square	Sgwâr
+	Square Root	Ail isradd
+	Square Root with Degree	Isradd gyda gradd
+	Square Union	Uniad sgwâr
+	Stack Object	Gwrthrych pentwr
+	Stack Object (Three)	Gwrthrych pentwr (tri)
+	Stacked	Wedi'u pentyrru
+	Stacked Bar	Bar wedi'i bentyrru
+	Stacked Column	Colofn wedi'i phentyrru
+	Stacked Fraction	Ffracsiwn wedi'i bentyrru
+	Stacked, no bar	Wedi'i bentyrru, dim bar
+	Standard	Safonol
+	Standard and Contextual	Safonol a chyd-destunol
+	Standard Colors	Lliwiau safonol
+	Standard Only	Safonol yn unig
+	Star	Seren
+	Start at:	Dechrau yn:
+	Start Enforcing Protection	Dechrau gorfodi diogelu
+	Start Mail Merge	Dechrau cyfuno post
+	Start Mail\nMerge	Dechrau cyfuno\npost
+	State	Sir/Talaith
+	Statement   5.50" × 8.50"	Statement   5.50" × 8.50"
+	Statistics	Ystadegau
+	Status Bar	Bar statws
+	Statutes	Statudau
+	Stop	Stopio
+	Stop Protection	Stopio diogelu
+	Stop Reading	Stopio darllen
+	Stopped	Wedi stopio
+	Store	Siop
+	Straight Arrow Connector	Cysylltydd saeth syth
+	Straight Connector	Cysylltydd syth
+	Strikethrough	Llinell drwodd
+	Stroke {n} of {total}	Strôc {n} o {total}
+	Strong	Cryf
+	Structure Actions	Gweithredoedd strwythur
+	Structures	Strwythurau
+	Studio	Stiwdio
+	Studio cover	Clawr stiwdio
+	Studio handbook (sample)	Llawlyfr stiwdio (sampl)
+	Style	Arddull
+	Style based on:	Arddull yn seiliedig ar:
+	Style Inspector	Archwiliwr arddulliau
+	Style Set	Set arddulliau
+	Style:	Arddull:
+	Style: APA	Arddull: APA
+	Style: {style}	Arddull: {style}
+	Styles	Arddulliau
+	Styles Pane	Cwarel arddulliau
+	Styles:	Arddulliau:
+	Subentry:	Is-gofnod:
+	Subject	Pwnc
+	Subscript	Isysgrif
+	Subscript-Superscript	Isysgrif-uwchysgrif
+	Subscripts and Superscripts	Isysgrifau ac uwchysgrifau
+	Subset:	Is-set:
+	Substituted font	Ffont amnewid
+	Subtitle	Is-deitl
+	Subtle Emphasis	Pwyslais cynnil
+	Subtle Reference	Cyfeiriad cynnil
+	Sum	Cyfanswm
+	Sum of cosines	Swm cosinau
+	Sum or difference of sines	Swm neu wahaniaeth sinau
+	Summation	Symiant
+	Summation from 0 to n	Symiant o 0 i n
+	Summation over binomials	Symiant dros finomialau
+	Summation with Limits	Symiant gyda therfannau
+	Summation with Lower Limit	Symiant gyda therfan isaf
+	Summation with Subscript Limit	Symiant gyda therfan isysgrif
+	Summation with Subscript-Superscript Limits	Symiant gyda therfannau isysgrif-uwchysgrif
+	Summations	Symiannau
+	Superscript	Uwchysgrif
+	Suppress line numbers	Atal rhifau llinell
+	Surface Integral	Integryn arwyneb
+	Surface Integral with Limits	Integryn arwyneb gyda therfannau
+	Surface Integral with Stacked Limits	Integryn arwyneb gyda therfannau wedi'u pentyrru
+	Swap footnotes and endnotes	Cyfnewid troednodiadau ac ôl-nodiadau
+	Swedish	Swedeg
+	Switch Modes	Newid moddau
+	Switch Windows	Newid ffenestri
+	Switch\nModes	Newid\nmoddau
+	Symbol	Symbol
+	Symbol Font	Ffont symbolau
+	Symbols	Symbolau
+	Synchronous Scrolling	Sgrolio cydamserol
+	Synonyms	Cyfystyron
+	System	System
+	Tab	Tab
+	Tab Character	Nod tab
+	Tab character	Nod tab
+	Tab characters	Nodau tab
+	Tab leader:	Arweinydd tab:
+	Tab stop position:	Safle'r stop tab:
+	Tab stops to be cleared:	Stopiau tab i'w clirio:
+	Table	Tabl
+	Table AutoFormat	Awtofformatio tabl
+	Table AutoFormat…	Awtofformatio tabl…
+	Table Column Width	Lled colofn tabl
+	Table Design	Dylunio tabl
+	Table direction:	Cyfeiriad y tabl:
+	Table entry fields	Meysydd cofnod tabl
+	Table Grid	Grid tabl
+	Table identifier:	Dynodwr tabl:
+	Table Layout	Cynllun tabl
+	Table of Authorities	Tabl awdurdodau
+	Table of Contents	Tabl cynnwys
+	Table of Contents Options	Opsiynau tabl cynnwys
+	Table of Contents Styles	Arddulliau tabl cynnwys
+	Table of Figures	Tabl ffigurau
+	Table of Figures Options	Opsiynau tabl ffigurau
+	Table of\nContents	Tabl\ncynnwys
+	Table Positioning	Lleoli tabl
+	Table Properties	Priodweddau'r tabl
+	Table Row Height	Uchder rhes tabl
+	Table style	Arddull tabl
+	Table Style Options	Opsiynau arddull tabl
+	Table Styles	Arddulliau tabl
+	Table styles:	Arddulliau tabl:
+	Tables	Tablau
+	Tabloid   11.00" × 17.00"	Tabloid   11.00" × 17.00"
+	Tabs	Tabiau
+	Tabs…	Tabiau…
+	Tabular List	Rhestr dablaidd
+	Tag	Tag
+	Tangent formula	Fformiwla tangiad
+	Tangent Function	Ffwythiant tangiad
+	TC entry fields	Meysydd cofnod TC
+	Technology	Technoleg
+	Templates	Templedi
+	Templates and Add-ins	Templedi ac ychwanegion
+	Text	Testun
+	Text Box	Blwch testun
+	Text boxes	Blychau testun
+	Text Direction	Cyfeiriad testun
+	Text Effects	Effeithiau testun
+	Text Effects and Typography	Effeithiau testun a theipograffeg
+	Text Fill	Llenwad testun
+	Text from File	Testun o ffeil
+	Text Highlight Color	Lliw amlygu testun
+	Text indent at:	Mewnoli testun yn:
+	Text isn't squeezed to fit its cell yet.	Nid yw testun yn cael ei wasgu i ffitio ei gell eto.
+	Text Outline	Amlinell testun
+	Text over Colon Equal	Testun dros colon hafal
+	Text over Equal	Testun dros hafal
+	Text Pane	Cwarel testun
+	Text size	Maint testun
+	Text snaps to characters	Testun yn snapio i nodau
+	Text to display:	Testun i'w ddangos:
+	Text Wrapping	Lapio testun
+	Text wrapping:	Lapio testun:
+	Text:	Testun:
+	Text\nBox	Blwch\ntestun
+	Text\nDirection	Cyfeiriad\ntestun
+	Thai	Thai
+	Thai Distributed	Thai wedi'i ddosbarthu
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Nid yw'r fformat hwnnw'n cadw popeth, felly mae'r ddogfen ar agor o hyd. Cadwch hi fel dogfen Word (.docx) i barhau.
+	That isn't the web address or embed code of an online video.	Nid cyfeiriad gwe na chod mewnblannu fideo ar-lein yw hwnnw.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Nid yw'r cyfrinair hwnnw'n gywir. Gwiriwch ef (mae cyfrineiriau'n sensitif i briflythrennau) a rhowch gynnig arall arni.
+	The clipboard is empty.	Mae'r clipfwrdd yn wag.
+	The date it is today	Dyddiad heddiw
+	The document contains no tracked changes.	Nid yw'r ddogfen yn cynnwys unrhyw newidiadau wedi'u tracio.
+	The document has no bookmarks yet.	Nid oes gan y ddogfen nodau tudalen eto.
+	The document is read only, except for regions marked editable.	Mae'r ddogfen yn ddarllen yn unig, ac eithrio rhanbarthau wedi'u marcio'n olygadwy.
+	The document will be saved with a password. Save it to protect it.	Bydd y ddogfen yn cael ei chadw gyda chyfrinair. Cadwch hi i'w diogelu.
+	The first word of a sentence starts with a capital.	Mae gair cyntaf brawddeg yn dechrau â phriflythyren.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	mae'r lwfans dyddiol rhad ac am ddim wedi'i ddefnyddio (rhowch gynnig arall yfory, neu rhowch gyfeiriad e-bost)
+	the LibreTranslate server	y gweinydd LibreTranslate
+	The Mail Merge Helper sets up a merge in three steps.	Mae'r Cynorthwyydd cyfuno post yn gosod cyfuno mewn tri cham.
+	The new style takes the formatting of the current paragraph.	Mae'r arddull newydd yn cymryd fformatio'r paragraff cyfredol.
+	The password is optional; without it anyone can stop the protection.	Mae'r cyfrinair yn ddewisol; hebddo gall unrhyw un stopio'r diogelu.
+	The password is removed. Save the document to keep the change.	Mae'r cyfrinair wedi'i dynnu. Cadwch y ddogfen i gadw'r newid.
+	The passwords don't match.	Nid yw'r cyfrineiriau'n cyfateb.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Dewisir yr argraffydd, argraffu dwyochrog a thudalennau fesul dalen yn y ddeialog honno.
+	The recipient-list field that fills each part of an address block and greeting line.	Maes y rhestr derbynwyr sy'n llenwi pob rhan o floc cyfeiriad a llinell gyfarch.
+	The same word twice in a row.	Yr un gair ddwywaith yn olynol.
+	The spelling and grammar check is complete.	Mae'r gwiriad sillafu a gramadeg wedi'i gwblhau.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Nid yw deialog ffeiliau'r system ar gael, felly mae Doc4Me yn dangos ei un ei hun. I gael deialog y system, gosodwch borth dewis ffeiliau (fel xdg-desktop-portal-gtk) neu zenity.
+	The text is sent to {service} to be translated.	Anfonir y testun at {service} i'w gyfieithu.
+	The time right now	Yr amser ar hyn o bryd
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Mae'r fideo'n ymddangos fel llun yn y ddogfen. Cliciwch ddwywaith arno i'w wylio yn eich porwr.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Caiff y ddogfen gyfan ei chyfieithu i ddogfen newydd, sy'n disodli'r un hon. Cadwch eich gwaith yn gyntaf.
+	Theme Colors	Lliwiau'r thema
+	Theme Fonts	Ffontiau'r thema
+	Theme List	Rhestr themâu
+	Themes	Themâu
+	Then by	Yna yn ôl
+	Then insert:	Yna mewnosod:
+	There's no text to translate.	Nid oes testun i'w gyfieithu.
+	Thesaurus	Thesawrws
+	These marks show even when Show/Hide ¶ is off.	Mae'r marciau hyn yn ymddangos hyd yn oed pan fo Dangos/Cuddio ¶ wedi'i ddiffodd.
+	These merge fields aren't in the recipient list:	Nid yw'r meysydd cyfuno hyn yn y rhestr derbynwyr:
+	These settings will be used for new documents.	Defnyddir y gosodiadau hyn ar gyfer dogfennau newydd.
+	Thick	Trwchus
+	Thickness	Trwch
+	This Device…	Y ddyfais hon…
+	This document	Y ddogfen hon
+	This field has no options.	Nid oes gan y maes hwn opsiynau.
+	This folder can't be read: {error}	Ni ellir darllen y ffolder hon: {error}
+	This font has no characters to show.	Nid oes gan y ffont hwn nodau i'w dangos.
+	This page	Y dudalen hon
+	This password type isn't supported.	Nid yw'r math hwn o gyfrinair yn cael ei gefnogi.
+	This point forward	O'r pwynt hwn ymlaen
+	This section	Yr adran hon
+	Three	Tri
+	Through	Drwodd
+	Tight	Tynn
+	Tilde	Tild
+	Tips ({n})	Awgrymiadau ({n})
+	Title	Teitl
+	Title from the document properties	Teitl o briodweddau'r ddogfen
+	Title:	Teitl:
+	To	At
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	I agor dogfennau Word gyda Doc4Me yn ddiofyn: dewiswch un yn Finder, dewiswch File › Get Info, dewiswch Doc4Me o dan Open with, yna cliciwch Change All.
+	To:	At:
+	TOA Heading	Pennawd tabl awdurdodau
+	TOC Heading	Pennawd tabl cynnwys
+	TOC {n}	Tabl cynnwys {n}
+	Today	Heddiw
+	tOGGLE cASE	tOGLO pRIFLYTHRENNAU
+	Toggle Check Box	Toglo blwch ticio
+	Toggle Field Codes	Toglo codau maes
+	Toggle Unicode Character	Toglo nod Unicode
+	Tools	Offer
+	Top	Brig
+	Top and Bottom	Brig a gwaelod
+	Top Border	Ffin uchaf
+	Top Margin	Ymyl uchaf
+	Top of Next Page	Brig y dudalen nesaf
+	Top of Page	Brig y dudalen
+	Top of Previous Page	Brig y dudalen flaenorol
+	Top of the Window	Brig y ffenestr
+	Top:	Brig:
+	Total	Cyfanswm
+	Total Row	Rhes gyfanswm
+	Track Changes	Tracio newidiadau
+	Track Changes Options	Opsiynau tracio newidiadau
+	Track changes while editing	Tracio newidiadau wrth olygu
+	Track Changes: On	Tracio newidiadau: Ymlaen
+	Track formatting	Tracio fformatio
+	Track\nChanges	Tracio\nnewidiadau
+	Track\nChanges ✓	Tracio\nnewidiadau ✓
+	Tracked changes	Newidiadau wedi'u tracio
+	Tracking	Tracio
+	Trademark	Nod masnach
+	Trademark Sign	Arwydd nod masnach
+	Transform	Trawsffurfio
+	Translate	Cyfieithu
+	Translate Document	Cyfieithu'r ddogfen
+	Translating {done} of {total}	Wrthi'n cyfieithu {done} o {total}
+	Translation service	Gwasanaeth cyfieithu
+	Translator	Cyfieithydd
+	Transparency	Tryloywder
+	Transparency:	Tryloywder:
+	Transport	Trafnidiaeth
+	Treatises	Traethodau
+	Triangle	Triongl
+	Triangle Down	Triongl i lawr
+	Triangle Up	Triongl i fyny
+	Trigonometric Functions	Ffwythiannau trigonometrig
+	Triple	Triphlyg
+	Triple Dot	Dot triphlyg
+	Triple Integral	Integryn triphlyg
+	Triple Integral with Limits	Integryn triphlyg gyda therfannau
+	Triple Integral with Stacked Limits	Integryn triphlyg gyda therfannau wedi'u pentyrru
+	Trust Center	Canolfan ymddiriedaeth
+	Tue	Maw
+	Turabian	Turabian
+	Turkish	Tyrceg
+	Two	Dau
+	Type	Math
+	Type a command, e.g. "insert table"	Teipiwch orchymyn, e.e. "mewnosod tabl"
+	Type a New List	Teipio rhestr newydd
+	Type a New List…	Teipio rhestr newydd…
+	Type at least one recipient.	Teipiwch o leiaf un derbynnydd.
+	Type equations in LaTeX	Teipio hafaliadau yn LaTeX
+	Type equations in the linear format (UnicodeMath)	Teipio hafaliadau yn y fformat llinol (UnicodeMath)
+	Type in Equation	Teipio yn yr hafaliad
+	Type normal (non-math) text in the equation	Teipio testun arferol (nid mathemateg) yn yr hafaliad
+	Type Text	Teipio testun
+	Type the categories down the side and a column of values per series.	Teipiwch y categorïau i lawr yr ochr a cholofn o werthoedd fesul cyfres.
+	Type the field's name and its switches, for example PAGE \\* roman.	Teipiwch enw'r maes a'i switshis, er enghraifft PAGE \\* roman.
+	Type the password to stop the protection.	Teipiwch y cyfrinair i stopio'r diogelu.
+	Type the recipients, or load them from a file.	Teipiwch y derbynwyr, neu llwythwch nhw o ffeil.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Teipiwch enw tag y ffynhonnell. Gallwch ychwanegu rhagor o wybodaeth at y ffynhonnell hon yn nes ymlaen drwy olygu'r ffynhonnell.
+	Type:	Math:
+	Typing	Teipio
+	Typing replaces selected text	Mae teipio'n amnewid y testun a ddewiswyd
+	Ukrainian	Wcreineg
+	Unchecked symbol	Symbol heb ei dicio
+	Underbar	Bar oddi tano
+	Underbrace	Cromfach gyrliog oddi tano
+	Underline	Tanlinellu
+	Underline color	Lliw tanlinellu
+	Underline Words Only	Tanlinellu geiriau yn unig
+	Undo	Dadwneud
+	Undo Stroke	Dadwneud strôc
+	Undo {action}	Dadwneud {action}
+	Unformatted Text	Testun heb ei fformatio
+	Ungroup	Dadgrwpio
+	Union	Uniad
+	Union of intersections	Uniad croestoriadau
+	Union with Limits	Uniad gyda therfannau
+	Union with Lower Limit	Uniad gyda therfan isaf
+	Union with Plus	Uniad gyda plws
+	Union with Subscript-Superscript Limits	Uniad gyda therfannau isysgrif-uwchysgrif
+	Unions and Intersections	Uniadau a chroestoriadau
+	Unlink Fields	Datgysylltu meysydd
+	Unlink\nCitations	Datgysylltu\ndyfyniadau
+	Unlock Fields	Datgloi meysydd
+	Up	I fyny
+	Up Diagonal Dots	Dotiau croeslin i fyny
+	Up one level	I fyny un lefel
+	Update Field	Diweddaru'r maes
+	Update fields before printing	Diweddaru meysydd cyn argraffu
+	Update Index	Diweddaru'r mynegai
+	Update Style to Match Selection	Diweddaru'r arddull i gyfateb i'r dewis
+	Update Styles from Template	Diweddaru arddulliau o'r templed
+	Update Table	Diweddaru'r tabl
+	Update Table of Figures	Diweddaru'r tabl ffigurau
+	Update to Match	Diweddaru i gyfateb
+	Update to Match Selection	Diweddaru i gyfateb i'r dewis
+	UPPERCASE	PRIFLYTHRENNAU
+	URGENT	BRYS
+	URL	URL
+	Use "a" before a consonant sound	Defnyddio "a" cyn sain cytsain
+	Use "an" before a vowel sound	Defnyddio "an" cyn sain llafariad
+	Use an Existing List…	Defnyddio rhestr sy'n bodoli…
+	Use passim (five or more pages)	Defnyddio passim (pum tudalen neu fwy)
+	Use system setting	Defnyddio gosodiad y system
+	Use the Insert key to switch overtype on and off	Defnyddio'r fysell Insert i droi trosysgrifo ymlaen ac i ffwrdd
+	Use wildcards	Defnyddio nodau chwilio
+	User Name	Enw defnyddiwr
+	User name:	Enw defnyddiwr:
+	Username	Enw defnyddiwr
+	Value	Gwerth
+	Vector A	Fector A
+	Vector AB	Fector AB
+	Version	Fersiwn
+	Version History	Hanes fersiynau
+	Version {version} ({build})	Fersiwn {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Cedwir fersiynau tra bo'r ddogfen ar agor (nid oes gan ffeil .docx fersiynau).
+	Vertical	Fertigol
+	Vertical Alignment	Aliniad fertigol
+	Vertical alignment:	Aliniad fertigol:
+	Vertical Bars	Barrau fertigol
+	Vertical Dots	Dotiau fertigol
+	Vertical spacing:	Bylchu fertigol:
+	Vietnamese	Fietnameg
+	View	Gweld
+	View Alt Text…	Gweld testun amgen…
+	View Gridlines	Gweld llinellau grid
+	View Side by Side	Gweld ochr yn ochr
+	View State	Cyflwr gweld
+	Views	Golygon
+	Visual effects	Effeithiau gweledol
+	Voice	Llais
+	Volume	Cyfrol
+	Volume Integral	Integryn cyfaint
+	Volume Integral with Limits	Integryn cyfaint gyda therfannau
+	Volume Integral with Stacked Limits	Integryn cyfaint gyda therfannau wedi'u pentyrru
+	W:	Ll:
+	Waiting for Zotero…	Wrthi'n aros am Zotero…
+	Warm Gradient with Outline	Graddiant cynnes gydag amlinell
+	Warnings ({n})	Rhybuddion ({n})
+	Watermark	Dyfrnod
+	Wave	Ton
+	Weather	Tywydd
+	web access isn't available here	nid oes mynediad i'r we ar gael yma
+	Web Layout	Cynllun gwe
+	Web page (*.html)	Tudalen we (*.html)
+	Web\nLayout	Cynllun\ngwe
+	Website	Gwefan
+	Wed	Mer
+	Weight	Pwysau
+	West	Gorllewin
+	When merging records	Wrth gyfuno cofnodion
+	When this document was first created	Pryd y crëwyd y ddogfen hon gyntaf
+	When this document was most recently printed	Pryd yr argraffwyd y ddogfen hon ddiwethaf
+	When this document was most recently saved	Pryd y cadwyd y ddogfen hon ddiwethaf
+	White Space	Gofod gwyn
+	White space	Gofod gwyn
+	Who the document properties name as author	Pwy y mae priodweddau'r ddogfen yn ei enwi'n awdur
+	Whole document	Y ddogfen gyfan
+	Whole page	Y dudalen gyfan
+	Whole Table	Y tabl cyfan
+	Whole words	Geiriau cyfan
+	Wide	Llydan
+	Widow/Orphan Control	Rheoli gweddwon/amddifaid
+	Widow/Orphan control	Rheoli gweddwon/amddifaid
+	Width and spacing	Lled a bylchu
+	Width:	Lled:
+	Wildcards (regex)	Nodau chwilio (regex)
+	Window	Ffenestr
+	With:	Gyda:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013 a diweddarach
+	Word 97–2003	Word 97–2003
+	Word Count	Cyfrif geiriau
+	Word document	Dogfen Word
+	Word document (*.docx)	Dogfen Word (*.docx)
+	Word forms	Ffurfiau geiriau
+	Word Left	Gair i'r chwith
+	Word level	Lefel geiriau
+	Word Right	Gair i'r dde
+	Word XML Document (*.xml)	Dogfen XML Word (*.xml)
+	WordArt	WordArt
+	WordArt Styles	Arddulliau WordArt
+	Words	Geiriau
+	Words only	Geiriau yn unig
+	Wrap Text	Lapio testun
+	Wrap text	Lapio testun
+	Wrap Text Sides	Ochrau lapio testun
+	Wrap\nText	Lapio\ntestun
+	Write & Insert Fields	Ysgrifennu a mewnosod meysydd
+	Write a reply	Ysgrifennu ateb
+	Write math here with the mouse or a pen.	Ysgrifennwch fathemateg yma gyda'r llygoden neu ben.
+	Writing Style: Grammar	Arddull ysgrifennu: Gramadeg
+	x bar	x bar
+	Year	Blwyddyn
+	Yes	Ie
+	Yields	Yn rhoi
+	Your changes will be lost if you don't save them.	Bydd eich newidiadau'n cael eu colli os na fyddwch yn eu cadw.
+	Your system doesn't report an animation setting, so animation effects stay on.	Nid yw eich system yn adrodd gosodiad animeiddio, felly mae effeithiau animeiddio'n aros ymlaen.
+	Your system has animation effects turned off.	Mae effeithiau animeiddio wedi'u diffodd ar eich system.
+	Your system has animation effects turned on.	Mae effeithiau animeiddio wedi'u troi ymlaen ar eich system.
+	Zoom	Chwyddo
+	Zoom In	Chwyddo i mewn
+	Zoom Out	Chwyddo allan
+	Zoom to Page	Chwyddo i'r dudalen
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: diddymwyd
+	Zotero: done	Zotero: wedi gorffen
+	{cols}×{rows} Table	Tabl {cols}×{rows}
+	{contributors} contributors · {commits} commits	{contributors} cyfrannwr · {commits} ymrwymiad
+	{count} items highlighted	{count} eitem wedi'u hamlygu
+	{count} of {total} pages will print	Bydd {count} o {total} tudalen yn argraffu
+	{count} paragraphs were changed.	Newidiwyd {count} paragraff.
+	{count} records; fields: {fields}	{count} cofnod; meysydd: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Nid yw {fonts} wedi'i osod ar y cyfrifiadur hwn, felly dangosir y ddogfen hon gyda {with}. Gall llinellau a thudalennau dorri'n wahanol nag â'r ffont gwreiddiol.
+	{group} settings	Gosodiadau {group}
+	{key}+Click to follow link	{key}+Clic i ddilyn y ddolen
+	{language} is now the document's default language.	{language} yw iaith ddiofyn y ddogfen bellach.
+	{name} (Press ENTER to Insert)	{name} (Pwyswch ENTER i fewnosod)
+	{name} already exists. Choose Save again to replace it.	Mae {name} yn bodoli eisoes. Dewiswch Cadw eto i'w amnewid.
+	{name} can't be a folder's name.	Ni all {name} fod yn enw ffolder.
+	{name} is protected with a password.	Mae {name} wedi'i ddiogelu â chyfrinair.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	Ychwanegwyd {name}. Mae ei facros o dan Fy ychwanegion a Gweld › Macros.
+	{name} wasn't found.	Ni chanfuwyd {name}.
+	{n} entries marked.	{n} cofnod wedi'u marcio.
+	{n} lines	{n} llinell
+	{n} of {of} recipients	{n} o {of} derbynnydd
+	{n} pt	{n} pt
+	{n} records	{n} cofnod
+	{n} revisions	{n} diwygiad
+	{selected} of {words} words	{selected} o {words} gair
+	{size} pt	{size} pt
+	{words} words	{words} gair
+	{w} × {h} in	{w} × {h} modf
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	Nid yw “{text}” ({row}, {series}) yn rhif.
+	← Find	← Canfod
+	✓ None	✓ Dim
+	➕ New comment	➕ Sylw newydd
+	📂  Browse…	📂  Pori…
+	Add Help Text…	Ychwanegu testun cymorth…
+	AutoText entry:	Cofnod Awtodestun:
+	Calculate on exit	Cyfrifo wrth adael
+	Calculation	Cyfrifiad
+	Check Box Form Field	Maes ffurflen blwch ticio
+	Check Box Form Field Options	Opsiynau maes ffurflen blwch ticio
+	Check box	Blwch ticio
+	Check box enabled	Blwch ticio wedi'i alluogi
+	Check box size:	Maint y blwch ticio:
+	Checked	Wedi'i dicio
+	Current date	Dyddiad cyfredol
+	Current time	Amser cyfredol
+	Default value:	Gwerth diofyn:
+	Drop-Down Form Field	Maes ffurflen cwymplen
+	Drop-Down Form Field Options	Opsiynau maes ffurflen cwymplen
+	Drop-down	Cwymplen
+	Drop-down enabled	Cwymplen wedi'i galluogi
+	Drop-down item:	Eitem cwymplen:
+	Fill In Form Field	Maes ffurflen llenwi
+	Fill-in enabled	Llenwi wedi'i alluogi
+	Form Field	Maes ffurflen
+	Form Field Help Text	Testun cymorth maes ffurflen
+	Form Field Options	Opsiynau maes ffurflen
+	Form Field Shading	Graddliwio meysydd ffurflen
+	Form Field at Selection	Maes ffurflen yn y dewis
+	Help Key (F1)	Bysell gymorth (F1)
+	Insert Form Field	Mewnosod maes ffurflen
+	Items in drop-down list:	Eitemau yn y gwymplen:
+	Legacy Tools	Offer etifeddol
+	Maximum length:	Hyd mwyaf:
+	Next Form Field	Maes ffurflen nesaf
+	Not checked	Heb ei dicio
+	Put the caret on a form field first.	Rhowch y cyrchwr ar faes ffurflen yn gyntaf.
+	Regular text	Testun rheolaidd
+	Reset Form Fields	Ailosod meysydd ffurflen
+	Text Form Field	Maes ffurflen testun
+	Text Form Field Options	Opsiynau maes ffurflen testun
+	Type your own:	Teipiwch eich un eich hun:
+	Unlimited	Diderfyn
+	Protected sections:	Adrannau wedi'u diogelu:
+	Section Protection	Diogelu adrannau
+	Section {n}	Adran {n}
+	Select sections…	Dewis adrannau…
+	AutoSummarize	Awtogrynhoi
+	Create a new document and put the summary there	Creu dogfen newydd a rhoi'r crynodeb yno
+	Highlight key points	Amlygu'r prif bwyntiau
+	Insert an executive summary or abstract at the top of the document	Mewnosod crynodeb gweithredol neu haniaeth ar frig y ddogfen
+	Length of summary	Hyd y crynodeb
+	Percent of original:	Canran o'r gwreiddiol:
+	Summary: {words} of {of} words	Crynodeb: {words} o {of} gair
+	Type of summary	Math o grynodeb
+	Update document statistics	Diweddaru ystadegau'r ddogfen
+	{n} sentences	{n} brawddeg
+	{n} words or less	{n} gair neu lai
+	At:	Yn:
+	Distance from text:	Pellter o'r testun:
+	Format Frame	Fformatio ffrâm
+	Format Frame…	Fformatio ffrâm…
+	Frame	Ffrâm
+	Frame…	Ffrâm…
+	Insert Frame	Mewnosod ffrâm
+	Lock anchor	Cloi'r angor
+	Remove Frame	Tynnu'r ffrâm
+	Text wrapping	Lapio testun
+	Chinese Conversion	Trosi Tsieinëeg
+	Chinese Conversion…	Trosi Tsieinëeg…
+	Converted {n} characters	Troswyd {n} nod
+	Simplified Chinese to Traditional Chinese	Tsieinëeg wedi'i symleiddio i Tsieinëeg draddodiadol
+	Simplified to Traditional	Wedi'i symleiddio i draddodiadol
+	Traditional Chinese to Simplified Chinese	Tsieinëeg draddodiadol i Tsieinëeg wedi'i symleiddio
+	Traditional to Simplified	Traddodiadol i wedi'i symleiddio
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Defnyddio amrywiadau nodau Taiwan, Hong Kong SAR a Macao SAR
+	Asian Layout	Cynllun Asiaidd
+	Fit Text	Ffitio testun
+	Fit Text…	Ffitio testun…
+	Two Lines in One	Dwy linell mewn un
+	Two Lines in One…	Dwy linell mewn un…
+	New text width (pt):	Lled testun newydd (pt):
+	Enclose in brackets	Amgáu mewn cromfachau
+	Bracket pair:	Pâr o gromfachau:
+	Typography	Teipograffeg
+	Character spacing control	Rheoli bylchu nodau
+	Don't compress	Peidio â chywasgu
+	Compress punctuation only	Cywasgu atalnodi yn unig
+	Compress punctuation and Japanese kana	Cywasgu atalnodi a kana Japaneg
+	First and last characters	Nodau cyntaf ac olaf
+	Strict	Llym
+	Cannot start a line:	Ni all ddechrau llinell:
+	Cannot end a line:	Ni all orffen llinell:
+	Japanese Find Options	Opsiynau canfod Japaneg
+	Sounds like (Japanese)	Swnio fel (Japaneg)
+	Match full/half width	Cyfateb lled llawn/hanner
+	Match hiragana/katakana	Cyfateb hiragana/katakana
+	Match small kana	Cyfateb kana bach
+	Match prolonged sound marks and dashes	Cyfateb marciau sain hir a thoriadau
+	Japanese Consistency Checker	Gwiriwr cysondeb Japaneg
+	Japanese Consistency Checker…	Gwiriwr cysondeb Japaneg…
+	No inconsistent spellings were found.	Ni chanfuwyd sillafiadau anghyson.
+	Pick the spelling to keep in each group.	Dewiswch y sillafiad i'w gadw ym mhob grŵp.
+	Bidirectional text	Testun deugyfeiriadol
+	Bidirectional Text	Testun deugyfeiriadol
+	Default direction:	Cyfeiriad diofyn:
+	Cursor movement:	Symudiad y cyrchwr:
+	Logical	Rhesymegol
+	Visual	Gweledol
+	Manage Fields	Rheoli meysydd
+	File locations	Lleoliadau ffeiliau
+	File Locations	Lleoliadau ffeiliau
+	Documents:	Dogfennau:
+	Pictures:	Lluniau:
+	The system's choice	Dewis y system
+	Show Repairs	Dangos atgyweiriadau
+	No repairs were needed.	Nid oedd angen atgyweirio dim.
+	These problems were found and repaired when the document was opened:	Canfuwyd ac atgyweiriwyd y problemau hyn pan agorwyd y ddogfen:
+	An unreadable entry in the file was skipped: {what}	Hepgorwyd cofnod annarllenadwy yn y ffeil: {what}
+	An unreadable part was left out: {what}	Gadawyd rhan annarllenadwy allan: {what}
+	Unreadable relationships were ignored: {what}	Anwybyddwyd perthnasoedd annarllenadwy: {what}
+	A missing part of an embedded object was left out: {what}	Gadawyd rhan goll o wrthrych wedi'i fewnblannu allan: {what}
+	Copy File	Copïo ffeil
+	Find Files	Canfod ffeiliau
+	Letter Wizard	Dewin llythyrau
+	Recipient's name:	Enw'r derbynnydd:
+	Salutation:	Cyfarchiad:
+	Subject:	Pwnc:
+	Complimentary closing:	Diweddglo:
+	Sender's name:	Enw'r anfonwr:
+	Job title:	Teitl swydd:
+	Company:	Cwmni:
+	Enclosures:	Amgaeadau:
+	Cc:	Cc:
+	Edit Links to Files	Golygu dolenni i ffeiliau
+	Source file	Ffeil ffynhonnell
+	Locked	Wedi'i gloi
+	Change Source	Newid ffynhonnell
+	This document has no links to files.	Nid oes gan y ddogfen hon ddolenni i ffeiliau.
+	Web options	Opsiynau gwe
+	Web Options	Opsiynau gwe
+	Allow PNG as a graphics format	Caniatáu PNG fel fformat graffeg
+	Rely on CSS for font formatting	Dibynnu ar CSS ar gyfer fformatio ffontiau
+	Rely on VML for displaying graphics in browsers	Dibynnu ar VML ar gyfer dangos graffeg mewn porwyr
+	Organize supporting files in a folder	Trefnu ffeiliau ategol mewn ffolder
+	Use long file names whenever possible	Defnyddio enwau ffeiliau hir pryd bynnag y bo modd
+	Screen size:	Maint y sgrin:
+	Pixels per inch:	Picseli fesul modfedd:
+	Hangul Hanja Conversion	Trosi Hangul Hanja
+	Hangul Hanja Conversion…	Trosi Hangul Hanja…
+	Hangul to Hanja	Hangul i Hanja
+	Hanja to Hangul	Hanja i Hangul
+	Put the caret in Korean text to choose its Hanja.	Rhowch y cyrchwr mewn testun Coreeg i ddewis ei Hanja.
+	The selection, or the whole document when nothing is selected.	Y dewis, neu'r ddogfen gyfan pan nad oes dim wedi'i ddewis.

@@ -1,0 +1,683 @@
+//! File tab (Backstage): new, open, save, export, print, properties; document inspection.
+
+use doc4me_doc::{Block, Document, StoryRef};
+use serde_json::{Value, json};
+
+use super::{pos_json, sel_result};
+use crate::{CmdError, CmdResult, CommandSpec, Session, p};
+
+/// Longest user name kept, in characters; longer names are cut, not refused.
+pub const MAX_AUTHOR_CHARS: usize = 255;
+
+/// Sets the user name that new tracked changes and comments are recorded under. The name is
+/// trimmed, stripped of control characters (they can't go into the saved XML) and cut to
+/// [`MAX_AUTHOR_CHARS`]; a blank name is refused so revisions always carry an author.
+pub(crate) fn set_author(s: &mut Session, v: &Value) -> CmdResult {
+    let name: String = p::req_str(v, "name")?.trim().chars().filter(|c| !c.is_control()).take(MAX_AUTHOR_CHARS).collect();
+    let name = name.trim_end();
+    if name.is_empty() {
+        return Err(CmdError::Params("`name` must not be blank".into()));
+    }
+    s.author = name.to_string();
+    let mut r = sel_result(s)?;
+    if let Some(o) = r.as_object_mut() {
+        o.insert("name".into(), json!(s.author));
+    }
+    Ok(r)
+}
+
+pub fn specs() -> Vec<CommandSpec> {
+    vec![
+        CommandSpec::new("file.new", "New", "File", new).key("Mod+N").params(r#"{"template"?: "blank|sample|letter|resume|report"}"#).pure(),
+        CommandSpec::new("file.open", "Open", "File", open)
+            .key("Mod+O / Mod+F12 / Mod+Alt+F2")
+            .params(r#"{"path": string, "data"?: base64 (the file's bytes; `path` then only names it), "password"?: string (for a password-protected Word document)}"#)
+            .pure(),
+        CommandSpec::new("file.letterWizard", "Letter Wizard", "File › New", letter_wizard)
+            .params(r#"{"senderName"?, "returnAddress"?, "date"?, "mailingInstructions"?, "recipientName"?, "recipientAddress"?, "attention"?, "subject"?, "salutation"?, "body"?, "closing"?, "senderJobTitle"?, "senderCompany"?, "senderInitials"?, "enclosures"?, "cc"?: string (lines separated by \n)} → a new letter from these; none of them opens the Letter Wizard"#)
+            .pure(),
+        CommandSpec::new("file.showRepairs", "Show Repairs", "File", show_repairs)
+            .params(r#"{} → {"repairs": [{"message": string with {what}, "what": string}]}: what opening the document had to repair or leave out (opening a damaged file shows them)"#)
+            .pure(),
+        CommandSpec::new("file.save", "Save", "File", save)
+            .key("Mod+S / Shift+F12 / Alt+Shift+F2")
+            .params(r#"{"path"?: string, "password"?: string (encrypt this and later saves with it, as file.encrypt does), "markup"?: bool (Print Markup for a PDF, PNG, HTML, Markdown or text copy: comments shown; default file.printMarkup)}"#)
+            .pure(),
+        CommandSpec::new("file.saveAs", "Save As", "File", save_as).key("F12").params(r#"{"path": string, "password"?: string, "markup"?: bool (as file.save)}"#).pure(),
+        // Pure: the password must not land in Repeat or a recorded macro, and it isn't an edit
+        // to undo; it marks the document as changed itself.
+        CommandSpec::new("file.encrypt", "Encrypt with Password", "File › Info › Protect Document", encrypt)
+            .params(r#"{"password": string (Word documents are saved encrypted with it) | null or "" (saved unencrypted)}"#)
+            .pure(),
+        CommandSpec::new("file.exportPdf", "Export PDF", "File › Export", |s, v| {
+            let path = p::req_str(v, "path")?;
+            let path = if path.to_ascii_lowercase().ends_with(".pdf") { path.to_string() } else { format!("{path}.pdf") };
+            let opts = export_options(s, v);
+            crate::io::save_path_with(std::path::Path::new(&path), &s.doc, None, &opts).map_err(CmdError::Failed)?;
+            Ok(json!({"path": path, "markup": opts.markup}))
+        })
+        .params(r#"{"path": string, "markup"?: bool (Print Markup: tracked changes marked up and each page scaled down beside the comments in balloons; default file.printMarkup)}"#)
+        .pure(),
+        CommandSpec::new("file.exportPng", "Export Page as PNG", "File › Export", export_png)
+            .params(r#"{"path": string, "page"?: n (1-based), "scale"?: px per pt, "markup"?: bool (the page with its comments in balloons beside it; default file.printMarkup)}"#)
+            .pure(),
+        CommandSpec::new("file.exportJpeg", "Export Page as JPEG", "File › Export", export_jpeg)
+            .params(
+                r#"{"path": string (.jpg is added unless it ends in .jpg or .jpeg), "page"?: n (1-based), "scale"?: px per pt, "quality"?: 1-100 (default 90), "markup"?: bool (the page with its comments in balloons beside it; default file.printMarkup)}"#,
+            )
+            .pure(),
+        // A print setting, like Word's: not part of the document, so no undo step.
+        CommandSpec::new("file.printMarkup", "Print Markup", "File › Print", |s, v| {
+            s.prefs.print_markup = p::bool(v, "value").unwrap_or(!s.prefs.print_markup);
+            Ok(json!({"value": s.prefs.print_markup}))
+        })
+        .params(r#"{"value"?: bool (omit to toggle)} — PDFs, prints and copies show comments (balloons beside each page; a list at the end of HTML, Markdown and text) and tracked changes"#)
+        .pure(),
+        CommandSpec::new("file.printPdf", "Print to PDF", "File › Print", crate::print::print_pdf_to_file)
+            .params(
+                r#"{"path": string, "range"?: "all" | "current" | "selection" (the pages the selection touches) | "custom", "pages"?: "1-3,5" (implies custom), "parity"?: "all" | "odd" | "even", "copies"?: 1-999, "collate"?: bool (default true)}"#,
+            )
+            .pure(),
+        CommandSpec::new("file.print", "Print", "File", |s, _| {
+            s.ui_requests.push(json!({"open": "print"}));
+            sel_result(s)
+        })
+        .key("Mod+P / Mod+Shift+F12 / Mod+F2 / Mod+Alt+I")
+        .pure(),
+        // Options › Advanced › Compatibility options: the layout options of this document that
+        // Doc4Me's layout follows.
+        CommandSpec::new("file.compatibilityOptions", "Compatibility Options", "File › Options › Advanced", |s, v| {
+            let mut changed = false;
+            for (k, f) in [("doNotUseHtmlParagraphAutoSpacing", 0), ("splitPageBreakAndParagraphMark", 1)] {
+                if let Some(b) = p::bool(v, k) {
+                    let x = if f == 0 { &mut s.doc.settings.add_para_spacing } else { &mut s.doc.settings.split_page_break_mark };
+                    changed |= *x != b;
+                    *x = b;
+                }
+            }
+            if changed {
+                s.relayout();
+            }
+            Ok(json!({
+                "mode": s.doc.settings.compat_mode,
+                "doNotUseHtmlParagraphAutoSpacing": s.doc.settings.add_para_spacing,
+                "splitPageBreakAndParagraphMark": s.doc.settings.split_page_break_mark,
+            }))
+        })
+        .params(r#"{"doNotUseHtmlParagraphAutoSpacing"?: bool (space after and before add up instead of the larger winning), "splitPageBreakAndParagraphMark"?: bool (a page break ending a paragraph takes its mark to the next page)} → the options and the compatibility mode (15: Word 2013 and later)"#),
+        // Options › Advanced › Font Substitution: the fonts the document names that aren't
+        // installed, each with the font shown instead; `convert` puts that font in their place.
+        CommandSpec::new("file.fontSubstitution", "Font Substitution", "File › Options › Advanced", font_substitution)
+            .params(r#"{"convert"?: [font name] (replace these missing fonts with their substitutes, Convert Permanently)} → {"fonts": [{"font", "substitute"}], "converted"}"#),
+        // F1: Help (Word's Help pane; Doc4Me's Help window).
+        CommandSpec::new("help.show", "Help", "Help", |s, _| {
+            s.ui_requests.push(json!({"open": "about"}));
+            sel_result(s)
+        })
+        .key("F1")
+        .pure(),
+        CommandSpec::new("file.close", "Close", "File", |s, _| {
+            s.ui_requests.push(json!({"close": true}));
+            sel_result(s)
+        })
+        .key("Mod+W / Mod+F4")
+        .pure(),
+        // Alt+F4: Word's Exit. Doc4Me has one document per window, so it closes it, asking first
+        // about unsaved changes, as Close does.
+        CommandSpec::new("file.exit", "Exit", "File", |s, _| {
+            s.ui_requests.push(json!({"close": true}));
+            sel_result(s)
+        })
+        .key(super::non_mac("Alt+F4"))
+        .pure(),
+        CommandSpec::new("file.properties", "Properties", "File › Info", properties)
+            .params(r#"{"title"?, "subject"?, "author"?, "keywords"?, "comments"?, "category"?, "custom"?: {name: string | null (removes)}}"#),
+        CommandSpec::new("file.info", "Info", "File", info).pure(),
+        CommandSpec::new("file.setAuthor", "User Name", "File › Options › General", set_author)
+            .params(r#"{"name": string (author of new tracked changes and comments)}"#)
+            .pure(),
+        CommandSpec::new("document.inspect", "Inspect Document", "Agents", inspect).params(r#"{"text"?: bool}"#).pure(),
+        CommandSpec::new("document.text", "Document Text", "Agents", |s, v| {
+            let story = super::story_param(s, v);
+            Ok(json!({"text": s.doc.plain_text(story)}))
+        })
+        .pure(),
+        CommandSpec::new("document.paragraph", "Paragraph Details", "Agents", paragraph).params(r#"{"path": [n], "story"?: Story}"#).pure(),
+        CommandSpec::new("document.selection", "Selection", "Agents", |s, _| {
+            let mut r = sel_result(s)?;
+            if let Some(o) = r.as_object_mut() {
+                o.insert("text".into(), json!(s.selected_text()));
+                o.insert("format".into(), super::format::state(s));
+            }
+            Ok(r)
+        })
+        .pure(),
+        CommandSpec::new("document.layout", "Layout Summary", "Agents", layout_summary).pure(),
+        CommandSpec::new("document.setText", "Replace Document Text", "Agents", |s, v| {
+            let text = p::req_str(v, "text")?;
+            let d = Document::from_text(text);
+            s.doc.body = d.body;
+            s.sel = crate::Selection::caret(s.doc.start_of(StoryRef::Body));
+            sel_result(s)
+        })
+        .params(r#"{"text": string}"#),
+    ]
+}
+
+fn new(s: &mut Session, v: &Value) -> CmdResult {
+    let doc = match p::str(v, "template").unwrap_or("blank") {
+        "sample" => crate::sample::sample_document(),
+        "letter" => crate::sample::letter(),
+        "resume" => crate::sample::resume(),
+        "report" => crate::sample::report(),
+        _ => {
+            // A blank document is written in the editing language (the templates' text is English).
+            let mut d = Document::new();
+            if let Some(lang) = &s.editing_lang {
+                d.styles.default_chr.lang = Some(lang.clone());
+            }
+            // Options › Advanced › Bidirectional text › Default direction: right to left.
+            if s.prefs.rtl_default {
+                d.styles.default_para.bidi = Some(true);
+            }
+            d
+        }
+    };
+    s.set_document(doc);
+    s.path = None;
+    sel_result(s)
+}
+
+fn open(s: &mut Session, v: &Value) -> CmdResult {
+    let Some(path) = p::str(v, "path") else {
+        s.ui_requests.push(json!({"open": "openFile"}));
+        return sel_result(s);
+    };
+    let password = p::str(v, "password");
+    let (mut doc, encrypted) = if let Some(data) = p::str(v, "data") {
+        let bytes = super::insert::base64_decode(data).ok_or_else(|| CmdError::Params("bad base64".into()))?;
+        crate::io::open_bytes_with(path, &bytes, password).map_err(CmdError::Failed)?
+    } else {
+        crate::io::open_path_with(std::path::Path::new(path), password).map_err(CmdError::Failed)?
+    };
+    // Plain text and Markdown carry no language: they are in the editing language.
+    let ext = std::path::Path::new(path).extension().and_then(|e| e.to_str()).unwrap_or("").to_ascii_lowercase();
+    if let Some(lang) = &s.editing_lang
+        && matches!(ext.as_str(), "txt" | "text" | "md" | "markdown")
+    {
+        doc.styles.default_chr.lang = Some(lang.clone());
+    }
+    s.set_document(doc);
+    s.path = Some(path.into());
+    // Like Word, a document opened with a password is saved with it again.
+    if encrypted {
+        s.password = password.map(crate::io::Password::new);
+    }
+    let substituted = unmatched_fonts(&s.doc);
+    if !substituted.is_empty() {
+        s.ui_requests.push(json!({"fontsSubstituted": substituted, "with": "Sarabun"}));
+    }
+    // A damaged file opened with parts left out: Word's Show Repairs says what.
+    if !s.doc.repairs.is_empty() {
+        s.ui_requests.push(json!({"open": "showRepairs"}));
+    }
+    Ok(json!({
+        "path": path,
+        "paragraphs": s.doc.paragraph_count(),
+        "words": s.doc.word_count(),
+        "encrypted": encrypted,
+        "substitutedFonts": substituted,
+        "repairs": s.doc.repairs.len(),
+    }))
+}
+
+/// The Letter Wizard's fields by parameter name.
+const LETTER_FIELDS: [&str; 16] = [
+    "senderName",
+    "returnAddress",
+    "date",
+    "mailingInstructions",
+    "recipientName",
+    "recipientAddress",
+    "attention",
+    "subject",
+    "salutation",
+    "body",
+    "closing",
+    "senderJobTitle",
+    "senderCompany",
+    "senderInitials",
+    "enclosures",
+    "cc",
+];
+/// Longest letter field, in characters (the body may be longer).
+const MAX_LETTER_FIELD: usize = 2_000;
+const MAX_LETTER_BODY: usize = 100_000;
+
+/// Letter Wizard: a new letter from the fields given (as File › New › Letter does from the
+/// template), replacing the document like File › New.
+fn letter_wizard(s: &mut Session, v: &Value) -> CmdResult {
+    let mut got = std::collections::HashMap::new();
+    for k in LETTER_FIELDS {
+        match v.get(k) {
+            None | Some(Value::Null) => {}
+            Some(Value::String(t)) => {
+                let max = if k == "body" { MAX_LETTER_BODY } else { MAX_LETTER_FIELD };
+                if t.chars().count() > max {
+                    return Err(CmdError::Params(format!("`{k}` is at most {max} characters")));
+                }
+                // Control characters other than line breaks have no place in a letter.
+                let clean: String = t.replace("\r\n", "\n").chars().filter(|c| *c == '\n' || !c.is_control()).collect();
+                got.insert(k, clean);
+            }
+            Some(_) => return Err(CmdError::Params(format!("`{k}` must be text"))),
+        }
+    }
+    if got.is_empty() {
+        s.ui_requests.push(json!({"open": "letterWizard"}));
+        return Ok(json!({"opened": true}));
+    }
+    let mut take = |k: &str| got.remove(k).unwrap_or_default();
+    let f = crate::sample::LetterFields {
+        sender_name: take("senderName"),
+        return_address: take("returnAddress"),
+        date: take("date"),
+        mailing_instructions: take("mailingInstructions"),
+        recipient_name: take("recipientName"),
+        recipient_address: take("recipientAddress"),
+        attention: take("attention"),
+        subject: take("subject"),
+        salutation: take("salutation"),
+        body: take("body"),
+        closing: take("closing"),
+        sender_title: take("senderJobTitle"),
+        sender_company: take("senderCompany"),
+        initials: take("senderInitials"),
+        enclosures: take("enclosures"),
+        cc: take("cc"),
+    };
+    let mut doc = crate::sample::letter_from(&f);
+    if let Some(lang) = &s.editing_lang {
+        doc.styles.default_chr.lang = Some(lang.clone());
+    }
+    s.set_document(doc);
+    s.path = None;
+    let mut r = sel_result(s)?;
+    if let Some(o) = r.as_object_mut() {
+        o.insert("opened".into(), json!(false));
+    }
+    Ok(r)
+}
+
+/// Show Repairs: what reading the document repaired or left out.
+fn show_repairs(s: &mut Session, _: &Value) -> CmdResult {
+    Ok(json!({"repairs": s.doc.repairs}))
+}
+
+/// Fonts Doc4Me has no metrics for that a document may use; when one isn't installed the bundled
+/// Sarabun draws it at its own size, so lines and pages can break differently, and the user is
+/// told when the document opens. Compared without spaces or case.
+const UNMATCHED_FONTS: &[&str] = &["thsarabunit๙", "thsarabunit9"];
+
+/// The [`UNMATCHED_FONTS`] the document uses (in its styles or its text) that aren't installed,
+/// each once, spelled as the document first spells it.
+pub fn unmatched_fonts(doc: &Document) -> Vec<String> {
+    let mut found: Vec<String> = Vec::new();
+    let mut note = |name: &Option<String>| {
+        let Some(name) = name.as_deref() else { return };
+        let key: String = name.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).collect();
+        if UNMATCHED_FONTS.contains(&key.as_str())
+            && !found.iter().any(|f| f.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).eq(key.chars()))
+            && doc4me_fonts::word::resolve(name, false, false).substituted
+        {
+            found.push(name.trim().to_string());
+        }
+    };
+    let mut chr = |c: &doc4me_doc::props::CharProps| {
+        note(&c.font);
+        note(&c.font_cs);
+        note(&c.font_ea);
+    };
+    chr(&doc.styles.default_chr);
+    for st in &doc.styles.styles {
+        chr(&st.chr);
+    }
+    let stories = std::iter::once(StoryRef::Body).chain(doc.parts.keys().map(|id| StoryRef::Part(*id)));
+    for story in stories {
+        for path in doc.para_paths(story) {
+            if let Some(para) = doc.para(story, &path) {
+                for run in &para.runs {
+                    chr(&run.props);
+                }
+            }
+        }
+    }
+    found
+}
+
+/// Every font name the document's styles, runs and paragraph marks use, in all stories, with the
+/// theme's heading and body fonts: the first spelling of each (case and spaces aside).
+fn document_fonts(doc: &Document) -> Vec<String> {
+    let key = |n: &str| n.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).collect::<String>();
+    let mut found: Vec<String> = Vec::new();
+    let mut note = |name: Option<&str>| {
+        let Some(name) = name.map(str::trim).filter(|n| !n.is_empty() && !n.starts_with('+')) else { return };
+        if !found.iter().any(|f| key(f) == key(name)) {
+            found.push(name.to_string());
+        }
+    };
+    note(Some(&doc.settings.major_font));
+    note(Some(&doc.settings.minor_font));
+    let mut chr = |c: &doc4me_doc::props::CharProps| {
+        for f in [&c.font, &c.font_cs, &c.font_ea] {
+            note(f.as_deref());
+        }
+    };
+    chr(&doc.styles.default_chr);
+    for st in &doc.styles.styles {
+        chr(&st.chr);
+    }
+    let stories = std::iter::once(StoryRef::Body).chain(doc.parts.keys().map(|id| StoryRef::Part(*id)));
+    for story in stories {
+        for path in doc.para_paths(story) {
+            if let Some(para) = doc.para(story, &path) {
+                chr(&para.mark);
+                for run in &para.runs {
+                    chr(&run.props);
+                }
+            }
+        }
+    }
+    found
+}
+
+/// `file.fontSubstitution`.
+fn font_substitution(s: &mut Session, v: &Value) -> CmdResult {
+    let fonts: Vec<(String, String)> =
+        document_fonts(&s.doc).into_iter().filter_map(|f| doc4me_fonts::word::substitute_for(&f).map(|sub| (f, sub))).collect();
+    let key = |n: &str| n.chars().filter(|c| !c.is_whitespace()).flat_map(char::to_lowercase).collect::<String>();
+    let wanted: Vec<String> = v.get("convert").and_then(Value::as_array).into_iter().flatten().filter_map(Value::as_str).map(key).collect();
+    let swap: Vec<(String, String)> = fonts.iter().filter(|(f, _)| wanted.contains(&key(f))).map(|(f, sub)| (key(f), sub.clone())).collect();
+    let mut converted = 0;
+    if !swap.is_empty() {
+        let fix = |name: &mut Option<String>, n: &mut usize| {
+            if let Some(sub) = name.as_deref().and_then(|x| swap.iter().find(|(k, _)| *k == key(x))).map(|(_, sub)| sub.clone()) {
+                *name = Some(sub);
+                *n += 1;
+            }
+        };
+        let fix_chr = |c: &mut doc4me_doc::props::CharProps, n: &mut usize| {
+            fix(&mut c.font, n);
+            fix(&mut c.font_cs, n);
+            fix(&mut c.font_ea, n);
+        };
+        for f in [&mut s.doc.settings.major_font, &mut s.doc.settings.minor_font] {
+            let mut o = Some(f.clone());
+            fix(&mut o, &mut converted);
+            *f = o.unwrap_or_default();
+        }
+        fix_chr(&mut s.doc.styles.default_chr, &mut converted);
+        for st in &mut s.doc.styles.styles {
+            fix_chr(&mut st.chr, &mut converted);
+        }
+        let stories: Vec<StoryRef> = std::iter::once(StoryRef::Body).chain(s.doc.parts.keys().map(|id| StoryRef::Part(*id))).collect();
+        for story in stories {
+            for path in s.doc.para_paths(story) {
+                let para = s.doc.para_mut(story, &path)?;
+                fix_chr(&mut para.mark, &mut converted);
+                for run in &mut para.runs {
+                    fix_chr(&mut run.props, &mut converted);
+                }
+                para.touch();
+            }
+        }
+        s.relayout();
+    }
+    let left: Vec<Value> =
+        fonts.iter().filter(|(f, _)| !swap.iter().any(|(k, _)| *k == key(f))).map(|(f, sub)| json!({"font": f, "substitute": sub})).collect();
+    Ok(json!({"fonts": left, "converted": converted}))
+}
+
+/// File › Info › Protect Document › Encrypt with Password: the password Word documents are saved
+/// with from now on, or none.
+fn encrypt(s: &mut Session, v: &Value) -> CmdResult {
+    let password = match v.get("password") {
+        Some(Value::Null) => None,
+        Some(Value::String(pw)) if pw.is_empty() => None,
+        Some(Value::String(pw)) => {
+            doc4me_docx::check_password(pw).map_err(|e| CmdError::Params(e.to_string()))?;
+            Some(crate::io::Password::new(pw))
+        }
+        _ => return Err(CmdError::Params("`password` must be a string, or null to remove the password".into())),
+    };
+    if password != s.password {
+        s.password = password;
+        s.dirty = true;
+    }
+    Ok(json!({"encrypted": s.password.is_some()}))
+}
+
+fn save(s: &mut Session, v: &Value) -> CmdResult {
+    let path = match p::str(v, "path").map(std::path::PathBuf::from).or_else(|| s.path.clone()) {
+        Some(p) => p,
+        None => {
+            s.ui_requests.push(json!({"open": "saveAs"}));
+            return Ok(json!({"saved": false}));
+        }
+    };
+    if let Some(pw) = v.get("password").filter(|pw| !pw.is_null()) {
+        let Some(pw) = pw.as_str().filter(|pw| !pw.is_empty()) else {
+            return Err(CmdError::Params("`password` must be a non-empty string (file.encrypt removes a password)".into()));
+        };
+        if !crate::io::can_encrypt(&path.to_string_lossy()) {
+            return Err(CmdError::Params("only Word documents (.docx, .docm, .dotx, .dotm) can be saved with a password".into()));
+        }
+        doc4me_docx::check_password(pw).map_err(|e| CmdError::Params(e.to_string()))?;
+        s.password = Some(crate::io::Password::new(pw));
+    }
+    s.stamp_save();
+    let password = s.password.as_ref().map(crate::io::Password::as_str);
+    crate::io::save_path_with(&path, &s.doc_to_save(), password, &export_options(s, v)).map_err(CmdError::Failed)?;
+    let encrypted = password.is_some() && crate::io::can_encrypt(&path.to_string_lossy());
+    let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("").to_ascii_lowercase();
+    if ["docx", "docm", "dotx", "dotm", "odt", "rtf", "json", "xml"].contains(&ext.as_str()) {
+        s.path = Some(path.clone());
+        s.dirty = false;
+    }
+    Ok(json!({"saved": true, "path": path.to_string_lossy(), "encrypted": encrypted}))
+}
+
+fn save_as(s: &mut Session, v: &Value) -> CmdResult {
+    if p::str(v, "path").is_none() {
+        s.ui_requests.push(json!({"open": "saveAs"}));
+        return Ok(json!({"saved": false}));
+    }
+    save(s, v)
+}
+
+/// How a copy is written: Print Markup from the command's `markup`, else the File › Print
+/// setting (`file.printMarkup`); comments as Track Changes Options show them.
+pub fn export_options(s: &Session, v: &Value) -> crate::io::ExportOptions {
+    let markup = p::bool(v, "markup").unwrap_or(s.prefs.print_markup);
+    crate::io::ExportOptions { markup, comments: markup && s.prefs.markup.comments }
+}
+
+fn export_png(s: &mut Session, v: &Value) -> CmdResult {
+    export_page(s, v, None)
+}
+
+fn export_jpeg(s: &mut Session, v: &Value) -> CmdResult {
+    let quality = p::u64(v, "quality").unwrap_or(u64::from(crate::io_ext::JPEG_QUALITY)).clamp(1, 100) as u8;
+    export_page(s, v, Some(quality))
+}
+
+/// Write one page as a picture: PNG, or JPEG at quality `jpeg` (on white, since JPEG has no
+/// transparency).
+fn export_page(s: &mut Session, v: &Value, jpeg: Option<u8>) -> CmdResult {
+    let path = p::req_str(v, "path")?;
+    let lower = path.to_ascii_lowercase();
+    let path = if jpeg.is_some() && !lower.ends_with(".jpg") && !lower.ends_with(".jpeg") { format!("{path}.jpg") } else { path.to_string() };
+    let page = p::u64(v, "page").unwrap_or(1).max(1) as usize - 1;
+    let scale = p::f32(v, "scale").unwrap_or(2.0).clamp(0.1, 8.0);
+    let l = s.export_layout_with(export_options(s, v).markup);
+    let pg = l.pages.get(page).ok_or_else(|| CmdError::Params(format!("no page {}", page + 1)))?;
+    let img = doc4me_render::render_page(&s.doc, pg, scale, &Default::default());
+    let (bytes, format) = match jpeg {
+        Some(q) => (img.to_jpeg(q), "JPEG"),
+        None => (img.to_png(), "PNG"),
+    };
+    if bytes.is_empty() {
+        return Err(CmdError::Failed(format!("{path}: the page image ({}×{} px) couldn't be encoded as {format}", img.width, img.height)));
+    }
+    crate::io::write_file(&path, &bytes).map_err(CmdError::Failed)?;
+    Ok(json!({"path": path, "width": img.width, "height": img.height, "bytes": bytes.len()}))
+}
+
+fn properties(s: &mut Session, v: &Value) -> CmdResult {
+    let c = &mut s.doc.core;
+    let set = |dst: &mut String, k: &str| {
+        if let Some(x) = p::str(v, k) {
+            *dst = x.to_string();
+        }
+    };
+    set(&mut c.title, "title");
+    set(&mut c.subject, "subject");
+    set(&mut c.creator, "author");
+    set(&mut c.keywords, "keywords");
+    set(&mut c.description, "comments");
+    set(&mut c.category, "category");
+    if let Some(custom) = v.get("custom") {
+        let Some(m) = custom.as_object() else {
+            return Err(CmdError::Params("`custom` must be an object of name → string or null".into()));
+        };
+        for (name, val) in m {
+            if name.trim().is_empty() || name.chars().count() > MAX_CUSTOM_NAME {
+                return Err(CmdError::Params(format!("custom property names are 1–{MAX_CUSTOM_NAME} characters")));
+            }
+            match val {
+                Value::Null => {
+                    s.doc.remove_custom_prop(name);
+                }
+                Value::String(x) if x.len() <= MAX_CUSTOM_VALUE => s.doc.set_custom_prop(name, x),
+                _ => return Err(CmdError::Params(format!("custom property `{name}` must be a string (≤ {MAX_CUSTOM_VALUE} bytes) or null"))),
+            }
+        }
+    }
+    let mut out = serde_json::to_value(&s.doc.core).unwrap_or(Value::Null);
+    if let Some(o) = out.as_object_mut() {
+        o.insert("custom".into(), serde_json::to_value(&s.doc.custom_props).unwrap_or(Value::Null));
+    }
+    Ok(out)
+}
+
+/// Longest custom property name (Word's limit).
+const MAX_CUSTOM_NAME: usize = 255;
+/// Largest custom property value we accept from a command.
+const MAX_CUSTOM_VALUE: usize = 1024 * 1024;
+
+fn info(s: &mut Session, _: &Value) -> CmdResult {
+    let l = s.layout();
+    Ok(json!({
+        "path": s.path.as_ref().map(|p| p.to_string_lossy().to_string()),
+        "dirty": s.dirty,
+        "pages": l.pages.len(),
+        "words": s.doc.word_count(),
+        "paragraphs": s.doc.paragraph_count(),
+        "properties": s.doc.core,
+        "trackChanges": s.doc.settings.track_changes,
+        "comments": s.doc.comments.len(),
+        "sections": s.doc.sections().len(),
+        "encrypted": s.password.is_some(),
+        "layoutMs": l.ms,
+    }))
+}
+
+/// Structure for agents: blocks with text and formatting summary, selection, stats.
+fn inspect(s: &mut Session, v: &Value) -> CmdResult {
+    let with_text = p::bool(v, "text").unwrap_or(true);
+    let mut blocks = Vec::new();
+    for (i, b) in s.doc.body.iter().enumerate().take(2000) {
+        match &**b {
+            Block::Para(p) => {
+                let style = p.props.style.clone().unwrap_or_else(|| "Normal".into());
+                let mut o = json!({"index": i, "type": "paragraph", "style": style, "len": p.len()});
+                if with_text {
+                    o["text"] = json!(p.plain_text());
+                }
+                if let Some(n) = p.props.numbering.filter(|n| n.num != 0) {
+                    o["list"] = json!({"num": n.num, "level": n.level});
+                }
+                if !p.props.is_empty() {
+                    o["props"] = serde_json::to_value(&p.props).unwrap_or(Value::Null);
+                }
+                let runs: Vec<Value> = p
+                    .run_ranges()
+                    .filter(|(_, c)| !c.is_empty())
+                    .map(|(r, c)| json!({"start": r.start, "end": r.end, "props": c}))
+                    .take(50)
+                    .collect();
+                if !runs.is_empty() {
+                    o["runs"] = json!(runs);
+                }
+                if !p.objects.is_empty() {
+                    o["objects"] = serde_json::to_value(&p.objects).unwrap_or(Value::Null);
+                }
+                if p.section.is_some() {
+                    o["sectionBreak"] = json!(true);
+                }
+                blocks.push(o);
+            }
+            Block::Table(t) => {
+                let cells: Vec<Vec<String>> = t
+                    .rows
+                    .iter()
+                    .map(|r| {
+                        r.cells
+                            .iter()
+                            .map(|c| c.blocks.iter().filter_map(|b| b.as_para().map(|p| p.plain_text())).collect::<Vec<_>>().join("\n"))
+                            .collect()
+                    })
+                    .collect();
+                blocks.push(json!({"index": i, "type": "table", "rows": t.rows.len(), "cols": t.cols(), "style": t.props.style, "cells": cells}));
+            }
+        }
+    }
+    let l = s.layout();
+    let parts: Vec<Value> =
+        s.doc.parts.iter().map(|(id, p)| json!({"id": id, "kind": p.kind, "text": s.doc.plain_text(StoryRef::Part(*id))})).collect();
+    Ok(json!({
+        "blocks": blocks,
+        "parts": parts,
+        "selection": {"anchor": pos_json(&s.sel.anchor), "focus": pos_json(&s.sel.focus), "text": s.selected_text()},
+        "pages": l.pages.len(),
+        "words": s.doc.word_count(),
+        "sections": s.doc.sections().iter().map(|(end, sp)| json!({"endBlock": end, "props": sp})).collect::<Vec<_>>(),
+        "comments": s.doc.comments.len(),
+        "trackChanges": s.doc.settings.track_changes,
+        "properties": s.doc.core,
+        "canUndo": s.can_undo(),
+        "canRedo": s.can_redo(),
+    }))
+}
+
+fn paragraph(s: &mut Session, v: &Value) -> CmdResult {
+    let path: Vec<u32> = serde_json::from_value(v.get("path").cloned().unwrap_or(json!([0]))).map_err(|e| CmdError::Params(e.to_string()))?;
+    let story = super::story_param(s, v);
+    let p = s.doc.para(story, &doc4me_doc::Path(path)).ok_or_else(|| CmdError::Params("no paragraph there".into()))?;
+    let resolved = s.doc.styles.resolve_para(&p.props);
+    Ok(json!({"paragraph": p, "resolved": resolved}))
+}
+
+fn layout_summary(s: &mut Session, _: &Value) -> CmdResult {
+    let l = s.layout();
+    let pages: Vec<Value> = l
+        .pages
+        .iter()
+        .map(|p| {
+            let lines: usize = p.items.iter().map(|it| if let doc4me_layout::Placed::Lines { l0, l1, .. } = it { l1 - l0 } else { 0 }).sum();
+            json!({"number": p.number, "w": p.w, "h": p.h, "section": p.section, "lines": lines, "firstBlock": p.first_block, "header": p.header_story, "footer": p.footer_story})
+        })
+        .collect();
+    let caret = l.caret_on(&s.sel.focus, s.page_hint).map(|c| json!({"page": c.page, "x": c.x, "y": c.top, "h": c.height}));
+    Ok(json!({"pages": pages, "caret": caret, "ms": l.ms}))
+}

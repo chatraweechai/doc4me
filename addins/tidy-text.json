@@ -1,0 +1,34 @@
+{
+  "id": "tidy-text",
+  "name": "Tidy Text",
+  "version": "1.0.0",
+  "description": "Cleans up pasted text: single spaces, no empty paragraphs, plain formatting.",
+  "author": "Doc4Me contributors",
+  "license": "MIT OR Apache-2.0",
+  "macros": [
+    {
+      "name": "Single spaces",
+      "description": "Replaces runs of spaces with one space.",
+      "steps": [
+        {"command": "edit.replaceAll", "params": {"text": "  ", "with": " "}},
+        {"command": "edit.replaceAll", "params": {"text": "  ", "with": " "}},
+        {"command": "edit.replaceAll", "params": {"text": "  ", "with": " "}},
+        {"command": "edit.replaceAll", "params": {"text": "  ", "with": " "}}
+      ]
+    },
+    {
+      "name": "Remove empty paragraphs",
+      "description": "Removes paragraphs with nothing in them.",
+      "steps": [
+        {"command": "edit.replaceAll", "params": {"text": "^p^p", "with": "^p"}},
+        {"command": "edit.replaceAll", "params": {"text": "^p^p", "with": "^p"}},
+        {"command": "edit.replaceAll", "params": {"text": "^p^p", "with": "^p"}}
+      ]
+    },
+    {
+      "name": "Clear all formatting",
+      "description": "Takes direct formatting off the whole document; styles stay.",
+      "steps": [{"command": "select.all"}, {"command": "format.clear"}, {"command": "caret.docStart"}]
+    }
+  ]
+}

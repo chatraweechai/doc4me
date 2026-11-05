@@ -1,0 +1,22 @@
+[package]
+name = "doc4me-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "Doc4Me command line: convert, inspect, render, run commands, MCP server"
+
+[[bin]]
+name = "doc4me-cli"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+doc4me-doc = { workspace = true }
+doc4me-engine = { workspace = true }
+doc4me-render = { workspace = true }
+doc4me-mcp = { workspace = true }
+doc4me-zotero = { workspace = true }
+serde_json = { workspace = true }

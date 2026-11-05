@@ -1,0 +1,40 @@
+name: Gemini AI Assistant
+
+on:
+  # ทำงานอัตโนมัติเมื่อมีการเปิดหรืออัปเดต Pull Request
+  pull_request:
+    types: [opened, synchronize]
+  # ทำงานเมื่อมีการพิมพ์คอมเมนต์ใน Issue หรือ PR
+  issue_comment:
+    types: [created]
+
+# กำหนดสิทธิ์ให้ GitHub Actions สามารถอ่านโค้ดและเขียนคอมเมนต์ตอบกลับได้
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  gemini-action:
+    # รันเฉพาะเมื่อเปิด PR ใหม่ หรือเมื่อมีคนพิมพ์คำว่า @gemini-cli ในคอมเมนต์
+    if: |
+      github.event_name == 'pull_request' || 
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@gemini-cli'))
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gemini CLI Action
+        uses: google-github-actions/run-gemini-cli@v1
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          github_token: ${{ secrets.GEMINI_GITHUB_TOKEN }}
+          # สามารถปรับแต่งโมเดลและคำสั่งเริ่มต้นได้
+          model: gemini-4-argon
+          prompt: |
+            ช่วยตรวจสอบการเปลี่ยนแปลงของโค้ดใน Pull Request นี้ 
+            เน้นหาช่องโหว่ด้านความปลอดภัย, บั๊กที่อาจเกิดขึ้น และแนะนำวิธีปรับปรุงโค้ดให้คลีนขึ้น (ตอบกลับเป็นภาษาไทย)

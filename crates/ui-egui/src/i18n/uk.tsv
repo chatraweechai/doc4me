@@ -1,0 +1,3014 @@
+# Ukrainian (uk) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts yet)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\ inside a column. `{name}` placeholders must appear in both columns,
+#              and a trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Clean room: translated from the meaning of the English labels in this repository.
+# No Microsoft Word or other product localisation was consulted or copied.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Author: @dmatviichuk with Codex; licensed MIT OR Apache-2.0, like Doc4Me.
+
+	(no style)	(без стилю)
+	(no suggestions)	(немає пропозицій)
+	1.5 Line Spacing	Міжрядковий інтервал 1,5
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	Безкоштовний текстовий процесор із відкритим кодом, написаний з нуля мовою Rust.\nСтворено на основі WordCraft від команди ArtCraft.
+	About	Про програму
+	About Doc4Me	Про Doc4Me
+	Accept	Прийняти
+	Accept All Changes	Прийняти всі зміни
+	Accept This Change	Прийняти цю зміну
+	Accessibility	Доступність
+	Add	Додати
+	Add a comment	Додати коментар
+	Add a Table	Додати таблицю
+	Add Object to Selection	Додати об'єкт до виділення
+	Add Space Before Paragraph	Додати інтервал перед абзацом
+	Add space between Asian and Latin text	Додавати інтервал між азійським і латинським текстом
+	Add space between Asian text and numbers	Додавати інтервал між азійським текстом і числами
+	Add tab stop at:	Додати позицію табуляції:
+	Add Text	Додати текст
+	Add to Dictionary	Додати до словника
+	Add to Style Gallery	Додати до колекції стилів
+	Address Block	Блок адреси
+	Address:	Адреса:
+	Address\nBlock	Блок\nадреси
+	Adjust	Налаштувати
+	Advanced	Додатково
+	Advanced Find	Розширений пошук
+	Advanced Find…	Розширений пошук…
+	After:	Після:
+	Agents	Агенти
+	Align	Вирівняти
+	Align Left	Вирівняти ліворуч
+	Align Right	Вирівняти праворуч
+	Aligned at:	Позиція номера:
+	Alignment	Вирівнювання
+	All Borders	Усі межі
+	All Caps	Усі великі літери
+	All caps	Усі великі літери
+	All Markup	Усі позначки
+	Allow hanging punctuation	Дозволити висячу пунктуацію
+	Allow Latin text to wrap in the middle of a word	Дозволити розрив латинського тексту посеред слова
+	Alt Text	Альтернативний текст
+	Apply Asian line-breaking rules (kinsoku)	Застосовувати азійські правила розриву рядків (кінсоку)
+	Apply Character Style	Застосувати стиль символів
+	Apply Style	Застосувати стиль
+	Arrange	Упорядкувати
+	Arrange\nAll	Упорядкувати\nвсі
+	Arrow	Стрілка
+	Artistic Effects	Художні ефекти
+	As you type	Під час введення
+	Asian text font:	Шрифт азійського тексту:
+	Asian Typography	Азійська типографіка
+	Author	Автор
+	AutoCorrect Options	Параметри автовиправлення
+	AutoFit	Добір розміру
+	AutoFit Contents	Добір розміру за вмістом
+	AutoFit Window	Добір розміру за шириною вікна
+	AutoSave writes your changes to the file a moment after you stop typing.	Автозбереження записує зміни у файл невдовзі після того, як ви припините вводити текст.
+	Automatic	Автоматично
+	Automatic ({language})	Автоматично ({language})
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Автоматичний режим використовує мову вашої системи. Змінюються меню й команди, а вміст документів залишається незмінним.
+	Automatic Table 1 (3 levels)	Автоматичний зміст 1 (3 рівні)
+	Automatic Table 2 (2 levels)	Автоматичний зміст 2 (2 рівні)
+	AutoSave	Автозбереження
+	AutoSave saves every change to the file (needs a saved document)	Автозбереження записує кожну зміну у файл (документ потрібно спочатку зберегти)
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Автозбереження недоступне в браузері: воно не може записувати у ваші файли. Збереження завантажує копію.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Автозбереження підтримує лише файли .docx, .odt і .rtf; {name} не може зберегти все форматування. Збережіть як .docx, щоб увімкнути автозбереження.
+	Balloons	Виноски
+	Bullet	Маркер
+	By author	За автором
+	Centimeters	Сантиметри
+	Changed lines:	Змінені рядки:
+	Check spelling as you type	Перевіряти правопис під час введення
+	Click level to modify:	Виберіть рівень для змінення:
+	Click to switch back to inserting	Клацніть, щоб повернутися до вставлення
+	Color only	Лише колір
+	Custom dictionary	Власний словник
+	Define New Multilevel List	Визначити новий багаторівневий список
+	Define New Multilevel List…	Визначити новий багаторівневий список…
+	Deletions:	Видалення:
+	Enter formatting for number:	Вигляд номера:
+	Follow number with:	Після номера:
+	Formatting	Форматування
+	Formatting marks	Знаки форматування
+	Hidden text	Прихований текст
+	Ignore web and file addresses	Пропускати веб-адреси та шляхи до файлів
+	Ignore words in capitals	Пропускати слова з великих літер
+	Ignore words with numbers	Пропускати слова з цифрами
+	Inches	Дюйми
+	Formatting exceptions	Винятки форматування
+	Include level number from:	Додати номер рівня:
+	Initials:	Ініціали:
+	Ink	Рукописні примітки
+	Insertions and Deletions	Вставлення й видалення
+	Insertions:	Вставлення:
+	Interface	Інтерфейс
+	Interface language	Мова інтерфейсу
+	Inside:	Усередині:
+	Latin text font:	Шрифт латинського тексту:
+	Left border	Ліва межа
+	Legal style numbering	Юридична нумерація
+	Link level to style:	Зв'язати рівень зі стилем:
+	List Definition	Визначення списку
+	Mark grammar errors as you type	Позначати граматичні помилки під час введення
+	Measurement units:	Одиниці виміру:
+	Millimeters	Міліметри
+	New comments and tracked changes are recorded under this name and these initials.	Нові коментарі та відстежувані зміни записуються під цим іменем і цими ініціалами.
+	New word	Нове слово
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Слів ще немає. «Додати до словника» для слова з помилкою додає його сюди.
+	Mirror indents	Дзеркальні відступи
+	Nothing	Нічого
+	Number alignment:	Вирівнювання номера:
+	Number format	Формат номера
+	Number style for this level:	Стиль номера для цього рівня:
+	Outside border	Зовнішня межа
+	Overtype	Заміна
+	Overtype (typing replaces the characters after the caret)	Заміна (введений текст замінює символи після курсора)
+	Page display	Відображення сторінки
+	Paragraph marks	Знаки абзацу
+	Personalize	Персоналізація
+	Picas	Піки
+	Points	Пункти
+	Print the page color	Друкувати колір сторінки
+	Printing	Друк
+	Proofing language	Мова перевірки
+	Recent documents to show:	Кількість останніх документів:
+	Remove	Вилучити
+	Outside:	Зовні:
+	Restart list after:	Почати список знову після:
+	Right border	Права межа
+	Save documents	Збереження документів
+	Save the document to turn on AutoSave	Збережіть документ, щоб увімкнути автозбереження
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Збережіть документ, щоб увімкнути автозбереження (файл, який ви лише відкрили, не перезаписується, доки ви його не збережете)
+	AutoText	Автоматичний текст
+	Backspace	Видалити попередній символ
+	Banded Columns	Смугасті стовпці
+	Banded Rows	Смугасті рядки
+	Base text:	Основний текст:
+	Before:	Перед:
+	Bibliography	Бібліографія
+	Binary assets added	Додано двійкових ресурсів
+	Binary assets removed	Видалено двійкових ресурсів
+	Blank	Порожній
+	Blank (Three Columns)	Порожній (три стовпці)
+	Blank document	Порожній документ
+	Blank Page	Порожня сторінка
+	Block\nAuthors	Блокувати\nавторів
+	Bold	Напівжирний
+	Bookmark	Закладка
+	Bookmark name:	Назва закладки:
+	Border Painter	Пензель меж
+	Border\nPainter	Пензель\nмеж
+	Borders	Межі
+	Show the mini toolbar when text is selected	Показувати міні-панель інструментів під час виділення тексту
+	Spaces	Пробіли
+	Spelling	Правопис
+	Spelling and grammar are checked in English (United States).	Правопис і граматика перевіряються англійською (США).
+	Tab characters	Символи табуляції
+	Tab stop position:	Позиція табуляції:
+	Default tab stops:	Типові позиції табуляції:
+	Tab stops to be cleared:	Позиції, які буде видалено:
+	All	Усі
+	Decimal	Десяткова
+	Bar	Риска
+	Leader	Заповнювач
+	Set	Встановити
+	Page Border	Межа сторінки
+	Apply to:	Застосувати до:
+	These marks show even when Show/Hide ¶ is off.	Ці знаки відображаються, навіть коли «Показати/приховати ¶» вимкнено.
+	Typing replaces selected text	Введення замінює виділений текст
+	Update fields before printing	Оновлювати поля перед друком
+	Use the Insert key to switch overtype on and off	Клавіша Insert вмикає та вимикає режим заміни
+	Whole document	Увесь документ
+	This section	Цей розділ
+	Fill	Колір заливки
+	Setting:	Тип:
+	3-D	Об'ємна
+	Custom	Власна
+	Style:	Стиль:
+	Dot dash	Штрихпунктирна
+	Triple	Потрійна
+	Between	Між абзацами
+	Borders and Shading	Межі й заливка
+	Tabs…	Табуляція…
+	Borders and Shading…	Межі й заливка…
+	Bottom Border	Нижня межа
+	Bottom Margin	Нижнє поле
+	Bottom of Page	Унизу сторінки
+	Bottom:	Знизу:
+	Box	Рамка
+	Breaks	Розриви
+	Bring Forward	Перемістити вперед
+	Bullet Library	Колекція маркерів
+	Bullets	Маркери
+	Calendar	Календар
+	Cancel	Скасувати
+	Capitalize Each Word	Кожне слово з великої літери
+	Captions	Підписи
+	Cell Margins	Поля клітинки
+	Cell Size	Розмір клітинки
+	Cell\nMargins	Поля\nклітинки
+	Center	По центру
+	Change	Змінити
+	Change Case	Змінити регістр
+	Change List Level	Змінити рівень списку
+	Change Picture	Змінити зображення
+	Change Shape	Змінити фігуру
+	Changes	Зміни
+	Character Position	Положення символів
+	Character Scale	Масштаб символів
+	Character Shading	Заливка символів
+	Character Spacing	Інтервал між символами
+	Characters	Символи
+	Characters (no spaces)	Символи (без пробілів)
+	Characters (with spaces)	Символи (з пробілами)
+	Chart	Діаграма
+	Check Accessibility	Перевірити доступність
+	Check Compatibility	Перевірити сумісність
+	Check for Errors	Перевірити наявність помилок
+	Check Spelling as You Type	Перевіряти правопис під час введення
+	Check\nAccessibility	Перевірити\nдоступність
+	Citation Style	Стиль цитування
+	Citations & Bibliography	Цитати й бібліографія
+	Clear	Очистити
+	Clear All	Очистити все
+	Clear All Formatting	Очистити все форматування
+	Clear Character Formatting	Очистити форматування символів
+	Clear Character Style	Очистити стиль символів
+	Clear Formatting Level	Очистити рівень форматування
+	Clear Paragraph Formatting	Очистити форматування абзацу
+	Click a border between two cells to merge them. Esc stops.	Клацніть межу між двома клітинками, щоб об'єднати їх. Esc завершує.
+	Clipboard	Буфер обміну
+	Clipboard Pane	Панель буфера обміну
+	Clipboard Items	Елементи буфера обміну
+	Paste Clipboard Item	Вставити елемент буфера обміну
+	Paste All	Вставити все
+	Delete Clipboard Item	Видалити елемент буфера обміну
+	Click an item to paste it.	Клацніть елемент, щоб вставити його.
+	Nothing collected yet. Items you copy or cut appear here.	Поки що порожньо. Тут з'являться елементи, які ви скопіюєте або виріжете.
+	(picture or object)	(зображення або об'єкт)
+	Close	Закрити
+	Close Header and Footer	Закрити колонтитули
+	Collapse Selection	Зняти виділення
+	Color	Колір
+	Color:	Колір:
+	Colors	Кольори
+	Column	Стовпець
+	Column Break	Розрив стовпця
+	Columns	Стовпці
+	Combine	Об'єднати
+	Commands	Команди
+	Comment	Коментар
+	Comments	Коментарі
+	Comments Pane	Панель коментарів
+	Compact	Компактний
+	Compare	Порівняти
+	Compress Pictures	Стиснути зображення
+	Compress punctuation at the start of a line	Стискати розділові знаки на початку рядка
+	Continuous	Безперервний
+	Convert	Перетворити
+	Convert Text to Table	Перетворити текст на таблицю
+	Convert Text to Table…	Перетворити текст на таблицю…
+	Convert to Text	Перетворити на текст
+	Copy	Копіювати
+	Copy Formatting	Копіювати форматування
+	Corrections	Виправлення
+	Couldn't make Doc4Me the default: {error}	Не вдалося зробити Doc4Me типовою програмою: {error}
+	Count words in text boxes and notes	Рахувати слова в текстових полях і виносках
+	Cover Page	Титульна сторінка
+	Create	Створити
+	Create a Style	Створити стиль
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Створіть інтерактивний план документа.\n\nТак ви зможете легко орієнтуватися в документі й швидко переміщувати його вміст.\n\nЩоб почати, відкрийте вкладку «Основне» й застосуйте стилі заголовків до заголовків у документі.
+	Create New Style	Створити новий стиль
+	Crop	Обітнути
+	Cross-reference	Перехресне посилання
+	Current Position	Поточне положення
+	Current style: {style}	Поточний стиль: {style}
+	Custom Margins…	Власні поля…
+	Custom Watermark	Власний водяний знак
+	Custom Watermark…	Власний водяний знак…
+	Customize Quick Access Toolbar	Налаштувати панель швидкого доступу
+	Cut	Вирізати
+	Dark Mode	Темний режим
+	Dashed	Штрихова
+	Data	Дані
+	Date & Time	Дата й час
+	Decrease Font Size	Зменшити розмір шрифту
+	Decrease Indent	Зменшити відступ
+	Default	Типовий
+	Define New Bullet	Визначити новий маркер
+	Define New Number Format	Визначити новий формат номера
+	Delete	Видалити
+	Delete Cells	Видалити клітинки
+	Delete Columns	Видалити стовпці
+	Delete Comment	Видалити коментар
+	Delete Next Word	Видалити наступне слово
+	Delete Previous Word	Видалити попереднє слово
+	Delete Rows	Видалити рядки
+	Delete Style	Видалити стиль
+	Delete Table	Видалити таблицю
+	Design	Дизайн
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Перетягніть прямокутник, щоб намалювати таблицю, або лінію через клітинки, щоб їх розділити. Esc завершує.
+	Draw Table	Намалювати таблицю
+	Edit Comment	Редагувати коментар
+	In Default apps, choose Doc4Me for the document types you want it to open.	У програмах за замовчуванням виберіть Doc4Me для типів документів, які він має відкривати.
+	Left Margin	Ліве поле
+	Indents and Spacing	Відступи й інтервали
+	Line breaking	Розрив рядків
+	Make Doc4Me the default for Word documents…	Зробити Doc4Me типовою програмою для документів Word…
+	More templates →	Більше шаблонів →
+	No templates match your search.	Немає шаблонів, що відповідають пошуку.
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Відтепер файли .docx, .doc, .rtf, .odt і шаблони Word відкриватимуться у Doc4Me.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Відкриває Параметри › Програми за замовчуванням, де ви вибираєте Doc4Me для .docx та інших типів документів.
+	Reopen	Відкрити знову
+	Right Margin	Праве поле
+	Distribute letters	Розподілити літери
+	Distribute spacing	Розподілити інтервали
+	Offset (pt):	Зсув (пункти):
+	Phonetic Guide	Фонетична підказка
+	Right (vertical)	Праворуч (вертикально)
+	Ruby text:	Текст рубі:
+	Search for templates	Пошук шаблонів
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Щоб документи Word типово відкривалися у Doc4Me: виберіть документ у Finder, оберіть Файл › Отримати інфо, виберіть Doc4Me у розділі «Відкривати за допомогою» і натисніть «Змінити все».
+	Doc4Me is now the default app for Word documents.	Doc4Me тепер типова програма для документів Word.
+	development build	Збірка для розробки
+	Diagonal	Діагональ
+	Diamond	Ромб
+	Dictate	Диктувати
+	Different First Page	Інша перша сторінка
+	Different Odd & Even Pages	Різні парні й непарні сторінки
+	Direct formatting	Пряме форматування
+	Display	Відображення
+	Display for Review	Відображення для рецензування
+	Distribute Columns	Розподілити стовпці
+	Distribute Rows	Розподілити рядки
+	Distributed	Розподілений
+	Thai	Тайська
+	Thai Distributed	Розподілений (тайський)
+	Do Not Show in TOC	Не показувати у змісті
+	Document End	Кінець документа
+	Document Formatting	Форматування документа
+	Document Property	Властивість документа
+	Document Start	Початок документа
+	Document Text	Текст документа
+	Document Title	Назва документа
+	Documents you open will show up here.	Тут з'являтимуться документи, які ви відкриваєте.
+	Dot-dash	Штрихпунктирна
+	Dotted	Пунктирна
+	Double	Подвійна
+	Double Spacing	Подвійний інтервал
+	Double Strikethrough	Подвійне закреслення
+	Double Underline	Подвійне підкреслення
+	Down	Униз
+	Draft	Чернетка
+	Draw	Малювання
+	Drawing Tools	Знаряддя малювання
+	Drawing\nCanvas	Полотно\nмалювання
+	Drop Cap	Буквиця
+	Drops all formatting and pastes plain text.	Відкидає все форматування й вставляє звичайний текст.
+	Edit Footer	Редагувати нижній колонтитул
+	Edit Header	Редагувати верхній колонтитул
+	Edit Recipient List	Редагувати список одержувачів
+	Edit\nRecipient List	Редагувати\nсписок одержувачів
+	Edited	Відредаговано
+	Editing	Редагування
+	Editing header/footer	Редагування колонтитула
+	Editing — edit the document directly	Редагування — безпосередні зміни в документі
+	Editor	Редактор
+	Effects	Ефекти
+	Emboss	Рельєф
+	Encrypt with Password	Зашифрувати паролем
+	English (United States)	Англійська (США)
+	Engrave	Гравіювання
+	Enter page number:	Введіть номер сторінки:
+	Envelopes	Конверти
+	Equation	Рівняння
+	Eraser	Гумка
+	Even Page	Парна сторінка
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Кожна команда доступна сценаріям і агентам ШІ: запустіть `doc4me-cli mcp` для сервера MCP або відкрийте програму з `--control <port>` для каналу керування JSON.
+	Export	Експорт
+	Export a copy to share (PDF, Word document)	Експортувати копію для спільного доступу (PDF, документ Word)
+	Export Page as PNG	Експортувати сторінку у PNG
+	Export Page as JPEG	Експортувати сторінку у JPEG
+	Export PDF	Експортувати PDF
+	Exported {path}	Експортовано {path}
+	Extend Selection	Розширити виділення
+	Extend Selection by Units	Розширити виділення за одиницями
+	Field	Поле
+	File	Файл
+	Find	Знайти
+	Find and Replace	Знайти й замінити
+	Find Next	Знайти наступне
+	Find Previous	Знайти попереднє
+	Find Recipient	Знайти одержувача
+	Find what:	Знайти:
+	Finish	Завершити
+	Finish & Merge	Завершити й об'єднати
+	Finish &\nMerge	Завершити й\nоб'єднати
+	First Column	Перший стовпець
+	First commit	Перший коміт
+	First line:	Перший рядок:
+	Fixed Column Width	Фіксована ширина стовпця
+	Focus	Зосередження
+	Font	Шрифт
+	Font Color	Колір шрифту
+	Font color:	Колір шрифту:
+	Font Dialog	Діалог шрифту
+	Font Size	Розмір шрифту
+	Font:	Шрифт:
+	Fonts	Шрифти
+	Footer	Нижній колонтитул
+	Footnote and Endnote	Виноски й кінцеві виноски
+	Footnotes	Виноски
+	Format	Формат
+	Format Page Numbers	Формат номерів сторінок
+	Format Page Numbers…	Формат номерів сторінок…
+	Format Painter	Пензель форматування
+	Formatted Text	Форматований текст
+	Formatting at Selection	Форматування виділення
+	Formula	Формула
+	General	Загальні
+	Go To	Перейти
+	Go to	Перейти
+	Go To…	Перейти…
+	Grab bag	Різне
+	Greeting Line	Рядок привітання
+	Greeting\nLine	Рядок\nпривітання
+	Gridlines	Лінії сітки
+	Group	Групувати
+	Grow Font 1 Point	Збільшити шрифт на 1 пункт
+	Hanging Indent	Виступ першого рядка
+	Header	Верхній колонтитул
+	Header & Footer	Колонтитули
+	Header Row	Рядок заголовка
+	Header/Footer Position	Положення колонтитулів
+	Heading 1	Заголовок 1
+	Heading 2	Заголовок 2
+	Heading 3	Заголовок 3
+	Headings	Заголовки
+	Heart	Серце
+	Help	Довідка
+	Hidden	Прихований
+	Highlight Merge Fields	Виділити поля злиття
+	Highlight\nMerge Fields	Виділити\nполя злиття
+	Highlighter	Маркер виділення
+	Home	Основне
+	Horizontal	Горизонтальна
+	Horizontal Line	Горизонтальна лінія
+	HTML Format	Формат HTML
+	Hyphenation	Перенесення слів
+	Icons	Піктограми
+	Ignore All	Ігнорувати всі
+	Illustrations	Ілюстрації
+	Immersive	Зосереджений
+	Immersive Reader	Зосереджене читання
+	Immersive\nReader	Зосереджене\nчитання
+	Increase Font Size	Збільшити розмір шрифту
+	Increase Indent	Збільшити відступ
+	Indent	Відступ
+	Indentation	Відступи
+	Indents	Відступи
+	Index	Покажчик
+	Info	Відомості
+	Ink to\nMath	Рукопис\nу формулу
+	Ink to\nShape	Рукопис\nу фігуру
+	Ink\nReplay	Відтворити\nрукопис
+	Insert	Вставлення
+	Insert Above	Вставити вище
+	Insert Below	Вставити нижче
+	Insert Caption	Вставити підпис
+	Insert Citation	Вставити цитату
+	Insert Endnote	Вставити кінцеву виноску
+	Insert Footnote	Вставити виноску
+	Insert Hyperlink	Вставити гіперпосилання
+	Insert Index	Вставити покажчик
+	Insert Left	Вставити ліворуч
+	Insert Merge Field	Вставити поле злиття
+	Insert Merge\nField	Вставити поле\nзлиття
+	Insert Right	Вставити праворуч
+	Insert Shapes	Вставити фігури
+	Insert Table	Вставити таблицю
+	Insert Table of Authorities	Вставити покажчик правових джерел
+	Insert Table of Figures	Вставити список ілюстрацій
+	Insert Table…	Вставити таблицю…
+	Insert\nAbove	Вставити\nвище
+	Insert\nCaption	Вставити\nпідпис
+	Insert\nCitation	Вставити\nцитату
+	Insert\nFootnote	Вставити\nвиноску
+	Inside Borders	Внутрішні межі
+	Inspect Document	Перевірити документ
+	Inspect Styles at Selection	Переглянути стилі у виділенні
+	Interface language:	Мова інтерфейсу:
+	Italic	Курсив
+	Justify	За шириною
+	Keep Lines Together	Не розривати рядки абзацу
+	Keep lines together	Не розривати рядки абзацу
+	Keep Text Only	Зберегти лише текст
+	Keep with Next	Не відривати від наступного
+	Keep with next	Не відривати від наступного
+	Keeps the fonts and formatting of the copied text.	Зберігає шрифти й форматування скопійованого тексту.
+	Labels	Етикетки
+	Landscape	Альбомна
+	Language	Мова
+	Lasso	Ласо
+	Last Column	Останній стовпець
+	Last commit	Останній коміт
+	Layout	Макет
+	Layout Summary	Зведення макета
+	Left	Ліворуч
+	Left Border	Ліва межа
+	Left:	Ліворуч:
+	Letter	Лист
+	Line	Лінія
+	Line and Page Breaks	Розриви рядків і сторінок
+	Line and Paragraph Spacing	Інтервал між рядками й абзацами
+	Line Break	Розрив рядка
+	Line delta	Різниця рядків
+	Line End	Кінець рядка
+	Line Numbers	Номери рядків
+	Line Spacing	Міжрядковий інтервал
+	Line Spacing Options…	Параметри міжрядкового інтервалу…
+	Line spacing:	Міжрядковий інтервал:
+	Line Start	Початок рядка
+	Lines	Рядки
+	Lines added	Додано рядків
+	Lines deleted	Видалено рядків
+	Link	Посилання
+	Link to Previous	Як у попередньому
+	Links	Посилання
+	Location: {path}	Розташування: {path}
+	lowercase	малі літери
+	Macros	Макроси
+	Mailings	Розсилки
+	Manage Sources	Керувати джерелами
+	Many pages	Багато сторінок
+	Margins	Поля
+	Mark Citation	Позначити цитату
+	Mark Entry	Позначити елемент
+	Mark\nCitation	Позначити\nцитату
+	Mark\nEntry	Позначити\nелемент
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Враховувати регістр
+	Match Fields	Зіставити поля
+	Matrix	Матриця
+	Merge	Об'єднати
+	Merge Cells	Об'єднати клітинки
+	Merge Formatting	Об'єднати форматування
+	Merged PRs	Об'єднані PR
+	Mirrored	Дзеркальні
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Авторські права (c) 2026 команди ArtCraft і учасників WordCraft.
+	Moderate	Помірні
+	Modify Style	Змінити стиль
+	Modify…	Змінити…
+	Move or Resize	Перемістити або змінити розмір
+	Multilevel List	Багаторівневий список
+	Multiple Pages	Кілька сторінок
+	Name (A–Z)	Назва (А–Я)
+	Name:	Назва:
+	Narrow  0.5" all	Вузькі — усі по 0,5″
+	Navigation	Навігація
+	Navigation Pane	Панель навігації
+	New	Новий
+	New Comment	Новий коментар
+	New from Template	Створити з шаблону
+	New Paragraph	Новий абзац
+	New Style…	Новий стиль…
+	New Window	Нове вікно
+	New\nComment	Новий\nкоментар
+	New\nWindow	Нове\nвікно
+	Next	Далі
+	Next Change	Наступна зміна
+	Next Comment	Наступний коментар
+	Next Footnote	Наступна виноска
+	Next Page	Наступна сторінка
+	Next Record	Наступний запис
+	Next Section	Наступний розділ
+	No Border	Без меж
+	No Color	Без кольору
+	No contributor data was built into this copy.	Ця збірка не містить даних про учасників.
+	No Markup	Без позначок
+	No model credits were built into this copy.	Ця збірка не містить відомостей про моделі.
+	No Paragraph Space	Без інтервалу між абзацами
+	Nonbreaking Hyphen	Нерозривний дефіс
+	Nonbreaking Space	Нерозривний пробіл
+	None	Немає
+	Normal  1" all	Звичайні — усі по 1″
+	Normal Style	Звичайний стиль
+	Not available right now	Зараз недоступно
+	Not saved	Не збережено
+	Not saved yet	Ще не збережено
+	Nudge	Злегка зсунути
+	Number of columns:	Кількість стовпців:
+	Number of rows:	Кількість рядків:
+	Numbering	Нумерація
+	Object	Об'єкт
+	Odd Page	Непарна сторінка
+	Office 2003 Default	Типовий Office 2003
+	OK	Гаразд
+	One	Один
+	One Page	Одна сторінка
+	Open	Відкрити
+	OpenDocument Text (*.odt)	Текст OpenDocument (*.odt)
+	Optional Hyphen	М'який перенос
+	Copyright Sign	Знак авторського права
+	Ellipsis	Три крапки
+	Em Dash	Довге тире
+	Insert Date Field	Вставити поле дати
+	Insert Page Field	Вставити поле сторінки
+	Insert Time Field	Вставити поле часу
+	Registered Sign	Знак зареєстрованої торгової марки
+	Reset Character Formatting	Скинути форматування символів
+	Reset Paragraph Formatting	Скинути форматування абзацу
+	Trademark Sign	Знак торгової марки
+	Options	Параметри
+	Orientation	Орієнтація
+	Outline	План
+	Outline Level	Рівень плану
+	Outside Borders	Зовнішні межі
+	Oval	Овал
+	Page	Сторінка
+	Page Background	Тло сторінки
+	Page Borders	Межі сторінки
+	Page Break	Розрив сторінки
+	Page Break Before	Розрив сторінки перед абзацом
+	Page break before	Розрив сторінки перед абзацом
+	Page Breaks	Розриви сторінок
+	Page Color	Колір сторінки
+	Page Down	На сторінку вниз
+	Page image (*.png)	Зображення сторінки (*.png)
+	Page image (*.jpg, *.jpeg)	Зображення сторінки (*.jpg, *.jpeg)
+	Page Movement	Переміщення сторінок
+	Page Number	Номер сторінки
+	Page Setup	Параметри сторінки
+	Page Up	На сторінку вгору
+	Page Width	Ширина сторінки
+	Page width	Ширина сторінки
+	Page X of Y	Сторінка X із Y
+	Page {page}	Сторінка {page}
+	Page {page} of {pages}	Сторінка {page} із {pages}
+	Page\nBorders	Межі\nсторінки
+	Page\nColor	Колір\nсторінки
+	Page\nNumber	Номер\nсторінки
+	Pages	Сторінки
+	Paragraph	Абзац
+	Paragraph Details	Відомості про абзац
+	Paragraph Down	На абзац вниз
+	Paragraph Settings	Параметри абзацу
+	Paragraph Spacing	Інтервал між абзацами
+	Paragraph Up	На абзац вгору
+	Paragraphs	Абзаци
+	Paste	Вставити
+	Paste as:	Вставити як:
+	Paste Formatting	Вставити форматування
+	Paste Special	Спеціальна вставка
+	Paste Special…	Спеціальна вставка…
+	Paste: Keep Text Only	Вставлення: зберегти лише текст
+	Paste: Merge Formatting	Вставлення: об'єднати форматування
+	PDF document (*.pdf)	Документ PDF (*.pdf)
+	Pen	Перо
+	Pencil	Олівець
+	Picture Border	Межа зображення
+	Picture Format	Формат зображення
+	Picture Styles	Стилі зображень
+	Pictures	Зображення
+	Plain text (*.txt)	Звичайний текст (*.txt)
+	Portrait	Книжкова
+	Position	Положення
+	Preview Results	Переглянути результати
+	Preview\nResults	Переглянути\nрезультати
+	Previous	Назад
+	Previous Change	Попередня зміна
+	Previous Comment	Попередній коментар
+	Previous Record	Попередній запис
+	Previous Section	Попередній розділ
+	Print	Друк
+	Print Layout	Макет друку
+	Print\nLayout	Макет\nдруку
+	Proofing	Перевірка
+	Proofing Issues	Проблеми перевірки
+	Properties	Властивості
+	Protect	Захист
+	Protect Document	Захистити документ
+	Quick Access Toolbar	Панель швидкого доступу
+	Quick Parts	Швидкі фрагменти
+	Quick Tables	Швидкі таблиці
+	Read Aloud	Читати вголос
+	Read Mode	Режим читання
+	Read\nAloud	Читати\nвголос
+	Read\nMode	Режим\nчитання
+	Reads the clipboard's rich text and keeps its formatting.	Читає форматований текст (RTF) із буфера обміну та зберігає його форматування.
+	Reads the clipboard's web content and keeps its formatting.	Читає вебвміст із буфера обміну та зберігає його форматування.
+	Reading Highlight	Виділення під час читання
+	Recent	Останні
+	Record Macro	Записати макрос
+	Recover Unsaved Documents	Відновити незбережені документи
+	Rectangle	Прямокутник
+	Redo	Повторити
+	Reduce Hanging Indent	Зменшити виступ першого рядка
+	References	Посилання
+	Reject	Відхилити
+	Reject All Changes	Відхилити всі зміни
+	Reject Change	Відхилити зміну
+	Relaxed	Вільний
+	Remove Background	Видалити тло
+	Remove Footer	Видалити нижній колонтитул
+	Remove Header	Видалити верхній колонтитул
+	Remove Hyperlink	Видалити гіперпосилання
+	Remove Space After Paragraph	Видалити інтервал після абзацу
+	Remove Table of Contents	Видалити зміст
+	Remove Watermark	Видалити водяний знак
+	Repeat	Повторити
+	Repeat Header Rows	Повторювати рядки заголовків
+	Replace	Замінити
+	Replace All	Замінити все
+	Replace Document Text	Замінити текст документа
+	Replace with:	Замінити на:
+	Replay	Відтворити
+	Reply	Відповісти
+	Report	Звіт
+	Research	Дослідження
+	Researcher	Дослідник
+	Reset Picture	Скинути зображення
+	Reset to Normal	Скинути до звичайного
+	Resolve	Вирішити
+	Resolved	Вирішено
+	Restart at 1	Почати з 1
+	Restart Each Page	Починати на кожній сторінці
+	Restart Each Section	Починати в кожному розділі
+	Restrict Editing	Обмежити редагування
+	Restrict\nEditing	Обмежити\nредагування
+	Result	Результат
+	Results	Результати
+	Reverse the order	Зворотний порядок
+	Review	Рецензування
+	Reviewing	Рецензування
+	Reviewing Pane	Панель рецензування
+	Reviewing — edits become suggestions	Рецензування — зміни стають пропозиціями
+	Rich Text Format (*.rtf)	Форматований текст (*.rtf)
+	Rich Text Format (RTF)	Формат RTF (Rich Text Format)
+	Right	Праворуч
+	Right Border	Права межа
+	Right-to-Left Text Direction	Напрямок тексту справа наліво
+	Left-to-Right Text Direction	Напрямок тексту зліва направо
+	Right:	Праворуч:
+	Rotate	Повернути
+	Rounded Rectangle	Заокруглений прямокутник
+	Rows & Columns	Рядки й стовпці
+	Ruler	Лінійка
+	Rules	Правила
+	Résumé	Резюме
+	Save	Зберегти
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Збережіть копію в іншому форматі. Для друку створюється PDF, який можна надрукувати з будь-якої програми перегляду.
+	Save As	Зберегти як
+	Save as Template	Зберегти як шаблон
+	Saved	Збережено
+	Search Commands	Пошук команд
+	Search commands and help	Пошук команд і довідки
+	Search document	Пошук у документі
+	Section Breaks	Розриви розділів
+	Section Properties	Властивості розділу
+	Sections	Розділи
+	Select	Виділити
+	Select All	Виділити все
+	Select Cell	Виділити клітинку
+	Select Line	Виділити рядок
+	Select Objects	Виділити об'єкти
+	Select Paragraph	Виділити абзац
+	Select Range	Виділити діапазон
+	Select Recipients	Вибрати одержувачів
+	Select Row	Виділити рядок таблиці
+	Select Sentence	Виділити речення
+	Select Table	Виділити таблицю
+	Select Text	Виділити текст
+	Select Text with Similar Formatting	Виділити текст зі схожим форматуванням
+	Select Word	Виділити слово
+	Select\nRecipients	Вибрати\nодержувачів
+	Selection	Виділення
+	Selection Pane	Панель виділення
+	Send Backward	Перемістити назад
+	Sentence case.	Як у реченні.
+	Set as Default	Установити як типове
+	Set Caret	Установити каретку
+	Set Character Formatting	Установити форматування символів
+	Set Numbering Value	Установити значення нумерації
+	Set Paragraph Formatting	Установити форматування абзацу
+	Shading	Заливка
+	Shadow	Тінь
+	Shape Fill	Заливка фігури
+	Shape Format	Формат фігури
+	Shape Outline	Контур фігури
+	Shape Styles	Стилі фігур
+	Shapes	Фігури
+	Share	Поділитися
+	Shift+Tab	Shift+Tab
+	Show	Показати
+	Show all formatting marks	Показати всі знаки форматування
+	Show all revisions inline	Показувати всі виправлення в тексті
+	Show Comments	Показати коментарі
+	Show Markup	Показати позначки
+	Show Notes	Показати примітки
+	Show only comments and formatting in balloons	Показувати у виносках лише коментарі й форматування
+	Show revisions in balloons	Показувати виправлення у виносках
+	Show rulers	Показати лінійки
+	Animation	Анімація
+	Animate the caret (it glides and fades)	Анімувати каретку (плавно рухається та згасає)
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Увімкнено: каретка плавно переходить на нове місце, коли ви вводите текст або користуєтеся стрілками, а її блимання згасає поступово. Вимкнено: вона перестрибує й блимає різко.
+	Show/Hide ¶	Показати/приховати ¶
+	Show\nComments	Показати\nкоментарі
+	Shrink Font 1 Point	Зменшити шрифт на 1 пункт
+	Side to Side	Поруч
+	Side\nto Side	Поруч
+	Signature Line	Рядок підпису
+	Single	Одинарний
+	Single Spacing	Одинарний інтервал
+	Size	Розмір
+	Size (pt):	Розмір (пункти):
+	Size:	Розмір:
+	Small Caps	Малі великі літери
+	Small caps	Малі великі літери
+	SmartArt	SmartArt
+	Sort	Сортувати
+	Source code: github.com/chatraweechai/doc4me	Вихідний код: github.com/chatraweechai/doc4me
+	Space	Пробіл
+	Space before/after:	Інтервал перед/після:
+	Spacing	Інтервал
+	Spacing (pt):	Інтервал (пункти):
+	Speech	Мовлення
+	Spelling & Grammar	Правопис і граматика
+	Spelling &\nGrammar	Правопис і\nграматика
+	Spelling Suggestions	Пропозиції правопису
+	Split	Розділити
+	Split Cells	Розділити клітинки
+	Split Table	Розділити таблицю
+	Spreadsheet Table	Таблиця електронної таблиці
+	Standard Colors	Стандартні кольори
+	Star	Зірка
+	Start at:	Почати з:
+	Start Mail Merge	Почати злиття пошти
+	Start Mail\nMerge	Почати злиття\nпошти
+	Statistics	Статистика
+	Status Bar	Рядок стану
+	Strikethrough	Закреслення
+	Studio cover	Обкладинка студії
+	Studio handbook (sample)	Посібник студії (приклад)
+	Style	Стиль
+	Style based on:	Стиль на основі:
+	Style Inspector	Інспектор стилів
+	Style Set	Набір стилів
+	Style: {style}	Стиль: {style}
+	Styles	Стилі
+	Styles Pane	Панель стилів
+	Subscript	Нижній індекс
+	Superscript	Верхній індекс
+	Switch Modes	Перемкнути режими
+	Switch\nModes	Перемкнути\nрежими
+	Symbol	Символ
+	Symbols	Символи
+	Synonyms	Синоніми
+	Tab	Табуляція
+	Tab character	Символ табуляції
+	Table	Таблиця
+	Table Column Width	Ширина стовпця таблиці
+	Table Design	Дизайн таблиці
+	Table Layout	Макет таблиці
+	Table of Authorities	Покажчик правових джерел
+	Table of Contents	Зміст
+	Table of\nContents	Зміст
+	Table Properties	Властивості таблиці
+	Table Row Height	Висота рядка таблиці
+	Table Style Options	Параметри стилю таблиці
+	Table Styles	Стилі таблиць
+	Tables	Таблиці
+	Tabs	Табуляція
+	Tabular List	Табличний список
+	Text	Текст
+	Text Box	Текстове поле
+	Text Direction	Напрямок тексту
+	Text Effects	Текстові ефекти
+	Text Effects and Typography	Текстові ефекти й типографіка
+	Text from File	Текст із файлу
+	Text Highlight Color	Колір виділення тексту
+	Text indent at:	Відступ тексту:
+	Text to display:	Текст для відображення:
+	Text Wrapping	Обтікання текстом
+	Text:	Текст:
+	Text\nBox	Текстове\nполе
+	Text\nDirection	Напрямок\nтексту
+	The clipboard is empty.	Буфер обміну порожній.
+	The new style takes the formatting of the current paragraph.	Новий стиль використовує форматування поточного абзацу.
+	Theme Colors	Кольори теми
+	Theme Fonts	Шрифти теми
+	Theme List	Список тем
+	Themes	Теми
+	Thesaurus	Тезаурус
+	Thick	Товста
+	Three	Три
+	Tight	Щільний
+	Top Border	Верхня межа
+	Top Margin	Верхнє поле
+	Top of Page	Угорі сторінки
+	Top:	Зверху:
+	Total Row	Рядок підсумків
+	Track Changes	Відстежувати зміни
+	Track Changes Options	Параметри відстеження змін
+	Track Changes: On	Відстеження змін: увімкнено
+	Track formatting	Відстежувати форматування
+	Tracking	Відстеження
+	Translate	Перекласти
+	Transparency	Прозорість
+	Triangle	Трикутник
+	Two	Два
+	Type a command, e.g. "insert table"	Введіть команду, наприклад «вставити таблицю»
+	Type Text	Ввести текст
+	Underline	Підкреслення
+	Underline Words Only	Підкреслити лише слова
+	Undo	Скасувати
+	Undo {action}	Скасувати {action}
+	Ungroup	Розгрупувати
+	Unformatted Text	Неформатований текст
+	Up	Угору
+	Update Field	Оновити поле
+	Update Index	Оновити покажчик
+	Update Style to Match Selection	Оновити стиль за виділенням
+	Update Table	Оновити таблицю
+	Update Table of Figures	Оновити список ілюстрацій
+	Update to Match	Оновити за зразком
+	Update to Match Selection	Оновити за виділенням
+	UPPERCASE	ВЕЛИКІ ЛІТЕРИ
+	User Name	Ім'я користувача
+	User name:	Ім'я користувача:
+	Version History	Історія версій
+	Version {version} ({build})	Версія {version} ({build})
+	Vertical	Вертикальна
+	Vertical Alignment	Вертикальне вирівнювання
+	View	Вигляд
+	View Gridlines	Показати лінії сітки
+	View State	Стан вигляду
+	Views	Вигляди
+	Voice	Голос
+	Watermark	Водяний знак
+	Wave	Хвиля
+	Web Layout	Макет вебсторінки
+	Web page (*.html)	Вебсторінка (*.html)
+	Web\nLayout	Макет вебсторінки
+	Whole page	Уся сторінка
+	Whole words	Цілі слова
+	Wide	Широкі
+	Widow/Orphan Control	Не залишати самотні рядки
+	Widow/Orphan control	Не залишати самотні рядки
+	Window	Вікно
+	Word Count	Кількість слів
+	Word document (*.docx)	Документ Word (*.docx)
+	Word XML Document (*.xml)	Документ Word XML (*.xml)
+	Word Left	На слово ліворуч
+	Word Right	На слово праворуч
+	WordArt	WordArt
+	Doc4Me	Doc4Me
+	Words	Слова
+	Words only	Лише слова
+	Wrap Text	Обтікання текстом
+	Wrap\nText	Обтікання\nтекстом
+	Write & Insert Fields	Написання й вставлення полів
+	Write a reply	Напишіть відповідь
+	Zoom	Масштаб
+	Zoom In	Збільшити масштаб
+	Zoom Out	Зменшити масштаб
+	{group} settings	Параметри групи «{group}»
+	{key}+Click to follow link	{key}+клацання, щоб перейти за посиланням
+	Browse…	Огляд…
+	{words} words	Слів: {words}
+	{selected} of {words} words	Слів: {words}; виділено: {selected}
+	Apply Styles	Застосувати стилі
+	Dark page (white text on black)	Темна сторінка (білий текст на чорному)
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Показує документи з інвертованими кольорами, як Вигляд › Перемкнути режими. Збереження, друк і PDF не змінюються.
+	Only web (http, https) and email (mailto) links can be followed	Можна переходити лише за вебпосиланнями (http, https) і посиланнями на електронну пошту (mailto)
+	Scroll ribbon left	Прокрутити стрічку ліворуч
+	Scroll ribbon right	Прокрутити стрічку праворуч
+	Character Border	Межа символу
+	Direction:	Напрямок:
+	Right-to-left	Справа наліво
+	Left-to-right	Зліва направо
+# Zotero integration
+	Zotero	Zotero
+	Citations	Цитати
+	Document	Документ
+	Add/Edit\nCitation	Додати/змінити\nцитату
+	Add\nNote	Додати\nпримітку
+	Add/Edit\nBibliography	Додати/змінити\nбібліографію
+	Refresh	Оновити
+	Document\nPreferences	Параметри\nдокумента
+	Unlink\nCitations	Від'єднати\nцитати
+	Waiting for Zotero…	Очікування Zotero…
+	Zotero: done	Zotero: готово
+	Zotero: cancelled	Zotero: скасовано
+	Yes	Так
+	No	Ні
+# Read Aloud player
+	Move Past Citation	Перейти за цитату
+	Move Past\nCitation	Перейти\nза цитату
+	Next Sentence	Наступне речення
+	Previous Sentence	Попереднє речення
+	Next sentence	Наступне речення
+	Previous sentence	Попереднє речення
+	Play/Pause	Відтворити/пауза
+	Read Aloud Status	Стан читання вголос
+	Reading Speed	Швидкість читання
+	Skip Citations and Bibliography	Пропускати цитати й бібліографію
+	Skip citations & bibliography	Пропускати цитати й бібліографію
+	Stop Reading	Зупинити читання
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Не читати цитати й бібліографії Zotero, Mendeley чи EndNote
+	Play	Відтворити
+	Pause	Пауза
+	Stop	Зупинити
+	Sentence	Речення
+	Paused	Призупинено
+	Finished	Завершено
+	Stopped	Зупинено
+	Speed	Швидкість
+	Normal speed	Звичайна швидкість
+	AutoSave documents you have saved in Doc4Me	Автоматично зберігати документи, збережені у Doc4Me
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	Не вдалося виконати автозбереження: {error}. Збережіть документ, щоб знову ввімкнути автозбереження.
+	Couldn't download {name}: {error}	Не вдалося завантажити {name}: {error}
+	Do you want to save changes to {name}?	Зберегти зміни в {name}?
+	Don't Save	Не зберігати
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Цей формат зберігає не все, тому документ залишається відкритим. Щоб продовжити, збережіть його як документ Word (.docx).
+	Your changes will be lost if you don't save them.	Якщо не зберегти зміни, їх буде втрачено.
+# Equations.
+	Change Structure	Змінити структуру
+	Change to Display	Змінити на окремий рядок
+	Change to Inline	Змінити на вбудований
+	Conversions	Перетворення
+	Delete Back in Equation	Видалити назад у рівнянні
+	Delete in Equation	Видалити в рівнянні
+	Edit Equation	Редагувати рівняння
+	Enter in Equation	Enter у рівнянні
+	Equation Gallery	Колекція рівнянь
+	Equation Info	Відомості про рівняння
+	Equation Number	Номер рівняння
+	Input Format	Формат введення
+	Insert Structure	Вставити структуру
+	Insert Symbol	Вставити символ
+	Justification	Вирівнювання
+	Leave Equation	Вийти з рівняння
+	Move in Equation	Переміщення в рівнянні
+	Normal Text	Звичайний текст
+	Set Equation	Задати рівняння
+	Structure Actions	Дії зі структурою
+	Structures	Структури
+	Tools	Знаряддя
+	Type in Equation	Введення в рівнянні
+	Inline	Вбудований
+	Number	Номер
+	Close Equation	Закрити рівняння
+	Insert New Equation	Вставити нове рівняння
+	Built-In	Вбудовані
+	Professional	Професійний
+	Linear	Лінійний
+	Fraction	Дріб
+	Script	Індекс
+	Radical	Радикал
+	Integral	Інтеграл
+	Large\nOperator	Великий\nоператор
+	Bracket	Дужки
+	Function	Функція
+	Accent	Діакритичний знак
+	Limit and\nLog	Границя та\nлогарифм
+	Operator	Оператор
+	Equation Options	Параметри рівняння
+	All symbol sets	Усі набори символів
+	Send the document straight to the system print dialog, or save a copy in another format below.	Надішліть документ безпосередньо до системного діалогу друку або збережіть копію в іншому форматі нижче.
+	Or save a copy in another format:	Або збережіть копію в іншому форматі:
+	Opening print dialog…	Відкриття діалогу друку…
+	Print failed: {error}	Не вдалося надрукувати: {error}
+	Couldn't open {path}: {error}	Не вдалося відкрити {path}: {error}
+	Column Selection	Виділення стовпця
+	New Table Style	Новий стиль таблиці
+	Modify Table Style	Змінити стиль таблиці
+	New Table Style…	Новий стиль таблиці…
+	Modify Table Style…	Змінити стиль таблиці…
+	Apply formatting to:	Застосувати форматування до:
+	Whole Table	Уся таблиця
+	Fill color:	Колір заливки:
+	{count} items highlighted	Виділено елементів: {count}
+	{n} pt	{n} пт
+	Not {name}	Без: {name}
+	Level {n}	Рівень {n}
+	Body Text	Основний текст
+	{n} lines	Рядків: {n}
+	At least {n}	Щонайменше {n}
+	Exactly {n}	Точно {n}
+	Centered	По центру
+	Character spacing	Інтервал між символами
+	Don't add space between paragraphs of the same style	Не додавати інтервал між абзацами одного стилю
+	Don't hyphenate	Без перенесення слів
+	Double strikethrough	Подвійне закреслення
+	Drop cap	Буквиця
+	First line	Перший рядок
+	Font color	Колір шрифту
+	Highlight	Виділення кольором
+	Justified	За шириною
+	Left indent	Відступ ліворуч
+	Line spacing	Міжрядковий інтервал
+	Outline level	Рівень плану
+	Raised/lowered	Піднято/опущено
+	Right indent	Відступ праворуч
+	Scale	Масштаб
+	Space after	Інтервал після
+	Space before	Інтервал перед
+	Suppress line numbers	Без номерів рядків
+	Underline color	Колір підкреслення
+	Letters	Листи
+	E-mail Messages	Повідомлення електронної пошти
+	Directory	Каталог
+	Normal Word Document	Звичайний документ
+	If…Then…Else…	Якщо…То…Інакше…
+	If…Then…Else	Якщо…То…Інакше
+	Merge Record #	Номер запису злиття
+	Skip Record If…	Пропустити запис, якщо…
+	Skip Record If	Пропустити запис, якщо
+	Equals:	Дорівнює:
+	Then insert:	Тоді вставити:
+	Otherwise insert:	Інакше вставити:
+	Courtesy Title	Звертання
+	First Name	Ім'я
+	Last Name	Прізвище
+	Company	Компанія
+	Address	Адреса
+	City	Місто
+	State	Область
+	Postal Code	Поштовий індекс
+	Country	Країна
+	(not matched)	(не зіставлено)
+	Leave a recipient out of the merge when a field has this value.	Пропускати одержувача під час злиття, коли поле має це значення.
+	Insert one text or another, depending on a field's value.	Вставити той чи інший текст залежно від значення поля.
+	Select recipients first to match their fields.	Спершу виберіть одержувачів, щоб зіставити їхні поля.
+	The recipient-list field that fills each part of an address block and greeting line.	Поле списку одержувачів, яке заповнює кожну частину блоку адреси та рядка привітання.
+	No errors found: every merge field is in the recipient list.	Помилок не знайдено: усі поля злиття є в списку одержувачів.
+	These merge fields aren't in the recipient list:	Цих полів злиття немає в списку одержувачів:
+	Add at least one field.	Додайте принаймні одне поле.
+	Add Field	Додати поле
+	Every field needs a name.	Кожне поле потребує назви.
+	Field name	Назва поля
+	Field names must be different.	Назви полів мають відрізнятися.
+	Fields:	Поля:
+	Field:	Поле:
+	Find:	Знайти:
+	New Entry	Новий запис
+	Recipient List	Список одержувачів
+	Recipients: {count}	Одержувачів: {count}
+	Remove field	Видалити поле
+	Remove recipient	Видалити одержувача
+	Select recipients first to choose from their fields.	Спершу виберіть одержувачів, щоб вибрати з їхніх полів.
+	Type a New List…	Ввести новий список…
+	Type at least one recipient.	Введіть принаймні одного одержувача.
+	Type the recipients, or load them from a file.	Введіть одержувачів або завантажте їх із файлу.
+	Use an Existing List…	Використати наявний список…
+	Choose the sheet that holds the recipients.	Виберіть аркуш з одержувачами.
+	First row of data contains column headers	Перший рядок даних містить заголовки стовпців
+	Interface theme:	Тема інтерфейсу:
+	Interface\nTheme	Тема\nінтерфейсу
+	Interface Theme	Тема інтерфейсу
+	Light	Світла
+	Dark	Темна
+	Use system setting	Як у системі
+	A file dialog is already open.	Діалогове вікно файлу вже відкрито.
+	Height:	Висота:
+	Width:	Ширина:
+	Row	Рядок
+	Cell	Клітинка
+	Preferred width:	Бажана ширина:
+	Alignment:	Вирівнювання:
+	Indent from left:	Відступ ліворуч:
+	Specify height:	Указати висоту:
+	Exactly	Точно
+	At least	Принаймні
+	Allow row to break across pages	Дозволити розрив рядка між сторінками
+	Repeat as header row on each page	Повторювати як рядок заголовка на кожній сторінці
+	Vertical alignment:	Вертикальне вирівнювання:
+	Top	Угорі
+	Bottom	Унизу
+	Alt text	Альтернативний текст
+	Alt:	Альт.:
+	W:	Ш:
+	H:	В:
+	Reset	Скинути
+	Reset Crop	Скинути обітнення
+	Insert a new equation (Alt+=)	Вставити нове рівняння (Alt+=)
+	Leave the equation (Esc)	Вийти з рівняння (Esc)
+	Preview	Попередній перегляд
+	Draw Ink	Малювати чорнилом
+	Erase Ink	Стерти чорнило
+	Hide Ink	Сховати чорнило
+	Hide\nInk	Сховати\nчорнило
+	Pens	Пера
+	Thickness	Товщина
+
+# Columns, Symbol and Field dialogs (#321).
+	(All)	(Усі)
+	(none)	(немає)
+	(normal text)	(звичайний текст)
+	1/4 Em Space	Пробіл 1/4 кегля
+	A mail merge field	Поле злиття
+	A numbered sequence (figures, tables…)	Нумерована послідовність (рисунки, таблиці…)
+	A table of contents	Зміст
+	Categories:	Категорії:
+	Character	Символ
+	Character code:	Код символу:
+	Col #:	Стовпець:
+	Copyright	Знак авторського права
+	Date and Time	Дата й час
+	Date formats:	Формати дати:
+	Description:	Опис:
+	Document Information	Відомості про документ
+	Double Closing Quote	Закривні подвійні лапки
+	Double Opening Quote	Відкривні подвійні лапки
+	En Dash	Коротке тире
+	Em Space	Широкий пробіл
+	En Space	Пробіл середньої ширини
+	Equal column width	Однакова ширина стовпців
+	Field Codes	Коди полів
+	Field code:	Код поля:
+	Field codes:	Коди полів:
+	Field name:	Назва поля:
+	Field names:	Назви полів:
+	Field properties	Властивості поля
+	Field…	Поле…
+	Format:	Формат:
+	Hide Codes	Сховати коди
+	Index and Tables	Покажчики й таблиці
+	Line between	Лінія між стовпцями
+	Links and References	Зв'язки й посилання
+	Mail Merge	Злиття
+	More Columns…	Інші стовпці…
+	More Symbols…	Інші символи…
+	No-Width Non Break	Нерозривний символ нульової ширини
+	No-Width Optional Break	Необов'язковий розрив нульової ширини
+	Paragraph Mark	Знак абзацу
+	Pick a field from the list	Виберіть поле
+	Preserve formatting during updates	Зберігати форматування під час оновлення
+	Presets	Шаблони
+	Recently used symbols:	Нещодавно використані символи:
+	Registered	Зареєстрована торговельна марка
+	Section Mark	Знак параграфа
+	Sequence name:	Назва послідовності:
+	Shortcut key:	Сполучення клавіш:
+	Single Closing Quote	Закривна одинарна лапка
+	Single Opening Quote	Відкривна одинарна лапка
+	Spacing:	Інтервал:
+	Special Characters	Спеціальні символи
+	Subset:	Набір:
+	The time right now	Поточний час
+	When this document was first created	Дата створення документа
+	When this document was most recently printed	Дата останнього друку документа
+	When this document was most recently saved	Дата останнього збереження документа
+	The document has no bookmarks yet.	У документі ще немає закладок.
+	Who the document properties name as author	Автор документа
+	Name of the file this document is saved as	Ім'я файлу документа
+	Title from the document properties	Назва документа
+	How many pages the whole document has	Кількість сторінок у документі
+	How many pages this section has	Кількість сторінок у розділі
+	Number of the page the field sits on	Номер поточної сторінки
+	Number of the section the field sits in	Номер поточного розділу
+	How many words the document holds	Кількість слів у документі
+	Page on which a bookmarked passage falls	Номер сторінки закладки
+	Copy of the text a bookmark marks	Текст закладки
+	This field has no options.	Це поле не має параметрів.
+	This font has no characters to show.	Цей шрифт не має символів для показу.
+	This point forward	Від цього місця
+	The date it is today	Сьогоднішня дата
+	Trademark	Торговельна марка
+	Type the field's name and its switches, for example PAGE \\* roman.	Введіть назву поля та його ключі, наприклад PAGE \\* roman.
+	Width and spacing	Ширина й інтервал
+	from Unicode (hex)	з Unicode (шістн.)
+	Shape Effects	Ефекти фігури
+	Glow	Світіння
+	Soft Edges	М'які краї
+	No Shadow	Без тіні
+	No Glow	Без світіння
+	No Soft Edges	Без м'яких країв
+	Glow Colors	Кольори світіння
+	Weight	Товщина
+	Shadow, glow and soft edges	Тінь, світіння та м'які краї
+	Offset: Bottom Right	Зміщення: вниз праворуч
+	Offset: Bottom	Зміщення: вниз
+	Offset: Bottom Left	Зміщення: вниз ліворуч
+	Offset: Right	Зміщення: праворуч
+	Offset: Center	Зміщення: по центру
+	Offset: Left	Зміщення: ліворуч
+	Offset: Top Right	Зміщення: вгору праворуч
+	Offset: Top	Зміщення: вгору
+	Offset: Top Left	Зміщення: вгору ліворуч
+	Manage Styles	Керування стилями
+	Show or Hide Style	Показати або сховати стиль
+	Manage Styles…	Керування стилями…
+	Sort order:	Порядок сортування:
+	As Recommended	Як рекомендовано
+	Alphabetical	За абеткою
+	Font: {font}	Шрифт: {font}
+	{size} pt	{size} пт
+	Color: {color}	Колір: {color}
+	Space before: {pt} pt	Інтервал перед: {pt} пт
+	Space after: {pt} pt	Інтервал після: {pt} пт
+	Based on: {style}	На основі: {style}
+	Paragraph style	Стиль абзацу
+	Character style	Стиль символів
+	Linked style (paragraph and character)	Зв’язаний стиль (абзац і символи)
+	Table style	Стиль таблиці
+	Built-in style	Вбудований стиль
+	Show in the Styles gallery	Показувати в колекції стилів
+	Hide from style lists	Сховати зі списків стилів
+	Built-in styles can't be deleted.	Вбудовані стилі не можна видалити.
+	Delete Table Style	Видалити стиль таблиці
+	Password	Пароль
+	Password:	Пароль:
+	Confirm password:	Підтвердження пароля:
+	Encrypt with Password…	Зашифрувати паролем…
+	Change Password…	Змінити пароль…
+	Remove Password	Видалити пароль
+	A password is required to open this document.	Щоб відкрити цей документ, потрібен пароль.
+	Anyone can open this document. Encrypt it with a password to keep it private.	Цей документ може відкрити будь-хто. Зашифруйте його паролем, щоб захистити.
+	Anyone who opens the document will need this password.	Кожному, хто відкриватиме документ, знадобиться цей пароль.
+	{name} is protected with a password.	{name} захищено паролем.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Пароль неправильний. Перевірте його (паролі враховують регістр) і спробуйте ще раз.
+	The document will be saved with a password. Save it to protect it.	Документ буде збережено з паролем. Збережіть його, щоб захистити.
+	The password is removed. Save the document to keep the change.	Пароль видалено. Збережіть документ, щоб зберегти зміну.
+	The passwords don't match.	Паролі не збігаються.
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Зберігайте пароль у надійному місці: без нього ніхто, зокрема Doc4Me, не зможе відкрити документ. Залиште обидва поля порожніми, щоб видалити пароль.
+
+# Interface text routed through translation (#313)
+	Align Top Left	Вирівняти вгорі ліворуч
+	Align Top Center	Вирівняти вгорі по центру
+	Align Top Right	Вирівняти вгорі праворуч
+	Align Center Left	Вирівняти посередині ліворуч
+	Align Center	Вирівняти по центру
+	Align Center Right	Вирівняти посередині праворуч
+	Align Bottom Left	Вирівняти внизу ліворуч
+	Align Bottom Center	Вирівняти внизу по центру
+	Align Bottom Right	Вирівняти внизу праворуч
+	{contributors} contributors · {commits} commits	Учасників: {contributors} · комітів: {commits}
+	{cols}×{rows} Table	Таблиця {cols}×{rows}
+	AaBbYyZz	AaBbYyZz ЄєЇї
+	pt	пт
+	Document1	Документ1
+	Username	Ім'я користувача
+	Display name	Відображуване ім'я
+	Real name	Справжнє ім'я
+	Name	Ім'я
+	PRs	PR
+	Commits	Коміти
+	First	Перший
+	Last	Останній
+	Model	Модель
+	Version	Версія
+	% of all commits	% усіх комітів
+	Lines +/−	Рядки +/−
+	Craft	Ремесло
+	Studio	Студія
+	Atelier	Ательє
+	Darkroom	Фотолабораторія
+	Gallery	Галерея
+	Sketchbook	Альбом для ескізів
+	Change Picture…	Змінити зображення…
+	Font…	Шрифт…
+	Paragraph…	Абзац…
+	Link…	Посилання…
+	Size and Crop…	Розмір і обтинання…
+	Insert Columns to the Left	Вставити стовпці ліворуч
+	Insert Columns to the Right	Вставити стовпці праворуч
+	Insert Rows Above	Вставити рядки вище
+	Insert Rows Below	Вставити рядки нижче
+	Mon	Пн
+	Tue	Вт
+	Wed	Ср
+	Sum	Сума
+	North	Північ
+	South	Південь
+	West	Захід
+	Total	Разом
+
+# Table Layout › Draw (#308)
+	Draw\nTable	Намалювати\nтаблицю
+	Rotation	Поворот
+	Rotation:	Поворот:
+	Rotate Right 90°	Повернути праворуч на 90°
+	Rotate Left 90°	Повернути ліворуч на 90°
+	Flip Vertical	Віддзеркалити по вертикалі
+	Flip Horizontal	Віддзеркалити по горизонталі
+	Move Paragraph Up	Перемістити абзац угору
+	Move Paragraph Down	Перемістити абзац униз
+	Promote	Підвищити рівень
+	Demote	Понизити рівень
+	Go Back	Повернутися назад
+	Toggle Unicode Character	Перемкнути символ Unicode
+	Toggle Field Codes	Перемкнути коди полів
+	Edit Field Code	Змінити код поля
+	Unlink Fields	Від’єднати поля
+	Lock Fields	Заблокувати поля
+	Unlock Fields	Розблокувати поля
+	Next Field	Наступне поле
+	Previous Field	Попереднє поле
+	Selected Fields	Вибрані поля
+	Edit Field…	Змінити поле…
+	Formatted	Відформатовано
+	Deleted	Видалено
+	Interface size:	Розмір інтерфейсу:
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Збільшує або зменшує стрічку, меню й діалогові вікна понад системне масштабування екрана. Масштаб документа налаштовується окремо.
+	Resize Table by Dragging	Змінити розмір таблиці перетягуванням
+	Print Markup	Друкувати примітки та виправлення
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Коментарі біля кожної сторінки й відстежені зміни в PDF, друку та зображеннях; список коментарів наприкінці вебсторінок, Markdown і тексту.
+
+# Compare / Combine, AutoCorrect Options and Restrict Editing (#412)
+	1. Formatting restrictions	1. Обмеження форматування
+	2. Editing restrictions	2. Обмеження редагування
+	3. Start enforcement	3. Увімкнення захисту
+	<< Less	<< Менше
+	Another file	Інший файл
+	Apply as you type	Застосовувати під час введення
+	AutoCorrect	Автовиправлення
+	AutoFormat As You Type	Автоформат під час введення
+	Automatic bulleted lists	Автоматичні марковані списки
+	Automatic numbered lists	Автоматичні нумеровані списки
+	Border lines	Лінії меж
+	Capitalize first letter of sentences	Перша літера речення велика
+	Capitalize first letter of table cells	Перша літера в клітинках таблиці велика
+	Capitalize names of days	Назви днів із великої літери
+	Case changes	Зміни регістру
+	Character level	Рівень символів
+	Checked styles are allowed:	Позначені стилі дозволено:
+	Combine Documents	Об'єднання документів
+	Compare Documents	Порівняння документів
+	Compared: {changes} changes	Порівняно: змін {changes}
+	Comparing with another file needs the desktop app.	Для порівняння з іншим файлом потрібна настільна програма.
+	Comparison settings	Параметри порівняння
+	Don't capitalize after:	Не робити великої літери після:
+	Editing in this document is restricted.	Редагування цього документа обмежено.
+	Every change is recorded as a tracked change.	Кожна зміна записується як відстежувана.
+	Everyone	Усі
+	Exceptions (optional)	Винятки (необов'язково)
+	Exceptions…	Винятки…
+	Fields	Поля
+	Filling in forms	Заповнення форм
+	Find Next Editable Region	Знайти наступну область для редагування
+	Footnotes and endnotes	Виноски та кінцеві виноски
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Порівнюються форматування, регістр, пробіли й таблиці; інші параметри збережено на майбутнє.
+	Fractions (1/2) as fraction characters (½)	Дроби (1/2) як символи дробів (½)
+	Headers and footers	Колонтитули
+	Hyphens (--) as dashes (—)	Дефіси (--) як тире (—)
+	In equations, typing a name after a backslash replaces it with its symbol.	У рівняннях назва після зворотної скісної риски замінюється символом.
+	Internet addresses as links	Інтернет-адреси як посилання
+	Label changes with:	Позначати зміни іменем:
+	Limit formatting to a selection of styles	Обмежити форматування вибраними стилями
+	Math AutoCorrect	Математичне автовиправлення
+	More >>	Більше >>
+	Moves	Переміщення
+	New document	Новий документ
+	No changes (read only)	Без змін (лише читання)
+	Only allow this kind of editing:	Дозволити лише такий тип редагування:
+	Only comments can be added, except in regions marked editable.	Можна лише додавати коментарі, крім областей, позначених для редагування.
+	Only form fields can be filled in.	Можна заповнювати лише поля форми.
+	Only the allowed styles can be applied.	Можна застосовувати лише дозволені стилі.
+	Ordinals (1st) as superscript	Порядкові (1st) як надрядкові
+	Original document	Вихідний документ
+	This password type isn't supported.	Цей тип пароля не підтримується.
+	Replace as you type	Замінювати під час введення
+	Replace text as you type	Замінювати текст під час введення
+	Replace:	Замінити:
+	Revised document	Змінений документ
+	Select text, then tick who can still edit it.	Виділіть текст і позначте, хто може його редагувати.
+	Settings…	Параметри…
+	Show changes at:	Показувати зміни на рівні:
+	Show changes in:	Показувати зміни в:
+	Smart quotes instead of straight quotes	Типографські лапки замість прямих
+	Start Enforcing Protection	Увімкнути захист
+	Stop Protection	Вимкнути захист
+	Text boxes	Текстові поля
+	The document is read only, except for regions marked editable.	Документ лише для читання, крім областей, позначених для редагування.
+	The password is optional; without it anyone can stop the protection.	Пароль необов'язковий; без нього будь-хто може вимкнути захист.
+	This document	Цей документ
+	Tracked changes	Відстежувані зміни
+	Type the password to stop the protection.	Введіть пароль, щоб вимкнути захист.
+	White space	Пробіли
+	With:	На:
+	Word level	Рівень слів
+	In Line with Text	У рядку з текстом
+	Square	Квадрат
+	Through	Наскрізне
+	Top and Bottom	Зверху і знизу
+	Behind Text	За текстом
+	In Front of Text	Перед текстом
+	Wrap Text Sides	Сторони обтікання
+	Both Sides	З обох боків
+	Left Only	Лише ліворуч
+	Right Only	Лише праворуч
+	Largest Only	Лише з ширшого боку
+	Customize Keyboard	Настроювання клавіатури
+	Choose a command	Виберіть команду
+	Choose a shortcut	Виберіть сполучення клавіш
+	All Commands	Усі команди
+	Commands:	Команди:
+	Keys for this command:	Клавіші цієї команди:
+	New shortcut:	Нове сполучення клавіш:
+	Now used by {command}	Зараз використовує: {command}
+	Not used by any command	Не використовується жодною командою
+	Remove every custom shortcut and restore the built-in keys?	Видалити всі власні сполучення клавіш і відновити вбудовані?
+	Assign	Призначити
+	Reset All…	Скинути все…
+	Press a key combination	Натисніть сполучення клавіш
+	Customize	Настроювання
+	Keyboard shortcuts:	Сполучення клавіш:
+	Customize…	Настроїти…
+	Customize Ribbon	Налаштувати стрічку
+	Add to Quick Access Toolbar	Додати на панель швидкого доступу
+	Remove from Quick Access Toolbar	Видалити з панелі швидкого доступу
+	Customize the Ribbon…	Налаштувати стрічку…
+	Customize Quick Access Toolbar…	Налаштувати панель швидкого доступу…
+	More Commands…	Інші команди…
+	Ribbon	Стрічка
+	(Custom)	(Користувацька)
+	Remove every custom tab and group and show all tabs again?	Видалити всі користувацькі вкладки й групи та знову показати всі вкладки?
+	Put the default commands back on the Quick Access Toolbar?	Повернути стандартні команди на панель швидкого доступу?
+	Reset…	Скинути…
+	Add >>	Додати >>
+	<< Remove	<< Видалити
+	Pick a custom group (New Group makes one)	Виберіть користувацьку групу (її створює «Нова група»)
+	Ribbon tabs	Вкладки стрічки
+	New Tab	Нова вкладка
+	New Group	Нова група
+	Rename…	Перейменувати…
+	Ribbon and Quick Access Toolbar:	Стрічка й панель швидкого доступу:
+	Add Font…	Додати шрифт…
+	Added Fonts	Додані шрифти
+	Remove Added Font	Видалити доданий шрифт
+	Recent Colors	Останні кольори
+	More Colors…	Інші кольори…
+	Standard	Стандартні
+	Current	Поточний
+	Colors:	Кольори:
+	Color model:	Колірна модель:
+	Red:	Червоний:
+	Green:	Зелений:
+	Blue:	Синій:
+	Hue:	Відтінок:
+	Sat:	Насиченість:
+	Lum:	Яскравість:
+	Hex:	Hex:
+	Accessibility Pane	Панель доступності
+	Alt Text Pane	Панель альтернативного тексту
+	Alt\nText	Альтернативний\nтекст
+	View Alt Text…	Переглянути альтернативний текст…
+	Mark as decorative	Позначити як декоративний
+	Title:	Заголовок:
+	Errors ({n})	Помилки ({n})
+	Warnings ({n})	Попередження ({n})
+	Tips ({n})	Поради ({n})
+	No accessibility issues found.	Проблем із доступністю не знайдено.
+	Describe what this object shows, for people who can't see it.	Опишіть, що показує цей об’єкт, для тих, хто не може його бачити.
+	Decorative objects only add visual interest: screen readers skip them.	Декоративні об’єкти лише прикрашають документ: засоби читання з екрана їх пропускають.
+	Describe what this table shows, for people who can't see it.	Опишіть, що показує ця таблиця, для тих, хто не може її бачити.
+	Select a picture, shape, chart or table to describe it.	Виберіть зображення, фігуру, діаграму або таблицю, щоб описати її.
+	Document Grid	Сітка документа
+	No grid	Без сітки
+	Lines only	Лише рядки
+	Lines and characters	Рядки й символи
+	Text snaps to characters	Текст прив’язується до символів
+	Characters per line:	Символів у рядку:
+	Lines per page:	Рядків на сторінці:
+	Moved from	Переміщено звідси
+	Moved to	Переміщено сюди
+	Developer	Розробник
+	Controls	Елементи керування
+	Rich Text Content Control	Елемент керування вмістом «Форматований текст»
+	Plain Text Content Control	Елемент керування вмістом «Звичайний текст»
+	Picture Content Control	Елемент керування вмістом «Зображення»
+	Building Block Gallery Content Control	Елемент керування вмістом «Колекція стандартних блоків»
+	Check Box Content Control	Елемент керування вмістом «Прапорець»
+	Combo Box Content Control	Елемент керування вмістом «Поле зі списком»
+	Drop-Down List Content Control	Елемент керування вмістом «Розкривний список»
+	Date Picker Content Control	Елемент керування вмістом «Вибір дати»
+	Repeating Section Content Control	Елемент керування вмістом «Розділ, що повторюється»
+	Design Mode	Режим конструктора
+	Content Control at Selection	Елемент керування вмістом у виділенні
+	Toggle Check Box	Перемкнути прапорець
+	Choose List Item	Вибрати елемент списку
+	Set Date	Задати дату
+	Remove Content Control	Видалити елемент керування вмістом
+	Content Control Properties	Властивості елемента керування вмістом
+	Title	Назва
+	Tag	Тег
+	Placeholder text	Текст заповнювача
+	Can't be deleted	Не можна видалити
+	Contents can't be edited	Вміст не можна редагувати
+	Remove the control once edited	Видалити елемент після редагування
+	Allow line breaks	Дозволити розриви рядків
+	Date format	Формат дати
+	Checked symbol	Символ увімкненого стану
+	Unchecked symbol	Символ вимкненого стану
+	List entries	Елементи списку
+	Display text	Текст для показу
+	Value	Значення
+	Today	Сьогодні
+	Put the caret in a content control first.	Спершу поставте курсор в елемент керування вмістом.
+	Right-to-Left Table	Таблиця справа наліво
+	Right-to-Left Section	Розділ справа наліво
+	Table direction:	Напрямок таблиці:
+	Section direction:	Напрямок розділу:
+	Drawing Canvas	Полотно малювання
+	New Drawing Canvas	Нове полотно малювання
+	Fit	Підігнати
+	Expand	Розширити
+	Scale Drawing	Масштабувати малюнок
+	Canvas Member	Об’єкт полотна
+	Arrows	Стрілки
+	Communication	Спілкування
+	Office	Офіс
+	People	Люди
+	Nature	Природа
+	Weather	Погода
+	Technology	Технології
+	Transport	Транспорт
+	Icon Color	Колір піктограми
+	Search icons	Пошук піктограм
+	No icons match your search.	Немає піктограм, що відповідають пошуку.
+	Recolor a one-color picture, such as an icon	Змінити колір одноколірного зображення, наприклад піктограми
+	Enclose Characters	Обведення символів
+	Shrink text	Зменшити текст
+	Enlarge symbol	Збільшити символ
+	Enclosure	Обведення
+	Circle	Коло
+	Numerals:	Цифри:
+	Numerals	Цифри
+	Arabic	Арабські
+	Hindi	Гінді
+	Context	Контекст
+	System	Системні
+	Templates	Шаблони
+	Templates and Add-ins	Шаблони й надбудови
+	Attach Template	Приєднати шаблон
+	Detach Template	Від'єднати шаблон
+	Automatically Update Document Styles	Автоматично оновлювати стилі документа
+	Update Styles from Template	Оновити стилі із шаблону
+	Organizer	Організатор
+	Copy Styles	Копіювати стилі
+	Rename Style	Перейменувати стиль
+	Document template:	Шаблон документа:
+	Attach…	Приєднати…
+	Automatically update document styles	Автоматично оновлювати стилі документа
+	Organizer…	Організатор…
+	Change Chart Type	Змінити тип діаграми
+	Chart Design	Конструктор діаграми
+	Type	Тип
+	Edit Data	Редагувати дані
+	Chart Title	Назва діаграми
+	Chart Layouts	Макети діаграми
+	Add Chart Element	Додати елемент діаграми
+	Legend	Легенда
+	Data Labels	Підписи даних
+	Above Chart	Над діаграмою
+	Insert Chart	Вставити діаграму
+	Clustered Column	Стовпці з групуванням
+	Stacked Column	Стовпці з накопиченням
+	Clustered Bar	Смуги з групуванням
+	Stacked Bar	Смуги з накопиченням
+	Area	Області
+	Pie	Кругова
+	Doughnut	Кільцева
+	Scatter	Точкова
+	“{text}” ({row}, {series}) isn't a number.	«{text}» ({row}, {series}) — не число.
+	Category {n}	Категорія {n}
+	Series {n}	Ряд {n}
+	Type the categories down the side and a column of values per series.	Введіть категорії збоку та стовпець значень для кожного ряду.
+	Categories	Категорії
+	Series name	Назва ряду
+	Remove series	Видалити ряд
+	Remove row	Видалити рядок
+	Add Row	Додати рядок
+	Add Series	Додати ряд
+	Edit\nData	Редагувати\nдані
+	Change\nChart Type	Змінити тип\nдіаграми
+	Align Text	Вирівняти текст
+	Create Link	Створити зв'язок
+	Break Link	Розірвати зв'язок
+	Rotate all text 90°	Повернути весь текст на 90°
+	Rotate all text 270°	Повернути весь текст на 270°
+	Stacked	Стовпчиком
+	Middle	Посередині
+	Click the empty text box the text should continue in (Esc cancels)	Клацніть порожнє текстове поле, у якому має продовжитися текст (Esc — скасувати)
+	Not linked: click a text box	Не зв'язано: клацніть текстове поле
+	Show KeyTips (Alt or F10)	Показувати підказки клавіш (Alt або F10)
+	Location	Розташування
+	Endnotes	Кінцеві виноски
+	Below text	Під текстом
+	End of section	Кінець розділу
+	End of document	Кінець документа
+	Footnotes to endnotes	Виноски на кінцеві виноски
+	Endnotes to footnotes	Кінцеві виноски на виноски
+	Swap footnotes and endnotes	Поміняти виноски й кінцеві виноски
+	Custom mark:	Власна позначка:
+	Continuous numbering	Наскрізна нумерація
+	Apply	Застосувати
+	Convert Notes	Перетворити примітки
+	Reading	Читання
+	Reading Column Width	Ширина стовпця для читання
+	Reading Line Spacing	Міжрядковий інтервал для читання
+	Reading Text Size	Розмір тексту для читання
+	English (United Kingdom)	Англійська (Велика Британія)
+	Polish	Польська
+	Do Not Check Spelling or Grammar	Не перевіряти правопис і граматику
+
+# Built-in file browser when the system file dialog is unavailable (#576)
+	Documents	Документи
+	Word document	Документ Word
+	All files	Усі файли
+	Recipient lists	Списки одержувачів
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Системне діалогове вікно файлів недоступне, тож Doc4Me показує власне. Щоб отримати системне вікно, установіть портал вибору файлів (наприклад, xdg-desktop-portal-gtk) або zenity.
+	Up one level	На рівень вище
+	Home folder	Домашня тека
+	{name} wasn't found.	{name} не знайдено.
+	{name} already exists. Choose Save again to replace it.	{name} уже існує. Щоб замінити файл, виберіть «Зберегти» ще раз.
+	This folder can't be read: {error}	Не вдається прочитати цю теку: {error}
+	Showing the first {count} items.	Показано лише перші елементи: {count}.
+	File name:	Ім'я файлу:
+	Browse in Doc4Me…	Огляд у Doc4Me…
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Відкрити файл власним оглядачем Doc4Me, коли системне діалогове вікно файлів не з'являється.
+	Hide White Space	Приховати порожній простір
+	All pages	Усі сторінки
+	Current page	Поточна сторінка
+	Selected pages	Вибрані сторінки
+	Custom range	Власний діапазон
+	All pages in the range	Усі сторінки діапазону
+	Odd pages only	Лише непарні сторінки
+	Even pages only	Лише парні сторінки
+	Copies	Копії
+	Collate copies	Розсортувати копії
+	Pages like 1-3, 5	Сторінки, наприклад 1-3, 5
+	{count} of {total} pages will print	Буде надруковано {count} зі сторінок: {total}
+	Save these pages as PDF…	Зберегти ці сторінки як PDF…
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Принтер, двобічний друк і кількість сторінок на аркуші вибирають у цьому діалозі.
+	Previous Page	Попередня сторінка
+	Print to PDF	Друк у PDF
+	Add Shape	Додати фігуру
+	Change Colors	Змінити кольори
+	Change Layout	Змінити макет
+	Create Graphic	Створення графіки
+	Edit Items	Редагувати елементи
+	Layouts	Макети
+	Reset Graphic	Скинути графіку
+	SmartArt Design	Конструктор SmartArt
+	SmartArt Styles	Стилі SmartArt
+	Text Pane	Область тексту
+	List	Список
+	Process	Процес
+	Cycle	Цикл
+	Hierarchy	Ієрархія
+	Relationship	Зв’язок
+	Pyramid	Піраміда
+	Basic List	Простий список
+	Basic Process	Простий процес
+	Basic Cycle	Простий цикл
+	Basic Pyramid	Проста піраміда
+	Basic Radial	Проста радіальна
+	Basic Matrix	Проста матриця
+	Basic Venn	Проста діаграма Венна
+	Shows items of equal weight as blocks in rows.	Показує рівноцінні елементи як блоки в рядках.
+	Shows steps in order, left to right, with arrows between them.	Показує кроки по порядку, зліва направо, зі стрілками між ними.
+	Shows steps that repeat, around a circle.	Показує кроки, що повторюються, по колу.
+	Shows a tree: each item below the item it belongs to.	Показує дерево: кожен елемент під елементом, до якого він належить.
+	Shows parts that build on each other, largest at the bottom.	Показує частини, що спираються одна на одну, найбільша внизу.
+	Shows items around a central idea: the first item is the centre.	Показує елементи навколо центральної ідеї: перший елемент — центр.
+	Shows parts of a whole as quadrants.	Показує частини цілого як квадранти.
+	Shows overlapping ideas as overlapping circles.	Показує ідеї, що перетинаються, як кола, що перетинаються.
+	Accent {n}	Акцент {n}
+	Colorful	Різнокольоровий
+	Insert SmartArt	Вставити SmartArt
+	One line per item. Enter adds an item.	Один рядок на елемент. Enter додає елемент.
+	Add\nShape	Додати\nфігуру
+	Change\nColors	Змінити\nкольори
+	Reset\nGraphic	Скинути\nграфіку
+	Promote to Heading 1	Підвищити до заголовка 1
+	Demote to Body Text	Понизити до основного тексту
+	Move Up	Перемістити вгору
+	Move Down	Перемістити вниз
+	Collapse	Згорнути
+	Expand or Collapse Heading	Розгорнути або згорнути заголовок
+	Select Heading and Content	Виділити заголовок із вмістом
+	Show Level	Показати рівень
+	Show Level 1	Показати рівень 1
+	Show Level 2	Показати рівень 2
+	Show Level 3	Показати рівень 3
+	Show Level 4	Показати рівень 4
+	Show Level 5	Показати рівень 5
+	Show Level 6	Показати рівень 6
+	Show Level 7	Показати рівень 7
+	Show Level 8	Показати рівень 8
+	Show Level 9	Показати рівень 9
+	Show All Levels	Показати всі рівні
+	All Levels	Усі рівні
+	Show First Line Only	Лише перший рядок
+	Show Text Formatting	Показати форматування тексту
+	Close Outline View	Закрити режим плану
+	Outline State	Стан плану
+	Outlining	Структура
+	Outline Tools	Знаряддя плану
+	Close Outline\nView	Закрити\nрежим плану
+	A, B, C, …	A, B, C, …
+	Above the item	Над елементом
+	Accessed on	Дата звернення
+	Add New Source…	Додати нове джерело…
+	Add the chapter number	Додати номер розділу
+	Atmosphere	Атмосфера
+	Below the item	Під елементом
+	Book	Книга
+	Book title	Назва книги
+	Caption	Підпис
+	Caption Numbering	Нумерація підписів
+	Caption text	Текст підпису
+	Caption:	Підпис:
+	Chapter in a book	Розділ книги
+	Chapters begin at:	Розділи починаються з:
+	Collect entries from:	Брати елементи з:
+	Columns:	Стовпці:
+	Conference	Конференція
+	Conference paper	Доповідь конференції
+	Container Title	Назва видання
+	Create Source	Створити джерело
+	Cross-reference:	Перехресне посилання:
+	Custom Table of Contents…	Настроюваний зміст…
+	DOI	DOI
+	Day	День
+	Delete Label	Видалити мітку
+	Edit Source	Редагувати джерело
+	Edition	Видання
+	Edit…	Редагувати…
+	Entry marked.	Елемент позначено.
+	Example: {sample}	Приклад: {sample}
+	Figure	Рисунок
+	Film	Фільм
+	Heading styles (levels 1–{n})	Стилі заголовків (рівні 1–{n})
+	Heading {n}	Заголовок {n}
+	I, II, III, …	I, II, III, …
+	Include page numbers	Додавати номери сторінок
+	Indented	З відступом
+	Institution	Установа
+	Ionosphere	Іоносфера
+	Issue	Випуск
+	Journal	Журнал
+	Label:	Мітка:
+	Last, First; Last, First	Прізвище, Ім’я; Прізвище, Ім’я
+	Leave the label out of the caption	Не включати мітку в підпис
+	Letter headings	Літерні заголовки
+	Levels:	Рівні:
+	Link entries to their headings	Пов’язати елементи із заголовками
+	Made from the author and year when empty	Якщо порожньо, утворюється з автора й року
+	Magazine or newspaper article	Стаття в журналі чи газеті
+	Main entry:	Основний елемент:
+	Mark	Позначити
+	Mark All	Позначити всі
+	Mark Entry…	Позначити елемент…
+	Mark Index Entry	Позначити елемент покажчика
+	Mesosphere	Мезосфера
+	Month	Місяць
+	New Label	Нова мітка
+	New Label…	Нова мітка…
+	New…	Створити…
+	No sources yet.	Джерел ще немає.
+	Numbering…	Нумерація…
+	Options…	Параметри…
+	Other	Інше
+	Other styles and their TOC level:	Інші стилі та їхній рівень у змісті:
+	Outline levels	Рівні структури
+	Page number style	Стиль номера сторінки
+	Page numbers at the right margin	Номери сторінок біля правого поля
+	Page title	Назва сторінки
+	Pages of bookmark:	Сторінки закладки:
+	Periodical	Періодичне видання
+	Position:	Розташування:
+	Publisher	Видавець
+	Run-in	Суцільний
+	See	Див.
+	Separator:	Роздільник:
+	Show every bibliography field	Показати всі поля бібліографії
+	Site name	Назва сайту
+	Source Manager	Диспетчер джерел
+	Source type:	Тип джерела:
+	Sources in this document:	Джерела в цьому документі:
+	Styles:	Стилі:
+	Subentry:	Піделемент:
+	TC entry fields	Поля елементів TC
+	Tab leader:	Заповнювач табуляції:
+	Table of Contents Options	Параметри змісту
+	Table of Contents Styles	Стилі змісту
+	This page	Ця сторінка
+	Type:	Тип:
+	URL	URL
+	Volume	Том
+	Website	Вебсайт
+	Year	Рік
+	a, b, c, …	a, b, c, …
+	i, ii, iii, …	i, ii, iii, …
+	{n} entries marked.	Позначено елементів: {n}.
+	Lasso Select	Виділення ласо
+	Move Selected Ink	Перемістити виділений рукопис
+	Delete Selected Ink	Видалити виділений рукопис
+	Recolor Selected Ink	Змінити колір виділеного рукопису
+	Add Pen	Додати перо
+	Remove Pen	Вилучити перо
+	Ink to Shape	Рукопис у фігуру
+	Convert to Shapes	Перетворити на фігури
+	Convert to Arabic Digits	Перетворити на арабські цифри
+	Convert to Thai Digits	Перетворити на тайські цифри
+	Ink Replay	Відтворити рукопис
+	Add\nPen	Додати\nперо
+	Rewind	На початок
+	Forward	Вперед
+	Stroke {n} of {total}	Штрих {n} з {total}
+	Use wildcards	Використовувати шаблони
+	Special	Спеціальні
+	Match prefix	Збіг префікса
+	Match suffix	Збіг суфікса
+	Ignore punctuation characters	Ігнорувати розділові знаки
+	Ignore white-space characters	Ігнорувати пробільні символи
+	Regular expressions	Регулярні вирази
+	Search Options	Параметри пошуку
+	Tab Character	Символ табуляції
+	Any Character	Будь-який символ
+	Any Digit	Будь-яка цифра
+	Any Letter	Будь-яка літера
+	Caret Character	Символ каретки
+	Section Character	Знак параграфа
+	Paragraph Character	Символ абзацу
+	Graphic	Графіка
+	Manual Line Break	Примусовий розрив рядка
+	Manual Page Break	Примусовий розрив сторінки
+	Section Break	Розрив розділу
+	White Space	Пробіл
+	Clipboard Contents	Вміст буфера обміну
+	Find What Text	Знайдений текст
+	Find What Expression	Знайдений вираз
+	Character in Range	Символ із діапазону
+	Beginning of Word	Початок слова
+	End of Word	Кінець слова
+	Expression	Вираз
+	Not	Не
+	Num Occurrences	Кількість повторень
+	Previous 1 or More	Попередній 1 або більше разів
+	0 or More Characters	0 або більше символів
+	Move with Text	Переміщувати з текстом
+	Fix Position on Page	Зафіксувати положення на сторінці
+
+# WordArt and connectors (#416).
+	WordArt Styles	Стилі WordArt
+	Text Fill	Заливка тексту
+	Text Outline	Контур тексту
+	Transform	Перетворення
+	No Fill	Без заливки
+	No Outline	Без контуру
+	Reflection	Відбиття
+	No Reflection	Без відбиття
+	No Transform	Без перетворення
+	Connect Shapes	З'єднати фігури
+	Straight Connector	Прямий з'єднувач
+	Straight Arrow Connector	Прямий з'єднувач зі стрілкою
+	Elbow Connector	Ламаний з'єднувач
+	Elbow Arrow Connector	Ламаний з'єднувач зі стрілкою
+	Curved Connector	Вигнутий з'єднувач
+	Curved Arrow Connector	Вигнутий з'єднувач зі стрілкою
+	Arch Up	Арка вгору
+	Arch Down	Арка вниз
+	Slant Up	Нахил угору
+	Slant Down	Нахил униз
+	Inflate	Роздуття
+	Deflate	Стиснення
+	Chevron Up	Шеврон угору
+	Chevron Down	Шеврон униз
+	Triangle Up	Трикутник угору
+	Triangle Down	Трикутник униз
+	Solid Accent	Суцільний акцент
+	Light with Outline	Світлий з контуром
+	Hollow	Порожнистий
+	Accent Gradient	Акцентний градієнт
+	Dark with Shadow	Темний із тінню
+	Soft Glow	М'яке світіння
+	Accent with Reflection	Акцент із відбиттям
+	Warm Gradient with Outline	Теплий градієнт із контуром
+	Add line numbering	Додати нумерацію рядків
+	Add to Document	Додати до документа
+	Address labels	Адресні етикетки
+	Auto	Авто
+	Automatically hyphenate document	Автоматично переносити слова в документі
+	Chinese (Simplified)	Китайська (спрощена)
+	Chinese (Traditional)	Китайська (традиційна)
+	Column:	Стовпець:
+	Count by:	Крок:
+	Czech	Чеська
+	Danish	Данська
+	Delivery address:	Адреса одержувача:
+	Detect language automatically	Визначати мову автоматично
+	Do not check spelling or grammar	Не перевіряти правопис і граматику
+	Dutch	Нідерландська
+	Envelope size:	Розмір конверта:
+	Estonian	Естонська
+	Finnish	Фінська
+	French (France)	Французька (Франція)
+	From text:	Від тексту:
+	Full page of the same label	Ціла сторінка однакових етикеток
+	German (Germany)	Німецька (Німеччина)
+	Greek	Грецька
+	Hebrew	Іврит
+	Hyphenate at:	Перенести після:
+	Hyphenate words in CAPS	Переносити слова з ВЕЛИКИХ ЛІТЕР
+	Hyphenation Options…	Параметри перенесення слів…
+	Hyphenation zone:	Зона перенесення:
+	Italian	Італійська
+	Japanese	Японська
+	Korean	Корейська
+	Limit consecutive hyphens to:	Обмежити кількість переносів поспіль:
+	Line Numbering Options…	Параметри нумерації рядків…
+	Manual Hyphenation	Ручне перенесення слів
+	Manual hyphenation is complete.	Ручне перенесення слів завершено.
+	Manual…	Вручну…
+	Mark selected text as:	Позначити виділений текст як:
+	New Document	Новий документ
+	No limit	Без обмеження
+	Norwegian (Bokmål)	Норвезька (букмол)
+	Numbering:	Нумерація:
+	Omit	Пропустити
+	One label per recipient	Одна етикетка на одержувача
+	Portuguese (Brazil)	Португальська (Бразилія)
+	Portuguese (Portugal)	Португальська (Португалія)
+	Return address labels	Етикетки зі зворотною адресою
+	Return address:	Зворотна адреса:
+	Row:	Рядок:
+	Russian	Російська
+	Serbian (Cyrillic)	Сербська (кирилиця)
+	Serbian (Latin)	Сербська (латиниця)
+	Set As Default	Зробити типовою
+	Shipping labels	Етикетки для відправлень
+	Single label	Одна етикетка
+	Spanish (Mexico)	Іспанська (Мексика)
+	Spanish (Spain)	Іспанська (Іспанія)
+	Swedish	Шведська
+	Turkish	Турецька
+	Ukrainian	Українська
+	{language} is now the document's default language.	{language} тепер типова мова документа.
+	Visual effects	Візуальні ефекти
+	Animation effects:	Ефекти анімації:
+	On	Увімкнено
+	Off	Вимкнено
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Плавне прокручування й масштабування, а також поступова поява меню та кнопок. Якщо вибрано «Вимкнено», усі зміни відображаються одразу.
+	Your system has animation effects turned on.	У вашій системі ефекти анімації ввімкнено.
+	Your system has animation effects turned off.	У вашій системі ефекти анімації вимкнено.
+	Your system doesn't report an animation setting, so animation effects stay on.	Система не повідомляє про налаштування анімації, тому ефекти анімації залишаються ввімкненими.
+	Expanded	Розріджений
+	Condensed	Ущільнений
+	By:	На:
+spacing	Normal	Звичайний
+	Arrange All	Упорядкувати все
+	View Side by Side	Поруч
+	Synchronous Scrolling	Синхронне прокручування
+	Switch Windows	Перейти до іншого вікна
+	Screenshot	Знімок екрана
+	Screen Clipping	Вирізка екрана
+	Select the part of the screen to insert.	Виділіть частину екрана, яку потрібно вставити.
+	Screen clipping ended without a picture.	Вирізання екрана завершилося без зображення.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Вирізка екрана тут недоступна. Скопіюйте зображення екрана, а потім вставте його.
+	Screen clipping didn't work: {reason}	Не вдалося вирізати частину екрана: {reason}
+	Media	Мультимедіа
+	Online Video	Відео з Інтернету
+	Insert Video	Вставлення відео
+	Play Video	Відтворити відео
+	Enter the web address or embed code of an online video:	Введіть веб-адресу або код вбудовування відео з Інтернету:
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Відео відображається в документі як зображення. Двічі клацніть його, щоб переглянути в браузері.
+	That isn't the web address or embed code of an online video.	Це не веб-адреса й не код вбудовування відео з Інтернету.
+	3D Models	Тривимірні моделі
+	Insert a 3D model from a file (.glb, .stl, .obj)	Вставити тривимірну модель із файлу (.glb, .stl, .obj)
+	Read Aloud isn't available in the browser	Функція «Читати вголос» недоступна в браузері
+	Read Aloud couldn't start the speech program: {reason}	Читати вголос: не вдалося запустити програму мовлення: {reason}
+	Read Aloud couldn't start: {reason}	Читати вголос: не вдалося запустити: {reason}
+	Read Aloud stopped: {reason}	Читати вголос: зупинено: {reason}
+	no speech program on this system	у системі немає програми мовлення
+	Online Pictures	Зображення з Інтернету
+	This Device…	Цей пристрій…
+	Online Pictures…	Зображення з Інтернету…
+	Search Openverse (Creative Commons pictures)	Пошук в Openverse (зображення Creative Commons)
+	Search	Знайти
+	Only pictures I may use commercially	Лише зображення для комерційного використання
+	Searching…	Пошук…
+	No pictures found.	Зображень не знайдено.
+	Downloading…	Завантаження…
+	Couldn't search: {reason}	Не вдалося виконати пошук: {reason}
+	Couldn't download the picture: {reason}	Не вдалося завантажити зображення: {reason}
+	it isn't a picture Doc4Me can read	це не зображення, яке Doc4Me може прочитати
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Зображення з Openverse. Дотримуйтеся ліцензії кожного зображення: Doc4Me додає під ним рядок із зазначенням автора.
+	Translator	Перекладач
+	From	З мови
+	To	На мову
+	Select text in the document to translate it.	Виділіть текст у документі, щоб перекласти його.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Увесь документ перекладається в новий документ, який замінює цей. Спочатку збережіть роботу.
+	Translating {done} of {total}	Переклад: {done} з {total}
+	Couldn't translate: {reason}	Не вдалося перекласти: {reason}
+	There's no text to translate.	Немає тексту для перекладу.
+	Translation service	Служба перекладу
+	MyMemory (free, no account)	MyMemory (безкоштовно, без облікового запису)
+	5,000 characters a day; give an email address for 50,000.	5000 символів на день; з адресою електронної пошти — 50 000.
+	Email address (optional)	Адреса електронної пошти (необов’язково)
+	LibreTranslate server (open source)	Сервер LibreTranslate (відкритий код)
+	Server address (https://…)	Адреса сервера (https://…)
+	API key (if the server needs one)	Ключ API (якщо його потребує сервер)
+	the LibreTranslate server	сервер LibreTranslate
+	The text is sent to {service} to be translated.	Текст надсилається до {service} для перекладу.
+	English	Англійська
+	Vietnamese	В’єтнамська
+	Indonesian	Індонезійська
+	Malay	Малайська
+	French	Французька
+	German	Німецька
+	Spanish	Іспанська
+	Hungarian	Угорська
+	Serbian	Сербська
+	the free daily allowance is used up (try again tomorrow, or give an email address)	безкоштовний денний ліміт вичерпано (спробуйте завтра або вкажіть адресу електронної пошти)
+	Translate Document	Перекласти документ
+	Add-ins	Надбудови
+	Get Add-ins	Отримати надбудови
+	Store	Магазин
+	My Add-ins	Мої надбудови
+	Added	Додано
+	Run	Запустити
+	No add-ins are listed yet.	Надбудов у списку ще немає.
+	Couldn't get the add-in list: {reason}	Не вдалося отримати список надбудов: {reason}
+	{name} was added. Its macros are under My Add-ins and View › Macros.	Надбудову {name} додано. Її макроси — у розділі «Мої надбудови» та в меню «Вигляд › Макроси».
+	Couldn't add {name}: {reason}	Не вдалося додати {name}: {reason}
+	No add-ins yet. Add one from the Store.	Надбудов ще немає. Додайте їх із магазину.
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Надбудови Doc4Me — це безкоштовні пакети макросів із каталогу надбудов Doc4Me. Вони можуть лише змінювати документ.
+	only https addresses can be used	можна використовувати лише адреси https
+	web access isn't available here	доступ до Інтернету тут недоступний
+	Ink Equation	Рукописне рівняння
+	Ink to Math	Рукописне введення в математику
+	Math Input Control	Панель математичного введення
+	Undo Stroke	Скасувати штрих
+	Write math here with the mouse or a pen.	Напишіть тут формулу мишею або пером.
+	Recognized (you can correct it):	Розпізнано (можна виправити):
+	Dictation isn't available here.	Диктування тут недоступне.
+	Dictation stopped: {reason}	Диктування зупинено: {reason}
+	Dictation stopped.	Диктування зупинено.
+	Downloading the speech model ({mb} MB, once)…	Завантаження мовної моделі ({mb} МБ, один раз)…
+	Getting ready…	Підготовка…
+	Listening… speak now	Слухаю… говоріть
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Мовлення розпізнається на цьому комп’ютері (whisper.cpp); нічого не надсилається в Інтернет.
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Шрифт {fonts} не встановлено на цьому комп’ютері, тому документ показано шрифтом {with}. Рядки й сторінки можуть розбиватися інакше, ніж з оригінальним шрифтом.
+	Font not installed	Шрифт не встановлено
+	Top of the Window	Верх вікна
+	Bottom of the Window	Низ вікна
+	Top of Next Page	Початок наступної сторінки
+	Top of Previous Page	Початок попередньої сторінки
+	Symbol Font	Шрифт Symbol
+	Shrink Selection	Зменшити виділення
+	Previous Window	Попереднє вікно
+	Next Window	Наступне вікно
+	Previous Footnote	Попередня виноска
+	Last Cell in Row	Остання клітинка рядка
+	Last Cell in Column	Остання клітинка стовпця
+	First Cell in Row	Перша клітинка рядка
+	First Cell in Column	Перша клітинка стовпця
+	Insert LISTNUM Field	Вставити поле LISTNUM
+	Collapse the Ribbon	Згорнути стрічку
+	1×2 Empty Matrix	Порожня матриця 1×2
+	1×3 Empty Matrix	Порожня матриця 1×3
+	2×1 Empty Matrix	Порожня матриця 2×1
+	2×2 Determinant	Визначник 2×2
+	2×2 Empty Matrix	Порожня матриця 2×2
+	2×2 Identity Matrix	Одинична матриця 2×2
+	2×2 Identity Matrix (sparse)	Одинична матриця 2×2 (розріджена)
+	2×2 Matrix in Brackets	Матриця 2×2 у квадратних дужках
+	2×2 Matrix in Double Bars	Матриця 2×2 у подвійних вертикальних рисках
+	2×2 Matrix in Parentheses	Матриця 2×2 у круглих дужках
+	2×3 Empty Matrix	Порожня матриця 2×3
+	3×1 Empty Matrix	Порожня матриця 3×1
+	3×2 Empty Matrix	Порожня матриця 3×2
+	3×3 Empty Matrix	Порожня матриця 3×3
+	3×3 Identity Matrix	Одинична матриця 3×3
+	3×3 Identity Matrix (sparse)	Одинична матриця 3×3 (розріджена)
+	A xor B	A xor B
+	APA	APA
+	ASAP	ЯКНАЙШВИДШЕ
+	AaBbCcDd	АаБбВвГг
+	Absolute value cases	Випадки модуля
+	Accents	Діакритичні знаки
+	Acute	Акут
+	All - Linear	Усе – лінійний
+	All - Professional	Усе – професійний
+	Angle Brackets	Кутові дужки
+	Angle Brackets with Separator	Кутові дужки з роздільником
+	Angle Brackets with Two Separators	Кутові дужки з двома роздільниками
+	Annotation Reference	Знак примітки
+	Annotation Subject	Тема примітки
+	Annotation Text	Текст примітки
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10,12" × 14,33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7,17" × 10,12"
+	Baseline Dots	Крапки на базовій лінії
+	Basic Math	Основи математики
+	Bayes' rule	Теорема Баєса
+	Binomial Coefficient	Біноміальний коефіцієнт
+	Binomial Coefficient (angle)	Біноміальний коефіцієнт (кутовий)
+	Binomial Coefficient with Angle Brackets	Біноміальний коефіцієнт у кутових дужках
+	Binomial expansion of (x+a)ⁿ	Біноміальне розвинення (x+a)ⁿ
+	Body text in a short paragraph to show spacing.	Текст у короткому абзаці для показу інтервалів.
+	Book Title	Назва книги
+	Boxed Formula	Формула в рамці
+	Boxed Formula (example)	Формула в рамці (приклад)
+	Boxed Formulas	Формули в рамці
+	Braces	Фігурні дужки
+	Braces with Separator	Фігурні дужки з роздільником
+	Brackets	Дужки
+	Brackets with Separators	Дужки з роздільниками
+	Breve	Бреве
+	CONFIDENTIAL	КОНФІДЕНЦІЙНО
+	Capitalize the first word of a sentence	Перше слово речення з великої літери
+	Cases (Three Conditions)	Випадки (три умови)
+	Cases (Two Conditions)	Випадки (дві умови)
+	Cases and Stacks	Випадки та стеки
+	Category	Категорія
+	Ceiling	Стеля
+	Centered as Group	По центру як група
+	Change in y over change in x	Зміна y до зміни x
+	Change to Level 1	Змінити на рівень 1
+	Change to Level 2	Змінити на рівень 2
+	Change to Level 3	Змінити на рівень 3
+	Change to Level 4	Змінити на рівень 4
+	Change to Level 5	Змінити на рівень 5
+	Change to Level 6	Змінити на рівень 6
+	Change to Level 7	Змінити на рівень 7
+	Change to Level 8	Змінити на рівень 8
+	Change to Level 9	Змінити на рівень 9
+	Check	Гачек
+	Chicago	Chicago
+	Circle area from its radius	Площа кола за радіусом
+	Circled Dot	Крапка в колі
+	Circled Plus	Плюс у колі
+	Circled Times	Множення в колі
+	Colon Equal	Двокрапка дорівнює
+	Column selection: the arrow keys extend the block, Esc ends it	Виділення стовпця: клавіші зі стрілками розширюють блок, Esc завершує
+	Column width	Ширина стовпця
+	Common Accent Objects	Поширені діакритичні об’єкти
+	Common Brackets	Поширені дужки
+	Common Fractions	Поширені дроби
+	Common Functions	Поширені функції
+	Common Large Operators	Поширені великі оператори
+	Common Operator Structures	Поширені структури операторів
+	Common Operators	Поширені оператори
+	Common Radicals	Поширені корені
+	Common Subscripts and Superscripts	Поширені нижні й верхні індекси
+	Contour Integral	Контурний інтеграл
+	Contour Integral with Limits	Контурний інтеграл з межами
+	Contour Integral with Stacked Limits	Контурний інтеграл з межами одна над одною
+	Contour Integrals	Контурні інтеграли
+	Contributors	Учасники
+	Convert between built-up and linear form	Перетворити між професійною та лінійною формою
+	Coproduct	Кодобуток
+	Coproduct with Limits	Кодобуток з межами
+	Coproduct with Lower Limit	Кодобуток з нижньою межею
+	Coproduct with Subscript-Superscript Limits	Кодобуток з межами в нижньому та верхньому індексах
+	Cosecant Function	Функція косеканс
+	Cosine 2x	Косинус 2x
+	Cosine Function	Функція косинус
+	Cotangent Function	Функція котангенс
+	Cube Root	Кубічний корінь
+	Current - Linear	Поточне – лінійний
+	Current - Professional	Поточне – професійний
+	DO NOT COPY	НЕ КОПІЮВАТИ
+	DRAFT	ЧЕРНЕТКА
+	Default Paragraph Font	Шрифт абзацу за промовчанням
+	Delta Equal To	Дельта дорівнює
+	Delta over arrow	Дельта над стрілкою
+	Derivative as a limit	Похідна як границя
+	Diagonal Dots	Діагональні крапки
+	Differential	Диференціал
+	Differential theta	Диференціал тета
+	Differential x	Диференціал x
+	Differential y	Диференціал y
+	Differentials	Диференціали
+	Dot	Крапка
+	Dots	Крапки
+	Double Bar	Подвійна риска
+	Double Dot	Дві крапки
+	Double Integral	Подвійний інтеграл
+	Double Integral with Limits	Подвійний інтеграл з межами
+	Double Integral with Stacked Limits	Подвійний інтеграл з межами одна над одною
+	Double Left Arrow with Text Above	Подвійна стрілка вліво з текстом угорі
+	Double Left Arrow with Text Below	Подвійна стрілка вліво з текстом унизу
+	Double Left Right Arrow with Text Above	Подвійна стрілка вліво-вправо з текстом угорі
+	Double Left Right Arrow with Text Below	Подвійна стрілка вліво-вправо з текстом унизу
+	Double Right Arrow with Text Above	Подвійна стрілка вправо з текстом угорі
+	Double Right Arrow with Text Below	Подвійна стрілка вправо з текстом унизу
+	Double Square Brackets	Подвійні квадратні дужки
+	Double Vertical Bars	Подвійні вертикальні риски
+	Double summation	Подвійна сума
+	Edit Document	Редагувати документ
+	Emphasis	Виділення
+	Empty Matrices	Порожні матриці
+	Endnote Reference	Знак кінцевої виноски
+	Endnote Text	Текст кінцевої виноски
+	Envelope #10   4.12" × 9.50"	Конверт #10   4,12" × 9,50"
+	Envelope Address	Адреса на конверті
+	Envelope DL   4.33" × 8.66"	Конверт DL   4,33" × 8,66"
+	Envelope Return	Зворотна адреса на конверті
+	Equal Equal	Дорівнює дорівнює
+	Equal by Definition	Дорівнює за визначенням
+	Euler's identity	Тотожність Ейлера
+	Executive   7.25" × 10.50"	Executive   7,25" × 10,50"
+	Exponential	Експонента
+	Exponential series	Експоненціальний ряд
+	Extra space	Зайвий пробіл
+	Floor	Підлога
+	Footnote Reference	Знак виноски
+	Footnote Text	Текст виноски
+	Functions	Функції
+	GB/T 7714	GB/T 7714
+	GOST (name sort)	ГОСТ (за іменем)
+	GOST (title sort)	ГОСТ (за назвою)
+	Geometry	Геометрія
+	Good afternoon	Добрий день
+	Good evening	Добрий вечір
+	Good morning	Доброго ранку
+	Grave	Гравіс
+	Greek Letters	Грецькі літери
+	Grid Table 1 Light	Таблиця-сітка 1, світла
+	Grid Table 4 – Blue	Таблиця-сітка 4 – синя
+	Grid Table 4 – Green	Таблиця-сітка 4 – зелена
+	Grid Table 4 – Orange	Таблиця-сітка 4 – помаранчева
+	Grid Table 4 – Purple	Таблиця-сітка 4 – фіолетова
+	Grouping Character Above	Символ групування вгорі
+	Grouping Character Below	Символ групування внизу
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Циркумфлекс
+	Historical and Discretional	Історичні та необов’язкові
+	Hyperbolic Cosecant Function	Функція гіперболічний косеканс
+	Hyperbolic Cosine Function	Функція гіперболічний косинус
+	Hyperbolic Cotangent Function	Функція гіперболічний котангенс
+	Hyperbolic Functions	Гіперболічні функції
+	Hyperbolic Secant Function	Функція гіперболічний секанс
+	Hyperbolic Sine Function	Функція гіперболічний синус
+	Hyperbolic Tangent Function	Функція гіперболічний тангенс
+	Hyperlink	Гіперпосилання
+	Hypotenuse	Гіпотенуза
+	IEEE	IEEE
+	ISO 690 (author-date)	ISO 690 (автор-дата)
+	ISO 690 (numerical)	ISO 690 (числовий)
+	Identity Matrices	Одиничні матриці
+	Index Heading	Заголовок покажчика
+	Index {n}	Покажчик {n}
+	Integral of e^(−x²)	Інтеграл від e^(−x²)
+	Integral with Limits	Інтеграл з межами
+	Integral with Stacked Limits	Інтеграл з межами одна над одною
+	Integrals	Інтеграли
+	Intense Emphasis	Насичене виділення
+	Intense Quote	Насичена цитата
+	Intense Reference	Насичене посилання
+	Intersection	Перетин
+	Intersection with Limits	Перетин з межами
+	Intersection with Lower Limit	Перетин з нижньою межею
+	Intersection with Subscript-Superscript Limits	Перетин з межами в нижньому та верхньому індексах
+	Inverse Cosecant Function	Функція арккосеканс
+	Inverse Cosine Function	Функція арккосинус
+	Inverse Cotangent Function	Функція арккотангенс
+	Inverse Functions	Обернені функції
+	Inverse Hyperbolic Cosecant Function	Функція гіперболічний арккосеканс
+	Inverse Hyperbolic Cosine Function	Функція гіперболічний арккосинус
+	Inverse Hyperbolic Cotangent Function	Функція гіперболічний арккотангенс
+	Inverse Hyperbolic Functions	Обернені гіперболічні функції
+	Inverse Hyperbolic Secant Function	Функція гіперболічний арксеканс
+	Inverse Hyperbolic Sine Function	Функція гіперболічний арксинус
+	Inverse Hyperbolic Tangent Function	Функція гіперболічний арктангенс
+	Inverse Secant Function	Функція арксеканс
+	Inverse Sine Function	Функція арксинус
+	Inverse Tangent Function	Функція арктангенс
+	Justification of a display equation	Вирівнювання виокремленого рівняння
+	Kerning for fonts:	Кернінг для шрифтів:
+	Keywords	Ключові слова
+	Left Arrow with Text Above	Стрілка вліво з текстом угорі
+	Left Arrow with Text Below	Стрілка вліво з текстом унизу
+	Left Bracket Twice	Двічі ліва дужка
+	Left Right Arrow Above	Стрілка вліво-вправо вгорі
+	Left Right Arrow with Text Above	Стрілка вліво-вправо з текстом угорі
+	Left Right Arrow with Text Below	Стрілка вліво-вправо з текстом унизу
+	Left Subscript-Superscript	Лівий нижній і верхній індекс
+	Leftwards Arrow Above	Стрілка вліво вгорі
+	Leftwards Harpoon Above	Гарпун уліво вгорі
+	Legal   8.50" × 14.00"	Legal   8,50" × 14,00"
+	Letter   8.50" × 11.00"	Letter   8,50" × 11,00"
+	Letter-Like Symbols	Буквоподібні символи
+	Level 1	Рівень 1
+	Level 2	Рівень 2
+	Level 3	Рівень 3
+	Level 4	Рівень 4
+	Level 5	Рівень 5
+	Level 6	Рівень 6
+	Level 7	Рівень 7
+	Level 8	Рівень 8
+	Level 9	Рівень 9
+	Ligatures:	Лігатури:
+	Limit	Границя
+	Limit Example	Приклад границі
+	Line Number	Номер рядка
+	Linear Fraction	Лінійний дріб
+	List Paragraph	Абзац списку
+	List Table 3 – Blue	Таблиця-список 3 – синя
+	List Table 3 – Green	Таблиця-список 3 – зелена
+	List Table 3 – Orange	Таблиця-список 3 – помаранчева
+	List Table 3 – Purple	Таблиця-список 3 – фіолетова
+	Logarithm	Логарифм
+	Logarithm with Base	Логарифм за основою
+	Logical AND	Логічне І
+	Logical AND with Limits	Логічне І з межами
+	Logical OR	Логічне АБО
+	Logical OR with Limits	Логічне АБО з межами
+	MLA	MLA
+	Matrices with Brackets	Матриці з дужками
+	Maximum	Максимум
+	Maximum Example	Приклад максимуму
+	Measured By	Вимірюється за
+	Midline Dots	Крапки на середній лінії
+	Minimum	Мінімум
+	Minus Equal	Мінус дорівнює
+	Models	Моделі
+	Natural Logarithm	Натуральний логарифм
+	Negated Relations	Заперечені відношення
+	No Spacing	Без інтервалів
+	Normal	Звичайний
+	Normal Indent	Звичайний відступ
+	Normal Table	Звичайна таблиця
+	Normal probability density	Густина нормального розподілу
+	Number the equation; the number sits at the right margin (or type # then the number)	Пронумерувати рівняння; номер стоїть біля правого поля (або введіть #, а потім номер)
+	One half	Одна друга
+	Operator Structures	Структури операторів
+	Operators	Оператори
+	Other Large Operators	Інші великі оператори
+	Outward Brackets	Дужки назовні
+	Overbar	Риска вгорі
+	Overbars and Underbars	Риски вгорі та внизу
+	Overbrace	Фігурна дужка вгорі
+	Parentheses	Круглі дужки
+	Parentheses with Separator	Круглі дужки з роздільником
+	Partial Differential	Частинний диференціал
+	Pi Over 2	Пі на 2
+	Plain Table 1	Проста таблиця 1
+	Plus Equal	Плюс дорівнює
+	Possible spelling mistake	Можлива орфографічна помилка
+	Power series of (1+x)ⁿ	Степеневий ряд (1+x)ⁿ
+	Product	Добуток
+	Product of A	Добуток A
+	Product with Limits	Добуток з межами
+	Product with Lower Limit	Добуток з нижньою межею
+	Product with Subscript-Superscript Limits	Добуток з межами в нижньому та верхньому індексах
+	Products and Coproducts	Добутки та кодобутки
+	Quadratic Root	Корінь квадратного рівняння
+	Quote	Цитата
+	Radical with Degree	Корінь зі степенем
+	Radicals	Корені
+	Reading Mode	Режим читання
+	Remove the space before the punctuation	Видалити пробіл перед розділовим знаком
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Researcher потребує онлайн-служби; Doc4Me зберігає ваші документи офлайн.
+	Right Arrow with Text Above	Стрілка вправо з текстом угорі
+	Right Arrow with Text Below	Стрілка вправо з текстом унизу
+	Right Bracket Twice	Двічі права дужка
+	Rightwards Arrow Above	Стрілка вправо вгорі
+	Rightwards Harpoon Above	Гарпун управо вгорі
+	Roots of ax²+bx+c	Корені ax²+bx+c
+	SAMPLE	ЗРАЗОК
+	SIST02	SIST02
+	Scripts	Письмена
+	Secant Function	Функція секанс
+	Show the equation in the line of text	Показувати рівняння в рядку тексту
+	Show the equation on a line of its own	Показувати рівняння в окремому рядку
+	Sides of a right triangle	Сторони прямокутного трикутника
+	Sine Function	Функція синус
+	Sine and cosine series of f(x)	Ряд синусів і косинусів f(x)
+	Sine theta	Синус тета
+	Single Brackets	Одинарні дужки
+	Single Left Angle	Одна ліва кутова дужка
+	Single Left Bar	Одна ліва риска
+	Single Left Brace	Одна ліва фігурна дужка
+	Single Left Bracket	Одна ліва квадратна дужка
+	Single Left Parenthesis	Одна ліва кругла дужка
+	Single Right Brace	Одна права фігурна дужка
+	Single Right Bracket	Одна права квадратна дужка
+	Single Right Parenthesis	Одна права кругла дужка
+	Skewed Fraction	Похилий дріб
+	Small change	Мала зміна
+	Sparse Matrices	Розріджені матриці
+	Square Root	Квадратний корінь
+	Square Root with Degree	Корінь зі степенем
+	Square Union	Квадратне об’єднання
+	Stack Object	Об’єкт стека
+	Stack Object (Three)	Об’єкт стека (три)
+	Stacked Fraction	Вертикальний дріб
+	Stacked, no bar	Вертикальний, без риски
+	Standard Only	Лише стандартні
+	Standard and Contextual	Стандартні та контекстні
+	Statement   5.50" × 8.50"	Statement   5,50" × 8,50"
+	Strong	Жирний
+	Style: APA	Стиль: APA
+	Subject	Тема
+	Subscript-Superscript	Нижній і верхній індекс
+	Subscripts and Superscripts	Нижні й верхні індекси
+	Subtitle	Підзаголовок
+	Subtle Emphasis	Слабке виділення
+	Subtle Reference	Слабке посилання
+	Sum of cosines	Сума косинусів
+	Sum or difference of sines	Сума або різниця синусів
+	Summation	Сума
+	Summation from 0 to n	Сума від 0 до n
+	Summation over binomials	Сума біноміальних коефіцієнтів
+	Summation with Limits	Сума з межами
+	Summation with Lower Limit	Сума з нижньою межею
+	Summation with Subscript Limit	Сума з межею в нижньому індексі
+	Summation with Subscript-Superscript Limits	Сума з межами в нижньому та верхньому індексах
+	Summations	Суми
+	Surface Integral	Поверхневий інтеграл
+	Surface Integral with Limits	Поверхневий інтеграл з межами
+	Surface Integral with Stacked Limits	Поверхневий інтеграл з межами одна над одною
+	TOA Heading	Заголовок таблиці посилань
+	TOC Heading	Заголовок змісту
+	TOC {n}	Зміст {n}
+	Table Grid	Сітка таблиці
+	Table of Figures	Перелік ілюстрацій
+	Tabloid   11.00" × 17.00"	Таблоїд   11,00" × 17,00"
+	Tangent Function	Функція тангенс
+	Tangent formula	Формула тангенса
+	Text over Colon Equal	Текст над двокрапкою дорівнює
+	Text over Equal	Текст над знаком рівності
+	Text size	Розмір тексту
+	The spelling and grammar check is complete.	Перевірку правопису й граматики завершено.
+	These settings will be used for new documents.	Ці параметри використовуватимуться для нових документів.
+	Tilde	Тильда
+	Track\nChanges	Відстежувати\nвиправлення
+	Track\nChanges ✓	Відстежувати\nвиправлення ✓
+	Trigonometric Functions	Тригонометричні функції
+	Triple Dot	Три крапки
+	Triple Integral	Потрійний інтеграл
+	Triple Integral with Limits	Потрійний інтеграл з межами
+	Triple Integral with Stacked Limits	Потрійний інтеграл з межами одна над одною
+	Turabian	Turabian
+	Type equations in LaTeX	Вводити рівняння в LaTeX
+	Type equations in the linear format (UnicodeMath)	Вводити рівняння в лінійному форматі (UnicodeMath)
+	Type normal (non-math) text in the equation	Вводити звичайний (не математичний) текст у рівняння
+	Typing	Введення
+	URGENT	ТЕРМІНОВО
+	Underbar	Риска внизу
+	Underbrace	Фігурна дужка внизу
+	Union	Об’єднання
+	Union of intersections	Об’єднання перетинів
+	Union with Limits	Об’єднання з межами
+	Union with Lower Limit	Об’єднання з нижньою межею
+	Union with Plus	Об’єднання з плюсом
+	Union with Subscript-Superscript Limits	Об’єднання з межами в нижньому та верхньому індексах
+	Unions and Intersections	Об’єднання та перетини
+	Up Diagonal Dots	Діагональні крапки вгору
+	Use "a" before a consonant sound	Вживайте "a" перед приголосним звуком
+	Use "an" before a vowel sound	Вживайте "an" перед голосним звуком
+	Vector A	Вектор A
+	Vector AB	Вектор AB
+	Vertical Bars	Вертикальні риски
+	Vertical Dots	Вертикальні крапки
+	Volume Integral	Об’ємний інтеграл
+	Volume Integral with Limits	Об’ємний інтеграл з межами
+	Volume Integral with Stacked Limits	Об’ємний інтеграл з межами одна над одною
+	Wildcards (regex)	Символи узагальнення (регулярний вираз)
+	Yields	Дає
+	n×n Identity Matrix	Одинична матриця n×n
+	n×n Matrix	Матриця n×n
+	points and above	пт і більше
+	tOGGLE cASE	зМІНИТИ рЕГІСТР
+	x bar	x з рискою
+	{w} × {h} in	{w} × {h} дюйм.
+	{w} × {h} mm	{w} × {h} мм
+	✓ None	✓ Немає
+	➕ New comment	➕ Нова примітка
+	📂  Browse…	📂  Огляд…
+	Mark Table of Contents Entry	Позначити елемент змісту
+	Custom Table of Contents	Настроюваний зміст
+	Type a New List	Ввести новий список
+	Accept or Reject Changes	Прийняття або відхилення виправлень
+	Highlight Changes	Виділення виправлень
+	List Commands	Список команд
+	Entry:	Елемент:
+	Table identifier:	Ідентифікатор покажчика:
+	Level:	Рівень:
+	Date	Дата
+	Inserted	Вставлено
+	Changes with highlighting	Виправлення з виділенням
+	Changes without highlighting	Виправлення без виділення
+	The document contains no tracked changes.	Документ не містить записаних виправлень.
+	Track changes while editing	Записувати виправлення під час редагування
+	Highlight changes on screen	Виділяти виправлення на екрані
+	Highlight changes in printed document	Виділяти виправлення в надрукованому документі
+	Current keyboard settings	Поточні параметри клавіатури
+	A new document lists the commands with their shortcuts.	Новий документ міститиме список команд із сполученнями клавіш.
+	Border…	Межа…
+	Language…	Мова…
+	Font Substitution…	Заміна шрифтів…
+	Compatibility Options…	Параметри сумісності…
+	Add New Placeholder…	Додати новий заповнювач…
+	Drawing Grid	Сітка малювання
+	Compatibility Options	Параметри сумісності
+	Font Substitution	Заміна шрифтів
+	Insert Rows	Вставлення рядків
+	Insert Cells	Вставлення клітинок
+	Placeholder Name	Ім’я заповнювача
+	Horizontal spacing:	Крок по горизонталі:
+	Vertical spacing:	Крок по вертикалі:
+	Display gridlines on screen	Відображати лінії сітки на екрані
+	Compatibility mode: {version}	Режим сумісності: {version}
+	Word 2013 and later	Word 2013 і пізніші версії
+	Word 2010	Word 2010
+	Word 2007	Word 2007
+	Word 97–2003	Word 97–2003
+	Layout options for this document	Параметри макета для цього документа
+	Don't use HTML paragraph auto spacing	Не використовувати автоматичні інтервали абзаців HTML
+	Split apart page break and paragraph mark	Розділяти розрив сторінки та знак абзацу
+	Every font this document uses is installed.	Усі шрифти цього документа встановлено.
+	Missing document font	Відсутній шрифт документа
+	Substituted font	Шрифт для заміни
+	Convert Permanently	Перетворити назавжди
+	Shift cells right	Зі зсувом праворуч
+	A table's rows keep the same columns here.	Тут рядки таблиці мають однакові стовпці.
+	Shift cells down	Зі зсувом донизу
+	Insert entire row	Вставити весь рядок
+	Insert entire column	Вставити весь стовпець
+	Number:	Число:
+	Number type:	Тип числа:
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Введіть ім’я тегу джерела. Додаткові відомості можна додати пізніше, змінивши джерело.
+	Grid Settings	Параметри сітки
+	Add New Placeholder	Додати новий заповнювач
+	Text wrapping:	Обтікання текстом:
+	Around	Навколо
+	Positioning…	Розташування…
+	Cell Options	Параметри клітинки
+	Table Positioning	Розташування таблиці
+	Cell margins	Поля клітинки
+	Same as the whole table	Як у всій таблиці
+	Wrap text	Переносити текст
+	Fit text	Вписати текст
+	Text isn't squeezed to fit its cell yet.	Текст поки не стискається, щоб уміститися в клітинці.
+	Inside	Усередині
+	Outside	Ззовні
+	Margin	Поле
+	Relative to:	Відносно:
+	Distance from surrounding text	Відстань до навколишнього тексту
+	Move with text	Переміщати з текстом
+	Allow overlap	Дозволити перекриття
+	Remove Positioning	Скасувати розташування
+	AutoCaption	Автоназва
+	AutoCaption…	Автоназва…
+	Add caption when inserting:	Додавати назву під час вставлення:
+	Picture	Зображення
+	Spike	Скарбничка
+	Paste Spike	Вставити скарбничку
+	Move Text	Перемістити текст
+	Copy Text	Копіювати текст
+	Move to where?	Куди перемістити?
+	Copy to where?	Куди копіювати?
+	Select Floating Shapes	Вибрати плаваючі фігури
+	Absolute position	Абсолютне розташування
+	Both sides	З обох боків
+	Brightness, contrast and transparency change the picture from how it looks now.	Яскравість, контрастність і прозорість змінюють зображення відносно його поточного вигляду.
+	Brightness:	Яскравість:
+	Contrast:	Контрастність:
+	Fill & Line	Заливка й лінія
+	Fill:	Заливка:
+	Format Picture	Формат зображення
+	Format Shape	Формат фігури
+	Inside Margin	Внутрішнє поле
+	Largest only	Лише з більшого боку
+	Left only	Лише ліворуч
+	Line width:	Товщина лінії:
+	Line:	Лінія:
+	Lock aspect ratio	Зберігати пропорції
+	Move object with text	Переміщувати разом із текстом
+	No Line	Без лінії
+	Outside Margin	Зовнішнє поле
+	Right only	Лише праворуч
+	Transparency:	Прозорість:
+	relative to	відносно
+	Open Hyperlink	Відкрити гіперпосилання
+	Back	Назад
+	Field Click	Клацання поля
+	Close Reviewing Pane	Закрити область перевірки
+	Maximize	Розгорнути
+	Restore Down	Відновити
+	Exit	Вихід
+	Revisions	Виправлення
+	{n} revisions	Виправлень: {n}
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Вставлення: {ins}, видалення: {del}, переміщення: {moves}, форматування: {fmt}, примітки: {comments}
+	No revisions	Виправлень немає
+	Changed	Змінено
+	Zoom to Page	За розміром сторінки
+	Save Version	Зберегти версію
+	Comments on version	Коментарі до версії
+	Restore	Відновити
+	Versions are kept while the document is open (a .docx file has no versions).	Версії зберігаються, доки документ відкритий (файл .docx не містить версій).
+	Set Proofing Language…	Вибрати мову перевірки правопису…
+	Language Preferences…	Мовні параметри…
+	Contextual	Контекстний
+	Print Documents	Друк документів
+	Edit Individual Documents…	Редагувати окремі документи…
+	Print Documents…	Друк документів…
+	AutoComplete	Автозавершення
+	{name} (Press ENTER to Insert)	{name} (Натисніть клавішу ENTER, щоб вставити)
+	Recognized Functions	Розпізнавані функції
+	Recognized Functions…	Розпізнавані функції…
+	Restore Defaults	Відновити стандартні
+	Insert Database	Вставити базу даних
+	Insert Database…	Вставити базу даних…
+	Get Data…	Отримати дані…
+	Data source:	Джерело даних:
+	Fields to insert:	Поля для вставлення:
+	Insert Data	Вставити дані
+	All records	Усі записи
+	{n} records	Записів: {n}
+	Filter and Sort	Фільтр і сортування
+	Filter and Sort…	Фільтр і сортування…
+	Filter Records	Фільтрувати записи
+	Sort Records	Сортувати записи
+	Comparison	Порівняння
+	Compare to	Порівняти з
+	And	І
+	Or	Або
+	Equal to	Дорівнює
+	Not equal to	Не дорівнює
+	Less than	Менше ніж
+	Greater than	Більше ніж
+	Less than or equal	Менше або дорівнює
+	Greater than or equal	Більше або дорівнює
+	Is blank	Порожнє
+	Is not blank	Не порожнє
+	Contains	Містить
+	Does not contain	Не містить
+	Sort by	Сортувати за
+	Then by	Потім за
+	Ascending	За зростанням
+	Descending	За спаданням
+	Table AutoFormat	Автоформат таблиці
+	Table AutoFormat…	Автоформат таблиці…
+	Table styles:	Стилі таблиці:
+	Apply special formats to	Застосувати особливі формати до
+	Sheet:	Аркуш:
+	{n} of {of} recipients	{n} з {of} одержувачів
+	New Folder	Нова папка
+	{name} can't be a folder's name.	{name} не може бути назвою папки.
+	Trust Center	Центр безпеки
+	Allow Doc4Me to use online services	Дозволити Doc4Me використовувати онлайн-служби
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Зображення з Інтернету (Openverse), Переклад (MyMemory або ваш сервер LibreTranslate), Отримати надбудови та завантаження мовленнєвої моделі для диктування підключаються до Інтернету, і лише коли ви ними користуєтеся. Якщо вимкнути, Doc4Me сам не встановлює жодних підключень.
+	Online services are turned off (File › Options › Trust Center).	Онлайн-служби вимкнено (Файл › Параметри › Центр безпеки).
+	Cut, copy, and paste	Вирізання, копіювання та вставлення
+	Pasting within the same document:	Вставлення в межах одного документа:
+	Pasting between documents:	Вставлення між документами:
+	Pasting from other programs:	Вставлення з інших програм:
+	Keep Source Formatting	Зберегти вихідне форматування
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Об’єднати форматування вставляє текст із форматуванням місця вставлення, як і Зберегти лише текст.
+	AutoFormat	Автоформат
+	Review AutoFormat Changes	Перегляд змін автоформату
+	*Bold* and _italic_ with real formatting	*Жирний* і _курсив_ справжнім форматуванням
+	Accept All	Прийняти все
+	Reject All	Відхилити все
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Автоформат (Ctrl+Alt+K) форматує виділені абзаци або весь документ.
+	AutoFormat Now	Автоформат зараз
+	AutoFormat and Review Changes…	Автоформат із переглядом змін…
+	AutoFormat changed {count} paragraphs	Автоформат змінив абзаців: {count}
+	Built-in Heading styles	Вбудовані стилі заголовків
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	«Знайти» виділяє наступний змінений абзац; «Відхилити» повертає виділений до попереднього вигляду.
+	Find →	Знайти →
+	← Find	← Знайти
+	Formatting completed. You can now:	Форматування завершено. Тепер можна:
+	List styles	Стилі списків
+	Other paragraph styles	Інші стилі абзаців
+	Preserve	Зберігати
+	Review Changes…	Переглянути зміни…
+	{count} paragraphs were changed.	Змінено абзаців: {count}.
+	Merge to:	Злити в:
+	Printer	Принтер
+	Merge records	Злити записи
+	Current record	Поточний запис
+	From:	З:
+	To:	По:
+	When merging records	Під час злиття записів
+	Don't print blank lines when data fields are empty	Не друкувати порожні рядки, якщо поля даних порожні
+	Print blank lines when data fields are empty	Друкувати порожні рядки, якщо поля даних порожні
+	Check Errors…	Перевірити помилки…
+	Query Options…	Параметри запиту…
+	The Mail Merge Helper sets up a merge in three steps.	Помічник злиття налаштовує злиття за три кроки.
+	1. Main document	1. Основний документ
+	Restore to Normal Word Document	Відновити звичайний документ Word
+	Merge type: {type}	Тип злиття: {type}
+	2. Data source	2. Джерело даних
+	Get Data	Отримати дані
+	Create Data Source…	Створити джерело даних…
+	Open Data Source…	Відкрити джерело даних…
+	No data source yet.	Джерела даних ще немає.
+	{count} records; fields: {fields}	Записів: {count}; поля: {fields}
+	Header Options:	Параметри заголовка:
+	Header Options	Параметри заголовка
+	Create…	Створити…
+	Open…	Відкрити…
+	Header source: {file} (the next data source opened here takes its field names)	Джерело заголовків: {file} (наступне відкрите тут джерело даних отримає його назви полів)
+	3. Merge the data with the document	3. Злити дані з документом
+	Merge…	Злити…
+	A header source holds the field names for a data source without a header row.	Джерело заголовків містить назви полів для джерела даних без рядка заголовків.
+	Add Field Name	Додати назву поля
+	Remove Field Name	Видалити назву поля
+	Mail Merge Helper…	Помічник злиття…
+	Mail Merge Helper	Помічник злиття
+	Merge to New Document	Злиття в новий документ
+	Merge to Printer	Злиття на принтер
+	Create Header Source	Створити джерело заголовків
+	Form Letters	Листи на бланку
+	Mailing Labels	Поштові наклейки
+	Catalog	Каталог
+	Caption label:	Підпис:
+	Include label and number	Додати підпис і номер
+	Built from the style or table entry fields chosen in Options.	Будується зі стилю або полів елементів таблиці, вибраних у параметрах.
+	Show page numbers	Показати номери сторінок
+	Right align page numbers	Номери сторінок праворуч
+	Build table of figures from:	Створити перелік ілюстрацій з:
+	Table entry fields	Поля елементів таблиці
+	Category:	Категорія:
+	Use passim (five or more pages)	Використовувати passim (п'ять і більше сторінок)
+	Mark Citation…	Позначити посилання…
+	Long citation:	Повне посилання:
+	Short citation:	Коротке посилання:
+	Category…	Категорія…
+	Citation marked.	Посилання позначено.
+	Edit Category	Змінити категорію
+	Table of Figures Options	Параметри переліку ілюстрацій
+	Cases	Справи
+	Statutes	Закони
+	Other Authorities	Інші джерела
+	Treatises	Трактати
+	Regulations	Постанови
+	Constitutional Provisions	Конституційні положення
+	Writing Style: Grammar	Стиль письма: граматика
+	Grammar Settings	Параметри граматики
+	Grammar	Граматика
+	Capitalization	Великі літери
+	Repeated words	Повтори слів
+	Word forms	Форми слів
+	Punctuation	Пунктуація
+	Reset All	Скинути все
+	The first word of a sentence starts with a capital.	Перше слово речення починається з великої літери.
+	The same word twice in a row.	Те саме слово двічі поспіль.
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	«a» або «an» перед наступним словом; польські «w»/«we», «z»/«ze».
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	Пробіл перед розділовим знаком, подвоєні знаки, польські коми перед сполучниками.
+	Extra spaces between words.	Зайві пробіли між словами.
+	Add Help Text…	Додати текст довідки…
+	AutoText entry:	Елемент автоматичного тексту:
+	Calculate on exit	Обчислювати під час виходу
+	Calculation	Обчислення
+	Check Box Form Field	Поле форми «Прапорець»
+	Check Box Form Field Options	Параметри поля форми «Прапорець»
+	Check box	Прапорець
+	Check box enabled	Прапорець увімкнуто
+	Check box size:	Розмір прапорця:
+	Checked	Установлено
+	Current date	Поточна дата
+	Current time	Поточний час
+	Default value:	Типове значення:
+	Drop-Down Form Field	Поле форми «Розкривний список»
+	Drop-Down Form Field Options	Параметри поля форми «Розкривний список»
+	Drop-down	Розкривний список
+	Drop-down enabled	Розкривний список увімкнуто
+	Drop-down item:	Елемент списку:
+	Fill In Form Field	Заповнити поле форми
+	Fill-in enabled	Заповнення ввімкнуто
+	Form Field	Поле форми
+	Form Field Help Text	Текст довідки поля форми
+	Form Field Options	Параметри поля форми
+	Form Field Shading	Затінення полів форми
+	Form Field at Selection	Поле форми у виділенні
+	Help Key (F1)	Клавіша довідки (F1)
+	Insert Form Field	Вставити поле форми
+	Items in drop-down list:	Елементи розкривного списку:
+	Legacy Tools	Застарілі засоби
+	Maximum length:	Максимальна довжина:
+	Next Form Field	Наступне поле форми
+	Not checked	Знято
+	Put the caret on a form field first.	Спочатку розташуйте курсор на полі форми.
+	Regular text	Звичайний текст
+	Reset Form Fields	Скинути поля форми
+	Text Form Field	Текстове поле форми
+	Text Form Field Options	Параметри текстового поля форми
+	Type your own:	Введіть власний текст:
+	Unlimited	Без обмежень
+	Protected sections:	Захищені розділи:
+	Section Protection	Захист розділів
+	Section {n}	Розділ {n}
+	Select sections…	Вибрати розділи…
+	AutoSummarize	Автореферат
+	Create a new document and put the summary there	Створити новий документ і помістити в нього реферат
+	Highlight key points	Виділити ключові положення
+	Insert an executive summary or abstract at the top of the document	Вставити реферат або анотацію на початок документа
+	Length of summary	Довжина реферату
+	Percent of original:	Відсоток від оригіналу:
+	Summary: {words} of {of} words	Реферат: {words} з {of} слів
+	Type of summary	Тип реферату
+	Update document statistics	Оновити статистику документа
+	{n} sentences	{n} речень
+	{n} words or less	Не більше {n} слів
+	At:	Значення:
+	Distance from text:	Відстань від тексту:
+	Format Frame	Формат рамки
+	Format Frame…	Формат рамки…
+	Frame	Рамка
+	Frame…	Рамка…
+	Insert Frame	Вставити рамку
+	Lock anchor	Закріпити прив’язку
+	Remove Frame	Видалити рамку
+	Text wrapping	Обтікання текстом
+	Chinese Conversion	Перетворення китайського тексту
+	Chinese Conversion…	Перетворення китайського тексту…
+	Converted {n} characters	Перетворено символів: {n}
+	Simplified Chinese to Traditional Chinese	Спрощена китайська на традиційну китайську
+	Simplified to Traditional	Зі спрощеної на традиційну
+	Traditional Chinese to Simplified Chinese	Традиційна китайська на спрощену китайську
+	Traditional to Simplified	З традиційної на спрощену
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Використовувати варіанти символів для Тайваню, САР Гонконг і САР Макао
+	Asian Layout	Азійна розмітка
+	Fit Text	Підгонка тексту
+	Fit Text…	Підгонка тексту…
+	Two Lines in One	Два рядки в одному
+	Two Lines in One…	Два рядки в одному…
+	New text width (pt):	Нова ширина тексту (пункти):
+	Enclose in brackets	Узяти в дужки
+	Bracket pair:	Тип дужок:
+	Typography	Типографіка
+	Character spacing control	Керування інтервалом між символами
+	Don't compress	Не стискати
+	Compress punctuation only	Стискати лише розділові знаки
+	Compress punctuation and Japanese kana	Стискати розділові знаки та японську кану
+	First and last characters	Перші й останні символи
+	Strict	Суворі
+	Cannot start a line:	Не може починати рядок:
+	Cannot end a line:	Не може завершувати рядок:
+	Japanese Find Options	Параметри пошуку японського тексту
+	Sounds like (Japanese)	Звучить як (японська)
+	Match full/half width	Не розрізняти повну/половинну ширину
+	Match hiragana/katakana	Не розрізняти хірагану/катакану
+	Match small kana	Не розрізняти малі кани
+	Match prolonged sound marks and dashes	Не розрізняти знаки довготи й тире
+	Japanese Consistency Checker	Перевірка узгодженості японського тексту
+	Japanese Consistency Checker…	Перевірка узгодженості японського тексту…
+	No inconsistent spellings were found.	Різних написань одного слова не знайдено.
+	Pick the spelling to keep in each group.	Виберіть у кожній групі написання, яке слід залишити.
+	Bidirectional text	Двонапрямлений текст
+	Bidirectional Text	Двонапрямлений текст
+	Default direction:	Напрямок за замовчуванням:
+	Cursor movement:	Переміщення курсора:
+	Logical	Логічне
+	Visual	Візуальне
+	Manage Fields	Керування полями
+	File locations	Розташування файлів
+	File Locations	Розташування файлів
+	Documents:	Документи:
+	Pictures:	Зображення:
+	The system's choice	Вибір системи
+	Show Repairs	Показати виправлення
+	No repairs were needed.	Виправлення не знадобилися.
+	These problems were found and repaired when the document was opened:	Під час відкриття документа виявлено та виправлено такі проблеми:
+	An unreadable entry in the file was skipped: {what}	Пропущено нечитабельний запис файлу: {what}
+	An unreadable part was left out: {what}	Нечитабельну частину пропущено: {what}
+	Unreadable relationships were ignored: {what}	Нечитабельні зв’язки проігноровано: {what}
+	A missing part of an embedded object was left out: {what}	Відсутню частину вбудованого об’єкта пропущено: {what}
+	Copy File	Копіювати файл
+	Find Files	Знайти файли
+	Letter Wizard	Майстер листів
+	Recipient's name:	Ім’я одержувача:
+	Salutation:	Звертання:
+	Subject:	Тема:
+	Complimentary closing:	Завершальна фраза:
+	Sender's name:	Ім’я відправника:
+	Job title:	Посада:
+	Company:	Організація:
+	Enclosures:	Вкладення:
+	Cc:	Копія:
+	Edit Links to Files	Редагувати зв’язки з файлами
+	Source file	Вихідний файл
+	Locked	Заблоковано
+	Change Source	Змінити джерело
+	This document has no links to files.	У цьому документі немає зв’язків із файлами.
+	Web options	Веб-параметри
+	Web Options	Веб-параметри
+	Allow PNG as a graphics format	Дозволити формат PNG для графіки
+	Rely on CSS for font formatting	Використовувати CSS для форматування шрифту
+	Rely on VML for displaying graphics in browsers	Використовувати VML для відображення графіки в браузерах
+	Organize supporting files in a folder	Упорядковувати допоміжні файли в папці
+	Use long file names whenever possible	За можливості використовувати довгі імена файлів
+	Screen size:	Розмір екрана:
+	Pixels per inch:	Пікселів на дюйм:
+	Hangul Hanja Conversion	Перетворення хангиль/ханча
+	Hangul Hanja Conversion…	Перетворення хангиль/ханча…
+	Hangul to Hanja	Хангиль у ханча
+	Hanja to Hangul	Ханча у хангиль
+	Put the caret in Korean text to choose its Hanja.	Поставте курсор у корейський текст, щоб вибрати ханча.
+	The selection, or the whole document when nothing is selected.	Виділений фрагмент або весь документ, якщо нічого не виділено.

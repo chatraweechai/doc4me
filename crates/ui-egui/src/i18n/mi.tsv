@@ -1,0 +1,3001 @@
+# Māori (mi) interface catalog. Columns, separated by a TAB:
+#   context <TAB> English source <TAB> translation
+#   context    empty (Doc4Me uses no contexts yet)
+#   source     the English text exactly as in the code (tl!(...), ribbon labels, command labels)
+#   escapes    \n  \t  \\  inside a column. `{name}` placeholders must appear in both columns, and a
+#              trailing "…" in one needs one in the other.
+#   Lines starting with # and blank lines are ignored. A missing entry shows in English.
+#
+# Te reo Māori (mi-NZ), standard orthography with macrons (ā ē ī ō ū).
+# Clean room: every entry was written from the plain meaning of the English label in ordinary
+# computing vocabulary. No Microsoft Word (or other product) localisation, string table or
+# translated UI was consulted or copied; add entries the same way.
+# Product, format and technology names (Doc4Me, PDF, Markdown, MCP …) stay in Latin letters.
+# Machine translation by an AI model (Claude), not yet reviewed by a native speaker.
+# License: MIT OR Apache-2.0.
+
+	"a" or "an" before the next word; Polish "w"/"we", "z"/"ze".	"a" or "an" i mua i te kupu e whai ake nei; Pōrana "w"/"we", "z"/"ze".
+	% of all commits	% o ngā tuku katoa
+	(All)	(Katoa)
+	(Custom)	(Ritenga)
+	(no style)	(kāore he kāhua)
+	(no suggestions)	(kāore he marohitanga)
+	(none)	(kore)
+	(normal text)	(kuputuhi noa)
+	(not matched)	(kāore i ōrite)
+	(picture or object)	(pikitia, ahanoa rānei)
+	*Bold* and _italic_ with real formatting	*Tōtoka* me _tītaha_ me te hōputu tūturu
+	0 or More Characters	0, Neke Atu Rānei ngā Pūāhua
+	1. Formatting restrictions	1. Ngā here hōputu
+	1. Main document	1. Tuhinga matua
+	1.5 Line Spacing	Mokowā Rārangi 1.5
+	1/4 Em Space	Mokowā ¼ Em
+	1×2 Empty Matrix	Poukapa Kau 1×2
+	1×3 Empty Matrix	Poukapa Kau 1×3
+	2. Data source	2. Mātāpuna raraunga
+	2. Editing restrictions	2. Ngā here whakatika
+	2×1 Empty Matrix	Poukapa Kau 2×1
+	2×2 Determinant	Pūwhakatau 2×2
+	2×2 Empty Matrix	Poukapa Kau 2×2
+	2×2 Identity Matrix	Poukapa Tuakiri 2×2
+	2×2 Identity Matrix (sparse)	Poukapa Tuakiri 2×2 (mōkarakara)
+	2×2 Matrix in Brackets	Poukapa 2×2 i Roto i ngā Taiapa
+	2×2 Matrix in Double Bars	Poukapa 2×2 i Roto i ngā Pou Rua
+	2×2 Matrix in Parentheses	Poukapa 2×2 i Roto i ngā Taiawhio
+	2×3 Empty Matrix	Poukapa Kau 2×3
+	3-D	3-D
+	3. Merge the data with the document	3. Hanumitia ngā raraunga ki te tuhinga
+	3. Start enforcement	3. Tīmata te whakamana
+	3D Models	Ngā Tauira 3D
+	3×1 Empty Matrix	Poukapa Kau 3×1
+	3×2 Empty Matrix	Poukapa Kau 3×2
+	3×3 Empty Matrix	Poukapa Kau 3×3
+	3×3 Identity Matrix	Poukapa Tuakiri 3×3
+	3×3 Identity Matrix (sparse)	Poukapa Tuakiri 3×3 (mōkarakara)
+	5,000 characters a day; give an email address for 50,000.	5,000 pūāhua ia rā; homai he wāhitau īmēra mō te 50,000.
+	<< Less	<< Iti Iho
+	<< Remove	<< Tango
+	A file dialog is already open.	Kua tuwhera kē tētahi matapihi kōnae.
+	A free, open-source word processor written from scratch in Rust.\nBased on WordCraft by the ArtCraft team.	He pūmanawa tukatuka kupu kore utu, puna tuwhera, i tuhia mai i te kore i roto i a Rust.\nI ahu mai i a WordCraft nā te rōpū ArtCraft.
+	A header source holds the field names for a data source without a header row.	Kei tētahi mātāpuna pane ngā ingoa āpure mō tētahi mātāpuna raraunga kāore he rārangi pane.
+	A mail merge field	He āpure hanumi mēra
+	A new document lists the commands with their shortcuts.	Ka whakarārangi tētahi tuhinga hou i ngā tohutohu me ō rātou pokatata.
+	A numbered sequence (figures, tables…)	He raupapa tau (ngā hoahoa, ngā ripanga…)
+	A password is required to open this document.	Me whai kupuhipa kia tuwhera ai tēnei tuhinga.
+	A space before punctuation, doubled marks, Polish commas before conjunctions.	He mokowā i mua i te tohutuhi, ngā tohu takirua, ngā piko Pōrana i mua i ngā kupu hono.
+	A table of contents	He rārangi kaupapa
+	A table's rows keep the same columns here.	He ōrite tonu ngā tīwae o ngā rārangi o te ripanga i konei.
+	A xor B	A xor B
+	A, B, C, …	A, B, C, …
+	a, b, c, …	a, b, c, …
+	AaBbCcDd	AaBbCcDd
+	AaBbYyZz	AaBbYyZz
+	About	Mō Tēnei
+	About Doc4Me	Mō Doc4Me
+	Above Chart	Ki Runga i te Kauwhata
+	Above the item	Ki runga i te tūemi
+	Absolute position	Tūnga pūmau
+	Absolute value cases	Ngā take uara pūmau
+	Accent	Kanohi
+	Accent Gradient	Rōnaki Kanohi
+	Accent with Reflection	Kanohi me te Whakaata
+	Accent {n}	Kanohi {n}
+	Accents	Ngā Tohu Whakahua
+	Accept	Whakaae
+	Accept All	Whakaae Katoa
+	Accept All Changes	Whakaae ki ngā Panoni Katoa
+	Accept or Reject Changes	Whakaae, Paopao rānei i ngā Panoni
+	Accept This Change	Whakaae ki Tēnei Panoni
+	Accessed on	I uru i te
+	Accessibility	Te Wātea ki te Katoa
+	Accessibility Pane	Pae Wātea ki te Katoa
+	Acute	Tohutō
+	Add	Tāpiri
+	Add >>	Tāpiri >>
+	Add a comment	Tāpiri tākupu
+	Add a Table	Tāpiri Ripanga
+	Add at least one field.	Tāpirihia kia kotahi te āpure i te iti rawa.
+	Add caption when inserting:	Tāpiri tapanga i te wā kōkuhu:
+	Add Chart Element	Tāpiri Huānga Kauwhata
+	Add Field	Tāpiri Āpure
+	Add Field Name	Tāpiri Ingoa Āpure
+	Add Font…	Tāpiri Momotuhi…
+	Add line numbering	Tāpiri tau rārangi
+	Add New Placeholder	Tāpiri Puriwāhi Hou
+	Add New Placeholder…	Tāpiri Puriwāhi Hou…
+	Add New Source…	Tāpiri Mātāpuna Hou…
+	Add Object to Selection	Tāpiri Ahanoa ki te Tīpakonga
+	Add Pen	Tāpiri Pene
+	Add Row	Tāpiri Rārangi
+	Add Series	Tāpiri Raupapa
+	Add Shape	Tāpiri Āhua
+	Add Space Before Paragraph	Tāpiri Mokowā i Mua i te Kōwae
+	Add space between Asian and Latin text	Tāpiri mokowā i waenga i te kuputuhi Āhia me te kuputuhi Rātini
+	Add space between Asian text and numbers	Tāpiri mokowā i waenga i te kuputuhi Āhia me ngā tau
+	Add tab stop at:	Tāpiri tūnga ripa ki:
+	Add Text	Tāpiri Kuputuhi
+	Add the chapter number	Tāpiri te tau upoko
+	Add to Dictionary	Tāpiri ki te Papakupu
+	Add to Document	Tāpiri ki te Tuhinga
+	Add to Quick Access Toolbar	Tāpiri ki te Paeutauta Uru Tere
+	Add to Style Gallery	Tāpiri ki te Taiwhanga Kāhua
+	Add-ins	Ngā Tāpiritanga
+	Add/Edit\nBibliography	Tāpiri/Whakatika\nRārangi Pukapuka
+	Add/Edit\nCitation	Tāpiri/Whakatika\nWhakahua
+	Add\nNote	Tāpiri\nTuhipoka
+	Add\nPen	Tāpiri\nPene
+	Add\nShape	Tāpiri\nĀhua
+	Added	Kua tāpirihia
+	Added Fonts	Ngā Momotuhi Kua Tāpirihia
+	Address	Wāhitau
+	Address Block	Paraka Wāhitau
+	Address labels	Ngā tapanga wāhitau
+	Address:	Wāhitau:
+	Address\nBlock	Paraka\nWāhitau
+	Adjust	Whakatika
+	Advanced	Arā Atu Anō
+	Advanced Find	Kimi Arā Atu Anō
+	Advanced Find…	Kimi Arā Atu Anō…
+	After:	I muri:
+	Agents	Ngā Māngai
+	Align	Tīaroaro
+	Align Bottom Center	Tīaroaro Raro Waenga
+	Align Bottom Left	Tīaroaro Raro Mauī
+	Align Bottom Right	Tīaroaro Raro Matau
+	Align Center	Tīaroaro Waenga
+	Align Center Left	Tīaroaro Waenga Mauī
+	Align Center Right	Tīaroaro Waenga Matau
+	Align Left	Tīaroaro Mauī
+	Align Right	Tīaroaro Matau
+	Align Text	Tīaroaro Kuputuhi
+	Align Top Center	Tīaroaro Runga Waenga
+	Align Top Left	Tīaroaro Runga Mauī
+	Align Top Right	Tīaroaro Runga Matau
+	Aligned at:	Tīaroaro ki:
+	Alignment	Tīaroaro
+	Alignment:	Tīaroaro:
+	All	Katoa
+	All - Linear	Katoa - Rārangi
+	All - Professional	Katoa - Ngaio
+	All Borders	Ngā Tapa Katoa
+	All Caps	Pūmatua Katoa
+	All caps	Pūmatua katoa
+	All Commands	Ngā Tohutohu Katoa
+	All files	Ngā kōnae katoa
+	All Levels	Ngā Taumata Katoa
+	All Markup	Ngā Tohu Katoa
+	All pages	Ngā whārangi katoa
+	All pages in the range	Ngā whārangi katoa o te awhe
+	All records	Ngā pūkete katoa
+	All symbol sets	Ngā huinga tohu katoa
+	Allow Doc4Me to use online services	Tukua a Doc4Me ki te whakamahi ratonga ipurangi
+	Allow hanging punctuation	Tukua te tohutuhi tārewa
+	Allow Latin text to wrap in the middle of a word	Tukua te kuputuhi Rātini kia takai i waenga i tētahi kupu
+	Allow line breaks	Tukua ngā wehenga rārangi
+	Allow overlap	Tukua te inaki
+	Allow row to break across pages	Tukua te rārangi kia wehe puta noa i ngā whārangi
+	Alphabetical	Ā-arapū
+	Alt Text	Kuputuhi Kē
+	Alt text	Kuputuhi kē
+	Alt Text Pane	Pae Kuputuhi Kē
+	Alt:	Kē:
+	Alt\nText	Kuputuhi\nKē
+	And	Me
+	Angle Brackets	Taiapa Koki
+	Angle Brackets with Separator	Taiapa Koki me te Pūwehe
+	Angle Brackets with Two Separators	Taiapa Koki me ngā Pūwehe e Rua
+	Animate the caret (it glides and fades)	Whakanekeneke te pūtohu (ka paheke, ka memeha)
+	Animation	Hākoritanga
+	Animation effects:	Ngā pānga hākoritanga:
+	Annotation Reference	Tohutoro Tuhipoka
+	Annotation Subject	Kaupapa Tuhipoka
+	Annotation Text	Kuputuhi Tuhipoka
+	Another file	Tētahi atu kōnae
+	Any Character	Pūāhua Ahakoa
+	Any Digit	Mati Ahakoa
+	Any Letter	Reta Ahakoa
+	Anyone can open this document. Encrypt it with a password to keep it private.	Ka taea e te tangata ahakoa ko wai te whakatuwhera i tēnei tuhinga. Whakamunatia ki te kupuhipa kia noho matatapu.
+	Anyone who opens the document will need this password.	Ka hiahiatia tēnei kupuhipa e te hunga katoa ka whakatuwhera i te tuhinga.
+	APA	APA
+	API key (if the server needs one)	Kī API (mēnā e hiahiatia ana e te tūmau)
+	Apply	Whakahāngai
+	Apply as you type	Whakahāngai i te wā e patopato ana
+	Apply Asian line-breaking rules (kinsoku)	Whakahāngai i ngā ture wehe rārangi Āhia (kinsoku)
+	Apply Character Style	Whakahāngai Kāhua Pūāhua
+	Apply formatting to:	Whakahāngai hōputu ki:
+	Apply special formats to	Whakahāngai hōputu motuhake ki
+	Apply Style	Whakahāngai Kāhua
+	Apply Styles	Whakahāngai Kāhua
+	Apply to:	Whakahāngai ki:
+	Arabic	Arapika
+	Arch Down	Kopere ki Raro
+	Arch Up	Kopere ki Runga
+	Area	Horahanga
+	Around	Huri Noa
+	Arrange	Whakaraupapa
+	Arrange All	Whakaraupapa Katoa
+	Arrange\nAll	Whakaraupapa\nKatoa
+	Arrow	Pere
+	Arrows	Ngā Pere
+	Artistic Effects	Ngā Pānga Toi
+	As Recommended	Pērā i te Mea i Tūtohutia
+	As you type	I te wā e patopato ana
+	ASAP	Ā TŌNA WĀ TATA
+	Ascending	Piki
+	Asian text font:	Momotuhi kuputuhi Āhia:
+	Asian Typography	Tuhi Momotuhi Āhia
+	Assign	Tautapa
+	At least	Ko te iti rawa
+	At least {n}	Ko te iti rawa {n}
+	Atelier	Atelier
+	Atmosphere	Kōhauhau
+	Attach Template	Tāpiri Tauira
+	Attach…	Tāpiri…
+	Author	Kaituhi
+	Auto	Aunoa
+	AutoCaption	Tapanga Aunoa
+	AutoCaption…	Tapanga Aunoa…
+	AutoComplete	Whakaoti Aunoa
+	AutoCorrect	Whakatika Aunoa
+	AutoCorrect Options	Ngā Kōwhiringa Whakatika Aunoa
+	AutoFit	Whakauru Aunoa
+	AutoFit Contents	Whakauru Aunoa ki ngā Ihirangi
+	AutoFit Window	Whakauru Aunoa ki te Matapihi
+	AutoFormat	Hōputu Aunoa
+	AutoFormat (Ctrl+Alt+K) formats the selected paragraphs, or the whole document.	Ka hōputu te Hōputu Aunoa (Ctrl+Alt+K) i ngā kōwae kua tīpakohia, i te tuhinga katoa rānei.
+	AutoFormat and Review Changes…	Hōputu Aunoa me te Arotake Panoni…
+	AutoFormat As You Type	Hōputu Aunoa i te Wā e Patopato Ana
+	AutoFormat changed {count} paragraphs	I panoni te Hōputu Aunoa i ngā kōwae {count}
+	AutoFormat Now	Hōputu Aunoa Ināianei
+	Automatic	Aunoa
+	Automatic ({language})	Aunoa ({language})
+	Automatic bulleted lists	Ngā rārangi matā aunoa
+	Automatic follows your system's language. Menus and commands change; your documents don't.	Ka whai te Aunoa i te reo o tō pūnaha. Ka panoni ngā tahua me ngā tohutohu; kāore e panoni ō tuhinga.
+	Automatic numbered lists	Ngā rārangi tau aunoa
+	Automatic Table 1 (3 levels)	Ripanga Aunoa 1 (3 taumata)
+	Automatic Table 2 (2 levels)	Ripanga Aunoa 2 (2 taumata)
+	Automatically hyphenate document	Tohuhono aunoatia te tuhinga
+	Automatically Update Document Styles	Whakahōu Aunoa i ngā Kāhua Tuhinga
+	Automatically update document styles	Whakahōu aunoa i ngā kāhua tuhinga
+	AutoSave	Tiaki Aunoa
+	AutoSave documents you have saved in Doc4Me	Tiaki Aunoa i ngā tuhinga kua tiakina e koe i roto i a Doc4Me
+	AutoSave failed: {error}. Save the document to turn AutoSave back on.	I rahua te Tiaki Aunoa: {error}. Tiakina te tuhinga kia hoki anō ai te Tiaki Aunoa.
+	AutoSave isn't available in the browser: it can't write to your files. Save downloads a copy.	Kāore te Tiaki Aunoa i te wātea i roto i te pūtirotiro: kāore e taea te tuhi ki ō kōnae. Ka tikiake te Tiaki i tētahi tārua.
+	AutoSave only keeps .docx, .odt and .rtf files; {name} can't keep all formatting. Save as .docx to turn on AutoSave.	Ko ngā kōnae .docx, .odt me .rtf anake e puritia ana e te Tiaki Aunoa; kāore e taea e {name} te pupuri i ngā hōputu katoa. Tiakina hei .docx kia whakakāhia ai te Tiaki Aunoa.
+	AutoSave saves every change to the file (needs a saved document)	Ka tiaki te Tiaki Aunoa i ia panoni ki te kōnae (me whai tuhinga kua tiakina)
+	AutoSave writes your changes to the file a moment after you stop typing.	Ka tuhi te Tiaki Aunoa i ō panoni ki te kōnae i tētahi wā poto i muri i tō mutu patopato.
+	AutoText	Kuputuhi Aunoa
+	B4 (JIS)   10.12" × 14.33"	B4 (JIS)   10.12" × 14.33"
+	B5 (JIS)   7.17" × 10.12"	B5 (JIS)   7.17" × 10.12"
+	Back	Hoki
+	Backspace	Backspace
+	Balloons	Ngā Pōhāhā
+	Banded Columns	Ngā Tīwae Whiri
+	Banded Rows	Ngā Rārangi Whiri
+	Bar	Pae
+	Base text:	Kuputuhi pūtake:
+	Based on: {style}	I ahu mai i: {style}
+	Baseline Dots	Ngā Ira Rārangi Pūtake
+	Basic Cycle	Huringa Taketake
+	Basic List	Rārangi Taketake
+	Basic Math	Pāngarau Taketake
+	Basic Matrix	Poukapa Taketake
+	Basic Process	Tukanga Taketake
+	Basic Pyramid	Koeko Taketake
+	Basic Radial	Pūtoro Taketake
+	Basic Venn	Venn Taketake
+	Bayes' rule	Te ture a Bayes
+	Before:	I mua:
+	Beginning of Word	Tīmatanga o te Kupu
+	Behind Text	Ki Muri i te Kuputuhi
+	Below text	Ki raro i te kuputuhi
+	Below the item	Ki raro i te tūemi
+	Between	I Waenga
+	Bibliography	Rārangi Pukapuka
+	Binary assets added	Kua tāpirihia ngā rawa pūrua
+	Binary assets removed	Kua tangohia ngā rawa pūrua
+	Binomial Coefficient	Whakarea Huarua
+	Binomial Coefficient (angle)	Whakarea Huarua (koki)
+	Binomial Coefficient with Angle Brackets	Whakarea Huarua me ngā Taiapa Koki
+	Binomial expansion of (x+a)ⁿ	Te whakawhānui huarua o (x+a)ⁿ
+	Blank	Kau
+	Blank (Three Columns)	Kau (E Toru ngā Tīwae)
+	Blank document	Tuhinga kau
+	Blank Page	Whārangi Kau
+	Block\nAuthors	Ārai\nKaituhi
+	Blue:	Kahurangi:
+	Body Text	Kuputuhi Tinana
+	Body text in a short paragraph to show spacing.	He kuputuhi tinana i roto i tētahi kōwae poto hei whakaatu i te mokowā.
+	Bold	Tōtoka
+	Book	Pukapuka
+	Book Title	Taitara Pukapuka
+	Book title	Taitara pukapuka
+	Bookmark	Tohuwāhi
+	Bookmark name:	Ingoa tohuwāhi:
+	Border lines	Ngā rārangi tapa
+	Border Painter	Kaipeita Tapa
+	Border\nPainter	Kaipeita\nTapa
+	Borders	Ngā Tapa
+	Borders and Shading	Ngā Tapa me te Whakamarumaru
+	Borders and Shading…	Ngā Tapa me te Whakamarumaru…
+	Border…	Tapa…
+	Both Sides	Ngā Taha e Rua
+	Both sides	Ngā taha e rua
+	Bottom	Raro
+	Bottom Border	Tapa Raro
+	Bottom Margin	Tawhē Raro
+	Bottom of Page	Raro o te Whārangi
+	Bottom of the Window	Raro o te Matapihi
+	Bottom:	Raro:
+	Box	Pouaka
+	Boxed Formula	Tātai i te Pouaka
+	Boxed Formula (example)	Tātai i te Pouaka (tauira)
+	Boxed Formulas	Ngā Tātai i te Pouaka
+	Braces	Ngā Awhi
+	Braces with Separator	Ngā Awhi me te Pūwehe
+	Bracket	Taiapa
+	Brackets	Ngā Taiapa
+	Brackets with Separators	Ngā Taiapa me ngā Pūwehe
+	Break Link	Wetewete Hononga
+	Breaks	Ngā Wehenga
+	Breve	Tohu Poto
+	Brightness, contrast and transparency change the picture from how it looks now.	Ka panoni te pīataata, te rerekētanga me te kiko mārama i te pikitia mai i tōna āhua ināianei.
+	Brightness:	Pīataata:
+	Bring Forward	Kawe Whakamua
+	Browse in Doc4Me…	Tirotiro i roto i a Doc4Me…
+	Browse…	Tirotiro…
+	Build table of figures from:	Hangaia te ripanga hoahoa mai i:
+	Building Block Gallery Content Control	Mana Ihirangi Taiwhanga Paraka Hanga
+	Built from the style or table entry fields chosen in Options.	I hangaia mai i ngā āpure kāhua, tāurunga ripanga rānei i tīpakohia i ngā Kōwhiringa.
+	Built-In	Ā-Roto
+	Built-in Heading styles	Ngā kāhua Upoko ā-roto
+	Built-in style	Kāhua ā-roto
+	Built-in styles can't be deleted.	Kāore e taea te muku i ngā kāhua ā-roto.
+	Bullet	Matā
+	Bullet Library	Whare Pukapuka Matā
+	Bullets	Ngā Matā
+	By author	Mā te kaituhi
+	By:	Nā:
+	Calendar	Maramataka
+	Can't be deleted	Kāore e taea te muku
+	Cancel	Whakakore
+	Canvas Member	Mema Kānawehi
+	Capitalization	Pūmatua
+	Capitalize Each Word	Pūmatua ia Kupu
+	Capitalize first letter of sentences	Pūmatua te reta tuatahi o ngā rerenga kōrero
+	Capitalize first letter of table cells	Pūmatua te reta tuatahi o ngā pūtau ripanga
+	Capitalize names of days	Pūmatua ngā ingoa o ngā rā
+	Capitalize the first word of a sentence	Pūmatua te kupu tuatahi o tētahi rerenga kōrero
+	Caption	Tapanga
+	Caption label:	Tūtohu tapanga:
+	Caption Numbering	Tau Tapanga
+	Caption text	Kuputuhi tapanga
+	Caption:	Tapanga:
+	Captions	Ngā Tapanga
+	Caret Character	Pūāhua Kare
+	Case changes	Ngā panoni pūmatua
+	Cases	Ngā Take
+	Cases (Three Conditions)	Ngā Take (E Toru ngā Tikanga)
+	Cases (Two Conditions)	Ngā Take (E Rua ngā Tikanga)
+	Cases and Stacks	Ngā Take me ngā Pūranga
+	Catalog	Rārangi tūemi
+	Categories	Ngā Kāwai
+	Categories:	Ngā kāwai:
+	Category	Kāwai
+	Category {n}	Kāwai {n}
+	Category:	Kāwai:
+	Category…	Kāwai…
+	Ceiling	Tuanui
+	Cell	Pūtau
+	Cell Margins	Ngā Tawhē Pūtau
+	Cell margins	Ngā tawhē pūtau
+	Cell Options	Ngā Kōwhiringa Pūtau
+	Cell Size	Rahi Pūtau
+	Cell\nMargins	Ngā Tawhē\nPūtau
+	Center	Waenga
+	Centered	Kei waenga
+	Centered as Group	Kei Waenga hei Rōpū
+	Centimeters	Ngā Henimita
+	Change	Panoni
+	Change Case	Panoni Pūmatua
+	Change Chart Type	Panoni Momo Kauwhata
+	Change Colors	Panoni Tae
+	Change in y over change in x	Te panoni o y i runga i te panoni o x
+	Change Layout	Panoni Takotoranga
+	Change List Level	Panoni Taumata Rārangi
+	Change Password…	Panoni Kupuhipa…
+	Change Picture	Panoni Pikitia
+	Change Picture…	Panoni Pikitia…
+	Change Shape	Panoni Āhua
+	Change Structure	Panoni Hanganga
+	Change to Display	Huri ki te Whakaatu
+	Change to Inline	Huri ki te Rārangi-roto
+	Change to Level 1	Huri ki te Taumata 1
+	Change to Level 2	Huri ki te Taumata 2
+	Change to Level 3	Huri ki te Taumata 3
+	Change to Level 4	Huri ki te Taumata 4
+	Change to Level 5	Huri ki te Taumata 5
+	Change to Level 6	Huri ki te Taumata 6
+	Change to Level 7	Huri ki te Taumata 7
+	Change to Level 8	Huri ki te Taumata 8
+	Change to Level 9	Huri ki te Taumata 9
+	Change\nChart Type	Panoni\nMomo Kauwhata
+	Change\nColors	Panoni\nTae
+	Changed	Kua panonitia
+	Changed lines:	Ngā rārangi kua panonitia:
+	Changes	Ngā Panoni
+	Changes with highlighting	Ngā panoni me te miramira
+	Changes without highlighting	Ngā panoni kāore he miramira
+	Chapter in a book	Upoko i roto i tētahi pukapuka
+	Chapters begin at:	Ka tīmata ngā upoko ki:
+	Character	Pūāhua
+	Character Border	Tapa Pūāhua
+	Character code:	Waehere pūāhua:
+	Character in Range	Pūāhua i Roto i te Awhe
+	Character level	Taumata pūāhua
+	Character Position	Tūnga Pūāhua
+	Character Scale	Āwhata Pūāhua
+	Character Shading	Whakamarumaru Pūāhua
+	Character Spacing	Mokowā Pūāhua
+	Character spacing	Mokowā pūāhua
+	Character style	Kāhua pūāhua
+	Characters	Ngā Pūāhua
+	Characters (no spaces)	Ngā Pūāhua (kore mokowā)
+	Characters (with spaces)	Ngā Pūāhua (me ngā mokowā)
+	Characters per line:	Ngā pūāhua ia rārangi:
+	Chart	Kauwhata
+	Chart Design	Hoahoa Kauwhata
+	Chart Layouts	Ngā Takotoranga Kauwhata
+	Chart Title	Taitara Kauwhata
+	Check	Tirotiro
+	Check Accessibility	Tirotiro Wātea ki te Katoa
+	Check Box Content Control	Mana Ihirangi Pouaka Tohu
+	Check Compatibility	Tirotiro Hototahi
+	Check Errors…	Tirotiro Hapa…
+	Check for Errors	Tirotiro mō ngā Hapa
+	Check Spelling as You Type	Tirotiro Tātaki Kupu i te Wā e Patopato Ana
+	Check spelling as you type	Tirotiro tātaki kupu i te wā e patopato ana
+	Check\nAccessibility	Tirotiro\nWātea ki te Katoa
+	Checked styles are allowed:	Ka whakaaetia ngā kāhua kua tohua:
+	Checked symbol	Tohu kua tohua
+	Chevron Down	Hewarona ki Raro
+	Chevron Up	Hewarona ki Runga
+	Chicago	Chicago
+	Chinese (Simplified)	Hainamana (Māmā)
+	Chinese (Traditional)	Hainamana (Tuku Iho)
+	Choose a command	Kōwhiria tētahi tohutohu
+	Choose a shortcut	Kōwhiria tētahi pokatata
+	Choose List Item	Kōwhiri Tūemi Rārangi
+	Choose the sheet that holds the recipients.	Kōwhiria te rau kei reira ngā kaiwhiwhi.
+	Circle	Porowhita
+	Circle area from its radius	Te horahanga porowhita mai i tōna pūtoro
+	Circled Dot	Ira Porowhita
+	Circled Plus	Tāpiri Porowhita
+	Circled Times	Whakarea Porowhita
+	Citation marked.	Kua tohua te whakahua.
+	Citation Style	Kāhua Whakahua
+	Citations	Ngā Whakahua
+	Citations & Bibliography	Ngā Whakahua & Rārangi Pukapuka
+	City	Tāone
+	Clear	Ūkui
+	Clear All	Ūkui Katoa
+	Clear All Formatting	Ūkui i ngā Hōputu Katoa
+	Clear Character Formatting	Ūkui Hōputu Pūāhua
+	Clear Character Style	Ūkui Kāhua Pūāhua
+	Clear Formatting Level	Ūkui Taumata Hōputu
+	Clear Paragraph Formatting	Ūkui Hōputu Kōwae
+	Click a border between two cells to merge them. Esc stops.	Pāwhiritia tētahi tapa i waenga i ngā pūtau e rua hei hanumi. Ka mutu mā Esc.
+	Click an item to paste it.	Pāwhiritia tētahi tūemi hei whakapiri.
+	Click level to modify:	Pāwhiritia te taumata hei whakarerekē:
+	Click the empty text box the text should continue in (Esc cancels)	Pāwhiritia te pouaka kuputuhi kau me haere tonu te kuputuhi ki roto (ka whakakore a Esc)
+	Click to switch back to inserting	Pāwhiri hei hoki ki te kōkuhu
+	Clipboard	Papatopenga
+	Clipboard Contents	Ngā Ihirangi Papatopenga
+	Clipboard Items	Ngā Tūemi Papatopenga
+	Clipboard Pane	Pae Papatopenga
+	Close	Kati
+	Close Equation	Kati Whārite
+	Close Header and Footer	Kati Pane me te Hiku
+	Close Outline View	Kati Tirohanga Hanganga
+	Close Outline\nView	Kati Tirohanga\nHanganga
+	Close Reviewing Pane	Kati Pae Arotake
+	Clustered Bar	Pae Kāhui
+	Clustered Column	Tīwae Kāhui
+	Col #:	Tīwae #:
+	Collapse	Tōpuni
+	Collapse Selection	Tōpuni Tīpakonga
+	Collapse the Ribbon	Tōpuni te Rīpene
+	Collate copies	Whakaraupapa ngā tārua
+	Collect entries from:	Kohikohi tāurunga mai i:
+	Colon Equal	Kopiko Ōrite
+	Color	Tae
+	Color model:	Tauira tae:
+	Color only	Tae anake
+	Color:	Tae:
+	Color: {color}	Tae: {color}
+	Colorful	Kanapanapa
+	Colors	Ngā Tae
+	Colors:	Ngā tae:
+	Column	Tīwae
+	Column Break	Wehenga Tīwae
+	Column Selection	Tīpakonga Tīwae
+	Column selection: the arrow keys extend the block, Esc ends it	Tīpakonga tīwae: ka whakawhānui ngā pātuhi pere i te paraka, ka whakamutu a Esc
+	Column width	Whānui tīwae
+	Column:	Tīwae:
+	Columns	Ngā Tīwae
+	Columns:	Ngā tīwae:
+	Combine	Whakakotahi
+	Combine Documents	Whakakotahi Tuhinga
+	Combo Box Content Control	Mana Ihirangi Pouaka Huinga
+	Commands	Ngā Tohutohu
+	Commands:	Ngā tohutohu:
+	Comment	Tākupu
+	Comments	Ngā Tākupu
+	Comments beside each page and tracked changes in PDFs, prints and images; a comment list at the end of web pages, Markdown and text.	Ngā tākupu i te taha o ia whārangi me ngā panoni aroturuki i roto i ngā PDF, ngā tānga me ngā atahanga; he rārangi tākupu i te mutunga o ngā whārangi tukutuku, Markdown me te kuputuhi.
+	Comments on version	Ngā tākupu mō te putanga
+	Comments Pane	Pae Tākupu
+	Commits	Ngā Tuku
+	Common Accent Objects	Ngā Ahanoa Tohu Whakahua Noa
+	Common Brackets	Ngā Taiapa Noa
+	Common Fractions	Ngā Hautau Noa
+	Common Functions	Ngā Taumahi Noa
+	Common Large Operators	Ngā Tūmahi Rahi Noa
+	Common Operator Structures	Ngā Hanganga Tūmahi Noa
+	Common Operators	Ngā Tūmahi Noa
+	Common Radicals	Ngā Pūtake Noa
+	Common Subscripts and Superscripts	Ngā Pūraro me ngā Pūrunga Noa
+	Communication	Whakawhitiwhiti Kōrero
+	Compact	Kōpiri
+	Company	Kamupene
+	Compare	Whakataurite
+	Compare Documents	Whakataurite Tuhinga
+	Compare to	Whakataurite ki
+	Compared: {changes} changes	I whakatauritea: {changes} ngā panoni
+	Comparing with another file needs the desktop app.	Me whai te taupānga papamahi kia whakatauritea ai ki tētahi atu kōnae.
+	Comparison	Whakatauritenga
+	Comparison settings	Ngā tautuhinga whakataurite
+	Compatibility mode: {version}	Aratau hototahi: {version}
+	Compatibility Options	Ngā Kōwhiringa Hototahi
+	Compatibility Options…	Ngā Kōwhiringa Hototahi…
+	Compress Pictures	Kōpiri Pikitia
+	Compress punctuation at the start of a line	Kōpiri tohutuhi i te tīmatanga o te rārangi
+	Condensed	Kōpiri
+	Conference	Hui
+	Conference paper	Pepa hui
+	CONFIDENTIAL	MATATAPU
+	Confirm password:	Whakaū kupuhipa:
+	Connect Shapes	Hono Āhua
+	Constitutional Provisions	Ngā Whakaritenga Ture Kaupapa
+	Container Title	Taitara Ipu
+	Contains	Kei roto
+	Content Control at Selection	Mana Ihirangi i te Tīpakonga
+	Content Control Properties	Ngā Āhuatanga Mana Ihirangi
+	Contents can't be edited	Kāore e taea te whakatika i ngā ihirangi
+	Context	Horopaki
+	Contextual	Ā-horopaki
+	Continuous	Haere Tonu
+	Continuous numbering	Tau haere tonu
+	Contour Integral	Pāhekoheko Hāwhe
+	Contour Integral with Limits	Pāhekoheko Hāwhe me ngā Tepe
+	Contour Integral with Stacked Limits	Pāhekoheko Hāwhe me ngā Tepe Tāpae
+	Contour Integrals	Ngā Pāhekoheko Hāwhe
+	Contrast:	Rerekētanga:
+	Contributors	Ngā Kaituku
+	Controls	Ngā Mana
+	Conversions	Ngā Huringa
+	Convert	Tahuri
+	Convert between built-up and linear form	Tahuri i waenga i te āhua hanga me te āhua rārangi
+	Convert Notes	Tahuri Tuhipoka
+	Convert Permanently	Tahuri Pūmau
+	Convert Text to Table	Tahuri Kuputuhi ki te Ripanga
+	Convert Text to Table…	Tahuri Kuputuhi ki te Ripanga…
+	Convert to Arabic Digits	Tahuri ki ngā Mati Arapika
+	Convert to Shapes	Tahuri ki ngā Āhua
+	Convert to Text	Tahuri ki te Kuputuhi
+	Convert to Thai Digits	Tahuri ki ngā Mati Tai
+	Copies	Ngā Tārua
+	Coproduct	Hua-tauaro
+	Coproduct with Limits	Hua-tauaro me ngā Tepe
+	Coproduct with Lower Limit	Hua-tauaro me te Tepe Raro
+	Coproduct with Subscript-Superscript Limits	Hua-tauaro me ngā Tepe Pūraro-Pūrunga
+	Copy	Tārua
+	Copy Formatting	Tārua Hōputu
+	Copy of the text a bookmark marks	Tārua o te kuputuhi e tohua ana e tētahi tohuwāhi
+	Copy Styles	Tārua Kāhua
+	Copy Text	Tārua Kuputuhi
+	Copy to where?	Tārua ki hea?
+	Copyright	Manatārua
+	Copyright Sign	Tohu Manatārua
+	Corrections	Ngā Whakatikatika
+	Cosecant Function	Taumahi Kohīkana
+	Cosine 2x	Kohaina 2x
+	Cosine Function	Taumahi Kohaina
+	Cotangent Function	Taumahi Kopātapa
+	Couldn't add {name}: {reason}	Kāore i taea te tāpiri i a {name}: {reason}
+	Couldn't download the picture: {reason}	Kāore i taea te tikiake i te pikitia: {reason}
+	Couldn't download {name}: {error}	Kāore i taea te tikiake i a {name}: {error}
+	Couldn't get the add-in list: {reason}	Kāore i taea te tiki i te rārangi tāpiritanga: {reason}
+	Couldn't make Doc4Me the default: {error}	Kāore i taea te whakarite i a Doc4Me hei taunoa: {error}
+	Couldn't open {path}: {error}	Kāore i taea te whakatuwhera i a {path}: {error}
+	Couldn't search: {reason}	Kāore i taea te rapu: {reason}
+	Couldn't translate: {reason}	Kāore i taea te whakamāori: {reason}
+	Count by:	Tatau mā:
+	Count words in text boxes and notes	Tatauria ngā kupu i roto i ngā pouaka kuputuhi me ngā tuhipoka
+	Country	Whenua
+	Courtesy Title	Taitara Whakaute
+	Cover Page	Whārangi Uhi
+	Craft	Mahi Toi
+	Create	Waihanga
+	Create a Style	Waihanga Kāhua
+	Create an interactive outline of your document.\n\nIt's a great way to keep track of where you are or quickly move your content around.\n\nTo get started, go to the Home tab and apply Heading styles to the headings in your document.	Waihangatia he whakarāpopototanga pāhekoheko o tō tuhinga.\n\nHe huarahi pai tēnei ki te mōhio kei hea koe, ki te neke tere rānei i ō ihirangi.\n\nHei tīmata, haere ki te ripa Kāinga ka whakahāngai i ngā kāhua Upoko ki ngā upoko o tō tuhinga.
+	Create Data Source…	Waihanga Mātāpuna Raraunga…
+	Create Graphic	Waihanga Whakairoiro
+	Create Header Source	Waihanga Mātāpuna Pane
+	Create Link	Waihanga Hononga
+	Create New Style	Waihanga Kāhua Hou
+	Create Source	Waihanga Mātāpuna
+	Create…	Waihanga…
+	Crop	Pokanga
+	Cross-reference	Tohutoro-whiti
+	Cross-reference:	Tohutoro-whiti:
+	Cube Root	Pūtake Pūtoru
+	Current	Onāianei
+	Current - Linear	Onāianei - Rārangi
+	Current - Professional	Onāianei - Ngaio
+	Current keyboard settings	Ngā tautuhinga papapātuhi onāianei
+	Current page	Whārangi onāianei
+	Current Position	Tūnga Onāianei
+	Current record	Pūkete onāianei
+	Current style: {style}	Kāhua onāianei: {style}
+	Curved Arrow Connector	Hononga Pere Kōpiko
+	Curved Connector	Hononga Kōpiko
+	Custom	Ritenga
+	Custom dictionary	Papakupu ritenga
+	Custom Margins…	Ngā Tawhē Ritenga…
+	Custom mark:	Tohu ritenga:
+	Custom range	Awhe ritenga
+	Custom Table of Contents	Rārangi Kaupapa Ritenga
+	Custom Table of Contents…	Rārangi Kaupapa Ritenga…
+	Custom Watermark	Tohu Wai Ritenga
+	Custom Watermark…	Tohu Wai Ritenga…
+	Customize	Whakaritenga
+	Customize Keyboard	Whakarite Papapātuhi
+	Customize Quick Access Toolbar	Whakarite Paeutauta Uru Tere
+	Customize Quick Access Toolbar…	Whakarite Paeutauta Uru Tere…
+	Customize Ribbon	Whakarite Rīpene
+	Customize the Ribbon…	Whakarite te Rīpene…
+	Customize…	Whakarite…
+	Cut	Tapahi
+	Cut, copy, and paste	Tapahi, tārua, whakapiri
+	Cycle	Huringa
+	Czech	Tieke
+	Danish	Tenemāka
+	Dark	Pōuri
+	Dark Mode	Aratau Pōuri
+	Dark page (white text on black)	Whārangi pōuri (kuputuhi mā ki te pango)
+	Dark with Shadow	Pōuri me te Ātārangi
+	Darkroom	Rūma Pōuri
+	Dashed	Tāraitia
+	Data	Raraunga
+	Data Labels	Ngā Tapanga Raraunga
+	Data source:	Mātāpuna raraunga:
+	Date	Rā
+	Date & Time	Rā & Wā
+	Date and Time	Rā me te Wā
+	Date format	Hōputu rā
+	Date formats:	Ngā hōputu rā:
+	Date Picker Content Control	Mana Ihirangi Kaikōwhiri Rā
+	Day	Rā
+	Decimal	Ā-ira
+	Decorative objects only add visual interest: screen readers skip them.	Ka tāpiri noa ngā ahanoa whakapaipai i te ātaahua: ka hipa ngā kaipānui mata i a rātou.
+	Decrease Font Size	Whakaiti Rahi Momotuhi
+	Decrease Indent	Whakaiti Nuku
+	Default	Taunoa
+	Default Paragraph Font	Momotuhi Kōwae Taunoa
+	Default tab stops:	Ngā tūnga ripa taunoa:
+	Define New Bullet	Tautuhi Matā Hou
+	Define New Multilevel List	Tautuhi Rārangi Taumata-maha Hou
+	Define New Multilevel List…	Tautuhi Rārangi Taumata-maha Hou…
+	Define New Number Format	Tautuhi Hōputu Tau Hou
+	Deflate	Whakapapatahi
+	Delete	Muku
+	Delete Back in Equation	Muku Whakamuri i te Whārite
+	Delete Cells	Muku Pūtau
+	Delete Clipboard Item	Muku Tūemi Papatopenga
+	Delete Columns	Muku Tīwae
+	Delete Comment	Muku Tākupu
+	Delete in Equation	Muku i te Whārite
+	Delete Label	Muku Tūtohu
+	Delete Next Word	Muku Kupu e Whai Ake
+	Delete Previous Word	Muku Kupu o Mua
+	Delete Rows	Muku Rārangi
+	Delete Selected Ink	Muku Mangumangu Kua Tīpakohia
+	Delete Style	Muku Kāhua
+	Delete Table	Muku Ripanga
+	Delete Table Style	Muku Kāhua Ripanga
+	Deleted	Kua mukua
+	Deletions:	Ngā mukunga:
+	Delivery address:	Wāhitau tuku:
+	Delta Equal To	Ōrite ki te Teta
+	Delta over arrow	Teta ki runga i te pere
+	Demote	Whakaheke
+	Demote to Body Text	Whakaheke ki te Kuputuhi Tinana
+	Derivative as a limit	Te pārōnaki hei tepe
+	Descending	Heke
+	Describe what this object shows, for people who can't see it.	Whakaahuatia te mea e whakaaturia ana e tēnei ahanoa, mō te hunga kāore e kite.
+	Describe what this table shows, for people who can't see it.	Whakaahuatia te mea e whakaaturia ana e tēnei ripanga, mō te hunga kāore e kite.
+	Description:	Whakaahuatanga:
+	Design	Hoahoa
+	Design Mode	Aratau Hoahoa
+	Detach Template	Wewete Tauira
+	Detect language automatically	Kimi aunoa i te reo
+	Developer	Kaiwhakawhanake
+	development build	hanga whakawhanake
+	Diagonal	Hauroki
+	Diagonal Dots	Ngā Ira Hauroki
+	Diamond	Taimana
+	Dictate	Whakahua Kōrero
+	Dictation isn't available here.	Kāore te whakahua kōrero i te wātea i konei.
+	Dictation stopped.	Kua mutu te whakahua kōrero.
+	Dictation stopped: {reason}	Kua mutu te whakahua kōrero: {reason}
+	Different First Page	Whārangi Tuatahi Rerekē
+	Different Odd & Even Pages	Whārangi Kehe & Taurite Rerekē
+	Differential	Pārōnaki
+	Differential theta	Pārōnaki teta
+	Differential x	Pārōnaki x
+	Differential y	Pārōnaki y
+	Differentials	Ngā Pārōnaki
+	Direct formatting	Hōputu tōtika
+	Direction:	Ahunga:
+	Directory	Rārangi Ingoa
+	Display	Whakaatu
+	Display for Review	Whakaatu mō te Arotake
+	Display gridlines on screen	Whakaatu rārangi mātiti i te mata
+	Display name	Ingoa whakaatu
+	Display text	Kuputuhi whakaatu
+	Distance from surrounding text	Tawhiti mai i te kuputuhi huri noa
+	Distribute Columns	Tohatoha Tīwae
+	Distribute letters	Tohatoha reta
+	Distribute Rows	Tohatoha Rārangi
+	Distribute spacing	Tohatoha mokowā
+	Distributed	Kua tohatohatia
+	Do Not Check Spelling or Grammar	Kaua e Tirotiro Tātaki Kupu, Wetereo Rānei
+	Do not check spelling or grammar	Kaua e tirotiro tātaki kupu, wetereo rānei
+	DO NOT COPY	KAUA E TĀRUA
+	Do Not Show in TOC	Kaua e Whakaatu i te Rārangi Kaupapa
+	Do you want to save changes to {name}?	Kei te hiahia koe ki te tiaki i ngā panoni ki a {name}?
+	Doc4Me	Doc4Me
+	Doc4Me add-ins are free packs of macros from Doc4Me's add-in catalog. They can only edit the document.	Ko ngā tāpiritanga Doc4Me he kōpaki makero kore utu mai i te rārangi tāpiritanga a Doc4Me. Ka taea anake e rātou te whakatika i te tuhinga.
+	Doc4Me is now the default app for Word documents.	Ko Doc4Me ināianei te taupānga taunoa mō ngā tuhinga Word.
+	Document	Tuhinga
+	Document End	Mutunga Tuhinga
+	Document Formatting	Hōputu Tuhinga
+	Document Grid	Mātiti Tuhinga
+	Document Information	Mōhiohio Tuhinga
+	Document Property	Āhuatanga Tuhinga
+	Document Start	Tīmatanga Tuhinga
+	Document template:	Tauira tuhinga:
+	Document Text	Kuputuhi Tuhinga
+	Document Title	Taitara Tuhinga
+	Document1	Tuhinga1
+	Document\nPreferences	Ngā Manakohanga\nTuhinga
+	Documents	Ngā Tuhinga
+	Documents you open will show up here.	Ka puta mai i konei ngā tuhinga ka whakatuwherahia e koe.
+	Does not contain	Kāore i roto
+	DOI	DOI
+	Don't add space between paragraphs of the same style	Kaua e tāpiri mokowā i waenga i ngā kōwae o te kāhua kotahi
+	Don't capitalize after:	Kaua e pūmatua i muri i:
+	Don't hyphenate	Kaua e tohuhono
+	Don't print blank lines when data fields are empty	Kaua e tā i ngā rārangi kau ina kau ngā āpure raraunga
+	Don't read Zotero, Mendeley or EndNote citations and bibliographies	Kaua e pānui i ngā whakahua me ngā rārangi pukapuka Zotero, Mendeley, EndNote rānei
+	Don't Save	Kaua e Tiaki
+	Don't use HTML paragraph auto spacing	Kaua e whakamahi i te mokowā aunoa kōwae HTML
+	Dot	Ira
+	Dot dash	Ira tāhiri
+	Dot-dash	Ira-tāhiri
+	Dots	Ngā Ira
+	Dotted	Iraira
+	Double	Rua
+	Double Bar	Pou Rua
+	Double Closing Quote	Tohukī Katinga Rua
+	Double Dot	Ira Rua
+	Double Integral	Pāhekoheko Rua
+	Double Integral with Limits	Pāhekoheko Rua me ngā Tepe
+	Double Integral with Stacked Limits	Pāhekoheko Rua me ngā Tepe Tāpae
+	Double Left Arrow with Text Above	Pere Mauī Rua me te Kuputuhi ki Runga
+	Double Left Arrow with Text Below	Pere Mauī Rua me te Kuputuhi ki Raro
+	Double Left Right Arrow with Text Above	Pere Mauī Matau Rua me te Kuputuhi ki Runga
+	Double Left Right Arrow with Text Below	Pere Mauī Matau Rua me te Kuputuhi ki Raro
+	Double Opening Quote	Tohukī Whakatuwheratanga Rua
+	Double Right Arrow with Text Above	Pere Matau Rua me te Kuputuhi ki Runga
+	Double Right Arrow with Text Below	Pere Matau Rua me te Kuputuhi ki Raro
+	Double Spacing	Mokowā Rua
+	Double Square Brackets	Taiapa Tapawhā Rua
+	Double Strikethrough	Rārangi Whakakore Rua
+	Double strikethrough	Rārangi whakakore rua
+	Double summation	Tāpiritanga rua
+	Double Underline	Tāraro Rua
+	Double Vertical Bars	Ngā Pou Poutū Rua
+	Doughnut	Tōnati
+	Down	Ki Raro
+	Downloading the speech model ({mb} MB, once)…	Kei te tikiake i te tauira kōrero ({mb} MB, kotahi te wā)…
+	Downloading…	Kei te tikiake…
+	DRAFT	HUKIHUKI
+	Draft	Hukihuki
+	Drag a rectangle to draw a table, or a line across cells to split them. Esc stops.	Tōia he tapawhā hei tuhi ripanga, he rārangi rānei puta noa i ngā pūtau hei wehe. Ka mutu mā Esc.
+	Draw	Tuhi
+	Draw Ink	Tuhi Mangumangu
+	Draw Table	Tuhi Ripanga
+	Draw\nTable	Tuhi\nRipanga
+	Drawing Canvas	Kānawehi Tuhi
+	Drawing Grid	Mātiti Tuhi
+	Drawing Tools	Ngā Utauta Tuhi
+	Drawing\nCanvas	Kānawehi\nTuhi
+	Drop Cap	Pūmatua Taka
+	Drop cap	Pūmatua taka
+	Drop-Down List Content Control	Mana Ihirangi Rārangi Taka-iho
+	Drops all formatting and pastes plain text.	Ka makaia ngā hōputu katoa, ka whakapiria he kuputuhi noa.
+	Dutch	Tati
+	E-mail Messages	Ngā Karere Īmēra
+	Edit Category	Whakatika Kāwai
+	Edit Comment	Whakatika Tākupu
+	Edit Data	Whakatika Raraunga
+	Edit Document	Whakatika Tuhinga
+	Edit Equation	Whakatika Whārite
+	Edit Field Code	Whakatika Waehere Āpure
+	Edit Field…	Whakatika Āpure…
+	Edit Footer	Whakatika Hiku
+	Edit Header	Whakatika Pane
+	Edit Individual Documents…	Whakatika Tuhinga Takitahi…
+	Edit Items	Whakatika Tūemi
+	Edit Recipient List	Whakatika Rārangi Kaiwhiwhi
+	Edit Source	Whakatika Mātāpuna
+	Edit\nData	Whakatika\nRaraunga
+	Edit\nRecipient List	Whakatika\nRārangi Kaiwhiwhi
+	Edited	Kua whakatikaina
+	Editing	Whakatika
+	Editing header/footer	Kei te whakatika i te pane/hiku
+	Editing in this document is restricted.	Kua herea te whakatika i tēnei tuhinga.
+	Editing — edit the document directly	Whakatika — whakatikahia tōtikatia te tuhinga
+	Edition	Whakaputanga
+	Editor	Ētita
+	Edit…	Whakatika…
+	Effects	Ngā Pānga
+	Elbow Arrow Connector	Hononga Pere Tuke
+	Elbow Connector	Hononga Tuke
+	Ellipsis	Ira Toru
+	Em Dash	Tāhiri Em
+	Em Space	Mokowā Em
+	Email address (optional)	Wāhitau īmēra (kōwhiringa)
+	Emboss	Whakaara
+	Emphasis	Aronui
+	Empty Matrices	Ngā Poukapa Kau
+	En Dash	Tāhiri En
+	En Space	Mokowā En
+	Enclose Characters	Taiapa Pūāhua
+	Enclosure	Taiapa
+	Encrypt with Password	Whakamuna ki te Kupuhipa
+	Encrypt with Password…	Whakamuna ki te Kupuhipa…
+	End of document	Mutunga o te tuhinga
+	End of section	Mutunga o te wāhanga
+	End of Word	Mutunga o te Kupu
+	Endnote Reference	Tohutoro Tuhipoka Whakamutunga
+	Endnote Text	Kuputuhi Tuhipoka Whakamutunga
+	Endnotes	Ngā Tuhipoka Whakamutunga
+	Endnotes to footnotes	Tuhipoka whakamutunga ki ngā tuhipoka
+	English	Ingarihi
+	English (United Kingdom)	Ingarihi (Kīngitanga Kotahi)
+	English (United States)	Ingarihi (Hononga o Amerika)
+	Engrave	Whakairo
+	Enlarge symbol	Whakanui tohu
+	Enter formatting for number:	Tāurua te hōputu mō te tau:
+	Enter in Equation	Tāuru i te Whārite
+	Enter page number:	Tāurua te tau whārangi:
+	Enter the web address or embed code of an online video:	Tāurua te wāhitau tukutuku, te waehere tāmau rānei o tētahi ataata ipurangi:
+	Entry marked.	Kua tohua te tāurunga.
+	Entry:	Tāurunga:
+	Envelope #10   4.12" × 9.50"	Kōpaki #10   4.12" × 9.50"
+	Envelope Address	Wāhitau Kōpaki
+	Envelope DL   4.33" × 8.66"	Kōpaki DL   4.33" × 8.66"
+	Envelope Return	Wāhitau Whakahoki Kōpaki
+	Envelope size:	Rahi kōpaki:
+	Envelopes	Ngā Kōpaki
+	Equal by Definition	Ōrite mā te Tautuhi
+	Equal column width	Whānui tīwae ōrite
+	Equal Equal	Ōrite Ōrite
+	Equal to	Ōrite ki
+	Equals:	Ōrite:
+	Equation	Whārite
+	Equation Gallery	Taiwhanga Whārite
+	Equation Info	Mōhiohio Whārite
+	Equation Number	Tau Whārite
+	Equation Options	Ngā Kōwhiringa Whārite
+	Erase Ink	Ūkui Mangumangu
+	Eraser	Ūkui
+	Errors ({n})	Ngā Hapa ({n})
+	Estonian	Ehetōnia
+	Euler's identity	Te tuakiri a Euler
+	Even Page	Whārangi Taurite
+	Even pages only	Ngā whārangi taurite anake
+	Every change is recorded as a tracked change.	Ka tuhia ia panoni hei panoni aroturuki.
+	Every command is available to scripts and AI agents: run `doc4me-cli mcp` for an MCP server, or start the app with `--control <port>` for the JSON control channel.	Kei te wātea ia tohutohu ki ngā hōtuhi me ngā māngai AI: whakahaerehia `doc4me-cli mcp` mō tētahi tūmau MCP, tīmatahia rānei te taupānga ki `--control <port>` mō te hongere mana JSON.
+	Every field needs a name.	Me whai ingoa ia āpure.
+	Every font this document uses is installed.	Kua tāutatia ia momotuhi e whakamahia ana e tēnei tuhinga.
+	Everyone	Te Katoa
+	Exactly	Tika tonu
+	Exactly {n}	Tika tonu {n}
+	Example: {sample}	Tauira: {sample}
+	Exceptions (optional)	Ngā okotahi (kōwhiringa)
+	Exceptions…	Ngā Okotahi…
+	Executive   7.25" × 10.50"	Executive   7.25" × 10.50"
+	Exit	Puta
+	Expand	Whakawhānui
+	Expand or Collapse Heading	Whakawhānui, Tōpuni rānei te Upoko
+	Expanded	Kua whakawhānuitia
+	Exponential	Taupū
+	Exponential series	Raupapa taupū
+	Export	Kaweake
+	Export a copy to share (PDF, Word document)	Kaweake he tārua hei tiri (PDF, tuhinga Word)
+	Export Page as JPEG	Kaweake Whārangi hei JPEG
+	Export Page as PNG	Kaweake Whārangi hei PNG
+	Export PDF	Kaweake PDF
+	Exported {path}	Kua kaweakehia a {path}
+	Expression	Kīanga
+	Extend Selection	Whakawhānui Tīpakonga
+	Extend Selection by Units	Whakawhānui Tīpakonga mā ngā Waeine
+	Extra space	Mokowā tāpiri
+	Extra spaces between words.	He mokowā tāpiri i waenga i ngā kupu.
+	Field	Āpure
+	Field Click	Pāwhiri Āpure
+	Field code:	Waehere āpure:
+	Field Codes	Ngā Waehere Āpure
+	Field codes:	Ngā waehere āpure:
+	Field name	Ingoa āpure
+	Field name:	Ingoa āpure:
+	Field names must be different.	Me rerekē ngā ingoa āpure.
+	Field names:	Ngā ingoa āpure:
+	Field properties	Ngā āhuatanga āpure
+	Field:	Āpure:
+	Fields	Ngā Āpure
+	Fields to insert:	Ngā āpure hei kōkuhu:
+	Fields:	Ngā āpure:
+	Field…	Āpure…
+	Figure	Hoahoa
+	File	Kōnae
+	File name:	Ingoa kōnae:
+	Fill	Whakakī
+	Fill & Line	Whakakī & Rārangi
+	Fill color:	Tae whakakī:
+	Fill:	Whakakī:
+	Filling in forms	Te whakakī i ngā puka
+	Film	Kiriata
+	Filter and Sort	Tātari me te Kōmaka
+	Filter and Sort…	Tātari me te Kōmaka…
+	Filter Records	Tātari Pūkete
+	Find	Kimi
+	Find and Replace	Kimi me te Whakakapi
+	Find Next	Kimi i te Mea e Whai Ake
+	Find Next Editable Region	Kimi i te Rohe Whakatika e Whai Ake
+	Find Previous	Kimi i te Mea o Mua
+	Find Recipient	Kimi Kaiwhiwhi
+	Find selects the next changed paragraph; Reject puts the selected one back as it was.	Ka tīpako a Kimi i te kōwae kua panonitia e whai ake nei; ka whakahoki a Paopao i te mea kua tīpakohia ki tōna āhua o mua.
+	Find What Expression	Kīanga Kimi
+	Find What Text	Kuputuhi Kimi
+	Find what:	Kimihia:
+	Find →	Kimi →
+	Find:	Kimi:
+	Finish	Whakaoti
+	Finish & Merge	Whakaoti & Hanumi
+	Finish &\nMerge	Whakaoti &\nHanumi
+	Finished	Kua oti
+	Finnish	Whinirānia
+	First	Tuatahi
+	First Cell in Column	Pūtau Tuatahi o te Tīwae
+	First Cell in Row	Pūtau Tuatahi o te Rārangi
+	First Column	Tīwae Tuatahi
+	First commit	Tuku tuatahi
+	First line	Rārangi tuatahi
+	First line:	Rārangi tuatahi:
+	First Name	Ingoa Tuatahi
+	First row of data contains column headers	Kei te rārangi raraunga tuatahi ngā pane tīwae
+	Fit	Whakauru
+	Fit text	Whakauru kuputuhi
+	Fix Position on Page	Whakapūmau te Tūnga i te Whārangi
+	Fixed Column Width	Whānui Tīwae Pūmau
+	Flip Horizontal	Huripoki Whakapae
+	Flip Vertical	Huripoki Poutū
+	Floor	Papa
+	Focus	Arotahi
+	Follow number with:	Whai muri i te tau ko:
+	Font	Momotuhi
+	Font Color	Tae Momotuhi
+	Font color	Tae momotuhi
+	Font color:	Tae momotuhi:
+	Font Dialog	Matapihi Momotuhi
+	Font not installed	Kāore te momotuhi i tāutatia
+	Font Size	Rahi Momotuhi
+	Font Substitution	Whakakapinga Momotuhi
+	Font Substitution…	Whakakapinga Momotuhi…
+	Font:	Momotuhi:
+	Font: {font}	Momotuhi: {font}
+	Fonts	Ngā Momotuhi
+	Font…	Momotuhi…
+	Footer	Hiku
+	Footnote and Endnote	Tuhipoka me te Tuhipoka Whakamutunga
+	Footnote Reference	Tohutoro Tuhipoka
+	Footnote Text	Kuputuhi Tuhipoka
+	Footnotes	Ngā Tuhipoka
+	Footnotes and endnotes	Ngā tuhipoka me ngā tuhipoka whakamutunga
+	Footnotes to endnotes	Tuhipoka ki ngā tuhipoka whakamutunga
+	Form Letters	Ngā Reta Puka
+	Format	Hōputu
+	Format Page Numbers	Hōputu Tau Whārangi
+	Format Page Numbers…	Hōputu Tau Whārangi…
+	Format Painter	Kaipeita Hōputu
+	Format Picture	Hōputu Pikitia
+	Format Shape	Hōputu Āhua
+	Format:	Hōputu:
+	Formatted	Kua hōputuhia
+	Formatted Text	Kuputuhi Kua Hōputuhia
+	Formatting	Hōputu
+	Formatting at Selection	Hōputu i te Tīpakonga
+	Formatting completed. You can now:	Kua oti te hōputu. Ka taea e koe ināianei te:
+	Formatting exceptions	Ngā okotahi hōputu
+	Formatting marks	Ngā tohu hōputu
+	Formatting, case changes, white space and tables are compared; the other settings are kept for later.	Ka whakatauritea te hōputu, ngā panoni pūmatua, te mokowā mā me ngā ripanga; ka puritia ngā tautuhinga atu mō muri ake.
+	Formula	Tātai
+	Forward	Whakamua
+	Fraction	Hautau
+	Fractions (1/2) as fraction characters (½)	Ngā hautau (1/2) hei pūāhua hautau (½)
+	French	Wīwī
+	French (France)	Wīwī (Wīwī)
+	From	Mai i
+	From text:	Mai i te kuputuhi:
+	from Unicode (hex)	mai i Unicode (hex)
+	From:	Mai i:
+	Full page of the same label	He whārangi katoa o te tapanga kotahi
+	Function	Taumahi
+	Functions	Ngā Taumahi
+	Gallery	Taiwhanga
+	GB/T 7714	GB/T 7714
+	General	Whānui
+	Geometry	Āhuahanga
+	German	Tiamana
+	German (Germany)	Tiamana (Tiamana)
+	Get Add-ins	Tiki Tāpiritanga
+	Get Data	Tiki Raraunga
+	Get Data…	Tiki Raraunga…
+	Getting ready…	Kei te whakareri…
+	Glow	Kanapa
+	Glow Colors	Ngā Tae Kanapa
+	Go Back	Hoki Whakamuri
+	Go To	Haere Ki
+	Go to	Haere ki
+	Go To…	Haere Ki…
+	Good afternoon	Ahiahi mārie
+	Good evening	Pō mārie
+	Good morning	Mōrena
+	GOST (name sort)	GOST (kōmaka ingoa)
+	GOST (title sort)	GOST (kōmaka taitara)
+	Grab bag	Pūtea tūemi
+	Grammar	Wetereo
+	Grammar Settings	Ngā Tautuhinga Wetereo
+	Graphic	Whakairoiro
+	Grave	Tohutō Whakamuri
+	Greater than	Nui ake i
+	Greater than or equal	Nui ake i, ōrite rānei
+	Greek	Kariki
+	Greek Letters	Ngā Reta Kariki
+	Green:	Kākāriki:
+	Greeting Line	Rārangi Mihi
+	Greeting\nLine	Rārangi\nMihi
+	Grid Settings	Ngā Tautuhinga Mātiti
+	Grid Table 1 Light	Ripanga Mātiti 1 Māmā
+	Grid Table 4 – Blue	Ripanga Mātiti 4 – Kahurangi
+	Grid Table 4 – Green	Ripanga Mātiti 4 – Kākāriki
+	Grid Table 4 – Orange	Ripanga Mātiti 4 – Karaka
+	Grid Table 4 – Purple	Ripanga Mātiti 4 – Waiporoporo
+	Gridlines	Ngā Rārangi Mātiti
+	Group	Rōpū
+	Grouping Character Above	Pūāhua Whakarōpū ki Runga
+	Grouping Character Below	Pūāhua Whakarōpū ki Raro
+	Grow Font 1 Point	Whakanui Momotuhi 1 Ira
+	H:	T:
+	Hanging Indent	Nuku Tārewa
+	Harvard (Anglia)	Harvard (Anglia)
+	Hat	Pōtae
+	Header	Pane
+	Header & Footer	Pane & Hiku
+	Header Options	Ngā Kōwhiringa Pane
+	Header Options:	Ngā Kōwhiringa Pane:
+	Header Row	Rārangi Pane
+	Header source: {file} (the next data source opened here takes its field names)	Mātāpuna pane: {file} (ka tango te mātāpuna raraunga e whai ake ka whakatuwherahia i konei i ōna ingoa āpure)
+	Header/Footer Position	Tūnga Pane/Hiku
+	Headers and footers	Ngā pane me ngā hiku
+	Heading 1	Upoko 1
+	Heading 2	Upoko 2
+	Heading 3	Upoko 3
+	Heading styles (levels 1–{n})	Ngā kāhua upoko (taumata 1–{n})
+	Heading {n}	Upoko {n}
+	Headings	Ngā Upoko
+	Heart	Manawa
+	Hebrew	Hīperu
+	Height:	Teitei:
+	Help	Āwhina
+	Hex:	Hex:
+	Hidden	Huna
+	Hidden text	Kuputuhi huna
+	Hide Codes	Huna Waehere
+	Hide from style lists	Huna i ngā rārangi kāhua
+	Hide Ink	Huna Mangumangu
+	Hide White Space	Huna Mokowā Mā
+	Hide\nInk	Huna\nMangumangu
+	Hierarchy	Arotaumata
+	Highlight	Miramira
+	Highlight Changes	Miramira Panoni
+	Highlight changes in printed document	Miramira panoni i te tuhinga kua tāngia
+	Highlight changes on screen	Miramira panoni i te mata
+	Highlight Merge Fields	Miramira Āpure Hanumi
+	Highlight\nMerge Fields	Miramira\nĀpure Hanumi
+	Highlighter	Pene Miramira
+	Hindi	Hindi
+	Historical and Discretional	Hītori me te Kōwhiringa
+	Hollow	Puare
+	Home	Kāinga
+	Home folder	Kōpaki kāinga
+	Horizontal	Whakapae
+	Horizontal Line	Rārangi Whakapae
+	Horizontal spacing:	Mokowā whakapae:
+	How many pages the whole document has	E hia ngā whārangi o te tuhinga katoa
+	How many pages this section has	E hia ngā whārangi o tēnei wāhanga
+	How many words the document holds	E hia ngā kupu kei roto i te tuhinga
+	HTML Format	Hōputu HTML
+	Hue:	Kano:
+	Hungarian	Hanakaria
+	Hyperbolic Cosecant Function	Taumahi Kohīkana Pūwerewere
+	Hyperbolic Cosine Function	Taumahi Kohaina Pūwerewere
+	Hyperbolic Cotangent Function	Taumahi Kopātapa Pūwerewere
+	Hyperbolic Functions	Ngā Taumahi Pūwerewere
+	Hyperbolic Secant Function	Taumahi Hīkana Pūwerewere
+	Hyperbolic Sine Function	Taumahi Haina Pūwerewere
+	Hyperbolic Tangent Function	Taumahi Pātapa Pūwerewere
+	Hyperlink	Hononga Tukutuku
+	Hyphenate at:	Tohuhono ki:
+	Hyphenate words in CAPS	Tohuhono kupu PŪMATUA
+	Hyphenation	Tohuhono
+	Hyphenation Options…	Ngā Kōwhiringa Tohuhono…
+	Hyphenation zone:	Rohe tohuhono:
+	Hyphens (--) as dashes (—)	Ngā tohuhono (--) hei tāhiri (—)
+	Hypotenuse	Tāroa
+	I, II, III, …	I, II, III, …
+	i, ii, iii, …	i, ii, iii, …
+	Icon Color	Tae Ata
+	Icons	Ngā Ata
+	Identity Matrices	Ngā Poukapa Tuakiri
+	IEEE	IEEE
+	If…Then…Else	Mēnā…Kātahi…Ki te kore
+	If…Then…Else…	Mēnā…Kātahi…Ki te kore…
+	Ignore All	Waiho Katoa
+	Ignore punctuation characters	Waiho ngā pūāhua tohutuhi
+	Ignore web and file addresses	Waiho ngā wāhitau tukutuku me ngā wāhitau kōnae
+	Ignore white-space characters	Waiho ngā pūāhua mokowā mā
+	Ignore words in capitals	Waiho ngā kupu pūmatua
+	Ignore words with numbers	Waiho ngā kupu me ngā tau
+	Illustrations	Ngā Whakaahua
+	Immersive	Rumaki
+	Immersive Reader	Kaipānui Rumaki
+	Immersive\nReader	Kaipānui\nRumaki
+	In Default apps, choose Doc4Me for the document types you want it to open.	I ngā taupānga Taunoa, kōwhiria a Doc4Me mō ngā momo tuhinga e hiahia ana koe kia whakatuwherahia e ia.
+	In equations, typing a name after a backslash replaces it with its symbol.	I roto i ngā whārite, mā te pato ingoa i muri i te rārangi whakamuri ka whakakapia ki tōna tohu.
+	In Front of Text	Ki Mua i te Kuputuhi
+	In Line with Text	I te Rārangi me te Kuputuhi
+	Inches	Ngā Īnihi
+	Include label and number	Whakaurua te tapanga me te tau
+	Include level number from:	Whakaurua te tau taumata mai i:
+	Include page numbers	Whakaurua ngā tau whārangi
+	Increase Font Size	Whakanui Rahi Momotuhi
+	Increase Indent	Whakanui Nuku
+	Indent	Nuku
+	Indent from left:	Nuku mai i te mauī:
+	Indentation	Nukunga
+	Indented	Kua nukuhia
+	Indents	Ngā Nuku
+	Indents and Spacing	Ngā Nuku me te Mokowā
+	Index	Kuputohu
+	Index and Tables	Kuputohu me ngā Ripanga
+	Index Heading	Upoko Kuputohu
+	Index {n}	Kuputohu {n}
+	Indonesian	Initonīhiana
+	Inflate	Whakapupuhi
+	Info	Mōhiohio
+	Initials:	Ngā tīmatanga ingoa:
+	Ink	Mangumangu
+	Ink Equation	Whārite Mangumangu
+	Ink Replay	Whakaatu Anō Mangumangu
+	Ink to Math	Mangumangu ki te Pāngarau
+	Ink to Shape	Mangumangu ki te Āhua
+	Ink to\nMath	Mangumangu ki te\nPāngarau
+	Ink to\nShape	Mangumangu ki te\nĀhua
+	Ink\nReplay	Whakaatu Anō\nMangumangu
+	Inline	Rārangi-roto
+	Input Format	Hōputu Tāuru
+	Insert	Kōkuhu
+	Insert a 3D model from a file (.glb, .stl, .obj)	Kōkuhu tauira 3D mai i tētahi kōnae (.glb, .stl, .obj)
+	Insert a new equation (Alt+=)	Kōkuhu whārite hou (Alt+=)
+	Insert Above	Kōkuhu ki Runga
+	Insert Below	Kōkuhu ki Raro
+	Insert Caption	Kōkuhu Tapanga
+	Insert Cells	Kōkuhu Pūtau
+	Insert Chart	Kōkuhu Kauwhata
+	Insert Citation	Kōkuhu Whakahua
+	Insert Columns to the Left	Kōkuhu Tīwae ki te Mauī
+	Insert Columns to the Right	Kōkuhu Tīwae ki te Matau
+	Insert Data	Kōkuhu Raraunga
+	Insert Database	Kōkuhu Pātengi Raraunga
+	Insert Database…	Kōkuhu Pātengi Raraunga…
+	Insert Date Field	Kōkuhu Āpure Rā
+	Insert Endnote	Kōkuhu Tuhipoka Whakamutunga
+	Insert entire column	Kōkuhu tīwae katoa
+	Insert entire row	Kōkuhu rārangi katoa
+	Insert Footnote	Kōkuhu Tuhipoka
+	Insert Hyperlink	Kōkuhu Hononga Tukutuku
+	Insert Index	Kōkuhu Kuputohu
+	Insert Left	Kōkuhu ki te Mauī
+	Insert LISTNUM Field	Kōkuhu Āpure LISTNUM
+	Insert Merge Field	Kōkuhu Āpure Hanumi
+	Insert Merge\nField	Kōkuhu Āpure\nHanumi
+	Insert New Equation	Kōkuhu Whārite Hou
+	Insert one text or another, depending on a field's value.	Kōkuhu tētahi kuputuhi, tētahi atu rānei, i runga anō i te uara o tētahi āpure.
+	Insert Page Field	Kōkuhu Āpure Whārangi
+	Insert Right	Kōkuhu ki te Matau
+	Insert Rows	Kōkuhu Rārangi
+	Insert Rows Above	Kōkuhu Rārangi ki Runga
+	Insert Rows Below	Kōkuhu Rārangi ki Raro
+	Insert Shapes	Kōkuhu Āhua
+	Insert SmartArt	Kōkuhu SmartArt
+	Insert Structure	Kōkuhu Hanganga
+	Insert Symbol	Kōkuhu Tohu
+	Insert Table	Kōkuhu Ripanga
+	Insert Table of Authorities	Kōkuhu Ripanga Mana Ture
+	Insert Table of Figures	Kōkuhu Ripanga Hoahoa
+	Insert Table…	Kōkuhu Ripanga…
+	Insert Time Field	Kōkuhu Āpure Wā
+	Insert Video	Kōkuhu Ataata
+	Insert\nAbove	Kōkuhu\nki Runga
+	Insert\nCaption	Kōkuhu\nTapanga
+	Insert\nCitation	Kōkuhu\nWhakahua
+	Insert\nFootnote	Kōkuhu\nTuhipoka
+	Inserted	Kua kōkuhutia
+	Insertions and Deletions	Ngā Kōkuhunga me ngā Mukunga
+	Insertions:	Ngā kōkuhunga:
+	Insertions: {ins}, deletions: {del}, moves: {moves}, formatting: {fmt}, comments: {comments}	Ngā kōkuhunga: {ins}, ngā mukunga: {del}, ngā nekehanga: {moves}, te hōputu: {fmt}, ngā tākupu: {comments}
+	Inside	Roto
+	Inside Borders	Ngā Tapa o Roto
+	Inside Margin	Tawhē o Roto
+	Inside:	Roto:
+	Inspect Document	Tirotiro Tuhinga
+	Inspect Styles at Selection	Tirotiro Kāhua i te Tīpakonga
+	Institution	Whare Ako
+	Integral	Pāhekoheko
+	Integral of e^(−x²)	Pāhekoheko o e^(−x²)
+	Integral with Limits	Pāhekoheko me ngā Tepe
+	Integral with Stacked Limits	Pāhekoheko me ngā Tepe Tāpae
+	Integrals	Ngā Pāhekoheko
+	Intense Emphasis	Aronui Kaha
+	Intense Quote	Whakahua Kaha
+	Intense Reference	Tohutoro Kaha
+	Interface	Atanga
+	Interface language	Reo atanga
+	Interface language:	Reo atanga:
+	Interface size:	Rahi atanga:
+	Interface Theme	Kaupapa Atanga
+	Interface theme:	Kaupapa atanga:
+	Interface\nTheme	Kaupapa\nAtanga
+	Internet addresses as links	Ngā wāhitau ipurangi hei hononga
+	Intersection	Pūtahitanga
+	Intersection with Limits	Pūtahitanga me ngā Tepe
+	Intersection with Lower Limit	Pūtahitanga me te Tepe Raro
+	Intersection with Subscript-Superscript Limits	Pūtahitanga me ngā Tepe Pūraro-Pūrunga
+	Inverse Cosecant Function	Taumahi Kohīkana Kōaro
+	Inverse Cosine Function	Taumahi Kohaina Kōaro
+	Inverse Cotangent Function	Taumahi Kopātapa Kōaro
+	Inverse Functions	Ngā Taumahi Kōaro
+	Inverse Hyperbolic Cosecant Function	Taumahi Kohīkana Pūwerewere Kōaro
+	Inverse Hyperbolic Cosine Function	Taumahi Kohaina Pūwerewere Kōaro
+	Inverse Hyperbolic Cotangent Function	Taumahi Kopātapa Pūwerewere Kōaro
+	Inverse Hyperbolic Functions	Ngā Taumahi Pūwerewere Kōaro
+	Inverse Hyperbolic Secant Function	Taumahi Hīkana Pūwerewere Kōaro
+	Inverse Hyperbolic Sine Function	Taumahi Haina Pūwerewere Kōaro
+	Inverse Hyperbolic Tangent Function	Taumahi Pātapa Pūwerewere Kōaro
+	Inverse Secant Function	Taumahi Hīkana Kōaro
+	Inverse Sine Function	Taumahi Haina Kōaro
+	Inverse Tangent Function	Taumahi Pātapa Kōaro
+	Ionosphere	Katote Rangi
+	Is blank	He kau
+	Is not blank	Ehara i te kau
+	ISO 690 (author-date)	ISO 690 (kaituhi-rā)
+	ISO 690 (numerical)	ISO 690 (ā-tau)
+	Issue	Tukunga
+	it isn't a picture Doc4Me can read	ehara i te pikitia ka taea e Doc4Me te pānui
+	Italian	Itāriana
+	Italic	Tītaha
+	Japanese	Hapanihi
+	Journal	Hautaka
+	Justification	Tautika
+	Justification of a display equation	Te tautika o tētahi whārite whakaatu
+	Justified	Kua tautikahia
+	Justify	Tautika
+	Keep Lines Together	Puritia ngā Rārangi Kia Tahi
+	Keep lines together	Puritia ngā rārangi kia tahi
+	Keep Source Formatting	Pupuri Hōputu Mātāpuna
+	Keep Text Only	Pupuri Kuputuhi Anake
+	Keep the password somewhere safe: without it nobody, Doc4Me included, can open the document. Leave both boxes empty to remove the password.	Puritia te kupuhipa ki tētahi wāhi haumaru: ki te kore, kāore he tangata, tae atu ki a Doc4Me, e taea te whakatuwhera i te tuhinga. Waiho kau ngā pouaka e rua hei tango i te kupuhipa.
+	Keep with Next	Pupuri me te Mea e Whai Ake
+	Keep with next	Pupuri me te mea e whai ake
+	Keeps the fonts and formatting of the copied text.	Ka pupuri i ngā momotuhi me te hōputu o te kuputuhi kua tāruatia.
+	Kerning for fonts:	Hāwhiti mō ngā momotuhi:
+	Keyboard shortcuts:	Ngā pokatata papapātuhi:
+	Keys for this command:	Ngā pātuhi mō tēnei tohutohu:
+	Keywords	Ngā kupu matua
+	Korean	Kōreana
+	Label changes with:	Ka panoni te tapanga me:
+	Label:	Tapanga:
+	Labels	Ngā Tapanga
+	Landscape	Whenua-roa
+	Language	Reo
+	Language Preferences…	Ngā Manakohanga Reo…
+	Language…	Reo…
+	Large\nOperator	Tūmahi\nRahi
+	Largest Only	Ko te Mea Nui Rawa Anake
+	Largest only	Ko te mea nui rawa anake
+	Lasso	Tari
+	Lasso Select	Tīpako Tari
+	Last	Whakamutunga
+	Last Cell in Column	Pūtau Whakamutunga o te Tīwae
+	Last Cell in Row	Pūtau Whakamutunga o te Rārangi
+	Last Column	Tīwae Whakamutunga
+	Last commit	Tuku whakamutunga
+	Last Name	Ingoa Whānau
+	Last, First; Last, First	Whānau, Tuatahi; Whānau, Tuatahi
+	Latin text font:	Momotuhi kuputuhi Rātini:
+	Layout	Takotoranga
+	Layout options for this document	Ngā kōwhiringa takotoranga mō tēnei tuhinga
+	Layout Summary	Whakarāpopototanga Takotoranga
+	Layouts	Ngā Takotoranga
+	Leader	Kaiārahi
+	Leave a recipient out of the merge when a field has this value.	Waiho tētahi kaiwhiwhi i waho i te hanumi ina whai tēnei uara tētahi āpure.
+	Leave Equation	Wehe i te Whārite
+	Leave the equation (Esc)	Wehe i te whārite (Esc)
+	Leave the label out of the caption	Waiho te tūtohu i waho i te tapanga
+	Left	Mauī
+	Left Arrow with Text Above	Pere Mauī me te Kuputuhi ki Runga
+	Left Arrow with Text Below	Pere Mauī me te Kuputuhi ki Raro
+	Left Border	Tapa Mauī
+	Left border	Tapa mauī
+	Left Bracket Twice	Taiapa Mauī Takirua
+	Left indent	Nuku mauī
+	Left Margin	Tawhē Mauī
+	Left Only	Mauī Anake
+	Left only	Mauī anake
+	Left Right Arrow Above	Pere Mauī Matau ki Runga
+	Left Right Arrow with Text Above	Pere Mauī Matau me te Kuputuhi ki Runga
+	Left Right Arrow with Text Below	Pere Mauī Matau me te Kuputuhi ki Raro
+	Left Subscript-Superscript	Pūraro-Pūrunga Mauī
+	Left-to-right	Mauī-ki-matau
+	Left-to-Right Text Direction	Ahunga Kuputuhi Mauī-ki-Matau
+	Left:	Mauī:
+	Leftwards Arrow Above	Pere Whakamauī ki Runga
+	Leftwards Harpoon Above	Hāpuna Whakamauī ki Runga
+	Legal   8.50" × 14.00"	Legal   8.50" × 14.00"
+	Legal style numbering	Tau kāhua ture
+	Legend	Kī
+	Less than	Iti iho i
+	Less than or equal	Iti iho i, ōrite rānei
+	Letter	Reta
+	Letter   8.50" × 11.00"	Letter   8.50" × 11.00"
+	Letter headings	Ngā upoko reta
+	Letter-Like Symbols	Ngā Tohu Rite-Reta
+	Letters	Ngā Reta
+	Level 1	Taumata 1
+	Level 2	Taumata 2
+	Level 3	Taumata 3
+	Level 4	Taumata 4
+	Level 5	Taumata 5
+	Level 6	Taumata 6
+	Level 7	Taumata 7
+	Level 8	Taumata 8
+	Level 9	Taumata 9
+	Level {n}	Taumata {n}
+	Level:	Taumata:
+	Levels:	Ngā taumata:
+	LibreTranslate server (open source)	Tūmau LibreTranslate (puna tuwhera)
+	Ligatures:	Ngā hono reta:
+	Light	Māmā
+	Light with Outline	Māmā me te Tuaono
+	Limit	Tepe
+	Limit and\nLog	Tepe me te\nPūkōaro
+	Limit consecutive hyphens to:	Herea ngā tohuhono haere tonu ki:
+	Limit Example	Tauira Tepe
+	Limit formatting to a selection of styles	Herea te hōputu ki ētahi kāhua kua tīpakohia
+	Line	Rārangi
+	Line and Page Breaks	Ngā Wehenga Rārangi me te Whārangi
+	Line and Paragraph Spacing	Mokowā Rārangi me te Kōwae
+	Line between	Rārangi i waenga
+	Line Break	Wehenga Rārangi
+	Line breaking	Wehe rārangi
+	Line delta	Rerekētanga rārangi
+	Line End	Mutunga Rārangi
+	Line Number	Tau Rārangi
+	Line Numbering Options…	Ngā Kōwhiringa Tau Rārangi…
+	Line Numbers	Ngā Tau Rārangi
+	Line Spacing	Mokowā Rārangi
+	Line spacing	Mokowā rārangi
+	Line Spacing Options…	Ngā Kōwhiringa Mokowā Rārangi…
+	Line spacing:	Mokowā rārangi:
+	Line Start	Tīmatanga Rārangi
+	Line width:	Whānui rārangi:
+	Line:	Rārangi:
+	Linear	Rārangi
+	Linear Fraction	Hautau Rārangi
+	Lines	Ngā Rārangi
+	Lines +/−	Ngā Rārangi +/−
+	Lines added	Ngā rārangi kua tāpirihia
+	Lines and characters	Ngā rārangi me ngā pūāhua
+	Lines deleted	Ngā rārangi kua mukua
+	Lines only	Ngā rārangi anake
+	Lines per page:	Ngā rārangi ia whārangi:
+	Link	Hononga
+	Link entries to their headings	Honoa ngā tāurunga ki ō rātou upoko
+	Link level to style:	Honoa te taumata ki te kāhua:
+	Link to Previous	Hono ki Mua
+	Linked style (paragraph and character)	Kāhua hono (kōwae me te pūāhua)
+	Links	Ngā Hononga
+	Links and References	Ngā Hononga me ngā Tohutoro
+	Link…	Hononga…
+	List	Rārangi
+	List Commands	Whakarārangi Tohutohu
+	List Definition	Tautuhinga Rārangi
+	List entries	Ngā tāurunga rārangi
+	List Paragraph	Kōwae Rārangi
+	List styles	Ngā kāhua rārangi
+	List Table 3 – Blue	Ripanga Rārangi 3 – Kahurangi
+	List Table 3 – Green	Ripanga Rārangi 3 – Kākāriki
+	List Table 3 – Orange	Ripanga Rārangi 3 – Karaka
+	List Table 3 – Purple	Ripanga Rārangi 3 – Waiporoporo
+	Listening… speak now	Kei te whakarongo… kōrero mai ināianei
+	Location	Wāhi
+	Location: {path}	Wāhi: {path}
+	Lock aspect ratio	Rakaina te ōwehenga āhua
+	Lock Fields	Rakaina ngā Āpure
+	Logarithm	Pūkōaro
+	Logarithm with Base	Pūkōaro me te Pūtake
+	Logical AND	AND Arorau
+	Logical AND with Limits	AND Arorau me ngā Tepe
+	Logical OR	OR Arorau
+	Logical OR with Limits	OR Arorau me ngā Tepe
+	Long citation:	Whakahua roa:
+	lowercase	pū iti
+	Lum:	Pīata:
+	Macros	Ngā Makero
+	Made from the author and year when empty	Ka hangaia mai i te kaituhi me te tau ina kau
+	Magazine or newspaper article	Tuhinga moheni, niupepa rānei
+	Mail Merge	Hanumi Mēra
+	Mail Merge Helper	Kaiāwhina Hanumi Mēra
+	Mail Merge Helper…	Kaiāwhina Hanumi Mēra…
+	Mailing Labels	Ngā Tapanga Mēra
+	Mailings	Ngā Mēra
+	Main entry:	Tāurunga matua:
+	Make Doc4Me the default for Word documents…	Whakaritea a Doc4Me hei taunoa mō ngā tuhinga Word…
+	Makes the ribbon, menus and dialogs larger or smaller, on top of your system's display scaling. Document zoom is separate.	Ka whakanui, ka whakaiti rānei i te rīpene, ngā tahua me ngā matapihi kōrero, i runga ake i te āwhata whakaatu o tō pūnaha. He motuhake te topa tuhinga.
+	Malay	Marei
+	Manage Sources	Whakahaere Mātāpuna
+	Manage Styles	Whakahaere Kāhua
+	Manage Styles…	Whakahaere Kāhua…
+	Manual Hyphenation	Tohuhono ā-Ringa
+	Manual hyphenation is complete.	Kua oti te tohuhono ā-ringa.
+	Manual Line Break	Wehenga Rārangi ā-Ringa
+	Manual Page Break	Wehenga Whārangi ā-Ringa
+	Manual…	Ā-ringa…
+	Many pages	He maha ngā whārangi
+	Margin	Tawhē
+	Margins	Ngā Tawhē
+	Mark	Tohu
+	Mark All	Tohu Katoa
+	Mark as decorative	Tohua hei whakapaipai
+	Mark Citation	Tohu Whakahua
+	Mark Citation…	Tohu Whakahua…
+	Mark Entry	Tohu Tāurunga
+	Mark Entry…	Tohu Tāurunga…
+	Mark grammar errors as you type	Tohua ngā hapa wetereo i te wā e patopato ana
+	Mark Index Entry	Tohu Tāurunga Kuputohu
+	Mark selected text as:	Tohua te kuputuhi kua tīpakohia hei:
+	Mark Table of Contents Entry	Tohu Tāurunga Rārangi Kaupapa
+	Mark\nCitation	Tohu\nWhakahua
+	Mark\nEntry	Tohu\nTāurunga
+	Markdown (*.md)	Markdown (*.md)
+	Match case	Ōrite te pūmatua
+	Match Fields	Whakaōrite Āpure
+	Match prefix	Ōrite te pūmua
+	Match suffix	Ōrite te pūmuri
+	Math AutoCorrect	Whakatika Aunoa Pāngarau
+	Math Input Control	Mana Tāuru Pāngarau
+	Matrices with Brackets	Ngā Poukapa me ngā Taiapa
+	Matrix	Poukapa
+	Maximize	Whakanui Rawa
+	Maximum	Mōrahi
+	Maximum Example	Tauira Mōrahi
+	Measured By	Ine Mā
+	Measurement units:	Ngā waeine ine:
+	Media	Pāpāho
+	Merge	Hanumi
+	Merge Cells	Hanumi Pūtau
+	Merge Formatting	Hanumi Hōputu
+	Merge Formatting pastes the text in the formatting where it lands, as Keep Text Only does.	Ka whakapiri a Hanumi Hōputu i te kuputuhi ki te hōputu o te wāhi ka tau ai, pērā i a Pupuri Kuputuhi Anake.
+	Merge Record #	Pūkete Hanumi #
+	Merge records	Hanumi pūkete
+	Merge to New Document	Hanumi ki te Tuhinga Hou
+	Merge to Printer	Hanumi ki te Pūreretā
+	Merge to:	Hanumi ki:
+	Merge type: {type}	Momo hanumi: {type}
+	Merged PRs	Ngā PR kua hanumitia
+	Merge…	Hanumi…
+	Mesosphere	Paparangi Waenga
+	Middle	Waenganui
+	Midline Dots	Ngā Ira Waenga-rārangi
+	Millimeters	Ngā Mitamano
+	Minimum	Mōkito
+	Minus Equal	Tango Ōrite
+	Mirror indents	Whakaata ngā nuku
+	Mirrored	Kua whakaatahia
+	Missing document font	Momotuhi tuhinga e ngaro ana
+	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team and the WordCraft contributors.	MIT OR Apache-2.0. Copyright (c) 2026 ArtCraft Team me ngā kaituku WordCraft.
+	MLA	MLA
+	Model	Tauira
+	Models	Ngā Tauira
+	Moderate	Ngāwari
+	Modify Style	Whakarerekē Kāhua
+	Modify Table Style	Whakarerekē Kāhua Ripanga
+	Modify Table Style…	Whakarerekē Kāhua Ripanga…
+	Modify…	Whakarerekē…
+	Mon	Mane
+	Month	Marama
+	More >>	Arā Atu >>
+	More Colors…	Ētahi Atu Tae…
+	More Columns…	Ētahi Atu Tīwae…
+	More Commands…	Ētahi Atu Tohutohu…
+	More Symbols…	Ētahi Atu Tohu…
+	More templates →	Ētahi atu tauira →
+	Move Down	Neke ki Raro
+	Move in Equation	Neke i te Whārite
+	Move object with text	Nekehia te ahanoa me te kuputuhi
+	Move or Resize	Neke, Panoni Rahi rānei
+	Move Paragraph Down	Neke Kōwae ki Raro
+	Move Paragraph Up	Neke Kōwae ki Runga
+	Move Past Citation	Neke Atu i te Whakahua
+	Move Past\nCitation	Neke Atu i te\nWhakahua
+	Move Selected Ink	Neke Mangumangu Kua Tīpakohia
+	Move Text	Neke Kuputuhi
+	Move to where?	Neke ki hea?
+	Move Up	Neke ki Runga
+	Move with Text	Neke me te Kuputuhi
+	Move with text	Neke me te kuputuhi
+	Moved from	I nekehia mai i
+	Moved to	I nekehia ki
+	Moves	Ngā Nekehanga
+	Multilevel List	Rārangi Taumata-maha
+	Multiple Pages	He Maha ngā Whārangi
+	My Add-ins	Āku Tāpiritanga
+	MyMemory (free, no account)	MyMemory (kore utu, kāore he pūkete)
+	Name	Ingoa
+	Name (A–Z)	Ingoa (A–Z)
+	Name of the file this document is saved as	Te ingoa o te kōnae i tiakina ai tēnei tuhinga
+	Name:	Ingoa:
+	Narrow  0.5" all	Whāiti  0.5" katoa
+	Natural Logarithm	Pūkōaro Tūturu
+	Nature	Taiao
+	Navigation	Whakatere
+	Navigation Pane	Pae Whakatere
+	Negated Relations	Ngā Pānga Whakakāhore
+	New	Hou
+	New Comment	Tākupu Hou
+	New comments and tracked changes are recorded under this name and these initials.	Ka tuhia ngā tākupu hou me ngā panoni aroturuki ki raro i tēnei ingoa me ēnei tīmatanga ingoa.
+	New Document	Tuhinga Hou
+	New document	Tuhinga hou
+	New Drawing Canvas	Kānawehi Tuhi Hou
+	New Entry	Tāurunga Hou
+	New Folder	Kōpaki Hou
+	New from Template	Hou mai i te Tauira
+	New Group	Rōpū Hou
+	New Label	Tūtohu Hou
+	New Label…	Tūtohu Hou…
+	New Paragraph	Kōwae Hou
+	New shortcut:	Pokatata hou:
+	New Style…	Kāhua Hou…
+	New Tab	Ripa Hou
+	New Table Style	Kāhua Ripanga Hou
+	New Table Style…	Kāhua Ripanga Hou…
+	New Window	Matapihi Hou
+	New word	Kupu hou
+	New\nComment	Tākupu\nHou
+	New\nWindow	Matapihi\nHou
+	New…	Hou…
+	Next	E Whai Ake
+	Next Change	Panoni e Whai Ake
+	Next Comment	Tākupu e Whai Ake
+	Next Field	Āpure e Whai Ake
+	Next Footnote	Tuhipoka e Whai Ake
+	Next Page	Whārangi e Whai Ake
+	Next Record	Pūkete e Whai Ake
+	Next Section	Wāhanga e Whai Ake
+	Next Sentence	Rerenga e Whai Ake
+	Next sentence	Rerenga e whai ake
+	Next Window	Matapihi e Whai Ake
+	No	Kāo
+	No accessibility issues found.	Kāore i kitea he raru wātea ki te katoa.
+	No add-ins are listed yet.	Kāore anō kia whakarārangitia he tāpiritanga.
+	No add-ins yet. Add one from the Store.	Kāore anō he tāpiritanga. Tāpirihia tētahi mai i te Toa.
+	No Border	Kāore he Tapa
+	No changes (read only)	Kāore he panoni (pānui anake)
+	No Color	Kāore he Tae
+	No contributor data was built into this copy.	Kāore i hangaia he raraunga kaituku ki roto i tēnei tārua.
+	No data source yet.	Kāore anō he mātāpuna raraunga.
+	No errors found: every merge field is in the recipient list.	Kāore i kitea he hapa: kei te rārangi kaiwhiwhi ia āpure hanumi.
+	No Fill	Kāore he Whakakī
+	No Glow	Kāore he Kanapa
+	No grid	Kāore he mātiti
+	No icons match your search.	Kāore he ata e ōrite ana ki tō rapunga.
+	No limit	Kāore he tepe
+	No Line	Kāore he Rārangi
+	No Markup	Kāore he Tohu
+	No model credits were built into this copy.	Kāore i hangaia he whakamihi tauira ki roto i tēnei tārua.
+	No Outline	Kāore he Paenga
+	No Paragraph Space	Kāore he Mokowā Kōwae
+	No pictures found.	Kāore i kitea he pikitia.
+	No Reflection	Kāore he Whakaata
+	No revisions	Kāore he Ātārangi
+	No Shadow	Kāore he Tapa Ngohengohe
+	No Soft Edges	Kāore he Tapa Ngohengohe
+	No sources yet.	Kāore anō he mātāpuna.
+	No Spacing	Kāore he Mokowā
+	no speech program on this system	kāore he hōtaka kōrero i runga i tēnei pūnaha
+	No templates match your search.	Kāore he tauira e ōrite ana ki tō rapunga.
+	No Transform	Kāore he Whakaahuahanga
+	No words yet. Add to Dictionary on a misspelled word puts it here.	Kāore anō he kupu. Mā te Tāpiri ki te Papakupu i runga i tētahi kupu hē te tātaki ka tuku ki konei.
+	No-Width Non Break	Kore-Whānui Kore Wehe
+	No-Width Optional Break	Wehenga Kōwhiringa Kore-Whānui
+	Nonbreaking Hyphen	Tohuhono Kore Wehe
+	Nonbreaking Space	Mokowā Kore Wehe
+	None	Kore
+	Normal	Noa
+	Normal  1" all	Noa  1" katoa
+	Normal Indent	Nuku Noa
+	Normal probability density	Kiato tūponotanga noa
+	Normal speed	Tere noa
+	Normal Style	Kāhua Noa
+	Normal Table	Ripanga Noa
+	Normal Text	Kuputuhi Noa
+	Normal Word Document	Tuhinga Word Noa
+	North	Raki
+	Norwegian (Bokmål)	Nōwei (Bokmål)
+	Not	Kāore
+	Not available right now	Kāore e wātea ana ināianei
+	Not equal to	Kāore e ōrite ki
+	Not linked: click a text box	Kāore i honoa: pāwhiritia tētahi pouaka kuputuhi
+	Not saved	Kāore i tiakina
+	Not saved yet	Kāore anō kia tiakina
+	Not used by any command	Kāore e whakamahia e tētahi tohutohu
+	Not {name}	Ehara i a {name}
+	Nothing	Kore noa iho
+	Nothing collected yet. Items you copy or cut appear here.	Kāore anō kia kohia tētahi mea. Ka puta mai i konei ngā tūemi ka tāruatia, ka tapahia rānei e koe.
+	Now used by {command}	Kei te whakamahia ināianei e {command}
+	Nudge	Pana Paku
+	Num Occurrences	Tau Putanga
+	Number	Tau
+	Number alignment:	Tīaroaro tau:
+	Number format	Hōputu tau
+	Number of columns:	Maha o ngā tīwae:
+	Number of rows:	Maha o ngā rārangi:
+	Number of the page the field sits on	Te tau o te whārangi kei reira te āpure
+	Number of the section the field sits in	Te tau o te wāhanga kei reira te āpure
+	Number style for this level:	Kāhua tau mō tēnei taumata:
+	Number the equation; the number sits at the right margin (or type # then the number)	Tauhia te whārite; ka noho te tau ki te tawhē matau (pato rānei i te # kātahi te tau)
+	Number type:	Momo tau:
+	Number:	Tau:
+	Numbering	Tau
+	Numbering:	Tau:
+	Numbering…	Tau…
+	Numerals	Ngā Tau
+	Numerals:	Ngā tau:
+	n×n Identity Matrix	Poukapa Tuakiri n×n
+	n×n Matrix	Poukapa n×n
+	Object	Ahanoa
+	Odd Page	Whārangi Kehe
+	Odd pages only	Ngā whārangi kehe anake
+	Off	Weto
+	Office	Office
+	Office 2003 Default	Taunoa Office 2003
+	Offset (pt):	Nekehanga (pt):
+	Offset: Bottom	Nekehanga: Raro
+	Offset: Bottom Left	Nekehanga: Raro Mauī
+	Offset: Bottom Right	Nekehanga: Raro Matau
+	Offset: Center	Nekehanga: Waenga
+	Offset: Left	Nekehanga: Mauī
+	Offset: Right	Nekehanga: Matau
+	Offset: Top	Nekehanga: Runga
+	Offset: Top Left	Nekehanga: Runga Mauī
+	Offset: Top Right	Nekehanga: Runga Matau
+	OK	Āe
+	Omit	Waiho
+	On	Kā
+	On: the caret glides to its new place when you type or use the arrow keys, and its blink fades. Off: it jumps and blinks on and off.	Kā: ka paheke te pūtohu ki tōna wāhi hou ina pato koe, ina whakamahi rānei i ngā pātuhi pere, ā, ka memeha tōna kimo. Weto: ka peke, ka kimo kā, weto hoki.
+	One	Kotahi
+	One half	Hāwhe
+	One label per recipient	Kotahi te tapanga ia kaiwhiwhi
+	One line per item. Enter adds an item.	Kotahi te rārangi ia tūemi. Ka tāpiri a Enter i tētahi tūemi.
+	One Page	Kotahi te Whārangi
+	Online Pictures	Ngā Pikitia Ipurangi
+	Online Pictures (Openverse), Translate (MyMemory or your LibreTranslate server), Get Add-ins and the download of Dictate's speech model connect to the internet, and only when you use them. Turned off, Doc4Me makes no connection of its own.	Ka hono ngā Pikitia Ipurangi (Openverse), te Whakamāori (MyMemory, tō tūmau LibreTranslate rānei), te Tiki Tāpiritanga me te tikiake o te tauira kōrero a Whakahua Kōrero ki te ipurangi, ā, ina whakamahia anake e koe. Ina weto, kāore a Doc4Me e hono ake ā-ia ake.
+	Online Pictures…	Ngā Pikitia Ipurangi…
+	Online services are turned off (File › Options › Trust Center).	Kua whakawetohia ngā ratonga ipurangi (Kōnae › Kōwhiringa › Pokapū Whakawhirinaki).
+	Online Video	Ataata Ipurangi
+	Only allow this kind of editing:	Tukua tēnei momo whakatika anake:
+	Only comments can be added, except in regions marked editable.	Ko ngā tākupu anake ka taea te tāpiri, hāunga i ngā rohe kua tohua hei whakatika.
+	Only form fields can be filled in.	Ko ngā āpure puka anake ka taea te whakakī.
+	only https addresses can be used	ko ngā wāhitau https anake ka taea te whakamahi
+	Only pictures I may use commercially	Ko ngā pikitia anake ka āhei au ki te whakamahi ā-arumoni
+	Only the allowed styles can be applied.	Ko ngā kāhua kua whakaaetia anake ka taea te whakahāngai.
+	Only web (http, https) and email (mailto) links can be followed	Ko ngā hononga tukutuku (http, https) me ngā hononga īmēra (mailto) anake ka taea te whai
+	Open	Whakatuwhera
+	Open a file with Doc4Me's own browser when the system file dialog doesn't appear.	Whakatuwherahia tētahi kōnae mā te pūtirotiro ake o Doc4Me ina kāore e puta te matapihi kōnae a te pūnaha.
+	Open Data Source…	Whakatuwhera Mātāpuna Raraunga…
+	Open Hyperlink	Whakatuwhera Hononga Tukutuku
+	OpenDocument Text (*.odt)	Kuputuhi OpenDocument (*.odt)
+	Opening print dialog…	Kei te whakatuwhera i te matapihi tā…
+	Opens .docx, .doc, .rtf and .odt files and Word templates with Doc4Me from now on.	Ka whakatuwhera i ngā kōnae .docx, .doc, .rtf me .odt me ngā tauira Word ki a Doc4Me mai i nāianei.
+	Opens Settings › Default apps, where you choose Doc4Me for .docx and the other document types.	Ka whakatuwhera i ngā Tautuhinga › Ngā taupānga taunoa, kei reira koe e kōwhiri ai i a Doc4Me mō te .docx me ērā atu momo tuhinga.
+	Open…	Whakatuwhera…
+	Operator	Tūmahi
+	Operator Structures	Ngā Hanganga Tūmahi
+	Operators	Ngā Tūmahi
+	Optional Hyphen	Tohuhono Kōwhiringa
+	Options	Ngā Kōwhiringa
+	Options…	Ngā Kōwhiringa…
+	Or	Rānei
+	Or save a copy in another format:	Tiakina rānei he tārua i tētahi atu hōputu:
+	Ordinals (1st) as superscript	Ngā tau raupapa (1st) hei pūrunga
+	Organizer	Kaiwhakarite
+	Organizer…	Kaiwhakarite…
+	Orientation	Takotoranga Whārangi
+	Original document	Tuhinga taketake
+	Other	Tētahi Atu
+	Other Authorities	Ētahi Atu Mana Ture
+	Other Large Operators	Ētahi Atu Tūmahi Rahi
+	Other paragraph styles	Ētahi atu kāhua kōwae
+	Other styles and their TOC level:	Ētahi atu kāhua me tō rātou taumata rārangi kaupapa:
+	Otherwise insert:	Ki te kore, kōkuhu:
+	Outline	Hanganga
+	Outline Level	Taumata Hanganga
+	Outline level	Taumata hanganga
+	Outline levels	Ngā taumata hanganga
+	Outline State	Tūāhua Hanganga
+	Outline Tools	Ngā Utauta Hanganga
+	Outlining	Whakahanganga
+	Outside	Waho
+	Outside border	Tapa o waho
+	Outside Borders	Ngā Tapa o Waho
+	Outside Margin	Tawhē o Waho
+	Outside:	Waho:
+	Outward Brackets	Ngā Taiapa Whakawaho
+	Oval	Porotītaha
+	Overbar	Pae Runga
+	Overbars and Underbars	Ngā Pae Runga me ngā Pae Raro
+	Overbrace	Awhi Runga
+	Overtype	Tuhi Whakakapi
+	Overtype (typing replaces the characters after the caret)	Tuhi Whakakapi (ka whakakapi te patopato i ngā pūāhua i muri i te pūtohu)
+	Page	Whārangi
+	Page Background	Papamuri Whārangi
+	Page Border	Tapa Whārangi
+	Page Borders	Ngā Tapa Whārangi
+	Page Break	Wehenga Whārangi
+	Page Break Before	Wehenga Whārangi i Mua
+	Page break before	Wehenga whārangi i mua
+	Page Breaks	Ngā Wehenga Whārangi
+	Page Color	Tae Whārangi
+	Page display	Whakaatu whārangi
+	Page Down	Page Down
+	Page image (*.jpg, *.jpeg)	Atahanga whārangi (*.jpg, *.jpeg)
+	Page image (*.png)	Atahanga whārangi (*.png)
+	Page Movement	Nekehanga Whārangi
+	Page Number	Tau Whārangi
+	Page number style	Kāhua tau whārangi
+	Page numbers at the right margin	Ngā tau whārangi ki te tawhē matau
+	Page on which a bookmarked passage falls	Te whārangi e taka ai tētahi wāhanga kua tohuwāhitia
+	Page Setup	Tatūnga Whārangi
+	Page title	Taitara whārangi
+	Page Up	Page Up
+	Page Width	Whānui Whārangi
+	Page width	Whānui whārangi
+	Page X of Y	Whārangi X o Y
+	Page {page}	Whārangi {page}
+	Page {page} of {pages}	Whārangi {page} o {pages}
+	Page\nBorders	Ngā Tapa\nWhārangi
+	Page\nColor	Tae\nWhārangi
+	Page\nNumber	Tau\nWhārangi
+	Pages	Ngā Whārangi
+	Pages like 1-3, 5	Ngā whārangi pērā i te 1-3, 5
+	Pages of bookmark:	Ngā whārangi o te tohuwāhi:
+	Paragraph	Kōwae
+	Paragraph Character	Pūāhua Kōwae
+	Paragraph Details	Ngā Taipitopito Kōwae
+	Paragraph Down	Kōwae ki Raro
+	Paragraph Mark	Tohu Kōwae
+	Paragraph marks	Ngā tohu kōwae
+	Paragraph Settings	Ngā Tautuhinga Kōwae
+	Paragraph Spacing	Mokowā Kōwae
+	Paragraph style	Kāhua kōwae
+	Paragraph Up	Kōwae ki Runga
+	Paragraphs	Ngā Kōwae
+	Paragraph…	Kōwae…
+	Parentheses	Ngā Taiawhio
+	Parentheses with Separator	Ngā Taiawhio me te Pūwehe
+	Partial Differential	Pārōnaki Wāhanga
+	Password	Kupuhipa
+	Password:	Kupuhipa:
+	Paste	Whakapiri
+	Paste All	Whakapiri Katoa
+	Paste as:	Whakapiri hei:
+	Paste Clipboard Item	Whakapiri Tūemi Papatopenga
+	Paste Formatting	Whakapiri Hōputu
+	Paste Special	Whakapiri Motuhake
+	Paste Special…	Whakapiri Motuhake…
+	Paste Spike	Whakapiri Tao
+	Paste: Keep Text Only	Whakapiri: Pupuri Kuputuhi Anake
+	Paste: Merge Formatting	Whakapiri: Hanumi Hōputu
+	Pasting between documents:	Te whakapiri i waenga i ngā tuhinga:
+	Pasting from other programs:	Te whakapiri mai i ētahi atu hōtaka:
+	Pasting within the same document:	Te whakapiri i roto i te tuhinga kotahi:
+	Pause	Tatari
+	Paused	Kua tatari
+	PDF document (*.pdf)	Tuhinga PDF (*.pdf)
+	Pen	Pene
+	Pencil	Pene Rākau
+	Pens	Ngā Pene
+	People	Ngā Tāngata
+	Periodical	Pukapuka Ā-Wā
+	Personalize	Whakawhaiaro
+	Phonetic Guide	Kaiārahi Whakahua
+	Pi Over 2	Pai Whakawehea ki te 2
+	Picas	Ngā Paika
+	Pick a custom group (New Group makes one)	Kōwhiria tētahi rōpū ritenga (ka hanga tētahi e Rōpū Hou)
+	Pick a field from the list	Kōwhiria tētahi āpure i te rārangi
+	Picture	Pikitia
+	Picture Border	Tapa Pikitia
+	Picture Content Control	Mana Ihirangi Pikitia
+	Picture Format	Hōputu Pikitia
+	Picture Styles	Ngā Kāhua Pikitia
+	Pictures	Ngā Pikitia
+	Pictures from Openverse. Respect each picture's licence: Doc4Me adds a credit line under it.	Ngā pikitia mai i Openverse. Whakaūngia te raihana o ia pikitia: ka tāpiri a Doc4Me i tētahi rārangi whakamihi ki raro.
+	Pie	Porohita
+	Placeholder Name	Ingoa Puriwāhi
+	Placeholder text	Kuputuhi puriwāhi
+	Plain Table 1	Ripanga Māmā 1
+	Plain text (*.txt)	Kuputuhi noa (*.txt)
+	Plain Text Content Control	Mana Ihirangi Kuputuhi Noa
+	Play	Pūrei
+	Play Video	Pūrei Ataata
+	Play/Pause	Pūrei/Tatari
+	Plus Equal	Tāpiri Ōrite
+	Points	Ngā Ira
+	points and above	ira, neke atu rānei
+	Polish	Pōrana
+	Portrait	Whenua-tū
+	Portuguese (Brazil)	Pōtikī (Parīhi)
+	Portuguese (Portugal)	Pōtikī (Potukara)
+	Position	Tūnga
+	Position:	Tūnga:
+	Positioning…	Whakatūnga…
+	Possible spelling mistake	Hapa tātaki kupu pea
+	Postal Code	Waehere Poutāpeta
+	Power series of (1+x)ⁿ	Raupapa pū o (1+x)ⁿ
+	Preferred width:	Whānui pai ake:
+	Preserve	Pupuri
+	Preserve formatting during updates	Puritia te hōputu i ngā whakahōunga
+	Presets	Ngā Tatūnga
+	Press a key combination	Pēhia tētahi huinga pātuhi
+	Preview	Arokite
+	Preview Results	Arokite Hua
+	Preview\nResults	Arokite\nHua
+	Previous	O Mua
+	Previous 1 or More	O Mua 1, Neke Atu Rānei
+	Previous Change	Panoni o Mua
+	Previous Comment	Tākupu o Mua
+	Previous Field	Āpure o Mua
+	Previous Footnote	Tuhipoka o Mua
+	Previous Page	Whārangi o Mua
+	Previous Record	Pūkete o Mua
+	Previous Section	Wāhanga o Mua
+	Previous Sentence	Rerenga o Mua
+	Previous sentence	Rerenga o mua
+	Previous Window	Matapihi o Mua
+	Print	Tā
+	Print blank lines when data fields are empty	Tāngia ngā rārangi kau ina kau ngā āpure raraunga
+	Print Documents	Tā Tuhinga
+	Print Documents…	Tā Tuhinga…
+	Print failed: {error}	I rahua te tā: {error}
+	Print Layout	Takotoranga Tā
+	Print Markup	Tā Tohu
+	Print the page color	Tāngia te tae whārangi
+	Print to PDF	Tā ki te PDF
+	Print\nLayout	Takotoranga\nTā
+	Printer	Pūreretā
+	Printing	Te Tā
+	Process	Tukanga
+	Product	Hua
+	Product of A	Hua o A
+	Product with Limits	Hua me ngā Tepe
+	Product with Lower Limit	Hua me te Tepe Raro
+	Product with Subscript-Superscript Limits	Hua me ngā Tepe Pūraro-Pūrunga
+	Products and Coproducts	Ngā Hua me ngā Hua-tauaro
+	Professional	Ngaio
+	Promote	Whakapiki
+	Promote to Heading 1	Whakapiki ki te Upoko 1
+	Proofing	Te Hāpono
+	Proofing Issues	Ngā Raru Hāpono
+	Proofing language	Reo hāpono
+	Properties	Ngā Āhuatanga
+	Protect	Parepare
+	Protect Document	Parepare Tuhinga
+	PRs	Ngā PR
+	pt	pt
+	Publisher	Kaiwhakaputa
+	Punctuation	Tohutuhi
+	Put the caret in a content control first.	Whakatakotoria te pūtohu ki roto i tētahi mana ihirangi i te tuatahi.
+	Put the default commands back on the Quick Access Toolbar?	Whakahokia ngā tohutohu taunoa ki te Paeutauta Uru Tere?
+	Pyramid	Koeko
+	Quadratic Root	Pūtake Tapawhā
+	Query Options…	Ngā Kōwhiringa Uiui…
+	Quick Access Toolbar	Paeutauta Uru Tere
+	Quick Parts	Ngā Wāhanga Tere
+	Quick Tables	Ngā Ripanga Tere
+	Quote	Whakahua
+	Radical	Pūtake
+	Radical with Degree	Pūtake me te Pūmana
+	Radicals	Ngā Pūtake
+	Raised/lowered	Kua hiki/kua heke
+	Read Aloud	Pānui ā-Waha
+	Read Aloud couldn't start the speech program: {reason}	Kāore i taea e Pānui ā-Waha te tīmata i te hōtaka kōrero: {reason}
+	Read Aloud couldn't start: {reason}	Kāore i taea e Pānui ā-Waha te tīmata: {reason}
+	Read Aloud isn't available in the browser	Kāore a Pānui ā-Waha i te wātea i roto i te pūtirotiro
+	Read Aloud Status	Tūnga Pānui ā-Waha
+	Read Aloud stopped: {reason}	Kua mutu a Pānui ā-Waha: {reason}
+	Read Mode	Aratau Pānui
+	Read\nAloud	Pānui\nā-Waha
+	Read\nMode	Aratau\nPānui
+	Reading	Te Pānui
+	Reading Column Width	Whānui Tīwae Pānui
+	Reading Highlight	Miramira Pānui
+	Reading Line Spacing	Mokowā Rārangi Pānui
+	Reading Mode	Aratau Pānui
+	Reading Speed	Tere Pānui
+	Reading Text Size	Rahi Kuputuhi Pānui
+	Reads the clipboard's rich text and keeps its formatting.	Ka pānui i te kuputuhi taurikura o te papatopenga, ka pupuri i tōna hōputu.
+	Reads the clipboard's web content and keeps its formatting.	Ka pānui i te ihirangi tukutuku o te papatopenga, ka pupuri i tōna hōputu.
+	Real name	Ingoa tūturu
+	Recent	Tata Nei
+	Recent Colors	Ngā Tae Tata Nei
+	Recent documents to show:	Ngā tuhinga tata nei hei whakaatu:
+	Recently used symbols:	Ngā tohu i whakamahia tata nei:
+	Recipient List	Rārangi Kaiwhiwhi
+	Recipient lists	Ngā rārangi kaiwhiwhi
+	Recipients: {count}	Ngā kaiwhiwhi: {count}
+	Recognized (you can correct it):	Kua mōhiotia (ka taea e koe te whakatika):
+	Recognized Functions	Ngā Taumahi Kua Mōhiotia
+	Recognized Functions…	Ngā Taumahi Kua Mōhiotia…
+	Recolor a one-color picture, such as an icon	Tae anō i tētahi pikitia tae-kotahi, pērā i tētahi ata
+	Recolor Selected Ink	Tae Anō Mangumangu Kua Tīpakohia
+	Record Macro	Hopu Makero
+	Recover Unsaved Documents	Whakaora Tuhinga Kāore i Tiakina
+	Rectangle	Tapawhā Hāngai
+	Red:	Whero:
+	Redo	Mahi Anō
+	Reduce Hanging Indent	Whakaiti Nuku Tārewa
+	References	Ngā Tohutoro
+	Reflection	Whakaata
+	Refresh	Whakahou
+	Registered	Kua rēhitatia
+	Registered Sign	Tohu Rēhita
+	Regular expressions	Ngā kīanga auau
+	Regulations	Ngā Waeture
+	Reject	Paopao
+	Reject All	Paopao Katoa
+	Reject All Changes	Paopao i ngā Panoni Katoa
+	Reject Change	Paopao Panoni
+	Relationship	Hononga
+	relative to	e hāngai ana ki
+	Relative to:	E hāngai ana ki:
+	Relaxed	Wātea
+	Remove	Tango
+	Remove Added Font	Tango Momotuhi Kua Tāpirihia
+	Remove Background	Tango Papamuri
+	Remove Content Control	Tango Mana Ihirangi
+	Remove every custom shortcut and restore the built-in keys?	Tangohia ia pokatata ritenga, ka whakahoki i ngā pātuhi ā-roto?
+	Remove every custom tab and group and show all tabs again?	Tangohia ia ripa me ia rōpū ritenga, ka whakaatu anō i ngā ripa katoa?
+	Remove field	Tango āpure
+	Remove Field Name	Tango Ingoa Āpure
+	Remove Footer	Tango Hiku
+	Remove from Quick Access Toolbar	Tango i te Paeutauta Uru Tere
+	Remove Header	Tango Pane
+	Remove Hyperlink	Tango Hononga Tukutuku
+	Remove Password	Tango Kupuhipa
+	Remove Pen	Tango Pene
+	Remove Positioning	Tango Whakatūnga
+	Remove recipient	Tango kaiwhiwhi
+	Remove row	Tango rārangi
+	Remove series	Tango raupapa
+	Remove Space After Paragraph	Tango Mokowā i Muri i te Kōwae
+	Remove Table of Contents	Tango Rārangi Kaupapa
+	Remove the control once edited	Tangohia te mana ina oti te whakatika
+	Remove the space before the punctuation	Tangohia te mokowā i mua i te tohutuhi
+	Remove Watermark	Tango Tohu Wai
+	Rename Style	Whakaingoa Anō Kāhua
+	Rename…	Whakaingoa Anō…
+	Reopen	Whakatuwhera Anō
+	Repeat	Tārua Mahi
+	Repeat as header row on each page	Tāruatia hei rārangi pane i ia whārangi
+	Repeat Header Rows	Tārua Rārangi Pane
+	Repeated words	Ngā kupu tārua
+	Repeating Section Content Control	Mana Ihirangi Wāhanga Tārua
+	Replace	Whakakapi
+	Replace All	Whakakapi Katoa
+	Replace as you type	Whakakapi i te wā e patopato ana
+	Replace Document Text	Whakakapi Kuputuhi Tuhinga
+	Replace text as you type	Whakakapi kuputuhi i te wā e patopato ana
+	Replace with:	Whakakapi ki:
+	Replace:	Whakakapi:
+	Replay	Whakaatu Anō
+	Reply	Whakautu
+	Report	Pūrongo
+	Research	Rangahau
+	Researcher	Kairangahau
+	Researcher needs an online service; Doc4Me keeps your documents offline.	Me whai ratonga ipurangi a Kairangahau; ka pupuri a Doc4Me i ō tuhinga tuimotu-kore.
+	Reset	Tautuhi Anō
+	Reset All	Tautuhi Anō Katoa
+	Reset All…	Tautuhi Anō Katoa…
+	Reset Character Formatting	Tautuhi Anō Hōputu Pūāhua
+	Reset Crop	Tautuhi Anō Pokanga
+	Reset Graphic	Tautuhi Anō Whakairoiro
+	Reset Paragraph Formatting	Tautuhi Anō Hōputu Kōwae
+	Reset Picture	Tautuhi Anō Pikitia
+	Reset to Normal	Tautuhi Anō ki te Noa
+	Reset\nGraphic	Tautuhi Anō\nWhakairoiro
+	Reset…	Tautuhi Anō…
+	Resize Table by Dragging	Panoni Rahi Ripanga mā te Tō
+	Resolve	Whakatau
+	Resolved	Kua whakatauhia
+	Restart at 1	Tīmata anō i te 1
+	Restart Each Page	Tīmata Anō ia Whārangi
+	Restart Each Section	Tīmata Anō ia Wāhanga
+	Restart list after:	Tīmata anō te rārangi i muri i:
+	Restore	Whakaora
+	Restore Defaults	Whakahoki ki ngā Taunoa
+	Restore Down	Whakahoki ki Raro
+	Restore to Normal Word Document	Whakahoki ki te Tuhinga Word Noa
+	Restrict Editing	Here Whakatika
+	Restrict\nEditing	Here\nWhakatika
+	Result	Hua
+	Results	Ngā Hua
+	Return address labels	Ngā tapanga wāhitau whakahoki
+	Return address:	Wāhitau whakahoki:
+	Reverse the order	Hurihia te raupapa
+	Review	Arotake
+	Review AutoFormat Changes	Arotake Panoni Hōputu Aunoa
+	Review Changes…	Arotake Panoni…
+	Reviewing	Te Arotake
+	Reviewing Pane	Pae Arotake
+	Reviewing — edits become suggestions	Arotake — ka huri ngā whakatika hei marohitanga
+	Revised document	Tuhinga kua whakahōutia
+	Revisions	Ngā Whakahōunga
+	Rewind	Whakamuri
+	Ribbon	Rīpene
+	Ribbon and Quick Access Toolbar:	Rīpene me te Paeutauta Uru Tere:
+	Ribbon tabs	Ngā ripa rīpene
+	Rich Text Content Control	Mana Ihirangi Kuputuhi Taurikura
+	Rich Text Format (*.rtf)	Rich Text Format (*.rtf)
+	Rich Text Format (RTF)	Rich Text Format (RTF)
+	Right	Matau
+	Right (vertical)	Matau (poutū)
+	Right align page numbers	Tīaroaro matau ngā tau whārangi
+	Right Arrow with Text Above	Pere Matau me te Kuputuhi ki Runga
+	Right Arrow with Text Below	Pere Matau me te Kuputuhi ki Raro
+	Right Border	Tapa Matau
+	Right border	Tapa matau
+	Right Bracket Twice	Taiapa Matau Takirua
+	Right indent	Nuku matau
+	Right Margin	Tawhē Matau
+	Right Only	Matau Anake
+	Right only	Matau anake
+	Right-to-left	Matau-ki-mauī
+	Right-to-Left Section	Wāhanga Matau-ki-Mauī
+	Right-to-Left Table	Ripanga Matau-ki-Mauī
+	Right-to-Left Text Direction	Ahunga Kuputuhi Matau-ki-Mauī
+	Right:	Matau:
+	Rightwards Arrow Above	Pere Whakamatau ki Runga
+	Rightwards Harpoon Above	Hāpuna Whakamatau ki Runga
+	Roots of ax²+bx+c	Ngā pūtake o ax²+bx+c
+	Rotate	Hurihuri
+	Rotate all text 270°	Hurihia te kuputuhi katoa 270°
+	Rotate all text 90°	Hurihia te kuputuhi katoa 90°
+	Rotate Left 90°	Hurihuri Mauī 90°
+	Rotate Right 90°	Hurihuri Matau 90°
+	Rotation	Hurihanga
+	Rotation:	Hurihanga:
+	Rounded Rectangle	Tapawhā Hāngai Porotaka
+	Row	Rārangi
+	Row:	Rārangi:
+	Rows & Columns	Ngā Rārangi & ngā Tīwae
+	Ruby text:	Kuputuhi Ruby:
+	Ruler	Rūri
+	Rules	Ngā Ture
+	Run	Whakahaere
+	Run-in	Rere-tahi
+	Russian	Rūhia
+	Résumé	Tāhuamahi
+	Same as the whole table	He ōrite ki te ripanga katoa
+	SAMPLE	TAUIRA
+	Sat:	Kukū:
+	Save	Tiaki
+	Save a copy in another format. Printing goes through a PDF you can print from any viewer.	Tiakina he tārua i tētahi atu hōputu. Ka haere te tā mā tētahi PDF ka taea e koe te tā mai i tētahi kaitiro ahakoa.
+	Save As	Tiaki Hei
+	Save as Template	Tiaki hei Tauira
+	Save documents	Tiaki tuhinga
+	Save the document to turn on AutoSave	Tiakina te tuhinga kia whakakāhia ai te Tiaki Aunoa
+	Save the document to turn on AutoSave (a file you have only opened isn't rewritten until you save it)	Tiakina te tuhinga kia whakakāhia ai te Tiaki Aunoa (kāore e tuhia anōtia tētahi kōnae kua whakatuwherahia noa e koe kia tiakina rā anō e koe)
+	Save these pages as PDF…	Tiakina ēnei whārangi hei PDF…
+	Save Version	Tiaki Putanga
+	Saved	Kua tiakina
+	Scale	Āwhata
+	Scale Drawing	Āwhata Tuhi
+	Scatter	Marara
+	Screen Clipping	Topenga Mata
+	Screen clipping didn't work: {reason}	Kāore i pai te topenga mata: {reason}
+	Screen clipping ended without a picture.	I mutu te topenga mata kāore he pikitia.
+	Screen clipping isn't available here. Copy a picture of the screen, then paste it.	Kāore te topenga mata i te wātea i konei. Tāruatia he pikitia o te mata, kātahi ka whakapiri.
+	Screenshot	Hopukanga Mata
+	Script	Hōtuhi
+	Scripts	Ngā Hōtuhi
+	Scroll ribbon left	Panuku rīpene ki te mauī
+	Scroll ribbon right	Panuku rīpene ki te matau
+	Search	Rapu
+	Search Commands	Rapu Tohutohu
+	Search commands and help	Rapu tohutohu me te āwhina
+	Search document	Rapu tuhinga
+	Search for templates	Rapu tauira
+	Search icons	Rapu ata
+	Search Openverse (Creative Commons pictures)	Rapu Openverse (ngā pikitia Creative Commons)
+	Search Options	Ngā Kōwhiringa Rapu
+	Searching…	Kei te rapu…
+	Secant Function	Taumahi Hīkana
+	Section Break	Wehenga Wāhanga
+	Section Breaks	Ngā Wehenga Wāhanga
+	Section Character	Pūāhua Wāhanga
+	Section direction:	Ahunga wāhanga:
+	Section Mark	Tohu Wāhanga
+	Section Properties	Ngā Āhuatanga Wāhanga
+	Sections	Ngā Wāhanga
+	See	Tirohia
+	Select	Tīpako
+	Select a picture, shape, chart or table to describe it.	Tīpakohia he pikitia, he āhua, he kauwhata, he ripanga rānei hei whakaahua.
+	Select All	Tīpako Katoa
+	Select Cell	Tīpako Pūtau
+	Select Floating Shapes	Tīpako Āhua Mānu
+	Select Heading and Content	Tīpako Upoko me te Ihirangi
+	Select Line	Tīpako Rārangi
+	Select Objects	Tīpako Ahanoa
+	Select Paragraph	Tīpako Kōwae
+	Select Range	Tīpako Awhe
+	Select Recipients	Tīpako Kaiwhiwhi
+	Select recipients first to choose from their fields.	Tīpakohia ngā kaiwhiwhi i te tuatahi kia kōwhiri ai i ō rātou āpure.
+	Select recipients first to match their fields.	Tīpakohia ngā kaiwhiwhi i te tuatahi kia whakaōrite ai i ō rātou āpure.
+	Select Row	Tīpako Rārangi
+	Select Sentence	Tīpako Rerenga
+	Select Table	Tīpako Ripanga
+	Select Text	Tīpako Kuputuhi
+	Select text in the document to translate it.	Tīpakohia he kuputuhi i roto i te tuhinga hei whakamāori.
+	Select Text with Similar Formatting	Tīpako Kuputuhi me te Hōputu Ōrite
+	Select text, then tick who can still edit it.	Tīpakohia he kuputuhi, kātahi ka tohu ko wai ka taea tonu te whakatika.
+	Select the part of the screen to insert.	Tīpakohia te wāhanga o te mata hei kōkuhu.
+	Select Word	Tīpako Kupu
+	Select\nRecipients	Tīpako\nKaiwhiwhi
+	Selected Fields	Ngā Āpure Kua Tīpakohia
+	Selected pages	Ngā whārangi kua tīpakohia
+	Selection	Tīpakonga
+	Selection Pane	Pae Tīpakonga
+	Send Backward	Tuku Whakamuri
+	Send the document straight to the system print dialog, or save a copy in another format below.	Tukuna tōtikatia te tuhinga ki te matapihi tā a te pūnaha, tiakina rānei he tārua i tētahi atu hōputu i raro iho.
+	Sentence	Rerenga
+	Sentence case.	Pūmatua rerenga.
+	Separator:	Pūwehe:
+	Sequence name:	Ingoa raupapa:
+	Serbian	Hēpia
+	Serbian (Cyrillic)	Hēpia (Hiririki)
+	Serbian (Latin)	Hēpia (Rātini)
+	Series name	Ingoa raupapa
+	Series {n}	Raupapa {n}
+	Server address (https://…)	Wāhitau tūmau (https://…)
+	Set	Tautuhi
+	Set As Default	Tautuhi Hei Taunoa
+	Set as Default	Tautuhi hei Taunoa
+	Set Caret	Tautuhi Pūtohu
+	Set Character Formatting	Tautuhi Hōputu Pūāhua
+	Set Date	Tautuhi Rā
+	Set Equation	Tautuhi Whārite
+	Set Numbering Value	Tautuhi Uara Tau
+	Set Paragraph Formatting	Tautuhi Hōputu Kōwae
+	Set Proofing Language…	Tautuhi Reo Hāpono…
+	Setting:	Tautuhinga:
+	Settings…	Ngā Tautuhinga…
+	Shading	Whakamarumaru
+	Shadow	Ātārangi
+	Shadow, glow and soft edges	Ātārangi, kanapa me ngā tapa ngohengohe
+	Shape Effects	Ngā Pānga Āhua
+	Shape Fill	Whakakī Āhua
+	Shape Format	Hōputu Āhua
+	Shape Outline	Paenga Āhua
+	Shape Styles	Ngā Kāhua Āhua
+	Shapes	Ngā Āhua
+	Share	Tiri
+	Sheet:	Rau:
+	Shift cells down	Nekehia ngā pūtau ki raro
+	Shift cells right	Nekehia ngā pūtau ki te matau
+	Shift+Tab	Shift+Tab
+	Shipping labels	Ngā tapanga tuku
+	Short citation:	Whakahua poto:
+	Shortcut key:	Pātuhi pokatata:
+	Show	Whakaatu
+	Show all formatting marks	Whakaaturia ngā tohu hōputu katoa
+	Show All Levels	Whakaatu i ngā Taumata Katoa
+	Show all revisions inline	Whakaaturia ngā whakahōunga katoa i te rārangi
+	Show changes at:	Whakaaturia ngā panoni ki:
+	Show changes in:	Whakaaturia ngā panoni i roto i:
+	Show Comments	Whakaatu Tākupu
+	Show documents with their colours inverted, like View › Switch Modes. Saving, printing and PDFs are unchanged.	Whakaaturia ngā tuhinga me ō rātou tae kua kōaro, pērā i te Tirohanga › Huri Aratau. Kāore e panoni te tiaki, te tā me ngā PDF.
+	Show every bibliography field	Whakaaturia ia āpure rārangi pukapuka
+	Show First Line Only	Whakaatu i te Rārangi Tuatahi Anake
+	Show in the Styles gallery	Whakaaturia i te taiwhanga Kāhua
+	Show KeyTips (Alt or F10)	Whakaatu Tohu Pātuhi (Alt, F10 rānei)
+	Show Level	Whakaatu Taumata
+	Show Level 1	Whakaatu Taumata 1
+	Show Level 2	Whakaatu Taumata 2
+	Show Level 3	Whakaatu Taumata 3
+	Show Level 4	Whakaatu Taumata 4
+	Show Level 5	Whakaatu Taumata 5
+	Show Level 6	Whakaatu Taumata 6
+	Show Level 7	Whakaatu Taumata 7
+	Show Level 8	Whakaatu Taumata 8
+	Show Level 9	Whakaatu Taumata 9
+	Show Markup	Whakaatu Tohu
+	Show Notes	Whakaatu Tuhipoka
+	Show only comments and formatting in balloons	Whakaaturia ngā tākupu me te hōputu anake i roto i ngā pōhāhā
+	Show or Hide Style	Whakaatu, Huna rānei i te Kāhua
+	Show page numbers	Whakaaturia ngā tau whārangi
+	Show revisions in balloons	Whakaaturia ngā whakahōunga i roto i ngā pōhāhā
+	Show rulers	Whakaaturia ngā rūri
+	Show Text Formatting	Whakaatu Hōputu Kuputuhi
+	Show the equation in the line of text	Whakaaturia te whārite i te rārangi kuputuhi
+	Show the equation on a line of its own	Whakaaturia te whārite ki tōna ake rārangi
+	Show the mini toolbar when text is selected	Whakaaturia te paeutauta iti ina tīpakohia he kuputuhi
+	Show/Hide ¶	Whakaatu/Huna ¶
+	Show\nComments	Whakaatu\nTākupu
+	Showing the first {count} items.	E whakaatu ana i ngā tūemi {count} tuatahi.
+	Shows a tree: each item below the item it belongs to.	Ka whakaatu i tētahi rākau: kei raro ia tūemi i te tūemi nōna ia.
+	Shows items around a central idea: the first item is the centre.	Ka whakaatu i ngā tūemi huri noa i tētahi whakaaro matua: ko te tūemi tuatahi te pokapū.
+	Shows items of equal weight as blocks in rows.	Ka whakaatu i ngā tūemi taumaha ōrite hei paraka i ngā rārangi.
+	Shows overlapping ideas as overlapping circles.	Ka whakaatu i ngā whakaaro inaki hei porowhita inaki.
+	Shows parts of a whole as quadrants.	Ka whakaatu i ngā wāhanga o tētahi katoa hei hauwhā.
+	Shows parts that build on each other, largest at the bottom.	Ka whakaatu i ngā wāhanga e hanga ana tētahi ki runga i tētahi, ko te mea nui rawa kei raro.
+	Shows steps in order, left to right, with arrows between them.	Ka whakaatu i ngā hīkoi i te raupapa, mauī ki matau, me ngā pere i waenga.
+	Shows steps that repeat, around a circle.	Ka whakaatu i ngā hīkoi ka tārua, huri noa i tētahi porowhita.
+	Shrink Font 1 Point	Whakaiti Momotuhi 1 Ira
+	Shrink Selection	Whakaiti Tīpakonga
+	Shrink text	Whakaiti kuputuhi
+	Side to Side	Taha ki te Taha
+	Side\nto Side	Taha\nki te Taha
+	Sides of a right triangle	Ngā taha o tētahi tapatoru hāngai
+	Signature Line	Rārangi Waitohu
+	Sine and cosine series of f(x)	Raupapa haina me te kohaina o f(x)
+	Sine Function	Taumahi Haina
+	Sine theta	Haina teta
+	Single	Kotahi
+	Single Brackets	Ngā Taiapa Kotahi
+	Single Closing Quote	Tohukī Katinga Kotahi
+	Single label	Tapanga kotahi
+	Single Left Angle	Koki Mauī Kotahi
+	Single Left Bar	Pou Mauī Kotahi
+	Single Left Brace	Awhi Mauī Kotahi
+	Single Left Bracket	Taiapa Mauī Kotahi
+	Single Left Parenthesis	Taiawhio Mauī Kotahi
+	Single Opening Quote	Tohukī Whakatuwheratanga Kotahi
+	Single Right Brace	Awhi Matau Kotahi
+	Single Right Bracket	Taiapa Matau Kotahi
+	Single Right Parenthesis	Taiawhio Matau Kotahi
+	Single Spacing	Mokowā Kotahi
+	SIST02	SIST02
+	Site name	Ingoa pae
+	Size	Rahi
+	Size (pt):	Rahi (pt):
+	Size and Crop…	Rahi me te Pokanga…
+	Size:	Rahi:
+	Sketchbook	Pukapuka Huahua
+	Skewed Fraction	Hautau Tītaha
+	Skip citations & bibliography	Hipa i ngā whakahua & te rārangi pukapuka
+	Skip Citations and Bibliography	Hipa i ngā Whakahua me te Rārangi Pukapuka
+	Skip Record If	Hipa Pūkete Mēnā
+	Skip Record If…	Hipa Pūkete Mēnā…
+	Slant Down	Tītaha ki Raro
+	Slant Up	Tītaha ki Runga
+	Small Caps	Pūmatua Iti
+	Small caps	Pūmatua iti
+	Small change	Panoni iti
+	Smart quotes instead of straight quotes	Ngā tohukī atamai hei utu mō ngā tohukī torotika
+	SmartArt	SmartArt
+	SmartArt Design	Hoahoa SmartArt
+	SmartArt Styles	Ngā Kāhua SmartArt
+	Smooth scrolling and zooming, and menus and buttons that fade in. Off shows every change at once.	Te panuku me te topa māeneene, me ngā tahua me ngā pātene ka memeha mai. Ina weto, ka whakaaturia ia panoni i te wā kotahi.
+	Soft Edges	Ngā Tapa Ngohengohe
+	Soft Glow	Kanapa Ngohengohe
+	Solid Accent	Kanohi Totoka
+	Sort	Kōmaka
+	Sort by	Kōmaka mā
+	Sort order:	Raupapa kōmaka:
+	Sort Records	Kōmaka Pūkete
+	Source code: github.com/chatraweechai/doc4me	Waehere pūtake: github.com/chatraweechai/doc4me
+	Source Manager	Kaiwhakahaere Mātāpuna
+	Source type:	Momo mātāpuna:
+	Sources in this document:	Ngā mātāpuna i roto i tēnei tuhinga:
+	South	Tonga
+	Space	Mokowā
+	Space after	Mokowā i muri
+	Space after: {pt} pt	Mokowā i muri: {pt} pt
+	Space before	Mokowā i mua
+	Space before/after:	Mokowā i mua/i muri:
+	Space before: {pt} pt	Mokowā i mua: {pt} pt
+	Spaces	Ngā Mokowā
+	Spacing	Mokowā
+	Spacing (pt):	Mokowā (pt):
+	Spacing:	Mokowā:
+	Spanish	Pāniora
+	Spanish (Mexico)	Pāniora (Mēhiko)
+	Spanish (Spain)	Pāniora (Pāniora)
+	Sparse Matrices	Ngā Poukapa Mōkarakara
+	Special	Motuhake
+	Special Characters	Ngā Pūāhua Motuhake
+	Specify height:	Tautuhia te teitei:
+	Speech	Kōrero
+	Speech is recognised on this computer (whisper.cpp); nothing is sent online.	Ka mōhiotia te kōrero i runga i tēnei rorohiko (whisper.cpp); kāore he mea e tukuna ki te ipurangi.
+	Speed	Tere
+	Spelling	Tātaki Kupu
+	Spelling & Grammar	Tātaki Kupu & Wetereo
+	Spelling &\nGrammar	Tātaki Kupu &\nWetereo
+	Spelling and grammar are checked in English (United States).	Ka tirohia te tātaki kupu me te wetereo i te reo Ingarihi (Hononga o Amerika).
+	Spelling Suggestions	Ngā Marohitanga Tātaki Kupu
+	Spike	Tao
+	Split	Wehe
+	Split apart page break and paragraph mark	Wehea te wehenga whārangi me te tohu kōwae
+	Split Cells	Wehe Pūtau
+	Split Table	Wehe Ripanga
+	Spreadsheet Table	Ripanga Ripanga Mahi
+	Square	Tapawhā
+	Square Root	Pūtake Tapawhā
+	Square Root with Degree	Pūtake Tapawhā me te Pūmana
+	Square Union	Hononga Tapawhā
+	Stack Object	Ahanoa Pūranga
+	Stack Object (Three)	Ahanoa Pūranga (Toru)
+	Stacked	Kua tāpaetia
+	Stacked Bar	Pae Tāpae
+	Stacked Column	Tīwae Tāpae
+	Stacked Fraction	Hautau Tāpae
+	Stacked, no bar	Tāpae, kāore he pae
+	Standard	Paerewa
+	Standard and Contextual	Paerewa me te Ā-horopaki
+	Standard Colors	Ngā Tae Paerewa
+	Standard Only	Paerewa Anake
+	Star	Whetū
+	Start at:	Tīmata ki:
+	Start Enforcing Protection	Tīmata te Whakamana Parepare
+	Start Mail Merge	Tīmata Hanumi Mēra
+	Start Mail\nMerge	Tīmata\nHanumi Mēra
+	State	Takiwā
+	Statement   5.50" × 8.50"	Statement   5.50" × 8.50"
+	Statistics	Tatauranga
+	Status Bar	Pae Tūnga
+	Statutes	Ngā Ture Pāremata
+	Stop	Kati
+	Stop Protection	Whakamutu Parepare
+	Stop Reading	Whakamutu Pānui
+	Stopped	Kua mutu
+	Store	Toa
+	Straight Arrow Connector	Hononga Pere Torotika
+	Straight Connector	Hononga Torotika
+	Strikethrough	Rārangi Whakakore
+	Stroke {n} of {total}	Whiu {n} o {total}
+	Strong	Kaha
+	Structure Actions	Ngā Mahi Hanganga
+	Structures	Ngā Hanganga
+	Studio	Taiwhanga Mahi
+	Studio cover	Uhi taiwhanga mahi
+	Studio handbook (sample)	Pukapuka ārahi taiwhanga mahi (tauira)
+	Style	Kāhua
+	Style based on:	Kāhua i ahu mai i:
+	Style Inspector	Kaitirotiro Kāhua
+	Style Set	Huinga Kāhua
+	Style:	Kāhua:
+	Style: APA	Kāhua: APA
+	Style: {style}	Kāhua: {style}
+	Styles	Ngā Kāhua
+	Styles Pane	Pae Kāhua
+	Styles:	Ngā kāhua:
+	Subentry:	Tāurunga iti:
+	Subject	Kaupapa
+	Subscript	Pūraro
+	Subscript-Superscript	Pūraro-Pūrunga
+	Subscripts and Superscripts	Ngā Pūraro me ngā Pūrunga
+	Subset:	Huinga iti:
+	Substituted font	Momotuhi kua whakakapia
+	Subtitle	Taitara Iti
+	Subtle Emphasis	Aronui Ngāwari
+	Subtle Reference	Tohutoro Ngāwari
+	Sum	Tapeke
+	Sum of cosines	Tapeke o ngā kohaina
+	Sum or difference of sines	Tapeke, rerekētanga rānei o ngā haina
+	Summation	Tāpiritanga
+	Summation from 0 to n	Tāpiritanga mai i te 0 ki te n
+	Summation over binomials	Tāpiritanga i runga i ngā huarua
+	Summation with Limits	Tāpiritanga me ngā Tepe
+	Summation with Lower Limit	Tāpiritanga me te Tepe Raro
+	Summation with Subscript Limit	Tāpiritanga me te Tepe Pūraro
+	Summation with Subscript-Superscript Limits	Tāpiritanga me ngā Tepe Pūraro-Pūrunga
+	Summations	Ngā Tāpiritanga
+	Superscript	Pūrunga
+	Suppress line numbers	Pēhi i ngā tau rārangi
+	Surface Integral	Pāhekoheko Mata
+	Surface Integral with Limits	Pāhekoheko Mata me ngā Tepe
+	Surface Integral with Stacked Limits	Pāhekoheko Mata me ngā Tepe Tāpae
+	Swap footnotes and endnotes	Whakawhitia ngā tuhipoka me ngā tuhipoka whakamutunga
+	Swedish	Huitene
+	Switch Modes	Huri Aratau
+	Switch Windows	Huri Matapihi
+	Switch\nModes	Huri\nAratau
+	Symbol	Tohu
+	Symbol Font	Momotuhi Tohu
+	Symbols	Ngā Tohu
+	Synchronous Scrolling	Panuku Tukutahi
+	Synonyms	Ngā Kupu Taurite
+	System	Pūnaha
+	Tab	Tab
+	Tab Character	Pūāhua Ripa
+	Tab character	Pūāhua ripa
+	Tab characters	Ngā pūāhua ripa
+	Tab leader:	Kaiārahi ripa:
+	Tab stop position:	Tūnga tūnga ripa:
+	Tab stops to be cleared:	Ngā tūnga ripa hei ūkui:
+	Table	Ripanga
+	Table AutoFormat	Hōputu Aunoa Ripanga
+	Table AutoFormat…	Hōputu Aunoa Ripanga…
+	Table Column Width	Whānui Tīwae Ripanga
+	Table Design	Hoahoa Ripanga
+	Table direction:	Ahunga ripanga:
+	Table entry fields	Ngā āpure tāurunga ripanga
+	Table Grid	Mātiti Ripanga
+	Table identifier:	Tautohu ripanga:
+	Table Layout	Takotoranga Ripanga
+	Table of Authorities	Ripanga Mana Ture
+	Table of Contents	Rārangi Kaupapa
+	Table of Contents Options	Ngā Kōwhiringa Rārangi Kaupapa
+	Table of Contents Styles	Ngā Kāhua Rārangi Kaupapa
+	Table of Figures	Ripanga Hoahoa
+	Table of Figures Options	Ngā Kōwhiringa Ripanga Hoahoa
+	Table of\nContents	Rārangi\nKaupapa
+	Table Positioning	Whakatūnga Ripanga
+	Table Properties	Ngā Āhuatanga Ripanga
+	Table Row Height	Teitei Rārangi Ripanga
+	Table style	Kāhua ripanga
+	Table Style Options	Ngā Kōwhiringa Kāhua Ripanga
+	Table Styles	Ngā Kāhua Ripanga
+	Table styles:	Ngā kāhua ripanga:
+	Tables	Ngā Ripanga
+	Tabloid   11.00" × 17.00"	Tabloid   11.00" × 17.00"
+	Tabs	Ngā Ripa
+	Tabs…	Ngā Ripa…
+	Tabular List	Rārangi Ripanga
+	Tag	Tūtohu
+	Tangent formula	Tātai pātapa
+	Tangent Function	Taumahi Pātapa
+	TC entry fields	Ngā āpure tāurunga TC
+	Technology	Hangarau
+	Templates	Ngā Tauira
+	Templates and Add-ins	Ngā Tauira me ngā Tāpiritanga
+	Text	Kuputuhi
+	Text Box	Pouaka Kuputuhi
+	Text boxes	Ngā pouaka kuputuhi
+	Text Direction	Ahunga Kuputuhi
+	Text Effects	Ngā Pānga Kuputuhi
+	Text Effects and Typography	Ngā Pānga Kuputuhi me te Momotuhi
+	Text Fill	Whakakī Kuputuhi
+	Text from File	Kuputuhi mai i te Kōnae
+	Text Highlight Color	Tae Miramira Kuputuhi
+	Text indent at:	Nuku kuputuhi ki:
+	Text isn't squeezed to fit its cell yet.	Kāore anō te kuputuhi kia kōpekehia kia uru ki tōna pūtau.
+	Text Outline	Paenga Kuputuhi
+	Text over Colon Equal	Kuputuhi ki runga i te Kopiko Ōrite
+	Text over Equal	Kuputuhi ki runga i te Ōrite
+	Text Pane	Pae Kuputuhi
+	Text size	Rahi kuputuhi
+	Text snaps to characters	Ka piri te kuputuhi ki ngā pūāhua
+	Text to display:	Kuputuhi hei whakaatu:
+	Text Wrapping	Takai Kuputuhi
+	Text wrapping:	Takai kuputuhi:
+	Text:	Kuputuhi:
+	Text\nBox	Pouaka\nKuputuhi
+	Text\nDirection	Ahunga\nKuputuhi
+	Thai	Tai
+	Thai Distributed	Tai Kua Tohatohatia
+	That format doesn't keep everything, so the document is still open. Save it as a Word document (.docx) to go on.	Kāore taua hōputu e pupuri i ngā mea katoa, nō reira kei te tuwhera tonu te tuhinga. Tiakina hei tuhinga Word (.docx) kia haere tonu ai.
+	That isn't the web address or embed code of an online video.	Ehara tēnā i te wāhitau tukutuku, i te waehere tāmau rānei o tētahi ataata ipurangi.
+	That password isn't right. Check it (passwords are case-sensitive) and try again.	Kāore e tika ana taua kupuhipa. Tirohia (e aro ana ngā kupuhipa ki te pūmatua) ka ngana anō.
+	The clipboard is empty.	Kei te kau te papatopenga.
+	The date it is today	Te rā o tēnei rā
+	The document contains no tracked changes.	Kāore he panoni aroturuki i roto i te tuhinga.
+	The document has no bookmarks yet.	Kāore anō he tohuwāhi o te tuhinga.
+	The document is read only, except for regions marked editable.	He pānui anake te tuhinga, hāunga i ngā rohe kua tohua hei whakatika.
+	The document will be saved with a password. Save it to protect it.	Ka tiakina te tuhinga me tētahi kupuhipa. Tiakina kia parepare ai.
+	The first word of a sentence starts with a capital.	Ka tīmata te kupu tuatahi o tētahi rerenga ki te pūmatua.
+	the free daily allowance is used up (try again tomorrow, or give an email address)	kua pau te tahua kore utu o te rā (ngana anō āpōpō, homai rānei he wāhitau īmēra)
+	the LibreTranslate server	te tūmau LibreTranslate
+	The Mail Merge Helper sets up a merge in three steps.	Ka whakarite te Kaiāwhina Hanumi Mēra i tētahi hanumi i ngā hīkoi e toru.
+	The new style takes the formatting of the current paragraph.	Ka tango te kāhua hou i te hōputu o te kōwae onāianei.
+	The password is optional; without it anyone can stop the protection.	He kōwhiringa te kupuhipa; ki te kore, ka taea e te tangata ahakoa ko wai te whakamutu i te parepare.
+	The password is removed. Save the document to keep the change.	Kua tangohia te kupuhipa. Tiakina te tuhinga kia mau ai te panoni.
+	The passwords don't match.	Kāore ngā kupuhipa e ōrite ana.
+	The printer, two-sided printing and pages per sheet are chosen in that dialog.	Ka kōwhiria te pūreretā, te tā taha-rua me ngā whārangi ia rau i roto i taua matapihi.
+	The recipient-list field that fills each part of an address block and greeting line.	Te āpure rārangi kaiwhiwhi e whakakī ana i ia wāhanga o tētahi paraka wāhitau me tētahi rārangi mihi.
+	The same word twice in a row.	Te kupu kotahi e rua ngā wā i te rārangi.
+	The spelling and grammar check is complete.	Kua oti te tirotiro tātaki kupu me te wetereo.
+	The system file dialog isn't available, so Doc4Me shows its own. To get the system dialog, install a file chooser portal (such as xdg-desktop-portal-gtk) or zenity.	Kāore te matapihi kōnae a te pūnaha i te wātea, nō reira ka whakaatu a Doc4Me i tōna ake. Kia whiwhi ai i te matapihi a te pūnaha, tāutatia he tomokanga kōwhiri kōnae (pērā i a xdg-desktop-portal-gtk), a zenity rānei.
+	The text is sent to {service} to be translated.	Ka tukuna te kuputuhi ki a {service} kia whakamāoritia.
+	The time right now	Te wā ināianei tonu
+	The video shows as a picture in the document. Double-click it to watch it in your browser.	Ka puta te ataata hei pikitia i roto i te tuhinga. Pāwhiri-rua kia mātakitakina i tō pūtirotiro.
+	The whole document is translated into a new document, which replaces this one. Save your work first.	Ka whakamāoritia te tuhinga katoa ki tētahi tuhinga hou, ka whakakapi i tēnei. Tiakina tō mahi i te tuatahi.
+	Theme Colors	Ngā Tae Kaupapa
+	Theme Fonts	Ngā Momotuhi Kaupapa
+	Theme List	Rārangi Kaupapa Āhua
+	Themes	Ngā Kaupapa Āhua
+	Then by	Kātahi mā
+	Then insert:	Kātahi kōkuhu:
+	There's no text to translate.	Kāore he kuputuhi hei whakamāori.
+	Thesaurus	Puna Kupu
+	These marks show even when Show/Hide ¶ is off.	Ka puta ēnei tohu ahakoa kua weto te Whakaatu/Huna ¶.
+	These merge fields aren't in the recipient list:	Kāore ēnei āpure hanumi i te rārangi kaiwhiwhi:
+	These settings will be used for new documents.	Ka whakamahia ēnei tautuhinga mō ngā tuhinga hou.
+	Thick	Mātotoru
+	Thickness	Mātotoru
+	This Device…	Tēnei Pūrere…
+	This document	Tēnei tuhinga
+	This field has no options.	Kāore he kōwhiringa o tēnei āpure.
+	This folder can't be read: {error}	Kāore e taea te pānui i tēnei kōpaki: {error}
+	This font has no characters to show.	Kāore he pūāhua o tēnei momotuhi hei whakaatu.
+	This page	Tēnei whārangi
+	This password type isn't supported.	Kāore e tautokona tēnei momo kupuhipa.
+	This point forward	Mai i tēnei wāhi whakamua
+	This section	Tēnei wāhanga
+	Three	Toru
+	Through	Puta Noa
+	Tight	Kikī
+	Tilde	Tohu Tilde
+	Tips ({n})	Ngā Tohuaki ({n})
+	Title	Taitara
+	Title from the document properties	Taitara mai i ngā āhuatanga tuhinga
+	Title:	Taitara:
+	To	Ki
+	To open Word documents with Doc4Me by default: select one in Finder, choose File › Get Info, pick Doc4Me under Open with, then click Change All.	Kia whakatuwhera ai i ngā tuhinga Word ki a Doc4Me hei taunoa: tīpakohia tētahi i roto i a Finder, kōwhiria File › Get Info, kōwhiria a Doc4Me i raro i Open with, kātahi ka pāwhiri i Change All.
+	To:	Ki:
+	TOA Heading	Upoko TOA
+	TOC Heading	Upoko Rārangi Kaupapa
+	TOC {n}	Rārangi Kaupapa {n}
+	Today	Tēnei Rā
+	tOGGLE cASE	wHAKAWHITI pŪMATUA
+	Toggle Check Box	Takahuri Pouaka Tohu
+	Toggle Field Codes	Takahuri Waehere Āpure
+	Toggle Unicode Character	Takahuri Pūāhua Unicode
+	Tools	Ngā Utauta
+	Top	Runga
+	Top and Bottom	Runga me Raro
+	Top Border	Tapa Runga
+	Top Margin	Tawhē Runga
+	Top of Next Page	Runga o te Whārangi e Whai Ake
+	Top of Page	Runga o te Whārangi
+	Top of Previous Page	Runga o te Whārangi o Mua
+	Top of the Window	Runga o te Matapihi
+	Top:	Runga:
+	Total	Tapeke
+	Total Row	Rārangi Tapeke
+	Track Changes	Aroturuki Panoni
+	Track Changes Options	Ngā Kōwhiringa Aroturuki Panoni
+	Track changes while editing	Aroturukitia ngā panoni i te wā e whakatika ana
+	Track Changes: On	Aroturuki Panoni: Kā
+	Track formatting	Aroturuki hōputu
+	Track\nChanges	Aroturuki\nPanoni
+	Track\nChanges ✓	Aroturuki\nPanoni ✓
+	Tracked changes	Ngā panoni aroturuki
+	Tracking	Mokowā reta
+	Trademark	Waitohu Hokohoko
+	Trademark Sign	Tohu Waitohu Hokohoko
+	Transform	Whakaahuahanga
+	Translate	Whakamāori
+	Translate Document	Whakamāori Tuhinga
+	Translating {done} of {total}	Kei te whakamāori {done} o {total}
+	Translation service	Ratonga whakamāori
+	Translator	Kaiwhakamāori
+	Transparency	Kiko mārama
+	Transparency:	Kiko mārama:
+	Transport	Waka
+	Treatises	Ngā Tuhinga Ture
+	Triangle	Tapatoru
+	Triangle Down	Tapatoru ki Raro
+	Triangle Up	Tapatoru ki Runga
+	Trigonometric Functions	Ngā Taumahi Pākoki
+	Triple	Toru
+	Triple Dot	Ira Toru
+	Triple Integral	Pāhekoheko Toru
+	Triple Integral with Limits	Pāhekoheko Toru me ngā Tepe
+	Triple Integral with Stacked Limits	Pāhekoheko Toru me ngā Tepe Tāpae
+	Trust Center	Pokapū Whakawhirinaki
+	Tue	Tūr
+	Turabian	Turabian
+	Turkish	Tākei
+	Two	Rua
+	Type	Momo
+	Type a command, e.g. "insert table"	Patohia tētahi tohutohu, hei tauira "kōkuhu ripanga"
+	Type a New List	Patohia he Rārangi Hou
+	Type a New List…	Patohia he Rārangi Hou…
+	Type at least one recipient.	Patohia kia kotahi te kaiwhiwhi i te iti rawa.
+	Type equations in LaTeX	Patohia ngā whārite i te LaTeX
+	Type equations in the linear format (UnicodeMath)	Patohia ngā whārite i te hōputu rārangi (UnicodeMath)
+	Type in Equation	Pato i te Whārite
+	Type normal (non-math) text in the equation	Patohia he kuputuhi noa (ehara i te pāngarau) i roto i te whārite
+	Type Text	Pato Kuputuhi
+	Type the categories down the side and a column of values per series.	Patohia ngā kāwai ki raro i te taha, me tētahi tīwae uara ia raupapa.
+	Type the field's name and its switches, for example PAGE \\* roman.	Patohia te ingoa o te āpure me ōna pana, hei tauira PAGE \\* roman.
+	Type the password to stop the protection.	Patohia te kupuhipa hei whakamutu i te parepare.
+	Type the recipients, or load them from a file.	Patohia ngā kaiwhiwhi, utaina rānei mai i tētahi kōnae.
+	Type the tag name of the source. You can add more information to this source later by editing the source.	Patohia te ingoa tūtohu o te mātāpuna. Ka taea e koe te tāpiri i ētahi atu mōhiohio ki tēnei mātāpuna ā muri ake mā te whakatika i te mātāpuna.
+	Type:	Momo:
+	Typing	Te Patopato
+	Typing replaces selected text	Ka whakakapi te patopato i te kuputuhi kua tīpakohia
+	Ukrainian	Ūkareinga
+	Unchecked symbol	Tohu kāore i tohua
+	Underbar	Pae Raro
+	Underbrace	Awhi Raro
+	Underline	Tāraro
+	Underline color	Tae tāraro
+	Underline Words Only	Tāraro Kupu Anake
+	Undo	Wetekina
+	Undo Stroke	Wetekina te Whiu
+	Undo {action}	Wetekina {action}
+	Unformatted Text	Kuputuhi Kāore i Hōputuhia
+	Ungroup	Wewete Rōpū
+	Union	Hononga
+	Union of intersections	Hononga o ngā pūtahitanga
+	Union with Limits	Hononga me ngā Tepe
+	Union with Lower Limit	Hononga me te Tepe Raro
+	Union with Plus	Hononga me te Tāpiri
+	Union with Subscript-Superscript Limits	Hononga me ngā Tepe Pūraro-Pūrunga
+	Unions and Intersections	Ngā Hononga me ngā Pūtahitanga
+	Unlink Fields	Wewete Āpure
+	Unlink\nCitations	Wewete\nWhakahua
+	Unlock Fields	Huaki Āpure
+	Up	Ki Runga
+	Up Diagonal Dots	Ngā Ira Hauroki Whakarunga
+	Up one level	Kotahi taumata ki runga
+	Update Field	Whakahōu Āpure
+	Update fields before printing	Whakahōu āpure i mua i te tā
+	Update Index	Whakahōu Kuputohu
+	Update Style to Match Selection	Whakahōu Kāhua kia Ōrite ki te Tīpakonga
+	Update Styles from Template	Whakahōu Kāhua mai i te Tauira
+	Update Table	Whakahōu Ripanga
+	Update Table of Figures	Whakahōu Ripanga Hoahoa
+	Update to Match	Whakahōu kia Ōrite
+	Update to Match Selection	Whakahōu kia Ōrite ki te Tīpakonga
+	UPPERCASE	PŪMATUA
+	URGENT	WHAKAHAERE WAWE
+	URL	URL
+	Use "a" before a consonant sound	Whakamahia te "a" i mua i te oro orokati
+	Use "an" before a vowel sound	Whakamahia te "an" i mua i te oro oropuare
+	Use an Existing List…	Whakamahi Rārangi Kua Tīaria…
+	Use passim (five or more pages)	Whakamahia te passim (e rima, neke atu rānei ngā whārangi)
+	Use system setting	Whakamahia te tautuhinga pūnaha
+	Use the Insert key to switch overtype on and off	Whakamahia te pātuhi Insert hei whakakā, hei whakaweto i te tuhi whakakapi
+	Use wildcards	Whakamahia ngā pūāhua tohu
+	User Name	Ingoa Kaiwhakamahi
+	User name:	Ingoa kaiwhakamahi:
+	Username	Ingoa kaiwhakamahi
+	Value	Uara
+	Vector A	Pere A
+	Vector AB	Pere AB
+	Version	Putanga
+	Version History	Hītori Putanga
+	Version {version} ({build})	Putanga {version} ({build})
+	Versions are kept while the document is open (a .docx file has no versions).	Ka puritia ngā putanga i te wā e tuwhera ana te tuhinga (kāore he putanga o tētahi kōnae .docx).
+	Vertical	Poutū
+	Vertical Alignment	Tīaroaro Poutū
+	Vertical alignment:	Tīaroaro poutū:
+	Vertical Bars	Ngā Pou Poutū
+	Vertical Dots	Ngā Ira Poutū
+	Vertical spacing:	Mokowā poutū:
+	Vietnamese	Whitināmu
+	View	Tirohanga
+	View Alt Text…	Tiro Kuputuhi Kē…
+	View Gridlines	Tiro Rārangi Mātiti
+	View Side by Side	Tiro Taha ki te Taha
+	View State	Tūāhua Tirohanga
+	Views	Ngā Tirohanga
+	Visual effects	Ngā pānga ataata
+	Voice	Reo Kōrero
+	Volume	Pukapuka
+	Volume Integral	Pāhekoheko Rōrahi
+	Volume Integral with Limits	Pāhekoheko Rōrahi me ngā Tepe
+	Volume Integral with Stacked Limits	Pāhekoheko Rōrahi me ngā Tepe Tāpae
+	W:	Wh:
+	Waiting for Zotero…	Kei te tatari mō Zotero…
+	Warm Gradient with Outline	Rōnaki Mahana me te Paenga
+	Warnings ({n})	Ngā Whakatūpato ({n})
+	Watermark	Tohu Wai
+	Wave	Ngaru
+	Weather	Huarere
+	web access isn't available here	kāore te uru tukutuku i te wātea i konei
+	Web Layout	Takotoranga Tukutuku
+	Web page (*.html)	Whārangi tukutuku (*.html)
+	Web\nLayout	Takotoranga\nTukutuku
+	Website	Paetukutuku
+	Wed	Wen
+	Weight	Taumaha
+	West	Uru
+	When merging records	I te wā e hanumi ana i ngā pūkete
+	When this document was first created	I te wā i waihangatia tuatahitia ai tēnei tuhinga
+	When this document was most recently printed	I te wā i tāngia whakamutungatia ai tēnei tuhinga
+	When this document was most recently saved	I te wā i tiakina whakamutungatia ai tēnei tuhinga
+	White Space	Mokowā Mā
+	White space	Mokowā mā
+	Who the document properties name as author	Ko wai te kaituhi e whakaingoatia ana e ngā āhuatanga tuhinga
+	Whole document	Tuhinga katoa
+	Whole page	Whārangi katoa
+	Whole Table	Ripanga Katoa
+	Whole words	Ngā kupu katoa
+	Wide	Whānui
+	Widow/Orphan Control	Mana Pouaru/Pani
+	Widow/Orphan control	Mana pouaru/pani
+	Width and spacing	Whānui me te mokowā
+	Width:	Whānui:
+	Wildcards (regex)	Ngā pūāhua tohu (regex)
+	Window	Matapihi
+	With:	Me:
+	Word 2007	Word 2007
+	Word 2010	Word 2010
+	Word 2013 and later	Word 2013, i muri mai
+	Word 97–2003	Word 97–2003
+	Word Count	Tatau Kupu
+	Word document	Tuhinga Word
+	Word document (*.docx)	Tuhinga Word (*.docx)
+	Word forms	Ngā puka kupu
+	Word Left	Kupu ki Mauī
+	Word level	Taumata kupu
+	Word Right	Kupu ki Matau
+	Word XML Document (*.xml)	Tuhinga Word XML (*.xml)
+	WordArt	WordArt
+	WordArt Styles	Ngā Kāhua WordArt
+	Words	Ngā Kupu
+	Words only	Ngā kupu anake
+	Wrap Text	Takai Kuputuhi
+	Wrap text	Takai kuputuhi
+	Wrap Text Sides	Ngā Taha Takai Kuputuhi
+	Wrap\nText	Takai\nKuputuhi
+	Write & Insert Fields	Tuhi & Kōkuhu Āpure
+	Write a reply	Tuhia he whakautu
+	Write math here with the mouse or a pen.	Tuhia te pāngarau ki konei ki te kiore, ki te pene rānei.
+	Writing Style: Grammar	Kāhua Tuhituhi: Wetereo
+	x bar	x pae
+	Year	Tau
+	Yes	Āe
+	Yields	Ka puta
+	Your changes will be lost if you don't save them.	Ka ngaro ō panoni ki te kore koe e tiaki.
+	Your system doesn't report an animation setting, so animation effects stay on.	Kāore tō pūnaha e pūrongo ana i tētahi tautuhinga hākoritanga, nō reira ka noho kā ngā pānga hākoritanga.
+	Your system has animation effects turned off.	Kua whakawetohia e tō pūnaha ngā pānga hākoritanga.
+	Your system has animation effects turned on.	Kua whakakāhia e tō pūnaha ngā pānga hākoritanga.
+	Zoom	Topa
+	Zoom In	Topa Whakatata
+	Zoom Out	Topa Whakamamao
+	Zoom to Page	Topa ki te Whārangi
+	Zotero	Zotero
+	Zotero: cancelled	Zotero: kua whakakorea
+	Zotero: done	Zotero: kua oti
+	{cols}×{rows} Table	Ripanga {cols}×{rows}
+	{contributors} contributors · {commits} commits	{contributors} ngā kaituku · {commits} ngā tuku
+	{count} items highlighted	{count} ngā tūemi kua miramiratia
+	{count} of {total} pages will print	{count} o ngā whārangi {total} ka tāngia
+	{count} paragraphs were changed.	{count} ngā kōwae i panonitia.
+	{count} records; fields: {fields}	{count} ngā pūkete; ngā āpure: {fields}
+	{fonts} isn't installed on this computer, so this document is shown with {with}. Lines and pages may break differently than with the original font.	Kāore a {fonts} i tāutatia ki tēnei rorohiko, nō reira ka whakaaturia tēnei tuhinga ki a {with}. Tērā pea ka rerekē te wehe o ngā rārangi me ngā whārangi i tō te momotuhi taketake.
+	{group} settings	Ngā tautuhinga {group}
+	{key}+Click to follow link	{key}+Pāwhiri hei whai i te hononga
+	{language} is now the document's default language.	Ko {language} ināianei te reo taunoa o te tuhinga.
+	{name} (Press ENTER to Insert)	{name} (Pēhia te ENTER hei Kōkuhu)
+	{name} already exists. Choose Save again to replace it.	Kei te tīari kē a {name}. Kōwhiria anō te Tiaki hei whakakapi.
+	{name} can't be a folder's name.	Kāore e taea a {name} hei ingoa kōpaki.
+	{name} is protected with a password.	Kua parepare a {name} ki te kupuhipa.
+	{name} was added. Its macros are under My Add-ins and View › Macros.	Kua tāpirihia a {name}. Kei raro ōna makero i Āku Tāpiritanga me Tirohanga › Ngā Makero.
+	{name} wasn't found.	Kāore i kitea a {name}.
+	{n} entries marked.	{n} ngā tāurunga kua tohua.
+	{n} lines	{n} ngā rārangi
+	{n} of {of} recipients	{n} o ngā kaiwhiwhi {of}
+	{n} pt	{n} pt
+	{n} records	{n} ngā pūkete
+	{n} revisions	{n} ngā whakahōunga
+	{selected} of {words} words	{selected} o ngā kupu {words}
+	{size} pt	{size} pt
+	{words} words	{words} ngā kupu
+	{w} × {h} in	{w} × {h} in
+	{w} × {h} mm	{w} × {h} mm
+	“{text}” ({row}, {series}) isn't a number.	Ehara a “{text}” ({row}, {series}) i te tau.
+	← Find	← Kimi
+	✓ None	✓ Kore
+	➕ New comment	➕ Tākupu hou
+	📂  Browse…	📂  Tirotiro…
+	Add Help Text…	Tāpiri Kuputuhi Āwhina…
+	AutoText entry:	Tāurunga Kuputuhi Aunoa:
+	Calculate on exit	Tātai i te putanga
+	Calculation	Tātaitanga
+	Check Box Form Field	Āpure Puka Pouaka Tohu
+	Check Box Form Field Options	Ngā Kōwhiringa Āpure Puka Pouaka Tohu
+	Check box	Pouaka tohu
+	Check box enabled	Kua whakahohea te pouaka tohu
+	Check box size:	Rahi pouaka tohu:
+	Checked	Kua tohua
+	Current date	Rā onāianei
+	Current time	Wā onāianei
+	Default value:	Uara taunoa:
+	Drop-Down Form Field	Āpure Puka Taka-iho
+	Drop-Down Form Field Options	Ngā Kōwhiringa Āpure Puka Taka-iho
+	Drop-down	Taka-iho
+	Drop-down enabled	Kua whakahohea te taka-iho
+	Drop-down item:	Tūemi taka-iho:
+	Fill In Form Field	Āpure Puka Whakakī
+	Fill-in enabled	Kua whakahohea te whakakī
+	Form Field	Āpure Puka
+	Form Field Help Text	Kuputuhi Āwhina Āpure Puka
+	Form Field Options	Ngā Kōwhiringa Āpure Puka
+	Form Field Shading	Whakamarumaru Āpure Puka
+	Form Field at Selection	Āpure Puka i te Tīpakonga
+	Help Key (F1)	Pātuhi Āwhina (F1)
+	Insert Form Field	Kōkuhu Āpure Puka
+	Items in drop-down list:	Ngā tūemi o te rārangi taka-iho:
+	Legacy Tools	Ngā Utauta Tawhito
+	Maximum length:	Roa mōrahi:
+	Next Form Field	Āpure Puka e Whai Ake
+	Not checked	Kāore i tohua
+	Put the caret on a form field first.	Whakatakotoria te pūtohu ki tētahi āpure puka i te tuatahi.
+	Regular text	Kuputuhi auau
+	Reset Form Fields	Tautuhi Anō Āpure Puka
+	Text Form Field	Āpure Puka Kuputuhi
+	Text Form Field Options	Ngā Kōwhiringa Āpure Puka Kuputuhi
+	Type your own:	Patohia tāu ake:
+	Unlimited	Mutunga-kore
+	Protected sections:	Ngā wāhanga kua parepare:
+	Section Protection	Parepare Wāhanga
+	Section {n}	Wāhanga {n}
+	Select sections…	Tīpako wāhanga…
+	AutoSummarize	Whakarāpopoto Aunoa
+	Create a new document and put the summary there	Waihangatia he tuhinga hou ka tuku i te whakarāpopototanga ki reira
+	Highlight key points	Miramira ngā take matua
+	Insert an executive summary or abstract at the top of the document	Kōkuhu he whakarāpopototanga matua, he tāpoi rānei ki runga o te tuhinga
+	Length of summary	Roa o te whakarāpopototanga
+	Percent of original:	Ōrau o te taketake:
+	Summary: {words} of {of} words	Whakarāpopototanga: {words} o ngā kupu {of}
+	Type of summary	Momo whakarāpopototanga
+	Update document statistics	Whakahōu tatauranga tuhinga
+	{n} sentences	{n} ngā rerenga
+	{n} words or less	{n} kupu, iti iho rānei
+	At:	Kei:
+	Distance from text:	Tawhiti mai i te kuputuhi:
+	Format Frame	Hōputu Anga
+	Format Frame…	Hōputu Anga…
+	Frame	Anga
+	Frame…	Anga…
+	Insert Frame	Kōkuhu Anga
+	Lock anchor	Rakaina te punga
+	Remove Frame	Tango Anga
+	Text wrapping	Takai kuputuhi
+	Chinese Conversion	Tahuringa Hainamana
+	Chinese Conversion…	Tahuringa Hainamana…
+	Converted {n} characters	{n} ngā pūāhua i tahuritia
+	Simplified Chinese to Traditional Chinese	Hainamana Māmā ki te Hainamana Tuku Iho
+	Simplified to Traditional	Māmā ki Tuku Iho
+	Traditional Chinese to Simplified Chinese	Hainamana Tuku Iho ki te Hainamana Māmā
+	Traditional to Simplified	Tuku Iho ki Māmā
+	Use Taiwan, Hong Kong SAR, and Macao SAR character variants	Whakamahia ngā momo pūāhua o Taiwana, o Hongipua SAR me Makau SAR
+	Asian Layout	Takotoranga Āhia
+	Fit Text	Whakauru Kuputuhi
+	Fit Text…	Whakauru Kuputuhi…
+	Two Lines in One	E Rua ngā Rārangi i te Kotahi
+	Two Lines in One…	E Rua ngā Rārangi i te Kotahi…
+	New text width (pt):	Whānui kuputuhi hou (pt):
+	Enclose in brackets	Tāpaea ki ngā taiapa
+	Bracket pair:	Takirua taiapa:
+	Typography	Tuhi Momotuhi
+	Character spacing control	Mana mokowā pūāhua
+	Don't compress	Kaua e kōpiri
+	Compress punctuation only	Kōpiri tohutuhi anake
+	Compress punctuation and Japanese kana	Kōpiri tohutuhi me te kana Hapanihi
+	First and last characters	Ngā pūāhua tuatahi me te whakamutunga
+	Strict	Tino Tika
+	Cannot start a line:	Kāore e taea te tīmata i tētahi rārangi:
+	Cannot end a line:	Kāore e taea te whakamutu i tētahi rārangi:
+	Japanese Find Options	Ngā Kōwhiringa Kimi Hapanihi
+	Sounds like (Japanese)	He rite te oro (Hapanihi)
+	Match full/half width	Whakaōrite whānui katoa/hāwhe
+	Match hiragana/katakana	Whakaōrite hiragana/katakana
+	Match small kana	Whakaōrite kana iti
+	Match prolonged sound marks and dashes	Whakaōrite ngā tohu oro whakaroa me ngā tāhiri
+	Japanese Consistency Checker	Kaitirotiro Rite Tonu Hapanihi
+	Japanese Consistency Checker…	Kaitirotiro Rite Tonu Hapanihi…
+	No inconsistent spellings were found.	Kāore i kitea he tātaki kupu rerekē.
+	Pick the spelling to keep in each group.	Kōwhiria te tātaki hei pupuri i ia rōpū.
+	Bidirectional text	Kuputuhi ahunga-rua
+	Bidirectional Text	Kuputuhi Ahunga-rua
+	Default direction:	Ahunga taunoa:
+	Cursor movement:	Nekehanga pūtohu:
+	Logical	Arorau
+	Visual	Ataata
+	Manage Fields	Whakahaere Āpure
+	File locations	Ngā wāhi kōnae
+	File Locations	Ngā Wāhi Kōnae
+	Documents:	Ngā tuhinga:
+	Pictures:	Ngā pikitia:
+	The system's choice	Te kōwhiringa a te pūnaha
+	Show Repairs	Whakaatu Whakatikatika
+	No repairs were needed.	Kāore he whakatikatika i hiahiatia.
+	These problems were found and repaired when the document was opened:	I kitea, i whakatikaina ēnei raru i te whakatuwheratanga o te tuhinga:
+	An unreadable entry in the file was skipped: {what}	I hipa tētahi tāurunga kāore e taea te pānui i te kōnae: {what}
+	An unreadable part was left out: {what}	I waiho i waho tētahi wāhanga kāore e taea te pānui: {what}
+	Unreadable relationships were ignored: {what}	I warea ngā hononga kāore e taea te pānui: {what}
+	A missing part of an embedded object was left out: {what}	I waiho i waho tētahi wāhanga ngaro o tētahi ahanoa tāmau: {what}
+	Copy File	Tārua Kōnae
+	Find Files	Kimi Kōnae
+	Letter Wizard	Ruānuku Reta
+	Recipient's name:	Ingoa o te kaiwhiwhi:
+	Salutation:	Mihi:
+	Subject:	Kaupapa:
+	Complimentary closing:	Kupu whakakapi:
+	Sender's name:	Ingoa o te kaituku:
+	Job title:	Taitara tūranga:
+	Company:	Kamupene:
+	Enclosures:	Ngā tāpiritanga:
+	Cc:	Cc:
+	Edit Links to Files	Whakatika Hononga ki ngā Kōnae
+	Source file	Kōnae mātāpuna
+	Locked	Kua rakaina
+	Change Source	Panoni Mātāpuna
+	This document has no links to files.	Kāore he hononga ki ngā kōnae o tēnei tuhinga.
+	Web options	Ngā kōwhiringa tukutuku
+	Web Options	Ngā Kōwhiringa Tukutuku
+	Allow PNG as a graphics format	Tukua te PNG hei hōputu whakairoiro
+	Rely on CSS for font formatting	Whirinaki ki te CSS mō te hōputu momotuhi
+	Rely on VML for displaying graphics in browsers	Whirinaki ki te VML hei whakaatu whakairoiro i ngā pūtirotiro
+	Organize supporting files in a folder	Whakaraupapahia ngā kōnae tautoko ki tētahi kōpaki
+	Use long file names whenever possible	Whakamahia ngā ingoa kōnae roa i ngā wā katoa e taea ana
+	Screen size:	Rahi mata:
+	Pixels per inch:	Ngā pika ia īnihi:
+	Hangul Hanja Conversion	Tahuringa Hangul Hanja
+	Hangul Hanja Conversion…	Tahuringa Hangul Hanja…
+	Hangul to Hanja	Hangul ki Hanja
+	Hanja to Hangul	Hanja ki Hangul
+	Put the caret in Korean text to choose its Hanja.	Whakatakotoria te pūtohu ki roto i te kuputuhi Kōreana kia kōwhiri ai i tōna Hanja.
+	The selection, or the whole document when nothing is selected.	Te tīpakonga, te tuhinga katoa rānei ina kāore he mea i tīpakohia.

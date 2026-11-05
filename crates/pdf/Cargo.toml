@@ -1,0 +1,30 @@
+[package]
+name = "doc4me-pdf"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Doc4Me PDF export (krilla): embedded font subsets with selectable text, links, outline, tagging"
+
+[lints]
+workspace = true
+
+[dependencies]
+doc4me-doc = { workspace = true }
+doc4me-geom = { workspace = true }
+doc4me-fonts = { workspace = true }
+doc4me-layout = { workspace = true }
+doc4me-metafile = { workspace = true }
+krilla = { workspace = true }
+kurbo = { workspace = true }
+image = { workspace = true }
+thiserror = { workspace = true }
+log = { workspace = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+# The browser clock (`SystemTime::now()` panics on wasm32).
+js-sys = "0.3"
+
+[dev-dependencies]
+hayro-syntax = "0.7.2"
+hayro-interpret = { version = "0.7.0", default-features = false, features = ["embed-fonts"] }
+hayro-cmap = "0.1"

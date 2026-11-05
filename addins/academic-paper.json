@@ -1,0 +1,29 @@
+{
+  "id": "academic-paper",
+  "name": "Academic Paper Setup",
+  "version": "1.0.0",
+  "description": "One-inch margins, a 12 pt serif font, double spacing and page numbers at the top right, as many style guides ask.",
+  "author": "Doc4Me contributors",
+  "license": "MIT OR Apache-2.0",
+  "macros": [
+    {
+      "name": "Paper layout",
+      "description": "Letter paper, 1-inch margins, 12 pt Times New Roman (or its substitute), double spacing.",
+      "steps": [
+        {"command": "layout.size", "params": {"name": "Letter"}},
+        {"command": "layout.margins", "params": {"top": 72, "bottom": 72, "left": 72, "right": 72}},
+        {"command": "select.all"},
+        {"command": "format.font", "params": {"name": "Times New Roman"}},
+        {"command": "format.size", "params": {"size": 12}},
+        {"command": "para.double"},
+        {"command": "para.spacing", "params": {"before": 0, "after": 0}},
+        {"command": "caret.docStart"}
+      ]
+    },
+    {
+      "name": "Page numbers top right",
+      "description": "Adds page numbers at the top right of every page.",
+      "steps": [{"command": "insert.pageNumber", "params": {"position": "top", "align": "right"}}, {"command": "insert.closeHeader"}]
+    }
+  ]
+}
