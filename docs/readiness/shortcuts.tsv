@@ -161,9 +161,9 @@ ks-159	Manage text formatting	Display the Reveal Formatting task pane.	Shift+F1	
 ks-160	Insert special characters	Insert a line break.	Shift+Enter	Shift+Enter	text.lineBreak	registry		
 ks-161	Insert special characters	Insert a page break.	Ctrl+Enter	Mod+Enter	text.pageBreak	registry		
 ks-162	Insert special characters	Insert a column break.	Ctrl+Shift+Enter	Mod+Shift+Enter	text.columnBreak	registry		
-ks-163	Insert special characters	Insert an em dash (—).	Ctrl+Alt+Minus sign (on the numeric keypad)	Mod+Alt+-	text.emDash	registry		
+ks-163	Insert special characters	Insert an em dash (—).	Ctrl+Alt+Minus sign (on the numeric keypad)	Mod+Alt+-	text.emDash	registry		The current key event model maps numeric-keypad subtract and the main minus key to the same key; Em Dash and Optional Hyphen cannot both bind this chord until that distinction is preserved.
 ks-164	Insert special characters	Insert an en dash (–).	Ctrl+Minus sign (on the numeric keypad)	Mod+-	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): a numeric keypad on the owner's Windows PC; Mod+- is Optional Hyphen in Doc4Me (as classic Word); no such command in Doc4Me
-ks-165	Insert special characters	Insert an optional hyphen.	Ctrl+Alt+Minus sign (-)	Mod+Alt+-	text.optionalHyphen	registry		published as Ctrl+Alt+Minus; Doc4Me uses Mod+- — verify on Word for Windows
+ks-165	Insert special characters	Insert an optional hyphen.	Ctrl+Alt+Minus sign (-)	Mod+Alt+-	text.optionalHyphen	registry		The main minus key inserts Optional Hyphen; numeric-keypad subtract is a separate Word shortcut but not yet distinguished by the key event model.
 ks-166	Insert special characters	Insert a nonbreaking hyphen.	Shift+Alt+Minus sign(-)	Alt+Shift+-	text.nbHyphen	registry		published as Shift+Alt+Minus; Doc4Me uses Mod+Shift+- — verify on Word for Windows
 ks-167	Insert special characters	Insert a nonbreaking space.	Ctrl+Shift+Spacebar	Mod+Shift+Space	text.nbsp	registry		
 ks-168	Insert special characters	Insert a copyright symbol (©).	Press (, C, )	(,C,)	-	manual	pass	tools.rs AutoCorrect: (c) → ©
