@@ -13,7 +13,7 @@
 
 ### เพิ่ม
 
-- **เพิ่ม shortcut สำหรับ Optional Hyphen** (`text.optionalHyphen`, `Mod+Alt+-`, readiness `ks-165`): ใช้ Ctrl+Alt+Minus บน Windows ตามตาราง Word; แก้การชนกับ Em Dash ซึ่งเคยผูกคีย์เดียวกันจน Optional Hyphen ใช้ไม่ได้. ตรวจด้วย `word_default_shortcuts_resolve`, `every_shortcut_runs_one_command` และ `cargo xtask ci` (ครบทั้ง 6 ขั้น).
+- **เพิ่ม shortcut สำหรับ Optional Hyphen** (`text.optionalHyphen`, `Mod+Alt+-`, readiness `ks-165`): ใช้ Ctrl+Alt+Minus บน Windows ตามตาราง Word; ย้ายคีย์นี้จาก Em Dash ซึ่งเดิมจำลองปุ่ม minus บน numeric keypad แต่ keymap ไม่รองรับการแยกปุ่มนั้น จึงทำให้ shortcut ชนกัน. ตรวจด้วย `word_default_shortcuts_resolve`, `every_shortcut_runs_one_command` และ `cargo xtask ci` (ครบทั้ง 6 ขั้น).
 
 - **ตั้งค่า Horizontal in Vertical กับข้อความที่เลือกได้** (`crates/engine/src/cmd/asian_layout.rs`, `crates/ui-egui/src/{ribbon.rs,dialogs.rs,lib.rs}`; readiness `dlg-083`): เพิ่มช่องเลือกใน Asian Layout dialog และเมนูทางลัด ซึ่งบันทึกและยกเลิก `w:vert` โดยไม่ลบค่า Two Lines in One หรือวงเล็บ; คุณสมบัติบันทึกลง .docx ได้ แต่ layout ปัจจุบันยังไม่วาดตัวอักษรแนวนอนภายในแนวตั้ง จึงไม่อ้างว่าการแสดงผลเทียบเท่า Word; ตรวจด้วย engine test `horizontal_in_vertical_formats_selection_and_preserves_other_asian_layout`, UI test `asian_layout_buttons_open_their_dialogs`, i18n test `every_tab_and_command_is_translated` และ `cargo xtask ci`
 

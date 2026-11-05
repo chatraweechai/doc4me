@@ -44,7 +44,7 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("text.nbsp", "Nonbreaking Space", "Insert › Symbols", |s, _| ins_char(s, NBSP)).key("Mod+Shift+Space"),
         // Microsoft's list: Alt+Shift+Minus (Ctrl+Shift+Minus is Subscript, Ctrl+Minus Zoom Out).
         CommandSpec::new("text.nbHyphen", "Nonbreaking Hyphen", "Insert › Symbols", |s, _| ins_char(s, NB_HYPHEN)).key("Alt+Shift+-"),
-        // Microsoft's list gives Ctrl+Alt+Minus, which is also its Em Dash (on the keypad): no key.
+        // Word uses Ctrl+Alt+Minus for this; the keypad distinction from Em Dash isn't modeled.
         CommandSpec::new("text.optionalHyphen", "Optional Hyphen", "Insert › Symbols", |s, _| ins_char(s, SOFT_HYPHEN)).key("Mod+Alt+-"),
         // Alt+X on Windows and Linux; macOS has no default (Option+X types a character there).
         CommandSpec::new("text.toggleUnicode", "Toggle Unicode Character", "Editing", toggle_unicode).key(if cfg!(target_os = "macos") {
