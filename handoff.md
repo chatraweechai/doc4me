@@ -1,6 +1,6 @@
 # Handoff: Doc4Me 1.1.3 · readiness 89.8% / 92.5% เมื่อไม่นับ 26 deferred (Windows run 42025088010, วัดโค้ด `bb15416`, รายงาน commit `aa1310d`, 2026-11-05) · รุ่นล่าสุดใน source คือ 1.1.3; ห้ามออก Release หรือเผยแพร่ environment จนกว่าผู้ใช้จะสั่ง
 
-อัปเดต: 2026-11-05 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 24 (ติดตาม readiness สู่ 100%) · เวอร์ชัน source 1.1.3 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
+อัปเดต: 2026-11-05 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 25 (ไล่สาเหตุ pagination/languages ตามเป้าหมาย 222/222 และ 95/95) · เวอร์ชัน source 1.1.3 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
 ## สถานะปัจจุบัน (2026-11-05 รอบที่ 24: แก้ mapping printer dialog และวัด Windows; ยังไม่ถึง 100%)
 
@@ -9,7 +9,9 @@
 - Run สำเร็จเมื่อ 2026-11-05 12:29 UTC, วัด source commit `bb15416` บน Windows และ bot บันทึกรายงานเป็น `aa1310d`: **89.8% รวม**, **92.5% เมื่อไม่นับ 26 แถว deferred**. ยังเหลือ 7.5 จุดถึงเป้าหมาย 100% โดยไม่นับ deferred.
 - มิติ: dialogs 205/220 (12 deferred; 8 dialog รุ่นเก่าถูก exclude พร้อมเหตุผล), corpus-pages 174/222, corpus-breaks 97/222, languages 64/95, shortcuts 268/280 (7 deferred); corpus-open, round-trip, stability และ performance ผ่านครบ. `dlg-041` ใช้ `file.print` แทน dialog ตั้งค่าเครื่องพิมพ์รุ่นเดิม เพราะหน้าพิมพ์ปัจจุบันให้เลือกเครื่องพิมพ์และเปิดคุณสมบัติระบบได้. รายละเอียดและรายการ fail จริงอยู่ใน [`docs/readiness.md`](docs/readiness.md).
 - `de3a06e` แก้การยุบ trailing paragraph spacing เมื่อ contextual spacing ใช้ใน table cell; regression test ผ่าน และ full `cargo xtask ci` ผ่านหลังตั้ง ALSA pkg-config path. Linux full-corpus diagnostic: pages 163/222, breaks 82/222 (ไม่ใช้แทน Windows baseline). Windows ได้ pages 174/222, breaks 97/222.
-- งานต่อ: pagination ยังคงเป็นตัวบล็อกที่ใหญ่สุด (48 page-count failures, 125 page-boundary failures); 31 ภาษาไม่มี catalog ที่ผ่าน 95%; ยังมี dialog 3 แถวและ shortcut 5 แถวที่ไม่ deferred. Run นี้เพิ่ม readiness เมื่อตัด deferred ออก 0.1 จุดจาก mapping `dlg-041`; 26 deferred rows คงเดิม. ใช้รายงานที่ครบคลังเท่านั้น. **ห้ามแก้/ลด/เปลี่ยน 26 deferred rows และห้ามออก release/publish.**
+- งานต่อ (เป้าหมายที่ผู้ใช้สั่ง 2026-11-05): pagination 222/222 ทั้งจำนวนหน้าและ page boundaries, languages 95/95. Windows baseline ล่าสุดยัง 174/222, 97/222 และ 64/95 ตาม run 42025088010; ห้ามอ้าง Linux diagnostic แทน Windows.
+- Diagnostic เต็ม 222 DOCX บน Linux (`cargo xtask readiness --corpus --jobs 8 --cli target/release/doc4me-cli --dry-run`): 89.0% โดยรวม (ต่าง Windows จากฟอนต์และแพลตฟอร์ม); ไม่มีการเขียนทับรายงาน Windows. `govuk-005` ได้ 37 หน้าเทียบ Word 36 ทั้ง Linux และ Windows; PDF Linux เทียบข้อความพบการเลื่อนเริ่มที่หน้า 13 ในตารางฟอร์ม checkbox (local เหลือแถว “Provide details here” ก่อนคำถามเงินบำนาญ ส่วน Word วางคำถามต่อเนื่องในหน้าเดียว). DOCX ระบุ checkbox `☐` เป็น MS Gothic 12pt และย่อหน้าใช้ `w:line=336`/auto (1.4); Windows-runner ยังมีผล 37/36. นี่เป็นเบาะแสเรื่อง line height ของ table row แต่ยังไม่พิสูจน์กฎแก้ที่ไม่ทำให้เอกสารอื่นแย่ลง; ห้ามลด row height แบบเดา.
+- Full-corpus diagnostic แสดง 59 page-count failures และ 31 languages ไม่มี catalog บน Linux; เป้าหมายยังทำไม่สำเร็จ. ถัดไปให้ทดสอบการตีความ line-height ของ checkbox ในตารางกับหลายเอกสารที่ใช้ MS Gothic ก่อน หากได้การแก้ที่มีหลักฐาน ให้รัน regression/full corpus แล้ว Windows readiness จากนั้นทำแค็ตตาล็อกทีละชุดด้วยการแปลจริง ตรวจ placeholder/glyph/coverage ห้ามนับ English fallback. 26 deferred rows คงเดิม และห้ามออก release/publish.
 
 ## สถานะเดิมและบันทึกการทำงาน
 
