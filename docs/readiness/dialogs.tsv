@@ -81,7 +81,7 @@ dlg-079	wdDialogFrameSetProperties	1074	(none)		excluded		Legacy HTML frameset a
 dlg-080	wdDialogHelpAbout	9	APPNAME, APPCOPYRIGHT, APPUSERNAME, APPORGANIZATION, APPSERIALNUMBER	help.show	registry		F1 and File › About open the About dialog
 dlg-081	wdDialogHelpWordPerfectHelp	10	WPCommand, HelpText, DemoGuidance		excluded		WordPerfect Help integration; Word 365 for Windows does not include WordPerfect Help.
 dlg-082	wdDialogHelpWordPerfectHelpOptions	511	CommandKeyHelp, DocNavKeys, MouseSimulation, DemoGuidance, DemoSpeed, HelpType		excluded		WordPerfect Help integration; Word 365 for Windows does not include WordPerfect Help.
-dlg-083	wdDialogHorizontalInVertical	1160	(none)	-	registry		
+dlg-083	wdDialogHorizontalInVertical	1160	(none)	format.horizontalInVertical	registry		Horizontal in Vertical is available in the Asian Layout dialog
 dlg-084	wdDialogIMESetDefault	1094	(none)	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): the Windows IME
 dlg-085	wdDialogInsertAddCaption	402	Name	references.caption	registry		Caption › New Label
 dlg-086	wdDialogInsertAutoCaption	359	Clear, ClearAll, Object, Label, Position	references.autoCaption	registry		Caption › AutoCaption…: tables and pictures (Word lists tables and OLE objects), label, above or below
