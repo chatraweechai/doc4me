@@ -11,7 +11,7 @@ lang-009	Basque (Basque)	eu-ES	eu
 lang-010	Bosnian (Latin)	bs-latn-BA	bs
 lang-011	Bulgarian	bg-BG	bg
 lang-012	Catalan	ca-ES	ca
-lang-013	Catalan (Valencia)	ca-ES-valencia	-
+lang-013	Catalan (Valencia)	ca-ES-valencia	ca
 lang-014	Chinese (Simplified)	zh-CN	zh-hans
 lang-015	Chinese (Traditional)	zh-TW	zh-hant
 lang-016	Croatian	hr-HR	hr
@@ -73,7 +73,7 @@ lang-071	Russian	ru-RU	ru
 lang-072	Scottish Gaelic	gd-GB	gd
 lang-073	Serbian (Cyrillic, Serbia)	sr-cyrl-RS	sr
 lang-074	Serbian (Latin, Serbia)	sr-latn-RS	sr-latn
-lang-075	Serbian (Cyrillic, Bosnia & Herzegovina)	sr-cyrl-BA	-
+lang-075	Serbian (Cyrillic, Bosnia & Herzegovina)	sr-cyrl-BA	sr
 lang-076	Sesotho sa Leboa	nso-ZA	-
 lang-077	Setswana	tn-ZA	-
 lang-078	Sinhala	si-LK	-

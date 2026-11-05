@@ -13,6 +13,8 @@
 
 ### เพิ่ม
 
+- **ผูกภาษาระดับภูมิภาคเข้ากับแค็ตตาล็อกที่รองรับแล้ว** (`docs/readiness/languages.tsv`, `crates/ui-egui/src/i18n/{mod.rs,tests.rs}`): Catalan (Valencia) ใช้แค็ตตาล็อก Catalan และ Serbian Cyrillic (Bosnia & Herzegovina) ใช้ Serbian Cyrillic; locale fallback เดิมรองรับทั้งสอง tag อยู่แล้ว. เพิ่มการทดสอบ `ca-ES-valencia` และ `sr-Cyrl-BA`; coverage ของ catalog ทั้งคู่ 100% โดยไม่สร้างคำแปลซ้ำ. ตรวจด้วย i18n tests และ full `cargo xtask ci` (fmt, clippy, workspace tests, assets, layers, wasm) ผ่าน; Windows readiness รอผล run หลัง commit.
+
 - **รองรับ Clippy รุ่นปัจจุบันใน test อ่านเสียงพูด** (`apps/doc4me/src/dictate.rs`): ใช้ `slice::as_chunks::<2>()` แปลง PCM 16-bit เป็นคู่ byte แทน `chunks_exact(2)` เพื่อไม่ให้ lint `chunks_exact_to_as_chunks` ทำให้ Clippy ทั้ง workspace ล้ม โดยยังทิ้ง byte เศษท้ายข้อมูลเหมือนเดิม; ไม่มีผลต่อไฟล์เอกสารหรือการติดตั้ง. ตรวจด้วย `cargo fmt --all -- --check`, `cargo clippy --workspace --all-targets -- -D warnings` และ `cargo test --workspace` ผ่าน; `cargo xtask assets`, `cargo xtask layers` และ `cargo xtask wasm` ผ่าน
 
 - **ภาษาของหน้าจอเพิ่มอีก 8 ภาษา (ชุดที่สาม): เฮาซา (`ha`), คีร์กีซ (`ky`), ลักเซมเบิร์ก (`lb`), เมารี (`mi`), โรแมนซ์ (`rm`), เกลิกแบบสกอตแลนด์ (`gd`), ตาตาร์ อักษรซีริลลิก (`tt`) และอุซเบก อักษรละติน (`uz`)** (`crates/ui-egui/src/i18n/{ha,ky,lb,mi,rm,gd,tt,uz}.tsv`, `crates/ui-egui/src/i18n/mod.rs`, `crates/ui-egui/src/i18n/tests.rs`, `docs/readiness/languages.tsv`)

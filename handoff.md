@@ -1,10 +1,19 @@
-# Handoff: Doc4Me 1.1.2 · readiness 87.7% (วัดบน Windows รอบที่ 21 ด้วย workflow `readiness-windows.yml` run 41608625168 ยืนยันผลของ run 41596836985, 2026-11-03; ก่อนหน้า 87.6%, 87.5%, 87.3%, 87.2%, 87.1%, 87.0%, 86.9%, 86.8%, 86.7% และ 86.0% รอบที่ 17) · ออก Release v1.0.0, v1.1.0, v1.1.1, v1.1.2 แล้วใน fork `veevie55/doc4me` (v1.1.2 เป็น Latest) · งานใหม่อยู่ใต้ `[Unreleased]` ห้ามออกเวอร์ชันถัดไปจนกว่าผู้ใช้จะสั่ง
+# Handoff: Doc4Me 1.1.3 · readiness 89.2% / 91.7% เมื่อไม่นับ 26 deferred (Windows run 42012615601, วัดโค้ด `de3a06e`, รายงาน commit `ddd2999`, 2026-11-05) · รุ่นล่าสุดใน source คือ 1.1.3; ห้ามออก Release หรือเผยแพร่ environment จนกว่าผู้ใช้จะสั่ง
 
-อัปเดต: 2026-11-03 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 22 (บันทึกผลวัด readiness ล่าสุด และแก้การวัดบน Windows) · เวอร์ชัน 1.1.2 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
+อัปเดต: 2026-11-05 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 23 (ทำ pagination และวัด Windows readiness) · เวอร์ชัน source 1.1.3 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
-## สถานะปัจจุบัน (2026-11-02 รอบที่ 20: ออกรุ่นครบใน fork `veevie55/doc4me` แล้วทำงานต่อด้าน pagination)
+## สถานะปัจจุบัน (2026-11-05 รอบที่ 23: ทำ pagination ต่อ; ยังไม่ถึง 100%)
 
-### ความคืบหน้าสู่ 100% ไม่นับ deferred (รอบที่ 22 ต่อ, 2026-11-03/04)
+### ความคืบหน้าล่าสุด — Windows run 42012615601
+
+- Run สำเร็จเมื่อ 2026-11-05 11:02 UTC, วัด source commit `de3a06e` บน Windows และ bot บันทึกรายงานเป็น `ddd2999`: **89.2% รวม**, **91.7% เมื่อไม่นับ 26 แถว deferred**. ยังเหลือ 8.3 จุดถึงเป้าหมาย 100% โดยไม่นับ deferred.
+- มิติ: dialogs 204/228 (12 deferred), corpus-pages 174/222, corpus-breaks 97/222, languages 62/95, shortcuts 268/280 (7 deferred); corpus-open, round-trip, stability และ performance ผ่านครบ. รายละเอียดและรายการ fail จริงอยู่ใน [`docs/readiness.md`](docs/readiness.md).
+- `de3a06e` แก้การยุบ trailing paragraph spacing เมื่อ contextual spacing ใช้ใน table cell; regression test ผ่าน และ full `cargo xtask ci` ผ่านหลังตั้ง ALSA pkg-config path. Linux full-corpus diagnostic: pages 163/222, breaks 82/222 (ไม่ใช้แทน Windows baseline). Windows ได้ pages 174/222, breaks 97/222.
+- งานต่อ: pagination ยังคงเป็นตัวบล็อกที่ใหญ่สุด (48 page-count failures, 125 page-boundary failures); 33 ภาษาไม่มี catalog ที่ผ่าน 95%; มี dialog failures และ shortcut failures ที่ไม่ deferred. แก้จากพฤติกรรมจริงพร้อม regression test, รัน Windows readiness หลังโค้ดแต่ละรอบ, อัปเดตตัวเลขจากรายงานที่ครบคลังเท่านั้น. **ห้ามแก้/ลด/เปลี่ยน 26 deferred rows และห้ามออก release/publish.**
+
+## สถานะเดิมและบันทึกการทำงาน
+
+### ความคืบหน้าสู่ 100% ไม่นับ deferred (ข้อมูลก่อนรอบที่ 23; อ่านตัวเลขล่าสุดด้านบน)
 
 - **เจ้าของเขียนทับ `main` ของ fork อีกครั้ง (2026-11-04 02:02–02:37 UTC)**: `main` ใหม่ = `d084ccc` (เนื้อไฟล์เท่า `c9ff26b` เดิม, tag `v1.1.3` ชี้ที่นี่) + 6 commit "Release 1.1.3"/"Initial commit" ที่แก้แค่ `Cargo.toml` (1.1.3) และ `Cargo.lock`; commit 65 รายการหลัง `c9ff26b` (dialogs รอบที่ 21, 40 ภาษา, ตัดบรรทัด LB15, แก้ readiness xtask ฯลฯ) หายจาก `main` จึง rebase ต่อบนงานของเจ้าของแบบ fast-forward (ไม่ force; ต้นไม้ต่างจากก่อน rebase แค่เลขเวอร์ชัน) และแก้ `Cargo.lock` ให้ตรง 1.1.3 (`3030a22`); hash ของ commit รอบนี้จึงเปลี่ยนทั้งหมด ถ้าเจ้าของตั้งใจตัดงานหลัง `c9ff26b` ทิ้ง ต้องตัดสินใหม่
 - ลองแก้ "ด้านที่ `w:tblCellMar`/`w:tcMar` ไม่ระบุให้สืบทอดจาก style" แล้ว**ย้อนออก**: zenodo-154 แสดงว่า Word ใช้ 0 กับด้านที่ `w:tblCellMar` ไม่ระบุ (บรรทัด "LEVEL 1 USE means that" ตรงเมื่อใช้ 0) และไม่แก้ govuk-006; สาเหตุจริงของ govuk-006 (หน้า 5 มีแค่ย่อหน้า "© Crown copyright" ที่ Word ใส่ท้ายหน้า 4) ยังไม่พบ — แถวสูงของเราเกิน Word ~16 pt ที่หน้า 4

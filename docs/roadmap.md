@@ -71,8 +71,10 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 
 The readiness number in [`ROADMAP.md`](../ROADMAP.md) was an estimate (~60%): a weighted sum of
 estimated dimension parities. Since stage B it is measured: **66.1%** at first, **73.4%** in the
-2026-10-25 report, and **87.7%** measured on Windows on 2026-11-03 (run 41608625168, dialogs 204/228; 87.6%, 87.5%, 87.3%, 87.2%, 87.1%, 87.0%, 86.9%, 86.8% and 86.7% earlier that day; 86.0% on 2026-11-01; `readiness.md`, all 222 corpus documents; DOCX open and round-trip 222/222), 12.3
-points short of the target. The current score excluding 26 deferred owner-bound checks is 90.3%.
+2026-10-25 report, and **89.2%** measured on Windows on 2026-11-05 (run 42012615601, dialogs
+204/228, 174/222 page counts, 97/222 page-boundary checks, 62/95 languages; `readiness.md`, all
+222 corpus documents; DOCX open and round-trip 222/222), 10.8 points short of 100% overall. The
+current score excluding 26 deferred owner-bound checks is 91.7%, 8.3 points short.
 The target is **100% ready for real work, measured**
 (raised from 80% to 95% by the owner on 2026-10-25, and to 100% on 2026-10-27): every dimension
 comes from a fixed pass/fail check set, and one command computes the number. Checks may be added,
@@ -107,13 +109,12 @@ never removed, so the number can't drift by editing the list.
 replaces ~60% in `ROADMAP.md`, `target-app-parity.md` and `gaps.md`).
 
 **C. Fix what the checks fail**, highest weight per hour first, until `cargo xtask readiness`
-reports 100.0% on the latest commit: every row of every check set passing. The 2026-11-01
+reports 100.0% on the latest commit: every row of every check set passing. The 2026-11-05
 measurement passes stability (222/222 corpus; 5/5 hand checks) and performance (6/6); the largest
-remaining areas are pagination (56.1%), dialog checks (187/228), and localization (30/95). The
-corpus now matches Word's page count for 162/222 documents and page boundaries for 87/222; the
-leading table-row page-break fix removes a blank page in govuk-003, but its page-boundary check
-still differs. A zero-size Word frame-marker fix restores page flow in zenodo-030 (34 pages versus
-Word's 32).
+remaining areas are pagination (61.0%), dialog checks (204/228), and localization (62/95). The
+corpus now matches Word's page count for 174/222 documents and page boundaries for 97/222. Recent
+work fixed contextual trailing spacing between paragraphs in table cells; the Windows result moved
+from 172 to 174 page-count passes, while boundary passes remain 97.
 Some rows can only pass
 on the owner's hardware: the Windows field reports of stability (startup crash, freezes, saving
 without administrator rights), typing and scrolling on a Windows PC, and the printer, pen,
@@ -138,6 +139,7 @@ languages, screen-reader access.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-11-05 | minor | Windows readiness run 42012615601: 89.2% total / 91.7% without 26 deferred rows; pagination 174/222 page counts and 97/222 page-boundary checks; dialogs 204/228; languages 62/95. Contextual spacing between paragraphs in table cells fixed and tested. |
 | 2026-11-02 | minor | Hidden table rows and `w:hideMark` kept and laid out as in Word (govuk-066 6 pages like Word); a page break ending a section's last paragraph leaves no blank page (zenodo-029, zenodo-140); Linux corpus 171/222 page counts, 91/222 page breaks |
 | 2026-11-02 | minor | M14: v1.0.0–v1.1.2 published on the fork `veevie55/doc4me` (v1.1.2 the latest), after Actions of `chatraweechai/doc4me` stopped over a billing lock; a page break before an empty paragraph ending a section leaves no blank page (Linux corpus: page counts 166 → 168, page breaks 89 → 90) |
 | 2026-11-01 | minor | Map classic New Toolbar and menu customization dialogs to the tested Customize Ribbon replacement; dialogs 187/228, readiness 86.0% (88.5% without deferred) |
