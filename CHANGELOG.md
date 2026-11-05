@@ -119,6 +119,12 @@
 
 ### แก้ไข
 
+- **ระยะหลังย่อหน้าใน cell ตารางที่ใช้ contextual spacing ถูกลบได้ถูกต้อง** (`crates/layout/src/lib.rs`, regression ใน `crates/layout/src/tests.rs`)
+  - เหตุผล: layout ของ cell บันทึกระยะท้ายย่อหน้าเป็นศูนย์เมื่อย่อหน้าปัจจุบันต่อเนื่องกับย่อหน้าก่อนหน้า ทั้งที่ยังบวกระยะนั้นเข้า flow; ย่อหน้าถัดไปจึงลบระยะที่บันทึกไว้ไม่ครบ ทำให้ระยะรายการใน govuk-006 สะสมเกิน Word
+  - เปลี่ยน: เก็บระยะท้ายจริงไว้ แล้วให้ย่อหน้าถัดไปตัดออกเมื่อ contextual spacing ใช้ได้; ไฟล์ DOCX เดิมยังเปิด/บันทึกได้และการติดตั้งไม่เปลี่ยน
+  - ผลที่วัดได้: govuk-006 กลับจาก 5 หน้าเป็น 4 หน้าเท่า PDF อ้างอิง; corpus บน Linux ผ่านจำนวนหน้า 163/222 (เดิม 161/222), ขอบเขตหน้า 82/222; ผล Windows จะบันทึกหลัง workflow readiness รอบนี้
+  - ตรวจสอบ: regression `cargo test -p doc4me-layout contextual_spacing_suppresses_trailing_space_between_cell_paragraphs` ผ่าน; `cargo xtask ci` ผ่านครบ fmt, clippy, workspace tests, assets, layers และ wasm
+
 - **`Cargo.lock` ตรงกับเลขเวอร์ชัน 1.1.3 ใน `Cargo.toml`** (`Cargo.lock`)
   - เหตุผล: เจ้าของ repo เขียนทับ `main` ของ fork เมื่อ 2026-11-04 02:02–02:37 UTC (เริ่มจาก `d084ccc` ซึ่งเนื้อไฟล์เท่ากับ `c9ff26b` ของเดิม แล้วเพิ่ม 6 commit "Release 1.1.3" และ "Initial commit" ที่แก้แค่ `Cargo.toml` เป็น 1.1.3 กับ `Cargo.lock`) และ commit สุดท้ายคืน `Cargo.lock` ของ crate ใน workspace เป็น 1.1.2 จน `cargo metadata --locked` ล้ม ("cannot update the lock file")
   - เปลี่ยน: crate ใน workspace (`doc4me`, `doc4me-*`, `xtask`) ใน `Cargo.lock` เป็น 1.1.3 ตาม `Cargo.toml` ไม่แตะ dependency ภายนอก; commit 65 รายการของ session ที่หายจาก `main` ถูก rebase ต่อบนงานของเจ้าของแบบ fast-forward (ไม่ force) โดยเนื้อไฟล์ต่างจากก่อน rebase แค่เลขเวอร์ชัน

@@ -988,7 +988,10 @@ fn layout_blocks(
                 y += bx.top + pl.height;
                 prev_end = y;
                 y += bx.bottom + pl.rp.space_after;
-                prev_after = if same && ctxl { 0.0 } else { pl.rp.space_after };
+                // Keep the actual trailing space: the next paragraph may suppress it when
+                // contextual spacing applies. `same` describes this paragraph and its previous
+                // sibling, not the paragraph that follows it.
+                prev_after = pl.rp.space_after;
                 prev_style = Some((pl.rp.style.clone(), ctxl));
             }
             Block::Table(t) => {
