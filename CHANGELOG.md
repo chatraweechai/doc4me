@@ -13,7 +13,7 @@
 
 ### เพิ่ม
 
-- **จับคู่ dialog ตั้งค่าเครื่องพิมพ์รุ่นเดิมกับหน้าพิมพ์ปัจจุบัน** (`docs/readiness/dialogs.tsv`, `dlg-041`): Word สมัยใหม่ใช้หน้าพิมพ์เลือกเครื่องพิมพ์และเปิดคุณสมบัติจากระบบปฏิบัติการ จึงใช้คำสั่ง `file.print` ที่มี UI ดังกล่าวเป็นตัวเทียบ ไม่เปลี่ยนพฤติกรรมโปรแกรมหรือไฟล์ .docx และคง 26 deferred rows เดิม; ตรวจด้วย `cargo test -p xtask readiness::tests`, Clippy ของ xtask และยืนยันว่า `doc4me-cli commands --json` มี `file.print`.
+- **จับคู่ dialog ตั้งค่าเครื่องพิมพ์รุ่นเดิมกับหน้าพิมพ์ปัจจุบัน** (`docs/readiness/dialogs.tsv`, `dlg-041`): Word สมัยใหม่ใช้หน้าพิมพ์เลือกเครื่องพิมพ์และเปิดคุณสมบัติจากระบบปฏิบัติการ จึงใช้คำสั่ง `file.print` ที่มี UI ดังกล่าวเป็นตัวเทียบ ไม่เปลี่ยนพฤติกรรมโปรแกรมหรือไฟล์ .docx และคง 26 deferred rows เดิม; ตรวจด้วย `cargo test -p xtask readiness::tests` (9 ผ่าน), Clippy ของ xtask และ `doc4me-cli commands --json`; Windows run 42025088010 ยืนยัน dialogs 205/220 และ readiness 89.8% รวม / 92.5% เมื่อไม่นับ deferred.
 
 - **ตัด dialog รุ่นเก่าที่ไม่มีใน Word 365 ออกจากขอบเขตการวัดโดยเก็บแถวและเหตุผลไว้ครบ** (`docs/readiness/dialogs.tsv`, `xtask/src/readiness.rs`): WordPerfect Help, Smart Tags, custom-XML authoring และ legacy HTML CSS/frameset authoring ไม่มี equivalent UI ใน target ปัจจุบัน; แถวทั้งแปดเปลี่ยนเป็น `excluded` ตามกฎ readiness (ไม่ลบแถวและไม่แตะ 26 deferred rows). เพิ่ม unit assertion ว่า excluded dialog ไม่เข้า denominator; `cargo fmt --all -- --check`, `cargo test -p xtask readiness::tests`, `cargo clippy -p xtask --all-targets -- -D warnings` ผ่าน; Windows run 42020535590 ยืนยัน 89.8% รวม / 92.4% เมื่อไม่นับ deferred, dialogs 204/220 (12 deferred).
 
