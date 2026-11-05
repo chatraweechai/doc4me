@@ -8,7 +8,7 @@ dlg-006	wdDialogConvertObject	392	IconNumber, ActivateAs, IconFileName, Caption,
 dlg-007	wdDialogCopyFile	300	FileName, Directory	file.copyFile	registry		legacy
 dlg-008	wdDialogCreateAutoText	872	(none)	insert.autoText	registry		save selection as AutoText
 dlg-009	wdDialogCreateSource	1922	(none)	references.citation	registry		Create Source
-dlg-010	wdDialogCSSLinks	1261	LinkStyles	-	registry		
+dlg-010	wdDialogCSSLinks	1261	LinkStyles		excluded		Legacy HTML authoring: Word 365 for Windows has no CSS-links dialog or equivalent UI.
 dlg-011	wdDialogDocumentInspector	1482	(none)	file.inspect	registry		Inspect Document
 dlg-012	wdDialogDocumentStatistics	78	FileName, Directory, Template, Title, Created, LastSaved, LastSavedBy, Revision, Time, Printed, Pages, Words, Characters, Paragraphs, Lines, FileSize	review.wordCount	registry		Word Count / statistics
 dlg-013	wdDialogDrawAlign	634	Horizontal, Vertical, RelativeTo	arrange.align	registry		
@@ -77,10 +77,10 @@ dlg-075	wdDialogFormatTheme	855	(none)	design.themes	registry
 dlg-076	wdDialogFormattingRestrictions	1427	(none)	review.restrict	registry		
 dlg-077	wdDialogFormFieldHelp	361	(none)	developer.formFieldHelp	registry		Form Field Help Text: status bar and F1 help (typed or an AutoText entry), on its own or from Options › Add Help Text…
 dlg-078	wdDialogFormFieldOptions	353	Entry, Exit, Name, Enable, TextType, TextWidth, TextDefault, TextFormat, CheckSize, CheckWidth, CheckDefault, Type, OwnHelp, HelpText, OwnStat, StatText, Calculate	developer.formFieldOptions	registry		Text, Check Box and Drop-Down Form Field Options (type, default, maximum length, format, size, entries, bookmark, fill-in enabled, calculate on exit)
-dlg-079	wdDialogFrameSetProperties	1074	(none)	-	registry		legacy frames page
+dlg-079	wdDialogFrameSetProperties	1074	(none)		excluded		Legacy HTML frameset authoring; no equivalent UI in Word 365 for Windows.
 dlg-080	wdDialogHelpAbout	9	APPNAME, APPCOPYRIGHT, APPUSERNAME, APPORGANIZATION, APPSERIALNUMBER	help.show	registry		F1 and File › About open the About dialog
-dlg-081	wdDialogHelpWordPerfectHelp	10	WPCommand, HelpText, DemoGuidance	-	registry		legacy
-dlg-082	wdDialogHelpWordPerfectHelpOptions	511	CommandKeyHelp, DocNavKeys, MouseSimulation, DemoGuidance, DemoSpeed, HelpType	-	registry		legacy
+dlg-081	wdDialogHelpWordPerfectHelp	10	WPCommand, HelpText, DemoGuidance		excluded		WordPerfect Help integration; Word 365 for Windows does not include WordPerfect Help.
+dlg-082	wdDialogHelpWordPerfectHelpOptions	511	CommandKeyHelp, DocNavKeys, MouseSimulation, DemoGuidance, DemoSpeed, HelpType		excluded		WordPerfect Help integration; Word 365 for Windows does not include WordPerfect Help.
 dlg-083	wdDialogHorizontalInVertical	1160	(none)	-	registry		
 dlg-084	wdDialogIMESetDefault	1094	(none)	-	registry	deferred	deferred 2026-10-27 (owner: skip until asked): the Windows IME
 dlg-085	wdDialogInsertAddCaption	402	Name	references.caption	registry		Caption › New Label
@@ -149,7 +149,7 @@ dlg-147	wdDialogOrganizer	222	(none)	styles.organizer	registry
 dlg-148	wdDialogPermission	1469	(none)		excluded		Information Rights Management (Microsoft service)
 dlg-149	wdDialogPhoneticGuide	986	(none)	format.phonetic	registry		
 dlg-150	wdDialogReviewAfmtRevisions	570	(none)	format.autoFormatReview	registry		"Formatting completed" after AutoFormat and Review Changes: Accept All, Reject All, Review Changes (Find ←/→ selects each changed paragraph, Reject puts it back); UI test dialogs_data::tests::autoformat_tab_and_review_dialog
-dlg-151	wdDialogSchemaLibrary	1417	(none)	-	registry		
+dlg-151	wdDialogSchemaLibrary	1417	(none)		excluded		Custom XML schema-library authoring was removed from Word starting with Office 2010; no equivalent current UI.
 dlg-152	wdDialogSearch	1363	(none)	file.findFiles	registry		legacy file search
 dlg-153	wdDialogShowRepairs	1381	(none)	file.showRepairs	registry		what opening a damaged .docx repaired or left out
 dlg-154	wdDialogSourceManager	1920	(none)	references.sources	registry		
@@ -213,7 +213,7 @@ dlg-211	wdDialogToolsOptionsGeneral	203	(none)	file.options	registry		General
 dlg-212	wdDialogToolsOptionsPrint	208	(none)	file.options	registry		Advanced › Print
 dlg-213	wdDialogToolsOptionsSave	209	(none)	file.options	registry		Save
 dlg-214	wdDialogToolsOptionsSecurity	1361	(none)	file.options	registry		File › Options › Trust Center: Allow Doc4Me to use online services (Online Pictures, Translate, Get Add-ins, the Dictate model download); off, Doc4Me makes no connection of its own. Word's macro/ActiveX/protected-view settings have no counterpart (Doc4Me runs no VBA or ActiveX)
-dlg-215	wdDialogToolsOptionsSmartTag	1395	(none)	-	registry		legacy
+dlg-215	wdDialogToolsOptionsSmartTag	1395	(none)		excluded		Legacy Smart Tags options; Smart Tags were removed from modern Office Word and have no current equivalent UI.
 dlg-216	wdDialogToolsOptionsSpellingAndGrammar	211	(none)	file.options	registry		Proofing
 dlg-217	wdDialogToolsOptionsTrackChanges	386	(none)	review.trackingOptions	registry		
 dlg-218	wdDialogToolsOptionsTypography	739	(none)	file.typography	registry		File › Options › Typography (`file.typography`): Character spacing control (`w:characterSpacingControl`, compress punctuation between neighbouring full-width marks) and First and last characters standard/strict/custom (`w:strictFirstAndLastChars`, `w:noLineBreaksBefore`/`After`), read, laid out and saved; tests `typography_settings_change_reopen_and_undo`, `strict_and_custom_first_and_last_characters`, `compress_punctuation_closes_up_neighbouring_marks`, UI `typography_pane_changes_the_document_settings`
@@ -232,5 +232,5 @@ dlg-230	wdDialogUpdateTOC	331	(none)	references.updateToc	registry
 dlg-231	wdDialogViewZoom	577	(none)	view.zoom	registry		
 dlg-232	wdDialogWebOptions	898	(none)	file.webOptions	registry		Options › Advanced › Web options (word/webSettings.xml read and saved)
 dlg-233	wdDialogWindowActivate	220	(none)	view.switchWindows	registry		
-dlg-234	wdDialogXMLElementAttributes	1460	(none)	-	registry		
-dlg-235	wdDialogXMLOptions	1425	(none)	-	registry		
+dlg-234	wdDialogXMLElementAttributes	1460	(none)		excluded		Custom XML markup UI was removed from Word starting with Office 2010; no equivalent current UI.
+dlg-235	wdDialogXMLOptions	1425	(none)		excluded		Custom XML markup UI was removed from Word starting with Office 2010; no equivalent current UI.
