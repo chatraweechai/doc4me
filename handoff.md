@@ -1,15 +1,15 @@
-# Handoff: Doc4Me 1.1.3 · readiness 89.3% / 91.8% เมื่อไม่นับ 26 deferred (Windows run 42017927963, วัดโค้ด `25cfb28`, รายงาน commit `b228495`, 2026-11-05) · รุ่นล่าสุดใน source คือ 1.1.3; ห้ามออก Release หรือเผยแพร่ environment จนกว่าผู้ใช้จะสั่ง
+# Handoff: Doc4Me 1.1.3 · readiness 89.8% / 92.4% เมื่อไม่นับ 26 deferred (Windows run 42020535590, วัดโค้ด `041cfbc`, รายงาน commit `b1e9eb5`, 2026-11-05) · รุ่นล่าสุดใน source คือ 1.1.3; ห้ามออก Release หรือเผยแพร่ environment จนกว่าผู้ใช้จะสั่ง
 
 อัปเดต: 2026-11-05 · สาขา `main` ของ fork `veevie55/doc4me` · รอบที่ 23 (ทำ pagination และวัด Windows readiness) · เวอร์ชัน source 1.1.3 · อ่านหัวข้อ "สถานะปัจจุบัน" ก่อน ส่วนที่อยู่ใต้ลงไปเป็นประวัติ
 
 ## สถานะปัจจุบัน (2026-11-05 รอบที่ 23: ทำ pagination ต่อ; ยังไม่ถึง 100%)
 
-### ความคืบหน้าล่าสุด — Windows run 42017927963
+### ความคืบหน้าล่าสุด — Windows run 42020535590
 
-- Run สำเร็จเมื่อ 2026-11-05 11:35 UTC, วัด source commit `25cfb28` บน Windows และ bot บันทึกรายงานเป็น `b228495`: **89.3% รวม**, **91.8% เมื่อไม่นับ 26 แถว deferred**. ยังเหลือ 8.2 จุดถึงเป้าหมาย 100% โดยไม่นับ deferred.
-- มิติ: dialogs 204/228 (12 deferred), corpus-pages 174/222, corpus-breaks 97/222, languages **64/95** (regional catalog aliases เพิ่มจาก 62), shortcuts 268/280 (7 deferred); corpus-open, round-trip, stability และ performance ผ่านครบ. รายละเอียดและรายการ fail จริงอยู่ใน [`docs/readiness.md`](docs/readiness.md).
+- Run สำเร็จเมื่อ 2026-11-05 11:54 UTC, วัด source commit `041cfbc` บน Windows และ bot บันทึกรายงานเป็น `b1e9eb5`: **89.8% รวม**, **92.4% เมื่อไม่นับ 26 แถว deferred**. ยังเหลือ 7.6 จุดถึงเป้าหมาย 100% โดยไม่นับ deferred.
+- มิติ: dialogs 204/220 (12 deferred; 8 dialog รุ่นเก่าถูก exclude พร้อมเหตุผล), corpus-pages 174/222, corpus-breaks 97/222, languages 64/95, shortcuts 268/280 (7 deferred); corpus-open, round-trip, stability และ performance ผ่านครบ. รายละเอียดและรายการ fail จริงอยู่ใน [`docs/readiness.md`](docs/readiness.md).
 - `de3a06e` แก้การยุบ trailing paragraph spacing เมื่อ contextual spacing ใช้ใน table cell; regression test ผ่าน และ full `cargo xtask ci` ผ่านหลังตั้ง ALSA pkg-config path. Linux full-corpus diagnostic: pages 163/222, breaks 82/222 (ไม่ใช้แทน Windows baseline). Windows ได้ pages 174/222, breaks 97/222.
-- งานต่อ: pagination ยังคงเป็นตัวบล็อกที่ใหญ่สุด (48 page-count failures, 125 page-boundary failures); 31 ภาษาไม่มี catalog ที่ผ่าน 95%; dialog และ shortcut ที่ยัง fail ต้องแก้ด้วยพฤติกรรมจริงหรือแสดงหลักฐานว่าไม่อยู่ในขอบเขต Word 365. มีการเตรียมยกเว้น 8 dialog รุ่นเก่าที่ไม่มี equivalent UI โดยเก็บแถวและเหตุผลไว้ครบ; ต้องวัด Windows หลัง commit นี้. รัน Windows readiness หลังโค้ดแต่ละรอบ และใช้รายงานที่ครบคลังเท่านั้น. **ห้ามแก้/ลด/เปลี่ยน 26 deferred rows และห้ามออก release/publish.**
+- งานต่อ: pagination ยังคงเป็นตัวบล็อกที่ใหญ่สุด (48 page-count failures, 125 page-boundary failures); 31 ภาษาไม่มี catalog ที่ผ่าน 95%; ยังมี dialog 4 แถวและ shortcut 5 แถวที่ไม่ deferred. Windows run นี้ยืนยันการ exclude dialog รุ่นเก่า 8 แถวที่ไม่มี equivalent UI ใน Word 365 โดยเก็บแถวและเหตุผลไว้ครบ; 26 deferred rows คงเดิม. ใช้รายงานที่ครบคลังเท่านั้น. **ห้ามแก้/ลด/เปลี่ยน 26 deferred rows และห้ามออก release/publish.**
 
 ## สถานะเดิมและบันทึกการทำงาน
 

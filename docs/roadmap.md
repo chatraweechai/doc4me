@@ -1,6 +1,6 @@
 # Doc4Me roadmap: milestones and what's next
 
-> **Last reviewed:** 2026-11-05 · **Last updated:** 2026-11-05 · **Change:** minor (Windows run 42017927963: readiness 89.3% / 91.8% without deferred; page counts 174/222, page-boundary checks 97/222, languages 64/95) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
+> **Last reviewed:** 2026-11-05 · **Last updated:** 2026-11-05 · **Change:** minor (Windows run 42020535590: readiness 89.8% / 92.4% without deferred; page counts 174/222, page-boundary checks 97/222, languages 64/95, dialogs 204/220 after excluding 8 obsolete rows) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
 
 Forward-looking plan. The summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is
 [`gaps.md`](gaps.md); the numbers are in [`target-app-parity.md`](target-app-parity.md). Hours are
@@ -71,10 +71,10 @@ partial rows are fidelity gaps (beta work), not broken workflows. Doc4Me stays *
 
 The readiness number in [`ROADMAP.md`](../ROADMAP.md) was an estimate (~60%): a weighted sum of
 estimated dimension parities. Since stage B it is measured: **66.1%** at first, **73.4%** in the
-2026-10-25 report, and **89.3%** measured on Windows on 2026-11-05 (run 42017927963, dialogs
-204/228, 174/222 page counts, 97/222 page-boundary checks, 64/95 languages; `readiness.md`, all
-222 corpus documents; DOCX open and round-trip 222/222), 10.7 points short of 100% overall. The
-current score excluding 26 deferred owner-bound checks is 91.8%, 8.2 points short.
+2026-10-25 report, and **89.8%** measured on Windows on 2026-11-05 (run 42020535590, dialogs
+204/220 in scope, 174/222 page counts, 97/222 page-boundary checks, 64/95 languages; `readiness.md`,
+all 222 corpus documents; DOCX open and round-trip 222/222), 10.2 points short of 100% overall.
+The current score excluding 26 deferred owner-bound checks is 92.4%, 7.6 points short.
 The target is **100% ready for real work, measured**
 (raised from 80% to 95% by the owner on 2026-10-25, and to 100% on 2026-10-27): every dimension
 comes from a fixed pass/fail check set, and one command computes the number. Checks may be added,
@@ -111,7 +111,7 @@ replaces ~60% in `ROADMAP.md`, `target-app-parity.md` and `gaps.md`).
 **C. Fix what the checks fail**, highest weight per hour first, until `cargo xtask readiness`
 reports 100.0% on the latest commit: every row of every check set passing. The 2026-11-05
 measurement passes stability (222/222 corpus; 5/5 hand checks) and performance (6/6); the largest
-remaining areas are pagination (61.0%), dialog checks (204/228), and localization (64/95). The
+remaining areas are pagination (61.0%), dialog checks (204/220), and localization (64/95). The
 corpus now matches Word's page count for 174/222 documents and page boundaries for 97/222. Recent
 work fixed contextual trailing spacing between paragraphs in table cells; the Windows result moved
 from 172 to 174 page-count passes, while boundary passes remain 97.
@@ -139,6 +139,7 @@ languages, screen-reader access.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-11-05 | minor | Windows run 42020535590: 89.8% total / 92.4% without 26 deferred; eight legacy dialogs excluded with reasons; dialogs 204/220, pagination 174/222 pages and 97/222 boundary checks, languages 64/95. |
 | 2026-11-05 | minor | Windows run 42017927963: 89.3% total / 91.8% without deferred; languages 64/95 (Catalan Valencia and Serbian Cyrillic Bosnia alias existing complete catalogs); pagination 174/222 pages and 97/222 boundary checks. |
 | 2026-11-05 | minor | Windows readiness run 42012615601: 89.2% total / 91.7% without 26 deferred rows; pagination 174/222 page counts and 97/222 page-boundary checks; dialogs 204/228; languages 62/95. Contextual spacing between paragraphs in table cells fixed and tested. |
 | 2026-11-02 | minor | Hidden table rows and `w:hideMark` kept and laid out as in Word (govuk-066 6 pages like Word); a page break ending a section's last paragraph leaves no blank page (zenodo-029, zenodo-140); Linux corpus 171/222 page counts, 91/222 page breaks |
