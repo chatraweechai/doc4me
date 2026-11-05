@@ -13,6 +13,8 @@
 
 ### เพิ่ม
 
+- **จับคู่ dialog ตั้งค่าเครื่องพิมพ์รุ่นเดิมกับหน้าพิมพ์ปัจจุบัน** (`docs/readiness/dialogs.tsv`, `dlg-041`): Word สมัยใหม่ใช้หน้าพิมพ์เลือกเครื่องพิมพ์และเปิดคุณสมบัติจากระบบปฏิบัติการ จึงใช้คำสั่ง `file.print` ที่มี UI ดังกล่าวเป็นตัวเทียบ ไม่เปลี่ยนพฤติกรรมโปรแกรมหรือไฟล์ .docx และคง 26 deferred rows เดิม; ตรวจด้วย `cargo test -p xtask readiness::tests`, Clippy ของ xtask และยืนยันว่า `doc4me-cli commands --json` มี `file.print`.
+
 - **ตัด dialog รุ่นเก่าที่ไม่มีใน Word 365 ออกจากขอบเขตการวัดโดยเก็บแถวและเหตุผลไว้ครบ** (`docs/readiness/dialogs.tsv`, `xtask/src/readiness.rs`): WordPerfect Help, Smart Tags, custom-XML authoring และ legacy HTML CSS/frameset authoring ไม่มี equivalent UI ใน target ปัจจุบัน; แถวทั้งแปดเปลี่ยนเป็น `excluded` ตามกฎ readiness (ไม่ลบแถวและไม่แตะ 26 deferred rows). เพิ่ม unit assertion ว่า excluded dialog ไม่เข้า denominator; `cargo fmt --all -- --check`, `cargo test -p xtask readiness::tests`, `cargo clippy -p xtask --all-targets -- -D warnings` ผ่าน; Windows run 42020535590 ยืนยัน 89.8% รวม / 92.4% เมื่อไม่นับ deferred, dialogs 204/220 (12 deferred).
 
 - **ผูกภาษาระดับภูมิภาคเข้ากับแค็ตตาล็อกที่รองรับแล้ว** (`docs/readiness/languages.tsv`, `crates/ui-egui/src/i18n/{mod.rs,tests.rs}`): Catalan (Valencia) ใช้แค็ตตาล็อก Catalan และ Serbian Cyrillic (Bosnia & Herzegovina) ใช้ Serbian Cyrillic; locale fallback เดิมรองรับทั้งสอง tag อยู่แล้ว. เพิ่มการทดสอบ `ca-ES-valencia` และ `sr-Cyrl-BA`; coverage ของ catalog ทั้งคู่ 100% โดยไม่สร้างคำแปลซ้ำ. ตรวจด้วย i18n tests และ full `cargo xtask ci` (fmt, clippy, workspace tests, assets, layers, wasm) ผ่าน; Windows run 42017927963 เพิ่มภาษา 62 → 64/95 และ readiness 89.2% → 89.3% (91.7% → 91.8% เมื่อไม่นับ deferred).
