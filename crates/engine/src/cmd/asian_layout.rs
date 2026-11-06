@@ -12,6 +12,8 @@ pub fn specs() -> Vec<CommandSpec> {
         CommandSpec::new("format.fitText", "Fit Text", "Home › Paragraph › Asian Layout", fit_text).params(r#"{"width": number | null}"#),
         CommandSpec::new("format.twoLinesInOne", "Two Lines in One", "Home › Paragraph › Asian Layout", two_lines_in_one)
             .params(r#"{"value": bool, "brackets"?: "none|round|square|angle|curly"}"#),
+        CommandSpec::new("format.horizontalInVertical", "Horizontal", "Home › Paragraph › Asian Layout", horizontal_in_vertical)
+            .params(r#"{"value": bool}"#),
     ]
 }
 
@@ -38,6 +40,7 @@ pub fn state(s: &Session) -> Value {
     json!({
         "fitText": fit,
         "twoLinesInOne": ea.combine,
+        "horizontalInVertical": ea.vert,
         "brackets": ea.brackets.ooxml(),
         "selected": a != b,
     })
@@ -87,6 +90,20 @@ fn two_lines_in_one(s: &mut Session, v: &Value) -> CmdResult {
         let mut l = c.east_asian.unwrap_or_default();
         l.combine = on;
         l.brackets = if on { brackets } else { CombineBrackets::None };
+        c.east_asian = (l != EastAsianLayout::default()).then_some(l);
+    })?;
+    sel_result(s)
+}
+
+/// Stores Word's `w:vert` formatting on the selected characters, independently of Two Lines in One.
+fn horizontal_in_vertical(s: &mut Session, v: &Value) -> CmdResult {
+    let Some(on) = p::bool(v, "value") else {
+        return Err(CmdError::Params("`value` (true or false) is required".into()));
+    };
+    let (a, b) = selected(s)?;
+    s.doc.format_range(&a, &b, &|c| {
+        let mut l = c.east_asian.unwrap_or_default();
+        l.vert = on;
         c.east_asian = (l != EastAsianLayout::default()).then_some(l);
     })?;
     sel_result(s)
@@ -165,5 +182,22 @@ mod tests {
         s.run("format.twoLinesInOne", &json!({"value": true})).unwrap();
         s.run("format.twoLinesInOne", &json!({"value": false})).unwrap();
         assert!(props_of(&s, "株式会社").east_asian.is_none());
+    }
+
+    #[test]
+    fn horizontal_in_vertical_formats_selection_and_preserves_other_asian_layout() {
+        let mut s = session("a 株式会社 b");
+        assert!(s.run("format.horizontalInVertical", &json!({"value": true})).is_err(), "nothing selected");
+        s.run("select.text", &json!({"text": "株式会社"})).unwrap();
+        s.run("format.twoLinesInOne", &json!({"value": true, "brackets": "round"})).unwrap();
+        s.run("format.horizontalInVertical", &json!({"value": true})).unwrap();
+        let l = props_of(&s, "株式会社").east_asian.unwrap();
+        assert!(l.vert && l.combine);
+        assert_eq!(l.brackets, CombineBrackets::Round);
+        assert_eq!(super::state(&s)["horizontalInVertical"], json!(true));
+        s.run("format.horizontalInVertical", &json!({"value": false})).unwrap();
+        let l = props_of(&s, "株式会社").east_asian.unwrap();
+        assert!(!l.vert && l.combine, "turning this off preserves Two Lines in One");
+        assert!(s.run("format.horizontalInVertical", &json!({"value": "yes"})).is_err());
     }
 }

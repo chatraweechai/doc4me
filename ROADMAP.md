@@ -1,8 +1,8 @@
 # Doc4Me roadmap
 
-**Stage: alpha** · ready for real work **87.7%, measured on Windows** ([`docs/readiness.md`](docs/readiness.md), full 222-document corpus, Windows run 41608625168, 2026-11-03, confirming run 41596836985; 87.6%, 87.5%, 87.3%, 87.2%, 87.1%, 87.0%, 86.9%, 86.8% and 86.7% earlier that day; 86.0% on 2026-11-01; the 26 deferred rows and their reasons are listed in readiness.md); the target is 100% measured (raised from 95% by the owner, 2026-10-27), 12.3 points away · 90.3% without 26 deferred owner-bound checks · next: beta, the blocking gaps #1–#7, ~150–230 h away
+**Stage: alpha** · ready for real work **89.8%, measured on Windows** ([`docs/readiness.md`](docs/readiness.md), full 222-document corpus, Windows run 42025088010 on 2026-11-05, measuring commit `bb15416`; report commit `aa1310d`; 26 deferred rows and their reasons are listed in readiness.md); the target is 100% measured, 10.2 points away · **92.5% without 26 deferred owner-bound checks**, 7.5 points away · next: continue pagination, localization and genuine dialog/shortcut coverage; no release until the owner asks
 
-> **Last reviewed:** 2026-11-02 · **Last updated:** 2026-11-03 · **Change:** minor (Doc4Me v1.0.0, v1.1.0, v1.1.1 and v1.1.2 released on the fork [`veevie55/doc4me`](https://github.com/veevie55/doc4me/releases), v1.1.2 the latest, after Actions of `chatraweechai/doc4me` stopped over a billing lock; since the 2026-11-01 measurement, not yet remeasured on Windows: text boxes use their own margins (`lIns`…), floating-object anchors no longer make lines taller, an empty paragraph ending a section no longer makes a blank page, nor does a page break before one or a page break ending a section's last paragraph, hidden table rows (`w:trPr/w:hidden`) take no room and an empty end-of-cell paragraph with `w:hideMark` doesn't count towards the row height (both now kept when saving), rows keep `w:wBefore`/`w:wAfter`, and Review › Chinese Conversion maps `dlg-174` (dialogs 188/228 by the registry); on Linux the same comparator moved page counts 160 → 171 and page breaks 82 → 91 with no document worse; readiness stays 86.0% until `docs/readiness.md` is regenerated) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
+> **Last reviewed:** 2026-11-05 · **Last updated:** 2026-11-05 · **Change:** minor (Windows readiness run 42025088010: 89.8% total / 92.5% without deferred; dlg-041 mapped to File › Print; pagination 174/222 page counts and 97/222 page-boundary checks; localization 64/95; 8 obsolete dialogs excluded with reasons; see [`docs/readiness.md`](docs/readiness.md)) · **Target:** Microsoft Word (Microsoft 365) for Windows (readiness measured on Windows with Word-made PDF references; direct UI parity has not yet been remeasured in Word for Windows)
 
 Doc4Me aims for complete parity with Microsoft Word, then goes further on speed, openness and
 agent control. This page is the summary; the assessment is
@@ -10,13 +10,13 @@ agent control. This page is the summary; the assessment is
 [`docs/gaps.md`](docs/gaps.md), and milestones and the current focus are in
 [`docs/roadmap.md`](docs/roadmap.md).
 
-## Headline numbers (2026-11-01)
+## Headline numbers (2026-11-05)
 
 | Number | Value | Kind |
 |---|---|---|
 | Ribbon/menu catalog coverage | **499 / 499 (100%)** | measured (`cargo xtask parity` → [`docs/parity-checklist.md`](docs/parity-checklist.md)) |
 | **Feature breadth** (weighted, incl. dialog options, styles, languages beyond the ribbon) | **~80%** | estimated |
-| **Ready for real work** (full target) | **87.7%** | measured 2026-11-03 on Windows (run 41608625168: features 94.7%, dialogs 204/228; 86.0% on 2026-11-01): `cargo xtask readiness --corpus` → [`docs/readiness.md`](docs/readiness.md), fixed pass/fail check sets and all 222 real-world documents with Word-made reference PDFs; 90.3% excluding 26 deferred rows; replaces the stale 73.4% report |
+| **Ready for real work** (full target) | **89.8%** | measured 2026-11-05 on Windows (run 42025088010: features 96.6%, dialogs 205/220, pages 174/222, page breaks 97/222, languages 64/95): `cargo xtask readiness --corpus` → [`docs/readiness.md`](docs/readiness.md), fixed pass/fail checks and all 222 real-world documents with Word-made reference PDFs; 92.5% excluding 26 deferred rows |
 | **Mainstream practitioner** | **~55%** | estimated: weekly-work depth × discounts for interaction (×0.93), stability (×0.90), file exchange (×0.90) |
 | **Essentials user** | **~63%** | estimated: core-feature depth × discounts for launch (×0.90), discoverability (×0.95), opening received files (×0.92) |
 | Remaining to **beta** | **~150–230 h** of Opus 5.5 agent wall-clock (gaps #1–#7) | estimated |
@@ -35,13 +35,13 @@ discounts and the user evidence (120 issues from outside users, 4 praise, 0 "swi
 
 | Audience | Ready | Opus 5.5 agent wall-clock hours to ~95% | Work that dominates |
 |---|---|---|---|
-| Full target (ready for real work) | **87.7%** (measured on Windows) | **~650–1,100 h** (70–80% parallelizes; estimate unchanged) | Pagination and document fidelity, missing dialogs, 65 unsupported interface languages, and owner-deferred hardware/platform/service checks; plus everything below |
+| Full target (ready for real work) | **89.8%** (measured on Windows) | **~650–1,100 h** (70–80% parallelizes; estimate unchanged) | Pagination and document fidelity, four current dialog gaps, 31 unsupported interface languages, and owner-deferred hardware/platform/service checks; plus everything below |
 | Mainstream practitioner | **~55%** | **~300–500 h** (~65% parallelizes) | DOCX real-world fidelity and preserving charts/SmartArt, pagination fidelity, formatting revisions, dialog depth, objects, stability |
 | Essentials user | **~63%** | **~90–140 h** (~50% parallelizes) | Install/launch stability, opening files people send (corpus subset, chart fallbacks), native printing, picture handling, English spelling depth |
 
 **Why alpha:** the core workflows (write, format, styles, lists, tables, references, review, mail
 merge, open and save .docx) work end to end and ship as an unsigned Windows x64 MSI and portable
-zip (CI signs once the owner adds a certificate; no other platform is packaged yet). **Why not beta:** all 222 corpus documents open, remain stable and preserve their measured structure through save and reopen. Pagination matches Word's page count on 162 documents and the first/last word on every page on 87; 65 of 95 interface-language checks, 41 dialog checks and several shortcut checks do not pass. Printing remains non-native. Gaps #1–#7 in [`docs/gaps.md`](docs/gaps.md)
+zip (CI signs once the owner adds a certificate; no other platform is packaged yet). **Why not beta:** all 222 corpus documents open, remain stable and preserve their measured structure through save and reopen. Pagination matches Word's page count on 174 documents and the first/last word on every page on 97; 31 of 95 interface-language checks, 12 dialog checks (including 12 deferred) and several shortcut checks do not pass. Printing remains non-native. Gaps #1–#7 in [`docs/gaps.md`](docs/gaps.md)
 are the beta list. All six core workflows pass the
 [alpha gate](docs/roadmap.md#alpha-gate-core-workflows) end to end on macOS (checked in WordCraft, not re-run on Windows yet), with save and reopen;
 the two partial ones (real-world .docx, printing) complete, roughly.
@@ -54,12 +54,12 @@ one, checks that real-world documents open and keep their text and make-up, not 
 
 | Dimension | Parity | Measured | Hours to full | Doc |
 |---|---|---|---|---|
-| Features (depth) | 68% | 91.0% (ribbon 499/499, dialogs 187/228; 12 deferred) | 210–335 | [target-app-parity.md](docs/target-app-parity.md#feature-areas) |
+| Features (depth) | 68% | 96.6% (ribbon 499/499, dialogs 205/220; 12 deferred, 8 obsolete excluded) | 210–335 | [target-app-parity.md](docs/target-app-parity.md#feature-areas) |
 | UI/UX fidelity | 65% | 95.7% (shortcuts 268/280; 7 deferred) | 65–100 | [ui-parity.md](docs/ui-parity.md) · [typing-parity.md](docs/typing-parity.md) |
 | File formats | 60% | 100.0% (open 222/222, save and reopen 222/222) | 185–300 | [file-format-parity.md](docs/file-format-parity.md) |
-| Layout and pagination fidelity | 55% | 56.1% (page count 162/222, page breaks 87/222) | 90–145 | [layout-parity.md](docs/layout-parity.md) |
+| Layout and pagination fidelity | 55% | 61.0% (page count 174/222, page breaks 97/222) | 90–145 | [layout-parity.md](docs/layout-parity.md) |
 | Hardware | 40% | 37.5% (3/8; 5 owner-deferred) | 20–40 | [hardware-parity.md](docs/hardware-parity.md) |
-| Localization | 27% | 31.6% (30/95 languages ≥ 95% translated) | 75–120 + native review | [localization-parity.md](docs/localization-parity.md) |
+| Localization | 27% | 67.4% (64/95 languages ≥ 95% translated) | 75–120 + native review | [localization-parity.md](docs/localization-parity.md) |
 | Performance | 75% | 100.0% (6/6) | 10–20 | [layout-parity.md](docs/layout-parity.md#performance) |
 | Stability | 50% | 100.0% (corpus 222/222; hand checks 5/5) | 25–45 | [gaps.md](docs/gaps.md) (#3) |
 | Platforms | 95% (beyond Word on Linux, BSD, web) | 80.0% (4/5; Windows arm64 deferred) | 5–10 | this page |
@@ -122,7 +122,7 @@ Proofing: English and Polish (spelling, grammar, hyphenation), chosen per run fr
 
 Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadmap.md)):
 
-0. Raise measured readiness from 86.0% (66.1% at first; 73.4% in the stale 2026-10-25 report) to 100% without the 26 deferred rows: the current run passes 162/222 page counts and 87/222 page-boundary checks, 187/228 dialogs (12 deferred), and 30/95 languages. Prioritize pagination, then dialogs and genuine interface translations; keep all deferred rows owner-bound unless the owner supplies evidence or asks to test them
+0. Raise measured readiness to 100% without changing the 26 deferred rows: Windows run 42025088010 passes 174/222 page counts and 97/222 page-boundary checks, 205/220 in-scope dialogs (12 deferred; 8 legacy rows excluded), and 64/95 languages. Prioritize pagination and genuine interface translations; address dialogs and shortcuts only with real behavior and tests
    ([results](docs/readiness.md),
    [plan](docs/roadmap.md#path-to-100-measured-readiness)).
 1. Keep following WordCraft, upstream: its ~45 open PRs close gaps and are taken over as they
@@ -132,8 +132,8 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 3. Preserve Word ink (`w14:contentPart`) through a round trip (2–4 h); charts, SmartArt and OLE
    objects already round-trip with all their parts.
 4. Stability sweep of the open crash, hang and write-failure issues; autosave soak test (20–30 h).
-5. Pagination fidelity: Word's page count on 162 of 222 corpus documents and every page's first
-   and last word on 87; `w:gridBefore`/`w:gridAfter` now preserve omitted table columns in govuk-009,
+5. Pagination fidelity: Word's page count on 174 of 222 corpus documents and every page's first
+   and last word on 97; `w:gridBefore`/`w:gridAfter` now preserve omitted table columns in govuk-009,
    while zero-size Word frame markers remain in page flow (zenodo-030 improved from 16 to 34 pages
    but still differs from Word's 32); compat options, floating tables and
    pictures remain (30–50 h).
@@ -144,6 +144,10 @@ Ranked, to beta (detail and remaining milestones in [docs/roadmap.md](docs/roadm
 
 | Date | What landed |
 |---|---|
+| 2026-11-05 | Windows run 42025088010 measured `bb15416`: 89.8% total / 92.5% without 26 deferred rows; `dlg-041` mapped to `file.print`, dialogs 205/220. Pagination 174/222 page counts and 97/222 boundaries; languages 64/95. |
+| 2026-11-05 | Windows run 42020535590 measured `041cfbc`: 89.8% total / 92.4% excluding 26 deferred rows; dialogs 204/220 after eight obsolete WordPerfect Help, Smart Tags, custom XML and legacy HTML authoring rows were excluded with reasons. Pagination 174/222 page counts and 97/222 boundaries; languages 64/95. |
+| 2026-11-05 | Windows run 42017927963 measured `25cfb28`: readiness 89.3% total / 91.8% excluding 26 deferred rows, languages 64/95 after recognizing Catalan (Valencia) and Serbian Cyrillic (Bosnia & Herzegovina) as locales of complete catalogs; pagination stayed at 174/222 page counts and 97/222 page boundaries. |
+| 2026-11-05 | Windows readiness run 42012615601 completed on all 222 documents: 89.2% total and 91.7% excluding 26 deferred rows; page counts 174/222, page boundaries 97/222, dialogs 204/228, languages 62/95. `de3a06e` fixed contextual spacing between paragraphs in table cells (Linux corpus 163 pages, 82 boundary checks); no release was made. |
 | 2026-11-02 | Tables keep `w:trPr/w:hidden` and `w:hideMark` when saving (both were dropped, so Word showed a form's hidden rows after a Doc4Me save); a row whose end-of-row mark and content are all hidden text takes no room, and an empty end-of-cell paragraph in a `hideMark` cell doesn't count towards the row height: govuk-066 now has Word's 6 pages instead of 9. A page break ending a section's last paragraph no longer leaves a blank page, and a page-break line holding only floating objects stays at the foot of the page: zenodo-029 and zenodo-140 now have Word's page count. Linux corpus, same machine: page counts 168 → 171, page breaks 90 → 91, none worse. zenodo-023's last page differs only because its DOCX (a 2026 conversion) and its Word PDF (2022) are different versions. |
 | 2026-11-02 | Released Doc4Me v1.0.0, v1.1.0 and v1.1.1 again from their own commits, then v1.1.2 (the latest), on the fork `veevie55/doc4me`: Actions of `chatraweechai/doc4me` stopped because its account is locked over billing (runs 41430786475, 41430819045, 41430823465, 41433220035; MSI and portable zip each). A page break ending the paragraph before an empty paragraph that only ends its section no longer leaves a blank page when the next section starts on a new page: zenodo-160 and zenodo-169 now have Word's page count, and on Linux the corpus moved from 166 to 168 page counts and from 89 to 90 page breaks, none worse. |
 | 2026-11-01 | Mapped three classic toolbar/menu dialogs to the tested Word 365 replacement, Customize Ribbon; dialogs 187/228 and readiness 86.0% (89.2% without 26 deferred). Verified by `customize_ribbon_opens_and_the_layout_persists` and the full 222-document readiness corpus; commit `3f9b4f3`, report refreshed in `4a7e28d`. |

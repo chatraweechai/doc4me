@@ -717,6 +717,9 @@ fn home(app: &mut WordApp, ui: &mut Ui) {
                 small(ui, app, "distribute", None, "Distributed", "para.distribute", json!({}), align == A::Distribute);
                 small(ui, app, "thaiDistribute", None, "Thai Distributed", "para.thaiDistribute", json!({}), align == A::ThaiDistribute);
                 menu_button(ui, app, "asianLayout", None, "Asian Layout", false, "", |ui, app| {
+                    let asian = doc4me_engine::cmd::asian_layout::state(&app.session);
+                    let vertical = asian["horizontalInVertical"].as_bool().unwrap_or(false);
+                    mi_check(ui, app, "Horizontal", vertical, "format.horizontalInVertical", json!({"value": !vertical}));
                     mi(ui, app, "Two Lines in One…", "format.twoLinesInOne", json!({}));
                     mi(ui, app, "Fit Text…", "format.fitText", json!({}));
                 });

@@ -973,6 +973,13 @@ mod tests {
         );
         assert_eq!((d.passed, d.total, d.deferred), (1, 2, 1));
         assert!(d.failing.iter().any(|(id, why)| id == "d2" && why.starts_with("deferred: Mail: Outlook")));
+        let dialogs_out_of_scope = dialogs(
+            &parse_tsv(
+                "id\tword_dialog\tcommand\tcheck\tstatus\tnote\nd1\tNew\tinsert.table\tregistry\t\t\nd2\tLegacy\t-\texcluded\t\tobsolete UI\n",
+            ),
+            &registry(),
+        );
+        assert_eq!((dialogs_out_of_scope.passed, dialogs_out_of_scope.total), (1, 1));
         let md = render(&sets, 3, 5, "abc", "2026-10-27");
         assert!(md.contains("**Without the deferred rows: ") && md.contains("hardware 1/4 (2 deferred)"), "{md}");
         // Every deferred row is listed with its reason, not only the first 40 of a set.

@@ -100,7 +100,7 @@ pub static LANGUAGES: [LangInfo; 61] = [
         catalog: OnceLock::new(),
     },
     // Serbian, Cyrillic script (the default per BCP 47 when no script is given); `sr`, `sr-RS`,
-    // `sr-Cyrl-*` resolve here.
+    // `sr-Cyrl-*` (including Bosnia & Herzegovina) resolve here.
     LangInfo { code: "sr", name: "Српски", source: include_str!("sr.tsv"), prefer_hans: false, editing_lang: None, catalog: OnceLock::new() },
     // Serbian, Latin script; `sr-Latn-*` resolves here (see `candidates`'s generic prefix
     // matching — no special-casing needed, unlike Chinese's script-by-region fallback).

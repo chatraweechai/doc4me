@@ -274,6 +274,10 @@ pub enum Dialog {
         /// The selection already is two lines in one (Remove is offered).
         existing: bool,
     },
+    /// Home › Paragraph › Asian Layout: Horizontal in Vertical (`format.horizontalInVertical`).
+    HorizontalInVertical {
+        value: bool,
+    },
     NewStyle {
         name: String,
         based_on: String,
@@ -899,6 +903,7 @@ impl Dialog {
             Dialog::Phonetic { .. } => "phonetic",
             Dialog::FitText { .. } => "fitText",
             Dialog::TwoLinesInOne { .. } => "twoLinesInOne",
+            Dialog::HorizontalInVertical { .. } => "horizontalInVertical",
             Dialog::NewStyle { .. } => "newStyle",
             Dialog::ModifyStyle { .. } => "modifyStyle",
             Dialog::ManageStyles { .. } => "manageStyles",
@@ -1159,6 +1164,10 @@ impl Dialog {
                 let brackets = v.get("brackets").and_then(Value::as_str).unwrap_or("none").to_string();
                 Dialog::TwoLinesInOne { on: true, brackets, existing }
             }
+            "horizontalInVertical" => {
+                let v = doc4me_engine::cmd::asian_layout::state(&app.session);
+                Dialog::HorizontalInVertical { value: v.get("horizontalInVertical").and_then(Value::as_bool).unwrap_or(false) }
+            }
             "newStyle" => Dialog::NewStyle { name: "Style1".into(), based_on: "Normal".into(), back: false },
             "manageStyles" => Dialog::ManageStyles { alphabetical: false, selected: s("style") },
             "newTableStyle" => {
@@ -1405,6 +1414,7 @@ pub fn show(app: &mut WordApp, ctx: &egui::Context) {
         Dialog::Watermark { .. } => "Custom Watermark",
         Dialog::Phonetic { .. } => "Phonetic Guide",
         Dialog::FitText { .. } => "Fit Text",
+        Dialog::HorizontalInVertical { .. } => "Horizontal",
         Dialog::TwoLinesInOne { .. } => "Two Lines in One",
         Dialog::NewStyle { .. } => "Create New Style",
         Dialog::ModifyStyle { .. } => "Modify Style",
@@ -2408,6 +2418,14 @@ fn body(app: &mut WordApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 let _ = app.run("format.fitText", json!({"width": *width}));
             }
             ok || cancel || remove
+        }
+        Dialog::HorizontalInVertical { value } => {
+            ui.checkbox(value, tl!("Horizontal"));
+            let (ok, cancel) = buttons(ui, tl!("OK"));
+            if ok {
+                let _ = app.run("format.horizontalInVertical", json!({"value": *value}));
+            }
+            ok || cancel
         }
         Dialog::TwoLinesInOne { on, brackets, existing } => {
             const PAIRS: [(&str, &str); 4] = [("round", "( )"), ("square", "[ ]"), ("angle", "< >"), ("curly", "{ }")];

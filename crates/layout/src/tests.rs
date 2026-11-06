@@ -2607,6 +2607,38 @@ fn list_items_are_counted_once_when_laid_out_again() {
 }
 
 #[test]
+fn contextual_spacing_suppresses_trailing_space_between_cell_paragraphs() {
+    use doc4me_doc::props::LineSpacing;
+
+    let caret_gap = |contextual| {
+        let props = ParaProps {
+            line_spacing: Some(LineSpacing::Exactly(12.0)),
+            space_after: Some(8.0),
+            contextual_spacing: Some(contextual),
+            ..Default::default()
+        };
+        let mut table = Table::new(1, 1, 200.0);
+        table.rows[0].cells[0].blocks = ["first", "second"]
+            .into_iter()
+            .map(|text| {
+                let mut p = doc4me_doc::Paragraph::with_text(text, Default::default());
+                p.props = props.clone();
+                doc4me_doc::para_block(p)
+            })
+            .collect();
+        let mut d = Document::new();
+        d.body = vec![std::sync::Arc::new(Block::Table(table))];
+        let l = lay(&d);
+        let pos = |block| Pos { story: StoryRef::Body, path: Path(vec![0, 0, 0, block]), off: 0 };
+        l.caret(&pos(1)).unwrap().top - l.caret(&pos(0)).unwrap().top
+    };
+
+    let with_context = caret_gap(true);
+    let without_context = caret_gap(false);
+    assert!((without_context - with_context - 8.0).abs() < 0.5, "contextual {with_context}, ordinary {without_context}");
+}
+
+#[test]
 fn list_items_beside_a_float_in_a_cell_are_counted_once() {
     use doc4me_doc::para::{Anchor, Float, Wrap};
     let mut d = Document::from_text("Body.");

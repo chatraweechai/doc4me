@@ -639,6 +639,11 @@ impl WordApp {
     /// Close, Envelopes, Labels and Finish & Merge on a document with unsaved changes first ask
     /// Save / Don't Save / Cancel, and the command runs once that is answered (`ui.saveChanges`).
     pub fn run(&mut self, id: &str, params: Value) -> Result<Value, String> {
+        // Insert › Text from File asks for a document when the user hasn't supplied a path.
+        if id == "insert.textFromFile" && params.get("path").is_none() && widgets::enabled(self, id) {
+            self.pick_text_from_file();
+            return Ok(json!({"pending": "insertTextFromFile"}));
+        }
         // 3D Models without a file picks one first (no undo step for asking).
         if id == "insert.model3d" && params.get("path").is_none() && params.get("data").is_none() && widgets::enabled(self, id) {
             self.pick_model3d();
@@ -1854,6 +1859,7 @@ fn input_dialog(id: &str, params: &Value) -> Option<&'static str> {
         // Asian Layout: Fit Text without a width, Two Lines in One without on or off.
         "format.fitText" if params.get("width").is_none() => Some("fitText"),
         "format.twoLinesInOne" if !has("value") => Some("twoLinesInOne"),
+        "format.horizontalInVertical" if !has("value") => Some("horizontalInVertical"),
         // Footnote and Endnote without settings shows its dialog (#385).
         "references.noteOptions" if params.as_object().is_none_or(|m| m.is_empty()) => Some("noteOptions"),
         // References dialogs (#402): Insert Caption, Insert Index, Mark Entry, Manage Sources and
@@ -2102,13 +2108,20 @@ mod tests {
         assert_eq!((width, existing), (60.0, true));
         a.dialog = None;
         a.run("format.twoLinesInOne", json!({})).unwrap();
-        let Some(dialogs::Dialog::TwoLinesInOne { on, brackets, existing }) = a.dialog.clone() else { panic!("no dialog") };
+        let Some(dialogs::Dialog::TwoLinesInOne { on, brackets, existing, .. }) = a.dialog.clone() else { panic!("no dialog") };
         assert_eq!((on, brackets.as_str(), existing), (true, "none", false));
         a.dialog = None;
         a.run("format.twoLinesInOne", json!({"value": true, "brackets": "square"})).unwrap();
         a.run("format.twoLinesInOne", json!({})).unwrap();
         let Some(dialogs::Dialog::TwoLinesInOne { brackets, existing, .. }) = a.dialog.clone() else { panic!("no dialog") };
         assert_eq!((brackets.as_str(), existing), ("square", true));
+        a.dialog = None;
+        a.run("format.horizontalInVertical", json!({})).unwrap();
+        let Some(dialogs::Dialog::HorizontalInVertical { value }) = a.dialog.clone() else { panic!("no Horizontal in Vertical dialog") };
+        assert!(!value);
+        a.dialog = None;
+        a.run("format.horizontalInVertical", json!({"value": true})).unwrap();
+        assert_eq!(doc4me_engine::cmd::asian_layout::state(&a.session)["horizontalInVertical"], json!(true));
     }
 
     /// Find Options (Japanese): `edit.fuzzyOptions` without settings opens Advanced Find with its

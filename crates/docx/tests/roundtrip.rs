@@ -5,8 +5,8 @@ use std::sync::Arc;
 use doc4me_doc::numbering::ListKind;
 use doc4me_doc::para::{Anchor, Float, FloatAlign, NoteKind, ShapeKind, Wrap};
 use doc4me_doc::props::{
-    Align, Border, BorderStyle, Borders, CharProps, FrameProps, FrameWrap, HeightRule, Highlight, LineSpacing, NumRef, ParaProps, Rgb, RowProps,
-    TabAlign, TabLeader, TabStop, TableLook, TextColor, TextDirection, Underline, VAlign, VMerge, VertAlign,
+    Align, Border, BorderStyle, Borders, CharProps, CombineBrackets, EastAsianLayout, FrameProps, FrameWrap, HeightRule, Highlight, LineSpacing,
+    NumRef, ParaProps, Rgb, RowProps, TabAlign, TabLeader, TabStop, TableLook, TextColor, TextDirection, Underline, VAlign, VMerge, VertAlign,
 };
 use doc4me_doc::section::{Columns, DocGrid, DocGridType, LineNumberRestart, LineNumbering, NumFormat, SectionProps, SectionStart};
 use doc4me_doc::styles::{Style, StyleKind};
@@ -37,6 +37,15 @@ fn doc_with(blocks: Vec<Paragraph>) -> Document {
     let mut d = Document::new();
     d.body = blocks.into_iter().map(para_block).collect();
     d
+}
+
+#[test]
+fn horizontal_in_vertical_character_properties_round_trip() {
+    let layout = EastAsianLayout { vert: true, combine: true, brackets: CombineBrackets::Square, ..Default::default() };
+    let d = doc_with(vec![para_runs(&[("vertical", CharProps { east_asian: Some(layout), ..Default::default() })])]);
+    let back = rt(&d);
+    let c = paras(&back)[0].props_at(0).east_asian.unwrap();
+    assert_eq!(c, layout);
 }
 
 /// A paragraph built from (text, props) runs.

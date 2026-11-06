@@ -56,6 +56,8 @@ pub(crate) enum AfterPick {
     Picture,
     /// Insert the picked 3D model (Insert › 3D Models).
     Model3d,
+    /// Insert the contents of the picked document at the caret (Insert › Text from File).
+    TextFromFile,
     /// Save the document there, then carry on.
     SaveAs(AfterSave),
     /// Save a copy there in this format (`pdf`, `docx`, `png`, `jpg`…).
@@ -226,6 +228,10 @@ impl WordApp {
                 let Some(path) = picked else { return Ok(json!({"cancelled": true})) };
                 self.run("insert.model3d", json!({"path": path}))
             }
+            AfterPick::TextFromFile => {
+                let Some(path) = picked else { return Ok(json!({"cancelled": true})) };
+                self.run("insert.textFromFile", json!({"path": path}))
+            }
             AfterPick::Font => {
                 let Some(path) = picked else { return Ok(json!({"cancelled": true})) };
                 self.run("font.add", json!({"path": path}))
@@ -353,6 +359,11 @@ impl WordApp {
         }
         let _ = self.ask_file(FileDialogRequest::Open { purpose: "font".into(), dir: None }, AfterPick::Font);
     }
+
+    /// Pick a document to insert at the caret (Insert › Text from File).
+    pub(crate) fn pick_text_from_file(&mut self) {
+        let _ = self.ask_file(FileDialogRequest::Open { purpose: "document".into(), dir: None }, AfterPick::TextFromFile);
+    }
 }
 
 #[cfg(test)]
@@ -409,6 +420,21 @@ mod tests {
 
     fn saved_text(path: &std::path::Path) -> String {
         doc4me_engine::io::open_path(path).unwrap().plain_text(doc4me_doc::StoryRef::Body)
+    }
+
+    #[test]
+    fn text_from_file_asks_for_a_document_and_inserts_its_contents() {
+        let dir = scratch("insert-text");
+        let path = dir.join("section.txt");
+        std::fs::write(&path, "Imported section").unwrap();
+        let (mut a, shown) = async_app();
+        assert_eq!(a.run("insert.textFromFile", json!({})).unwrap(), json!({"pending": "insertTextFromFile"}));
+        assert_eq!(shown.borrow()[0].0, FileDialogRequest::Open { purpose: "document".into(), dir: None });
+        answer(&shown, Some(&path.to_string_lossy()));
+        a.logic(&egui::Context::default());
+        assert_eq!(body_text(&a), "Imported section");
+        assert!(!a.file_dialog_open());
+        let _ = std::fs::remove_dir_all(dir);
     }
 
     /// Save As returns at once (the UI keeps running); the frame loop saves once the answer arrives.

@@ -281,7 +281,7 @@ fn bundled_interface_fonts_cover_serbian_latin_without_system_fallbacks() {
 fn serbian_locales_resolve_by_script() {
     let cyr = lang("sr");
     let lat = lang("sr-latn");
-    for tag in ["sr", "sr-RS", "sr_RS.UTF-8", "SR", "sr-Cyrl", "sr-Cyrl-RS"] {
+    for tag in ["sr", "sr-RS", "sr_RS.UTF-8", "SR", "sr-Cyrl", "sr-Cyrl-RS", "sr-Cyrl-BA"] {
         assert_eq!(lang_from_tag(tag), Some(cyr), "{tag}");
     }
     for tag in ["sr-Latn", "sr-Latn-RS", "sr-latn-me"] {
@@ -951,7 +951,7 @@ const WHOLE_CATALOGS: [(&str, &str, &[&str]); 40] = [
     ("gl", "Galego", &["gl", "gl-ES", "gl_ES.UTF-8"]),
     ("is", "Íslenska", &["is", "is-IS", "is_IS.UTF-8"]),
     ("bg", "Български", &["bg", "bg-BG", "bg_BG.UTF-8"]),
-    ("ca", "Català", &["ca", "ca-ES", "ca_ES.UTF-8"]),
+    ("ca", "Català", &["ca", "ca-ES", "ca-ES-valencia", "ca_ES.UTF-8"]),
     ("el", "Ελληνικά", &["el", "el-GR", "el_GR.UTF-8"]),
     ("id", "Bahasa Indonesia", &["id", "id-ID", "id_ID.UTF-8"]),
     ("lv", "Latviešu", &["lv", "lv-LV", "lv_LV.UTF-8"]),

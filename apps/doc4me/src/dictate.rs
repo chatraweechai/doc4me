@@ -361,7 +361,7 @@ mod tests {
         // A plain PCM WAV: 44-byte header, rate at 24, samples after "data".
         let rate = u32::from_le_bytes(bytes[24..28].try_into().unwrap());
         let data = bytes.windows(4).position(|w| w == b"data").unwrap() + 8;
-        let samples: Vec<f32> = bytes[data..].chunks_exact(2).map(|c| i16::from_le_bytes([c[0], c[1]]) as f32 / 32768.0).collect();
+        let samples: Vec<f32> = bytes[data..].as_chunks::<2>().0.iter().map(|sample| i16::from_le_bytes(*sample) as f32 / 32768.0).collect();
         let dir = std::env::temp_dir().join("doc4me-whisper-test");
         let stop = AtomicBool::new(false);
         let path = ensure_model(&BASE, &dir, true, &stop, &|_| {}).unwrap();

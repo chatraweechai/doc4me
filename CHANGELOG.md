@@ -13,6 +13,22 @@
 
 ### เพิ่ม
 
+- **จับคู่ Format Callout รุ่นเดิมกับ Format Shape** (`docs/readiness/dialogs.tsv`, `dlg-052`): Format Shape ปัจจุบันเปิดบน callout ที่เลือกและปรับ fill, outline และขนาดได้; leader geometry และ auto-attach แบบ Word รุ่นเก่าไม่รองรับ จึงบันทึกข้อจำกัดไว้ตรง readiness row. Windows run 42133507843 ยืนยัน dialogs 208/220 และ 100% เมื่อไม่นับ deferred.
+
+- **แทรกเนื้อหาเอกสารจาก file picker** (`insert.textFromFile`, readiness `dlg-108`): คำสั่ง Text from File ที่เดิมต้องป้อน path เองเปิด file picker ใน UI แล้วแทรกเนื้อหาของเอกสารที่เลือกตรงเคอร์เซอร์; ทดสอบ file picker แบบ async ด้วยไฟล์ TXT และ `cargo xtask ci` ผ่านครบทั้ง 6 ขั้น. เป็นการแทรกเนื้อหาแบบคงที่ ยังไม่รองรับการเชื่อมโยงซอร์สแบบ master document.
+
+- **เพิ่ม shortcut สำหรับ Optional Hyphen** (`text.optionalHyphen`, `Mod+Alt+-`, readiness `ks-165`): ใช้ Ctrl+Alt+Minus บนปุ่ม minus ปกติตามตาราง Word; key event ปัจจุบันรวมปุ่ม minus บน numpad เป็นคีย์เดียวกัน จึงย้าย shortcut ออกจาก Em Dash และบันทึก `ks-163` เป็นข้อจำกัดที่ยังไม่ผ่านแทน. ตรวจด้วย `word_default_shortcuts_resolve`, `every_shortcut_runs_one_command` และ `cargo xtask ci` (ครบทั้ง 6 ขั้น).
+
+- **ตั้งค่า Horizontal in Vertical กับข้อความที่เลือกได้** (`crates/engine/src/cmd/asian_layout.rs`, `crates/ui-egui/src/{ribbon.rs,dialogs.rs,lib.rs}`; readiness `dlg-083`): เพิ่มช่องเลือกใน Asian Layout dialog และเมนูทางลัด ซึ่งบันทึกและยกเลิก `w:vert` โดยไม่ลบค่า Two Lines in One หรือวงเล็บ; คุณสมบัติบันทึกลง .docx ได้ แต่ layout ปัจจุบันยังไม่วาดตัวอักษรแนวนอนภายในแนวตั้ง จึงไม่อ้างว่าการแสดงผลเทียบเท่า Word; ตรวจด้วย engine test `horizontal_in_vertical_formats_selection_and_preserves_other_asian_layout`, UI test `asian_layout_buttons_open_their_dialogs`, i18n test `every_tab_and_command_is_translated` และ `cargo xtask ci`
+
+- **จับคู่ dialog ตั้งค่าเครื่องพิมพ์รุ่นเดิมกับหน้าพิมพ์ปัจจุบัน** (`docs/readiness/dialogs.tsv`, `dlg-041`): Word สมัยใหม่ใช้หน้าพิมพ์เลือกเครื่องพิมพ์และเปิดคุณสมบัติจากระบบปฏิบัติการ จึงใช้คำสั่ง `file.print` ที่มี UI ดังกล่าวเป็นตัวเทียบ ไม่เปลี่ยนพฤติกรรมโปรแกรมหรือไฟล์ .docx และคง 26 deferred rows เดิม; ตรวจด้วย `cargo test -p xtask readiness::tests` (9 ผ่าน), Clippy ของ xtask และ `doc4me-cli commands --json`; Windows run 42025088010 ยืนยัน dialogs 205/220 และ readiness 89.8% รวม / 92.5% เมื่อไม่นับ deferred.
+
+- **ตัด dialog รุ่นเก่าที่ไม่มีใน Word 365 ออกจากขอบเขตการวัดโดยเก็บแถวและเหตุผลไว้ครบ** (`docs/readiness/dialogs.tsv`, `xtask/src/readiness.rs`): WordPerfect Help, Smart Tags, custom-XML authoring และ legacy HTML CSS/frameset authoring ไม่มี equivalent UI ใน target ปัจจุบัน; แถวทั้งแปดเปลี่ยนเป็น `excluded` ตามกฎ readiness (ไม่ลบแถวและไม่แตะ 26 deferred rows). เพิ่ม unit assertion ว่า excluded dialog ไม่เข้า denominator; `cargo fmt --all -- --check`, `cargo test -p xtask readiness::tests`, `cargo clippy -p xtask --all-targets -- -D warnings` ผ่าน; Windows run 42020535590 ยืนยัน 89.8% รวม / 92.4% เมื่อไม่นับ deferred, dialogs 204/220 (12 deferred).
+
+- **ผูกภาษาระดับภูมิภาคเข้ากับแค็ตตาล็อกที่รองรับแล้ว** (`docs/readiness/languages.tsv`, `crates/ui-egui/src/i18n/{mod.rs,tests.rs}`): Catalan (Valencia) ใช้แค็ตตาล็อก Catalan และ Serbian Cyrillic (Bosnia & Herzegovina) ใช้ Serbian Cyrillic; locale fallback เดิมรองรับทั้งสอง tag อยู่แล้ว. เพิ่มการทดสอบ `ca-ES-valencia` และ `sr-Cyrl-BA`; coverage ของ catalog ทั้งคู่ 100% โดยไม่สร้างคำแปลซ้ำ. ตรวจด้วย i18n tests และ full `cargo xtask ci` (fmt, clippy, workspace tests, assets, layers, wasm) ผ่าน; Windows run 42017927963 เพิ่มภาษา 62 → 64/95 และ readiness 89.2% → 89.3% (91.7% → 91.8% เมื่อไม่นับ deferred).
+
+- **รองรับ Clippy รุ่นปัจจุบันใน test อ่านเสียงพูด** (`apps/doc4me/src/dictate.rs`): ใช้ `slice::as_chunks::<2>()` แปลง PCM 16-bit เป็นคู่ byte แทน `chunks_exact(2)` เพื่อไม่ให้ lint `chunks_exact_to_as_chunks` ทำให้ Clippy ทั้ง workspace ล้ม โดยยังทิ้ง byte เศษท้ายข้อมูลเหมือนเดิม; ไม่มีผลต่อไฟล์เอกสารหรือการติดตั้ง. ตรวจด้วย `cargo fmt --all -- --check`, `cargo clippy --workspace --all-targets -- -D warnings` และ `cargo test --workspace` ผ่าน; `cargo xtask assets`, `cargo xtask layers` และ `cargo xtask wasm` ผ่าน
+
 - **ภาษาของหน้าจอเพิ่มอีก 8 ภาษา (ชุดที่สาม): เฮาซา (`ha`), คีร์กีซ (`ky`), ลักเซมเบิร์ก (`lb`), เมารี (`mi`), โรแมนซ์ (`rm`), เกลิกแบบสกอตแลนด์ (`gd`), ตาตาร์ อักษรซีริลลิก (`tt`) และอุซเบก อักษรละติน (`uz`)** (`crates/ui-egui/src/i18n/{ha,ky,lb,mi,rm,gd,tt,uz}.tsv`, `crates/ui-egui/src/i18n/mod.rs`, `crates/ui-egui/src/i18n/tests.rs`, `docs/readiness/languages.tsv`)
   - เหตุผลและวิธีเดียวกับรายการ 16 ภาษาด้านล่าง: **คำแปลจาก AI (Claude) ที่ยังไม่ได้ให้เจ้าของภาษาตรวจ** แบบ clean room; อุซเบกใช้ ʻ (U+02BB) ใน oʻ/gʻ และ ʼ (U+02BC) ตามอักขรวิธีละติน; เฮาซาใช้ ɓ ɗ ƙ; เมารีใช้สระเสียงยาว ā ē ī ō ū
   - ผลต่อผู้ใช้และความเข้ากันได้เหมือนรายการด้านล่าง (ไม่เปลี่ยนเอกสาร วาดด้วย Inter ที่ฝังมา)
@@ -116,6 +132,12 @@
   - ความปลอดภัย: สิทธิ์ `contents: write` ให้เฉพาะ job นี้เพื่อ push ผลวัด; action ทุกตัวปักที่ SHA เดียวกับ workflow installer
 
 ### แก้ไข
+
+- **ระยะหลังย่อหน้าใน cell ตารางที่ใช้ contextual spacing ถูกลบได้ถูกต้อง** (`crates/layout/src/lib.rs`, regression ใน `crates/layout/src/tests.rs`)
+  - เหตุผล: layout ของ cell บันทึกระยะท้ายย่อหน้าเป็นศูนย์เมื่อย่อหน้าปัจจุบันต่อเนื่องกับย่อหน้าก่อนหน้า ทั้งที่ยังบวกระยะนั้นเข้า flow; ย่อหน้าถัดไปจึงลบระยะที่บันทึกไว้ไม่ครบ ทำให้ระยะรายการใน govuk-006 สะสมเกิน Word
+  - เปลี่ยน: เก็บระยะท้ายจริงไว้ แล้วให้ย่อหน้าถัดไปตัดออกเมื่อ contextual spacing ใช้ได้; ไฟล์ DOCX เดิมยังเปิด/บันทึกได้และการติดตั้งไม่เปลี่ยน
+  - ผลที่วัดได้: govuk-006 กลับจาก 5 หน้าเป็น 4 หน้าเท่า PDF อ้างอิง; corpus บน Linux ผ่านจำนวนหน้า 163/222 (เดิม 161/222), ขอบเขตหน้า 82/222; ผล Windows จะบันทึกหลัง workflow readiness รอบนี้
+  - ตรวจสอบ: regression `cargo test -p doc4me-layout contextual_spacing_suppresses_trailing_space_between_cell_paragraphs` ผ่าน; `cargo xtask ci` ผ่านครบ fmt, clippy, workspace tests, assets, layers และ wasm
 
 - **`Cargo.lock` ตรงกับเลขเวอร์ชัน 1.1.3 ใน `Cargo.toml`** (`Cargo.lock`)
   - เหตุผล: เจ้าของ repo เขียนทับ `main` ของ fork เมื่อ 2026-11-04 02:02–02:37 UTC (เริ่มจาก `d084ccc` ซึ่งเนื้อไฟล์เท่ากับ `c9ff26b` ของเดิม แล้วเพิ่ม 6 commit "Release 1.1.3" และ "Initial commit" ที่แก้แค่ `Cargo.toml` เป็น 1.1.3 กับ `Cargo.lock`) และ commit สุดท้ายคืน `Cargo.lock` ของ crate ใน workspace เป็น 1.1.2 จน `cargo metadata --locked` ล้ม ("cannot update the lock file")
