@@ -13,7 +13,7 @@
 
 ### เพิ่ม
 
-- **จับคู่ Format Callout รุ่นเดิมกับ Format Shape** (`docs/readiness/dialogs.tsv`, `dlg-052`): Format Shape ปัจจุบันเปิดบน callout ที่เลือกและปรับ fill, outline และขนาดได้; leader geometry และ auto-attach แบบ Word รุ่นเก่าไม่รองรับ จึงบันทึกข้อจำกัดไว้ตรง readiness row. Windows run 42131295539 วัดก่อน mapping นี้; ต้องรัน Windows readiness ซ้ำเพื่อยืนยัน dialogs 208/220 และ 100% เมื่อไม่นับ deferred.
+- **จับคู่ Format Callout รุ่นเดิมกับ Format Shape** (`docs/readiness/dialogs.tsv`, `dlg-052`): Format Shape ปัจจุบันเปิดบน callout ที่เลือกและปรับ fill, outline และขนาดได้; leader geometry และ auto-attach แบบ Word รุ่นเก่าไม่รองรับ จึงบันทึกข้อจำกัดไว้ตรง readiness row. Windows run 42133507843 ยืนยัน dialogs 208/220 และ 100% เมื่อไม่นับ deferred.
 
 - **แทรกเนื้อหาเอกสารจาก file picker** (`insert.textFromFile`, readiness `dlg-108`): คำสั่ง Text from File ที่เดิมต้องป้อน path เองเปิด file picker ใน UI แล้วแทรกเนื้อหาของเอกสารที่เลือกตรงเคอร์เซอร์; ทดสอบ file picker แบบ async ด้วยไฟล์ TXT และ `cargo xtask ci` ผ่านครบทั้ง 6 ขั้น. เป็นการแทรกเนื้อหาแบบคงที่ ยังไม่รองรับการเชื่อมโยงซอร์สแบบ master document.
 
